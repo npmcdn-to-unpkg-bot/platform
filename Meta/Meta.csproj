@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BA6EFCFE-CB7F-4994-A5A4-C11DDAAC32DD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Meta</RootNamespace>
+    <AssemblyName>Meta</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Core\Allors\output\EmbeddedPartial\AssociationType.allors.g.cs" />
+    <Compile Include="Core\Allors\output\EmbeddedPartial\Domain.allors.g.cs" />
+    <Compile Include="Core\Allors\output\EmbeddedPartial\Inheritance.allors.g.cs" />
+    <Compile Include="Core\Allors\output\EmbeddedPartial\MetaObject.allors.g.cs" />
+    <Compile Include="Core\Allors\output\EmbeddedPartial\MethodType.allors.g.cs" />
+    <Compile Include="Core\Allors\output\EmbeddedPartial\ObjectType.allors.g.cs" />
+    <Compile Include="Core\Allors\output\EmbeddedPartial\OperandType.allors.g.cs" />
+    <Compile Include="Core\Allors\output\EmbeddedPartial\PropertyType.allors.g.cs" />
+    <Compile Include="Core\Allors\output\EmbeddedPartial\RelationType.allors.g.cs" />
+    <Compile Include="Core\Allors\output\EmbeddedPartial\RoleType.allors.g.cs" />
+    <Compile Include="Core\Allors\output\Embedded\AllorsR1Framework.g.cs" />
+    <Compile Include="Core\Allors\output\Embedded\AssociationType.g.cs" />
+    <Compile Include="Core\Allors\output\Embedded\Domain.g.cs" />
+    <Compile Include="Core\Allors\output\Embedded\Inheritance.g.cs" />
+    <Compile Include="Core\Allors\output\Embedded\MetaObject.g.cs" />
+    <Compile Include="Core\Allors\output\Embedded\MethodType.g.cs" />
+    <Compile Include="Core\Allors\output\Embedded\ObjectType.g.cs" />
+    <Compile Include="Core\Allors\output\Embedded\OperandType.g.cs" />
+    <Compile Include="Core\Allors\output\Embedded\PropertyType.g.cs" />
+    <Compile Include="Core\Allors\output\Embedded\RelationType.g.cs" />
+    <Compile Include="Core\Allors\output\Embedded\RoleType.g.cs" />
+    <Compile Include="Core\Meta\AssociationType.cs" />
+    <Compile Include="Core\Meta\Domain.cs" />
+    <Compile Include="Core\Meta\Events\MetaObjectChangedEventArgs.cs" />
+    <Compile Include="Core\Meta\Events\MetaObjectDeletedEventArgs.cs" />
+    <Compile Include="Core\Meta\IDomainExtension.cs" />
+    <Compile Include="Core\Meta\Inheritance.cs" />
+    <Compile Include="Core\Meta\IObjectTypeExtension.cs" />
+    <Compile Include="Core\Meta\MetaObject.cs" />
+    <Compile Include="Core\Meta\MethodType.cs" />
+    <Compile Include="Core\Meta\ObjectType.cs" />
+    <Compile Include="Core\Meta\OperandType.cs" />
+    <Compile Include="Core\Meta\PropertyType.cs" />
+    <Compile Include="Core\Meta\RelationType.cs" />
+    <Compile Include="Core\Meta\RoleType.cs" />
+    <Compile Include="Core\Meta\UnitTypeIds.cs" />
+    <Compile Include="Core\Meta\UnitTypeTags.cs" />
+    <Compile Include="Core\Meta\ValidationError.cs" />
+    <Compile Include="Core\Meta\ValidationKind.cs" />
+    <Compile Include="Core\Meta\ValidationLog.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="Core\Generate.proj" />
+    <None Include="Settings.StyleCop" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
