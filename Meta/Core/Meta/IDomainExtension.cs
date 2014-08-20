@@ -19,7 +19,7 @@
 // <summary>Defines the Domain type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Meta
+namespace Allors.Meta
 {
     /// <summary>
     /// A DomainExtension allows you to extend a domain programmatically.

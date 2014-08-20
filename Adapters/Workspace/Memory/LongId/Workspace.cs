@@ -14,7 +14,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Workspace.Memory.LongId
+namespace Allors.Adapters.Workspace.Memory.LongId
 {
     public class Workspace : Memory.Workspace
     {

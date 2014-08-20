@@ -15,7 +15,7 @@
 // <summary>Defines the DomainTest type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Meta.Static
+namespace Allors.Meta.Static
 {
     using NUnit.Framework;
 

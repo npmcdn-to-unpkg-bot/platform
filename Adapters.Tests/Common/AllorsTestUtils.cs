@@ -18,10 +18,10 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Special
+namespace Allors.Adapters.Special
 {
-    using Allors.R1;
-    using Allors.R1.Meta;
+    using Allors;
+    using Allors.Meta;
 
     public class AllorsTestUtils
     {

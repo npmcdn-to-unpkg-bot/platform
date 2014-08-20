@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.Npgsql.Commands
+namespace Allors.Adapters.Database.Npgsql.Commands
 {
     using System;
     using System.Collections.Generic;

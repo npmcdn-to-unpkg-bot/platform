@@ -18,20 +18,20 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient.Commands.Text
+namespace Allors.Adapters.Database.SqlClient.Commands.Text
 {
     using System.Collections.Generic;
     using System.Data.SqlClient;
     using System.Linq;
     using System.Text;
 
-    using Allors.R1.Adapters.Database.Sql;
-    using Allors.R1.Adapters.Database.Sql.Commands;
+    using Allors.Adapters.Database.Sql;
+    using Allors.Adapters.Database.Sql.Commands;
 
-    using Meta;
+    using Allors.Meta;
 
     using Database = Database;
-    using DatabaseSession = Allors.R1.Adapters.Database.SqlClient.DatabaseSession;
+    using DatabaseSession = DatabaseSession;
 
     public class SetUnitRolesFactory : ISetUnitRolesFactory
     {

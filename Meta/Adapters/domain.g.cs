@@ -5579,7 +5579,7 @@ namespace Domain
 		";
 		#endregion
 
-		public static readonly global::Allors.R1.Meta.Domain D;
+		public static readonly global::Allors.Meta.Domain D;
         public static readonly global::System.Reflection.Assembly A;
 
 		static M()
@@ -5587,7 +5587,7 @@ namespace Domain
 	            using (var stringReader = new System.IO.StringReader(Xml))
         	    {
                 	var xmlTextReader = new System.Xml.XmlTextReader(stringReader); 
-                	D = global::Allors.R1.Meta.Domain.Load(xmlTextReader);
+                	D = global::Allors.Meta.Domain.Load(xmlTextReader);
 	            }
 
     		    A = typeof(M).Assembly;

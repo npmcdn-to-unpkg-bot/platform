@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.Memory
+namespace Allors.Adapters.Database.Memory
 {
     using System;
     using System.Collections;
@@ -26,7 +26,7 @@ namespace Allors.R1.Adapters.Database.Memory
     using System.Linq;
     using System.Xml;
 
-    using Meta;
+    using Allors.Meta;
 
     public sealed class Strategy : IStrategy
     {
@@ -204,7 +204,7 @@ namespace Allors.R1.Adapters.Database.Memory
             {
                 if (roleType.IsMany)
                 {
-                    var roles = value as R1.Extent;
+                    var roles = value as Allors.Extent;
                     if (roles == null)
                     {
                         var roleList = new ArrayList((ICollection)value);
@@ -354,14 +354,14 @@ namespace Allors.R1.Adapters.Database.Memory
             return this.compositeRoleByRoleType.ContainsKey(roleType);
         }
 
-        public R1.Extent GetCompositeRoles(RoleType roleType)
+        public Allors.Extent GetCompositeRoles(RoleType roleType)
         {
             this.CheckRemoved();
 
             return new ExtentSwitch(this, roleType);
         }
 
-        public void SetCompositeRoles(RoleType roleType, R1.Extent roles)
+        public void SetCompositeRoles(RoleType roleType, Allors.Extent roles)
         {
             if (roles == null || roles.Count == 0)
             {
@@ -493,7 +493,7 @@ namespace Allors.R1.Adapters.Database.Memory
             return this.GetCompositeAssociation(associationType) != null;
         }
 
-        public R1.Extent GetCompositeAssociations(AssociationType associationType)
+        public Allors.Extent GetCompositeAssociations(AssociationType associationType)
         {
             this.CheckRemoved();
 

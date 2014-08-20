@@ -18,7 +18,7 @@
 // </copyright>
 // <summary>Defines the ObjectId type.</summary>
 //-------------------------------------------------------------------------------------------------
-namespace Allors.R1
+namespace Allors
 {
     using System;
     using System.Collections.Generic;

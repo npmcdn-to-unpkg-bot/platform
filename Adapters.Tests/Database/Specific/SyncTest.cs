@@ -14,13 +14,13 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Special
+namespace Allors.Adapters.Special
 {
     using System;
     using System.IO;
     using System.Xml;
 
-    using Allors.R1;
+    using Allors;
 
     using global::Domain;
 

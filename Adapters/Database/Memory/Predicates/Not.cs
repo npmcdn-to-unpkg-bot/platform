@@ -18,12 +18,12 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.Memory
+namespace Allors.Adapters.Database.Memory
 {
     using System;
     using System.Collections.Generic;
 
-    using Meta;
+    using Allors.Meta;
 
     internal sealed class Not : Predicate, ICompositePredicate
     {
@@ -56,7 +56,7 @@ namespace Allors.R1.Adapters.Database.Memory
             return this;
         }
 
-        public ICompositePredicate AddContainedIn(RoleType role, R1.Extent containingExtent)
+        public ICompositePredicate AddContainedIn(RoleType role, Allors.Extent containingExtent)
         {
             this.CheckUnarity();
             if (role.IsMany)
@@ -88,7 +88,7 @@ namespace Allors.R1.Adapters.Database.Memory
             return this;
         }
 
-        public ICompositePredicate AddContainedIn(AssociationType association, R1.Extent containingExtent)
+        public ICompositePredicate AddContainedIn(AssociationType association, Allors.Extent containingExtent)
         {
             this.CheckUnarity();
             this.predicate = new AssociationContainedInExtent(this.extent, association, containingExtent);

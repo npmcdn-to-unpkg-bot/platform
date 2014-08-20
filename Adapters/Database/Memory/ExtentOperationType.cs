@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.Memory
+namespace Allors.Adapters.Database.Memory
 {
     public enum ExtentOperationType
     {

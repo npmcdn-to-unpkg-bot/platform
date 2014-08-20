@@ -21,7 +21,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Special.Memory.IntegerId
+namespace Allors.Adapters.Special.Memory.IntegerId
 {
     using NUnit.Framework;
 

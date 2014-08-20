@@ -4,18 +4,18 @@ namespace Domain
 {
 	public abstract partial class A34 : A34Allors 
 	{
-		public A34(Allors.R1.IStrategy allors) : base(allors) {}
+		public A34(Allors.IStrategy allors) : base(allors) {}
 
-		public static A34 Instantiate (Allors.R1.ISession allorsSession, string allorsObjectId)
+		public static A34 Instantiate (Allors.ISession allorsSession, string allorsObjectId)
 		{
 			return (A34) allorsSession.Instantiate(allorsObjectId);		
 		}
 	}
 
 	[System.Diagnostics.DebuggerNonUserCode]
-	public abstract class A34Allors :  Allors.R1.ObjectBase 
+	public abstract class A34Allors :  Allors.ObjectBase 
 	{
-		protected A34Allors(Allors.R1.IStrategy allors) : base(allors){}
+		protected A34Allors(Allors.IStrategy allors) : base(allors){}
 
 
 

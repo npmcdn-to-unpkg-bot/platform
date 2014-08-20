@@ -18,16 +18,16 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Special
+namespace Allors.Adapters.Special
 {
-    using Allors.R1;
-    using Allors.R1.Adapters.Database.Sql;
+    using Allors;
+    using Allors.Adapters.Database.Sql;
 
     using Domain;
 
     using NUnit.Framework;
 
-    using IDatabase = Allors.R1.IDatabase;
+    using IDatabase = IDatabase;
 
     [TestFixture]
     public abstract class CacheTest

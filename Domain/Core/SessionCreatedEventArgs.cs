@@ -18,7 +18,7 @@
 // </copyright>
 // <summary>Defines the SessionCreatedEventArgs type.</summary>
 //-------------------------------------------------------------------------------------------------
-namespace Allors.R1
+namespace Allors
 {
     /// <summary>
     /// The <see cref="IDatabase"/> raises an <see cref="SessionCreatedEventArgs"/> event 

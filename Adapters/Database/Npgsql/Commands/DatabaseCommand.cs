@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.Npgsql.Commands
+namespace Allors.Adapters.Database.Npgsql.Commands
 {
     public abstract class DatabaseCommand : Command
     {

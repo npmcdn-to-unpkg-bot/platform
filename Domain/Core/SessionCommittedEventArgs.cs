@@ -18,7 +18,7 @@
 // </copyright>
 // <summary>Defines the SessionCommittedEventArgs type.</summary>
 //-------------------------------------------------------------------------------------------------
-namespace Allors.R1
+namespace Allors
 {
     /// <summary>
     /// The EventHandler for the session committed event.

@@ -18,9 +18,9 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Special.SqlClient.IntegerId.ReadCommitted
+namespace Allors.Adapters.Special.SqlClient.IntegerId.ReadCommitted
 {
-    using Allors.R1;
+    using Allors;
 
     using NUnit.Framework;
 

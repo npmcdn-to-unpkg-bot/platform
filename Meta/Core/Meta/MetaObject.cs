@@ -18,12 +18,12 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Meta
+namespace Allors.Meta
 {
     using System;
     using System.Collections.Generic;
 
-    using Allors.R1.Meta.AllorsGenerated;
+    using Allors.Meta.AllorsGenerated;
 
     /// <summary>
     /// Base class for Meta objects.
@@ -96,7 +96,7 @@ namespace Allors.R1.Meta
         /// <value>The domain.</value>
         public Domain Domain
         {
-            get { return Domain.GetDomain(this.AllorsSession); }
+            get { return Meta.Domain.GetDomain(this.AllorsSession); }
         }
 
         /// <summary>

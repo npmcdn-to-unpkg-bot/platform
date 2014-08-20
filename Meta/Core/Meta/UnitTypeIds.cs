@@ -19,7 +19,7 @@
 // <summary>Defines the UnitTypeTags type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Meta
+namespace Allors.Meta
 {
     using System;
 

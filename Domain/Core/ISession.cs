@@ -19,11 +19,11 @@
 // <summary>Defines the ISession type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.R1
+namespace Allors
 {
     using System;
 
-    using Allors.R1.Meta;
+    using Allors.Meta;
 
     /// <summary>
     /// <para>

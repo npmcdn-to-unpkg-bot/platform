@@ -18,11 +18,11 @@
 // </copyright>
 // <summary>Defines the Serialization type.</summary>
 //-------------------------------------------------------------------------------------------------
-namespace Allors.R1.Adapters
+namespace Allors.Adapters
 {
     using System;
     using System.Xml;
-    using Meta;
+    using Allors.Meta;
     
     /// <summary>
     /// Xml tag definitions and utility methods for Xml Serialization.

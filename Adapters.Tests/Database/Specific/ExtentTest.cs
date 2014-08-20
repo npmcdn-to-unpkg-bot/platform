@@ -18,19 +18,19 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Special
+namespace Allors.Adapters.Special
 {
     using System;
     using System.Collections.Generic;
 
-    using Allors.R1;
-    using Allors.R1.Meta;
+    using Allors;
+    using Allors.Meta;
 
     using Domain;
 
     using NUnit.Framework;
 
-    using Domain = Allors.R1.Meta.Domain;
+    using Domain = Allors.Meta.Domain;
 
     public enum Zero2Four
     {

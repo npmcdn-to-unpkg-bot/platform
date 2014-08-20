@@ -1,4 +1,4 @@
-namespace Allors.R1.Meta.AllorsGenerated
+namespace Allors.Meta.AllorsGenerated
 {
 	internal interface AllorsInternalPropertyType : AllorsInternalOperandType, AllorsInternal
 	{
@@ -9,7 +9,7 @@ namespace Allors.R1.Meta.AllorsGenerated
 	}
 
 	[System.Diagnostics.DebuggerNonUserCode]
-	public abstract class AllorsClassPropertyType :  global::Allors.R1.Meta.OperandType,  AllorsInternalPropertyType , AllorsEmbeddedObject
+	public abstract class AllorsClassPropertyType :  global::Allors.Meta.OperandType,  AllorsInternalPropertyType , AllorsEmbeddedObject
 	{
 
 

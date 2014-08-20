@@ -14,12 +14,14 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Special.Npgsql.IntegerId.ReadCommitted
+namespace Allors.Adapters.Special.Npgsql.IntegerId.ReadCommitted
 {
     using System;
     using System.Collections.Generic;
 
-    using Allors.R1.Adapters.Database.Npgsql.IntegerId;
+    using Allors.Adapters.Database.Npgsql.IntegerId;
+
+    using Configuration = Allors.Adapters.Configuration;
 
     public class Profile : Npgsql.Profile
     {
@@ -51,7 +53,7 @@ namespace Allors.R1.Adapters.Special.Npgsql.IntegerId.ReadCommitted
 
         public IDatabase CreateDatabase(Meta.Domain domain, bool init)
         {
-            var configuration = new Configuration
+            var configuration = new Adapters.Database.Npgsql.IntegerId.Configuration
             {
                 ObjectFactory = this.ObjectFactory,
                 CacheFactory = this.CacheFactory,
@@ -70,7 +72,7 @@ namespace Allors.R1.Adapters.Special.Npgsql.IntegerId.ReadCommitted
 
         public override IDatabase CreateDatabase()
         {
-            var configuration = new Configuration
+            var configuration = new Adapters.Database.Npgsql.IntegerId.Configuration
             {
                 ObjectFactory = this.ObjectFactory,
                 CacheFactory = this.CacheFactory,

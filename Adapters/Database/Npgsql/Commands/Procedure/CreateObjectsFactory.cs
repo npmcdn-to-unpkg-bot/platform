@@ -18,20 +18,20 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.Npgsql.Commands.Procedure
+namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
 {
     using System.Collections.Generic;
     using System.Data;
     using System.Data.Common;
 
-    using Allors.R1.Adapters.Database.Sql;
-    using Allors.R1.Adapters.Database.Sql.Commands;
-    using Allors.R1.Meta;
+    using Allors.Adapters.Database.Sql;
+    using Allors.Adapters.Database.Sql.Commands;
+    using Allors.Meta;
 
     using global::Npgsql;
 
     using Database = Database;
-    using DatabaseSession = Allors.R1.Adapters.Database.Npgsql.DatabaseSession;
+    using DatabaseSession = DatabaseSession;
 
     internal class CreateObjectsFactory : ICreateObjectsFactory
     {

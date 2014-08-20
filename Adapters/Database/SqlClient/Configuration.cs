@@ -14,7 +14,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient
+namespace Allors.Adapters.Database.SqlClient
 {
     using System.Data;
 

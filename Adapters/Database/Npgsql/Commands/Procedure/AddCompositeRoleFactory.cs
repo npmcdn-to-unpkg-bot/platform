@@ -18,17 +18,17 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.Npgsql.Commands.Procedure
+namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
 {
     using System.Collections.Generic;
     using System.Data;
 
-    using Allors.R1.Meta;
+    using Allors.Meta;
 
     using global::Npgsql;
 
     using Database = Database;
-    using DatabaseSession = Allors.R1.Adapters.Database.Npgsql.DatabaseSession;
+    using DatabaseSession = DatabaseSession;
 
     internal class AddCompositeRoleFactory : Sql.Commands.IAddCompositeRoleFactory
     {

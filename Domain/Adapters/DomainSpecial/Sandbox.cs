@@ -20,7 +20,7 @@
 
 namespace Domain
 {
-    using Allors.R1;
+    using Allors;
 
     public partial class Sandbox
     {

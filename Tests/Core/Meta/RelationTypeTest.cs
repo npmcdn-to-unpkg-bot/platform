@@ -15,14 +15,14 @@
 // <summary>Defines the RelationTypeTest type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Meta.Static
+namespace Allors.Meta.Static
 {
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Xml;
 
-    using Allors.R1.Meta.Events;
+    using Allors.Meta.Events;
 
     using NUnit.Framework;
 

@@ -18,10 +18,10 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.Memory
+namespace Allors.Adapters.Database.Memory
 {
     using System;
-    using Meta;
+    using Allors.Meta;
 
     internal sealed class Instanceof : Predicate
     {

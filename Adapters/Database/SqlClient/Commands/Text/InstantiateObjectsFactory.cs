@@ -18,16 +18,16 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient.Commands.Text
+namespace Allors.Adapters.Database.SqlClient.Commands.Text
 {
     using System.Collections.Generic;
     using System.Data.SqlClient;
 
-    using Allors.R1.Adapters.Database.Sql;
-    using Allors.R1.Adapters.Database.Sql.Commands;
+    using Allors.Adapters.Database.Sql;
+    using Allors.Adapters.Database.Sql.Commands;
 
     using Database = Database;
-    using DatabaseSession = Allors.R1.Adapters.Database.SqlClient.DatabaseSession;
+    using DatabaseSession = DatabaseSession;
 
     internal class InstantiateObjectsFactory : IInstantiateObjectsFactory
     {

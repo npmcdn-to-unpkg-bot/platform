@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient.IntegerId
+namespace Allors.Adapters.Database.SqlClient.IntegerId
 {
     public class Configuration : SqlClient.Configuration
     {

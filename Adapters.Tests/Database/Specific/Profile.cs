@@ -18,16 +18,16 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Special
+namespace Allors.Adapters.Special
 {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Text;
 
-    using Allors.R1;
-    using Allors.R1.Adapters.Database.Caching;
-    using Allors.R1.Meta;
+    using Allors.Adapters.Database.Caching;
+    using Allors;
+    using Allors.Meta;
 
     using Domain;
 

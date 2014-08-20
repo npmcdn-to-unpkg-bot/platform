@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Special.SqlClient.LongId.ReadCommitted
+namespace Allors.Adapters.Special.SqlClient.LongId.ReadCommitted
 {
     using NUnit.Framework;
 

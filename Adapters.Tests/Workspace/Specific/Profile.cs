@@ -18,13 +18,13 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Special
+namespace Allors.Special
 {
     using System;
     using System.Diagnostics;
 
-    using Allors.R1;
-    using Allors.R1.Adapters.Special;
+    using Allors.Adapters.Special;
+    using Allors;
 
     using Domain;
 

@@ -15,7 +15,7 @@
 // <summary>Defines the InheritanceTest type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Meta.Static
+namespace Allors.Meta.Static
 {
     using System;
 

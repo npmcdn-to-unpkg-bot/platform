@@ -18,9 +18,9 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.Memory
+namespace Allors.Adapters.Database.Memory
 {
-    public abstract class StrategyExtent : R1.Extent
+    public abstract class StrategyExtent : Allors.Extent
     {
         internal abstract Session Session { get; }
 

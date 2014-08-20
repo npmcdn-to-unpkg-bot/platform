@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Special.Memory.LongId
+namespace Allors.Adapters.Special.Memory.LongId
 {
     using NUnit.Framework;
 

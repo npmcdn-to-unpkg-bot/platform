@@ -18,13 +18,13 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient
+namespace Allors.Adapters.Database.SqlClient
 {
-    using Allors.R1.Adapters.Database.Sql.Commands;
-    using Allors.R1.Adapters.Database.SqlClient.Commands.Procedure;
-    using Allors.R1.Adapters.Database.SqlClient.Commands.Text;
+    using Allors.Adapters.Database.SqlClient.Commands.Procedure;
+    using Allors.Adapters.Database.SqlClient.Commands.Text;
+    using Allors.Adapters.Database.Sql.Commands;
 
-    using AddCompositeRoleFactory = Allors.R1.Adapters.Database.SqlClient.Commands.Procedure.AddCompositeRoleFactory;
+    using AddCompositeRoleFactory = Allors.Adapters.Database.SqlClient.Commands.Procedure.AddCompositeRoleFactory;
 
     public sealed class CommandFactories : Sql.CommandFactories
     {

@@ -17,11 +17,11 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.Memory
+namespace Allors.Adapters.Database.Memory
 {
     using System.Collections.Generic;
 
-    using Allors.R1.Meta;
+    using Allors.Meta;
 
     public sealed class ChangeSet : IChangeSet
     {

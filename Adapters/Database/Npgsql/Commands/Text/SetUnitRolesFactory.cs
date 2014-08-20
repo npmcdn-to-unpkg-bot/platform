@@ -18,19 +18,19 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.Npgsql.Commands.Text
+namespace Allors.Adapters.Database.Npgsql.Commands.Text
 {
     using System.Collections.Generic;
     using System.Text;
 
-    using Allors.R1.Adapters.Database.Sql;
-    using Allors.R1.Adapters.Database.Sql.Commands;
-    using Allors.R1.Meta;
+    using Allors.Adapters.Database.Sql;
+    using Allors.Adapters.Database.Sql.Commands;
+    using Allors.Meta;
 
     using global::Npgsql;
 
     using Database = Database;
-    using DatabaseSession = Allors.R1.Adapters.Database.Npgsql.DatabaseSession;
+    using DatabaseSession = DatabaseSession;
 
     public class SetUnitRolesFactory : ISetUnitRolesFactory
     {

@@ -18,9 +18,9 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1
+namespace Allors
 {
-    using Allors.R1.Meta;
+    using Allors.Meta;
 
     /// <summary>
     /// Extends the <see cref="ISession"/> with database capabilities.

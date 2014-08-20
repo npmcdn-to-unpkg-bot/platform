@@ -1,4 +1,4 @@
-namespace Allors.R1.Meta.AllorsGenerated
+namespace Allors.Meta.AllorsGenerated
 {
 	internal interface AllorsInternalMetaObject :  AllorsInternal
 	{

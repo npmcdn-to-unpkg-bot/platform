@@ -19,9 +19,9 @@
 // <summary>Defines the IConflict type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.R1
+namespace Allors
 {
-    using Meta;
+    using Allors.Meta;
 
     /// <summary>
     /// An object or relation conflict between a Workspace and a Database relation.

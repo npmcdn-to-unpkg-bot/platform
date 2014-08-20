@@ -18,9 +18,9 @@
 // </copyright>
 // <summary>Defines the ValidationError type.</summary>
 //-------------------------------------------------------------------------------------------------
-namespace Allors.R1.Meta
+namespace Allors.Meta
 {
-    using Allors.R1.Meta.AllorsGenerated;
+    using Allors.Meta.AllorsGenerated;
 
     /// <summary>
     /// An error that occurred during validation.

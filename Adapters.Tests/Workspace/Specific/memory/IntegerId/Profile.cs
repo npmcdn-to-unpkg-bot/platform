@@ -18,18 +18,18 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Special.Memory.IntegerId
+namespace Allors.Special.Memory.IntegerId
 {
     using System;
     using System.Collections.Generic;
 
-    using Allors.R1;
-    using Allors.R1.Adapters;
-    using Allors.R1.Adapters.Database.Memory.IntegerId;
+    using Allors.Adapters;
+    using Allors.Adapters.Database.Memory.IntegerId;
+    using Allors;
 
     using Domain;
 
-    using Configuration = Allors.R1.Adapters.Database.Memory.IntegerId.Configuration;
+    using Configuration = Allors.Adapters.Database.Memory.IntegerId.Configuration;
 
     public class Profile : Special.Profile
     {

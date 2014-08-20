@@ -18,13 +18,13 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.Memory
+namespace Allors.Adapters.Database.Memory
 {
     using System;
     using System.Collections;
-    using Meta;
+    using Allors.Meta;
 
-    public class ExtentSwitch : R1.Extent
+    public class ExtentSwitch : Allors.Extent
     {
         private readonly StrategyExtent strategyExtent;
         private Extent extent;
@@ -88,13 +88,13 @@ namespace Allors.R1.Adapters.Database.Memory
             }
         }
 
-        public override R1.Extent AddSort(RoleType roleType)
+        public override Allors.Extent AddSort(RoleType roleType)
         {
             this.Upgrade();
             return this.extent.AddSort(roleType);
         }
 
-        public override R1.Extent AddSort(RoleType roleType, SortDirection direction)
+        public override Allors.Extent AddSort(RoleType roleType, SortDirection direction)
         {
             this.Upgrade();
             return this.extent.AddSort(roleType, direction);

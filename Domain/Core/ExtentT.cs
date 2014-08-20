@@ -18,13 +18,13 @@
 // </copyright>
 // <summary>Defines the ExtentT type.</summary>
 //-------------------------------------------------------------------------------------------------
-namespace Allors.R1
+namespace Allors
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
 
-    using Allors.R1.Meta;
+    using Allors.Meta;
 
     /// <summary>
     /// The Extent of a <see cref="ObjectType"/> is the set of all objects that either

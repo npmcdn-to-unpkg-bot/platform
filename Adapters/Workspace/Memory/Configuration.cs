@@ -14,7 +14,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Workspace.Memory
+namespace Allors.Adapters.Workspace.Memory
 {
     public abstract class Configuration : Adapters.Configuration
     {

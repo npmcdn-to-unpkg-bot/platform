@@ -18,12 +18,12 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1
+namespace Allors
 {
     using System;
     using System.Xml;
 
-    using Allors.R1.Meta;
+    using Allors.Meta;
 
     /// <summary>
     /// A population is the container for objects and relations.

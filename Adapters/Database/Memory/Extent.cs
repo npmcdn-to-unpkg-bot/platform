@@ -17,15 +17,15 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.Memory
+namespace Allors.Adapters.Database.Memory
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using Meta;
+    using Allors.Meta;
 
-    public abstract class Extent : R1.Extent
+    public abstract class Extent : Allors.Extent
     {
         private readonly Session session;
 
@@ -92,12 +92,12 @@ namespace Allors.R1.Adapters.Database.Memory
             set { this.strategies = value; }
         }
 
-        public override R1.Extent AddSort(RoleType roleType)
+        public override Allors.Extent AddSort(RoleType roleType)
         {
             return this.AddSort(roleType, SortDirection.Ascending);
         }
 
-        public override R1.Extent AddSort(RoleType roleType, SortDirection direction)
+        public override Allors.Extent AddSort(RoleType roleType, SortDirection direction)
         {
             if (this.sorter == null)
             {

@@ -4,9 +4,9 @@ namespace Domain
 {
 	public abstract partial class A4 : A4Allors , global::Domain.AI4, global::Domain.AI34
 	{
-		public A4(Allors.R1.IStrategy allors) : base(allors) {}
+		public A4(Allors.IStrategy allors) : base(allors) {}
 
-		public static new A4 Instantiate (Allors.R1.ISession allorsSession, string allorsObjectId)
+		public static new A4 Instantiate (Allors.ISession allorsSession, string allorsObjectId)
 		{
 			return (A4) allorsSession.Instantiate(allorsObjectId);		
 		}
@@ -15,7 +15,7 @@ namespace Domain
 	[System.Diagnostics.DebuggerNonUserCode]
 	public abstract class A4Allors :  global::Domain.A34 
 	{
-		protected A4Allors(Allors.R1.IStrategy allors) : base(allors){}
+		protected A4Allors(Allors.IStrategy allors) : base(allors){}
 
 
 

@@ -17,12 +17,12 @@
 // For more information visit http://www.allors.com/legal
 // </copyright>
 //-------------------------------------------------------------------------------------------------
-namespace Allors.R1.Adapters
+namespace Allors.Adapters
 {
     using System;
     using System.Collections.Generic;
 
-    using Meta;
+    using Allors.Meta;
 
     /// <summary>
     /// Utility class for <see cref="ICompositePredicate"/>s containing several assertions.

@@ -19,7 +19,7 @@
 // <summary>Defines the RelationType type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Meta
+namespace Allors.Meta
 {
     using System;
     using System.Globalization;

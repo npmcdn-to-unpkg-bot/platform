@@ -4,18 +4,18 @@ namespace Domain
 {
 	public abstract partial class A2 : A2Allors , global::Domain.AI2
 	{
-		public A2(Allors.R1.IStrategy allors) : base(allors) {}
+		public A2(Allors.IStrategy allors) : base(allors) {}
 
-		public static A2 Instantiate (Allors.R1.ISession allorsSession, string allorsObjectId)
+		public static A2 Instantiate (Allors.ISession allorsSession, string allorsObjectId)
 		{
 			return (A2) allorsSession.Instantiate(allorsObjectId);		
 		}
 	}
 
 	[System.Diagnostics.DebuggerNonUserCode]
-	public abstract class A2Allors :  Allors.R1.ObjectBase 
+	public abstract class A2Allors :  Allors.ObjectBase 
 	{
-		protected A2Allors(Allors.R1.IStrategy allors) : base(allors){}
+		protected A2Allors(Allors.IStrategy allors) : base(allors){}
 
 
 
@@ -45,7 +45,7 @@ namespace Domain
 
 
 
-		virtual public Allors.R1.Extent<global::Domain.A1> A1sWhereA2Many2Many
+		virtual public Allors.Extent<global::Domain.A1> A1sWhereA2Many2Many
 		{ 
 			get
 			{
@@ -79,7 +79,7 @@ namespace Domain
 		}
 
 
-		virtual public Allors.R1.Extent<global::Domain.A1> A1sWhereA2Many2One
+		virtual public Allors.Extent<global::Domain.A1> A1sWhereA2Many2One
 		{ 
 			get
 			{

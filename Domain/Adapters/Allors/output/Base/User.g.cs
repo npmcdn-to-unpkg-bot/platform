@@ -4,21 +4,21 @@ namespace Domain
 {
 	public  partial class User : UserAllors 
 	{
-		public User(Allors.R1.IStrategy allors) : base(allors) {}
+		public User(Allors.IStrategy allors) : base(allors) {}
 
-		public static User Instantiate (Allors.R1.ISession allorsSession, string allorsObjectId)
+		public static User Instantiate (Allors.ISession allorsSession, string allorsObjectId)
 		{
 			return (User) allorsSession.Instantiate(allorsObjectId);		
 		}
 	}
 
 	[System.Diagnostics.DebuggerNonUserCode]
-	public abstract class UserAllors :  Allors.R1.ObjectBase 
+	public abstract class UserAllors :  Allors.ObjectBase 
 	{
-		protected UserAllors(Allors.R1.IStrategy allors) : base(allors){}
+		protected UserAllors(Allors.IStrategy allors) : base(allors){}
 
 
-		virtual public Allors.R1.Extent<global::Domain.User> Selects
+		virtual public Allors.Extent<global::Domain.User> Selects
 		{ 
 			get
 			{
@@ -81,7 +81,7 @@ namespace Domain
 
 
 
-		virtual public Allors.R1.Extent<global::Domain.User> UsersWhereSelect
+		virtual public Allors.Extent<global::Domain.User> UsersWhereSelect
 		{ 
 			get
 			{

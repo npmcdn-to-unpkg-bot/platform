@@ -4,17 +4,17 @@ namespace Domain
 {
 	public  partial class LT32UnitGT32Composite : LT32UnitGT32CompositeAllors 
 	{
-		public LT32UnitGT32Composite(Allors.R1.IStrategy allors) : base(allors) {}
+		public LT32UnitGT32Composite(Allors.IStrategy allors) : base(allors) {}
 
-		public static LT32UnitGT32Composite Instantiate (Allors.R1.ISession allorsSession, string allorsObjectId)
+		public static LT32UnitGT32Composite Instantiate (Allors.ISession allorsSession, string allorsObjectId)
 		{
 			return (LT32UnitGT32Composite) allorsSession.Instantiate(allorsObjectId);		
 		}
 	}
 
 	[System.Diagnostics.DebuggerNonUserCode]
-	public abstract class LT32UnitGT32CompositeAllors :  Allors.R1.ObjectBase 
+	public abstract class LT32UnitGT32CompositeAllors :  Allors.ObjectBase 
 	{
-		protected LT32UnitGT32CompositeAllors(Allors.R1.IStrategy allors) : base(allors){}
+		protected LT32UnitGT32CompositeAllors(Allors.IStrategy allors) : base(allors){}
 	}
 }

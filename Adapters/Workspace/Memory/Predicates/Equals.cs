@@ -14,9 +14,9 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Workspace.Memory
+namespace Allors.Adapters.Workspace.Memory
 {
-    using Allors.R1.Adapters;
+    using Allors.Adapters;
 
     internal sealed class Equals : Predicate
     {

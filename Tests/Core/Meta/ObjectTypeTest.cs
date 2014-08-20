@@ -14,14 +14,14 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Meta.Static
+namespace Allors.Meta.Static
 {
     using System;
     using System.Collections.Generic;
     using System.Globalization;
 
-    using Allors.R1.Meta.AllorsGenerated;
-    using Allors.R1.Meta.Events;
+    using Allors.Meta.AllorsGenerated;
+    using Allors.Meta.Events;
 
     using NUnit.Framework;
 

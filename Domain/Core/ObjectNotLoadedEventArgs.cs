@@ -19,7 +19,7 @@
 // <summary>Defines the ObjectNotLoadedEventArgs type.</summary>
 //------------------------------------------------------------------------------------------------- 
 
-namespace Allors.R1
+namespace Allors
 {
     using System;
 

@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.Caching
+namespace Allors.Adapters.Database.Caching
 {
     /// <summary>
     /// The cache factory is a factory for cache objects.

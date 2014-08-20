@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Special.SqlClient
+namespace Allors.Adapters.Special.SqlClient
 {
     using System;
     using global::Domain;

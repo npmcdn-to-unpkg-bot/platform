@@ -18,9 +18,9 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.Caching
+namespace Allors.Adapters.Database.Caching
 {
-    using Allors.R1.Meta;
+    using Allors.Meta;
 
     /// <summary>
     /// Factory for default cache.

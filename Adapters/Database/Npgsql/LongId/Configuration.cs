@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.Npgsql.LongId
+namespace Allors.Adapters.Database.Npgsql.LongId
 {
     public class Configuration : Npgsql.Configuration 
     {

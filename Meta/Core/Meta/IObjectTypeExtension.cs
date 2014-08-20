@@ -19,7 +19,7 @@
 // <summary>Defines the Domain type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Meta
+namespace Allors.Meta
 {
     /// <summary>
     /// An ObjectTypeExtension allows you to extend an object type programmatically.

@@ -18,14 +18,14 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.Memory
+namespace Allors.Adapters.Database.Memory
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Xml;
 
-    using Meta;
+    using Allors.Meta;
 
     public abstract class Session : IDatabaseSession
     {
@@ -355,12 +355,12 @@ namespace Allors.R1.Adapters.Database.Memory
             return this.Extent(this.database.ObjectFactory.GetObjectTypeForType(typeof(T)));
         }
         
-        public virtual R1.Extent Extent(ObjectType objectType)
+        public virtual Allors.Extent Extent(ObjectType objectType)
         {
             return new ExtentFiltered(this, objectType);
         }
 
-        public virtual R1.Extent Union(R1.Extent firstOperand, R1.Extent secondOperand)
+        public virtual Allors.Extent Union(Allors.Extent firstOperand, Allors.Extent secondOperand)
         {
             var firstExtent = firstOperand as Extent ?? ((ExtentSwitch)firstOperand).Extent;
             var secondExtent = secondOperand as Extent ?? ((ExtentSwitch)secondOperand).Extent;
@@ -368,7 +368,7 @@ namespace Allors.R1.Adapters.Database.Memory
             return new ExtentOperation(this, firstExtent, secondExtent, ExtentOperationType.Union);
         }
 
-        public virtual R1.Extent Intersect(R1.Extent firstOperand, R1.Extent secondOperand)
+        public virtual Allors.Extent Intersect(Allors.Extent firstOperand, Allors.Extent secondOperand)
         {
             return new ExtentOperation(
                 this,
@@ -377,7 +377,7 @@ namespace Allors.R1.Adapters.Database.Memory
                 ExtentOperationType.Intersect);
         }
 
-        public virtual R1.Extent Except(R1.Extent firstOperand, R1.Extent secondOperand)
+        public virtual Allors.Extent Except(Allors.Extent firstOperand, Allors.Extent secondOperand)
         {
             return new ExtentOperation(
                 this,

@@ -18,12 +18,12 @@
 // </copyright>
 // <summary>Defines the IObject type.</summary>
 //-------------------------------------------------------------------------------------------------
-namespace Allors.R1
+namespace Allors
 {
     using System;
     using System.Reflection;
 
-    using Allors.R1.Meta;
+    using Allors.Meta;
 
     /// <summary>
     /// A factory for creating new IObject instances.

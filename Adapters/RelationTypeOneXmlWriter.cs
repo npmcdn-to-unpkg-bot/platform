@@ -18,11 +18,11 @@
 // </copyright>
 // <summary>Defines the RelationTypeOneXmlWriter type.</summary>
 //-------------------------------------------------------------------------------------------------
-namespace Allors.R1.Adapters
+namespace Allors.Adapters
 {
     using System;
     using System.Xml;
-    using Meta;
+    using Allors.Meta;
 
     /// <summary>
     /// Writes all relations from a <see cref="RelationType"/> with a Role

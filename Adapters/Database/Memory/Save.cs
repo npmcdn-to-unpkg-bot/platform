@@ -14,13 +14,13 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.Memory
+namespace Allors.Adapters.Database.Memory
 {
     using System;
     using System.Collections.Generic;
     using System.Xml;
 
-    using Allors.R1.Meta;
+    using Allors.Meta;
 
     public class Save
     {

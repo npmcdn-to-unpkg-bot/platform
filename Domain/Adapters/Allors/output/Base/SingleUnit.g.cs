@@ -4,18 +4,18 @@ namespace Domain
 {
 	public  partial class SingleUnit : SingleUnitAllors 
 	{
-		public SingleUnit(Allors.R1.IStrategy allors) : base(allors) {}
+		public SingleUnit(Allors.IStrategy allors) : base(allors) {}
 
-		public static SingleUnit Instantiate (Allors.R1.ISession allorsSession, string allorsObjectId)
+		public static SingleUnit Instantiate (Allors.ISession allorsSession, string allorsObjectId)
 		{
 			return (SingleUnit) allorsSession.Instantiate(allorsObjectId);		
 		}
 	}
 
 	[System.Diagnostics.DebuggerNonUserCode]
-	public abstract class SingleUnitAllors :  Allors.R1.ObjectBase 
+	public abstract class SingleUnitAllors :  Allors.ObjectBase 
 	{
-		protected SingleUnitAllors(Allors.R1.IStrategy allors) : base(allors){}
+		protected SingleUnitAllors(Allors.IStrategy allors) : base(allors){}
 
 
 

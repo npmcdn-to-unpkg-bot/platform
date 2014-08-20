@@ -18,13 +18,13 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Special.Assertions
+namespace Allors.Adapters.Special.Assertions
 {
     using System;
 
-    using Allors.R1.Meta;
+    using Allors.Meta;
 
-    using Allors.R1;
+    using Allors;
 
     using NUnit.Framework;
 

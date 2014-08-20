@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1
+namespace Allors
 {
     /// <summary>
     /// A workspace is an <see cref="IPopulation"/> that is connected

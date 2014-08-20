@@ -19,9 +19,9 @@
 // <summary>Defines the Session type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-using Allors.R1;
+using Allors;
 
-namespace Allors.R1.Adapters.Database.Memory.LongId
+namespace Allors.Adapters.Database.Memory.LongId
 {
     using System;
 

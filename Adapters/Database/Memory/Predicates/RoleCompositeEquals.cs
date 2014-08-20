@@ -14,9 +14,9 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.Memory
+namespace Allors.Adapters.Database.Memory
 {
-    using Meta;
+    using Allors.Meta;
 
     internal sealed class RoleCompositeEqualsValue : Predicate
     {

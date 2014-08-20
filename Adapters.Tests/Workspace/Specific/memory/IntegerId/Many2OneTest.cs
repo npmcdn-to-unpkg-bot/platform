@@ -18,12 +18,12 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Special.Memory.IntegerId
+namespace Allors.Special.Memory.IntegerId
 {
     using System;
 
-    using Allors.R1;
-    using Allors.R1.Adapters.Special;
+    using Allors.Adapters.Special;
+    using Allors;
 
     using NUnit.Framework;
 

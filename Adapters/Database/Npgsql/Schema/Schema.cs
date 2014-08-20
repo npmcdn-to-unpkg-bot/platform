@@ -19,15 +19,15 @@
 // <summary>Defines the Schema type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.Npgsql
+namespace Allors.Adapters.Database.Npgsql
 {
     using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Text.RegularExpressions;
 
-    using Allors.R1.Adapters.Database.Sql;
-    using Allors.R1.Meta;
+    using Allors.Adapters.Database.Sql;
+    using Allors.Meta;
 
     using NpgsqlTypes;
 

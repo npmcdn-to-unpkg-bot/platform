@@ -18,17 +18,17 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.Npgsql.Commands.Text
+namespace Allors.Adapters.Database.Npgsql.Commands.Text
 {
     using System;
 
-    using Allors.R1.Adapters.Database.Sql.Commands;
-    using Allors.R1.Meta;
+    using Allors.Adapters.Database.Sql.Commands;
+    using Allors.Meta;
 
     using global::Npgsql;
 
     using Database = Database;
-    using DatabaseSession = Allors.R1.Adapters.Database.Npgsql.DatabaseSession;
+    using DatabaseSession = DatabaseSession;
 
     public class GetObjectTypeFactory : IGetObjectTypeFactory
     {

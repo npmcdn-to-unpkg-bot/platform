@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient.Commands
+namespace Allors.Adapters.Database.SqlClient.Commands
 {
     public abstract class DatabaseCommand : Command
     {

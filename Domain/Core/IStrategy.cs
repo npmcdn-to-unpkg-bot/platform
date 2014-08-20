@@ -18,9 +18,9 @@
 // </copyright>
 // <summary>Defines the IStrategy type.</summary>
 //-------------------------------------------------------------------------------------------------
-namespace Allors.R1
+namespace Allors
 {
-    using Allors.R1.Meta;
+    using Allors.Meta;
 
     /// <summary>
     /// A strategy based object delegates all framework related work
@@ -47,7 +47,7 @@ namespace Allors.R1
         ObjectType ObjectType { get; }
 
         /// <summary>
-        /// Gets the <see cref="R1.ObjectId"/>.
+        /// Gets the <see cref="Allors.ObjectId"/>.
         /// </summary>
         /// <value>The object id.</value>
         ObjectId ObjectId { get; }

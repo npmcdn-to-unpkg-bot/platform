@@ -18,10 +18,10 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Special.Assertions
+namespace Allors.Adapters.Special.Assertions
 {
-    using Allors.R1;
-    using Allors.R1.Adapters.Database.Memory.IntegerId;
+    using Allors.Adapters.Database.Memory.IntegerId;
+    using Allors;
 
     using global::Domain;
 

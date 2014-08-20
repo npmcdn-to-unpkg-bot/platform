@@ -14,10 +14,10 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Workspace.Memory
+namespace Allors.Adapters.Workspace.Memory
 {
-    public abstract class UpgradeableExtent : R1.Extent
+    public abstract class UpgradeableExtent : Allors.Extent
     {
-        internal abstract R1.Extent UpgradeExtent();
+        internal abstract Allors.Extent UpgradeExtent();
     }
 }

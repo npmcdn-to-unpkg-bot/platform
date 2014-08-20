@@ -21,7 +21,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Special.Npgsql.IntegerId.ReadCommitted
+namespace Allors.Adapters.Special.Npgsql.IntegerId.ReadCommitted
 {
     using System;
 

@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Workspace.Memory
+namespace Allors.Adapters.Workspace.Memory
 {
     using System;
     using System.Collections;
@@ -26,8 +26,8 @@ namespace Allors.R1.Adapters.Workspace.Memory
     using System.Linq;
     using System.Xml;
 
-    using Allors.R1.Adapters;
-    using Allors.R1.Meta;
+    using Allors.Adapters;
+    using Allors.Meta;
 
     public class WorkspaceSession : IWorkspaceSession
     {
@@ -499,7 +499,7 @@ namespace Allors.R1.Adapters.Workspace.Memory
             return objects.ToArray();
         }
 
-        public virtual R1.Extent LocalExtent(ObjectType objectType)
+        public virtual Allors.Extent LocalExtent(ObjectType objectType)
         {
             return new ExtentObject(this, objectType);
         }
@@ -1059,22 +1059,22 @@ namespace Allors.R1.Adapters.Workspace.Memory
             throw new NotSupportedException();
         }
 
-        public virtual R1.Extent Extent(ObjectType objectType)
+        public virtual Allors.Extent Extent(ObjectType objectType)
         {
             throw new NotSupportedException();
         }
 
-        public virtual R1.Extent Union(R1.Extent firstOperand, R1.Extent secondOperand)
+        public virtual Allors.Extent Union(Allors.Extent firstOperand, Allors.Extent secondOperand)
         {
             throw new NotSupportedException();
         }
 
-        public virtual R1.Extent Intersect(R1.Extent firstOperand, R1.Extent secondOperand)
+        public virtual Allors.Extent Intersect(Allors.Extent firstOperand, Allors.Extent secondOperand)
         {
             throw new NotSupportedException();
         }
 
-        public virtual R1.Extent Except(R1.Extent firstOperand, R1.Extent secondOperand)
+        public virtual Allors.Extent Except(Allors.Extent firstOperand, Allors.Extent secondOperand)
         {
             throw new NotSupportedException();
         }

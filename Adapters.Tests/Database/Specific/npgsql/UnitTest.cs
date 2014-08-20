@@ -19,7 +19,7 @@
 // <summary>Defines the Default type.</summary>
 //------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Special.Npgsql
+namespace Allors.Adapters.Special.Npgsql
 {
     using System;
 

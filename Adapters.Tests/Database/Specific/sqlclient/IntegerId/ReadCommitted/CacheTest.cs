@@ -18,13 +18,13 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Special.SqlClient.IntegerId.ReadCommitted
+namespace Allors.Adapters.Special.SqlClient.IntegerId.ReadCommitted
 {
-    using Allors.R1.Adapters.Database.Sql;
+    using Allors.Adapters.Database.Sql;
 
     using NUnit.Framework;
 
-    using IDatabase = Allors.R1.IDatabase;
+    using IDatabase = IDatabase;
 
     [TestFixture]
     public class CacheTest : Special.CacheTest

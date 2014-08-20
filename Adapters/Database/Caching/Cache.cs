@@ -18,11 +18,11 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.Caching
+namespace Allors.Adapters.Database.Caching
 {
     using System.Collections.Generic;
 
-    using Allors.R1.Meta;
+    using Allors.Meta;
 
     /// <summary>
     /// The Cache holds a CachedObject and/or ObjectType by ObjectId.

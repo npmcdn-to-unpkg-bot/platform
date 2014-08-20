@@ -18,15 +18,15 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Special
+namespace Allors.Adapters.Special
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
 
-    using Allors.R1;
-    using Allors.R1.Adapters.Special.Assertions;
-    using Allors.R1.Meta;
+    using Allors.Adapters.Special.Assertions;
+    using Allors;
+    using Allors.Meta;
 
     using Domain;
 

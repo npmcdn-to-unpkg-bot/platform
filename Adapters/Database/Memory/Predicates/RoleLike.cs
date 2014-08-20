@@ -18,10 +18,10 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.Memory
+namespace Allors.Adapters.Database.Memory
 {
     using System.Text.RegularExpressions;
-    using Meta;
+    using Allors.Meta;
 
     internal sealed class RoleLike : Predicate
     {

@@ -18,11 +18,11 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Special.Npgsql
+namespace Allors.Adapters.Special.Npgsql
 {
     using System.Text;
 
-    using Allors.R1.Adapters.Database.Sql;
+    using Allors.Adapters.Database.Sql;
 
     public abstract class Profile : Special.Profile
     {

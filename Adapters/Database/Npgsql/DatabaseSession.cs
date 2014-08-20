@@ -19,13 +19,15 @@
 // <summary>Defines the Session type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.Npgsql
+namespace Allors.Adapters.Database.Npgsql
 {
     using System.Collections.Generic;
 
-    using Allors.R1.Adapters.Database.Sql;
+    using Allors.Adapters.Database.Sql;
 
     using global::Npgsql;
+
+    using IDatabase = Allors.IDatabase;
 
     public class DatabaseSession : Sql.DatabaseSession, ICommandFactory
     {
@@ -41,7 +43,7 @@ namespace Allors.R1.Adapters.Database.Npgsql
             this.database = database;
         }
         
-        public override R1.IDatabase Database
+        public override IDatabase Database
         {
             get { return this.database; }
         }

@@ -18,11 +18,11 @@
 // </copyright>
 // <summary>Defines the IChangeSet type.</summary>
 //-------------------------------------------------------------------------------------------------
-namespace Allors.R1
+namespace Allors
 {
     using System.Collections.Generic;
 
-    using Meta;
+    using Allors.Meta;
 
     /// <summary>
     /// A change set is created during a checkpoint

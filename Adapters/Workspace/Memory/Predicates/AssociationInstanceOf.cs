@@ -18,13 +18,13 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Workspace.Memory
+namespace Allors.Adapters.Workspace.Memory
 {
     using System;
 
-    using Allors.R1.Adapters;
+    using Allors.Adapters;
 
-    using Meta;
+    using Allors.Meta;
 
     internal sealed class AssociationInstanceOf : Predicate
     {

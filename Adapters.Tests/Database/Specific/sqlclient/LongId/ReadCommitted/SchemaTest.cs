@@ -14,14 +14,14 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Special.SqlClient.LongId.ReadCommitted
+namespace Allors.Adapters.Special.SqlClient.LongId.ReadCommitted
 {
-    using Allors.R1.Adapters.Database.Sql;
-    using Allors.R1.Meta;
+    using Allors.Adapters.Database.Sql;
+    using Allors.Meta;
 
     using NUnit.Framework;
 
-    using IDatabase = Allors.R1.IDatabase;
+    using IDatabase = IDatabase;
 
     [TestFixture]
     public class SchemaTest : SchemaIntegerIdTest
@@ -82,7 +82,7 @@ namespace Allors.R1.Adapters.Special.SqlClient.LongId.ReadCommitted
             return this.profile.IsUnique(table, column);
         }
 
-        protected override SchemaValidationErrors GetSchemaValidation(R1.IDatabase repository)
+        protected override SchemaValidationErrors GetSchemaValidation(IDatabase repository)
         {
             return ((Database)repository).Schema.SchemaValidationErrors;
         }

@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1
+namespace Allors
 {
     /// <summary>
     /// A database is an online <see cref="IPopulation"/>.

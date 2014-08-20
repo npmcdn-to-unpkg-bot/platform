@@ -18,7 +18,7 @@
 // </copyright>
 // <summary>Defines the MetaObjectDeletedEventArgs type.</summary>
 //-------------------------------------------------------------------------------------------------
-namespace Allors.R1.Meta.Events
+namespace Allors.Meta.Events
 {
     using System;
 

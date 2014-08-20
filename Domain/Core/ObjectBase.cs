@@ -18,7 +18,7 @@
 // </copyright>
 // <summary>Defines the ObjectBase type.</summary>
 //-------------------------------------------------------------------------------------------------
-namespace Allors.R1
+namespace Allors
 {
     using System.Diagnostics;
 

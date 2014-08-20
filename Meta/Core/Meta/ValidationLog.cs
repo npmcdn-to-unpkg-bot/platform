@@ -18,12 +18,12 @@
 // </copyright>
 // <summary>Defines the ValidationReport type.</summary>
 //-------------------------------------------------------------------------------------------------
-namespace Allors.R1.Meta
+namespace Allors.Meta
 {
     using System;
     using System.Collections.Generic;
 
-    using Allors.R1.Meta.AllorsGenerated;
+    using Allors.Meta.AllorsGenerated;
 
     /// <summary>
     /// The report of the validation.

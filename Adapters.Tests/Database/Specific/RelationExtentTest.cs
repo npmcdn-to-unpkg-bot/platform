@@ -14,19 +14,19 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Special
+namespace Allors.Adapters.Special
 {
     using System;
 
-    using Allors.R1.Meta;
+    using Allors.Meta;
 
-    using Allors.R1;
+    using Allors;
 
     using global::Domain;
 
     using NUnit.Framework;
 
-    using Domain = Allors.R1.Meta.Domain;
+    using Domain = Allors.Meta.Domain;
 
     public abstract class RelationExtentTest
     {

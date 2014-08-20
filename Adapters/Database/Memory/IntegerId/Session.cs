@@ -14,9 +14,9 @@
 // </copyright>
 // <summary>Defines the Session type.</summary>
 //-------------------------------------------------------------------------------------------------
-using Allors.R1;
+using Allors;
 
-namespace Allors.R1.Adapters.Database.Memory.IntegerId
+namespace Allors.Adapters.Database.Memory.IntegerId
 {
     using System;
 

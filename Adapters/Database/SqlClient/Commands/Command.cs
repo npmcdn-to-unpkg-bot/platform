@@ -18,14 +18,14 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient.Commands
+namespace Allors.Adapters.Database.SqlClient.Commands
 {
     using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
 
-    using Allors.R1.Adapters.Database.Sql;
+    using Allors.Adapters.Database.Sql;
 
     using Microsoft.SqlServer.Server;
 

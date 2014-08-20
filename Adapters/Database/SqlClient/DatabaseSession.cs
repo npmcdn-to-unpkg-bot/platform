@@ -19,12 +19,14 @@
 // <summary>Defines the Session type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient
+namespace Allors.Adapters.Database.SqlClient
 {
     using System.Collections.Generic;
     using System.Data.SqlClient;
 
-    using Allors.R1.Adapters.Database.Sql;
+    using Allors.Adapters.Database.Sql;
+
+    using IDatabase = Allors.IDatabase;
 
     public class DatabaseSession : Sql.DatabaseSession, ICommandFactory
     {
@@ -40,7 +42,7 @@ namespace Allors.R1.Adapters.Database.SqlClient
             this.database = database;
         }
         
-        public override R1.IDatabase Database
+        public override IDatabase Database
         {
             get { return this.database; }
         }

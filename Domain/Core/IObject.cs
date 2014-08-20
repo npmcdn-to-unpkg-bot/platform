@@ -18,7 +18,7 @@
 // </copyright>
 // <summary>Defines the IObject type.</summary>
 //-------------------------------------------------------------------------------------------------
-namespace Allors.R1
+namespace Allors
 {
     /// <summary>
     /// <para>

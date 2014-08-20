@@ -14,12 +14,14 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Special.SqlClient.IntegerId.ReadCommitted
+namespace Allors.Adapters.Special.SqlClient.IntegerId.ReadCommitted
 {
-    using Allors.R1.Adapters.Database.Sql;
-    using Allors.R1.Meta;
+    using Allors.Adapters.Database.Sql;
+    using Allors.Meta;
 
     using NUnit.Framework;
+
+    using IDatabase = Allors.IDatabase;
 
     [TestFixture]
     public class SchemaTest : SchemaIntegerIdTest
@@ -34,7 +36,7 @@ namespace Allors.R1.Adapters.Special.SqlClient.IntegerId.ReadCommitted
             }
         }
 
-        protected override R1.IDatabase CreateDatabase(Domain domain, bool init)
+        protected override IDatabase CreateDatabase(Domain domain, bool init)
         {
             return this.profile.CreateDatabase(domain, init);
         }
@@ -80,7 +82,7 @@ namespace Allors.R1.Adapters.Special.SqlClient.IntegerId.ReadCommitted
             return this.profile.IsUnique(table, column);
         }
 
-        protected override SchemaValidationErrors GetSchemaValidation(R1.IDatabase repository)
+        protected override SchemaValidationErrors GetSchemaValidation(IDatabase repository)
         {
             return ((Database)repository).Schema.SchemaValidationErrors;
         }

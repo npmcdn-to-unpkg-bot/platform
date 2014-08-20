@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.Npgsql
+namespace Allors.Adapters.Database.Npgsql
 {
     using NpgsqlTypes;
 

@@ -19,7 +19,7 @@
 // <summary>Defines the Schema type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.Npgsql.IntegerId
+namespace Allors.Adapters.Database.Npgsql.IntegerId
 {
     using System.Data;
 

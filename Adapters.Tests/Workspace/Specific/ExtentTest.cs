@@ -14,13 +14,13 @@
 // </copyright>
 // <summary>Defines the ExtentTest type.</summary>
 //-------------------------------------------------------------------------------------------------
-namespace Allors.R1.Special
+namespace Allors.Special
 {
     using System;
 
-    using Allors.R1.Meta;
+    using Allors.Meta;
 
-    using Allors.R1;
+    using Allors;
 
     using global::Domain;
 

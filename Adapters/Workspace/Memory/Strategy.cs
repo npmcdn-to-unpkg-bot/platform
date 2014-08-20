@@ -18,15 +18,15 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Workspace.Memory
+namespace Allors.Adapters.Workspace.Memory
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Xml;
 
-    using Allors.R1.Adapters;
-    using Allors.R1.Meta;
+    using Allors.Adapters;
+    using Allors.Meta;
 
     public class Strategy : IStrategy
     {
@@ -165,7 +165,7 @@ namespace Allors.R1.Adapters.Workspace.Memory
             {
                 if (roleType.IsMany)
                 {
-                    var roles = value as R1.Extent;
+                    var roles = value as Allors.Extent;
                     if (roles == null)
                     {
                         var roleList = new ArrayList((ICollection)value);
@@ -304,14 +304,14 @@ namespace Allors.R1.Adapters.Workspace.Memory
             return this.GetCompositeRole(roleType) != null;
         }
 
-        public virtual R1.Extent GetCompositeRoles(RoleType roleType)
+        public virtual Allors.Extent GetCompositeRoles(RoleType roleType)
         {
             this.CheckRemoved();
 
             return new ExtentRole(this, roleType);
         }
 
-        public virtual void SetCompositeRoles(RoleType roleType, R1.Extent roles)
+        public virtual void SetCompositeRoles(RoleType roleType, Allors.Extent roles)
         {
             if (roles == null || roles.Count == 0)
             {
@@ -435,7 +435,7 @@ namespace Allors.R1.Adapters.Workspace.Memory
             return this.GetCompositeAssociation(associationType) != null;
         }
 
-        public virtual R1.Extent GetCompositeAssociations(AssociationType associationType)
+        public virtual Allors.Extent GetCompositeAssociations(AssociationType associationType)
         {
             this.CheckRemoved();
 

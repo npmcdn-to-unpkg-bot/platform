@@ -14,7 +14,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient
+namespace Allors.Adapters.Database.SqlClient
 {
     using System;
     using System.Collections.Generic;
@@ -23,7 +23,7 @@ namespace Allors.R1.Adapters.Database.SqlClient
     using System.Data.SqlClient;
     using System.Text;
 
-    using Allors.R1.Meta;
+    using Allors.Meta;
 
     using Microsoft.SqlServer.Server;
 

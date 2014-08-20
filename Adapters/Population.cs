@@ -18,13 +18,13 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters
+namespace Allors.Adapters
 {
     using System;
     using System.Collections.Generic;
     using System.Xml;
 
-    using Meta;
+    using Allors.Meta;
 
     public abstract class Population : IPopulation
     {

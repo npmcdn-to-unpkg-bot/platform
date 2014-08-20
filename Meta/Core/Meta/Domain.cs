@@ -19,7 +19,7 @@
 // <summary>Defines the Domain type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Meta
+namespace Allors.Meta
 {
     using System;
     using System.Collections;
@@ -27,7 +27,7 @@ namespace Allors.R1.Meta
     using System.Text;
     using System.Xml;
 
-    using Allors.R1.Meta.Events;
+    using Allors.Meta.Events;
 
     using AllorsGenerated;
 

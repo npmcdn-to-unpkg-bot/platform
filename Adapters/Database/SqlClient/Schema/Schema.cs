@@ -19,14 +19,14 @@
 // <summary>Defines the Schema type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient
+namespace Allors.Adapters.Database.SqlClient
 {
     using System;
     using System.Collections.Generic;
     using System.Data;
 
-    using Allors.R1.Adapters.Database.Sql;
-    using Allors.R1.Meta;
+    using Allors.Adapters.Database.Sql;
+    using Allors.Meta;
 
     public abstract class Schema : Sql.Schema
     {

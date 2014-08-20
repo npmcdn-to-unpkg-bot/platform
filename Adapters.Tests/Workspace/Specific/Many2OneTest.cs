@@ -14,7 +14,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Special
+namespace Allors.Special
 {
     using global::Domain;
 

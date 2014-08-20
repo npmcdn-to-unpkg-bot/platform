@@ -18,13 +18,13 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.Memory
+namespace Allors.Adapters.Database.Memory
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using Meta;
+    using Allors.Meta;
 
     public sealed class StrategyExtentAssociation : StrategyExtent
     {
@@ -70,12 +70,12 @@ namespace Allors.R1.Adapters.Database.Memory
             get { return this.roleStrategy.MemorySession; }
         }
 
-        public override R1.Extent AddSort(RoleType roleType)
+        public override Allors.Extent AddSort(RoleType roleType)
         {
             throw new NotSupportedException();
         }
 
-        public override R1.Extent AddSort(RoleType roleType, SortDirection direction)
+        public override Allors.Extent AddSort(RoleType roleType, SortDirection direction)
         {
             throw new NotSupportedException();
         }

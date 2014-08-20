@@ -18,9 +18,9 @@
 // </copyright> 
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1
+namespace Allors
 {
-    using Meta;
+    using Allors.Meta;
 
     /// <summary>
     /// Extends <see cref="ISession"/> with workspace capabilities. 

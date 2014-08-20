@@ -14,13 +14,15 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Special.SqlClient.LongId.ReadCommitted
+namespace Allors.Adapters.Special.SqlClient.LongId.ReadCommitted
 {
     using System;
     using System.Collections.Generic;
 
-    using Allors.R1.Adapters.Database.SqlClient.LongId;
-    using Allors.R1.Meta;
+    using Allors.Adapters.Database.SqlClient.LongId;
+    using Allors.Meta;
+
+    using Configuration = Allors.Adapters.Configuration;
 
     public class Profile : SqlClient.Profile
     {
@@ -53,7 +55,7 @@ namespace Allors.R1.Adapters.Special.SqlClient.LongId.ReadCommitted
 
         public IDatabase CreateDatabase(Domain domain, bool init)
         {
-            var configuration = new Configuration
+            var configuration = new Adapters.Database.SqlClient.LongId.Configuration
             {
                 ObjectFactory = this.ObjectFactory,
                 CacheFactory = this.CacheFactory,
@@ -72,7 +74,7 @@ namespace Allors.R1.Adapters.Special.SqlClient.LongId.ReadCommitted
 
         public override IDatabase CreateDatabase()
         {
-            var configuration = new Configuration
+            var configuration = new Adapters.Database.SqlClient.LongId.Configuration
             {
                 ObjectFactory = this.ObjectFactory,
                 CacheFactory = this.CacheFactory,

@@ -14,7 +14,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Meta.Static
+namespace Allors.Meta.Static
 {
     using System;
     using System.Collections;

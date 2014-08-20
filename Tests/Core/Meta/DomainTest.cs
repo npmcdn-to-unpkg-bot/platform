@@ -15,14 +15,14 @@
 // <summary>Defines the DomainTest type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Meta.Static
+namespace Allors.Meta.Static
 {
     using System;
     using System.Collections;
     using System.IO;
     using System.Xml;
 
-    using Allors.R1.Meta.AllorsGenerated;
+    using Allors.Meta.AllorsGenerated;
 
     using NUnit.Framework;
 

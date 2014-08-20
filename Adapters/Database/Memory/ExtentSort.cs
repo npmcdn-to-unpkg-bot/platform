@@ -18,11 +18,11 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.Memory
+namespace Allors.Adapters.Database.Memory
 {
     using System;
     using System.Collections.Generic;
-    using Meta;
+    using Allors.Meta;
 
     public sealed class ExtentSort : IComparer<Strategy>
     {
@@ -97,7 +97,7 @@ namespace Allors.R1.Adapters.Database.Memory
             }
         }
 
-        internal void CopyToConnected(R1.Extent connectedExtent)
+        internal void CopyToConnected(Allors.Extent connectedExtent)
         {
             connectedExtent.AddSort(this.roleType, this.direction);
             if (this.subSorter != null)

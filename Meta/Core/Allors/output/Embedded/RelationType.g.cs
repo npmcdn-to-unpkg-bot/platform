@@ -1,4 +1,4 @@
-namespace Allors.R1.Meta.AllorsGenerated
+namespace Allors.Meta.AllorsGenerated
 {
 	internal interface AllorsInternalRelationType : AllorsInternalMetaObject, AllorsInternal
 	{
@@ -30,7 +30,7 @@ namespace Allors.R1.Meta.AllorsGenerated
 		}
 
 
-		global::Allors.R1.Meta.RoleType RoleType
+		global::Allors.Meta.RoleType RoleType
 		{
 			get;
 			set;
@@ -46,7 +46,7 @@ namespace Allors.R1.Meta.AllorsGenerated
 		void AllorsRemoveRelationTypeRoleType();
 
 
-		global::Allors.R1.Meta.AssociationType AssociationType
+		global::Allors.Meta.AssociationType AssociationType
 		{
 			get;
 			set;
@@ -63,7 +63,7 @@ namespace Allors.R1.Meta.AllorsGenerated
 
 
 
-		global::Allors.R1.Meta.Domain DomainWhereDeclaredRelationType
+		global::Allors.Meta.Domain DomainWhereDeclaredRelationType
 		{
 			get;
 		}
@@ -74,13 +74,13 @@ namespace Allors.R1.Meta.AllorsGenerated
 		}
 
 
-		void AllorsRoleSyncSetDeclaredRelationTypeDomain(global::Allors.R1.Meta.Domain association );
+		void AllorsRoleSyncSetDeclaredRelationTypeDomain(global::Allors.Meta.Domain association );
 
 
 		void AllorsRoleReleaseDeclaredRelationTypeDomain();
 
 
-		global::Allors.R1.Meta.Domain[] DomainsWhereDerivedRelationType
+		global::Allors.Meta.Domain[] DomainsWhereDerivedRelationType
 		{
 			get;
 		}
@@ -90,9 +90,9 @@ namespace Allors.R1.Meta.AllorsGenerated
 			get;
 		}
 
-		void AllorsRoleSyncAddDerivedRelationTypeDomain(global::Allors.R1.Meta.Domain association );
+		void AllorsRoleSyncAddDerivedRelationTypeDomain(global::Allors.Meta.Domain association );
 
-		void AllorsRoleSyncRemoveDerivedRelationTypeDomain(global::Allors.R1.Meta.Domain association );
+		void AllorsRoleSyncRemoveDerivedRelationTypeDomain(global::Allors.Meta.Domain association );
 
 		void AllorsRoleReleaseDerivedRelationTypeDomain();
 
@@ -104,7 +104,7 @@ namespace Allors.R1.Meta.AllorsGenerated
 	}
 
 	[System.Diagnostics.DebuggerNonUserCode]
-	public abstract class AllorsClassRelationType :  global::Allors.R1.Meta.MetaObject,  AllorsInternalRelationType , AllorsEmbeddedObject
+	public abstract class AllorsClassRelationType :  global::Allors.Meta.MetaObject,  AllorsInternalRelationType , AllorsEmbeddedObject
 	{
 		protected System.Object _RelationTypeIsDerived;
 
@@ -112,16 +112,16 @@ namespace Allors.R1.Meta.AllorsGenerated
 		protected System.Object _RelationTypeIsIndexed;
 
 
-		protected global::Allors.R1.Meta.RoleType _RelationTypeRoleType;
+		protected global::Allors.Meta.RoleType _RelationTypeRoleType;
 
 
-		protected global::Allors.R1.Meta.AssociationType _RelationTypeAssociationType;
+		protected global::Allors.Meta.AssociationType _RelationTypeAssociationType;
 
 
-		protected global::Allors.R1.Meta.Domain _DeclaredRelationTypeDomain;
+		protected global::Allors.Meta.Domain _DeclaredRelationTypeDomain;
 
 
-		protected global::Allors.R1.Meta.Domain[] _DerivedRelationTypeDomain = AllorsEmbeddedArrays.EMPTY_Domain_ARRAY;
+		protected global::Allors.Meta.Domain[] _DerivedRelationTypeDomain = AllorsEmbeddedArrays.EMPTY_Domain_ARRAY;
 
 
 
@@ -160,11 +160,11 @@ namespace Allors.R1.Meta.AllorsGenerated
 		{
 			AllorsAssert();
 
-			((Allors.R1.Meta.AllorsGenerated.AllorsInternalRelationType)this).AllorsRemoveRelationTypeRoleType();
-			((Allors.R1.Meta.AllorsGenerated.AllorsInternalRelationType)this).AllorsRemoveRelationTypeAssociationType();
+			((AllorsInternalRelationType)this).AllorsRemoveRelationTypeRoleType();
+			((AllorsInternalRelationType)this).AllorsRemoveRelationTypeAssociationType();
 
-			((Allors.R1.Meta.AllorsGenerated.AllorsInternalRelationType)this).AllorsRoleReleaseDeclaredRelationTypeDomain();
-			((Allors.R1.Meta.AllorsGenerated.AllorsInternalRelationType)this).AllorsRoleReleaseDerivedRelationTypeDomain();
+			((AllorsInternalRelationType)this).AllorsRoleReleaseDeclaredRelationTypeDomain();
+			((AllorsInternalRelationType)this).AllorsRoleReleaseDerivedRelationTypeDomain();
 
 
 			session.Delete(this);
@@ -203,10 +203,10 @@ namespace Allors.R1.Meta.AllorsGenerated
 					RoleSetRelationTypeIsIndexed((global::System.Boolean)role);
 					break;
 				case AllorsRelationTags.RelationTypeRoleType:
-					RoleSetRelationTypeRoleType((global::Allors.R1.Meta.RoleType)role);
+					RoleSetRelationTypeRoleType((global::Allors.Meta.RoleType)role);
 					break;
 				case AllorsRelationTags.RelationTypeAssociationType:
-					RoleSetRelationTypeAssociationType((global::Allors.R1.Meta.AssociationType)role);
+					RoleSetRelationTypeAssociationType((global::Allors.Meta.AssociationType)role);
 					break;
 				case AllorsRelationTags.MetaObjectId:
 					RoleSetMetaObjectId((global::System.Guid)role);
@@ -284,7 +284,7 @@ namespace Allors.R1.Meta.AllorsGenerated
 			_RelationTypeIsIndexed = null;
 		}
 
-		public virtual global::Allors.R1.Meta.RoleType RoleType
+		public virtual global::Allors.Meta.RoleType RoleType
 		{
 			get
 			{
@@ -299,30 +299,30 @@ namespace Allors.R1.Meta.AllorsGenerated
 			}
 		}
 
-		protected void RoleSetRelationTypeRoleType(global::Allors.R1.Meta.RoleType value)
+		protected void RoleSetRelationTypeRoleType(global::Allors.Meta.RoleType value)
 		{
-			((Allors.R1.Meta.AllorsGenerated.AllorsInternalRelationType)this).AllorsRemoveRelationTypeRoleType();
+			((AllorsInternalRelationType)this).AllorsRemoveRelationTypeRoleType();
 			if( value != null ) 
 			{
 				_RelationTypeRoleType = value;
-				((Allors.R1.Meta.AllorsGenerated.AllorsInternalRoleType)_RelationTypeRoleType).AllorsRoleReleaseRoleTypeRelationType();
+				((AllorsInternalRoleType)_RelationTypeRoleType).AllorsRoleReleaseRoleTypeRelationType();
 				_RelationTypeRoleType = value;
 				// role side
-				((Allors.R1.Meta.AllorsGenerated.AllorsInternalRoleType)_RelationTypeRoleType).AllorsRoleSyncSetRoleTypeRelationType((global::Allors.R1.Meta.RelationType) this ); 
+				((AllorsInternalRoleType)_RelationTypeRoleType).AllorsRoleSyncSetRoleTypeRelationType((global::Allors.Meta.RelationType) this ); 
 			}
 		}
 
 		public virtual void RemoveRoleType()
 		{
-			((Allors.R1.Meta.AllorsGenerated.AllorsInternalRelationType)this).AllorsRemoveRelationTypeRoleType();
+			((AllorsInternalRelationType)this).AllorsRemoveRelationTypeRoleType();
 		}
 
-		void Allors.R1.Meta.AllorsGenerated.AllorsInternalRelationType.AllorsRemoveRelationTypeRoleType()
+		void AllorsInternalRelationType.AllorsRemoveRelationTypeRoleType()
 		{
 			AllorsAssert();
 			if( _RelationTypeRoleType != null) 
 			{
-				((Allors.R1.Meta.AllorsGenerated.AllorsInternalRoleType)_RelationTypeRoleType).AllorsRoleSyncSetRoleTypeRelationType( null ); 
+				((AllorsInternalRoleType)_RelationTypeRoleType).AllorsRoleSyncSetRoleTypeRelationType( null ); 
 				_RelationTypeRoleType = null;
 				_RelationTypeRoleType = null;
 			}
@@ -336,7 +336,7 @@ namespace Allors.R1.Meta.AllorsGenerated
 			}
 		}
 
-		public virtual global::Allors.R1.Meta.AssociationType AssociationType
+		public virtual global::Allors.Meta.AssociationType AssociationType
 		{
 			get
 			{
@@ -351,30 +351,30 @@ namespace Allors.R1.Meta.AllorsGenerated
 			}
 		}
 
-		protected void RoleSetRelationTypeAssociationType(global::Allors.R1.Meta.AssociationType value)
+		protected void RoleSetRelationTypeAssociationType(global::Allors.Meta.AssociationType value)
 		{
-			((Allors.R1.Meta.AllorsGenerated.AllorsInternalRelationType)this).AllorsRemoveRelationTypeAssociationType();
+			((AllorsInternalRelationType)this).AllorsRemoveRelationTypeAssociationType();
 			if( value != null ) 
 			{
 				_RelationTypeAssociationType = value;
-				((Allors.R1.Meta.AllorsGenerated.AllorsInternalAssociationType)_RelationTypeAssociationType).AllorsRoleReleaseAssociationTypeRelationType();
+				((AllorsInternalAssociationType)_RelationTypeAssociationType).AllorsRoleReleaseAssociationTypeRelationType();
 				_RelationTypeAssociationType = value;
 				// role side
-				((Allors.R1.Meta.AllorsGenerated.AllorsInternalAssociationType)_RelationTypeAssociationType).AllorsRoleSyncSetAssociationTypeRelationType((global::Allors.R1.Meta.RelationType) this ); 
+				((AllorsInternalAssociationType)_RelationTypeAssociationType).AllorsRoleSyncSetAssociationTypeRelationType((global::Allors.Meta.RelationType) this ); 
 			}
 		}
 
 		public virtual void RemoveAssociationType()
 		{
-			((Allors.R1.Meta.AllorsGenerated.AllorsInternalRelationType)this).AllorsRemoveRelationTypeAssociationType();
+			((AllorsInternalRelationType)this).AllorsRemoveRelationTypeAssociationType();
 		}
 
-		void Allors.R1.Meta.AllorsGenerated.AllorsInternalRelationType.AllorsRemoveRelationTypeAssociationType()
+		void AllorsInternalRelationType.AllorsRemoveRelationTypeAssociationType()
 		{
 			AllorsAssert();
 			if( _RelationTypeAssociationType != null) 
 			{
-				((Allors.R1.Meta.AllorsGenerated.AllorsInternalAssociationType)_RelationTypeAssociationType).AllorsRoleSyncSetAssociationTypeRelationType( null ); 
+				((AllorsInternalAssociationType)_RelationTypeAssociationType).AllorsRoleSyncSetAssociationTypeRelationType( null ); 
 				_RelationTypeAssociationType = null;
 				_RelationTypeAssociationType = null;
 			}
@@ -389,7 +389,7 @@ namespace Allors.R1.Meta.AllorsGenerated
 		}
 
 
-		public virtual global::Allors.R1.Meta.Domain DomainWhereDeclaredRelationType
+		public virtual global::Allors.Meta.Domain DomainWhereDeclaredRelationType
 		{
 			get
 			{
@@ -406,22 +406,22 @@ namespace Allors.R1.Meta.AllorsGenerated
 			}
 		}
 
-		void Allors.R1.Meta.AllorsGenerated.AllorsInternalRelationType.AllorsRoleSyncSetDeclaredRelationTypeDomain(global::Allors.R1.Meta.Domain association)
+		void AllorsInternalRelationType.AllorsRoleSyncSetDeclaredRelationTypeDomain(global::Allors.Meta.Domain association)
 		{
 			AllorsAssert();
 			_DeclaredRelationTypeDomain = association;
 		}
 
-		void Allors.R1.Meta.AllorsGenerated.AllorsInternalRelationType.AllorsRoleReleaseDeclaredRelationTypeDomain()
+		void AllorsInternalRelationType.AllorsRoleReleaseDeclaredRelationTypeDomain()
 		{
 			if( _DeclaredRelationTypeDomain != null )
 			{
-				((Allors.R1.Meta.AllorsGenerated.AllorsInternalDomain)_DeclaredRelationTypeDomain).AllorsRemoveDomainDeclaredRelationType( (global::Allors.R1.Meta.RelationType) this);
+				((AllorsInternalDomain)_DeclaredRelationTypeDomain).AllorsRemoveDomainDeclaredRelationType( (global::Allors.Meta.RelationType) this);
 			}
 		}
 
 
-		public virtual global::Allors.R1.Meta.Domain[] DomainsWhereDerivedRelationType
+		public virtual global::Allors.Meta.Domain[] DomainsWhereDerivedRelationType
 		{
 			get
 			{
@@ -438,27 +438,27 @@ namespace Allors.R1.Meta.AllorsGenerated
 			}
 		}
 
-		void Allors.R1.Meta.AllorsGenerated.AllorsInternalRelationType.AllorsRoleSyncAddDerivedRelationTypeDomain(global::Allors.R1.Meta.Domain association)
+		void AllorsInternalRelationType.AllorsRoleSyncAddDerivedRelationTypeDomain(global::Allors.Meta.Domain association)
 		{
 			AllorsAssert();
 			if( !AllorsEmbeddedArrays.Exist( _DerivedRelationTypeDomain, association ) ) 
 			{
-				_DerivedRelationTypeDomain = (global::Allors.R1.Meta.Domain[])AllorsEmbeddedArrays.Add(_DerivedRelationTypeDomain,association);
+				_DerivedRelationTypeDomain = (global::Allors.Meta.Domain[])AllorsEmbeddedArrays.Add(_DerivedRelationTypeDomain,association);
 			}
 		}
 
-		void Allors.R1.Meta.AllorsGenerated.AllorsInternalRelationType.AllorsRoleSyncRemoveDerivedRelationTypeDomain(global::Allors.R1.Meta.Domain association)
+		void AllorsInternalRelationType.AllorsRoleSyncRemoveDerivedRelationTypeDomain(global::Allors.Meta.Domain association)
 		{
 			AllorsAssert();
-			_DerivedRelationTypeDomain = (global::Allors.R1.Meta.Domain[]) AllorsEmbeddedArrays.Remove(_DerivedRelationTypeDomain,association);
+			_DerivedRelationTypeDomain = (global::Allors.Meta.Domain[]) AllorsEmbeddedArrays.Remove(_DerivedRelationTypeDomain,association);
 		}
 
-		void Allors.R1.Meta.AllorsGenerated.AllorsInternalRelationType.AllorsRoleReleaseDerivedRelationTypeDomain()
+		void AllorsInternalRelationType.AllorsRoleReleaseDerivedRelationTypeDomain()
 		{
 			AllorsAssert();
-			foreach( global::Allors.R1.Meta.Domain association in _DerivedRelationTypeDomain )
+			foreach( global::Allors.Meta.Domain association in _DerivedRelationTypeDomain )
 			{
-				((Allors.R1.Meta.AllorsGenerated.AllorsInternalDomain)association).AllorsRemoveDomainDerivedRelationType((global::Allors.R1.Meta.RelationType) this);
+				((AllorsInternalDomain)association).AllorsRemoveDomainDerivedRelationType((global::Allors.Meta.RelationType) this);
 			}
 		}
 

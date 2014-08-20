@@ -18,18 +18,18 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Workspace.Memory
+namespace Allors.Adapters.Workspace.Memory
 {
-    using Allors.R1.Adapters;
+    using Allors.Adapters;
 
-    using Meta;
+    using Allors.Meta;
 
     internal sealed class RoleOneContainedInExtent : Predicate
     {
         private readonly RoleType roleType;
-        private readonly R1.Extent containingExtent;
+        private readonly Allors.Extent containingExtent;
         
-        internal RoleOneContainedInExtent(Extent extent, RoleType roleType, R1.Extent containingExtent)
+        internal RoleOneContainedInExtent(Extent extent, RoleType roleType, Allors.Extent containingExtent)
         {
             extent.CheckForRoleType(roleType);
             CompositePredicateAssertions.ValidateRoleContainedIn(roleType, containingExtent);

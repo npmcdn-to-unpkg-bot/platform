@@ -18,11 +18,11 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Workspace.Memory
+namespace Allors.Adapters.Workspace.Memory
 {
     using System;
 
-    using Allors.R1.Meta;
+    using Allors.Meta;
 
     internal abstract class Predicate
     {

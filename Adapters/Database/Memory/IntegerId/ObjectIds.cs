@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.Memory.IntegerId
+namespace Allors.Adapters.Database.Memory.IntegerId
 {
     internal sealed class ObjectIds : Memory.ObjectIds
     {

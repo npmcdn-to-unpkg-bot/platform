@@ -18,9 +18,9 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.Npgsql.IntegerId
+namespace Allors.Adapters.Database.Npgsql.IntegerId
 {
-    using Allors.R1.Adapters.Database.Sql;
+    using Allors.Adapters.Database.Sql;
 
     public class Database : Npgsql.Database 
     {

@@ -4,18 +4,18 @@ namespace Domain
 {
 	public  partial class Person : PersonAllors , global::Domain.Named
 	{
-		public Person(Allors.R1.IStrategy allors) : base(allors) {}
+		public Person(Allors.IStrategy allors) : base(allors) {}
 
-		public static Person Instantiate (Allors.R1.ISession allorsSession, string allorsObjectId)
+		public static Person Instantiate (Allors.ISession allorsSession, string allorsObjectId)
 		{
 			return (Person) allorsSession.Instantiate(allorsObjectId);		
 		}
 	}
 
 	[System.Diagnostics.DebuggerNonUserCode]
-	public abstract class PersonAllors :  Allors.R1.ObjectBase 
+	public abstract class PersonAllors :  Allors.ObjectBase 
 	{
-		protected PersonAllors(Allors.R1.IStrategy allors) : base(allors){}
+		protected PersonAllors(Allors.IStrategy allors) : base(allors){}
 
 
 		virtual public global::Domain.Person NextPerson
@@ -123,7 +123,7 @@ namespace Domain
 
 
 
-		virtual public Allors.R1.Extent<global::Domain.Company> CompaniesWhereManager
+		virtual public Allors.Extent<global::Domain.Company> CompaniesWhereManager
 		{ 
 			get
 			{
@@ -191,7 +191,7 @@ namespace Domain
 		}
 
 
-		virtual public Allors.R1.Extent<global::Domain.Company> CompaniesWhereOwner
+		virtual public Allors.Extent<global::Domain.Company> CompaniesWhereOwner
 		{ 
 			get
 			{
@@ -208,7 +208,7 @@ namespace Domain
 		}
 
 
-		virtual public Allors.R1.Extent<global::Domain.Company> CompaniesWhereIndexedMany2ManyPerson
+		virtual public Allors.Extent<global::Domain.Company> CompaniesWhereIndexedMany2ManyPerson
 		{ 
 			get
 			{
@@ -242,7 +242,7 @@ namespace Domain
 		}
 
 
-		virtual public Allors.R1.Extent<global::Domain.Company> CompaniesWherePersonManySort1
+		virtual public Allors.Extent<global::Domain.Company> CompaniesWherePersonManySort1
 		{ 
 			get
 			{
@@ -259,7 +259,7 @@ namespace Domain
 		}
 
 
-		virtual public Allors.R1.Extent<global::Domain.Company> CompaniesWherePersonManySort2
+		virtual public Allors.Extent<global::Domain.Company> CompaniesWherePersonManySort2
 		{ 
 			get
 			{
@@ -293,7 +293,7 @@ namespace Domain
 		}
 
 
-		virtual public Allors.R1.Extent<global::Domain.Company> CompaniesWhereMany2ManyPerson
+		virtual public Allors.Extent<global::Domain.Company> CompaniesWhereMany2ManyPerson
 		{ 
 			get
 			{
@@ -327,7 +327,7 @@ namespace Domain
 		}
 
 
-		virtual public Allors.R1.Extent<global::Domain.Company> CompaniesWhereNamedManySort1
+		virtual public Allors.Extent<global::Domain.Company> CompaniesWhereNamedManySort1
 		{ 
 			get
 			{
@@ -344,7 +344,7 @@ namespace Domain
 		}
 
 
-		virtual public Allors.R1.Extent<global::Domain.Company> CompaniesWhereNamedManySort2
+		virtual public Allors.Extent<global::Domain.Company> CompaniesWhereNamedManySort2
 		{ 
 			get
 			{

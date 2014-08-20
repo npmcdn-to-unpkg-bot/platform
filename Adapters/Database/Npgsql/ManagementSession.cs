@@ -14,14 +14,14 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.Npgsql
+namespace Allors.Adapters.Database.Npgsql
 {
     using System;
     using System.Data.Common;
 
-    using Allors.R1.Adapters.Database.Npgsql.Commands.Procedure;
-    using Allors.R1.Adapters.Database.Npgsql.Commands.Text;
-    using Allors.R1.Adapters.Database.Sql.Commands;
+    using Allors.Adapters.Database.Npgsql.Commands.Procedure;
+    using Allors.Adapters.Database.Npgsql.Commands.Text;
+    using Allors.Adapters.Database.Sql.Commands;
 
     using global::Npgsql;
 

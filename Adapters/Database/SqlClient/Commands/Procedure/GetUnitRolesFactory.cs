@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient.Commands.Procedure
+namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
 {
     using System;
     using System.Collections.Generic;
@@ -26,13 +26,13 @@ namespace Allors.R1.Adapters.Database.SqlClient.Commands.Procedure
     using System.Data.Common;
     using System.Data.SqlClient;
 
-    using Allors.R1.Adapters.Database.Sql;
-    using Allors.R1.Adapters.Database.Sql.Commands;
+    using Allors.Adapters.Database.Sql;
+    using Allors.Adapters.Database.Sql.Commands;
 
-    using Meta;
+    using Allors.Meta;
 
     using Database = Database;
-    using DatabaseSession = Allors.R1.Adapters.Database.SqlClient.DatabaseSession;
+    using DatabaseSession = DatabaseSession;
 
     public class GetUnitRolesFactory : IGetUnitRolesFactory
     {

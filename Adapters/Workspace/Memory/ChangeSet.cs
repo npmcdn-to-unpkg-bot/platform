@@ -17,13 +17,13 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Workspace.Memory
+namespace Allors.Adapters.Workspace.Memory
 {
     using System.Collections.Generic;
 
-    using Allors.R1.Meta;
+    using Allors.Meta;
 
-    using Allors.R1.Adapters;
+    using Allors.Adapters;
 
     public sealed class ChangeSet : IChangeSet
     {

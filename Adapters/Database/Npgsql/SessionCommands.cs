@@ -18,9 +18,9 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.Npgsql
+namespace Allors.Adapters.Database.Npgsql
 {
-    using Allors.R1.Adapters.Database.Sql.Commands;
+    using Allors.Adapters.Database.Sql.Commands;
 
     public sealed class SessionCommands : Sql.SessionCommands
     {

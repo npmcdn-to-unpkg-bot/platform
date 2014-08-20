@@ -19,7 +19,7 @@
 // <summary>Defines the ObjectIdInteger type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.R1
+namespace Allors
 {
     using System;
     using System.Globalization;

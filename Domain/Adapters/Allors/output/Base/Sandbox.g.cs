@@ -4,21 +4,21 @@ namespace Domain
 {
 	public  partial class Sandbox : SandboxAllors 
 	{
-		public Sandbox(Allors.R1.IStrategy allors) : base(allors) {}
+		public Sandbox(Allors.IStrategy allors) : base(allors) {}
 
-		public static Sandbox Instantiate (Allors.R1.ISession allorsSession, string allorsObjectId)
+		public static Sandbox Instantiate (Allors.ISession allorsSession, string allorsObjectId)
 		{
 			return (Sandbox) allorsSession.Instantiate(allorsObjectId);		
 		}
 	}
 
 	[System.Diagnostics.DebuggerNonUserCode]
-	public abstract class SandboxAllors :  Allors.R1.ObjectBase 
+	public abstract class SandboxAllors :  Allors.ObjectBase 
 	{
-		protected SandboxAllors(Allors.R1.IStrategy allors) : base(allors){}
+		protected SandboxAllors(Allors.IStrategy allors) : base(allors){}
 
 
-		virtual public Allors.R1.Extent<global::Domain.Sandbox> InvisibleManies
+		virtual public Allors.Extent<global::Domain.Sandbox> InvisibleManies
 		{ 
 			get
 			{
@@ -159,7 +159,7 @@ namespace Domain
 
 
 
-		virtual public Allors.R1.Extent<global::Domain.Sandbox> SandboxesWhereInvisibleMany
+		virtual public Allors.Extent<global::Domain.Sandbox> SandboxesWhereInvisibleMany
 		{ 
 			get
 			{

@@ -4,17 +4,17 @@ namespace Domain
 {
 	public  partial class ClassWithoutRoles : ClassWithoutRolesAllors 
 	{
-		public ClassWithoutRoles(Allors.R1.IStrategy allors) : base(allors) {}
+		public ClassWithoutRoles(Allors.IStrategy allors) : base(allors) {}
 
-		public static ClassWithoutRoles Instantiate (Allors.R1.ISession allorsSession, string allorsObjectId)
+		public static ClassWithoutRoles Instantiate (Allors.ISession allorsSession, string allorsObjectId)
 		{
 			return (ClassWithoutRoles) allorsSession.Instantiate(allorsObjectId);		
 		}
 	}
 
 	[System.Diagnostics.DebuggerNonUserCode]
-	public abstract class ClassWithoutRolesAllors :  Allors.R1.ObjectBase 
+	public abstract class ClassWithoutRolesAllors :  Allors.ObjectBase 
 	{
-		protected ClassWithoutRolesAllors(Allors.R1.IStrategy allors) : base(allors){}
+		protected ClassWithoutRolesAllors(Allors.IStrategy allors) : base(allors){}
 	}
 }

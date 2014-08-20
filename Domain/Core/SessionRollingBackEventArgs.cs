@@ -18,7 +18,7 @@
 // </copyright>
 // <summary>Defines the SessionRollingBackEventArgs type.</summary>
 //-------------------------------------------------------------------------------------------------
-namespace Allors.R1
+namespace Allors
 {
     /// <summary>
     /// The EventhHandler for the rolling back event.

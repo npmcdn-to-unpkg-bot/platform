@@ -17,12 +17,12 @@
 // For more information visit http://www.allors.com/legal
 // </copyright>
 //-------------------------------------------------------------------------------------------------
-namespace Allors.R1.Adapters
+namespace Allors.Adapters
 {
     using System;
     using System.Text;
     using System.Xml;
-    using Meta;
+    using Allors.Meta;
 
     /// <summary>
     /// Writes all relations from a <see cref="RelationType"/> with a <see cref="RoleType"/> with multiplicity of many 

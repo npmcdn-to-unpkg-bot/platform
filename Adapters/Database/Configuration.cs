@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database
+namespace Allors.Adapters.Database
 {
     public abstract class Configuration : Adapters.Configuration
     {

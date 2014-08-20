@@ -4,18 +4,18 @@ namespace Domain
 {
 	public abstract partial class AbstractClassWithoutConcreteClass : AbstractClassWithoutConcreteClassAllors 
 	{
-		public AbstractClassWithoutConcreteClass(Allors.R1.IStrategy allors) : base(allors) {}
+		public AbstractClassWithoutConcreteClass(Allors.IStrategy allors) : base(allors) {}
 
-		public static AbstractClassWithoutConcreteClass Instantiate (Allors.R1.ISession allorsSession, string allorsObjectId)
+		public static AbstractClassWithoutConcreteClass Instantiate (Allors.ISession allorsSession, string allorsObjectId)
 		{
 			return (AbstractClassWithoutConcreteClass) allorsSession.Instantiate(allorsObjectId);		
 		}
 	}
 
 	[System.Diagnostics.DebuggerNonUserCode]
-	public abstract class AbstractClassWithoutConcreteClassAllors :  Allors.R1.ObjectBase 
+	public abstract class AbstractClassWithoutConcreteClassAllors :  Allors.ObjectBase 
 	{
-		protected AbstractClassWithoutConcreteClassAllors(Allors.R1.IStrategy allors) : base(allors){}
+		protected AbstractClassWithoutConcreteClassAllors(Allors.IStrategy allors) : base(allors){}
 
 
 

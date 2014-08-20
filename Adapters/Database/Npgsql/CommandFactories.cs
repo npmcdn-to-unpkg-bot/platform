@@ -18,13 +18,13 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.Npgsql
+namespace Allors.Adapters.Database.Npgsql
 {
-    using Allors.R1.Adapters.Database.Npgsql.Commands.Procedure;
-    using Allors.R1.Adapters.Database.Npgsql.Commands.Text;
-    using Allors.R1.Adapters.Database.Sql.Commands;
+    using Allors.Adapters.Database.Npgsql.Commands.Procedure;
+    using Allors.Adapters.Database.Npgsql.Commands.Text;
+    using Allors.Adapters.Database.Sql.Commands;
 
-    using AddCompositeRoleFactory = Allors.R1.Adapters.Database.Npgsql.Commands.Procedure.AddCompositeRoleFactory;
+    using AddCompositeRoleFactory = Allors.Adapters.Database.Npgsql.Commands.Procedure.AddCompositeRoleFactory;
 
     public sealed class CommandFactories : Sql.CommandFactories
     {

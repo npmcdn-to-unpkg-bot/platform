@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.Memory.LongId
+namespace Allors.Adapters.Database.Memory.LongId
 {
     public class Configuration : Memory.Configuration
     {

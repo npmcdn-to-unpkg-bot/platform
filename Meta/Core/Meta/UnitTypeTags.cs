@@ -18,9 +18,9 @@
 // </copyright>
 // <summary>Defines the UnitTypeTag type.</summary>
 //-------------------------------------------------------------------------------------------------
-namespace Allors.R1.Meta
+namespace Allors.Meta
 {
-    using Allors.R1.Meta.AllorsGenerated;
+    using Allors.Meta.AllorsGenerated;
 
     /// <summary>
     /// The tags for <see cref="AllorsClassObjectType.UnitTag"/>s.

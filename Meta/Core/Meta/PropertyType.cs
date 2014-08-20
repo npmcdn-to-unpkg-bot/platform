@@ -18,7 +18,7 @@
 // </copyright>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Meta
+namespace Allors.Meta
 {
     public partial class PropertyType
     {

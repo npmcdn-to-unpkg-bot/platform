@@ -18,7 +18,7 @@
 // </copyright>
 // <summary>Defines the SessionCommittingEventArgs type.</summary>
 //-------------------------------------------------------------------------------------------------
-namespace Allors.R1
+namespace Allors
 {
     /// <summary>
     /// The EventHandler for the committing event.

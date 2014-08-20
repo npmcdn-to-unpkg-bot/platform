@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient.LongId
+namespace Allors.Adapters.Database.SqlClient.LongId
 {
     public class Configuration : SqlClient.Configuration
     {

@@ -18,10 +18,10 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Workspace.Memory
+namespace Allors.Adapters.Workspace.Memory
 {
     using System.Collections.Generic;
-    using Meta;
+    using Allors.Meta;
 
     public class ExtentObject : Extent
     {

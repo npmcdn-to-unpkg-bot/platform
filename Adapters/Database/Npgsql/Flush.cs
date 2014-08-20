@@ -18,12 +18,12 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.Npgsql
+namespace Allors.Adapters.Database.Npgsql
 {
     using System.Collections.Generic;
 
-    using Allors.R1.Adapters.Database.Sql;
-    using Allors.R1.Meta;
+    using Allors.Adapters.Database.Sql;
+    using Allors.Meta;
 
     public class Flush : IFlush
     {

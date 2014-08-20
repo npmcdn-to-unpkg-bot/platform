@@ -14,10 +14,10 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Workspace.Memory
+namespace Allors.Adapters.Workspace.Memory
 {
     using System.Collections.Generic;
-    using Meta;
+    using Allors.Meta;
 
     internal abstract class CompositePredicate : Predicate, ICompositePredicate
     {
@@ -66,7 +66,7 @@ namespace Allors.R1.Adapters.Workspace.Memory
             return this;
         }
 
-        public ICompositePredicate AddContainedIn(RoleType role, R1.Extent containingExtent)
+        public ICompositePredicate AddContainedIn(RoleType role, Allors.Extent containingExtent)
         {
             if (role.IsMany)
             {
@@ -96,7 +96,7 @@ namespace Allors.R1.Adapters.Workspace.Memory
             return this;
         }
 
-        public ICompositePredicate AddContainedIn(AssociationType association, R1.Extent containingExtent)
+        public ICompositePredicate AddContainedIn(AssociationType association, Allors.Extent containingExtent)
         {
             this.predicates.Add(new AssociationContainedInExtent(this.extent, association, containingExtent));
             this.extent.Invalidate();

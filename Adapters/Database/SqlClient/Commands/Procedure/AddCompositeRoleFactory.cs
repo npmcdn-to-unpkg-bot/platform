@@ -18,16 +18,16 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient.Commands.Procedure
+namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
 {
     using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
 
-    using Allors.R1.Meta;
+    using Allors.Meta;
 
     using Database = Database;
-    using DatabaseSession = Allors.R1.Adapters.Database.SqlClient.DatabaseSession;
+    using DatabaseSession = DatabaseSession;
 
     internal class AddCompositeRoleFactory : Sql.Commands.IAddCompositeRoleFactory
     {

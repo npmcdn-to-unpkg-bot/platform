@@ -14,7 +14,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.Npgsql
+namespace Allors.Adapters.Database.Npgsql
 {
     using System;
     using System.Collections.Generic;
@@ -23,7 +23,7 @@ namespace Allors.R1.Adapters.Database.Npgsql
     using System.Linq;
     using System.Text;
 
-    using Allors.R1.Adapters.Database.Sql;
+    using Allors.Adapters.Database.Sql;
 
     using global::Npgsql;
 

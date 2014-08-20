@@ -18,17 +18,17 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Special
+namespace Allors.Adapters.Special
 {
     using System;
 
-    using Allors.R1;
-    using Allors.R1.Adapters.Database.Sql;
-    using Allors.R1.Meta;
+    using Allors;
+    using Allors.Adapters.Database.Sql;
+    using Allors.Meta;
 
     using NUnit.Framework;
 
-    using IDatabase = Allors.R1.IDatabase;
+    using IDatabase = IDatabase;
 
     public abstract class SchemaTest
     {

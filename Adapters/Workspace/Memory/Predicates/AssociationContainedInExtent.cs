@@ -18,18 +18,18 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Workspace.Memory
+namespace Allors.Adapters.Workspace.Memory
 {
-    using Allors.R1.Adapters;
+    using Allors.Adapters;
 
-    using Meta;
+    using Allors.Meta;
 
     internal sealed class AssociationContainedInExtent : Predicate
     {
         private readonly AssociationType associationType;
-        private readonly R1.Extent containingExtent;
+        private readonly Allors.Extent containingExtent;
 
-        internal AssociationContainedInExtent(Extent extent, AssociationType associationType, R1.Extent containingExtent)
+        internal AssociationContainedInExtent(Extent extent, AssociationType associationType, Allors.Extent containingExtent)
         {
             extent.CheckForAssociationType(associationType);
             CompositePredicateAssertions.AssertAssociationContainedIn(associationType, containingExtent);

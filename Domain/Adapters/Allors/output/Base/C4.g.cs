@@ -4,9 +4,9 @@ namespace Domain
 {
 	public  partial class C4 : C4Allors , global::Domain.I4, global::Domain.I34
 	{
-		public C4(Allors.R1.IStrategy allors) : base(allors) {}
+		public C4(Allors.IStrategy allors) : base(allors) {}
 
-		public static new C4 Instantiate (Allors.R1.ISession allorsSession, string allorsObjectId)
+		public static new C4 Instantiate (Allors.ISession allorsSession, string allorsObjectId)
 		{
 			return (C4) allorsSession.Instantiate(allorsObjectId);		
 		}
@@ -15,7 +15,7 @@ namespace Domain
 	[System.Diagnostics.DebuggerNonUserCode]
 	public abstract class C4Allors :  global::Domain.A4 
 	{
-		protected C4Allors(Allors.R1.IStrategy allors) : base(allors){}
+		protected C4Allors(Allors.IStrategy allors) : base(allors){}
 
 
 
@@ -174,7 +174,7 @@ namespace Domain
 		}
 
 
-		virtual public Allors.R1.Extent<global::Domain.C2> S1234C2many2manies
+		virtual public Allors.Extent<global::Domain.C2> S1234C2many2manies
 		{ 
 			get
 			{
@@ -210,7 +210,7 @@ namespace Domain
 		}
 
 
-		virtual public Allors.R1.Extent<global::Domain.S1234> S1234one2manies
+		virtual public Allors.Extent<global::Domain.S1234> S1234one2manies
 		{ 
 			get
 			{
@@ -246,7 +246,7 @@ namespace Domain
 		}
 
 
-		virtual public Allors.R1.Extent<global::Domain.C2> S1234C2one2manies
+		virtual public Allors.Extent<global::Domain.C2> S1234C2one2manies
 		{ 
 			get
 			{
@@ -282,7 +282,7 @@ namespace Domain
 		}
 
 
-		virtual public Allors.R1.Extent<global::Domain.S1234> S1234many2manies
+		virtual public Allors.Extent<global::Domain.S1234> S1234many2manies
 		{ 
 			get
 			{
@@ -631,7 +631,7 @@ namespace Domain
 
 
 
-		virtual public Allors.R1.Extent<global::Domain.I3> I3sWhereC4many2many
+		virtual public Allors.Extent<global::Domain.I3> I3sWhereC4many2many
 		{ 
 			get
 			{
@@ -648,7 +648,7 @@ namespace Domain
 		}
 
 
-		virtual public Allors.R1.Extent<global::Domain.C3> C3sWhereC4many2one
+		virtual public Allors.Extent<global::Domain.C3> C3sWhereC4many2one
 		{ 
 			get
 			{
@@ -682,7 +682,7 @@ namespace Domain
 		}
 
 
-		virtual public Allors.R1.Extent<global::Domain.A3> A3sWhereC4many2many
+		virtual public Allors.Extent<global::Domain.A3> A3sWhereC4many2many
 		{ 
 			get
 			{
@@ -699,7 +699,7 @@ namespace Domain
 		}
 
 
-		virtual public Allors.R1.Extent<global::Domain.C3> C3sWhereC4many2many
+		virtual public Allors.Extent<global::Domain.C3> C3sWhereC4many2many
 		{ 
 			get
 			{
@@ -750,7 +750,7 @@ namespace Domain
 		}
 
 
-		virtual public Allors.R1.Extent<global::Domain.I3> I3sWhereC4many2one
+		virtual public Allors.Extent<global::Domain.I3> I3sWhereC4many2one
 		{ 
 			get
 			{
@@ -818,7 +818,7 @@ namespace Domain
 		}
 
 
-		virtual public Allors.R1.Extent<global::Domain.I3> I3sWhereI4many2many
+		virtual public Allors.Extent<global::Domain.I3> I3sWhereI4many2many
 		{ 
 			get
 			{
@@ -835,7 +835,7 @@ namespace Domain
 		}
 
 
-		virtual public Allors.R1.Extent<global::Domain.I3> I3sWhereI4many2one
+		virtual public Allors.Extent<global::Domain.I3> I3sWhereI4many2one
 		{ 
 			get
 			{
@@ -852,7 +852,7 @@ namespace Domain
 		}
 
 
-		virtual public Allors.R1.Extent<global::Domain.C3> C3sWhereI4many2many
+		virtual public Allors.Extent<global::Domain.C3> C3sWhereI4many2many
 		{ 
 			get
 			{
@@ -869,7 +869,7 @@ namespace Domain
 		}
 
 
-		virtual public Allors.R1.Extent<global::Domain.C3> C3sWhereI4many2one
+		virtual public Allors.Extent<global::Domain.C3> C3sWhereI4many2one
 		{ 
 			get
 			{
@@ -920,7 +920,7 @@ namespace Domain
 		}
 
 
-		virtual public Allors.R1.Extent<global::Domain.S1234> S1234sWhereS1234many2one
+		virtual public Allors.Extent<global::Domain.S1234> S1234sWhereS1234many2one
 		{ 
 			get
 			{
@@ -954,7 +954,7 @@ namespace Domain
 		}
 
 
-		virtual public Allors.R1.Extent<global::Domain.S1234> S1234sWhereS1234many2many
+		virtual public Allors.Extent<global::Domain.S1234> S1234sWhereS1234many2many
 		{ 
 			get
 			{
@@ -1022,7 +1022,7 @@ namespace Domain
 		}
 
 
-		virtual public Allors.R1.Extent<global::Domain.I1> I1sWhereI34many2one
+		virtual public Allors.Extent<global::Domain.I1> I1sWhereI34many2one
 		{ 
 			get
 			{
@@ -1039,7 +1039,7 @@ namespace Domain
 		}
 
 
-		virtual public Allors.R1.Extent<global::Domain.I12> I12sWhereI34many2one
+		virtual public Allors.Extent<global::Domain.I12> I12sWhereI34many2one
 		{ 
 			get
 			{
@@ -1056,7 +1056,7 @@ namespace Domain
 		}
 
 
-		virtual public Allors.R1.Extent<global::Domain.I12> I12sWhereI34many2many
+		virtual public Allors.Extent<global::Domain.I12> I12sWhereI34many2many
 		{ 
 			get
 			{
@@ -1073,7 +1073,7 @@ namespace Domain
 		}
 
 
-		virtual public Allors.R1.Extent<global::Domain.I1> I1sWhereI34many2many
+		virtual public Allors.Extent<global::Domain.I1> I1sWhereI34many2many
 		{ 
 			get
 			{

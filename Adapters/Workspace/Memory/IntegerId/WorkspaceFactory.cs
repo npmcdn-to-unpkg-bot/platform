@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Workspace.Memory.IntegerId
+namespace Allors.Adapters.Workspace.Memory.IntegerId
 {
     public class WorkspaceFactory : IWorkspaceFactory
     {

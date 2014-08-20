@@ -18,12 +18,12 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient.LongId
+namespace Allors.Adapters.Database.SqlClient.LongId
 {
     using System.Collections.Generic;
 
-    using Allors.R1.Adapters.Database.Sql;
-    using Allors.R1.Meta;
+    using Allors.Adapters.Database.Sql;
+    using Allors.Meta;
 
     using Microsoft.SqlServer.Server;
 

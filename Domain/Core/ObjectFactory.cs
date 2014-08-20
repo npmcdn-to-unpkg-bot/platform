@@ -18,14 +18,14 @@
 // </copyright>
 // <summary>Defines the ObjectBase type.</summary>
 //-------------------------------------------------------------------------------------------------
-namespace Allors.R1
+namespace Allors
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
 
-    using Allors.R1.Meta;
+    using Allors.Meta;
 
     /// <summary>
     /// A base implementation for a static <see cref="IObjectFactory"/>.

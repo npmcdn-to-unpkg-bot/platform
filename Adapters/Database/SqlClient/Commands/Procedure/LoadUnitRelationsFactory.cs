@@ -18,16 +18,18 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient.Commands.Text
+namespace Allors.Adapters.Database.SqlClient.Commands.Text
 {
     using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
 
-    using Allors.R1.Adapters.Database.Sql;
-    using Allors.R1.Adapters.Database.Sql.Commands;
-    using Allors.R1.Meta;
+    using Allors.Adapters.Database.Sql;
+    using Allors.Adapters.Database.Sql.Commands;
+    using Allors.Meta;
+
+    using Schema = Allors.Adapters.Database.SqlClient.Schema;
 
     public class LoadUnitRelationsFactory : ILoadUnitRelationsFactory
     {

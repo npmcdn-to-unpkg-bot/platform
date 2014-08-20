@@ -14,15 +14,15 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient
+namespace Allors.Adapters.Database.SqlClient
 {
     using System;
     using System.Data.Common;
     using System.Data.SqlClient;
 
-    using Allors.R1.Adapters.Database.Sql.Commands;
-    using Allors.R1.Adapters.Database.SqlClient.Commands.Procedure;
-    using Allors.R1.Adapters.Database.SqlClient.Commands.Text;
+    using Allors.Adapters.Database.SqlClient.Commands.Procedure;
+    using Allors.Adapters.Database.SqlClient.Commands.Text;
+    using Allors.Adapters.Database.Sql.Commands;
 
     public class ManagementSession : Sql.ManagementSession, ICommandFactory
     {
