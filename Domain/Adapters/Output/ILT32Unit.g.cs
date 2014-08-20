@@ -6,15 +6,15 @@ namespace Domain
 	{
 
 
-		global::System.String AllorsString1 
+		global::System.String AllorsString2 
 		{
 			get;
 			set;
 		}
 
-		bool ExistAllorsString1{get;}
+		bool ExistAllorsString2{get;}
 
-		void RemoveAllorsString1();
+		void RemoveAllorsString2();
 
 
 		global::System.String AllorsString3 
@@ -28,15 +28,15 @@ namespace Domain
 		void RemoveAllorsString3();
 
 
-		global::System.String AllorsString2 
+		global::System.String AllorsString1 
 		{
 			get;
 			set;
 		}
 
-		bool ExistAllorsString2{get;}
+		bool ExistAllorsString1{get;}
 
-		void RemoveAllorsString2();
+		void RemoveAllorsString1();
 
 	}
 

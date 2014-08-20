@@ -45,36 +45,19 @@ namespace Domain
 
 
 
-		virtual public Allors.Extent<global::Domain.A1> A1sWhereA2Many2Many
+		virtual public global::Domain.A1 A1WhereA2One2Many
 		{ 
 			get
 			{
-				return Strategy.GetCompositeAssociations(A2Meta.A1sWhereA2Many2Many);
-			}
-		}
-
-		virtual public bool ExistA1sWhereA2Many2Many
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociations(A2Meta.A1sWhereA2Many2Many);
-			}
-		}
-
-
-		virtual public global::Domain.A1 A1WhereA2One2One
-		{ 
-			get
-			{
-				return (global::Domain.A1) Strategy.GetCompositeAssociation(A2Meta.A1WhereA2One2One);
+				return (global::Domain.A1) Strategy.GetCompositeAssociation(A2Meta.A1WhereA2One2Many);
 			}
 		} 
 
-		virtual public bool ExistA1WhereA2One2One
+		virtual public bool ExistA1WhereA2One2Many
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociation(A2Meta.A1WhereA2One2One);
+				return Strategy.ExistCompositeAssociation(A2Meta.A1WhereA2One2Many);
 			}
 		}
 
@@ -96,19 +79,36 @@ namespace Domain
 		}
 
 
-		virtual public global::Domain.A1 A1WhereA2One2Many
+		virtual public global::Domain.A1 A1WhereA2One2One
 		{ 
 			get
 			{
-				return (global::Domain.A1) Strategy.GetCompositeAssociation(A2Meta.A1WhereA2One2Many);
+				return (global::Domain.A1) Strategy.GetCompositeAssociation(A2Meta.A1WhereA2One2One);
 			}
 		} 
 
-		virtual public bool ExistA1WhereA2One2Many
+		virtual public bool ExistA1WhereA2One2One
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociation(A2Meta.A1WhereA2One2Many);
+				return Strategy.ExistCompositeAssociation(A2Meta.A1WhereA2One2One);
+			}
+		}
+
+
+		virtual public Allors.Extent<global::Domain.A1> A1sWhereA2Many2Many
+		{ 
+			get
+			{
+				return Strategy.GetCompositeAssociations(A2Meta.A1sWhereA2Many2Many);
+			}
+		}
+
+		virtual public bool ExistA1sWhereA2Many2Many
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociations(A2Meta.A1sWhereA2Many2Many);
 			}
 		}
 

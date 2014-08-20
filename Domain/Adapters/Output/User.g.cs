@@ -18,6 +18,32 @@ namespace Domain
 		protected UserAllors(Allors.IStrategy allors) : base(allors){}
 
 
+
+		virtual public global::System.String From 
+		{
+			get
+			{
+				return (global::System.String) Strategy.GetUnitRole(UserMeta.From);
+			}
+			set
+			{
+				Strategy.SetUnitRole(UserMeta.From, value);
+			}
+		}
+
+		virtual public bool ExistFrom{
+			get
+			{
+				return Strategy.ExistUnitRole(UserMeta.From);
+			}
+		}
+
+		virtual public void RemoveFrom()
+		{
+			Strategy.RemoveUnitRole(UserMeta.From);
+		}
+
+
 		virtual public Allors.Extent<global::Domain.User> Selects
 		{ 
 			get
@@ -51,32 +77,6 @@ namespace Domain
 		virtual public void RemoveSelects()
 		{
 			Strategy.RemoveCompositeRoles(UserMeta.Select);
-		}
-
-
-
-		virtual public global::System.String From 
-		{
-			get
-			{
-				return (global::System.String) Strategy.GetUnitRole(UserMeta.From);
-			}
-			set
-			{
-				Strategy.SetUnitRole(UserMeta.From, value);
-			}
-		}
-
-		virtual public bool ExistFrom{
-			get
-			{
-				return Strategy.ExistUnitRole(UserMeta.From);
-			}
-		}
-
-		virtual public void RemoveFrom()
-		{
-			Strategy.RemoveUnitRole(UserMeta.From);
 		}
 
 

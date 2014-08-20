@@ -6,48 +6,15 @@ namespace Domain
 	{
 
 
-		global::System.Double? AS1AllorsDouble 
+		global::System.String AS1AllorsString 
 		{
 			get;
 			set;
 		}
 
-		bool ExistAS1AllorsDouble{get;}
+		bool ExistAS1AllorsString{get;}
 
-		void RemoveAS1AllorsDouble();
-
-
-		global::System.Boolean? AS1AllorsBoolean 
-		{
-			get;
-			set;
-		}
-
-		bool ExistAS1AllorsBoolean{get;}
-
-		void RemoveAS1AllorsBoolean();
-
-
-		global::System.Decimal? AS1AllorsDecimal 
-		{
-			get;
-			set;
-		}
-
-		bool ExistAS1AllorsDecimal{get;}
-
-		void RemoveAS1AllorsDecimal();
-
-
-		global::System.DateTime? AS1AllorsDateTime 
-		{
-			get;
-			set;
-		}
-
-		bool ExistAS1AllorsDateTime{get;}
-
-		void RemoveAS1AllorsDateTime();
+		void RemoveAS1AllorsString();
 
 
 		global::System.Int32? AS1AllorsInteger 
@@ -61,15 +28,48 @@ namespace Domain
 		void RemoveAS1AllorsInteger();
 
 
-		global::System.String AS1AllorsString 
+		global::System.DateTime? AS1AllorsDateTime 
 		{
 			get;
 			set;
 		}
 
-		bool ExistAS1AllorsString{get;}
+		bool ExistAS1AllorsDateTime{get;}
 
-		void RemoveAS1AllorsString();
+		void RemoveAS1AllorsDateTime();
+
+
+		global::System.Decimal? AS1AllorsDecimal 
+		{
+			get;
+			set;
+		}
+
+		bool ExistAS1AllorsDecimal{get;}
+
+		void RemoveAS1AllorsDecimal();
+
+
+		global::System.Boolean? AS1AllorsBoolean 
+		{
+			get;
+			set;
+		}
+
+		bool ExistAS1AllorsBoolean{get;}
+
+		void RemoveAS1AllorsBoolean();
+
+
+		global::System.Double? AS1AllorsDouble 
+		{
+			get;
+			set;
+		}
+
+		bool ExistAS1AllorsDouble{get;}
+
+		void RemoveAS1AllorsDouble();
 
 	}
 

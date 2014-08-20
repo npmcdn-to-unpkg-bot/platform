@@ -6,37 +6,15 @@ namespace Domain
 	{
 
 
-		global::System.Decimal? I34AllorsDecimal 
+		global::System.String I34AllorsString 
 		{
 			get;
 			set;
 		}
 
-		bool ExistI34AllorsDecimal{get;}
+		bool ExistI34AllorsString{get;}
 
-		void RemoveI34AllorsDecimal();
-
-
-		global::System.Boolean? I34AllorsBoolean 
-		{
-			get;
-			set;
-		}
-
-		bool ExistI34AllorsBoolean{get;}
-
-		void RemoveI34AllorsBoolean();
-
-
-		global::System.Double? I34AllorsDouble 
-		{
-			get;
-			set;
-		}
-
-		bool ExistI34AllorsDouble{get;}
-
-		void RemoveI34AllorsDouble();
+		void RemoveI34AllorsString();
 
 
 		global::System.Int32? I34AllorsInteger 
@@ -50,79 +28,46 @@ namespace Domain
 		void RemoveI34AllorsInteger();
 
 
-		global::System.String I34AllorsString 
+		global::System.Double? I34AllorsDouble 
 		{
 			get;
 			set;
 		}
 
-		bool ExistI34AllorsString{get;}
+		bool ExistI34AllorsDouble{get;}
 
-		void RemoveI34AllorsString();
+		void RemoveI34AllorsDouble();
+
+
+		global::System.Boolean? I34AllorsBoolean 
+		{
+			get;
+			set;
+		}
+
+		bool ExistI34AllorsBoolean{get;}
+
+		void RemoveI34AllorsBoolean();
+
+
+		global::System.Decimal? I34AllorsDecimal 
+		{
+			get;
+			set;
+		}
+
+		bool ExistI34AllorsDecimal{get;}
+
+		void RemoveI34AllorsDecimal();
 
 
 
-		global::Domain.I1 I1WhereI34one2many
+		global::Domain.I12 I12WhereI34one2one
 		{
 			get;
 		}
 
-		bool ExistI1WhereI34one2many
-		{
-			get;
-		}
-
-
-		global::Domain.I12 I12WhereI34one2many
-		{
-			get;
-		}
-
-		bool ExistI12WhereI34one2many
-		{
-			get;
-		}
-
-
-		Allors.Extent<global::Domain.I1> I1sWhereI34many2one
-		{ 
-			get;
-		}
-
-		bool ExistI1sWhereI34many2one
-		{
-			get;
-		}
-
-
-		Allors.Extent<global::Domain.I12> I12sWhereI34many2one
-		{ 
-			get;
-		}
-
-		bool ExistI12sWhereI34many2one
-		{
-			get;
-		}
-
-
-		Allors.Extent<global::Domain.I12> I12sWhereI34many2many
-		{ 
-			get;
-		}
-
-		bool ExistI12sWhereI34many2many
-		{
-			get;
-		}
-
-
-		Allors.Extent<global::Domain.I1> I1sWhereI34many2many
-		{ 
-			get;
-		}
-
-		bool ExistI1sWhereI34many2many
+		bool ExistI12WhereI34one2one
 		{
 			get;
 		}
@@ -139,12 +84,67 @@ namespace Domain
 		}
 
 
-		global::Domain.I12 I12WhereI34one2one
+		Allors.Extent<global::Domain.I1> I1sWhereI34many2many
+		{ 
+			get;
+		}
+
+		bool ExistI1sWhereI34many2many
 		{
 			get;
 		}
 
-		bool ExistI12WhereI34one2one
+
+		Allors.Extent<global::Domain.I12> I12sWhereI34many2many
+		{ 
+			get;
+		}
+
+		bool ExistI12sWhereI34many2many
+		{
+			get;
+		}
+
+
+		Allors.Extent<global::Domain.I12> I12sWhereI34many2one
+		{ 
+			get;
+		}
+
+		bool ExistI12sWhereI34many2one
+		{
+			get;
+		}
+
+
+		Allors.Extent<global::Domain.I1> I1sWhereI34many2one
+		{ 
+			get;
+		}
+
+		bool ExistI1sWhereI34many2one
+		{
+			get;
+		}
+
+
+		global::Domain.I12 I12WhereI34one2many
+		{
+			get;
+		}
+
+		bool ExistI12WhereI34one2many
+		{
+			get;
+		}
+
+
+		global::Domain.I1 I1WhereI34one2many
+		{
+			get;
+		}
+
+		bool ExistI1WhereI34one2many
 		{
 			get;
 		}

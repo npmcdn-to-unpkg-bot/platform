@@ -6,170 +6,58 @@ namespace Domain
 	{
 
 
-		global::System.Decimal? S1AllorsDecimal 
-		{
-			get;
-			set;
-		}
-
-		bool ExistS1AllorsDecimal{get;}
-
-		void RemoveS1AllorsDecimal();
-
-
-		global::System.Int32? S1AllorsInteger 
-		{
-			get;
-			set;
-		}
-
-		bool ExistS1AllorsInteger{get;}
-
-		void RemoveS1AllorsInteger();
-
-
-		global::System.Byte[] S1AllorsBinary 
-		{
-			get;
-			set;
-		}
-
-		bool ExistS1AllorsBinary{get;}
-
-		void RemoveS1AllorsBinary();
-
-
-		global::System.Guid? S1AllorsUnique 
-		{
-			get;
-			set;
-		}
-
-		bool ExistS1AllorsUnique{get;}
-
-		void RemoveS1AllorsUnique();
-
-
-		global::System.String S1StringLarge 
-		{
-			get;
-			set;
-		}
-
-		bool ExistS1StringLarge{get;}
-
-		void RemoveS1StringLarge();
-
-
-		global::Domain.S2 S1S2many2one
+		Allors.Extent<global::Domain.C1> S1C1one2manies
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistS1S2many2one
+		void AddS1C1one2many (global::Domain.C1 value);
+
+		void RemoveS1C1one2many (global::Domain.C1 value);
+
+		bool ExistS1C1one2manies
 		{
 			get;
 		}
 
-		void RemoveS1S2many2one();
+		void RemoveS1C1one2manies();
 
 
-		Allors.Extent<global::Domain.S2> S1S2one2manies
+		global::System.DateTime? S1AllorsDateTime 
+		{
+			get;
+			set;
+		}
+
+		bool ExistS1AllorsDateTime{get;}
+
+		void RemoveS1AllorsDateTime();
+
+
+		global::System.Int64? S1AllorsLong 
+		{
+			get;
+			set;
+		}
+
+		bool ExistS1AllorsLong{get;}
+
+		void RemoveS1AllorsLong();
+
+
+		global::Domain.S2 S1S2one2one
 		{ 
 			get;
 			set;
 		}
 
-		void AddS1S2one2many (global::Domain.S2 value);
-
-		void RemoveS1S2one2many (global::Domain.S2 value);
-
-		bool ExistS1S2one2manies
+		bool ExistS1S2one2one
 		{
 			get;
 		}
 
-		void RemoveS1S2one2manies();
-
-
-		global::System.Double? S1AllorsDouble 
-		{
-			get;
-			set;
-		}
-
-		bool ExistS1AllorsDouble{get;}
-
-		void RemoveS1AllorsDouble();
-
-
-		global::System.String S1AllorsString 
-		{
-			get;
-			set;
-		}
-
-		bool ExistS1AllorsString{get;}
-
-		void RemoveS1AllorsString();
-
-
-		global::Domain.C1 S1C1many2one
-		{ 
-			get;
-			set;
-		}
-
-		bool ExistS1C1many2one
-		{
-			get;
-		}
-
-		void RemoveS1C1many2one();
-
-
-		global::Domain.C1 S1C1one2one
-		{ 
-			get;
-			set;
-		}
-
-		bool ExistS1C1one2one
-		{
-			get;
-		}
-
-		void RemoveS1C1one2one();
-
-
-		global::System.Boolean? S1AllorsBoolean 
-		{
-			get;
-			set;
-		}
-
-		bool ExistS1AllorsBoolean{get;}
-
-		void RemoveS1AllorsBoolean();
-
-
-		Allors.Extent<global::Domain.C1> S1C1many2manies
-		{ 
-			get;
-			set;
-		}
-
-		void AddS1C1many2many (global::Domain.C1 value);
-
-		void RemoveS1C1many2many (global::Domain.C1 value);
-
-		bool ExistS1C1many2manies
-		{
-			get;
-		}
-
-		void RemoveS1C1many2manies();
+		void RemoveS1S2one2one();
 
 
 		Allors.Extent<global::Domain.S2> S1S2many2manies
@@ -190,122 +78,179 @@ namespace Domain
 		void RemoveS1S2many2manies();
 
 
-		global::Domain.S2 S1S2one2one
+		Allors.Extent<global::Domain.C1> S1C1many2manies
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistS1S2one2one
+		void AddS1C1many2many (global::Domain.C1 value);
+
+		void RemoveS1C1many2many (global::Domain.C1 value);
+
+		bool ExistS1C1many2manies
 		{
 			get;
 		}
 
-		void RemoveS1S2one2one();
+		void RemoveS1C1many2manies();
 
 
-		global::System.Int64? S1AllorsLong 
-		{
-			get;
-			set;
-		}
-
-		bool ExistS1AllorsLong{get;}
-
-		void RemoveS1AllorsLong();
-
-
-		global::System.DateTime? S1AllorsDateTime 
+		global::System.Boolean? S1AllorsBoolean 
 		{
 			get;
 			set;
 		}
 
-		bool ExistS1AllorsDateTime{get;}
+		bool ExistS1AllorsBoolean{get;}
 
-		void RemoveS1AllorsDateTime();
+		void RemoveS1AllorsBoolean();
 
 
-		Allors.Extent<global::Domain.C1> S1C1one2manies
+		global::Domain.C1 S1C1one2one
 		{ 
 			get;
 			set;
 		}
 
-		void AddS1C1one2many (global::Domain.C1 value);
-
-		void RemoveS1C1one2many (global::Domain.C1 value);
-
-		bool ExistS1C1one2manies
+		bool ExistS1C1one2one
 		{
 			get;
 		}
 
-		void RemoveS1C1one2manies();
+		void RemoveS1C1one2one();
 
 
+		global::Domain.C1 S1C1many2one
+		{ 
+			get;
+			set;
+		}
 
-		global::Domain.C1 C1WhereS1one2many
+		bool ExistS1C1many2one
 		{
 			get;
 		}
 
-		bool ExistC1WhereS1one2many
+		void RemoveS1C1many2one();
+
+
+		global::System.String S1AllorsString 
+		{
+			get;
+			set;
+		}
+
+		bool ExistS1AllorsString{get;}
+
+		void RemoveS1AllorsString();
+
+
+		global::System.Double? S1AllorsDouble 
+		{
+			get;
+			set;
+		}
+
+		bool ExistS1AllorsDouble{get;}
+
+		void RemoveS1AllorsDouble();
+
+
+		Allors.Extent<global::Domain.S2> S1S2one2manies
+		{ 
+			get;
+			set;
+		}
+
+		void AddS1S2one2many (global::Domain.S2 value);
+
+		void RemoveS1S2one2many (global::Domain.S2 value);
+
+		bool ExistS1S2one2manies
 		{
 			get;
 		}
 
+		void RemoveS1S2one2manies();
 
-		global::Domain.I1 I1WhereS1one2one
+
+		global::Domain.S2 S1S2many2one
+		{ 
+			get;
+			set;
+		}
+
+		bool ExistS1S2many2one
 		{
 			get;
 		}
 
-		bool ExistI1WhereS1one2one
+		void RemoveS1S2many2one();
+
+
+		global::System.String S1StringLarge 
 		{
 			get;
+			set;
 		}
 
+		bool ExistS1StringLarge{get;}
 
-		Allors.Extent<global::Domain.C1> C1sWhereS1many2many
+		void RemoveS1StringLarge();
+
+
+		global::System.Guid? S1AllorsUnique 
+		{
+			get;
+			set;
+		}
+
+		bool ExistS1AllorsUnique{get;}
+
+		void RemoveS1AllorsUnique();
+
+
+		global::System.Byte[] S1AllorsBinary 
+		{
+			get;
+			set;
+		}
+
+		bool ExistS1AllorsBinary{get;}
+
+		void RemoveS1AllorsBinary();
+
+
+		global::System.Int32? S1AllorsInteger 
+		{
+			get;
+			set;
+		}
+
+		bool ExistS1AllorsInteger{get;}
+
+		void RemoveS1AllorsInteger();
+
+
+		global::System.Decimal? S1AllorsDecimal 
+		{
+			get;
+			set;
+		}
+
+		bool ExistS1AllorsDecimal{get;}
+
+		void RemoveS1AllorsDecimal();
+
+
+
+		Allors.Extent<global::Domain.I1> I1sWhereS1many2one
 		{ 
 			get;
 		}
 
-		bool ExistC1sWhereS1many2many
-		{
-			get;
-		}
-
-
-		Allors.Extent<global::Domain.C1> C1sWhereS1many2one
-		{ 
-			get;
-		}
-
-		bool ExistC1sWhereS1many2one
-		{
-			get;
-		}
-
-
-		Allors.Extent<global::Domain.I1> I1sWhereS1many2many
-		{ 
-			get;
-		}
-
-		bool ExistI1sWhereS1many2many
-		{
-			get;
-		}
-
-
-		global::Domain.C1 C1WhereS1one2one
-		{
-			get;
-		}
-
-		bool ExistC1WhereS1one2one
+		bool ExistI1sWhereS1many2one
 		{
 			get;
 		}
@@ -322,12 +267,67 @@ namespace Domain
 		}
 
 
-		Allors.Extent<global::Domain.I1> I1sWhereS1many2one
+		global::Domain.C1 C1WhereS1one2one
+		{
+			get;
+		}
+
+		bool ExistC1WhereS1one2one
+		{
+			get;
+		}
+
+
+		Allors.Extent<global::Domain.I1> I1sWhereS1many2many
 		{ 
 			get;
 		}
 
-		bool ExistI1sWhereS1many2one
+		bool ExistI1sWhereS1many2many
+		{
+			get;
+		}
+
+
+		Allors.Extent<global::Domain.C1> C1sWhereS1many2one
+		{ 
+			get;
+		}
+
+		bool ExistC1sWhereS1many2one
+		{
+			get;
+		}
+
+
+		Allors.Extent<global::Domain.C1> C1sWhereS1many2many
+		{ 
+			get;
+		}
+
+		bool ExistC1sWhereS1many2many
+		{
+			get;
+		}
+
+
+		global::Domain.I1 I1WhereS1one2one
+		{
+			get;
+		}
+
+		bool ExistI1WhereS1one2one
+		{
+			get;
+		}
+
+
+		global::Domain.C1 C1WhereS1one2many
+		{
+			get;
+		}
+
+		bool ExistC1WhereS1one2many
 		{
 			get;
 		}
