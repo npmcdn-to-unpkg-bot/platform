@@ -30,7 +30,7 @@ namespace Allors.Special
 
     public abstract class Profile : IProfile
     {
-        private readonly ObjectFactory objectFactory = new ObjectFactory(M.D, M.A, "Domain");
+        private readonly ObjectFactory objectFactory = new ObjectFactory(M.D, typeof(IObject).Assembly, "Domain");
 
         private int eventCounter;
         private IPopulation population;

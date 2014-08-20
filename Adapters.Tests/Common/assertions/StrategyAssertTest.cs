@@ -163,7 +163,7 @@ namespace Allors.Adapters.Special.Assertions
         [SetUp]
         protected void Init()
         {
-            var configuration = new Configuration { ObjectFactory = new ObjectFactory(M.D, M.A, "Domain") };
+            var configuration = new Configuration { ObjectFactory = new ObjectFactory(M.D, typeof(IObject).Assembly, "Domain") };
             var database = new Database(configuration);
             this.session = database.CreateSession();
         }

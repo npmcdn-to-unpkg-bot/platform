@@ -159,7 +159,7 @@ namespace Allors.Adapters.Special
 
         protected ObjectFactory CreateObjectFactory(Domain domain)
         {
-            return new ObjectFactory(domain, M.A, "Domain");
+            return new ObjectFactory(domain, typeof(IObject).Assembly, "Domain");
         }
 
         #region Events
