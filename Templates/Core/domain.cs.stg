@@ -1,0 +1,491 @@
+group AllorsCSharp;
+
+TemplateId() ::= <<44E93EDD-770F-4FA4-8ED7-D3492F7FE52D>>
+TemplateName() ::= <<Allors Domain C#>>
+TemplateVersion() ::= <<1.0.64>>
+TemplateConfiguration(domain,settings) ::= <<
+$!
+Copyright 2002-2013 Allors bvba.
+
+Dual Licensed under
+  a) the Lesser General Public Licence v3 (LGPL)
+  b) the Allors License
+
+The LGPL License is included in the file lgpl.txt.
+The Allors License is an addendum to your contract.
+
+Allors Platform is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+For more information visit http://www.allors.com/legal
+!$
+<generations>
+$domain.compositeObjectTypes:{objectType|
+	<generation template="compositeObjectType" input="$objectType.Id $" output="$objectType.SingularName$.g.cs"/>
+}$
+</generations>
+>>
+
+compositeObjectType(domain,settings,objectType) ::= <<
+namespace $domainNamespace()$
+{
+$if(objectType.IsInterface)$
+	public partial interface $objectType.name$ : $objectType.DirectSuperinterfaces:{directSuperinterface|$globalNullableName(directSuperinterface)$,}$ Allors.R1.IObject
+	{
+$objectType.AssociationTypesWhereObjectType:{associationType|$objectTypeInterfaceRoleType(relationType=associationType.RelationType,associationType=associationType,roleType=associationType.RoleType)$}$
+$objectType.RoleTypesWhereObjectType:{roleType|$objectTypeInterfaceAssociationType(relationType=roleType.RelationType,associationType=roleType.AssociationType,roleType=roleType)$}$
+	}
+	
+$else$
+	public $if(objectType.IsAbstract)$abstract$endif$ partial class $objectType.name$ : $objectType.name$Allors $objectType.directSuperinterfaces:{directSuperinterface|, $globalNullableName(directSuperinterface)$}$
+	{		
+		public $objectType.name$(Allors.R1.IStrategy allors) : base(allors) {}
+	}
+
+	public abstract partial class $objectType.name$Allors : $if(objectType.ExistDirectSuperclass)$ $globalNullableName(objectType.DirectSuperclass)$ $else$ global::Allors.ObjectBase $endif$ 
+	{
+		protected $objectType.name$Allors(Allors.R1.IStrategy allors) : base(allors){}
+
+        $if(objectType.ExistDirectSuperclass)$new$endif$ public static readonly global::$metaNamespace()$.$objectType.Name$Extension Meta = global::$metaNamespace()$.$objectType.Name$Extension.Instance;
+
+$objectType.ExclusiveRoleTypes:{roleType|$objectTypeClassRoleType(relationType=roleType.RelationType,associationType=roleType.AssociationType,roleType=roleType)$}$
+$objectType.ExclusiveAssociationTypes:{associationType|$objectTypeClassAssociationType(relationType=associationType.RelationType,associationType=associationType,roleType=associationType.RoleType)$}$
+	
+$if(objectType.IsConcrete)$
+		internal override void OnBuild(global::Allors.IObjectBuilder objectBuilder)
+		{
+			var builder = ($objectType.name$Builder)objectBuilder;
+$objectType.UnitRoleTypes:{roleType|$initUnitRoleType(objectType=objectType,relationType=roleType.RelationType,associationType=roleType.AssociationType,roleType=roleType)$}$
+$objectType.CompositeRoleTypes:{roleType|$initCompositeRoleType(objectType=objectType,relationType=roleType.RelationType,associationType=roleType.AssociationType,roleType=roleType)$}$
+		}
+$endif$
+	}
+$endif$
+
+$if(objectType.IsConcrete)$
+	public partial class $objectType.name$Builder : Allors.ObjectBuilder<$objectType.name$> $objectType.DirectSupertypes:{directSupertype|, $globalNullableName(directSupertype)$Builder}$, global::System.IDisposable
+	{		
+		public $objectType.name$Builder(Allors.R1.ISession session) : base(session)
+	    {
+	    }
+		
+$objectType.UnitRoleTypes:{roleType|$withUnitRoleType(objectType=objectType,relationType=roleType.RelationType,associationType=roleType.AssociationType,roleType=roleType)$}$
+$objectType.CompositeRoleTypes:{roleType|$withCompositeRoleType(objectType=objectType,relationType=roleType.RelationType,associationType=roleType.AssociationType,roleType=roleType)$}$
+	}
+$else$	
+	public partial interface $objectType.name$Builder : $objectType.DirectSupertypes:{directSupertype|$globalNullableName(directSupertype)$Builder ,}$ global::System.IDisposable
+	{	
+$objectType.AssociationTypesWhereObjectType:{associationType|$withRoleType(relationType=associationType.RelationType,associationType=associationType,roleType=associationType.RoleType)$}$
+	}
+$endif$
+
+	public partial class $objectType.pluralName$ : global::Allors.ObjectsBase<$objectType.singularName$>
+	{
+		public static global::$metaNamespace()$.$objectType.Name$Extension Meta = global::$metaNamespace()$.$objectType.name$Extension.Instance;
+
+		public $objectType.pluralName$(Allors.R1.ISession session) : base(session)
+		{
+		}
+
+		public override Allors.R1.Meta.ObjectType ObjectType
+		{
+			get
+			{
+				return Meta.ObjectType;
+			}
+		}
+	}
+}
+>>
+
+objectTypeInterfaceRoleType(relationType,associationType,roleType) ::= <<
+$\n$
+$if(roleType.ObjectType.IsUnit)$
+		$globalNullableName(roleType.ObjectType)$ $roleType.HierarchySingularName$ 
+		{
+			get;
+			set;
+		}
+
+		/// <exclude/>
+		bool Exist$roleType.HierarchySingularName${get;}
+
+		/// <exclude/>
+		void Remove$roleType.HierarchySingularName$();
+$else$
+$if(roleType.IsMany)$
+
+		Allors.R1.Extent<$globalNullableName(roleType.ObjectType)$> $roleType.HierarchyPluralName$
+		{ 
+			get;
+			set;
+		}
+
+		/// <exclude/>
+		bool Exist$roleType.HierarchyPluralName$
+		{
+			get;
+		}
+
+		/// <exclude/>
+		void Add$roleType.HierarchySingularName$ ($globalNullableName(roleType.ObjectType)$ value);
+
+		/// <exclude/>
+		void Remove$roleType.HierarchySingularName$ ($globalNullableName(roleType.ObjectType)$ value);
+
+		/// <exclude/>
+		void Remove$roleType.HierarchyPluralName$();
+$else$
+
+		$globalNullableName(roleType.ObjectType)$ $roleType.HierarchySingularName$
+		{ 
+			get;
+			set;
+		}
+
+		/// <exclude/>
+		bool Exist$roleType.HierarchySingularName$
+		{
+			get;
+		}
+
+		/// <exclude/>
+		void Remove$roleType.HierarchySingularName$();
+$endif$
+$endif$
+>>
+
+objectTypeInterfaceAssociationType(relationType,associationType,roleType) ::= <<
+$\n$
+$if(associationType.IsMany)$
+
+		Allors.R1.Extent<$globalNullableName(associationType.ObjectType)$> $associationType.PluralName$Where$roleType.SingularName$
+		{ 
+			get;
+		}
+
+		/// <exclude/>
+		bool Exist$associationType.PluralName$Where$roleType.SingularName$
+		{
+			get;
+		}
+$else$
+
+		$globalNullableName(associationType.ObjectType)$ $associationType.SingularName$Where$roleType.SingularName$
+		{
+			get;
+		}
+
+		/// <exclude/>
+		bool Exist$associationType.SingularName$Where$roleType.SingularName$
+		{
+			get;
+		}
+$endif$
+>>
+
+objectTypeClassRoleType(relationType,associationType,roleType) ::= <<
+$\n$
+$if(roleType.ObjectType.IsUnit)$
+		
+		virtual public $globalNullableName(roleType.ObjectType)$ $roleType.HierarchySingularName$ 
+		{
+			get
+			{
+				return ($globalNullableName(roleType.ObjectType)$) Strategy.GetUnitRole(Meta.$roleType.HierarchySingularName$);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.$roleType.HierarchySingularName$,value);
+			}
+		}
+
+		/// <exclude/>
+		virtual public bool Exist$roleType.HierarchySingularName${
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.$roleType.HierarchySingularName$);
+			}
+		}
+
+		/// <exclude/>
+		virtual public void Remove$roleType.HierarchySingularName$()
+		{
+			Strategy.RemoveUnitRole(Meta.$roleType.HierarchySingularName$);
+		}
+$else$
+$if(roleType.IsMany)$
+
+		virtual public Allors.R1.Extent<$globalNullableName(roleType.ObjectType)$> $roleType.HierarchyPluralName$
+		{ 
+			get
+			{
+				return Strategy.GetCompositeRoles(Meta.$roleType.HierarchySingularName$);
+			}
+			set
+			{
+				Strategy.SetCompositeRoles(Meta.$roleType.HierarchySingularName$, value);
+			}
+		}
+
+		/// <exclude/>
+		virtual public bool Exist$roleType.HierarchyPluralName$
+		{
+			get
+			{
+				return Strategy.ExistCompositeRoles(Meta.$roleType.HierarchySingularName$);
+			}
+		}
+
+		/// <exclude/>
+		virtual public void Add$roleType.HierarchySingularName$ ($globalNullableName(roleType.ObjectType)$ value)
+		{
+			Strategy.AddCompositeRole(Meta.$roleType.HierarchySingularName$, value);
+		}
+
+		/// <exclude/>
+		virtual public void Remove$roleType.HierarchySingularName$ ($globalNullableName(roleType.ObjectType)$ value)
+		{
+			Strategy.RemoveCompositeRole(Meta.$roleType.HierarchySingularName$, value);
+		}
+
+		/// <exclude/>
+		virtual public void Remove$roleType.HierarchyPluralName$()
+		{
+			Strategy.RemoveCompositeRoles(Meta.$roleType.HierarchySingularName$);
+		}
+$else$
+
+		virtual public $globalNullableName(roleType.ObjectType)$ $roleType.HierarchySingularName$
+		{ 
+			get
+			{
+				return ($globalNullableName(roleType.ObjectType)$) Strategy.GetCompositeRole(Meta.$roleType.HierarchySingularName$);
+			}
+			set
+			{
+				Strategy.SetCompositeRole(Meta.$roleType.HierarchySingularName$, value);
+			}
+		}
+
+		/// <exclude/>
+		virtual public bool Exist$roleType.HierarchySingularName$
+		{
+			get
+			{
+				return Strategy.ExistCompositeRole(Meta.$roleType.HierarchySingularName$);
+			}
+		}
+
+		/// <exclude/>
+		virtual public void Remove$roleType.HierarchySingularName$()
+		{
+			Strategy.RemoveCompositeRole(Meta.$roleType.HierarchySingularName$);
+		}
+$endif$
+$endif$
+>>
+
+objectTypeClassAssociationType(relationType,associationType,roleType) ::= <<
+$\n$
+$if(associationType.IsMany)$
+
+		virtual public Allors.R1.Extent<$globalNullableName(associationType.ObjectType)$> $associationType.PluralName$Where$roleType.SingularName$
+		{ 
+			get
+			{
+				return Strategy.GetCompositeAssociations(Meta.$associationType.FullName$);
+			}
+		}
+
+		/// <exclude/>
+		virtual public bool Exist$associationType.PluralName$Where$roleType.SingularName$
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociations(Meta.$associationType.FullName$);
+			}
+		}
+$else$
+
+		virtual public $globalNullableName(associationType.ObjectType)$ $associationType.SingularName$Where$roleType.SingularName$
+		{ 
+			get
+			{
+				return ($globalNullableName(associationType.ObjectType)$) Strategy.GetCompositeAssociation(Meta.$associationType.FullName$);
+			}
+		} 
+
+		/// <exclude/>
+		virtual public bool Exist$associationType.SingularName$Where$roleType.SingularName$
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociation(Meta.$associationType.FullName$);
+			}
+		}
+$endif$
+>>
+
+initUnitRoleType(objectType,relationType,associationType,roleType) ::= <<
+$if(roleType.ObjectType.IsString)$
+			
+			this.$roleType.Name$ = builder.$roleType.HierarchySingularName$;
+$else$			
+$if(roleType.ObjectType.IsBinary)$
+			
+			this.$roleType.Name$ = builder.$roleType.HierarchySingularName$;
+
+$else$
+			
+			if(builder.$roleType.HierarchySingularName$.HasValue)
+			{
+				this.$roleType.Name$ = builder.$roleType.HierarchySingularName$.Value;
+			}			
+$endif$
+$endif$		
+>>
+
+initCompositeRoleType(objectType,relationType,associationType,roleType) ::= <<
+$if(roleType.IsOne)$
+
+			this.$roleType.Name$ = builder.$roleType.HierarchySingularName$;
+		
+$else$
+			if(builder.$roleType.HierarchySingularName$!=null)
+			{
+				this.$roleType.Name$ = builder.$roleType.HierarchySingularName$.ToArray();
+			}
+$endif$
+>>
+
+withUnitRoleType(objectType,relationType,associationType,roleType) ::= <<
+$if(roleType.ObjectType.IsString)$
+		public $globalNullableName(roleType.ObjectType)$ $roleType.HierarchySingularName$ {get; set;}
+
+$else$
+$if(roleType.ObjectType.IsBinary)$
+		public $globalNullableName(roleType.ObjectType)$ $roleType.HierarchySingularName$ {get; set;}
+
+$else$
+		public $globalNullableName(roleType.ObjectType)$ $roleType.HierarchySingularName$ {get; set;}
+
+$endif$
+$endif$
+		/// <exclude/>
+		public $objectType.name$Builder With$roleType.HierarchySingularName$($globalNullableName(roleType.ObjectType)$ value)
+        {
+		    if(this.$roleType.HierarchySingularName$!=null){throw new global::System.ArgumentException("One multicplicity");}
+            this.$roleType.HierarchySingularName$ = value;
+            return this;
+        }	
+
+>>
+
+withCompositeRoleType(objectType,relationType,associationType,roleType) ::= <<
+$if(roleType.IsOne)$
+		public $globalNullableName(roleType.ObjectType)$ $roleType.HierarchySingularName$ {get; set;}
+
+		/// <exclude/>
+		public $objectType.name$Builder With$roleType.HierarchySingularName$($globalNullableName(roleType.ObjectType)$ value)
+        {
+            if(this.$roleType.HierarchySingularName$!=null){throw new global::System.ArgumentException("One multicplicity");}
+			this.$roleType.HierarchySingularName$ = value;
+            return this;
+        }		
+
+$else$
+		public global::System.Collections.Generic.List<$globalNullableName(roleType.ObjectType)$> $roleType.HierarchySingularName$ {get; set;}	
+
+		/// <exclude/>
+		public $objectType.name$Builder With$roleType.HierarchySingularName$($globalNullableName(roleType.ObjectType)$ value)
+        {
+			if(this.$roleType.HierarchySingularName$ == null)
+			{
+				this.$roleType.HierarchySingularName$ = new global::System.Collections.Generic.List<$globalNullableName(roleType.ObjectType)$>(); 
+			}
+            this.$roleType.HierarchySingularName$.Add(value);
+            return this;
+        }		
+
+$endif$		
+>>
+
+withRoleType(relationType,associationType,roleType) ::= <<
+$if(roleType.ObjectType.IsUnit)$
+$if(roleType.ObjectType.IsString)$
+		
+		$globalNullableName(roleType.ObjectType)$ $roleType.HierarchySingularName$ {get;}
+
+$else$
+$if(roleType.ObjectType.IsBinary)$
+		
+		$globalNullableName(roleType.ObjectType)$ $roleType.HierarchySingularName$ {get;}
+
+$else$
+		
+		$globalNullableName(roleType.ObjectType)$ $roleType.HierarchySingularName$ {get;}
+
+$endif$
+$endif$
+$else$
+$if(roleType.IsOne)$
+		$globalNullableName(roleType.ObjectType)$ $roleType.HierarchySingularName$ {get;}
+
+$else$
+		
+		global::System.Collections.Generic.List<$globalNullableName(roleType.ObjectType)$> $roleType.HierarchySingularName$ {get;}		
+
+$endif$
+$endif$		
+>>
+
+globalNullableName(objectType) ::= <%
+$if(objectType.IsBinary)$
+	global::System.Byte[]
+$elseif(objectType.IsBoolean)$
+	global::System.Boolean?
+$elseif(objectType.IsDateTime)$
+	global::System.DateTime?
+$elseif(objectType.IsDecimal)$
+	global::System.Decimal?
+$elseif(objectType.IsDouble)$
+	global::System.Double?
+$elseif(objectType.IsInteger)$
+	global::System.Int32?
+$elseif(objectType.IsLong)$
+	global::System.Int64?
+$elseif(objectType.IsString)$
+	global::System.String
+$elseif(objectType.IsUnique)$
+	global::System.Guid?
+$else$
+	global::$domainNamespace()$.$objectType.SingularName$
+$endif$
+%>
+
+domainNamespace() ::= <%
+$if(settings.existAllors)$
+	$if(settings.allors.ExistDomain)$
+		$if(settings.allors.ExistNamespace)$
+			$settings.allors.domain.namespace$
+		$endif$
+	$endif$
+$else$
+	Allors.Domain
+$endif$
+%>
+
+metaNamespace() ::= <%
+$if(settings.existAllors)$
+	$if(settings.allors.ExistMeta)$
+		$if(settings.allors.ExistNamespace)$
+			$settings.allors.meta.namespace$
+		$endif$
+	$endif$
+$else$
+	Allors.Meta
+$endif$
+%>

@@ -11,6 +11,8 @@
     <AssemblyName>Meta</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr4.StringTemplate">
+      <HintPath>..\packages\Antlr4.StringTemplate.4.0.6.9004\lib\net35\Antlr4.StringTemplate.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -39,6 +45,57 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapters\A1.g.cs" />
+    <Compile Include="Adapters\A2.g.cs" />
+    <Compile Include="Adapters\A3.g.cs" />
+    <Compile Include="Adapters\A34.g.cs" />
+    <Compile Include="Adapters\A4.g.cs" />
+    <Compile Include="Adapters\AbstractClassWithoutConcreteClass.g.cs" />
+    <Compile Include="Adapters\AI1.g.cs" />
+    <Compile Include="Adapters\AI2.g.cs" />
+    <Compile Include="Adapters\AI3.g.cs" />
+    <Compile Include="Adapters\AI34.g.cs" />
+    <Compile Include="Adapters\AI4.g.cs" />
+    <Compile Include="Adapters\AS1.g.cs" />
+    <Compile Include="Adapters\AS2.g.cs" />
+    <Compile Include="Adapters\AS3.g.cs" />
+    <Compile Include="Adapters\AS4.g.cs" />
+    <Compile Include="Adapters\C1.g.cs" />
+    <Compile Include="Adapters\C2.g.cs" />
+    <Compile Include="Adapters\C3.g.cs" />
+    <Compile Include="Adapters\C4.g.cs" />
+    <Compile Include="Adapters\ClassWithoutRoles.g.cs" />
+    <Compile Include="Adapters\ClassWithoutUnitRoles.g.cs" />
+    <Compile Include="Adapters\Company.g.cs" />
+    <Compile Include="Adapters\domain.g.cs" />
+    <Compile Include="Adapters\GT32.g.cs" />
+    <Compile Include="Adapters\GT32UnitLT32Composite.g.cs" />
+    <Compile Include="Adapters\I1.g.cs" />
+    <Compile Include="Adapters\I12.g.cs" />
+    <Compile Include="Adapters\I2.g.cs" />
+    <Compile Include="Adapters\I23.g.cs" />
+    <Compile Include="Adapters\I3.g.cs" />
+    <Compile Include="Adapters\I34.g.cs" />
+    <Compile Include="Adapters\I4.g.cs" />
+    <Compile Include="Adapters\IGT32Composite.g.cs" />
+    <Compile Include="Adapters\IGT32Unit.g.cs" />
+    <Compile Include="Adapters\ILT32Composite.g.cs" />
+    <Compile Include="Adapters\ILT32Unit.g.cs" />
+    <Compile Include="Adapters\InterfaceWithoutConcreteClass.g.cs" />
+    <Compile Include="Adapters\ISandbox.g.cs" />
+    <Compile Include="Adapters\LT32.g.cs" />
+    <Compile Include="Adapters\LT32UnitGT32Composite.g.cs" />
+    <Compile Include="Adapters\Named.g.cs" />
+    <Compile Include="Adapters\Person.g.cs" />
+    <Compile Include="Adapters\S1.g.cs" />
+    <Compile Include="Adapters\S12.g.cs" />
+    <Compile Include="Adapters\S1234.g.cs" />
+    <Compile Include="Adapters\S2.g.cs" />
+    <Compile Include="Adapters\S3.g.cs" />
+    <Compile Include="Adapters\S4.g.cs" />
+    <Compile Include="Adapters\Sandbox.g.cs" />
+    <Compile Include="Adapters\SingleUnit.g.cs" />
+    <Compile Include="Adapters\User.g.cs" />
     <Compile Include="Core\Allors\output\EmbeddedPartial\AssociationType.allors.g.cs" />
     <Compile Include="Core\Allors\output\EmbeddedPartial\Domain.allors.g.cs" />
     <Compile Include="Core\Allors\output\EmbeddedPartial\Inheritance.allors.g.cs" />
@@ -60,6 +117,13 @@
     <Compile Include="Core\Allors\output\Embedded\PropertyType.g.cs" />
     <Compile Include="Core\Allors\output\Embedded\RelationType.g.cs" />
     <Compile Include="Core\Allors\output\Embedded\RoleType.g.cs" />
+    <Compile Include="Core\Generation\Generate.cs" />
+    <Compile Include="Core\Generation\GenerateLog.cs" />
+    <Compile Include="Core\Generation\Log.cs" />
+    <Compile Include="Core\Generation\Storage\AllorsDirectoryInfo.cs" />
+    <Compile Include="Core\Generation\Storage\AllorsFileInfo.cs" />
+    <Compile Include="Core\Generation\Storage\Location.cs" />
+    <Compile Include="Core\Generation\StringTemplate.cs" />
     <Compile Include="Core\Meta\AssociationType.cs" />
     <Compile Include="Core\Meta\Domain.cs" />
     <Compile Include="Core\Meta\Events\MetaObjectChangedEventArgs.cs" />
@@ -84,9 +148,17 @@
   <ItemGroup />
   <ItemGroup>
     <None Include="Core\Generate.proj" />
+    <None Include="packages.config" />
     <None Include="Settings.StyleCop" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

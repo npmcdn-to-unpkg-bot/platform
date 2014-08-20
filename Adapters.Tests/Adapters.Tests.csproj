@@ -221,14 +221,6 @@
     <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Adapters.Tests.Domain\Adapters.Tests.Domain.csproj">
-      <Project>{a4b6ac55-78e2-464c-b97c-5afced3fb6db}</Project>
-      <Name>Adapters.Tests.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Adapters.Tests.Meta\Adapters.Tests.Meta.csproj">
-      <Project>{5751cbec-e70a-4dfd-a651-0b7c10d4547c}</Project>
-      <Name>Adapters.Tests.Meta</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Adapters\Adapters.csproj">
       <Project>{233622ff-5493-4981-9529-4337d84c8312}</Project>
       <Name>Adapters</Name>

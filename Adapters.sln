@@ -20,10 +20,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adapters", "Adapters\Adapte
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adapters.Tests", "Adapters.Tests\Adapters.Tests.csproj", "{D4FED8A0-8375-41FA-B0C6-3A9AA1A348BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adapters.Tests.Domain", "Adapters.Tests.Domain\Adapters.Tests.Domain.csproj", "{A4B6AC55-78E2-464C-B97C-5AFCED3FB6DB}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adapters.Tests.Meta", "Adapters.Tests.Meta\Adapters.Tests.Meta.csproj", "{5751CBEC-E70A-4DFD-A651-0B7C10D4547C}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,14 +46,6 @@ Global
 		{D4FED8A0-8375-41FA-B0C6-3A9AA1A348BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4FED8A0-8375-41FA-B0C6-3A9AA1A348BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4FED8A0-8375-41FA-B0C6-3A9AA1A348BD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A4B6AC55-78E2-464C-B97C-5AFCED3FB6DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A4B6AC55-78E2-464C-B97C-5AFCED3FB6DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A4B6AC55-78E2-464C-B97C-5AFCED3FB6DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A4B6AC55-78E2-464C-B97C-5AFCED3FB6DB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5751CBEC-E70A-4DFD-A651-0B7C10D4547C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5751CBEC-E70A-4DFD-A651-0B7C10D4547C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5751CBEC-E70A-4DFD-A651-0B7C10D4547C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5751CBEC-E70A-4DFD-A651-0B7C10D4547C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
