@@ -467,25 +467,9 @@ $endif$
 %>
 
 domainNamespace() ::= <%
-$if(settings.existAllors)$
-	$if(settings.allors.ExistDomain)$
-		$if(settings.allors.ExistNamespace)$
-			$settings.allors.domain.namespace$
-		$endif$
-	$endif$
-$else$
-	Allors.Domain
-$endif$
+	Allors
 %>
 
 metaNamespace() ::= <%
-$if(settings.existAllors)$
-	$if(settings.allors.ExistMeta)$
-		$if(settings.allors.ExistNamespace)$
-			$settings.allors.meta.namespace$
-		$endif$
-	$endif$
-$else$
 	Allors.Meta
-$endif$
 %>

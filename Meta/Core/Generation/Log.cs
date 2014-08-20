@@ -18,7 +18,7 @@
 // </copyright>
 // <summary>Defines the Log type.</summary>
 // -------------------------------------------------------------------------------------------------
-namespace Allors.R1.Development.Repository
+namespace Allors.Development.Repository
 {
     public abstract class Log
     {

@@ -21,13 +21,13 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Development.Repository.Generation
+namespace Allors.Development.Repository.Generation
 {
     using System;
     using System.IO;
     using System.Xml;
 
-    using Allors.R1.Meta;
+    using Allors.Meta;
 
     using Antlr4.StringTemplate;
     using Antlr4.StringTemplate.Misc;

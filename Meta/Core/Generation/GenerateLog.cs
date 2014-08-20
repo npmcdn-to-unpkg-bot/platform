@@ -17,7 +17,7 @@
 // For more information visit http://www.allors.com/legal
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Allors.R1.Development.Repository.Tasks
+namespace Allors.Development.Repository.Tasks
 {
     using System;
 

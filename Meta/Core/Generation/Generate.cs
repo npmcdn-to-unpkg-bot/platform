@@ -17,11 +17,11 @@
 // For more information visit http://www.allors.com/legal
 // </copyright>
 // -------------------------------------------------------------------------------------------------
-namespace Allors.R1.Development.Repository.Tasks
+namespace Allors.Development.Repository.Tasks
 {
     using System.IO;
 
-    using Allors.R1.Development.Repository.Generation;
+    using Allors.Development.Repository.Generation;
 
     using Microsoft.Build.Framework;
 

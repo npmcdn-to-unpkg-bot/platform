@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Development.Repository.Storage
+namespace Allors.Development.Repository.Storage
 {
     using System;
     using System.IO;
