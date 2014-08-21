@@ -2787,10 +2787,6 @@ namespace Allors.Adapters.Special
                 var extent = this.LocalExtent(InterfaceWithoutConcreteClassMeta.ObjectType);
 
                 Assert.AreEqual(0, extent.Count);
-
-                extent = this.LocalExtent(AbstractClassWithoutConcreteClassMeta.ObjectType);
-
-                Assert.AreEqual(0, extent.Count);
             }
         }
 
@@ -3088,8 +3084,8 @@ namespace Allors.Adapters.Special
                 extent = this.Session.Except(firstExtent, secondExtent);
 
                 Assert.AreEqual(2, extent.Count);
-                this.AssertC1(extent, false, false, false, false);
-                this.AssertC2(extent, true, true, false, false);
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, true, false, false);
                 this.AssertC3(extent, false, false, false, false);
                 this.AssertC4(extent, false, false, false, false);
 
@@ -4992,7 +4988,7 @@ namespace Allors.Adapters.Special
                 none.AddLessThan(C1Meta.C1AllorsInteger, 1);
 
                 Assert.AreEqual(1, extent.Count);
-                this.AssertC1(extent, true, false, false, false);
+                this.AssertC1(extent, false, true, false, false);
                 this.AssertC2(extent, false, false, false, false);
                 this.AssertC3(extent, false, false, false, false);
                 this.AssertC4(extent, false, false, false, false);
@@ -8311,7 +8307,7 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddLessThan(C1Meta.C1AllorsInteger, C1Meta.C1IntegerLessThan);
 
                 Assert.AreEqual(1, extent.Count);
-                this.AssertC1(extent, true, false, false, false);
+                this.AssertC1(extent, false, false, false, true);
                 this.AssertC2(extent, false, false, false, false);
                 this.AssertC3(extent, false, false, false, false);
                 this.AssertC4(extent, false, false, false, false);
@@ -8356,8 +8352,8 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddLessThan(S1234Meta.S1234AllorsInteger, 1);
 
                 Assert.AreEqual(0, extent.Count);
-                this.AssertC1(extent, false, true, false, false);
-                this.AssertC2(extent, false, true, false, false);
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
                 this.AssertC3(extent, false, false, false, false);
                 this.AssertC4(extent, false, false, false, false);
 
