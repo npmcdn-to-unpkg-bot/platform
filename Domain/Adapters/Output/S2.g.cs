@@ -6,59 +6,15 @@ namespace Domain
 	{
 
 
-		global::System.Int64? S2AllorsLong 
+		global::System.String S2AllorsString 
 		{
 			get;
 			set;
 		}
 
-		bool ExistS2AllorsLong{get;}
+		bool ExistS2AllorsString{get;}
 
-		void RemoveS2AllorsLong();
-
-
-		global::System.DateTime? S2AllorsDateTime 
-		{
-			get;
-			set;
-		}
-
-		bool ExistS2AllorsDateTime{get;}
-
-		void RemoveS2AllorsDateTime();
-
-
-		global::System.Decimal? S2AllorsDecimal 
-		{
-			get;
-			set;
-		}
-
-		bool ExistS2AllorsDecimal{get;}
-
-		void RemoveS2AllorsDecimal();
-
-
-		global::System.Boolean? S2AllorsBoolean 
-		{
-			get;
-			set;
-		}
-
-		bool ExistS2AllorsBoolean{get;}
-
-		void RemoveS2AllorsBoolean();
-
-
-		global::System.Double? S2AllorsDouble 
-		{
-			get;
-			set;
-		}
-
-		bool ExistS2AllorsDouble{get;}
-
-		void RemoveS2AllorsDouble();
+		void RemoveS2AllorsString();
 
 
 		global::System.Int32? S2AllorsInteger 
@@ -72,123 +28,68 @@ namespace Domain
 		void RemoveS2AllorsInteger();
 
 
-		global::System.String S2AllorsString 
+		global::System.Double? S2AllorsDouble 
 		{
 			get;
 			set;
 		}
 
-		bool ExistS2AllorsString{get;}
+		bool ExistS2AllorsDouble{get;}
 
-		void RemoveS2AllorsString();
+		void RemoveS2AllorsDouble();
+
+
+		global::System.Boolean? S2AllorsBoolean 
+		{
+			get;
+			set;
+		}
+
+		bool ExistS2AllorsBoolean{get;}
+
+		void RemoveS2AllorsBoolean();
+
+
+		global::System.Decimal? S2AllorsDecimal 
+		{
+			get;
+			set;
+		}
+
+		bool ExistS2AllorsDecimal{get;}
+
+		void RemoveS2AllorsDecimal();
+
+
+		global::System.DateTime? S2AllorsDateTime 
+		{
+			get;
+			set;
+		}
+
+		bool ExistS2AllorsDateTime{get;}
+
+		void RemoveS2AllorsDateTime();
+
+
+		global::System.Int64? S2AllorsLong 
+		{
+			get;
+			set;
+		}
+
+		bool ExistS2AllorsLong{get;}
+
+		void RemoveS2AllorsLong();
 
 
 
-		Allors.Extent<global::Domain.I1> I1sWhereS2many2one
+		Allors.Extent<global::Domain.C1> C1sWhereS2many2one
 		{ 
 			get;
 		}
 
-		bool ExistI1sWhereS2many2one
-		{
-			get;
-		}
-
-
-		global::Domain.C1 C1WhereS2one2many
-		{
-			get;
-		}
-
-		bool ExistC1WhereS2one2many
-		{
-			get;
-		}
-
-
-		global::Domain.S1 S1WhereS2one2one
-		{
-			get;
-		}
-
-		bool ExistS1WhereS2one2one
-		{
-			get;
-		}
-
-
-		Allors.Extent<global::Domain.S1> S1sWhereS2many2many
-		{ 
-			get;
-		}
-
-		bool ExistS1sWhereS2many2many
-		{
-			get;
-		}
-
-
-		Allors.Extent<global::Domain.C1> C1sWhereS2many2many
-		{ 
-			get;
-		}
-
-		bool ExistC1sWhereS2many2many
-		{
-			get;
-		}
-
-
-		global::Domain.I1 I1WhereS2one2many
-		{
-			get;
-		}
-
-		bool ExistI1WhereS2one2many
-		{
-			get;
-		}
-
-
-		Allors.Extent<global::Domain.I1> I1sWhereS2many2many
-		{ 
-			get;
-		}
-
-		bool ExistI1sWhereS2many2many
-		{
-			get;
-		}
-
-
-		global::Domain.C1 C1WhereS2one2one
-		{
-			get;
-		}
-
-		bool ExistC1WhereS2one2one
-		{
-			get;
-		}
-
-
-		global::Domain.S1 S1WhereS2one2many
-		{
-			get;
-		}
-
-		bool ExistS1WhereS2one2many
-		{
-			get;
-		}
-
-
-		Allors.Extent<global::Domain.S1> S1sWhereS2many2one
-		{ 
-			get;
-		}
-
-		bool ExistS1sWhereS2many2one
+		bool ExistC1sWhereS2many2one
 		{
 			get;
 		}
@@ -205,12 +106,111 @@ namespace Domain
 		}
 
 
-		Allors.Extent<global::Domain.C1> C1sWhereS2many2one
+		Allors.Extent<global::Domain.S1> S1sWhereS2many2one
 		{ 
 			get;
 		}
 
-		bool ExistC1sWhereS2many2one
+		bool ExistS1sWhereS2many2one
+		{
+			get;
+		}
+
+
+		global::Domain.S1 S1WhereS2one2many
+		{
+			get;
+		}
+
+		bool ExistS1WhereS2one2many
+		{
+			get;
+		}
+
+
+		global::Domain.C1 C1WhereS2one2one
+		{
+			get;
+		}
+
+		bool ExistC1WhereS2one2one
+		{
+			get;
+		}
+
+
+		Allors.Extent<global::Domain.I1> I1sWhereS2many2many
+		{ 
+			get;
+		}
+
+		bool ExistI1sWhereS2many2many
+		{
+			get;
+		}
+
+
+		global::Domain.I1 I1WhereS2one2many
+		{
+			get;
+		}
+
+		bool ExistI1WhereS2one2many
+		{
+			get;
+		}
+
+
+		Allors.Extent<global::Domain.C1> C1sWhereS2many2many
+		{ 
+			get;
+		}
+
+		bool ExistC1sWhereS2many2many
+		{
+			get;
+		}
+
+
+		Allors.Extent<global::Domain.S1> S1sWhereS2many2many
+		{ 
+			get;
+		}
+
+		bool ExistS1sWhereS2many2many
+		{
+			get;
+		}
+
+
+		global::Domain.S1 S1WhereS2one2one
+		{
+			get;
+		}
+
+		bool ExistS1WhereS2one2one
+		{
+			get;
+		}
+
+
+		global::Domain.C1 C1WhereS2one2many
+		{
+			get;
+		}
+
+		bool ExistC1WhereS2one2many
+		{
+			get;
+		}
+
+
+		Allors.Extent<global::Domain.I1> I1sWhereS2many2one
+		{ 
+			get;
+		}
+
+		bool ExistI1sWhereS2many2one
 		{
 			get;
 		}

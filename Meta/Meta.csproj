@@ -45,21 +45,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Adapters\A1.g.cs" />
-    <Compile Include="Adapters\A2.g.cs" />
-    <Compile Include="Adapters\A3.g.cs" />
-    <Compile Include="Adapters\A34.g.cs" />
-    <Compile Include="Adapters\A4.g.cs" />
-    <Compile Include="Adapters\AbstractClassWithoutConcreteClass.g.cs" />
-    <Compile Include="Adapters\AI1.g.cs" />
-    <Compile Include="Adapters\AI2.g.cs" />
-    <Compile Include="Adapters\AI3.g.cs" />
-    <Compile Include="Adapters\AI34.g.cs" />
-    <Compile Include="Adapters\AI4.g.cs" />
-    <Compile Include="Adapters\AS1.g.cs" />
-    <Compile Include="Adapters\AS2.g.cs" />
-    <Compile Include="Adapters\AS3.g.cs" />
-    <Compile Include="Adapters\AS4.g.cs" />
     <Compile Include="Adapters\C1.g.cs" />
     <Compile Include="Adapters\C2.g.cs" />
     <Compile Include="Adapters\C3.g.cs" />

@@ -6,17 +6,6 @@ namespace Domain
 	{
 
 
-		global::System.Int32? Index 
-		{
-			get;
-			set;
-		}
-
-		bool ExistIndex{get;}
-
-		void RemoveIndex();
-
-
 		global::System.String Name 
 		{
 			get;
@@ -28,24 +17,24 @@ namespace Domain
 		void RemoveName();
 
 
+		global::System.Int32? Index 
+		{
+			get;
+			set;
+		}
 
-		global::Domain.Company CompanyWhereNamedOneSort1
+		bool ExistIndex{get;}
+
+		void RemoveIndex();
+
+
+
+		global::Domain.Company CompanyWhereNamedOneSort2
 		{
 			get;
 		}
 
-		bool ExistCompanyWhereNamedOneSort1
-		{
-			get;
-		}
-
-
-		Allors.Extent<global::Domain.Company> CompaniesWhereNamedManySort2
-		{ 
-			get;
-		}
-
-		bool ExistCompaniesWhereNamedManySort2
+		bool ExistCompanyWhereNamedOneSort2
 		{
 			get;
 		}
@@ -62,12 +51,23 @@ namespace Domain
 		}
 
 
-		global::Domain.Company CompanyWhereNamedOneSort2
+		Allors.Extent<global::Domain.Company> CompaniesWhereNamedManySort2
+		{ 
+			get;
+		}
+
+		bool ExistCompaniesWhereNamedManySort2
 		{
 			get;
 		}
 
-		bool ExistCompanyWhereNamedOneSort2
+
+		global::Domain.Company CompanyWhereNamedOneSort1
+		{
+			get;
+		}
+
+		bool ExistCompanyWhereNamedOneSort1
 		{
 			get;
 		}

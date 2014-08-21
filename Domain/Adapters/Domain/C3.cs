@@ -49,7 +49,7 @@ namespace Domain
             return (C3[])session.Extent(C3Meta.ObjectType).ToArray();
         }
 
-        public override void AnS1234Method()
+        public void AnS1234Method()
         {
         }
     }

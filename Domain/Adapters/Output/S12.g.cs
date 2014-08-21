@@ -6,94 +6,26 @@ namespace Domain
 	{
 
 
-		global::System.Decimal? S12AllorsDecimal 
+		global::System.String S12AllorsString 
 		{
 			get;
 			set;
 		}
 
-		bool ExistS12AllorsDecimal{get;}
+		bool ExistS12AllorsString{get;}
 
-		void RemoveS12AllorsDecimal();
+		void RemoveS12AllorsString();
 
 
-		global::System.Int32? S12AllorsInteger 
+		global::System.DateTime? S12AllorsDateTime 
 		{
 			get;
 			set;
 		}
 
-		bool ExistS12AllorsInteger{get;}
+		bool ExistS12AllorsDateTime{get;}
 
-		void RemoveS12AllorsInteger();
-
-
-		global::System.Double? S12AllorsDouble 
-		{
-			get;
-			set;
-		}
-
-		bool ExistS12AllorsDouble{get;}
-
-		void RemoveS12AllorsDouble();
-
-
-		global::System.Boolean? S12AllorsBoolean 
-		{
-			get;
-			set;
-		}
-
-		bool ExistS12AllorsBoolean{get;}
-
-		void RemoveS12AllorsBoolean();
-
-
-		Allors.Extent<global::Domain.C2> S12C2one2manies
-		{ 
-			get;
-			set;
-		}
-
-		void AddS12C2one2many (global::Domain.C2 value);
-
-		void RemoveS12C2one2many (global::Domain.C2 value);
-
-		bool ExistS12C2one2manies
-		{
-			get;
-		}
-
-		void RemoveS12C2one2manies();
-
-
-		global::Domain.C2 S12C2one2one
-		{ 
-			get;
-			set;
-		}
-
-		bool ExistS12C2one2one
-		{
-			get;
-		}
-
-		void RemoveS12C2one2one();
-
-
-		global::Domain.C2 S12C2many2one
-		{ 
-			get;
-			set;
-		}
-
-		bool ExistS12C2many2one
-		{
-			get;
-		}
-
-		void RemoveS12C2many2one();
+		void RemoveS12AllorsDateTime();
 
 
 		Allors.Extent<global::Domain.C2> S12C2many2manies
@@ -114,26 +46,94 @@ namespace Domain
 		void RemoveS12C2many2manies();
 
 
-		global::System.DateTime? S12AllorsDateTime 
+		global::Domain.C2 S12C2many2one
+		{ 
+			get;
+			set;
+		}
+
+		bool ExistS12C2many2one
+		{
+			get;
+		}
+
+		void RemoveS12C2many2one();
+
+
+		global::Domain.C2 S12C2one2one
+		{ 
+			get;
+			set;
+		}
+
+		bool ExistS12C2one2one
+		{
+			get;
+		}
+
+		void RemoveS12C2one2one();
+
+
+		Allors.Extent<global::Domain.C2> S12C2one2manies
+		{ 
+			get;
+			set;
+		}
+
+		void AddS12C2one2many (global::Domain.C2 value);
+
+		void RemoveS12C2one2many (global::Domain.C2 value);
+
+		bool ExistS12C2one2manies
+		{
+			get;
+		}
+
+		void RemoveS12C2one2manies();
+
+
+		global::System.Boolean? S12AllorsBoolean 
 		{
 			get;
 			set;
 		}
 
-		bool ExistS12AllorsDateTime{get;}
+		bool ExistS12AllorsBoolean{get;}
 
-		void RemoveS12AllorsDateTime();
+		void RemoveS12AllorsBoolean();
 
 
-		global::System.String S12AllorsString 
+		global::System.Double? S12AllorsDouble 
 		{
 			get;
 			set;
 		}
 
-		bool ExistS12AllorsString{get;}
+		bool ExistS12AllorsDouble{get;}
 
-		void RemoveS12AllorsString();
+		void RemoveS12AllorsDouble();
+
+
+		global::System.Int32? S12AllorsInteger 
+		{
+			get;
+			set;
+		}
+
+		bool ExistS12AllorsInteger{get;}
+
+		void RemoveS12AllorsInteger();
+
+
+		global::System.Decimal? S12AllorsDecimal 
+		{
+			get;
+			set;
+		}
+
+		bool ExistS12AllorsDecimal{get;}
+
+		void RemoveS12AllorsDecimal();
 
 	}
 

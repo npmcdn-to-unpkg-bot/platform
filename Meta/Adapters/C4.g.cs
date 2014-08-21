@@ -5,8 +5,6 @@ namespace Domain
 		public static readonly global::Allors.Meta.ObjectType ObjectType = (Allors.Meta.ObjectType)global::Domain.M.D.Find( new System.Guid("20049a79-20c7-478b-a5ba-c54b1e615168") );
 
 		public static readonly global::Allors.Meta.RoleType C4AllorsString = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("9f24fc51-8568-4ffc-b47a-c5c317d00954"))).RoleType;
-		public static readonly global::Allors.Meta.RoleType A4AllorsString = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("cbf14f55-dc38-4cc1-9c7e-088234f7d285"))).RoleType;
-		public static readonly global::Allors.Meta.RoleType A34AllorsString = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("4a0acddf-3949-4223-8ea9-b23fb46054c3"))).RoleType;
 		public static readonly global::Allors.Meta.RoleType S1234AllorsDouble = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("012a43d3-e1e0-4693-a771-1526c29b7ac4"))).RoleType;
 		public static readonly global::Allors.Meta.RoleType S1234AllorsDecimal = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("2ac36edd-d718-4252-b7cf-74849e1fca6e"))).RoleType;
 		public static readonly global::Allors.Meta.RoleType S1234AllorsInteger = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("46263379-afd4-4472-bb05-057fb88163ab"))).RoleType;
@@ -32,7 +30,6 @@ namespace Domain
 		public static readonly global::Allors.Meta.AssociationType I3sWhereC4many2many = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("00b706bb-681e-44ce-bbf3-c3b01bb11269"))).AssociationType;
 		public static readonly global::Allors.Meta.AssociationType C3sWhereC4many2one = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("39313684-8ea1-4f15-aada-2a16feb148ea"))).AssociationType;
 		public static readonly global::Allors.Meta.AssociationType I3WhereC4one2many = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("3a55d57f-768f-4c11-9c18-baa5f3eeda8c"))).AssociationType;
-		public static readonly global::Allors.Meta.AssociationType A3sWhereC4many2many = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("5e0bf3d5-2585-4945-b68e-8a66fe24695e"))).AssociationType;
 		public static readonly global::Allors.Meta.AssociationType C3sWhereC4many2many = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("5e6c2802-3dc5-405a-a2f7-03c9361d4562"))).AssociationType;
 		public static readonly global::Allors.Meta.AssociationType I3WhereC4one2one = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("cc48853e-46f3-4292-be9b-8a4937cea308"))).AssociationType;
 		public static readonly global::Allors.Meta.AssociationType C3WhereC4one2many = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("d1601926-ae62-4592-b15b-6511e0d98355"))).AssociationType;

@@ -18,32 +18,6 @@ namespace Domain
 		protected PersonAllors(Allors.IStrategy allors) : base(allors){}
 
 
-		virtual public global::Domain.Company Company
-		{ 
-			get
-			{
-				return (global::Domain.Company) Strategy.GetCompositeRole(PersonMeta.Company);
-			}
-			set
-			{
-				Strategy.SetCompositeRole(PersonMeta.Company ,value);
-			}
-		}
-
-		virtual public bool ExistCompany
-		{
-			get
-			{
-				return Strategy.ExistCompositeRole(PersonMeta.Company);
-			}
-		}
-
-		virtual public void RemoveCompany()
-		{
-			Strategy.RemoveCompositeRole(PersonMeta.Company);
-		}
-
-
 		virtual public global::Domain.Person NextPerson
 		{ 
 			get
@@ -70,29 +44,29 @@ namespace Domain
 		}
 
 
-
-		virtual public global::System.Int32? Index 
-		{
+		virtual public global::Domain.Company Company
+		{ 
 			get
 			{
-				return (global::System.Int32?) Strategy.GetUnitRole(PersonMeta.Index);
+				return (global::Domain.Company) Strategy.GetCompositeRole(PersonMeta.Company);
 			}
 			set
 			{
-				Strategy.SetUnitRole(PersonMeta.Index, value);
+				Strategy.SetCompositeRole(PersonMeta.Company ,value);
 			}
 		}
 
-		virtual public bool ExistIndex{
+		virtual public bool ExistCompany
+		{
 			get
 			{
-				return Strategy.ExistUnitRole(PersonMeta.Index);
+				return Strategy.ExistCompositeRole(PersonMeta.Company);
 			}
 		}
 
-		virtual public void RemoveIndex()
+		virtual public void RemoveCompany()
 		{
-			Strategy.RemoveUnitRole(PersonMeta.Index);
+			Strategy.RemoveCompositeRole(PersonMeta.Company);
 		}
 
 
@@ -123,155 +97,45 @@ namespace Domain
 
 
 
-		virtual public Allors.Extent<global::Domain.Company> CompaniesWhereMany2ManyPerson
-		{ 
-			get
-			{
-				return Strategy.GetCompositeAssociations(PersonMeta.CompaniesWhereMany2ManyPerson);
-			}
-		}
-
-		virtual public bool ExistCompaniesWhereMany2ManyPerson
+		virtual public global::System.Int32? Index 
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociations(PersonMeta.CompaniesWhereMany2ManyPerson);
+				return (global::System.Int32?) Strategy.GetUnitRole(PersonMeta.Index);
+			}
+			set
+			{
+				Strategy.SetUnitRole(PersonMeta.Index, value);
 			}
 		}
 
+		virtual public bool ExistIndex{
+			get
+			{
+				return Strategy.ExistUnitRole(PersonMeta.Index);
+			}
+		}
 
-		virtual public global::Domain.Company CompanyWherePersonOneSort2
+		virtual public void RemoveIndex()
+		{
+			Strategy.RemoveUnitRole(PersonMeta.Index);
+		}
+
+
+
+		virtual public Allors.Extent<global::Domain.Company> CompaniesWhereManager
 		{ 
 			get
 			{
-				return (global::Domain.Company) Strategy.GetCompositeAssociation(PersonMeta.CompanyWherePersonOneSort2);
+				return Strategy.GetCompositeAssociations(PersonMeta.CompaniesWhereManager);
 			}
-		} 
+		}
 
-		virtual public bool ExistCompanyWherePersonOneSort2
+		virtual public bool ExistCompaniesWhereManager
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociation(PersonMeta.CompanyWherePersonOneSort2);
-			}
-		}
-
-
-		virtual public Allors.Extent<global::Domain.Company> CompaniesWherePersonManySort2
-		{ 
-			get
-			{
-				return Strategy.GetCompositeAssociations(PersonMeta.CompaniesWherePersonManySort2);
-			}
-		}
-
-		virtual public bool ExistCompaniesWherePersonManySort2
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociations(PersonMeta.CompaniesWherePersonManySort2);
-			}
-		}
-
-
-		virtual public Allors.Extent<global::Domain.Company> CompaniesWherePersonManySort1
-		{ 
-			get
-			{
-				return Strategy.GetCompositeAssociations(PersonMeta.CompaniesWherePersonManySort1);
-			}
-		}
-
-		virtual public bool ExistCompaniesWherePersonManySort1
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociations(PersonMeta.CompaniesWherePersonManySort1);
-			}
-		}
-
-
-		virtual public global::Domain.Company CompanyWherePersonOneSort1
-		{ 
-			get
-			{
-				return (global::Domain.Company) Strategy.GetCompositeAssociation(PersonMeta.CompanyWherePersonOneSort1);
-			}
-		} 
-
-		virtual public bool ExistCompanyWherePersonOneSort1
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociation(PersonMeta.CompanyWherePersonOneSort1);
-			}
-		}
-
-
-		virtual public Allors.Extent<global::Domain.Company> CompaniesWhereIndexedMany2ManyPerson
-		{ 
-			get
-			{
-				return Strategy.GetCompositeAssociations(PersonMeta.CompaniesWhereIndexedMany2ManyPerson);
-			}
-		}
-
-		virtual public bool ExistCompaniesWhereIndexedMany2ManyPerson
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociations(PersonMeta.CompaniesWhereIndexedMany2ManyPerson);
-			}
-		}
-
-
-		virtual public Allors.Extent<global::Domain.Company> CompaniesWhereOwner
-		{ 
-			get
-			{
-				return Strategy.GetCompositeAssociations(PersonMeta.CompaniesWhereOwner);
-			}
-		}
-
-		virtual public bool ExistCompaniesWhereOwner
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociations(PersonMeta.CompaniesWhereOwner);
-			}
-		}
-
-
-		virtual public global::Domain.Company CompanyWhereFirstPerson
-		{ 
-			get
-			{
-				return (global::Domain.Company) Strategy.GetCompositeAssociation(PersonMeta.CompanyWhereFirstPerson);
-			}
-		} 
-
-		virtual public bool ExistCompanyWhereFirstPerson
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociation(PersonMeta.CompanyWhereFirstPerson);
-			}
-		}
-
-
-		virtual public global::Domain.Person PersonWhereNextPerson
-		{ 
-			get
-			{
-				return (global::Domain.Person) Strategy.GetCompositeAssociation(PersonMeta.PersonWhereNextPerson);
-			}
-		} 
-
-		virtual public bool ExistPersonWhereNextPerson
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociation(PersonMeta.PersonWhereNextPerson);
+				return Strategy.ExistCompositeAssociations(PersonMeta.CompaniesWhereManager);
 			}
 		}
 
@@ -293,53 +157,172 @@ namespace Domain
 		}
 
 
-		virtual public Allors.Extent<global::Domain.Company> CompaniesWhereManager
+		virtual public global::Domain.Person PersonWhereNextPerson
 		{ 
 			get
 			{
-				return Strategy.GetCompositeAssociations(PersonMeta.CompaniesWhereManager);
-			}
-		}
-
-		virtual public bool ExistCompaniesWhereManager
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociations(PersonMeta.CompaniesWhereManager);
-			}
-		}
-
-
-		virtual public global::Domain.Company CompanyWhereNamedOneSort1
-		{ 
-			get
-			{
-				return (global::Domain.Company) Strategy.GetCompositeAssociation(PersonMeta.CompanyWhereNamedOneSort1);
+				return (global::Domain.Person) Strategy.GetCompositeAssociation(PersonMeta.PersonWhereNextPerson);
 			}
 		} 
 
-		virtual public bool ExistCompanyWhereNamedOneSort1
+		virtual public bool ExistPersonWhereNextPerson
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociation(PersonMeta.CompanyWhereNamedOneSort1);
+				return Strategy.ExistCompositeAssociation(PersonMeta.PersonWhereNextPerson);
 			}
 		}
 
 
-		virtual public Allors.Extent<global::Domain.Company> CompaniesWhereNamedManySort2
+		virtual public global::Domain.Company CompanyWhereFirstPerson
 		{ 
 			get
 			{
-				return Strategy.GetCompositeAssociations(PersonMeta.CompaniesWhereNamedManySort2);
+				return (global::Domain.Company) Strategy.GetCompositeAssociation(PersonMeta.CompanyWhereFirstPerson);
 			}
-		}
+		} 
 
-		virtual public bool ExistCompaniesWhereNamedManySort2
+		virtual public bool ExistCompanyWhereFirstPerson
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociations(PersonMeta.CompaniesWhereNamedManySort2);
+				return Strategy.ExistCompositeAssociation(PersonMeta.CompanyWhereFirstPerson);
+			}
+		}
+
+
+		virtual public Allors.Extent<global::Domain.Company> CompaniesWhereOwner
+		{ 
+			get
+			{
+				return Strategy.GetCompositeAssociations(PersonMeta.CompaniesWhereOwner);
+			}
+		}
+
+		virtual public bool ExistCompaniesWhereOwner
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociations(PersonMeta.CompaniesWhereOwner);
+			}
+		}
+
+
+		virtual public Allors.Extent<global::Domain.Company> CompaniesWhereIndexedMany2ManyPerson
+		{ 
+			get
+			{
+				return Strategy.GetCompositeAssociations(PersonMeta.CompaniesWhereIndexedMany2ManyPerson);
+			}
+		}
+
+		virtual public bool ExistCompaniesWhereIndexedMany2ManyPerson
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociations(PersonMeta.CompaniesWhereIndexedMany2ManyPerson);
+			}
+		}
+
+
+		virtual public global::Domain.Company CompanyWherePersonOneSort1
+		{ 
+			get
+			{
+				return (global::Domain.Company) Strategy.GetCompositeAssociation(PersonMeta.CompanyWherePersonOneSort1);
+			}
+		} 
+
+		virtual public bool ExistCompanyWherePersonOneSort1
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociation(PersonMeta.CompanyWherePersonOneSort1);
+			}
+		}
+
+
+		virtual public Allors.Extent<global::Domain.Company> CompaniesWherePersonManySort1
+		{ 
+			get
+			{
+				return Strategy.GetCompositeAssociations(PersonMeta.CompaniesWherePersonManySort1);
+			}
+		}
+
+		virtual public bool ExistCompaniesWherePersonManySort1
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociations(PersonMeta.CompaniesWherePersonManySort1);
+			}
+		}
+
+
+		virtual public Allors.Extent<global::Domain.Company> CompaniesWherePersonManySort2
+		{ 
+			get
+			{
+				return Strategy.GetCompositeAssociations(PersonMeta.CompaniesWherePersonManySort2);
+			}
+		}
+
+		virtual public bool ExistCompaniesWherePersonManySort2
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociations(PersonMeta.CompaniesWherePersonManySort2);
+			}
+		}
+
+
+		virtual public global::Domain.Company CompanyWherePersonOneSort2
+		{ 
+			get
+			{
+				return (global::Domain.Company) Strategy.GetCompositeAssociation(PersonMeta.CompanyWherePersonOneSort2);
+			}
+		} 
+
+		virtual public bool ExistCompanyWherePersonOneSort2
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociation(PersonMeta.CompanyWherePersonOneSort2);
+			}
+		}
+
+
+		virtual public Allors.Extent<global::Domain.Company> CompaniesWhereMany2ManyPerson
+		{ 
+			get
+			{
+				return Strategy.GetCompositeAssociations(PersonMeta.CompaniesWhereMany2ManyPerson);
+			}
+		}
+
+		virtual public bool ExistCompaniesWhereMany2ManyPerson
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociations(PersonMeta.CompaniesWhereMany2ManyPerson);
+			}
+		}
+
+
+		virtual public global::Domain.Company CompanyWhereNamedOneSort2
+		{ 
+			get
+			{
+				return (global::Domain.Company) Strategy.GetCompositeAssociation(PersonMeta.CompanyWhereNamedOneSort2);
+			}
+		} 
+
+		virtual public bool ExistCompanyWhereNamedOneSort2
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociation(PersonMeta.CompanyWhereNamedOneSort2);
 			}
 		}
 
@@ -361,19 +344,36 @@ namespace Domain
 		}
 
 
-		virtual public global::Domain.Company CompanyWhereNamedOneSort2
+		virtual public Allors.Extent<global::Domain.Company> CompaniesWhereNamedManySort2
 		{ 
 			get
 			{
-				return (global::Domain.Company) Strategy.GetCompositeAssociation(PersonMeta.CompanyWhereNamedOneSort2);
+				return Strategy.GetCompositeAssociations(PersonMeta.CompaniesWhereNamedManySort2);
 			}
-		} 
+		}
 
-		virtual public bool ExistCompanyWhereNamedOneSort2
+		virtual public bool ExistCompaniesWhereNamedManySort2
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociation(PersonMeta.CompanyWhereNamedOneSort2);
+				return Strategy.ExistCompositeAssociations(PersonMeta.CompaniesWhereNamedManySort2);
+			}
+		}
+
+
+		virtual public global::Domain.Company CompanyWhereNamedOneSort1
+		{ 
+			get
+			{
+				return (global::Domain.Company) Strategy.GetCompositeAssociation(PersonMeta.CompanyWhereNamedOneSort1);
+			}
+		} 
+
+		virtual public bool ExistCompanyWhereNamedOneSort1
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociation(PersonMeta.CompanyWhereNamedOneSort1);
 			}
 		}
 

@@ -129,33 +129,6 @@ namespace Allors.Adapters.Special
                 {
                     Assert.AreEqual(id, nextId - 1);
                 }
-
-                id = nextId;
-                objectCount = this.GetExtent(C1Meta.ObjectType).Length;
-
-                exceptionThrown = false;
-                try
-                {
-                    this.Session.Create(A1Meta.ObjectType);
-                }
-                catch
-                {
-                    exceptionThrown = true;
-                }
-
-                Assert.IsTrue(exceptionThrown);
-                Assert.AreEqual(objectCount, this.GetExtent(C1Meta.ObjectType).Length);
-
-                nextId = long.Parse(this.Session.Create<C1>().Strategy.ObjectId.ToString());
-
-                if (this.Session.Population is IWorkspace)
-                {
-                    Assert.AreEqual(id, nextId + 1);
-                }
-                else
-                {
-                    Assert.AreEqual(id, nextId - 1);
-                }
             }
         }
 
@@ -228,32 +201,6 @@ namespace Allors.Adapters.Special
                 Assert.AreEqual(objectCount, this.GetExtent(C1Meta.ObjectType).Length);
 
                 long nextId = long.Parse(this.Session.Create<C1>().Strategy.ObjectId.ToString());
-                if (this.Session.Population is IWorkspace)
-                {
-                    Assert.AreEqual(id, nextId + 1);
-                }
-                else
-                {
-                    Assert.AreEqual(id, nextId - 1);
-                }
-
-                id = nextId;
-                objectCount = this.GetExtent(C1Meta.ObjectType).Length;
-
-                exceptionThrown = false;
-                try
-                {
-                    this.Session.Create(A1Meta.ObjectType, 1);
-                }
-                catch
-                {
-                    exceptionThrown = true;
-                }
-
-                Assert.IsTrue(exceptionThrown);
-                Assert.AreEqual(objectCount, this.GetExtent(C1Meta.ObjectType).Length);
-
-                nextId = long.Parse(this.Session.Create<C1>().Strategy.ObjectId.ToString());
                 if (this.Session.Population is IWorkspace)
                 {
                     Assert.AreEqual(id, nextId + 1);

@@ -418,9 +418,9 @@ namespace Allors.Adapters.Special
                 {
                     this.c1A = C1.Create(saveSession);
                     this.c1A.C1AllorsString = "> <";
-                    this.c1A.A1AllorsString = "< >";
                     this.c1A.I1AllorsString = "& &&";
                     this.c1A.S1AllorsString = "' \" ''";
+                    this.c1A.S1234AllorsString = "< >";
 
                     this.c1Empty = C1.Create(saveSession);
 
@@ -445,9 +445,9 @@ namespace Allors.Adapters.Special
                         var copyValues = C1.Instantiate(session, this.c1A.Strategy.ObjectId);
 
                         Assert.AreEqual(this.c1A.C1AllorsString, copyValues.C1AllorsString);
-                        Assert.AreEqual(this.c1A.A1AllorsString, copyValues.A1AllorsString);
                         Assert.AreEqual(this.c1A.I1AllorsString, copyValues.I1AllorsString);
                         Assert.AreEqual(this.c1A.S1AllorsString, copyValues.S1AllorsString);
+                        Assert.AreEqual(this.c1A.S1234AllorsString, copyValues.S1234AllorsString);
 
                         var c1EmptyLoaded = C1.Instantiate(session, this.c1Empty.Strategy.ObjectId);
                         Assert.IsNotNull(c1EmptyLoaded);

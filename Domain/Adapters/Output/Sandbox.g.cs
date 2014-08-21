@@ -18,110 +18,6 @@ namespace Domain
 		protected SandboxAllors(Allors.IStrategy allors) : base(allors){}
 
 
-
-		virtual public global::System.String AllorsString 
-		{
-			get
-			{
-				return (global::System.String) Strategy.GetUnitRole(SandboxMeta.AllorsString);
-			}
-			set
-			{
-				Strategy.SetUnitRole(SandboxMeta.AllorsString, value);
-			}
-		}
-
-		virtual public bool ExistAllorsString{
-			get
-			{
-				return Strategy.ExistUnitRole(SandboxMeta.AllorsString);
-			}
-		}
-
-		virtual public void RemoveAllorsString()
-		{
-			Strategy.RemoveUnitRole(SandboxMeta.AllorsString);
-		}
-
-
-
-		virtual public global::System.String Test 
-		{
-			get
-			{
-				return (global::System.String) Strategy.GetUnitRole(SandboxMeta.Test);
-			}
-			set
-			{
-				Strategy.SetUnitRole(SandboxMeta.Test, value);
-			}
-		}
-
-		virtual public bool ExistTest{
-			get
-			{
-				return Strategy.ExistUnitRole(SandboxMeta.Test);
-			}
-		}
-
-		virtual public void RemoveTest()
-		{
-			Strategy.RemoveUnitRole(SandboxMeta.Test);
-		}
-
-
-
-		virtual public global::System.String InvisibleValue 
-		{
-			get
-			{
-				return (global::System.String) Strategy.GetUnitRole(SandboxMeta.InvisibleValue);
-			}
-			set
-			{
-				Strategy.SetUnitRole(SandboxMeta.InvisibleValue, value);
-			}
-		}
-
-		virtual public bool ExistInvisibleValue{
-			get
-			{
-				return Strategy.ExistUnitRole(SandboxMeta.InvisibleValue);
-			}
-		}
-
-		virtual public void RemoveInvisibleValue()
-		{
-			Strategy.RemoveUnitRole(SandboxMeta.InvisibleValue);
-		}
-
-
-		virtual public global::Domain.Sandbox InvisibleOne
-		{ 
-			get
-			{
-				return (global::Domain.Sandbox) Strategy.GetCompositeRole(SandboxMeta.InvisibleOne);
-			}
-			set
-			{
-				Strategy.SetCompositeRole(SandboxMeta.InvisibleOne ,value);
-			}
-		}
-
-		virtual public bool ExistInvisibleOne
-		{
-			get
-			{
-				return Strategy.ExistCompositeRole(SandboxMeta.InvisibleOne);
-			}
-		}
-
-		virtual public void RemoveInvisibleOne()
-		{
-			Strategy.RemoveCompositeRole(SandboxMeta.InvisibleOne);
-		}
-
-
 		virtual public Allors.Extent<global::Domain.Sandbox> InvisibleManies
 		{ 
 			get
@@ -158,22 +54,109 @@ namespace Domain
 		}
 
 
-
-		virtual public global::Domain.Sandbox SandboxWhereInvisibleOne
+		virtual public global::Domain.Sandbox InvisibleOne
 		{ 
 			get
 			{
-				return (global::Domain.Sandbox) Strategy.GetCompositeAssociation(SandboxMeta.SandboxWhereInvisibleOne);
+				return (global::Domain.Sandbox) Strategy.GetCompositeRole(SandboxMeta.InvisibleOne);
 			}
-		} 
+			set
+			{
+				Strategy.SetCompositeRole(SandboxMeta.InvisibleOne ,value);
+			}
+		}
 
-		virtual public bool ExistSandboxWhereInvisibleOne
+		virtual public bool ExistInvisibleOne
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociation(SandboxMeta.SandboxWhereInvisibleOne);
+				return Strategy.ExistCompositeRole(SandboxMeta.InvisibleOne);
 			}
 		}
+
+		virtual public void RemoveInvisibleOne()
+		{
+			Strategy.RemoveCompositeRole(SandboxMeta.InvisibleOne);
+		}
+
+
+
+		virtual public global::System.String InvisibleValue 
+		{
+			get
+			{
+				return (global::System.String) Strategy.GetUnitRole(SandboxMeta.InvisibleValue);
+			}
+			set
+			{
+				Strategy.SetUnitRole(SandboxMeta.InvisibleValue, value);
+			}
+		}
+
+		virtual public bool ExistInvisibleValue{
+			get
+			{
+				return Strategy.ExistUnitRole(SandboxMeta.InvisibleValue);
+			}
+		}
+
+		virtual public void RemoveInvisibleValue()
+		{
+			Strategy.RemoveUnitRole(SandboxMeta.InvisibleValue);
+		}
+
+
+
+		virtual public global::System.String Test 
+		{
+			get
+			{
+				return (global::System.String) Strategy.GetUnitRole(SandboxMeta.Test);
+			}
+			set
+			{
+				Strategy.SetUnitRole(SandboxMeta.Test, value);
+			}
+		}
+
+		virtual public bool ExistTest{
+			get
+			{
+				return Strategy.ExistUnitRole(SandboxMeta.Test);
+			}
+		}
+
+		virtual public void RemoveTest()
+		{
+			Strategy.RemoveUnitRole(SandboxMeta.Test);
+		}
+
+
+
+		virtual public global::System.String AllorsString 
+		{
+			get
+			{
+				return (global::System.String) Strategy.GetUnitRole(SandboxMeta.AllorsString);
+			}
+			set
+			{
+				Strategy.SetUnitRole(SandboxMeta.AllorsString, value);
+			}
+		}
+
+		virtual public bool ExistAllorsString{
+			get
+			{
+				return Strategy.ExistUnitRole(SandboxMeta.AllorsString);
+			}
+		}
+
+		virtual public void RemoveAllorsString()
+		{
+			Strategy.RemoveUnitRole(SandboxMeta.AllorsString);
+		}
+
 
 
 		virtual public Allors.Extent<global::Domain.Sandbox> SandboxesWhereInvisibleMany
@@ -189,6 +172,23 @@ namespace Domain
 			get
 			{
 				return Strategy.ExistCompositeAssociations(SandboxMeta.SandboxesWhereInvisibleMany);
+			}
+		}
+
+
+		virtual public global::Domain.Sandbox SandboxWhereInvisibleOne
+		{ 
+			get
+			{
+				return (global::Domain.Sandbox) Strategy.GetCompositeAssociation(SandboxMeta.SandboxWhereInvisibleOne);
+			}
+		} 
+
+		virtual public bool ExistSandboxWhereInvisibleOne
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociation(SandboxMeta.SandboxWhereInvisibleOne);
 			}
 		}
 

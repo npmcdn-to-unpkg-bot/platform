@@ -58,7 +58,7 @@ namespace Domain
             }
         }
 
-        public override void AnS1234Method()
+        public void AnS1234Method()
         {
         }
     }

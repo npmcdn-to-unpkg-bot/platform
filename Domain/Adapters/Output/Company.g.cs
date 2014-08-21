@@ -18,451 +18,29 @@ namespace Domain
 		protected CompanyAllors(Allors.IStrategy allors) : base(allors){}
 
 
-		virtual public Allors.Extent<global::Domain.Named> NamedsOneSort1
+		virtual public global::Domain.Person Manager
 		{ 
 			get
 			{
-				return Strategy.GetCompositeRoles(CompanyMeta.NamedOneSort1);
+				return (global::Domain.Person) Strategy.GetCompositeRole(CompanyMeta.Manager);
 			}
 			set
 			{
-				Strategy.SetCompositeRoles(CompanyMeta.NamedOneSort1, value);
+				Strategy.SetCompositeRole(CompanyMeta.Manager ,value);
 			}
 		}
 
-		virtual public void AddNamedOneSort1 (global::Domain.Named value)
-		{
-			Strategy.AddCompositeRole(CompanyMeta.NamedOneSort1, value);
-		}
-
-		virtual public void RemoveNamedOneSort1 (global::Domain.Named value)
-		{
-			Strategy.RemoveCompositeRole(CompanyMeta.NamedOneSort1,value);
-		}
-
-		virtual public bool ExistNamedsOneSort1
+		virtual public bool ExistManager
 		{
 			get
 			{
-				return Strategy.ExistCompositeRoles(CompanyMeta.NamedOneSort1);
+				return Strategy.ExistCompositeRole(CompanyMeta.Manager);
 			}
 		}
 
-		virtual public void RemoveNamedsOneSort1()
+		virtual public void RemoveManager()
 		{
-			Strategy.RemoveCompositeRoles(CompanyMeta.NamedOneSort1);
-		}
-
-
-		virtual public Allors.Extent<global::Domain.Company> Children
-		{ 
-			get
-			{
-				return Strategy.GetCompositeRoles(CompanyMeta.Child);
-			}
-			set
-			{
-				Strategy.SetCompositeRoles(CompanyMeta.Child, value);
-			}
-		}
-
-		virtual public void AddChild (global::Domain.Company value)
-		{
-			Strategy.AddCompositeRole(CompanyMeta.Child, value);
-		}
-
-		virtual public void RemoveChild (global::Domain.Company value)
-		{
-			Strategy.RemoveCompositeRole(CompanyMeta.Child,value);
-		}
-
-		virtual public bool ExistChildren
-		{
-			get
-			{
-				return Strategy.ExistCompositeRoles(CompanyMeta.Child);
-			}
-		}
-
-		virtual public void RemoveChildren()
-		{
-			Strategy.RemoveCompositeRoles(CompanyMeta.Child);
-		}
-
-
-		virtual public Allors.Extent<global::Domain.Person> Many2ManyPersons
-		{ 
-			get
-			{
-				return Strategy.GetCompositeRoles(CompanyMeta.Many2ManyPerson);
-			}
-			set
-			{
-				Strategy.SetCompositeRoles(CompanyMeta.Many2ManyPerson, value);
-			}
-		}
-
-		virtual public void AddMany2ManyPerson (global::Domain.Person value)
-		{
-			Strategy.AddCompositeRole(CompanyMeta.Many2ManyPerson, value);
-		}
-
-		virtual public void RemoveMany2ManyPerson (global::Domain.Person value)
-		{
-			Strategy.RemoveCompositeRole(CompanyMeta.Many2ManyPerson,value);
-		}
-
-		virtual public bool ExistMany2ManyPersons
-		{
-			get
-			{
-				return Strategy.ExistCompositeRoles(CompanyMeta.Many2ManyPerson);
-			}
-		}
-
-		virtual public void RemoveMany2ManyPersons()
-		{
-			Strategy.RemoveCompositeRoles(CompanyMeta.Many2ManyPerson);
-		}
-
-
-		virtual public global::Domain.Named NamedManySort2
-		{ 
-			get
-			{
-				return (global::Domain.Named) Strategy.GetCompositeRole(CompanyMeta.NamedManySort2);
-			}
-			set
-			{
-				Strategy.SetCompositeRole(CompanyMeta.NamedManySort2 ,value);
-			}
-		}
-
-		virtual public bool ExistNamedManySort2
-		{
-			get
-			{
-				return Strategy.ExistCompositeRole(CompanyMeta.NamedManySort2);
-			}
-		}
-
-		virtual public void RemoveNamedManySort2()
-		{
-			Strategy.RemoveCompositeRole(CompanyMeta.NamedManySort2);
-		}
-
-
-		virtual public Allors.Extent<global::Domain.Person> PersonsOneSort2
-		{ 
-			get
-			{
-				return Strategy.GetCompositeRoles(CompanyMeta.PersonOneSort2);
-			}
-			set
-			{
-				Strategy.SetCompositeRoles(CompanyMeta.PersonOneSort2, value);
-			}
-		}
-
-		virtual public void AddPersonOneSort2 (global::Domain.Person value)
-		{
-			Strategy.AddCompositeRole(CompanyMeta.PersonOneSort2, value);
-		}
-
-		virtual public void RemovePersonOneSort2 (global::Domain.Person value)
-		{
-			Strategy.RemoveCompositeRole(CompanyMeta.PersonOneSort2,value);
-		}
-
-		virtual public bool ExistPersonsOneSort2
-		{
-			get
-			{
-				return Strategy.ExistCompositeRoles(CompanyMeta.PersonOneSort2);
-			}
-		}
-
-		virtual public void RemovePersonsOneSort2()
-		{
-			Strategy.RemoveCompositeRoles(CompanyMeta.PersonOneSort2);
-		}
-
-
-		virtual public Allors.Extent<global::Domain.Person> PersonsManySort2
-		{ 
-			get
-			{
-				return Strategy.GetCompositeRoles(CompanyMeta.PersonManySort2);
-			}
-			set
-			{
-				Strategy.SetCompositeRoles(CompanyMeta.PersonManySort2, value);
-			}
-		}
-
-		virtual public void AddPersonManySort2 (global::Domain.Person value)
-		{
-			Strategy.AddCompositeRole(CompanyMeta.PersonManySort2, value);
-		}
-
-		virtual public void RemovePersonManySort2 (global::Domain.Person value)
-		{
-			Strategy.RemoveCompositeRole(CompanyMeta.PersonManySort2,value);
-		}
-
-		virtual public bool ExistPersonsManySort2
-		{
-			get
-			{
-				return Strategy.ExistCompositeRoles(CompanyMeta.PersonManySort2);
-			}
-		}
-
-		virtual public void RemovePersonsManySort2()
-		{
-			Strategy.RemoveCompositeRoles(CompanyMeta.PersonManySort2);
-		}
-
-
-		virtual public Allors.Extent<global::Domain.Named> NamedsManySort1
-		{ 
-			get
-			{
-				return Strategy.GetCompositeRoles(CompanyMeta.NamedManySort1);
-			}
-			set
-			{
-				Strategy.SetCompositeRoles(CompanyMeta.NamedManySort1, value);
-			}
-		}
-
-		virtual public void AddNamedManySort1 (global::Domain.Named value)
-		{
-			Strategy.AddCompositeRole(CompanyMeta.NamedManySort1, value);
-		}
-
-		virtual public void RemoveNamedManySort1 (global::Domain.Named value)
-		{
-			Strategy.RemoveCompositeRole(CompanyMeta.NamedManySort1,value);
-		}
-
-		virtual public bool ExistNamedsManySort1
-		{
-			get
-			{
-				return Strategy.ExistCompositeRoles(CompanyMeta.NamedManySort1);
-			}
-		}
-
-		virtual public void RemoveNamedsManySort1()
-		{
-			Strategy.RemoveCompositeRoles(CompanyMeta.NamedManySort1);
-		}
-
-
-		virtual public Allors.Extent<global::Domain.Person> PersonsManySort1
-		{ 
-			get
-			{
-				return Strategy.GetCompositeRoles(CompanyMeta.PersonManySort1);
-			}
-			set
-			{
-				Strategy.SetCompositeRoles(CompanyMeta.PersonManySort1, value);
-			}
-		}
-
-		virtual public void AddPersonManySort1 (global::Domain.Person value)
-		{
-			Strategy.AddCompositeRole(CompanyMeta.PersonManySort1, value);
-		}
-
-		virtual public void RemovePersonManySort1 (global::Domain.Person value)
-		{
-			Strategy.RemoveCompositeRole(CompanyMeta.PersonManySort1,value);
-		}
-
-		virtual public bool ExistPersonsManySort1
-		{
-			get
-			{
-				return Strategy.ExistCompositeRoles(CompanyMeta.PersonManySort1);
-			}
-		}
-
-		virtual public void RemovePersonsManySort1()
-		{
-			Strategy.RemoveCompositeRoles(CompanyMeta.PersonManySort1);
-		}
-
-
-		virtual public Allors.Extent<global::Domain.Person> PersonsOneSort1
-		{ 
-			get
-			{
-				return Strategy.GetCompositeRoles(CompanyMeta.PersonOneSort1);
-			}
-			set
-			{
-				Strategy.SetCompositeRoles(CompanyMeta.PersonOneSort1, value);
-			}
-		}
-
-		virtual public void AddPersonOneSort1 (global::Domain.Person value)
-		{
-			Strategy.AddCompositeRole(CompanyMeta.PersonOneSort1, value);
-		}
-
-		virtual public void RemovePersonOneSort1 (global::Domain.Person value)
-		{
-			Strategy.RemoveCompositeRole(CompanyMeta.PersonOneSort1,value);
-		}
-
-		virtual public bool ExistPersonsOneSort1
-		{
-			get
-			{
-				return Strategy.ExistCompositeRoles(CompanyMeta.PersonOneSort1);
-			}
-		}
-
-		virtual public void RemovePersonsOneSort1()
-		{
-			Strategy.RemoveCompositeRoles(CompanyMeta.PersonOneSort1);
-		}
-
-
-		virtual public Allors.Extent<global::Domain.Person> IndexedMany2ManyPersons
-		{ 
-			get
-			{
-				return Strategy.GetCompositeRoles(CompanyMeta.IndexedMany2ManyPerson);
-			}
-			set
-			{
-				Strategy.SetCompositeRoles(CompanyMeta.IndexedMany2ManyPerson, value);
-			}
-		}
-
-		virtual public void AddIndexedMany2ManyPerson (global::Domain.Person value)
-		{
-			Strategy.AddCompositeRole(CompanyMeta.IndexedMany2ManyPerson, value);
-		}
-
-		virtual public void RemoveIndexedMany2ManyPerson (global::Domain.Person value)
-		{
-			Strategy.RemoveCompositeRole(CompanyMeta.IndexedMany2ManyPerson,value);
-		}
-
-		virtual public bool ExistIndexedMany2ManyPersons
-		{
-			get
-			{
-				return Strategy.ExistCompositeRoles(CompanyMeta.IndexedMany2ManyPerson);
-			}
-		}
-
-		virtual public void RemoveIndexedMany2ManyPersons()
-		{
-			Strategy.RemoveCompositeRoles(CompanyMeta.IndexedMany2ManyPerson);
-		}
-
-
-		virtual public Allors.Extent<global::Domain.Person> Owners
-		{ 
-			get
-			{
-				return Strategy.GetCompositeRoles(CompanyMeta.Owner);
-			}
-			set
-			{
-				Strategy.SetCompositeRoles(CompanyMeta.Owner, value);
-			}
-		}
-
-		virtual public void AddOwner (global::Domain.Person value)
-		{
-			Strategy.AddCompositeRole(CompanyMeta.Owner, value);
-		}
-
-		virtual public void RemoveOwner (global::Domain.Person value)
-		{
-			Strategy.RemoveCompositeRole(CompanyMeta.Owner,value);
-		}
-
-		virtual public bool ExistOwners
-		{
-			get
-			{
-				return Strategy.ExistCompositeRoles(CompanyMeta.Owner);
-			}
-		}
-
-		virtual public void RemoveOwners()
-		{
-			Strategy.RemoveCompositeRoles(CompanyMeta.Owner);
-		}
-
-
-		virtual public Allors.Extent<global::Domain.Named> NamedsOneSort2
-		{ 
-			get
-			{
-				return Strategy.GetCompositeRoles(CompanyMeta.NamedOneSort2);
-			}
-			set
-			{
-				Strategy.SetCompositeRoles(CompanyMeta.NamedOneSort2, value);
-			}
-		}
-
-		virtual public void AddNamedOneSort2 (global::Domain.Named value)
-		{
-			Strategy.AddCompositeRole(CompanyMeta.NamedOneSort2, value);
-		}
-
-		virtual public void RemoveNamedOneSort2 (global::Domain.Named value)
-		{
-			Strategy.RemoveCompositeRole(CompanyMeta.NamedOneSort2,value);
-		}
-
-		virtual public bool ExistNamedsOneSort2
-		{
-			get
-			{
-				return Strategy.ExistCompositeRoles(CompanyMeta.NamedOneSort2);
-			}
-		}
-
-		virtual public void RemoveNamedsOneSort2()
-		{
-			Strategy.RemoveCompositeRoles(CompanyMeta.NamedOneSort2);
-		}
-
-
-		virtual public global::Domain.Person FirstPerson
-		{ 
-			get
-			{
-				return (global::Domain.Person) Strategy.GetCompositeRole(CompanyMeta.FirstPerson);
-			}
-			set
-			{
-				Strategy.SetCompositeRole(CompanyMeta.FirstPerson ,value);
-			}
-		}
-
-		virtual public bool ExistFirstPerson
-		{
-			get
-			{
-				return Strategy.ExistCompositeRole(CompanyMeta.FirstPerson);
-			}
-		}
-
-		virtual public void RemoveFirstPerson()
-		{
-			Strategy.RemoveCompositeRole(CompanyMeta.FirstPerson);
+			Strategy.RemoveCompositeRole(CompanyMeta.Manager);
 		}
 
 
@@ -502,55 +80,451 @@ namespace Domain
 		}
 
 
-		virtual public global::Domain.Person Manager
+		virtual public global::Domain.Person FirstPerson
 		{ 
 			get
 			{
-				return (global::Domain.Person) Strategy.GetCompositeRole(CompanyMeta.Manager);
+				return (global::Domain.Person) Strategy.GetCompositeRole(CompanyMeta.FirstPerson);
 			}
 			set
 			{
-				Strategy.SetCompositeRole(CompanyMeta.Manager ,value);
+				Strategy.SetCompositeRole(CompanyMeta.FirstPerson ,value);
 			}
 		}
 
-		virtual public bool ExistManager
+		virtual public bool ExistFirstPerson
 		{
 			get
 			{
-				return Strategy.ExistCompositeRole(CompanyMeta.Manager);
+				return Strategy.ExistCompositeRole(CompanyMeta.FirstPerson);
 			}
 		}
 
-		virtual public void RemoveManager()
+		virtual public void RemoveFirstPerson()
 		{
-			Strategy.RemoveCompositeRole(CompanyMeta.Manager);
+			Strategy.RemoveCompositeRole(CompanyMeta.FirstPerson);
 		}
 
 
-
-		virtual public global::System.Int32? Index 
-		{
+		virtual public Allors.Extent<global::Domain.Named> NamedsOneSort2
+		{ 
 			get
 			{
-				return (global::System.Int32?) Strategy.GetUnitRole(CompanyMeta.Index);
+				return Strategy.GetCompositeRoles(CompanyMeta.NamedOneSort2);
 			}
 			set
 			{
-				Strategy.SetUnitRole(CompanyMeta.Index, value);
+				Strategy.SetCompositeRoles(CompanyMeta.NamedOneSort2, value);
 			}
 		}
 
-		virtual public bool ExistIndex{
+		virtual public void AddNamedOneSort2 (global::Domain.Named value)
+		{
+			Strategy.AddCompositeRole(CompanyMeta.NamedOneSort2, value);
+		}
+
+		virtual public void RemoveNamedOneSort2 (global::Domain.Named value)
+		{
+			Strategy.RemoveCompositeRole(CompanyMeta.NamedOneSort2,value);
+		}
+
+		virtual public bool ExistNamedsOneSort2
+		{
 			get
 			{
-				return Strategy.ExistUnitRole(CompanyMeta.Index);
+				return Strategy.ExistCompositeRoles(CompanyMeta.NamedOneSort2);
 			}
 		}
 
-		virtual public void RemoveIndex()
+		virtual public void RemoveNamedsOneSort2()
 		{
-			Strategy.RemoveUnitRole(CompanyMeta.Index);
+			Strategy.RemoveCompositeRoles(CompanyMeta.NamedOneSort2);
+		}
+
+
+		virtual public Allors.Extent<global::Domain.Person> Owners
+		{ 
+			get
+			{
+				return Strategy.GetCompositeRoles(CompanyMeta.Owner);
+			}
+			set
+			{
+				Strategy.SetCompositeRoles(CompanyMeta.Owner, value);
+			}
+		}
+
+		virtual public void AddOwner (global::Domain.Person value)
+		{
+			Strategy.AddCompositeRole(CompanyMeta.Owner, value);
+		}
+
+		virtual public void RemoveOwner (global::Domain.Person value)
+		{
+			Strategy.RemoveCompositeRole(CompanyMeta.Owner,value);
+		}
+
+		virtual public bool ExistOwners
+		{
+			get
+			{
+				return Strategy.ExistCompositeRoles(CompanyMeta.Owner);
+			}
+		}
+
+		virtual public void RemoveOwners()
+		{
+			Strategy.RemoveCompositeRoles(CompanyMeta.Owner);
+		}
+
+
+		virtual public Allors.Extent<global::Domain.Person> IndexedMany2ManyPersons
+		{ 
+			get
+			{
+				return Strategy.GetCompositeRoles(CompanyMeta.IndexedMany2ManyPerson);
+			}
+			set
+			{
+				Strategy.SetCompositeRoles(CompanyMeta.IndexedMany2ManyPerson, value);
+			}
+		}
+
+		virtual public void AddIndexedMany2ManyPerson (global::Domain.Person value)
+		{
+			Strategy.AddCompositeRole(CompanyMeta.IndexedMany2ManyPerson, value);
+		}
+
+		virtual public void RemoveIndexedMany2ManyPerson (global::Domain.Person value)
+		{
+			Strategy.RemoveCompositeRole(CompanyMeta.IndexedMany2ManyPerson,value);
+		}
+
+		virtual public bool ExistIndexedMany2ManyPersons
+		{
+			get
+			{
+				return Strategy.ExistCompositeRoles(CompanyMeta.IndexedMany2ManyPerson);
+			}
+		}
+
+		virtual public void RemoveIndexedMany2ManyPersons()
+		{
+			Strategy.RemoveCompositeRoles(CompanyMeta.IndexedMany2ManyPerson);
+		}
+
+
+		virtual public Allors.Extent<global::Domain.Person> PersonsOneSort1
+		{ 
+			get
+			{
+				return Strategy.GetCompositeRoles(CompanyMeta.PersonOneSort1);
+			}
+			set
+			{
+				Strategy.SetCompositeRoles(CompanyMeta.PersonOneSort1, value);
+			}
+		}
+
+		virtual public void AddPersonOneSort1 (global::Domain.Person value)
+		{
+			Strategy.AddCompositeRole(CompanyMeta.PersonOneSort1, value);
+		}
+
+		virtual public void RemovePersonOneSort1 (global::Domain.Person value)
+		{
+			Strategy.RemoveCompositeRole(CompanyMeta.PersonOneSort1,value);
+		}
+
+		virtual public bool ExistPersonsOneSort1
+		{
+			get
+			{
+				return Strategy.ExistCompositeRoles(CompanyMeta.PersonOneSort1);
+			}
+		}
+
+		virtual public void RemovePersonsOneSort1()
+		{
+			Strategy.RemoveCompositeRoles(CompanyMeta.PersonOneSort1);
+		}
+
+
+		virtual public Allors.Extent<global::Domain.Person> PersonsManySort1
+		{ 
+			get
+			{
+				return Strategy.GetCompositeRoles(CompanyMeta.PersonManySort1);
+			}
+			set
+			{
+				Strategy.SetCompositeRoles(CompanyMeta.PersonManySort1, value);
+			}
+		}
+
+		virtual public void AddPersonManySort1 (global::Domain.Person value)
+		{
+			Strategy.AddCompositeRole(CompanyMeta.PersonManySort1, value);
+		}
+
+		virtual public void RemovePersonManySort1 (global::Domain.Person value)
+		{
+			Strategy.RemoveCompositeRole(CompanyMeta.PersonManySort1,value);
+		}
+
+		virtual public bool ExistPersonsManySort1
+		{
+			get
+			{
+				return Strategy.ExistCompositeRoles(CompanyMeta.PersonManySort1);
+			}
+		}
+
+		virtual public void RemovePersonsManySort1()
+		{
+			Strategy.RemoveCompositeRoles(CompanyMeta.PersonManySort1);
+		}
+
+
+		virtual public Allors.Extent<global::Domain.Named> NamedsManySort1
+		{ 
+			get
+			{
+				return Strategy.GetCompositeRoles(CompanyMeta.NamedManySort1);
+			}
+			set
+			{
+				Strategy.SetCompositeRoles(CompanyMeta.NamedManySort1, value);
+			}
+		}
+
+		virtual public void AddNamedManySort1 (global::Domain.Named value)
+		{
+			Strategy.AddCompositeRole(CompanyMeta.NamedManySort1, value);
+		}
+
+		virtual public void RemoveNamedManySort1 (global::Domain.Named value)
+		{
+			Strategy.RemoveCompositeRole(CompanyMeta.NamedManySort1,value);
+		}
+
+		virtual public bool ExistNamedsManySort1
+		{
+			get
+			{
+				return Strategy.ExistCompositeRoles(CompanyMeta.NamedManySort1);
+			}
+		}
+
+		virtual public void RemoveNamedsManySort1()
+		{
+			Strategy.RemoveCompositeRoles(CompanyMeta.NamedManySort1);
+		}
+
+
+		virtual public Allors.Extent<global::Domain.Person> PersonsManySort2
+		{ 
+			get
+			{
+				return Strategy.GetCompositeRoles(CompanyMeta.PersonManySort2);
+			}
+			set
+			{
+				Strategy.SetCompositeRoles(CompanyMeta.PersonManySort2, value);
+			}
+		}
+
+		virtual public void AddPersonManySort2 (global::Domain.Person value)
+		{
+			Strategy.AddCompositeRole(CompanyMeta.PersonManySort2, value);
+		}
+
+		virtual public void RemovePersonManySort2 (global::Domain.Person value)
+		{
+			Strategy.RemoveCompositeRole(CompanyMeta.PersonManySort2,value);
+		}
+
+		virtual public bool ExistPersonsManySort2
+		{
+			get
+			{
+				return Strategy.ExistCompositeRoles(CompanyMeta.PersonManySort2);
+			}
+		}
+
+		virtual public void RemovePersonsManySort2()
+		{
+			Strategy.RemoveCompositeRoles(CompanyMeta.PersonManySort2);
+		}
+
+
+		virtual public Allors.Extent<global::Domain.Person> PersonsOneSort2
+		{ 
+			get
+			{
+				return Strategy.GetCompositeRoles(CompanyMeta.PersonOneSort2);
+			}
+			set
+			{
+				Strategy.SetCompositeRoles(CompanyMeta.PersonOneSort2, value);
+			}
+		}
+
+		virtual public void AddPersonOneSort2 (global::Domain.Person value)
+		{
+			Strategy.AddCompositeRole(CompanyMeta.PersonOneSort2, value);
+		}
+
+		virtual public void RemovePersonOneSort2 (global::Domain.Person value)
+		{
+			Strategy.RemoveCompositeRole(CompanyMeta.PersonOneSort2,value);
+		}
+
+		virtual public bool ExistPersonsOneSort2
+		{
+			get
+			{
+				return Strategy.ExistCompositeRoles(CompanyMeta.PersonOneSort2);
+			}
+		}
+
+		virtual public void RemovePersonsOneSort2()
+		{
+			Strategy.RemoveCompositeRoles(CompanyMeta.PersonOneSort2);
+		}
+
+
+		virtual public global::Domain.Named NamedManySort2
+		{ 
+			get
+			{
+				return (global::Domain.Named) Strategy.GetCompositeRole(CompanyMeta.NamedManySort2);
+			}
+			set
+			{
+				Strategy.SetCompositeRole(CompanyMeta.NamedManySort2 ,value);
+			}
+		}
+
+		virtual public bool ExistNamedManySort2
+		{
+			get
+			{
+				return Strategy.ExistCompositeRole(CompanyMeta.NamedManySort2);
+			}
+		}
+
+		virtual public void RemoveNamedManySort2()
+		{
+			Strategy.RemoveCompositeRole(CompanyMeta.NamedManySort2);
+		}
+
+
+		virtual public Allors.Extent<global::Domain.Person> Many2ManyPersons
+		{ 
+			get
+			{
+				return Strategy.GetCompositeRoles(CompanyMeta.Many2ManyPerson);
+			}
+			set
+			{
+				Strategy.SetCompositeRoles(CompanyMeta.Many2ManyPerson, value);
+			}
+		}
+
+		virtual public void AddMany2ManyPerson (global::Domain.Person value)
+		{
+			Strategy.AddCompositeRole(CompanyMeta.Many2ManyPerson, value);
+		}
+
+		virtual public void RemoveMany2ManyPerson (global::Domain.Person value)
+		{
+			Strategy.RemoveCompositeRole(CompanyMeta.Many2ManyPerson,value);
+		}
+
+		virtual public bool ExistMany2ManyPersons
+		{
+			get
+			{
+				return Strategy.ExistCompositeRoles(CompanyMeta.Many2ManyPerson);
+			}
+		}
+
+		virtual public void RemoveMany2ManyPersons()
+		{
+			Strategy.RemoveCompositeRoles(CompanyMeta.Many2ManyPerson);
+		}
+
+
+		virtual public Allors.Extent<global::Domain.Company> Children
+		{ 
+			get
+			{
+				return Strategy.GetCompositeRoles(CompanyMeta.Child);
+			}
+			set
+			{
+				Strategy.SetCompositeRoles(CompanyMeta.Child, value);
+			}
+		}
+
+		virtual public void AddChild (global::Domain.Company value)
+		{
+			Strategy.AddCompositeRole(CompanyMeta.Child, value);
+		}
+
+		virtual public void RemoveChild (global::Domain.Company value)
+		{
+			Strategy.RemoveCompositeRole(CompanyMeta.Child,value);
+		}
+
+		virtual public bool ExistChildren
+		{
+			get
+			{
+				return Strategy.ExistCompositeRoles(CompanyMeta.Child);
+			}
+		}
+
+		virtual public void RemoveChildren()
+		{
+			Strategy.RemoveCompositeRoles(CompanyMeta.Child);
+		}
+
+
+		virtual public Allors.Extent<global::Domain.Named> NamedsOneSort1
+		{ 
+			get
+			{
+				return Strategy.GetCompositeRoles(CompanyMeta.NamedOneSort1);
+			}
+			set
+			{
+				Strategy.SetCompositeRoles(CompanyMeta.NamedOneSort1, value);
+			}
+		}
+
+		virtual public void AddNamedOneSort1 (global::Domain.Named value)
+		{
+			Strategy.AddCompositeRole(CompanyMeta.NamedOneSort1, value);
+		}
+
+		virtual public void RemoveNamedOneSort1 (global::Domain.Named value)
+		{
+			Strategy.RemoveCompositeRole(CompanyMeta.NamedOneSort1,value);
+		}
+
+		virtual public bool ExistNamedsOneSort1
+		{
+			get
+			{
+				return Strategy.ExistCompositeRoles(CompanyMeta.NamedOneSort1);
+			}
+		}
+
+		virtual public void RemoveNamedsOneSort1()
+		{
+			Strategy.RemoveCompositeRoles(CompanyMeta.NamedOneSort1);
 		}
 
 
@@ -581,21 +555,30 @@ namespace Domain
 
 
 
-		virtual public global::Domain.Company CompanyWhereChild
-		{ 
-			get
-			{
-				return (global::Domain.Company) Strategy.GetCompositeAssociation(CompanyMeta.CompanyWhereChild);
-			}
-		} 
-
-		virtual public bool ExistCompanyWhereChild
+		virtual public global::System.Int32? Index 
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociation(CompanyMeta.CompanyWhereChild);
+				return (global::System.Int32?) Strategy.GetUnitRole(CompanyMeta.Index);
+			}
+			set
+			{
+				Strategy.SetUnitRole(CompanyMeta.Index, value);
 			}
 		}
+
+		virtual public bool ExistIndex{
+			get
+			{
+				return Strategy.ExistUnitRole(CompanyMeta.Index);
+			}
+		}
+
+		virtual public void RemoveIndex()
+		{
+			Strategy.RemoveUnitRole(CompanyMeta.Index);
+		}
+
 
 
 		virtual public Allors.Extent<global::Domain.Person> PersonsWhereCompany
@@ -615,36 +598,36 @@ namespace Domain
 		}
 
 
-		virtual public global::Domain.Company CompanyWhereNamedOneSort1
+		virtual public global::Domain.Company CompanyWhereChild
 		{ 
 			get
 			{
-				return (global::Domain.Company) Strategy.GetCompositeAssociation(CompanyMeta.CompanyWhereNamedOneSort1);
+				return (global::Domain.Company) Strategy.GetCompositeAssociation(CompanyMeta.CompanyWhereChild);
 			}
 		} 
 
-		virtual public bool ExistCompanyWhereNamedOneSort1
+		virtual public bool ExistCompanyWhereChild
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociation(CompanyMeta.CompanyWhereNamedOneSort1);
+				return Strategy.ExistCompositeAssociation(CompanyMeta.CompanyWhereChild);
 			}
 		}
 
 
-		virtual public Allors.Extent<global::Domain.Company> CompaniesWhereNamedManySort2
+		virtual public global::Domain.Company CompanyWhereNamedOneSort2
 		{ 
 			get
 			{
-				return Strategy.GetCompositeAssociations(CompanyMeta.CompaniesWhereNamedManySort2);
+				return (global::Domain.Company) Strategy.GetCompositeAssociation(CompanyMeta.CompanyWhereNamedOneSort2);
 			}
-		}
+		} 
 
-		virtual public bool ExistCompaniesWhereNamedManySort2
+		virtual public bool ExistCompanyWhereNamedOneSort2
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociations(CompanyMeta.CompaniesWhereNamedManySort2);
+				return Strategy.ExistCompositeAssociation(CompanyMeta.CompanyWhereNamedOneSort2);
 			}
 		}
 
@@ -666,19 +649,36 @@ namespace Domain
 		}
 
 
-		virtual public global::Domain.Company CompanyWhereNamedOneSort2
+		virtual public Allors.Extent<global::Domain.Company> CompaniesWhereNamedManySort2
 		{ 
 			get
 			{
-				return (global::Domain.Company) Strategy.GetCompositeAssociation(CompanyMeta.CompanyWhereNamedOneSort2);
+				return Strategy.GetCompositeAssociations(CompanyMeta.CompaniesWhereNamedManySort2);
 			}
-		} 
+		}
 
-		virtual public bool ExistCompanyWhereNamedOneSort2
+		virtual public bool ExistCompaniesWhereNamedManySort2
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociation(CompanyMeta.CompanyWhereNamedOneSort2);
+				return Strategy.ExistCompositeAssociations(CompanyMeta.CompaniesWhereNamedManySort2);
+			}
+		}
+
+
+		virtual public global::Domain.Company CompanyWhereNamedOneSort1
+		{ 
+			get
+			{
+				return (global::Domain.Company) Strategy.GetCompositeAssociation(CompanyMeta.CompanyWhereNamedOneSort1);
+			}
+		} 
+
+		virtual public bool ExistCompanyWhereNamedOneSort1
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociation(CompanyMeta.CompanyWhereNamedOneSort1);
 			}
 		}
 

@@ -20,8 +20,6 @@
 
 namespace Allors.Adapters.Special.Memory.IntegerId
 {
-    using Allors;
-
     using NUnit.Framework;
 
     [TestFixture]

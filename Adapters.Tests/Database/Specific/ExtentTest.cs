@@ -2817,7 +2817,7 @@ namespace Allors.Adapters.Special
 
                 Assert.AreEqual(0, extent.Count);
 
-                // exclusive interface
+                // interface
                 extent = this.LocalExtent(I1Meta.ObjectType);
 
                 extent.Filter.AddEquals(this.c1A);
@@ -2833,7 +2833,6 @@ namespace Allors.Adapters.Special
                 Assert.AreEqual(0, extent.Count);
 
                 // shared interface
-                // exclusive abstract class
                 extent = this.LocalExtent(I12Meta.ObjectType);
 
                 extent.Filter.AddEquals(this.c1A);
@@ -2845,51 +2844,6 @@ namespace Allors.Adapters.Special
                 this.AssertC4(extent, false, false, false, false);
 
                 extent.Filter.AddEquals(this.c1B);
-
-                Assert.AreEqual(0, extent.Count);
-
-                // shared abstract class
-                extent = this.LocalExtent(I34Meta.ObjectType);
-
-                extent.Filter.AddEquals(this.c3A);
-
-                Assert.AreEqual(1, extent.Count);
-                this.AssertC1(extent, false, false, false, false);
-                this.AssertC2(extent, false, false, false, false);
-                this.AssertC3(extent, true, false, false, false);
-                this.AssertC4(extent, false, false, false, false);
-
-                extent.Filter.AddEquals(this.c3B);
-
-                Assert.AreEqual(0, extent.Count);
-
-                // exclusive abstract class
-                extent = this.LocalExtent(A1Meta.ObjectType);
-
-                extent.Filter.AddEquals(this.c1A);
-
-                Assert.AreEqual(1, extent.Count);
-                this.AssertC1(extent, true, false, false, false);
-                this.AssertC2(extent, false, false, false, false);
-                this.AssertC3(extent, false, false, false, false);
-                this.AssertC4(extent, false, false, false, false);
-
-                extent.Filter.AddEquals(this.c1B);
-
-                Assert.AreEqual(0, extent.Count);
-
-                // shared abstract class
-                extent = this.LocalExtent(A34Meta.ObjectType);
-
-                extent.Filter.AddEquals(this.c3A);
-
-                Assert.AreEqual(1, extent.Count);
-                this.AssertC1(extent, false, false, false, false);
-                this.AssertC2(extent, false, false, false, false);
-                this.AssertC3(extent, true, false, false, false);
-                this.AssertC4(extent, false, false, false, false);
-
-                extent.Filter.AddEquals(this.c3B);
 
                 Assert.AreEqual(0, extent.Count);
             }
@@ -2923,7 +2877,7 @@ namespace Allors.Adapters.Special
                 this.AssertC3(extent, false, false, false, false);
                 this.AssertC4(extent, false, false, false, false);
 
-                // exclusive interface
+                // interface
                 extent = this.LocalExtent(I1Meta.ObjectType);
                 not = extent.Filter.AddNot();
                 and = not.AddAnd();
@@ -2944,7 +2898,6 @@ namespace Allors.Adapters.Special
                 this.AssertC4(extent, false, false, false, false);
 
                 // shared interface
-                // exclusive abstract class
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 not = extent.Filter.AddNot();
                 and = not.AddAnd();
@@ -2963,66 +2916,6 @@ namespace Allors.Adapters.Special
                 this.AssertC2(extent, true, true, true, true);
                 this.AssertC3(extent, false, false, false, false);
                 this.AssertC4(extent, false, false, false, false);
-
-                // shared abstract class
-                extent = this.LocalExtent(I34Meta.ObjectType);
-                not = extent.Filter.AddNot();
-                and = not.AddAnd();
-                and.AddEquals(this.c3A);
-
-                Assert.AreEqual(7, extent.Count);
-                this.AssertC1(extent, false, false, false, false);
-                this.AssertC2(extent, false, false, false, false);
-                this.AssertC3(extent, false, true, true, true);
-                this.AssertC4(extent, true, true, true, true);
-
-                and.AddEquals(this.c3B);
-
-                Assert.AreEqual(8, extent.Count);
-                this.AssertC1(extent, false, false, false, false);
-                this.AssertC2(extent, false, false, false, false);
-                this.AssertC3(extent, true, true, true, true);
-                this.AssertC4(extent, true, true, true, true);
-
-                // exclusive abstract class
-                extent = this.LocalExtent(A1Meta.ObjectType);
-                not = extent.Filter.AddNot();
-                and = not.AddAnd();
-                and.AddEquals(this.c1A);
-
-                Assert.AreEqual(3, extent.Count);
-                this.AssertC1(extent, false, true, true, true);
-                this.AssertC2(extent, false, false, false, false);
-                this.AssertC3(extent, false, false, false, false);
-                this.AssertC4(extent, false, false, false, false);
-
-                and.AddEquals(this.c1B);
-
-                Assert.AreEqual(4, extent.Count);
-                this.AssertC1(extent, true, true, true, true);
-                this.AssertC2(extent, false, false, false, false);
-                this.AssertC3(extent, false, false, false, false);
-                this.AssertC4(extent, false, false, false, false);
-
-                // shared abstract class
-                extent = this.LocalExtent(A34Meta.ObjectType);
-                not = extent.Filter.AddNot();
-                and = not.AddAnd();
-                and.AddEquals(this.c3A);
-
-                Assert.AreEqual(7, extent.Count);
-                this.AssertC1(extent, false, false, false, false);
-                this.AssertC2(extent, false, false, false, false);
-                this.AssertC3(extent, false, true, true, true);
-                this.AssertC4(extent, true, true, true, true);
-
-                and.AddEquals(this.c3B);
-
-                Assert.AreEqual(8, extent.Count);
-                this.AssertC1(extent, false, false, false, false);
-                this.AssertC2(extent, false, false, false, false);
-                this.AssertC3(extent, true, true, true, true);
-                this.AssertC4(extent, true, true, true, true);
             }
         }
 
@@ -3053,7 +2946,7 @@ namespace Allors.Adapters.Special
                 this.AssertC3(extent, false, false, false, false);
                 this.AssertC4(extent, false, false, false, false);
 
-                // exclusive interface
+                // interface
                 extent = this.LocalExtent(I1Meta.ObjectType);
                 or = extent.Filter.AddOr();
                 or.AddEquals(this.c1A);
@@ -3073,7 +2966,6 @@ namespace Allors.Adapters.Special
                 this.AssertC4(extent, false, false, false, false);
 
                 // shared interface
-                // exclusive abstract class
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 or = extent.Filter.AddOr();
                 or.AddEquals(this.c1A);
@@ -3091,63 +2983,6 @@ namespace Allors.Adapters.Special
                 this.AssertC2(extent, false, true, false, false);
                 this.AssertC3(extent, false, false, false, false);
                 this.AssertC4(extent, false, false, false, false);
-
-                // shared abstract class
-                extent = this.LocalExtent(I34Meta.ObjectType);
-                or = extent.Filter.AddOr();
-                or.AddEquals(this.c3A);
-
-                Assert.AreEqual(1, extent.Count);
-                this.AssertC1(extent, false, false, false, false);
-                this.AssertC2(extent, false, false, false, false);
-                this.AssertC3(extent, true, false, false, false);
-                this.AssertC4(extent, false, false, false, false);
-
-                or.AddEquals(this.c4B);
-
-                Assert.AreEqual(2, extent.Count);
-                this.AssertC1(extent, false, false, false, false);
-                this.AssertC2(extent, false, false, false, false);
-                this.AssertC3(extent, true, false, false, false);
-                this.AssertC4(extent, false, true, false, false);
-
-                // exclusive abstract class
-                extent = this.LocalExtent(A1Meta.ObjectType);
-                or = extent.Filter.AddOr();
-                or.AddEquals(this.c1A);
-
-                Assert.AreEqual(1, extent.Count);
-                this.AssertC1(extent, true, false, false, false);
-                this.AssertC2(extent, false, false, false, false);
-                this.AssertC3(extent, false, false, false, false);
-                this.AssertC4(extent, false, false, false, false);
-
-                or.AddEquals(this.c1B);
-
-                Assert.AreEqual(2, extent.Count);
-                this.AssertC1(extent, true, true, false, false);
-                this.AssertC2(extent, false, false, false, false);
-                this.AssertC3(extent, false, false, false, false);
-                this.AssertC4(extent, false, false, false, false);
-
-                // shared abstract class
-                extent = this.LocalExtent(A34Meta.ObjectType);
-                or = extent.Filter.AddOr();
-                or.AddEquals(this.c3A);
-
-                Assert.AreEqual(1, extent.Count);
-                this.AssertC1(extent, false, false, false, false);
-                this.AssertC2(extent, false, false, false, false);
-                this.AssertC3(extent, true, false, false, false);
-                this.AssertC4(extent, false, false, false, false);
-
-                or.AddEquals(this.c4B);
-
-                Assert.AreEqual(2, extent.Count);
-                this.AssertC1(extent, false, false, false, false);
-                this.AssertC2(extent, false, false, false, false);
-                this.AssertC3(extent, true, false, false, false);
-                this.AssertC4(extent, false, true, false, false);
             }
         }
 
@@ -3179,7 +3014,7 @@ namespace Allors.Adapters.Special
                 this.AssertC3(extent, false, false, false, false);
                 this.AssertC4(extent, false, false, false, false);
 
-                // exclusive interface
+                // interface
                 extent = this.LocalExtent(I1Meta.ObjectType);
                 not = extent.Filter.AddNot();
                 or = not.AddOr();
@@ -3200,7 +3035,6 @@ namespace Allors.Adapters.Special
                 this.AssertC4(extent, false, false, false, false);
 
                 // shared interface
-                // exclusive abstract class
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 not = extent.Filter.AddNot();
                 or = not.AddOr();
@@ -3219,66 +3053,6 @@ namespace Allors.Adapters.Special
                 this.AssertC2(extent, true, false, true, true);
                 this.AssertC3(extent, false, false, false, false);
                 this.AssertC4(extent, false, false, false, false);
-
-                // shared abstract class
-                extent = this.LocalExtent(I34Meta.ObjectType);
-                not = extent.Filter.AddNot();
-                or = not.AddOr();
-                or.AddEquals(this.c3A);
-
-                Assert.AreEqual(7, extent.Count);
-                this.AssertC1(extent, false, false, false, false);
-                this.AssertC2(extent, false, false, false, false);
-                this.AssertC3(extent, false, true, true, true);
-                this.AssertC4(extent, true, true, true, true);
-
-                or.AddEquals(this.c4B);
-
-                Assert.AreEqual(6, extent.Count);
-                this.AssertC1(extent, false, false, false, false);
-                this.AssertC2(extent, false, false, false, false);
-                this.AssertC3(extent, false, true, true, true);
-                this.AssertC4(extent, true, false, true, true);
-
-                // exclusive abstract class
-                extent = this.LocalExtent(A1Meta.ObjectType);
-                not = extent.Filter.AddNot();
-                or = not.AddOr();
-                or.AddEquals(this.c1A);
-
-                Assert.AreEqual(3, extent.Count);
-                this.AssertC1(extent, false, true, true, true);
-                this.AssertC2(extent, false, false, false, false);
-                this.AssertC3(extent, false, false, false, false);
-                this.AssertC4(extent, false, false, false, false);
-
-                or.AddEquals(this.c1B);
-
-                Assert.AreEqual(2, extent.Count);
-                this.AssertC1(extent, false, false, true, true);
-                this.AssertC2(extent, false, false, false, false);
-                this.AssertC3(extent, false, false, false, false);
-                this.AssertC4(extent, false, false, false, false);
-
-                // shared abstract class
-                extent = this.LocalExtent(A34Meta.ObjectType);
-                not = extent.Filter.AddNot();
-                or = not.AddOr();
-                or.AddEquals(this.c3A);
-
-                Assert.AreEqual(7, extent.Count);
-                this.AssertC1(extent, false, false, false, false);
-                this.AssertC2(extent, false, false, false, false);
-                this.AssertC3(extent, false, true, true, true);
-                this.AssertC4(extent, true, true, true, true);
-
-                or.AddEquals(this.c4B);
-
-                Assert.AreEqual(6, extent.Count);
-                this.AssertC1(extent, false, false, false, false);
-                this.AssertC2(extent, false, false, false, false);
-                this.AssertC3(extent, false, true, true, true);
-                this.AssertC4(extent, true, false, true, true);
             }
         }
 
@@ -3299,22 +3073,10 @@ namespace Allors.Adapters.Special
                 var extent = this.Session.Except(firstExtent, secondExtent);
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsTrue(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, true, true, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // interface
                 firstExtent = this.LocalExtent(I12Meta.ObjectType);
@@ -3326,22 +3088,10 @@ namespace Allors.Adapters.Special
                 extent = this.Session.Except(firstExtent, secondExtent);
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, true, true, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Different Classes
                 firstExtent = this.LocalExtent(C1Meta.ObjectType);
@@ -3387,313 +3137,92 @@ namespace Allors.Adapters.Special
                 init();
                 this.Populate();
 
-                // Class
-
-                // Class
+                // Class + Class
                 var extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddInstanceof(C1Meta.ObjectType);
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsTrue(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, true, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
-                // Interface
+                // Class + Interface
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddInstanceof(C1Meta.ObjectType);
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsTrue(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, true, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
-                // Super Interface
+                // Class + Shared Interface
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddInstanceof(C1Meta.ObjectType);
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsTrue(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, true, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
-                // Interface
-
-                // Class
+                // Inteface + Class
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddInstanceof(I1Meta.ObjectType);
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsTrue(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, true, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
-                // Interface
+                // Interface + Interface
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddInstanceof(I1Meta.ObjectType);
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsTrue(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, true, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddInstanceof(I12Meta.ObjectType);
 
                 Assert.AreEqual(8, extent.Count);
-                Assert.IsTrue(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsTrue(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, true, true, true, true);
+                this.AssertC2(extent, true, true, true, true);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
-                // Super Interface
+                // Interface + Super Interface
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddInstanceof(I1Meta.ObjectType);
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsTrue(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, true, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddInstanceof(I12Meta.ObjectType);
 
                 Assert.AreEqual(8, extent.Count);
-                Assert.IsTrue(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsTrue(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, true, true, true, true);
+                this.AssertC2(extent, true, true, true, true);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddInstanceof(S1234Meta.ObjectType);
 
                 Assert.AreEqual(16, extent.Count);
-                Assert.IsTrue(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsTrue(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsTrue(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsTrue(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsTrue(extent.Contains(this.c4C));
-                Assert.IsTrue(extent.Contains(this.c4D));
-
-                // Abstract Class
-
-                // Class
-                extent = this.LocalExtent(C1Meta.ObjectType);
-                extent.Filter.AddInstanceof(A1Meta.ObjectType);
-
-                Assert.AreEqual(4, extent.Count);
-                Assert.IsTrue(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
-
-                // Interface
-                extent = this.LocalExtent(I1Meta.ObjectType);
-                extent.Filter.AddInstanceof(A1Meta.ObjectType);
-
-                Assert.AreEqual(4, extent.Count);
-                Assert.IsTrue(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
-
-                extent = this.LocalExtent(I34Meta.ObjectType);
-                extent.Filter.AddInstanceof(A34Meta.ObjectType);
-
-                Assert.AreEqual(8, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsTrue(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsTrue(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsTrue(extent.Contains(this.c4C));
-                Assert.IsTrue(extent.Contains(this.c4D));
-
-                // Super Interface
-                extent = this.LocalExtent(S1234Meta.ObjectType);
-                extent.Filter.AddInstanceof(A1Meta.ObjectType);
-
-                Assert.AreEqual(4, extent.Count);
-                Assert.IsTrue(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
-
-                extent = this.LocalExtent(S1234Meta.ObjectType);
-                extent.Filter.AddInstanceof(A34Meta.ObjectType);
-
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsTrue(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsTrue(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsTrue(extent.Contains(this.c4C));
-                Assert.IsTrue(extent.Contains(this.c4D));
+                this.AssertC1(extent, true, true, true, true);
+                this.AssertC2(extent, true, true, true, true);
+                this.AssertC3(extent, true, true, true, true);
+                this.AssertC4(extent, true, true, true, true);
 
                 // Wrong Parameters
                 var exceptionThrown = false;
@@ -3728,22 +3257,10 @@ namespace Allors.Adapters.Special
                 var extent = this.Session.Intersect(firstExtent, secondExtent);
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Different Classes
                 firstExtent = this.LocalExtent(C1Meta.ObjectType);
@@ -3796,22 +3313,10 @@ namespace Allors.Adapters.Special
                 none.AddLessThan(C1Meta.C1AllorsInteger, 2);
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Interface
                 (extent = this.LocalExtent(I12Meta.ObjectType)).Filter.AddNot()
@@ -3820,22 +3325,10 @@ namespace Allors.Adapters.Special
                     .AddLessThan(I12Meta.I12AllorsInteger, 2);
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, true, true);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Super Interface
                 (extent = this.LocalExtent(S1234Meta.ObjectType)).Filter.AddNot()
@@ -3844,44 +3337,20 @@ namespace Allors.Adapters.Special
                     .AddLessThan(S1234Meta.S1234AllorsInteger, 2);
 
                 Assert.AreEqual(8, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsTrue(extent.Contains(this.c4C));
-                Assert.IsTrue(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, true, true);
+                this.AssertC3(extent, false, false, true, true);
+                this.AssertC4(extent, false, false, true, true);
 
                 // Class
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddNot().AddAnd();
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsTrue(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, true, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
             }
         }
 
@@ -4161,66 +3630,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddNot().AddExists(C1Meta.C1C2many2many.AssociationType);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsTrue(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, true, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Interface
                 extent = this.LocalExtent(I2Meta.ObjectType);
                 extent.Filter.AddNot().AddExists(I1Meta.I1I2many2many.AssociationType);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsTrue(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, true, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Super Interface
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddNot().AddExists(S1234Meta.S1234many2many.AssociationType);
 
                 Assert.AreEqual(6, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsTrue(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsTrue(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsTrue(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsTrue(extent.Contains(this.c4C));
-                Assert.IsTrue(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, true, false, false, false);
+                this.AssertC3(extent, true, false, false, false);
+                this.AssertC4(extent, true, true, true, true);
 
                 // Class - Wrong RelationType
                 extent = this.LocalExtent(C2Meta.ObjectType);
@@ -4938,66 +4371,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddNot().AddExists(C1Meta.C1C2one2many.AssociationType);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsTrue(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, true, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Interface
                 extent = this.LocalExtent(I2Meta.ObjectType);
                 extent.Filter.AddNot().AddExists(I1Meta.I1I2one2many.AssociationType);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsTrue(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, true, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Super Interface
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddNot().AddExists(S1234Meta.S1234one2many.AssociationType);
 
                 Assert.AreEqual(13, extent.Count);
-                Assert.IsTrue(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsTrue(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsTrue(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsTrue(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsTrue(extent.Contains(this.c4C));
-                Assert.IsTrue(extent.Contains(this.c4D));
+                this.AssertC1(extent, true, false, false, false);
+                this.AssertC2(extent, true, true, true, true);
+                this.AssertC3(extent, true, true, true, true);
+                this.AssertC4(extent, true, true, true, true);
 
                 // Class - Wrong RelationType
                 extent = this.LocalExtent(C1Meta.ObjectType);
@@ -5369,129 +4766,57 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddNot().AddExists(C1Meta.C1C1one2one.AssociationType);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsTrue(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, true, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 extent = this.LocalExtent(C2Meta.ObjectType);
                 extent.Filter.AddNot().AddExists(C1Meta.C1C2one2one.AssociationType);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsTrue(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, true, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 extent = this.LocalExtent(C2Meta.ObjectType);
                 extent.Filter.AddNot().AddExists(C1Meta.C1C2one2one.AssociationType);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsTrue(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, true, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 extent = this.LocalExtent(C4Meta.ObjectType);
                 extent.Filter.AddNot().AddExists(C3Meta.C3C4one2one.AssociationType);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsTrue(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, true, false, false, false);
 
                 // Interface
                 extent = this.LocalExtent(I2Meta.ObjectType);
                 extent.Filter.AddNot().AddExists(I1Meta.I1I2one2one.AssociationType);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsTrue(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, true, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Super Interface
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddNot().AddExists(S1234Meta.S1234one2one.AssociationType);
 
                 Assert.AreEqual(7, extent.Count);
-                Assert.IsTrue(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsTrue(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsTrue(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsTrue(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsTrue(extent.Contains(this.c4C));
-                Assert.IsTrue(extent.Contains(this.c4D));
+                this.AssertC1(extent, true, false, false, false);
+                this.AssertC2(extent, true, false, false, false);
+                this.AssertC3(extent, true, false, false, false);
+                this.AssertC4(extent, true, true, true, true);
 
                 // Class - Wrong RelationType
                 extent = this.LocalExtent(C1Meta.ObjectType);
@@ -5667,22 +4992,10 @@ namespace Allors.Adapters.Special
                 none.AddLessThan(C1Meta.C1AllorsInteger, 1);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, true, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Interface
                 (extent = this.LocalExtent(I12Meta.ObjectType)).Filter.AddNot()
@@ -5691,22 +5004,10 @@ namespace Allors.Adapters.Special
                     .AddLessThan(I12Meta.I12AllorsInteger, 1);
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, true, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Super Interface
                 (extent = this.LocalExtent(S1234Meta.ObjectType)).Filter.AddNot()
@@ -5715,44 +5016,20 @@ namespace Allors.Adapters.Special
                     .AddLessThan(S1234Meta.S1234AllorsInteger, 1);
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, true, false, false);
+                this.AssertC3(extent, false, true, false, false);
+                this.AssertC4(extent, false, true, false, false);
 
                 // Class
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddNot().AddOr();
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsTrue(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, true, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
             }
         }
 
@@ -6461,66 +5738,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddNot().AddExists(C1Meta.C1AllorsInteger);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsTrue(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, true, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Interface
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddNot().AddExists(I12Meta.I12AllorsInteger);
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsTrue(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsTrue(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, true, false, false, false);
+                this.AssertC2(extent, true, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Super Interface
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddNot().AddExists(S1234Meta.S1234AllorsInteger);
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsTrue(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsTrue(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsTrue(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsTrue(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, true, false, false, false);
+                this.AssertC2(extent, true, false, false, false);
+                this.AssertC3(extent, true, false, false, false);
+                this.AssertC4(extent, true, false, false, false);
 
                 // Class - Wrong RelationType
                 extent = this.LocalExtent(C1Meta.ObjectType);
@@ -6968,66 +6209,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddNot().AddExists(C1Meta.C1C2many2many);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsTrue(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, true, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Interface
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddNot().AddExists(I12Meta.I12C2many2many);
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsTrue(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, true, false, false, false);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Super Interface
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddNot().AddExists(S1234Meta.S1234C2many2many);
 
                 Assert.AreEqual(12, extent.Count);
-                Assert.IsTrue(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsTrue(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsTrue(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsTrue(extent.Contains(this.c4C));
-                Assert.IsTrue(extent.Contains(this.c4D));
+                this.AssertC1(extent, true, false, false, false);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, true, true, true, true);
+                this.AssertC4(extent, true, true, true, true);
 
                 // Class - Wrong RelationType
                 extent = this.LocalExtent(C1Meta.ObjectType);
@@ -7333,66 +6538,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddNot().AddExists(C1Meta.C1C2one2many);
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsTrue(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, true, false, false, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Interface
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddNot().AddExists(I12Meta.I12C2one2many);
 
                 Assert.AreEqual(6, extent.Count);
-                Assert.IsTrue(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsTrue(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, true, false, true, true);
+                this.AssertC2(extent, true, true, false, true);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Super Interface
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddNot().AddExists(S1234Meta.S1234C2one2many);
 
                 Assert.AreEqual(14, extent.Count);
-                Assert.IsTrue(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsTrue(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsTrue(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsTrue(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsTrue(extent.Contains(this.c4C));
-                Assert.IsTrue(extent.Contains(this.c4D));
+                this.AssertC1(extent, true, false, true, true);
+                this.AssertC2(extent, true, true, true, true);
+                this.AssertC3(extent, true, true, false, true);
+                this.AssertC4(extent, true, true, true, true);
 
                 // Class - Wrong RelationType
                 extent = this.LocalExtent(C1Meta.ObjectType);
@@ -7707,87 +6876,39 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddNot().AddExists(C1Meta.C1C2one2one);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsTrue(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, true, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddNot().AddExists(C1Meta.C1C2one2one);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsTrue(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, true, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Interface
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddNot().AddExists(I12Meta.I12C2one2one);
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsTrue(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, true, false, false, false);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Super Interface
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddNot().AddExists(S1234Meta.S1234C2one2one);
 
                 Assert.AreEqual(12, extent.Count);
-                Assert.IsTrue(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsTrue(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsTrue(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsTrue(extent.Contains(this.c4C));
-                Assert.IsTrue(extent.Contains(this.c4D));
+                this.AssertC1(extent, true, false, false, false);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, true, true, true, true);
+                this.AssertC4(extent, true, true, true, true);
 
                 // Class - Wrong RelationType
                 extent = this.LocalExtent(C1Meta.ObjectType);
@@ -7997,7 +7118,7 @@ namespace Allors.Adapters.Special
                 this.AssertC3(extent, false, true, false, false);
                 this.AssertC4(extent, false, false, false, false);
 
-                // Exclusive Interface
+                // Interface
 
                 // Equal ""
                 extent = this.LocalExtent(I1Meta.ObjectType);
@@ -8357,66 +7478,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddNot().AddExists(C1Meta.C1AllorsString);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsTrue(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, true, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Interface
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddNot().AddExists(I12Meta.I12AllorsString);
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsTrue(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsTrue(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, true, false, false, false);
+                this.AssertC2(extent, true, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Super Interface
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddNot().AddExists(S1234Meta.S1234AllorsString);
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsTrue(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsTrue(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsTrue(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsTrue(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, true, false, false, false);
+                this.AssertC2(extent, true, false, false, false);
+                this.AssertC3(extent, true, false, false, false);
+                this.AssertC4(extent, true, false, false, false);
 
                 // Class - Wrong RelationType
                 extent = this.LocalExtent(C1Meta.ObjectType);
@@ -8798,22 +7883,10 @@ namespace Allors.Adapters.Special
                 or.AddLessThan(C1Meta.C1AllorsInteger, 2);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Dangling empty Or behind Or
                 extent = this.LocalExtent(C1Meta.ObjectType);
@@ -8823,22 +7896,10 @@ namespace Allors.Adapters.Special
                 or.AddLessThan(C1Meta.C1AllorsInteger, 2);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Dangling empty Not behind Or
                 extent = this.LocalExtent(C1Meta.ObjectType);
@@ -8848,22 +7909,10 @@ namespace Allors.Adapters.Special
                 or.AddLessThan(C1Meta.C1AllorsInteger, 2);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Dangling empty And behind And
                 extent = this.LocalExtent(C1Meta.ObjectType);
@@ -8873,22 +7922,10 @@ namespace Allors.Adapters.Special
                 and.AddLessThan(C1Meta.C1AllorsInteger, 2);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Dangling empty Or behind And
                 extent = this.LocalExtent(C1Meta.ObjectType);
@@ -8898,22 +7935,10 @@ namespace Allors.Adapters.Special
                 and.AddLessThan(C1Meta.C1AllorsInteger, 2);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Dangling empty Not behind And
                 extent = this.LocalExtent(C1Meta.ObjectType);
@@ -8923,44 +7948,20 @@ namespace Allors.Adapters.Special
                 and.AddLessThan(C1Meta.C1AllorsInteger, 2);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Dangling empty And
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddAnd();
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsTrue(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, true, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
             }
         }
 
@@ -8979,22 +7980,10 @@ namespace Allors.Adapters.Special
                 any.AddLessThan(C1Meta.C1AllorsInteger, 3);
 
                 Assert.AreEqual(3, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Interface
                 (extent = this.LocalExtent(I12Meta.ObjectType)).Filter.AddOr()
@@ -9002,22 +7991,10 @@ namespace Allors.Adapters.Special
                     .AddLessThan(I12Meta.I12AllorsInteger, 3);
 
                 Assert.AreEqual(6, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Super Interface
                 (extent = this.LocalExtent(S1234Meta.ObjectType)).Filter.AddOr()
@@ -9025,44 +8002,20 @@ namespace Allors.Adapters.Special
                     .AddLessThan(S1234Meta.S1234AllorsInteger, 3);
 
                 Assert.AreEqual(12, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsTrue(extent.Contains(this.c4C));
-                Assert.IsTrue(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, false, true, true, true);
+                this.AssertC4(extent, false, true, true, true);
 
                 // Class Without predicates
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddOr();
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsTrue(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, true, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
             }
         }
 
@@ -9102,66 +8055,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddExists(C1Meta.C1AllorsInteger);
 
                 Assert.AreEqual(3, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Interface
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddExists(I12Meta.I12AllorsInteger);
 
                 Assert.AreEqual(6, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Super Interface
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddExists(S1234Meta.S1234AllorsInteger);
 
                 Assert.AreEqual(12, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsTrue(extent.Contains(this.c4C));
-                Assert.IsTrue(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, false, true, true, true);
+                this.AssertC4(extent, false, true, true, true);
 
                 // Class - Wrong RelationType
                 extent = this.LocalExtent(C1Meta.ObjectType);
@@ -9225,22 +8142,10 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddBetween(C1Meta.C1AllorsInteger, C1Meta.C1IntegerBetweenA, C1Meta.C1IntegerBetweenB);
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // TODO: Greater than Role
                 // Interface
@@ -9250,88 +8155,40 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddBetween(I12Meta.I12AllorsInteger, -10, 0);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Between 0 and 1
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddBetween(I12Meta.I12AllorsInteger, 0, 1);
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, true, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Between 1 and 2
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddBetween(I12Meta.I12AllorsInteger, 1, 2);
 
                 Assert.AreEqual(6, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Between 3 and 10
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddBetween(I12Meta.I12AllorsInteger, 3, 10);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Super Interface
 
@@ -9340,88 +8197,40 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddBetween(S1234Meta.S1234AllorsInteger, -10, 0);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Between 0 and 1
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddBetween(S1234Meta.S1234AllorsInteger, 0, 1);
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, true, false, false);
+                this.AssertC3(extent, false, true, false, false);
+                this.AssertC4(extent, false, true, false, false);
 
                 // Between 1 and 2
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddBetween(S1234Meta.S1234AllorsInteger, 1, 2);
 
                 Assert.AreEqual(12, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsTrue(extent.Contains(this.c4C));
-                Assert.IsTrue(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, false, true, true, true);
+                this.AssertC4(extent, false, true, true, true);
 
                 // Between 3 and 10
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddBetween(S1234Meta.S1234AllorsInteger, 3, 10);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Class - Wrong RelationType
 
@@ -9502,22 +8311,10 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddLessThan(C1Meta.C1AllorsInteger, C1Meta.C1IntegerLessThan);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, true, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // TODO: Less than Role
                 // Interface
@@ -9527,66 +8324,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddLessThan(I12Meta.I12AllorsInteger, 1);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Less Than 2
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddLessThan(I12Meta.I12AllorsInteger, 2);
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, true, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Less Than 3
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddLessThan(I12Meta.I12AllorsInteger, 3);
 
                 Assert.AreEqual(6, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Super Interface
 
@@ -9595,66 +8356,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddLessThan(S1234Meta.S1234AllorsInteger, 1);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, true, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Less Than 2
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddLessThan(S1234Meta.S1234AllorsInteger, 2);
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, true, false, false);
+                this.AssertC3(extent, false, true, false, false);
+                this.AssertC4(extent, false, true, false, false);
 
                 // Less Than 3
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddLessThan(S1234Meta.S1234AllorsInteger, 3);
 
                 Assert.AreEqual(12, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsTrue(extent.Contains(this.c4C));
-                Assert.IsTrue(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, false, true, true, true);
+                this.AssertC4(extent, false, true, true, true);
 
                 // Class - Wrong RelationType
 
@@ -9814,22 +8539,10 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddGreaterThan(C1Meta.C1AllorsInteger, C1Meta.C1IntegerGreaterThan);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // TODO: Greater than Role
                 // Interface
@@ -9839,67 +8552,31 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddGreaterThan(I12Meta.I12AllorsInteger, 0);
 
                 Assert.AreEqual(6, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Greater Than 1
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddGreaterThan(I12Meta.I12AllorsInteger, 1);
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, true, true);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Greater Than 2
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddGreaterThan(I12Meta.I12AllorsInteger, 2);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
-
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
+                
                 // Super Interface
 
                 // Greater Than 0
@@ -9907,66 +8584,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddGreaterThan(S1234Meta.S1234AllorsInteger, 0);
 
                 Assert.AreEqual(12, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsTrue(extent.Contains(this.c4C));
-                Assert.IsTrue(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, false, true, true, true);
+                this.AssertC4(extent, false, true, true, true);
 
                 // Greater Than 1
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddGreaterThan(S1234Meta.S1234AllorsInteger, 1);
 
                 Assert.AreEqual(8, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsTrue(extent.Contains(this.c4C));
-                Assert.IsTrue(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, true, true);
+                this.AssertC3(extent, false, false, true, true);
+                this.AssertC4(extent, false, false, true, true);
 
                 // Greater Than 2
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddGreaterThan(S1234Meta.S1234AllorsInteger, 2);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Class - Wrong RelationType
 
@@ -10126,88 +8767,40 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddBetween(C1Meta.C1AllorsInteger, -10, 0);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Between 0 and 1
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddBetween(C1Meta.C1AllorsInteger, 0, 1);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Between 1 and 2
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddBetween(C1Meta.C1AllorsInteger, 1, 2);
 
                 Assert.AreEqual(3, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Between 3 and 10
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddBetween(C1Meta.C1AllorsInteger, 3, 10);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Interface
 
@@ -10216,88 +8809,40 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddBetween(I12Meta.I12AllorsInteger, -10, 0);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Between 0 and 1
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddBetween(I12Meta.I12AllorsInteger, 0, 1);
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, true, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Between 1 and 2
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddBetween(I12Meta.I12AllorsInteger, 1, 2);
 
                 Assert.AreEqual(6, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Between 3 and 10
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddBetween(I12Meta.I12AllorsInteger, 3, 10);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Super Interface
 
@@ -10306,88 +8851,40 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddBetween(S1234Meta.S1234AllorsInteger, -10, 0);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Between 0 and 1
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddBetween(S1234Meta.S1234AllorsInteger, 0, 1);
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, true, false, false);
+                this.AssertC3(extent, false, true, false, false);
+                this.AssertC4(extent, false, true, false, false);
 
                 // Between 1 and 2
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddBetween(S1234Meta.S1234AllorsInteger, 1, 2);
 
                 Assert.AreEqual(12, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsTrue(extent.Contains(this.c4C));
-                Assert.IsTrue(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, false, true, true, true);
+                this.AssertC4(extent, false, true, true, true);
 
                 // Between 3 and 10
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddBetween(S1234Meta.S1234AllorsInteger, 3, 10);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Class - Wrong RelationType
 
@@ -10468,66 +8965,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddLessThan(C1Meta.C1AllorsInteger, 1);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Less Than 2
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddLessThan(C1Meta.C1AllorsInteger, 2);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Less Than 3
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddLessThan(C1Meta.C1AllorsInteger, 3);
 
                 Assert.AreEqual(3, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Interface
 
@@ -10536,66 +8997,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddLessThan(I12Meta.I12AllorsInteger, 1);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Less Than 2
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddLessThan(I12Meta.I12AllorsInteger, 2);
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, true, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Less Than 3
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddLessThan(I12Meta.I12AllorsInteger, 3);
 
                 Assert.AreEqual(6, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Super Interface
 
@@ -10604,66 +9029,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddLessThan(S1234Meta.S1234AllorsInteger, 1);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
-
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
+                
                 // Less Than 2
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddLessThan(S1234Meta.S1234AllorsInteger, 2);
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, true, false, false);
+                this.AssertC3(extent, false, true, false, false);
+                this.AssertC4(extent, false, true, false, false);
 
                 // Less Than 3
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddLessThan(S1234Meta.S1234AllorsInteger, 3);
 
                 Assert.AreEqual(12, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsTrue(extent.Contains(this.c4C));
-                Assert.IsTrue(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, false, true, true, true);
+                this.AssertC4(extent, false, true, true, true);
 
                 // Class - Wrong RelationType
 
@@ -10823,66 +9212,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddGreaterThan(C1Meta.C1AllorsInteger, 0);
 
                 Assert.AreEqual(3, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Greater Than 1
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddGreaterThan(C1Meta.C1AllorsInteger, 1);
-
+                
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Greater Than 2
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddGreaterThan(C1Meta.C1AllorsInteger, 2);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Interface
                 // Greater Than 0
@@ -10890,66 +9243,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddGreaterThan(I12Meta.I12AllorsInteger, 0);
 
                 Assert.AreEqual(6, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Greater Than 1
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddGreaterThan(I12Meta.I12AllorsInteger, 1);
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, true, true);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Greater Than 2
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddGreaterThan(I12Meta.I12AllorsInteger, 2);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Super Interface
                 // Greater Than 0
@@ -10957,66 +9274,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddGreaterThan(S1234Meta.S1234AllorsInteger, 0);
 
                 Assert.AreEqual(12, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsTrue(extent.Contains(this.c4C));
-                Assert.IsTrue(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, false, true, true, true);
+                this.AssertC4(extent, false, true, true, true);
 
                 // Greater Than 1
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddGreaterThan(S1234Meta.S1234AllorsInteger, 1);
 
                 Assert.AreEqual(8, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsTrue(extent.Contains(this.c4C));
-                Assert.IsTrue(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, true, true);
+                this.AssertC3(extent, false, false, true, true);
+                this.AssertC4(extent, false, false, true, true);
 
                 // Greater Than 2
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddGreaterThan(S1234Meta.S1234AllorsInteger, 2);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Class - Wrong RelationType
                 // Greater Than 0
@@ -11172,66 +9453,31 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddEquals(C1Meta.C1AllorsInteger, 0);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
+
 
                 // Equal 1
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddEquals(C1Meta.C1AllorsInteger, 1);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Equal 2
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddEquals(C1Meta.C1AllorsInteger, 2);
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Interface
                 // Equal 0
@@ -11239,66 +9485,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddEquals(I12Meta.I12AllorsInteger, 0);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Equal 1
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddEquals(I12Meta.I12AllorsInteger, 1);
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, true, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Equal 2
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddEquals(I12Meta.I12AllorsInteger, 2);
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, true, true);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Super Interface
                 // Equal 0
@@ -11306,66 +9516,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddEquals(S1234Meta.S1234AllorsInteger, 0);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Equal 1
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddEquals(S1234Meta.S1234AllorsInteger, 1);
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, true, false, false);
+                this.AssertC3(extent, false, true, false, false);
+                this.AssertC4(extent, false, true, false, false);
 
                 // Equal 2
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddEquals(S1234Meta.S1234AllorsInteger, 2);
 
                 Assert.AreEqual(8, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsTrue(extent.Contains(this.c4C));
-                Assert.IsTrue(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, true, true);
+                this.AssertC3(extent, false, false, true, true);
+                this.AssertC4(extent, false, false, true, true);
 
                 // Class - Wrong RelationType
                 // Equal 0
@@ -11522,88 +9696,40 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddBetween(C1Meta.C1AllorsLong, -10, 0);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Between 0 and 1
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddBetween(C1Meta.C1AllorsLong, 0, 1);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false); 
 
                 // Between 1 and 2
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddBetween(C1Meta.C1AllorsLong, 1, 2);
 
                 Assert.AreEqual(3, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false); 
 
                 // Between 3 and 10
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddBetween(C1Meta.C1AllorsLong, 3, 10);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false); 
 
                 // Interface
                 // Between -10 and 0
@@ -11611,88 +9737,40 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddBetween(I12Meta.I12AllorsLong, -10, 0);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Between 0 and 1
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddBetween(I12Meta.I12AllorsLong, 0, 1);
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, true, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false); 
 
                 // Between 1 and 2
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddBetween(I12Meta.I12AllorsLong, 1, 2);
 
                 Assert.AreEqual(6, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false); 
 
                 // Between 3 and 10
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddBetween(I12Meta.I12AllorsLong, 3, 10);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false); 
 
                 // Super Interface
                 // Between -10 and 0
@@ -11700,88 +9778,40 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddBetween(S1234Meta.S1234AllorsLong, -10, 0);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false); 
 
                 // Between 0 and 1
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddBetween(S1234Meta.S1234AllorsLong, 0, 1);
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, true, false, false);
+                this.AssertC3(extent, false, true, false, false);
+                this.AssertC4(extent, false, true, false, false); 
 
                 // Between 1 and 2
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddBetween(S1234Meta.S1234AllorsLong, 1, 2);
 
                 Assert.AreEqual(12, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsTrue(extent.Contains(this.c4C));
-                Assert.IsTrue(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, false, true, true, true);
+                this.AssertC4(extent, false, true, true, true);
 
                 // Between 3 and 10
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddBetween(S1234Meta.S1234AllorsLong, 3, 10);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Class - Wrong RelationType
                 // Between -10 and 0
@@ -11861,66 +9891,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddLessThan(C1Meta.C1AllorsLong, 1);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Less Than 2
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddLessThan(C1Meta.C1AllorsLong, 2);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Less Than 3
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddLessThan(C1Meta.C1AllorsLong, 3);
 
                 Assert.AreEqual(3, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Interface
                 // Less Than 1
@@ -11928,66 +9922,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddLessThan(I12Meta.I12AllorsLong, 1);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Less Than 2
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddLessThan(I12Meta.I12AllorsLong, 2);
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, true, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Less Than 3
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddLessThan(I12Meta.I12AllorsLong, 3);
 
                 Assert.AreEqual(6, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Super Interface
                 // Less Than 1
@@ -11995,66 +9953,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddLessThan(S1234Meta.S1234AllorsLong, 1);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Less Than 2
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddLessThan(S1234Meta.S1234AllorsLong, 2);
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, true, false, false);
+                this.AssertC3(extent, false, true, false, false);
+                this.AssertC4(extent, false, true, false, false);
 
                 // Less Than 3
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddLessThan(S1234Meta.S1234AllorsLong, 3);
 
                 Assert.AreEqual(12, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsTrue(extent.Contains(this.c4C));
-                Assert.IsTrue(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, false, true, true, true);
+                this.AssertC4(extent, false, true, true, true);
 
                 // Class - Wrong RelationType
                 // Less Than 1
@@ -12211,66 +10133,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddGreaterThan(C1Meta.C1AllorsLong, 0);
 
                 Assert.AreEqual(3, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Greater Than 1
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddGreaterThan(C1Meta.C1AllorsLong, 1);
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Greater Than 2
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddGreaterThan(C1Meta.C1AllorsLong, 2);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Interface
 
@@ -12279,66 +10165,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddGreaterThan(I12Meta.I12AllorsLong, 0);
 
                 Assert.AreEqual(6, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Greater Than 1
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddGreaterThan(I12Meta.I12AllorsLong, 1);
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, true, true);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Greater Than 2
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddGreaterThan(I12Meta.I12AllorsLong, 2);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Super Interface
 
@@ -12347,66 +10197,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddGreaterThan(S1234Meta.S1234AllorsLong, 0);
 
                 Assert.AreEqual(12, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsTrue(extent.Contains(this.c4C));
-                Assert.IsTrue(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, false, true, true, true);
+                this.AssertC4(extent, false, true, true, true);
 
                 // Greater Than 1
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddGreaterThan(S1234Meta.S1234AllorsLong, 1);
 
                 Assert.AreEqual(8, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsTrue(extent.Contains(this.c4C));
-                Assert.IsTrue(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, true, true);
+                this.AssertC3(extent, false, false, true, true);
+                this.AssertC4(extent, false, false, true, true);
 
                 // Greater Than 2
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddGreaterThan(S1234Meta.S1234AllorsLong, 2);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Class - Wrong RelationType
 
@@ -12565,66 +10379,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddEquals(C1Meta.C1AllorsLong, 0);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Equal 1
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddEquals(C1Meta.C1AllorsLong, 1);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Equal 2
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddEquals(C1Meta.C1AllorsLong, 2);
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Interface
                 // Equal 0
@@ -12632,66 +10410,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddEquals(I12Meta.I12AllorsLong, 0);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Equal 1
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddEquals(I12Meta.I12AllorsLong, 1);
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, true, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Equal 2
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddEquals(I12Meta.I12AllorsLong, 2);
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, true, true);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Super Interface
                 // Equal 0
@@ -12699,66 +10441,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddEquals(S1234Meta.S1234AllorsLong, 0);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Equal 1
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddEquals(S1234Meta.S1234AllorsLong, 1);
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, true, false, false);
+                this.AssertC3(extent, false, true, false, false);
+                this.AssertC4(extent, false, true, false, false);
 
                 // Equal 2
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddEquals(S1234Meta.S1234AllorsLong, 2);
 
                 Assert.AreEqual(8, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsTrue(extent.Contains(this.c4C));
-                Assert.IsTrue(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, true, true);
+                this.AssertC3(extent, false, false, true, true);
+                this.AssertC4(extent, false, false, true, true);
 
                 // Class - Wrong RelationType
                 // Equal 0
@@ -12915,88 +10621,40 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddBetween(C1Meta.C1AllorsDouble, -10, 0);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Between 0 and 1
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddBetween(C1Meta.C1AllorsDouble, 0, 1);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Between 1 and 2
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddBetween(C1Meta.C1AllorsDouble, 1, 2);
 
                 Assert.AreEqual(3, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Between 3 and 10
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddBetween(C1Meta.C1AllorsDouble, 3, 10);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Interface
 
@@ -13005,88 +10663,40 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddBetween(I12Meta.I12AllorsDouble, -10, 0);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Between 0 and 1
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddBetween(I12Meta.I12AllorsDouble, 0, 1);
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, true, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Between 1 and 2
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddBetween(I12Meta.I12AllorsDouble, 1, 2);
 
                 Assert.AreEqual(6, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Between 3 and 10
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddBetween(I12Meta.I12AllorsDouble, 3, 10);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Super Interface
 
@@ -13095,88 +10705,40 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddBetween(S1234Meta.S1234AllorsDouble, -10, 0);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Between 0 and 1
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddBetween(S1234Meta.S1234AllorsDouble, 0, 1);
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, true, false, false);
+                this.AssertC3(extent, false, true, false, false);
+                this.AssertC4(extent, false, true, false, false);
 
                 // Between 1 and 2
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddBetween(S1234Meta.S1234AllorsDouble, 1, 2);
 
                 Assert.AreEqual(12, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsTrue(extent.Contains(this.c4C));
-                Assert.IsTrue(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, false, true, true, true);
+                this.AssertC4(extent, false, true, true, true);
 
                 // Between 3 and 10
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddBetween(S1234Meta.S1234AllorsDouble, 3, 10);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Class - Wrong RelationType
 
@@ -13257,66 +10819,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddLessThan(C1Meta.C1AllorsDouble, 1);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Less Than 2
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddLessThan(C1Meta.C1AllorsDouble, 2);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Less Than 3
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddLessThan(C1Meta.C1AllorsDouble, 3);
 
                 Assert.AreEqual(3, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Interface
 
@@ -13325,66 +10851,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddLessThan(I12Meta.I12AllorsDouble, 1);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Less Than 2
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddLessThan(I12Meta.I12AllorsDouble, 2);
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, true, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Less Than 3
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddLessThan(I12Meta.I12AllorsDouble, 3);
 
                 Assert.AreEqual(6, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Super Interface
 
@@ -13393,66 +10883,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddLessThan(S1234Meta.S1234AllorsDouble, 1);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Less Than 2
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddLessThan(S1234Meta.S1234AllorsDouble, 2);
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, true, false, false);
+                this.AssertC3(extent, false, true, false, false);
+                this.AssertC4(extent, false, true, false, false);
 
                 // Less Than 3
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddLessThan(S1234Meta.S1234AllorsDouble, 3);
 
                 Assert.AreEqual(12, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsTrue(extent.Contains(this.c4C));
-                Assert.IsTrue(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, false, true, true, true);
+                this.AssertC4(extent, false, true, true, true);
 
                 // Class - Wrong RelationType
 
@@ -13612,66 +11066,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddGreaterThan(C1Meta.C1AllorsDouble, 0);
 
                 Assert.AreEqual(3, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Greater Than 1
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddGreaterThan(C1Meta.C1AllorsDouble, 1);
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Greater Than 2
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddGreaterThan(C1Meta.C1AllorsDouble, 2);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Interface
 
@@ -13680,66 +11098,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddGreaterThan(I12Meta.I12AllorsDouble, 0);
 
                 Assert.AreEqual(6, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Greater Than 1
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddGreaterThan(I12Meta.I12AllorsDouble, 1);
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, true, true);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Greater Than 2
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddGreaterThan(I12Meta.I12AllorsDouble, 2);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Super Interface
 
@@ -13748,66 +11130,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddGreaterThan(S1234Meta.S1234AllorsDouble, 0);
 
                 Assert.AreEqual(12, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsTrue(extent.Contains(this.c4C));
-                Assert.IsTrue(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, false, true, true, true);
+                this.AssertC4(extent, false, true, true, true);
 
                 // Greater Than 1
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddGreaterThan(S1234Meta.S1234AllorsDouble, 1);
 
                 Assert.AreEqual(8, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsTrue(extent.Contains(this.c4C));
-                Assert.IsTrue(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, true, true);
+                this.AssertC3(extent, false, false, true, true);
+                this.AssertC4(extent, false, false, true, true);
 
                 // Greater Than 2
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddGreaterThan(S1234Meta.S1234AllorsDouble, 2);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Class - Wrong RelationType
 
@@ -13966,66 +11312,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddEquals(C1Meta.C1AllorsDouble, 0);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Equal 1
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddEquals(C1Meta.C1AllorsDouble, 1);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Equal 2
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddEquals(C1Meta.C1AllorsDouble, 2);
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Interface
                 // Equal 0
@@ -14033,66 +11343,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddEquals(I12Meta.I12AllorsDouble, 0);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Equal 1
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddEquals(I12Meta.I12AllorsDouble, 1);
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, true, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Equal 2
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddEquals(I12Meta.I12AllorsDouble, 2);
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, true, true);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Super Interface
                 // Equal 0
@@ -14100,66 +11374,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddEquals(S1234Meta.S1234AllorsDouble, 0);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Equal 1
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddEquals(S1234Meta.S1234AllorsDouble, 1);
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, true, false, false);
+                this.AssertC3(extent, false, true, false, false);
+                this.AssertC4(extent, false, true, false, false);
 
                 // Equal 2
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddEquals(S1234Meta.S1234AllorsDouble, 2);
 
                 Assert.AreEqual(8, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsTrue(extent.Contains(this.c4C));
-                Assert.IsTrue(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, true, true);
+                this.AssertC3(extent, false, false, true, true);
+                this.AssertC4(extent, false, false, true, true);
 
                 // Class - Wrong RelationType
                 // Equal 0
@@ -14316,88 +11554,40 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddBetween(C1Meta.C1AllorsDecimal, -10, 0);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Between 0 and 1
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddBetween(C1Meta.C1AllorsDecimal, 0, 1);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Between 1 and 2
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddBetween(C1Meta.C1AllorsDecimal, 1, 2);
 
                 Assert.AreEqual(3, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Between 3 and 10
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddBetween(C1Meta.C1AllorsDecimal, 3, 10);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Interface
 
@@ -14406,88 +11596,40 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddBetween(I12Meta.I12AllorsDecimal, -10, 0);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Between 0 and 1
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddBetween(I12Meta.I12AllorsDecimal, 0, 1);
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, true, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Between 1 and 2
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddBetween(I12Meta.I12AllorsDecimal, 1, 2);
 
                 Assert.AreEqual(6, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Between 3 and 10
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddBetween(I12Meta.I12AllorsDecimal, 3, 10);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Super Interface
 
@@ -14496,88 +11638,40 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddBetween(S1234Meta.S1234AllorsDecimal, -10, 0);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Between 0 and 1
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddBetween(S1234Meta.S1234AllorsDecimal, 0, 1);
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, true, false, false);
+                this.AssertC3(extent, false, true, false, false);
+                this.AssertC4(extent, false, true, false, false);
 
                 // Between 1 and 2
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddBetween(S1234Meta.S1234AllorsDecimal, 1, 2);
 
                 Assert.AreEqual(12, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsTrue(extent.Contains(this.c4C));
-                Assert.IsTrue(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, false, true, true, true);
+                this.AssertC4(extent, false, true, true, true);
 
                 // Between 3 and 10
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddBetween(S1234Meta.S1234AllorsDecimal, 3, 10);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Class - Wrong RelationType
 
@@ -14658,66 +11752,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddLessThan(C1Meta.C1AllorsDecimal, 1);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Less Than 2
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddLessThan(C1Meta.C1AllorsDecimal, 2);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Less Than 3
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddLessThan(C1Meta.C1AllorsDecimal, 3);
 
                 Assert.AreEqual(3, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Interface
 
@@ -14726,66 +11784,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddLessThan(I12Meta.I12AllorsDecimal, 1);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Less Than 2
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddLessThan(I12Meta.I12AllorsDecimal, 2);
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, true, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Less Than 3
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddLessThan(I12Meta.I12AllorsDecimal, 3);
 
                 Assert.AreEqual(6, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Super Interface
 
@@ -14794,66 +11816,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddLessThan(S1234Meta.S1234AllorsDecimal, 1);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Less Than 2
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddLessThan(S1234Meta.S1234AllorsDecimal, 2);
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, true, false, false);
+                this.AssertC3(extent, false, true, false, false);
+                this.AssertC4(extent, false, true, false, false);
 
                 // Less Than 3
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddLessThan(S1234Meta.S1234AllorsDecimal, 3);
 
                 Assert.AreEqual(12, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsTrue(extent.Contains(this.c4C));
-                Assert.IsTrue(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, false, true, true, true);
+                this.AssertC4(extent, false, true, true, true);
 
                 // Class - Wrong RelationType
 
@@ -15013,66 +11999,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddGreaterThan(C1Meta.C1AllorsDecimal, 0);
 
                 Assert.AreEqual(3, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Greater Than 1
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddGreaterThan(C1Meta.C1AllorsDecimal, 1);
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Greater Than 2
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddGreaterThan(C1Meta.C1AllorsDecimal, 2);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Interface
 
@@ -15081,66 +12031,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddGreaterThan(I12Meta.I12AllorsDecimal, 0);
 
                 Assert.AreEqual(6, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Greater Than 1
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddGreaterThan(I12Meta.I12AllorsDecimal, 1);
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, true, true);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Greater Than 2
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddGreaterThan(I12Meta.I12AllorsDecimal, 2);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Super Interface
 
@@ -15149,66 +12063,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddGreaterThan(S1234Meta.S1234AllorsDecimal, 0);
 
                 Assert.AreEqual(12, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsTrue(extent.Contains(this.c4C));
-                Assert.IsTrue(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, false, true, true, true);
+                this.AssertC4(extent, false, true, true, true);
 
                 // Greater Than 1
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddGreaterThan(S1234Meta.S1234AllorsDecimal, 1);
 
                 Assert.AreEqual(8, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsTrue(extent.Contains(this.c4C));
-                Assert.IsTrue(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, true, true);
+                this.AssertC3(extent, false, false, true, true);
+                this.AssertC4(extent, false, false, true, true);
 
                 // Greater Than 2
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddGreaterThan(S1234Meta.S1234AllorsDecimal, 2);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Class - Wrong RelationType
 
@@ -15367,66 +12245,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddEquals(C1Meta.C1AllorsDecimal, 0);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Equal 1
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddEquals(C1Meta.C1AllorsDecimal, 1);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Equal 2
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddEquals(C1Meta.C1AllorsDecimal, 2);
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Interface
                 // Equal 0
@@ -15434,66 +12276,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddEquals(I12Meta.I12AllorsDecimal, 0);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Equal 1
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddEquals(I12Meta.I12AllorsDecimal, 1);
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, true, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Equal 2
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddEquals(I12Meta.I12AllorsDecimal, 2);
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, true, true);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Super Interface
                 // Equal 0
@@ -15501,66 +12307,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddEquals(S1234Meta.S1234AllorsDecimal, 0);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false); 
 
                 // Equal 1
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddEquals(S1234Meta.S1234AllorsDecimal, 1);
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
-
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, true, false, false);
+                this.AssertC3(extent, false, true, false, false);
+                this.AssertC4(extent, false, true, false, false); 
+                
                 // Equal 2
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddEquals(S1234Meta.S1234AllorsDecimal, 2);
 
                 Assert.AreEqual(8, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsTrue(extent.Contains(this.c4C));
-                Assert.IsTrue(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, true, true);
+                this.AssertC3(extent, false, false, true, true);
+                this.AssertC4(extent, false, false, true, true); 
 
                 // Class - Wrong RelationType
                 // Equal 0
@@ -15739,88 +12509,40 @@ namespace Allors.Adapters.Special
                     extent.Filter.AddBetween(C1Meta.C1AllorsDateTime, dateTime1, dateTime3);
 
                     Assert.AreEqual(0, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsFalse(extent.Contains(this.c1B));
-                    Assert.IsFalse(extent.Contains(this.c1C));
-                    Assert.IsFalse(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsFalse(extent.Contains(this.c2B));
-                    Assert.IsFalse(extent.Contains(this.c2C));
-                    Assert.IsFalse(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsFalse(extent.Contains(this.c3B));
-                    Assert.IsFalse(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsFalse(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, false, false, false);
+                    this.AssertC2(extent, false, false, false, false);
+                    this.AssertC3(extent, false, false, false, false);
+                    this.AssertC4(extent, false, false, false, false);
 
                     // Between 3 and 4
                     extent = this.LocalExtent(C1Meta.ObjectType);
                     extent.Filter.AddBetween(C1Meta.C1AllorsDateTime, dateTime3, dateTime4);
 
                     Assert.AreEqual(1, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsTrue(extent.Contains(this.c1B));
-                    Assert.IsFalse(extent.Contains(this.c1C));
-                    Assert.IsFalse(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsFalse(extent.Contains(this.c2B));
-                    Assert.IsFalse(extent.Contains(this.c2C));
-                    Assert.IsFalse(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsFalse(extent.Contains(this.c3B));
-                    Assert.IsFalse(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsFalse(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, true, false, false);
+                    this.AssertC2(extent, false, false, false, false);
+                    this.AssertC3(extent, false, false, false, false);
+                    this.AssertC4(extent, false, false, false, false);
 
                     // Between 4 and 5
                     extent = this.LocalExtent(C1Meta.ObjectType);
                     extent.Filter.AddBetween(C1Meta.C1AllorsDateTime, dateTime4, dateTime5);
 
                     Assert.AreEqual(3, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsTrue(extent.Contains(this.c1B));
-                    Assert.IsTrue(extent.Contains(this.c1C));
-                    Assert.IsTrue(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsFalse(extent.Contains(this.c2B));
-                    Assert.IsFalse(extent.Contains(this.c2C));
-                    Assert.IsFalse(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsFalse(extent.Contains(this.c3B));
-                    Assert.IsFalse(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsFalse(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, true, true, true);
+                    this.AssertC2(extent, false, false, false, false);
+                    this.AssertC3(extent, false, false, false, false);
+                    this.AssertC4(extent, false, false, false, false);
 
                     // Between 6 and 10
                     extent = this.LocalExtent(C1Meta.ObjectType);
                     extent.Filter.AddBetween(C1Meta.C1AllorsDateTime, dateTime6, dateTime10);
 
                     Assert.AreEqual(0, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsFalse(extent.Contains(this.c1B));
-                    Assert.IsFalse(extent.Contains(this.c1C));
-                    Assert.IsFalse(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsFalse(extent.Contains(this.c2B));
-                    Assert.IsFalse(extent.Contains(this.c2C));
-                    Assert.IsFalse(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsFalse(extent.Contains(this.c3B));
-                    Assert.IsFalse(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsFalse(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, false, false, false);
+                    this.AssertC2(extent, false, false, false, false);
+                    this.AssertC3(extent, false, false, false, false);
+                    this.AssertC4(extent, false, false, false, false);
 
                     // Interface
                     // Between 1 and 3
@@ -15828,88 +12550,40 @@ namespace Allors.Adapters.Special
                     extent.Filter.AddBetween(I12Meta.I12AllorsDateTime, dateTime1, dateTime3);
 
                     Assert.AreEqual(0, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsFalse(extent.Contains(this.c1B));
-                    Assert.IsFalse(extent.Contains(this.c1C));
-                    Assert.IsFalse(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsFalse(extent.Contains(this.c2B));
-                    Assert.IsFalse(extent.Contains(this.c2C));
-                    Assert.IsFalse(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsFalse(extent.Contains(this.c3B));
-                    Assert.IsFalse(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsFalse(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, false, false, false);
+                    this.AssertC2(extent, false, false, false, false);
+                    this.AssertC3(extent, false, false, false, false);
+                    this.AssertC4(extent, false, false, false, false);
 
                     // Between 3 and 4
                     extent = this.LocalExtent(I12Meta.ObjectType);
                     extent.Filter.AddBetween(I12Meta.I12AllorsDateTime, dateTime3, dateTime4);
 
                     Assert.AreEqual(2, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsTrue(extent.Contains(this.c1B));
-                    Assert.IsFalse(extent.Contains(this.c1C));
-                    Assert.IsFalse(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsTrue(extent.Contains(this.c2B));
-                    Assert.IsFalse(extent.Contains(this.c2C));
-                    Assert.IsFalse(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsFalse(extent.Contains(this.c3B));
-                    Assert.IsFalse(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsFalse(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, true, false, false);
+                    this.AssertC2(extent, false, true, false, false);
+                    this.AssertC3(extent, false, false, false, false);
+                    this.AssertC4(extent, false, false, false, false);
 
                     // Between 4 and 5
                     extent = this.LocalExtent(I12Meta.ObjectType);
                     extent.Filter.AddBetween(I12Meta.I12AllorsDateTime, dateTime4, dateTime5);
 
                     Assert.AreEqual(6, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsTrue(extent.Contains(this.c1B));
-                    Assert.IsTrue(extent.Contains(this.c1C));
-                    Assert.IsTrue(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsTrue(extent.Contains(this.c2B));
-                    Assert.IsTrue(extent.Contains(this.c2C));
-                    Assert.IsTrue(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsFalse(extent.Contains(this.c3B));
-                    Assert.IsFalse(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsFalse(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, true, true, true);
+                    this.AssertC2(extent, false, true, true, true);
+                    this.AssertC3(extent, false, false, false, false);
+                    this.AssertC4(extent, false, false, false, false);
 
                     // Between 6 and 10
                     extent = this.LocalExtent(I12Meta.ObjectType);
                     extent.Filter.AddBetween(I12Meta.I12AllorsDateTime, dateTime6, dateTime10);
 
                     Assert.AreEqual(0, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsFalse(extent.Contains(this.c1B));
-                    Assert.IsFalse(extent.Contains(this.c1C));
-                    Assert.IsFalse(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsFalse(extent.Contains(this.c2B));
-                    Assert.IsFalse(extent.Contains(this.c2C));
-                    Assert.IsFalse(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsFalse(extent.Contains(this.c3B));
-                    Assert.IsFalse(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsFalse(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, false, false, false);
+                    this.AssertC2(extent, false, false, false, false);
+                    this.AssertC3(extent, false, false, false, false);
+                    this.AssertC4(extent, false, false, false, false);
 
                     // Super Interface
                     // Between 1 and 3
@@ -15917,88 +12591,40 @@ namespace Allors.Adapters.Special
                     extent.Filter.AddBetween(S1234Meta.S1234AllorsDateTime, dateTime1, dateTime3);
 
                     Assert.AreEqual(0, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsFalse(extent.Contains(this.c1B));
-                    Assert.IsFalse(extent.Contains(this.c1C));
-                    Assert.IsFalse(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsFalse(extent.Contains(this.c2B));
-                    Assert.IsFalse(extent.Contains(this.c2C));
-                    Assert.IsFalse(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsFalse(extent.Contains(this.c3B));
-                    Assert.IsFalse(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsFalse(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, false, false, false);
+                    this.AssertC2(extent, false, false, false, false);
+                    this.AssertC3(extent, false, false, false, false);
+                    this.AssertC4(extent, false, false, false, false);
 
                     // Between 3 and 4
                     extent = this.LocalExtent(S1234Meta.ObjectType);
                     extent.Filter.AddBetween(S1234Meta.S1234AllorsDateTime, dateTime3, dateTime4);
 
                     Assert.AreEqual(4, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsTrue(extent.Contains(this.c1B));
-                    Assert.IsFalse(extent.Contains(this.c1C));
-                    Assert.IsFalse(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsTrue(extent.Contains(this.c2B));
-                    Assert.IsFalse(extent.Contains(this.c2C));
-                    Assert.IsFalse(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsTrue(extent.Contains(this.c3B));
-                    Assert.IsFalse(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsTrue(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, true, false, false);
+                    this.AssertC2(extent, false, true, false, false);
+                    this.AssertC3(extent, false, true, false, false);
+                    this.AssertC4(extent, false, true, false, false);
 
                     // Between 4 and 5
                     extent = this.LocalExtent(S1234Meta.ObjectType);
                     extent.Filter.AddBetween(S1234Meta.S1234AllorsDateTime, dateTime4, dateTime5);
 
                     Assert.AreEqual(12, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsTrue(extent.Contains(this.c1B));
-                    Assert.IsTrue(extent.Contains(this.c1C));
-                    Assert.IsTrue(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsTrue(extent.Contains(this.c2B));
-                    Assert.IsTrue(extent.Contains(this.c2C));
-                    Assert.IsTrue(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsTrue(extent.Contains(this.c3B));
-                    Assert.IsTrue(extent.Contains(this.c3C));
-                    Assert.IsTrue(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsTrue(extent.Contains(this.c4B));
-                    Assert.IsTrue(extent.Contains(this.c4C));
-                    Assert.IsTrue(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, true, true, true);
+                    this.AssertC2(extent, false, true, true, true);
+                    this.AssertC3(extent, false, true, true, true);
+                    this.AssertC4(extent, false, true, true, true);
 
                     // Between 6 and 10
                     extent = this.LocalExtent(S1234Meta.ObjectType);
                     extent.Filter.AddBetween(S1234Meta.S1234AllorsDateTime, dateTime6, dateTime10);
 
                     Assert.AreEqual(0, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsFalse(extent.Contains(this.c1B));
-                    Assert.IsFalse(extent.Contains(this.c1C));
-                    Assert.IsFalse(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsFalse(extent.Contains(this.c2B));
-                    Assert.IsFalse(extent.Contains(this.c2C));
-                    Assert.IsFalse(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsFalse(extent.Contains(this.c3B));
-                    Assert.IsFalse(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsFalse(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, false, false, false);
+                    this.AssertC2(extent, false, false, false, false);
+                    this.AssertC3(extent, false, false, false, false);
+                    this.AssertC4(extent, false, false, false, false);
 
                     // Class - Wrong RelationType0
                     // Between 1 and 3
@@ -16101,66 +12727,30 @@ namespace Allors.Adapters.Special
                     extent.Filter.AddLessThan(C1Meta.C1AllorsDateTime, dateTime4);
 
                     Assert.AreEqual(0, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsFalse(extent.Contains(this.c1B));
-                    Assert.IsFalse(extent.Contains(this.c1C));
-                    Assert.IsFalse(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsFalse(extent.Contains(this.c2B));
-                    Assert.IsFalse(extent.Contains(this.c2C));
-                    Assert.IsFalse(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsFalse(extent.Contains(this.c3B));
-                    Assert.IsFalse(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsFalse(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, false, false, false);
+                    this.AssertC2(extent, false, false, false, false);
+                    this.AssertC3(extent, false, false, false, false);
+                    this.AssertC4(extent, false, false, false, false);
 
                     // Less Than 5
                     extent = this.LocalExtent(C1Meta.ObjectType);
                     extent.Filter.AddLessThan(C1Meta.C1AllorsDateTime, dateTime5);
 
                     Assert.AreEqual(1, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsTrue(extent.Contains(this.c1B));
-                    Assert.IsFalse(extent.Contains(this.c1C));
-                    Assert.IsFalse(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsFalse(extent.Contains(this.c2B));
-                    Assert.IsFalse(extent.Contains(this.c2C));
-                    Assert.IsFalse(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsFalse(extent.Contains(this.c3B));
-                    Assert.IsFalse(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsFalse(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, true, false, false);
+                    this.AssertC2(extent, false, false, false, false);
+                    this.AssertC3(extent, false, false, false, false);
+                    this.AssertC4(extent, false, false, false, false); 
 
                     // Less Than 6
                     extent = this.LocalExtent(C1Meta.ObjectType);
                     extent.Filter.AddLessThan(C1Meta.C1AllorsDateTime, dateTime6);
 
                     Assert.AreEqual(3, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsTrue(extent.Contains(this.c1B));
-                    Assert.IsTrue(extent.Contains(this.c1C));
-                    Assert.IsTrue(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsFalse(extent.Contains(this.c2B));
-                    Assert.IsFalse(extent.Contains(this.c2C));
-                    Assert.IsFalse(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsFalse(extent.Contains(this.c3B));
-                    Assert.IsFalse(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsFalse(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, true, true, true);
+                    this.AssertC2(extent, false, false, false, false);
+                    this.AssertC3(extent, false, false, false, false);
+                    this.AssertC4(extent, false, false, false, false); 
 
                     // Interface
                     // Less Than 4
@@ -16168,66 +12758,30 @@ namespace Allors.Adapters.Special
                     extent.Filter.AddLessThan(I12Meta.I12AllorsDateTime, dateTime4);
 
                     Assert.AreEqual(0, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsFalse(extent.Contains(this.c1B));
-                    Assert.IsFalse(extent.Contains(this.c1C));
-                    Assert.IsFalse(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsFalse(extent.Contains(this.c2B));
-                    Assert.IsFalse(extent.Contains(this.c2C));
-                    Assert.IsFalse(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsFalse(extent.Contains(this.c3B));
-                    Assert.IsFalse(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsFalse(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, false, false, false);
+                    this.AssertC2(extent, false, false, false, false);
+                    this.AssertC3(extent, false, false, false, false);
+                    this.AssertC4(extent, false, false, false, false);
 
                     // Less Than 5
                     extent = this.LocalExtent(I12Meta.ObjectType);
                     extent.Filter.AddLessThan(I12Meta.I12AllorsDateTime, dateTime5);
 
                     Assert.AreEqual(2, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsTrue(extent.Contains(this.c1B));
-                    Assert.IsFalse(extent.Contains(this.c1C));
-                    Assert.IsFalse(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsTrue(extent.Contains(this.c2B));
-                    Assert.IsFalse(extent.Contains(this.c2C));
-                    Assert.IsFalse(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsFalse(extent.Contains(this.c3B));
-                    Assert.IsFalse(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsFalse(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, true, false, false);
+                    this.AssertC2(extent, false, true, false, false);
+                    this.AssertC3(extent, false, false, false, false);
+                    this.AssertC4(extent, false, false, false, false);
 
                     // Less Than 6
                     extent = this.LocalExtent(I12Meta.ObjectType);
                     extent.Filter.AddLessThan(I12Meta.I12AllorsDateTime, dateTime6);
 
                     Assert.AreEqual(6, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsTrue(extent.Contains(this.c1B));
-                    Assert.IsTrue(extent.Contains(this.c1C));
-                    Assert.IsTrue(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsTrue(extent.Contains(this.c2B));
-                    Assert.IsTrue(extent.Contains(this.c2C));
-                    Assert.IsTrue(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsFalse(extent.Contains(this.c3B));
-                    Assert.IsFalse(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsFalse(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, true, true, true);
+                    this.AssertC2(extent, false, true, true, true);
+                    this.AssertC3(extent, false, false, false, false);
+                    this.AssertC4(extent, false, false, false, false); 
 
                     // Super Interface
                     // Less Than 4
@@ -16235,66 +12789,30 @@ namespace Allors.Adapters.Special
                     extent.Filter.AddLessThan(S1234Meta.S1234AllorsDateTime, dateTime4);
 
                     Assert.AreEqual(0, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsFalse(extent.Contains(this.c1B));
-                    Assert.IsFalse(extent.Contains(this.c1C));
-                    Assert.IsFalse(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsFalse(extent.Contains(this.c2B));
-                    Assert.IsFalse(extent.Contains(this.c2C));
-                    Assert.IsFalse(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsFalse(extent.Contains(this.c3B));
-                    Assert.IsFalse(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsFalse(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, false, false, false);
+                    this.AssertC2(extent, false, false, false, false);
+                    this.AssertC3(extent, false, false, false, false);
+                    this.AssertC4(extent, false, false, false, false); 
 
                     // Less Than 5
                     extent = this.LocalExtent(S1234Meta.ObjectType);
                     extent.Filter.AddLessThan(S1234Meta.S1234AllorsDateTime, dateTime5);
 
                     Assert.AreEqual(4, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsTrue(extent.Contains(this.c1B));
-                    Assert.IsFalse(extent.Contains(this.c1C));
-                    Assert.IsFalse(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsTrue(extent.Contains(this.c2B));
-                    Assert.IsFalse(extent.Contains(this.c2C));
-                    Assert.IsFalse(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsTrue(extent.Contains(this.c3B));
-                    Assert.IsFalse(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsTrue(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, true, false, false);
+                    this.AssertC2(extent, false, true, false, false);
+                    this.AssertC3(extent, false, true, false, false);
+                    this.AssertC4(extent, false, true, false, false); 
 
                     // Less Than 6
                     extent = this.LocalExtent(S1234Meta.ObjectType);
                     extent.Filter.AddLessThan(S1234Meta.S1234AllorsDateTime, dateTime6);
 
                     Assert.AreEqual(12, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsTrue(extent.Contains(this.c1B));
-                    Assert.IsTrue(extent.Contains(this.c1C));
-                    Assert.IsTrue(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsTrue(extent.Contains(this.c2B));
-                    Assert.IsTrue(extent.Contains(this.c2C));
-                    Assert.IsTrue(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsTrue(extent.Contains(this.c3B));
-                    Assert.IsTrue(extent.Contains(this.c3C));
-                    Assert.IsTrue(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsTrue(extent.Contains(this.c4B));
-                    Assert.IsTrue(extent.Contains(this.c4C));
-                    Assert.IsTrue(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, true, true, true);
+                    this.AssertC2(extent, false, true, true, true);
+                    this.AssertC3(extent, false, true, true, true);
+                    this.AssertC4(extent, false, true, true, true);
 
                     // Class - Wrong RelationType
 
@@ -16475,66 +12993,30 @@ namespace Allors.Adapters.Special
                     extent.Filter.AddGreaterThan(C1Meta.C1AllorsDateTime, dateTime3);
 
                     Assert.AreEqual(3, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsTrue(extent.Contains(this.c1B));
-                    Assert.IsTrue(extent.Contains(this.c1C));
-                    Assert.IsTrue(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsFalse(extent.Contains(this.c2B));
-                    Assert.IsFalse(extent.Contains(this.c2C));
-                    Assert.IsFalse(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsFalse(extent.Contains(this.c3B));
-                    Assert.IsFalse(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsFalse(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, true, true, true);
+                    this.AssertC2(extent, false, false, false, false);
+                    this.AssertC3(extent, false, false, false, false);
+                    this.AssertC4(extent, false, false, false, false); 
 
                     // Greater Than 4
                     extent = this.LocalExtent(C1Meta.ObjectType);
                     extent.Filter.AddGreaterThan(C1Meta.C1AllorsDateTime, dateTime4);
 
                     Assert.AreEqual(2, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsFalse(extent.Contains(this.c1B));
-                    Assert.IsTrue(extent.Contains(this.c1C));
-                    Assert.IsTrue(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsFalse(extent.Contains(this.c2B));
-                    Assert.IsFalse(extent.Contains(this.c2C));
-                    Assert.IsFalse(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsFalse(extent.Contains(this.c3B));
-                    Assert.IsFalse(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsFalse(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, false, true, true);
+                    this.AssertC2(extent, false, false, false, false);
+                    this.AssertC3(extent, false, false, false, false);
+                    this.AssertC4(extent, false, false, false, false);
 
                     // Greater Than 5
                     extent = this.LocalExtent(C1Meta.ObjectType);
                     extent.Filter.AddGreaterThan(C1Meta.C1AllorsDateTime, dateTime5);
 
                     Assert.AreEqual(0, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsFalse(extent.Contains(this.c1B));
-                    Assert.IsFalse(extent.Contains(this.c1C));
-                    Assert.IsFalse(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsFalse(extent.Contains(this.c2B));
-                    Assert.IsFalse(extent.Contains(this.c2C));
-                    Assert.IsFalse(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsFalse(extent.Contains(this.c3B));
-                    Assert.IsFalse(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsFalse(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, false, false, false);
+                    this.AssertC2(extent, false, false, false, false);
+                    this.AssertC3(extent, false, false, false, false);
+                    this.AssertC4(extent, false, false, false, false);
 
                     // Interface
                     // Greater Than 3
@@ -16542,66 +13024,30 @@ namespace Allors.Adapters.Special
                     extent.Filter.AddGreaterThan(I12Meta.I12AllorsDateTime, dateTime3);
 
                     Assert.AreEqual(6, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsTrue(extent.Contains(this.c1B));
-                    Assert.IsTrue(extent.Contains(this.c1C));
-                    Assert.IsTrue(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsTrue(extent.Contains(this.c2B));
-                    Assert.IsTrue(extent.Contains(this.c2C));
-                    Assert.IsTrue(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsFalse(extent.Contains(this.c3B));
-                    Assert.IsFalse(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsFalse(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, true, true, true);
+                    this.AssertC2(extent, false, true, true, true);
+                    this.AssertC3(extent, false, false, false, false);
+                    this.AssertC4(extent, false, false, false, false);
 
                     // Greater Than 4
                     extent = this.LocalExtent(I12Meta.ObjectType);
                     extent.Filter.AddGreaterThan(I12Meta.I12AllorsDateTime, dateTime4);
 
                     Assert.AreEqual(4, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsFalse(extent.Contains(this.c1B));
-                    Assert.IsTrue(extent.Contains(this.c1C));
-                    Assert.IsTrue(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsFalse(extent.Contains(this.c2B));
-                    Assert.IsTrue(extent.Contains(this.c2C));
-                    Assert.IsTrue(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsFalse(extent.Contains(this.c3B));
-                    Assert.IsFalse(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsFalse(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, false, true, true);
+                    this.AssertC2(extent, false, false, true, true);
+                    this.AssertC3(extent, false, false, false, false);
+                    this.AssertC4(extent, false, false, false, false);
 
                     // Greater Than 5
                     extent = this.LocalExtent(I12Meta.ObjectType);
                     extent.Filter.AddGreaterThan(I12Meta.I12AllorsDateTime, dateTime5);
 
                     Assert.AreEqual(0, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsFalse(extent.Contains(this.c1B));
-                    Assert.IsFalse(extent.Contains(this.c1C));
-                    Assert.IsFalse(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsFalse(extent.Contains(this.c2B));
-                    Assert.IsFalse(extent.Contains(this.c2C));
-                    Assert.IsFalse(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsFalse(extent.Contains(this.c3B));
-                    Assert.IsFalse(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsFalse(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, false, false, false);
+                    this.AssertC2(extent, false, false, false, false);
+                    this.AssertC3(extent, false, false, false, false);
+                    this.AssertC4(extent, false, false, false, false);
 
                     // Super Interface
                     // Greater Than 3
@@ -16609,66 +13055,30 @@ namespace Allors.Adapters.Special
                     extent.Filter.AddGreaterThan(S1234Meta.S1234AllorsDateTime, dateTime3);
 
                     Assert.AreEqual(12, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsTrue(extent.Contains(this.c1B));
-                    Assert.IsTrue(extent.Contains(this.c1C));
-                    Assert.IsTrue(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsTrue(extent.Contains(this.c2B));
-                    Assert.IsTrue(extent.Contains(this.c2C));
-                    Assert.IsTrue(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsTrue(extent.Contains(this.c3B));
-                    Assert.IsTrue(extent.Contains(this.c3C));
-                    Assert.IsTrue(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsTrue(extent.Contains(this.c4B));
-                    Assert.IsTrue(extent.Contains(this.c4C));
-                    Assert.IsTrue(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, true, true, true);
+                    this.AssertC2(extent, false, true, true, true);
+                    this.AssertC3(extent, false, true, true, true);
+                    this.AssertC4(extent, false, true, true, true);
 
                     // Greater Than 4
                     extent = this.LocalExtent(S1234Meta.ObjectType);
                     extent.Filter.AddGreaterThan(S1234Meta.S1234AllorsDateTime, dateTime4);
 
                     Assert.AreEqual(8, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsFalse(extent.Contains(this.c1B));
-                    Assert.IsTrue(extent.Contains(this.c1C));
-                    Assert.IsTrue(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsFalse(extent.Contains(this.c2B));
-                    Assert.IsTrue(extent.Contains(this.c2C));
-                    Assert.IsTrue(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsFalse(extent.Contains(this.c3B));
-                    Assert.IsTrue(extent.Contains(this.c3C));
-                    Assert.IsTrue(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsFalse(extent.Contains(this.c4B));
-                    Assert.IsTrue(extent.Contains(this.c4C));
-                    Assert.IsTrue(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, false, true, true);
+                    this.AssertC2(extent, false, false, true, true);
+                    this.AssertC3(extent, false, false, true, true);
+                    this.AssertC4(extent, false, false, true, true); 
 
                     // Greater Than 5
                     extent = this.LocalExtent(S1234Meta.ObjectType);
                     extent.Filter.AddGreaterThan(S1234Meta.S1234AllorsDateTime, dateTime5);
 
                     Assert.AreEqual(0, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsFalse(extent.Contains(this.c1B));
-                    Assert.IsFalse(extent.Contains(this.c1C));
-                    Assert.IsFalse(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsFalse(extent.Contains(this.c2B));
-                    Assert.IsFalse(extent.Contains(this.c2C));
-                    Assert.IsFalse(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsFalse(extent.Contains(this.c3B));
-                    Assert.IsFalse(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsFalse(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, false, false, false);
+                    this.AssertC2(extent, false, false, false, false);
+                    this.AssertC3(extent, false, false, false, false);
+                    this.AssertC4(extent, false, false, false, false);
 
                     // Class - Wrong RelationType
 
@@ -16851,66 +13261,30 @@ namespace Allors.Adapters.Special
                     extent.Filter.AddEquals(C1Meta.C1AllorsDateTime, dateTime3);
 
                     Assert.AreEqual(0, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsFalse(extent.Contains(this.c1B));
-                    Assert.IsFalse(extent.Contains(this.c1C));
-                    Assert.IsFalse(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsFalse(extent.Contains(this.c2B));
-                    Assert.IsFalse(extent.Contains(this.c2C));
-                    Assert.IsFalse(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsFalse(extent.Contains(this.c3B));
-                    Assert.IsFalse(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsFalse(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, false, false, false);
+                    this.AssertC2(extent, false, false, false, false);
+                    this.AssertC3(extent, false, false, false, false);
+                    this.AssertC4(extent, false, false, false, false);
 
                     // Equal 4
                     extent = this.LocalExtent(C1Meta.ObjectType);
                     extent.Filter.AddEquals(C1Meta.C1AllorsDateTime, dateTime4);
 
                     Assert.AreEqual(1, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsTrue(extent.Contains(this.c1B));
-                    Assert.IsFalse(extent.Contains(this.c1C));
-                    Assert.IsFalse(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsFalse(extent.Contains(this.c2B));
-                    Assert.IsFalse(extent.Contains(this.c2C));
-                    Assert.IsFalse(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsFalse(extent.Contains(this.c3B));
-                    Assert.IsFalse(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsFalse(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
-
+                    this.AssertC1(extent, false, true, false, false);
+                    this.AssertC2(extent, false, false, false, false);
+                    this.AssertC3(extent, false, false, false, false);
+                    this.AssertC4(extent, false, false, false, false);
+                    
                     // Equal 5
                     extent = this.LocalExtent(C1Meta.ObjectType);
                     extent.Filter.AddEquals(C1Meta.C1AllorsDateTime, dateTime5);
 
                     Assert.AreEqual(2, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsFalse(extent.Contains(this.c1B));
-                    Assert.IsTrue(extent.Contains(this.c1C));
-                    Assert.IsTrue(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsFalse(extent.Contains(this.c2B));
-                    Assert.IsFalse(extent.Contains(this.c2C));
-                    Assert.IsFalse(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsFalse(extent.Contains(this.c3B));
-                    Assert.IsFalse(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsFalse(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, false, true, true);
+                    this.AssertC2(extent, false, false, false, false);
+                    this.AssertC3(extent, false, false, false, false);
+                    this.AssertC4(extent, false, false, false, false);
 
                     // Interface
                     // Equal 3
@@ -16918,66 +13292,30 @@ namespace Allors.Adapters.Special
                     extent.Filter.AddEquals(I12Meta.I12AllorsDateTime, dateTime3);
 
                     Assert.AreEqual(0, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsFalse(extent.Contains(this.c1B));
-                    Assert.IsFalse(extent.Contains(this.c1C));
-                    Assert.IsFalse(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsFalse(extent.Contains(this.c2B));
-                    Assert.IsFalse(extent.Contains(this.c2C));
-                    Assert.IsFalse(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsFalse(extent.Contains(this.c3B));
-                    Assert.IsFalse(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsFalse(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, false, false, false);
+                    this.AssertC2(extent, false, false, false, false);
+                    this.AssertC3(extent, false, false, false, false);
+                    this.AssertC4(extent, false, false, false, false);
 
                     // Equal 4
                     extent = this.LocalExtent(I12Meta.ObjectType);
                     extent.Filter.AddEquals(I12Meta.I12AllorsDateTime, dateTime4);
 
                     Assert.AreEqual(2, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsTrue(extent.Contains(this.c1B));
-                    Assert.IsFalse(extent.Contains(this.c1C));
-                    Assert.IsFalse(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsTrue(extent.Contains(this.c2B));
-                    Assert.IsFalse(extent.Contains(this.c2C));
-                    Assert.IsFalse(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsFalse(extent.Contains(this.c3B));
-                    Assert.IsFalse(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsFalse(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, true, false, false);
+                    this.AssertC2(extent, false, true, false, false);
+                    this.AssertC3(extent, false, false, false, false);
+                    this.AssertC4(extent, false, false, false, false);
 
                     // Equal 5
                     extent = this.LocalExtent(I12Meta.ObjectType);
                     extent.Filter.AddEquals(I12Meta.I12AllorsDateTime, dateTime5);
 
                     Assert.AreEqual(4, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsFalse(extent.Contains(this.c1B));
-                    Assert.IsTrue(extent.Contains(this.c1C));
-                    Assert.IsTrue(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsFalse(extent.Contains(this.c2B));
-                    Assert.IsTrue(extent.Contains(this.c2C));
-                    Assert.IsTrue(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsFalse(extent.Contains(this.c3B));
-                    Assert.IsFalse(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsFalse(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, false, true, true);
+                    this.AssertC2(extent, false, false, true, true);
+                    this.AssertC3(extent, false, false, false, false);
+                    this.AssertC4(extent, false, false, false, false);
 
                     // Super Interface
                     // Equal 3
@@ -16985,66 +13323,30 @@ namespace Allors.Adapters.Special
                     extent.Filter.AddEquals(S1234Meta.S1234AllorsDateTime, dateTime3);
 
                     Assert.AreEqual(0, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsFalse(extent.Contains(this.c1B));
-                    Assert.IsFalse(extent.Contains(this.c1C));
-                    Assert.IsFalse(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsFalse(extent.Contains(this.c2B));
-                    Assert.IsFalse(extent.Contains(this.c2C));
-                    Assert.IsFalse(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsFalse(extent.Contains(this.c3B));
-                    Assert.IsFalse(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsFalse(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, false, false, false);
+                    this.AssertC2(extent, false, false, false, false);
+                    this.AssertC3(extent, false, false, false, false);
+                    this.AssertC4(extent, false, false, false, false);
 
                     // Equal 4
                     extent = this.LocalExtent(S1234Meta.ObjectType);
                     extent.Filter.AddEquals(S1234Meta.S1234AllorsDateTime, dateTime4);
 
                     Assert.AreEqual(4, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsTrue(extent.Contains(this.c1B));
-                    Assert.IsFalse(extent.Contains(this.c1C));
-                    Assert.IsFalse(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsTrue(extent.Contains(this.c2B));
-                    Assert.IsFalse(extent.Contains(this.c2C));
-                    Assert.IsFalse(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsTrue(extent.Contains(this.c3B));
-                    Assert.IsFalse(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsTrue(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, true, false, false);
+                    this.AssertC2(extent, false, true, false, false);
+                    this.AssertC3(extent, false, true, false, false);
+                    this.AssertC4(extent, false, true, false, false);
 
                     // Equal 5
                     extent = this.LocalExtent(S1234Meta.ObjectType);
                     extent.Filter.AddEquals(S1234Meta.S1234AllorsDateTime, dateTime5);
 
                     Assert.AreEqual(8, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsFalse(extent.Contains(this.c1B));
-                    Assert.IsTrue(extent.Contains(this.c1C));
-                    Assert.IsTrue(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsFalse(extent.Contains(this.c2B));
-                    Assert.IsTrue(extent.Contains(this.c2C));
-                    Assert.IsTrue(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsFalse(extent.Contains(this.c3B));
-                    Assert.IsTrue(extent.Contains(this.c3C));
-                    Assert.IsTrue(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsFalse(extent.Contains(this.c4B));
-                    Assert.IsTrue(extent.Contains(this.c4C));
-                    Assert.IsTrue(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, false, true, true);
+                    this.AssertC2(extent, false, false, true, true);
+                    this.AssertC3(extent, false, false, true, true);
+                    this.AssertC4(extent, false, false, true, true);
 
                     // Class - Wrong RelationType
                     // Equal 3
@@ -17203,66 +13505,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddEquals(C1Meta.C1AllorsInteger, Zero2Four.Zero);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Equal 1
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddEquals(C1Meta.C1AllorsInteger, Zero2Four.One);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Equal 2
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddEquals(C1Meta.C1AllorsInteger, Zero2Four.Two);
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Interface
 
@@ -17271,66 +13537,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddEquals(I12Meta.I12AllorsInteger, Zero2Four.Zero);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Equal 1
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddEquals(I12Meta.I12AllorsInteger, Zero2Four.One);
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, true, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Equal 2
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddEquals(I12Meta.I12AllorsInteger, Zero2Four.Two);
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, true, true);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Super Interface
 
@@ -17339,66 +13569,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddEquals(S1234Meta.S1234AllorsInteger, Zero2Four.Zero);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Equal 1
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddEquals(S1234Meta.S1234AllorsInteger, Zero2Four.One);
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, true, false, false);
+                this.AssertC3(extent, false, true, false, false);
+                this.AssertC4(extent, false, true, false, false);
 
                 // Equal 2
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddEquals(S1234Meta.S1234AllorsInteger, Zero2Four.Two);
 
                 Assert.AreEqual(8, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsTrue(extent.Contains(this.c4C));
-                Assert.IsTrue(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, true, true);
+                this.AssertC3(extent, false, false, true, true);
+                this.AssertC4(extent, false, false, true, true);
 
                 // Class - Wrong RelationType
 
@@ -17880,88 +14074,40 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddContains(C1Meta.C1C2many2many, this.c2C);
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddContains(C1Meta.C1C2many2many, this.c2B);
                 extent.Filter.AddContains(C1Meta.C1C2many2many, this.c2C);
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false); 
 
                 // Interface
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddContains(C1Meta.C1I12many2many, this.c2C);
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Super Interface
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddContains(S1234Meta.S1234many2many, this.c1A);
 
                 Assert.AreEqual(9, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, false, true, true, true);
+                this.AssertC4(extent, false, false, false, false); 
 
                 // TODO: wrong relation
             }
@@ -17980,66 +14126,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddExists(C1Meta.C1C2many2many);
 
                 Assert.AreEqual(3, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Interface
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddExists(I12Meta.I12C2many2many);
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsTrue(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, true, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Super Interface
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddExists(S1234Meta.S1234C2many2many);
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsTrue(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, true, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Class - Wrong RelationType
                 extent = this.LocalExtent(C1Meta.ObjectType);
@@ -18137,22 +14247,10 @@ namespace Allors.Adapters.Special
                     extent.Filter.AddContainedIn(C1Meta.C1C1one2many, inExtent);
 
                     Assert.AreEqual(2, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsTrue(extent.Contains(this.c1B));
-                    Assert.IsTrue(extent.Contains(this.c1C));
-                    Assert.IsFalse(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsFalse(extent.Contains(this.c2B));
-                    Assert.IsFalse(extent.Contains(this.c2C));
-                    Assert.IsFalse(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsFalse(extent.Contains(this.c3B));
-                    Assert.IsFalse(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsFalse(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, true, true, false);
+                    this.AssertC2(extent, false, false, false, false);
+                    this.AssertC3(extent, false, false, false, false);
+                    this.AssertC4(extent, false, false, false, false);
 
                     inExtent = this.LocalExtent(C2Meta.ObjectType);
                     if (useOperator)
@@ -18166,22 +14264,10 @@ namespace Allors.Adapters.Special
                     extent.Filter.AddContainedIn(C1Meta.C1C2one2many, inExtent);
 
                     Assert.AreEqual(2, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsTrue(extent.Contains(this.c1B));
-                    Assert.IsTrue(extent.Contains(this.c1C));
-                    Assert.IsFalse(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsFalse(extent.Contains(this.c2B));
-                    Assert.IsFalse(extent.Contains(this.c2C));
-                    Assert.IsFalse(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsFalse(extent.Contains(this.c3B));
-                    Assert.IsFalse(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsFalse(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, true, true, false);
+                    this.AssertC2(extent, false, false, false, false);
+                    this.AssertC3(extent, false, false, false, false);
+                    this.AssertC4(extent, false, false, false, false);
 
                     inExtent = this.LocalExtent(C4Meta.ObjectType);
                     if (useOperator)
@@ -18195,22 +14281,10 @@ namespace Allors.Adapters.Special
                     extent.Filter.AddContainedIn(C3Meta.C3C4one2many, inExtent);
 
                     Assert.AreEqual(2, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsFalse(extent.Contains(this.c1B));
-                    Assert.IsFalse(extent.Contains(this.c1C));
-                    Assert.IsFalse(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsFalse(extent.Contains(this.c2B));
-                    Assert.IsFalse(extent.Contains(this.c2C));
-                    Assert.IsFalse(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsTrue(extent.Contains(this.c3B));
-                    Assert.IsTrue(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsFalse(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, false, false, false);
+                    this.AssertC2(extent, false, false, false, false);
+                    this.AssertC3(extent, false, true, true, false);
+                    this.AssertC4(extent, false, false, false, false);
 
                     // ContainedIn Extent over Shared Interface
                     // Emtpy Extent
@@ -18247,22 +14321,10 @@ namespace Allors.Adapters.Special
                     extent.Filter.AddContainedIn(C1Meta.C1C1one2many, inExtent);
 
                     Assert.AreEqual(2, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsTrue(extent.Contains(this.c1B));
-                    Assert.IsTrue(extent.Contains(this.c1C));
-                    Assert.IsFalse(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsFalse(extent.Contains(this.c2B));
-                    Assert.IsFalse(extent.Contains(this.c2C));
-                    Assert.IsFalse(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsFalse(extent.Contains(this.c3B));
-                    Assert.IsFalse(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsFalse(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, true, true, false);
+                    this.AssertC2(extent, false, false, false, false);
+                    this.AssertC3(extent, false, false, false, false);
+                    this.AssertC4(extent, false, false, false, false);
 
                     inExtent = this.LocalExtent(I12Meta.ObjectType);
                     if (useOperator)
@@ -18276,22 +14338,10 @@ namespace Allors.Adapters.Special
                     extent.Filter.AddContainedIn(C1Meta.C1C2one2many, inExtent);
 
                     Assert.AreEqual(2, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsTrue(extent.Contains(this.c1B));
-                    Assert.IsTrue(extent.Contains(this.c1C));
-                    Assert.IsFalse(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsFalse(extent.Contains(this.c2B));
-                    Assert.IsFalse(extent.Contains(this.c2C));
-                    Assert.IsFalse(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsFalse(extent.Contains(this.c3B));
-                    Assert.IsFalse(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsFalse(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, true, true, false);
+                    this.AssertC2(extent, false, false, false, false);
+                    this.AssertC3(extent, false, false, false, false);
+                    this.AssertC4(extent, false, false, false, false);
 
                     inExtent = this.LocalExtent(I34Meta.ObjectType);
                     if (useOperator)
@@ -18305,22 +14355,10 @@ namespace Allors.Adapters.Special
                     extent.Filter.AddContainedIn(C3Meta.C3C4one2many, inExtent);
 
                     Assert.AreEqual(2, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsFalse(extent.Contains(this.c1B));
-                    Assert.IsFalse(extent.Contains(this.c1C));
-                    Assert.IsFalse(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsFalse(extent.Contains(this.c2B));
-                    Assert.IsFalse(extent.Contains(this.c2C));
-                    Assert.IsFalse(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsTrue(extent.Contains(this.c3B));
-                    Assert.IsTrue(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsFalse(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, false, false, false);
+                    this.AssertC2(extent, false, false, false, false);
+                    this.AssertC3(extent, false, true, true, false);
+                    this.AssertC4(extent, false, false, false, false);
 
                     // RelationType from Interface to Class
 
@@ -18337,22 +14375,10 @@ namespace Allors.Adapters.Special
                     extent.Filter.AddContainedIn(I12Meta.I12C2one2many, inExtent);
 
                     Assert.AreEqual(1, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsTrue(extent.Contains(this.c1B));
-                    Assert.IsFalse(extent.Contains(this.c1C));
-                    Assert.IsFalse(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsFalse(extent.Contains(this.c2B));
-                    Assert.IsFalse(extent.Contains(this.c2C));
-                    Assert.IsFalse(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsFalse(extent.Contains(this.c3B));
-                    Assert.IsFalse(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsFalse(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, true, false, false);
+                    this.AssertC2(extent, false, false, false, false);
+                    this.AssertC3(extent, false, false, false, false);
+                    this.AssertC4(extent, false, false, false, false);
 
                     // ContainedIn Extent over Interface
                     inExtent = this.LocalExtent(I12Meta.ObjectType);
@@ -18367,22 +14393,10 @@ namespace Allors.Adapters.Special
                     extent.Filter.AddContainedIn(I12Meta.I12C2one2many, inExtent);
 
                     Assert.AreEqual(1, extent.Count);
-                    Assert.IsFalse(extent.Contains(this.c1A));
-                    Assert.IsTrue(extent.Contains(this.c1B));
-                    Assert.IsFalse(extent.Contains(this.c1C));
-                    Assert.IsFalse(extent.Contains(this.c1D));
-                    Assert.IsFalse(extent.Contains(this.c2A));
-                    Assert.IsFalse(extent.Contains(this.c2B));
-                    Assert.IsFalse(extent.Contains(this.c2C));
-                    Assert.IsFalse(extent.Contains(this.c2D));
-                    Assert.IsFalse(extent.Contains(this.c3A));
-                    Assert.IsFalse(extent.Contains(this.c3B));
-                    Assert.IsFalse(extent.Contains(this.c3C));
-                    Assert.IsFalse(extent.Contains(this.c3D));
-                    Assert.IsFalse(extent.Contains(this.c4A));
-                    Assert.IsFalse(extent.Contains(this.c4B));
-                    Assert.IsFalse(extent.Contains(this.c4C));
-                    Assert.IsFalse(extent.Contains(this.c4D));
+                    this.AssertC1(extent, false, true, false, false);
+                    this.AssertC2(extent, false, false, false, false);
+                    this.AssertC3(extent, false, false, false, false);
+                    this.AssertC4(extent, false, false, false, false);
                 }
             }
         }
@@ -18400,66 +14414,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddContains(C1Meta.C1C2one2many, this.c2C);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Interface
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddContains(C1Meta.C1I12one2many, this.c2C);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Super Interface
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddContains(S1234Meta.S1234one2many, this.c1B);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // TODO: wrong relation
             }
@@ -18478,67 +14456,31 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddExists(C1Meta.C1C2one2many);
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Interface
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddExists(I12Meta.I12C2one2many);
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
-
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, false, true, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
+               
                 // Super Interface
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddExists(S1234Meta.S1234C2one2many);
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
-
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, true, false);
+                this.AssertC4(extent, false, false, false, false);
+ 
                 // Class - Wrong RelationType
                 extent = this.LocalExtent(C1Meta.ObjectType);
 
@@ -18897,66 +14839,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddEquals(C1Meta.C1C2one2one, this.c2B);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Interface
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddEquals(I12Meta.I12C2one2one, this.c2A);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsTrue(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, true, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Super Interface
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddEquals(S1234Meta.S1234C2one2one, this.c2A);
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsTrue(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, true, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Class - Wrong RelationType
                 extent = this.LocalExtent(C1Meta.ObjectType);
@@ -19018,108 +14924,48 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddExists(C1Meta.C1C1one2one);
 
                 Assert.AreEqual(3, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddExists(C1Meta.C1C2one2one);
 
                 Assert.AreEqual(3, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 extent = this.LocalExtent(C3Meta.ObjectType);
                 extent.Filter.AddExists(C3Meta.C3C4one2one);
 
                 Assert.AreEqual(3, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
-
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, true, true, true);
+                this.AssertC4(extent, false, false, false, false);
+ 
                 // Interface
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddExists(I12Meta.I12C2one2one);
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsTrue(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, true, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Super Interface
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddExists(S1234Meta.S1234C2one2one);
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsTrue(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, true, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Class - Wrong RelationType
                 extent = this.LocalExtent(C1Meta.ObjectType);
@@ -19192,66 +15038,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddInstanceof(C1Meta.C1C2one2one, C2Meta.ObjectType);
 
                 Assert.AreEqual(3, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Interface
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddInstanceof(C1Meta.C1I12one2one, C2Meta.ObjectType);
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Super Interface
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddInstanceof(S1234Meta.S1234one2one, C2Meta.ObjectType);
 
                 Assert.AreEqual(3, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, false);
+                this.AssertC2(extent, false, false, true, false);
+                this.AssertC3(extent, false, false, true, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Interface
 
@@ -19260,87 +15070,39 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddInstanceof(C1Meta.C1C2one2one, I2Meta.ObjectType);
 
                 Assert.AreEqual(3, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Interface
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddInstanceof(C1Meta.C1I12one2one, I2Meta.ObjectType);
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddInstanceof(C1Meta.C1I12one2one, I12Meta.ObjectType);
 
                 Assert.AreEqual(3, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Super Interface
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddInstanceof(S1234Meta.S1234one2one, S1234Meta.ObjectType);
 
                 Assert.AreEqual(9, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, false, true, true, true);
+                this.AssertC4(extent, false, false, false, false);
 
                 // TODO: wrong relation
             }
@@ -19359,22 +15121,10 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddEquals(C1Meta.C1AllorsString, C1Meta.C1AllorsString);
 
                 Assert.AreEqual(3, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // TODO: Equal Role
             }
@@ -19395,129 +15145,57 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddEquals(C1Meta.C1AllorsString, string.Empty);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 extent = this.LocalExtent(C3Meta.ObjectType);
                 extent.Filter.AddEquals(C3Meta.C3AllorsString, string.Empty);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Equal "Abra"
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddEquals(C1Meta.C1AllorsString, "Abra");
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 extent = this.LocalExtent(C3Meta.ObjectType);
                 extent.Filter.AddEquals(C3Meta.C3AllorsString, "Abra");
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, true, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Equal "Abracadabra"
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddEquals(C1Meta.C1AllorsString, "Abracadabra");
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 extent = this.LocalExtent(C3Meta.ObjectType);
                 extent.Filter.AddEquals(C3Meta.C3AllorsString, "Abracadabra");
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, true, true);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Exclusive Interface
 
@@ -19526,129 +15204,57 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddEquals(I1Meta.I1AllorsString, string.Empty);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 extent = this.LocalExtent(I3Meta.ObjectType);
                 extent.Filter.AddEquals(I3Meta.I3AllorsString, string.Empty);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Equal "Abra"
                 extent = this.LocalExtent(I1Meta.ObjectType);
                 extent.Filter.AddEquals(I1Meta.I1AllorsString, "Abra");
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 extent = this.LocalExtent(I3Meta.ObjectType);
                 extent.Filter.AddEquals(I3Meta.I3AllorsString, "Abra");
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, true, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Equal "Abracadabra"
                 extent = this.LocalExtent(I1Meta.ObjectType);
                 extent.Filter.AddEquals(I1Meta.I1AllorsString, "Abracadabra");
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 extent = this.LocalExtent(I3Meta.ObjectType);
                 extent.Filter.AddEquals(I3Meta.I3AllorsString, "Abracadabra");
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, true, true);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Shared Interface
 
@@ -19657,255 +15263,111 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddEquals(I12Meta.I12AllorsString, string.Empty);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 extent = this.LocalExtent(I34Meta.ObjectType);
                 extent.Filter.AddEquals(I34Meta.I34AllorsString, string.Empty);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Equal "Abra"
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddEquals(I12Meta.I12AllorsString, "Abra");
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, true, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddEquals(I12Meta.I12AllorsString, "Abra");
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 extent = this.LocalExtent(I23Meta.ObjectType);
                 extent.Filter.AddEquals(I23Meta.I23AllorsString, "Abra");
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, true, false, false);
+                this.AssertC3(extent, false, true, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 extent = this.LocalExtent(C2Meta.ObjectType);
                 extent.Filter.AddEquals(I23Meta.I23AllorsString, "Abra");
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, true, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 extent = this.LocalExtent(C3Meta.ObjectType);
                 extent.Filter.AddEquals(I23Meta.I23AllorsString, "Abra");
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, true, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 extent = this.LocalExtent(I34Meta.ObjectType);
                 extent.Filter.AddEquals(I34Meta.I34AllorsString, "Abra");
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, true, false, false);
+                this.AssertC4(extent, false, true, false, false);
 
                 extent = this.LocalExtent(C3Meta.ObjectType);
                 extent.Filter.AddEquals(I34Meta.I34AllorsString, "Abra");
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, true, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Equal "Abracadabra"
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddEquals(I12Meta.I12AllorsString, "Abracadabra");
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, true, true);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddEquals(I12Meta.I12AllorsString, "Abracadabra");
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 extent = this.LocalExtent(I34Meta.ObjectType);
                 extent.Filter.AddEquals(I34Meta.I34AllorsString, "Abracadabra");
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsTrue(extent.Contains(this.c4C));
-                Assert.IsTrue(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, true, true);
+                this.AssertC4(extent, false, false, true, true);
 
                 // Super Interface
 
@@ -19914,66 +15376,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddEquals(S1234Meta.S1234AllorsString, string.Empty);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Equal "Abra"
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddEquals(S1234Meta.S1234AllorsString, "Abra");
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, true, false, false);
+                this.AssertC3(extent, false, true, false, false);
+                this.AssertC4(extent, false, true, false, false);
 
                 // Equal "Abracadabra"
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddEquals(S1234Meta.S1234AllorsString, "Abracadabra");
 
                 Assert.AreEqual(8, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsTrue(extent.Contains(this.c4C));
-                Assert.IsTrue(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, true, true);
+                this.AssertC3(extent, false, false, true, true);
+                this.AssertC4(extent, false, false, true, true);
 
                 // Class - Wrong RelationType
 
@@ -20131,66 +15557,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddExists(C1Meta.C1AllorsString);
 
                 Assert.AreEqual(3, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Interface
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddExists(I12Meta.I12AllorsString);
 
                 Assert.AreEqual(6, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Super Interface
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddExists(S1234Meta.S1234AllorsString);
 
                 Assert.AreEqual(12, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsTrue(extent.Contains(this.c4C));
-                Assert.IsTrue(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, true, true, true);
+                this.AssertC3(extent, false, true, true, true);
+                this.AssertC4(extent, false, true, true, true);
 
                 // Class - Wrong RelationType
                 extent = this.LocalExtent(C1Meta.ObjectType);
@@ -20254,154 +15644,70 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddLike(C1Meta.C1AllorsString, string.Empty);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Like "Abra"
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddLike(C1Meta.C1AllorsString, "Abra");
 
                 Assert.AreEqual(1, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Like "Abracadabra"
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddLike(C1Meta.C1AllorsString, "Abracadabra");
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Like "notfound"
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddLike(C1Meta.C1AllorsString, "notfound");
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Like "%ra%"
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddLike(C1Meta.C1AllorsString, "%ra%");
 
                 Assert.AreEqual(3, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Like "%bra"
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddLike(C1Meta.C1AllorsString, "%bra");
 
                 Assert.AreEqual(3, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Like "%cadabra"
                 extent = this.LocalExtent(C1Meta.ObjectType);
                 extent.Filter.AddLike(C1Meta.C1AllorsString, "%cadabra");
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Interface
 
@@ -20410,66 +15716,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddLike(I12Meta.I12AllorsString, string.Empty);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Like "Abra"
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddLike(I12Meta.I12AllorsString, "Abra");
 
                 Assert.AreEqual(2, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, true, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Like "Abracadabra"
                 extent = this.LocalExtent(I12Meta.ObjectType);
                 extent.Filter.AddLike(I12Meta.I12AllorsString, "Abracadabra");
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, true, true);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Super Interface
 
@@ -20478,66 +15748,30 @@ namespace Allors.Adapters.Special
                 extent.Filter.AddLike(S1234Meta.S1234AllorsString, string.Empty);
 
                 Assert.AreEqual(0, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
 
                 // Like "Abra"
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddLike(S1234Meta.S1234AllorsString, "Abra");
 
                 Assert.AreEqual(4, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsTrue(extent.Contains(this.c1B));
-                Assert.IsFalse(extent.Contains(this.c1C));
-                Assert.IsFalse(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsTrue(extent.Contains(this.c2B));
-                Assert.IsFalse(extent.Contains(this.c2C));
-                Assert.IsFalse(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsTrue(extent.Contains(this.c3B));
-                Assert.IsFalse(extent.Contains(this.c3C));
-                Assert.IsFalse(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsTrue(extent.Contains(this.c4B));
-                Assert.IsFalse(extent.Contains(this.c4C));
-                Assert.IsFalse(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, true, false, false);
+                this.AssertC3(extent, false, true, false, false);
+                this.AssertC4(extent, false, true, false, false);
 
                 // Like "Abracadabra"
                 extent = this.LocalExtent(S1234Meta.ObjectType);
                 extent.Filter.AddLike(S1234Meta.S1234AllorsString, "Abracadabra");
 
                 Assert.AreEqual(8, extent.Count);
-                Assert.IsFalse(extent.Contains(this.c1A));
-                Assert.IsFalse(extent.Contains(this.c1B));
-                Assert.IsTrue(extent.Contains(this.c1C));
-                Assert.IsTrue(extent.Contains(this.c1D));
-                Assert.IsFalse(extent.Contains(this.c2A));
-                Assert.IsFalse(extent.Contains(this.c2B));
-                Assert.IsTrue(extent.Contains(this.c2C));
-                Assert.IsTrue(extent.Contains(this.c2D));
-                Assert.IsFalse(extent.Contains(this.c3A));
-                Assert.IsFalse(extent.Contains(this.c3B));
-                Assert.IsTrue(extent.Contains(this.c3C));
-                Assert.IsTrue(extent.Contains(this.c3D));
-                Assert.IsFalse(extent.Contains(this.c4A));
-                Assert.IsFalse(extent.Contains(this.c4B));
-                Assert.IsTrue(extent.Contains(this.c4C));
-                Assert.IsTrue(extent.Contains(this.c4D));
+                this.AssertC1(extent, false, false, true, true);
+                this.AssertC2(extent, false, false, true, true);
+                this.AssertC3(extent, false, false, true, true);
+                this.AssertC4(extent, false, false, true, true); 
 
                 // Class - Wrong RelationType
 
@@ -20837,7 +16071,7 @@ namespace Allors.Adapters.Special
                 init();
                 this.Populate();
 
-                var extent = this.LocalExtent(AI4Meta.ObjectType);
+                var extent = this.LocalExtent(I4Meta.ObjectType);
                 Assert.AreEqual(4, extent.Count);
                 this.AssertC4(extent, true, true, true, true);
             }
@@ -21014,6 +16248,7 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateAssociationExist()
         {
+            //TODO:
         }
 
         [Test]
@@ -21043,6 +16278,7 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateAssociationNotExist()
         {
+            // TODO:
         }
 
         [Test]
@@ -21134,6 +16370,7 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateRoleExistFilter()
         {
+            // TODO:
         }
 
         [Test]
@@ -21261,6 +16498,7 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateRoleNotExistFilter()
         {
+            // TODO:
         }
 
         [Test]

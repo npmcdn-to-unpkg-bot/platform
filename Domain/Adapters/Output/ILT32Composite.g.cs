@@ -6,18 +6,18 @@ namespace Domain
 	{
 
 
-		global::Domain.ILT32Composite Self1
+		global::Domain.ILT32Composite Self3
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistSelf1
+		bool ExistSelf3
 		{
 			get;
 		}
 
-		void RemoveSelf1();
+		void RemoveSelf3();
 
 
 		global::Domain.ILT32Composite Self2
@@ -34,27 +34,27 @@ namespace Domain
 		void RemoveSelf2();
 
 
-		global::Domain.ILT32Composite Self3
+		global::Domain.ILT32Composite Self1
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistSelf3
+		bool ExistSelf1
 		{
 			get;
 		}
 
-		void RemoveSelf3();
+		void RemoveSelf1();
 
 
 
-		Allors.Extent<global::Domain.ILT32Composite> ILT32CompositesWhereSelf1
+		Allors.Extent<global::Domain.ILT32Composite> ILT32CompositesWhereSelf3
 		{ 
 			get;
 		}
 
-		bool ExistILT32CompositesWhereSelf1
+		bool ExistILT32CompositesWhereSelf3
 		{
 			get;
 		}
@@ -71,12 +71,12 @@ namespace Domain
 		}
 
 
-		Allors.Extent<global::Domain.ILT32Composite> ILT32CompositesWhereSelf3
+		Allors.Extent<global::Domain.ILT32Composite> ILT32CompositesWhereSelf1
 		{ 
 			get;
 		}
 
-		bool ExistILT32CompositesWhereSelf3
+		bool ExistILT32CompositesWhereSelf1
 		{
 			get;
 		}

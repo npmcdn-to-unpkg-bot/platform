@@ -6,18 +6,15 @@ namespace Domain
 	{
 
 
-		global::Domain.ISandbox InvisibleOne
-		{ 
+		global::System.String InvisibleValue 
+		{
 			get;
 			set;
 		}
 
-		bool ExistInvisibleOne
-		{
-			get;
-		}
+		bool ExistInvisibleValue{get;}
 
-		void RemoveInvisibleOne();
+		void RemoveInvisibleValue();
 
 
 		Allors.Extent<global::Domain.ISandbox> InvisibleManies
@@ -38,27 +35,19 @@ namespace Domain
 		void RemoveInvisibleManies();
 
 
-		global::System.String InvisibleValue 
-		{
+		global::Domain.ISandbox InvisibleOne
+		{ 
 			get;
 			set;
 		}
 
-		bool ExistInvisibleValue{get;}
-
-		void RemoveInvisibleValue();
-
-
-
-		global::Domain.ISandbox ISandboxWhereInvisibleOne
+		bool ExistInvisibleOne
 		{
 			get;
 		}
 
-		bool ExistISandboxWhereInvisibleOne
-		{
-			get;
-		}
+		void RemoveInvisibleOne();
+
 
 
 		Allors.Extent<global::Domain.ISandbox> ISandboxesWhereInvisibleMany
@@ -67,6 +56,17 @@ namespace Domain
 		}
 
 		bool ExistISandboxesWhereInvisibleMany
+		{
+			get;
+		}
+
+
+		global::Domain.ISandbox ISandboxWhereInvisibleOne
+		{
+			get;
+		}
+
+		bool ExistISandboxWhereInvisibleOne
 		{
 			get;
 		}

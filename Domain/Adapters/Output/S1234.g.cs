@@ -6,141 +6,65 @@ namespace Domain
 	{
 
 
-		global::System.Boolean? S1234AllorsBoolean 
+		global::System.Double? S1234AllorsDouble 
 		{
 			get;
 			set;
 		}
 
-		bool ExistS1234AllorsBoolean{get;}
+		bool ExistS1234AllorsDouble{get;}
 
-		void RemoveS1234AllorsBoolean();
+		void RemoveS1234AllorsDouble();
 
 
-		global::System.String S1234AllorsString 
+		global::System.Decimal? S1234AllorsDecimal 
 		{
 			get;
 			set;
 		}
 
-		bool ExistS1234AllorsString{get;}
+		bool ExistS1234AllorsDecimal{get;}
 
-		void RemoveS1234AllorsString();
+		void RemoveS1234AllorsDecimal();
 
 
-		global::Domain.C2 S1234C2many2one
+		global::System.Int32? S1234AllorsInteger 
+		{
+			get;
+			set;
+		}
+
+		bool ExistS1234AllorsInteger{get;}
+
+		void RemoveS1234AllorsInteger();
+
+
+		global::Domain.S1234 S1234many2one
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistS1234C2many2one
+		bool ExistS1234many2one
 		{
 			get;
 		}
 
-		void RemoveS1234C2many2one();
+		void RemoveS1234many2one();
 
 
-		global::Domain.S1234 S1234one2one
+		global::Domain.C2 S1234C2one2one
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistS1234one2one
+		bool ExistS1234C2one2one
 		{
 			get;
 		}
 
-		void RemoveS1234one2one();
-
-
-		global::System.DateTime? S1234AllorsDateTime 
-		{
-			get;
-			set;
-		}
-
-		bool ExistS1234AllorsDateTime{get;}
-
-		void RemoveS1234AllorsDateTime();
-
-
-		global::System.String ClassName 
-		{
-			get;
-			set;
-		}
-
-		bool ExistClassName{get;}
-
-		void RemoveClassName();
-
-
-		global::System.Int64? S1234AllorsLong 
-		{
-			get;
-			set;
-		}
-
-		bool ExistS1234AllorsLong{get;}
-
-		void RemoveS1234AllorsLong();
-
-
-		Allors.Extent<global::Domain.S1234> S1234many2manies
-		{ 
-			get;
-			set;
-		}
-
-		void AddS1234many2many (global::Domain.S1234 value);
-
-		void RemoveS1234many2many (global::Domain.S1234 value);
-
-		bool ExistS1234many2manies
-		{
-			get;
-		}
-
-		void RemoveS1234many2manies();
-
-
-		Allors.Extent<global::Domain.C2> S1234C2one2manies
-		{ 
-			get;
-			set;
-		}
-
-		void AddS1234C2one2many (global::Domain.C2 value);
-
-		void RemoveS1234C2one2many (global::Domain.C2 value);
-
-		bool ExistS1234C2one2manies
-		{
-			get;
-		}
-
-		void RemoveS1234C2one2manies();
-
-
-		Allors.Extent<global::Domain.S1234> S1234one2manies
-		{ 
-			get;
-			set;
-		}
-
-		void AddS1234one2many (global::Domain.S1234 value);
-
-		void RemoveS1234one2many (global::Domain.S1234 value);
-
-		bool ExistS1234one2manies
-		{
-			get;
-		}
-
-		void RemoveS1234one2manies();
+		void RemoveS1234C2one2one();
 
 
 		Allors.Extent<global::Domain.C2> S1234C2many2manies
@@ -161,85 +85,150 @@ namespace Domain
 		void RemoveS1234C2many2manies();
 
 
-		global::Domain.C2 S1234C2one2one
+		Allors.Extent<global::Domain.S1234> S1234one2manies
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistS1234C2one2one
+		void AddS1234one2many (global::Domain.S1234 value);
+
+		void RemoveS1234one2many (global::Domain.S1234 value);
+
+		bool ExistS1234one2manies
 		{
 			get;
 		}
 
-		void RemoveS1234C2one2one();
+		void RemoveS1234one2manies();
 
 
-		global::Domain.S1234 S1234many2one
+		Allors.Extent<global::Domain.C2> S1234C2one2manies
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistS1234many2one
+		void AddS1234C2one2many (global::Domain.C2 value);
+
+		void RemoveS1234C2one2many (global::Domain.C2 value);
+
+		bool ExistS1234C2one2manies
 		{
 			get;
 		}
 
-		void RemoveS1234many2one();
+		void RemoveS1234C2one2manies();
 
 
-		global::System.Int32? S1234AllorsInteger 
+		Allors.Extent<global::Domain.S1234> S1234many2manies
+		{ 
+			get;
+			set;
+		}
+
+		void AddS1234many2many (global::Domain.S1234 value);
+
+		void RemoveS1234many2many (global::Domain.S1234 value);
+
+		bool ExistS1234many2manies
+		{
+			get;
+		}
+
+		void RemoveS1234many2manies();
+
+
+		global::System.Int64? S1234AllorsLong 
 		{
 			get;
 			set;
 		}
 
-		bool ExistS1234AllorsInteger{get;}
+		bool ExistS1234AllorsLong{get;}
 
-		void RemoveS1234AllorsInteger();
+		void RemoveS1234AllorsLong();
 
 
-		global::System.Decimal? S1234AllorsDecimal 
+		global::System.String ClassName 
 		{
 			get;
 			set;
 		}
 
-		bool ExistS1234AllorsDecimal{get;}
+		bool ExistClassName{get;}
 
-		void RemoveS1234AllorsDecimal();
+		void RemoveClassName();
 
 
-		global::System.Double? S1234AllorsDouble 
+		global::System.DateTime? S1234AllorsDateTime 
 		{
 			get;
 			set;
 		}
 
-		bool ExistS1234AllorsDouble{get;}
+		bool ExistS1234AllorsDateTime{get;}
 
-		void RemoveS1234AllorsDouble();
+		void RemoveS1234AllorsDateTime();
 
 
+		global::Domain.S1234 S1234one2one
+		{ 
+			get;
+			set;
+		}
 
-		global::Domain.S1234 S1234WhereS1234one2one
+		bool ExistS1234one2one
 		{
 			get;
 		}
 
-		bool ExistS1234WhereS1234one2one
+		void RemoveS1234one2one();
+
+
+		global::Domain.C2 S1234C2many2one
+		{ 
+			get;
+			set;
+		}
+
+		bool ExistS1234C2many2one
 		{
 			get;
 		}
 
+		void RemoveS1234C2many2one();
 
-		Allors.Extent<global::Domain.S1234> S1234sWhereS1234many2many
+
+		global::System.String S1234AllorsString 
+		{
+			get;
+			set;
+		}
+
+		bool ExistS1234AllorsString{get;}
+
+		void RemoveS1234AllorsString();
+
+
+		global::System.Boolean? S1234AllorsBoolean 
+		{
+			get;
+			set;
+		}
+
+		bool ExistS1234AllorsBoolean{get;}
+
+		void RemoveS1234AllorsBoolean();
+
+
+
+		Allors.Extent<global::Domain.S1234> S1234sWhereS1234many2one
 		{ 
 			get;
 		}
 
-		bool ExistS1234sWhereS1234many2many
+		bool ExistS1234sWhereS1234many2one
 		{
 			get;
 		}
@@ -256,12 +245,23 @@ namespace Domain
 		}
 
 
-		Allors.Extent<global::Domain.S1234> S1234sWhereS1234many2one
+		Allors.Extent<global::Domain.S1234> S1234sWhereS1234many2many
 		{ 
 			get;
 		}
 
-		bool ExistS1234sWhereS1234many2one
+		bool ExistS1234sWhereS1234many2many
+		{
+			get;
+		}
+
+
+		global::Domain.S1234 S1234WhereS1234one2one
+		{
+			get;
+		}
+
+		bool ExistS1234WhereS1234one2one
 		{
 			get;
 		}
