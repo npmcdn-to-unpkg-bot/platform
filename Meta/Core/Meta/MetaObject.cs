@@ -216,7 +216,7 @@ namespace Allors.Meta
                     return selfArray;
                 }
 
-                return this.Subclasses.Length == 0 ? EmptyArray : this.ConcreteSubClasses;
+                return this.Subclasses.Length == 0 ? EmptyArray : this.Subclasses;
             }
         }
 
@@ -904,27 +904,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Gets the concrete sub classes.
-        /// </summary>
-        /// <value>The concrete sub classes.</value>
-        private MetaObject[] ConcreteSubClasses
-        {
-            get
-            {
-                var concreteSubClasses = new List<MetaObject>();
-                foreach (var subClass in this.Subclasses)
-                {
-                    if (subClass.IsConcrete)
-                    {
-                        concreteSubClasses.Add(subClass);
-                    }
-                }
-
-                return concreteSubClasses.ToArray();
-            }
-        }
-
-        /// <summary>
         /// Gets the object types where this instance is a direct supertype.
         /// </summary>
         /// <value>The object types where this instance is a direct supertype.</value>
@@ -1105,19 +1084,6 @@ namespace Allors.Meta
             foreach (var superType in superInterfaces)
             {
                 this.AddDirectSupertype(superType);
-            }
-
-            foreach (var inheritance in this.InheritancesWhereSubtype)
-            {
-                var superType = inheritance.Supertype;
-
-                if (superType == null || 
-                    (superType.IsInterface && Array.IndexOf(superInterfaces, superType) < 0))
-                {
-                    if (!inheritance.DomainWhereDeclaredInheritance.IsSuperDomain)
-                    {
-                    }
-                }
             }
         }
 

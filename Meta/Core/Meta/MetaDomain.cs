@@ -136,18 +136,6 @@ namespace Allors.Meta
         {
             get { return AllorsUnitDomainId.Equals(this.Id); }
         }
-
-        /// <summary>
-        /// Gets a value indicating whether this domain is a domain.
-        /// </summary>
-        /// <value><c>true</c> if this domain is a domain; otherwise, <c>false</c>.</value>
-        public bool IsSuperDomain
-        {
-            get
-            {
-                return this.ExistDomainsWhereDirectSuperDomain;
-            }
-        }
       
         /// <summary>
         /// Gets a value indicating whether this instance is valid.
@@ -192,18 +180,6 @@ namespace Allors.Meta
         {
             get { return base.DeclaredObjectTypes; }
             set { throw new ArgumentException("Use Domain.AddObjectType() and ObjectType.Delete()"); }
-        }
-
-        /// <summary>
-        /// Gets all the importSuperDomain domains of this domain.
-        /// </summary>
-        /// <value>The importSuperDomain domain.</value>
-        public MetaDomain[] SuperDomains
-        {
-            get
-            {
-                return this.DerivedSuperDomains;
-            }
         }
 
         /// <summary>
@@ -321,12 +297,7 @@ namespace Allors.Meta
             CacheConcreteDomain(session, domain);
             domain.Id = id;
 
-            var unitDomain = (MetaDomain)session.Create(AllorsEmbeddedDomain.Domain);
-            unitDomain.Id = AllorsUnitDomainId;
-            unitDomain.AddAllorsUnitPopulation();
-
-            domain.UnitDomain = unitDomain;
-            domain.AddDirectSuperDomain(unitDomain);
+            domain.AddAllorsUnitPopulation();
 
             return domain;
         }
@@ -359,24 +330,21 @@ namespace Allors.Meta
             foreach (var o in session.Extent(AllorsEmbeddedDomain.Domain))
             {
                 var domain = (MetaDomain)o;
-                if (!domain.ExistDomainsWhereDirectSuperDomain)
+                CacheConcreteDomain(session, domain);
+
+                domain.PurgeDerivations();
+
+                // Initialise MetaObjectById
+                foreach (var obj in domain.AllorsSession.Extent())
                 {
-                    CacheConcreteDomain(session, domain);
-
-                    domain.PurgeDerivations();
-
-                    // Initialise MetaObjectById
-                    foreach (var obj in domain.AllorsSession.Extent())
+                    var metaObject = obj as MetaBase;
+                    if (metaObject != null)
                     {
-                        var metaObject = obj as MetaBase;
-                        if (metaObject != null)
-                        {
-                            domain.MetaObjectById[metaObject.Id] = metaObject;
-                        }
+                        domain.MetaObjectById[metaObject.Id] = metaObject;
                     }
-
-                    return domain;
                 }
+
+                return domain;
             }
 
             throw new ArgumentException("No domain found in the repository");
@@ -501,33 +469,6 @@ namespace Allors.Meta
 
             this.AddDeclaredMethodType(methodType);
             return methodType;
-        }
-
-        /// <summary>
-        /// Adds a domain to this domain.
-        /// </summary>
-        /// <param name="domain">The domain.</param>
-        public override void AddDirectSuperDomain(MetaDomain domain)
-        {
-            if (domain.Equals(this) || Array.IndexOf(domain.SuperDomains, this) > -1)
-            {
-                throw new Exception("Cyclic in domain inheritance");
-            }
-
-            base.AddDirectSuperDomain(domain);
-        }
-
-        /// <summary>
-        /// Adds the domain to this domain.
-        /// </summary>
-        /// <param name="domainId">The domain id.</param>
-        /// <returns>The domain.</returns>
-        public MetaDomain AddDirectSuperDomain(Guid domainId)
-        {
-            var domain = (MetaDomain)this.MetaDomain.MetaDomain.Find(domainId) ?? Create(this.AllorsSession, domainId);
-
-            this.AddDirectSuperDomain(domain);
-            return domain;
         }
 
         /// <summary>
@@ -693,23 +634,10 @@ namespace Allors.Meta
 
         public void Derive()
         {
-            var derivedSuperDomains = new List<MetaDomain>();
-            this.AddDerivedSuperDomain(derivedSuperDomains);
-            this.DerivedSuperDomains = derivedSuperDomains.ToArray();
-
             var inheritances = new List<MetaInheritance>(this.DeclaredInheritances);
-            foreach (var superDomain in this.SuperDomains)
-            {
-                inheritances.AddRange(superDomain.DeclaredInheritances);
-            }
-
             this.DerivedInheritances = inheritances.ToArray();
 
             var objectTypes = new List<MetaObject>(this.DeclaredObjectTypes);
-            foreach (var superDomain in this.SuperDomains)
-            {
-                objectTypes.AddRange(superDomain.DeclaredObjectTypes);
-            }
 
             this.DerivedObjectTypes = objectTypes.ToArray();
 
@@ -800,10 +728,6 @@ namespace Allors.Meta
             }
 
             var relationTypes = new List<MetaRelation>(this.DeclaredRelationTypes);
-            foreach (var superDomain in this.SuperDomains)
-            {
-                relationTypes.AddRange(superDomain.DeclaredRelationTypes);
-            }
 
             this.DerivedRelationTypes = relationTypes.ToArray();
 
@@ -908,10 +832,6 @@ namespace Allors.Meta
             }
 
             var methodTypes = new List<MetaMethod>(this.DeclaredMethodTypes);
-            foreach (var superDomain in this.SuperDomains)
-            {
-                methodTypes.AddRange(superDomain.DeclaredMethodTypes);
-            }
 
             this.DerivedMethodTypes = methodTypes.ToArray();
 
@@ -932,33 +852,6 @@ namespace Allors.Meta
         internal static MetaDomain GetDomain(AllorsEmbeddedSession session)
         {
             return (MetaDomain)session[DomainSessionKey];
-        }
-
-        /// <summary>
-        /// Determines whether adding the specified domain will result in a cycle.
-        /// </summary>
-        /// <param name="superDomains">The importSuperDomain domains.</param>
-        /// <returns>
-        /// <c>true</c> if adding the specified domain will result in a cycle; otherwise, <c>false</c>.
-        /// </returns>
-        internal bool IsCyclicInheritance(List<MetaDomain> superDomains)
-        {
-            if (superDomains.Contains(this))
-            {
-                return true;
-            }
-
-            superDomains.Add(this);
-
-            foreach (MetaDomain directSuperDomain in this.DirectSuperDomains)
-            {
-                if (directSuperDomain.IsCyclicInheritance(superDomains))
-                {
-                    return true;
-                }
-            }
-
-            return false;
         }
 
         /// <summary>
@@ -1006,24 +899,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Creates the specified session.
-        /// </summary>
-        /// <param name="session">The session.</param>
-        /// <param name="domainId">The domain id.</param>
-        /// <returns>The new domain.</returns>
-        private static MetaDomain Create(AllorsEmbeddedSession session, Guid domainId)
-        {
-            var domain = (MetaDomain)session.Create(AllorsEmbeddedDomain.Domain);
-            domain.Id = domainId;
-
-            var unitDomain = GetDomain(session).UnitDomain;
-            domain.UnitDomain = unitDomain;
-            domain.AddDirectSuperDomain(unitDomain);
-
-            return domain;
-        }
-
-        /// <summary>
         /// Caches the concrete domain.
         /// </summary>
         /// <param name="session">The session.</param>
@@ -1056,21 +931,6 @@ namespace Allors.Meta
             this.RemoveDerivedObjectTypes();
             this.RemoveDerivedRelationTypes();
             this.RemoveDerivedUnitObjectTypes();
-        }
-
-        /// <summary>
-        /// Add a derived importSuperDomain domain.
-        /// </summary>
-        /// <param name="temporaryList">
-        /// A temporary list of domains.
-        /// </param>
-        private void AddDerivedSuperDomain(List<MetaDomain> temporaryList)
-        {
-            temporaryList.AddRange(this.DirectSuperDomains);
-            foreach (var directSuperDomain in this.DirectSuperDomains)
-            {
-                directSuperDomain.AddDerivedSuperDomain(temporaryList);
-            }
         }
         
         /// <summary>
