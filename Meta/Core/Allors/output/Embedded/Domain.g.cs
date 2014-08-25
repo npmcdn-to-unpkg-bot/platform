@@ -152,46 +152,7 @@ namespace Allors.Meta.AllorsGenerated
 	[System.Diagnostics.DebuggerNonUserCode]
 	public abstract class AllorsClassDomain :  global::Allors.Meta.MetaObject,  AllorsInternalDomain , AllorsEmbeddedObject
 	{
-		protected global::Allors.Meta.ObjectType[] DomainObjectType = AllorsEmbeddedArrays.EMPTY_ObjectType_ARRAY;
-
-
-		protected System.Object _DomainName;
-
-
-		protected global::Allors.Meta.MethodType[] DomainMethodType = AllorsEmbeddedArrays.EMPTY_MethodType_ARRAY;
-
-
-		protected global::Allors.Meta.Inheritance[] DomainInheritance = AllorsEmbeddedArrays.EMPTY_Inheritance_ARRAY;
-
-
-		protected global::Allors.Meta.ObjectType[] _DomainDerivedUnitObjectType = AllorsEmbeddedArrays.EMPTY_ObjectType_ARRAY;
-
-
-		protected global::Allors.Meta.ObjectType[] _DomainDerivedCompositeObjectType = AllorsEmbeddedArrays.EMPTY_ObjectType_ARRAY;
-
-
-		protected global::Allors.Meta.RelationType[] DomainRelationType = AllorsEmbeddedArrays.EMPTY_RelationType_ARRAY;
-
-
-		protected global::Allors.Meta.RelationType[] _DomainDerivedRelationType = AllorsEmbeddedArrays.EMPTY_RelationType_ARRAY;
-
-
-		protected global::Allors.Meta.MethodType[] _DomainDerivedMethodType = AllorsEmbeddedArrays.EMPTY_MethodType_ARRAY;
-
-
-		protected global::Allors.Meta.Inheritance[] _DomainDerivedInheritance = AllorsEmbeddedArrays.EMPTY_Inheritance_ARRAY;
-
-
-		protected global::Allors.Meta.ObjectType[] _DomainDerivedObjectType = AllorsEmbeddedArrays.EMPTY_ObjectType_ARRAY;
-
-
-		protected global::Allors.Meta.Domain[] _DerivedSuperDomainDomain = AllorsEmbeddedArrays.EMPTY_Domain_ARRAY;
-
-
-		protected global::Allors.Meta.Domain[] _DirectSuperDomainDomain = AllorsEmbeddedArrays.EMPTY_Domain_ARRAY;
-
-
-		protected global::Allors.Meta.Domain[] _UnitDomainDomain = AllorsEmbeddedArrays.EMPTY_Domain_ARRAY;
+	
 
 
 
@@ -244,14 +205,6 @@ namespace Allors.Meta.AllorsGenerated
 					return _DomainDerivedCompositeObjectType;
 				case AllorsRelationTags.DomainDeclaredRelationType:
 					return this.DomainRelationType;
-				case AllorsRelationTags.DomainDerivedRelationType:
-					return _DomainDerivedRelationType;
-				case AllorsRelationTags.DomainDerivedMethodType:
-					return _DomainDerivedMethodType;
-				case AllorsRelationTags.DomainDerivedInheritance:
-					return _DomainDerivedInheritance;
-				case AllorsRelationTags.DomainDerivedObjectType:
-					return _DomainDerivedObjectType;
 				case AllorsRelationTags.MetaObjectId:
 					return _MetaObjectId;
 
@@ -389,7 +342,7 @@ namespace Allors.Meta.AllorsGenerated
 		}
 
 
-		public virtual global::System.String Name
+		public global::System.String Name
 		{
 			get
 			{

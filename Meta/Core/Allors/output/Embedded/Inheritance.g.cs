@@ -60,17 +60,7 @@ namespace Allors.Meta.AllorsGenerated
 	[System.Diagnostics.DebuggerNonUserCode]
 	public abstract class AllorsClassInheritance :  global::Allors.Meta.MetaObject,  AllorsInternalInheritance , AllorsEmbeddedObject
 	{
-		protected global::Allors.Meta.ObjectType _InheritanceSubtype;
-
-
-		protected global::Allors.Meta.ObjectType _InheritanceSupertype;
-
-
-		protected global::Allors.Meta.Domain _DeclaredInheritanceDomain;
-
-
-		protected global::Allors.Meta.Domain[] _DerivedInheritanceDomain = AllorsEmbeddedArrays.EMPTY_Domain_ARRAY;
-
+		
 
 
 

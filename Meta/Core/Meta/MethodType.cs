@@ -22,8 +22,18 @@ namespace Allors.Meta
 {
     using AllorsGenerated;
 
-    public partial class MethodType
+    public partial class MethodType : OperandType
     {
+
+        public string Name;
+
+        public ObjectType ObjectType;
+
+
+        // Domain -> MethodType
+        public Domain Domain;
+
+
         /// <summary>
         /// Gets the display name.
         /// </summary>
@@ -43,7 +53,7 @@ namespace Allors.Meta
         {
             get
             {
-                if (ExistName)
+                if (!string.IsNullOrEmpty(this.Name))
                 {
                     return "method type " + this.Name;
                 }
@@ -71,7 +81,7 @@ namespace Allors.Meta
         {
             base.Validate(validationLog);
 
-            if (!ExistName)
+            if (string.IsNullOrEmpty(this.Name))
             {
                 var message = this.ValidationName + " has no name";
                 validationLog.AddError(message, this, ValidationKind.Required, AllorsEmbeddedDomain.MethodTypeName);

@@ -39,37 +39,9 @@ namespace Allors.Meta
         /// Gets or sets the id.
         /// </summary>
         /// <value>The meta object id.</value>
-        public override sealed Guid Id
+        public Guid Id
         {
-            get
-            {
-                return base.Id;
-            }
-
-            set
-            {
-                if (this.ExistId)
-                {
-                    throw new ArgumentException("Id " + this.Id.ToString() + " is write once");
-                }
-
-                if (value.Equals(Guid.Empty))
-                {
-                    throw new ArgumentNullException();
-                }
-                else
-                {
-                    var existing = this.Domain.Find(value);
-
-                    if (existing != null)
-                    {
-                        throw new ArgumentException("Id " + value.ToString() + " is already in use");
-                    }
-                    
-                    base.Id = value;
-                    this.Domain.MetaObjectById[this.Id] = this;
-                }
-            }
+            get; set;
         }
 
         /// <summary>
@@ -91,15 +63,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Gets the domain.
-        /// </summary>
-        /// <value>The domain.</value>
-        public Domain Domain
-        {
-            get { return Domain.GetDomain(this.AllorsSession); }
-        }
-
-        /// <summary>
         /// Gets the validation name.
         /// </summary>
         protected abstract string ValidationName { get; }
@@ -112,7 +75,7 @@ namespace Allors.Meta
         /// </param>
         protected internal virtual void Validate(ValidationLog validationLog)
         {
-            if (!this.ExistId)
+            if (this.Id == Guid.Empty)
             {
                 var message = "id on " + this.ValidationName + " is required";
                 validationLog.AddError(message, this, ValidationKind.Unique, AllorsEmbeddedDomain.MetaObjectId);
@@ -130,28 +93,7 @@ namespace Allors.Meta
                 }
             }
         }
-
-        /// <summary>
-        /// Copy from the source meta object.
-        /// </summary>
-        /// <param name="source">
-        /// The source meta object.
-        /// </param>
-        /// <exception cref="ArgumentException">
-        /// Thrown when this object already has an id that is different from the source object.
-        /// </exception>
-        protected void CopyMetaObject(MetaObject source)
-        {
-            if (!this.ExistId)
-            {
-                this.Id = source.Id;
-            }
-            else if (!this.Id.Equals(source.Id))
-            {
-                throw new ArgumentException("imported object has a different id (" + this.ValidationName + ")");
-            }
-        }
-
+        
         /// <summary>
         /// The id comparer.
         /// </summary>

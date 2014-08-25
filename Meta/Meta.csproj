@@ -81,16 +81,6 @@
     <Compile Include="Adapters\Sandbox.g.cs" />
     <Compile Include="Adapters\SingleUnit.g.cs" />
     <Compile Include="Adapters\User.g.cs" />
-    <Compile Include="Core\Allors\output\EmbeddedPartial\AssociationType.allors.g.cs" />
-    <Compile Include="Core\Allors\output\EmbeddedPartial\Domain.allors.g.cs" />
-    <Compile Include="Core\Allors\output\EmbeddedPartial\Inheritance.allors.g.cs" />
-    <Compile Include="Core\Allors\output\EmbeddedPartial\MetaObject.allors.g.cs" />
-    <Compile Include="Core\Allors\output\EmbeddedPartial\MethodType.allors.g.cs" />
-    <Compile Include="Core\Allors\output\EmbeddedPartial\ObjectType.allors.g.cs" />
-    <Compile Include="Core\Allors\output\EmbeddedPartial\OperandType.allors.g.cs" />
-    <Compile Include="Core\Allors\output\EmbeddedPartial\PropertyType.allors.g.cs" />
-    <Compile Include="Core\Allors\output\EmbeddedPartial\RelationType.allors.g.cs" />
-    <Compile Include="Core\Allors\output\EmbeddedPartial\RoleType.allors.g.cs" />
     <Compile Include="Core\Allors\output\Embedded\AllorsR1Framework.g.cs" />
     <Compile Include="Core\Allors\output\Embedded\AssociationType.g.cs" />
     <Compile Include="Core\Allors\output\Embedded\Domain.g.cs" />

@@ -94,32 +94,6 @@ namespace Allors.Meta.AllorsGenerated
 	[System.Diagnostics.DebuggerNonUserCode]
 	public abstract class AllorsClassAssociationType :  global::Allors.Meta.PropertyType,  AllorsInternalAssociationType , AllorsEmbeddedObject
 	{
-		protected System.Object _AssociationTypeAssignedPluralName;
-
-
-		protected global::Allors.Meta.ObjectType _AssociationTypeObjectType;
-
-
-		protected System.Object _AssociationTypeIsMany;
-
-
-		protected global::Allors.Meta.ObjectType[] _AssociationTypeDerivedRootObjectType = AllorsEmbeddedArrays.EMPTY_ObjectType_ARRAY;
-
-
-		protected System.Object _AssociationTypeDerivedRootName;
-
-
-		protected System.Object _AssociationTypeAssignedSingularName;
-
-
-		protected global::Allors.Meta.ObjectType[] _DerivedExclusiveAssociationTypeObjectType = AllorsEmbeddedArrays.EMPTY_ObjectType_ARRAY;
-
-
-		protected global::Allors.Meta.ObjectType[] _DerivedAssociationTypeObjectType = AllorsEmbeddedArrays.EMPTY_ObjectType_ARRAY;
-
-
-		protected global::Allors.Meta.RelationType _AssociationTypeRelationType;
-
 
 
 

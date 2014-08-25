@@ -30,8 +30,22 @@ namespace Allors.Meta
     /// <summary>
     /// A Domain is a container for <see cref="ObjectType"/>s, <see cref="RelationType"/>s.
     /// </summary>
-    public sealed partial class Domain : IComparable
+    public sealed partial class Domain : MetaObject, IComparable
     {
+        public string Name;
+
+        public List<ObjectType> ObjectTypes = new List<ObjectType>();
+
+        public List<RelationType> RelationTypes = new List<RelationType>();
+        
+        public List<MethodType> MethodTypes = new List<MethodType>();
+        
+        public List<Inheritance> Inheritances = new List<Inheritance>();
+        
+        public List<ObjectType> DerivedUnitObjectTypes = new List<ObjectType>();
+        
+        public List<ObjectType> DerivedCompositeObjectTypes = new List<ObjectType>();
+        
         /// <summary>
         /// The default plural form.
         /// </summary>
@@ -61,11 +75,11 @@ namespace Allors.Meta
         /// Gets the composite types.
         /// </summary>
         /// <value>The composite types.</value>
-        public ObjectType[] CompositeObjectTypes
+        public IList<ObjectType> CompositeObjectTypes
         {
             get
             {
-                return DerivedCompositeObjectTypes;
+                return this.DerivedCompositeObjectTypes;
             }
         }
 
@@ -73,11 +87,11 @@ namespace Allors.Meta
         /// Gets the concrete composite types.
         /// </summary>
         /// <value>The concrete composite types.</value>
-        public ObjectType[] ConcreteCompositeObjectTypes
+        public IList<ObjectType> ConcreteCompositeObjectTypes
         {
             get
             {
-                var concreteCompositeTypeList = new List<ObjectType>(this.CompositeObjectTypes.Length);
+                var concreteCompositeTypeList = new List<ObjectType>(this.CompositeObjectTypes.Count);
                 foreach (var compositeType in this.CompositeObjectTypes)
                 {
                     if (!compositeType.IsInterface)
@@ -109,16 +123,7 @@ namespace Allors.Meta
         {
             get { return this.Validate().Errors.Length == 0; }
         }
- 
-        /// <summary>
-        /// Gets or sets the object types that are Defined to this domain.
-        /// </summary>
-        /// <value>The Defined object types.</value>
-        public override ObjectType[] ObjectTypes
-        {
-            get { return base.ObjectTypes; }
-            set { throw new ArgumentException("Use Domain.AddObjectType() and ObjectType.Delete()"); }
-        }
+
 
         /// <summary>
         /// Gets the unit types.
@@ -158,7 +163,7 @@ namespace Allors.Meta
         {
             get
             {
-                if (ExistName)
+                if (!string.IsNullOrEmpty(this.Name))
                 {
                     return "domain " + this.Name;
                 }

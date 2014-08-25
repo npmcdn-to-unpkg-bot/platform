@@ -22,6 +22,7 @@
 namespace Allors.Meta
 {
     using System;
+    using System.Collections.Generic;
 
     using AllorsGenerated;
 
@@ -30,8 +31,25 @@ namespace Allors.Meta
     /// This is also called the 'active', 'controlling' or 'owning' side.
     /// AssociationTypes can only have composite <see cref="ObjectType"/>s.
     /// </summary>
-    public sealed partial class AssociationType : IComparable
+    public sealed partial class AssociationType : PropertyType, IComparable
     {
+        public string AssignedPluralName;
+        
+        public ObjectType ObjectType;
+
+        public bool IsMany;
+        
+        public List<ObjectType> DerivedRootObjectTypes = new List<ObjectType>();
+
+        public string DerivedRootName;
+        
+        public string AssignedSingularName;
+
+        // RelationType->AssociationType
+        public RelationType RelationType { get; private set; }
+        
+
+
         /// <summary>
         /// Used to form names to navigate from <see cref="RoleType"/> To <see cref="AssociationType"/>;
         /// </summary>
@@ -60,7 +78,7 @@ namespace Allors.Meta
         /// <value>The plural name when using <see cref="Where"/>.</value>
         public string PluralName
         {
-            get { return this.ObjectType.Name + Where + this.RelationTypeWhereAssociationType.RoleType.SingularName; }
+            get { return this.ObjectType.Name + Where + this.RelationType.RoleType.SingularName; }
         }
 
         /// <summary>
@@ -69,7 +87,7 @@ namespace Allors.Meta
         /// <value>The singular name when using <see cref="Where"/>.</value>
         public string SingularName
         {
-            get { return this.ObjectType.Name + Where + this.RelationTypeWhereAssociationType.RoleType.SingularName; }
+            get { return this.ObjectType.Name + Where + this.RelationType.RoleType.SingularName; }
         }
 
         /// <summary>
@@ -91,15 +109,6 @@ namespace Allors.Meta
         {
             get { return !this.IsMany; }
             set { this.IsMany = !value; }
-        }
-
-        /// <summary>
-        /// Gets the relation type.
-        /// </summary>
-        /// <value>The type of the relation.</value>
-        public RelationType RelationType
-        {
-            get { return RelationTypeWhereAssociationType; }
         }
 
         /// <summary>

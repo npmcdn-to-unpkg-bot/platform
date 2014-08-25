@@ -31,8 +31,56 @@ namespace Allors.Meta
     /// An <see cref="ObjectType"/> defines the state and behavior for
     /// a set of <see cref="IObject"/>s.
     /// </summary>
-    public partial class ObjectType : IComparable
+    public partial class ObjectType : MetaObject, IComparable
     {
+        public List<AssociationType> DerivedExclusiveAssociationTypes = new List<AssociationType>();
+
+        public List<ObjectType> DerivedExclusiveSuperinterfaces = new List<ObjectType>();
+
+        public List<ObjectType> DerivedSubclasses = new List<ObjectType>();
+
+        public List<AssociationType> DerivedAssociationTypes = new List<AssociationType>();
+
+        public List<ObjectType> DerivedDirectSupertypes = new List<ObjectType>();
+
+        public ObjectType DerivedDirectSuperclass;
+
+        public string PluralName;
+
+        public List<MethodType> DerivedMethodTypes = new List<MethodType>();
+
+        public List<ObjectType> DerivedSuperinterfaces = new List<ObjectType>();
+
+        public bool IsInterface;
+
+        public List<ObjectType> DerivedSubinterfaces = new List<ObjectType>();
+
+        public bool IsUnit;
+
+        public ObjectType DerivedExclusiveConcreteLeafClass;
+
+        public List<ObjectType> DerivedDirectSuperinterfaces = new List<ObjectType>();
+
+        public List<RoleType> DerivedUnitRoleTypes = new List<RoleType>();
+
+        public List<ObjectType> DerivedRootClasses = new List<ObjectType>();
+
+        public int UnitTag;
+
+        public List<RoleType> DerivedCompositeRoleTypes = new List<RoleType>();
+
+        public List<ObjectType> DerivedSuperclasses = new List<ObjectType>();
+
+        public List<RoleType> DerivedRoleTypes = new List<RoleType>();
+
+        public string SingularName;
+
+        public List<RoleType> DerivedExclusiveRoleTypes = new List<RoleType>();
+
+        public List<ObjectType> DerivedSupertypes = new List<ObjectType>();
+
+
+
         /// <summary>
         /// An empty array of object types.
         /// </summary>
@@ -59,7 +107,7 @@ namespace Allors.Meta
         /// <value>The association count.</value>
         public int AssociationTypesCount
         {
-            get { return this.AssociationTypes.Length; }
+            get { return this.AssociationTypes.Count; }
         }
 
         /// <summary>
@@ -77,7 +125,7 @@ namespace Allors.Meta
         /// Gets the associations.
         /// </summary>
         /// <value>The associations.</value>
-        public AssociationType[] AssociationTypes
+        public IList<AssociationType> AssociationTypes
         {
             get
             {

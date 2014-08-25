@@ -27,51 +27,20 @@ namespace Allors.Meta
     /// <summary>
     /// Defines a subtype/supertype relation between two <see cref="ObjectType"/>s.
     /// </summary>
-    public sealed partial class Inheritance
+    public sealed partial class Inheritance : MetaObject
     {
-        /// <summary>
-        /// Gets or sets the subtype.
-        /// </summary>
-        /// <value>The Subtype.</value>
-        public override ObjectType Subtype
+
+        public ObjectType Subtype;
+
+        public ObjectType Supertype;
+
+        internal Inheritance(Domain domain)
         {
-            get
-            {
-                return base.Subtype;
-            }
-
-            set
-            {
-                if (value != null && value.Equals(this.Supertype))
-                {
-                    throw new ArgumentException("Can not inherit from itself.");
-                }
-
-                base.Subtype = value;
-            }
+            this.Domain = domain;
         }
 
-        /// <summary>
-        /// Gets or sets the supertype.
-        /// </summary>
-        /// <value>The Supertype.</value>
-        public override ObjectType Supertype
-        {
-            get
-            {
-                return base.Supertype;
-            }
-
-            set
-            {
-                if (value != null && value.Equals(this.Subtype))
-                {
-                    throw new ArgumentException("Can not inherit from itself.");
-                }
-
-                base.Supertype = value;
-            }
-        }
+        // Domain->Inheritance
+        protected Domain Domain { get; private set; }
 
         /// <summary>
         /// Gets the validation name.
@@ -80,14 +49,9 @@ namespace Allors.Meta
         {
             get
             {
-                if (ExistSupertype && ExistSubtype)
+                if (this.Supertype != null && this.Subtype != null)
                 {
                     return "inheritance " + this.Subtype + "::" + this.Supertype;
-                }
-
-                if (ExistId)
-                {
-                    return "inheritance " + this.Id;
                 }
 
                 return "unknown inheritance";
@@ -102,18 +66,7 @@ namespace Allors.Meta
         /// </returns>
         public override string ToString()
         {
-            return (ExistSubtype ? this.Subtype.Name : string.Empty) + "::" + (ExistSupertype ? this.Supertype.Name : string.Empty);
-        }
-
-        /// <summary>
-        /// Creates a new instance.
-        /// </summary>
-        /// <param name="session">The session.</param>
-        /// <returns>The new inheritance.</returns>
-        internal static Inheritance Create(AllorsEmbeddedSession session)
-        {
-            var inheritance = (Inheritance)session.Create(AllorsEmbeddedDomain.Inheritance);
-            return inheritance;
+            return (this.Subtype != null ? this.Subtype.Name : string.Empty) + "::" + (this.Supertype != null ? this.Supertype.Name : string.Empty);
         }
 
         /// <summary>
@@ -124,7 +77,7 @@ namespace Allors.Meta
         {
             base.Validate(validationLog);
 
-            if (this.ExistSubtype && this.ExistSupertype)
+            if (this.Subtype != null && this.Supertype != null)
             {
                 if (this.Subtype.IsCyclicInheritance(this.Supertype))
                 {
@@ -148,7 +101,7 @@ namespace Allors.Meta
             }
             else
             {
-                if (!this.ExistSubtype)
+                if (this.Supertype == null)
                 {
                     var message = this.ValidationName + " has a missing Supertype";
                     validationLog.AddError(message, this, ValidationKind.Unique, AllorsEmbeddedDomain.InheritanceSupertype);
