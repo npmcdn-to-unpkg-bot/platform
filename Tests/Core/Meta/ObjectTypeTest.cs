@@ -83,8 +83,6 @@ namespace Allors.Meta.Static
 
             var c1 = this.Population.C1;
             var c2 = this.Population.C2;
-            var a1 = this.Population.A1;
-            var a2 = this.Population.A2;
             var i1 = this.Population.I1;
             var i2 = this.Population.I2;
 
@@ -328,7 +326,6 @@ namespace Allors.Meta.Static
             var thisType = this.Domain.AddDeclaredObjectType(Guid.NewGuid());
             thisType.SingularName = "ThisType";
             thisType.PluralName = "TheseTypes";
-            thisType.IsAbstract = !thisType.IsAbstract;
 
             var thatType = this.Domain.AddDeclaredObjectType(Guid.NewGuid());
             thatType.SingularName = "ThatType";
@@ -352,44 +349,6 @@ namespace Allors.Meta.Static
             relationTypeWhereRole.RoleType.AssignedPluralName = "tos";
 
             Assert.IsTrue(this.Domain.IsValid);
-        }
-
-        [Test]
-        public void DirectSuperclasses()
-        {
-            this.Populate();
-
-            var c1 = this.Population.C1;
-            var a1 = this.Population.A1;
-            var a2 = this.Population.A2;
-
-            Assert.AreEqual(a1, c1.DirectSuperclass);
-            Assert.IsTrue(c1.ExistDirectSuperclass);
-
-            RemoveDirectSupertypes(c1);
-
-            Assert.AreEqual(null, c1.DirectSuperclass);
-            Assert.IsFalse(c1.ExistDirectSuperclass);
-
-            c1.AddDirectSupertype(a1);
-
-            Assert.AreEqual(a1, c1.DirectSuperclass);
-            Assert.IsTrue(c1.ExistDirectSuperclass);
-
-            RemoveDirectSupertypes(c1);
-
-            Assert.AreEqual(null, c1.DirectSuperclass);
-            Assert.IsFalse(c1.ExistDirectSuperclass);
-
-            c1.AddDirectSupertype(a1);
-
-            Assert.AreEqual(1, c1.DirectSupertypes.Length);
-
-            c1.AddDirectSupertype(a2);
-
-            Assert.AreEqual(1, c1.DirectSupertypes.Length);
-            Assert.AreEqual(a2, c1.DirectSuperclass);
-            Assert.IsTrue(c1.ExistDirectSuperclass);
         }
 
         [Test]

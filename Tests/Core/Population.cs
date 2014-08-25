@@ -42,16 +42,6 @@ namespace Allors.Meta.Static
             this.GetUnits();
         }
 
-        public MetaObject A1 { get; set; }
-
-        public MetaObject A2 { get; set; }
-
-        public MetaObject A3 { get; set; }
-
-        public MetaObject A34 { get; set; }
-
-        public MetaObject A4 { get; set; }
-
         public MetaObject BinaryType { get; set; }
 
         public MetaObject BooleanType { get; set; }
@@ -65,8 +55,6 @@ namespace Allors.Meta.Static
         public MetaObject C4 { get; set; }
 
         public MetaObject[] Classes { get; set; }
-
-        public MetaObject[] CompositeAbstractClasses { get; set; }
 
         public MetaObject[] CompositeClasses { get; set; }
 
@@ -210,13 +198,6 @@ namespace Allors.Meta.Static
             }
         }
 
-        public static MetaObject CreateAbstractClass(MetaDomain domain, string name)
-        {
-            var type = CreateType(domain, name);
-            type.IsAbstract = true;
-            return type;
-        }
-
         public static MetaObject CreateClass(MetaDomain domain, string name)
         {
             var type = CreateType(domain, name);
@@ -257,13 +238,6 @@ namespace Allors.Meta.Static
             this.I3 = CreateInterface(this.Domain, "i3");
             this.I4 = CreateInterface(this.Domain, "i4");
 
-            // abstract classes
-            this.A1 = CreateAbstractClass(this.Domain, "a1");
-            this.A2 = CreateAbstractClass(this.Domain, "a2");
-            this.A3 = CreateAbstractClass(this.Domain, "a3");
-            this.A34 = CreateAbstractClass(this.Domain, "a34");
-            this.A4 = CreateAbstractClass(this.Domain, "a4");
-
             // classes
             this.C1 = CreateClass(this.Domain, "c1");
             this.C2 = CreateClass(this.Domain, "c2");
@@ -294,13 +268,6 @@ namespace Allors.Meta.Static
             this.I3 = CreateInterface(this.Domain, "i3");
             this.I4 = CreateInterface(this.Domain, "i4");
 
-            // abstract classes
-            this.A1 = CreateAbstractClass(this.SuperDomain, "a1");
-            this.A2 = CreateAbstractClass(this.SuperDomain, "a2");
-            this.A3 = CreateAbstractClass(this.Domain, "a3");
-            this.A34 = CreateAbstractClass(this.Domain, "a34");
-            this.A4 = CreateAbstractClass(this.Domain, "a4");
-
             // classes
             this.C1 = CreateClass(this.Domain, "c1");
             this.C2 = CreateClass(this.Domain, "c2");
@@ -327,27 +294,17 @@ namespace Allors.Meta.Static
 
         private void CreateInheritance()
         {
-            this.A1.AddDirectSupertype(this.I1);
-            this.A1.AddDirectSupertype(this.I12);
+            this.C1.AddDirectSupertype(this.I1);
+            this.C1.AddDirectSupertype(this.I12);
 
-            this.A2.AddDirectSupertype(this.I2);
-            this.A2.AddDirectSupertype(this.I12);
+            this.C2.AddDirectSupertype(this.I2);
+            this.C2.AddDirectSupertype(this.I12);
 
-            this.A3.AddDirectSupertype(this.A34);
-            this.A3.AddDirectSupertype(this.I3);
-            this.A3.AddDirectSupertype(this.I34);
+            this.C3.AddDirectSupertype(this.I3);
+            this.C3.AddDirectSupertype(this.I34);
 
-            this.A4.AddDirectSupertype(this.A34);
-            this.A4.AddDirectSupertype(this.I4);
-            this.A4.AddDirectSupertype(this.I34);
-
-            this.C1.AddDirectSupertype(this.A1);
-
-            this.C2.AddDirectSupertype(this.A2);
-
-            this.C3.AddDirectSupertype(this.A3);
-
-            this.C4.AddDirectSupertype(this.A4);
+            this.C4.AddDirectSupertype(this.I4);
+            this.C4.AddDirectSupertype(this.I34);
         }
 
         private void CreateLists()
@@ -356,17 +313,12 @@ namespace Allors.Meta.Static
 
             this.CompositeConcreteClasses = (MetaObject[])compositeConcreteClassList.ToArray(typeof(MetaObject));
 
-            var compositeAbstractClassList = new ArrayList { this.A1, this.A2, this.A3, this.A4, this.A34 };
-
-            this.CompositeAbstractClasses = (MetaObject[])compositeAbstractClassList.ToArray(typeof(MetaObject));
-
             var compositeInterfaceList = new ArrayList { this.I1, this.I2, this.I3, this.I4, this.I12, this.I34 };
             this.CompositeInterfaces = (MetaObject[])compositeInterfaceList.ToArray(typeof(MetaObject));
             this.Interfaces = this.CompositeInterfaces;
 
             var compositeClassList = new ArrayList();
             compositeClassList.AddRange(this.CompositeConcreteClasses);
-            compositeClassList.AddRange(this.CompositeAbstractClasses);
             this.CompositeClasses = (MetaObject[])compositeClassList.ToArray(typeof(MetaObject));
 
             var compositeList = new ArrayList();
