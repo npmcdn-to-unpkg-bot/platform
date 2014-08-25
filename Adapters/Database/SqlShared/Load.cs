@@ -291,7 +291,7 @@ namespace Allors.Adapters.Database.Sql
                                 }
 
                                 var relationTypeId = new Guid(relationTypeIdString);
-                                var relationType = (MetaRelation)this.database.Domain.Domain.Find(relationTypeId);
+                                var relationType = (MetaRelation)this.database.Domain.MetaDomain.Find(relationTypeId);
 
                                 if (this.reader.Name.Equals(Serialization.RelationTypeUnit))
                                 {

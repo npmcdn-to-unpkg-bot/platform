@@ -47,7 +47,7 @@ namespace Allors.Meta
             set
             {
                 // TODO: Test
-                this.Domain.StaleRelationTypeDerivations();
+                this.MetaDomain.StaleRelationTypeDerivations();
 
                 if (this.ExistAssociationType)
                 {
@@ -188,7 +188,7 @@ namespace Allors.Meta
             set
             {
                 // TODO: Test
-                this.Domain.StaleRelationTypeDerivations();
+                this.MetaDomain.StaleRelationTypeDerivations();
 
                 if (this.ExistRoleType)
                 {
@@ -246,19 +246,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Removes the Id.
-        /// </summary>
-        public override void RemoveId()
-        {
-            if (this.ExistId)
-            {
-                throw new ArgumentException("Id is write once");
-            }
-
-            base.RemoveId();
-        }
-
-        /// <summary>
         /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
         /// </summary>
         /// <returns>
@@ -310,7 +297,7 @@ namespace Allors.Meta
         /// </summary>
         internal void EnsureRelationTypeDerivations()
         {
-            this.Domain.EnsureRelationTypeDerivations();
+            this.MetaDomain.EnsureRelationTypeDerivations();
         }
 
         /// <summary>

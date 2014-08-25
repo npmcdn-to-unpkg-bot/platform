@@ -48,7 +48,7 @@ namespace Allors.Meta
                 }
 
                 base.Subtype = value;
-                this.Domain.StaleInheritanceDerivations();
+                this.MetaDomain.StaleInheritanceDerivations();
             }
         }
 
@@ -71,7 +71,7 @@ namespace Allors.Meta
                 }
 
                 base.Supertype = value;
-                this.Domain.StaleInheritanceDerivations();
+                this.MetaDomain.StaleInheritanceDerivations();
             }
         }
 
@@ -97,25 +97,12 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Removes the Id.
-        /// </summary>
-        public override void RemoveId()
-        {
-            if (ExistId)
-            {
-                throw new ArgumentException("Id is write once");
-            }
-
-            base.RemoveId();
-        }
-
-        /// <summary>
         /// Removes the Subtype.
         /// </summary>
         public override void RemoveSubtype()
         {
             base.RemoveSubtype();
-            this.Domain.StaleInheritanceDerivations();
+            this.MetaDomain.StaleInheritanceDerivations();
         }
 
         /// <summary>
@@ -124,7 +111,7 @@ namespace Allors.Meta
         public override void RemoveSupertype()
         {
             base.RemoveSupertype();
-            this.Domain.StaleInheritanceDerivations();
+            this.MetaDomain.StaleInheritanceDerivations();
         }
 
         /// <summary>

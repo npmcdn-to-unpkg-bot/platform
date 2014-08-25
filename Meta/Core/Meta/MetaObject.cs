@@ -593,7 +593,7 @@ namespace Allors.Meta
             {
                 base.IsInterface = value;
 
-                this.Domain.StaleObjectTypeDerivations();
+                this.MetaDomain.StaleObjectTypeDerivations();
             }
         }
 
@@ -806,7 +806,7 @@ namespace Allors.Meta
             {
                 base.PluralName = value;
 
-                this.Domain.StaleObjectTypeDerivations();
+                this.MetaDomain.StaleObjectTypeDerivations();
             }
         }
 
@@ -897,7 +897,7 @@ namespace Allors.Meta
             {
                 base.SingularName = value;
 
-                this.Domain.StaleObjectTypeDerivations();
+                this.MetaDomain.StaleObjectTypeDerivations();
             }
         }
 
@@ -1111,7 +1111,7 @@ namespace Allors.Meta
                 {
                 }
 
-                inheritance = this.Domain.AddDeclaredInheritance(Guid.NewGuid());
+                inheritance = this.MetaDomain.AddDeclaredInheritance(Guid.NewGuid());
                 inheritance.Subtype = this;
                 inheritance.Supertype = supertype;
             }
@@ -1127,7 +1127,7 @@ namespace Allors.Meta
         /// <returns>The method type</returns>
         public MetaMethod AddMethodType(Guid methodId, string methodName)
         {
-            var methodType = this.Domain.AddDeclaredMethodType(methodId);
+            var methodType = this.MetaDomain.AddDeclaredMethodType(methodId);
             methodType.ObjectType = this;
             methodType.Name = methodName;
             return methodType;
@@ -1250,25 +1250,12 @@ namespace Allors.Meta
         }
         
         /// <summary>
-        /// Removes the Id.
-        /// </summary>
-        public override void RemoveId()
-        {
-            if (ExistId)
-            {
-                throw new ArgumentException("Id is write once");
-            }
-
-            base.RemoveId();
-        }
-
-        /// <summary>
         /// Removes the plural name.
         /// </summary>
         public override void RemovePluralName()
         {
             base.RemovePluralName();
-            this.Domain.StaleObjectTypeDerivations();
+            this.MetaDomain.StaleObjectTypeDerivations();
         }
 
         /// <summary>
@@ -1277,7 +1264,7 @@ namespace Allors.Meta
         public override void RemoveSingularName()
         {
             base.RemoveSingularName();
-            this.Domain.StaleObjectTypeDerivations();
+            this.MetaDomain.StaleObjectTypeDerivations();
         }
 
         /// <summary>
@@ -1347,7 +1334,7 @@ namespace Allors.Meta
         /// </summary>
         internal void EnsureRelationTypeDerivations()
         {
-            this.Domain.EnsureRelationTypeDerivations();
+            this.MetaDomain.EnsureRelationTypeDerivations();
         }
 
         /// <summary>
@@ -1403,7 +1390,7 @@ namespace Allors.Meta
         /// </summary>
         internal void StaleRelationTypeDerivations()
         {
-            this.Domain.StaleRelationTypeDerivations();
+            this.MetaDomain.StaleRelationTypeDerivations();
         }
 
         /// <summary>
@@ -1961,7 +1948,7 @@ namespace Allors.Meta
         /// </summary>
         private void EnsureMethodTypeDerivations()
         {
-            this.Domain.EnsureMethodTypeDerivations();
+            this.MetaDomain.EnsureMethodTypeDerivations();
         }
 
         /// <summary>
@@ -1969,7 +1956,7 @@ namespace Allors.Meta
         /// </summary>
         private void EnsureObjectTypeDerivations()
         {
-            this.Domain.EnsureObjectTypeDerivations();
+            this.MetaDomain.EnsureObjectTypeDerivations();
         }
 
         /// <summary>

@@ -112,17 +112,17 @@ namespace Allors.Meta.Static
 
             var typeId = new Guid("89ff164f-ff6c-4b0d-916c-4e4507f97250");
             var type = this.Population.SuperDomain.AddDeclaredObjectType(typeId);
-            Assert.AreEqual(type, this.Domain.Domain.Find(typeId));
+            Assert.AreEqual(type, this.Domain.MetaDomain.Find(typeId));
 
             var relationId = new Guid("2B03B8A9-6BE0-4809-A536-092DBE09032A");
             var relationType = this.Population.SuperDomain.AddDeclaredRelationType(relationId, Guid.NewGuid(), Guid.NewGuid());
 
-            Assert.AreEqual(relationType, this.Domain.Domain.Find(relationId));
+            Assert.AreEqual(relationType, this.Domain.MetaDomain.Find(relationId));
 
-            Assert.AreEqual(this.Population.SuperDomain, this.Domain.Domain.Find(this.Population.SuperDomain.Id));
+            Assert.AreEqual(this.Population.SuperDomain, this.Domain.MetaDomain.Find(this.Population.SuperDomain.Id));
 
             var inheritanceId = this.Population.C1.FindInheritanceWhereDirectSubtype(this.Population.A1).Id;
-            var inheritance = (MetaInheritance)this.Domain.Domain.Find(inheritanceId);
+            var inheritance = (MetaInheritance)this.Domain.MetaDomain.Find(inheritanceId);
             Assert.IsNotNull(inheritance);
             Assert.AreEqual(this.Population.C1, inheritance.Subtype);
             Assert.AreEqual(this.Population.A1, inheritance.Supertype);
@@ -338,18 +338,18 @@ namespace Allors.Meta.Static
             var reader = new XmlTextReader(new StringReader(xml));
             var copy = MetaDomain.Load(reader);
 
-            var copyC1 = (MetaObject)copy.Domain.Find(c1.Id);
-            var copyC2 = (MetaObject)copy.Domain.Find(c2.Id);
+            var copyC1 = (MetaObject)copy.MetaDomain.Find(c1.Id);
+            var copyC2 = (MetaObject)copy.MetaDomain.Find(c2.Id);
 
-            var copyRelationType = (MetaRelation)copy.Domain.Find(relationType.Id);
+            var copyRelationType = (MetaRelation)copy.MetaDomain.Find(relationType.Id);
 
             Assert.AreEqual(c1.Name, copyC1.Name);
             Assert.AreEqual(c2.Name, copyC2.Name);
             Assert.AreEqual(relationType.Name, copyRelationType.Name);
 
-            Assert.AreEqual(copyC1, copy.Domain.Find(c1.Id));
-            Assert.AreEqual(copyC2, copy.Domain.Find(c2.Id));
-            Assert.AreEqual(copyRelationType, copy.Domain.Find(relationType.Id));
+            Assert.AreEqual(copyC1, copy.MetaDomain.Find(c1.Id));
+            Assert.AreEqual(copyC2, copy.MetaDomain.Find(c2.Id));
+            Assert.AreEqual(copyRelationType, copy.MetaDomain.Find(relationType.Id));
         }
 
         [Test]
@@ -399,7 +399,7 @@ namespace Allors.Meta.Static
 
             var reader = new XmlTextReader(new StringReader(domain.Xml));
             var copy = MetaDomain.Load(reader);
-            var copySuperDomain = (MetaDomain)copy.Domain.Find(superDomain.Id);
+            var copySuperDomain = (MetaDomain)copy.MetaDomain.Find(superDomain.Id);
 
             Assert.AreEqual(4, copy.Inheritances.Length);
             Assert.AreEqual(2, copySuperDomain.Inheritances.Length);
@@ -458,7 +458,7 @@ namespace Allors.Meta.Static
 
             var reader = new XmlTextReader(new StringReader(domain.Xml));
             var copy = MetaDomain.Load(reader);
-            var copySuperDomain = (MetaDomain)copy.Domain.Find(superDomain.Id);
+            var copySuperDomain = (MetaDomain)copy.MetaDomain.Find(superDomain.Id);
 
             Assert.AreEqual(13, copy.ObjectTypes.Length);
             Assert.AreEqual(9, copy.UnitObjectTypes.Length);
@@ -501,7 +501,7 @@ namespace Allors.Meta.Static
 
             var reader = new XmlTextReader(new StringReader(domain.Xml));
             var copy = MetaDomain.Load(reader);
-            var copySuperDomain = (MetaDomain)copy.Domain.Find(superDomain.Id);
+            var copySuperDomain = (MetaDomain)copy.MetaDomain.Find(superDomain.Id);
 
             Assert.AreEqual(2, copy.RelationTypes.Length);
             Assert.AreEqual(1, copySuperDomain.RelationTypes.Length);
@@ -537,7 +537,7 @@ namespace Allors.Meta.Static
 
             var reader = new XmlTextReader(new StringReader(domain.Xml));
             var copy = MetaDomain.Load(reader);
-            var copySuperDomain = (MetaDomain)copy.Domain.Find(superDomain.Id);
+            var copySuperDomain = (MetaDomain)copy.MetaDomain.Find(superDomain.Id);
 
             Assert.AreEqual(4, copy.MethodTypes.Length);
             Assert.AreEqual(2, copySuperDomain.MethodTypes.Length);
@@ -584,8 +584,8 @@ namespace Allors.Meta.Static
 
             var reader = new XmlTextReader(new StringReader(domain.Xml));
             var copy = MetaDomain.Load(reader);
-            var copyParent = (MetaDomain)copy.Domain.Find(parent.Id);
-            var copyGrandparent = (MetaDomain)copy.Domain.Find(grandParent.Id);
+            var copyParent = (MetaDomain)copy.MetaDomain.Find(parent.Id);
+            var copyGrandparent = (MetaDomain)copy.MetaDomain.Find(grandParent.Id);
 
             Assert.AreEqual(3, copy.SuperDomains.Length);
             Assert.Contains(copy.UnitDomain, copy.SuperDomains);

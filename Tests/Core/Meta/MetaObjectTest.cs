@@ -39,8 +39,8 @@ namespace Allors.Meta.Static
             objectType.SingularName = "Singular";
             objectType.PluralName = "Plural";
 
-            Assert.AreEqual(objectType, domain.Domain.Find(objectType.Id));
-            Assert.AreEqual(objectType, superDomain.Domain.Find(objectType.Id));
+            Assert.AreEqual(objectType, domain.MetaDomain.Find(objectType.Id));
+            Assert.AreEqual(objectType, superDomain.MetaDomain.Find(objectType.Id));
         }
     }
 

@@ -55,11 +55,11 @@ namespace Allors.Meta
 
                 if (value.Equals(Guid.Empty))
                 {
-                    this.RemoveId();
+                    throw new ArgumentNullException();
                 }
                 else
                 {
-                    var existing = this.Domain.Find(value);
+                    var existing = this.MetaDomain.Find(value);
 
                     if (existing != null)
                     {
@@ -67,7 +67,7 @@ namespace Allors.Meta
                     }
                     
                     base.Id = value;
-                    this.Domain.MetaObjectById[this.Id] = this;
+                    this.MetaDomain.MetaObjectById[this.Id] = this;
                 }
             }
         }
@@ -94,28 +94,15 @@ namespace Allors.Meta
         /// Gets the domain.
         /// </summary>
         /// <value>The domain.</value>
-        public MetaDomain Domain
+        public MetaDomain MetaDomain
         {
-            get { return Meta.MetaDomain.GetDomain(this.AllorsSession); }
+            get { return MetaDomain.GetDomain(this.AllorsSession); }
         }
 
         /// <summary>
         /// Gets the validation name.
         /// </summary>
         protected abstract string ValidationName { get; }
-
-        /// <summary>
-        /// Removes the Id.
-        /// </summary>
-        public override void RemoveId()
-        {
-            if (this.ExistId)
-            {
-                throw new ArgumentException("Id is write once");
-            }
-
-            base.RemoveId();
-        }
 
         /// <summary>
         /// Validate this object.

@@ -223,7 +223,7 @@ namespace Allors.Meta
             set
             {
                 base.DeclaredInheritances = value;
-                this.Domain.StaleInheritanceDerivations();
+                this.MetaDomain.StaleInheritanceDerivations();
             }
         }
 
@@ -251,7 +251,7 @@ namespace Allors.Meta
             set
             {
                 base.DeclaredRelationTypes = value;
-                this.Domain.StaleRelationTypeDerivations();
+                this.MetaDomain.StaleRelationTypeDerivations();
             }
         }
 
@@ -282,7 +282,7 @@ namespace Allors.Meta
             set
             {
                 base.DirectSuperDomains = value;
-                this.Domain.StaleDomainDerivations();
+                this.MetaDomain.StaleDomainDerivations();
             }
         }
 
@@ -511,7 +511,7 @@ namespace Allors.Meta
         {
             base.AddDeclaredInheritance(inheritance);
 
-            this.Domain.StaleInheritanceDerivations();
+            this.MetaDomain.StaleInheritanceDerivations();
         }
 
         /// <summary>
@@ -521,7 +521,7 @@ namespace Allors.Meta
         /// <returns>The added inheritance.</returns>
         public MetaInheritance AddDeclaredInheritance(Guid inheritanceId)
         {
-            var inheritance = (MetaInheritance)this.Domain.Find(inheritanceId);
+            var inheritance = (MetaInheritance)this.MetaDomain.Find(inheritanceId);
             if (inheritance == null)
             {
                 inheritance = MetaInheritance.Create(AllorsSession);
@@ -540,7 +540,7 @@ namespace Allors.Meta
         {
             base.AddDeclaredObjectType(objectType);
 
-            this.Domain.StaleObjectTypeDerivations();
+            this.MetaDomain.StaleObjectTypeDerivations();
         }
 
         /// <summary>
@@ -550,7 +550,7 @@ namespace Allors.Meta
         /// <returns>The object type.</returns>
         public MetaObject AddDeclaredObjectType(Guid objectTypeId)
         {
-            var objectType = (MetaObject)this.Domain.Find(objectTypeId);
+            var objectType = (MetaObject)this.MetaDomain.Find(objectTypeId);
             if (objectType == null)
             {
                 objectType = MetaObject.Create(AllorsSession);
@@ -567,7 +567,7 @@ namespace Allors.Meta
         /// <param name="relationType">The relation type.</param>
         public override void AddDeclaredRelationType(MetaRelation relationType)
         {
-            this.Domain.StaleRelationTypeDerivations();
+            this.MetaDomain.StaleRelationTypeDerivations();
             base.AddDeclaredRelationType(relationType);
         }
 
@@ -588,7 +588,7 @@ namespace Allors.Meta
         /// </returns>
         public MetaRelation AddDeclaredRelationType(Guid relationTypeId, Guid associationTypeId, Guid roleTypeId)
         {
-            var relationType = (MetaRelation)this.Domain.Find(relationTypeId);
+            var relationType = (MetaRelation)this.MetaDomain.Find(relationTypeId);
             if (relationType == null)
             {
                 relationType = MetaRelation.Create(AllorsSession);
@@ -607,7 +607,7 @@ namespace Allors.Meta
         /// <param name="methodType">The method type.</param>
         public override void AddDeclaredMethodType(MetaMethod methodType)
         {
-            this.Domain.StaleMethodTypeDerivations();
+            this.MetaDomain.StaleMethodTypeDerivations();
             base.AddDeclaredMethodType(methodType);
         }
 
@@ -618,7 +618,7 @@ namespace Allors.Meta
         /// <returns>The method type.</returns>
         public MetaMethod AddDeclaredMethodType(Guid methodTypeId)
         {
-            var methodType = (MetaMethod)this.Domain.Find(methodTypeId);
+            var methodType = (MetaMethod)this.MetaDomain.Find(methodTypeId);
             if (methodType == null)
             {
                 methodType = MetaMethod.Create(AllorsSession);
@@ -641,7 +641,7 @@ namespace Allors.Meta
             }
 
             base.AddDirectSuperDomain(domain);
-            this.Domain.StaleDomainDerivations();
+            this.MetaDomain.StaleDomainDerivations();
         }
 
         /// <summary>
@@ -651,7 +651,7 @@ namespace Allors.Meta
         /// <returns>The domain.</returns>
         public MetaDomain AddDirectSuperDomain(Guid domainId)
         {
-            var domain = (MetaDomain)this.Domain.Domain.Find(domainId) ?? Create(this.AllorsSession, domainId);
+            var domain = (MetaDomain)this.MetaDomain.MetaDomain.Find(domainId) ?? Create(this.AllorsSession, domainId);
 
             this.AddDirectSuperDomain(domain);
             return domain;
@@ -664,7 +664,7 @@ namespace Allors.Meta
         public override void RemoveDirectSuperDomain(MetaDomain domain)
         {
             base.RemoveDirectSuperDomain(domain);
-            this.Domain.StaleDomainDerivations();
+            this.MetaDomain.StaleDomainDerivations();
         }
 
         /// <summary>
@@ -673,7 +673,7 @@ namespace Allors.Meta
         public override void RemoveDirectSuperDomains()
         {
             base.RemoveDirectSuperDomains();
-            this.Domain.StaleDomainDerivations();
+            this.MetaDomain.StaleDomainDerivations();
         }
         
         /// <summary>
@@ -724,19 +724,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Removes the Id.
-        /// </summary>
-        public override void RemoveId()
-        {
-            if (ExistId)
-            {
-                throw new ArgumentException("Id is write once");
-            }
-
-            base.RemoveId();
-        }
-
-        /// <summary>
         /// Removes the Defined <see cref="MetaInheritance"/> from this domain.
         /// </summary>
         /// <param name="inheritance">The inheritance.</param>
@@ -744,7 +731,7 @@ namespace Allors.Meta
         {
             base.RemoveDeclaredInheritance(inheritance);
 
-            this.Domain.StaleInheritanceDerivations();
+            this.MetaDomain.StaleInheritanceDerivations();
         }
 
         /// <summary>
@@ -754,7 +741,7 @@ namespace Allors.Meta
         {
             base.RemoveDeclaredInheritances();
 
-            this.Domain.StaleInheritanceDerivations();
+            this.MetaDomain.StaleInheritanceDerivations();
         }
 
         /// <summary>
@@ -1411,7 +1398,7 @@ namespace Allors.Meta
 
             var allorsUnitTypes = new ArrayList();
 
-            if (this.Domain.Find(MetaUnitIds.StringId) == null)
+            if (this.MetaDomain.Find(MetaUnitIds.StringId) == null)
             {
                 var objectType = this.AddDeclaredObjectType(MetaUnitIds.StringId);
                 objectType.SingularName = MetaUnitTags.AllorsString.ToString();
@@ -1420,7 +1407,7 @@ namespace Allors.Meta
                 allorsUnitTypes.Add(objectType);
             }
 
-            if (this.Domain.Find(MetaUnitIds.IntegerId) == null)
+            if (this.MetaDomain.Find(MetaUnitIds.IntegerId) == null)
             {
                 var objectType = this.AddDeclaredObjectType(MetaUnitIds.IntegerId);
                 objectType.SingularName = MetaUnitTags.AllorsInteger.ToString();
@@ -1429,7 +1416,7 @@ namespace Allors.Meta
                 allorsUnitTypes.Add(objectType);
             }
 
-            if (this.Domain.Find(MetaUnitIds.LongId) == null)
+            if (this.MetaDomain.Find(MetaUnitIds.LongId) == null)
             {
                 var objectType = this.AddDeclaredObjectType(MetaUnitIds.LongId);
                 objectType.SingularName = MetaUnitTags.AllorsLong.ToString();
@@ -1438,7 +1425,7 @@ namespace Allors.Meta
                 allorsUnitTypes.Add(objectType);
             }
 
-            if (this.Domain.Find(MetaUnitIds.DecimalId) == null)
+            if (this.MetaDomain.Find(MetaUnitIds.DecimalId) == null)
             {
                 var objectType = this.AddDeclaredObjectType(MetaUnitIds.DecimalId);
                 objectType.SingularName = MetaUnitTags.AllorsDecimal.ToString();
@@ -1447,7 +1434,7 @@ namespace Allors.Meta
                 allorsUnitTypes.Add(objectType);
             }
 
-            if (this.Domain.Find(MetaUnitIds.DoubleId) == null)
+            if (this.MetaDomain.Find(MetaUnitIds.DoubleId) == null)
             {
                 var objectType = this.AddDeclaredObjectType(MetaUnitIds.DoubleId);
                 objectType.SingularName = MetaUnitTags.AllorsDouble.ToString();
@@ -1456,7 +1443,7 @@ namespace Allors.Meta
                 allorsUnitTypes.Add(objectType);
             }
 
-            if (this.Domain.Find(MetaUnitIds.BooleanId) == null)
+            if (this.MetaDomain.Find(MetaUnitIds.BooleanId) == null)
             {
                 var objectType = this.AddDeclaredObjectType(MetaUnitIds.BooleanId);
                 objectType.SingularName = MetaUnitTags.AllorsBoolean.ToString();
@@ -1465,7 +1452,7 @@ namespace Allors.Meta
                 allorsUnitTypes.Add(objectType);
             }
 
-            if (this.Domain.Find(MetaUnitIds.DatetimeId) == null)
+            if (this.MetaDomain.Find(MetaUnitIds.DatetimeId) == null)
             {
                 var objectType = this.AddDeclaredObjectType(MetaUnitIds.DatetimeId);
                 objectType.SingularName = MetaUnitTags.AllorsDateTime.ToString();
@@ -1474,7 +1461,7 @@ namespace Allors.Meta
                 allorsUnitTypes.Add(objectType);
             }
 
-            if (this.Domain.Find(MetaUnitIds.Unique) == null)
+            if (this.MetaDomain.Find(MetaUnitIds.Unique) == null)
             {
                 var objectType = this.AddDeclaredObjectType(MetaUnitIds.Unique);
                 objectType.SingularName = MetaUnitTags.AllorsUnique.ToString();
@@ -1483,7 +1470,7 @@ namespace Allors.Meta
                 allorsUnitTypes.Add(objectType);
             }
 
-            if (this.Domain.Find(MetaUnitIds.BinaryId) == null)
+            if (this.MetaDomain.Find(MetaUnitIds.BinaryId) == null)
             {
                 var objectType = this.AddDeclaredObjectType(MetaUnitIds.BinaryId);
                 objectType.SingularName = MetaUnitTags.AllorsBinary.ToString();

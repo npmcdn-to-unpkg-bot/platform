@@ -109,19 +109,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Removes the Id.
-        /// </summary>
-        public override void RemoveId()
-        {
-            if (ExistId)
-            {
-                throw new ArgumentException("Id is write once");
-            }
-
-            base.RemoveId();
-        }
-
-        /// <summary>
         /// Creates a new instance.
         /// </summary>
         /// <param name="session">The session.</param>
@@ -152,7 +139,7 @@ namespace Allors.Meta
         /// </summary>
         private void StaleMethodTypeDerivations()
         {
-            this.Domain.StaleMethodTypeDerivations();
+            this.MetaDomain.StaleMethodTypeDerivations();
         }
     }
 }

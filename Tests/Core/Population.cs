@@ -382,15 +382,15 @@ namespace Allors.Meta.Static
 
         private void GetUnits()
         {
-            this.BinaryType = (MetaObject)this.Domain.Domain.Find(MetaUnitIds.BinaryId);
-            this.BooleanType = (MetaObject)this.Domain.Domain.Find(MetaUnitIds.BooleanId);
-            this.DateTimeType = (MetaObject)this.Domain.Domain.Find(MetaUnitIds.DatetimeId);
-            this.DecimalType = (MetaObject)this.Domain.Domain.Find(MetaUnitIds.DecimalId);
-            this.DoubleType = (MetaObject)this.Domain.Domain.Find(MetaUnitIds.DoubleId);
-            this.IntegerType = (MetaObject)this.Domain.Domain.Find(MetaUnitIds.IntegerId);
-            this.LongType = (MetaObject)this.Domain.Domain.Find(MetaUnitIds.LongId);
-            this.StringType = (MetaObject)this.Domain.Domain.Find(MetaUnitIds.StringId);
-            this.UniqueType = (MetaObject)this.Domain.Domain.Find(MetaUnitIds.Unique);
+            this.BinaryType = (MetaObject)this.Domain.MetaDomain.Find(MetaUnitIds.BinaryId);
+            this.BooleanType = (MetaObject)this.Domain.MetaDomain.Find(MetaUnitIds.BooleanId);
+            this.DateTimeType = (MetaObject)this.Domain.MetaDomain.Find(MetaUnitIds.DatetimeId);
+            this.DecimalType = (MetaObject)this.Domain.MetaDomain.Find(MetaUnitIds.DecimalId);
+            this.DoubleType = (MetaObject)this.Domain.MetaDomain.Find(MetaUnitIds.DoubleId);
+            this.IntegerType = (MetaObject)this.Domain.MetaDomain.Find(MetaUnitIds.IntegerId);
+            this.LongType = (MetaObject)this.Domain.MetaDomain.Find(MetaUnitIds.LongId);
+            this.StringType = (MetaObject)this.Domain.MetaDomain.Find(MetaUnitIds.StringId);
+            this.UniqueType = (MetaObject)this.Domain.MetaDomain.Find(MetaUnitIds.Unique);
         }
     }
 }

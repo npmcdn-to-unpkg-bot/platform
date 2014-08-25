@@ -243,7 +243,7 @@ namespace Allors.Adapters.Database.Memory
                                 }
 
                                 var relationTypeId = new Guid(relationTypeIdString);
-                                var relationType = (MetaRelation)this.session.Database.Domain.Domain.Find(relationTypeId);
+                                var relationType = (MetaRelation)this.session.Database.Domain.MetaDomain.Find(relationTypeId);
 
                                 if (this.reader.Name.Equals(Serialization.RelationTypeUnit))
                                 {

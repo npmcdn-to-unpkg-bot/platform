@@ -8,9 +8,7 @@ namespace Allors.Meta.AllorsGenerated
 			set;
 		}
 
-		void RemoveId();
-
-		bool ExistId
+        bool ExistId
 		{
 			get;
 		}
@@ -132,11 +130,5 @@ namespace Allors.Meta.AllorsGenerated
 				return _MetaObjectId != null;
 			}
 		}
-
-		public virtual void RemoveId()
-		{
-			_MetaObjectId = null;
-		}
-
-}
+    }
 }

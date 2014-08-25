@@ -2252,7 +2252,7 @@ namespace Allors.Adapters.Workspace.Memory
             }
 
             var relationTypeId = new Guid(relationTypeIdString);
-            var roleType = ((MetaRelation)this.Workspace.Database.Domain.Domain.Find(relationTypeId)).RoleType;
+            var roleType = ((MetaRelation)this.Workspace.Database.Domain.MetaDomain.Find(relationTypeId)).RoleType;
 
             if (!reader.IsEmptyElement)
             {
@@ -2566,7 +2566,7 @@ namespace Allors.Adapters.Workspace.Memory
             }
 
             var relationTypeId = new Guid(relationTypeIdString);
-            var relationType = ((MetaRelation)this.Workspace.Database.Domain.Domain.Find(relationTypeId)).RoleType;
+            var relationType = ((MetaRelation)this.Workspace.Database.Domain.MetaDomain.Find(relationTypeId)).RoleType;
 
             if (!reader.IsEmptyElement)
             {

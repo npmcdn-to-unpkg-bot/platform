@@ -458,19 +458,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Removes the Id.
-        /// </summary>
-        public override void RemoveId()
-        {
-            if (ExistId)
-            {
-                throw new ArgumentException("Id is write once");
-            }
-
-            base.RemoveId();
-        }
-
-        /// <summary>
         /// Removes the assigned plural name.
         /// </summary>
         public override void RemoveAssignedPluralName()
@@ -929,7 +916,7 @@ namespace Allors.Meta
             }
             else
             {
-                this.Domain.EnsureRelationTypeDerivations();
+                this.MetaDomain.EnsureRelationTypeDerivations();
             }
         }
 
@@ -940,7 +927,7 @@ namespace Allors.Meta
         {
             if (this.ExistRelationTypeWhereRoleType)
             {
-                this.RelationTypeWhereRoleType.Domain.StaleRelationTypeDerivations();
+                this.RelationTypeWhereRoleType.MetaDomain.StaleRelationTypeDerivations();
             }
             else if (this.ExistObjectType)
             {
@@ -948,7 +935,7 @@ namespace Allors.Meta
             }
             else
             {
-                this.Domain.StaleRelationTypeDerivations();
+                this.MetaDomain.StaleRelationTypeDerivations();
             }
         }
     }

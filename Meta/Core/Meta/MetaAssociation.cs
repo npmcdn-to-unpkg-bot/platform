@@ -296,7 +296,7 @@ namespace Allors.Meta
             }
             else
             {
-                this.Domain.EnsureRelationTypeDerivations();
+                this.MetaDomain.EnsureRelationTypeDerivations();
             }
         }
 
@@ -307,7 +307,7 @@ namespace Allors.Meta
         {
             if (this.ExistRelationTypeWhereAssociationType)
             {
-                this.RelationTypeWhereAssociationType.Domain.StaleRelationTypeDerivations();
+                this.RelationTypeWhereAssociationType.MetaDomain.StaleRelationTypeDerivations();
             }
             else if (this.ExistObjectType)
             {
@@ -315,7 +315,7 @@ namespace Allors.Meta
             }
             else
             {
-                this.Domain.StaleRelationTypeDerivations();
+                this.MetaDomain.StaleRelationTypeDerivations();
             }
         }
     }
