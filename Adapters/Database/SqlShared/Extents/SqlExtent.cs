@@ -80,12 +80,12 @@ namespace Allors.Adapters.Database.Sql
             get { return this.GetItem(index); }
         }
 
-        public override Allors.Extent AddSort(MetaRole roleType)
+        public override Allors.Extent AddSort(RoleType roleType)
         {
             return this.AddSort(roleType, SortDirection.Ascending);
         }
 
-        public override Allors.Extent AddSort(MetaRole roleType, SortDirection direction)
+        public override Allors.Extent AddSort(RoleType roleType, SortDirection direction)
         {
             this.LazyLoadFilter();
             this.FlushCache();

@@ -25,7 +25,7 @@ namespace Allors.Adapters
     using Allors.Meta;
 
     /// <summary>
-    /// Writes all relations from a <see cref="MetaRelation"/> with a Role
+    /// Writes all relations from a <see cref="RelationType"/> with a Role
     /// with multiplicity of one  to the <see cref="XmlWriter"/> during a <see cref="IDatabase#Save"/>.
     /// </summary>
     public class RelationTypeOneXmlWriter : IDisposable
@@ -33,7 +33,7 @@ namespace Allors.Adapters
         /// <summary>
         /// The <see cref="relationType"/>.
         /// </summary>
-        private readonly MetaRelation relationType;
+        private readonly RelationType relationType;
 
         /// <summary>
         /// The <see cref="xmlWriter"/>.
@@ -55,7 +55,7 @@ namespace Allors.Adapters
         /// </summary>
         /// <param name="relationType">Type of the relation.</param>
         /// <param name="xmlWriter">The XML writer.</param>
-        public RelationTypeOneXmlWriter(MetaRelation relationType, XmlWriter xmlWriter)
+        public RelationTypeOneXmlWriter(RelationType relationType, XmlWriter xmlWriter)
         {
             this.relationType = relationType;
             this.xmlWriter = xmlWriter;

@@ -92,7 +92,7 @@ namespace Allors.Adapters.Database.SqlClient
 
         internal abstract IEnumerable<SqlDataRecord> CreateRelationTable(IEnumerable<CompositeRelation> compositeRelations);
 
-        internal abstract IEnumerable<SqlDataRecord> CreateRelationTable(MetaRole roleType, IEnumerable<UnitRelation> unitRelations);
+        internal abstract IEnumerable<SqlDataRecord> CreateRelationTable(RoleType roleType, IEnumerable<UnitRelation> unitRelations);
 
         internal SqlMetaData GetSqlMetaData(string name, SchemaColumn column)
         {

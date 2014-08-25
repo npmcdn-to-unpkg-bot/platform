@@ -126,7 +126,7 @@ namespace Allors
         /// Gets the type.
         /// </summary>
         /// <value>The type of the Extent.</value>
-        public MetaObject ObjectType
+        public ObjectType ObjectType
         {
             get { return this.extent.ObjectType; }
         }
@@ -270,7 +270,7 @@ namespace Allors
         /// </summary>
         /// <param name="roleType">The role type by which to sort.</param>
         /// <returns>The current extent.</returns>
-        public Extent<T> AddSort(MetaRole roleType)
+        public Extent<T> AddSort(RoleType roleType)
         {
             this.extent.AddSort(roleType);
             return this;
@@ -282,7 +282,7 @@ namespace Allors
         /// <param name="roleType">The role type by which to sort.</param>
         /// <param name="direction">The sort direction.</param>
         /// <returns>The current extent.</returns>
-        public Extent<T> AddSort(MetaRole roleType, SortDirection direction)
+        public Extent<T> AddSort(RoleType roleType, SortDirection direction)
         {
             this.extent.AddSort(roleType, direction);
             return this;

@@ -26,11 +26,11 @@ namespace Allors.Adapters.Database.Memory
     internal sealed class RoleBetween : Predicate
     {
         private readonly ExtentFiltered extent;
-        private readonly MetaRole roleType;
+        private readonly RoleType roleType;
         private readonly object first;
         private readonly object second;
 
-        internal RoleBetween(ExtentFiltered extent, MetaRole roleType, object first, object second)
+        internal RoleBetween(ExtentFiltered extent, RoleType roleType, object first, object second)
         {
             extent.CheckForRoleType(roleType);
             CompositePredicateAssertions.ValidateRoleBetween(roleType, first, second);
@@ -47,7 +47,7 @@ namespace Allors.Adapters.Database.Memory
             var firstValue = this.first;
             var secondValue = this.second;
 
-            var firstRole = this.first as MetaRole;
+            var firstRole = this.first as RoleType;
             if (firstRole != null)
             {
                 firstValue = strategy.GetInternalizedUnitRole(firstRole);
@@ -60,7 +60,7 @@ namespace Allors.Adapters.Database.Memory
                 }
             }
 
-            var secondRole = this.second as MetaRole;
+            var secondRole = this.second as RoleType;
             if (secondRole != null)
             {
                 secondValue = strategy.GetInternalizedUnitRole(secondRole);

@@ -28,7 +28,7 @@ namespace Allors.Adapters.Database.Sql.Commands
 
     public interface IRemoveCompositeRole
     {
-        void Execute(IList<CompositeRelation> relations, MetaRole roleType);
+        void Execute(IList<CompositeRelation> relations, RoleType roleType);
     }
 
     public interface IRemoveCompositeRoleFactory

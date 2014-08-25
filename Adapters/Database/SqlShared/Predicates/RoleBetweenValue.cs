@@ -24,11 +24,11 @@ namespace Allors.Adapters.Database.Sql
 
     public sealed class RoleBetweenValue : Predicate
     {
-        private readonly MetaRole roleType;
+        private readonly RoleType roleType;
         private readonly object first;
         private readonly object second;
 
-        public RoleBetweenValue(ExtentFiltered extent, MetaRole roleType, object first, object second)
+        public RoleBetweenValue(ExtentFiltered extent, RoleType roleType, object first, object second)
         {
             extent.CheckRole(roleType);
             CompositePredicateAssertions.ValidateRoleBetween(roleType, first, second);

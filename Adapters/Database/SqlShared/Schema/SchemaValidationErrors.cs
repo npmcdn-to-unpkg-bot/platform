@@ -26,12 +26,12 @@ namespace Allors.Adapters.Database.Sql
 
     /// <summary>
     /// Holds the <see cref="ISchemaValidationError"/>s that occured during the validation
-    /// of the <see cref="MetaDomain"/> against the database schema.
+    /// of the <see cref="Domain"/> against the database schema.
     /// </summary>
     public class SchemaValidationErrors
     {
         /// <summary>
-        /// The errors that occured during validation of the <see cref="MetaDomain"/> against the Sql schema.
+        /// The errors that occured during validation of the <see cref="Domain"/> against the Sql schema.
         /// </summary>
         private readonly List<ISchemaValidationError> errors;
 
@@ -125,7 +125,7 @@ namespace Allors.Adapters.Database.Sql
         /// <param name="columnName">Name of the column.</param>
         /// <param name="kind">The kind of validation error.</param>
         /// <param name="message">The validation error message.</param>
-        public void AddTableError(MetaObject objectType, MetaRelation relationType, MetaRole roleType, string tableName, string columnName, SchemaValidationErrorKind kind, string message)
+        public void AddTableError(ObjectType objectType, RelationType relationType, RoleType roleType, string tableName, string columnName, SchemaValidationErrorKind kind, string message)
         {
             this.errors.Add(new TableSchemaValidationError(objectType, relationType, roleType, tableName, columnName, kind, message));
         }

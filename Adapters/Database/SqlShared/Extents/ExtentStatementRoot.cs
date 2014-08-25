@@ -73,12 +73,12 @@ namespace Allors.Adapters.Database.Sql
             return "alias" + (this.aliasIndex++);
         }
 
-        public override ExtentStatement CreateChild(SqlExtent extent, MetaAssociation association)
+        public override ExtentStatement CreateChild(SqlExtent extent, AssociationType association)
         {
             return new ExtentStatementChild(this, extent, association);
         }
 
-        public override ExtentStatement CreateChild(SqlExtent extent, MetaRole role)
+        public override ExtentStatement CreateChild(SqlExtent extent, RoleType role)
         {
             return new ExtentStatementChild(this, extent, role);
         }

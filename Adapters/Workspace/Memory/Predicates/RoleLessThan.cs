@@ -29,10 +29,10 @@ namespace Allors.Adapters.Workspace.Memory
     internal sealed class RoleLessThan : Predicate
     {
         private readonly Extent extent;
-        private readonly MetaRole roleType;
+        private readonly RoleType roleType;
         private readonly object compare;
 
-        internal RoleLessThan(Extent extent, MetaRole roleType, object compare)
+        internal RoleLessThan(Extent extent, RoleType roleType, object compare)
         {
             extent.CheckForRoleType(roleType);
             CompositePredicateAssertions.ValidateRoleLessThan(roleType, compare);
@@ -46,7 +46,7 @@ namespace Allors.Adapters.Workspace.Memory
         {
             var compareValue = this.compare;
 
-            var compareRole = this.compare as MetaRole;
+            var compareRole = this.compare as RoleType;
             if (compareRole != null)
             {
                 compareValue = strategy.GetInternalizedUnitRole(compareRole);

@@ -59,7 +59,7 @@ namespace Allors.Meta
                 }
                 else
                 {
-                    var existing = this.MetaDomain.Find(value);
+                    var existing = this.Domain.Find(value);
 
                     if (existing != null)
                     {
@@ -67,7 +67,7 @@ namespace Allors.Meta
                     }
                     
                     base.Id = value;
-                    this.MetaDomain.MetaObjectById[this.Id] = this;
+                    this.Domain.MetaObjectById[this.Id] = this;
                 }
             }
         }
@@ -94,9 +94,9 @@ namespace Allors.Meta
         /// Gets the domain.
         /// </summary>
         /// <value>The domain.</value>
-        public MetaDomain MetaDomain
+        public Domain Domain
         {
-            get { return MetaDomain.GetDomain(this.AllorsSession); }
+            get { return Domain.GetDomain(this.AllorsSession); }
         }
 
         /// <summary>

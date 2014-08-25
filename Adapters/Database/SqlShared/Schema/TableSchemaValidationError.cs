@@ -23,7 +23,7 @@ namespace Allors.Adapters.Database.Sql
     using Allors.Meta;
 
     /// <summary>
-    /// <para>Raised during the validation of the <see cref="MetaDomain"/> against the Sql schema.</para>
+    /// <para>Raised during the validation of the <see cref="Domain"/> against the Sql schema.</para>
     /// <para>The <see cref="TableSchemaValidationError#ObjectType"/>, <see cref="TableSchemaValidationError#RelationType"/>
     /// and <see cref="TableSchemaValidationError#RoleType"/> objects are mutually exclusive.
     /// </para>
@@ -48,12 +48,12 @@ namespace Allors.Adapters.Database.Sql
         /// <summary>
         /// The invalid relation type.
         /// </summary>
-        private readonly MetaRelation relationType;
+        private readonly RelationType relationType;
 
         /// <summary>
         /// The invalid role.
         /// </summary>
-        private readonly MetaRole role;
+        private readonly RoleType role;
 
         /// <summary>
         /// The name of the table.
@@ -63,7 +63,7 @@ namespace Allors.Adapters.Database.Sql
         /// <summary>
         /// The object type.
         /// </summary>
-        private readonly MetaObject objectType;
+        private readonly ObjectType objectType;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TableSchemaValidationError"/> class.
@@ -75,7 +75,7 @@ namespace Allors.Adapters.Database.Sql
         /// <param name="columnName">Name of the column.</param>
         /// <param name="errorKind">The kind of validation error.</param>
         /// <param name="message">The validation error message.</param>
-        public TableSchemaValidationError(MetaObject objectType, MetaRelation relationType, MetaRole role, string tableName, string columnName, SchemaValidationErrorKind errorKind, string message)
+        public TableSchemaValidationError(ObjectType objectType, RelationType relationType, RoleType role, string tableName, string columnName, SchemaValidationErrorKind errorKind, string message)
         {
             this.objectType = objectType;
             this.relationType = relationType;
@@ -117,7 +117,7 @@ namespace Allors.Adapters.Database.Sql
         /// Gets the invalid relation type.
         /// </summary>
         /// <value>The ChangedRelations Type.</value>
-        public MetaRelation RelationType
+        public RelationType RelationType
         {
             get { return this.relationType; }
         }
@@ -126,7 +126,7 @@ namespace Allors.Adapters.Database.Sql
         /// Gets the invalid role.
         /// </summary>
         /// <value>The role .</value>
-        public MetaRole Role
+        public RoleType Role
         {
             get { return this.role; }
         }
@@ -144,7 +144,7 @@ namespace Allors.Adapters.Database.Sql
         /// Gets the invalid object type. 
         /// </summary>
         /// <value>The Object Type.</value>
-        public MetaObject ObjectType
+        public ObjectType ObjectType
         {
             get { return this.objectType; }
         }

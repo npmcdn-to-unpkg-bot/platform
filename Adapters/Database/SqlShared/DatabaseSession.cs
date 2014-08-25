@@ -33,13 +33,13 @@ namespace Allors.Adapters.Database.Sql
 
         private Dictionary<Reference, Roles> modifiedRolesByReference;
         private Dictionary<Reference, Roles> unflushedRolesByReference;
-        private Dictionary<MetaAssociation, HashSet<ObjectId>> triggersFlushRolesByAssociationType;
+        private Dictionary<AssociationType, HashSet<ObjectId>> triggersFlushRolesByAssociationType;
 
         private Dictionary<ObjectId, Reference> referenceByObjectId;
         private HashSet<Reference> referencesWithoutCacheId;
 
-        private Dictionary<MetaAssociation, Dictionary<Reference, Reference>> associationByRoleByAssociationType;
-        private Dictionary<MetaAssociation, Dictionary<Reference, ObjectId[]>> associationsByRoleByAssociationType;
+        private Dictionary<AssociationType, Dictionary<Reference, Reference>> associationByRoleByAssociationType;
+        private Dictionary<AssociationType, Dictionary<Reference, ObjectId[]>> associationsByRoleByAssociationType;
         
         private bool busyCommittingOrRollingBack;
 
@@ -50,8 +50,8 @@ namespace Allors.Adapters.Database.Sql
             this.referenceByObjectId = new Dictionary<ObjectId, Reference>();
             this.referencesWithoutCacheId = new HashSet<Reference>();
 
-            this.associationByRoleByAssociationType = new Dictionary<MetaAssociation, Dictionary<Reference, Reference>>();
-            this.associationsByRoleByAssociationType = new Dictionary<MetaAssociation, Dictionary<Reference, ObjectId[]>>();
+            this.associationByRoleByAssociationType = new Dictionary<AssociationType, Dictionary<Reference, Reference>>();
+            this.associationsByRoleByAssociationType = new Dictionary<AssociationType, Dictionary<Reference, ObjectId[]>>();
 
             this.changeSet = new ChangeSet();
         }
@@ -136,7 +136,7 @@ namespace Allors.Adapters.Database.Sql
             get { return this.SqlDatabase.Schema; }
         }
 
-        public virtual IObject Create(MetaObject objectType)
+        public virtual IObject Create(ObjectType objectType)
         {
             if (!objectType.IsConcreteComposite)
             {
@@ -153,7 +153,7 @@ namespace Allors.Adapters.Database.Sql
             return strategyReference.Strategy.GetObject();
         }
 
-        public virtual IObject[] Create(MetaObject objectType, int count)
+        public virtual IObject[] Create(ObjectType objectType, int count)
         {
             if (!objectType.IsConcreteComposite)
             {
@@ -178,7 +178,7 @@ namespace Allors.Adapters.Database.Sql
             return domainObjects;
         }
 
-        public virtual IObject Insert(MetaObject domainType, string objectIdString)
+        public virtual IObject Insert(ObjectType domainType, string objectIdString)
         {
             var objectId = this.SqlDatabase.AllorsObjectIds.Parse(objectIdString);
             var insertedObject = this.Insert(domainType, objectId);
@@ -188,7 +188,7 @@ namespace Allors.Adapters.Database.Sql
             return insertedObject;
         }
 
-        public virtual IObject Insert(MetaObject domainType, ObjectId objectId)
+        public virtual IObject Insert(ObjectType domainType, ObjectId objectId)
         {
             if (this.referenceByObjectId.ContainsKey(objectId))
             {
@@ -333,7 +333,7 @@ namespace Allors.Adapters.Database.Sql
             return this.Extent(this.SqlDatabase.ObjectFactory.GetObjectTypeForType(typeof(T)));
         }
         
-        public virtual Allors.Extent Extent(MetaObject type)
+        public virtual Allors.Extent Extent(ObjectType type)
         {
             return new ExtentFiltered(this, type);
         }
@@ -397,8 +397,8 @@ namespace Allors.Adapters.Database.Sql
                         this.referenceByObjectId[reference.ObjectId] = reference;
                     }
 
-                    this.associationByRoleByAssociationType = new Dictionary<MetaAssociation, Dictionary<Reference, Reference>>();
-                    this.associationsByRoleByAssociationType = new Dictionary<MetaAssociation, Dictionary<Reference, ObjectId[]>>();
+                    this.associationByRoleByAssociationType = new Dictionary<AssociationType, Dictionary<Reference, Reference>>();
+                    this.associationsByRoleByAssociationType = new Dictionary<AssociationType, Dictionary<Reference, ObjectId[]>>();
 
                     this.changeSet = new ChangeSet();
 
@@ -452,8 +452,8 @@ namespace Allors.Adapters.Database.Sql
                     this.modifiedRolesByReference = null;
                     this.triggersFlushRolesByAssociationType = null;
 
-                    this.associationByRoleByAssociationType = new Dictionary<MetaAssociation, Dictionary<Reference, Reference>>();
-                    this.associationsByRoleByAssociationType = new Dictionary<MetaAssociation, Dictionary<Reference, ObjectId[]>>();
+                    this.associationByRoleByAssociationType = new Dictionary<AssociationType, Dictionary<Reference, Reference>>();
+                    this.associationsByRoleByAssociationType = new Dictionary<AssociationType, Dictionary<Reference, ObjectId[]>>();
 
                     this.changeSet = new ChangeSet();
 
@@ -482,7 +482,7 @@ namespace Allors.Adapters.Database.Sql
             return (T)this.Create(objectType);
         }
         
-        public virtual Reference GetAssociation(Strategy roleStrategy, MetaAssociation associationType)
+        public virtual Reference GetAssociation(Strategy roleStrategy, AssociationType associationType)
         {
             var associationByRole = this.GetAssociationByRole(associationType);
 
@@ -497,13 +497,13 @@ namespace Allors.Adapters.Database.Sql
             return association;
         }
 
-        public void SetAssociation(Reference previousAssociation, Strategy roleStrategy, MetaAssociation associationType)
+        public void SetAssociation(Reference previousAssociation, Strategy roleStrategy, AssociationType associationType)
         {
             var associationByRole = this.GetAssociationByRole(associationType);
             associationByRole[roleStrategy.Reference] = previousAssociation;
         }
 
-        public virtual ObjectId[] GetAssociations(Strategy roleStrategy, MetaAssociation associationType)
+        public virtual ObjectId[] GetAssociations(Strategy roleStrategy, AssociationType associationType)
         {
             var associationsByRole = this.GetAssociationsByRole(associationType);
 
@@ -518,7 +518,7 @@ namespace Allors.Adapters.Database.Sql
             return associations;
         }
 
-        public void AddAssociation(Reference association, Reference role, MetaAssociation associationType)
+        public void AddAssociation(Reference association, Reference role, AssociationType associationType)
         {
             var associationsByRole = this.GetAssociationsByRole(associationType);
 
@@ -532,7 +532,7 @@ namespace Allors.Adapters.Database.Sql
             }
         }
 
-        public void RemoveAssociation(Reference association, Reference role, MetaAssociation associationType)
+        public void RemoveAssociation(Reference association, Reference role, AssociationType associationType)
         {
             var associationsByRole = this.GetAssociationsByRole(associationType);
 
@@ -571,7 +571,7 @@ namespace Allors.Adapters.Database.Sql
             return association;
         }
 
-        public virtual Reference GetOrCreateAssociationForExistingObject(MetaObject objectType, ObjectId objectId)
+        public virtual Reference GetOrCreateAssociationForExistingObject(ObjectType objectType, ObjectId objectId)
         {
             Reference association;
             if (!this.referenceByObjectId.TryGetValue(objectId, out association))
@@ -584,7 +584,7 @@ namespace Allors.Adapters.Database.Sql
             return association;
         }
 
-        public virtual Reference GetOrCreateAssociationForExistingObject(MetaObject objectType, ObjectId objectId, int cacheId)
+        public virtual Reference GetOrCreateAssociationForExistingObject(ObjectType objectType, ObjectId objectId, int cacheId)
         {
             Reference association;
             if (!this.referenceByObjectId.TryGetValue(objectId, out association))
@@ -596,7 +596,7 @@ namespace Allors.Adapters.Database.Sql
             return association;
         }
 
-        public virtual Reference CreateAssociationForNewObject(MetaObject objectType, ObjectId objectId)
+        public virtual Reference CreateAssociationForNewObject(ObjectType objectType, ObjectId objectId)
         {
             var strategyReference = this.CreateReference(objectType, objectId, true);
             this.referenceByObjectId[objectId] = strategyReference;
@@ -636,7 +636,7 @@ namespace Allors.Adapters.Database.Sql
             this.triggersFlushRolesByAssociationType = null;
         }
 
-        public virtual void FlushConditionally(Strategy strategy, MetaAssociation associationType)
+        public virtual void FlushConditionally(Strategy strategy, AssociationType associationType)
         {
             if (this.triggersFlushRolesByAssociationType != null)
             {
@@ -693,11 +693,11 @@ namespace Allors.Adapters.Database.Sql
             this.modifiedRolesByReference[association] = roles;
         }
 
-        protected internal virtual void TriggerFlush(ObjectId role, MetaAssociation associationType)
+        protected internal virtual void TriggerFlush(ObjectId role, AssociationType associationType)
         {
             if (this.triggersFlushRolesByAssociationType == null)
             {
-                this.triggersFlushRolesByAssociationType = new Dictionary<MetaAssociation, HashSet<ObjectId>>();    
+                this.triggersFlushRolesByAssociationType = new Dictionary<AssociationType, HashSet<ObjectId>>();    
             }
 
             HashSet<ObjectId> associations;
@@ -721,12 +721,12 @@ namespace Allors.Adapters.Database.Sql
 
         protected abstract void SqlRollback();
 
-        protected virtual Reference CreateReference(MetaObject objectType, ObjectId objectId, bool isNew)
+        protected virtual Reference CreateReference(ObjectType objectType, ObjectId objectId, bool isNew)
         {
             return new Reference(this, objectType, objectId, isNew);
         }
 
-        protected virtual Reference CreateReference(MetaObject objectType, ObjectId objectId, int cacheId)
+        protected virtual Reference CreateReference(ObjectType objectType, ObjectId objectId, int cacheId)
         {
             return new Reference(this, objectType, objectId, cacheId);
         }
@@ -751,7 +751,7 @@ namespace Allors.Adapters.Database.Sql
             return strategyReference;
         }
 
-        private Dictionary<Reference, Reference> GetAssociationByRole(MetaAssociation associationType)
+        private Dictionary<Reference, Reference> GetAssociationByRole(AssociationType associationType)
         {
             Dictionary<Reference, Reference> associationByRole;
             if (!this.associationByRoleByAssociationType.TryGetValue(associationType, out associationByRole))
@@ -763,7 +763,7 @@ namespace Allors.Adapters.Database.Sql
             return associationByRole;
         }
 
-        private Dictionary<Reference, ObjectId[]> GetAssociationsByRole(MetaAssociation associationType)
+        private Dictionary<Reference, ObjectId[]> GetAssociationsByRole(AssociationType associationType)
         {
             Dictionary<Reference, ObjectId[]> associationsByRole;
             if (!this.associationsByRoleByAssociationType.TryGetValue(associationType, out associationsByRole))

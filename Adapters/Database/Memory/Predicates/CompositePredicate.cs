@@ -60,14 +60,14 @@ namespace Allors.Adapters.Database.Memory
             return andFilter;
         }
 
-        public ICompositePredicate AddBetween(MetaRole role, object firstValue, object secondValue)
+        public ICompositePredicate AddBetween(RoleType role, object firstValue, object secondValue)
         {
             this.predicates.Add(new RoleBetween(this.extent, role, firstValue, secondValue));
             this.extent.Invalidate();
             return this;
         }
 
-        public ICompositePredicate AddContainedIn(MetaRole role, Allors.Extent containingExtent)
+        public ICompositePredicate AddContainedIn(RoleType role, Allors.Extent containingExtent)
         {
             if (role.IsMany)
             {
@@ -82,7 +82,7 @@ namespace Allors.Adapters.Database.Memory
             return this;
         }
 
-        public ICompositePredicate AddContainedIn(MetaRole role, IEnumerable<IObject> containingEnumerable)
+        public ICompositePredicate AddContainedIn(RoleType role, IEnumerable<IObject> containingEnumerable)
         {
             if (role.IsMany)
             {
@@ -97,28 +97,28 @@ namespace Allors.Adapters.Database.Memory
             return this;
         }
 
-        public ICompositePredicate AddContainedIn(MetaAssociation association, Allors.Extent containingExtent)
+        public ICompositePredicate AddContainedIn(AssociationType association, Allors.Extent containingExtent)
         {
             this.predicates.Add(new AssociationContainedInExtent(this.extent, association, containingExtent));
             this.extent.Invalidate();
             return this;
         }
 
-        public ICompositePredicate AddContainedIn(MetaAssociation association, IEnumerable<IObject> containingEnumerable)
+        public ICompositePredicate AddContainedIn(AssociationType association, IEnumerable<IObject> containingEnumerable)
         {
             this.predicates.Add(new AssociationContainedInEnumerable(this.extent, association, containingEnumerable));
             this.extent.Invalidate();
             return this;
         }
 
-        public ICompositePredicate AddContains(MetaRole role, IObject containedObject)
+        public ICompositePredicate AddContains(RoleType role, IObject containedObject)
         {
             this.predicates.Add(new RoleContains(this.extent, role, containedObject));
             this.extent.Invalidate();
             return this;
         }
 
-        public ICompositePredicate AddContains(MetaAssociation association, IObject containedObject)
+        public ICompositePredicate AddContains(AssociationType association, IObject containedObject)
         {
             this.predicates.Add(new AssociationContains(this.extent, association, containedObject));
             this.extent.Invalidate();
@@ -132,7 +132,7 @@ namespace Allors.Adapters.Database.Memory
             return this;
         }
 
-        public ICompositePredicate AddEquals(MetaRole role, object obj)
+        public ICompositePredicate AddEquals(RoleType role, object obj)
         {
             if (role.ObjectType.IsUnit)
             {
@@ -147,63 +147,63 @@ namespace Allors.Adapters.Database.Memory
             return this;
         }
 
-        public ICompositePredicate AddEquals(MetaAssociation association, IObject allorsObject)
+        public ICompositePredicate AddEquals(AssociationType association, IObject allorsObject)
         {
             this.predicates.Add(new AssociationEquals(this.extent, association, allorsObject));
             this.extent.Invalidate();
             return this;
         }
 
-        public ICompositePredicate AddExists(MetaRole role)
+        public ICompositePredicate AddExists(RoleType role)
         {
             this.predicates.Add(new RoleExists(this.extent, role));
             this.extent.Invalidate();
             return this;
         }
 
-        public ICompositePredicate AddExists(MetaAssociation association)
+        public ICompositePredicate AddExists(AssociationType association)
         {
             this.predicates.Add(new AssociationExists(this.extent, association));
             this.extent.Invalidate();
             return this;
         }
 
-        public ICompositePredicate AddGreaterThan(MetaRole role, object value)
+        public ICompositePredicate AddGreaterThan(RoleType role, object value)
         {
             this.predicates.Add(new RoleGreaterThan(this.extent, role, value));
             this.extent.Invalidate();
             return this;
         }
 
-        public ICompositePredicate AddInstanceof(MetaObject type)
+        public ICompositePredicate AddInstanceof(ObjectType type)
         {
             this.predicates.Add(new Instanceof(type));
             this.extent.Invalidate();
             return this;
         }
 
-        public ICompositePredicate AddInstanceof(MetaRole role, MetaObject type)
+        public ICompositePredicate AddInstanceof(RoleType role, ObjectType type)
         {
             this.predicates.Add(new RoleInstanceof(this.extent, role, type));
             this.extent.Invalidate();
             return this;
         }
 
-        public ICompositePredicate AddInstanceof(MetaAssociation association, MetaObject type)
+        public ICompositePredicate AddInstanceof(AssociationType association, ObjectType type)
         {
             this.predicates.Add(new AssociationInstanceOf(this.extent, association, type));
             this.extent.Invalidate();
             return this;
         }
 
-        public ICompositePredicate AddLessThan(MetaRole role, object value)
+        public ICompositePredicate AddLessThan(RoleType role, object value)
         {
             this.predicates.Add(new RoleLessThan(this.extent, role, value));
             this.extent.Invalidate();
             return this;
         }
 
-        public ICompositePredicate AddLike(MetaRole role, string value)
+        public ICompositePredicate AddLike(RoleType role, string value)
         {
             this.predicates.Add(new RoleLike(this.extent, role, value));
             this.extent.Invalidate();

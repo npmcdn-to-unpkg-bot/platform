@@ -34,12 +34,12 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
     public class LoadUnitRelationsFactory : ILoadUnitRelationsFactory
     {
         public readonly SqlClient.ManagementSession ManagementSession;
-        private readonly Dictionary<MetaObject, Dictionary<MetaRole, string>> sqlByRoleTypeByObjectType;
+        private readonly Dictionary<ObjectType, Dictionary<RoleType, string>> sqlByRoleTypeByObjectType;
 
         public LoadUnitRelationsFactory(SqlClient.ManagementSession session)
         {
             this.ManagementSession = session;
-            this.sqlByRoleTypeByObjectType = new Dictionary<MetaObject, Dictionary<MetaRole, string>>();
+            this.sqlByRoleTypeByObjectType = new Dictionary<ObjectType, Dictionary<RoleType, string>>();
         }
 
         public ILoadUnitRelations Create()
@@ -47,12 +47,12 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
             return new LoadUnitRelations(this);
         }
 
-        public string GetSql(MetaObject objectType, MetaRole roleType)
+        public string GetSql(ObjectType objectType, RoleType roleType)
         {
-            Dictionary<MetaRole, string> sqlByRoleType;
+            Dictionary<RoleType, string> sqlByRoleType;
             if (!this.sqlByRoleTypeByObjectType.TryGetValue(objectType, out sqlByRoleType))
             {
-                sqlByRoleType = new Dictionary<MetaRole, string>();
+                sqlByRoleType = new Dictionary<RoleType, string>();
                 this.sqlByRoleTypeByObjectType.Add(objectType, sqlByRoleType);
             }
 
@@ -68,64 +68,64 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
         private class LoadUnitRelations : Commands.Command, ILoadUnitRelations
         {
             private readonly LoadUnitRelationsFactory factory;
-            private readonly Dictionary<MetaObject, Dictionary<MetaRole, SqlCommand>> commandByRoleTypeByObjectType;
+            private readonly Dictionary<ObjectType, Dictionary<RoleType, SqlCommand>> commandByRoleTypeByObjectType;
 
             public LoadUnitRelations(LoadUnitRelationsFactory factory)
             {
                 this.factory = factory;
-                this.commandByRoleTypeByObjectType = new Dictionary<MetaObject, Dictionary<MetaRole, SqlCommand>>();
+                this.commandByRoleTypeByObjectType = new Dictionary<ObjectType, Dictionary<RoleType, SqlCommand>>();
             }
 
-            public void Execute(IList<UnitRelation> relations, MetaObject exclusiveRootClass, MetaRole roleType)
+            public void Execute(IList<UnitRelation> relations, ObjectType exclusiveRootClass, RoleType roleType)
             {
                 var database = this.factory.ManagementSession.SqlClientDatabase;
                 var schema = database.SqlClientSchema;
 
-                Dictionary<MetaRole, SqlCommand> commandByRoleType;
+                Dictionary<RoleType, SqlCommand> commandByRoleType;
                 if (!this.commandByRoleTypeByObjectType.TryGetValue(exclusiveRootClass, out commandByRoleType))
                 {
-                    commandByRoleType = new Dictionary<MetaRole, SqlCommand>();
+                    commandByRoleType = new Dictionary<RoleType, SqlCommand>();
                     this.commandByRoleTypeByObjectType.Add(exclusiveRootClass, commandByRoleType);
                 }
 
                 SchemaTableParameter tableParam;
 
-                var unitTypeTag = (MetaUnitTags)roleType.ObjectType.UnitTag;
+                var unitTypeTag = (UnitTags)roleType.ObjectType.UnitTag;
                 switch (unitTypeTag)
                 {
-                    case MetaUnitTags.AllorsString:
+                    case UnitTags.AllorsString:
                         tableParam = schema.StringRelationTableParam;
                         break;
 
-                    case MetaUnitTags.AllorsInteger:
+                    case UnitTags.AllorsInteger:
                         tableParam = schema.IntegerRelationTableParam;
                         break;
 
-                    case MetaUnitTags.AllorsLong:
+                    case UnitTags.AllorsLong:
                         tableParam = schema.LongRelationTableParam;
                         break;
 
-                    case MetaUnitTags.AllorsDouble:
+                    case UnitTags.AllorsDouble:
                         tableParam = schema.DoubleRelationTableParam;
                         break;
 
-                    case MetaUnitTags.AllorsBoolean:
+                    case UnitTags.AllorsBoolean:
                         tableParam = schema.BooleanRelationTableParam;
                         break;
 
-                    case MetaUnitTags.AllorsDateTime:
+                    case UnitTags.AllorsDateTime:
                         tableParam = schema.DateTimeRelationTableParam;
                         break;
 
-                    case MetaUnitTags.AllorsUnique:
+                    case UnitTags.AllorsUnique:
                         tableParam = schema.UniqueRelationTableParam;
                         break;
 
-                    case MetaUnitTags.AllorsBinary:
+                    case UnitTags.AllorsBinary:
                         tableParam = schema.BinaryRelationTableParam;
                         break;
 
-                    case MetaUnitTags.AllorsDecimal:
+                    case UnitTags.AllorsDecimal:
                         tableParam = schema.DecimalRelationTableParameterByScaleByPrecision[roleType.Precision][roleType.Scale];
                         break;
 

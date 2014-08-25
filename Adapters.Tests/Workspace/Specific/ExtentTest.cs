@@ -90,7 +90,7 @@ namespace Allors.Special
         {
         }
         
-        protected override Extent LocalExtent(MetaObject objectType)
+        protected override Extent LocalExtent(ObjectType objectType)
         {
             var workspaceSession = (IWorkspaceSession)this.Session;
             return workspaceSession.LocalExtent(objectType);

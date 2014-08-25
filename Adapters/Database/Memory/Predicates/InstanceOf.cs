@@ -25,9 +25,9 @@ namespace Allors.Adapters.Database.Memory
 
     internal sealed class Instanceof : Predicate
     {
-        private readonly MetaObject objectType;
+        private readonly ObjectType objectType;
 
-        internal Instanceof(MetaObject objectType)
+        internal Instanceof(ObjectType objectType)
         {
             CompositePredicateAssertions.ValidateInstanceof(objectType);
 

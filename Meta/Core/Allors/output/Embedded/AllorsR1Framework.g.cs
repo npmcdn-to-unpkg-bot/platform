@@ -154,25 +154,25 @@ namespace Allors.Meta.AllorsGenerated
 			switch(type.Tag)
 			{
 				case AllorsTypeTags.AssociationType:
-					allorsObject = new global::Allors.Meta.MetaAssociation(this,id);
+					allorsObject = new global::Allors.Meta.AssociationType(this,id);
 				break;
 				case AllorsTypeTags.Domain:
-					allorsObject = new global::Allors.Meta.MetaDomain(this,id);
+					allorsObject = new global::Allors.Meta.Domain(this,id);
 				break;
 				case AllorsTypeTags.RoleType:
-					allorsObject = new global::Allors.Meta.MetaRole(this,id);
+					allorsObject = new global::Allors.Meta.RoleType(this,id);
 				break;
 				case AllorsTypeTags.RelationType:
-					allorsObject = new global::Allors.Meta.MetaRelation(this,id);
+					allorsObject = new global::Allors.Meta.RelationType(this,id);
 				break;
 				case AllorsTypeTags.Inheritance:
-					allorsObject = new global::Allors.Meta.MetaInheritance(this,id);
+					allorsObject = new global::Allors.Meta.Inheritance(this,id);
 				break;
 				case AllorsTypeTags.ObjectType:
-					allorsObject = new global::Allors.Meta.MetaObject(this,id);
+					allorsObject = new global::Allors.Meta.ObjectType(this,id);
 				break;
 				case AllorsTypeTags.MethodType:
-					allorsObject = new global::Allors.Meta.MetaMethod(this,id);
+					allorsObject = new global::Allors.Meta.MethodType(this,id);
 				break;
 
 				default:
@@ -859,12 +859,12 @@ namespace Allors.Meta.AllorsGenerated
 		/// <summary>
 		/// The PropertyType Object Type.
 		/// </summary>
-		public static AllorsEmbeddedObjectType PropertyType = new AllorsEmbeddedObjectType(new Guid("47bb2aad-ad9e-4789-82b4-c9594585b3da"), typeof(global::Allors.Meta.MetaProperty), false , AllorsTypeTags.PropertyType );
+		public static AllorsEmbeddedObjectType PropertyType = new AllorsEmbeddedObjectType(new Guid("47bb2aad-ad9e-4789-82b4-c9594585b3da"), typeof(global::Allors.Meta.PropertyType), false , AllorsTypeTags.PropertyType );
 
 		/// <summary>
 		/// The AssociationType Object Type.
 		/// </summary>
-		public static AllorsEmbeddedObjectType AssociationType = new AllorsEmbeddedObjectType(new Guid("51df648e-4870-403a-8b2e-50f6e63d4749"), typeof(global::Allors.Meta.MetaAssociation), true , AllorsTypeTags.AssociationType );
+		public static AllorsEmbeddedObjectType AssociationType = new AllorsEmbeddedObjectType(new Guid("51df648e-4870-403a-8b2e-50f6e63d4749"), typeof(global::Allors.Meta.AssociationType), true , AllorsTypeTags.AssociationType );
 
 		/// <summary>
 		/// The MetaObject Object Type.
@@ -874,37 +874,37 @@ namespace Allors.Meta.AllorsGenerated
 		/// <summary>
 		/// The Domain Object Type.
 		/// </summary>
-		public static AllorsEmbeddedObjectType Domain = new AllorsEmbeddedObjectType(new Guid("804929af-0208-4384-a74d-17353963d105"), typeof(global::Allors.Meta.MetaDomain), true , AllorsTypeTags.Domain );
+		public static AllorsEmbeddedObjectType Domain = new AllorsEmbeddedObjectType(new Guid("804929af-0208-4384-a74d-17353963d105"), typeof(global::Allors.Meta.Domain), true , AllorsTypeTags.Domain );
 
 		/// <summary>
 		/// The RoleType Object Type.
 		/// </summary>
-		public static AllorsEmbeddedObjectType RoleType = new AllorsEmbeddedObjectType(new Guid("903d3eb5-dc70-4cb4-93b8-5a1d0899c949"), typeof(global::Allors.Meta.MetaRole), true , AllorsTypeTags.RoleType );
+		public static AllorsEmbeddedObjectType RoleType = new AllorsEmbeddedObjectType(new Guid("903d3eb5-dc70-4cb4-93b8-5a1d0899c949"), typeof(global::Allors.Meta.RoleType), true , AllorsTypeTags.RoleType );
 
 		/// <summary>
 		/// The OperandType Object Type.
 		/// </summary>
-		public static AllorsEmbeddedObjectType OperandType = new AllorsEmbeddedObjectType(new Guid("97cd4cf4-1945-4b60-aa3b-f8629e6074da"), typeof(global::Allors.Meta.MetaOperand), false , AllorsTypeTags.OperandType );
+		public static AllorsEmbeddedObjectType OperandType = new AllorsEmbeddedObjectType(new Guid("97cd4cf4-1945-4b60-aa3b-f8629e6074da"), typeof(global::Allors.Meta.OperandType), false , AllorsTypeTags.OperandType );
 
 		/// <summary>
 		/// The RelationType Object Type.
 		/// </summary>
-		public static AllorsEmbeddedObjectType RelationType = new AllorsEmbeddedObjectType(new Guid("c03575fa-2d84-4096-9c4d-93cf05d3c1de"), typeof(global::Allors.Meta.MetaRelation), true , AllorsTypeTags.RelationType );
+		public static AllorsEmbeddedObjectType RelationType = new AllorsEmbeddedObjectType(new Guid("c03575fa-2d84-4096-9c4d-93cf05d3c1de"), typeof(global::Allors.Meta.RelationType), true , AllorsTypeTags.RelationType );
 
 		/// <summary>
 		/// The Inheritance Object Type.
 		/// </summary>
-		public static AllorsEmbeddedObjectType Inheritance = new AllorsEmbeddedObjectType(new Guid("ceb95f73-a297-48cc-85bc-92efa5954efc"), typeof(global::Allors.Meta.MetaInheritance), true , AllorsTypeTags.Inheritance );
+		public static AllorsEmbeddedObjectType Inheritance = new AllorsEmbeddedObjectType(new Guid("ceb95f73-a297-48cc-85bc-92efa5954efc"), typeof(global::Allors.Meta.Inheritance), true , AllorsTypeTags.Inheritance );
 
 		/// <summary>
 		/// The ObjectType Object Type.
 		/// </summary>
-		public static AllorsEmbeddedObjectType ObjectType = new AllorsEmbeddedObjectType(new Guid("e6270568-a164-40ef-bf2b-cfdff59ee1fa"), typeof(global::Allors.Meta.MetaObject), true , AllorsTypeTags.ObjectType );
+		public static AllorsEmbeddedObjectType ObjectType = new AllorsEmbeddedObjectType(new Guid("e6270568-a164-40ef-bf2b-cfdff59ee1fa"), typeof(global::Allors.Meta.ObjectType), true , AllorsTypeTags.ObjectType );
 
 		/// <summary>
 		/// The MethodType Object Type.
 		/// </summary>
-		public static AllorsEmbeddedObjectType MethodType = new AllorsEmbeddedObjectType(new Guid("edf4fdb9-9fc9-4914-bd67-c781f9199f98"), typeof(global::Allors.Meta.MetaMethod), true , AllorsTypeTags.MethodType );
+		public static AllorsEmbeddedObjectType MethodType = new AllorsEmbeddedObjectType(new Guid("edf4fdb9-9fc9-4914-bd67-c781f9199f98"), typeof(global::Allors.Meta.MethodType), true , AllorsTypeTags.MethodType );
 
 		/// <summary>
 		/// The AllorsString Object Type.
@@ -1610,11 +1610,11 @@ namespace Allors.Meta.AllorsGenerated
 		/// <summary>
 		/// An empty array of PropertyTypes.
 		/// </summary>
-		internal static global::Allors.Meta.MetaProperty[] EMPTY_PropertyType_ARRAY = {};
+		internal static global::Allors.Meta.PropertyType[] EMPTY_PropertyType_ARRAY = {};
 		/// <summary>
 		/// An empty array of AssociationTypes.
 		/// </summary>
-		internal static global::Allors.Meta.MetaAssociation[] EMPTY_AssociationType_ARRAY = {};
+		internal static global::Allors.Meta.AssociationType[] EMPTY_AssociationType_ARRAY = {};
 		/// <summary>
 		/// An empty array of MetaObjects.
 		/// </summary>
@@ -1622,31 +1622,31 @@ namespace Allors.Meta.AllorsGenerated
 		/// <summary>
 		/// An empty array of Domains.
 		/// </summary>
-		internal static global::Allors.Meta.MetaDomain[] EMPTY_Domain_ARRAY = {};
+		internal static global::Allors.Meta.Domain[] EMPTY_Domain_ARRAY = {};
 		/// <summary>
 		/// An empty array of RoleTypes.
 		/// </summary>
-		internal static global::Allors.Meta.MetaRole[] EMPTY_RoleType_ARRAY = {};
+		internal static global::Allors.Meta.RoleType[] EMPTY_RoleType_ARRAY = {};
 		/// <summary>
 		/// An empty array of OperandTypes.
 		/// </summary>
-		internal static global::Allors.Meta.MetaOperand[] EMPTY_OperandType_ARRAY = {};
+		internal static global::Allors.Meta.OperandType[] EMPTY_OperandType_ARRAY = {};
 		/// <summary>
 		/// An empty array of RelationTypes.
 		/// </summary>
-		internal static global::Allors.Meta.MetaRelation[] EMPTY_RelationType_ARRAY = {};
+		internal static global::Allors.Meta.RelationType[] EMPTY_RelationType_ARRAY = {};
 		/// <summary>
 		/// An empty array of Inheritances.
 		/// </summary>
-		internal static global::Allors.Meta.MetaInheritance[] EMPTY_Inheritance_ARRAY = {};
+		internal static global::Allors.Meta.Inheritance[] EMPTY_Inheritance_ARRAY = {};
 		/// <summary>
 		/// An empty array of ObjectTypes.
 		/// </summary>
-		internal static global::Allors.Meta.MetaObject[] EMPTY_ObjectType_ARRAY = {};
+		internal static global::Allors.Meta.ObjectType[] EMPTY_ObjectType_ARRAY = {};
 		/// <summary>
 		/// An empty array of MethodTypes.
 		/// </summary>
-		internal static global::Allors.Meta.MetaMethod[] EMPTY_MethodType_ARRAY = {};
+		internal static global::Allors.Meta.MethodType[] EMPTY_MethodType_ARRAY = {};
 
 	}
 

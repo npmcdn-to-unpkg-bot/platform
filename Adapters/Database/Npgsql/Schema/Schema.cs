@@ -227,12 +227,12 @@ FROM information_schema.columns"))
                                                 }
                                                 else
                                                 {
-                                                    var unitTypeTag = (MetaUnitTags)column.RelationType.RoleType.ObjectType.UnitTag;
+                                                    var unitTypeTag = (UnitTags)column.RelationType.RoleType.ObjectType.UnitTag;
                                                     switch (dataType)
                                                     {
                                                         case "varchar":
                                                         case "character varying":
-                                                            if (unitTypeTag != MetaUnitTags.AllorsString)
+                                                            if (unitTypeTag != UnitTags.AllorsString)
                                                             {
                                                                 AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Incompatible);
                                                             }
@@ -249,7 +249,7 @@ FROM information_schema.columns"))
                                                             break;
 
                                                         case "text":
-                                                            if (unitTypeTag != MetaUnitTags.AllorsString)
+                                                            if (unitTypeTag != UnitTags.AllorsString)
                                                             {
                                                                 AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Incompatible);
                                                             }
@@ -267,7 +267,7 @@ FROM information_schema.columns"))
 
                                                         case "int4":
                                                         case "integer":
-                                                            if (unitTypeTag != MetaUnitTags.AllorsInteger)
+                                                            if (unitTypeTag != UnitTags.AllorsInteger)
                                                             {
                                                                 AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Incompatible);
                                                             }
@@ -276,7 +276,7 @@ FROM information_schema.columns"))
 
                                                         case "int8":
                                                         case "bigint":
-                                                            if (unitTypeTag != MetaUnitTags.AllorsLong)
+                                                            if (unitTypeTag != UnitTags.AllorsLong)
                                                             {
                                                                 AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Incompatible);
                                                             }
@@ -284,7 +284,7 @@ FROM information_schema.columns"))
                                                             break;
 
                                                         case "numeric":
-                                                            if (unitTypeTag != MetaUnitTags.AllorsDecimal)
+                                                            if (unitTypeTag != UnitTags.AllorsDecimal)
                                                             {
                                                                 AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Incompatible);
                                                             }
@@ -308,7 +308,7 @@ FROM information_schema.columns"))
                                                             break;
 
                                                         case "double precision":
-                                                            if (unitTypeTag != MetaUnitTags.AllorsDouble)
+                                                            if (unitTypeTag != UnitTags.AllorsDouble)
                                                             {
                                                                 AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Incompatible);
                                                             }
@@ -316,7 +316,7 @@ FROM information_schema.columns"))
                                                             break;
 
                                                         case "boolean":
-                                                            if (unitTypeTag != MetaUnitTags.AllorsBoolean)
+                                                            if (unitTypeTag != UnitTags.AllorsBoolean)
                                                             {
                                                                 AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Incompatible);
                                                             }
@@ -324,7 +324,7 @@ FROM information_schema.columns"))
                                                             break;
 
                                                         case "timestamp":
-                                                            if (unitTypeTag != MetaUnitTags.AllorsDateTime)
+                                                            if (unitTypeTag != UnitTags.AllorsDateTime)
                                                             {
                                                                 AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Incompatible);
                                                             }
@@ -332,7 +332,7 @@ FROM information_schema.columns"))
                                                             break;
 
                                                         case "uuid":
-                                                            if (unitTypeTag != MetaUnitTags.AllorsUnique)
+                                                            if (unitTypeTag != UnitTags.AllorsUnique)
                                                             {
                                                                 AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Incompatible);
                                                             }
@@ -340,7 +340,7 @@ FROM information_schema.columns"))
                                                             break;
 
                                                         case "bytea":
-                                                            if (unitTypeTag != MetaUnitTags.AllorsBinary)
+                                                            if (unitTypeTag != UnitTags.AllorsBinary)
                                                             {
                                                                 AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Incompatible);
                                                             }
@@ -750,10 +750,10 @@ $$ language plpgsql;
 
                         if (relationType.RoleType.ObjectType.IsUnit)
                         {
-                            var unitTypeTag = (MetaUnitTags)relationType.RoleType.ObjectType.UnitTag;
+                            var unitTypeTag = (UnitTags)relationType.RoleType.ObjectType.UnitTag;
                             switch (unitTypeTag)
                             {
-                                case MetaUnitTags.AllorsString:
+                                case UnitTags.AllorsString:
                                     if (relationType.RoleType.Size == -1)
                                     {
                                         // Set MAX String Role
@@ -806,7 +806,7 @@ $$ language plpgsql;
                                     this.procedureByName.Add(procedure.Name, procedure);
                                     break;
 
-                                case MetaUnitTags.AllorsInteger:
+                                case UnitTags.AllorsInteger:
                                     // Set Integer Role
                                     procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.RootName };
                                     procedure.Definition =
@@ -832,7 +832,7 @@ $$ language plpgsql;
                                     this.procedureByName.Add(procedure.Name, procedure);
                                     break;
 
-                                case MetaUnitTags.AllorsLong:
+                                case UnitTags.AllorsLong:
                                     // Set Long Role
                                     procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.RootName };
                                     procedure.Definition =
@@ -858,7 +858,7 @@ $$ language plpgsql;
                                     this.procedureByName.Add(procedure.Name, procedure);
                                     break;
 
-                                case MetaUnitTags.AllorsDecimal:
+                                case UnitTags.AllorsDecimal:
                                     // Set Decimal Role
                                     procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.RootName };
                                     procedure.Definition =
@@ -884,7 +884,7 @@ $$ language plpgsql;
 
                                     break;
 
-                                case MetaUnitTags.AllorsDouble:
+                                case UnitTags.AllorsDouble:
                                     // Set Double Role
                                     procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.RootName };
                                     procedure.Definition =
@@ -910,7 +910,7 @@ $$ language plpgsql;
                                     this.procedureByName.Add(procedure.Name, procedure);
                                     break;
 
-                                case MetaUnitTags.AllorsBoolean:
+                                case UnitTags.AllorsBoolean:
                                     // Set Boolean Role
                                     procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.RootName };
                                     procedure.Definition =
@@ -935,7 +935,7 @@ $$ language plpgsql;
                                     this.procedureByName.Add(procedure.Name, procedure);
                                     break;
 
-                                case MetaUnitTags.AllorsDateTime:
+                                case UnitTags.AllorsDateTime:
                                     // Set DateTime Role
                                     procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.RootName };
                                     procedure.Definition =
@@ -960,7 +960,7 @@ $$ language plpgsql;
                                     this.procedureByName.Add(procedure.Name, procedure);
                                     break;
 
-                                case MetaUnitTags.AllorsUnique:
+                                case UnitTags.AllorsUnique:
                                     // Set Unique Role
                                     procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.RootName };
                                     procedure.Definition =
@@ -985,7 +985,7 @@ $$ language plpgsql;
                                     this.procedureByName.Add(procedure.Name, procedure);
                                     break;
 
-                                case MetaUnitTags.AllorsBinary:
+                                case UnitTags.AllorsBinary:
                                     // Set Binary Role
                                     procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.RootName };
                                     procedure.Definition =

@@ -29,11 +29,11 @@ namespace Allors.Adapters.Database.Sql
     public class ExtentAssociations : Extent
     {
         private readonly Strategy strategy;
-        private readonly MetaAssociation associationType;
+        private readonly AssociationType associationType;
 
         private ExtentFiltered upgrade;
 
-        public ExtentAssociations(Strategy strategy, MetaAssociation associationType)
+        public ExtentAssociations(Strategy strategy, AssociationType associationType)
         {
             this.strategy = strategy;
             this.associationType = associationType;
@@ -91,7 +91,7 @@ namespace Allors.Adapters.Database.Sql
             }
         }
 
-        public override MetaObject ObjectType
+        public override ObjectType ObjectType
         {
             get
             {
@@ -162,7 +162,7 @@ namespace Allors.Adapters.Database.Sql
             return objects;
         }
 
-        public override Allors.Extent AddSort(MetaRole sort)
+        public override Allors.Extent AddSort(RoleType sort)
         {
             this.LazyUpgrade();
 
@@ -171,7 +171,7 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public override Allors.Extent AddSort(MetaRole sort, SortDirection direction)
+        public override Allors.Extent AddSort(RoleType sort, SortDirection direction)
         {
             this.LazyUpgrade();
 

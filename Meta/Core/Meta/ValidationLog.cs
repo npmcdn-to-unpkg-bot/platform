@@ -41,12 +41,12 @@ namespace Allors.Meta
         private readonly HashSet<Guid> ids;
 
         /// <summary>
-        /// The set of all <see cref="MetaObject"/> names.
+        /// The set of all <see cref="ObjectType"/> names.
         /// </summary>
         private readonly HashSet<string> objectTypeNames;
 
         /// <summary>
-        /// The set of all <see cref="MetaRelation"/> names.
+        /// The set of all <see cref="RelationType"/> names.
         /// </summary>
         private readonly HashSet<string> relationTypeNames;
 

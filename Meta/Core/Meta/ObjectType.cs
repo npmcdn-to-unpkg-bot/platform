@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="MetaObject.cs" company="Allors bvba">
+// <copyright file="ObjectType.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -28,15 +28,15 @@ namespace Allors.Meta
     using AllorsGenerated;
 
     /// <summary>
-    /// An <see cref="MetaObject"/> defines the state and behavior for
+    /// An <see cref="ObjectType"/> defines the state and behavior for
     /// a set of <see cref="IObject"/>s.
     /// </summary>
-    public partial class MetaObject : IComparable
+    public partial class ObjectType : IComparable
     {
         /// <summary>
         /// An empty array of object types.
         /// </summary>
-        private static readonly MetaObject[] EmptyArray = new MetaObject[0];
+        private static readonly ObjectType[] EmptyArray = new ObjectType[0];
 
         /// <summary>
         /// A cache for the ids of the <see cref="AssociationTypes"/>.
@@ -51,7 +51,7 @@ namespace Allors.Meta
         /// <summary>
         /// A cache for the ids of the <see cref="RoleTypes"/>.
         /// </summary>
-        private HashSet<MetaObject> concreteClassesCache;
+        private HashSet<ObjectType> concreteClassesCache;
 
         /// <summary>
         /// Gets the association count.
@@ -77,7 +77,7 @@ namespace Allors.Meta
         /// Gets the associations.
         /// </summary>
         /// <value>The associations.</value>
-        public MetaAssociation[] AssociationTypes
+        public AssociationType[] AssociationTypes
         {
             get
             {
@@ -89,7 +89,7 @@ namespace Allors.Meta
         /// Gets the associations where this instance is the root type.
         /// </summary>
         /// <value>The associations where this instance is the root type.</value>
-        public MetaAssociation[] AssociationTypesWhereRootType
+        public AssociationType[] AssociationTypesWhereRootType
         {
             get
             {
@@ -101,72 +101,72 @@ namespace Allors.Meta
         /// Gets the binary roles.
         /// </summary>
         /// <value>The binary roles.</value>
-        public MetaRole[] BinaryRoles
+        public RoleType[] BinaryRoles
         {
-            get { return this.GetUnitRoleTypes(MetaUnitTags.AllorsBinary); }
+            get { return this.GetUnitRoleTypes(UnitTags.AllorsBinary); }
         }
 
         /// <summary>
         /// Gets the boolean roles.
         /// </summary>
         /// <value>The boolean roles.</value>
-        public MetaRole[] BooleanRoles
+        public RoleType[] BooleanRoles
         {
-            get { return this.GetUnitRoleTypes(MetaUnitTags.AllorsBoolean); }
+            get { return this.GetUnitRoleTypes(UnitTags.AllorsBoolean); }
         }
 
         /// <summary>
         /// Gets the double roles.
         /// </summary>
         /// <value>The double roles.</value>
-        public MetaRole[] DoubleRoleTypes
+        public RoleType[] DoubleRoleTypes
         {
-            get { return this.GetUnitRoleTypes(MetaUnitTags.AllorsDouble); }
+            get { return this.GetUnitRoleTypes(UnitTags.AllorsDouble); }
         }
 
         /// <summary>
         /// Gets the date time role types.
         /// </summary>
         /// <value>The date time role types.</value>
-        public MetaRole[] DateTimeRoleTypes
+        public RoleType[] DateTimeRoleTypes
         {
-            get { return this.GetUnitRoleTypes(MetaUnitTags.AllorsDateTime); }
+            get { return this.GetUnitRoleTypes(UnitTags.AllorsDateTime); }
         }
 
         /// <summary>
         /// Gets the decimal role types.
         /// </summary>
         /// <value>The decimal role types.</value>
-        public MetaRole[] DecimalRoleTypes
+        public RoleType[] DecimalRoleTypes
         {
-            get { return this.GetUnitRoleTypes(MetaUnitTags.AllorsDecimal); }
+            get { return this.GetUnitRoleTypes(UnitTags.AllorsDecimal); }
         }
 
         /// <summary>
         /// Gets the integer32 roles.
         /// </summary>
         /// <value>The integer32 roles.</value>
-        public MetaRole[] Integer32Roles
+        public RoleType[] Integer32Roles
         {
-            get { return this.GetUnitRoleTypes(MetaUnitTags.AllorsInteger); }
+            get { return this.GetUnitRoleTypes(UnitTags.AllorsInteger); }
         }
 
         /// <summary>
         /// Gets the integer64 roles.
         /// </summary>
         /// <value>The integer64 roles.</value>
-        public MetaRole[] Integer64Roles
+        public RoleType[] Integer64Roles
         {
-            get { return this.GetUnitRoleTypes(MetaUnitTags.AllorsLong); }
+            get { return this.GetUnitRoleTypes(UnitTags.AllorsLong); }
         }
 
         /// <summary>
         /// Gets the string roles.
         /// </summary>
         /// <value>The string roles.</value>
-        public MetaRole[] StringRoleTypes
+        public RoleType[] StringRoleTypes
         {
-            get { return this.GetUnitRoleTypes(MetaUnitTags.AllorsString); }
+            get { return this.GetUnitRoleTypes(UnitTags.AllorsString); }
         }
 
         /// <summary>
@@ -193,7 +193,7 @@ namespace Allors.Meta
         /// Gets the composite roles.
         /// </summary>
         /// <value>The composite roles.</value>
-        public MetaRole[] CompositeRoleTypes
+        public RoleType[] CompositeRoleTypes
         {
             get
             {
@@ -206,13 +206,13 @@ namespace Allors.Meta
         /// self if this is a concrete class.
         /// </summary>
         /// <value>The concrete classes.</value>
-        public MetaObject[] ConcreteClasses
+        public ObjectType[] ConcreteClasses
         {
             get
             {
                 if (this.IsConcreteComposite)
                 {
-                    MetaObject[] selfArray = { this };
+                    ObjectType[] selfArray = { this };
                     return selfArray;
                 }
 
@@ -224,7 +224,7 @@ namespace Allors.Meta
         /// Gets the direct subtypes.
         /// </summary>
         /// <value>The direct subtypes.</value>
-        public MetaObject[] DirectSubtypes
+        public ObjectType[] DirectSubtypes
         {
             get { return this.ObjectTypesWhereDirectSupertype; }
         }
@@ -233,7 +233,7 @@ namespace Allors.Meta
         /// Gets the direct super interfaces.
         /// </summary>
         /// <value>The direct super interfaces.</value>
-        public MetaObject[] DirectSuperinterfaces
+        public ObjectType[] DirectSuperinterfaces
         {
             get
             {
@@ -245,7 +245,7 @@ namespace Allors.Meta
         /// Gets the direct super types.
         /// </summary>
         /// <value>The direct super types.</value>
-        public MetaObject[] DirectSupertypes
+        public ObjectType[] DirectSupertypes
         {
             get
             {
@@ -257,7 +257,7 @@ namespace Allors.Meta
         /// Gets the exclusive associations.
         /// </summary>
         /// <value>The exclusive associations.</value>
-        public MetaAssociation[] ExclusiveAssociationTypes
+        public AssociationType[] ExclusiveAssociationTypes
         {
             get
             {
@@ -269,7 +269,7 @@ namespace Allors.Meta
         /// Gets the exclusive concrete subclass.
         /// </summary>
         /// <value>The exclusive concrete subclass.</value>
-        public MetaObject ExclusiveConcreteSubclass
+        public ObjectType ExclusiveConcreteSubclass
         {
             get
             {
@@ -281,7 +281,7 @@ namespace Allors.Meta
         /// Gets the exclusive roles.
         /// </summary>
         /// <value>The exclusive roles.</value>
-        public MetaRole[] ExclusiveRoleTypes
+        public RoleType[] ExclusiveRoleTypes
         {
             get
             {
@@ -293,7 +293,7 @@ namespace Allors.Meta
         /// Gets the exclusive root class.
         /// </summary>
         /// <value>The exclusive root class.</value>
-        public MetaObject ExclusiveRootClass
+        public ObjectType ExclusiveRootClass
         {
             get
             {
@@ -310,7 +310,7 @@ namespace Allors.Meta
         /// Gets the exclusive super interfaces.
         /// </summary>
         /// <value>The exclusive super interfaces.</value>
-        public MetaObject[] ExclusiveSuperinterfaces
+        public ObjectType[] ExclusiveSuperinterfaces
         {
             get
             {
@@ -424,7 +424,7 @@ namespace Allors.Meta
         /// <value><c>true</c> if this instance is a binary; otherwise, <c>false</c>.</value>
         public bool IsBinary
         {
-            get { return this.Id.Equals(MetaUnitIds.BinaryId); }
+            get { return this.Id.Equals(UnitIds.BinaryId); }
         }
 
         /// <summary>
@@ -435,7 +435,7 @@ namespace Allors.Meta
         /// </value>
         public bool IsBoolean
         {
-            get { return this.Id.Equals(MetaUnitIds.BooleanId); }
+            get { return this.Id.Equals(UnitIds.BooleanId); }
         }
 
         /// <summary>
@@ -491,7 +491,7 @@ namespace Allors.Meta
         /// </value>
         public bool IsDateTime
         {
-            get { return this.Id.Equals(MetaUnitIds.DatetimeId); }
+            get { return this.Id.Equals(UnitIds.DatetimeId); }
         }
 
         /// <summary>
@@ -502,7 +502,7 @@ namespace Allors.Meta
         /// </value>
         public bool IsDecimal
         {
-            get { return this.Id.Equals(MetaUnitIds.DecimalId); }
+            get { return this.Id.Equals(UnitIds.DecimalId); }
         }
 
         /// <summary>
@@ -511,7 +511,7 @@ namespace Allors.Meta
         /// <value><c>true</c> if this instance is a double; otherwise, <c>false</c>.</value>
         public bool IsDouble
         {
-            get { return this.Id.Equals(MetaUnitIds.DoubleId); }
+            get { return this.Id.Equals(UnitIds.DoubleId); }
         }
 
         /// <summary>
@@ -522,7 +522,7 @@ namespace Allors.Meta
         /// </value>
         public bool IsInteger
         {
-            get { return this.Id.Equals(MetaUnitIds.IntegerId); }
+            get { return this.Id.Equals(UnitIds.IntegerId); }
         }
 
         /// <summary>
@@ -531,7 +531,7 @@ namespace Allors.Meta
         /// <value><c>true</c> if this instance is a long; otherwise, <c>false</c>.</value>
         public bool IsLong
         {
-            get { return this.Id.Equals(MetaUnitIds.LongId); }
+            get { return this.Id.Equals(UnitIds.LongId); }
         }
 
         /// <summary>
@@ -611,7 +611,7 @@ namespace Allors.Meta
         /// <value><c>true</c> if this instance is a string; otherwise, <c>false</c>.</value>
         public bool IsString
         {
-            get { return this.Id.Equals(MetaUnitIds.StringId); }
+            get { return this.Id.Equals(UnitIds.StringId); }
         }
 
         /// <summary>
@@ -620,7 +620,7 @@ namespace Allors.Meta
         /// <value><c>true</c> if this instance is a unique; otherwise, <c>false</c>.</value>
         public bool IsUnique
         {
-            get { return this.Id.Equals(MetaUnitIds.Unique); }
+            get { return this.Id.Equals(UnitIds.Unique); }
         }
 
         /// <summary>
@@ -644,7 +644,7 @@ namespace Allors.Meta
         /// Gets the object types where this instance is a direct super interface.
         /// </summary>
         /// <value>The object types where this instance is a direct super interface.</value>
-        public MetaObject[] ObjectTypesWhereDirectSuperinterface
+        public ObjectType[] ObjectTypesWhereDirectSuperinterface
         {
             get
             {
@@ -656,7 +656,7 @@ namespace Allors.Meta
         /// Gets the object types where this instance is an exclusive super interface.
         /// </summary>
         /// <value>The object types where this instance is an exclusive super interface.</value>
-        public MetaObject[] ObjectTypesWhereExclusiveSuperinterface
+        public ObjectType[] ObjectTypesWhereExclusiveSuperinterface
         {
             get
             {
@@ -668,7 +668,7 @@ namespace Allors.Meta
         /// Gets the object types where this instance is the root class.
         /// </summary>
         /// <value>The object types where this instance is the root class.</value>
-        public MetaObject[] ObjectTypesWhereRootClass
+        public ObjectType[] ObjectTypesWhereRootClass
         {
             get
             {
@@ -680,7 +680,7 @@ namespace Allors.Meta
         /// Gets the object types where this instance is the super class.
         /// </summary>
         /// <value>The object types where this instance is the super class.</value>
-        public MetaObject[] ObjectTypesWhereSuperclass
+        public ObjectType[] ObjectTypesWhereSuperclass
         {
             get
             {
@@ -692,7 +692,7 @@ namespace Allors.Meta
         /// Gets the object types where this instance is the super interface.
         /// </summary>
         /// <value>The object types where this instance is the super interface.</value>
-        public MetaObject[] ObjectTypesWhereSuperinterface
+        public ObjectType[] ObjectTypesWhereSuperinterface
         {
             get
             {
@@ -704,7 +704,7 @@ namespace Allors.Meta
         /// Gets the method types.
         /// </summary>
         /// <value>The method types.</value>
-        public MetaMethod[] MethodTypes
+        public MethodType[] MethodTypes
         {
             get
             {
@@ -736,7 +736,7 @@ namespace Allors.Meta
         /// Gets the roles.
         /// </summary>
         /// <value>The roles.</value>
-        public MetaRole[] RoleTypes
+        public RoleType[] RoleTypes
         {
             get
             {
@@ -748,7 +748,7 @@ namespace Allors.Meta
         /// Gets the roles where this instance is the root type.
         /// </summary>
         /// <value>The roles where this instance is the root type.</value>
-        public MetaRole[] RolesTypesWhereRootType
+        public RoleType[] RolesTypesWhereRootType
         {
             get
             {
@@ -760,7 +760,7 @@ namespace Allors.Meta
         /// Gets the root classes.
         /// </summary>
         /// <value>The root classes.</value>
-        public MetaObject[] RootClasses
+        public ObjectType[] RootClasses
         {
             get
             {
@@ -772,7 +772,7 @@ namespace Allors.Meta
         /// Gets the subclasses.
         /// </summary>
         /// <value>The subclasses.</value>
-        public MetaObject[] Subclasses
+        public ObjectType[] Subclasses
         {
             get
             {
@@ -784,7 +784,7 @@ namespace Allors.Meta
         /// Gets the sub interfaces.
         /// </summary>
         /// <value>The sub interfaces.</value>
-        public MetaObject[] Subinterfaces
+        public ObjectType[] Subinterfaces
         {
             get
             {
@@ -796,7 +796,7 @@ namespace Allors.Meta
         /// Gets the subtypes.
         /// </summary>
         /// <value>The subtypes.</value>
-        public MetaObject[] Subtypes
+        public ObjectType[] Subtypes
         {
             get
             {
@@ -808,7 +808,7 @@ namespace Allors.Meta
         /// Gets the super classes.
         /// </summary>
         /// <value>The super classes.</value>
-        public MetaObject[] Superclasses
+        public ObjectType[] Superclasses
         {
             get
             {
@@ -820,7 +820,7 @@ namespace Allors.Meta
         /// Gets the super interfaces.
         /// </summary>
         /// <value>The super interfaces.</value>
-        public MetaObject[] Superinterfaces
+        public ObjectType[] Superinterfaces
         {
             get
             {
@@ -832,7 +832,7 @@ namespace Allors.Meta
         /// Gets the super types.
         /// </summary>
         /// <value>The super types.</value>
-        public MetaObject[] Supertypes
+        public ObjectType[] Supertypes
         {
             get
             {
@@ -844,9 +844,9 @@ namespace Allors.Meta
         /// Gets the unique roles.
         /// </summary>
         /// <value>The unique roles.</value>
-        public MetaRole[] UniqueRoleTypes
+        public RoleType[] UniqueRoleTypes
         {
-            get { return this.GetUnitRoleTypes(MetaUnitTags.AllorsUnique); }
+            get { return this.GetUnitRoleTypes(UnitTags.AllorsUnique); }
         }
 
         /// <summary>
@@ -873,7 +873,7 @@ namespace Allors.Meta
         /// Gets the unit roles.
         /// </summary>
         /// <value>The unit roles.</value>
-        public MetaRole[] UnitRoleTypes
+        public RoleType[] UnitRoleTypes
         {
             get
             {
@@ -907,7 +907,7 @@ namespace Allors.Meta
         /// Gets the object types where this instance is a direct supertype.
         /// </summary>
         /// <value>The object types where this instance is a direct supertype.</value>
-        private MetaObject[] ObjectTypesWhereDirectSupertype
+        private ObjectType[] ObjectTypesWhereDirectSupertype
         {
             get
             {
@@ -920,7 +920,7 @@ namespace Allors.Meta
         /// </summary>
         /// <param name="supertype">The supertype.</param>
         /// <returns>The inheritance.</returns> 
-        public MetaInheritance AddDirectSupertype(MetaObject supertype)
+        public Inheritance AddDirectSupertype(ObjectType supertype)
         {
             if (supertype == null)
             {
@@ -940,7 +940,7 @@ namespace Allors.Meta
                     throw new ArgumentException("The inheritance " + this + "::" + supertype + " can not have a concrete superclass");
                 }
 
-                inheritance = this.MetaDomain.AddDeclaredInheritance(Guid.NewGuid());
+                inheritance = this.Domain.AddDeclaredInheritance(Guid.NewGuid());
                 inheritance.Subtype = this;
                 inheritance.Supertype = supertype;
             }
@@ -949,14 +949,14 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Adds a <see cref="MetaMethod"/> to this object.
+        /// Adds a <see cref="MethodType"/> to this object.
         /// </summary>
         /// <param name="methodId">The method id</param>
         /// <param name="methodName">The method name</param>
         /// <returns>The method type</returns>
-        public MetaMethod AddMethodType(Guid methodId, string methodName)
+        public MethodType AddMethodType(Guid methodId, string methodName)
         {
-            var methodType = this.MetaDomain.AddDeclaredMethodType(methodId);
+            var methodType = this.Domain.AddDeclaredMethodType(methodId);
             methodType.ObjectType = this;
             methodType.Name = methodName;
             return methodType;
@@ -973,7 +973,7 @@ namespace Allors.Meta
         /// <paramref name="obj"/> is not the same type as this instance. </exception>
         public int CompareTo(object obj)
         {
-            var that = obj as MetaObject;
+            var that = obj as ObjectType;
             if (that != null)
             {
                 return string.CompareOrdinal(this.Name, that.Name);
@@ -989,7 +989,7 @@ namespace Allors.Meta
         /// <returns>
         ///  <c>true</c> if this instance contains the specified association; otherwise, <c>false</c>.
         /// </returns>
-        public bool ContainsAssociationType(MetaAssociation association)
+        public bool ContainsAssociationType(AssociationType association)
         {
             return this.associationIdsCache.ContainsKey(association.RelationTypeWhereAssociationType.Id);
         }
@@ -1001,7 +1001,7 @@ namespace Allors.Meta
         /// <returns>
         ///  <c>true</c> if this instance contains the specified role; otherwise, <c>false</c>.
         /// </returns>
-        public bool ContainsRoleType(MetaRole role)
+        public bool ContainsRoleType(RoleType role)
         {
             return this.roleIdsCache.ContainsKey(role.RelationTypeWhereRoleType.Id);
         }
@@ -1015,7 +1015,7 @@ namespace Allors.Meta
         /// <returns>
         /// True if this contains the concrete class.
         /// </returns>
-        public bool ContainsConcreteClass(MetaObject objectType)
+        public bool ContainsConcreteClass(ObjectType objectType)
         {
             return this.concreteClassesCache.Contains(objectType);
         }
@@ -1025,7 +1025,7 @@ namespace Allors.Meta
         /// </summary>
         public void DeleteRecursive()
         {
-            var inheritances = new List<MetaInheritance>();
+            var inheritances = new List<Inheritance>();
             inheritances.AddRange(this.InheritancesWhereSubtype);
             inheritances.AddRange(this.InheritancesWhereSupertype);
 
@@ -1045,7 +1045,7 @@ namespace Allors.Meta
         /// </summary>
         /// <param name="supertype">The supertype.</param>
         /// <returns>The inheritance.</returns>
-        public MetaInheritance FindInheritanceWhereDirectSubtype(MetaObject supertype)
+        public Inheritance FindInheritanceWhereDirectSubtype(ObjectType supertype)
         {
             foreach (var inheritance in this.InheritancesWhereSubtype)
             {
@@ -1065,7 +1065,7 @@ namespace Allors.Meta
         /// <returns>
         ///  <c>true</c> if the specified super type is valid; otherwise, <c>false</c>.
         /// </returns>
-        public bool IsValidSupertype(MetaObject supertype)
+        public bool IsValidSupertype(ObjectType supertype)
         {
             if (!this.IsCyclicInheritance(supertype))
             {
@@ -1079,7 +1079,7 @@ namespace Allors.Meta
         /// Sets the direct super interfaces.
         /// </summary>
         /// <param name="superInterfaces">The super interfaces.</param>
-        public void SetDirectSuperinterfaces(MetaObject[] superInterfaces)
+        public void SetDirectSuperinterfaces(ObjectType[] superInterfaces)
         {
             foreach (var superType in superInterfaces)
             {
@@ -1113,9 +1113,9 @@ namespace Allors.Meta
         /// </summary>
         /// <param name="session">The session.</param>
         /// <returns>The new instance.</returns>
-        internal static MetaObject Create(AllorsEmbeddedSession session)
+        internal static ObjectType Create(AllorsEmbeddedSession session)
         {
-            var type = (MetaObject)session.Create(AllorsEmbeddedDomain.ObjectType);
+            var type = (ObjectType)session.Create(AllorsEmbeddedDomain.ObjectType);
 
             type.IsInterface = false;
             type.IsUnit = false;
@@ -1130,7 +1130,7 @@ namespace Allors.Meta
         /// <returns>
         /// <c>true</c> if adding the specified super type will result in a cycle; otherwise, <c>false</c>.
         /// </returns>
-        internal bool IsCyclicInheritance(MetaObject superType)
+        internal bool IsCyclicInheritance(ObjectType superType)
         {
             if (this.Equals(superType))
             {
@@ -1152,7 +1152,7 @@ namespace Allors.Meta
         /// Derive association types.
         /// </summary>
         /// <param name="associations">The associations.</param>
-        internal void DeriveAssociationTypes(HashSet<MetaAssociation> associations)
+        internal void DeriveAssociationTypes(HashSet<AssociationType> associations)
         {
             associations.Clear();
             foreach (var role in this.RoleTypesWhereObjectType)
@@ -1168,7 +1168,7 @@ namespace Allors.Meta
                 }
             }
 
-            var associationArray = new MetaAssociation[associations.Count];
+            var associationArray = new AssociationType[associations.Count];
             associations.CopyTo(associationArray);
 
             this.DerivedAssociationTypes = associationArray;
@@ -1178,7 +1178,7 @@ namespace Allors.Meta
         /// Derive composite role types.
         /// </summary>
         /// <param name="roles">The roles.</param>
-        internal void DeriveCompositeRoleTypes(HashSet<MetaRole> roles)
+        internal void DeriveCompositeRoleTypes(HashSet<RoleType> roles)
         {
             roles.Clear();
             foreach (var role in this.DerivedRoleTypes)
@@ -1190,7 +1190,7 @@ namespace Allors.Meta
                 }
             }
 
-            var roleArray = new MetaRole[roles.Count];
+            var roleArray = new RoleType[roles.Count];
             roles.CopyTo(roleArray);
 
             this.DerivedCompositeRoleTypes = roleArray;
@@ -1225,14 +1225,14 @@ namespace Allors.Meta
         /// </summary>
         internal void DeriveConcreteClassesCache()
         {
-            this.concreteClassesCache = new HashSet<MetaObject>(this.ConcreteClasses);
+            this.concreteClassesCache = new HashSet<ObjectType>(this.ConcreteClasses);
         }
 
         /// <summary>
         /// Derive direct super interface.
         /// </summary>
         /// <param name="directSuperinterfaces">The direct super interfaces.</param>
-        internal void DeriveDirectSuperinterface(HashSet<MetaObject> directSuperinterfaces)
+        internal void DeriveDirectSuperinterface(HashSet<ObjectType> directSuperinterfaces)
         {
             directSuperinterfaces.Clear();
             foreach (var directSupertype in this.DerivedDirectSupertypes)
@@ -1243,7 +1243,7 @@ namespace Allors.Meta
                 }
             }
 
-            var directSuperinterfaceArray = new MetaObject[directSuperinterfaces.Count];
+            var directSuperinterfaceArray = new ObjectType[directSuperinterfaces.Count];
             directSuperinterfaces.CopyTo(directSuperinterfaceArray);
 
             this.DerivedDirectSuperinterfaces = directSuperinterfaceArray;
@@ -1253,7 +1253,7 @@ namespace Allors.Meta
         /// Derive direct super type derivations.
         /// </summary>
         /// <param name="directSupertypes">The direct super types.</param>
-        internal void DeriveDirectSupertypes(HashSet<MetaObject> directSupertypes)
+        internal void DeriveDirectSupertypes(HashSet<ObjectType> directSupertypes)
         {
             directSupertypes.Clear();
             foreach (var inheritance in this.InheritancesWhereSubtype)
@@ -1261,7 +1261,7 @@ namespace Allors.Meta
                 directSupertypes.Add(inheritance.Supertype);
             }
 
-            var directSupertypeArray = new MetaObject[directSupertypes.Count];
+            var directSupertypeArray = new ObjectType[directSupertypes.Count];
             directSupertypes.CopyTo(directSupertypeArray);
 
             this.DerivedDirectSupertypes = directSupertypeArray;
@@ -1271,7 +1271,7 @@ namespace Allors.Meta
         /// Derive exclusive association types.
         /// </summary>
         /// <param name="exclusiveAssociationTypes">The exclusive association types.</param>
-        internal void DeriveExclusiveAssociationTypes(HashSet<MetaAssociation> exclusiveAssociationTypes)
+        internal void DeriveExclusiveAssociationTypes(HashSet<AssociationType> exclusiveAssociationTypes)
         {
             exclusiveAssociationTypes.Clear();
             foreach (var role in this.RoleTypesWhereObjectType)
@@ -1287,7 +1287,7 @@ namespace Allors.Meta
                 }
             }
 
-            var exclusiveAssociationTypeArray = new MetaAssociation[exclusiveAssociationTypes.Count];
+            var exclusiveAssociationTypeArray = new AssociationType[exclusiveAssociationTypes.Count];
             exclusiveAssociationTypes.CopyTo(exclusiveAssociationTypeArray);
 
             this.DerivedExclusiveAssociationTypes = exclusiveAssociationTypeArray;
@@ -1297,7 +1297,7 @@ namespace Allors.Meta
         /// Derive exclusive concrete leaf classes.
         /// </summary>
         /// <param name="concreteLeafClasses">The concrete leaf classes.</param>
-        internal void DeriveExclusiveConcreteLeafClass(HashSet<MetaObject> concreteLeafClasses)
+        internal void DeriveExclusiveConcreteLeafClass(HashSet<ObjectType> concreteLeafClasses)
         {
             concreteLeafClasses.Clear();
 
@@ -1323,7 +1323,7 @@ namespace Allors.Meta
 
             if (concreteLeafClasses.Count == 1)
             {
-                var concreteLeafClassArray = new MetaObject[concreteLeafClasses.Count];
+                var concreteLeafClassArray = new ObjectType[concreteLeafClasses.Count];
                 concreteLeafClasses.CopyTo(concreteLeafClassArray);
 
                 this.DerivedExclusiveConcreteLeafClass = concreteLeafClassArray[0];
@@ -1334,7 +1334,7 @@ namespace Allors.Meta
         /// Derive exclusive roles.
         /// </summary>
         /// <param name="exclusiveRoles">The exclusive roles.</param>
-        internal void DeriveExclusiveRoleTypes(HashSet<MetaRole> exclusiveRoles)
+        internal void DeriveExclusiveRoleTypes(HashSet<RoleType> exclusiveRoles)
         {
             exclusiveRoles.Clear();
             foreach (var association in this.AssociationTypesWhereObjectType)
@@ -1350,7 +1350,7 @@ namespace Allors.Meta
                 }
             }
 
-            var exclusiveRoleArray = new MetaRole[exclusiveRoles.Count];
+            var exclusiveRoleArray = new RoleType[exclusiveRoles.Count];
             exclusiveRoles.CopyTo(exclusiveRoleArray);
 
             this.DerivedExclusiveRoleTypes = exclusiveRoleArray;
@@ -1360,7 +1360,7 @@ namespace Allors.Meta
         /// Derive exclusive super interfaces.
         /// </summary>
         /// <param name="superInterfaces">The super interfaces.</param>
-        internal void DeriveExclusiveSuperinterfaces(HashSet<MetaObject> superInterfaces)
+        internal void DeriveExclusiveSuperinterfaces(HashSet<ObjectType> superInterfaces)
         {
             superInterfaces.Clear();
             foreach (var superType in this.DerivedSupertypes)
@@ -1371,7 +1371,7 @@ namespace Allors.Meta
                 }
             }
 
-            var superInterfaceArray = new MetaObject[superInterfaces.Count];
+            var superInterfaceArray = new ObjectType[superInterfaces.Count];
             superInterfaces.CopyTo(superInterfaceArray);
 
             this.DerivedExclusiveSuperinterfaces = superInterfaceArray;
@@ -1383,7 +1383,7 @@ namespace Allors.Meta
         /// <param name="methodTypes">
         /// The method types.
         /// </param>
-        internal void DeriveMethodTypes(HashSet<MetaMethod> methodTypes)
+        internal void DeriveMethodTypes(HashSet<MethodType> methodTypes)
         {
             methodTypes.Clear();
             foreach (var methodType in this.MethodTypesWhereObjectType)
@@ -1399,7 +1399,7 @@ namespace Allors.Meta
                 }
             }
 
-            var methodTypeArray = new MetaMethod[methodTypes.Count];
+            var methodTypeArray = new MethodType[methodTypes.Count];
             methodTypes.CopyTo(methodTypeArray);
 
             this.DerivedMethodTypes = methodTypeArray;
@@ -1409,7 +1409,7 @@ namespace Allors.Meta
         /// Derive role types.
         /// </summary>
         /// <param name="roleTypes">The role types.</param>
-        internal void DeriveRoleTypes(HashSet<MetaRole> roleTypes)
+        internal void DeriveRoleTypes(HashSet<RoleType> roleTypes)
         {
             roleTypes.Clear();
             foreach (var association in this.AssociationTypesWhereObjectType)
@@ -1425,7 +1425,7 @@ namespace Allors.Meta
                 }
             }
 
-            var roleTypeArray = new MetaRole[roleTypes.Count];
+            var roleTypeArray = new RoleType[roleTypes.Count];
             roleTypes.CopyTo(roleTypeArray);
 
             this.DerivedRoleTypes = roleTypeArray;
@@ -1450,7 +1450,7 @@ namespace Allors.Meta
         /// Derive subclasses.
         /// </summary>
         /// <param name="subClasses">The sub classes.</param>
-        internal void DeriveSubclasses(HashSet<MetaObject> subClasses)
+        internal void DeriveSubclasses(HashSet<ObjectType> subClasses)
         {
             subClasses.Clear();
             foreach (var subType in this.ObjectTypesWhereDerivedSupertype)
@@ -1461,7 +1461,7 @@ namespace Allors.Meta
                 }
             }
 
-            var subClassArray = new MetaObject[subClasses.Count];
+            var subClassArray = new ObjectType[subClasses.Count];
             subClasses.CopyTo(subClassArray);
 
             this.DerivedSubclasses = subClassArray;
@@ -1471,7 +1471,7 @@ namespace Allors.Meta
         /// Derive sub interfaces.
         /// </summary>
         /// <param name="subInterfaces">The sub interfaces.</param>
-        internal void DeriveSubinterfaces(HashSet<MetaObject> subInterfaces)
+        internal void DeriveSubinterfaces(HashSet<ObjectType> subInterfaces)
         {
             subInterfaces.Clear();
             foreach (var subType in this.ObjectTypesWhereDerivedSupertype)
@@ -1482,7 +1482,7 @@ namespace Allors.Meta
                 }
             }
 
-            var subInterfaceArray = new MetaObject[subInterfaces.Count];
+            var subInterfaceArray = new ObjectType[subInterfaces.Count];
             subInterfaces.CopyTo(subInterfaceArray);
 
             this.DerivedSubinterfaces = subInterfaceArray;
@@ -1492,7 +1492,7 @@ namespace Allors.Meta
         /// Derive super classes.
         /// </summary>
         /// <param name="superClasses">The super classes.</param>
-        internal void DeriveSuperclasses(HashSet<MetaObject> superClasses)
+        internal void DeriveSuperclasses(HashSet<ObjectType> superClasses)
         {
             superClasses.Clear();
             foreach (var superTypes in this.DerivedSupertypes)
@@ -1503,7 +1503,7 @@ namespace Allors.Meta
                 }
             }
 
-            var superClassArray = new MetaObject[superClasses.Count];
+            var superClassArray = new ObjectType[superClasses.Count];
             superClasses.CopyTo(superClassArray);
 
             this.DerivedSuperclasses = superClassArray;
@@ -1513,7 +1513,7 @@ namespace Allors.Meta
         /// Derive super interface.
         /// </summary>
         /// <param name="superInterfaces">The super interfaces.</param>
-        internal void DeriveSuperinterfaces(HashSet<MetaObject> superInterfaces)
+        internal void DeriveSuperinterfaces(HashSet<ObjectType> superInterfaces)
         {
             superInterfaces.Clear();
             foreach (var superType in this.DerivedSupertypes)
@@ -1524,7 +1524,7 @@ namespace Allors.Meta
                 }
             }
 
-            var superInterfaceArray = new MetaObject[superInterfaces.Count];
+            var superInterfaceArray = new ObjectType[superInterfaces.Count];
             superInterfaces.CopyTo(superInterfaceArray);
 
             this.DerivedSuperinterfaces = superInterfaceArray;
@@ -1534,12 +1534,12 @@ namespace Allors.Meta
         /// Derive super types.
         /// </summary>
         /// <param name="superTypes">The super types.</param>
-        internal void DeriveSupertypes(HashSet<MetaObject> superTypes)
+        internal void DeriveSupertypes(HashSet<ObjectType> superTypes)
         {
             superTypes.Clear();
             this.DeriveSupertypesRecursively(this, superTypes);
 
-            var superTypeArray = new MetaObject[superTypes.Count];
+            var superTypeArray = new ObjectType[superTypes.Count];
             superTypes.CopyTo(superTypeArray);
 
             this.DerivedSupertypes = superTypeArray;
@@ -1549,7 +1549,7 @@ namespace Allors.Meta
         /// Derive unit role types.
         /// </summary>
         /// <param name="roles">The roles.</param>
-        internal void DeriveUnitRoleTypes(HashSet<MetaRole> roles)
+        internal void DeriveUnitRoleTypes(HashSet<RoleType> roles)
         {
             roles.Clear();
             foreach (var role in this.DerivedRoleTypes)
@@ -1561,7 +1561,7 @@ namespace Allors.Meta
                 }
             }
 
-            var roleArray = new MetaRole[roles.Count];
+            var roleArray = new RoleType[roles.Count];
             roles.CopyTo(roleArray);
 
             this.DerivedUnitRoleTypes = roleArray;
@@ -1663,9 +1663,9 @@ namespace Allors.Meta
         /// </summary>
         /// <param name="unitTypeTags">The unit type tag.</param>
         /// <returns>The roles.</returns>
-        private MetaRole[] GetUnitRoleTypes(MetaUnitTags unitTypeTags)
+        private RoleType[] GetUnitRoleTypes(UnitTags unitTypeTags)
         {
-            var roles = new List<MetaRole>(this.UnitRoleTypes.Length);
+            var roles = new List<RoleType>(this.UnitRoleTypes.Length);
             foreach (var role in this.UnitRoleTypes)
             {
                 if (role.ObjectType.UnitTag == (int)unitTypeTags)
@@ -1684,7 +1684,7 @@ namespace Allors.Meta
         /// <returns>
         ///  <c>true</c> if this instance is implemented by any of the specified object types; otherwise, <c>false</c>.
         /// </returns>
-        private bool IsImplementedByAnyOf(IEnumerable<MetaObject> objectTypes)
+        private bool IsImplementedByAnyOf(IEnumerable<ObjectType> objectTypes)
         {
             foreach (var domainType in objectTypes)
             {
@@ -1705,7 +1705,7 @@ namespace Allors.Meta
         /// </summary>
         /// <param name="type">The type .</param>
         /// <param name="superTypes">The super types.</param>
-        private void DeriveSupertypesRecursively(MetaObject type, HashSet<MetaObject> superTypes)
+        private void DeriveSupertypesRecursively(ObjectType type, HashSet<ObjectType> superTypes)
         {
             foreach (var directSupertype in this.DerivedDirectSupertypes)
             {

@@ -240,10 +240,10 @@ FROM information_schema.columns"))
                                                 else
                                                 {
                                                     var unitTypeTag =
-                                                        (MetaUnitTags)column.RelationType.RoleType.ObjectType.UnitTag;
+                                                        (UnitTags)column.RelationType.RoleType.ObjectType.UnitTag;
                                                     switch (unitTypeTag)
                                                     {
-                                                        case MetaUnitTags.AllorsString:
+                                                        case UnitTags.AllorsString:
                                                             if (
                                                                 !dataType.Equals(
                                                                     SqlDbType.NVarChar.ToString().ToLower()))
@@ -263,7 +263,7 @@ FROM information_schema.columns"))
 
                                                             break;
 
-                                                        case MetaUnitTags.AllorsInteger:
+                                                        case UnitTags.AllorsInteger:
                                                             if (!dataType.Equals(SqlDbType.Int.ToString().ToLower()))
                                                             {
                                                                 AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Incompatible);
@@ -271,7 +271,7 @@ FROM information_schema.columns"))
 
                                                             break;
 
-                                                        case MetaUnitTags.AllorsLong:
+                                                        case UnitTags.AllorsLong:
                                                             if (!dataType.Equals(SqlDbType.BigInt.ToString().ToLower()))
                                                             {
                                                                 AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Incompatible);
@@ -279,7 +279,7 @@ FROM information_schema.columns"))
 
                                                             break;
 
-                                                        case MetaUnitTags.AllorsDecimal:
+                                                        case UnitTags.AllorsDecimal:
                                                             if (!dataType.Equals(SqlDbType.Decimal.ToString().ToLower()))
                                                             {
                                                                 AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Incompatible);
@@ -303,7 +303,7 @@ FROM information_schema.columns"))
 
                                                             break;
 
-                                                        case MetaUnitTags.AllorsDouble:
+                                                        case UnitTags.AllorsDouble:
                                                             if (!dataType.Equals(SqlDbType.Float.ToString().ToLower()))
                                                             {
                                                                 AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Incompatible);
@@ -311,7 +311,7 @@ FROM information_schema.columns"))
 
                                                             break;
 
-                                                        case MetaUnitTags.AllorsBoolean:
+                                                        case UnitTags.AllorsBoolean:
                                                             if (!dataType.Equals(SqlDbType.Bit.ToString().ToLower()))
                                                             {
                                                                 AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Incompatible);
@@ -319,7 +319,7 @@ FROM information_schema.columns"))
 
                                                             break;
 
-                                                        case MetaUnitTags.AllorsDateTime:
+                                                        case UnitTags.AllorsDateTime:
                                                             if (
                                                                 !dataType.Equals(
                                                                     SqlDbType.DateTime2.ToString().ToLower()))
@@ -329,7 +329,7 @@ FROM information_schema.columns"))
 
                                                             break;
 
-                                                        case MetaUnitTags.AllorsUnique:
+                                                        case UnitTags.AllorsUnique:
                                                             if (
                                                                 !dataType.Equals(
                                                                     SqlDbType.UniqueIdentifier.ToString().ToLower()))
@@ -339,7 +339,7 @@ FROM information_schema.columns"))
 
                                                             break;
 
-                                                        case MetaUnitTags.AllorsBinary:
+                                                        case UnitTags.AllorsBinary:
                                                             if (
                                                                 !dataType.Equals(
                                                                     SqlDbType.VarBinary.ToString().ToLower()))
@@ -616,10 +616,10 @@ END";
 
                         if (relationType.RoleType.ObjectType.IsUnit)
                         {
-                            var unitTypeTag = (MetaUnitTags)relationType.RoleType.ObjectType.UnitTag;
+                            var unitTypeTag = (UnitTags)relationType.RoleType.ObjectType.UnitTag;
                             switch (unitTypeTag)
                             {
-                                case MetaUnitTags.AllorsString:
+                                case UnitTags.AllorsString:
                                     // Set String Role
                                     procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.RootName };
                                     procedure.Definition = "CREATE PROCEDURE " + procedure.Name + @"
@@ -635,7 +635,7 @@ AS
                                     this.procedureByName.Add(procedure.Name, procedure);
                                     break;
 
-                                case MetaUnitTags.AllorsInteger:
+                                case UnitTags.AllorsInteger:
                                     // Set Integer Role
                                     procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.RootName };
                                     procedure.Definition = "CREATE PROCEDURE " + procedure.Name + @"
@@ -651,7 +651,7 @@ AS
                                     this.procedureByName.Add(procedure.Name, procedure);
                                     break;
 
-                                case MetaUnitTags.AllorsLong:
+                                case UnitTags.AllorsLong:
                                     // Set Long Role
                                     procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.RootName };
                                     procedure.Definition = "CREATE PROCEDURE " + procedure.Name + @"
@@ -667,7 +667,7 @@ AS
                                     this.procedureByName.Add(procedure.Name, procedure);
                                     break;
 
-                                case MetaUnitTags.AllorsDecimal:
+                                case UnitTags.AllorsDecimal:
                                     // Set Decimal Role
                                     var decimalRelationTable = this.DecimalRelationTableByScaleByPrecision[roleType.Precision][roleType.Scale];
                                     var decimalRelationParameter = this.DecimalRelationTableParameterByScaleByPrecision[roleType.Precision][roleType.Scale];
@@ -686,7 +686,7 @@ ON " + this.ObjectId + " = r." + this.RelationTableAssociation + @"
 
                                     break;
 
-                                case MetaUnitTags.AllorsDouble:
+                                case UnitTags.AllorsDouble:
                                     // Set Double Role
                                     procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.RootName };
                                     procedure.Definition = "CREATE PROCEDURE " + procedure.Name + @"
@@ -702,7 +702,7 @@ AS
                                     this.procedureByName.Add(procedure.Name, procedure);
                                     break;
 
-                                case MetaUnitTags.AllorsBoolean:
+                                case UnitTags.AllorsBoolean:
                                     // Set Boolean Role
                                     procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.RootName };
                                     procedure.Definition = "CREATE PROCEDURE " + procedure.Name + @"
@@ -718,7 +718,7 @@ AS
                                     this.procedureByName.Add(procedure.Name, procedure);
                                     break;
 
-                                case MetaUnitTags.AllorsDateTime:
+                                case UnitTags.AllorsDateTime:
                                     // Set DateTime Role
                                     procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.RootName };
                                     procedure.Definition = "CREATE PROCEDURE " + procedure.Name + @"
@@ -734,7 +734,7 @@ AS
                                     this.procedureByName.Add(procedure.Name, procedure);
                                     break;
 
-                                case MetaUnitTags.AllorsUnique:
+                                case UnitTags.AllorsUnique:
                                     // Set Unique Role
                                     procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.RootName };
                                     procedure.Definition = "CREATE PROCEDURE " + procedure.Name + @"
@@ -749,7 +749,7 @@ AS
                                     this.procedureByName.Add(procedure.Name, procedure);
                                     break;
 
-                                case MetaUnitTags.AllorsBinary:
+                                case UnitTags.AllorsBinary:
                                     // Set Binary Role
                                     procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.RootName };
                                     procedure.Definition = "CREATE PROCEDURE " + procedure.Name + @"

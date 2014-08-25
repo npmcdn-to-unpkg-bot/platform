@@ -36,12 +36,12 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
     public class ClearCompositeAndCompositesRoleFactory : IClearCompositeAndCompositesRoleFactory
     {
         public readonly Database Database;
-        private readonly Dictionary<MetaRole, string> sqlByRoleType;
+        private readonly Dictionary<RoleType, string> sqlByRoleType;
 
         public ClearCompositeAndCompositesRoleFactory(Database database)
         {
             this.Database = database;
-            this.sqlByRoleType = new Dictionary<MetaRole, string>();
+            this.sqlByRoleType = new Dictionary<RoleType, string>();
         }
 
         public IClearCompositeAndCompositesRole Create(Sql.DatabaseSession session)
@@ -49,7 +49,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
             return new ClearCompositeAndCompoisitesAndCompositesAndCompoisitesRole(this, session);
         }
 
-        public string GetSql(MetaRole roleType)
+        public string GetSql(RoleType roleType)
         {
             if (!this.sqlByRoleType.ContainsKey(roleType))
             {
@@ -81,16 +81,16 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
         private class ClearCompositeAndCompoisitesAndCompositesAndCompoisitesRole : DatabaseCommand, IClearCompositeAndCompositesRole
         {
             private readonly ClearCompositeAndCompositesRoleFactory factory;
-            private readonly Dictionary<MetaRole, SqlCommand> commandByRoleType;
+            private readonly Dictionary<RoleType, SqlCommand> commandByRoleType;
 
             public ClearCompositeAndCompoisitesAndCompositesAndCompoisitesRole(ClearCompositeAndCompositesRoleFactory factory, Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
-                this.commandByRoleType = new Dictionary<MetaRole, SqlCommand>();
+                this.commandByRoleType = new Dictionary<RoleType, SqlCommand>();
             }
 
-            public void Execute(IList<ObjectId> associations, MetaRole roleType)
+            public void Execute(IList<ObjectId> associations, RoleType roleType)
             {
                 var schema = this.factory.Database.SqlClientSchema;
 

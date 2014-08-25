@@ -27,9 +27,9 @@ namespace Allors
     using Allors.Meta;
 
     /// <summary>
-    /// The Extent of a <see cref="MetaObject"/> is the set of all objects that either
-    /// - are of the specified <see cref="MetaObject"/>
-    /// - inherit from the specified <see cref="MetaObject"/>
+    /// The Extent of a <see cref="Meta.ObjectType"/> is the set of all objects that either
+    /// - are of the specified <see cref="Meta.ObjectType"/>
+    /// - inherit from the specified <see cref="Meta.ObjectType"/>
     /// The extent can be filtered based on predicates.
     /// </summary>
     [DebuggerTypeProxy(typeof(ExtentDebugView))]
@@ -100,7 +100,7 @@ namespace Allors
         /// Gets the object type of this extent.
         /// </summary>
         /// <value>The type of the Extent.</value>
-        public abstract MetaObject ObjectType { get; }
+        public abstract ObjectType ObjectType { get; }
 
         /// <summary>
         /// Gets the <see cref="IObject"/> at the specified index.
@@ -174,7 +174,7 @@ namespace Allors
         /// </summary>
         /// <param name="roleType">The role type by which to sort.</param>
         /// <returns>The current extent.</returns>
-        public abstract Extent AddSort(MetaRole roleType);
+        public abstract Extent AddSort(RoleType roleType);
 
         /// <summary>
         /// Adds sorting based on the specified role type and direction.
@@ -182,7 +182,7 @@ namespace Allors
         /// <param name="roleType">The role type by which to sort.</param>
         /// <param name="direction">The sort direction.</param>
         /// <returns>The current extent.</returns>
-        public abstract Extent AddSort(MetaRole roleType, SortDirection direction);
+        public abstract Extent AddSort(RoleType roleType, SortDirection direction);
 
         /// <summary>
         /// Adds sorting based on the specified sort specification.
@@ -373,7 +373,7 @@ namespace Allors
             /// Gets the object type of this extent.
             /// </summary>
             /// <value>The type of the Extent.</value>
-            public override MetaObject ObjectType
+            public override ObjectType ObjectType
             {
                 get { return null; }
             }
@@ -383,7 +383,7 @@ namespace Allors
             /// </summary>
             /// <param name="roleType">The role type by which to sort.</param>
             /// <returns>The current extent.</returns>
-            public override Extent AddSort(MetaRole roleType)
+            public override Extent AddSort(RoleType roleType)
             {
                 throw new NotSupportedException("A converted extent does not support sorting");
             }
@@ -394,7 +394,7 @@ namespace Allors
             /// <param name="roleType">The role type by which to sort.</param>
             /// <param name="direction">The sort direction.</param>
             /// <returns>The current extent.</returns>
-            public override Extent AddSort(MetaRole roleType, SortDirection direction)
+            public override Extent AddSort(RoleType roleType, SortDirection direction)
             {
                 throw new NotSupportedException("A converted extent does not support sorting");
             }

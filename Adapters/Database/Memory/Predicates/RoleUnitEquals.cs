@@ -26,10 +26,10 @@ namespace Allors.Adapters.Database.Memory
     internal sealed class RoleUnitEquals : Predicate
     {
         private readonly ExtentFiltered extent;
-        private readonly MetaRole roleType;
+        private readonly RoleType roleType;
         private readonly object equals;
 
-        internal RoleUnitEquals(ExtentFiltered extent, MetaRole roleType, object equals)
+        internal RoleUnitEquals(ExtentFiltered extent, RoleType roleType, object equals)
         {
             extent.CheckForRoleType(roleType);
             CompositePredicateAssertions.ValidateRoleEquals(roleType, equals);
@@ -64,9 +64,9 @@ namespace Allors.Adapters.Database.Memory
 
             var equalsValue = this.equals;
 
-            if (this.equals is MetaRole)
+            if (this.equals is RoleType)
             {
-                var equalsRole = (MetaRole)this.equals;
+                var equalsRole = (RoleType)this.equals;
                 equalsValue = strategy.GetInternalizedUnitRole(equalsRole);
             }
             else

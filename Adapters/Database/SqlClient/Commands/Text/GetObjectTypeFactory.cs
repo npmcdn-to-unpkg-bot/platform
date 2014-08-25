@@ -58,7 +58,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
                 this.factory = factory;
             }
 
-            public MetaObject Execute(ObjectId objectId)
+            public ObjectType Execute(ObjectId objectId)
             {
                 if (this.command == null)
                 {

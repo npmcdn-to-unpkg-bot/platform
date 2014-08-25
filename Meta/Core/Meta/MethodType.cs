@@ -20,11 +20,9 @@
 
 namespace Allors.Meta
 {
-    using System;
-
     using AllorsGenerated;
 
-    public partial class MetaMethod
+    public partial class MethodType
     {
         /// <summary>
         /// Gets the display name.
@@ -59,9 +57,9 @@ namespace Allors.Meta
         /// </summary>
         /// <param name="session">The session.</param>
         /// <returns>The new instance.</returns>
-        internal static MetaMethod Create(AllorsEmbeddedSession session)
+        internal static MethodType Create(AllorsEmbeddedSession session)
         {
-            var methodType = (MetaMethod)session.Create(AllorsEmbeddedDomain.MethodType);
+            var methodType = (MethodType)session.Create(AllorsEmbeddedDomain.MethodType);
             return methodType;
         }
         

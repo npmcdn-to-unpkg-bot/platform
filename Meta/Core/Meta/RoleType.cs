@@ -28,11 +28,11 @@ namespace Allors.Meta
     using AllorsGenerated;
 
     /// <summary>
-    /// A <see cref="MetaRole"/> defines the role side of a relation.
+    /// A <see cref="RoleType"/> defines the role side of a relation.
     /// This is also called the 'passive' side.
     /// RoleTypes can have composite and unit <see cref="ObjectType"/>s.
     /// </summary>
-    public partial class MetaRole : IComparable
+    public partial class RoleType : IComparable
     {
         /// <summary>
         /// The maximum size value.
@@ -212,7 +212,7 @@ namespace Allors.Meta
         /// Gets the type of the relation.
         /// </summary>
         /// <value>The type of the relation.</value>
-        public MetaRelation RelationType
+        public RelationType RelationType
         {
             get { return RelationTypeWhereRoleType; }
         }
@@ -221,7 +221,7 @@ namespace Allors.Meta
         /// Gets the association.
         /// </summary>
         /// <value>The association.</value>
-        public MetaAssociation AssociationType
+        public AssociationType AssociationType
         {
             get { return RelationTypeWhereRoleType.AssociationType; }
         }
@@ -230,7 +230,7 @@ namespace Allors.Meta
         /// Gets the root objectTypes.
         /// </summary>
         /// <value>The root objectTypes.</value>
-        public MetaObject[] RootTypes
+        public ObjectType[] RootTypes
         {
             get
             {
@@ -278,7 +278,7 @@ namespace Allors.Meta
         /// <paramref name="obj"/> is not the same type as this instance. </exception>
         public int CompareTo(object obj)
         {
-            var that = obj as MetaRole;
+            var that = obj as RoleType;
             if (that != null)
             {
                 return string.CompareOrdinal(this.SingularName, that.SingularName);
@@ -293,7 +293,7 @@ namespace Allors.Meta
         /// <returns>
         /// The <see cref="ObjectType"/>.
         /// </returns>
-        public override MetaObject GetObjectType()
+        public override ObjectType GetObjectType()
         {
             return this.ObjectType;
         }
@@ -321,9 +321,9 @@ namespace Allors.Meta
         /// </summary>
         /// <param name="session">The session.</param>
         /// <returns>The new instance.</returns>
-        internal static MetaRole Create(AllorsEmbeddedSession session)
+        internal static RoleType Create(AllorsEmbeddedSession session)
         {
-            var role = (MetaRole)session.Create(AllorsEmbeddedDomain.RoleType);
+            var role = (RoleType)session.Create(AllorsEmbeddedDomain.RoleType);
             role.IsMany = false;
             return role;
         }
@@ -340,9 +340,9 @@ namespace Allors.Meta
                     base.IsMany = false;
                 }
 
-                switch ((MetaUnitTags)this.ObjectType.UnitTag)
+                switch ((UnitTags)this.ObjectType.UnitTag)
                 {
-                    case MetaUnitTags.AllorsString:
+                    case UnitTags.AllorsString:
                         if (!this.ExistSize)
                         {
                             this.Size = 256;
@@ -352,7 +352,7 @@ namespace Allors.Meta
                         }
 
                         break;
-                    case MetaUnitTags.AllorsBinary:
+                    case UnitTags.AllorsBinary:
                         if (!this.ExistSize)
                         {
                             this.Size = MaximumSize;
@@ -362,7 +362,7 @@ namespace Allors.Meta
                         }
 
                         break;
-                    case MetaUnitTags.AllorsDecimal:
+                    case UnitTags.AllorsDecimal:
                         if (!this.ExistPrecision)
                         {
                             this.Precision = 19;
@@ -425,7 +425,7 @@ namespace Allors.Meta
         /// Derive hierarchy plural name.
         /// </summary>
         /// <param name="objectTypes">The object Types.</param>
-        internal void DeriveHierarchyPluralName(HashSet<MetaObject> objectTypes)
+        internal void DeriveHierarchyPluralName(HashSet<ObjectType> objectTypes)
         {
             objectTypes.Clear();
             DerivedHierarchyPluralName = null;
@@ -485,7 +485,7 @@ namespace Allors.Meta
         /// Derive hierarchy singular name.
         /// </summary>
         /// <param name="objectTypes">The object types.</param>
-        internal void DeriveHierarchySingularName(HashSet<MetaObject> objectTypes)
+        internal void DeriveHierarchySingularName(HashSet<ObjectType> objectTypes)
         {
             objectTypes.Clear();
             DerivedHierarchySingularName = null;
@@ -594,9 +594,9 @@ namespace Allors.Meta
             {
                 if (this.ObjectType.IsUnit)
                 {
-                    switch ((MetaUnitTags)this.ObjectType.UnitTag)
+                    switch ((UnitTags)this.ObjectType.UnitTag)
                     {
-                        case MetaUnitTags.AllorsString:
+                        case UnitTags.AllorsString:
                             if (!this.ExistSize)
                             {
                                 var message = this.ValidationName + " should have a size.";
@@ -604,7 +604,7 @@ namespace Allors.Meta
                             }
 
                             break;
-                        case MetaUnitTags.AllorsBinary:
+                        case UnitTags.AllorsBinary:
                             if (!this.ExistSize)
                             {
                                 var message = this.ValidationName + " should have a size.";
@@ -612,7 +612,7 @@ namespace Allors.Meta
                             }
 
                             break;
-                        case MetaUnitTags.AllorsDecimal:
+                        case UnitTags.AllorsDecimal:
                             if (!this.ExistPrecision)
                             {
                                 var message = this.ValidationName + " should have a precision.";

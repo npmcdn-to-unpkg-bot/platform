@@ -28,15 +28,15 @@ namespace Allors.Adapters.Workspace.Memory
         private static readonly HashSet<Strategy> EmptySet = new HashSet<Strategy>();
 
         private readonly Strategy associationStrategy;
-        private readonly MetaRole roleType;
+        private readonly RoleType roleType;
 
-        public ExtentRole(Strategy associationStrategy, MetaRole roleType)
+        public ExtentRole(Strategy associationStrategy, RoleType roleType)
         {
             this.associationStrategy = associationStrategy;
             this.roleType = roleType;
         }
 
-        public override MetaObject ObjectType
+        public override ObjectType ObjectType
         {
             get { return this.roleType.ObjectType; }
         }

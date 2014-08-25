@@ -243,7 +243,7 @@ namespace Allors.Adapters.Database.Memory
                                 }
 
                                 var relationTypeId = new Guid(relationTypeIdString);
-                                var relationType = (MetaRelation)this.session.Database.Domain.MetaDomain.Find(relationTypeId);
+                                var relationType = (RelationType)this.session.Database.Domain.Domain.Find(relationTypeId);
 
                                 if (this.reader.Name.Equals(Serialization.RelationTypeUnit))
                                 {
@@ -288,7 +288,7 @@ namespace Allors.Adapters.Database.Memory
             }
         }
 
-        private void LoadUnitRelations(MetaRelation relationType)
+        private void LoadUnitRelations(RelationType relationType)
         {
             while (this.reader.Read())
             {
@@ -321,17 +321,17 @@ namespace Allors.Adapters.Database.Memory
                                     {
                                         switch (relationType.RoleType.ObjectType.UnitTag)
                                         {
-                                            case (int)MetaUnitTags.AllorsString:
+                                            case (int)UnitTags.AllorsString:
                                                 strategy.SetUnitRole(relationType.RoleType, string.Empty);
                                                 break;
-                                            case (int)MetaUnitTags.AllorsBinary:
+                                            case (int)UnitTags.AllorsBinary:
                                                 strategy.SetUnitRole(relationType.RoleType, emptyByteArray);
                                                 break;
                                         }
                                     }
                                     else
                                     {
-                                        var unitTypeTag = (MetaUnitTags)relationType.RoleType.ObjectType.UnitTag;
+                                        var unitTypeTag = (UnitTags)relationType.RoleType.ObjectType.UnitTag;
 
                                         var unit = Serialization.ReadString(value, unitTypeTag);
                                         strategy.SetUnitRole(relationType.RoleType, unit);
@@ -360,7 +360,7 @@ namespace Allors.Adapters.Database.Memory
             }
         }
 
-        private void LoadCompositeRelations(MetaRelation relationType)
+        private void LoadCompositeRelations(RelationType relationType)
         {
             while (this.reader.Read())
             {

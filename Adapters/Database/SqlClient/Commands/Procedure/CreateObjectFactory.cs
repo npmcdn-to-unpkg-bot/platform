@@ -51,15 +51,15 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
 
         private class CreateObject : DatabaseCommand, ICreateObject
         {
-            private readonly Dictionary<MetaObject, SqlCommand> commandByObjectType;
+            private readonly Dictionary<ObjectType, SqlCommand> commandByObjectType;
 
             public CreateObject(Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
-                this.commandByObjectType = new Dictionary<MetaObject, SqlCommand>();
+                this.commandByObjectType = new Dictionary<ObjectType, SqlCommand>();
             }
 
-            public Reference Execute(MetaObject objectType)
+            public Reference Execute(ObjectType objectType)
             {
                 var exclusiveRootClass = objectType.ExclusiveRootClass;
                 var schema = this.Database.Schema;

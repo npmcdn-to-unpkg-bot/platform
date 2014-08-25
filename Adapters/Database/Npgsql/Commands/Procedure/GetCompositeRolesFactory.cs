@@ -36,12 +36,12 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Text
     public class GetCompositeRolesFactory : IGetCompositeRolesFactory
     {
         public readonly Database Database;
-        private readonly Dictionary<MetaRole, string> sqlByRoleType;
+        private readonly Dictionary<RoleType, string> sqlByRoleType;
 
         public GetCompositeRolesFactory(Database database)
         {
             this.Database = database;
-            this.sqlByRoleType = new Dictionary<MetaRole, string>();
+            this.sqlByRoleType = new Dictionary<RoleType, string>();
         }
 
         public IGetCompositeRoles Create(Sql.DatabaseSession session)
@@ -49,7 +49,7 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Text
             return new GetCompositeRoles(this, session);
         }
 
-        public string GetSql(MetaRole roleType)
+        public string GetSql(RoleType roleType)
         {
             if (!this.sqlByRoleType.ContainsKey(roleType))
             {
@@ -74,16 +74,16 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Text
         private class GetCompositeRoles : DatabaseCommand, IGetCompositeRoles
         {
             private readonly GetCompositeRolesFactory factory;
-            private readonly Dictionary<MetaRole, NpgsqlCommand> commandByRoleType;
+            private readonly Dictionary<RoleType, NpgsqlCommand> commandByRoleType;
 
             public GetCompositeRoles(GetCompositeRolesFactory factory, Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
-                this.commandByRoleType = new Dictionary<MetaRole, NpgsqlCommand>();
+                this.commandByRoleType = new Dictionary<RoleType, NpgsqlCommand>();
             }
 
-            public void Execute(Roles roles, MetaRole roleType)
+            public void Execute(Roles roles, RoleType roleType)
             {
                 var reference = roles.Reference;
 

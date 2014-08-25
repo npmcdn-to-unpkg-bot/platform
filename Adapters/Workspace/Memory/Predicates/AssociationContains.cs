@@ -26,10 +26,10 @@ namespace Allors.Adapters.Workspace.Memory
 
     internal sealed class AssociationContains : Predicate
     {
-        private readonly MetaAssociation associationType;
+        private readonly AssociationType associationType;
         private readonly IObject containedObject;
 
-        internal AssociationContains(Extent extent, MetaAssociation associationType, IObject containedObject)
+        internal AssociationContains(Extent extent, AssociationType associationType, IObject containedObject)
         {
             extent.CheckForAssociationType(associationType);
             CompositePredicateAssertions.AssertAssociationContains(associationType, containedObject);

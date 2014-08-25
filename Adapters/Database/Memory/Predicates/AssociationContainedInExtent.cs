@@ -24,10 +24,10 @@ namespace Allors.Adapters.Database.Memory
 
     internal sealed class AssociationContainedInExtent : Predicate
     {
-        private readonly MetaAssociation associationType;
+        private readonly AssociationType associationType;
         private readonly Allors.Extent containingExtent;
 
-        internal AssociationContainedInExtent(ExtentFiltered extent, MetaAssociation associationType, Allors.Extent containingExtent)
+        internal AssociationContainedInExtent(ExtentFiltered extent, AssociationType associationType, Allors.Extent containingExtent)
         {
             extent.CheckForAssociationType(associationType);
             CompositePredicateAssertions.AssertAssociationContainedIn(associationType, containingExtent);

@@ -56,7 +56,7 @@ namespace Allors
         /// <summary>
         /// Gets the changed role types by association.
         /// </summary>
-        IDictionary<ObjectId, ISet<MetaRole>> RoleTypesByAssociation { get; }
+        IDictionary<ObjectId, ISet<RoleType>> RoleTypesByAssociation { get; }
 
         /// <summary>
         /// Get the changed role types for the association.
@@ -67,6 +67,6 @@ namespace Allors
         /// <returns>
         /// The role types.
         /// </returns>
-        ISet<MetaRole> GetRoleTypes(ObjectId association);
+        ISet<RoleType> GetRoleTypes(ObjectId association);
     }
 }

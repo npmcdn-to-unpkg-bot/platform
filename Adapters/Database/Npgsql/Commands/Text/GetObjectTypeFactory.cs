@@ -59,7 +59,7 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Text
                 this.factory = factory;
             }
 
-            public MetaObject Execute(ObjectId objectId)
+            public ObjectType Execute(ObjectId objectId)
             {
                 if (this.command == null)
                 {

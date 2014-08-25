@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="MetaInheritance.cs" company="Allors bvba">
+// <copyright file="Inheritance.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -25,15 +25,15 @@ namespace Allors.Meta
     using AllorsGenerated;
 
     /// <summary>
-    /// Defines a subtype/supertype relation between two <see cref="MetaObject"/>s.
+    /// Defines a subtype/supertype relation between two <see cref="ObjectType"/>s.
     /// </summary>
-    public sealed partial class MetaInheritance
+    public sealed partial class Inheritance
     {
         /// <summary>
         /// Gets or sets the subtype.
         /// </summary>
         /// <value>The Subtype.</value>
-        public override MetaObject Subtype
+        public override ObjectType Subtype
         {
             get
             {
@@ -55,7 +55,7 @@ namespace Allors.Meta
         /// Gets or sets the supertype.
         /// </summary>
         /// <value>The Supertype.</value>
-        public override MetaObject Supertype
+        public override ObjectType Supertype
         {
             get
             {
@@ -110,9 +110,9 @@ namespace Allors.Meta
         /// </summary>
         /// <param name="session">The session.</param>
         /// <returns>The new inheritance.</returns>
-        internal static MetaInheritance Create(AllorsEmbeddedSession session)
+        internal static Inheritance Create(AllorsEmbeddedSession session)
         {
-            var inheritance = (MetaInheritance)session.Create(AllorsEmbeddedDomain.Inheritance);
+            var inheritance = (Inheritance)session.Create(AllorsEmbeddedDomain.Inheritance);
             return inheritance;
         }
 

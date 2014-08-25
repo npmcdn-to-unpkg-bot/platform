@@ -51,25 +51,25 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
         {
             private readonly DatabaseSession session;
 
-            private readonly Dictionary<MetaObject, Dictionary<IList<MetaRole>, SqlCommand>> commandByKeyByObjectType; 
+            private readonly Dictionary<ObjectType, Dictionary<IList<RoleType>, SqlCommand>> commandByKeyByObjectType; 
 
             public SetUnitRoles(Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.session = (DatabaseSession)session;
-                this.commandByKeyByObjectType = new Dictionary<MetaObject, Dictionary<IList<MetaRole>, SqlCommand>>();
+                this.commandByKeyByObjectType = new Dictionary<ObjectType, Dictionary<IList<RoleType>, SqlCommand>>();
             }
 
-            public void Execute(Roles roles, IList<MetaRole> sortedRoleTypes)
+            public void Execute(Roles roles, IList<RoleType> sortedRoleTypes)
             {
                 var schema = this.Database.Schema;
 
                 var exclusiveRootClass = roles.Reference.ObjectType.ExclusiveRootClass;
 
-                Dictionary<IList<MetaRole>, SqlCommand> commandByKey;
+                Dictionary<IList<RoleType>, SqlCommand> commandByKey;
                 if (!this.commandByKeyByObjectType.TryGetValue(exclusiveRootClass, out commandByKey))
                 {
-                    commandByKey = new Dictionary<IList<MetaRole>, SqlCommand>(new SortedRoleTypesComparer());
+                    commandByKey = new Dictionary<IList<RoleType>, SqlCommand>(new SortedRoleTypesComparer());
                     this.commandByKeyByObjectType.Add(exclusiveRootClass, commandByKey);
                 }
 
@@ -122,9 +122,9 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
                 }
             }
 
-            private class SortedRoleTypesComparer : IEqualityComparer<IList<MetaRole>>
+            private class SortedRoleTypesComparer : IEqualityComparer<IList<RoleType>>
             {
-                public bool Equals(IList<MetaRole> x, IList<MetaRole> y)
+                public bool Equals(IList<RoleType> x, IList<RoleType> y)
                 {
                     if (x.Count == y.Count)
                     {
@@ -142,7 +142,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
                     return false;
                 }
 
-                public int GetHashCode(IList<MetaRole> roleTypes)
+                public int GetHashCode(IList<RoleType> roleTypes)
                 {
                     var hashCode = 0;
                     foreach (var roleType in roleTypes)

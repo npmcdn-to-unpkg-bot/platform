@@ -33,12 +33,12 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
     internal class AddCompositeRoleFactory : Sql.Commands.IAddCompositeRoleFactory
     {
         internal readonly Database Database;
-        private readonly Dictionary<MetaRole, string> sqlByRoleType;
+        private readonly Dictionary<RoleType, string> sqlByRoleType;
 
         internal AddCompositeRoleFactory(Database database)
         {
             this.Database = database;
-            this.sqlByRoleType = new Dictionary<MetaRole, string>();
+            this.sqlByRoleType = new Dictionary<RoleType, string>();
         }
 
         public Sql.Commands.IAddCompositeRole Create(Sql.DatabaseSession session)
@@ -46,7 +46,7 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
             return new AddCompositeRole(this, session);
         }
 
-        internal string GetSql(MetaRole roleType)
+        internal string GetSql(RoleType roleType)
         {
             if (!this.sqlByRoleType.ContainsKey(roleType))
             {
@@ -71,16 +71,16 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
         private class AddCompositeRole : DatabaseCommand, Sql.Commands.IAddCompositeRole
         {
             private readonly AddCompositeRoleFactory factory;
-            private readonly Dictionary<MetaRole, NpgsqlCommand> commandByRoleType;
+            private readonly Dictionary<RoleType, NpgsqlCommand> commandByRoleType;
 
             public AddCompositeRole(AddCompositeRoleFactory factory, Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
-                this.commandByRoleType = new Dictionary<MetaRole, NpgsqlCommand>();
+                this.commandByRoleType = new Dictionary<RoleType, NpgsqlCommand>();
             }
 
-            public void Execute(IList<CompositeRelation> relations, MetaRole roleType)
+            public void Execute(IList<CompositeRelation> relations, RoleType roleType)
             {
                 NpgsqlCommand command;
                 if (!this.commandByRoleType.TryGetValue(roleType, out command))

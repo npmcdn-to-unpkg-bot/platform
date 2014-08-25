@@ -79,7 +79,7 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
                         var classId = this.GetClassId(reader, 1);
                         var cacheId = this.GetCachId(reader, 2);
 
-                        var type = (MetaObject)this.Session.Database.ObjectFactory.Domain.MetaDomain.Find(classId);
+                        var type = (ObjectType)this.Session.Database.ObjectFactory.Domain.Domain.Find(classId);
                         var obj = this.Session.GetOrCreateAssociationForExistingObject(type, id, cacheId);
 
                         objects.Add(obj);

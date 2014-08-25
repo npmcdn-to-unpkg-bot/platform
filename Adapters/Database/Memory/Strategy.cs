@@ -31,19 +31,19 @@ namespace Allors.Adapters.Database.Memory
     public sealed class Strategy : IStrategy
     {
         private readonly Session session;
-        private readonly MetaObject objectType;
+        private readonly ObjectType objectType;
 
-        private readonly Dictionary<MetaRole, object> unitRoleByRoleType;
-        private readonly Dictionary<MetaRole, Strategy> compositeRoleByRoleType;
-        private readonly Dictionary<MetaRole, HashSet<Strategy>> compositesRoleByRoleType;
-        private readonly Dictionary<MetaAssociation, Strategy> compositeAssociationByAssociationType;
-        private readonly Dictionary<MetaAssociation, HashSet<Strategy>> compositesAssociationByAssociationType;
+        private readonly Dictionary<RoleType, object> unitRoleByRoleType;
+        private readonly Dictionary<RoleType, Strategy> compositeRoleByRoleType;
+        private readonly Dictionary<RoleType, HashSet<Strategy>> compositesRoleByRoleType;
+        private readonly Dictionary<AssociationType, Strategy> compositeAssociationByAssociationType;
+        private readonly Dictionary<AssociationType, HashSet<Strategy>> compositesAssociationByAssociationType;
         
-        private Dictionary<MetaRole, object> rollbackUnitRoleByRoleType;
-        private Dictionary<MetaRole, Strategy> rollbackCompositeRoleByRoleType;
-        private Dictionary<MetaRole, HashSet<Strategy>> rollbackCompositesRoleByRoleType;
-        private Dictionary<MetaAssociation, Strategy> rollbackCompositeAssociationByAssociationType;
-        private Dictionary<MetaAssociation, HashSet<Strategy>> rollbackCompositesAssociationByAssociationType;
+        private Dictionary<RoleType, object> rollbackUnitRoleByRoleType;
+        private Dictionary<RoleType, Strategy> rollbackCompositeRoleByRoleType;
+        private Dictionary<RoleType, HashSet<Strategy>> rollbackCompositesRoleByRoleType;
+        private Dictionary<AssociationType, Strategy> rollbackCompositeAssociationByAssociationType;
+        private Dictionary<AssociationType, HashSet<Strategy>> rollbackCompositesAssociationByAssociationType;
         
         // TODO: move to a BitFlag
         private bool isDeleted;
@@ -52,7 +52,7 @@ namespace Allors.Adapters.Database.Memory
 
         private WeakReference allorizedObjectWeakReference;
 
-        internal Strategy(Session session, MetaObject objectType, ObjectId objectId)
+        internal Strategy(Session session, ObjectType objectType, ObjectId objectId)
         {
             this.session = session;
             this.objectType = objectType;
@@ -62,11 +62,11 @@ namespace Allors.Adapters.Database.Memory
             this.isDeletedOnRollback = true;
             this.isNew = true;
 
-            this.unitRoleByRoleType = new Dictionary<MetaRole, object>();
-            this.compositeRoleByRoleType = new Dictionary<MetaRole, Strategy>();
-            this.compositesRoleByRoleType = new Dictionary<MetaRole, HashSet<Strategy>>();
-            this.compositeAssociationByAssociationType = new Dictionary<MetaAssociation, Strategy>();
-            this.compositesAssociationByAssociationType = new Dictionary<MetaAssociation, HashSet<Strategy>>();
+            this.unitRoleByRoleType = new Dictionary<RoleType, object>();
+            this.compositeRoleByRoleType = new Dictionary<RoleType, Strategy>();
+            this.compositesRoleByRoleType = new Dictionary<RoleType, HashSet<Strategy>>();
+            this.compositeAssociationByAssociationType = new Dictionary<AssociationType, Strategy>();
+            this.compositesAssociationByAssociationType = new Dictionary<AssociationType, HashSet<Strategy>>();
 
             this.rollbackUnitRoleByRoleType = null;
             this.rollbackCompositeRoleByRoleType = null;
@@ -98,7 +98,7 @@ namespace Allors.Adapters.Database.Memory
 
         public ObjectId ObjectId { get; internal set; }
 
-        public MetaObject ObjectType
+        public ObjectType ObjectType
         {
             get { return this.objectType; }
         }
@@ -129,48 +129,48 @@ namespace Allors.Adapters.Database.Memory
             }
         }
 
-        private Dictionary<MetaRole, object> RollbackUnitRoleByRoleType 
+        private Dictionary<RoleType, object> RollbackUnitRoleByRoleType 
         {
             get
             {
                 return this.rollbackUnitRoleByRoleType
-                       ?? (this.rollbackUnitRoleByRoleType = new Dictionary<MetaRole, object>());
+                       ?? (this.rollbackUnitRoleByRoleType = new Dictionary<RoleType, object>());
             }
         }
 
-        private Dictionary<MetaRole, Strategy> RollbackCompositeRoleByRoleType 
+        private Dictionary<RoleType, Strategy> RollbackCompositeRoleByRoleType 
         {
             get
             {
                 return this.rollbackCompositeRoleByRoleType
-                       ?? (this.rollbackCompositeRoleByRoleType = new Dictionary<MetaRole, Strategy>());
+                       ?? (this.rollbackCompositeRoleByRoleType = new Dictionary<RoleType, Strategy>());
             }
         }
 
-        private Dictionary<MetaRole, HashSet<Strategy>> RollbackCompositesRoleByRoleType 
+        private Dictionary<RoleType, HashSet<Strategy>> RollbackCompositesRoleByRoleType 
         {
             get
             {
                 return this.rollbackCompositesRoleByRoleType
-                       ?? (this.rollbackCompositesRoleByRoleType = new Dictionary<MetaRole, HashSet<Strategy>>());
+                       ?? (this.rollbackCompositesRoleByRoleType = new Dictionary<RoleType, HashSet<Strategy>>());
             }
         }
 
-        private Dictionary<MetaAssociation, Strategy> RollbackCompositeAssociationByAssociationType 
+        private Dictionary<AssociationType, Strategy> RollbackCompositeAssociationByAssociationType 
         {
             get
             {
                 return this.rollbackCompositeAssociationByAssociationType
-                    ?? (this.rollbackCompositeAssociationByAssociationType = new Dictionary<MetaAssociation, Strategy>());
+                    ?? (this.rollbackCompositeAssociationByAssociationType = new Dictionary<AssociationType, Strategy>());
             }
         }
 
-        private Dictionary<MetaAssociation, HashSet<Strategy>> RollbackCompositesAssociationByAssociationType 
+        private Dictionary<AssociationType, HashSet<Strategy>> RollbackCompositesAssociationByAssociationType 
         {
             get
             {
                 return this.rollbackCompositesAssociationByAssociationType
-                    ?? (this.rollbackCompositesAssociationByAssociationType = new Dictionary<MetaAssociation, HashSet<Strategy>>());
+                    ?? (this.rollbackCompositesAssociationByAssociationType = new Dictionary<AssociationType, HashSet<Strategy>>());
             }
         }
         
@@ -179,7 +179,7 @@ namespace Allors.Adapters.Database.Memory
             return this.objectType.Name + " " + this.ObjectId;
         }
 
-        public object GetRole(MetaRole roleType)
+        public object GetRole(RoleType roleType)
         {
             if (roleType.ObjectType.IsUnit)
             {
@@ -194,7 +194,7 @@ namespace Allors.Adapters.Database.Memory
             return this.GetCompositeRole(roleType);
         }
 
-        public void SetRole(MetaRole roleType, object value)
+        public void SetRole(RoleType roleType, object value)
         {
             if (roleType.ObjectType.IsUnit)
             {
@@ -220,7 +220,7 @@ namespace Allors.Adapters.Database.Memory
             }
         }
 
-        public void RemoveRole(MetaRole roleType)
+        public void RemoveRole(RoleType roleType)
         {
             if (roleType.ObjectType.IsUnit)
             {
@@ -239,7 +239,7 @@ namespace Allors.Adapters.Database.Memory
             }
         }
 
-        public bool ExistRole(MetaRole roleType)
+        public bool ExistRole(RoleType roleType)
         {
             if (roleType.ObjectType.IsUnit)
             {
@@ -254,7 +254,7 @@ namespace Allors.Adapters.Database.Memory
             return this.ExistCompositeRole(roleType);
         }
 
-        public object GetUnitRole(MetaRole roleType)
+        public object GetUnitRole(RoleType roleType)
         {
             this.CheckRemoved();
             this.session.MemoryDatabase.UnitRoleChecks(this, roleType);
@@ -263,7 +263,7 @@ namespace Allors.Adapters.Database.Memory
             return unitRole;
         }
         
-        public void SetUnitRole(MetaRole roleType, object role)
+        public void SetUnitRole(RoleType roleType, object role)
         {
             this.CheckRemoved();
             this.session.MemoryDatabase.UnitRoleChecks(this, roleType);
@@ -286,19 +286,19 @@ namespace Allors.Adapters.Database.Memory
             }
         }
 
-        public void RemoveUnitRole(MetaRole roleType)
+        public void RemoveUnitRole(RoleType roleType)
         {
             this.SetUnitRole(roleType, null);
         }
 
-        public bool ExistUnitRole(MetaRole roleType)
+        public bool ExistUnitRole(RoleType roleType)
         {
             this.CheckRemoved();
             this.session.MemoryDatabase.UnitRoleChecks(this, roleType);
             return this.unitRoleByRoleType.ContainsKey(roleType);
         }
 
-        public IObject GetCompositeRole(MetaRole roleType)
+        public IObject GetCompositeRole(RoleType roleType)
         {
             this.CheckRemoved();
 
@@ -313,7 +313,7 @@ namespace Allors.Adapters.Database.Memory
             return null;
         }
 
-        public void SetCompositeRole(MetaRole roleType, IObject newRole)
+        public void SetCompositeRole(RoleType roleType, IObject newRole)
         {
             if (newRole == null)
             {
@@ -334,7 +334,7 @@ namespace Allors.Adapters.Database.Memory
             }
         }
 
-        public void RemoveCompositeRole(MetaRole roleType)
+        public void RemoveCompositeRole(RoleType roleType)
         {
             if (roleType.AssociationType.IsOne)
             {
@@ -348,20 +348,20 @@ namespace Allors.Adapters.Database.Memory
             }
         }
 
-        public bool ExistCompositeRole(MetaRole roleType)
+        public bool ExistCompositeRole(RoleType roleType)
         {
             this.CheckRemoved();
             return this.compositeRoleByRoleType.ContainsKey(roleType);
         }
 
-        public Allors.Extent GetCompositeRoles(MetaRole roleType)
+        public Allors.Extent GetCompositeRoles(RoleType roleType)
         {
             this.CheckRemoved();
 
             return new ExtentSwitch(this, roleType);
         }
 
-        public void SetCompositeRoles(MetaRole roleType, Allors.Extent roles)
+        public void SetCompositeRoles(RoleType roleType, Allors.Extent roles)
         {
             if (roles == null || roles.Count == 0)
             {
@@ -394,7 +394,7 @@ namespace Allors.Adapters.Database.Memory
             }
         }
 
-        public void AddCompositeRole(MetaRole roleType, IObject objectToAdd)
+        public void AddCompositeRole(RoleType roleType, IObject objectToAdd)
         {
             this.CheckRemoved();
             if (objectToAdd != null)
@@ -414,7 +414,7 @@ namespace Allors.Adapters.Database.Memory
             }
         }
 
-        public void RemoveCompositeRole(MetaRole roleType, IObject objectToRemove)
+        public void RemoveCompositeRole(RoleType roleType, IObject objectToRemove)
         {
             this.CheckRemoved();
             if (objectToRemove != null)
@@ -434,7 +434,7 @@ namespace Allors.Adapters.Database.Memory
             }
         }
 
-        public void RemoveCompositeRoles(MetaRole roleType)
+        public void RemoveCompositeRoles(RoleType roleType)
         {
             this.CheckRemoved();
             if (roleType.AssociationType.IsMany)
@@ -447,7 +447,7 @@ namespace Allors.Adapters.Database.Memory
             }
         }
 
-        public bool ExistCompositeRoles(MetaRole roleType)
+        public bool ExistCompositeRoles(RoleType roleType)
         {
             this.CheckRemoved();
             HashSet<Strategy> roleStrategies;
@@ -455,7 +455,7 @@ namespace Allors.Adapters.Database.Memory
             return roleStrategies != null;
         }
 
-        public object GetAssociation(MetaAssociation associationType)
+        public object GetAssociation(AssociationType associationType)
         {
             if (associationType.IsMany)
             {
@@ -465,7 +465,7 @@ namespace Allors.Adapters.Database.Memory
             return this.GetCompositeAssociation(associationType);
         }
 
-        public bool ExistAssociation(MetaAssociation associationType)
+        public bool ExistAssociation(AssociationType associationType)
         {
             if (associationType.IsMany)
             {
@@ -475,7 +475,7 @@ namespace Allors.Adapters.Database.Memory
             return this.ExistCompositeAssociation(associationType);
         }
 
-        public IObject GetCompositeAssociation(MetaAssociation associationType)
+        public IObject GetCompositeAssociation(AssociationType associationType)
         {
             this.CheckRemoved();
             Strategy strategy;
@@ -488,19 +488,19 @@ namespace Allors.Adapters.Database.Memory
             return null;
         }
 
-        public bool ExistCompositeAssociation(MetaAssociation associationType)
+        public bool ExistCompositeAssociation(AssociationType associationType)
         {
             return this.GetCompositeAssociation(associationType) != null;
         }
 
-        public Allors.Extent GetCompositeAssociations(MetaAssociation associationType)
+        public Allors.Extent GetCompositeAssociations(AssociationType associationType)
         {
             this.CheckRemoved();
 
             return new ExtentSwitch(this, associationType);
         }
 
-        public bool ExistCompositeAssociations(MetaAssociation associationType)
+        public bool ExistCompositeAssociations(AssociationType associationType)
         {
             this.CheckRemoved();
             HashSet<Strategy> strategies;
@@ -724,14 +724,14 @@ namespace Allors.Adapters.Database.Memory
             this.rollbackCompositesAssociationByAssociationType = null;
         }
 
-        internal object GetInternalizedUnitRole(MetaRole roleType)
+        internal object GetInternalizedUnitRole(RoleType roleType)
         {
             object unitRole;
             this.unitRoleByRoleType.TryGetValue(roleType, out unitRole);
             return unitRole;
         }
 
-        internal List<Strategy> GetStrategies(MetaAssociation associationType)
+        internal List<Strategy> GetStrategies(AssociationType associationType)
         {
             HashSet<Strategy> strategies;
             this.compositesAssociationByAssociationType.TryGetValue(associationType, out strategies);
@@ -743,7 +743,7 @@ namespace Allors.Adapters.Database.Memory
             return strategies.ToList();
         }
 
-        internal List<Strategy> GetStrategies(MetaRole roleType)
+        internal List<Strategy> GetStrategies(RoleType roleType)
         {
             HashSet<Strategy> strategies;
             this.compositesRoleByRoleType.TryGetValue(roleType, out strategies);
@@ -755,7 +755,7 @@ namespace Allors.Adapters.Database.Memory
             return strategies.ToList();
         }
 
-        internal void SetCompositeRoleOne2One(MetaRole roleType, IObject newRole)
+        internal void SetCompositeRoleOne2One(RoleType roleType, IObject newRole)
         {
             this.CheckRemoved();
             this.session.MemoryDatabase.CompositeRoleChecks(this, roleType, newRole);
@@ -800,7 +800,7 @@ namespace Allors.Adapters.Database.Memory
             }
         }
 
-        internal void SetCompositeRoleMany2One(MetaRole roleType, IObject newRole)
+        internal void SetCompositeRoleMany2One(RoleType roleType, IObject newRole)
         {
             this.CheckRemoved();
             this.session.MemoryDatabase.CompositeRoleChecks(this, roleType, newRole);
@@ -847,7 +847,7 @@ namespace Allors.Adapters.Database.Memory
             }
         }
 
-        internal void SetCompositesRoleOne2Many(MetaRole roleType, HashSet<Strategy> newStrategies)
+        internal void SetCompositesRoleOne2Many(RoleType roleType, HashSet<Strategy> newStrategies)
         {
             this.RemoveCompositeRolesOne2Many(roleType);
 
@@ -858,7 +858,7 @@ namespace Allors.Adapters.Database.Memory
             }
         }
 
-        internal void SetCompositeRolesMany2Many(MetaRole roleType, HashSet<Strategy> newStrategies)
+        internal void SetCompositeRolesMany2Many(RoleType roleType, HashSet<Strategy> newStrategies)
         {
             this.RemoveCompositeRolesMany2Many(roleType);
 
@@ -869,7 +869,7 @@ namespace Allors.Adapters.Database.Memory
             }
         }
 
-        internal void FillRoleForSave(Dictionary<MetaRole, List<Strategy>> strategiesByRoleType)
+        internal void FillRoleForSave(Dictionary<RoleType, List<Strategy>> strategiesByRoleType)
         {
             if (this.IsDeleted)
             {
@@ -928,9 +928,9 @@ namespace Allors.Adapters.Database.Memory
             }
         }
 
-        internal void SaveUnit(XmlWriter writer, MetaRole roleType)
+        internal void SaveUnit(XmlWriter writer, RoleType roleType)
         {
-            var value = Serialization.WriteString((MetaUnitTags)roleType.ObjectType.UnitTag, this.unitRoleByRoleType[roleType]);
+            var value = Serialization.WriteString((UnitTags)roleType.ObjectType.UnitTag, this.unitRoleByRoleType[roleType]);
 
             writer.WriteStartElement(Serialization.Relation);
             writer.WriteAttributeString(Serialization.Association, this.ObjectId.ToString());
@@ -938,7 +938,7 @@ namespace Allors.Adapters.Database.Memory
             writer.WriteEndElement();
         }
 
-        internal void SaveComposites(XmlWriter writer, MetaRole roleType)
+        internal void SaveComposites(XmlWriter writer, RoleType roleType)
         {
             writer.WriteStartElement(Serialization.Relation);
             writer.WriteAttributeString(Serialization.Association, this.ObjectId.ToString());
@@ -959,7 +959,7 @@ namespace Allors.Adapters.Database.Memory
             writer.WriteEndElement();
         }
 
-        internal void SaveComposite(XmlWriter writer, MetaRole roleType)
+        internal void SaveComposite(XmlWriter writer, RoleType roleType)
         {
             writer.WriteStartElement(Serialization.Relation);
             writer.WriteAttributeString(Serialization.Association, this.ObjectId.ToString());
@@ -979,7 +979,7 @@ namespace Allors.Adapters.Database.Memory
             }
         }
 
-        private void Backup(MetaRole roleType)
+        private void Backup(RoleType roleType)
         {
             if (roleType.IsMany)
             {
@@ -1017,7 +1017,7 @@ namespace Allors.Adapters.Database.Memory
             }
         }
 
-        private void Backup(MetaAssociation associationType)
+        private void Backup(AssociationType associationType)
         {
             if (associationType.IsMany)
             {
@@ -1055,7 +1055,7 @@ namespace Allors.Adapters.Database.Memory
             }
         }
 
-        private void RemoveCompositeRoleOne2One(MetaRole roleType)
+        private void RemoveCompositeRoleOne2One(RoleType roleType)
         {
             this.CheckRemoved();
             this.session.MemoryDatabase.CompositeRoleChecks(this, roleType);
@@ -1077,7 +1077,7 @@ namespace Allors.Adapters.Database.Memory
             this.compositeRoleByRoleType.Remove(roleType);
         }
 
-        private void RemoveCompositeRoleMany2One(MetaRole roleType)
+        private void RemoveCompositeRoleMany2One(RoleType roleType)
         {
             this.CheckRemoved();
             this.session.MemoryDatabase.CompositeRoleChecks(this, roleType);
@@ -1108,7 +1108,7 @@ namespace Allors.Adapters.Database.Memory
             this.compositeRoleByRoleType.Remove(roleType);
         }
 
-        private void AddCompositeRoleMany2Many(MetaRole roleType, Strategy newRoleStrategy)
+        private void AddCompositeRoleMany2Many(RoleType roleType, Strategy newRoleStrategy)
         {
             HashSet<Strategy> previousRoleStrategies;
             this.compositesRoleByRoleType.TryGetValue(roleType, out previousRoleStrategies);
@@ -1144,7 +1144,7 @@ namespace Allors.Adapters.Database.Memory
             newRoleStrategiesAssociationStrategies.Add(this);
         }
 
-        private void AddCompositeRoleOne2Many(MetaRole roleType, Strategy newRoleStrategy)
+        private void AddCompositeRoleOne2Many(RoleType roleType, Strategy newRoleStrategy)
         {
             HashSet<Strategy> previousRoleStrategies;
             this.compositesRoleByRoleType.TryGetValue(roleType, out previousRoleStrategies);
@@ -1194,7 +1194,7 @@ namespace Allors.Adapters.Database.Memory
             newRoleStrategy.compositeAssociationByAssociationType[roleType.AssociationType] = this;
         }
 
-        private void RemoveCompositeRoleMany2Many(MetaRole roleType, Strategy roleStrategy)
+        private void RemoveCompositeRoleMany2Many(RoleType roleType, Strategy roleStrategy)
         {
             HashSet<Strategy> roleStrategies;
             this.compositesRoleByRoleType.TryGetValue(roleType, out roleStrategies);
@@ -1224,7 +1224,7 @@ namespace Allors.Adapters.Database.Memory
             }
         }
 
-        private void RemoveCompositeRoleOne2Many(MetaRole roleType, Strategy roleStrategy)
+        private void RemoveCompositeRoleOne2Many(RoleType roleType, Strategy roleStrategy)
         {
             HashSet<Strategy> roleStrategies;
             this.compositesRoleByRoleType.TryGetValue(roleType, out roleStrategies);
@@ -1249,7 +1249,7 @@ namespace Allors.Adapters.Database.Memory
             roleStrategy.compositeAssociationByAssociationType.Remove(roleType.AssociationType);
         }
 
-        private void RemoveCompositeRolesMany2Many(MetaRole roleType)
+        private void RemoveCompositeRolesMany2Many(RoleType roleType)
         {
             HashSet<Strategy> previousRoleStrategies;
             this.compositesRoleByRoleType.TryGetValue(roleType, out previousRoleStrategies);
@@ -1264,7 +1264,7 @@ namespace Allors.Adapters.Database.Memory
             }
         }
 
-        private void RemoveCompositeRolesOne2Many(MetaRole roleType)
+        private void RemoveCompositeRolesOne2Many(RoleType roleType)
         {
             // TODO: Optimize
             HashSet<Strategy> previousRoleStrategies;

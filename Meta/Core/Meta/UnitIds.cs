@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="MetaUnitIds.cs" company="Allors bvba">
+// <copyright file="UnitIds.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -27,7 +27,7 @@ namespace Allors.Meta
     /// The ids for unit ObjectTypes.
     /// Ids can be used for long term persistence and should therefore never be changed.
     /// </summary>
-    public static class MetaUnitIds
+    public static class UnitIds
     {
         /// <summary>
         /// The id of the binary type.

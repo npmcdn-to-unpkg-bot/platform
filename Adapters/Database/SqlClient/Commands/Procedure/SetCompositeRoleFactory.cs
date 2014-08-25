@@ -36,12 +36,12 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
     public class SetCompositeRoleFactory : ISetCompositeRoleFactory
     {
         public readonly Database Database;
-        private readonly Dictionary<MetaRole, string> sqlByRoleType;
+        private readonly Dictionary<RoleType, string> sqlByRoleType;
 
         public SetCompositeRoleFactory(Database database)
         {
             this.Database = database;
-            this.sqlByRoleType = new Dictionary<MetaRole, string>();
+            this.sqlByRoleType = new Dictionary<RoleType, string>();
         }
 
         public ISetCompositeRole Create(Sql.DatabaseSession session)
@@ -49,7 +49,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
             return new SetCompositeRole(this, session);
         }
 
-        public string GetSql(MetaRole roleType)
+        public string GetSql(RoleType roleType)
         {
             if (!this.sqlByRoleType.ContainsKey(roleType))
             {
@@ -74,16 +74,16 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
         private class SetCompositeRole : DatabaseCommand, ISetCompositeRole
         {
             private readonly SetCompositeRoleFactory factory;
-            private readonly Dictionary<MetaRole, SqlCommand> commandByRoleType;
+            private readonly Dictionary<RoleType, SqlCommand> commandByRoleType;
 
             public SetCompositeRole(SetCompositeRoleFactory factory, Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
-                this.commandByRoleType = new Dictionary<MetaRole, SqlCommand>();
+                this.commandByRoleType = new Dictionary<RoleType, SqlCommand>();
             }
 
-            public void Execute(IList<CompositeRelation> relations, MetaRole roleType)
+            public void Execute(IList<CompositeRelation> relations, RoleType roleType)
             {
                 var schema = this.factory.Database.SqlClientSchema;
 

@@ -27,7 +27,7 @@ namespace Allors.Adapters.Database.Caching
     /// </summary>
     public sealed class CacheFactory : ICacheFactory
     {
-        public MetaObject[] TransientObjectTypes { get; set; } 
+        public ObjectType[] TransientObjectTypes { get; set; } 
 
         public ICache CreateCache(IDatabase database)
         {

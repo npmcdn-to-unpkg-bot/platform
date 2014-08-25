@@ -81,6 +81,6 @@ namespace Allors
         /// <returns>
         /// The local extent.
         /// </returns>
-        Extent LocalExtent(MetaObject objectType);
+        Extent LocalExtent(ObjectType objectType);
     }
 }

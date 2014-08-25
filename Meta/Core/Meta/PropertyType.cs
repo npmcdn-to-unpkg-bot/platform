@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="MetaOperand.cs" company="Allors bvba">
+// <copyright file="MetaProperty.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -20,11 +20,19 @@
 
 namespace Allors.Meta
 {
-    public partial class MetaOperand
+    public partial class PropertyType
     {
         /// <summary>
-        /// Gets the display name.
+        /// Gets the operand name.
         /// </summary>
-        public abstract string DisplayName { get; }
-   }
+        public abstract string Name { get; }
+
+        /// <summary>
+        /// Get the object type.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="ObjectType"/>.
+        /// </returns>
+        public abstract ObjectType GetObjectType();
+    }
 }

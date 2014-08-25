@@ -24,10 +24,10 @@ namespace Allors.Adapters.Workspace.Memory
 
     public class Conflict : IConflict
     {
-        private readonly MetaRole roleType;
+        private readonly RoleType roleType;
         private readonly Strategy strategy;
 
-        internal Conflict(Strategy strategy, MetaRole roleType)
+        internal Conflict(Strategy strategy, RoleType roleType)
         {
             this.strategy = strategy;
             this.roleType = roleType;
@@ -48,7 +48,7 @@ namespace Allors.Adapters.Workspace.Memory
             get { return this.Strategy.ObjectId; }
         }
 
-        public MetaRole RoleType
+        public RoleType RoleType
         {
             get { return this.roleType; }
         }

@@ -5,13 +5,13 @@ namespace Allors.Meta
 {
     using Allors.Meta.AllorsGenerated;
 
-    public  partial class MetaRole : global::Allors.Meta.AllorsGenerated.AllorsClassRoleType, global::Allors.Meta.AllorsGenerated.AllorsInterfaceRoleType
+    public  partial class RoleType : global::Allors.Meta.AllorsGenerated.AllorsClassRoleType, global::Allors.Meta.AllorsGenerated.AllorsInterfaceRoleType
 	{		
-		public MetaRole(AllorsEmbeddedSession session, System.Int32 id) : base(session, id) {}
+		public RoleType(AllorsEmbeddedSession session, System.Int32 id) : base(session, id) {}
 
-		public new static MetaRole Instantiate (global::Allors.Meta.AllorsGenerated.AllorsEmbeddedSession session, System.Int32 id)
+		public new static RoleType Instantiate (global::Allors.Meta.AllorsGenerated.AllorsEmbeddedSession session, System.Int32 id)
 		{
-			return (MetaRole) session.Instantiate(id);		
+			return (RoleType) session.Instantiate(id);		
 		}
 	}
 }

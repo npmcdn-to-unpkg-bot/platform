@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="MetaAssociation.cs" company="Allors bvba">
+// <copyright file="AssociationType.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -26,14 +26,14 @@ namespace Allors.Meta
     using AllorsGenerated;
 
     /// <summary>
-    /// An <see cref="MetaAssociation"/> defines the association side of a relation.
+    /// An <see cref="AssociationType"/> defines the association side of a relation.
     /// This is also called the 'active', 'controlling' or 'owning' side.
     /// AssociationTypes can only have composite <see cref="ObjectType"/>s.
     /// </summary>
-    public sealed partial class MetaAssociation : IComparable
+    public sealed partial class AssociationType : IComparable
     {
         /// <summary>
-        /// Used to form names to navigate from <see cref="RoleType"/> To <see cref="MetaAssociation"/>;
+        /// Used to form names to navigate from <see cref="RoleType"/> To <see cref="AssociationType"/>;
         /// </summary>
         private const string Where = "Where";
 
@@ -97,7 +97,7 @@ namespace Allors.Meta
         /// Gets the relation type.
         /// </summary>
         /// <value>The type of the relation.</value>
-        public MetaRelation RelationType
+        public RelationType RelationType
         {
             get { return RelationTypeWhereAssociationType; }
         }
@@ -106,7 +106,7 @@ namespace Allors.Meta
         /// Gets the role.
         /// </summary>
         /// <value>The role .</value>
-        public MetaRole RoleType
+        public RoleType RoleType
         {
             get { return RelationTypeWhereAssociationType.RoleType; }
         }
@@ -139,7 +139,7 @@ namespace Allors.Meta
         /// <paramref name="obj"/> is not the same type as this instance. </exception>
         public int CompareTo(object obj)
         {
-            var that = obj as MetaAssociation;
+            var that = obj as AssociationType;
             if (that != null)
             {
                 return string.CompareOrdinal(this.SingularName, that.SingularName);
@@ -154,7 +154,7 @@ namespace Allors.Meta
         /// <returns>
         /// The <see cref="ObjectType"/>.
         /// </returns>
-        public override MetaObject GetObjectType()
+        public override ObjectType GetObjectType()
         {
             return this.ObjectType;
         }
@@ -182,9 +182,9 @@ namespace Allors.Meta
         /// </summary>
         /// <param name="session">The session.</param>
         /// <returns>A new instance</returns>
-        internal static MetaAssociation Create(AllorsEmbeddedSession session)
+        internal static AssociationType Create(AllorsEmbeddedSession session)
         {
-            var association = (MetaAssociation)session.Create(AllorsEmbeddedDomain.AssociationType);
+            var association = (AssociationType)session.Create(AllorsEmbeddedDomain.AssociationType);
 
             association.IsMany = false;
 

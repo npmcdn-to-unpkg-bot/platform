@@ -50,7 +50,7 @@ namespace Allors
         /// <param name="firstValue">The first object.</param>
         /// <param name="secondValue">The second object.</param>
         /// <returns>the composing CompositePredicate</returns>
-        ICompositePredicate AddBetween(MetaRole role, object firstValue, object secondValue);
+        ICompositePredicate AddBetween(RoleType role, object firstValue, object secondValue);
 
         /// <summary>
         /// Adds a Predicate that evaluates to true if any object of the role of the object under evaluation is contained in the containingExtent.
@@ -58,7 +58,7 @@ namespace Allors
         /// <param name="role">The role .</param>
         /// <param name="containingExtent">The extent.</param>
         /// <returns>this CompositePredicate</returns>
-        ICompositePredicate AddContainedIn(MetaRole role, Extent containingExtent);
+        ICompositePredicate AddContainedIn(RoleType role, Extent containingExtent);
 
         /// <summary>
         /// Adds a Predicate that evaluates to true if any object of the role of the object under evaluation is contained in the containingExtent.
@@ -66,7 +66,7 @@ namespace Allors
         /// <param name="role">The role .</param>
         /// <param name="containingEnumerable">The enumerable.</param>
         /// <returns>This CompositePredicate. </returns>
-        ICompositePredicate AddContainedIn(MetaRole role, IEnumerable<IObject> containingEnumerable);
+        ICompositePredicate AddContainedIn(RoleType role, IEnumerable<IObject> containingEnumerable);
 
         /// <summary>
         /// Adds a Predicate that evaluates to true if any object of the association of the object under evaluation is contained in the containingExtent.
@@ -74,7 +74,7 @@ namespace Allors
         /// <param name="association">The association.</param>
         /// <param name="containingExtent">The extent.</param>
         /// <returns>the composing CompositePredicate</returns>
-        ICompositePredicate AddContainedIn(MetaAssociation association, Extent containingExtent);
+        ICompositePredicate AddContainedIn(AssociationType association, Extent containingExtent);
 
         /// <summary>
         /// Adds a Predicate that evaluates to true if any object of the role of the object under evaluation is contained in the containingExtent.
@@ -82,7 +82,7 @@ namespace Allors
         /// <param name="association">The association.</param>
         /// <param name="containingEnumerable">The enumerable.</param>
         /// <returns>This CompositePredicate. </returns>
-        ICompositePredicate AddContainedIn(MetaAssociation association, IEnumerable<IObject> containingEnumerable);
+        ICompositePredicate AddContainedIn(AssociationType association, IEnumerable<IObject> containingEnumerable);
 
         /// <summary>
         /// Adds a Predicate that evaluates to true if the role of the object under evaluation contains the allorsObject.
@@ -90,7 +90,7 @@ namespace Allors
         /// <param name="role">The role .</param>
         /// <param name="containedObject">The allors object.</param>
         /// <returns>the composing CompositePredicate</returns>
-        ICompositePredicate AddContains(MetaRole role, IObject containedObject);
+        ICompositePredicate AddContains(RoleType role, IObject containedObject);
 
         /// <summary>
         /// Adds a Predicate that evaluates to true if the association of the object under evaluation contains the allorsObject.
@@ -98,7 +98,7 @@ namespace Allors
         /// <param name="association">The association.</param>
         /// <param name="containedObject">The allors object.</param>
         /// <returns>the composing CompositePredicate</returns>
-        ICompositePredicate AddContains(MetaAssociation association, IObject containedObject);
+        ICompositePredicate AddContains(AssociationType association, IObject containedObject);
 
         /// <summary>
         /// Adds a Predicate that evaluates to true if the object under evaluation equals the allorsObject.
@@ -113,7 +113,7 @@ namespace Allors
         /// <param name="role">The role .</param>
         /// <param name="valueOrAllorsObject">The object.</param>
         /// <returns>the composing CompositePredicate</returns>
-        ICompositePredicate AddEquals(MetaRole role, object valueOrAllorsObject);
+        ICompositePredicate AddEquals(RoleType role, object valueOrAllorsObject);
 
         /// <summary>
         /// Adds a Predicate that evaluates to true if the association of the object under evaluation equals the allorsObject.
@@ -121,21 +121,21 @@ namespace Allors
         /// <param name="association">The association.</param>
         /// <param name="allorsObject">The allors object.</param>
         /// <returns>the composing CompositePredicate</returns>
-        ICompositePredicate AddEquals(MetaAssociation association, IObject allorsObject);
+        ICompositePredicate AddEquals(AssociationType association, IObject allorsObject);
 
         /// <summary>
         /// Adds a Predicate that evaluates to true if the role of the object under evaluation exists.
         /// </summary>
         /// <param name="role">The role .</param>
         /// <returns>the composing CompositePredicate</returns>
-        ICompositePredicate AddExists(MetaRole role);
+        ICompositePredicate AddExists(RoleType role);
 
         /// <summary>
         /// Adds a Predicate that evaluates to true if the association of the object under evaluation exists.
         /// </summary>
         /// <param name="assocation">The assocation.</param>
         /// <returns>the composing CompositePredicate</returns>
-        ICompositePredicate AddExists(MetaAssociation assocation);
+        ICompositePredicate AddExists(AssociationType assocation);
 
         /// <summary>
         /// Adds a Predicate that evaluates to true if the role of the object under evaluation is greater than the object.
@@ -143,14 +143,14 @@ namespace Allors
         /// <param name="role">The role .</param>
         /// <param name="value">The object.</param>
         /// <returns>the composing CompositePredicate</returns>
-        ICompositePredicate AddGreaterThan(MetaRole role, object value);
+        ICompositePredicate AddGreaterThan(RoleType role, object value);
 
         /// <summary>
         /// Adds a Predicate that evaluates to true if the object under evaluation is an instance of the ObjectType.
         /// </summary>
         /// <param name="objectType">the ObjectType.</param>
         /// <returns>the composing CompositePredicate</returns>
-        ICompositePredicate AddInstanceof(MetaObject objectType);
+        ICompositePredicate AddInstanceof(ObjectType objectType);
 
         /// <summary>
         /// Adds a Predicate that evaluates to true if the role of the object under evaluation is an instance of the ObjectType.
@@ -158,7 +158,7 @@ namespace Allors
         /// <param name="role">the RoleType .</param>
         /// <param name="objectType">the ObjectType.</param>
         /// <returns>the composing CompositePredicate</returns>
-        ICompositePredicate AddInstanceof(MetaRole role, MetaObject objectType);
+        ICompositePredicate AddInstanceof(RoleType role, ObjectType objectType);
 
         /// <summary>
         /// Adds a Predicate that evaluates to true if the association of the object under evaluation is an instance of the ObjectType.
@@ -166,7 +166,7 @@ namespace Allors
         /// <param name="association">the AssociationType.</param>
         /// <param name="objectType">the ObjectType.</param>
         /// <returns>the composing CompositePredicate</returns>
-        ICompositePredicate AddInstanceof(MetaAssociation association, MetaObject objectType);
+        ICompositePredicate AddInstanceof(AssociationType association, ObjectType objectType);
 
         /// <summary>
         /// Adds a Predicate that evaluates to true if the role of the object under evaluation is less than the object.
@@ -174,7 +174,7 @@ namespace Allors
         /// <param name="role">The role .</param>
         /// <param name="value">The object.</param>
         /// <returns>the composing CompositePredicate</returns>
-        ICompositePredicate AddLessThan(MetaRole role, object value);
+        ICompositePredicate AddLessThan(RoleType role, object value);
 
         /// <summary>
         /// Adds a Predicate that evaluates to true if the role of the object under evaluation is like the string (Sql like).
@@ -182,7 +182,7 @@ namespace Allors
         /// <param name="role">The role .</param>
         /// <param name="value">The string.</param>
         /// <returns>the composing CompositePredicate</returns>
-        ICompositePredicate AddLike(MetaRole role, string value);
+        ICompositePredicate AddLike(RoleType role, string value);
 
         /// <summary>
         /// Adds a CompositePredicate that evaluates to true if its composed predicate evaluates to false.

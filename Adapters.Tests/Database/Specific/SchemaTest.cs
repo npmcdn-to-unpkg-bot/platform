@@ -32,7 +32,7 @@ namespace Allors.Adapters.Special
 
     public abstract class SchemaTest
     {
-        private MetaDomain domain;
+        private Domain domain;
 
         protected virtual bool DetectBinarySizedDifferences
         {
@@ -71,7 +71,7 @@ namespace Allors.Adapters.Special
             this.DropTable("C1");
             this.DropTable("C2");
 
-            this.domain = MetaDomain.Create();
+            this.domain = Domain.Create();
             this.domain.Name = "MyDomain";
 
             this.CreateClass("C1");
@@ -91,7 +91,7 @@ namespace Allors.Adapters.Special
         [ExpectedException("System.Exception")]
         public void InitInvalidDomain()
         {
-            this.domain = MetaDomain.Create();
+            this.domain = Domain.Create();
 
             this.domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
 
@@ -114,7 +114,7 @@ namespace Allors.Adapters.Special
         {
             if (this.DetectBinarySizedDifferences)
             {
-                this.domain = MetaDomain.Create();
+                this.domain = Domain.Create();
                 this.domain.Name = "MyDomain";
 
                 var c1 = this.CreateClass("C1");
@@ -122,7 +122,7 @@ namespace Allors.Adapters.Special
 
                 var c1RelationType = this.domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
                 c1RelationType.AssociationType.ObjectType = c1;
-                c1RelationType.RoleType.ObjectType = (MetaObject)this.domain.Find(MetaUnitIds.BinaryId);
+                c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Find(UnitIds.BinaryId);
                 c1RelationType.RoleType.Size = 200;
 
                 this.CreateDatabase(this.domain, true);
@@ -152,7 +152,7 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateDecimalRelationDifferentPrecision()
         {
-            this.domain = MetaDomain.Create();
+            this.domain = Domain.Create();
             this.domain.Name = "MyDomain";
 
             var c1 = this.CreateClass("C1");
@@ -160,7 +160,7 @@ namespace Allors.Adapters.Special
 
             var c1RelationType = this.domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             c1RelationType.AssociationType.ObjectType = c1;
-            c1RelationType.RoleType.ObjectType = (MetaObject)this.domain.Find(MetaUnitIds.DecimalId);
+            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Find(UnitIds.DecimalId);
             c1RelationType.RoleType.Precision = 10;
             c1RelationType.RoleType.Scale = 2;
 
@@ -190,7 +190,7 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateDecimalRelationDifferentScale()
         {
-            this.domain = MetaDomain.Create();
+            this.domain = Domain.Create();
             this.domain.Name = "MyDomain";
 
             var c1 = this.CreateClass("C1");
@@ -198,7 +198,7 @@ namespace Allors.Adapters.Special
 
             var c1RelationType = this.domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             c1RelationType.AssociationType.ObjectType = c1;
-            c1RelationType.RoleType.ObjectType = (MetaObject)this.domain.Find(MetaUnitIds.DecimalId);
+            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Find(UnitIds.DecimalId);
             c1RelationType.RoleType.Precision = 10;
             c1RelationType.RoleType.Scale = 2;
 
@@ -231,7 +231,7 @@ namespace Allors.Adapters.Special
             this.DropTable("C1");
             this.DropTable("C2");
 
-            this.domain = MetaDomain.Create();
+            this.domain = Domain.Create();
             this.domain.Name = "MyDomain";
 
             this.CreateClass("C1");
@@ -257,7 +257,7 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateNewInterfaceInheritanceWithBooleanRelation()
         {
-            this.domain = MetaDomain.Create();
+            this.domain = Domain.Create();
             this.domain.Name = "MyDomain";
 
             var c1 = this.CreateClass("C1");
@@ -267,7 +267,7 @@ namespace Allors.Adapters.Special
 
             var i12AllorsString = this.domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             i12AllorsString.AssociationType.ObjectType = i12;
-            i12AllorsString.RoleType.ObjectType = (MetaObject)this.domain.Find(MetaUnitIds.BooleanId);
+            i12AllorsString.RoleType.ObjectType = (ObjectType)this.domain.Find(UnitIds.BooleanId);
 
             c1.AddDirectSupertype(i12);
 
@@ -293,7 +293,7 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateNewMany2ManyRelation()
         {
-            this.domain = MetaDomain.Create();
+            this.domain = Domain.Create();
             this.domain.Name = "MyDomain";
 
             var c1 = this.CreateClass("C1");
@@ -329,7 +329,7 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateNewMany2OneRelation()
         {
-            this.domain = MetaDomain.Create();
+            this.domain = Domain.Create();
             this.domain.Name = "MyDomain";
 
             var c1 = this.CreateClass("C1");
@@ -362,7 +362,7 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateNewOne2ManyRelation()
         {
-            this.domain = MetaDomain.Create();
+            this.domain = Domain.Create();
             this.domain.Name = "MyDomain";
 
             var c1 = this.CreateClass("C1");
@@ -396,7 +396,7 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateNewOne2OneRelation()
         {
-            this.domain = MetaDomain.Create();
+            this.domain = Domain.Create();
             this.domain.Name = "MyDomain";
 
             var c1 = this.CreateClass("C1");
@@ -429,7 +429,7 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateStringRelationDifferentSize()
         {
-            this.domain = MetaDomain.Create();
+            this.domain = Domain.Create();
             this.domain.Name = "MyDomain";
 
             var c1 = this.CreateClass("C1");
@@ -437,7 +437,7 @@ namespace Allors.Adapters.Special
 
             var c1RelationType = this.domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             c1RelationType.AssociationType.ObjectType = c1;
-            c1RelationType.RoleType.ObjectType = (MetaObject)this.domain.Find(MetaUnitIds.StringId);
+            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Find(UnitIds.StringId);
             c1RelationType.RoleType.Size = 100;
 
             this.CreateDatabase(this.domain, true);
@@ -466,7 +466,7 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateStringToOne2One()
         {
-            this.domain = MetaDomain.Create();
+            this.domain = Domain.Create();
             this.domain.Name = "MyDomain";
 
             var c1 = this.CreateClass("C1");
@@ -474,7 +474,7 @@ namespace Allors.Adapters.Special
 
             var c1RelationType = this.domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             c1RelationType.AssociationType.ObjectType = c1;
-            c1RelationType.RoleType.ObjectType = (MetaObject)this.domain.Find(MetaUnitIds.StringId);
+            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Find(UnitIds.StringId);
             c1RelationType.RoleType.Size = 100;
             c1RelationType.RoleType.AssignedSingularName = "RelationType";
             c1RelationType.RoleType.AssignedPluralName = "RelationTypes";
@@ -506,7 +506,7 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateUnitRelationDifferentType()
         {
-            this.domain = MetaDomain.Create();
+            this.domain = Domain.Create();
             this.domain.Name = "MyDomain";
 
             var c1 = this.CreateClass("C1");
@@ -514,13 +514,13 @@ namespace Allors.Adapters.Special
 
             var c1RelationType = this.domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             c1RelationType.AssociationType.ObjectType = c1;
-            c1RelationType.RoleType.ObjectType = (MetaObject)this.domain.Find(MetaUnitIds.BooleanId);
+            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Find(UnitIds.BooleanId);
             c1RelationType.RoleType.AssignedSingularName = "RelationType";
             c1RelationType.RoleType.AssignedPluralName = "RelationTypes";
 
             this.CreateDatabase(this.domain, true);
 
-            c1RelationType.RoleType.ObjectType = (MetaObject)this.domain.Find(MetaUnitIds.Unique);
+            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Find(UnitIds.Unique);
 
             var database = this.CreateDatabase(this.domain, false);
 
@@ -561,7 +561,7 @@ namespace Allors.Adapters.Special
             this.DropTable("C1");
             this.DropTable("C2");
 
-            this.domain = MetaDomain.Create();
+            this.domain = Domain.Create();
             this.domain.Name = "MyDomain";
 
             var c1 = this.CreateClass("C1");
@@ -595,33 +595,33 @@ namespace Allors.Adapters.Special
             }
         }
 
-        protected MetaObject CreateAbstractClass(string name)
+        protected ObjectType CreateAbstractClass(string name)
         {
             var type = this.CreateType(name);
             return type;
         }
 
-        protected MetaObject CreateClass(string name)
+        protected ObjectType CreateClass(string name)
         {
             var type = this.CreateType(name);
             return type;
         }
 
-        protected MetaObject CreateInterface(string name)
+        protected ObjectType CreateInterface(string name)
         {
             var type = this.CreateType(name);
             type.IsInterface = true;
             return type;
         }
 
-        protected abstract IDatabase CreateDatabase(MetaDomain domain, bool init);
+        protected abstract IDatabase CreateDatabase(Domain domain, bool init);
 
         protected IDatabase CreateDatabase()
         {
             return this.Profile.CreateDatabase();
         }
 
-        protected MetaObject CreateType(string name)
+        protected ObjectType CreateType(string name)
         {
             var type = this.domain.AddDeclaredObjectType(Guid.NewGuid());
             type.SingularName = name;

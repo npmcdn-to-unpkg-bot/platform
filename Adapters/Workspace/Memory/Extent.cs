@@ -153,12 +153,12 @@ namespace Allors.Adapters.Workspace.Memory
             return (IObject[])Array.CreateInstance(type, 0);
         }
 
-        public override Allors.Extent AddSort(MetaRole roleType)
+        public override Allors.Extent AddSort(RoleType roleType)
         {
             return this.AddSort(roleType, SortDirection.Ascending);
         }
 
-        public override Allors.Extent AddSort(MetaRole roleType, SortDirection direction)
+        public override Allors.Extent AddSort(RoleType roleType, SortDirection direction)
         {
             if (this.sorter == null)
             {
@@ -178,7 +178,7 @@ namespace Allors.Adapters.Workspace.Memory
             this.strategies = null;
         }
 
-        internal virtual void CheckForAssociationType(MetaAssociation association)
+        internal virtual void CheckForAssociationType(AssociationType association)
         {
             // TODO: Optimize
             if (Array.IndexOf(this.ObjectType.AssociationTypes, association) < 0)
@@ -187,7 +187,7 @@ namespace Allors.Adapters.Workspace.Memory
             }
         }
 
-        internal virtual void CheckForRoleType(MetaRole role)
+        internal virtual void CheckForRoleType(RoleType role)
         {
             // TODO: Optimize
             if (Array.IndexOf(this.ObjectType.RoleTypes, role) < 0)

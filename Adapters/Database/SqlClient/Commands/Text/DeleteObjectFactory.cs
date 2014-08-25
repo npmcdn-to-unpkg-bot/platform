@@ -33,12 +33,12 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
     public class DeleteObjectFactory : IDeleteObjectFactory
     {
         public readonly Database Database;
-        private readonly Dictionary<MetaObject, string> sqlByMetaType;
+        private readonly Dictionary<ObjectType, string> sqlByMetaType;
 
         public DeleteObjectFactory(Database database)
         {
             this.Database = database;
-            this.sqlByMetaType = new Dictionary<MetaObject, string>();
+            this.sqlByMetaType = new Dictionary<ObjectType, string>();
         }
 
         public IDeleteObject Create(Sql.DatabaseSession session)
@@ -46,7 +46,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
             return new DeleteObject(this, session);
         }
 
-        public string GetSql(MetaObject objectType)
+        public string GetSql(ObjectType objectType)
         {
             if (!this.sqlByMetaType.ContainsKey(objectType))
             {
@@ -73,13 +73,13 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
         private class DeleteObject : DatabaseCommand, IDeleteObject
         {
             private readonly DeleteObjectFactory factory;
-            private readonly Dictionary<MetaObject, SqlCommand> commandByObjectType;
+            private readonly Dictionary<ObjectType, SqlCommand> commandByObjectType;
 
             public DeleteObject(DeleteObjectFactory factory, Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
-                this.commandByObjectType = new Dictionary<MetaObject, SqlCommand>();
+                this.commandByObjectType = new Dictionary<ObjectType, SqlCommand>();
             }
 
             public void Execute(Strategy strategy)

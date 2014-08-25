@@ -26,10 +26,10 @@ namespace Allors.Adapters.Workspace.Memory
 
     internal sealed class RoleContains : Predicate
     {
-        private readonly MetaRole roleType;
+        private readonly RoleType roleType;
         private readonly IObject containedObject;
 
-        internal RoleContains(Extent extent, MetaRole roleType, IObject containedObject)
+        internal RoleContains(Extent extent, RoleType roleType, IObject containedObject)
         {
             extent.CheckForRoleType(roleType);
             CompositePredicateAssertions.ValidateRoleContains(roleType, containedObject);

@@ -28,9 +28,9 @@ namespace Allors.Adapters.Database.Sql
     public sealed class RoleContainedInEnumerable : In
     {
         private readonly IEnumerable<IObject> enumerable;
-        private readonly MetaRole role;
+        private readonly RoleType role;
 
-        public RoleContainedInEnumerable(ExtentFiltered extent, MetaRole role, IEnumerable<IObject> enumerable)
+        public RoleContainedInEnumerable(ExtentFiltered extent, RoleType role, IEnumerable<IObject> enumerable)
         {
             extent.CheckRole(role);
             CompositePredicateAssertions.ValidateRoleContainedIn(role, this.enumerable);

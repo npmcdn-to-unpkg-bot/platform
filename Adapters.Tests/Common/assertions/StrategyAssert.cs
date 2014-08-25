@@ -30,7 +30,7 @@ namespace Allors.Adapters.Special.Assertions
 
     public class StrategyAssert
     {
-        public static void AssociationExistHasException(IObject allorsObject, MetaAssociation associationType)
+        public static void AssociationExistHasException(IObject allorsObject, AssociationType associationType)
         {
             bool exceptionOccured = false;
             try
@@ -48,7 +48,7 @@ namespace Allors.Adapters.Special.Assertions
             }
         }
 
-        public static void AssociationGetHasException(IObject allorsObject, MetaAssociation associationType)
+        public static void AssociationGetHasException(IObject allorsObject, AssociationType associationType)
         {
             bool exceptionOccured = false;
             try
@@ -66,9 +66,9 @@ namespace Allors.Adapters.Special.Assertions
             }
         }
 
-        public static void AssociationsExistExclusive(IObject allorsObject, params MetaAssociation[] associationTypes)
+        public static void AssociationsExistExclusive(IObject allorsObject, params AssociationType[] associationTypes)
         {
-            foreach (MetaAssociation associationType in associationTypes)
+            foreach (AssociationType associationType in associationTypes)
             {
                 if (Array.IndexOf(allorsObject.Strategy.ObjectType.AssociationTypes, associationType) < 0)
                 {
@@ -76,7 +76,7 @@ namespace Allors.Adapters.Special.Assertions
                 }
             }
 
-            foreach (MetaAssociation associationType in allorsObject.Strategy.ObjectType.AssociationTypes)
+            foreach (AssociationType associationType in allorsObject.Strategy.ObjectType.AssociationTypes)
             {
                 if (Array.IndexOf(associationTypes, associationType) >= 0)
                 {
@@ -98,7 +98,7 @@ namespace Allors.Adapters.Special.Assertions
             }
         }
 
-        public static void RoleExistHasException(IObject allorsObject, MetaRole roleType)
+        public static void RoleExistHasException(IObject allorsObject, RoleType roleType)
         {
             bool exceptionOccured = false;
             try
@@ -116,7 +116,7 @@ namespace Allors.Adapters.Special.Assertions
             }
         }
 
-        public static void RoleGetHasException(IObject allorsObject, MetaRole roleType)
+        public static void RoleGetHasException(IObject allorsObject, RoleType roleType)
         {
             bool exceptionOccured = false;
             try
@@ -134,9 +134,9 @@ namespace Allors.Adapters.Special.Assertions
             }
         }
 
-        public static void RolesExistExclusive(IObject allorsObject, params MetaRole[] roleTypes)
+        public static void RolesExistExclusive(IObject allorsObject, params RoleType[] roleTypes)
         {
-            foreach (MetaRole roleType in roleTypes)
+            foreach (RoleType roleType in roleTypes)
             {
                 if (Array.IndexOf(allorsObject.Strategy.ObjectType.RoleTypes, roleType) < 0)
                 {
@@ -144,7 +144,7 @@ namespace Allors.Adapters.Special.Assertions
                 }
             }
 
-            foreach (MetaRole roleType in allorsObject.Strategy.ObjectType.RoleTypes)
+            foreach (RoleType roleType in allorsObject.Strategy.ObjectType.RoleTypes)
             {
                 if (Array.IndexOf(roleTypes, roleType) >= 0)
                 {

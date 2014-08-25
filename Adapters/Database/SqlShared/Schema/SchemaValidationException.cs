@@ -25,7 +25,7 @@ namespace Allors.Adapters.Database.Sql
     using Allors.Meta;
 
     /// <summary>
-    /// Thrown when the <see cref="IDatabase"/> encounters a Sql schema that is incompatible with the <see cref="MetaDomain"/>.
+    /// Thrown when the <see cref="IDatabase"/> encounters a Sql schema that is incompatible with the <see cref="Domain"/>.
     /// </summary>
     public class SchemaValidationException : Exception
     {

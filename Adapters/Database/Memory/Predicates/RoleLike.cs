@@ -25,11 +25,11 @@ namespace Allors.Adapters.Database.Memory
 
     internal sealed class RoleLike : Predicate
     {
-        private readonly MetaRole roleType;
+        private readonly RoleType roleType;
         private readonly bool isEmpty;
         private readonly Regex regex;
 
-        internal RoleLike(ExtentFiltered extent, MetaRole roleType, string like)
+        internal RoleLike(ExtentFiltered extent, RoleType roleType, string like)
         {
             extent.CheckForRoleType(roleType);
             CompositePredicateAssertions.ValidateRoleLikeFilter(roleType, like);

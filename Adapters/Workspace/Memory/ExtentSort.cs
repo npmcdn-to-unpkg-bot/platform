@@ -27,10 +27,10 @@ namespace Allors.Adapters.Workspace.Memory
     public sealed class ExtentSort : IComparer<Strategy>
     {
         private readonly SortDirection direction;
-        private readonly MetaRole roleType;
+        private readonly RoleType roleType;
         private ExtentSort subSorter;
 
-        internal ExtentSort(MetaRole roleType, SortDirection direction)
+        internal ExtentSort(RoleType roleType, SortDirection direction)
         {
             this.roleType = roleType;
             this.direction = direction;
@@ -86,7 +86,7 @@ namespace Allors.Adapters.Workspace.Memory
             return thatResult;
         }
         
-        internal void AddSort(MetaRole subSortRoleType, SortDirection subSortDirection)
+        internal void AddSort(RoleType subSortRoleType, SortDirection subSortDirection)
         {
             if (this.subSorter == null)
             {

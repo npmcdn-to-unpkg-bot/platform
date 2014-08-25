@@ -92,12 +92,12 @@ namespace Allors.Adapters.Database.Memory
             set { this.strategies = value; }
         }
 
-        public override Allors.Extent AddSort(MetaRole roleType)
+        public override Allors.Extent AddSort(RoleType roleType)
         {
             return this.AddSort(roleType, SortDirection.Ascending);
         }
 
-        public override Allors.Extent AddSort(MetaRole roleType, SortDirection direction)
+        public override Allors.Extent AddSort(RoleType roleType, SortDirection direction)
         {
             if (this.sorter == null)
             {

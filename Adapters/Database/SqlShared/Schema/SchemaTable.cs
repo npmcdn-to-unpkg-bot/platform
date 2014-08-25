@@ -29,20 +29,20 @@ namespace Allors.Adapters.Database.Sql
     {
         public readonly SchemaTableKind Kind;
         public readonly string Name;
-        public readonly MetaRelation RelationType;
+        public readonly RelationType RelationType;
         public readonly Schema Schema;
-        public readonly MetaObject ObjectType;
+        public readonly ObjectType ObjectType;
         public readonly string StatementName;
 
         private readonly Dictionary<string, SchemaColumn> columnsByName;
 
-        public SchemaTable(Schema schema, string name, SchemaTableKind kind, MetaObject objectType) 
+        public SchemaTable(Schema schema, string name, SchemaTableKind kind, ObjectType objectType) 
             : this(schema, name, kind)
         {
             this.ObjectType = objectType;
         }
 
-        public SchemaTable(Schema schema, string name, SchemaTableKind kind, MetaRelation relationType)
+        public SchemaTable(Schema schema, string name, SchemaTableKind kind, RelationType relationType)
             : this(schema, name, kind)
         {
             this.RelationType = relationType;

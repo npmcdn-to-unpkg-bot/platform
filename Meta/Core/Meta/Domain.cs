@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="MetaDomain.cs" company="Allors bvba">
+// <copyright file="Domain.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -24,15 +24,13 @@ namespace Allors.Meta
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Text;
-    using System.Xml;
 
     using AllorsGenerated;
 
     /// <summary>
-    /// A Domain is a container for <see cref="MetaObject"/>s, <see cref="MetaRelation"/>s.
+    /// A Domain is a container for <see cref="ObjectType"/>s, <see cref="RelationType"/>s.
     /// </summary>
-    public sealed partial class MetaDomain : IComparable
+    public sealed partial class Domain : IComparable
     {
         /// <summary>
         /// The default plural form.
@@ -45,7 +43,7 @@ namespace Allors.Meta
         private const string MetaObjectByIdSessionKey = "BB103F95-7197-4082-8395-6D4DD2EC30AC";
 
         /// <summary>
-        /// The session key for the <see cref="MetaDomain"/>
+        /// The session key for the <see cref="Domain"/>
         /// </summary>
         private const string DomainSessionKey = "E0446FFC-014E-4DEC-B9FF-D8064C7DD3E7";
 
@@ -63,7 +61,7 @@ namespace Allors.Meta
         /// Gets the composite types.
         /// </summary>
         /// <value>The composite types.</value>
-        public MetaObject[] CompositeObjectTypes
+        public ObjectType[] CompositeObjectTypes
         {
             get
             {
@@ -75,11 +73,11 @@ namespace Allors.Meta
         /// Gets the concrete composite types.
         /// </summary>
         /// <value>The concrete composite types.</value>
-        public MetaObject[] ConcreteCompositeObjectTypes
+        public ObjectType[] ConcreteCompositeObjectTypes
         {
             get
             {
-                var concreteCompositeTypeList = new List<MetaObject>(this.CompositeObjectTypes.Length);
+                var concreteCompositeTypeList = new List<ObjectType>(this.CompositeObjectTypes.Length);
                 foreach (var compositeType in this.CompositeObjectTypes)
                 {
                     if (compositeType.IsConcrete)
@@ -96,7 +94,7 @@ namespace Allors.Meta
         /// Gets the inheritances.
         /// </summary>
         /// <value>The inheritances.</value>
-        public MetaInheritance[] Inheritances
+        public Inheritance[] Inheritances
         {
             get
             {
@@ -128,7 +126,7 @@ namespace Allors.Meta
         /// Gets or sets the object types that are Defined to this domain.
         /// </summary>
         /// <value>The Defined object types.</value>
-        public override MetaObject[] MetaObjects
+        public override ObjectType[] MetaObjects
         {
             get { return base.MetaObjects; }
             set { throw new ArgumentException("Use Domain.AddObjectType() and ObjectType.Delete()"); }
@@ -138,7 +136,7 @@ namespace Allors.Meta
         /// Gets the relation types.
         /// </summary>
         /// <value>The relation types.</value>
-        public MetaMethod[] MethodTypes
+        public MethodType[] MethodTypes
         {
             get
             {
@@ -150,7 +148,7 @@ namespace Allors.Meta
         /// Gets the relation types.
         /// </summary>
         /// <value>The relation types.</value>
-        public MetaRelation[] RelationTypes
+        public RelationType[] RelationTypes
         {
             get
             {
@@ -162,7 +160,7 @@ namespace Allors.Meta
         /// Gets the unit types.
         /// </summary>
         /// <value>The unit types.</value>
-        public MetaObject[] UnitObjectTypes
+        public ObjectType[] UnitObjectTypes
         {
             get
             {
@@ -209,7 +207,7 @@ namespace Allors.Meta
         /// Creates a new instance.
         /// </summary>
         /// <returns>The new domain.</returns>
-        public static MetaDomain Create()
+        public static Domain Create()
         {
             return Create(Guid.NewGuid());
         }
@@ -219,11 +217,11 @@ namespace Allors.Meta
         /// </summary>
         /// <param name="id">The domain id.</param>
         /// <returns>The new domain.</returns>
-        public static MetaDomain Create(Guid id)
+        public static Domain Create(Guid id)
         {
             var session = new AllorsEmbeddedSession();
 
-            var domain = (MetaDomain)session.Create(AllorsEmbeddedDomain.Domain);
+            var domain = (Domain)session.Create(AllorsEmbeddedDomain.Domain);
             CacheConcreteDomain(session, domain);
             domain.Id = id;
 
@@ -239,9 +237,9 @@ namespace Allors.Meta
         /// The Allors object.
         /// </param>
         /// <returns>
-        /// The <see cref="MetaDomain"/>.
+        /// The <see cref="Domain"/>.
         /// </returns>
-        public static MetaDomain GetDomain(AllorsEmbeddedObject allorsObject)
+        public static Domain GetDomain(AllorsEmbeddedObject allorsObject)
         {
             return GetDomain(allorsObject.AllorsSession);
         }
@@ -257,7 +255,7 @@ namespace Allors.Meta
         /// <paramref name="obj"/> is not the same type as this instance. </exception>
         public int CompareTo(object obj)
         {
-            var that = obj as MetaObject;
+            var that = obj as ObjectType;
             if (that != null)
             {
                 return string.CompareOrdinal(this.Name, that.Name);
@@ -284,16 +282,16 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Adds the <see cref="MetaInheritance"/> to this domain.
+        /// Adds the <see cref="Inheritance"/> to this domain.
         /// </summary>
         /// <param name="inheritanceId">The inheritance id.</param>
         /// <returns>The added inheritance.</returns>
-        public MetaInheritance AddDeclaredInheritance(Guid inheritanceId)
+        public Inheritance AddDeclaredInheritance(Guid inheritanceId)
         {
-            var inheritance = (MetaInheritance)this.MetaDomain.Find(inheritanceId);
+            var inheritance = (Inheritance)this.Domain.Find(inheritanceId);
             if (inheritance == null)
             {
-                inheritance = MetaInheritance.Create(AllorsSession);
+                inheritance = Inheritance.Create(AllorsSession);
                 inheritance.Id = inheritanceId;
             }
 
@@ -302,16 +300,16 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Adds the <see cref="MetaObject"/> to this domain.
+        /// Adds the <see cref="ObjectType"/> to this domain.
         /// </summary>
         /// <param name="objectTypeId">The object type id.</param>
         /// <returns>The object type.</returns>
-        public MetaObject AddDeclaredObjectType(Guid objectTypeId)
+        public ObjectType AddDeclaredObjectType(Guid objectTypeId)
         {
-            var objectType = (MetaObject)this.MetaDomain.Find(objectTypeId);
+            var objectType = (ObjectType)this.Domain.Find(objectTypeId);
             if (objectType == null)
             {
-                objectType = MetaObject.Create(AllorsSession);
+                objectType = ObjectType.Create(AllorsSession);
                 objectType.Id = objectTypeId;
             }
 
@@ -320,7 +318,7 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Adds the <see cref="MetaRelation"/> to this domain.
+        /// Adds the <see cref="RelationType"/> to this domain.
         /// </summary>
         /// <param name="relationTypeId">
         /// The relation type id.
@@ -334,12 +332,12 @@ namespace Allors.Meta
         /// <returns>
         /// The relation type.
         /// </returns>
-        public MetaRelation AddDeclaredRelationType(Guid relationTypeId, Guid associationTypeId, Guid roleTypeId)
+        public RelationType AddDeclaredRelationType(Guid relationTypeId, Guid associationTypeId, Guid roleTypeId)
         {
-            var relationType = (MetaRelation)this.MetaDomain.Find(relationTypeId);
+            var relationType = (RelationType)this.Domain.Find(relationTypeId);
             if (relationType == null)
             {
-                relationType = MetaRelation.Create(AllorsSession);
+                relationType = RelationType.Create(AllorsSession);
                 relationType.Id = relationTypeId;
                 relationType.AssociationType.Id = associationTypeId;
                 relationType.RoleType.Id = roleTypeId;
@@ -350,16 +348,16 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Adds the <see cref="MetaMethod"/> to this domain.
+        /// Adds the <see cref="MethodType"/> to this domain.
         /// </summary>
         /// <param name="methodTypeId">The method type id.</param>
         /// <returns>The method type.</returns>
-        public MetaMethod AddDeclaredMethodType(Guid methodTypeId)
+        public MethodType AddDeclaredMethodType(Guid methodTypeId)
         {
-            var methodType = (MetaMethod)this.MetaDomain.Find(methodTypeId);
+            var methodType = (MethodType)this.Domain.Find(methodTypeId);
             if (methodType == null)
             {
-                methodType = MetaMethod.Create(AllorsSession);
+                methodType = MethodType.Create(AllorsSession);
                 methodType.Id = methodTypeId;
             }
 
@@ -381,32 +379,32 @@ namespace Allors.Meta
         /// </exception>
         public AllorsEmbeddedObject[] Extent(Type type)
         {
-            if (type == typeof(MetaDomain))
+            if (type == typeof(Domain))
             {
                 return new AllorsEmbeddedObject[] { this };
             }
 
-            if (type == typeof(MetaObject))
+            if (type == typeof(ObjectType))
             {
                 return this.AllorsSession.Extent(AllorsEmbeddedDomain.ObjectType);
             }
 
-            if (type == typeof(MetaRelation))
+            if (type == typeof(RelationType))
             {
                 return this.AllorsSession.Extent(AllorsEmbeddedDomain.RelationType);
             }
 
-            if (type == typeof(MetaAssociation))
+            if (type == typeof(AssociationType))
             {
                 return this.AllorsSession.Extent(AllorsEmbeddedDomain.AssociationType);
             }
 
-            if (type == typeof(MetaRole))
+            if (type == typeof(RoleType))
             {
                 return this.AllorsSession.Extent(AllorsEmbeddedDomain.RoleType);
             }
 
-            if (type == typeof(MetaInheritance))
+            if (type == typeof(Inheritance))
             {
                 return this.AllorsSession.Extent(AllorsEmbeddedDomain.Inheritance);
             }
@@ -415,16 +413,16 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Removes the Defined <see cref="MetaObject"/> from this domain.
+        /// Removes the Defined <see cref="ObjectType"/> from this domain.
         /// </summary>
         /// <param name="objectType">The object type.</param>
-        public override void RemoveDeclaredObjectType(MetaObject objectType)
+        public override void RemoveDeclaredObjectType(ObjectType objectType)
         {
             throw new ArgumentException("Use ObjectType.Delete() to delete ObjectTypes.");
         }
 
         /// <summary>
-        /// Removes all Defined <see cref="MetaObject"/>s from this domain.
+        /// Removes all Defined <see cref="ObjectType"/>s from this domain.
         /// </summary>
         public override void RemoveDeclaredObjectTypes()
         {
@@ -432,16 +430,16 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Removes the Defined <see cref="MetaRelation"/> from this domain.
+        /// Removes the Defined <see cref="RelationType"/> from this domain.
         /// </summary>
         /// <param name="relationType">The relation type.</param>
-        public override void RemoveDeclaredRelationType(MetaRelation relationType)
+        public override void RemoveDeclaredRelationType(RelationType relationType)
         {
             throw new ArgumentException("Use RelationType.Delete() to delete ObjectTypes.");
         }
 
         /// <summary>
-        /// Removes all Defined <see cref="MetaRelation"/>s from this domain.
+        /// Removes all Defined <see cref="RelationType"/>s from this domain.
         /// </summary>
         public override void RemoveDeclaredRelationTypes()
         {
@@ -479,37 +477,37 @@ namespace Allors.Meta
 
             this.Validate(validationReport);
 
-            var types = (MetaObject[])AllorsSession.Extent(AllorsEmbeddedDomain.ObjectType);
+            var types = (ObjectType[])AllorsSession.Extent(AllorsEmbeddedDomain.ObjectType);
             foreach (var type in types)
             {
                 type.Validate(validationReport);
             }
 
-            var methodTypes = (MetaMethod[])AllorsSession.Extent(AllorsEmbeddedDomain.MethodType);
+            var methodTypes = (MethodType[])AllorsSession.Extent(AllorsEmbeddedDomain.MethodType);
             foreach (var method in methodTypes)
             {
                 method.Validate(validationReport);
             }
 
-            var relationTypes = (MetaRelation[])AllorsSession.Extent(AllorsEmbeddedDomain.RelationType);
+            var relationTypes = (RelationType[])AllorsSession.Extent(AllorsEmbeddedDomain.RelationType);
             foreach (var relation in relationTypes)
             {
                 relation.Validate(validationReport);
             }
 
-            var associations = (MetaAssociation[])AllorsSession.Extent(AllorsEmbeddedDomain.AssociationType);
+            var associations = (AssociationType[])AllorsSession.Extent(AllorsEmbeddedDomain.AssociationType);
             foreach (var association in associations)
             {
                 association.Validate(validationReport);
             }
 
-            var roles = (MetaRole[])AllorsSession.Extent(AllorsEmbeddedDomain.RoleType);
+            var roles = (RoleType[])AllorsSession.Extent(AllorsEmbeddedDomain.RoleType);
             foreach (var role in roles)
             {
                 role.Validate(validationReport);
             }
 
-            var inheritances = (MetaInheritance[])AllorsSession.Extent(AllorsEmbeddedDomain.Inheritance);
+            var inheritances = (Inheritance[])AllorsSession.Extent(AllorsEmbeddedDomain.Inheritance);
             foreach (var inheritance in inheritances)
             {
                 inheritance.Validate(validationReport);
@@ -520,12 +518,12 @@ namespace Allors.Meta
 
         public void Derive()
         {
-            var inheritances = new List<MetaInheritance>(this.DeclaredInheritances);
+            var inheritances = new List<Inheritance>(this.DeclaredInheritances);
             this.DerivedInheritances = inheritances.ToArray();
 
             // Unit & Composite ObjectTypes
-            var compositeTypes = new List<MetaObject>();
-            var unitTypes = new List<MetaObject>();
+            var compositeTypes = new List<ObjectType>();
+            var unitTypes = new List<ObjectType>();
             foreach (var objectType in this.MetaObjects)
             {
                 if (objectType.IsUnit)
@@ -541,7 +539,7 @@ namespace Allors.Meta
             this.DerivedUnitObjectTypes = unitTypes.ToArray();
             this.DerivedCompositeObjectTypes = compositeTypes.ToArray();
 
-            var sharedList = new HashSet<MetaObject>();
+            var sharedList = new HashSet<ObjectType>();
 
             // DirectSupertypes
             foreach (var type in DerivedCompositeObjectTypes)
@@ -609,13 +607,13 @@ namespace Allors.Meta
                 type.DeriveConcreteClassesCache();
             }
 
-            var relationTypes = new List<MetaRelation>(this.DeclaredRelationTypes);
+            var relationTypes = new List<RelationType>(this.DeclaredRelationTypes);
 
             this.DerivedRelationTypes = relationTypes.ToArray();
 
-            var sharedRoleTypeList = new HashSet<MetaRole>();
-            var sharedAssociationTypeList = new HashSet<MetaAssociation>();
-            var sharedObjectTypeList = new HashSet<MetaObject>();
+            var sharedRoleTypeList = new HashSet<RoleType>();
+            var sharedAssociationTypeList = new HashSet<AssociationType>();
+            var sharedObjectTypeList = new HashSet<ObjectType>();
 
             // RoleTypes
             foreach (var type in this.MetaObjects)
@@ -713,11 +711,11 @@ namespace Allors.Meta
                 type.DeriveAssociationIdsCache();
             }
 
-            var methodTypes = new List<MetaMethod>(this.DeclaredMethodTypes);
+            var methodTypes = new List<MethodType>(this.DeclaredMethodTypes);
 
             this.DerivedMethodTypes = methodTypes.ToArray();
 
-            var sharedMethodTypeList = new HashSet<MetaMethod>();
+            var sharedMethodTypeList = new HashSet<MethodType>();
 
             // MethodTypes
             foreach (var type in this.MetaObjects)
@@ -731,9 +729,9 @@ namespace Allors.Meta
         /// </summary>
         /// <param name="session">The session.</param>
         /// <returns>The domain.</returns>
-        internal static MetaDomain GetDomain(AllorsEmbeddedSession session)
+        internal static Domain GetDomain(AllorsEmbeddedSession session)
         {
-            return (MetaDomain)session[DomainSessionKey];
+            return (Domain)session[DomainSessionKey];
         }
 
         /// <summary>
@@ -785,7 +783,7 @@ namespace Allors.Meta
         /// </summary>
         /// <param name="session">The session.</param>
         /// <param name="concreteDomain">The concrete domain.</param>
-        private static void CacheConcreteDomain(AllorsEmbeddedSession session, MetaDomain concreteDomain)
+        private static void CacheConcreteDomain(AllorsEmbeddedSession session, Domain concreteDomain)
         {
             session[DomainSessionKey] = concreteDomain;
         }
@@ -799,88 +797,88 @@ namespace Allors.Meta
 
             var allorsUnitTypes = new ArrayList();
 
-            if (this.MetaDomain.Find(MetaUnitIds.StringId) == null)
+            if (this.Domain.Find(UnitIds.StringId) == null)
             {
-                var objectType = this.AddDeclaredObjectType(MetaUnitIds.StringId);
-                objectType.SingularName = MetaUnitTags.AllorsString.ToString();
+                var objectType = this.AddDeclaredObjectType(UnitIds.StringId);
+                objectType.SingularName = UnitTags.AllorsString.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
-                objectType.UnitTag = (int)MetaUnitTags.AllorsString;
+                objectType.UnitTag = (int)UnitTags.AllorsString;
                 allorsUnitTypes.Add(objectType);
             }
 
-            if (this.MetaDomain.Find(MetaUnitIds.IntegerId) == null)
+            if (this.Domain.Find(UnitIds.IntegerId) == null)
             {
-                var objectType = this.AddDeclaredObjectType(MetaUnitIds.IntegerId);
-                objectType.SingularName = MetaUnitTags.AllorsInteger.ToString();
+                var objectType = this.AddDeclaredObjectType(UnitIds.IntegerId);
+                objectType.SingularName = UnitTags.AllorsInteger.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
-                objectType.UnitTag = (int)MetaUnitTags.AllorsInteger;
+                objectType.UnitTag = (int)UnitTags.AllorsInteger;
                 allorsUnitTypes.Add(objectType);
             }
 
-            if (this.MetaDomain.Find(MetaUnitIds.LongId) == null)
+            if (this.Domain.Find(UnitIds.LongId) == null)
             {
-                var objectType = this.AddDeclaredObjectType(MetaUnitIds.LongId);
-                objectType.SingularName = MetaUnitTags.AllorsLong.ToString();
+                var objectType = this.AddDeclaredObjectType(UnitIds.LongId);
+                objectType.SingularName = UnitTags.AllorsLong.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
-                objectType.UnitTag = (int)MetaUnitTags.AllorsLong;
+                objectType.UnitTag = (int)UnitTags.AllorsLong;
                 allorsUnitTypes.Add(objectType);
             }
 
-            if (this.MetaDomain.Find(MetaUnitIds.DecimalId) == null)
+            if (this.Domain.Find(UnitIds.DecimalId) == null)
             {
-                var objectType = this.AddDeclaredObjectType(MetaUnitIds.DecimalId);
-                objectType.SingularName = MetaUnitTags.AllorsDecimal.ToString();
+                var objectType = this.AddDeclaredObjectType(UnitIds.DecimalId);
+                objectType.SingularName = UnitTags.AllorsDecimal.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
-                objectType.UnitTag = (int)MetaUnitTags.AllorsDecimal;
+                objectType.UnitTag = (int)UnitTags.AllorsDecimal;
                 allorsUnitTypes.Add(objectType);
             }
 
-            if (this.MetaDomain.Find(MetaUnitIds.DoubleId) == null)
+            if (this.Domain.Find(UnitIds.DoubleId) == null)
             {
-                var objectType = this.AddDeclaredObjectType(MetaUnitIds.DoubleId);
-                objectType.SingularName = MetaUnitTags.AllorsDouble.ToString();
+                var objectType = this.AddDeclaredObjectType(UnitIds.DoubleId);
+                objectType.SingularName = UnitTags.AllorsDouble.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
-                objectType.UnitTag = (int)MetaUnitTags.AllorsDouble;
+                objectType.UnitTag = (int)UnitTags.AllorsDouble;
                 allorsUnitTypes.Add(objectType);
             }
 
-            if (this.MetaDomain.Find(MetaUnitIds.BooleanId) == null)
+            if (this.Domain.Find(UnitIds.BooleanId) == null)
             {
-                var objectType = this.AddDeclaredObjectType(MetaUnitIds.BooleanId);
-                objectType.SingularName = MetaUnitTags.AllorsBoolean.ToString();
+                var objectType = this.AddDeclaredObjectType(UnitIds.BooleanId);
+                objectType.SingularName = UnitTags.AllorsBoolean.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
-                objectType.UnitTag = (int)MetaUnitTags.AllorsBoolean;
+                objectType.UnitTag = (int)UnitTags.AllorsBoolean;
                 allorsUnitTypes.Add(objectType);
             }
 
-            if (this.MetaDomain.Find(MetaUnitIds.DatetimeId) == null)
+            if (this.Domain.Find(UnitIds.DatetimeId) == null)
             {
-                var objectType = this.AddDeclaredObjectType(MetaUnitIds.DatetimeId);
-                objectType.SingularName = MetaUnitTags.AllorsDateTime.ToString();
+                var objectType = this.AddDeclaredObjectType(UnitIds.DatetimeId);
+                objectType.SingularName = UnitTags.AllorsDateTime.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
-                objectType.UnitTag = (int)MetaUnitTags.AllorsDateTime;
+                objectType.UnitTag = (int)UnitTags.AllorsDateTime;
                 allorsUnitTypes.Add(objectType);
             }
 
-            if (this.MetaDomain.Find(MetaUnitIds.Unique) == null)
+            if (this.Domain.Find(UnitIds.Unique) == null)
             {
-                var objectType = this.AddDeclaredObjectType(MetaUnitIds.Unique);
-                objectType.SingularName = MetaUnitTags.AllorsUnique.ToString();
+                var objectType = this.AddDeclaredObjectType(UnitIds.Unique);
+                objectType.SingularName = UnitTags.AllorsUnique.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
-                objectType.UnitTag = (int)MetaUnitTags.AllorsUnique;
+                objectType.UnitTag = (int)UnitTags.AllorsUnique;
                 allorsUnitTypes.Add(objectType);
             }
 
-            if (this.MetaDomain.Find(MetaUnitIds.BinaryId) == null)
+            if (this.Domain.Find(UnitIds.BinaryId) == null)
             {
-                var objectType = this.AddDeclaredObjectType(MetaUnitIds.BinaryId);
-                objectType.SingularName = MetaUnitTags.AllorsBinary.ToString();
+                var objectType = this.AddDeclaredObjectType(UnitIds.BinaryId);
+                objectType.SingularName = UnitTags.AllorsBinary.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
-                objectType.UnitTag = (int)MetaUnitTags.AllorsBinary;
+                objectType.UnitTag = (int)UnitTags.AllorsBinary;
                 allorsUnitTypes.Add(objectType);
             }
 
-            foreach (MetaObject unitType in allorsUnitTypes)
+            foreach (ObjectType unitType in allorsUnitTypes)
             {
                 unitType.IsUnit = true;
             }

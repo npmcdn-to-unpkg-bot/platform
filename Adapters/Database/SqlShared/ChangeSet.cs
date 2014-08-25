@@ -25,7 +25,7 @@ namespace Allors.Adapters.Database.Sql
 
     public sealed class ChangeSet : IChangeSet
     {
-        private readonly EmptySet<MetaRole> emptySet;
+        private readonly EmptySet<RoleType> emptySet;
         
         private readonly HashSet<ObjectId> created;
         private readonly HashSet<ObjectId> deleted; 
@@ -33,16 +33,16 @@ namespace Allors.Adapters.Database.Sql
         private readonly HashSet<ObjectId> associations;
         private readonly HashSet<ObjectId> roles;
 
-        private readonly Dictionary<ObjectId, ISet<MetaRole>> roleTypesByAssociation;
+        private readonly Dictionary<ObjectId, ISet<RoleType>> roleTypesByAssociation;
 
         public ChangeSet()
         {
-            this.emptySet = new EmptySet<MetaRole>();
+            this.emptySet = new EmptySet<RoleType>();
             this.created = new HashSet<ObjectId>();
             this.deleted = new HashSet<ObjectId>();
             this.associations = new HashSet<ObjectId>();
             this.roles = new HashSet<ObjectId>();
-            this.roleTypesByAssociation = new Dictionary<ObjectId, ISet<MetaRole>>();
+            this.roleTypesByAssociation = new Dictionary<ObjectId, ISet<RoleType>>();
         }
 
         public ISet<ObjectId> Created
@@ -77,7 +77,7 @@ namespace Allors.Adapters.Database.Sql
             }
         }
 
-        public IDictionary<ObjectId, ISet<MetaRole>> RoleTypesByAssociation
+        public IDictionary<ObjectId, ISet<RoleType>> RoleTypesByAssociation
         {
             get
             {
@@ -85,9 +85,9 @@ namespace Allors.Adapters.Database.Sql
             }
         }
 
-        public ISet<MetaRole> GetRoleTypes(ObjectId association)
+        public ISet<RoleType> GetRoleTypes(ObjectId association)
         {
-            ISet<MetaRole> roleTypes;
+            ISet<RoleType> roleTypes;
             if (this.RoleTypesByAssociation.TryGetValue(association, out roleTypes))
             {
                 return roleTypes;
@@ -106,14 +106,14 @@ namespace Allors.Adapters.Database.Sql
             this.deleted.Add(objectId);
         }
 
-        public void OnChangingUnitRole(Roles association, MetaRole roleType)
+        public void OnChangingUnitRole(Roles association, RoleType roleType)
         {
             this.associations.Add(association.Reference.ObjectId);
 
             this.RoleTypes(association.Reference.ObjectId).Add(roleType);
         }
 
-        public void OnChangingCompositeRole(Roles association, MetaRole roleType, ObjectId previousRole, ObjectId newRole)
+        public void OnChangingCompositeRole(Roles association, RoleType roleType, ObjectId previousRole, ObjectId newRole)
         {
             this.associations.Add(association.Reference.ObjectId);
 
@@ -130,7 +130,7 @@ namespace Allors.Adapters.Database.Sql
             this.RoleTypes(association.Reference.ObjectId).Add(roleType);
         }
 
-        public void OnChangingCompositesRole(Roles association, MetaRole roleType, Strategy changedRole)
+        public void OnChangingCompositesRole(Roles association, RoleType roleType, Strategy changedRole)
         {
             this.associations.Add(association.Reference.ObjectId);
 
@@ -142,12 +142,12 @@ namespace Allors.Adapters.Database.Sql
             this.RoleTypes(association.Reference.ObjectId).Add(roleType);
         }
 
-        private ISet<MetaRole> RoleTypes(ObjectId associationId)
+        private ISet<RoleType> RoleTypes(ObjectId associationId)
         {
-            ISet<MetaRole> roleTypes;
+            ISet<RoleType> roleTypes;
             if (!this.RoleTypesByAssociation.TryGetValue(associationId, out roleTypes))
             {
-                roleTypes = new HashSet<MetaRole>();
+                roleTypes = new HashSet<RoleType>();
                 this.RoleTypesByAssociation[associationId] = roleTypes;
             }
 

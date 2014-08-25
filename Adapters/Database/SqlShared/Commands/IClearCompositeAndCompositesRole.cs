@@ -26,7 +26,7 @@ namespace Allors.Adapters.Database.Sql.Commands
 
     public interface IClearCompositeAndCompositesRole
     {
-        void Execute(IList<ObjectId> objects, MetaRole roleType);
+        void Execute(IList<ObjectId> objects, RoleType roleType);
     }
 
     public interface IClearCompositeAndCompositesRoleFactory

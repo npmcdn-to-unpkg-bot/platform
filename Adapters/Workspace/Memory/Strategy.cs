@@ -33,7 +33,7 @@ namespace Allors.Adapters.Workspace.Memory
         private static readonly byte[] EmptyByteArray = new byte[0];
         
         private readonly WorkspaceSession session;
-        private readonly MetaObject objectType;
+        private readonly ObjectType objectType;
 
         // TODO: move to a BitFlag
         private bool isDeleted;
@@ -43,7 +43,7 @@ namespace Allors.Adapters.Workspace.Memory
         private WeakReference allorizedObjectWeakReference;
 
         // New
-        internal Strategy(WorkspaceSession session, MetaObject objectType, ObjectId objectId)
+        internal Strategy(WorkspaceSession session, ObjectType objectType, ObjectId objectId)
         {
             this.session = session;
             this.objectType = objectType;
@@ -63,7 +63,7 @@ namespace Allors.Adapters.Workspace.Memory
         }
 
         // Load
-        internal Strategy(WorkspaceSession worspaceSession, MetaObject objectType, ObjectId objectId, bool deleted)
+        internal Strategy(WorkspaceSession worspaceSession, ObjectType objectType, ObjectId objectId, bool deleted)
             : this(worspaceSession, objectType, objectId)
         {
             if (deleted)
@@ -98,7 +98,7 @@ namespace Allors.Adapters.Workspace.Memory
 
         public ObjectId ObjectId { get; internal set; }
 
-        public MetaObject ObjectType
+        public ObjectType ObjectType
         {
             get { return this.objectType; }
         }
@@ -140,7 +140,7 @@ namespace Allors.Adapters.Workspace.Memory
             return this.objectType.Name + " " + this.ObjectId;
         }
 
-        public virtual object GetRole(MetaRole roleType)
+        public virtual object GetRole(RoleType roleType)
         {
             if (roleType.ObjectType.IsUnit)
             {
@@ -155,7 +155,7 @@ namespace Allors.Adapters.Workspace.Memory
             return this.GetCompositeRole(roleType);
         }
 
-        public virtual void SetRole(MetaRole roleType, object value)
+        public virtual void SetRole(RoleType roleType, object value)
         {
             if (roleType.ObjectType.IsUnit)
             {
@@ -181,7 +181,7 @@ namespace Allors.Adapters.Workspace.Memory
             }
         }
 
-        public virtual void RemoveRole(MetaRole roleType)
+        public virtual void RemoveRole(RoleType roleType)
         {
             if (roleType.ObjectType.IsUnit)
             {
@@ -200,7 +200,7 @@ namespace Allors.Adapters.Workspace.Memory
             }
         }
 
-        public virtual bool ExistRole(MetaRole roleType)
+        public virtual bool ExistRole(RoleType roleType)
         {
             if (roleType.ObjectType.IsUnit)
             {
@@ -215,7 +215,7 @@ namespace Allors.Adapters.Workspace.Memory
             return this.ExistCompositeRole(roleType);
         }
 
-        public virtual object GetUnitRole(MetaRole roleType)
+        public virtual object GetUnitRole(RoleType roleType)
         {
             this.CheckRemoved();
             this.RoleUnitChecks(roleType);
@@ -224,7 +224,7 @@ namespace Allors.Adapters.Workspace.Memory
             return unitRole;
         }
 
-        public virtual void SetUnitRole(MetaRole roleType, object role)
+        public virtual void SetUnitRole(RoleType roleType, object role)
         {
             this.CheckRemoved();
             this.RoleUnitChecks(roleType);
@@ -243,17 +243,17 @@ namespace Allors.Adapters.Workspace.Memory
             }
         }
 
-        public virtual void RemoveUnitRole(MetaRole roleType)
+        public virtual void RemoveUnitRole(RoleType roleType)
         {
             this.SetUnitRole(roleType, null);
         }
 
-        public virtual bool ExistUnitRole(MetaRole roleType)
+        public virtual bool ExistUnitRole(RoleType roleType)
         {
             return this.GetUnitRole(roleType) != null;
         }
 
-        public virtual IObject GetCompositeRole(MetaRole roleType)
+        public virtual IObject GetCompositeRole(RoleType roleType)
         {
             this.CheckRemoved();
             this.RoleCompositeChecks(roleType);
@@ -262,7 +262,7 @@ namespace Allors.Adapters.Workspace.Memory
             return roleStrategy != null ? roleStrategy.GetObject() : null;
         }
 
-        public virtual void SetCompositeRole(MetaRole roleType, IObject role)
+        public virtual void SetCompositeRole(RoleType roleType, IObject role)
         {
             if (role == null)
             {
@@ -284,7 +284,7 @@ namespace Allors.Adapters.Workspace.Memory
             }
         }
 
-        public virtual void RemoveCompositeRole(MetaRole roleType)
+        public virtual void RemoveCompositeRole(RoleType roleType)
         {
             this.CheckRemoved();
             this.RoleCompositeChecks(roleType);
@@ -299,19 +299,19 @@ namespace Allors.Adapters.Workspace.Memory
             }
         }
 
-        public virtual bool ExistCompositeRole(MetaRole roleType)
+        public virtual bool ExistCompositeRole(RoleType roleType)
         {
             return this.GetCompositeRole(roleType) != null;
         }
 
-        public virtual Allors.Extent GetCompositeRoles(MetaRole roleType)
+        public virtual Allors.Extent GetCompositeRoles(RoleType roleType)
         {
             this.CheckRemoved();
 
             return new ExtentRole(this, roleType);
         }
 
-        public virtual void SetCompositeRoles(MetaRole roleType, Allors.Extent roles)
+        public virtual void SetCompositeRoles(RoleType roleType, Allors.Extent roles)
         {
             if (roles == null || roles.Count == 0)
             {
@@ -342,7 +342,7 @@ namespace Allors.Adapters.Workspace.Memory
             }
         }
 
-        public virtual void AddCompositeRole(MetaRole roleType, IObject objectToAdd)
+        public virtual void AddCompositeRole(RoleType roleType, IObject objectToAdd)
         {
             this.CheckRemoved();
             if (objectToAdd != null)
@@ -360,7 +360,7 @@ namespace Allors.Adapters.Workspace.Memory
             }
         }
 
-        public virtual void RemoveCompositeRole(MetaRole roleType, IObject objectToRemove)
+        public virtual void RemoveCompositeRole(RoleType roleType, IObject objectToRemove)
         {
             this.CheckRemoved();
 
@@ -380,7 +380,7 @@ namespace Allors.Adapters.Workspace.Memory
             }
         }
 
-        public virtual void RemoveCompositeRoles(MetaRole roleType)
+        public virtual void RemoveCompositeRoles(RoleType roleType)
         {
             this.CheckRemoved();
             this.RoleCompositesChecks(roleType);
@@ -395,13 +395,13 @@ namespace Allors.Adapters.Workspace.Memory
             }
         }
 
-        public virtual bool ExistCompositeRoles(MetaRole roleType)
+        public virtual bool ExistCompositeRoles(RoleType roleType)
         {
             // TODO: Optimize
             return this.GetCompositeRoles(roleType).Count > 0;
         }
 
-        public virtual object GetAssociation(MetaAssociation associationType)
+        public virtual object GetAssociation(AssociationType associationType)
         {
             if (associationType.IsMany)
             {
@@ -411,7 +411,7 @@ namespace Allors.Adapters.Workspace.Memory
             return this.GetCompositeAssociation(associationType);
         }
 
-        public virtual bool ExistAssociation(MetaAssociation associationType)
+        public virtual bool ExistAssociation(AssociationType associationType)
         {
             if (associationType.IsMany)
             {
@@ -421,7 +421,7 @@ namespace Allors.Adapters.Workspace.Memory
             return this.ExistCompositeAssociation(associationType);
         }
 
-        public virtual IObject GetCompositeAssociation(MetaAssociation associationType)
+        public virtual IObject GetCompositeAssociation(AssociationType associationType)
         {
             this.CheckRemoved();
 
@@ -430,19 +430,19 @@ namespace Allors.Adapters.Workspace.Memory
             return association != null ? association.GetObject() : null;
         }
 
-        public virtual bool ExistCompositeAssociation(MetaAssociation associationType)
+        public virtual bool ExistCompositeAssociation(AssociationType associationType)
         {
             return this.GetCompositeAssociation(associationType) != null;
         }
 
-        public virtual Allors.Extent GetCompositeAssociations(MetaAssociation associationType)
+        public virtual Allors.Extent GetCompositeAssociations(AssociationType associationType)
         {
             this.CheckRemoved();
 
             return new ExtentAssociation(this, associationType);
         }
 
-        public virtual bool ExistCompositeAssociations(MetaAssociation associationType)
+        public virtual bool ExistCompositeAssociations(AssociationType associationType)
         {
             return this.GetCompositeAssociations(associationType).Count > 0;
         }
@@ -479,17 +479,17 @@ namespace Allors.Adapters.Workspace.Memory
             return allorsObject;
         }
 
-        internal static object LoadUnit(XmlReader reader, MetaRole roleType, string value)
+        internal static object LoadUnit(XmlReader reader, RoleType roleType, string value)
         {
-            var unitTypeTag = (MetaUnitTags)roleType.ObjectType.UnitTag;
+            var unitTypeTag = (UnitTags)roleType.ObjectType.UnitTag;
             if (reader.IsEmptyElement)
             {
-                if (unitTypeTag == MetaUnitTags.AllorsString)
+                if (unitTypeTag == UnitTags.AllorsString)
                 {
                     return string.Empty;
                 }
 
-                if (unitTypeTag == MetaUnitTags.AllorsBinary)
+                if (unitTypeTag == UnitTags.AllorsBinary)
                 {
                     return EmptyByteArray;
                 }
@@ -512,12 +512,12 @@ namespace Allors.Adapters.Workspace.Memory
             this.isNew = false;
         }
 
-        internal object GetInternalizedUnitRole(MetaRole roleType)
+        internal object GetInternalizedUnitRole(RoleType roleType)
         {
             return this.session.GetUnitRole(this, roleType);
         }
 
-        internal virtual void RoleUnitChecks(MetaRole relationType)
+        internal virtual void RoleUnitChecks(RoleType relationType)
         {
             if (!relationType.ObjectType.IsUnit)
             {
@@ -530,7 +530,7 @@ namespace Allors.Adapters.Workspace.Memory
             }
         }
 
-        internal virtual void RoleCompositeChecks(MetaRole roleType, IObject role)
+        internal virtual void RoleCompositeChecks(RoleType roleType, IObject role)
         {
             this.RoleCompositeChecks(roleType);
 
@@ -548,14 +548,14 @@ namespace Allors.Adapters.Workspace.Memory
             }
         }
 
-        internal virtual void RoleCompositesChecks(MetaRole roleType, IObject allorsObject)
+        internal virtual void RoleCompositesChecks(RoleType roleType, IObject allorsObject)
         {
             this.RoleCompositesChecks(roleType);
 
             this.RoleCompositesSharedChecks(roleType, allorsObject);
         }
 
-        internal virtual object LoadUnitRole(XmlReader reader, MetaRole roleType)
+        internal virtual object LoadUnitRole(XmlReader reader, RoleType roleType)
         {
             this.RoleUnitChecks(roleType);
             var value = string.Empty;
@@ -567,7 +567,7 @@ namespace Allors.Adapters.Workspace.Memory
             return LoadUnit(reader, roleType, value);
         }
 
-        internal virtual Strategy LoadDatabaseCompositeRole(XmlReader reader, MetaRole roleType)
+        internal virtual Strategy LoadDatabaseCompositeRole(XmlReader reader, RoleType roleType)
         {
             try
             {
@@ -581,7 +581,7 @@ namespace Allors.Adapters.Workspace.Memory
             }
         }
 
-        internal virtual HashSet<Strategy> LoadDatabaseCompositesRole(XmlReader reader, MetaRole roleType)
+        internal virtual HashSet<Strategy> LoadDatabaseCompositesRole(XmlReader reader, RoleType roleType)
         {
             try
             {
@@ -595,7 +595,7 @@ namespace Allors.Adapters.Workspace.Memory
             }
         }
 
-        internal virtual object GetOriginalUnitRole(MetaRole roleType)
+        internal virtual object GetOriginalUnitRole(RoleType roleType)
         {
             if (this.DatabaseStrategy != null &&
                 !this.DatabaseStrategy.IsDeleted)
@@ -606,7 +606,7 @@ namespace Allors.Adapters.Workspace.Memory
             return null;
         }
 
-        internal virtual Strategy GetOriginalCompositeRole(MetaRole roleType)
+        internal virtual Strategy GetOriginalCompositeRole(RoleType roleType)
         {
             if (this.DatabaseStrategy != null &&
                 !this.DatabaseStrategy.IsDeleted)
@@ -618,7 +618,7 @@ namespace Allors.Adapters.Workspace.Memory
             return null;
         }
 
-        internal virtual HashSet<Strategy> GetOriginalCompositeRoles(MetaRole roleType)
+        internal virtual HashSet<Strategy> GetOriginalCompositeRoles(RoleType roleType)
         {
             HashSet<Strategy> roles = null;
 
@@ -640,7 +640,7 @@ namespace Allors.Adapters.Workspace.Memory
             return roles;
         }
 
-        internal virtual Strategy GetOriginalCompositeAssociation(MetaAssociation associationType)
+        internal virtual Strategy GetOriginalCompositeAssociation(AssociationType associationType)
         {
             if (this.DatabaseStrategy != null &&
                 !this.DatabaseStrategy.IsDeleted)
@@ -652,7 +652,7 @@ namespace Allors.Adapters.Workspace.Memory
             return null;
         }
 
-        internal virtual HashSet<Strategy> GetOriginalCompositesAssociation(MetaAssociation associationType)
+        internal virtual HashSet<Strategy> GetOriginalCompositesAssociation(AssociationType associationType)
         {
             var associations = new HashSet<Strategy>();
 
@@ -689,7 +689,7 @@ namespace Allors.Adapters.Workspace.Memory
             }
         }
 
-        private void RoleCompositeChecks(MetaRole roleType)
+        private void RoleCompositeChecks(RoleType roleType)
         {
             if (Array.IndexOf(roleType.AssociationType.ObjectType.ConcreteClasses, this.objectType) < 0)
             {
@@ -702,7 +702,7 @@ namespace Allors.Adapters.Workspace.Memory
             }
         }
 
-        private void RoleCompositesChecks(MetaRole roleType)
+        private void RoleCompositesChecks(RoleType roleType)
         {
             if (Array.IndexOf(roleType.AssociationType.ObjectType.ConcreteClasses, this.objectType) < 0)
             {
@@ -715,7 +715,7 @@ namespace Allors.Adapters.Workspace.Memory
             }
         }
 
-        private void RoleCompositesSharedChecks(MetaRole roleType, IObject allorsObject)
+        private void RoleCompositesSharedChecks(RoleType roleType, IObject allorsObject)
         {
             if (allorsObject.Strategy.IsDeleted)
             {

@@ -37,12 +37,12 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
     public class GetUnitRolesFactory : IGetUnitRolesFactory
     {
         public readonly Database Database;
-        private readonly Dictionary<MetaObject, string> sqlByObjectType;
+        private readonly Dictionary<ObjectType, string> sqlByObjectType;
 
         public GetUnitRolesFactory(Database database)
         {
             this.Database = database;
-            this.sqlByObjectType = new Dictionary<MetaObject, string>();
+            this.sqlByObjectType = new Dictionary<ObjectType, string>();
         }
 
         public IGetUnitRoles Create(Sql.DatabaseSession session)
@@ -50,7 +50,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
             return new GetUnitRoles(this, session);
         }
 
-        public string GetSql(MetaObject objectType)
+        public string GetSql(ObjectType objectType)
         {
             if (!this.sqlByObjectType.ContainsKey(objectType))
             {
@@ -64,13 +64,13 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
         public class GetUnitRoles : DatabaseCommand, IGetUnitRoles
         {
             private readonly GetUnitRolesFactory factory;
-            private readonly Dictionary<MetaObject, SqlCommand> commandByObjectType;
+            private readonly Dictionary<ObjectType, SqlCommand> commandByObjectType;
 
             public GetUnitRoles(GetUnitRolesFactory factory, Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
-                this.commandByObjectType = new Dictionary<MetaObject, SqlCommand>();
+                this.commandByObjectType = new Dictionary<ObjectType, SqlCommand>();
             }
 
             public void Execute(Roles roles)
@@ -105,35 +105,35 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
                             object unit = null;
                             if (!reader.IsDBNull(i))
                             {
-                                var unitTypeTag = (MetaUnitTags)roleType.ObjectType.UnitTag;
+                                var unitTypeTag = (UnitTags)roleType.ObjectType.UnitTag;
                                 switch (unitTypeTag)
                                 {
-                                    case MetaUnitTags.AllorsString:
+                                    case UnitTags.AllorsString:
                                         unit = reader.GetString(i);
                                         break;
-                                    case MetaUnitTags.AllorsInteger:
+                                    case UnitTags.AllorsInteger:
                                         unit = reader.GetInt32(i);
                                         break;
-                                    case MetaUnitTags.AllorsLong:
+                                    case UnitTags.AllorsLong:
                                         unit = reader.GetInt64(i);
                                         break;
-                                    case MetaUnitTags.AllorsDecimal:
+                                    case UnitTags.AllorsDecimal:
                                         unit = reader.GetDecimal(i);
                                         break;
-                                    case MetaUnitTags.AllorsDouble:
+                                    case UnitTags.AllorsDouble:
                                         unit = reader.GetDouble(i);
                                         break;
-                                    case MetaUnitTags.AllorsBoolean:
+                                    case UnitTags.AllorsBoolean:
                                         unit = reader.GetBoolean(i);
                                         break;
-                                    case MetaUnitTags.AllorsDateTime:
+                                    case UnitTags.AllorsDateTime:
                                         var dateTime = reader.GetDateTime(i);
                                         unit = new DateTime(dateTime.Ticks, DateTimeKind.Utc);
                                         break;
-                                    case MetaUnitTags.AllorsUnique:
+                                    case UnitTags.AllorsUnique:
                                         unit = reader.GetGuid(i);
                                         break;
-                                    case MetaUnitTags.AllorsBinary:
+                                    case UnitTags.AllorsBinary:
                                         var byteArray = (byte[])reader.GetValue(i);
                                         unit = byteArray;
                                         break;

@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="MetaRelation.cs" company="Allors bvba">
+// <copyright file="RelationType.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -28,16 +28,16 @@ namespace Allors.Meta
     using AllorsGenerated;
 
     /// <summary>
-    /// A <see cref="MetaRelation"/> defines the state and behavior for
+    /// A <see cref="RelationType"/> defines the state and behavior for
     /// a set of <see cref="AssociationType"/>s and <see cref="RoleType"/>s.
     /// </summary>
-    public partial class MetaRelation : IComparable
+    public partial class RelationType : IComparable
     {
         /// <summary>
         /// Gets or sets the <see cref="AssociationType"/>.
         /// </summary>
         /// <value>The AssociationType.</value>
-        public override MetaAssociation AssociationType
+        public override AssociationType AssociationType
         {
             get
             {
@@ -175,7 +175,7 @@ namespace Allors.Meta
         /// Gets or sets the <see cref="RoleType"/>.
         /// </summary>
         /// <value>The RoleType    .</value>
-        public override MetaRole RoleType
+        public override RoleType RoleType
         {
             get
             {
@@ -230,7 +230,7 @@ namespace Allors.Meta
         /// <paramref name="obj"/> is not the same type as this instance. </exception>
         public int CompareTo(object obj)
         {
-            var that = obj as MetaRelation;
+            var that = obj as RelationType;
             if (that != null)
             {
                 return string.CompareOrdinal(this.Name, that.Name);
@@ -273,15 +273,15 @@ namespace Allors.Meta
         /// </summary>
         /// <param name="session">The session.</param>
         /// <returns>The new instance.</returns>
-        internal static MetaRelation Create(AllorsEmbeddedSession session)
+        internal static RelationType Create(AllorsEmbeddedSession session)
         {
-            var relationType = (MetaRelation)session.Create(AllorsEmbeddedDomain.RelationType);
+            var relationType = (RelationType)session.Create(AllorsEmbeddedDomain.RelationType);
 
             relationType.IsIndexed = false;
             relationType.IsDerived = false;
 
-            relationType.AssociationType = MetaAssociation.Create(session);
-            relationType.RoleType = MetaRole.Create(session);
+            relationType.AssociationType = AssociationType.Create(session);
+            relationType.RoleType = RoleType.Create(session);
 
             return relationType;
         }

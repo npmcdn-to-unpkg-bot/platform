@@ -22,10 +22,10 @@ namespace Allors.Adapters.Workspace.Memory
 
     internal sealed class RoleCompositeEquals : Predicate
     {
-        private readonly MetaRole roleType;
+        private readonly RoleType roleType;
         private readonly object equals;
 
-        internal RoleCompositeEquals(Extent extent, MetaRole roleType, object equals)
+        internal RoleCompositeEquals(Extent extent, RoleType roleType, object equals)
         {
             extent.CheckForRoleType(roleType);
             CompositePredicateAssertions.ValidateRoleEquals(roleType, equals);
@@ -45,9 +45,9 @@ namespace Allors.Adapters.Workspace.Memory
 
             object equalsValue = this.equals;
 
-            if (this.equals is MetaRole)
+            if (this.equals is RoleType)
             {
-                var equalsRole = (MetaRole)this.equals;
+                var equalsRole = (RoleType)this.equals;
                 equalsValue = strategy.GetCompositeRole(equalsRole);
             }
 

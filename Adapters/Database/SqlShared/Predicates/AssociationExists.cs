@@ -24,9 +24,9 @@ namespace Allors.Adapters.Database.Sql
 
     public sealed class AssociationExists : Predicate
     {
-        private readonly MetaAssociation association;
+        private readonly AssociationType association;
 
-        public AssociationExists(ExtentFiltered extent, MetaAssociation association)
+        public AssociationExists(ExtentFiltered extent, AssociationType association)
         {
             extent.CheckAssociation(association);
             CompositePredicateAssertions.ValidateAssociationExists(association);

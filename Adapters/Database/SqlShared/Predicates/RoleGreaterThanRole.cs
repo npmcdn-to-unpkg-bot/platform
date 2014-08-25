@@ -24,10 +24,10 @@ namespace Allors.Adapters.Database.Sql
 
     public sealed class RoleGreaterThanRole : Predicate
     {
-        private readonly MetaRole greaterThanRole;
-        private readonly MetaRole role;
+        private readonly RoleType greaterThanRole;
+        private readonly RoleType role;
 
-        public RoleGreaterThanRole(ExtentFiltered extent, MetaRole role, MetaRole greaterThanRole)
+        public RoleGreaterThanRole(ExtentFiltered extent, RoleType role, RoleType greaterThanRole)
         {
             extent.CheckRole(role);
             CompositePredicateAssertions.ValidateRoleGreaterThan(role, greaterThanRole);
