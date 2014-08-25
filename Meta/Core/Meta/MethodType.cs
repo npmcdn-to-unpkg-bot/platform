@@ -20,7 +20,7 @@
 
 namespace Allors.Meta
 {
-    using AllorsGenerated;
+    using System;
 
     public partial class MethodType : OperandType
     {
@@ -28,11 +28,15 @@ namespace Allors.Meta
         public string Name;
 
         public ObjectType ObjectType;
-
-
+        
         // Domain -> MethodType
-        public Domain Domain;
+        public Domain Domain { get; private set; }
 
+        public MethodType(Domain domain, Guid methodTypeId)
+        {
+            this.Domain = domain;
+            this.Id = methodTypeId;
+        }
 
         /// <summary>
         /// Gets the display name.
@@ -61,18 +65,7 @@ namespace Allors.Meta
                 return "unknown method type";
             }
         }
-
-        /// <summary>
-        /// Creates a new instance.
-        /// </summary>
-        /// <param name="session">The session.</param>
-        /// <returns>The new instance.</returns>
-        internal static MethodType Create(AllorsEmbeddedSession session)
-        {
-            var methodType = (MethodType)session.Create(AllorsEmbeddedDomain.MethodType);
-            return methodType;
-        }
-        
+       
         /// <summary>
         /// Validates the instance.
         /// </summary>
@@ -84,7 +77,7 @@ namespace Allors.Meta
             if (string.IsNullOrEmpty(this.Name))
             {
                 var message = this.ValidationName + " has no name";
-                validationLog.AddError(message, this, ValidationKind.Required, AllorsEmbeddedDomain.MethodTypeName);
+                validationLog.AddError(message, this, ValidationKind.Required, "MethodType.Name");
             }
         }
     }

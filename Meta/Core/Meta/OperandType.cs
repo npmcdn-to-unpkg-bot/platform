@@ -20,7 +20,7 @@
 
 namespace Allors.Meta
 {
-    public partial class OperandType
+    public abstract partial class OperandType : MetaObject
     {
         /// <summary>
         /// Gets the display name.

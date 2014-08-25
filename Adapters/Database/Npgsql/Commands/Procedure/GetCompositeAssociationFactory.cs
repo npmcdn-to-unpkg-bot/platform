@@ -114,7 +114,7 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
                 {
                     ObjectId id = this.Database.AllorsObjectIds.Parse(result.ToString());
 
-                    if (associationType.ObjectType.ExistExclusiveRootClass && associationType.ObjectType.ExclusiveRootClass.ExistExclusiveConcreteSubclass)
+                    if (associationType.ObjectType.RootClasses.Length == 1 && associationType.ObjectType.ExclusiveRootClass.ExistDerivedExclusiveConcreteLeafClass)
                     {
                         associationObject = this.Session.GetOrCreateAssociationForExistingObject(associationType.ObjectType.ExclusiveRootClass.ExclusiveConcreteSubclass, id);
                     }

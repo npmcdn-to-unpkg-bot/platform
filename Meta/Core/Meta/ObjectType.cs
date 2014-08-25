@@ -25,8 +25,6 @@ namespace Allors.Meta
     using System.Collections.Generic;
     using System.Globalization;
 
-    using AllorsGenerated;
-
     /// <summary>
     /// An <see cref="ObjectType"/> defines the state and behavior for
     /// a set of <see cref="IObject"/>s.
@@ -79,7 +77,8 @@ namespace Allors.Meta
 
         public List<ObjectType> DerivedSupertypes = new List<ObjectType>();
 
-
+        // Domain -> ObjectType
+        public Domain Domain { get; private set; }
 
         /// <summary>
         /// An empty array of object types.
@@ -101,24 +100,10 @@ namespace Allors.Meta
         /// </summary>
         private HashSet<ObjectType> concreteClassesCache;
 
-        /// <summary>
-        /// Gets the association count.
-        /// </summary>
-        /// <value>The association count.</value>
-        public int AssociationTypesCount
+        public ObjectType(Domain domain, Guid objectTypeId)
         {
-            get { return this.AssociationTypes.Count; }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether the association count is greater than 32.
-        /// </summary>
-        /// <value>
-        /// <c>true</c> if association count is greater than 32; otherwise, <c>false</c>.
-        /// </value>
-        public bool AssociationTypesCountGreaterThan32
-        {
-            get { return this.AssociationTypes.Length > 32; }
+            this.Domain = domain;
+            this.Id = objectTypeId;
         }
 
         /// <summary>
@@ -134,114 +119,10 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Gets the associations where this instance is the root type.
-        /// </summary>
-        /// <value>The associations where this instance is the root type.</value>
-        public AssociationType[] AssociationTypesWhereRootType
-        {
-            get
-            {
-                return this.AssociationTypesWhereDerivedRootObjectType;
-            }
-        }
-
-        /// <summary>
-        /// Gets the binary roles.
-        /// </summary>
-        /// <value>The binary roles.</value>
-        public RoleType[] BinaryRoles
-        {
-            get { return this.GetUnitRoleTypes(UnitTags.AllorsBinary); }
-        }
-
-        /// <summary>
-        /// Gets the boolean roles.
-        /// </summary>
-        /// <value>The boolean roles.</value>
-        public RoleType[] BooleanRoles
-        {
-            get { return this.GetUnitRoleTypes(UnitTags.AllorsBoolean); }
-        }
-
-        /// <summary>
-        /// Gets the double roles.
-        /// </summary>
-        /// <value>The double roles.</value>
-        public RoleType[] DoubleRoleTypes
-        {
-            get { return this.GetUnitRoleTypes(UnitTags.AllorsDouble); }
-        }
-
-        /// <summary>
-        /// Gets the date time role types.
-        /// </summary>
-        /// <value>The date time role types.</value>
-        public RoleType[] DateTimeRoleTypes
-        {
-            get { return this.GetUnitRoleTypes(UnitTags.AllorsDateTime); }
-        }
-
-        /// <summary>
-        /// Gets the decimal role types.
-        /// </summary>
-        /// <value>The decimal role types.</value>
-        public RoleType[] DecimalRoleTypes
-        {
-            get { return this.GetUnitRoleTypes(UnitTags.AllorsDecimal); }
-        }
-
-        /// <summary>
-        /// Gets the integer32 roles.
-        /// </summary>
-        /// <value>The integer32 roles.</value>
-        public RoleType[] Integer32Roles
-        {
-            get { return this.GetUnitRoleTypes(UnitTags.AllorsInteger); }
-        }
-
-        /// <summary>
-        /// Gets the integer64 roles.
-        /// </summary>
-        /// <value>The integer64 roles.</value>
-        public RoleType[] Integer64Roles
-        {
-            get { return this.GetUnitRoleTypes(UnitTags.AllorsLong); }
-        }
-
-        /// <summary>
-        /// Gets the string roles.
-        /// </summary>
-        /// <value>The string roles.</value>
-        public RoleType[] StringRoleTypes
-        {
-            get { return this.GetUnitRoleTypes(UnitTags.AllorsString); }
-        }
-
-        /// <summary>
-        /// Gets the composite role count.
-        /// </summary>
-        /// <value>The composite role count.</value>
-        public int CompositeRoleTypeCount
-        {
-            get { return this.CompositeRoleTypes.Length; }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether the composite role count is greater than 32.
-        /// </summary>
-        /// <value>
-        /// <c>true</c> if the composite role count is greater than32; otherwise, <c>false</c>.
-        /// </value>
-        public bool CompositeRoleTypeCountGreaterThan32
-        {
-            get { return this.CompositeRoleTypes.Length > 32; }
-        }
-
-        /// <summary>
         /// Gets the composite roles.
         /// </summary>
         /// <value>The composite roles.</value>
-        public RoleType[] CompositeRoleTypes
+        public IList<RoleType> CompositeRoleTypes
         {
             get
             {
@@ -281,7 +162,7 @@ namespace Allors.Meta
         /// Gets the direct super interfaces.
         /// </summary>
         /// <value>The direct super interfaces.</value>
-        public ObjectType[] DirectSuperinterfaces
+        public IList<ObjectType> DirectSuperinterfaces
         {
             get
             {
@@ -293,7 +174,7 @@ namespace Allors.Meta
         /// Gets the direct super types.
         /// </summary>
         /// <value>The direct super types.</value>
-        public ObjectType[] DirectSupertypes
+        public IList<ObjectType> DirectSupertypes
         {
             get
             {
@@ -305,7 +186,7 @@ namespace Allors.Meta
         /// Gets the exclusive associations.
         /// </summary>
         /// <value>The exclusive associations.</value>
-        public AssociationType[] ExclusiveAssociationTypes
+        public IList<AssociationType> ExclusiveAssociationTypes
         {
             get
             {
@@ -329,7 +210,7 @@ namespace Allors.Meta
         /// Gets the exclusive roles.
         /// </summary>
         /// <value>The exclusive roles.</value>
-        public RoleType[] ExclusiveRoleTypes
+        public IList<RoleType> ExclusiveRoleTypes
         {
             get
             {
@@ -345,7 +226,7 @@ namespace Allors.Meta
         {
             get
             {
-                if (this.ExistExclusiveRootClass)
+                if (this.RootClasses.Length == 1)
                 {
                     return this.RootClasses[0];
                 }
@@ -358,111 +239,11 @@ namespace Allors.Meta
         /// Gets the exclusive super interfaces.
         /// </summary>
         /// <value>The exclusive super interfaces.</value>
-        public ObjectType[] ExclusiveSuperinterfaces
+        public IList<ObjectType> ExclusiveSuperinterfaces
         {
             get
             {
                 return this.DerivedExclusiveSuperinterfaces;
-            }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether there exist concrete classes.
-        /// </summary>
-        /// <value>
-        ///  <c>true</c> if there exist concrete classes; otherwise, <c>false</c>.
-        /// </value>
-        public bool ExistConcreteClasses
-        {
-            get { return this.ConcreteClasses.Length > 0; }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether there exists direct super interfaces.
-        /// </summary>
-        /// <value>
-        ///  <c>true</c> if there exists direct super interfaces; otherwise, <c>false</c>.
-        /// </value>
-        public bool ExistDirectSuperinterfaces
-        {
-            get
-            {
-                return this.ExistDerivedDirectSuperinterfaces;
-            }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether there exists direct super types.
-        /// </summary>
-        /// <value>
-        /// <c>true</c> if there exists direct super types; otherwise, <c>false</c>.
-        /// </value>
-        public bool ExistDirectSupertypes
-        {
-            get
-            {
-                return this.ExistDerivedDirectSupertypes;
-            }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether there exists an exclusive concrete subclass.
-        /// </summary>
-        /// <value>
-        /// <c>true</c> if there exists an exclusive concrete subclass; otherwise, <c>false</c>.
-        /// </value>
-        public bool ExistExclusiveConcreteSubclass
-        {
-            get
-            {
-                return this.ExistDerivedExclusiveConcreteLeafClass;
-            }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether [exist exclusive root class].
-        /// </summary>
-        /// <value>
-        /// <c>true</c> if [exist exclusive root class]; otherwise, <c>false</c>.
-        /// </value>
-        public bool ExistExclusiveRootClass
-        {
-            get { return this.RootClasses.Length == 1; }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether there exist root classes.
-        /// </summary>
-        /// <value><c>true</c> if there exist root classes; otherwise, <c>false</c>.</value>
-        public bool ExistRootClasses
-        {
-            get
-            {
-                return this.ExistDerivedRootClasses;
-            }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether there exist subclasses.
-        /// </summary>
-        /// <value><c>true</c> if there exist subclasses; otherwise, <c>false</c>.</value>
-        public bool ExistSubclasses
-        {
-            get
-            {
-                return this.ExistDerivedSubclasses;
-            }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether there exists super classes.
-        /// </summary>
-        /// <value><c>true</c> if there exist super classes; otherwise, <c>false</c>.</value>
-        public bool ExistSuperclasses
-        {
-            get
-            {
-                return this.ExistDerivedSuperclasses;
             }
         }
 
@@ -557,20 +338,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Gets a value indicating whether this instance is a root class.
-        /// </summary>
-        /// <value>
-        ///  <c>true</c> if this instance is a root class; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsRootClass
-        {
-            get
-            {
-                return this.ExistObjectTypesWhereDerivedRootClass;
-            }
-        }
-
-        /// <summary>
         /// Gets a value indicating whether this instance requires a scale.
         /// </summary>
         /// <value>
@@ -634,72 +401,7 @@ namespace Allors.Meta
         {
             get
             {
-                if (this.ExistSingularName)
-                {
-                    return this.SingularName;
-                }
-
-                return this.IdAsString;
-            }
-        }
-
-        /// <summary>
-        /// Gets the object types where this instance is a direct super interface.
-        /// </summary>
-        /// <value>The object types where this instance is a direct super interface.</value>
-        public ObjectType[] ObjectTypesWhereDirectSuperinterface
-        {
-            get
-            {
-                return this.ObjectTypesWhereDerivedDirectSuperinterface;
-            }
-        }
-
-        /// <summary>
-        /// Gets the object types where this instance is an exclusive super interface.
-        /// </summary>
-        /// <value>The object types where this instance is an exclusive super interface.</value>
-        public ObjectType[] ObjectTypesWhereExclusiveSuperinterface
-        {
-            get
-            {
-                return this.ObjectTypesWhereDerivedExclusiveSuperinterface;
-            }
-        }
-
-        /// <summary>
-        /// Gets the object types where this instance is the root class.
-        /// </summary>
-        /// <value>The object types where this instance is the root class.</value>
-        public ObjectType[] ObjectTypesWhereRootClass
-        {
-            get
-            {
-                return this.ObjectTypesWhereDerivedRootClass;
-            }
-        }
-
-        /// <summary>
-        /// Gets the object types where this instance is the super class.
-        /// </summary>
-        /// <value>The object types where this instance is the super class.</value>
-        public ObjectType[] ObjectTypesWhereSuperclass
-        {
-            get
-            {
-                return this.ObjectTypesWhereDerivedSuperclass;
-            }
-        }
-
-        /// <summary>
-        /// Gets the object types where this instance is the super interface.
-        /// </summary>
-        /// <value>The object types where this instance is the super interface.</value>
-        public ObjectType[] ObjectTypesWhereSuperinterface
-        {
-            get
-            {
-                return this.ObjectTypesWhereDerivedSuperinterface;
+                return this.SingularName;
             }
         }
 
@@ -707,7 +409,7 @@ namespace Allors.Meta
         /// Gets the method types.
         /// </summary>
         /// <value>The method types.</value>
-        public MethodType[] MethodTypes
+        public IList<MethodType> MethodTypes
         {
             get
             {
@@ -716,30 +418,10 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Gets the role count.
-        /// </summary>
-        /// <value>The role count.</value>
-        public int RoleTypeCount
-        {
-            get { return this.RoleTypes.Length; }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether the role count is greater than 32.
-        /// </summary>
-        /// <value>
-        ///  <c>true</c> if the role count is greater than32; otherwise, <c>false</c>.
-        /// </value>
-        public bool RoleTypeCountGreaterThan32
-        {
-            get { return this.RoleTypes.Length > 32; }
-        }
-
-        /// <summary>
         /// Gets the roles.
         /// </summary>
         /// <value>The roles.</value>
-        public RoleType[] RoleTypes
+        public IList<RoleType> RoleTypes
         {
             get
             {
@@ -751,7 +433,7 @@ namespace Allors.Meta
         /// Gets the roles where this instance is the root type.
         /// </summary>
         /// <value>The roles where this instance is the root type.</value>
-        public RoleType[] RolesTypesWhereRootType
+        public IList<RoleType> RolesTypesWhereRootType
         {
             get
             {
@@ -763,7 +445,7 @@ namespace Allors.Meta
         /// Gets the root classes.
         /// </summary>
         /// <value>The root classes.</value>
-        public ObjectType[] RootClasses
+        public IList<ObjectType> RootClasses
         {
             get
             {
@@ -775,7 +457,7 @@ namespace Allors.Meta
         /// Gets the subclasses.
         /// </summary>
         /// <value>The subclasses.</value>
-        public ObjectType[] Subclasses
+        public IList<ObjectType> Subclasses
         {
             get
             {
@@ -787,7 +469,7 @@ namespace Allors.Meta
         /// Gets the sub interfaces.
         /// </summary>
         /// <value>The sub interfaces.</value>
-        public ObjectType[] Subinterfaces
+        public IList<ObjectType> Subinterfaces
         {
             get
             {
@@ -796,22 +478,10 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Gets the subtypes.
-        /// </summary>
-        /// <value>The subtypes.</value>
-        public ObjectType[] Subtypes
-        {
-            get
-            {
-                return this.ObjectTypesWhereDerivedSupertype;
-            }
-        }
-
-        /// <summary>
         /// Gets the super classes.
         /// </summary>
         /// <value>The super classes.</value>
-        public ObjectType[] Superclasses
+        public IList<ObjectType> Superclasses
         {
             get
             {
@@ -820,22 +490,10 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Gets the super interfaces.
-        /// </summary>
-        /// <value>The super interfaces.</value>
-        public ObjectType[] Superinterfaces
-        {
-            get
-            {
-                return this.DerivedSuperinterfaces;
-            }
-        }
-
-        /// <summary>
         /// Gets the super types.
         /// </summary>
         /// <value>The super types.</value>
-        public ObjectType[] Supertypes
+        public IList<ObjectType> Supertypes
         {
             get
             {
@@ -843,40 +501,12 @@ namespace Allors.Meta
             }
         }
 
-        /// <summary>
-        /// Gets the unique roles.
-        /// </summary>
-        /// <value>The unique roles.</value>
-        public RoleType[] UniqueRoleTypes
-        {
-            get { return this.GetUnitRoleTypes(UnitTags.AllorsUnique); }
-        }
-
-        /// <summary>
-        /// Gets the unit role count.
-        /// </summary>
-        /// <value>The unit role count.</value>
-        public int UnitRoleTypesCount
-        {
-            get { return this.UnitRoleTypes.Length; }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether the unit role count is greater than32.
-        /// </summary>
-        /// <value>
-        ///  <c>true</c> if the unit role count is greater than 32; otherwise, <c>false</c>.
-        /// </value>
-        public bool UnitRoleTypesCountGreaterThan32
-        {
-            get { return this.UnitRoleTypes.Length > 32; }
-        }
 
         /// <summary>
         /// Gets the unit roles.
         /// </summary>
         /// <value>The unit roles.</value>
-        public RoleType[] UnitRoleTypes
+        public IList<RoleType> UnitRoleTypes
         {
             get
             {
@@ -892,17 +522,12 @@ namespace Allors.Meta
         {
             get
             {
-                if (this.ExistSingularName)
+                if (!string.IsNullOrEmpty(this.SingularName))
                 {
                     return "object type " + this.SingularName;
                 }
                 
-                if (this.ExistId)
-                {
-                    return "object type " + this.Id;
-                }
-
-                return "unknown object type";
+                return "object type " + this.Id;
             }
         }
 
@@ -950,21 +575,7 @@ namespace Allors.Meta
 
             return inheritance;
         }
-
-        /// <summary>
-        /// Adds a <see cref="MethodType"/> to this object.
-        /// </summary>
-        /// <param name="methodId">The method id</param>
-        /// <param name="methodName">The method name</param>
-        /// <returns>The method type</returns>
-        public MethodType AddMethodType(Guid methodId, string methodName)
-        {
-            var methodType = this.Domain.AddDeclaredMethodType(methodId);
-            methodType.ObjectType = this;
-            methodType.Name = methodName;
-            return methodType;
-        }
-
+        
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -994,7 +605,7 @@ namespace Allors.Meta
         /// </returns>
         public bool ContainsAssociationType(AssociationType association)
         {
-            return this.associationIdsCache.ContainsKey(association.RelationTypeWhereAssociationType.Id);
+            return this.associationIdsCache.ContainsKey(association.RelationType.Id);
         }
 
         /// <summary>
@@ -1006,7 +617,7 @@ namespace Allors.Meta
         /// </returns>
         public bool ContainsRoleType(RoleType role)
         {
-            return this.roleIdsCache.ContainsKey(role.RelationTypeWhereRoleType.Id);
+            return this.roleIdsCache.ContainsKey(role.RelationType.Id);
         }
 
         /// <summary>
@@ -1022,27 +633,7 @@ namespace Allors.Meta
         {
             return this.concreteClassesCache.Contains(objectType);
         }
-
-        /// <summary>
-        /// Delete this instance and its associations and inheritances.
-        /// </summary>
-        public void DeleteRecursive()
-        {
-            var inheritances = new List<Inheritance>();
-            inheritances.AddRange(this.InheritancesWhereSubtype);
-            inheritances.AddRange(this.InheritancesWhereSupertype);
-
-            var associations = this.AssociationTypesWhereObjectType;
-
-            foreach (var association in associations)
-            {
-            }
-
-            foreach (var inheritance in inheritances)
-            {
-            }
-        }
-
+        
         /// <summary>
         /// Finds the inheritance where this instance is the direct subtype.
         /// </summary>
@@ -1098,34 +689,14 @@ namespace Allors.Meta
         /// </returns>
         public override string ToString()
         {
-            if (this.ExistSingularName)
+            if (!string.IsNullOrEmpty(this.SingularName))
             {
                 return this.SingularName;
             }
 
-            if (this.ExistId)
-            {
-                return this.IdAsString;
-            }
-
-            return this.AllorsObjectId.ToString(CultureInfo.InvariantCulture);
+            return this.IdAsString;
         }
-        
-        /// <summary>
-        /// Creates a new instance.
-        /// </summary>
-        /// <param name="session">The session.</param>
-        /// <returns>The new instance.</returns>
-        internal static ObjectType Create(AllorsEmbeddedSession session)
-        {
-            var type = (ObjectType)session.Create(AllorsEmbeddedDomain.ObjectType);
-
-            type.IsInterface = false;
-            type.IsUnit = false;
-
-            return type;
-        }
-
+       
         /// <summary>
         /// Determines whether adding the specified super type will result in a cycle.
         /// </summary>
@@ -1160,21 +731,18 @@ namespace Allors.Meta
             associations.Clear();
             foreach (var role in this.RoleTypesWhereObjectType)
             {
-                associations.Add(role.RelationTypeWhereRoleType.AssociationType);
+                associations.Add(role.RelationType.AssociationType);
             }
 
             foreach (var superType in this.Supertypes)
             {
                 foreach (var role in superType.RoleTypesWhereObjectType)
                 {
-                    associations.Add(role.RelationTypeWhereRoleType.AssociationType);
+                    associations.Add(role.RelationType.AssociationType);
                 }
             }
 
-            var associationArray = new AssociationType[associations.Count];
-            associations.CopyTo(associationArray);
-
-            this.DerivedAssociationTypes = associationArray;
+            this.DerivedAssociationTypes = new List<AssociationType>(associations);
         }
 
         /// <summary>
@@ -1187,16 +755,13 @@ namespace Allors.Meta
             foreach (var role in this.DerivedRoleTypes)
             {
                 // TODO: Test
-                if (role.ExistObjectType && !role.ObjectType.IsUnit)
+                if (role.ObjectType != null && !role.ObjectType.IsUnit)
                 {
                     roles.Add(role);
                 }
             }
 
-            var roleArray = new RoleType[roles.Count];
-            roles.CopyTo(roleArray);
-
-            this.DerivedCompositeRoleTypes = roleArray;
+            this.DerivedCompositeRoleTypes = new List<RoleType>(roles);
         }
 
         /// <summary>
@@ -1207,7 +772,7 @@ namespace Allors.Meta
             this.associationIdsCache = new Dictionary<Guid, object>();
             foreach (var containsAssociation in this.AssociationTypes)
             {
-                this.associationIdsCache[containsAssociation.RelationTypeWhereAssociationType.Id] = null;
+                this.associationIdsCache[containsAssociation.RelationType.Id] = null;
             }
         }
 
@@ -1219,7 +784,7 @@ namespace Allors.Meta
             this.roleIdsCache = new Dictionary<Guid, object>();
             foreach (var containsRole in this.DerivedRoleTypes)
             {
-                this.roleIdsCache[containsRole.RelationTypeWhereRoleType.Id] = null;
+                this.roleIdsCache[containsRole.RelationType.Id] = null;
             }
         }
 
@@ -1246,10 +811,7 @@ namespace Allors.Meta
                 }
             }
 
-            var directSuperinterfaceArray = new ObjectType[directSuperinterfaces.Count];
-            directSuperinterfaces.CopyTo(directSuperinterfaceArray);
-
-            this.DerivedDirectSuperinterfaces = directSuperinterfaceArray;
+            this.DerivedDirectSuperinterfaces = new List<ObjectType>(directSuperinterfaces);
         }
 
         /// <summary>
@@ -1264,10 +826,7 @@ namespace Allors.Meta
                 directSupertypes.Add(inheritance.Supertype);
             }
 
-            var directSupertypeArray = new ObjectType[directSupertypes.Count];
-            directSupertypes.CopyTo(directSupertypeArray);
-
-            this.DerivedDirectSupertypes = directSupertypeArray;
+            this.DerivedDirectSupertypes = new List<ObjectType>(directSupertypes);
         }
 
         /// <summary>
@@ -1279,21 +838,18 @@ namespace Allors.Meta
             exclusiveAssociationTypes.Clear();
             foreach (var role in this.RoleTypesWhereObjectType)
             {
-                exclusiveAssociationTypes.Add(role.RelationTypeWhereRoleType.AssociationType);
+                exclusiveAssociationTypes.Add(role.RelationType.AssociationType);
             }
 
             foreach (var superType in this.ExclusiveSuperinterfaces)
             {
                 foreach (var role in superType.RoleTypesWhereObjectType)
                 {
-                    exclusiveAssociationTypes.Add(role.RelationTypeWhereRoleType.AssociationType);
+                    exclusiveAssociationTypes.Add(role.RelationType.AssociationType);
                 }
             }
 
-            var exclusiveAssociationTypeArray = new AssociationType[exclusiveAssociationTypes.Count];
-            exclusiveAssociationTypes.CopyTo(exclusiveAssociationTypeArray);
-
-            this.DerivedExclusiveAssociationTypes = exclusiveAssociationTypeArray;
+            this.DerivedExclusiveAssociationTypes = new List<AssociationType>(exclusiveAssociationTypes);
         }
 
         /// <summary>
@@ -1305,7 +861,7 @@ namespace Allors.Meta
             concreteLeafClasses.Clear();
 
             this.DerivedExclusiveConcreteLeafClass = null;
-            if (!this.IsInterface && !this.ExistSubclasses)
+            if (!this.IsInterface && this.DerivedSubclasses.Count == 0)
             {
                 concreteLeafClasses.Add(this);
             }
@@ -1314,7 +870,7 @@ namespace Allors.Meta
             {
                 foreach (var rootSubClass in rootClass.Subclasses)
                 {
-                    if (!rootSubClass.IsInterface && !rootSubClass.ExistSubclasses)
+                    if (!rootSubClass.IsInterface && rootSubClass.DerivedSubclasses.Count == 0)
                     {
                         if (!concreteLeafClasses.Contains(rootSubClass))
                         {
@@ -1342,21 +898,18 @@ namespace Allors.Meta
             exclusiveRoles.Clear();
             foreach (var association in this.AssociationTypesWhereObjectType)
             {
-                exclusiveRoles.Add(association.RelationTypeWhereAssociationType.RoleType);
+                exclusiveRoles.Add(association.RelationType.RoleType);
             }
 
             foreach (var superType in this.ExclusiveSuperinterfaces)
             {
                 foreach (var association in superType.AssociationTypesWhereObjectType)
                 {
-                    exclusiveRoles.Add(association.RelationTypeWhereAssociationType.RoleType);
+                    exclusiveRoles.Add(association.RelationType.RoleType);
                 }
             }
 
-            var exclusiveRoleArray = new RoleType[exclusiveRoles.Count];
-            exclusiveRoles.CopyTo(exclusiveRoleArray);
-
-            this.DerivedExclusiveRoleTypes = exclusiveRoleArray;
+            this.DerivedExclusiveRoleTypes = new List<RoleType>(exclusiveRoles);
         }
 
         /// <summary>
@@ -1374,10 +927,7 @@ namespace Allors.Meta
                 }
             }
 
-            var superInterfaceArray = new ObjectType[superInterfaces.Count];
-            superInterfaces.CopyTo(superInterfaceArray);
-
-            this.DerivedExclusiveSuperinterfaces = superInterfaceArray;
+            this.DerivedExclusiveSuperinterfaces = new List<ObjectType>(superInterfaces);
         }
 
         /// <summary>
@@ -1402,10 +952,7 @@ namespace Allors.Meta
                 }
             }
 
-            var methodTypeArray = new MethodType[methodTypes.Count];
-            methodTypes.CopyTo(methodTypeArray);
-
-            this.DerivedMethodTypes = methodTypeArray;
+            this.DerivedMethodTypes = new List<MethodType>(methodTypes);
         }
 
         /// <summary>
@@ -1417,21 +964,18 @@ namespace Allors.Meta
             roleTypes.Clear();
             foreach (var association in this.AssociationTypesWhereObjectType)
             {
-                roleTypes.Add(association.RelationTypeWhereAssociationType.RoleType);
+                roleTypes.Add(association.RelationType.RoleType);
             }
 
             foreach (var superType in this.Supertypes)
             {
                 foreach (var association in superType.AssociationTypesWhereObjectType)
                 {
-                    roleTypes.Add(association.RelationTypeWhereAssociationType.RoleType);
+                    roleTypes.Add(association.RelationType.RoleType);
                 }
             }
 
-            var roleTypeArray = new RoleType[roleTypes.Count];
-            roleTypes.CopyTo(roleTypeArray);
-
-            this.DerivedRoleTypes = roleTypeArray;
+            this.DerivedRoleTypes = new List<RoleType>(roleTypes);
         }
 
         /// <summary>
@@ -1445,7 +989,7 @@ namespace Allors.Meta
             }
             else
             {
-                this.DerivedRootClasses = new[] { this };
+                this.DerivedRootClasses = new List<ObjectType>() { this };
             }
         }
 
@@ -1464,10 +1008,7 @@ namespace Allors.Meta
                 }
             }
 
-            var subClassArray = new ObjectType[subClasses.Count];
-            subClasses.CopyTo(subClassArray);
-
-            this.DerivedSubclasses = subClassArray;
+            this.DerivedSubclasses = new List<ObjectType>(subClasses);
         }
 
         /// <summary>
@@ -1485,10 +1026,7 @@ namespace Allors.Meta
                 }
             }
 
-            var subInterfaceArray = new ObjectType[subInterfaces.Count];
-            subInterfaces.CopyTo(subInterfaceArray);
-
-            this.DerivedSubinterfaces = subInterfaceArray;
+            this.DerivedSubinterfaces = new List<ObjectType>(subInterfaces);
         }
 
         /// <summary>
@@ -1506,10 +1044,7 @@ namespace Allors.Meta
                 }
             }
 
-            var superClassArray = new ObjectType[superClasses.Count];
-            superClasses.CopyTo(superClassArray);
-
-            this.DerivedSuperclasses = superClassArray;
+            this.DerivedSuperclasses = new List<ObjectType>(superClasses);
         }
 
         /// <summary>
@@ -1527,10 +1062,7 @@ namespace Allors.Meta
                 }
             }
 
-            var superInterfaceArray = new ObjectType[superInterfaces.Count];
-            superInterfaces.CopyTo(superInterfaceArray);
-
-            this.DerivedSuperinterfaces = superInterfaceArray;
+            this.DerivedSuperinterfaces = new List<ObjectType>(superInterfaces);
         }
 
         /// <summary>
@@ -1542,10 +1074,7 @@ namespace Allors.Meta
             superTypes.Clear();
             this.DeriveSupertypesRecursively(this, superTypes);
 
-            var superTypeArray = new ObjectType[superTypes.Count];
-            superTypes.CopyTo(superTypeArray);
-
-            this.DerivedSupertypes = superTypeArray;
+            this.DerivedSupertypes = new List<ObjectType>(superTypes);
         }
 
         /// <summary>
@@ -1558,16 +1087,13 @@ namespace Allors.Meta
             foreach (var role in this.DerivedRoleTypes)
             {
                 // TODO: Test
-                if (role.ExistObjectType && role.ObjectType.IsUnit)
+                if (role.ObjectType != null && role.ObjectType.IsUnit)
                 {
                     roles.Add(role);
                 }
             }
 
-            var roleArray = new RoleType[roles.Count];
-            roles.CopyTo(roleArray);
-
-            this.DerivedUnitRoleTypes = roleArray;
+            this.DerivedUnitRoleTypes = new List<RoleType>(roles);
         }
 
         /// <summary>
@@ -1578,19 +1104,19 @@ namespace Allors.Meta
         {
             base.Validate(validationLog);
 
-            if (this.ExistSingularName)
+            if (!string.IsNullOrEmpty(this.SingularName))
             {
                 if (this.SingularName.Length < 2)
                 {
                     var message = this.ValidationName + " should have a singular name with at least 2 characters";
-                    validationLog.AddError(message, this, ValidationKind.MinimumLength, AllorsEmbeddedDomain.ObjectTypeSingularName);
+                    validationLog.AddError(message, this, ValidationKind.MinimumLength, "ObjectType.SingularName");
                 }
                 else
                 {
                     if (!char.IsLetter(this.SingularName[0]))
                     {
                         var message = this.ValidationName + "'s singular name should start with an alfabetical character";
-                        validationLog.AddError(message, this, ValidationKind.Format, AllorsEmbeddedDomain.ObjectTypeSingularName);
+                        validationLog.AddError(message, this, ValidationKind.Format, "ObjectType.SingularName");
                     }
 
                     for (var i = 1; i < this.SingularName.Length; i++)
@@ -1598,7 +1124,7 @@ namespace Allors.Meta
                         if (!char.IsLetter(this.SingularName[i]) && !char.IsDigit(this.SingularName[i]))
                         {
                             var message = this.ValidationName + "'s singular name should only contain alfanumerical characters";
-                            validationLog.AddError(message, this, ValidationKind.Format, AllorsEmbeddedDomain.ObjectTypeSingularName);
+                            validationLog.AddError(message, this, ValidationKind.Format, "ObjectType.SingularName");
                             break;
                         }
                     }
@@ -1607,7 +1133,7 @@ namespace Allors.Meta
                 if (validationLog.ExistObjectTypeName(this.SingularName))
                 {
                     var message = "The singular name of " + this.ValidationName + " is already in use";
-                    validationLog.AddError(message, this, ValidationKind.Unique, AllorsEmbeddedDomain.ObjectTypeSingularName);
+                    validationLog.AddError(message, this, ValidationKind.Unique, "ObjectType.SingularName");
                 }
                 else
                 {
@@ -1616,7 +1142,7 @@ namespace Allors.Meta
             }
             else
             {
-                validationLog.AddError(this.ValidationName + " has no singular name", this, ValidationKind.Required, AllorsEmbeddedDomain.ObjectTypeSingularName);
+                validationLog.AddError(this.ValidationName + " has no singular name", this, ValidationKind.Required, "ObjectType.SingularName");
             }
 
             if (this.ExistPluralName)
@@ -1624,14 +1150,14 @@ namespace Allors.Meta
                 if (this.PluralName.Length < 2)
                 {
                     var message = this.ValidationName + " should have a plural name with at least 2 characters";
-                    validationLog.AddError(message, this, ValidationKind.MinimumLength, AllorsEmbeddedDomain.ObjectTypePluralName);
+                    validationLog.AddError(message, this, ValidationKind.MinimumLength, "ObjectType.PluralName");
                 }
                 else
                 {
                     if (!char.IsLetter(this.PluralName[0]))
                     {
                         var message = this.ValidationName + "'s plural name should start with an alfabetical character";
-                        validationLog.AddError(message, this, ValidationKind.Format, AllorsEmbeddedDomain.ObjectTypePluralName);
+                        validationLog.AddError(message, this, ValidationKind.Format, "ObjectType.PluralName");
                     }
 
                     for (var i = 1; i < this.PluralName.Length; i++)
@@ -1639,7 +1165,7 @@ namespace Allors.Meta
                         if (!char.IsLetter(this.PluralName[i]) && !char.IsDigit(this.PluralName[i]))
                         {
                             var message = this.ValidationName + "'s plural name should only contain alfanumerical characters";
-                            validationLog.AddError(message, this, ValidationKind.Format, AllorsEmbeddedDomain.ObjectTypePluralName);
+                            validationLog.AddError(message, this, ValidationKind.Format, "ObjectType.PluralName");
                             break;
                         }
                     }
@@ -1648,7 +1174,7 @@ namespace Allors.Meta
                 if (validationLog.ExistObjectTypeName(this.PluralName))
                 {
                     var message = "The plural name of " + this.ValidationName + " is already in use";
-                    validationLog.AddError(message, this, ValidationKind.Unique, AllorsEmbeddedDomain.ObjectTypePluralName);
+                    validationLog.AddError(message, this, ValidationKind.Unique, "ObjectType.PluralName");
                 }
                 else
                 {
@@ -1657,27 +1183,8 @@ namespace Allors.Meta
             }
             else
             {
-                validationLog.AddError(this.ValidationName + " has no plural name", this, ValidationKind.Required, AllorsEmbeddedDomain.ObjectTypePluralName);
+                validationLog.AddError(this.ValidationName + " has no plural name", this, ValidationKind.Required, "ObjectType.PluralName");
             }
-        }
-
-        /// <summary>
-        /// Gets the unit roles.
-        /// </summary>
-        /// <param name="unitTypeTags">The unit type tag.</param>
-        /// <returns>The roles.</returns>
-        private RoleType[] GetUnitRoleTypes(UnitTags unitTypeTags)
-        {
-            var roles = new List<RoleType>(this.UnitRoleTypes.Length);
-            foreach (var role in this.UnitRoleTypes)
-            {
-                if (role.ObjectType.UnitTag == (int)unitTypeTags)
-                {
-                    roles.Add(role);
-                }
-            }
-
-            return roles.ToArray();
         }
 
         /// <summary>

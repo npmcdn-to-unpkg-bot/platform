@@ -20,8 +20,6 @@
 //-------------------------------------------------------------------------------------------------
 namespace Allors.Meta
 {
-    using Allors.Meta.AllorsGenerated;
-
     /// <summary>
     /// The tags for <see cref="AllorsClassObjectType.UnitTag"/>s.
     /// Do not use tags for long term persistence, UnitTypeIds should be used for that.

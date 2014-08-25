@@ -20,7 +20,7 @@
 
 namespace Allors.Meta
 {
-    public partial class PropertyType
+    public abstract partial class PropertyType : OperandType
     {
         /// <summary>
         /// Gets the operand name.

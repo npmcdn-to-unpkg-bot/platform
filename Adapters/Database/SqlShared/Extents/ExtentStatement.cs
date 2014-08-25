@@ -168,7 +168,7 @@ namespace Allors.Adapters.Database.Sql
 
         public bool AddWhere(ObjectType rootClass, string alias)
         {
-            var useWhere = !this.Extent.ObjectType.ExistExclusiveRootClass || !this.Extent.ObjectType.ExclusiveRootClass.ExistExclusiveConcreteSubclass;
+            var useWhere = !(this.Extent.ObjectType.RootClasses.Length == 1) || !(bool)this.Extent.ObjectType.ExclusiveRootClass.ExistDerivedExclusiveConcreteLeafClass;
             
             if (useWhere)
             {

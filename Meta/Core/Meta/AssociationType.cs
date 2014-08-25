@@ -23,9 +23,7 @@ namespace Allors.Meta
 {
     using System;
     using System.Collections.Generic;
-
-    using AllorsGenerated;
-
+    
     /// <summary>
     /// An <see cref="AssociationType"/> defines the association side of a relation.
     /// This is also called the 'active', 'controlling' or 'owning' side.
@@ -44,6 +42,12 @@ namespace Allors.Meta
         public string DerivedRootName;
         
         public string AssignedSingularName;
+
+        public AssociationType(RelationType relationType, Guid associationTypeId)
+        {
+            this.RelationType = relationType;
+            this.Id = associationTypeId;
+        }
 
         // RelationType->AssociationType
         public RelationType RelationType { get; private set; }
@@ -117,7 +121,7 @@ namespace Allors.Meta
         /// <value>The role .</value>
         public RoleType RoleType
         {
-            get { return RelationTypeWhereAssociationType.RoleType; }
+            get { return RelationType.RoleType; }
         }
 
         /// <summary>
@@ -128,12 +132,7 @@ namespace Allors.Meta
         {
             get
             {
-                if (ExistRelationTypeWhereAssociationType)
-                {
-                    return "association type " + RelationTypeWhereAssociationType.Name;
-                }
-
-                return "unknown association type";
+                return "association type " + RelationType.Name;
             }
         }
 
@@ -187,30 +186,13 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Creates a new instance.
-        /// </summary>
-        /// <param name="session">The session.</param>
-        /// <returns>A new instance</returns>
-        internal static AssociationType Create(AllorsEmbeddedSession session)
-        {
-            var association = (AssociationType)session.Create(AllorsEmbeddedDomain.AssociationType);
-
-            association.IsMany = false;
-
-            return association;
-        }
-
-        /// <summary>
         /// Derive the multiplicity.
         /// </summary>
         internal void DeriveMultiplicity()
         {
-            if (this.RoleType != null && this.RoleType.ExistObjectType && this.RoleType.ObjectType.IsUnit)
+            if (this.RoleType != null && this.RoleType.ObjectType != null && this.RoleType.ObjectType.IsUnit)
             {
-                if (!this.ExistIsMany || this.IsMany)
-                {
-                    base.IsMany = false;
-                }
+                this.IsMany = false;
             }
         }
 
@@ -222,16 +204,16 @@ namespace Allors.Meta
         {
             base.Validate(validationLog);
 
-            if (!ExistObjectType)
+            if (this.ObjectType == null)
             {
                 var message = this.ValidationName + " has no object type";
-                validationLog.AddError(message, this, ValidationKind.Required, AllorsEmbeddedDomain.AssociationTypeObjectType);
+                validationLog.AddError(message, this, ValidationKind.Required, "AssociationType.ObjectType");
             }
 
-            if (!ExistRelationTypeWhereAssociationType)
+            if (this.RelationType == null)
             {
                 var message = this.ValidationName + " has no relation type";
-                validationLog.AddError(message, this, ValidationKind.Required, AllorsEmbeddedDomain.RelationTypeAssociationType);
+                validationLog.AddError(message, this, ValidationKind.Required, "AssociationType.RelationType");
             }
         }
     }

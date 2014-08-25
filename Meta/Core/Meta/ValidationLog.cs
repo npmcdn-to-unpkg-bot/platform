@@ -23,8 +23,6 @@ namespace Allors.Meta
     using System;
     using System.Collections.Generic;
 
-    using Allors.Meta.AllorsGenerated;
-
     /// <summary>
     /// The report of the validation.
     /// </summary>
@@ -105,7 +103,7 @@ namespace Allors.Meta
         /// <param name="source">The source.</param>
         /// <param name="kind">The kind.</param>
         /// <param name="members">The members.</param>
-        public void AddError(string message, object source, ValidationKind kind, params AllorsEmbeddedRelationType[] members)
+        public void AddError(string message, object source, ValidationKind kind, params string[] members)
         {
             this.errors.Add(new ValidationError(message, source, kind, members));
         }

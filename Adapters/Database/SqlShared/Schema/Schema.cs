@@ -406,7 +406,7 @@ namespace Allors.Adapters.Database.Sql
 
             foreach (var objectType in this.Database.Domain.CompositeObjectTypes)
             {
-                if (objectType.IsRootClass)
+                if (!objectType.IsUnit && !objectType.IsInterface)
                 {
                     var schemaTable = new SchemaTable(this, objectType.SingularName, SchemaTableKind.Object, objectType);
                     this.TablesByName.Add(schemaTable.Name, schemaTable);

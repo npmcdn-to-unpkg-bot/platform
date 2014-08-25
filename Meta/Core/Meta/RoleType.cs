@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="MetaRole.cs" company="Allors bvba">
+// <copyright file="RoleType.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -23,17 +23,46 @@ namespace Allors.Meta
 {
     using System;
     using System.Collections.Generic;
-    using System.Globalization;
-
-    using AllorsGenerated;
+    using System.Data.SqlTypes;
 
     /// <summary>
     /// A <see cref="RoleType"/> defines the role side of a relation.
     /// This is also called the 'passive' side.
     /// RoleTypes can have composite and unit <see cref="ObjectType"/>s.
     /// </summary>
-    public partial class RoleType : IComparable
+    public partial class RoleType : PropertyType, IComparable
     {
+        public ObjectType ObjectType;
+        
+        public List<ObjectType> DerivedRootTypes = new List<ObjectType>();
+
+        public int? Scale;
+
+        public int? Precision;
+
+        public int? Size;
+
+        public string DerivedHierarchyPluralName;
+
+        public string DerivedHierarchySingularName;
+
+        public string AssignedPluralName;
+
+        public string DerivedRootName;
+
+        public bool IsMany;
+
+        public string AssignedSingularName;
+
+        public RoleType(RelationType relationType, Guid roleTypeId)
+        {
+            this.RelationType = relationType;
+            this.Id = roleTypeId;
+        }
+
+        // RelationType -> RoleType
+        public RelationType RelationType { get; private set; }
+        
         /// <summary>
         /// The maximum size value.
         /// </summary>
@@ -85,22 +114,12 @@ namespace Allors.Meta
         {
             get
             {
-                if (ExistAssignedSingularName)
+                if (!string.IsNullOrEmpty(this.AssignedSingularName))
                 {
                     return this.AssignedSingularName;
                 }
 
-                if (ExistObjectType)
-                {
-                    return ObjectType.ExistSingularName ? ObjectType.SingularName : ObjectType.ToString();
-                }
-
-                if (ExistRelationTypeWhereRoleType)
-                {
-                    return RelationTypeWhereRoleType.SafeName;
-                }
-
-                return AllorsObjectId.ToString(CultureInfo.InvariantCulture);
+                return this.ObjectType.SingularName;
             }
         }
 
@@ -112,17 +131,12 @@ namespace Allors.Meta
         {
             get
             {
-                if (ExistAssignedPluralName)
+                if (!string.IsNullOrEmpty(this.AssignedPluralName))
                 {
                     return this.AssignedPluralName;
                 }
 
-                if (ExistObjectType && ObjectType.ExistPluralName)
-                {
-                    return ObjectType.PluralName;
-                }
-
-                return this.SingularName;
+                return this.ObjectType.PluralName;
             }
         }
 
@@ -149,7 +163,7 @@ namespace Allors.Meta
         /// <value>The full singular name.</value>
         public string FullSingularName
         {
-            get { return this.RelationTypeWhereRoleType.AssociationType.SingularName + this.SingularName; }
+            get { return this.RelationType.AssociationType.SingularName + this.SingularName; }
         }
 
         /// <summary>
@@ -158,7 +172,7 @@ namespace Allors.Meta
         /// <value>The full plural name.</value>
         public string FullPluralName
         {
-            get { return this.RelationTypeWhereRoleType.AssociationType.SingularName + this.PluralName; }
+            get { return this.RelationType.AssociationType.SingularName + this.PluralName; }
         }
 
         /// <summary>
@@ -169,7 +183,7 @@ namespace Allors.Meta
         {
             get
             {
-                return DerivedRootName;
+                return this.DerivedRootName;
             }
         }
 
@@ -181,7 +195,7 @@ namespace Allors.Meta
         {
             get
             {
-                return DerivedHierarchySingularName;
+                return this.DerivedHierarchySingularName;
             }
         }
 
@@ -207,46 +221,24 @@ namespace Allors.Meta
             set { this.IsMany = !value; }
         }
 
-
-        /// <summary>
-        /// Gets the type of the relation.
-        /// </summary>
-        /// <value>The type of the relation.</value>
-        public RelationType RelationType
-        {
-            get { return RelationTypeWhereRoleType; }
-        }
-
         /// <summary>
         /// Gets the association.
         /// </summary>
         /// <value>The association.</value>
         public AssociationType AssociationType
         {
-            get { return RelationTypeWhereRoleType.AssociationType; }
+            get { return this.RelationType.AssociationType; }
         }
 
         /// <summary>
         /// Gets the root objectTypes.
         /// </summary>
         /// <value>The root objectTypes.</value>
-        public ObjectType[] RootTypes
+        public IList<ObjectType> RootTypes
         {
             get
             {
-                return DerivedRootTypes;
-            }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether there exist root objectTypes.
-        /// </summary>
-        /// <value><c>true</c> if there exist root objectTypes; otherwise, <c>false</c>.</value>
-        public bool ExistRootTypes
-        {
-            get
-            {
-                return ExistDerivedRootTypes;
+                return this.DerivedRootTypes;
             }
         }
         
@@ -258,12 +250,7 @@ namespace Allors.Meta
         {
             get
             {
-                if (ExistRelationTypeWhereRoleType)
-                {
-                    return "role type " + RelationTypeWhereRoleType.Name;
-                }
-
-                return "unknown role type";
+                return "role type " + RelationType.Name;
             }
         }
         
@@ -317,77 +304,65 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Creates a new instance.
-        /// </summary>
-        /// <param name="session">The session.</param>
-        /// <returns>The new instance.</returns>
-        internal static RoleType Create(AllorsEmbeddedSession session)
-        {
-            var role = (RoleType)session.Create(AllorsEmbeddedDomain.RoleType);
-            role.IsMany = false;
-            return role;
-        }
-
-        /// <summary>
         /// Derive multiplicity, scale and size.
         /// </summary>
         internal void DeriveMultiplicityScaleAndSize()
         {
-            if (this.ExistObjectType && this.ObjectType.IsUnit)
+            if (this.ObjectType != null && this.ObjectType.IsUnit)
             {
-                if (!this.ExistIsMany || this.IsMany)
-                {
-                    base.IsMany = false;
-                }
+                this.IsMany = false;
 
                 switch ((UnitTags)this.ObjectType.UnitTag)
                 {
                     case UnitTags.AllorsString:
-                        if (!this.ExistSize)
+                        if (!this.Size.HasValue)
                         {
                             this.Size = 256;
-
-                            base.RemoveScale();
-                            base.RemovePrecision();
                         }
+
+                        this.Scale = null;
+                        this.Precision = null;
+                
 
                         break;
                     case UnitTags.AllorsBinary:
-                        if (!this.ExistSize)
+                        if (!this.Size.HasValue)
                         {
                             this.Size = MaximumSize;
-
-                            base.RemoveScale();
-                            base.RemovePrecision();
                         }
+
+                        this.Scale = null;
+                        this.Precision = null;
 
                         break;
                     case UnitTags.AllorsDecimal:
-                        if (!this.ExistPrecision)
+                        if (!this.Precision.HasValue)
                         {
                             this.Precision = 19;
                         }
 
-                        if (!this.ExistScale)
+                        if (!this.Scale.HasValue)
                         {
                             this.Scale = 2;
                         }
 
-                        base.RemoveSize();
+                        this.Size = null;
+
                         break;
 
                     default:
-                        base.RemoveSize();
-                        base.RemoveScale();
-                        base.RemovePrecision();
+                        this.Size = null;
+                        this.Scale = null;
+                        this.Precision = null;
+                
                         break;
                 }
             }
             else
             {
-                base.RemoveSize();
-                base.RemoveScale();
-                base.RemovePrecision();
+                this.Size = null;
+                this.Scale = null;
+                this.Precision = null;
             }
         }
 
@@ -400,22 +375,22 @@ namespace Allors.Meta
             var association = relationType.AssociationType;
             var role = this;
 
-            DerivedRootTypes = null;
+            this.DerivedRootTypes = null;
 
             // TODO: Test
-            if (association.ExistObjectType)
+            if (association.ObjectType != null)
             {
-                if (ObjectType.IsUnit)
+                if (this.ObjectType.IsUnit)
                 {
-                    DerivedRootTypes = association.ObjectType.RootClasses;
+                    this.DerivedRootTypes = association.ObjectType.RootClasses;
                 }
                 else
                 {
                     if (!relationType.IsManyToMany &&
-                        relationType.ExistExclusiveRootClasses &&
+                        relationType.ExclusiveRootClasses.Count > 0 &&
                         !role.IsMany)
                     {
-                        DerivedRootTypes = association.ObjectType.RootClasses;
+                        this.DerivedRootTypes = association.ObjectType.RootClasses;
                     }
                 }
             }
@@ -428,18 +403,14 @@ namespace Allors.Meta
         internal void DeriveHierarchyPluralName(HashSet<ObjectType> objectTypes)
         {
             objectTypes.Clear();
-            DerivedHierarchyPluralName = null;
+            this.DerivedHierarchyPluralName = null;
 
-            if (ExistObjectType && ExistRelationTypeWhereRoleType && RelationTypeWhereRoleType.ExistAssociationType &&
-                RelationTypeWhereRoleType.AssociationType.ExistObjectType)
+            if (this.ObjectType != null && this.AssociationType.ObjectType != null)
             {
-                var myAssociation = RelationTypeWhereRoleType.AssociationType;
-                var myAssociationType = myAssociation.ObjectType;
-
-                objectTypes.Add(myAssociationType);
-                objectTypes.UnionWith(myAssociationType.Supertypes);
-                objectTypes.UnionWith(myAssociationType.Subtypes);
-                foreach (var subType in myAssociationType.Subtypes)
+                objectTypes.Add(this.AssociationType.ObjectType);
+                objectTypes.UnionWith(this.AssociationType.ObjectType.Supertypes);
+                objectTypes.UnionWith(this.AssociationType.ObjectType.Subtypes);
+                foreach (var subType in this.AssociationType.ObjectType.Subtypes)
                 {
                     foreach (var superType in subType.Supertypes)
                     {
@@ -450,13 +421,13 @@ namespace Allors.Meta
                     }
                 }
 
-                DerivedHierarchyPluralName = this.PluralName;
+                this.DerivedHierarchyPluralName = this.PluralName;
 
-                foreach (var type in objectTypes)
+                foreach (var objectType in objectTypes)
                 {
-                    foreach (var otherAsssociation in type.AssociationTypesWhereObjectType)
+                    foreach (var otherAsssociation in objectType.AssociationTypesWhereObjectType)
                     {
-                        if (!myAssociation.Equals(otherAsssociation))
+                        if (!this.AssociationType.Equals(otherAsssociation))
                         {
                             if (otherAsssociation.ExistRelationTypeWhereAssociationType)
                             {
@@ -488,12 +459,11 @@ namespace Allors.Meta
         internal void DeriveHierarchySingularName(HashSet<ObjectType> objectTypes)
         {
             objectTypes.Clear();
-            DerivedHierarchySingularName = null;
+            this.DerivedHierarchySingularName = null;
 
-            if (ExistObjectType && ExistRelationTypeWhereRoleType && RelationTypeWhereRoleType.ExistAssociationType &&
-                RelationTypeWhereRoleType.AssociationType.ExistObjectType)
+            if (this.ObjectType != null && this.AssociationType.ObjectType != null)
             {
-                var myAssociation = RelationTypeWhereRoleType.AssociationType;
+                var myAssociation = this.AssociationType;
                 var myAssociationType = myAssociation.ObjectType;
 
                 objectTypes.Add(myAssociationType);
@@ -545,24 +515,23 @@ namespace Allors.Meta
         /// </summary>
         internal void DeriveRootName()
         {
-            DerivedRootName = null;
+            this.DerivedRootName = null;
 
-            if (ExistObjectType && ExistRelationTypeWhereRoleType && RelationTypeWhereRoleType.ExistAssociationType &&
-                RelationTypeWhereRoleType.AssociationType.ExistObjectType)
+            if (this.ObjectType != null && this.AssociationType.ObjectType != null)
             {
-                DerivedRootName = this.FullSingularName;
+                this.DerivedRootName = this.FullSingularName;
 
-                if (ExistDerivedRootTypes)
+                if (this.DerivedRootTypes.Count > 0)
                 {
-                    DerivedRootName = this.SingularName;
+                    this.DerivedRootName = this.SingularName;
 
-                    foreach (var rootType in DerivedRootTypes)
+                    foreach (var rootType in this.DerivedRootTypes)
                     {
                         foreach (var otherRole in rootType.RolesTypesWhereRootType)
                         {
                             if (!Equals(otherRole))
                             {
-                                if (otherRole.ExistObjectType)
+                                if (otherRole.ObjectType != null)
                                 {
                                     if (otherRole.SingularName.Equals(this.SingularName))
                                     {
@@ -585,10 +554,10 @@ namespace Allors.Meta
         {
             base.Validate(validationLog);
 
-            if (!ExistObjectType)
+            if (this.ObjectType != null)
             {
                 var message = this.ValidationName + " has no ObjectType";
-                validationLog.AddError(message, this, ValidationKind.Required, AllorsEmbeddedDomain.RoleTypeObjectType);
+                validationLog.AddError(message, this, ValidationKind.Required, "RoleType.ObjectType");
             }
             else
             {
@@ -597,32 +566,32 @@ namespace Allors.Meta
                     switch ((UnitTags)this.ObjectType.UnitTag)
                     {
                         case UnitTags.AllorsString:
-                            if (!this.ExistSize)
+                            if (this.Size.HasValue)
                             {
                                 var message = this.ValidationName + " should have a size.";
-                                validationLog.AddError(message, this, ValidationKind.Required, AllorsEmbeddedDomain.RoleTypeSize);
+                                validationLog.AddError(message, this, ValidationKind.Required, "RoleType.Size");
                             }
 
                             break;
                         case UnitTags.AllorsBinary:
-                            if (!this.ExistSize)
+                            if (this.Size.HasValue)
                             {
                                 var message = this.ValidationName + " should have a size.";
-                                validationLog.AddError(message, this, ValidationKind.Required, AllorsEmbeddedDomain.RoleTypeSize);
+                                validationLog.AddError(message, this, ValidationKind.Required, "RoleType.Size");
                             }
 
                             break;
                         case UnitTags.AllorsDecimal:
-                            if (!this.ExistPrecision)
+                            if (this.Precision.HasValue)
                             {
                                 var message = this.ValidationName + " should have a precision.";
-                                validationLog.AddError(message, this, ValidationKind.Required, AllorsEmbeddedDomain.RoleTypePrecision);
+                                validationLog.AddError(message, this, ValidationKind.Required, "RoleType.Precision");
                             }
 
-                            if (!this.ExistScale)
+                            if (this.Scale.HasValue)
                             {
                                 var message = this.ValidationName + " should have a scale.";
-                                validationLog.AddError(message, this, ValidationKind.Required, AllorsEmbeddedDomain.RoleTypeScale);
+                                validationLog.AddError(message, this, ValidationKind.Required, "RoleType.Scale");
                             }
 
                             break;
@@ -630,28 +599,22 @@ namespace Allors.Meta
                 }
             }
 
-            if (!ExistRelationTypeWhereRoleType)
-            {
-                var message = this.ValidationName + " has no relation type";
-                validationLog.AddError(message, this, ValidationKind.Required, AllorsEmbeddedDomain.RelationTypeRoleType);
-            }
-
-            if (ExistAssignedSingularName && !ExistAssignedPluralName)
+            if (!string.IsNullOrEmpty(this.AssignedSingularName) && string.IsNullOrEmpty(this.AssignedPluralName))
             {
                 var message = this.ValidationName + " has a singular but no plural name";
-                validationLog.AddError(message, this, ValidationKind.Required, AllorsEmbeddedDomain.RoleTypeAssignedPluralName);
+                validationLog.AddError(message, this, ValidationKind.Required, "RoleType.AssignedPluralName");
             }
 
-            if (this.ExistAssignedSingularName && this.AssignedSingularName.Length < 2)
+            if (!string.IsNullOrEmpty(this.AssignedSingularName) && this.AssignedSingularName.Length < 2)
             {
                 var message = this.ValidationName + " should have an assigned singular name with at least 2 characters";
-                validationLog.AddError(message, this, ValidationKind.MinimumLength, AllorsEmbeddedDomain.RoleTypeAssignedSingularName);
+                validationLog.AddError(message, this, ValidationKind.MinimumLength, "RoleType.AssignedSingularName");
             }
 
-            if (this.ExistAssignedPluralName && this.AssignedPluralName.Length < 2)
+            if (!string.IsNullOrEmpty(this.AssignedPluralName) && this.AssignedPluralName.Length < 2)
             {
                 var message = this.ValidationName + " should have an assigned plural role name with at least 2 characters";
-                validationLog.AddError(message, this, ValidationKind.MinimumLength, AllorsEmbeddedDomain.RoleTypeAssignedPluralName);
+                validationLog.AddError(message, this, ValidationKind.MinimumLength, "RoleType.AssignedPluralName");
             }
         }
     }

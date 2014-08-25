@@ -20,8 +20,6 @@
 //-------------------------------------------------------------------------------------------------
 namespace Allors.Meta
 {
-    using Allors.Meta.AllorsGenerated;
-
     /// <summary>
     /// An error that occurred during validation.
     /// </summary>
@@ -35,7 +33,7 @@ namespace Allors.Meta
         /// <summary>
         /// The validated member.
         /// </summary>
-        private readonly AllorsEmbeddedRelationType[] members;
+        private readonly string[] members;
 
         /// <summary>
         /// The error message.
@@ -54,7 +52,7 @@ namespace Allors.Meta
         /// <param name="source">The source.</param>
         /// <param name="kind">The kind .</param>
         /// <param name="members">The members.</param>
-        public ValidationError(string message, object source, ValidationKind kind, AllorsEmbeddedRelationType[] members)
+        public ValidationError(string message, object source, ValidationKind kind, string[] members)
         {
             this.source = source;
             this.members = members;
@@ -75,7 +73,7 @@ namespace Allors.Meta
         /// Gets the validated members.
         /// </summary>
         /// <value>The validated members.</value>
-        public AllorsEmbeddedRelationType[] Members
+        public string[] Members
         {
             get { return this.members; }
         }

@@ -86,9 +86,9 @@ namespace Allors.Adapters.Database.Sql
             this.LazyLoadFilter();
             this.filter.Setup(statement);
 
-            if (this.objectType.ExistConcreteClasses)
+            if (this.objectType.ConcreteClasses.Length > 0)
             {
-                if (this.objectType.ExistExclusiveRootClass)
+                if (this.objectType.RootClasses.Length == 1)
                 {
                     return this.BuildSqlWithExclusiveRootClass(statement);
                 }

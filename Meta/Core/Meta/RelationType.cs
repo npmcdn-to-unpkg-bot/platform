@@ -25,36 +25,31 @@ namespace Allors.Meta
     using System.Globalization;
     using System.Text;
 
-    using AllorsGenerated;
-
     /// <summary>
     /// A <see cref="RelationType"/> defines the state and behavior for
     /// a set of <see cref="AssociationType"/>s and <see cref="RoleType"/>s.
     /// </summary>
-    public partial class RelationType : IComparable
+    public partial class RelationType : MetaObject, IComparable
     {
-        /// <summary>
-        /// Gets or sets the <see cref="AssociationType"/>.
-        /// </summary>
-        /// <value>The AssociationType.</value>
-        public override AssociationType AssociationType
+        public bool IsDerived;
+
+        public bool IsIndexed;
+
+        public RoleType RoleType;
+
+        public AssociationType AssociationType;
+
+        // Domain -> RelationType
+        public Domain Domain { get; private set; }
+
+        public RelationType(Domain domain, Guid relationTypeId, Guid associationTypeId, Guid roleTypeId)
         {
-            get
-            {
-                return base.AssociationType;
-            }
-
-            set
-            {
-                if (this.ExistAssociationType)
-                {
-                    throw new ArgumentException("AssociationType is write once");
-                }
-
-                base.AssociationType = value;
-            }
+            this.Domain = domain;
+            this.Id = relationTypeId;
+            this.AssociationType = new AssociationType(this, associationTypeId);
+            this.RoleType = new RoleType(this, roleTypeId);
         }
-
+        
         /// <summary>
         /// Gets a value indicating whether there exist exclusive root classes.
         /// </summary>
@@ -65,10 +60,10 @@ namespace Allors.Meta
         {
             get
             {
-                if (this.ExistAssociationType && this.AssociationType.ExistObjectType &&
-                    this.ExistRoleType && this.RoleType.ExistObjectType)
+                if (this.AssociationType != null && this.AssociationType.ObjectType != null &&
+                    this.RoleType != null && this.RoleType.ObjectType != null)
                 {
-                    return this.AssociationType.ObjectType.ExistExclusiveRootClass && this.RoleType.ObjectType.ExistExclusiveRootClass;
+                    return this.AssociationType.ObjectType.RootClasses.Count == 1 && this.RoleType.ObjectType.RootClasses.Count == 1;
                 }
 
                 return false;
@@ -172,45 +167,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="RoleType"/>.
-        /// </summary>
-        /// <value>The RoleType    .</value>
-        public override RoleType RoleType
-        {
-            get
-            {
-                return base.RoleType;
-            }
-
-            set
-            {
-                if (this.ExistRoleType)
-                {
-                    throw new ArgumentException("RoleType is write once");
-                }
-
-                base.RoleType = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets the safe name.
-        /// </summary>
-        /// <value>The safe name.</value>
-        internal string SafeName
-        {
-            get
-            {
-                if (this.ExistId)
-                {
-                    return this.IdAsString;
-                }
-
-                return this.AllorsObjectId.ToString(CultureInfo.InvariantCulture);
-            }
-        }
-
-        /// <summary>
         /// Gets the validation name.
         /// </summary>
         /// <value>The validation name.</value>
@@ -251,7 +207,7 @@ namespace Allors.Meta
             {
                 var toString = new StringBuilder();
 
-                if (this.ExistRoleType && !string.IsNullOrEmpty(this.RoleType.FullName))
+                if (this.RoleType != null && !string.IsNullOrEmpty(this.RoleType.FullName))
                 {
                     toString.Append(this.RoleType.Name);
                 }
@@ -269,24 +225,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Creates a new instance.
-        /// </summary>
-        /// <param name="session">The session.</param>
-        /// <returns>The new instance.</returns>
-        internal static RelationType Create(AllorsEmbeddedSession session)
-        {
-            var relationType = (RelationType)session.Create(AllorsEmbeddedDomain.RelationType);
-
-            relationType.IsIndexed = false;
-            relationType.IsDerived = false;
-
-            relationType.AssociationType = AssociationType.Create(session);
-            relationType.RoleType = RoleType.Create(session);
-
-            return relationType;
-        }
-
-        /// <summary>
         /// Validates this. instance.
         /// </summary>
         /// <param name="validationLog">The validation.</param>
@@ -294,12 +232,12 @@ namespace Allors.Meta
         {
             base.Validate(validationLog);
 
-            if (this.ExistAssociationType && this.ExistRoleType)
+            if (this.AssociationType != null && this.RoleType != null)
             {
                 if (validationLog.ExistRelationName(this.Name))
                 {
                     var message = "name of " + this.ValidationName + " is already in use";
-                    validationLog.AddError(message, this, ValidationKind.Unique, AllorsEmbeddedDomain.RoleTypeAssignedSingularName);
+                    validationLog.AddError(message, this, ValidationKind.Unique, "RelationType.Name");
                 }
                 else
                 {
@@ -309,7 +247,7 @@ namespace Allors.Meta
                 if (validationLog.ExistRelationName(this.ReverseName))
                 {
                     var message = "reversed name of " + this.ValidationName + " is already in use";
-                    validationLog.AddError(message, this, ValidationKind.Unique, AllorsEmbeddedDomain.RoleTypeAssignedSingularName);
+                    validationLog.AddError(message, this, ValidationKind.Unique, "RelationType.Name");
                 }
                 else
                 {
@@ -319,27 +257,26 @@ namespace Allors.Meta
                 if (validationLog.ExistObjectTypeName(this.Name))
                 {
                     var message = "name of " + this.ValidationName + " is in conflict with object type " + this.Name;
-                    validationLog.AddError(message, this, ValidationKind.Unique, AllorsEmbeddedDomain.RoleTypeAssignedSingularName);
+                    validationLog.AddError(message, this, ValidationKind.Unique, "RelationType.Name");
                 }
 
                 if (validationLog.ExistObjectTypeName(this.ReverseName))
                 {
                     var message = "reversed name of " + this.ValidationName + " is in conflict with object type " + this.Name;
-                    validationLog.AddError(message, this, ValidationKind.Unique, AllorsEmbeddedDomain.RoleTypeAssignedSingularName);
+                    validationLog.AddError(message, this, ValidationKind.Unique, "RelationType.Name");
                 }
             }
             else
             {
-                if (!this.ExistAssociationType)
+                if (this.AssociationType == null)
                 {
                     var message = this.ValidationName + " has no association type";
-                    validationLog.AddError(message, this, ValidationKind.Required, AllorsEmbeddedDomain.RelationTypeAssociationType);
+                    validationLog.AddError(message, this, ValidationKind.Required, "RelationType.AssociationType");
                 }
-
-                if (!this.ExistRoleType)
+                else
                 {
                     var message = this.ValidationName + " has no role type";
-                    validationLog.AddError(message, this, ValidationKind.Required, AllorsEmbeddedDomain.RelationTypeRoleType);
+                    validationLog.AddError(message, this, ValidationKind.Required, "RelationType.RoleType");
                 }
             }
         }

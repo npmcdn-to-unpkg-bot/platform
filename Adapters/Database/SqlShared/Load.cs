@@ -217,7 +217,7 @@ namespace Allors.Adapters.Database.Sql
         {
             foreach (var type in this.database.Domain.CompositeObjectTypes)
             {
-                if (type.IsRootClass)
+                if (!type.IsUnit && !type.IsInterface)
                 {
                     var sql = new StringBuilder();
                     sql.Append("INSERT INTO " + this.database.Schema.Objects + " (" + this.database.Schema.ObjectId + "," + this.database.Schema.TypeId + "," + this.database.Schema.CacheId + ")\n");

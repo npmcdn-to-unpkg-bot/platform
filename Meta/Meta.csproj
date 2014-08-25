@@ -81,17 +81,6 @@
     <Compile Include="Adapters\Sandbox.g.cs" />
     <Compile Include="Adapters\SingleUnit.g.cs" />
     <Compile Include="Adapters\User.g.cs" />
-    <Compile Include="Core\Allors\output\Embedded\AllorsR1Framework.g.cs" />
-    <Compile Include="Core\Allors\output\Embedded\AssociationType.g.cs" />
-    <Compile Include="Core\Allors\output\Embedded\Domain.g.cs" />
-    <Compile Include="Core\Allors\output\Embedded\Inheritance.g.cs" />
-    <Compile Include="Core\Allors\output\Embedded\MetaObject.g.cs" />
-    <Compile Include="Core\Allors\output\Embedded\MethodType.g.cs" />
-    <Compile Include="Core\Allors\output\Embedded\ObjectType.g.cs" />
-    <Compile Include="Core\Allors\output\Embedded\OperandType.g.cs" />
-    <Compile Include="Core\Allors\output\Embedded\PropertyType.g.cs" />
-    <Compile Include="Core\Allors\output\Embedded\RelationType.g.cs" />
-    <Compile Include="Core\Allors\output\Embedded\RoleType.g.cs" />
     <Compile Include="Core\Generation\Generate.cs" />
     <Compile Include="Core\Generation\GenerateLog.cs" />
     <Compile Include="Core\Generation\Log.cs" />

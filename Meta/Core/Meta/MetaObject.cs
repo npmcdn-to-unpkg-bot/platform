@@ -23,8 +23,6 @@ namespace Allors.Meta
     using System;
     using System.Collections.Generic;
 
-    using Allors.Meta.AllorsGenerated;
-
     /// <summary>
     /// Base class for Meta objects.
     /// </summary>
@@ -78,14 +76,14 @@ namespace Allors.Meta
             if (this.Id == Guid.Empty)
             {
                 var message = "id on " + this.ValidationName + " is required";
-                validationLog.AddError(message, this, ValidationKind.Unique, AllorsEmbeddedDomain.MetaObjectId);
+                validationLog.AddError(message, this, ValidationKind.Unique, "MetaObject.Id");
             }
             else
             {
                 if (validationLog.ExistId(this.Id))
                 {
                     var message = "id " + this.ValidationName + " is already in use";
-                    validationLog.AddError(message, this, ValidationKind.Unique, AllorsEmbeddedDomain.MetaObjectId);
+                    validationLog.AddError(message, this, ValidationKind.Unique, "MetaObject.Id");
                 }
                 else
                 {
