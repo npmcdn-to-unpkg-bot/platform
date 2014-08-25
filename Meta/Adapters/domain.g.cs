@@ -417,7 +417,7 @@ namespace Domain
 
 		static M()
 		{
-            	D = Allors.Meta.Domain.Create(new Guid("26B81EE6-08B6-48E8-931C-B8D944ED1C42"));
+            	D = new Domain(new Guid("26B81EE6-08B6-48E8-931C-B8D944ED1C42"));
 				D.Name = "WithoutPart";
 
 				AllorsString = D.AddDeclaredObjectType(new Guid("ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9"));

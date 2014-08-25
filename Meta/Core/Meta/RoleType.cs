@@ -34,7 +34,7 @@ namespace Allors.Meta
     {
         public ObjectType ObjectType;
         
-        public List<ObjectType> DerivedRootTypes = new List<ObjectType>();
+        public List<ObjectType> DerivedRootClasses = new List<ObjectType>();
 
         public int? Scale;
 
@@ -234,11 +234,11 @@ namespace Allors.Meta
         /// Gets the root objectTypes.
         /// </summary>
         /// <value>The root objectTypes.</value>
-        public IList<ObjectType> RootTypes
+        public IList<ObjectType> RootClasses
         {
             get
             {
-                return this.DerivedRootTypes;
+                return this.DerivedRootClasses;
             }
         }
         
@@ -369,28 +369,22 @@ namespace Allors.Meta
         /// <summary>
         /// Derive root objectTypes.
         /// </summary>
-        internal void DeriveRootTypes()
+        internal void DeriveRootClasses()
         {
-            var relationType = RelationTypeWhereRoleType;
-            var association = relationType.AssociationType;
-            var role = this;
-
-            this.DerivedRootTypes = null;
+            this.DerivedRootClasses = null;
 
             // TODO: Test
-            if (association.ObjectType != null)
+            if (this.AssociationType.ObjectType != null)
             {
                 if (this.ObjectType.IsUnit)
                 {
-                    this.DerivedRootTypes = association.ObjectType.RootClasses;
+                    this.DerivedRootClasses = new List<ObjectType>(this.AssociationType.ObjectType.RootClasses);
                 }
                 else
                 {
-                    if (!relationType.IsManyToMany &&
-                        relationType.ExclusiveRootClasses.Count > 0 &&
-                        !role.IsMany)
+                    if (!this.RelationType.IsManyToMany && this.RelationType.ExistExclusiveRootClasses && !this.IsMany)
                     {
-                        this.DerivedRootTypes = association.ObjectType.RootClasses;
+                        this.DerivedRootClasses = new List<ObjectType>(this.AssociationType.ObjectType.RootClasses);
                     }
                 }
             }
@@ -425,17 +419,17 @@ namespace Allors.Meta
 
                 foreach (var objectType in objectTypes)
                 {
-                    foreach (var otherAsssociation in objectType.AssociationTypesWhereObjectType)
+                    foreach (var otherAsssociation in objectType.AssociationTypes)
                     {
                         if (!this.AssociationType.Equals(otherAsssociation))
                         {
-                            if (otherAsssociation.ExistRelationTypeWhereAssociationType)
+                            if (otherAsssociation.RelationType != null)
                             {
-                                var otherRelationType = otherAsssociation.RelationTypeWhereAssociationType;
-                                if (otherRelationType.ExistRoleType)
+                                var otherRelationType = otherAsssociation.RelationType;
+                                if (otherRelationType.RoleType != null)
                                 {
                                     var otherRole = otherRelationType.RoleType;
-                                    if (otherRole.ExistObjectType)
+                                    if (otherRole.ObjectType != null)
                                     {
                                         // TODO: Test for PluralName == null
                                         if (otherRole.PluralName.Equals(this.PluralName))
@@ -484,17 +478,17 @@ namespace Allors.Meta
 
                 foreach (var type in objectTypes)
                 {
-                    foreach (var otherAsssociation in type.AssociationTypesWhereObjectType)
+                    foreach (var otherAsssociation in type.AssociationTypes)
                     {
                         if (!myAssociation.Equals(otherAsssociation))
                         {
-                            if (otherAsssociation.ExistRelationTypeWhereAssociationType)
+                            if (otherAsssociation.RelationType != null)
                             {
-                                var otherRelationType = otherAsssociation.RelationTypeWhereAssociationType;
-                                if (otherRelationType.ExistRoleType)
+                                var otherRelationType = otherAsssociation.RelationType;
+                                if (otherRelationType.RoleType != null)
                                 {
                                     var otherRole = otherRelationType.RoleType;
-                                    if (otherRole.ExistObjectType)
+                                    if (otherRole.ObjectType != null)
                                     {
                                         if (otherRole.SingularName.Equals(this.SingularName))
                                         {
@@ -521,13 +515,13 @@ namespace Allors.Meta
             {
                 this.DerivedRootName = this.FullSingularName;
 
-                if (this.DerivedRootTypes.Count > 0)
+                if (this.DerivedRootClasses.Count > 0)
                 {
                     this.DerivedRootName = this.SingularName;
 
-                    foreach (var rootType in this.DerivedRootTypes)
+                    foreach (var rootType in this.DerivedRootClasses)
                     {
-                        foreach (var otherRole in rootType.RolesTypesWhereRootType)
+                        foreach (var otherRole in rootType.DerivedRoleTypes)
                         {
                             if (!Equals(otherRole))
                             {

@@ -24,6 +24,7 @@ namespace Allors.Meta
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Linq;
 
     using Microsoft.SqlServer.Server;
 
@@ -52,16 +53,6 @@ namespace Allors.Meta
         /// The default plural form.
         /// </summary>
         private const string DefaultPluralForm = "s";
-
-        /// <summary>
-        /// The session key for all objects by id.
-        /// </summary>
-        private const string MetaObjectByIdSessionKey = "BB103F95-7197-4082-8395-6D4DD2EC30AC";
-
-        /// <summary>
-        /// The session key for the <see cref="Domain"/>
-        /// </summary>
-        private const string DomainSessionKey = "E0446FFC-014E-4DEC-B9FF-D8064C7DD3E7";
 
         /// <summary>
         /// The name of the Allors Unit Domain.
@@ -337,10 +328,22 @@ namespace Allors.Meta
                 type.DeriveDirectSupertypes(sharedList);
             }
 
+            // DirectSubtypes
+            foreach (var type in this.DerivedCompositeObjectTypes)
+            {
+                type.DeriveDirectSubtypes(sharedList);
+            }
+
             // Supertypes
             foreach (var type in this.DerivedCompositeObjectTypes)
             {
                 type.DeriveSupertypes(sharedList);
+            }
+
+            // Subtypes
+            foreach (var type in this.DerivedCompositeObjectTypes)
+            {
+                type.DeriveSubtypes(sharedList);
             }
 
             // DirectSuperinterfaces
@@ -360,19 +363,7 @@ namespace Allors.Meta
             {
                 type.DeriveSubclasses(sharedList);
             }
-
-            // Superinterfaces
-            foreach (var type in DerivedCompositeObjectTypes)
-            {
-                type.DeriveSuperinterfaces(sharedList);
-            }
-
-            // Subinterfaces
-            foreach (var type in DerivedCompositeObjectTypes)
-            {
-                type.DeriveSubinterfaces(sharedList);
-            }
-
+            
             // Exclusive Superinterfaces
             foreach (var type in DerivedCompositeObjectTypes)
             {
@@ -447,7 +438,7 @@ namespace Allors.Meta
             // RoleType Root ObjectType
             foreach (var relationType in this.RelationTypes)
             {
-                relationType.RoleType.DeriveRootTypes();
+                relationType.RoleType.DeriveRootClasses();
             }
 
             // RoleType Hierarchy Singular Name

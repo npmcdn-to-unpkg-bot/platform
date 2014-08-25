@@ -242,12 +242,12 @@ namespace Allors.Adapters.Database.Sql
 
         public SchemaColumn Column(AssociationType association)
         {
-            return this.columnsByRelationType[association.RelationTypeWhereAssociationType];
+            return this.columnsByRelationType[association.RelationType];
         }
 
         public SchemaColumn Column(RoleType role)
         {
-            return this.columnsByRelationType[role.RelationTypeWhereRoleType];
+            return this.columnsByRelationType[role.RelationType];
         }
 
         public SchemaTable Table(ObjectType type)
@@ -262,12 +262,12 @@ namespace Allors.Adapters.Database.Sql
 
         public SchemaTable Table(AssociationType association)
         {
-            return this.tablesByRelationType[association.RelationTypeWhereAssociationType];
+            return this.tablesByRelationType[association.RelationType];
         }
 
         public SchemaTable Table(RoleType role)
         {
-            return this.tablesByRelationType[role.RelationTypeWhereRoleType];
+            return this.tablesByRelationType[role.RelationType];
         }
 
         public string EscapeIfReserved(string name)
@@ -358,7 +358,8 @@ namespace Allors.Adapters.Database.Sql
                 var associationType = relationType.AssociationType;
                 var roleType = relationType.RoleType;
 
-                if (!roleType.ObjectType.IsUnit && ((associationType.IsMany && roleType.IsMany) || !relationType.ExistExclusiveRootClasses))
+                if (!roleType.ObjectType.IsUnit && 
+                    ((associationType.IsMany && roleType.IsMany) || !relationType.ExistExclusiveRootClasses))
                 {
                     var column = new SchemaColumn(this, "R", this.ObjectDbType, false, true, relationType.IsIndexed ? SchemaIndexType.Combined : SchemaIndexType.None, relationType);
                     this.ColumnsByRelationType.Add(relationType, column);
@@ -367,25 +368,7 @@ namespace Allors.Adapters.Database.Sql
                 {
                     if (roleType.ObjectType.IsUnit)
                     {
-                        int? size = null;
-                        int? precision = null;
-                        int? scale = null;
-                        if (roleType.ExistSize)
-                        {
-                            size = roleType.Size;
-                        }
-
-                        if (roleType.ExistPrecision)
-                        {
-                            precision = roleType.Precision;
-                        }
-
-                        if (roleType.ExistScale)
-                        {
-                            scale = roleType.Scale;
-                        }
-
-                        var column = new SchemaColumn(this, roleType.RootName, this.GetDbType(roleType), false, false, relationType.IsIndexed ? SchemaIndexType.Single : SchemaIndexType.None, relationType, size, precision, scale);
+                        var column = new SchemaColumn(this, roleType.RootName, this.GetDbType(roleType), false, false, relationType.IsIndexed ? SchemaIndexType.Single : SchemaIndexType.None, relationType, roleType.Size, roleType.Precision, roleType.Scale);
                         this.ColumnsByRelationType.Add(relationType, column);
                     }
                     else if (relationType.ExistExclusiveRootClasses)
@@ -441,7 +424,7 @@ namespace Allors.Adapters.Database.Sql
 
                     foreach (var associationType in associationTypes)
                     {
-                        var relationType = associationType.RelationTypeWhereAssociationType;
+                        var relationType = associationType.RelationType;
                         var roleType = relationType.RoleType;
                         if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveRootClasses && roleType.IsMany)
                         {
@@ -451,7 +434,7 @@ namespace Allors.Adapters.Database.Sql
 
                     foreach (var roleType in roleTypes)
                     {
-                        var relationType = roleType.RelationTypeWhereRoleType;
+                        var relationType = roleType.RelationType;
                         var associationType = relationType.AssociationType;
                         if (roleType.ObjectType.IsUnit)
                         {

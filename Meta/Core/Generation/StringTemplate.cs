@@ -127,21 +127,21 @@ namespace Allors.Development.Repository.Generation
                     if (generation.HasAttribute(InputKey))
                     {
                         var input = new Guid(generation.GetAttribute(InputKey));
-                        var objectType = domain.Domain.Find(input) as ObjectType;
+                        var objectType = domain.Find(input) as ObjectType;
                         if (objectType != null)
                         {
                             template.Add(ObjectTypeKey, objectType);
                         }
                         else
                         {
-                            var relationType = domain.Domain.Find(input) as RelationType;
+                            var relationType = domain.Find(input) as RelationType;
                             if (relationType != null)
                             {
                                 template.Add(RelationTypeKey, relationType);
                             }
                             else
                             {
-                                var inheritance = domain.Domain.Find(input) as Inheritance;
+                                var inheritance = domain.Find(input) as Inheritance;
                                 if (inheritance != null)
                                 {
                                     template.Add(InheritanceKey, inheritance);

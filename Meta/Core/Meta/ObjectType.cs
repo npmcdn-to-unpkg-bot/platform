@@ -24,6 +24,7 @@ namespace Allors.Meta
     using System;
     using System.Collections.Generic;
     using System.Globalization;
+    using System.Linq;
 
     /// <summary>
     /// An <see cref="ObjectType"/> defines the state and behavior for
@@ -41,17 +42,13 @@ namespace Allors.Meta
 
         public List<ObjectType> DerivedDirectSupertypes = new List<ObjectType>();
 
-        public ObjectType DerivedDirectSuperclass;
+        public List<ObjectType> DerivedDirectSubtypes = new List<ObjectType>();
 
         public string PluralName;
 
         public List<MethodType> DerivedMethodTypes = new List<MethodType>();
 
-        public List<ObjectType> DerivedSuperinterfaces = new List<ObjectType>();
-
         public bool IsInterface;
-
-        public List<ObjectType> DerivedSubinterfaces = new List<ObjectType>();
 
         public bool IsUnit;
 
@@ -76,6 +73,8 @@ namespace Allors.Meta
         public List<RoleType> DerivedExclusiveRoleTypes = new List<RoleType>();
 
         public List<ObjectType> DerivedSupertypes = new List<ObjectType>();
+
+        public List<ObjectType> DerivedSubtypes = new List<ObjectType>();
 
         // Domain -> ObjectType
         public Domain Domain { get; private set; }
@@ -135,7 +134,7 @@ namespace Allors.Meta
         /// self if this is a concrete class.
         /// </summary>
         /// <value>The concrete classes.</value>
-        public ObjectType[] ConcreteClasses
+        public IList<ObjectType> ConcreteClasses
         {
             get
             {
@@ -145,17 +144,8 @@ namespace Allors.Meta
                     return selfArray;
                 }
 
-                return this.Subclasses.Length == 0 ? EmptyArray : this.Subclasses;
+                return this.Subclasses.Count == 0 ? EmptyArray : this.Subclasses;
             }
-        }
-
-        /// <summary>
-        /// Gets the direct subtypes.
-        /// </summary>
-        /// <value>The direct subtypes.</value>
-        public ObjectType[] DirectSubtypes
-        {
-            get { return this.ObjectTypesWhereDirectSupertype; }
         }
 
         /// <summary>
@@ -226,7 +216,7 @@ namespace Allors.Meta
         {
             get
             {
-                if (this.RootClasses.Length == 1)
+                if (this.RootClasses.Count == 1)
                 {
                     return this.RootClasses[0];
                 }
@@ -430,18 +420,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Gets the roles where this instance is the root type.
-        /// </summary>
-        /// <value>The roles where this instance is the root type.</value>
-        public IList<RoleType> RolesTypesWhereRootType
-        {
-            get
-            {
-                return this.RoleTypesWhereDerivedRootType;
-            }
-        }
-
-        /// <summary>
         /// Gets the root classes.
         /// </summary>
         /// <value>The root classes.</value>
@@ -462,18 +440,6 @@ namespace Allors.Meta
             get
             {
                 return this.DerivedSubclasses;
-            }
-        }
-
-        /// <summary>
-        /// Gets the sub interfaces.
-        /// </summary>
-        /// <value>The sub interfaces.</value>
-        public IList<ObjectType> Subinterfaces
-        {
-            get
-            {
-                return this.DerivedSubinterfaces;
             }
         }
 
@@ -501,6 +467,17 @@ namespace Allors.Meta
             }
         }
 
+        /// <summary>
+        /// Gets the sub types.
+        /// </summary>
+        /// <value>The super types.</value>
+        public IList<ObjectType> Subtypes
+        {
+            get
+            {
+                return this.DerivedSubtypes;
+            }
+        }
 
         /// <summary>
         /// Gets the unit roles.
@@ -528,18 +505,6 @@ namespace Allors.Meta
                 }
                 
                 return "object type " + this.Id;
-            }
-        }
-
-        /// <summary>
-        /// Gets the object types where this instance is a direct supertype.
-        /// </summary>
-        /// <value>The object types where this instance is a direct supertype.</value>
-        private ObjectType[] ObjectTypesWhereDirectSupertype
-        {
-            get
-            {
-                return this.ObjectTypesWhereDerivedDirectSupertype;
             }
         }
 
@@ -641,15 +606,7 @@ namespace Allors.Meta
         /// <returns>The inheritance.</returns>
         public Inheritance FindInheritanceWhereDirectSubtype(ObjectType supertype)
         {
-            foreach (var inheritance in this.InheritancesWhereSubtype)
-            {
-                if (supertype.Equals(inheritance.Supertype))
-                {
-                    return inheritance;
-                }
-            }
-
-            return null;
+            return this.Domain.Inheritances.FirstOrDefault(inheritance => this.Equals(inheritance.Subtype) && supertype.Equals(inheritance.Supertype));
         }
 
         /// <summary>
@@ -711,9 +668,9 @@ namespace Allors.Meta
                 return true;
             }
 
-            foreach (var directSub in this.ObjectTypesWhereDirectSupertype)
+            foreach (var directSubtypes in this.DerivedDirectSubtypes)
             {
-                if (directSub.IsCyclicInheritance(superType))
+                if (directSubtypes.IsCyclicInheritance(superType))
                 {
                     return true;
                 }
@@ -729,16 +686,17 @@ namespace Allors.Meta
         internal void DeriveAssociationTypes(HashSet<AssociationType> associations)
         {
             associations.Clear();
-            foreach (var role in this.RoleTypesWhereObjectType)
+            foreach (var relationType in this.Domain.RelationTypes.Where(rel => this.Equals(rel.RoleType.ObjectType)))
             {
-                associations.Add(role.RelationType.AssociationType);
+                associations.Add(relationType.AssociationType);
             }
 
             foreach (var superType in this.Supertypes)
             {
-                foreach (var role in superType.RoleTypesWhereObjectType)
+                var type = superType;
+                foreach (var relationType in this.Domain.RelationTypes.Where(rel => type.Equals(rel.RoleType.ObjectType)))
                 {
-                    associations.Add(role.RelationType.AssociationType);
+                    associations.Add(relationType.AssociationType);
                 }
             }
 
@@ -821,12 +779,27 @@ namespace Allors.Meta
         internal void DeriveDirectSupertypes(HashSet<ObjectType> directSupertypes)
         {
             directSupertypes.Clear();
-            foreach (var inheritance in this.InheritancesWhereSubtype)
+            foreach (var inheritance in (IList<Inheritance>)this.Domain.Inheritances.Where(inheritance => this.Equals(inheritance.Subtype)))
             {
                 directSupertypes.Add(inheritance.Supertype);
             }
 
             this.DerivedDirectSupertypes = new List<ObjectType>(directSupertypes);
+        }
+
+        /// <summary>
+        /// Derive direct sub type derivations.
+        /// </summary>
+        /// <param name="directSubtypes">The direct super types.</param>
+        internal void DeriveDirectSubtypes(HashSet<ObjectType> directSubtypes)
+        {
+            directSubtypes.Clear();
+            foreach (var inheritance in (IList<Inheritance>)this.Domain.Inheritances.Where(inheritance => this.Equals(inheritance.Supertype)))
+            {
+                directSubtypes.Add(inheritance.Subtype);
+            }
+
+            this.DerivedDirectSupertypes = new List<ObjectType>(directSubtypes);
         }
 
         /// <summary>
@@ -836,16 +809,17 @@ namespace Allors.Meta
         internal void DeriveExclusiveAssociationTypes(HashSet<AssociationType> exclusiveAssociationTypes)
         {
             exclusiveAssociationTypes.Clear();
-            foreach (var role in this.RoleTypesWhereObjectType)
+            foreach (var relationType in this.Domain.RelationTypes.Where(rel => this.Equals(rel.RoleType.ObjectType)))
             {
-                exclusiveAssociationTypes.Add(role.RelationType.AssociationType);
+                exclusiveAssociationTypes.Add(relationType.AssociationType);
             }
 
             foreach (var superType in this.ExclusiveSuperinterfaces)
             {
-                foreach (var role in superType.RoleTypesWhereObjectType)
+                var type = superType;
+                foreach (var relationType in this.Domain.RelationTypes.Where(rel => type.Equals(rel.RoleType.ObjectType)))
                 {
-                    exclusiveAssociationTypes.Add(role.RelationType.AssociationType);
+                    exclusiveAssociationTypes.Add(relationType.AssociationType);
                 }
             }
 
@@ -896,16 +870,17 @@ namespace Allors.Meta
         internal void DeriveExclusiveRoleTypes(HashSet<RoleType> exclusiveRoles)
         {
             exclusiveRoles.Clear();
-            foreach (var association in this.AssociationTypesWhereObjectType)
+            foreach (var relationType in this.Domain.RelationTypes.Where(rel => this.Equals(rel.AssociationType.ObjectType)))
             {
-                exclusiveRoles.Add(association.RelationType.RoleType);
+                exclusiveRoles.Add(relationType.RoleType);
             }
 
             foreach (var superType in this.ExclusiveSuperinterfaces)
             {
-                foreach (var association in superType.AssociationTypesWhereObjectType)
+                var type = superType;
+                foreach (var relationType in this.Domain.RelationTypes.Where(rel => type.Equals(rel.AssociationType.ObjectType)))
                 {
-                    exclusiveRoles.Add(association.RelationType.RoleType);
+                    exclusiveRoles.Add(relationType.RoleType);
                 }
             }
 
@@ -939,14 +914,15 @@ namespace Allors.Meta
         internal void DeriveMethodTypes(HashSet<MethodType> methodTypes)
         {
             methodTypes.Clear();
-            foreach (var methodType in this.MethodTypesWhereObjectType)
+            foreach (var methodType in this.Domain.MethodTypes.Where(m => this.Equals(m.ObjectType)))
             {
                 methodTypes.Add(methodType);
             }
 
             foreach (var superType in this.Supertypes)
             {
-                foreach (var methodType in superType.MethodTypesWhereObjectType)
+                var type = superType;
+                foreach (var methodType in this.Domain.MethodTypes.Where(m => type.Equals(m.ObjectType)))
                 {
                     methodTypes.Add(methodType);
                 }
@@ -962,16 +938,17 @@ namespace Allors.Meta
         internal void DeriveRoleTypes(HashSet<RoleType> roleTypes)
         {
             roleTypes.Clear();
-            foreach (var association in this.AssociationTypesWhereObjectType)
+            foreach (var relationType in this.Domain.RelationTypes.Where(rel => this.Equals(rel.AssociationType.ObjectType)))
             {
-                roleTypes.Add(association.RelationType.RoleType);
+                roleTypes.Add(relationType.RoleType);
             }
 
             foreach (var superType in this.Supertypes)
             {
-                foreach (var association in superType.AssociationTypesWhereObjectType)
+                var type = superType;
+                foreach (var relationType in this.Domain.RelationTypes.Where(rel => type.Equals(rel.AssociationType.ObjectType)))
                 {
-                    roleTypes.Add(association.RelationType.RoleType);
+                    roleTypes.Add(relationType.RoleType);
                 }
             }
 
@@ -989,7 +966,7 @@ namespace Allors.Meta
             }
             else
             {
-                this.DerivedRootClasses = new List<ObjectType>() { this };
+                this.DerivedRootClasses = new List<ObjectType> { this };
             }
         }
 
@@ -1000,7 +977,7 @@ namespace Allors.Meta
         internal void DeriveSubclasses(HashSet<ObjectType> subClasses)
         {
             subClasses.Clear();
-            foreach (var subType in this.ObjectTypesWhereDerivedSupertype)
+            foreach (var subType in this.DerivedSubtypes)
             {
                 if (!subType.IsInterface)
                 {
@@ -1009,24 +986,6 @@ namespace Allors.Meta
             }
 
             this.DerivedSubclasses = new List<ObjectType>(subClasses);
-        }
-
-        /// <summary>
-        /// Derive sub interfaces.
-        /// </summary>
-        /// <param name="subInterfaces">The sub interfaces.</param>
-        internal void DeriveSubinterfaces(HashSet<ObjectType> subInterfaces)
-        {
-            subInterfaces.Clear();
-            foreach (var subType in this.ObjectTypesWhereDerivedSupertype)
-            {
-                if (subType.IsInterface)
-                {
-                    subInterfaces.Add(subType);
-                }
-            }
-
-            this.DerivedSubinterfaces = new List<ObjectType>(subInterfaces);
         }
 
         /// <summary>
@@ -1048,24 +1007,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Derive super interface.
-        /// </summary>
-        /// <param name="superInterfaces">The super interfaces.</param>
-        internal void DeriveSuperinterfaces(HashSet<ObjectType> superInterfaces)
-        {
-            superInterfaces.Clear();
-            foreach (var superType in this.DerivedSupertypes)
-            {
-                if (superType.IsInterface)
-                {
-                    superInterfaces.Add(superType);
-                }
-            }
-
-            this.DerivedSuperinterfaces = new List<ObjectType>(superInterfaces);
-        }
-
-        /// <summary>
         /// Derive super types.
         /// </summary>
         /// <param name="superTypes">The super types.</param>
@@ -1077,6 +1018,18 @@ namespace Allors.Meta
             this.DerivedSupertypes = new List<ObjectType>(superTypes);
         }
 
+        /// <summary>
+        /// Derive sub types.
+        /// </summary>
+        /// <param name="superTypes">The super types.</param>
+        internal void DeriveSubtypes(HashSet<ObjectType> subTypes)
+        {
+            subTypes.Clear();
+            this.DeriveSubtypesRecursively(this, subTypes);
+
+            this.DerivedSubtypes = new List<ObjectType>(subTypes);
+        }
+     
         /// <summary>
         /// Derive unit role types.
         /// </summary>
@@ -1145,7 +1098,7 @@ namespace Allors.Meta
                 validationLog.AddError(this.ValidationName + " has no singular name", this, ValidationKind.Required, "ObjectType.SingularName");
             }
 
-            if (this.ExistPluralName)
+            if (!string.IsNullOrEmpty(this.PluralName))
             {
                 if (this.PluralName.Length < 2)
                 {
@@ -1223,6 +1176,23 @@ namespace Allors.Meta
                 {
                     superTypes.Add(directSupertype);
                     directSupertype.DeriveSupertypesRecursively(type, superTypes);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Derive super types recursively.
+        /// </summary>
+        /// <param name="type">The type .</param>
+        /// <param name="superTypes">The super types.</param>
+        private void DeriveSubtypesRecursively(ObjectType type, HashSet<ObjectType> subTypes)
+        {
+            foreach (var directSubtype in this.DerivedDirectSubtypes)
+            {
+                if (!Equals(directSubtype, type))
+                {
+                    subTypes.Add(directSubtype);
+                    directSubtype.DeriveSupertypesRecursively(type, subTypes);
                 }
             }
         }
