@@ -84,17 +84,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Gets a value indicating whether this instance's <see cref="IsMany"/> is default.
-        /// </summary>
-        /// <value>
-        ///  <c>true</c> if this instance's <see cref="IsMany"/> is default; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsIsManyDefault
-        {
-            get { return this.IsMany == false; }
-        }
-
-        /// <summary>
         /// Gets or sets a value indicating whether this instance has a multiplicity of many.
         /// </summary>
         /// <value><c>true</c> if this instance is many; otherwise, <c>false</c>.</value>
@@ -111,17 +100,6 @@ namespace Allors.Meta
                 this.StaleRelationTypeDerivations();
                 base.IsMany = value;
             }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether this instance's <see cref="ObjectType"/> is default.
-        /// </summary>
-        /// <value>
-        ///  <c>true</c> if this instance's <see cref="ObjectType"/> is default; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsObjectTypeDefault
-        {
-            get { return !ExistObjectType; }
         }
 
         /// <summary>
@@ -219,17 +197,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Deletes this instance.
-        /// </summary>
-        /// <exception cref="NotSupportedException">
-        /// It is not possible to directly delete an association.
-        /// </exception>
-        public override void Delete()
-        {
-            throw new NotSupportedException();
-        }
-        
-        /// <summary>
         /// Removes the IsMany.
         /// </summary>
         public override void RemoveIsMany()
@@ -245,15 +212,6 @@ namespace Allors.Meta
         {
             this.StaleRelationTypeDerivations();
             base.RemoveObjectType();
-        }
-
-        /// <summary>
-        /// Resets this instance.
-        /// </summary>
-        public void Reset()
-        {
-            this.IsMany = false;
-            this.RemoveObjectType();
         }
 
         /// <summary>
@@ -282,38 +240,10 @@ namespace Allors.Meta
         internal static MetaAssociation Create(AllorsEmbeddedSession session)
         {
             var association = (MetaAssociation)session.Create(AllorsEmbeddedDomain.AssociationType);
-            association.Reset();
+
+            association.IsMany = false;
+
             return association;
-        }
-
-        /// <summary>
-        /// Deletes this instance.
-        /// </summary>
-        internal void InternalDelete()
-        {
-            base.Delete();
-        }
-
-        /// <summary>
-        /// Copy form source.
-        /// </summary>
-        /// <param name="source">The source.</param>
-        internal void Copy(MetaAssociation source)
-        {
-            if (!this.ExistId)
-            {
-                this.Id = source.Id;
-            }
-            else if (!this.Id.Equals(source.Id))
-            {
-                throw new Exception("imported object has a different id (" + this.ValidationName + ")");
-            }
-
-            this.IsMany = source.IsMany;
-            if (source.ExistObjectType)
-            {
-                ObjectType = (MetaObject)this.Domain.Domain.Find(source.ObjectType.Id);
-            }
         }
 
         /// <summary>

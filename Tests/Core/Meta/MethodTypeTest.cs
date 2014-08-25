@@ -28,42 +28,6 @@ namespace Allors.Meta.Static
     public class MethodTypeTest : AbstractTest
     {
         private readonly List<MetaObjectChangedEventArgs> metaObjectChangedEvents = new List<MetaObjectChangedEventArgs>();
-        
-        [Test]
-        public void Delete()
-        {
-            this.Populate();
-
-            var methodType = this.Domain.AddDeclaredMethodType(Guid.NewGuid());
-            methodType.ObjectType = this.Population.C1;
-            methodType.Name = "MyName";
-
-            Assert.IsTrue(this.Domain.IsValid);
-
-            methodType.Delete();
-
-            Assert.IsFalse(this.Population.C1.IsDeleted);
-            Assert.IsTrue(methodType.IsDeleted);
-        }
-
-        [Test]
-        public void Reset()
-        {
-            this.Populate();
-            var methodType = this.Domain.AddDeclaredMethodType(Guid.NewGuid());
-            methodType.ObjectType = this.Population.C1;
-            methodType.Name = "MyName";
-
-            Assert.IsTrue(this.Domain.IsValid);
-
-            methodType.Reset();
-
-            Assert.IsTrue(methodType.IsNameDefault);
-            Assert.IsTrue(methodType.IsObjectTypeDefault);
-
-            Assert.IsFalse(methodType.ExistName);
-            Assert.IsFalse(methodType.ExistObjectType);
-        }
 
         [Test]
         public void ValidateDuplicateMethod()

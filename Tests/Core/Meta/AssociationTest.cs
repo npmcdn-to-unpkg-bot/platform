@@ -44,36 +44,6 @@ namespace Allors.Meta.Static
 
             association.ObjectType = this.Population.C1;
             association.IsMany = !association.IsMany;
-
-            association.Reset();
-
-            Assert.IsTrue(association.ExistId);
-            Assert.AreEqual(associationId, association.Id);
-            Assert.IsTrue(association.IsIsManyDefault);
-            Assert.IsTrue(association.IsObjectTypeDefault);
-        }
-
-        [Test]
-        public void Delete()
-        {
-            this.Populate();
-
-            var relationType = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-
-            var association = relationType.AssociationType;
-            association.ObjectType = this.Population.C1;
-
-            var exceptionThrown = false;
-            try
-            {
-                association.Delete();
-            }
-            catch
-            {
-                exceptionThrown = true;
-            }
-
-            Assert.IsTrue(exceptionThrown);
         }
 
         [Test]
@@ -120,28 +90,7 @@ namespace Allors.Meta.Static
 
             Assert.AreEqual("CompaniesWherePerson", companyPerson.AssociationType.PluralName);
         }
-
-        [Test]
-        public void Reset()
-        {
-            this.Populate();
-
-            var relationType = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-
-            var association = relationType.AssociationType;
-            association.ObjectType = this.Population.C1;
-            association.IsMany = !association.IsMany;
-
-            association.Reset();
-
-            Assert.IsTrue(association.IsOne);
-            Assert.IsNull(association.ObjectType);
-
-            Assert.IsFalse(this.Population.C1.IsDeleted);
-            Assert.IsFalse(relationType.IsDeleted);
-            Assert.IsFalse(association.IsDeleted);
-        }
-        
+       
         [Test]
         public void SingularName()
         {

@@ -41,55 +41,8 @@ namespace Allors.Meta.Static
 
             Assert.IsTrue(role.ExistId);
             Assert.AreEqual(roleId, role.Id);
-
-            role.ObjectType = this.Population.C1;
-            role.AssignedSingularName = "Singular";
-            role.AssignedSingularName = "Plural";
-            role.IsMany = !role.IsMany;
-            role.Scale = 3;
-            role.Size = 30;
-
-            role.Reset();
-
-            Assert.IsTrue(role.ExistId);
-            Assert.AreEqual(roleId, role.Id);
-
-            Assert.IsTrue(role.IsAssignedPluralNameDefault);
-            Assert.IsTrue(role.IsAssignedSingularNameDefault);
-            Assert.IsTrue(role.IsScaleDefault);
-            Assert.IsTrue(role.IsSizeDefault);
-            Assert.IsTrue(role.IsIsManyDefault);
-            Assert.IsTrue(role.IsObjectTypeDefault);
         }
 
-        [Test]
-        public void Delete()
-        {
-            this.Populate();
-
-            var relationType = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-
-            var role = relationType.RoleType;
-            role.ObjectType = this.Population.C1;
-            role.AssignedSingularName = "Singular";
-            role.AssignedSingularName = "Plural";
-            role.IsMany = !role.IsMany;
-            role.Scale = 3;
-            role.Size = 30;
-
-            var exceptionThrown = false;
-            try
-            {
-                role.Delete();
-            }
-            catch
-            {
-                exceptionThrown = true;
-            }
-
-            Assert.IsTrue(exceptionThrown);
-        }
-        
         [Test]
         public void Immutable()
         {
@@ -147,35 +100,6 @@ namespace Allors.Meta.Static
 
             person.PluralName = null;
             Assert.AreEqual("Personen", companyPerson.RoleType.PluralName);
-        }
-
-        [Test]
-        public void Reset()
-        {
-            this.Populate();
-
-            var relationType = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-
-            var role = relationType.RoleType;
-            role.ObjectType = this.Population.C1;
-            role.AssignedSingularName = "Singular";
-            role.AssignedSingularName = "Plural";
-            role.IsMany = !role.IsMany;
-            role.Scale = 3;
-            role.Size = 30;
-
-            role.Reset();
-
-            Assert.IsNull(role.AssignedPluralName);
-            Assert.IsNull(role.AssignedSingularName);
-            Assert.IsFalse(role.ExistScale);
-            Assert.IsFalse(role.ExistSize);
-            Assert.IsTrue(role.IsOne);
-            Assert.IsNull(role.ObjectType);
-
-            Assert.IsFalse(this.Population.C1.IsDeleted);
-            Assert.IsFalse(relationType.IsDeleted);
-            Assert.IsFalse(role.IsDeleted);
         }
 
         [Test]

@@ -557,72 +557,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Gets a value indicating whether this instance's assigned plural name is default.
-        /// </summary>
-        /// <value>
-        /// <c>true</c> if this instance's assigned plural name is default; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsAssignedPluralNameDefault
-        {
-            get { return !this.ExistPluralName; }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether this instance's assigned singular name is default.
-        /// </summary>
-        /// <value>
-        ///  <c>true</c> if this instance's assigned singular name is default; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsAssignedSingularNameDefault
-        {
-            get { return !this.ExistSingularName; }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether this instance's is abstract is default.
-        /// </summary>
-        /// <value>
-        /// <c>true</c> if this instance's is abstract is default; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsIsAbstractDefault
-        {
-            get { return this.IsAbstract.Equals(false); }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether this instance is interface is default.
-        /// </summary>
-        /// <value>
-        /// <c>true</c> if this instance is is interface default; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsIsInterfaceDefault
-        {
-            get { return this.IsInterface.Equals(false); }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether this instance is unit is default.
-        /// </summary>
-        /// <value>
-        ///  <c>true</c> if this instance is unit is default; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsIsUnitDefault
-        {
-            get { return this.IsUnit.Equals(false); }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether this instance unit tag is default.
-        /// </summary>
-        /// <value>
-        /// <c>true</c> if this instance unit tag is default; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsUnitTagDefault
-        {
-            get { return !this.ExistUnitTag; }
-        }
-
-        /// <summary>
         /// Gets a value indicating whether this instance is a double.
         /// </summary>
         /// <value><c>true</c> if this instance is a double; otherwise, <c>false</c>.</value>
@@ -1175,7 +1109,6 @@ namespace Allors.Meta
 
                 if (supertype.IsClass && this.ExistDirectSuperclass)
                 {
-                    this.FindInheritanceWhereDirectSubtype(this.DirectSuperclass).Delete();
                 }
 
                 inheritance = this.Domain.AddDeclaredInheritance(Guid.NewGuid());
@@ -1221,28 +1154,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Copy form source.
-        /// </summary>
-        /// <param name="source">
-        /// The source.
-        /// </param>
-        public void Copy(MetaObject source)
-        {
-            this.CopyMetaObject(source);
-
-            this.PluralName = source.PluralName;
-            this.SingularName = source.SingularName;
-            this.IsAbstract = source.IsAbstract;
-            this.IsInterface = source.IsInterface;
-            this.IsUnit = source.IsUnit;
-
-            if (this.ExistUnitTag)
-            {
-                this.UnitTag = source.UnitTag;
-            }
-        }
-
-        /// <summary>
         /// Determines whether this instance contains the specified association.
         /// </summary>
         /// <param name="association">The association.</param>
@@ -1284,20 +1195,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Deletes this instance.
-        /// </summary>
-        public override void Delete()
-        {
-            var domain = this.Domain;
-            var deleteId = this.Id;
-
-            this.Reset();
-            base.Delete();
-
-            domain.StaleObjectTypeDerivations();
-        }
-
-        /// <summary>
         /// Delete this instance and its associations and inheritances.
         /// </summary>
         public void DeleteRecursive()
@@ -1310,14 +1207,10 @@ namespace Allors.Meta
 
             foreach (var association in associations)
             {
-                association.RelationType.Delete();
             }
-
-            this.Delete();
 
             foreach (var inheritance in inheritances)
             {
-                inheritance.Delete();
             }
         }
 
@@ -1388,19 +1281,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Resets this instance.
-        /// </summary>
-        public void Reset()
-        {
-            this.RemovePluralName();
-            this.RemoveSingularName();
-            this.IsAbstract = false;
-            this.IsInterface = false;
-            this.IsUnit = false;
-            this.RemoveUnitTag();
-        }
-
-        /// <summary>
         /// Sets the direct super interfaces.
         /// </summary>
         /// <param name="superInterfaces">The super interfaces.</param>
@@ -1420,7 +1300,6 @@ namespace Allors.Meta
                 {
                     if (!inheritance.DomainWhereDeclaredInheritance.IsSuperDomain)
                     {
-                        inheritance.Delete();
                     }
                 }
             }
@@ -1455,7 +1334,11 @@ namespace Allors.Meta
         internal static MetaObject Create(AllorsEmbeddedSession session)
         {
             var type = (MetaObject)session.Create(AllorsEmbeddedDomain.ObjectType);
-            type.Reset();
+
+            type.IsAbstract = false;
+            type.IsInterface = false;
+            type.IsUnit = false;
+
             return type;
         }
 

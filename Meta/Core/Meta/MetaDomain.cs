@@ -487,14 +487,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Deletes this instance.
-        /// </summary>
-        public override void Delete()
-        {
-            throw new InvalidOperationException("A Domain can not be deleted");
-        }
-
-        /// <summary>
         /// Find a meta object by meta object id.
         /// </summary>
         /// <param name="metaObjectId">
@@ -508,18 +500,7 @@ namespace Allors.Meta
             MetaBase metaObject;
             this.MetaObjectById.TryGetValue(metaObjectId, out metaObject);
 
-            if (metaObject != null)
-            {
-                if (metaObject.IsDeleted)
-                {
-                    this.MetaObjectById.Remove(metaObjectId);
-                    return null;
-                }
-
-                return metaObject;
-            }
-
-            return null;
+            return metaObject;
         }
 
         /// <summary>
@@ -695,16 +676,6 @@ namespace Allors.Meta
             this.Domain.StaleDomainDerivations();
         }
         
-        /// <summary>
-        /// Import the domain and inherit from it.
-        /// </summary>
-        /// <param name="domain">The domain to import and inherit from.</param>
-        /// <returns>The importSuperDomain domain.</returns>
-        public MetaDomain Inherit(MetaDomain domain)
-        {
-            return this.Inherit(this, domain);
-        }
-
         /// <summary>
         /// Create an extent for this type.
         /// </summary>
@@ -1525,70 +1496,6 @@ namespace Allors.Meta
             {
                 unitType.IsUnit = true;
             }
-        }
-
-        /// <summary>
-        /// Import the source super domain into the domain and
-        /// then create a inheritance relationship in the domain.
-        /// </summary>
-        /// <param name="domain">
-        /// The domain.
-        /// </param>
-        /// <param name="sourceSuperDomain">
-        /// The source super domain.
-        /// </param>
-        /// <returns>
-        /// The super domain.
-        /// </returns>
-        private MetaDomain Inherit(MetaDomain domain, MetaDomain sourceSuperDomain)
-        {
-            var superDomain = (MetaDomain)domain.Domain.Find(sourceSuperDomain.Id);
-            if (superDomain == null)
-            {
-                superDomain = Create(AllorsSession, sourceSuperDomain.Id);
-                superDomain.Name = sourceSuperDomain.Name;
-
-                this.AddDirectSuperDomain(superDomain);
-
-                foreach (var domainSuperDomain in sourceSuperDomain.DirectSuperDomains)
-                {
-                    superDomain.Inherit(domain, domainSuperDomain);
-                }
-
-                foreach (var domainObjectType in sourceSuperDomain.DeclaredObjectTypes)
-                {
-                    var integratedObjectType = (MetaObject)domain.Domain.Find(domainObjectType.Id) ?? MetaObject.Create(AllorsSession);
-                    integratedObjectType.Copy(domainObjectType);
-                    superDomain.AddDeclaredObjectType(integratedObjectType);
-                }
-
-                foreach (var domainInheritance in sourceSuperDomain.DeclaredInheritances)
-                {
-                    var integrateInheritance = (MetaInheritance)domain.Domain.Find(domainInheritance.Id) ?? MetaInheritance.Create(AllorsSession);
-                    integrateInheritance.Copy(domainInheritance);
-                    superDomain.AddDeclaredInheritance(integrateInheritance);
-                }
-
-                foreach (var domainRelationType in sourceSuperDomain.DeclaredRelationTypes)
-                {
-                    var integratedRelationType = (MetaRelation)domain.Domain.Find(domainRelationType.Id) ?? MetaRelation.Create(AllorsSession);
-                    integratedRelationType.Copy(domainRelationType);
-                    superDomain.AddDeclaredRelationType(integratedRelationType);
-                }
-
-                foreach (var domainMethodType in sourceSuperDomain.DeclaredMethodTypes)
-                {
-                    var integratedMethodType = MetaMethod.Create(AllorsSession);
-                    integratedMethodType.Copy(domainMethodType);
-                    superDomain.AddDeclaredMethodType(integratedMethodType);
-                }
-            }
-            else
-            {
-                this.AddDirectSuperDomain(superDomain);
-            }
-
-            return superDomain;
         }
     }
 }

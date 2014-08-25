@@ -51,7 +51,6 @@ namespace Allors.Meta.Static
         {
             foreach (var inheritance in this.Domain.Inheritances)
             {
-                inheritance.Delete();
             }
         }
    }

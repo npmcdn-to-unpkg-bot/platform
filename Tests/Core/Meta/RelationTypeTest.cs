@@ -18,11 +18,8 @@
 namespace Allors.Meta.Static
 {
     using System;
-    using System.Collections.Generic;
     using System.IO;
     using System.Xml;
-
-    using Allors.Meta.Events;
 
     using NUnit.Framework;
 
@@ -45,39 +42,6 @@ namespace Allors.Meta.Static
             role.ObjectType = this.Population.C2;
 
             Assert.IsTrue(this.Domain.IsValid);
-
-            relationType.Reset();
-
-            Assert.IsTrue(relationType.IsIsIndexedDefault);
-            Assert.IsTrue(relationType.IsIsDerivedDefault);
-        }
-
-        [Test]
-        public void Delete()
-        {
-            this.Populate();
-
-            var relationType = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-
-            var association = relationType.AssociationType;
-            association.ObjectType = this.Population.C1;
-
-            var role = relationType.RoleType;
-            role.ObjectType = this.Population.C2;
-
-            Assert.IsTrue(this.Domain.IsValid);
-
-            relationType.Delete();
-
-            Assert.IsFalse(this.Population.C1.IsDeleted);
-            Assert.IsFalse(this.Population.C2.IsDeleted);
-            Assert.IsTrue(relationType.IsDeleted);
-            Assert.IsTrue(association.IsDeleted);
-            Assert.IsTrue(role.IsDeleted);
-
-            Assert.AreEqual(0, this.Population.Relations.Length);
-            Assert.AreEqual(0, this.Population.Associations.Length);
-            Assert.AreEqual(0, this.Population.Roles.Length);
         }
 
         [Test]
@@ -145,36 +109,6 @@ namespace Allors.Meta.Static
             role.IsMany = false;
 
             Assert.IsTrue(relationType.IsManyToOne);
-        }
-
-        [Test]
-        public void Reset()
-        {
-            this.Populate();
-
-            var relationType = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            relationType.IsIndexed = true;
-            relationType.IsDerived = true;
-
-            var association = relationType.AssociationType;
-            association.ObjectType = this.Population.C1;
-
-            var role = relationType.RoleType;
-            role.ObjectType = this.Population.C2;
-
-            Assert.IsTrue(this.Domain.IsValid);
-
-            relationType.Reset();
-
-            Assert.IsTrue(relationType.ExistId);
-            Assert.IsFalse(relationType.IsIndexed);
-            Assert.IsFalse(relationType.IsDerived);
-
-            Assert.IsFalse(this.Population.C1.IsDeleted);
-            Assert.IsFalse(this.Population.C2.IsDeleted);
-            Assert.IsFalse(relationType.IsDeleted);
-            Assert.IsFalse(association.IsDeleted);
-            Assert.IsFalse(role.IsDeleted);
         }
 
         [Test]

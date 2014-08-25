@@ -79,28 +79,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Gets a value indicating whether this instance's is indexed is default.
-        /// </summary>
-        /// <value>
-        ///  <c>true</c> if this instance is indexed default; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsIsIndexedDefault
-        {
-            get { return this.IsIndexed.Equals(false); }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether this instance's is derived is default.
-        /// </summary>
-        /// <value>
-        ///  <c>true</c> if this instance is derived default; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsIsDerivedDefault
-        {
-            get { return this.IsDerived.Equals(false); }
-        }
-
-        /// <summary>
         /// Gets a value indicating whether this instance is many to many.
         /// </summary>
         /// <value>
@@ -268,21 +246,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Copy from source.
-        /// </summary>
-        /// <param name="source">The source.</param>
-        public void Copy(MetaRelation source)
-        {
-            this.CopyMetaObject(source);
-
-            this.AssociationType.Copy(source.AssociationType);
-            this.RoleType.Copy(source.RoleType);
-
-            this.IsIndexed = source.IsIndexed;
-            this.IsDerived = source.IsDerived;
-        }
-
-        /// <summary>
         /// Removes the Id.
         /// </summary>
         public override void RemoveId()
@@ -293,38 +256,6 @@ namespace Allors.Meta
             }
 
             base.RemoveId();
-        }
-
-        /// <summary>
-        /// Deletes this instance.
-        /// </summary>
-        public override void Delete()
-        {
-            var domain = this.Domain;
-            var deleteId = this.Id;
-
-            this.Reset();
-            this.AssociationType.Reset();
-            this.RoleType.Reset();
-
-            this.AssociationType.InternalDelete();
-            this.RoleType.InternalDelete();
-            
-            base.Delete();
-
-            domain.StaleRelationTypeDerivations();
-        }
-
-        /// <summary>
-        /// Resets this instance.
-        /// </summary>
-        public void Reset()
-        {
-            this.IsIndexed = false;
-            this.IsDerived = false;
-
-            this.AssociationType.Reset();
-            this.RoleType.Reset();
         }
 
         /// <summary>
@@ -365,10 +296,12 @@ namespace Allors.Meta
         {
             var relationType = (MetaRelation)session.Create(AllorsEmbeddedDomain.RelationType);
 
+            relationType.IsIndexed = false;
+            relationType.IsDerived = false;
+
             relationType.AssociationType = MetaAssociation.Create(session);
             relationType.RoleType = MetaRole.Create(session);
-            
-            relationType.Reset();
+
             return relationType;
         }
 

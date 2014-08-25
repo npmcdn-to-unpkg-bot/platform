@@ -30,28 +30,6 @@ namespace Allors.Meta
     public sealed partial class MetaInheritance
     {
         /// <summary>
-        /// Gets a value indicating whether this subtype is default.
-        /// </summary>
-        /// <value>
-        ///  <c>true</c> if this subtype is default; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsSubtypeDefault
-        {
-            get { return !ExistSubtype; }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether the supertype is default.
-        /// </summary>
-        /// <value>
-        ///  <c>true</c> if the supertype is default; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsSupertypeDefault
-        {
-            get { return !ExistSupertype; }
-        }
-
-        /// <summary>
         /// Gets or sets the subtype.
         /// </summary>
         /// <value>The Subtype.</value>
@@ -119,39 +97,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Copy from source.
-        /// </summary>
-        /// <param name="source">The source.</param>
-        public void Copy(MetaInheritance source)
-        {
-            this.CopyMetaObject(source);
-
-            if (source.ExistSubtype)
-            {
-                this.Subtype = (MetaObject)this.Domain.Domain.Find(source.Subtype.Id);
-            }
-
-            if (source.ExistSupertype)
-            {
-                this.Supertype = (MetaObject)this.Domain.Domain.Find(source.Supertype.Id);
-            }
-        }
-
-        /// <summary>
-        /// Deletes this instance.
-        /// </summary>
-        public override void Delete()
-        {
-            var domain = this.Domain;
-            var deleteId = this.Id;
-
-            this.Reset();
-            base.Delete();
-            
-            domain.StaleInheritanceDerivations();
-        }
-
-        /// <summary>
         /// Removes the Id.
         /// </summary>
         public override void RemoveId()
@@ -180,15 +125,6 @@ namespace Allors.Meta
         {
             base.RemoveSupertype();
             this.Domain.StaleInheritanceDerivations();
-        }
-
-        /// <summary>
-        /// Resets this instance.
-        /// </summary>
-        public void Reset()
-        {
-            this.RemoveSubtype();
-            this.RemoveSupertype();
         }
 
         /// <summary>

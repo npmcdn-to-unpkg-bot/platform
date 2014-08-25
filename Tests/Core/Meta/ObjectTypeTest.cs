@@ -116,16 +116,11 @@ namespace Allors.Meta.Static
 
             Assert.AreEqual(3, c2.AssociationTypes.Length);
 
-            a2.FindInheritanceWhereDirectSubtype(i2).Delete();
-
             Assert.AreEqual(2, c2.AssociationTypes.Length);
 
             a2.AddDirectSupertype(i2);
-            i1_i2.Delete();
 
             Assert.AreEqual(2, c2.AssociationTypes.Length);
-
-            a1_a2.Delete();
 
             Assert.AreEqual(1, c2.AssociationTypes.Length);
 
@@ -240,33 +235,19 @@ namespace Allors.Meta.Static
 
             Assert.AreEqual(3, c1.CompositeRoleTypes.Length);
 
-            a1.FindInheritanceWhereDirectSubtype(i1).Delete();
-
             Assert.AreEqual(2, c1.CompositeRoleTypes.Length);
 
             a1.AddDirectSupertype(i1);
 
-            i1_string.Delete();
+            Assert.AreEqual(3, c1.CompositeRoleTypes.Length);
 
             Assert.AreEqual(3, c1.CompositeRoleTypes.Length);
 
-            a1_string.Delete();
-
             Assert.AreEqual(3, c1.CompositeRoleTypes.Length);
-
-            c1_string.Delete();
-
-            Assert.AreEqual(3, c1.CompositeRoleTypes.Length);
-
-            i1_i2.Delete();
 
             Assert.AreEqual(2, c1.CompositeRoleTypes.Length);
 
-            a1_a2.Delete();
-
             Assert.AreEqual(1, c1.CompositeRoleTypes.Length);
-
-            c1_c2.Delete();
 
             Assert.AreEqual(0, c1.CompositeRoleTypes.Length);
         }
@@ -371,64 +352,6 @@ namespace Allors.Meta.Static
             relationTypeWhereRole.RoleType.AssignedPluralName = "tos";
 
             Assert.IsTrue(this.Domain.IsValid);
-
-            Assert.IsFalse(thisType.IsAssignedSingularNameDefault);
-            Assert.IsFalse(thisType.IsAssignedPluralNameDefault);
-            Assert.IsFalse(thisType.IsIsAbstractDefault);
-
-            // Assert.IsFalse(thisType.IsDefaultIsInterface);
-            // Assert.IsFalse(thisType.IsDefaultIsMultiple);
-            // Assert.IsFalse(thisType.IsDefaultIsUnit);
-            // Assert.IsFalse(thisType.IsDefaultUnitTag);
-            thisType.Reset();
-
-            Assert.IsTrue(thisType.IsAssignedSingularNameDefault);
-            Assert.IsTrue(thisType.IsAssignedPluralNameDefault);
-            Assert.IsTrue(thisType.IsIsAbstractDefault);
-            Assert.IsTrue(thisType.IsIsInterfaceDefault);
-            Assert.IsTrue(thisType.IsIsUnitDefault);
-            Assert.IsTrue(thisType.IsUnitTagDefault);
-        }
-
-        [Test]
-        public void Delete()
-        {
-            this.Populate();
-
-            var thisType = this.Domain.AddDeclaredObjectType(Guid.NewGuid());
-            thisType.SingularName = "ThisType";
-            thisType.PluralName = "ThisTypes";
-
-            var thatType = this.Domain.AddDeclaredObjectType(Guid.NewGuid());
-            thatType.SingularName = "ThatType";
-            thatType.PluralName = "ThatTypes";
-
-            var superType = this.Domain.AddDeclaredObjectType(Guid.NewGuid());
-            superType.SingularName = "Supertype";
-            superType.PluralName = "Supertypes";
-            superType.IsInterface = true;
-
-            thisType.AddDirectSupertype(superType);
-
-            var relationTypeWhereAssociation = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            relationTypeWhereAssociation.AssociationType.ObjectType = thisType;
-            relationTypeWhereAssociation.RoleType.ObjectType = thatType;
-
-            var relationTypeWhereRole = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            relationTypeWhereRole.AssociationType.ObjectType = thatType;
-            relationTypeWhereRole.RoleType.ObjectType = thisType;
-            relationTypeWhereRole.RoleType.AssignedSingularName = "to";
-            relationTypeWhereRole.RoleType.AssignedPluralName = "tos";
-
-            Assert.IsTrue(this.Domain.IsValid);
-
-            thisType.Delete();
-
-            Assert.IsFalse(relationTypeWhereAssociation.IsDeleted);
-            Assert.IsFalse(relationTypeWhereRole.IsDeleted);
-
-            Assert.IsFalse(thatType.IsDeleted);
-            Assert.IsFalse(superType.IsDeleted);
         }
 
         [Test]
@@ -494,7 +417,6 @@ namespace Allors.Meta.Static
             Assert.AreEqual(1, c1.DirectSuperinterfaces.Length);
 
             c1.AddDirectSupertype(this.Population.I2);
-            c1.FindInheritanceWhereDirectSubtype(this.Population.I1).Delete();
 
             Assert.AreEqual(1, c1.DirectSuperinterfaces.Length);
 
@@ -670,8 +592,6 @@ namespace Allors.Meta.Static
             Assert.AreEqual(0, c1.ExclusiveSuperinterfaces.Length);
             Assert.AreEqual(3, a1.ExclusiveSuperinterfaces.Length);
 
-            a1.FindInheritanceWhereDirectSubtype(i1).Delete();
-
             Assert.AreEqual(0, c1.ExclusiveSuperinterfaces.Length);
             Assert.AreEqual(2, a1.ExclusiveSuperinterfaces.Length);
 
@@ -740,12 +660,9 @@ namespace Allors.Meta.Static
 
             Assert.AreEqual(3, c1.ExclusiveRoleTypes.Length);
 
-            i2.FindInheritanceWhereDirectSubtype(i3).Delete();
-
             Assert.AreEqual(2, c1.ExclusiveRoleTypes.Length);
 
             i2.AddDirectSupertype(i3);
-            i3_i4.Delete();
 
             Assert.AreEqual(2, c1.ExclusiveRoleTypes.Length);
 
@@ -781,7 +698,6 @@ namespace Allors.Meta.Static
             Assert.AreEqual(a2, i1.ExclusiveRootClass);
 
             var i12 = this.Population.I12;
-            a1.FindInheritanceWhereDirectSubtype(a2).Delete();
 
             Assert.AreEqual(null, i12.ExclusiveRootClass);
 
@@ -829,29 +745,17 @@ namespace Allors.Meta.Static
         {
             this.Populate();
 
-            foreach (var interfacesToDelete in this.Domain.Inheritances)
-            {
-                interfacesToDelete.Delete();
-            }
-
-            var originalInheritance = this.Population.C1.AddDirectSupertype(this.Population.A1);
             var inheritance = this.Population.C1.AddDirectSupertype(this.Population.A2);
 
             Assert.AreEqual(1, this.Domain.Inheritances.Length);
-            Assert.IsTrue(originalInheritance.IsDeleted);
-            Assert.IsFalse(inheritance.IsDeleted);
 
             inheritance.Subtype = this.Population.C1;
 
             Assert.AreEqual(1, this.Domain.Inheritances.Length);
-            Assert.IsTrue(originalInheritance.IsDeleted);
-            Assert.IsFalse(inheritance.IsDeleted);
 
             inheritance.Supertype = this.Population.A1;
 
             Assert.AreEqual(1, this.Domain.Inheritances.Length);
-            Assert.IsTrue(originalInheritance.IsDeleted);
-            Assert.IsFalse(inheritance.IsDeleted);
         }
 
         [Test]
@@ -1028,56 +932,6 @@ namespace Allors.Meta.Static
         }
 
         [Test]
-        public void Reset()
-        {
-            this.Populate();
-
-            var thisType = this.Domain.AddDeclaredObjectType(Guid.NewGuid());
-            thisType.SingularName = "ThisType";
-            thisType.PluralName = "TheseTypes";
-            thisType.IsAbstract = !thisType.IsAbstract;
-            thisType.IsAbstract = !thisType.IsAbstract;
-            thisType.IsInterface = !thisType.IsInterface;
-            thisType.IsUnit = !thisType.IsUnit;
-            thisType.UnitTag = 1001;
-
-            var thatType = this.Domain.AddDeclaredObjectType(Guid.NewGuid());
-            thatType.SingularName = "ThatType";
-            thatType.PluralName = "ThatTypes";
-
-            var superType = this.Domain.AddDeclaredObjectType(Guid.NewGuid());
-            superType.SingularName = "Supertype";
-            superType.PluralName = "Supertypes";
-            superType.IsInterface = true;
-
-            thisType.AddDirectSupertype(superType);
-
-            var relationTypeWhereAssociation = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            relationTypeWhereAssociation.AssociationType.ObjectType = thisType;
-            relationTypeWhereAssociation.RoleType.ObjectType = thatType;
-
-            var relationTypeWhereRole = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            relationTypeWhereRole.AssociationType.ObjectType = thatType;
-            relationTypeWhereRole.RoleType.ObjectType = thisType;
-            relationTypeWhereRole.RoleType.AssignedSingularName = "to";
-            relationTypeWhereRole.RoleType.AssignedPluralName = "tos";
-
-            Assert.IsTrue(this.Domain.IsValid);
-
-            thisType.Reset();
-
-            Assert.IsFalse(thisType.ExistSingularName);
-            Assert.IsFalse(thisType.ExistPluralName);
-            Assert.IsFalse(thisType.IsAbstract);
-            Assert.IsFalse(thisType.IsInterface);
-            Assert.IsFalse(thisType.IsUnit);
-            Assert.IsFalse(thisType.ExistUnitTag);
-
-            Assert.IsFalse(relationTypeWhereAssociation.IsDeleted);
-            Assert.IsFalse(relationTypeWhereRole.IsDeleted);
-        }
-
-        [Test]
         public void Methods()
         {
             this.Populate();
@@ -1117,16 +971,11 @@ namespace Allors.Meta.Static
 
             Assert.AreEqual(3, c1.MethodTypes.Length);
 
-            a1.FindInheritanceWhereDirectSubtype(i1).Delete();
-
             Assert.AreEqual(2, c1.MethodTypes.Length);
 
             a1.AddDirectSupertype(i1);
-            methodI1.Delete();
 
             Assert.AreEqual(2, c1.MethodTypes.Length);
-
-            methodA1.ObjectType.Delete();
 
             Assert.AreEqual(1, c1.MethodTypes.Length);
 
@@ -1175,16 +1024,11 @@ namespace Allors.Meta.Static
 
             Assert.AreEqual(3, c1.RoleTypes.Length);
 
-            a1.FindInheritanceWhereDirectSubtype(i1).Delete();
-
             Assert.AreEqual(2, c1.RoleTypes.Length);
 
             a1.AddDirectSupertype(i1);
-            i1_i2.Delete();
 
             Assert.AreEqual(2, c1.RoleTypes.Length);
-
-            a1_a2.AssociationType.ObjectType.Delete();
 
             Assert.AreEqual(1, c1.RoleTypes.Length);
 
@@ -1223,7 +1067,6 @@ namespace Allors.Meta.Static
             Assert.AreEqual(a2, i1.RootClasses[0]);
 
             var i12 = this.Population.I12;
-            a1.FindInheritanceWhereDirectSubtype(a2).Delete();
 
             Assert.AreEqual(1, c1.RootClasses.Length);
             Assert.AreEqual(1, a1.RootClasses.Length);
@@ -1291,8 +1134,6 @@ namespace Allors.Meta.Static
             Assert.AreEqual(1, a1.Subclasses.Length);
             Assert.AreEqual(0, c1.Subclasses.Length);
 
-            c1.Delete();
-
             Assert.AreEqual(1, i1.Subclasses.Length);
             Assert.AreEqual(0, a1.Subclasses.Length);
         }
@@ -1341,8 +1182,6 @@ namespace Allors.Meta.Static
 
             Assert.AreEqual(2, c1.Superclasses.Length);
 
-            a1.FindInheritanceWhereDirectSubtype(this.Population.A2).Delete();
-
             Assert.AreEqual(1, c1.Superclasses.Length);
 
             RemoveDirectSupertypes(c1);
@@ -1373,7 +1212,6 @@ namespace Allors.Meta.Static
             Assert.AreEqual(2, c1.Superinterfaces.Length);
 
             a1.AddDirectSupertype(this.Population.I2);
-            a1.FindInheritanceWhereDirectSubtype(this.Population.I1).Delete();
 
             Assert.AreEqual(2, c1.Superinterfaces.Length);
 
@@ -1538,32 +1376,19 @@ namespace Allors.Meta.Static
 
             Assert.AreEqual(3, c1.UnitRoleTypes.Length);
 
-            a1.FindInheritanceWhereDirectSubtype(i1).Delete();
-
             Assert.AreEqual(2, c1.UnitRoleTypes.Length);
 
             a1.AddDirectSupertype(i1);
-            i1_i2.Delete();
 
             Assert.AreEqual(3, c1.UnitRoleTypes.Length);
 
-            a1_a2.Delete();
-
             Assert.AreEqual(3, c1.UnitRoleTypes.Length);
 
-            c1_c1.Delete();
-
             Assert.AreEqual(3, c1.UnitRoleTypes.Length);
-
-            i1_string.Delete();
 
             Assert.AreEqual(2, c1.UnitRoleTypes.Length);
 
-            a1_string.Delete();
-
             Assert.AreEqual(1, c1.UnitRoleTypes.Length);
-
-            c1_string.Delete();
 
             Assert.AreEqual(0, c1.UnitRoleTypes.Length);
         }
@@ -1777,7 +1602,6 @@ namespace Allors.Meta.Static
         {
             foreach (var inheritance in subType.InheritancesWhereSubtype)
             {
-                inheritance.Delete();
             }
         }
 

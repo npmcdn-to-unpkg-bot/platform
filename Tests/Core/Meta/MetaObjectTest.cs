@@ -42,25 +42,6 @@ namespace Allors.Meta.Static
             Assert.AreEqual(objectType, domain.Domain.Find(objectType.Id));
             Assert.AreEqual(objectType, superDomain.Domain.Find(objectType.Id));
         }
-
-        [Test]
-        public void FindByIdAfterExtend()
-        {
-            var superDomainDomain = MetaDomain.Create();
-            superDomainDomain.Name = "SuperDomain";
-
-            var objectTypeId = new Guid("6A10F333-4AD6-4812-AB84-46DB10858DCA");
-
-            var objectType = superDomainDomain.AddDeclaredObjectType(objectTypeId);
-            objectType.SingularName = "Singular";
-            objectType.PluralName = "Plural";
-
-            var domain = this.Domain;
-            var superDomain = domain.Inherit(superDomainDomain);
-
-            Assert.IsNotNull(domain.Domain.Find(objectTypeId));
-            Assert.IsNotNull(superDomain.Domain.Find(objectTypeId));
-        }
     }
 
     public class MetaObjectTestWithSuperDomains : MetaObjectTest

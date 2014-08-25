@@ -74,28 +74,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Gets a value indicating whether this instance's <see cref="ObjectType"/> is default.
-        /// </summary>
-        /// <value>
-        ///  <c>true</c> if this instance's <see cref="ObjectType"/> is default; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsObjectTypeDefault
-        {
-            get { return !ExistObjectType; }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether this instance's <see cref="Name"/> is default.
-        /// </summary>
-        /// <value>
-        /// <c>true</c> if this instance's <see cref="Name"/> is default; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsNameDefault
-        {
-            get { return !ExistName; }
-        }
-
-        /// <summary>
         /// Gets the validation name.
         /// </summary>
         /// <value>The validation name.</value>
@@ -109,21 +87,6 @@ namespace Allors.Meta
                 }
 
                 return "unknown method type";
-            }
-        }
-
-        /// <summary>
-        /// Copy from source.
-        /// </summary>
-        /// <param name="source">The source.</param>
-        public void Copy(MetaMethod source)
-        {
-            this.CopyMetaObject(source);
-
-            this.Name = source.Name;
-            if (source.ExistObjectType)
-            {
-                ObjectType = (MetaObject)this.Domain.Domain.Find(source.ObjectType.Id);
             }
         }
 
@@ -159,27 +122,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Resets this instance.
-        /// </summary>
-        public void Reset()
-        {
-            this.RemoveName();
-            this.RemoveObjectType();
-        }
-
-        /// <summary>
-        /// Deletes this instance.
-        /// </summary>
-        public override void Delete()
-        {
-            var deleteId = this.Id;
-            var domain = this.Domain;
-
-            this.Reset();
-            base.Delete();
-        }
-
-        /// <summary>
         /// Creates a new instance.
         /// </summary>
         /// <param name="session">The session.</param>
@@ -187,7 +129,6 @@ namespace Allors.Meta
         internal static MetaMethod Create(AllorsEmbeddedSession session)
         {
             var methodType = (MetaMethod)session.Create(AllorsEmbeddedDomain.MethodType);
-            methodType.Reset();
             return methodType;
         }
         

@@ -27,14 +27,6 @@ namespace Allors.Meta.AllorsGenerated
 	{
 		protected System.Object _MetaObjectId;
 
-
-
-
-		/// <summary>
-		/// Do not use, this is an Allors internal field.
-		/// </summary>
-		protected bool isDeleted;
-
 		/// <summary>
 		/// Do not use, this is an Allors internal field.
 		/// </summary>
@@ -72,33 +64,13 @@ namespace Allors.Meta.AllorsGenerated
 			}
 		}
 
-		public bool IsDeleted
-		{ 
-			get
-			{
-				return isDeleted;
-			}
-		}
-
-		/// <summary>
-		/// Asserts that this Object is in the right state.
-		/// </summary>
-		protected void AllorsAssert()
-		{
-			if( isDeleted ) 
-			{
-				throw new System.Exception("Object of class "+ GetType().ToString() +" with id " + id + " has been deleted");
-			}
-		}
-
-		/// <summary>
+	    /// <summary>
 		/// Asserts that this Object and the related Object are in the right state.
 		/// </summary>
 		/// <param name="relatedObject">The related object.</param>
 		protected void AllorsAssert(AllorsEmbeddedObject relatedObject)
 		{
-			AllorsAssert();
-			if( relatedObject!=null && session!=relatedObject.AllorsSession )
+		    if( relatedObject!=null && session!=relatedObject.AllorsSession )
 			{
 				throw new System.ArgumentException("Objects are from different populations");
 			}
@@ -110,8 +82,7 @@ namespace Allors.Meta.AllorsGenerated
 		/// <param name="relatedObjects">The related objects.</param>
 		protected void AllorsAssert(System.Collections.ICollection relatedObjects)
 		{
-			AllorsAssert();
-			if(relatedObjects!=null)
+		    if(relatedObjects!=null)
 			{
 				foreach(AllorsEmbeddedObject obj in relatedObjects)
 				{
@@ -125,9 +96,7 @@ namespace Allors.Meta.AllorsGenerated
 
 		public abstract System.Guid AllorsObjectTypeId {get;}
 
-		public abstract void Delete();
-
-		object AllorsInternal.GetRole(AllorsEmbeddedRelationType relation)
+	    object AllorsInternal.GetRole(AllorsEmbeddedRelationType relation)
 		{
 			throw new System.NotImplementedException();
 		}
@@ -141,15 +110,13 @@ namespace Allors.Meta.AllorsGenerated
 		public virtual global::System.Guid Id
 		{
 			get
-			{ 
-				AllorsAssert();
-				return (global::System.Guid)_MetaObjectId;
+			{
+			    return (global::System.Guid)_MetaObjectId;
 			}
 
 			set
 			{
-				AllorsAssert();
-				RoleSetMetaObjectId(value);
+			    RoleSetMetaObjectId(value);
 			}
 		}
 

@@ -419,83 +419,6 @@ namespace Allors.Meta
                 return ExistDerivedRootTypes;
             }
         }
-
-        /// <summary>
-        /// Gets a value indicating whether this instance's assigned singular name is default.
-        /// </summary>
-        /// <value>
-        ///  <c>true</c> if this instance's assigned singular name is default; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsAssignedSingularNameDefault
-        {
-            get { return !ExistAssignedSingularName; }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether this instance's assigned plural name is default.
-        /// </summary>
-        /// <value>
-        ///  <c>true</c> if this instance's assigned plural name is default; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsAssignedPluralNameDefault
-        {
-            get { return !ExistAssignedPluralName; }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether this instance's is many is default.
-        /// </summary>
-        /// <value>
-        ///  <c>true</c> if this instance's is many is default; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsIsManyDefault
-        {
-            get { return this.IsMany.Equals(false); }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether this instance's object type is default.
-        /// </summary>
-        /// <value>
-        ///  <c>true</c> if this instance object type is default; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsObjectTypeDefault
-        {
-            get { return !ExistObjectType; }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether this instance's precision is default.
-        /// </summary>
-        /// <value>
-        ///  <c>true</c> if this instance's precision is default; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsPrecisionDefault
-        {
-            get { return !this.ExistPrecision; }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether this instance's scale is default.
-        /// </summary>
-        /// <value>
-        ///  <c>true</c> if this instance's is default scale; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsScaleDefault
-        {
-            get { return !this.ExistScale; }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether this instance's size is default.
-        /// </summary>
-        /// <value>
-        ///  <c>true</c> if this instance's size is default; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsSizeDefault
-        {
-            get { return !this.ExistSize; }
-        }
         
         /// <summary>
         /// Gets the validation name.
@@ -534,46 +457,6 @@ namespace Allors.Meta
             return -1;
         }
 
-        /// <summary>
-        /// Copy from source.
-        /// </summary>
-        /// <param name="source">The source.</param>
-        public void Copy(MetaRole source)
-        {
-            this.CopyMetaObject(source);
-
-            this.AssignedPluralName = source.PluralName;
-            this.AssignedSingularName = source.SingularName;
-            this.IsMany = source.IsMany;
-            if (source.ExistSize)
-            {
-                this.Size = source.Size;
-            }
-
-            if (source.ExistPrecision)
-            {
-                this.Precision = source.Precision;
-            }
-
-            if (source.ExistScale)
-            {
-                this.Scale = source.Scale;
-            }
-
-            if (source.ExistObjectType)
-            {
-                ObjectType = (MetaObject)this.Domain.Domain.Find(source.ObjectType.Id);
-            }
-        }
-
-        /// <summary>
-        /// Deletes this instance.
-        /// </summary>
-        public override void Delete()
-        {
-            throw new NotSupportedException();
-        }
-        
         /// <summary>
         /// Removes the Id.
         /// </summary>
@@ -664,19 +547,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Resets this instance.
-        /// </summary>
-        public void Reset()
-        {
-            this.RemoveAssignedPluralName();
-            this.RemoveAssignedSingularName();
-            this.IsMany = false;
-            this.RemoveScale();
-            this.RemoveSize();
-            this.RemoveObjectType();
-        }
-
-        /// <summary>
         /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
         /// </summary>
         /// <returns>
@@ -702,16 +572,8 @@ namespace Allors.Meta
         internal static MetaRole Create(AllorsEmbeddedSession session)
         {
             var role = (MetaRole)session.Create(AllorsEmbeddedDomain.RoleType);
-            role.Reset();
+            role.IsMany = false;
             return role;
-        }
-
-        /// <summary>
-        /// Delete for internal purpose.
-        /// </summary>
-        internal void InternalDelete()
-        {
-            base.Delete();
         }
 
         /// <summary>

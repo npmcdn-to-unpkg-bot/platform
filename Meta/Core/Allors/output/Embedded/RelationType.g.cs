@@ -156,25 +156,9 @@ namespace Allors.Meta.AllorsGenerated
 			}
 		}
 
-		public override void Delete()
+	    object AllorsInternal.GetRole(AllorsEmbeddedRelationType relation)
 		{
-			AllorsAssert();
-
-			((AllorsInternalRelationType)this).AllorsRemoveRelationTypeRoleType();
-			((AllorsInternalRelationType)this).AllorsRemoveRelationTypeAssociationType();
-
-			((AllorsInternalRelationType)this).AllorsRoleReleaseDeclaredRelationTypeDomain();
-			((AllorsInternalRelationType)this).AllorsRoleReleaseDerivedRelationTypeDomain();
-
-
-			session.Delete(this);
-			isDeleted = true;
-		}
-
-		object AllorsInternal.GetRole(AllorsEmbeddedRelationType relation)
-		{
-			AllorsAssert();
-			switch(relation.Tag)
+	        switch(relation.Tag)
 			{
 				case AllorsRelationTags.RelationTypeIsDerived:
 					return _RelationTypeIsDerived;
@@ -221,15 +205,13 @@ namespace Allors.Meta.AllorsGenerated
 		public virtual global::System.Boolean IsDerived
 		{
 			get
-			{ 
-				AllorsAssert();
-				return (global::System.Boolean)_RelationTypeIsDerived;
+			{
+			    return (global::System.Boolean)_RelationTypeIsDerived;
 			}
 
 			set
 			{
-				AllorsAssert();
-				RoleSetRelationTypeIsDerived(value);
+			    RoleSetRelationTypeIsDerived(value);
 			}
 		}
 
@@ -254,15 +236,13 @@ namespace Allors.Meta.AllorsGenerated
 		public virtual global::System.Boolean IsIndexed
 		{
 			get
-			{ 
-				AllorsAssert();
-				return (global::System.Boolean)_RelationTypeIsIndexed;
+			{
+			    return (global::System.Boolean)_RelationTypeIsIndexed;
 			}
 
 			set
 			{
-				AllorsAssert();
-				RoleSetRelationTypeIsIndexed(value);
+			    RoleSetRelationTypeIsIndexed(value);
 			}
 		}
 
@@ -288,8 +268,7 @@ namespace Allors.Meta.AllorsGenerated
 		{
 			get
 			{
-				AllorsAssert();
-				return _RelationTypeRoleType;
+			    return _RelationTypeRoleType;
 			}
 
 			set
@@ -319,8 +298,7 @@ namespace Allors.Meta.AllorsGenerated
 
 		void AllorsInternalRelationType.AllorsRemoveRelationTypeRoleType()
 		{
-			AllorsAssert();
-			if( _RelationTypeRoleType != null) 
+		    if( _RelationTypeRoleType != null) 
 			{
 				((AllorsInternalRoleType)_RelationTypeRoleType).AllorsRoleSyncSetRoleTypeRelationType( null ); 
 				_RelationTypeRoleType = null;
@@ -340,8 +318,7 @@ namespace Allors.Meta.AllorsGenerated
 		{
 			get
 			{
-				AllorsAssert();
-				return _RelationTypeAssociationType;
+			    return _RelationTypeAssociationType;
 			}
 
 			set
@@ -371,8 +348,7 @@ namespace Allors.Meta.AllorsGenerated
 
 		void AllorsInternalRelationType.AllorsRemoveRelationTypeAssociationType()
 		{
-			AllorsAssert();
-			if( _RelationTypeAssociationType != null) 
+		    if( _RelationTypeAssociationType != null) 
 			{
 				((AllorsInternalAssociationType)_RelationTypeAssociationType).AllorsRoleSyncSetAssociationTypeRelationType( null ); 
 				_RelationTypeAssociationType = null;
@@ -393,8 +369,7 @@ namespace Allors.Meta.AllorsGenerated
 		{
 			get
 			{
-				AllorsAssert();
-				return _DeclaredRelationTypeDomain;
+			    return _DeclaredRelationTypeDomain;
 			}
 		}
 
@@ -408,8 +383,7 @@ namespace Allors.Meta.AllorsGenerated
 
 		void AllorsInternalRelationType.AllorsRoleSyncSetDeclaredRelationTypeDomain(global::Allors.Meta.MetaDomain association)
 		{
-			AllorsAssert();
-			_DeclaredRelationTypeDomain = association;
+		    _DeclaredRelationTypeDomain = association;
 		}
 
 		void AllorsInternalRelationType.AllorsRoleReleaseDeclaredRelationTypeDomain()
@@ -425,8 +399,7 @@ namespace Allors.Meta.AllorsGenerated
 		{
 			get
 			{
-				AllorsAssert();
-				return _DerivedRelationTypeDomain;
+			    return _DerivedRelationTypeDomain;
 			}
 		}
 
@@ -440,8 +413,7 @@ namespace Allors.Meta.AllorsGenerated
 
 		void AllorsInternalRelationType.AllorsRoleSyncAddDerivedRelationTypeDomain(global::Allors.Meta.MetaDomain association)
 		{
-			AllorsAssert();
-			if( !AllorsEmbeddedArrays.Exist( _DerivedRelationTypeDomain, association ) ) 
+		    if( !AllorsEmbeddedArrays.Exist( _DerivedRelationTypeDomain, association ) ) 
 			{
 				_DerivedRelationTypeDomain = (global::Allors.Meta.MetaDomain[])AllorsEmbeddedArrays.Add(_DerivedRelationTypeDomain,association);
 			}
@@ -449,14 +421,12 @@ namespace Allors.Meta.AllorsGenerated
 
 		void AllorsInternalRelationType.AllorsRoleSyncRemoveDerivedRelationTypeDomain(global::Allors.Meta.MetaDomain association)
 		{
-			AllorsAssert();
-			_DerivedRelationTypeDomain = (global::Allors.Meta.MetaDomain[]) AllorsEmbeddedArrays.Remove(_DerivedRelationTypeDomain,association);
+		    _DerivedRelationTypeDomain = (global::Allors.Meta.MetaDomain[]) AllorsEmbeddedArrays.Remove(_DerivedRelationTypeDomain,association);
 		}
 
 		void AllorsInternalRelationType.AllorsRoleReleaseDerivedRelationTypeDomain()
 		{
-			AllorsAssert();
-			foreach( global::Allors.Meta.MetaDomain association in _DerivedRelationTypeDomain )
+		    foreach( global::Allors.Meta.MetaDomain association in _DerivedRelationTypeDomain )
 			{
 				((AllorsInternalDomain)association).AllorsRemoveDomainDerivedRelationType((global::Allors.Meta.MetaRelation) this);
 			}

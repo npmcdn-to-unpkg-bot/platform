@@ -77,8 +77,6 @@ namespace Allors.Meta.Static
             var validationReport = this.Domain.Validate();
             Assert.AreEqual(1, validationReport.Errors.Length);
 
-            c1_c2_inheritance.Delete();
-
             // interface with abstract superclass
             var i1_a1_inheritance = this.Domain.AddDeclaredInheritance(Guid.NewGuid());
             i1_a1_inheritance.Subtype = this.Population.I1;
@@ -86,8 +84,6 @@ namespace Allors.Meta.Static
 
             validationReport = this.Domain.Validate();
             Assert.AreEqual(1, validationReport.Errors.Length);
-
-            i1_a1_inheritance.Delete();
 
             // Cyclic
             var c1_a1_inheritance = this.Domain.AddDeclaredInheritance(Guid.NewGuid());
@@ -99,9 +95,6 @@ namespace Allors.Meta.Static
 
             validationReport = this.Domain.Validate();
             Assert.AreEqual(2, validationReport.Errors.Length);
-
-            c1_a1_inheritance.Delete();
-            a1_c1_inheritance.Delete();
         }
 
         private void CycleDifferentTypeCheck(MetaObject type1, MetaObject type2)
@@ -117,9 +110,6 @@ namespace Allors.Meta.Static
             Assert.AreEqual(1, type1.DirectSubtypes.Length);
             Assert.AreEqual(1, type2.DirectSupertypes.Length);
             Assert.AreEqual(1, type2.DirectSubtypes.Length);
-
-            inheritance1.Delete();
-            inheritance2.Delete();
         }
 
         private void CycleSameTypeReset(MetaObject type1, MetaObject type2)
@@ -139,8 +129,6 @@ namespace Allors.Meta.Static
                 Assert.AreEqual(1, type2.DirectSubtypes.Length);
             }
 
-            inheritance.Delete();
-
             inheritance = this.Domain.AddDeclaredInheritance(Guid.NewGuid());
             inheritance.Subtype = type1;
             inheritance.Supertype = type2;
@@ -155,8 +143,6 @@ namespace Allors.Meta.Static
                 Assert.AreEqual(1, type1.DirectSupertypes.Length);
                 Assert.AreEqual(1, type2.DirectSubtypes.Length);
             }
-
-            inheritance.Delete();
         }
 
         private void CycleSameTypeSet(MetaObject type)
@@ -175,8 +161,6 @@ namespace Allors.Meta.Static
                 Assert.AreEqual(0, type.DirectSubtypes.Length);
             }
 
-            inheritance.Delete();
-
             inheritance = this.Domain.AddDeclaredInheritance(Guid.NewGuid());
             try
             {
@@ -190,8 +174,6 @@ namespace Allors.Meta.Static
                 Assert.AreEqual(0, type.DirectSupertypes.Length);
                 Assert.AreEqual(0, type.DirectSubtypes.Length);
             }
-
-            inheritance.Delete();
         }
     }
 

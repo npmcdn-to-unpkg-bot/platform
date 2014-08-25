@@ -16,10 +16,6 @@ namespace Allors.Meta.AllorsGenerated
 		int AllorsObjectId { get; }
 
 		System.Guid AllorsObjectTypeId { get; }
-
-		void Delete();
-
-		bool IsDeleted { get; }
 	}
 
 	/// <summary>
