@@ -754,7 +754,7 @@ namespace Allors.Meta.AllorsGenerated
 	}
 
 	[System.Diagnostics.DebuggerNonUserCode]
-	public abstract class AllorsClassObjectType :  global::Allors.Meta.MetaBase,  AllorsInternalObjectType , AllorsEmbeddedObject
+	public abstract class AllorsClassObjectType :  global::Allors.Meta.MetaObject,  AllorsInternalObjectType , AllorsEmbeddedObject
 	{
 		protected global::Allors.Meta.AssociationType[] _ObjectTypeDerivedExclusiveAssociationType = AllorsEmbeddedArrays.EMPTY_AssociationType_ARRAY;
 

@@ -218,9 +218,9 @@ FROM information_schema.columns"))
                                             {
                                                 var dataType = existingColumn.DataType.ToLower();
 
-                                                if (column.RelationType.RoleType.ObjectType.IsComposite)
+                                                if (!column.RelationType.RoleType.ObjectType.IsUnit)
                                                 {
-                                                    if (!dataType.Equals(NpgsqlDbType.ToString().ToLower()))
+                                                    if (!dataType.Equals(this.NpgsqlDbType.ToString().ToLower()))
                                                     {
                                                         AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Incompatible);
                                                     }

@@ -124,7 +124,7 @@ namespace Allors.Meta
         {
             base.Validate(validationLog);
 
-            if (ExistSubtype && ExistSupertype)
+            if (this.ExistSubtype && this.ExistSupertype)
             {
                 if (this.Subtype.IsCyclicInheritance(this.Supertype))
                 {
@@ -139,7 +139,8 @@ namespace Allors.Meta
                     validationLog.AddError(message, this, ValidationKind.Unique, AllorsEmbeddedDomain.InheritanceSupertype);
                 }
 
-                if (this.Supertype.IsConcreteComposite)
+                ObjectType tempQualifier = this.Supertype;
+                if (!tempQualifier.IsUnit && !tempQualifier.IsInterface)
                 {
                     var message = this.ValidationName + " can not have a concrete superclass";
                     validationLog.AddError(message, this, ValidationKind.Hierarchy, AllorsEmbeddedDomain.InheritanceSupertype);
@@ -147,7 +148,7 @@ namespace Allors.Meta
             }
             else
             {
-                if (!ExistSubtype)
+                if (!this.ExistSubtype)
                 {
                     var message = this.ValidationName + " has a missing Supertype";
                     validationLog.AddError(message, this, ValidationKind.Unique, AllorsEmbeddedDomain.InheritanceSupertype);

@@ -1081,7 +1081,7 @@ namespace Allors.Adapters.Workspace.Memory
 
         public virtual IObject Create(ObjectType objectType)
         {
-            if (!objectType.IsConcreteComposite)
+            if (!(!objectType.IsUnit && !objectType.IsInterface))
             {
                 throw new ArgumentException("Can not create non concrete composite type " + objectType);
             }
@@ -1755,14 +1755,14 @@ namespace Allors.Adapters.Workspace.Memory
             {
                 var sortedClassAndSubclassList = new List<ObjectType>();
 
-                if (objectType.IsConcreteComposite)
+                if (!objectType.IsUnit && !objectType.IsInterface)
                 {
                     sortedClassAndSubclassList.Add(objectType);
                 }
 
                 foreach (var subClass in objectType.Subclasses)
                 {
-                    if (subClass.IsConcreteComposite)
+                    if (!subClass.IsUnit && !subClass.IsInterface)
                     {
                         sortedClassAndSubclassList.Add(subClass);
                     }
@@ -2188,7 +2188,7 @@ namespace Allors.Adapters.Workspace.Memory
                                 {
                                     var objectId = this.MemoryWorkspace.ObjectIds.Parse(objectIdString);
 
-                                    if (objectType == null || !objectType.IsConcreteComposite)
+                                    if (objectType == null || !(!objectType.IsUnit && !objectType.IsInterface))
                                     {
                                         throw new Exception("Could not load object with id " + objectId);
                                     }
@@ -2200,7 +2200,7 @@ namespace Allors.Adapters.Workspace.Memory
                                     }
 
                                     this.MemoryWorkspace.ObjectIds.AdjustCurrentId(objectId);
-                                    strategy = LoadStrategy(objectType, objectId);
+                                    strategy = this.LoadStrategy(objectType, objectId);
                                     this.strategyByObjectId.Add(strategy.ObjectId, strategy);
                                 }
                             }
@@ -2449,7 +2449,7 @@ namespace Allors.Adapters.Workspace.Memory
                                 {
                                     var objectId = this.MemoryWorkspace.ObjectIds.Parse(objectIdString);
 
-                                    if (objectType == null || !objectType.IsConcreteComposite)
+                                    if (objectType == null || !(!objectType.IsUnit && !objectType.IsInterface))
                                     {
                                         throw new Exception("Could not load object with id " + objectId);
                                     }
@@ -2502,7 +2502,7 @@ namespace Allors.Adapters.Workspace.Memory
                                 {
                                     var objectId = this.MemoryWorkspace.ObjectIds.Parse(objectIdString);
 
-                                    if (objectType == null || !objectType.IsConcreteComposite)
+                                    if (objectType == null || !(!objectType.IsUnit && !objectType.IsInterface))
                                     {
                                         throw new Exception("Could not load object with id " + objectId);
                                     }

@@ -67,23 +67,6 @@ namespace Allors.Meta.AllorsGenerated
 		void AllorsRoleReleaseDerivedMethodTypeObjectType();
 
 
-		global::Allors.Meta.Domain[] DomainsWhereDerivedMethodType
-		{
-			get;
-		}
-
-		bool ExistDomainsWhereDerivedMethodType
-		{
-			get;
-		}
-
-		void AllorsRoleSyncAddDerivedMethodTypeDomain(global::Allors.Meta.Domain association );
-
-		void AllorsRoleSyncRemoveDerivedMethodTypeDomain(global::Allors.Meta.Domain association );
-
-		void AllorsRoleReleaseDerivedMethodTypeDomain();
-
-
 	}
 
 	public interface AllorsInterfaceMethodType :  AllorsEmbeddedObject 
@@ -340,26 +323,5 @@ namespace Allors.Meta.AllorsGenerated
 			}
 		}
 
-		void AllorsInternalMethodType.AllorsRoleSyncAddDerivedMethodTypeDomain(global::Allors.Meta.Domain association)
-		{
-		    if( !AllorsEmbeddedArrays.Exist( _DerivedMethodTypeDomain, association ) ) 
-			{
-				_DerivedMethodTypeDomain = (global::Allors.Meta.Domain[])AllorsEmbeddedArrays.Add(_DerivedMethodTypeDomain,association);
-			}
-		}
-
-		void AllorsInternalMethodType.AllorsRoleSyncRemoveDerivedMethodTypeDomain(global::Allors.Meta.Domain association)
-		{
-		    _DerivedMethodTypeDomain = (global::Allors.Meta.Domain[]) AllorsEmbeddedArrays.Remove(_DerivedMethodTypeDomain,association);
-		}
-
-		void AllorsInternalMethodType.AllorsRoleReleaseDerivedMethodTypeDomain()
-		{
-		    foreach( global::Allors.Meta.Domain association in _DerivedMethodTypeDomain )
-			{
-				((AllorsInternalDomain)association).AllorsRemoveDomainDerivedMethodType((global::Allors.Meta.MethodType) this);
-			}
-		}
-
-}
+    }
 }

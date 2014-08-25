@@ -51,24 +51,6 @@ namespace Allors.Meta.AllorsGenerated
 
 		void AllorsRoleReleaseDeclaredInheritanceDomain();
 
-
-		global::Allors.Meta.Domain[] DomainsWhereDerivedInheritance
-		{
-			get;
-		}
-
-		bool ExistDomainsWhereDerivedInheritance
-		{
-			get;
-		}
-
-		void AllorsRoleSyncAddDerivedInheritanceDomain(global::Allors.Meta.Domain association );
-
-		void AllorsRoleSyncRemoveDerivedInheritanceDomain(global::Allors.Meta.Domain association );
-
-		void AllorsRoleReleaseDerivedInheritanceDomain();
-
-
 	}
 
 	public interface AllorsInterfaceInheritance :  AllorsEmbeddedObject 
@@ -76,7 +58,7 @@ namespace Allors.Meta.AllorsGenerated
 	}
 
 	[System.Diagnostics.DebuggerNonUserCode]
-	public abstract class AllorsClassInheritance :  global::Allors.Meta.MetaBase,  AllorsInternalInheritance , AllorsEmbeddedObject
+	public abstract class AllorsClassInheritance :  global::Allors.Meta.MetaObject,  AllorsInternalInheritance , AllorsEmbeddedObject
 	{
 		protected global::Allors.Meta.ObjectType _InheritanceSubtype;
 
@@ -285,44 +267,5 @@ namespace Allors.Meta.AllorsGenerated
 				((AllorsInternalDomain)_DeclaredInheritanceDomain).AllorsRemoveDomainDeclaredInheritance( (global::Allors.Meta.Inheritance) this);
 			}
 		}
-
-
-		public virtual global::Allors.Meta.Domain[] DomainsWhereDerivedInheritance
-		{
-			get
-			{
-			    return _DerivedInheritanceDomain;
-			}
-		}
-
-		public virtual bool ExistDomainsWhereDerivedInheritance
-		{
-			get
-			{
-				return _DerivedInheritanceDomain.Length > 0;
-			}
-		}
-
-		void AllorsInternalInheritance.AllorsRoleSyncAddDerivedInheritanceDomain(global::Allors.Meta.Domain association)
-		{
-		    if( !AllorsEmbeddedArrays.Exist( _DerivedInheritanceDomain, association ) ) 
-			{
-				_DerivedInheritanceDomain = (global::Allors.Meta.Domain[])AllorsEmbeddedArrays.Add(_DerivedInheritanceDomain,association);
-			}
-		}
-
-		void AllorsInternalInheritance.AllorsRoleSyncRemoveDerivedInheritanceDomain(global::Allors.Meta.Domain association)
-		{
-		    _DerivedInheritanceDomain = (global::Allors.Meta.Domain[]) AllorsEmbeddedArrays.Remove(_DerivedInheritanceDomain,association);
-		}
-
-		void AllorsInternalInheritance.AllorsRoleReleaseDerivedInheritanceDomain()
-		{
-		    foreach( global::Allors.Meta.Domain association in _DerivedInheritanceDomain )
-			{
-				((AllorsInternalDomain)association).AllorsRemoveDomainDerivedInheritance((global::Allors.Meta.Inheritance) this);
-			}
-		}
-
-}
+    }
 }

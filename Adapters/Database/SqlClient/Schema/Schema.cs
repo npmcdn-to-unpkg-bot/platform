@@ -230,9 +230,9 @@ FROM information_schema.columns"))
                                             {
                                                 var dataType = existingColumn.DataType.ToLower();
 
-                                                if (column.RelationType.RoleType.ObjectType.IsComposite)
+                                                if (!column.RelationType.RoleType.ObjectType.IsUnit)
                                                 {
-                                                    if (!dataType.Equals(SqlDbType.ToString().ToLower()))
+                                                    if (!dataType.Equals(this.SqlDbType.ToString().ToLower()))
                                                     {
                                                         AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Incompatible);
                                                     }

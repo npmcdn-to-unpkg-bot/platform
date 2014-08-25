@@ -80,25 +80,13 @@ namespace Allors.Meta
                 var concreteCompositeTypeList = new List<ObjectType>(this.CompositeObjectTypes.Length);
                 foreach (var compositeType in this.CompositeObjectTypes)
                 {
-                    if (compositeType.IsConcrete)
+                    if (!compositeType.IsInterface)
                     {
                         concreteCompositeTypeList.Add(compositeType);
                     }
                 }
 
                 return concreteCompositeTypeList.ToArray();
-            }
-        }
-
-        /// <summary>
-        /// Gets the inheritances.
-        /// </summary>
-        /// <value>The inheritances.</value>
-        public Inheritance[] Inheritances
-        {
-            get
-            {
-                return DerivedInheritances;
             }
         }
 
@@ -126,34 +114,10 @@ namespace Allors.Meta
         /// Gets or sets the object types that are Defined to this domain.
         /// </summary>
         /// <value>The Defined object types.</value>
-        public override ObjectType[] MetaObjects
+        public override ObjectType[] ObjectTypes
         {
-            get { return base.MetaObjects; }
+            get { return base.ObjectTypes; }
             set { throw new ArgumentException("Use Domain.AddObjectType() and ObjectType.Delete()"); }
-        }
-
-        /// <summary>
-        /// Gets the relation types.
-        /// </summary>
-        /// <value>The relation types.</value>
-        public MethodType[] MethodTypes
-        {
-            get
-            {
-                return DerivedMethodTypes;
-            }
-        }
-
-        /// <summary>
-        /// Gets the relation types.
-        /// </summary>
-        /// <value>The relation types.</value>
-        public RelationType[] RelationTypes
-        {
-            get
-            {
-                return DerivedRelationTypes;
-            }
         }
 
         /// <summary>
@@ -172,14 +136,14 @@ namespace Allors.Meta
         /// Gets the domains.
         /// </summary>
         /// <value>The domains.</value>
-        internal Dictionary<Guid, MetaBase> MetaObjectById
+        internal Dictionary<Guid, MetaObject> MetaObjectById
         {
             get
             {
-                var objectById = (Dictionary<Guid, MetaBase>)session[MetaObjectByIdSessionKey];
+                var objectById = (Dictionary<Guid, MetaObject>)session[MetaObjectByIdSessionKey];
                 if (objectById == null)
                 {
-                    objectById = new Dictionary<Guid, MetaBase>();
+                    objectById = new Dictionary<Guid, MetaObject>();
                     session[MetaObjectByIdSessionKey] = objectById;
                 }
 
@@ -271,11 +235,11 @@ namespace Allors.Meta
         /// The meta object id.
         /// </param>
         /// <returns>
-        /// The <see cref="MetaBase"/>.
+        /// The <see cref="MetaObject"/>.
         /// </returns>
-        public MetaBase Find(Guid metaObjectId)
+        public MetaObject Find(Guid metaObjectId)
         {
-            MetaBase metaObject;
+            MetaObject metaObject;
             this.MetaObjectById.TryGetValue(metaObjectId, out metaObject);
 
             return metaObject;
@@ -295,7 +259,7 @@ namespace Allors.Meta
                 inheritance.Id = inheritanceId;
             }
 
-            this.AddDeclaredInheritance(inheritance);
+            this.AddInheritance(inheritance);
             return inheritance;
         }
 
@@ -313,7 +277,7 @@ namespace Allors.Meta
                 objectType.Id = objectTypeId;
             }
 
-            this.AddDeclaredObjectType(objectType);
+            this.AddObjectType(objectType);
             return objectType;
         }
 
@@ -343,7 +307,7 @@ namespace Allors.Meta
                 relationType.RoleType.Id = roleTypeId;
             }
 
-            this.AddDeclaredRelationType(relationType);
+            this.AddRelationType(relationType);
             return relationType;
         }
 
@@ -361,7 +325,7 @@ namespace Allors.Meta
                 methodType.Id = methodTypeId;
             }
 
-            this.AddDeclaredMethodType(methodType);
+            this.AddMethodType(methodType);
             return methodType;
         }
 
@@ -518,13 +482,10 @@ namespace Allors.Meta
 
         public void Derive()
         {
-            var inheritances = new List<Inheritance>(this.DeclaredInheritances);
-            this.DerivedInheritances = inheritances.ToArray();
-
             // Unit & Composite ObjectTypes
             var compositeTypes = new List<ObjectType>();
             var unitTypes = new List<ObjectType>();
-            foreach (var objectType in this.MetaObjects)
+            foreach (var objectType in this.ObjectTypes)
             {
                 if (objectType.IsUnit)
                 {
@@ -607,52 +568,48 @@ namespace Allors.Meta
                 type.DeriveConcreteClassesCache();
             }
 
-            var relationTypes = new List<RelationType>(this.DeclaredRelationTypes);
-
-            this.DerivedRelationTypes = relationTypes.ToArray();
-
             var sharedRoleTypeList = new HashSet<RoleType>();
             var sharedAssociationTypeList = new HashSet<AssociationType>();
             var sharedObjectTypeList = new HashSet<ObjectType>();
 
             // RoleTypes
-            foreach (var type in this.MetaObjects)
+            foreach (var type in this.ObjectTypes)
             {
                 type.DeriveRoleTypes(sharedRoleTypeList);
             }
 
             // Unit RoleTypes
-            foreach (var type in this.MetaObjects)
+            foreach (var type in this.ObjectTypes)
             {
                 type.DeriveUnitRoleTypes(sharedRoleTypeList);
             }
 
             // Composite RoleTypes
-            foreach (var type in this.MetaObjects)
+            foreach (var type in this.ObjectTypes)
             {
                 type.DeriveCompositeRoleTypes(sharedRoleTypeList);
             }
 
             // Exclusive RoleTypes
-            foreach (var type in this.MetaObjects)
+            foreach (var type in this.ObjectTypes)
             {
                 type.DeriveExclusiveRoleTypes(sharedRoleTypeList);
             }
 
             // AssociationTypes
-            foreach (var type in this.MetaObjects)
+            foreach (var type in this.ObjectTypes)
             {
                 type.DeriveAssociationTypes(sharedAssociationTypeList);
             }
 
             // Exclusive AssociationTypes
-            foreach (var type in this.MetaObjects)
+            foreach (var type in this.ObjectTypes)
             {
                 type.DeriveExclusiveAssociationTypes(sharedAssociationTypeList);
             }
 
             // Association & RoleType
-            foreach (var type in this.MetaObjects)
+            foreach (var type in this.ObjectTypes)
             {
                 foreach (var association in type.AssociationTypesWhereObjectType)
                 {
@@ -666,7 +623,7 @@ namespace Allors.Meta
             }
 
             // RoleType Root ObjectType
-            foreach (var type in this.MetaObjects)
+            foreach (var type in this.ObjectTypes)
             {
                 foreach (var role in type.RoleTypesWhereObjectType)
                 {
@@ -675,7 +632,7 @@ namespace Allors.Meta
             }
 
             // RoleType Hierarchy Singular Name
-            foreach (var type in this.MetaObjects)
+            foreach (var type in this.ObjectTypes)
             {
                 foreach (var role in type.RoleTypesWhereObjectType)
                 {
@@ -684,7 +641,7 @@ namespace Allors.Meta
             }
 
             // RoleType Hierarchy Plural Name
-            foreach (var type in this.MetaObjects)
+            foreach (var type in this.ObjectTypes)
             {
                 foreach (var role in type.RoleTypesWhereObjectType)
                 {
@@ -693,7 +650,7 @@ namespace Allors.Meta
             }
 
             // RoleType Root Name
-            foreach (var type in this.MetaObjects)
+            foreach (var type in this.ObjectTypes)
             {
                 foreach (var role in type.RoleTypesWhereObjectType)
                 {
@@ -711,14 +668,11 @@ namespace Allors.Meta
                 type.DeriveAssociationIdsCache();
             }
 
-            var methodTypes = new List<MethodType>(this.DeclaredMethodTypes);
-
-            this.DerivedMethodTypes = methodTypes.ToArray();
 
             var sharedMethodTypeList = new HashSet<MethodType>();
 
             // MethodTypes
-            foreach (var type in this.MetaObjects)
+            foreach (var type in this.ObjectTypes)
             {
                 type.DeriveMethodTypes(sharedMethodTypeList);
             }

@@ -210,7 +210,7 @@ namespace Allors.Meta
         {
             get
             {
-                if (this.IsConcreteComposite)
+                if (!this.IsUnit && !this.IsInterface)
                 {
                     ObjectType[] selfArray = { this };
                     return selfArray;
@@ -436,51 +436,6 @@ namespace Allors.Meta
         public bool IsBoolean
         {
             get { return this.Id.Equals(UnitIds.BooleanId); }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether this instance is a class.
-        /// </summary>
-        /// <value><c>true</c> if this instance is a class; otherwise, <c>false</c>.</value>
-        public bool IsClass
-        {
-            get { return !this.IsInterface; }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether this instance is a composite.
-        /// </summary>
-        /// <value>
-        ///  <c>true</c> if this instance is a composite; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsComposite
-        {
-            get { return !this.IsUnit; }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether this instance is concrete.
-        /// </summary>
-        /// <value>
-        ///  <c>true</c> if this instance is concrete; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsConcrete
-        {
-            get
-            {
-                return !this.IsInterface;
-            }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether this instance is a concrete composite.
-        /// </summary>
-        /// <value>
-        ///  <c>true</c> if this instance is a concrete composite; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsConcreteComposite
-        {
-            get { return !this.IsUnit && this.IsConcrete; }
         }
 
         /// <summary>
@@ -935,7 +890,7 @@ namespace Allors.Meta
             var inheritance = this.FindInheritanceWhereDirectSubtype(supertype);
             if (inheritance == null)
             {
-                if (supertype.IsConcreteComposite)
+                if (!supertype.IsUnit && !supertype.IsInterface)
                 {
                     throw new ArgumentException("The inheritance " + this + "::" + supertype + " can not have a concrete superclass");
                 }
@@ -1184,7 +1139,7 @@ namespace Allors.Meta
             foreach (var role in this.DerivedRoleTypes)
             {
                 // TODO: Test
-                if (role.ExistObjectType && role.ObjectType.IsComposite)
+                if (role.ExistObjectType && !role.ObjectType.IsUnit)
                 {
                     roles.Add(role);
                 }
@@ -1302,7 +1257,7 @@ namespace Allors.Meta
             concreteLeafClasses.Clear();
 
             this.DerivedExclusiveConcreteLeafClass = null;
-            if (this.IsConcrete && !this.ExistSubclasses)
+            if (!this.IsInterface && !this.ExistSubclasses)
             {
                 concreteLeafClasses.Add(this);
             }
@@ -1311,7 +1266,7 @@ namespace Allors.Meta
             {
                 foreach (var rootSubClass in rootClass.Subclasses)
                 {
-                    if (rootSubClass.IsConcrete && !rootSubClass.ExistSubclasses)
+                    if (!rootSubClass.IsInterface && !rootSubClass.ExistSubclasses)
                     {
                         if (!concreteLeafClasses.Contains(rootSubClass))
                         {

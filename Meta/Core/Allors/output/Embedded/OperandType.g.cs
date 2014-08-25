@@ -9,7 +9,7 @@ namespace Allors.Meta.AllorsGenerated
 	}
 
 	[System.Diagnostics.DebuggerNonUserCode]
-	public abstract class AllorsClassOperandType :  global::Allors.Meta.MetaBase,  AllorsInternalOperandType , AllorsEmbeddedObject
+	public abstract class AllorsClassOperandType :  global::Allors.Meta.MetaObject,  AllorsInternalOperandType , AllorsEmbeddedObject
 	{
 
 

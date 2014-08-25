@@ -167,7 +167,7 @@ namespace Allors.Adapters.Database.Sql
                                 var objectTypeId = new Guid(objectTypeIdString);
                                 var objectType = this.database.ObjectFactory.GetObjectTypeForType(objectTypeId);
 
-                                var canLoad = objectType != null && objectType.IsConcreteComposite;
+                                var canLoad = objectType != null && (!objectType.IsUnit && !objectType.IsInterface);
 
                                 var objectIdsString = this.reader.ReadString();
                                 var objectIdStringArray = objectIdsString.Split(Serialization.ObjectsSplitterCharArray);
@@ -295,7 +295,7 @@ namespace Allors.Adapters.Database.Sql
 
                                 if (this.reader.Name.Equals(Serialization.RelationTypeUnit))
                                 {
-                                    if (relationType == null || relationType.RoleType.ObjectType.IsComposite)
+                                    if (relationType == null || !relationType.RoleType.ObjectType.IsUnit)
                                     {
                                         this.CantLoadUnitRole(relationTypeId);
                                     }

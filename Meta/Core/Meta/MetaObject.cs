@@ -28,12 +28,12 @@ namespace Allors.Meta
     /// <summary>
     /// Base class for Meta objects.
     /// </summary>
-    public abstract partial class MetaBase
+    public abstract partial class MetaObject
     {
         /// <summary>
         /// Gets the id comparer for meta objects.
         /// </summary>
-        public static readonly IComparer<MetaBase> IdComparer = new PrivateIdComparer();
+        public static readonly IComparer<MetaObject> IdComparer = new PrivateIdComparer();
 
         /// <summary>
         /// Gets or sets the id.
@@ -140,7 +140,7 @@ namespace Allors.Meta
         /// <exception cref="ArgumentException">
         /// Thrown when this object already has an id that is different from the source object.
         /// </exception>
-        protected void CopyMetaObject(MetaBase source)
+        protected void CopyMetaObject(MetaObject source)
         {
             if (!this.ExistId)
             {
@@ -155,7 +155,7 @@ namespace Allors.Meta
         /// <summary>
         /// The id comparer.
         /// </summary>
-        private class PrivateIdComparer : IComparer<MetaBase>
+        private class PrivateIdComparer : IComparer<MetaObject>
         {
             /// <summary>
             /// Compares two relationTypes by id.
@@ -164,7 +164,7 @@ namespace Allors.Meta
             /// The result of the comparison.
             /// </returns>
             /// <param name="x">The first object to compare.</param><param name="y">The second object to compare.</param>
-            public int Compare(MetaBase x, MetaBase y)
+            public int Compare(MetaObject x, MetaObject y)
             {
                 return x.Id.CompareTo(y.Id);
             }

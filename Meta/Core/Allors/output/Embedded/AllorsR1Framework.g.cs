@@ -869,7 +869,7 @@ namespace Allors.Meta.AllorsGenerated
 		/// <summary>
 		/// The MetaObject Object Type.
 		/// </summary>
-		public static AllorsEmbeddedObjectType MetaObject = new AllorsEmbeddedObjectType(new Guid("7794a50c-a2ba-45cb-a8a7-9e8091d313cb"), typeof(global::Allors.Meta.MetaBase), false , AllorsTypeTags.MetaObject );
+		public static AllorsEmbeddedObjectType MetaObject = new AllorsEmbeddedObjectType(new Guid("7794a50c-a2ba-45cb-a8a7-9e8091d313cb"), typeof(global::Allors.Meta.MetaObject), false , AllorsTypeTags.MetaObject );
 
 		/// <summary>
 		/// The Domain Object Type.
@@ -1618,7 +1618,7 @@ namespace Allors.Meta.AllorsGenerated
 		/// <summary>
 		/// An empty array of MetaObjects.
 		/// </summary>
-		internal static global::Allors.Meta.MetaBase[] EMPTY_MetaObject_ARRAY = {};
+		internal static global::Allors.Meta.MetaObject[] EMPTY_MetaObject_ARRAY = {};
 		/// <summary>
 		/// An empty array of Domains.
 		/// </summary>

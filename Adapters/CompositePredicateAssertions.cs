@@ -229,7 +229,7 @@ namespace Allors.Adapters
             }
 
             var compareRole = compareObject as RoleType;
-            if (compareRole != null && compareRole.ObjectType.IsComposite)
+            if (compareRole != null && !compareRole.ObjectType.IsUnit)
             {
                 throw new ArgumentException("AddRoleEqual() for composites can only be used with objects (not other roles).");
             }

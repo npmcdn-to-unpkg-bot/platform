@@ -119,9 +119,9 @@ namespace Allors.Adapters.Database.Sql
         {
             this.AssertExist();
 
-            foreach (var roleType in ObjectType.RoleTypes)
+            foreach (var roleType in this.ObjectType.RoleTypes)
             {
-                if (roleType.ObjectType.IsComposite)
+                if (!roleType.ObjectType.IsUnit)
                 {
                     this.RemoveRole(roleType);
                 }

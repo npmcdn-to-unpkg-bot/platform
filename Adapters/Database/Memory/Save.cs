@@ -72,7 +72,7 @@ namespace Allors.Adapters.Database.Memory
             this.writer.WriteStartElement(Serialization.Database);
 
             var sortedObjectTypes = new List<ObjectType>(this.sortedNonDeletedStrategiesByObjectType.Keys);
-            sortedObjectTypes.Sort(MetaBase.IdComparer);
+            sortedObjectTypes.Sort(MetaObject.IdComparer);
 
             foreach (var objectType in sortedObjectTypes)
             {

@@ -79,24 +79,6 @@ namespace Allors.Meta.AllorsGenerated
 
 		void AllorsRoleReleaseDeclaredRelationTypeDomain();
 
-
-		global::Allors.Meta.Domain[] DomainsWhereDerivedRelationType
-		{
-			get;
-		}
-
-		bool ExistDomainsWhereDerivedRelationType
-		{
-			get;
-		}
-
-		void AllorsRoleSyncAddDerivedRelationTypeDomain(global::Allors.Meta.Domain association );
-
-		void AllorsRoleSyncRemoveDerivedRelationTypeDomain(global::Allors.Meta.Domain association );
-
-		void AllorsRoleReleaseDerivedRelationTypeDomain();
-
-
 	}
 
 	public interface AllorsInterfaceRelationType :  AllorsEmbeddedObject 
@@ -104,7 +86,7 @@ namespace Allors.Meta.AllorsGenerated
 	}
 
 	[System.Diagnostics.DebuggerNonUserCode]
-	public abstract class AllorsClassRelationType :  global::Allors.Meta.MetaBase,  AllorsInternalRelationType , AllorsEmbeddedObject
+	public abstract class AllorsClassRelationType :  global::Allors.Meta.MetaObject,  AllorsInternalRelationType , AllorsEmbeddedObject
 	{
 		protected System.Object _RelationTypeIsDerived;
 
@@ -408,27 +390,6 @@ namespace Allors.Meta.AllorsGenerated
 			get
 			{
 				return _DerivedRelationTypeDomain.Length > 0;
-			}
-		}
-
-		void AllorsInternalRelationType.AllorsRoleSyncAddDerivedRelationTypeDomain(global::Allors.Meta.Domain association)
-		{
-		    if( !AllorsEmbeddedArrays.Exist( _DerivedRelationTypeDomain, association ) ) 
-			{
-				_DerivedRelationTypeDomain = (global::Allors.Meta.Domain[])AllorsEmbeddedArrays.Add(_DerivedRelationTypeDomain,association);
-			}
-		}
-
-		void AllorsInternalRelationType.AllorsRoleSyncRemoveDerivedRelationTypeDomain(global::Allors.Meta.Domain association)
-		{
-		    _DerivedRelationTypeDomain = (global::Allors.Meta.Domain[]) AllorsEmbeddedArrays.Remove(_DerivedRelationTypeDomain,association);
-		}
-
-		void AllorsInternalRelationType.AllorsRoleReleaseDerivedRelationTypeDomain()
-		{
-		    foreach( global::Allors.Meta.Domain association in _DerivedRelationTypeDomain )
-			{
-				((AllorsInternalDomain)association).AllorsRemoveDomainDerivedRelationType((global::Allors.Meta.RelationType) this);
 			}
 		}
 
