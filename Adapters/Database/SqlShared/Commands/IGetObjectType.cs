@@ -24,7 +24,7 @@ namespace Allors.Adapters.Database.Sql.Commands
 
     public interface IGetObjectType
     {
-        ObjectType Execute(ObjectId objectId);
+        MetaObject Execute(ObjectId objectId);
     }
 
     public interface IGetObjectTypeFactory

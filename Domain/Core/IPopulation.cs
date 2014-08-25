@@ -69,7 +69,7 @@ namespace Allors
         /// <summary>
         /// Gets the meta domain of this population.
         /// </summary>
-        Domain Domain { get; }
+        MetaDomain Domain { get; }
 
         /// <summary>
         /// Population properties are simple key/value pairs.

@@ -26,11 +26,11 @@ namespace Allors.Adapters.Database.Memory
 
     internal sealed class ExtentFiltered : Extent
     {
-        private readonly ObjectType objectType;
+        private readonly MetaObject objectType;
 
         private And filter;
 
-        internal ExtentFiltered(Session session, ObjectType objectType)
+        internal ExtentFiltered(Session session, MetaObject objectType)
             : base(session)
         {
             this.objectType = objectType;
@@ -48,12 +48,12 @@ namespace Allors.Adapters.Database.Memory
             get { return this.filter ?? (this.filter = new And(this)); }
         }
 
-        public override ObjectType ObjectType
+        public override MetaObject ObjectType
         {
             get { return this.objectType; }
         }
 
-        internal void CheckForAssociationType(AssociationType association)
+        internal void CheckForAssociationType(MetaAssociation association)
         {
             // TODO: Optimize
             if (Array.IndexOf(this.objectType.AssociationTypes, association) < 0)
@@ -62,7 +62,7 @@ namespace Allors.Adapters.Database.Memory
             }
         }
 
-        internal void CheckForRoleType(RoleType role)
+        internal void CheckForRoleType(MetaRole role)
         {
             // TODO: Optimize
             if (Array.IndexOf(this.objectType.RoleTypes, role) < 0)

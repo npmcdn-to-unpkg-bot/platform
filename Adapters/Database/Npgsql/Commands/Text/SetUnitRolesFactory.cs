@@ -50,25 +50,25 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Text
         {
             private readonly DatabaseSession session;
 
-            private readonly Dictionary<ObjectType, Dictionary<IList<RoleType>, NpgsqlCommand>> commandByKeyByObjectType; 
+            private readonly Dictionary<MetaObject, Dictionary<IList<MetaRole>, NpgsqlCommand>> commandByKeyByObjectType; 
 
             public SetUnitRoles(Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.session = (DatabaseSession)session;
-                this.commandByKeyByObjectType = new Dictionary<ObjectType, Dictionary<IList<RoleType>, NpgsqlCommand>>();
+                this.commandByKeyByObjectType = new Dictionary<MetaObject, Dictionary<IList<MetaRole>, NpgsqlCommand>>();
             }
 
-            public void Execute(Roles roles, IList<RoleType> sortedRoleTypes)
+            public void Execute(Roles roles, IList<MetaRole> sortedRoleTypes)
             {
                 var schema = this.Database.Schema;
 
                 var exclusiveRootClass = roles.Reference.ObjectType.ExclusiveRootClass;
 
-                Dictionary<IList<RoleType>, NpgsqlCommand> commandByKey;
+                Dictionary<IList<MetaRole>, NpgsqlCommand> commandByKey;
                 if (!this.commandByKeyByObjectType.TryGetValue(exclusiveRootClass, out commandByKey))
                 {
-                    commandByKey = new Dictionary<IList<RoleType>, NpgsqlCommand>(new SortedRoleTypesComparer());
+                    commandByKey = new Dictionary<IList<MetaRole>, NpgsqlCommand>(new SortedRoleTypesComparer());
                     this.commandByKeyByObjectType.Add(exclusiveRootClass, commandByKey);
                 }
 
@@ -121,9 +121,9 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Text
                 }
             }
 
-            private class SortedRoleTypesComparer : IEqualityComparer<IList<RoleType>>
+            private class SortedRoleTypesComparer : IEqualityComparer<IList<MetaRole>>
             {
-                public bool Equals(IList<RoleType> x, IList<RoleType> y)
+                public bool Equals(IList<MetaRole> x, IList<MetaRole> y)
                 {
                     if (x.Count == y.Count)
                     {
@@ -141,7 +141,7 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Text
                     return false;
                 }
 
-                public int GetHashCode(IList<RoleType> roleTypes)
+                public int GetHashCode(IList<MetaRole> roleTypes)
                 {
                     var hashCode = 0;
                     foreach (var roleType in roleTypes)

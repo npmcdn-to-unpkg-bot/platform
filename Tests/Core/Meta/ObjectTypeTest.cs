@@ -39,7 +39,7 @@ namespace Allors.Meta.Static
             var c2 = this.Population.C2;
 
             var count = 0;
-            RelationType c1_c2;
+            MetaRelation c1_c2;
             for (; count < 31; count++)
             {
                 c1_c2 = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
@@ -171,7 +171,7 @@ namespace Allors.Meta.Static
             var c2 = this.Population.C2;
 
             var count = 0;
-            RelationType c1_c22;
+            MetaRelation c1_c22;
             for (; count < 31; count++)
             {
                 c1_c22 = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
@@ -672,7 +672,7 @@ namespace Allors.Meta.Static
             var i1 = this.Population.I1;
             var i2 = this.Population.I2;
 
-            var i1_i2_array = new ObjectType[2];
+            var i1_i2_array = new MetaObject[2];
             i1_i2_array[0] = i1;
             i1_i2_array[1] = i2;
 
@@ -1475,7 +1475,7 @@ namespace Allors.Meta.Static
             var allorsString = this.Population.IntegerType;
 
             var count = 0;
-            RelationType c1_string;
+            MetaRelation c1_string;
             for (; count < 31; count++)
             {
                 c1_string = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
@@ -1607,15 +1607,15 @@ namespace Allors.Meta.Static
         {
             this.Populate();
 
-            Assert.IsTrue(((ObjectType)this.Domain.Domain.Find(new Guid("ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9"))).IsString);
-            Assert.IsTrue(((ObjectType)this.Domain.Domain.Find(new Guid("ccd6f134-26de-4103-bff9-a37ec3e997a3"))).IsInteger);
-            Assert.IsTrue(((ObjectType)this.Domain.Domain.Find(new Guid("e8989069-024b-4389-ac77-a98c4dfff25a"))).IsLong);
-            Assert.IsTrue(((ObjectType)this.Domain.Domain.Find(new Guid("da866d8e-2c40-41a8-ae5b-5f6dae0b89c8"))).IsDecimal);
-            Assert.IsTrue(((ObjectType)this.Domain.Domain.Find(new Guid("ffcabd07-f35f-4083-bef6-f6c47970ca5d"))).IsDouble);
-            Assert.IsTrue(((ObjectType)this.Domain.Domain.Find(new Guid("b5ee6cea-4e2b-498e-a5dd-24671d896477"))).IsBoolean);
-            Assert.IsTrue(((ObjectType)this.Domain.Domain.Find(new Guid("c4c09343-61d3-418c-ade2-fe6fd588f128"))).IsDateTime);
-            Assert.IsTrue(((ObjectType)this.Domain.Domain.Find(new Guid("6DC0A1A8-88A4-4614-ADB4-92DD3D017C0E"))).IsUnique);
-            Assert.IsTrue(((ObjectType)this.Domain.Domain.Find(new Guid("c28e515b-cae8-4d6b-95bf-062aec8042fc"))).IsBinary);
+            Assert.IsTrue(((MetaObject)this.Domain.Domain.Find(new Guid("ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9"))).IsString);
+            Assert.IsTrue(((MetaObject)this.Domain.Domain.Find(new Guid("ccd6f134-26de-4103-bff9-a37ec3e997a3"))).IsInteger);
+            Assert.IsTrue(((MetaObject)this.Domain.Domain.Find(new Guid("e8989069-024b-4389-ac77-a98c4dfff25a"))).IsLong);
+            Assert.IsTrue(((MetaObject)this.Domain.Domain.Find(new Guid("da866d8e-2c40-41a8-ae5b-5f6dae0b89c8"))).IsDecimal);
+            Assert.IsTrue(((MetaObject)this.Domain.Domain.Find(new Guid("ffcabd07-f35f-4083-bef6-f6c47970ca5d"))).IsDouble);
+            Assert.IsTrue(((MetaObject)this.Domain.Domain.Find(new Guid("b5ee6cea-4e2b-498e-a5dd-24671d896477"))).IsBoolean);
+            Assert.IsTrue(((MetaObject)this.Domain.Domain.Find(new Guid("c4c09343-61d3-418c-ade2-fe6fd588f128"))).IsDateTime);
+            Assert.IsTrue(((MetaObject)this.Domain.Domain.Find(new Guid("6DC0A1A8-88A4-4614-ADB4-92DD3D017C0E"))).IsUnique);
+            Assert.IsTrue(((MetaObject)this.Domain.Domain.Find(new Guid("c28e515b-cae8-4d6b-95bf-062aec8042fc"))).IsBinary);
         }
 
         [Test]
@@ -1807,7 +1807,7 @@ namespace Allors.Meta.Static
             Assert.IsTrue(this.Domain.IsValid);
         }
 
-        internal static void RemoveDirectSupertypes(ObjectType subType)
+        internal static void RemoveDirectSupertypes(MetaObject subType)
         {
             foreach (var inheritance in subType.InheritancesWhereSubtype)
             {

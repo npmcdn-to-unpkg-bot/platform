@@ -35,7 +35,7 @@ namespace Allors.Adapters.Special.Npgsql.IntegerId.ReadCommitted
             }
         }
 
-        protected override IDatabase CreateDatabase(Meta.Domain domain, bool init)
+        protected override IDatabase CreateDatabase(Meta.MetaDomain domain, bool init)
         {
             return this.profile.CreateDatabase(domain, init);
         }

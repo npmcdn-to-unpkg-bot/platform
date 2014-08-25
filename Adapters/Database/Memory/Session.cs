@@ -31,7 +31,7 @@ namespace Allors.Adapters.Database.Memory
     {
         private static readonly HashSet<Strategy> EmptyStrategies = new HashSet<Strategy>();
 
-        private readonly Dictionary<ObjectType, ObjectType[]> concreteClassesByObjectType;
+        private readonly Dictionary<MetaObject, MetaObject[]> concreteClassesByObjectType;
 
         private readonly Database database;
 
@@ -40,7 +40,7 @@ namespace Allors.Adapters.Database.Memory
         private bool busyCommittingOrRollingBack;
 
         private Dictionary<ObjectId, Strategy> strategyByObjectId;
-        private Dictionary<ObjectType, HashSet<Strategy>> strategiesByObjectType;
+        private Dictionary<MetaObject, HashSet<Strategy>> strategiesByObjectType;
 
         private Dictionary<string, object> properties;
 
@@ -49,7 +49,7 @@ namespace Allors.Adapters.Database.Memory
             this.database = database;
             this.busyCommittingOrRollingBack = false;
 
-            this.concreteClassesByObjectType = new Dictionary<ObjectType, ObjectType[]>();
+            this.concreteClassesByObjectType = new Dictionary<MetaObject, MetaObject[]>();
 
             this.changeSet = new ChangeSet();
         }
@@ -249,7 +249,7 @@ namespace Allors.Adapters.Database.Memory
             return (T)this.Create(objectType);
         }
 
-        public IObject[] Create(ObjectType objectType, int count)
+        public IObject[] Create(MetaObject objectType, int count)
         {
             var arrayType = this.database.ObjectFactory.GetTypeForObjectType(objectType);
             var allorsObjects = (IObject[])Array.CreateInstance(arrayType, count);
@@ -261,13 +261,13 @@ namespace Allors.Adapters.Database.Memory
             return allorsObjects;
         }
 
-        public IObject Insert(ObjectType objectType, string objectId)
+        public IObject Insert(MetaObject objectType, string objectId)
         {
             var id = this.ObjectIds.Parse(objectId);
             return this.Insert(objectType, id);
         }
 
-        public IObject Insert(ObjectType objectType, ObjectId objectId)
+        public IObject Insert(MetaObject objectType, ObjectId objectId)
         {
             var strategy = this.InsertStrategy(objectType, objectId);
             return strategy.GetObject();
@@ -355,7 +355,7 @@ namespace Allors.Adapters.Database.Memory
             return this.Extent(this.database.ObjectFactory.GetObjectTypeForType(typeof(T)));
         }
         
-        public virtual Allors.Extent Extent(ObjectType objectType)
+        public virtual Allors.Extent Extent(MetaObject objectType)
         {
             return new ExtentFiltered(this, objectType);
         }
@@ -386,7 +386,7 @@ namespace Allors.Adapters.Database.Memory
                 ExtentOperationType.Except);
         }
 
-        public virtual IObject Create(ObjectType objectType)
+        public virtual IObject Create(MetaObject objectType)
         {
             if (!objectType.IsConcreteComposite)
             {
@@ -406,12 +406,12 @@ namespace Allors.Adapters.Database.Memory
             this.Reset();
         }
 
-        internal Type GetTypeForObjectType(ObjectType objectType)
+        internal Type GetTypeForObjectType(MetaObject objectType)
         {
             return this.database.ObjectFactory.GetTypeForObjectType(objectType);
         }
 
-        internal virtual Strategy InsertStrategy(ObjectType objectType, ObjectId objectId)
+        internal virtual Strategy InsertStrategy(MetaObject objectType, ObjectId objectId)
         {
             var strategy = this.GetStrategy(objectId);
             if (strategy != null)
@@ -432,7 +432,7 @@ namespace Allors.Adapters.Database.Memory
         {
             // Strategies
             this.strategyByObjectId = new Dictionary<ObjectId, Strategy>();
-            this.strategiesByObjectType = new Dictionary<ObjectType, HashSet<Strategy>>();
+            this.strategiesByObjectType = new Dictionary<MetaObject, HashSet<Strategy>>();
 
             this.properties = null;
         }
@@ -477,12 +477,12 @@ namespace Allors.Adapters.Database.Memory
             strategies.Add(strategy);
         }
 
-        internal virtual HashSet<Strategy> GetStrategiesForExtentIncludingDeleted(ObjectType type)
+        internal virtual HashSet<Strategy> GetStrategiesForExtentIncludingDeleted(MetaObject type)
         {
-            ObjectType[] concreteClasses;
+            MetaObject[] concreteClasses;
             if (!this.concreteClassesByObjectType.TryGetValue(type, out concreteClasses))
             {
-                var sortedClassAndSubclassList = new List<ObjectType>();
+                var sortedClassAndSubclassList = new List<MetaObject>();
 
                 if (type.IsConcreteComposite)
                 {
@@ -539,7 +539,7 @@ namespace Allors.Adapters.Database.Memory
 
         internal void Save(XmlWriter writer)
         {
-            var sortedNonDeletedStrategiesByObjectType = new Dictionary<ObjectType, List<Strategy>>();
+            var sortedNonDeletedStrategiesByObjectType = new Dictionary<MetaObject, List<Strategy>>();
             foreach (var dictionaryEntry in this.strategyByObjectId)
             {
                 var strategy = dictionaryEntry.Value;

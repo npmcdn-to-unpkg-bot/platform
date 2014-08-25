@@ -25,11 +25,11 @@ namespace Allors.Meta
     /// A DomainExtension allows you to extend a domain programmatically.
     /// DomainExtension is available in the second phase of a two phase generation.
     /// </summary>
-    public interface IDomainExtension
+    public interface IMetaDomainExtension
     {
         /// <summary>
         /// Gets the domain.
         /// </summary>
-        Domain Domain { get; }
+        MetaDomain Domain { get; }
     }
 }

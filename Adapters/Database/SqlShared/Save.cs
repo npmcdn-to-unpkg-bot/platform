@@ -72,8 +72,8 @@ namespace Allors.Adapters.Database.Sql
 
         protected void SaveObjects(ManagementSession session)
         {
-            var concreteCompositeType = new List<ObjectType>(this.database.Domain.ConcreteCompositeObjectTypes);
-            concreteCompositeType.Sort(MetaObject.IdComparer);
+            var concreteCompositeType = new List<MetaObject>(this.database.Domain.ConcreteCompositeObjectTypes);
+            concreteCompositeType.Sort(MetaBase.IdComparer);
             foreach (var type in concreteCompositeType)
             {
                 var atLeastOne = false;
@@ -120,10 +120,10 @@ namespace Allors.Adapters.Database.Sql
 
         protected void SaveRelations(ManagementSession session)
         {
-            var exclusiverRootClassesByObjectType = new Dictionary<ObjectType, HashSet<ObjectType>>();
+            var exclusiverRootClassesByObjectType = new Dictionary<MetaObject, HashSet<MetaObject>>();
 
-            var relations = new List<RelationType>(this.database.Domain.RelationTypes);
-            relations.Sort(MetaObject.IdComparer);
+            var relations = new List<MetaRelation>(this.database.Domain.RelationTypes);
+            relations.Sort(MetaBase.IdComparer);
 
             foreach (var relation in relations)
             {
@@ -136,10 +136,10 @@ namespace Allors.Adapters.Database.Sql
                     var sql = string.Empty;
                     if (roleType.ObjectType.IsUnit)
                     {
-                        HashSet<ObjectType> exclusiveRootClasses;
+                        HashSet<MetaObject> exclusiveRootClasses;
                         if (!exclusiverRootClassesByObjectType.TryGetValue(associationType.ObjectType, out exclusiveRootClasses))
                         {
-                            exclusiveRootClasses = new HashSet<ObjectType>();
+                            exclusiveRootClasses = new HashSet<MetaObject>();
                             foreach (var concreteClass in associationType.ObjectType.ConcreteClasses)
                             {
                                 exclusiveRootClasses.Add(concreteClass.ExclusiveRootClass);
@@ -224,7 +224,7 @@ namespace Allors.Adapters.Database.Sql
 
                                         if (roleType.ObjectType.IsUnit)
                                         {
-                                            var unitTypeTag = (UnitTypeTags)roleType.ObjectType.UnitTag;
+                                            var unitTypeTag = (MetaUnitTags)roleType.ObjectType.UnitTag;
                                             var r = command.GetValue(reader, unitTypeTag, 1);
                                             var content = Serialization.WriteString(unitTypeTag, r);
                                             relationTypeOneXmlWriter.Write(a, content);

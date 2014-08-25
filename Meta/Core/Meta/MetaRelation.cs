@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="RelationType.cs" company="Allors bvba">
+// <copyright file="MetaRelation.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -28,16 +28,16 @@ namespace Allors.Meta
     using AllorsGenerated;
 
     /// <summary>
-    /// A <see cref="RelationType"/> defines the state and behavior for
+    /// A <see cref="MetaRelation"/> defines the state and behavior for
     /// a set of <see cref="AssociationType"/>s and <see cref="RoleType"/>s.
     /// </summary>
-    public partial class RelationType : IComparable
+    public partial class MetaRelation : IComparable
     {
         /// <summary>
         /// Gets or sets the <see cref="AssociationType"/>.
         /// </summary>
         /// <value>The AssociationType.</value>
-        public override AssociationType AssociationType
+        public override MetaAssociation AssociationType
         {
             get
             {
@@ -200,7 +200,7 @@ namespace Allors.Meta
         /// Gets or sets the <see cref="RoleType"/>.
         /// </summary>
         /// <value>The RoleType    .</value>
-        public override RoleType RoleType
+        public override MetaRole RoleType
         {
             get
             {
@@ -258,7 +258,7 @@ namespace Allors.Meta
         /// <paramref name="obj"/> is not the same type as this instance. </exception>
         public int CompareTo(object obj)
         {
-            var that = obj as RelationType;
+            var that = obj as MetaRelation;
             if (that != null)
             {
                 return string.CompareOrdinal(this.Name, that.Name);
@@ -271,7 +271,7 @@ namespace Allors.Meta
         /// Copy from source.
         /// </summary>
         /// <param name="source">The source.</param>
-        public void Copy(RelationType source)
+        public void Copy(MetaRelation source)
         {
             this.CopyMetaObject(source);
 
@@ -366,12 +366,12 @@ namespace Allors.Meta
         /// </summary>
         /// <param name="session">The session.</param>
         /// <returns>The new instance.</returns>
-        internal static RelationType Create(AllorsEmbeddedSession session)
+        internal static MetaRelation Create(AllorsEmbeddedSession session)
         {
-            var relationType = (RelationType)session.Create(AllorsEmbeddedDomain.RelationType);
+            var relationType = (MetaRelation)session.Create(AllorsEmbeddedDomain.RelationType);
 
-            relationType.AssociationType = AssociationType.Create(session);
-            relationType.RoleType = RoleType.Create(session);
+            relationType.AssociationType = MetaAssociation.Create(session);
+            relationType.RoleType = MetaRole.Create(session);
             
             relationType.Reset();
             return relationType;

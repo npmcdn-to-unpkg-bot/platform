@@ -28,11 +28,11 @@ namespace Allors.Adapters.Database.Sql
     public class ExtentRoles : Extent
     {
         private readonly Strategy strategy;
-        private readonly RoleType roleType;
+        private readonly MetaRole roleType;
 
         private ExtentFiltered upgrade;
 
-        public ExtentRoles(Strategy strategy, RoleType roleType)
+        public ExtentRoles(Strategy strategy, MetaRole roleType)
         {
             this.strategy = strategy;
             this.roleType = roleType;
@@ -84,7 +84,7 @@ namespace Allors.Adapters.Database.Sql
             }
         }
 
-        public override ObjectType ObjectType
+        public override MetaObject ObjectType
         {
             get
             {
@@ -151,7 +151,7 @@ namespace Allors.Adapters.Database.Sql
             return (IObject[])objects.ToArray(type);
         }
 
-        public override Allors.Extent AddSort(RoleType sort)
+        public override Allors.Extent AddSort(MetaRole sort)
         {
             this.LazyUpgrade();
 
@@ -160,7 +160,7 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public override Allors.Extent AddSort(RoleType sort, SortDirection direction)
+        public override Allors.Extent AddSort(MetaRole sort, SortDirection direction)
         {
             this.LazyUpgrade();
 

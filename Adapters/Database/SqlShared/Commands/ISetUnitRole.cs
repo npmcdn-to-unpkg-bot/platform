@@ -28,7 +28,7 @@ namespace Allors.Adapters.Database.Sql.Commands
 
     public interface ISetUnitRole
     {
-        void Execute(IList<UnitRelation> relation, ObjectType exclusiveRootClass, RoleType roleType);
+        void Execute(IList<UnitRelation> relation, MetaObject exclusiveRootClass, MetaRole roleType);
     }
 
     public interface ISetUnitRoleFactory

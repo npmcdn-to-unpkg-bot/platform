@@ -28,10 +28,10 @@ namespace Allors.Adapters.Workspace.Memory
 
     internal sealed class AssociationContainedInEnumerable : Predicate
     {
-        private readonly AssociationType associationType;
+        private readonly MetaAssociation associationType;
         private readonly IEnumerable<IObject> containingEnumerable;
 
-        internal AssociationContainedInEnumerable(Extent extent, AssociationType associationType, IEnumerable<IObject> containingEnumerable)
+        internal AssociationContainedInEnumerable(Extent extent, MetaAssociation associationType, IEnumerable<IObject> containingEnumerable)
         {
             extent.CheckForAssociationType(associationType);
             CompositePredicateAssertions.AssertAssociationContainedIn(associationType, containingEnumerable);

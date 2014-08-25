@@ -157,7 +157,7 @@ namespace Allors.Adapters.Special
             }
         }
 
-        protected ObjectFactory CreateObjectFactory(Domain domain)
+        protected ObjectFactory CreateObjectFactory(MetaDomain domain)
         {
             return new ObjectFactory(domain, typeof(IObject).Assembly, "Domain");
         }

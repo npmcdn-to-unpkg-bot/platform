@@ -30,28 +30,28 @@ namespace Allors.Adapters
     public class CompositePredicateAssertions
     {
         /// <summary>
-        /// Asserts that the <see cref="AssociationType"/> and the <see cref="Extent"/> are compatible with
+        /// Asserts that the <see cref="MetaAssociation"/> and the <see cref="Extent"/> are compatible with
         /// <see cref="ICompositePredicate#AddContainedIn"/>.
         /// </summary>
         /// <param name="association">The association.</param>
         /// <param name="extent">The extent.</param>
-        public static void AssertAssociationContainedIn(AssociationType association, Extent extent)
+        public static void AssertAssociationContainedIn(MetaAssociation association, Extent extent)
         {
             // TODO: ?
         }
 
-        public static void AssertAssociationContainedIn(AssociationType association, IEnumerable<IObject> enumerable)
+        public static void AssertAssociationContainedIn(MetaAssociation association, IEnumerable<IObject> enumerable)
         {
             // TODO: ?
         }
 
         /// <summary>
-        /// Asserts that the <see cref="AssociationType"/> and the <see cref="IObject"/> are compatible with
+        /// Asserts that the <see cref="MetaAssociation"/> and the <see cref="IObject"/> are compatible with
         /// <see cref="ICompositePredicate#AddContains"/>.
         /// </summary>
         /// <param name="association">The association.</param>
         /// <param name="allorsObject">The allors object.</param>
-        public static void AssertAssociationContains(AssociationType association, IObject allorsObject)
+        public static void AssertAssociationContains(MetaAssociation association, IObject allorsObject)
         {
             if (!association.IsMany)
             {
@@ -66,12 +66,12 @@ namespace Allors.Adapters
         }
 
         /// <summary>
-        /// Asserts that the <see cref="AssociationType"/> and the <see cref="IObject"/> are compatible with
+        /// Asserts that the <see cref="MetaAssociation"/> and the <see cref="IObject"/> are compatible with
         /// <see cref="ICompositePredicate#AddEquals"/>.
         /// </summary>
         /// <param name="association">The association.</param>
         /// <param name="allorsObject">The allors object.</param>
-        public static void AssertAssociationEquals(AssociationType association, IObject allorsObject)
+        public static void AssertAssociationEquals(MetaAssociation association, IObject allorsObject)
         {
             if (!association.IsOne)
             {
@@ -87,22 +87,22 @@ namespace Allors.Adapters
         }
 
         /// <summary>
-        /// Asserts that the <see cref="AssociationType"/> is compatible with
+        /// Asserts that the <see cref="MetaAssociation"/> is compatible with
         /// <see cref="ICompositePredicate#AddExists"/>.
         /// </summary>
         /// <param name="association">The association.</param>
-        public static void ValidateAssociationExists(AssociationType association)
+        public static void ValidateAssociationExists(MetaAssociation association)
         {
             // TODO: ?
         }
 
         /// <summary>
-        /// Asserts that the <see cref="AssociationType"/> and the <see cref="ObjectType"/> are compatible with
+        /// Asserts that the <see cref="MetaAssociation"/> and the <see cref="MetaObject"/> are compatible with
         /// <see cref="ICompositePredicate#AddInstanceof"/>.
         /// </summary>
         /// <param name="association">The association.</param>
         /// <param name="objectType">The object type.</param>
-        public static void ValidateAssociationInstanceof(AssociationType association, ObjectType objectType)
+        public static void ValidateAssociationInstanceof(MetaAssociation association, MetaObject objectType)
         {
             if (objectType.IsUnit)
             {
@@ -117,11 +117,11 @@ namespace Allors.Adapters
         }
 
         /// <summary>
-        /// Asserts that the <see cref="ObjectType"/> is compatible with
+        /// Asserts that the <see cref="MetaObject"/> is compatible with
         /// <see cref="ICompositePredicate#AddInstanceof"/>.
         /// </summary>
         /// <param name="objectType">The object type.</param>
-        public static void ValidateInstanceof(ObjectType objectType)
+        public static void ValidateInstanceof(MetaObject objectType)
         {
             if (objectType.IsUnit)
             {
@@ -130,13 +130,13 @@ namespace Allors.Adapters
         }
 
         /// <summary>
-        /// Asserts that the <see cref="RoleType"/>, the first <see cref="IObject"/> and the second <see cref="IObject"/> are compatible with
+        /// Asserts that the <see cref="MetaRole"/>, the first <see cref="IObject"/> and the second <see cref="IObject"/> are compatible with
         /// <see cref="ICompositePredicate#AddBetween"/>.
         /// </summary>
         /// <param name="role">The role .</param>
         /// <param name="firstObject">The first object.</param>
         /// <param name="secondObject">The second object.</param>
-        public static void ValidateRoleBetween(RoleType role, object firstObject, object secondObject)
+        public static void ValidateRoleBetween(MetaRole role, object firstObject, object secondObject)
         {
             if (!role.ObjectType.IsUnit)
             {
@@ -149,8 +149,8 @@ namespace Allors.Adapters
                     "AddBetween() requires a first and second object, use AddLessThan() or AddGreaterThan() instead.");
             }
 
-            var firstRole = firstObject as RoleType;
-            var secondRole = secondObject as RoleType;
+            var firstRole = firstObject as MetaRole;
+            var secondRole = secondObject as MetaRole;
             if ((firstRole != null && !firstRole.ObjectType.IsUnit) ||
                 (secondRole != null && !secondRole.ObjectType.IsUnit))
             {
@@ -159,12 +159,12 @@ namespace Allors.Adapters
         }
 
         /// <summary>
-        /// Asserts that the <see cref="RoleType"/> and the <see cref="Extent"/> are compatible with
+        /// Asserts that the <see cref="MetaRole"/> and the <see cref="Extent"/> are compatible with
         /// <see cref="ICompositePredicate#AddContainedIn"/>.
         /// </summary>
         /// <param name="role">The role .</param>
         /// <param name="extent">The extent.</param>
-        public static void ValidateRoleContainedIn(RoleType role, Extent extent)
+        public static void ValidateRoleContainedIn(MetaRole role, Extent extent)
         {
             if (role.ObjectType.IsUnit)
             {
@@ -177,7 +177,7 @@ namespace Allors.Adapters
             }
         }
 
-        public static void ValidateRoleContainedIn(RoleType role, IEnumerable<IObject> enumerable)
+        public static void ValidateRoleContainedIn(MetaRole role, IEnumerable<IObject> enumerable)
         {
             if (role.ObjectType.IsUnit)
             {
@@ -191,12 +191,12 @@ namespace Allors.Adapters
         }
 
         /// <summary>
-        /// Asserts that the <see cref="RoleType"/> and the <see cref="IObject"/> are compatible with
+        /// Asserts that the <see cref="MetaRole"/> and the <see cref="IObject"/> are compatible with
         /// <see cref="ICompositePredicate#AddContainedIn"/>.
         /// </summary>
         /// <param name="role">The role .</param>
         /// <param name="allorsObject">The allors object.</param>
-        public static void ValidateRoleContains(RoleType role, IObject allorsObject)
+        public static void ValidateRoleContains(MetaRole role, IObject allorsObject)
         {
             if (role.IsOne)
             {
@@ -210,12 +210,12 @@ namespace Allors.Adapters
         }
 
         /// <summary>
-        /// Asserts that the <see cref="RoleType"/> and the object are compatible with
+        /// Asserts that the <see cref="MetaRole"/> and the object are compatible with
         /// <see cref="ICompositePredicate#AddEquals"/>.
         /// </summary>
         /// <param name="role">The role .</param>
         /// <param name="compareObject">The compare object.</param>
-        public static void ValidateRoleEquals(RoleType role, object compareObject)
+        public static void ValidateRoleEquals(MetaRole role, object compareObject)
         {
             if (role.IsMany)
             {
@@ -228,7 +228,7 @@ namespace Allors.Adapters
                     "AddEquals() requires a non-null value or object, use AddNot().AddExists() instead.");
             }
 
-            var compareRole = compareObject as RoleType;
+            var compareRole = compareObject as MetaRole;
             if (compareRole != null && compareRole.ObjectType.IsComposite)
             {
                 throw new ArgumentException("AddRoleEqual() for composites can only be used with objects (not other roles).");
@@ -236,22 +236,22 @@ namespace Allors.Adapters
         }
 
         /// <summary>
-        /// Asserts that the <see cref="RoleType"/> is compatible with
+        /// Asserts that the <see cref="MetaRole"/> is compatible with
         /// <see cref="ICompositePredicate#Exists"/>.
         /// </summary>
         /// <param name="role">The role .</param>
-        public static void ValidateRoleExists(RoleType role)
+        public static void ValidateRoleExists(MetaRole role)
         {
             // TODO: ?
         }
 
         /// <summary>
-        /// Asserts that the <see cref="RoleType"/> and the unit are compatible with
+        /// Asserts that the <see cref="MetaRole"/> and the unit are compatible with
         /// <see cref="ICompositePredicate#AddGreaterThan"/>.
         /// </summary>
         /// <param name="role">The role .</param>
         /// <param name="unit">The unit .</param>
-        public static void ValidateRoleGreaterThan(RoleType role, object unit)
+        public static void ValidateRoleGreaterThan(MetaRole role, object unit)
         {
             if (!role.ObjectType.IsUnit)
             {
@@ -263,7 +263,7 @@ namespace Allors.Adapters
                 throw new ArgumentException("AddGreaterThan() requires a non-null value.");
             }
 
-            var compareRole = unit as RoleType;
+            var compareRole = unit as MetaRole;
             if (compareRole != null && !compareRole.ObjectType.IsUnit)
             {
                 throw new ArgumentException("AAddGreaterThan() can only be used with roles having unit types.");
@@ -271,12 +271,12 @@ namespace Allors.Adapters
         }
 
         /// <summary>
-        /// Asserts that the <see cref="RoleType"/> and the <see cref="ObjectType"/> are compatible with
+        /// Asserts that the <see cref="MetaRole"/> and the <see cref="MetaObject"/> are compatible with
         /// <see cref="ICompositePredicate#AddInstanceOf"/>.
         /// </summary>
         /// <param name="role">The role .</param>
         /// <param name="objectType">Type object type.</param>
-        public static void ValidateRoleInstanceOf(RoleType role, ObjectType objectType)
+        public static void ValidateRoleInstanceOf(MetaRole role, MetaObject objectType)
         {
             if (objectType.IsUnit)
             {
@@ -290,12 +290,12 @@ namespace Allors.Adapters
         }
 
         /// <summary>
-        /// Asserts that the <see cref="RoleType"/> and the unit are compatible with
+        /// Asserts that the <see cref="MetaRole"/> and the unit are compatible with
         /// <see cref="ICompositePredicate#AddLessThan"/>.
         /// </summary>
         /// <param name="role">The role .</param>
         /// <param name="unit">The unit .</param>
-        public static void ValidateRoleLessThan(RoleType role, object unit)
+        public static void ValidateRoleLessThan(MetaRole role, object unit)
         {
             if (!role.ObjectType.IsUnit)
             {
@@ -307,7 +307,7 @@ namespace Allors.Adapters
                 throw new ArgumentException("AddLessThan() requires a value.");
             }
 
-            var compareRole = unit as RoleType;
+            var compareRole = unit as MetaRole;
             if (compareRole != null && !compareRole.ObjectType.IsUnit)
             {
                 throw new ArgumentException("AddLessThan() can only be used with roles having unit types.");
@@ -315,12 +315,12 @@ namespace Allors.Adapters
         }
 
         /// <summary>
-        /// Asserts that the <see cref="RoleType"/> and the unit are compatible with
+        /// Asserts that the <see cref="MetaRole"/> and the unit are compatible with
         /// <see cref="ICompositePredicate#AddLike"/>.
         /// </summary>
         /// <param name="role">The role .</param>
         /// <param name="unit">The unit .</param>
-        public static void ValidateRoleLikeFilter(RoleType role, string unit)
+        public static void ValidateRoleLikeFilter(MetaRole role, string unit)
         {
             if (!role.ObjectType.IsString)
             {

@@ -97,7 +97,7 @@ namespace Allors.Development.Repository.Generation
             return this.Name;
         }
 
-        internal void Generate(Meta.Domain domain, DirectoryInfo outputDirectory, Log log)
+        internal void Generate(Meta.MetaDomain domain, DirectoryInfo outputDirectory, Log log)
         {
             if (!domain.IsValid)
             {
@@ -127,21 +127,21 @@ namespace Allors.Development.Repository.Generation
                     if (generation.HasAttribute(InputKey))
                     {
                         var input = new Guid(generation.GetAttribute(InputKey));
-                        var objectType = domain.Domain.Find(input) as ObjectType;
+                        var objectType = domain.Domain.Find(input) as MetaObject;
                         if (objectType != null)
                         {
                             template.Add(ObjectTypeKey, objectType);
                         }
                         else
                         {
-                            var relationType = domain.Domain.Find(input) as RelationType;
+                            var relationType = domain.Domain.Find(input) as MetaRelation;
                             if (relationType != null)
                             {
                                 template.Add(RelationTypeKey, relationType);
                             }
                             else
                             {
-                                var inheritance = domain.Domain.Find(input) as Inheritance;
+                                var inheritance = domain.Domain.Find(input) as MetaInheritance;
                                 if (inheritance != null)
                                 {
                                     template.Add(InheritanceKey, inheritance);

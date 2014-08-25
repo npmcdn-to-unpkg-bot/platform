@@ -29,19 +29,19 @@ namespace Allors.Adapters.Database.Caching
     /// </summary>
     public sealed class Cache : ICache
     {
-        private readonly HashSet<ObjectType> transientConcreteClasses; 
+        private readonly HashSet<MetaObject> transientConcreteClasses; 
 
         private readonly Dictionary<ObjectId, CachedObject> cachedObjectByObjectId;
-        private readonly Dictionary<ObjectId, ObjectType> objectTypeByObjectId;
+        private readonly Dictionary<ObjectId, MetaObject> objectTypeByObjectId;
 
-        public Cache(ObjectType[] transientObjectTypes)
+        public Cache(MetaObject[] transientObjectTypes)
         {
             this.cachedObjectByObjectId = new Dictionary<ObjectId, CachedObject>();
-            this.objectTypeByObjectId = new Dictionary<ObjectId, ObjectType>();
+            this.objectTypeByObjectId = new Dictionary<ObjectId, MetaObject>();
 
             if (transientObjectTypes != null)
             {
-                this.transientConcreteClasses = new HashSet<ObjectType>();
+                this.transientConcreteClasses = new HashSet<MetaObject>();
                 foreach (var transientObjectType in transientObjectTypes)
                 {
                     foreach (var transientConcreteClass in transientObjectType.ConcreteClasses)
@@ -66,7 +66,7 @@ namespace Allors.Adapters.Database.Caching
             this.objectTypeByObjectId.Clear();
         }
 
-        public ICachedObject GetOrCreateCachedObject(ObjectType concreteClass, ObjectId objectId, int localCacheId)
+        public ICachedObject GetOrCreateCachedObject(MetaObject concreteClass, ObjectId objectId, int localCacheId)
         {
             if (this.transientConcreteClasses != null && this.transientConcreteClasses.Contains(concreteClass))
             {
@@ -91,14 +91,14 @@ namespace Allors.Adapters.Database.Caching
             return cachedObject;
         }
 
-        public ObjectType GetObjectType(ObjectId objectId)
+        public MetaObject GetObjectType(ObjectId objectId)
         {
-            ObjectType objectType;
+            MetaObject objectType;
             this.objectTypeByObjectId.TryGetValue(objectId, out objectType);
             return objectType;
         }
 
-        public void SetObjectType(ObjectId objectId, ObjectType objectType)
+        public void SetObjectType(ObjectId objectId, MetaObject objectType)
         {
             this.objectTypeByObjectId[objectId] = objectType;
         }

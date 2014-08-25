@@ -24,7 +24,7 @@ namespace Allors.Adapters.Database.Sql.Commands
 
     public interface IGetCompositeAssociation
     {
-        Reference Execute(Reference role, AssociationType associationType);
+        Reference Execute(Reference role, MetaAssociation associationType);
     }
 
     public interface IGetCompositeAssociationFactory

@@ -24,25 +24,25 @@ namespace Allors.Adapters.Database.Sql
 
     public class ExtentStatementChild : ExtentStatement
     {
-        private readonly AssociationType associationType;
-        private readonly RoleType roleType;
+        private readonly MetaAssociation associationType;
+        private readonly MetaRole roleType;
         private readonly ExtentStatementRoot root;
 
-        public ExtentStatementChild(ExtentStatementRoot root, SqlExtent extent, RoleType roleType)
+        public ExtentStatementChild(ExtentStatementRoot root, SqlExtent extent, MetaRole roleType)
             : base(extent)
         {
             this.root = root;
             this.roleType = roleType;
         }
 
-        public ExtentStatementChild(ExtentStatementRoot root, SqlExtent extent, AssociationType associationType)
+        public ExtentStatementChild(ExtentStatementRoot root, SqlExtent extent, MetaAssociation associationType)
             : base(extent)
         {
             this.root = root;
             this.associationType = associationType;
         }
 
-        public AssociationType AssociationType
+        public MetaAssociation AssociationType
         {
             get { return this.associationType; }
         }
@@ -52,7 +52,7 @@ namespace Allors.Adapters.Database.Sql
             get { return false; }
         }
 
-        public RoleType RoleType
+        public MetaRole RoleType
         {
             get { return this.roleType; }
         }
@@ -77,12 +77,12 @@ namespace Allors.Adapters.Database.Sql
             return this.root.CreateAlias();
         }
 
-        public override ExtentStatement CreateChild(SqlExtent extent, AssociationType association)
+        public override ExtentStatement CreateChild(SqlExtent extent, MetaAssociation association)
         {
             return new ExtentStatementChild(this.root, extent, association);
         }
 
-        public override ExtentStatement CreateChild(SqlExtent extent, RoleType role)
+        public override ExtentStatement CreateChild(SqlExtent extent, MetaRole role)
         {
             return new ExtentStatementChild(this.root, extent, role);
         }

@@ -42,6 +42,6 @@ namespace Allors
         /// Gets the relation type.
         /// </summary>
         /// <value>The relation type.</value>
-        RoleType RoleType { get; }
+        MetaRole RoleType { get; }
     }
 }

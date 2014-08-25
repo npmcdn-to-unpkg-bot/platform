@@ -98,11 +98,11 @@ namespace Allors
         Extent<T> Extent<T>() where T : IObject;
 
         /// <summary>
-        /// Creates an Extent for the specified <see cref="ObjectType"/>.
+        /// Creates an Extent for the specified <see cref="MetaObject"/>.
         /// </summary>
         /// <param name="objectType">The objectType.</param>
         /// <returns>The extent.</returns>
-        Extent Extent(ObjectType objectType);
+        Extent Extent(MetaObject objectType);
 
         /// <summary>
         /// Creates an Extent that is the exception of its two operands.
@@ -153,7 +153,7 @@ namespace Allors
         /// </summary>
         /// <param name="objectType">The ObjectType.</param>
         /// <returns>a new <see cref="IObject"/></returns>
-        IObject Create(ObjectType objectType);
+        IObject Create(MetaObject objectType);
 
         /// <summary>
         /// Creates a specified amount of AllorsObjects.
@@ -161,7 +161,7 @@ namespace Allors
         /// <param name="objectType">The ObjectType.</param>
         /// <param name="count">The count.</param>
         /// <returns>The created objects.</returns>
-        IObject[] Create(ObjectType objectType, int count);
+        IObject[] Create(MetaObject objectType, int count);
 
         /// <summary>
         /// Instantiates an Allors Object.

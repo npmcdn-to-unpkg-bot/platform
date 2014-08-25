@@ -34,12 +34,12 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Text
     public class SetCompositeRoleFactory : ISetCompositeRoleFactory
     {
         public readonly Database Database;
-        private readonly Dictionary<RoleType, string> sqlByRoleType;
+        private readonly Dictionary<MetaRole, string> sqlByRoleType;
 
         public SetCompositeRoleFactory(Database database)
         {
             this.Database = database;
-            this.sqlByRoleType = new Dictionary<RoleType, string>();
+            this.sqlByRoleType = new Dictionary<MetaRole, string>();
         }
 
         public ISetCompositeRole Create(Sql.DatabaseSession session)
@@ -47,7 +47,7 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Text
             return new SetCompositeRole(this, session);
         }
 
-        public string GetSql(RoleType roleType)
+        public string GetSql(MetaRole roleType)
         {
             if (!this.sqlByRoleType.ContainsKey(roleType))
             {
@@ -72,16 +72,16 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Text
         private class SetCompositeRole : DatabaseCommand, ISetCompositeRole
         {
             private readonly SetCompositeRoleFactory factory;
-            private readonly Dictionary<RoleType, NpgsqlCommand> commandByRoleType;
+            private readonly Dictionary<MetaRole, NpgsqlCommand> commandByRoleType;
 
             public SetCompositeRole(SetCompositeRoleFactory factory, Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
-                this.commandByRoleType = new Dictionary<RoleType, NpgsqlCommand>();
+                this.commandByRoleType = new Dictionary<MetaRole, NpgsqlCommand>();
             }
 
-            public void Execute(IList<CompositeRelation> relations, RoleType roleType)
+            public void Execute(IList<CompositeRelation> relations, MetaRole roleType)
             {
                 NpgsqlCommand command;
                 if (!this.commandByRoleType.TryGetValue(roleType, out command))

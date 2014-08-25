@@ -77,14 +77,14 @@ namespace Allors.Adapters.Database.Sql
             return (ICompositePredicate)this.filter;
         }
 
-        public ICompositePredicate AddBetween(RoleType role, object firstValue, object secondValue)
+        public ICompositePredicate AddBetween(MetaRole role, object firstValue, object secondValue)
         {
             this.CheckUnarity();
             this.extent.FlushCache();
-            var betweenRoleA = firstValue as RoleType;
-            var betweenRoleB = secondValue as RoleType;
-            var betweenAssociationA = firstValue as AssociationType;
-            var betweenAssociationB = secondValue as AssociationType;
+            var betweenRoleA = firstValue as MetaRole;
+            var betweenRoleB = secondValue as MetaRole;
+            var betweenAssociationA = firstValue as MetaAssociation;
+            var betweenAssociationB = secondValue as MetaAssociation;
             if (betweenRoleA != null && betweenRoleB != null)
             {
                 this.filter = new RoleBetweenRole(this.extent, role, betweenRoleA, betweenRoleB);
@@ -101,7 +101,7 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public ICompositePredicate AddContainedIn(RoleType role, Allors.Extent containingExtent)
+        public ICompositePredicate AddContainedIn(MetaRole role, Allors.Extent containingExtent)
         {
             this.CheckUnarity();
             this.extent.FlushCache();
@@ -109,7 +109,7 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public ICompositePredicate AddContainedIn(RoleType role, IEnumerable<IObject> containingEnumerable)
+        public ICompositePredicate AddContainedIn(MetaRole role, IEnumerable<IObject> containingEnumerable)
         {
             this.CheckUnarity();
             this.extent.FlushCache();
@@ -117,7 +117,7 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public ICompositePredicate AddContainedIn(AssociationType association, Allors.Extent containingExtent)
+        public ICompositePredicate AddContainedIn(MetaAssociation association, Allors.Extent containingExtent)
         {
             this.CheckUnarity();
             this.extent.FlushCache();
@@ -125,7 +125,7 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public ICompositePredicate AddContainedIn(AssociationType association, IEnumerable<IObject> containingEnumerable)
+        public ICompositePredicate AddContainedIn(MetaAssociation association, IEnumerable<IObject> containingEnumerable)
         {
             this.CheckUnarity();
             this.extent.FlushCache();
@@ -133,7 +133,7 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public ICompositePredicate AddContains(RoleType role, IObject containedObject)
+        public ICompositePredicate AddContains(MetaRole role, IObject containedObject)
         {
             this.CheckUnarity();
             this.extent.FlushCache();
@@ -141,7 +141,7 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public ICompositePredicate AddContains(AssociationType association, IObject containedObject)
+        public ICompositePredicate AddContains(MetaAssociation association, IObject containedObject)
         {
             this.CheckUnarity();
             this.extent.FlushCache();
@@ -157,12 +157,12 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public ICompositePredicate AddEquals(RoleType role, object obj)
+        public ICompositePredicate AddEquals(MetaRole role, object obj)
         {
             this.CheckUnarity();
             this.extent.FlushCache();
-            var equalsRole = obj as RoleType;
-            var equalsAssociation = obj as AssociationType;
+            var equalsRole = obj as MetaRole;
+            var equalsAssociation = obj as MetaAssociation;
             if (equalsRole != null)
             {
                 this.filter = new RoleEqualsRole(this.extent, role, equalsRole);
@@ -179,7 +179,7 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public ICompositePredicate AddEquals(AssociationType association, IObject allorsObject)
+        public ICompositePredicate AddEquals(MetaAssociation association, IObject allorsObject)
         {
             this.CheckUnarity();
             this.extent.FlushCache();
@@ -187,7 +187,7 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public ICompositePredicate AddExists(RoleType role)
+        public ICompositePredicate AddExists(MetaRole role)
         {
             this.CheckUnarity();
             this.extent.FlushCache();
@@ -195,7 +195,7 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public ICompositePredicate AddExists(AssociationType association)
+        public ICompositePredicate AddExists(MetaAssociation association)
         {
             this.CheckUnarity();
             this.extent.FlushCache();
@@ -203,12 +203,12 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public ICompositePredicate AddGreaterThan(RoleType role, object value)
+        public ICompositePredicate AddGreaterThan(MetaRole role, object value)
         {
             this.CheckUnarity();
             this.extent.FlushCache();
-            var greaterThanRole = value as RoleType;
-            var greaterThanAssociation = value as AssociationType;
+            var greaterThanRole = value as MetaRole;
+            var greaterThanAssociation = value as MetaAssociation;
             if (greaterThanRole != null)
             {
                 this.filter = new RoleGreaterThanRole(this.extent, role, greaterThanRole);
@@ -225,7 +225,7 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public ICompositePredicate AddInstanceof(ObjectType type)
+        public ICompositePredicate AddInstanceof(MetaObject type)
         {
             this.CheckUnarity();
             this.extent.FlushCache();
@@ -233,7 +233,7 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public ICompositePredicate AddInstanceof(RoleType role, ObjectType type)
+        public ICompositePredicate AddInstanceof(MetaRole role, MetaObject type)
         {
             this.CheckUnarity();
             this.extent.FlushCache();
@@ -241,7 +241,7 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public ICompositePredicate AddInstanceof(AssociationType association, ObjectType type)
+        public ICompositePredicate AddInstanceof(MetaAssociation association, MetaObject type)
         {
             this.CheckUnarity();
             this.extent.FlushCache();
@@ -249,12 +249,12 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public ICompositePredicate AddLessThan(RoleType role, object value)
+        public ICompositePredicate AddLessThan(MetaRole role, object value)
         {
             this.CheckUnarity();
             this.extent.FlushCache();
-            var lessThanRole = value as RoleType;
-            var lessThanAssociation = value as AssociationType;
+            var lessThanRole = value as MetaRole;
+            var lessThanAssociation = value as MetaAssociation;
             if (lessThanRole != null)
             {
                 this.filter = new RoleLessThanRole(this.extent, role, lessThanRole);
@@ -271,7 +271,7 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public ICompositePredicate AddLike(RoleType role, string value)
+        public ICompositePredicate AddLike(MetaRole role, string value)
         {
             this.CheckUnarity();
             this.extent.FlushCache();

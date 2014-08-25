@@ -36,12 +36,12 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
     public class GetCompositeRoleFactory : IGetCompositeRoleFactory
     {
         public readonly Database Database;
-        private readonly Dictionary<RoleType, string> sqlByRoleType;
+        private readonly Dictionary<MetaRole, string> sqlByRoleType;
 
         public GetCompositeRoleFactory(Database database)
         {
             this.Database = database;
-            this.sqlByRoleType = new Dictionary<RoleType, string>();
+            this.sqlByRoleType = new Dictionary<MetaRole, string>();
         }
 
         public IGetCompositeRole Create(Sql.DatabaseSession session)
@@ -49,11 +49,11 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
             return new GetCompositeRole(this, session);
         }
 
-        public string GetSql(RoleType roleType)
+        public string GetSql(MetaRole roleType)
         {
             if (!this.sqlByRoleType.ContainsKey(roleType))
             {
-                AssociationType associationType = roleType.AssociationType;
+                MetaAssociation associationType = roleType.AssociationType;
 
                 string sql;
                 if (!roleType.RelationType.ExistExclusiveRootClasses)
@@ -74,16 +74,16 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
         private class GetCompositeRole : DatabaseCommand, IGetCompositeRole
         {
             private readonly GetCompositeRoleFactory factory;
-            private readonly Dictionary<RoleType, NpgsqlCommand> commandByRoleType;
+            private readonly Dictionary<MetaRole, NpgsqlCommand> commandByRoleType;
 
             public GetCompositeRole(GetCompositeRoleFactory factory, Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
-                this.commandByRoleType = new Dictionary<RoleType, NpgsqlCommand>();
+                this.commandByRoleType = new Dictionary<MetaRole, NpgsqlCommand>();
             }
 
-            public void Execute(Roles roles, RoleType roleType)
+            public void Execute(Roles roles, MetaRole roleType)
             {
                 var reference = roles.Reference;
 

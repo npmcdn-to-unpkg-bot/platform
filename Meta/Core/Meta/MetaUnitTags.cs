@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="UnitTypeTags.cs" company="Allors bvba">
+// <copyright file="MetaUnitTags.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -26,50 +26,50 @@ namespace Allors.Meta
     /// The tags for <see cref="AllorsClassObjectType.UnitTag"/>s.
     /// Do not use tags for long term persistence, UnitTypeIds should be used for that.
     /// </summary>
-    public enum UnitTypeTags
+    public enum MetaUnitTags
     {
         /// <summary>
-        /// The tag for the binary <see cref="ObjectType"/>.
+        /// The tag for the binary <see cref="MetaObject"/>.
         /// </summary>
         AllorsBinary,
 
         /// <summary>
-        /// The tag for the boolean <see cref="ObjectType"/>.
+        /// The tag for the boolean <see cref="MetaObject"/>.
         /// </summary>
         AllorsBoolean,
 
         /// <summary>
-        /// The tag for the date time <see cref="ObjectType"/>.
+        /// The tag for the date time <see cref="MetaObject"/>.
         /// </summary>
         AllorsDateTime,
 
         /// <summary>
-        /// The tag for the decimal <see cref="ObjectType"/>.
+        /// The tag for the decimal <see cref="MetaObject"/>.
         /// </summary>
         AllorsDecimal,
 
         /// <summary>
-        /// The tag for the double <see cref="ObjectType"/>.
+        /// The tag for the double <see cref="MetaObject"/>.
         /// </summary>
         AllorsDouble,
 
         /// <summary>
-        /// The tag for the integer <see cref="ObjectType"/>.
+        /// The tag for the integer <see cref="MetaObject"/>.
         /// </summary>
         AllorsInteger,
 
         /// <summary>
-        /// The tag for the long integer <see cref="ObjectType"/>.
+        /// The tag for the long integer <see cref="MetaObject"/>.
         /// </summary>
         AllorsLong,
 
         /// <summary>
-        /// The tag for the string <see cref="ObjectType"/>.
+        /// The tag for the string <see cref="MetaObject"/>.
         /// </summary>
         AllorsString,
 
         /// <summary>
-        /// The tag for the unique <see cref="ObjectType"/>.
+        /// The tag for the unique <see cref="MetaObject"/>.
         /// </summary>
         AllorsUnique,
     }

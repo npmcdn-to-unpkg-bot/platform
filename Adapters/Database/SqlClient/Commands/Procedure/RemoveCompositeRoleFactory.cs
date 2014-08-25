@@ -32,12 +32,12 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
     internal class RemoveCompositeRoleFactory : Sql.Commands.IRemoveCompositeRoleFactory
     {
         internal readonly Database Database;
-        private readonly Dictionary<RoleType, string> sqlByRoleType;
+        private readonly Dictionary<MetaRole, string> sqlByRoleType;
 
         internal RemoveCompositeRoleFactory(Database database)
         {
             this.Database = database;
-            this.sqlByRoleType = new Dictionary<RoleType, string>();
+            this.sqlByRoleType = new Dictionary<MetaRole, string>();
         }
 
         public Sql.Commands.IRemoveCompositeRole Create(Sql.DatabaseSession session)
@@ -45,7 +45,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
             return new RemoveCompositeRole(this, session);
         }
 
-        internal string GetSql(RoleType roleType)
+        internal string GetSql(MetaRole roleType)
         {
             if (!this.sqlByRoleType.ContainsKey(roleType))
             {
@@ -70,16 +70,16 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
         private class RemoveCompositeRole : DatabaseCommand, Sql.Commands.IRemoveCompositeRole
         {
             private readonly RemoveCompositeRoleFactory factory;
-            private readonly Dictionary<RoleType, SqlCommand> commandByRoleType;
+            private readonly Dictionary<MetaRole, SqlCommand> commandByRoleType;
 
             public RemoveCompositeRole(RemoveCompositeRoleFactory factory, Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
-                this.commandByRoleType = new Dictionary<RoleType, SqlCommand>();
+                this.commandByRoleType = new Dictionary<MetaRole, SqlCommand>();
             }
 
-            public void Execute(IList<CompositeRelation> relations, RoleType roleType)
+            public void Execute(IList<CompositeRelation> relations, MetaRole roleType)
             {
                 SqlCommand command;
                 if (!this.commandByRoleType.TryGetValue(roleType, out command))

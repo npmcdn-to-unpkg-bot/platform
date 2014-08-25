@@ -26,15 +26,15 @@ namespace Allors.Adapters.Workspace.Memory
     public class ExtentObject : Extent
     {
         private readonly WorkspaceSession session;
-        private readonly ObjectType objectType;
+        private readonly MetaObject objectType;
 
-        public ExtentObject(WorkspaceSession session, ObjectType objectType)
+        public ExtentObject(WorkspaceSession session, MetaObject objectType)
         {
             this.session = session;
             this.objectType = objectType;
         }
 
-        public override ObjectType ObjectType
+        public override MetaObject ObjectType
         {
             get { return this.objectType; }
         }

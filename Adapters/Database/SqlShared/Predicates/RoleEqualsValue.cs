@@ -27,9 +27,9 @@ namespace Allors.Adapters.Database.Sql
     public sealed class RoleEqualsValue : Predicate
     {
         private readonly object obj;
-        private readonly RoleType roleType;
+        private readonly MetaRole roleType;
 
-        public RoleEqualsValue(ExtentFiltered extent, RoleType roleType, object obj)
+        public RoleEqualsValue(ExtentFiltered extent, MetaRole roleType, object obj)
         {
             extent.CheckRole(roleType);
             CompositePredicateAssertions.ValidateRoleEquals(roleType, obj);

@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="OperandType.cs" company="Allors bvba">
+// <copyright file="IMetaObjectExtension.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -16,15 +16,20 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
+// <summary>Defines the Domain type.</summary>
 //-------------------------------------------------------------------------------------------------
 
 namespace Allors.Meta
 {
-    public partial class OperandType
+    /// <summary>
+    /// An ObjectTypeExtension allows you to extend an object type programmatically.
+    /// ObjectTypeExtensions are available in the second phase of a two phase generation.
+    /// </summary>
+    public interface IMetaObjectExtension
     {
         /// <summary>
-        /// Gets the display name.
+        /// Gets the object type.
         /// </summary>
-        public abstract string DisplayName { get; }
-   }
+        MetaObject ObjectType { get; }
+    }
 }

@@ -54,7 +54,7 @@ namespace Allors.Adapters.Special.SqlClient.IntegerId.ReadCommitted
             }
         }
         
-        public IDatabase CreateDatabase(Domain domain, bool init)
+        public IDatabase CreateDatabase(MetaDomain domain, bool init)
         {
             var configuration = new Adapters.Database.SqlClient.IntegerId.Configuration
                                     {

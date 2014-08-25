@@ -35,12 +35,12 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Text
     public class GetCompositeAssociationsFactory : IGetCompositeAssociationsFactory
     {
         public readonly Database Database;
-        private readonly Dictionary<AssociationType, string> sqlByAssociationType;
+        private readonly Dictionary<MetaAssociation, string> sqlByAssociationType;
 
         public GetCompositeAssociationsFactory(Database database)
         {
             this.Database = database;
-            this.sqlByAssociationType = new Dictionary<AssociationType, string>();
+            this.sqlByAssociationType = new Dictionary<MetaAssociation, string>();
         }
 
         public IGetCompositeAssociations Create(Sql.DatabaseSession session)
@@ -48,11 +48,11 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Text
             return new GetCompositeAssociations(this, session);
         }
 
-        public string GetSql(AssociationType associationType)
+        public string GetSql(MetaAssociation associationType)
         {
             if (!this.sqlByAssociationType.ContainsKey(associationType))
             {
-                RoleType roleType = associationType.RoleType;
+                MetaRole roleType = associationType.RoleType;
 
                 string sql;
                 if (roleType.IsMany || !associationType.RelationType.ExistExclusiveRootClasses)
@@ -73,16 +73,16 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Text
         public class GetCompositeAssociations : DatabaseCommand, IGetCompositeAssociations
         {
             private readonly GetCompositeAssociationsFactory factory;
-            private readonly Dictionary<AssociationType, NpgsqlCommand> commandByAssociationType;
+            private readonly Dictionary<MetaAssociation, NpgsqlCommand> commandByAssociationType;
 
             public GetCompositeAssociations(GetCompositeAssociationsFactory factory, Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
-                this.commandByAssociationType = new Dictionary<AssociationType, NpgsqlCommand>();
+                this.commandByAssociationType = new Dictionary<MetaAssociation, NpgsqlCommand>();
             }
 
-            public ObjectId[] Execute(Strategy role, AssociationType associationType)
+            public ObjectId[] Execute(Strategy role, MetaAssociation associationType)
             {
                 NpgsqlCommand command;
                 if (!this.commandByAssociationType.TryGetValue(associationType, out command))

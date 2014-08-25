@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="Inheritance.cs" company="Allors bvba">
+// <copyright file="MetaInheritance.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -25,9 +25,9 @@ namespace Allors.Meta
     using AllorsGenerated;
 
     /// <summary>
-    /// Defines a subtype/supertype relation between two <see cref="ObjectType"/>s.
+    /// Defines a subtype/supertype relation between two <see cref="MetaObject"/>s.
     /// </summary>
-    public sealed partial class Inheritance
+    public sealed partial class MetaInheritance
     {
         /// <summary>
         /// Gets a value indicating whether this subtype is default.
@@ -55,7 +55,7 @@ namespace Allors.Meta
         /// Gets or sets the subtype.
         /// </summary>
         /// <value>The Subtype.</value>
-        public override ObjectType Subtype
+        public override MetaObject Subtype
         {
             get
             {
@@ -78,7 +78,7 @@ namespace Allors.Meta
         /// Gets or sets the supertype.
         /// </summary>
         /// <value>The Supertype.</value>
-        public override ObjectType Supertype
+        public override MetaObject Supertype
         {
             get
             {
@@ -122,18 +122,18 @@ namespace Allors.Meta
         /// Copy from source.
         /// </summary>
         /// <param name="source">The source.</param>
-        public void Copy(Inheritance source)
+        public void Copy(MetaInheritance source)
         {
             this.CopyMetaObject(source);
 
             if (source.ExistSubtype)
             {
-                this.Subtype = (ObjectType)this.Domain.Domain.Find(source.Subtype.Id);
+                this.Subtype = (MetaObject)this.Domain.Domain.Find(source.Subtype.Id);
             }
 
             if (source.ExistSupertype)
             {
-                this.Supertype = (ObjectType)this.Domain.Domain.Find(source.Supertype.Id);
+                this.Supertype = (MetaObject)this.Domain.Domain.Find(source.Supertype.Id);
             }
         }
 
@@ -208,9 +208,9 @@ namespace Allors.Meta
         /// </summary>
         /// <param name="session">The session.</param>
         /// <returns>The new inheritance.</returns>
-        internal static Inheritance Create(AllorsEmbeddedSession session)
+        internal static MetaInheritance Create(AllorsEmbeddedSession session)
         {
-            var inheritance = (Inheritance)session.Create(AllorsEmbeddedDomain.Inheritance);
+            var inheritance = (MetaInheritance)session.Create(AllorsEmbeddedDomain.Inheritance);
             return inheritance;
         }
 

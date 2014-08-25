@@ -37,12 +37,12 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
     public class GetCompositeAssociationFactory : IGetCompositeAssociationFactory
     {
         public readonly Database Database;
-        private readonly Dictionary<AssociationType, string> sqlByAssociationType;
+        private readonly Dictionary<MetaAssociation, string> sqlByAssociationType;
 
         public GetCompositeAssociationFactory(Database database)
         {
             this.Database = database;
-            this.sqlByAssociationType = new Dictionary<AssociationType, string>();
+            this.sqlByAssociationType = new Dictionary<MetaAssociation, string>();
         }
 
         public IGetCompositeAssociation Create(Sql.DatabaseSession session)
@@ -50,7 +50,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
             return new GetCompositeAssociation(this, session);
         }
 
-        public string GetSql(AssociationType associationType)
+        public string GetSql(MetaAssociation associationType)
         {
             if (!this.sqlByAssociationType.ContainsKey(associationType))
             {
@@ -82,16 +82,16 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
         private class GetCompositeAssociation : DatabaseCommand, IGetCompositeAssociation
         {
             private readonly GetCompositeAssociationFactory factory;
-            private readonly Dictionary<AssociationType, SqlCommand> commandByAssociationType;
+            private readonly Dictionary<MetaAssociation, SqlCommand> commandByAssociationType;
 
             public GetCompositeAssociation(GetCompositeAssociationFactory factory, Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
-                this.commandByAssociationType = new Dictionary<AssociationType, SqlCommand>();
+                this.commandByAssociationType = new Dictionary<MetaAssociation, SqlCommand>();
             }
 
-            public Reference Execute(Reference role, AssociationType associationType)
+            public Reference Execute(Reference role, MetaAssociation associationType)
             {
                 Reference associationObject = null;
 

@@ -36,7 +36,7 @@ namespace Allors.Adapters.Database.Sql
         private readonly RelationNotLoadedEventHandler relationNotLoaded;
         private readonly XmlReader reader;
 
-        private readonly Dictionary<ObjectId, ObjectType> objectTypeByObjectId;
+        private readonly Dictionary<ObjectId, MetaObject> objectTypeByObjectId;
 
         protected Load(Database database, ObjectNotLoadedEventHandler objectNotLoaded, RelationNotLoadedEventHandler relationNotLoaded, XmlReader reader)
         {
@@ -45,7 +45,7 @@ namespace Allors.Adapters.Database.Sql
             this.relationNotLoaded = relationNotLoaded;
             this.reader = reader;
 
-            this.objectTypeByObjectId = new Dictionary<ObjectId, ObjectType>();
+            this.objectTypeByObjectId = new Dictionary<ObjectId, MetaObject>();
         }
 
         public void Execute(ManagementSession session)
@@ -291,7 +291,7 @@ namespace Allors.Adapters.Database.Sql
                                 }
 
                                 var relationTypeId = new Guid(relationTypeIdString);
-                                var relationType = (RelationType)this.database.Domain.Domain.Find(relationTypeId);
+                                var relationType = (MetaRelation)this.database.Domain.Domain.Find(relationTypeId);
 
                                 if (this.reader.Name.Equals(Serialization.RelationTypeUnit))
                                 {
@@ -301,7 +301,7 @@ namespace Allors.Adapters.Database.Sql
                                     }
                                     else
                                     {
-                                        var relationsByExclusiveRootClass = new Dictionary<ObjectType, List<UnitRelation>>();
+                                        var relationsByExclusiveRootClass = new Dictionary<MetaObject, List<UnitRelation>>();
                                         this.LoadUnitRelations(relationType, relationsByExclusiveRootClass);
 
                                         foreach (var dictionaryEntry in relationsByExclusiveRootClass)
@@ -351,7 +351,7 @@ namespace Allors.Adapters.Database.Sql
             }
         }
 
-        protected void LoadUnitRelations(RelationType relationType, Dictionary<ObjectType, List<UnitRelation>> relationsByExclusiveRootClass)
+        protected void LoadUnitRelations(MetaRelation relationType, Dictionary<MetaObject, List<UnitRelation>> relationsByExclusiveRootClass)
         {
             while (this.reader.Read())
             {
@@ -367,7 +367,7 @@ namespace Allors.Adapters.Database.Sql
                             }
 
                             var associationId = this.database.AllorsObjectIds.Parse(associationIdString);
-                            ObjectType associationConcreteClass;
+                            MetaObject associationConcreteClass;
                             this.objectTypeByObjectId.TryGetValue(associationId, out associationConcreteClass);
 
                             if (this.reader.IsEmptyElement)
@@ -382,7 +382,7 @@ namespace Allors.Adapters.Database.Sql
                                     var exclusiveRootClass = associationConcreteClass.ExclusiveRootClass;
                                     switch (relationType.RoleType.ObjectType.UnitTag)
                                     {
-                                        case (int)UnitTypeTags.AllorsString:
+                                        case (int)MetaUnitTags.AllorsString:
                                             {
                                                 List<UnitRelation> relations;
                                                 if (
@@ -399,7 +399,7 @@ namespace Allors.Adapters.Database.Sql
                                             
                                             break;
 
-                                        case (int)UnitTypeTags.AllorsBinary:
+                                        case (int)MetaUnitTags.AllorsBinary:
                                             {
                                                 List<UnitRelation> relations;
                                                 if (!relationsByExclusiveRootClass.TryGetValue(associationConcreteClass.ExclusiveRootClass, out relations))
@@ -433,7 +433,7 @@ namespace Allors.Adapters.Database.Sql
                                     try
                                     {
                                         var exclusiveRootClass = associationConcreteClass.ExclusiveRootClass;
-                                        var unitTypeTag = (UnitTypeTags)relationType.RoleType.ObjectType.UnitTag;
+                                        var unitTypeTag = (MetaUnitTags)relationType.RoleType.ObjectType.UnitTag;
                                         var unit = Serialization.ReadString(value, unitTypeTag);
 
                                         List<UnitRelation> relations;
@@ -472,7 +472,7 @@ namespace Allors.Adapters.Database.Sql
             }
         }
 
-        protected void LoadCompositeRelations(RelationType relationType, List<CompositeRelation> relations)
+        protected void LoadCompositeRelations(MetaRelation relationType, List<CompositeRelation> relations)
         {
             while (this.reader.Read())
             {
@@ -493,7 +493,7 @@ namespace Allors.Adapters.Database.Sql
                             }
 
                             var association = this.database.AllorsObjectIds.Parse(associationIdString);
-                            ObjectType associationConcreteClass;
+                            MetaObject associationConcreteClass;
                             this.objectTypeByObjectId.TryGetValue(association, out associationConcreteClass);
 
                             var value = this.reader.ReadString();
@@ -513,7 +513,7 @@ namespace Allors.Adapters.Database.Sql
                                 foreach (var r in rs)
                                 {
                                     var role = this.database.AllorsObjectIds.Parse(r);
-                                    ObjectType roleConcreteClass;
+                                    MetaObject roleConcreteClass;
                                     this.objectTypeByObjectId.TryGetValue(role, out roleConcreteClass);
 
                                     if (roleConcreteClass == null ||

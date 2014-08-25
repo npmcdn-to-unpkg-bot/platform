@@ -30,14 +30,14 @@ namespace Allors.Adapters
     {
         private readonly IObjectFactory objectFactory;
 
-        private readonly Dictionary<ObjectType, object> concreteClassesByObjectType;
+        private readonly Dictionary<MetaObject, object> concreteClassesByObjectType;
 
         protected Dictionary<string, object> Properties;
 
         protected Population(Configuration configuration)
         {
             this.objectFactory = configuration.ObjectFactory;
-            this.concreteClassesByObjectType = new Dictionary<ObjectType, object>();
+            this.concreteClassesByObjectType = new Dictionary<MetaObject, object>();
         }
         
         public abstract event SessionCreatedEventHandler SessionCreated;
@@ -56,7 +56,7 @@ namespace Allors.Adapters
 
         public abstract bool IsWorkspace { get; }
 
-        public Domain Domain 
+        public MetaDomain Domain 
         {
             get
             {
@@ -114,16 +114,16 @@ namespace Allors.Adapters
         /// <returns>
         /// The normalize.
         /// </returns>
-        public object Internalize(object unit, RoleType roleType)
+        public object Internalize(object unit, MetaRole roleType)
         {
             var objectType = roleType.ObjectType;
-            var unitTypeTag = (UnitTypeTags)objectType.UnitTag;
+            var unitTypeTag = (MetaUnitTags)objectType.UnitTag;
 
             var normalizedUnit = unit;
 
             switch (unitTypeTag)
             {
-                case UnitTypeTags.AllorsString:
+                case MetaUnitTags.AllorsString:
                     if (!(unit is string))
                     {
                         throw new ArgumentException("RoleType is not a String.");
@@ -137,14 +137,14 @@ namespace Allors.Adapters
                     }
 
                     break;
-                case UnitTypeTags.AllorsInteger:
+                case MetaUnitTags.AllorsInteger:
                     if (!(unit is int))
                     {
                         throw new ArgumentException("RoleType is not an Integer.");
                     }
 
                     break;
-                case UnitTypeTags.AllorsLong:
+                case MetaUnitTags.AllorsLong:
                     if (unit is int)
                     {
                         normalizedUnit = Convert.ToInt64(unit);
@@ -155,7 +155,7 @@ namespace Allors.Adapters
                     }
 
                     break;
-                case UnitTypeTags.AllorsDecimal:
+                case MetaUnitTags.AllorsDecimal:
                     if (unit is int || unit is long || unit is float || unit is double)
                     {
                         normalizedUnit = Convert.ToDecimal(unit);
@@ -166,7 +166,7 @@ namespace Allors.Adapters
                     }
 
                     break;
-                case UnitTypeTags.AllorsDouble:
+                case MetaUnitTags.AllorsDouble:
                     if (unit is int || unit is long || unit is float)
                     {
                         normalizedUnit = Convert.ToDouble(unit);
@@ -177,14 +177,14 @@ namespace Allors.Adapters
                     }
 
                     break;
-                case UnitTypeTags.AllorsBoolean:
+                case MetaUnitTags.AllorsBoolean:
                     if (!(unit is bool))
                     {
                         throw new ArgumentException("RoleType is not a Boolean.");
                     }
 
                     break;
-                case UnitTypeTags.AllorsDateTime:
+                case MetaUnitTags.AllorsDateTime:
                     if (!(unit is DateTime))
                     {
                         throw new ArgumentException("RoleType is not a DateTime.");
@@ -202,14 +202,14 @@ namespace Allors.Adapters
                     }
 
                     break;
-                case UnitTypeTags.AllorsUnique:
+                case MetaUnitTags.AllorsUnique:
                     if (!(unit is Guid))
                     {
                         throw new ArgumentException("RoleType is not a Boolean.");
                     }
 
                     break;
-                case UnitTypeTags.AllorsBinary:
+                case MetaUnitTags.AllorsBinary:
                     if (!(unit is byte[]))
                     {
                         throw new ArgumentException("RoleType is not a Boolean.");
@@ -223,7 +223,7 @@ namespace Allors.Adapters
             return normalizedUnit;
         }
 
-        public bool ContainsConcreteClass(ObjectType objectType, ObjectType concreteClass)
+        public bool ContainsConcreteClass(MetaObject objectType, MetaObject concreteClass)
         {
             object concreteClassOrClasses;
             if (!this.concreteClassesByObjectType.TryGetValue(objectType, out concreteClassOrClasses))
@@ -235,21 +235,21 @@ namespace Allors.Adapters
                 }
                 else
                 {
-                    concreteClassOrClasses = new HashSet<ObjectType>(objectType.ConcreteClasses);
+                    concreteClassOrClasses = new HashSet<MetaObject>(objectType.ConcreteClasses);
                     this.concreteClassesByObjectType[objectType] = concreteClassOrClasses;
                 }
             }
 
-            if (concreteClassOrClasses is ObjectType)
+            if (concreteClassOrClasses is MetaObject)
             {
                 return concreteClass.Equals(concreteClassOrClasses);
             }
 
-            var concreteClasses = (HashSet<ObjectType>)concreteClassOrClasses;
+            var concreteClasses = (HashSet<MetaObject>)concreteClassOrClasses;
             return concreteClasses.Contains(concreteClass);
         }
 
-        public void UnitRoleChecks(IStrategy strategy, RoleType relationType)
+        public void UnitRoleChecks(IStrategy strategy, MetaRole relationType)
         {
             if (!this.ContainsConcreteClass(relationType.AssociationType.ObjectType, strategy.ObjectType))
             {
@@ -262,12 +262,12 @@ namespace Allors.Adapters
             }
         }
 
-        public void CompositeRoleChecks(IStrategy strategy, RoleType roleType)
+        public void CompositeRoleChecks(IStrategy strategy, MetaRole roleType)
         {
             this.CompositeSharedChecks(strategy, roleType, null);
         }
 
-        public void CompositeRoleChecks(IStrategy strategy, RoleType roleType, IObject role)
+        public void CompositeRoleChecks(IStrategy strategy, MetaRole roleType, IObject role)
         {
             this.CompositeSharedChecks(strategy, roleType, role);
             if (!roleType.IsOne)
@@ -276,7 +276,7 @@ namespace Allors.Adapters
             }
         }
 
-        public void CompositeRolesChecks(IStrategy strategy, RoleType roleType, IObject role)
+        public void CompositeRolesChecks(IStrategy strategy, MetaRole roleType, IObject role)
         {
             this.CompositeSharedChecks(strategy, roleType, role);
             if (!roleType.IsMany)
@@ -285,7 +285,7 @@ namespace Allors.Adapters
             }
         }
 
-        private void CompositeSharedChecks(IStrategy strategy, RoleType roleType, IObject role)
+        private void CompositeSharedChecks(IStrategy strategy, MetaRole roleType, IObject role)
         {
             if (!this.ContainsConcreteClass(roleType.AssociationType.ObjectType, strategy.ObjectType))
             {

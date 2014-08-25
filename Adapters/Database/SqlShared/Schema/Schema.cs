@@ -48,9 +48,9 @@ namespace Allors.Adapters.Database.Sql
         private readonly string prefix;
         private readonly string postfix;
         
-        private Dictionary<RelationType, SchemaColumn> columnsByRelationType;
-        private Dictionary<RelationType, SchemaTable> tablesByRelationType;
-        private Dictionary<ObjectType, SchemaTable> tableByObjectType;
+        private Dictionary<MetaRelation, SchemaColumn> columnsByRelationType;
+        private Dictionary<MetaRelation, SchemaTable> tablesByRelationType;
+        private Dictionary<MetaObject, SchemaTable> tableByObjectType;
         private Dictionary<string, SchemaTable> tablesByName;
 
         private SchemaColumn objectId;
@@ -164,7 +164,7 @@ namespace Allors.Adapters.Database.Sql
             get { return this.database; }
         }
 
-        protected Dictionary<RelationType, SchemaColumn> ColumnsByRelationType
+        protected Dictionary<MetaRelation, SchemaColumn> ColumnsByRelationType
         {
             get { return this.columnsByRelationType; }
         }
@@ -174,12 +174,12 @@ namespace Allors.Adapters.Database.Sql
             get { return this.tablesByName; }
         }
 
-        protected Dictionary<RelationType, SchemaTable> TablesByRelationType
+        protected Dictionary<MetaRelation, SchemaTable> TablesByRelationType
         {
             get { return this.tablesByRelationType; }
         }
 
-        protected Dictionary<ObjectType, SchemaTable> TableByObjectType
+        protected Dictionary<MetaObject, SchemaTable> TableByObjectType
         {
             get { return this.tableByObjectType; }
         }
@@ -235,37 +235,37 @@ namespace Allors.Adapters.Database.Sql
             return this.tablesByName.Values.GetEnumerator();
         }
 
-        public SchemaColumn Column(RelationType relationType)
+        public SchemaColumn Column(MetaRelation relationType)
         {
             return this.columnsByRelationType[relationType];
         }
 
-        public SchemaColumn Column(AssociationType association)
+        public SchemaColumn Column(MetaAssociation association)
         {
             return this.columnsByRelationType[association.RelationTypeWhereAssociationType];
         }
 
-        public SchemaColumn Column(RoleType role)
+        public SchemaColumn Column(MetaRole role)
         {
             return this.columnsByRelationType[role.RelationTypeWhereRoleType];
         }
 
-        public SchemaTable Table(ObjectType type)
+        public SchemaTable Table(MetaObject type)
         {
             return this.tableByObjectType[type];
         }
 
-        public SchemaTable Table(RelationType relationType)
+        public SchemaTable Table(MetaRelation relationType)
         {
             return this.tablesByRelationType[relationType];
         }
 
-        public SchemaTable Table(AssociationType association)
+        public SchemaTable Table(MetaAssociation association)
         {
             return this.tablesByRelationType[association.RelationTypeWhereAssociationType];
         }
 
-        public SchemaTable Table(RoleType role)
+        public SchemaTable Table(MetaRole role)
         {
             return this.tablesByRelationType[role.RelationTypeWhereRoleType];
         }
@@ -294,9 +294,9 @@ namespace Allors.Adapters.Database.Sql
 
             this.tablesByName = new Dictionary<string, SchemaTable>();
 
-            this.tableByObjectType = new Dictionary<ObjectType, SchemaTable>();
-            this.tablesByRelationType = new Dictionary<RelationType, SchemaTable>();
-            this.columnsByRelationType = new Dictionary<RelationType, SchemaColumn>();
+            this.tableByObjectType = new Dictionary<MetaObject, SchemaTable>();
+            this.tablesByRelationType = new Dictionary<MetaRelation, SchemaTable>();
+            this.columnsByRelationType = new Dictionary<MetaRelation, SchemaColumn>();
 
             this.objectId = new SchemaColumn(this, "O", this.ObjectDbType, false, true, SchemaIndexType.None);
             this.cacheId = new SchemaColumn(this, "C", this.CacheDbType, false, false, SchemaIndexType.None);
@@ -318,28 +318,28 @@ namespace Allors.Adapters.Database.Sql
             this.CreateTablesFromMeta();
         }
         
-        protected virtual DbType GetDbType(RoleType role)
+        protected virtual DbType GetDbType(MetaRole role)
         {
-            var unitTypeTag = (UnitTypeTags)role.ObjectType.UnitTag;
+            var unitTypeTag = (MetaUnitTags)role.ObjectType.UnitTag;
             switch (unitTypeTag)
             {
-                case UnitTypeTags.AllorsString:
+                case MetaUnitTags.AllorsString:
                     return DbType.String;
-                case UnitTypeTags.AllorsInteger:
+                case MetaUnitTags.AllorsInteger:
                     return DbType.Int32;
-                case UnitTypeTags.AllorsLong:
+                case MetaUnitTags.AllorsLong:
                     return DbType.Int64;
-                case UnitTypeTags.AllorsDecimal:
+                case MetaUnitTags.AllorsDecimal:
                     return DbType.Decimal;
-                case UnitTypeTags.AllorsDouble:
+                case MetaUnitTags.AllorsDouble:
                     return DbType.Double;
-                case UnitTypeTags.AllorsBoolean:
+                case MetaUnitTags.AllorsBoolean:
                     return DbType.Boolean;
-                case UnitTypeTags.AllorsDateTime:
+                case MetaUnitTags.AllorsDateTime:
                     return DbType.DateTime;
-                case UnitTypeTags.AllorsUnique:
+                case MetaUnitTags.AllorsUnique:
                     return DbType.Guid;
-                case UnitTypeTags.AllorsBinary:
+                case MetaUnitTags.AllorsBinary:
                     return DbType.Binary;
                 default:
                     throw new ArgumentException("Unkown unit type " + role.ObjectType);
@@ -415,10 +415,10 @@ namespace Allors.Adapters.Database.Sql
                     schemaTable.AddColumn(this.ObjectId);
                     schemaTable.AddColumn(this.TypeId);
 
-                    var roleTypes = new List<RoleType>();
-                    var associationTypes = new List<AssociationType>();
+                    var roleTypes = new List<MetaRole>();
+                    var associationTypes = new List<MetaAssociation>();
 
-                    var subClassesAndSelf = new List<ObjectType>(objectType.Subclasses) { objectType };
+                    var subClassesAndSelf = new List<MetaObject>(objectType.Subclasses) { objectType };
 
                     foreach (var subClass in subClassesAndSelf)
                     {

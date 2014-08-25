@@ -39,7 +39,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
             this.ManagementSession = session;
         }
 
-        public ILoadObjects Create(ObjectType objectType)
+        public ILoadObjects Create(MetaObject objectType)
         {
             return new LoadObjects(this);
         }
@@ -53,7 +53,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
                 this.factory = factory;
             }
 
-            public void Execute(ObjectType objectType, IEnumerable<ObjectId> objectIds)
+            public void Execute(MetaObject objectType, IEnumerable<ObjectId> objectIds)
             {
                 var database = this.factory.ManagementSession.SqlClientDatabase;
 

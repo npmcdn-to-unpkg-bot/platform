@@ -27,7 +27,7 @@ namespace Allors.Adapters.Special
     {
         public static void ForceRoleCaching(IObject allorsObject)
         {
-            foreach (RoleType role in allorsObject.Strategy.ObjectType.RoleTypes)
+            foreach (MetaRole role in allorsObject.Strategy.ObjectType.RoleTypes)
             {
                 allorsObject.Strategy.GetRole(role);
             }
@@ -35,7 +35,7 @@ namespace Allors.Adapters.Special
 
         public static void ForceAssociationCaching(IObject allorsObject)
         {
-            foreach (AssociationType association in allorsObject.Strategy.ObjectType.AssociationTypes)
+            foreach (MetaAssociation association in allorsObject.Strategy.ObjectType.AssociationTypes)
             {
                 allorsObject.Strategy.GetAssociation(association);
             }

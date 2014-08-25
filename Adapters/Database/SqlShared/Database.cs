@@ -43,7 +43,7 @@ namespace Allors.Adapters.Database.Sql
         private readonly int commandTimeout;
         private readonly IsolationLevel isolationLevel;
 
-        private readonly Dictionary<ObjectType, RoleType[]> sortedUnitRolesByObjectType;
+        private readonly Dictionary<MetaObject, MetaRole[]> sortedUnitRolesByObjectType;
         private readonly ICache cache;
 
         protected Database(Configuration configuration)
@@ -56,7 +56,7 @@ namespace Allors.Adapters.Database.Sql
             this.commandTimeout = configuration.CommandTimeout;
             this.isolationLevel = configuration.IsolationLevel;
 
-            this.sortedUnitRolesByObjectType = new Dictionary<ObjectType, RoleType[]>();
+            this.sortedUnitRolesByObjectType = new Dictionary<MetaObject, MetaRole[]>();
             
             this.cache = configuration.CacheFactory.CreateCache(this);
         }
@@ -322,18 +322,18 @@ namespace Allors.Adapters.Database.Sql
             return this.workspaceFactory.CreateWorkspace(this);
         }
 
-        public Type GetDomainType(ObjectType objectType)
+        public Type GetDomainType(MetaObject objectType)
         {
             return this.ObjectFactory.GetTypeForObjectType(objectType);
         }
 
-        public RoleType[] GetSortedUnitRolesByObjectType(ObjectType objectType)
+        public MetaRole[] GetSortedUnitRolesByObjectType(MetaObject objectType)
         {
-            RoleType[] sortedUnitRoles;
+            MetaRole[] sortedUnitRoles;
             if (!this.sortedUnitRolesByObjectType.TryGetValue(objectType, out sortedUnitRoles))
             {
-                var sortedUnitRoleList = new List<RoleType>(objectType.UnitRoleTypes);
-                sortedUnitRoleList.Sort(RoleType.IdComparer);
+                var sortedUnitRoleList = new List<MetaRole>(objectType.UnitRoleTypes);
+                sortedUnitRoleList.Sort(MetaRole.IdComparer);
                 sortedUnitRoles = sortedUnitRoleList.ToArray();
                 this.sortedUnitRolesByObjectType[objectType] = sortedUnitRoles;
             }

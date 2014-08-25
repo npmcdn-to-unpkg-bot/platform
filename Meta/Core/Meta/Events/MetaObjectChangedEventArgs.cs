@@ -31,7 +31,7 @@ namespace Allors.Meta.Events
         /// Initializes a new instance of the <see cref="MetaObjectChangedEventArgs"/> class.
         /// </summary>
         /// <param name="metaObject">The changed meta object.</param>
-        public MetaObjectChangedEventArgs(MetaObject metaObject)
+        public MetaObjectChangedEventArgs(MetaBase metaObject)
         {
             this.MetaObject = metaObject;
         }
@@ -39,6 +39,6 @@ namespace Allors.Meta.Events
         /// <summary>
         /// Gets the meta object.
         /// </summary>
-        public MetaObject MetaObject { get; private set; }
+        public MetaBase MetaObject { get; private set; }
     }
 }

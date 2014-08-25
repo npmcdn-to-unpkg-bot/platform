@@ -28,10 +28,10 @@ namespace Allors.Adapters.Workspace.Memory
 
     internal sealed class RoleInstanceof : Predicate
     {
-        private readonly RoleType roleType;
-        private readonly ObjectType objectType;
+        private readonly MetaRole roleType;
+        private readonly MetaObject objectType;
 
-        internal RoleInstanceof(Extent extent, RoleType roleType, ObjectType objectType)
+        internal RoleInstanceof(Extent extent, MetaRole roleType, MetaObject objectType)
         {
             extent.CheckForRoleType(roleType);
             CompositePredicateAssertions.ValidateRoleInstanceOf(roleType, objectType);
@@ -50,7 +50,7 @@ namespace Allors.Adapters.Workspace.Memory
             }
 
             // TODO: Optimize
-            ObjectType roleObjectType = role.Strategy.ObjectType;
+            MetaObject roleObjectType = role.Strategy.ObjectType;
             return (roleObjectType.Equals(this.objectType) || Array.IndexOf(roleObjectType.Supertypes, this.objectType) >= 0)
                        ? ThreeValuedLogic.True
                        : ThreeValuedLogic.False;

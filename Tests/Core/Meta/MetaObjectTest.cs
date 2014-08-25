@@ -46,7 +46,7 @@ namespace Allors.Meta.Static
         [Test]
         public void FindByIdAfterExtend()
         {
-            var superDomainDomain = Domain.Create();
+            var superDomainDomain = MetaDomain.Create();
             superDomainDomain.Name = "SuperDomain";
 
             var objectTypeId = new Guid("6A10F333-4AD6-4812-AB84-46DB10858DCA");

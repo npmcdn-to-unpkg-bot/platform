@@ -25,9 +25,9 @@ namespace Allors.Adapters.Database.Sql
     public sealed class RoleLessThanValue : Predicate
     {
         private readonly object obj;
-        private readonly RoleType roleType;
+        private readonly MetaRole roleType;
 
-        public RoleLessThanValue(ExtentFiltered extent, RoleType roleType, object obj)
+        public RoleLessThanValue(ExtentFiltered extent, MetaRole roleType, object obj)
         {
             extent.CheckRole(roleType);
             CompositePredicateAssertions.ValidateRoleLessThan(roleType, obj);

@@ -24,7 +24,7 @@ namespace Allors.Adapters.Database.Sql.Commands
 
     public interface IAddToCompositeRoles
     {
-        void Execute(Reference association, RoleType roleType, Reference role);
+        void Execute(Reference association, MetaRole roleType, Reference role);
     }
 
     public interface IAddToCompositeRolesFactory

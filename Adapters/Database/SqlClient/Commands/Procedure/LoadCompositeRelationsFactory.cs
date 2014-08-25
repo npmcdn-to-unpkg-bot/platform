@@ -36,7 +36,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
             this.ManagementSession = session;
         }
 
-        public ILoadCompositeRelations Create(RoleType roleType)
+        public ILoadCompositeRelations Create(MetaRole roleType)
         {
             var associationType = roleType.AssociationType;
 

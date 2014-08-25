@@ -171,7 +171,7 @@ namespace Allors.Adapters.Database.Sql
             }
         }
 
-        public void Flush(IFlush flush, Roles roles, RoleType roleType)
+        public void Flush(IFlush flush, Roles roles, MetaRole roleType)
         {
             if (this.Count == 0)
             {

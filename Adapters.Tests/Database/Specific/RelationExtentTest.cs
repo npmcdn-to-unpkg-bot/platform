@@ -26,8 +26,6 @@ namespace Allors.Adapters.Special
 
     using NUnit.Framework;
 
-    using Domain = Allors.Meta.Domain;
-
     public abstract class RelationExtentTest
     {
         #region population

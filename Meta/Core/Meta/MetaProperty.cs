@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="IObjectTypeExtension.cs" company="Allors bvba">
+// <copyright file="MetaProperty.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -16,20 +16,23 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the Domain type.</summary>
 //-------------------------------------------------------------------------------------------------
 
 namespace Allors.Meta
 {
-    /// <summary>
-    /// An ObjectTypeExtension allows you to extend an object type programmatically.
-    /// ObjectTypeExtensions are available in the second phase of a two phase generation.
-    /// </summary>
-    public interface IObjectTypeExtension
+    public partial class MetaProperty
     {
         /// <summary>
-        /// Gets the object type.
+        /// Gets the operand name.
         /// </summary>
-        ObjectType ObjectType { get; }
+        public abstract string Name { get; }
+
+        /// <summary>
+        /// Get the object type.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="MetaObject"/>.
+        /// </returns>
+        public abstract MetaObject GetObjectType();
     }
 }

@@ -50,18 +50,18 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
         private class CreateObjects : DatabaseCommand, ICreateObjects
         {
             private readonly CreateObjectsFactory factory;
-            private readonly Dictionary<ObjectType, NpgsqlCommand> commandByObjectType;
+            private readonly Dictionary<MetaObject, NpgsqlCommand> commandByObjectType;
 
             public CreateObjects(CreateObjectsFactory factory, Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
-                this.commandByObjectType = new Dictionary<ObjectType, NpgsqlCommand>();
+                this.commandByObjectType = new Dictionary<MetaObject, NpgsqlCommand>();
             }
 
-            public IList<Reference> Execute(ObjectType objectType, int count)
+            public IList<Reference> Execute(MetaObject objectType, int count)
             {
-                ObjectType exclusiveRootClass = objectType.ExclusiveRootClass;
+                MetaObject exclusiveRootClass = objectType.ExclusiveRootClass;
                 Sql.Schema schema = this.Database.Schema;
 
                 NpgsqlCommand command;

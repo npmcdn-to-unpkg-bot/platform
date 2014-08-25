@@ -26,11 +26,11 @@ namespace Allors.Adapters.Database.Sql.Commands
 
     public interface ILoadObjects
     {
-        void Execute(ObjectType objectType, IEnumerable<ObjectId> objectids);
+        void Execute(MetaObject objectType, IEnumerable<ObjectId> objectids);
     }
 
     public interface ILoadObjectsFactory
     {
-        ILoadObjects Create(ObjectType objectType);
+        ILoadObjects Create(MetaObject objectType);
     }
 }

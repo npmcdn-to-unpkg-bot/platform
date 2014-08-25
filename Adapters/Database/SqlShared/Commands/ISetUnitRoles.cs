@@ -26,7 +26,7 @@ namespace Allors.Adapters.Database.Sql.Commands
 
     public interface ISetUnitRoles
     {
-        void Execute(Roles roles, IList<RoleType> sortedRoleTypes);
+        void Execute(Roles roles, IList<MetaRole> sortedRoleTypes);
     }
 
     public interface ISetUnitRolesFactory

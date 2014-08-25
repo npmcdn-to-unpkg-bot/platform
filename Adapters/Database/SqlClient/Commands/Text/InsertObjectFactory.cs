@@ -34,12 +34,12 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
     internal class InsertObjectFactory : IInsertObjectFactory
     {
         internal readonly Database Database;
-        private readonly Dictionary<ObjectType, string> sqlByMetaType;
+        private readonly Dictionary<MetaObject, string> sqlByMetaType;
 
         public InsertObjectFactory(Database database)
         {
             this.Database = database;
-            this.sqlByMetaType = new Dictionary<ObjectType, string>();
+            this.sqlByMetaType = new Dictionary<MetaObject, string>();
         }
 
         public IInsertObject Create(Sql.DatabaseSession session)
@@ -47,7 +47,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
             return new InsertObject(this, session);
         }
 
-        internal string GetSql(ObjectType objectType)
+        internal string GetSql(MetaObject objectType)
         {
             if (!this.sqlByMetaType.ContainsKey(objectType))
             {
@@ -85,16 +85,16 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
         private class InsertObject : DatabaseCommand, IInsertObject
         {
             private readonly InsertObjectFactory factory;
-            private readonly Dictionary<ObjectType, SqlCommand> commandByObjectType;
+            private readonly Dictionary<MetaObject, SqlCommand> commandByObjectType;
 
             public InsertObject(InsertObjectFactory factory, Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
-                this.commandByObjectType = new Dictionary<ObjectType, SqlCommand>();
+                this.commandByObjectType = new Dictionary<MetaObject, SqlCommand>();
             }
 
-            public Reference Execute(ObjectType objectType, ObjectId objectId)
+            public Reference Execute(MetaObject objectType, ObjectId objectId)
             {
                 SqlCommand command;
                 if (!this.commandByObjectType.TryGetValue(objectType, out command))

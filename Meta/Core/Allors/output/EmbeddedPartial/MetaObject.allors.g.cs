@@ -5,13 +5,13 @@ namespace Allors.Meta
 {
     using Allors.Meta.AllorsGenerated;
 
-    public abstract partial class MetaObject : global::Allors.Meta.AllorsGenerated.AllorsClassMetaObject, global::Allors.Meta.AllorsGenerated.AllorsInterfaceMetaObject
+    public abstract partial class MetaBase : global::Allors.Meta.AllorsGenerated.AllorsClassMetaObject, global::Allors.Meta.AllorsGenerated.AllorsInterfaceMetaObject
 	{		
-		public MetaObject(AllorsEmbeddedSession session, System.Int32 id) : base(session, id) {}
+		public MetaBase(AllorsEmbeddedSession session, System.Int32 id) : base(session, id) {}
 
-		public static MetaObject Instantiate (global::Allors.Meta.AllorsGenerated.AllorsEmbeddedSession session, System.Int32 id)
+		public static MetaBase Instantiate (global::Allors.Meta.AllorsGenerated.AllorsEmbeddedSession session, System.Int32 id)
 		{
-			return (MetaObject) session.Instantiate(id);		
+			return (MetaBase) session.Instantiate(id);		
 		}
 	}
 }

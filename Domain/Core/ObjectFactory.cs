@@ -35,7 +35,7 @@ namespace Allors
         /// <summary>
         /// The domain.
         /// </summary>
-        private readonly Domain domain;
+        private readonly MetaDomain domain;
 
         /// <summary>
         ///  The assembly.
@@ -48,24 +48,24 @@ namespace Allors
         private readonly string ns;
 
         /// <summary>
-        /// <see cref="Type"/> by <see cref="ObjectType"/> cache.
+        /// <see cref="Type"/> by <see cref="MetaObject"/> cache.
         /// </summary>
-        private readonly Dictionary<ObjectType, Type> typeByObjectType;
+        private readonly Dictionary<MetaObject, Type> typeByObjectType;
 
         /// <summary>
-        /// <see cref="Type"/> by <see cref="ObjectType"/> id cache.
+        /// <see cref="Type"/> by <see cref="MetaObject"/> id cache.
         /// </summary>
-        private readonly Dictionary<Type, ObjectType> objectTypeByType;
+        private readonly Dictionary<Type, MetaObject> objectTypeByType;
 
         /// <summary>
-        /// <see cref="ObjectType"/> by <see cref="ObjectType"/> id cache.
+        /// <see cref="MetaObject"/> by <see cref="MetaObject"/> id cache.
         /// </summary>
-        private readonly Dictionary<Guid, ObjectType> objectTypeByObjectTypeId;
+        private readonly Dictionary<Guid, MetaObject> objectTypeByObjectTypeId;
 
         /// <summary>
-        /// <see cref="ConstructorInfo"/> by <see cref="ObjectType"/> cache.
+        /// <see cref="ConstructorInfo"/> by <see cref="MetaObject"/> cache.
         /// </summary>
-        private readonly Dictionary<ObjectType, ConstructorInfo> contructorInfoByObjectType;
+        private readonly Dictionary<MetaObject, ConstructorInfo> contructorInfoByObjectType;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ObjectFactory"/> class.
@@ -79,16 +79,16 @@ namespace Allors
         /// <param name="namespace">
         /// The namespace
         /// </param>
-        public ObjectFactory(Domain domain, Assembly assembly, string @namespace)
+        public ObjectFactory(MetaDomain domain, Assembly assembly, string @namespace)
         {
             this.domain = domain;
             this.assembly = assembly;
             this.ns = @namespace;
 
-            this.typeByObjectType = new Dictionary<ObjectType, Type>();
-            this.objectTypeByType = new Dictionary<Type, ObjectType>();
-            this.objectTypeByObjectTypeId = new Dictionary<Guid, ObjectType>();
-            this.contructorInfoByObjectType = new Dictionary<ObjectType, ConstructorInfo>();
+            this.typeByObjectType = new Dictionary<MetaObject, Type>();
+            this.objectTypeByType = new Dictionary<Type, MetaObject>();
+            this.objectTypeByObjectTypeId = new Dictionary<Guid, MetaObject>();
+            this.contructorInfoByObjectType = new Dictionary<MetaObject, ConstructorInfo>();
 
             var types = assembly.GetTypes().Where(type => 
                 type.Namespace != null && 
@@ -144,7 +144,7 @@ namespace Allors
         /// <summary>
         /// Gets the domain.
         /// </summary>
-        public Domain Domain 
+        public MetaDomain Domain 
         {
             get
             {
@@ -167,32 +167,32 @@ namespace Allors
         }
 
         /// <summary>
-        /// Gets the .Net <see cref="Type"/> given the Allors <see cref="ObjectType"/>.
+        /// Gets the .Net <see cref="Type"/> given the Allors <see cref="MetaObject"/>.
         /// </summary>
         /// <param name="type">The .Net <see cref="Type"/>.</param>
-        /// <returns>The Allors <see cref="ObjectType"/>.</returns>
-        public ObjectType GetObjectTypeForType(Type type)
+        /// <returns>The Allors <see cref="MetaObject"/>.</returns>
+        public MetaObject GetObjectTypeForType(Type type)
         {
-            ObjectType objectType;
+            MetaObject objectType;
             return !this.objectTypeByType.TryGetValue(type, out objectType) ? null : objectType;
         }
 
         /// <summary>
-        /// Gets the .Net <see cref="Type"/> given the Allors <see cref="ObjectType"/>.
+        /// Gets the .Net <see cref="Type"/> given the Allors <see cref="MetaObject"/>.
         /// </summary>
-        /// <param name="objectType">The Allors <see cref="ObjectType"/>.</param>
+        /// <param name="objectType">The Allors <see cref="MetaObject"/>.</param>
         /// <returns>The .Net <see cref="Type"/>.</returns>
-        public Type GetTypeForObjectType(ObjectType objectType)
+        public Type GetTypeForObjectType(MetaObject objectType)
         {
             return this.typeByObjectType[objectType];
         }
 
         /// <summary>
-        /// Gets the .Net <see cref="Type"/> given the Allors <see cref="ObjectType"/>.
+        /// Gets the .Net <see cref="Type"/> given the Allors <see cref="MetaObject"/>.
         /// </summary>
-        /// <param name="objectTypeId">The Allors <see cref="ObjectType"/> id.</param>
+        /// <param name="objectTypeId">The Allors <see cref="MetaObject"/> id.</param>
         /// <returns>The .Net <see cref="Type"/>.</returns>
-        public ObjectType GetObjectTypeForType(Guid objectTypeId)
+        public MetaObject GetObjectTypeForType(Guid objectTypeId)
         {
             return this.objectTypeByObjectTypeId[objectTypeId];
         }

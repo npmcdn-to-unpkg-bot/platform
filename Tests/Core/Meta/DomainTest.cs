@@ -29,7 +29,7 @@ namespace Allors.Meta.Static
     [TestFixture]
     public class DomainTest : AbstractTest
     {
-        private Inheritance sharedSuperDomainInterfaceInheritance;
+        private MetaInheritance sharedSuperDomainInterfaceInheritance;
 
         [Test]
         public void Composites()
@@ -55,7 +55,7 @@ namespace Allors.Meta.Static
             domainDefinedTypes.Remove(this.Population.C1);
             try
             {
-                this.Domain.DeclaredObjectTypes = (ObjectType[])domainDefinedTypes.ToArray(typeof(ObjectType));
+                this.Domain.DeclaredObjectTypes = (MetaObject[])domainDefinedTypes.ToArray(typeof(MetaObject));
                 Assert.Fail();
             }
             catch
@@ -90,7 +90,7 @@ namespace Allors.Meta.Static
         [Test]
         public void Create()
         {
-            var newDomain = Domain.Create();
+            var newDomain = MetaDomain.Create();
             newDomain.Name = "MyDomain";
 
             var validationReport = newDomain.Validate();
@@ -138,7 +138,7 @@ namespace Allors.Meta.Static
             Assert.AreEqual(this.Population.SuperDomain, this.Domain.Domain.Find(this.Population.SuperDomain.Id));
 
             var inheritanceId = this.Population.C1.FindInheritanceWhereDirectSubtype(this.Population.A1).Id;
-            var inheritance = (Inheritance)this.Domain.Domain.Find(inheritanceId);
+            var inheritance = (MetaInheritance)this.Domain.Domain.Find(inheritanceId);
             Assert.IsNotNull(inheritance);
             Assert.AreEqual(this.Population.C1, inheritance.Subtype);
             Assert.AreEqual(this.Population.A1, inheritance.Supertype);
@@ -152,7 +152,7 @@ namespace Allors.Meta.Static
             var xml = this.Domain.Xml;
 
             var reader = new XmlTextReader(new StringReader(xml));
-            var copy = Domain.Load(reader);
+            var copy = MetaDomain.Load(reader);
 
             Assert.AreEqual(xml, copy.Xml);
         }
@@ -166,7 +166,7 @@ namespace Allors.Meta.Static
             domainDefinedTypes.Remove(this.Population.C1);
             try
             {
-                this.Domain.DeclaredObjectTypes = (ObjectType[])domainDefinedTypes.ToArray(typeof(ObjectType));
+                this.Domain.DeclaredObjectTypes = (MetaObject[])domainDefinedTypes.ToArray(typeof(MetaObject));
                 Assert.Fail();
             }
             catch
@@ -222,7 +222,7 @@ namespace Allors.Meta.Static
         [Test]
         public void Validate()
         {
-            var domain = Domain.Create();
+            var domain = MetaDomain.Create();
             domain.Name = "MySuperDomain";
 
             var validationReport = domain.Validate();
@@ -356,12 +356,12 @@ namespace Allors.Meta.Static
 
             var xml = this.Domain.Xml;
             var reader = new XmlTextReader(new StringReader(xml));
-            var copy = Domain.Load(reader);
+            var copy = MetaDomain.Load(reader);
 
-            var copyC1 = (ObjectType)copy.Domain.Find(c1.Id);
-            var copyC2 = (ObjectType)copy.Domain.Find(c2.Id);
+            var copyC1 = (MetaObject)copy.Domain.Find(c1.Id);
+            var copyC2 = (MetaObject)copy.Domain.Find(c2.Id);
 
-            var copyRelationType = (RelationType)copy.Domain.Find(relationType.Id);
+            var copyRelationType = (MetaRelation)copy.Domain.Find(relationType.Id);
 
             Assert.AreEqual(c1.Name, copyC1.Name);
             Assert.AreEqual(c2.Name, copyC2.Name);
@@ -418,8 +418,8 @@ namespace Allors.Meta.Static
             Assert.AreEqual(2, superDomain.Inheritances.Length);
 
             var reader = new XmlTextReader(new StringReader(domain.Xml));
-            var copy = Domain.Load(reader);
-            var copySuperDomain = (Domain)copy.Domain.Find(superDomain.Id);
+            var copy = MetaDomain.Load(reader);
+            var copySuperDomain = (MetaDomain)copy.Domain.Find(superDomain.Id);
 
             Assert.AreEqual(4, copy.Inheritances.Length);
             Assert.AreEqual(2, copySuperDomain.Inheritances.Length);
@@ -477,8 +477,8 @@ namespace Allors.Meta.Static
             Assert.AreEqual(2, superDomain.CompositeObjectTypes.Length);
 
             var reader = new XmlTextReader(new StringReader(domain.Xml));
-            var copy = Domain.Load(reader);
-            var copySuperDomain = (Domain)copy.Domain.Find(superDomain.Id);
+            var copy = MetaDomain.Load(reader);
+            var copySuperDomain = (MetaDomain)copy.Domain.Find(superDomain.Id);
 
             Assert.AreEqual(13, copy.ObjectTypes.Length);
             Assert.AreEqual(9, copy.UnitObjectTypes.Length);
@@ -520,8 +520,8 @@ namespace Allors.Meta.Static
             Assert.AreEqual(1, superDomain.RelationTypes.Length);
 
             var reader = new XmlTextReader(new StringReader(domain.Xml));
-            var copy = Domain.Load(reader);
-            var copySuperDomain = (Domain)copy.Domain.Find(superDomain.Id);
+            var copy = MetaDomain.Load(reader);
+            var copySuperDomain = (MetaDomain)copy.Domain.Find(superDomain.Id);
 
             Assert.AreEqual(2, copy.RelationTypes.Length);
             Assert.AreEqual(1, copySuperDomain.RelationTypes.Length);
@@ -556,8 +556,8 @@ namespace Allors.Meta.Static
             Assert.AreEqual(2, superDomain.MethodTypes.Length);
 
             var reader = new XmlTextReader(new StringReader(domain.Xml));
-            var copy = Domain.Load(reader);
-            var copySuperDomain = (Domain)copy.Domain.Find(superDomain.Id);
+            var copy = MetaDomain.Load(reader);
+            var copySuperDomain = (MetaDomain)copy.Domain.Find(superDomain.Id);
 
             Assert.AreEqual(4, copy.MethodTypes.Length);
             Assert.AreEqual(2, copySuperDomain.MethodTypes.Length);
@@ -566,7 +566,7 @@ namespace Allors.Meta.Static
         [Test]
         public void DerivedSuperDomains()
         {
-            var domain = Domain.Create();
+            var domain = MetaDomain.Create();
             domain.Name = "Domain";
 
             Assert.AreEqual(1, domain.SuperDomains.Length);
@@ -603,9 +603,9 @@ namespace Allors.Meta.Static
             Assert.AreEqual(domain.UnitDomain, grandParent.UnitDomain);
 
             var reader = new XmlTextReader(new StringReader(domain.Xml));
-            var copy = Domain.Load(reader);
-            var copyParent = (Domain)copy.Domain.Find(parent.Id);
-            var copyGrandparent = (Domain)copy.Domain.Find(grandParent.Id);
+            var copy = MetaDomain.Load(reader);
+            var copyParent = (MetaDomain)copy.Domain.Find(parent.Id);
+            var copyGrandparent = (MetaDomain)copy.Domain.Find(grandParent.Id);
 
             Assert.AreEqual(3, copy.SuperDomains.Length);
             Assert.Contains(copy.UnitDomain, copy.SuperDomains);
@@ -616,7 +616,7 @@ namespace Allors.Meta.Static
         [Test]
         public void CircularSuperDomains()
         {
-            var domain = Domain.Create();
+            var domain = MetaDomain.Create();
             domain.Name = "Domain";
 
             Assert.AreEqual(1, domain.SuperDomains.Length);
@@ -657,7 +657,7 @@ namespace Allors.Meta.Static
             Assert.AreEqual(0, this.Population.Relations.Length);
             Assert.AreEqual(0, this.Population.Roles.Length);
 
-            var newSuperDomain = Domain.Create();
+            var newSuperDomain = MetaDomain.Create();
             newSuperDomain.Name = "SuperDomain";
 
             this.Domain.Inherit(newSuperDomain);
@@ -675,7 +675,7 @@ namespace Allors.Meta.Static
             Assert.AreEqual(0, this.Population.Relations.Length);
             Assert.AreEqual(0, this.Population.Roles.Length);
 
-            var importDomain = Domain.Create();
+            var importDomain = MetaDomain.Create();
             importDomain.Name = "Import";
 
             var importAssociationType = importDomain.AddDeclaredObjectType(Guid.NewGuid());
@@ -701,12 +701,12 @@ namespace Allors.Meta.Static
 
             var importStringRelationType = importDomain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             importStringRelationType.AssociationType.ObjectType = importAssociationType;
-            importStringRelationType.RoleType.ObjectType = (ObjectType)importDomain.Domain.Find(UnitTypeIds.StringId);
+            importStringRelationType.RoleType.ObjectType = (MetaObject)importDomain.Domain.Find(MetaUnitIds.StringId);
             importStringRelationType.RoleType.Size = 100;
 
             var importDecimalRelationType = importDomain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             importDecimalRelationType.AssociationType.ObjectType = importAssociationType;
-            importDecimalRelationType.RoleType.ObjectType = (ObjectType)importDomain.Domain.Find(UnitTypeIds.DecimalId);
+            importDecimalRelationType.RoleType.ObjectType = (MetaObject)importDomain.Domain.Find(MetaUnitIds.DecimalId);
             importDecimalRelationType.RoleType.Precision = 30;
             importDecimalRelationType.RoleType.Scale = 4;
 
@@ -735,7 +735,7 @@ namespace Allors.Meta.Static
             Assert.AreEqual(13, this.Domain.ObjectTypes.Length);
             Assert.AreEqual(3, this.Domain.RelationTypes.Length);
 
-            var importedSuperDomain = (Domain)this.Domain.Domain.Find(importDomain.Id);
+            var importedSuperDomain = (MetaDomain)this.Domain.Domain.Find(importDomain.Id);
 
             Assert.IsNotNull(this.Domain.Domain.Find(importAssociationType.Id));
             Assert.IsNotNull(this.Domain.Domain.Find(importRoleType.Id));
@@ -753,16 +753,16 @@ namespace Allors.Meta.Static
             Assert.IsNotNull(importedSuperDomain.Domain.Find(importDecimalRelationType.Id));
             Assert.IsNotNull(importedSuperDomain.Domain.Find(importCompositeRelationType.Id));
 
-            var importedAssociationType = (ObjectType)this.Domain.Domain.Find(importAssociationType.Id);
-            var importedRoleType = (ObjectType)this.Domain.Domain.Find(importRoleType.Id);
-            var importedAbstractType = (ObjectType)this.Domain.Domain.Find(importAbstractType.Id);
-            var importedInterfaceType = (ObjectType)this.Domain.Domain.Find(importInterfaceType.Id);
-            var importedStringRelationType = (RelationType)this.Domain.Domain.Find(importStringRelationType.Id);
-            var importedDecimalRelationType = (RelationType)this.Domain.Domain.Find(importDecimalRelationType.Id);
-            var importedCompositeRelationType = (RelationType)this.Domain.Domain.Find(importCompositeRelationType.Id);
+            var importedAssociationType = (MetaObject)this.Domain.Domain.Find(importAssociationType.Id);
+            var importedRoleType = (MetaObject)this.Domain.Domain.Find(importRoleType.Id);
+            var importedAbstractType = (MetaObject)this.Domain.Domain.Find(importAbstractType.Id);
+            var importedInterfaceType = (MetaObject)this.Domain.Domain.Find(importInterfaceType.Id);
+            var importedStringRelationType = (MetaRelation)this.Domain.Domain.Find(importStringRelationType.Id);
+            var importedDecimalRelationType = (MetaRelation)this.Domain.Domain.Find(importDecimalRelationType.Id);
+            var importedCompositeRelationType = (MetaRelation)this.Domain.Domain.Find(importCompositeRelationType.Id);
 
-            var importedAbstractInheritance = (Inheritance)this.Domain.Domain.Find(importAbstractInheritance.Id);
-            var importedInterfaceInheritance = (Inheritance)this.Domain.Domain.Find(partInterfaceInheritance.Id);
+            var importedAbstractInheritance = (MetaInheritance)this.Domain.Domain.Find(importAbstractInheritance.Id);
+            var importedInterfaceInheritance = (MetaInheritance)this.Domain.Domain.Find(partInterfaceInheritance.Id);
 
             Assert.IsNotNull(importedAbstractInheritance);
             Assert.AreEqual(importedAssociationType, importedAbstractInheritance.Subtype);
@@ -809,7 +809,7 @@ namespace Allors.Meta.Static
             Assert.AreEqual(0, this.Population.Roles.Length);
 
             // Shared Super Domain
-            var sharedSuperDomain = Domain.Create();
+            var sharedSuperDomain = MetaDomain.Create();
             sharedSuperDomain.Name = "SharedSuperDomain";
 
             var sharedSuperDomainAssociationType = sharedSuperDomain.AddDeclaredObjectType(Guid.NewGuid());
@@ -840,7 +840,7 @@ namespace Allors.Meta.Static
 
             var sharedSuperDomainUnitRelationType = sharedSuperDomain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             sharedSuperDomainUnitRelationType.AssociationType.ObjectType = sharedSuperDomainAssociationType;
-            sharedSuperDomainUnitRelationType.RoleType.ObjectType = (ObjectType)sharedSuperDomain.Domain.Find(UnitTypeIds.StringId);
+            sharedSuperDomainUnitRelationType.RoleType.ObjectType = (MetaObject)sharedSuperDomain.Domain.Find(MetaUnitIds.StringId);
             sharedSuperDomainUnitRelationType.RoleType.Size = 100;
 
             var sharedSuperDomainCompositeRelationType = sharedSuperDomain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
@@ -848,7 +848,7 @@ namespace Allors.Meta.Static
             sharedSuperDomainCompositeRelationType.RoleType.ObjectType = sharedSuperDomainRoleType;
 
             // Super Domain
-            var superDomain = Domain.Create();
+            var superDomain = MetaDomain.Create();
             superDomain.Name = "superDomain";
 
             var superDomainAssociationType = superDomain.AddDeclaredObjectType(Guid.NewGuid());
@@ -879,7 +879,7 @@ namespace Allors.Meta.Static
 
             var superDomainUnitRelationType = superDomain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             superDomainUnitRelationType.AssociationType.ObjectType = superDomainAssociationType;
-            superDomainUnitRelationType.RoleType.ObjectType = (ObjectType)superDomain.Domain.Find(UnitTypeIds.StringId);
+            superDomainUnitRelationType.RoleType.ObjectType = (MetaObject)superDomain.Domain.Find(MetaUnitIds.StringId);
             superDomainUnitRelationType.RoleType.Size = 200;
 
             var superDomainCompositeRelationType = superDomain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
@@ -912,7 +912,7 @@ namespace Allors.Meta.Static
             Assert.AreEqual(17, this.Domain.ObjectTypes.Length);
             Assert.AreEqual(4, this.Domain.RelationTypes.Length);
 
-            var sharedImportedSuperDomain = (Domain)this.Domain.Domain.Find(sharedSuperDomain.Id);
+            var sharedImportedSuperDomain = (MetaDomain)this.Domain.Domain.Find(sharedSuperDomain.Id);
 
             // Shared SuperDomain
             Assert.IsNotNull(this.Domain.Domain.Find(sharedSuperDomainAssociationType.Id));
@@ -929,15 +929,15 @@ namespace Allors.Meta.Static
             Assert.IsNotNull(sharedImportedSuperDomain.Domain.Find(sharedSuperDomainUnitRelationType.Id));
             Assert.IsNotNull(sharedImportedSuperDomain.Domain.Find(sharedSuperDomainCompositeRelationType.Id));
 
-            var sharedImportedAssociationType = (ObjectType)this.Domain.Domain.Find(sharedSuperDomainAssociationType.Id);
-            var sharedImportedRoleType = (ObjectType)this.Domain.Domain.Find(sharedSuperDomainRoleType.Id);
-            var sharedImportedAbstractType = (ObjectType)this.Domain.Domain.Find(sharedSuperDomainAbstractType.Id);
-            var sharedImportedInterfaceType = (ObjectType)this.Domain.Domain.Find(sharedSuperDomainInterfaceType.Id);
-            var sharedImportedUnitRelationType = (RelationType)this.Domain.Domain.Find(sharedSuperDomainUnitRelationType.Id);
-            var sharedImportedCompositeRelationType = (RelationType)this.Domain.Domain.Find(sharedSuperDomainCompositeRelationType.Id);
+            var sharedImportedAssociationType = (MetaObject)this.Domain.Domain.Find(sharedSuperDomainAssociationType.Id);
+            var sharedImportedRoleType = (MetaObject)this.Domain.Domain.Find(sharedSuperDomainRoleType.Id);
+            var sharedImportedAbstractType = (MetaObject)this.Domain.Domain.Find(sharedSuperDomainAbstractType.Id);
+            var sharedImportedInterfaceType = (MetaObject)this.Domain.Domain.Find(sharedSuperDomainInterfaceType.Id);
+            var sharedImportedUnitRelationType = (MetaRelation)this.Domain.Domain.Find(sharedSuperDomainUnitRelationType.Id);
+            var sharedImportedCompositeRelationType = (MetaRelation)this.Domain.Domain.Find(sharedSuperDomainCompositeRelationType.Id);
 
-            var sharedImportedAbstractInheritance = (Inheritance)this.Domain.Domain.Find(sharedSuperDomainAbstractInheritance.Id);
-            var sharedImportedInterfaceInheritance = (Inheritance)this.Domain.Domain.Find(this.sharedSuperDomainInterfaceInheritance.Id);
+            var sharedImportedAbstractInheritance = (MetaInheritance)this.Domain.Domain.Find(sharedSuperDomainAbstractInheritance.Id);
+            var sharedImportedInterfaceInheritance = (MetaInheritance)this.Domain.Domain.Find(this.sharedSuperDomainInterfaceInheritance.Id);
 
             Assert.IsNotNull(sharedImportedAbstractInheritance);
             Assert.AreEqual(sharedImportedAssociationType, sharedImportedAbstractInheritance.Subtype);
@@ -969,7 +969,7 @@ namespace Allors.Meta.Static
             Assert.AreEqual(sharedSuperDomainCompositeRelationType.RoleType.ObjectType.Id, sharedImportedCompositeRelationType.RoleType.ObjectType.Id);
 
             // Super Domain
-            var importedSuperDomain = (Domain)this.Domain.Domain.Find(superDomain.Id);
+            var importedSuperDomain = (MetaDomain)this.Domain.Domain.Find(superDomain.Id);
 
             Assert.IsNotNull(this.Domain.Domain.Find(superDomainAssociationType.Id));
             Assert.IsNotNull(this.Domain.Domain.Find(superDomainRoleType.Id));
@@ -985,15 +985,15 @@ namespace Allors.Meta.Static
             Assert.IsNotNull(importedSuperDomain.Domain.Find(superDomainUnitRelationType.Id));
             Assert.IsNotNull(importedSuperDomain.Domain.Find(superDomainCompositeRelationType.Id));
 
-            var importedAssociationType = (ObjectType)this.Domain.Domain.Find(superDomainAssociationType.Id);
-            var importedRoleType = (ObjectType)this.Domain.Domain.Find(superDomainRoleType.Id);
-            var importedAbstractType = (ObjectType)this.Domain.Domain.Find(superDomainAbstractType.Id);
-            var importedInterfaceType = (ObjectType)this.Domain.Domain.Find(superDomainInterfaceType.Id);
-            var importedUnitRelationType = (RelationType)this.Domain.Domain.Find(superDomainUnitRelationType.Id);
-            var importedCompositeRelationType = (RelationType)this.Domain.Domain.Find(superDomainCompositeRelationType.Id);
+            var importedAssociationType = (MetaObject)this.Domain.Domain.Find(superDomainAssociationType.Id);
+            var importedRoleType = (MetaObject)this.Domain.Domain.Find(superDomainRoleType.Id);
+            var importedAbstractType = (MetaObject)this.Domain.Domain.Find(superDomainAbstractType.Id);
+            var importedInterfaceType = (MetaObject)this.Domain.Domain.Find(superDomainInterfaceType.Id);
+            var importedUnitRelationType = (MetaRelation)this.Domain.Domain.Find(superDomainUnitRelationType.Id);
+            var importedCompositeRelationType = (MetaRelation)this.Domain.Domain.Find(superDomainCompositeRelationType.Id);
 
-            var importedAbstractInheritance = (Inheritance)this.Domain.Domain.Find(superDomainAbstractInheritance.Id);
-            var importedInterfaceInheritance = (Inheritance)this.Domain.Domain.Find(superDomainInterfaceInheritance.Id);
+            var importedAbstractInheritance = (MetaInheritance)this.Domain.Domain.Find(superDomainAbstractInheritance.Id);
+            var importedInterfaceInheritance = (MetaInheritance)this.Domain.Domain.Find(superDomainInterfaceInheritance.Id);
 
             Assert.IsNotNull(importedAbstractInheritance);
             Assert.AreEqual(importedAssociationType, importedAbstractInheritance.Subtype);

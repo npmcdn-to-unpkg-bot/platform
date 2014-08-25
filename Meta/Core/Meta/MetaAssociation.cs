@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="AssociationType.cs" company="Allors bvba">
+// <copyright file="MetaAssociation.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -26,14 +26,14 @@ namespace Allors.Meta
     using AllorsGenerated;
 
     /// <summary>
-    /// An <see cref="AssociationType"/> defines the association side of a relation.
+    /// An <see cref="MetaAssociation"/> defines the association side of a relation.
     /// This is also called the 'active', 'controlling' or 'owning' side.
     /// AssociationTypes can only have composite <see cref="ObjectType"/>s.
     /// </summary>
-    public sealed partial class AssociationType : IComparable
+    public sealed partial class MetaAssociation : IComparable
     {
         /// <summary>
-        /// Used to form names to navigate from <see cref="RoleType"/> To <see cref="AssociationType"/>;
+        /// Used to form names to navigate from <see cref="RoleType"/> To <see cref="MetaAssociation"/>;
         /// </summary>
         private const string Where = "Where";
 
@@ -221,7 +221,7 @@ namespace Allors.Meta
         /// Gets or sets ObjectType.
         /// </summary>
         /// <value>The ObjectType.</value>
-        public override ObjectType ObjectType
+        public override MetaObject ObjectType
         {
             get
             {
@@ -261,7 +261,7 @@ namespace Allors.Meta
         /// Gets the relation type.
         /// </summary>
         /// <value>The type of the relation.</value>
-        public RelationType RelationType
+        public MetaRelation RelationType
         {
             get { return RelationTypeWhereAssociationType; }
         }
@@ -270,7 +270,7 @@ namespace Allors.Meta
         /// Gets the role.
         /// </summary>
         /// <value>The role .</value>
-        public RoleType RoleType
+        public MetaRole RoleType
         {
             get { return RelationTypeWhereAssociationType.RoleType; }
         }
@@ -292,7 +292,7 @@ namespace Allors.Meta
         /// Gets the root types.
         /// </summary>
         /// <value>The root types.</value>
-        public ObjectType[] RootTypes
+        public MetaObject[] RootTypes
         {
             get
             {
@@ -379,7 +379,7 @@ namespace Allors.Meta
         /// <paramref name="obj"/> is not the same type as this instance. </exception>
         public int CompareTo(object obj)
         {
-            var that = obj as AssociationType;
+            var that = obj as MetaAssociation;
             if (that != null)
             {
                 return string.CompareOrdinal(this.SingularName, that.SingularName);
@@ -405,7 +405,7 @@ namespace Allors.Meta
         /// <returns>
         /// The <see cref="ObjectType"/>.
         /// </returns>
-        public override ObjectType GetObjectType()
+        public override MetaObject GetObjectType()
         {
             return this.ObjectType;
         }
@@ -491,9 +491,9 @@ namespace Allors.Meta
         /// </summary>
         /// <param name="session">The session.</param>
         /// <returns>A new instance</returns>
-        internal static AssociationType Create(AllorsEmbeddedSession session)
+        internal static MetaAssociation Create(AllorsEmbeddedSession session)
         {
-            var association = (AssociationType)session.Create(AllorsEmbeddedDomain.AssociationType);
+            var association = (MetaAssociation)session.Create(AllorsEmbeddedDomain.AssociationType);
             association.Reset();
             return association;
         }
@@ -510,7 +510,7 @@ namespace Allors.Meta
         /// Copy form source.
         /// </summary>
         /// <param name="source">The source.</param>
-        internal void Copy(AssociationType source)
+        internal void Copy(MetaAssociation source)
         {
             if (!this.ExistId)
             {
@@ -526,7 +526,7 @@ namespace Allors.Meta
             this.AssignedSingularName = source.AssignedSingularName;
             if (source.ExistObjectType)
             {
-                ObjectType = (ObjectType)this.Domain.Domain.Find(source.ObjectType.Id);
+                ObjectType = (MetaObject)this.Domain.Domain.Find(source.ObjectType.Id);
             }
         }
 

@@ -66,14 +66,14 @@ namespace Allors.Adapters.Database.Sql
             get { return this.extent.Session; }
         }
 
-        protected ObjectType Type
+        protected MetaObject Type
         {
             get { return this.extent.ObjectType; }
         }
 
-        public void AddJoins(ObjectType rootClass, string alias)
+        public void AddJoins(MetaObject rootClass, string alias)
         {
-            foreach (RoleType role in this.referenceRoles)
+            foreach (MetaRole role in this.referenceRoles)
             {
                 var relationType = role.RelationTypeWhereRoleType;
                 var association = relationType.AssociationType;
@@ -96,7 +96,7 @@ namespace Allors.Adapters.Database.Sql
                 }
             }
 
-            foreach (RoleType role in this.referenceRoleInstances)
+            foreach (MetaRole role in this.referenceRoleInstances)
             {
                 var relationType = role.RelationTypeWhereRoleType;
 
@@ -115,7 +115,7 @@ namespace Allors.Adapters.Database.Sql
                 }
             }
 
-            foreach (AssociationType association in this.referenceAssociations)
+            foreach (MetaAssociation association in this.referenceAssociations)
             {
                 var relationType = association.RelationTypeWhereAssociationType;
                 var role = relationType.RoleType;
@@ -135,7 +135,7 @@ namespace Allors.Adapters.Database.Sql
                 }
             }
 
-            foreach (AssociationType association in this.referenceAssociationInstances)
+            foreach (MetaAssociation association in this.referenceAssociationInstances)
             {
                 var relationType = association.RelationTypeWhereAssociationType;
                 var role = relationType.RoleType;
@@ -166,7 +166,7 @@ namespace Allors.Adapters.Database.Sql
 
         public abstract string AddParameter(object obj);
 
-        public bool AddWhere(ObjectType rootClass, string alias)
+        public bool AddWhere(MetaObject rootClass, string alias)
         {
             var useWhere = !this.Extent.ObjectType.ExistExclusiveRootClass || !this.Extent.ObjectType.ExclusiveRootClass.ExistExclusiveConcreteSubclass;
             
@@ -212,21 +212,21 @@ namespace Allors.Adapters.Database.Sql
 
         public abstract string CreateAlias();
 
-        public abstract ExtentStatement CreateChild(SqlExtent extent, AssociationType association);
+        public abstract ExtentStatement CreateChild(SqlExtent extent, MetaAssociation association);
 
-        public abstract ExtentStatement CreateChild(SqlExtent extent, RoleType role);
+        public abstract ExtentStatement CreateChild(SqlExtent extent, MetaRole role);
 
-        public string GetJoinName(AssociationType association)
+        public string GetJoinName(MetaAssociation association)
         {
             return association.FullSingularName + "_AC";
         }
 
-        public string GetJoinName(RoleType role)
+        public string GetJoinName(MetaRole role)
         {
             return role.FullSingularName + "_RC";
         }
 
-        public void UseAssociation(AssociationType association)
+        public void UseAssociation(MetaAssociation association)
         {
             if (!association.ObjectType.IsUnit && !this.referenceAssociations.Contains(association))
             {
@@ -234,7 +234,7 @@ namespace Allors.Adapters.Database.Sql
             }
         }
 
-        public void UseAssociationInstance(AssociationType association)
+        public void UseAssociationInstance(MetaAssociation association)
         {
             if (!this.referenceAssociationInstances.Contains(association))
             {
@@ -242,7 +242,7 @@ namespace Allors.Adapters.Database.Sql
             }
         }
 
-        public void UseRole(RoleType role)
+        public void UseRole(MetaRole role)
         {
             if (!role.ObjectType.IsUnit && !this.referenceRoles.Contains(role))
             {
@@ -250,7 +250,7 @@ namespace Allors.Adapters.Database.Sql
             }
         }
 
-        public void UseRoleInstance(RoleType role)
+        public void UseRoleInstance(MetaRole role)
         {
             if (!this.referenceRoleInstances.Contains(role))
             {

@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="RoleType.cs" company="Allors bvba">
+// <copyright file="MetaRole.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -28,11 +28,11 @@ namespace Allors.Meta
     using AllorsGenerated;
 
     /// <summary>
-    /// A <see cref="RoleType"/> defines the role side of a relation.
+    /// A <see cref="MetaRole"/> defines the role side of a relation.
     /// This is also called the 'passive' side.
     /// RoleTypes can have composite and unit <see cref="ObjectType"/>s.
     /// </summary>
-    public partial class RoleType : IComparable
+    public partial class MetaRole : IComparable
     {
         /// <summary>
         /// The maximum size value.
@@ -362,7 +362,7 @@ namespace Allors.Meta
         /// Gets the type of the relation.
         /// </summary>
         /// <value>The type of the relation.</value>
-        public RelationType RelationType
+        public MetaRelation RelationType
         {
             get { return RelationTypeWhereRoleType; }
         }
@@ -371,7 +371,7 @@ namespace Allors.Meta
         /// Gets the association.
         /// </summary>
         /// <value>The association.</value>
-        public AssociationType AssociationType
+        public MetaAssociation AssociationType
         {
             get { return RelationTypeWhereRoleType.AssociationType; }
         }
@@ -380,7 +380,7 @@ namespace Allors.Meta
         /// Gets or sets <see cref="ObjectType"/>.
         /// </summary>
         /// <value>The ObjectType.</value>
-        public override ObjectType ObjectType
+        public override MetaObject ObjectType
         {
             get
             {
@@ -398,7 +398,7 @@ namespace Allors.Meta
         /// Gets the root objectTypes.
         /// </summary>
         /// <value>The root objectTypes.</value>
-        public ObjectType[] RootTypes
+        public MetaObject[] RootTypes
         {
             get
             {
@@ -525,7 +525,7 @@ namespace Allors.Meta
         /// <paramref name="obj"/> is not the same type as this instance. </exception>
         public int CompareTo(object obj)
         {
-            var that = obj as RoleType;
+            var that = obj as MetaRole;
             if (that != null)
             {
                 return string.CompareOrdinal(this.SingularName, that.SingularName);
@@ -538,7 +538,7 @@ namespace Allors.Meta
         /// Copy from source.
         /// </summary>
         /// <param name="source">The source.</param>
-        public void Copy(RoleType source)
+        public void Copy(MetaRole source)
         {
             this.CopyMetaObject(source);
 
@@ -562,7 +562,7 @@ namespace Allors.Meta
 
             if (source.ExistObjectType)
             {
-                ObjectType = (ObjectType)this.Domain.Domain.Find(source.ObjectType.Id);
+                ObjectType = (MetaObject)this.Domain.Domain.Find(source.ObjectType.Id);
             }
         }
 
@@ -669,7 +669,7 @@ namespace Allors.Meta
         /// <returns>
         /// The <see cref="ObjectType"/>.
         /// </returns>
-        public override ObjectType GetObjectType()
+        public override MetaObject GetObjectType()
         {
             return this.ObjectType;
         }
@@ -710,9 +710,9 @@ namespace Allors.Meta
         /// </summary>
         /// <param name="session">The session.</param>
         /// <returns>The new instance.</returns>
-        internal static RoleType Create(AllorsEmbeddedSession session)
+        internal static MetaRole Create(AllorsEmbeddedSession session)
         {
-            var role = (RoleType)session.Create(AllorsEmbeddedDomain.RoleType);
+            var role = (MetaRole)session.Create(AllorsEmbeddedDomain.RoleType);
             role.Reset();
             return role;
         }
@@ -748,9 +748,9 @@ namespace Allors.Meta
                     base.IsMany = false;
                 }
 
-                switch ((UnitTypeTags)this.ObjectType.UnitTag)
+                switch ((MetaUnitTags)this.ObjectType.UnitTag)
                 {
-                    case UnitTypeTags.AllorsString:
+                    case MetaUnitTags.AllorsString:
                         if (!this.ExistSize)
                         {
                             this.Size = 256;
@@ -760,7 +760,7 @@ namespace Allors.Meta
                         }
 
                         break;
-                    case UnitTypeTags.AllorsBinary:
+                    case MetaUnitTags.AllorsBinary:
                         if (!this.ExistSize)
                         {
                             this.Size = MaximumSize;
@@ -770,7 +770,7 @@ namespace Allors.Meta
                         }
 
                         break;
-                    case UnitTypeTags.AllorsDecimal:
+                    case MetaUnitTags.AllorsDecimal:
                         if (!this.ExistPrecision)
                         {
                             this.Precision = 19;
@@ -833,7 +833,7 @@ namespace Allors.Meta
         /// Derive hierarchy plural name.
         /// </summary>
         /// <param name="objectTypes">The object Types.</param>
-        internal void DeriveHierarchyPluralName(HashSet<ObjectType> objectTypes)
+        internal void DeriveHierarchyPluralName(HashSet<MetaObject> objectTypes)
         {
             objectTypes.Clear();
             DerivedHierarchyPluralName = null;
@@ -893,7 +893,7 @@ namespace Allors.Meta
         /// Derive hierarchy singular name.
         /// </summary>
         /// <param name="objectTypes">The object types.</param>
-        internal void DeriveHierarchySingularName(HashSet<ObjectType> objectTypes)
+        internal void DeriveHierarchySingularName(HashSet<MetaObject> objectTypes)
         {
             objectTypes.Clear();
             DerivedHierarchySingularName = null;
@@ -1002,9 +1002,9 @@ namespace Allors.Meta
             {
                 if (this.ObjectType.IsUnit)
                 {
-                    switch ((UnitTypeTags)this.ObjectType.UnitTag)
+                    switch ((MetaUnitTags)this.ObjectType.UnitTag)
                     {
-                        case UnitTypeTags.AllorsString:
+                        case MetaUnitTags.AllorsString:
                             if (!this.ExistSize)
                             {
                                 var message = this.ValidationName + " should have a size.";
@@ -1012,7 +1012,7 @@ namespace Allors.Meta
                             }
 
                             break;
-                        case UnitTypeTags.AllorsBinary:
+                        case MetaUnitTags.AllorsBinary:
                             if (!this.ExistSize)
                             {
                                 var message = this.ValidationName + " should have a size.";
@@ -1020,7 +1020,7 @@ namespace Allors.Meta
                             }
 
                             break;
-                        case UnitTypeTags.AllorsDecimal:
+                        case MetaUnitTags.AllorsDecimal:
                             if (!this.ExistPrecision)
                             {
                                 var message = this.ValidationName + " should have a precision.";

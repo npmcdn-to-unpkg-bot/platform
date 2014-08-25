@@ -28,12 +28,12 @@ namespace Allors.Adapters.Database.Caching
     {
         private readonly int localCacheVersion;
 
-        private readonly Dictionary<RoleType, object> roleByRoleType;
+        private readonly Dictionary<MetaRole, object> roleByRoleType;
 
         internal CachedObject(int localCacheVersion)
         {
             this.localCacheVersion = localCacheVersion;
-            this.roleByRoleType = new Dictionary<RoleType, object>();
+            this.roleByRoleType = new Dictionary<MetaRole, object>();
         }
 
         public int LocalCacheVersion
@@ -44,12 +44,12 @@ namespace Allors.Adapters.Database.Caching
             }
         }
 
-        public bool TryGetValue(RoleType roleType, out object value)
+        public bool TryGetValue(MetaRole roleType, out object value)
         {
             return this.roleByRoleType.TryGetValue(roleType, out value);
         }
 
-        public void SetValue(RoleType roleType, object value)
+        public void SetValue(MetaRole roleType, object value)
         {
             this.roleByRoleType[roleType] = value;
         }

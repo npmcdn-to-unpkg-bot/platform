@@ -23,7 +23,7 @@ namespace Allors.Meta.Static
 
     public abstract class AbstractTest : IDisposable
     {
-        protected Domain Domain { get; set; }
+        protected MetaDomain Domain { get; set; }
 
         protected Population Population { get; set; }
 

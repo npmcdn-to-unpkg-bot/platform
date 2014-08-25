@@ -5,13 +5,13 @@ namespace Allors.Meta
 {
     using Allors.Meta.AllorsGenerated;
 
-    public  partial class Domain : global::Allors.Meta.AllorsGenerated.AllorsClassDomain, global::Allors.Meta.AllorsGenerated.AllorsInterfaceDomain
+    public  partial class MetaDomain : global::Allors.Meta.AllorsGenerated.AllorsClassDomain, global::Allors.Meta.AllorsGenerated.AllorsInterfaceDomain
 	{		
-		public Domain(AllorsEmbeddedSession session, System.Int32 id) : base(session, id) {}
+		public MetaDomain(AllorsEmbeddedSession session, System.Int32 id) : base(session, id) {}
 
-		public new static Domain Instantiate (global::Allors.Meta.AllorsGenerated.AllorsEmbeddedSession session, System.Int32 id)
+		public new static MetaDomain Instantiate (global::Allors.Meta.AllorsGenerated.AllorsEmbeddedSession session, System.Int32 id)
 		{
-			return (Domain) session.Instantiate(id);		
+			return (MetaDomain) session.Instantiate(id);		
 		}
 	}
 }

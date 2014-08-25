@@ -24,7 +24,7 @@ namespace Allors.Adapters.Database.Sql.Commands
 
     public interface IRemoveFromCompositeRoles
     {
-        void Execute(Strategy strategy, RoleType roleType, Strategy role);
+        void Execute(Strategy strategy, MetaRole roleType, Strategy role);
     }
 
     public interface IRemoveFromCompositeRolesFactory

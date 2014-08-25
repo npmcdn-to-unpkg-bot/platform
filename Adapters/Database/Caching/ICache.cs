@@ -29,11 +29,11 @@ namespace Allors.Adapters.Database.Caching
     /// </summary>
     public interface ICache
     {
-        ICachedObject GetOrCreateCachedObject(ObjectType concreteClass, ObjectId objectId, int localCacheId);
+        ICachedObject GetOrCreateCachedObject(MetaObject concreteClass, ObjectId objectId, int localCacheId);
 
-        ObjectType GetObjectType(ObjectId objectId);
+        MetaObject GetObjectType(ObjectId objectId);
 
-        void SetObjectType(ObjectId objectId, ObjectType objectType);
+        void SetObjectType(ObjectId objectId, MetaObject objectType);
 
         void OnCommit(IList<ObjectId> accessedObjectIds, IList<ObjectId> changedObjectIds);
 

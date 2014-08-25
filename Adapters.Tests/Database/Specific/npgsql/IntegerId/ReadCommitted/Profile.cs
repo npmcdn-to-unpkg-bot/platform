@@ -51,7 +51,7 @@ namespace Allors.Adapters.Special.Npgsql.IntegerId.ReadCommitted
             }
         }
 
-        public IDatabase CreateDatabase(Meta.Domain domain, bool init)
+        public IDatabase CreateDatabase(Meta.MetaDomain domain, bool init)
         {
             var configuration = new Adapters.Database.Npgsql.IntegerId.Configuration
             {

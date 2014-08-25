@@ -24,10 +24,10 @@ namespace Allors.Adapters.Database.Sql
 
     public sealed class RoleLike : Predicate
     {
-        private readonly RoleType role;
+        private readonly MetaRole role;
         private readonly string like;
 
-        public RoleLike(ExtentFiltered extent, RoleType role, string like)
+        public RoleLike(ExtentFiltered extent, MetaRole role, string like)
         {
             extent.CheckRole(role);
             CompositePredicateAssertions.ValidateRoleLikeFilter(role, like);

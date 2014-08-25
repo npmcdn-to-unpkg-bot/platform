@@ -24,9 +24,9 @@ namespace Allors.Adapters.Database.Sql
 
     public sealed class RoleExists : Predicate
     {
-        private readonly RoleType role;
+        private readonly MetaRole role;
 
-        public RoleExists(ExtentFiltered extent, RoleType role)
+        public RoleExists(ExtentFiltered extent, MetaRole role)
         {
             extent.CheckRole(role);
             CompositePredicateAssertions.ValidateRoleExists(role);

@@ -26,9 +26,9 @@ namespace Allors.Adapters.Workspace.Memory
 
     internal sealed class AssociationExists : Predicate
     {
-        private readonly AssociationType associationType;
+        private readonly MetaAssociation associationType;
 
-        internal AssociationExists(Extent extent, AssociationType associationType)
+        internal AssociationExists(Extent extent, MetaAssociation associationType)
         {
             extent.CheckForAssociationType(associationType);
             CompositePredicateAssertions.ValidateAssociationExists(associationType);

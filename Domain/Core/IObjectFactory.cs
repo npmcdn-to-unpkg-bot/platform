@@ -44,7 +44,7 @@ namespace Allors
         /// Gets the domain.
         /// </summary>
         /// <value>The domain.</value>
-        Domain Domain { get; }
+        MetaDomain Domain { get; }
 
         /// <summary>
         /// Create a new IObject instance.
@@ -60,16 +60,16 @@ namespace Allors
         /// The object type id.
         /// </param>
         /// <returns>
-        /// The <see cref="ObjectType"/>.
+        /// The <see cref="MetaObject"/>.
         /// </returns>
-        ObjectType GetObjectTypeForType(Guid objectTypeId);
+        MetaObject GetObjectTypeForType(Guid objectTypeId);
         
         /// <summary>
         /// Gets the Type for the specified ObjectType
         /// </summary>
         /// <param name="objectType">The object type</param>
         /// <returns>The type</returns>
-        Type GetTypeForObjectType(ObjectType objectType);
+        Type GetTypeForObjectType(MetaObject objectType);
 
         /// <summary>
         /// Gets the ObjectType for the specified Type.
@@ -77,6 +77,6 @@ namespace Allors
         /// </summary>
         /// <param name="type">The type</param>
         /// <returns>The object type</returns>
-        ObjectType GetObjectTypeForType(Type type);
+        MetaObject GetObjectTypeForType(Type type);
     }
 }

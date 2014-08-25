@@ -36,7 +36,7 @@ namespace Allors.Adapters.Database.Sql
         private static readonly int MaskExistsKnown = BitVector32.CreateMask(MaskExists);
 
         private readonly DatabaseSession session;
-        private readonly ObjectType objectType;
+        private readonly MetaObject objectType;
         private readonly ObjectId objectId;
         private int cacheId;
 
@@ -44,7 +44,7 @@ namespace Allors.Adapters.Database.Sql
 
         private WeakReference weakReference;
 
-        public Reference(DatabaseSession session, ObjectType objectType, ObjectId objectId, bool isNew)
+        public Reference(DatabaseSession session, MetaObject objectType, ObjectId objectId, bool isNew)
         {
             this.session = session;
             this.objectType = objectType;
@@ -58,7 +58,7 @@ namespace Allors.Adapters.Database.Sql
             }
         }
 
-        public Reference(DatabaseSession session, ObjectType objectType, ObjectId objectId, int cacheId)
+        public Reference(DatabaseSession session, MetaObject objectType, ObjectId objectId, int cacheId)
             : this(session, objectType, objectId, false)
         {
             this.cacheId = cacheId;
@@ -90,7 +90,7 @@ namespace Allors.Adapters.Database.Sql
             }
         }
 
-        public ObjectType ObjectType
+        public MetaObject ObjectType
         {
             get
             {

@@ -85,7 +85,7 @@ namespace Allors.Adapters.Database.SqlClient.LongId
             return new RelationTableForCompositeRelations(this.schema, relations);
         }
 
-        internal override IEnumerable<SqlDataRecord> CreateRelationTable(RoleType roleType, IEnumerable<UnitRelation> relations)
+        internal override IEnumerable<SqlDataRecord> CreateRelationTable(MetaRole roleType, IEnumerable<UnitRelation> relations)
         {
             return new RelationTableForUnitRelations(this, roleType, relations);
         }

@@ -30,13 +30,13 @@ namespace Allors.Adapters.Database.Memory
     {
         private static readonly List<Strategy> EmptyList = new List<Strategy>();
         private readonly Strategy roleStrategy;
-        private readonly AssociationType associationType;
+        private readonly MetaAssociation associationType;
 
         private IObject[] defaultObjectArray;
 
         private List<Strategy> associations;
 
-        public StrategyExtentAssociation(Strategy roleStrategy, AssociationType associationType)
+        public StrategyExtentAssociation(Strategy roleStrategy, MetaAssociation associationType)
         {
             this.roleStrategy = roleStrategy;
             this.associationType = associationType;
@@ -60,7 +60,7 @@ namespace Allors.Adapters.Database.Memory
             }
         }
 
-        public override ObjectType ObjectType
+        public override MetaObject ObjectType
         {
             get { return this.associationType.ObjectType; }
         }
@@ -70,12 +70,12 @@ namespace Allors.Adapters.Database.Memory
             get { return this.roleStrategy.MemorySession; }
         }
 
-        public override Allors.Extent AddSort(RoleType roleType)
+        public override Allors.Extent AddSort(MetaRole roleType)
         {
             throw new NotSupportedException();
         }
 
-        public override Allors.Extent AddSort(RoleType roleType, SortDirection direction)
+        public override Allors.Extent AddSort(MetaRole roleType, SortDirection direction)
         {
             throw new NotSupportedException();
         }

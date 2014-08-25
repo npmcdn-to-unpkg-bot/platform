@@ -24,9 +24,9 @@ namespace Allors.Adapters.Database.Memory
 
     internal sealed class RoleExists : Predicate
     {
-        private readonly RoleType roleType;
+        private readonly MetaRole roleType;
 
-        internal RoleExists(ExtentFiltered extent, RoleType roleType)
+        internal RoleExists(ExtentFiltered extent, MetaRole roleType)
         {
             extent.CheckForRoleType(roleType);
             CompositePredicateAssertions.ValidateRoleExists(roleType);

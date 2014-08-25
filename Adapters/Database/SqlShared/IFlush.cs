@@ -28,16 +28,16 @@ namespace Allors.Adapters.Database.Sql
     {
         void Execute();
 
-        void SetUnitRoles(Roles roles, List<RoleType> unitRoles);
+        void SetUnitRoles(Roles roles, List<MetaRole> unitRoles);
 
-        void SetUnitRole(Reference association, RoleType roleType, object role);
+        void SetUnitRole(Reference association, MetaRole roleType, object role);
 
-        void SetCompositeRole(Reference association, RoleType roleType, ObjectId role);
+        void SetCompositeRole(Reference association, MetaRole roleType, ObjectId role);
 
-        void AddCompositeRole(Reference association, RoleType roleType, HashSet<ObjectId> removed);
+        void AddCompositeRole(Reference association, MetaRole roleType, HashSet<ObjectId> removed);
 
-        void RemoveCompositeRole(Reference association, RoleType roleType, HashSet<ObjectId> removed);
+        void RemoveCompositeRole(Reference association, MetaRole roleType, HashSet<ObjectId> removed);
 
-        void ClearCompositeAndCompositesRole(Reference association, RoleType roleType);
+        void ClearCompositeAndCompositesRole(Reference association, MetaRole roleType);
     }
 }

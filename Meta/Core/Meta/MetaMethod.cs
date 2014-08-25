@@ -21,11 +21,10 @@
 namespace Allors.Meta
 {
     using System;
-    using System.Reflection;
 
     using AllorsGenerated;
 
-    public partial class MethodType
+    public partial class MetaMethod
     {
         /// <summary>
         /// Gets the display name.
@@ -60,7 +59,7 @@ namespace Allors.Meta
         /// Gets or sets the ObjectType.
         /// </summary>
         /// <value>The ObjectType.</value>
-        public override ObjectType ObjectType
+        public override MetaObject ObjectType
         {
             get
             {
@@ -117,14 +116,14 @@ namespace Allors.Meta
         /// Copy from source.
         /// </summary>
         /// <param name="source">The source.</param>
-        public void Copy(MethodType source)
+        public void Copy(MetaMethod source)
         {
             this.CopyMetaObject(source);
 
             this.Name = source.Name;
             if (source.ExistObjectType)
             {
-                ObjectType = (ObjectType)this.Domain.Domain.Find(source.ObjectType.Id);
+                ObjectType = (MetaObject)this.Domain.Domain.Find(source.ObjectType.Id);
             }
         }
 
@@ -187,9 +186,9 @@ namespace Allors.Meta
         /// </summary>
         /// <param name="session">The session.</param>
         /// <returns>The new instance.</returns>
-        internal static MethodType Create(AllorsEmbeddedSession session)
+        internal static MetaMethod Create(AllorsEmbeddedSession session)
         {
-            var methodType = (MethodType)session.Create(AllorsEmbeddedDomain.MethodType);
+            var methodType = (MetaMethod)session.Create(AllorsEmbeddedDomain.MethodType);
             methodType.Reset();
             return methodType;
         }

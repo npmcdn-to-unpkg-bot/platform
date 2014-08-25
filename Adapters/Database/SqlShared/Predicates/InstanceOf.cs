@@ -24,9 +24,9 @@ namespace Allors.Adapters.Database.Sql
 
     public sealed class InstanceOf : Predicate
     {
-        private readonly ObjectType[] instanceClasses;
+        private readonly MetaObject[] instanceClasses;
 
-        public InstanceOf(ObjectType instanceType, ObjectType[] instanceClasses)
+        public InstanceOf(MetaObject instanceType, MetaObject[] instanceClasses)
         {
             CompositePredicateAssertions.ValidateInstanceof(instanceType);
             this.instanceClasses = instanceClasses;

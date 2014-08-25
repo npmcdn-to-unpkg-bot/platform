@@ -27,25 +27,25 @@ namespace Allors.Adapters.Database.Sql
     public class ExtentFiltered : SqlExtent
     {
         private readonly DatabaseSession session;
-        private readonly ObjectType objectType;
+        private readonly MetaObject objectType;
 
         private AndPredicate filter;
 
-        public ExtentFiltered(DatabaseSession session, Strategy strategy, RoleType roleType)
+        public ExtentFiltered(DatabaseSession session, Strategy strategy, MetaRole roleType)
             : this(session, roleType.ObjectType)
         {
             this.Strategy = strategy;
             this.RoleType = roleType;
         }
 
-        public ExtentFiltered(DatabaseSession session, Strategy strategy, AssociationType associationType)
+        public ExtentFiltered(DatabaseSession session, Strategy strategy, MetaAssociation associationType)
             : this(session, associationType.ObjectType)
         {
             this.Strategy = strategy;
             this.AssociationType = associationType;
         }
 
-        public ExtentFiltered(DatabaseSession session, ObjectType objectType)
+        public ExtentFiltered(DatabaseSession session, MetaObject objectType)
         {
             this.session = session;
             this.objectType = objectType;
@@ -70,14 +70,14 @@ namespace Allors.Adapters.Database.Sql
             get { return this.session; }
         }
 
-        public override ObjectType ObjectType
+        public override MetaObject ObjectType
         {
             get { return this.objectType; }
         }
 
-        public AssociationType AssociationType { get; private set; }
+        public MetaAssociation AssociationType { get; private set; }
 
-        public RoleType RoleType { get; private set; }
+        public MetaRole RoleType { get; private set; }
 
         public Strategy Strategy { get; private set; }
 
@@ -99,7 +99,7 @@ namespace Allors.Adapters.Database.Sql
             return null;
         }
 
-        public void CheckAssociation(AssociationType association)
+        public void CheckAssociation(MetaAssociation association)
         {
             if (Array.IndexOf(this.objectType.AssociationTypes, association) < 0)
             {
@@ -107,7 +107,7 @@ namespace Allors.Adapters.Database.Sql
             }
         }
 
-        public void CheckRole(RoleType role)
+        public void CheckRole(MetaRole role)
         {
             if (Array.IndexOf(this.objectType.RoleTypes, role) < 0)
             {

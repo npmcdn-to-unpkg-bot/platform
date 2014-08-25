@@ -30,8 +30,6 @@ namespace Allors.Adapters.Special
 
     using NUnit.Framework;
 
-    using Domain = Allors.Meta.Domain;
-
     public enum Zero2Four
     {
         Zero = 0, 
@@ -16671,14 +16669,14 @@ namespace Allors.Adapters.Special
 
         // IDatabaseSession.Extent for Repositories and
         // IWorkspaceSession.WorkspaceExtent for Workspaces.
-        protected virtual Extent LocalExtent(ObjectType objectType)
+        protected virtual Extent LocalExtent(MetaObject objectType)
         {
             return this.Session.Extent(objectType);
         }
 
-        private static ObjectType GetAllorsString(ObjectType objectType)
+        private static MetaObject GetAllorsString(MetaObject objectType)
         {
-            return (ObjectType)Domain.GetDomain(objectType).Find(UnitTypeIds.StringId);
+            return (MetaObject)MetaDomain.GetDomain(objectType).Find(MetaUnitIds.StringId);
         }
 
         private void AssertC1(Extent extent, bool assert0, bool assert1, bool assert2, bool assert3)

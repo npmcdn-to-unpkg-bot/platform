@@ -94,27 +94,27 @@ namespace Allors.Adapters.Database.Sql
             return reader.GetValue(i);
         }
 
-        public virtual object GetValue(DbDataReader reader, UnitTypeTags unitTypeTag, int i)
+        public virtual object GetValue(DbDataReader reader, MetaUnitTags unitTypeTag, int i)
         {
             switch (unitTypeTag)
             {
-                case UnitTypeTags.AllorsString:
+                case MetaUnitTags.AllorsString:
                     return this.GetString(reader, i);
-                case UnitTypeTags.AllorsInteger:
+                case MetaUnitTags.AllorsInteger:
                     return this.GetInteger(reader, i);
-                case UnitTypeTags.AllorsLong:
+                case MetaUnitTags.AllorsLong:
                     return this.GetLong(reader, i);
-                case UnitTypeTags.AllorsDecimal:
+                case MetaUnitTags.AllorsDecimal:
                     return this.GetDecimal(reader, i);
-                case UnitTypeTags.AllorsDouble:
+                case MetaUnitTags.AllorsDouble:
                     return this.GetDouble(reader, i);
-                case UnitTypeTags.AllorsBoolean:
+                case MetaUnitTags.AllorsBoolean:
                     return this.GetBoolean(reader, i);
-                case UnitTypeTags.AllorsDateTime:
+                case MetaUnitTags.AllorsDateTime:
                     return this.GetDateTime(reader, i);
-                case UnitTypeTags.AllorsUnique:
+                case MetaUnitTags.AllorsUnique:
                     return this.GetUnique(reader, i);
-                case UnitTypeTags.AllorsBinary:
+                case MetaUnitTags.AllorsBinary:
                     return this.GetBinary(reader, i);
                 default:
                     throw new ArgumentException("Unknown Unit ObjectType: " + unitTypeTag);

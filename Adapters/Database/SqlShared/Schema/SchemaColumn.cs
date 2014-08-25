@@ -40,19 +40,19 @@ namespace Allors.Adapters.Database.Sql
         public readonly int? Scale;
         public readonly int? Size;
 
-        public readonly RelationType RelationType;
+        public readonly MetaRelation RelationType;
 
         public SchemaColumn(Schema schema, string name, DbType dbType, bool isIdentity, bool isKey, SchemaIndexType indexType)
             : this(schema, name, dbType, isIdentity, isKey, indexType, null, null, null, null)
         {
         }
 
-        public SchemaColumn(Schema schema, string name, DbType dbType, bool isIdentity, bool isKey, SchemaIndexType indexType, RelationType relationType)
+        public SchemaColumn(Schema schema, string name, DbType dbType, bool isIdentity, bool isKey, SchemaIndexType indexType, MetaRelation relationType)
             : this(schema, name, dbType, isIdentity, isKey, indexType, relationType, null, null, null)
         {
         }
 
-        public SchemaColumn(Schema schema, string name, DbType dbType, bool isIdentity, bool isKey, SchemaIndexType indexType, RelationType relationType, int? size, int? precision, int? scale)
+        public SchemaColumn(Schema schema, string name, DbType dbType, bool isIdentity, bool isKey, SchemaIndexType indexType, MetaRelation relationType, int? size, int? precision, int? scale)
         {
             this.Name = name.ToLowerInvariant();
             this.StatementName = schema.EscapeIfReserved(this.Name);

@@ -30,8 +30,8 @@ namespace Allors.Meta.Static
             this.Populate();
             this.RemoveInheritances();
 
-            ObjectType[] ones = { this.Population.C1, this.Population.A1, this.Population.I1 };
-            ObjectType[] twos = { this.Population.C2, this.Population.A2, this.Population.I2 };
+            MetaObject[] ones = { this.Population.C1, this.Population.A1, this.Population.I1 };
+            MetaObject[] twos = { this.Population.C2, this.Population.A2, this.Population.I2 };
 
             foreach (var one in ones)
             {
@@ -104,7 +104,7 @@ namespace Allors.Meta.Static
             a1_c1_inheritance.Delete();
         }
 
-        private void CycleDifferentTypeCheck(ObjectType type1, ObjectType type2)
+        private void CycleDifferentTypeCheck(MetaObject type1, MetaObject type2)
         {
             var inheritance1 = this.Domain.AddDeclaredInheritance(Guid.NewGuid());
             inheritance1.Subtype = type1;
@@ -122,7 +122,7 @@ namespace Allors.Meta.Static
             inheritance2.Delete();
         }
 
-        private void CycleSameTypeReset(ObjectType type1, ObjectType type2)
+        private void CycleSameTypeReset(MetaObject type1, MetaObject type2)
         {
             var inheritance = this.Domain.AddDeclaredInheritance(Guid.NewGuid());
             inheritance.Subtype = type1;
@@ -159,7 +159,7 @@ namespace Allors.Meta.Static
             inheritance.Delete();
         }
 
-        private void CycleSameTypeSet(ObjectType type)
+        private void CycleSameTypeSet(MetaObject type)
         {
             var inheritance = this.Domain.AddDeclaredInheritance(Guid.NewGuid());
             try

@@ -5,13 +5,13 @@ namespace Allors.Meta
 {
     using Allors.Meta.AllorsGenerated;
 
-    public  partial class AssociationType : global::Allors.Meta.AllorsGenerated.AllorsClassAssociationType, global::Allors.Meta.AllorsGenerated.AllorsInterfaceAssociationType
+    public  partial class MetaAssociation : global::Allors.Meta.AllorsGenerated.AllorsClassAssociationType, global::Allors.Meta.AllorsGenerated.AllorsInterfaceAssociationType
 	{		
-		public AssociationType(AllorsEmbeddedSession session, System.Int32 id) : base(session, id) {}
+		public MetaAssociation(AllorsEmbeddedSession session, System.Int32 id) : base(session, id) {}
 
-		public new static AssociationType Instantiate (global::Allors.Meta.AllorsGenerated.AllorsEmbeddedSession session, System.Int32 id)
+		public new static MetaAssociation Instantiate (global::Allors.Meta.AllorsGenerated.AllorsEmbeddedSession session, System.Int32 id)
 		{
-			return (AssociationType) session.Instantiate(id);		
+			return (MetaAssociation) session.Instantiate(id);		
 		}
 	}
 }

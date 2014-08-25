@@ -54,7 +54,7 @@ namespace Allors.Adapters
         public const string Association = "a";
 
         /// <summary>
-        /// This attribute is used for <see cref="ObjectType#Id"/> and <see cref="RelationType#Id"/>.
+        /// This attribute is used for <see cref="ObjectType#Id"/> and <see cref="MetaRelation#Id"/>.
         /// Attribute of the <see cref="Serialization#ObjectType"/> and <see cref="Serialization#RelationType"/> element.
         /// </summary>
         public const string Id = "i";
@@ -125,14 +125,14 @@ namespace Allors.Adapters
         public const string Relations = "relations";
 
         /// <summary>
-        /// This element groups relations having the same <see cref="RelationType"/> and 
+        /// This element groups relations having the same <see cref="MetaRelation"/> and 
         /// where the role's <see cref="ObjectType"/> is a composite.
         /// Child element of the <see cref="Serialization#Relations"/> element.
         /// </summary>
         public const string RelationTypeComposite = "rtc";
 
         /// <summary>
-        /// This element groups relations having the same <see cref="RelationType"/> and 
+        /// This element groups relations having the same <see cref="MetaRelation"/> and 
         /// where the role's <see cref="ObjectType"/> is a unit.
         /// Child element of the <see cref="Serialization#Relations"/> element.
         /// </summary>
@@ -167,27 +167,27 @@ namespace Allors.Adapters
         /// <param name="xmlValue">The XML value.</param>
         /// <param name="unitTypeTag">The unit type tag.</param>
         /// <returns>The converted value</returns>
-        public static object ReadString(string xmlValue, UnitTypeTags unitTypeTag)
+        public static object ReadString(string xmlValue, MetaUnitTags unitTypeTag)
         {
             switch (unitTypeTag)
             {
-                case UnitTypeTags.AllorsString:
+                case MetaUnitTags.AllorsString:
                     return xmlValue;
-                case UnitTypeTags.AllorsInteger:
+                case MetaUnitTags.AllorsInteger:
                     return XmlConvert.ToInt32(xmlValue);
-                case UnitTypeTags.AllorsLong:
+                case MetaUnitTags.AllorsLong:
                     return XmlConvert.ToInt64(xmlValue);
-                case UnitTypeTags.AllorsDecimal:
+                case MetaUnitTags.AllorsDecimal:
                     return XmlConvert.ToDecimal(xmlValue);
-                case UnitTypeTags.AllorsDouble:
+                case MetaUnitTags.AllorsDouble:
                     return XmlConvert.ToDouble(xmlValue);
-                case UnitTypeTags.AllorsBoolean:
+                case MetaUnitTags.AllorsBoolean:
                     return XmlConvert.ToBoolean(xmlValue);
-                case UnitTypeTags.AllorsDateTime:
+                case MetaUnitTags.AllorsDateTime:
                     return XmlConvert.ToDateTime(xmlValue, XmlDateTimeSerializationMode.Utc);
-                case UnitTypeTags.AllorsUnique:
+                case MetaUnitTags.AllorsUnique:
                     return XmlConvert.ToGuid(xmlValue);
-                case UnitTypeTags.AllorsBinary:
+                case MetaUnitTags.AllorsBinary:
                     return Convert.FromBase64String(xmlValue);
                 default:
                     throw new ArgumentException("Unknown Unit ObjectType: " + unitTypeTag);
@@ -200,27 +200,27 @@ namespace Allors.Adapters
         /// <param name="unitTypeTag">The unit type tag.</param>
         /// <param name="unit">The unit .</param>
         /// <returns>The XML Value</returns>
-        public static string WriteString(UnitTypeTags unitTypeTag, object unit)
+        public static string WriteString(MetaUnitTags unitTypeTag, object unit)
         {
             switch (unitTypeTag)
             {
-                case UnitTypeTags.AllorsString:
+                case MetaUnitTags.AllorsString:
                     return (string)unit;
-                case UnitTypeTags.AllorsInteger:
+                case MetaUnitTags.AllorsInteger:
                     return XmlConvert.ToString((int)unit);
-                case UnitTypeTags.AllorsLong:
+                case MetaUnitTags.AllorsLong:
                     return XmlConvert.ToString((long)unit);
-                case UnitTypeTags.AllorsDecimal:
+                case MetaUnitTags.AllorsDecimal:
                     return XmlConvert.ToString((decimal)unit);
-                case UnitTypeTags.AllorsDouble:
+                case MetaUnitTags.AllorsDouble:
                     return XmlConvert.ToString((double)unit);
-                case UnitTypeTags.AllorsBoolean:
+                case MetaUnitTags.AllorsBoolean:
                     return XmlConvert.ToString((bool)unit);
-                case UnitTypeTags.AllorsDateTime:
+                case MetaUnitTags.AllorsDateTime:
                     return XmlConvert.ToString((DateTime)unit, XmlDateTimeSerializationMode.Utc);
-                case UnitTypeTags.AllorsUnique:
+                case MetaUnitTags.AllorsUnique:
                     return XmlConvert.ToString((Guid)unit);
-                case UnitTypeTags.AllorsBinary:
+                case MetaUnitTags.AllorsBinary:
                     return Convert.ToBase64String((byte[])unit);
                 default:
                     throw new ArgumentException("Unknown Unit ObjectType: " + unitTypeTag);

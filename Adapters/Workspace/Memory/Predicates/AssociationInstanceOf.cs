@@ -28,10 +28,10 @@ namespace Allors.Adapters.Workspace.Memory
 
     internal sealed class AssociationInstanceOf : Predicate
     {
-        private readonly AssociationType associationType;
-        private readonly ObjectType objectType;
+        private readonly MetaAssociation associationType;
+        private readonly MetaObject objectType;
 
-        internal AssociationInstanceOf(Extent extent, AssociationType associationType, ObjectType instanceObjectType)
+        internal AssociationInstanceOf(Extent extent, MetaAssociation associationType, MetaObject instanceObjectType)
         {
             extent.CheckForAssociationType(associationType);
             CompositePredicateAssertions.ValidateAssociationInstanceof(associationType, instanceObjectType);
@@ -50,7 +50,7 @@ namespace Allors.Adapters.Workspace.Memory
             }
 
             // TODO: Optimize
-            ObjectType associationObjectType = association.Strategy.ObjectType;
+            MetaObject associationObjectType = association.Strategy.ObjectType;
             return associationObjectType.Equals(this.objectType) || Array.IndexOf(associationObjectType.Supertypes, this.objectType) >= 0
                        ? ThreeValuedLogic.True
                        : ThreeValuedLogic.False;

@@ -385,9 +385,9 @@ namespace Allors.Meta.Static
             var xml = this.Domain.Xml;
 
             var reader = new XmlTextReader(new StringReader(xml));
-            var copy = Domain.Load(reader);
+            var copy = MetaDomain.Load(reader);
             
-            relationType = (RelationType)copy.Domain.Find(relationType.Id);
+            relationType = (MetaRelation)copy.Domain.Find(relationType.Id);
 
             Assert.IsFalse(relationType.IsIndexed);
             Assert.IsFalse(relationType.IsDerived);

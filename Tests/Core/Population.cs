@@ -28,7 +28,7 @@ namespace Allors.Meta.Static
 
         public Population()
         {
-            this.Domain = Domain.Create();
+            this.Domain = MetaDomain.Create();
             this.Domain.Name = "Domain";
 
             this.allorsSession = this.Domain.AllorsSession;
@@ -42,44 +42,44 @@ namespace Allors.Meta.Static
             this.GetUnits();
         }
 
-        public ObjectType A1 { get; set; }
+        public MetaObject A1 { get; set; }
 
-        public ObjectType A2 { get; set; }
+        public MetaObject A2 { get; set; }
 
-        public ObjectType A3 { get; set; }
+        public MetaObject A3 { get; set; }
 
-        public ObjectType A34 { get; set; }
+        public MetaObject A34 { get; set; }
 
-        public ObjectType A4 { get; set; }
+        public MetaObject A4 { get; set; }
 
-        public ObjectType BinaryType { get; set; }
+        public MetaObject BinaryType { get; set; }
 
-        public ObjectType BooleanType { get; set; }
+        public MetaObject BooleanType { get; set; }
 
-        public ObjectType C1 { get; set; }
+        public MetaObject C1 { get; set; }
 
-        public ObjectType C2 { get; set; }
+        public MetaObject C2 { get; set; }
 
-        public ObjectType C3 { get; set; }
+        public MetaObject C3 { get; set; }
 
-        public ObjectType C4 { get; set; }
+        public MetaObject C4 { get; set; }
 
-        public ObjectType[] Classes { get; set; }
+        public MetaObject[] Classes { get; set; }
 
-        public ObjectType[] CompositeAbstractClasses { get; set; }
+        public MetaObject[] CompositeAbstractClasses { get; set; }
 
-        public ObjectType[] CompositeClasses { get; set; }
+        public MetaObject[] CompositeClasses { get; set; }
 
-        public ObjectType[] CompositeConcreteClasses { get; set; }
+        public MetaObject[] CompositeConcreteClasses { get; set; }
 
-        public ObjectType[] CompositeInterfaces { get; set; }
+        public MetaObject[] CompositeInterfaces { get; set; }
 
-        public ObjectType[] CompositeTypes
+        public MetaObject[] CompositeTypes
         {
             get
             {
-                var compositeTypes = new List<ObjectType>();
-                foreach (ObjectType type in this.Types)
+                var compositeTypes = new List<MetaObject>();
+                foreach (MetaObject type in this.Types)
                 {
                     if (type.IsComposite)
                     {
@@ -91,42 +91,42 @@ namespace Allors.Meta.Static
             }
         }
 
-        public ObjectType[] Composites { get; set; }
+        public MetaObject[] Composites { get; set; }
 
-        public ObjectType DateTimeType { get; set; }
+        public MetaObject DateTimeType { get; set; }
 
-        public ObjectType DecimalType { get; set; }
+        public MetaObject DecimalType { get; set; }
 
-        public ObjectType DoubleType { get; set; }
+        public MetaObject DoubleType { get; set; }
 
-        public ObjectType I1 { get; set; }
+        public MetaObject I1 { get; set; }
 
-        public ObjectType I12 { get; set; }
+        public MetaObject I12 { get; set; }
 
-        public ObjectType I2 { get; set; }
+        public MetaObject I2 { get; set; }
 
-        public ObjectType I3 { get; set; }
+        public MetaObject I3 { get; set; }
 
-        public ObjectType I34 { get; set; }
+        public MetaObject I34 { get; set; }
 
-        public ObjectType I4 { get; set; }
+        public MetaObject I4 { get; set; }
 
-        public ObjectType IntegerType { get; set; }
+        public MetaObject IntegerType { get; set; }
 
-        public ObjectType[] Interfaces { get; set; }
+        public MetaObject[] Interfaces { get; set; }
 
-        public ObjectType LongType { get; set; }
+        public MetaObject LongType { get; set; }
 
-        public ObjectType StringType { get; set; }
+        public MetaObject StringType { get; set; }
 
-        public ObjectType UniqueType { get; set; }
+        public MetaObject UniqueType { get; set; }
 
-        public ObjectType[] UnitTypes
+        public MetaObject[] UnitTypes
         {
             get
             {
-                var unitTypes = new List<ObjectType>();
-                foreach (ObjectType type in this.Types)
+                var unitTypes = new List<MetaObject>();
+                foreach (MetaObject type in this.Types)
                 {
                     if (type.IsUnit)
                     {
@@ -138,7 +138,7 @@ namespace Allors.Meta.Static
             }
         }
 
-        internal Domain Domain { get; set; }
+        internal MetaDomain Domain { get; set; }
 
         internal AllorsEmbeddedObject[] Inheritances
         {
@@ -161,7 +161,7 @@ namespace Allors.Meta.Static
             get
             {
                 var results = new Hashtable();
-                foreach (RelationType relation in this.Relations)
+                foreach (MetaRelation relation in this.Relations)
                 {
                     results.Add(relation.Id, relation);
                 }
@@ -186,7 +186,7 @@ namespace Allors.Meta.Static
             }
         }
 
-        internal Domain SuperDomain { get; set; }
+        internal MetaDomain SuperDomain { get; set; }
 
         internal AllorsEmbeddedObject[] Types
         {
@@ -201,7 +201,7 @@ namespace Allors.Meta.Static
             get
             {
                 var results = new Hashtable();
-                foreach (ObjectType allorsType in this.Types)
+                foreach (MetaObject allorsType in this.Types)
                 {
                     results.Add(allorsType.Id, allorsType);
                 }
@@ -210,34 +210,34 @@ namespace Allors.Meta.Static
             }
         }
 
-        public static ObjectType CreateAbstractClass(Domain domain, string name)
+        public static MetaObject CreateAbstractClass(MetaDomain domain, string name)
         {
             var type = CreateType(domain, name);
             type.IsAbstract = true;
             return type;
         }
 
-        public static ObjectType CreateClass(Domain domain, string name)
+        public static MetaObject CreateClass(MetaDomain domain, string name)
         {
             var type = CreateType(domain, name);
             return type;
         }
 
-        public static ObjectType CreateInterface(Domain domain, string name)
-        {
-            var type = CreateType(domain, name);
-            type.IsInterface = true;
-            return type;
-        }
-
-        public static ObjectType CreateMultiple(Domain domain, string name)
+        public static MetaObject CreateInterface(MetaDomain domain, string name)
         {
             var type = CreateType(domain, name);
             type.IsInterface = true;
             return type;
         }
 
-        public static ObjectType CreateType(Domain domain, string name)
+        public static MetaObject CreateMultiple(MetaDomain domain, string name)
+        {
+            var type = CreateType(domain, name);
+            type.IsInterface = true;
+            return type;
+        }
+
+        public static MetaObject CreateType(MetaDomain domain, string name)
         {
             var type = domain.AddDeclaredObjectType(Guid.NewGuid());
             type.SingularName = name;
@@ -354,43 +354,43 @@ namespace Allors.Meta.Static
         {
             var compositeConcreteClassList = new ArrayList { this.C1, this.C2, this.C3, this.C4 };
 
-            this.CompositeConcreteClasses = (ObjectType[])compositeConcreteClassList.ToArray(typeof(ObjectType));
+            this.CompositeConcreteClasses = (MetaObject[])compositeConcreteClassList.ToArray(typeof(MetaObject));
 
             var compositeAbstractClassList = new ArrayList { this.A1, this.A2, this.A3, this.A4, this.A34 };
 
-            this.CompositeAbstractClasses = (ObjectType[])compositeAbstractClassList.ToArray(typeof(ObjectType));
+            this.CompositeAbstractClasses = (MetaObject[])compositeAbstractClassList.ToArray(typeof(MetaObject));
 
             var compositeInterfaceList = new ArrayList { this.I1, this.I2, this.I3, this.I4, this.I12, this.I34 };
-            this.CompositeInterfaces = (ObjectType[])compositeInterfaceList.ToArray(typeof(ObjectType));
+            this.CompositeInterfaces = (MetaObject[])compositeInterfaceList.ToArray(typeof(MetaObject));
             this.Interfaces = this.CompositeInterfaces;
 
             var compositeClassList = new ArrayList();
             compositeClassList.AddRange(this.CompositeConcreteClasses);
             compositeClassList.AddRange(this.CompositeAbstractClasses);
-            this.CompositeClasses = (ObjectType[])compositeClassList.ToArray(typeof(ObjectType));
+            this.CompositeClasses = (MetaObject[])compositeClassList.ToArray(typeof(MetaObject));
 
             var compositeList = new ArrayList();
             compositeList.AddRange(this.CompositeClasses);
             compositeList.AddRange(this.CompositeInterfaces);
-            this.Composites = (ObjectType[])compositeClassList.ToArray(typeof(ObjectType));
+            this.Composites = (MetaObject[])compositeClassList.ToArray(typeof(MetaObject));
 
             var classList = new ArrayList();
             classList.AddRange(this.UnitTypes);
             classList.AddRange(this.CompositeClasses);
-            this.Classes = (ObjectType[])classList.ToArray(typeof(ObjectType));
+            this.Classes = (MetaObject[])classList.ToArray(typeof(MetaObject));
         }
 
         private void GetUnits()
         {
-            this.BinaryType = (ObjectType)this.Domain.Domain.Find(UnitTypeIds.BinaryId);
-            this.BooleanType = (ObjectType)this.Domain.Domain.Find(UnitTypeIds.BooleanId);
-            this.DateTimeType = (ObjectType)this.Domain.Domain.Find(UnitTypeIds.DatetimeId);
-            this.DecimalType = (ObjectType)this.Domain.Domain.Find(UnitTypeIds.DecimalId);
-            this.DoubleType = (ObjectType)this.Domain.Domain.Find(UnitTypeIds.DoubleId);
-            this.IntegerType = (ObjectType)this.Domain.Domain.Find(UnitTypeIds.IntegerId);
-            this.LongType = (ObjectType)this.Domain.Domain.Find(UnitTypeIds.LongId);
-            this.StringType = (ObjectType)this.Domain.Domain.Find(UnitTypeIds.StringId);
-            this.UniqueType = (ObjectType)this.Domain.Domain.Find(UnitTypeIds.Unique);
+            this.BinaryType = (MetaObject)this.Domain.Domain.Find(MetaUnitIds.BinaryId);
+            this.BooleanType = (MetaObject)this.Domain.Domain.Find(MetaUnitIds.BooleanId);
+            this.DateTimeType = (MetaObject)this.Domain.Domain.Find(MetaUnitIds.DatetimeId);
+            this.DecimalType = (MetaObject)this.Domain.Domain.Find(MetaUnitIds.DecimalId);
+            this.DoubleType = (MetaObject)this.Domain.Domain.Find(MetaUnitIds.DoubleId);
+            this.IntegerType = (MetaObject)this.Domain.Domain.Find(MetaUnitIds.IntegerId);
+            this.LongType = (MetaObject)this.Domain.Domain.Find(MetaUnitIds.LongId);
+            this.StringType = (MetaObject)this.Domain.Domain.Find(MetaUnitIds.StringId);
+            this.UniqueType = (MetaObject)this.Domain.Domain.Find(MetaUnitIds.Unique);
         }
     }
 }
