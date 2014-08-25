@@ -329,17 +329,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Purges the derivations.
-        /// </summary>
-        internal void PurgeDerivations()
-        {
-            RemoveDerivedHierarchyPluralName();
-            RemoveDerivedHierarchySingularName();
-            RemoveDerivedRootName();
-            RemoveDerivedRootTypes();
-        }
-
-        /// <summary>
         /// Derive multiplicity, scale and size.
         /// </summary>
         internal void DeriveMultiplicityScaleAndSize()

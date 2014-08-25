@@ -78,7 +78,7 @@ namespace Allors.Adapters.Special
                         {
                             this.CacheFactory = new CacheFactory
                                                     {
-                                                        TransientObjectTypes = this.database.ObjectFactory.Domain.ObjectTypes,
+                                                        TransientObjectTypes = this.database.ObjectFactory.Domain.MetaObjects,
                                                     };
                             this.Init();
                         });

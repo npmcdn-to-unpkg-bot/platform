@@ -1149,28 +1149,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Purges the derivations.
-        /// </summary>
-        internal void PurgeDerivations()
-        {
-            this.RemoveDerivedAssociationTypes();
-            this.RemoveDerivedCompositeRoleTypes();
-            this.RemoveDerivedDirectSuperinterfaces();
-            this.RemoveDerivedExclusiveAssociationTypes();
-            this.RemoveDerivedExclusiveConcreteLeafClass();
-            this.RemoveDerivedExclusiveRoleTypes();
-            this.RemoveDerivedExclusiveSuperinterfaces();
-            this.RemoveDerivedRoleTypes();
-            this.RemoveDerivedRootClasses();
-            this.RemoveDerivedSubclasses();
-            this.RemoveDerivedSubinterfaces();
-            this.RemoveDerivedSuperclasses();
-            this.RemoveDerivedSuperinterfaces();
-            this.RemoveDerivedSupertypes();
-            this.RemoveDerivedUnitRoleTypes();
-        }
-
-        /// <summary>
         /// Derive association types.
         /// </summary>
         /// <param name="associations">The associations.</param>

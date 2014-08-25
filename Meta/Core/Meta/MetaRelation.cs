@@ -287,17 +287,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Purges the derivations.
-        /// </summary>
-        internal void PurgeDerivations()
-        {
-            if (this.ExistRoleType)
-            {
-                this.RoleType.PurgeDerivations();
-            }
-        }
-
-        /// <summary>
         /// Validates this. instance.
         /// </summary>
         /// <param name="validationLog">The validation.</param>

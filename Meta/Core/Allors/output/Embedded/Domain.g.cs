@@ -2,7 +2,7 @@ namespace Allors.Meta.AllorsGenerated
 {
 	internal interface AllorsInternalDomain : AllorsInternalMetaObject, AllorsInternal
 	{
-		global::Allors.Meta.MetaObject[] DeclaredObjectTypes
+		global::Allors.Meta.MetaObject[] MetaObjects
 		{
 			get;
 			set;
@@ -207,26 +207,6 @@ namespace Allors.Meta.AllorsGenerated
 		void AllorsRemoveDomainDerivedInheritance( global::Allors.Meta.MetaInheritance role );
 
 
-		global::Allors.Meta.MetaObject[] DerivedObjectTypes
-		{
-			get;
-			set;
-		}
-
-		void AddDerivedObjectType( global::Allors.Meta.MetaObject addRole );
-
-		void RemoveDerivedObjectType( global::Allors.Meta.MetaObject removeRole );
-
-		void RemoveDerivedObjectTypes();
-
-		bool ExistDerivedObjectTypes
-		{
-			get;
-		}
-		void AllorsRemoveDomainDerivedObjectType();
-
-		void AllorsRemoveDomainDerivedObjectType( global::Allors.Meta.MetaObject role );
-
 	}
 
 	public interface AllorsInterfaceDomain :  AllorsEmbeddedObject 
@@ -236,7 +216,7 @@ namespace Allors.Meta.AllorsGenerated
 	[System.Diagnostics.DebuggerNonUserCode]
 	public abstract class AllorsClassDomain :  global::Allors.Meta.MetaBase,  AllorsInternalDomain , AllorsEmbeddedObject
 	{
-		protected global::Allors.Meta.MetaObject[] _DomainDeclaredObjectType = AllorsEmbeddedArrays.EMPTY_ObjectType_ARRAY;
+		protected global::Allors.Meta.MetaObject[] DomainMetaObject = AllorsEmbeddedArrays.EMPTY_ObjectType_ARRAY;
 
 
 		protected System.Object _DomainName;
@@ -315,7 +295,7 @@ namespace Allors.Meta.AllorsGenerated
 	        switch(relation.Tag)
 			{
 				case AllorsRelationTags.DomainDeclaredObjectType:
-					return _DomainDeclaredObjectType;
+					return this.DomainMetaObject;
 				case AllorsRelationTags.DomainName:
 					return _DomainName;
 				case AllorsRelationTags.DomainDeclaredMethodType:
@@ -378,9 +358,6 @@ namespace Allors.Meta.AllorsGenerated
 				case AllorsRelationTags.DomainDerivedInheritance:
 					RoleSetDomainDerivedInheritance((global::Allors.Meta.MetaInheritance[])role);
 					break;
-				case AllorsRelationTags.DomainDerivedObjectType:
-					RoleSetDomainDerivedObjectType((global::Allors.Meta.MetaObject[])role);
-					break;
 				case AllorsRelationTags.MetaObjectId:
 					RoleSetMetaObjectId((global::System.Guid)role);
 					break;
@@ -391,11 +368,11 @@ namespace Allors.Meta.AllorsGenerated
 		}
 
 
-		public virtual global::Allors.Meta.MetaObject[] DeclaredObjectTypes
+		public virtual global::Allors.Meta.MetaObject[] MetaObjects
 		{
 			get
 			{
-			    return _DomainDeclaredObjectType;
+			    return this.DomainMetaObject;
 			}
 
 			set
@@ -428,10 +405,10 @@ namespace Allors.Meta.AllorsGenerated
 			if( addRole != null )
 			{
 				((AllorsInternalObjectType)addRole).AllorsRoleReleaseDeclaredObjectTypeDomain();
-				if( !AllorsEmbeddedArrays.Exist( _DomainDeclaredObjectType, addRole ) ) 
+				if( !AllorsEmbeddedArrays.Exist( this.DomainMetaObject, addRole ) ) 
 				{
 					// association side
-					_DomainDeclaredObjectType = (global::Allors.Meta.MetaObject[]) AllorsEmbeddedArrays.Add( _DomainDeclaredObjectType, addRole );
+					this.DomainMetaObject = (global::Allors.Meta.MetaObject[]) AllorsEmbeddedArrays.Add( this.DomainMetaObject, addRole );
 					// role side
 					((AllorsInternalObjectType)addRole).AllorsRoleSyncSetDeclaredObjectTypeDomain( (global::Allors.Meta.MetaDomain) this ); 
 				}
@@ -448,9 +425,9 @@ namespace Allors.Meta.AllorsGenerated
 			AllorsAssert(removeRole);
 			if( removeRole != null )
 			{
-				if(AllorsEmbeddedArrays.Exist( _DomainDeclaredObjectType, removeRole ) ) 
+				if(AllorsEmbeddedArrays.Exist( this.DomainMetaObject, removeRole ) ) 
 				{
-					_DomainDeclaredObjectType = (global::Allors.Meta.MetaObject[]) AllorsEmbeddedArrays.Remove( _DomainDeclaredObjectType, removeRole );
+					this.DomainMetaObject = (global::Allors.Meta.MetaObject[]) AllorsEmbeddedArrays.Remove( this.DomainMetaObject, removeRole );
 					// role side
 					((AllorsInternalObjectType)removeRole).AllorsRoleSyncSetDeclaredObjectTypeDomain( null ); 
 			
@@ -465,22 +442,22 @@ namespace Allors.Meta.AllorsGenerated
 
 		void AllorsInternalDomain.AllorsRemoveDomainDeclaredObjectType()
 		{
-		    if( _DomainDeclaredObjectType!=null )
+		    if( this.DomainMetaObject!=null )
 			{
-				foreach( global::Allors.Meta.MetaObject role in _DomainDeclaredObjectType ) 
+				foreach( global::Allors.Meta.MetaObject role in this.DomainMetaObject ) 
 				{
 					// role side
 					((AllorsInternalObjectType)role).AllorsRoleSyncSetDeclaredObjectTypeDomain( null ); 
 				}
 			}
-			_DomainDeclaredObjectType = AllorsEmbeddedArrays.EMPTY_ObjectType_ARRAY;
+			this.DomainMetaObject = AllorsEmbeddedArrays.EMPTY_ObjectType_ARRAY;
 		}
 
 		public virtual bool ExistDeclaredObjectTypes
 		{
 			get
 			{
-				return _DomainDeclaredObjectType.Length > 0;
+				return this.DomainMetaObject.Length > 0;
 			}
 		}
 
@@ -1262,114 +1239,5 @@ namespace Allors.Meta.AllorsGenerated
 			}
 		}
 
-
-		public virtual global::Allors.Meta.MetaObject[] DerivedObjectTypes
-		{
-			get
-			{
-			    return _DomainDerivedObjectType;
-			}
-
-			set
-			{ 
-				AllorsAssert(value);
-				RoleSetDomainDerivedObjectType(value);
-			}
-		}
-
-		protected void RoleSetDomainDerivedObjectType(global::Allors.Meta.MetaObject[] roles)
-		{
-			((AllorsInternalDomain)this).AllorsRemoveDomainDerivedObjectType();
-			if( roles != null && roles.Length > 0 )
-			{
-				foreach( global::Allors.Meta.MetaObject role in roles )
-				{
-					RoleAddDerivedObjectType(role);
-				}
-			}
-		}
-
-		public virtual void AddDerivedObjectType( global::Allors.Meta.MetaObject addRole )
-		{
-			RoleAddDerivedObjectType( addRole );
-		}
-
-		void RoleAddDerivedObjectType( global::Allors.Meta.MetaObject addRole )
-		{
-			AllorsAssert(addRole);
-			if( addRole != null )
-			{
-				if( !AllorsEmbeddedArrays.Exist( _DomainDerivedObjectType, addRole ) ) 
-				{
-					// association side
-					_DomainDerivedObjectType = (global::Allors.Meta.MetaObject[]) AllorsEmbeddedArrays.Add( _DomainDerivedObjectType, addRole );
-					// role side
-					((AllorsInternalObjectType)addRole).AllorsRoleSyncAddDerivedObjectTypeDomain( (global::Allors.Meta.MetaDomain) this ); 
-				}
-			}
-		}
-
-		public virtual void RemoveDerivedObjectType( global::Allors.Meta.MetaObject removeRole ) 
-		{
-			((AllorsInternalDomain)this).AllorsRemoveDomainDerivedObjectType( removeRole );
-		}
-
-		void AllorsInternalDomain.AllorsRemoveDomainDerivedObjectType( global::Allors.Meta.MetaObject removeRole ) 
-		{
-			AllorsAssert(removeRole);
-			if( removeRole != null )
-			{
-				if(AllorsEmbeddedArrays.Exist( _DomainDerivedObjectType, removeRole ) ) 
-				{
-					_DomainDerivedObjectType = (global::Allors.Meta.MetaObject[]) AllorsEmbeddedArrays.Remove( _DomainDerivedObjectType, removeRole );
-					// role side
-					((AllorsInternalObjectType)removeRole).AllorsRoleSyncRemoveDerivedObjectTypeDomain( (global::Allors.Meta.MetaDomain) this ); 
-			
-				}
-			}
-		}
-
-		public virtual void RemoveDerivedObjectTypes()
-		{
-			((AllorsInternalDomain)this).AllorsRemoveDomainDerivedObjectType();
-		}
-
-		void AllorsInternalDomain.AllorsRemoveDomainDerivedObjectType()
-		{
-		    if( _DomainDerivedObjectType!=null )
-			{
-				foreach( global::Allors.Meta.MetaObject role in _DomainDerivedObjectType ) 
-				{
-					// role side
-					((AllorsInternalObjectType)role).AllorsRoleSyncRemoveDerivedObjectTypeDomain( (global::Allors.Meta.MetaDomain) this ); 
-				}
-			}
-			_DomainDerivedObjectType = AllorsEmbeddedArrays.EMPTY_ObjectType_ARRAY;
-		}
-
-		public virtual bool ExistDerivedObjectTypes
-		{
-			get
-			{
-				return _DomainDerivedObjectType.Length > 0;
-			}
-		}
-
-		public virtual global::Allors.Meta.MetaDomain[] DomainsWhereUnitDomain
-		{
-			get
-			{
-			    return _UnitDomainDomain;
-			}
-		}
-
-		public virtual bool ExistDomainsWhereUnitDomain
-		{
-			get
-			{
-				return _UnitDomainDomain.Length > 0;
-			}
-		}
-
-}
+    }
 }

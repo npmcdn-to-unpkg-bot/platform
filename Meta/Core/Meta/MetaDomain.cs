@@ -35,11 +35,6 @@ namespace Allors.Meta
     public sealed partial class MetaDomain : IComparable
     {
         /// <summary>
-        /// The version.
-        /// </summary>
-        public static readonly Version Version = new Version(1, 0);
-
-        /// <summary>
         /// The default plural form.
         /// </summary>
         private const string DefaultPluralForm = "s";
@@ -53,11 +48,6 @@ namespace Allors.Meta
         /// The session key for the <see cref="MetaDomain"/>
         /// </summary>
         private const string DomainSessionKey = "E0446FFC-014E-4DEC-B9FF-D8064C7DD3E7";
-
-        /// <summary>
-        /// The session key for the <see cref="MetaDomain"/>s.
-        /// </summary>
-        private const string DomainsSessionKey = "A2F0B18C-1980-46C6-AD78-D56E2CF8BD80";
 
         /// <summary>
         /// The name of the Allors Unit Domain.
@@ -103,18 +93,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Gets the domains.
-        /// </summary>
-        /// <value>The domains.</value>
-        public MetaDomain[] Domains
-        {
-            get
-            {
-                return (MetaDomain[])session[DomainsSessionKey];
-            }
-        }
-
-        /// <summary>
         /// Gets the inheritances.
         /// </summary>
         /// <value>The inheritances.</value>
@@ -145,53 +123,15 @@ namespace Allors.Meta
         {
             get { return this.Validate().Errors.Length == 0; }
         }
-
-        /// <summary>
-        /// Gets the saved population as an xml string.
-        /// </summary>
-        public string Xml
-        {
-            get
-            {
-                var stringBuilder = new StringBuilder();
-
-                var xmlWriterSettings = new XmlWriterSettings
-                    { 
-                        Encoding = Encoding.UTF8, 
-                        OmitXmlDeclaration = true, 
-                        Indent = true 
-                    };
-
-                using (var xmlWriter = XmlWriter.Create(stringBuilder, xmlWriterSettings))
-                {
-                    this.Save(xmlWriter);
-                    xmlWriter.Flush();
-                }
-
-                return stringBuilder.ToString();
-            }
-        }
  
         /// <summary>
         /// Gets or sets the object types that are Defined to this domain.
         /// </summary>
         /// <value>The Defined object types.</value>
-        public override MetaObject[] DeclaredObjectTypes
+        public override MetaObject[] MetaObjects
         {
-            get { return base.DeclaredObjectTypes; }
+            get { return base.MetaObjects; }
             set { throw new ArgumentException("Use Domain.AddObjectType() and ObjectType.Delete()"); }
-        }
-
-        /// <summary>
-        /// Gets the object types.
-        /// </summary>
-        /// <value>The object types.</value>
-        public MetaObject[] ObjectTypes
-        {
-            get
-            {
-                return DerivedObjectTypes;
-            }
         }
 
         /// <summary>
@@ -227,16 +167,6 @@ namespace Allors.Meta
             get
             {
                 return DerivedUnitObjectTypes;
-            }
-        }
-
-        public string XmlVerbatimStringLiteral
-        {
-            get
-            {
-                var xml = this.Xml;
-                xml = xml.Replace("\"", "\"\"");
-                return xml;
             }
         }
 
@@ -314,40 +244,6 @@ namespace Allors.Meta
         public static MetaDomain GetDomain(AllorsEmbeddedObject allorsObject)
         {
             return GetDomain(allorsObject.AllorsSession);
-        }
-
-        /// <summary>
-        /// Loads the <see cref="MetaDomain"/> from the xml reader.
-        /// </summary>
-        /// <param name="xmlReader">The xml reader.</param>
-        /// <returns>The domain.</returns>
-        public static MetaDomain Load(XmlReader xmlReader)
-        {
-            var session = new AllorsEmbeddedSession();
-
-            session.Load(xmlReader);
-
-            foreach (var o in session.Extent(AllorsEmbeddedDomain.Domain))
-            {
-                var domain = (MetaDomain)o;
-                CacheConcreteDomain(session, domain);
-
-                domain.PurgeDerivations();
-
-                // Initialise MetaObjectById
-                foreach (var obj in domain.AllorsSession.Extent())
-                {
-                    var metaObject = obj as MetaBase;
-                    if (metaObject != null)
-                    {
-                        domain.MetaObjectById[metaObject.Id] = metaObject;
-                    }
-                }
-
-                return domain;
-            }
-
-            throw new ArgumentException("No domain found in the repository");
         }
 
         /// <summary>
@@ -551,17 +447,7 @@ namespace Allors.Meta
         {
             throw new ArgumentException("Use RelationType.Delete() to delete ObjectTypes.");
         }
-
-        /// <summary>
-        /// Saves the <see cref="MetaDomain"/> to the specified writer.
-        /// </summary>
-        /// <param name="xmlWriter">The XML writer.</param>
-        public void Save(XmlWriter xmlWriter)
-        {
-            this.PurgeDerivations();
-            AllorsSession.Save(xmlWriter);
-        }
-
+        
         /// <summary>
         /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
         /// </summary>
@@ -637,14 +523,10 @@ namespace Allors.Meta
             var inheritances = new List<MetaInheritance>(this.DeclaredInheritances);
             this.DerivedInheritances = inheritances.ToArray();
 
-            var objectTypes = new List<MetaObject>(this.DeclaredObjectTypes);
-
-            this.DerivedObjectTypes = objectTypes.ToArray();
-
             // Unit & Composite ObjectTypes
             var compositeTypes = new List<MetaObject>();
             var unitTypes = new List<MetaObject>();
-            foreach (var objectType in objectTypes)
+            foreach (var objectType in this.MetaObjects)
             {
                 if (objectType.IsUnit)
                 {
@@ -736,43 +618,43 @@ namespace Allors.Meta
             var sharedObjectTypeList = new HashSet<MetaObject>();
 
             // RoleTypes
-            foreach (var type in this.ObjectTypes)
+            foreach (var type in this.MetaObjects)
             {
                 type.DeriveRoleTypes(sharedRoleTypeList);
             }
 
             // Unit RoleTypes
-            foreach (var type in this.ObjectTypes)
+            foreach (var type in this.MetaObjects)
             {
                 type.DeriveUnitRoleTypes(sharedRoleTypeList);
             }
 
             // Composite RoleTypes
-            foreach (var type in this.ObjectTypes)
+            foreach (var type in this.MetaObjects)
             {
                 type.DeriveCompositeRoleTypes(sharedRoleTypeList);
             }
 
             // Exclusive RoleTypes
-            foreach (var type in this.ObjectTypes)
+            foreach (var type in this.MetaObjects)
             {
                 type.DeriveExclusiveRoleTypes(sharedRoleTypeList);
             }
 
             // AssociationTypes
-            foreach (var type in this.ObjectTypes)
+            foreach (var type in this.MetaObjects)
             {
                 type.DeriveAssociationTypes(sharedAssociationTypeList);
             }
 
             // Exclusive AssociationTypes
-            foreach (var type in this.ObjectTypes)
+            foreach (var type in this.MetaObjects)
             {
                 type.DeriveExclusiveAssociationTypes(sharedAssociationTypeList);
             }
 
             // Association & RoleType
-            foreach (var type in this.ObjectTypes)
+            foreach (var type in this.MetaObjects)
             {
                 foreach (var association in type.AssociationTypesWhereObjectType)
                 {
@@ -786,7 +668,7 @@ namespace Allors.Meta
             }
 
             // RoleType Root ObjectType
-            foreach (var type in this.ObjectTypes)
+            foreach (var type in this.MetaObjects)
             {
                 foreach (var role in type.RoleTypesWhereObjectType)
                 {
@@ -795,7 +677,7 @@ namespace Allors.Meta
             }
 
             // RoleType Hierarchy Singular Name
-            foreach (var type in this.ObjectTypes)
+            foreach (var type in this.MetaObjects)
             {
                 foreach (var role in type.RoleTypesWhereObjectType)
                 {
@@ -804,7 +686,7 @@ namespace Allors.Meta
             }
 
             // RoleType Hierarchy Plural Name
-            foreach (var type in this.ObjectTypes)
+            foreach (var type in this.MetaObjects)
             {
                 foreach (var role in type.RoleTypesWhereObjectType)
                 {
@@ -813,7 +695,7 @@ namespace Allors.Meta
             }
 
             // RoleType Root Name
-            foreach (var type in this.ObjectTypes)
+            foreach (var type in this.MetaObjects)
             {
                 foreach (var role in type.RoleTypesWhereObjectType)
                 {
@@ -838,7 +720,7 @@ namespace Allors.Meta
             var sharedMethodTypeList = new HashSet<MetaMethod>();
 
             // MethodTypes
-            foreach (var type in this.ObjectTypes)
+            foreach (var type in this.MetaObjects)
             {
                 type.DeriveMethodTypes(sharedMethodTypeList);
             }
@@ -907,32 +789,7 @@ namespace Allors.Meta
         {
             session[DomainSessionKey] = concreteDomain;
         }
-
-        /// <summary>
-        /// Purges the derivations.
-        /// </summary>
-        private void PurgeDerivations()
-        {
-            var objectTypes = (MetaObject[])AllorsSession.Extent(AllorsEmbeddedDomain.ObjectType);
-            foreach (var objectType in objectTypes)
-            {
-                objectType.PurgeDerivations();
-            }
-
-            var relationTypes = (MetaRelation[])AllorsSession.Extent(AllorsEmbeddedDomain.RelationType);
-            foreach (var relationType in relationTypes)
-            {
-                relationType.PurgeDerivations();
-            }
-
-            this.RemoveDerivedCompositeObjectTypes();
-            this.RemoveDerivedInheritances();
-            this.RemoveDerivedMethodTypes();
-            this.RemoveDerivedObjectTypes();
-            this.RemoveDerivedRelationTypes();
-            this.RemoveDerivedUnitObjectTypes();
-        }
-        
+       
         /// <summary>
         /// Adds the default population.
         /// </summary>

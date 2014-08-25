@@ -713,23 +713,6 @@ namespace Allors.Meta.AllorsGenerated
 		void AllorsRoleReleaseDerivedSuperclassObjectType();
 
 
-		global::Allors.Meta.MetaDomain[] DomainsWhereDerivedObjectType
-		{
-			get;
-		}
-
-		bool ExistDomainsWhereDerivedObjectType
-		{
-			get;
-		}
-
-		void AllorsRoleSyncAddDerivedObjectTypeDomain(global::Allors.Meta.MetaDomain association );
-
-		void AllorsRoleSyncRemoveDerivedObjectTypeDomain(global::Allors.Meta.MetaDomain association );
-
-		void AllorsRoleReleaseDerivedObjectTypeDomain();
-
-
 		global::Allors.Meta.MetaInheritance[] InheritancesWhereSupertype
 		{
 			get;
@@ -3403,43 +3386,6 @@ namespace Allors.Meta.AllorsGenerated
 		    foreach( global::Allors.Meta.MetaObject association in _DerivedSuperclassObjectType )
 			{
 				((AllorsInternalObjectType)association).AllorsRemoveObjectTypeDerivedSuperclass((global::Allors.Meta.MetaObject) this);
-			}
-		}
-
-		public virtual global::Allors.Meta.MetaDomain[] DomainsWhereDerivedObjectType
-		{
-			get
-			{
-			    return _DerivedObjectTypeDomain;
-			}
-		}
-
-		public virtual bool ExistDomainsWhereDerivedObjectType
-		{
-			get
-			{
-				return _DerivedObjectTypeDomain.Length > 0;
-			}
-		}
-
-		void AllorsInternalObjectType.AllorsRoleSyncAddDerivedObjectTypeDomain(global::Allors.Meta.MetaDomain association)
-		{
-		    if( !AllorsEmbeddedArrays.Exist( _DerivedObjectTypeDomain, association ) ) 
-			{
-				_DerivedObjectTypeDomain = (global::Allors.Meta.MetaDomain[])AllorsEmbeddedArrays.Add(_DerivedObjectTypeDomain,association);
-			}
-		}
-
-		void AllorsInternalObjectType.AllorsRoleSyncRemoveDerivedObjectTypeDomain(global::Allors.Meta.MetaDomain association)
-		{
-		    _DerivedObjectTypeDomain = (global::Allors.Meta.MetaDomain[]) AllorsEmbeddedArrays.Remove(_DerivedObjectTypeDomain,association);
-		}
-
-		void AllorsInternalObjectType.AllorsRoleReleaseDerivedObjectTypeDomain()
-		{
-		    foreach( global::Allors.Meta.MetaDomain association in _DerivedObjectTypeDomain )
-			{
-				((AllorsInternalDomain)association).AllorsRemoveDomainDerivedObjectType((global::Allors.Meta.MetaObject) this);
 			}
 		}
 
