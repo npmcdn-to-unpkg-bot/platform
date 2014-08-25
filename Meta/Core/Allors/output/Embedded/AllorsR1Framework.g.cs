@@ -1026,11 +1026,6 @@ namespace Allors.Meta.AllorsGenerated
 		public static AllorsEmbeddedRelationType DomainDerivedSuperDomain = new AllorsEmbeddedRelationType(new Guid("24a5b0cc-30aa-4124-a907-6bc382987ee3"),AllorsRelationTags.DomainDerivedSuperDomain,"DerivedSuperDomain", Domain, false, true);
 
 		/// <summary>
-		/// The ObjectTypeDerivedDirectSuperclass Relation Type.
-		/// </summary>
-		public static AllorsEmbeddedRelationType ObjectTypeDerivedDirectSuperclass = new AllorsEmbeddedRelationType(new Guid("26fd946a-1442-4330-9305-2498f7f14d86"),AllorsRelationTags.ObjectTypeDerivedDirectSuperclass,"DerivedDirectSuperclass", ObjectType, false, false);
-
-		/// <summary>
 		/// The ObjectTypePluralName Relation Type.
 		/// </summary>
 		public static AllorsEmbeddedRelationType ObjectTypePluralName = new AllorsEmbeddedRelationType(new Guid("2fdc2297-0c58-4adf-ba8f-20a67dc774ee"),AllorsRelationTags.ObjectTypePluralName,"PluralName", AllorsString, true, false);
@@ -1367,8 +1362,6 @@ namespace Allors.Meta.AllorsGenerated
 						RelationById[MetaObjectId.Id] = MetaObjectId;
 			RelationByTag[DomainDerivedSuperDomain.Tag] = DomainDerivedSuperDomain;
 						RelationById[DomainDerivedSuperDomain.Id] = DomainDerivedSuperDomain;
-			RelationByTag[ObjectTypeDerivedDirectSuperclass.Tag] = ObjectTypeDerivedDirectSuperclass;
-						RelationById[ObjectTypeDerivedDirectSuperclass.Id] = ObjectTypeDerivedDirectSuperclass;
 			RelationByTag[ObjectTypePluralName.Tag] = ObjectTypePluralName;
 						RelationById[ObjectTypePluralName.Id] = ObjectTypePluralName;
 			RelationByTag[RoleTypeObjectType.Tag] = RoleTypeObjectType;
@@ -1491,7 +1484,6 @@ namespace Allors.Meta.AllorsGenerated
 			MetaObjectId.ConcreteClassHierarchy.Add(ObjectType);
 			MetaObjectId.ConcreteClassHierarchy.Add(MethodType);
 			DomainDerivedSuperDomain.ConcreteClassHierarchy.Add(Domain);
-			ObjectTypeDerivedDirectSuperclass.ConcreteClassHierarchy.Add(ObjectType);
 			ObjectTypePluralName.ConcreteClassHierarchy.Add(ObjectType);
 			RoleTypeObjectType.ConcreteClassHierarchy.Add(RoleType);
 			RoleTypeDerivedRootType.ConcreteClassHierarchy.Add(RoleType);
@@ -1761,7 +1753,6 @@ namespace Allors.Meta.AllorsGenerated
 		internal const int AssociationTypeObjectType = 11;
 		internal const int MetaObjectId = 12;
 		internal const int DomainDerivedSuperDomain = 13;
-		internal const int ObjectTypeDerivedDirectSuperclass = 14;
 		internal const int ObjectTypePluralName = 15;
 		internal const int RoleTypeObjectType = 16;
 		internal const int RoleTypeDerivedRootType = 17;

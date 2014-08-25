@@ -139,16 +139,6 @@ namespace Allors.Meta
                     validationLog.AddError(message, this, ValidationKind.Unique, AllorsEmbeddedDomain.InheritanceSupertype);
                 }
 
-                if (this.Supertype.IsClass && this.Subtype.ExistDirectSuperclass)
-                {
-                    var existingInheritance = this.Subtype.FindInheritanceWhereDirectSubtype(this.Subtype.DirectSuperclass);
-                    if (!this.Equals(existingInheritance))
-                    {
-                        var message = "multiple class inheritance is not supported (" + this.ValidationName + ")";
-                        validationLog.AddError(message, this, ValidationKind.Exclusive, AllorsEmbeddedDomain.InheritanceSupertype);
-                    }
-                }
-
                 if (this.Supertype.IsConcreteComposite)
                 {
                     var message = this.ValidationName + " can not have a concrete superclass";

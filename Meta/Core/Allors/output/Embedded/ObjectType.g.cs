@@ -107,21 +107,6 @@ namespace Allors.Meta.AllorsGenerated
 		void AllorsRemoveObjectTypeDerivedDirectSupertype( global::Allors.Meta.MetaObject role );
 
 
-		global::Allors.Meta.MetaObject DerivedDirectSuperclass
-		{
-			get;
-			set;
-		}
-
-		void RemoveDerivedDirectSuperclass();
-
-		bool ExistDerivedDirectSuperclass
-		{
-			get;
-		}
-
-		void AllorsRemoveObjectTypeDerivedDirectSuperclass();
-
 
 		global::System.String PluralName
 		{
@@ -540,23 +525,6 @@ namespace Allors.Meta.AllorsGenerated
 		void AllorsRoleSyncRemoveObjectTypeAssociationType(global::Allors.Meta.MetaAssociation association );
 
 		void AllorsRoleReleaseObjectTypeAssociationType();
-
-
-		global::Allors.Meta.MetaObject[] ObjectTypesWhereDerivedDirectSuperclass
-		{
-			get;
-		}
-
-		bool ExistObjectTypesWhereDerivedDirectSuperclass
-		{
-			get;
-		}
-
-		void AllorsRoleSyncAddDerivedDirectSuperclassObjectType(global::Allors.Meta.MetaObject association );
-
-		void AllorsRoleSyncRemoveDerivedDirectSuperclassObjectType(global::Allors.Meta.MetaObject association );
-
-		void AllorsRoleReleaseDerivedDirectSuperclassObjectType();
 
 
 		global::Allors.Meta.MetaRole[] RoleTypesWhereObjectType
@@ -986,8 +954,6 @@ namespace Allors.Meta.AllorsGenerated
 					return _ObjectTypeDerivedAssociationType;
 				case AllorsRelationTags.ObjectTypeDerivedDirectSupertype:
 					return _ObjectTypeDerivedDirectSupertype;
-				case AllorsRelationTags.ObjectTypeDerivedDirectSuperclass:
-					return _ObjectTypeDerivedDirectSuperclass;
 				case AllorsRelationTags.ObjectTypePluralName:
 					return _ObjectTypePluralName;
 				case AllorsRelationTags.ObjectTypeDerivedMethodType:
@@ -1048,9 +1014,6 @@ namespace Allors.Meta.AllorsGenerated
 					break;
 				case AllorsRelationTags.ObjectTypeDerivedDirectSupertype:
 					RoleSetObjectTypeDerivedDirectSupertype((global::Allors.Meta.MetaObject[])role);
-					break;
-				case AllorsRelationTags.ObjectTypeDerivedDirectSuperclass:
-					RoleSetObjectTypeDerivedDirectSuperclass((global::Allors.Meta.MetaObject)role);
 					break;
 				case AllorsRelationTags.ObjectTypePluralName:
 					RoleSetObjectTypePluralName((global::System.String)role);
@@ -1577,55 +1540,6 @@ namespace Allors.Meta.AllorsGenerated
 			}
 		}
 
-
-		public virtual global::Allors.Meta.MetaObject DerivedDirectSuperclass
-		{
-			get
-			{
-			    return _ObjectTypeDerivedDirectSuperclass;
-			}
-
-			set
-			{
-				AllorsAssert(value);
-				RoleSetObjectTypeDerivedDirectSuperclass(value);
-			}
-		}
-
-		protected void RoleSetObjectTypeDerivedDirectSuperclass(global::Allors.Meta.MetaObject value)
-		{
-			((AllorsInternalObjectType)this).AllorsRemoveObjectTypeDerivedDirectSuperclass();
-			if( value != null ) 
-			{
-				_ObjectTypeDerivedDirectSuperclass = value;
-				_ObjectTypeDerivedDirectSuperclass = value;
-				// role side
-				((AllorsInternalObjectType)_ObjectTypeDerivedDirectSuperclass).AllorsRoleSyncAddDerivedDirectSuperclassObjectType((global::Allors.Meta.MetaObject) this ); 
-			}
-		}
-
-		public virtual void RemoveDerivedDirectSuperclass()
-		{
-			((AllorsInternalObjectType)this).AllorsRemoveObjectTypeDerivedDirectSuperclass();
-		}
-
-		void AllorsInternalObjectType.AllorsRemoveObjectTypeDerivedDirectSuperclass()
-		{
-		    if( _ObjectTypeDerivedDirectSuperclass != null) 
-			{
-				((AllorsInternalObjectType)_ObjectTypeDerivedDirectSuperclass).AllorsRoleSyncRemoveDerivedDirectSuperclassObjectType( (global::Allors.Meta.MetaObject) this ); 
-				_ObjectTypeDerivedDirectSuperclass = null;
-				_ObjectTypeDerivedDirectSuperclass = null;
-			}
-		}
-
-		public virtual bool ExistDerivedDirectSuperclass
-		{
-			get
-			{
-				return _ObjectTypeDerivedDirectSuperclass != null;
-			}
-		}
 
 		public virtual global::System.String PluralName
 		{
@@ -3066,43 +2980,6 @@ namespace Allors.Meta.AllorsGenerated
 		    foreach( global::Allors.Meta.MetaAssociation association in _ObjectTypeAssociationType )
 			{
 				((AllorsInternalAssociationType)association).AllorsRemoveAssociationTypeObjectType();
-			}
-		}
-
-		public virtual global::Allors.Meta.MetaObject[] ObjectTypesWhereDerivedDirectSuperclass
-		{
-			get
-			{
-			    return _DerivedDirectSuperclassObjectType;
-			}
-		}
-
-		public virtual bool ExistObjectTypesWhereDerivedDirectSuperclass
-		{
-			get
-			{
-				return _DerivedDirectSuperclassObjectType.Length > 0;
-			}
-		}
-
-		void AllorsInternalObjectType.AllorsRoleSyncAddDerivedDirectSuperclassObjectType(global::Allors.Meta.MetaObject association)
-		{
-		    if( !AllorsEmbeddedArrays.Exist( _DerivedDirectSuperclassObjectType, association ) ) 
-			{
-				_DerivedDirectSuperclassObjectType = (global::Allors.Meta.MetaObject[])AllorsEmbeddedArrays.Add(_DerivedDirectSuperclassObjectType,association);
-			}
-		}
-
-		void AllorsInternalObjectType.AllorsRoleSyncRemoveDerivedDirectSuperclassObjectType(global::Allors.Meta.MetaObject association)
-		{
-		    _DerivedDirectSuperclassObjectType = (global::Allors.Meta.MetaObject[]) AllorsEmbeddedArrays.Remove(_DerivedDirectSuperclassObjectType,association);
-		}
-
-		void AllorsInternalObjectType.AllorsRoleReleaseDerivedDirectSuperclassObjectType()
-		{
-		    foreach( global::Allors.Meta.MetaObject association in _DerivedDirectSuperclassObjectType )
-			{
-				((AllorsInternalObjectType)association).AllorsRemoveObjectTypeDerivedDirectSuperclass();
 			}
 		}
 

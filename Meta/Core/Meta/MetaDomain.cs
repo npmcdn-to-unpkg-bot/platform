@@ -745,12 +745,6 @@ namespace Allors.Meta
                 type.DeriveSupertypes(sharedList);
             }
 
-            // DirectSuperclass
-            foreach (var type in DerivedCompositeObjectTypes)
-            {
-                type.DeriveDirectSuperclass();
-            }
-
             // DirectSuperinterfaces
             foreach (var type in DerivedCompositeObjectTypes)
             {
@@ -790,18 +784,7 @@ namespace Allors.Meta
             // RootClasses
             foreach (var type in DerivedCompositeObjectTypes)
             {
-                if (!type.IsInterface)
-                {
-                    type.DeriveRootClassForClasses();
-                }
-            }
-
-            foreach (var type in DerivedCompositeObjectTypes)
-            {
-                if (type.IsInterface)
-                {
-                    type.DeriveRootClassForInterfaces(sharedList);
-                }
+                type.DeriveRootClasses();
             }
 
             // Exclusive Concrete Leaf Class

@@ -230,18 +230,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Gets the direct superclass.
-        /// </summary>
-        /// <value>The direct superclass.</value>
-        public MetaObject DirectSuperclass
-        {
-            get
-            {
-                return this.DerivedDirectSuperclass;
-            }
-        }
-
-        /// <summary>
         /// Gets the direct super interfaces.
         /// </summary>
         /// <value>The direct super interfaces.</value>
@@ -339,20 +327,6 @@ namespace Allors.Meta
         public bool ExistConcreteClasses
         {
             get { return this.ConcreteClasses.Length > 0; }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether there exists a direct superclass.
-        /// </summary>
-        /// <value>
-        ///  <c>true</c> if there exists a direct superclass; otherwise, <c>false</c>.
-        /// </value>
-        public bool ExistDirectSuperclass
-        {
-            get
-            {
-                return this.ExistDerivedDirectSuperclass;
-            }
         }
 
         /// <summary>
@@ -663,18 +637,6 @@ namespace Allors.Meta
                 }
 
                 return this.IdAsString;
-            }
-        }
-
-        /// <summary>
-        /// Gets the object types where this instance is a direct superclass.
-        /// </summary>
-        /// <value>The object types where this instance is a direct superclass.</value>
-        public MetaObject[] ObjectTypesWhereDirectSuperclass
-        {
-            get
-            {
-                return this.ObjectTypesWhereDerivedDirectSuperclass;
             }
         }
 
@@ -999,10 +961,6 @@ namespace Allors.Meta
                     throw new ArgumentException("The inheritance " + this + "::" + supertype + " can not have a concrete superclass");
                 }
 
-                if (supertype.IsClass && this.ExistDirectSuperclass)
-                {
-                }
-
                 inheritance = this.MetaDomain.AddDeclaredInheritance(Guid.NewGuid());
                 inheritance.Subtype = this;
                 inheritance.Supertype = supertype;
@@ -1231,7 +1189,6 @@ namespace Allors.Meta
         {
             this.RemoveDerivedAssociationTypes();
             this.RemoveDerivedCompositeRoleTypes();
-            this.RemoveDerivedDirectSuperclass();
             this.RemoveDerivedDirectSuperinterfaces();
             this.RemoveDerivedExclusiveAssociationTypes();
             this.RemoveDerivedExclusiveConcreteLeafClass();
@@ -1325,21 +1282,6 @@ namespace Allors.Meta
         internal void DeriveConcreteClassesCache()
         {
             this.concreteClassesCache = new HashSet<MetaObject>(this.ConcreteClasses);
-        }
-
-        /// <summary>
-        /// Derive direct superclass.
-        /// </summary>
-        internal void DeriveDirectSuperclass()
-        {
-            this.DerivedDirectSuperclass = null;
-            foreach (var directSupertype in this.DerivedDirectSupertypes)
-            {
-                if (!directSupertype.IsInterface)
-                {
-                    this.DerivedDirectSuperclass = directSupertype;
-                }
-            }
         }
 
         /// <summary>
@@ -1548,41 +1490,16 @@ namespace Allors.Meta
         /// <summary>
         /// Derive root class for classes.
         /// </summary>
-        internal void DeriveRootClassForClasses()
+        internal void DeriveRootClasses()
         {
-            this.DerivedRootClasses = null;
-            if (!this.IsInterface)
-            {
-                this.DeriveRootClassForClassRecursively(this);
-            }
-        }
-
-        /// <summary>
-        /// Derive root class for interfaces.
-        /// </summary>
-        /// <param name="rootClasses">The root classes.</param>
-        internal void DeriveRootClassForInterfaces(HashSet<MetaObject> rootClasses)
-        {
-            // TODO: Extra Tests required.
-            rootClasses.Clear();
             if (this.IsInterface)
             {
-                foreach (var subClass in this.DerivedSubclasses)
-                {
-                    foreach (var rootClass in subClass.DerivedRootClasses)
-                    {
-                        if (!rootClasses.Contains(rootClass))
-                        {
-                            rootClasses.Add(rootClass);
-                        }
-                    }
-                }
+                this.DerivedRootClasses = this.DerivedSubclasses;
             }
-
-            var rootClassArray = new MetaObject[rootClasses.Count];
-            rootClasses.CopyTo(rootClassArray);
-
-            this.DerivedRootClasses = rootClassArray;
+            else
+            {
+                this.DerivedRootClasses = new[] { this };
+            }
         }
 
         /// <summary>
@@ -1837,22 +1754,6 @@ namespace Allors.Meta
             }
 
             return false;
-        }
-
-        /// <summary>
-        /// Derive root class for class recursively.
-        /// </summary>
-        /// <param name="type">The type .</param>
-        private void DeriveRootClassForClassRecursively(MetaObject type)
-        {
-            if (this.ExistDerivedDirectSuperclass && !Equals(this.DerivedDirectSuperclass, type))
-            {
-                this.DerivedDirectSuperclass.DeriveRootClassForClassRecursively(type);
-            }
-            else
-            {
-                type.AddDerivedRootClass(this);
-            }
         }
 
         /// <summary>
