@@ -1043,7 +1043,7 @@ $$ language plpgsql;
                                 if (associationType.IsOne)
                                 {
                                     // Get Composite Association (1-1) [object table]
-                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GA_" + objectType.Name + "_" + associationType.RootName };
+                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GA_" + objectType.Name + "_" + associationType.Name };
                                     procedure.Definition =
 @"DROP FUNCTION IF EXISTS " + procedure.Name + @"(" + this.database.GetSqlType(this.RoleId) + @");
 CREATE FUNCTION " + procedure.Name + @"(" + this.RoleId.Param + @" " + this.database.GetSqlType(this.RoleId) + @")
@@ -1066,7 +1066,7 @@ $$ language plpgsql;
                                 else
                                 {
                                     // Get Composite Association (*-1) [object table]
-                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GA_" + objectType.Name + "_" + associationType.RootName };
+                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GA_" + objectType.Name + "_" + associationType.Name };
                                     procedure.Definition =
 @"DROP FUNCTION IF EXISTS " + procedure.Name + @"(" + this.database.GetSqlType(this.RoleId) + @");
 CREATE FUNCTION " + procedure.Name + @"(" + this.RoleId.Param + @" " + this.database.GetSqlType(this.RoleId) + @")
@@ -1128,7 +1128,7 @@ $$ language plpgsql;
                             else
                             {
                                 // Get Composites Role (1-*) [object table]
-                                procedure = new SchemaProcedure { Name = AllorsPrefix + "GR_" + objectType.Name + "_" + associationType.RootName };
+                                procedure = new SchemaProcedure { Name = AllorsPrefix + "GR_" + objectType.Name + "_" + associationType.Name };
                                 procedure.Definition =
 @"DROP FUNCTION IF EXISTS " + procedure.Name + @"(" + this.database.GetSqlType(this.AssociationId) + @");
 CREATE FUNCTION " + procedure.Name + @"(" + this.AssociationId.Param + @" " + this.database.GetSqlType(this.AssociationId) + @")
@@ -1149,7 +1149,7 @@ $$ language plpgsql;
                                 if (associationType.IsOne)
                                 {
                                     // Get Composite Association (1-*) [object table]
-                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GA_" + objectType.Name + "_" + associationType.RootName };
+                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GA_" + objectType.Name + "_" + associationType.Name };
                                     procedure.Definition =
 @"DROP FUNCTION IF EXISTS " + procedure.Name + @"(" + this.database.GetSqlType(this.RoleId) + @");
 CREATE FUNCTION " + procedure.Name + @"(" + this.RoleId.Param + @" " + this.database.GetSqlType(this.RoleId) + @")
@@ -1171,7 +1171,7 @@ $$ language plpgsql;
                                 }
 
                                 // Add Composite Role (1-*) [object table]
-                                procedure = new SchemaProcedure { Name = AllorsPrefix + "A_" + objectType.Name + "_" + associationType.RootName };
+                                procedure = new SchemaProcedure { Name = AllorsPrefix + "A_" + objectType.Name + "_" + associationType.Name };
                                 procedure.Definition =
 @"DROP FUNCTION IF EXISTS " + procedure.Name + @"(" + this.ObjectArrayParam.TypeName + ", " + this.CompositeRelationArrayParam.TypeName + @");
 CREATE FUNCTION " + procedure.Name + @"(" + this.ObjectArrayParam + @" " + this.ObjectArrayParam.TypeName + @", " + this.CompositeRelationArrayParam + @" " + this.CompositeRelationArrayParam.TypeName + @")
@@ -1195,7 +1195,7 @@ $$ language plpgsql;
                                 this.procedureByName.Add(procedure.Name, procedure);
 
                                 // Remove Composite Role (1-*) [object table]
-                                procedure = new SchemaProcedure { Name = AllorsPrefix + "R_" + objectType.Name + "_" + associationType.RootName };
+                                procedure = new SchemaProcedure { Name = AllorsPrefix + "R_" + objectType.Name + "_" + associationType.Name };
                                 procedure.Definition =
 @"DROP FUNCTION IF EXISTS " + procedure.Name + @"(" + this.ObjectArrayParam.TypeName + ", " + this.CompositeRelationArrayParam.TypeName + @");
 CREATE FUNCTION " + procedure.Name + @"(" + this.ObjectArrayParam + @" " + this.ObjectArrayParam.TypeName + @", " + this.CompositeRelationArrayParam + @" " + this.CompositeRelationArrayParam.TypeName + @")
@@ -1220,7 +1220,7 @@ $$ language plpgsql;
                                 this.procedureByName.Add(procedure.Name, procedure);
 
                                 // Clear Composites Role (1-*) [object table]
-                                procedure = new SchemaProcedure { Name = AllorsPrefix + "C_" + objectType.Name + "_" + associationType.RootName };
+                                procedure = new SchemaProcedure { Name = AllorsPrefix + "C_" + objectType.Name + "_" + associationType.Name };
                                 procedure.Definition =
 @"DROP FUNCTION IF EXISTS " + procedure.Name + @"(" + this.ObjectArrayParam.TypeName + @");
 CREATE FUNCTION " + procedure.Name + @"(" + this.ObjectArrayParam + @" " + this.ObjectArrayParam.TypeName + @")

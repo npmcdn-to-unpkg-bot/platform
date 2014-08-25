@@ -66,7 +66,7 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
                     }
                     else
                     {
-                        sql = Sql.Schema.AllorsPrefix + "C_" + roleType.ObjectType.ExclusiveRootClass.Name + "_" + associationType.RootName;
+                        sql = Sql.Schema.AllorsPrefix + "C_" + roleType.ObjectType.ExclusiveRootClass.Name + "_" + associationType.Name;
                     }
                 }
 

@@ -51,8 +51,8 @@ namespace Allors.Adapters.Database.Sql
 
             if ((this.association.IsMany && this.association.RelationTypeWhereAssociationType.RoleType.IsMany) || !this.association.RelationTypeWhereAssociationType.ExistExclusiveRootClasses)
             {
-                statement.Append(" (" + this.association.RootName + "_A." + schema.AssociationId + " IS NOT NULL AND ");
-                statement.Append(" " + this.association.RootName + "_A." + schema.AssociationId + " IN (\n");
+                statement.Append(" (" + this.association.Name + "_A." + schema.AssociationId + " IS NOT NULL AND ");
+                statement.Append(" " + this.association.Name + "_A." + schema.AssociationId + " IN (\n");
                 statement.Append(inStatement.ToString());
                 statement.Append(" ))\n");
             }
@@ -67,8 +67,8 @@ namespace Allors.Adapters.Database.Sql
                 }
                 else
                 {
-                    statement.Append(" (" + this.association.RootName + "_A." + schema.ObjectId + " IS NOT NULL AND ");
-                    statement.Append(" " + this.association.RootName + "_A." + schema.ObjectId + " IN (\n");
+                    statement.Append(" (" + this.association.Name + "_A." + schema.ObjectId + " IS NOT NULL AND ");
+                    statement.Append(" " + this.association.Name + "_A." + schema.ObjectId + " IN (\n");
                     statement.Append(inStatement.ToString());
                     statement.Append(" ))\n");
                 }

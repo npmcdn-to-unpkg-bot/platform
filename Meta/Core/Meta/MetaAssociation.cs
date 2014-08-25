@@ -45,74 +45,31 @@ namespace Allors.Meta
         {
             get
             {
-                return this.FullName;
-            }
-        }
-
-        /// <summary>
-        /// Gets the name.
-        /// </summary>
-        /// <value>The name .</value>
-        public string FullName
-        {
-            get
-            {
                 if (this.IsMany)
                 {
-                    return this.WherePluralName;
+                    return this.PluralName;
                 }
 
-                return this.WhereSingularName;
+                return this.SingularName;
             }
         }
 
         /// <summary>
-        /// Gets or sets the name of the assigned plural.
+        /// Gets the plural name when using <see cref="Where"/>.
         /// </summary>
-        /// <value>The name of the assigned plural.</value>
-        public override string AssignedPluralName
+        /// <value>The plural name when using <see cref="Where"/>.</value>
+        public string PluralName
         {
-            get
-            {
-                return base.AssignedPluralName;
-            }
-
-            set
-            {
-                this.StaleRelationTypeDerivations();
-                base.AssignedPluralName = value;
-            }
+            get { return this.ObjectType.Name + Where + this.RelationTypeWhereAssociationType.RoleType.SingularName; }
         }
 
         /// <summary>
-        /// Gets or sets the name of the assigned singular.
+        /// Gets the singular name when using <see cref="Where"/>.
         /// </summary>
-        /// <value>The name of the assigned singular.</value>
-        public override string AssignedSingularName
+        /// <value>The singular name when using <see cref="Where"/>.</value>
+        public string SingularName
         {
-            get
-            {
-                return base.AssignedSingularName;
-            }
-
-            set
-            {
-                this.StaleRelationTypeDerivations();
-                base.AssignedSingularName = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether there exist root <see cref="ObjectType"/>s.
-        /// </summary>
-        /// <value><c>true</c> if there exists root <see cref="ObjectType"/>s; otherwise, <c>false</c>.</value>
-        public bool ExistRootTypes
-        {
-            get
-            {
-                this.EnsureRelationTypeDerivations();
-                return ExistDerivedRootObjectTypes;
-            }
+            get { return this.ObjectType.Name + Where + this.RelationTypeWhereAssociationType.RoleType.SingularName; }
         }
 
         /// <summary>
@@ -124,46 +81,6 @@ namespace Allors.Meta
             {
                 return this.Name;
             }
-        }
-
-        /// <summary>
-        /// Gets the the full plural name.
-        /// </summary>
-        /// <value>The full name of the plural.</value>
-        public string FullPluralName
-        {
-            get { return this.RelationTypeWhereAssociationType.RoleType.SingularName + this.PluralName; }
-        }
-
-        /// <summary>
-        /// Gets the full singular name.
-        /// </summary>
-        /// <value>The full name of the singular.</value>
-        public string FullSingularName
-        {
-            get { return this.RelationTypeWhereAssociationType.RoleType.SingularName + this.SingularName; }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether this instance's <see cref="AssignedPluralName"/> is default.
-        /// </summary>
-        /// <value>
-        /// <c>true</c> if this instance's <see cref="AssignedPluralName"/> is default; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsAssignedPluralNameDefault
-        {
-            get { return !ExistAssignedPluralName; }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether this instance's <see cref="AssignedSingularName"/> is default.
-        /// </summary>
-        /// <value>
-        ///  <c>true</c> if this instance's <see cref="AssignedPluralName"/> is default; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsAssignedSingularNameDefault
-        {
-            get { return !ExistAssignedSingularName; }
         }
 
         /// <summary>
@@ -236,28 +153,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Gets the plural name.
-        /// </summary>
-        /// <value>The plural name.</value>
-        public string PluralName
-        {
-            get
-            {
-                if (ExistAssignedPluralName)
-                {
-                    return this.AssignedPluralName;
-                }
-
-                if (ExistObjectType && ObjectType.ExistPluralName)
-                {
-                    return ObjectType.PluralName;
-                }
-
-                return this.SingularName;
-            }
-        }
-
-        /// <summary>
         /// Gets the relation type.
         /// </summary>
         /// <value>The type of the relation.</value>
@@ -276,64 +171,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Gets the root name.
-        /// </summary>
-        /// <value>The name of the root.</value>
-        public string RootName
-        {
-            get
-            {
-                this.EnsureRelationTypeDerivations();
-                return DerivedRootName;
-            }
-        }
-
-        /// <summary>
-        /// Gets the root types.
-        /// </summary>
-        /// <value>The root types.</value>
-        public MetaObject[] RootTypes
-        {
-            get
-            {
-                this.EnsureRelationTypeDerivations();
-                return DerivedRootObjectTypes;
-            }
-        }
-
-        /// <summary>
-        /// Gets the singular name.
-        /// </summary>
-        /// <value>The name of the singular.</value>
-        public string SingularName
-        {
-            get
-            {
-                if (ExistAssignedSingularName)
-                {
-                    return this.AssignedSingularName;
-                }
-
-                if (ExistObjectType)
-                {
-                    if (ObjectType.ExistSingularName)
-                    {
-                        return ObjectType.SingularName;
-                    }
-
-                    return ObjectType.ToString();
-                }
-
-                if (ExistRelationTypeWhereAssociationType)
-                {
-                    return RelationTypeWhereAssociationType.SafeName;
-                }
-
-                return this.Id.ToString();
-            }
-        }
-        
-        /// <summary>
         /// Gets the validation name.
         /// </summary>
         /// <value>The name of the validation.</value>
@@ -348,24 +185,6 @@ namespace Allors.Meta
 
                 return "unknown association type";
             }
-        }
-
-        /// <summary>
-        /// Gets the plural name when using <see cref="Where"/>.
-        /// </summary>
-        /// <value>The plural name when using <see cref="Where"/>.</value>
-        private string WherePluralName
-        {
-            get { return this.PluralName + Where + this.RelationTypeWhereAssociationType.RoleType.SingularName; }
-        }
-
-        /// <summary>
-        /// Gets the singular name when using <see cref="Where"/>.
-        /// </summary>
-        /// <value>The singular name when using <see cref="Where"/>.</value>
-        private string WhereSingularName
-        {
-            get { return this.SingularName + Where + this.RelationTypeWhereAssociationType.RoleType.SingularName; }
         }
 
         /// <summary>
@@ -386,17 +205,6 @@ namespace Allors.Meta
             }
 
             return -1;
-        }
-
-        /// <summary>
-        /// Send a changed event.
-        /// </summary>
-        public override void SendChangedEvent()
-        {
-            if (this.ExistRelationTypeWhereAssociationType)
-            {
-                this.RelationTypeWhereAssociationType.SendChangedEvent();
-            }
         }
 
         /// <summary>
@@ -422,24 +230,6 @@ namespace Allors.Meta
         }
         
         /// <summary>
-        /// Removes the AssignedPluralName.
-        /// </summary>
-        public override void RemoveAssignedPluralName()
-        {
-            this.StaleRelationTypeDerivations();
-            base.RemoveAssignedPluralName();
-        }
-
-        /// <summary>
-        /// Removes the AssignedSingularName.
-        /// </summary>
-        public override void RemoveAssignedSingularName()
-        {
-            this.StaleRelationTypeDerivations();
-            base.RemoveAssignedSingularName();
-        }
-
-        /// <summary>
         /// Removes the IsMany.
         /// </summary>
         public override void RemoveIsMany()
@@ -463,8 +253,6 @@ namespace Allors.Meta
         public void Reset()
         {
             this.IsMany = false;
-            this.RemoveAssignedPluralName();
-            this.RemoveAssignedSingularName();
             this.RemoveObjectType();
         }
 
@@ -522,21 +310,10 @@ namespace Allors.Meta
             }
 
             this.IsMany = source.IsMany;
-            this.AssignedPluralName = source.AssignedPluralName;
-            this.AssignedSingularName = source.AssignedSingularName;
             if (source.ExistObjectType)
             {
                 ObjectType = (MetaObject)this.Domain.Domain.Find(source.ObjectType.Id);
             }
-        }
-
-        /// <summary>
-        /// Purges the derivations.
-        /// </summary>
-        internal void PurgeDerivations()
-        {
-            RemoveDerivedRootName();
-            RemoveDerivedRootObjectTypes();
         }
 
         /// <summary>
@@ -550,73 +327,6 @@ namespace Allors.Meta
                 {
                     base.IsMany = false;
                 }
-            }
-        }
-
-        /// <summary>
-        /// Derives the root name.
-        /// </summary>
-        internal void DeriveRootName()
-        {
-            DerivedRootName = null;
-
-            if (ExistObjectType && ExistRelationTypeWhereAssociationType && RelationTypeWhereAssociationType.ExistRoleType &&
-                RelationTypeWhereAssociationType.RoleType.ExistObjectType)
-            {
-                DerivedRootName = this.FullSingularName;
-
-                if (ExistDerivedRootObjectTypes)
-                {
-                    DerivedRootName = this.SingularName;
-
-                    foreach (var bundledType in this.RootTypes)
-                    {
-                        foreach (var otherRole in bundledType.RolesTypesWhereRootType)
-                        {
-                            if (otherRole.ExistObjectType)
-                            {
-                                if (otherRole.SingularName.Equals(this.SingularName))
-                                {
-                                    DerivedRootName = this.FullSingularName;
-                                    return;
-                                }
-                            }
-                        }
-
-                        foreach (var otherAssociation in bundledType.AssociationTypesWhereRootType)
-                        {
-                            if (!this.Equals(otherAssociation))
-                            {
-                                if (otherAssociation.ExistObjectType)
-                                {
-                                    if (otherAssociation.SingularName.Equals(this.SingularName))
-                                    {
-                                        DerivedRootName = this.FullSingularName;
-                                        return;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Derives the root type.
-        /// </summary>
-        internal void DeriveRootType()
-        {
-            var relationType = RelationTypeWhereAssociationType;
-            var role = relationType.RoleType;
-
-            DerivedRootObjectTypes = null;
-
-            if (!relationType.IsManyToMany &&
-                relationType.ExistExclusiveRootClasses &&
-                role.IsMany)
-            {
-                DerivedRootObjectTypes = role.ObjectType.RootClasses;
             }
         }
 
@@ -638,24 +348,6 @@ namespace Allors.Meta
             {
                 var message = this.ValidationName + " has no relation type";
                 validationLog.AddError(message, this, ValidationKind.Required, AllorsEmbeddedDomain.RelationTypeAssociationType);
-            }
-
-            if (ExistAssignedSingularName && !ExistAssignedPluralName)
-            {
-                var message = this.ValidationName + " has a singular but no plural name";
-                validationLog.AddError(message, this, ValidationKind.Required, AllorsEmbeddedDomain.AssociationTypeAssignedPluralName);
-            }
-
-            if (this.ExistAssignedSingularName && this.AssignedSingularName.Length < 2)
-            {
-                var message = this.ValidationName + " should have an assigned singular name with at least 2 characters";
-                validationLog.AddError(message, this, ValidationKind.MinimumLength, AllorsEmbeddedDomain.AssociationTypeAssignedSingularName);
-            }
-
-            if (this.ExistAssignedPluralName && this.AssignedPluralName.Length < 2)
-            {
-                var message = this.ValidationName + " should have an assigned plural name with at least 2 characters";
-                validationLog.AddError(message, this, ValidationKind.MinimumLength, AllorsEmbeddedDomain.AssociationTypeAssignedPluralName);
             }
         }
 

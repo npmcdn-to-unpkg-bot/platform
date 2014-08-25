@@ -113,9 +113,7 @@
     <Compile Include="Core\Meta\MetaDomain.cs" />
     <Compile Include="Core\Meta\Events\MetaObjectChangedEventArgs.cs" />
     <Compile Include="Core\Meta\Events\MetaObjectDeletedEventArgs.cs" />
-    <Compile Include="Core\Meta\IMetaDomainExtension.cs" />
     <Compile Include="Core\Meta\MetaInheritance.cs" />
-    <Compile Include="Core\Meta\IMetaObjectExtension.cs" />
     <Compile Include="Core\Meta\MetaBase.cs" />
     <Compile Include="Core\Meta\MetaMethod.cs" />
     <Compile Include="Core\Meta\MetaObject.cs" />

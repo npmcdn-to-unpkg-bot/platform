@@ -288,8 +288,6 @@ namespace Allors.Meta.Static
 
             var relationType = this.Population.SuperDomain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             relationType.AssociationType.ObjectType = this.Population.C1;
-            relationType.AssociationType.AssignedSingularName = "aa";
-            relationType.AssociationType.AssignedPluralName = "aas";
             relationType.RoleType.ObjectType = this.Population.C2;
             relationType.RoleType.AssignedSingularName = "bb";
             relationType.RoleType.AssignedPluralName = "bbs";
@@ -297,7 +295,7 @@ namespace Allors.Meta.Static
             Assert.IsTrue(this.Domain.IsValid);
 
             var type = this.Population.SuperDomain.AddDeclaredObjectType(Guid.NewGuid());
-            type.SingularName = "aabb";
+            type.SingularName = "C1bb";
 
             Assert.IsFalse(this.Domain.IsValid);
         }
@@ -309,8 +307,6 @@ namespace Allors.Meta.Static
 
             var relationType = this.Population.SuperDomain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             relationType.AssociationType.ObjectType = this.Population.C1;
-            relationType.AssociationType.AssignedSingularName = "bb";
-            relationType.AssociationType.AssignedPluralName = "bbs";
             relationType.RoleType.ObjectType = this.Population.C2;
             relationType.RoleType.AssignedSingularName = "aa";
             relationType.RoleType.AssignedPluralName = "aas";
@@ -318,7 +314,7 @@ namespace Allors.Meta.Static
             Assert.IsTrue(this.Domain.IsValid);
 
             var type = this.Population.SuperDomain.AddDeclaredObjectType(Guid.NewGuid());
-            type.SingularName = "aabb";
+            type.SingularName = "aaC1";
 
             Assert.IsFalse(this.Domain.IsValid);
         }

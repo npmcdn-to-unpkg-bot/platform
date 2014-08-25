@@ -1078,8 +1078,6 @@ namespace Domain
   
   
 			EmployerEmployee.AssociationType.ObjectType = Company;  
-			EmployerEmployee.AssociationType.AssignedSingularName = "Employer";  
-			EmployerEmployee.AssociationType.AssignedPluralName = "Employers";  
   
 			EmployerEmployee.RoleType.ObjectType = Person;  
 			EmployerEmployee.RoleType.AssignedSingularName = "Employee";  

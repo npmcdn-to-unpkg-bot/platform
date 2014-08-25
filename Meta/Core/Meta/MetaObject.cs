@@ -54,12 +54,6 @@ namespace Allors.Meta
         private HashSet<MetaObject> concreteClassesCache;
 
         /// <summary>
-        /// Gets or sets the user defined object that will act as an extension.
-        /// </summary>
-        /// <value>The user defined extension object.</value>
-        public IMetaObjectExtension Extension { get; set; }
-
-        /// <summary>
         /// Gets the association count.
         /// </summary>
         /// <value>The association count.</value>
@@ -1301,7 +1295,6 @@ namespace Allors.Meta
             base.Delete();
 
             domain.StaleObjectTypeDerivations();
-            domain.SendDeletedEvent(deleteId);
         }
 
         /// <summary>

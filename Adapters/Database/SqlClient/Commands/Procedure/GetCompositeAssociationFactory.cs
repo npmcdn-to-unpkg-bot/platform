@@ -61,11 +61,11 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
                 {
                     if (roleType.IsOne)
                     {
-                        sql = Sql.Schema.AllorsPrefix + "GA_" + associationType.ObjectType.ExclusiveRootClass.Name + "_" + associationType.RootName;
+                        sql = Sql.Schema.AllorsPrefix + "GA_" + associationType.ObjectType.ExclusiveRootClass.Name + "_" + associationType.Name;
                     }
                     else
                     {
-                        sql = Sql.Schema.AllorsPrefix + "GA_" + roleType.ObjectType.ExclusiveRootClass.Name + "_" + associationType.RootName;
+                        sql = Sql.Schema.AllorsPrefix + "GA_" + roleType.ObjectType.ExclusiveRootClass.Name + "_" + associationType.Name;
                     }
                 }
                 else

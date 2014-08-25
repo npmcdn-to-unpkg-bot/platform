@@ -397,7 +397,7 @@ namespace Allors.Adapters.Database.Sql
                         }
                         else
                         {
-                            var column = new SchemaColumn(this, associationType.RootName, this.ObjectDbType, false, false, relationType.IsIndexed ? SchemaIndexType.Combined : SchemaIndexType.None, relationType);
+                            var column = new SchemaColumn(this, associationType.Name, this.ObjectDbType, false, false, relationType.IsIndexed ? SchemaIndexType.Combined : SchemaIndexType.None, relationType);
                             this.ColumnsByRelationType.Add(relationType, column);
                         }
                     }

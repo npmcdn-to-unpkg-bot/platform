@@ -29,40 +29,6 @@ namespace Allors.Meta.Static
     [TestFixture]
     public class RelationTypeTest : AbstractTest
     {
-        private readonly List<MetaObjectChangedEventArgs> metaObjectChangedEvents = new List<MetaObjectChangedEventArgs>();
-
-        [Test]
-        public void ChangedEvent()
-        {
-            this.Populate();
-
-            var relationType = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            relationType.AssociationType.ObjectType = this.Population.C1;
-            relationType.RoleType.ObjectType = this.Population.IntegerType;
-
-            Assert.IsTrue(this.Domain.IsValid);
-
-            this.Domain.MetaObjectChanged += this.DomainMetaObjectChanged;
-
-            Assert.AreEqual(0, this.metaObjectChangedEvents.Count);
-
-            relationType.SendChangedEvent();
-
-            Assert.AreEqual(1, this.metaObjectChangedEvents.Count);
-
-            var args = this.metaObjectChangedEvents[0];
-            Assert.AreEqual(relationType, args.MetaObject);
-
-            this.metaObjectChangedEvents.Clear();
-
-            Assert.AreEqual(0, this.metaObjectChangedEvents.Count);
-
-            // No Events
-            relationType.Reset();
-
-            Assert.AreEqual(0, this.metaObjectChangedEvents.Count); 
-        }
-
         [Test]
         public void Defaults()
         {
@@ -253,8 +219,6 @@ namespace Allors.Meta.Static
 
             var relationType = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             relationType.AssociationType.ObjectType = this.Population.C1;
-            relationType.AssociationType.AssignedSingularName = "aa";
-            relationType.AssociationType.AssignedPluralName = "aas";
             relationType.RoleType.ObjectType = this.Population.C2;
             relationType.RoleType.AssignedSingularName = "bb";
             relationType.RoleType.AssignedPluralName = "bbs";
@@ -262,9 +226,7 @@ namespace Allors.Meta.Static
             Assert.IsTrue(this.Domain.IsValid);
 
             var otherRelationType = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            otherRelationType.AssociationType.ObjectType = this.Population.C3;
-            otherRelationType.AssociationType.AssignedSingularName = "aa";
-            otherRelationType.AssociationType.AssignedPluralName = "aas";
+            otherRelationType.AssociationType.ObjectType = this.Population.C1;
             otherRelationType.RoleType.ObjectType = this.Population.C4;
             otherRelationType.RoleType.AssignedSingularName = "bb";
             otherRelationType.RoleType.AssignedPluralName = "bbs";
@@ -279,20 +241,12 @@ namespace Allors.Meta.Static
 
             var relationType = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             relationType.AssociationType.ObjectType = this.Population.C1;
-            relationType.AssociationType.AssignedSingularName = "aa";
-            relationType.AssociationType.AssignedPluralName = "aas";
             relationType.RoleType.ObjectType = this.Population.C2;
-            relationType.RoleType.AssignedSingularName = "bb";
-            relationType.RoleType.AssignedPluralName = "bbs";
             Assert.IsTrue(this.Domain.IsValid);
 
             var otherRelationType = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            otherRelationType.AssociationType.ObjectType = this.Population.C3;
-            otherRelationType.AssociationType.AssignedSingularName = "bb";
-            otherRelationType.AssociationType.AssignedPluralName = "bbs";
-            otherRelationType.RoleType.ObjectType = this.Population.C4;
-            otherRelationType.RoleType.AssignedSingularName = "aa";
-            otherRelationType.RoleType.AssignedPluralName = "aas";
+            otherRelationType.AssociationType.ObjectType = this.Population.C2;
+            otherRelationType.RoleType.ObjectType = this.Population.C1;
 
             Assert.IsFalse(this.Domain.IsValid);
         }
@@ -307,23 +261,6 @@ namespace Allors.Meta.Static
             var role = relationType.RoleType;
             association.ObjectType = this.Population.C1;
             role.ObjectType = this.Population.C2;
-
-            Assert.IsTrue(this.Domain.IsValid);
-
-            association.AssignedSingularName = "A";
-            association.AssignedPluralName = "CD";
-
-            Assert.IsFalse(this.Domain.IsValid);
-
-            association.AssignedSingularName = "AB";
-
-            Assert.IsTrue(this.Domain.IsValid);
-
-            association.AssignedPluralName = "C";
-
-            Assert.IsFalse(this.Domain.IsValid);
-
-            association.AssignedPluralName = "CD";
 
             Assert.IsTrue(this.Domain.IsValid);
 
@@ -391,11 +328,6 @@ namespace Allors.Meta.Static
 
             Assert.IsFalse(relationType.IsIndexed);
             Assert.IsFalse(relationType.IsDerived);
-        }
-
-        private void DomainMetaObjectChanged(object sender, MetaObjectChangedEventArgs args)
-        {
-            this.metaObjectChangedEvents.Add(args);
         }
     }
 

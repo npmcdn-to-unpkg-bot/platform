@@ -135,34 +135,6 @@ namespace Allors.Meta.Static
         }
 
         [Test]
-        public void ChangedEvent()
-        {
-            this.Populate();
-
-            var thisType = this.Domain.AddDeclaredObjectType(Guid.NewGuid());
-            thisType.SingularName = "ThisType";
-            thisType.PluralName = "ThisTypes";
-
-            Assert.IsTrue(this.Domain.IsValid);
-
-            this.Domain.MetaObjectChanged += this.DomainMetaObjectChanged;
-
-            Assert.AreEqual(0, this.metaObjectChangedEvents.Count);
-
-            thisType.SendChangedEvent();
-
-            Assert.AreEqual(1, this.metaObjectChangedEvents.Count);
-            var args = this.metaObjectChangedEvents[0];
-            Assert.AreEqual(thisType, args.MetaObject);
-
-            this.metaObjectChangedEvents.Clear();
-
-            thisType.SingularName = "NoEvent";
-
-            Assert.AreEqual(0, this.metaObjectChangedEvents.Count);
-        }
-
-        [Test]
         public void CompositeRoleCountGreaterThan32()
         {
             this.Populate();
@@ -394,8 +366,6 @@ namespace Allors.Meta.Static
 
             var relationTypeWhereRole = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             relationTypeWhereRole.AssociationType.ObjectType = thatType;
-            relationTypeWhereRole.AssociationType.AssignedSingularName = "from";
-            relationTypeWhereRole.AssociationType.AssignedPluralName = "froms";
             relationTypeWhereRole.RoleType.ObjectType = thisType;
             relationTypeWhereRole.RoleType.AssignedSingularName = "to";
             relationTypeWhereRole.RoleType.AssignedPluralName = "tos";
@@ -446,8 +416,6 @@ namespace Allors.Meta.Static
 
             var relationTypeWhereRole = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             relationTypeWhereRole.AssociationType.ObjectType = thatType;
-            relationTypeWhereRole.AssociationType.AssignedSingularName = "from";
-            relationTypeWhereRole.AssociationType.AssignedPluralName = "froms";
             relationTypeWhereRole.RoleType.ObjectType = thisType;
             relationTypeWhereRole.RoleType.AssignedSingularName = "to";
             relationTypeWhereRole.RoleType.AssignedPluralName = "tos";
@@ -1090,8 +1058,6 @@ namespace Allors.Meta.Static
 
             var relationTypeWhereRole = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             relationTypeWhereRole.AssociationType.ObjectType = thatType;
-            relationTypeWhereRole.AssociationType.AssignedSingularName = "from";
-            relationTypeWhereRole.AssociationType.AssignedPluralName = "froms";
             relationTypeWhereRole.RoleType.ObjectType = thisType;
             relationTypeWhereRole.RoleType.AssignedSingularName = "to";
             relationTypeWhereRole.RoleType.AssignedPluralName = "tos";

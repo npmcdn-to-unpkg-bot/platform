@@ -92,22 +92,6 @@ namespace Allors.Meta
         private bool hasStaleMethodDerivations;
 
         /// <summary>
-        /// Occurs when a meta object is changed.
-        /// </summary>
-        public event EventHandler<MetaObjectChangedEventArgs> MetaObjectChanged;
-
-        /// <summary>
-        /// Occurs when a meta object is deleted.
-        /// </summary>
-        public event EventHandler<MetaObjectDeletedEventArgs> MetaObjectDeleted;
-
-        /// <summary>
-        /// Gets or sets the user defined object that will act as an extension.
-        /// </summary>
-        /// <value>The user defined extension object.</value>
-        public IMetaDomainExtension Extension { get; set; }
-
-        /// <summary>
         /// Gets the composite types.
         /// </summary>
         /// <value>The composite types.</value>
@@ -954,32 +938,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Sends the meta object changed event.
-        /// </summary>
-        /// <param name="metaObject">The meta object.</param>
-        internal void SendChangedEvent(MetaBase metaObject)
-        {
-            if (this.MetaObjectChanged != null)
-            {
-                this.MetaObjectChanged(this, new MetaObjectChangedEventArgs(metaObject));
-            }
-        }
-
-        /// <summary>
-        /// Sends the meta object deleted event.
-        /// </summary>
-        /// <param name="metaObjectId">
-        /// The meta Object Id.
-        /// </param>
-        internal void SendDeletedEvent(Guid metaObjectId)
-        {
-            if (this.MetaObjectDeleted != null)
-            {
-                this.MetaObjectDeleted(this, new MetaObjectDeletedEventArgs(metaObjectId));
-            }
-        }
-
-        /// <summary>
         /// Stales the inheritance derivations.
         /// </summary>
         internal void StaleInheritanceDerivations()
@@ -1219,15 +1177,6 @@ namespace Allors.Meta
                     }
                 }
 
-                // AssociationType Root ObjectType
-                foreach (var type in this.ObjectTypes)
-                {
-                    foreach (var association in type.AssociationTypesWhereObjectType)
-                    {
-                        association.DeriveRootType();
-                    }
-                }
-
                 // RoleType Hierarchy Singular Name
                 foreach (var type in this.ObjectTypes)
                 {
@@ -1252,15 +1201,6 @@ namespace Allors.Meta
                     foreach (var role in type.RoleTypesWhereObjectType)
                     {
                         role.DeriveRootName();
-                    }
-                }
-
-                // AssociationType Root Name
-                foreach (var type in this.ObjectTypes)
-                {
-                    foreach (var association in type.AssociationTypesWhereObjectType)
-                    {
-                        association.DeriveRootName();
                     }
                 }
 

@@ -149,7 +149,6 @@ namespace Allors.Meta
             base.Delete();
             
             domain.StaleInheritanceDerivations();
-            domain.SendDeletedEvent(deleteId);
         }
 
         /// <summary>

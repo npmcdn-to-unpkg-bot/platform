@@ -118,14 +118,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Send a changed event.
-        /// </summary>
-        public virtual void SendChangedEvent()
-        {
-            this.Domain.SendChangedEvent(this);
-        }
-
-        /// <summary>
         /// Validate this object.
         /// </summary>
         /// <param name="validationLog">

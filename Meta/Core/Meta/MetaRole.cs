@@ -567,17 +567,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Send the changed event.
-        /// </summary>
-        public override void SendChangedEvent()
-        {
-            if (this.ExistRelationTypeWhereRoleType)
-            {
-                this.RelationTypeWhereRoleType.SendChangedEvent();
-            }
-        }
-
-        /// <summary>
         /// Deletes this instance.
         /// </summary>
         public override void Delete()

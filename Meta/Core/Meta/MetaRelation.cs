@@ -313,7 +313,6 @@ namespace Allors.Meta
             base.Delete();
 
             domain.StaleRelationTypeDerivations();
-            domain.SendDeletedEvent(deleteId);
         }
 
         /// <summary>
@@ -339,12 +338,8 @@ namespace Allors.Meta
             try
             {
                 var toString = new StringBuilder();
-                if (this.ExistAssociationType && this.AssociationType.ExistObjectType)
-                {
-                    toString.Append(this.AssociationType.ObjectType + ".");
-                }
 
-                if (this.ExistRoleType && !string.IsNullOrEmpty(this.RoleType.Name))
+                if (this.ExistRoleType && !string.IsNullOrEmpty(this.RoleType.FullName))
                 {
                     toString.Append(this.RoleType.Name);
                 }
@@ -390,11 +385,6 @@ namespace Allors.Meta
         /// </summary>
         internal void PurgeDerivations()
         {
-            if (this.ExistAssociationType)
-            {
-                this.AssociationType.PurgeDerivations();
-            }
-
             if (this.ExistRoleType)
             {
                 this.RoleType.PurgeDerivations();

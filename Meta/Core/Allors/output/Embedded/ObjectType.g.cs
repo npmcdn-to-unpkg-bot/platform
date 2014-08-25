@@ -692,24 +692,6 @@ namespace Allors.Meta.AllorsGenerated
 
 		void AllorsRoleReleaseDerivedExclusiveConcreteLeafClassObjectType();
 
-
-		global::Allors.Meta.MetaAssociation[] AssociationTypesWhereDerivedRootObjectType
-		{
-			get;
-		}
-
-		bool ExistAssociationTypesWhereDerivedRootObjectType
-		{
-			get;
-		}
-
-		void AllorsRoleSyncAddDerivedRootObjectTypeAssociationType(global::Allors.Meta.MetaAssociation association );
-
-		void AllorsRoleSyncRemoveDerivedRootObjectTypeAssociationType(global::Allors.Meta.MetaAssociation association );
-
-		void AllorsRoleReleaseDerivedRootObjectTypeAssociationType();
-
-
 		global::Allors.Meta.MetaObject[] ObjectTypesWhereDerivedDirectSuperinterface
 		{
 			get;
@@ -1045,7 +1027,6 @@ namespace Allors.Meta.AllorsGenerated
 			((AllorsInternalObjectType)this).AllorsRoleReleaseDerivedCompositeObjectTypeDomain();
 			((AllorsInternalObjectType)this).AllorsRoleReleaseDerivedSubinterfaceObjectType();
 			((AllorsInternalObjectType)this).AllorsRoleReleaseDerivedExclusiveConcreteLeafClassObjectType();
-			((AllorsInternalObjectType)this).AllorsRoleReleaseDerivedRootObjectTypeAssociationType();
 			((AllorsInternalObjectType)this).AllorsRoleReleaseDerivedDirectSuperinterfaceObjectType();
 			((AllorsInternalObjectType)this).AllorsRoleReleaseObjectTypeMethodType();
 			((AllorsInternalObjectType)this).AllorsRoleReleaseDerivedRootClassObjectType();
@@ -3622,30 +3603,6 @@ namespace Allors.Meta.AllorsGenerated
 			get
 			{
 				return _DerivedRootObjectTypeAssociationType.Length > 0;
-			}
-		}
-
-		void AllorsInternalObjectType.AllorsRoleSyncAddDerivedRootObjectTypeAssociationType(global::Allors.Meta.MetaAssociation association)
-		{
-			AllorsAssert();
-			if( !AllorsEmbeddedArrays.Exist( _DerivedRootObjectTypeAssociationType, association ) ) 
-			{
-				_DerivedRootObjectTypeAssociationType = (global::Allors.Meta.MetaAssociation[])AllorsEmbeddedArrays.Add(_DerivedRootObjectTypeAssociationType,association);
-			}
-		}
-
-		void AllorsInternalObjectType.AllorsRoleSyncRemoveDerivedRootObjectTypeAssociationType(global::Allors.Meta.MetaAssociation association)
-		{
-			AllorsAssert();
-			_DerivedRootObjectTypeAssociationType = (global::Allors.Meta.MetaAssociation[]) AllorsEmbeddedArrays.Remove(_DerivedRootObjectTypeAssociationType,association);
-		}
-
-		void AllorsInternalObjectType.AllorsRoleReleaseDerivedRootObjectTypeAssociationType()
-		{
-			AllorsAssert();
-			foreach( global::Allors.Meta.MetaAssociation association in _DerivedRootObjectTypeAssociationType )
-			{
-				((AllorsInternalAssociationType)association).AllorsRemoveAssociationTypeDerivedRootObjectType((global::Allors.Meta.MetaObject) this);
 			}
 		}
 

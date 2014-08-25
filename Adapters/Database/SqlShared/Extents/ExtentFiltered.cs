@@ -103,7 +103,7 @@ namespace Allors.Adapters.Database.Sql
         {
             if (Array.IndexOf(this.objectType.AssociationTypes, association) < 0)
             {
-                throw new ArgumentException("Extent does not implement association " + association.FullSingularName);
+                throw new ArgumentException("Extent does not implement association " + association);
             }
         }
 
@@ -111,7 +111,7 @@ namespace Allors.Adapters.Database.Sql
         {
             if (Array.IndexOf(this.objectType.RoleTypes, role) < 0)
             {
-                throw new ArgumentException("Extent does not implement role " + role.FullSingularName);
+                throw new ArgumentException("Extent does not implement role " + role);
             }
         }
 
@@ -197,7 +197,7 @@ namespace Allors.Adapters.Database.Sql
                     var inRelationType = inRole.RelationType;
                     if (inRelationType.IsManyToMany || !inRelationType.ExistExclusiveRootClasses)
                     {
-                        statement.Append("SELECT " + inRole.AssociationType.RootName + "_A." + this.Schema.AssociationId);
+                        statement.Append("SELECT " + inRole.AssociationType.Name + "_A." + this.Schema.AssociationId);
                     }
                     else
                     {
@@ -207,8 +207,7 @@ namespace Allors.Adapters.Database.Sql
                         }
                         else
                         {
-                            statement.Append("SELECT " + inRole.AssociationType.RootName + "_A." +
-                                             this.Schema.Column(inRole.AssociationType));
+                            statement.Append("SELECT " + inRole.AssociationType.Name + "_A." + this.Schema.Column(inRole.AssociationType));
                         }
                     }
 
@@ -233,7 +232,7 @@ namespace Allors.Adapters.Database.Sql
 
                     if (inRelationType.IsManyToMany || !inRelationType.ExistExclusiveRootClasses)
                     {
-                        statement.Append(inRole.AssociationType.RootName + "_A." + this.Schema.AssociationId + " IS NOT NULL ");
+                        statement.Append(inRole.AssociationType.Name + "_A." + this.Schema.AssociationId + " IS NOT NULL ");
                     }
                     else
                     {
@@ -243,7 +242,7 @@ namespace Allors.Adapters.Database.Sql
                         }
                         else
                         {
-                            statement.Append(inRole.AssociationType.RootName + "_A." +
+                            statement.Append(inRole.AssociationType.Name + "_A." +
                                              this.Schema.Column(inRole.AssociationType) + " IS NOT NULL ");
                         }
                     }
@@ -372,7 +371,7 @@ namespace Allors.Adapters.Database.Sql
 
                         if (inRelationType.IsManyToMany || !inRelationType.ExistExclusiveRootClasses)
                         {
-                            statement.Append("SELECT " + inRole.AssociationType.RootName + "_A." + this.Schema.AssociationId);
+                            statement.Append("SELECT " + inRole.AssociationType.Name + "_A." + this.Schema.AssociationId);
                         }
                         else
                         {
@@ -382,7 +381,7 @@ namespace Allors.Adapters.Database.Sql
                             }
                             else
                             {
-                                statement.Append("SELECT " + inRole.AssociationType.RootName + "_A." + this.Schema.Column(inRole.AssociationType));
+                                statement.Append("SELECT " + inRole.AssociationType.Name + "_A." + this.Schema.Column(inRole.AssociationType));
                             }
                         }
 
@@ -408,7 +407,7 @@ namespace Allors.Adapters.Database.Sql
 
                         if (inRelationType.IsManyToMany || !inRelationType.ExistExclusiveRootClasses)
                         {
-                            statement.Append(inRole.AssociationType.RootName + "_A." + this.Schema.AssociationId + " IS NOT NULL ");
+                            statement.Append(inRole.AssociationType.Name + "_A." + this.Schema.AssociationId + " IS NOT NULL ");
                         }
                         else
                         {
@@ -418,7 +417,7 @@ namespace Allors.Adapters.Database.Sql
                             }
                             else
                             {
-                                statement.Append(inRole.AssociationType.RootName + "_A." + this.Schema.Column(inRole.AssociationType) + " IS NOT NULL ");
+                                statement.Append(inRole.AssociationType.Name + "_A." + this.Schema.Column(inRole.AssociationType) + " IS NOT NULL ");
                             }
                         }
                     }

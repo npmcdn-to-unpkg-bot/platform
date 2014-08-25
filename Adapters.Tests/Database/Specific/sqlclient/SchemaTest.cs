@@ -25,6 +25,7 @@ namespace Allors.Adapters.Special.SqlClient
     public abstract class SchemaIntegerIdTest : Special.SchemaIntegerIdTest
     {
         [Test]
+        [Explicit
         public void Recover()
         {
             this.InitAndCreateSession();

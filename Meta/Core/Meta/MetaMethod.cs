@@ -177,8 +177,6 @@ namespace Allors.Meta
 
             this.Reset();
             base.Delete();
-
-            domain.SendDeletedEvent(deleteId);
         }
 
         /// <summary>

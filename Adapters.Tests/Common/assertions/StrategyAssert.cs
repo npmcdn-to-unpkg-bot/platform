@@ -44,7 +44,7 @@ namespace Allors.Adapters.Special.Assertions
 
             if (!exceptionOccured)
             {
-                Assert.Fail("Exist didn't threw an Exception for association " + associationType.FullName);
+                Assert.Fail("Exist didn't threw an Exception for association " + associationType);
             }
         }
 
@@ -112,7 +112,7 @@ namespace Allors.Adapters.Special.Assertions
 
             if (!exceptionOccured)
             {
-                Assert.Fail("Exist didn't threw an Exception for role " + roleType.Name);
+                Assert.Fail("Exist didn't threw an Exception for role " + roleType);
             }
         }
 

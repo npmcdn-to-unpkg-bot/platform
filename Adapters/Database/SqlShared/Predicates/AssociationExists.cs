@@ -38,7 +38,7 @@ namespace Allors.Adapters.Database.Sql
             var schema = statement.Schema;
             if ((this.association.IsMany && this.association.RelationTypeWhereAssociationType.RoleType.IsMany) || !this.association.RelationTypeWhereAssociationType.ExistExclusiveRootClasses)
             {
-                statement.Append(" " + this.association.RootName + "_A." + schema.AssociationId.StatementName + " IS NOT NULL");
+                statement.Append(" " + this.association.Name + "_A." + schema.AssociationId.StatementName + " IS NOT NULL");
             }
             else
             {
@@ -48,7 +48,7 @@ namespace Allors.Adapters.Database.Sql
                 }
                 else
                 {
-                    statement.Append(" " + this.association.RootName + "_A." + schema.ObjectId + " IS NOT NULL");
+                    statement.Append(" " + this.association.Name + "_A." + schema.ObjectId + " IS NOT NULL");
                 }
             }
 

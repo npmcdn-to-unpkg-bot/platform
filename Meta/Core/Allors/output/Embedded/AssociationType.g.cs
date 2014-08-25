@@ -2,19 +2,6 @@ namespace Allors.Meta.AllorsGenerated
 {
 	internal interface AllorsInternalAssociationType : AllorsInternalPropertyType, AllorsInternal
 	{
-		global::System.String AssignedPluralName
-		{
-			get;
-			set;
-		}
-
-		void RemoveAssignedPluralName();
-
-		bool ExistAssignedPluralName
-		{
-			get;
-		}
-
 
 		global::Allors.Meta.MetaObject ObjectType
 		{
@@ -41,55 +28,6 @@ namespace Allors.Meta.AllorsGenerated
 		void RemoveIsMany();
 
 		bool ExistIsMany
-		{
-			get;
-		}
-
-
-		global::Allors.Meta.MetaObject[] DerivedRootObjectTypes
-		{
-			get;
-			set;
-		}
-
-		void AddDerivedRootObjectType( global::Allors.Meta.MetaObject addRole );
-
-		void RemoveDerivedRootObjectType( global::Allors.Meta.MetaObject removeRole );
-
-		void RemoveDerivedRootObjectTypes();
-
-		bool ExistDerivedRootObjectTypes
-		{
-			get;
-		}
-		void AllorsRemoveAssociationTypeDerivedRootObjectType();
-
-		void AllorsRemoveAssociationTypeDerivedRootObjectType( global::Allors.Meta.MetaObject role );
-
-
-		global::System.String DerivedRootName
-		{
-			get;
-			set;
-		}
-
-		void RemoveDerivedRootName();
-
-		bool ExistDerivedRootName
-		{
-			get;
-		}
-
-
-		global::System.String AssignedSingularName
-		{
-			get;
-			set;
-		}
-
-		void RemoveAssignedSingularName();
-
-		bool ExistAssignedSingularName
 		{
 			get;
 		}
@@ -220,7 +158,6 @@ namespace Allors.Meta.AllorsGenerated
 			AllorsAssert();
 
 			((AllorsInternalAssociationType)this).AllorsRemoveAssociationTypeObjectType();
-			((AllorsInternalAssociationType)this).AllorsRemoveAssociationTypeDerivedRootObjectType();
 
 			((AllorsInternalAssociationType)this).AllorsRoleReleaseDerivedExclusiveAssociationTypeObjectType();
 			((AllorsInternalAssociationType)this).AllorsRoleReleaseDerivedAssociationTypeObjectType();
@@ -260,23 +197,11 @@ namespace Allors.Meta.AllorsGenerated
 		{
 			switch(relation.Tag)
 			{
-				case AllorsRelationTags.AssociationTypeAssignedPluralName:
-					RoleSetAssociationTypeAssignedPluralName((global::System.String)role);
-					break;
 				case AllorsRelationTags.AssociationTypeObjectType:
 					RoleSetAssociationTypeObjectType((global::Allors.Meta.MetaObject)role);
 					break;
 				case AllorsRelationTags.AssociationTypeIsMany:
 					RoleSetAssociationTypeIsMany((global::System.Boolean)role);
-					break;
-				case AllorsRelationTags.AssociationTypeDerivedRootObjectType:
-					RoleSetAssociationTypeDerivedRootObjectType((global::Allors.Meta.MetaObject[])role);
-					break;
-				case AllorsRelationTags.AssociationTypeDerivedRootName:
-					RoleSetAssociationTypeDerivedRootName((global::System.String)role);
-					break;
-				case AllorsRelationTags.AssociationTypeAssignedSingularName:
-					RoleSetAssociationTypeAssignedSingularName((global::System.String)role);
 					break;
 				case AllorsRelationTags.MetaObjectId:
 					RoleSetMetaObjectId((global::System.Guid)role);
@@ -285,40 +210,6 @@ namespace Allors.Meta.AllorsGenerated
 		default:
 				throw new System.ArgumentException("Illegal relation " + relation.Name);
 			}
-		}
-
-
-		public virtual global::System.String AssignedPluralName
-		{
-			get
-			{ 
-				AllorsAssert();
-				return (global::System.String)_AssociationTypeAssignedPluralName;
-			}
-
-			set
-			{
-				AllorsAssert();
-				RoleSetAssociationTypeAssignedPluralName(value);
-			}
-		}
-
-		protected void RoleSetAssociationTypeAssignedPluralName(global::System.String role)
-		{
-			_AssociationTypeAssignedPluralName = role;
-		}
-
-		public virtual bool ExistAssignedPluralName
-		{
-			get
-			{
-				return _AssociationTypeAssignedPluralName != null;
-			}
-		}
-
-		public virtual void RemoveAssignedPluralName()
-		{
-			_AssociationTypeAssignedPluralName = null;
 		}
 
 		public virtual global::Allors.Meta.MetaObject ObjectType
@@ -403,168 +294,6 @@ namespace Allors.Meta.AllorsGenerated
 		public virtual void RemoveIsMany()
 		{
 			_AssociationTypeIsMany = null;
-		}
-
-		public virtual global::Allors.Meta.MetaObject[] DerivedRootObjectTypes
-		{
-			get
-			{ 
-				AllorsAssert();
-				return _AssociationTypeDerivedRootObjectType;
-			}
-
-			set
-			{ 
-				AllorsAssert(value);
-				RoleSetAssociationTypeDerivedRootObjectType(value);
-			}
-		}
-
-		protected void RoleSetAssociationTypeDerivedRootObjectType(global::Allors.Meta.MetaObject[] roles)
-		{
-			((AllorsInternalAssociationType)this).AllorsRemoveAssociationTypeDerivedRootObjectType();
-			if( roles != null && roles.Length > 0 )
-			{
-				foreach( global::Allors.Meta.MetaObject role in roles )
-				{
-					RoleAddDerivedRootObjectType(role);
-				}
-			}
-		}
-
-		public virtual void AddDerivedRootObjectType( global::Allors.Meta.MetaObject addRole )
-		{
-			RoleAddDerivedRootObjectType( addRole );
-		}
-
-		void RoleAddDerivedRootObjectType( global::Allors.Meta.MetaObject addRole )
-		{
-			AllorsAssert(addRole);
-			if( addRole != null )
-			{
-				if( !AllorsEmbeddedArrays.Exist( _AssociationTypeDerivedRootObjectType, addRole ) ) 
-				{
-					// association side
-					_AssociationTypeDerivedRootObjectType = (global::Allors.Meta.MetaObject[]) AllorsEmbeddedArrays.Add( _AssociationTypeDerivedRootObjectType, addRole );
-					// role side
-					((AllorsInternalObjectType)addRole).AllorsRoleSyncAddDerivedRootObjectTypeAssociationType( (global::Allors.Meta.MetaAssociation) this ); 
-				}
-			}
-		}
-
-		public virtual void RemoveDerivedRootObjectType( global::Allors.Meta.MetaObject removeRole ) 
-		{
-			((AllorsInternalAssociationType)this).AllorsRemoveAssociationTypeDerivedRootObjectType( removeRole );
-		}
-
-		void AllorsInternalAssociationType.AllorsRemoveAssociationTypeDerivedRootObjectType( global::Allors.Meta.MetaObject removeRole ) 
-		{
-			AllorsAssert(removeRole);
-			if( removeRole != null )
-			{
-				if(AllorsEmbeddedArrays.Exist( _AssociationTypeDerivedRootObjectType, removeRole ) ) 
-				{
-					_AssociationTypeDerivedRootObjectType = (global::Allors.Meta.MetaObject[]) AllorsEmbeddedArrays.Remove( _AssociationTypeDerivedRootObjectType, removeRole );
-					// role side
-					((AllorsInternalObjectType)removeRole).AllorsRoleSyncRemoveDerivedRootObjectTypeAssociationType( (global::Allors.Meta.MetaAssociation) this ); 
-			
-				}
-			}
-		}
-
-		public virtual void RemoveDerivedRootObjectTypes()
-		{
-			((AllorsInternalAssociationType)this).AllorsRemoveAssociationTypeDerivedRootObjectType();
-		}
-
-		void AllorsInternalAssociationType.AllorsRemoveAssociationTypeDerivedRootObjectType()
-		{
-			AllorsAssert();
-
-			if( _AssociationTypeDerivedRootObjectType!=null )
-			{
-				foreach( global::Allors.Meta.MetaObject role in _AssociationTypeDerivedRootObjectType ) 
-				{
-					// role side
-					((AllorsInternalObjectType)role).AllorsRoleSyncRemoveDerivedRootObjectTypeAssociationType( (global::Allors.Meta.MetaAssociation) this ); 
-				}
-			}
-			_AssociationTypeDerivedRootObjectType = AllorsEmbeddedArrays.EMPTY_ObjectType_ARRAY;
-		}
-
-		public virtual bool ExistDerivedRootObjectTypes
-		{
-			get
-			{
-				return _AssociationTypeDerivedRootObjectType.Length > 0;
-			}
-		}
-
-
-		public virtual global::System.String DerivedRootName
-		{
-			get
-			{ 
-				AllorsAssert();
-				return (global::System.String)_AssociationTypeDerivedRootName;
-			}
-
-			set
-			{
-				AllorsAssert();
-				RoleSetAssociationTypeDerivedRootName(value);
-			}
-		}
-
-		protected void RoleSetAssociationTypeDerivedRootName(global::System.String role)
-		{
-			_AssociationTypeDerivedRootName = role;
-		}
-
-		public virtual bool ExistDerivedRootName
-		{
-			get
-			{
-				return _AssociationTypeDerivedRootName != null;
-			}
-		}
-
-		public virtual void RemoveDerivedRootName()
-		{
-			_AssociationTypeDerivedRootName = null;
-		}
-
-		public virtual global::System.String AssignedSingularName
-		{
-			get
-			{ 
-				AllorsAssert();
-				return (global::System.String)_AssociationTypeAssignedSingularName;
-			}
-
-			set
-			{
-				AllorsAssert();
-				RoleSetAssociationTypeAssignedSingularName(value);
-			}
-		}
-
-		protected void RoleSetAssociationTypeAssignedSingularName(global::System.String role)
-		{
-			_AssociationTypeAssignedSingularName = role;
-		}
-
-		public virtual bool ExistAssignedSingularName
-		{
-			get
-			{
-				return _AssociationTypeAssignedSingularName != null;
-			}
-		}
-
-		public virtual void RemoveAssignedSingularName()
-		{
-			_AssociationTypeAssignedSingularName = null;
 		}
 
 		public virtual global::Allors.Meta.MetaObject[] ObjectTypesWhereDerivedExclusiveAssociationType

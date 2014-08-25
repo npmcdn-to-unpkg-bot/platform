@@ -58,7 +58,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
                 }
                 else
                 {
-                    sql = Sql.Schema.AllorsPrefix + "A_" + roleType.ObjectType.ExclusiveRootClass.Name + "_" + associationType.RootName;
+                    sql = Sql.Schema.AllorsPrefix + "A_" + roleType.ObjectType.ExclusiveRootClass.Name + "_" + associationType.Name;
                 }
  
                 this.sqlByRoleType[roleType] = sql;

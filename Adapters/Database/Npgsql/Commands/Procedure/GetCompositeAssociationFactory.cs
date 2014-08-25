@@ -60,11 +60,11 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
                 {
                     if (roleType.IsOne)
                     {
-                        sql = Schema.AllorsPrefix + "GA_" + associationType.ObjectType.ExclusiveRootClass.Name + "_" + associationType.RootName;
+                        sql = Schema.AllorsPrefix + "GA_" + associationType.ObjectType.ExclusiveRootClass.Name + "_" + associationType.Name;
                     }
                     else
                     {
-                        sql = Schema.AllorsPrefix + "GA_" + roleType.ObjectType.ExclusiveRootClass.Name + "_" + associationType.RootName;
+                        sql = Schema.AllorsPrefix + "GA_" + roleType.ObjectType.ExclusiveRootClass.Name + "_" + associationType.Name;
                     }
                 }
                 else

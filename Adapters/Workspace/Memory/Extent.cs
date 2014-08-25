@@ -183,7 +183,7 @@ namespace Allors.Adapters.Workspace.Memory
             // TODO: Optimize
             if (Array.IndexOf(this.ObjectType.AssociationTypes, association) < 0)
             {
-                throw new ArgumentException("Extent does not have association " + association.FullSingularName);
+                throw new ArgumentException("Extent does not have association " + association);
             }
         }
 
