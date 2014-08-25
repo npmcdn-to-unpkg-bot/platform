@@ -81,7 +81,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureRelationTypeDerivations();
                 return this.DerivedAssociationTypes;
             }
         }
@@ -94,7 +93,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureRelationTypeDerivations();
                 return this.AssociationTypesWhereDerivedRootObjectType;
             }
         }
@@ -199,7 +197,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureRelationTypeDerivations();
                 return this.DerivedCompositeRoleTypes;
             }
         }
@@ -240,7 +237,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureObjectTypeDerivations();
                 return this.DerivedDirectSuperclass;
             }
         }
@@ -253,7 +249,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureObjectTypeDerivations();
                 return this.DerivedDirectSuperinterfaces;
             }
         }
@@ -266,7 +261,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureObjectTypeDerivations();
                 return this.DerivedDirectSupertypes;
             }
         }
@@ -279,7 +273,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureRelationTypeDerivations();
                 return this.DerivedExclusiveAssociationTypes;
             }
         }
@@ -292,7 +285,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureObjectTypeDerivations();
                 return this.DerivedExclusiveConcreteLeafClass;
             }
         }
@@ -305,7 +297,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureRelationTypeDerivations();
                 return this.DerivedExclusiveRoleTypes;
             }
         }
@@ -335,7 +326,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureObjectTypeDerivations();
                 return this.DerivedExclusiveSuperinterfaces;
             }
         }
@@ -361,7 +351,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureObjectTypeDerivations();
                 return this.ExistDerivedDirectSuperclass;
             }
         }
@@ -376,7 +365,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureObjectTypeDerivations();
                 return this.ExistDerivedDirectSuperinterfaces;
             }
         }
@@ -391,7 +379,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureObjectTypeDerivations();
                 return this.ExistDerivedDirectSupertypes;
             }
         }
@@ -406,7 +393,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureObjectTypeDerivations();
                 return this.ExistDerivedExclusiveConcreteLeafClass;
             }
         }
@@ -430,7 +416,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureObjectTypeDerivations();
                 return this.ExistDerivedRootClasses;
             }
         }
@@ -443,7 +428,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureObjectTypeDerivations();
                 return this.ExistDerivedSubclasses;
             }
         }
@@ -456,7 +440,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureObjectTypeDerivations();
                 return this.ExistDerivedSuperclasses;
             }
         }
@@ -577,27 +560,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this instance is an interface.
-        /// </summary>
-        /// <value>
-        ///  <c>true</c> if this instance is an interface; otherwise, <c>false</c>.
-        /// </value>
-        public override bool IsInterface
-        {
-            get
-            {
-                return base.IsInterface;
-            }
-
-            set
-            {
-                base.IsInterface = value;
-
-                this.MetaDomain.StaleObjectTypeDerivations();
-            }
-        }
-
-        /// <summary>
         /// Gets a value indicating whether this instance is long.
         /// </summary>
         /// <value><c>true</c> if this instance is a long; otherwise, <c>false</c>.</value>
@@ -635,7 +597,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureObjectTypeDerivations();
                 return this.ExistObjectTypesWhereDerivedRootClass;
             }
         }
@@ -721,7 +682,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureObjectTypeDerivations();
                 return this.ObjectTypesWhereDerivedDirectSuperclass;
             }
         }
@@ -734,7 +694,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureObjectTypeDerivations();
                 return this.ObjectTypesWhereDerivedDirectSuperinterface;
             }
         }
@@ -747,7 +706,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureObjectTypeDerivations();
                 return this.ObjectTypesWhereDerivedExclusiveSuperinterface;
             }
         }
@@ -760,7 +718,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureObjectTypeDerivations();
                 return this.ObjectTypesWhereDerivedRootClass;
             }
         }
@@ -773,7 +730,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureObjectTypeDerivations();
                 return this.ObjectTypesWhereDerivedSuperclass;
             }
         }
@@ -786,27 +742,7 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureObjectTypeDerivations();
                 return this.ObjectTypesWhereDerivedSuperinterface;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the plural name.
-        /// </summary>
-        /// <value>The plural name.</value>
-        public override string PluralName
-        {
-            get
-            {
-                return base.PluralName;
-            }
-
-            set
-            {
-                base.PluralName = value;
-
-                this.MetaDomain.StaleObjectTypeDerivations();
             }
         }
 
@@ -818,7 +754,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureMethodTypeDerivations();
                 return this.DerivedMethodTypes;
             }
         }
@@ -851,7 +786,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureRelationTypeDerivations();
                 return this.DerivedRoleTypes;
             }
         }
@@ -864,7 +798,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureRelationTypeDerivations();
                 return this.RoleTypesWhereDerivedRootType;
             }
         }
@@ -877,27 +810,7 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureObjectTypeDerivations();
                 return this.DerivedRootClasses;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the singular name.
-        /// </summary>
-        /// <value>The singular name.</value>
-        public override string SingularName
-        {
-            get
-            {
-                return base.SingularName;
-            }
-
-            set
-            {
-                base.SingularName = value;
-
-                this.MetaDomain.StaleObjectTypeDerivations();
             }
         }
 
@@ -909,7 +822,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureObjectTypeDerivations();
                 return this.DerivedSubclasses;
             }
         }
@@ -922,7 +834,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureObjectTypeDerivations();
                 return this.DerivedSubinterfaces;
             }
         }
@@ -935,7 +846,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureObjectTypeDerivations();
                 return this.ObjectTypesWhereDerivedSupertype;
             }
         }
@@ -948,7 +858,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureObjectTypeDerivations();
                 return this.DerivedSuperclasses;
             }
         }
@@ -961,7 +870,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureObjectTypeDerivations();
                 return this.DerivedSuperinterfaces;
             }
         }
@@ -974,7 +882,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureObjectTypeDerivations();
                 return this.DerivedSupertypes;
             }
         }
@@ -1016,7 +923,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureRelationTypeDerivations();
                 return this.DerivedUnitRoleTypes;
             }
         }
@@ -1072,7 +978,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureObjectTypeDerivations();
                 return this.ObjectTypesWhereDerivedDirectSupertype;
             }
         }
@@ -1162,7 +1067,6 @@ namespace Allors.Meta
         /// </returns>
         public bool ContainsAssociationType(MetaAssociation association)
         {
-            this.EnsureRelationTypeDerivations();
             return this.associationIdsCache.ContainsKey(association.RelationTypeWhereAssociationType.Id);
         }
 
@@ -1175,7 +1079,6 @@ namespace Allors.Meta
         /// </returns>
         public bool ContainsRoleType(MetaRole role)
         {
-            this.EnsureRelationTypeDerivations();
             return this.roleIdsCache.ContainsKey(role.RelationTypeWhereRoleType.Id);
         }
 
@@ -1190,7 +1093,6 @@ namespace Allors.Meta
         /// </returns>
         public bool ContainsConcreteClass(MetaObject objectType)
         {
-            this.EnsureObjectTypeDerivations();
             return this.concreteClassesCache.Contains(objectType);
         }
 
@@ -1249,24 +1151,6 @@ namespace Allors.Meta
             return false;
         }
         
-        /// <summary>
-        /// Removes the plural name.
-        /// </summary>
-        public override void RemovePluralName()
-        {
-            base.RemovePluralName();
-            this.MetaDomain.StaleObjectTypeDerivations();
-        }
-
-        /// <summary>
-        /// Removes the singular name.
-        /// </summary>
-        public override void RemoveSingularName()
-        {
-            base.RemoveSingularName();
-            this.MetaDomain.StaleObjectTypeDerivations();
-        }
-
         /// <summary>
         /// Sets the direct super interfaces.
         /// </summary>
@@ -1330,14 +1214,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Ensures that relation type derivations are up to date.
-        /// </summary>
-        internal void EnsureRelationTypeDerivations()
-        {
-            this.MetaDomain.EnsureRelationTypeDerivations();
-        }
-
-        /// <summary>
         /// Determines whether adding the specified super type will result in a cycle.
         /// </summary>
         /// <param name="superType">The super type.</param>
@@ -1383,14 +1259,6 @@ namespace Allors.Meta
             this.RemoveDerivedSuperinterfaces();
             this.RemoveDerivedSupertypes();
             this.RemoveDerivedUnitRoleTypes();
-        }
-
-        /// <summary>
-        /// Stales the relation type derivations.
-        /// </summary>
-        internal void StaleRelationTypeDerivations()
-        {
-            this.MetaDomain.StaleRelationTypeDerivations();
         }
 
         /// <summary>
@@ -1941,22 +1809,6 @@ namespace Allors.Meta
             {
                 validationLog.AddError(this.ValidationName + " has no plural name", this, ValidationKind.Required, AllorsEmbeddedDomain.ObjectTypePluralName);
             }
-        }
-
-        /// <summary>
-        /// Ensures that method type derivations are up to date.
-        /// </summary>
-        private void EnsureMethodTypeDerivations()
-        {
-            this.MetaDomain.EnsureMethodTypeDerivations();
-        }
-
-        /// <summary>
-        /// Ensures that object type derivations are up to date.
-        /// </summary>
-        private void EnsureObjectTypeDerivations()
-        {
-            this.MetaDomain.EnsureObjectTypeDerivations();
         }
 
         /// <summary>

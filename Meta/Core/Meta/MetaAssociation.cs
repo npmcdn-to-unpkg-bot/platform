@@ -84,25 +84,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this instance has a multiplicity of many.
-        /// </summary>
-        /// <value><c>true</c> if this instance is many; otherwise, <c>false</c>.</value>
-        public override bool IsMany
-        {
-            get
-            {
-                this.EnsureRelationTypeDerivations();
-                return base.IsMany;
-            }
-
-            set
-            {
-                this.StaleRelationTypeDerivations();
-                base.IsMany = value;
-            }
-        }
-
-        /// <summary>
         /// Gets or sets a value indicating whether this instance has a multiplicity of one.
         /// </summary>
         /// <value><c>true</c> if this instance is one; otherwise, <c>false</c>.</value>
@@ -110,24 +91,6 @@ namespace Allors.Meta
         {
             get { return !this.IsMany; }
             set { this.IsMany = !value; }
-        }
-
-        /// <summary>
-        /// Gets or sets ObjectType.
-        /// </summary>
-        /// <value>The ObjectType.</value>
-        public override MetaObject ObjectType
-        {
-            get
-            {
-                return base.ObjectType;
-            }
-
-            set
-            {
-                this.StaleRelationTypeDerivations();
-                base.ObjectType = value;
-            }
         }
 
         /// <summary>
@@ -197,24 +160,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Removes the IsMany.
-        /// </summary>
-        public override void RemoveIsMany()
-        {
-            this.StaleRelationTypeDerivations();
-            base.RemoveIsMany();
-        }
-
-        /// <summary>
-        /// Removes the ObjectType.
-        /// </summary>
-        public override void RemoveObjectType()
-        {
-            this.StaleRelationTypeDerivations();
-            base.RemoveObjectType();
-        }
-
-        /// <summary>
         /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
         /// </summary>
         /// <returns>
@@ -278,44 +223,6 @@ namespace Allors.Meta
             {
                 var message = this.ValidationName + " has no relation type";
                 validationLog.AddError(message, this, ValidationKind.Required, AllorsEmbeddedDomain.RelationTypeAssociationType);
-            }
-        }
-
-        /// <summary>
-        /// Ensures that the relation type derivations are up to date.
-        /// </summary>
-        private void EnsureRelationTypeDerivations()
-        {
-            if (ExistRelationTypeWhereAssociationType)
-            {
-                RelationTypeWhereAssociationType.EnsureRelationTypeDerivations();
-            }
-            else if (ExistObjectType)
-            {
-                ObjectType.EnsureRelationTypeDerivations();
-            }
-            else
-            {
-                this.MetaDomain.EnsureRelationTypeDerivations();
-            }
-        }
-
-        /// <summary>
-        /// Make the relation type derivations stale.
-        /// </summary>
-        private void StaleRelationTypeDerivations()
-        {
-            if (this.ExistRelationTypeWhereAssociationType)
-            {
-                this.RelationTypeWhereAssociationType.MetaDomain.StaleRelationTypeDerivations();
-            }
-            else if (this.ExistObjectType)
-            {
-                this.ObjectType.StaleRelationTypeDerivations();
-            }
-            else
-            {
-                this.MetaDomain.StaleRelationTypeDerivations();
             }
         }
     }

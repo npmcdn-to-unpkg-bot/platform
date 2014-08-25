@@ -48,7 +48,6 @@ namespace Allors.Meta
                 }
 
                 base.Subtype = value;
-                this.MetaDomain.StaleInheritanceDerivations();
             }
         }
 
@@ -71,7 +70,6 @@ namespace Allors.Meta
                 }
 
                 base.Supertype = value;
-                this.MetaDomain.StaleInheritanceDerivations();
             }
         }
 
@@ -94,24 +92,6 @@ namespace Allors.Meta
 
                 return "unknown inheritance";
             }
-        }
-
-        /// <summary>
-        /// Removes the Subtype.
-        /// </summary>
-        public override void RemoveSubtype()
-        {
-            base.RemoveSubtype();
-            this.MetaDomain.StaleInheritanceDerivations();
-        }
-
-        /// <summary>
-        /// Removes the Supertype.
-        /// </summary>
-        public override void RemoveSupertype()
-        {
-            base.RemoveSupertype();
-            this.MetaDomain.StaleInheritanceDerivations();
         }
 
         /// <summary>

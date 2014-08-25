@@ -51,44 +51,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Gets or sets the assigned singular name.
-        /// </summary>
-        /// <value>The assigned plural name.</value>
-        public override string AssignedSingularName
-        {
-            get
-            {
-                return base.AssignedSingularName;
-            }
-
-            set
-            {
-                // TODO: Test
-                this.StaleRelationTypeDerivations();
-                base.AssignedSingularName = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the assigned plural name.
-        /// </summary>
-        /// <value>The assigned plural name.</value>
-        public override string AssignedPluralName
-        {
-            get
-            {
-                return base.AssignedPluralName;
-            }
-
-            set
-            {
-                // TODO: Test
-                this.StaleRelationTypeDerivations();
-                base.AssignedPluralName = value;
-            }
-        }
-
-        /// <summary>
         /// Gets the name.
         /// </summary>
         /// <value>The name .</value>
@@ -207,7 +169,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureRelationTypeDerivations();
                 return DerivedRootName;
             }
         }
@@ -220,7 +181,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureRelationTypeDerivations();
                 return DerivedHierarchySingularName;
             }
         }
@@ -233,7 +193,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureRelationTypeDerivations();
                 return DerivedHierarchyPluralName;
             }
         }
@@ -248,115 +207,6 @@ namespace Allors.Meta
             set { this.IsMany = !value; }
         }
 
-        /// <summary>
-        /// Gets or sets a value indicating whether this instance has multiplicity is many.
-        /// </summary>
-        /// <value><c>true</c> if this instance has multiplicity many; otherwise, <c>false</c>.</value>
-        public override bool IsMany
-        {
-            get
-            {
-                this.EnsureRelationTypeDerivations();
-                return base.IsMany;
-            }
-
-            set
-            {
-                // TODO: Test
-                this.StaleRelationTypeDerivations();
-                base.IsMany = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether size exists.
-        /// </summary>
-        public override bool ExistSize
-        {
-            get
-            {
-                this.EnsureRelationTypeDerivations();
-                return base.ExistSize;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the size.
-        /// </summary>
-        public override int Size
-        {
-            get
-            {
-                this.EnsureRelationTypeDerivations();
-                return base.Size;
-            }
-
-            set
-            {
-                this.StaleRelationTypeDerivations();
-                base.Size = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether scale exists.
-        /// </summary>
-        public override bool ExistScale
-        {
-            get
-            {
-                this.EnsureRelationTypeDerivations();
-                return base.ExistScale;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the scale.
-        /// </summary>
-        public override int Scale
-        {
-            get
-            {
-                this.EnsureRelationTypeDerivations();
-                return base.Scale;
-            }
-
-            set
-            {
-                this.StaleRelationTypeDerivations();
-                base.Scale = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether precision exists.
-        /// </summary>
-        public override bool ExistPrecision
-        {
-            get
-            {
-                this.EnsureRelationTypeDerivations();
-                return base.ExistPrecision;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the precision.
-        /// </summary>
-        public override int Precision
-        {
-            get
-            {
-                this.EnsureRelationTypeDerivations();
-                return base.Precision;
-            }
-
-            set
-            {
-                this.StaleRelationTypeDerivations();
-                base.Precision = value;
-            }
-        }
 
         /// <summary>
         /// Gets the type of the relation.
@@ -377,24 +227,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Gets or sets <see cref="ObjectType"/>.
-        /// </summary>
-        /// <value>The ObjectType.</value>
-        public override MetaObject ObjectType
-        {
-            get
-            {
-                return base.ObjectType;
-            }
-
-            set
-            {
-                this.StaleRelationTypeDerivations();
-                base.ObjectType = value;
-            }
-        }
-
-        /// <summary>
         /// Gets the root objectTypes.
         /// </summary>
         /// <value>The root objectTypes.</value>
@@ -402,7 +234,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureRelationTypeDerivations();
                 return DerivedRootTypes;
             }
         }
@@ -415,7 +246,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureRelationTypeDerivations();
                 return ExistDerivedRootTypes;
             }
         }
@@ -455,71 +285,6 @@ namespace Allors.Meta
             }
 
             return -1;
-        }
-
-        /// <summary>
-        /// Removes the assigned plural name.
-        /// </summary>
-        public override void RemoveAssignedPluralName()
-        {
-            // TODO: Test
-            this.StaleRelationTypeDerivations();
-            base.RemoveAssignedPluralName();
-        }
-
-        /// <summary>
-        /// Removes the assigned singular name.
-        /// </summary>
-        public override void RemoveAssignedSingularName()
-        {
-            // TODO: Test
-            this.StaleRelationTypeDerivations();
-            base.RemoveAssignedSingularName();
-        }
-
-        /// <summary>
-        /// Removes the is many.
-        /// </summary>
-        public override void RemoveIsMany()
-        {
-            this.StaleRelationTypeDerivations();
-            base.RemoveIsMany();
-        }
-
-        /// <summary>
-        /// Removes the object type.
-        /// </summary>
-        public override void RemoveObjectType()
-        {
-            this.StaleRelationTypeDerivations();
-            base.RemoveObjectType();
-        }
-
-        /// <summary>
-        /// Remove size.
-        /// </summary>
-        public override void RemoveSize()
-        {
-            this.StaleRelationTypeDerivations();
-            base.RemoveSize();
-        }
-
-        /// <summary>
-        /// Remove scale.
-        /// </summary>
-        public override void RemoveScale()
-        {
-            this.StaleRelationTypeDerivations();
-            base.RemoveScale();
-        }
-
-        /// <summary>
-        /// Remove precision.
-        /// </summary>
-        public override void RemovePrecision()
-        {
-            this.StaleRelationTypeDerivations();
-            base.RemovePrecision();
         }
 
         /// <summary>
@@ -898,44 +663,6 @@ namespace Allors.Meta
             {
                 var message = this.ValidationName + " should have an assigned plural role name with at least 2 characters";
                 validationLog.AddError(message, this, ValidationKind.MinimumLength, AllorsEmbeddedDomain.RoleTypeAssignedPluralName);
-            }
-        }
-
-        /// <summary>
-        /// Ensures that the relation type derivations are up to date.
-        /// </summary>
-        private void EnsureRelationTypeDerivations()
-        {
-            if (ExistRelationTypeWhereRoleType)
-            {
-                RelationTypeWhereRoleType.EnsureRelationTypeDerivations();
-            }
-            else if (ExistObjectType)
-            {
-                ObjectType.EnsureRelationTypeDerivations();
-            }
-            else
-            {
-                this.MetaDomain.EnsureRelationTypeDerivations();
-            }
-        }
-
-        /// <summary>
-        /// Stales the relation type derivations.
-        /// </summary>
-        private void StaleRelationTypeDerivations()
-        {
-            if (this.ExistRelationTypeWhereRoleType)
-            {
-                this.RelationTypeWhereRoleType.MetaDomain.StaleRelationTypeDerivations();
-            }
-            else if (this.ExistObjectType)
-            {
-                this.ObjectType.StaleRelationTypeDerivations();
-            }
-            else
-            {
-                this.MetaDomain.StaleRelationTypeDerivations();
             }
         }
     }

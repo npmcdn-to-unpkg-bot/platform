@@ -4805,8 +4805,9 @@ namespace Domain
   
 			IGT32CompositeSelf16.RoleType.ObjectType = IGT32Composite;  
 			IGT32CompositeSelf16.RoleType.AssignedSingularName = "Self16";  
-			IGT32CompositeSelf16.RoleType.AssignedPluralName = "Selfs16";  
+			IGT32CompositeSelf16.RoleType.AssignedPluralName = "Selfs16";
 
+		   
 		}
 	}
 }

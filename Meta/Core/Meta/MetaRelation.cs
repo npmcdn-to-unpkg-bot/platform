@@ -46,9 +46,6 @@ namespace Allors.Meta
 
             set
             {
-                // TODO: Test
-                this.MetaDomain.StaleRelationTypeDerivations();
-
                 if (this.ExistAssociationType)
                 {
                     throw new ArgumentException("AssociationType is write once");
@@ -187,9 +184,6 @@ namespace Allors.Meta
 
             set
             {
-                // TODO: Test
-                this.MetaDomain.StaleRelationTypeDerivations();
-
                 if (this.ExistRoleType)
                 {
                     throw new ArgumentException("RoleType is write once");
@@ -290,14 +284,6 @@ namespace Allors.Meta
             relationType.RoleType = MetaRole.Create(session);
 
             return relationType;
-        }
-
-        /// <summary>
-        /// Ensures that relation type derivations are up to date.
-        /// </summary>
-        internal void EnsureRelationTypeDerivations()
-        {
-            this.MetaDomain.EnsureRelationTypeDerivations();
         }
 
         /// <summary>

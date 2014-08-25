@@ -81,6 +81,14 @@ namespace Allors
         /// </param>
         public ObjectFactory(MetaDomain domain, Assembly assembly, string @namespace)
         {
+            var validationLog = domain.Validate();
+            if (validationLog.ContainsErrors)
+            {
+                throw new Exception(validationLog.ToString());
+            }
+
+            domain.Derive();
+
             this.domain = domain;
             this.assembly = assembly;
             this.ns = @namespace;

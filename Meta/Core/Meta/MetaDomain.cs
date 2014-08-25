@@ -27,8 +27,6 @@ namespace Allors.Meta
     using System.Text;
     using System.Xml;
 
-    using Allors.Meta.Events;
-
     using AllorsGenerated;
 
     /// <summary>
@@ -72,26 +70,6 @@ namespace Allors.Meta
         private static readonly Guid AllorsUnitDomainId = new Guid("2d337e3a-5e9e-4705-b327-c14bd279d322");
 
         /// <summary>
-        /// True if the type derivations are stale, false otherwise.
-        /// </summary>
-        private bool hasStaleObjectTypeDerivations;
-
-        /// <summary>
-        /// True if the inheritance derivations are stale, false otherwise.
-        /// </summary>
-        private bool hasStaleInheritanceDerivations;
-
-        /// <summary>
-        /// True if the relation derivations are stale, false otherwise.
-        /// </summary>
-        private bool hasStaleRelationDerivations;
-
-        /// <summary>
-        /// True if the method derivations are stale, false otherwise.
-        /// </summary>
-        private bool hasStaleMethodDerivations;
-
-        /// <summary>
         /// Gets the composite types.
         /// </summary>
         /// <value>The composite types.</value>
@@ -99,7 +77,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureObjectTypeDerivations();
                 return DerivedCompositeObjectTypes;
             }
         }
@@ -133,7 +110,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureDomainDerivations();
                 return (MetaDomain[])session[DomainsSessionKey];
             }
         }
@@ -146,7 +122,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureInheritanceDerivations();
                 return DerivedInheritances;
             }
         }
@@ -208,25 +183,7 @@ namespace Allors.Meta
                 return stringBuilder.ToString();
             }
         }
-        
-        /// <summary>
-        /// Gets or sets the inheritances that are Defined to this domain.
-        /// </summary>
-        /// <value>The Defined inheritances.</value>
-        public override MetaInheritance[] DeclaredInheritances
-        {
-            get
-            {
-                return base.DeclaredInheritances;
-            }
-
-            set
-            {
-                base.DeclaredInheritances = value;
-                this.MetaDomain.StaleInheritanceDerivations();
-            }
-        }
-
+ 
         /// <summary>
         /// Gets or sets the object types that are Defined to this domain.
         /// </summary>
@@ -238,24 +195,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Gets or sets relation types that are Defined to this domain.
-        /// </summary>
-        /// <value>The Defined relation types.</value>
-        public override MetaRelation[] DeclaredRelationTypes
-        {
-            get
-            {
-                return base.DeclaredRelationTypes;
-            }
-
-            set
-            {
-                base.DeclaredRelationTypes = value;
-                this.MetaDomain.StaleRelationTypeDerivations();
-            }
-        }
-
-        /// <summary>
         /// Gets all the importSuperDomain domains of this domain.
         /// </summary>
         /// <value>The importSuperDomain domain.</value>
@@ -263,26 +202,7 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureDomainDerivations();
                 return this.DerivedSuperDomains;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the direct importSuperDomain domains of this domain.
-        /// </summary>
-        /// <value>The direct importSuperDomain domains.</value>
-        public override MetaDomain[] DirectSuperDomains
-        {
-            get
-            {
-                return base.DirectSuperDomains;
-            }
-
-            set
-            {
-                base.DirectSuperDomains = value;
-                this.MetaDomain.StaleDomainDerivations();
             }
         }
 
@@ -294,7 +214,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureObjectTypeDerivations();
                 return DerivedObjectTypes;
             }
         }
@@ -307,7 +226,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureMethodTypeDerivations();
                 return DerivedMethodTypes;
             }
         }
@@ -320,7 +238,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureRelationTypeDerivations();
                 return DerivedRelationTypes;
             }
         }
@@ -333,7 +250,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.EnsureObjectTypeDerivations();
                 return DerivedUnitObjectTypes;
             }
         }
@@ -506,17 +422,6 @@ namespace Allors.Meta
         /// <summary>
         /// Adds the <see cref="MetaInheritance"/> to this domain.
         /// </summary>
-        /// <param name="inheritance">The inheritance.</param>
-        public override void AddDeclaredInheritance(MetaInheritance inheritance)
-        {
-            base.AddDeclaredInheritance(inheritance);
-
-            this.MetaDomain.StaleInheritanceDerivations();
-        }
-
-        /// <summary>
-        /// Adds the <see cref="MetaInheritance"/> to this domain.
-        /// </summary>
         /// <param name="inheritanceId">The inheritance id.</param>
         /// <returns>The added inheritance.</returns>
         public MetaInheritance AddDeclaredInheritance(Guid inheritanceId)
@@ -535,17 +440,6 @@ namespace Allors.Meta
         /// <summary>
         /// Adds the <see cref="MetaObject"/> to this domain.
         /// </summary>
-        /// <param name="objectType">The object type.</param>
-        public override void AddDeclaredObjectType(MetaObject objectType)
-        {
-            base.AddDeclaredObjectType(objectType);
-
-            this.MetaDomain.StaleObjectTypeDerivations();
-        }
-
-        /// <summary>
-        /// Adds the <see cref="MetaObject"/> to this domain.
-        /// </summary>
         /// <param name="objectTypeId">The object type id.</param>
         /// <returns>The object type.</returns>
         public MetaObject AddDeclaredObjectType(Guid objectTypeId)
@@ -559,16 +453,6 @@ namespace Allors.Meta
 
             this.AddDeclaredObjectType(objectType);
             return objectType;
-        }
-
-        /// <summary>
-        /// Adds the <see cref="MetaRelation"/> to this domain.
-        /// </summary>
-        /// <param name="relationType">The relation type.</param>
-        public override void AddDeclaredRelationType(MetaRelation relationType)
-        {
-            this.MetaDomain.StaleRelationTypeDerivations();
-            base.AddDeclaredRelationType(relationType);
         }
 
         /// <summary>
@@ -604,16 +488,6 @@ namespace Allors.Meta
         /// <summary>
         /// Adds the <see cref="MetaMethod"/> to this domain.
         /// </summary>
-        /// <param name="methodType">The method type.</param>
-        public override void AddDeclaredMethodType(MetaMethod methodType)
-        {
-            this.MetaDomain.StaleMethodTypeDerivations();
-            base.AddDeclaredMethodType(methodType);
-        }
-
-        /// <summary>
-        /// Adds the <see cref="MetaMethod"/> to this domain.
-        /// </summary>
         /// <param name="methodTypeId">The method type id.</param>
         /// <returns>The method type.</returns>
         public MetaMethod AddDeclaredMethodType(Guid methodTypeId)
@@ -641,7 +515,6 @@ namespace Allors.Meta
             }
 
             base.AddDirectSuperDomain(domain);
-            this.MetaDomain.StaleDomainDerivations();
         }
 
         /// <summary>
@@ -657,25 +530,6 @@ namespace Allors.Meta
             return domain;
         }
 
-        /// <summary>
-        /// Removes the Defined domain from this domain.
-        /// </summary>
-        /// <param name="domain">The domain.</param>
-        public override void RemoveDirectSuperDomain(MetaDomain domain)
-        {
-            base.RemoveDirectSuperDomain(domain);
-            this.MetaDomain.StaleDomainDerivations();
-        }
-
-        /// <summary>
-        /// Removes all direct importSuperDomain domains from this domain.
-        /// </summary>
-        public override void RemoveDirectSuperDomains()
-        {
-            base.RemoveDirectSuperDomains();
-            this.MetaDomain.StaleDomainDerivations();
-        }
-        
         /// <summary>
         /// Create an extent for this type.
         /// </summary>
@@ -721,27 +575,6 @@ namespace Allors.Meta
             }
 
             throw new ArgumentException("Unknown type");
-        }
-
-        /// <summary>
-        /// Removes the Defined <see cref="MetaInheritance"/> from this domain.
-        /// </summary>
-        /// <param name="inheritance">The inheritance.</param>
-        public override void RemoveDeclaredInheritance(MetaInheritance inheritance)
-        {
-            base.RemoveDeclaredInheritance(inheritance);
-
-            this.MetaDomain.StaleInheritanceDerivations();
-        }
-
-        /// <summary>
-        /// Removes all Defined <see cref="MetaInheritance"/>s from this domain.
-        /// </summary>
-        public override void RemoveDeclaredInheritances()
-        {
-            base.RemoveDeclaredInheritances();
-
-            this.MetaDomain.StaleInheritanceDerivations();
         }
 
         /// <summary>
@@ -858,6 +691,256 @@ namespace Allors.Meta
             return validationReport;
         }
 
+        public void Derive()
+        {
+            var derivedSuperDomains = new List<MetaDomain>();
+            this.AddDerivedSuperDomain(derivedSuperDomains);
+            this.DerivedSuperDomains = derivedSuperDomains.ToArray();
+
+            var inheritances = new List<MetaInheritance>(this.DeclaredInheritances);
+            foreach (var superDomain in this.SuperDomains)
+            {
+                inheritances.AddRange(superDomain.DeclaredInheritances);
+            }
+
+            this.DerivedInheritances = inheritances.ToArray();
+
+            var objectTypes = new List<MetaObject>(this.DeclaredObjectTypes);
+            foreach (var superDomain in this.SuperDomains)
+            {
+                objectTypes.AddRange(superDomain.DeclaredObjectTypes);
+            }
+
+            this.DerivedObjectTypes = objectTypes.ToArray();
+
+            // Unit & Composite ObjectTypes
+            var compositeTypes = new List<MetaObject>();
+            var unitTypes = new List<MetaObject>();
+            foreach (var objectType in objectTypes)
+            {
+                if (objectType.IsUnit)
+                {
+                    unitTypes.Add(objectType);
+                }
+                else
+                {
+                    compositeTypes.Add(objectType);
+                }
+            }
+
+            this.DerivedUnitObjectTypes = unitTypes.ToArray();
+            this.DerivedCompositeObjectTypes = compositeTypes.ToArray();
+
+            var sharedList = new HashSet<MetaObject>();
+
+            // DirectSupertypes
+            foreach (var type in DerivedCompositeObjectTypes)
+            {
+                type.DeriveDirectSupertypes(sharedList);
+            }
+
+            // Supertypes
+            foreach (var type in DerivedCompositeObjectTypes)
+            {
+                type.DeriveSupertypes(sharedList);
+            }
+
+            // DirectSuperclass
+            foreach (var type in DerivedCompositeObjectTypes)
+            {
+                type.DeriveDirectSuperclass();
+            }
+
+            // DirectSuperinterfaces
+            foreach (var type in DerivedCompositeObjectTypes)
+            {
+                type.DeriveDirectSuperinterface(sharedList);
+            }
+
+            // Superclasses
+            foreach (var type in DerivedCompositeObjectTypes)
+            {
+                type.DeriveSuperclasses(sharedList);
+            }
+
+            // Subclasses
+            foreach (var type in DerivedCompositeObjectTypes)
+            {
+                type.DeriveSubclasses(sharedList);
+            }
+
+            // Superinterfaces
+            foreach (var type in DerivedCompositeObjectTypes)
+            {
+                type.DeriveSuperinterfaces(sharedList);
+            }
+
+            // Subinterfaces
+            foreach (var type in DerivedCompositeObjectTypes)
+            {
+                type.DeriveSubinterfaces(sharedList);
+            }
+
+            // Exclusive Superinterfaces
+            foreach (var type in DerivedCompositeObjectTypes)
+            {
+                type.DeriveExclusiveSuperinterfaces(sharedList);
+            }
+
+            // RootClasses
+            foreach (var type in DerivedCompositeObjectTypes)
+            {
+                if (!type.IsInterface)
+                {
+                    type.DeriveRootClassForClasses();
+                }
+            }
+
+            foreach (var type in DerivedCompositeObjectTypes)
+            {
+                if (type.IsInterface)
+                {
+                    type.DeriveRootClassForInterfaces(sharedList);
+                }
+            }
+
+            // Exclusive Concrete Leaf Class
+            foreach (var type in DerivedCompositeObjectTypes)
+            {
+                type.DeriveExclusiveConcreteLeafClass(sharedList);
+            }
+
+            // Derive concrete classes
+            foreach (var type in DerivedCompositeObjectTypes)
+            {
+                type.DeriveConcreteClassesCache();
+            }
+
+            var relationTypes = new List<MetaRelation>(this.DeclaredRelationTypes);
+            foreach (var superDomain in this.SuperDomains)
+            {
+                relationTypes.AddRange(superDomain.DeclaredRelationTypes);
+            }
+
+            this.DerivedRelationTypes = relationTypes.ToArray();
+
+            var sharedRoleTypeList = new HashSet<MetaRole>();
+            var sharedAssociationTypeList = new HashSet<MetaAssociation>();
+            var sharedObjectTypeList = new HashSet<MetaObject>();
+
+            // RoleTypes
+            foreach (var type in this.ObjectTypes)
+            {
+                type.DeriveRoleTypes(sharedRoleTypeList);
+            }
+
+            // Unit RoleTypes
+            foreach (var type in this.ObjectTypes)
+            {
+                type.DeriveUnitRoleTypes(sharedRoleTypeList);
+            }
+
+            // Composite RoleTypes
+            foreach (var type in this.ObjectTypes)
+            {
+                type.DeriveCompositeRoleTypes(sharedRoleTypeList);
+            }
+
+            // Exclusive RoleTypes
+            foreach (var type in this.ObjectTypes)
+            {
+                type.DeriveExclusiveRoleTypes(sharedRoleTypeList);
+            }
+
+            // AssociationTypes
+            foreach (var type in this.ObjectTypes)
+            {
+                type.DeriveAssociationTypes(sharedAssociationTypeList);
+            }
+
+            // Exclusive AssociationTypes
+            foreach (var type in this.ObjectTypes)
+            {
+                type.DeriveExclusiveAssociationTypes(sharedAssociationTypeList);
+            }
+
+            // Association & RoleType
+            foreach (var type in this.ObjectTypes)
+            {
+                foreach (var association in type.AssociationTypesWhereObjectType)
+                {
+                    association.DeriveMultiplicity();
+                }
+
+                foreach (var role in type.RoleTypesWhereObjectType)
+                {
+                    role.DeriveMultiplicityScaleAndSize();
+                }
+            }
+
+            // RoleType Root ObjectType
+            foreach (var type in this.ObjectTypes)
+            {
+                foreach (var role in type.RoleTypesWhereObjectType)
+                {
+                    role.DeriveRootTypes();
+                }
+            }
+
+            // RoleType Hierarchy Singular Name
+            foreach (var type in this.ObjectTypes)
+            {
+                foreach (var role in type.RoleTypesWhereObjectType)
+                {
+                    role.DeriveHierarchySingularName(sharedObjectTypeList);
+                }
+            }
+
+            // RoleType Hierarchy Plural Name
+            foreach (var type in this.ObjectTypes)
+            {
+                foreach (var role in type.RoleTypesWhereObjectType)
+                {
+                    role.DeriveHierarchyPluralName(sharedObjectTypeList);
+                }
+            }
+
+            // RoleType Root Name
+            foreach (var type in this.ObjectTypes)
+            {
+                foreach (var role in type.RoleTypesWhereObjectType)
+                {
+                    role.DeriveRootName();
+                }
+            }
+
+            foreach (var type in this.CompositeObjectTypes)
+            {
+                type.DeriveRoleTypeIdsCache();
+            }
+
+            foreach (var type in this.CompositeObjectTypes)
+            {
+                type.DeriveAssociationIdsCache();
+            }
+
+            var methodTypes = new List<MetaMethod>(this.DeclaredMethodTypes);
+            foreach (var superDomain in this.SuperDomains)
+            {
+                methodTypes.AddRange(superDomain.DeclaredMethodTypes);
+            }
+
+            this.DerivedMethodTypes = methodTypes.ToArray();
+
+            var sharedMethodTypeList = new HashSet<MetaMethod>();
+
+            // MethodTypes
+            foreach (var type in this.ObjectTypes)
+            {
+                type.DeriveMethodTypes(sharedMethodTypeList);
+            }
+        }
+
         /// <summary>
         /// Gets the domain.
         /// </summary>
@@ -893,323 +976,6 @@ namespace Allors.Meta
             }
 
             return false;
-        }
-
-        /// <summary>
-        /// Stales the inheritance derivations.
-        /// </summary>
-        internal void StaleInheritanceDerivations()
-        {
-            foreach (var domain in this.Domains)
-            {
-                domain.hasStaleInheritanceDerivations = true;
-            }
-
-            this.StaleObjectTypeDerivations();
-        }
-
-        /// <summary>
-        /// Stales the object type derivations.
-        /// </summary>
-        internal void StaleObjectTypeDerivations()
-        {
-            foreach (var domain in this.Domains)
-            {
-                domain.hasStaleObjectTypeDerivations = true;
-            }
-
-            this.StaleMethodTypeDerivations();
-            this.StaleRelationTypeDerivations();
-        }
-
-        /// <summary>
-        /// Ensures that object type derivations are up to date.
-        /// </summary>
-        internal void EnsureObjectTypeDerivations()
-        {
-            if (this.hasStaleObjectTypeDerivations)
-            {
-                this.hasStaleObjectTypeDerivations = false;
-
-                var objectTypes = new List<MetaObject>(this.DeclaredObjectTypes);
-                foreach (var superDomain in this.SuperDomains)
-                {
-                    objectTypes.AddRange(superDomain.DeclaredObjectTypes);
-                }
-
-                this.DerivedObjectTypes = objectTypes.ToArray();
-
-                // Unit & Composite ObjectTypes
-                var compositeTypes = new List<MetaObject>();
-                var unitTypes = new List<MetaObject>();
-                foreach (var objectType in objectTypes)
-                {
-                    if (objectType.IsUnit)
-                    {
-                        unitTypes.Add(objectType);
-                    }
-                    else
-                    {
-                        compositeTypes.Add(objectType);
-                    }
-                }
-
-                this.DerivedUnitObjectTypes = unitTypes.ToArray();
-                this.DerivedCompositeObjectTypes = compositeTypes.ToArray();
-
-                var sharedList = new HashSet<MetaObject>();
-
-                // DirectSupertypes
-                foreach (var type in DerivedCompositeObjectTypes)
-                {
-                    type.DeriveDirectSupertypes(sharedList);
-                }
-
-                // Supertypes
-                foreach (var type in DerivedCompositeObjectTypes)
-                {
-                    type.DeriveSupertypes(sharedList);
-                }
-
-                // DirectSuperclass
-                foreach (var type in DerivedCompositeObjectTypes)
-                {
-                    type.DeriveDirectSuperclass();
-                }
-
-                // DirectSuperinterfaces
-                foreach (var type in DerivedCompositeObjectTypes)
-                {
-                    type.DeriveDirectSuperinterface(sharedList);
-                }
-
-                // Superclasses
-                foreach (var type in DerivedCompositeObjectTypes)
-                {
-                    type.DeriveSuperclasses(sharedList);
-                }
-
-                // Subclasses
-                foreach (var type in DerivedCompositeObjectTypes)
-                {
-                    type.DeriveSubclasses(sharedList);
-                }
-
-                // Superinterfaces
-                foreach (var type in DerivedCompositeObjectTypes)
-                {
-                    type.DeriveSuperinterfaces(sharedList);
-                }
-
-                // Subinterfaces
-                foreach (var type in DerivedCompositeObjectTypes)
-                {
-                    type.DeriveSubinterfaces(sharedList);
-                }
-
-                // Exclusive Superinterfaces
-                foreach (var type in DerivedCompositeObjectTypes)
-                {
-                    type.DeriveExclusiveSuperinterfaces(sharedList);
-                }
-
-                // RootClasses
-                foreach (var type in DerivedCompositeObjectTypes)
-                {
-                    if (!type.IsInterface)
-                    {
-                        type.DeriveRootClassForClasses();
-                    }
-                }
-
-                foreach (var type in DerivedCompositeObjectTypes)
-                {
-                    if (type.IsInterface)
-                    {
-                        type.DeriveRootClassForInterfaces(sharedList);
-                    }
-                }
-
-                // Exclusive Concrete Leaf Class
-                foreach (var type in DerivedCompositeObjectTypes)
-                {
-                    type.DeriveExclusiveConcreteLeafClass(sharedList);
-                }
-
-                // Derive concrete classes
-                foreach (var type in DerivedCompositeObjectTypes)
-                {
-                    type.DeriveConcreteClassesCache();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Stales the relation type derivations.
-        /// </summary>
-        internal void StaleRelationTypeDerivations()
-        {
-            foreach (var domain in this.Domains)
-            {
-                domain.hasStaleRelationDerivations = true;
-            }
-        }
-        
-        /// <summary>
-        /// Ensures that relation type derivations are up to date.
-        /// </summary>
-        internal void EnsureRelationTypeDerivations()
-        {
-            if (this.hasStaleRelationDerivations)
-            {
-                this.hasStaleRelationDerivations = false;
-
-                var relationTypes = new List<MetaRelation>(this.DeclaredRelationTypes);
-                foreach (var superDomain in this.SuperDomains)
-                {
-                    relationTypes.AddRange(superDomain.DeclaredRelationTypes);
-                }
-
-                this.DerivedRelationTypes = relationTypes.ToArray();
-
-                var sharedRoleTypeList = new HashSet<MetaRole>();
-                var sharedAssociationTypeList = new HashSet<MetaAssociation>();
-                var sharedObjectTypeList = new HashSet<MetaObject>();
-
-                // RoleTypes
-                foreach (var type in this.ObjectTypes)
-                {
-                    type.DeriveRoleTypes(sharedRoleTypeList);
-                }
-
-                // Unit RoleTypes
-                foreach (var type in this.ObjectTypes)
-                {
-                    type.DeriveUnitRoleTypes(sharedRoleTypeList);
-                }
-
-                // Composite RoleTypes
-                foreach (var type in this.ObjectTypes)
-                {
-                    type.DeriveCompositeRoleTypes(sharedRoleTypeList);
-                }
-
-                // Exclusive RoleTypes
-                foreach (var type in this.ObjectTypes)
-                {
-                    type.DeriveExclusiveRoleTypes(sharedRoleTypeList);
-                }
-
-                // AssociationTypes
-                foreach (var type in this.ObjectTypes)
-                {
-                    type.DeriveAssociationTypes(sharedAssociationTypeList);
-                }
-
-                // Exclusive AssociationTypes
-                foreach (var type in this.ObjectTypes)
-                {
-                    type.DeriveExclusiveAssociationTypes(sharedAssociationTypeList);
-                }
-
-                // Association & RoleType
-                foreach (var type in this.ObjectTypes)
-                {
-                    foreach (var association in type.AssociationTypesWhereObjectType)
-                    {
-                        association.DeriveMultiplicity();
-                    } 
-                    
-                    foreach (var role in type.RoleTypesWhereObjectType)
-                    {
-                        role.DeriveMultiplicityScaleAndSize();
-                    }
-                }
-
-                // RoleType Root ObjectType
-                foreach (var type in this.ObjectTypes)
-                {
-                    foreach (var role in type.RoleTypesWhereObjectType)
-                    {
-                        role.DeriveRootTypes();
-                    }
-                }
-
-                // RoleType Hierarchy Singular Name
-                foreach (var type in this.ObjectTypes)
-                {
-                    foreach (var role in type.RoleTypesWhereObjectType)
-                    {
-                        role.DeriveHierarchySingularName(sharedObjectTypeList);
-                    }
-                }
-
-                // RoleType Hierarchy Plural Name
-                foreach (var type in this.ObjectTypes)
-                {
-                    foreach (var role in type.RoleTypesWhereObjectType)
-                    {
-                        role.DeriveHierarchyPluralName(sharedObjectTypeList);
-                    }
-                }
-
-                // RoleType Root Name
-                foreach (var type in this.ObjectTypes)
-                {
-                    foreach (var role in type.RoleTypesWhereObjectType)
-                    {
-                        role.DeriveRootName();
-                    }
-                }
-
-                foreach (var type in this.CompositeObjectTypes)
-                {
-                    type.DeriveRoleTypeIdsCache();
-                }
-
-                foreach (var type in this.CompositeObjectTypes)
-                {
-                    type.DeriveAssociationIdsCache();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Stales the method type derivations.
-        /// </summary>
-        internal void StaleMethodTypeDerivations()
-        {
-            foreach (var domain in this.Domains)
-            {
-                domain.hasStaleMethodDerivations = true;
-            }
-        }
-
-        /// <summary>
-        /// Ensures that relation type derivations are up to date.
-        /// </summary>
-        internal void EnsureMethodTypeDerivations()
-        {
-            if (this.hasStaleMethodDerivations)
-            {
-                this.hasStaleMethodDerivations = false;
-
-                var methodTypes = new List<MetaMethod>(this.DeclaredMethodTypes);
-                foreach (var superDomain in this.SuperDomains)
-                {
-                    methodTypes.AddRange(superDomain.DeclaredMethodTypes);
-                }
-
-                this.DerivedMethodTypes = methodTypes.ToArray();
-
-                var sharedMethodTypeList = new HashSet<MetaMethod>();
-
-                // MethodTypes
-                foreach (var type in this.ObjectTypes)
-                {
-                    type.DeriveMethodTypes(sharedMethodTypeList);
-                }
-            }
         }
 
         /// <summary>
@@ -1289,11 +1055,6 @@ namespace Allors.Meta
         /// </summary>
         private void PurgeDerivations()
         {
-            this.StaleDomainDerivations();
-            this.StaleRelationTypeDerivations();
-            this.StaleObjectTypeDerivations();
-            this.StaleInheritanceDerivations();
-
             var objectTypes = (MetaObject[])AllorsSession.Extent(AllorsEmbeddedDomain.ObjectType);
             foreach (var objectType in objectTypes)
             {
@@ -1312,66 +1073,6 @@ namespace Allors.Meta
             this.RemoveDerivedObjectTypes();
             this.RemoveDerivedRelationTypes();
             this.RemoveDerivedUnitObjectTypes();
-        }
-
-        /// <summary>
-        /// Ensures that inheritance derivations are up to date.
-        /// </summary>
-        private void EnsureInheritanceDerivations()
-        {
-            if (this.hasStaleInheritanceDerivations)
-            {
-                this.hasStaleInheritanceDerivations = false;
-
-                var inheritances = new List<MetaInheritance>(this.DeclaredInheritances);
-                foreach (var superDomain in this.SuperDomains)
-                {
-                    inheritances.AddRange(superDomain.DeclaredInheritances);
-                }
-
-                this.DerivedInheritances = inheritances.ToArray();
-            }
-        }
-
-        /// <summary>
-        /// Stales the domain derivations.
-        /// </summary>
-        private void StaleDomainDerivations()
-        {
-            session[DomainsSessionKey] = null;
-
-            this.StaleInheritanceDerivations();
-            this.StaleRelationTypeDerivations();
-            this.StaleObjectTypeDerivations();
-            this.StaleMethodTypeDerivations();
-        }
-
-        /// <summary>
-        /// Ensure the domain derivations.
-        /// </summary>
-        private void EnsureDomainDerivations()
-        {
-            var domains = (MetaDomain[])session[DomainsSessionKey];
-            if (domains == null)
-            {
-                domains = (MetaDomain[])AllorsSession.Extent(AllorsEmbeddedDomain.Domain);
-                session[DomainsSessionKey] = domains;
-
-                foreach (var domain in domains)
-                {
-                    domain.EnsureDerivedSuperDomains();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Ensure the derived importSuperDomain domains.
-        /// </summary>
-        private void EnsureDerivedSuperDomains()
-        {
-            var derivedSuperDomains = new List<MetaDomain>();
-            this.AddDerivedSuperDomain(derivedSuperDomains);
-            this.DerivedSuperDomains = derivedSuperDomains.ToArray();
         }
 
         /// <summary>

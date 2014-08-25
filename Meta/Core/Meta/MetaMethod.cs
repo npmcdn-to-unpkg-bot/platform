@@ -38,42 +38,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Gets or sets the name.
-        /// </summary>
-        /// <value>The name.</value>
-        public override string Name
-        {
-            get
-            {
-                return base.Name;
-            }
-
-            set
-            {
-                this.StaleMethodTypeDerivations();
-                base.Name = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the ObjectType.
-        /// </summary>
-        /// <value>The ObjectType.</value>
-        public override MetaObject ObjectType
-        {
-            get
-            {
-                return base.ObjectType;
-            }
-
-            set
-            {
-                this.StaleMethodTypeDerivations();
-                base.ObjectType = value;
-            }
-        }
-
-        /// <summary>
         /// Gets the validation name.
         /// </summary>
         /// <value>The validation name.</value>
@@ -88,24 +52,6 @@ namespace Allors.Meta
 
                 return "unknown method type";
             }
-        }
-
-        /// <summary>
-        /// Removes the Name.
-        /// </summary>
-        public override void RemoveName()
-        {
-            this.StaleMethodTypeDerivations();
-            base.RemoveName();
-        }
-
-        /// <summary>
-        /// Removes the ObjectType.
-        /// </summary>
-        public override void RemoveObjectType()
-        {
-            this.StaleMethodTypeDerivations();
-            base.RemoveObjectType();
         }
 
         /// <summary>
@@ -132,14 +78,6 @@ namespace Allors.Meta
                 var message = this.ValidationName + " has no name";
                 validationLog.AddError(message, this, ValidationKind.Required, AllorsEmbeddedDomain.MethodTypeName);
             }
-        }
-
-        /// <summary>
-        /// Stales the relation type derivations.
-        /// </summary>
-        private void StaleMethodTypeDerivations()
-        {
-            this.MetaDomain.StaleMethodTypeDerivations();
         }
     }
 }
