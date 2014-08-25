@@ -88,7 +88,7 @@ namespace Allors.Adapters.Special
         }
 
         [Test]
-        [ExpectedException("System.ArgumentException")]
+        [ExpectedException("System.Exception")]
         public void InitInvalidDomain()
         {
             this.domain = MetaDomain.Create();
@@ -598,7 +598,6 @@ namespace Allors.Adapters.Special
         protected MetaObject CreateAbstractClass(string name)
         {
             var type = this.CreateType(name);
-            type.IsAbstract = true;
             return type;
         }
 

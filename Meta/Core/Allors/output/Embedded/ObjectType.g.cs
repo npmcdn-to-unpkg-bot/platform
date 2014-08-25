@@ -361,22 +361,7 @@ namespace Allors.Meta.AllorsGenerated
 		void AllorsRemoveObjectTypeDerivedSuperclass();
 
 		void AllorsRemoveObjectTypeDerivedSuperclass( global::Allors.Meta.MetaObject role );
-
-
-		global::System.Boolean IsAbstract
-		{
-			get;
-			set;
-		}
-
-		void RemoveIsAbstract();
-
-		bool ExistIsAbstract
-		{
-			get;
-		}
-
-
+        
 		global::Allors.Meta.MetaRole[] DerivedRoleTypes
 		{
 			get;
@@ -877,9 +862,6 @@ namespace Allors.Meta.AllorsGenerated
 		protected global::Allors.Meta.MetaObject[] _ObjectTypeDerivedSuperclass = AllorsEmbeddedArrays.EMPTY_ObjectType_ARRAY;
 
 
-		protected System.Object _ObjectTypeIsAbstract;
-
-
 		protected global::Allors.Meta.MetaRole[] _ObjectTypeDerivedRoleType = AllorsEmbeddedArrays.EMPTY_RoleType_ARRAY;
 
 
@@ -1032,8 +1014,6 @@ namespace Allors.Meta.AllorsGenerated
 					return _ObjectTypeDerivedCompositeRoleType;
 				case AllorsRelationTags.ObjectTypeDerivedSuperclass:
 					return _ObjectTypeDerivedSuperclass;
-				case AllorsRelationTags.ObjectTypeIsAbstract:
-					return _ObjectTypeIsAbstract;
 				case AllorsRelationTags.ObjectTypeDerivedRoleType:
 					return _ObjectTypeDerivedRoleType;
 				case AllorsRelationTags.ObjectTypeSingularName:
@@ -1110,9 +1090,6 @@ namespace Allors.Meta.AllorsGenerated
 					break;
 				case AllorsRelationTags.ObjectTypeDerivedSuperclass:
 					RoleSetObjectTypeDerivedSuperclass((global::Allors.Meta.MetaObject[])role);
-					break;
-				case AllorsRelationTags.ObjectTypeIsAbstract:
-					RoleSetObjectTypeIsAbstract((global::System.Boolean)role);
 					break;
 				case AllorsRelationTags.ObjectTypeDerivedRoleType:
 					RoleSetObjectTypeDerivedRoleType((global::Allors.Meta.MetaRole[])role);
@@ -2564,38 +2541,6 @@ namespace Allors.Meta.AllorsGenerated
 			{
 				return _ObjectTypeDerivedSuperclass.Length > 0;
 			}
-		}
-
-
-		public virtual global::System.Boolean IsAbstract
-		{
-			get
-			{
-			    return (global::System.Boolean)_ObjectTypeIsAbstract;
-			}
-
-			set
-			{
-			    RoleSetObjectTypeIsAbstract(value);
-			}
-		}
-
-		protected void RoleSetObjectTypeIsAbstract(global::System.Boolean role)
-		{
-			_ObjectTypeIsAbstract = role;
-		}
-
-		public virtual bool ExistIsAbstract
-		{
-			get
-			{
-				return _ObjectTypeIsAbstract != null;
-			}
-		}
-
-		public virtual void RemoveIsAbstract()
-		{
-			_ObjectTypeIsAbstract = null;
 		}
 
 		public virtual global::Allors.Meta.MetaRole[] DerivedRoleTypes

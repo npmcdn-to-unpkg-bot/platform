@@ -154,12 +154,6 @@ namespace Allors.Meta
                     var message = this.ValidationName + " can not have a concrete superclass";
                     validationLog.AddError(message, this, ValidationKind.Hierarchy, AllorsEmbeddedDomain.InheritanceSupertype);
                 }
-
-                if (this.Supertype.IsAbstractComposite && this.Subtype.IsInterface)
-                {
-                    var message = this.ValidationName + " can not have an abstract superclass";
-                    validationLog.AddError(message, this, ValidationKind.Hierarchy, AllorsEmbeddedDomain.InheritanceSupertype);
-                }
             }
             else
             {

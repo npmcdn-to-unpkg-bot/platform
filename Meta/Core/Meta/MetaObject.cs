@@ -445,17 +445,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Gets a value indicating whether this instance is an abstract composite.
-        /// </summary>
-        /// <value>
-        ///  <c>true</c> if this instance is an abstract composite; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsAbstractComposite
-        {
-            get { return !this.IsUnit && this.IsAbstract; }
-        }
-
-        /// <summary>
         /// Gets a value indicating whether this instance is a binary.
         /// </summary>
         /// <value><c>true</c> if this instance is a binary; otherwise, <c>false</c>.</value>
@@ -503,7 +492,10 @@ namespace Allors.Meta
         /// </value>
         public bool IsConcrete
         {
-            get { return !this.IsInterface && !this.IsAbstract; }
+            get
+            {
+                return !this.IsInterface;
+            }
         }
 
         /// <summary>
@@ -1007,11 +999,6 @@ namespace Allors.Meta
                     throw new ArgumentException("The inheritance " + this + "::" + supertype + " can not have a concrete superclass");
                 }
 
-                if (supertype.IsAbstractComposite && this.IsInterface)
-                {
-                    throw new ArgumentException("The inheritance " + this + "::" + supertype + " can not have an abstract");
-                }
-
                 if (supertype.IsClass && this.ExistDirectSuperclass)
                 {
                 }
@@ -1206,7 +1193,6 @@ namespace Allors.Meta
         {
             var type = (MetaObject)session.Create(AllorsEmbeddedDomain.ObjectType);
 
-            type.IsAbstract = false;
             type.IsInterface = false;
             type.IsUnit = false;
 

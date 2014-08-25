@@ -1236,11 +1236,6 @@ namespace Allors.Meta.AllorsGenerated
 		public static AllorsEmbeddedRelationType ObjectTypeDerivedSuperclass = new AllorsEmbeddedRelationType(new Guid("dad9ec8c-b723-4b6e-9972-15c14c340e52"),AllorsRelationTags.ObjectTypeDerivedSuperclass,"DerivedSuperclass", ObjectType, false, true);
 
 		/// <summary>
-		/// The ObjectTypeIsAbstract Relation Type.
-		/// </summary>
-		public static AllorsEmbeddedRelationType ObjectTypeIsAbstract = new AllorsEmbeddedRelationType(new Guid("dc85d5e7-7071-4380-a597-3a16c554f653"),AllorsRelationTags.ObjectTypeIsAbstract,"IsAbstract", AllorsBoolean, true, false);
-
-		/// <summary>
 		/// The AssociationTypeAssignedSingularName Relation Type.
 		/// </summary>
 		public static AllorsEmbeddedRelationType AssociationTypeAssignedSingularName = new AllorsEmbeddedRelationType(new Guid("de038faa-da98-4550-bfff-e281f7955591"),AllorsRelationTags.AssociationTypeAssignedSingularName,"AssignedSingularName", AllorsString, true, false);
@@ -1456,8 +1451,6 @@ namespace Allors.Meta.AllorsGenerated
 						RelationById[ObjectTypeDerivedCompositeRoleType.Id] = ObjectTypeDerivedCompositeRoleType;
 			RelationByTag[ObjectTypeDerivedSuperclass.Tag] = ObjectTypeDerivedSuperclass;
 						RelationById[ObjectTypeDerivedSuperclass.Id] = ObjectTypeDerivedSuperclass;
-			RelationByTag[ObjectTypeIsAbstract.Tag] = ObjectTypeIsAbstract;
-						RelationById[ObjectTypeIsAbstract.Id] = ObjectTypeIsAbstract;
 			RelationByTag[AssociationTypeAssignedSingularName.Tag] = AssociationTypeAssignedSingularName;
 						RelationById[AssociationTypeAssignedSingularName.Id] = AssociationTypeAssignedSingularName;
 			RelationByTag[ObjectTypeDerivedRoleType.Tag] = ObjectTypeDerivedRoleType;
@@ -1540,7 +1533,6 @@ namespace Allors.Meta.AllorsGenerated
 			ObjectTypeUnitTag.ConcreteClassHierarchy.Add(ObjectType);
 			ObjectTypeDerivedCompositeRoleType.ConcreteClassHierarchy.Add(ObjectType);
 			ObjectTypeDerivedSuperclass.ConcreteClassHierarchy.Add(ObjectType);
-			ObjectTypeIsAbstract.ConcreteClassHierarchy.Add(ObjectType);
 			AssociationTypeAssignedSingularName.ConcreteClassHierarchy.Add(AssociationType);
 			ObjectTypeDerivedRoleType.ConcreteClassHierarchy.Add(ObjectType);
 			DomainDerivedObjectType.ConcreteClassHierarchy.Add(Domain);
@@ -1811,7 +1803,6 @@ namespace Allors.Meta.AllorsGenerated
 		internal const int ObjectTypeUnitTag = 53;
 		internal const int ObjectTypeDerivedCompositeRoleType = 54;
 		internal const int ObjectTypeDerivedSuperclass = 55;
-		internal const int ObjectTypeIsAbstract = 56;
 		internal const int AssociationTypeAssignedSingularName = 57;
 		internal const int ObjectTypeDerivedRoleType = 58;
 		internal const int DomainDerivedObjectType = 59;

@@ -173,33 +173,10 @@ namespace Allors.Adapters.Database.Sql
             if (useWhere)
             {
                 this.Append(" WHERE ( ");
-                if (!this.Type.IsInterface && !this.Type.IsAbstract)
+                this.Append(" " + alias + "." + this.Schema.TypeId + "=" + this.AddParameter(this.Type.Id));
+                foreach (var subClass in this.Type.Subclasses)
                 {
-                    this.Append(" " + alias + "." + this.Schema.TypeId + "=" + this.AddParameter(this.Type.Id));
-                    foreach (var subClass in this.Type.Subclasses)
-                    {
-                        this.Append(" OR " + alias + "." + this.Schema.TypeId + "=" + this.AddParameter(subClass.Id));
-                    }
-                }
-                else
-                {
-                    var first = true;
-                    foreach (var subClass in this.Type.Subclasses)
-                    {
-                        if (subClass.IsConcrete)
-                        {
-                            if (first)
-                            {
-                                first = false;
-                            }
-                            else
-                            {
-                                this.Append(" OR ");
-                            }
-
-                            this.Append(" " + alias + "." + this.Schema.TypeId + "=" + this.AddParameter(subClass.Id));
-                        }
-                    }
+                    this.Append(" OR " + alias + "." + this.Schema.TypeId + "=" + this.AddParameter(subClass.Id));
                 }
 
                 this.Append(" ) ");

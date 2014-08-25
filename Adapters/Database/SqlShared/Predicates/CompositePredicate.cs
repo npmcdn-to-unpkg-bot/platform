@@ -99,15 +99,12 @@ namespace Allors.Adapters.Database.Sql
 
         public static MetaObject[] GetConcreteSubClasses(MetaObject type)
         {
-            if (type.IsInterface || type.IsAbstract)
+            if (type.IsInterface)
             {
                 var concreteSubclassList = new ArrayList(type.Subclasses.Length);
                 foreach (var subClass in type.Subclasses)
                 {
-                    if (!subClass.IsAbstract)
-                    {
-                        concreteSubclassList.Add(subClass);
-                    }
+                    concreteSubclassList.Add(subClass);
                 }
 
                 return (MetaObject[])concreteSubclassList.ToArray(typeof(MetaObject));
