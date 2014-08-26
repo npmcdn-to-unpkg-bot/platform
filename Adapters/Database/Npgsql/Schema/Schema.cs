@@ -94,28 +94,28 @@ namespace Allors.Adapters.Database.Npgsql
 
                     // table
                     Dictionary<int, string> decimalRelationTableByScale;
-                    if (!this.DecimalRelationTableByScaleByPrecision.TryGetValue(precision, out decimalRelationTableByScale))
+                    if (!this.DecimalRelationTableByScaleByPrecision.TryGetValue(precision.Value, out decimalRelationTableByScale))
                     {
                         decimalRelationTableByScale = new Dictionary<int, string>();
-                        this.DecimalRelationTableByScaleByPrecision[precision] = decimalRelationTableByScale;
+                        this.DecimalRelationTableByScaleByPrecision[precision.Value] = decimalRelationTableByScale;
                     }
 
-                    if (!decimalRelationTableByScale.ContainsKey(scale))
+                    if (!decimalRelationTableByScale.ContainsKey(scale.Value))
                     {
-                        decimalRelationTableByScale[scale] = tableName;
+                        decimalRelationTableByScale[scale.Value] = tableName;
                     }
 
                     // param
                     Dictionary<int, SchemaArrayParameter> schemaTableParameterByScale;
-                    if (!this.DecimalRelationTableParameterByScaleByPrecision.TryGetValue(precision, out schemaTableParameterByScale))
+                    if (!this.DecimalRelationTableParameterByScaleByPrecision.TryGetValue(precision.Value, out schemaTableParameterByScale))
                     {
                         schemaTableParameterByScale = new Dictionary<int, SchemaArrayParameter>();
-                        this.DecimalRelationTableParameterByScaleByPrecision[precision] = schemaTableParameterByScale;
+                        this.DecimalRelationTableParameterByScaleByPrecision[precision.Value] = schemaTableParameterByScale;
                     }
 
-                    if (!schemaTableParameterByScale.ContainsKey(scale))
+                    if (!schemaTableParameterByScale.ContainsKey(scale.Value))
                     {
-                        schemaTableParameterByScale[scale] = new SchemaArrayParameter(this, AllorsPrefix + "p_r", NpgsqlDbType.Numeric);
+                        schemaTableParameterByScale[scale.Value] = new SchemaArrayParameter(this, AllorsPrefix + "p_r", NpgsqlDbType.Numeric);
                     }
                 }
             }
@@ -585,7 +585,7 @@ RETURNS TABLE
                             procedure.Definition += ", ";
                         }
 
-                        procedure.Definition += "__" + this.ColumnsByRelationType[role.RelationTypeWhereRoleType].Name + " " + this.database.GetSqlType(this.ColumnsByRelationType[role.RelationTypeWhereRoleType].DbType);
+                        procedure.Definition += "__" + this.ColumnsByRelationType[role.RelationType].Name + " " + this.database.GetSqlType(this.ColumnsByRelationType[role.RelationType].DbType);
                     }
 
                     procedure.Definition += @") 
@@ -605,7 +605,7 @@ BEGIN
                             procedure.Definition += ", ";
                         }
 
-                        procedure.Definition += this.ColumnsByRelationType[role.RelationTypeWhereRoleType];
+                        procedure.Definition += this.ColumnsByRelationType[role.RelationType];
                     }
 
                     procedure.Definition += @"

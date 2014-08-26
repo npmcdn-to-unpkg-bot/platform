@@ -202,6 +202,7 @@ namespace Allors.Meta
         {
             var inheritance = new Inheritance(this, inheritanceId);
             this.Inheritances.Add(inheritance);
+            this.MetaObjectById[inheritanceId] = inheritance;
             return inheritance;
         }
 
@@ -214,6 +215,7 @@ namespace Allors.Meta
         {
             var objectType = new ObjectType(this, objectTypeId);
             this.ObjectTypes.Add(objectType);
+            this.MetaObjectById[objectTypeId] = objectType;
             return objectType;
         }
 
@@ -236,6 +238,7 @@ namespace Allors.Meta
         {
             var relationType = new RelationType(this, relationTypeId, associationTypeId, roleTypeId);
             this.RelationTypes.Add(relationType);
+            this.MetaObjectById[relationTypeId] = relationType;
             return relationType;
         }
 
@@ -248,6 +251,7 @@ namespace Allors.Meta
         {
             var methodType = new MethodType(this, methodTypeId);
             this.MethodTypes.Add(methodType);
+            this.MetaObjectById[methodTypeId] = methodType;
             return methodType;
         }
 

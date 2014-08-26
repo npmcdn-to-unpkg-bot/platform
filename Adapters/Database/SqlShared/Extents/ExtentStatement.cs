@@ -75,7 +75,7 @@ namespace Allors.Adapters.Database.Sql
         {
             foreach (RoleType role in this.referenceRoles)
             {
-                var relationType = role.RelationTypeWhereRoleType;
+                var relationType = role.RelationType;
                 var association = relationType.AssociationType;
 
                 if (!role.ObjectType.IsUnit)
@@ -98,7 +98,7 @@ namespace Allors.Adapters.Database.Sql
 
             foreach (RoleType role in this.referenceRoleInstances)
             {
-                var relationType = role.RelationTypeWhereRoleType;
+                var relationType = role.RelationType;
 
                 if (!role.ObjectType.IsUnit && role.IsOne)
                 {
@@ -117,7 +117,7 @@ namespace Allors.Adapters.Database.Sql
 
             foreach (AssociationType association in this.referenceAssociations)
             {
-                var relationType = association.RelationTypeWhereAssociationType;
+                var relationType = association.RelationType;
                 var role = relationType.RoleType;
 
                 if ((association.IsMany && role.IsMany) || !relationType.ExistExclusiveRootClasses)
@@ -137,7 +137,7 @@ namespace Allors.Adapters.Database.Sql
 
             foreach (AssociationType association in this.referenceAssociationInstances)
             {
-                var relationType = association.RelationTypeWhereAssociationType;
+                var relationType = association.RelationType;
                 var role = relationType.RoleType;
 
                 if (!association.ObjectType.IsUnit && association.IsOne)
@@ -168,7 +168,7 @@ namespace Allors.Adapters.Database.Sql
 
         public bool AddWhere(ObjectType rootClass, string alias)
         {
-            var useWhere = !(this.Extent.ObjectType.RootClasses.Length == 1) || !(bool)this.Extent.ObjectType.ExclusiveRootClass.ExistDerivedExclusiveConcreteLeafClass;
+            var useWhere = !(this.Extent.ObjectType.RootClasses.Count == 1) || this.Extent.ObjectType.ExclusiveRootClass.DerivedExclusiveConcreteLeafClass == null;
             
             if (useWhere)
             {

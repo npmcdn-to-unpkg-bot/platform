@@ -47,7 +47,7 @@ namespace Allors.Adapters.Database.Sql
             {
                 statement.Append(" " + alias + "." + schema.Column(this.role) + "=" + alias + "." + schema.Column(this.equalsRole));
             }
-            else if (this.role.ObjectType.RootClasses.Length == 1 && this.equalsRole.ObjectType.RootClasses.Length == 1)
+            else if (this.role.ObjectType.RootClasses.Count == 1 && this.equalsRole.ObjectType.RootClasses.Count == 1)
             {
                 statement.Append(" " + alias + "." + schema.Column(this.role) + "=" + alias + "." + schema.Column(this.equalsRole));
             }

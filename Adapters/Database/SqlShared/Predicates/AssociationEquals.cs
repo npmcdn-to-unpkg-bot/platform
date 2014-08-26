@@ -38,14 +38,14 @@ namespace Allors.Adapters.Database.Sql
         public override bool BuildWhere(ExtentStatement statement, string alias)
         {
             var schema = statement.Schema;
-            if ((this.association.IsMany && this.association.RelationTypeWhereAssociationType.RoleType.IsMany) || !this.association.RelationTypeWhereAssociationType.ExistExclusiveRootClasses)
+            if ((this.association.IsMany && this.association.RelationType.RoleType.IsMany) || !this.association.RelationType.ExistExclusiveRootClasses)
             {
                 statement.Append(" (" + this.association.Name + "_A." + schema.AssociationId + " IS NOT NULL AND ");
                 statement.Append(" " + this.association.Name + "_A." + schema.AssociationId + "=" + this.allorsObject.Strategy.ObjectId + ")");
             }
             else
             {
-                if (this.association.RelationTypeWhereAssociationType.RoleType.IsMany)
+                if (this.association.RelationType.RoleType.IsMany)
                 {
                     statement.Append(" (" + alias + "." + schema.Column(this.association) + " IS NOT NULL AND ");
                     statement.Append(" " + alias + "." + schema.Column(this.association) + "=" + this.allorsObject.Strategy.ObjectId + ")");

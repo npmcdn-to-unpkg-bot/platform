@@ -48,7 +48,7 @@ namespace Allors.Adapters.Database.Memory
 
             // TODO: Optimize
             ObjectType associationObjectType = association.Strategy.ObjectType;
-            return associationObjectType.Equals(this.objectType) || Array.IndexOf(associationObjectType.Supertypes, this.objectType) >= 0
+            return associationObjectType.Equals(this.objectType) || associationObjectType.Supertypes.Contains(this.objectType)
                        ? ThreeValuedLogic.True
                        : ThreeValuedLogic.False;
         }

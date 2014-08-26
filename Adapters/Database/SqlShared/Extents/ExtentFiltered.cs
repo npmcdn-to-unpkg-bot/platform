@@ -86,9 +86,9 @@ namespace Allors.Adapters.Database.Sql
             this.LazyLoadFilter();
             this.filter.Setup(statement);
 
-            if (this.objectType.ConcreteClasses.Length > 0)
+            if (this.objectType.ConcreteClasses.Count > 0)
             {
-                if (this.objectType.RootClasses.Length == 1)
+                if (this.objectType.RootClasses.Count == 1)
                 {
                     return this.BuildSqlWithExclusiveRootClass(statement);
                 }
@@ -101,7 +101,7 @@ namespace Allors.Adapters.Database.Sql
 
         public void CheckAssociation(AssociationType association)
         {
-            if (Array.IndexOf(this.objectType.AssociationTypes, association) < 0)
+            if (!this.objectType.AssociationTypes.Contains(association))
             {
                 throw new ArgumentException("Extent does not implement association " + association);
             }
@@ -109,7 +109,7 @@ namespace Allors.Adapters.Database.Sql
 
         public void CheckRole(RoleType role)
         {
-            if (Array.IndexOf(this.objectType.RoleTypes, role) < 0)
+            if (!this.objectType.RoleTypes.Contains(role))
             {
                 throw new ArgumentException("Extent does not implement role " + role);
             }
@@ -314,7 +314,7 @@ namespace Allors.Adapters.Database.Sql
         {
             if (statement.IsRoot)
             {
-                for (var i = 0; i < this.objectType.RootClasses.Length; i++)
+                for (var i = 0; i < this.objectType.RootClasses.Count; i++)
                 {
                     var alias = statement.CreateAlias();
                     var rootClass = this.objectType.RootClasses[i];
@@ -335,7 +335,7 @@ namespace Allors.Adapters.Database.Sql
                         this.filter.BuildWhere(statement, alias);
                     }
 
-                    if (i < this.objectType.RootClasses.Length - 1)
+                    if (i < this.objectType.RootClasses.Count - 1)
                     {
                         statement.Append("\nUNION\n");
                     }
@@ -353,7 +353,7 @@ namespace Allors.Adapters.Database.Sql
                         var inRole = inStatement.RoleType;
                         var inRelationType = inRole.RelationType;
 
-                        if (Array.IndexOf(inRole.ObjectType.RootClasses, rootClass) < 0)
+                        if (!inRole.ObjectType.RootClasses.Contains(rootClass))
                         {
                             continue;
                         }
@@ -424,7 +424,7 @@ namespace Allors.Adapters.Database.Sql
                 }
                 else
                 {
-                    for (var i = 0; i < this.objectType.RootClasses.Length; i++)
+                    for (var i = 0; i < this.objectType.RootClasses.Count; i++)
                     {
                         var alias = statement.CreateAlias();
                         var rootClass = this.objectType.RootClasses[i];
@@ -452,7 +452,7 @@ namespace Allors.Adapters.Database.Sql
                             this.filter.BuildWhere(statement, alias);
                         }
 
-                        if (i < this.objectType.RootClasses.Length - 1)
+                        if (i < this.objectType.RootClasses.Count - 1)
                         {
                             statement.Append("\nUNION\n");
                         }

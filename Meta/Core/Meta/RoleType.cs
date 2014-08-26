@@ -371,7 +371,7 @@ namespace Allors.Meta
         /// </summary>
         internal void DeriveRootClasses()
         {
-            this.DerivedRootClasses = null;
+            this.DerivedRootClasses =  new List<ObjectType>();
 
             // TODO: Test
             if (this.AssociationType.ObjectType != null)

@@ -524,7 +524,7 @@ namespace Allors.Adapters.Workspace.Memory
                 throw new ArgumentException(relationType.ObjectType + " on relationType " + relationType + " is not a unit type.");
             }
 
-            if (Array.IndexOf(relationType.AssociationType.ObjectType.ConcreteClasses, this.objectType) < 0)
+            if (!relationType.AssociationType.ObjectType.ConcreteClasses.Contains(this.objectType))
             {
                 throw new ArgumentException(this.objectType + " has no relationType with role " + relationType + ".");
             }
@@ -541,7 +541,7 @@ namespace Allors.Adapters.Workspace.Memory
                     throw new ArgumentException(roleType + " on object " + this + " is removed.");
                 }
                 
-                if (Array.IndexOf(roleType.ObjectType.ConcreteClasses, role.Strategy.ObjectType) < 0)
+                if (!roleType.ObjectType.ConcreteClasses.Contains(role.Strategy.ObjectType))
                 {
                     throw new ArgumentException(role.Strategy.ObjectType + " is not compatible with type " + roleType.ObjectType + " of role " + roleType + ".");
                 }
@@ -691,7 +691,7 @@ namespace Allors.Adapters.Workspace.Memory
 
         private void RoleCompositeChecks(RoleType roleType)
         {
-            if (Array.IndexOf(roleType.AssociationType.ObjectType.ConcreteClasses, this.objectType) < 0)
+            if (!roleType.AssociationType.ObjectType.ConcreteClasses.Contains(this.objectType))
             {
                 throw new ArgumentException(this.objectType + " has no relationType with role " + roleType + ".");
             }
@@ -704,7 +704,7 @@ namespace Allors.Adapters.Workspace.Memory
 
         private void RoleCompositesChecks(RoleType roleType)
         {
-            if (Array.IndexOf(roleType.AssociationType.ObjectType.ConcreteClasses, this.objectType) < 0)
+            if (!roleType.AssociationType.ObjectType.ConcreteClasses.Contains(this.objectType))
             {
                 throw new ArgumentException(this.objectType + " has no relationType with role " + roleType + ".");
             }
@@ -722,7 +722,7 @@ namespace Allors.Adapters.Workspace.Memory
                 throw new ArgumentException(roleType + " on object " + this + " is removed.");
             }
             
-            if (Array.IndexOf(roleType.ObjectType.ConcreteClasses, allorsObject.Strategy.ObjectType) < 0)
+            if (!roleType.ObjectType.ConcreteClasses.Contains(allorsObject.Strategy.ObjectType))
             {
                 throw new ArgumentException(allorsObject.Strategy.ObjectType + " is not compatible with type " + roleType.ObjectType + " of role " + roleType + ".");
             }

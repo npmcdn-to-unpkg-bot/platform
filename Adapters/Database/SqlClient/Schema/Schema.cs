@@ -103,28 +103,28 @@ namespace Allors.Adapters.Database.SqlClient
 
                     // table
                     Dictionary<int, string> decimalRelationTableByScale;
-                    if (!this.DecimalRelationTableByScaleByPrecision.TryGetValue(precision, out decimalRelationTableByScale))
+                    if (!this.DecimalRelationTableByScaleByPrecision.TryGetValue(precision.Value, out decimalRelationTableByScale))
                     {
                         decimalRelationTableByScale = new Dictionary<int, string>();
-                        this.DecimalRelationTableByScaleByPrecision[precision] = decimalRelationTableByScale;
+                        this.DecimalRelationTableByScaleByPrecision[precision.Value] = decimalRelationTableByScale;
                     }
 
-                    if (!decimalRelationTableByScale.ContainsKey(scale))
+                    if (!decimalRelationTableByScale.ContainsKey(scale.Value))
                     {
-                        decimalRelationTableByScale[scale] = tableName;
+                        decimalRelationTableByScale[scale.Value] = tableName;
                     }
 
                     // param
                     Dictionary<int, SchemaTableParameter> schemaTableParameterByScale;
-                    if (!this.DecimalRelationTableParameterByScaleByPrecision.TryGetValue(precision, out schemaTableParameterByScale))
+                    if (!this.DecimalRelationTableParameterByScaleByPrecision.TryGetValue(precision.Value, out schemaTableParameterByScale))
                     {
                         schemaTableParameterByScale = new Dictionary<int, SchemaTableParameter>();
-                        this.DecimalRelationTableParameterByScaleByPrecision[precision] = schemaTableParameterByScale;
+                        this.DecimalRelationTableParameterByScaleByPrecision[precision.Value] = schemaTableParameterByScale;
                     }
 
-                    if (!schemaTableParameterByScale.ContainsKey(scale))
+                    if (!schemaTableParameterByScale.ContainsKey(scale.Value))
                     {
-                        schemaTableParameterByScale[scale] = new SchemaTableParameter(this, AllorsPrefix + "p_r", tableName); 
+                        schemaTableParameterByScale[scale.Value] = new SchemaTableParameter(this, AllorsPrefix + "p_r", tableName); 
                     }
                 }
             }
@@ -525,7 +525,7 @@ AS
                             procedure.Definition += ", ";
                         }
 
-                        procedure.Definition += this.ColumnsByRelationType[role.RelationTypeWhereRoleType];
+                        procedure.Definition += this.ColumnsByRelationType[role.RelationType];
                     }
 
                     procedure.Definition += @"
@@ -669,8 +669,8 @@ AS
 
                                 case UnitTags.AllorsDecimal:
                                     // Set Decimal Role
-                                    var decimalRelationTable = this.DecimalRelationTableByScaleByPrecision[roleType.Precision][roleType.Scale];
-                                    var decimalRelationParameter = this.DecimalRelationTableParameterByScaleByPrecision[roleType.Precision][roleType.Scale];
+                                    var decimalRelationTable = this.DecimalRelationTableByScaleByPrecision[roleType.Precision.Value][roleType.Scale.Value];
+                                    var decimalRelationParameter = this.DecimalRelationTableParameterByScaleByPrecision[roleType.Precision.Value][roleType.Scale.Value];
 
                                     procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.RootName };
                                     procedure.Definition = "CREATE PROCEDURE " + procedure.Name + @"

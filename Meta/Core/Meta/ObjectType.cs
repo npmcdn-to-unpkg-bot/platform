@@ -779,7 +779,7 @@ namespace Allors.Meta
         internal void DeriveDirectSupertypes(HashSet<ObjectType> directSupertypes)
         {
             directSupertypes.Clear();
-            foreach (var inheritance in (IList<Inheritance>)this.Domain.Inheritances.Where(inheritance => this.Equals(inheritance.Subtype)))
+            foreach (var inheritance in this.Domain.Inheritances.Where(inheritance => this.Equals(inheritance.Subtype)))
             {
                 directSupertypes.Add(inheritance.Supertype);
             }
@@ -794,12 +794,12 @@ namespace Allors.Meta
         internal void DeriveDirectSubtypes(HashSet<ObjectType> directSubtypes)
         {
             directSubtypes.Clear();
-            foreach (var inheritance in (IList<Inheritance>)this.Domain.Inheritances.Where(inheritance => this.Equals(inheritance.Supertype)))
+            foreach (var inheritance in this.Domain.Inheritances.Where(inheritance => this.Equals(inheritance.Supertype)))
             {
                 directSubtypes.Add(inheritance.Subtype);
             }
 
-            this.DerivedDirectSupertypes = new List<ObjectType>(directSubtypes);
+            this.DerivedDirectSubtypes = new List<ObjectType>(directSubtypes);
         }
 
         /// <summary>
@@ -1192,7 +1192,7 @@ namespace Allors.Meta
                 if (!Equals(directSubtype, type))
                 {
                     subTypes.Add(directSubtype);
-                    directSubtype.DeriveSupertypesRecursively(type, subTypes);
+                    directSubtype.DeriveSubtypesRecursively(type, subTypes);
                 }
             }
         }

@@ -228,7 +228,7 @@ namespace Allors.Adapters
             object concreteClassOrClasses;
             if (!this.concreteClassesByObjectType.TryGetValue(objectType, out concreteClassOrClasses))
             {
-                if (objectType.ConcreteClasses.Length == 1)
+                if (objectType.ConcreteClasses.Count == 1)
                 {
                     concreteClassOrClasses = objectType.ConcreteClasses[0];
                     this.concreteClassesByObjectType[objectType] = concreteClassOrClasses;

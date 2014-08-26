@@ -51,7 +51,7 @@ namespace Allors.Adapters.Workspace.Memory
 
             // TODO: Optimize
             ObjectType roleObjectType = role.Strategy.ObjectType;
-            return (roleObjectType.Equals(this.objectType) || Array.IndexOf(roleObjectType.Supertypes, this.objectType) >= 0)
+            return (roleObjectType.Equals(this.objectType) || roleObjectType.Supertypes.Contains(this.objectType))
                        ? ThreeValuedLogic.True
                        : ThreeValuedLogic.False;
         }

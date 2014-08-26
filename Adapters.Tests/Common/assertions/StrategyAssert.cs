@@ -70,7 +70,7 @@ namespace Allors.Adapters.Special.Assertions
         {
             foreach (AssociationType associationType in associationTypes)
             {
-                if (Array.IndexOf(allorsObject.Strategy.ObjectType.AssociationTypes, associationType) < 0)
+                if (!allorsObject.Strategy.ObjectType.AssociationTypes.Contains(associationType))
                 {
                     Assert.Fail();
                 }
@@ -138,7 +138,7 @@ namespace Allors.Adapters.Special.Assertions
         {
             foreach (RoleType roleType in roleTypes)
             {
-                if (Array.IndexOf(allorsObject.Strategy.ObjectType.RoleTypes, roleType) < 0)
+                if (!allorsObject.Strategy.ObjectType.RoleTypes.Contains(roleType))
                 {
                     Assert.Fail();
                 }

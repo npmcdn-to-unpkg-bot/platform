@@ -138,7 +138,7 @@ namespace Allors.Meta
             {
                 try
                 {
-                    return this.AssociationType.SingularName + this.RoleType.SingularName;
+                    return this.AssociationType.ObjectType.SingularName + this.RoleType.SingularName;
                 }
                 catch
                 {

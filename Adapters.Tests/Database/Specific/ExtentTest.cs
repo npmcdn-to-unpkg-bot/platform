@@ -16676,7 +16676,7 @@ namespace Allors.Adapters.Special
 
         private static ObjectType GetAllorsString(ObjectType objectType)
         {
-            return (ObjectType)Domain.GetDomain(objectType).Find(UnitIds.StringId);
+            return (ObjectType)objectType.Domain.Find(UnitIds.StringId);
         }
 
         private void AssertC1(Extent extent, bool assert0, bool assert1, bool assert2, bool assert3)

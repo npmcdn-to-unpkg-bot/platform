@@ -75,14 +75,14 @@ namespace Allors.Meta
                 return this.SingularName;
             }
         }
-
+        
         /// <summary>
         /// Gets the plural name when using <see cref="Where"/>.
         /// </summary>
         /// <value>The plural name when using <see cref="Where"/>.</value>
         public string PluralName
         {
-            get { return this.ObjectType.Name + Where + this.RelationType.RoleType.SingularName; }
+            get { return this.ObjectType.PluralName + Where + this.RelationType.RoleType.SingularName; }
         }
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace Allors.Meta
         /// <value>The singular name when using <see cref="Where"/>.</value>
         public string SingularName
         {
-            get { return this.ObjectType.Name + Where + this.RelationType.RoleType.SingularName; }
+            get { return this.ObjectType.SingularName + Where + this.RelationType.RoleType.SingularName; }
         }
 
         /// <summary>

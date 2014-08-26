@@ -101,7 +101,7 @@ namespace Allors.Adapters.Database.Sql
         {
             if (type.IsInterface)
             {
-                var concreteSubclassList = new ArrayList(type.Subclasses.Length);
+                var concreteSubclassList = new ArrayList(type.Subclasses.Count);
                 foreach (var subClass in type.Subclasses)
                 {
                     concreteSubclassList.Add(subClass);

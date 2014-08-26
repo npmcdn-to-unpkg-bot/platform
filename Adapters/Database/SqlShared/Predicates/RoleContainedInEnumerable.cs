@@ -46,10 +46,10 @@ namespace Allors.Adapters.Database.Sql
             foreach (var inObject in this.enumerable)
             {
                 inStatement.Append(",");
-                inStatement.Append(inObject.Id.ToString());
+                inStatement.Append(inObject.Id);
             }
 
-            if ((this.role.IsMany && this.role.RelationTypeWhereRoleType.AssociationType.IsMany) || !this.role.RelationTypeWhereRoleType.ExistExclusiveRootClasses)
+            if ((this.role.IsMany && this.role.RelationType.AssociationType.IsMany) || !this.role.RelationType.ExistExclusiveRootClasses)
             {
                 statement.Append(" (" + this.role.RootName + "_R." + schema.RoleId + " IS NOT NULL AND ");
                 statement.Append(" " + this.role.RootName + "_R." + schema.AssociationId + " IN (");

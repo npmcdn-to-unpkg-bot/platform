@@ -126,7 +126,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
                         break;
 
                     case UnitTags.AllorsDecimal:
-                        tableParam = schema.DecimalRelationTableParameterByScaleByPrecision[roleType.Precision][roleType.Scale];
+                        tableParam = schema.DecimalRelationTableParameterByScaleByPrecision[roleType.Precision.Value][roleType.Scale.Value];
                         break;
 
                     default:

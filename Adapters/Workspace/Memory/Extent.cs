@@ -181,7 +181,7 @@ namespace Allors.Adapters.Workspace.Memory
         internal virtual void CheckForAssociationType(AssociationType association)
         {
             // TODO: Optimize
-            if (Array.IndexOf(this.ObjectType.AssociationTypes, association) < 0)
+            if (!this.ObjectType.AssociationTypes.Contains(association))
             {
                 throw new ArgumentException("Extent does not have association " + association);
             }
@@ -190,7 +190,7 @@ namespace Allors.Adapters.Workspace.Memory
         internal virtual void CheckForRoleType(RoleType role)
         {
             // TODO: Optimize
-            if (Array.IndexOf(this.ObjectType.RoleTypes, role) < 0)
+            if (!this.ObjectType.RoleTypes.Contains(role))
             {
                 throw new ArgumentException("Extent does not have role " + role.FullSingularName);
             }

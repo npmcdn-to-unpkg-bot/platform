@@ -125,7 +125,7 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Text
                         break;
 
                     case UnitTags.AllorsDecimal:
-                        arrayParam = schema.DecimalRelationTableParameterByScaleByPrecision[roleType.Precision][roleType.Scale];
+                        arrayParam = schema.DecimalRelationTableParameterByScaleByPrecision[roleType.Precision.Value][roleType.Scale.Value];
                         break;
 
                     default:

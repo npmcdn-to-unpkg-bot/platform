@@ -420,43 +420,15 @@ namespace Domain
             	D = new Domain(new Guid("26B81EE6-08B6-48E8-931C-B8D944ED1C42"));
 				D.Name = "WithoutPart";
 
-				AllorsString = D.AddDeclaredObjectType(new Guid("ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9"));
-  				AllorsString.SingularName = "AllorsString";
-  				AllorsString.PluralName = "AllorsStrings";
-  
-  AllorsInteger = D.AddDeclaredObjectType(new Guid("ccd6f134-26de-4103-bff9-a37ec3e997a3"));
-  				AllorsInteger.SingularName = "AllorsInteger";
-  				AllorsInteger.PluralName = "AllorsIntegers";
-  
-  AllorsLong = D.AddDeclaredObjectType(new Guid("e8989069-024b-4389-ac77-a98c4dfff25a"));
-  				AllorsLong.SingularName = "AllorsLong";
-  				AllorsLong.PluralName = "AllorsLongs";
-  
-  AllorsDecimal = D.AddDeclaredObjectType(new Guid("da866d8e-2c40-41a8-ae5b-5f6dae0b89c8"));
-  				AllorsDecimal.SingularName = "AllorsDecimal";
-  				AllorsDecimal.PluralName = "AllorsDecimals";
-  
-  AllorsDouble = D.AddDeclaredObjectType(new Guid("ffcabd07-f35f-4083-bef6-f6c47970ca5d"));
-  				AllorsDouble.SingularName = "AllorsDouble";
-  				AllorsDouble.PluralName = "AllorsDoubles";
-  
-  AllorsBoolean = D.AddDeclaredObjectType(new Guid("b5ee6cea-4e2b-498e-a5dd-24671d896477"));
-  				AllorsBoolean.SingularName = "AllorsBoolean";
-  				AllorsBoolean.PluralName = "AllorsBooleans";
-  
-  AllorsDateTime = D.AddDeclaredObjectType(new Guid("c4c09343-61d3-418c-ade2-fe6fd588f128"));
-  				AllorsDateTime.SingularName = "AllorsDateTime";
-  				AllorsDateTime.PluralName = "AllorsDateTimes";
-  
-  AllorsUnique = D.AddDeclaredObjectType(new Guid("6dc0a1a8-88a4-4614-adb4-92dd3d017c0e"));
-  				AllorsUnique.SingularName = "AllorsUnique";
-  				AllorsUnique.PluralName = "AllorsUniques";
-  
-  AllorsBinary = D.AddDeclaredObjectType(new Guid("c28e515b-cae8-4d6b-95bf-062aec8042fc"));
-  				AllorsBinary.SingularName = "AllorsBinary";
-  				AllorsBinary.PluralName = "AllorsBinarys";
-  
-  
+				AllorsString = (ObjectType)D.Find(new Guid("ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9"));
+                AllorsInteger = (ObjectType)D.Find(new Guid("ccd6f134-26de-4103-bff9-a37ec3e997a3"));
+                AllorsLong = (ObjectType)D.Find(new Guid("e8989069-024b-4389-ac77-a98c4dfff25a"));
+                AllorsDecimal = (ObjectType)D.Find(new Guid("da866d8e-2c40-41a8-ae5b-5f6dae0b89c8"));
+                AllorsDouble = (ObjectType)D.Find(new Guid("ffcabd07-f35f-4083-bef6-f6c47970ca5d"));
+                AllorsBoolean = (ObjectType)D.Find(new Guid("b5ee6cea-4e2b-498e-a5dd-24671d896477"));
+                AllorsDateTime = (ObjectType)D.Find(new Guid("c4c09343-61d3-418c-ade2-fe6fd588f128"));
+                AllorsUnique = (ObjectType)D.Find(new Guid("6dc0a1a8-88a4-4614-adb4-92dd3d017c0e"));
+                AllorsBinary = (ObjectType)D.Find(new Guid("c28e515b-cae8-4d6b-95bf-062aec8042fc"));
 
 				ClassWithoutUnitRoles = D.AddDeclaredObjectType(new Guid("071d291d-fcc6-4511-8aa2-2d30fdeede8f"));
   				ClassWithoutUnitRoles.SingularName = "ClassWithoutUnitRoles";
@@ -582,7 +554,9 @@ namespace Domain
   				I34.SingularName = "I34";
   				I34.PluralName = "I34s";
   
-  				I34.IsInterface = true;  IGT32Composite = D.AddDeclaredObjectType(new Guid("ee84609f-e165-4037-b8ce-f7c8b826e603"));
+  				I34.IsInterface = true;  
+            
+                IGT32Composite = D.AddDeclaredObjectType(new Guid("ee84609f-e165-4037-b8ce-f7c8b826e603"));
   				IGT32Composite.SingularName = "IGT32Composite";
   				IGT32Composite.PluralName = "IGT32Composites";
   
