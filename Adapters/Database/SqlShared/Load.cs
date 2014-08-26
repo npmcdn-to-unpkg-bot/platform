@@ -167,7 +167,7 @@ namespace Allors.Adapters.Database.Sql
                                 var objectTypeId = new Guid(objectTypeIdString);
                                 var objectType = this.database.ObjectFactory.GetObjectTypeForType(objectTypeId);
 
-                                var canLoad = objectType != null && (!objectType.IsUnit && !objectType.IsInterface);
+                                var canLoad = objectType != null && (objectType is Class);
 
                                 var objectIdsString = this.reader.ReadString();
                                 var objectIdStringArray = objectIdsString.Split(Serialization.ObjectsSplitterCharArray);
@@ -215,9 +215,9 @@ namespace Allors.Adapters.Database.Sql
 
         protected virtual void LoadObjectsPostProcess(ManagementSession session)
         {
-            foreach (var type in this.database.Domain.CompositeTypes)
+            foreach (var type in this.database.Domain.CompositeObjectTypes)
             {
-                if (!type.IsUnit && !type.IsInterface)
+                if (type is Class)
                 {
                     var sql = new StringBuilder();
                     sql.Append("INSERT INTO " + this.database.Schema.Objects + " (" + this.database.Schema.ObjectId + "," + this.database.Schema.TypeId + "," + this.database.Schema.CacheId + ")\n");
@@ -295,7 +295,7 @@ namespace Allors.Adapters.Database.Sql
 
                                 if (this.reader.Name.Equals(Serialization.RelationTypeUnit))
                                 {
-                                    if (relationType == null || !relationType.RoleType.ObjectType.IsUnit)
+                                    if (relationType == null || relationType.RoleType.ObjectType is CompositeType)
                                     {
                                         this.CantLoadUnitRole(relationTypeId);
                                     }
@@ -315,7 +315,7 @@ namespace Allors.Adapters.Database.Sql
                                 }
                                 else if (this.reader.Name.Equals(Serialization.RelationTypeComposite))
                                 {
-                                    if (relationType == null || relationType.RoleType.ObjectType.IsUnit)
+                                    if (relationType == null || relationType.RoleType.ObjectType is UnitType)
                                     {
                                         this.CantLoadCompositeRole(relationTypeId);
                                     }

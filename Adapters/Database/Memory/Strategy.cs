@@ -181,7 +181,7 @@ namespace Allors.Adapters.Database.Memory
 
         public object GetRole(RoleType roleType)
         {
-            if (roleType.ObjectType.IsUnit)
+            if (roleType.ObjectType is UnitType)
             {
                 return this.GetUnitRole(roleType);
             }
@@ -196,7 +196,7 @@ namespace Allors.Adapters.Database.Memory
 
         public void SetRole(RoleType roleType, object value)
         {
-            if (roleType.ObjectType.IsUnit)
+            if (roleType.ObjectType is UnitType)
             {
                 this.SetUnitRole(roleType, value);
             }
@@ -222,7 +222,7 @@ namespace Allors.Adapters.Database.Memory
 
         public void RemoveRole(RoleType roleType)
         {
-            if (roleType.ObjectType.IsUnit)
+            if (roleType.ObjectType is UnitType)
             {
                 this.RemoveUnitRole(roleType);
             }
@@ -241,7 +241,7 @@ namespace Allors.Adapters.Database.Memory
 
         public bool ExistRole(RoleType roleType)
         {
-            if (roleType.ObjectType.IsUnit)
+            if (roleType.ObjectType is UnitType)
             {
                 return this.ExistUnitRole(roleType);
             }
@@ -518,7 +518,7 @@ namespace Allors.Adapters.Database.Memory
             {
                 if (this.ExistRole(roleType))
                 {
-                    if (roleType.ObjectType.IsUnit)
+                    if (roleType.ObjectType is UnitType)
                     {
                         this.RemoveUnitRole(roleType);
                     }

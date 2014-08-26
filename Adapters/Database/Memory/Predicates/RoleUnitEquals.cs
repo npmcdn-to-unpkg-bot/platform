@@ -71,7 +71,7 @@ namespace Allors.Adapters.Database.Memory
             }
             else
             {
-                if (this.roleType.ObjectType.IsUnit)
+                if (this.roleType.ObjectType is UnitType)
                 {
                     equalsValue = this.extent.Session.MemoryDatabase.Internalize(this.equals, this.roleType);
                 }

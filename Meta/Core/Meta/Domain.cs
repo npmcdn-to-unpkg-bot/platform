@@ -35,24 +35,19 @@ namespace Allors.Meta
     {
         public string Name;
 
-        public List<UnitType> UnitTypes = new List<UnitType>();
-
-        public List<Interface> Interfaces = new List<Interface>();
-        
-        public List<Class> Classes = new List<Class>(); 
+        public List<ObjectType> ObjectTypes = new List<ObjectType>();
 
         public List<RelationType> RelationTypes = new List<RelationType>();
         
         public List<MethodType> MethodTypes = new List<MethodType>();
         
         public List<Inheritance> Inheritances = new List<Inheritance>();
-
-        public List<CompositeType> DerivedCompositeTypes = new List<CompositeType>();
-
-        /// <summary>
-        /// A lookup dictionary for meta objects.
-        /// </summary>
-        private readonly Dictionary<Guid, MetaObject> metaObjectById = new Dictionary<Guid, MetaObject>();
+        
+        public List<ObjectType> DerivedUnitObjectTypes = new List<ObjectType>();
+        
+        public List<ObjectType> DerivedCompositeObjectTypes = new List<ObjectType>();
+        
+        private Dictionary<Guid, MetaObject> MetaObjectById = new Dictionary<Guid, MetaObject>();
 
         /// <summary>
         /// The default plural form.
@@ -60,15 +55,57 @@ namespace Allors.Meta
         private const string DefaultPluralForm = "s";
 
         /// <summary>
+        /// The name of the Allors Unit Domain.
+        /// </summary>
+        private const string AllorsUnitDomainName = "AllorsUnit";
+
+        /// <summary>
+        /// The id of the Allors Domain.
+        /// </summary>
+        private static readonly Guid AllorsUnitDomainId = new Guid("2d337e3a-5e9e-4705-b327-c14bd279d322");
+
+        /// <summary>
         /// Gets the composite types.
         /// </summary>
         /// <value>The composite types.</value>
-        public IList<CompositeType> CompositeTypes
+        public IList<ObjectType> CompositeObjectTypes
         {
             get
             {
-                return this.DerivedCompositeTypes;
+                return this.DerivedCompositeObjectTypes;
             }
+        }
+
+        /// <summary>
+        /// Gets the concrete composite types.
+        /// </summary>
+        /// <value>The concrete composite types.</value>
+        public IList<ObjectType> ConcreteCompositeObjectTypes
+        {
+            get
+            {
+                var concreteCompositeTypeList = new List<ObjectType>(this.CompositeObjectTypes.Count);
+                foreach (var compositeType in this.CompositeObjectTypes)
+                {
+                    if (!(compositeType is Interface))
+                    {
+                        concreteCompositeTypeList.Add(compositeType);
+                    }
+                }
+
+                return concreteCompositeTypeList.ToArray();
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether this instance is the allors unit domain.
+        /// </summary>
+        /// <value>
+        ///  <c>true</c> if this instance is the allors unit domain; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsAllorsUnitDomain
+        {
+            get { return AllorsUnitDomainId.Equals(this.Id); }
         }
       
         /// <summary>
@@ -78,6 +115,19 @@ namespace Allors.Meta
         public bool IsValid
         {
             get { return this.Validate().Errors.Length == 0; }
+        }
+
+
+        /// <summary>
+        /// Gets the unit types.
+        /// </summary>
+        /// <value>The unit types.</value>
+        public IList<ObjectType> UnitObjectTypes
+        {
+            get
+            {
+                return this.DerivedUnitObjectTypes;
+            }
         }
         
         /// <summary>
@@ -95,7 +145,11 @@ namespace Allors.Meta
                 return "unknown domain";
             }
         }
-        
+
+        public Domain() : this(Guid.NewGuid())
+        {
+        }
+
         public Domain(Guid id)
         {
             this.Id = id;
@@ -134,7 +188,7 @@ namespace Allors.Meta
         public MetaObject Find(Guid metaObjectId)
         {
             MetaObject metaObject;
-            this.metaObjectById.TryGetValue(metaObjectId, out metaObject);
+            this.MetaObjectById.TryGetValue(metaObjectId, out metaObject);
 
             return metaObject;
         }
@@ -165,19 +219,9 @@ namespace Allors.Meta
 
             this.Validate(validationReport);
 
-            foreach (var unitType in this.UnitTypes)
+            foreach (var objectType in this.ObjectTypes)
             {
-                unitType.Validate(validationReport);
-            }
-
-            foreach (var @interface in this.Interfaces)
-            {
-                @interface.Validate(validationReport);
-            }
-
-            foreach (var @class in this.Classes)
-            {
-                @class.Validate(validationReport);
+                objectType.Validate(validationReport);
             }
 
             foreach (var methodType in this.MethodTypes)
@@ -201,63 +245,87 @@ namespace Allors.Meta
         public void Derive()
         {
             // Unit & Composite ObjectTypes
-            var compositeTypes = new List<CompositeType>(this.Interfaces);
-            compositeTypes.AddRange(this.Classes);
-            this.DerivedCompositeTypes = compositeTypes;
-
-            var sharedObjectTypes = new HashSet<ObjectType>();
-            var sharedInterfaces = new HashSet<Interface>();
-
-            // DirectSuperinterfaces
-            foreach (var compositeType in this.DerivedCompositeTypes)
+            var compositeTypes = new List<ObjectType>();
+            var unitTypes = new List<ObjectType>();
+            foreach (var objectType in this.ObjectTypes)
             {
-                compositeType.DeriveDirectSuperinterface(sharedInterfaces);
+                if (objectType is UnitType)
+                {
+                    unitTypes.Add(objectType);
+                }
+                else
+                {
+                    compositeTypes.Add(objectType);
+                }
+            }
+
+            this.DerivedUnitObjectTypes = unitTypes;
+            this.DerivedCompositeObjectTypes = compositeTypes;
+
+            var sharedList = new HashSet<ObjectType>();
+
+            // DirectSupertypes
+            foreach (var type in this.DerivedCompositeObjectTypes)
+            {
+                type.DeriveDirectSupertypes(sharedList);
             }
 
             // DirectSubtypes
-            foreach (var type in this.DerivedCompositeTypes)
+            foreach (var type in this.DerivedCompositeObjectTypes)
             {
-                type.DeriveDirectSubtypes(sharedObjectTypes);
+                type.DeriveDirectSubtypes(sharedList);
+            }
+
+            // Supertypes
+            foreach (var type in this.DerivedCompositeObjectTypes)
+            {
+                type.DeriveSupertypes(sharedList);
             }
 
             // Subtypes
-            foreach (var type in this.DerivedCompositeTypes)
+            foreach (var type in this.DerivedCompositeObjectTypes)
             {
-                type.DeriveSubtypes(sharedObjectTypes);
+                type.DeriveSubtypes(sharedList);
+            }
+
+            // DirectSuperinterfaces
+            foreach (var type in this.DerivedCompositeObjectTypes)
+            {
+                type.DeriveDirectSuperinterface(sharedList);
             }
 
             // Superclasses
-            foreach (var type in this.DerivedCompositeTypes)
+            foreach (var type in this.DerivedCompositeObjectTypes)
             {
-                type.DeriveSuperclasses(sharedObjectTypes);
+                type.DeriveSuperclasses(sharedList);
             }
 
             // Subclasses
-            foreach (var type in this.DerivedCompositeTypes)
+            foreach (var type in DerivedCompositeObjectTypes)
             {
-                type.DeriveSubclasses(sharedObjectTypes);
+                type.DeriveSubclasses(sharedList);
             }
             
             // Exclusive Superinterfaces
-            foreach (var type in this.DerivedCompositeTypes)
+            foreach (var type in DerivedCompositeObjectTypes)
             {
-                type.DeriveExclusiveSuperinterfaces(sharedObjectTypes);
+                type.DeriveExclusiveSuperinterfaces(sharedList);
             }
 
             // RootClasses
-            foreach (var type in this.DerivedCompositeTypes)
+            foreach (var type in DerivedCompositeObjectTypes)
             {
                 type.DeriveRootClasses();
             }
 
             // Exclusive Concrete Leaf Class
-            foreach (var type in this.DerivedCompositeTypes)
+            foreach (var type in DerivedCompositeObjectTypes)
             {
-                type.DeriveExclusiveConcreteLeafClass(sharedObjectTypes);
+                type.DeriveExclusiveConcreteLeafClass(sharedList);
             }
 
             // Derive concrete classes
-            foreach (var type in this.DerivedCompositeTypes)
+            foreach (var type in DerivedCompositeObjectTypes)
             {
                 type.DeriveConcreteClassesCache();
             }
@@ -267,39 +335,39 @@ namespace Allors.Meta
             var sharedObjectTypeList = new HashSet<ObjectType>();
 
             // RoleTypes
-            foreach (var compositeType in this.DerivedCompositeTypes)
+            foreach (var type in this.ObjectTypes)
             {
-                compositeType.DeriveRoleTypes(sharedRoleTypeList);
+                type.DeriveRoleTypes(sharedRoleTypeList);
             }
 
             // Unit RoleTypes
-            foreach (var compositeType in this.DerivedCompositeTypes)
+            foreach (var type in this.ObjectTypes)
             {
-                compositeType.DeriveUnitRoleTypes(sharedRoleTypeList);
+                type.DeriveUnitRoleTypes(sharedRoleTypeList);
             }
 
             // Composite RoleTypes
-            foreach (var compositeType in this.DerivedCompositeTypes)
+            foreach (var type in this.ObjectTypes)
             {
-                compositeType.DeriveCompositeRoleTypes(sharedRoleTypeList);
+                type.DeriveCompositeRoleTypes(sharedRoleTypeList);
             }
 
             // Exclusive RoleTypes
-            foreach (var compositeType in this.DerivedCompositeTypes)
+            foreach (var type in this.ObjectTypes)
             {
-                compositeType.DeriveExclusiveRoleTypes(sharedRoleTypeList);
+                type.DeriveExclusiveRoleTypes(sharedRoleTypeList);
             }
 
             // AssociationTypes
-            foreach (var compositeType in this.DerivedCompositeTypes)
+            foreach (var type in this.ObjectTypes)
             {
-                compositeType.DeriveAssociationTypes(sharedAssociationTypeList);
+                type.DeriveAssociationTypes(sharedAssociationTypeList);
             }
 
             // Exclusive AssociationTypes
-            foreach (var compositeType in this.DerivedCompositeTypes)
+            foreach (var type in this.ObjectTypes)
             {
-                compositeType.DeriveExclusiveAssociationTypes(sharedAssociationTypeList);
+                type.DeriveExclusiveAssociationTypes(sharedAssociationTypeList);
             }
 
             // Association & RoleType
@@ -333,59 +401,47 @@ namespace Allors.Meta
                 relationType.RoleType.DeriveRootName();
             }
 
-            foreach (var compositeType in this.DerivedCompositeTypes)
+            foreach (var type in this.CompositeObjectTypes)
             {
-                compositeType.DeriveRoleTypeIdsCache();
+                type.DeriveRoleTypeIdsCache();
             }
 
-            foreach (var compositeType in this.DerivedCompositeTypes)
+            foreach (var type in this.CompositeObjectTypes)
             {
-                compositeType.DeriveAssociationIdsCache();
+                type.DeriveAssociationIdsCache();
             }
             
             var sharedMethodTypeList = new HashSet<MethodType>();
 
             // MethodTypes
-            foreach (var compositeType in this.DerivedCompositeTypes)
+            foreach (var type in this.ObjectTypes)
             {
-                compositeType.DeriveMethodTypes(sharedMethodTypeList);
+                type.DeriveMethodTypes(sharedMethodTypeList);
             }
         }
 
-        internal void OnUnitTypeCreated(UnitType unitType)
+        internal void OnObjectTypeCreated(ObjectType objectType)
         {
-            this.UnitTypes.Add(unitType);
-            this.metaObjectById[unitType.Id] = unitType;
-        }
-
-        internal void OnInterfaceCreated(Interface @interface)
-        {
-            this.Interfaces.Add(@interface);
-            this.metaObjectById[@interface.Id] = @interface;
-        }
-
-        internal void OnClassCreated(Class @class)
-        {
-            this.Classes.Add(@class);
-            this.metaObjectById[@class.Id] = @class;
+            this.ObjectTypes.Add(objectType);
+            this.MetaObjectById[objectType.Id] = objectType;
         }
 
         internal void OnInheritanceCreated(Inheritance inheritance)
         {
             this.Inheritances.Add(inheritance);
-            this.metaObjectById[inheritance.Id] = inheritance;
+            this.MetaObjectById[inheritance.Id] = inheritance;
         }
 
         internal void OnRelationTypeCreated(RelationType relationType)
         {
             this.RelationTypes.Add(relationType);
-            this.metaObjectById[relationType.Id] = relationType;
+            this.MetaObjectById[relationType.Id] = relationType;
         }
 
         internal void OnMethodTypeCreated(MethodType methodType)
         {
             this.MethodTypes.Add(methodType);
-            this.metaObjectById[methodType.Id] = methodType;
+            this.MetaObjectById[methodType.Id] = methodType;
         }
 
         /// <summary>
@@ -437,6 +493,8 @@ namespace Allors.Meta
         /// </summary>
         private void AddAllorsUnitPopulation()
         {
+            this.Name = AllorsUnitDomainName;
+
             var allorsUnitTypes = new ArrayList();
 
             {
@@ -509,11 +567,6 @@ namespace Allors.Meta
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
                 objectType.UnitTag = (int)UnitTags.AllorsBinary;
                 allorsUnitTypes.Add(objectType);
-            }
-
-            foreach (ObjectType unitType in allorsUnitTypes)
-            {
-                unitType.IsUnit = true;
             }
         }
     }

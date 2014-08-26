@@ -159,7 +159,7 @@ namespace Allors.Adapters.Database.Memory
                                 {
                                     var objectId = this.session.ObjectIds.Parse(objectIdString);
 
-                                    if (objectType == null || !(!objectType.IsUnit && !objectType.IsInterface))
+                                    if (objectType == null || !(objectType is Class))
                                     {
                                         this.session.MemoryDatabase.OnObjectNotLoaded(objectTypeId, objectId.ToString());
                                     }
@@ -247,7 +247,7 @@ namespace Allors.Adapters.Database.Memory
 
                                 if (this.reader.Name.Equals(Serialization.RelationTypeUnit))
                                 {
-                                    if (relationType == null || !relationType.RoleType.ObjectType.IsUnit)
+                                    if (relationType == null || relationType.RoleType.ObjectType is CompositeType)
                                     {
                                         this.CantLoadUnitRole(relationTypeId);
                                     }
@@ -258,7 +258,7 @@ namespace Allors.Adapters.Database.Memory
                                 }
                                 else if (this.reader.Name.Equals(Serialization.RelationTypeComposite))
                                 {
-                                    if (relationType == null || relationType.RoleType.ObjectType.IsUnit)
+                                    if (relationType == null || relationType.RoleType.ObjectType is UnitType)
                                     {
                                         this.CantLoadCompositeRole(relationTypeId);
                                     }

@@ -78,7 +78,7 @@ namespace Allors.Adapters.Database.Sql
                 var relationType = role.RelationType;
                 var association = relationType.AssociationType;
 
-                if (!role.ObjectType.IsUnit)
+                if (role.ObjectType is CompositeType)
                 {
                     if ((association.IsMany && role.IsMany) || !relationType.ExistExclusiveRootClasses)
                     {
@@ -100,7 +100,7 @@ namespace Allors.Adapters.Database.Sql
             {
                 var relationType = role.RelationType;
 
-                if (!role.ObjectType.IsUnit && role.IsOne)
+                if (role.ObjectType is CompositeType && role.IsOne)
                 {
                     if (!relationType.ExistExclusiveRootClasses)
                     {
@@ -140,7 +140,7 @@ namespace Allors.Adapters.Database.Sql
                 var relationType = association.RelationType;
                 var role = relationType.RoleType;
 
-                if (!association.ObjectType.IsUnit && association.IsOne)
+                if (association.ObjectType is CompositeType && association.IsOne)
                 {
                     if (!relationType.ExistExclusiveRootClasses)
                     {
@@ -205,7 +205,7 @@ namespace Allors.Adapters.Database.Sql
 
         public void UseAssociation(AssociationType association)
         {
-            if (!association.ObjectType.IsUnit && !this.referenceAssociations.Contains(association))
+            if (association.ObjectType is CompositeType && !this.referenceAssociations.Contains(association))
             {
                 this.referenceAssociations.Add(association);
             }
@@ -221,7 +221,7 @@ namespace Allors.Adapters.Database.Sql
 
         public void UseRole(RoleType role)
         {
-            if (!role.ObjectType.IsUnit && !this.referenceRoles.Contains(role))
+            if (role.ObjectType is CompositeType && !this.referenceRoles.Contains(role))
             {
                 this.referenceRoles.Add(role);
             }

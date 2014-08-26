@@ -142,7 +142,7 @@ namespace Allors.Adapters.Workspace.Memory
 
         public virtual object GetRole(RoleType roleType)
         {
-            if (roleType.ObjectType.IsUnit)
+            if (roleType.ObjectType is UnitType)
             {
                 return this.GetUnitRole(roleType);
             }
@@ -157,7 +157,7 @@ namespace Allors.Adapters.Workspace.Memory
 
         public virtual void SetRole(RoleType roleType, object value)
         {
-            if (roleType.ObjectType.IsUnit)
+            if (roleType.ObjectType is UnitType)
             {
                 this.SetUnitRole(roleType, value);
             }
@@ -183,7 +183,7 @@ namespace Allors.Adapters.Workspace.Memory
 
         public virtual void RemoveRole(RoleType roleType)
         {
-            if (roleType.ObjectType.IsUnit)
+            if (roleType.ObjectType is UnitType)
             {
                 this.RemoveUnitRole(roleType);
             }
@@ -202,7 +202,7 @@ namespace Allors.Adapters.Workspace.Memory
 
         public virtual bool ExistRole(RoleType roleType)
         {
-            if (roleType.ObjectType.IsUnit)
+            if (roleType.ObjectType is UnitType)
             {
                 return this.ExistUnitRole(roleType);
             }
@@ -519,7 +519,7 @@ namespace Allors.Adapters.Workspace.Memory
 
         internal virtual void RoleUnitChecks(RoleType relationType)
         {
-            if (!relationType.ObjectType.IsUnit)
+            if (relationType.ObjectType is CompositeType)
             {
                 throw new ArgumentException(relationType.ObjectType + " on relationType " + relationType + " is not a unit type.");
             }

@@ -256,7 +256,7 @@ namespace Allors.Adapters
                 throw new ArgumentException(strategy.ObjectType + " is not a valid association object type for " + relationType + ".");
             }
 
-            if (!relationType.ObjectType.IsUnit)
+            if (relationType.ObjectType is CompositeType)
             {
                 throw new ArgumentException(relationType.ObjectType + " on relationType " + relationType + " is not a unit type.");
             }

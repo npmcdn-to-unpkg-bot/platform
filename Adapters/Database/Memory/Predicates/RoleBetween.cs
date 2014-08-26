@@ -54,7 +54,7 @@ namespace Allors.Adapters.Database.Memory
             }
             else
             {
-                if (this.roleType.ObjectType.IsUnit)
+                if (this.roleType.ObjectType is UnitType)
                 {
                     firstValue = this.extent.Session.MemoryDatabase.Internalize(this.first, this.roleType);
                 }
@@ -67,7 +67,7 @@ namespace Allors.Adapters.Database.Memory
             }
             else
             {
-                if (this.roleType.ObjectType.IsUnit)
+                if (this.roleType.ObjectType is UnitType)
                 {
                     secondValue = this.extent.Session.MemoryDatabase.Internalize(this.second, this.roleType);
                 }

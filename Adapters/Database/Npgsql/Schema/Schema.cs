@@ -218,7 +218,7 @@ FROM information_schema.columns"))
                                             {
                                                 var dataType = existingColumn.DataType.ToLower();
 
-                                                if (!column.RelationType.RoleType.ObjectType.IsUnit)
+                                                if (column.RelationType.RoleType.ObjectType is CompositeType)
                                                 {
                                                     if (!dataType.Equals(this.NpgsqlDbType.ToString().ToLower()))
                                                     {
@@ -560,7 +560,7 @@ $$ language plpgsql;
 
             this.procedureByName.Add(procedure.Name, procedure);
 
-            foreach (var concreteComposite in this.Database.ObjectFactory.Domain.Classes)
+            foreach (var concreteComposite in this.Database.ObjectFactory.Domain.ConcreteCompositeObjectTypes)
             {
                 var sortedUnitRoleTypes = this.Database.GetSortedUnitRolesByObjectType(concreteComposite);
 
@@ -748,7 +748,7 @@ $$ language plpgsql;
                         var roleType = relationType.RoleType;
                         var associationType = relationType.AssociationType;
 
-                        if (relationType.RoleType.ObjectType.IsUnit)
+                        if (relationType.RoleType.ObjectType is UnitType)
                         {
                             var unitTypeTag = (UnitTags)relationType.RoleType.ObjectType.UnitTag;
                             switch (unitTypeTag)

@@ -155,7 +155,7 @@ namespace Allors.Adapters.Database.Sql
 
         public virtual IObject[] Create(ObjectType objectType, int count)
         {
-            if (!(!objectType.IsUnit && !objectType.IsInterface))
+            if (!(objectType is Class))
             {
                 throw new ArgumentException("Can not create non concrete composite type " + objectType);
             }

@@ -29,9 +29,9 @@ namespace Allors.Meta
     public sealed partial class Inheritance : MetaObject
     {
 
-        public CompositeType Subtype;
+        public ObjectType Subtype;
 
-        public Interface Supertype;
+        public ObjectType Supertype;
 
         internal Inheritance(Domain domain, Guid inheritanceId)
         {
@@ -94,8 +94,8 @@ namespace Allors.Meta
                     validationLog.AddError(message, this, ValidationKind.Unique, "Inheritance.Supertype");
                 }
 
-                CompositeType tempQualifier = this.Supertype;
-                if (!tempQualifier.IsUnit && !tempQualifier.IsInterface)
+                ObjectType tempQualifier = this.Supertype;
+                if (tempQualifier is Class)
                 {
                     var message = this.ValidationName + " can not have a concrete superclass";
                     validationLog.AddError(message, this, ValidationKind.Hierarchy, "Inheritance.Supertype");

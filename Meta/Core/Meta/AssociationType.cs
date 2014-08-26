@@ -190,7 +190,7 @@ namespace Allors.Meta
         /// </summary>
         internal void DeriveMultiplicity()
         {
-            if (this.RoleType != null && this.RoleType.ObjectType != null && this.RoleType.ObjectType.IsUnit)
+            if (this.RoleType != null && this.RoleType.ObjectType != null && this.RoleType.ObjectType is UnitType)
             {
                 this.IsMany = false;
             }

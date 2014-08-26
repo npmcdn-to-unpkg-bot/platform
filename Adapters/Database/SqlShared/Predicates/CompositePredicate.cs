@@ -97,12 +97,12 @@ namespace Allors.Adapters.Database.Sql
             }
         }
 
-        public static ObjectType[] GetConcreteSubClasses(ObjectType objectType)
+        public static ObjectType[] GetConcreteSubClasses(ObjectType type)
         {
-            if (objectType is Interface)
+            if (type is Interface)
             {
-                var concreteSubclassList = new ArrayList(objectType.Subclasses.Count);
-                foreach (var subClass in objectType.Subclasses)
+                var concreteSubclassList = new ArrayList(type.Subclasses.Count);
+                foreach (var subClass in type.Subclasses)
                 {
                     concreteSubclassList.Add(subClass);
                 }
@@ -111,7 +111,7 @@ namespace Allors.Adapters.Database.Sql
             }
 
             var concreteSubclasses = new ObjectType[1];
-            concreteSubclasses[0] = objectType;
+            concreteSubclasses[0] = type;
             return concreteSubclasses;
         }
 

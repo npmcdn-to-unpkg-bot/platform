@@ -72,7 +72,7 @@ namespace Allors.Adapters.Database.Sql
 
         protected void SaveObjects(ManagementSession session)
         {
-            var concreteCompositeType = new List<ObjectType>(this.database.Domain.Classes);
+            var concreteCompositeType = new List<ObjectType>(this.database.Domain.ConcreteCompositeObjectTypes);
             concreteCompositeType.Sort(MetaObject.IdComparer);
             foreach (var type in concreteCompositeType)
             {
@@ -134,7 +134,7 @@ namespace Allors.Adapters.Database.Sql
                     var roleType = relation.RoleType;
                 
                     var sql = string.Empty;
-                    if (roleType.ObjectType.IsUnit)
+                    if (roleType.ObjectType is UnitType)
                     {
                         HashSet<ObjectType> exclusiveRootClasses;
                         if (!exclusiverRootClassesByObjectType.TryGetValue(associationType.ObjectType, out exclusiveRootClasses))
@@ -222,7 +222,7 @@ namespace Allors.Adapters.Database.Sql
                                     {
                                         var a = long.Parse(reader[0].ToString());
 
-                                        if (roleType.ObjectType.IsUnit)
+                                        if (roleType.ObjectType is UnitType)
                                         {
                                             var unitTypeTag = (UnitTags)roleType.ObjectType.UnitTag;
                                             var r = command.GetValue(reader, unitTypeTag, 1);

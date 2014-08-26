@@ -358,7 +358,7 @@ namespace Allors.Adapters.Database.Sql
                 var associationType = relationType.AssociationType;
                 var roleType = relationType.RoleType;
 
-                if (!roleType.ObjectType.IsUnit && 
+                if (roleType.ObjectType is CompositeType && 
                     ((associationType.IsMany && roleType.IsMany) || !relationType.ExistExclusiveRootClasses))
                 {
                     var column = new SchemaColumn(this, "R", this.ObjectDbType, false, true, relationType.IsIndexed ? SchemaIndexType.Combined : SchemaIndexType.None, relationType);
@@ -366,7 +366,7 @@ namespace Allors.Adapters.Database.Sql
                 }
                 else
                 {
-                    if (roleType.ObjectType.IsUnit)
+                    if (roleType.ObjectType is UnitType)
                     {
                         var column = new SchemaColumn(this, roleType.RootName, this.GetDbType(roleType), false, false, relationType.IsIndexed ? SchemaIndexType.Single : SchemaIndexType.None, relationType, roleType.Size, roleType.Precision, roleType.Scale);
                         this.ColumnsByRelationType.Add(relationType, column);
@@ -387,9 +387,9 @@ namespace Allors.Adapters.Database.Sql
                 }
             }
 
-            foreach (var objectType in this.Database.Domain.CompositeTypes)
+            foreach (var objectType in this.Database.Domain.CompositeObjectTypes)
             {
-                if (!objectType.IsUnit && !objectType.IsInterface)
+                if (objectType is Class)
                 {
                     var schemaTable = new SchemaTable(this, objectType.SingularName, SchemaTableKind.Object, objectType);
                     this.TablesByName.Add(schemaTable.Name, schemaTable);
@@ -436,7 +436,7 @@ namespace Allors.Adapters.Database.Sql
                     {
                         var relationType = roleType.RelationType;
                         var associationType = relationType.AssociationType;
-                        if (roleType.ObjectType.IsUnit)
+                        if (roleType.ObjectType is UnitType)
                         {
                             schemaTable.AddColumn(this.Column(relationType));
                         }
@@ -456,7 +456,7 @@ namespace Allors.Adapters.Database.Sql
                 var associationType = relationType.AssociationType;
                 var roleType = relationType.RoleType;
 
-                if (!roleType.ObjectType.IsUnit && ((associationType.IsMany && roleType.IsMany) || !relationType.ExistExclusiveRootClasses))
+                if (roleType.ObjectType is CompositeType && ((associationType.IsMany && roleType.IsMany) || !relationType.ExistExclusiveRootClasses))
                 {
                     var schemaTable = new SchemaTable(this, relationType.Name, SchemaTableKind.Relation, relationType);
                     this.TablesByName.Add(schemaTable.Name, schemaTable);

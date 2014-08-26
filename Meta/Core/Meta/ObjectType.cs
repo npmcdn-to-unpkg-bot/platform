@@ -32,10 +32,6 @@ namespace Allors.Meta
     /// </summary>
     public abstract partial class ObjectType : MetaObject, IComparable
     {
-        public string SingularName;
-
-        public string PluralName;
-
         public List<AssociationType> DerivedExclusiveAssociationTypes = new List<AssociationType>();
 
         public List<ObjectType> DerivedExclusiveSuperinterfaces = new List<ObjectType>();
@@ -44,14 +40,17 @@ namespace Allors.Meta
 
         public List<AssociationType> DerivedAssociationTypes = new List<AssociationType>();
 
+        public List<ObjectType> DerivedDirectSupertypes = new List<ObjectType>();
 
         public List<ObjectType> DerivedDirectSubtypes = new List<ObjectType>();
 
+        public string PluralName;
+
         public List<MethodType> DerivedMethodTypes = new List<MethodType>();
 
-        public bool IsUnit;
-
         public ObjectType DerivedExclusiveConcreteLeafClass;
+
+        public List<ObjectType> DerivedDirectSuperinterfaces = new List<ObjectType>();
 
         public List<RoleType> DerivedUnitRoleTypes = new List<RoleType>();
 
@@ -65,6 +64,8 @@ namespace Allors.Meta
 
         public List<RoleType> DerivedRoleTypes = new List<RoleType>();
 
+        public string SingularName;
+
         public List<RoleType> DerivedExclusiveRoleTypes = new List<RoleType>();
 
         public List<ObjectType> DerivedSupertypes = new List<ObjectType>();
@@ -77,7 +78,7 @@ namespace Allors.Meta
         /// <summary>
         /// An empty array of object types.
         /// </summary>
-        protected static readonly ObjectType[] EmptyArray = new ObjectType[0];
+        private static readonly ObjectType[] EmptyArray = new ObjectType[0];
 
         /// <summary>
         /// A cache for the ids of the <see cref="AssociationTypes"/>.
@@ -89,10 +90,17 @@ namespace Allors.Meta
         /// </summary>
         private Dictionary<Guid, object> roleIdsCache;
 
+        /// <summary>
+        /// A cache for the ids of the <see cref="RoleTypes"/>.
+        /// </summary>
+        private HashSet<ObjectType> concreteClassesCache;
+
         public ObjectType(Domain domain, Guid objectTypeId)
         {
             this.Domain = domain;
             this.Id = objectTypeId;
+
+            this.Domain.OnObjectTypeCreated(this);
         }
 
         /// <summary>
@@ -116,6 +124,49 @@ namespace Allors.Meta
             get
             {
                 return this.DerivedCompositeRoleTypes;
+            }
+        }
+
+        /// <summary>
+        /// Gets the concrete sub classes or
+        /// self if this is a concrete class.
+        /// </summary>
+        /// <value>The concrete classes.</value>
+        public IList<ObjectType> ConcreteClasses
+        {
+            get
+            {
+                if (this is Class)
+                {
+                    ObjectType[] selfArray = { this };
+                    return selfArray;
+                }
+
+                return this.Subclasses.Count == 0 ? EmptyArray : this.Subclasses;
+            }
+        }
+
+        /// <summary>
+        /// Gets the direct super interfaces.
+        /// </summary>
+        /// <value>The direct super interfaces.</value>
+        public IList<ObjectType> DirectSuperinterfaces
+        {
+            get
+            {
+                return this.DerivedDirectSuperinterfaces;
+            }
+        }
+
+        /// <summary>
+        /// Gets the direct super types.
+        /// </summary>
+        /// <value>The direct super types.</value>
+        public IList<ObjectType> DirectSupertypes
+        {
+            get
+            {
+                return this.DerivedDirectSupertypes;
             }
         }
 
@@ -183,7 +234,153 @@ namespace Allors.Meta
                 return this.DerivedExclusiveSuperinterfaces;
             }
         }
-        
+
+        /// <summary>
+        /// Gets a value indicating whether this instance is a binary.
+        /// </summary>
+        /// <value><c>true</c> if this instance is a binary; otherwise, <c>false</c>.</value>
+        public bool IsBinary
+        {
+            get { return this.Id.Equals(UnitIds.BinaryId); }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether this instance is a boolean.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if this instance is a boolean; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsBoolean
+        {
+            get { return this.Id.Equals(UnitIds.BooleanId); }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether this instance is a date time.
+        /// </summary>
+        /// <value>
+        ///  <c>true</c> if this instance is a date time; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsDateTime
+        {
+            get { return this.Id.Equals(UnitIds.DatetimeId); }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether this instance is a decimal.
+        /// </summary>
+        /// <value>
+        ///  <c>true</c> if this instance is a decimal; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsDecimal
+        {
+            get { return this.Id.Equals(UnitIds.DecimalId); }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether this instance is a double.
+        /// </summary>
+        /// <value><c>true</c> if this instance is a double; otherwise, <c>false</c>.</value>
+        public bool IsDouble
+        {
+            get { return this.Id.Equals(UnitIds.DoubleId); }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether this instance is an integer.
+        /// </summary>
+        /// <value>
+        ///  <c>true</c> if this instance is an integer; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsInteger
+        {
+            get { return this.Id.Equals(UnitIds.IntegerId); }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether this instance is long.
+        /// </summary>
+        /// <value><c>true</c> if this instance is a long; otherwise, <c>false</c>.</value>
+        public bool IsLong
+        {
+            get { return this.Id.Equals(UnitIds.LongId); }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether this instance requires precision.
+        /// </summary>
+        /// <value>
+        ///  <c>true</c> if this instance requires precision; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsPrecisionRequired
+        {
+            get
+            {
+                if (this.IsDecimal)
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether this instance requires a scale.
+        /// </summary>
+        /// <value>
+        ///  <c>true</c> if this instance requires a scale; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsScaleRequired
+        {
+            get
+            {
+                if (this.IsDecimal)
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether this instance requires a size.
+        /// </summary>
+        /// <value>
+        ///  <c>true</c> if this instance requires a size; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsSizeRequired
+        {
+            get
+            {
+                if (this.IsString || this.IsBinary)
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether this instance is a string.
+        /// </summary>
+        /// <value><c>true</c> if this instance is a string; otherwise, <c>false</c>.</value>
+        public bool IsString
+        {
+            get { return this.Id.Equals(UnitIds.StringId); }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether this instance is a unique.
+        /// </summary>
+        /// <value><c>true</c> if this instance is a unique; otherwise, <c>false</c>.</value>
+        public bool IsUnique
+        {
+            get { return this.Id.Equals(UnitIds.Unique); }
+        }
+
         /// <summary>
         /// Gets the name.
         /// </summary>
@@ -308,6 +505,39 @@ namespace Allors.Meta
                 return "object type " + this.Id;
             }
         }
+
+        /// <summary>
+        /// Adds the direct supertype.
+        /// </summary>
+        /// <param name="supertype">The supertype.</param>
+        /// <returns>The inheritance.</returns> 
+        public Inheritance AddDirectSupertype(ObjectType supertype)
+        {
+            if (supertype == null)
+            {
+                return null;
+            }
+
+            if (!this.IsValidSupertype(supertype))
+            {
+                throw new ArgumentException(supertype + " is not a valid supertype for " + this);
+            }
+
+            var inheritance = this.FindInheritanceWhereDirectSubtype(supertype);
+            if (inheritance == null)
+            {
+                if (supertype is Class)
+                {
+                    throw new ArgumentException("The inheritance " + this + "::" + supertype + " can not have a concrete superclass");
+                }
+
+                inheritance = new Inheritance(this.Domain, Guid.NewGuid());
+                inheritance.Subtype = this;
+                inheritance.Supertype = supertype;
+            }
+
+            return inheritance;
+        }
         
         /// <summary>
         /// Compares the current instance with another object of the same type.
@@ -352,6 +582,20 @@ namespace Allors.Meta
         {
             return this.roleIdsCache.ContainsKey(role.RelationType.Id);
         }
+
+        /// <summary>
+        /// Contains this concrete class.
+        /// </summary>
+        /// <param name="objectType">
+        /// The concrete class.
+        /// </param>
+        /// <returns>
+        /// True if this contains the concrete class.
+        /// </returns>
+        public bool ContainsConcreteClass(ObjectType objectType)
+        {
+            return this.concreteClassesCache.Contains(objectType);
+        }
         
         /// <summary>
         /// Finds the inheritance where this instance is the direct subtype.
@@ -379,7 +623,19 @@ namespace Allors.Meta
 
             return false;
         }
-   
+        
+        /// <summary>
+        /// Sets the direct super interfaces.
+        /// </summary>
+        /// <param name="superInterfaces">The super interfaces.</param>
+        public void SetDirectSuperinterfaces(ObjectType[] superInterfaces)
+        {
+            foreach (var superType in superInterfaces)
+            {
+                this.AddDirectSupertype(superType);
+            }
+        }
+
         /// <summary>
         /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
         /// </summary>
@@ -455,7 +711,7 @@ namespace Allors.Meta
             foreach (var role in this.DerivedRoleTypes)
             {
                 // TODO: Test
-                if (role.ObjectType != null && !role.ObjectType.IsUnit)
+                if (role.ObjectType is CompositeType)
                 {
                     roles.Add(role);
                 }
@@ -486,6 +742,47 @@ namespace Allors.Meta
             {
                 this.roleIdsCache[containsRole.RelationType.Id] = null;
             }
+        }
+
+        /// <summary>
+        /// Derive concrete classes cache.
+        /// </summary>
+        internal void DeriveConcreteClassesCache()
+        {
+            this.concreteClassesCache = new HashSet<ObjectType>(this.ConcreteClasses);
+        }
+
+        /// <summary>
+        /// Derive direct super interface.
+        /// </summary>
+        /// <param name="directSuperinterfaces">The direct super interfaces.</param>
+        internal void DeriveDirectSuperinterface(HashSet<ObjectType> directSuperinterfaces)
+        {
+            directSuperinterfaces.Clear();
+            foreach (var directSupertype in this.DerivedDirectSupertypes)
+            {
+                if (directSupertype is Interface)
+                {
+                    directSuperinterfaces.Add(directSupertype);
+                }
+            }
+
+            this.DerivedDirectSuperinterfaces = new List<ObjectType>(directSuperinterfaces);
+        }
+
+        /// <summary>
+        /// Derive direct super type derivations.
+        /// </summary>
+        /// <param name="directSupertypes">The direct super types.</param>
+        internal void DeriveDirectSupertypes(HashSet<ObjectType> directSupertypes)
+        {
+            directSupertypes.Clear();
+            foreach (var inheritance in this.Domain.Inheritances.Where(inheritance => this.Equals(inheritance.Subtype)))
+            {
+                directSupertypes.Add(inheritance.Supertype);
+            }
+
+            this.DerivedDirectSupertypes = new List<ObjectType>(directSupertypes);
         }
 
         /// <summary>
@@ -536,7 +833,7 @@ namespace Allors.Meta
             concreteLeafClasses.Clear();
 
             this.DerivedExclusiveConcreteLeafClass = null;
-            if (this is Interface && this.DerivedSubclasses.Count == 0)
+            if (!(this is Interface) && this.DerivedSubclasses.Count == 0)
             {
                 concreteLeafClasses.Add(this);
             }
@@ -545,7 +842,7 @@ namespace Allors.Meta
             {
                 foreach (var rootSubClass in rootClass.Subclasses)
                 {
-                    if (rootSubClass is Interface && rootSubClass.DerivedSubclasses.Count == 0)
+                    if (!(rootSubClass is Interface) && rootSubClass.DerivedSubclasses.Count == 0)
                     {
                         if (!concreteLeafClasses.Contains(rootSubClass))
                         {
@@ -708,6 +1005,18 @@ namespace Allors.Meta
         }
 
         /// <summary>
+        /// Derive super types.
+        /// </summary>
+        /// <param name="superTypes">The super types.</param>
+        internal void DeriveSupertypes(HashSet<ObjectType> superTypes)
+        {
+            superTypes.Clear();
+            this.DeriveSupertypesRecursively(this, superTypes);
+
+            this.DerivedSupertypes = new List<ObjectType>(superTypes);
+        }
+
+        /// <summary>
         /// Derive sub types.
         /// </summary>
         /// <param name="superTypes">The super types.</param>
@@ -729,7 +1038,7 @@ namespace Allors.Meta
             foreach (var role in this.DerivedRoleTypes)
             {
                 // TODO: Test
-                if (role.ObjectType != null && role.ObjectType.IsUnit)
+                if (role.ObjectType is UnitType)
                 {
                     roles.Add(role);
                 }
@@ -852,6 +1161,22 @@ namespace Allors.Meta
             return false;
         }
 
+        /// <summary>
+        /// Derive super types recursively.
+        /// </summary>
+        /// <param name="type">The type .</param>
+        /// <param name="superTypes">The super types.</param>
+        private void DeriveSupertypesRecursively(ObjectType type, HashSet<ObjectType> superTypes)
+        {
+            foreach (var directSupertype in this.DerivedDirectSupertypes)
+            {
+                if (!Equals(directSupertype, type))
+                {
+                    superTypes.Add(directSupertype);
+                    directSupertype.DeriveSupertypesRecursively(type, superTypes);
+                }
+            }
+        }
 
         /// <summary>
         /// Derive super types recursively.

@@ -105,7 +105,7 @@ namespace Allors
 
             var typeByName = types.ToDictionary(type => type.Name, type => type);
 
-            foreach (var objectType in domain.CompositeTypes)
+            foreach (var objectType in domain.CompositeObjectTypes)
             {
                 var type = typeByName[objectType.Name];
 
@@ -113,7 +113,7 @@ namespace Allors
                 this.objectTypeByType[type] = objectType;
                 this.objectTypeByObjectTypeId[objectType.Id] = objectType;
 
-                if (!objectType.IsInterface)
+                if (objectType is Class)
                 {
                     var parameterTypes = new[] { typeof(IStrategy) };
                     var constructor = type.GetConstructor(parameterTypes);

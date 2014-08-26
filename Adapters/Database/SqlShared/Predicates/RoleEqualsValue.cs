@@ -47,14 +47,14 @@ namespace Allors.Adapters.Database.Sql
             }
             else
             {
-                this.obj = roleType.ObjectType.IsUnit ? extent.Session.SqlDatabase.Internalize(obj, roleType) : obj;
+                this.obj = roleType.ObjectType is UnitType ? extent.Session.SqlDatabase.Internalize(obj, roleType) : obj;
             }
         }
 
         public override bool BuildWhere(ExtentStatement statement, string alias)
         {
             var schema = statement.Schema;
-            if (this.roleType.ObjectType.IsUnit)
+            if (this.roleType.ObjectType is UnitType)
             {
                 statement.Append(" " + alias + "." + schema.Column(this.roleType) + "=" + statement.AddParameter(this.obj));
             }

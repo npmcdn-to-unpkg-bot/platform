@@ -24,6 +24,7 @@ namespace Allors.Meta
 
     public partial class MethodType : OperandType
     {
+
         public string Name;
 
         public ObjectType ObjectType;

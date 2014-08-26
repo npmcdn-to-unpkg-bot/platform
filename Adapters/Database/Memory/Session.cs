@@ -388,7 +388,7 @@ namespace Allors.Adapters.Database.Memory
 
         public virtual IObject Create(ObjectType objectType)
         {
-            if (!(!objectType.IsUnit && !objectType.IsInterface))
+            if (!(objectType is Class))
             {
                 throw new ArgumentException("Can not create non concrete composite type " + objectType);
             }
@@ -484,14 +484,14 @@ namespace Allors.Adapters.Database.Memory
             {
                 var sortedClassAndSubclassList = new List<ObjectType>();
 
-                if (!type.IsUnit && !type.IsInterface)
+                if (type is Class)
                 {
                     sortedClassAndSubclassList.Add(type);
                 }
 
                 foreach (var subClass in type.Subclasses)
                 {
-                    if (!subClass.IsUnit && !subClass.IsInterface)
+                    if (subClass is Class)
                     {
                         sortedClassAndSubclassList.Add(subClass);
                     }

@@ -335,7 +335,7 @@ namespace Allors.Adapters.Workspace.Memory
             {
                 var roleType = conflict.RoleType;
 
-                if (roleType.ObjectType.IsUnit)
+                if (roleType.ObjectType is UnitType)
                 {
                     Dictionary<Strategy, object> originalUnitRoleByAssociation;
                     if (this.originalUnitRoleByAssociationByRoleType.TryGetValue(roleType, out originalUnitRoleByAssociation))
@@ -390,7 +390,7 @@ namespace Allors.Adapters.Workspace.Memory
 
                     foreach (var roleType in strategy.ObjectType.RoleTypes)
                     {
-                        if (roleType.ObjectType.IsUnit)
+                        if (roleType.ObjectType is UnitType)
                         {
                             Dictionary<Strategy, object> originalUnitRoleByStrategy;
                             if (this.originalUnitRoleByAssociationByRoleType.TryGetValue(roleType, out originalUnitRoleByStrategy))
@@ -1081,7 +1081,7 @@ namespace Allors.Adapters.Workspace.Memory
 
         public virtual IObject Create(ObjectType objectType)
         {
-            if (!(!objectType.IsUnit && !objectType.IsInterface))
+            if (!(objectType is Class))
             {
                 throw new ArgumentException("Can not create non concrete composite type " + objectType);
             }
@@ -1276,7 +1276,7 @@ namespace Allors.Adapters.Workspace.Memory
         {
             foreach (var roleType in association.ObjectType.RoleTypes)
             {
-                if (roleType.ObjectType.IsUnit)
+                if (roleType.ObjectType is UnitType)
                 {
                     Dictionary<Strategy, object> diffUnitRoleByStrategy;
                     if (this.diffUnitRoleByAssociationByRoleType.TryGetValue(roleType, out diffUnitRoleByStrategy))
@@ -1755,14 +1755,14 @@ namespace Allors.Adapters.Workspace.Memory
             {
                 var sortedClassAndSubclassList = new List<ObjectType>();
 
-                if (!objectType.IsUnit && !objectType.IsInterface)
+                if (objectType is Class)
                 {
                     sortedClassAndSubclassList.Add(objectType);
                 }
 
                 foreach (var subClass in objectType.Subclasses)
                 {
-                    if (!subClass.IsUnit && !subClass.IsInterface)
+                    if (subClass is Class)
                     {
                         sortedClassAndSubclassList.Add(subClass);
                     }
@@ -2188,7 +2188,7 @@ namespace Allors.Adapters.Workspace.Memory
                                 {
                                     var objectId = this.MemoryWorkspace.ObjectIds.Parse(objectIdString);
 
-                                    if (objectType == null || !(!objectType.IsUnit && !objectType.IsInterface))
+                                    if (objectType == null || !(objectType is Class))
                                     {
                                         throw new Exception("Could not load object with id " + objectId);
                                     }
@@ -2257,12 +2257,12 @@ namespace Allors.Adapters.Workspace.Memory
             if (!reader.IsEmptyElement)
             {
                 if (roleType == null ||
-                    roleType.ObjectType.IsUnit != isUnit)
+                    roleType.ObjectType is UnitType != isUnit)
                 {
                     throw new Exception("RoleType changed during Save/Load");
                 }
 
-                if (roleType.ObjectType.IsUnit)
+                if (roleType.ObjectType is UnitType)
                 {
                     this.LoadDatabaseUnitRelations(reader, roleType);
                 }
@@ -2449,7 +2449,7 @@ namespace Allors.Adapters.Workspace.Memory
                                 {
                                     var objectId = this.MemoryWorkspace.ObjectIds.Parse(objectIdString);
 
-                                    if (objectType == null || !(!objectType.IsUnit && !objectType.IsInterface))
+                                    if (objectType == null || !(objectType is Class))
                                     {
                                         throw new Exception("Could not load object with id " + objectId);
                                     }
@@ -2502,7 +2502,7 @@ namespace Allors.Adapters.Workspace.Memory
                                 {
                                     var objectId = this.MemoryWorkspace.ObjectIds.Parse(objectIdString);
 
-                                    if (objectType == null || !(!objectType.IsUnit && !objectType.IsInterface))
+                                    if (objectType == null || !(objectType is Class))
                                     {
                                         throw new Exception("Could not load object with id " + objectId);
                                     }
@@ -2571,12 +2571,12 @@ namespace Allors.Adapters.Workspace.Memory
             if (!reader.IsEmptyElement)
             {
                 if (relationType == null ||
-                    relationType.ObjectType.IsUnit != isUnit)
+                    relationType.ObjectType is UnitType != isUnit)
                 {
                     throw new Exception("RoleType changed during Save/Load");
                 }
 
-                if (relationType.ObjectType.IsUnit)
+                if (relationType.ObjectType is UnitType)
                 {
                     this.LoadWorkspaceUnitRelations(reader, relationType);
                 }

@@ -131,7 +131,7 @@ namespace Allors.Adapters.Database.Memory
         public ICompositePredicate AddEquals(RoleType role, object obj)
         {
             this.CheckUnarity();
-            if (role.ObjectType.IsUnit)
+            if (role.ObjectType is UnitType)
             {
                 this.predicate = new RoleUnitEquals(this.extent, role, obj);
             }

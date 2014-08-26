@@ -308,7 +308,7 @@ namespace Allors.Meta
         /// </summary>
         internal void DeriveMultiplicityScaleAndSize()
         {
-            if (this.ObjectType != null && this.ObjectType.IsUnit)
+            if (this.ObjectType is UnitType)
             {
                 this.IsMany = false;
 
@@ -376,7 +376,7 @@ namespace Allors.Meta
             // TODO: Test
             if (this.AssociationType.ObjectType != null)
             {
-                if (this.ObjectType.IsUnit)
+                if (this.ObjectType is UnitType)
                 {
                     this.DerivedRootClasses = new List<ObjectType>(this.AssociationType.ObjectType.RootClasses);
                 }
@@ -555,7 +555,7 @@ namespace Allors.Meta
             }
             else
             {
-                if (this.ObjectType.IsUnit)
+                if (this.ObjectType is UnitType)
                 {
                     switch ((UnitTags)this.ObjectType.UnitTag)
                     {

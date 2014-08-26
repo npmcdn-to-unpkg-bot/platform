@@ -74,7 +74,7 @@ namespace Allors.Adapters.Workspace.Memory
             }
             else
             {
-                if (this.roleType.ObjectType.IsUnit)
+                if (this.roleType.ObjectType is UnitType)
                 {
                     equalsValue = this.extent.Session.MemoryWorkspace.Internalize(this.equals, this.roleType);
                 }

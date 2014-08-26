@@ -133,13 +133,13 @@ namespace Allors.Adapters.Database.Memory
 
                 if (strategies != null)
                 {
-                    this.writer.WriteStartElement(roleType.ObjectType.IsUnit
+                    this.writer.WriteStartElement(roleType.ObjectType is UnitType
                                                  ? Serialization.RelationTypeUnit
                                                  : Serialization.RelationTypeComposite);
 
                     this.writer.WriteAttributeString(Serialization.Id, relationType.IdAsString);
 
-                    if (roleType.ObjectType.IsUnit)
+                    if (roleType.ObjectType is UnitType)
                     {
                         var unitTypeTag = (UnitTags)roleType.ObjectType.UnitTag;
                         foreach (var strategy in strategies)
