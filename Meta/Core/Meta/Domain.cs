@@ -194,42 +194,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Adds the <see cref="Inheritance"/> to this domain.
-        /// </summary>
-        /// <param name="inheritanceId">The inheritance id.</param>
-        /// <returns>The added inheritance.</returns>
-        public Inheritance AddInheritance(Guid inheritanceId)
-        {
-            var inheritance = new Inheritance(this, inheritanceId);
-            this.Inheritances.Add(inheritance);
-            this.MetaObjectById[inheritanceId] = inheritance;
-            return inheritance;
-        }
-
-        /// <summary>
-        /// Adds the <see cref="RelationType"/> to this domain.
-        /// </summary>
-        /// <param name="relationTypeId">
-        /// The relation type id.
-        /// </param>
-        /// <param name="associationTypeId">
-        /// The association Type Id.
-        /// </param>
-        /// <param name="roleTypeId">
-        /// The role Type Id.
-        /// </param>
-        /// <returns>
-        /// The relation type.
-        /// </returns>
-        public RelationType AddRelationType(Guid relationTypeId, Guid associationTypeId, Guid roleTypeId)
-        {
-            var relationType = new RelationType(this, relationTypeId, associationTypeId, roleTypeId);
-            this.RelationTypes.Add(relationType);
-            this.MetaObjectById[relationTypeId] = relationType;
-            return relationType;
-        }
-
-        /// <summary>
         /// Adds the <see cref="MethodType"/> to this domain.
         /// </summary>
         /// <param name="methodTypeId">The method type id.</param>
@@ -473,6 +437,18 @@ namespace Allors.Meta
         {
             this.ObjectTypes.Add(objectType);
             this.MetaObjectById[objectType.Id] = objectType;
+        }
+
+        internal void OnInheritanceCreated(Inheritance inheritance)
+        {
+            this.Inheritances.Add(inheritance);
+            this.MetaObjectById[inheritance.Id] = inheritance;
+        }
+
+        internal void OnRelationTypeCreate(RelationType relationType)
+        {
+            this.RelationTypes.Add(relationType);
+            this.MetaObjectById[relationType.Id] = relationType;
         }
 
         /// <summary>

@@ -37,6 +37,8 @@ namespace Allors.Meta
         {
             this.Domain = domain;
             this.Id = inheritanceId;
+
+            this.Domain.OnInheritanceCreated(this);
         }
 
         // Domain->Inheritance
