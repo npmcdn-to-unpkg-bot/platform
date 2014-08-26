@@ -535,7 +535,7 @@ namespace Allors.Meta
                     throw new ArgumentException("The inheritance " + this + "::" + supertype + " can not have a concrete superclass");
                 }
 
-                inheritance = this.Domain.AddInheritance(Guid.NewGuid());
+                inheritance = new Inheritance(this.Domain, Guid.NewGuid());
                 inheritance.Subtype = this;
                 inheritance.Supertype = supertype;
             }
