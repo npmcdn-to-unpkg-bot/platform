@@ -105,7 +105,7 @@ namespace Allors
 
             var typeByName = types.ToDictionary(type => type.Name, type => type);
 
-            foreach (var objectType in domain.CompositeObjectTypes)
+            foreach (var objectType in domain.CompositeTypes)
             {
                 var type = typeByName[objectType.Name];
 

@@ -99,8 +99,6 @@ namespace Allors.Meta
         {
             this.Domain = domain;
             this.Id = objectTypeId;
-
-            this.Domain.OnObjectTypeCreated(this);
         }
 
         /// <summary>

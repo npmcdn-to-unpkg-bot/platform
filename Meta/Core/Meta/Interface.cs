@@ -32,6 +32,7 @@ namespace Allors.Meta
         public Interface(Domain domain, Guid objectTypeId)
             : base(domain, objectTypeId)
         {
+            this.Domain.OnInterfaceCreated(this);
         }
     }
 }

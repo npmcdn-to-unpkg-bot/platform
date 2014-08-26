@@ -32,6 +32,7 @@ namespace Allors.Meta
         public Class(Domain domain, Guid objectTypeId)
             : base(domain, objectTypeId)
         {
+            this.Domain.OnClassCreated(this);
         }
     }
 }

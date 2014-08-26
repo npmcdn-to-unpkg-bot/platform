@@ -32,6 +32,8 @@ namespace Allors.Meta
         public UnitType(Domain domain, Guid objectTypeId)
             : base(domain, objectTypeId)
         {
+
+            this.Domain.OnUnitTypeCreated(this);
         }
     }
 }
