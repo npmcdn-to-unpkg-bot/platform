@@ -89,10 +89,14 @@
     <Compile Include="Core\Generation\Storage\Location.cs" />
     <Compile Include="Core\Generation\StringTemplate.cs" />
     <Compile Include="Core\Meta\AssociationType.cs" />
+    <Compile Include="Core\Meta\Interface.cs" />
     <Compile Include="Core\Meta\Domain.cs" />
     <Compile Include="Core\Meta\Inheritance.cs" />
     <Compile Include="Core\Meta\MetaObject.cs" />
     <Compile Include="Core\Meta\MethodType.cs" />
+    <Compile Include="Core\Meta\CompositeType.cs" />
+    <Compile Include="Core\Meta\Class.cs" />
+    <Compile Include="Core\Meta\UnitType.cs" />
     <Compile Include="Core\Meta\ObjectType.cs" />
     <Compile Include="Core\Meta\OperandType.cs" />
     <Compile Include="Core\Meta\PropertyType.cs" />

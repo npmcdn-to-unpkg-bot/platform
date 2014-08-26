@@ -93,7 +93,7 @@ namespace Allors.Adapters.Special
         {
             this.domain = new Domain(Guid.NewGuid());
 
-            this.domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
+            this.domain.AddRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
 
             this.CreateDatabase(this.domain, true);
         }
@@ -120,7 +120,7 @@ namespace Allors.Adapters.Special
                 var c1 = this.CreateClass("C1");
                 this.CreateClass("C2");
 
-                var c1RelationType = this.domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
+                var c1RelationType = this.domain.AddRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
                 c1RelationType.AssociationType.ObjectType = c1;
                 c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Find(UnitIds.BinaryId);
                 c1RelationType.RoleType.Size = 200;
@@ -158,7 +158,7 @@ namespace Allors.Adapters.Special
             var c1 = this.CreateClass("C1");
             this.CreateClass("C2");
 
-            var c1RelationType = this.domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
+            var c1RelationType = this.domain.AddRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             c1RelationType.AssociationType.ObjectType = c1;
             c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Find(UnitIds.DecimalId);
             c1RelationType.RoleType.Precision = 10;
@@ -196,7 +196,7 @@ namespace Allors.Adapters.Special
             var c1 = this.CreateClass("C1");
             this.CreateClass("C2");
 
-            var c1RelationType = this.domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
+            var c1RelationType = this.domain.AddRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             c1RelationType.AssociationType.ObjectType = c1;
             c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Find(UnitIds.DecimalId);
             c1RelationType.RoleType.Precision = 10;
@@ -265,7 +265,7 @@ namespace Allors.Adapters.Special
 
             var i12 = this.CreateInterface("I12");
 
-            var i12AllorsString = this.domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
+            var i12AllorsString = this.domain.AddRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             i12AllorsString.AssociationType.ObjectType = i12;
             i12AllorsString.RoleType.ObjectType = (ObjectType)this.domain.Find(UnitIds.BooleanId);
 
@@ -301,7 +301,7 @@ namespace Allors.Adapters.Special
 
             this.CreateDatabase(this.domain, true);
 
-            var fromC1ToC2 = this.domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
+            var fromC1ToC2 = this.domain.AddRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             fromC1ToC2.AssociationType.ObjectType = c1;
             fromC1ToC2.AssociationType.IsMany = true;
             fromC1ToC2.RoleType.ObjectType = c2;
@@ -337,7 +337,7 @@ namespace Allors.Adapters.Special
 
             this.CreateDatabase(this.domain, true);
 
-            var fromC1ToC2 = this.domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
+            var fromC1ToC2 = this.domain.AddRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             fromC1ToC2.AssociationType.ObjectType = c1;
             fromC1ToC2.AssociationType.IsMany = true;
             fromC1ToC2.RoleType.ObjectType = c2;
@@ -370,7 +370,7 @@ namespace Allors.Adapters.Special
 
             this.CreateDatabase(this.domain, true);
 
-            var fromC1ToC2 = this.domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
+            var fromC1ToC2 = this.domain.AddRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             fromC1ToC2.AssociationType.ObjectType = c1;
             fromC1ToC2.RoleType.ObjectType = c2;
             fromC1ToC2.RoleType.IsMany = true;
@@ -404,7 +404,7 @@ namespace Allors.Adapters.Special
 
             this.CreateDatabase(this.domain, true);
 
-            var fromC1ToC2 = this.domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
+            var fromC1ToC2 = this.domain.AddRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             fromC1ToC2.AssociationType.ObjectType = c1;
             fromC1ToC2.RoleType.ObjectType = c2;
 
@@ -435,7 +435,7 @@ namespace Allors.Adapters.Special
             var c1 = this.CreateClass("C1");
             this.CreateClass("C2");
 
-            var c1RelationType = this.domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
+            var c1RelationType = this.domain.AddRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             c1RelationType.AssociationType.ObjectType = c1;
             c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Find(UnitIds.StringId);
             c1RelationType.RoleType.Size = 100;
@@ -472,7 +472,7 @@ namespace Allors.Adapters.Special
             var c1 = this.CreateClass("C1");
             var c2 = this.CreateClass("C2");
 
-            var c1RelationType = this.domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
+            var c1RelationType = this.domain.AddRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             c1RelationType.AssociationType.ObjectType = c1;
             c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Find(UnitIds.StringId);
             c1RelationType.RoleType.Size = 100;
@@ -512,7 +512,7 @@ namespace Allors.Adapters.Special
             var c1 = this.CreateClass("C1");
             this.CreateClass("C2");
 
-            var c1RelationType = this.domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
+            var c1RelationType = this.domain.AddRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             c1RelationType.AssociationType.ObjectType = c1;
             c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Find(UnitIds.BooleanId);
             c1RelationType.RoleType.AssignedSingularName = "RelationType";
@@ -569,7 +569,7 @@ namespace Allors.Adapters.Special
 
             this.CreateDatabase(this.domain, true);
 
-            var c1AllorsString = this.domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
+            var c1AllorsString = this.domain.AddRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             c1AllorsString.AssociationType.ObjectType = c1;
             c1AllorsString.RoleType.ObjectType = c2;
 
@@ -594,24 +594,15 @@ namespace Allors.Adapters.Special
                 }
             }
         }
-
-        protected ObjectType CreateAbstractClass(string name)
-        {
-            var type = this.CreateType(name);
-            return type;
-        }
-
+        
         protected ObjectType CreateClass(string name)
         {
-            var type = this.CreateType(name);
-            return type;
+            return new Class(this.domain, Guid.NewGuid()) { SingularName = name, PluralName = name + "s" };
         }
 
         protected ObjectType CreateInterface(string name)
         {
-            var type = this.CreateType(name);
-            type.IsInterface = true;
-            return type;
+            return new Interface(this.domain, Guid.NewGuid()) { SingularName = name, PluralName = name + "s" };
         }
 
         protected abstract IDatabase CreateDatabase(Domain domain, bool init);
@@ -619,14 +610,6 @@ namespace Allors.Adapters.Special
         protected IDatabase CreateDatabase()
         {
             return this.Profile.CreateDatabase();
-        }
-
-        protected ObjectType CreateType(string name)
-        {
-            var type = this.domain.AddDeclaredObjectType(Guid.NewGuid());
-            type.SingularName = name;
-            type.PluralName = name + "s";
-            return type;
         }
 
         protected abstract void DropTable(string tableName);

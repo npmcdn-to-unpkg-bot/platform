@@ -30,7 +30,7 @@ namespace Allors.Meta
     /// An <see cref="ObjectType"/> defines the state and behavior for
     /// a set of <see cref="IObject"/>s.
     /// </summary>
-    public partial class ObjectType : MetaObject, IComparable
+    public abstract partial class ObjectType : MetaObject, IComparable
     {
         public List<AssociationType> DerivedExclusiveAssociationTypes = new List<AssociationType>();
 
@@ -103,6 +103,8 @@ namespace Allors.Meta
         {
             this.Domain = domain;
             this.Id = objectTypeId;
+
+            this.Domain.OnObjectTypeCreated(this);
         }
 
         /// <summary>
@@ -533,7 +535,7 @@ namespace Allors.Meta
                     throw new ArgumentException("The inheritance " + this + "::" + supertype + " can not have a concrete superclass");
                 }
 
-                inheritance = this.Domain.AddDeclaredInheritance(Guid.NewGuid());
+                inheritance = this.Domain.AddInheritance(Guid.NewGuid());
                 inheritance.Subtype = this;
                 inheritance.Supertype = supertype;
             }

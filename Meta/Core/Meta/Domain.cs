@@ -198,25 +198,12 @@ namespace Allors.Meta
         /// </summary>
         /// <param name="inheritanceId">The inheritance id.</param>
         /// <returns>The added inheritance.</returns>
-        public Inheritance AddDeclaredInheritance(Guid inheritanceId)
+        public Inheritance AddInheritance(Guid inheritanceId)
         {
             var inheritance = new Inheritance(this, inheritanceId);
             this.Inheritances.Add(inheritance);
             this.MetaObjectById[inheritanceId] = inheritance;
             return inheritance;
-        }
-
-        /// <summary>
-        /// Adds the <see cref="ObjectType"/> to this domain.
-        /// </summary>
-        /// <param name="objectTypeId">The object type id.</param>
-        /// <returns>The object type.</returns>
-        public ObjectType AddDeclaredObjectType(Guid objectTypeId)
-        {
-            var objectType = new ObjectType(this, objectTypeId);
-            this.ObjectTypes.Add(objectType);
-            this.MetaObjectById[objectTypeId] = objectType;
-            return objectType;
         }
 
         /// <summary>
@@ -234,7 +221,7 @@ namespace Allors.Meta
         /// <returns>
         /// The relation type.
         /// </returns>
-        public RelationType AddDeclaredRelationType(Guid relationTypeId, Guid associationTypeId, Guid roleTypeId)
+        public RelationType AddRelationType(Guid relationTypeId, Guid associationTypeId, Guid roleTypeId)
         {
             var relationType = new RelationType(this, relationTypeId, associationTypeId, roleTypeId);
             this.RelationTypes.Add(relationType);
@@ -247,7 +234,7 @@ namespace Allors.Meta
         /// </summary>
         /// <param name="methodTypeId">The method type id.</param>
         /// <returns>The method type.</returns>
-        public MethodType AddDeclaredMethodType(Guid methodTypeId)
+        public MethodType AddMethodType(Guid methodTypeId)
         {
             var methodType = new MethodType(this, methodTypeId);
             this.MethodTypes.Add(methodType);
@@ -482,6 +469,12 @@ namespace Allors.Meta
             }
         }
 
+        internal void OnObjectTypeCreated(ObjectType objectType)
+        {
+            this.ObjectTypes.Add(objectType);
+            this.MetaObjectById[objectType.Id] = objectType;
+        }
+
         /// <summary>
         /// Validates the domain.
         /// </summary>
@@ -536,7 +529,7 @@ namespace Allors.Meta
             var allorsUnitTypes = new ArrayList();
 
             {
-                var objectType = this.AddDeclaredObjectType(UnitIds.StringId);
+                var objectType = new UnitType(this, UnitIds.StringId);
                 objectType.SingularName = UnitTags.AllorsString.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
                 objectType.UnitTag = (int)UnitTags.AllorsString;
@@ -544,7 +537,7 @@ namespace Allors.Meta
             }
 
             {
-                var objectType = this.AddDeclaredObjectType(UnitIds.IntegerId);
+                var objectType = new UnitType(this, UnitIds.IntegerId);
                 objectType.SingularName = UnitTags.AllorsInteger.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
                 objectType.UnitTag = (int)UnitTags.AllorsInteger;
@@ -552,7 +545,7 @@ namespace Allors.Meta
             }
 
             {
-                var objectType = this.AddDeclaredObjectType(UnitIds.LongId);
+                var objectType = new UnitType(this, UnitIds.LongId);
                 objectType.SingularName = UnitTags.AllorsLong.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
                 objectType.UnitTag = (int)UnitTags.AllorsLong;
@@ -560,7 +553,7 @@ namespace Allors.Meta
             }
 
             {
-                var objectType = this.AddDeclaredObjectType(UnitIds.DecimalId);
+                var objectType = new UnitType(this, UnitIds.DecimalId);
                 objectType.SingularName = UnitTags.AllorsDecimal.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
                 objectType.UnitTag = (int)UnitTags.AllorsDecimal;
@@ -568,7 +561,7 @@ namespace Allors.Meta
             }
 
             {
-                var objectType = this.AddDeclaredObjectType(UnitIds.DoubleId);
+                var objectType = new UnitType(this, UnitIds.DoubleId);
                 objectType.SingularName = UnitTags.AllorsDouble.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
                 objectType.UnitTag = (int)UnitTags.AllorsDouble;
@@ -576,7 +569,7 @@ namespace Allors.Meta
             }
 
             {
-                var objectType = this.AddDeclaredObjectType(UnitIds.BooleanId);
+                var objectType = new UnitType(this, UnitIds.BooleanId);
                 objectType.SingularName = UnitTags.AllorsBoolean.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
                 objectType.UnitTag = (int)UnitTags.AllorsBoolean;
@@ -584,7 +577,7 @@ namespace Allors.Meta
             }
 
             {
-                var objectType = this.AddDeclaredObjectType(UnitIds.DatetimeId);
+                var objectType = new UnitType(this, UnitIds.DatetimeId);
                 objectType.SingularName = UnitTags.AllorsDateTime.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
                 objectType.UnitTag = (int)UnitTags.AllorsDateTime;
@@ -592,7 +585,7 @@ namespace Allors.Meta
             }
 
             {
-                var objectType = this.AddDeclaredObjectType(UnitIds.Unique);
+                var objectType = new UnitType(this, UnitIds.Unique);
                 objectType.SingularName = UnitTags.AllorsUnique.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
                 objectType.UnitTag = (int)UnitTags.AllorsUnique;
@@ -600,7 +593,7 @@ namespace Allors.Meta
             }
 
             {
-                var objectType = this.AddDeclaredObjectType(UnitIds.BinaryId);
+                var objectType = new UnitType(this, UnitIds.BinaryId);
                 objectType.SingularName = UnitTags.AllorsBinary.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
                 objectType.UnitTag = (int)UnitTags.AllorsBinary;
