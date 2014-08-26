@@ -322,7 +322,8 @@ namespace Allors.Adapters
         /// <param name="unit">The unit .</param>
         public static void ValidateRoleLikeFilter(RoleType role, string unit)
         {
-            if (!role.ObjectType.IsString)
+            var unitType = role.ObjectType as UnitType;
+            if (unitType == null || !unitType.IsString)
             {
                 throw new ArgumentException("AddLike() can only be used with String.");
             }

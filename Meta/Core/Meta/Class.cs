@@ -22,6 +22,7 @@
 namespace Allors.Meta
 {
     using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// An <see cref="ObjectType"/> defines the state and behavior for
@@ -32,6 +33,33 @@ namespace Allors.Meta
         public Class(Domain domain, Guid objectTypeId)
             : base(domain, objectTypeId)
         {
+            this.Domain.OnClassCreated(this);
         }
+
+        public override bool IsInterface
+        {
+            get
+            {
+                return false;
+            }
+        }
+
+        public override bool IsClass
+        {
+            get
+            {
+                return true;
+            }
+        }
+
+        public override IList<ObjectType> ConcreteClasses
+        {
+            get
+            {
+                ObjectType[] selfArray = { this };
+                return selfArray;
+            }
+        }
+
     }
 }

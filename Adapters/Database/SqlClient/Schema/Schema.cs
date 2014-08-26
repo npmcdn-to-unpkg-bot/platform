@@ -501,7 +501,7 @@ AS
 
             this.procedureByName.Add(procedure.Name, procedure);
 
-            foreach (var concreteComposite in this.Database.Domain.ConcreteCompositeObjectTypes)
+            foreach (var concreteComposite in this.Database.Domain.Classes)
             {
                 var sortedUnitRoleTypes = this.Database.GetSortedUnitRolesByObjectType(concreteComposite);
 

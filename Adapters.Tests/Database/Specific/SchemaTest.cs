@@ -265,9 +265,11 @@ namespace Allors.Adapters.Special
 
             var i12 = this.CreateInterface("I12");
 
-            var i12AllorsString = new RelationType(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            i12AllorsString.AssociationType.ObjectType = i12;
-            i12AllorsString.RoleType.ObjectType = (ObjectType)this.domain.Find(UnitIds.BooleanId);
+            var i12AllorsString = new RelationType(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid())
+                                      {
+                                          AssociationType = { ObjectType = i12 },
+                                          RoleType = { ObjectType = (ObjectType)this.domain.Find(UnitIds.BooleanId) }
+                                      };
 
             c1.AddDirectSupertype(i12);
 

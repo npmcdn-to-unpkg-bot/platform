@@ -49,7 +49,7 @@ namespace Allors.Meta
             this.AssociationType = new AssociationType(this, associationTypeId);
             this.RoleType = new RoleType(this, roleTypeId);
 
-            this.Domain.OnRelationTypeCreate(this);
+            this.Domain.OnRelationTypeCreated(this);
         }
         
         /// <summary>

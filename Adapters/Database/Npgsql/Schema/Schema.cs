@@ -560,7 +560,7 @@ $$ language plpgsql;
 
             this.procedureByName.Add(procedure.Name, procedure);
 
-            foreach (var concreteComposite in this.Database.ObjectFactory.Domain.ConcreteCompositeObjectTypes)
+            foreach (var concreteComposite in this.Database.ObjectFactory.Domain.Classes)
             {
                 var sortedUnitRoleTypes = this.Database.GetSortedUnitRolesByObjectType(concreteComposite);
 
