@@ -2473,32 +2473,50 @@ namespace Domain
                                             IsMany
                                                 =
                                                 true
+                                        },
+                                    RoleType
+                                        =
+                                        {
+                                            ObjectType
+                                                =
+                                                C3,
+                                            AssignedSingularName
+                                                =
+                                                "C3many2one",
+                                            AssignedPluralName
+                                                =
+                                                "C3many2ones"
                                         }
                                 };
 
-            I12C3many2one.RoleType.ObjectType = C3;  
-			I12C3many2one.RoleType.AssignedSingularName = "C3many2one";  
-			I12C3many2one.RoleType.AssignedPluralName = "C3many2ones";  
+            I1C1many2one = new RelationType(D, new Guid("33f13167-3a14-4b06-a1d8-87076918b285"), new Guid("d138c296-e332-414c-9dc4-9eeff746e7ec"), new Guid("13fa334e-a315-4dbb-9d2a-1a8979254754"))
+                               {
+                                   AssociationType
+                                       =
+                                       {
+                                           ObjectType
+                                               =
+                                               I1,
+                                           IsMany
+                                               =
+                                               true
+                                       },
+                                   RoleType
+                                       =
+                                       {
+                                           ObjectType
+                                               =
+                                               C1,
+                                           AssignedSingularName
+                                               =
+                                               "C1many2one",
+                                           AssignedPluralName
+                                               =
+                                               "C1many2ones"
+                                       }
+                               };
 
-			I1C1many2one = new RelationType(D, new Guid("33f13167-3a14-4b06-a1d8-87076918b285"), new Guid("d138c296-e332-414c-9dc4-9eeff746e7ec"), new Guid("13fa334e-a315-4dbb-9d2a-1a8979254754"))
-			                   {
-			                       AssociationType
-			                           =
-			                           {
-			                               ObjectType
-			                                   =
-			                                   I1,
-			                               IsMany
-			                                   =
-			                                   true
-			                           }
-			                   };
-
-            I1C1many2one.RoleType.ObjectType = C1;  
-			I1C1many2one.RoleType.AssignedSingularName = "C1many2one";  
-			I1C1many2one.RoleType.AssignedPluralName = "C1many2ones";  
-
-			I2AllorsBoolean = new RelationType(D, new Guid("35040d7c-ab7f-4a99-9d09-e01e24ca3cb9"), new Guid("3aa841fd-a95d-4ddc-b994-5e432fd9f2ef"), new Guid("c39a79f1-3b54-45bb-ad24-3cec889691fc"))
+            I2AllorsBoolean = new RelationType(D, new Guid("35040d7c-ab7f-4a99-9d09-e01e24ca3cb9"), new Guid("3aa841fd-a95d-4ddc-b994-5e432fd9f2ef"), new Guid("c39a79f1-3b54-45bb-ad24-3cec889691fc"))
 			                      {
 			                          AssociationType
 			                              =
@@ -2551,33 +2569,53 @@ namespace Domain
                                             IsMany
                                                 =
                                                 true
+                                        },
+                                    RoleType
+                                        =
+                                        {
+                                            ObjectType
+                                                =
+                                                C2,
+                                            AssignedSingularName
+                                                =
+                                                "C2many2one",
+                                            AssignedPluralName
+                                                =
+                                                "C2many2ones"
                                         }
                                 };
 
-            I12C2many2one.RoleType.ObjectType = C2;  
-			I12C2many2one.RoleType.AssignedSingularName = "C2many2one";  
-			I12C2many2one.RoleType.AssignedPluralName = "C2many2ones";  
+            C1S1many2many = new RelationType(D, new Guid("3673e4f6-8b40-44e7-be25-d73907b5806a"), new Guid("f9ba3e92-f1df-418d-94de-9ad0ddcbd24a"), new Guid("fc639289-9a1e-449e-832a-9b7dda4a80be"))
+                                {
+                                    AssociationType
+                                        =
+                                        {
+                                            ObjectType
+                                                =
+                                                C1,
+                                            IsMany
+                                                =
+                                                true
+                                        },
+                                    RoleType
+                                        =
+                                        {
+                                            ObjectType
+                                                =
+                                                S1,
+                                            AssignedSingularName
+                                                =
+                                                "S1many2many",
+                                            AssignedPluralName
+                                                =
+                                                "S1many2manies",
+                                            IsMany
+                                                =
+                                                true
+                                        }
+                                };
 
-			C1S1many2many = new RelationType(D, new Guid("3673e4f6-8b40-44e7-be25-d73907b5806a"), new Guid("f9ba3e92-f1df-418d-94de-9ad0ddcbd24a"), new Guid("fc639289-9a1e-449e-832a-9b7dda4a80be"))
-			                    {
-			                        AssociationType
-			                            =
-			                            {
-			                                ObjectType
-			                                    =
-			                                    C1,
-			                                IsMany
-			                                    =
-			                                    true
-			                            }
-			                    };
-
-            C1S1many2many.RoleType.ObjectType = S1;  
-			C1S1many2many.RoleType.AssignedSingularName = "S1many2many";  
-			C1S1many2many.RoleType.AssignedPluralName = "S1many2manies";  
-			C1S1many2many.RoleType.IsMany = true;
-
-			IGT32UnitAllorsString15 = new RelationType(D, new Guid("36daace4-f9d1-453d-9caf-90173b13017b"), new Guid("899dd11c-3467-4f03-86ef-5534b0eadbfb"), new Guid("2e5c06e4-dcaa-4aa8-b6ec-8eb6fea2d7d6"))
+            IGT32UnitAllorsString15 = new RelationType(D, new Guid("36daace4-f9d1-453d-9caf-90173b13017b"), new Guid("899dd11c-3467-4f03-86ef-5534b0eadbfb"), new Guid("2e5c06e4-dcaa-4aa8-b6ec-8eb6fea2d7d6"))
 			                              {
 			                                  AssociationType
 			                                      =
@@ -4145,14 +4183,17 @@ namespace Domain
                                             IsMany
                                                 =
                                                 true
+                                        },
+                                    RoleType
+                                        =
+                                        {
+                                            ObjectType
+                                                =
+                                                Company
                                         }
                                 };
 
-            PersonCompany.RoleType.ObjectType = Company;  
-  
-  
-
-			IGT32CompositeSelf17 = new RelationType(D, new Guid("6e2f60b4-ee37-4c66-9425-aee146f51bc8"), new Guid("c7fea1ff-7748-4316-948b-90bc64bd0218"), new Guid("7406c2a2-1c85-45df-a7f1-107f3ea8526b"))
+            IGT32CompositeSelf17 = new RelationType(D, new Guid("6e2f60b4-ee37-4c66-9425-aee146f51bc8"), new Guid("c7fea1ff-7748-4316-948b-90bc64bd0218"), new Guid("7406c2a2-1c85-45df-a7f1-107f3ea8526b"))
 			                           {
 			                               AssociationType
 			                                   =
@@ -4187,14 +4228,23 @@ namespace Domain
                                            IsMany
                                                =
                                                true
+                                       },
+                                   RoleType
+                                       =
+                                       {
+                                           ObjectType
+                                               =
+                                               I1,
+                                           AssignedSingularName
+                                               =
+                                               "I1many2one",
+                                           AssignedPluralName
+                                               =
+                                               "I1many2ones"
                                        }
                                };
 
-            I1I1many2one.RoleType.ObjectType = I1;  
-			I1I1many2one.RoleType.AssignedSingularName = "I1many2one";  
-			I1I1many2one.RoleType.AssignedPluralName = "I1many2ones";  
-
-			S1S2one2many = new RelationType(D, new Guid("6ee98698-15dc-4998-88c3-d2a4d1c19e8c"), new Guid("0b75718e-1648-438c-b0fe-70e4f05623c8"), new Guid("e88fdde4-a3e8-4ee0-85d6-7e5fc3047b48"))
+            S1S2one2many = new RelationType(D, new Guid("6ee98698-15dc-4998-88c3-d2a4d1c19e8c"), new Guid("0b75718e-1648-438c-b0fe-70e4f05623c8"), new Guid("e88fdde4-a3e8-4ee0-85d6-7e5fc3047b48"))
 			                   {
 			                       AssociationType
 			                           =
@@ -4283,15 +4333,26 @@ namespace Domain
                                             IsMany
                                                 =
                                                 true
+                                        },
+                                    RoleType
+                                        =
+                                        {
+                                            ObjectType
+                                                =
+                                                C1,
+                                            AssignedSingularName
+                                                =
+                                                "C1many2many",
+                                            AssignedPluralName
+                                                =
+                                                "C1many2manies",
+                                            IsMany
+                                                =
+                                                true
                                         }
                                 };
 
-            I1C1many2many.RoleType.ObjectType = C1;  
-			I1C1many2many.RoleType.AssignedSingularName = "C1many2many";  
-			I1C1many2many.RoleType.AssignedPluralName = "C1many2manies";  
-			I1C1many2many.RoleType.IsMany = true;
-
-			S1AllorsDouble = new RelationType(D, new Guid("701ca57d-241f-470c-b690-9045c0f76c8f"), new Guid("1310f3cf-dfc3-4a28-846a-1b2a32e73930"), new Guid("0c610a6d-839f-4578-9ede-23afa29c3205"))
+            S1AllorsDouble = new RelationType(D, new Guid("701ca57d-241f-470c-b690-9045c0f76c8f"), new Guid("1310f3cf-dfc3-4a28-846a-1b2a32e73930"), new Guid("0c610a6d-839f-4578-9ede-23afa29c3205"))
 			                     {
 			                         AssociationType
 			                             =
@@ -6948,14 +7009,23 @@ namespace Domain
                                            IsMany
                                                =
                                                true
+                                       },
+                                   RoleType
+                                       =
+                                       {
+                                           ObjectType
+                                               =
+                                               I4,
+                                           AssignedSingularName
+                                               =
+                                               "I4many2one",
+                                           AssignedPluralName
+                                               =
+                                               "I4many2ones"
                                        }
                                };
 
-            C3I4many2one.RoleType.ObjectType = I4;  
-			C3I4many2one.RoleType.AssignedSingularName = "I4many2one";  
-			C3I4many2one.RoleType.AssignedPluralName = "I4many2ones";  
-
-			I12C3many2many = new RelationType(D, new Guid("b889bc75-3d93-4577-a4d7-752393284220"), new Guid("7df93147-276f-419d-b4b2-ff6dba76c683"), new Guid("18a37e3c-539c-4cf5-9f75-05295f1bacda"))
+            I12C3many2many = new RelationType(D, new Guid("b889bc75-3d93-4577-a4d7-752393284220"), new Guid("7df93147-276f-419d-b4b2-ff6dba76c683"), new Guid("18a37e3c-539c-4cf5-9f75-05295f1bacda"))
 			                     {
 			                         AssociationType
 			                             =
