@@ -308,11 +308,12 @@ namespace Allors.Meta
         /// </summary>
         internal void DeriveMultiplicityScaleAndSize()
         {
-            if (this.ObjectType is UnitType)
+            var unitType = this.ObjectType as UnitType;
+            if (unitType != null)
             {
                 this.IsMany = false;
 
-                switch ((UnitTags)this.ObjectType.UnitTag)
+                switch ((UnitTags)unitType.UnitTag)
                 {
                     case UnitTags.AllorsString:
                         if (!this.Size.HasValue)
@@ -555,9 +556,10 @@ namespace Allors.Meta
             }
             else
             {
-                if (this.ObjectType is UnitType)
+                var unitType = this.ObjectType as UnitType;
+                if (unitType != null)
                 {
-                    switch ((UnitTags)this.ObjectType.UnitTag)
+                    switch ((UnitTags)unitType.UnitTag)
                     {
                         case UnitTags.AllorsString:
                             if (this.Size.HasValue)

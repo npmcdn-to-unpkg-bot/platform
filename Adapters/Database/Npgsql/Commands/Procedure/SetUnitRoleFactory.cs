@@ -91,7 +91,8 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
 
                 SchemaArrayParameter arrayParam;
 
-                var unitTypeTag = (UnitTags)roleType.ObjectType.UnitTag;
+                var unitType = (UnitType)roleType.ObjectType;
+                var unitTypeTag = (UnitTags)unitType.UnitTag;
                 switch (unitTypeTag)
                 {
                     case UnitTags.AllorsString:

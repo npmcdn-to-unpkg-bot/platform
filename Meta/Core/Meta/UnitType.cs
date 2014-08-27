@@ -36,6 +36,8 @@ namespace Allors.Meta
             this.Domain.OnUnitTypeCreated(this);
         }
 
+        public int UnitTag;
+
         /// <summary>
         /// Gets a value indicating whether this instance is a binary.
         /// </summary>

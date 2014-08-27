@@ -380,7 +380,8 @@ namespace Allors.Adapters.Database.Sql
                                 else
                                 {
                                     var exclusiveRootClass = associationConcreteClass.ExclusiveRootClass;
-                                    switch (relationType.RoleType.ObjectType.UnitTag)
+                                    var unitType = (UnitType)relationType.RoleType.ObjectType;
+                                    switch (unitType.UnitTag)
                                     {
                                         case (int)UnitTags.AllorsString:
                                             {
@@ -433,7 +434,8 @@ namespace Allors.Adapters.Database.Sql
                                     try
                                     {
                                         var exclusiveRootClass = associationConcreteClass.ExclusiveRootClass;
-                                        var unitTypeTag = (UnitTags)relationType.RoleType.ObjectType.UnitTag;
+                                        var unitType = (UnitType)relationType.RoleType.ObjectType;
+                                        var unitTypeTag = (UnitTags)unitType.UnitTag;
                                         var unit = Serialization.ReadString(value, unitTypeTag);
 
                                         List<UnitRelation> relations;

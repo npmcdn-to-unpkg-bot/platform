@@ -320,7 +320,8 @@ namespace Allors.Adapters.Database.Sql
         
         protected virtual DbType GetDbType(RoleType role)
         {
-            var unitTypeTag = (UnitTags)role.ObjectType.UnitTag;
+            var unitType = (UnitType)role.ObjectType;
+            var unitTypeTag = (UnitTags)unitType.UnitTag;
             switch (unitTypeTag)
             {
                 case UnitTags.AllorsString:

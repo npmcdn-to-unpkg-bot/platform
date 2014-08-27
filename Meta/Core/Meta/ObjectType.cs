@@ -23,7 +23,6 @@ namespace Allors.Meta
 {
     using System;
     using System.Collections.Generic;
-    using System.Globalization;
     using System.Linq;
 
     /// <summary>
@@ -32,8 +31,6 @@ namespace Allors.Meta
     /// </summary>
     public abstract partial class ObjectType : MetaObject, IComparable
     {
-        public int UnitTag;
-
         public string SingularName;
 
         public string PluralName;

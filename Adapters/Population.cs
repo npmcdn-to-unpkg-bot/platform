@@ -116,8 +116,8 @@ namespace Allors.Adapters
         /// </returns>
         public object Internalize(object unit, RoleType roleType)
         {
-            var objectType = roleType.ObjectType;
-            var unitTypeTag = (UnitTags)objectType.UnitTag;
+            var unitType = (UnitType)roleType.ObjectType;
+            var unitTypeTag = (UnitTags)unitType.UnitTag;
 
             var normalizedUnit = unit;
 

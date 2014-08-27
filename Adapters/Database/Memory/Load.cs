@@ -319,7 +319,8 @@ namespace Allors.Adapters.Database.Memory
                                     this.session.MemoryDatabase.UnitRoleChecks(strategy, relationType.RoleType);
                                     if (this.reader.IsEmptyElement)
                                     {
-                                        switch (relationType.RoleType.ObjectType.UnitTag)
+                                        var unitType = (UnitType)relationType.RoleType.ObjectType;
+                                        switch (unitType.UnitTag)
                                         {
                                             case (int)UnitTags.AllorsString:
                                                 strategy.SetUnitRole(relationType.RoleType, string.Empty);
@@ -331,7 +332,8 @@ namespace Allors.Adapters.Database.Memory
                                     }
                                     else
                                     {
-                                        var unitTypeTag = (UnitTags)relationType.RoleType.ObjectType.UnitTag;
+                                        var unitType = (UnitType)relationType.RoleType.ObjectType;
+                                        var unitTypeTag = (UnitTags)unitType.UnitTag;
 
                                         var unit = Serialization.ReadString(value, unitTypeTag);
                                         strategy.SetUnitRole(relationType.RoleType, unit);

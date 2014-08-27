@@ -1953,7 +1953,8 @@ namespace Allors.Adapters.Workspace.Memory
                             writer.WriteStartElement(Serialization.Relation);
                             writer.WriteAttributeString(Serialization.Association, association.ObjectId.ToString());
 
-                            var unitTypeTag = (UnitTags)roleType.ObjectType.UnitTag;
+                            var unitType = (UnitType)roleType.ObjectType;
+                            var unitTypeTag = (UnitTags)unitType.UnitTag;
                             var roleString = Serialization.WriteString(unitTypeTag, role);
                             writer.WriteString(roleString);
 
@@ -2071,7 +2072,8 @@ namespace Allors.Adapters.Workspace.Memory
                         writer.WriteStartElement(Serialization.Relation);
                         writer.WriteAttributeString(Serialization.Association, association.ObjectId.ToString());
 
-                        var unitTypeTag = (UnitTags)roleType.ObjectType.UnitTag;
+                        var unitType = (UnitType)roleType.ObjectType;
+                        var unitTypeTag = (UnitTags)unitType.UnitTag;
                         var roleString = Serialization.WriteString(unitTypeTag, role);
                         writer.WriteString(roleString);
 

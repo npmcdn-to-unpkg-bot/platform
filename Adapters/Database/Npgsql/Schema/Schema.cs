@@ -228,7 +228,8 @@ FROM information_schema.columns"))
                                                 }
                                                 else
                                                 {
-                                                    var unitTypeTag = (UnitTags)column.RelationType.RoleType.ObjectType.UnitTag;
+                                                    var unitType = (UnitType)column.RelationType.RoleType.ObjectType;
+                                                    var unitTypeTag = (UnitTags)unitType.UnitTag;
                                                     switch (dataType)
                                                     {
                                                         case "varchar":
@@ -751,7 +752,8 @@ $$ language plpgsql;
 
                         if (relationType.RoleType.ObjectType is UnitType)
                         {
-                            var unitTypeTag = (UnitTags)relationType.RoleType.ObjectType.UnitTag;
+                            var unitType = (UnitType)relationType.RoleType.ObjectType;
+                            var unitTypeTag = (UnitTags)unitType.UnitTag;
                             switch (unitTypeTag)
                             {
                                 case UnitTags.AllorsString:
