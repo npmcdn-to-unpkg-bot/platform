@@ -542,7 +542,14 @@ namespace Allors.Adapters.Workspace.Memory
                     throw new ArgumentException(roleType + " on object " + this + " is removed.");
                 }
 
-                if (!roleType.ObjectType.DerivedRootClasses.Contains(role.Strategy.ObjectType))
+                var compositeType = roleType.ObjectType as CompositeType;
+
+                if (compositeType == null)
+                {
+                    throw new ArgumentException(roleType + " has no CompositeType");
+                }
+
+                if (!compositeType.DerivedRootClasses.Contains(role.Strategy.ObjectType))
                 {
                     throw new ArgumentException(role.Strategy.ObjectType + " is not compatible with type " + roleType.ObjectType + " of role " + roleType + ".");
                 }
@@ -723,7 +730,14 @@ namespace Allors.Adapters.Workspace.Memory
                 throw new ArgumentException(roleType + " on object " + this + " is removed.");
             }
 
-            if (!roleType.ObjectType.DerivedRootClasses.Contains(allorsObject.Strategy.ObjectType))
+            var compositeType = roleType.ObjectType as CompositeType;
+
+            if (compositeType == null)
+            {
+                throw new ArgumentException(roleType + " has no CompositeType");
+            }
+
+            if (!compositeType.DerivedRootClasses.Contains(allorsObject.Strategy.ObjectType))
             {
                 throw new ArgumentException(allorsObject.Strategy.ObjectType + " is not compatible with type " + roleType.ObjectType + " of role " + roleType + ".");
             }

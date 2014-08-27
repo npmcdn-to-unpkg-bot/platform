@@ -518,7 +518,7 @@ namespace Allors.Adapters.Database.Sql
                                     this.objectTypeByObjectId.TryGetValue(role, out roleConcreteClass);
 
                                     if (roleConcreteClass == null ||
-                                        !this.database.ContainsConcreteClass(relationType.RoleType.ObjectType, roleConcreteClass))
+                                        !this.database.ContainsConcreteClass((CompositeType)relationType.RoleType.ObjectType, roleConcreteClass))
                                     {
                                         this.OnRelationNotLoaded(relationType.Id, associationIdString, r);
                                     }

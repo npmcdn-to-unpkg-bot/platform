@@ -241,7 +241,7 @@ namespace Allors.Meta
             }
 
             // RootClasses
-            foreach (var type in this.DerivedCompositeTypes)
+            foreach (var type in this.Interfaces)
             {
                 type.DeriveRootClasses();
             }

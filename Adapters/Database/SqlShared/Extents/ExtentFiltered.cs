@@ -353,7 +353,7 @@ namespace Allors.Adapters.Database.Sql
                         var inRole = inStatement.RoleType;
                         var inRelationType = inRole.RelationType;
 
-                        if (!inRole.ObjectType.RootClasses.Contains(rootClass))
+                        if (!((CompositeType)inRole.ObjectType).RootClasses.Contains(rootClass))
                         {
                             continue;
                         }

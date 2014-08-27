@@ -401,7 +401,7 @@ namespace Allors.Adapters.Database.Memory
                                     {
                                         var roleIdString = this.session.ObjectIds.Parse(roleIdStringArray[0]);
                                         var role = this.LoadInstantiateStrategy(roleIdString);
-                                        if (role == null || !this.session.MemoryDatabase.ContainsConcreteClass(relationType.RoleType.ObjectType, role.ObjectType))
+                                        if (role == null || !this.session.MemoryDatabase.ContainsConcreteClass((CompositeType)relationType.RoleType.ObjectType, role.ObjectType))
                                         {
                                             this.session.MemoryDatabase.OnRelationNotLoaded(relationType.Id, associationId.ToString(), roleIdStringArray[0]);
                                         }
@@ -424,7 +424,7 @@ namespace Allors.Adapters.Database.Memory
                                         {
                                             var roleId = this.session.ObjectIds.Parse(roleIdString);
                                             var role = this.LoadInstantiateStrategy(roleId);
-                                            if (role == null || !this.session.MemoryDatabase.ContainsConcreteClass(relationType.RoleType.ObjectType, role.ObjectType))
+                                            if (role == null || !this.session.MemoryDatabase.ContainsConcreteClass((CompositeType)relationType.RoleType.ObjectType, role.ObjectType))
                                             {
                                                 this.session.MemoryDatabase.OnRelationNotLoaded(relationType.Id, associationId.ToString(), roleId.ToString());
                                             }

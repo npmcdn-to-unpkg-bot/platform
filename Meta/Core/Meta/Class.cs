@@ -22,17 +22,25 @@
 namespace Allors.Meta
 {
     using System;
+    using System.Collections.Generic;
 
-    /// <summary>
-    /// An <see cref="ObjectType"/> defines the state and behavior for
-    /// a set of <see cref="IObject"/>s.
-    /// </summary>
     public partial class Class : CompositeType
     {
+        private readonly List<Class> selfList; 
+
         public Class(Domain domain, Guid objectTypeId)
             : base(domain, objectTypeId)
         {
             this.Domain.OnClassCreated(this);
+            this.selfList = new List<Class> { this };
+        }
+
+        public override List<Class> DerivedRootClasses
+        {
+            get
+            {
+                return this.selfList;
+            }
         }
 
         public override Class DerivedExclusiveRootClass
@@ -41,6 +49,11 @@ namespace Allors.Meta
             {
                 return this;
             }
+        }
+
+        public override bool ContainsRootClass(ObjectType objectType)
+        {
+            return this.Equals(objectType);
         }
     }
 }

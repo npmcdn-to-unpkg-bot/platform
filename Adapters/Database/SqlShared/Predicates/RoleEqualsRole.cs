@@ -47,12 +47,17 @@ namespace Allors.Adapters.Database.Sql
             {
                 statement.Append(" " + alias + "." + schema.Column(this.role) + "=" + alias + "." + schema.Column(this.equalsRole));
             }
-            else if (this.role.ObjectType.RootClasses.Count == 1 && this.equalsRole.ObjectType.RootClasses.Count == 1)
-            {
-                statement.Append(" " + alias + "." + schema.Column(this.role) + "=" + alias + "." + schema.Column(this.equalsRole));
-            }
             else
             {
+                var roleCompositeType = this.role.ObjectType as CompositeType;
+                var equalsRoleCompositeType = this.equalsRole.ObjectType as CompositeType;
+
+                if (roleCompositeType != null && roleCompositeType.ExclusiveRootClass != null && 
+                    equalsRoleCompositeType != null && equalsRoleCompositeType.ExclusiveRootClass != null)
+                {
+                    statement.Append(" " + alias + "." + schema.Column(this.role) + "=" + alias + "." + schema.Column(this.equalsRole));
+                }
+                
                 throw new NotImplementedException();
             }
 

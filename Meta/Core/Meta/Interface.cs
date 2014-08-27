@@ -22,6 +22,7 @@
 namespace Allors.Meta
 {
     using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// An <see cref="ObjectType"/> defines the state and behavior for
@@ -29,8 +30,28 @@ namespace Allors.Meta
     /// </summary>
     public partial class Interface : CompositeType
     {
+        private List<Class> derivedRootClasses = new List<Class>();
 
-        public Class derivedExclusiveRootClass;
+        /// <summary>
+        /// A cache for the ids of the <see cref="RoleTypes"/>.
+        /// </summary>
+        private HashSet<ObjectType> rootClassesCache;
+
+        private Class derivedExclusiveRootClass;
+
+        public Interface(Domain domain, Guid objectTypeId)
+            : base(domain, objectTypeId)
+        {
+            this.Domain.OnInterfaceCreated(this);
+        }
+
+        public override List<Class> DerivedRootClasses
+        {
+            get
+            {
+                return this.derivedRootClasses;
+            }
+        }
 
         public override Class DerivedExclusiveRootClass
         {
@@ -40,16 +61,23 @@ namespace Allors.Meta
             }
         }
 
-        public Interface(Domain domain, Guid objectTypeId)
-            : base(domain, objectTypeId)
+        /// <summary>
+        /// Contains this concrete class.
+        /// </summary>
+        /// <param name="objectType">
+        /// The concrete class.
+        /// </param>
+        /// <returns>
+        /// True if this contains the concrete class.
+        /// </returns>
+        public override bool ContainsRootClass(ObjectType objectType)
         {
-            this.Domain.OnInterfaceCreated(this);
+            return this.rootClassesCache.Contains(objectType);
         }
 
         /// <summary>
         /// Derive exclusive concrete leaf classes.
         /// </summary>
-        /// <param name="concreteLeafClasses">The concrete leaf classes.</param>
         internal void DeriveExclusiveRootClass()
         {
             this.derivedExclusiveRootClass = null;
@@ -57,6 +85,15 @@ namespace Allors.Meta
             {
                 this.derivedExclusiveRootClass = this.DerivedRootClasses[0];
             }
+        }
+
+        /// <summary>
+        /// Derive root class for classes.
+        /// </summary>
+        internal void DeriveRootClasses()
+        {
+            this.derivedRootClasses = this.DerivedSubclasses;
+            this.rootClassesCache = new HashSet<ObjectType>(this.DerivedRootClasses);
         }
     }
 }

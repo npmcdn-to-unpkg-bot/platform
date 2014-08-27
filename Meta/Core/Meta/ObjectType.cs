@@ -41,15 +41,8 @@ namespace Allors.Meta
 
         public List<Class> DerivedSubclasses = new List<Class>();
 
-        public List<Class> DerivedRootClasses = new List<Class>();
-
         // Domain -> ObjectType
         public Domain Domain { get; private set; }
-
-        /// <summary>
-        /// A cache for the ids of the <see cref="RoleTypes"/>.
-        /// </summary>
-        private HashSet<ObjectType> rootClassesCache;
 
         public ObjectType(Domain domain, Guid objectTypeId)
         {
@@ -66,18 +59,6 @@ namespace Allors.Meta
             get
             {
                 return this.SingularName;
-            }
-        }
-
-        /// <summary>
-        /// Gets the root classes.
-        /// </summary>
-        /// <value>The root classes.</value>
-        public IList<Class> RootClasses
-        {
-            get
-            {
-                return this.DerivedRootClasses;
             }
         }
 
@@ -141,20 +122,6 @@ namespace Allors.Meta
             }
 
             return -1;
-        }
-
-        /// <summary>
-        /// Contains this concrete class.
-        /// </summary>
-        /// <param name="objectType">
-        /// The concrete class.
-        /// </param>
-        /// <returns>
-        /// True if this contains the concrete class.
-        /// </returns>
-        public bool ContainsConcreteClass(ObjectType objectType)
-        {
-            return this.rootClassesCache.Contains(objectType);
         }
         
         /// <summary>
@@ -239,24 +206,7 @@ namespace Allors.Meta
 
             this.DerivedDirectSubtypes = new List<CompositeType>(directSubtypes);
         }
-
-        /// <summary>
-        /// Derive root class for classes.
-        /// </summary>
-        internal void DeriveRootClasses()
-        {
-            if (this is Interface)
-            {
-                this.DerivedRootClasses = this.DerivedSubclasses;
-            }
-            else
-            {
-                this.DerivedRootClasses = new List<Class> { (Class)this };
-            }
-
-            this.rootClassesCache = new HashSet<ObjectType>(this.DerivedRootClasses);
-        }
-
+        
         /// <summary>
         /// Derive subclasses.
         /// </summary>
@@ -274,8 +224,7 @@ namespace Allors.Meta
 
             this.DerivedSubclasses = new List<Class>(subClasses);
         }
-
-
+        
         /// <summary>
         /// Derive sub types.
         /// </summary>

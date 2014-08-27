@@ -49,7 +49,21 @@ namespace Allors.Meta
             }
         }
 
+        public abstract List<Class> DerivedRootClasses { get; }
+
         public abstract Class DerivedExclusiveRootClass { get; }
+
+        /// <summary>
+        /// Gets the root classes.
+        /// </summary>
+        /// <value>The root classes.</value>
+        public IList<Class> RootClasses
+        {
+            get
+            {
+                return this.DerivedRootClasses;
+            }
+        }
 
         /// <summary>
         /// A cache for the ids of the <see cref="AssociationTypes"/>.
@@ -113,6 +127,17 @@ namespace Allors.Meta
                 return this.DerivedRoleTypes;
             }
         }
+
+        /// <summary>
+        /// Contains this concrete class.
+        /// </summary>
+        /// <param name="objectType">
+        /// The concrete class.
+        /// </param>
+        /// <returns>
+        /// True if this contains the concrete class.
+        /// </returns>
+        public abstract bool ContainsRootClass(ObjectType objectType);
 
         /// <summary>
         /// Derive direct super type derivations.

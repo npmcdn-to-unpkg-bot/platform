@@ -223,7 +223,7 @@ namespace Allors.Adapters
             return normalizedUnit;
         }
 
-        public bool ContainsConcreteClass(ObjectType objectType, ObjectType concreteClass)
+        public bool ContainsConcreteClass(CompositeType objectType, ObjectType concreteClass)
         {
             object concreteClassOrClasses;
             if (!this.concreteClassesByObjectType.TryGetValue(objectType, out concreteClassOrClasses))
@@ -304,7 +304,14 @@ namespace Allors.Adapters
                     throw new ArgumentException(roleType + " on object " + strategy + " is removed.");
                 }
 
-                if (!roleType.ObjectType.ContainsConcreteClass(role.Strategy.ObjectType))
+                var compositeType = roleType.ObjectType as CompositeType;
+
+                if (compositeType == null)
+                {
+                    throw new ArgumentException(role + " has no CompositeType");
+                }
+
+                if (!compositeType.ContainsRootClass(role.Strategy.ObjectType))
                 {
                     throw new ArgumentException(role.Strategy.ObjectType + " is not compatible with type " + roleType.ObjectType + " of role " + roleType + ".");
                 }
