@@ -280,7 +280,7 @@ namespace Allors.Adapters
         {
             if (objectType is UnitType)
             {
-                throw new ArgumentException("AddInstanceOf() can only be used with unit types.");
+                throw new ArgumentException("AddInstanceOf() can only be used with composite types.");
             }
 
             if (role.IsMany)

@@ -51,7 +51,7 @@ namespace Allors.Adapters.Workspace.Memory
             }
 
             // TODO: Optimize
-            ObjectType roleObjectType = role.Strategy.ObjectType;
+            var roleObjectType = role.Strategy.ObjectType;
             if (roleObjectType.Equals(this.objectType))
             {
                 return ThreeValuedLogic.True;

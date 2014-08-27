@@ -20,15 +20,14 @@
 
 namespace Allors.Adapters.Database.Memory
 {
-    using System;
     using Allors.Meta;
 
     internal sealed class RoleInstanceof : Predicate
     {
         private readonly RoleType roleType;
-        private readonly ObjectType objectType;
+        private readonly CompositeType objectType;
 
-        internal RoleInstanceof(ExtentFiltered extent, RoleType roleType, ObjectType objectType)
+        internal RoleInstanceof(ExtentFiltered extent, RoleType roleType, CompositeType objectType)
         {
             extent.CheckForRoleType(roleType);
             CompositePredicateAssertions.ValidateRoleInstanceOf(roleType, objectType);
@@ -47,7 +46,7 @@ namespace Allors.Adapters.Database.Memory
             }
 
             // TODO: Optimize
-            ObjectType roleObjectType = role.Strategy.ObjectType;
+            var roleObjectType = role.Strategy.ObjectType;
             if (roleObjectType.Equals(this.objectType))
             {
                 return ThreeValuedLogic.True;

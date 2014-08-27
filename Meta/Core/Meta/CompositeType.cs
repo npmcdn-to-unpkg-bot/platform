@@ -27,6 +27,10 @@ namespace Allors.Meta
 
     public abstract partial class CompositeType : ObjectType
     {
+        public List<Interface> DerivedDirectSupertypes = new List<Interface>();
+
+        public List<Interface> DerivedSupertypes = new List<Interface>();
+
         public List<RoleType> DerivedRoleTypes = new List<RoleType>();
 
         public List<AssociationType> DerivedAssociationTypes = new List<AssociationType>();
@@ -46,6 +50,18 @@ namespace Allors.Meta
         public CompositeType(Domain domain, Guid objectTypeId)
             : base(domain, objectTypeId)
         {
+        }
+
+        /// <summary>
+        /// Gets the super types.
+        /// </summary>
+        /// <value>The super types.</value>
+        public IList<Interface> Supertypes
+        {
+            get
+            {
+                return this.DerivedSupertypes;
+            }
         }
 
         /// <summary>
@@ -82,6 +98,33 @@ namespace Allors.Meta
             {
                 return this.DerivedRoleTypes;
             }
+        }
+
+        /// <summary>
+        /// Derive direct super type derivations.
+        /// </summary>
+        /// <param name="directSupertypes">The direct super types.</param>
+        internal void DeriveDirectSupertypes(HashSet<Interface> directSupertypes)
+        {
+            directSupertypes.Clear();
+            foreach (var inheritance in this.Domain.Inheritances.Where(inheritance => this.Equals(inheritance.Subtype)))
+            {
+                directSupertypes.Add(inheritance.Supertype);
+            }
+
+            this.DerivedDirectSupertypes = new List<Interface>(directSupertypes);
+        }
+
+        /// <summary>
+        /// Derive super types.
+        /// </summary>
+        /// <param name="superTypes">The super types.</param>
+        internal void DeriveSupertypes(HashSet<Interface> superTypes)
+        {
+            superTypes.Clear();
+            this.DeriveSupertypesRecursively(this, superTypes);
+
+            this.DerivedSupertypes = new List<Interface>(superTypes);
         }
 
         /// <summary>
@@ -179,6 +222,23 @@ namespace Allors.Meta
             foreach (var containsRole in this.DerivedRoleTypes)
             {
                 this.roleIdsCache[containsRole.RelationType.Id] = null;
+            }
+        }
+
+        /// <summary>
+        /// Derive super types recursively.
+        /// </summary>
+        /// <param name="type">The type .</param>
+        /// <param name="superTypes">The super types.</param>
+        private void DeriveSupertypesRecursively(ObjectType type, HashSet<Interface> superTypes)
+        {
+            foreach (var directSupertype in this.DerivedDirectSupertypes)
+            {
+                if (!Equals(directSupertype, type))
+                {
+                    superTypes.Add(directSupertype);
+                    directSupertype.DeriveSupertypesRecursively(type, superTypes);
+                }
             }
         }
     }

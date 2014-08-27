@@ -47,7 +47,7 @@ namespace Allors.Adapters.Database.Memory
             }
 
             // TODO: Optimize
-            ObjectType associationObjectType = association.Strategy.ObjectType;
+            var associationObjectType = association.Strategy.ObjectType;
             if (associationObjectType.Equals(this.objectType))
             {
                 return ThreeValuedLogic.True;

@@ -36,9 +36,6 @@ namespace Allors.Meta
         public string PluralName;
 
 
-        public List<Interface> DerivedDirectSupertypes = new List<Interface>();
-
-        public List<Interface> DerivedSupertypes = new List<Interface>();
 
         public List<CompositeType> DerivedDirectSubtypes = new List<CompositeType>();
 
@@ -53,11 +50,6 @@ namespace Allors.Meta
         
         // Domain -> ObjectType
         public Domain Domain { get; private set; }
-        
-        /// <summary>
-        /// An empty array of object types.
-        /// </summary>
-        private static readonly ObjectType[] EmptyArray = new ObjectType[0];
 
         /// <summary>
         /// A cache for the ids of the <see cref="RoleTypes"/>.
@@ -118,17 +110,6 @@ namespace Allors.Meta
             }
         }
 
-        /// <summary>
-        /// Gets the super types.
-        /// </summary>
-        /// <value>The super types.</value>
-        public IList<Interface> Supertypes
-        {
-            get
-            {
-                return this.DerivedSupertypes;
-            }
-        }
 
         /// <summary>
         /// Gets the sub types.
@@ -261,22 +242,6 @@ namespace Allors.Meta
             return false;
         }
 
-
-        /// <summary>
-        /// Derive direct super type derivations.
-        /// </summary>
-        /// <param name="directSupertypes">The direct super types.</param>
-        internal void DeriveDirectSupertypes(HashSet<Interface> directSupertypes)
-        {
-            directSupertypes.Clear();
-            foreach (var inheritance in this.Domain.Inheritances.Where(inheritance => this.Equals(inheritance.Subtype)))
-            {
-                directSupertypes.Add(inheritance.Supertype);
-            }
-
-            this.DerivedDirectSupertypes = new List<Interface>(directSupertypes);
-        }
-
         /// <summary>
         /// Derive direct sub type derivations.
         /// </summary>
@@ -340,17 +305,6 @@ namespace Allors.Meta
             this.DerivedSubclasses = new List<Class>(subClasses);
         }
 
-        /// <summary>
-        /// Derive super types.
-        /// </summary>
-        /// <param name="superTypes">The super types.</param>
-        internal void DeriveSupertypes(HashSet<Interface> superTypes)
-        {
-            superTypes.Clear();
-            this.DeriveSupertypesRecursively(this, superTypes);
-
-            this.DerivedSupertypes = new List<Interface>(superTypes);
-        }
 
         /// <summary>
         /// Derive sub types.
@@ -452,23 +406,6 @@ namespace Allors.Meta
             else
             {
                 validationLog.AddError(this.ValidationName + " has no plural name", this, ValidationKind.Required, "ObjectType.PluralName");
-            }
-        }
-
-        /// <summary>
-        /// Derive super types recursively.
-        /// </summary>
-        /// <param name="type">The type .</param>
-        /// <param name="superTypes">The super types.</param>
-        private void DeriveSupertypesRecursively(ObjectType type, HashSet<Interface> superTypes)
-        {
-            foreach (var directSupertype in this.DerivedDirectSupertypes)
-            {
-                if (!Equals(directSupertype, type))
-                {
-                    superTypes.Add(directSupertype);
-                    directSupertype.DeriveSupertypesRecursively(type, superTypes);
-                }
             }
         }
 
