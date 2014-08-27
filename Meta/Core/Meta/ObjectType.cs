@@ -32,6 +32,11 @@ namespace Allors.Meta
     /// </summary>
     public abstract partial class ObjectType : MetaObject, IComparable
     {
+        public List<ObjectType> DerivedDirectSupertypes = new List<ObjectType>();
+
+
+
+
         public List<AssociationType> DerivedExclusiveAssociationTypes = new List<AssociationType>();
 
         public List<ObjectType> DerivedExclusiveSuperinterfaces = new List<ObjectType>();
@@ -40,8 +45,6 @@ namespace Allors.Meta
 
         public List<AssociationType> DerivedAssociationTypes = new List<AssociationType>();
 
-        public List<ObjectType> DerivedDirectSupertypes = new List<ObjectType>();
-
         public List<ObjectType> DerivedDirectSubtypes = new List<ObjectType>();
 
         public string PluralName;
@@ -49,8 +52,6 @@ namespace Allors.Meta
         public List<MethodType> DerivedMethodTypes = new List<MethodType>();
 
         public ObjectType DerivedExclusiveConcreteLeafClass;
-
-        public List<ObjectType> DerivedDirectSuperinterfaces = new List<ObjectType>();
 
         public List<RoleType> DerivedUnitRoleTypes = new List<RoleType>();
 
@@ -145,18 +146,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Gets the direct super interfaces.
-        /// </summary>
-        /// <value>The direct super interfaces.</value>
-        public IList<ObjectType> DirectSuperinterfaces
-        {
-            get
-            {
-                return this.DerivedDirectSuperinterfaces;
-            }
-        }
-
-        /// <summary>
         /// Gets the direct super types.
         /// </summary>
         /// <value>The direct super types.</value>
@@ -231,152 +220,6 @@ namespace Allors.Meta
             {
                 return this.DerivedExclusiveSuperinterfaces;
             }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether this instance is a binary.
-        /// </summary>
-        /// <value><c>true</c> if this instance is a binary; otherwise, <c>false</c>.</value>
-        public bool IsBinary
-        {
-            get { return this.Id.Equals(UnitIds.BinaryId); }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether this instance is a boolean.
-        /// </summary>
-        /// <value>
-        /// <c>true</c> if this instance is a boolean; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsBoolean
-        {
-            get { return this.Id.Equals(UnitIds.BooleanId); }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether this instance is a date time.
-        /// </summary>
-        /// <value>
-        ///  <c>true</c> if this instance is a date time; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsDateTime
-        {
-            get { return this.Id.Equals(UnitIds.DatetimeId); }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether this instance is a decimal.
-        /// </summary>
-        /// <value>
-        ///  <c>true</c> if this instance is a decimal; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsDecimal
-        {
-            get { return this.Id.Equals(UnitIds.DecimalId); }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether this instance is a double.
-        /// </summary>
-        /// <value><c>true</c> if this instance is a double; otherwise, <c>false</c>.</value>
-        public bool IsDouble
-        {
-            get { return this.Id.Equals(UnitIds.DoubleId); }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether this instance is an integer.
-        /// </summary>
-        /// <value>
-        ///  <c>true</c> if this instance is an integer; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsInteger
-        {
-            get { return this.Id.Equals(UnitIds.IntegerId); }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether this instance is long.
-        /// </summary>
-        /// <value><c>true</c> if this instance is a long; otherwise, <c>false</c>.</value>
-        public bool IsLong
-        {
-            get { return this.Id.Equals(UnitIds.LongId); }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether this instance requires precision.
-        /// </summary>
-        /// <value>
-        ///  <c>true</c> if this instance requires precision; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsPrecisionRequired
-        {
-            get
-            {
-                if (this.IsDecimal)
-                {
-                    return true;
-                }
-
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether this instance requires a scale.
-        /// </summary>
-        /// <value>
-        ///  <c>true</c> if this instance requires a scale; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsScaleRequired
-        {
-            get
-            {
-                if (this.IsDecimal)
-                {
-                    return true;
-                }
-
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether this instance requires a size.
-        /// </summary>
-        /// <value>
-        ///  <c>true</c> if this instance requires a size; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsSizeRequired
-        {
-            get
-            {
-                if (this.IsString || this.IsBinary)
-                {
-                    return true;
-                }
-
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether this instance is a string.
-        /// </summary>
-        /// <value><c>true</c> if this instance is a string; otherwise, <c>false</c>.</value>
-        public bool IsString
-        {
-            get { return this.Id.Equals(UnitIds.StringId); }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether this instance is a unique.
-        /// </summary>
-        /// <value><c>true</c> if this instance is a unique; otherwise, <c>false</c>.</value>
-        public bool IsUnique
-        {
-            get { return this.Id.Equals(UnitIds.Unique); }
         }
 
         /// <summary>
@@ -748,24 +591,6 @@ namespace Allors.Meta
         internal void DeriveConcreteClassesCache()
         {
             this.concreteClassesCache = new HashSet<ObjectType>(this.ConcreteClasses);
-        }
-
-        /// <summary>
-        /// Derive direct super interface.
-        /// </summary>
-        /// <param name="directSuperinterfaces">The direct super interfaces.</param>
-        internal void DeriveDirectSuperinterface(HashSet<ObjectType> directSuperinterfaces)
-        {
-            directSuperinterfaces.Clear();
-            foreach (var directSupertype in this.DerivedDirectSupertypes)
-            {
-                if (directSupertype is Interface)
-                {
-                    directSuperinterfaces.Add(directSupertype);
-                }
-            }
-
-            this.DerivedDirectSuperinterfaces = new List<ObjectType>(directSuperinterfaces);
         }
 
         /// <summary>

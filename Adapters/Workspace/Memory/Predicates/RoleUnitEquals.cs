@@ -41,7 +41,8 @@ namespace Allors.Adapters.Workspace.Memory
             this.roleType = roleType;
             if (equals is Enum)
             {
-                if (roleType.ObjectType.IsInteger)
+                var unitType = roleType.ObjectType as UnitType;
+                if (unitType != null && unitType.IsInteger)
                 {
                     this.equals = (int)equals;
                 }

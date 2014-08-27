@@ -85,7 +85,8 @@ namespace Allors.Adapters.Database.Npgsql
             foreach (var relationType in database.ObjectFactory.Domain.RelationTypes)
             {
                 var roleType = relationType.RoleType;
-                if (roleType.ObjectType.IsDecimal)
+                var unitType = roleType.ObjectType as UnitType;
+                if (unitType != null && unitType.IsDecimal)
                 {
                     var precision = roleType.Precision;
                     var scale = roleType.Scale;

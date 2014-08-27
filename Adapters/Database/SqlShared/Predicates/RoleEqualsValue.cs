@@ -36,7 +36,8 @@ namespace Allors.Adapters.Database.Sql
             this.roleType = roleType;
             if (obj is Enum)
             {
-                if (roleType.ObjectType.IsInteger)
+                var unitType = roleType.ObjectType as UnitType;
+                if (unitType != null && unitType.IsInteger)
                 {
                     this.obj = (int)obj;
                 }

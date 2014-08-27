@@ -41,11 +41,11 @@ namespace Allors.Meta
 
         public List<Class> Classes = new List<Class>();
 
+        public List<Inheritance> Inheritances = new List<Inheritance>();
+
         public List<RelationType> RelationTypes = new List<RelationType>();
         
         public List<MethodType> MethodTypes = new List<MethodType>();
-        
-        public List<Inheritance> Inheritances = new List<Inheritance>();
         
         public List<ObjectType> DerivedCompositeTypes = new List<ObjectType>();
         
@@ -55,16 +55,6 @@ namespace Allors.Meta
         /// The default plural form.
         /// </summary>
         private const string DefaultPluralForm = "s";
-
-        /// <summary>
-        /// The name of the Allors Unit Domain.
-        /// </summary>
-        private const string AllorsUnitDomainName = "AllorsUnit";
-
-        /// <summary>
-        /// The id of the Allors Domain.
-        /// </summary>
-        private static readonly Guid AllorsUnitDomainId = new Guid("2d337e3a-5e9e-4705-b327-c14bd279d322");
 
         /// <summary>
         /// Gets the composite types.
@@ -98,18 +88,7 @@ namespace Allors.Meta
                 return concreteCompositeTypeList.ToArray();
             }
         }
-
-        /// <summary>
-        /// Gets a value indicating whether this instance is the allors unit domain.
-        /// </summary>
-        /// <value>
-        ///  <c>true</c> if this instance is the allors unit domain; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsAllorsUnitDomain
-        {
-            get { return AllorsUnitDomainId.Equals(this.Id); }
-        }
-      
+     
         /// <summary>
         /// Gets a value indicating whether this instance is valid.
         /// </summary>
@@ -133,10 +112,6 @@ namespace Allors.Meta
 
                 return "unknown domain";
             }
-        }
-
-        public Domain() : this(Guid.NewGuid())
-        {
         }
 
         public Domain(Guid id)
@@ -272,12 +247,6 @@ namespace Allors.Meta
             foreach (var type in this.DerivedCompositeTypes)
             {
                 type.DeriveSubtypes(sharedList);
-            }
-
-            // DirectSuperinterfaces
-            foreach (var type in this.DerivedCompositeTypes)
-            {
-                type.DeriveDirectSuperinterface(sharedList);
             }
 
             // Superclasses
@@ -417,8 +386,7 @@ namespace Allors.Meta
             this.Interfaces.Add(@interface);
             this.MetaObjectById[@interface.Id] = @interface;
         }
-
-
+        
         internal void OnClassCreated(Class @class)
         {
             this.Classes.Add(@class);
@@ -492,16 +460,11 @@ namespace Allors.Meta
         /// </summary>
         private void AddAllorsUnitPopulation()
         {
-            this.Name = AllorsUnitDomainName;
-
-            var allorsUnitTypes = new ArrayList();
-
             {
                 var objectType = new UnitType(this, UnitIds.StringId);
                 objectType.SingularName = UnitTags.AllorsString.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
                 objectType.UnitTag = (int)UnitTags.AllorsString;
-                allorsUnitTypes.Add(objectType);
             }
 
             {
@@ -509,7 +472,6 @@ namespace Allors.Meta
                 objectType.SingularName = UnitTags.AllorsInteger.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
                 objectType.UnitTag = (int)UnitTags.AllorsInteger;
-                allorsUnitTypes.Add(objectType);
             }
 
             {
@@ -517,7 +479,6 @@ namespace Allors.Meta
                 objectType.SingularName = UnitTags.AllorsLong.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
                 objectType.UnitTag = (int)UnitTags.AllorsLong;
-                allorsUnitTypes.Add(objectType);
             }
 
             {
@@ -525,7 +486,6 @@ namespace Allors.Meta
                 objectType.SingularName = UnitTags.AllorsDecimal.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
                 objectType.UnitTag = (int)UnitTags.AllorsDecimal;
-                allorsUnitTypes.Add(objectType);
             }
 
             {
@@ -533,7 +493,6 @@ namespace Allors.Meta
                 objectType.SingularName = UnitTags.AllorsDouble.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
                 objectType.UnitTag = (int)UnitTags.AllorsDouble;
-                allorsUnitTypes.Add(objectType);
             }
 
             {
@@ -541,7 +500,6 @@ namespace Allors.Meta
                 objectType.SingularName = UnitTags.AllorsBoolean.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
                 objectType.UnitTag = (int)UnitTags.AllorsBoolean;
-                allorsUnitTypes.Add(objectType);
             }
 
             {
@@ -549,7 +507,6 @@ namespace Allors.Meta
                 objectType.SingularName = UnitTags.AllorsDateTime.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
                 objectType.UnitTag = (int)UnitTags.AllorsDateTime;
-                allorsUnitTypes.Add(objectType);
             }
 
             {
@@ -557,7 +514,6 @@ namespace Allors.Meta
                 objectType.SingularName = UnitTags.AllorsUnique.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
                 objectType.UnitTag = (int)UnitTags.AllorsUnique;
-                allorsUnitTypes.Add(objectType);
             }
 
             {
@@ -565,7 +521,6 @@ namespace Allors.Meta
                 objectType.SingularName = UnitTags.AllorsBinary.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
                 objectType.UnitTag = (int)UnitTags.AllorsBinary;
-                allorsUnitTypes.Add(objectType);
             }
         }
     }

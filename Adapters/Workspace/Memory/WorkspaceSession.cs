@@ -2814,7 +2814,8 @@ namespace Allors.Adapters.Workspace.Memory
                     return false;
                 }
 
-                if (roleType.ObjectType.IsBinary)
+                var unitType = roleType.ObjectType as UnitType;
+                if (unitType != null && unitType.IsBinary)
                 {
                     var binary1 = (byte[])role1;
                     var binary2 = (byte[])role2;

@@ -94,7 +94,8 @@ namespace Allors.Adapters.Database.SqlClient
             foreach (var relationType in database.Domain.RelationTypes)
             {
                 var roleType = relationType.RoleType;
-                if (roleType.ObjectType.IsDecimal)
+                var unitType = roleType.ObjectType as UnitType;
+                if (unitType != null && unitType.IsDecimal)
                 {
                     var precision = roleType.Precision;
                     var scale = roleType.Scale;
