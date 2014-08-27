@@ -289,12 +289,6 @@ namespace Allors.Meta
                 type.DeriveAssociationTypes(sharedAssociationTypeList);
             }
 
-            // Exclusive AssociationTypes
-            foreach (var type in this.DerivedCompositeTypes)
-            {
-                type.DeriveExclusiveAssociationTypes(sharedAssociationTypeList);
-            }
-
             // Association & RoleType
             foreach (var relationType in this.RelationTypes)
             {

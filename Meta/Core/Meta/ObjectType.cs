@@ -57,9 +57,7 @@ namespace Allors.Meta
         public List<RoleType> DerivedRoleTypes = new List<RoleType>();
 
         public List<AssociationType> DerivedAssociationTypes = new List<AssociationType>();
-
-        public List<AssociationType> DerivedExclusiveAssociationTypes = new List<AssociationType>();
-        
+       
         public List<MethodType> DerivedMethodTypes = new List<MethodType>();
 
         
@@ -101,18 +99,6 @@ namespace Allors.Meta
             get
             {
                 return this.DerivedAssociationTypes;
-            }
-        }
-
-        /// <summary>
-        /// Gets the exclusive associations.
-        /// </summary>
-        /// <value>The exclusive associations.</value>
-        public IList<AssociationType> ExclusiveAssociationTypes
-        {
-            get
-            {
-                return this.DerivedExclusiveAssociationTypes;
             }
         }
 
@@ -465,30 +451,6 @@ namespace Allors.Meta
             }
 
             this.DerivedDirectSubtypes = new List<ObjectType>(directSubtypes);
-        }
-
-        /// <summary>
-        /// Derive exclusive association types.
-        /// </summary>
-        /// <param name="exclusiveAssociationTypes">The exclusive association types.</param>
-        internal void DeriveExclusiveAssociationTypes(HashSet<AssociationType> exclusiveAssociationTypes)
-        {
-            exclusiveAssociationTypes.Clear();
-            foreach (var relationType in this.Domain.RelationTypes.Where(rel => this.Equals(rel.RoleType.ObjectType)))
-            {
-                exclusiveAssociationTypes.Add(relationType.AssociationType);
-            }
-
-            foreach (var superType in this.Supertypes)
-            {
-                var type = superType;
-                foreach (var relationType in this.Domain.RelationTypes.Where(rel => type.Equals(rel.RoleType.ObjectType)))
-                {
-                    exclusiveAssociationTypes.Add(relationType.AssociationType);
-                }
-            }
-
-            this.DerivedExclusiveAssociationTypes = new List<AssociationType>(exclusiveAssociationTypes);
         }
 
         /// <summary>

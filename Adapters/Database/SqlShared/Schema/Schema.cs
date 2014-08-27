@@ -413,7 +413,7 @@ namespace Allors.Adapters.Database.Sql
                             }
                         }
 
-                        foreach (var associationType in subClass.ExclusiveAssociationTypes)
+                        foreach (var associationType in subClass.AssociationTypes)
                         {
                             if (!associationTypes.Contains(associationType))
                             {
