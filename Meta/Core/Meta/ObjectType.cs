@@ -51,7 +51,7 @@ namespace Allors.Meta
 
         public List<ObjectType> DerivedRootClasses = new List<ObjectType>();
 
-        public ObjectType DerivedExclusiveConcreteLeafClass;
+        public ObjectType DerivedExclusiveRootClass;
 
 
         public List<RoleType> DerivedRoleTypes = new List<RoleType>();
@@ -68,11 +68,11 @@ namespace Allors.Meta
         
         public List<MethodType> DerivedMethodTypes = new List<MethodType>();
 
-
-
+        
         // Domain -> ObjectType
         public Domain Domain { get; private set; }
 
+        
         /// <summary>
         /// An empty array of object types.
         /// </summary>
@@ -112,49 +112,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Gets the composite roles.
-        /// </summary>
-        /// <value>The composite roles.</value>
-        public IList<RoleType> CompositeRoleTypes
-        {
-            get
-            {
-                return this.DerivedCompositeRoleTypes;
-            }
-        }
-
-        /// <summary>
-        /// Gets the concrete sub classes or
-        /// self if this is a concrete class.
-        /// </summary>
-        /// <value>The concrete classes.</value>
-        public IList<ObjectType> ConcreteClasses
-        {
-            get
-            {
-                if (this is Class)
-                {
-                    ObjectType[] selfArray = { this };
-                    return selfArray;
-                }
-
-                return this.Subclasses.Count == 0 ? EmptyArray : this.Subclasses;
-            }
-        }
-
-        /// <summary>
-        /// Gets the direct super types.
-        /// </summary>
-        /// <value>The direct super types.</value>
-        public IList<ObjectType> DirectSupertypes
-        {
-            get
-            {
-                return this.DerivedDirectSupertypes;
-            }
-        }
-
-        /// <summary>
         /// Gets the exclusive associations.
         /// </summary>
         /// <value>The exclusive associations.</value>
@@ -170,11 +127,11 @@ namespace Allors.Meta
         /// Gets the exclusive concrete subclass.
         /// </summary>
         /// <value>The exclusive concrete subclass.</value>
-        public ObjectType ExclusiveConcreteSubclass
+        public ObjectType ExclusiveRootclass
         {
             get
             {
-                return this.DerivedExclusiveConcreteLeafClass;
+                return this.DerivedExclusiveRootClass;
             }
         }
 
@@ -374,30 +331,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Determines whether this instance contains the specified association.
-        /// </summary>
-        /// <param name="association">The association.</param>
-        /// <returns>
-        ///  <c>true</c> if this instance contains the specified association; otherwise, <c>false</c>.
-        /// </returns>
-        public bool ContainsAssociationType(AssociationType association)
-        {
-            return this.associationIdsCache.ContainsKey(association.RelationType.Id);
-        }
-
-        /// <summary>
-        /// Determines whether this instance contains the specified role.
-        /// </summary>
-        /// <param name="role">The role .</param>
-        /// <returns>
-        ///  <c>true</c> if this instance contains the specified role; otherwise, <c>false</c>.
-        /// </returns>
-        public bool ContainsRoleType(RoleType role)
-        {
-            return this.roleIdsCache.ContainsKey(role.RelationType.Id);
-        }
-
-        /// <summary>
         /// Contains this concrete class.
         /// </summary>
         /// <param name="objectType">
@@ -438,18 +371,6 @@ namespace Allors.Meta
             return false;
         }
         
-        /// <summary>
-        /// Sets the direct super interfaces.
-        /// </summary>
-        /// <param name="superInterfaces">The super interfaces.</param>
-        public void SetDirectSuperinterfaces(ObjectType[] superInterfaces)
-        {
-            foreach (var superType in superInterfaces)
-            {
-                this.AddDirectSupertype(superType);
-            }
-        }
-
         /// <summary>
         /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
         /// </summary>
@@ -563,7 +484,7 @@ namespace Allors.Meta
         /// </summary>
         internal void DeriveConcreteClassesCache()
         {
-            this.concreteClassesCache = new HashSet<ObjectType>(this.ConcreteClasses);
+            this.concreteClassesCache = new HashSet<ObjectType>(this.DerivedRootClasses);
         }
 
         /// <summary>
@@ -628,7 +549,7 @@ namespace Allors.Meta
         {
             concreteLeafClasses.Clear();
 
-            this.DerivedExclusiveConcreteLeafClass = null;
+            this.DerivedExclusiveRootClass = null;
             if (!(this is Interface) && this.DerivedSubclasses.Count == 0)
             {
                 concreteLeafClasses.Add(this);
@@ -653,7 +574,7 @@ namespace Allors.Meta
                 var concreteLeafClassArray = new ObjectType[concreteLeafClasses.Count];
                 concreteLeafClasses.CopyTo(concreteLeafClassArray);
 
-                this.DerivedExclusiveConcreteLeafClass = concreteLeafClassArray[0];
+                this.DerivedExclusiveRootClass = concreteLeafClassArray[0];
             }
         }
 
@@ -779,7 +700,7 @@ namespace Allors.Meta
         /// <summary>
         /// Derive sub types.
         /// </summary>
-        /// <param name="superTypes">The super types.</param>
+        /// <param name="subTypes">The super types.</param>
         internal void DeriveSubtypes(HashSet<ObjectType> subTypes)
         {
             subTypes.Clear();
@@ -896,29 +817,6 @@ namespace Allors.Meta
             {
                 validationLog.AddError(this.ValidationName + " has no plural name", this, ValidationKind.Required, "ObjectType.PluralName");
             }
-        }
-
-        /// <summary>
-        /// Determines whether this instance is implemented by any of the specified object types.
-        /// </summary>
-        /// <param name="objectTypes">The object types.</param>
-        /// <returns>
-        ///  <c>true</c> if this instance is implemented by any of the specified object types; otherwise, <c>false</c>.
-        /// </returns>
-        private bool IsImplementedByAnyOf(IEnumerable<ObjectType> objectTypes)
-        {
-            foreach (var domainType in objectTypes)
-            {
-                foreach (var superType in domainType.DerivedSupertypes)
-                {
-                    if (this.Equals(superType))
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
         }
 
         /// <summary>

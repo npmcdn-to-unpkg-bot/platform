@@ -129,7 +129,7 @@ namespace Allors.Adapters.Database.Sql
             {
                 var associationType = relation.AssociationType;
 
-                if (associationType.ObjectType.ConcreteClasses.Count > 0)
+                if (associationType.ObjectType.DerivedRootClasses.Count > 0)
                 {
                     var roleType = relation.RoleType;
                 
@@ -140,7 +140,7 @@ namespace Allors.Adapters.Database.Sql
                         if (!exclusiverRootClassesByObjectType.TryGetValue(associationType.ObjectType, out exclusiveRootClasses))
                         {
                             exclusiveRootClasses = new HashSet<ObjectType>();
-                            foreach (var concreteClass in associationType.ObjectType.ConcreteClasses)
+                            foreach (var concreteClass in associationType.ObjectType.DerivedRootClasses)
                             {
                                 exclusiveRootClasses.Add(concreteClass.ExclusiveRootClass);
                             }
