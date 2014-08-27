@@ -270,7 +270,7 @@ namespace Allors.Meta
             // Derive concrete classes
             foreach (var type in this.DerivedCompositeTypes)
             {
-                type.DeriveConcreteClassesCache();
+                type.DeriveRootClassesCache();
             }
 
             var sharedRoleTypeList = new HashSet<RoleType>();
@@ -281,18 +281,6 @@ namespace Allors.Meta
             foreach (var type in this.DerivedCompositeTypes)
             {
                 type.DeriveRoleTypes(sharedRoleTypeList);
-            }
-
-            // Unit RoleTypes
-            foreach (var type in this.DerivedCompositeTypes)
-            {
-                type.DeriveUnitRoleTypes(sharedRoleTypeList);
-            }
-
-            // Composite RoleTypes
-            foreach (var type in this.DerivedCompositeTypes)
-            {
-                type.DeriveCompositeRoleTypes(sharedRoleTypeList);
             }
 
             // Exclusive RoleTypes

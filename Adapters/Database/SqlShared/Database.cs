@@ -25,6 +25,7 @@ namespace Allors.Adapters.Database.Sql
     using System.Configuration;
     using System.Data;
     using System.Data.Common;
+    using System.Linq;
     using System.Text;
     using System.Xml;
 
@@ -332,7 +333,7 @@ namespace Allors.Adapters.Database.Sql
             RoleType[] sortedUnitRoles;
             if (!this.sortedUnitRolesByObjectType.TryGetValue(objectType, out sortedUnitRoles))
             {
-                var sortedUnitRoleList = new List<RoleType>(objectType.UnitRoleTypes);
+                var sortedUnitRoleList = new List<RoleType>(objectType.RoleTypes.Where(roleType => roleType.ObjectType is UnitType));
                 sortedUnitRoleList.Sort(RoleType.IdComparer);
                 sortedUnitRoles = sortedUnitRoleList.ToArray();
                 this.sortedUnitRolesByObjectType[objectType] = sortedUnitRoles;

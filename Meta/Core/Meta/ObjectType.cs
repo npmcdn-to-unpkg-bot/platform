@@ -56,10 +56,6 @@ namespace Allors.Meta
 
         public List<RoleType> DerivedRoleTypes = new List<RoleType>();
 
-        public List<RoleType> DerivedUnitRoleTypes = new List<RoleType>();
-
-        public List<RoleType> DerivedCompositeRoleTypes = new List<RoleType>();
-
         public List<RoleType> DerivedExclusiveRoleTypes = new List<RoleType>();
 
         public List<AssociationType> DerivedAssociationTypes = new List<AssociationType>();
@@ -71,7 +67,6 @@ namespace Allors.Meta
         
         // Domain -> ObjectType
         public Domain Domain { get; private set; }
-
         
         /// <summary>
         /// An empty array of object types.
@@ -91,7 +86,7 @@ namespace Allors.Meta
         /// <summary>
         /// A cache for the ids of the <see cref="RoleTypes"/>.
         /// </summary>
-        private HashSet<ObjectType> concreteClassesCache;
+        private HashSet<ObjectType> rootClassesCache;
 
         public ObjectType(Domain domain, Guid objectTypeId)
         {
@@ -249,18 +244,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Gets the unit roles.
-        /// </summary>
-        /// <value>The unit roles.</value>
-        public IList<RoleType> UnitRoleTypes
-        {
-            get
-            {
-                return this.DerivedUnitRoleTypes;
-            }
-        }
-
-        /// <summary>
         /// Gets the validation name.
         /// </summary>
         /// <value>The validation name.</value>
@@ -341,7 +324,7 @@ namespace Allors.Meta
         /// </returns>
         public bool ContainsConcreteClass(ObjectType objectType)
         {
-            return this.concreteClassesCache.Contains(objectType);
+            return this.rootClassesCache.Contains(objectType);
         }
         
         /// <summary>
@@ -437,25 +420,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Derive composite role types.
-        /// </summary>
-        /// <param name="roles">The roles.</param>
-        internal void DeriveCompositeRoleTypes(HashSet<RoleType> roles)
-        {
-            roles.Clear();
-            foreach (var role in this.DerivedRoleTypes)
-            {
-                // TODO: Test
-                if (role.ObjectType is CompositeType)
-                {
-                    roles.Add(role);
-                }
-            }
-
-            this.DerivedCompositeRoleTypes = new List<RoleType>(roles);
-        }
-
-        /// <summary>
         /// Derive association ids cache.
         /// </summary>
         internal void DeriveAssociationIdsCache()
@@ -482,9 +446,9 @@ namespace Allors.Meta
         /// <summary>
         /// Derive concrete classes cache.
         /// </summary>
-        internal void DeriveConcreteClassesCache()
+        internal void DeriveRootClassesCache()
         {
-            this.concreteClassesCache = new HashSet<ObjectType>(this.DerivedRootClasses);
+            this.rootClassesCache = new HashSet<ObjectType>(this.DerivedRootClasses);
         }
 
         /// <summary>
@@ -707,25 +671,6 @@ namespace Allors.Meta
             this.DeriveSubtypesRecursively(this, subTypes);
 
             this.DerivedSubtypes = new List<ObjectType>(subTypes);
-        }
-     
-        /// <summary>
-        /// Derive unit role types.
-        /// </summary>
-        /// <param name="roles">The roles.</param>
-        internal void DeriveUnitRoleTypes(HashSet<RoleType> roles)
-        {
-            roles.Clear();
-            foreach (var role in this.DerivedRoleTypes)
-            {
-                // TODO: Test
-                if (role.ObjectType is UnitType)
-                {
-                    roles.Add(role);
-                }
-            }
-
-            this.DerivedUnitRoleTypes = new List<RoleType>(roles);
         }
 
         /// <summary>
