@@ -24,7 +24,7 @@ namespace Allors.Adapters.Database.Sql.Commands
 
     public interface ICreateObject
     {
-        Reference Execute(ObjectType objectType);
+        Reference Execute(Class objectType);
     }
 
     public interface ICreateObjectFactory

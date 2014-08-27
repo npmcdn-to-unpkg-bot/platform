@@ -2,7 +2,7 @@ namespace Domain
 {
 	public class S1234Meta
 	{
-		public static readonly global::Allors.Meta.ObjectType ObjectType = (Allors.Meta.ObjectType)global::Domain.M.D.Find( new System.Guid("c3c0ecf3-9f8d-4701-854f-8ddea1bd69fd") );
+		public static readonly global::Allors.Meta.Interface ObjectType = (Allors.Meta.Interface)global::Domain.M.D.Find( new System.Guid("c3c0ecf3-9f8d-4701-854f-8ddea1bd69fd") );
 
 		public static readonly global::Allors.Meta.RoleType S1234AllorsDouble = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("012a43d3-e1e0-4693-a771-1526c29b7ac4"))).RoleType;
 		public static readonly global::Allors.Meta.RoleType S1234AllorsDecimal = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("2ac36edd-d718-4252-b7cf-74849e1fca6e"))).RoleType;

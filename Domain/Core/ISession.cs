@@ -102,7 +102,7 @@ namespace Allors
         /// </summary>
         /// <param name="objectType">The objectType.</param>
         /// <returns>The extent.</returns>
-        Extent Extent(ObjectType objectType);
+        Extent Extent(CompositeType objectType);
 
         /// <summary>
         /// Creates an Extent that is the exception of its two operands.
@@ -153,7 +153,7 @@ namespace Allors
         /// </summary>
         /// <param name="objectType">The ObjectType.</param>
         /// <returns>a new <see cref="IObject"/></returns>
-        IObject Create(ObjectType objectType);
+        IObject Create(Class objectType);
 
         /// <summary>
         /// Creates a specified amount of AllorsObjects.
@@ -161,7 +161,7 @@ namespace Allors
         /// <param name="objectType">The ObjectType.</param>
         /// <param name="count">The count.</param>
         /// <returns>The created objects.</returns>
-        IObject[] Create(ObjectType objectType, int count);
+        IObject[] Create(Class objectType, int count);
 
         /// <summary>
         /// Instantiates an Allors Object.

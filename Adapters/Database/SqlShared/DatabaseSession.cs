@@ -136,7 +136,7 @@ namespace Allors.Adapters.Database.Sql
             get { return this.SqlDatabase.Schema; }
         }
 
-        public virtual IObject Create(ObjectType objectType)
+        public virtual IObject Create(Class objectType)
         {
             if (!(objectType is Class))
             {
@@ -153,7 +153,8 @@ namespace Allors.Adapters.Database.Sql
             return strategyReference.Strategy.GetObject();
         }
 
-        public virtual IObject[] Create(ObjectType objectType, int count)
+
+        public virtual IObject[] Create(Class objectType, int count)
         {
             if (!(objectType is Class))
             {
@@ -178,7 +179,7 @@ namespace Allors.Adapters.Database.Sql
             return domainObjects;
         }
 
-        public virtual IObject Insert(ObjectType domainType, string objectIdString)
+        public virtual IObject Insert(Class domainType, string objectIdString)
         {
             var objectId = this.SqlDatabase.AllorsObjectIds.Parse(objectIdString);
             var insertedObject = this.Insert(domainType, objectId);
@@ -188,7 +189,7 @@ namespace Allors.Adapters.Database.Sql
             return insertedObject;
         }
 
-        public virtual IObject Insert(ObjectType domainType, ObjectId objectId)
+        public virtual IObject Insert(Class domainType, ObjectId objectId)
         {
             if (this.referenceByObjectId.ContainsKey(objectId))
             {
@@ -330,10 +331,17 @@ namespace Allors.Adapters.Database.Sql
 
         public virtual Extent<T> Extent<T>() where T : IObject
         {
-            return this.Extent(this.SqlDatabase.ObjectFactory.GetObjectTypeForType(typeof(T)));
+            var compositeType = this.SqlDatabase.ObjectFactory.GetObjectTypeForType(typeof(T)) as CompositeType;
+
+            if (compositeType == null)
+            {
+                throw new Exception("type should be a CompositeType");
+            }
+
+            return this.Extent(compositeType);
         }
         
-        public virtual Allors.Extent Extent(ObjectType type)
+        public virtual Allors.Extent Extent(CompositeType type)
         {
             return new ExtentFiltered(this, type);
         }
@@ -479,7 +487,13 @@ namespace Allors.Adapters.Database.Sql
         public virtual T Create<T>() where T : IObject
         {
             var objectType = this.SqlDatabase.ObjectFactory.GetObjectTypeForType(typeof(T));
-            return (T)this.Create(objectType);
+            var @class = objectType as Class;
+            if (@class == null)
+            {
+                throw new Exception("ObjectType is not a Class");
+            }
+
+            return (T)this.Create(@class);
         }
         
         public virtual Reference GetAssociation(Strategy roleStrategy, AssociationType associationType)
@@ -563,7 +577,13 @@ namespace Allors.Adapters.Database.Sql
                     this.SqlDatabase.Cache.SetObjectType(objectId, objectType);
                 }
 
-                association = this.CreateReference(objectType, objectId, false);
+                var @class = objectType as Class;
+                if (@class == null)
+                {
+                    throw new Exception("ObjectType should be a class");
+                }
+
+                association = this.CreateReference(@class, objectId, false);
                 this.referenceByObjectId[objectId] = association;
                 this.referencesWithoutCacheId.Add(association);
             }
@@ -571,7 +591,7 @@ namespace Allors.Adapters.Database.Sql
             return association;
         }
 
-        public virtual Reference GetOrCreateAssociationForExistingObject(ObjectType objectType, ObjectId objectId)
+        public virtual Reference GetOrCreateAssociationForExistingObject(Class objectType, ObjectId objectId)
         {
             Reference association;
             if (!this.referenceByObjectId.TryGetValue(objectId, out association))
@@ -584,7 +604,7 @@ namespace Allors.Adapters.Database.Sql
             return association;
         }
 
-        public virtual Reference GetOrCreateAssociationForExistingObject(ObjectType objectType, ObjectId objectId, int cacheId)
+        public virtual Reference GetOrCreateAssociationForExistingObject(Class objectType, ObjectId objectId, int cacheId)
         {
             Reference association;
             if (!this.referenceByObjectId.TryGetValue(objectId, out association))
@@ -596,7 +616,7 @@ namespace Allors.Adapters.Database.Sql
             return association;
         }
 
-        public virtual Reference CreateAssociationForNewObject(ObjectType objectType, ObjectId objectId)
+        public virtual Reference CreateAssociationForNewObject(Class objectType, ObjectId objectId)
         {
             var strategyReference = this.CreateReference(objectType, objectId, true);
             this.referenceByObjectId[objectId] = strategyReference;
@@ -721,12 +741,12 @@ namespace Allors.Adapters.Database.Sql
 
         protected abstract void SqlRollback();
 
-        protected virtual Reference CreateReference(ObjectType objectType, ObjectId objectId, bool isNew)
+        protected virtual Reference CreateReference(Class objectType, ObjectId objectId, bool isNew)
         {
             return new Reference(this, objectType, objectId, isNew);
         }
 
-        protected virtual Reference CreateReference(ObjectType objectType, ObjectId objectId, int cacheId)
+        protected virtual Reference CreateReference(Class objectType, ObjectId objectId, int cacheId)
         {
             return new Reference(this, objectType, objectId, cacheId);
         }

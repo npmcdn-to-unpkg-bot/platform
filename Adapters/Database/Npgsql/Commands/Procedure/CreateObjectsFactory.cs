@@ -59,7 +59,7 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
                 this.commandByObjectType = new Dictionary<ObjectType, NpgsqlCommand>();
             }
 
-            public IList<Reference> Execute(ObjectType objectType, int count)
+            public IList<Reference> Execute(Class objectType, int count)
             {
                 ObjectType exclusiveRootClass = objectType.ExclusiveRootClass;
                 Sql.Schema schema = this.Database.Schema;

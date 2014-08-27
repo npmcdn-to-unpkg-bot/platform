@@ -31,7 +31,7 @@ namespace Allors.Adapters.Database.Memory
     public sealed class Strategy : IStrategy
     {
         private readonly Session session;
-        private readonly ObjectType objectType;
+        private readonly Class objectType;
 
         private readonly Dictionary<RoleType, object> unitRoleByRoleType;
         private readonly Dictionary<RoleType, Strategy> compositeRoleByRoleType;
@@ -52,7 +52,7 @@ namespace Allors.Adapters.Database.Memory
 
         private WeakReference allorizedObjectWeakReference;
 
-        internal Strategy(Session session, ObjectType objectType, ObjectId objectId)
+        internal Strategy(Session session, Class objectType, ObjectId objectId)
         {
             this.session = session;
             this.objectType = objectType;
@@ -98,7 +98,7 @@ namespace Allors.Adapters.Database.Memory
 
         public ObjectId ObjectId { get; internal set; }
 
-        public ObjectType ObjectType
+        public Class ObjectType
         {
             get { return this.objectType; }
         }

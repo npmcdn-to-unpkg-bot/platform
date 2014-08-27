@@ -116,7 +116,7 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
 
                     if (associationType.ObjectType.RootClasses.Count == 1 && associationType.ObjectType.ExclusiveRootClass.DerivedExclusiveRootClass != null)
                     {
-                        associationObject = this.Session.GetOrCreateAssociationForExistingObject(associationType.ObjectType.ExclusiveRootClass.ExclusiveRootclass, id);
+                        associationObject = this.Session.GetOrCreateAssociationForExistingObject(associationType.ObjectType.ExclusiveRootClass.ExclusiveRootClass, id);
                     }
                     else
                     {

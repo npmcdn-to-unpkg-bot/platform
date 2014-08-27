@@ -402,7 +402,7 @@ namespace Allors.Adapters.Database.Sql
                     var roleTypes = new List<RoleType>();
                     var associationTypes = new List<AssociationType>();
 
-                    var subClassesAndSelf = new List<ObjectType>(objectType.Subclasses) { objectType };
+                    var subClassesAndSelf = new List<Class>(objectType.Subclasses) { (Class)objectType };
 
                     foreach (var subClass in subClassesAndSelf)
                     {

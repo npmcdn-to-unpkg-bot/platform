@@ -747,7 +747,7 @@ namespace Allors.Adapters.Special
             session.Commit();
         }
 
-        private IObject[] GetExtent(ISession session, ObjectType objectType)
+        private IObject[] GetExtent(ISession session, CompositeType objectType)
         {
             var workspaceSession = session as IWorkspaceSession;
 

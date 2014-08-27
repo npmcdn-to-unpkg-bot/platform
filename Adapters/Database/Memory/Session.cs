@@ -246,10 +246,17 @@ namespace Allors.Adapters.Database.Memory
         public T Create<T>() where T : IObject
         {
             var objectType = this.database.ObjectFactory.GetObjectTypeForType(typeof(T));
-            return (T)this.Create(objectType);
+            
+            var @class = objectType as Class;
+            if (@class == null)
+            {
+                throw new Exception("ObjectType should be a class");
+            }
+            
+            return (T)this.Create(@class);
         }
 
-        public IObject[] Create(ObjectType objectType, int count)
+        public IObject[] Create(Class objectType, int count)
         {
             var arrayType = this.database.ObjectFactory.GetTypeForObjectType(objectType);
             var allorsObjects = (IObject[])Array.CreateInstance(arrayType, count);
@@ -261,13 +268,13 @@ namespace Allors.Adapters.Database.Memory
             return allorsObjects;
         }
 
-        public IObject Insert(ObjectType objectType, string objectId)
+        public IObject Insert(Class objectType, string objectId)
         {
             var id = this.ObjectIds.Parse(objectId);
             return this.Insert(objectType, id);
         }
 
-        public IObject Insert(ObjectType objectType, ObjectId objectId)
+        public IObject Insert(Class objectType, ObjectId objectId)
         {
             var strategy = this.InsertStrategy(objectType, objectId);
             return strategy.GetObject();
@@ -352,10 +359,17 @@ namespace Allors.Adapters.Database.Memory
 
         public Extent<T> Extent<T>() where T : IObject
         {
-            return this.Extent(this.database.ObjectFactory.GetObjectTypeForType(typeof(T)));
+            var compositeType = this.database.ObjectFactory.GetObjectTypeForType(typeof(T)) as CompositeType;
+
+            if (compositeType == null)
+            {
+                throw new Exception("type should be a CompositeType");
+            }
+
+            return this.Extent(compositeType);
         }
-        
-        public virtual Allors.Extent Extent(ObjectType objectType)
+
+        public virtual Allors.Extent Extent(CompositeType objectType)
         {
             return new ExtentFiltered(this, objectType);
         }
@@ -386,7 +400,7 @@ namespace Allors.Adapters.Database.Memory
                 ExtentOperationType.Except);
         }
 
-        public virtual IObject Create(ObjectType objectType)
+        public virtual IObject Create(Class objectType)
         {
             if (!(objectType is Class))
             {
@@ -411,7 +425,7 @@ namespace Allors.Adapters.Database.Memory
             return this.database.ObjectFactory.GetTypeForObjectType(objectType);
         }
 
-        internal virtual Strategy InsertStrategy(ObjectType objectType, ObjectId objectId)
+        internal virtual Strategy InsertStrategy(Class objectType, ObjectId objectId)
         {
             var strategy = this.GetStrategy(objectId);
             if (strategy != null)

@@ -159,13 +159,13 @@ namespace Allors.Adapters.Database.Memory
                                 {
                                     var objectId = this.session.ObjectIds.Parse(objectIdString);
 
-                                    if (objectType == null || !(objectType is Class))
+                                    if (objectType is Class)
                                     {
-                                        this.session.MemoryDatabase.OnObjectNotLoaded(objectTypeId, objectId.ToString());
+                                        this.session.InsertStrategy((Class)objectType, objectId);
                                     }
                                     else
                                     {
-                                        this.session.InsertStrategy(objectType, objectId);
+                                        this.session.MemoryDatabase.OnObjectNotLoaded(objectTypeId, objectId.ToString());
                                     }
                                 }
                             }

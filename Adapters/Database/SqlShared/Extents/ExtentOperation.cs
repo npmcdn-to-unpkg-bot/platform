@@ -56,7 +56,7 @@ namespace Allors.Adapters.Database.Sql
             get { return this.first.Session; }
         }
 
-        public override ObjectType ObjectType
+        public override CompositeType ObjectType
         {
             get { return this.first.ObjectType; }
         }

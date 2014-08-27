@@ -25,6 +25,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
 
     using Allors.Adapters.Database.Sql;
     using Allors.Adapters.Database.Sql.Commands;
+    using Allors.Meta;
 
     using Database = Database;
     using DatabaseSession = DatabaseSession;
@@ -82,7 +83,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
                         var cacheId = this.GetCachId(reader, 2);
 
                         var objectId = this.Database.AllorsObjectIds.Parse(objectIdString);
-                        var type = this.Database.ObjectFactory.GetObjectTypeForType(classId);
+                        var type = (Class)this.Database.ObjectFactory.GetObjectTypeForType(classId);
                         strategies.Add(this.Session.GetOrCreateAssociationForExistingObject(type, objectId, cacheId));
                     }
                 }

@@ -26,11 +26,11 @@ namespace Allors.Adapters.Database.Memory
 
     internal sealed class ExtentFiltered : Extent
     {
-        private readonly ObjectType objectType;
+        private readonly CompositeType objectType;
 
         private And filter;
 
-        internal ExtentFiltered(Session session, ObjectType objectType)
+        internal ExtentFiltered(Session session, CompositeType objectType)
             : base(session)
         {
             this.objectType = objectType;
@@ -48,7 +48,7 @@ namespace Allors.Adapters.Database.Memory
             get { return this.filter ?? (this.filter = new And(this)); }
         }
 
-        public override ObjectType ObjectType
+        public override CompositeType ObjectType
         {
             get { return this.objectType; }
         }

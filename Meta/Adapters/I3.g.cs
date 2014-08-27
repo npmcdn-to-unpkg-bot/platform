@@ -2,7 +2,7 @@ namespace Domain
 {
 	public class I3Meta
 	{
-		public static readonly global::Allors.Meta.ObjectType ObjectType = (Allors.Meta.ObjectType)global::Domain.M.D.Find( new System.Guid("2d86277f-3993-4831-a7de-3640166d3d50") );
+		public static readonly global::Allors.Meta.Interface ObjectType = (Allors.Meta.Interface)global::Domain.M.D.Find( new System.Guid("2d86277f-3993-4831-a7de-3640166d3d50") );
 
 		public static readonly global::Allors.Meta.RoleType I3C4many2many = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("00b706bb-681e-44ce-bbf3-c3b01bb11269"))).RoleType;
 		public static readonly global::Allors.Meta.RoleType I3AllorsString = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("25a3bcbf-cd9a-4735-879d-c5415b19cf88"))).RoleType;

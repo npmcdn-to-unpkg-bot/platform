@@ -94,7 +94,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
                 this.commandByObjectType = new Dictionary<ObjectType, SqlCommand>();
             }
 
-            public Reference Execute(ObjectType objectType, ObjectId objectId)
+            public Reference Execute(Class objectType, ObjectId objectId)
             {
                 SqlCommand command;
                 if (!this.commandByObjectType.TryGetValue(objectType, out command))

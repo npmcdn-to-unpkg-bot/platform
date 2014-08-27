@@ -95,7 +95,7 @@ namespace Allors.Adapters.Special
         }
 
         [Test]
-        public void CreateIllegal()
+        public void NextId()
         {
             foreach (var init in this.Inits)
             {
@@ -104,20 +104,6 @@ namespace Allors.Adapters.Special
                 var c1 = this.Session.Create<C1>();
                 var strategy = c1.Strategy;
                 var id = long.Parse(strategy.ObjectId.ToString());
-                var objectCount = this.GetExtent(C1Meta.ObjectType).Length;
-
-                var exceptionThrown = false;
-                try
-                {
-                    this.Session.Create(I1Meta.ObjectType);
-                }
-                catch
-                {
-                    exceptionThrown = true;
-                }
-
-                Assert.IsTrue(exceptionThrown);
-                Assert.AreEqual(objectCount, this.GetExtent(C1Meta.ObjectType).Length);
 
                 long nextId = long.Parse(this.Session.Create<C1>().Strategy.ObjectId.ToString());
 
@@ -173,41 +159,6 @@ namespace Allors.Adapters.Special
 
                     var c2s = (C2[])this.Session.Create(C2Meta.ObjectType, run);
                     Assert.AreEqual(run, c2s.Length);
-                }
-            }
-        }
-
-        [Test]
-        public void CreateManyIllegal()
-        {
-            foreach (var init in this.Inits)
-            {
-                init();
-
-                long id = long.Parse(this.Session.Create<C1>().Strategy.ObjectId.ToString());
-                int objectCount = this.GetExtent(C1Meta.ObjectType).Length;
-
-                var exceptionThrown = false;
-                try
-                {
-                    this.Session.Create(I1Meta.ObjectType, 1);
-                }
-                catch
-                {
-                    exceptionThrown = true;
-                }
-
-                Assert.IsTrue(exceptionThrown);
-                Assert.AreEqual(objectCount, this.GetExtent(C1Meta.ObjectType).Length);
-
-                long nextId = long.Parse(this.Session.Create<C1>().Strategy.ObjectId.ToString());
-                if (this.Session.Population is IWorkspace)
-                {
-                    Assert.AreEqual(id, nextId + 1);
-                }
-                else
-                {
-                    Assert.AreEqual(id, nextId - 1);
                 }
             }
         }
@@ -4375,7 +4326,7 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
             Assert.Fail();
         }
 
-        private IObject[] GetExtent(ObjectType objectType)
+        private IObject[] GetExtent(CompositeType objectType)
         {
             var workspaceSession = this.Session as IWorkspaceSession;
 

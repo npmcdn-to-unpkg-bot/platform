@@ -2,7 +2,7 @@ namespace Domain
 {
 	public class SandboxMeta
 	{
-		public static readonly global::Allors.Meta.ObjectType ObjectType = (Allors.Meta.ObjectType)global::Domain.M.D.Find( new System.Guid("73970b0f-1ff4-4d39-aad8-fdbfbaae472f") );
+		public static readonly global::Allors.Meta.Class ObjectType = (Allors.Meta.Class)global::Domain.M.D.Find( new System.Guid("73970b0f-1ff4-4d39-aad8-fdbfbaae472f") );
 
 		public static readonly global::Allors.Meta.RoleType InvisibleMany = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("0e0ee030-8fb5-42fb-82b5-5daade2aca9d"))).RoleType;
 		public static readonly global::Allors.Meta.RoleType InvisibleOne = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("122b0376-8d1a-4d46-b8a0-9f4ea94c9e96"))).RoleType;

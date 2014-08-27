@@ -33,8 +33,8 @@ namespace Allors.Meta
     public partial class RoleType : PropertyType, IComparable
     {
         public ObjectType ObjectType;
-        
-        public List<ObjectType> DerivedRootClasses = new List<ObjectType>();
+
+        public List<Class> DerivedRootClasses = new List<Class>();
 
         public int? Scale;
 
@@ -234,7 +234,7 @@ namespace Allors.Meta
         /// Gets the root objectTypes.
         /// </summary>
         /// <value>The root objectTypes.</value>
-        public IList<ObjectType> RootClasses
+        public IList<Class> RootClasses
         {
             get
             {
@@ -372,20 +372,20 @@ namespace Allors.Meta
         /// </summary>
         internal void DeriveRootClasses()
         {
-            this.DerivedRootClasses =  new List<ObjectType>();
+            this.DerivedRootClasses =  new List<Class>();
 
             // TODO: Test
             if (this.AssociationType.ObjectType != null)
             {
                 if (this.ObjectType is UnitType)
                 {
-                    this.DerivedRootClasses = new List<ObjectType>(this.AssociationType.ObjectType.RootClasses);
+                    this.DerivedRootClasses = new List<Class>(this.AssociationType.ObjectType.RootClasses);
                 }
                 else
                 {
                     if (!this.RelationType.IsManyToMany && this.RelationType.ExistExclusiveRootClasses && !this.IsMany)
                     {
-                        this.DerivedRootClasses = new List<ObjectType>(this.AssociationType.ObjectType.RootClasses);
+                        this.DerivedRootClasses = new List<Class>(this.AssociationType.ObjectType.RootClasses);
                     }
                 }
             }
@@ -395,7 +395,7 @@ namespace Allors.Meta
         /// Derive hierarchy plural name.
         /// </summary>
         /// <param name="objectTypes">The object Types.</param>
-        internal void DeriveHierarchyPluralName(HashSet<ObjectType> objectTypes)
+        internal void DeriveHierarchyPluralName(HashSet<CompositeType> objectTypes)
         {
             objectTypes.Clear();
             this.DerivedHierarchyPluralName = null;
@@ -451,7 +451,7 @@ namespace Allors.Meta
         /// Derive hierarchy singular name.
         /// </summary>
         /// <param name="objectTypes">The object types.</param>
-        internal void DeriveHierarchySingularName(HashSet<ObjectType> objectTypes)
+        internal void DeriveHierarchySingularName(HashSet<CompositeType> objectTypes)
         {
             objectTypes.Clear();
             this.DerivedHierarchySingularName = null;

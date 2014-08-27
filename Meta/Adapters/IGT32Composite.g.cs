@@ -2,7 +2,7 @@ namespace Domain
 {
 	public class IGT32CompositeMeta
 	{
-		public static readonly global::Allors.Meta.ObjectType ObjectType = (Allors.Meta.ObjectType)global::Domain.M.D.Find( new System.Guid("ee84609f-e165-4037-b8ce-f7c8b826e603") );
+		public static readonly global::Allors.Meta.Interface ObjectType = (Allors.Meta.Interface)global::Domain.M.D.Find( new System.Guid("ee84609f-e165-4037-b8ce-f7c8b826e603") );
 
 		public static readonly global::Allors.Meta.RoleType Self13 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("010bc5d7-9e1e-4ca7-a146-33b73252c4c8"))).RoleType;
 		public static readonly global::Allors.Meta.RoleType Self31 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("02894576-278f-4cbe-9c19-346187f9006f"))).RoleType;

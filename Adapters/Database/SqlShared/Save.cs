@@ -72,7 +72,7 @@ namespace Allors.Adapters.Database.Sql
 
         protected void SaveObjects(ManagementSession session)
         {
-            var concreteCompositeType = new List<ObjectType>(this.database.Domain.ConcreteCompositeObjectTypes);
+            var concreteCompositeType = new List<ObjectType>(this.database.Domain.Classes);
             concreteCompositeType.Sort(MetaObject.IdComparer);
             foreach (var type in concreteCompositeType)
             {

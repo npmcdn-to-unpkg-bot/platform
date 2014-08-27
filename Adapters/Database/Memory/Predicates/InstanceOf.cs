@@ -20,7 +20,6 @@
 
 namespace Allors.Adapters.Database.Memory
 {
-    using System;
     using Allors.Meta;
 
     internal sealed class Instanceof : Predicate

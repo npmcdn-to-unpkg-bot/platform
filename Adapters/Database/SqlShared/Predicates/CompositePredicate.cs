@@ -258,21 +258,21 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public ICompositePredicate AddInstanceof(ObjectType type)
+        public ICompositePredicate AddInstanceof(CompositeType type)
         {
             this.Extent.FlushCache();
             this.Filters.Add(new InstanceOf(type, GetConcreteSubClasses(type)));
             return this;
         }
 
-        public ICompositePredicate AddInstanceof(RoleType role, ObjectType type)
+        public ICompositePredicate AddInstanceof(RoleType role, CompositeType type)
         {
             this.Extent.FlushCache();
             this.Filters.Add(new RoleInstanceof(this.Extent, role, type, GetConcreteSubClasses(type)));
             return this;
         }
 
-        public ICompositePredicate AddInstanceof(AssociationType association, ObjectType type)
+        public ICompositePredicate AddInstanceof(AssociationType association, CompositeType type)
         {
             this.Extent.FlushCache();
             this.Filters.Add(new AssociationInstanceOf(this.Extent, association, type, GetConcreteSubClasses(type)));

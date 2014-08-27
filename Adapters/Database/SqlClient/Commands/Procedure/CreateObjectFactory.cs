@@ -59,7 +59,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
                 this.commandByObjectType = new Dictionary<ObjectType, SqlCommand>();
             }
 
-            public Reference Execute(ObjectType objectType)
+            public Reference Execute(Class objectType)
             {
                 var exclusiveRootClass = objectType.ExclusiveRootClass;
                 var schema = this.Database.Schema;

@@ -2,7 +2,7 @@ namespace Domain
 {
 	public class PersonMeta
 	{
-		public static readonly global::Allors.Meta.ObjectType ObjectType = (Allors.Meta.ObjectType)global::Domain.M.D.Find( new System.Guid("6a082a25-a8f2-4acd-a1a3-ba4461b729f1") );
+		public static readonly global::Allors.Meta.Class ObjectType = (Allors.Meta.Class)global::Domain.M.D.Find( new System.Guid("6a082a25-a8f2-4acd-a1a3-ba4461b729f1") );
 
 		public static readonly global::Allors.Meta.RoleType NextPerson = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("25ff791d-9547-41ba-ac34-f2fe501ef217"))).RoleType;
 		public static readonly global::Allors.Meta.RoleType Company = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("6cc83cb8-cb94-4716-bb7d-e25201f06b20"))).RoleType;

@@ -74,7 +74,7 @@ namespace Allors.Adapters.Database.Memory
             }
         }
 
-        public override ObjectType ObjectType
+        public override CompositeType ObjectType
         {
             get { return this.strategyExtent.ObjectType; }
         }

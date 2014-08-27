@@ -175,21 +175,21 @@ namespace Allors.Adapters.Database.Memory
             return this;
         }
 
-        public ICompositePredicate AddInstanceof(ObjectType type)
+        public ICompositePredicate AddInstanceof(CompositeType type)
         {
             this.predicates.Add(new Instanceof(type));
             this.extent.Invalidate();
             return this;
         }
 
-        public ICompositePredicate AddInstanceof(RoleType role, ObjectType type)
+        public ICompositePredicate AddInstanceof(RoleType role, CompositeType type)
         {
             this.predicates.Add(new RoleInstanceof(this.extent, role, type));
             this.extent.Invalidate();
             return this;
         }
 
-        public ICompositePredicate AddInstanceof(AssociationType association, ObjectType type)
+        public ICompositePredicate AddInstanceof(AssociationType association, CompositeType type)
         {
             this.predicates.Add(new AssociationInstanceOf(this.extent, association, type));
             this.extent.Invalidate();

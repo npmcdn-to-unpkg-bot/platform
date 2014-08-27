@@ -176,7 +176,7 @@ namespace Allors.Adapters.Database.Memory
             return this;
         }
 
-        public ICompositePredicate AddInstanceof(ObjectType type)
+        public ICompositePredicate AddInstanceof(CompositeType type)
         {
             this.CheckUnarity();
             this.predicate = new Instanceof(type);
@@ -184,7 +184,7 @@ namespace Allors.Adapters.Database.Memory
             return this;
         }
 
-        public ICompositePredicate AddInstanceof(RoleType role, ObjectType type)
+        public ICompositePredicate AddInstanceof(RoleType role, CompositeType type)
         {
             this.CheckUnarity();
             this.predicate = new RoleInstanceof(this.extent, role, type);
@@ -192,7 +192,7 @@ namespace Allors.Adapters.Database.Memory
             return this;
         }
 
-        public ICompositePredicate AddInstanceof(AssociationType association, ObjectType type)
+        public ICompositePredicate AddInstanceof(AssociationType association, CompositeType type)
         {
             this.CheckUnarity();
             this.predicate = new AssociationInstanceOf(this.extent, association, type);

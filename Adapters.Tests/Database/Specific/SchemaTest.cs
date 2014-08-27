@@ -269,11 +269,11 @@ namespace Allors.Adapters.Special
             i12AllorsString.AssociationType.ObjectType = i12;
             i12AllorsString.RoleType.ObjectType = (ObjectType)this.domain.Find(UnitIds.BooleanId);
 
-            c1.AddDirectSupertype(i12);
-
+            new Inheritance(this.domain, Guid.NewGuid()) { Subtype = c1, Supertype = i12 };
+ 
             this.CreateDatabase(this.domain, true);
 
-            c2.AddDirectSupertype(i12);
+            new Inheritance(this.domain, Guid.NewGuid()) { Subtype = c2, Supertype = i12 };
 
             var database = this.CreateDatabase(this.domain, false);
 
@@ -599,12 +599,12 @@ namespace Allors.Adapters.Special
             }
         }
         
-        protected ObjectType CreateClass(string name)
+        protected Class CreateClass(string name)
         {
             return new Class(this.domain, Guid.NewGuid()) { SingularName = name, PluralName = name + "s" };
         }
 
-        protected ObjectType CreateInterface(string name)
+        protected Interface CreateInterface(string name)
         {
             return new Interface(this.domain, Guid.NewGuid()) { SingularName = name, PluralName = name + "s" };
         }

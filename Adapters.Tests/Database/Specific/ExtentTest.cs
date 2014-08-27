@@ -3217,20 +3217,6 @@ namespace Allors.Adapters.Special
                 this.AssertC2(extent, true, true, true, true);
                 this.AssertC3(extent, true, true, true, true);
                 this.AssertC4(extent, true, true, true, true);
-
-                // Wrong Parameters
-                var exceptionThrown = false;
-                try
-                {
-                    extent = this.LocalExtent(C1Meta.ObjectType);
-                    extent.Filter.AddInstanceof(GetAllorsString(C1Meta.ObjectType));
-                }
-                catch (ArgumentException)
-                {
-                    exceptionThrown = true;
-                }
-
-                Assert.IsTrue(exceptionThrown);
             }
         }
 
@@ -16246,30 +16232,6 @@ namespace Allors.Adapters.Special
         }
 
         [Test]
-        public void ValidateAssociationInstanceOf()
-        {
-            foreach (var init in this.Inits)
-            {
-                init();
-                this.Populate();
-
-                // Wrong Parameters
-                var exceptionThrown = false;
-                try
-                {
-                    var extent = this.LocalExtent(C1Meta.ObjectType);
-                    extent.Filter.AddInstanceof(C1Meta.C1C1one2one.AssociationType, GetAllorsString(C1Meta.ObjectType));
-                }
-                catch (ArgumentException)
-                {
-                    exceptionThrown = true;
-                }
-
-                Assert.IsTrue(exceptionThrown);
-            }
-        }
-
-        [Test]
         public void ValidateAssociationNotExist()
         {
             // TODO:
@@ -16418,30 +16380,6 @@ namespace Allors.Adapters.Special
         }
 
         [Test]
-        public void ValidateRoleInstanceOfFilter()
-        {
-            foreach (var init in this.Inits)
-            {
-                init();
-                this.Populate();
-
-                // Wrong Parameters
-                var exceptionThrown = false;
-                try
-                {
-                    var extent = this.LocalExtent(C1Meta.ObjectType);
-                    extent.Filter.AddInstanceof(C1Meta.C1C2one2one, GetAllorsString(C1Meta.ObjectType));
-                }
-                catch (ArgumentException)
-                {
-                    exceptionThrown = true;
-                }
-
-                Assert.IsTrue(exceptionThrown);
-            }
-        }
-
-        [Test]
         public void ValidateRoleLessThanFilter()
         {
             foreach (var init in this.Inits)
@@ -16493,30 +16431,6 @@ namespace Allors.Adapters.Special
         public void ValidateRoleNotExistFilter()
         {
             // TODO:
-        }
-
-        [Test]
-        public void ValidationInstanceOf()
-        {
-            foreach (var init in this.Inits)
-            {
-                init();
-                this.Populate();
-
-                // Wrong Parameters
-                var exceptionThrown = false;
-                try
-                {
-                    var extent = this.LocalExtent(C1Meta.ObjectType);
-                    extent.Filter.AddInstanceof(GetAllorsString(C1Meta.ObjectType));
-                }
-                catch (ArgumentException)
-                {
-                    exceptionThrown = true;
-                }
-
-                Assert.IsTrue(exceptionThrown);
-            }
         }
 
         [Test]
@@ -16577,10 +16491,10 @@ namespace Allors.Adapters.Special
                 c2.AddC3Many2Many(c3);
                 c1.C1C2many2one = c2;
 
-                var c2s = LocalExtent(C2Meta.ObjectType);
+                var c2s = this.LocalExtent(C2Meta.ObjectType);
                 c2s.Filter.AddContains(C2Meta.C3Many2Many, c3);
 
-                Extent<C1> c1s = LocalExtent(C1Meta.ObjectType);
+                Extent<C1> c1s = this.LocalExtent(C1Meta.ObjectType);
                 c1s.Filter.AddContainedIn(C1Meta.C1C2many2one, (Extent)c2s);
 
                 Assert.AreEqual(1, c1s.Count);
@@ -16604,10 +16518,10 @@ namespace Allors.Adapters.Special
                 c3.AddC3C4one2many(c4);
                 c2.C3Many2One = c3;
 
-                var c3s = LocalExtent(C3Meta.ObjectType);
+                var c3s = this.LocalExtent(C3Meta.ObjectType);
                 c3s.Filter.AddContains(C3Meta.C3C4one2many, c4);
 
-                Extent<C2> c2s = LocalExtent(C2Meta.ObjectType);
+                Extent<C2> c2s = this.LocalExtent(C2Meta.ObjectType);
                 c2s.Filter.AddContainedIn(C2Meta.C3Many2One, (Extent)c3s);
 
                 Assert.AreEqual(1, c2s.Count);
@@ -16631,10 +16545,10 @@ namespace Allors.Adapters.Special
                 c3.AddC3C2many2many(c2);
                 c1.C1C2many2one = c2;
 
-                var c2s = LocalExtent(C2Meta.ObjectType);
+                var c2s = this.LocalExtent(C2Meta.ObjectType);
                 c2s.Filter.AddContains(C2Meta.C3sWhereC2many2many, c3);
 
-                Extent<C1> c1s = LocalExtent(C1Meta.ObjectType);
+                Extent<C1> c1s = this.LocalExtent(C1Meta.ObjectType);
                 c1s.Filter.AddContainedIn(C1Meta.C1C2many2one, (Extent)c2s);
 
                 Assert.AreEqual(1, c1s.Count);
@@ -16669,14 +16583,14 @@ namespace Allors.Adapters.Special
 
         // IDatabaseSession.Extent for Repositories and
         // IWorkspaceSession.WorkspaceExtent for Workspaces.
-        protected virtual Extent LocalExtent(ObjectType objectType)
+        protected virtual Extent LocalExtent(CompositeType objectType)
         {
             return this.Session.Extent(objectType);
         }
 
-        private static ObjectType GetAllorsString(ObjectType objectType)
+        private static UnitType GetAllorsString(ObjectType objectType)
         {
-            return (ObjectType)objectType.Domain.Find(UnitIds.StringId);
+            return (UnitType)objectType.Domain.Find(UnitIds.StringId);
         }
 
         private void AssertC1(Extent extent, bool assert0, bool assert1, bool assert2, bool assert3)

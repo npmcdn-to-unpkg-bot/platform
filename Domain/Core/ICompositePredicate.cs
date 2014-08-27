@@ -150,7 +150,7 @@ namespace Allors
         /// </summary>
         /// <param name="objectType">the ObjectType.</param>
         /// <returns>the composing CompositePredicate</returns>
-        ICompositePredicate AddInstanceof(ObjectType objectType);
+        ICompositePredicate AddInstanceof(CompositeType objectType);
 
         /// <summary>
         /// Adds a Predicate that evaluates to true if the role of the object under evaluation is an instance of the ObjectType.
@@ -158,7 +158,7 @@ namespace Allors
         /// <param name="role">the RoleType .</param>
         /// <param name="objectType">the ObjectType.</param>
         /// <returns>the composing CompositePredicate</returns>
-        ICompositePredicate AddInstanceof(RoleType role, ObjectType objectType);
+        ICompositePredicate AddInstanceof(RoleType role, CompositeType objectType);
 
         /// <summary>
         /// Adds a Predicate that evaluates to true if the association of the object under evaluation is an instance of the ObjectType.
@@ -166,7 +166,7 @@ namespace Allors
         /// <param name="association">the AssociationType.</param>
         /// <param name="objectType">the ObjectType.</param>
         /// <returns>the composing CompositePredicate</returns>
-        ICompositePredicate AddInstanceof(AssociationType association, ObjectType objectType);
+        ICompositePredicate AddInstanceof(AssociationType association, CompositeType objectType);
 
         /// <summary>
         /// Adds a Predicate that evaluates to true if the role of the object under evaluation is less than the object.

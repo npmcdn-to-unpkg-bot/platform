@@ -33,7 +33,7 @@ namespace Allors.Meta
     {
         public bool IsMany;
 
-        public ObjectType ObjectType;
+        public CompositeType ObjectType;
         
         public AssociationType(RelationType relationType, Guid associationTypeId)
         {

@@ -499,7 +499,7 @@ namespace Allors.Adapters.Workspace.Memory
             return objects.ToArray();
         }
 
-        public virtual Allors.Extent LocalExtent(ObjectType objectType)
+        public virtual Allors.Extent LocalExtent(CompositeType objectType)
         {
             return new ExtentObject(this, objectType);
         }
@@ -967,10 +967,16 @@ namespace Allors.Adapters.Workspace.Memory
         public virtual T Create<T>() where T : IObject
         {
             var objectType = this.MemoryWorkspace.Database.ObjectFactory.GetObjectTypeForType(typeof(T));
-            return (T)this.Create(objectType);
+            var @class = objectType as Class;
+            if (@class == null)
+            {
+                throw new Exception("ObjectType should be a class");
+            }
+
+            return (T)this.Create(@class);
         }
 
-        public virtual IObject[] Create(ObjectType objectType, int count)
+        public virtual IObject[] Create(Class objectType, int count)
         {
             var arrayType = this.MemoryWorkspace.Database.ObjectFactory.GetTypeForObjectType(objectType);
             var allorsObjects = (IObject[])Array.CreateInstance(arrayType, count);
@@ -1059,7 +1065,7 @@ namespace Allors.Adapters.Workspace.Memory
             throw new NotSupportedException();
         }
 
-        public virtual Allors.Extent Extent(ObjectType objectType)
+        public virtual Allors.Extent Extent(CompositeType objectType)
         {
             throw new NotSupportedException();
         }
@@ -1079,13 +1085,8 @@ namespace Allors.Adapters.Workspace.Memory
             throw new NotSupportedException();
         }
 
-        public virtual IObject Create(ObjectType objectType)
+        public virtual IObject Create(Class objectType)
         {
-            if (!(objectType is Class))
-            {
-                throw new ArgumentException("Can not create non concrete composite type " + objectType);
-            }
-
             var strategy = this.CreateNewStrategy(objectType);
             this.strategyByObjectId.Add(strategy.ObjectId, strategy);
 
@@ -2190,7 +2191,8 @@ namespace Allors.Adapters.Workspace.Memory
                                 {
                                     var objectId = this.MemoryWorkspace.ObjectIds.Parse(objectIdString);
 
-                                    if (objectType == null || !(objectType is Class))
+                                    var @class = objectType as Class;
+                                    if (@class == null)
                                     {
                                         throw new Exception("Could not load object with id " + objectId);
                                     }
@@ -2202,7 +2204,7 @@ namespace Allors.Adapters.Workspace.Memory
                                     }
 
                                     this.MemoryWorkspace.ObjectIds.AdjustCurrentId(objectId);
-                                    strategy = this.LoadStrategy(objectType, objectId);
+                                    strategy = this.LoadStrategy(@class, objectId);
                                     this.strategyByObjectId.Add(strategy.ObjectId, strategy);
                                 }
                             }
@@ -2451,7 +2453,8 @@ namespace Allors.Adapters.Workspace.Memory
                                 {
                                     var objectId = this.MemoryWorkspace.ObjectIds.Parse(objectIdString);
 
-                                    if (objectType == null || !(objectType is Class))
+                                    var @class = objectType as Class;
+                                    if (@class == null)
                                     {
                                         throw new Exception("Could not load object with id " + objectId);
                                     }
@@ -2463,7 +2466,7 @@ namespace Allors.Adapters.Workspace.Memory
                                     }
 
                                     this.MemoryWorkspace.ObjectIds.AdjustCurrentId(objectId);
-                                    strategy = new Strategy(this, objectType, objectId, false);
+                                    strategy = new Strategy(this, @class, objectId, false);
                                     this.strategyByObjectId.Add(strategy.ObjectId, strategy);
                                 }
                             }
@@ -2504,7 +2507,8 @@ namespace Allors.Adapters.Workspace.Memory
                                 {
                                     var objectId = this.MemoryWorkspace.ObjectIds.Parse(objectIdString);
 
-                                    if (objectType == null || !(objectType is Class))
+                                    var @class = objectType as Class;
+                                    if (@class == null)
                                     {
                                         throw new Exception("Could not load object with id " + objectId);
                                     }
@@ -2516,7 +2520,7 @@ namespace Allors.Adapters.Workspace.Memory
                                     }
 
                                     this.MemoryWorkspace.ObjectIds.AdjustCurrentId(objectId);
-                                    strategy = new Strategy(this, objectType, objectId, true);
+                                    strategy = new Strategy(this, @class, objectId, true);
                                     this.strategyByObjectId.Add(strategy.ObjectId, strategy);
                                 }
                             }
@@ -2785,7 +2789,7 @@ namespace Allors.Adapters.Workspace.Memory
             return compositeRolesByAssociation;
         }
 
-        protected virtual Strategy CreateNewStrategy(ObjectType objectType)
+        protected virtual Strategy CreateNewStrategy(Class objectType)
         {
             return new Strategy(this, objectType, this.MemoryWorkspace.ObjectIds.Next());
         }
@@ -2795,7 +2799,7 @@ namespace Allors.Adapters.Workspace.Memory
             return new Strategy(this, databaseStrategy);
         }
 
-        protected virtual Strategy LoadStrategy(ObjectType objectType, ObjectId objectId)
+        protected virtual Strategy LoadStrategy(Class objectType, ObjectId objectId)
         {
             return new Strategy(this, objectType, objectId, false);
         }

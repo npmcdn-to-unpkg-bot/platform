@@ -2,7 +2,7 @@ namespace Domain
 {
 	public class I34Meta
 	{
-		public static readonly global::Allors.Meta.ObjectType ObjectType = (Allors.Meta.ObjectType)global::Domain.M.D.Find( new System.Guid("ebc22540-54c8-4601-a43d-2ed6da9f3e79") );
+		public static readonly global::Allors.Meta.Interface ObjectType = (Allors.Meta.Interface)global::Domain.M.D.Find( new System.Guid("ebc22540-54c8-4601-a43d-2ed6da9f3e79") );
 
 		public static readonly global::Allors.Meta.RoleType I34AllorsDecimal = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("37e8d764-bfeb-40d8-b7e9-d94e455dcc11"))).RoleType;
 		public static readonly global::Allors.Meta.RoleType I34AllorsBoolean = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("4a6db64f-aeeb-4657-a24c-7997129f3efa"))).RoleType;

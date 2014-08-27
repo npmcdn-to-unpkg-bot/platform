@@ -29,11 +29,11 @@ namespace Allors.Meta
     public sealed partial class Inheritance : MetaObject
     {
 
-        public ObjectType Subtype;
+        public CompositeType Subtype;
 
-        public ObjectType Supertype;
+        public Interface Supertype;
 
-        internal Inheritance(Domain domain, Guid inheritanceId)
+        public Inheritance(Domain domain, Guid inheritanceId)
         {
             this.Domain = domain;
             this.Id = inheritanceId;
