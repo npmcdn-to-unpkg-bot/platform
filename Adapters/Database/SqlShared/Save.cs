@@ -72,7 +72,7 @@ namespace Allors.Adapters.Database.Sql
 
         protected void SaveObjects(ManagementSession session)
         {
-            var concreteCompositeType = new List<ObjectType>(this.database.Domain.Classes);
+            var concreteCompositeType = new List<Class>(this.database.Domain.Classes);
             concreteCompositeType.Sort(MetaObject.IdComparer);
             foreach (var type in concreteCompositeType)
             {
@@ -120,7 +120,7 @@ namespace Allors.Adapters.Database.Sql
 
         protected void SaveRelations(ManagementSession session)
         {
-            var exclusiverRootClassesByObjectType = new Dictionary<ObjectType, HashSet<ObjectType>>();
+            var exclusiveRootClassesByObjectType = new Dictionary<ObjectType, HashSet<Class>>();
 
             var relations = new List<RelationType>(this.database.Domain.RelationTypes);
             relations.Sort(MetaObject.IdComparer);
@@ -136,16 +136,16 @@ namespace Allors.Adapters.Database.Sql
                     var sql = string.Empty;
                     if (roleType.ObjectType is UnitType)
                     {
-                        HashSet<ObjectType> exclusiveRootClasses;
-                        if (!exclusiverRootClassesByObjectType.TryGetValue(associationType.ObjectType, out exclusiveRootClasses))
+                        HashSet<Class> exclusiveRootClasses;
+                        if (!exclusiveRootClassesByObjectType.TryGetValue(associationType.ObjectType, out exclusiveRootClasses))
                         {
-                            exclusiveRootClasses = new HashSet<ObjectType>();
+                            exclusiveRootClasses = new HashSet<Class>();
                             foreach (var concreteClass in associationType.ObjectType.DerivedRootClasses)
                             {
                                 exclusiveRootClasses.Add(concreteClass.ExclusiveRootClass);
                             }
 
-                            exclusiverRootClassesByObjectType[associationType.ObjectType] = exclusiveRootClasses;
+                            exclusiveRootClassesByObjectType[associationType.ObjectType] = exclusiveRootClasses;
                         }
                        
                         var first = true;
@@ -188,8 +188,9 @@ namespace Allors.Adapters.Database.Sql
                             else
                             {
                                 // role.Many
+                                var compositeType = (CompositeType)roleType.ObjectType;
                                 sql += "SELECT " + this.database.Schema.Column(associationType) + " As " + this.database.Schema.AssociationId + ", " + this.database.Schema.ObjectId + " As " + this.database.Schema.RoleId + "\n";
-                                sql += "FROM " + this.database.Schema.Table(roleType.ObjectType.ExclusiveRootClass) + "\n";
+                                sql += "FROM " + this.database.Schema.Table(compositeType.ExclusiveRootClass) + "\n";
                                 sql += "WHERE " + this.database.Schema.Column(associationType) + " IS NOT NULL\n";
                                 sql += "ORDER BY " + this.database.Schema.AssociationId + "," + this.database.Schema.RoleId;
                             }

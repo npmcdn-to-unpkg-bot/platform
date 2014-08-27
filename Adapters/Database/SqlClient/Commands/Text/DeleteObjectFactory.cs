@@ -46,7 +46,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
             return new DeleteObject(this, session);
         }
 
-        public string GetSql(ObjectType objectType)
+        public string GetSql(Class objectType)
         {
             if (!this.sqlByMetaType.ContainsKey(objectType))
             {

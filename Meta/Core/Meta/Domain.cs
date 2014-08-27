@@ -247,7 +247,7 @@ namespace Allors.Meta
             }
 
             // Exclusive Root Class
-            foreach (var type in this.DerivedCompositeTypes)
+            foreach (var type in this.Interfaces)
             {
                 type.DeriveExclusiveRootClass();
             }

@@ -65,7 +65,8 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
                     }
                     else
                     {
-                        sql = Sql.Schema.AllorsPrefix + "GA_" + roleType.ObjectType.ExclusiveRootClass.Name + "_" + associationType.Name;
+                        var compositeType = (CompositeType)roleType.ObjectType;
+                        sql = Sql.Schema.AllorsPrefix + "GA_" + compositeType.ExclusiveRootClass.Name + "_" + associationType.Name;
                     }
                 }
                 else

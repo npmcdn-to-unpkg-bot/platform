@@ -34,5 +34,13 @@ namespace Allors.Meta
         {
             this.Domain.OnClassCreated(this);
         }
+
+        public override Class DerivedExclusiveRootClass
+        {
+            get
+            {
+                return this;
+            }
+        }
     }
 }

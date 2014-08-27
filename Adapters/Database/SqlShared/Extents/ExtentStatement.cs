@@ -89,7 +89,8 @@ namespace Allors.Adapters.Database.Sql
                     {
                         if (role.IsMany)
                         {
-                            this.Append(" LEFT OUTER JOIN " + this.Schema.Table(role.ObjectType.ExclusiveRootClass) + " " + role.RootName + "_R");
+                            var compositeType = (CompositeType)role.ObjectType;
+                            this.Append(" LEFT OUTER JOIN " + this.Schema.Table(compositeType.ExclusiveRootClass) + " " + role.RootName + "_R");
                             this.Append(" ON " + alias + "." + this.Schema.ObjectId + "=" + role.RootName + "_R." + this.Schema.Column(association));
                         }
                     }

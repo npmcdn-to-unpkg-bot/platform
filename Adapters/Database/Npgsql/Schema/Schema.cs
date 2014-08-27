@@ -621,7 +621,7 @@ $$ language plpgsql;
                 }
             }
 
-            foreach (var dictionaryEntry in this.TableByObjectType)
+            foreach (var dictionaryEntry in this.TableByClass)
             {
                 var objectType = dictionaryEntry.Key;
                 var table = dictionaryEntry.Value;

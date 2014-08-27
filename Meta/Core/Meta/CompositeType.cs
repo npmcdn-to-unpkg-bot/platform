@@ -38,6 +38,20 @@ namespace Allors.Meta
         public List<MethodType> DerivedMethodTypes = new List<MethodType>();
 
         /// <summary>
+        /// Gets the exclusive concrete subclass.
+        /// </summary>
+        /// <value>The exclusive concrete subclass.</value>
+        public Class ExclusiveRootClass
+        {
+            get
+            {
+                return this.DerivedExclusiveRootClass;
+            }
+        }
+
+        public abstract Class DerivedExclusiveRootClass { get; }
+
+        /// <summary>
         /// A cache for the ids of the <see cref="AssociationTypes"/>.
         /// </summary>
         private Dictionary<Guid, object> associationIdsCache;

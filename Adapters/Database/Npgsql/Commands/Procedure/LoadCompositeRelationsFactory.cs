@@ -45,18 +45,19 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
             {
                 if (associationType.IsMany || !roleType.RelationType.ExistExclusiveRootClasses)
                 {
-                    sql = Sql.Schema.AllorsPrefix + "A_" + roleType.FullSingularName;
+                    sql = Schema.AllorsPrefix + "A_" + roleType.FullSingularName;
                 }
                 else
                 {
-                    sql = Sql.Schema.AllorsPrefix + "A_" + roleType.ObjectType.ExclusiveRootClass.Name + "_" + associationType.Name;
+                    var compositeType = (CompositeType)roleType.ObjectType;
+                    sql = Schema.AllorsPrefix + "A_" + compositeType.ExclusiveRootClass.Name + "_" + associationType.Name;
                 }
             }
             else
             {
                 if (!roleType.RelationType.ExistExclusiveRootClasses)
                 {
-                    sql = Sql.Schema.AllorsPrefix + "S_" + roleType.FullSingularName;
+                    sql = Schema.AllorsPrefix + "S_" + roleType.FullSingularName;
                 }
                 else
                 {

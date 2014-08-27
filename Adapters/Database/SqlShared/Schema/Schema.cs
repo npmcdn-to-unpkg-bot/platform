@@ -50,7 +50,7 @@ namespace Allors.Adapters.Database.Sql
         
         private Dictionary<RelationType, SchemaColumn> columnsByRelationType;
         private Dictionary<RelationType, SchemaTable> tablesByRelationType;
-        private Dictionary<ObjectType, SchemaTable> tableByObjectType;
+        private Dictionary<Class, SchemaTable> tableByClass;
         private Dictionary<string, SchemaTable> tablesByName;
 
         private SchemaColumn objectId;
@@ -179,9 +179,9 @@ namespace Allors.Adapters.Database.Sql
             get { return this.tablesByRelationType; }
         }
 
-        protected Dictionary<ObjectType, SchemaTable> TableByObjectType
+        protected Dictionary<Class, SchemaTable> TableByClass
         {
-            get { return this.tableByObjectType; }
+            get { return this.tableByClass; }
         }
 
         private DbType TypeDbType
@@ -250,9 +250,9 @@ namespace Allors.Adapters.Database.Sql
             return this.columnsByRelationType[role.RelationType];
         }
 
-        public SchemaTable Table(ObjectType type)
+        public SchemaTable Table(Class type)
         {
-            return this.tableByObjectType[type];
+            return this.tableByClass[type];
         }
 
         public SchemaTable Table(RelationType relationType)
@@ -294,7 +294,7 @@ namespace Allors.Adapters.Database.Sql
 
             this.tablesByName = new Dictionary<string, SchemaTable>();
 
-            this.tableByObjectType = new Dictionary<ObjectType, SchemaTable>();
+            this.tableByClass = new Dictionary<Class, SchemaTable>();
             this.tablesByRelationType = new Dictionary<RelationType, SchemaTable>();
             this.columnsByRelationType = new Dictionary<RelationType, SchemaColumn>();
 
@@ -390,11 +390,12 @@ namespace Allors.Adapters.Database.Sql
 
             foreach (var objectType in this.Database.Domain.CompositeTypes)
             {
-                if (objectType is Class)
+                var @class = objectType as Class;
+                if (@class != null)
                 {
                     var schemaTable = new SchemaTable(this, objectType.SingularName, SchemaTableKind.Object, objectType);
                     this.TablesByName.Add(schemaTable.Name, schemaTable);
-                    this.TableByObjectType.Add(objectType, schemaTable);
+                    this.TableByClass.Add(@class, schemaTable);
 
                     schemaTable.AddColumn(this.ObjectId);
                     schemaTable.AddColumn(this.TypeId);

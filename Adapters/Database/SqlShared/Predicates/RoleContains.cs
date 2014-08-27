@@ -53,6 +53,8 @@ namespace Allors.Adapters.Database.Sql
             }
             else
             {
+                var compositeType = (CompositeType)this.role.ObjectType;
+
                 // This join is not possible because of the 3VL (Three Valued Logic).
                 // It should work for normal queries, but it fails when wrapped in a NOT( ... ) predicate.
                 // The rows with NULL values should then return TRUE and not UNKNOWN.
@@ -62,7 +64,7 @@ namespace Allors.Adapters.Database.Sql
                 statement.Append("\n");
                 statement.Append("EXISTS(\n");
                 statement.Append("SELECT " + schema.ObjectId + "\n");
-                statement.Append("FROM " + schema.Table(this.role.ObjectType.ExclusiveRootClass) + "\n");
+                statement.Append("FROM " + schema.Table(compositeType.ExclusiveRootClass) + "\n");
                 statement.Append("WHERE " + schema.ObjectId + "=" + this.allorsObject.Strategy.ObjectId + "\n");
                 statement.Append("AND " + schema.Column(this.role.AssociationType) + "=" + alias + ".O\n");
                 statement.Append(")\n");

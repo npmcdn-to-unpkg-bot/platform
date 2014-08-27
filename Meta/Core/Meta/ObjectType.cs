@@ -35,8 +35,6 @@ namespace Allors.Meta
 
         public string PluralName;
 
-
-
         public List<CompositeType> DerivedDirectSubtypes = new List<CompositeType>();
 
         public List<CompositeType> DerivedSubtypes = new List<CompositeType>();
@@ -45,9 +43,6 @@ namespace Allors.Meta
 
         public List<Class> DerivedRootClasses = new List<Class>();
 
-        public Class DerivedExclusiveRootClass;
-
-        
         // Domain -> ObjectType
         public Domain Domain { get; private set; }
 
@@ -61,19 +56,7 @@ namespace Allors.Meta
             this.Domain = domain;
             this.Id = objectTypeId;
         }
-
-        /// <summary>
-        /// Gets the exclusive concrete subclass.
-        /// </summary>
-        /// <value>The exclusive concrete subclass.</value>
-        public Class ExclusiveRootClass
-        {
-            get
-            {
-                return this.DerivedExclusiveRootClass;
-            }
-        }
-
+        
         /// <summary>
         /// Gets the name.
         /// </summary>
@@ -255,19 +238,6 @@ namespace Allors.Meta
             }
 
             this.DerivedDirectSubtypes = new List<CompositeType>(directSubtypes);
-        }
-
-        /// <summary>
-        /// Derive exclusive concrete leaf classes.
-        /// </summary>
-        /// <param name="concreteLeafClasses">The concrete leaf classes.</param>
-        internal void DeriveExclusiveRootClass()
-        {
-            this.DerivedExclusiveRootClass = null;
-            if (this.DerivedRootClasses.Count == 1)
-            {
-                this.DerivedExclusiveRootClass = this.DerivedRootClasses[0];
-            }
         }
 
         /// <summary>

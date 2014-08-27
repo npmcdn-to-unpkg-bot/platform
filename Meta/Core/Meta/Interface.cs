@@ -29,10 +29,34 @@ namespace Allors.Meta
     /// </summary>
     public partial class Interface : CompositeType
     {
+
+        public Class derivedExclusiveRootClass;
+
+        public override Class DerivedExclusiveRootClass
+        {
+            get
+            {
+                return this.derivedExclusiveRootClass;
+            }
+        }
+
         public Interface(Domain domain, Guid objectTypeId)
             : base(domain, objectTypeId)
         {
             this.Domain.OnInterfaceCreated(this);
+        }
+
+        /// <summary>
+        /// Derive exclusive concrete leaf classes.
+        /// </summary>
+        /// <param name="concreteLeafClasses">The concrete leaf classes.</param>
+        internal void DeriveExclusiveRootClass()
+        {
+            this.derivedExclusiveRootClass = null;
+            if (this.DerivedRootClasses.Count == 1)
+            {
+                this.derivedExclusiveRootClass = this.DerivedRootClasses[0];
+            }
         }
     }
 }
