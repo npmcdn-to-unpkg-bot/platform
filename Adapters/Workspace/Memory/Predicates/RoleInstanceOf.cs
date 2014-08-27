@@ -21,6 +21,7 @@
 namespace Allors.Adapters.Workspace.Memory
 {
     using System;
+    using System.Runtime.InteropServices;
 
     using Allors.Adapters;
 
@@ -29,9 +30,9 @@ namespace Allors.Adapters.Workspace.Memory
     internal sealed class RoleInstanceof : Predicate
     {
         private readonly RoleType roleType;
-        private readonly ObjectType objectType;
+        private readonly CompositeType objectType;
 
-        internal RoleInstanceof(Extent extent, RoleType roleType, ObjectType objectType)
+        internal RoleInstanceof(Extent extent, RoleType roleType, CompositeType objectType)
         {
             extent.CheckForRoleType(roleType);
             CompositePredicateAssertions.ValidateRoleInstanceOf(roleType, objectType);
@@ -51,7 +52,13 @@ namespace Allors.Adapters.Workspace.Memory
 
             // TODO: Optimize
             ObjectType roleObjectType = role.Strategy.ObjectType;
-            return (roleObjectType.Equals(this.objectType) || roleObjectType.Supertypes.Contains(this.objectType))
+            if (roleObjectType.Equals(this.objectType))
+            {
+                return ThreeValuedLogic.True;
+            }
+
+            var @interface = this.objectType as Interface;
+            return (@interface != null && roleObjectType.Supertypes.Contains(@interface))
                        ? ThreeValuedLogic.True
                        : ThreeValuedLogic.False;
         }

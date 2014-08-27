@@ -48,7 +48,13 @@ namespace Allors.Adapters.Database.Memory
 
             // TODO: Optimize
             ObjectType roleObjectType = role.Strategy.ObjectType;
-            return (roleObjectType.Equals(this.objectType) || roleObjectType.Supertypes.Contains(this.objectType))
+            if (roleObjectType.Equals(this.objectType))
+            {
+                return ThreeValuedLogic.True;
+            }
+
+            var @interface = this.objectType as Interface;
+            return (@interface != null && roleObjectType.Supertypes.Contains(@interface))
                        ? ThreeValuedLogic.True
                        : ThreeValuedLogic.False;
         }
