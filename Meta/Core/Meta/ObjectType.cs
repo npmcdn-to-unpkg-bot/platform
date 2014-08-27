@@ -43,8 +43,6 @@ namespace Allors.Meta
 
         public List<ObjectType> DerivedSupertypes = new List<ObjectType>();
 
-        public List<ObjectType> DerivedExclusiveSuperinterfaces = new List<ObjectType>();
-
         public List<ObjectType> DerivedDirectSubtypes = new List<ObjectType>();
 
         public List<ObjectType> DerivedSubtypes = new List<ObjectType>();
@@ -206,18 +204,6 @@ namespace Allors.Meta
                 }
 
                 return null;
-            }
-        }
-
-        /// <summary>
-        /// Gets the exclusive super interfaces.
-        /// </summary>
-        /// <value>The exclusive super interfaces.</value>
-        public IList<ObjectType> ExclusiveSuperinterfaces
-        {
-            get
-            {
-                return this.DerivedExclusiveSuperinterfaces;
             }
         }
 
@@ -622,7 +608,7 @@ namespace Allors.Meta
                 exclusiveAssociationTypes.Add(relationType.AssociationType);
             }
 
-            foreach (var superType in this.ExclusiveSuperinterfaces)
+            foreach (var superType in this.Supertypes)
             {
                 var type = superType;
                 foreach (var relationType in this.Domain.RelationTypes.Where(rel => type.Equals(rel.RoleType.ObjectType)))
@@ -683,7 +669,7 @@ namespace Allors.Meta
                 exclusiveRoles.Add(relationType.RoleType);
             }
 
-            foreach (var superType in this.ExclusiveSuperinterfaces)
+            foreach (var superType in this.Supertypes)
             {
                 var type = superType;
                 foreach (var relationType in this.Domain.RelationTypes.Where(rel => type.Equals(rel.AssociationType.ObjectType)))
@@ -693,15 +679,6 @@ namespace Allors.Meta
             }
 
             this.DerivedExclusiveRoleTypes = new List<RoleType>(exclusiveRoles);
-        }
-
-        /// <summary>
-        /// Derive exclusive super interfaces.
-        /// </summary>
-        /// <param name="superInterfaces">The super interfaces.</param>
-        internal void DeriveExclusiveSuperinterfaces(HashSet<ObjectType> superInterfaces)
-        {
-            this.DerivedExclusiveSuperinterfaces = new List<ObjectType>(this.DerivedSupertypes);
         }
 
         /// <summary>

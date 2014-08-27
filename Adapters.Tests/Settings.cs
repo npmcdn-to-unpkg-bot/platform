@@ -24,10 +24,17 @@ namespace Allors.Adapters
 
     public static class Settings
     {
+        // Smoke
         private const int DefaultNumberOfRuns = 1;
-        private const int DefaultLargeArraySize = 100;
+        private const int DefaultLargeArraySize = 10;
         private const bool DefaultExtraMarkers = false;
-        private const bool DefaultExtraInits = true;
+        private const bool DefaultExtraInits = false;
+
+        // Full
+        //private const int DefaultNumberOfRuns = 2;
+        //private const int DefaultLargeArraySize = 1000;
+        //private const bool DefaultExtraMarkers = true;
+        //private const bool DefaultExtraInits = true;
 
         static Settings()
         {

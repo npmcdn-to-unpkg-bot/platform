@@ -254,12 +254,6 @@ namespace Allors.Meta
             {
                 type.DeriveSubclasses(sharedList);
             }
-            
-            // Exclusive Superinterfaces
-            foreach (var type in this.DerivedCompositeTypes)
-            {
-                type.DeriveExclusiveSuperinterfaces(sharedList);
-            }
 
             // RootClasses
             foreach (var type in this.DerivedCompositeTypes)
