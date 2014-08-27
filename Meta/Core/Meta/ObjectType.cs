@@ -32,46 +32,49 @@ namespace Allors.Meta
     /// </summary>
     public abstract partial class ObjectType : MetaObject, IComparable
     {
-        public List<ObjectType> DerivedDirectSupertypes = new List<ObjectType>();
-
-
-
-
-        public List<AssociationType> DerivedExclusiveAssociationTypes = new List<AssociationType>();
-
-        public List<ObjectType> DerivedExclusiveSuperinterfaces = new List<ObjectType>();
-
-        public List<ObjectType> DerivedSubclasses = new List<ObjectType>();
-
-        public List<AssociationType> DerivedAssociationTypes = new List<AssociationType>();
-
-        public List<ObjectType> DerivedDirectSubtypes = new List<ObjectType>();
-
-        public string PluralName;
-
-        public List<MethodType> DerivedMethodTypes = new List<MethodType>();
-
-        public ObjectType DerivedExclusiveConcreteLeafClass;
-
-        public List<RoleType> DerivedUnitRoleTypes = new List<RoleType>();
-
-        public List<ObjectType> DerivedRootClasses = new List<ObjectType>();
-
         public int UnitTag;
-
-        public List<RoleType> DerivedCompositeRoleTypes = new List<RoleType>();
-
-        public List<ObjectType> DerivedSuperclasses = new List<ObjectType>();
-
-        public List<RoleType> DerivedRoleTypes = new List<RoleType>();
 
         public string SingularName;
 
-        public List<RoleType> DerivedExclusiveRoleTypes = new List<RoleType>();
+        public string PluralName;
+
+
+        public List<ObjectType> DerivedDirectSupertypes = new List<ObjectType>();
 
         public List<ObjectType> DerivedSupertypes = new List<ObjectType>();
 
+        public List<ObjectType> DerivedExclusiveSuperinterfaces = new List<ObjectType>();
+
+        public List<ObjectType> DerivedDirectSubtypes = new List<ObjectType>();
+
         public List<ObjectType> DerivedSubtypes = new List<ObjectType>();
+
+        public List<ObjectType> DerivedSubclasses = new List<ObjectType>();
+
+        public List<ObjectType> DerivedRootClasses = new List<ObjectType>();
+
+        public ObjectType DerivedExclusiveConcreteLeafClass;
+
+
+        public List<RoleType> DerivedRoleTypes = new List<RoleType>();
+
+        public List<RoleType> DerivedUnitRoleTypes = new List<RoleType>();
+
+        public List<RoleType> DerivedCompositeRoleTypes = new List<RoleType>();
+
+        public List<RoleType> DerivedExclusiveRoleTypes = new List<RoleType>();
+
+        public List<AssociationType> DerivedAssociationTypes = new List<AssociationType>();
+
+        public List<AssociationType> DerivedExclusiveAssociationTypes = new List<AssociationType>();
+        
+        public List<MethodType> DerivedMethodTypes = new List<MethodType>();
+
+
+
+        public List<ObjectType> DerivedSuperclasses = new List<ObjectType>();
+
+
 
         // Domain -> ObjectType
         public Domain Domain { get; private set; }
