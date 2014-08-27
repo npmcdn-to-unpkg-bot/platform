@@ -551,8 +551,8 @@ namespace Allors.Adapters.Special
         [Test]
         public void IndexesUnits()
         {
-            Assert.IsTrue(this.ExistIndex("A1", "C1AllorsInteger"));
-            Assert.IsFalse(this.ExistIndex("A1", "C1AllorsString"));
+            Assert.IsTrue(this.ExistIndex("C1", "C1AllorsInteger"));
+            Assert.IsFalse(this.ExistIndex("C1", "C1AllorsString"));
         }
 
         [Test]
