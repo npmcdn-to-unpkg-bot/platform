@@ -25,8 +25,8 @@ namespace Allors.Adapters.Special
     using System.Diagnostics;
     using System.Text;
 
-    using Allors.Adapters.Database.Caching;
     using Allors;
+    using Allors.Adapters.Database.Caching;
     using Allors.Meta;
 
     using Domain;

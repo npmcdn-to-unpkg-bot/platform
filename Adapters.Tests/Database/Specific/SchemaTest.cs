@@ -88,7 +88,7 @@ namespace Allors.Adapters.Special
         }
 
         [Test]
-        [ExpectedException("System.Exception")]
+        [ExpectedException]
         public void InitInvalidDomain()
         {
             this.domain = new Domain(Guid.NewGuid());
@@ -544,6 +544,8 @@ namespace Allors.Adapters.Special
         [Test]
         public void IndexesMany2Many()
         {
+            this.CreateDatabase().Init();
+
             Assert.IsTrue(this.ExistIndex("CompanyIndexedMany2ManyPerson", "R"));
             Assert.IsFalse(this.ExistIndex("CompanyMany2ManyPerson", "R"));
         }
@@ -551,6 +553,8 @@ namespace Allors.Adapters.Special
         [Test]
         public void IndexesUnits()
         {
+            this.CreateDatabase().Init();
+
             Assert.IsTrue(this.ExistIndex("C1", "C1AllorsInteger"));
             Assert.IsFalse(this.ExistIndex("C1", "C1AllorsString"));
         }
