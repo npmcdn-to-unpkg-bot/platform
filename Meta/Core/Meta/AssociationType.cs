@@ -31,18 +31,10 @@ namespace Allors.Meta
     /// </summary>
     public sealed partial class AssociationType : PropertyType, IComparable
     {
-        public string AssignedPluralName;
-        
-        public ObjectType ObjectType;
-
         public bool IsMany;
-        
-        public List<ObjectType> DerivedRootObjectTypes = new List<ObjectType>();
 
-        public string DerivedRootName;
+        public ObjectType ObjectType;
         
-        public string AssignedSingularName;
-
         public AssociationType(RelationType relationType, Guid associationTypeId)
         {
             this.RelationType = relationType;
@@ -52,8 +44,6 @@ namespace Allors.Meta
         // RelationType->AssociationType
         public RelationType RelationType { get; private set; }
         
-
-
         /// <summary>
         /// Used to form names to navigate from <see cref="RoleType"/> To <see cref="AssociationType"/>;
         /// </summary>
@@ -69,18 +59,35 @@ namespace Allors.Meta
             {
                 if (this.IsMany)
                 {
-                    return this.PluralName;
+                    return this.WherePluralName;
                 }
 
-                return this.SingularName;
+                return this.WhereSingularName;
             }
         }
-        
+
+        /// <summary>
+        /// Gets the singular name when using <see cref="Where"/>.
+        /// </summary>
+        /// <value>The singular name when using <see cref="Where"/>.</value>
+        public string SingularName
+        {
+            get { return this.ObjectType.SingularName; }
+        }
+
         /// <summary>
         /// Gets the plural name when using <see cref="Where"/>.
         /// </summary>
         /// <value>The plural name when using <see cref="Where"/>.</value>
         public string PluralName
+        {
+            get { return this.ObjectType.PluralName; }
+        }
+        /// <summary>
+        /// Gets the plural name when using <see cref="Where"/>.
+        /// </summary>
+        /// <value>The plural name when using <see cref="Where"/>.</value>
+        public string WherePluralName
         {
             get { return this.ObjectType.PluralName + Where + this.RelationType.RoleType.SingularName; }
         }
@@ -89,7 +96,7 @@ namespace Allors.Meta
         /// Gets the singular name when using <see cref="Where"/>.
         /// </summary>
         /// <value>The singular name when using <see cref="Where"/>.</value>
-        public string SingularName
+        public string WhereSingularName
         {
             get { return this.ObjectType.SingularName + Where + this.RelationType.RoleType.SingularName; }
         }

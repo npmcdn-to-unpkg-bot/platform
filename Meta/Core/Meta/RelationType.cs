@@ -138,14 +138,7 @@ namespace Allors.Meta
         {
             get
             {
-                try
-                {
-                    return this.AssociationType.ObjectType.SingularName + this.RoleType.SingularName;
-                }
-                catch
-                {
-                    return this.IdAsString;
-                }
+                return this.AssociationType.SingularName + this.RoleType.SingularName;
             }
         }
 
@@ -157,14 +150,7 @@ namespace Allors.Meta
         {
             get
             {
-                try
-                {
-                    return this.RoleType.SingularName + this.AssociationType.SingularName;
-                }
-                catch
-                {
-                    return this.IdAsString;
-                }
+                return this.RoleType.SingularName + this.AssociationType.SingularName;
             }
         }
 
