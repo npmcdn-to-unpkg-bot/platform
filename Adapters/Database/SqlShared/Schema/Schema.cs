@@ -405,7 +405,7 @@ namespace Allors.Adapters.Database.Sql
 
                     foreach (var subClass in subClassesAndSelf)
                     {
-                        foreach (var roleType in subClass.ExclusiveRoleTypes)
+                        foreach (var roleType in subClass.RoleTypes)
                         {
                             if (!roleTypes.Contains(roleType))
                             {

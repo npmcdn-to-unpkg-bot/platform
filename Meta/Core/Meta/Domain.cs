@@ -283,12 +283,6 @@ namespace Allors.Meta
                 type.DeriveRoleTypes(sharedRoleTypeList);
             }
 
-            // Exclusive RoleTypes
-            foreach (var type in this.DerivedCompositeTypes)
-            {
-                type.DeriveExclusiveRoleTypes(sharedRoleTypeList);
-            }
-
             // AssociationTypes
             foreach (var type in this.DerivedCompositeTypes)
             {

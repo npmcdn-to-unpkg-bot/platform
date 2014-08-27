@@ -56,8 +56,6 @@ namespace Allors.Meta
 
         public List<RoleType> DerivedRoleTypes = new List<RoleType>();
 
-        public List<RoleType> DerivedExclusiveRoleTypes = new List<RoleType>();
-
         public List<AssociationType> DerivedAssociationTypes = new List<AssociationType>();
 
         public List<AssociationType> DerivedExclusiveAssociationTypes = new List<AssociationType>();
@@ -127,18 +125,6 @@ namespace Allors.Meta
             get
             {
                 return this.DerivedExclusiveRootClass;
-            }
-        }
-
-        /// <summary>
-        /// Gets the exclusive roles.
-        /// </summary>
-        /// <value>The exclusive roles.</value>
-        public IList<RoleType> ExclusiveRoleTypes
-        {
-            get
-            {
-                return this.DerivedExclusiveRoleTypes;
             }
         }
 
@@ -540,30 +526,6 @@ namespace Allors.Meta
 
                 this.DerivedExclusiveRootClass = concreteLeafClassArray[0];
             }
-        }
-
-        /// <summary>
-        /// Derive exclusive roles.
-        /// </summary>
-        /// <param name="exclusiveRoles">The exclusive roles.</param>
-        internal void DeriveExclusiveRoleTypes(HashSet<RoleType> exclusiveRoles)
-        {
-            exclusiveRoles.Clear();
-            foreach (var relationType in this.Domain.RelationTypes.Where(rel => this.Equals(rel.AssociationType.ObjectType)))
-            {
-                exclusiveRoles.Add(relationType.RoleType);
-            }
-
-            foreach (var superType in this.Supertypes)
-            {
-                var type = superType;
-                foreach (var relationType in this.Domain.RelationTypes.Where(rel => type.Equals(rel.AssociationType.ObjectType)))
-                {
-                    exclusiveRoles.Add(relationType.RoleType);
-                }
-            }
-
-            this.DerivedExclusiveRoleTypes = new List<RoleType>(exclusiveRoles);
         }
 
         /// <summary>
