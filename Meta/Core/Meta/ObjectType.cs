@@ -72,10 +72,6 @@ namespace Allors.Meta
 
 
 
-        public List<ObjectType> DerivedSuperclasses = new List<ObjectType>();
-
-
-
         // Domain -> ObjectType
         public Domain Domain { get; private set; }
 
@@ -282,18 +278,6 @@ namespace Allors.Meta
             get
             {
                 return this.DerivedSubclasses;
-            }
-        }
-
-        /// <summary>
-        /// Gets the super classes.
-        /// </summary>
-        /// <value>The super classes.</value>
-        public IList<ObjectType> Superclasses
-        {
-            get
-            {
-                return this.DerivedSuperclasses;
             }
         }
 
@@ -717,16 +701,7 @@ namespace Allors.Meta
         /// <param name="superInterfaces">The super interfaces.</param>
         internal void DeriveExclusiveSuperinterfaces(HashSet<ObjectType> superInterfaces)
         {
-            superInterfaces.Clear();
-            foreach (var superType in this.DerivedSupertypes)
-            {
-                if (superType is Interface && !superType.IsImplementedByAnyOf(this.Superclasses))
-                {
-                    superInterfaces.Add(superType);
-                }
-            }
-
-            this.DerivedExclusiveSuperinterfaces = new List<ObjectType>(superInterfaces);
+            this.DerivedExclusiveSuperinterfaces = new List<ObjectType>(this.DerivedSupertypes);
         }
 
         /// <summary>
@@ -810,24 +785,6 @@ namespace Allors.Meta
             }
 
             this.DerivedSubclasses = new List<ObjectType>(subClasses);
-        }
-
-        /// <summary>
-        /// Derive super classes.
-        /// </summary>
-        /// <param name="superClasses">The super classes.</param>
-        internal void DeriveSuperclasses(HashSet<ObjectType> superClasses)
-        {
-            superClasses.Clear();
-            foreach (var superTypes in this.DerivedSupertypes)
-            {
-                if (!(superTypes is Interface))
-                {
-                    superClasses.Add(superTypes);
-                }
-            }
-
-            this.DerivedSuperclasses = new List<ObjectType>(superClasses);
         }
 
         /// <summary>

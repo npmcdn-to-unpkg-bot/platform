@@ -248,13 +248,7 @@ namespace Allors.Meta
             {
                 type.DeriveSubtypes(sharedList);
             }
-
-            // Superclasses
-            foreach (var type in this.DerivedCompositeTypes)
-            {
-                type.DeriveSuperclasses(sharedList);
-            }
-
+            
             // Subclasses
             foreach (var type in this.DerivedCompositeTypes)
             {
