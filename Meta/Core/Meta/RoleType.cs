@@ -32,27 +32,18 @@ namespace Allors.Meta
     /// </summary>
     public partial class RoleType : PropertyType, IComparable
     {
-        public ObjectType ObjectType;
+        /// <summary>
+        /// The maximum size value.
+        /// </summary>
+        public const int MaximumSize = -1;
 
-        public List<Class> DerivedRootClasses = new List<Class>();
+        private string derivedHierarchyPluralName;
 
-        public int? Scale;
+        private string derivedHierarchySingularName;
 
-        public int? Precision;
+        private string derivedRootName;
 
-        public int? Size;
-
-        public string DerivedHierarchyPluralName;
-
-        public string DerivedHierarchySingularName;
-
-        public string AssignedPluralName;
-
-        public string DerivedRootName;
-
-        public bool IsMany;
-
-        public string AssignedSingularName;
+        private IList<Class> derivedRootClasses;
 
         public RoleType(RelationType relationType, Guid roleTypeId)
         {
@@ -60,13 +51,21 @@ namespace Allors.Meta
             this.Id = roleTypeId;
         }
 
-        // RelationType -> RoleType
+        public ObjectType ObjectType { get; set; }
+
+        public string AssignedSingularName { get; set; }
+
+        public string AssignedPluralName { get; set; }
+
+        public bool IsMany { get; set; }
+
+        public int? Scale { get; set; }
+
+        public int? Precision { get; set; }
+
+        public int? Size { get; set; }
+
         public RelationType RelationType { get; private set; }
-        
-        /// <summary>
-        /// The maximum size value.
-        /// </summary>
-        public const int MaximumSize = -1;
 
         /// <summary>
         /// Gets the display name.
@@ -183,7 +182,7 @@ namespace Allors.Meta
         {
             get
             {
-                return this.DerivedRootName;
+                return this.derivedRootName;
             }
         }
 
@@ -195,7 +194,7 @@ namespace Allors.Meta
         {
             get
             {
-                return this.DerivedHierarchySingularName;
+                return this.derivedHierarchySingularName;
             }
         }
 
@@ -207,7 +206,7 @@ namespace Allors.Meta
         {
             get
             {
-                return DerivedHierarchyPluralName;
+                return this.derivedHierarchyPluralName;
             }
         }
 
@@ -238,7 +237,7 @@ namespace Allors.Meta
         {
             get
             {
-                return this.DerivedRootClasses;
+                return this.derivedRootClasses;
             }
         }
         
@@ -324,7 +323,6 @@ namespace Allors.Meta
                         this.Scale = null;
                         this.Precision = null;
                 
-
                         break;
                     case UnitTags.AllorsBinary:
                         if (!this.Size.HasValue)
@@ -372,20 +370,20 @@ namespace Allors.Meta
         /// </summary>
         internal void DeriveRootClasses()
         {
-            this.DerivedRootClasses =  new List<Class>();
+            this.derivedRootClasses = new List<Class>();
 
             // TODO: Test
             if (this.AssociationType.ObjectType != null)
             {
                 if (this.ObjectType is UnitType)
                 {
-                    this.DerivedRootClasses = new List<Class>(this.AssociationType.ObjectType.RootClasses);
+                    this.derivedRootClasses = new List<Class>(this.AssociationType.ObjectType.RootClasses);
                 }
                 else
                 {
                     if (!this.RelationType.IsManyToMany && this.RelationType.ExistExclusiveRootClasses && !this.IsMany)
                     {
-                        this.DerivedRootClasses = new List<Class>(this.AssociationType.ObjectType.RootClasses);
+                        this.derivedRootClasses = new List<Class>(this.AssociationType.ObjectType.RootClasses);
                     }
                 }
             }
@@ -398,7 +396,7 @@ namespace Allors.Meta
         internal void DeriveHierarchyPluralName(HashSet<CompositeType> objectTypes)
         {
             objectTypes.Clear();
-            this.DerivedHierarchyPluralName = null;
+            this.derivedHierarchyPluralName = null;
 
             if (this.ObjectType != null && this.AssociationType.ObjectType != null)
             {
@@ -421,7 +419,7 @@ namespace Allors.Meta
                     }
                 }
 
-                this.DerivedHierarchyPluralName = this.PluralName;
+                this.derivedHierarchyPluralName = this.PluralName;
 
                 foreach (var objectType in objectTypes)
                 {
@@ -440,7 +438,7 @@ namespace Allors.Meta
                                         // TODO: Test for PluralName == null
                                         if (otherRole.PluralName.Equals(this.PluralName))
                                         {
-                                            DerivedHierarchyPluralName = this.FullPluralName;
+                                            this.derivedHierarchyPluralName = this.FullPluralName;
                                             return;
                                         }
                                     }
@@ -459,7 +457,7 @@ namespace Allors.Meta
         internal void DeriveHierarchySingularName(HashSet<CompositeType> objectTypes)
         {
             objectTypes.Clear();
-            this.DerivedHierarchySingularName = null;
+            this.derivedHierarchySingularName = null;
 
             if (this.ObjectType != null && this.AssociationType.ObjectType != null)
             {
@@ -485,7 +483,7 @@ namespace Allors.Meta
                     }
                 }
 
-                DerivedHierarchySingularName = this.SingularName;
+                this.derivedHierarchySingularName = this.SingularName;
 
                 foreach (var type in objectTypes)
                 {
@@ -503,7 +501,7 @@ namespace Allors.Meta
                                     {
                                         if (otherRole.SingularName.Equals(this.SingularName))
                                         {
-                                            DerivedHierarchySingularName = this.FullSingularName;
+                                            this.derivedHierarchySingularName = this.FullSingularName;
                                             return;
                                         }
                                     }
@@ -520,17 +518,17 @@ namespace Allors.Meta
         /// </summary>
         internal void DeriveRootName()
         {
-            this.DerivedRootName = null;
+            this.derivedRootName = null;
 
             if (this.ObjectType != null && this.AssociationType.ObjectType != null)
             {
-                this.DerivedRootName = this.FullSingularName;
+                this.derivedRootName = this.FullSingularName;
 
-                if (this.DerivedRootClasses.Count > 0)
+                if (this.derivedRootClasses.Count > 0)
                 {
-                    this.DerivedRootName = this.SingularName;
+                    this.derivedRootName = this.SingularName;
 
-                    foreach (var rootType in this.DerivedRootClasses)
+                    foreach (var rootType in this.derivedRootClasses)
                     {
                         foreach (var otherRole in rootType.RoleTypes)
                         {
@@ -540,7 +538,7 @@ namespace Allors.Meta
                                 {
                                     if (otherRole.SingularName.Equals(this.SingularName))
                                     {
-                                        DerivedRootName = this.FullSingularName;
+                                        this.derivedRootName = this.FullSingularName;
                                         return;
                                     }
                                 }
