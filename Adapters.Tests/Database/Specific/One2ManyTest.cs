@@ -4194,9 +4194,9 @@ namespace Allors.Adapters.Special
                         mark();
                         acme.AddOwner(fred);
 
-                        if (john.EmployerWhereEmployee.ExistManager)
+                        if (john.CompanyWhereEmployee.ExistManager)
                         {
-                            foreach (Person owner in john.EmployerWhereEmployee.Owners)
+                            foreach (Person owner in john.CompanyWhereEmployee.Owners)
                             {
                                 foreach (Company company in owner.CompaniesWhereOwner)
                                 {

@@ -2,16 +2,17 @@
 {
     using System;
 
-    using Domain;
-
     class Program
     {
         static void Main(string[] args)
         {
-            var domain = M.D;
-            var log = domain.Validate();
-            Console.WriteLine(string.Join("\n", log.Messages));
+            Generate();
+        }
 
+        public static void Generate()
+        {
+            var log = Allors.Development.Repository.Tasks.Generate.Execute("../../../Templates/Core/domain.cs.stg", "../../../Domain/Adapters/Output");
+            Console.WriteLine(log);
             Console.ReadKey();
         }
     }

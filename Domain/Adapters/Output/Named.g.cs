@@ -4,74 +4,19 @@ namespace Domain
 {
 	public partial interface Named : Allors.IObject
 	{
-
-
-		global::System.String Name 
-		{
-			get;
-			set;
-		}
-
-		bool ExistName{get;}
-
-		void RemoveName();
-
-
-		global::System.Int32? Index 
-		{
-			get;
-			set;
-		}
-
-		bool ExistIndex{get;}
-
-		void RemoveIndex();
-
-
-
-		global::Domain.Company CompanyWhereNamedOneSort2
-		{
-			get;
-		}
-
-		bool ExistCompanyWhereNamedOneSort2
-		{
-			get;
-		}
-
-
-		Allors.Extent<global::Domain.Company> CompaniesWhereNamedManySort1
-		{ 
-			get;
-		}
-
-		bool ExistCompaniesWhereNamedManySort1
-		{
-			get;
-		}
-
-
-		Allors.Extent<global::Domain.Company> CompaniesWhereNamedManySort2
-		{ 
-			get;
-		}
-
-		bool ExistCompaniesWhereNamedManySort2
-		{
-			get;
-		}
-
-
-		global::Domain.Company CompanyWhereNamedOneSort1
-		{
-			get;
-		}
-
-		bool ExistCompanyWhereNamedOneSort1
-		{
-			get;
-		}
-
 	}
 
+	public static class NamedMeta
+	{
+		public static readonly global::Allors.Meta.Interface ObjectType = (Allors.Meta.Interface)global::Domain.M.D.Find( new System.Guid("fcaa52e3-4a90-4981-b45d-d158e2589506") );
+
+		public static readonly global::Allors.Meta.RoleType Name = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("ce43ca5e-4dfb-4fe1-98ea-17d8382e9531"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType Index = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("fdad723a-f062-492a-989c-8d8727c52679"))).RoleType;
+
+		public static readonly global::Allors.Meta.AssociationType CompanyWhereNamedOneSort2 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("2f9fc05e-c904-4056-83f0-a7081762594a"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType CompaniesWhereNamedManySort1 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("996d27ff-3615-4a51-9214-944fac566a11"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType CompaniesWhereNamedManySort2 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("c1f68661-4999-4851-9224-1878258b6a58"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType CompanyWhereNamedOneSort1 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("cdf04399-aa37-4ea2-9ac8-bf6d19884933"))).AssociationType;
+
+	}
 }

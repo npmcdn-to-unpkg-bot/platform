@@ -97,7 +97,7 @@ namespace Allors.Development.Repository.Generation
             return this.Name;
         }
 
-        internal void Generate(Meta.Domain domain, DirectoryInfo outputDirectory, Log log)
+        internal void Generate(Domain domain, DirectoryInfo outputDirectory, Log log)
         {
             if (!domain.IsValid)
             {
@@ -120,8 +120,14 @@ namespace Allors.Development.Repository.Generation
                 var location = new Location(outputDirectory);
                 foreach (XmlElement generation in configurationXml.DocumentElement.SelectNodes(GenerationKey))
                 {
-                    var template = group.GetInstanceOf(generation.GetAttribute(TemplateKey));
+                    var templateName = generation.GetAttribute(TemplateKey);
+                    var template = group.GetInstanceOf(templateName);
                     var output = generation.GetAttribute(OutputKey);
+
+                    if (template == null)
+                    {
+                        System.Console.WriteLine(0);
+                    }
 
                     template.Add(DomainKey, domain);
                     if (generation.HasAttribute(InputKey))

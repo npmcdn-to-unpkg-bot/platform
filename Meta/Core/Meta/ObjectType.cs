@@ -49,6 +49,38 @@ namespace Allors.Meta
             }
         }
 
+        public bool IsUnit
+        {
+            get
+            {
+                return this is Unit;
+            }
+        }
+
+        public bool IsComposite
+        {
+            get
+            {
+                return this is Composite;
+            }
+        }
+
+        public bool IsInterface
+        {
+            get
+            {
+                return this is Interface;
+            }
+        }
+
+        public bool IsClass
+        {
+            get
+            {
+                return this is Class;
+            }
+        }
+
         /// <summary>
         /// Gets the validation name.
         /// </summary>

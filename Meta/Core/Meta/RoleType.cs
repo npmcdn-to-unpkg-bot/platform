@@ -124,6 +124,23 @@ namespace Allors.Meta
         }
 
         /// <summary>
+        /// Gets the full name.
+        /// </summary>
+        /// <value>The full name.</value>
+        public string FullName
+        {
+            get
+            {
+                if (this.IsMany)
+                {
+                    return this.PluralFullName;
+                }
+
+                return this.SingularFullName;
+            }
+        }
+
+        /// <summary>
         /// Gets the full singular name.
         /// </summary>
         /// <value>The full singular name.</value>
@@ -139,6 +156,23 @@ namespace Allors.Meta
         public string PluralFullName
         {
             get { return this.RelationType.AssociationType.SingularName + this.PluralName; }
+        }
+
+        /// <summary>
+        /// Gets the property name.
+        /// </summary>
+        /// <value>The full name</value>
+        public string PropertyName
+        {
+            get
+            {
+                if (this.IsMany)
+                {
+                    return this.PluralPropertyName;
+                }
+
+                return this.SingularPropertyName;
+            }
         }
 
         public string SingularPropertyName

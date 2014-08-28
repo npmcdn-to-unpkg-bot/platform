@@ -4,370 +4,45 @@ namespace Domain
 {
 	public partial interface IGT32Unit : Allors.IObject
 	{
-
-
-		global::System.String AllorsString2 
-		{
-			get;
-			set;
-		}
-
-		bool ExistAllorsString2{get;}
-
-		void RemoveAllorsString2();
-
-
-		global::System.String AllorsString5 
-		{
-			get;
-			set;
-		}
-
-		bool ExistAllorsString5{get;}
-
-		void RemoveAllorsString5();
-
-
-		global::System.String AllorsString19 
-		{
-			get;
-			set;
-		}
-
-		bool ExistAllorsString19{get;}
-
-		void RemoveAllorsString19();
-
-
-		global::System.String AllorsString18 
-		{
-			get;
-			set;
-		}
-
-		bool ExistAllorsString18{get;}
-
-		void RemoveAllorsString18();
-
-
-		global::System.String AllorsString21 
-		{
-			get;
-			set;
-		}
-
-		bool ExistAllorsString21{get;}
-
-		void RemoveAllorsString21();
-
-
-		global::System.String AllorsString31 
-		{
-			get;
-			set;
-		}
-
-		bool ExistAllorsString31{get;}
-
-		void RemoveAllorsString31();
-
-
-		global::System.String AllorsString15 
-		{
-			get;
-			set;
-		}
-
-		bool ExistAllorsString15{get;}
-
-		void RemoveAllorsString15();
-
-
-		global::System.String AllorsString6 
-		{
-			get;
-			set;
-		}
-
-		bool ExistAllorsString6{get;}
-
-		void RemoveAllorsString6();
-
-
-		global::System.String AllorsString27 
-		{
-			get;
-			set;
-		}
-
-		bool ExistAllorsString27{get;}
-
-		void RemoveAllorsString27();
-
-
-		global::System.String AllorsString11 
-		{
-			get;
-			set;
-		}
-
-		bool ExistAllorsString11{get;}
-
-		void RemoveAllorsString11();
-
-
-		global::System.String AllorsString33 
-		{
-			get;
-			set;
-		}
-
-		bool ExistAllorsString33{get;}
-
-		void RemoveAllorsString33();
-
-
-		global::System.String AllorsString32 
-		{
-			get;
-			set;
-		}
-
-		bool ExistAllorsString32{get;}
-
-		void RemoveAllorsString32();
-
-
-		global::System.String AllorsString25 
-		{
-			get;
-			set;
-		}
-
-		bool ExistAllorsString25{get;}
-
-		void RemoveAllorsString25();
-
-
-		global::System.String AllorsString8 
-		{
-			get;
-			set;
-		}
-
-		bool ExistAllorsString8{get;}
-
-		void RemoveAllorsString8();
-
-
-		global::System.String AllorsString28 
-		{
-			get;
-			set;
-		}
-
-		bool ExistAllorsString28{get;}
-
-		void RemoveAllorsString28();
-
-
-		global::System.String AllorsString29 
-		{
-			get;
-			set;
-		}
-
-		bool ExistAllorsString29{get;}
-
-		void RemoveAllorsString29();
-
-
-		global::System.String AllorsString20 
-		{
-			get;
-			set;
-		}
-
-		bool ExistAllorsString20{get;}
-
-		void RemoveAllorsString20();
-
-
-		global::System.String AllorsString16 
-		{
-			get;
-			set;
-		}
-
-		bool ExistAllorsString16{get;}
-
-		void RemoveAllorsString16();
-
-
-		global::System.String AllorsString30 
-		{
-			get;
-			set;
-		}
-
-		bool ExistAllorsString30{get;}
-
-		void RemoveAllorsString30();
-
-
-		global::System.String AllorsString12 
-		{
-			get;
-			set;
-		}
-
-		bool ExistAllorsString12{get;}
-
-		void RemoveAllorsString12();
-
-
-		global::System.String AllorsString26 
-		{
-			get;
-			set;
-		}
-
-		bool ExistAllorsString26{get;}
-
-		void RemoveAllorsString26();
-
-
-		global::System.String AllorsString17 
-		{
-			get;
-			set;
-		}
-
-		bool ExistAllorsString17{get;}
-
-		void RemoveAllorsString17();
-
-
-		global::System.String AllorsString4 
-		{
-			get;
-			set;
-		}
-
-		bool ExistAllorsString4{get;}
-
-		void RemoveAllorsString4();
-
-
-		global::System.String AllorsString10 
-		{
-			get;
-			set;
-		}
-
-		bool ExistAllorsString10{get;}
-
-		void RemoveAllorsString10();
-
-
-		global::System.String AllorsString23 
-		{
-			get;
-			set;
-		}
-
-		bool ExistAllorsString23{get;}
-
-		void RemoveAllorsString23();
-
-
-		global::System.String AllorsString24 
-		{
-			get;
-			set;
-		}
-
-		bool ExistAllorsString24{get;}
-
-		void RemoveAllorsString24();
-
-
-		global::System.String AllorsString1 
-		{
-			get;
-			set;
-		}
-
-		bool ExistAllorsString1{get;}
-
-		void RemoveAllorsString1();
-
-
-		global::System.String AllorsString14 
-		{
-			get;
-			set;
-		}
-
-		bool ExistAllorsString14{get;}
-
-		void RemoveAllorsString14();
-
-
-		global::System.String AllorsString13 
-		{
-			get;
-			set;
-		}
-
-		bool ExistAllorsString13{get;}
-
-		void RemoveAllorsString13();
-
-
-		global::System.String AllorsString22 
-		{
-			get;
-			set;
-		}
-
-		bool ExistAllorsString22{get;}
-
-		void RemoveAllorsString22();
-
-
-		global::System.String AllorsString3 
-		{
-			get;
-			set;
-		}
-
-		bool ExistAllorsString3{get;}
-
-		void RemoveAllorsString3();
-
-
-		global::System.String AllorsString7 
-		{
-			get;
-			set;
-		}
-
-		bool ExistAllorsString7{get;}
-
-		void RemoveAllorsString7();
-
-
-		global::System.String AllorsString9 
-		{
-			get;
-			set;
-		}
-
-		bool ExistAllorsString9{get;}
-
-		void RemoveAllorsString9();
-
 	}
 
+	public static class IGT32UnitMeta
+	{
+		public static readonly global::Allors.Meta.Interface ObjectType = (Allors.Meta.Interface)global::Domain.M.D.Find( new System.Guid("584681af-90f0-45b1-a80e-6a73c3592600") );
+
+		public static readonly global::Allors.Meta.RoleType IGT32UnitAllorsString2 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("113ea45f-0e8a-423d-b650-30ab4ac85ebd"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32UnitAllorsString5 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("163739dd-60aa-48b3-8566-43accb24cf0f"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32UnitAllorsString19 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("18bf90a6-2954-4e4f-bfa9-78ede63314bf"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32UnitAllorsString18 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("209d428f-87b5-49d9-b3b6-9ef357889f2a"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32UnitAllorsString21 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("2279e1c7-1f8d-4daf-b686-aee9c143ce5d"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32UnitAllorsString31 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("26a72acf-af4e-48b5-af95-b3fa78bfbcf8"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32UnitAllorsString15 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("36daace4-f9d1-453d-9caf-90173b13017b"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32UnitAllorsString6 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("4c0539d2-2ef3-4572-8098-3e161c338316"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32UnitAllorsString27 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("505b67b2-6e0b-45cc-9474-5782ab40f0a7"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32UnitAllorsString11 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("60be7e02-6c19-4f55-a67d-041c0c29c7b1"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32UnitAllorsString33 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("63e19c51-8721-4a53-a129-fff09429498e"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32UnitAllorsString32 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("6facb71c-1399-41c3-94cd-e51b2ace2d49"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32UnitAllorsString25 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("7890180e-3ea8-490d-a360-16f04ef567dd"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32UnitAllorsString8 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("7a653b33-2ea5-483f-903d-6f13891e6c44"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32UnitAllorsString28 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("81d16484-71fd-445b-a681-0363a6d95325"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32UnitAllorsString29 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("84670520-d8c9-407f-82e3-6eb53f1fb290"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32UnitAllorsString20 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("88324671-7170-4798-8cc0-d2b25212f7a1"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32UnitAllorsString16 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("8d97b1d0-304a-4e8a-b62f-f425e9327ad8"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32UnitAllorsString30 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("8f538538-785f-4cdc-9106-2137644f36ae"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32UnitAllorsString12 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("96f9bb98-8658-4903-9b97-7dbb50ac258d"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32UnitAllorsString26 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("a0ce37ac-ec40-4215-9ff6-7b39121080af"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32UnitAllorsString17 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("a5ed3f77-5f87-4994-8f25-a35fad3f71fe"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32UnitAllorsString4 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("a6c3242f-aab8-481e-803e-67d7d45f15d3"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32UnitAllorsString10 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("a91487f7-8b1a-454c-9adb-e14c3ac49271"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32UnitAllorsString23 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("abd8508a-e03a-4bee-ac5f-738551400205"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32UnitAllorsString24 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("b43ff179-22f1-47cb-a304-24e4ec977cf9"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32UnitAllorsString1 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("b9309d7a-9946-4462-93a8-51f78efe0696"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32UnitAllorsString14 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("ca170e8c-5aef-452e-8a3e-1228054d9a85"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32UnitAllorsString13 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("cdb2dbc9-e481-4d7b-8746-e931c7c75da5"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32UnitAllorsString22 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("ce493f43-d598-43fd-970f-042debdc0d67"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32UnitAllorsString3 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("db9ce637-26ba-4551-abc2-4199d91e7db5"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32UnitAllorsString7 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("e27c59c0-a8ed-46c2-8fd6-707bb45b8af5"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32UnitAllorsString9 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("e518ffe9-7a15-469d-9062-fb0f3e25fde3"))).RoleType;
+
+	}
 }

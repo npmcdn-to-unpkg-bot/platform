@@ -56,12 +56,7 @@ namespace Allors.Meta
         {
             get
             {
-                if (this.IsMany)
-                {
-                    return this.PluralFullName;
-                }
-
-                return this.SingularFullName;
+                return this.FullName;
             }
         }
 
@@ -84,12 +79,29 @@ namespace Allors.Meta
         }
 
         /// <summary>
+        /// Gets the full name.
+        /// </summary>
+        /// <value>The full name</value>
+        public string FullName
+        {
+            get
+            {
+                if (this.IsMany)
+                {
+                    return this.PluralFullName;
+                }
+
+                return this.SingularFullName;
+            }
+        }
+
+        /// <summary>
         /// Gets the singular name when using <see cref="Where"/>.
         /// </summary>
         /// <value>The singular name when using <see cref="Where"/>.</value>
         public string SingularFullName
         {
-            get { return this.ObjectType.SingularName + this.RelationType.RoleType.SingularName; }
+            get { return this.RelationType.RoleType.SingularName + this.ObjectType.SingularName; }
         }
 
         /// <summary>
@@ -98,7 +110,24 @@ namespace Allors.Meta
         /// <value>The plural name when using <see cref="Where"/>.</value>
         public string PluralFullName
         {
-            get { return this.ObjectType.PluralName + this.RelationType.RoleType.SingularName; }
+            get { return this.RelationType.RoleType.SingularName + this.ObjectType.PluralName; }
+        }
+
+        /// <summary>
+        /// Gets the property name.
+        /// </summary>
+        /// <value>The full name</value>
+        public string PropertyName
+        {
+            get
+            {
+                if (this.IsMany)
+                {
+                    return this.PluralPropertyName;
+                }
+
+                return this.SingularPropertyName;
+            }
         }
 
         /// <summary>

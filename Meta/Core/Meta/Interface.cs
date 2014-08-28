@@ -52,6 +52,24 @@ namespace Allors.Meta
             this.Domain.OnInterfaceCreated(this);
         }
 
+        #region Exists
+        public bool ExistSubclasses
+        {
+            get
+            {
+                return this.Subclasses.Count > 0;
+            }
+        }
+
+        public bool ExistSubtypes
+        {
+            get
+            {
+                return this.Subtypes.Count > 0;
+            }
+        }
+        #endregion
+
         /// <summary>
         /// Gets the subclasses.
         /// </summary>
@@ -176,7 +194,7 @@ namespace Allors.Meta
         /// Derive super types recursively.
         /// </summary>
         /// <param name="type">The type .</param>
-        /// <param name="superTypes">The super types.</param>
+        /// <param name="subTypes">The super types.</param>
         private void DeriveSubtypesRecursively(ObjectType type, HashSet<Composite> subTypes)
         {
             foreach (var directSubtype in this.derivedDirectSubtypes)

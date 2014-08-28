@@ -81,14 +81,6 @@ namespace Allors
         /// </param>
         public ObjectFactory(Domain domain, Assembly assembly, string @namespace)
         {
-            var validationLog = domain.Validate();
-            if (validationLog.ContainsErrors)
-            {
-                throw new Exception(validationLog.ToString());
-            }
-
-            domain.Derive();
-
             this.domain = domain;
             this.assembly = assembly;
             this.ns = @namespace;
@@ -105,7 +97,7 @@ namespace Allors
 
             var typeByName = types.ToDictionary(type => type.Name, type => type);
 
-            foreach (var objectType in domain.CompositeTypes)
+            foreach (var objectType in domain.Composites)
             {
                 var type = typeByName[objectType.Name];
 

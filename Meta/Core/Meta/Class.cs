@@ -34,7 +34,7 @@ namespace Allors.Meta
             this.Domain.OnClassCreated(this);
             this.selfList = new List<Class> { this };
         }
-
+        
         public override IList<Class> RootClasses
         {
             get

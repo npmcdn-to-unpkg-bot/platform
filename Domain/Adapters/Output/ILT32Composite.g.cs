@@ -6,46 +6,46 @@ namespace Domain
 	{
 
 
-		global::Domain.ILT32Composite Self3
+		global::Domain.ILT32Composite ILT32CompositeSelf3
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistSelf3
+		bool ExistILT32CompositeSelf3
 		{
 			get;
 		}
 
-		void RemoveSelf3();
+		void RemoveILT32CompositeSelf3();
 
 
-		global::Domain.ILT32Composite Self2
+		global::Domain.ILT32Composite ILT32CompositeSelf2
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistSelf2
+		bool ExistILT32CompositeSelf2
 		{
 			get;
 		}
 
-		void RemoveSelf2();
+		void RemoveILT32CompositeSelf2();
 
 
-		global::Domain.ILT32Composite Self1
+		global::Domain.ILT32Composite ILT32CompositeSelf1
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistSelf1
+		bool ExistILT32CompositeSelf1
 		{
 			get;
 		}
 
-		void RemoveSelf1();
+		void RemoveILT32CompositeSelf1();
 
 
 
@@ -83,4 +83,17 @@ namespace Domain
 
 	}
 
+	public static class ILT32CompositeMeta
+	{
+		public static readonly global::Allors.Meta.Interface ObjectType = (Allors.Meta.Interface)global::Domain.M.D.Find( new System.Guid("4f53e1e7-e88a-4161-969c-1fed0b3a24a2") );
+
+		public static readonly global::Allors.Meta.RoleType ILT32CompositeSelf3 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("be3fc71d-66d8-411f-ab5f-4ed91e437852"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType ILT32CompositeSelf2 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("c03a8b50-7fd1-4304-9d45-2c699fcbee80"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType ILT32CompositeSelf1 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("d0eeeb45-97a6-465e-9a05-7e0fa970a969"))).RoleType;
+
+		public static readonly global::Allors.Meta.AssociationType ILT32CompositesWhereSelf3 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("be3fc71d-66d8-411f-ab5f-4ed91e437852"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType ILT32CompositesWhereSelf2 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("c03a8b50-7fd1-4304-9d45-2c699fcbee80"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType ILT32CompositesWhereSelf1 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("d0eeeb45-97a6-465e-9a05-7e0fa970a969"))).AssociationType;
+
+	}
 }

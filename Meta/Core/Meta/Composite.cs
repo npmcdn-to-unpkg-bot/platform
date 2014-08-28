@@ -24,6 +24,7 @@ namespace Allors.Meta
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Security.Permissions;
 
     public abstract partial class Composite : ObjectType
     {
@@ -51,6 +52,64 @@ namespace Allors.Meta
             : base(domain, id)
         {
         }
+
+        #region Exists
+        public bool ExistExclusiveRootClass
+        {
+            get
+            {
+                return this.ExclusiveRootClass != null;
+            }
+        }
+
+        public bool ExistRootClasses
+        {
+            get
+            {
+                return this.RootClasses.Count > 0;
+            }
+        }
+
+        public bool ExistDirectSupertypes
+        {
+            get
+            {
+                return this.DirectSupertypes.Count > 0;
+            }
+        }
+
+        public bool ExistSupertypes
+        {
+            get
+            {
+                return this.Supertypes.Count > 0;
+            }
+        }
+
+        public bool ExistAssociationTypes
+        {
+            get
+            {
+                return this.AssociationTypes.Count > 0;
+            }
+        }
+
+        public bool ExistRoleTypes
+        {
+            get
+            {
+                return this.AssociationTypes.Count > 0;
+            }
+        }
+
+        public bool ExistMethodTypes
+        {
+            get
+            {
+                return this.MethodTypes.Count > 0;
+            }
+        }
+        #endregion
 
         /// <summary>
         /// Gets the exclusive concrete subclass.
@@ -100,6 +159,14 @@ namespace Allors.Meta
             }
         }
 
+        public IList<AssociationType> AssociationTypesWhereObjectType
+        {
+            get
+            {
+                return this.AssociationTypes.Where(associationType => this.Equals(associationType.ObjectType)).ToArray();
+            }
+        }
+
         /// <summary>
         /// Gets the roles.
         /// </summary>
@@ -109,6 +176,14 @@ namespace Allors.Meta
             get
             {
                 return this.derivedRoleTypes;
+            }
+        }
+
+        public IList<RoleType> RoleTypesWhereObjectType
+        {
+            get
+            {
+                return this.RoleTypes.Where(roleType => this.Equals(roleType.ObjectType)).ToArray();
             }
         }
 

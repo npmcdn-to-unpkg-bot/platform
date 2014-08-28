@@ -6,39 +6,6 @@ namespace Domain
 	{
 
 
-		global::System.Double? S1234AllorsDouble 
-		{
-			get;
-			set;
-		}
-
-		bool ExistS1234AllorsDouble{get;}
-
-		void RemoveS1234AllorsDouble();
-
-
-		global::System.Decimal? S1234AllorsDecimal 
-		{
-			get;
-			set;
-		}
-
-		bool ExistS1234AllorsDecimal{get;}
-
-		void RemoveS1234AllorsDecimal();
-
-
-		global::System.Int32? S1234AllorsInteger 
-		{
-			get;
-			set;
-		}
-
-		bool ExistS1234AllorsInteger{get;}
-
-		void RemoveS1234AllorsInteger();
-
-
 		global::Domain.S1234 S1234many2one
 		{ 
 			get;
@@ -51,38 +18,6 @@ namespace Domain
 		}
 
 		void RemoveS1234many2one();
-
-
-		global::Domain.C2 S1234C2one2one
-		{ 
-			get;
-			set;
-		}
-
-		bool ExistS1234C2one2one
-		{
-			get;
-		}
-
-		void RemoveS1234C2one2one();
-
-
-		Allors.Extent<global::Domain.C2> S1234C2many2manies
-		{ 
-			get;
-			set;
-		}
-
-		void AddS1234C2many2many (global::Domain.C2 value);
-
-		void RemoveS1234C2many2many (global::Domain.C2 value);
-
-		bool ExistS1234C2many2manies
-		{
-			get;
-		}
-
-		void RemoveS1234C2many2manies();
 
 
 		Allors.Extent<global::Domain.S1234> S1234one2manies
@@ -103,24 +38,6 @@ namespace Domain
 		void RemoveS1234one2manies();
 
 
-		Allors.Extent<global::Domain.C2> S1234C2one2manies
-		{ 
-			get;
-			set;
-		}
-
-		void AddS1234C2one2many (global::Domain.C2 value);
-
-		void RemoveS1234C2one2many (global::Domain.C2 value);
-
-		bool ExistS1234C2one2manies
-		{
-			get;
-		}
-
-		void RemoveS1234C2one2manies();
-
-
 		Allors.Extent<global::Domain.S1234> S1234many2manies
 		{ 
 			get;
@@ -139,39 +56,6 @@ namespace Domain
 		void RemoveS1234many2manies();
 
 
-		global::System.Int64? S1234AllorsLong 
-		{
-			get;
-			set;
-		}
-
-		bool ExistS1234AllorsLong{get;}
-
-		void RemoveS1234AllorsLong();
-
-
-		global::System.String ClassName 
-		{
-			get;
-			set;
-		}
-
-		bool ExistClassName{get;}
-
-		void RemoveClassName();
-
-
-		global::System.DateTime? S1234AllorsDateTime 
-		{
-			get;
-			set;
-		}
-
-		bool ExistS1234AllorsDateTime{get;}
-
-		void RemoveS1234AllorsDateTime();
-
-
 		global::Domain.S1234 S1234one2one
 		{ 
 			get;
@@ -184,42 +68,6 @@ namespace Domain
 		}
 
 		void RemoveS1234one2one();
-
-
-		global::Domain.C2 S1234C2many2one
-		{ 
-			get;
-			set;
-		}
-
-		bool ExistS1234C2many2one
-		{
-			get;
-		}
-
-		void RemoveS1234C2many2one();
-
-
-		global::System.String S1234AllorsString 
-		{
-			get;
-			set;
-		}
-
-		bool ExistS1234AllorsString{get;}
-
-		void RemoveS1234AllorsString();
-
-
-		global::System.Boolean? S1234AllorsBoolean 
-		{
-			get;
-			set;
-		}
-
-		bool ExistS1234AllorsBoolean{get;}
-
-		void RemoveS1234AllorsBoolean();
 
 
 
@@ -268,4 +116,31 @@ namespace Domain
 
 	}
 
+	public static class S1234Meta
+	{
+		public static readonly global::Allors.Meta.Interface ObjectType = (Allors.Meta.Interface)global::Domain.M.D.Find( new System.Guid("c3c0ecf3-9f8d-4701-854f-8ddea1bd69fd") );
+
+		public static readonly global::Allors.Meta.RoleType S1234AllorsDouble = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("012a43d3-e1e0-4693-a771-1526c29b7ac4"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType S1234AllorsDecimal = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("2ac36edd-d718-4252-b7cf-74849e1fca6e"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType S1234AllorsInteger = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("46263379-afd4-4472-bb05-057fb88163ab"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType S1234many2one = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("4b846355-000b-4651-bff2-51f1275c1461"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType S1234C2one2one = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("58a56dee-c613-4d76-ab99-5608e7709cd8"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType S1234C2many2many = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("73302b50-8526-40ae-a202-5b17e1093629"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType S1234one2many = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("8fb24e1c-9e04-4b3d-8a97-153d3c0ea7ec"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType S1234C2one2many = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("94a49847-273f-4e9b-b07b-d615d994757a"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType S1234many2many = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("a2e7c6f6-ca0d-4fb3-9431-8dd1be7ebdb7"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType S1234AllorsLong = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("b0814062-4881-43ec-935e-c6b61ef0bcf6"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType ClassName = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("b299db28-1107-4120-946c-fbdad2271c5c"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType S1234AllorsDateTime = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("c13e8484-75a3-40be-afd5-44a31aca3771"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType S1234one2one = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("c2fac2fc-14c6-4aa3-89ff-afba1316d06d"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType S1234C2many2one = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("df9eb36a-366f-4a5a-a750-f2f23f681c74"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType S1234AllorsString = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("e6164217-2f54-4134-8c53-4a45caa9dd11"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType S1234AllorsBoolean = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("ef45cd72-2e16-47df-b949-c803a554b307"))).RoleType;
+
+		public static readonly global::Allors.Meta.AssociationType S1234sWhereS1234many2one = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("4b846355-000b-4651-bff2-51f1275c1461"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType S1234WhereS1234one2many = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("8fb24e1c-9e04-4b3d-8a97-153d3c0ea7ec"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType S1234sWhereS1234many2many = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("a2e7c6f6-ca0d-4fb3-9431-8dd1be7ebdb7"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType S1234WhereS1234one2one = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("c2fac2fc-14c6-4aa3-89ff-afba1316d06d"))).AssociationType;
+
+	}
 }

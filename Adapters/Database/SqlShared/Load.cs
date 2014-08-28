@@ -214,7 +214,7 @@ namespace Allors.Adapters.Database.Sql
 
         protected virtual void LoadObjectsPostProcess(ManagementSession session)
         {
-            foreach (var type in this.database.Domain.CompositeTypes)
+            foreach (var type in this.database.Domain.Composites)
             {
                 if (type is Class)
                 {

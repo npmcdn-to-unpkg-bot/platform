@@ -36,15 +36,21 @@ namespace Allors.Development.Repository.Tasks
 
         public string Output { get; set; }
 
-        public bool Execute()
+        public static Log Execute(string template, string output)
         {
             var log = new GenerateLog();
 
-            var templateFileInfo = new FileInfo(this.Template);
-            var template = new StringTemplate(templateFileInfo);
-            var outputDirectoryInfo = new DirectoryInfo(this.Output);
-            template.Generate(Domain.M.D, outputDirectoryInfo, log);
+            var templateFileInfo = new FileInfo(template);
+            var stringTemplate = new StringTemplate(templateFileInfo);
+            var outputDirectoryInfo = new DirectoryInfo(output);
+            stringTemplate.Generate(Domain.M.D, outputDirectoryInfo, log);
 
+            return log;
+        }
+
+        public bool Execute()
+        {
+            var log = Execute(this.Template, this.Output);
             return !log.ErrorOccured;
         }
     }

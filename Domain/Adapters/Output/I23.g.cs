@@ -4,18 +4,13 @@ namespace Domain
 {
 	public partial interface I23 : Allors.IObject
 	{
-
-
-		global::System.String I23AllorsString 
-		{
-			get;
-			set;
-		}
-
-		bool ExistI23AllorsString{get;}
-
-		void RemoveI23AllorsString();
-
 	}
 
+	public static class I23Meta
+	{
+		public static readonly global::Allors.Meta.Interface ObjectType = (Allors.Meta.Interface)global::Domain.M.D.Find( new System.Guid("29cb9717-2452-4da0-9a29-8bd5d815307a") );
+
+		public static readonly global::Allors.Meta.RoleType I23AllorsString = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("0407c93e-f2ea-49e4-8779-44b42c554e60"))).RoleType;
+
+	}
 }

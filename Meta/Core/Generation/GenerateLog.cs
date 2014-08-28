@@ -28,8 +28,6 @@ namespace Allors.Development.Repository.Tasks
             this.ErrorOccured = false;
         }
 
-        public bool ErrorOccured { get; private set; }
-
         public override void Error(object sender, string message)
         {
             this.ErrorOccured = true;

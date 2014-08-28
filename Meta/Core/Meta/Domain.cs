@@ -22,7 +22,6 @@
 namespace Allors.Meta
 {
     using System;
-    using System;
     using System.Collections.Generic;
 
     /// <summary>
@@ -37,7 +36,7 @@ namespace Allors.Meta
 
         private readonly Dictionary<Guid, MetaObject> metaObjectById;
 
-        private IList<Composite> derivedCompositeTypes;
+        private IList<Composite> derivedComposites;
         
         public Domain(Guid id)
         {
@@ -52,7 +51,7 @@ namespace Allors.Meta
 
             this.metaObjectById = new Dictionary<Guid, MetaObject>();
 
-            this.AddAllorsUnitPopulation();
+            this.AddUnits();
         }
 
         public string Name { get; set; }
@@ -73,11 +72,11 @@ namespace Allors.Meta
         /// Gets the composite types.
         /// </summary>
         /// <value>The composite types.</value>
-        public IList<Composite> CompositeTypes
+        public IList<Composite> Composites
         {
             get
             {
-                return this.derivedCompositeTypes;
+                return this.derivedComposites;
             }
         }
      
@@ -207,7 +206,7 @@ namespace Allors.Meta
             // Unit & Composite ObjectTypes
             var compositeTypes = new List<Composite>(this.Interfaces);
             compositeTypes.AddRange(this.Classes);
-            this.derivedCompositeTypes = compositeTypes;
+            this.derivedComposites = compositeTypes;
 
             var sharedCompositeTypes = new HashSet<Composite>();
             var sharedInterfaces = new HashSet<Interface>();
@@ -217,7 +216,7 @@ namespace Allors.Meta
             var sharedAssociationTypes = new HashSet<AssociationType>();
 
             // DirectSupertypes
-            foreach (var type in this.derivedCompositeTypes)
+            foreach (var type in this.derivedComposites)
             {
                 type.DeriveDirectSupertypes(sharedInterfaces);
             }
@@ -229,7 +228,7 @@ namespace Allors.Meta
             }
 
             // Supertypes
-            foreach (var type in this.derivedCompositeTypes)
+            foreach (var type in this.derivedComposites)
             {
                 type.DeriveSupertypes(sharedInterfaces);
             }
@@ -259,13 +258,13 @@ namespace Allors.Meta
             }
 
             // RoleTypes
-            foreach (var type in this.derivedCompositeTypes)
+            foreach (var type in this.derivedComposites)
             {
                 type.DeriveRoleTypes(sharedRoleTypes);
             }
 
             // AssociationTypes
-            foreach (var type in this.derivedCompositeTypes)
+            foreach (var type in this.derivedComposites)
             {
                 type.DeriveAssociationTypes(sharedAssociationTypes);
             }
@@ -284,12 +283,12 @@ namespace Allors.Meta
                 relationType.RoleType.DerivePluralPropertyName();
             }
 
-            foreach (var type in this.CompositeTypes)
+            foreach (var type in this.Composites)
             {
                 type.DeriveRoleTypeIdsCache();
             }
 
-            foreach (var type in this.CompositeTypes)
+            foreach (var type in this.Composites)
             {
                 type.DeriveAssociationIdsCache();
             }
@@ -297,13 +296,13 @@ namespace Allors.Meta
             var sharedMethodTypeList = new HashSet<MethodType>();
 
             // MethodTypes
-            foreach (var type in this.derivedCompositeTypes)
+            foreach (var type in this.derivedComposites)
             {
                 type.DeriveMethodTypes(sharedMethodTypeList);
             }
         }
 
-        internal void OnUnitTypeCreated(Unit unit)
+        internal void OnUnitCreated(Unit unit)
         {
             this.UnitTypes.Add(unit);
             this.metaObjectById.Add(unit.Id, unit);
@@ -386,7 +385,7 @@ namespace Allors.Meta
         /// <summary>
         /// Adds the default population.
         /// </summary>
-        private void AddAllorsUnitPopulation()
+        private void AddUnits()
         {
             {
                 var objectType = new Unit(this, UnitIds.StringId);

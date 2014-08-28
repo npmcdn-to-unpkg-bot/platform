@@ -388,7 +388,7 @@ namespace Allors.Adapters.Database.Sql
                 }
             }
 
-            foreach (var objectType in this.Database.Domain.CompositeTypes)
+            foreach (var objectType in this.Database.Domain.Composites)
             {
                 var @class = objectType as Class;
                 if (@class != null)

@@ -5223,6 +5223,15 @@ namespace Domain
                                            AssociationType = { ObjectType = IGT32Composite },
                                            RoleType = { ObjectType = IGT32Composite, AssignedSingularName = "Self16", AssignedPluralName = "Selfs16" }
                                        };
+
+
+            var validationLog = D.Validate();
+            if (validationLog.ContainsErrors)
+            {
+                throw new Exception(validationLog.ToString());
+            }
+
+            D.Derive();
         }
     }
 }

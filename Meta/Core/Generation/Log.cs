@@ -28,5 +28,7 @@ namespace Allors.Development.Repository
         /// <param name="sender">The sender.</param>
         /// <param name="message">The message.</param>
         public abstract void Error(object sender, string message);
+
+        public bool ErrorOccured { get; protected set; }
     }
 }

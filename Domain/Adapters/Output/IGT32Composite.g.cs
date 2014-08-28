@@ -6,466 +6,466 @@ namespace Domain
 	{
 
 
-		global::Domain.IGT32Composite Self13
+		global::Domain.IGT32Composite IGT32CompositeSelf13
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistSelf13
+		bool ExistIGT32CompositeSelf13
 		{
 			get;
 		}
 
-		void RemoveSelf13();
+		void RemoveIGT32CompositeSelf13();
 
 
-		global::Domain.IGT32Composite Self31
+		global::Domain.IGT32Composite IGT32CompositeSelf31
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistSelf31
+		bool ExistIGT32CompositeSelf31
 		{
 			get;
 		}
 
-		void RemoveSelf31();
+		void RemoveIGT32CompositeSelf31();
 
 
-		global::Domain.IGT32Composite Self14
+		global::Domain.IGT32Composite IGT32CompositeSelf14
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistSelf14
+		bool ExistIGT32CompositeSelf14
 		{
 			get;
 		}
 
-		void RemoveSelf14();
+		void RemoveIGT32CompositeSelf14();
 
 
-		global::Domain.IGT32Composite Self21
+		global::Domain.IGT32Composite IGT32CompositeSelf21
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistSelf21
+		bool ExistIGT32CompositeSelf21
 		{
 			get;
 		}
 
-		void RemoveSelf21();
+		void RemoveIGT32CompositeSelf21();
 
 
-		global::Domain.IGT32Composite Self2
+		global::Domain.IGT32Composite IGT32CompositeSelf2
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistSelf2
+		bool ExistIGT32CompositeSelf2
 		{
 			get;
 		}
 
-		void RemoveSelf2();
+		void RemoveIGT32CompositeSelf2();
 
 
-		global::Domain.IGT32Composite Self23
+		global::Domain.IGT32Composite IGT32CompositeSelf23
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistSelf23
+		bool ExistIGT32CompositeSelf23
 		{
 			get;
 		}
 
-		void RemoveSelf23();
+		void RemoveIGT32CompositeSelf23();
 
 
-		global::Domain.IGT32Composite Self22
+		global::Domain.IGT32Composite IGT32CompositeSelf22
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistSelf22
+		bool ExistIGT32CompositeSelf22
 		{
 			get;
 		}
 
-		void RemoveSelf22();
+		void RemoveIGT32CompositeSelf22();
 
 
-		global::Domain.IGT32Composite Self18
+		global::Domain.IGT32Composite IGT32CompositeSelf18
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistSelf18
+		bool ExistIGT32CompositeSelf18
 		{
 			get;
 		}
 
-		void RemoveSelf18();
+		void RemoveIGT32CompositeSelf18();
 
 
-		global::Domain.IGT32Composite Self17
+		global::Domain.IGT32Composite IGT32CompositeSelf17
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistSelf17
+		bool ExistIGT32CompositeSelf17
 		{
 			get;
 		}
 
-		void RemoveSelf17();
+		void RemoveIGT32CompositeSelf17();
 
 
-		global::Domain.IGT32Composite Self3
+		global::Domain.IGT32Composite IGT32CompositeSelf3
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistSelf3
+		bool ExistIGT32CompositeSelf3
 		{
 			get;
 		}
 
-		void RemoveSelf3();
+		void RemoveIGT32CompositeSelf3();
 
 
-		global::Domain.IGT32Composite Self29
+		global::Domain.IGT32Composite IGT32CompositeSelf29
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistSelf29
+		bool ExistIGT32CompositeSelf29
 		{
 			get;
 		}
 
-		void RemoveSelf29();
+		void RemoveIGT32CompositeSelf29();
 
 
-		global::Domain.IGT32Composite Self26
+		global::Domain.IGT32Composite IGT32CompositeSelf26
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistSelf26
+		bool ExistIGT32CompositeSelf26
 		{
 			get;
 		}
 
-		void RemoveSelf26();
+		void RemoveIGT32CompositeSelf26();
 
 
-		global::Domain.IGT32Composite Self4
+		global::Domain.IGT32Composite IGT32CompositeSelf4
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistSelf4
+		bool ExistIGT32CompositeSelf4
 		{
 			get;
 		}
 
-		void RemoveSelf4();
+		void RemoveIGT32CompositeSelf4();
 
 
-		global::Domain.IGT32Composite Self8
+		global::Domain.IGT32Composite IGT32CompositeSelf8
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistSelf8
+		bool ExistIGT32CompositeSelf8
 		{
 			get;
 		}
 
-		void RemoveSelf8();
+		void RemoveIGT32CompositeSelf8();
 
 
-		global::Domain.IGT32Composite Self24
+		global::Domain.IGT32Composite IGT32CompositeSelf24
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistSelf24
+		bool ExistIGT32CompositeSelf24
 		{
 			get;
 		}
 
-		void RemoveSelf24();
+		void RemoveIGT32CompositeSelf24();
 
 
-		global::Domain.IGT32Composite Self12
+		global::Domain.IGT32Composite IGT32CompositeSelf12
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistSelf12
+		bool ExistIGT32CompositeSelf12
 		{
 			get;
 		}
 
-		void RemoveSelf12();
+		void RemoveIGT32CompositeSelf12();
 
 
-		global::Domain.IGT32Composite Self7
+		global::Domain.IGT32Composite IGT32CompositeSelf7
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistSelf7
+		bool ExistIGT32CompositeSelf7
 		{
 			get;
 		}
 
-		void RemoveSelf7();
+		void RemoveIGT32CompositeSelf7();
 
 
-		global::Domain.IGT32Composite Self6
+		global::Domain.IGT32Composite IGT32CompositeSelf6
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistSelf6
+		bool ExistIGT32CompositeSelf6
 		{
 			get;
 		}
 
-		void RemoveSelf6();
+		void RemoveIGT32CompositeSelf6();
 
 
-		global::Domain.IGT32Composite Self25
+		global::Domain.IGT32Composite IGT32CompositeSelf25
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistSelf25
+		bool ExistIGT32CompositeSelf25
 		{
 			get;
 		}
 
-		void RemoveSelf25();
+		void RemoveIGT32CompositeSelf25();
 
 
-		global::Domain.IGT32Composite Self20
+		global::Domain.IGT32Composite IGT32CompositeSelf20
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistSelf20
+		bool ExistIGT32CompositeSelf20
 		{
 			get;
 		}
 
-		void RemoveSelf20();
+		void RemoveIGT32CompositeSelf20();
 
 
-		global::Domain.IGT32Composite Self9
+		global::Domain.IGT32Composite IGT32CompositeSelf9
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistSelf9
+		bool ExistIGT32CompositeSelf9
 		{
 			get;
 		}
 
-		void RemoveSelf9();
+		void RemoveIGT32CompositeSelf9();
 
 
-		global::Domain.IGT32Composite Self11
+		global::Domain.IGT32Composite IGT32CompositeSelf11
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistSelf11
+		bool ExistIGT32CompositeSelf11
 		{
 			get;
 		}
 
-		void RemoveSelf11();
+		void RemoveIGT32CompositeSelf11();
 
 
-		global::Domain.IGT32Composite Self32
+		global::Domain.IGT32Composite IGT32CompositeSelf32
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistSelf32
+		bool ExistIGT32CompositeSelf32
 		{
 			get;
 		}
 
-		void RemoveSelf32();
+		void RemoveIGT32CompositeSelf32();
 
 
-		global::Domain.IGT32Composite Self28
+		global::Domain.IGT32Composite IGT32CompositeSelf28
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistSelf28
+		bool ExistIGT32CompositeSelf28
 		{
 			get;
 		}
 
-		void RemoveSelf28();
+		void RemoveIGT32CompositeSelf28();
 
 
-		global::Domain.IGT32Composite Self33
+		global::Domain.IGT32Composite IGT32CompositeSelf33
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistSelf33
+		bool ExistIGT32CompositeSelf33
 		{
 			get;
 		}
 
-		void RemoveSelf33();
+		void RemoveIGT32CompositeSelf33();
 
 
-		global::Domain.IGT32Composite Self27
+		global::Domain.IGT32Composite IGT32CompositeSelf27
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistSelf27
+		bool ExistIGT32CompositeSelf27
 		{
 			get;
 		}
 
-		void RemoveSelf27();
+		void RemoveIGT32CompositeSelf27();
 
 
-		global::Domain.IGT32Composite Self30
+		global::Domain.IGT32Composite IGT32CompositeSelf30
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistSelf30
+		bool ExistIGT32CompositeSelf30
 		{
 			get;
 		}
 
-		void RemoveSelf30();
+		void RemoveIGT32CompositeSelf30();
 
 
-		global::Domain.IGT32Composite Self1
+		global::Domain.IGT32Composite IGT32CompositeSelf1
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistSelf1
+		bool ExistIGT32CompositeSelf1
 		{
 			get;
 		}
 
-		void RemoveSelf1();
+		void RemoveIGT32CompositeSelf1();
 
 
-		global::Domain.IGT32Composite Self15
+		global::Domain.IGT32Composite IGT32CompositeSelf15
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistSelf15
+		bool ExistIGT32CompositeSelf15
 		{
 			get;
 		}
 
-		void RemoveSelf15();
+		void RemoveIGT32CompositeSelf15();
 
 
-		global::Domain.IGT32Composite Self5
+		global::Domain.IGT32Composite IGT32CompositeSelf5
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistSelf5
+		bool ExistIGT32CompositeSelf5
 		{
 			get;
 		}
 
-		void RemoveSelf5();
+		void RemoveIGT32CompositeSelf5();
 
 
-		global::Domain.IGT32Composite Self19
+		global::Domain.IGT32Composite IGT32CompositeSelf19
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistSelf19
+		bool ExistIGT32CompositeSelf19
 		{
 			get;
 		}
 
-		void RemoveSelf19();
+		void RemoveIGT32CompositeSelf19();
 
 
-		global::Domain.IGT32Composite Self10
+		global::Domain.IGT32Composite IGT32CompositeSelf10
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistSelf10
+		bool ExistIGT32CompositeSelf10
 		{
 			get;
 		}
 
-		void RemoveSelf10();
+		void RemoveIGT32CompositeSelf10();
 
 
-		global::Domain.IGT32Composite Self16
+		global::Domain.IGT32Composite IGT32CompositeSelf16
 		{ 
 			get;
 			set;
 		}
 
-		bool ExistSelf16
+		bool ExistIGT32CompositeSelf16
 		{
 			get;
 		}
 
-		void RemoveSelf16();
+		void RemoveIGT32CompositeSelf16();
 
 
 
@@ -833,4 +833,77 @@ namespace Domain
 
 	}
 
+	public static class IGT32CompositeMeta
+	{
+		public static readonly global::Allors.Meta.Interface ObjectType = (Allors.Meta.Interface)global::Domain.M.D.Find( new System.Guid("ee84609f-e165-4037-b8ce-f7c8b826e603") );
+
+		public static readonly global::Allors.Meta.RoleType IGT32CompositeSelf13 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("010bc5d7-9e1e-4ca7-a146-33b73252c4c8"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32CompositeSelf31 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("02894576-278f-4cbe-9c19-346187f9006f"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32CompositeSelf14 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("03f0e0ab-d24d-4eae-9b05-0ce153055530"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32CompositeSelf21 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("11eb24d1-0c4d-4060-8373-e2f53da416d4"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32CompositeSelf2 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("1d4d3282-f7bc-4619-ae32-d987b4bd87b7"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32CompositeSelf23 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("3a691474-812c-4631-9909-0864297c9e86"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32CompositeSelf22 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("3b523d8e-2163-401a-9ccf-7d85777e216f"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32CompositeSelf18 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("4f4eaf7d-cc6c-4279-b371-d569fc07f148"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32CompositeSelf17 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("6e2f60b4-ee37-4c66-9425-aee146f51bc8"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32CompositeSelf3 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("6f1e2848-b27f-4ccc-a35e-467d77577a29"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32CompositeSelf29 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("77fccc90-38f2-48f6-b834-58f7f972823b"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32CompositeSelf26 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("7d18345c-7754-4ad7-96fa-e83460fa6235"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32CompositeSelf4 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("8ca8e840-1bf7-4131-b5a3-0abb66ba4e36"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32CompositeSelf8 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("8e898953-b166-4573-a56c-3be50b9c651d"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32CompositeSelf24 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("90bb79e0-d32b-49e9-8c05-b02505a31858"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32CompositeSelf12 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("90fe5360-126b-4b2d-a7ba-b29c026883a4"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32CompositeSelf7 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("991b59d1-9225-4534-a86e-8668068c9d45"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32CompositeSelf6 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("a11bfd43-47a9-4f0f-a20a-ec60939a4de1"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32CompositeSelf25 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("ae8fbd21-64dd-4667-b0d9-f6398e14364f"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32CompositeSelf20 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("b6e0754a-b271-4853-afa0-fddb96444249"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32CompositeSelf9 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("b9d79c6c-46cb-4bd8-80a7-8bcae27a3d3c"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32CompositeSelf11 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("c643a160-556b-44bb-b3e4-232d291ff1e2"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32CompositeSelf32 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("c662f343-3859-4d04-8d4b-011087c72885"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32CompositeSelf28 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("c6932f0a-e1de-4d93-ab94-80a5eb0a315c"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32CompositeSelf33 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("c9f2803b-890d-4370-831b-83c65805b160"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32CompositeSelf27 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("cb03691e-8483-4af4-9fc0-83d9ab358e12"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32CompositeSelf30 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("d2b6c061-927e-4db5-b419-ec7375d8845a"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32CompositeSelf1 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("e50d68f0-ab9d-4a0e-8976-324037145aec"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32CompositeSelf15 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("ec22d147-fed5-40a7-9c85-4fccc0717127"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32CompositeSelf5 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("f16b7de2-aed2-49c9-b1dc-618e919136a6"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32CompositeSelf19 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("fdcad358-8532-471a-a47e-1ad45a34a962"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32CompositeSelf10 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("fee41b72-ace5-4cc4-bde5-e1df40b388e4"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType IGT32CompositeSelf16 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("ffbe4164-497e-4b02-acc7-fefec48dc36e"))).RoleType;
+
+		public static readonly global::Allors.Meta.AssociationType IGT32CompositeWhereSelf13 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("010bc5d7-9e1e-4ca7-a146-33b73252c4c8"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType IGT32CompositeWhereSelf31 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("02894576-278f-4cbe-9c19-346187f9006f"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType IGT32CompositeWhereSelf14 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("03f0e0ab-d24d-4eae-9b05-0ce153055530"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType IGT32CompositeWhereSelf21 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("11eb24d1-0c4d-4060-8373-e2f53da416d4"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType IGT32CompositeWhereSelf2 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("1d4d3282-f7bc-4619-ae32-d987b4bd87b7"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType IGT32CompositeWhereSelf23 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("3a691474-812c-4631-9909-0864297c9e86"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType IGT32CompositeWhereSelf22 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("3b523d8e-2163-401a-9ccf-7d85777e216f"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType IGT32CompositeWhereSelf18 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("4f4eaf7d-cc6c-4279-b371-d569fc07f148"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType IGT32CompositeWhereSelf17 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("6e2f60b4-ee37-4c66-9425-aee146f51bc8"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType IGT32CompositeWhereSelf3 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("6f1e2848-b27f-4ccc-a35e-467d77577a29"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType IGT32CompositeWhereSelf29 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("77fccc90-38f2-48f6-b834-58f7f972823b"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType IGT32CompositeWhereSelf26 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("7d18345c-7754-4ad7-96fa-e83460fa6235"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType IGT32CompositeWhereSelf4 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("8ca8e840-1bf7-4131-b5a3-0abb66ba4e36"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType IGT32CompositeWhereSelf8 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("8e898953-b166-4573-a56c-3be50b9c651d"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType IGT32CompositeWhereSelf24 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("90bb79e0-d32b-49e9-8c05-b02505a31858"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType IGT32CompositeWhereSelf12 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("90fe5360-126b-4b2d-a7ba-b29c026883a4"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType IGT32CompositeWhereSelf7 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("991b59d1-9225-4534-a86e-8668068c9d45"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType IGT32CompositeWhereSelf6 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("a11bfd43-47a9-4f0f-a20a-ec60939a4de1"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType IGT32CompositeWhereSelf25 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("ae8fbd21-64dd-4667-b0d9-f6398e14364f"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType IGT32CompositeWhereSelf20 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("b6e0754a-b271-4853-afa0-fddb96444249"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType IGT32CompositeWhereSelf9 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("b9d79c6c-46cb-4bd8-80a7-8bcae27a3d3c"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType IGT32CompositeWhereSelf11 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("c643a160-556b-44bb-b3e4-232d291ff1e2"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType IGT32CompositeWhereSelf32 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("c662f343-3859-4d04-8d4b-011087c72885"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType IGT32CompositeWhereSelf28 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("c6932f0a-e1de-4d93-ab94-80a5eb0a315c"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType IGT32CompositeWhereSelf33 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("c9f2803b-890d-4370-831b-83c65805b160"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType IGT32CompositeWhereSelf27 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("cb03691e-8483-4af4-9fc0-83d9ab358e12"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType IGT32CompositeWhereSelf30 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("d2b6c061-927e-4db5-b419-ec7375d8845a"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType IGT32CompositeWhereSelf1 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("e50d68f0-ab9d-4a0e-8976-324037145aec"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType IGT32CompositeWhereSelf15 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("ec22d147-fed5-40a7-9c85-4fccc0717127"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType IGT32CompositeWhereSelf5 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("f16b7de2-aed2-49c9-b1dc-618e919136a6"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType IGT32CompositeWhereSelf19 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("fdcad358-8532-471a-a47e-1ad45a34a962"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType IGT32CompositeWhereSelf10 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("fee41b72-ace5-4cc4-bde5-e1df40b388e4"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType IGT32CompositeWhereSelf16 = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("ffbe4164-497e-4b02-acc7-fefec48dc36e"))).AssociationType;
+
+	}
 }

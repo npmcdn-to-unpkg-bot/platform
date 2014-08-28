@@ -4,137 +4,22 @@ namespace Domain
 {
 	public partial interface S12 : Allors.IObject
 	{
-
-
-		global::System.String S12AllorsString 
-		{
-			get;
-			set;
-		}
-
-		bool ExistS12AllorsString{get;}
-
-		void RemoveS12AllorsString();
-
-
-		global::System.DateTime? S12AllorsDateTime 
-		{
-			get;
-			set;
-		}
-
-		bool ExistS12AllorsDateTime{get;}
-
-		void RemoveS12AllorsDateTime();
-
-
-		Allors.Extent<global::Domain.C2> S12C2many2manies
-		{ 
-			get;
-			set;
-		}
-
-		void AddS12C2many2many (global::Domain.C2 value);
-
-		void RemoveS12C2many2many (global::Domain.C2 value);
-
-		bool ExistS12C2many2manies
-		{
-			get;
-		}
-
-		void RemoveS12C2many2manies();
-
-
-		global::Domain.C2 S12C2many2one
-		{ 
-			get;
-			set;
-		}
-
-		bool ExistS12C2many2one
-		{
-			get;
-		}
-
-		void RemoveS12C2many2one();
-
-
-		global::Domain.C2 S12C2one2one
-		{ 
-			get;
-			set;
-		}
-
-		bool ExistS12C2one2one
-		{
-			get;
-		}
-
-		void RemoveS12C2one2one();
-
-
-		Allors.Extent<global::Domain.C2> S12C2one2manies
-		{ 
-			get;
-			set;
-		}
-
-		void AddS12C2one2many (global::Domain.C2 value);
-
-		void RemoveS12C2one2many (global::Domain.C2 value);
-
-		bool ExistS12C2one2manies
-		{
-			get;
-		}
-
-		void RemoveS12C2one2manies();
-
-
-		global::System.Boolean? S12AllorsBoolean 
-		{
-			get;
-			set;
-		}
-
-		bool ExistS12AllorsBoolean{get;}
-
-		void RemoveS12AllorsBoolean();
-
-
-		global::System.Double? S12AllorsDouble 
-		{
-			get;
-			set;
-		}
-
-		bool ExistS12AllorsDouble{get;}
-
-		void RemoveS12AllorsDouble();
-
-
-		global::System.Int32? S12AllorsInteger 
-		{
-			get;
-			set;
-		}
-
-		bool ExistS12AllorsInteger{get;}
-
-		void RemoveS12AllorsInteger();
-
-
-		global::System.Decimal? S12AllorsDecimal 
-		{
-			get;
-			set;
-		}
-
-		bool ExistS12AllorsDecimal{get;}
-
-		void RemoveS12AllorsDecimal();
-
 	}
 
+	public static class S12Meta
+	{
+		public static readonly global::Allors.Meta.Interface ObjectType = (Allors.Meta.Interface)global::Domain.M.D.Find( new System.Guid("c5747a64-f468-4d0d-80f3-6463bd32b0ca") );
+
+		public static readonly global::Allors.Meta.RoleType S12AllorsString = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("06fabe71-737a-4cff-ac10-2d15dafce503"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType S12AllorsDateTime = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("2eb9e232-4ed4-4997-a21a-f11bb0fe3b0e"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType S12C2many2many = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("39f50108-df59-455d-8371-fc07f3dbb7ef"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType S12C2many2one = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("61e8c425-407e-408b-9f2e-c95548833004"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType S12C2one2one = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("830117d4-fbe1-4944-bacf-54331e8451d7"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType S12C2one2many = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("a3aac482-aad0-4b59-9361-51b23867e5a2"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType S12AllorsBoolean = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("a97eca8e-807b-4a06-9587-6240f6150203"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType S12AllorsDouble = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("acc4ae39-2d5c-4485-be22-87b27e84b627"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType S12AllorsInteger = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("d07313ca-fd8d-4c74-928e-41274aa28de9"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType S12AllorsDecimal = ((Allors.Meta.RelationType)global::Domain.M.D.Find( new System.Guid("f7ace363-89bd-4ea5-a865-4a6e3de2d723"))).RoleType;
+
+	}
 }
