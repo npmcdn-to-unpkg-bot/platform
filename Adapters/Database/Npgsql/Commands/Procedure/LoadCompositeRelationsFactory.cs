@@ -45,7 +45,7 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
             {
                 if (associationType.IsMany || !roleType.RelationType.ExistExclusiveRootClasses)
                 {
-                    sql = Schema.AllorsPrefix + "A_" + roleType.FullSingularName;
+                    sql = Schema.AllorsPrefix + "A_" + roleType.SingularFullName;
                 }
                 else
                 {
@@ -57,11 +57,11 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
             {
                 if (!roleType.RelationType.ExistExclusiveRootClasses)
                 {
-                    sql = Schema.AllorsPrefix + "S_" + roleType.FullSingularName;
+                    sql = Schema.AllorsPrefix + "S_" + roleType.SingularFullName;
                 }
                 else
                 {
-                    sql = Schema.AllorsPrefix + "S_" + associationType.ObjectType.ExclusiveRootClass.Name + "_" + roleType.RootName;
+                    sql = Schema.AllorsPrefix + "S_" + associationType.ObjectType.ExclusiveRootClass.Name + "_" + roleType.SingularPropertyName;
                 }
             }
 

@@ -58,10 +58,10 @@ namespace Allors.Meta
             {
                 if (this.IsMany)
                 {
-                    return this.FullPluralName;
+                    return this.PluralFullName;
                 }
 
-                return this.FullSingularName;
+                return this.SingularFullName;
             }
         }
 
@@ -84,19 +84,10 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Gets the plural name when using <see cref="Where"/>.
-        /// </summary>
-        /// <value>The plural name when using <see cref="Where"/>.</value>
-        public string FullPluralName
-        {
-            get { return this.ObjectType.PluralName + this.RelationType.RoleType.SingularName; }
-        }
-
-        /// <summary>
         /// Gets the singular name when using <see cref="Where"/>.
         /// </summary>
         /// <value>The singular name when using <see cref="Where"/>.</value>
-        public string FullSingularName
+        public string SingularFullName
         {
             get { return this.ObjectType.SingularName + this.RelationType.RoleType.SingularName; }
         }
@@ -105,18 +96,27 @@ namespace Allors.Meta
         /// Gets the plural name when using <see cref="Where"/>.
         /// </summary>
         /// <value>The plural name when using <see cref="Where"/>.</value>
-        public string WherePluralName
+        public string PluralFullName
         {
-            get { return this.ObjectType.PluralName + Where + this.RelationType.RoleType.SingularName; }
+            get { return this.ObjectType.PluralName + this.RelationType.RoleType.SingularName; }
         }
 
         /// <summary>
         /// Gets the singular name when using <see cref="Where"/>.
         /// </summary>
         /// <value>The singular name when using <see cref="Where"/>.</value>
-        public string WhereSingularName
+        public string SingularPropertyName
         {
             get { return this.ObjectType.SingularName + Where + this.RelationType.RoleType.SingularName; }
+        }
+
+        /// <summary>
+        /// Gets the plural name when using <see cref="Where"/>.
+        /// </summary>
+        /// <value>The plural name when using <see cref="Where"/>.</value>
+        public string PluralPropertyName
+        {
+            get { return this.ObjectType.PluralName + Where + this.RelationType.RoleType.SingularName; }
         }
 
         /// <summary>

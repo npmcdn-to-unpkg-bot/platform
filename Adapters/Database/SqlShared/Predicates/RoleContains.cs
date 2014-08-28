@@ -59,7 +59,7 @@ namespace Allors.Adapters.Database.Sql
                 // It should work for normal queries, but it fails when wrapped in a NOT( ... ) predicate.
                 // The rows with NULL values should then return TRUE and not UNKNOWN.
                 //
-                // statement.sql.Append(" " + role.RootName + "_R." + schema.O + " = " + allorsObject.ObjectId);
+                // statement.sql.Append(" " + role.SingularPropertyName + "_R." + schema.O + " = " + allorsObject.ObjectId);
 
                 statement.Append("\n");
                 statement.Append("EXISTS(\n");

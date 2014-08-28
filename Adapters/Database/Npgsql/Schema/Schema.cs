@@ -760,7 +760,7 @@ $$ language plpgsql;
                                     if (relationType.RoleType.Size == -1)
                                     {
                                         // Set MAX String Role
-                                        procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.RootName };
+                                        procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularPropertyName };
                                         procedure.Definition =
 @"DROP FUNCTION IF EXISTS " + procedure.Name + @"(" + this.ObjectArrayParam.TypeName + ", " + this.StringRelationArrayParam.TypeName + @");
 CREATE FUNCTION " + procedure.Name + @"(" + this.ObjectArrayParam + @" " + this.ObjectArrayParam.TypeName + @", " + this.StringRelationArrayParam + @" " + this.StringRelationArrayParam.TypeName + @")
@@ -784,7 +784,7 @@ $$ language plpgsql;
                                     else
                                     {
                                         // Set String Role
-                                        procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.RootName };
+                                        procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularPropertyName };
                                         procedure.Definition =
 @"DROP FUNCTION IF EXISTS " + procedure.Name + @"(" + this.ObjectArrayParam.TypeName + ", " + this.StringMaxRelationArrayParam.TypeName + @");
 CREATE FUNCTION " + procedure.Name + @"(" + this.ObjectArrayParam + @" " + this.ObjectArrayParam.TypeName + @", " + this.StringMaxRelationArrayParam + @" " + this.StringMaxRelationArrayParam.TypeName + @")
@@ -811,7 +811,7 @@ $$ language plpgsql;
 
                                 case UnitTags.AllorsInteger:
                                     // Set Integer Role
-                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.RootName };
+                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularPropertyName };
                                     procedure.Definition =
 @"DROP FUNCTION IF EXISTS " + procedure.Name + @"(" + this.ObjectArrayParam.TypeName + ", " + this.IntegerRelationArrayParam.TypeName + @");
 CREATE FUNCTION " + procedure.Name + @"(" + this.ObjectArrayParam + @" " + this.ObjectArrayParam.TypeName + @", " + this.IntegerRelationArrayParam + @" " + this.IntegerRelationArrayParam.TypeName + @")
@@ -837,7 +837,7 @@ $$ language plpgsql;
 
                                 case UnitTags.AllorsLong:
                                     // Set Long Role
-                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.RootName };
+                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularPropertyName };
                                     procedure.Definition =
 @"DROP FUNCTION IF EXISTS " + procedure.Name + @"(" + this.ObjectArrayParam.TypeName + ", " + this.LongRelationArrayParam.TypeName + @");
 CREATE FUNCTION " + procedure.Name + @"(" + this.ObjectArrayParam + @" " + this.ObjectArrayParam.TypeName + @", " + this.LongRelationArrayParam + @" " + this.LongRelationArrayParam.TypeName + @")
@@ -863,7 +863,7 @@ $$ language plpgsql;
 
                                 case UnitTags.AllorsDecimal:
                                     // Set Decimal Role
-                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.RootName };
+                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularPropertyName };
                                     procedure.Definition =
 @"DROP FUNCTION IF EXISTS " + procedure.Name + @"(" + this.ObjectArrayParam.TypeName + ", " + this.DecimalRelationArrayParam.TypeName + @");
 CREATE FUNCTION " + procedure.Name + @"(" + this.ObjectArrayParam + @" " + this.ObjectArrayParam.TypeName + @", " + this.DecimalRelationArrayParam + @" " + this.DecimalRelationArrayParam.TypeName + @")
@@ -889,7 +889,7 @@ $$ language plpgsql;
 
                                 case UnitTags.AllorsDouble:
                                     // Set Double Role
-                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.RootName };
+                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularPropertyName };
                                     procedure.Definition =
 @"DROP FUNCTION IF EXISTS " + procedure.Name + @"(" + this.ObjectArrayParam.TypeName + ", " + this.DoubleRelationArrayParam.TypeName + @");
 CREATE FUNCTION " + procedure.Name + @"(" + this.ObjectArrayParam + @" " + this.ObjectArrayParam.TypeName + @", " + this.DoubleRelationArrayParam + @" " + this.DoubleRelationArrayParam.TypeName + @")
@@ -915,7 +915,7 @@ $$ language plpgsql;
 
                                 case UnitTags.AllorsBoolean:
                                     // Set Boolean Role
-                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.RootName };
+                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularPropertyName };
                                     procedure.Definition =
 @"DROP FUNCTION IF EXISTS " + procedure.Name + @"(" + this.ObjectArrayParam.TypeName + ", " + this.BooleanRelationArrayParam.TypeName + @");
 CREATE FUNCTION " + procedure.Name + @"(" + this.ObjectArrayParam + @" " + this.ObjectArrayParam.TypeName + @", " + this.BooleanRelationArrayParam + @" " + this.BooleanRelationArrayParam.TypeName + @")
@@ -940,7 +940,7 @@ $$ language plpgsql;
 
                                 case UnitTags.AllorsDateTime:
                                     // Set DateTime Role
-                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.RootName };
+                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularPropertyName };
                                     procedure.Definition =
 @"DROP FUNCTION IF EXISTS " + procedure.Name + @"(" + this.ObjectArrayParam.TypeName + ", " + this.DateTimeRelationArrayParam.TypeName + @");
 CREATE FUNCTION " + procedure.Name + @"(" + this.ObjectArrayParam + @" " + this.ObjectArrayParam.TypeName + @", " + this.DateTimeRelationArrayParam + @" " + this.DateTimeRelationArrayParam.TypeName + @")
@@ -965,7 +965,7 @@ $$ language plpgsql;
 
                                 case UnitTags.AllorsUnique:
                                     // Set Unique Role
-                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.RootName };
+                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularPropertyName };
                                     procedure.Definition =
 @"DROP FUNCTION IF EXISTS " + procedure.Name + @"(" + this.ObjectArrayParam.TypeName + ", " + this.UniqueRelationArrayParam.TypeName + @");
 CREATE FUNCTION " + procedure.Name + @"(" + this.ObjectArrayParam + @" " + this.ObjectArrayParam.TypeName + @", " + this.UniqueRelationArrayParam + @" " + this.UniqueRelationArrayParam.TypeName + @")
@@ -990,7 +990,7 @@ $$ language plpgsql;
 
                                 case UnitTags.AllorsBinary:
                                     // Set Binary Role
-                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.RootName };
+                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularPropertyName };
                                     procedure.Definition =
 @"DROP FUNCTION IF EXISTS " + procedure.Name + @"(" + this.ObjectArrayParam.TypeName + ", " + this.BinaryRelationArrayParam.TypeName + @");
 CREATE FUNCTION " + procedure.Name + @"(" + this.ObjectArrayParam + @" " + this.ObjectArrayParam.TypeName + @", " + this.BinaryRelationArrayParam + @" " + this.BinaryRelationArrayParam.TypeName + @")
@@ -1023,7 +1023,7 @@ $$ language plpgsql;
                             if (roleType.IsOne)
                             {
                                 // Get Composite Role (1-1 and *-1) [object table]
-                                procedure = new SchemaProcedure { Name = AllorsPrefix + "GR_" + objectType.Name + "_" + roleType.RootName };
+                                procedure = new SchemaProcedure { Name = AllorsPrefix + "GR_" + objectType.Name + "_" + roleType.SingularPropertyName };
                                 procedure.Definition =
 @"DROP FUNCTION IF EXISTS " + procedure.Name + @"(" + this.database.GetSqlType(this.AssociationId) + @");
 CREATE FUNCTION " + procedure.Name + @"(" + this.AssociationId.Param + @" " + this.database.GetSqlType(this.AssociationId) + @")
@@ -1088,7 +1088,7 @@ $$ language plpgsql;
                                 }
 
                                 // Set Composite Role (1-1 and *-1) [object table]
-                                procedure = new SchemaProcedure { Name = AllorsPrefix + "S_" + objectType.Name + "_" + roleType.RootName };
+                                procedure = new SchemaProcedure { Name = AllorsPrefix + "S_" + objectType.Name + "_" + roleType.SingularPropertyName };
                                 procedure.Definition =
 @"DROP FUNCTION IF EXISTS " + procedure.Name + @"(" + this.ObjectArrayParam.TypeName + ", " + this.CompositeRelationArrayParam.TypeName  + @");
 CREATE FUNCTION " + procedure.Name + @"(" + this.ObjectArrayParam + @" " + this.ObjectArrayParam.TypeName + @", " + this.CompositeRelationArrayParam + @" " + this.CompositeRelationArrayParam.TypeName + @")
@@ -1112,7 +1112,7 @@ $$ language plpgsql;
                                 this.procedureByName.Add(procedure.Name, procedure);
 
                                 // Clear Composite Role (1-1 and *-1) [object table]
-                                procedure = new SchemaProcedure { Name = AllorsPrefix + "C_" + objectType.Name + "_" + roleType.RootName };
+                                procedure = new SchemaProcedure { Name = AllorsPrefix + "C_" + objectType.Name + "_" + roleType.SingularPropertyName };
                                 procedure.Definition =
 @"DROP FUNCTION IF EXISTS " + procedure.Name + @"(" + this.ObjectArrayParam.TypeName + @");
 CREATE FUNCTION " + procedure.Name + @"(" + this.ObjectArrayParam + @" " + this.ObjectArrayParam.TypeName + @")
@@ -1253,7 +1253,7 @@ $$ language plpgsql;
                 if (roleType.IsMany)
                 {
                     // Get Composites Role (1-* and *-*) [relation table]
-                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GR_" + roleType.FullSingularName };
+                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GR_" + roleType.SingularFullName };
                     procedure.Definition =
 @"DROP FUNCTION IF EXISTS " + procedure.Name + @"(" + this.database.GetSqlType(this.AssociationId) + @");
 CREATE FUNCTION " + procedure.Name + @"(" + this.AssociationId.Param + @" " + this.database.GetSqlType(this.AssociationId) + @")
@@ -1272,7 +1272,7 @@ $$ language plpgsql;
                     this.procedureByName.Add(procedure.Name, procedure);
 
                     // Add Composite Role (1-* and *-*) [relation table]
-                    procedure = new SchemaProcedure { Name = AllorsPrefix + "A_" + roleType.FullSingularName };
+                    procedure = new SchemaProcedure { Name = AllorsPrefix + "A_" + roleType.SingularFullName };
                     procedure.Definition =
 @"DROP FUNCTION IF EXISTS " + procedure.Name + @"(" + this.ObjectArrayParam.TypeName + ", " + this.CompositeRelationArrayParam.TypeName + @");
 CREATE FUNCTION " + procedure.Name + @"(" + this.ObjectArrayParam + @" " + this.ObjectArrayParam.TypeName + @", " + this.CompositeRelationArrayParam + @" " + this.CompositeRelationArrayParam.TypeName + @")
@@ -1295,7 +1295,7 @@ $$ language plpgsql;
                     this.procedureByName.Add(procedure.Name, procedure);
 
                     // Remove Composite Role (1-* and *-*) [relation table]
-                    procedure = new SchemaProcedure { Name = AllorsPrefix + "R_" + roleType.FullSingularName };
+                    procedure = new SchemaProcedure { Name = AllorsPrefix + "R_" + roleType.SingularFullName };
                     procedure.Definition =
 @"DROP FUNCTION IF EXISTS " + procedure.Name + @"(" + this.ObjectArrayParam.TypeName + ", " + this.CompositeRelationArrayParam.TypeName + @");
 CREATE FUNCTION " + procedure.Name + @"(" + this.ObjectArrayParam + @" " + this.ObjectArrayParam.TypeName + @", " + this.CompositeRelationArrayParam + " " + this.CompositeRelationArrayParam.TypeName + @")
@@ -1323,7 +1323,7 @@ $$ language plpgsql;
                 else
                 {
                     // Get Composite Role (1-1 and *-1) [relation table]
-                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GR_" + roleType.FullSingularName };
+                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GR_" + roleType.SingularFullName };
                     procedure.Definition =
 @"DROP FUNCTION IF EXISTS " + procedure.Name + @"(" + this.database.GetSqlType(this.AssociationId) + @");
 CREATE FUNCTION " + procedure.Name + @"(" + this.AssociationId.Param + @" " + this.database.GetSqlType(this.AssociationId) + @")
@@ -1344,7 +1344,7 @@ $$ language plpgsql;
                     this.procedureByName.Add(procedure.Name, procedure);
 
                     // Set Composite Role (1-1 and *-1) [relation table]
-                    procedure = new SchemaProcedure { Name = AllorsPrefix + "S_" + roleType.FullSingularName };
+                    procedure = new SchemaProcedure { Name = AllorsPrefix + "S_" + roleType.SingularFullName };
                     procedure.Definition =
 @"DROP FUNCTION IF EXISTS " + procedure.Name + @"(" + this.ObjectArrayParam.TypeName + ", " + this.CompositeRelationArrayParam.TypeName + @");
 CREATE FUNCTION " + procedure.Name + @"(" + this.ObjectArrayParam + @" " + this.ObjectArrayParam.TypeName + @", " + this.CompositeRelationArrayParam + @" " + this.CompositeRelationArrayParam.TypeName + @")
@@ -1377,7 +1377,7 @@ $$ language plpgsql;
                 if (associationType.IsOne)
                 {
                     // Get Composite Association (1-1) [relation table]
-                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GA_" + roleType.FullSingularName };
+                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GA_" + roleType.SingularFullName };
                     procedure.Definition =
 @"DROP FUNCTION IF EXISTS " + procedure.Name + @"(" + this.database.GetSqlType(this.RoleId) + @");
 CREATE FUNCTION " + procedure.Name + @"(" + this.RoleId.Param + @" " + this.database.GetSqlType(this.RoleId) + @")
@@ -1400,7 +1400,7 @@ $$ language plpgsql;
                 else
                 {
                     // Get Composite Association (*-1) [relation table]
-                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GA_" + roleType.FullSingularName };
+                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GA_" + roleType.SingularFullName };
                     procedure.Definition =
 @"DROP FUNCTION IF EXISTS " + procedure.Name + @"(" + this.database.GetSqlType(this.RoleId) + @");
 CREATE FUNCTION " + procedure.Name + @"(" + this.RoleId.Param + @" " + this.database.GetSqlType(this.RoleId) + @")
@@ -1419,7 +1419,7 @@ $$ language plpgsql;
                 }
 
                 // Clear Composite Role (1-1 and *-1) [relation table]
-                procedure = new SchemaProcedure { Name = AllorsPrefix + "C_" + roleType.FullSingularName };
+                procedure = new SchemaProcedure { Name = AllorsPrefix + "C_" + roleType.SingularFullName };
                 procedure.Definition =
 @"DROP FUNCTION IF EXISTS " + procedure.Name + @"(" + this.ObjectArrayParam.TypeName + @");
 CREATE FUNCTION " + procedure.Name + @"(" + this.ObjectArrayParam + @" " + this.ObjectArrayParam.TypeName + @")

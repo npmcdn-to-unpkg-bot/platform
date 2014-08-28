@@ -59,7 +59,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
                 string sql;
                 if (associationType.IsMany || !roleType.RelationType.ExistExclusiveRootClasses)
                 {
-                    sql = Sql.Schema.AllorsPrefix + "GR_" + roleType.FullSingularName;
+                    sql = Sql.Schema.AllorsPrefix + "GR_" + roleType.SingularFullName;
                 }
                 else
                 {

@@ -71,7 +71,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
                 }
                 else
                 {
-                    sql = Sql.Schema.AllorsPrefix + "GA_" + roleType.FullSingularName;
+                    sql = Sql.Schema.AllorsPrefix + "GA_" + roleType.SingularFullName;
                 }
 
                 this.sqlByAssociationType[associationType] = sql;

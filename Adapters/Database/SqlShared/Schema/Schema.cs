@@ -369,14 +369,14 @@ namespace Allors.Adapters.Database.Sql
                 {
                     if (roleType.ObjectType is Unit)
                     {
-                        var column = new SchemaColumn(this, roleType.RootName, this.GetDbType(roleType), false, false, relationType.IsIndexed ? SchemaIndexType.Single : SchemaIndexType.None, relationType, roleType.Size, roleType.Precision, roleType.Scale);
+                        var column = new SchemaColumn(this, roleType.SingularPropertyName, this.GetDbType(roleType), false, false, relationType.IsIndexed ? SchemaIndexType.Single : SchemaIndexType.None, relationType, roleType.Size, roleType.Precision, roleType.Scale);
                         this.ColumnsByRelationType.Add(relationType, column);
                     }
                     else if (relationType.ExistExclusiveRootClasses)
                     {
                         if (roleType.IsOne)
                         {
-                            var column = new SchemaColumn(this, roleType.RootName, this.ObjectDbType, false, false, relationType.IsIndexed ? SchemaIndexType.Combined : SchemaIndexType.None, relationType);
+                            var column = new SchemaColumn(this, roleType.SingularPropertyName, this.ObjectDbType, false, false, relationType.IsIndexed ? SchemaIndexType.Combined : SchemaIndexType.None, relationType);
                             this.ColumnsByRelationType.Add(relationType, column);
                         }
                         else

@@ -44,13 +44,13 @@ namespace Allors.Adapters.Database.Sql
             {
                 if ((this.role.IsMany && this.role.RelationType.AssociationType.IsMany) || !this.role.RelationType.ExistExclusiveRootClasses)
                 {
-                    statement.Append(" " + this.role.RootName + "_R." + schema.RoleId + " IS NOT NULL");
+                    statement.Append(" " + this.role.SingularPropertyName + "_R." + schema.RoleId + " IS NOT NULL");
                 }
                 else
                 {
                     if (this.role.IsMany)
                     {
-                        statement.Append(" " + this.role.RootName + "_R." + schema.ObjectId + " IS NOT NULL");
+                        statement.Append(" " + this.role.SingularPropertyName + "_R." + schema.ObjectId + " IS NOT NULL");
                     }
                     else
                     {

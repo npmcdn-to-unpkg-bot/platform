@@ -56,13 +56,13 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
                 string sql;
                 if ((roleType.IsMany && associationType.IsMany) || !roleType.RelationType.ExistExclusiveRootClasses)
                 {
-                    sql = Sql.Schema.AllorsPrefix + "C_" + roleType.FullSingularName;
+                    sql = Sql.Schema.AllorsPrefix + "C_" + roleType.SingularFullName;
                 }
                 else
                 {
                     if (roleType.IsOne)
                     {
-                        sql = Sql.Schema.AllorsPrefix + "C_" + associationType.ObjectType.ExclusiveRootClass.Name + "_" + roleType.RootName;
+                        sql = Sql.Schema.AllorsPrefix + "C_" + associationType.ObjectType.ExclusiveRootClass.Name + "_" + roleType.SingularPropertyName;
                     }
                     else
                     {

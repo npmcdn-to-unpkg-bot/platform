@@ -277,10 +277,11 @@ namespace Allors.Meta
                 relationType.RoleType.DeriveMultiplicityScaleAndSize();
             }
 
-            // RoleType Root Name
+            // RoleType Property Names
             foreach (var relationType in this.RelationTypes)
             {
-                relationType.RoleType.DeriveRootName();
+                relationType.RoleType.DeriveSingularPropertyName();
+                relationType.RoleType.DerivePluralPropertyName();
             }
 
             foreach (var type in this.CompositeTypes)

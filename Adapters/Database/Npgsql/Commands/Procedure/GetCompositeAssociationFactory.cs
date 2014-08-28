@@ -70,7 +70,7 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
                 }
                 else
                 {
-                    sql = Schema.AllorsPrefix + "GA_" + roleType.FullSingularName;
+                    sql = Schema.AllorsPrefix + "GA_" + roleType.SingularFullName;
                 }
 
                 this.sqlByAssociationType[associationType] = sql;

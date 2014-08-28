@@ -82,16 +82,16 @@ namespace Allors.Adapters.Database.Sql
                 {
                     if ((association.IsMany && role.IsMany) || !relationType.ExistExclusiveRootClasses)
                     {
-                        this.Append(" LEFT OUTER JOIN " + this.Schema.Table(role) + " " + role.RootName + "_R");
-                        this.Append(" ON " + alias + "." + this.Schema.ObjectId + "=" + role.RootName + "_R." + this.Schema.AssociationId);
+                        this.Append(" LEFT OUTER JOIN " + this.Schema.Table(role) + " " + role.SingularPropertyName + "_R");
+                        this.Append(" ON " + alias + "." + this.Schema.ObjectId + "=" + role.SingularPropertyName + "_R." + this.Schema.AssociationId);
                     }
                     else
                     {
                         if (role.IsMany)
                         {
                             var compositeType = (Composite)role.ObjectType;
-                            this.Append(" LEFT OUTER JOIN " + this.Schema.Table(compositeType.ExclusiveRootClass) + " " + role.RootName + "_R");
-                            this.Append(" ON " + alias + "." + this.Schema.ObjectId + "=" + role.RootName + "_R." + this.Schema.Column(association));
+                            this.Append(" LEFT OUTER JOIN " + this.Schema.Table(compositeType.ExclusiveRootClass) + " " + role.SingularPropertyName + "_R");
+                            this.Append(" ON " + alias + "." + this.Schema.ObjectId + "=" + role.SingularPropertyName + "_R." + this.Schema.Column(association));
                         }
                     }
                 }
@@ -106,7 +106,7 @@ namespace Allors.Adapters.Database.Sql
                     if (!relationType.ExistExclusiveRootClasses)
                     {
                         this.Append(" LEFT OUTER JOIN " + this.Schema.Objects + " " + this.GetJoinName(role));
-                        this.Append(" ON " + this.GetJoinName(role) + "." + this.Schema.ObjectId + "=" + role.RootName + "_R." + this.Schema.RoleId + " ");
+                        this.Append(" ON " + this.GetJoinName(role) + "." + this.Schema.ObjectId + "=" + role.SingularPropertyName + "_R." + this.Schema.RoleId + " ");
                     }
                     else
                     {
@@ -205,7 +205,7 @@ namespace Allors.Adapters.Database.Sql
 
         public string GetJoinName(RoleType role)
         {
-            return role.FullSingularName + "_RC";
+            return role.SingularFullName + "_RC";
         }
 
         public void UseAssociation(AssociationType association)

@@ -254,13 +254,13 @@ namespace Allors.Adapters.Database.Sql
 
                     if (inRelationType.IsManyToMany || !inRelationType.ExistExclusiveRootClasses)
                     {
-                        statement.Append("SELECT " + inAssociation.RoleType.RootName + "_R." + this.Schema.RoleId);
+                        statement.Append("SELECT " + inAssociation.RoleType.SingularPropertyName + "_R." + this.Schema.RoleId);
                     }
                     else
                     {
                         if (inAssociation.RoleType.IsMany)
                         {
-                            statement.Append("SELECT " + inAssociation.RoleType.RootName + "_R." +
+                            statement.Append("SELECT " + inAssociation.RoleType.SingularPropertyName + "_R." +
                                              this.Schema.Column(inAssociation.RoleType));
                         }
                         else
@@ -290,18 +290,18 @@ namespace Allors.Adapters.Database.Sql
 
                     if (inRelationType.IsManyToMany || !inRelationType.ExistExclusiveRootClasses)
                     {
-                        statement.Append(inAssociation.RoleType.RootName + "_R." + this.Schema.RoleId + " IS NOT NULL ");
+                        statement.Append(inAssociation.RoleType.SingularPropertyName + "_R." + this.Schema.RoleId + " IS NOT NULL ");
                     }
                     else
                     {
                         if (inAssociation.RoleType.IsMany)
                         {
-                            statement.Append(inAssociation.RoleType.RootName + "_R." +
+                            statement.Append(inAssociation.RoleType.SingularPropertyName + "_R." +
                                              this.Schema.Column(inAssociation.RoleType) + " IS NOT NULL ");
                         }
                         else
                         {
-                            statement.Append(alias + "." + inAssociation.RoleType.RootName + " IS NOT NULL ");
+                            statement.Append(alias + "." + inAssociation.RoleType.SingularPropertyName + " IS NOT NULL ");
                         }
                     }
                 }

@@ -70,8 +70,8 @@ namespace Allors.Adapters.Database.Sql
                 }
                 else
                 {
-                    statement.Append(" (" + this.roleType.RootName + "_R." + schema.RoleId + " IS NOT NULL AND ");
-                    statement.Append(" " + this.roleType.RootName + "_R." + schema.RoleId + "=" + allorsObject.Strategy.ObjectId + ")");
+                    statement.Append(" (" + this.roleType.SingularPropertyName + "_R." + schema.RoleId + " IS NOT NULL AND ");
+                    statement.Append(" " + this.roleType.SingularPropertyName + "_R." + schema.RoleId + "=" + allorsObject.Strategy.ObjectId + ")");
                 }
             }
 

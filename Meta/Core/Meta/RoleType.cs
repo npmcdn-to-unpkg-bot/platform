@@ -35,7 +35,9 @@ namespace Allors.Meta
         /// </summary>
         public const int MaximumSize = -1;
 
-        private string derivedRootName;
+        private string derivedSingularPropertyName;
+
+        private string derivedPluralPropertyName;
 
         public RoleType(RelationType relationType, Guid roleTypeId)
         {
@@ -125,7 +127,7 @@ namespace Allors.Meta
         /// Gets the full singular name.
         /// </summary>
         /// <value>The full singular name.</value>
-        public string FullSingularName
+        public string SingularFullName
         {
             get { return this.RelationType.AssociationType.SingularName + this.SingularName; }
         }
@@ -134,20 +136,24 @@ namespace Allors.Meta
         /// Gets the full plural name.
         /// </summary>
         /// <value>The full plural name.</value>
-        public string FullPluralName
+        public string PluralFullName
         {
             get { return this.RelationType.AssociationType.SingularName + this.PluralName; }
         }
 
-        /// <summary>
-        /// Gets the name of the root.
-        /// </summary>
-        /// <value>The name of the root.</value>
-        public string RootName
+        public string SingularPropertyName
         {
             get
             {
-                return this.derivedRootName;
+                return this.derivedSingularPropertyName;
+            }
+        }
+
+        public string PluralPropertyName
+        {
+            get
+            {
+                return this.derivedPluralPropertyName;
             }
         }
 
@@ -294,20 +300,17 @@ namespace Allors.Meta
             }
         }
 
-        /// <summary>
-        /// Derive root name.
-        /// </summary>
-        internal void DeriveRootName()
+        internal void DeriveSingularPropertyName()
         {
-            this.derivedRootName = null;
+            this.derivedSingularPropertyName = null;
 
             if (this.ObjectType != null && this.AssociationType.ObjectType != null)
             {
-                this.derivedRootName = this.FullSingularName;
+                this.derivedSingularPropertyName = this.SingularFullName;
 
                 if (this.AssociationType.ObjectType.RootClasses.Count > 0)
                 {
-                    this.derivedRootName = this.SingularName;
+                    this.derivedSingularPropertyName = this.SingularName;
 
                     foreach (var rootClass in this.AssociationType.ObjectType.RootClasses)
                     {
@@ -319,7 +322,40 @@ namespace Allors.Meta
                                 {
                                     if (otherRole.SingularName.Equals(this.SingularName))
                                     {
-                                        this.derivedRootName = this.FullSingularName;
+                                        this.derivedSingularPropertyName = this.SingularFullName;
+                                        return;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        internal void DerivePluralPropertyName()
+        {
+            this.derivedPluralPropertyName = null;
+
+            if (this.ObjectType != null && this.AssociationType.ObjectType != null)
+            {
+                this.derivedPluralPropertyName = this.PluralFullName;
+
+                if (this.AssociationType.ObjectType.RootClasses.Count > 0)
+                {
+                    this.derivedPluralPropertyName = this.PluralName;
+
+                    foreach (var rootClass in this.AssociationType.ObjectType.RootClasses)
+                    {
+                        foreach (var otherRole in rootClass.RoleTypes)
+                        {
+                            if (!Equals(otherRole))
+                            {
+                                if (otherRole.ObjectType != null)
+                                {
+                                    if (otherRole.PluralName.Equals(this.PluralName))
+                                    {
+                                        this.derivedPluralPropertyName = this.PluralFullName;
                                         return;
                                     }
                                 }

@@ -54,7 +54,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
 
                 if (associationType.IsMany || !roleType.RelationType.ExistExclusiveRootClasses)
                 {
-                    sql = Sql.Schema.AllorsPrefix + "R_" + roleType.FullSingularName;
+                    sql = Sql.Schema.AllorsPrefix + "R_" + roleType.SingularFullName;
                 }
                 else
                 {
