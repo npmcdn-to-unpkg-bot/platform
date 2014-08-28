@@ -277,12 +277,6 @@ namespace Allors.Meta
                 relationType.RoleType.DeriveMultiplicityScaleAndSize();
             }
 
-            // RoleType Root ObjectType
-            foreach (var relationType in this.RelationTypes)
-            {
-                relationType.RoleType.DeriveRootClasses();
-            }
-
             // RoleType Hierarchy Singular Name
             foreach (var relationType in this.RelationTypes)
             {

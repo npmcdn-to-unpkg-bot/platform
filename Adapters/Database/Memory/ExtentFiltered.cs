@@ -67,7 +67,7 @@ namespace Allors.Adapters.Database.Memory
             // TODO: Optimize
             if (!this.objectType.RoleTypes.Contains(role))
             {
-                throw new ArgumentException("Extent does not have role " + role.FullSingularName);
+                throw new ArgumentException("Extent does not have role " + role.Name);
             }
         }
 

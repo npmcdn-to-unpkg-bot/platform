@@ -42,8 +42,6 @@ namespace Allors.Meta
 
         private string derivedRootName;
 
-        private IList<Class> derivedRootClasses;
-
         public RoleType(RelationType relationType, Guid roleTypeId)
         {
             this.RelationType = relationType;
@@ -139,23 +137,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Gets the name.
-        /// </summary>
-        /// <value>The name .</value>
-        public string FullName
-        {
-            get
-            {
-                if (this.IsMany)
-                {
-                    return this.FullPluralName;
-                }
-
-                return this.FullSingularName;
-            }
-        }
-
-        /// <summary>
         /// Gets the full singular name.
         /// </summary>
         /// <value>The full singular name.</value>
@@ -227,19 +208,7 @@ namespace Allors.Meta
         {
             get { return this.RelationType.AssociationType; }
         }
-
-        /// <summary>
-        /// Gets the root objectTypes.
-        /// </summary>
-        /// <value>The root objectTypes.</value>
-        public IList<Class> RootClasses
-        {
-            get
-            {
-                return this.derivedRootClasses;
-            }
-        }
-        
+       
         /// <summary>
         /// Gets the validation name.
         /// </summary>
@@ -361,30 +330,6 @@ namespace Allors.Meta
                 this.Size = null;
                 this.Scale = null;
                 this.Precision = null;
-            }
-        }
-
-        /// <summary>
-        /// Derive root objectTypes.
-        /// </summary>
-        internal void DeriveRootClasses()
-        {
-            this.derivedRootClasses = new List<Class>();
-
-            // TODO: Test
-            if (this.AssociationType.ObjectType != null)
-            {
-                if (this.ObjectType is Unit)
-                {
-                    this.derivedRootClasses = new List<Class>(this.AssociationType.ObjectType.RootClasses);
-                }
-                else
-                {
-                    if (!this.RelationType.IsManyToMany && this.RelationType.ExistExclusiveRootClasses && !this.IsMany)
-                    {
-                        this.derivedRootClasses = new List<Class>(this.AssociationType.ObjectType.RootClasses);
-                    }
-                }
             }
         }
 
@@ -523,13 +468,13 @@ namespace Allors.Meta
             {
                 this.derivedRootName = this.FullSingularName;
 
-                if (this.derivedRootClasses.Count > 0)
+                if (this.AssociationType.ObjectType.RootClasses.Count > 0)
                 {
                     this.derivedRootName = this.SingularName;
 
-                    foreach (var rootType in this.derivedRootClasses)
+                    foreach (var rootClass in this.AssociationType.ObjectType.RootClasses)
                     {
-                        foreach (var otherRole in rootType.RoleTypes)
+                        foreach (var otherRole in rootClass.RoleTypes)
                         {
                             if (!Equals(otherRole))
                             {

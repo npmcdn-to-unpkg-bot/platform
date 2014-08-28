@@ -22,7 +22,6 @@
 namespace Allors.Meta
 {
     using System;
-    using System.Globalization;
     using System.Text;
 
     /// <summary>
@@ -179,18 +178,7 @@ namespace Allors.Meta
         {
             try
             {
-                var toString = new StringBuilder();
-
-                if (this.RoleType != null && !string.IsNullOrEmpty(this.RoleType.FullName))
-                {
-                    toString.Append(this.RoleType.Name);
-                }
-                else
-                {
-                    toString.Append(this.IdAsString);
-                }
-
-                return toString.ToString();
+                return this.Name;
             }
             catch
             {
