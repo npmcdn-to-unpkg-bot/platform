@@ -44,7 +44,7 @@ namespace Allors.Meta
 
         public bool IsMany { get; set; }
 
-        public CompositeType ObjectType { get; set; }
+        public Composite ObjectType { get; set; }
 
         public RelationType RelationType { get; private set; }
         
@@ -215,7 +215,7 @@ namespace Allors.Meta
         /// </summary>
         internal void DeriveMultiplicity()
         {
-            if (this.RoleType != null && this.RoleType.ObjectType != null && this.RoleType.ObjectType is UnitType)
+            if (this.RoleType != null && this.RoleType.ObjectType != null && this.RoleType.ObjectType is Unit)
             {
                 this.IsMany = false;
             }

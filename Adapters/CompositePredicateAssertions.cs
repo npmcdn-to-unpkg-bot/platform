@@ -104,7 +104,7 @@ namespace Allors.Adapters
         /// <param name="objectType">The object type.</param>
         public static void ValidateAssociationInstanceof(AssociationType association, ObjectType objectType)
         {
-            if (objectType is UnitType)
+            if (objectType is Unit)
             {
                 throw new ArgumentException("AddInstanceof() can only be used with a composite type.");
             }
@@ -123,7 +123,7 @@ namespace Allors.Adapters
         /// <param name="objectType">The object type.</param>
         public static void ValidateInstanceof(ObjectType objectType)
         {
-            if (objectType is UnitType)
+            if (objectType is Unit)
             {
                 throw new ArgumentException("AddInstanceOf() can only be used with composite types.");
             }
@@ -138,7 +138,7 @@ namespace Allors.Adapters
         /// <param name="secondObject">The second object.</param>
         public static void ValidateRoleBetween(RoleType role, object firstObject, object secondObject)
         {
-            if (role.ObjectType is CompositeType)
+            if (role.ObjectType is Composite)
             {
                 throw new ArgumentException("AddBetween() can only be used with unit types.");
             }
@@ -151,8 +151,8 @@ namespace Allors.Adapters
 
             var firstRole = firstObject as RoleType;
             var secondRole = secondObject as RoleType;
-            if ((firstRole != null && !(firstRole.ObjectType is UnitType)) ||
-                (secondRole != null && !(secondRole.ObjectType is UnitType)))
+            if ((firstRole != null && !(firstRole.ObjectType is Unit)) ||
+                (secondRole != null && !(secondRole.ObjectType is Unit)))
             {
                 throw new ArgumentException("AddBetween() can only be used with roles having unit types.");
             }
@@ -166,7 +166,7 @@ namespace Allors.Adapters
         /// <param name="extent">The extent.</param>
         public static void ValidateRoleContainedIn(RoleType role, Extent extent)
         {
-            if (role.ObjectType is UnitType)
+            if (role.ObjectType is Unit)
             {
                 throw new ArgumentException("AddContainedIn() can only be used with composite types.");
             }
@@ -179,7 +179,7 @@ namespace Allors.Adapters
 
         public static void ValidateRoleContainedIn(RoleType role, IEnumerable<IObject> enumerable)
         {
-            if (role.ObjectType is UnitType)
+            if (role.ObjectType is Unit)
             {
                 throw new ArgumentException("AddContainedIn() can only be used with composite types.");
             }
@@ -229,7 +229,7 @@ namespace Allors.Adapters
             }
 
             var compareRole = compareObject as RoleType;
-            if (compareRole != null && compareRole.ObjectType is CompositeType)
+            if (compareRole != null && compareRole.ObjectType is Composite)
             {
                 throw new ArgumentException("AddRoleEqual() for composites can only be used with objects (not other roles).");
             }
@@ -253,7 +253,7 @@ namespace Allors.Adapters
         /// <param name="unit">The unit .</param>
         public static void ValidateRoleGreaterThan(RoleType role, object unit)
         {
-            if (role.ObjectType is CompositeType)
+            if (role.ObjectType is Composite)
             {
                 throw new ArgumentException("AddGreaterThan() can only be used with unit types.");
             }
@@ -264,7 +264,7 @@ namespace Allors.Adapters
             }
 
             var compareRole = unit as RoleType;
-            if (compareRole != null && compareRole.ObjectType is CompositeType)
+            if (compareRole != null && compareRole.ObjectType is Composite)
             {
                 throw new ArgumentException("AAddGreaterThan() can only be used with roles having unit types.");
             }
@@ -278,7 +278,7 @@ namespace Allors.Adapters
         /// <param name="objectType">Type object type.</param>
         public static void ValidateRoleInstanceOf(RoleType role, ObjectType objectType)
         {
-            if (objectType is UnitType)
+            if (objectType is Unit)
             {
                 throw new ArgumentException("AddInstanceOf() can only be used with composite types.");
             }
@@ -297,7 +297,7 @@ namespace Allors.Adapters
         /// <param name="unit">The unit .</param>
         public static void ValidateRoleLessThan(RoleType role, object unit)
         {
-            if (role.ObjectType is CompositeType)
+            if (role.ObjectType is Composite)
             {
                 throw new ArgumentException("AddLessThan() can only be used with unit types.");
             }
@@ -308,7 +308,7 @@ namespace Allors.Adapters
             }
 
             var compareRole = unit as RoleType;
-            if (compareRole != null && compareRole.ObjectType is CompositeType)
+            if (compareRole != null && compareRole.ObjectType is Composite)
             {
                 throw new ArgumentException("AddLessThan() can only be used with roles having unit types.");
             }
@@ -322,7 +322,7 @@ namespace Allors.Adapters
         /// <param name="unit">The unit .</param>
         public static void ValidateRoleLikeFilter(RoleType role, string unit)
         {
-            var unitType = role.ObjectType as UnitType;
+            var unitType = role.ObjectType as Unit;
             if (unitType == null || !unitType.IsString)
             {
                 throw new ArgumentException("AddLike() can only be used with String.");

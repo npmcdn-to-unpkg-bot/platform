@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="CompositeType.cs" company="Allors bvba">
+// <copyright file="Composite.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -25,7 +25,7 @@ namespace Allors.Meta
     using System.Collections.Generic;
     using System.Linq;
 
-    public abstract partial class CompositeType : ObjectType
+    public abstract partial class Composite : ObjectType
     {
         private IList<Interface> derivedDirectSupertypes;
 
@@ -47,7 +47,7 @@ namespace Allors.Meta
         /// </summary>
         private Dictionary<Guid, object> roleIdsCache;
 
-        protected CompositeType(Domain domain, Guid id)
+        protected Composite(Domain domain, Guid id)
             : base(domain, id)
         {
         }

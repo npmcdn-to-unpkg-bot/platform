@@ -16583,14 +16583,14 @@ namespace Allors.Adapters.Special
 
         // IDatabaseSession.Extent for Repositories and
         // IWorkspaceSession.WorkspaceExtent for Workspaces.
-        protected virtual Extent LocalExtent(CompositeType objectType)
+        protected virtual Extent LocalExtent(Composite objectType)
         {
             return this.Session.Extent(objectType);
         }
 
-        private static UnitType GetAllorsString(ObjectType objectType)
+        private static Unit GetAllorsString(ObjectType objectType)
         {
-            return (UnitType)objectType.Domain.Find(UnitIds.StringId);
+            return (Unit)objectType.Domain.Find(UnitIds.StringId);
         }
 
         private void AssertC1(Extent extent, bool assert0, bool assert1, bool assert2, bool assert3)

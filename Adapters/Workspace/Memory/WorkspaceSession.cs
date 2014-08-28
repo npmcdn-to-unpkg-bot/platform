@@ -335,7 +335,7 @@ namespace Allors.Adapters.Workspace.Memory
             {
                 var roleType = conflict.RoleType;
 
-                if (roleType.ObjectType is UnitType)
+                if (roleType.ObjectType is Unit)
                 {
                     Dictionary<Strategy, object> originalUnitRoleByAssociation;
                     if (this.originalUnitRoleByAssociationByRoleType.TryGetValue(roleType, out originalUnitRoleByAssociation))
@@ -390,7 +390,7 @@ namespace Allors.Adapters.Workspace.Memory
 
                     foreach (var roleType in strategy.ObjectType.RoleTypes)
                     {
-                        if (roleType.ObjectType is UnitType)
+                        if (roleType.ObjectType is Unit)
                         {
                             Dictionary<Strategy, object> originalUnitRoleByStrategy;
                             if (this.originalUnitRoleByAssociationByRoleType.TryGetValue(roleType, out originalUnitRoleByStrategy))
@@ -499,7 +499,7 @@ namespace Allors.Adapters.Workspace.Memory
             return objects.ToArray();
         }
 
-        public virtual Allors.Extent LocalExtent(CompositeType objectType)
+        public virtual Allors.Extent LocalExtent(Composite objectType)
         {
             return new ExtentObject(this, objectType);
         }
@@ -1065,7 +1065,7 @@ namespace Allors.Adapters.Workspace.Memory
             throw new NotSupportedException();
         }
 
-        public virtual Allors.Extent Extent(CompositeType objectType)
+        public virtual Allors.Extent Extent(Composite objectType)
         {
             throw new NotSupportedException();
         }
@@ -1277,7 +1277,7 @@ namespace Allors.Adapters.Workspace.Memory
         {
             foreach (var roleType in association.ObjectType.RoleTypes)
             {
-                if (roleType.ObjectType is UnitType)
+                if (roleType.ObjectType is Unit)
                 {
                     Dictionary<Strategy, object> diffUnitRoleByStrategy;
                     if (this.diffUnitRoleByAssociationByRoleType.TryGetValue(roleType, out diffUnitRoleByStrategy))
@@ -1957,7 +1957,7 @@ namespace Allors.Adapters.Workspace.Memory
                             writer.WriteStartElement(Serialization.Relation);
                             writer.WriteAttributeString(Serialization.Association, association.ObjectId.ToString());
 
-                            var unitType = (UnitType)roleType.ObjectType;
+                            var unitType = (Unit)roleType.ObjectType;
                             var unitTypeTag = (UnitTags)unitType.UnitTag;
                             var roleString = Serialization.WriteString(unitTypeTag, role);
                             writer.WriteString(roleString);
@@ -2076,7 +2076,7 @@ namespace Allors.Adapters.Workspace.Memory
                         writer.WriteStartElement(Serialization.Relation);
                         writer.WriteAttributeString(Serialization.Association, association.ObjectId.ToString());
 
-                        var unitType = (UnitType)roleType.ObjectType;
+                        var unitType = (Unit)roleType.ObjectType;
                         var unitTypeTag = (UnitTags)unitType.UnitTag;
                         var roleString = Serialization.WriteString(unitTypeTag, role);
                         writer.WriteString(roleString);
@@ -2264,12 +2264,12 @@ namespace Allors.Adapters.Workspace.Memory
             if (!reader.IsEmptyElement)
             {
                 if (roleType == null ||
-                    roleType.ObjectType is UnitType != isUnit)
+                    roleType.ObjectType is Unit != isUnit)
                 {
                     throw new Exception("RoleType changed during Save/Load");
                 }
 
-                if (roleType.ObjectType is UnitType)
+                if (roleType.ObjectType is Unit)
                 {
                     this.LoadDatabaseUnitRelations(reader, roleType);
                 }
@@ -2580,12 +2580,12 @@ namespace Allors.Adapters.Workspace.Memory
             if (!reader.IsEmptyElement)
             {
                 if (relationType == null ||
-                    relationType.ObjectType is UnitType != isUnit)
+                    relationType.ObjectType is Unit != isUnit)
                 {
                     throw new Exception("RoleType changed during Save/Load");
                 }
 
-                if (relationType.ObjectType is UnitType)
+                if (relationType.ObjectType is Unit)
                 {
                     this.LoadWorkspaceUnitRelations(reader, relationType);
                 }
@@ -2823,7 +2823,7 @@ namespace Allors.Adapters.Workspace.Memory
                     return false;
                 }
 
-                var unitType = roleType.ObjectType as UnitType;
+                var unitType = roleType.ObjectType as Unit;
                 if (unitType != null && unitType.IsBinary)
                 {
                     var binary1 = (byte[])role1;

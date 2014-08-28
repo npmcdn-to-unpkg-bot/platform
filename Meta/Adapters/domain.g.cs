@@ -16,23 +16,23 @@ namespace Domain
 
         #region Unit Types
 
-        public static readonly UnitType AllorsString;
+        public static readonly Unit AllorsString;
 
-        public static readonly UnitType AllorsInteger;
+        public static readonly Unit AllorsInteger;
 
-        public static readonly UnitType AllorsLong;
+        public static readonly Unit AllorsLong;
 
-        public static readonly UnitType AllorsDecimal;
+        public static readonly Unit AllorsDecimal;
 
-        public static readonly UnitType AllorsDouble;
+        public static readonly Unit AllorsDouble;
 
-        public static readonly UnitType AllorsBoolean;
+        public static readonly Unit AllorsBoolean;
 
-        public static readonly UnitType AllorsDateTime;
+        public static readonly Unit AllorsDateTime;
 
-        public static readonly UnitType AllorsUnique;
+        public static readonly Unit AllorsUnique;
 
-        public static readonly UnitType AllorsBinary;
+        public static readonly Unit AllorsBinary;
 
         #endregion
 
@@ -834,15 +834,15 @@ namespace Domain
         {
             D = new Domain(new Guid("26B81EE6-08B6-48E8-931C-B8D944ED1C42")) { Name = "WithoutPart" };
 
-            AllorsString = (UnitType)D.Find(new Guid("ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9"));
-            AllorsInteger = (UnitType)D.Find(new Guid("ccd6f134-26de-4103-bff9-a37ec3e997a3"));
-            AllorsLong = (UnitType)D.Find(new Guid("e8989069-024b-4389-ac77-a98c4dfff25a"));
-            AllorsDecimal = (UnitType)D.Find(new Guid("da866d8e-2c40-41a8-ae5b-5f6dae0b89c8"));
-            AllorsDouble = (UnitType)D.Find(new Guid("ffcabd07-f35f-4083-bef6-f6c47970ca5d"));
-            AllorsBoolean = (UnitType)D.Find(new Guid("b5ee6cea-4e2b-498e-a5dd-24671d896477"));
-            AllorsDateTime = (UnitType)D.Find(new Guid("c4c09343-61d3-418c-ade2-fe6fd588f128"));
-            AllorsUnique = (UnitType)D.Find(new Guid("6dc0a1a8-88a4-4614-adb4-92dd3d017c0e"));
-            AllorsBinary = (UnitType)D.Find(new Guid("c28e515b-cae8-4d6b-95bf-062aec8042fc"));
+            AllorsString = (Unit)D.Find(new Guid("ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9"));
+            AllorsInteger = (Unit)D.Find(new Guid("ccd6f134-26de-4103-bff9-a37ec3e997a3"));
+            AllorsLong = (Unit)D.Find(new Guid("e8989069-024b-4389-ac77-a98c4dfff25a"));
+            AllorsDecimal = (Unit)D.Find(new Guid("da866d8e-2c40-41a8-ae5b-5f6dae0b89c8"));
+            AllorsDouble = (Unit)D.Find(new Guid("ffcabd07-f35f-4083-bef6-f6c47970ca5d"));
+            AllorsBoolean = (Unit)D.Find(new Guid("b5ee6cea-4e2b-498e-a5dd-24671d896477"));
+            AllorsDateTime = (Unit)D.Find(new Guid("c4c09343-61d3-418c-ade2-fe6fd588f128"));
+            AllorsUnique = (Unit)D.Find(new Guid("6dc0a1a8-88a4-4614-adb4-92dd3d017c0e"));
+            AllorsBinary = (Unit)D.Find(new Guid("c28e515b-cae8-4d6b-95bf-062aec8042fc"));
 
             ClassWithoutUnitRoles = new Class(D, new Guid("071d291d-fcc6-4511-8aa2-2d30fdeede8f"))
                                         {

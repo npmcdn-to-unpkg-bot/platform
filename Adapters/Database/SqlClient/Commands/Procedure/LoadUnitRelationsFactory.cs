@@ -90,7 +90,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
 
                 SchemaTableParameter tableParam;
 
-                var unitType = (UnitType)roleType.ObjectType;
+                var unitType = (Unit)roleType.ObjectType;
                 var unitTypeTag = (UnitTags)unitType.UnitTag;
                 switch (unitTypeTag)
                 {

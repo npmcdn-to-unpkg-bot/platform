@@ -94,7 +94,7 @@ namespace Allors.Adapters.Database.SqlClient
             foreach (var relationType in database.Domain.RelationTypes)
             {
                 var roleType = relationType.RoleType;
-                var unitType = roleType.ObjectType as UnitType;
+                var unitType = roleType.ObjectType as Unit;
                 if (unitType != null && unitType.IsDecimal)
                 {
                     var precision = roleType.Precision;
@@ -231,7 +231,7 @@ FROM information_schema.columns"))
                                             {
                                                 var dataType = existingColumn.DataType.ToLower();
 
-                                                if (column.RelationType.RoleType.ObjectType is CompositeType)
+                                                if (column.RelationType.RoleType.ObjectType is Composite)
                                                 {
                                                     if (!dataType.Equals(this.SqlDbType.ToString().ToLower()))
                                                     {
@@ -240,7 +240,7 @@ FROM information_schema.columns"))
                                                 }
                                                 else
                                                 {
-                                                    var unitType = (UnitType)column.RelationType.RoleType.ObjectType;
+                                                    var unitType = (Unit)column.RelationType.RoleType.ObjectType;
                                                     var unitTypeTag = (UnitTags)unitType.UnitTag;
                                                     switch (unitTypeTag)
                                                     {
@@ -615,9 +615,9 @@ END";
                         var roleType = relationType.RoleType;
                         var associationType = relationType.AssociationType;
 
-                        if (relationType.RoleType.ObjectType is UnitType)
+                        if (relationType.RoleType.ObjectType is Unit)
                         {
-                            var unitType = (UnitType)relationType.RoleType.ObjectType;
+                            var unitType = (Unit)relationType.RoleType.ObjectType;
                             var unitTypeTag = (UnitTags)unitType.UnitTag;
                             switch (unitTypeTag)
                             {

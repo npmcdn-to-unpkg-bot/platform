@@ -53,7 +53,7 @@ namespace Allors.Adapters.Database.Sql
             }
             else
             {
-                var compositeType = (CompositeType)this.role.ObjectType;
+                var compositeType = (Composite)this.role.ObjectType;
 
                 // This join is not possible because of the 3VL (Three Valued Logic).
                 // It should work for normal queries, but it fails when wrapped in a NOT( ... ) predicate.

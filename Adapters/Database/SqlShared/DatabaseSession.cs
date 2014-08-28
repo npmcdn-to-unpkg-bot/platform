@@ -331,7 +331,7 @@ namespace Allors.Adapters.Database.Sql
 
         public virtual Extent<T> Extent<T>() where T : IObject
         {
-            var compositeType = this.SqlDatabase.ObjectFactory.GetObjectTypeForType(typeof(T)) as CompositeType;
+            var compositeType = this.SqlDatabase.ObjectFactory.GetObjectTypeForType(typeof(T)) as Composite;
 
             if (compositeType == null)
             {
@@ -341,7 +341,7 @@ namespace Allors.Adapters.Database.Sql
             return this.Extent(compositeType);
         }
         
-        public virtual Allors.Extent Extent(CompositeType type)
+        public virtual Allors.Extent Extent(Composite type)
         {
             return new ExtentFiltered(this, type);
         }

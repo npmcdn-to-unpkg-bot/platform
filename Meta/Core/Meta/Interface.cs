@@ -29,11 +29,11 @@ namespace Allors.Meta
     /// An <see cref="ObjectType"/> defines the state and behavior for
     /// a set of <see cref="IObject"/>s.
     /// </summary>
-    public partial class Interface : CompositeType
+    public partial class Interface : Composite
     {
-        private IList<CompositeType> derivedDirectSubtypes;
+        private IList<Composite> derivedDirectSubtypes;
 
-        private IList<CompositeType> derivedSubtypes;
+        private IList<Composite> derivedSubtypes;
 
         private IList<Class> derivedSubclasses;
 
@@ -68,7 +68,7 @@ namespace Allors.Meta
         /// Gets the sub types.
         /// </summary>
         /// <value>The super types.</value>
-        public IList<CompositeType> Subtypes
+        public IList<Composite> Subtypes
         {
             get
             {
@@ -110,7 +110,7 @@ namespace Allors.Meta
         /// Derive direct sub type derivations.
         /// </summary>
         /// <param name="directSubtypes">The direct super types.</param>
-        internal void DeriveDirectSubtypes(HashSet<CompositeType> directSubtypes)
+        internal void DeriveDirectSubtypes(HashSet<Composite> directSubtypes)
         {
             directSubtypes.Clear();
             foreach (var inheritance in this.Domain.Inheritances.Where(inheritance => this.Equals(inheritance.Supertype)))
@@ -118,7 +118,7 @@ namespace Allors.Meta
                 directSubtypes.Add(inheritance.Subtype);
             }
 
-            this.derivedDirectSubtypes = new List<CompositeType>(directSubtypes);
+            this.derivedDirectSubtypes = new List<Composite>(directSubtypes);
         }
 
         /// <summary>
@@ -143,12 +143,12 @@ namespace Allors.Meta
         /// Derive sub types.
         /// </summary>
         /// <param name="subTypes">The super types.</param>
-        internal void DeriveSubtypes(HashSet<CompositeType> subTypes)
+        internal void DeriveSubtypes(HashSet<Composite> subTypes)
         {
             subTypes.Clear();
             this.DeriveSubtypesRecursively(this, subTypes);
 
-            this.derivedSubtypes = new List<CompositeType>(subTypes);
+            this.derivedSubtypes = new List<Composite>(subTypes);
         }
 
         /// <summary>
@@ -177,7 +177,7 @@ namespace Allors.Meta
         /// </summary>
         /// <param name="type">The type .</param>
         /// <param name="superTypes">The super types.</param>
-        private void DeriveSubtypesRecursively(ObjectType type, HashSet<CompositeType> subTypes)
+        private void DeriveSubtypesRecursively(ObjectType type, HashSet<Composite> subTypes)
         {
             foreach (var directSubtype in this.derivedDirectSubtypes)
             {

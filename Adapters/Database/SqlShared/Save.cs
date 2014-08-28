@@ -134,7 +134,7 @@ namespace Allors.Adapters.Database.Sql
                     var roleType = relation.RoleType;
                 
                     var sql = string.Empty;
-                    if (roleType.ObjectType is UnitType)
+                    if (roleType.ObjectType is Unit)
                     {
                         HashSet<Class> exclusiveRootClasses;
                         if (!exclusiveRootClassesByObjectType.TryGetValue(associationType.ObjectType, out exclusiveRootClasses))
@@ -188,7 +188,7 @@ namespace Allors.Adapters.Database.Sql
                             else
                             {
                                 // role.Many
-                                var compositeType = (CompositeType)roleType.ObjectType;
+                                var compositeType = (Composite)roleType.ObjectType;
                                 sql += "SELECT " + this.database.Schema.Column(associationType) + " As " + this.database.Schema.AssociationId + ", " + this.database.Schema.ObjectId + " As " + this.database.Schema.RoleId + "\n";
                                 sql += "FROM " + this.database.Schema.Table(compositeType.ExclusiveRootClass) + "\n";
                                 sql += "WHERE " + this.database.Schema.Column(associationType) + " IS NOT NULL\n";
@@ -223,9 +223,9 @@ namespace Allors.Adapters.Database.Sql
                                     {
                                         var a = long.Parse(reader[0].ToString());
 
-                                        if (roleType.ObjectType is UnitType)
+                                        if (roleType.ObjectType is Unit)
                                         {
-                                            var unitType = (UnitType)roleType.ObjectType;
+                                            var unitType = (Unit)roleType.ObjectType;
                                             var unitTypeTag = (UnitTags)unitType.UnitTag;
                                             var r = command.GetValue(reader, unitTypeTag, 1);
                                             var content = Serialization.WriteString(unitTypeTag, r);

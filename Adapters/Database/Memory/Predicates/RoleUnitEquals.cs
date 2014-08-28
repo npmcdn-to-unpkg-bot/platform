@@ -38,7 +38,7 @@ namespace Allors.Adapters.Database.Memory
             this.roleType = roleType;
             if (equals is Enum)
             {
-                var unitType = roleType.ObjectType as UnitType;
+                var unitType = roleType.ObjectType as Unit;
                 if (unitType != null && unitType.IsInteger)
                 {
                     this.equals = (int)equals;
@@ -72,7 +72,7 @@ namespace Allors.Adapters.Database.Memory
             }
             else
             {
-                if (this.roleType.ObjectType is UnitType)
+                if (this.roleType.ObjectType is Unit)
                 {
                     equalsValue = this.extent.Session.MemoryDatabase.Internalize(this.equals, this.roleType);
                 }

@@ -247,7 +247,7 @@ namespace Allors.Adapters.Database.Memory
 
                                 if (this.reader.Name.Equals(Serialization.RelationTypeUnit))
                                 {
-                                    if (relationType == null || relationType.RoleType.ObjectType is CompositeType)
+                                    if (relationType == null || relationType.RoleType.ObjectType is Composite)
                                     {
                                         this.CantLoadUnitRole(relationTypeId);
                                     }
@@ -258,7 +258,7 @@ namespace Allors.Adapters.Database.Memory
                                 }
                                 else if (this.reader.Name.Equals(Serialization.RelationTypeComposite))
                                 {
-                                    if (relationType == null || relationType.RoleType.ObjectType is UnitType)
+                                    if (relationType == null || relationType.RoleType.ObjectType is Unit)
                                     {
                                         this.CantLoadCompositeRole(relationTypeId);
                                     }
@@ -319,7 +319,7 @@ namespace Allors.Adapters.Database.Memory
                                     this.session.MemoryDatabase.UnitRoleChecks(strategy, relationType.RoleType);
                                     if (this.reader.IsEmptyElement)
                                     {
-                                        var unitType = (UnitType)relationType.RoleType.ObjectType;
+                                        var unitType = (Unit)relationType.RoleType.ObjectType;
                                         switch (unitType.UnitTag)
                                         {
                                             case (int)UnitTags.AllorsString:
@@ -332,7 +332,7 @@ namespace Allors.Adapters.Database.Memory
                                     }
                                     else
                                     {
-                                        var unitType = (UnitType)relationType.RoleType.ObjectType;
+                                        var unitType = (Unit)relationType.RoleType.ObjectType;
                                         var unitTypeTag = (UnitTags)unitType.UnitTag;
 
                                         var unit = Serialization.ReadString(value, unitTypeTag);
@@ -401,7 +401,7 @@ namespace Allors.Adapters.Database.Memory
                                     {
                                         var roleIdString = this.session.ObjectIds.Parse(roleIdStringArray[0]);
                                         var role = this.LoadInstantiateStrategy(roleIdString);
-                                        if (role == null || !this.session.MemoryDatabase.ContainsConcreteClass((CompositeType)relationType.RoleType.ObjectType, role.ObjectType))
+                                        if (role == null || !this.session.MemoryDatabase.ContainsConcreteClass((Composite)relationType.RoleType.ObjectType, role.ObjectType))
                                         {
                                             this.session.MemoryDatabase.OnRelationNotLoaded(relationType.Id, associationId.ToString(), roleIdStringArray[0]);
                                         }
@@ -424,7 +424,7 @@ namespace Allors.Adapters.Database.Memory
                                         {
                                             var roleId = this.session.ObjectIds.Parse(roleIdString);
                                             var role = this.LoadInstantiateStrategy(roleId);
-                                            if (role == null || !this.session.MemoryDatabase.ContainsConcreteClass((CompositeType)relationType.RoleType.ObjectType, role.ObjectType))
+                                            if (role == null || !this.session.MemoryDatabase.ContainsConcreteClass((Composite)relationType.RoleType.ObjectType, role.ObjectType))
                                             {
                                                 this.session.MemoryDatabase.OnRelationNotLoaded(relationType.Id, associationId.ToString(), roleId.ToString());
                                             }

@@ -134,7 +134,7 @@ namespace Allors.Adapters.Database.Memory
 
         public ICompositePredicate AddEquals(RoleType role, object obj)
         {
-            if (role.ObjectType is UnitType)
+            if (role.ObjectType is Unit)
             {
                 this.predicates.Add(new RoleUnitEquals(this.extent, role, obj));
             }
@@ -175,21 +175,21 @@ namespace Allors.Adapters.Database.Memory
             return this;
         }
 
-        public ICompositePredicate AddInstanceof(CompositeType type)
+        public ICompositePredicate AddInstanceof(Composite type)
         {
             this.predicates.Add(new Instanceof(type));
             this.extent.Invalidate();
             return this;
         }
 
-        public ICompositePredicate AddInstanceof(RoleType role, CompositeType type)
+        public ICompositePredicate AddInstanceof(RoleType role, Composite type)
         {
             this.predicates.Add(new RoleInstanceof(this.extent, role, type));
             this.extent.Invalidate();
             return this;
         }
 
-        public ICompositePredicate AddInstanceof(AssociationType association, CompositeType type)
+        public ICompositePredicate AddInstanceof(AssociationType association, Composite type)
         {
             this.predicates.Add(new AssociationInstanceOf(this.extent, association, type));
             this.extent.Invalidate();

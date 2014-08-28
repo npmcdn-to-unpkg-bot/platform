@@ -43,14 +43,14 @@ namespace Allors.Adapters.Database.Sql
         public override bool BuildWhere(ExtentStatement statement, string alias)
         {
             var schema = statement.Schema;
-            if (this.role.ObjectType is UnitType && this.equalsRole.ObjectType is UnitType)
+            if (this.role.ObjectType is Unit && this.equalsRole.ObjectType is Unit)
             {
                 statement.Append(" " + alias + "." + schema.Column(this.role) + "=" + alias + "." + schema.Column(this.equalsRole));
             }
             else
             {
-                var roleCompositeType = this.role.ObjectType as CompositeType;
-                var equalsRoleCompositeType = this.equalsRole.ObjectType as CompositeType;
+                var roleCompositeType = this.role.ObjectType as Composite;
+                var equalsRoleCompositeType = this.equalsRole.ObjectType as Composite;
 
                 if (roleCompositeType != null && roleCompositeType.ExclusiveRootClass != null && 
                     equalsRoleCompositeType != null && equalsRoleCompositeType.ExclusiveRootClass != null)

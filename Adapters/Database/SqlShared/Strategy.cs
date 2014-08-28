@@ -121,7 +121,7 @@ namespace Allors.Adapters.Database.Sql
 
             foreach (var roleType in this.ObjectType.RoleTypes)
             {
-                if (roleType.ObjectType is CompositeType)
+                if (roleType.ObjectType is Composite)
                 {
                     this.RemoveRole(roleType);
                 }
@@ -171,7 +171,7 @@ namespace Allors.Adapters.Database.Sql
 
         public virtual bool ExistRole(RoleType roleType)
         {
-            if (roleType.ObjectType is UnitType)
+            if (roleType.ObjectType is Unit)
             {
                 return this.ExistUnitRole(roleType);
             }
@@ -186,7 +186,7 @@ namespace Allors.Adapters.Database.Sql
 
         public virtual object GetRole(RoleType roleType)
         {
-            if (roleType.ObjectType is UnitType)
+            if (roleType.ObjectType is Unit)
             {
                 return this.GetUnitRole(roleType);
             }
@@ -201,7 +201,7 @@ namespace Allors.Adapters.Database.Sql
 
         public virtual void SetRole(RoleType roleType, object value)
         {
-            if (roleType.ObjectType is UnitType)
+            if (roleType.ObjectType is Unit)
             {
                 this.SetUnitRole(roleType, value);
             }
@@ -227,7 +227,7 @@ namespace Allors.Adapters.Database.Sql
 
         public virtual void RemoveRole(RoleType roleType)
         {
-            if (roleType.ObjectType is UnitType)
+            if (roleType.ObjectType is Unit)
             {
                 this.RemoveUnitRole(roleType);
             }

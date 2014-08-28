@@ -294,7 +294,7 @@ namespace Allors.Adapters.Database.Sql
 
                                 if (this.reader.Name.Equals(Serialization.RelationTypeUnit))
                                 {
-                                    if (relationType == null || relationType.RoleType.ObjectType is CompositeType)
+                                    if (relationType == null || relationType.RoleType.ObjectType is Composite)
                                     {
                                         this.CantLoadUnitRole(relationTypeId);
                                     }
@@ -314,7 +314,7 @@ namespace Allors.Adapters.Database.Sql
                                 }
                                 else if (this.reader.Name.Equals(Serialization.RelationTypeComposite))
                                 {
-                                    if (relationType == null || relationType.RoleType.ObjectType is UnitType)
+                                    if (relationType == null || relationType.RoleType.ObjectType is Unit)
                                     {
                                         this.CantLoadCompositeRole(relationTypeId);
                                     }
@@ -379,7 +379,7 @@ namespace Allors.Adapters.Database.Sql
                                 else
                                 {
                                     var exclusiveRootClass = associationConcreteClass.ExclusiveRootClass;
-                                    var unitType = (UnitType)relationType.RoleType.ObjectType;
+                                    var unitType = (Unit)relationType.RoleType.ObjectType;
                                     switch (unitType.UnitTag)
                                     {
                                         case (int)UnitTags.AllorsString:
@@ -433,7 +433,7 @@ namespace Allors.Adapters.Database.Sql
                                     try
                                     {
                                         var exclusiveRootClass = associationConcreteClass.ExclusiveRootClass;
-                                        var unitType = (UnitType)relationType.RoleType.ObjectType;
+                                        var unitType = (Unit)relationType.RoleType.ObjectType;
                                         var unitTypeTag = (UnitTags)unitType.UnitTag;
                                         var unit = Serialization.ReadString(value, unitTypeTag);
 
@@ -518,7 +518,7 @@ namespace Allors.Adapters.Database.Sql
                                     this.objectTypeByObjectId.TryGetValue(role, out roleConcreteClass);
 
                                     if (roleConcreteClass == null ||
-                                        !this.database.ContainsConcreteClass((CompositeType)relationType.RoleType.ObjectType, roleConcreteClass))
+                                        !this.database.ContainsConcreteClass((Composite)relationType.RoleType.ObjectType, roleConcreteClass))
                                     {
                                         this.OnRelationNotLoaded(relationType.Id, associationIdString, r);
                                     }

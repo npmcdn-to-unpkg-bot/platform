@@ -36,7 +36,7 @@ namespace Allors.Adapters.Workspace.Memory
             this.associationType = associationType;
         }
 
-        public override CompositeType ObjectType
+        public override Composite ObjectType
         {
             get { return this.associationType.ObjectType; }
         }

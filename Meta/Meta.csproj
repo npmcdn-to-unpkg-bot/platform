@@ -94,9 +94,9 @@
     <Compile Include="Core\Meta\Inheritance.cs" />
     <Compile Include="Core\Meta\MetaObject.cs" />
     <Compile Include="Core\Meta\MethodType.cs" />
-    <Compile Include="Core\Meta\CompositeType.cs" />
+    <Compile Include="Core\Meta\Composite.cs" />
     <Compile Include="Core\Meta\Class.cs" />
-    <Compile Include="Core\Meta\UnitType.cs" />
+    <Compile Include="Core\Meta\Unit.cs" />
     <Compile Include="Core\Meta\ObjectType.cs" />
     <Compile Include="Core\Meta\OperandType.cs" />
     <Compile Include="Core\Meta\PropertyType.cs" />

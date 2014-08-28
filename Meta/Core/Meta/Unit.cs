@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="UnitType.cs" company="Allors bvba">
+// <copyright file="Unit.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -23,20 +23,14 @@ namespace Allors.Meta
 {
     using System;
 
-    /// <summary>
-    /// An <see cref="ObjectType"/> defines the state and behavior for
-    /// a set of <see cref="IObject"/>s.
-    /// </summary>
-    public partial class UnitType : ObjectType
+    public partial class Unit : ObjectType
     {
-        public UnitType(Domain domain, Guid id)
-            : base(domain, id)
+        public Unit(Domain domain, Guid id) : base(domain, id)
         {
-
             this.Domain.OnUnitTypeCreated(this);
         }
 
-        public int UnitTag;
+        public int UnitTag { get; set; }
 
         /// <summary>
         /// Gets a value indicating whether this instance is a binary.

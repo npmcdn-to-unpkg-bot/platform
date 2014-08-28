@@ -66,7 +66,7 @@ namespace Allors.Adapters.Database.Sql
             get { return this.extent.Session; }
         }
 
-        protected CompositeType Type
+        protected Composite Type
         {
             get { return this.extent.ObjectType; }
         }
@@ -78,7 +78,7 @@ namespace Allors.Adapters.Database.Sql
                 var relationType = role.RelationType;
                 var association = relationType.AssociationType;
 
-                if (role.ObjectType is CompositeType)
+                if (role.ObjectType is Composite)
                 {
                     if ((association.IsMany && role.IsMany) || !relationType.ExistExclusiveRootClasses)
                     {
@@ -89,7 +89,7 @@ namespace Allors.Adapters.Database.Sql
                     {
                         if (role.IsMany)
                         {
-                            var compositeType = (CompositeType)role.ObjectType;
+                            var compositeType = (Composite)role.ObjectType;
                             this.Append(" LEFT OUTER JOIN " + this.Schema.Table(compositeType.ExclusiveRootClass) + " " + role.RootName + "_R");
                             this.Append(" ON " + alias + "." + this.Schema.ObjectId + "=" + role.RootName + "_R." + this.Schema.Column(association));
                         }
@@ -101,7 +101,7 @@ namespace Allors.Adapters.Database.Sql
             {
                 var relationType = role.RelationType;
 
-                if (role.ObjectType is CompositeType && role.IsOne)
+                if (role.ObjectType is Composite && role.IsOne)
                 {
                     if (!relationType.ExistExclusiveRootClasses)
                     {
@@ -141,7 +141,7 @@ namespace Allors.Adapters.Database.Sql
                 var relationType = association.RelationType;
                 var role = relationType.RoleType;
 
-                if (association.ObjectType is CompositeType && association.IsOne)
+                if (association.ObjectType is Composite && association.IsOne)
                 {
                     if (!relationType.ExistExclusiveRootClasses)
                     {
@@ -210,7 +210,7 @@ namespace Allors.Adapters.Database.Sql
 
         public void UseAssociation(AssociationType association)
         {
-            if (association.ObjectType is CompositeType && !this.referenceAssociations.Contains(association))
+            if (association.ObjectType is Composite && !this.referenceAssociations.Contains(association))
             {
                 this.referenceAssociations.Add(association);
             }
@@ -226,7 +226,7 @@ namespace Allors.Adapters.Database.Sql
 
         public void UseRole(RoleType role)
         {
-            if (role.ObjectType is CompositeType && !this.referenceRoles.Contains(role))
+            if (role.ObjectType is Composite && !this.referenceRoles.Contains(role))
             {
                 this.referenceRoles.Add(role);
             }

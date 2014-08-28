@@ -37,7 +37,7 @@ namespace Allors.Meta
             this.Domain.OnInheritanceCreated(this);
         }
 
-        public CompositeType Subtype { get; set; }
+        public Composite Subtype { get; set; }
 
         public Interface Supertype { get; set; }
 
@@ -114,7 +114,7 @@ namespace Allors.Meta
             }
         }
 
-        private bool HasCycle(CompositeType startSubType)
+        private bool HasCycle(Composite startSubType)
         {
             if (startSubType.Equals(this.Supertype))
             {

@@ -328,12 +328,12 @@ namespace Allors.Adapters.Database.Sql
             return this.ObjectFactory.GetTypeForObjectType(objectType);
         }
 
-        public RoleType[] GetSortedUnitRolesByObjectType(CompositeType objectType)
+        public RoleType[] GetSortedUnitRolesByObjectType(Composite objectType)
         {
             RoleType[] sortedUnitRoles;
             if (!this.sortedUnitRolesByObjectType.TryGetValue(objectType, out sortedUnitRoles))
             {
-                var sortedUnitRoleList = new List<RoleType>(objectType.RoleTypes.Where(roleType => roleType.ObjectType is UnitType));
+                var sortedUnitRoleList = new List<RoleType>(objectType.RoleTypes.Where(roleType => roleType.ObjectType is Unit));
                 sortedUnitRoleList.Sort(RoleType.IdComparer);
                 sortedUnitRoles = sortedUnitRoleList.ToArray();
                 this.sortedUnitRolesByObjectType[objectType] = sortedUnitRoles;

@@ -36,7 +36,7 @@ namespace Allors.Adapters.Database.Sql
             this.roleType = roleType;
             if (obj is Enum)
             {
-                var unitType = roleType.ObjectType as UnitType;
+                var unitType = roleType.ObjectType as Unit;
                 if (unitType != null && unitType.IsInteger)
                 {
                     this.obj = (int)obj;
@@ -48,14 +48,14 @@ namespace Allors.Adapters.Database.Sql
             }
             else
             {
-                this.obj = roleType.ObjectType is UnitType ? extent.Session.SqlDatabase.Internalize(obj, roleType) : obj;
+                this.obj = roleType.ObjectType is Unit ? extent.Session.SqlDatabase.Internalize(obj, roleType) : obj;
             }
         }
 
         public override bool BuildWhere(ExtentStatement statement, string alias)
         {
             var schema = statement.Schema;
-            if (this.roleType.ObjectType is UnitType)
+            if (this.roleType.ObjectType is Unit)
             {
                 statement.Append(" " + alias + "." + schema.Column(this.roleType) + "=" + statement.AddParameter(this.obj));
             }

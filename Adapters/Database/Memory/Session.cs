@@ -359,7 +359,7 @@ namespace Allors.Adapters.Database.Memory
 
         public Extent<T> Extent<T>() where T : IObject
         {
-            var compositeType = this.database.ObjectFactory.GetObjectTypeForType(typeof(T)) as CompositeType;
+            var compositeType = this.database.ObjectFactory.GetObjectTypeForType(typeof(T)) as Composite;
 
             if (compositeType == null)
             {
@@ -369,7 +369,7 @@ namespace Allors.Adapters.Database.Memory
             return this.Extent(compositeType);
         }
 
-        public virtual Allors.Extent Extent(CompositeType objectType)
+        public virtual Allors.Extent Extent(Composite objectType)
         {
             return new ExtentFiltered(this, objectType);
         }

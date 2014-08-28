@@ -23,6 +23,7 @@ namespace Allors.Adapters.Special
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Linq;
     using System.Text;
 
     using Allors;
@@ -78,7 +79,7 @@ namespace Allors.Adapters.Special
                         {
                             this.CacheFactory = new CacheFactory
                                                     {
-                                                        TransientObjectTypes = this.database.ObjectFactory.Domain.Classes.ToArray(),
+                                                        TransientObjectTypes = this.database.ObjectFactory.Domain.Classes.Cast<Composite>().ToArray(),
                                                     };
                             this.Init();
                         });

@@ -41,7 +41,7 @@ namespace Allors.Adapters.Workspace.Memory
             this.roleType = roleType;
             if (equals is Enum)
             {
-                var unitType = roleType.ObjectType as UnitType;
+                var unitType = roleType.ObjectType as Unit;
                 if (unitType != null && unitType.IsInteger)
                 {
                     this.equals = (int)equals;
@@ -75,7 +75,7 @@ namespace Allors.Adapters.Workspace.Memory
             }
             else
             {
-                if (this.roleType.ObjectType is UnitType)
+                if (this.roleType.ObjectType is Unit)
                 {
                     equalsValue = this.extent.Session.MemoryWorkspace.Internalize(this.equals, this.roleType);
                 }

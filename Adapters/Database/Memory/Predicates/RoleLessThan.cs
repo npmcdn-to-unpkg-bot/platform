@@ -50,7 +50,7 @@ namespace Allors.Adapters.Database.Memory
             }
             else
             {
-                if (this.roleType.ObjectType is UnitType)
+                if (this.roleType.ObjectType is Unit)
                 {
                     compareValue = this.extent.Session.MemoryDatabase.Internalize(this.compare, this.roleType);
                 }

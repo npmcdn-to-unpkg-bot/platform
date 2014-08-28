@@ -24,7 +24,7 @@ namespace Allors.Meta
     using System;
     using System.Collections.Generic;
 
-    public partial class Class : CompositeType
+    public partial class Class : Composite
     {
         private readonly List<Class> selfList; 
 

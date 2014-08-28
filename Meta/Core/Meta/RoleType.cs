@@ -307,7 +307,7 @@ namespace Allors.Meta
         /// </summary>
         internal void DeriveMultiplicityScaleAndSize()
         {
-            var unitType = this.ObjectType as UnitType;
+            var unitType = this.ObjectType as Unit;
             if (unitType != null)
             {
                 this.IsMany = false;
@@ -375,7 +375,7 @@ namespace Allors.Meta
             // TODO: Test
             if (this.AssociationType.ObjectType != null)
             {
-                if (this.ObjectType is UnitType)
+                if (this.ObjectType is Unit)
                 {
                     this.derivedRootClasses = new List<Class>(this.AssociationType.ObjectType.RootClasses);
                 }
@@ -393,7 +393,7 @@ namespace Allors.Meta
         /// Derive hierarchy plural name.
         /// </summary>
         /// <param name="objectTypes">The object Types.</param>
-        internal void DeriveHierarchyPluralName(HashSet<CompositeType> objectTypes)
+        internal void DeriveHierarchyPluralName(HashSet<Composite> objectTypes)
         {
             objectTypes.Clear();
             this.derivedHierarchyPluralName = null;
@@ -454,7 +454,7 @@ namespace Allors.Meta
         /// Derive hierarchy singular name.
         /// </summary>
         /// <param name="objectTypes">The object types.</param>
-        internal void DeriveHierarchySingularName(HashSet<CompositeType> objectTypes)
+        internal void DeriveHierarchySingularName(HashSet<Composite> objectTypes)
         {
             objectTypes.Clear();
             this.derivedHierarchySingularName = null;
@@ -564,7 +564,7 @@ namespace Allors.Meta
             }
             else
             {
-                var unitType = this.ObjectType as UnitType;
+                var unitType = this.ObjectType as Unit;
                 if (unitType != null)
                 {
                     switch ((UnitTags)unitType.UnitTag)

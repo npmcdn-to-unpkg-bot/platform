@@ -102,7 +102,7 @@ namespace Allors
         /// </summary>
         /// <param name="objectType">The objectType.</param>
         /// <returns>The extent.</returns>
-        Extent Extent(CompositeType objectType);
+        Extent Extent(Composite objectType);
 
         /// <summary>
         /// Creates an Extent that is the exception of its two operands.

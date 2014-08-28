@@ -22,49 +22,62 @@
 namespace Allors.Meta
 {
     using System;
-    using System.Collections;
+    using System;
     using System.Collections.Generic;
-    using System.Linq;
-
-    using Microsoft.SqlServer.Server;
 
     /// <summary>
     /// A Domain is a container for <see cref="ObjectType"/>s, <see cref="RelationType"/>s.
     /// </summary>
     public sealed partial class Domain : MetaObject, IComparable
     {
-        public string Name;
-
-        public List<UnitType> UnitTypes = new List<UnitType>();
-
-        public List<Interface> Interfaces = new List<Interface>();
-
-        public List<Class> Classes = new List<Class>();
-
-        public List<Inheritance> Inheritances = new List<Inheritance>();
-
-        public List<RelationType> RelationTypes = new List<RelationType>();
-        
-        public List<MethodType> MethodTypes = new List<MethodType>();
-
-        public List<CompositeType> DerivedCompositeTypes = new List<CompositeType>();
-        
-        private Dictionary<Guid, MetaObject> MetaObjectById = new Dictionary<Guid, MetaObject>();
-
         /// <summary>
         /// The default plural form.
         /// </summary>
         private const string DefaultPluralForm = "s";
 
+        private readonly Dictionary<Guid, MetaObject> metaObjectById;
+
+        private IList<Composite> derivedCompositeTypes;
+        
+        public Domain(Guid id)
+        {
+            this.Id = id;
+            
+            this.UnitTypes = new List<Unit>();
+            this.Interfaces = new List<Interface>();
+            this.Classes = new List<Class>();
+            this.Inheritances = new List<Inheritance>();
+            this.RelationTypes = new List<RelationType>();
+            this.MethodTypes = new List<MethodType>();
+
+            this.metaObjectById = new Dictionary<Guid, MetaObject>();
+
+            this.AddAllorsUnitPopulation();
+        }
+
+        public string Name { get; set; }
+
+        public IList<Unit> UnitTypes { get; private set; }
+
+        public IList<Interface> Interfaces { get; private set; }
+
+        public IList<Class> Classes { get; private set; }
+
+        public IList<Inheritance> Inheritances { get; private set; }
+
+        public IList<RelationType> RelationTypes { get; private set; }
+
+        public IList<MethodType> MethodTypes { get; private set; }
+        
         /// <summary>
         /// Gets the composite types.
         /// </summary>
         /// <value>The composite types.</value>
-        public IList<CompositeType> CompositeTypes
+        public IList<Composite> CompositeTypes
         {
             get
             {
-                return this.DerivedCompositeTypes;
+                return this.derivedCompositeTypes;
             }
         }
      
@@ -91,12 +104,6 @@ namespace Allors.Meta
 
                 return "unknown domain";
             }
-        }
-
-        public Domain(Guid id)
-        {
-            this.Id = id;
-            this.AddAllorsUnitPopulation();
         }
 
         /// <summary>
@@ -131,7 +138,7 @@ namespace Allors.Meta
         public MetaObject Find(Guid metaObjectId)
         {
             MetaObject metaObject;
-            this.MetaObjectById.TryGetValue(metaObjectId, out metaObject);
+            this.metaObjectById.TryGetValue(metaObjectId, out metaObject);
 
             return metaObject;
         }
@@ -198,12 +205,11 @@ namespace Allors.Meta
         public void Derive()
         {
             // Unit & Composite ObjectTypes
-            var compositeTypes = new List<CompositeType>(this.Interfaces);
+            var compositeTypes = new List<Composite>(this.Interfaces);
             compositeTypes.AddRange(this.Classes);
-            this.DerivedCompositeTypes = compositeTypes;
+            this.derivedCompositeTypes = compositeTypes;
 
-            var sharedObjectTypes = new HashSet<ObjectType>();
-            var sharedCompositeTypes = new HashSet<CompositeType>();
+            var sharedCompositeTypes = new HashSet<Composite>();
             var sharedInterfaces = new HashSet<Interface>();
             var sharedClasses = new HashSet<Class>();
 
@@ -211,7 +217,7 @@ namespace Allors.Meta
             var sharedAssociationTypes = new HashSet<AssociationType>();
 
             // DirectSupertypes
-            foreach (var type in this.DerivedCompositeTypes)
+            foreach (var type in this.derivedCompositeTypes)
             {
                 type.DeriveDirectSupertypes(sharedInterfaces);
             }
@@ -223,7 +229,7 @@ namespace Allors.Meta
             }
 
             // Supertypes
-            foreach (var type in this.DerivedCompositeTypes)
+            foreach (var type in this.derivedCompositeTypes)
             {
                 type.DeriveSupertypes(sharedInterfaces);
             }
@@ -253,13 +259,13 @@ namespace Allors.Meta
             }
 
             // RoleTypes
-            foreach (var type in this.DerivedCompositeTypes)
+            foreach (var type in this.derivedCompositeTypes)
             {
                 type.DeriveRoleTypes(sharedRoleTypes);
             }
 
             // AssociationTypes
-            foreach (var type in this.DerivedCompositeTypes)
+            foreach (var type in this.derivedCompositeTypes)
             {
                 type.DeriveAssociationTypes(sharedAssociationTypes);
             }
@@ -308,46 +314,46 @@ namespace Allors.Meta
             var sharedMethodTypeList = new HashSet<MethodType>();
 
             // MethodTypes
-            foreach (var type in this.DerivedCompositeTypes)
+            foreach (var type in this.derivedCompositeTypes)
             {
                 type.DeriveMethodTypes(sharedMethodTypeList);
             }
         }
 
-        internal void OnUnitTypeCreated(UnitType unitType)
+        internal void OnUnitTypeCreated(Unit unit)
         {
-            this.UnitTypes.Add(unitType);
-            this.MetaObjectById[unitType.Id] = unitType;
+            this.UnitTypes.Add(unit);
+            this.metaObjectById.Add(unit.Id, unit);
         }
 
         internal void OnInterfaceCreated(Interface @interface)
         {
             this.Interfaces.Add(@interface);
-            this.MetaObjectById[@interface.Id] = @interface;
+            this.metaObjectById.Add(@interface.Id, @interface);
         }
         
         internal void OnClassCreated(Class @class)
         {
             this.Classes.Add(@class);
-            this.MetaObjectById[@class.Id] = @class;
+            this.metaObjectById.Add(@class.Id, @class);
         }
 
         internal void OnInheritanceCreated(Inheritance inheritance)
         {
             this.Inheritances.Add(inheritance);
-            this.MetaObjectById[inheritance.Id] = inheritance;
+            this.metaObjectById.Add(inheritance.Id, inheritance);
         }
 
         internal void OnRelationTypeCreated(RelationType relationType)
         {
             this.RelationTypes.Add(relationType);
-            this.MetaObjectById[relationType.Id] = relationType;
+            this.metaObjectById.Add(relationType.Id, relationType);
         }
 
         internal void OnMethodTypeCreated(MethodType methodType)
         {
             this.MethodTypes.Add(methodType);
-            this.MetaObjectById[methodType.Id] = methodType;
+            this.metaObjectById.Add(methodType.Id, methodType);
         }
 
         /// <summary>
@@ -400,63 +406,63 @@ namespace Allors.Meta
         private void AddAllorsUnitPopulation()
         {
             {
-                var objectType = new UnitType(this, UnitIds.StringId);
+                var objectType = new Unit(this, UnitIds.StringId);
                 objectType.SingularName = UnitTags.AllorsString.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
                 objectType.UnitTag = (int)UnitTags.AllorsString;
             }
 
             {
-                var objectType = new UnitType(this, UnitIds.IntegerId);
+                var objectType = new Unit(this, UnitIds.IntegerId);
                 objectType.SingularName = UnitTags.AllorsInteger.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
                 objectType.UnitTag = (int)UnitTags.AllorsInteger;
             }
 
             {
-                var objectType = new UnitType(this, UnitIds.LongId);
+                var objectType = new Unit(this, UnitIds.LongId);
                 objectType.SingularName = UnitTags.AllorsLong.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
                 objectType.UnitTag = (int)UnitTags.AllorsLong;
             }
 
             {
-                var objectType = new UnitType(this, UnitIds.DecimalId);
+                var objectType = new Unit(this, UnitIds.DecimalId);
                 objectType.SingularName = UnitTags.AllorsDecimal.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
                 objectType.UnitTag = (int)UnitTags.AllorsDecimal;
             }
 
             {
-                var objectType = new UnitType(this, UnitIds.DoubleId);
+                var objectType = new Unit(this, UnitIds.DoubleId);
                 objectType.SingularName = UnitTags.AllorsDouble.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
                 objectType.UnitTag = (int)UnitTags.AllorsDouble;
             }
 
             {
-                var objectType = new UnitType(this, UnitIds.BooleanId);
+                var objectType = new Unit(this, UnitIds.BooleanId);
                 objectType.SingularName = UnitTags.AllorsBoolean.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
                 objectType.UnitTag = (int)UnitTags.AllorsBoolean;
             }
 
             {
-                var objectType = new UnitType(this, UnitIds.DatetimeId);
+                var objectType = new Unit(this, UnitIds.DatetimeId);
                 objectType.SingularName = UnitTags.AllorsDateTime.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
                 objectType.UnitTag = (int)UnitTags.AllorsDateTime;
             }
 
             {
-                var objectType = new UnitType(this, UnitIds.Unique);
+                var objectType = new Unit(this, UnitIds.Unique);
                 objectType.SingularName = UnitTags.AllorsUnique.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
                 objectType.UnitTag = (int)UnitTags.AllorsUnique;
             }
 
             {
-                var objectType = new UnitType(this, UnitIds.BinaryId);
+                var objectType = new Unit(this, UnitIds.BinaryId);
                 objectType.SingularName = UnitTags.AllorsBinary.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
                 objectType.UnitTag = (int)UnitTags.AllorsBinary;

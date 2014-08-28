@@ -116,7 +116,7 @@ namespace Allors.Adapters
         /// </returns>
         public object Internalize(object unit, RoleType roleType)
         {
-            var unitType = (UnitType)roleType.ObjectType;
+            var unitType = (Unit)roleType.ObjectType;
             var unitTypeTag = (UnitTags)unitType.UnitTag;
 
             var normalizedUnit = unit;
@@ -223,7 +223,7 @@ namespace Allors.Adapters
             return normalizedUnit;
         }
 
-        public bool ContainsConcreteClass(CompositeType objectType, ObjectType concreteClass)
+        public bool ContainsConcreteClass(Composite objectType, ObjectType concreteClass)
         {
             object concreteClassOrClasses;
             if (!this.concreteClassesByObjectType.TryGetValue(objectType, out concreteClassOrClasses))
@@ -256,7 +256,7 @@ namespace Allors.Adapters
                 throw new ArgumentException(strategy.ObjectType + " is not a valid association object type for " + relationType + ".");
             }
 
-            if (relationType.ObjectType is CompositeType)
+            if (relationType.ObjectType is Composite)
             {
                 throw new ArgumentException(relationType.ObjectType + " on relationType " + relationType + " is not a unit type.");
             }
@@ -304,7 +304,7 @@ namespace Allors.Adapters
                     throw new ArgumentException(roleType + " on object " + strategy + " is removed.");
                 }
 
-                var compositeType = roleType.ObjectType as CompositeType;
+                var compositeType = roleType.ObjectType as Composite;
 
                 if (compositeType == null)
                 {

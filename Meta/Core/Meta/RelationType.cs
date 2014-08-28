@@ -64,7 +64,7 @@ namespace Allors.Meta
                 if (this.AssociationType != null && this.AssociationType.ObjectType != null &&
                     this.RoleType != null && this.RoleType.ObjectType != null)
                 {
-                    var roleCompositeType = this.RoleType.ObjectType as CompositeType;
+                    var roleCompositeType = this.RoleType.ObjectType as Composite;
                     return this.AssociationType.ObjectType.RootClasses.Count == 1 && roleCompositeType != null && roleCompositeType.RootClasses.Count == 1;
                 }
 

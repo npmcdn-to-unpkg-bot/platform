@@ -25,7 +25,7 @@ namespace Allors.Meta
 
     /// <summary>
     /// The ids for unit ObjectTypes.
-    /// Ids can be used for long term persistence and should therefore never be changed.
+    /// Ids can be used for long term reference and should therefore never be changed.
     /// </summary>
     public static class UnitIds
     {
