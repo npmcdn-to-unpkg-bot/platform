@@ -277,18 +277,6 @@ namespace Allors.Meta
                 relationType.RoleType.DeriveMultiplicityScaleAndSize();
             }
 
-            // RoleType Hierarchy Singular Name
-            foreach (var relationType in this.RelationTypes)
-            {
-                relationType.RoleType.DeriveHierarchySingularName(sharedCompositeTypes);
-            }
-
-            // RoleType Hierarchy Plural Name
-            foreach (var relationType in this.RelationTypes)
-            {
-                relationType.RoleType.DeriveHierarchyPluralName(sharedCompositeTypes);
-            }
-
             // RoleType Root Name
             foreach (var relationType in this.RelationTypes)
             {

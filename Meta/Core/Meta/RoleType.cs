@@ -22,7 +22,6 @@
 namespace Allors.Meta
 {
     using System;
-    using System.Collections.Generic;
 
     /// <summary>
     /// A <see cref="RoleType"/> defines the role side of a relation.
@@ -35,10 +34,6 @@ namespace Allors.Meta
         /// The maximum size value.
         /// </summary>
         public const int MaximumSize = -1;
-
-        private string derivedHierarchyPluralName;
-
-        private string derivedHierarchySingularName;
 
         private string derivedRootName;
 
@@ -85,17 +80,7 @@ namespace Allors.Meta
             {
                 if (this.IsMany)
                 {
-                    if (this.HierarchyPluralName != null)
-                    {
-                        return this.HierarchyPluralName;
-                    }
-
                     return this.PluralName;
-                }
-
-                if (this.HierarchySingularName != null)
-                {
-                    return this.HierarchySingularName;
                 }
 
                 return this.SingularName;
@@ -163,30 +148,6 @@ namespace Allors.Meta
             get
             {
                 return this.derivedRootName;
-            }
-        }
-
-        /// <summary>
-        /// Gets the hierarchy singular name.
-        /// </summary>
-        /// <value>The name of the hierarchy singular.</value>
-        public string HierarchySingularName
-        {
-            get
-            {
-                return this.derivedHierarchySingularName;
-            }
-        }
-
-        /// <summary>
-        /// Gets the hierarchy plural name.
-        /// </summary>
-        /// <value>The name of the hierarchy plural.</value>
-        public string HierarchyPluralName
-        {
-            get
-            {
-                return this.derivedHierarchyPluralName;
             }
         }
 
@@ -330,130 +291,6 @@ namespace Allors.Meta
                 this.Size = null;
                 this.Scale = null;
                 this.Precision = null;
-            }
-        }
-
-        /// <summary>
-        /// Derive hierarchy plural name.
-        /// </summary>
-        /// <param name="objectTypes">The object Types.</param>
-        internal void DeriveHierarchyPluralName(HashSet<Composite> objectTypes)
-        {
-            objectTypes.Clear();
-            this.derivedHierarchyPluralName = null;
-
-            if (this.ObjectType != null && this.AssociationType.ObjectType != null)
-            {
-                objectTypes.Add(this.AssociationType.ObjectType);
-                objectTypes.UnionWith(this.AssociationType.ObjectType.Supertypes);
-
-                var associationInterface = this.AssociationType.ObjectType as Interface;
-                if (associationInterface != null)
-                {
-                    objectTypes.UnionWith(associationInterface.Subtypes);
-                    foreach (var subType in associationInterface.Subtypes)
-                    {
-                        foreach (var superType in subType.Supertypes)
-                        {
-                            if (!objectTypes.Contains(superType))
-                            {
-                                objectTypes.Add(superType);
-                            }
-                        }
-                    }
-                }
-
-                this.derivedHierarchyPluralName = this.PluralName;
-
-                foreach (var objectType in objectTypes)
-                {
-                    foreach (var otherAsssociation in objectType.AssociationTypes)
-                    {
-                        if (!this.AssociationType.Equals(otherAsssociation))
-                        {
-                            if (otherAsssociation.RelationType != null)
-                            {
-                                var otherRelationType = otherAsssociation.RelationType;
-                                if (otherRelationType.RoleType != null)
-                                {
-                                    var otherRole = otherRelationType.RoleType;
-                                    if (otherRole.ObjectType != null)
-                                    {
-                                        // TODO: Test for PluralName == null
-                                        if (otherRole.PluralName.Equals(this.PluralName))
-                                        {
-                                            this.derivedHierarchyPluralName = this.FullPluralName;
-                                            return;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Derive hierarchy singular name.
-        /// </summary>
-        /// <param name="objectTypes">The object types.</param>
-        internal void DeriveHierarchySingularName(HashSet<Composite> objectTypes)
-        {
-            objectTypes.Clear();
-            this.derivedHierarchySingularName = null;
-
-            if (this.ObjectType != null && this.AssociationType.ObjectType != null)
-            {
-                var myAssociation = this.AssociationType;
-                var myAssociationType = myAssociation.ObjectType;
-
-                objectTypes.Add(myAssociationType);
-                objectTypes.UnionWith(myAssociationType.Supertypes);
-
-                var myAssociationInterface = myAssociationType as Interface;
-                if (myAssociationInterface != null)
-                {
-                    objectTypes.UnionWith(myAssociationInterface.Subtypes);
-                    foreach (var subType in myAssociationInterface.Subtypes)
-                    {
-                        foreach (var superType in subType.Supertypes)
-                        {
-                            if (!objectTypes.Contains(superType))
-                            {
-                                objectTypes.Add(superType);
-                            }
-                        }
-                    }
-                }
-
-                this.derivedHierarchySingularName = this.SingularName;
-
-                foreach (var type in objectTypes)
-                {
-                    foreach (var otherAsssociation in type.AssociationTypes)
-                    {
-                        if (!myAssociation.Equals(otherAsssociation))
-                        {
-                            if (otherAsssociation.RelationType != null)
-                            {
-                                var otherRelationType = otherAsssociation.RelationType;
-                                if (otherRelationType.RoleType != null)
-                                {
-                                    var otherRole = otherRelationType.RoleType;
-                                    if (otherRole.ObjectType != null)
-                                    {
-                                        if (otherRole.SingularName.Equals(this.SingularName))
-                                        {
-                                            this.derivedHierarchySingularName = this.FullSingularName;
-                                            return;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
             }
         }
 
