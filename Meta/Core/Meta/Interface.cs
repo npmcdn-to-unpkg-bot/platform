@@ -31,13 +31,13 @@ namespace Allors.Meta
     /// </summary>
     public partial class Interface : CompositeType
     {
-        public List<CompositeType> DerivedDirectSubtypes = new List<CompositeType>();
+        private IList<CompositeType> derivedDirectSubtypes;
 
-        public List<CompositeType> DerivedSubtypes = new List<CompositeType>();
+        private IList<CompositeType> derivedSubtypes;
 
-        public List<Class> DerivedSubclasses = new List<Class>();
+        private IList<Class> derivedSubclasses;
 
-        private List<Class> derivedRootClasses = new List<Class>();
+        private IList<Class> derivedRootClasses;
 
         /// <summary>
         /// A cache for the ids of the <see cref="RoleTypes"/>.
@@ -60,7 +60,7 @@ namespace Allors.Meta
         {
             get
             {
-                return this.DerivedSubclasses;
+                return this.derivedSubclasses;
             }
         }
 
@@ -72,7 +72,7 @@ namespace Allors.Meta
         {
             get
             {
-                return this.DerivedSubtypes;
+                return this.derivedSubtypes;
             }
         }
 
@@ -105,52 +105,7 @@ namespace Allors.Meta
         {
             return this.rootClassesCache.Contains(objectType);
         }
-
-        /// <summary>
-        /// Determines whether the specified super type is a valid super type.
-        /// </summary>
-        /// <param name="supertype">The super type.</param>
-        /// <returns>
-        ///  <c>true</c> if the specified super type is valid; otherwise, <c>false</c>.
-        /// </returns>
-        public bool IsValidSupertype(ObjectType supertype)
-        {
-            if (!this.IsCyclicInheritance(supertype))
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// Determines whether adding the specified super type will result in a cycle.
-        /// </summary>
-        /// <param name="superType">The super type.</param>
-        /// <returns>
-        /// <c>true</c> if adding the specified super type will result in a cycle; otherwise, <c>false</c>.
-        /// </returns>
-        internal bool IsCyclicInheritance(ObjectType superType)
-        {
-            if (this.Equals(superType))
-            {
-                return true;
-            }
-
-            foreach (var directSubtype in this.DerivedDirectSubtypes)
-            {
-                if (directSubtype is Interface)
-                {
-                    if (((Interface)directSubtype).IsCyclicInheritance(superType))
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
-        }
-
+      
         /// <summary>
         /// Derive direct sub type derivations.
         /// </summary>
@@ -163,7 +118,7 @@ namespace Allors.Meta
                 directSubtypes.Add(inheritance.Subtype);
             }
 
-            this.DerivedDirectSubtypes = new List<CompositeType>(directSubtypes);
+            this.derivedDirectSubtypes = new List<CompositeType>(directSubtypes);
         }
 
         /// <summary>
@@ -173,7 +128,7 @@ namespace Allors.Meta
         internal void DeriveSubclasses(HashSet<Class> subClasses)
         {
             subClasses.Clear();
-            foreach (var subType in this.DerivedSubtypes)
+            foreach (var subType in this.derivedSubtypes)
             {
                 if (subType is Class)
                 {
@@ -181,7 +136,7 @@ namespace Allors.Meta
                 }
             }
 
-            this.DerivedSubclasses = new List<Class>(subClasses);
+            this.derivedSubclasses = new List<Class>(subClasses);
         }
 
         /// <summary>
@@ -193,7 +148,7 @@ namespace Allors.Meta
             subTypes.Clear();
             this.DeriveSubtypesRecursively(this, subTypes);
 
-            this.DerivedSubtypes = new List<CompositeType>(subTypes);
+            this.derivedSubtypes = new List<CompositeType>(subTypes);
         }
 
         /// <summary>
@@ -213,7 +168,7 @@ namespace Allors.Meta
         /// </summary>
         internal void DeriveRootClasses()
         {
-            this.derivedRootClasses = this.DerivedSubclasses;
+            this.derivedRootClasses = this.derivedSubclasses;
             this.rootClassesCache = new HashSet<ObjectType>(this.derivedRootClasses);
         }
 
@@ -224,7 +179,7 @@ namespace Allors.Meta
         /// <param name="superTypes">The super types.</param>
         private void DeriveSubtypesRecursively(ObjectType type, HashSet<CompositeType> subTypes)
         {
-            foreach (var directSubtype in this.DerivedDirectSubtypes)
+            foreach (var directSubtype in this.derivedDirectSubtypes)
             {
                 if (!Equals(directSubtype, type))
                 {

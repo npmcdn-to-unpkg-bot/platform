@@ -31,17 +31,6 @@ namespace Allors.Meta
     /// </summary>
     public partial class RelationType : MetaObject, IComparable
     {
-        public bool IsDerived;
-
-        public bool IsIndexed;
-
-        public RoleType RoleType;
-
-        public AssociationType AssociationType;
-
-        // Domain -> RelationType
-        public Domain Domain { get; private set; }
-
         public RelationType(Domain domain, Guid relationTypeId, Guid associationTypeId, Guid roleTypeId)
         {
             this.Domain = domain;
@@ -51,7 +40,17 @@ namespace Allors.Meta
 
             this.Domain.OnRelationTypeCreated(this);
         }
-        
+
+        public bool IsDerived { get; set; }
+
+        public bool IsIndexed { get; set; }
+
+        public RoleType RoleType { get; set; }
+
+        public AssociationType AssociationType { get; set; }
+
+        public Domain Domain { get; private set; }
+
         /// <summary>
         /// Gets a value indicating whether there exist exclusive root classes.
         /// </summary>
@@ -115,20 +114,6 @@ namespace Allors.Meta
         public bool IsOneToOne
         {
             get { return this.AssociationType.IsOne && !this.RoleType.IsMany; }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether this instance is valid.
-        /// </summary>
-        /// <value><c>true</c> if this instance is valid; otherwise, <c>false</c>.</value>
-        public bool IsValid
-        {
-            get
-            {
-                var validationReport = new ValidationLog();
-                this.Validate(validationReport);
-                return !validationReport.ContainsErrors;
-            }
         }
 
         /// <summary>

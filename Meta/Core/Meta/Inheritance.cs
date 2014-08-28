@@ -22,17 +22,14 @@
 namespace Allors.Meta
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
     /// <summary>
     /// Defines a subtype/supertype relation between two <see cref="ObjectType"/>s.
     /// </summary>
     public sealed partial class Inheritance : MetaObject
     {
-
-        public CompositeType Subtype;
-
-        public Interface Supertype;
-
         public Inheritance(Domain domain, Guid inheritanceId)
         {
             this.Domain = domain;
@@ -41,8 +38,11 @@ namespace Allors.Meta
             this.Domain.OnInheritanceCreated(this);
         }
 
-        // Domain->Inheritance
-        protected Domain Domain { get; private set; }
+        public CompositeType Subtype { get; set; }
+
+        public Interface Supertype { get; set; }
+
+        public Domain Domain { get; private set; }
 
         /// <summary>
         /// Gets the validation name.
@@ -81,17 +81,13 @@ namespace Allors.Meta
 
             if (this.Subtype != null && this.Supertype != null)
             {
-                if (this.Subtype is Interface)
+                if (this.HasCycle(this.Subtype))
                 {
-                    if (((Interface)this.Subtype).IsCyclicInheritance(this.Supertype))
-                    {
-                        var message = this.ValidationName + " has a cycle in its inheritance hierarchy";
-                        validationLog.AddError(message, this, ValidationKind.Cyclic, "Inheritance.Subtype");
-                    }
+                    var message = this.ValidationName + " has a cycle in its inheritance hierarchy";
+                    validationLog.AddError(message, this, ValidationKind.Cyclic, "Inheritance.Subtype");
                 }
 
-                var inheritance = this.Subtype.FindInheritanceWhereDirectSubtype(this.Supertype);
-                if (inheritance != null && !this.Equals(inheritance))
+                if (this.Domain.Inheritances.Count(inheritance => this.Subtype.Equals(inheritance.Subtype) && this.Supertype.Equals(inheritance.Supertype)) != 1)
                 {
                     var message = "name of " + this.ValidationName + " is already in use";
                     validationLog.AddError(message, this, ValidationKind.Unique, "Inheritance.Supertype");
@@ -117,6 +113,18 @@ namespace Allors.Meta
                     validationLog.AddError(message, this, ValidationKind.Unique, "Inheritance.Supertype");
                 }
             }
+        }
+
+        private bool HasCycle(CompositeType startSubType)
+        {
+            if (startSubType.Equals(this.Supertype))
+            {
+                return true;
+            }
+
+            return this.Supertype != null && this.Domain.Inheritances
+                .Where(inheritance => this.Supertype.Equals(inheritance.Subtype))
+                .Any(superInheritance => superInheritance.HasCycle(startSubType));
         }
     }
 }

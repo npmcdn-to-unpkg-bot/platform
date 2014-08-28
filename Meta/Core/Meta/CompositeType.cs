@@ -134,17 +134,7 @@ namespace Allors.Meta
         /// True if this contains the concrete class.
         /// </returns>
         public abstract bool ContainsRootClass(ObjectType objectType);
-
-        /// <summary>
-        /// Finds the inheritance where this instance is the direct subtype.
-        /// </summary>
-        /// <param name="supertype">The supertype.</param>
-        /// <returns>The inheritance.</returns>
-        internal Inheritance FindInheritanceWhereDirectSubtype(ObjectType supertype)
-        {
-            return this.Domain.Inheritances.FirstOrDefault(inheritance => this.Equals(inheritance.Subtype) && supertype.Equals(inheritance.Supertype));
-        }
-
+        
         /// <summary>
         /// Derive direct super type derivations.
         /// </summary>

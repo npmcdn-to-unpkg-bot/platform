@@ -31,24 +31,23 @@ namespace Allors.Meta
     /// </summary>
     public sealed partial class AssociationType : PropertyType, IComparable
     {
-        public bool IsMany;
+        /// <summary>
+        /// Used to form names to navigate from <see cref="RoleType"/> To <see cref="AssociationType"/>;
+        /// </summary>
+        private const string Where = "Where";
 
-        public CompositeType ObjectType;
-        
         public AssociationType(RelationType relationType, Guid associationTypeId)
         {
             this.RelationType = relationType;
             this.Id = associationTypeId;
         }
 
-        // RelationType->AssociationType
+        public bool IsMany { get; set; }
+
+        public CompositeType ObjectType { get; set; }
+
         public RelationType RelationType { get; private set; }
         
-        /// <summary>
-        /// Used to form names to navigate from <see cref="RoleType"/> To <see cref="AssociationType"/>;
-        /// </summary>
-        private const string Where = "Where";
-
         /// <summary>
         /// Gets the name.
         /// </summary>
@@ -59,10 +58,10 @@ namespace Allors.Meta
             {
                 if (this.IsMany)
                 {
-                    return this.WherePluralName;
+                    return this.FullPluralName;
                 }
 
-                return this.WhereSingularName;
+                return this.FullSingularName;
             }
         }
 
@@ -83,6 +82,25 @@ namespace Allors.Meta
         {
             get { return this.ObjectType.PluralName; }
         }
+
+        /// <summary>
+        /// Gets the plural name when using <see cref="Where"/>.
+        /// </summary>
+        /// <value>The plural name when using <see cref="Where"/>.</value>
+        public string FullPluralName
+        {
+            get { return this.ObjectType.PluralName + this.RelationType.RoleType.SingularName; }
+        }
+
+        /// <summary>
+        /// Gets the singular name when using <see cref="Where"/>.
+        /// </summary>
+        /// <value>The singular name when using <see cref="Where"/>.</value>
+        public string FullSingularName
+        {
+            get { return this.ObjectType.SingularName + this.RelationType.RoleType.SingularName; }
+        }
+
         /// <summary>
         /// Gets the plural name when using <see cref="Where"/>.
         /// </summary>
@@ -113,6 +131,15 @@ namespace Allors.Meta
         }
 
         /// <summary>
+        /// Gets the role.
+        /// </summary>
+        /// <value>The role .</value>
+        public RoleType RoleType
+        {
+            get { return RelationType.RoleType; }
+        }
+
+        /// <summary>
         /// Gets or sets a value indicating whether this instance has a multiplicity of one.
         /// </summary>
         /// <value><c>true</c> if this instance is one; otherwise, <c>false</c>.</value>
@@ -120,15 +147,6 @@ namespace Allors.Meta
         {
             get { return !this.IsMany; }
             set { this.IsMany = !value; }
-        }
-
-        /// <summary>
-        /// Gets the role.
-        /// </summary>
-        /// <value>The role .</value>
-        public RoleType RoleType
-        {
-            get { return RelationType.RoleType; }
         }
 
         /// <summary>

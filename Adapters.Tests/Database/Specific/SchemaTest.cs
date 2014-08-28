@@ -390,7 +390,7 @@ namespace Allors.Adapters.Special
             Assert.AreEqual(null, error.RelationType);
             Assert.AreEqual(fromC1ToC2.RoleType, error.Role);
             Assert.AreEqual("c2", error.TableName);
-            Assert.AreEqual("c1wherec2", error.ColumnName);
+            Assert.AreEqual("c1c2", error.ColumnName);
         }
 
         [Test]
