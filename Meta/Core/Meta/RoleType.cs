@@ -23,7 +23,6 @@ namespace Allors.Meta
 {
     using System;
     using System.Collections.Generic;
-    using System.Data.SqlTypes;
 
     /// <summary>
     /// A <see cref="RoleType"/> defines the role side of a relation.
