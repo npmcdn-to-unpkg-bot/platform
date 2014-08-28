@@ -217,7 +217,7 @@ namespace Allors.Meta
             }
 
             // DirectSubtypes
-            foreach (var type in this.DerivedCompositeTypes)
+            foreach (var type in this.Interfaces)
             {
                 type.DeriveDirectSubtypes(sharedCompositeTypes);
             }
@@ -229,13 +229,13 @@ namespace Allors.Meta
             }
 
             // Subtypes
-            foreach (var type in this.DerivedCompositeTypes)
+            foreach (var type in this.Interfaces)
             {
                 type.DeriveSubtypes(sharedCompositeTypes);
             }
             
             // Subclasses
-            foreach (var type in this.DerivedCompositeTypes)
+            foreach (var type in this.Interfaces)
             {
                 type.DeriveSubclasses(sharedClasses);
             }

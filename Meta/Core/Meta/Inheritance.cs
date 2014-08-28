@@ -81,10 +81,13 @@ namespace Allors.Meta
 
             if (this.Subtype != null && this.Supertype != null)
             {
-                if (this.Subtype.IsCyclicInheritance(this.Supertype))
+                if (this.Subtype is Interface)
                 {
-                    var message = this.ValidationName + " has a cycle in its inheritance hierarchy";
-                    validationLog.AddError(message, this, ValidationKind.Cyclic, "Inheritance.Subtype");
+                    if (((Interface)this.Subtype).IsCyclicInheritance(this.Supertype))
+                    {
+                        var message = this.ValidationName + " has a cycle in its inheritance hierarchy";
+                        validationLog.AddError(message, this, ValidationKind.Cyclic, "Inheritance.Subtype");
+                    }
                 }
 
                 var inheritance = this.Subtype.FindInheritanceWhereDirectSubtype(this.Supertype);

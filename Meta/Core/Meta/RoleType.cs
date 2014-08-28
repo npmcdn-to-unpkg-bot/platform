@@ -404,14 +404,19 @@ namespace Allors.Meta
             {
                 objectTypes.Add(this.AssociationType.ObjectType);
                 objectTypes.UnionWith(this.AssociationType.ObjectType.Supertypes);
-                objectTypes.UnionWith(this.AssociationType.ObjectType.Subtypes);
-                foreach (var subType in this.AssociationType.ObjectType.Subtypes)
+
+                var associationInterface = this.AssociationType.ObjectType as Interface;
+                if (associationInterface != null)
                 {
-                    foreach (var superType in subType.Supertypes)
+                    objectTypes.UnionWith(associationInterface.Subtypes);
+                    foreach (var subType in associationInterface.Subtypes)
                     {
-                        if (!objectTypes.Contains(superType))
+                        foreach (var superType in subType.Supertypes)
                         {
-                            objectTypes.Add(superType);
+                            if (!objectTypes.Contains(superType))
+                            {
+                                objectTypes.Add(superType);
+                            }
                         }
                     }
                 }
@@ -463,14 +468,19 @@ namespace Allors.Meta
 
                 objectTypes.Add(myAssociationType);
                 objectTypes.UnionWith(myAssociationType.Supertypes);
-                objectTypes.UnionWith(myAssociationType.Subtypes);
-                foreach (var subType in myAssociationType.Subtypes)
+
+                var myAssociationInterface = myAssociationType as Interface;
+                if (myAssociationInterface != null)
                 {
-                    foreach (var superType in subType.Supertypes)
+                    objectTypes.UnionWith(myAssociationInterface.Subtypes);
+                    foreach (var subType in myAssociationInterface.Subtypes)
                     {
-                        if (!objectTypes.Contains(superType))
+                        foreach (var superType in subType.Supertypes)
                         {
-                            objectTypes.Add(superType);
+                            if (!objectTypes.Contains(superType))
+                            {
+                                objectTypes.Add(superType);
+                            }
                         }
                     }
                 }

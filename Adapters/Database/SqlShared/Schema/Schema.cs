@@ -403,24 +403,19 @@ namespace Allors.Adapters.Database.Sql
                     var roleTypes = new List<RoleType>();
                     var associationTypes = new List<AssociationType>();
 
-                    var subClassesAndSelf = new List<Class>(objectType.Subclasses) { (Class)objectType };
-
-                    foreach (var subClass in subClassesAndSelf)
+                    foreach (var roleType in @class.RoleTypes)
                     {
-                        foreach (var roleType in subClass.RoleTypes)
+                        if (!roleTypes.Contains(roleType))
                         {
-                            if (!roleTypes.Contains(roleType))
-                            {
-                                roleTypes.Add(roleType);
-                            }
+                            roleTypes.Add(roleType);
                         }
+                    }
 
-                        foreach (var associationType in subClass.AssociationTypes)
+                    foreach (var associationType in @class.AssociationTypes)
+                    {
+                        if (!associationTypes.Contains(associationType))
                         {
-                            if (!associationTypes.Contains(associationType))
-                            {
-                                associationTypes.Add(associationType);
-                            }
+                            associationTypes.Add(associationType);
                         }
                     }
 

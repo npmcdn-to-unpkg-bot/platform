@@ -66,7 +66,7 @@ namespace Allors.Adapters.Database.Sql
             get { return this.extent.Session; }
         }
 
-        protected ObjectType Type
+        protected CompositeType Type
         {
             get { return this.extent.ObjectType; }
         }
@@ -175,9 +175,13 @@ namespace Allors.Adapters.Database.Sql
             {
                 this.Append(" WHERE ( ");
                 this.Append(" " + alias + "." + this.Schema.TypeId + "=" + this.AddParameter(this.Type.Id));
-                foreach (var subClass in this.Type.Subclasses)
+                var @interface = this.Type as Interface;
+                if (@interface != null)
                 {
-                    this.Append(" OR " + alias + "." + this.Schema.TypeId + "=" + this.AddParameter(subClass.Id));
+                    foreach (var subClass in @interface.Subclasses)
+                    {
+                        this.Append(" OR " + alias + "." + this.Schema.TypeId + "=" + this.AddParameter(subClass.Id));
+                    }
                 }
 
                 this.Append(" ) ");

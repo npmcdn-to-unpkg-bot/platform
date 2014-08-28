@@ -23,6 +23,8 @@ namespace Allors.Adapters.Database.Sql
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Linq;
+
     using Meta;
 
     public abstract class CompositePredicate : Predicate, ICompositePredicate
@@ -97,22 +99,15 @@ namespace Allors.Adapters.Database.Sql
             }
         }
 
-        public static ObjectType[] GetConcreteSubClasses(ObjectType type)
+        public static Class[] GetConcreteSubClasses(CompositeType type)
         {
-            if (type is Interface)
+            var @interface = type as Interface;
+            if (@interface != null)
             {
-                var concreteSubclassList = new ArrayList(type.Subclasses.Count);
-                foreach (var subClass in type.Subclasses)
-                {
-                    concreteSubclassList.Add(subClass);
-                }
-
-                return (ObjectType[])concreteSubclassList.ToArray(typeof(ObjectType));
+                return @interface.Subclasses.ToArray();
             }
 
-            var concreteSubclasses = new ObjectType[1];
-            concreteSubclasses[0] = type;
-            return concreteSubclasses;
+            return new[] { (Class)type };
         }
 
         public ICompositePredicate AddAnd()

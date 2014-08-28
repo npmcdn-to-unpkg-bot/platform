@@ -35,11 +35,6 @@ namespace Allors.Meta
 
         public string PluralName;
 
-        public List<CompositeType> DerivedDirectSubtypes = new List<CompositeType>();
-
-        public List<CompositeType> DerivedSubtypes = new List<CompositeType>();
-
-        public List<Class> DerivedSubclasses = new List<Class>();
 
         // Domain -> ObjectType
         public Domain Domain { get; private set; }
@@ -59,31 +54,6 @@ namespace Allors.Meta
             get
             {
                 return this.SingularName;
-            }
-        }
-
-        /// <summary>
-        /// Gets the subclasses.
-        /// </summary>
-        /// <value>The subclasses.</value>
-        public IList<Class> Subclasses
-        {
-            get
-            {
-                return this.DerivedSubclasses;
-            }
-        }
-
-
-        /// <summary>
-        /// Gets the sub types.
-        /// </summary>
-        /// <value>The super types.</value>
-        public IList<CompositeType> Subtypes
-        {
-            get
-            {
-                return this.DerivedSubtypes;
             }
         }
 
@@ -125,33 +95,6 @@ namespace Allors.Meta
         }
         
         /// <summary>
-        /// Finds the inheritance where this instance is the direct subtype.
-        /// </summary>
-        /// <param name="supertype">The supertype.</param>
-        /// <returns>The inheritance.</returns>
-        public Inheritance FindInheritanceWhereDirectSubtype(ObjectType supertype)
-        {
-            return this.Domain.Inheritances.FirstOrDefault(inheritance => this.Equals(inheritance.Subtype) && supertype.Equals(inheritance.Supertype));
-        }
-
-        /// <summary>
-        /// Determines whether the specified super type is a valid super type.
-        /// </summary>
-        /// <param name="supertype">The super type.</param>
-        /// <returns>
-        ///  <c>true</c> if the specified super type is valid; otherwise, <c>false</c>.
-        /// </returns>
-        public bool IsValidSupertype(ObjectType supertype)
-        {
-            if (!this.IsCyclicInheritance(supertype))
-            {
-                return true;
-            }
-
-            return false;
-        }
-        
-        /// <summary>
         /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
         /// </summary>
         /// <returns>
@@ -165,76 +108,6 @@ namespace Allors.Meta
             }
 
             return this.IdAsString;
-        }
-       
-        /// <summary>
-        /// Determines whether adding the specified super type will result in a cycle.
-        /// </summary>
-        /// <param name="superType">The super type.</param>
-        /// <returns>
-        /// <c>true</c> if adding the specified super type will result in a cycle; otherwise, <c>false</c>.
-        /// </returns>
-        internal bool IsCyclicInheritance(ObjectType superType)
-        {
-            if (this.Equals(superType))
-            {
-                return true;
-            }
-
-            foreach (var directSubtypes in this.DerivedDirectSubtypes)
-            {
-                if (directSubtypes.IsCyclicInheritance(superType))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// Derive direct sub type derivations.
-        /// </summary>
-        /// <param name="directSubtypes">The direct super types.</param>
-        internal void DeriveDirectSubtypes(HashSet<CompositeType> directSubtypes)
-        {
-            directSubtypes.Clear();
-            foreach (var inheritance in this.Domain.Inheritances.Where(inheritance => this.Equals(inheritance.Supertype)))
-            {
-                directSubtypes.Add(inheritance.Subtype);
-            }
-
-            this.DerivedDirectSubtypes = new List<CompositeType>(directSubtypes);
-        }
-        
-        /// <summary>
-        /// Derive subclasses.
-        /// </summary>
-        /// <param name="subClasses">The sub classes.</param>
-        internal void DeriveSubclasses(HashSet<Class> subClasses)
-        {
-            subClasses.Clear();
-            foreach (var subType in this.DerivedSubtypes)
-            {
-                if (subType is Class)
-                {
-                    subClasses.Add((Class)subType);
-                }
-            }
-
-            this.DerivedSubclasses = new List<Class>(subClasses);
-        }
-        
-        /// <summary>
-        /// Derive sub types.
-        /// </summary>
-        /// <param name="subTypes">The super types.</param>
-        internal void DeriveSubtypes(HashSet<CompositeType> subTypes)
-        {
-            subTypes.Clear();
-            this.DeriveSubtypesRecursively(this, subTypes);
-
-            this.DerivedSubtypes = new List<CompositeType>(subTypes);
         }
 
         /// <summary>
@@ -325,23 +198,6 @@ namespace Allors.Meta
             else
             {
                 validationLog.AddError(this.ValidationName + " has no plural name", this, ValidationKind.Required, "ObjectType.PluralName");
-            }
-        }
-
-        /// <summary>
-        /// Derive super types recursively.
-        /// </summary>
-        /// <param name="type">The type .</param>
-        /// <param name="superTypes">The super types.</param>
-        private void DeriveSubtypesRecursively(ObjectType type, HashSet<CompositeType> subTypes)
-        {
-            foreach (var directSubtype in this.DerivedDirectSubtypes)
-            {
-                if (!Equals(directSubtype, type))
-                {
-                    subTypes.Add(directSubtype);
-                    directSubtype.DeriveSubtypesRecursively(type, subTypes);
-                }
             }
         }
     }

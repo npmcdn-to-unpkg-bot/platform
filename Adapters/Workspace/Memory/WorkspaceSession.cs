@@ -1761,11 +1761,14 @@ namespace Allors.Adapters.Workspace.Memory
                     sortedClassAndSubclassList.Add(objectType);
                 }
 
-                foreach (var subClass in objectType.Subclasses)
+                if (objectType is Interface)
                 {
-                    if (subClass is Class)
+                    foreach (var subClass in ((Interface)objectType).Subclasses)
                     {
-                        sortedClassAndSubclassList.Add(subClass);
+                        if (subClass is Class)
+                        {
+                            sortedClassAndSubclassList.Add(subClass);
+                        }
                     }
                 }
 

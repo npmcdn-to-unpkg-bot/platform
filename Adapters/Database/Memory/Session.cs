@@ -503,11 +503,14 @@ namespace Allors.Adapters.Database.Memory
                     sortedClassAndSubclassList.Add(type);
                 }
 
-                foreach (var subClass in type.Subclasses)
+                if (type is Interface)
                 {
-                    if (subClass is Class)
+                    foreach (var subClass in ((Interface)type).Subclasses)
                     {
-                        sortedClassAndSubclassList.Add(subClass);
+                        if (subClass is Class)
+                        {
+                            sortedClassAndSubclassList.Add(subClass);
+                        }
                     }
                 }
 
