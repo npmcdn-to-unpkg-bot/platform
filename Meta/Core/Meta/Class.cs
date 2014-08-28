@@ -28,14 +28,14 @@ namespace Allors.Meta
     {
         private readonly List<Class> selfList; 
 
-        public Class(Domain domain, Guid objectTypeId)
-            : base(domain, objectTypeId)
+        public Class(Domain domain, Guid id)
+            : base(domain, id)
         {
             this.Domain.OnClassCreated(this);
             this.selfList = new List<Class> { this };
         }
 
-        public override List<Class> DerivedRootClasses
+        public override IList<Class> RootClasses
         {
             get
             {
@@ -43,7 +43,7 @@ namespace Allors.Meta
             }
         }
 
-        public override Class DerivedExclusiveRootClass
+        public override Class ExclusiveRootClass
         {
             get
             {

@@ -532,7 +532,7 @@ namespace Allors.Meta
 
                     foreach (var rootType in this.DerivedRootClasses)
                     {
-                        foreach (var otherRole in rootType.DerivedRoleTypes)
+                        foreach (var otherRole in rootType.RoleTypes)
                         {
                             if (!Equals(otherRole))
                             {

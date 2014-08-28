@@ -228,14 +228,14 @@ namespace Allors.Adapters
             object concreteClassOrClasses;
             if (!this.concreteClassesByObjectType.TryGetValue(objectType, out concreteClassOrClasses))
             {
-                if (objectType.DerivedRootClasses.Count == 1)
+                if (objectType.RootClasses.Count == 1)
                 {
-                    concreteClassOrClasses = objectType.DerivedRootClasses[0];
+                    concreteClassOrClasses = objectType.RootClasses[0];
                     this.concreteClassesByObjectType[objectType] = concreteClassOrClasses;
                 }
                 else
                 {
-                    concreteClassOrClasses = new HashSet<ObjectType>(objectType.DerivedRootClasses);
+                    concreteClassOrClasses = new HashSet<ObjectType>(objectType.RootClasses);
                     this.concreteClassesByObjectType[objectType] = concreteClassOrClasses;
                 }
             }

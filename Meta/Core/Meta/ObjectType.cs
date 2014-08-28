@@ -22,28 +22,20 @@
 namespace Allors.Meta
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
 
-    /// <summary>
-    /// An <see cref="ObjectType"/> defines the state and behavior for
-    /// a set of <see cref="IObject"/>s.
-    /// </summary>
     public abstract partial class ObjectType : MetaObject, IComparable
     {
-        public string SingularName;
-
-        public string PluralName;
-
-
-        // Domain -> ObjectType
-        public Domain Domain { get; private set; }
-
-        public ObjectType(Domain domain, Guid objectTypeId)
+        protected ObjectType(Domain domain, Guid id)
         {
             this.Domain = domain;
-            this.Id = objectTypeId;
+            this.Id = id;
         }
+
+        public string SingularName { get; set; }
+
+        public string PluralName { get; set; }
+
+        public Domain Domain { get; private set; }
         
         /// <summary>
         /// Gets the name.

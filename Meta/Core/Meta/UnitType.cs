@@ -29,8 +29,8 @@ namespace Allors.Meta
     /// </summary>
     public partial class UnitType : ObjectType
     {
-        public UnitType(Domain domain, Guid objectTypeId)
-            : base(domain, objectTypeId)
+        public UnitType(Domain domain, Guid id)
+            : base(domain, id)
         {
 
             this.Domain.OnUnitTypeCreated(this);

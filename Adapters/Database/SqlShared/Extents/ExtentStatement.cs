@@ -169,7 +169,7 @@ namespace Allors.Adapters.Database.Sql
 
         public bool AddWhere(ObjectType rootClass, string alias)
         {
-            var useWhere = !(this.Extent.ObjectType.RootClasses.Count == 1) || this.Extent.ObjectType.ExclusiveRootClass.DerivedExclusiveRootClass == null;
+            var useWhere = !(this.Extent.ObjectType.RootClasses.Count == 1) || this.Extent.ObjectType.ExclusiveRootClass.ExclusiveRootClass == null;
             
             if (useWhere)
             {

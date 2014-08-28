@@ -86,7 +86,7 @@ namespace Allors.Adapters.Database.Sql
             this.LazyLoadFilter();
             this.filter.Setup(statement);
 
-            if (this.objectType.DerivedRootClasses.Count > 0)
+            if (this.objectType.RootClasses.Count > 0)
             {
                 if (this.objectType.RootClasses.Count == 1)
                 {

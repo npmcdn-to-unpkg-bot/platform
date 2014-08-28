@@ -33,7 +33,7 @@ namespace Allors.Adapters.Database.Sql
                 var root = this.Extent.Filter == null || this.Extent.Filter.Equals(this);
                 if (root)
                 {
-                    var wherePresent = !(this.Extent.ObjectType.RootClasses.Count == 1) || this.Extent.ObjectType.ExclusiveRootClass.DerivedExclusiveRootClass == null;
+                    var wherePresent = !(this.Extent.ObjectType.RootClasses.Count == 1) || this.Extent.ObjectType.ExclusiveRootClass.ExclusiveRootClass == null;
                     statement.Append(wherePresent ? " AND " : " WHERE ");
                 }
                 else

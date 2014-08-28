@@ -27,43 +27,15 @@ namespace Allors.Meta
 
     public abstract partial class CompositeType : ObjectType
     {
-        public List<Interface> DerivedDirectSupertypes = new List<Interface>();
+        private IList<Interface> derivedDirectSupertypes;
 
-        public List<Interface> DerivedSupertypes = new List<Interface>();
+        private IList<Interface> derivedSupertypes;
 
-        public List<RoleType> DerivedRoleTypes = new List<RoleType>();
+        private IList<AssociationType> derivedAssociationTypes;
 
-        public List<AssociationType> DerivedAssociationTypes = new List<AssociationType>();
+        private IList<RoleType> derivedRoleTypes;
 
-        public List<MethodType> DerivedMethodTypes = new List<MethodType>();
-
-        /// <summary>
-        /// Gets the exclusive concrete subclass.
-        /// </summary>
-        /// <value>The exclusive concrete subclass.</value>
-        public Class ExclusiveRootClass
-        {
-            get
-            {
-                return this.DerivedExclusiveRootClass;
-            }
-        }
-
-        public abstract List<Class> DerivedRootClasses { get; }
-
-        public abstract Class DerivedExclusiveRootClass { get; }
-
-        /// <summary>
-        /// Gets the root classes.
-        /// </summary>
-        /// <value>The root classes.</value>
-        public IList<Class> RootClasses
-        {
-            get
-            {
-                return this.DerivedRootClasses;
-            }
-        }
+        private IList<MethodType> derivedMethodTypes;
 
         /// <summary>
         /// A cache for the ids of the <see cref="AssociationTypes"/>.
@@ -75,9 +47,33 @@ namespace Allors.Meta
         /// </summary>
         private Dictionary<Guid, object> roleIdsCache;
 
-        public CompositeType(Domain domain, Guid objectTypeId)
-            : base(domain, objectTypeId)
+        protected CompositeType(Domain domain, Guid id)
+            : base(domain, id)
         {
+        }
+
+        /// <summary>
+        /// Gets the exclusive concrete subclass.
+        /// </summary>
+        /// <value>The exclusive concrete subclass.</value>
+        public abstract Class ExclusiveRootClass { get; }
+
+        /// <summary>
+        /// Gets the root classes.
+        /// </summary>
+        /// <value>The root classes.</value>
+        public abstract IList<Class> RootClasses { get; }
+
+        /// <summary>
+        /// Gets the direct super types.
+        /// </summary>
+        /// <value>The super types.</value>
+        public IList<Interface> DirectSupertypes
+        {
+            get
+            {
+                return this.derivedDirectSupertypes;
+            }
         }
 
         /// <summary>
@@ -88,7 +84,7 @@ namespace Allors.Meta
         {
             get
             {
-                return this.DerivedSupertypes;
+                return this.derivedSupertypes;
             }
         }
 
@@ -100,19 +96,7 @@ namespace Allors.Meta
         {
             get
             {
-                return this.DerivedAssociationTypes;
-            }
-        }
-
-        /// <summary>
-        /// Gets the method types.
-        /// </summary>
-        /// <value>The method types.</value>
-        public IList<MethodType> MethodTypes
-        {
-            get
-            {
-                return this.DerivedMethodTypes;
+                return this.derivedAssociationTypes;
             }
         }
 
@@ -124,7 +108,19 @@ namespace Allors.Meta
         {
             get
             {
-                return this.DerivedRoleTypes;
+                return this.derivedRoleTypes;
+            }
+        }
+
+        /// <summary>
+        /// Gets the method types.
+        /// </summary>
+        /// <value>The method types.</value>
+        public IList<MethodType> MethodTypes
+        {
+            get
+            {
+                return this.derivedMethodTypes;
             }
         }
 
@@ -161,7 +157,7 @@ namespace Allors.Meta
                 directSupertypes.Add(inheritance.Supertype);
             }
 
-            this.DerivedDirectSupertypes = new List<Interface>(directSupertypes);
+            this.derivedDirectSupertypes = new List<Interface>(directSupertypes);
         }
 
         /// <summary>
@@ -173,7 +169,7 @@ namespace Allors.Meta
             superTypes.Clear();
             this.DeriveSupertypesRecursively(this, superTypes);
 
-            this.DerivedSupertypes = new List<Interface>(superTypes);
+            this.derivedSupertypes = new List<Interface>(superTypes);
         }
 
         /// <summary>
@@ -199,7 +195,7 @@ namespace Allors.Meta
                 }
             }
 
-            this.DerivedMethodTypes = new List<MethodType>(methodTypes);
+            this.derivedMethodTypes = new List<MethodType>(methodTypes);
         }
 
         /// <summary>
@@ -223,7 +219,7 @@ namespace Allors.Meta
                 }
             }
 
-            this.DerivedRoleTypes = new List<RoleType>(roleTypes);
+            this.derivedRoleTypes = new List<RoleType>(roleTypes);
         }
         
         /// <summary>
@@ -247,7 +243,7 @@ namespace Allors.Meta
                 }
             }
 
-            this.DerivedAssociationTypes = new List<AssociationType>(associations);
+            this.derivedAssociationTypes = new List<AssociationType>(associations);
         }
 
         /// <summary>
@@ -268,7 +264,7 @@ namespace Allors.Meta
         internal void DeriveRoleTypeIdsCache()
         {
             this.roleIdsCache = new Dictionary<Guid, object>();
-            foreach (var containsRole in this.DerivedRoleTypes)
+            foreach (var containsRole in this.derivedRoleTypes)
             {
                 this.roleIdsCache[containsRole.RelationType.Id] = null;
             }
@@ -281,7 +277,7 @@ namespace Allors.Meta
         /// <param name="superTypes">The super types.</param>
         private void DeriveSupertypesRecursively(ObjectType type, HashSet<Interface> superTypes)
         {
-            foreach (var directSupertype in this.DerivedDirectSupertypes)
+            foreach (var directSupertype in this.derivedDirectSupertypes)
             {
                 if (!Equals(directSupertype, type))
                 {

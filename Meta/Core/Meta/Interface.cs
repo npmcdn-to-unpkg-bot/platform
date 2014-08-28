@@ -46,8 +46,8 @@ namespace Allors.Meta
 
         private Class derivedExclusiveRootClass;
 
-        public Interface(Domain domain, Guid objectTypeId)
-            : base(domain, objectTypeId)
+        public Interface(Domain domain, Guid id)
+            : base(domain, id)
         {
             this.Domain.OnInterfaceCreated(this);
         }
@@ -76,7 +76,7 @@ namespace Allors.Meta
             }
         }
 
-        public override List<Class> DerivedRootClasses
+        public override IList<Class> RootClasses
         {
             get
             {
@@ -84,7 +84,7 @@ namespace Allors.Meta
             }
         }
 
-        public override Class DerivedExclusiveRootClass
+        public override Class ExclusiveRootClass
         {
             get
             {
@@ -202,9 +202,9 @@ namespace Allors.Meta
         internal void DeriveExclusiveRootClass()
         {
             this.derivedExclusiveRootClass = null;
-            if (this.DerivedRootClasses.Count == 1)
+            if (this.derivedRootClasses.Count == 1)
             {
-                this.derivedExclusiveRootClass = this.DerivedRootClasses[0];
+                this.derivedExclusiveRootClass = this.derivedRootClasses[0];
             }
         }
 
@@ -214,7 +214,7 @@ namespace Allors.Meta
         internal void DeriveRootClasses()
         {
             this.derivedRootClasses = this.DerivedSubclasses;
-            this.rootClassesCache = new HashSet<ObjectType>(this.DerivedRootClasses);
+            this.rootClassesCache = new HashSet<ObjectType>(this.derivedRootClasses);
         }
 
         /// <summary>
