@@ -28,7 +28,7 @@ namespace Allors.Meta
     {
         private readonly List<Class> selfList; 
 
-        public Class(Domain domain, Guid id)
+        public Class(Whole domain, Guid id)
             : base(domain, id)
         {
             this.Domain.OnClassCreated(this);

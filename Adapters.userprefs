@@ -1,8 +1,41 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Meta\Adapters\domain.g.cs">
+    <Files>
+      <File FileName="Meta\Adapters\domain.g.cs" Line="1" Column="1" />
+      <File FileName="Meta\Core\Meta\MetaObject.cs" Line="1" Column="1" />
+      <File FileName="Adapters.Tests\Database\Specific\ChangesTest.cs" Line="9" Column="9" />
+      <File FileName="c:\github\allors\Meta\Core\Meta\Inheritance.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="MonoDevelop.NUnit.TestPad">
+        <State expanded="True">
+          <Node name="Adapters.Tests" expanded="True">
+            <Node name="Allors" expanded="True">
+              <Node name="Adapters" expanded="True">
+                <Node name="Special" expanded="True">
+                  <Node name="Memory" expanded="True">
+                    <Node name="IntegerId" expanded="True">
+                      <Node name="ExtentTest" expanded="True">
+                        <Node name="AndGreaterThanLessThan" selected="True" />
+                      </Node>
+                    </Node>
+                  </Node>
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="C:\github\allors\Meta\Adapters\domain.g.cs" line="5231" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <DisabledProjects>
+    <String>Tests\Tests.csproj</String>
+  </DisabledProjects>
 </Properties>

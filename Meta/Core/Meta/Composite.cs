@@ -24,7 +24,6 @@ namespace Allors.Meta
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Security.Permissions;
 
     public abstract partial class Composite : ObjectType
     {
@@ -48,7 +47,7 @@ namespace Allors.Meta
         /// </summary>
         private Dictionary<Guid, object> roleIdsCache;
 
-        protected Composite(Domain domain, Guid id)
+        protected Composite(Whole domain, Guid id)
             : base(domain, id)
         {
         }
@@ -131,6 +130,7 @@ namespace Allors.Meta
         {
             get
             {
+                this.Domain.Derive();
                 return this.derivedDirectSupertypes;
             }
         }
@@ -143,6 +143,7 @@ namespace Allors.Meta
         {
             get
             {
+                this.Domain.Derive();
                 return this.derivedSupertypes;
             }
         }
@@ -155,6 +156,7 @@ namespace Allors.Meta
         {
             get
             {
+                this.Domain.Derive();
                 return this.derivedAssociationTypes;
             }
         }
@@ -175,6 +177,7 @@ namespace Allors.Meta
         {
             get
             {
+                this.Domain.Derive();
                 return this.derivedRoleTypes;
             }
         }
@@ -195,6 +198,7 @@ namespace Allors.Meta
         {
             get
             {
+                this.Domain.Derive();
                 return this.derivedMethodTypes;
             }
         }

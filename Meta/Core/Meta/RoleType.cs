@@ -35,29 +35,128 @@ namespace Allors.Meta
         /// </summary>
         public const int MaximumSize = -1;
 
+        private ObjectType objectType;
+
         private string derivedSingularPropertyName;
 
         private string derivedPluralPropertyName;
 
+        private string assignedSingularName;
+
+        private string assignedPluralName;
+
+        private bool isMany;
+
+        private int? scale;
+
+        private int? precision;
+
+        private int? size;
+
         public RoleType(RelationType relationType, Guid roleTypeId)
         {
+            this.Domain = relationType.Domain;
             this.RelationType = relationType;
             this.Id = roleTypeId;
         }
 
-        public ObjectType ObjectType { get; set; }
+        public ObjectType ObjectType
+        {
+            get
+            {
+                return this.objectType;
+            }
 
-        public string AssignedSingularName { get; set; }
+            set
+            {
+                this.objectType = value;
+                this.Domain.Stale();
+            }
+        }
 
-        public string AssignedPluralName { get; set; }
+        public string AssignedSingularName
+        {
+            get
+            {
+                return this.assignedSingularName;
+            }
 
-        public bool IsMany { get; set; }
+            set
+            {
+                this.assignedSingularName = value;
+                this.Domain.Stale();
+            }
+        }
 
-        public int? Scale { get; set; }
+        public string AssignedPluralName
+        {
+            get
+            {
+                return this.assignedPluralName;
+            }
 
-        public int? Precision { get; set; }
+            set
+            {
+                this.assignedPluralName = value;
+                this.Domain.Stale();
+            }
+        }
 
-        public int? Size { get; set; }
+        public bool IsMany
+        {
+            get
+            {
+                return this.isMany;
+            }
+
+            set
+            {
+                this.isMany = value;
+                this.Domain.Stale();
+            }
+        }
+
+        public int? Scale
+        {
+            get
+            {
+                return this.scale;
+            }
+
+            set
+            {
+                this.scale = value;
+                this.Domain.Stale();
+            }
+        }
+
+        public int? Precision
+        {
+            get
+            {
+                return this.precision;
+            }
+
+            set
+            {
+                this.precision = value;
+                this.Domain.Stale();
+            }
+        }
+
+        public int? Size
+        {
+            get
+            {
+                return this.size;
+            }
+
+            set
+            {
+                this.size = value;
+                this.Domain.Stale();
+            }
+        }
 
         public RelationType RelationType { get; private set; }
 

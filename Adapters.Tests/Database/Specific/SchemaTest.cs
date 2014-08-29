@@ -32,7 +32,7 @@ namespace Allors.Adapters.Special
 
     public abstract class SchemaTest
     {
-        private Domain domain;
+        private Whole domain;
 
         protected virtual bool DetectBinarySizedDifferences
         {
@@ -71,7 +71,7 @@ namespace Allors.Adapters.Special
             this.DropTable("C1");
             this.DropTable("C2");
 
-            this.domain = new Domain(Guid.NewGuid());
+            this.domain = new Whole(Guid.NewGuid());
             this.domain.Name = "MyDomain";
 
             this.CreateClass("C1");
@@ -91,7 +91,7 @@ namespace Allors.Adapters.Special
         [ExpectedException]
         public void InitInvalidDomain()
         {
-            this.domain = new Domain(Guid.NewGuid());
+            this.domain = new Whole(Guid.NewGuid());
 
             new RelationType(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
 
@@ -114,7 +114,7 @@ namespace Allors.Adapters.Special
         {
             if (this.DetectBinarySizedDifferences)
             {
-                this.domain = new Domain(Guid.NewGuid()) { Name = "MyDomain" };
+                this.domain = new Whole(Guid.NewGuid()) { Name = "MyDomain" };
 
                 var c1 = this.CreateClass("C1");
                 this.CreateClass("C2");
@@ -152,7 +152,7 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateDecimalRelationDifferentPrecision()
         {
-            this.domain = new Domain(Guid.NewGuid());
+            this.domain = new Whole(Guid.NewGuid());
             this.domain.Name = "MyDomain";
 
             var c1 = this.CreateClass("C1");
@@ -190,7 +190,7 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateDecimalRelationDifferentScale()
         {
-            this.domain = new Domain(Guid.NewGuid());
+            this.domain = new Whole(Guid.NewGuid());
             this.domain.Name = "MyDomain";
 
             var c1 = this.CreateClass("C1");
@@ -231,7 +231,7 @@ namespace Allors.Adapters.Special
             this.DropTable("C1");
             this.DropTable("C2");
 
-            this.domain = new Domain(Guid.NewGuid());
+            this.domain = new Whole(Guid.NewGuid());
             this.domain.Name = "MyDomain";
 
             this.CreateClass("C1");
@@ -257,7 +257,7 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateNewInterfaceInheritanceWithBooleanRelation()
         {
-            this.domain = new Domain(Guid.NewGuid());
+            this.domain = new Whole(Guid.NewGuid());
             this.domain.Name = "MyDomain";
 
             var c1 = this.CreateClass("C1");
@@ -293,7 +293,7 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateNewMany2ManyRelation()
         {
-            this.domain = new Domain(Guid.NewGuid());
+            this.domain = new Whole(Guid.NewGuid());
             this.domain.Name = "MyDomain";
 
             var c1 = this.CreateClass("C1");
@@ -329,7 +329,7 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateNewMany2OneRelation()
         {
-            this.domain = new Domain(Guid.NewGuid());
+            this.domain = new Whole(Guid.NewGuid());
             this.domain.Name = "MyDomain";
 
             var c1 = this.CreateClass("C1");
@@ -362,7 +362,7 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateNewOne2ManyRelation()
         {
-            this.domain = new Domain(Guid.NewGuid());
+            this.domain = new Whole(Guid.NewGuid());
             this.domain.Name = "MyDomain";
 
             var c1 = this.CreateClass("C1");
@@ -396,7 +396,7 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateNewOne2OneRelation()
         {
-            this.domain = new Domain(Guid.NewGuid());
+            this.domain = new Whole(Guid.NewGuid());
             this.domain.Name = "MyDomain";
 
             var c1 = this.CreateClass("C1");
@@ -429,7 +429,7 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateStringRelationDifferentSize()
         {
-            this.domain = new Domain(Guid.NewGuid());
+            this.domain = new Whole(Guid.NewGuid());
             this.domain.Name = "MyDomain";
 
             var c1 = this.CreateClass("C1");
@@ -466,7 +466,7 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateStringToOne2One()
         {
-            this.domain = new Domain(Guid.NewGuid());
+            this.domain = new Whole(Guid.NewGuid());
             this.domain.Name = "MyDomain";
 
             var c1 = this.CreateClass("C1");
@@ -506,7 +506,7 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateUnitRelationDifferentType()
         {
-            this.domain = new Domain(Guid.NewGuid());
+            this.domain = new Whole(Guid.NewGuid());
             this.domain.Name = "MyDomain";
 
             var c1 = this.CreateClass("C1");
@@ -565,7 +565,7 @@ namespace Allors.Adapters.Special
             this.DropTable("C1");
             this.DropTable("C2");
 
-            this.domain = new Domain(Guid.NewGuid());
+            this.domain = new Whole(Guid.NewGuid());
             this.domain.Name = "MyDomain";
 
             var c1 = this.CreateClass("C1");
@@ -609,7 +609,7 @@ namespace Allors.Adapters.Special
             return new Interface(this.domain, Guid.NewGuid()) { SingularName = name, PluralName = name + "s" };
         }
 
-        protected abstract IDatabase CreateDatabase(Domain domain, bool init);
+        protected abstract IDatabase CreateDatabase(Whole domain, bool init);
 
         protected IDatabase CreateDatabase()
         {

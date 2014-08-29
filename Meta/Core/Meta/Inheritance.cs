@@ -29,7 +29,11 @@ namespace Allors.Meta
     /// </summary>
     public sealed partial class Inheritance : MetaObject
     {
-        public Inheritance(Domain domain, Guid inheritanceId)
+        private Composite subtype;
+
+        private Interface supertype;
+
+        public Inheritance(Whole domain, Guid inheritanceId)
         {
             this.Domain = domain;
             this.Id = inheritanceId;
@@ -37,11 +41,33 @@ namespace Allors.Meta
             this.Domain.OnInheritanceCreated(this);
         }
 
-        public Composite Subtype { get; set; }
+        public Composite Subtype
+        {
+            get
+            {
+                return this.subtype;
+            }
 
-        public Interface Supertype { get; set; }
+            set
+            {
+                this.subtype = value;
+                this.Domain.Stale();
+            }
+        }
 
-        public Domain Domain { get; private set; }
+        public Interface Supertype
+        {
+            get
+            {
+                return this.supertype;
+            }
+
+            set
+            {
+                this.supertype = value;
+                this.Domain.Stale();
+            }
+        }
 
         /// <summary>
         /// Gets the validation name.

@@ -25,18 +25,44 @@ namespace Allors.Meta
 
     public abstract partial class ObjectType : MetaObject, IComparable
     {
-        protected ObjectType(Domain domain, Guid id)
+        private string singularName;
+
+        private string pluralName;
+
+        protected ObjectType(Whole domain, Guid id)
         {
             this.Domain = domain;
             this.Id = id;
         }
 
-        public string SingularName { get; set; }
+        public string SingularName
+        {
+            get
+            {
+                return this.singularName;
+            }
 
-        public string PluralName { get; set; }
+            set
+            {
+                this.singularName = value;
+                this.Domain.Stale();
+            }
+        }
 
-        public Domain Domain { get; private set; }
-        
+        public string PluralName
+        {
+            get
+            {
+                return this.pluralName;
+            }
+
+            set
+            {
+                this.pluralName = value;
+                this.Domain.Stale();
+            }
+        }
+
         /// <summary>
         /// Gets the name.
         /// </summary>

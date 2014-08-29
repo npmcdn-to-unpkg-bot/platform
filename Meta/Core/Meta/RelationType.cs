@@ -30,9 +30,14 @@ namespace Allors.Meta
     /// </summary>
     public partial class RelationType : MetaObject, IComparable
     {
-        public RelationType(Domain domain, Guid relationTypeId, Guid associationTypeId, Guid roleTypeId)
+        private bool isDerived;
+
+        private bool isIndexed;
+
+        public RelationType(Whole domain, Guid relationTypeId, Guid associationTypeId, Guid roleTypeId)
         {
             this.Domain = domain;
+
             this.Id = relationTypeId;
             this.AssociationType = new AssociationType(this, associationTypeId);
             this.RoleType = new RoleType(this, roleTypeId);
@@ -40,15 +45,37 @@ namespace Allors.Meta
             this.Domain.OnRelationTypeCreated(this);
         }
 
-        public bool IsDerived { get; set; }
+        public bool IsDerived
+        {
+            get 
+            {
+                return this.isDerived;
+            }
 
-        public bool IsIndexed { get; set; }
+            set 
+            {
+                this.isDerived = value;
+                this.Domain.Stale();
+            }
+        }
+
+        public bool IsIndexed
+        {
+            get
+            {
+                return this.isIndexed;
+            }
+
+            set
+            {
+                this.isIndexed = value;
+                this.Domain.Stale();
+            }
+        }
 
         public RoleType RoleType { get; set; }
 
         public AssociationType AssociationType { get; set; }
-
-        public Domain Domain { get; private set; }
 
         /// <summary>
         /// Gets a value indicating whether there exist exclusive root classes.
@@ -160,12 +187,8 @@ namespace Allors.Meta
         public int CompareTo(object obj)
         {
             var that = obj as RelationType;
-            if (that != null)
-            {
-                return string.CompareOrdinal(this.Name, that.Name);
-            }
+            return that != null ? string.CompareOrdinal(this.Name, that.Name) : -1;
 
-            return -1;
         }
 
         /// <summary>

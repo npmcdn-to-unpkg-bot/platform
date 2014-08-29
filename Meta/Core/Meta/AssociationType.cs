@@ -32,19 +32,48 @@ namespace Allors.Meta
     public sealed partial class AssociationType : PropertyType, IComparable
     {
         /// <summary>
-        /// Used to form names to navigate from <see cref="RoleType"/> To <see cref="AssociationType"/>;
+        /// Used to create property names.
         /// </summary>
         private const string Where = "Where";
 
+        private bool isMany;
+
+        private Composite objectType;
+
         public AssociationType(RelationType relationType, Guid associationTypeId)
         {
+            this.Domain = relationType.Domain;
             this.RelationType = relationType;
             this.Id = associationTypeId;
         }
 
-        public bool IsMany { get; set; }
+        public bool IsMany
+        {
+            get
+            {
+                return this.isMany;
+            }
 
-        public Composite ObjectType { get; set; }
+            set
+            {
+                this.isMany = value;
+                this.RelationType.Domain.Stale();
+            }
+        }
+
+        public Composite ObjectType
+        {
+            get
+            {
+                return this.objectType;
+            }
+
+            set
+            {
+                this.objectType = value;
+                this.RelationType.Domain.Stale();
+            }
+        }
 
         public RelationType RelationType { get; private set; }
         

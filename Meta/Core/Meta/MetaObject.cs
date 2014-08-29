@@ -33,13 +33,24 @@ namespace Allors.Meta
         /// </summary>
         public static readonly IComparer<MetaObject> IdComparer = new PrivateIdComparer();
 
+        private Guid id;
+
         /// <summary>
         /// Gets or sets the id.
         /// </summary>
         /// <value>The meta object id.</value>
         public Guid Id
         {
-            get; set;
+            get
+            {
+                return this.id;
+            }
+
+            protected set
+            {
+                this.id = value;
+                this.Domain.Stale();
+            }
         }
 
         /// <summary>
@@ -59,6 +70,8 @@ namespace Allors.Meta
         {
             get { return this.Id.ToString("D").ToLower(); }
         }
+
+        public Whole Domain { get; protected set; }
 
         /// <summary>
         /// Gets the validation name.

@@ -12,7 +12,7 @@ namespace Domain
 
     public static class M
     {
-        public static readonly Domain D;
+        public static readonly Whole D;
 
         #region Unit Types
 
@@ -832,7 +832,7 @@ namespace Domain
 
         static M()
         {
-            D = new Domain(new Guid("26B81EE6-08B6-48E8-931C-B8D944ED1C42")) { Name = "WithoutPart" };
+            D = new Whole(new Guid("26B81EE6-08B6-48E8-931C-B8D944ED1C42")) { Name = "WithoutPart" };
 
             AllorsString = (Unit)D.Find(new Guid("ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9"));
             AllorsInteger = (Unit)D.Find(new Guid("ccd6f134-26de-4103-bff9-a37ec3e997a3"));
@@ -5230,8 +5230,6 @@ namespace Domain
             {
                 throw new Exception(validationLog.ToString());
             }
-
-            D.Derive();
         }
     }
 }

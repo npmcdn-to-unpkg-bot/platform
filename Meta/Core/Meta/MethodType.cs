@@ -24,20 +24,44 @@ namespace Allors.Meta
 
     public partial class MethodType : OperandType
     {
+        private string name;
 
-        public string Name;
-
-        public ObjectType ObjectType;
+        private ObjectType objectType;
         
-        // Domain -> MethodType
-        public Domain Domain { get; private set; }
-
-        public MethodType(Domain domain, Guid methodTypeId)
+        public MethodType(Whole domain, Guid methodTypeId)
         {
             this.Domain = domain;
             this.Id = methodTypeId;
 
             this.Domain.OnMethodTypeCreated(this);
+        }
+
+        public string Name
+        {
+            get
+            {
+                return this.name;
+            }
+
+            set
+            {
+                this.name = value;
+                this.Domain.Stale();
+            }
+        }
+
+        public ObjectType ObjectType
+        {
+            get
+            {
+                return this.objectType;
+            }
+
+            set
+            {
+                this.objectType = value;
+                this.Domain.Stale();
+            }
         }
 
         /// <summary>
@@ -47,7 +71,7 @@ namespace Allors.Meta
         {
             get
             {
-                return this.Name;
+                return this.name;
             }
         }
 
@@ -59,15 +83,15 @@ namespace Allors.Meta
         {
             get
             {
-                if (!string.IsNullOrEmpty(this.Name))
+                if (!string.IsNullOrEmpty(this.name))
                 {
-                    return "method type " + this.Name;
+                    return "method type " + this.name;
                 }
 
                 return "unknown method type";
             }
         }
-       
+
         /// <summary>
         /// Validates the instance.
         /// </summary>
@@ -76,7 +100,7 @@ namespace Allors.Meta
         {
             base.Validate(validationLog);
 
-            if (string.IsNullOrEmpty(this.Name))
+            if (string.IsNullOrEmpty(this.name))
             {
                 var message = this.ValidationName + " has no name";
                 validationLog.AddError(message, this, ValidationKind.Required, "MethodType.Name");

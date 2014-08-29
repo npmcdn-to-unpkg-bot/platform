@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="Domain.cs" company="Allors bvba">
+// <copyright file="Whole.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -27,7 +27,7 @@ namespace Allors.Meta
     /// <summary>
     /// A Domain is a container for <see cref="ObjectType"/>s, <see cref="RelationType"/>s.
     /// </summary>
-    public sealed partial class Domain : MetaObject, IComparable
+    public sealed partial class Whole : MetaObject, IComparable
     {
         /// <summary>
         /// The default plural form.
@@ -37,11 +37,20 @@ namespace Allors.Meta
         private readonly Dictionary<Guid, MetaObject> metaObjectById;
 
         private IList<Composite> derivedComposites;
-        
-        public Domain(Guid id)
+
+        private bool isStale;
+
+        private bool isDeriving;
+
+        public Whole(Guid id)
         {
+            this.Domain = this;
+
+            this.isStale = true;
+            this.isDeriving = false;
+
             this.Id = id;
-            
+
             this.UnitTypes = new List<Unit>();
             this.Interfaces = new List<Interface>();
             this.Classes = new List<Class>();
@@ -76,6 +85,8 @@ namespace Allors.Meta
         {
             get
             {
+                this.Derive();
+
                 return this.derivedComposites;
             }
         }
@@ -201,104 +212,118 @@ namespace Allors.Meta
             return validationReport;
         }
 
-        public void Derive()
+        internal void Derive()
         {
-            // Unit & Composite ObjectTypes
-            var compositeTypes = new List<Composite>(this.Interfaces);
-            compositeTypes.AddRange(this.Classes);
-            this.derivedComposites = compositeTypes;
-
-            var sharedCompositeTypes = new HashSet<Composite>();
-            var sharedInterfaces = new HashSet<Interface>();
-            var sharedClasses = new HashSet<Class>();
-
-            var sharedRoleTypes = new HashSet<RoleType>();
-            var sharedAssociationTypes = new HashSet<AssociationType>();
-
-            // DirectSupertypes
-            foreach (var type in this.derivedComposites)
+            if (this.isStale && !this.isDeriving)
             {
-                type.DeriveDirectSupertypes(sharedInterfaces);
-            }
+                this.isStale = false;
 
-            // DirectSubtypes
-            foreach (var type in this.Interfaces)
-            {
-                type.DeriveDirectSubtypes(sharedCompositeTypes);
-            }
+                try
+                {
+                    this.isDeriving = true;
 
-            // Supertypes
-            foreach (var type in this.derivedComposites)
-            {
-                type.DeriveSupertypes(sharedInterfaces);
-            }
+                    // Unit & Composite ObjectTypes
+                    var compositeTypes = new List<Composite>(this.Interfaces);
+                    compositeTypes.AddRange(this.Classes);
+                    this.derivedComposites = compositeTypes;
 
-            // Subtypes
-            foreach (var type in this.Interfaces)
-            {
-                type.DeriveSubtypes(sharedCompositeTypes);
-            }
-            
-            // Subclasses
-            foreach (var type in this.Interfaces)
-            {
-                type.DeriveSubclasses(sharedClasses);
-            }
+                    var sharedCompositeTypes = new HashSet<Composite>();
+                    var sharedInterfaces = new HashSet<Interface>();
+                    var sharedClasses = new HashSet<Class>();
 
-            // RootClasses
-            foreach (var type in this.Interfaces)
-            {
-                type.DeriveRootClasses();
-            }
+                    var sharedRoleTypes = new HashSet<RoleType>();
+                    var sharedAssociationTypes = new HashSet<AssociationType>();
 
-            // Exclusive Root Class
-            foreach (var type in this.Interfaces)
-            {
-                type.DeriveExclusiveRootClass();
-            }
+                    // DirectSupertypes
+                    foreach (var type in this.derivedComposites)
+                    {
+                        type.DeriveDirectSupertypes(sharedInterfaces);
+                    }
 
-            // RoleTypes
-            foreach (var type in this.derivedComposites)
-            {
-                type.DeriveRoleTypes(sharedRoleTypes);
-            }
+                    // DirectSubtypes
+                    foreach (var type in this.Interfaces)
+                    {
+                        type.DeriveDirectSubtypes(sharedCompositeTypes);
+                    }
 
-            // AssociationTypes
-            foreach (var type in this.derivedComposites)
-            {
-                type.DeriveAssociationTypes(sharedAssociationTypes);
-            }
+                    // Supertypes
+                    foreach (var type in this.derivedComposites)
+                    {
+                        type.DeriveSupertypes(sharedInterfaces);
+                    }
 
-            // Association & RoleType
-            foreach (var relationType in this.RelationTypes)
-            {
-                relationType.AssociationType.DeriveMultiplicity();
-                relationType.RoleType.DeriveMultiplicityScaleAndSize();
-            }
+                    // Subtypes
+                    foreach (var type in this.Interfaces)
+                    {
+                        type.DeriveSubtypes(sharedCompositeTypes);
+                    }
 
-            // RoleType Property Names
-            foreach (var relationType in this.RelationTypes)
-            {
-                relationType.RoleType.DeriveSingularPropertyName();
-                relationType.RoleType.DerivePluralPropertyName();
-            }
+                    // Subclasses
+                    foreach (var type in this.Interfaces)
+                    {
+                        type.DeriveSubclasses(sharedClasses);
+                    }
 
-            foreach (var type in this.Composites)
-            {
-                type.DeriveRoleTypeIdsCache();
-            }
+                    // RootClasses
+                    foreach (var type in this.Interfaces)
+                    {
+                        type.DeriveRootClasses();
+                    }
 
-            foreach (var type in this.Composites)
-            {
-                type.DeriveAssociationIdsCache();
-            }
-            
-            var sharedMethodTypeList = new HashSet<MethodType>();
+                    // Exclusive Root Class
+                    foreach (var type in this.Interfaces)
+                    {
+                        type.DeriveExclusiveRootClass();
+                    }
 
-            // MethodTypes
-            foreach (var type in this.derivedComposites)
-            {
-                type.DeriveMethodTypes(sharedMethodTypeList);
+                    // RoleTypes
+                    foreach (var type in this.derivedComposites)
+                    {
+                        type.DeriveRoleTypes(sharedRoleTypes);
+                    }
+
+                    // AssociationTypes
+                    foreach (var type in this.derivedComposites)
+                    {
+                        type.DeriveAssociationTypes(sharedAssociationTypes);
+                    }
+
+                    // Association & RoleType
+                    foreach (var relationType in this.RelationTypes)
+                    {
+                        relationType.AssociationType.DeriveMultiplicity();
+                        relationType.RoleType.DeriveMultiplicityScaleAndSize();
+                    }
+
+                    // RoleType Property Names
+                    foreach (var relationType in this.RelationTypes)
+                    {
+                        relationType.RoleType.DeriveSingularPropertyName();
+                        relationType.RoleType.DerivePluralPropertyName();
+                    }
+
+                    foreach (var type in this.Composites)
+                    {
+                        type.DeriveRoleTypeIdsCache();
+                    }
+
+                    foreach (var type in this.Composites)
+                    {
+                        type.DeriveAssociationIdsCache();
+                    }
+
+                    var sharedMethodTypeList = new HashSet<MethodType>();
+
+                    // MethodTypes
+                    foreach (var type in this.derivedComposites)
+                    {
+                        type.DeriveMethodTypes(sharedMethodTypeList);
+                    }
+                }
+                finally
+                {
+                    this.isDeriving = false;
+                }
             }
         }
 
@@ -306,36 +331,53 @@ namespace Allors.Meta
         {
             this.UnitTypes.Add(unit);
             this.metaObjectById.Add(unit.Id, unit);
+
+            this.Stale();
         }
 
         internal void OnInterfaceCreated(Interface @interface)
         {
             this.Interfaces.Add(@interface);
             this.metaObjectById.Add(@interface.Id, @interface);
+
+            this.Stale();
         }
         
         internal void OnClassCreated(Class @class)
         {
             this.Classes.Add(@class);
             this.metaObjectById.Add(@class.Id, @class);
+            
+            this.Stale();
         }
 
         internal void OnInheritanceCreated(Inheritance inheritance)
         {
             this.Inheritances.Add(inheritance);
             this.metaObjectById.Add(inheritance.Id, inheritance);
+
+            this.Stale();
         }
 
         internal void OnRelationTypeCreated(RelationType relationType)
         {
             this.RelationTypes.Add(relationType);
             this.metaObjectById.Add(relationType.Id, relationType);
+
+            this.Stale();
         }
 
         internal void OnMethodTypeCreated(MethodType methodType)
         {
             this.MethodTypes.Add(methodType);
             this.metaObjectById.Add(methodType.Id, methodType);
+
+            this.Stale();
+        }
+
+        internal void Stale()
+        {
+            this.isStale = true;
         }
 
         /// <summary>

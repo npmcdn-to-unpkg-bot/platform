@@ -25,10 +25,6 @@ namespace Allors.Meta
     using System.Collections.Generic;
     using System.Linq;
 
-    /// <summary>
-    /// An <see cref="ObjectType"/> defines the state and behavior for
-    /// a set of <see cref="IObject"/>s.
-    /// </summary>
     public partial class Interface : Composite
     {
         private IList<Composite> derivedDirectSubtypes;
@@ -39,14 +35,11 @@ namespace Allors.Meta
 
         private IList<Class> derivedRootClasses;
 
-        /// <summary>
-        /// A cache for the ids of the <see cref="RoleTypes"/>.
-        /// </summary>
         private HashSet<ObjectType> rootClassesCache;
 
         private Class derivedExclusiveRootClass;
 
-        public Interface(Domain domain, Guid id)
+        public Interface(Whole domain, Guid id)
             : base(domain, id)
         {
             this.Domain.OnInterfaceCreated(this);
@@ -78,6 +71,7 @@ namespace Allors.Meta
         {
             get
             {
+                this.Domain.Derive();
                 return this.derivedSubclasses;
             }
         }
@@ -90,6 +84,7 @@ namespace Allors.Meta
         {
             get
             {
+                this.Domain.Derive();
                 return this.derivedSubtypes;
             }
         }
@@ -98,6 +93,7 @@ namespace Allors.Meta
         {
             get
             {
+                this.Domain.Derive();
                 return this.derivedRootClasses;
             }
         }
@@ -106,6 +102,7 @@ namespace Allors.Meta
         {
             get
             {
+                this.Domain.Derive();
                 return this.derivedExclusiveRootClass;
             }
         }

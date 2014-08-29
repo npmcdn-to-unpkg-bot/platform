@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -222,15 +222,15 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Adapters\Adapters.csproj">
-      <Project>{233622ff-5493-4981-9529-4337d84c8312}</Project>
+      <Project>{233622FF-5493-4981-9529-4337D84C8312}</Project>
       <Name>Adapters</Name>
     </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
-      <Project>{b6c2e17b-53e1-44a4-9299-5350cc854e65}</Project>
+      <Project>{B6C2E17B-53E1-44A4-9299-5350CC854E65}</Project>
       <Name>Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\Meta\Meta.csproj">
-      <Project>{ba6efcfe-cb7f-4994-a5a4-c11ddaac32dd}</Project>
+      <Project>{BA6EFCFE-CB7F-4994-A5A4-C11DDAAC32DD}</Project>
       <Name>Meta</Name>
     </ProjectReference>
   </ItemGroup>

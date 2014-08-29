@@ -36,7 +36,7 @@ namespace Allors.Adapters.Special.SqlClient.IntegerId.ReadCommitted
             }
         }
 
-        protected override IDatabase CreateDatabase(Domain domain, bool init)
+        protected override IDatabase CreateDatabase(Whole domain, bool init)
         {
             return this.profile.CreateDatabase(domain, init);
         }

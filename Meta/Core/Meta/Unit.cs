@@ -25,12 +25,26 @@ namespace Allors.Meta
 
     public partial class Unit : ObjectType
     {
-        public Unit(Domain domain, Guid id) : base(domain, id)
+        private int unitTag;
+
+        public Unit(Whole domain, Guid id) : base(domain, id)
         {
             this.Domain.OnUnitCreated(this);
         }
 
-        public int UnitTag { get; set; }
+        public int UnitTag
+        {
+            get
+            {
+                return this.unitTag;
+            }
+
+            set
+            {
+                this.unitTag = value;
+                this.Domain.Stale();
+            }
+        }
 
         /// <summary>
         /// Gets a value indicating whether this instance is a binary.
