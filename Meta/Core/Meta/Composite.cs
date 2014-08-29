@@ -47,8 +47,8 @@ namespace Allors.Meta
         /// </summary>
         private Dictionary<Guid, object> roleIdsCache;
 
-        protected Composite(Whole domain, Guid id)
-            : base(domain, id)
+        protected Composite(Part part, Guid id)
+            : base(part, id)
         {
         }
 
@@ -130,7 +130,7 @@ namespace Allors.Meta
         {
             get
             {
-                this.Domain.Derive();
+                this.Whole.Derive();
                 return this.derivedDirectSupertypes;
             }
         }
@@ -143,7 +143,7 @@ namespace Allors.Meta
         {
             get
             {
-                this.Domain.Derive();
+                this.Whole.Derive();
                 return this.derivedSupertypes;
             }
         }
@@ -156,7 +156,7 @@ namespace Allors.Meta
         {
             get
             {
-                this.Domain.Derive();
+                this.Whole.Derive();
                 return this.derivedAssociationTypes;
             }
         }
@@ -177,7 +177,7 @@ namespace Allors.Meta
         {
             get
             {
-                this.Domain.Derive();
+                this.Whole.Derive();
                 return this.derivedRoleTypes;
             }
         }
@@ -198,7 +198,7 @@ namespace Allors.Meta
         {
             get
             {
-                this.Domain.Derive();
+                this.Whole.Derive();
                 return this.derivedMethodTypes;
             }
         }
@@ -221,7 +221,7 @@ namespace Allors.Meta
         internal void DeriveDirectSupertypes(HashSet<Interface> directSupertypes)
         {
             directSupertypes.Clear();
-            foreach (var inheritance in this.Domain.Inheritances.Where(inheritance => this.Equals(inheritance.Subtype)))
+            foreach (var inheritance in this.Whole.Inheritances.Where(inheritance => this.Equals(inheritance.Subtype)))
             {
                 directSupertypes.Add(inheritance.Supertype);
             }
@@ -250,7 +250,7 @@ namespace Allors.Meta
         internal void DeriveMethodTypes(HashSet<MethodType> methodTypes)
         {
             methodTypes.Clear();
-            foreach (var methodType in this.Domain.MethodTypes.Where(m => this.Equals(m.ObjectType)))
+            foreach (var methodType in this.Whole.MethodTypes.Where(m => this.Equals(m.ObjectType)))
             {
                 methodTypes.Add(methodType);
             }
@@ -258,7 +258,7 @@ namespace Allors.Meta
             foreach (var superType in this.Supertypes)
             {
                 var type = superType;
-                foreach (var methodType in this.Domain.MethodTypes.Where(m => type.Equals(m.ObjectType)))
+                foreach (var methodType in this.Whole.MethodTypes.Where(m => type.Equals(m.ObjectType)))
                 {
                     methodTypes.Add(methodType);
                 }
@@ -274,7 +274,7 @@ namespace Allors.Meta
         internal void DeriveRoleTypes(HashSet<RoleType> roleTypes)
         {
             roleTypes.Clear();
-            foreach (var relationType in this.Domain.RelationTypes.Where(rel => this.Equals(rel.AssociationType.ObjectType)))
+            foreach (var relationType in this.Whole.RelationTypes.Where(rel => this.Equals(rel.AssociationType.ObjectType)))
             {
                 roleTypes.Add(relationType.RoleType);
             }
@@ -282,7 +282,7 @@ namespace Allors.Meta
             foreach (var superType in this.Supertypes)
             {
                 var type = superType;
-                foreach (var relationType in this.Domain.RelationTypes.Where(rel => type.Equals(rel.AssociationType.ObjectType)))
+                foreach (var relationType in this.Whole.RelationTypes.Where(rel => type.Equals(rel.AssociationType.ObjectType)))
                 {
                     roleTypes.Add(relationType.RoleType);
                 }
@@ -298,7 +298,7 @@ namespace Allors.Meta
         internal void DeriveAssociationTypes(HashSet<AssociationType> associations)
         {
             associations.Clear();
-            foreach (var relationType in this.Domain.RelationTypes.Where(rel => this.Equals(rel.RoleType.ObjectType)))
+            foreach (var relationType in this.Whole.RelationTypes.Where(rel => this.Equals(rel.RoleType.ObjectType)))
             {
                 associations.Add(relationType.AssociationType);
             }
@@ -306,7 +306,7 @@ namespace Allors.Meta
             foreach (var superType in this.Supertypes)
             {
                 var type = superType;
-                foreach (var relationType in this.Domain.RelationTypes.Where(rel => type.Equals(rel.RoleType.ObjectType)))
+                foreach (var relationType in this.Whole.RelationTypes.Where(rel => type.Equals(rel.RoleType.ObjectType)))
                 {
                     associations.Add(relationType.AssociationType);
                 }

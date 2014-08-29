@@ -22,7 +22,6 @@
 namespace Allors.Meta
 {
     using System;
-    using System.Collections.Generic;
     
     /// <summary>
     /// An <see cref="AssociationType"/> defines the association side of a relation.
@@ -42,7 +41,7 @@ namespace Allors.Meta
 
         public AssociationType(RelationType relationType, Guid associationTypeId)
         {
-            this.Domain = relationType.Domain;
+            this.Whole = relationType.Whole;
             this.RelationType = relationType;
             this.Id = associationTypeId;
         }
@@ -57,7 +56,7 @@ namespace Allors.Meta
             set
             {
                 this.isMany = value;
-                this.RelationType.Domain.Stale();
+                this.RelationType.Whole.Stale();
             }
         }
 
@@ -71,7 +70,7 @@ namespace Allors.Meta
             set
             {
                 this.objectType = value;
-                this.RelationType.Domain.Stale();
+                this.RelationType.Whole.Stale();
             }
         }
 

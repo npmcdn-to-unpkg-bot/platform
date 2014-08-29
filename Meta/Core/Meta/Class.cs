@@ -28,10 +28,10 @@ namespace Allors.Meta
     {
         private readonly List<Class> selfList; 
 
-        public Class(Whole domain, Guid id)
-            : base(domain, id)
+        public Class(Part part, Guid id)
+            : base(part, id)
         {
-            this.Domain.OnClassCreated(this);
+            this.Whole.OnClassCreated(this);
             this.selfList = new List<Class> { this };
         }
         

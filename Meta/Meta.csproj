@@ -51,6 +51,7 @@
     <Compile Include="Core\Generation\StringTemplate.cs" />
     <Compile Include="Core\Meta\AssociationType.cs" />
     <Compile Include="Core\Meta\Interface.cs" />
+    <Compile Include="Core\Meta\Part.cs" />
     <Compile Include="Core\Meta\Whole.cs" />
     <Compile Include="Core\Meta\Inheritance.cs" />
     <Compile Include="Core\Meta\MetaObject.cs" />

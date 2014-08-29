@@ -27,9 +27,9 @@ namespace Allors.Meta
     {
         private int unitTag;
 
-        public Unit(Whole domain, Guid id) : base(domain, id)
+        public Unit(Part part, Guid id) : base(part, id)
         {
-            this.Domain.OnUnitCreated(this);
+            part.OnUnitCreated(this);
         }
 
         public int UnitTag
@@ -42,7 +42,7 @@ namespace Allors.Meta
             set
             {
                 this.unitTag = value;
-                this.Domain.Stale();
+                this.Whole.Stale();
             }
         }
 

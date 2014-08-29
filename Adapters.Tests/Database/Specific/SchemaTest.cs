@@ -32,7 +32,7 @@ namespace Allors.Adapters.Special
 
     public abstract class SchemaTest
     {
-        private Whole domain;
+        private Part domain;
 
         protected virtual bool DetectBinarySizedDifferences
         {
@@ -71,18 +71,17 @@ namespace Allors.Adapters.Special
             this.DropTable("C1");
             this.DropTable("C2");
 
-            this.domain = new Whole(Guid.NewGuid());
-            this.domain.Name = "MyDomain";
+            this.domain = new Part(new Whole(), Guid.NewGuid()) { Name = "MyDomain" };
 
             this.CreateClass("C1");
 
-            var database = this.CreateDatabase(this.domain, true);
+            var database = this.CreateDatabase(this.domain.Whole, true);
             ISession session = database.CreateSession();
             session.Rollback();
 
             this.CreateClass("C2");
 
-            database = this.CreateDatabase(this.domain, true);
+            database = this.CreateDatabase(this.domain.Whole, true);
             session = database.CreateSession();
             session.Rollback();
         }
@@ -91,11 +90,11 @@ namespace Allors.Adapters.Special
         [ExpectedException]
         public void InitInvalidDomain()
         {
-            this.domain = new Whole(Guid.NewGuid());
+            this.domain = new Part(new Whole(), Guid.NewGuid()) { Name = "MyDomain" };
 
             new RelationType(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
 
-            this.CreateDatabase(this.domain, true);
+            this.CreateDatabase(this.domain.Whole, true);
         }
 
         [Test]
@@ -114,7 +113,7 @@ namespace Allors.Adapters.Special
         {
             if (this.DetectBinarySizedDifferences)
             {
-                this.domain = new Whole(Guid.NewGuid()) { Name = "MyDomain" };
+                this.domain = new Part(new Whole(), Guid.NewGuid()) { Name = "MyDomain" };
 
                 var c1 = this.CreateClass("C1");
                 this.CreateClass("C2");
@@ -122,14 +121,14 @@ namespace Allors.Adapters.Special
                 var c1RelationType = new RelationType(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid())
                                          {
                                              AssociationType = { ObjectType = c1 },
-                                             RoleType = { ObjectType = (ObjectType)this.domain.Find(UnitIds.BinaryId), Size = 200 }
+                                             RoleType = { ObjectType = (ObjectType)this.domain.Whole.Find(UnitIds.BinaryId), Size = 200 }
                                          };
 
-                this.CreateDatabase(this.domain, true);
+                this.CreateDatabase(this.domain.Whole, true);
 
                 c1RelationType.RoleType.Size = 300;
 
-                var database = this.CreateDatabase(this.domain, false);
+                var database = this.CreateDatabase(this.domain.Whole, false);
 
                 var validationErrors = this.GetSchemaValidation(database);
 
@@ -152,7 +151,7 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateDecimalRelationDifferentPrecision()
         {
-            this.domain = new Whole(Guid.NewGuid());
+            this.domain = new Part(new Whole(), Guid.NewGuid()) { Name = "MyDomain" };
             this.domain.Name = "MyDomain";
 
             var c1 = this.CreateClass("C1");
@@ -160,15 +159,15 @@ namespace Allors.Adapters.Special
 
             var c1RelationType = new RelationType(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             c1RelationType.AssociationType.ObjectType = c1;
-            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Find(UnitIds.DecimalId);
+            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Whole.Find(UnitIds.DecimalId);
             c1RelationType.RoleType.Precision = 10;
             c1RelationType.RoleType.Scale = 2;
 
-            this.CreateDatabase(this.domain, true);
+            this.CreateDatabase(this.domain.Whole, true);
 
             c1RelationType.RoleType.Precision = 11;
 
-            var database = this.CreateDatabase(this.domain, false);
+            var database = this.CreateDatabase(this.domain.Whole, false);
 
             var validationErrors = this.GetSchemaValidation(database);
 
@@ -190,23 +189,22 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateDecimalRelationDifferentScale()
         {
-            this.domain = new Whole(Guid.NewGuid());
-            this.domain.Name = "MyDomain";
+            this.domain = new Part(new Whole(), Guid.NewGuid()) { Name = "MyDomain" };
 
             var c1 = this.CreateClass("C1");
             this.CreateClass("C2");
 
             var c1RelationType = new RelationType(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             c1RelationType.AssociationType.ObjectType = c1;
-            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Find(UnitIds.DecimalId);
+            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Whole.Find(UnitIds.DecimalId);
             c1RelationType.RoleType.Precision = 10;
             c1RelationType.RoleType.Scale = 2;
 
-            this.CreateDatabase(this.domain, true);
+            this.CreateDatabase(this.domain.Whole, true);
 
             c1RelationType.RoleType.Scale = 3;
 
-            var database = this.CreateDatabase(this.domain, false);
+            var database = this.CreateDatabase(this.domain.Whole, false);
 
             var validationErrors = this.GetSchemaValidation(database);
 
@@ -231,16 +229,16 @@ namespace Allors.Adapters.Special
             this.DropTable("C1");
             this.DropTable("C2");
 
-            this.domain = new Whole(Guid.NewGuid());
+            this.domain = new Part(new Whole(), Guid.NewGuid()) { Name = "MyDomain" };
             this.domain.Name = "MyDomain";
 
             this.CreateClass("C1");
 
-            this.CreateDatabase(this.domain, true);
+            this.CreateDatabase(this.domain.Whole, true);
 
             this.CreateClass("C2");
 
-            var database = this.CreateDatabase(this.domain, false);
+            var database = this.CreateDatabase(this.domain.Whole, false);
 
             var validationErrors = this.GetSchemaValidation(database);
 
@@ -257,8 +255,7 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateNewInterfaceInheritanceWithBooleanRelation()
         {
-            this.domain = new Whole(Guid.NewGuid());
-            this.domain.Name = "MyDomain";
+            this.domain = new Part(new Whole(), Guid.NewGuid()) { Name = "MyDomain" };
 
             var c1 = this.CreateClass("C1");
             var c2 = this.CreateClass("C2");
@@ -267,15 +264,15 @@ namespace Allors.Adapters.Special
 
             var i12AllorsString = new RelationType(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             i12AllorsString.AssociationType.ObjectType = i12;
-            i12AllorsString.RoleType.ObjectType = (ObjectType)this.domain.Find(UnitIds.BooleanId);
+            i12AllorsString.RoleType.ObjectType = (ObjectType)this.domain.Whole.Find(UnitIds.BooleanId);
 
             new Inheritance(this.domain, Guid.NewGuid()) { Subtype = c1, Supertype = i12 };
  
-            this.CreateDatabase(this.domain, true);
+            this.CreateDatabase(this.domain.Whole, true);
 
             new Inheritance(this.domain, Guid.NewGuid()) { Subtype = c2, Supertype = i12 };
 
-            var database = this.CreateDatabase(this.domain, false);
+            var database = this.CreateDatabase(this.domain.Whole, false);
 
             var validationErrors = this.GetSchemaValidation(database);
 
@@ -293,13 +290,12 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateNewMany2ManyRelation()
         {
-            this.domain = new Whole(Guid.NewGuid());
-            this.domain.Name = "MyDomain";
+            this.domain = new Part(new Whole(), Guid.NewGuid()) { Name = "MyDomain" };
 
             var c1 = this.CreateClass("C1");
             var c2 = this.CreateClass("C2");
 
-            this.CreateDatabase(this.domain, true);
+            this.CreateDatabase(this.domain.Whole, true);
 
             var fromC1ToC2 = new RelationType(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             fromC1ToC2.AssociationType.ObjectType = c1;
@@ -307,7 +303,7 @@ namespace Allors.Adapters.Special
             fromC1ToC2.RoleType.ObjectType = c2;
             fromC1ToC2.RoleType.IsMany = true;
 
-            var database = this.CreateDatabase(this.domain, false);
+            var database = this.CreateDatabase(this.domain.Whole, false);
 
             var validationErrors = this.GetSchemaValidation(database);
 
@@ -329,20 +325,19 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateNewMany2OneRelation()
         {
-            this.domain = new Whole(Guid.NewGuid());
-            this.domain.Name = "MyDomain";
+            this.domain = new Part(new Whole(), Guid.NewGuid()) { Name = "MyDomain" };
 
             var c1 = this.CreateClass("C1");
             var c2 = this.CreateClass("C2");
 
-            this.CreateDatabase(this.domain, true);
+            this.CreateDatabase(this.domain.Whole, true);
 
             var fromC1ToC2 = new RelationType(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             fromC1ToC2.AssociationType.ObjectType = c1;
             fromC1ToC2.AssociationType.IsMany = true;
             fromC1ToC2.RoleType.ObjectType = c2;
 
-            var database = this.CreateDatabase(this.domain, false);
+            var database = this.CreateDatabase(this.domain.Whole, false);
 
             var validationErrors = this.GetSchemaValidation(database);
             var tableErros = validationErrors.TableErrors;
@@ -362,20 +357,19 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateNewOne2ManyRelation()
         {
-            this.domain = new Whole(Guid.NewGuid());
-            this.domain.Name = "MyDomain";
+            this.domain = new Part(new Whole(), Guid.NewGuid()) { Name = "MyDomain" };
 
             var c1 = this.CreateClass("C1");
             var c2 = this.CreateClass("C2");
 
-            this.CreateDatabase(this.domain, true);
+            this.CreateDatabase(this.domain.Whole, true);
 
             var fromC1ToC2 = new RelationType(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             fromC1ToC2.AssociationType.ObjectType = c1;
             fromC1ToC2.RoleType.ObjectType = c2;
             fromC1ToC2.RoleType.IsMany = true;
 
-            var database = this.CreateDatabase(this.domain, false);
+            var database = this.CreateDatabase(this.domain.Whole, false);
 
             var validationErrors = this.GetSchemaValidation(database);
 
@@ -396,19 +390,18 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateNewOne2OneRelation()
         {
-            this.domain = new Whole(Guid.NewGuid());
-            this.domain.Name = "MyDomain";
+            this.domain = new Part(new Whole(), Guid.NewGuid()) { Name = "MyDomain" };
 
             var c1 = this.CreateClass("C1");
             var c2 = this.CreateClass("C2");
 
-            this.CreateDatabase(this.domain, true);
+            this.CreateDatabase(this.domain.Whole, true);
 
             var fromC1ToC2 = new RelationType(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             fromC1ToC2.AssociationType.ObjectType = c1;
             fromC1ToC2.RoleType.ObjectType = c2;
 
-            var database = this.CreateDatabase(this.domain, false);
+            var database = this.CreateDatabase(this.domain.Whole, false);
 
             var validationErrors = this.GetSchemaValidation(database);
 
@@ -429,22 +422,21 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateStringRelationDifferentSize()
         {
-            this.domain = new Whole(Guid.NewGuid());
-            this.domain.Name = "MyDomain";
+            this.domain = new Part(new Whole(), Guid.NewGuid()) { Name = "MyDomain" };
 
             var c1 = this.CreateClass("C1");
             this.CreateClass("C2");
 
             var c1RelationType = new RelationType(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             c1RelationType.AssociationType.ObjectType = c1;
-            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Find(UnitIds.StringId);
+            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Whole.Find(UnitIds.StringId);
             c1RelationType.RoleType.Size = 100;
 
-            this.CreateDatabase(this.domain, true);
+            this.CreateDatabase(this.domain.Whole, true);
 
             c1RelationType.RoleType.Size = 101;
 
-            var database = this.CreateDatabase(this.domain, false);
+            var database = this.CreateDatabase(this.domain.Whole, false);
 
             var validationErrors = this.GetSchemaValidation(database);
 
@@ -466,25 +458,24 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateStringToOne2One()
         {
-            this.domain = new Whole(Guid.NewGuid());
-            this.domain.Name = "MyDomain";
+            this.domain = new Part(new Whole(), Guid.NewGuid()) { Name = "MyDomain" };
 
             var c1 = this.CreateClass("C1");
             var c2 = this.CreateClass("C2");
 
             var c1RelationType = new RelationType(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             c1RelationType.AssociationType.ObjectType = c1;
-            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Find(UnitIds.StringId);
+            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Whole.Find(UnitIds.StringId);
             c1RelationType.RoleType.Size = 100;
             c1RelationType.RoleType.AssignedSingularName = "RelationType";
             c1RelationType.RoleType.AssignedPluralName = "RelationTypes";
 
-            this.CreateDatabase(this.domain, true);
+            this.CreateDatabase(this.domain.Whole, true);
 
             c1RelationType.RoleType.Size = null;
             c1RelationType.RoleType.ObjectType = c2;
 
-            var database = this.CreateDatabase(this.domain, false);
+            var database = this.CreateDatabase(this.domain.Whole, false);
 
             var validationErrors = this.GetSchemaValidation(database);
 
@@ -506,23 +497,22 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateUnitRelationDifferentType()
         {
-            this.domain = new Whole(Guid.NewGuid());
-            this.domain.Name = "MyDomain";
+            this.domain = new Part(new Whole(), Guid.NewGuid()) { Name = "MyDomain" };
 
             var c1 = this.CreateClass("C1");
             this.CreateClass("C2");
 
             var c1RelationType = new RelationType(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             c1RelationType.AssociationType.ObjectType = c1;
-            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Find(UnitIds.BooleanId);
+            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Whole.Find(UnitIds.BooleanId);
             c1RelationType.RoleType.AssignedSingularName = "RelationType";
             c1RelationType.RoleType.AssignedPluralName = "RelationTypes";
 
-            this.CreateDatabase(this.domain, true);
+            this.CreateDatabase(this.domain.Whole, true);
 
-            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Find(UnitIds.Unique);
+            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Whole.Find(UnitIds.Unique);
 
-            var database = this.CreateDatabase(this.domain, false);
+            var database = this.CreateDatabase(this.domain.Whole, false);
 
             var validationErrors = this.GetSchemaValidation(database);
 
@@ -565,19 +555,18 @@ namespace Allors.Adapters.Special
             this.DropTable("C1");
             this.DropTable("C2");
 
-            this.domain = new Whole(Guid.NewGuid());
-            this.domain.Name = "MyDomain";
+            this.domain = new Part(new Whole(), Guid.NewGuid()) { Name = "MyDomain" };
 
             var c1 = this.CreateClass("C1");
             var c2 = this.CreateClass("C2");
 
-            this.CreateDatabase(this.domain, true);
+            this.CreateDatabase(this.domain.Whole, true);
 
             var c1AllorsString = new RelationType(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             c1AllorsString.AssociationType.ObjectType = c1;
             c1AllorsString.RoleType.ObjectType = c2;
 
-            var database = this.CreateDatabase(this.domain, false);
+            var database = this.CreateDatabase(this.domain.Whole, false);
 
             ISession session = null;
             try

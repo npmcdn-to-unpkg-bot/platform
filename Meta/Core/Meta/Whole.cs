@@ -27,7 +27,7 @@ namespace Allors.Meta
     /// <summary>
     /// A Domain is a container for <see cref="ObjectType"/>s, <see cref="RelationType"/>s.
     /// </summary>
-    public sealed partial class Whole : MetaObject, IComparable
+    public sealed partial class Whole
     {
         /// <summary>
         /// The default plural form.
@@ -42,15 +42,12 @@ namespace Allors.Meta
 
         private bool isDeriving;
 
-        public Whole(Guid id)
+        public Whole()
         {
-            this.Domain = this;
-
             this.isStale = true;
             this.isDeriving = false;
 
-            this.Id = id;
-
+            this.Parts = new List<Part>();
             this.UnitTypes = new List<Unit>();
             this.Interfaces = new List<Interface>();
             this.Classes = new List<Class>();
@@ -63,8 +60,8 @@ namespace Allors.Meta
             this.AddUnits();
         }
 
-        public string Name { get; set; }
-
+        public IList<Part> Parts { get; private set; }
+        
         public IList<Unit> UnitTypes { get; private set; }
 
         public IList<Interface> Interfaces { get; private set; }
@@ -76,21 +73,16 @@ namespace Allors.Meta
         public IList<RelationType> RelationTypes { get; private set; }
 
         public IList<MethodType> MethodTypes { get; private set; }
-        
-        /// <summary>
-        /// Gets the composite types.
-        /// </summary>
-        /// <value>The composite types.</value>
+
         public IList<Composite> Composites
         {
             get
             {
                 this.Derive();
-
                 return this.derivedComposites;
             }
         }
-     
+
         /// <summary>
         /// Gets a value indicating whether this instance is valid.
         /// </summary>
@@ -98,42 +90,6 @@ namespace Allors.Meta
         public bool IsValid
         {
             get { return this.Validate().Errors.Length == 0; }
-        }
-        
-        /// <summary>
-        /// Gets the validation name.
-        /// </summary>
-        protected override string ValidationName
-        {
-            get
-            {
-                if (!string.IsNullOrEmpty(this.Name))
-                {
-                    return "domain " + this.Name;
-                }
-
-                return "unknown domain";
-            }
-        }
-
-        /// <summary>
-        /// Compares the current instance with another object of the same type.
-        /// </summary>
-        /// <param name="obj">An object to compare with this instance.</param>
-        /// <returns>
-        /// A 32-bit signed integer that indicates the relative order of the objects being compared. The return value has these meanings: Value Meaning Less than zero This instance is less than <paramref name="obj"/>. Zero This instance is equal to <paramref name="obj"/>. Greater than zero This instance is greater than <paramref name="obj"/>.
-        /// </returns>
-        /// <exception cref="T:System.ArgumentException">
-        /// <paramref name="obj"/> is not the same type as this instance. </exception>
-        public int CompareTo(object obj)
-        {
-            var that = obj as ObjectType;
-            if (that != null)
-            {
-                return string.CompareOrdinal(this.Name, that.Name);
-            }
-
-            return -1;
         }
 
         /// <summary>
@@ -152,64 +108,51 @@ namespace Allors.Meta
 
             return metaObject;
         }
-
-        /// <summary>
-        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
-        /// </returns>
-        public override string ToString()
-        {
-            if (!string.IsNullOrEmpty(this.Name))
-            {
-                return this.Name;
-            }
-
-            return this.IdAsString;
-        }
-
+        
         /// <summary>
         /// Validates this instance.
         /// </summary>
         /// <returns>The Validate.</returns>
         public ValidationLog Validate()
         {
-            var validationReport = new ValidationLog();
+            var log = new ValidationLog();
 
-            this.Validate(validationReport);
+            foreach (var part in this.Parts)
+            {
+                part.Validate(log);
+            }
 
             foreach (var unitType in this.UnitTypes)
             {
-                unitType.Validate(validationReport);
+                unitType.Validate(log);
             }
 
             foreach (var @interface in this.Interfaces)
             {
-                @interface.Validate(validationReport);
+                @interface.Validate(log);
             }
 
             foreach (var @class in this.Classes)
             {
-                @class.Validate(validationReport);
+                @class.Validate(log);
             }
 
             foreach (var methodType in this.MethodTypes)
             {
-                methodType.Validate(validationReport);
+                methodType.Validate(log);
             }
 
             foreach (var relationType in this.RelationTypes)
             {
-                relationType.Validate(validationReport);
+                relationType.Validate(log);
             }
 
             foreach (var inheritance in this.Inheritances)
             {
-                inheritance.Validate(validationReport);
+                inheritance.Validate(log);
             }
 
-            return validationReport;
+            return log;
         }
 
         internal void Derive()
@@ -381,112 +324,70 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Validates the domain.
-        /// </summary>
-        /// <param name="validationLog">The validation.</param>
-        protected internal override void Validate(ValidationLog validationLog)
-        {
-            base.Validate(validationLog);
-
-            if (string.IsNullOrEmpty(this.Name))
-            {
-                validationLog.AddError("domain has no name", this, ValidationKind.Required, "Domain.Name");
-            }
-            else
-            {
-                if (this.Name.Length == 0)
-                {
-                    validationLog.AddError("domain has no name", this, ValidationKind.Required, "Domain.Name");
-                }
-                else
-                {
-                    if (!char.IsLetter(this.Name[0]))
-                    {
-                        var message = this.ValidationName + " should start with an alfabetical character";
-                        validationLog.AddError(message, this, ValidationKind.Format, "Domain.Name");
-                    }
-
-                    for (var i = 1; i < this.Name.Length; i++)
-                    {
-                        if (!char.IsLetter(this.Name[i]) && !char.IsDigit(this.Name[i]))
-                        {
-                            var message = this.ValidationName + " should only contain alfanumerical characters)";
-                            validationLog.AddError(message, this, ValidationKind.Format, "Domain.Name");
-                            break;
-                        }
-                    }
-                }
-            }
-
-            if (this.Id == Guid.Empty)
-            {
-                validationLog.AddError(this.ValidationName + " has no id", this, ValidationKind.Required, "MetaObject.Id");
-            }
-        }
-        
-        /// <summary>
         /// Adds the default population.
         /// </summary>
         private void AddUnits()
         {
+            var coreId = new Guid("CA802192-8186-4C2A-8315-A8DEFAA74A12");
+            var core = new Part(this, coreId);
             {
-                var objectType = new Unit(this, UnitIds.StringId);
+                var objectType = new Unit(core, UnitIds.StringId);
                 objectType.SingularName = UnitTags.AllorsString.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
                 objectType.UnitTag = (int)UnitTags.AllorsString;
             }
 
             {
-                var objectType = new Unit(this, UnitIds.IntegerId);
+                var objectType = new Unit(core, UnitIds.IntegerId);
                 objectType.SingularName = UnitTags.AllorsInteger.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
                 objectType.UnitTag = (int)UnitTags.AllorsInteger;
             }
 
             {
-                var objectType = new Unit(this, UnitIds.LongId);
+                var objectType = new Unit(core, UnitIds.LongId);
                 objectType.SingularName = UnitTags.AllorsLong.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
                 objectType.UnitTag = (int)UnitTags.AllorsLong;
             }
 
             {
-                var objectType = new Unit(this, UnitIds.DecimalId);
+                var objectType = new Unit(core, UnitIds.DecimalId);
                 objectType.SingularName = UnitTags.AllorsDecimal.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
                 objectType.UnitTag = (int)UnitTags.AllorsDecimal;
             }
 
             {
-                var objectType = new Unit(this, UnitIds.DoubleId);
+                var objectType = new Unit(core, UnitIds.DoubleId);
                 objectType.SingularName = UnitTags.AllorsDouble.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
                 objectType.UnitTag = (int)UnitTags.AllorsDouble;
             }
 
             {
-                var objectType = new Unit(this, UnitIds.BooleanId);
+                var objectType = new Unit(core, UnitIds.BooleanId);
                 objectType.SingularName = UnitTags.AllorsBoolean.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
                 objectType.UnitTag = (int)UnitTags.AllorsBoolean;
             }
 
             {
-                var objectType = new Unit(this, UnitIds.DatetimeId);
+                var objectType = new Unit(core, UnitIds.DatetimeId);
                 objectType.SingularName = UnitTags.AllorsDateTime.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
                 objectType.UnitTag = (int)UnitTags.AllorsDateTime;
             }
 
             {
-                var objectType = new Unit(this, UnitIds.Unique);
+                var objectType = new Unit(core, UnitIds.Unique);
                 objectType.SingularName = UnitTags.AllorsUnique.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
                 objectType.UnitTag = (int)UnitTags.AllorsUnique;
             }
 
             {
-                var objectType = new Unit(this, UnitIds.BinaryId);
+                var objectType = new Unit(core, UnitIds.BinaryId);
                 objectType.SingularName = UnitTags.AllorsBinary.ToString();
                 objectType.PluralName = objectType.SingularName + DefaultPluralForm;
                 objectType.UnitTag = (int)UnitTags.AllorsBinary;

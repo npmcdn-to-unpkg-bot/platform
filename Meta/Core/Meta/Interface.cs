@@ -39,10 +39,10 @@ namespace Allors.Meta
 
         private Class derivedExclusiveRootClass;
 
-        public Interface(Whole domain, Guid id)
-            : base(domain, id)
+        public Interface(Part part, Guid id)
+            : base(part, id)
         {
-            this.Domain.OnInterfaceCreated(this);
+            part.OnInterfaceCreated(this);
         }
 
         #region Exists
@@ -71,7 +71,7 @@ namespace Allors.Meta
         {
             get
             {
-                this.Domain.Derive();
+                this.Whole.Derive();
                 return this.derivedSubclasses;
             }
         }
@@ -84,7 +84,7 @@ namespace Allors.Meta
         {
             get
             {
-                this.Domain.Derive();
+                this.Whole.Derive();
                 return this.derivedSubtypes;
             }
         }
@@ -93,7 +93,7 @@ namespace Allors.Meta
         {
             get
             {
-                this.Domain.Derive();
+                this.Whole.Derive();
                 return this.derivedRootClasses;
             }
         }
@@ -102,7 +102,7 @@ namespace Allors.Meta
         {
             get
             {
-                this.Domain.Derive();
+                this.Whole.Derive();
                 return this.derivedExclusiveRootClass;
             }
         }
@@ -128,7 +128,7 @@ namespace Allors.Meta
         internal void DeriveDirectSubtypes(HashSet<Composite> directSubtypes)
         {
             directSubtypes.Clear();
-            foreach (var inheritance in this.Domain.Inheritances.Where(inheritance => this.Equals(inheritance.Supertype)))
+            foreach (var inheritance in this.Whole.Inheritances.Where(inheritance => this.Equals(inheritance.Supertype)))
             {
                 directSubtypes.Add(inheritance.Subtype);
             }
