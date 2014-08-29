@@ -55,7 +55,7 @@ namespace Allors.Meta
 
         public RoleType(RelationType relationType, Guid roleTypeId)
         {
-            this.Whole = relationType.Whole;
+            this.Domain = relationType.Domain;
             this.RelationType = relationType;
             this.Id = roleTypeId;
         }
@@ -70,7 +70,7 @@ namespace Allors.Meta
             set
             {
                 this.objectType = value;
-                this.Whole.Stale();
+                this.Domain.Stale();
             }
         }
 
@@ -84,7 +84,7 @@ namespace Allors.Meta
             set
             {
                 this.assignedSingularName = value;
-                this.Whole.Stale();
+                this.Domain.Stale();
             }
         }
 
@@ -98,7 +98,7 @@ namespace Allors.Meta
             set
             {
                 this.assignedPluralName = value;
-                this.Whole.Stale();
+                this.Domain.Stale();
             }
         }
 
@@ -112,7 +112,7 @@ namespace Allors.Meta
             set
             {
                 this.isMany = value;
-                this.Whole.Stale();
+                this.Domain.Stale();
             }
         }
 
@@ -126,7 +126,7 @@ namespace Allors.Meta
             set
             {
                 this.scale = value;
-                this.Whole.Stale();
+                this.Domain.Stale();
             }
         }
 
@@ -140,7 +140,7 @@ namespace Allors.Meta
             set
             {
                 this.precision = value;
-                this.Whole.Stale();
+                this.Domain.Stale();
             }
         }
 
@@ -154,7 +154,7 @@ namespace Allors.Meta
             set
             {
                 this.size = value;
-                this.Whole.Stale();
+                this.Domain.Stale();
             }
         }
 
@@ -441,13 +441,13 @@ namespace Allors.Meta
             {
                 this.derivedSingularPropertyName = this.SingularFullName;
 
-                if (this.AssociationType.ObjectType.RootClasses.Count > 0)
+                if (this.AssociationType.ObjectType.LeafClasses.Count > 0)
                 {
                     this.derivedSingularPropertyName = this.SingularName;
 
-                    foreach (var rootClass in this.AssociationType.ObjectType.RootClasses)
+                    foreach (var leafClass in this.AssociationType.ObjectType.LeafClasses)
                     {
-                        foreach (var otherRole in rootClass.RoleTypes)
+                        foreach (var otherRole in leafClass.RoleTypes)
                         {
                             if (!Equals(otherRole))
                             {
@@ -474,13 +474,13 @@ namespace Allors.Meta
             {
                 this.derivedPluralPropertyName = this.PluralFullName;
 
-                if (this.AssociationType.ObjectType.RootClasses.Count > 0)
+                if (this.AssociationType.ObjectType.LeafClasses.Count > 0)
                 {
                     this.derivedPluralPropertyName = this.PluralName;
 
-                    foreach (var rootClass in this.AssociationType.ObjectType.RootClasses)
+                    foreach (var leafClass in this.AssociationType.ObjectType.LeafClasses)
                     {
-                        foreach (var otherRole in rootClass.RoleTypes)
+                        foreach (var otherRole in leafClass.RoleTypes)
                         {
                             if (!Equals(otherRole))
                             {

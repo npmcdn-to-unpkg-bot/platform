@@ -59,7 +59,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
                 sql += "DELETE FROM " + schema.Objects + "\n";
                 sql += "WHERE " + schema.ObjectId + "=" + schema.ObjectId.Param + ";\n";
 
-                sql += "DELETE FROM " + schema.Table(objectType.ExclusiveRootClass) + "\n";
+                sql += "DELETE FROM " + schema.Table(objectType.ExclusiveLeafClass) + "\n";
                 sql += "WHERE " + schema.ObjectId + "=" + schema.ObjectId.Param + ";\n";
 
                 sql += "END;";

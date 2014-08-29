@@ -53,14 +53,14 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
                 var associationType = roleType.AssociationType;
 
                 string sql;
-                if (associationType.IsMany || !roleType.RelationType.ExistExclusiveRootClasses)
+                if (associationType.IsMany || !roleType.RelationType.ExistExclusiveLeafClasses)
                 {
                     sql = Sql.Schema.AllorsPrefix + "A_" + roleType.SingularFullName;
                 }
                 else
                 {
                     var compositeType = (Composite)roleType.ObjectType;
-                    sql = Sql.Schema.AllorsPrefix + "A_" + compositeType.ExclusiveRootClass.Name + "_" + associationType.Name;
+                    sql = Sql.Schema.AllorsPrefix + "A_" + compositeType.ExclusiveLeafClass.Name + "_" + associationType.Name;
                 }
  
                 this.sqlByRoleType[roleType] = sql;

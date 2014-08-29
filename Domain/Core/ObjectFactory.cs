@@ -35,7 +35,7 @@ namespace Allors
         /// <summary>
         /// The domain.
         /// </summary>
-        private readonly Whole domain;
+        private readonly Domain domain;
 
         /// <summary>
         ///  The assembly.
@@ -79,7 +79,7 @@ namespace Allors
         /// <param name="namespace">
         /// The namespace
         /// </param>
-        public ObjectFactory(Whole domain, Assembly assembly, string @namespace)
+        public ObjectFactory(Domain domain, Assembly assembly, string @namespace)
         {
             this.domain = domain;
             this.assembly = assembly;
@@ -144,7 +144,7 @@ namespace Allors
         /// <summary>
         /// Gets the domain.
         /// </summary>
-        public Whole Domain 
+        public Domain Domain 
         {
             get
             {

@@ -611,7 +611,7 @@ BEGIN
                     }
 
                     procedure.Definition += @"
-    FROM " + this.Table(concreteComposite.ExclusiveRootClass) + @"
+    FROM " + this.Table(concreteComposite.ExclusiveLeafClass) + @"
     WHERE " + this.ObjectId + "=" + this.ObjectId.Param + @";
 END
 $$ language plpgsql;
@@ -691,7 +691,7 @@ WHILE COUNTER < " + this.CountParam + @" LOOP
     VALUES (" + this.TypeId.Param + ", " + Reference.InitialCacheId + @" )
     RETURNING " + this.ObjectId + @" INTO ID;
 
-    INSERT INTO " + this.Table(objectType.ExclusiveRootClass) + " (" + this.ObjectId + "," + this.TypeId + @")
+    INSERT INTO " + this.Table(objectType.ExclusiveLeafClass) + " (" + this.ObjectId + "," + this.TypeId + @")
     VALUES (ID," + this.TypeId.Param + @");
    
     COUNTER := COUNTER+1;
@@ -717,7 +717,7 @@ BEGIN
 
 IF 
     EXISTS (SELECT " + this.ObjectId + @"
-    FROM " + this.Table(objectType.ExclusiveRootClass) + @"
+    FROM " + this.Table(objectType.ExclusiveLeafClass) + @"
     WHERE " + this.ObjectId + "=" + this.ObjectId.Param + @")
 THEN 
     RETURN FALSE;
@@ -725,7 +725,7 @@ ELSE
     INSERT INTO " + this.Objects + " (" + this.ObjectId + "," + this.TypeId + "," + this.CacheId + @")
     VALUES (" + this.ObjectId.Param + "," + this.TypeId.Param + ", " + Reference.InitialCacheId + @");
     
-    INSERT INTO " + this.Table(objectType.ExclusiveRootClass) + " (" + this.ObjectId + "," + this.TypeId + @")
+    INSERT INTO " + this.Table(objectType.ExclusiveLeafClass) + " (" + this.ObjectId + "," + this.TypeId + @")
     VALUES (" + this.ObjectId.Param + "," + this.TypeId.Param + @");
    
     IF currval('" + this.Objects + "_" + this.ObjectId + @"_seq') < " + this.ObjectId.Param + @"

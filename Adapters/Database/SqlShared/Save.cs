@@ -79,7 +79,7 @@ namespace Allors.Adapters.Database.Sql
                 var atLeastOne = false;
 
                 var sql = "SELECT " + this.database.Schema.ObjectId + "\n";
-                sql += "FROM " + this.database.Schema.Table(type.ExclusiveRootClass) + "\n";
+                sql += "FROM " + this.database.Schema.Table(type.ExclusiveLeafClass) + "\n";
                 sql += "WHERE " + this.database.Schema.TypeId + "=" + this.database.Schema.TypeId.Param.InvocationName + "\n";
                 sql += "ORDER BY " + this.database.Schema.ObjectId;
 
@@ -120,7 +120,7 @@ namespace Allors.Adapters.Database.Sql
 
         protected void SaveRelations(ManagementSession session)
         {
-            var exclusiveRootClassesByObjectType = new Dictionary<ObjectType, HashSet<Class>>();
+            var exclusiveLeafClassesByObjectType = new Dictionary<ObjectType, HashSet<Class>>();
 
             var relations = new List<RelationType>(this.database.Domain.RelationTypes);
             relations.Sort(MetaObject.IdComparer);
@@ -129,27 +129,27 @@ namespace Allors.Adapters.Database.Sql
             {
                 var associationType = relation.AssociationType;
 
-                if (associationType.ObjectType.RootClasses.Count > 0)
+                if (associationType.ObjectType.LeafClasses.Count > 0)
                 {
                     var roleType = relation.RoleType;
                 
                     var sql = string.Empty;
                     if (roleType.ObjectType is Unit)
                     {
-                        HashSet<Class> exclusiveRootClasses;
-                        if (!exclusiveRootClassesByObjectType.TryGetValue(associationType.ObjectType, out exclusiveRootClasses))
+                        HashSet<Class> exclusiveLeafClasses;
+                        if (!exclusiveLeafClassesByObjectType.TryGetValue(associationType.ObjectType, out exclusiveLeafClasses))
                         {
-                            exclusiveRootClasses = new HashSet<Class>();
-                            foreach (var concreteClass in associationType.ObjectType.RootClasses)
+                            exclusiveLeafClasses = new HashSet<Class>();
+                            foreach (var concreteClass in associationType.ObjectType.LeafClasses)
                             {
-                                exclusiveRootClasses.Add(concreteClass.ExclusiveRootClass);
+                                exclusiveLeafClasses.Add(concreteClass.ExclusiveLeafClass);
                             }
 
-                            exclusiveRootClassesByObjectType[associationType.ObjectType] = exclusiveRootClasses;
+                            exclusiveLeafClassesByObjectType[associationType.ObjectType] = exclusiveLeafClasses;
                         }
                        
                         var first = true;
-                        foreach (var exclusiveRootClass in exclusiveRootClasses)
+                        foreach (var exclusiveLeafClass in exclusiveLeafClasses)
                         {
                             if (first)
                             {
@@ -161,7 +161,7 @@ namespace Allors.Adapters.Database.Sql
                             }
 
                             sql += "SELECT " + this.database.Schema.ObjectId + " As " + this.database.Schema.AssociationId + ", " + this.database.Schema.Column(roleType) + " As " + this.database.Schema.RoleId + "\n";
-                            sql += "FROM " + this.database.Schema.Table(exclusiveRootClass) + "\n";
+                            sql += "FROM " + this.database.Schema.Table(exclusiveLeafClass) + "\n";
                             sql += "WHERE " + this.database.Schema.Column(roleType) + " IS NOT NULL\n";
                         }
 
@@ -169,7 +169,7 @@ namespace Allors.Adapters.Database.Sql
                     }
                     else
                     {
-                        if ((roleType.IsMany && associationType.IsMany) || !relation.ExistExclusiveRootClasses)
+                        if ((roleType.IsMany && associationType.IsMany) || !relation.ExistExclusiveLeafClasses)
                         {
                             sql += "SELECT " + this.database.Schema.AssociationId + "," + this.database.Schema.RoleId + "\n";
                             sql += "FROM " + this.database.Schema.Table(relation) + "\n";
@@ -181,7 +181,7 @@ namespace Allors.Adapters.Database.Sql
                             if (roleType.IsOne)
                             {
                                 sql += "SELECT " + this.database.Schema.ObjectId + " As " + this.database.Schema.AssociationId + ", " + this.database.Schema.Column(roleType) + " As " + this.database.Schema.RoleId + "\n";
-                                sql += "FROM " + this.database.Schema.Table(associationType.ObjectType.ExclusiveRootClass) + "\n";
+                                sql += "FROM " + this.database.Schema.Table(associationType.ObjectType.ExclusiveLeafClass) + "\n";
                                 sql += "WHERE " + this.database.Schema.Column(roleType) + " IS NOT NULL\n";
                                 sql += "ORDER BY " + this.database.Schema.AssociationId;
                             }
@@ -190,7 +190,7 @@ namespace Allors.Adapters.Database.Sql
                                 // role.Many
                                 var compositeType = (Composite)roleType.ObjectType;
                                 sql += "SELECT " + this.database.Schema.Column(associationType) + " As " + this.database.Schema.AssociationId + ", " + this.database.Schema.ObjectId + " As " + this.database.Schema.RoleId + "\n";
-                                sql += "FROM " + this.database.Schema.Table(compositeType.ExclusiveRootClass) + "\n";
+                                sql += "FROM " + this.database.Schema.Table(compositeType.ExclusiveLeafClass) + "\n";
                                 sql += "WHERE " + this.database.Schema.Column(associationType) + " IS NOT NULL\n";
                                 sql += "ORDER BY " + this.database.Schema.AssociationId + "," + this.database.Schema.RoleId;
                             }

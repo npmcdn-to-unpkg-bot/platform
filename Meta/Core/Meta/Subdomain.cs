@@ -27,17 +27,17 @@ namespace Allors.Meta
     /// <summary>
     /// A Part is a Domain that can be used together with other parts to form a whole.
     /// </summary>
-    public sealed partial class Part : MetaObject, IComparable
+    public sealed partial class Subdomain : MetaObject, IComparable
     {
         private string name;
 
-        public Part(Whole whole, Guid id)
+        public Subdomain(Domain domain, Guid id)
         {
-            this.Whole = whole;
+            this.Domain = domain;
 
             this.Id = id;
 
-            this.UnitTypes = new List<Unit>();
+            this.Units = new List<Unit>();
             this.Interfaces = new List<Interface>();
             this.Classes = new List<Class>();
             this.Inheritances = new List<Inheritance>();
@@ -55,11 +55,11 @@ namespace Allors.Meta
             set
             {
                 this.name = value;
-                this.Whole.Stale();
+                this.Domain.Stale();
             }
         }
 
-        public IList<Unit> UnitTypes { get; private set; }
+        public IList<Unit> Units { get; private set; }
 
         public IList<Interface> Interfaces { get; private set; }
 
@@ -125,38 +125,38 @@ namespace Allors.Meta
         
         internal void OnUnitCreated(Unit unit)
         {
-            this.UnitTypes.Add(unit);
-            this.Whole.OnUnitCreated(unit);
+            this.Units.Add(unit);
+            this.Domain.OnUnitCreated(unit);
         }
 
         internal void OnInterfaceCreated(Interface @interface)
         {
             this.Interfaces.Add(@interface);
-            this.Whole.OnInterfaceCreated(@interface);
+            this.Domain.OnInterfaceCreated(@interface);
         }
 
         internal void OnClassCreated(Class @class)
         {
             this.Classes.Add(@class);
-            this.Whole.OnClassCreated(@class);
+            this.Domain.OnClassCreated(@class);
         }
 
         internal void OnInheritanceCreated(Inheritance inheritance)
         {
             this.Inheritances.Add(inheritance);
-            this.Whole.OnInheritanceCreated(inheritance);
+            this.Domain.OnInheritanceCreated(inheritance);
         }
 
         internal void OnRelationTypeCreated(RelationType relationType)
         {
             this.RelationTypes.Add(relationType);
-            this.Whole.OnRelationTypeCreated(relationType);
+            this.Domain.OnRelationTypeCreated(relationType);
         }
 
         internal void OnMethodTypeCreated(MethodType methodType)
         {
             this.MethodTypes.Add(methodType);
-            this.Whole.OnMethodTypeCreated(methodType);
+            this.Domain.OnMethodTypeCreated(methodType);
         }
 
         /// <summary>

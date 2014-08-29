@@ -57,14 +57,14 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
                 var associationType = roleType.AssociationType;
 
                 string sql;
-                if (associationType.IsMany || !roleType.RelationType.ExistExclusiveRootClasses)
+                if (associationType.IsMany || !roleType.RelationType.ExistExclusiveLeafClasses)
                 {
                     sql = Sql.Schema.AllorsPrefix + "GR_" + roleType.SingularFullName;
                 }
                 else
                 {
                     var compositeType = (Composite)roleType.ObjectType;
-                    sql = Sql.Schema.AllorsPrefix + "GR_" + compositeType.ExclusiveRootClass.Name + "_" + associationType.Name;
+                    sql = Sql.Schema.AllorsPrefix + "GR_" + compositeType.ExclusiveLeafClass.Name + "_" + associationType.Name;
                 }
  
                 this.sqlByRoleType[roleType] = sql;

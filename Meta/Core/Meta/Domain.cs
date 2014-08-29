@@ -27,7 +27,7 @@ namespace Allors.Meta
     /// <summary>
     /// A Domain is a container for <see cref="ObjectType"/>s, <see cref="RelationType"/>s.
     /// </summary>
-    public sealed partial class Whole
+    public sealed partial class Domain
     {
         /// <summary>
         /// The default plural form.
@@ -42,12 +42,12 @@ namespace Allors.Meta
 
         private bool isDeriving;
 
-        public Whole()
+        public Domain()
         {
             this.isStale = true;
             this.isDeriving = false;
 
-            this.Parts = new List<Part>();
+            this.Subdomains = new List<Subdomain>();
             this.UnitTypes = new List<Unit>();
             this.Interfaces = new List<Interface>();
             this.Classes = new List<Class>();
@@ -60,7 +60,7 @@ namespace Allors.Meta
             this.AddUnits();
         }
 
-        public IList<Part> Parts { get; private set; }
+        public IList<Subdomain> Subdomains { get; private set; }
         
         public IList<Unit> UnitTypes { get; private set; }
 
@@ -117,7 +117,7 @@ namespace Allors.Meta
         {
             var log = new ValidationLog();
 
-            foreach (var part in this.Parts)
+            foreach (var part in this.Subdomains)
             {
                 part.Validate(log);
             }
@@ -205,16 +205,16 @@ namespace Allors.Meta
                         type.DeriveSubclasses(sharedClasses);
                     }
 
-                    // RootClasses
+                    // LeafClasses
                     foreach (var type in this.Interfaces)
                     {
-                        type.DeriveRootClasses();
+                        type.DeriveLeafClasses();
                     }
 
                     // Exclusive Root Class
                     foreach (var type in this.Interfaces)
                     {
-                        type.DeriveExclusiveRootClass();
+                        type.DeriveExclusiveLeafClass();
                     }
 
                     // RoleTypes
@@ -329,7 +329,7 @@ namespace Allors.Meta
         private void AddUnits()
         {
             var coreId = new Guid("CA802192-8186-4C2A-8315-A8DEFAA74A12");
-            var core = new Part(this, coreId);
+            var core = new Subdomain(this, coreId);
             {
                 var objectType = new Unit(core, UnitIds.StringId);
                 objectType.SingularName = UnitTags.AllorsString.ToString();

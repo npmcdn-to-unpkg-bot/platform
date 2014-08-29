@@ -44,7 +44,7 @@ namespace Allors.Adapters.Database.Caching
                 this.transientConcreteClasses = new HashSet<ObjectType>();
                 foreach (var transientObjectType in transientObjectTypes)
                 {
-                    foreach (var transientConcreteClass in transientObjectType.RootClasses)
+                    foreach (var transientConcreteClass in transientObjectType.LeafClasses)
                     {
                         this.transientConcreteClasses.Add(transientConcreteClass);
                     }

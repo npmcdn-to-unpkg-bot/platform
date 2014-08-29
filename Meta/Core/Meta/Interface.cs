@@ -33,16 +33,16 @@ namespace Allors.Meta
 
         private IList<Class> derivedSubclasses;
 
-        private IList<Class> derivedRootClasses;
+        private IList<Class> derivedLeafClasses;
 
-        private HashSet<ObjectType> rootClassesCache;
+        private HashSet<ObjectType> leafClassesCache;
 
-        private Class derivedExclusiveRootClass;
+        private Class derivedExclusiveLeafClass;
 
-        public Interface(Part part, Guid id)
-            : base(part, id)
+        public Interface(Subdomain subdomain, Guid id)
+            : base(subdomain, id)
         {
-            part.OnInterfaceCreated(this);
+            subdomain.OnInterfaceCreated(this);
         }
 
         #region Exists
@@ -71,7 +71,7 @@ namespace Allors.Meta
         {
             get
             {
-                this.Whole.Derive();
+                this.Domain.Derive();
                 return this.derivedSubclasses;
             }
         }
@@ -84,26 +84,26 @@ namespace Allors.Meta
         {
             get
             {
-                this.Whole.Derive();
+                this.Domain.Derive();
                 return this.derivedSubtypes;
             }
         }
 
-        public override IList<Class> RootClasses
+        public override IList<Class> LeafClasses
         {
             get
             {
-                this.Whole.Derive();
-                return this.derivedRootClasses;
+                this.Domain.Derive();
+                return this.derivedLeafClasses;
             }
         }
 
-        public override Class ExclusiveRootClass
+        public override Class ExclusiveLeafClass
         {
             get
             {
-                this.Whole.Derive();
-                return this.derivedExclusiveRootClass;
+                this.Domain.Derive();
+                return this.derivedExclusiveLeafClass;
             }
         }
 
@@ -116,9 +116,9 @@ namespace Allors.Meta
         /// <returns>
         /// True if this contains the concrete class.
         /// </returns>
-        public override bool ContainsRootClass(ObjectType objectType)
+        public override bool ContainsLeafClass(ObjectType objectType)
         {
-            return this.rootClassesCache.Contains(objectType);
+            return this.leafClassesCache.Contains(objectType);
         }
       
         /// <summary>
@@ -128,7 +128,7 @@ namespace Allors.Meta
         internal void DeriveDirectSubtypes(HashSet<Composite> directSubtypes)
         {
             directSubtypes.Clear();
-            foreach (var inheritance in this.Whole.Inheritances.Where(inheritance => this.Equals(inheritance.Supertype)))
+            foreach (var inheritance in this.Domain.Inheritances.Where(inheritance => this.Equals(inheritance.Supertype)))
             {
                 directSubtypes.Add(inheritance.Subtype);
             }
@@ -169,22 +169,22 @@ namespace Allors.Meta
         /// <summary>
         /// Derive exclusive concrete leaf classes.
         /// </summary>
-        internal void DeriveExclusiveRootClass()
+        internal void DeriveExclusiveLeafClass()
         {
-            this.derivedExclusiveRootClass = null;
-            if (this.derivedRootClasses.Count == 1)
+            this.derivedExclusiveLeafClass = null;
+            if (this.derivedLeafClasses.Count == 1)
             {
-                this.derivedExclusiveRootClass = this.derivedRootClasses[0];
+                this.derivedExclusiveLeafClass = this.derivedLeafClasses[0];
             }
         }
 
         /// <summary>
         /// Derive root class for classes.
         /// </summary>
-        internal void DeriveRootClasses()
+        internal void DeriveLeafClasses()
         {
-            this.derivedRootClasses = this.derivedSubclasses;
-            this.rootClassesCache = new HashSet<ObjectType>(this.derivedRootClasses);
+            this.derivedLeafClasses = this.derivedSubclasses;
+            this.leafClassesCache = new HashSet<ObjectType>(this.derivedLeafClasses);
         }
 
         /// <summary>

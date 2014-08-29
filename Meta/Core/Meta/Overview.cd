@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Allors.Meta.Domain">
+    <Position X="2" Y="4.5" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAHCBAAAgBgAUCgAIAAIBAAABIQBAAGABAA=</HashCode>
+      <FileName>Core\Meta\Domain.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Parts" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Allors.Meta.Subdomain">
+    <Position X="5.25" Y="4.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAGCBAQEAACAUCwAAAAEAAAAEIAAAAGAAAA=</HashCode>
+      <FileName>Core\Meta\Subdomain.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Allors.Meta.MetaObject">
+    <Position X="5.5" Y="0.5" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="Allors.Meta.MetaObject.PrivateIdComparer" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Core\Meta\MetaObject.cs</NewMemberFileName>
+        </TypeIdentifier>
+        <Lollipop Position="0.2" />
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAACAAAAAAACAAACAAgAAAAAAAAAAAEABAgA=</HashCode>
+      <FileName>Core\Meta\MetaObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

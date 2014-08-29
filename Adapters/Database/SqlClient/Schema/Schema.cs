@@ -530,7 +530,7 @@ AS
                     }
 
                     procedure.Definition += @"
-    FROM " + this.Table(concreteComposite.ExclusiveRootClass) + @"
+    FROM " + this.Table(concreteComposite.ExclusiveLeafClass) + @"
     WHERE " + this.ObjectId + "=" + this.ObjectId.Param;
 
                     this.procedureByName.Add(procedure.Name, procedure);
@@ -599,7 +599,7 @@ WHILE @COUNTER < " + this.CountParam + @"
     SET @COUNTER = @COUNTER+1;
     END
 
-INSERT INTO " + this.Table(objectType.ExclusiveRootClass) + " (" + this.ObjectId + "," + this.TypeId + @")
+INSERT INTO " + this.Table(objectType.ExclusiveLeafClass) + " (" + this.ObjectId + "," + this.TypeId + @")
 SELECT ID," + this.TypeId.Param + @" FROM @IDS;
 
 SELECT id FROM @IDS;

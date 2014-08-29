@@ -63,13 +63,13 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Text
             {
                 var schema = this.Database.Schema;
 
-                var exclusiveRootClass = roles.Reference.ObjectType.ExclusiveRootClass;
+                var exclusiveLeafClass = roles.Reference.ObjectType.ExclusiveLeafClass;
 
                 Dictionary<IList<RoleType>, NpgsqlCommand> commandByKey;
-                if (!this.commandByKeyByObjectType.TryGetValue(exclusiveRootClass, out commandByKey))
+                if (!this.commandByKeyByObjectType.TryGetValue(exclusiveLeafClass, out commandByKey))
                 {
                     commandByKey = new Dictionary<IList<RoleType>, NpgsqlCommand>(new SortedRoleTypesComparer());
-                    this.commandByKeyByObjectType.Add(exclusiveRootClass, commandByKey);
+                    this.commandByKeyByObjectType.Add(exclusiveLeafClass, commandByKey);
                 }
 
                 NpgsqlCommand command;
@@ -79,7 +79,7 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Text
                     this.AddInObject(command, schema.ObjectId.Param, roles.Reference.ObjectId.Value);
 
                     var sql = new StringBuilder();
-                    sql.Append("UPDATE " + schema.Table(exclusiveRootClass) + " SET\n");
+                    sql.Append("UPDATE " + schema.Table(exclusiveLeafClass) + " SET\n");
 
                     var count = 0;
                     foreach (var roleType in sortedRoleTypes)

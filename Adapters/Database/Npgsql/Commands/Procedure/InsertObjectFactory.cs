@@ -50,18 +50,18 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
 
             public Reference Execute(Class objectType, ObjectId objectId)
             {
-                var exclusiveRootClass = objectType.ExclusiveRootClass;
+                var exclusiveLeafClass = objectType.ExclusiveLeafClass;
                 var schema = this.Database.Schema;
 
                 NpgsqlCommand command;
-                if (!this.commandByObjectType.TryGetValue(exclusiveRootClass, out command))
+                if (!this.commandByObjectType.TryGetValue(exclusiveLeafClass, out command))
                 {
-                    command = this.Session.CreateNpgsqlCommand(Sql.Schema.AllorsPrefix + "INS_" + exclusiveRootClass.Name);
+                    command = this.Session.CreateNpgsqlCommand(Sql.Schema.AllorsPrefix + "INS_" + exclusiveLeafClass.Name);
                     command.CommandType = CommandType.StoredProcedure;
                     this.AddInObject(command, schema.ObjectId.Param, objectId.Value);
                     this.AddInObject(command, schema.TypeId.Param, objectType.Id);
 
-                    this.commandByObjectType[exclusiveRootClass] = command;
+                    this.commandByObjectType[exclusiveLeafClass] = command;
                 }
                 else
                 {

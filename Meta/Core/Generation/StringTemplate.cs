@@ -97,7 +97,7 @@ namespace Allors.Development.Repository.Generation
             return this.Name;
         }
 
-        internal void Generate(Whole domain, DirectoryInfo outputDirectory, Log log)
+        internal void Generate(Domain domain, DirectoryInfo outputDirectory, Log log)
         {
             if (!domain.IsValid)
             {

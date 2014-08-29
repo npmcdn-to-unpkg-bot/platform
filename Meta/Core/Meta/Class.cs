@@ -28,14 +28,14 @@ namespace Allors.Meta
     {
         private readonly List<Class> selfList; 
 
-        public Class(Part part, Guid id)
-            : base(part, id)
+        public Class(Subdomain subdomain, Guid id)
+            : base(subdomain, id)
         {
-            this.Whole.OnClassCreated(this);
+            this.Domain.OnClassCreated(this);
             this.selfList = new List<Class> { this };
         }
         
-        public override IList<Class> RootClasses
+        public override IList<Class> LeafClasses
         {
             get
             {
@@ -43,7 +43,7 @@ namespace Allors.Meta
             }
         }
 
-        public override Class ExclusiveRootClass
+        public override Class ExclusiveLeafClass
         {
             get
             {
@@ -51,7 +51,7 @@ namespace Allors.Meta
             }
         }
 
-        public override bool ContainsRootClass(ObjectType objectType)
+        public override bool ContainsLeafClass(ObjectType objectType)
         {
             return this.Equals(objectType);
         }

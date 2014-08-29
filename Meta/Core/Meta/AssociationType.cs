@@ -41,7 +41,7 @@ namespace Allors.Meta
 
         public AssociationType(RelationType relationType, Guid associationTypeId)
         {
-            this.Whole = relationType.Whole;
+            this.Domain = relationType.Domain;
             this.RelationType = relationType;
             this.Id = associationTypeId;
         }
@@ -56,7 +56,7 @@ namespace Allors.Meta
             set
             {
                 this.isMany = value;
-                this.RelationType.Whole.Stale();
+                this.RelationType.Domain.Stale();
             }
         }
 
@@ -70,7 +70,7 @@ namespace Allors.Meta
             set
             {
                 this.objectType = value;
-                this.RelationType.Whole.Stale();
+                this.RelationType.Domain.Stale();
             }
         }
 

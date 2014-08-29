@@ -51,8 +51,8 @@
     <Compile Include="Core\Generation\StringTemplate.cs" />
     <Compile Include="Core\Meta\AssociationType.cs" />
     <Compile Include="Core\Meta\Interface.cs" />
-    <Compile Include="Core\Meta\Part.cs" />
-    <Compile Include="Core\Meta\Whole.cs" />
+    <Compile Include="Core\Meta\Subdomain.cs" />
+    <Compile Include="Core\Meta\Domain.cs" />
     <Compile Include="Core\Meta\Inheritance.cs" />
     <Compile Include="Core\Meta\MetaObject.cs" />
     <Compile Include="Core\Meta\MethodType.cs" />
@@ -74,6 +74,7 @@
   <ItemGroup />
   <ItemGroup>
     <None Include="Core\Generate.proj" />
+    <None Include="Core\Meta\Overview.cd" />
     <None Include="packages.config" />
     <None Include="Settings.StyleCop" />
   </ItemGroup>

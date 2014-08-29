@@ -23,7 +23,7 @@ namespace Allors.Adapters.Database.Sql
     using Allors.Meta;
 
     /// <summary>
-    /// <para>Raised during the validation of the <see cref="Whole"/> against the Sql schema.</para>
+    /// <para>Raised during the validation of the <see cref="Domain"/> against the Sql schema.</para>
     /// <para>The <see cref="TableSchemaValidationError#ObjectType"/>, <see cref="TableSchemaValidationError#RelationType"/>
     /// and <see cref="TableSchemaValidationError#RoleType"/> objects are mutually exclusive.
     /// </para>

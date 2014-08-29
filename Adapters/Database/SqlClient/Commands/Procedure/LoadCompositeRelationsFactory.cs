@@ -43,25 +43,25 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
             string sql;
             if (roleType.IsMany)
             {
-                if (associationType.IsMany || !roleType.RelationType.ExistExclusiveRootClasses)
+                if (associationType.IsMany || !roleType.RelationType.ExistExclusiveLeafClasses)
                 {
                     sql = Schema.AllorsPrefix + "A_" + roleType.SingularFullName;
                 }
                 else
                 {
                     var compositeType = (Composite)roleType.ObjectType;
-                    sql = Schema.AllorsPrefix + "A_" + compositeType.ExclusiveRootClass.Name + "_" + associationType.Name;
+                    sql = Schema.AllorsPrefix + "A_" + compositeType.ExclusiveLeafClass.Name + "_" + associationType.Name;
                 }
             }
             else
             {
-                if (!roleType.RelationType.ExistExclusiveRootClasses)
+                if (!roleType.RelationType.ExistExclusiveLeafClasses)
                 {
                     sql = Schema.AllorsPrefix + "S_" + roleType.SingularFullName;
                 }
                 else
                 {
-                    sql = Schema.AllorsPrefix + "S_" + associationType.ObjectType.ExclusiveRootClass.Name + "_" + roleType.SingularPropertyName;
+                    sql = Schema.AllorsPrefix + "S_" + associationType.ObjectType.ExclusiveLeafClass.Name + "_" + roleType.SingularPropertyName;
                 }
             }
 

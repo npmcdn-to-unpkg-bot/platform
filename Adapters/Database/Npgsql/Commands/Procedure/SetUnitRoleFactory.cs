@@ -78,15 +78,15 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
                 this.commandByRoleTypeByObjectType = new Dictionary<ObjectType, Dictionary<RoleType, NpgsqlCommand>>();
             }
 
-            public void Execute(IList<UnitRelation> relation, ObjectType exclusiveRootClass, RoleType roleType)
+            public void Execute(IList<UnitRelation> relation, ObjectType exclusiveLeafClass, RoleType roleType)
             {
                 var schema = this.Database.NpgsqlSchema;
 
                 Dictionary<RoleType, NpgsqlCommand> commandByRoleType;
-                if (!this.commandByRoleTypeByObjectType.TryGetValue(exclusiveRootClass, out commandByRoleType))
+                if (!this.commandByRoleTypeByObjectType.TryGetValue(exclusiveLeafClass, out commandByRoleType))
                 {
                     commandByRoleType = new Dictionary<RoleType, NpgsqlCommand>();
-                    this.commandByRoleTypeByObjectType.Add(exclusiveRootClass, commandByRoleType);
+                    this.commandByRoleTypeByObjectType.Add(exclusiveLeafClass, commandByRoleType);
                 }
 
                 SchemaArrayParameter arrayParam;
@@ -138,7 +138,7 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
                 NpgsqlCommand command;
                 if (!commandByRoleType.TryGetValue(roleType, out command))
                 {
-                    command = this.Session.CreateNpgsqlCommand(this.factory.GetSql(exclusiveRootClass, roleType));
+                    command = this.Session.CreateNpgsqlCommand(this.factory.GetSql(exclusiveLeafClass, roleType));
                     command.CommandType = CommandType.StoredProcedure;
 
                     this.AddInTable(command, this.Database.NpgsqlSchema.ObjectArrayParam, this.Database.CreateAssociationTable(relation));

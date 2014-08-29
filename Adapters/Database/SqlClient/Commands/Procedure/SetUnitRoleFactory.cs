@@ -80,15 +80,15 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
                 this.commandByRoleTypeByObjectType = new Dictionary<ObjectType, Dictionary<RoleType, SqlCommand>>();
             }
 
-            public void Execute(IList<UnitRelation> relation, ObjectType exclusiveRootClass, RoleType roleType)
+            public void Execute(IList<UnitRelation> relation, ObjectType exclusiveLeafClass, RoleType roleType)
             {
                 var schema = this.Database.SqlClientSchema;
 
                 Dictionary<RoleType, SqlCommand> commandByRoleType;
-                if (!this.commandByRoleTypeByObjectType.TryGetValue(exclusiveRootClass, out commandByRoleType))
+                if (!this.commandByRoleTypeByObjectType.TryGetValue(exclusiveLeafClass, out commandByRoleType))
                 {
                     commandByRoleType = new Dictionary<RoleType, SqlCommand>();
-                    this.commandByRoleTypeByObjectType.Add(exclusiveRootClass, commandByRoleType);
+                    this.commandByRoleTypeByObjectType.Add(exclusiveLeafClass, commandByRoleType);
                 }
 
                 SchemaTableParameter tableParam;
@@ -140,7 +140,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
                 SqlCommand command;
                 if (!commandByRoleType.TryGetValue(roleType, out command))
                 {
-                    command = this.Session.CreateSqlCommand(this.factory.GetSql(exclusiveRootClass, roleType));
+                    command = this.Session.CreateSqlCommand(this.factory.GetSql(exclusiveLeafClass, roleType));
                     command.CommandType = CommandType.StoredProcedure;
                     this.AddInTable(command, tableParam, this.Database.CreateRelationTable(roleType, relation));
                 }

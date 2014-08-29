@@ -56,7 +56,7 @@ namespace Allors.Adapters
 
         public abstract bool IsWorkspace { get; }
 
-        public Whole Domain 
+        public Domain Domain 
         {
             get
             {
@@ -228,14 +228,14 @@ namespace Allors.Adapters
             object concreteClassOrClasses;
             if (!this.concreteClassesByObjectType.TryGetValue(objectType, out concreteClassOrClasses))
             {
-                if (objectType.RootClasses.Count == 1)
+                if (objectType.LeafClasses.Count == 1)
                 {
-                    concreteClassOrClasses = objectType.RootClasses[0];
+                    concreteClassOrClasses = objectType.LeafClasses[0];
                     this.concreteClassesByObjectType[objectType] = concreteClassOrClasses;
                 }
                 else
                 {
-                    concreteClassOrClasses = new HashSet<ObjectType>(objectType.RootClasses);
+                    concreteClassOrClasses = new HashSet<ObjectType>(objectType.LeafClasses);
                     this.concreteClassesByObjectType[objectType] = concreteClassOrClasses;
                 }
             }
@@ -311,7 +311,7 @@ namespace Allors.Adapters
                     throw new ArgumentException(role + " has no CompositeType");
                 }
 
-                if (!compositeType.ContainsRootClass(role.Strategy.ObjectType))
+                if (!compositeType.ContainsLeafClass(role.Strategy.ObjectType))
                 {
                     throw new ArgumentException(role.Strategy.ObjectType + " is not compatible with type " + roleType.ObjectType + " of role " + roleType + ".");
                 }

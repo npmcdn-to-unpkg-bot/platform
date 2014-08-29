@@ -56,7 +56,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
                 // TODO: Make this a single pass Query.
                 var sql = "IF EXISTS (\n";
                 sql += "    SELECT " + schema.ObjectId + "\n";
-                sql += "    FROM " + schema.Table(objectType.ExclusiveRootClass) + "\n";
+                sql += "    FROM " + schema.Table(objectType.ExclusiveLeafClass) + "\n";
                 sql += "    WHERE " + schema.ObjectId + "=" + schema.ObjectId.Param + "\n";
                 sql += ")\n";
                 sql += "    SELECT 1\n";
@@ -70,7 +70,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
 
                 sql += "    SET IDENTITY_INSERT " + schema.Objects.StatementName + " OFF;\n";
 
-                sql += "    INSERT INTO " + schema.Table(objectType.ExclusiveRootClass) + " (" + schema.ObjectId + "," + schema.TypeId + ")\n";
+                sql += "    INSERT INTO " + schema.Table(objectType.ExclusiveLeafClass) + " (" + schema.ObjectId + "," + schema.TypeId + ")\n";
                 sql += "    VALUES (" + schema.ObjectId.Param + "," + schema.TypeId.Param + ");\n";
 
                 sql += "    SELECT 0;\n";

@@ -41,7 +41,7 @@ namespace Allors.Adapters.Database.Sql
         public override bool BuildWhere(ExtentStatement statement, string alias)
         {
             var schema = statement.Schema;
-            if ((this.role.IsMany && this.role.RelationType.AssociationType.IsMany) || !this.role.RelationType.ExistExclusiveRootClasses)
+            if ((this.role.IsMany && this.role.RelationType.AssociationType.IsMany) || !this.role.RelationType.ExistExclusiveLeafClasses)
             {
                 statement.Append("\n");
                 statement.Append("EXISTS(\n");
@@ -64,7 +64,7 @@ namespace Allors.Adapters.Database.Sql
                 statement.Append("\n");
                 statement.Append("EXISTS(\n");
                 statement.Append("SELECT " + schema.ObjectId + "\n");
-                statement.Append("FROM " + schema.Table(compositeType.ExclusiveRootClass) + "\n");
+                statement.Append("FROM " + schema.Table(compositeType.ExclusiveLeafClass) + "\n");
                 statement.Append("WHERE " + schema.ObjectId + "=" + this.allorsObject.Strategy.ObjectId + "\n");
                 statement.Append("AND " + schema.Column(this.role.AssociationType) + "=" + alias + ".O\n");
                 statement.Append(")\n");

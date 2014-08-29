@@ -52,8 +52,8 @@ namespace Allors.Adapters.Database.Sql
                 var roleCompositeType = this.role.ObjectType as Composite;
                 var equalsRoleCompositeType = this.equalsRole.ObjectType as Composite;
 
-                if (roleCompositeType != null && roleCompositeType.ExclusiveRootClass != null && 
-                    equalsRoleCompositeType != null && equalsRoleCompositeType.ExclusiveRootClass != null)
+                if (roleCompositeType != null && roleCompositeType.ExclusiveLeafClass != null && 
+                    equalsRoleCompositeType != null && equalsRoleCompositeType.ExclusiveLeafClass != null)
                 {
                     statement.Append(" " + alias + "." + schema.Column(this.role) + "=" + alias + "." + schema.Column(this.equalsRole));
                 }

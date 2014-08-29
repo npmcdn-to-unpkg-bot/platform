@@ -56,13 +56,13 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
                 RoleType roleType = associationType.RoleType;
 
                 string sql;
-                if (roleType.IsMany || !associationType.RelationType.ExistExclusiveRootClasses)
+                if (roleType.IsMany || !associationType.RelationType.ExistExclusiveLeafClasses)
                 {
                     sql = Sql.Schema.AllorsPrefix + "GA_" + roleType.SingularFullName;
                 }
                 else
                 {
-                    sql = Sql.Schema.AllorsPrefix + "GA_" + associationType.ObjectType.ExclusiveRootClass.Name + "_" + associationType.Name;
+                    sql = Sql.Schema.AllorsPrefix + "GA_" + associationType.ObjectType.ExclusiveLeafClass.Name + "_" + associationType.Name;
                 }
 
                 this.sqlByAssociationType[associationType] = sql;

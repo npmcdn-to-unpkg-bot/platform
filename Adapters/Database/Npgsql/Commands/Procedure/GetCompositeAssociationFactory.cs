@@ -56,16 +56,16 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
                 var roleType = associationType.RoleType;
 
                 string sql;
-                if (associationType.RelationType.ExistExclusiveRootClasses)
+                if (associationType.RelationType.ExistExclusiveLeafClasses)
                 {
                     if (roleType.IsOne)
                     {
-                        sql = Schema.AllorsPrefix + "GA_" + associationType.ObjectType.ExclusiveRootClass.Name + "_" + associationType.Name;
+                        sql = Schema.AllorsPrefix + "GA_" + associationType.ObjectType.ExclusiveLeafClass.Name + "_" + associationType.Name;
                     }
                     else
                     {
                         var compositeType = (Composite)roleType.ObjectType;
-                        sql = Schema.AllorsPrefix + "GA_" + compositeType.ExclusiveRootClass.Name + "_" + associationType.Name;
+                        sql = Schema.AllorsPrefix + "GA_" + compositeType.ExclusiveLeafClass.Name + "_" + associationType.Name;
                     }
                 }
                 else
@@ -115,9 +115,9 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
                 {
                     ObjectId id = this.Database.AllorsObjectIds.Parse(result.ToString());
 
-                    if (associationType.ObjectType.RootClasses.Count == 1 && associationType.ObjectType.ExclusiveRootClass.ExclusiveRootClass != null)
+                    if (associationType.ObjectType.LeafClasses.Count == 1 && associationType.ObjectType.ExclusiveLeafClass.ExclusiveLeafClass != null)
                     {
-                        associationObject = this.Session.GetOrCreateAssociationForExistingObject(associationType.ObjectType.ExclusiveRootClass.ExclusiveRootClass, id);
+                        associationObject = this.Session.GetOrCreateAssociationForExistingObject(associationType.ObjectType.ExclusiveLeafClass.ExclusiveLeafClass, id);
                     }
                     else
                     {

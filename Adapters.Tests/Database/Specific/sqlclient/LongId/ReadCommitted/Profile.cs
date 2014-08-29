@@ -53,7 +53,7 @@ namespace Allors.Adapters.Special.SqlClient.LongId.ReadCommitted
             }
         }
 
-        public IDatabase CreateDatabase(Whole domain, bool init)
+        public IDatabase CreateDatabase(Domain domain, bool init)
         {
             var configuration = new Adapters.Database.SqlClient.LongId.Configuration
             {

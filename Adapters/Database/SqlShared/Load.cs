@@ -221,7 +221,7 @@ namespace Allors.Adapters.Database.Sql
                     var sql = new StringBuilder();
                     sql.Append("INSERT INTO " + this.database.Schema.Objects + " (" + this.database.Schema.ObjectId + "," + this.database.Schema.TypeId + "," + this.database.Schema.CacheId + ")\n");
                     sql.Append("SELECT " + this.database.Schema.ObjectId + "," + this.database.Schema.TypeId + ", " + Reference.InitialCacheId + "\n");
-                    sql.Append("FROM " + this.database.Schema.Table(type.ExclusiveRootClass));
+                    sql.Append("FROM " + this.database.Schema.Table(type.ExclusiveLeafClass));
 
                     lock (this)
                     {
@@ -300,15 +300,15 @@ namespace Allors.Adapters.Database.Sql
                                     }
                                     else
                                     {
-                                        var relationsByExclusiveRootClass = new Dictionary<ObjectType, List<UnitRelation>>();
-                                        this.LoadUnitRelations(relationType, relationsByExclusiveRootClass);
+                                        var relationsByExclusiveLeafClass = new Dictionary<ObjectType, List<UnitRelation>>();
+                                        this.LoadUnitRelations(relationType, relationsByExclusiveLeafClass);
 
-                                        foreach (var dictionaryEntry in relationsByExclusiveRootClass)
+                                        foreach (var dictionaryEntry in relationsByExclusiveLeafClass)
                                         {
-                                            var exclusiveRootClass = dictionaryEntry.Key;
+                                            var exclusiveLeafClass = dictionaryEntry.Key;
                                             var relations = dictionaryEntry.Value;
                                             var loadUnitRelations = session.LoadUnitRelationsFactory.Create();
-                                            loadUnitRelations.Execute(relations, exclusiveRootClass, relationType.RoleType);
+                                            loadUnitRelations.Execute(relations, exclusiveLeafClass, relationType.RoleType);
                                         }
                                     }
                                 }
@@ -350,7 +350,7 @@ namespace Allors.Adapters.Database.Sql
             }
         }
 
-        protected void LoadUnitRelations(RelationType relationType, Dictionary<ObjectType, List<UnitRelation>> relationsByExclusiveRootClass)
+        protected void LoadUnitRelations(RelationType relationType, Dictionary<ObjectType, List<UnitRelation>> relationsByExclusiveLeafClass)
         {
             while (this.reader.Read())
             {
@@ -378,19 +378,17 @@ namespace Allors.Adapters.Database.Sql
                                 }
                                 else
                                 {
-                                    var exclusiveRootClass = associationConcreteClass.ExclusiveRootClass;
+                                    var exclusiveLeafClass = associationConcreteClass.ExclusiveLeafClass;
                                     var unitType = (Unit)relationType.RoleType.ObjectType;
                                     switch (unitType.UnitTag)
                                     {
                                         case (int)UnitTags.AllorsString:
                                             {
                                                 List<UnitRelation> relations;
-                                                if (
-                                                    !relationsByExclusiveRootClass.TryGetValue(
-                                                        associationConcreteClass.ExclusiveRootClass, out relations))
+                                                if (!relationsByExclusiveLeafClass.TryGetValue(associationConcreteClass.ExclusiveLeafClass, out relations))
                                                 {
                                                     relations = new List<UnitRelation>();
-                                                    relationsByExclusiveRootClass[exclusiveRootClass] = relations;
+                                                    relationsByExclusiveLeafClass[exclusiveLeafClass] = relations;
                                                 }
 
                                                 var unitRelation = new UnitRelation(associationId, string.Empty);
@@ -402,10 +400,10 @@ namespace Allors.Adapters.Database.Sql
                                         case (int)UnitTags.AllorsBinary:
                                             {
                                                 List<UnitRelation> relations;
-                                                if (!relationsByExclusiveRootClass.TryGetValue(associationConcreteClass.ExclusiveRootClass, out relations))
+                                                if (!relationsByExclusiveLeafClass.TryGetValue(associationConcreteClass.ExclusiveLeafClass, out relations))
                                                 {
                                                     relations = new List<UnitRelation>();
-                                                    relationsByExclusiveRootClass[exclusiveRootClass] = relations;
+                                                    relationsByExclusiveLeafClass[exclusiveLeafClass] = relations;
                                                 }
 
                                                 var unitRelation = new UnitRelation(associationId, EmptyByteArray);
@@ -432,18 +430,16 @@ namespace Allors.Adapters.Database.Sql
                                 {
                                     try
                                     {
-                                        var exclusiveRootClass = associationConcreteClass.ExclusiveRootClass;
+                                        var exclusiveLeafClass = associationConcreteClass.ExclusiveLeafClass;
                                         var unitType = (Unit)relationType.RoleType.ObjectType;
                                         var unitTypeTag = (UnitTags)unitType.UnitTag;
                                         var unit = Serialization.ReadString(value, unitTypeTag);
 
                                         List<UnitRelation> relations;
-                                        if (
-                                            !relationsByExclusiveRootClass.TryGetValue(
-                                                associationConcreteClass.ExclusiveRootClass, out relations))
+                                        if (!relationsByExclusiveLeafClass.TryGetValue(associationConcreteClass.ExclusiveLeafClass, out relations))
                                         {
                                             relations = new List<UnitRelation>();
-                                            relationsByExclusiveRootClass[exclusiveRootClass] = relations;
+                                            relationsByExclusiveLeafClass[exclusiveLeafClass] = relations;
                                         }
 
                                         var unitRelation = new UnitRelation(associationId, unit);

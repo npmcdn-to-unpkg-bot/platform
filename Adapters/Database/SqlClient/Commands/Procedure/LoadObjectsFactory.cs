@@ -57,12 +57,12 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
             {
                 var database = this.factory.ManagementSession.SqlClientDatabase;
 
-                var exclusiveRootClass = objectType.ExclusiveRootClass;
+                var exclusiveLeafClass = objectType.ExclusiveLeafClass;
                 var schema = database.SqlClientSchema;
 
                 lock (database)
                 {
-                    using (var command = this.factory.ManagementSession.CreateSqlCommand(Schema.AllorsPrefix + "L_" + exclusiveRootClass.Name))
+                    using (var command = this.factory.ManagementSession.CreateSqlCommand(Schema.AllorsPrefix + "L_" + exclusiveLeafClass.Name))
                     {
                         command.CommandType = CommandType.StoredProcedure;
                         this.AddInObject(command, schema.TypeId.Param, objectType.Id);

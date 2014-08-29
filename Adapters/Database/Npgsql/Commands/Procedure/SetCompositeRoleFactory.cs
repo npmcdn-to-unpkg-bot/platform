@@ -54,13 +54,13 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Text
                 var associationType = roleType.AssociationType;
 
                 string sql;
-                if (!roleType.RelationType.ExistExclusiveRootClasses)
+                if (!roleType.RelationType.ExistExclusiveLeafClasses)
                 {
                     sql = Sql.Schema.AllorsPrefix + "S_" + roleType.SingularFullName;
                 }
                 else
                 {
-                    sql = Sql.Schema.AllorsPrefix + "S_" + associationType.ObjectType.ExclusiveRootClass.Name + "_" + roleType.SingularPropertyName;
+                    sql = Sql.Schema.AllorsPrefix + "S_" + associationType.ObjectType.ExclusiveLeafClass.Name + "_" + roleType.SingularPropertyName;
                 }
 
                 this.sqlByRoleType[roleType] = sql;

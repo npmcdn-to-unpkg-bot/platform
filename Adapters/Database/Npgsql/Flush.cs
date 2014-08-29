@@ -30,7 +30,7 @@ namespace Allors.Adapters.Database.Npgsql
         private const int BatchSize = 1000;
         private readonly DatabaseSession session;
 
-        private Dictionary<ObjectType, Dictionary<RoleType, List<UnitRelation>>> setUnitRoleRelationsByRoleTypeByExclusiveRootClass;
+        private Dictionary<ObjectType, Dictionary<RoleType, List<UnitRelation>>> setUnitRoleRelationsByRoleTypeByExclusiveLeafClass;
         private Dictionary<RoleType, List<CompositeRelation>> setCompositeRoleRelationsByRoleType;
         private Dictionary<RoleType, List<CompositeRelation>> addCompositeRoleRelationsByRoleType;
         private Dictionary<RoleType, List<CompositeRelation>> removeCompositeRoleRelationsByRoleType;
@@ -49,11 +49,11 @@ namespace Allors.Adapters.Database.Npgsql
 
         public void Execute()
         {
-            if (this.setUnitRoleRelationsByRoleTypeByExclusiveRootClass != null)
+            if (this.setUnitRoleRelationsByRoleTypeByExclusiveLeafClass != null)
             {
-                foreach (var firstDictionaryEntry in this.setUnitRoleRelationsByRoleTypeByExclusiveRootClass)
+                foreach (var firstDictionaryEntry in this.setUnitRoleRelationsByRoleTypeByExclusiveLeafClass)
                 {
-                    var exclusiveRootClass = firstDictionaryEntry.Key;
+                    var exclusiveLeafClass = firstDictionaryEntry.Key;
                     var setUnitRoleRelationsByRoleType = firstDictionaryEntry.Value;
                     foreach (var secondDictionaryEntry in setUnitRoleRelationsByRoleType)
                     {
@@ -61,13 +61,13 @@ namespace Allors.Adapters.Database.Npgsql
                         var relations = secondDictionaryEntry.Value;
                         if (relations.Count > 0)
                         {
-                            this.session.SessionCommands.SetUnitRoleCommand.Execute(relations, exclusiveRootClass, roleType);
+                            this.session.SessionCommands.SetUnitRoleCommand.Execute(relations, exclusiveLeafClass, roleType);
                         }
                     }
                 }
             }
 
-            this.setUnitRoleRelationsByRoleTypeByExclusiveRootClass = null;
+            this.setUnitRoleRelationsByRoleTypeByExclusiveLeafClass = null;
 
             if (this.setCompositeRoleRelationsByRoleType != null)
             {
@@ -137,18 +137,18 @@ namespace Allors.Adapters.Database.Npgsql
 
         public void SetUnitRole(Reference association, RoleType roleType, object role)
         {
-            if (this.setUnitRoleRelationsByRoleTypeByExclusiveRootClass == null)
+            if (this.setUnitRoleRelationsByRoleTypeByExclusiveLeafClass == null)
             {
-                this.setUnitRoleRelationsByRoleTypeByExclusiveRootClass = new Dictionary<ObjectType, Dictionary<RoleType, List<UnitRelation>>>();
+                this.setUnitRoleRelationsByRoleTypeByExclusiveLeafClass = new Dictionary<ObjectType, Dictionary<RoleType, List<UnitRelation>>>();
             }
 
-            var exclusiveRootClass = association.ObjectType.ExclusiveRootClass;
+            var exclusiveLeafClass = association.ObjectType.ExclusiveLeafClass;
 
             Dictionary<RoleType, List<UnitRelation>> setUnitRoleRelationsByRoleType;
-            if (!this.setUnitRoleRelationsByRoleTypeByExclusiveRootClass.TryGetValue(exclusiveRootClass, out setUnitRoleRelationsByRoleType))
+            if (!this.setUnitRoleRelationsByRoleTypeByExclusiveLeafClass.TryGetValue(exclusiveLeafClass, out setUnitRoleRelationsByRoleType))
             {
                 setUnitRoleRelationsByRoleType = new Dictionary<RoleType, List<UnitRelation>>();
-                this.setUnitRoleRelationsByRoleTypeByExclusiveRootClass[exclusiveRootClass] = setUnitRoleRelationsByRoleType;
+                this.setUnitRoleRelationsByRoleTypeByExclusiveLeafClass[exclusiveLeafClass] = setUnitRoleRelationsByRoleType;
             }
 
             List<UnitRelation> relations;
@@ -163,7 +163,7 @@ namespace Allors.Adapters.Database.Npgsql
 
             if (relations.Count > BatchSize)
             {
-                this.session.SessionCommands.SetUnitRoleCommand.Execute(relations, exclusiveRootClass, roleType);
+                this.session.SessionCommands.SetUnitRoleCommand.Execute(relations, exclusiveLeafClass, roleType);
                 relations.Clear();
             }
         }

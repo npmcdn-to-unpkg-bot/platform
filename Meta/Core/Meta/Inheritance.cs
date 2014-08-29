@@ -33,12 +33,12 @@ namespace Allors.Meta
 
         private Interface supertype;
 
-        public Inheritance(Part part, Guid inheritanceId)
+        public Inheritance(Subdomain subdomain, Guid inheritanceId)
         {
-            this.Whole = part.Whole;
+            this.Domain = subdomain.Domain;
             this.Id = inheritanceId;
 
-            part.OnInheritanceCreated(this);
+            subdomain.OnInheritanceCreated(this);
         }
 
         public Composite Subtype
@@ -51,7 +51,7 @@ namespace Allors.Meta
             set
             {
                 this.subtype = value;
-                this.Whole.Stale();
+                this.Domain.Stale();
             }
         }
 
@@ -65,7 +65,7 @@ namespace Allors.Meta
             set
             {
                 this.supertype = value;
-                this.Whole.Stale();
+                this.Domain.Stale();
             }
         }
 
@@ -112,7 +112,7 @@ namespace Allors.Meta
                     validationLog.AddError(message, this, ValidationKind.Cyclic, "Inheritance.Subtype");
                 }
 
-                if (this.Whole.Inheritances.Count(inheritance => this.Subtype.Equals(inheritance.Subtype) && this.Supertype.Equals(inheritance.Supertype)) != 1)
+                if (this.Domain.Inheritances.Count(inheritance => this.Subtype.Equals(inheritance.Subtype) && this.Supertype.Equals(inheritance.Supertype)) != 1)
                 {
                     var message = "name of " + this.ValidationName + " is already in use";
                     validationLog.AddError(message, this, ValidationKind.Unique, "Inheritance.Supertype");
@@ -147,7 +147,7 @@ namespace Allors.Meta
                 return true;
             }
 
-            return this.Supertype != null && this.Whole.Inheritances
+            return this.Supertype != null && this.Domain.Inheritances
                 .Where(inheritance => this.Supertype.Equals(inheritance.Subtype))
                 .Any(superInheritance => superInheritance.HasCycle(startSubType));
         }

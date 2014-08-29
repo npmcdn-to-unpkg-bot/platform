@@ -56,7 +56,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
                 var associationType = roleType.AssociationType;
 
                 string sql;
-                if ((roleType.IsMany && associationType.IsMany) || !roleType.RelationType.ExistExclusiveRootClasses)
+                if ((roleType.IsMany && associationType.IsMany) || !roleType.RelationType.ExistExclusiveLeafClasses)
                 {
                     sql = Sql.Schema.AllorsPrefix + "C_" + roleType.SingularFullName;
                 }
@@ -64,12 +64,12 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
                 {
                     if (roleType.IsOne)
                     {
-                        sql = Sql.Schema.AllorsPrefix + "C_" + associationType.ObjectType.ExclusiveRootClass.Name + "_" + roleType.SingularPropertyName;
+                        sql = Sql.Schema.AllorsPrefix + "C_" + associationType.ObjectType.ExclusiveLeafClass.Name + "_" + roleType.SingularPropertyName;
                     }
                     else
                     {
                         var compositeType = (Composite)roleType.ObjectType;
-                        sql = Sql.Schema.AllorsPrefix + "C_" + compositeType.ExclusiveRootClass.Name + "_" + associationType.Name;
+                        sql = Sql.Schema.AllorsPrefix + "C_" + compositeType.ExclusiveLeafClass.Name + "_" + associationType.Name;
                     }
                 }
 

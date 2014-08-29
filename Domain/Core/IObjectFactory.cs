@@ -44,7 +44,7 @@ namespace Allors
         /// Gets the domain.
         /// </summary>
         /// <value>The domain.</value>
-        Whole Domain { get; }
+        Domain Domain { get; }
 
         /// <summary>
         /// Create a new IObject instance.

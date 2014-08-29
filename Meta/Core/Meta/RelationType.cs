@@ -34,15 +34,15 @@ namespace Allors.Meta
 
         private bool isIndexed;
 
-        public RelationType(Part part, Guid relationTypeId, Guid associationTypeId, Guid roleTypeId)
+        public RelationType(Subdomain subdomain, Guid relationTypeId, Guid associationTypeId, Guid roleTypeId)
         {
-            this.Whole = part.Whole;
+            this.Domain = subdomain.Domain;
 
             this.Id = relationTypeId;
             this.AssociationType = new AssociationType(this, associationTypeId);
             this.RoleType = new RoleType(this, roleTypeId);
 
-            part.OnRelationTypeCreated(this);
+            subdomain.OnRelationTypeCreated(this);
         }
 
         public bool IsDerived
@@ -55,7 +55,7 @@ namespace Allors.Meta
             set 
             {
                 this.isDerived = value;
-                this.Whole.Stale();
+                this.Domain.Stale();
             }
         }
 
@@ -69,7 +69,7 @@ namespace Allors.Meta
             set
             {
                 this.isIndexed = value;
-                this.Whole.Stale();
+                this.Domain.Stale();
             }
         }
 
@@ -83,7 +83,7 @@ namespace Allors.Meta
         /// <value>
         ///  <c>true</c> if [exist exclusive root classes]; otherwise, <c>false</c>.
         /// </value>
-        public bool ExistExclusiveRootClasses
+        public bool ExistExclusiveLeafClasses
         {
             get
             {
@@ -91,7 +91,7 @@ namespace Allors.Meta
                     this.RoleType != null && this.RoleType.ObjectType != null)
                 {
                     var roleCompositeType = this.RoleType.ObjectType as Composite;
-                    return this.AssociationType.ObjectType.RootClasses.Count == 1 && roleCompositeType != null && roleCompositeType.RootClasses.Count == 1;
+                    return this.AssociationType.ObjectType.LeafClasses.Count == 1 && roleCompositeType != null && roleCompositeType.LeafClasses.Count == 1;
                 }
 
                 return false;

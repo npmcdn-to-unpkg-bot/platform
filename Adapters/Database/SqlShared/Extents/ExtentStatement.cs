@@ -71,7 +71,7 @@ namespace Allors.Adapters.Database.Sql
             get { return this.extent.ObjectType; }
         }
 
-        public void AddJoins(ObjectType rootClass, string alias)
+        public void AddJoins(ObjectType leafClass, string alias)
         {
             foreach (RoleType role in this.referenceRoles)
             {
@@ -80,7 +80,7 @@ namespace Allors.Adapters.Database.Sql
 
                 if (role.ObjectType is Composite)
                 {
-                    if ((association.IsMany && role.IsMany) || !relationType.ExistExclusiveRootClasses)
+                    if ((association.IsMany && role.IsMany) || !relationType.ExistExclusiveLeafClasses)
                     {
                         this.Append(" LEFT OUTER JOIN " + this.Schema.Table(role) + " " + role.SingularPropertyName + "_R");
                         this.Append(" ON " + alias + "." + this.Schema.ObjectId + "=" + role.SingularPropertyName + "_R." + this.Schema.AssociationId);
@@ -90,7 +90,7 @@ namespace Allors.Adapters.Database.Sql
                         if (role.IsMany)
                         {
                             var compositeType = (Composite)role.ObjectType;
-                            this.Append(" LEFT OUTER JOIN " + this.Schema.Table(compositeType.ExclusiveRootClass) + " " + role.SingularPropertyName + "_R");
+                            this.Append(" LEFT OUTER JOIN " + this.Schema.Table(compositeType.ExclusiveLeafClass) + " " + role.SingularPropertyName + "_R");
                             this.Append(" ON " + alias + "." + this.Schema.ObjectId + "=" + role.SingularPropertyName + "_R." + this.Schema.Column(association));
                         }
                     }
@@ -103,7 +103,7 @@ namespace Allors.Adapters.Database.Sql
 
                 if (role.ObjectType is Composite && role.IsOne)
                 {
-                    if (!relationType.ExistExclusiveRootClasses)
+                    if (!relationType.ExistExclusiveLeafClasses)
                     {
                         this.Append(" LEFT OUTER JOIN " + this.Schema.Objects + " " + this.GetJoinName(role));
                         this.Append(" ON " + this.GetJoinName(role) + "." + this.Schema.ObjectId + "=" + role.SingularPropertyName + "_R." + this.Schema.RoleId + " ");
@@ -121,7 +121,7 @@ namespace Allors.Adapters.Database.Sql
                 var relationType = association.RelationType;
                 var role = relationType.RoleType;
 
-                if ((association.IsMany && role.IsMany) || !relationType.ExistExclusiveRootClasses)
+                if ((association.IsMany && role.IsMany) || !relationType.ExistExclusiveLeafClasses)
                 {
                     this.Append(" LEFT OUTER JOIN " + Schema.Table(association) + " " + association.Name + "_A");
                     this.Append(" ON " + alias + "." + this.Schema.ObjectId + "=" + association.Name + "_A." + this.Schema.RoleId);
@@ -130,7 +130,7 @@ namespace Allors.Adapters.Database.Sql
                 {
                     if (!role.IsMany)
                     {
-                        this.Append(" LEFT OUTER JOIN " + Schema.Table(association.ObjectType.ExclusiveRootClass) + " " + association.Name + "_A");
+                        this.Append(" LEFT OUTER JOIN " + Schema.Table(association.ObjectType.ExclusiveLeafClass) + " " + association.Name + "_A");
                         this.Append(" ON " + alias + "." + this.Schema.ObjectId + "=" + association.Name + "_A." + Schema.Column(role));
                     }
                 }
@@ -143,7 +143,7 @@ namespace Allors.Adapters.Database.Sql
 
                 if (association.ObjectType is Composite && association.IsOne)
                 {
-                    if (!relationType.ExistExclusiveRootClasses)
+                    if (!relationType.ExistExclusiveLeafClasses)
                     {
                         this.Append(" LEFT OUTER JOIN " + this.Schema.Objects + " " + this.GetJoinName(association));
                         this.Append(" ON " + this.GetJoinName(association) + "." + this.Schema.ObjectId + "=" + association.Name + "_A." + this.Schema.AssociationId + " ");
@@ -167,9 +167,9 @@ namespace Allors.Adapters.Database.Sql
 
         public abstract string AddParameter(object obj);
 
-        public bool AddWhere(ObjectType rootClass, string alias)
+        public bool AddWhere(ObjectType leafClass, string alias)
         {
-            var useWhere = !(this.Extent.ObjectType.RootClasses.Count == 1) || this.Extent.ObjectType.ExclusiveRootClass.ExclusiveRootClass == null;
+            var useWhere = !(this.Extent.ObjectType.LeafClasses.Count == 1) || this.Extent.ObjectType.ExclusiveLeafClass.ExclusiveLeafClass == null;
             
             if (useWhere)
             {

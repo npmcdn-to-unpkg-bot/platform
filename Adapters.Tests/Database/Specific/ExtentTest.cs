@@ -16503,7 +16503,7 @@ namespace Allors.Adapters.Special
         }
 
         [Test]
-        public void RoleContainsOne2ManySharedRootClassAndContained()
+        public void RoleContainsOne2ManySharedLeafClassAndContained()
         {
             foreach (var init in this.Inits)
             {
@@ -16590,7 +16590,7 @@ namespace Allors.Adapters.Special
 
         private static Unit GetAllorsString(ObjectType objectType)
         {
-            return (Unit)objectType.Whole.Find(UnitIds.StringId);
+            return (Unit)objectType.Domain.Find(UnitIds.StringId);
         }
 
         private void AssertC1(Extent extent, bool assert0, bool assert1, bool assert2, bool assert3)

@@ -26,12 +26,12 @@ namespace Allors.Adapters.Database.Sql
 
     /// <summary>
     /// Holds the <see cref="ISchemaValidationError"/>s that occured during the validation
-    /// of the <see cref="Whole"/> against the database schema.
+    /// of the <see cref="Domain"/> against the database schema.
     /// </summary>
     public class SchemaValidationErrors
     {
         /// <summary>
-        /// The errors that occured during validation of the <see cref="Whole"/> against the Sql schema.
+        /// The errors that occured during validation of the <see cref="Domain"/> against the Sql schema.
         /// </summary>
         private readonly List<ISchemaValidationError> errors;
 

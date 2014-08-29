@@ -360,7 +360,7 @@ namespace Allors.Adapters.Database.Sql
                 var roleType = relationType.RoleType;
 
                 if (roleType.ObjectType is Composite && 
-                    ((associationType.IsMany && roleType.IsMany) || !relationType.ExistExclusiveRootClasses))
+                    ((associationType.IsMany && roleType.IsMany) || !relationType.ExistExclusiveLeafClasses))
                 {
                     var column = new SchemaColumn(this, "R", this.ObjectDbType, false, true, relationType.IsIndexed ? SchemaIndexType.Combined : SchemaIndexType.None, relationType);
                     this.ColumnsByRelationType.Add(relationType, column);
@@ -372,7 +372,7 @@ namespace Allors.Adapters.Database.Sql
                         var column = new SchemaColumn(this, roleType.SingularPropertyName, this.GetDbType(roleType), false, false, relationType.IsIndexed ? SchemaIndexType.Single : SchemaIndexType.None, relationType, roleType.Size, roleType.Precision, roleType.Scale);
                         this.ColumnsByRelationType.Add(relationType, column);
                     }
-                    else if (relationType.ExistExclusiveRootClasses)
+                    else if (relationType.ExistExclusiveLeafClasses)
                     {
                         if (roleType.IsOne)
                         {
@@ -423,7 +423,7 @@ namespace Allors.Adapters.Database.Sql
                     {
                         var relationType = associationType.RelationType;
                         var roleType = relationType.RoleType;
-                        if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveRootClasses && roleType.IsMany)
+                        if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveLeafClasses && roleType.IsMany)
                         {
                             schemaTable.AddColumn(this.Column(relationType));
                         }
@@ -439,7 +439,7 @@ namespace Allors.Adapters.Database.Sql
                         }
                         else
                         {
-                            if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveRootClasses && !roleType.IsMany)
+                            if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveLeafClasses && !roleType.IsMany)
                             {
                                 schemaTable.AddColumn(this.Column(relationType));
                             }
@@ -453,7 +453,7 @@ namespace Allors.Adapters.Database.Sql
                 var associationType = relationType.AssociationType;
                 var roleType = relationType.RoleType;
 
-                if (roleType.ObjectType is Composite && ((associationType.IsMany && roleType.IsMany) || !relationType.ExistExclusiveRootClasses))
+                if (roleType.ObjectType is Composite && ((associationType.IsMany && roleType.IsMany) || !relationType.ExistExclusiveLeafClasses))
                 {
                     var schemaTable = new SchemaTable(this, relationType.Name, SchemaTableKind.Relation, relationType);
                     this.TablesByName.Add(schemaTable.Name, schemaTable);
