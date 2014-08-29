@@ -263,6 +263,7 @@ namespace Allors.Meta
                 }
                 finally
                 {
+                    // Ignore stale requests during a derivation
                     this.isStale = false;
                     this.isDeriving = false;
                 }

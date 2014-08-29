@@ -384,7 +384,7 @@ namespace Allors.Adapters.Special
             Assert.AreEqual(null, error.RelationType);
             Assert.AreEqual(fromC1ToC2.RoleType, error.Role);
             Assert.AreEqual("c2", error.TableName);
-            Assert.AreEqual("c1c2", error.ColumnName);
+            Assert.AreEqual("c2c1", error.ColumnName);
         }
 
         [Test]
