@@ -159,8 +159,6 @@ namespace Allors.Meta
         {
             if (this.isStale && !this.isDeriving)
             {
-                this.isStale = false;
-
                 try
                 {
                     this.isDeriving = true;
@@ -265,6 +263,7 @@ namespace Allors.Meta
                 }
                 finally
                 {
+                    this.isStale = false;
                     this.isDeriving = false;
                 }
             }
