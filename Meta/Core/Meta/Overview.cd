@@ -6,11 +6,11 @@
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AABAAAAAAAHCBAAAgBgAUCgAIAAIBAAABIQBAAGABAA=</HashCode>
+      <HashCode>AABAAAAAAAHCBAQAgAgAUCgAAAAIBAAABIQBAAGABAA=</HashCode>
       <FileName>Core\Meta\Domain.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
-      <Property Name="Parts" />
+      <Property Name="Subdomains" />
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="Allors.Meta.Subdomain">

@@ -29,11 +29,6 @@ namespace Allors.Meta
     /// </summary>
     public sealed partial class Domain
     {
-        /// <summary>
-        /// The default plural form.
-        /// </summary>
-        private const string DefaultPluralForm = "s";
-
         private readonly Dictionary<Guid, MetaObject> metaObjectById;
 
         private IList<Composite> derivedComposites;
@@ -333,63 +328,63 @@ namespace Allors.Meta
             {
                 var objectType = new Unit(core, UnitIds.StringId);
                 objectType.SingularName = UnitTags.AllorsString.ToString();
-                objectType.PluralName = objectType.SingularName + DefaultPluralForm;
+                objectType.PluralName = objectType.SingularName + "s";
                 objectType.UnitTag = (int)UnitTags.AllorsString;
             }
 
             {
                 var objectType = new Unit(core, UnitIds.IntegerId);
                 objectType.SingularName = UnitTags.AllorsInteger.ToString();
-                objectType.PluralName = objectType.SingularName + DefaultPluralForm;
+                objectType.PluralName = objectType.SingularName + "s";
                 objectType.UnitTag = (int)UnitTags.AllorsInteger;
             }
 
             {
                 var objectType = new Unit(core, UnitIds.LongId);
                 objectType.SingularName = UnitTags.AllorsLong.ToString();
-                objectType.PluralName = objectType.SingularName + DefaultPluralForm;
+                objectType.PluralName = objectType.SingularName + "s";
                 objectType.UnitTag = (int)UnitTags.AllorsLong;
             }
 
             {
                 var objectType = new Unit(core, UnitIds.DecimalId);
                 objectType.SingularName = UnitTags.AllorsDecimal.ToString();
-                objectType.PluralName = objectType.SingularName + DefaultPluralForm;
+                objectType.PluralName = objectType.SingularName + "s";
                 objectType.UnitTag = (int)UnitTags.AllorsDecimal;
             }
 
             {
                 var objectType = new Unit(core, UnitIds.DoubleId);
                 objectType.SingularName = UnitTags.AllorsDouble.ToString();
-                objectType.PluralName = objectType.SingularName + DefaultPluralForm;
+                objectType.PluralName = objectType.SingularName + "s";
                 objectType.UnitTag = (int)UnitTags.AllorsDouble;
             }
 
             {
                 var objectType = new Unit(core, UnitIds.BooleanId);
                 objectType.SingularName = UnitTags.AllorsBoolean.ToString();
-                objectType.PluralName = objectType.SingularName + DefaultPluralForm;
+                objectType.PluralName = objectType.SingularName + "s";
                 objectType.UnitTag = (int)UnitTags.AllorsBoolean;
             }
 
             {
                 var objectType = new Unit(core, UnitIds.DatetimeId);
                 objectType.SingularName = UnitTags.AllorsDateTime.ToString();
-                objectType.PluralName = objectType.SingularName + DefaultPluralForm;
+                objectType.PluralName = objectType.SingularName + "s";
                 objectType.UnitTag = (int)UnitTags.AllorsDateTime;
             }
 
             {
                 var objectType = new Unit(core, UnitIds.Unique);
                 objectType.SingularName = UnitTags.AllorsUnique.ToString();
-                objectType.PluralName = objectType.SingularName + DefaultPluralForm;
+                objectType.PluralName = objectType.SingularName + "s";
                 objectType.UnitTag = (int)UnitTags.AllorsUnique;
             }
 
             {
                 var objectType = new Unit(core, UnitIds.BinaryId);
                 objectType.SingularName = UnitTags.AllorsBinary.ToString();
-                objectType.PluralName = objectType.SingularName + DefaultPluralForm;
+                objectType.PluralName = objectType.SingularName + "s";
                 objectType.UnitTag = (int)UnitTags.AllorsBinary;
             }
         }
