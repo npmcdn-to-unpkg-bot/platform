@@ -22,6 +22,7 @@ namespace Allors.Adapters.Special.Assertions
 {
     using Allors.Adapters.Database.Memory.IntegerId;
     using Allors;
+    using Allors.Meta;
 
     using global::Domain;
 
@@ -35,7 +36,7 @@ namespace Allors.Adapters.Special.Assertions
         [SetUp]
         protected void Init()
         {
-            var configuration = new Configuration { ObjectFactory = new ObjectFactory(M.D, typeof(IObject).Assembly, "Domain") };
+            var configuration = new Configuration { ObjectFactory = new ObjectFactory(Repository.Environment, typeof(IObject).Assembly, "Domain") };
             var database = new Database(configuration);
             this.session = database.CreateSession();
         }

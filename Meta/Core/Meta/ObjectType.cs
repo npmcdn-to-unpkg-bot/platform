@@ -29,9 +29,9 @@ namespace Allors.Meta
 
         private string pluralName;
 
-        protected ObjectType(Subdomain subdomain, Guid id)
+        protected ObjectType(Domain domain, Guid id)
         {
-            this.Domain = subdomain.Domain;
+            this.Environment = domain.Environment;
             this.Id = id;
         }
 
@@ -45,7 +45,7 @@ namespace Allors.Meta
             set
             {
                 this.singularName = value;
-                this.Domain.Stale();
+                this.Environment.Stale();
             }
         }
 
@@ -59,7 +59,7 @@ namespace Allors.Meta
             set
             {
                 this.pluralName = value;
-                this.Domain.Stale();
+                this.Environment.Stale();
             }
         }
 

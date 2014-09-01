@@ -26,6 +26,8 @@ namespace Allors.Adapters
 
     using Allors.Meta;
 
+    using Environment = Allors.Meta.Environment;
+
     public abstract class Population : IPopulation
     {
         private readonly IObjectFactory objectFactory;
@@ -56,11 +58,11 @@ namespace Allors.Adapters
 
         public abstract bool IsWorkspace { get; }
 
-        public Domain Domain 
+        public Environment Environment 
         {
             get
             {
-                return this.objectFactory.Domain;
+                return this.objectFactory.Environment;
             }
         }
 

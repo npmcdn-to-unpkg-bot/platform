@@ -41,7 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Adapters\domain.g.cs" />
+    <Compile Include="Adapters\Meta\Repository.v.cs" />
+    <Compile Include="Adapters\Meta\Repository.cs" />
     <Compile Include="Core\Generation\Generate.cs" />
     <Compile Include="Core\Generation\GenerateLog.cs" />
     <Compile Include="Core\Generation\Log.cs" />
@@ -51,13 +52,14 @@
     <Compile Include="Core\Generation\StringTemplate.cs" />
     <Compile Include="Core\Meta\AssociationType.cs" />
     <Compile Include="Core\Meta\Interface.cs" />
-    <Compile Include="Core\Meta\Subdomain.cs" />
     <Compile Include="Core\Meta\Domain.cs" />
+    <Compile Include="Core\Meta\Environment.cs" />
     <Compile Include="Core\Meta\Inheritance.cs" />
     <Compile Include="Core\Meta\MetaObject.cs" />
     <Compile Include="Core\Meta\MethodType.cs" />
     <Compile Include="Core\Meta\Composite.cs" />
     <Compile Include="Core\Meta\Class.cs" />
+    <Compile Include="Core\Meta\Repository.cs" />
     <Compile Include="Core\Meta\Unit.cs" />
     <Compile Include="Core\Meta\ObjectType.cs" />
     <Compile Include="Core\Meta\OperandType.cs" />

@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="Whole.cs" company="Allors bvba">
+// <copyright file="Part.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -25,39 +25,44 @@ namespace Allors.Meta
     using System.Collections.Generic;
 
     /// <summary>
-    /// A Domain is a container for <see cref="ObjectType"/>s, <see cref="RelationType"/>s.
+    /// A Part is a Domain that can be used together with other parts to form a whole.
     /// </summary>
-    public sealed partial class Domain
+    public sealed partial class Domain : MetaObject, IComparable
     {
-        private readonly Dictionary<Guid, MetaObject> metaObjectById;
+        private string name;
 
-        private IList<Composite> derivedComposites;
-
-        private bool isStale;
-
-        private bool isDeriving;
-
-        public Domain()
+        public Domain(Environment environment, Guid id)
         {
-            this.isStale = true;
-            this.isDeriving = false;
+            this.Environment = environment;
 
-            this.Subdomains = new List<Subdomain>();
-            this.UnitTypes = new List<Unit>();
+            this.Id = id;
+
+            this.DirectSuperdomains = new List<Domain>();
+            this.Units = new List<Unit>();
             this.Interfaces = new List<Interface>();
             this.Classes = new List<Class>();
             this.Inheritances = new List<Inheritance>();
             this.RelationTypes = new List<RelationType>();
             this.MethodTypes = new List<MethodType>();
-
-            this.metaObjectById = new Dictionary<Guid, MetaObject>();
-
-            this.AddUnits();
         }
 
-        public IList<Subdomain> Subdomains { get; private set; }
-        
-        public IList<Unit> UnitTypes { get; private set; }
+        public string Name
+        {
+            get
+            {
+                return this.name;
+            }
+
+            set
+            {
+                this.name = value;
+                this.Environment.Stale();
+            }
+        }
+
+        public IList<Domain> DirectSuperdomains { get; private set; }
+
+        public IList<Unit> Units { get; private set; }
 
         public IList<Interface> Interfaces { get; private set; }
 
@@ -68,324 +73,135 @@ namespace Allors.Meta
         public IList<RelationType> RelationTypes { get; private set; }
 
         public IList<MethodType> MethodTypes { get; private set; }
-
-        public IList<Composite> Composites
+      
+        /// <summary>
+        /// Gets the validation name.
+        /// </summary>
+        protected override string ValidationName
         {
             get
             {
-                this.Derive();
-                return this.derivedComposites;
+                if (!string.IsNullOrEmpty(this.Name))
+                {
+                    return "domain " + this.Name;
+                }
+
+                return "unknown domain";
             }
         }
 
-        /// <summary>
-        /// Gets a value indicating whether this instance is valid.
-        /// </summary>
-        /// <value><c>true</c> if this instance is valid; otherwise, <c>false</c>.</value>
-        public bool IsValid
+        public void AddDirectSuperdomain(Domain superdomain)
         {
-            get { return this.Validate().Errors.Length == 0; }
+            this.DirectSuperdomains.Add(superdomain);
+            this.Environment.Stale();
         }
 
         /// <summary>
-        /// Find a meta object by meta object id.
+        /// Compares the current instance with another object of the same type.
         /// </summary>
-        /// <param name="metaObjectId">
-        /// The meta object id.
-        /// </param>
+        /// <param name="obj">An object to compare with this instance.</param>
         /// <returns>
-        /// The <see cref="MetaObject"/>.
+        /// A 32-bit signed integer that indicates the relative order of the objects being compared. The return value has these meanings: Value Meaning Less than zero This instance is less than <paramref name="obj"/>. Zero This instance is equal to <paramref name="obj"/>. Greater than zero This instance is greater than <paramref name="obj"/>.
         /// </returns>
-        public MetaObject Find(Guid metaObjectId)
+        /// <exception cref="T:System.ArgumentException">
+        /// <paramref name="obj"/> is not the same type as this instance. </exception>
+        public int CompareTo(object obj)
         {
-            MetaObject metaObject;
-            this.metaObjectById.TryGetValue(metaObjectId, out metaObject);
+            var that = obj as ObjectType;
+            if (that != null)
+            {
+                return string.CompareOrdinal(this.Name, that.Name);
+            }
 
-            return metaObject;
+            return -1;
+        }
+
+        /// <summary>
+        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        /// </returns>
+        public override string ToString()
+        {
+            if (!string.IsNullOrEmpty(this.Name))
+            {
+                return this.Name;
+            }
+
+            return this.IdAsString;
         }
         
-        /// <summary>
-        /// Validates this instance.
-        /// </summary>
-        /// <returns>The Validate.</returns>
-        public ValidationLog Validate()
-        {
-            var log = new ValidationLog();
-
-            foreach (var part in this.Subdomains)
-            {
-                part.Validate(log);
-            }
-
-            foreach (var unitType in this.UnitTypes)
-            {
-                unitType.Validate(log);
-            }
-
-            foreach (var @interface in this.Interfaces)
-            {
-                @interface.Validate(log);
-            }
-
-            foreach (var @class in this.Classes)
-            {
-                @class.Validate(log);
-            }
-
-            foreach (var methodType in this.MethodTypes)
-            {
-                methodType.Validate(log);
-            }
-
-            foreach (var relationType in this.RelationTypes)
-            {
-                relationType.Validate(log);
-            }
-
-            foreach (var inheritance in this.Inheritances)
-            {
-                inheritance.Validate(log);
-            }
-
-            return log;
-        }
-
-        internal void Derive()
-        {
-            if (this.isStale && !this.isDeriving)
-            {
-                try
-                {
-                    this.isDeriving = true;
-
-                    // Unit & Composite ObjectTypes
-                    var compositeTypes = new List<Composite>(this.Interfaces);
-                    compositeTypes.AddRange(this.Classes);
-                    this.derivedComposites = compositeTypes;
-
-                    var sharedCompositeTypes = new HashSet<Composite>();
-                    var sharedInterfaces = new HashSet<Interface>();
-                    var sharedClasses = new HashSet<Class>();
-
-                    var sharedRoleTypes = new HashSet<RoleType>();
-                    var sharedAssociationTypes = new HashSet<AssociationType>();
-
-                    // DirectSupertypes
-                    foreach (var type in this.derivedComposites)
-                    {
-                        type.DeriveDirectSupertypes(sharedInterfaces);
-                    }
-
-                    // DirectSubtypes
-                    foreach (var type in this.Interfaces)
-                    {
-                        type.DeriveDirectSubtypes(sharedCompositeTypes);
-                    }
-
-                    // Supertypes
-                    foreach (var type in this.derivedComposites)
-                    {
-                        type.DeriveSupertypes(sharedInterfaces);
-                    }
-
-                    // Subtypes
-                    foreach (var type in this.Interfaces)
-                    {
-                        type.DeriveSubtypes(sharedCompositeTypes);
-                    }
-
-                    // Subclasses
-                    foreach (var type in this.Interfaces)
-                    {
-                        type.DeriveSubclasses(sharedClasses);
-                    }
-
-                    // LeafClasses
-                    foreach (var type in this.Interfaces)
-                    {
-                        type.DeriveLeafClasses();
-                    }
-
-                    // Exclusive Root Class
-                    foreach (var type in this.Interfaces)
-                    {
-                        type.DeriveExclusiveLeafClass();
-                    }
-
-                    // RoleTypes
-                    foreach (var type in this.derivedComposites)
-                    {
-                        type.DeriveRoleTypes(sharedRoleTypes);
-                    }
-
-                    // AssociationTypes
-                    foreach (var type in this.derivedComposites)
-                    {
-                        type.DeriveAssociationTypes(sharedAssociationTypes);
-                    }
-
-                    // Association & RoleType
-                    foreach (var relationType in this.RelationTypes)
-                    {
-                        relationType.AssociationType.DeriveMultiplicity();
-                        relationType.RoleType.DeriveMultiplicityScaleAndSize();
-                    }
-
-                    // RoleType Property Names
-                    foreach (var relationType in this.RelationTypes)
-                    {
-                        relationType.RoleType.DeriveSingularPropertyName();
-                        relationType.RoleType.DerivePluralPropertyName();
-                    }
-
-                    foreach (var type in this.Composites)
-                    {
-                        type.DeriveRoleTypeIdsCache();
-                    }
-
-                    foreach (var type in this.Composites)
-                    {
-                        type.DeriveAssociationIdsCache();
-                    }
-
-                    var sharedMethodTypeList = new HashSet<MethodType>();
-
-                    // MethodTypes
-                    foreach (var type in this.derivedComposites)
-                    {
-                        type.DeriveMethodTypes(sharedMethodTypeList);
-                    }
-                }
-                finally
-                {
-                    // Ignore stale requests during a derivation
-                    this.isStale = false;
-                    this.isDeriving = false;
-                }
-            }
-        }
-
         internal void OnUnitCreated(Unit unit)
         {
-            this.UnitTypes.Add(unit);
-            this.metaObjectById.Add(unit.Id, unit);
-
-            this.Stale();
+            this.Units.Add(unit);
+            this.Environment.OnUnitCreated(unit);
         }
 
         internal void OnInterfaceCreated(Interface @interface)
         {
             this.Interfaces.Add(@interface);
-            this.metaObjectById.Add(@interface.Id, @interface);
-
-            this.Stale();
+            this.Environment.OnInterfaceCreated(@interface);
         }
-        
+
         internal void OnClassCreated(Class @class)
         {
             this.Classes.Add(@class);
-            this.metaObjectById.Add(@class.Id, @class);
-            
-            this.Stale();
+            this.Environment.OnClassCreated(@class);
         }
 
         internal void OnInheritanceCreated(Inheritance inheritance)
         {
             this.Inheritances.Add(inheritance);
-            this.metaObjectById.Add(inheritance.Id, inheritance);
-
-            this.Stale();
+            this.Environment.OnInheritanceCreated(inheritance);
         }
 
         internal void OnRelationTypeCreated(RelationType relationType)
         {
             this.RelationTypes.Add(relationType);
-            this.metaObjectById.Add(relationType.Id, relationType);
-
-            this.Stale();
+            this.Environment.OnRelationTypeCreated(relationType);
         }
 
         internal void OnMethodTypeCreated(MethodType methodType)
         {
             this.MethodTypes.Add(methodType);
-            this.metaObjectById.Add(methodType.Id, methodType);
-
-            this.Stale();
-        }
-
-        internal void Stale()
-        {
-            this.isStale = true;
+            this.Environment.OnMethodTypeCreated(methodType);
         }
 
         /// <summary>
-        /// Adds the default population.
+        /// Validates the domain.
         /// </summary>
-        private void AddUnits()
+        /// <param name="validationLog">The validation.</param>
+        protected internal override void Validate(ValidationLog validationLog)
         {
-            var coreId = new Guid("CA802192-8186-4C2A-8315-A8DEFAA74A12");
-            var core = new Subdomain(this, coreId);
+            base.Validate(validationLog);
+
+            if (string.IsNullOrEmpty(this.Name))
             {
-                var objectType = new Unit(core, UnitIds.StringId);
-                objectType.SingularName = UnitTags.AllorsString.ToString();
-                objectType.PluralName = objectType.SingularName + "s";
-                objectType.UnitTag = (int)UnitTags.AllorsString;
+                validationLog.AddError("domain has no name", this, ValidationKind.Required, "Domain.Name");
+            }
+            else
+            {
+                if (!char.IsLetter(this.Name[0]))
+                {
+                    var message = this.ValidationName + " should start with an alfabetical character";
+                    validationLog.AddError(message, this, ValidationKind.Format, "Domain.Name");
+                }
+
+                for (var i = 1; i < this.Name.Length; i++)
+                {
+                    if (!char.IsLetter(this.Name[i]) && !char.IsDigit(this.Name[i]))
+                    {
+                        var message = this.ValidationName + " should only contain alfanumerical characters)";
+                        validationLog.AddError(message, this, ValidationKind.Format, "Domain.Name");
+                        break;
+                    }
+                }
             }
 
+            if (this.Id == Guid.Empty)
             {
-                var objectType = new Unit(core, UnitIds.IntegerId);
-                objectType.SingularName = UnitTags.AllorsInteger.ToString();
-                objectType.PluralName = objectType.SingularName + "s";
-                objectType.UnitTag = (int)UnitTags.AllorsInteger;
-            }
-
-            {
-                var objectType = new Unit(core, UnitIds.LongId);
-                objectType.SingularName = UnitTags.AllorsLong.ToString();
-                objectType.PluralName = objectType.SingularName + "s";
-                objectType.UnitTag = (int)UnitTags.AllorsLong;
-            }
-
-            {
-                var objectType = new Unit(core, UnitIds.DecimalId);
-                objectType.SingularName = UnitTags.AllorsDecimal.ToString();
-                objectType.PluralName = objectType.SingularName + "s";
-                objectType.UnitTag = (int)UnitTags.AllorsDecimal;
-            }
-
-            {
-                var objectType = new Unit(core, UnitIds.DoubleId);
-                objectType.SingularName = UnitTags.AllorsDouble.ToString();
-                objectType.PluralName = objectType.SingularName + "s";
-                objectType.UnitTag = (int)UnitTags.AllorsDouble;
-            }
-
-            {
-                var objectType = new Unit(core, UnitIds.BooleanId);
-                objectType.SingularName = UnitTags.AllorsBoolean.ToString();
-                objectType.PluralName = objectType.SingularName + "s";
-                objectType.UnitTag = (int)UnitTags.AllorsBoolean;
-            }
-
-            {
-                var objectType = new Unit(core, UnitIds.DatetimeId);
-                objectType.SingularName = UnitTags.AllorsDateTime.ToString();
-                objectType.PluralName = objectType.SingularName + "s";
-                objectType.UnitTag = (int)UnitTags.AllorsDateTime;
-            }
-
-            {
-                var objectType = new Unit(core, UnitIds.Unique);
-                objectType.SingularName = UnitTags.AllorsUnique.ToString();
-                objectType.PluralName = objectType.SingularName + "s";
-                objectType.UnitTag = (int)UnitTags.AllorsUnique;
-            }
-
-            {
-                var objectType = new Unit(core, UnitIds.BinaryId);
-                objectType.SingularName = UnitTags.AllorsBinary.ToString();
-                objectType.PluralName = objectType.SingularName + "s";
-                objectType.UnitTag = (int)UnitTags.AllorsBinary;
+                validationLog.AddError(this.ValidationName + " has no id", this, ValidationKind.Required, "MetaObject.Id");
             }
         }
     }

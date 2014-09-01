@@ -22,6 +22,8 @@ namespace Allors.Adapters.Special.SqlClient.IntegerId.ReadCommitted
     using Allors.Adapters.Database.SqlClient.IntegerId;
     using Allors.Meta;
 
+    using Environment = Allors.Meta.Environment;
+
     public class Profile : SqlClient.Profile
     {
         private static readonly string ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["sqlclient"].ConnectionString;
@@ -50,11 +52,11 @@ namespace Allors.Adapters.Special.SqlClient.IntegerId.ReadCommitted
             }
         }
         
-        public IDatabase CreateDatabase(Domain domain, bool init)
+        public IDatabase CreateDatabase(Environment environment, bool init)
         {
             var configuration = new Adapters.Database.SqlClient.IntegerId.Configuration
                                     {
-                                        ObjectFactory = this.CreateObjectFactory(domain),
+                                        ObjectFactory = this.CreateObjectFactory(environment),
                                         CacheFactory = this.CacheFactory,
                                         Id = Guid.NewGuid(),
                                         ConnectionString = ConnectionString

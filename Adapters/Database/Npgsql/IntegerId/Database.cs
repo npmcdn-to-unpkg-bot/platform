@@ -42,7 +42,7 @@ namespace Allors.Adapters.Database.Npgsql.IntegerId
         {
             get
             {
-                if (this.ObjectFactory.Domain != null)
+                if (this.ObjectFactory.Environment != null)
                 {
                     if (this.schema == null)
                     {

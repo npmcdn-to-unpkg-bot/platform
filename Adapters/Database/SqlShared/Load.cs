@@ -214,7 +214,7 @@ namespace Allors.Adapters.Database.Sql
 
         protected virtual void LoadObjectsPostProcess(ManagementSession session)
         {
-            foreach (var type in this.database.Domain.Composites)
+            foreach (var type in this.database.Environment.Composites)
             {
                 if (type is Class)
                 {
@@ -290,7 +290,7 @@ namespace Allors.Adapters.Database.Sql
                                 }
 
                                 var relationTypeId = new Guid(relationTypeIdString);
-                                var relationType = (RelationType)this.database.Domain.Find(relationTypeId);
+                                var relationType = (RelationType)this.database.Environment.Find(relationTypeId);
 
                                 if (this.reader.Name.Equals(Serialization.RelationTypeUnit))
                                 {

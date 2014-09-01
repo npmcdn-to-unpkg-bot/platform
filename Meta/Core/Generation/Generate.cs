@@ -22,6 +22,7 @@ namespace Allors.Development.Repository.Tasks
     using System.IO;
 
     using Allors.Development.Repository.Generation;
+    using Allors.Meta;
 
     using Microsoft.Build.Framework;
 
@@ -43,7 +44,7 @@ namespace Allors.Development.Repository.Tasks
             var templateFileInfo = new FileInfo(template);
             var stringTemplate = new StringTemplate(templateFileInfo);
             var outputDirectoryInfo = new DirectoryInfo(output);
-            stringTemplate.Generate(Domain.M.D, outputDirectoryInfo, log);
+            stringTemplate.Generate(Repository.Environment, outputDirectoryInfo, log);
 
             return log;
         }

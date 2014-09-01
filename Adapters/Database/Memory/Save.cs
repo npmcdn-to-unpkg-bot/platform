@@ -124,7 +124,7 @@ namespace Allors.Adapters.Database.Memory
                 strategies.Sort(strategySorter);
             }
 
-            foreach (var relationType in this.session.Population.Domain.RelationTypes)
+            foreach (var relationType in this.session.Population.Environment.RelationTypes)
             {
                 var roleType = relationType.RoleType;
 

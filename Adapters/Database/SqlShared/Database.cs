@@ -162,7 +162,7 @@ namespace Allors.Adapters.Database.Sql
 
         public void Recover()
         {
-            if (!ObjectFactory.Domain.IsValid)
+            if (!ObjectFactory.Environment.IsValid)
             {
                 throw new ArgumentException("Domain is invalid");
             }
@@ -232,7 +232,7 @@ namespace Allors.Adapters.Database.Sql
 
         public void Init(bool allowTruncate)
         {
-            if (!ObjectFactory.Domain.IsValid)
+            if (!ObjectFactory.Environment.IsValid)
             {
                 throw new ArgumentException("Domain is invalid");
             }

@@ -25,12 +25,13 @@ namespace Allors.Special
 
     using Allors.Adapters.Special;
     using Allors;
+    using Allors.Meta;
 
     using Domain;
 
     public abstract class Profile : IProfile
     {
-        private readonly ObjectFactory objectFactory = new ObjectFactory(M.D, typeof(IObject).Assembly, "Domain");
+        private readonly ObjectFactory objectFactory = new ObjectFactory(Repository.Environment, typeof(IObject).Assembly, "Domain");
 
         private int eventCounter;
         private IPopulation population;

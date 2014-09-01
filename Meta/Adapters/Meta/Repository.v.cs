@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="Class.cs" company="Allors bvba">
+// <copyright file="Repository.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -16,44 +16,24 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the ObjectType type.</summary>
 //-------------------------------------------------------------------------------------------------
 
 namespace Allors.Meta
 {
     using System;
-    using System.Collections.Generic;
 
-    public partial class Class : Composite
+    public static partial class Repository
     {
-        private readonly List<Class> selfList; 
-
-        public Class(Domain domain, Guid id)
-            : base(domain, id)
+        static Repository()
         {
-            this.Environment.OnClassCreated(this);
-            this.selfList = new List<Class> { this };
-        }
-        
-        public override IList<Class> LeafClasses
-        {
-            get
+            Core();
+            Adapters();
+            
+            var validationLog = Environment.Validate();
+            if (validationLog.ContainsErrors)
             {
-                return this.selfList;
+                throw new Exception(validationLog.ToString());
             }
-        }
-
-        public override Class ExclusiveLeafClass
-        {
-            get
-            {
-                return this;
-            }
-        }
-
-        public override bool ContainsLeafClass(ObjectType objectType)
-        {
-            return this.Equals(objectType);
         }
     }
 }

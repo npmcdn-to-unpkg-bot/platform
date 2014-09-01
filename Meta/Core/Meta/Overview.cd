@@ -1,26 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="Allors.Meta.Domain">
+  <Class Name="Allors.Meta.Environment">
     <Position X="2" Y="4.5" Width="1.75" />
-    <Compartments>
-      <Compartment Name="Methods" Collapsed="true" />
-    </Compartments>
     <TypeIdentifier>
-      <HashCode>AABAAAAAAAHCBAQAgAgAUCgAAAAIBAAABIQBAAGABAA=</HashCode>
-      <FileName>Core\Meta\Domain.cs</FileName>
+      <HashCode>AABAAAAAAAHCBAAAgAgAUCgAAAAIBAAABIQBQAGABAA=</HashCode>
+      <FileName>Core\Meta\Environment.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
-      <Property Name="Subdomains" />
+      <Property Name="Domains" />
     </ShowAsCollectionAssociation>
   </Class>
-  <Class Name="Allors.Meta.Subdomain">
+  <Class Name="Allors.Meta.Domain">
     <Position X="5.25" Y="4.5" Width="2" />
-    <Compartments>
-      <Compartment Name="Methods" Collapsed="true" />
-    </Compartments>
     <TypeIdentifier>
-      <HashCode>AABAAAAAAAGCBAQEAACAUCwAAAAEAAAAEIAAAAGAAAA=</HashCode>
-      <FileName>Core\Meta\Subdomain.cs</FileName>
+      <HashCode>AABABAAAAAGCBAQEAACAUCwAAAAEAAAAEIAAAAGAAAA=</HashCode>
+      <FileName>Core\Meta\Domain.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
@@ -38,7 +32,7 @@
       </Class>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAACAAAAAACAAAAAAACAAACAAgAAAAAAAAAAAEABAgA=</HashCode>
+      <HashCode>AAACAAACAACAAAAAAACAAACAAAAAAAAAAAAAAEABAgA=</HashCode>
       <FileName>Core\Meta\MetaObject.cs</FileName>
     </TypeIdentifier>
   </Class>

@@ -34,15 +34,15 @@ namespace Allors.Meta
 
         private bool isIndexed;
 
-        public RelationType(Subdomain subdomain, Guid relationTypeId, Guid associationTypeId, Guid roleTypeId)
+        public RelationType(Domain domain, Guid relationTypeId, Guid associationTypeId, Guid roleTypeId)
         {
-            this.Domain = subdomain.Domain;
+            this.Environment = domain.Environment;
 
             this.Id = relationTypeId;
             this.AssociationType = new AssociationType(this, associationTypeId);
             this.RoleType = new RoleType(this, roleTypeId);
 
-            subdomain.OnRelationTypeCreated(this);
+            domain.OnRelationTypeCreated(this);
         }
 
         public bool IsDerived
@@ -55,7 +55,7 @@ namespace Allors.Meta
             set 
             {
                 this.isDerived = value;
-                this.Domain.Stale();
+                this.Environment.Stale();
             }
         }
 
@@ -69,7 +69,7 @@ namespace Allors.Meta
             set
             {
                 this.isIndexed = value;
-                this.Domain.Stale();
+                this.Environment.Stale();
             }
         }
 

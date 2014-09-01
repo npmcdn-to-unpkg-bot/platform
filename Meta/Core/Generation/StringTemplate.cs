@@ -34,6 +34,8 @@ namespace Allors.Development.Repository.Generation
 
     using Storage;
 
+    using Environment = Allors.Meta.Environment;
+
     public class StringTemplate
     {
         private const string TemplateId = "TemplateId";
@@ -97,11 +99,11 @@ namespace Allors.Development.Repository.Generation
             return this.Name;
         }
 
-        internal void Generate(Domain domain, DirectoryInfo outputDirectory, Log log)
+        internal void Generate(Environment environment, DirectoryInfo outputDirectory, Log log)
         {
-            if (!domain.IsValid)
+            if (!environment.IsValid)
             {
-                log.Error(this, "Domain " + domain + " has validation errors.");
+                log.Error(this, "Domain " + environment + " has validation errors.");
                 return;
             }
 
@@ -112,7 +114,7 @@ namespace Allors.Development.Repository.Generation
                 group.ErrorManager = new ErrorManager(new LogAdapter(log));
                 
                 var configurationTemplate = group.GetInstanceOf(TemplateConfiguration);
-                configurationTemplate.Add(DomainKey, domain);
+                configurationTemplate.Add(DomainKey, environment);
 
                 var configurationXml = new XmlDocument();
                 configurationXml.LoadXml(configurationTemplate.Render());
@@ -129,25 +131,25 @@ namespace Allors.Development.Repository.Generation
                         System.Console.WriteLine(0);
                     }
 
-                    template.Add(DomainKey, domain);
+                    template.Add(DomainKey, environment);
                     if (generation.HasAttribute(InputKey))
                     {
                         var input = new Guid(generation.GetAttribute(InputKey));
-                        var objectType = domain.Find(input) as ObjectType;
+                        var objectType = environment.Find(input) as ObjectType;
                         if (objectType != null)
                         {
                             template.Add(ObjectTypeKey, objectType);
                         }
                         else
                         {
-                            var relationType = domain.Find(input) as RelationType;
+                            var relationType = environment.Find(input) as RelationType;
                             if (relationType != null)
                             {
                                 template.Add(RelationTypeKey, relationType);
                             }
                             else
                             {
-                                var inheritance = domain.Find(input) as Inheritance;
+                                var inheritance = environment.Find(input) as Inheritance;
                                 if (inheritance != null)
                                 {
                                     template.Add(InheritanceKey, inheritance);

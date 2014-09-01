@@ -27,6 +27,8 @@ namespace Allors
 
     using Allors.Meta;
 
+    using Environment = Allors.Meta.Environment;
+
     /// <summary>
     /// A base implementation for a static <see cref="IObjectFactory"/>.
     /// </summary>
@@ -35,7 +37,7 @@ namespace Allors
         /// <summary>
         /// The domain.
         /// </summary>
-        private readonly Domain domain;
+        private readonly Environment environment;
 
         /// <summary>
         ///  The assembly.
@@ -70,7 +72,7 @@ namespace Allors
         /// <summary>
         /// Initializes a new instance of the <see cref="ObjectFactory"/> class.
         /// </summary>
-        /// <param name="domain">
+        /// <param name="environment">
         /// The domain.
         /// </param>
         /// <param name="assembly">
@@ -79,9 +81,9 @@ namespace Allors
         /// <param name="namespace">
         /// The namespace
         /// </param>
-        public ObjectFactory(Domain domain, Assembly assembly, string @namespace)
+        public ObjectFactory(Environment environment, Assembly assembly, string @namespace)
         {
-            this.domain = domain;
+            this.environment = environment;
             this.assembly = assembly;
             this.ns = @namespace;
 
@@ -97,7 +99,7 @@ namespace Allors
 
             var typeByName = types.ToDictionary(type => type.Name, type => type);
 
-            foreach (var objectType in domain.Composites)
+            foreach (var objectType in environment.Composites)
             {
                 var type = typeByName[objectType.Name];
 
@@ -144,11 +146,11 @@ namespace Allors
         /// <summary>
         /// Gets the domain.
         /// </summary>
-        public Domain Domain 
+        public Environment Environment 
         {
             get
             {
-                return this.domain;
+                return this.environment;
             }
         }
 

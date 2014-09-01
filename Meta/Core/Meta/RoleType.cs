@@ -55,7 +55,7 @@ namespace Allors.Meta
 
         public RoleType(RelationType relationType, Guid roleTypeId)
         {
-            this.Domain = relationType.Domain;
+            this.Environment = relationType.Environment;
             this.RelationType = relationType;
             this.Id = roleTypeId;
         }
@@ -70,7 +70,7 @@ namespace Allors.Meta
             set
             {
                 this.objectType = value;
-                this.Domain.Stale();
+                this.Environment.Stale();
             }
         }
 
@@ -84,7 +84,7 @@ namespace Allors.Meta
             set
             {
                 this.assignedSingularName = value;
-                this.Domain.Stale();
+                this.Environment.Stale();
             }
         }
 
@@ -98,7 +98,7 @@ namespace Allors.Meta
             set
             {
                 this.assignedPluralName = value;
-                this.Domain.Stale();
+                this.Environment.Stale();
             }
         }
 
@@ -112,7 +112,7 @@ namespace Allors.Meta
             set
             {
                 this.isMany = value;
-                this.Domain.Stale();
+                this.Environment.Stale();
             }
         }
 
@@ -126,7 +126,7 @@ namespace Allors.Meta
             set
             {
                 this.scale = value;
-                this.Domain.Stale();
+                this.Environment.Stale();
             }
         }
 
@@ -140,7 +140,7 @@ namespace Allors.Meta
             set
             {
                 this.precision = value;
-                this.Domain.Stale();
+                this.Environment.Stale();
             }
         }
 
@@ -154,7 +154,7 @@ namespace Allors.Meta
             set
             {
                 this.size = value;
-                this.Domain.Stale();
+                this.Environment.Stale();
             }
         }
 
@@ -201,7 +201,7 @@ namespace Allors.Meta
                     return this.AssignedSingularName;
                 }
 
-                return this.ObjectType.SingularName;
+                return this.ObjectType != null ? this.ObjectType.SingularName : null;
             }
         }
 
@@ -218,7 +218,7 @@ namespace Allors.Meta
                     return this.AssignedPluralName;
                 }
 
-                return this.ObjectType.PluralName;
+                return this.ObjectType != null ? this.ObjectType.PluralName : null;
             }
         }
 

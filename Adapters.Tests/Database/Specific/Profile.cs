@@ -32,6 +32,8 @@ namespace Allors.Adapters.Special
 
     using Domain;
 
+    using Environment = Allors.Meta.Environment;
+
     public abstract class Profile : IProfile
     {
         private readonly ObjectFactory objectFactory;
@@ -43,7 +45,7 @@ namespace Allors.Adapters.Special
         protected Profile()
         {
             this.CacheFactory = new CacheFactory();
-            this.objectFactory = this.CreateObjectFactory(M.D);
+            this.objectFactory = this.CreateObjectFactory(Repository.Environment);
         }
 
         public IObjectFactory ObjectFactory
@@ -79,7 +81,7 @@ namespace Allors.Adapters.Special
                         {
                             this.CacheFactory = new CacheFactory
                                                     {
-                                                        TransientObjectTypes = this.database.ObjectFactory.Domain.Classes.Cast<Composite>().ToArray(),
+                                                        TransientObjectTypes = this.database.ObjectFactory.Environment.Classes.Cast<Composite>().ToArray(),
                                                     };
                             this.Init();
                         });
@@ -158,9 +160,9 @@ namespace Allors.Adapters.Special
             }
         }
 
-        protected ObjectFactory CreateObjectFactory(Domain domain)
+        protected ObjectFactory CreateObjectFactory(Environment environment)
         {
-            return new ObjectFactory(domain, typeof(IObject).Assembly, "Domain");
+            return new ObjectFactory(environment, typeof(IObject).Assembly, "Domain");
         }
 
         #region Events

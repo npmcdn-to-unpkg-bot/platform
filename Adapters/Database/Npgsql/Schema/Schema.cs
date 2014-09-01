@@ -82,7 +82,7 @@ namespace Allors.Adapters.Database.Npgsql
             this.UniqueRelationArrayParam = new SchemaArrayParameter(this, AllorsPrefix + "arr_r", NpgsqlDbType.Uuid);
             this.BinaryRelationArrayParam = new SchemaArrayParameter(this, AllorsPrefix + "arr_r", NpgsqlDbType.Bytea);
 
-            foreach (var relationType in database.ObjectFactory.Domain.RelationTypes)
+            foreach (var relationType in database.ObjectFactory.Environment.RelationTypes)
             {
                 var roleType = relationType.RoleType;
                 var unitType = roleType.ObjectType as Unit;
@@ -562,7 +562,7 @@ $$ language plpgsql;
 
             this.procedureByName.Add(procedure.Name, procedure);
 
-            foreach (var concreteComposite in this.Database.ObjectFactory.Domain.Classes)
+            foreach (var concreteComposite in this.Database.ObjectFactory.Environment.Classes)
             {
                 var sortedUnitRoleTypes = this.Database.GetSortedUnitRolesByObjectType(concreteComposite);
 

@@ -72,7 +72,7 @@ namespace Allors.Adapters.Database.Sql
 
         protected void SaveObjects(ManagementSession session)
         {
-            var concreteCompositeType = new List<Class>(this.database.Domain.Classes);
+            var concreteCompositeType = new List<Class>(this.database.Environment.Classes);
             concreteCompositeType.Sort(MetaObject.IdComparer);
             foreach (var type in concreteCompositeType)
             {
@@ -122,7 +122,7 @@ namespace Allors.Adapters.Database.Sql
         {
             var exclusiveLeafClassesByObjectType = new Dictionary<ObjectType, HashSet<Class>>();
 
-            var relations = new List<RelationType>(this.database.Domain.RelationTypes);
+            var relations = new List<RelationType>(this.database.Environment.RelationTypes);
             relations.Sort(MetaObject.IdComparer);
 
             foreach (var relation in relations)

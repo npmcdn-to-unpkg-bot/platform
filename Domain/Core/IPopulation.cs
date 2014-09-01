@@ -25,6 +25,8 @@ namespace Allors
 
     using Allors.Meta;
 
+    using Environment = Allors.Meta.Environment;
+
     /// <summary>
     /// A population is the container for objects and relations.
     /// </summary>
@@ -69,7 +71,7 @@ namespace Allors
         /// <summary>
         /// Gets the meta domain of this population.
         /// </summary>
-        Domain Domain { get; }
+        Environment Environment { get; }
 
         /// <summary>
         /// Population properties are simple key/value pairs.

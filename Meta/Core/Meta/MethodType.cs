@@ -28,12 +28,12 @@ namespace Allors.Meta
 
         private ObjectType objectType;
         
-        public MethodType(Subdomain subdomain, Guid methodTypeId)
+        public MethodType(Domain domain, Guid methodTypeId)
         {
-            this.Domain = subdomain.Domain;
+            this.Environment = domain.Environment;
             this.Id = methodTypeId;
 
-            subdomain.OnMethodTypeCreated(this);
+            domain.OnMethodTypeCreated(this);
         }
 
         public string Name
@@ -46,7 +46,7 @@ namespace Allors.Meta
             set
             {
                 this.name = value;
-                this.Domain.Stale();
+                this.Environment.Stale();
             }
         }
 
@@ -60,7 +60,7 @@ namespace Allors.Meta
             set
             {
                 this.objectType = value;
-                this.Domain.Stale();
+                this.Environment.Stale();
             }
         }
 

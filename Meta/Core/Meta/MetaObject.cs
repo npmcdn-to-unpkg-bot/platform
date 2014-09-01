@@ -49,7 +49,7 @@ namespace Allors.Meta
             protected set
             {
                 this.id = value;
-                this.Domain.Stale();
+                this.Environment.Stale();
             }
         }
 
@@ -71,7 +71,7 @@ namespace Allors.Meta
             get { return this.Id.ToString("D").ToLower(); }
         }
 
-        public Domain Domain { get; protected set; }
+        public Environment Environment { get; protected set; }
 
         /// <summary>
         /// Gets the validation name.
