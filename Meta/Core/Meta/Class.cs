@@ -31,8 +31,8 @@ namespace Allors.Meta
         public Class(Domain domain, Guid id)
             : base(domain, id)
         {
-            this.Environment.OnClassCreated(this);
             this.selfList = new List<Class> { this };
+            domain.OnClassCreated(this);
         }
         
         public override IList<Class> LeafClasses

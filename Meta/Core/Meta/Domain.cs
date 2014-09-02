@@ -38,12 +38,12 @@ namespace Allors.Meta
             this.Id = id;
 
             this.DirectSuperdomains = new List<Domain>();
-            this.Units = new List<Unit>();
-            this.Interfaces = new List<Interface>();
-            this.Classes = new List<Class>();
-            this.Inheritances = new List<Inheritance>();
-            this.RelationTypes = new List<RelationType>();
-            this.MethodTypes = new List<MethodType>();
+            this.DefinedUnits = new List<Unit>();
+            this.DefinedInterfaces = new List<Interface>();
+            this.DefinedClasses = new List<Class>();
+            this.DefinedInheritances = new List<Inheritance>();
+            this.DefinedRelationTypes = new List<RelationType>();
+            this.DefinedMethodTypes = new List<MethodType>();
         }
 
         public string Name
@@ -62,17 +62,17 @@ namespace Allors.Meta
 
         public IList<Domain> DirectSuperdomains { get; private set; }
 
-        public IList<Unit> Units { get; private set; }
+        public IList<Unit> DefinedUnits { get; private set; }
 
-        public IList<Interface> Interfaces { get; private set; }
+        public IList<Interface> DefinedInterfaces { get; private set; }
 
-        public IList<Class> Classes { get; private set; }
+        public IList<Class> DefinedClasses { get; private set; }
 
-        public IList<Inheritance> Inheritances { get; private set; }
+        public IList<Inheritance> DefinedInheritances { get; private set; }
 
-        public IList<RelationType> RelationTypes { get; private set; }
+        public IList<RelationType> DefinedRelationTypes { get; private set; }
 
-        public IList<MethodType> MethodTypes { get; private set; }
+        public IList<MethodType> DefinedMethodTypes { get; private set; }
       
         /// <summary>
         /// Gets the validation name.
@@ -134,37 +134,37 @@ namespace Allors.Meta
         
         internal void OnUnitCreated(Unit unit)
         {
-            this.Units.Add(unit);
+            this.DefinedUnits.Add(unit);
             this.Environment.OnUnitCreated(unit);
         }
 
         internal void OnInterfaceCreated(Interface @interface)
         {
-            this.Interfaces.Add(@interface);
+            this.DefinedInterfaces.Add(@interface);
             this.Environment.OnInterfaceCreated(@interface);
         }
 
         internal void OnClassCreated(Class @class)
         {
-            this.Classes.Add(@class);
+            this.DefinedClasses.Add(@class);
             this.Environment.OnClassCreated(@class);
         }
 
         internal void OnInheritanceCreated(Inheritance inheritance)
         {
-            this.Inheritances.Add(inheritance);
+            this.DefinedInheritances.Add(inheritance);
             this.Environment.OnInheritanceCreated(inheritance);
         }
 
         internal void OnRelationTypeCreated(RelationType relationType)
         {
-            this.RelationTypes.Add(relationType);
+            this.DefinedRelationTypes.Add(relationType);
             this.Environment.OnRelationTypeCreated(relationType);
         }
 
         internal void OnMethodTypeCreated(MethodType methodType)
         {
-            this.MethodTypes.Add(methodType);
+            this.DefinedMethodTypes.Add(methodType);
             this.Environment.OnMethodTypeCreated(methodType);
         }
 
