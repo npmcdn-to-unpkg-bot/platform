@@ -26,14 +26,18 @@ namespace Allors.Meta
     {
         static Repository()
         {
-            Core();
-            Adapters();
+            var env = new Environment();
+
+            Core(env);
+            Adapters(env);
             
-            var validationLog = Environment.Validate();
+            var validationLog = env.Validate();
             if (validationLog.ContainsErrors)
             {
                 throw new Exception(validationLog.ToString());
             }
+
+            Environment = env;
         }
     }
 }

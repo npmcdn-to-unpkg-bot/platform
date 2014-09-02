@@ -24,23 +24,23 @@ namespace Allors.Meta
 
     public static partial class Repository
     {
-        private static void Adapters()
+        public static Domain Adapters(Environment env)
         {
             // Imports
-            var core = (Domain)Environment.Find(new Guid("CA802192-8186-4C2A-8315-A8DEFAA74A12"));
+            var core = (Domain)env.Find(new Guid("CA802192-8186-4C2A-8315-A8DEFAA74A12"));
 
-            var allorsString = (Unit)Environment.Find(new Guid("ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9"));
-            var allorsInteger = (Unit)Environment.Find(new Guid("ccd6f134-26de-4103-bff9-a37ec3e997a3"));
-            var allorsLong = (Unit)Environment.Find(new Guid("e8989069-024b-4389-ac77-a98c4dfff25a"));
-            var allorsDecimal = (Unit)Environment.Find(new Guid("da866d8e-2c40-41a8-ae5b-5f6dae0b89c8"));
-            var allorsDouble = (Unit)Environment.Find(new Guid("ffcabd07-f35f-4083-bef6-f6c47970ca5d"));
-            var allorsBoolean = (Unit)Environment.Find(new Guid("b5ee6cea-4e2b-498e-a5dd-24671d896477"));
-            var allorsDateTime = (Unit)Environment.Find(new Guid("c4c09343-61d3-418c-ade2-fe6fd588f128"));
-            var allorsUnique = (Unit)Environment.Find(new Guid("6dc0a1a8-88a4-4614-adb4-92dd3d017c0e"));
-            var allorsBinary = (Unit)Environment.Find(new Guid("c28e515b-cae8-4d6b-95bf-062aec8042fc"));
+            var allorsString = (Unit)env.Find(new Guid("ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9"));
+            var allorsInteger = (Unit)env.Find(new Guid("ccd6f134-26de-4103-bff9-a37ec3e997a3"));
+            var allorsLong = (Unit)env.Find(new Guid("e8989069-024b-4389-ac77-a98c4dfff25a"));
+            var allorsDecimal = (Unit)env.Find(new Guid("da866d8e-2c40-41a8-ae5b-5f6dae0b89c8"));
+            var allorsDouble = (Unit)env.Find(new Guid("ffcabd07-f35f-4083-bef6-f6c47970ca5d"));
+            var allorsBoolean = (Unit)env.Find(new Guid("b5ee6cea-4e2b-498e-a5dd-24671d896477"));
+            var allorsDateTime = (Unit)env.Find(new Guid("c4c09343-61d3-418c-ade2-fe6fd588f128"));
+            var allorsUnique = (Unit)env.Find(new Guid("6dc0a1a8-88a4-4614-adb4-92dd3d017c0e"));
+            var allorsBinary = (Unit)env.Find(new Guid("c28e515b-cae8-4d6b-95bf-062aec8042fc"));
 
             // Composites
-            var adapters = new Domain(Environment, new Guid("FEEA74C4-D5B6-44DA-BD0E-D4864CC88B88")) { Name = "Adapters" };
+            var adapters = new Domain(env, new Guid("FEEA74C4-D5B6-44DA-BD0E-D4864CC88B88")) { Name = "Adapters" };
             adapters.AddDirectSuperdomain(core);
 
             var c1 = new Class(adapters, new Guid("7041c691-d896-4628-8f50-1c24f5d03414")) { SingularName = "C1", PluralName = "C1s" };
@@ -5634,6 +5634,8 @@ namespace Allors.Meta
                                    ObjectType = igt32Composite, AssignedSingularName = "Self16", AssignedPluralName = "Selfs16" 
                                }
                 };
+
+            return adapters;
         }
     }
 }

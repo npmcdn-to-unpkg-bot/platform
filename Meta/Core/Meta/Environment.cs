@@ -43,7 +43,7 @@ namespace Allors.Meta
             this.isDeriving = false;
 
             this.Domains = new List<Domain>();
-            this.UnitTypes = new List<Unit>();
+            this.Units = new List<Unit>();
             this.Interfaces = new List<Interface>();
             this.Classes = new List<Class>();
             this.Inheritances = new List<Inheritance>();
@@ -55,7 +55,7 @@ namespace Allors.Meta
 
         public IList<Domain> Domains { get; private set; }
         
-        public IList<Unit> UnitTypes { get; private set; }
+        public IList<Unit> Units { get; private set; }
 
         public IList<Interface> Interfaces { get; private set; }
 
@@ -82,7 +82,11 @@ namespace Allors.Meta
         /// <value><c>true</c> if this instance is valid; otherwise, <c>false</c>.</value>
         public bool IsValid
         {
-            get { return this.Validate().Errors.Length == 0; }
+            get
+            {
+                var validation = this.Validate();
+                return validation.Errors.Length == 0;
+            }
         }
 
         /// <summary>
@@ -115,7 +119,7 @@ namespace Allors.Meta
                 part.Validate(log);
             }
 
-            foreach (var unitType in this.UnitTypes)
+            foreach (var unitType in this.Units)
             {
                 unitType.Validate(log);
             }
@@ -265,7 +269,7 @@ namespace Allors.Meta
 
         internal void OnUnitCreated(Unit unit)
         {
-            this.UnitTypes.Add(unit);
+            this.Units.Add(unit);
             this.metaObjectById.Add(unit.Id, unit);
 
             this.Stale();

@@ -26,9 +26,9 @@ namespace Allors.Meta
     {
         public static readonly Environment Environment = new Environment();
 
-        private static void Core()
+        public static Domain Core(Environment env)
         {
-            var core = new Domain(Environment, new Guid("CA802192-8186-4C2A-8315-A8DEFAA74A12"));
+            var core = new Domain(env, new Guid("CA802192-8186-4C2A-8315-A8DEFAA74A12"));
 
             {
                 var objectType = new Unit(core, UnitIds.StringId);
@@ -92,6 +92,8 @@ namespace Allors.Meta
                 objectType.PluralName = objectType.SingularName + "s";
                 objectType.UnitTag = (int)UnitTags.AllorsBinary;
             }
+
+            return core;
         }
     }
 }

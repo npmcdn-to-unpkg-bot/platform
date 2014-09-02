@@ -114,15 +114,18 @@ namespace Allors.Adapters.Special
         {
             if (this.DetectBinarySizedDifferences)
             {
-                this.domain = new Domain(new Environment(), Guid.NewGuid()) { Name = "MyDomain" };
+                var environment = new Environment();
+                var core = Repository.Core(environment);
+                this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain", DirectSuperdomains = { core } };
 
                 var c1 = this.CreateClass("C1");
                 this.CreateClass("C2");
 
+                var allorsBinary = (ObjectType)this.domain.Environment.Find(UnitIds.BinaryId);
                 var c1RelationType = new RelationType(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid())
                                          {
                                              AssociationType = { ObjectType = c1 },
-                                             RoleType = { ObjectType = (ObjectType)this.domain.Environment.Find(UnitIds.BinaryId), Size = 200 }
+                                             RoleType = { ObjectType = allorsBinary, Size = 200 }
                                          };
 
                 this.CreateDatabase(this.domain.Environment, true);
@@ -152,8 +155,9 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateDecimalRelationDifferentPrecision()
         {
-            this.domain = new Domain(new Environment(), Guid.NewGuid()) { Name = "MyDomain" };
-            this.domain.Name = "MyDomain";
+            var environment = new Environment();
+            var core = Repository.Core(environment);
+            this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain", DirectSuperdomains = { core } };
 
             var c1 = this.CreateClass("C1");
             this.CreateClass("C2");
@@ -190,8 +194,10 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateDecimalRelationDifferentScale()
         {
-            this.domain = new Domain(new Environment(), Guid.NewGuid()) { Name = "MyDomain" };
-
+            var environment = new Environment();
+            var core = Repository.Core(environment);
+            this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain", DirectSuperdomains = { core } }; 
+            
             var c1 = this.CreateClass("C1");
             this.CreateClass("C2");
 
@@ -256,7 +262,9 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateNewInterfaceInheritanceWithBooleanRelation()
         {
-            this.domain = new Domain(new Environment(), Guid.NewGuid()) { Name = "MyDomain" };
+            var environment = new Environment();
+            var core = Repository.Core(environment);
+            this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain", DirectSuperdomains = { core } };
 
             var c1 = this.CreateClass("C1");
             var c2 = this.CreateClass("C2");
@@ -423,7 +431,9 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateStringRelationDifferentSize()
         {
-            this.domain = new Domain(new Environment(), Guid.NewGuid()) { Name = "MyDomain" };
+            var environment = new Environment();
+            var core = Repository.Core(environment);
+            this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain", DirectSuperdomains = { core } };
 
             var c1 = this.CreateClass("C1");
             this.CreateClass("C2");
@@ -459,7 +469,9 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateStringToOne2One()
         {
-            this.domain = new Domain(new Environment(), Guid.NewGuid()) { Name = "MyDomain" };
+            var environment = new Environment();
+            var core = Repository.Core(environment);
+            this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain", DirectSuperdomains = { core } };
 
             var c1 = this.CreateClass("C1");
             var c2 = this.CreateClass("C2");
@@ -498,7 +510,9 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateUnitRelationDifferentType()
         {
-            this.domain = new Domain(new Environment(), Guid.NewGuid()) { Name = "MyDomain" };
+            var environment = new Environment();
+            var core = Repository.Core(environment);
+            this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain", DirectSuperdomains = { core } };
 
             var c1 = this.CreateClass("C1");
             this.CreateClass("C2");
