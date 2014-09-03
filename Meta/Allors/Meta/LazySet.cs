@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="Class.cs" company="Allors bvba">
+// <copyright file="LazySet.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -16,52 +16,56 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the ObjectType type.</summary>
+// <summary>Defines the AssociationType type.</summary>
 //-------------------------------------------------------------------------------------------------
 
 namespace Allors.Meta
 {
-    using System;
+    using System.Collections;
     using System.Collections.Generic;
+    using System.Linq;
 
-    public partial class Class : Composite
+    internal sealed class LazySet<T> : IEnumerable<T>
     {
-        private readonly Class[] leafClasses; 
+        private readonly IList<T> array;
+        private HashSet<T> set;
 
-        public Class(Domain domain, Guid id)
-            : base(domain, id)
+        internal LazySet(IEnumerable<T> collection)
         {
-            this.leafClasses = new[] { this };
-            domain.OnClassCreated(this);
+            this.array = collection.ToArray();
         }
-        
-        public override IEnumerable<Class> LeafClasses
+
+        public int Count
         {
             get
             {
-                return this.leafClasses;
+                return this.array.Count;
             }
         }
 
-        public override bool ExistLeafClasses
+        public bool Contains(T item)
         {
-            get
+            if (this.array.Count > 0)
             {
-                return true;
+                if (this.set == null)
+                {
+                    this.set = new HashSet<T>(this.array);
+                }
+
+                return this.set.Contains(item);
             }
+
+            return false;
         }
 
-        public override Class ExclusiveLeafClass
+        public IEnumerator<T> GetEnumerator()
         {
-            get
-            {
-                return this;
-            }
+            return this.array.GetEnumerator();
         }
 
-        public override bool ContainsLeafClass(ObjectType objectType)
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            return this.Equals(objectType);
+            return this.GetEnumerator();
         }
     }
 }

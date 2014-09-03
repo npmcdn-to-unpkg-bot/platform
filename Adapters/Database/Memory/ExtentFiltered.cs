@@ -55,19 +55,17 @@ namespace Allors.Adapters.Database.Memory
 
         internal void CheckForAssociationType(AssociationType association)
         {
-            // TODO: Optimize
-            if (!this.objectType.AssociationTypes.Contains(association))
+            if (!this.objectType.ContainsAssociationType(association))
             {
                 throw new ArgumentException("Extent does not have association " + association);
             }
         }
 
-        internal void CheckForRoleType(RoleType role)
+        internal void CheckForRoleType(RoleType roleType)
         {
-            // TODO: Optimize
-            if (!this.objectType.RoleTypes.Contains(role))
+            if (!this.objectType.ContainsRoleType(roleType))
             {
-                throw new ArgumentException("Extent does not have role " + role.Name);
+                throw new ArgumentException("Extent does not have role " + roleType.Name);
             }
         }
 

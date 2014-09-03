@@ -50,6 +50,7 @@ namespace Allors.Meta
 
             set
             {
+                this.Environment.AssertUnlocked();
                 this.subtype = value;
                 this.Environment.Stale();
             }
@@ -64,6 +65,7 @@ namespace Allors.Meta
 
             set
             {
+                this.Environment.AssertUnlocked();
                 this.supertype = value;
                 this.Environment.Stale();
             }

@@ -45,7 +45,7 @@ namespace Allors.Adapters.Workspace.Memory
             }
 
             var @interface = this.objectType as Interface;
-            return (@interface != null && strategy.ObjectType.Supertypes.Contains(@interface))
+            return (@interface != null && strategy.ObjectType.ContainsSupertype(@interface))
                        ? ThreeValuedLogic.True
                        : ThreeValuedLogic.False;
         }

@@ -30,6 +30,8 @@ namespace Allors.Meta
     /// </summary>
     public sealed partial class AssociationType : PropertyType, IComparable
     {
+        private readonly RelationType relationType;
+
         /// <summary>
         /// Used to create property names.
         /// </summary>
@@ -42,7 +44,7 @@ namespace Allors.Meta
         public AssociationType(RelationType relationType, Guid associationTypeId)
         {
             this.Environment = relationType.Environment;
-            this.RelationType = relationType;
+            this.relationType = relationType;
             this.Id = associationTypeId;
         }
 
@@ -55,6 +57,7 @@ namespace Allors.Meta
 
             set
             {
+                this.Environment.AssertUnlocked();
                 this.isMany = value;
                 this.RelationType.Environment.Stale();
             }
@@ -69,13 +72,20 @@ namespace Allors.Meta
 
             set
             {
+                this.Environment.AssertUnlocked();
                 this.objectType = value;
                 this.RelationType.Environment.Stale();
             }
         }
 
-        public RelationType RelationType { get; private set; }
-        
+        public RelationType RelationType
+        {
+            get
+            {
+                return this.relationType;
+            }
+        }
+
         /// <summary>
         /// Gets the name.
         /// </summary>

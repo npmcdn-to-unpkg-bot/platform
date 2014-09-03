@@ -48,6 +48,7 @@ namespace Allors.Meta
 
             protected set
             {
+                this.Environment.AssertUnlocked();
                 this.id = value;
                 this.Environment.Stale();
             }

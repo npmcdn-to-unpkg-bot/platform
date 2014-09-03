@@ -41,6 +41,7 @@ namespace Allors.Meta
 
             set
             {
+                this.Environment.AssertUnlocked();
                 this.unitTag = value;
                 this.Environment.Stale();
             }

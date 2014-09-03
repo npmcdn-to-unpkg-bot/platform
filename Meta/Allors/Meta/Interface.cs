@@ -27,15 +27,13 @@ namespace Allors.Meta
 
     public partial class Interface : Composite
     {
-        private IList<Composite> derivedDirectSubtypes;
+        private LazySet<Composite> derivedDirectSubtypes;
 
-        private IList<Composite> derivedSubtypes;
+        private LazySet<Composite> derivedSubtypes;
 
-        private IList<Class> derivedSubclasses;
+        private LazySet<Class> derivedSubclasses;
 
-        private IList<Class> derivedLeafClasses;
-
-        private HashSet<ObjectType> leafClassesCache;
+        private LazySet<Class> derivedLeafClasses;
 
         private Class derivedExclusiveLeafClass;
 
@@ -45,12 +43,13 @@ namespace Allors.Meta
             domain.OnInterfaceCreated(this);
         }
 
-        #region Exists
+        #region Exist
         public bool ExistSubclasses
         {
             get
             {
-                return this.Subclasses.Count > 0;
+                this.Environment.Derive();
+                return this.derivedSubclasses.Count > 0;
             }
         }
 
@@ -58,16 +57,27 @@ namespace Allors.Meta
         {
             get
             {
-                return this.Subtypes.Count > 0;
+                this.Environment.Derive();
+                return this.derivedSubtypes.Count > 0;
             }
         }
-        #endregion
 
+        public override bool ExistLeafClasses
+        {
+            get
+            {
+                this.Environment.Derive();
+                return this.derivedLeafClasses.Count > 0;
+            }
+        }
+
+        #endregion
+        
         /// <summary>
         /// Gets the subclasses.
         /// </summary>
         /// <value>The subclasses.</value>
-        public IList<Class> Subclasses
+        public IEnumerable<Class> Subclasses
         {
             get
             {
@@ -80,7 +90,7 @@ namespace Allors.Meta
         /// Gets the sub types.
         /// </summary>
         /// <value>The super types.</value>
-        public IList<Composite> Subtypes
+        public IEnumerable<Composite> Subtypes
         {
             get
             {
@@ -89,7 +99,7 @@ namespace Allors.Meta
             }
         }
 
-        public override IList<Class> LeafClasses
+        public override IEnumerable<Class> LeafClasses
         {
             get
             {
@@ -107,6 +117,8 @@ namespace Allors.Meta
             }
         }
 
+        #region Contains
+
         /// <summary>
         /// Contains this concrete class.
         /// </summary>
@@ -118,9 +130,12 @@ namespace Allors.Meta
         /// </returns>
         public override bool ContainsLeafClass(ObjectType objectType)
         {
-            return this.leafClassesCache.Contains(objectType);
+            this.Environment.Derive();
+            return this.derivedLeafClasses.Contains(objectType);
         }
-      
+
+        #endregion
+
         /// <summary>
         /// Derive direct sub type derivations.
         /// </summary>
@@ -133,7 +148,7 @@ namespace Allors.Meta
                 directSubtypes.Add(inheritance.Subtype);
             }
 
-            this.derivedDirectSubtypes = new List<Composite>(directSubtypes);
+            this.derivedDirectSubtypes = new LazySet<Composite>(directSubtypes);
         }
 
         /// <summary>
@@ -151,7 +166,7 @@ namespace Allors.Meta
                 }
             }
 
-            this.derivedSubclasses = new List<Class>(subClasses);
+            this.derivedSubclasses = new LazySet<Class>(subClasses);
         }
 
         /// <summary>
@@ -163,7 +178,7 @@ namespace Allors.Meta
             subTypes.Clear();
             this.DeriveSubtypesRecursively(this, subTypes);
 
-            this.derivedSubtypes = new List<Composite>(subTypes);
+            this.derivedSubtypes = new LazySet<Composite>(subTypes);
         }
 
         /// <summary>
@@ -171,11 +186,7 @@ namespace Allors.Meta
         /// </summary>
         internal void DeriveExclusiveLeafClass()
         {
-            this.derivedExclusiveLeafClass = null;
-            if (this.derivedLeafClasses.Count == 1)
-            {
-                this.derivedExclusiveLeafClass = this.derivedLeafClasses[0];
-            }
+            this.derivedExclusiveLeafClass = this.derivedLeafClasses.Count == 1 ? this.derivedLeafClasses.First() : null;
         }
 
         /// <summary>
@@ -183,8 +194,7 @@ namespace Allors.Meta
         /// </summary>
         internal void DeriveLeafClasses()
         {
-            this.derivedLeafClasses = this.derivedSubclasses;
-            this.leafClassesCache = new HashSet<ObjectType>(this.derivedLeafClasses);
+            this.derivedLeafClasses = new LazySet<Class>(this.derivedSubclasses);
         }
 
         /// <summary>

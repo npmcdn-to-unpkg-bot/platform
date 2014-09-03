@@ -129,7 +129,7 @@ namespace Allors.Adapters.Database.Sql
             {
                 var associationType = relation.AssociationType;
 
-                if (associationType.ObjectType.LeafClasses.Count > 0)
+                if (associationType.ObjectType.ExistLeafClasses)
                 {
                     var roleType = relation.RoleType;
                 

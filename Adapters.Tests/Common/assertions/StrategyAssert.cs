@@ -22,9 +22,8 @@ namespace Allors.Adapters.Special.Assertions
 {
     using System;
 
-    using Allors.Meta;
-
     using Allors;
+    using Allors.Meta;
 
     using NUnit.Framework;
 
@@ -70,7 +69,7 @@ namespace Allors.Adapters.Special.Assertions
         {
             foreach (AssociationType associationType in associationTypes)
             {
-                if (!allorsObject.Strategy.ObjectType.AssociationTypes.Contains(associationType))
+                if (!allorsObject.Strategy.ObjectType.ContainsAssociationType(associationType))
                 {
                     Assert.Fail();
                 }
@@ -138,7 +137,7 @@ namespace Allors.Adapters.Special.Assertions
         {
             foreach (RoleType roleType in roleTypes)
             {
-                if (!allorsObject.Strategy.ObjectType.RoleTypes.Contains(roleType))
+                if (!allorsObject.Strategy.ObjectType.ContainsRoleType(roleType))
                 {
                     Assert.Fail();
                 }

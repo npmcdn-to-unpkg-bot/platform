@@ -50,6 +50,7 @@
     <Compile Include="Allors\Generation\Storage\AllorsFileInfo.cs" />
     <Compile Include="Allors\Generation\Storage\Location.cs" />
     <Compile Include="Allors\Generation\StringTemplate.cs" />
+    <Compile Include="Allors\Meta\LazySet.cs" />
     <Compile Include="Allors\Meta\AssociationType.cs" />
     <Compile Include="Allors\Meta\Interface.cs" />
     <Compile Include="Allors\Meta\Domain.cs" />
@@ -80,7 +81,7 @@
   <ItemGroup />
   <ItemGroup>
     <None Include="Core\Generate.proj" />
-    <None Include="Allors\Meta\Overview.cd" />
+    <None Include="Core\Meta\Overview.cd" />
     <None Include="packages.config" />
     <None Include="Settings.StyleCop" />
   </ItemGroup>

@@ -53,7 +53,7 @@ namespace Allors.Adapters.Database.Memory
             }
 
             var @interface = this.objectType as Interface;
-            return (@interface != null && roleObjectType.Supertypes.Contains(@interface))
+            return (@interface != null && roleObjectType.ContainsSupertype(@interface))
                        ? ThreeValuedLogic.True
                        : ThreeValuedLogic.False;
         }

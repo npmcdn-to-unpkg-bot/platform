@@ -28,7 +28,7 @@ namespace Allors.Meta
     /// This is also called the 'passive' side.
     /// RoleTypes can have composite and unit <see cref="ObjectType"/>s.
     /// </summary>
-    public partial class RoleType : PropertyType, IComparable
+    public partial class RoleType
     {
         /// <summary>
         /// The maximum size value.
@@ -86,13 +86,11 @@ namespace Allors.Meta
         /// <summary>
         /// Derive multiplicity, scale and size.
         /// </summary>
-        internal void DeriveMultiplicityScaleAndSize()
+        internal void DeriveScaleAndSize()
         {
             var unitType = this.ObjectType as Unit;
             if (unitType != null)
             {
-                this.IsMany = false;
-
                 switch ((UnitTags)unitType.UnitTag)
                 {
                     case UnitTags.AllorsString:

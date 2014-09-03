@@ -87,6 +87,14 @@ namespace Allors
             this.assembly = assembly;
             this.ns = @namespace;
 
+            var validationLog = environment.Validate();
+            if (validationLog.ContainsErrors)
+            {
+                throw new Exception(validationLog.ToString());
+            }
+
+            environment.Lock();
+            
             this.typeByObjectType = new Dictionary<ObjectType, Type>();
             this.objectTypeByType = new Dictionary<Type, ObjectType>();
             this.objectTypeByObjectTypeId = new Dictionary<Guid, ObjectType>();

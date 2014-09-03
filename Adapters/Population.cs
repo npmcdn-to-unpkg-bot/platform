@@ -230,9 +230,9 @@ namespace Allors.Adapters
             object concreteClassOrClasses;
             if (!this.concreteClassesByObjectType.TryGetValue(objectType, out concreteClassOrClasses))
             {
-                if (objectType.LeafClasses.Count == 1)
+                if (objectType.ExistExclusiveLeafClass)
                 {
-                    concreteClassOrClasses = objectType.LeafClasses[0];
+                    concreteClassOrClasses = objectType.ExclusiveLeafClass;
                     this.concreteClassesByObjectType[objectType] = concreteClassOrClasses;
                 }
                 else

@@ -22,6 +22,8 @@ namespace Allors.Adapters.Database.Sql
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
+
     using Meta;
 
     public class ExtentFiltered : SqlExtent
@@ -86,9 +88,9 @@ namespace Allors.Adapters.Database.Sql
             this.LazyLoadFilter();
             this.filter.Setup(statement);
 
-            if (this.objectType.LeafClasses.Count > 0)
+            if (this.objectType.ExistLeafClasses)
             {
-                if (this.objectType.LeafClasses.Count == 1)
+                if (this.objectType.ExistExclusiveLeafClass)
                 {
                     return this.BuildSqlWithExclusiveLeafClass(statement);
                 }
@@ -101,7 +103,7 @@ namespace Allors.Adapters.Database.Sql
 
         public void CheckAssociation(AssociationType association)
         {
-            if (!this.objectType.AssociationTypes.Contains(association))
+            if (!this.objectType.ContainsAssociationType(association))
             {
                 throw new ArgumentException("Extent does not implement association " + association);
             }
@@ -109,7 +111,7 @@ namespace Allors.Adapters.Database.Sql
 
         public void CheckRole(RoleType role)
         {
-            if (!this.objectType.RoleTypes.Contains(role))
+            if (!this.objectType.ContainsRoleType(role))
             {
                 throw new ArgumentException("Extent does not implement role " + role);
             }
@@ -314,10 +316,11 @@ namespace Allors.Adapters.Database.Sql
         {
             if (statement.IsRoot)
             {
-                for (var i = 0; i < this.objectType.LeafClasses.Count; i++)
+                var leafClasses = this.objectType.LeafClasses.ToArray();
+                for (var i = 0; i < leafClasses.Length; i++)
                 {
                     var alias = statement.CreateAlias();
-                    var leafClass = this.objectType.LeafClasses[i];
+                    var leafClass = leafClasses[i];
 
                     statement.Append("SELECT " + alias + "." + this.Schema.ObjectId);
                     if (statement.Sorter != null)
@@ -335,7 +338,7 @@ namespace Allors.Adapters.Database.Sql
                         this.filter.BuildWhere(statement, alias);
                     }
 
-                    if (i < this.objectType.LeafClasses.Count - 1)
+                    if (i < leafClasses.Length - 1)
                     {
                         statement.Append("\nUNION\n");
                     }
@@ -424,10 +427,11 @@ namespace Allors.Adapters.Database.Sql
                 }
                 else
                 {
-                    for (var i = 0; i < this.objectType.LeafClasses.Count; i++)
+                    var leafClasses = this.objectType.LeafClasses.ToArray();
+                    for (var i = 0; i < leafClasses.Length; i++)
                     {
                         var alias = statement.CreateAlias();
-                        var leafClass = this.objectType.LeafClasses[i];
+                        var leafClass = leafClasses[i];
 
                         if (statement.IsRoot)
                         {
@@ -452,7 +456,7 @@ namespace Allors.Adapters.Database.Sql
                             this.filter.BuildWhere(statement, alias);
                         }
 
-                        if (i < this.objectType.LeafClasses.Count - 1)
+                        if (i < leafClasses.Length - 1)
                         {
                             statement.Append("\nUNION\n");
                         }

@@ -22,6 +22,6 @@ namespace Allors.Meta
 {
     public static partial class Repository
     {
-        public static readonly Environment Environment = new Environment();
+        public static readonly Environment Environment;
     }
 }

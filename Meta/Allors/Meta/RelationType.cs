@@ -30,8 +30,10 @@ namespace Allors.Meta
     /// </summary>
     public partial class RelationType : MetaObject, IComparable
     {
-        private bool isDerived;
+        private readonly AssociationType associationType;
+        private readonly RoleType roleType;
 
+        private bool isDerived;
         private bool isIndexed;
 
         public RelationType(Domain domain, Guid relationTypeId, Guid associationTypeId, Guid roleTypeId)
@@ -39,8 +41,8 @@ namespace Allors.Meta
             this.Environment = domain.Environment;
 
             this.Id = relationTypeId;
-            this.AssociationType = new AssociationType(this, associationTypeId);
-            this.RoleType = new RoleType(this, roleTypeId);
+            this.associationType = new AssociationType(this, associationTypeId);
+            this.roleType = new RoleType(this, roleTypeId);
 
             domain.OnRelationTypeCreated(this);
         }
@@ -54,6 +56,7 @@ namespace Allors.Meta
 
             set 
             {
+                this.Environment.AssertUnlocked();
                 this.isDerived = value;
                 this.Environment.Stale();
             }
@@ -68,14 +71,27 @@ namespace Allors.Meta
 
             set
             {
+                this.Environment.AssertUnlocked();
                 this.isIndexed = value;
                 this.Environment.Stale();
             }
         }
 
-        public RoleType RoleType { get; set; }
+        public AssociationType AssociationType
+        {
+            get
+            {
+                return this.associationType;
+            }
+        }
 
-        public AssociationType AssociationType { get; set; }
+        public RoleType RoleType
+        {
+            get
+            {
+                return this.roleType;
+            }
+        }
 
         /// <summary>
         /// Gets a value indicating whether there exist exclusive root classes.
@@ -91,7 +107,7 @@ namespace Allors.Meta
                     this.RoleType != null && this.RoleType.ObjectType != null)
                 {
                     var roleCompositeType = this.RoleType.ObjectType as Composite;
-                    return this.AssociationType.ObjectType.LeafClasses.Count == 1 && roleCompositeType != null && roleCompositeType.LeafClasses.Count == 1;
+                    return this.AssociationType.ObjectType.ExistExclusiveLeafClass && roleCompositeType != null && roleCompositeType.ExistExclusiveLeafClass;
                 }
 
                 return false;
@@ -188,7 +204,6 @@ namespace Allors.Meta
         {
             var that = obj as RelationType;
             return that != null ? string.CompareOrdinal(this.Name, that.Name) : -1;
-
         }
 
         /// <summary>

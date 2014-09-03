@@ -31,6 +31,8 @@ namespace Allors.Meta
     public partial class RoleType : PropertyType, IComparable
     {
 
+        private readonly RelationType relationType;
+
         private ObjectType objectType;
 
         private string derivedSingularPropertyName;
@@ -46,7 +48,7 @@ namespace Allors.Meta
         public RoleType(RelationType relationType, Guid roleTypeId)
         {
             this.Environment = relationType.Environment;
-            this.RelationType = relationType;
+            this.relationType = relationType;
             this.Id = roleTypeId;
         }
 
@@ -59,6 +61,7 @@ namespace Allors.Meta
 
             set
             {
+                this.Environment.AssertUnlocked();
                 this.objectType = value;
                 this.Environment.Stale();
             }
@@ -73,6 +76,7 @@ namespace Allors.Meta
 
             set
             {
+                this.Environment.AssertUnlocked();
                 this.assignedSingularName = value;
                 this.Environment.Stale();
             }
@@ -87,6 +91,7 @@ namespace Allors.Meta
 
             set
             {
+                this.Environment.AssertUnlocked();
                 this.assignedPluralName = value;
                 this.Environment.Stale();
             }
@@ -101,12 +106,19 @@ namespace Allors.Meta
 
             set
             {
+                this.Environment.AssertUnlocked();
                 this.isMany = value;
                 this.Environment.Stale();
             }
         }
 
-        public RelationType RelationType { get; private set; }
+        public RelationType RelationType
+        {
+            get
+            {
+                return this.relationType;
+            }
+        }
 
         /// <summary>
         /// Gets the display name.
@@ -337,7 +349,7 @@ namespace Allors.Meta
             {
                 this.derivedSingularPropertyName = this.SingularFullName;
 
-                if (this.AssociationType.ObjectType.LeafClasses.Count > 0)
+                if (this.AssociationType.ObjectType.ExistLeafClasses)
                 {
                     this.derivedSingularPropertyName = this.SingularName;
 
@@ -370,7 +382,7 @@ namespace Allors.Meta
             {
                 this.derivedPluralPropertyName = this.PluralFullName;
 
-                if (this.AssociationType.ObjectType.LeafClasses.Count > 0)
+                if (this.AssociationType.ObjectType.ExistLeafClasses)
                 {
                     this.derivedPluralPropertyName = this.PluralName;
 

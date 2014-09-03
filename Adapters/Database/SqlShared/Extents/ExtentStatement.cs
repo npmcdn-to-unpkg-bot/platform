@@ -169,7 +169,7 @@ namespace Allors.Adapters.Database.Sql
 
         public bool AddWhere(ObjectType leafClass, string alias)
         {
-            var useWhere = !(this.Extent.ObjectType.LeafClasses.Count == 1) || this.Extent.ObjectType.ExclusiveLeafClass.ExclusiveLeafClass == null;
+            var useWhere = !this.Extent.ObjectType.ExistExclusiveLeafClass;
             
             if (useWhere)
             {

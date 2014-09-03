@@ -23,15 +23,16 @@ namespace Allors.Meta
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     /// <summary>
     /// A Part is a Domain that can be used together with other parts to form a whole.
     /// </summary>
     public sealed partial class Domain : MetaObject, IComparable
     {
-        private readonly IList<Domain> directSuperdomains;
-
         private string name;
+
+        private IList<Domain> directSuperdomains;
 
         private IList<Unit> definedUnits;
 
@@ -69,6 +70,7 @@ namespace Allors.Meta
 
             set
             {
+                this.Environment.AssertUnlocked();
                 this.name = value;
                 this.Environment.Stale();
             }
@@ -187,7 +189,18 @@ namespace Allors.Meta
 
             return this.IdAsString;
         }
-        
+
+        internal void Lock()
+        {
+            this.directSuperdomains = this.directSuperdomains.ToArray();
+            this.definedUnits = this.definedUnits.ToArray();
+            this.definedInterfaces = this.definedInterfaces.ToArray();
+            this.definedClasses = this.definedClasses.ToArray();
+            this.definedInheritances = this.definedInheritances.ToArray();
+            this.definedRelationTypes = this.definedRelationTypes.ToArray();
+            this.definedMethodTypes = this.definedMethodTypes.ToArray();
+        }
+
         internal void OnUnitCreated(Unit unit)
         {
             this.definedUnits.Add(unit);

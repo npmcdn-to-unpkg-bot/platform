@@ -116,7 +116,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
                 {
                     ObjectId id = this.Database.AllorsObjectIds.Parse(result.ToString());
 
-                    if (associationType.ObjectType.LeafClasses.Count == 1 && associationType.ObjectType.ExclusiveLeafClass.ExclusiveLeafClass != null)
+                    if (associationType.ObjectType.ExistExclusiveLeafClass)
                     {
                         associationObject = this.Session.GetOrCreateAssociationForExistingObject(associationType.ObjectType.ExclusiveLeafClass.ExclusiveLeafClass, id);
                     }

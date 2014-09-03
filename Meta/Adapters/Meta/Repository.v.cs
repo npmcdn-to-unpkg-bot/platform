@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="Repository.cs" company="Allors bvba">
+// <copyright file="Repository.v.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -20,8 +20,6 @@
 
 namespace Allors.Meta
 {
-    using System;
-
     public static partial class Repository
     {
         static Repository()
@@ -30,12 +28,6 @@ namespace Allors.Meta
 
             Core(env);
             Adapters(env);
-            
-            var validationLog = env.Validate();
-            if (validationLog.ContainsErrors)
-            {
-                throw new Exception(validationLog.ToString());
-            }
 
             Environment = env;
         }

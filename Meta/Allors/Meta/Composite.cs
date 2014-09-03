@@ -27,15 +27,12 @@ namespace Allors.Meta
     
     public abstract partial class Composite : ObjectType
     {
-        private IList<Interface> derivedDirectSupertypes;
+        private LazySet<Interface> derivedDirectSupertypes;
+        private LazySet<Interface> derivedSupertypes;
 
-        private IList<Interface> derivedSupertypes;
-
-        private IList<AssociationType> derivedAssociationTypes;
-
-        private IList<RoleType> derivedRoleTypes;
-
-        private IList<MethodType> derivedMethodTypes;
+        private LazySet<AssociationType> derivedAssociationTypes;
+        private LazySet<RoleType> derivedRoleTypes;
+        private LazySet<MethodType> derivedMethodTypes;
         
         protected Composite(Domain domain, Guid id)
             : base(domain, id)
@@ -47,23 +44,19 @@ namespace Allors.Meta
         {
             get
             {
+                this.Environment.Derive();
                 return this.ExclusiveLeafClass != null;
             }
         }
 
-        public bool ExistLeafClasses
-        {
-            get
-            {
-                return this.LeafClasses.Count > 0;
-            }
-        }
+        public abstract bool ExistLeafClasses { get; }
 
         public bool ExistDirectSupertypes
         {
             get
             {
-                return this.DirectSupertypes.Count > 0;
+                this.Environment.Derive();
+                return this.derivedDirectSupertypes.Count > 0;
             }
         }
 
@@ -71,7 +64,8 @@ namespace Allors.Meta
         {
             get
             {
-                return this.Supertypes.Count > 0;
+                this.Environment.Derive();
+                return this.derivedSupertypes.Count > 0;
             }
         }
 
@@ -79,7 +73,8 @@ namespace Allors.Meta
         {
             get
             {
-                return this.AssociationTypes.Count > 0;
+                this.Environment.Derive();
+                return this.derivedAssociationTypes.Count > 0;
             }
         }
 
@@ -87,7 +82,8 @@ namespace Allors.Meta
         {
             get
             {
-                return this.AssociationTypes.Count > 0;
+                this.Environment.Derive();
+                return this.derivedAssociationTypes.Count > 0;
             }
         }
 
@@ -95,7 +91,8 @@ namespace Allors.Meta
         {
             get
             {
-                return this.MethodTypes.Count > 0;
+                this.Environment.Derive();
+                return this.derivedMethodTypes.Count > 0;
             }
         }
         #endregion
@@ -110,13 +107,13 @@ namespace Allors.Meta
         /// Gets the root classes.
         /// </summary>
         /// <value>The root classes.</value>
-        public abstract IList<Class> LeafClasses { get; }
+        public abstract IEnumerable<Class> LeafClasses { get; }
 
         /// <summary>
         /// Gets the direct super types.
         /// </summary>
         /// <value>The super types.</value>
-        public IList<Interface> DirectSupertypes
+        public IEnumerable<Interface> DirectSupertypes
         {
             get
             {
@@ -129,7 +126,7 @@ namespace Allors.Meta
         /// Gets the super types.
         /// </summary>
         /// <value>The super types.</value>
-        public IList<Interface> Supertypes
+        public IEnumerable<Interface> Supertypes
         {
             get
             {
@@ -142,7 +139,7 @@ namespace Allors.Meta
         /// Gets the associations.
         /// </summary>
         /// <value>The associations.</value>
-        public IList<AssociationType> AssociationTypes
+        public IEnumerable<AssociationType> AssociationTypes
         {
             get
             {
@@ -151,7 +148,7 @@ namespace Allors.Meta
             }
         }
 
-        public IList<AssociationType> AssociationTypesWhereObjectType
+        public IEnumerable<AssociationType> AssociationTypesWhereObjectType
         {
             get
             {
@@ -163,7 +160,7 @@ namespace Allors.Meta
         /// Gets the roles.
         /// </summary>
         /// <value>The roles.</value>
-        public IList<RoleType> RoleTypes
+        public IEnumerable<RoleType> RoleTypes
         {
             get
             {
@@ -172,7 +169,7 @@ namespace Allors.Meta
             }
         }
 
-        public IList<RoleType> RoleTypesWhereObjectType
+        public IEnumerable<RoleType> RoleTypesWhereObjectType
         {
             get
             {
@@ -184,13 +181,31 @@ namespace Allors.Meta
         /// Gets the method types.
         /// </summary>
         /// <value>The method types.</value>
-        public IList<MethodType> MethodTypes
+        public IEnumerable<MethodType> MethodTypes
         {
             get
             {
                 this.Environment.Derive();
                 return this.derivedMethodTypes;
             }
+        }
+
+        public bool ContainsSupertype(Interface @interface)
+        {
+            this.Environment.Derive();
+            return this.derivedSupertypes.Contains(@interface);
+        }
+
+        public bool ContainsAssociationType(AssociationType associationType)
+        {
+            this.Environment.Derive();
+            return this.derivedAssociationTypes.Contains(associationType);
+        }
+
+        public bool ContainsRoleType(RoleType roleType)
+        {
+            this.Environment.Derive();
+            return this.derivedRoleTypes.Contains(roleType);
         }
 
         /// <summary>
@@ -216,7 +231,7 @@ namespace Allors.Meta
                 directSupertypes.Add(inheritance.Supertype);
             }
 
-            this.derivedDirectSupertypes = new List<Interface>(directSupertypes);
+            this.derivedDirectSupertypes = new LazySet<Interface>(directSupertypes);
         }
 
         /// <summary>
@@ -226,9 +241,10 @@ namespace Allors.Meta
         internal void DeriveSupertypes(HashSet<Interface> superTypes)
         {
             superTypes.Clear();
+
             this.DeriveSupertypesRecursively(this, superTypes);
 
-            this.derivedSupertypes = new List<Interface>(superTypes);
+            this.derivedSupertypes = new LazySet<Interface>(superTypes);
         }
 
         /// <summary>
@@ -254,7 +270,7 @@ namespace Allors.Meta
                 }
             }
 
-            this.derivedMethodTypes = new List<MethodType>(methodTypes);
+            this.derivedMethodTypes = new LazySet<MethodType>(methodTypes);
         }
 
         /// <summary>
@@ -278,7 +294,7 @@ namespace Allors.Meta
                 }
             }
 
-            this.derivedRoleTypes = new List<RoleType>(roleTypes);
+            this.derivedRoleTypes = new LazySet<RoleType>(roleTypes);
         }
         
         /// <summary>
@@ -302,7 +318,7 @@ namespace Allors.Meta
                 }
             }
 
-            this.derivedAssociationTypes = new List<AssociationType>(associations);
+            this.derivedAssociationTypes = new LazySet<AssociationType>(associations);
         }
         
         /// <summary>

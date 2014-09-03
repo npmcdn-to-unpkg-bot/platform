@@ -44,6 +44,7 @@ namespace Allors.Meta
 
             set
             {
+                this.Environment.AssertUnlocked();
                 this.singularName = value;
                 this.Environment.Stale();
             }
@@ -58,6 +59,7 @@ namespace Allors.Meta
 
             set
             {
+                this.Environment.AssertUnlocked();
                 this.pluralName = value;
                 this.Environment.Stale();
             }

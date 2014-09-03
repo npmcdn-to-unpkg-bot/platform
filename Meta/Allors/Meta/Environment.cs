@@ -23,6 +23,7 @@ namespace Allors.Meta
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     /// <summary>
     /// A Domain is a container for <see cref="ObjectType"/>s, <see cref="RelationType"/>s.
@@ -31,7 +32,9 @@ namespace Allors.Meta
     {
         private readonly Dictionary<Guid, MetaObject> metaObjectById;
 
-        private IList<Composite> derivedComposites;
+        private Composite[] derivedComposites;
+
+        private bool isLocked;
 
         private bool isStale;
         private bool isDeriving;
@@ -43,7 +46,7 @@ namespace Allors.Meta
         private IList<Inheritance> inheritances;
         private IList<RelationType> relationTypes;
         private IList<MethodType> methodTypes;
-
+        
         public Environment()
         {
             this.isStale = true;
@@ -58,6 +61,14 @@ namespace Allors.Meta
             this.methodTypes = new List<MethodType>();
 
             this.metaObjectById = new Dictionary<Guid, MetaObject>();
+        }
+
+        public bool IsLocked
+        {
+            get
+            {
+                return this.isLocked;
+            }
         }
 
         public IEnumerable<Domain> Domains
@@ -163,9 +174,9 @@ namespace Allors.Meta
         {
             var log = new ValidationLog();
 
-            foreach (var part in this.Domains)
+            foreach (var domain in this.Domains)
             {
-                part.Validate(log);
+                domain.Validate(log);
             }
 
             foreach (var unitType in this.Units)
@@ -183,9 +194,9 @@ namespace Allors.Meta
                 @class.Validate(log);
             }
 
-            foreach (var methodType in this.MethodTypes)
+            foreach (var inheritance in this.Inheritances)
             {
-                methodType.Validate(log);
+                inheritance.Validate(log);
             }
 
             foreach (var relationType in this.RelationTypes)
@@ -193,12 +204,43 @@ namespace Allors.Meta
                 relationType.Validate(log);
             }
 
-            foreach (var inheritance in this.Inheritances)
+            foreach (var methodType in this.MethodTypes)
             {
-                inheritance.Validate(log);
+                methodType.Validate(log);
             }
 
             return log;
+        }
+
+        public void Lock()
+        {
+            if (!this.IsLocked)
+            {
+                this.Derive();
+
+                this.isLocked = true;
+
+                this.domains = this.domains.ToArray();
+                this.units = this.units.ToArray();
+                this.interfaces = this.interfaces.ToArray();
+                this.classes = this.classes.ToArray();
+                this.inheritances = this.inheritances.ToArray();
+                this.relationTypes = this.relationTypes.ToArray();
+                this.methodTypes = this.methodTypes.ToArray();
+
+                foreach (var domain in this.domains)
+                {
+                    domain.Lock();
+                }
+            }
+        }
+
+        internal void AssertUnlocked()
+        {
+            if (this.IsLocked)
+            {
+                throw new Exception("Environment is locked");
+            }
         }
 
         internal void Derive()
@@ -212,7 +254,7 @@ namespace Allors.Meta
                     // Unit & Composite ObjectTypes
                     var compositeTypes = new List<Composite>(this.Interfaces);
                     compositeTypes.AddRange(this.Classes);
-                    this.derivedComposites = compositeTypes;
+                    this.derivedComposites = compositeTypes.ToArray();
 
                     var sharedCompositeTypes = new HashSet<Composite>();
                     var sharedInterfaces = new HashSet<Interface>();
@@ -279,7 +321,8 @@ namespace Allors.Meta
                     foreach (var relationType in this.RelationTypes)
                     {
                         relationType.AssociationType.DeriveMultiplicity();
-                        relationType.RoleType.DeriveMultiplicityScaleAndSize();
+                        relationType.RoleType.DeriveMultiplicity();
+                        relationType.RoleType.DeriveScaleAndSize();
                     }
 
                     // RoleType Property Names
