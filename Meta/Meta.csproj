@@ -67,6 +67,7 @@
     <Compile Include="Allors\Meta\PropertyType.cs" />
     <Compile Include="Allors\Meta\RelationType.cs" />
     <Compile Include="Allors\Meta\RoleType.cs" />
+    <Compile Include="Core\Meta\RelationType.cs" />
     <Compile Include="Core\Meta\Repository.cs" />
     <Compile Include="Core\Meta\RoleType.v..cs" />
     <Compile Include="Core\Meta\RoleType.cs" />

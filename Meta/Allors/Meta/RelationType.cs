@@ -34,7 +34,6 @@ namespace Allors.Meta
         private readonly RoleType roleType;
 
         private bool isDerived;
-        private bool isIndexed;
 
         public RelationType(Domain domain, Guid relationTypeId, Guid associationTypeId, Guid roleTypeId)
         {
@@ -58,21 +57,6 @@ namespace Allors.Meta
             {
                 this.Environment.AssertUnlocked();
                 this.isDerived = value;
-                this.Environment.Stale();
-            }
-        }
-
-        public bool IsIndexed
-        {
-            get
-            {
-                return this.isIndexed;
-            }
-
-            set
-            {
-                this.Environment.AssertUnlocked();
-                this.isIndexed = value;
                 this.Environment.Stale();
             }
         }
