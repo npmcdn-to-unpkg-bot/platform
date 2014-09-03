@@ -34,40 +34,89 @@ namespace Allors.Meta
         private IList<Composite> derivedComposites;
 
         private bool isStale;
-
         private bool isDeriving;
+
+        private IList<Domain> domains;
+        private IList<Unit> units;
+        private IList<Interface> interfaces;
+        private IList<Class> classes;
+        private IList<Inheritance> inheritances;
+        private IList<RelationType> relationTypes;
+        private IList<MethodType> methodTypes;
 
         public Environment()
         {
             this.isStale = true;
             this.isDeriving = false;
 
-            this.Domains = new List<Domain>();
-            this.Units = new List<Unit>();
-            this.Interfaces = new List<Interface>();
-            this.Classes = new List<Class>();
-            this.Inheritances = new List<Inheritance>();
-            this.RelationTypes = new List<RelationType>();
-            this.MethodTypes = new List<MethodType>();
+            this.domains = new List<Domain>();
+            this.units = new List<Unit>();
+            this.interfaces = new List<Interface>();
+            this.classes = new List<Class>();
+            this.inheritances = new List<Inheritance>();
+            this.relationTypes = new List<RelationType>();
+            this.methodTypes = new List<MethodType>();
 
             this.metaObjectById = new Dictionary<Guid, MetaObject>();
         }
 
-        public IList<Domain> Domains { get; private set; }
-        
-        public IList<Unit> Units { get; private set; }
+        public IEnumerable<Domain> Domains
+        {
+            get
+            {
+                return this.domains;
+            }
+        }
 
-        public IList<Interface> Interfaces { get; private set; }
+        public IEnumerable<Unit> Units
+        {
+            get
+            {
+                return this.units;
+            }
+        }
 
-        public IList<Class> Classes { get; private set; }
+        public IEnumerable<Interface> Interfaces
+        {
+            get
+            {
+                return this.interfaces;
+            }
+        }
 
-        public IList<Inheritance> Inheritances { get; private set; }
+        public IEnumerable<Class> Classes
+        {
+            get
+            {
+                return this.classes;
+            }
+        }
 
-        public IList<RelationType> RelationTypes { get; private set; }
+        public IEnumerable<Inheritance> Inheritances
+        {
+            get
+            {
+                return this.inheritances;
+            }
+        }
 
-        public IList<MethodType> MethodTypes { get; private set; }
+        public IEnumerable<RelationType> RelationTypes
+        {
+            get
+            {
+                return this.relationTypes;
+            }
+        }
 
-        public IList<Composite> Composites
+        public IEnumerable<MethodType> MethodTypes
+        {
+            get
+            {
+                return this.methodTypes;
+            }
+        }
+
+        public IEnumerable<Composite> Composites
         {
             get
             {
@@ -240,16 +289,6 @@ namespace Allors.Meta
                         relationType.RoleType.DerivePluralPropertyName();
                     }
 
-                    foreach (var type in this.Composites)
-                    {
-                        type.DeriveRoleTypeIdsCache();
-                    }
-
-                    foreach (var type in this.Composites)
-                    {
-                        type.DeriveAssociationIdsCache();
-                    }
-
                     var sharedMethodTypeList = new HashSet<MethodType>();
 
                     // MethodTypes
@@ -269,7 +308,7 @@ namespace Allors.Meta
 
         internal void OnUnitCreated(Unit unit)
         {
-            this.Units.Add(unit);
+            this.units.Add(unit);
             this.metaObjectById.Add(unit.Id, unit);
 
             this.Stale();
@@ -277,7 +316,7 @@ namespace Allors.Meta
 
         internal void OnInterfaceCreated(Interface @interface)
         {
-            this.Interfaces.Add(@interface);
+            this.interfaces.Add(@interface);
             this.metaObjectById.Add(@interface.Id, @interface);
 
             this.Stale();
@@ -285,7 +324,7 @@ namespace Allors.Meta
         
         internal void OnClassCreated(Class @class)
         {
-            this.Classes.Add(@class);
+            this.classes.Add(@class);
             this.metaObjectById.Add(@class.Id, @class);
             
             this.Stale();
@@ -293,7 +332,7 @@ namespace Allors.Meta
 
         internal void OnInheritanceCreated(Inheritance inheritance)
         {
-            this.Inheritances.Add(inheritance);
+            this.inheritances.Add(inheritance);
             this.metaObjectById.Add(inheritance.Id, inheritance);
 
             this.Stale();
@@ -301,7 +340,7 @@ namespace Allors.Meta
 
         internal void OnRelationTypeCreated(RelationType relationType)
         {
-            this.RelationTypes.Add(relationType);
+            this.relationTypes.Add(relationType);
             this.metaObjectById.Add(relationType.Id, relationType);
 
             this.Stale();
@@ -309,7 +348,7 @@ namespace Allors.Meta
 
         internal void OnMethodTypeCreated(MethodType methodType)
         {
-            this.MethodTypes.Add(methodType);
+            this.methodTypes.Add(methodType);
             this.metaObjectById.Add(methodType.Id, methodType);
 
             this.Stale();

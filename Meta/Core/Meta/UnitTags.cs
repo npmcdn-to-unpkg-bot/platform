@@ -21,7 +21,7 @@
 namespace Allors.Meta
 {
     /// <summary>
-    /// The tags for <see cref="AllorsClassObjectType.UnitTag"/>s.
+    /// The tags for units.
     /// Do not use tags for long term persistence, UnitTypeIds should be used for that.
     /// </summary>
     public enum UnitTags

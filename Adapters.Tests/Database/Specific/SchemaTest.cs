@@ -116,7 +116,9 @@ namespace Allors.Adapters.Special
             {
                 var environment = new Environment();
                 var core = Repository.Core(environment);
-                this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain", DirectSuperdomains = { core } };
+
+                this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
+                this.domain.AddDirectSuperdomain(core);
 
                 var c1 = this.CreateClass("C1");
                 this.CreateClass("C2");
@@ -157,8 +159,10 @@ namespace Allors.Adapters.Special
         {
             var environment = new Environment();
             var core = Repository.Core(environment);
-            this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain", DirectSuperdomains = { core } };
-
+            
+            this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain"};
+            this.domain.AddDirectSuperdomain(core);
+            
             var c1 = this.CreateClass("C1");
             this.CreateClass("C2");
 
@@ -196,7 +200,9 @@ namespace Allors.Adapters.Special
         {
             var environment = new Environment();
             var core = Repository.Core(environment);
-            this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain", DirectSuperdomains = { core } }; 
+
+            this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
+            this.domain.AddDirectSuperdomain(core);
             
             var c1 = this.CreateClass("C1");
             this.CreateClass("C2");
@@ -264,7 +270,9 @@ namespace Allors.Adapters.Special
         {
             var environment = new Environment();
             var core = Repository.Core(environment);
-            this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain", DirectSuperdomains = { core } };
+
+            this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
+            this.domain.AddDirectSuperdomain(core);
 
             var c1 = this.CreateClass("C1");
             var c2 = this.CreateClass("C2");
@@ -433,7 +441,9 @@ namespace Allors.Adapters.Special
         {
             var environment = new Environment();
             var core = Repository.Core(environment);
-            this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain", DirectSuperdomains = { core } };
+
+            this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
+            this.domain.AddDirectSuperdomain(core);
 
             var c1 = this.CreateClass("C1");
             this.CreateClass("C2");
@@ -471,7 +481,9 @@ namespace Allors.Adapters.Special
         {
             var environment = new Environment();
             var core = Repository.Core(environment);
-            this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain", DirectSuperdomains = { core } };
+
+            this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
+            this.domain.AddDirectSuperdomain(core);
 
             var c1 = this.CreateClass("C1");
             var c2 = this.CreateClass("C2");
@@ -512,7 +524,9 @@ namespace Allors.Adapters.Special
         {
             var environment = new Environment();
             var core = Repository.Core(environment);
-            this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain", DirectSuperdomains = { core } };
+
+            this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
+            this.domain.AddDirectSuperdomain(core);
 
             var c1 = this.CreateClass("C1");
             this.CreateClass("C2");

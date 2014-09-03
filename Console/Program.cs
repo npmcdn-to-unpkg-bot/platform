@@ -11,8 +11,8 @@
 
         public static void Generate()
         {
-            var log = Allors.Development.Repository.Tasks.Generate.Execute("../../../Templates/Core/domain.cs.stg", "../../../Domain/Adapters/Generated");
-            Console.WriteLine(log);
+            var log = Development.Repository.Tasks.Generate.Execute("../../../Templates/Core/domain.cs.stg", "../../../Domain/Adapters/Generated");
+            Console.WriteLine("Finished");
             Console.ReadKey();
         }
     }

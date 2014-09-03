@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Allors.Meta.Environment">
+    <Position X="0.5" Y="4" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AIBAAAAAQAHCBAABqAgAUCgAAAAYAAAAFIQBQAGABEA=</HashCode>
+      <FileName>Allors\Meta\Environment.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="domains" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Allors.Meta.Domain">
+    <Position X="3.25" Y="4.25" Width="2" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAIhAIBAAACCBAQEAACAUAQIAAAEAAUAAYgBAAECAAI=</HashCode>
+      <FileName>Allors\Meta\Domain.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Allors.Meta.MetaObject">
+    <Position X="4.75" Y="0.5" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="Allors.Meta.MetaObject.PrivateIdComparer" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Allors\Meta\MetaObject.cs</NewMemberFileName>
+        </TypeIdentifier>
+        <Lollipop Position="0.2" />
+      </Class>
+    </NestedTypes>
+    <AssociationLine Name="Environment" Type="Allors.Meta.Environment" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.75" Y="1.229" />
+        <Point X="1.438" Y="1.229" />
+        <Point X="1.438" Y="4" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAACAAACAACAAAAAAACAAACAAAAAAAAAAAAAAEABAgA=</HashCode>
+      <FileName>Allors\Meta\MetaObject.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Environment" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Allors.Meta.Class">
+    <Position X="9.75" Y="7.5" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAABgAAAAQAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Allors\Meta\Class.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Allors.Meta.Composite">
+    <Position X="8.5" Y="4" Width="2" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="derivedDirectSupertypes" Type="Allors.Meta.Interface" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="8.5" Y="5.372" />
+        <Point X="7.708" Y="5.372" />
+        <Point X="7.708" Y="7.5" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="derivedRoleTypes" Type="Allors.Meta.RoleType" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="10.031" Y="5.752" />
+        <Point X="10.031" Y="6.188" />
+        <Point X="12.167" Y="6.187" Type="JumpStart" />
+        <Point X="12.333" Y="6.188" Type="JumpEnd" />
+        <Point X="14.5" Y="6.188" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="derivedMethodTypes" Type="Allors.Meta.MethodType" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="10.5" Y="5.272" />
+        <Point X="12.25" Y="5.272" />
+        <Point X="12.25" Y="7.232" />
+        <Point X="16.875" Y="7.232" />
+        <Point X="16.875" Y="5.444" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.532" Y="0.177" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AgJAhgAAAAEEAAAAISABBIACwQgAEABAARBAAAAAAAE=</HashCode>
+      <FileName>Allors\Meta\Composite.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="derivedDirectSupertypes" />
+      <Field Name="derivedAssociationTypes" />
+      <Field Name="derivedRoleTypes" />
+      <Field Name="derivedMethodTypes" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Allors.Meta.Interface">
+    <Position X="7.25" Y="7.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>IAAAFgEAAEEAAAAAJAAAAAAAQgAAAEAAAAKIFAIAAAE=</HashCode>
+      <FileName>Allors\Meta\Interface.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Allors.Meta.Inheritance">
+    <Position X="5.75" Y="4.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAACAAAAEAACABAAAAAAAAAAAEAAAABAQAAA=</HashCode>
+      <FileName>Allors\Meta\Inheritance.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="subtype" />
+      <Field Name="supertype" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Allors.Meta.ObjectType">
+    <Position X="9.5" Y="1.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgCAAAYEAACAAAQAACKAAAACAAAAAUAAAAA=</HashCode>
+      <FileName>Allors\Meta\ObjectType.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Allors.Meta.AssociationType">
+    <Position X="12.5" Y="3.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAIGmACAAACAAIYGAECAAAQAAAEAAAASAJIAAABAAAg=</HashCode>
+      <FileName>Allors\Meta\AssociationType.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Allors.Meta.RoleType">
+    <Position X="14.5" Y="3.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAIGmACCAAGggIYGAMKAAAQCgAAQIIASAJIQAADCEAg=</HashCode>
+      <FileName>Allors\Meta\RoleType.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Allors.Meta.PropertyType" Collapsed="true">
+    <Position X="13.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Allors\Meta\PropertyType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Allors.Meta.OperandType" Collapsed="true">
+    <Position X="15" Y="0.75" Width="1.5" />
+    <InheritanceLine Type="Allors.Meta.MetaObject" FixedToPoint="true">
+      <Path>
+        <Point X="5.625" Y="0.5" />
+        <Point X="5.625" Y="0.26" />
+        <Point X="15.875" Y="0.26" />
+        <Point X="15.875" Y="0.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Allors\Meta\OperandType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Allors.Meta.MethodType">
+    <Position X="16.5" Y="3.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <InheritanceLine Type="Allors.Meta.OperandType" FixedFromPoint="true">
+      <Path>
+        <Point X="16.5" Y="1.25" />
+        <Point X="17.25" Y="1.25" />
+        <Point X="17.25" Y="3.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAEACAAACAAAAAAACAAAQAAAAEAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Allors\Meta\MethodType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

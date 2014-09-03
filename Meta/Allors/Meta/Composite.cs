@@ -24,7 +24,7 @@ namespace Allors.Meta
     using System;
     using System.Collections.Generic;
     using System.Linq;
-
+    
     public abstract partial class Composite : ObjectType
     {
         private IList<Interface> derivedDirectSupertypes;
@@ -36,17 +36,7 @@ namespace Allors.Meta
         private IList<RoleType> derivedRoleTypes;
 
         private IList<MethodType> derivedMethodTypes;
-
-        /// <summary>
-        /// A cache for the ids of the <see cref="AssociationTypes"/>.
-        /// </summary>
-        private Dictionary<Guid, object> associationIdsCache;
-
-        /// <summary>
-        /// A cache for the ids of the <see cref="RoleTypes"/>.
-        /// </summary>
-        private Dictionary<Guid, object> roleIdsCache;
-
+        
         protected Composite(Domain domain, Guid id)
             : base(domain, id)
         {
@@ -314,31 +304,7 @@ namespace Allors.Meta
 
             this.derivedAssociationTypes = new List<AssociationType>(associations);
         }
-
-        /// <summary>
-        /// Derive association ids cache.
-        /// </summary>
-        internal void DeriveAssociationIdsCache()
-        {
-            this.associationIdsCache = new Dictionary<Guid, object>();
-            foreach (var containsAssociation in this.AssociationTypes)
-            {
-                this.associationIdsCache[containsAssociation.RelationType.Id] = null;
-            }
-        }
-
-        /// <summary>
-        /// Derive role ids cache.
-        /// </summary>
-        internal void DeriveRoleTypeIdsCache()
-        {
-            this.roleIdsCache = new Dictionary<Guid, object>();
-            foreach (var containsRole in this.derivedRoleTypes)
-            {
-                this.roleIdsCache[containsRole.RelationType.Id] = null;
-            }
-        }
-
+        
         /// <summary>
         /// Derive super types recursively.
         /// </summary>

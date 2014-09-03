@@ -44,7 +44,7 @@ namespace Allors.Development.Repository.Generation
         private const string TemplateConfiguration = "TemplateConfiguration";
 
         private const string TemplateKey = "template";
-        private const string DomainKey = "domain";
+        private const string EnvironmentKey = "environment";
         private const string InputKey = "input";
         private const string OutputKey = "output";
         private const string GenerationKey = "generation";
@@ -103,7 +103,7 @@ namespace Allors.Development.Repository.Generation
         {
             if (!environment.IsValid)
             {
-                log.Error(this, "Domain " + environment + " has validation errors.");
+                log.Error(this, "Environment " + environment + " has validation errors.");
                 return;
             }
 
@@ -114,7 +114,7 @@ namespace Allors.Development.Repository.Generation
                 group.ErrorManager = new ErrorManager(new LogAdapter(log));
                 
                 var configurationTemplate = group.GetInstanceOf(TemplateConfiguration);
-                configurationTemplate.Add(DomainKey, environment);
+                configurationTemplate.Add(EnvironmentKey, environment);
 
                 var configurationXml = new XmlDocument();
                 configurationXml.LoadXml(configurationTemplate.Render());
@@ -131,7 +131,7 @@ namespace Allors.Development.Repository.Generation
                         System.Console.WriteLine(0);
                     }
 
-                    template.Add(DomainKey, environment);
+                    template.Add(EnvironmentKey, environment);
                     if (generation.HasAttribute(InputKey))
                     {
                         var input = new Guid(generation.GetAttribute(InputKey));

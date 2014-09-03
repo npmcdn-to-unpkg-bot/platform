@@ -26,12 +26,12 @@ namespace Allors.Meta
 
     public partial class Class : Composite
     {
-        private readonly List<Class> selfList; 
+        private readonly Class[] leafClasses; 
 
         public Class(Domain domain, Guid id)
             : base(domain, id)
         {
-            this.selfList = new List<Class> { this };
+            this.leafClasses = new[] { this };
             domain.OnClassCreated(this);
         }
         
@@ -39,7 +39,7 @@ namespace Allors.Meta
         {
             get
             {
-                return this.selfList;
+                return this.leafClasses;
             }
         }
 

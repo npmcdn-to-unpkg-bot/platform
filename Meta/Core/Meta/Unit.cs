@@ -21,31 +21,8 @@
 
 namespace Allors.Meta
 {
-    using System;
-
     public partial class Unit : ObjectType
     {
-        private int unitTag;
-
-        public Unit(Domain domain, Guid id) : base(domain, id)
-        {
-            domain.OnUnitCreated(this);
-        }
-
-        public int UnitTag
-        {
-            get
-            {
-                return this.unitTag;
-            }
-
-            set
-            {
-                this.unitTag = value;
-                this.Environment.Stale();
-            }
-        }
-
         /// <summary>
         /// Gets a value indicating whether this instance is a binary.
         /// </summary>
