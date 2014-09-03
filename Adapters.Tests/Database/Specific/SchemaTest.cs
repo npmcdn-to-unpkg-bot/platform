@@ -80,6 +80,9 @@ namespace Allors.Adapters.Special
             ISession session = database.CreateSession();
             session.Rollback();
 
+            this.domain = new Domain(new Environment(), Guid.NewGuid()) { Name = "MyDomain" };
+
+            this.CreateClass("C1");
             this.CreateClass("C2");
 
             database = this.CreateDatabase(this.domain.Environment, true);
@@ -114,9 +117,11 @@ namespace Allors.Adapters.Special
         {
             if (this.DetectBinarySizedDifferences)
             {
+                this.DropTable("C1");
+                this.DropTable("C2");
+
                 var environment = new Environment();
                 var core = Repository.Core(environment);
-
                 this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
                 this.domain.AddDirectSuperdomain(core);
 
@@ -124,7 +129,7 @@ namespace Allors.Adapters.Special
                 this.CreateClass("C2");
 
                 var allorsBinary = (ObjectType)this.domain.Environment.Find(UnitIds.BinaryId);
-                var c1RelationType = new RelationType(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid())
+                new RelationType(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid())
                                          {
                                              AssociationType = { ObjectType = c1 },
                                              RoleType = { ObjectType = allorsBinary, Size = 200 }
@@ -132,6 +137,22 @@ namespace Allors.Adapters.Special
 
                 this.CreateDatabase(this.domain.Environment, true);
 
+                environment = new Environment();
+                core = Repository.Core(environment);
+                this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
+                this.domain.AddDirectSuperdomain(core);
+
+                c1 = this.CreateClass("C1");
+                this.CreateClass("C2");
+
+                allorsBinary = (ObjectType)this.domain.Environment.Find(UnitIds.BinaryId);
+                var c1RelationType = new RelationType(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid())
+                {
+                    AssociationType = { ObjectType = c1 },
+                    RoleType = { ObjectType = allorsBinary }
+                };
+
+                // Different Size
                 c1RelationType.RoleType.Size = 300;
 
                 var database = this.CreateDatabase(this.domain.Environment, false);
@@ -157,9 +178,11 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateDecimalRelationDifferentPrecision()
         {
+            this.DropTable("C1");
+            this.DropTable("C2");
+
             var environment = new Environment();
             var core = Repository.Core(environment);
-            
             this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain"};
             this.domain.AddDirectSuperdomain(core);
             
@@ -174,6 +197,21 @@ namespace Allors.Adapters.Special
 
             this.CreateDatabase(this.domain.Environment, true);
 
+            environment = new Environment();
+            core = Repository.Core(environment);
+            this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
+            this.domain.AddDirectSuperdomain(core);
+
+            c1 = this.CreateClass("C1");
+            this.CreateClass("C2");
+
+            c1RelationType = new RelationType(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
+            c1RelationType.AssociationType.ObjectType = c1;
+            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Environment.Find(UnitIds.DecimalId);
+            c1RelationType.RoleType.Precision = 10;
+            c1RelationType.RoleType.Scale = 2;
+
+            // Different precision
             c1RelationType.RoleType.Precision = 11;
 
             var database = this.CreateDatabase(this.domain.Environment, false);
@@ -198,9 +236,11 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateDecimalRelationDifferentScale()
         {
+            this.DropTable("C1");
+            this.DropTable("C2");
+
             var environment = new Environment();
             var core = Repository.Core(environment);
-
             this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
             this.domain.AddDirectSuperdomain(core);
             
@@ -215,6 +255,21 @@ namespace Allors.Adapters.Special
 
             this.CreateDatabase(this.domain.Environment, true);
 
+            environment = new Environment();
+            core = Repository.Core(environment);
+            this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
+            this.domain.AddDirectSuperdomain(core);
+
+            c1 = this.CreateClass("C1");
+            this.CreateClass("C2");
+
+            c1RelationType = new RelationType(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
+            c1RelationType.AssociationType.ObjectType = c1;
+            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Environment.Find(UnitIds.DecimalId);
+            c1RelationType.RoleType.Precision = 10;
+            c1RelationType.RoleType.Scale = 2;
+
+            // Different scale
             c1RelationType.RoleType.Scale = 3;
 
             var database = this.CreateDatabase(this.domain.Environment, false);
@@ -249,6 +304,12 @@ namespace Allors.Adapters.Special
 
             this.CreateDatabase(this.domain.Environment, true);
 
+            this.domain = new Domain(new Environment(), Guid.NewGuid()) { Name = "MyDomain" };
+            this.domain.Name = "MyDomain";
+
+            this.CreateClass("C1");
+
+            // Extra class            
             this.CreateClass("C2");
 
             var database = this.CreateDatabase(this.domain.Environment, false);
@@ -268,9 +329,11 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateNewInterfaceInheritanceWithBooleanRelation()
         {
+            this.DropTable("C1");
+            this.DropTable("C2");
+
             var environment = new Environment();
             var core = Repository.Core(environment);
-
             this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
             this.domain.AddDirectSuperdomain(core);
 
@@ -287,6 +350,23 @@ namespace Allors.Adapters.Special
  
             this.CreateDatabase(this.domain.Environment, true);
 
+            environment = new Environment();
+            core = Repository.Core(environment);
+            this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
+            this.domain.AddDirectSuperdomain(core);
+
+            c1 = this.CreateClass("C1");
+            c2 = this.CreateClass("C2");
+
+            i12 = this.CreateInterface("I12");
+
+            i12AllorsString = new RelationType(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
+            i12AllorsString.AssociationType.ObjectType = i12;
+            i12AllorsString.RoleType.ObjectType = (ObjectType)this.domain.Environment.Find(UnitIds.BooleanId);
+
+            new Inheritance(this.domain, Guid.NewGuid()) { Subtype = c1, Supertype = i12 };
+
+            // Extra inheritance
             new Inheritance(this.domain, Guid.NewGuid()) { Subtype = c2, Supertype = i12 };
 
             var database = this.CreateDatabase(this.domain.Environment, false);
@@ -307,6 +387,9 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateNewMany2ManyRelation()
         {
+            this.DropTable("C1");
+            this.DropTable("C2");
+
             this.domain = new Domain(new Environment(), Guid.NewGuid()) { Name = "MyDomain" };
 
             var c1 = this.CreateClass("C1");
@@ -314,6 +397,12 @@ namespace Allors.Adapters.Special
 
             this.CreateDatabase(this.domain.Environment, true);
 
+            this.domain = new Domain(new Environment(), Guid.NewGuid()) { Name = "MyDomain" };
+
+            c1 = this.CreateClass("C1");
+            c2 = this.CreateClass("C2");
+
+            // Extra relation
             var fromC1ToC2 = new RelationType(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             fromC1ToC2.AssociationType.ObjectType = c1;
             fromC1ToC2.AssociationType.IsMany = true;
@@ -342,6 +431,9 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateNewMany2OneRelation()
         {
+            this.DropTable("C1");
+            this.DropTable("C2");
+
             this.domain = new Domain(new Environment(), Guid.NewGuid()) { Name = "MyDomain" };
 
             var c1 = this.CreateClass("C1");
@@ -349,6 +441,12 @@ namespace Allors.Adapters.Special
 
             this.CreateDatabase(this.domain.Environment, true);
 
+            this.domain = new Domain(new Environment(), Guid.NewGuid()) { Name = "MyDomain" };
+
+            c1 = this.CreateClass("C1");
+            c2 = this.CreateClass("C2");
+
+            // Extra relation
             var fromC1ToC2 = new RelationType(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             fromC1ToC2.AssociationType.ObjectType = c1;
             fromC1ToC2.AssociationType.IsMany = true;
@@ -374,6 +472,9 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateNewOne2ManyRelation()
         {
+            this.DropTable("C1");
+            this.DropTable("C2");
+
             this.domain = new Domain(new Environment(), Guid.NewGuid()) { Name = "MyDomain" };
 
             var c1 = this.CreateClass("C1");
@@ -381,6 +482,12 @@ namespace Allors.Adapters.Special
 
             this.CreateDatabase(this.domain.Environment, true);
 
+            this.domain = new Domain(new Environment(), Guid.NewGuid()) { Name = "MyDomain" };
+
+            c1 = this.CreateClass("C1");
+            c2 = this.CreateClass("C2");
+
+            // extra relation
             var fromC1ToC2 = new RelationType(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             fromC1ToC2.AssociationType.ObjectType = c1;
             fromC1ToC2.RoleType.ObjectType = c2;
@@ -407,6 +514,9 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateNewOne2OneRelation()
         {
+            this.DropTable("C1");
+            this.DropTable("C2");
+
             this.domain = new Domain(new Environment(), Guid.NewGuid()) { Name = "MyDomain" };
 
             var c1 = this.CreateClass("C1");
@@ -414,6 +524,12 @@ namespace Allors.Adapters.Special
 
             this.CreateDatabase(this.domain.Environment, true);
 
+            this.domain = new Domain(new Environment(), Guid.NewGuid()) { Name = "MyDomain" };
+
+            c1 = this.CreateClass("C1");
+            c2 = this.CreateClass("C2");
+
+            // extra relation
             var fromC1ToC2 = new RelationType(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             fromC1ToC2.AssociationType.ObjectType = c1;
             fromC1ToC2.RoleType.ObjectType = c2;
@@ -439,9 +555,11 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateStringRelationDifferentSize()
         {
+            this.DropTable("C1");
+            this.DropTable("C2");
+
             var environment = new Environment();
             var core = Repository.Core(environment);
-
             this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
             this.domain.AddDirectSuperdomain(core);
 
@@ -455,6 +573,20 @@ namespace Allors.Adapters.Special
 
             this.CreateDatabase(this.domain.Environment, true);
 
+            environment = new Environment();
+            core = Repository.Core(environment);
+            this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
+            this.domain.AddDirectSuperdomain(core);
+
+            c1 = this.CreateClass("C1");
+            this.CreateClass("C2");
+
+            c1RelationType = new RelationType(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
+            c1RelationType.AssociationType.ObjectType = c1;
+            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Environment.Find(UnitIds.StringId);
+            c1RelationType.RoleType.Size = 100;
+
+            // Different size
             c1RelationType.RoleType.Size = 101;
 
             var database = this.CreateDatabase(this.domain.Environment, false);
@@ -479,9 +611,11 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateStringToOne2One()
         {
+            this.DropTable("C1");
+            this.DropTable("C2");
+
             var environment = new Environment();
             var core = Repository.Core(environment);
-
             this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
             this.domain.AddDirectSuperdomain(core);
 
@@ -497,6 +631,22 @@ namespace Allors.Adapters.Special
 
             this.CreateDatabase(this.domain.Environment, true);
 
+            environment = new Environment();
+            core = Repository.Core(environment);
+            this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
+            this.domain.AddDirectSuperdomain(core);
+
+            c1 = this.CreateClass("C1");
+            c2 = this.CreateClass("C2");
+
+            c1RelationType = new RelationType(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
+            c1RelationType.AssociationType.ObjectType = c1;
+            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Environment.Find(UnitIds.StringId);
+            c1RelationType.RoleType.Size = 100;
+            c1RelationType.RoleType.AssignedSingularName = "RelationType";
+            c1RelationType.RoleType.AssignedPluralName = "RelationTypes";
+
+            // From string to one2one
             c1RelationType.RoleType.Size = null;
             c1RelationType.RoleType.ObjectType = c2;
 
@@ -522,9 +672,11 @@ namespace Allors.Adapters.Special
         [Test]
         public void ValidateUnitRelationDifferentType()
         {
+            this.DropTable("C1");
+            this.DropTable("C2");
+
             var environment = new Environment();
             var core = Repository.Core(environment);
-
             this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
             this.domain.AddDirectSuperdomain(core);
 
@@ -539,6 +691,21 @@ namespace Allors.Adapters.Special
 
             this.CreateDatabase(this.domain.Environment, true);
 
+            environment = new Environment();
+            core = Repository.Core(environment);
+            this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
+            this.domain.AddDirectSuperdomain(core);
+
+            c1 = this.CreateClass("C1");
+            this.CreateClass("C2");
+
+            c1RelationType = new RelationType(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
+            c1RelationType.AssociationType.ObjectType = c1;
+            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Environment.Find(UnitIds.BooleanId);
+            c1RelationType.RoleType.AssignedSingularName = "RelationType";
+            c1RelationType.RoleType.AssignedPluralName = "RelationTypes";
+
+            // Different type
             c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Environment.Find(UnitIds.Unique);
 
             var database = this.CreateDatabase(this.domain.Environment, false);
@@ -588,12 +755,17 @@ namespace Allors.Adapters.Special
 
             var c1 = this.CreateClass("C1");
             var c2 = this.CreateClass("C2");
-
+            
             this.CreateDatabase(this.domain.Environment, true);
 
-            var c1AllorsString = new RelationType(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            c1AllorsString.AssociationType.ObjectType = c1;
-            c1AllorsString.RoleType.ObjectType = c2;
+            this.domain = new Domain(new Environment(), Guid.NewGuid()) { Name = "MyDomain" };
+
+            c1 = this.CreateClass("C1");
+            c2 = this.CreateClass("C2");
+
+            var c1c2 = new RelationType(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
+            c1c2.AssociationType.ObjectType = c1;
+            c1c2.RoleType.ObjectType = c2;
 
             var database = this.CreateDatabase(this.domain.Environment, false);
 
