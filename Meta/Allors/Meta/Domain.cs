@@ -132,6 +132,28 @@ namespace Allors.Meta
             }
         }
 
+        /// <summary>
+        /// Gets the validation name.
+        /// </summary>
+        protected override string ValidationName
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(this.Name))
+                {
+                    return "domain " + this.Name;
+                }
+
+                return "unknown domain";
+            }
+        }
+
+        public void AddDirectSuperdomain(Domain superdomain)
+        {
+            this.directSuperdomains.Add(superdomain);
+            this.Environment.Stale();
+        }
+        
         public Unit DefineUnit(Guid id, string singularName, string pluralName, UnitTags unitTag)
         {
             return new Unit(this, id)
@@ -160,26 +182,13 @@ namespace Allors.Meta
             };
         }
 
-        /// <summary>
-        /// Gets the validation name.
-        /// </summary>
-        protected override string ValidationName
+        public Inheritance DefineInheritance(Guid id, Composite subtype, Interface supertype)
         {
-            get
+            return new Inheritance(this, id)
             {
-                if (!string.IsNullOrEmpty(this.Name))
-                {
-                    return "domain " + this.Name;
-                }
-
-                return "unknown domain";
-            }
-        }
-
-        public void AddDirectSuperdomain(Domain superdomain)
-        {
-            this.directSuperdomains.Add(superdomain);
-            this.Environment.Stale();
+                Subtype = subtype,
+                Supertype = supertype
+            };
         }
 
         /// <summary>

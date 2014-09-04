@@ -20,12 +20,12 @@
 
 namespace Allors.Meta
 {
-    public abstract partial class PropertyType : OperandType
+    public partial interface PropertyType : OperandType
     {
         /// <summary>
         /// Gets the operand name.
         /// </summary>
-        public abstract string Name { get; }
+        string Name { get; }
 
         /// <summary>
         /// Get the object type.
@@ -33,6 +33,6 @@ namespace Allors.Meta
         /// <returns>
         /// The <see cref="ObjectType"/>.
         /// </returns>
-        public abstract ObjectType GetObjectType();
+        ObjectType GetObjectType();
     }
 }

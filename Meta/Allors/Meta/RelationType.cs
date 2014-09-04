@@ -35,13 +35,13 @@ namespace Allors.Meta
 
         private bool isDerived;
 
-        public RelationType(Domain domain, Guid relationTypeId, Guid associationTypeId, Guid roleTypeId)
+        public RelationType(Domain domain, Guid relationTypeId)
         {
             this.Environment = domain.Environment;
 
             this.Id = relationTypeId;
-            this.associationType = new AssociationType(this, associationTypeId);
-            this.roleType = new RoleType(this, roleTypeId);
+            this.associationType = new AssociationType(this);
+            this.roleType = new RoleType(this);
 
             domain.OnRelationTypeCreated(this);
         }
@@ -262,6 +262,16 @@ namespace Allors.Meta
                     var message = this.ValidationName + " has no role type";
                     validationLog.AddError(message, this, ValidationKind.Required, "RelationType.RoleType");
                 }
+            }
+
+            if (this.AssociationType != null)
+            {
+                this.AssociationType.Validate(validationLog);
+            }
+
+            if (this.RoleType != null)
+            {
+                this.RoleType.Validate(validationLog);
             }
         }
     }

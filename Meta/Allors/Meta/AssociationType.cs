@@ -30,22 +30,20 @@ namespace Allors.Meta
     /// </summary>
     public sealed partial class AssociationType : PropertyType, IComparable
     {
-        private readonly RelationType relationType;
-
         /// <summary>
         /// Used to create property names.
         /// </summary>
         private const string Where = "Where";
 
+        private readonly RelationType relationType;
+
         private bool isMany;
 
         private Composite objectType;
 
-        public AssociationType(RelationType relationType, Guid associationTypeId)
+        public AssociationType(RelationType relationType)
         {
-            this.Environment = relationType.Environment;
             this.relationType = relationType;
-            this.Id = associationTypeId;
         }
 
         public bool IsMany
@@ -57,7 +55,7 @@ namespace Allors.Meta
 
             set
             {
-                this.Environment.AssertUnlocked();
+                this.RelationType.Environment.AssertUnlocked();
                 this.isMany = value;
                 this.RelationType.Environment.Stale();
             }
@@ -72,7 +70,7 @@ namespace Allors.Meta
 
             set
             {
-                this.Environment.AssertUnlocked();
+                this.RelationType.Environment.AssertUnlocked();
                 this.objectType = value;
                 this.RelationType.Environment.Stale();
             }
@@ -90,7 +88,7 @@ namespace Allors.Meta
         /// Gets the name.
         /// </summary>
         /// <value>The name .</value>
-        public override string Name
+        public string Name
         {
             get
             {
@@ -189,7 +187,7 @@ namespace Allors.Meta
         /// <summary>
         /// Gets the display name.
         /// </summary>
-        public override string DisplayName
+        public string DisplayName
         {
             get
             {
@@ -220,7 +218,7 @@ namespace Allors.Meta
         /// Gets the validation name.
         /// </summary>
         /// <value>The name of the validation.</value>
-        protected override string ValidationName
+        protected string ValidationName
         {
             get
             {
@@ -254,7 +252,7 @@ namespace Allors.Meta
         /// <returns>
         /// The <see cref="ObjectType"/>.
         /// </returns>
-        public override ObjectType GetObjectType()
+        public ObjectType GetObjectType()
         {
             return this.ObjectType;
         }
@@ -292,10 +290,8 @@ namespace Allors.Meta
         /// Validates this object.
         /// </summary>
         /// <param name="validationLog">The validation information.</param>
-        protected internal override void Validate(ValidationLog validationLog)
+        protected internal void Validate(ValidationLog validationLog)
         {
-            base.Validate(validationLog);
-
             if (this.ObjectType == null)
             {
                 var message = this.ValidationName + " has no object type";

@@ -21,8 +21,6 @@
 
 namespace Allors.Meta
 {
-    using System;
-
     /// <summary>
     /// A <see cref="RoleType"/> defines the role side of a relation.
     /// This is also called the 'passive' side.
@@ -51,7 +49,7 @@ namespace Allors.Meta
             set
             {
                 this.scale = value;
-                this.Environment.Stale();
+                this.RelationType.Environment.Stale();
             }
         }
 
@@ -65,7 +63,7 @@ namespace Allors.Meta
             set
             {
                 this.precision = value;
-                this.Environment.Stale();
+                this.RelationType.Environment.Stale();
             }
         }
 
@@ -79,7 +77,7 @@ namespace Allors.Meta
             set
             {
                 this.size = value;
-                this.Environment.Stale();
+                this.RelationType.Environment.Stale();
             }
         }
 
@@ -141,79 +139,6 @@ namespace Allors.Meta
                 this.Size = null;
                 this.Scale = null;
                 this.Precision = null;
-            }
-        }
-
-        /// <summary>
-        /// Validates the instance.
-        /// </summary>
-        /// <param name="validationLog">The validation.</param>
-        protected internal void CoreValidate(ValidationLog validationLog)
-        {
-            base.Validate(validationLog);
-
-            if (this.ObjectType != null)
-            {
-                var message = this.ValidationName + " has no ObjectType";
-                validationLog.AddError(message, this, ValidationKind.Required, "RoleType.ObjectType");
-            }
-            else
-            {
-                var unitType = this.ObjectType as Unit;
-                if (unitType != null)
-                {
-                    switch (unitType.UnitTag)
-                    {
-                        case UnitTags.AllorsString:
-                            if (this.Size.HasValue)
-                            {
-                                var message = this.ValidationName + " should have a size.";
-                                validationLog.AddError(message, this, ValidationKind.Required, "RoleType.Size");
-                            }
-
-                            break;
-                        case UnitTags.AllorsBinary:
-                            if (this.Size.HasValue)
-                            {
-                                var message = this.ValidationName + " should have a size.";
-                                validationLog.AddError(message, this, ValidationKind.Required, "RoleType.Size");
-                            }
-
-                            break;
-                        case UnitTags.AllorsDecimal:
-                            if (this.Precision.HasValue)
-                            {
-                                var message = this.ValidationName + " should have a precision.";
-                                validationLog.AddError(message, this, ValidationKind.Required, "RoleType.Precision");
-                            }
-
-                            if (this.Scale.HasValue)
-                            {
-                                var message = this.ValidationName + " should have a scale.";
-                                validationLog.AddError(message, this, ValidationKind.Required, "RoleType.Scale");
-                            }
-
-                            break;
-                    }
-                }
-            }
-
-            if (!string.IsNullOrEmpty(this.AssignedSingularName) && string.IsNullOrEmpty(this.AssignedPluralName))
-            {
-                var message = this.ValidationName + " has a singular but no plural name";
-                validationLog.AddError(message, this, ValidationKind.Required, "RoleType.AssignedPluralName");
-            }
-
-            if (!string.IsNullOrEmpty(this.AssignedSingularName) && this.AssignedSingularName.Length < 2)
-            {
-                var message = this.ValidationName + " should have an assigned singular name with at least 2 characters";
-                validationLog.AddError(message, this, ValidationKind.MinimumLength, "RoleType.AssignedSingularName");
-            }
-
-            if (!string.IsNullOrEmpty(this.AssignedPluralName) && this.AssignedPluralName.Length < 2)
-            {
-                var message = this.ValidationName + " should have an assigned plural role name with at least 2 characters";
-                validationLog.AddError(message, this, ValidationKind.MinimumLength, "RoleType.AssignedPluralName");
             }
         }
     }

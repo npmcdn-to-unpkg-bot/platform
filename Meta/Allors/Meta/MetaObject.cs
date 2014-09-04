@@ -28,11 +28,6 @@ namespace Allors.Meta
     /// </summary>
     public abstract partial class MetaObject
     {
-        /// <summary>
-        /// Gets the id comparer for meta objects.
-        /// </summary>
-        public static readonly IComparer<MetaObject> IdComparer = new PrivateIdComparer();
-
         private Guid id;
 
         /// <summary>
@@ -79,6 +74,11 @@ namespace Allors.Meta
         /// </summary>
         protected abstract string ValidationName { get; }
 
+        public static int IdComparer(MetaObject x, MetaObject y)
+        {
+            return x.Id.CompareTo(y.Id);
+        }
+
         /// <summary>
         /// Validate this object.
         /// </summary>
@@ -103,24 +103,6 @@ namespace Allors.Meta
                 {
                     validationLog.AddId(this.Id);
                 }
-            }
-        }
-        
-        /// <summary>
-        /// The id comparer.
-        /// </summary>
-        private class PrivateIdComparer : IComparer<MetaObject>
-        {
-            /// <summary>
-            /// Compares two relationTypes by id.
-            /// </summary>
-            /// <returns>
-            /// The result of the comparison.
-            /// </returns>
-            /// <param name="x">The first object to compare.</param><param name="y">The second object to compare.</param>
-            public int Compare(MetaObject x, MetaObject y)
-            {
-                return x.Id.CompareTo(y.Id);
             }
         }
     }

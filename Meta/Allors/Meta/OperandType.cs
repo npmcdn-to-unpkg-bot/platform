@@ -20,11 +20,11 @@
 
 namespace Allors.Meta
 {
-    public abstract partial class OperandType : MetaObject
+    public partial interface OperandType
     {
         /// <summary>
         /// Gets the display name.
         /// </summary>
-        public abstract string DisplayName { get; }
+        string DisplayName { get; }
    }
 }
