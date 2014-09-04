@@ -132,6 +132,34 @@ namespace Allors.Meta
             }
         }
 
+        public Unit DefineUnit(Guid id, string singularName, string pluralName, UnitTags unitTag)
+        {
+            return new Unit(this, id)
+            {
+                SingularName = singularName,
+                PluralName = pluralName,
+                UnitTag = unitTag
+            };
+        }
+
+        public Interface DefineInterface(Guid id, string singularName, string pluralName)
+        {
+            return new Interface(this, id)
+            {
+                SingularName = singularName,
+                PluralName = pluralName
+            };
+        }
+
+        public Class DefineClass(Guid id, string singularName, string pluralName)
+        {
+            return new Class(this, id)
+            {
+                SingularName = singularName,
+                PluralName = pluralName
+            };
+        }
+
         /// <summary>
         /// Gets the validation name.
         /// </summary>

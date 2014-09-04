@@ -226,7 +226,7 @@ namespace Allors.Adapters.Database.Sql
                                         if (roleType.ObjectType is Unit)
                                         {
                                             var unitType = (Unit)roleType.ObjectType;
-                                            var unitTypeTag = (UnitTags)unitType.UnitTag;
+                                            var unitTypeTag = unitType.UnitTag;
                                             var r = command.GetValue(reader, unitTypeTag, 1);
                                             var content = Serialization.WriteString(unitTypeTag, r);
                                             relationTypeOneXmlWriter.Write(a, content);

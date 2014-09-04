@@ -26,72 +26,19 @@ namespace Allors.Meta
     {
         public static Domain Core(Environment env)
         {
-            var core = new Domain(env, new Guid("CA802192-8186-4C2A-8315-A8DEFAA74A12"));
+            var domain = new Domain(env, new Guid("CA802192-8186-4C2A-8315-A8DEFAA74A12"));
 
-            {
-                var objectType = new Unit(core, UnitIds.StringId);
-                objectType.SingularName = UnitTags.AllorsString.ToString();
-                objectType.PluralName = objectType.SingularName + "s";
-                objectType.UnitTag = (int)UnitTags.AllorsString;
-            }
+            domain.DefineUnit(UnitIds.StringId, "AllorsString", "AllorsStrings", UnitTags.AllorsString);
+            domain.DefineUnit(UnitIds.IntegerId, "AllorsInteger", "AllorsIntegers", UnitTags.AllorsInteger);
+            domain.DefineUnit(UnitIds.LongId, "AllorsLong", "AllorsLongs", UnitTags.AllorsLong);
+            domain.DefineUnit(UnitIds.DecimalId, "AllorsDecimal", "AllorsDecimals", UnitTags.AllorsDecimal);
+            domain.DefineUnit(UnitIds.DoubleId, "AllorsDouble", "AllorsDoubles", UnitTags.AllorsDouble);
+            domain.DefineUnit(UnitIds.BooleanId, "AllorsBoolean", "AllorsBooleans", UnitTags.AllorsBoolean);
+            domain.DefineUnit(UnitIds.DatetimeId, "AllorsDateTime", "AllorsDateTimes", UnitTags.AllorsDateTime);
+            domain.DefineUnit(UnitIds.Unique, "AllorsUnique", "AllorsUniques", UnitTags.AllorsUnique);
+            domain.DefineUnit(UnitIds.BinaryId, "AllorsBinary", "AllorsBinaries", UnitTags.AllorsBinary);
 
-            {
-                var objectType = new Unit(core, UnitIds.IntegerId);
-                objectType.SingularName = UnitTags.AllorsInteger.ToString();
-                objectType.PluralName = objectType.SingularName + "s";
-                objectType.UnitTag = (int)UnitTags.AllorsInteger;
-            }
-
-            {
-                var objectType = new Unit(core, UnitIds.LongId);
-                objectType.SingularName = UnitTags.AllorsLong.ToString();
-                objectType.PluralName = objectType.SingularName + "s";
-                objectType.UnitTag = (int)UnitTags.AllorsLong;
-            }
-
-            {
-                var objectType = new Unit(core, UnitIds.DecimalId);
-                objectType.SingularName = UnitTags.AllorsDecimal.ToString();
-                objectType.PluralName = objectType.SingularName + "s";
-                objectType.UnitTag = (int)UnitTags.AllorsDecimal;
-            }
-
-            {
-                var objectType = new Unit(core, UnitIds.DoubleId);
-                objectType.SingularName = UnitTags.AllorsDouble.ToString();
-                objectType.PluralName = objectType.SingularName + "s";
-                objectType.UnitTag = (int)UnitTags.AllorsDouble;
-            }
-
-            {
-                var objectType = new Unit(core, UnitIds.BooleanId);
-                objectType.SingularName = UnitTags.AllorsBoolean.ToString();
-                objectType.PluralName = objectType.SingularName + "s";
-                objectType.UnitTag = (int)UnitTags.AllorsBoolean;
-            }
-
-            {
-                var objectType = new Unit(core, UnitIds.DatetimeId);
-                objectType.SingularName = UnitTags.AllorsDateTime.ToString();
-                objectType.PluralName = objectType.SingularName + "s";
-                objectType.UnitTag = (int)UnitTags.AllorsDateTime;
-            }
-
-            {
-                var objectType = new Unit(core, UnitIds.Unique);
-                objectType.SingularName = UnitTags.AllorsUnique.ToString();
-                objectType.PluralName = objectType.SingularName + "s";
-                objectType.UnitTag = (int)UnitTags.AllorsUnique;
-            }
-
-            {
-                var objectType = new Unit(core, UnitIds.BinaryId);
-                objectType.SingularName = UnitTags.AllorsBinary.ToString();
-                objectType.PluralName = objectType.SingularName + "s";
-                objectType.UnitTag = (int)UnitTags.AllorsBinary;
-            }
-
-            return core;
+            return domain;
         }
     }
 }

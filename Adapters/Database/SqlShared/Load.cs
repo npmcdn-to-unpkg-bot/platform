@@ -382,7 +382,7 @@ namespace Allors.Adapters.Database.Sql
                                     var unitType = (Unit)relationType.RoleType.ObjectType;
                                     switch (unitType.UnitTag)
                                     {
-                                        case (int)UnitTags.AllorsString:
+                                        case UnitTags.AllorsString:
                                             {
                                                 List<UnitRelation> relations;
                                                 if (!relationsByExclusiveLeafClass.TryGetValue(associationConcreteClass.ExclusiveLeafClass, out relations))
@@ -397,7 +397,7 @@ namespace Allors.Adapters.Database.Sql
                                             
                                             break;
 
-                                        case (int)UnitTags.AllorsBinary:
+                                        case UnitTags.AllorsBinary:
                                             {
                                                 List<UnitRelation> relations;
                                                 if (!relationsByExclusiveLeafClass.TryGetValue(associationConcreteClass.ExclusiveLeafClass, out relations))
@@ -432,7 +432,7 @@ namespace Allors.Adapters.Database.Sql
                                     {
                                         var exclusiveLeafClass = associationConcreteClass.ExclusiveLeafClass;
                                         var unitType = (Unit)relationType.RoleType.ObjectType;
-                                        var unitTypeTag = (UnitTags)unitType.UnitTag;
+                                        var unitTypeTag = unitType.UnitTag;
                                         var unit = Serialization.ReadString(value, unitTypeTag);
 
                                         List<UnitRelation> relations;

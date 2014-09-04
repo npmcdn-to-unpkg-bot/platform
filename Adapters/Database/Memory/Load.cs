@@ -322,10 +322,10 @@ namespace Allors.Adapters.Database.Memory
                                         var unitType = (Unit)relationType.RoleType.ObjectType;
                                         switch (unitType.UnitTag)
                                         {
-                                            case (int)UnitTags.AllorsString:
+                                            case UnitTags.AllorsString:
                                                 strategy.SetUnitRole(relationType.RoleType, string.Empty);
                                                 break;
-                                            case (int)UnitTags.AllorsBinary:
+                                            case UnitTags.AllorsBinary:
                                                 strategy.SetUnitRole(relationType.RoleType, emptyByteArray);
                                                 break;
                                         }
@@ -333,7 +333,7 @@ namespace Allors.Adapters.Database.Memory
                                     else
                                     {
                                         var unitType = (Unit)relationType.RoleType.ObjectType;
-                                        var unitTypeTag = (UnitTags)unitType.UnitTag;
+                                        var unitTypeTag = unitType.UnitTag;
 
                                         var unit = Serialization.ReadString(value, unitTypeTag);
                                         strategy.SetUnitRole(relationType.RoleType, unit);

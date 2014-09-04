@@ -373,9 +373,7 @@
     <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Database\Npgsql\RepositoryCommands\Text\" />
     <Folder Include="Database\Npgsql\SessionCommands\Text\" />
-    <Folder Include="Database\SqlClient\RepositoryCommands\Text\" />
     <Folder Include="Database\SqlClient\SessionCommands\Text\" />
   </ItemGroup>
   <ItemGroup>

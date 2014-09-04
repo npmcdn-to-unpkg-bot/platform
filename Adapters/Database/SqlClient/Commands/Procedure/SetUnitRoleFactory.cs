@@ -94,7 +94,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
                 SchemaTableParameter tableParam;
 
                 var unitType = (Unit)roleType.ObjectType;
-                var unitTypeTag = (UnitTags)unitType.UnitTag;
+                var unitTypeTag = unitType.UnitTag;
                 switch (unitTypeTag)
                 {
                     case UnitTags.AllorsString:

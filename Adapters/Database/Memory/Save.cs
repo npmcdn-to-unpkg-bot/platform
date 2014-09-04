@@ -142,7 +142,6 @@ namespace Allors.Adapters.Database.Memory
                     if (roleType.ObjectType is Unit)
                     {
                         var unitType = (Unit)roleType.ObjectType;
-                        var unitTypeTag = (UnitTags)unitType.UnitTag;
                         foreach (var strategy in strategies)
                         {
                             strategy.SaveUnit(this.writer, roleType);

@@ -482,7 +482,7 @@ namespace Allors.Adapters.Workspace.Memory
         internal static object LoadUnit(XmlReader reader, RoleType roleType, string value)
         {
             var unitType = (Unit)roleType.ObjectType;
-            var unitTypeTag = (UnitTags)unitType.UnitTag;
+            var unitTypeTag = unitType.UnitTag;
             if (reader.IsEmptyElement)
             {
                 if (unitTypeTag == UnitTags.AllorsString)

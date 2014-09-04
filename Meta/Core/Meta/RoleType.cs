@@ -91,7 +91,7 @@ namespace Allors.Meta
             var unitType = this.ObjectType as Unit;
             if (unitType != null)
             {
-                switch ((UnitTags)unitType.UnitTag)
+                switch (unitType.UnitTag)
                 {
                     case UnitTags.AllorsString:
                         if (!this.Size.HasValue)
@@ -162,7 +162,7 @@ namespace Allors.Meta
                 var unitType = this.ObjectType as Unit;
                 if (unitType != null)
                 {
-                    switch ((UnitTags)unitType.UnitTag)
+                    switch (unitType.UnitTag)
                     {
                         case UnitTags.AllorsString:
                             if (this.Size.HasValue)

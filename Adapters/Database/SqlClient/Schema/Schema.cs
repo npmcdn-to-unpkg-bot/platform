@@ -241,7 +241,7 @@ FROM information_schema.columns"))
                                                 else
                                                 {
                                                     var unitType = (Unit)column.RelationType.RoleType.ObjectType;
-                                                    var unitTypeTag = (UnitTags)unitType.UnitTag;
+                                                    var unitTypeTag = unitType.UnitTag;
                                                     switch (unitTypeTag)
                                                     {
                                                         case UnitTags.AllorsString:
@@ -618,7 +618,7 @@ END";
                         if (relationType.RoleType.ObjectType is Unit)
                         {
                             var unitType = (Unit)relationType.RoleType.ObjectType;
-                            var unitTypeTag = (UnitTags)unitType.UnitTag;
+                            var unitTypeTag = unitType.UnitTag;
                             switch (unitTypeTag)
                             {
                                 case UnitTags.AllorsString:

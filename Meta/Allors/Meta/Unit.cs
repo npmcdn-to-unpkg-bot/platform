@@ -25,14 +25,14 @@ namespace Allors.Meta
 
     public partial class Unit : ObjectType
     {
-        private int unitTag;
+        private UnitTags unitTag;
 
         public Unit(Domain domain, Guid id) : base(domain, id)
         {
             domain.OnUnitCreated(this);
         }
 
-        public int UnitTag
+        public UnitTags UnitTag
         {
             get
             {
