@@ -50,7 +50,11 @@
     <Compile Include="Allors\Generation\Storage\AllorsFileInfo.cs" />
     <Compile Include="Allors\Generation\Storage\Location.cs" />
     <Compile Include="Allors\Generation\StringTemplate.cs" />
+    <Compile Include="Allors\Meta\RelationTypeBuilder.cs" />
+    <Compile Include="Allors\Meta\InheritanceBuilder.cs" />
+    <Compile Include="Allors\Meta\RelationTypeBuilder.v.cs" />
     <Compile Include="Allors\Meta\InterfaceBuilder.cs" />
+    <Compile Include="Allors\Meta\InheritanceBuilder.v.cs" />
     <Compile Include="Allors\Meta\InterfaceBuilder.v.cs" />
     <Compile Include="Allors\Meta\MetaObjectBuilder.cs" />
     <Compile Include="Allors\Meta\ClassBuilder.cs" />
