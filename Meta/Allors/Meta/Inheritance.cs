@@ -27,14 +27,14 @@ namespace Allors.Meta
     /// <summary>
     /// Defines a subtype/supertype relation between two <see cref="ObjectType"/>s.
     /// </summary>
-    public sealed partial class Inheritance : MetaObject
+    public sealed partial class Inheritance : DomainDefinedObject
     {
         private Composite subtype;
 
         private Interface supertype;
 
         public Inheritance(Domain domain, Guid id)
-            : base(domain.MetaPopulation, id)
+            : base(domain, id)
         {
             domain.OnInheritanceCreated(this);
         }

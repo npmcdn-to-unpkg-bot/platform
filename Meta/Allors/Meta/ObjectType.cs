@@ -23,14 +23,14 @@ namespace Allors.Meta
 {
     using System;
 
-    public abstract partial class ObjectType : MetaObject, IComparable
+    public abstract partial class ObjectType : DomainDefinedObject, IComparable
     {
         private string singularName;
 
         private string pluralName;
 
         protected ObjectType(Domain domain, Guid id)
-            : base(domain.MetaPopulation, id)
+            : base(domain, id)
         {
         }
 

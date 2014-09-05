@@ -41,10 +41,11 @@ namespace Allors.Meta
             var allorsUnique = (Unit)env.Find(UnitIds.Unique);
             var allorsBinary = (Unit)env.Find(UnitIds.BinaryId);
 
-            // Objects
+            // Domain
             var domain = new Domain(env, new Guid("FEEA74C4-D5B6-44DA-BD0E-D4864CC88B88")) { Name = "Adapters" };
             domain.AddDirectSuperdomain(core);
 
+            // Objects
             var c1 = new ClassBuilder(domain, new Guid("7041c691-d896-4628-8f50-1c24f5d03414")).WithSingularName("C1").WithPluralName("C1s").Build();
             var c2 = new ClassBuilder(domain, new Guid("72c07e8a-03f5-4da8-ab37-236333d4f74e")).WithSingularName("C2").WithPluralName("C2s").Build();
             var c3 = new ClassBuilder(domain, new Guid("2a9b5a77-6065-4f2a-bbc3-655426f0f97b")).WithSingularName("C3").WithPluralName("C3s").Build();
@@ -133,7 +134,6 @@ namespace Allors.Meta
             new InheritanceBuilder(domain, new Guid("a1c0ac5b-cffa-4a5d-8812-9383a3e1cadc")).WithSubtype(i1).WithSupertype(s1234).Build();
 
             // RelationTypes
-
             // User
             new RelationTypeBuilder(domain, new Guid("1ffa3cb7-41f0-406a-a3a5-2f3a4c5ad59c")).WithObjectTypes(user, user).WithSingularName("Select").WithPluralName("Selects").WithCardinality(Cardinalities.ManyToMany).WithIsIndexed(true).Build();
             new RelationTypeBuilder(domain, new Guid("bc6b71a8-2a66-4b57-9c86-ecf521b973ba")).WithObjectTypes(user, allorsString).WithSingularName("From").WithPluralName("Froms").WithSize(256).Build();

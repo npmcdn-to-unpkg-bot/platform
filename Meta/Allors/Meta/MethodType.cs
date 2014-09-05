@@ -22,14 +22,14 @@ namespace Allors.Meta
 {
     using System;
 
-    public partial class MethodType : MetaObject, OperandType
+    public partial class MethodType : DomainDefinedObject, OperandType
     {
         private string name;
 
         private ObjectType objectType;
 
         public MethodType(Domain domain, Guid id)
-            : base(domain.MetaPopulation, id)
+            : base(domain, id)
         {
             domain.OnMethodTypeCreated(this);
         }

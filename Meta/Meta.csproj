@@ -50,6 +50,11 @@
     <Compile Include="Allors\Generation\Storage\AllorsFileInfo.cs" />
     <Compile Include="Allors\Generation\Storage\Location.cs" />
     <Compile Include="Allors\Generation\StringTemplate.cs" />
+    <Compile Include="Allors\Meta\MethodTypeBuilder.cs" />
+    <Compile Include="Allors\Meta\MethodTypeBuilder.v.cs" />
+    <Compile Include="Allors\Meta\UnitBuilder.cs" />
+    <Compile Include="Allors\Meta\UnitBuilder.v.cs" />
+    <Compile Include="Allors\Meta\DomainDefinedObject.cs" />
     <Compile Include="Allors\Meta\RelationTypeBuilder.cs" />
     <Compile Include="Allors\Meta\InheritanceBuilder.cs" />
     <Compile Include="Allors\Meta\RelationTypeBuilder.v.cs" />

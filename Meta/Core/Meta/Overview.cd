@@ -6,7 +6,7 @@
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAI1AIBAAASCBAQEAACAUAQIAAAGAg0AAYgBAAECAAI=</HashCode>
+      <HashCode>AAIxAIBAAACCBAQEAACAUAQIAAAEAAUAAYgBAAECAAI=</HashCode>
       <FileName>Allors\Meta\Domain.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -36,7 +36,7 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="Allors.Meta.Class" Collapsed="true">
-    <Position X="2.5" Y="6.75" Width="1.5" />
+    <Position X="2.5" Y="7.5" Width="1.5" />
     <Compartments>
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
@@ -46,7 +46,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Allors.Meta.Composite" Collapsed="true">
-    <Position X="4" Y="5.25" Width="1.5" />
+    <Position X="3.75" Y="6" Width="1.5" />
     <Compartments>
       <Compartment Name="Methods" Collapsed="true" />
       <Compartment Name="Fields" Collapsed="true" />
@@ -57,7 +57,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Allors.Meta.Interface" Collapsed="true">
-    <Position X="5" Y="6.75" Width="1.5" />
+    <Position X="4.75" Y="7.5" Width="1.5" />
     <Compartments>
       <Compartment Name="Properties" Collapsed="true" />
       <Compartment Name="Methods" Collapsed="true" />
@@ -69,7 +69,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Allors.Meta.Inheritance" Collapsed="true">
-    <Position X="6" Y="3.25" Width="1.5" />
+    <Position X="5.75" Y="4" Width="1.5" />
     <Members>
       <Method Name="HasCycle" Hidden="true" />
       <Method Name="Inheritance" Hidden="true" />
@@ -84,10 +84,10 @@
     </Compartments>
     <AssociationLine Name="Subtype" Type="Allors.Meta.Composite" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="6" Y="3.562" />
-        <Point X="5.75" Y="3.562" />
-        <Point X="5.75" Y="5.596" />
-        <Point X="5.5" Y="5.596" />
+        <Point X="5.75" Y="4.312" />
+        <Point X="5.5" Y="4.312" />
+        <Point X="5.5" Y="6.346" />
+        <Point X="5.25" Y="6.346" />
       </Path>
     </AssociationLine>
     <TypeIdentifier>
@@ -100,7 +100,7 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="Allors.Meta.ObjectType">
-    <Position X="3" Y="3.25" Width="1.5" />
+    <Position X="2.75" Y="4" Width="1.5" />
     <Members>
       <Method Name="CompareTo" Hidden="true" />
       <Property Name="IsClass" Hidden="true" />
@@ -125,7 +125,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Allors.Meta.AssociationType">
-    <Position X="9.25" Y="6.25" Width="1.5" />
+    <Position X="9" Y="7" Width="1.5" />
     <Members>
       <Method Name="AssociationType" Hidden="true" />
       <Method Name="CompareTo" Hidden="true" />
@@ -162,7 +162,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Allors.Meta.RoleType">
-    <Position X="11" Y="6.25" Width="2" />
+    <Position X="10.75" Y="7" Width="2" />
     <Members>
       <Field Name="assignedPluralName" Hidden="true" />
       <Field Name="assignedSingularName" Hidden="true" />
@@ -208,7 +208,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Allors.Meta.MethodType" Collapsed="true">
-    <Position X="12" Y="4.75" Width="1.5" />
+    <Position X="11.75" Y="5.5" Width="1.5" />
     <Compartments>
       <Compartment Name="Properties" Collapsed="true" />
       <Compartment Name="Methods" Collapsed="true" />
@@ -220,7 +220,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Allors.Meta.RelationType">
-    <Position X="8.25" Y="3.25" Width="1.5" />
+    <Position X="8" Y="4" Width="1.5" />
     <Members>
       <Field Name="associationType" Hidden="true" />
       <Method Name="CompareTo" Hidden="true" />
@@ -250,7 +250,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Allors.Meta.Unit">
-    <Position X="1.25" Y="5.25" Width="1.5" />
+    <Position X="1" Y="6" Width="1.5" />
     <Members>
       <Property Name="IsBinary" Hidden="true" />
       <Property Name="IsBoolean" Hidden="true" />
@@ -276,15 +276,25 @@
       <FileName>Allors\Meta\MetaPopulation.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="Allors.Meta.DomainDefinedObject" Collapsed="true">
+    <Position X="5.5" Y="2.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Allors\Meta\DomainDefinedObject.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DefiningDomain" />
+    </ShowAsAssociation>
+  </Class>
   <Interface Name="Allors.Meta.OperandType" Collapsed="true">
-    <Position X="10.5" Y="3.25" Width="1.5" />
+    <Position X="10.5" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Allors\Meta\OperandType.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Allors.Meta.PropertyType" Collapsed="true">
-    <Position X="10" Y="4.75" Width="1.5" />
+    <Position X="9.75" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Allors\Meta\PropertyType.cs</FileName>

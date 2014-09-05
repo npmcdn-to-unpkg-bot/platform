@@ -28,7 +28,7 @@ namespace Allors.Meta
     /// A <see cref="RelationType"/> defines the state and behavior for
     /// a set of <see cref="AssociationType"/>s and <see cref="RoleType"/>s.
     /// </summary>
-    public partial class RelationType : MetaObject, IComparable
+    public partial class RelationType : DomainDefinedObject, IComparable
     {
         private readonly AssociationType associationType;
         private readonly RoleType roleType;
@@ -36,7 +36,7 @@ namespace Allors.Meta
         private bool isDerived;
 
         public RelationType(Domain domain, Guid id)
-            : base(domain.MetaPopulation, id)
+            : base(domain, id)
         {
             this.associationType = new AssociationType(this);
             this.roleType = new RoleType(this);
