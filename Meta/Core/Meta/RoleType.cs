@@ -49,7 +49,7 @@ namespace Allors.Meta
             set
             {
                 this.scale = value;
-                this.RelationType.Environment.Stale();
+                this.RelationType.MetaPopulation.Stale();
             }
         }
 
@@ -63,7 +63,7 @@ namespace Allors.Meta
             set
             {
                 this.precision = value;
-                this.RelationType.Environment.Stale();
+                this.RelationType.MetaPopulation.Stale();
             }
         }
 
@@ -77,7 +77,7 @@ namespace Allors.Meta
             set
             {
                 this.size = value;
-                this.RelationType.Environment.Stale();
+                this.RelationType.MetaPopulation.Stale();
             }
         }
 

@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="Part.cs" company="Allors bvba">
+// <copyright file="Domain.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -46,9 +46,9 @@ namespace Allors.Meta
 
         private IList<MethodType> definedMethodTypes;
 
-        public Domain(Environment environment, Guid id)
+        public Domain(MetaPopulation metaPopulation, Guid id)
         {
-            this.Environment = environment;
+            this.MetaPopulation = metaPopulation;
 
             this.Id = id;
             this.directSuperdomains = new List<Domain>();
@@ -70,9 +70,9 @@ namespace Allors.Meta
 
             set
             {
-                this.Environment.AssertUnlocked();
+                this.MetaPopulation.AssertUnlocked();
                 this.name = value;
-                this.Environment.Stale();
+                this.MetaPopulation.Stale();
             }
         }
 
@@ -151,7 +151,7 @@ namespace Allors.Meta
         public void AddDirectSuperdomain(Domain superdomain)
         {
             this.directSuperdomains.Add(superdomain);
-            this.Environment.Stale();
+            this.MetaPopulation.Stale();
         }
         
         public Unit DefineUnit(Guid id, string singularName, string pluralName, UnitTags unitTag)
@@ -189,6 +189,47 @@ namespace Allors.Meta
                 Subtype = subtype,
                 Supertype = supertype
             };
+        }
+
+        public void DefineRelationType(Guid id, Composite associationObjectType, ObjectType roleObjectType, Cardinalities cardinalities, string assignedSingularName, string assignedPluralName)
+        {
+            var relationType = new RelationType(this, id)
+            {
+                AssociationType =
+                {
+                    ObjectType = associationObjectType,
+                },
+                RoleType =
+                {
+                    ObjectType = roleObjectType,
+                    AssignedSingularName = assignedSingularName,
+                    AssignedPluralName = assignedPluralName,
+                }
+            };
+
+            switch (cardinalities)
+            {
+                case Cardinalities.OneToOne:
+                    relationType.AssociationType.IsOne = true;
+                    relationType.RoleType.IsOne = true;
+                    break;
+
+                case Cardinalities.OneToMany:
+                    relationType.AssociationType.IsOne = true;
+                    relationType.RoleType.IsMany = true;
+                    break;
+
+                case Cardinalities.ManyToOne:
+                    relationType.AssociationType.IsMany = true;
+                    relationType.RoleType.IsOne = true;
+                    break;
+
+                case Cardinalities.ManyToMany:
+                    relationType.AssociationType.IsMany = true;
+                    relationType.RoleType.IsMany = true;
+                    break;
+            }
+
         }
 
         /// <summary>
@@ -241,37 +282,37 @@ namespace Allors.Meta
         internal void OnUnitCreated(Unit unit)
         {
             this.definedUnits.Add(unit);
-            this.Environment.OnUnitCreated(unit);
+            this.MetaPopulation.OnUnitCreated(unit);
         }
 
         internal void OnInterfaceCreated(Interface @interface)
         {
             this.definedInterfaces.Add(@interface);
-            this.Environment.OnInterfaceCreated(@interface);
+            this.MetaPopulation.OnInterfaceCreated(@interface);
         }
 
         internal void OnClassCreated(Class @class)
         {
             this.definedClasses.Add(@class);
-            this.Environment.OnClassCreated(@class);
+            this.MetaPopulation.OnClassCreated(@class);
         }
 
         internal void OnInheritanceCreated(Inheritance inheritance)
         {
             this.definedInheritances.Add(inheritance);
-            this.Environment.OnInheritanceCreated(inheritance);
+            this.MetaPopulation.OnInheritanceCreated(inheritance);
         }
 
         internal void OnRelationTypeCreated(RelationType relationType)
         {
             this.definedRelationTypes.Add(relationType);
-            this.Environment.OnRelationTypeCreated(relationType);
+            this.MetaPopulation.OnRelationTypeCreated(relationType);
         }
 
         internal void OnMethodTypeCreated(MethodType methodType)
         {
             this.definedMethodTypes.Add(methodType);
-            this.Environment.OnMethodTypeCreated(methodType);
+            this.MetaPopulation.OnMethodTypeCreated(methodType);
         }
 
         /// <summary>

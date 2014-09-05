@@ -42,9 +42,9 @@ namespace Allors.Adapters.Special.SqlClient.LongId.ReadCommitted
             this.profile.Dispose();
         }
 
-        protected override IDatabase CreateDatabase(Environment environment, bool init)
+        protected override IDatabase CreateDatabase(MetaPopulation metaPopulation, bool init)
         {
-            return this.profile.CreateDatabase(environment, init);
+            return this.profile.CreateDatabase(metaPopulation, init);
         }
 
         protected override void DropTable(string tableName)

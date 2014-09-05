@@ -24,7 +24,7 @@ namespace Allors.Meta
 
     public static partial class Repository
     {
-        public static Domain Core(Environment env)
+        public static Domain Core(MetaPopulation env)
         {
             var domain = new Domain(env, new Guid("CA802192-8186-4C2A-8315-A8DEFAA74A12"));
 

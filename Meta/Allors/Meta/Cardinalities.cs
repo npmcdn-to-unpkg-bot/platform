@@ -1,5 +1,5 @@
-//------------------------------------------------------------------------------------------------- 
-// <copyright file="Repository.cs" company="Allors bvba">
+﻿//------------------------------------------------------------------------------------------------- 
+// <copyright file="Cardinalities.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -18,10 +18,29 @@
 // </copyright>
 //-------------------------------------------------------------------------------------------------
 
+
 namespace Allors.Meta
 {
-    public static partial class Repository
+    public enum Cardinalities
     {
-        public static readonly MetaPopulation MetaPopulation;
+        /// <summary>
+        /// One to one.
+        /// </summary>
+        OneToOne = 0,
+
+        /// <summary>
+        /// One to many.
+        /// </summary>
+        OneToMany = 1,
+
+        /// <summary>
+        /// Many to one.
+        /// </summary>
+        ManyToOne = 2,
+
+        /// <summary>
+        /// Many to Many.
+        /// </summary>
+        ManyToMany = 3
     }
 }

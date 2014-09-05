@@ -36,7 +36,7 @@ namespace Allors.Adapters.Special.Assertions
         [SetUp]
         protected void Init()
         {
-            var configuration = new Configuration { ObjectFactory = new ObjectFactory(Repository.Environment, typeof(IObject).Assembly, "Domain") };
+            var configuration = new Configuration { ObjectFactory = new ObjectFactory(Repository.MetaPopulation, typeof(IObject).Assembly, "Domain") };
             var database = new Database(configuration);
             this.session = database.CreateSession();
         }

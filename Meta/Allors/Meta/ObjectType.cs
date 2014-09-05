@@ -31,7 +31,7 @@ namespace Allors.Meta
 
         protected ObjectType(Domain domain, Guid id)
         {
-            this.Environment = domain.Environment;
+            this.MetaPopulation = domain.MetaPopulation;
             this.Id = id;
         }
 
@@ -44,9 +44,9 @@ namespace Allors.Meta
 
             set
             {
-                this.Environment.AssertUnlocked();
+                this.MetaPopulation.AssertUnlocked();
                 this.singularName = value;
-                this.Environment.Stale();
+                this.MetaPopulation.Stale();
             }
         }
 
@@ -59,9 +59,9 @@ namespace Allors.Meta
 
             set
             {
-                this.Environment.AssertUnlocked();
+                this.MetaPopulation.AssertUnlocked();
                 this.pluralName = value;
-                this.Environment.Stale();
+                this.MetaPopulation.Stale();
             }
         }
 

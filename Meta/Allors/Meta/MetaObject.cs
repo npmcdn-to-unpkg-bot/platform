@@ -43,9 +43,9 @@ namespace Allors.Meta
 
             protected set
             {
-                this.Environment.AssertUnlocked();
+                this.MetaPopulation.AssertUnlocked();
                 this.id = value;
-                this.Environment.Stale();
+                this.MetaPopulation.Stale();
             }
         }
 
@@ -67,7 +67,7 @@ namespace Allors.Meta
             get { return this.Id.ToString("D").ToLower(); }
         }
 
-        public Environment Environment { get; protected set; }
+        public MetaPopulation MetaPopulation { get; protected set; }
 
         /// <summary>
         /// Gets the validation name.

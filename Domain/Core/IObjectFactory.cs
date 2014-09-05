@@ -25,8 +25,6 @@ namespace Allors
 
     using Allors.Meta;
 
-    using Environment = Allors.Meta.Environment;
-
     /// <summary>
     /// A factory for creating new IObject instances.
     /// </summary>
@@ -46,7 +44,7 @@ namespace Allors
         /// Gets the domain.
         /// </summary>
         /// <value>The domain.</value>
-        Environment Environment { get; }
+        MetaPopulation MetaPopulation { get; }
 
         /// <summary>
         /// Create a new IObject instance.

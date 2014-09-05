@@ -30,7 +30,7 @@ namespace Allors.Meta
         
         public MethodType(Domain domain, Guid methodTypeId)
         {
-            this.Environment = domain.Environment;
+            this.MetaPopulation = domain.MetaPopulation;
             this.Id = methodTypeId;
 
             domain.OnMethodTypeCreated(this);
@@ -45,9 +45,9 @@ namespace Allors.Meta
 
             set
             {
-                this.Environment.AssertUnlocked();
+                this.MetaPopulation.AssertUnlocked();
                 this.name = value;
-                this.Environment.Stale();
+                this.MetaPopulation.Stale();
             }
         }
 
@@ -60,9 +60,9 @@ namespace Allors.Meta
 
             set
             {
-                this.Environment.AssertUnlocked();
+                this.MetaPopulation.AssertUnlocked();
                 this.objectType = value;
-                this.Environment.Stale();
+                this.MetaPopulation.Stale();
             }
         }
 

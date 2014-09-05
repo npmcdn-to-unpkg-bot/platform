@@ -22,9 +22,11 @@ namespace Allors.Meta
 {
     using System;
 
+    using Allors.Meta.Builders;
+
     public static partial class Repository
     {
-        public static Domain Adapters(Environment env)
+        public static Domain Adapters(MetaPopulation env)
         {
             // Imports
             var core = (Domain)env.Find(new Guid("CA802192-8186-4C2A-8315-A8DEFAA74A12"));
@@ -43,23 +45,23 @@ namespace Allors.Meta
             var domain = new Domain(env, new Guid("FEEA74C4-D5B6-44DA-BD0E-D4864CC88B88")) { Name = "Adapters" };
             domain.AddDirectSuperdomain(core);
 
-            var c1 = domain.DefineClass(new Guid("7041c691-d896-4628-8f50-1c24f5d03414"), "C1", "C1s");
-            var c2 = domain.DefineClass(new Guid("72c07e8a-03f5-4da8-ab37-236333d4f74e"), "C2", "C2s");
-            var c3 = domain.DefineClass(new Guid("2a9b5a77-6065-4f2a-bbc3-655426f0f97b"), "C3", "C3s");
-            var c4 = domain.DefineClass(new Guid("20049a79-20c7-478b-a5ba-c54b1e615168"), "C4", "C4s");
-            var i1 = domain.DefineInterface(new Guid("fefcf1b6-ac8f-47b0-bed5-939207a2833e"), "I1", "I1s");
-            var i2 = domain.DefineInterface(new Guid("19bb2bc3-d53a-4d15-86d0-b250fdbcb0a0"), "I2", "I2s");
-            var i3 = domain.DefineInterface(new Guid("2d86277f-3993-4831-a7de-3640166d3d50"), "I3", "I3s");
-            var i4 = domain.DefineInterface(new Guid("7a49be0e-cb91-4e1e-b113-ac67ec969935"), "I4", "I4s");
-            var i12 = domain.DefineInterface(new Guid("97755724-b934-4cc5-beb4-3d49a7a4b27e"), "I12", "I12s");
-            var i23 = domain.DefineInterface(new Guid("29cb9717-2452-4da0-9a29-8bd5d815307a"), "I23", "I23s");
-            var i34 = domain.DefineInterface(new Guid("ebc22540-54c8-4601-a43d-2ed6da9f3e79"), "I34", "I34s");
-            var s1 = domain.DefineInterface(new Guid("15c3bb71-075d-48ad-8a00-250c2f627092"), "S1", "S1s");
-            var s2 = domain.DefineInterface(new Guid("feeb7027-7c6c-4cb5-8718-93e6e8a4afd8"), "S2", "S2s");
-            var s3 = domain.DefineInterface(new Guid("5b24107d-f5e8-499b-94f7-2bf712493546"), "S3", "S3s");
-            var s4 = domain.DefineInterface(new Guid("5b348bcb-823d-4cbe-b3ac-a18b1cd96581"), "S4", "S4s");
-            var s12 = domain.DefineInterface(new Guid("c5747a64-f468-4d0d-80f3-6463bd32b0ca"), "S12", "S12s");
-            var s1234 = domain.DefineInterface(new Guid("c3c0ecf3-9f8d-4701-854f-8ddea1bd69fd"), "S1234", "S1234s");
+            var c1 = new ClassBuilder(domain, new Guid("7041c691-d896-4628-8f50-1c24f5d03414")).WithSingularName("C1").WithPluralName("C1s").Build();
+            var c2 = new ClassBuilder(domain, new Guid("72c07e8a-03f5-4da8-ab37-236333d4f74e")).WithSingularName("C2").WithPluralName("C2s").Build();
+            var c3 = new ClassBuilder(domain, new Guid("2a9b5a77-6065-4f2a-bbc3-655426f0f97b")).WithSingularName("C3").WithPluralName("C3s").Build();
+            var c4 = new ClassBuilder(domain, new Guid("20049a79-20c7-478b-a5ba-c54b1e615168")).WithSingularName("C4").WithPluralName("C4s").Build();
+            var i1 = new InterfaceBuilder(domain, new Guid("fefcf1b6-ac8f-47b0-bed5-939207a2833e")).WithSingularName("I1").WithPluralName("I1s").Build();
+            var i2 = new InterfaceBuilder(domain, new Guid("19bb2bc3-d53a-4d15-86d0-b250fdbcb0a0")).WithSingularName("I2").WithPluralName("I2s").Build();
+            var i3 = new InterfaceBuilder(domain, new Guid("2d86277f-3993-4831-a7de-3640166d3d50")).WithSingularName("I3").WithPluralName("I3s").Build();
+            var i4 = new InterfaceBuilder(domain, new Guid("7a49be0e-cb91-4e1e-b113-ac67ec969935")).WithSingularName("I4").WithPluralName("I4s").Build();
+            var i12 = new InterfaceBuilder(domain, new Guid("97755724-b934-4cc5-beb4-3d49a7a4b27e")).WithSingularName("I12").WithPluralName("I12s").Build();
+            var i23 = new InterfaceBuilder(domain, new Guid("29cb9717-2452-4da0-9a29-8bd5d815307a")).WithSingularName("I23").WithPluralName("I23s").Build();
+            var i34 = new InterfaceBuilder(domain, new Guid("ebc22540-54c8-4601-a43d-2ed6da9f3e79")).WithSingularName("I34").WithPluralName("I34s").Build();
+            var s1 = new InterfaceBuilder(domain, new Guid("15c3bb71-075d-48ad-8a00-250c2f627092")).WithSingularName("S1").WithPluralName("S1s").Build();
+            var s2 = new InterfaceBuilder(domain, new Guid("feeb7027-7c6c-4cb5-8718-93e6e8a4afd8")).WithSingularName("S2").WithPluralName("S2s").Build();
+            var s3 = new InterfaceBuilder(domain, new Guid("5b24107d-f5e8-499b-94f7-2bf712493546")).WithSingularName("S3").WithPluralName("S3s").Build();
+            var s4 = new InterfaceBuilder(domain, new Guid("5b348bcb-823d-4cbe-b3ac-a18b1cd96581")).WithSingularName("S4").WithPluralName("S4s").Build();
+            var s12 = new InterfaceBuilder(domain, new Guid("c5747a64-f468-4d0d-80f3-6463bd32b0ca")).WithSingularName("S12").WithPluralName("S12s").Build();
+            var s1234 = new InterfaceBuilder(domain, new Guid("c3c0ecf3-9f8d-4701-854f-8ddea1bd69fd")).WithSingularName("S1234").WithPluralName("S1234s").Build();
 
             var interfaceWithoutConcreteClass = domain.DefineInterface(new Guid("2f4bc713-47c9-4e07-9f2b-1d22a0cb4fad"), "InterfaceWithoutConcreteClass", "InterfacesWithoutConcreteClass");
             var classWithoutUnitRoles = domain.DefineClass(new Guid("071d291d-fcc6-4511-8aa2-2d30fdeede8f"),"ClassWithoutUnitRoles", "ClassesWithoutUnitRoles");
@@ -108,40 +110,11 @@ namespace Allors.Meta
             domain.DefineInheritance(new Guid("3fea8f15-6a9e-425b-9064-3efd9b7b809a"), person,  named);
             domain.DefineInheritance(new Guid("a7b5f53e-1e73-48ff-a313-16c9ebc0609d"), company,  named);
 
-            // Relations
-            new RelationType(
-                domain,
-                new Guid("00a70a04-4fc8-4585-83ce-0f7f0e0db7ab"))
-                {
-                    AssociationType = 
-                    {
-                        ObjectType = i1 
-                    },
-                    RoleType =
-                        {
-                            ObjectType = i34,
-                            AssignedSingularName = "I34one2many",
-                            AssignedPluralName = "I34one2manies",
-                            IsMany = true
-                        }
-                };
 
-            new RelationType(
-                domain,
-                new Guid("00b706bb-681e-44ce-bbf3-c3b01bb11269"))
-                {
-                    AssociationType = 
-                    {
-                        ObjectType = i3, IsMany = true 
-                    },
-                    RoleType =
-                        {
-                            ObjectType = c4,
-                            AssignedSingularName = "C4many2many",
-                            AssignedPluralName = "C4many2manies",
-                            IsMany = true
-                        }
-                };
+            // Relations
+            domain.DefineRelationType(new Guid("00a70a04-4fc8-4585-83ce-0f7f0e0db7ab"), i1, i34, Cardinalities.OneToMany, "I34one2many", "I34one2manies");
+            
+            domain.DefineRelationType(new Guid("00b706bb-681e-44ce-bbf3-c3b01bb11269"), i3, c4, Cardinalities.ManyToMany, "C4many2many", "C4many2manies");
 
             new RelationType(
                 domain,

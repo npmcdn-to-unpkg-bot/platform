@@ -91,7 +91,7 @@ namespace Allors.Adapters.Database.SqlClient
             this.UniqueRelationTableParam = new SchemaTableParameter(this, AllorsPrefix + "p_r", this.UniqueRelationTable);
             this.BinaryRelationTableParam = new SchemaTableParameter(this, AllorsPrefix + "p_r", this.BinaryRelationTable);
 
-            foreach (var relationType in database.Environment.RelationTypes)
+            foreach (var relationType in database.MetaPopulation.RelationTypes)
             {
                 var roleType = relationType.RoleType;
                 var unitType = roleType.ObjectType as Unit;
@@ -502,7 +502,7 @@ AS
 
             this.procedureByName.Add(procedure.Name, procedure);
 
-            foreach (var concreteComposite in this.Database.Environment.Classes)
+            foreach (var concreteComposite in this.Database.MetaPopulation.Classes)
             {
                 var sortedUnitRoleTypes = this.Database.GetSortedUnitRolesByObjectType(concreteComposite);
 

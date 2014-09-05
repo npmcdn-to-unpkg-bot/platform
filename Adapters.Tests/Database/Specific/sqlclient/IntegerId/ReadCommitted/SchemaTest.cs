@@ -36,9 +36,9 @@ namespace Allors.Adapters.Special.SqlClient.IntegerId.ReadCommitted
             }
         }
 
-        protected override IDatabase CreateDatabase(Environment environment, bool init)
+        protected override IDatabase CreateDatabase(MetaPopulation metaPopulation, bool init)
         {
-            return this.profile.CreateDatabase(environment, init);
+            return this.profile.CreateDatabase(metaPopulation, init);
         }
 
         [TearDown]

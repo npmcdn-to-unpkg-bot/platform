@@ -48,7 +48,7 @@ namespace Allors.Meta
         {
             get
             {
-                this.Environment.Derive();
+                this.MetaPopulation.Derive();
                 return this.derivedSubclasses.Count > 0;
             }
         }
@@ -57,7 +57,7 @@ namespace Allors.Meta
         {
             get
             {
-                this.Environment.Derive();
+                this.MetaPopulation.Derive();
                 return this.derivedSubtypes.Count > 0;
             }
         }
@@ -66,7 +66,7 @@ namespace Allors.Meta
         {
             get
             {
-                this.Environment.Derive();
+                this.MetaPopulation.Derive();
                 return this.derivedLeafClasses.Count > 0;
             }
         }
@@ -81,7 +81,7 @@ namespace Allors.Meta
         {
             get
             {
-                this.Environment.Derive();
+                this.MetaPopulation.Derive();
                 return this.derivedSubclasses;
             }
         }
@@ -94,7 +94,7 @@ namespace Allors.Meta
         {
             get
             {
-                this.Environment.Derive();
+                this.MetaPopulation.Derive();
                 return this.derivedSubtypes;
             }
         }
@@ -103,7 +103,7 @@ namespace Allors.Meta
         {
             get
             {
-                this.Environment.Derive();
+                this.MetaPopulation.Derive();
                 return this.derivedLeafClasses;
             }
         }
@@ -112,7 +112,7 @@ namespace Allors.Meta
         {
             get
             {
-                this.Environment.Derive();
+                this.MetaPopulation.Derive();
                 return this.derivedExclusiveLeafClass;
             }
         }
@@ -130,7 +130,7 @@ namespace Allors.Meta
         /// </returns>
         public override bool ContainsLeafClass(ObjectType objectType)
         {
-            this.Environment.Derive();
+            this.MetaPopulation.Derive();
             return this.derivedLeafClasses.Contains(objectType);
         }
 
@@ -143,7 +143,7 @@ namespace Allors.Meta
         internal void DeriveDirectSubtypes(HashSet<Composite> directSubtypes)
         {
             directSubtypes.Clear();
-            foreach (var inheritance in this.Environment.Inheritances.Where(inheritance => this.Equals(inheritance.Supertype)))
+            foreach (var inheritance in this.MetaPopulation.Inheritances.Where(inheritance => this.Equals(inheritance.Supertype)))
             {
                 directSubtypes.Add(inheritance.Subtype);
             }

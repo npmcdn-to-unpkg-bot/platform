@@ -8,9 +8,9 @@ namespace Domain
 
 	public static class InterfaceWithoutConcreteClassMeta
 	{
-		public static readonly global::Allors.Meta.Interface ObjectType = (Allors.Meta.Interface)global::Allors.Meta.Repository.Environment.Find( new System.Guid("2f4bc713-47c9-4e07-9f2b-1d22a0cb4fad") );
+		public static readonly global::Allors.Meta.Interface ObjectType = (Allors.Meta.Interface)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("2f4bc713-47c9-4e07-9f2b-1d22a0cb4fad") );
 
-		public static readonly global::Allors.Meta.RoleType InterfaceWithoutConcreteClassAllorsBoolean = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.Environment.Find( new System.Guid("b490715d-e318-471b-bd37-1c1e12c0314e"))).RoleType;
+		public static readonly global::Allors.Meta.RoleType InterfaceWithoutConcreteClassAllorsBoolean = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("b490715d-e318-471b-bd37-1c1e12c0314e"))).RoleType;
 
 	}
 }

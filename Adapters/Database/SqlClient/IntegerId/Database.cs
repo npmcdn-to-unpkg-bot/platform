@@ -47,7 +47,7 @@ namespace Allors.Adapters.Database.SqlClient.IntegerId
         {
             get
             {
-                if (this.ObjectFactory.Environment != null)
+                if (this.ObjectFactory.MetaPopulation != null)
                 {
                     if (this.schema == null)
                     {

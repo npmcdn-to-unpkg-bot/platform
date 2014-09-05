@@ -77,7 +77,7 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Text
                         var classId = this.GetClassId(reader, 0);
                         var cacheId = this.GetCachId(reader, 1);
 
-                        var type = (Class)this.factory.Database.ObjectFactory.Environment.Find(classId);
+                        var type = (Class)this.factory.Database.ObjectFactory.MetaPopulation.Find(classId);
                         return this.Session.GetOrCreateAssociationForExistingObject(type, objectId, cacheId);
                     }
 

@@ -37,7 +37,7 @@ namespace Allors.Meta
 
         public RelationType(Domain domain, Guid relationTypeId)
         {
-            this.Environment = domain.Environment;
+            this.MetaPopulation = domain.MetaPopulation;
 
             this.Id = relationTypeId;
             this.associationType = new AssociationType(this);
@@ -55,9 +55,9 @@ namespace Allors.Meta
 
             set 
             {
-                this.Environment.AssertUnlocked();
+                this.MetaPopulation.AssertUnlocked();
                 this.isDerived = value;
-                this.Environment.Stale();
+                this.MetaPopulation.Stale();
             }
         }
 

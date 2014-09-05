@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="RelationType.cs" company="Allors bvba">
+// <copyright file="Builder.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -16,35 +16,25 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the RelationType type.</summary>
+// <summary>Defines the ObjectType type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.Meta
+namespace Allors.Meta.Builders
 {
     using System;
-    using System.Text;
 
-    /// <summary>
-    /// A <see cref="RelationType"/> defines the state and behavior for
-    /// a set of <see cref="AssociationType"/>s and <see cref="RoleType"/>s.
-    /// </summary>
-    public partial class RelationType 
+    internal abstract partial class MetaObjectBuilder<T>
     {
-        private bool isIndexed;
+        protected Domain domain;
 
-        public bool IsIndexed
+        protected readonly Guid id;
+
+        protected MetaObjectBuilder(Domain domain, Guid id)
         {
-            get
-            {
-                return this.isIndexed;
-            }
-
-            set
-            {
-                this.MetaPopulation.AssertUnlocked();
-                this.isIndexed = value;
-                this.MetaPopulation.Stale();
-            }
+            this.domain = domain;
+            this.id = id;
         }
+
+        public abstract T Build();
     }
 }

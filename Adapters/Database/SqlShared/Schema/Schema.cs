@@ -354,7 +354,7 @@ namespace Allors.Adapters.Database.Sql
 
         private void CreateTablesFromMeta()
         {
-            foreach (var relationType in this.Database.Environment.RelationTypes)
+            foreach (var relationType in this.Database.MetaPopulation.RelationTypes)
             {
                 var associationType = relationType.AssociationType;
                 var roleType = relationType.RoleType;
@@ -388,7 +388,7 @@ namespace Allors.Adapters.Database.Sql
                 }
             }
 
-            foreach (var objectType in this.Database.Environment.Composites)
+            foreach (var objectType in this.Database.MetaPopulation.Composites)
             {
                 var @class = objectType as Class;
                 if (@class != null)
@@ -448,7 +448,7 @@ namespace Allors.Adapters.Database.Sql
                 }
             }
 
-            foreach (var relationType in this.Database.Environment.RelationTypes)
+            foreach (var relationType in this.Database.MetaPopulation.RelationTypes)
             {
                 var associationType = relationType.AssociationType;
                 var roleType = relationType.RoleType;

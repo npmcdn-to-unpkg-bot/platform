@@ -24,12 +24,12 @@ namespace Allors.Meta
     {
         static Repository()
         {
-            var env = new Environment();
+            var env = new MetaPopulation();
 
             Core(env);
             Adapters(env);
 
-            Environment = env;
+            MetaPopulation = env;
         }
     }
 }

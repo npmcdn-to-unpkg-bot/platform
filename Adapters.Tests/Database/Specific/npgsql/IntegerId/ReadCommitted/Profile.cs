@@ -51,7 +51,7 @@ namespace Allors.Adapters.Special.Npgsql.IntegerId.ReadCommitted
             }
         }
 
-        public IDatabase CreateDatabase(Meta.Environment environment, bool init)
+        public IDatabase CreateDatabase(Meta.MetaPopulation metaPopulation, bool init)
         {
             var configuration = new Adapters.Database.Npgsql.IntegerId.Configuration
             {

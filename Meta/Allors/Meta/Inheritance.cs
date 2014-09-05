@@ -35,7 +35,7 @@ namespace Allors.Meta
 
         public Inheritance(Domain domain, Guid inheritanceId)
         {
-            this.Environment = domain.Environment;
+            this.MetaPopulation = domain.MetaPopulation;
             this.Id = inheritanceId;
 
             domain.OnInheritanceCreated(this);
@@ -50,9 +50,9 @@ namespace Allors.Meta
 
             set
             {
-                this.Environment.AssertUnlocked();
+                this.MetaPopulation.AssertUnlocked();
                 this.subtype = value;
-                this.Environment.Stale();
+                this.MetaPopulation.Stale();
             }
         }
 
@@ -65,9 +65,9 @@ namespace Allors.Meta
 
             set
             {
-                this.Environment.AssertUnlocked();
+                this.MetaPopulation.AssertUnlocked();
                 this.supertype = value;
-                this.Environment.Stale();
+                this.MetaPopulation.Stale();
             }
         }
 
@@ -114,7 +114,7 @@ namespace Allors.Meta
                     validationLog.AddError(message, this, ValidationKind.Cyclic, "Inheritance.Subtype");
                 }
 
-                if (this.Environment.Inheritances.Count(inheritance => this.Subtype.Equals(inheritance.Subtype) && this.Supertype.Equals(inheritance.Supertype)) != 1)
+                if (this.MetaPopulation.Inheritances.Count(inheritance => this.Subtype.Equals(inheritance.Subtype) && this.Supertype.Equals(inheritance.Supertype)) != 1)
                 {
                     var message = "name of " + this.ValidationName + " is already in use";
                     validationLog.AddError(message, this, ValidationKind.Unique, "Inheritance.Supertype");
@@ -149,7 +149,7 @@ namespace Allors.Meta
                 return true;
             }
 
-            return this.Supertype != null && this.Environment.Inheritances
+            return this.Supertype != null && this.MetaPopulation.Inheritances
                 .Where(inheritance => this.Supertype.Equals(inheritance.Subtype))
                 .Any(superInheritance => superInheritance.HasCycle(startSubType));
         }

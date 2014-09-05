@@ -28,7 +28,7 @@ namespace Allors.Meta
     /// <summary>
     /// A Domain is a container for <see cref="ObjectType"/>s, <see cref="RelationType"/>s.
     /// </summary>
-    public sealed partial class Environment
+    public sealed partial class MetaPopulation
     {
         private readonly Dictionary<Guid, MetaObject> metaObjectById;
 
@@ -47,7 +47,7 @@ namespace Allors.Meta
         private IList<RelationType> relationTypes;
         private IList<MethodType> methodTypes;
         
-        public Environment()
+        public MetaPopulation()
         {
             this.isStale = true;
             this.isDeriving = false;
@@ -152,18 +152,18 @@ namespace Allors.Meta
         /// <summary>
         /// Find a meta object by meta object id.
         /// </summary>
-        /// <param name="metaObjectId">
+        /// <param name="id">
         /// The meta object id.
         /// </param>
         /// <returns>
         /// The <see cref="MetaObject"/>.
         /// </returns>
-        public MetaObject Find(Guid metaObjectId)
+        public MetaObject Find(Guid id)
         {
-            MetaObject metaObject;
-            this.metaObjectById.TryGetValue(metaObjectId, out metaObject);
+            MetaObject @object;
+            this.metaObjectById.TryGetValue(id, out @object);
 
-            return metaObject;
+            return @object;
         }
         
         /// <summary>

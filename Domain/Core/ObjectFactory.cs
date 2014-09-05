@@ -27,8 +27,6 @@ namespace Allors
 
     using Allors.Meta;
 
-    using Environment = Allors.Meta.Environment;
-
     /// <summary>
     /// A base implementation for a static <see cref="IObjectFactory"/>.
     /// </summary>
@@ -37,7 +35,7 @@ namespace Allors
         /// <summary>
         /// The domain.
         /// </summary>
-        private readonly Environment environment;
+        private readonly MetaPopulation metaPopulation;
 
         /// <summary>
         ///  The assembly.
@@ -81,19 +79,19 @@ namespace Allors
         /// <param name="namespace">
         /// The namespace
         /// </param>
-        public ObjectFactory(Environment environment, Assembly assembly, string @namespace)
+        public ObjectFactory(MetaPopulation metaPopulation, Assembly assembly, string @namespace)
         {
-            this.environment = environment;
+            this.metaPopulation = metaPopulation;
             this.assembly = assembly;
             this.ns = @namespace;
 
-            var validationLog = environment.Validate();
+            var validationLog = metaPopulation.Validate();
             if (validationLog.ContainsErrors)
             {
                 throw new Exception(validationLog.ToString());
             }
 
-            environment.Lock();
+            metaPopulation.Lock();
             
             this.typeByObjectType = new Dictionary<ObjectType, Type>();
             this.objectTypeByType = new Dictionary<Type, ObjectType>();
@@ -107,7 +105,7 @@ namespace Allors
 
             var typeByName = types.ToDictionary(type => type.Name, type => type);
 
-            foreach (var objectType in environment.Composites)
+            foreach (var objectType in metaPopulation.Composites)
             {
                 var type = typeByName[objectType.Name];
 
@@ -154,11 +152,11 @@ namespace Allors
         /// <summary>
         /// Gets the domain.
         /// </summary>
-        public Environment Environment 
+        public MetaPopulation MetaPopulation 
         {
             get
             {
-                return this.environment;
+                return this.metaPopulation;
             }
         }
 

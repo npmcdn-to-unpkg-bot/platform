@@ -8,7 +8,7 @@ namespace Domain
 
 	public static class S3Meta
 	{
-		public static readonly global::Allors.Meta.Interface ObjectType = (Allors.Meta.Interface)global::Allors.Meta.Repository.Environment.Find( new System.Guid("5b24107d-f5e8-499b-94f7-2bf712493546") );
+		public static readonly global::Allors.Meta.Interface ObjectType = (Allors.Meta.Interface)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("5b24107d-f5e8-499b-94f7-2bf712493546") );
 
 	}
 }

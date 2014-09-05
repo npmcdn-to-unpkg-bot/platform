@@ -20,7 +20,7 @@ namespace Domain
 
 	public static class GT32Meta
 	{
-		public static readonly global::Allors.Meta.Class ObjectType = (Allors.Meta.Class)global::Allors.Meta.Repository.Environment.Find( new System.Guid("4f6301b3-6f0a-40c2-8267-4f8631bae706") );
+		public static readonly global::Allors.Meta.Class ObjectType = (Allors.Meta.Class)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("4f6301b3-6f0a-40c2-8267-4f8631bae706") );
 
 	}
 }

@@ -55,9 +55,9 @@ namespace Allors.Meta
 
             set
             {
-                this.RelationType.Environment.AssertUnlocked();
+                this.RelationType.MetaPopulation.AssertUnlocked();
                 this.isMany = value;
-                this.RelationType.Environment.Stale();
+                this.RelationType.MetaPopulation.Stale();
             }
         }
 
@@ -70,9 +70,9 @@ namespace Allors.Meta
 
             set
             {
-                this.RelationType.Environment.AssertUnlocked();
+                this.RelationType.MetaPopulation.AssertUnlocked();
                 this.objectType = value;
-                this.RelationType.Environment.Stale();
+                this.RelationType.MetaPopulation.Stale();
             }
         }
 

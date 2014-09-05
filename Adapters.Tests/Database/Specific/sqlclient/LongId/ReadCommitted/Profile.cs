@@ -23,7 +23,6 @@ namespace Allors.Adapters.Special.SqlClient.LongId.ReadCommitted
     using Allors.Meta;
 
     using Configuration = Allors.Adapters.Configuration;
-    using Environment = Allors.Meta.Environment;
 
     public class Profile : SqlClient.Profile
     {
@@ -54,7 +53,7 @@ namespace Allors.Adapters.Special.SqlClient.LongId.ReadCommitted
             }
         }
 
-        public IDatabase CreateDatabase(Environment environment, bool init)
+        public IDatabase CreateDatabase(MetaPopulation metaPopulation, bool init)
         {
             var configuration = new Adapters.Database.SqlClient.LongId.Configuration
             {

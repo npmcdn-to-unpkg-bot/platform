@@ -25,7 +25,7 @@ namespace Allors.Adapters.Database.Sql
     using Allors.Meta;
 
     /// <summary>
-    /// Thrown when the <see cref="IDatabase"/> encounters a Sql schema that is incompatible with the <see cref="Meta.Environment"/>.
+    /// Thrown when the <see cref="IDatabase"/> encounters a Sql schema that is incompatible with the <see cref="MetaPopulation"/>.
     /// </summary>
     public class SchemaValidationException : Exception
     {

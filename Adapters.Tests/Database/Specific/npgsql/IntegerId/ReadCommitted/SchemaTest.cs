@@ -35,9 +35,9 @@ namespace Allors.Adapters.Special.Npgsql.IntegerId.ReadCommitted
             }
         }
 
-        protected override IDatabase CreateDatabase(Meta.Environment environment, bool init)
+        protected override IDatabase CreateDatabase(Meta.MetaPopulation metaPopulation, bool init)
         {
-            return this.profile.CreateDatabase(environment, init);
+            return this.profile.CreateDatabase(metaPopulation, init);
         }
 
         [TearDown]

@@ -2259,7 +2259,7 @@ namespace Allors.Adapters.Workspace.Memory
             }
 
             var relationTypeId = new Guid(relationTypeIdString);
-            var roleType = ((RelationType)this.Workspace.Database.Environment.Find(relationTypeId)).RoleType;
+            var roleType = ((RelationType)this.Workspace.Database.MetaPopulation.Find(relationTypeId)).RoleType;
 
             if (!reader.IsEmptyElement)
             {
@@ -2575,7 +2575,7 @@ namespace Allors.Adapters.Workspace.Memory
             }
 
             var relationTypeId = new Guid(relationTypeIdString);
-            var relationType = ((RelationType)this.Workspace.Database.Environment.Find(relationTypeId)).RoleType;
+            var relationType = ((RelationType)this.Workspace.Database.MetaPopulation.Find(relationTypeId)).RoleType;
 
             if (!reader.IsEmptyElement)
             {

@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="Unit.cs" company="Allors bvba">
+// <copyright file="ClassBuilder.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -19,32 +19,36 @@
 // <summary>Defines the ObjectType type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.Meta
+namespace Allors.Meta.Builders
 {
     using System;
 
-    public partial class Unit : ObjectType
+    internal partial class InterfaceBuilder : MetaObjectBuilder<Interface>
     {
-        private UnitTags unitTag;
+        private string singularName;
+        private string pluralName;
 
-        public Unit(Domain domain, Guid id) : base(domain, id)
+        internal InterfaceBuilder(Domain domain, Guid id)
+            : base(domain, id)
         {
-            domain.OnUnitCreated(this);
         }
 
-        public UnitTags UnitTag
+        internal InterfaceBuilder WithSingularName(string value)
         {
-            get
-            {
-                return this.unitTag;
-            }
+            this.singularName = value;
+            return this;
+        }
 
-            set
-            {
-                this.MetaPopulation.AssertUnlocked();
-                this.unitTag = value;
-                this.MetaPopulation.Stale();
-            }
+        internal InterfaceBuilder WithPluralName(string value)
+        {
+            this.pluralName = value;
+            return this;
+        }
+
+        internal void AllorsBuild(Interface instance)
+        {
+            instance.SingularName = this.singularName;
+            instance.PluralName = this.pluralName;
         }
     }
 }

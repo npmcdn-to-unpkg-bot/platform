@@ -34,8 +34,6 @@ namespace Allors.Development.Repository.Generation
 
     using Storage;
 
-    using Environment = Allors.Meta.Environment;
-
     public class StringTemplate
     {
         private const string TemplateId = "TemplateId";
@@ -99,11 +97,11 @@ namespace Allors.Development.Repository.Generation
             return this.Name;
         }
 
-        internal void Generate(Environment environment, DirectoryInfo outputDirectory, Log log)
+        internal void Generate(MetaPopulation metaPopulation, DirectoryInfo outputDirectory, Log log)
         {
-            if (!environment.IsValid)
+            if (!metaPopulation.IsValid)
             {
-                log.Error(this, "Environment " + environment + " has validation errors.");
+                log.Error(this, "Environment " + metaPopulation + " has validation errors.");
                 return;
             }
 
@@ -114,7 +112,7 @@ namespace Allors.Development.Repository.Generation
                 group.ErrorManager = new ErrorManager(new LogAdapter(log));
                 
                 var configurationTemplate = group.GetInstanceOf(TemplateConfiguration);
-                configurationTemplate.Add(EnvironmentKey, environment);
+                configurationTemplate.Add(EnvironmentKey, metaPopulation);
 
                 var configurationXml = new XmlDocument();
                 configurationXml.LoadXml(configurationTemplate.Render());
@@ -131,25 +129,25 @@ namespace Allors.Development.Repository.Generation
                         System.Console.WriteLine(0);
                     }
 
-                    template.Add(EnvironmentKey, environment);
+                    template.Add(EnvironmentKey, metaPopulation);
                     if (generation.HasAttribute(InputKey))
                     {
                         var input = new Guid(generation.GetAttribute(InputKey));
-                        var objectType = environment.Find(input) as ObjectType;
+                        var objectType = metaPopulation.Find(input) as ObjectType;
                         if (objectType != null)
                         {
                             template.Add(ObjectTypeKey, objectType);
                         }
                         else
                         {
-                            var relationType = environment.Find(input) as RelationType;
+                            var relationType = metaPopulation.Find(input) as RelationType;
                             if (relationType != null)
                             {
                                 template.Add(RelationTypeKey, relationType);
                             }
                             else
                             {
-                                var inheritance = environment.Find(input) as Inheritance;
+                                var inheritance = metaPopulation.Find(input) as Inheritance;
                                 if (inheritance != null)
                                 {
                                     template.Add(InheritanceKey, inheritance);

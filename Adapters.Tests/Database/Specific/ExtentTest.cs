@@ -16590,7 +16590,7 @@ namespace Allors.Adapters.Special
 
         private static Unit GetAllorsString(ObjectType objectType)
         {
-            return (Unit)objectType.Environment.Find(UnitIds.StringId);
+            return (Unit)objectType.MetaPopulation.Find(UnitIds.StringId);
         }
 
         private void AssertC1(Extent extent, bool assert0, bool assert1, bool assert2, bool assert3)

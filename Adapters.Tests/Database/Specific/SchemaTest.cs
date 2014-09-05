@@ -28,7 +28,6 @@ namespace Allors.Adapters.Special
 
     using NUnit.Framework;
 
-    using Environment = Allors.Meta.Environment;
     using IDatabase = IDatabase;
 
     public abstract class SchemaTest
@@ -72,20 +71,20 @@ namespace Allors.Adapters.Special
             this.DropTable("C1");
             this.DropTable("C2");
 
-            this.domain = new Domain(new Environment(), Guid.NewGuid()) { Name = "MyDomain" };
+            this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
 
             this.CreateClass("C1");
 
-            var database = this.CreateDatabase(this.domain.Environment, true);
+            var database = this.CreateDatabase(this.domain.MetaPopulation, true);
             ISession session = database.CreateSession();
             session.Rollback();
 
-            this.domain = new Domain(new Environment(), Guid.NewGuid()) { Name = "MyDomain" };
+            this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
 
             this.CreateClass("C1");
             this.CreateClass("C2");
 
-            database = this.CreateDatabase(this.domain.Environment, true);
+            database = this.CreateDatabase(this.domain.MetaPopulation, true);
             session = database.CreateSession();
             session.Rollback();
         }
@@ -94,11 +93,11 @@ namespace Allors.Adapters.Special
         [ExpectedException]
         public void InitInvalidDomain()
         {
-            this.domain = new Domain(new Environment(), Guid.NewGuid()) { Name = "MyDomain" };
+            this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
 
             new RelationType(this.domain, Guid.NewGuid());
 
-            this.CreateDatabase(this.domain.Environment, true);
+            this.CreateDatabase(this.domain.MetaPopulation, true);
         }
 
         [Test]
@@ -120,7 +119,7 @@ namespace Allors.Adapters.Special
                 this.DropTable("C1");
                 this.DropTable("C2");
 
-                var environment = new Environment();
+                var environment = new MetaPopulation();
                 var core = Repository.Core(environment);
                 this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
                 this.domain.AddDirectSuperdomain(core);
@@ -128,16 +127,16 @@ namespace Allors.Adapters.Special
                 var c1 = this.CreateClass("C1");
                 this.CreateClass("C2");
 
-                var allorsBinary = (ObjectType)this.domain.Environment.Find(UnitIds.BinaryId);
+                var allorsBinary = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.BinaryId);
                 new RelationType(this.domain, Guid.NewGuid())
                                          {
                                              AssociationType = { ObjectType = c1 },
                                              RoleType = { ObjectType = allorsBinary, Size = 200 }
                                          };
 
-                this.CreateDatabase(this.domain.Environment, true);
+                this.CreateDatabase(this.domain.MetaPopulation, true);
 
-                environment = new Environment();
+                environment = new MetaPopulation();
                 core = Repository.Core(environment);
                 this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
                 this.domain.AddDirectSuperdomain(core);
@@ -145,7 +144,7 @@ namespace Allors.Adapters.Special
                 c1 = this.CreateClass("C1");
                 this.CreateClass("C2");
 
-                allorsBinary = (ObjectType)this.domain.Environment.Find(UnitIds.BinaryId);
+                allorsBinary = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.BinaryId);
                 var c1RelationType = new RelationType(this.domain, Guid.NewGuid())
                 {
                     AssociationType = { ObjectType = c1 },
@@ -155,7 +154,7 @@ namespace Allors.Adapters.Special
                 // Different Size
                 c1RelationType.RoleType.Size = 300;
 
-                var database = this.CreateDatabase(this.domain.Environment, false);
+                var database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
                 var validationErrors = this.GetSchemaValidation(database);
 
@@ -181,7 +180,7 @@ namespace Allors.Adapters.Special
             this.DropTable("C1");
             this.DropTable("C2");
 
-            var environment = new Environment();
+            var environment = new MetaPopulation();
             var core = Repository.Core(environment);
             this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain"};
             this.domain.AddDirectSuperdomain(core);
@@ -191,13 +190,13 @@ namespace Allors.Adapters.Special
 
             var c1RelationType = new RelationType(this.domain, Guid.NewGuid());
             c1RelationType.AssociationType.ObjectType = c1;
-            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Environment.Find(UnitIds.DecimalId);
+            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.DecimalId);
             c1RelationType.RoleType.Precision = 10;
             c1RelationType.RoleType.Scale = 2;
 
-            this.CreateDatabase(this.domain.Environment, true);
+            this.CreateDatabase(this.domain.MetaPopulation, true);
 
-            environment = new Environment();
+            environment = new MetaPopulation();
             core = Repository.Core(environment);
             this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
             this.domain.AddDirectSuperdomain(core);
@@ -207,14 +206,14 @@ namespace Allors.Adapters.Special
 
             c1RelationType = new RelationType(this.domain, Guid.NewGuid());
             c1RelationType.AssociationType.ObjectType = c1;
-            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Environment.Find(UnitIds.DecimalId);
+            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.DecimalId);
             c1RelationType.RoleType.Precision = 10;
             c1RelationType.RoleType.Scale = 2;
 
             // Different precision
             c1RelationType.RoleType.Precision = 11;
 
-            var database = this.CreateDatabase(this.domain.Environment, false);
+            var database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
             var validationErrors = this.GetSchemaValidation(database);
 
@@ -239,7 +238,7 @@ namespace Allors.Adapters.Special
             this.DropTable("C1");
             this.DropTable("C2");
 
-            var environment = new Environment();
+            var environment = new MetaPopulation();
             var core = Repository.Core(environment);
             this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
             this.domain.AddDirectSuperdomain(core);
@@ -249,13 +248,13 @@ namespace Allors.Adapters.Special
 
             var c1RelationType = new RelationType(this.domain, Guid.NewGuid());
             c1RelationType.AssociationType.ObjectType = c1;
-            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Environment.Find(UnitIds.DecimalId);
+            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.DecimalId);
             c1RelationType.RoleType.Precision = 10;
             c1RelationType.RoleType.Scale = 2;
 
-            this.CreateDatabase(this.domain.Environment, true);
+            this.CreateDatabase(this.domain.MetaPopulation, true);
 
-            environment = new Environment();
+            environment = new MetaPopulation();
             core = Repository.Core(environment);
             this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
             this.domain.AddDirectSuperdomain(core);
@@ -265,14 +264,14 @@ namespace Allors.Adapters.Special
 
             c1RelationType = new RelationType(this.domain, Guid.NewGuid());
             c1RelationType.AssociationType.ObjectType = c1;
-            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Environment.Find(UnitIds.DecimalId);
+            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.DecimalId);
             c1RelationType.RoleType.Precision = 10;
             c1RelationType.RoleType.Scale = 2;
 
             // Different scale
             c1RelationType.RoleType.Scale = 3;
 
-            var database = this.CreateDatabase(this.domain.Environment, false);
+            var database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
             var validationErrors = this.GetSchemaValidation(database);
 
@@ -297,14 +296,14 @@ namespace Allors.Adapters.Special
             this.DropTable("C1");
             this.DropTable("C2");
 
-            this.domain = new Domain(new Environment(), Guid.NewGuid()) { Name = "MyDomain" };
+            this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
             this.domain.Name = "MyDomain";
 
             this.CreateClass("C1");
 
-            this.CreateDatabase(this.domain.Environment, true);
+            this.CreateDatabase(this.domain.MetaPopulation, true);
 
-            this.domain = new Domain(new Environment(), Guid.NewGuid()) { Name = "MyDomain" };
+            this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
             this.domain.Name = "MyDomain";
 
             this.CreateClass("C1");
@@ -312,7 +311,7 @@ namespace Allors.Adapters.Special
             // Extra class            
             this.CreateClass("C2");
 
-            var database = this.CreateDatabase(this.domain.Environment, false);
+            var database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
             var validationErrors = this.GetSchemaValidation(database);
 
@@ -332,7 +331,7 @@ namespace Allors.Adapters.Special
             this.DropTable("C1");
             this.DropTable("C2");
 
-            var environment = new Environment();
+            var environment = new MetaPopulation();
             var core = Repository.Core(environment);
             this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
             this.domain.AddDirectSuperdomain(core);
@@ -344,13 +343,13 @@ namespace Allors.Adapters.Special
 
             var i12AllorsString = new RelationType(this.domain, Guid.NewGuid());
             i12AllorsString.AssociationType.ObjectType = i12;
-            i12AllorsString.RoleType.ObjectType = (ObjectType)this.domain.Environment.Find(UnitIds.BooleanId);
+            i12AllorsString.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.BooleanId);
 
             new Inheritance(this.domain, Guid.NewGuid()) { Subtype = c1, Supertype = i12 };
  
-            this.CreateDatabase(this.domain.Environment, true);
+            this.CreateDatabase(this.domain.MetaPopulation, true);
 
-            environment = new Environment();
+            environment = new MetaPopulation();
             core = Repository.Core(environment);
             this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
             this.domain.AddDirectSuperdomain(core);
@@ -362,14 +361,14 @@ namespace Allors.Adapters.Special
 
             i12AllorsString = new RelationType(this.domain, Guid.NewGuid());
             i12AllorsString.AssociationType.ObjectType = i12;
-            i12AllorsString.RoleType.ObjectType = (ObjectType)this.domain.Environment.Find(UnitIds.BooleanId);
+            i12AllorsString.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.BooleanId);
 
             new Inheritance(this.domain, Guid.NewGuid()) { Subtype = c1, Supertype = i12 };
 
             // Extra inheritance
             new Inheritance(this.domain, Guid.NewGuid()) { Subtype = c2, Supertype = i12 };
 
-            var database = this.CreateDatabase(this.domain.Environment, false);
+            var database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
             var validationErrors = this.GetSchemaValidation(database);
 
@@ -390,14 +389,14 @@ namespace Allors.Adapters.Special
             this.DropTable("C1");
             this.DropTable("C2");
 
-            this.domain = new Domain(new Environment(), Guid.NewGuid()) { Name = "MyDomain" };
+            this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
 
             var c1 = this.CreateClass("C1");
             var c2 = this.CreateClass("C2");
 
-            this.CreateDatabase(this.domain.Environment, true);
+            this.CreateDatabase(this.domain.MetaPopulation, true);
 
-            this.domain = new Domain(new Environment(), Guid.NewGuid()) { Name = "MyDomain" };
+            this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
 
             c1 = this.CreateClass("C1");
             c2 = this.CreateClass("C2");
@@ -409,7 +408,7 @@ namespace Allors.Adapters.Special
             fromC1ToC2.RoleType.ObjectType = c2;
             fromC1ToC2.RoleType.IsMany = true;
 
-            var database = this.CreateDatabase(this.domain.Environment, false);
+            var database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
             var validationErrors = this.GetSchemaValidation(database);
 
@@ -434,14 +433,14 @@ namespace Allors.Adapters.Special
             this.DropTable("C1");
             this.DropTable("C2");
 
-            this.domain = new Domain(new Environment(), Guid.NewGuid()) { Name = "MyDomain" };
+            this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
 
             var c1 = this.CreateClass("C1");
             var c2 = this.CreateClass("C2");
 
-            this.CreateDatabase(this.domain.Environment, true);
+            this.CreateDatabase(this.domain.MetaPopulation, true);
 
-            this.domain = new Domain(new Environment(), Guid.NewGuid()) { Name = "MyDomain" };
+            this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
 
             c1 = this.CreateClass("C1");
             c2 = this.CreateClass("C2");
@@ -452,7 +451,7 @@ namespace Allors.Adapters.Special
             fromC1ToC2.AssociationType.IsMany = true;
             fromC1ToC2.RoleType.ObjectType = c2;
 
-            var database = this.CreateDatabase(this.domain.Environment, false);
+            var database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
             var validationErrors = this.GetSchemaValidation(database);
             var tableErros = validationErrors.TableErrors;
@@ -475,14 +474,14 @@ namespace Allors.Adapters.Special
             this.DropTable("C1");
             this.DropTable("C2");
 
-            this.domain = new Domain(new Environment(), Guid.NewGuid()) { Name = "MyDomain" };
+            this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
 
             var c1 = this.CreateClass("C1");
             var c2 = this.CreateClass("C2");
 
-            this.CreateDatabase(this.domain.Environment, true);
+            this.CreateDatabase(this.domain.MetaPopulation, true);
 
-            this.domain = new Domain(new Environment(), Guid.NewGuid()) { Name = "MyDomain" };
+            this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
 
             c1 = this.CreateClass("C1");
             c2 = this.CreateClass("C2");
@@ -493,7 +492,7 @@ namespace Allors.Adapters.Special
             fromC1ToC2.RoleType.ObjectType = c2;
             fromC1ToC2.RoleType.IsMany = true;
 
-            var database = this.CreateDatabase(this.domain.Environment, false);
+            var database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
             var validationErrors = this.GetSchemaValidation(database);
 
@@ -517,14 +516,14 @@ namespace Allors.Adapters.Special
             this.DropTable("C1");
             this.DropTable("C2");
 
-            this.domain = new Domain(new Environment(), Guid.NewGuid()) { Name = "MyDomain" };
+            this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
 
             var c1 = this.CreateClass("C1");
             var c2 = this.CreateClass("C2");
 
-            this.CreateDatabase(this.domain.Environment, true);
+            this.CreateDatabase(this.domain.MetaPopulation, true);
 
-            this.domain = new Domain(new Environment(), Guid.NewGuid()) { Name = "MyDomain" };
+            this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
 
             c1 = this.CreateClass("C1");
             c2 = this.CreateClass("C2");
@@ -534,7 +533,7 @@ namespace Allors.Adapters.Special
             fromC1ToC2.AssociationType.ObjectType = c1;
             fromC1ToC2.RoleType.ObjectType = c2;
 
-            var database = this.CreateDatabase(this.domain.Environment, false);
+            var database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
             var validationErrors = this.GetSchemaValidation(database);
 
@@ -558,7 +557,7 @@ namespace Allors.Adapters.Special
             this.DropTable("C1");
             this.DropTable("C2");
 
-            var environment = new Environment();
+            var environment = new MetaPopulation();
             var core = Repository.Core(environment);
             this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
             this.domain.AddDirectSuperdomain(core);
@@ -568,12 +567,12 @@ namespace Allors.Adapters.Special
 
             var c1RelationType = new RelationType(this.domain, Guid.NewGuid());
             c1RelationType.AssociationType.ObjectType = c1;
-            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Environment.Find(UnitIds.StringId);
+            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.StringId);
             c1RelationType.RoleType.Size = 100;
 
-            this.CreateDatabase(this.domain.Environment, true);
+            this.CreateDatabase(this.domain.MetaPopulation, true);
 
-            environment = new Environment();
+            environment = new MetaPopulation();
             core = Repository.Core(environment);
             this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
             this.domain.AddDirectSuperdomain(core);
@@ -583,13 +582,13 @@ namespace Allors.Adapters.Special
 
             c1RelationType = new RelationType(this.domain, Guid.NewGuid());
             c1RelationType.AssociationType.ObjectType = c1;
-            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Environment.Find(UnitIds.StringId);
+            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.StringId);
             c1RelationType.RoleType.Size = 100;
 
             // Different size
             c1RelationType.RoleType.Size = 101;
 
-            var database = this.CreateDatabase(this.domain.Environment, false);
+            var database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
             var validationErrors = this.GetSchemaValidation(database);
 
@@ -614,7 +613,7 @@ namespace Allors.Adapters.Special
             this.DropTable("C1");
             this.DropTable("C2");
 
-            var environment = new Environment();
+            var environment = new MetaPopulation();
             var core = Repository.Core(environment);
             this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
             this.domain.AddDirectSuperdomain(core);
@@ -624,14 +623,14 @@ namespace Allors.Adapters.Special
 
             var c1RelationType = new RelationType(this.domain, Guid.NewGuid());
             c1RelationType.AssociationType.ObjectType = c1;
-            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Environment.Find(UnitIds.StringId);
+            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.StringId);
             c1RelationType.RoleType.Size = 100;
             c1RelationType.RoleType.AssignedSingularName = "RelationType";
             c1RelationType.RoleType.AssignedPluralName = "RelationTypes";
 
-            this.CreateDatabase(this.domain.Environment, true);
+            this.CreateDatabase(this.domain.MetaPopulation, true);
 
-            environment = new Environment();
+            environment = new MetaPopulation();
             core = Repository.Core(environment);
             this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
             this.domain.AddDirectSuperdomain(core);
@@ -641,7 +640,7 @@ namespace Allors.Adapters.Special
 
             c1RelationType = new RelationType(this.domain, Guid.NewGuid());
             c1RelationType.AssociationType.ObjectType = c1;
-            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Environment.Find(UnitIds.StringId);
+            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.StringId);
             c1RelationType.RoleType.Size = 100;
             c1RelationType.RoleType.AssignedSingularName = "RelationType";
             c1RelationType.RoleType.AssignedPluralName = "RelationTypes";
@@ -650,7 +649,7 @@ namespace Allors.Adapters.Special
             c1RelationType.RoleType.Size = null;
             c1RelationType.RoleType.ObjectType = c2;
 
-            var database = this.CreateDatabase(this.domain.Environment, false);
+            var database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
             var validationErrors = this.GetSchemaValidation(database);
 
@@ -675,7 +674,7 @@ namespace Allors.Adapters.Special
             this.DropTable("C1");
             this.DropTable("C2");
 
-            var environment = new Environment();
+            var environment = new MetaPopulation();
             var core = Repository.Core(environment);
             this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
             this.domain.AddDirectSuperdomain(core);
@@ -685,13 +684,13 @@ namespace Allors.Adapters.Special
 
             var c1RelationType = new RelationType(this.domain, Guid.NewGuid());
             c1RelationType.AssociationType.ObjectType = c1;
-            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Environment.Find(UnitIds.BooleanId);
+            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.BooleanId);
             c1RelationType.RoleType.AssignedSingularName = "RelationType";
             c1RelationType.RoleType.AssignedPluralName = "RelationTypes";
 
-            this.CreateDatabase(this.domain.Environment, true);
+            this.CreateDatabase(this.domain.MetaPopulation, true);
 
-            environment = new Environment();
+            environment = new MetaPopulation();
             core = Repository.Core(environment);
             this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
             this.domain.AddDirectSuperdomain(core);
@@ -701,14 +700,14 @@ namespace Allors.Adapters.Special
 
             c1RelationType = new RelationType(this.domain, Guid.NewGuid());
             c1RelationType.AssociationType.ObjectType = c1;
-            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Environment.Find(UnitIds.BooleanId);
+            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.BooleanId);
             c1RelationType.RoleType.AssignedSingularName = "RelationType";
             c1RelationType.RoleType.AssignedPluralName = "RelationTypes";
 
             // Different type
-            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.Environment.Find(UnitIds.Unique);
+            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.Unique);
 
-            var database = this.CreateDatabase(this.domain.Environment, false);
+            var database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
             var validationErrors = this.GetSchemaValidation(database);
 
@@ -751,14 +750,14 @@ namespace Allors.Adapters.Special
             this.DropTable("C1");
             this.DropTable("C2");
 
-            this.domain = new Domain(new Environment(), Guid.NewGuid()) { Name = "MyDomain" };
+            this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
 
             var c1 = this.CreateClass("C1");
             var c2 = this.CreateClass("C2");
             
-            this.CreateDatabase(this.domain.Environment, true);
+            this.CreateDatabase(this.domain.MetaPopulation, true);
 
-            this.domain = new Domain(new Environment(), Guid.NewGuid()) { Name = "MyDomain" };
+            this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
 
             c1 = this.CreateClass("C1");
             c2 = this.CreateClass("C2");
@@ -767,7 +766,7 @@ namespace Allors.Adapters.Special
             c1c2.AssociationType.ObjectType = c1;
             c1c2.RoleType.ObjectType = c2;
 
-            var database = this.CreateDatabase(this.domain.Environment, false);
+            var database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
             ISession session = null;
             try
@@ -799,7 +798,7 @@ namespace Allors.Adapters.Special
             return new Interface(this.domain, Guid.NewGuid()) { SingularName = name, PluralName = name + "s" };
         }
 
-        protected abstract IDatabase CreateDatabase(Environment environment, bool init);
+        protected abstract IDatabase CreateDatabase(MetaPopulation metaPopulation, bool init);
 
         protected IDatabase CreateDatabase()
         {
