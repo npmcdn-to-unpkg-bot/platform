@@ -42,7 +42,7 @@ namespace Allors.Development.Repository.Generation
         private const string TemplateConfiguration = "TemplateConfiguration";
 
         private const string TemplateKey = "template";
-        private const string EnvironmentKey = "environment";
+        private const string MetaKey = "meta";
         private const string InputKey = "input";
         private const string OutputKey = "output";
         private const string GenerationKey = "generation";
@@ -101,7 +101,7 @@ namespace Allors.Development.Repository.Generation
         {
             if (!metaPopulation.IsValid)
             {
-                log.Error(this, "Environment " + metaPopulation + " has validation errors.");
+                log.Error(this, "Meta population " + metaPopulation + " has validation errors.");
                 return;
             }
 
@@ -112,7 +112,7 @@ namespace Allors.Development.Repository.Generation
                 group.ErrorManager = new ErrorManager(new LogAdapter(log));
                 
                 var configurationTemplate = group.GetInstanceOf(TemplateConfiguration);
-                configurationTemplate.Add(EnvironmentKey, metaPopulation);
+                configurationTemplate.Add(MetaKey, metaPopulation);
 
                 var configurationXml = new XmlDocument();
                 configurationXml.LoadXml(configurationTemplate.Render());
@@ -129,7 +129,7 @@ namespace Allors.Development.Repository.Generation
                         System.Console.WriteLine(0);
                     }
 
-                    template.Add(EnvironmentKey, metaPopulation);
+                    template.Add(MetaKey, metaPopulation);
                     if (generation.HasAttribute(InputKey))
                     {
                         var input = new Guid(generation.GetAttribute(InputKey));

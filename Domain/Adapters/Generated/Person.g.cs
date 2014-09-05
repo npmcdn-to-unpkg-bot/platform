@@ -123,6 +123,23 @@ namespace Domain
 
 
 
+		virtual public global::Domain.Person PersonWhereNextPerson
+		{ 
+			get
+			{
+				return (global::Domain.Person) Strategy.GetCompositeAssociation(PersonMeta.PersonWhereNextPerson);
+			}
+		} 
+
+		virtual public bool ExistPersonWhereNextPerson
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociation(PersonMeta.PersonWhereNextPerson);
+			}
+		}
+
+
 		virtual public Allors.Extent<global::Domain.Company> CompaniesWhereManager
 		{ 
 			get
@@ -153,23 +170,6 @@ namespace Domain
 			get
 			{
 				return Strategy.ExistCompositeAssociation(PersonMeta.CompanyWhereEmployee);
-			}
-		}
-
-
-		virtual public global::Domain.Person PersonWhereNextPerson
-		{ 
-			get
-			{
-				return (global::Domain.Person) Strategy.GetCompositeAssociation(PersonMeta.PersonWhereNextPerson);
-			}
-		} 
-
-		virtual public bool ExistPersonWhereNextPerson
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociation(PersonMeta.PersonWhereNextPerson);
 			}
 		}
 
@@ -388,9 +388,9 @@ namespace Domain
 		public static readonly global::Allors.Meta.RoleType Name = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("ce43ca5e-4dfb-4fe1-98ea-17d8382e9531"))).RoleType;
 		public static readonly global::Allors.Meta.RoleType Index = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("fdad723a-f062-492a-989c-8d8727c52679"))).RoleType;
 
+		public static readonly global::Allors.Meta.AssociationType PersonWhereNextPerson = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("25ff791d-9547-41ba-ac34-f2fe501ef217"))).AssociationType;
 		public static readonly global::Allors.Meta.AssociationType CompaniesWhereManager = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("08ab248d-bdb1-49c5-a2da-d6485f49239f"))).AssociationType;
 		public static readonly global::Allors.Meta.AssociationType CompanyWhereEmployee = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("1a4087de-f116-4f79-9441-31faee8054f3"))).AssociationType;
-		public static readonly global::Allors.Meta.AssociationType PersonWhereNextPerson = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("25ff791d-9547-41ba-ac34-f2fe501ef217"))).AssociationType;
 		public static readonly global::Allors.Meta.AssociationType CompanyWhereFirstPerson = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("28021756-f15f-4671-aa01-a40d3707d61a"))).AssociationType;
 		public static readonly global::Allors.Meta.AssociationType CompaniesWhereOwner = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("44abca14-9fb2-42a7-b8ab-a1ca87d87b2e"))).AssociationType;
 		public static readonly global::Allors.Meta.AssociationType CompaniesWhereIndexedMany2ManyPerson = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("509c5341-3d87-4da4-a807-5567d897169b"))).AssociationType;

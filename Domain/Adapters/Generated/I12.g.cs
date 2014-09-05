@@ -42,13 +42,13 @@ namespace Domain
 		public static readonly global::Allors.Meta.RoleType S12AllorsDecimal = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("f7ace363-89bd-4ea5-a865-4a6e3de2d723"))).RoleType;
 
 		public static readonly global::Allors.Meta.AssociationType C1WhereI12one2one = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("13761939-4842-45ba-af73-2a5976e2d6e3"))).AssociationType;
-		public static readonly global::Allors.Meta.AssociationType I1sWhereI12many2one = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("28b92468-27e5-4471-b3a5-37b8ec4f794e"))).AssociationType;
-		public static readonly global::Allors.Meta.AssociationType I1WhereI12one2one = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("381c61c1-312d-47ea-8314-8ac051378a81"))).AssociationType;
 		public static readonly global::Allors.Meta.AssociationType C1sWhereI12many2one = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("599420c6-0757-49f6-8ae7-4cb0714ca791"))).AssociationType;
-		public static readonly global::Allors.Meta.AssociationType I1sWhereI12many2many = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("9b05ecb0-c3d5-4b11-98dc-653aef9f65cc"))).AssociationType;
-		public static readonly global::Allors.Meta.AssociationType I1WhereI12one2many = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("a458ad6e-0f4a-473b-a233-04b8e7fadf62"))).AssociationType;
 		public static readonly global::Allors.Meta.AssociationType C1WhereI12one2many = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("ad1b1fb1-b30c-431f-b975-5505f6311a18"))).AssociationType;
 		public static readonly global::Allors.Meta.AssociationType C1sWhereI12many2many = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("c58903fb-443b-4de9-b010-15f3f09ff5df"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType I1sWhereI12many2one = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("28b92468-27e5-4471-b3a5-37b8ec4f794e"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType I1WhereI12one2one = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("381c61c1-312d-47ea-8314-8ac051378a81"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType I1sWhereI12many2many = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("9b05ecb0-c3d5-4b11-98dc-653aef9f65cc"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType I1WhereI12one2many = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("a458ad6e-0f4a-473b-a233-04b8e7fadf62"))).AssociationType;
 
 	}
 }

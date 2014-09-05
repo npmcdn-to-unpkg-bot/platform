@@ -631,23 +631,6 @@ namespace Domain
 
 
 
-		virtual public Allors.Extent<global::Domain.I3> I3sWhereC4many2many
-		{ 
-			get
-			{
-				return Strategy.GetCompositeAssociations(C4Meta.I3sWhereC4many2many);
-			}
-		}
-
-		virtual public bool ExistI3sWhereC4many2many
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociations(C4Meta.I3sWhereC4many2many);
-			}
-		}
-
-
 		virtual public Allors.Extent<global::Domain.C3> C3sWhereC4many2one
 		{ 
 			get
@@ -661,23 +644,6 @@ namespace Domain
 			get
 			{
 				return Strategy.ExistCompositeAssociations(C4Meta.C3sWhereC4many2one);
-			}
-		}
-
-
-		virtual public global::Domain.I3 I3WhereC4one2many
-		{ 
-			get
-			{
-				return (global::Domain.I3) Strategy.GetCompositeAssociation(C4Meta.I3WhereC4one2many);
-			}
-		} 
-
-		virtual public bool ExistI3WhereC4one2many
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociation(C4Meta.I3WhereC4one2many);
 			}
 		}
 
@@ -699,23 +665,6 @@ namespace Domain
 		}
 
 
-		virtual public global::Domain.I3 I3WhereC4one2one
-		{ 
-			get
-			{
-				return (global::Domain.I3) Strategy.GetCompositeAssociation(C4Meta.I3WhereC4one2one);
-			}
-		} 
-
-		virtual public bool ExistI3WhereC4one2one
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociation(C4Meta.I3WhereC4one2one);
-			}
-		}
-
-
 		virtual public global::Domain.C3 C3WhereC4one2many
 		{ 
 			get
@@ -729,23 +678,6 @@ namespace Domain
 			get
 			{
 				return Strategy.ExistCompositeAssociation(C4Meta.C3WhereC4one2many);
-			}
-		}
-
-
-		virtual public Allors.Extent<global::Domain.I3> I3sWhereC4many2one
-		{ 
-			get
-			{
-				return Strategy.GetCompositeAssociations(C4Meta.I3sWhereC4many2one);
-			}
-		}
-
-		virtual public bool ExistI3sWhereC4many2one
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociations(C4Meta.I3sWhereC4many2one);
 			}
 		}
 
@@ -767,6 +699,74 @@ namespace Domain
 		}
 
 
+		virtual public Allors.Extent<global::Domain.I3> I3sWhereC4many2many
+		{ 
+			get
+			{
+				return Strategy.GetCompositeAssociations(C4Meta.I3sWhereC4many2many);
+			}
+		}
+
+		virtual public bool ExistI3sWhereC4many2many
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociations(C4Meta.I3sWhereC4many2many);
+			}
+		}
+
+
+		virtual public global::Domain.I3 I3WhereC4one2many
+		{ 
+			get
+			{
+				return (global::Domain.I3) Strategy.GetCompositeAssociation(C4Meta.I3WhereC4one2many);
+			}
+		} 
+
+		virtual public bool ExistI3WhereC4one2many
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociation(C4Meta.I3WhereC4one2many);
+			}
+		}
+
+
+		virtual public global::Domain.I3 I3WhereC4one2one
+		{ 
+			get
+			{
+				return (global::Domain.I3) Strategy.GetCompositeAssociation(C4Meta.I3WhereC4one2one);
+			}
+		} 
+
+		virtual public bool ExistI3WhereC4one2one
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociation(C4Meta.I3WhereC4one2one);
+			}
+		}
+
+
+		virtual public Allors.Extent<global::Domain.I3> I3sWhereC4many2one
+		{ 
+			get
+			{
+				return Strategy.GetCompositeAssociations(C4Meta.I3sWhereC4many2one);
+			}
+		}
+
+		virtual public bool ExistI3sWhereC4many2one
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociations(C4Meta.I3sWhereC4many2one);
+			}
+		}
+
+
 		virtual public global::Domain.C3 C3WhereI4one2one
 		{ 
 			get
@@ -780,6 +780,57 @@ namespace Domain
 			get
 			{
 				return Strategy.ExistCompositeAssociation(C4Meta.C3WhereI4one2one);
+			}
+		}
+
+
+		virtual public Allors.Extent<global::Domain.C3> C3sWhereI4many2many
+		{ 
+			get
+			{
+				return Strategy.GetCompositeAssociations(C4Meta.C3sWhereI4many2many);
+			}
+		}
+
+		virtual public bool ExistC3sWhereI4many2many
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociations(C4Meta.C3sWhereI4many2many);
+			}
+		}
+
+
+		virtual public Allors.Extent<global::Domain.C3> C3sWhereI4many2one
+		{ 
+			get
+			{
+				return Strategy.GetCompositeAssociations(C4Meta.C3sWhereI4many2one);
+			}
+		}
+
+		virtual public bool ExistC3sWhereI4many2one
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociations(C4Meta.C3sWhereI4many2one);
+			}
+		}
+
+
+		virtual public global::Domain.C3 C3WhereI4one2many
+		{ 
+			get
+			{
+				return (global::Domain.C3) Strategy.GetCompositeAssociation(C4Meta.C3WhereI4one2many);
+			}
+		} 
+
+		virtual public bool ExistC3WhereI4one2many
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociation(C4Meta.C3WhereI4one2many);
 			}
 		}
 
@@ -835,40 +886,6 @@ namespace Domain
 		}
 
 
-		virtual public Allors.Extent<global::Domain.C3> C3sWhereI4many2many
-		{ 
-			get
-			{
-				return Strategy.GetCompositeAssociations(C4Meta.C3sWhereI4many2many);
-			}
-		}
-
-		virtual public bool ExistC3sWhereI4many2many
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociations(C4Meta.C3sWhereI4many2many);
-			}
-		}
-
-
-		virtual public Allors.Extent<global::Domain.C3> C3sWhereI4many2one
-		{ 
-			get
-			{
-				return Strategy.GetCompositeAssociations(C4Meta.C3sWhereI4many2one);
-			}
-		}
-
-		virtual public bool ExistC3sWhereI4many2one
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociations(C4Meta.C3sWhereI4many2one);
-			}
-		}
-
-
 		virtual public global::Domain.I3 I3WhereI4one2one
 		{ 
 			get
@@ -882,23 +899,6 @@ namespace Domain
 			get
 			{
 				return Strategy.ExistCompositeAssociation(C4Meta.I3WhereI4one2one);
-			}
-		}
-
-
-		virtual public global::Domain.C3 C3WhereI4one2many
-		{ 
-			get
-			{
-				return (global::Domain.C3) Strategy.GetCompositeAssociation(C4Meta.C3WhereI4one2many);
-			}
-		} 
-
-		virtual public bool ExistC3WhereI4one2many
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociation(C4Meta.C3WhereI4one2many);
 			}
 		}
 
@@ -971,23 +971,6 @@ namespace Domain
 		}
 
 
-		virtual public global::Domain.I1 I1WhereI34one2many
-		{ 
-			get
-			{
-				return (global::Domain.I1) Strategy.GetCompositeAssociation(C4Meta.I1WhereI34one2many);
-			}
-		} 
-
-		virtual public bool ExistI1WhereI34one2many
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociation(C4Meta.I1WhereI34one2many);
-			}
-		}
-
-
 		virtual public global::Domain.I12 I12WhereI34one2many
 		{ 
 			get
@@ -1001,23 +984,6 @@ namespace Domain
 			get
 			{
 				return Strategy.ExistCompositeAssociation(C4Meta.I12WhereI34one2many);
-			}
-		}
-
-
-		virtual public Allors.Extent<global::Domain.I1> I1sWhereI34many2one
-		{ 
-			get
-			{
-				return Strategy.GetCompositeAssociations(C4Meta.I1sWhereI34many2one);
-			}
-		}
-
-		virtual public bool ExistI1sWhereI34many2one
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociations(C4Meta.I1sWhereI34many2one);
 			}
 		}
 
@@ -1056,6 +1022,57 @@ namespace Domain
 		}
 
 
+		virtual public global::Domain.I12 I12WhereI34one2one
+		{ 
+			get
+			{
+				return (global::Domain.I12) Strategy.GetCompositeAssociation(C4Meta.I12WhereI34one2one);
+			}
+		} 
+
+		virtual public bool ExistI12WhereI34one2one
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociation(C4Meta.I12WhereI34one2one);
+			}
+		}
+
+
+		virtual public global::Domain.I1 I1WhereI34one2many
+		{ 
+			get
+			{
+				return (global::Domain.I1) Strategy.GetCompositeAssociation(C4Meta.I1WhereI34one2many);
+			}
+		} 
+
+		virtual public bool ExistI1WhereI34one2many
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociation(C4Meta.I1WhereI34one2many);
+			}
+		}
+
+
+		virtual public Allors.Extent<global::Domain.I1> I1sWhereI34many2one
+		{ 
+			get
+			{
+				return Strategy.GetCompositeAssociations(C4Meta.I1sWhereI34many2one);
+			}
+		}
+
+		virtual public bool ExistI1sWhereI34many2one
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociations(C4Meta.I1sWhereI34many2one);
+			}
+		}
+
+
 		virtual public Allors.Extent<global::Domain.I1> I1sWhereI34many2many
 		{ 
 			get
@@ -1089,23 +1106,6 @@ namespace Domain
 			}
 		}
 
-
-		virtual public global::Domain.I12 I12WhereI34one2one
-		{ 
-			get
-			{
-				return (global::Domain.I12) Strategy.GetCompositeAssociation(C4Meta.I12WhereI34one2one);
-			}
-		} 
-
-		virtual public bool ExistI12WhereI34one2one
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociation(C4Meta.I12WhereI34one2one);
-			}
-		}
-
 	}
 
 	public static class C4Meta
@@ -1135,34 +1135,34 @@ namespace Domain
 		public static readonly global::Allors.Meta.RoleType I34AllorsInteger = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("cd30dada-24c5-4b94-8f58-ab1018f087ea"))).RoleType;
 		public static readonly global::Allors.Meta.RoleType I34AllorsString = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("d8125c69-1921-4e16-84bc-d3d174be7b83"))).RoleType;
 
-		public static readonly global::Allors.Meta.AssociationType I3sWhereC4many2many = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("00b706bb-681e-44ce-bbf3-c3b01bb11269"))).AssociationType;
 		public static readonly global::Allors.Meta.AssociationType C3sWhereC4many2one = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("39313684-8ea1-4f15-aada-2a16feb148ea"))).AssociationType;
-		public static readonly global::Allors.Meta.AssociationType I3WhereC4one2many = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("3a55d57f-768f-4c11-9c18-baa5f3eeda8c"))).AssociationType;
 		public static readonly global::Allors.Meta.AssociationType C3sWhereC4many2many = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("5e6c2802-3dc5-405a-a2f7-03c9361d4562"))).AssociationType;
-		public static readonly global::Allors.Meta.AssociationType I3WhereC4one2one = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("cc48853e-46f3-4292-be9b-8a4937cea308"))).AssociationType;
 		public static readonly global::Allors.Meta.AssociationType C3WhereC4one2many = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("d1601926-ae62-4592-b15b-6511e0d98355"))).AssociationType;
-		public static readonly global::Allors.Meta.AssociationType I3sWhereC4many2one = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("d5ff5333-6bbc-4bb5-8208-44e1d4b53aee"))).AssociationType;
 		public static readonly global::Allors.Meta.AssociationType C3WhereC4one2one = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("da44bf79-b72e-4565-bd33-0eb278a6f4ec"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType I3sWhereC4many2many = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("00b706bb-681e-44ce-bbf3-c3b01bb11269"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType I3WhereC4one2many = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("3a55d57f-768f-4c11-9c18-baa5f3eeda8c"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType I3WhereC4one2one = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("cc48853e-46f3-4292-be9b-8a4937cea308"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType I3sWhereC4many2one = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("d5ff5333-6bbc-4bb5-8208-44e1d4b53aee"))).AssociationType;
 		public static readonly global::Allors.Meta.AssociationType C3WhereI4one2one = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("29e76785-f3eb-48b9-a9bf-c44e64762631"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType C3sWhereI4many2many = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("8f2225b7-8c15-414a-a9be-50c757f80b3e"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType C3sWhereI4many2one = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("b7745909-a63a-448a-b4bd-6caf614c4b12"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType C3WhereI4one2many = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("ed3267fb-fbc4-4e38-87f5-8e2ee91b1bac"))).AssociationType;
 		public static readonly global::Allors.Meta.AssociationType I3WhereI4one2many = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("2b273c39-cc85-4585-806f-d991f43dda29"))).AssociationType;
 		public static readonly global::Allors.Meta.AssociationType I3sWhereI4many2many = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("3f553db3-b490-4de5-b388-5d096d83de0d"))).AssociationType;
 		public static readonly global::Allors.Meta.AssociationType I3sWhereI4many2one = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("57f8f305-e1a9-452b-bcc1-febf7ccc346a"))).AssociationType;
-		public static readonly global::Allors.Meta.AssociationType C3sWhereI4many2many = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("8f2225b7-8c15-414a-a9be-50c757f80b3e"))).AssociationType;
-		public static readonly global::Allors.Meta.AssociationType C3sWhereI4many2one = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("b7745909-a63a-448a-b4bd-6caf614c4b12"))).AssociationType;
 		public static readonly global::Allors.Meta.AssociationType I3WhereI4one2one = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("d36e7cf1-08d1-4333-b539-e50503c10934"))).AssociationType;
-		public static readonly global::Allors.Meta.AssociationType C3WhereI4one2many = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("ed3267fb-fbc4-4e38-87f5-8e2ee91b1bac"))).AssociationType;
 		public static readonly global::Allors.Meta.AssociationType S1234sWhereS1234many2one = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("4b846355-000b-4651-bff2-51f1275c1461"))).AssociationType;
 		public static readonly global::Allors.Meta.AssociationType S1234WhereS1234one2many = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("8fb24e1c-9e04-4b3d-8a97-153d3c0ea7ec"))).AssociationType;
 		public static readonly global::Allors.Meta.AssociationType S1234sWhereS1234many2many = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("a2e7c6f6-ca0d-4fb3-9431-8dd1be7ebdb7"))).AssociationType;
 		public static readonly global::Allors.Meta.AssociationType S1234WhereS1234one2one = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("c2fac2fc-14c6-4aa3-89ff-afba1316d06d"))).AssociationType;
-		public static readonly global::Allors.Meta.AssociationType I1WhereI34one2many = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("00a70a04-4fc8-4585-83ce-0f7f0e0db7ab"))).AssociationType;
 		public static readonly global::Allors.Meta.AssociationType I12WhereI34one2many = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("2c05b90e-a036-450a-8b4e-ee70c8146fed"))).AssociationType;
-		public static readonly global::Allors.Meta.AssociationType I1sWhereI34many2one = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("528ece9c-81f2-4ea4-8d42-50d9a3fe1eea"))).AssociationType;
 		public static readonly global::Allors.Meta.AssociationType I12sWhereI34many2one = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("61fc731f-d769-4eb9-bf87-983e73e403e4"))).AssociationType;
 		public static readonly global::Allors.Meta.AssociationType I12sWhereI34many2many = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("716d13fc-f608-41a8-ac9e-824890c585b5"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType I12WhereI34one2one = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("f31ace17-76b1-46db-9fc0-099b94fbada5"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType I1WhereI34one2many = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("00a70a04-4fc8-4585-83ce-0f7f0e0db7ab"))).AssociationType;
+		public static readonly global::Allors.Meta.AssociationType I1sWhereI34many2one = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("528ece9c-81f2-4ea4-8d42-50d9a3fe1eea"))).AssociationType;
 		public static readonly global::Allors.Meta.AssociationType I1sWhereI34many2many = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("912eeb1b-c5d6-4ea3-9e66-6d92cc455ef6"))).AssociationType;
 		public static readonly global::Allors.Meta.AssociationType I1WhereI34one2one = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("9291fb85-9d1f-4c5d-96ec-797be51557ce"))).AssociationType;
-		public static readonly global::Allors.Meta.AssociationType I12WhereI34one2one = ((Allors.Meta.RelationType)global::Allors.Meta.Repository.MetaPopulation.Find( new System.Guid("f31ace17-76b1-46db-9fc0-099b94fbada5"))).AssociationType;
 
 	}
 }
