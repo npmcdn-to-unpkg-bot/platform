@@ -23,7 +23,7 @@ namespace Allors.Meta.Builders
 {
     using System;
 
-    internal partial class InheritanceBuilder : MetaObjectBuilder<Inheritance>
+    internal partial class InheritanceBuilder : Builder<Inheritance>
     {
         private Composite subtype;
         private Interface supertype;

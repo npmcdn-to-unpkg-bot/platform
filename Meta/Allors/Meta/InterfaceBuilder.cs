@@ -23,7 +23,7 @@ namespace Allors.Meta.Builders
 {
     using System;
 
-    internal partial class InterfaceBuilder : MetaObjectBuilder<Interface>
+    internal partial class InterfaceBuilder : Builder<Interface>
     {
         private string singularName;
         private string pluralName;

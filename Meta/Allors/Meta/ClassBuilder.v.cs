@@ -25,7 +25,7 @@ namespace Allors.Meta.Builders
     {
         public override Class Build()
         {
-            var instance = new Class(this.domain, this.id);
+            var instance = new Class(this.Domain, this.Id);
 
             this.AllorsBuild(instance);
 

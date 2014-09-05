@@ -35,11 +35,9 @@ namespace Allors.Meta
 
         private bool isDerived;
 
-        public RelationType(Domain domain, Guid relationTypeId)
+        public RelationType(Domain domain, Guid id)
+            : base(domain.MetaPopulation, id)
         {
-            this.MetaPopulation = domain.MetaPopulation;
-
-            this.Id = relationTypeId;
             this.associationType = new AssociationType(this);
             this.roleType = new RoleType(this);
 

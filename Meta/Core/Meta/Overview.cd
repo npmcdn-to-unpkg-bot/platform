@@ -6,7 +6,7 @@
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAIxAIBAAACCBAQEAACAUAQIAAAEAAUAAYgBAAECAAI=</HashCode>
+      <HashCode>AAI1AIBAAASCBAQEAACAUAQIAAAGAg0AAYgBAAECAAI=</HashCode>
       <FileName>Allors\Meta\Domain.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -20,27 +20,19 @@
       <Field Name="id" Hidden="true" />
       <Property Name="IdAsNumberString" Hidden="true" />
       <Property Name="IdAsString" Hidden="true" />
-      <Field Name="IdComparer" Hidden="true" />
+      <Method Name="IdComparer" Hidden="true" />
       <Method Name="Validate" Hidden="true" />
       <Property Name="ValidationName" Hidden="true" />
     </Members>
     <Compartments>
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
-    <NestedTypes>
-      <Class Name="Allors.Meta.MetaObject.PrivateIdComparer" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>Allors\Meta\MetaObject.cs</NewMemberFileName>
-        </TypeIdentifier>
-        <Lollipop Position="0.2" />
-      </Class>
-    </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAACAAACAACAAAAAAACAAACAAAAAAAAAAAAAAEABAgA=</HashCode>
+      <HashCode>AAACAAAAAACAAAAAAACAAACAAAAAAAAAAAAAAEBBAgA=</HashCode>
       <FileName>Allors\Meta\MetaObject.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="Environment" />
+      <Property Name="MetaPopulation" />
     </ShowAsAssociation>
   </Class>
   <Class Name="Allors.Meta.Class" Collapsed="true">
@@ -172,12 +164,10 @@
   <Class Name="Allors.Meta.RoleType">
     <Position X="11" Y="6.25" Width="2" />
     <Members>
-      <Method Name="AllorsValidate" Hidden="true" />
       <Field Name="assignedPluralName" Hidden="true" />
       <Field Name="assignedSingularName" Hidden="true" />
       <Property Name="AssociationType" Hidden="true" />
       <Method Name="CompareTo" Hidden="true" />
-      <Method Name="CoreValidate" Hidden="true" />
       <Field Name="derivedPluralPropertyName" Hidden="true" />
       <Field Name="derivedSingularPropertyName" Hidden="true" />
       <Method Name="DeriveMultiplicity" Hidden="true" />
@@ -212,32 +202,10 @@
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAIGmACCAAGgwIYGAMLAAAQCgAAQIIASAJIQAIDAEAg=</HashCode>
+      <HashCode>AAIGmACCAAGgwIYGAMLAAAQCgAAQAIASAJIQAEDAEAg=</HashCode>
       <FileName>Allors\Meta\RoleType.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="Allors.Meta.PropertyType" Collapsed="true">
-    <Position X="10" Y="4.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Allors\Meta\PropertyType.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Allors.Meta.OperandType" Collapsed="true">
-    <Position X="11" Y="3.25" Width="1.5" />
-    <InheritanceLine Type="Allors.Meta.MetaObject" FixedToPoint="true">
-      <Path>
-        <Point X="4.25" Y="1.863" />
-        <Point X="4.25" Y="2.875" />
-        <Point X="11.875" Y="2.875" />
-        <Point X="11.875" Y="3.25" />
-      </Path>
-    </InheritanceLine>
-    <TypeIdentifier>
-      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Allors\Meta\OperandType.cs</FileName>
-    </TypeIdentifier>
   </Class>
   <Class Name="Allors.Meta.MethodType" Collapsed="true">
     <Position X="12" Y="4.75" Width="1.5" />
@@ -245,18 +213,11 @@
       <Compartment Name="Properties" Collapsed="true" />
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
-    <InheritanceLine Type="Allors.Meta.OperandType" FixedFromPoint="true">
-      <Path>
-        <Point X="11.75" Y="3.941" />
-        <Point X="11.75" Y="4.375" />
-        <Point X="12.75" Y="4.375" />
-        <Point X="12.75" Y="4.75" />
-      </Path>
-    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AAAAEACAAACAAAAAAACAAAQAAAAEAAAAAIAAAAAAAAA=</HashCode>
       <FileName>Allors\Meta\MethodType.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="Allors.Meta.RelationType">
     <Position X="8.25" Y="3.25" Width="1.5" />
@@ -278,13 +239,6 @@
       <Method Name="Validate" Hidden="true" />
       <Property Name="ValidationName" Hidden="true" />
     </Members>
-    <AssociationLine Name="RoleType" Type="Allors.Meta.RoleType" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="8.625" Y="5.06" />
-        <Point X="8.625" Y="8.125" />
-        <Point X="11" Y="8.125" />
-      </Path>
-    </AssociationLine>
     <TypeIdentifier>
       <HashCode>AAIAAAAAAACAACQEAKGABAQggAAQABAAEAIAAAACAAA=</HashCode>
       <FileName>Allors\Meta\RelationType.cs</FileName>
@@ -315,12 +269,26 @@
       <FileName>Allors\Meta\Unit.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Allors.Meta.Environment" Collapsed="true">
+  <Class Name="Allors.Meta.MetaPopulation" Collapsed="true">
     <Position X="7.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIBQCAAAQAHCBAABqAgAUCgAAAAaAAAAFIQBQAGABEg=</HashCode>
-      <FileName>Allors\Meta\Environment.cs</FileName>
+      <FileName>Allors\Meta\MetaPopulation.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Interface Name="Allors.Meta.OperandType" Collapsed="true">
+    <Position X="10.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Allors\Meta\OperandType.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Allors.Meta.PropertyType" Collapsed="true">
+    <Position X="10" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Allors\Meta\PropertyType.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

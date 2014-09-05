@@ -30,9 +30,8 @@ namespace Allors.Meta
         private string pluralName;
 
         protected ObjectType(Domain domain, Guid id)
+            : base(domain.MetaPopulation, id)
         {
-            this.MetaPopulation = domain.MetaPopulation;
-            this.Id = id;
         }
 
         public string SingularName

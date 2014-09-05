@@ -25,7 +25,7 @@ namespace Allors.Meta.Builders
     {
         public override RelationType Build()
         {
-            var instance = new RelationType(this.domain, this.id);
+            var instance = new RelationType(this.Domain, this.Id);
 
             this.AllorsBuild(instance);
 

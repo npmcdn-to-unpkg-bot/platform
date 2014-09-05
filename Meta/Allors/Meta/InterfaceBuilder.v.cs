@@ -25,7 +25,7 @@ namespace Allors.Meta.Builders
     {
         public override Interface Build()
         {
-            var instance = new Interface(this.domain, this.id);
+            var instance = new Interface(this.Domain, this.Id);
 
             this.AllorsBuild(instance);
 

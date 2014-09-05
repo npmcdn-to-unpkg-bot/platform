@@ -30,6 +30,14 @@ namespace Allors.Meta
     {
         private Guid id;
 
+        protected MetaObject(MetaPopulation metaPopulation, Guid id)
+        {
+            this.MetaPopulation = metaPopulation;
+            this.Id = id;
+        }
+        
+        public MetaPopulation MetaPopulation { get; private set; }
+
         /// <summary>
         /// Gets or sets the id.
         /// </summary>
@@ -41,7 +49,7 @@ namespace Allors.Meta
                 return this.id;
             }
 
-            protected set
+            private set
             {
                 this.MetaPopulation.AssertUnlocked();
                 this.id = value;
@@ -66,8 +74,6 @@ namespace Allors.Meta
         {
             get { return this.Id.ToString("D").ToLower(); }
         }
-
-        public MetaPopulation MetaPopulation { get; protected set; }
 
         /// <summary>
         /// Gets the validation name.

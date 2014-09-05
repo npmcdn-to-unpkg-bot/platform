@@ -27,12 +27,10 @@ namespace Allors.Meta
         private string name;
 
         private ObjectType objectType;
-        
-        public MethodType(Domain domain, Guid methodTypeId)
-        {
-            this.MetaPopulation = domain.MetaPopulation;
-            this.Id = methodTypeId;
 
+        public MethodType(Domain domain, Guid id)
+            : base(domain.MetaPopulation, id)
+        {
             domain.OnMethodTypeCreated(this);
         }
 

@@ -23,7 +23,7 @@ namespace Allors.Meta.Builders
 {
     using System;
 
-    internal partial class ClassBuilder : MetaObjectBuilder<Class>
+    internal partial class ClassBuilder : Builder<Class>
     {
         private string singularName;
         private string pluralName;

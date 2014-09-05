@@ -23,18 +23,18 @@ namespace Allors.Meta.Builders
 {
     using System;
 
-    internal abstract partial class MetaObjectBuilder<T>
+    internal abstract partial class Builder<T>
     {
-        protected Domain domain;
-
-        protected readonly Guid id;
-
-        protected MetaObjectBuilder(Domain domain, Guid id)
+        protected Builder(Domain domain, Guid id)
         {
-            this.domain = domain;
-            this.id = id;
+            this.Domain = domain;
+            this.Id = id;
         }
 
+        protected Domain Domain { get; private set; }
+
+        protected Guid Id { get; private set; }
+        
         public abstract T Build();
     }
 }

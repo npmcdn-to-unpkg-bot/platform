@@ -23,7 +23,7 @@ namespace Allors.Meta.Builders
 {
     using System;
 
-    internal partial class RelationTypeBuilder : MetaObjectBuilder<RelationType>
+    internal partial class RelationTypeBuilder : Builder<RelationType>
     {
         private Composite associationObjectType;
         private ObjectType roleObjectType;

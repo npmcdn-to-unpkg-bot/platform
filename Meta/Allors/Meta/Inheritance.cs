@@ -33,11 +33,9 @@ namespace Allors.Meta
 
         private Interface supertype;
 
-        public Inheritance(Domain domain, Guid inheritanceId)
+        public Inheritance(Domain domain, Guid id)
+            : base(domain.MetaPopulation, id)
         {
-            this.MetaPopulation = domain.MetaPopulation;
-            this.Id = inheritanceId;
-
             domain.OnInheritanceCreated(this);
         }
 

@@ -47,10 +47,8 @@ namespace Allors.Meta
         private IList<MethodType> definedMethodTypes;
 
         public Domain(MetaPopulation metaPopulation, Guid id)
+            : base(metaPopulation, id)
         {
-            this.MetaPopulation = metaPopulation;
-
-            this.Id = id;
             this.directSuperdomains = new List<Domain>();
             
             this.definedUnits = new List<Unit>();
