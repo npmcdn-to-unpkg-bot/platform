@@ -35,6 +35,73 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\Common\Cache.cs" />
+    <Compile Include="Base\Common\Counter.cs" />
+    <Compile Include="Base\Common\Counters.cs" />
+    <Compile Include="Base\Common\Derivable.cs" />
+    <Compile Include="Base\Common\Derivation.cs" />
+    <Compile Include="Base\Common\DerivationError.cs" />
+    <Compile Include="Base\Common\DerivationErrorAtLeastOne.cs" />
+    <Compile Include="Base\Common\DerivationErrorAtMostOne.cs" />
+    <Compile Include="Base\Common\DerivationErrorConflict.cs" />
+    <Compile Include="Base\Common\DerivationErrorEquals.cs" />
+    <Compile Include="Base\Common\DerivationErrorGeneric.cs" />
+    <Compile Include="Base\Common\DerivationErrorNotAllowed.cs" />
+    <Compile Include="Base\Common\DerivationErrorRequired.cs" />
+    <Compile Include="Base\Common\DerivationErrorUnique.cs" />
+    <Compile Include="Base\Common\DerivationException.cs" />
+    <Compile Include="Base\Common\DerivationGraph.cs" />
+    <Compile Include="Base\Common\DerivationLog.cs" />
+    <Compile Include="Base\Common\DerivationNode.cs" />
+    <Compile Include="Base\Common\DerivationRelation.cs" />
+    <Compile Include="Base\Common\IDerivation.cs" />
+    <Compile Include="Base\Common\IDerivationError.cs" />
+    <Compile Include="Base\Common\ObjectState.cs" />
+    <Compile Include="Base\Common\Retry.cs" />
+    <Compile Include="Base\Common\Singleton.cs" />
+    <Compile Include="Base\Common\Singleton.v.cs" />
+    <Compile Include="Base\Common\Singletons.cs" />
+    <Compile Include="Base\Common\Transitional.cs" />
+    <Compile Include="Base\Common\UniquelyIdentifiableCache.cs" />
+    <Compile Include="Base\Databases.cs" />
+    <Compile Include="Base\IObjectBuilder.cs" />
+    <Compile Include="Base\IObjects.cs" />
+    <Compile Include="Base\ISecure.cs" />
+    <Compile Include="Base\ISessionExtensions.cs" />
+    <Compile Include="Base\ISetup.cs" />
+    <Compile Include="Base\Meta\IObjectTypeExtensions.cs" />
+    <Compile Include="Base\ObjectBase.cs" />
+    <Compile Include="Base\ObjectBuilder.cs" />
+    <Compile Include="Base\ObjectsBase.cs" />
+    <Compile Include="Base\ObjectsGraph.cs" />
+    <Compile Include="Base\ObjectsNode.cs" />
+    <Compile Include="Base\Security\AccessControl.cs" />
+    <Compile Include="Base\Security\AccessControlledObject.cs" />
+    <Compile Include="Base\Security\AccessControlList.cs" />
+    <Compile Include="Base\Security\AccessControlListCache.cs" />
+    <Compile Include="Base\Security\AccessControls.cs" />
+    <Compile Include="Base\Security\Cache\SecurityCache.cs" />
+    <Compile Include="Base\Security\IAccessControlList.cs" />
+    <Compile Include="Base\Security\IAccessControlListFactory.cs" />
+    <Compile Include="Base\Security\Login.cs" />
+    <Compile Include="Base\Security\Operation.cs" />
+    <Compile Include="Base\Security\Permission.cs" />
+    <Compile Include="Base\Security\PermissionBuilder.cs" />
+    <Compile Include="Base\Security\PermissionComparer.cs" />
+    <Compile Include="Base\Security\Permissions.cs" />
+    <Compile Include="Base\Security\Role.cs" />
+    <Compile Include="Base\Security\Role.v.cs" />
+    <Compile Include="Base\Security\Roles.cs" />
+    <Compile Include="Base\Security\Security.cs" />
+    <Compile Include="Base\Security\SecurityConfiguration.cs" />
+    <Compile Include="Base\Security\SecurityToken.cs" />
+    <Compile Include="Base\Security\SecurityTokens.cs" />
+    <Compile Include="Base\Security\UserExtensions.cs" />
+    <Compile Include="Base\Security\UserGroup.cs" />
+    <Compile Include="Base\Security\UserGroup.v.cs" />
+    <Compile Include="Base\Security\UserGroups.cs" />
+    <Compile Include="Base\Security\Users.cs" />
+    <Compile Include="Base\Setup.cs" />
     <Compile Include="Core\Extent.cs" />
     <Compile Include="Core\ExtentT.cs" />
     <Compile Include="Core\IChangeSet.cs" />
@@ -221,7 +288,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="BaseTest\" />
-    <Folder Include="Base\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
