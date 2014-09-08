@@ -19,6 +19,7 @@
 // -------------------------------------------------------------------------------------------------
 namespace Allors.Development.Repository.Tasks
 {
+    using System;
     using System.IO;
 
     using Allors.Development.Repository.Generation;
@@ -51,8 +52,16 @@ namespace Allors.Development.Repository.Tasks
 
         public bool Execute()
         {
-            var log = Execute(this.Template, this.Output);
-            return !log.ErrorOccured;
+            try
+            {
+                var log = Execute(this.Template, this.Output);
+                return !log.ErrorOccured;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.InnerException != null ? e.InnerException.Message : e.Message);
+                return false;
+            }
         }
     }
 }

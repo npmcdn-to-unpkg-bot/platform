@@ -41,8 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Adapters\Meta\Repository.v.cs" />
-    <Compile Include="Adapters\Meta\Repository.cs" />
+    <Compile Include="BaseTest\Meta\Repository.cs" />
+    <Compile Include="BaseTest\Meta\Repository.v.cs" />
+    <Compile Include="Base\Meta\Repository.cs" />
     <Compile Include="Core\Generation\Generate.cs" />
     <Compile Include="Core\Generation\GenerateLog.cs" />
     <Compile Include="Core\Generation\Log.cs" />

@@ -35,76 +35,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Adapters\DomainBusiness\Company.cs" />
-    <Compile Include="Adapters\DomainBusiness\Named.cs" />
-    <Compile Include="Adapters\DomainBusiness\Person.cs" />
-    <Compile Include="Adapters\DomainSpecial\ClassWithoutRoles.cs" />
-    <Compile Include="Adapters\DomainSpecial\ClassWithoutUnitRoles.cs" />
-    <Compile Include="Adapters\DomainSpecial\GT32.cs" />
-    <Compile Include="Adapters\DomainSpecial\GT32UnitLT32Composite.cs" />
-    <Compile Include="Adapters\DomainSpecial\IGT32Composite.cs" />
-    <Compile Include="Adapters\DomainSpecial\IGT32Unit.cs" />
-    <Compile Include="Adapters\DomainSpecial\ILT32Composite.cs" />
-    <Compile Include="Adapters\DomainSpecial\ILT32Unit.cs" />
-    <Compile Include="Adapters\DomainSpecial\ISandbox.cs" />
-    <Compile Include="Adapters\DomainSpecial\LT32.cs" />
-    <Compile Include="Adapters\DomainSpecial\LT32UnitGT32Composite.cs" />
-    <Compile Include="Adapters\DomainSpecial\Sandbox.cs" />
-    <Compile Include="Adapters\DomainSpecial\SingleUnit.cs" />
-    <Compile Include="Adapters\DomainSpecial\User.cs" />
-    <Compile Include="Adapters\Domain\C1.cs" />
-    <Compile Include="Adapters\Domain\C2.cs" />
-    <Compile Include="Adapters\Domain\C3.cs" />
-    <Compile Include="Adapters\Domain\C4.cs" />
-    <Compile Include="Adapters\Domain\I1.cs" />
-    <Compile Include="Adapters\Domain\I12.cs" />
-    <Compile Include="Adapters\Domain\I2.cs" />
-    <Compile Include="Adapters\Domain\I23.cs" />
-    <Compile Include="Adapters\Domain\I3.cs" />
-    <Compile Include="Adapters\Domain\I34.cs" />
-    <Compile Include="Adapters\Domain\I4.cs" />
-    <Compile Include="Adapters\Domain\S1.cs" />
-    <Compile Include="Adapters\Domain\S12.cs" />
-    <Compile Include="Adapters\Domain\S1234.cs" />
-    <Compile Include="Adapters\Domain\S2.cs" />
-    <Compile Include="Adapters\Domain\S3.cs" />
-    <Compile Include="Adapters\Domain\S4.cs" />
-    <Compile Include="Adapters\Domain\Subscriber.cs" />
-    <Compile Include="Adapters\Generated\C1.g.cs" />
-    <Compile Include="Adapters\Generated\C2.g.cs" />
-    <Compile Include="Adapters\Generated\C3.g.cs" />
-    <Compile Include="Adapters\Generated\C4.g.cs" />
-    <Compile Include="Adapters\Generated\ClassWithoutRoles.g.cs" />
-    <Compile Include="Adapters\Generated\ClassWithoutUnitRoles.g.cs" />
-    <Compile Include="Adapters\Generated\Company.g.cs" />
-    <Compile Include="Adapters\Generated\GT32.g.cs" />
-    <Compile Include="Adapters\Generated\GT32UnitLT32Composite.g.cs" />
-    <Compile Include="Adapters\Generated\I1.g.cs" />
-    <Compile Include="Adapters\Generated\I12.g.cs" />
-    <Compile Include="Adapters\Generated\I2.g.cs" />
-    <Compile Include="Adapters\Generated\I23.g.cs" />
-    <Compile Include="Adapters\Generated\I3.g.cs" />
-    <Compile Include="Adapters\Generated\I34.g.cs" />
-    <Compile Include="Adapters\Generated\I4.g.cs" />
-    <Compile Include="Adapters\Generated\IGT32Composite.g.cs" />
-    <Compile Include="Adapters\Generated\IGT32Unit.g.cs" />
-    <Compile Include="Adapters\Generated\ILT32Composite.g.cs" />
-    <Compile Include="Adapters\Generated\ILT32Unit.g.cs" />
-    <Compile Include="Adapters\Generated\InterfaceWithoutConcreteClass.g.cs" />
-    <Compile Include="Adapters\Generated\ISandbox.g.cs" />
-    <Compile Include="Adapters\Generated\LT32.g.cs" />
-    <Compile Include="Adapters\Generated\LT32UnitGT32Composite.g.cs" />
-    <Compile Include="Adapters\Generated\Named.g.cs" />
-    <Compile Include="Adapters\Generated\Person.g.cs" />
-    <Compile Include="Adapters\Generated\S1.g.cs" />
-    <Compile Include="Adapters\Generated\S12.g.cs" />
-    <Compile Include="Adapters\Generated\S1234.g.cs" />
-    <Compile Include="Adapters\Generated\S2.g.cs" />
-    <Compile Include="Adapters\Generated\S3.g.cs" />
-    <Compile Include="Adapters\Generated\S4.g.cs" />
-    <Compile Include="Adapters\Generated\Sandbox.g.cs" />
-    <Compile Include="Adapters\Generated\SingleUnit.g.cs" />
-    <Compile Include="Adapters\Generated\User.g.cs" />
     <Compile Include="Core\Extent.cs" />
     <Compile Include="Core\ExtentT.cs" />
     <Compile Include="Core\IChangeSet.cs" />
@@ -134,6 +64,150 @@
     <Compile Include="Core\SessionRollingBackEventArgs.cs" />
     <Compile Include="Core\Sort.cs" />
     <Compile Include="Core\SortDirection.cs" />
+    <Compile Include="Generated\AccessControl.g.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generated\AccessControlledObject.g.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generated\Address.g.cs" />
+    <Compile Include="Generated\BadUI.g.cs" />
+    <Compile Include="Generated\C1.g.cs" />
+    <Compile Include="Generated\C2.g.cs" />
+    <Compile Include="Generated\ClassWithoutRoles.g.cs" />
+    <Compile Include="Generated\Commentable.g.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generated\Counter.g.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generated\Country.g.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generated\Currency.g.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generated\Dependee.g.cs" />
+    <Compile Include="Generated\Dependent.g.cs" />
+    <Compile Include="Generated\DerivationLogC1.g.cs" />
+    <Compile Include="Generated\DerivationLogC2.g.cs" />
+    <Compile Include="Generated\DerivationLogI12.g.cs" />
+    <Compile Include="Generated\Enumeration.g.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generated\Extender.g.cs" />
+    <Compile Include="Generated\First.g.cs" />
+    <Compile Include="Generated\Four.g.cs" />
+    <Compile Include="Generated\From.g.cs" />
+    <Compile Include="Generated\Gender.g.cs" />
+    <Compile Include="Generated\HomeAddress.g.cs" />
+    <Compile Include="Generated\I1.g.cs" />
+    <Compile Include="Generated\I12.g.cs" />
+    <Compile Include="Generated\I2.g.cs" />
+    <Compile Include="Generated\Image.g.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generated\Language.g.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generated\Locale.g.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generated\Localised.g.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generated\LocalisedText.g.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generated\Login.g.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generated\MailboxAddress.g.cs" />
+    <Compile Include="Generated\Media.g.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generated\MediaContent.g.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generated\MediaType.g.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generated\ObjectState.g.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generated\One.g.cs" />
+    <Compile Include="Generated\Organisation.g.cs" />
+    <Compile Include="Generated\Period.g.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generated\Permission.g.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generated\Person.g.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generated\Place.g.cs" />
+    <Compile Include="Generated\Printable.g.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generated\PrintQueue.g.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generated\Role.g.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generated\Searchable.g.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generated\SearchData.g.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generated\SearchFragment.g.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generated\SearchResult.g.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generated\SearchTest.g.cs" />
+    <Compile Include="Generated\Second.g.cs" />
+    <Compile Include="Generated\SecurityToken.g.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generated\SecurityTokenOwner.g.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generated\Shared.g.cs" />
+    <Compile Include="Generated\Singleton.g.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generated\StatefulCompany.g.cs" />
+    <Compile Include="Generated\StringTemplate.g.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generated\Subdependee.g.cs" />
+    <Compile Include="Generated\Third.g.cs" />
+    <Compile Include="Generated\Three.g.cs" />
+    <Compile Include="Generated\To.g.cs" />
+    <Compile Include="Generated\Transition.g.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generated\Transitional.g.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generated\Two.g.cs" />
+    <Compile Include="Generated\UniquelyIdentifiable.g.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generated\Unit.g.cs" />
+    <Compile Include="Generated\User.g.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generated\UserGroup.g.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generated\UserInterfaceable.g.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -145,7 +219,10 @@
   <ItemGroup>
     <None Include="Settings.StyleCop" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="BaseTest\" />
+    <Folder Include="Base\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
