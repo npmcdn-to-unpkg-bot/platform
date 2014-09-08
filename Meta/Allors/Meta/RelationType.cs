@@ -35,6 +35,9 @@ namespace Allors.Meta
 
         private bool isDerived;
 
+        private bool isIndexed;
+
+
         public RelationType(Domain domain, Guid id)
             : base(domain, id)
         {
@@ -55,6 +58,21 @@ namespace Allors.Meta
             {
                 this.MetaPopulation.AssertUnlocked();
                 this.isDerived = value;
+                this.MetaPopulation.Stale();
+            }
+        }
+
+        public bool IsIndexed
+        {
+            get
+            {
+                return this.isIndexed;
+            }
+
+            set
+            {
+                this.MetaPopulation.AssertUnlocked();
+                this.isIndexed = value;
                 this.MetaPopulation.Stale();
             }
         }

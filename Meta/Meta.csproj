@@ -74,7 +74,6 @@
     <Compile Include="Allors\Meta\MethodType.cs" />
     <Compile Include="Allors\Meta\Composite.cs" />
     <Compile Include="Allors\Meta\Class.cs" />
-    <Compile Include="Allors\Meta\Repository.cs" />
     <Compile Include="Allors\Meta\Unit.cs" />
     <Compile Include="Allors\Meta\ObjectType.cs" />
     <Compile Include="Allors\Meta\OperandType.cs" />
@@ -82,12 +81,9 @@
     <Compile Include="Allors\Meta\RelationType.cs" />
     <Compile Include="Allors\Meta\RoleType.cs" />
     <Compile Include="Allors\Meta\ClassBuilder.v.cs" />
-    <Compile Include="Core\Meta\RelationType.cs" />
-    <Compile Include="Core\Meta\Repository.cs" />
-    <Compile Include="Core\Meta\RoleType.cs" />
-    <Compile Include="Core\Meta\Unit.cs" />
-    <Compile Include="Core\Meta\UnitIds.cs" />
-    <Compile Include="Core\Meta\UnitTags.cs" />
+    <Compile Include="Allors\Meta\Repository.cs" />
+    <Compile Include="Allors\Meta\UnitIds.cs" />
+    <Compile Include="Allors\Meta\UnitTags.cs" />
     <Compile Include="Allors\Meta\ValidationError.cs" />
     <Compile Include="Allors\Meta\ValidationKind.cs" />
     <Compile Include="Allors\Meta\ValidationLog.cs" />
@@ -96,8 +92,8 @@
   <ItemGroup />
   <ItemGroup>
     <None Include="Core\Generate.proj" />
-    <None Include="Core\Meta\Operands.cd" />
-    <None Include="Core\Meta\Overview.cd" />
+    <None Include="Allors\Meta\Operands.cd" />
+    <None Include="Allors\Meta\Overview.cd" />
     <None Include="packages.config" />
     <None Include="Settings.StyleCop" />
   </ItemGroup>
