@@ -44,26 +44,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\AbstractTest.cs" />
-    <Compile Include="Core\Meta\AssociationTest.cs" />
-    <Compile Include="Core\Meta\DomainTest.cs" />
-    <Compile Include="Core\Meta\InheritanceTest.cs" />
-    <Compile Include="Core\Meta\MetaObjectTest.cs" />
-    <Compile Include="Core\Meta\MethodTypeTest.cs" />
-    <Compile Include="Core\Meta\ObjectTypeTest.cs" />
-    <Compile Include="Core\Meta\RelationTypeTest.cs" />
-    <Compile Include="Core\Meta\RoleTest.cs" />
-    <Compile Include="Core\Meta\SandboxTest.cs" />
-    <Compile Include="Core\Population.cs" />
+    <Compile Include="Allors\AbstractTest.cs" />
+    <Compile Include="Allors\Meta\AssociationTest.cs" />
+    <Compile Include="Allors\Meta\DomainTest.cs" />
+    <Compile Include="Allors\Meta\InheritanceTest.cs" />
+    <Compile Include="Allors\Meta\MetaObjectTest.cs" />
+    <Compile Include="Allors\Meta\MethodTypeTest.cs" />
+    <Compile Include="Allors\Meta\ObjectTypeTest.cs" />
+    <Compile Include="Allors\Meta\RelationTypeTest.cs" />
+    <Compile Include="Allors\Meta\RoleTest.cs" />
+    <Compile Include="Allors\Meta\SandboxTest.cs" />
+    <Compile Include="Allors\Population.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Allors\Meta\Static\" />
     <Folder Include="Base\" />
-    <Folder Include="Core\Meta\Static\" />
+    <Folder Include="Core\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Core\App.config" />
-    <None Include="Core\Settings.StyleCop" />
+    <None Include="Settings.StyleCop" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
