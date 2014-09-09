@@ -16,36 +16,35 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the ObjectType type.</summary>
 //-------------------------------------------------------------------------------------------------
 
 namespace Allors.Meta.Builders
 {
     using System;
 
-    internal partial class InheritanceBuilder : Builder<Inheritance>
+    public partial class InheritanceBuilder : Builder<Inheritance>
     {
         private Composite subtype;
         private Interface supertype;
 
-        internal InheritanceBuilder(Domain domain, Guid id)
+        public InheritanceBuilder(Domain domain, Guid id)
             : base(domain, id)
         {
         }
 
-        internal InheritanceBuilder WithSubtype(Composite value)
+        public InheritanceBuilder WithSubtype(Composite value)
         {
             this.subtype = value;
             return this;
         }
 
-        internal InheritanceBuilder WithSupertype(Interface value)
+        public InheritanceBuilder WithSupertype(Interface value)
         {
             this.supertype = value;
             return this;
         }
 
-        internal void AllorsBuild(Inheritance instance)
+        private void AllorsBuild(Inheritance instance)
         {
             instance.Subtype = this.subtype;
             instance.Supertype = this.supertype;

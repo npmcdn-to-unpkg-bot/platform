@@ -41,7 +41,7 @@ namespace Allors.Meta
 
         private Composite objectType;
 
-        public AssociationType(RelationType relationType, Guid id)
+        internal AssociationType(RelationType relationType, Guid id)
             : base(relationType.DefiningDomain, id)
         {
             this.relationType = relationType;
@@ -58,9 +58,9 @@ namespace Allors.Meta
 
             set
             {
-                this.RelationType.MetaPopulation.AssertUnlocked();
+                this.MetaPopulation.AssertUnlocked();
                 this.isMany = value;
-                this.RelationType.MetaPopulation.Stale();
+                this.MetaPopulation.Stale();
             }
         }
 
@@ -73,9 +73,9 @@ namespace Allors.Meta
 
             set
             {
-                this.RelationType.MetaPopulation.AssertUnlocked();
+                this.MetaPopulation.AssertUnlocked();
                 this.objectType = value;
-                this.RelationType.MetaPopulation.Stale();
+                this.MetaPopulation.Stale();
             }
         }
 
@@ -293,7 +293,7 @@ namespace Allors.Meta
         /// Validates this object.
         /// </summary>
         /// <param name="validationLog">The validation information.</param>
-        protected internal void Validate(ValidationLog validationLog)
+        protected internal override void Validate(ValidationLog validationLog)
         {
             if (this.ObjectType == null)
             {

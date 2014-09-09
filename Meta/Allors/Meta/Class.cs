@@ -28,7 +28,7 @@ namespace Allors.Meta
     {
         private readonly Class[] leafClasses; 
 
-        public Class(Domain domain, Guid id)
+        internal Class(Domain domain, Guid id)
             : base(domain, id)
         {
             this.leafClasses = new[] { this };

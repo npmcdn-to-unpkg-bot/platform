@@ -16,12 +16,11 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the ObjectType type.</summary>
 //-------------------------------------------------------------------------------------------------
 
 namespace Allors.Meta.Builders
 {
-    internal partial class InterfaceBuilder
+    public partial class InterfaceBuilder
     {
         public override Interface Build()
         {

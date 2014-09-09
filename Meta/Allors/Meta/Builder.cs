@@ -16,14 +16,13 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the ObjectType type.</summary>
 //-------------------------------------------------------------------------------------------------
 
 namespace Allors.Meta.Builders
 {
     using System;
 
-    internal abstract partial class Builder<T>
+    public abstract partial class Builder<T>
     {
         protected Builder(Domain domain, Guid id)
         {

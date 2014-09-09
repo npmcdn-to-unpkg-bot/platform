@@ -23,7 +23,22 @@ namespace Allors.Meta.Static
 
     public abstract class AbstractTest : IDisposable
     {
-        protected MetaDomain Domain { get; set; }
+        protected MetaPopulation MetaPopulation 
+        {
+            get
+            {
+                return this.Population.MetaPopulation;
+            }
+        }
+
+        protected Domain Domain
+        {
+            get
+            {
+                return this.Population.Domain;
+            }
+        }
+
 
         protected Population Population { get; set; }
 
@@ -31,27 +46,18 @@ namespace Allors.Meta.Static
         public void SetUp()
         {
             this.Population = new Population();
-            this.Domain = this.Population.Domain;
-            Assert.IsTrue(this.Domain.IsValid);
+            Assert.IsTrue(this.Domain.MetaPopulation.IsValid);
         }
 
         [TearDown]
         public void Dispose()
         {
             this.Population = null;
-            this.Domain = null;
         }
 
         protected virtual void Populate()
         {
             this.Population.Populate();
         }
-
-        protected void RemoveInheritances()
-        {
-            foreach (var inheritance in this.Domain.Inheritances)
-            {
-            }
-        }
-   }
+    }
 }

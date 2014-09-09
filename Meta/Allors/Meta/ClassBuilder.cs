@@ -16,36 +16,35 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the ObjectType type.</summary>
 //-------------------------------------------------------------------------------------------------
 
 namespace Allors.Meta.Builders
 {
     using System;
 
-    internal partial class ClassBuilder : Builder<Class>
+    public partial class ClassBuilder : Builder<Class>
     {
         private string singularName;
         private string pluralName;
 
-        internal ClassBuilder(Domain domain, Guid id)
+        public ClassBuilder(Domain domain, Guid id)
             : base(domain, id)
         {
         }
 
-        internal ClassBuilder WithSingularName(string value)
+        public ClassBuilder WithSingularName(string value)
         {
             this.singularName = value;
             return this;
         }
 
-        internal ClassBuilder WithPluralName(string value)
+        public ClassBuilder WithPluralName(string value)
         {
             this.pluralName = value;
             return this;
         }
 
-        internal void AllorsBuild(Class instance)
+        private void AllorsBuild(Class instance)
         {
             instance.SingularName = this.singularName;
             instance.PluralName = this.pluralName;

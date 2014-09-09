@@ -16,19 +16,18 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the ObjectType type.</summary>
 //-------------------------------------------------------------------------------------------------
 
 namespace Allors.Meta.Builders
 {
     using System;
 
-    internal partial class MethodTypeBuilder : Builder<MethodType>
+    public partial class MethodTypeBuilder : Builder<MethodType>
     {
         private Composite objectType;
         private string name;
 
-        internal MethodTypeBuilder(Domain domain, Guid id)
+        public MethodTypeBuilder(Domain domain, Guid id)
             : base(domain, id)
         {
         }
@@ -39,13 +38,13 @@ namespace Allors.Meta.Builders
             return this;
         }
 
-        internal MethodTypeBuilder WithName(string value)
+        public MethodTypeBuilder WithName(string value)
         {
             this.name = value;
             return this;
         }
 
-        internal void AllorsBuild(MethodType instance)
+        private void AllorsBuild(MethodType instance)
         {
             instance.ObjectType = this.objectType;
             instance.Name = this.name;

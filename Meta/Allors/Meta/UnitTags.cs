@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------------------------- 
 // <copyright file="UnitTags.cs" company="Allors bvba">
-// Copyright 2002-2013 Allors bvba.
+// Copyright 2002-2014 Allors bvba.
 // 
 // Dual Licensed under
 //   a) the Lesser General Public Licence v3 (LGPL)
@@ -16,13 +16,12 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the UnitTypeTag type.</summary>
 //-------------------------------------------------------------------------------------------------
 namespace Allors.Meta
 {
     /// <summary>
     /// The tags for units.
-    /// Do not use tags for long term persistence, UnitTypeIds should be used for that.
+    /// Do not use tags for long term persistence, UnitTypeIds should be used for that purpose.
     /// </summary>
     public enum UnitTags
     {

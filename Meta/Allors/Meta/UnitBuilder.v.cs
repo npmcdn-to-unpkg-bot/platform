@@ -16,12 +16,11 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the ObjectType type.</summary>
 //-------------------------------------------------------------------------------------------------
 
 namespace Allors.Meta.Builders
 {
-    internal partial class UnitBuilder
+    public partial class UnitBuilder
     {
         public override Unit Build()
         {

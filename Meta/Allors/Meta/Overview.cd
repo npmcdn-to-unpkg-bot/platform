@@ -6,7 +6,7 @@
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAIxAIBAAACCBAQEAACAUAQIAAAEAAUAAYgBAAECAAI=</HashCode>
+      <HashCode>BAIxAIBAAACCBAREAACAUAQIEAAEAAUAAYiBAAkCAAI=</HashCode>
       <FileName>Allors\Meta\Domain.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -272,7 +272,7 @@
   <Class Name="Allors.Meta.MetaPopulation" Collapsed="true">
     <Position X="7.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AIBQCAAAQAHCBAABqAgAUCgAAAAaAAAAFIQBQAGABEg=</HashCode>
+      <HashCode>AIJQCAAAQAHCBAABqAgAUCgAEAAaAEAAFIRBQAmCBEg=</HashCode>
       <FileName>Allors\Meta\MetaPopulation.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -286,18 +286,19 @@
       <Property Name="DefiningDomain" />
     </ShowAsAssociation>
   </Class>
+  <Class Name="Allors.Meta.PropertyType" Collapsed="true">
+    <Position X="9.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACEAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Allors\Meta\PropertyType.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
   <Interface Name="Allors.Meta.OperandType" Collapsed="true">
     <Position X="10.5" Y="4" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAACEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Allors\Meta\OperandType.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="Allors.Meta.PropertyType" Collapsed="true">
-    <Position X="9.75" Y="5.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Allors\Meta\PropertyType.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Font Name="Segoe UI" Size="9" />

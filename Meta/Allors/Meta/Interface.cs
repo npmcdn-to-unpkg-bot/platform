@@ -37,7 +37,7 @@ namespace Allors.Meta
 
         private Class derivedExclusiveLeafClass;
 
-        public Interface(Domain domain, Guid id)
+        internal Interface(Domain domain, Guid id)
             : base(domain, id)
         {
             domain.OnInterfaceCreated(this);

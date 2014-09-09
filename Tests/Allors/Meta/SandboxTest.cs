@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="DomainTest.cs" company="Allors bvba">
+// <copyright file="SandboxTest.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // Dual Licensed under
 //   a) the Lesser General Public Licence v3 (LGPL)

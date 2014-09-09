@@ -17,213 +17,84 @@
 namespace Allors.Meta.Static
 {
     using System;
-    using System.Collections;
-    using System.Collections.Generic;
-
-    using AllorsGenerated;
+    using Allors.Meta.Builders;
 
     public class Population
     {
-        private readonly AllorsEmbeddedSession allorsSession;
+        private readonly MetaPopulation metaPopulation;
 
         public Population()
         {
-            this.Domain = MetaDomain.Create();
-            this.Domain.Name = "Domain";
+            this.metaPopulation = new MetaPopulation();
 
-            this.allorsSession = this.Domain.AllorsSession;
+            var core = Repository.Core(metaPopulation);
 
-            var validationReport = this.Domain.Validate();
-            if (validationReport.ContainsErrors)
-            {
-                throw new Exception("Domain invalid");
-            }
+            this.Domain = new Domain(this.MetaPopulation, Guid.NewGuid()) { Name = "Domain" };
+            this.Domain.AddDirectSuperdomain(core);
 
             this.GetUnits();
         }
 
-        public MetaObject BinaryType { get; set; }
+        public Unit BinaryType { get; set; }
 
-        public MetaObject BooleanType { get; set; }
+        public Unit BooleanType { get; set; }
 
-        public MetaObject C1 { get; set; }
+        public Unit DateTimeType { get; set; }
 
-        public MetaObject C2 { get; set; }
+        public Unit DecimalType { get; set; }
 
-        public MetaObject C3 { get; set; }
+        public Unit DoubleType { get; set; }
 
-        public MetaObject C4 { get; set; }
+        public Unit IntegerType { get; set; }
 
-        public MetaObject[] Classes { get; set; }
+        public Unit[] Interfaces { get; set; }
 
-        public MetaObject[] CompositeClasses { get; set; }
+        public Unit LongType { get; set; }
 
-        public MetaObject[] CompositeConcreteClasses { get; set; }
+        public Unit StringType { get; set; }
 
-        public MetaObject[] CompositeInterfaces { get; set; }
+        public Unit UniqueType { get; set; }
 
-        public MetaObject[] CompositeTypes
+        public Interface I1 { get; set; }
+
+        public Interface I12 { get; set; }
+
+        public Interface I2 { get; set; }
+
+        public Interface I3 { get; set; }
+
+        public Interface I34 { get; set; }
+
+        public Interface I4 { get; set; }
+
+        public Class C1 { get; set; }
+
+        public Class C2 { get; set; }
+
+        public Class C3 { get; set; }
+
+        public Class C4 { get; set; }
+
+        public Domain Domain { get; set; }
+
+        public Domain SuperDomain { get; set; }
+
+        public MetaPopulation MetaPopulation
         {
             get
             {
-                var compositeTypes = new List<MetaObject>();
-                foreach (MetaObject type in this.Types)
-                {
-                    if (type.IsComposite)
-                    {
-                        compositeTypes.Add(type);
-                    }
-                }
-
-                return compositeTypes.ToArray();
+                return this.metaPopulation;
             }
         }
 
-        public MetaObject[] Composites { get; set; }
-
-        public MetaObject DateTimeType { get; set; }
-
-        public MetaObject DecimalType { get; set; }
-
-        public MetaObject DoubleType { get; set; }
-
-        public MetaObject I1 { get; set; }
-
-        public MetaObject I12 { get; set; }
-
-        public MetaObject I2 { get; set; }
-
-        public MetaObject I3 { get; set; }
-
-        public MetaObject I34 { get; set; }
-
-        public MetaObject I4 { get; set; }
-
-        public MetaObject IntegerType { get; set; }
-
-        public MetaObject[] Interfaces { get; set; }
-
-        public MetaObject LongType { get; set; }
-
-        public MetaObject StringType { get; set; }
-
-        public MetaObject UniqueType { get; set; }
-
-        public MetaObject[] UnitTypes
+        public static Class CreateClass(Domain domain, string name)
         {
-            get
-            {
-                var unitTypes = new List<MetaObject>();
-                foreach (MetaObject type in this.Types)
-                {
-                    if (type.IsUnit)
-                    {
-                        unitTypes.Add(type);
-                    }
-                }
-
-                return unitTypes.ToArray();
-            }
+            return new ClassBuilder(domain, Guid.NewGuid()).WithSingularName(name).WithPluralName(name + "s").Build();
         }
 
-        internal MetaDomain Domain { get; set; }
-
-        internal AllorsEmbeddedObject[] Inheritances
+        public static Interface CreateInterface(Domain domain, string name)
         {
-            get
-            {
-                return this.allorsSession.Extent(AllorsEmbeddedDomain.Inheritance);
-            }
-        }
-
-        internal AllorsEmbeddedObject[] Relations
-        {
-            get
-            {
-                return this.allorsSession.Extent(AllorsEmbeddedDomain.RelationType);
-            }
-        }
-
-        internal Hashtable RelationsById
-        {
-            get
-            {
-                var results = new Hashtable();
-                foreach (MetaRelation relation in this.Relations)
-                {
-                    results.Add(relation.Id, relation);
-                }
-
-                return results;
-            }
-        }
-
-        internal AllorsEmbeddedObject[] Associations
-        {
-            get
-            {
-                return this.allorsSession.Extent(AllorsEmbeddedDomain.AssociationType);
-            }
-        }
-
-        internal AllorsEmbeddedObject[] Roles
-        {
-            get
-            {
-                return this.allorsSession.Extent(AllorsEmbeddedDomain.RoleType);
-            }
-        }
-
-        internal MetaDomain SuperDomain { get; set; }
-
-        internal AllorsEmbeddedObject[] Types
-        {
-            get
-            {
-                return this.allorsSession.Extent(AllorsEmbeddedDomain.ObjectType);
-            }
-        }
-
-        internal Hashtable TypesById
-        {
-            get
-            {
-                var results = new Hashtable();
-                foreach (MetaObject allorsType in this.Types)
-                {
-                    results.Add(allorsType.Id, allorsType);
-                }
-
-                return results;
-            }
-        }
-
-        public static MetaObject CreateClass(MetaDomain domain, string name)
-        {
-            var type = CreateType(domain, name);
-            return type;
-        }
-
-        public static MetaObject CreateInterface(MetaDomain domain, string name)
-        {
-            var type = CreateType(domain, name);
-            type.IsInterface = true;
-            return type;
-        }
-
-        public static MetaObject CreateMultiple(MetaDomain domain, string name)
-        {
-            var type = CreateType(domain, name);
-            type.IsInterface = true;
-            return type;
-        }
-
-        public static MetaObject CreateType(MetaDomain domain, string name)
-        {
-            var type = domain.AddDeclaredObjectType(Guid.NewGuid());
-            type.SingularName = name;
-            type.PluralName = name + "s";
-            return type;
+            return new InterfaceBuilder(domain, Guid.NewGuid()).WithSingularName(name).WithPluralName(name + "s").Build();
         }
         
         internal void Populate()
@@ -246,11 +117,8 @@ namespace Allors.Meta.Static
 
             this.CreateInheritance();
 
-            this.CreateLists();
-
-            this.Domain.Validate();
-
-            if (!this.Domain.IsValid)
+            var validation = this.MetaPopulation.Validate();
+            if (validation.ContainsErrors)
             {
                 throw new Exception("Domain invalid");
             }
@@ -276,11 +144,8 @@ namespace Allors.Meta.Static
 
             this.CreateInheritance();
 
-            this.CreateLists();
-
-            this.Domain.Validate();
-
-            if (!this.Domain.IsValid)
+            var validation = this.MetaPopulation.Validate();
+            if (validation.ContainsErrors)
             {
                 throw new Exception("Domain invalid");
             }
@@ -288,61 +153,36 @@ namespace Allors.Meta.Static
 
         private void PopulateSuperDomain()
         {
-            this.SuperDomain = this.Domain.AddDirectSuperDomain(Guid.NewGuid());
-            this.SuperDomain.Name = "SuperDomain";
+            this.SuperDomain = new Domain(this.MetaPopulation, Guid.NewGuid()) { Name = "SuperDomain" };
+            this.Domain.AddDirectSuperdomain(this.SuperDomain);
         }
 
         private void CreateInheritance()
         {
-            this.C1.AddDirectSupertype(this.I1);
-            this.C1.AddDirectSupertype(this.I12);
+            new InheritanceBuilder(this.Domain, Guid.NewGuid()).WithSubtype(this.C1).WithSupertype(this.I1).Build();
+            new InheritanceBuilder(this.Domain, Guid.NewGuid()).WithSubtype(this.C1).WithSupertype(this.I12).Build();
 
-            this.C2.AddDirectSupertype(this.I2);
-            this.C2.AddDirectSupertype(this.I12);
+            new InheritanceBuilder(this.Domain, Guid.NewGuid()).WithSubtype(this.C2).WithSupertype(this.I2).Build();
+            new InheritanceBuilder(this.Domain, Guid.NewGuid()).WithSubtype(this.C2).WithSupertype(this.I12).Build();
 
-            this.C3.AddDirectSupertype(this.I3);
-            this.C3.AddDirectSupertype(this.I34);
+            new InheritanceBuilder(this.Domain, Guid.NewGuid()).WithSubtype(this.C3).WithSupertype(this.I3).Build();
+            new InheritanceBuilder(this.Domain, Guid.NewGuid()).WithSubtype(this.C3).WithSupertype(this.I34).Build();
 
-            this.C4.AddDirectSupertype(this.I4);
-            this.C4.AddDirectSupertype(this.I34);
+            new InheritanceBuilder(this.Domain, Guid.NewGuid()).WithSubtype(this.C4).WithSupertype(this.I4).Build();
+            new InheritanceBuilder(this.Domain, Guid.NewGuid()).WithSubtype(this.C4).WithSupertype(this.I34).Build();
         }
-
-        private void CreateLists()
-        {
-            var compositeConcreteClassList = new ArrayList { this.C1, this.C2, this.C3, this.C4 };
-
-            this.CompositeConcreteClasses = (MetaObject[])compositeConcreteClassList.ToArray(typeof(MetaObject));
-
-            var compositeInterfaceList = new ArrayList { this.I1, this.I2, this.I3, this.I4, this.I12, this.I34 };
-            this.CompositeInterfaces = (MetaObject[])compositeInterfaceList.ToArray(typeof(MetaObject));
-            this.Interfaces = this.CompositeInterfaces;
-
-            var compositeClassList = new ArrayList();
-            compositeClassList.AddRange(this.CompositeConcreteClasses);
-            this.CompositeClasses = (MetaObject[])compositeClassList.ToArray(typeof(MetaObject));
-
-            var compositeList = new ArrayList();
-            compositeList.AddRange(this.CompositeClasses);
-            compositeList.AddRange(this.CompositeInterfaces);
-            this.Composites = (MetaObject[])compositeClassList.ToArray(typeof(MetaObject));
-
-            var classList = new ArrayList();
-            classList.AddRange(this.UnitTypes);
-            classList.AddRange(this.CompositeClasses);
-            this.Classes = (MetaObject[])classList.ToArray(typeof(MetaObject));
-        }
-
+        
         private void GetUnits()
         {
-            this.BinaryType = (MetaObject)this.Domain.MetaDomain.Find(MetaUnitIds.BinaryId);
-            this.BooleanType = (MetaObject)this.Domain.MetaDomain.Find(MetaUnitIds.BooleanId);
-            this.DateTimeType = (MetaObject)this.Domain.MetaDomain.Find(MetaUnitIds.DatetimeId);
-            this.DecimalType = (MetaObject)this.Domain.MetaDomain.Find(MetaUnitIds.DecimalId);
-            this.DoubleType = (MetaObject)this.Domain.MetaDomain.Find(MetaUnitIds.DoubleId);
-            this.IntegerType = (MetaObject)this.Domain.MetaDomain.Find(MetaUnitIds.IntegerId);
-            this.LongType = (MetaObject)this.Domain.MetaDomain.Find(MetaUnitIds.LongId);
-            this.StringType = (MetaObject)this.Domain.MetaDomain.Find(MetaUnitIds.StringId);
-            this.UniqueType = (MetaObject)this.Domain.MetaDomain.Find(MetaUnitIds.Unique);
+            this.BinaryType = (Unit)this.metaPopulation.Find(UnitIds.BinaryId);
+            this.BooleanType = (Unit)this.metaPopulation.Find(UnitIds.BooleanId);
+            this.DateTimeType = (Unit)this.metaPopulation.Find(UnitIds.DatetimeId);
+            this.DecimalType = (Unit)this.metaPopulation.Find(UnitIds.DecimalId);
+            this.DoubleType = (Unit)this.metaPopulation.Find(UnitIds.DoubleId);
+            this.IntegerType = (Unit)this.metaPopulation.Find(UnitIds.IntegerId);
+            this.LongType = (Unit)this.metaPopulation.Find(UnitIds.LongId);
+            this.StringType = (Unit)this.metaPopulation.Find(UnitIds.StringId);
+            this.UniqueType = (Unit)this.metaPopulation.Find(UnitIds.Unique);
         }
     }
 }

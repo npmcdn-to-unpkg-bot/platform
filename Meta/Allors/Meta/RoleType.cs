@@ -55,7 +55,7 @@ namespace Allors.Meta
 
         private int? size;
 
-        public RoleType(RelationType relationType, Guid id)
+        internal RoleType(RelationType relationType, Guid id)
             : base(relationType.DefiningDomain, id)
         {
             this.relationType = relationType;
@@ -72,9 +72,9 @@ namespace Allors.Meta
 
             set
             {
-                this.RelationType.MetaPopulation.AssertUnlocked();
+                this.MetaPopulation.AssertUnlocked();
                 this.objectType = value;
-                this.RelationType.MetaPopulation.Stale();
+                this.MetaPopulation.Stale();
             }
         }
 
@@ -87,9 +87,9 @@ namespace Allors.Meta
 
             set
             {
-                this.RelationType.MetaPopulation.AssertUnlocked();
+                this.MetaPopulation.AssertUnlocked();
                 this.assignedSingularName = value;
-                this.RelationType.MetaPopulation.Stale();
+                this.MetaPopulation.Stale();
             }
         }
 
@@ -102,9 +102,9 @@ namespace Allors.Meta
 
             set
             {
-                this.RelationType.MetaPopulation.AssertUnlocked();
+                this.MetaPopulation.AssertUnlocked();
                 this.assignedPluralName = value;
-                this.RelationType.MetaPopulation.Stale();
+                this.MetaPopulation.Stale();
             }
         }
 
@@ -117,9 +117,9 @@ namespace Allors.Meta
 
             set
             {
-                this.RelationType.MetaPopulation.AssertUnlocked();
+                this.MetaPopulation.AssertUnlocked();
                 this.isMany = value;
-                this.RelationType.MetaPopulation.Stale();
+                this.MetaPopulation.Stale();
             }
         }
 
@@ -172,7 +172,7 @@ namespace Allors.Meta
                     return this.AssignedSingularName;
                 }
 
-                return this.ObjectType != null ? this.ObjectType.SingularName : null;
+                return this.ObjectType != null ? this.ObjectType.SingularName : this.IdAsString;
             }
         }
 
@@ -189,7 +189,7 @@ namespace Allors.Meta
                     return this.AssignedPluralName;
                 }
 
-                return this.ObjectType != null ? this.ObjectType.PluralName : null;
+                return this.ObjectType != null ? this.ObjectType.PluralName : this.IdAsString;
             }
         }
 
@@ -285,13 +285,15 @@ namespace Allors.Meta
         {
             get
             {
+                this.MetaPopulation.AssertUnlocked();
+                this.MetaPopulation.Derive();
                 return this.scale;
             }
 
             set
             {
                 this.scale = value;
-                this.RelationType.MetaPopulation.Stale();
+                this.MetaPopulation.Stale();
             }
         }
 
@@ -299,13 +301,15 @@ namespace Allors.Meta
         {
             get
             {
+                this.MetaPopulation.AssertUnlocked();
+                this.MetaPopulation.Derive();
                 return this.precision;
             }
 
             set
             {
                 this.precision = value;
-                this.RelationType.MetaPopulation.Stale();
+                this.MetaPopulation.Stale();
             }
         }
 
@@ -313,13 +317,15 @@ namespace Allors.Meta
         {
             get
             {
+                this.MetaPopulation.AssertUnlocked();
+                this.MetaPopulation.Derive();
                 return this.size;
             }
 
             set
             {
                 this.size = value;
-                this.RelationType.MetaPopulation.Stale();
+                this.MetaPopulation.Stale();
             }
         }
 
@@ -531,7 +537,7 @@ namespace Allors.Meta
         /// Validates the instance.
         /// </summary>
         /// <param name="validationLog">The validation.</param>
-        internal void Validate(ValidationLog validationLog)
+        protected internal void Validate(ValidationLog validationLog)
         {
             if (this.ObjectType == null)
             {

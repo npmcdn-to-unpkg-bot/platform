@@ -28,7 +28,6 @@ namespace Allors.Meta.Static
         public void CycleDifferentType()
         {
             this.Populate();
-            this.RemoveInheritances();
 
             MetaObject[] ones = { this.Population.C1, this.Population.A1, this.Population.I1 };
             MetaObject[] twos = { this.Population.C2, this.Population.A2, this.Population.I2 };
@@ -46,7 +45,6 @@ namespace Allors.Meta.Static
         public void CycleSameType()
         {
             this.Populate();
-            this.RemoveInheritances();
 
             var c1 = this.Population.C1;
             var a1 = this.Population.A1;
@@ -67,7 +65,6 @@ namespace Allors.Meta.Static
         public void Validate()
         {
             this.Populate();
-            this.RemoveInheritances();
 
             // Concrete supertype
             var c1_c2_inheritance = this.Domain.AddDeclaredInheritance(Guid.NewGuid());

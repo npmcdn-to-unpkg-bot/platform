@@ -16,14 +16,13 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the ObjectType type.</summary>
 //-------------------------------------------------------------------------------------------------
 
 namespace Allors.Meta.Builders
 {
     using System;
 
-    internal partial class RelationTypeBuilder : Builder<RelationType>
+    public partial class RelationTypeBuilder : Builder<RelationType>
     {
         private Guid associationTypeId;
         private Guid roleTypeId;
@@ -36,11 +35,11 @@ namespace Allors.Meta.Builders
 
         private string singularName;
         private string pluralName;
-        private int precision;
-        private int scale;
-        private int size;
+        private int? precision;
+        private int? scale;
+        private int? size;
 
-        internal RelationTypeBuilder(Domain domain, Guid id, Guid associationTypeId, Guid roleTypeId)
+        public RelationTypeBuilder(Domain domain, Guid id, Guid associationTypeId, Guid roleTypeId)
             : base(domain, id)
         {
             this.associationTypeId = associationTypeId;
@@ -54,55 +53,55 @@ namespace Allors.Meta.Builders
             return this;
         }
 
-        internal RelationTypeBuilder WithSingularName(string value)
+        public RelationTypeBuilder WithSingularName(string value)
         {
             this.singularName = value;
             return this;
         }
 
-        internal RelationTypeBuilder WithPluralName(string value)
+        public RelationTypeBuilder WithPluralName(string value)
         {
             this.pluralName = value;
             return this;
         }
 
-        internal RelationTypeBuilder WithCardinality(Cardinalities value)
+        public RelationTypeBuilder WithCardinality(Cardinalities value)
         {
             this.cardinality = value;
             return this;
         }
 
-        internal RelationTypeBuilder WithIsDerived(bool value)
+        public RelationTypeBuilder WithIsDerived(bool value)
         {
             this.isDerived = value;
             return this;
         }
 
-        internal RelationTypeBuilder WithIsIndexed(bool value)
+        public RelationTypeBuilder WithIsIndexed(bool value)
         {
             this.isIndexed = value;
             return this;
         }
 
-        internal RelationTypeBuilder WithPrecision(int value)
+        public RelationTypeBuilder WithPrecision(int value)
         {
             this.precision = value;
             return this;
         }
 
-        internal RelationTypeBuilder WithScale(int value)
+        public RelationTypeBuilder WithScale(int value)
         {
             this.scale = value;
             return this;
         }
 
-        internal RelationTypeBuilder WithSize(int value)
+        public RelationTypeBuilder WithSize(int value)
         {
             this.size = value;
             return this;
         }
 
-        internal void AllorsBuild(RelationType instance)
+        private void AllorsBuild(RelationType instance)
         {
             instance.AssociationType.ObjectType = this.associationObjectType;
             instance.RoleType.ObjectType = this.roleObjectType;

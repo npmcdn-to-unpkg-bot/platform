@@ -16,43 +16,42 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the ObjectType type.</summary>
 //-------------------------------------------------------------------------------------------------
 
 namespace Allors.Meta.Builders
 {
     using System;
 
-    internal partial class UnitBuilder : Builder<Unit>
+    public partial class UnitBuilder : Builder<Unit>
     {
         private string singularName;
         private string pluralName;
         private UnitTags unitTag;
 
-        internal UnitBuilder(Domain domain, Guid id)
+        public UnitBuilder(Domain domain, Guid id)
             : base(domain, id)
         {
         }
 
-        internal UnitBuilder WithSingularName(string value)
+        public UnitBuilder WithSingularName(string value)
         {
             this.singularName = value;
             return this;
         }
 
-        internal UnitBuilder WithPluralName(string value)
+        public UnitBuilder WithPluralName(string value)
         {
             this.pluralName = value;
             return this;
         }
 
-        internal UnitBuilder WithUnitTag(UnitTags value)
+        public UnitBuilder WithUnitTag(UnitTags value)
         {
             this.unitTag = value;
             return this;
         }
 
-        internal void AllorsBuild(Unit instance)
+        private void AllorsBuild(Unit instance)
         {
             instance.SingularName = this.singularName;
             instance.PluralName = this.pluralName;

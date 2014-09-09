@@ -18,104 +18,49 @@
 namespace Allors.Meta.Static
 {
     using System;
-    using System.Collections.Generic;
 
-    using Allors.Meta.Events;
+    using Allors.Meta.Builders;
 
     using NUnit.Framework;
 
     [TestFixture]
     public class RoleTest : AbstractTest
     {
-        private readonly List<MetaObjectChangedEventArgs> metaObjectChangedEvents = new List<MetaObjectChangedEventArgs>();
-
         [Test]
-        public void Defaults()
+        public void Id()
         {
             this.Populate();
 
             var roleId = Guid.NewGuid();
-            var relationType = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), roleId);
+            var relationType = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), roleId).Build();
 
-            var role = relationType.RoleType;
+            var roleType = relationType.RoleType;
 
-            Assert.IsTrue(role.ExistId);
-            Assert.AreEqual(roleId, role.Id);
+            Assert.AreEqual(roleId, roleType.Id);
         }
-
+        
         [Test]
-        public void Immutable()
+        public void DefaultName()
         {
-            var relation1 = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            var relation2 = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
+            var relationType = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
 
-            try
-            {
-                relation2.RoleType = relation1.RoleType;
-                Assert.Fail();
-            }
-            catch
-            {
-            }
-        }
+            var roleType = relationType.RoleType;
 
-        [Test]
-        public void Name()
-        {
-            var relationType = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-
-            var role = relationType.RoleType;
-
-            role.IsMany = false;
-            Assert.AreEqual(relationType.Id.ToString(), role.Name);
-            role.IsMany = true;
-            Assert.AreEqual(relationType.Id.ToString(), role.Name);
-        }
-
-        [Test]
-        public void PluralName()
-        {
-            var company = this.Domain.AddDeclaredObjectType(Guid.NewGuid());
-            company.SingularName = "Company";
-            company.PluralName = "Companies";
-
-            var person = this.Domain.AddDeclaredObjectType(Guid.NewGuid());
-            person.SingularName = "Person";
-            person.PluralName = "Persons";
-
-            var companyPerson = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            companyPerson.AssociationType.ObjectType = company;
-            companyPerson.RoleType.ObjectType = person;
-            companyPerson.RoleType.IsMany = true;
-
-            Assert.AreEqual("Persons", companyPerson.RoleType.PluralName);
-
-            companyPerson.RoleType.AssignedSingularName = "Persoon";
-
-            Assert.AreEqual("Persons", companyPerson.RoleType.PluralName);
-
-            companyPerson.RoleType.AssignedPluralName = "Personen";
-
-            Assert.AreEqual("Personen", companyPerson.RoleType.PluralName);
-
-            person.PluralName = null;
-            Assert.AreEqual("Personen", companyPerson.RoleType.PluralName);
+            roleType.IsMany = false;
+            Assert.AreEqual(roleType.Id.ToString(), roleType.Name);
+            roleType.IsMany = true;
+            Assert.AreEqual(roleType.Id.ToString(), roleType.Name);
         }
 
         [Test]
         public void SingularName()
         {
-            var company = this.Domain.AddDeclaredObjectType(Guid.NewGuid());
-            company.SingularName = "Company";
-            company.PluralName = "Companies";
+            var company = new ClassBuilder(this.Domain, Guid.NewGuid()).WithSingularName("Company").WithPluralName("Companies").Build();
+            var person = new ClassBuilder(this.Domain, Guid.NewGuid()).WithSingularName("Person").WithPluralName("Persons").Build();
 
-            var person = this.Domain.AddDeclaredObjectType(Guid.NewGuid());
-            person.SingularName = "Person";
-            person.PluralName = "Persons";
-
-            var companyPerson = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            companyPerson.AssociationType.ObjectType = company;
-            companyPerson.RoleType.ObjectType = person;
+            var companyPerson = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid())
+                .WithObjectTypes(company, person)
+                .Build();
 
             Assert.AreEqual("Person", companyPerson.RoleType.SingularName);
 
@@ -130,24 +75,50 @@ namespace Allors.Meta.Static
         }
 
         [Test]
+        public void PluralName()
+        {
+            var company = new ClassBuilder(this.Domain, Guid.NewGuid()).WithSingularName("Company").WithPluralName("Companies").Build();
+            var person = new ClassBuilder(this.Domain, Guid.NewGuid()).WithSingularName("Person").WithPluralName("Persons").Build();
+
+            var companyPerson = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid())
+                .WithObjectTypes(company, person)
+                .WithCardinality(Cardinalities.OneToMany)
+                .Build();
+
+            Assert.AreEqual("Persons", companyPerson.RoleType.PluralName);
+
+            companyPerson.RoleType.AssignedSingularName = "Persoon";
+
+            Assert.AreEqual("Persons", companyPerson.RoleType.PluralName);
+
+            companyPerson.RoleType.AssignedPluralName = "Personen";
+
+            Assert.AreEqual("Personen", companyPerson.RoleType.PluralName);
+
+            person.PluralName = null;
+
+            Assert.AreEqual("Personen", companyPerson.RoleType.PluralName);
+        }
+
+        [Test]
         public void DeriveSize()
         {
             this.Populate();
 
-            var relationType = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            relationType.AssociationType.ObjectType = this.Population.C1;
-            relationType.RoleType.ObjectType = this.Population.IntegerType;
+            var relationType = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid())
+                .WithObjectTypes(this.Population.C1, this.Population.IntegerType)
+                .Build();
 
-            Assert.IsFalse(relationType.RoleType.ExistSize);
+            Assert.IsFalse(relationType.RoleType.Size.HasValue);
 
             relationType.RoleType.ObjectType = this.Population.StringType;
 
-            Assert.IsTrue(relationType.RoleType.ExistSize);
+            Assert.IsTrue(relationType.RoleType.Size.HasValue);
             Assert.AreEqual(256, relationType.RoleType.Size);
 
             relationType.RoleType.ObjectType = this.Population.IntegerType;
 
-            Assert.IsFalse(relationType.RoleType.ExistSize);
+            Assert.IsFalse(relationType.RoleType.Size.HasValue);
         }
         
         [Test]
@@ -155,30 +126,24 @@ namespace Allors.Meta.Static
         {
             this.Populate();
 
-            var relationType = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            relationType.AssociationType.ObjectType = this.Population.C1;
-            relationType.RoleType.ObjectType = this.Population.IntegerType;
+            var relationType = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid())
+             .WithObjectTypes(this.Population.C1, this.Population.IntegerType)
+             .Build();
 
-            Assert.IsFalse(relationType.RoleType.ExistPrecision);
-            Assert.IsFalse(relationType.RoleType.ExistScale);
+            Assert.IsFalse(relationType.RoleType.Precision.HasValue);
+            Assert.IsFalse(relationType.RoleType.Scale.HasValue);
 
             relationType.RoleType.ObjectType = this.Population.DecimalType;
 
-            Assert.IsTrue(relationType.RoleType.ExistPrecision);
+            Assert.IsTrue(relationType.RoleType.Precision.HasValue);
             Assert.AreEqual(19, relationType.RoleType.Precision);
-            Assert.IsTrue(relationType.RoleType.ExistScale);
+            Assert.IsTrue(relationType.RoleType.Scale.HasValue);
             Assert.AreEqual(2, relationType.RoleType.Scale);
 
             relationType.RoleType.ObjectType = this.Population.IntegerType;
 
-            Assert.IsFalse(relationType.RoleType.ExistPrecision);
-            Assert.IsFalse(relationType.RoleType.ExistScale);
-        }
-        
-
-        private void DomainMetaObjectChanged(object sender, MetaObjectChangedEventArgs args)
-        {
-            this.metaObjectChangedEvents.Add(args);
+            Assert.IsFalse(relationType.RoleType.Precision.HasValue);
+            Assert.IsFalse(relationType.RoleType.Scale.HasValue);
         }
     }
 

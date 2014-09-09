@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="ClassBuilder.cs" company="Allors bvba">
+// <copyright file="InterfaceBuilder.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -16,36 +16,35 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the ObjectType type.</summary>
 //-------------------------------------------------------------------------------------------------
 
 namespace Allors.Meta.Builders
 {
     using System;
 
-    internal partial class InterfaceBuilder : Builder<Interface>
+    public partial class InterfaceBuilder : Builder<Interface>
     {
         private string singularName;
         private string pluralName;
 
-        internal InterfaceBuilder(Domain domain, Guid id)
+        public InterfaceBuilder(Domain domain, Guid id)
             : base(domain, id)
         {
         }
 
-        internal InterfaceBuilder WithSingularName(string value)
+        public InterfaceBuilder WithSingularName(string value)
         {
             this.singularName = value;
             return this;
         }
 
-        internal InterfaceBuilder WithPluralName(string value)
+        public InterfaceBuilder WithPluralName(string value)
         {
             this.pluralName = value;
             return this;
         }
 
-        internal void AllorsBuild(Interface instance)
+        private void AllorsBuild(Interface instance)
         {
             instance.SingularName = this.singularName;
             instance.PluralName = this.pluralName;
