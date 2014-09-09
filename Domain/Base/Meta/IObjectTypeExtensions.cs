@@ -23,8 +23,8 @@ namespace Allors
 {
     using System;
 
-    using Allors.R1;
-    using Allors.R1.Meta;
+    using Allors;
+    using Allors.Meta;
 
     public static class IObjectTypeExtensions
     {

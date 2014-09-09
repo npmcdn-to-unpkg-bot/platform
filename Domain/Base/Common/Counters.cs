@@ -24,7 +24,7 @@ namespace Allors.Domain
     using System.Threading;
 
     using Allors;
-    using Allors.R1;
+    using Allors;
 
     using Allors.Domain;
 

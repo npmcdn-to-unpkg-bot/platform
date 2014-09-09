@@ -20,9 +20,8 @@
 
 namespace Allors
 {
-    using Allors.R1;
-    using Allors.R1.Meta;
-
+    using Allors.Meta;
+    
     using Allors.Domain;
 
     public abstract partial class ObjectsBase<T> : IObjects where T : IObject
@@ -34,7 +33,7 @@ namespace Allors
             this.session = session;
         }
 
-        public abstract ObjectType ObjectType { get; }
+        public abstract Composite ObjectType { get; }
 
         public ISession Session
         {

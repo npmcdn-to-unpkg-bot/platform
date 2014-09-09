@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.R1;
+    using Allors;
 
     public class UniquelyIdentifiableCache<TObject> : Cache<Guid, TObject>
         where TObject : class, IObject

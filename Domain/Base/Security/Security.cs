@@ -24,8 +24,8 @@ namespace Allors.Domain
     using System.Collections.Generic;
 
     using Allors;
-    using Allors.R1;
-    using Allors.R1.Meta;
+    using Allors;
+    using Allors.Meta;
 
     public partial class Security
     {
@@ -46,7 +46,7 @@ namespace Allors.Domain
             this.session = session;
 
             this.objectsByObjectType = new Dictionary<ObjectType, IObjects>();
-            foreach (var objectType in session.Database.Domain.CompositeObjectTypes)
+            foreach (var objectType in session.Database.MetaPopulation.Composites)
             {
                 this.objectsByObjectType[objectType] = objectType.GetObjects(session);
             }

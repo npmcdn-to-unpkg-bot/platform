@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     using System.Collections.Generic;
 
-    using Allors.R1.Meta;
+    using Allors.Meta;
 
     public abstract class DerivationError : IDerivationError
     {

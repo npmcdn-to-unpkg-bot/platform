@@ -23,7 +23,7 @@ namespace Allors.Domain
     using System;
     using System.Collections.Generic;
 
-    using Allors.R1.Meta;
+    using Allors.Meta;
 
     public interface IAccessControlList
     {

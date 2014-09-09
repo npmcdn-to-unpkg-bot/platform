@@ -22,8 +22,8 @@ namespace Allors.Domain
 {
     using System.Collections.Generic;
 
-    using Allors.R1;
-    using Allors.R1.Meta;
+    using Allors;
+    using Allors.Meta;
 
     public interface IDerivation
     {

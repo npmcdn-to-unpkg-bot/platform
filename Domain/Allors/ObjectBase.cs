@@ -25,7 +25,7 @@ namespace Allors
     /// <summary>
     /// A base implementation for a static <see cref="IObject"/>.
     /// </summary>
-    public abstract class ObjectBase : IObject
+    public abstract partial class ObjectBase : IObject
     {
         /// <summary>
         /// The <see cref="Strategy"/>.
@@ -95,10 +95,8 @@ namespace Allors
             return this.Strategy.ObjectId.GetHashCode();
         }
 
-        /// <summary>
-        /// Deletes this instance.
-        /// </summary>
-        public virtual void Delete()
+        // TODO: Rename
+        public void XDelete()
         {
             this.strategy.Delete();
         }
@@ -109,7 +107,7 @@ namespace Allors
         /// <returns>
         /// A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
         /// </returns>
-        public override string ToString()
+        private string String()
         {
             return this.GetType().Name + "[" + this.Strategy.ObjectId + "]";
         }

@@ -45,6 +45,8 @@ namespace Allors.Meta
         private IList<Class> classes;
         private IList<Inheritance> inheritances;
         private IList<RelationType> relationTypes;
+        private IList<AssociationType> associationTypes;
+        private IList<RoleType> roleTypes;
         private IList<MethodType> methodTypes;
         
         public MetaPopulation()
@@ -58,6 +60,8 @@ namespace Allors.Meta
             this.classes = new List<Class>();
             this.inheritances = new List<Inheritance>();
             this.relationTypes = new List<RelationType>();
+            this.associationTypes = new List<AssociationType>();
+            this.roleTypes = new List<RoleType>();
             this.methodTypes = new List<MethodType>();
 
             this.metaObjectById = new Dictionary<Guid, MetaObject>();
@@ -116,6 +120,22 @@ namespace Allors.Meta
             get
             {
                 return this.relationTypes;
+            }
+        }
+
+        public IEnumerable<AssociationType> AssociationTypes
+        {
+            get
+            {
+                return this.associationTypes;
+            }
+        }
+
+        public IEnumerable<RoleType> RoleTypes
+        {
+            get
+            {
+                return this.roleTypes;
             }
         }
 
@@ -226,6 +246,8 @@ namespace Allors.Meta
                 this.classes = this.classes.ToArray();
                 this.inheritances = this.inheritances.ToArray();
                 this.relationTypes = this.relationTypes.ToArray();
+                this.associationTypes = this.associationTypes.ToArray();
+                this.roleTypes = this.roleTypes.ToArray();
                 this.methodTypes = this.methodTypes.ToArray();
 
                 foreach (var domain in this.domains)
@@ -385,6 +407,22 @@ namespace Allors.Meta
         {
             this.relationTypes.Add(relationType);
             this.metaObjectById.Add(relationType.Id, relationType);
+
+            this.Stale();
+        }
+
+        internal void OnAssociationTypeCreated(AssociationType associationType)
+        {
+            this.associationTypes.Add(associationType);
+            this.metaObjectById.Add(associationType.Id, associationType);
+
+            this.Stale();
+        }
+
+        internal void OnRoleTypeCreated(RoleType roleType)
+        {
+            this.roleTypes.Add(roleType);
+            this.metaObjectById.Add(roleType.Id, roleType);
 
             this.Stale();
         }

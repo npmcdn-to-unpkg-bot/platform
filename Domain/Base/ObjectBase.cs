@@ -21,15 +21,9 @@
 namespace Allors
 {
     using Allors.Domain;
-    using Allors.R1;
 
-    public abstract partial class ObjectBase : Allors.R1.ObjectBase, Derivable
+    public abstract partial class ObjectBase : Derivable
     {
-        protected ObjectBase(IStrategy allors)
-            : base(allors)
-        {
-        }
-
         public ISession Session
         {
             get { return this.Strategy.Session; }
@@ -53,12 +47,6 @@ namespace Allors
         public bool IsNewInWorkspace
         {
             get { return this.Strategy.IsNewInWorkspace; }
-        }
-
-        public override string ToString()
-        {
-            var userInterfaceable = this as UserInterfaceable;
-            return (userInterfaceable != null && userInterfaceable.ExistDisplayName) ? userInterfaceable.DisplayName : base.ToString();
         }
 
         internal virtual void OnBuild(IObjectBuilder builder)
@@ -109,6 +97,12 @@ namespace Allors
 
         protected virtual void CoreOnDelete()
         {
+        }
+        
+        private string CoreToString()
+        {
+            var userInterfaceable = this as UserInterfaceable;
+            return (userInterfaceable != null && userInterfaceable.ExistDisplayName) ? userInterfaceable.DisplayName : base.ToString();
         }
     }
 }

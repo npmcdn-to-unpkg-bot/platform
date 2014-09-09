@@ -38,11 +38,11 @@ namespace Allors.Meta
         private bool isIndexed;
 
 
-        public RelationType(Domain domain, Guid id)
+        public RelationType(Domain domain, Guid id, Guid associationTypeId, Guid roleTypdId)
             : base(domain, id)
         {
-            this.associationType = new AssociationType(this);
-            this.roleType = new RoleType(this);
+            this.associationType = new AssociationType(this, associationTypeId);
+            this.roleType = new RoleType(this, roleTypdId);
 
             domain.OnRelationTypeCreated(this);
         }

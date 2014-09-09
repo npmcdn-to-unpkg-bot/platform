@@ -23,8 +23,8 @@ namespace Allors.Domain
     using System;
     using System.Collections.Generic;
 
-    using Allors.R1;
-    using Allors.R1.Meta;
+    using Allors;
+    using Allors.Meta;
 
     public class SecurityCache
     {

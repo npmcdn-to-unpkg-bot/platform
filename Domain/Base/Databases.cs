@@ -22,11 +22,11 @@ namespace Allors
 {
     using Allors.Domain;
     using Allors.Meta;
-    using Allors.R1;
+    using Allors;
 
     public static partial class Databases
     {
-        public static readonly ObjectFactory ObjectFactory = new ObjectFactory(DomainExtension.Instance.Domain, typeof(Databases).Assembly, typeof(Singleton).Namespace);
+        public static readonly ObjectFactory ObjectFactory = new ObjectFactory(Repository.MetaPopulation, typeof(Databases).Assembly, typeof(Singleton).Namespace);
 
         public static IDatabase Default { get; set; }
 

@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     using System.Text;
 
-    using Allors.R1.Meta;
+    using Allors.Meta;
 
     using Resources;
 
@@ -32,7 +32,7 @@ namespace Allors.Domain
         {
             get
             {
-                return (OperandType)(this.OperandTypePointer.HasValue ? this.Session.Population.Domain.Find(this.OperandTypePointer.Value) : null);
+                return (OperandType)(this.OperandTypePointer.HasValue ? this.Session.Population.MetaPopulation.Find(this.OperandTypePointer.Value) : null);
             }
 
             set
@@ -81,7 +81,7 @@ namespace Allors.Domain
         {
             get
             {
-                return (ObjectType)(this.ConcreteClassPointer.HasValue ? this.Session.Population.Domain.Find(this.ConcreteClassPointer.Value) : null);
+                return (ObjectType)(this.ConcreteClassPointer.HasValue ? this.Session.Population.MetaPopulation.Find(this.ConcreteClassPointer.Value) : null);
             }
 
             set

@@ -20,8 +20,8 @@
 
 namespace Allors.Domain
 {
-    using Allors.R1;
-    using Allors.R1.Meta;
+    using Allors;
+    using Allors.Meta;
 
     using Resources;
 

@@ -39,7 +39,7 @@ namespace Allors.Meta
         public MetaPopulation MetaPopulation { get; private set; }
 
         /// <summary>
-        /// Gets or sets the id.
+        /// Gets the id.
         /// </summary>
         /// <value>The meta object id.</value>
         public Guid Id

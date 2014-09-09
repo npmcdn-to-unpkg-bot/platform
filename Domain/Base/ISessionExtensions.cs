@@ -22,7 +22,7 @@
 namespace Allors
 {
     using Allors.Domain;
-    using Allors.R1;
+    using Allors;
 
     public static class ISessionExtensions
     {

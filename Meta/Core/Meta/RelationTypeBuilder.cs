@@ -25,6 +25,9 @@ namespace Allors.Meta.Builders
 
     internal partial class RelationTypeBuilder : Builder<RelationType>
     {
+        private Guid associationTypeId;
+        private Guid roleTypeId;
+
         private Composite associationObjectType;
         private ObjectType roleObjectType;
         private Cardinalities cardinality;
@@ -37,9 +40,11 @@ namespace Allors.Meta.Builders
         private int scale;
         private int size;
 
-        internal RelationTypeBuilder(Domain domain, Guid id)
+        internal RelationTypeBuilder(Domain domain, Guid id, Guid associationTypeId, Guid roleTypeId)
             : base(domain, id)
         {
+            this.associationTypeId = associationTypeId;
+            this.roleTypeId = roleTypeId;
         }
 
         public RelationTypeBuilder WithObjectTypes(Composite associationObjectType, ObjectType roleObjectType)
@@ -104,7 +109,7 @@ namespace Allors.Meta.Builders
             instance.IsDerived = this.isDerived;
             instance.IsIndexed = this.isIndexed;
 
-            switch (cardinality)
+            switch (this.cardinality)
             {
                 case Cardinalities.OneToOne:
                     instance.AssociationType.IsOne = true;

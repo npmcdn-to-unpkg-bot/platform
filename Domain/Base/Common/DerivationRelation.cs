@@ -22,8 +22,8 @@ namespace Allors.Domain
 {
     using System.Text;
 
-    using Allors.R1;
-    using Allors.R1.Meta;
+    using Allors;
+    using Allors.Meta;
 
     public class DerivationRelation
     {

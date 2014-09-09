@@ -20,10 +20,10 @@
 
 namespace Allors
 {
-    using Allors.R1.Meta;
+    using Allors.Meta;
 
     public interface IObjects : ISetup, ISecure
     {
-        ObjectType ObjectType { get; }
+        Composite ObjectType { get; }
     }
 }

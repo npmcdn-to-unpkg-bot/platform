@@ -152,7 +152,7 @@ namespace Allors.Meta
         {
             get
             {
-                return this.AssociationTypes.Where(associationType => this.Equals(associationType.ObjectType)).ToArray();
+                return this.AssociationTypes.Where(associationType => this.Equals(associationType.RoleType.ObjectType)).ToArray();
             }
         }
 
@@ -173,7 +173,7 @@ namespace Allors.Meta
         {
             get
             {
-                return this.RoleTypes.Where(roleType => this.Equals(roleType.ObjectType)).ToArray();
+                return this.RoleTypes.Where(roleType => this.Equals(roleType.AssociationType.ObjectType)).ToArray();
             }
         }
 

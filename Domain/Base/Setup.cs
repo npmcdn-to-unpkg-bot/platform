@@ -24,8 +24,7 @@ namespace Allors
     using System.Reflection;
 
     using Allors.Domain;
-    using Allors.R1;
-    using Allors.R1.Meta;
+    using Allors.Meta;
 
     public partial class Setup
     {
@@ -38,7 +37,7 @@ namespace Allors
             this.session = session;
 
             this.objectsByObjectType = new Dictionary<ObjectType, IObjects>();
-            foreach (var objectType in session.Database.Domain.CompositeObjectTypes)
+            foreach (var objectType in session.Database.MetaPopulation.Composites)
             {
                 this.objectsByObjectType[objectType] = objectType.GetObjects(session);
             }
@@ -91,7 +90,7 @@ namespace Allors
             return null;
         }
 
-        private void CoreOnPrePrepare()
+        private void BaseOnPrePrepare()
         {
             var singleton = new SingletonBuilder(this.session).Build();
 
@@ -99,15 +98,7 @@ namespace Allors
             singleton.AdministratorSecurityToken = new SecurityTokenBuilder(this.session).Build();
         }
 
-        private void CoreOnPostPrepare()
-        {
-        }
-
-        private void CoreOnPreSetup()
-        {
-        }
-
-        private void CoreOnPostSetup()
+        private void BaseOnPostSetup()
         {
             var guest = new PersonBuilder(this.session).WithUserName("guest").WithLastName("Guest").Build();
             new UserGroups(this.session).Guests.AddMember(guest);
@@ -115,6 +106,14 @@ namespace Allors
 
             var administrator = new PersonBuilder(this.session).WithUserName("administrator").WithLastName("Administrator").Build();
             new UserGroups(this.session).Administrators.AddMember(administrator);
+        }
+
+        private void BaseOnPostPrepare()
+        {
+        }
+
+        private void BaseOnPreSetup()
+        {
         }
     }
 }

@@ -37,26 +37,6 @@ namespace Allors.Domain
             return false;
         }
 
-        public override void AddMember(User value)
-        {
-            base.AddMember(value);
-
-            if (this.ExistParent)
-            {
-                this.Parent.AddMember(value);
-            }
-        }
-
-        public override void RemoveMember(User value)
-        {
-            base.RemoveMember(value);
-
-            if (this.ExistParent)
-            {
-                this.Parent.RemoveMember(value);
-            }
-        }
-
         protected override void CorePrepareDerivation(IDerivation derivation)
         {
             base.CorePrepareDerivation(derivation);
@@ -73,6 +53,11 @@ namespace Allors.Domain
 
             derivation.Log.AssertExists(this, Meta.Name);
             derivation.Log.AssertIsUnique(this, Meta.Name);
+
+            if (this.ExistParent)
+            {
+                // TODO: members should be added to ancestor groups
+            }
 
             if (this.ExistName)
             {

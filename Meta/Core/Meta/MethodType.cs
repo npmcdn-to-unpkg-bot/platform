@@ -26,7 +26,7 @@ namespace Allors.Meta
     {
         private string name;
 
-        private ObjectType objectType;
+        private Composite objectType;
 
         public MethodType(Domain domain, Guid id)
             : base(domain, id)
@@ -49,7 +49,7 @@ namespace Allors.Meta
             }
         }
 
-        public ObjectType ObjectType
+        public Composite ObjectType
         {
             get
             {

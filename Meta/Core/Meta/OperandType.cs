@@ -20,8 +20,12 @@
 
 namespace Allors.Meta
 {
+    using System;
+
     public partial interface OperandType
     {
+        Guid Id { get; }
+
         /// <summary>
         /// Gets the display name.
         /// </summary>

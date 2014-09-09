@@ -20,8 +20,8 @@
 
 namespace Allors.Domain
 {
-    using Allors.R1;
-    using Allors.R1.Meta;
+    using Allors;
+    using Allors.Meta;
     using System;
     using System.Collections.Generic;
 
@@ -97,7 +97,7 @@ namespace Allors.Domain
 
                         if (!this.workspaceSessionCache.TryGetValue(key, out cachedObjectId))
                         {
-                            var objectType = this.database.ObjectFactory.GetObjectTypeForType(typeof(TObject));
+                            var objectType = (Composite)this.database.ObjectFactory.GetObjectTypeForType(typeof(TObject));
                             foreach (TObject workspaceObject in this.workspaceSession.LocalExtent(objectType))
                             {
                                 var role = workspaceObject.Strategy.GetUnitRole(this.roleType);

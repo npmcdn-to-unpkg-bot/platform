@@ -30,7 +30,7 @@ namespace Allors
     /// life cycle management, transaction management, etc.
     /// </para>
     /// </summary>
-    public interface IObject
+    public partial interface IObject
     {
         /// <summary>
         /// Gets the Strategy.

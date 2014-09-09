@@ -11,6 +11,8 @@
     <AssemblyName>Domain</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,11 +32,103 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr4.StringTemplate">
+      <HintPath>..\packages\Antlr4.StringTemplate.4.0.6.9004\lib\net35\Antlr4.StringTemplate.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base2\Common\Enumeration.cs" />
+    <Compile Include="Base2\Content\HtmlCharacters.cs" />
+    <Compile Include="Base2\Content\HtmlDocument.cs" />
+    <Compile Include="Base2\Content\HtmlProfile.cs" />
+    <Compile Include="Base2\Content\HtmlReader.cs" />
+    <Compile Include="Base2\Content\HtmlRules.cs" />
+    <Compile Include="Base2\Content\HtmlSanitize.cs" />
+    <Compile Include="Base2\Content\Image.cs" />
+    <Compile Include="Base2\Content\Image.v..cs" />
+    <Compile Include="Base2\Content\Media.cs" />
+    <Compile Include="Base2\Content\MediaBuilder.cs" />
+    <Compile Include="Base2\Content\MediaContent.cs" />
+    <Compile Include="Base2\Content\Medias.cs" />
+    <Compile Include="Base2\Content\MediaType.cs" />
+    <Compile Include="Base2\Content\MediaTypes.cs" />
+    <Compile Include="Base2\Content\MediaTypes.v.cs" />
+    <Compile Include="Base2\Content\PrintQueue.cs" />
+    <Compile Include="Base2\Content\PrintQueues.cs" />
+    <Compile Include="Base2\Content\PrintQueues.v.cs" />
+    <Compile Include="Base2\Content\StringTemplate.cs" />
+    <Compile Include="Base2\Content\StringTemplates.cs" />
+    <Compile Include="Base2\Data\CsvExport.cs" />
+    <Compile Include="Base2\Data\CsvExportColumn.cs" />
+    <Compile Include="Base2\Data\CsvExportFunction.cs" />
+    <Compile Include="Base2\Data\CsvExportPath.cs" />
+    <Compile Include="Base2\Drawing\BitmapExtensions.cs" />
+    <Compile Include="Base2\Localisation\Countries.cs" />
+    <Compile Include="Base2\Localisation\Country.cs" />
+    <Compile Include="Base2\Localisation\Country.v.cs" />
+    <Compile Include="Base2\Localisation\Currencies.cs" />
+    <Compile Include="Base2\Localisation\Currency.cs" />
+    <Compile Include="Base2\Localisation\Language.cs" />
+    <Compile Include="Base2\Localisation\Languages.cs" />
+    <Compile Include="Base2\Localisation\Locale.cs" />
+    <Compile Include="Base2\Localisation\Locales.cs" />
+    <Compile Include="Base2\Localisation\Locales.v.cs" />
+    <Compile Include="Base2\Localisation\LocalisedText.cs" />
+    <Compile Include="Base2\Localisation\LocalisedTexts.cs" />
+    <Compile Include="Base2\Meta\Path.cs" />
+    <Compile Include="Base2\ObjectBase.cs" />
+    <Compile Include="Base2\ObjectsBase.cs" />
+    <Compile Include="Base2\Relation\Person.cs" />
+    <Compile Include="Base2\Relation\Person.v.cs" />
+    <Compile Include="Base2\Relation\Persons.cs" />
+    <Compile Include="Base2\Search\Searchables.cs" />
+    <Compile Include="Base2\Search\SearchData.cs" />
+    <Compile Include="Base2\Search\SearchData.v.cs" />
+    <Compile Include="Base2\Search\SearchDatas.cs" />
+    <Compile Include="Base2\Search\SearchFragment.cs" />
+    <Compile Include="Base2\Search\SearchFragments.cs" />
+    <Compile Include="Base2\Search\SearchResults.cs" />
+    <Compile Include="BaseTest\Combinations\C1.cs" />
+    <Compile Include="BaseTest\Combinations\C2.cs" />
+    <Compile Include="BaseTest\Common\Singletons.cs" />
+    <Compile Include="BaseTest\Databases.v.cs" />
+    <Compile Include="BaseTest\Derivations\Dependee.cs" />
+    <Compile Include="BaseTest\Derivations\Dependent.cs" />
+    <Compile Include="BaseTest\Derivations\First.cs" />
+    <Compile Include="BaseTest\Derivations\Second.cs" />
+    <Compile Include="BaseTest\Derivations\Subdependee.cs" />
+    <Compile Include="BaseTest\Derivations\Third.cs" />
+    <Compile Include="BaseTest\General\HomeAddress.cs" />
+    <Compile Include="BaseTest\General\MailboxAddress.cs" />
+    <Compile Include="BaseTest\General\Organisation.cs" />
+    <Compile Include="BaseTest\General\Organisations.cs" />
+    <Compile Include="BaseTest\General\Place.cs" />
+    <Compile Include="BaseTest\General\Places.cs" />
+    <Compile Include="BaseTest\General\To.cs" />
+    <Compile Include="BaseTest\General\Units.cs" />
+    <Compile Include="BaseTest\ObjectBase.cs" />
+    <Compile Include="BaseTest\ObjectBase.v.cs" />
+    <Compile Include="BaseTest\ObjectsBase.cs" />
+    <Compile Include="BaseTest\ObjectsBase.v.cs" />
+    <Compile Include="BaseTest\Relation\Person.cs" />
+    <Compile Include="BaseTest\Security\AccessControls.cs" />
+    <Compile Include="BaseTest\Security\Roles.cs" />
+    <Compile Include="BaseTest\Security\Security.cs" />
+    <Compile Include="BaseTest\Security\UserGroups.cs" />
+    <Compile Include="BaseTest\Setup.cs" />
+    <Compile Include="BaseTest\Setup.v.cs" />
+    <Compile Include="BaseTest\Special\DerivationLogC1.cs" />
+    <Compile Include="BaseTest\Special\DerivationLogC2.cs" />
+    <Compile Include="BaseTest\Special\DerivationLogI12.cs" />
+    <Compile Include="BaseTest\Special\Four.cs" />
+    <Compile Include="BaseTest\Special\One.cs" />
+    <Compile Include="BaseTest\Special\Shared.cs" />
+    <Compile Include="BaseTest\Special\Three.cs" />
+    <Compile Include="BaseTest\Special\Two.cs" />
     <Compile Include="Base\Common\Cache.cs" />
     <Compile Include="Base\Common\Counter.cs" />
     <Compile Include="Base\Common\Counters.cs" />
@@ -93,7 +187,6 @@
     <Compile Include="Base\Security\Role.v.cs" />
     <Compile Include="Base\Security\Roles.cs" />
     <Compile Include="Base\Security\Security.cs" />
-    <Compile Include="Base\Security\SecurityConfiguration.cs" />
     <Compile Include="Base\Security\SecurityToken.cs" />
     <Compile Include="Base\Security\SecurityTokens.cs" />
     <Compile Include="Base\Security\UserExtensions.cs" />
@@ -102,66 +195,52 @@
     <Compile Include="Base\Security\UserGroups.cs" />
     <Compile Include="Base\Security\Users.cs" />
     <Compile Include="Base\Setup.cs" />
-    <Compile Include="Core\Extent.cs" />
-    <Compile Include="Core\ExtentT.cs" />
-    <Compile Include="Core\IChangeSet.cs" />
-    <Compile Include="Core\ICompositePredicate.cs" />
-    <Compile Include="Core\IConflict.cs" />
-    <Compile Include="Core\IDatabase.cs" />
-    <Compile Include="Core\IDatabaseSession.cs" />
-    <Compile Include="Core\IObject.cs" />
-    <Compile Include="Core\IObjectFactory.cs" />
-    <Compile Include="Core\IPopulation.cs" />
-    <Compile Include="Core\ISession.cs" />
-    <Compile Include="Core\IStrategy.cs" />
-    <Compile Include="Core\IWorkspace.cs" />
-    <Compile Include="Core\IWorkspaceFactory.cs" />
-    <Compile Include="Core\IWorkspaceSession.cs" />
-    <Compile Include="Core\ObjectBase.cs" />
-    <Compile Include="Core\ObjectFactory.cs" />
-    <Compile Include="Core\ObjectId.cs" />
-    <Compile Include="Core\ObjectIdInteger.cs" />
-    <Compile Include="Core\ObjectIdLong.cs" />
-    <Compile Include="Core\ObjectNotLoadedEventArgs.cs" />
-    <Compile Include="Core\RelationNotLoadedEventArgs.cs" />
-    <Compile Include="Core\SessionCommittedEventArgs.cs" />
-    <Compile Include="Core\SessionCommittingEventArgs.cs" />
-    <Compile Include="Core\SessionCreatedEventArgs.cs" />
-    <Compile Include="Core\SessionRolledBackEventArgs.cs" />
-    <Compile Include="Core\SessionRollingBackEventArgs.cs" />
-    <Compile Include="Core\Sort.cs" />
-    <Compile Include="Core\SortDirection.cs" />
-    <Compile Include="Generated\AccessControl.g.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Generated\AccessControlledObject.g.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Allors\Extent.cs" />
+    <Compile Include="Allors\ExtentT.cs" />
+    <Compile Include="Allors\IChangeSet.cs" />
+    <Compile Include="Allors\ICompositePredicate.cs" />
+    <Compile Include="Allors\IConflict.cs" />
+    <Compile Include="Allors\IDatabase.cs" />
+    <Compile Include="Allors\IDatabaseSession.cs" />
+    <Compile Include="Allors\IObject.cs" />
+    <Compile Include="Allors\IObjectFactory.cs" />
+    <Compile Include="Allors\IPopulation.cs" />
+    <Compile Include="Allors\ISession.cs" />
+    <Compile Include="Allors\IStrategy.cs" />
+    <Compile Include="Allors\IWorkspace.cs" />
+    <Compile Include="Allors\IWorkspaceFactory.cs" />
+    <Compile Include="Allors\IWorkspaceSession.cs" />
+    <Compile Include="Allors\ObjectBase.cs" />
+    <Compile Include="Allors\ObjectFactory.cs" />
+    <Compile Include="Allors\ObjectId.cs" />
+    <Compile Include="Allors\ObjectIdInteger.cs" />
+    <Compile Include="Allors\ObjectIdLong.cs" />
+    <Compile Include="Allors\ObjectNotLoadedEventArgs.cs" />
+    <Compile Include="Allors\RelationNotLoadedEventArgs.cs" />
+    <Compile Include="Allors\SessionCommittedEventArgs.cs" />
+    <Compile Include="Allors\SessionCommittingEventArgs.cs" />
+    <Compile Include="Allors\SessionCreatedEventArgs.cs" />
+    <Compile Include="Allors\SessionRolledBackEventArgs.cs" />
+    <Compile Include="Allors\SessionRollingBackEventArgs.cs" />
+    <Compile Include="Allors\Sort.cs" />
+    <Compile Include="Allors\SortDirection.cs" />
+    <Compile Include="Generated\AccessControl.g.cs" />
+    <Compile Include="Generated\AccessControlledObject.g.cs" />
     <Compile Include="Generated\Address.g.cs" />
     <Compile Include="Generated\BadUI.g.cs" />
     <Compile Include="Generated\C1.g.cs" />
     <Compile Include="Generated\C2.g.cs" />
     <Compile Include="Generated\ClassWithoutRoles.g.cs" />
-    <Compile Include="Generated\Commentable.g.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Generated\Counter.g.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Generated\Country.g.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Generated\Currency.g.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Generated\Commentable.g.cs" />
+    <Compile Include="Generated\Counter.g.cs" />
+    <Compile Include="Generated\Country.g.cs" />
+    <Compile Include="Generated\Currency.g.cs" />
     <Compile Include="Generated\Dependee.g.cs" />
     <Compile Include="Generated\Dependent.g.cs" />
     <Compile Include="Generated\DerivationLogC1.g.cs" />
     <Compile Include="Generated\DerivationLogC2.g.cs" />
     <Compile Include="Generated\DerivationLogI12.g.cs" />
-    <Compile Include="Generated\Enumeration.g.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Generated\Enumeration.g.cs" />
     <Compile Include="Generated\Extender.g.cs" />
     <Compile Include="Generated\First.g.cs" />
     <Compile Include="Generated\Four.g.cs" />
@@ -171,110 +250,51 @@
     <Compile Include="Generated\I1.g.cs" />
     <Compile Include="Generated\I12.g.cs" />
     <Compile Include="Generated\I2.g.cs" />
-    <Compile Include="Generated\Image.g.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Generated\Language.g.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Generated\Locale.g.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Generated\Localised.g.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Generated\LocalisedText.g.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Generated\Login.g.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Generated\Image.g.cs" />
+    <Compile Include="Generated\Language.g.cs" />
+    <Compile Include="Generated\Locale.g.cs" />
+    <Compile Include="Generated\Localised.g.cs" />
+    <Compile Include="Generated\LocalisedText.g.cs" />
+    <Compile Include="Generated\Login.g.cs" />
     <Compile Include="Generated\MailboxAddress.g.cs" />
-    <Compile Include="Generated\Media.g.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Generated\MediaContent.g.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Generated\MediaType.g.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Generated\ObjectState.g.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Generated\Media.g.cs" />
+    <Compile Include="Generated\MediaContent.g.cs" />
+    <Compile Include="Generated\MediaType.g.cs" />
+    <Compile Include="Generated\Meta.g.cs" />
+    <Compile Include="Generated\ObjectState.g.cs" />
     <Compile Include="Generated\One.g.cs" />
     <Compile Include="Generated\Organisation.g.cs" />
-    <Compile Include="Generated\Period.g.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Generated\Permission.g.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Generated\Person.g.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Generated\Period.g.cs" />
+    <Compile Include="Generated\Permission.g.cs" />
+    <Compile Include="Generated\Person.g.cs" />
     <Compile Include="Generated\Place.g.cs" />
-    <Compile Include="Generated\Printable.g.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Generated\PrintQueue.g.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Generated\Role.g.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Generated\Searchable.g.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Generated\SearchData.g.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Generated\SearchFragment.g.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Generated\SearchResult.g.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Generated\Printable.g.cs" />
+    <Compile Include="Generated\PrintQueue.g.cs" />
+    <Compile Include="Generated\Role.g.cs" />
+    <Compile Include="Generated\Searchable.g.cs" />
+    <Compile Include="Generated\SearchData.g.cs" />
+    <Compile Include="Generated\SearchFragment.g.cs" />
+    <Compile Include="Generated\SearchResult.g.cs" />
     <Compile Include="Generated\SearchTest.g.cs" />
     <Compile Include="Generated\Second.g.cs" />
-    <Compile Include="Generated\SecurityToken.g.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Generated\SecurityTokenOwner.g.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Generated\SecurityToken.g.cs" />
+    <Compile Include="Generated\SecurityTokenOwner.g.cs" />
     <Compile Include="Generated\Shared.g.cs" />
-    <Compile Include="Generated\Singleton.g.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Generated\Singleton.g.cs" />
     <Compile Include="Generated\StatefulCompany.g.cs" />
-    <Compile Include="Generated\StringTemplate.g.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Generated\StringTemplate.g.cs" />
     <Compile Include="Generated\Subdependee.g.cs" />
     <Compile Include="Generated\Third.g.cs" />
     <Compile Include="Generated\Three.g.cs" />
     <Compile Include="Generated\To.g.cs" />
-    <Compile Include="Generated\Transition.g.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Generated\Transitional.g.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Generated\Transition.g.cs" />
+    <Compile Include="Generated\Transitional.g.cs" />
     <Compile Include="Generated\Two.g.cs" />
-    <Compile Include="Generated\UniquelyIdentifiable.g.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Generated\UniquelyIdentifiable.g.cs" />
     <Compile Include="Generated\Unit.g.cs" />
-    <Compile Include="Generated\User.g.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Generated\UserGroup.g.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Generated\UserInterfaceable.g.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Generated\User.g.cs" />
+    <Compile Include="Generated\UserGroup.g.cs" />
+    <Compile Include="Generated\UserInterfaceable.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -282,14 +302,24 @@
       <Project>{BA6EFCFE-CB7F-4994-A5A4-C11DDAAC32DD}</Project>
       <Name>Meta</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Resources\Resources.csproj">
+      <Project>{a10683f7-b261-4770-81c6-bb589e768acb}</Project>
+      <Name>Resources</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Settings.StyleCop" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BaseTest\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

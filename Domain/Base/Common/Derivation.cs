@@ -24,8 +24,8 @@ namespace Allors.Domain
     using System.ComponentModel;
     using System.Linq;
 
-    using Allors.R1;
-    using Allors.R1.Meta;
+    using Allors;
+    using Allors.Meta;
 
     using ObjectBase = Allors.ObjectBase;
 

@@ -20,12 +20,19 @@
 
 namespace Allors.Meta
 {
-    public partial interface PropertyType : OperandType
+    using System;
+
+    public abstract partial class PropertyType : DomainDefinedObject, OperandType
     {
+        protected PropertyType(Domain domain, Guid id)
+            : base(domain, id)
+        {
+        }
+
         /// <summary>
         /// Gets the operand name.
         /// </summary>
-        string Name { get; }
+        public abstract string Name { get; }
 
         /// <summary>
         /// Get the object type.
@@ -33,6 +40,8 @@ namespace Allors.Meta
         /// <returns>
         /// The <see cref="ObjectType"/>.
         /// </returns>
-        ObjectType GetObjectType();
+        public abstract ObjectType GetObjectType();
+
+        public abstract string DisplayName { get; }
     }
 }

@@ -24,8 +24,8 @@ namespace Allors.Domain
     using System.Collections.Generic;
     using System.Text;
 
-    using Allors.R1;
-    using Allors.R1.Meta;
+    using Allors;
+    using Allors.Meta;
 
     /// <summary>
     /// List of permissions for an object/user combination.
@@ -109,7 +109,7 @@ namespace Allors.Domain
             var toString = new StringBuilder();
             foreach (var objectId in this.OperationsByOperandObjectId.Keys)
             {
-                var operandType = (OperandType)this.user.Strategy.Session.Population.Domain.Find(objectId);
+                var operandType = (OperandType)this.user.Strategy.Session.Population.MetaPopulation.Find(objectId);
                 toString.Append(operandType.DisplayName + ":");
                 foreach (var operation in this.OperationsByOperandObjectId[objectId])
                 {
@@ -140,7 +140,7 @@ namespace Allors.Domain
 
         public bool CanExecute(Guid methodTypeId)
         {
-            return this.CanExecute((MethodType)this.objectType.Domain.Find(methodTypeId));
+            return this.CanExecute((MethodType)this.objectType.MetaPopulation.Find(methodTypeId));
         }
 
         public IList<Operation> GetOperations(OperandType operandType)

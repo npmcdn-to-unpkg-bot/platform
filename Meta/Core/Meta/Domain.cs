@@ -44,6 +44,10 @@ namespace Allors.Meta
 
         private IList<RelationType> definedRelationTypes;
 
+        private IList<AssociationType> definedAssociationTypes;
+
+        private IList<RoleType> definedRoleTypes;
+
         private IList<MethodType> definedMethodTypes;
 
         public Domain(MetaPopulation metaPopulation, Guid id)
@@ -56,6 +60,8 @@ namespace Allors.Meta
             this.definedClasses = new List<Class>();
             this.definedInheritances = new List<Inheritance>();
             this.definedRelationTypes = new List<RelationType>();
+            this.definedAssociationTypes = new List<AssociationType>();
+            this.definedRoleTypes = new List<RoleType>();
             this.definedMethodTypes = new List<MethodType>();
         }
 
@@ -119,6 +125,22 @@ namespace Allors.Meta
             get
             {
                 return this.definedRelationTypes;
+            }
+        }
+
+        public IEnumerable<AssociationType> DefinedAssociationTypes
+        {
+            get
+            {
+                return this.definedAssociationTypes;
+            }
+        }
+
+        public IEnumerable<RoleType> DefinedRoleTypes
+        {
+            get
+            {
+                return this.definedRoleTypes;
             }
         }
 
@@ -196,6 +218,8 @@ namespace Allors.Meta
             this.definedClasses = this.definedClasses.ToArray();
             this.definedInheritances = this.definedInheritances.ToArray();
             this.definedRelationTypes = this.definedRelationTypes.ToArray();
+            this.definedAssociationTypes = this.definedAssociationTypes.ToArray();
+            this.definedRoleTypes = this.definedRoleTypes.ToArray();
             this.definedMethodTypes = this.definedMethodTypes.ToArray();
         }
 
@@ -227,6 +251,18 @@ namespace Allors.Meta
         {
             this.definedRelationTypes.Add(relationType);
             this.MetaPopulation.OnRelationTypeCreated(relationType);
+        }
+
+        internal void OnAssociationTypeCreated(AssociationType associationType)
+        {
+            this.definedAssociationTypes.Add(associationType);
+            this.MetaPopulation.OnAssociationTypeCreated(associationType);
+        }
+
+        internal void OnRoleTypeCreated(RoleType roleType)
+        {
+            this.definedRoleTypes.Add(roleType);
+            this.MetaPopulation.OnRoleTypeCreated(roleType);
         }
 
         internal void OnMethodTypeCreated(MethodType methodType)

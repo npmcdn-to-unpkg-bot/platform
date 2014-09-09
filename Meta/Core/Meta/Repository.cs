@@ -28,9 +28,9 @@ namespace Allors.Meta
     {
         public static readonly MetaPopulation MetaPopulation;
 
-        public static Domain Core(MetaPopulation env)
+        public static Domain Core(MetaPopulation meta)
         {
-            var domain = new Domain(env, new Guid("CA802192-8186-4C2A-8315-A8DEFAA74A12"));
+            var domain = new Domain(meta, new Guid("CA802192-8186-4C2A-8315-A8DEFAA74A12"));
 
             new UnitBuilder(domain, UnitIds.StringId).WithSingularName("AllorsString").WithPluralName("AllorsStrings").WithUnitTag(UnitTags.AllorsString).Build();
             new UnitBuilder(domain, UnitIds.IntegerId).WithSingularName("AllorsInteger").WithPluralName("AllorsIntegers").WithUnitTag(UnitTags.AllorsInteger).Build();

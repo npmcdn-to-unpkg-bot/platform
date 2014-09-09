@@ -25,7 +25,7 @@ namespace Allors.Meta.Builders
 
     internal partial class MethodTypeBuilder : Builder<MethodType>
     {
-        private ObjectType objectType;
+        private Composite objectType;
         private string name;
 
         internal MethodTypeBuilder(Domain domain, Guid id)

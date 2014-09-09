@@ -23,8 +23,8 @@ namespace Allors
     using System;
     using System.Collections.Generic;
 
-    using Allors.R1;
-    using Allors.R1.Meta;
+    using Allors;
+    using Allors.Meta;
 
     using Allors.Domain;
 
@@ -125,37 +125,35 @@ namespace Allors
         {
             if (objectType.IsUnit)
             {
-                var unitTypeTag = (UnitTypeTags)objectType.UnitTag;
+                var unit = (Meta.Unit)objectType;
+                var unitTypeTag = (UnitTags)unit.UnitTag;
                 switch (unitTypeTag)
                 {
-                    case UnitTypeTags.AllorsString:
+                    case UnitTags.AllorsString:
                         return string.Empty;
 
-                    case UnitTypeTags.AllorsInteger:
+                    case UnitTags.AllorsInteger:
                         return 0;
 
-                    case UnitTypeTags.AllorsLong:
+                    case UnitTags.AllorsLong:
                         return 0L;
 
-                    case UnitTypeTags.AllorsDecimal:
+                    case UnitTags.AllorsDecimal:
                         return 0m;
 
-                    case UnitTypeTags.AllorsDouble:
+                    case UnitTags.AllorsDouble:
                         return 0d;
 
-                    case UnitTypeTags.AllorsBoolean:
+                    case UnitTags.AllorsBoolean:
                         return false;
 
-                    case UnitTypeTags.AllorsBinary:
+                    case UnitTags.AllorsBinary:
                         return new byte[0];
 
-                    case UnitTypeTags.AllorsDate:
-                        return DateTime.Now.Date;
-
-                    case UnitTypeTags.AllorsDateTime:
+                    case UnitTags.AllorsDateTime:
                         return DateTime.Now;
 
-                    case UnitTypeTags.AllorsUnique:
+                    case UnitTags.AllorsUnique:
                         return Guid.NewGuid();
 
                     default:
@@ -182,7 +180,7 @@ namespace Allors
                 return builder.DefaultBuild();
             }
 
-            return session.Create(objectType);
+            return session.Create((Class)objectType);
         }
 
         public abstract void Dispose();

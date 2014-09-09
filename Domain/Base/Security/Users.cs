@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     using System.Threading;
 
-    using Allors.R1;
+    using Allors;
 
     /// <summary>
     /// A user of this application.

@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="BaseTest\Meta\Repository.cs" />
     <Compile Include="BaseTest\Meta\Repository.v.cs" />
+    <Compile Include="Base\Meta\Path.cs" />
     <Compile Include="Base\Meta\Repository.cs" />
     <Compile Include="Core\Generation\Generate.cs" />
     <Compile Include="Core\Generation\GenerateLog.cs" />

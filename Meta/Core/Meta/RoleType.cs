@@ -55,9 +55,12 @@ namespace Allors.Meta
 
         private int? size;
 
-        public RoleType(RelationType relationType)
+        public RoleType(RelationType relationType, Guid id)
+            : base(relationType.DefiningDomain, id)
         {
             this.relationType = relationType;
+
+            relationType.DefiningDomain.OnRoleTypeCreated(this);
         }
 
         public ObjectType ObjectType
@@ -131,7 +134,7 @@ namespace Allors.Meta
         /// <summary>
         /// Gets the display name.
         /// </summary>
-        public string DisplayName
+        public override string DisplayName
         {
             get
             {
@@ -143,7 +146,7 @@ namespace Allors.Meta
         /// Gets the name.
         /// </summary>
         /// <value>The name .</value>
-        public string Name
+        public override string Name
         {
             get
             {
@@ -324,7 +327,7 @@ namespace Allors.Meta
         /// Gets the validation name.
         /// </summary>
         /// <value>The validation name.</value>
-        protected string ValidationName
+        protected override string ValidationName
         {
             get
             {
@@ -363,7 +366,7 @@ namespace Allors.Meta
         /// <returns>
         /// The <see cref="ObjectType"/>.
         /// </returns>
-        public ObjectType GetObjectType()
+        public override ObjectType GetObjectType()
         {
             return this.ObjectType;
         }
