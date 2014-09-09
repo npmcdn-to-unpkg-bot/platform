@@ -18,103 +18,128 @@
 namespace Allors.Meta.Static
 {
     using System;
-    using System.Collections.Generic;
 
-    using Allors.Meta.Events;
+    using Allors.Meta.Builders;
 
     using NUnit.Framework;
 
     [TestFixture]
     public class AssociationTest : AbstractTest
     {
-        private readonly List<MetaObjectChangedEventArgs> metaObjectChangedEvents = new List<MetaObjectChangedEventArgs>();
-
         [Test]
-        public void Defaults()
+        public void Id()
         {
             this.Populate();
 
             var associationId = Guid.NewGuid();
-            var relationType = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), associationId, Guid.NewGuid());
+            var relationType = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), associationId, Guid.NewGuid()).Build();
 
-            var association = relationType.AssociationType;
+            var associationType = relationType.AssociationType;
 
-            Assert.IsTrue(association.ExistId);
-            Assert.AreEqual(associationId, association.Id);
-
-            association.ObjectType = this.Population.C1;
-            association.IsMany = !association.IsMany;
+            Assert.AreEqual(associationId, associationType.Id);
         }
 
         [Test]
-        public void Immutable()
+        public void DefaultName()
         {
-            var relation1 = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            var relation2 = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
+            var relationType = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
 
-            try
-            {
-                relation2.AssociationType = relation1.AssociationType;
-                Assert.Fail();
-            }
-            catch
-            {
-            }
+            var associationType = relationType.AssociationType;
+
+            Assert.AreEqual(associationType.Id.ToString().ToLower(), associationType.SingularName);
+            Assert.AreEqual(associationType.Id.ToString().ToLower(), associationType.PluralName);
+
+            associationType.IsMany = false;
+            Assert.AreEqual(associationType.Id.ToString(), associationType.Name);
+            associationType.IsMany = true;
+            Assert.AreEqual(associationType.Id.ToString(), associationType.Name);
         }
 
-        [Test]
-        public void Name()
-        {
-            var relationType = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-
-            var association = relationType.AssociationType;
-
-            Assert.AreEqual(relationType.Id.ToString().ToLower(), association.SingularName);
-            Assert.AreEqual(relationType.Id.ToString().ToLower(), association.PluralName);
-        }
-
-        [Test]
-        public void PluralName()
-        {
-            var company = this.Domain.AddDeclaredObjectType(Guid.NewGuid());
-            company.SingularName = "Company";
-            company.PluralName = "Companies";
-
-            var person = this.Domain.AddDeclaredObjectType(Guid.NewGuid());
-            person.SingularName = "Person";
-
-            var companyPerson = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            companyPerson.AssociationType.ObjectType = company;
-            companyPerson.AssociationType.IsMany = true;
-            companyPerson.RoleType.ObjectType = person;
-
-            Assert.AreEqual("CompaniesWherePerson", companyPerson.AssociationType.PluralName);
-        }
-       
         [Test]
         public void SingularName()
         {
-            var company = this.Domain.AddDeclaredObjectType(Guid.NewGuid());
-            company.SingularName = "Company";
+            var company = new ClassBuilder(this.Domain, Guid.NewGuid()).WithSingularName("Company").WithPluralName("Companies").Build();
+            var person = new ClassBuilder(this.Domain, Guid.NewGuid()).WithSingularName("Person").WithPluralName("Persons").Build();
 
-            var person = this.Domain.AddDeclaredObjectType(Guid.NewGuid());
-            person.SingularName = "Person";
+            var companyPerson = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid())
+                .WithObjectTypes(company, person)
+                .Build();
 
-            var companyPerson = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            companyPerson.AssociationType.ObjectType = company;
-            companyPerson.AssociationType.IsMany = false;
-            companyPerson.RoleType.ObjectType = person;
+            var associationType = companyPerson.AssociationType;
 
-            Assert.AreEqual("Company", companyPerson.AssociationType.SingularName);
-
-            company.PluralName = "Companies";
-
-            Assert.AreEqual("Company", companyPerson.AssociationType.SingularName);
+            Assert.AreEqual("Company", associationType.SingularName);
         }
 
-        private void DomainMetaObjectChanged(object sender, MetaObjectChangedEventArgs args)
+        [Test]
+        public void SingularFullName()
         {
-            this.metaObjectChangedEvents.Add(args);
+            var company = new ClassBuilder(this.Domain, Guid.NewGuid()).WithSingularName("Company").WithPluralName("Companies").Build();
+            var person = new ClassBuilder(this.Domain, Guid.NewGuid()).WithSingularName("Person").WithPluralName("Persons").Build();
+
+            var companyPerson = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid())
+                .WithObjectTypes(company, person)
+                .Build();
+
+            var associationType = companyPerson.AssociationType;
+
+            Assert.AreEqual("PersonCompany", associationType.SingularFullName);
+        }
+
+        [Test]
+        public void SingularPropertyName()
+        {
+            var company = new ClassBuilder(this.Domain, Guid.NewGuid()).WithSingularName("Company").WithPluralName("Companies").Build();
+            var person = new ClassBuilder(this.Domain, Guid.NewGuid()).WithSingularName("Person").WithPluralName("Persons").Build();
+
+            var companyPerson = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid())
+                .WithObjectTypes(company, person)
+                .Build();
+
+            var associationType = companyPerson.AssociationType;
+
+            Assert.AreEqual("CompanyWherePerson", associationType.SingularPropertyName);
+        }
+        
+        [Test]
+        public void PluralName()
+        {
+            var company = new ClassBuilder(this.Domain, Guid.NewGuid()).WithSingularName("Company").WithPluralName("Companies").Build();
+            var person = new ClassBuilder(this.Domain, Guid.NewGuid()).WithSingularName("Person").WithPluralName("Persons").Build();
+
+            var companyPerson = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid())
+                .WithObjectTypes(company, person)
+                .WithCardinality(Cardinalities.ManyToOne)
+                .Build();
+
+            Assert.AreEqual("Companies", companyPerson.AssociationType.PluralName);
+        }
+
+        [Test]
+        public void PluralFullName()
+        {
+            var company = new ClassBuilder(this.Domain, Guid.NewGuid()).WithSingularName("Company").WithPluralName("Companies").Build();
+            var person = new ClassBuilder(this.Domain, Guid.NewGuid()).WithSingularName("Person").WithPluralName("Persons").Build();
+
+            var companyPerson = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid())
+                .WithObjectTypes(company, person)
+                .WithCardinality(Cardinalities.ManyToOne)
+                .Build();
+
+            Assert.AreEqual("PersonCompanies", companyPerson.AssociationType.PluralFullName);
+        }
+
+        [Test]
+        public void PluralPropertyName()
+        {
+            var company = new ClassBuilder(this.Domain, Guid.NewGuid()).WithSingularName("Company").WithPluralName("Companies").Build();
+            var person = new ClassBuilder(this.Domain, Guid.NewGuid()).WithSingularName("Person").WithPluralName("Persons").Build();
+
+            var companyPerson = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid())
+                .WithObjectTypes(company, person)
+                .WithCardinality(Cardinalities.ManyToOne)
+                .Build();
+
+            Assert.AreEqual("CompaniesWherePerson", companyPerson.AssociationType.PluralPropertyName);
         }
     }
 

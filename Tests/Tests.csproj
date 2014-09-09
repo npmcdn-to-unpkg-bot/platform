@@ -45,13 +45,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Allors\AbstractTest.cs" />
+    <Compile Include="Allors\Meta\AssociationTest.cs" />
     <Compile Include="Allors\Meta\RoleTest.cs" />
     <Compile Include="Allors\Meta\SandboxTest.cs" />
     <Compile Include="Allors\Population.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Allors\Meta\Static\" />
     <Folder Include="Base\" />
     <Folder Include="Core\" />
   </ItemGroup>

@@ -46,6 +46,9 @@ namespace Allors.Meta.Static
 
             var roleType = relationType.RoleType;
 
+            Assert.AreEqual(roleType.Id.ToString(), roleType.SingularName);
+            Assert.AreEqual(roleType.Id.ToString(), roleType.PluralName);
+
             roleType.IsMany = false;
             Assert.AreEqual(roleType.Id.ToString(), roleType.Name);
             roleType.IsMany = true;
@@ -64,14 +67,78 @@ namespace Allors.Meta.Static
 
             Assert.AreEqual("Person", companyPerson.RoleType.SingularName);
 
-            person.PluralName = "Persons";
-            Assert.AreEqual("Person", companyPerson.RoleType.SingularName);
-
             companyPerson.RoleType.AssignedPluralName = "Personen";
             Assert.AreEqual("Person", companyPerson.RoleType.SingularName);
 
             companyPerson.RoleType.AssignedSingularName = "Persoon";
             Assert.AreEqual("Persoon", companyPerson.RoleType.SingularName);
+        }
+
+        [Test]
+        public void SingularFullName()
+        {
+            var company = new ClassBuilder(this.Domain, Guid.NewGuid()).WithSingularName("Company").WithPluralName("Companies").Build();
+            var person = new ClassBuilder(this.Domain, Guid.NewGuid()).WithSingularName("Person").WithPluralName("Persons").Build();
+
+            var companyPerson = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid())
+                .WithObjectTypes(company, person)
+                .Build();
+
+            Assert.AreEqual("CompanyPerson", companyPerson.RoleType.SingularFullName);
+
+            companyPerson.RoleType.AssignedPluralName = "Personen";
+            Assert.AreEqual("CompanyPerson", companyPerson.RoleType.SingularFullName);
+
+            companyPerson.RoleType.AssignedSingularName = "Persoon";
+            Assert.AreEqual("CompanyPersoon", companyPerson.RoleType.SingularFullName);
+        }
+
+        [Test]
+        public void SingularPropertyName()
+        {
+            var company = new ClassBuilder(this.Domain, Guid.NewGuid()).WithSingularName("Company").WithPluralName("Companies").Build();
+            var person = new ClassBuilder(this.Domain, Guid.NewGuid()).WithSingularName("Person").WithPluralName("Persons").Build();
+
+            var companyPerson = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid())
+                .WithObjectTypes(company, person)
+                .Build();
+
+            Assert.AreEqual("Person", companyPerson.RoleType.SingularPropertyName);
+
+            companyPerson.RoleType.AssignedPluralName = "Personen";
+            Assert.AreEqual("Person", companyPerson.RoleType.SingularPropertyName);
+
+            companyPerson.RoleType.AssignedSingularName = "Persoon";
+            Assert.AreEqual("Persoon", companyPerson.RoleType.SingularPropertyName);
+        }
+
+        [Test]
+        public void SingularPropertyNameWithInheritance()
+        {
+            var company = new ClassBuilder(this.Domain, Guid.NewGuid()).WithSingularName("Company").WithPluralName("Companies").Build();
+            var person = new ClassBuilder(this.Domain, Guid.NewGuid()).WithSingularName("Person").WithPluralName("Persons").Build();
+            
+            var companyPerson = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid())
+                .WithObjectTypes(company, person)
+                .Build();
+
+            var super = new InterfaceBuilder(this.Domain, Guid.NewGuid()).WithSingularName("Company").WithPluralName("Companies").Build();
+            new InheritanceBuilder(this.Domain, Guid.NewGuid()).WithSubtype(company).WithSupertype(super).Build();
+
+            var superPerson = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid())
+                .WithObjectTypes(super, person)
+                .Build();
+            
+            Assert.AreEqual("CompanyPerson", companyPerson.RoleType.SingularPropertyName);
+            Assert.AreEqual("CompanyPerson", superPerson.RoleType.SingularPropertyName);
+
+            companyPerson.RoleType.AssignedPluralName = "Personen";
+            Assert.AreEqual("CompanyPerson", companyPerson.RoleType.SingularPropertyName);
+            Assert.AreEqual("CompanyPerson", superPerson.RoleType.SingularPropertyName);
+
+            companyPerson.RoleType.AssignedSingularName = "Persoon";
+            Assert.AreEqual("Persoon", companyPerson.RoleType.SingularPropertyName);
+            Assert.AreEqual("Person", superPerson.RoleType.SingularPropertyName);
         }
 
         [Test]
@@ -94,10 +161,60 @@ namespace Allors.Meta.Static
             companyPerson.RoleType.AssignedPluralName = "Personen";
 
             Assert.AreEqual("Personen", companyPerson.RoleType.PluralName);
+        }
 
-            person.PluralName = null;
+        [Test]
+        public void PluralFullName()
+        {
+            var company = new ClassBuilder(this.Domain, Guid.NewGuid()).WithSingularName("Company").WithPluralName("Companies").Build();
+            var person = new ClassBuilder(this.Domain, Guid.NewGuid()).WithSingularName("Person").WithPluralName("Persons").Build();
 
-            Assert.AreEqual("Personen", companyPerson.RoleType.PluralName);
+            var companyPerson = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid())
+                .WithObjectTypes(company, person)
+                .WithCardinality(Cardinalities.OneToMany)
+                .Build();
+
+            Assert.AreEqual("CompanyPersons", companyPerson.RoleType.PluralFullName);
+
+            companyPerson.RoleType.AssignedSingularName = "Persoon";
+
+            Assert.AreEqual("CompanyPersons", companyPerson.RoleType.PluralFullName);
+
+            companyPerson.RoleType.AssignedPluralName = "Personen";
+
+            Assert.AreEqual("CompanyPersonen", companyPerson.RoleType.PluralFullName);
+        }
+
+        [Test]
+        public void PluralPropertyName()
+        {
+            var company = new ClassBuilder(this.Domain, Guid.NewGuid()).WithSingularName("Company").WithPluralName("Companies").Build();
+            var person = new ClassBuilder(this.Domain, Guid.NewGuid()).WithSingularName("Person").WithPluralName("Persons").Build();
+
+            var companyPerson = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid())
+                .WithObjectTypes(company, person)
+                .WithCardinality(Cardinalities.OneToMany)
+                .Build();
+
+            var super = new InterfaceBuilder(this.Domain, Guid.NewGuid()).WithSingularName("Company").WithPluralName("Companies").Build();
+            new InheritanceBuilder(this.Domain, Guid.NewGuid()).WithSubtype(company).WithSupertype(super).Build();
+
+            var superPerson = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid())
+                .WithObjectTypes(super, person)
+                .Build();
+            
+            Assert.AreEqual("CompanyPersons", companyPerson.RoleType.PluralPropertyName);
+            Assert.AreEqual("CompanyPersons", superPerson.RoleType.PluralPropertyName);
+
+            companyPerson.RoleType.AssignedSingularName = "Persoon";
+
+            Assert.AreEqual("CompanyPersons", companyPerson.RoleType.PluralPropertyName);
+            Assert.AreEqual("CompanyPersons", superPerson.RoleType.PluralPropertyName);
+
+            companyPerson.RoleType.AssignedPluralName = "Personen";
+
+            Assert.AreEqual("Personen", companyPerson.RoleType.PluralPropertyName);
+            Assert.AreEqual("Persons", superPerson.RoleType.PluralPropertyName);
         }
 
         [Test]

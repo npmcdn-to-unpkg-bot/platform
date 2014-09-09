@@ -249,6 +249,7 @@ namespace Allors.Meta
         {
             get
             {
+                this.MetaPopulation.Derive();
                 return this.derivedSingularPropertyName;
             }
         }
@@ -257,6 +258,7 @@ namespace Allors.Meta
         {
             get
             {
+                this.MetaPopulation.Derive();
                 return this.derivedPluralPropertyName;
             }
         }
@@ -285,7 +287,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.MetaPopulation.AssertUnlocked();
                 this.MetaPopulation.Derive();
                 return this.scale;
             }
@@ -301,7 +302,6 @@ namespace Allors.Meta
         {
             get
             {
-                this.MetaPopulation.AssertUnlocked();
                 this.MetaPopulation.Derive();
                 return this.precision;
             }
