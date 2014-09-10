@@ -25,152 +25,39 @@ namespace Allors.Meta.Static
     public class InheritanceTest : AbstractTest
     {
         [Test]
-        public void CycleDifferentType()
-        {
-            this.Populate();
-
-            MetaObject[] ones = { this.Population.C1, this.Population.A1, this.Population.I1 };
-            MetaObject[] twos = { this.Population.C2, this.Population.A2, this.Population.I2 };
-
-            foreach (var one in ones)
-            {
-                foreach (var two in twos)
-                {
-                    this.CycleDifferentTypeCheck(one, two);
-                }
-            }
-        }
-
-        [Test]
-        public void CycleSameType()
-        {
-            this.Populate();
-
-            var c1 = this.Population.C1;
-            var a1 = this.Population.A1;
-            var i1 = this.Population.I1;
-
-            var i2 = this.Population.I2;
-
-            this.CycleSameTypeSet(c1);
-            this.CycleSameTypeSet(a1);
-            this.CycleSameTypeSet(i1);
-
-            this.CycleSameTypeReset(c1, i2);
-            this.CycleSameTypeReset(a1, i2);
-            this.CycleSameTypeReset(i1, i2);
-        }
-
-        [Test]
         public void Validate()
         {
-            this.Populate();
+            var metaPopulation = new MetaPopulation();
+            var domain = new Domain(metaPopulation, Guid.NewGuid()) { Name = "Domain" };
 
-            // Concrete supertype
-            var c1_c2_inheritance = this.Domain.AddDeclaredInheritance(Guid.NewGuid());
-            c1_c2_inheritance.Subtype = this.Population.C1;
-            c1_c2_inheritance.Supertype = this.Population.C2;
+            var c1 = new ClassBuilder(domain, Guid.NewGuid()).WithSingularName("C1").WithPluralName("C1s").Build();
 
-            var validationReport = this.Domain.Validate();
-            Assert.AreEqual(1, validationReport.Errors.Length);
+            var i1 = new InterfaceBuilder(domain, Guid.NewGuid()).WithSingularName("I1").WithPluralName("I1s").Build();
+            var i2 = new InterfaceBuilder(domain, Guid.NewGuid()).WithSingularName("I2").WithPluralName("I2s").Build();
 
-            // interface with abstract superclass
-            var i1_a1_inheritance = this.Domain.AddDeclaredInheritance(Guid.NewGuid());
-            i1_a1_inheritance.Subtype = this.Population.I1;
-            i1_a1_inheritance.Supertype = this.Population.A1;
+            Assert.IsTrue(metaPopulation.IsValid);
 
-            validationReport = this.Domain.Validate();
-            Assert.AreEqual(1, validationReport.Errors.Length);
+            // class with interface
+            new InheritanceBuilder(domain, Guid.NewGuid()).WithSubtype(c1).WithSupertype(i1).Build();
+
+            var validation = metaPopulation.Validate();
+            Assert.IsFalse(validation.ContainsErrors);
+
+            // interface with interface
+            new InheritanceBuilder(domain, Guid.NewGuid()).WithSubtype(i1).WithSupertype(i2).Build();
+
+            validation = metaPopulation.Validate();
+            Assert.IsFalse(validation.ContainsErrors);
 
             // Cyclic
-            var c1_a1_inheritance = this.Domain.AddDeclaredInheritance(Guid.NewGuid());
-            c1_a1_inheritance.Subtype = this.Population.C1;
-            c1_a1_inheritance.Supertype = this.Population.A1;
-            var a1_c1_inheritance = this.Domain.AddDeclaredInheritance(Guid.NewGuid());
-            a1_c1_inheritance.Subtype = this.Population.C1;
-            a1_c1_inheritance.Supertype = this.Population.A1;
+            var cycle = new InheritanceBuilder(domain, Guid.NewGuid()).WithSubtype(i2).WithSupertype(i1).Build();
 
-            validationReport = this.Domain.Validate();
-            Assert.AreEqual(2, validationReport.Errors.Length);
-        }
-
-        private void CycleDifferentTypeCheck(MetaObject type1, MetaObject type2)
-        {
-            var inheritance1 = this.Domain.AddDeclaredInheritance(Guid.NewGuid());
-            inheritance1.Subtype = type1;
-            inheritance1.Supertype = type2;
-            var inheritance2 = this.Domain.AddDeclaredInheritance(Guid.NewGuid());
-            inheritance2.Subtype = type2;
-            inheritance2.Supertype = type1;
-
-            Assert.AreEqual(1, type1.DirectSupertypes.Length);
-            Assert.AreEqual(1, type1.DirectSubtypes.Length);
-            Assert.AreEqual(1, type2.DirectSupertypes.Length);
-            Assert.AreEqual(1, type2.DirectSubtypes.Length);
-        }
-
-        private void CycleSameTypeReset(MetaObject type1, MetaObject type2)
-        {
-            var inheritance = this.Domain.AddDeclaredInheritance(Guid.NewGuid());
-            inheritance.Subtype = type1;
-            inheritance.Supertype = type2;
-            try
-            {
-                inheritance.Supertype = type1;
-                Assert.Fail();
-            }
-            catch
-            {
-                Assert.AreEqual(1, this.Population.Inheritances.Length);
-                Assert.AreEqual(1, type1.DirectSupertypes.Length);
-                Assert.AreEqual(1, type2.DirectSubtypes.Length);
-            }
-
-            inheritance = this.Domain.AddDeclaredInheritance(Guid.NewGuid());
-            inheritance.Subtype = type1;
-            inheritance.Supertype = type2;
-            try
-            {
-                inheritance.Subtype = type1;
-                Assert.Fail();
-            }
-            catch
-            {
-                Assert.AreEqual(1, this.Population.Inheritances.Length);
-                Assert.AreEqual(1, type1.DirectSupertypes.Length);
-                Assert.AreEqual(1, type2.DirectSubtypes.Length);
-            }
-        }
-
-        private void CycleSameTypeSet(MetaObject type)
-        {
-            var inheritance = this.Domain.AddDeclaredInheritance(Guid.NewGuid());
-            try
-            {
-                inheritance.Subtype = type;
-                inheritance.Supertype = type;
-                Assert.Fail();
-            }
-            catch
-            {
-                Assert.AreEqual(1, this.Population.Inheritances.Length);
-                Assert.AreEqual(0, type.DirectSupertypes.Length);
-                Assert.AreEqual(0, type.DirectSubtypes.Length);
-            }
-
-            inheritance = this.Domain.AddDeclaredInheritance(Guid.NewGuid());
-            try
-            {
-                inheritance.Supertype = type;
-                inheritance.Subtype = type;
-                Assert.Fail();
-            }
-            catch
-            {
-                Assert.AreEqual(1, this.Population.Inheritances.Length);
-                Assert.AreEqual(0, type.DirectSupertypes.Length);
-                Assert.AreEqual(0, type.DirectSubtypes.Length);
-            }
+            validation = metaPopulation.Validate(); 
+            Assert.IsTrue(validation.ContainsErrors);
+            Assert.AreEqual(i1, validation.Errors[0].Source);
+            Assert.AreEqual(1, validation.Errors[0].Members.Length);
+            Assert.AreEqual("Composite.Supertypes", validation.Errors[0].Members[0]);
+            Assert.AreEqual(ValidationKind.Cyclic, validation.Errors[0].Kind);
         }
     }
 

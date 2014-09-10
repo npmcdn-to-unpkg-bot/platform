@@ -34,6 +34,8 @@ namespace Allors.Meta
 
         private IList<Domain> directSuperdomains;
 
+        private IList<Domain> derivedSuperdomains;
+
         private IList<Unit> definedUnits;
 
         private IList<Interface> definedInterfaces;
@@ -54,7 +56,7 @@ namespace Allors.Meta
             : base(metaPopulation, id)
         {
             this.directSuperdomains = new List<Domain>();
-            
+
             this.definedUnits = new List<Unit>();
             this.definedInterfaces = new List<Interface>();
             this.definedClasses = new List<Class>();
@@ -87,6 +89,15 @@ namespace Allors.Meta
             get
             {
                 return this.directSuperdomains;
+            }
+        }
+
+        public IEnumerable<Domain> Superdomains
+        {
+            get
+            {
+                this.MetaPopulation.Derive();
+                return this.derivedSuperdomains;
             }
         }
 
@@ -157,7 +168,7 @@ namespace Allors.Meta
         /// <summary>
         /// Gets the validation name.
         /// </summary>
-        protected override string ValidationName
+        protected internal override string ValidationName
         {
             get
             {
@@ -172,6 +183,11 @@ namespace Allors.Meta
 
         public void AddDirectSuperdomain(Domain superdomain)
         {
+            if (superdomain.Equals(this) || superdomain.Superdomains.Contains(this))
+            {
+                throw new Exception("Cyclic in domain inheritance");
+            }
+
             this.directSuperdomains.Add(superdomain);
             this.MetaPopulation.Stale();
         }
@@ -272,6 +288,17 @@ namespace Allors.Meta
             this.definedMethodTypes.Add(methodType);
             this.MetaPopulation.OnMethodTypeCreated(methodType);
         }
+        
+        internal void DeriveSuperdomains(HashSet<Domain> sharedDomains)
+        {
+            sharedDomains.Clear();
+            foreach (var directSuperdomain in this.DirectSuperdomains)
+            {
+                directSuperdomain.DeriveSuperdomains(this, sharedDomains);
+            }
+
+            this.derivedSuperdomains = sharedDomains.ToArray();
+        }
 
         /// <summary>
         /// Validates the domain.
@@ -307,6 +334,25 @@ namespace Allors.Meta
             if (this.Id == Guid.Empty)
             {
                 validationLog.AddError(this.ValidationName + " has no id", this, ValidationKind.Required, "MetaObject.Id");
+            }
+        }
+
+        private void DeriveSuperdomains(Domain subdomain, HashSet<Domain> superdomains)
+        {
+            if (this.Equals(subdomain))
+            {
+                // We have a cycle
+                return;
+            }
+
+            superdomains.Add(this);
+
+            foreach (var directSuperdomain in this.DirectSuperdomains)
+            {
+                if (!superdomains.Contains(directSuperdomain))
+                {
+                    directSuperdomain.DeriveSuperdomains(subdomain, superdomains);
+                }
             }
         }
     }

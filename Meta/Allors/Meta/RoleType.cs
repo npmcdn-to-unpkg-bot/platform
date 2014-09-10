@@ -334,7 +334,7 @@ namespace Allors.Meta
         /// Gets the validation name.
         /// </summary>
         /// <value>The validation name.</value>
-        protected override string ValidationName
+        protected internal override string ValidationName
         {
             get
             {

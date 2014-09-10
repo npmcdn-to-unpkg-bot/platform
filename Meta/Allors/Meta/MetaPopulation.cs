@@ -22,6 +22,7 @@
 namespace Allors.Meta
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -229,6 +230,36 @@ namespace Allors.Meta
                 methodType.Validate(log);
             }
 
+
+            var inheritancesBySubtype = new Dictionary<Composite, List<Inheritance>>();
+            foreach (var inheritance in this.Inheritances)
+            {
+                var subtype = inheritance.Subtype;
+                if (subtype != null)
+                {
+                    List<Inheritance> inheritanceList;
+                    if (!inheritancesBySubtype.TryGetValue(subtype, out inheritanceList))
+                    {
+                        inheritanceList = new List<Inheritance>();
+                        inheritancesBySubtype[subtype] = inheritanceList;
+                    }
+
+                    inheritanceList.Add(inheritance);
+                }
+            }
+
+            var supertypes = new HashSet<Interface>();
+            foreach (var subtype in inheritancesBySubtype.Keys)
+            {
+                supertypes.Clear();
+                if (this.HasCycle(subtype, supertypes, inheritancesBySubtype))
+                {
+                    var message = subtype.ValidationName + " has a cycle in its inheritance hierarchy";
+                    log.AddError(message, subtype, ValidationKind.Cyclic, "Composite.Supertypes");
+                }
+            }
+
+
             return log;
         }
 
@@ -273,17 +304,23 @@ namespace Allors.Meta
                 {
                     this.isDeriving = true;
 
+                    var sharedDomains = new HashSet<Domain>();
+                    var sharedCompositeTypes = new HashSet<Composite>();
+                    var sharedInterfaces = new HashSet<Interface>();
+                    var sharedClasses = new HashSet<Class>();
+                    var sharedAssociationTypes = new HashSet<AssociationType>();
+                    var sharedRoleTypes = new HashSet<RoleType>();
+
+                    // Domains
+                    foreach (var domain in this.domains)
+                    {
+                        domain.DeriveSuperdomains(sharedDomains);
+                    }
+
                     // Unit & Composite ObjectTypes
                     var compositeTypes = new List<Composite>(this.Interfaces);
                     compositeTypes.AddRange(this.Classes);
                     this.derivedComposites = compositeTypes.ToArray();
-
-                    var sharedCompositeTypes = new HashSet<Composite>();
-                    var sharedInterfaces = new HashSet<Interface>();
-                    var sharedClasses = new HashSet<Class>();
-
-                    var sharedRoleTypes = new HashSet<RoleType>();
-                    var sharedAssociationTypes = new HashSet<AssociationType>();
 
                     // DirectSupertypes
                     foreach (var type in this.derivedComposites)
@@ -446,6 +483,54 @@ namespace Allors.Meta
         internal void Stale()
         {
             this.isStale = true;
+        }
+
+        private bool HasCycle(Composite subtype, HashSet<Interface> supertypes, Dictionary<Composite, List<Inheritance>> inheritancesBySubtype)
+        {
+            foreach (var inheritance in inheritancesBySubtype[subtype])
+            {
+                var supertype = inheritance.Supertype;
+                if (supertype != null)
+                {
+                    if (this.HasCycle(subtype, supertype, supertypes, inheritancesBySubtype))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        private bool HasCycle(Composite originalSubtype, Interface currentSupertype, HashSet<Interface> supertypes, Dictionary<Composite, List<Inheritance>> inheritancesBySubtype)
+        {
+            if (supertypes.Contains(originalSubtype))
+            {
+                return true;
+            }
+
+            if (!supertypes.Contains(currentSupertype))
+            {
+                supertypes.Add(currentSupertype);
+
+                List<Inheritance> currentSuperInheritances;
+                if (inheritancesBySubtype.TryGetValue(currentSupertype, out currentSuperInheritances))
+                {
+                    foreach (var inheritance in currentSuperInheritances)
+                    {
+                        var newSupertype = inheritance.Supertype;
+                        if (newSupertype != null)
+                        {
+                            if (this.HasCycle(originalSubtype, newSupertype, supertypes, inheritancesBySubtype))
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return false;
         }
     }
 }

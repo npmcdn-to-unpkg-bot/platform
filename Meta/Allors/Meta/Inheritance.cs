@@ -72,7 +72,7 @@ namespace Allors.Meta
         /// <summary>
         /// Gets the validation name.
         /// </summary>
-        protected override string ValidationName
+        protected internal override string ValidationName
         {
             get
             {
@@ -106,12 +106,6 @@ namespace Allors.Meta
 
             if (this.Subtype != null && this.Supertype != null)
             {
-                if (this.HasCycle(this.Subtype))
-                {
-                    var message = this.ValidationName + " has a cycle in its inheritance hierarchy";
-                    validationLog.AddError(message, this, ValidationKind.Cyclic, "Inheritance.Subtype");
-                }
-
                 if (this.MetaPopulation.Inheritances.Count(inheritance => this.Subtype.Equals(inheritance.Subtype) && this.Supertype.Equals(inheritance.Supertype)) != 1)
                 {
                     var message = "name of " + this.ValidationName + " is already in use";
@@ -138,18 +132,6 @@ namespace Allors.Meta
                     validationLog.AddError(message, this, ValidationKind.Unique, "Inheritance.Supertype");
                 }
             }
-        }
-
-        private bool HasCycle(Composite startSubType)
-        {
-            if (startSubType.Equals(this.Supertype))
-            {
-                return true;
-            }
-
-            return this.Supertype != null && this.MetaPopulation.Inheritances
-                .Where(inheritance => this.Supertype.Equals(inheritance.Subtype))
-                .Any(superInheritance => superInheritance.HasCycle(startSubType));
         }
     }
 }

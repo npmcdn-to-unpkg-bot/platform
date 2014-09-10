@@ -78,7 +78,7 @@ namespace Allors.Meta
         /// <summary>
         /// Gets the validation name.
         /// </summary>
-        protected abstract string ValidationName { get; }
+        protected internal abstract string ValidationName { get; }
 
         public static int IdComparer(MetaObject x, MetaObject y)
         {
