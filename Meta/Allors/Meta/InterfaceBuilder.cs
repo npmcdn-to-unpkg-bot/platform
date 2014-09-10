@@ -18,7 +18,7 @@
 // </copyright>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.Meta.Builders
+namespace Allors.Meta
 {
     using System;
 

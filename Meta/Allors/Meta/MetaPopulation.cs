@@ -371,6 +371,14 @@ namespace Allors.Meta
             }
         }
 
+        internal void OnDomainCreated(Domain domain)
+        {
+            this.domains.Add(domain);
+            this.metaObjectById.Add(domain.Id, domain);
+
+            this.Stale();
+        }
+
         internal void OnUnitCreated(Unit unit)
         {
             this.units.Add(unit);

@@ -22,14 +22,14 @@ namespace Allors.Meta
 {
     using System;
 
-    using Allors.Meta.Builders;
+    using Allors.Meta;
 
     public static partial class Repository
     {
         public static Domain Base(MetaPopulation meta)
         {
             // Imports
-            var core = (Domain)meta.Find(new Guid("CA802192-8186-4C2A-8315-A8DEFAA74A12"));
+            var allors = (Domain)meta.Find(new Guid("CA802192-8186-4C2A-8315-A8DEFAA74A12"));
 
             var allorsString = (Unit)meta.Find(UnitIds.StringId);
             var allorsInteger = (Unit)meta.Find(UnitIds.IntegerId);
@@ -43,7 +43,7 @@ namespace Allors.Meta
 
             // Domain
             var domain = new Domain(meta, new Guid("AB41FD0C-C887-4A1D-BEDA-CED69527E69A")) { Name = "Core" };
-            domain.AddDirectSuperdomain(core);
+            domain.AddDirectSuperdomain(allors);
 
             // ObjectTypes
             var userInterfaceable = new InterfaceBuilder(domain, new Guid("eea17b39-8912-40b3-8403-293bd5a3316d")).WithSingularName("UserInterfaceable").WithPluralName("UserInterfaceables").Build();

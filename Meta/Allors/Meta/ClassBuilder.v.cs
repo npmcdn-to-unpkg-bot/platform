@@ -18,7 +18,7 @@
 // </copyright>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.Meta.Builders
+namespace Allors.Meta
 {
     public partial class ClassBuilder
     {

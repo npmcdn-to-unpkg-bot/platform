@@ -46,6 +46,11 @@
   <ItemGroup>
     <Compile Include="Allors\AbstractTest.cs" />
     <Compile Include="Allors\Meta\AssociationTest.cs" />
+    <Compile Include="Allors\Meta\DomainTest.cs" />
+    <Compile Include="Allors\Meta\MetaPopulationTest.cs" />
+    <Compile Include="Allors\Meta\MethodTypeTest.cs" />
+    <Compile Include="Allors\Meta\ObjectTypeTest.cs" />
+    <Compile Include="Allors\Meta\RelationTypeTest.cs" />
     <Compile Include="Allors\Meta\RoleTest.cs" />
     <Compile Include="Allors\Meta\SandboxTest.cs" />
     <Compile Include="Allors\Population.cs" />

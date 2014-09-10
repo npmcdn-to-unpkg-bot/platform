@@ -22,15 +22,15 @@ namespace Allors.Meta
 {
     using System;
 
-    using Allors.Meta.Builders;
+    using Allors.Meta;
 
     public static partial class Repository
     {
         public static readonly MetaPopulation MetaPopulation;
 
-        public static Domain Core(MetaPopulation meta)
+        public static Domain Allors(MetaPopulation meta)
         {
-            var domain = new Domain(meta, new Guid("CA802192-8186-4C2A-8315-A8DEFAA74A12"));
+            var domain = new Domain(meta, new Guid("CA802192-8186-4C2A-8315-A8DEFAA74A12")) { Name = "Allors" };
 
             new UnitBuilder(domain, UnitIds.StringId).WithSingularName("AllorsString").WithPluralName("AllorsStrings").WithUnitTag(UnitTags.AllorsString).Build();
             new UnitBuilder(domain, UnitIds.IntegerId).WithSingularName("AllorsInteger").WithPluralName("AllorsIntegers").WithUnitTag(UnitTags.AllorsInteger).Build();

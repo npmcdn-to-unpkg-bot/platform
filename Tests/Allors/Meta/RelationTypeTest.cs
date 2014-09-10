@@ -18,8 +18,8 @@
 namespace Allors.Meta.Static
 {
     using System;
-    using System.IO;
-    using System.Xml;
+
+    using Allors.Meta;
 
     using NUnit.Framework;
 
@@ -27,59 +27,53 @@ namespace Allors.Meta.Static
     public class RelationTypeTest : AbstractTest
     {
         [Test]
-        public void Defaults()
+        public void Minimal()
         {
             this.Populate();
 
-            var relationType = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            relationType.IsIndexed = true;
-            relationType.IsDerived = true;
+            var relationType = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
+            relationType.AssociationType.ObjectType = this.Population.C1;
+            relationType.RoleType.ObjectType = this.Population.C2;
 
-            var association = relationType.AssociationType;
-            association.ObjectType = this.Population.C1;
-
-            var role = relationType.RoleType;
-            role.ObjectType = this.Population.C2;
-
-            Assert.IsTrue(this.Domain.IsValid);
+            Assert.IsTrue(this.MetaPopulation.IsValid);
         }
 
         [Test]
-        public void HasExclusiveClassHierarchies()
+        public void HasExclusiveLeafClasses()
         {
             this.Populate();
 
-            var relationType = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
+            var relationType = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
 
-            Assert.IsFalse(relationType.ExistExclusiveRootClasses);
+            Assert.IsFalse(relationType.ExistExclusiveLeafClasses);
 
             var association = relationType.AssociationType;
 
-            Assert.IsFalse(relationType.ExistExclusiveRootClasses);
+            Assert.IsFalse(relationType.ExistExclusiveLeafClasses);
 
             var role = relationType.RoleType;
 
-            Assert.IsFalse(relationType.ExistExclusiveRootClasses);
+            Assert.IsFalse(relationType.ExistExclusiveLeafClasses);
 
             association.ObjectType = this.Population.I1;
             role.ObjectType = this.Population.I2;
 
-            Assert.IsTrue(relationType.ExistExclusiveRootClasses);
+            Assert.IsTrue(relationType.ExistExclusiveLeafClasses);
 
             association.ObjectType = this.Population.I1;
             role.ObjectType = null;
 
-            Assert.IsFalse(relationType.ExistExclusiveRootClasses);
+            Assert.IsFalse(relationType.ExistExclusiveLeafClasses);
 
             association.ObjectType = null;
             role.ObjectType = this.Population.I2;
 
-            Assert.IsFalse(relationType.ExistExclusiveRootClasses);
+            Assert.IsFalse(relationType.ExistExclusiveLeafClasses);
 
             association.ObjectType = this.Population.I1;
             role.ObjectType = this.Population.I12;
 
-            Assert.IsFalse(relationType.ExistExclusiveRootClasses);
+            Assert.IsFalse(relationType.ExistExclusiveLeafClasses);
         }
 
         [Test]
@@ -87,148 +81,43 @@ namespace Allors.Meta.Static
         {
             this.Populate();
 
-            var relationType = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            var association = relationType.AssociationType;
-            association.ObjectType = this.Population.C1;
+            var relationType = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
+            var associationType = relationType.AssociationType;
+            associationType.ObjectType = this.Population.C1;
 
-            var role = relationType.RoleType;
-            role.ObjectType = this.Population.C2;
+            var roleType = relationType.RoleType;
+            roleType.ObjectType = this.Population.C2;
 
-            Assert.IsTrue(this.Domain.IsValid);
+            Assert.IsTrue(this.MetaPopulation.IsValid);
 
             Assert.IsTrue(relationType.IsOneToOne);
 
-            role.IsMany = true;
+            roleType.IsMany = true;
 
             Assert.IsTrue(relationType.IsOneToMany);
 
-            association.IsMany = true;
+            associationType.IsMany = true;
 
             Assert.IsTrue(relationType.IsManyToMany);
 
-            role.IsMany = false;
+            roleType.IsMany = false;
 
             Assert.IsTrue(relationType.IsManyToOne);
         }
 
         [Test]
-        public void ValidateCompositeCardinality()
+        public void UnitCardinality()
         {
             this.Populate();
 
-            var relationType = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            relationType.AssociationType.ObjectType = this.Population.C1;
-            relationType.RoleType.ObjectType = this.Population.C2;
-
-            relationType.AssociationType.IsMany = false;
-            relationType.RoleType.IsMany = false;
-
-            Assert.IsTrue(this.Domain.IsValid);
-
-            relationType.AssociationType.IsMany = true;
-            relationType.RoleType.IsMany = false;
-
-            Assert.IsTrue(this.Domain.IsValid);
-
-            relationType.AssociationType.IsMany = false;
-            relationType.RoleType.IsMany = true;
-
-            Assert.IsTrue(this.Domain.IsValid);
-
-            relationType.AssociationType.IsMany = true;
-            relationType.RoleType.IsMany = true;
-
-            Assert.IsTrue(this.Domain.IsValid);
-
-            relationType.AssociationType.IsMany = false;
-            relationType.RoleType.IsMany = false;
-
-            Assert.IsTrue(this.Domain.IsValid);
-        }
-
-        [Test]
-        public void ValidateDuplicateRelation()
-        {
-            this.Populate();
-
-            var relationType = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            relationType.AssociationType.ObjectType = this.Population.C1;
-            relationType.RoleType.ObjectType = this.Population.C2;
-            relationType.RoleType.AssignedSingularName = "bb";
-            relationType.RoleType.AssignedPluralName = "bbs";
-
-            Assert.IsTrue(this.Domain.IsValid);
-
-            var otherRelationType = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            otherRelationType.AssociationType.ObjectType = this.Population.C1;
-            otherRelationType.RoleType.ObjectType = this.Population.C4;
-            otherRelationType.RoleType.AssignedSingularName = "bb";
-            otherRelationType.RoleType.AssignedPluralName = "bbs";
-
-            Assert.IsFalse(this.Domain.IsValid);
-        }
-
-        [Test]
-        public void ValidateDuplicateReverseRelation()
-        {
-            this.Populate();
-
-            var relationType = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            relationType.AssociationType.ObjectType = this.Population.C1;
-            relationType.RoleType.ObjectType = this.Population.C2;
-            Assert.IsTrue(this.Domain.IsValid);
-
-            var otherRelationType = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            otherRelationType.AssociationType.ObjectType = this.Population.C2;
-            otherRelationType.RoleType.ObjectType = this.Population.C1;
-
-            Assert.IsFalse(this.Domain.IsValid);
-        }
-
-        [Test]
-        public void ValidateNameMinimumLength()
-        {
-            this.Populate();
-
-            var relationType = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            var association = relationType.AssociationType;
-            var role = relationType.RoleType;
-            association.ObjectType = this.Population.C1;
-            role.ObjectType = this.Population.C2;
-
-            Assert.IsTrue(this.Domain.IsValid);
-
-            role.AssignedSingularName = "E";
-            role.AssignedPluralName = "GH";
-
-            Assert.IsFalse(this.Domain.IsValid);
-
-            role.AssignedSingularName = "EF";
-
-            Assert.IsTrue(this.Domain.IsValid);
-
-            role.AssignedPluralName = "G";
-
-            Assert.IsFalse(this.Domain.IsValid);
-
-            role.AssignedPluralName = "GH";
-
-            Assert.IsTrue(this.Domain.IsValid);
-        }
-
-        [Test]
-        public void DeriveUnitCardinality()
-        {
-            this.Populate();
-
-            var relationType = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
+            var relationType = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
             relationType.AssociationType.ObjectType = this.Population.C1;
             relationType.RoleType.ObjectType = this.Population.IntegerType;
 
             relationType.AssociationType.IsMany = false;
             relationType.RoleType.IsMany = false;
 
-            Assert.IsTrue(this.Domain.IsValid);
+            Assert.IsTrue(this.MetaPopulation.IsValid);
 
             relationType.AssociationType.IsMany = true;
             Assert.IsFalse(relationType.AssociationType.IsMany);
@@ -238,30 +127,108 @@ namespace Allors.Meta.Static
         }
 
         [Test]
-        public void DefaultsAfterSaveAndLoad()
+        public void CompositeCardinality()
         {
-            var objectType = this.Domain.AddDeclaredObjectType(Guid.NewGuid());
-            objectType.SingularName = "Object";
-            objectType.PluralName = "Objects";
+            this.Populate();
 
-            var relationType = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            relationType.AssociationType.ObjectType = objectType;
-            relationType.RoleType.ObjectType = objectType;
-            relationType.RoleType.AssignedSingularName = "Relation";
-            relationType.RoleType.AssignedPluralName = "Relations";
+            var relationType = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
+            relationType.AssociationType.ObjectType = this.Population.C1;
+            relationType.RoleType.ObjectType = this.Population.C2;
 
-            var validation = this.Domain.Validate();
-            Assert.IsFalse(validation.ContainsErrors);
+            relationType.AssociationType.IsMany = false;
+            relationType.RoleType.IsMany = false;
 
-            var xml = this.Domain.Xml;
+            Assert.IsTrue(this.MetaPopulation.IsValid);
 
-            var reader = new XmlTextReader(new StringReader(xml));
-            var copy = MetaDomain.Load(reader);
-            
-            relationType = (MetaRelation)copy.MetaDomain.Find(relationType.Id);
+            relationType.AssociationType.IsMany = true;
+            relationType.RoleType.IsMany = false;
 
-            Assert.IsFalse(relationType.IsIndexed);
-            Assert.IsFalse(relationType.IsDerived);
+            Assert.IsTrue(this.MetaPopulation.IsValid);
+
+            relationType.AssociationType.IsMany = false;
+            relationType.RoleType.IsMany = true;
+
+            Assert.IsTrue(this.MetaPopulation.IsValid);
+
+            relationType.AssociationType.IsMany = true;
+            relationType.RoleType.IsMany = true;
+
+            Assert.IsTrue(this.MetaPopulation.IsValid);
+
+            relationType.AssociationType.IsMany = false;
+            relationType.RoleType.IsMany = false;
+
+            Assert.IsTrue(this.MetaPopulation.IsValid);
+        }
+
+        [Test]
+        public void ValidateDuplicateRelation()
+        {
+            this.Populate();
+
+            var relationType = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
+            relationType.AssociationType.ObjectType = this.Population.C1;
+            relationType.RoleType.ObjectType = this.Population.C2;
+            relationType.RoleType.AssignedSingularName = "bb";
+            relationType.RoleType.AssignedPluralName = "bbs";
+
+            Assert.IsTrue(this.MetaPopulation.IsValid);
+
+            var otherRelationType = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
+            otherRelationType.AssociationType.ObjectType = this.Population.C1;
+            otherRelationType.RoleType.ObjectType = this.Population.C4;
+            otherRelationType.RoleType.AssignedSingularName = "bb";
+            otherRelationType.RoleType.AssignedPluralName = "bbs";
+
+            Assert.IsFalse(this.MetaPopulation.IsValid);
+        }
+
+        [Test]
+        public void ValidateDuplicateReverseRelation()
+        {
+            this.Populate();
+
+            var relationType = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
+            relationType.AssociationType.ObjectType = this.Population.C1;
+            relationType.RoleType.ObjectType = this.Population.C2;
+            Assert.IsTrue(this.MetaPopulation.IsValid);
+
+            var otherRelationType = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
+            otherRelationType.AssociationType.ObjectType = this.Population.C2;
+            otherRelationType.RoleType.ObjectType = this.Population.C1;
+
+            Assert.IsFalse(this.MetaPopulation.IsValid);
+        }
+
+        [Test]
+        public void ValidateNameMinimumLength()
+        {
+            this.Populate();
+
+            var relationType = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
+            var associationType = relationType.AssociationType;
+            var role = relationType.RoleType;
+            associationType.ObjectType = this.Population.C1;
+            role.ObjectType = this.Population.C2;
+
+            Assert.IsTrue(this.MetaPopulation.IsValid);
+
+            role.AssignedSingularName = "E";
+            role.AssignedPluralName = "GH";
+
+            Assert.IsFalse(this.MetaPopulation.IsValid);
+
+            role.AssignedSingularName = "EF";
+
+            Assert.IsTrue(this.MetaPopulation.IsValid);
+
+            role.AssignedPluralName = "G";
+
+            Assert.IsFalse(this.MetaPopulation.IsValid);
+
+            role.AssignedPluralName = "GH";
+
+            Assert.IsTrue(this.MetaPopulation.IsValid);
         }
     }
 

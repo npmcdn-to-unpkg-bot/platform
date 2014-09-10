@@ -46,7 +46,8 @@ namespace Allors.Meta.Static
         public void SetUp()
         {
             this.Population = new Population();
-            Assert.IsTrue(this.Domain.MetaPopulation.IsValid);
+            var validation = this.Domain.MetaPopulation.Validate();
+            Assert.IsFalse(validation.ContainsErrors);
         }
 
         [TearDown]

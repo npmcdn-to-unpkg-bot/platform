@@ -18,38 +18,28 @@
 namespace Allors.Meta.Static
 {
     using System;
-    using System.Collections.Generic;
-
-    using Allors.Meta.Events;
 
     using NUnit.Framework;
 
     [TestFixture]
     public class MethodTypeTest : AbstractTest
     {
-        private readonly List<MetaObjectChangedEventArgs> metaObjectChangedEvents = new List<MetaObjectChangedEventArgs>();
-
         [Test]
         public void ValidateDuplicateMethod()
         {
             this.Populate();
 
-            var methodType = this.Domain.AddDeclaredMethodType(Guid.NewGuid());
+            var methodType = new MethodTypeBuilder(this.Domain, Guid.NewGuid()).Build();
             methodType.ObjectType = this.Population.C1;
             methodType.Name = "MyName";
 
-            Assert.IsTrue(this.Domain.IsValid);
+            Assert.IsTrue(this.MetaPopulation.IsValid);
 
-            var otherMethodType = this.Domain.AddDeclaredMethodType(Guid.NewGuid());
+            var otherMethodType = new MethodTypeBuilder(this.Domain, Guid.NewGuid()).Build();
             methodType.ObjectType = this.Population.C1;
             methodType.Name = "MyName";
 
-            Assert.IsFalse(this.Domain.IsValid);
-        }
-
-        private void DomainMetaObjectChanged(object sender, MetaObjectChangedEventArgs args)
-        {
-            this.metaObjectChangedEvents.Add(args);
+            Assert.IsFalse(this.MetaPopulation.IsValid);
         }
     }
 

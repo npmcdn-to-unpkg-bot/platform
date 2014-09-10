@@ -17,65 +17,13 @@
 namespace Allors.Meta.Static
 {
     using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-
-    using Allors.Meta.AllorsGenerated;
-    using Allors.Meta.Events;
+    using System.Linq;
 
     using NUnit.Framework;
 
     [TestFixture]
     public class ObjectTypeTest : AbstractTest
     {
-        private readonly List<MetaObjectChangedEventArgs> metaObjectChangedEvents = new List<MetaObjectChangedEventArgs>();
-
-        [Test]
-        public void AssociationCountGreaterThan32()
-        {
-            this.Populate();
-
-            var c1 = this.Population.C1;
-            var c2 = this.Population.C2;
-
-            var count = 0;
-            MetaRelation c1_c2;
-            for (; count < 31; count++)
-            {
-                c1_c2 = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-                c1_c2.AssociationType.ObjectType = c1;
-                c1_c2.RoleType.ObjectType = c2;
-                c1_c2.RoleType.AssignedSingularName = count.ToString(CultureInfo.InvariantCulture);
-            }
-
-            Assert.AreEqual(31, c2.AssociationTypes.Length);
-            Assert.IsFalse(c2.AssociationTypesCountGreaterThan32);
-
-            c1_c2 = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            c1_c2.AssociationType.ObjectType = c1;
-            c1_c2.RoleType.ObjectType = c2;
-            c1_c2.RoleType.AssignedSingularName = (++count).ToString(CultureInfo.InvariantCulture);
-
-            Assert.AreEqual(32, c2.AssociationTypes.Length);
-            Assert.IsFalse(c2.AssociationTypesCountGreaterThan32);
-
-            c1_c2 = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            c1_c2.AssociationType.ObjectType = c1;
-            c1_c2.RoleType.ObjectType = c2;
-            c1_c2.RoleType.AssignedSingularName = (++count).ToString(CultureInfo.InvariantCulture);
-
-            Assert.AreEqual(33, c2.AssociationTypes.Length);
-            Assert.IsTrue(c2.AssociationTypesCountGreaterThan32);
-
-            c1_c2 = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            c1_c2.AssociationType.ObjectType = c1;
-            c1_c2.RoleType.ObjectType = c2;
-            c1_c2.RoleType.AssignedSingularName = (++count).ToString(CultureInfo.InvariantCulture);
-
-            Assert.AreEqual(34, c2.AssociationTypes.Length);
-            Assert.IsTrue(c2.AssociationTypesCountGreaterThan32);
-        }
-
         [Test]
         public void Associations()
         {
@@ -86,168 +34,68 @@ namespace Allors.Meta.Static
             var i1 = this.Population.I1;
             var i2 = this.Population.I2;
 
-            Assert.AreEqual(0, c2.AssociationTypes.Length);
+            Assert.AreEqual(0, c2.AssociationTypes.Count());
 
-            var c1_c2 = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
+            var c1_c2 = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
             c1_c2.AssociationType.ObjectType = c1;
             c1_c2.RoleType.ObjectType = c2;
 
-            Assert.AreEqual(1, c2.AssociationTypes.Length);
+            Assert.AreEqual(1, c2.AssociationTypes.Count());
 
-            var a1_a2 = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            a1_a2.AssociationType.ObjectType = a1;
-            a1_a2.RoleType.ObjectType = a2;
-
-            Assert.AreEqual(2, c2.AssociationTypes.Length);
-
-            var i1_i2 = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
+            var i1_i2 = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
             i1_i2.AssociationType.ObjectType = i1;
             i1_i2.RoleType.ObjectType = i2;
 
-            Assert.AreEqual(3, c2.AssociationTypes.Length);
+            Assert.AreEqual(2, c2.AssociationTypes.Count());
 
-            RemoveDirectSupertypes(a2);
+            var ix = new InterfaceBuilder(this.Domain, Guid.NewGuid()).WithSingularName("ix").WithPluralName("ixs").Build();
 
-            Assert.AreEqual(2, c2.AssociationTypes.Length);
+            var c1_ix = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
+            c1_ix.AssociationType.ObjectType = c1;
+            c1_ix.RoleType.ObjectType = ix;
 
-            a2.AddDirectSupertype(i2);
+            Assert.AreEqual(2, c2.AssociationTypes.Count());
 
-            Assert.AreEqual(3, c2.AssociationTypes.Length);
+            new InheritanceBuilder(this.Domain, Guid.NewGuid()).WithSubtype(c2).WithSupertype(ix).Build();
 
-            Assert.AreEqual(2, c2.AssociationTypes.Length);
-
-            a2.AddDirectSupertype(i2);
-
-            Assert.AreEqual(2, c2.AssociationTypes.Length);
-
-            Assert.AreEqual(1, c2.AssociationTypes.Length);
-
-            c1_c2.RoleType.ObjectType = c1;
-
-            Assert.AreEqual(0, c2.AssociationTypes.Length);
+            Assert.AreEqual(3, c2.AssociationTypes.Count());
         }
 
         [Test]
-        public void CompositeRoleCountGreaterThan32()
+        public void Roles()
         {
             this.Populate();
 
             var c1 = this.Population.C1;
             var c2 = this.Population.C2;
-
-            var count = 0;
-            MetaRelation c1_c22;
-            for (; count < 31; count++)
-            {
-                c1_c22 = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-                c1_c22.AssociationType.ObjectType = c1;
-                c1_c22.RoleType.ObjectType = c2;
-                c1_c22.RoleType.AssignedSingularName = count.ToString(CultureInfo.InvariantCulture);
-            }
-
-            Assert.AreEqual(31, c1.CompositeRoleTypes.Length);
-            Assert.IsFalse(c1.CompositeRoleTypeCountGreaterThan32);
-
-            c1_c22 = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            c1_c22.AssociationType.ObjectType = c1;
-            c1_c22.RoleType.ObjectType = c2;
-            c1_c22.RoleType.AssignedSingularName = (++count).ToString(CultureInfo.InvariantCulture);
-
-            Assert.AreEqual(32, c1.CompositeRoleTypes.Length);
-            Assert.IsFalse(c1.CompositeRoleTypeCountGreaterThan32);
-
-            c1_c22 = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            c1_c22.AssociationType.ObjectType = c1;
-            c1_c22.RoleType.ObjectType = c2;
-            c1_c22.RoleType.AssignedSingularName = (++count).ToString(CultureInfo.InvariantCulture);
-
-            Assert.AreEqual(33, c1.CompositeRoleTypes.Length);
-            Assert.IsTrue(c1.CompositeRoleTypeCountGreaterThan32);
-
-            c1_c22 = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            c1_c22.AssociationType.ObjectType = c1;
-            c1_c22.RoleType.ObjectType = c2;
-            c1_c22.RoleType.AssignedSingularName = (++count).ToString(CultureInfo.InvariantCulture);
-
-            Assert.AreEqual(34, c1.CompositeRoleTypes.Length);
-            Assert.IsTrue(c1.CompositeRoleTypeCountGreaterThan32);
-        }
-
-        [Test]
-        public void CompositeRoles()
-        {
-            this.Populate();
-
-            var c1 = this.Population.C1;
-            var c2 = this.Population.C2;
-            var a1 = this.Population.A1;
-            var a2 = this.Population.A2;
             var i1 = this.Population.I1;
             var i2 = this.Population.I2;
 
-            var allorsString = this.Population.IntegerType;
+            Assert.AreEqual(0, c1.RoleTypes.Count());
 
-            Assert.AreEqual(0, c1.CompositeRoleTypes.Length);
-
-            var c1_c2 = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
+            var c1_c2 = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
             c1_c2.AssociationType.ObjectType = c1;
             c1_c2.RoleType.ObjectType = c2;
 
-            Assert.AreEqual(1, c1.CompositeRoleTypes.Length);
+            Assert.AreEqual(1, c1.RoleTypes.Count());
 
-            var c1_string = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            c1_string.AssociationType.ObjectType = c1;
-            c1_string.RoleType.ObjectType = allorsString;
-
-            Assert.AreEqual(1, c1.CompositeRoleTypes.Length);
-
-            var a1_a2 = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            a1_a2.AssociationType.ObjectType = a1;
-            a1_a2.RoleType.ObjectType = a2;
-
-            Assert.AreEqual(2, c1.CompositeRoleTypes.Length);
-
-            var a1_string = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            a1_string.AssociationType.ObjectType = a1;
-            a1_string.RoleType.ObjectType = allorsString;
-
-            Assert.AreEqual(2, c1.CompositeRoleTypes.Length);
-
-            var i1_i2 = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
+            var i1_i2 = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
             i1_i2.AssociationType.ObjectType = i1;
             i1_i2.RoleType.ObjectType = i2;
 
-            Assert.AreEqual(3, c1.CompositeRoleTypes.Length);
+            Assert.AreEqual(2, c1.RoleTypes.Count());
 
-            var i1_string = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            i1_string.AssociationType.ObjectType = i1;
-            i1_string.RoleType.ObjectType = allorsString;
+            var ix = new InterfaceBuilder(this.Domain, Guid.NewGuid()).WithSingularName("ix").WithPluralName("ixs").Build();
 
-            Assert.AreEqual(3, c1.CompositeRoleTypes.Length);
+            var ix_c2 = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
+            ix_c2.AssociationType.ObjectType = ix;
+            ix_c2.RoleType.ObjectType = c2;
 
-            RemoveDirectSupertypes(a1);
+            Assert.AreEqual(2, c1.RoleTypes.Count());
 
-            Assert.AreEqual(2, c1.CompositeRoleTypes.Length);
+            new InheritanceBuilder(this.Domain, Guid.NewGuid()).WithSubtype(c1).WithSupertype(ix).Build();
 
-            a1.AddDirectSupertype(i1);
-
-            Assert.AreEqual(3, c1.CompositeRoleTypes.Length);
-
-            Assert.AreEqual(2, c1.CompositeRoleTypes.Length);
-
-            a1.AddDirectSupertype(i1);
-
-            Assert.AreEqual(3, c1.CompositeRoleTypes.Length);
-
-            Assert.AreEqual(3, c1.CompositeRoleTypes.Length);
-
-            Assert.AreEqual(3, c1.CompositeRoleTypes.Length);
-
-            Assert.AreEqual(2, c1.CompositeRoleTypes.Length);
-
-            Assert.AreEqual(1, c1.CompositeRoleTypes.Length);
-
-            Assert.AreEqual(0, c1.CompositeRoleTypes.Length);
+            Assert.AreEqual(3, c1.RoleTypes.Count());
         }
 
         [Test]
@@ -260,7 +108,7 @@ namespace Allors.Meta.Static
             var c3 = this.Population.C3;
             var c4 = this.Population.C4;
 
-            var c1_c2 = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
+            var c1_c2 = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
             c1_c2.AssociationType.ObjectType = c1;
             c1_c2.RoleType.ObjectType = c2;
 
@@ -269,7 +117,7 @@ namespace Allors.Meta.Static
             Assert.IsFalse(c3.ContainsAssociationType(c1_c2.AssociationType));
             Assert.IsFalse(c4.ContainsAssociationType(c1_c2.AssociationType));
 
-            var c1_c3 = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
+            var c1_c3 = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
             c1_c3.AssociationType.ObjectType = c1;
             c1_c3.RoleType.ObjectType = c3;
 
@@ -294,7 +142,7 @@ namespace Allors.Meta.Static
             var c3 = this.Population.C3;
             var c4 = this.Population.C4;
 
-            var c1_c2 = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
+            var c1_c2 = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
             c1_c2.AssociationType.ObjectType = c1;
             c1_c2.RoleType.ObjectType = c2;
 
@@ -303,7 +151,7 @@ namespace Allors.Meta.Static
             Assert.IsFalse(c3.ContainsRoleType(c1_c2.RoleType));
             Assert.IsFalse(c4.ContainsRoleType(c1_c2.RoleType));
 
-            var c1_c3 = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
+            var c1_c3 = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
             c1_c3.AssociationType.ObjectType = c1;
             c1_c3.RoleType.ObjectType = c3;
 
@@ -323,351 +171,141 @@ namespace Allors.Meta.Static
         {
             this.Populate();
 
-            var thisType = this.Domain.AddDeclaredObjectType(Guid.NewGuid());
+            var thisType = new ClassBuilder(this.Domain, Guid.NewGuid()).Build();
             thisType.SingularName = "ThisType";
             thisType.PluralName = "TheseTypes";
 
-            var thatType = this.Domain.AddDeclaredObjectType(Guid.NewGuid());
+            var thatType = new ClassBuilder(this.Domain, Guid.NewGuid()).Build();
             thatType.SingularName = "ThatType";
             thatType.PluralName = "ThatTypes";
 
-            var supertype = this.Domain.AddDeclaredObjectType(Guid.NewGuid());
+            var supertype = new InterfaceBuilder(this.Domain, Guid.NewGuid()).Build();
             supertype.SingularName = "Supertype";
             supertype.PluralName = "Supertypes";
-            supertype.IsInterface = true;
 
-            thisType.AddDirectSupertype(supertype);
+            new InheritanceBuilder(this.Domain, Guid.NewGuid()).WithSubtype(thisType).WithSupertype(supertype).Build();
 
-            var relationTypeWhereAssociation = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
+            var relationTypeWhereAssociation = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
             relationTypeWhereAssociation.AssociationType.ObjectType = thisType;
             relationTypeWhereAssociation.RoleType.ObjectType = thatType;
 
-            var relationTypeWhereRole = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
+            var relationTypeWhereRole = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
             relationTypeWhereRole.AssociationType.ObjectType = thatType;
             relationTypeWhereRole.RoleType.ObjectType = thisType;
             relationTypeWhereRole.RoleType.AssignedSingularName = "to";
             relationTypeWhereRole.RoleType.AssignedPluralName = "tos";
 
-            Assert.IsTrue(this.Domain.IsValid);
-        }
-
-        [Test]
-        public void DirectSuperinterfaces()
-        {
-            this.Populate();
-
-            // Class
-            var c1 = this.Population.C1;
-
-            c1.AddDirectSupertype(this.Population.I1);
-
-            Assert.AreEqual(1, c1.DirectSuperinterfaces.Length);
-
-            c1.AddDirectSupertype(this.Population.I2);
-
-            Assert.AreEqual(2, c1.DirectSuperinterfaces.Length);
-
-            RemoveDirectSupertypes(c1);
-
-            Assert.AreEqual(0, c1.DirectSuperinterfaces.Length);
-
-            c1.AddDirectSupertype(this.Population.I1);
-
-            Assert.AreEqual(1, c1.DirectSuperinterfaces.Length);
-
-            c1.AddDirectSupertype(this.Population.I2);
-
-            Assert.AreEqual(1, c1.DirectSuperinterfaces.Length);
-
-            RemoveDirectSupertypes(c1);
-
-            Assert.AreEqual(0, c1.DirectSuperinterfaces.Length);
+            Assert.IsTrue(this.MetaPopulation.IsValid);
         }
 
         [Test]
         public void DirectSupertypes()
         {
-            this.Populate();
+            var c1 = new ClassBuilder(this.Domain, Guid.NewGuid()).WithSingularName("c1").WithPluralName("c1s").Build();
+            var c2 = new ClassBuilder(this.Domain, Guid.NewGuid()).WithSingularName("c2").WithPluralName("c2s").Build();
 
-            // Class
-            var c1 = this.Population.C1;
+            var i1 = new InterfaceBuilder(this.Domain, Guid.NewGuid()).WithSingularName("i1").WithPluralName("i1s").Build();
+            var i2 = new InterfaceBuilder(this.Domain, Guid.NewGuid()).WithSingularName("i2").WithPluralName("i2s").Build();
 
-            Assert.AreEqual(1, c1.DirectSupertypes.Length);
+            Assert.AreEqual(0, c1.DirectSupertypes.Count());
 
-            RemoveDirectSupertypes(c1);
+            new InheritanceBuilder(this.Domain, Guid.NewGuid()).WithSubtype(c1).WithSupertype(i1).Build();
 
-            Assert.AreEqual(0, c1.DirectSupertypes.Length);
+            Assert.AreEqual(1, c1.DirectSupertypes.Count());
+
+            new InheritanceBuilder(this.Domain, Guid.NewGuid()).WithSubtype(c1).WithSupertype(i2).Build();
+
+            Assert.AreEqual(2, c1.DirectSupertypes.Count());
+
+            new InheritanceBuilder(this.Domain, Guid.NewGuid()).WithSubtype(c2).WithSupertype(i1).Build();
+
+            Assert.AreEqual(2, c1.DirectSupertypes.Count());
         }
 
         [Test]
-        public void ExclusiveAssociations()
+        public void LeafClasses()
         {
-            this.Populate();
+            var c1 = new ClassBuilder(this.Domain, Guid.NewGuid()).WithSingularName("c1").WithPluralName("c1s").Build();
+            var c2 = new ClassBuilder(this.Domain, Guid.NewGuid()).WithSingularName("c2").WithPluralName("c2s").Build();
 
-            var c1 = this.Population.C1;
-            var c2 = this.Population.C2;
-            var a1 = this.Population.A1;
-            var a2 = this.Population.A2;
-            var i1 = this.Population.I1;
-            var i2 = this.Population.I2;
-            var i3 = this.Population.I3;
+            var i1 = new InterfaceBuilder(this.Domain, Guid.NewGuid()).WithSingularName("i1").WithPluralName("i1s").Build();
+            var i2 = new InterfaceBuilder(this.Domain, Guid.NewGuid()).WithSingularName("i2").WithPluralName("i2s").Build();
 
-            // c1 -> a1 -> i1
-            // -> i2 -> i3
-            c1.AddDirectSupertype(i2);
-            i2.AddDirectSupertype(i3);
+            Assert.AreEqual(1, c1.LeafClasses.Count());
+            Assert.AreEqual(c1, c1.LeafClasses.First());
+            Assert.AreEqual(1, c2.LeafClasses.Count());
+            Assert.AreEqual(c2, c2.LeafClasses.First());
+            Assert.AreEqual(0, i1.LeafClasses.Count());
+            Assert.AreEqual(0, i2.LeafClasses.Count());
 
-            Assert.AreEqual(0, c2.ExclusiveAssociationTypes.Length);
+            new InheritanceBuilder(this.Domain, Guid.NewGuid()).WithSubtype(c1).WithSupertype(i1).Build();
 
-            var c1_c2 = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            c1_c2.AssociationType.ObjectType = c1;
-            c1_c2.RoleType.ObjectType = c2;
+            Assert.AreEqual(1, c1.LeafClasses.Count());
+            Assert.AreEqual(c1, c1.LeafClasses.First());
+            Assert.AreEqual(1, c2.LeafClasses.Count());
+            Assert.AreEqual(c2, c2.LeafClasses.First());
+            Assert.AreEqual(1, i1.LeafClasses.Count());
+            Assert.AreEqual(c1, i1.LeafClasses.First());
+            Assert.AreEqual(0, i2.LeafClasses.Count());
 
-            Assert.AreEqual(1, c2.ExclusiveAssociationTypes.Length);
+            new InheritanceBuilder(this.Domain, Guid.NewGuid()).WithSubtype(c2).WithSupertype(i2).Build();
 
-            var a1_a2 = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            a1_a2.AssociationType.ObjectType = a1;
-            a1_a2.RoleType.ObjectType = a2;
+            Assert.AreEqual(1, c1.LeafClasses.Count());
+            Assert.AreEqual(c1, c1.LeafClasses.First());
+            Assert.AreEqual(1, c2.LeafClasses.Count());
+            Assert.AreEqual(c2, c2.LeafClasses.First());
+            Assert.AreEqual(1, i1.LeafClasses.Count());
+            Assert.AreEqual(c1, i1.LeafClasses.First());
+            Assert.AreEqual(1, i2.LeafClasses.Count());
+            Assert.AreEqual(c2, i2.LeafClasses.First());
 
-            Assert.AreEqual(1, c2.ExclusiveAssociationTypes.Length);
+            new InheritanceBuilder(this.Domain, Guid.NewGuid()).WithSubtype(c1).WithSupertype(i2).Build();
 
-            var i1_i2 = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            i1_i2.AssociationType.ObjectType = i1;
-            i1_i2.RoleType.ObjectType = i2;
-
-            Assert.AreEqual(1, c2.ExclusiveAssociationTypes.Length);
-
-            // TODO: see Exclusive RoleTypes
+            Assert.AreEqual(1, c1.LeafClasses.Count());
+            Assert.AreEqual(c1, c1.LeafClasses.First());
+            Assert.AreEqual(1, c2.LeafClasses.Count());
+            Assert.AreEqual(c2, c2.LeafClasses.First());
+            Assert.AreEqual(1, i1.LeafClasses.Count());
+            Assert.AreEqual(c1, i1.LeafClasses.First());
+            Assert.AreEqual(2, i2.LeafClasses.Count());
+            Assert.Contains(c1, i2.LeafClasses.ToList());
+            Assert.Contains(c2, i2.LeafClasses.ToList());
         }
 
         [Test]
-        public void ExclusiveConcreteSubclass()
+        public void ExclusiveLeafClass()
         {
-            var c1 = this.Domain.AddDeclaredObjectType(Guid.NewGuid());
+            var c1 = new ClassBuilder(this.Domain, Guid.NewGuid()).WithSingularName("c1").WithPluralName("c1s").Build();
+            var c2 = new ClassBuilder(this.Domain, Guid.NewGuid()).WithSingularName("c2").WithPluralName("c2s").Build();
 
-            Assert.AreEqual(c1, c1.ExclusiveConcreteSubclass);
+            var i1 = new InterfaceBuilder(this.Domain, Guid.NewGuid()).WithSingularName("i1").WithPluralName("i1s").Build();
+            var i2 = new InterfaceBuilder(this.Domain, Guid.NewGuid()).WithSingularName("i2").WithPluralName("i2s").Build();
 
-            var a1 = this.Domain.AddDeclaredObjectType(Guid.NewGuid());
-            a1.IsAbstract = true;
-            c1.AddDirectSupertype(a1);
+            Assert.AreEqual(c1, c1.ExclusiveLeafClass);
+            Assert.AreEqual(c2, c2.ExclusiveLeafClass);
+            Assert.IsNull(i1.ExclusiveLeafClass);
+            Assert.IsNull(i2.ExclusiveLeafClass);
 
-            Assert.AreEqual(c1, c1.ExclusiveConcreteSubclass);
-            Assert.AreEqual(c1, a1.ExclusiveConcreteSubclass);
+            new InheritanceBuilder(this.Domain, Guid.NewGuid()).WithSubtype(c1).WithSupertype(i1).Build();
 
-            var i1 = this.Domain.AddDeclaredObjectType(Guid.NewGuid());
-            i1.IsInterface = true;
-            a1.AddDirectSupertype(i1);
+            Assert.AreEqual(c1, c1.ExclusiveLeafClass);
+            Assert.AreEqual(c2, c2.ExclusiveLeafClass);
+            Assert.AreEqual(c1, i1.ExclusiveLeafClass);
+            Assert.IsNull(i2.ExclusiveLeafClass);
 
-            Assert.AreEqual(c1, c1.ExclusiveConcreteSubclass);
-            Assert.AreEqual(c1, a1.ExclusiveConcreteSubclass);
-            Assert.AreEqual(c1, i1.ExclusiveConcreteSubclass);
+            new InheritanceBuilder(this.Domain, Guid.NewGuid()).WithSubtype(c2).WithSupertype(i2).Build();
 
-            var a2 = this.Domain.AddDeclaredObjectType(Guid.NewGuid());
-            a2.IsAbstract = true;
+            Assert.AreEqual(c1, c1.ExclusiveLeafClass);
+            Assert.AreEqual(c2, c2.ExclusiveLeafClass);
+            Assert.AreEqual(c1, i1.ExclusiveLeafClass);
+            Assert.AreEqual(c2, i2.ExclusiveLeafClass);
 
-            Assert.AreEqual(c1, c1.ExclusiveConcreteSubclass);
-            Assert.AreEqual(c1, a1.ExclusiveConcreteSubclass);
-            Assert.AreEqual(c1, i1.ExclusiveConcreteSubclass);
+            new InheritanceBuilder(this.Domain, Guid.NewGuid()).WithSubtype(c1).WithSupertype(i2).Build();
 
-            Assert.AreEqual(null, a2.ExclusiveConcreteSubclass);
-
-            var c2 = this.Domain.AddDeclaredObjectType(Guid.NewGuid());
-            c2.AddDirectSupertype(a2);
-
-            Assert.AreEqual(c1, c1.ExclusiveConcreteSubclass);
-            Assert.AreEqual(c1, a1.ExclusiveConcreteSubclass);
-            Assert.AreEqual(c1, i1.ExclusiveConcreteSubclass);
-
-            Assert.AreEqual(c2, c2.ExclusiveConcreteSubclass);
-            Assert.AreEqual(c2, a2.ExclusiveConcreteSubclass);
-
-            var i12 = this.Domain.AddDeclaredObjectType(Guid.NewGuid());
-            i12.IsInterface = true;
-
-            a1.AddDirectSupertype(i12);
-            a2.AddDirectSupertype(i12);
-
-            Assert.AreEqual(c1, c1.ExclusiveConcreteSubclass);
-            Assert.AreEqual(c1, a1.ExclusiveConcreteSubclass);
-            Assert.AreEqual(c1, i1.ExclusiveConcreteSubclass);
-
-            Assert.AreEqual(c2, c2.ExclusiveConcreteSubclass);
-            Assert.AreEqual(c2, a2.ExclusiveConcreteSubclass);
-
-            Assert.AreEqual(null, i12.ExclusiveConcreteSubclass);
-
-            var c1X = this.Domain.AddDeclaredObjectType(Guid.NewGuid());
-            c1X.AddDirectSupertype(a1);
-
-            Assert.AreEqual(null, c1.ExclusiveConcreteSubclass);
-            Assert.AreEqual(null, a1.ExclusiveConcreteSubclass);
-            Assert.AreEqual(null, i1.ExclusiveConcreteSubclass);
-
-            Assert.AreEqual(null, c1X.ExclusiveConcreteSubclass);
-
-            Assert.AreEqual(c2, c2.ExclusiveConcreteSubclass);
-            Assert.AreEqual(c2, a2.ExclusiveConcreteSubclass);
-
-            Assert.AreEqual(null, i12.ExclusiveConcreteSubclass);
-        }
-
-        [Test]
-        public void ExclusiveInterfaces()
-        {
-            this.Populate();
-
-            var c1 = this.Population.C1;
-            var a1 = this.Population.A1;
-            var i1 = this.Population.I1;
-            var i2 = this.Population.I2;
-
-            var i1_i2_array = new MetaObject[2];
-            i1_i2_array[0] = i1;
-            i1_i2_array[1] = i2;
-
-            Assert.AreEqual(0, c1.ExclusiveSuperinterfaces.Length);
-            Assert.AreEqual(2, a1.ExclusiveSuperinterfaces.Length);
-
-            RemoveDirectSupertypes(c1);
-            c1.AddDirectSupertype(i1);
-            c1.AddDirectSupertype(i2);
-
-            Assert.AreEqual(2, c1.ExclusiveSuperinterfaces.Length);
-            Assert.AreEqual(2, a1.ExclusiveSuperinterfaces.Length);
-
-            RemoveDirectSupertypes(c1);
-            c1.AddDirectSupertype(a1);
-
-            Assert.AreEqual(0, c1.ExclusiveSuperinterfaces.Length);
-            Assert.AreEqual(2, a1.ExclusiveSuperinterfaces.Length);
-
-            c1.AddDirectSupertype(i2);
-
-            Assert.AreEqual(1, c1.ExclusiveSuperinterfaces.Length);
-            Assert.AreEqual(2, a1.ExclusiveSuperinterfaces.Length);
-
-            a1.AddDirectSupertype(i2);
-
-            Assert.AreEqual(0, c1.ExclusiveSuperinterfaces.Length);
-            Assert.AreEqual(3, a1.ExclusiveSuperinterfaces.Length);
-
-            Assert.AreEqual(0, c1.ExclusiveSuperinterfaces.Length);
-            Assert.AreEqual(2, a1.ExclusiveSuperinterfaces.Length);
-
-            RemoveDirectSupertypes(a1);
-
-            Assert.AreEqual(1, c1.ExclusiveSuperinterfaces.Length);
-            Assert.AreEqual(0, a1.ExclusiveSuperinterfaces.Length);
-        }
-
-        [Test]
-        public void ExclusiveRoles()
-        {
-            this.Populate();
-
-            var c1 = this.Population.C1;
-            var c2 = this.Population.C2;
-            var a1 = this.Population.A1;
-            var a2 = this.Population.A2;
-            var i1 = this.Population.I1;
-            var i2 = this.Population.I2;
-            var i3 = this.Population.I3;
-            var i4 = this.Population.I4;
-
-            // c1 -> a1 -> i1
-            // -> i2 -> i3
-            c1.AddDirectSupertype(i2);
-            i2.AddDirectSupertype(i3);
-
-            Assert.AreEqual(0, c1.ExclusiveRoleTypes.Length);
-
-            var c1_c2 = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            c1_c2.AssociationType.ObjectType = c1;
-            c1_c2.RoleType.ObjectType = c2;
-
-            Assert.AreEqual(1, c1.ExclusiveRoleTypes.Length);
-
-            var a1_a2 = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            a1_a2.AssociationType.ObjectType = a1;
-            a1_a2.RoleType.ObjectType = a2;
-
-            Assert.AreEqual(1, c1.ExclusiveRoleTypes.Length);
-
-            var i1_i2 = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            i1_i2.AssociationType.ObjectType = i1;
-            i1_i2.RoleType.ObjectType = i2;
-
-            Assert.AreEqual(1, c1.ExclusiveRoleTypes.Length);
-
-            var i2_i3 = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            i2_i3.AssociationType.ObjectType = i2;
-            i2_i3.RoleType.ObjectType = i3;
-
-            Assert.AreEqual(2, c1.ExclusiveRoleTypes.Length);
-
-            var i3_i4 = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            i3_i4.AssociationType.ObjectType = i3;
-            i3_i4.RoleType.ObjectType = i4;
-
-            Assert.AreEqual(3, c1.ExclusiveRoleTypes.Length);
-
-            RemoveDirectSupertypes(c1);
-
-            Assert.AreEqual(1, c1.ExclusiveRoleTypes.Length);
-
-            c1.AddDirectSupertype(i2);
-
-            Assert.AreEqual(3, c1.ExclusiveRoleTypes.Length);
-
-            Assert.AreEqual(2, c1.ExclusiveRoleTypes.Length);
-
-            i2.AddDirectSupertype(i3);
-
-            Assert.AreEqual(2, c1.ExclusiveRoleTypes.Length);
-
-            i2_i3.AssociationType.ObjectType = c2;
-
-            Assert.AreEqual(1, c1.ExclusiveRoleTypes.Length);
-
-            c1_c2.AssociationType.ObjectType = c2;
-
-            Assert.AreEqual(0, c1.ExclusiveRoleTypes.Length);
-        }
-
-        [Test]
-        public void ExclusiveRootClass()
-        {
-            this.Populate();
-
-            var c1 = this.Population.C1;
-            var a1 = this.Population.A1;
-            var i1 = this.Population.I1;
-
-            var a2 = this.Population.A2;
-
-            Assert.AreEqual(a1, c1.ExclusiveRootClass);
-            Assert.AreEqual(a1, a1.ExclusiveRootClass);
-            Assert.AreEqual(a1, i1.ExclusiveRootClass);
-
-            a1.AddDirectSupertype(a2);
-
-            Assert.AreEqual(a2, c1.ExclusiveRootClass);
-            Assert.AreEqual(a2, a1.ExclusiveRootClass);
-            Assert.AreEqual(a2, a2.ExclusiveRootClass);
-            Assert.AreEqual(a2, i1.ExclusiveRootClass);
-
-            var i12 = this.Population.I12;
-
-            Assert.AreEqual(null, i12.ExclusiveRootClass);
-
-            var i = c1.DomainWhereDeclaredObjectType.AddDeclaredObjectType(Guid.NewGuid());
-            i.IsInterface = true;
-
-            Assert.AreEqual(null, i.ExclusiveRootClass);
-
-            c1.AddDirectSupertype(i);
-
-            Assert.AreEqual(a1, i.ExclusiveRootClass);
+            Assert.AreEqual(c1, c1.ExclusiveLeafClass);
+            Assert.AreEqual(c2, c2.ExclusiveLeafClass);
+            Assert.AreEqual(c1, i1.ExclusiveLeafClass);
+            Assert.IsNull(i2.ExclusiveLeafClass);
         }
 
         [Test]
@@ -675,46 +313,16 @@ namespace Allors.Meta.Static
         {
             this.Populate();
 
-            var thisType = this.Domain.AddDeclaredObjectType(Guid.NewGuid());
+            var thisType = new ClassBuilder(this.Domain, Guid.NewGuid()).WithSingularName("c1").WithPluralName("c1s").Build();
             thisType.SingularName = "ThisType";
-            thisType.PluralName = "ThisTypes";
+            thisType.PluralName = "TheseTypes";
 
-            Assert.IsTrue(this.Domain.IsValid);
+            Assert.IsTrue(this.MetaPopulation.IsValid);
 
-            foreach (var objectType in this.Domain.CompositeObjectTypes)
+            foreach (var objectType in this.MetaPopulation.Classes)
             {
-                Assert.IsTrue(objectType.ExistId);
+                Assert.IsTrue(objectType.Id != Guid.Empty);
             }
-
-            var exceptionThrown = false;
-            try
-            {
-                thisType.Id = Guid.NewGuid();
-            }
-            catch
-            {
-                exceptionThrown = true;
-            }
-
-            Assert.IsTrue(exceptionThrown);
-        }
-
-        [Test]
-        public void Inheritance()
-        {
-            this.Populate();
-
-            var inheritance = this.Population.C1.AddDirectSupertype(this.Population.A2);
-
-            Assert.AreEqual(1, this.Domain.Inheritances.Length);
-
-            inheritance.Subtype = this.Population.C1;
-
-            Assert.AreEqual(1, this.Domain.Inheritances.Length);
-
-            inheritance.Supertype = this.Population.A1;
-
-            Assert.AreEqual(1, this.Domain.Inheritances.Length);
         }
 
         [Test]
@@ -722,171 +330,19 @@ namespace Allors.Meta.Static
         {
             this.Populate();
 
-            foreach (var objectType in this.Domain.CompositeObjectTypes)
+            foreach (var composite in this.MetaPopulation.Composites)
             {
-                Assert.AreEqual(objectType.IsClass, !objectType.IsInterface);
+                Assert.AreEqual(composite.IsClass, !composite.IsInterface);
             }
 
-            foreach (var objectType in this.Population.Classes)
+            foreach (var objectType in this.MetaPopulation.Classes)
             {
                 Assert.IsTrue(objectType.IsClass);
             }
 
-            foreach (var objectType in this.Population.Interfaces)
+            foreach (var objectType in this.MetaPopulation.Interfaces)
             {
                 Assert.IsFalse(objectType.IsClass);
-            }
-        }
-
-        [Test]
-        public void IsComposite()
-        {
-            this.Populate();
-
-            foreach (var objectType in this.Domain.CompositeObjectTypes)
-            {
-                Assert.AreEqual(objectType.IsUnit, !objectType.IsComposite);
-            }
-
-            foreach (var objectType in this.Population.Composites)
-            {
-                Assert.IsTrue(objectType.IsComposite);
-            }
-
-            foreach (var objectType in this.Population.UnitTypes)
-            {
-                Assert.IsFalse(objectType.IsComposite);
-            }
-        }
-
-        [Test]
-        public void IsConcrete()
-        {
-            this.Populate();
-
-            foreach (var objectType in this.Population.UnitTypes)
-            {
-                Assert.IsTrue(objectType.IsConcrete);
-            }
-
-            foreach (var objectType in this.Population.CompositeConcreteClasses)
-            {
-                Assert.IsTrue(objectType.IsConcrete);
-            }
-
-            foreach (var objectType in this.Population.CompositeAbstractClasses)
-            {
-                Assert.IsFalse(objectType.IsConcrete);
-            }
-
-            foreach (var objectType in this.Population.Interfaces)
-            {
-                Assert.IsFalse(objectType.IsConcrete);
-            }
-        }
-
-        [Test]
-        public void IsConcreteComposite()
-        {
-            this.Populate();
-
-            foreach (var objectType in this.Population.CompositeConcreteClasses)
-            {
-                Assert.IsTrue(objectType.IsConcreteComposite);
-            }
-
-            foreach (var objectType in this.Population.UnitTypes)
-            {
-                Assert.IsFalse(objectType.IsConcreteComposite);
-            }
-
-            foreach (var objectType in this.Population.CompositeAbstractClasses)
-            {
-                Assert.IsFalse(objectType.IsConcreteComposite);
-            }
-
-            foreach (var objectType in this.Population.Interfaces)
-            {
-                Assert.IsFalse(objectType.IsConcreteComposite);
-            }
-        }
-
-        [Test]
-        public void IsInterface()
-        {
-            this.Populate();
-
-            var c1 = this.Population.C1;
-            var a1 = this.Population.A1;
-            var i1 = this.Population.I1;
-
-            Assert.AreEqual(1, c1.Superclasses.Length);
-            Assert.AreEqual(2, i1.Subclasses.Length);
-
-            a1.IsInterface = true;
-
-            Assert.AreEqual(0, c1.Superclasses.Length);
-            Assert.AreEqual(1, i1.Subclasses.Length);
-        }
-
-        [Test]
-        public void IsRootClass()
-        {
-            this.Populate();
-
-            var c1 = this.Population.C1;
-            var a1 = this.Population.A1;
-            var i1 = this.Population.I1;
-
-            Assert.IsFalse(c1.IsRootClass);
-            Assert.IsTrue(a1.IsRootClass);
-            Assert.IsFalse(i1.IsRootClass);
-
-            var a2 = this.Population.A2;
-            Assert.IsTrue(a2.IsRootClass);
-
-            a1.AddDirectSupertype(a2);
-
-            Assert.IsFalse(c1.IsRootClass);
-            Assert.IsFalse(a1.IsRootClass);
-            Assert.IsFalse(i1.IsRootClass);
-
-            Assert.IsTrue(a2.IsRootClass);
-        }
-
-        [Test]
-        public void IsScaleable()
-        {
-            this.Populate();
-
-            foreach (var objectType in this.Domain.CompositeObjectTypes)
-            {
-                if (objectType.IsDecimal)
-                {
-                    Assert.IsTrue(objectType.IsScaleRequired);
-                }
-                else
-                {
-                    Assert.IsFalse(objectType.IsScaleRequired);
-                }
-            }
-        }
-
-        [Test]
-        public void IsSizeable()
-        {
-            this.Populate();
-
-            foreach (var objectType in this.Domain.CompositeObjectTypes)
-            {
-                if (objectType.IsString || objectType.IsDecimal)
-                {
-                    Assert.IsTrue(objectType.IsSizeRequired);
-                }
-                else
-                {
-                    Assert.IsFalse(objectType.IsSizeRequired);
-                }
             }
         }
 
@@ -897,459 +353,98 @@ namespace Allors.Meta.Static
 
             var c1 = this.Population.C1;
             var c2 = this.Population.C2;
-            var a1 = this.Population.A1;
-            var a2 = this.Population.A2;
             var i1 = this.Population.I1;
             var i2 = this.Population.I2;
 
-            Assert.AreEqual(0, c1.MethodTypes.Length);
+            Assert.AreEqual(0, c1.MethodTypes.Count());
 
-            var methodC1 = this.Domain.AddDeclaredMethodType(Guid.NewGuid());
+            var methodC1 = new MethodTypeBuilder(this.Domain, Guid.NewGuid()).Build();
             methodC1.ObjectType = this.Population.C1;
             methodC1.Name = "MethodC1";
 
-            Assert.AreEqual(1, c1.MethodTypes.Length);
+            Assert.AreEqual(1, c1.MethodTypes.Count());
 
-            var methodA1 = this.Domain.AddDeclaredMethodType(Guid.NewGuid());
-            methodA1.ObjectType = this.Population.A1;
-            methodA1.Name = "MethodA1";
+            var methodC2 = new MethodTypeBuilder(this.Domain, Guid.NewGuid()).Build();
+            methodC2.ObjectType = this.Population.C2;
+            methodC2.Name = "MethodC2";
 
-            Assert.AreEqual(2, c1.MethodTypes.Length);
+            Assert.AreEqual(1, c1.MethodTypes.Count());
 
-            var methodI1 = this.Domain.AddDeclaredMethodType(Guid.NewGuid());
+            var methodI1 = new MethodTypeBuilder(this.Domain, Guid.NewGuid()).Build();
             methodI1.ObjectType = this.Population.I1;
             methodI1.Name = "MethodI1";
 
-            Assert.AreEqual(3, c1.MethodTypes.Length);
-
-            RemoveDirectSupertypes(a1);
-
-            Assert.AreEqual(2, c1.MethodTypes.Length);
-
-            a1.AddDirectSupertype(i1);
-
-            Assert.AreEqual(3, c1.MethodTypes.Length);
-
-            Assert.AreEqual(2, c1.MethodTypes.Length);
-
-            a1.AddDirectSupertype(i1);
-
-            Assert.AreEqual(2, c1.MethodTypes.Length);
-
-            Assert.AreEqual(1, c1.MethodTypes.Length);
-
-            methodC1.ObjectType = c2;
-
-            Assert.AreEqual(0, c1.MethodTypes.Length);
-        }
-
-        [Test]
-        public void Roles()
-        {
-            this.Populate();
-
-            var c1 = this.Population.C1;
-            var c2 = this.Population.C2;
-            var a1 = this.Population.A1;
-            var a2 = this.Population.A2;
-            var i1 = this.Population.I1;
-            var i2 = this.Population.I2;
-
-            Assert.AreEqual(0, c1.RoleTypes.Length);
-
-            var c1_c2 = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            c1_c2.AssociationType.ObjectType = c1;
-            c1_c2.RoleType.ObjectType = c2;
-
-            Assert.AreEqual(1, c1.RoleTypes.Length);
-
-            var a1_a2 = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            a1_a2.AssociationType.ObjectType = a1;
-            a1_a2.RoleType.ObjectType = a2;
-
-            Assert.AreEqual(2, c1.RoleTypes.Length);
-
-            var i1_i2 = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            i1_i2.AssociationType.ObjectType = i1;
-            i1_i2.RoleType.ObjectType = i2;
-
-            Assert.AreEqual(3, c1.RoleTypes.Length);
-
-            RemoveDirectSupertypes(a1);
-
-            Assert.AreEqual(2, c1.RoleTypes.Length);
-
-            a1.AddDirectSupertype(i1);
-
-            Assert.AreEqual(3, c1.RoleTypes.Length);
-
-            Assert.AreEqual(2, c1.RoleTypes.Length);
-
-            a1.AddDirectSupertype(i1);
-
-            Assert.AreEqual(2, c1.RoleTypes.Length);
-
-            Assert.AreEqual(1, c1.RoleTypes.Length);
-
-            c1_c2.AssociationType.ObjectType = c2;
-
-            Assert.AreEqual(0, c1.RoleTypes.Length);
-        }
-
-        [Test]
-        public void RootClasses()
-        {
-            this.Populate();
-
-            var c1 = this.Population.C1;
-            var a1 = this.Population.A1;
-            var i1 = this.Population.I1;
-
-            var a2 = this.Population.A2;
-
-            Assert.AreEqual(1, c1.RootClasses.Length);
-            Assert.AreEqual(a1, c1.RootClasses[0]);
-            Assert.AreEqual(1, a1.RootClasses.Length);
-            Assert.AreEqual(a1, a1.RootClasses[0]);
-            Assert.AreEqual(1, i1.RootClasses.Length);
-            Assert.AreEqual(a1, i1.RootClasses[0]);
-
-            a1.AddDirectSupertype(a2);
-
-            Assert.AreEqual(1, c1.RootClasses.Length);
-            Assert.AreEqual(a2, c1.RootClasses[0]);
-            Assert.AreEqual(1, a1.RootClasses.Length);
-            Assert.AreEqual(a2, a1.RootClasses[0]);
-            Assert.AreEqual(1, a2.RootClasses.Length);
-            Assert.AreEqual(a2, a2.RootClasses[0]);
-            Assert.AreEqual(1, i1.RootClasses.Length);
-            Assert.AreEqual(a2, i1.RootClasses[0]);
-
-            var i12 = this.Population.I12;
-
-            Assert.AreEqual(1, c1.RootClasses.Length);
-            Assert.AreEqual(1, a1.RootClasses.Length);
-            Assert.AreEqual(1, i1.RootClasses.Length);
-            Assert.AreEqual(2, i12.RootClasses.Length);
-
-            var i = c1.DomainWhereDeclaredObjectType.AddDeclaredObjectType(Guid.NewGuid());
-            i.IsInterface = true;
-
-            Assert.AreEqual(0, i.RootClasses.Length);
-
-            c1.AddDirectSupertype(i);
-
-            Assert.AreEqual(1, i.RootClasses.Length);
-        }
-
-        [Test]
-        public void SpecificUnitRoles()
-        {
-            this.Populate();
-
-            var c1 = this.Population.C1;
-            var c2 = this.Population.C2;
-
-            Assert.AreEqual(0, c1.StringRoleTypes.Length);
-            Assert.AreEqual(0, c2.StringRoleTypes.Length);
-
-            var c1_x_string = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            c1_x_string.AssociationType.ObjectType = c1;
-            c1_x_string.RoleType.ObjectType = this.Population.StringType;
-            c1_x_string.RoleType.Size = 100;
-            c1_x_string.RoleType.AssignedSingularName = "x";
-
-            Assert.AreEqual(1, c1.StringRoleTypes.Length);
-            Assert.AreEqual(0, c2.StringRoleTypes.Length);
-
-            var c2_string = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            c2_string.AssociationType.ObjectType = c2;
-            c2_string.RoleType.ObjectType = this.Population.StringType;
-            c2_string.RoleType.Size = 50;
-
-            Assert.AreEqual(1, c1.StringRoleTypes.Length);
-            Assert.AreEqual(1, c2.StringRoleTypes.Length);
-
-            var c1_y_string = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            c1_y_string.AssociationType.ObjectType = c1;
-            c1_y_string.RoleType.ObjectType = this.Population.StringType;
-            c1_y_string.RoleType.Size = 200;
-            c1_y_string.RoleType.AssignedSingularName = "y";
-
-            Assert.AreEqual(2, c1.StringRoleTypes.Length);
-            Assert.AreEqual(1, c2.StringRoleTypes.Length);
-        }
-
-        [Test]
-        public void SubClasses()
-        {
-            this.Populate();
-
-            var c1 = this.Population.C1;
-            var a1 = this.Population.A1;
-            var i1 = this.Population.I1;
-
-            Assert.AreEqual(2, i1.Subclasses.Length);
-            Assert.AreEqual(1, a1.Subclasses.Length);
-            Assert.AreEqual(0, c1.Subclasses.Length);
-
-            Assert.AreEqual(1, i1.Subclasses.Length);
-            Assert.AreEqual(0, a1.Subclasses.Length);
+            Assert.AreEqual(2, c1.MethodTypes.Count());
         }
 
         [Test]
         public void SubTypes()
         {
-            this.Populate();
+            var c1 = new ClassBuilder(this.Domain, Guid.NewGuid()).WithSingularName("c1").WithPluralName("c1s").Build();
 
-            var c1 = this.Population.C1;
-            var a1 = this.Population.A1;
-            var i1 = this.Population.I1;
+            var i1 = new InterfaceBuilder(this.Domain, Guid.NewGuid()).WithSingularName("i1").WithPluralName("i1s").Build();
+            var i2 = new InterfaceBuilder(this.Domain, Guid.NewGuid()).WithSingularName("i2").WithPluralName("i2s").Build();
 
-            Assert.AreEqual(2, i1.Subtypes.Length);
-            Assert.AreEqual(1, a1.Subclasses.Length);
-            Assert.AreEqual(0, c1.Subclasses.Length);
-        }
+            var i12 = new InterfaceBuilder(this.Domain, Guid.NewGuid()).WithSingularName("i1").WithPluralName("i1s").Build();
 
-        [Test]
-        public void SuperClasses()
-        {
-            this.Populate();
+            new InheritanceBuilder(this.Domain, Guid.NewGuid()).WithSubtype(c1).WithSupertype(i1).Build();
 
-            var c1 = this.Population.C1;
-            var a1 = this.Population.A1;
+            new InheritanceBuilder(this.Domain, Guid.NewGuid()).WithSubtype(i1).WithSupertype(i12).Build();
+            new InheritanceBuilder(this.Domain, Guid.NewGuid()).WithSubtype(i2).WithSupertype(i12).Build();
 
-            Assert.AreEqual(1, c1.Superclasses.Length);
-
-            a1.AddDirectSupertype(this.Population.A2);
-
-            Assert.AreEqual(2, c1.Superclasses.Length);
-
-            RemoveDirectSupertypes(c1);
-
-            Assert.AreEqual(0, c1.Superclasses.Length);
-
-            c1.AddDirectSupertype(this.Population.A1);
-
-            Assert.AreEqual(2, c1.Superclasses.Length);
-
-            RemoveDirectSupertypes(a1);
-
-            Assert.AreEqual(1, c1.Superclasses.Length);
-
-            a1.AddDirectSupertype(this.Population.A2);
-
-            Assert.AreEqual(2, c1.Superclasses.Length);
-
-            Assert.AreEqual(1, c1.Superclasses.Length);
-
-            RemoveDirectSupertypes(c1);
-
-            Assert.AreEqual(0, c1.Superclasses.Length);
-        }
-
-        [Test]
-        public void SuperInterfaces()
-        {
-            this.Populate();
-
-            var c1 = this.Population.C1;
-            var a1 = this.Population.A1;
-
-            Assert.AreEqual(2, c1.Superinterfaces.Length);
-
-            c1.AddDirectSupertype(this.Population.I2);
-
-            Assert.AreEqual(3, c1.Superinterfaces.Length);
-
-            RemoveDirectSupertypes(c1);
-
-            Assert.AreEqual(0, c1.Superinterfaces.Length);
-
-            c1.AddDirectSupertype(this.Population.A1);
-
-            Assert.AreEqual(2, c1.Superinterfaces.Length);
-
-            a1.AddDirectSupertype(this.Population.I2);
-
-            Assert.AreEqual(2, c1.Superinterfaces.Length);
-
-            RemoveDirectSupertypes(a1);
-
-            Assert.AreEqual(0, c1.Superinterfaces.Length);
+            Assert.AreEqual(1, i1.Subtypes.Count());
+            Assert.AreEqual(0, i2.Subtypes.Count());
+            Assert.AreEqual(3, i12.Subtypes.Count());
         }
 
         [Test]
         public void Supertypes()
         {
-            this.Populate();
+            var c1 = new ClassBuilder(this.Domain, Guid.NewGuid()).WithSingularName("c1").WithPluralName("c1s").Build();
+            var c2 = new ClassBuilder(this.Domain, Guid.NewGuid()).WithSingularName("c1").WithPluralName("c1s").Build();
 
-            var c1 = this.Population.C1;
+            var i1 = new InterfaceBuilder(this.Domain, Guid.NewGuid()).WithSingularName("i1").WithPluralName("i1s").Build();
+            var i2 = new InterfaceBuilder(this.Domain, Guid.NewGuid()).WithSingularName("i2").WithPluralName("i2s").Build();
 
-            Assert.AreEqual(3, c1.Supertypes.Length);
-            Assert.Contains(this.Population.A1, c1.Supertypes);
-            Assert.Contains(this.Population.I1, c1.Supertypes);
-            Assert.Contains(this.Population.I12, c1.Supertypes);
+            var i12 = new InterfaceBuilder(this.Domain, Guid.NewGuid()).WithSingularName("i1").WithPluralName("i1s").Build();
 
-            c1.AddDirectSupertype(this.Population.A2);
+            Assert.AreEqual(0, c1.Supertypes.Count());
+            Assert.AreEqual(0, c2.Supertypes.Count());
+            Assert.AreEqual(0, i1.Supertypes.Count());
+            Assert.AreEqual(0, i2.Supertypes.Count());
+            Assert.AreEqual(0, i12.Supertypes.Count());
 
-            Assert.AreEqual(3, c1.Supertypes.Length);
-            Assert.Contains(this.Population.A2, c1.Supertypes);
-            Assert.Contains(this.Population.I2, c1.Supertypes);
-            Assert.Contains(this.Population.I12, c1.Supertypes);
+            new InheritanceBuilder(this.Domain, Guid.NewGuid()).WithSubtype(c1).WithSupertype(i1).Build();
 
-            RemoveDirectSupertypes(c1);
+            Assert.AreEqual(1, c1.Supertypes.Count());
+            Assert.Contains(i1, c1.Supertypes.ToList());
+            Assert.AreEqual(0, c2.Supertypes.Count());
+            Assert.AreEqual(0, i1.Supertypes.Count());
+            Assert.AreEqual(0, i2.Supertypes.Count());
+            Assert.AreEqual(0, i12.Supertypes.Count());
 
-            Assert.AreEqual(0, c1.Supertypes.Length);
+            new InheritanceBuilder(this.Domain, Guid.NewGuid()).WithSubtype(i1).WithSupertype(i12).Build();
 
-            c1.AddDirectSupertype(this.Population.A1);
+            Assert.AreEqual(2, c1.Supertypes.Count());
+            Assert.Contains(i1, c1.Supertypes.ToList());
+            Assert.Contains(i12, c1.Supertypes.ToList());
+            Assert.AreEqual(0, c2.Supertypes.Count());
+            Assert.AreEqual(1, i1.Supertypes.Count());
+            Assert.Contains(i12, i1.Supertypes.ToList());
+            Assert.AreEqual(0, i2.Supertypes.Count());
+            Assert.AreEqual(0, i12.Supertypes.Count());
+            
+            new InheritanceBuilder(this.Domain, Guid.NewGuid()).WithSubtype(i2).WithSupertype(i12).Build();
 
-            Assert.AreEqual(3, c1.Supertypes.Length);
-            Assert.Contains(this.Population.A1, c1.Supertypes);
-            Assert.Contains(this.Population.I1, c1.Supertypes);
-            Assert.Contains(this.Population.I12, c1.Supertypes);
-
-            RemoveDirectSupertypes(c1);
-
-            Assert.AreEqual(0, c1.Supertypes.Length);
-
-            c1.AddDirectSupertype(this.Population.A1);
-
-            Assert.AreEqual(3, c1.Supertypes.Length);
-            Assert.Contains(this.Population.A1, c1.Supertypes);
-            Assert.Contains(this.Population.I1, c1.Supertypes);
-            Assert.Contains(this.Population.I12, c1.Supertypes);
-
-            c1.AddDirectSupertype(this.Population.A2);
-
-            Assert.AreEqual(3, c1.Supertypes.Length);
-            Assert.Contains(this.Population.A2, c1.Supertypes);
-            Assert.Contains(this.Population.I2, c1.Supertypes);
-            Assert.Contains(this.Population.I12, c1.Supertypes);
-        }
-
-        [Test]
-        public void UnitRoleCountGreaterThan32()
-        {
-            this.Populate();
-
-            var c1 = this.Population.C1;
-
-            var allorsString = this.Population.IntegerType;
-
-            var count = 0;
-            MetaRelation c1_string;
-            for (; count < 31; count++)
-            {
-                c1_string = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-                c1_string.AssociationType.ObjectType = c1;
-                c1_string.RoleType.ObjectType = allorsString;
-                c1_string.RoleType.AssignedSingularName = count.ToString(CultureInfo.InvariantCulture);
-            }
-
-            Assert.AreEqual(31, c1.UnitRoleTypes.Length);
-            Assert.IsFalse(c1.UnitRoleTypesCountGreaterThan32);
-
-            c1_string = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            c1_string.AssociationType.ObjectType = c1;
-            c1_string.RoleType.ObjectType = allorsString;
-            c1_string.RoleType.AssignedSingularName = (++count).ToString(CultureInfo.InvariantCulture);
-
-            Assert.AreEqual(32, c1.UnitRoleTypes.Length);
-            Assert.IsFalse(c1.UnitRoleTypesCountGreaterThan32);
-
-            c1_string = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            c1_string.AssociationType.ObjectType = c1;
-            c1_string.RoleType.ObjectType = allorsString;
-            c1_string.RoleType.AssignedSingularName = (++count).ToString(CultureInfo.InvariantCulture);
-
-            Assert.AreEqual(33, c1.UnitRoleTypes.Length);
-            Assert.IsTrue(c1.UnitRoleTypesCountGreaterThan32);
-
-            c1_string = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            c1_string.AssociationType.ObjectType = c1;
-            c1_string.RoleType.ObjectType = allorsString;
-            c1_string.RoleType.AssignedSingularName = (++count).ToString(CultureInfo.InvariantCulture);
-
-            Assert.AreEqual(34, c1.UnitRoleTypes.Length);
-            Assert.IsTrue(c1.UnitRoleTypesCountGreaterThan32);
-        }
-
-        [Test]
-        public void UnitRoles()
-        {
-            this.Populate();
-
-            var c1 = this.Population.C1;
-            var a1 = this.Population.A1;
-            var a2 = this.Population.A2;
-            var i1 = this.Population.I1;
-            var i2 = this.Population.I2;
-
-            var allorsString = this.Population.IntegerType;
-
-            Assert.AreEqual(0, c1.UnitRoleTypes.Length);
-
-            var c1_c1 = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            c1_c1.AssociationType.ObjectType = c1;
-            c1_c1.RoleType.ObjectType = c1;
-            c1_c1.RoleType.AssignedSingularName = "me";
-
-            Assert.AreEqual(0, c1.UnitRoleTypes.Length);
-
-            var c1_string = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            c1_string.AssociationType.ObjectType = c1;
-            c1_string.RoleType.ObjectType = allorsString;
-
-            Assert.AreEqual(1, c1.UnitRoleTypes.Length);
-
-            var a1_a2 = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            a1_a2.AssociationType.ObjectType = a1;
-            a1_a2.RoleType.ObjectType = a2;
-
-            Assert.AreEqual(1, c1.UnitRoleTypes.Length);
-
-            var a1_string = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            a1_string.AssociationType.ObjectType = a1;
-            a1_string.RoleType.ObjectType = allorsString;
-
-            Assert.AreEqual(2, c1.UnitRoleTypes.Length);
-
-            var i1_i2 = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            i1_i2.AssociationType.ObjectType = i1;
-            i1_i2.RoleType.ObjectType = i2;
-
-            Assert.AreEqual(2, c1.UnitRoleTypes.Length);
-
-            var i1_string = this.Domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            i1_string.AssociationType.ObjectType = i1;
-            i1_string.RoleType.ObjectType = allorsString;
-
-            Assert.AreEqual(3, c1.UnitRoleTypes.Length);
-
-            RemoveDirectSupertypes(a1);
-
-            Assert.AreEqual(2, c1.UnitRoleTypes.Length);
-
-            a1.AddDirectSupertype(i1);
-
-            Assert.AreEqual(3, c1.UnitRoleTypes.Length);
-
-            Assert.AreEqual(2, c1.UnitRoleTypes.Length);
-
-            a1.AddDirectSupertype(i1);
-
-            Assert.AreEqual(3, c1.UnitRoleTypes.Length);
-
-            Assert.AreEqual(3, c1.UnitRoleTypes.Length);
-
-            Assert.AreEqual(3, c1.UnitRoleTypes.Length);
-
-            Assert.AreEqual(2, c1.UnitRoleTypes.Length);
-
-            Assert.AreEqual(1, c1.UnitRoleTypes.Length);
-
-            Assert.AreEqual(0, c1.UnitRoleTypes.Length);
+            Assert.AreEqual(2, c1.Supertypes.Count());
+            Assert.Contains(i1, c1.Supertypes.ToList());
+            Assert.Contains(i12, c1.Supertypes.ToList());
+            Assert.AreEqual(0, c2.Supertypes.Count());
+            Assert.AreEqual(1, i1.Supertypes.Count());
+            Assert.Contains(i12, i1.Supertypes.ToList());
+            Assert.AreEqual(1, i2.Supertypes.Count());
+            Assert.Contains(i12, i2.Supertypes.ToList());
+            Assert.AreEqual(0, i12.Supertypes.Count());
         }
 
         [Test]
@@ -1357,23 +452,25 @@ namespace Allors.Meta.Static
         {
             this.Populate();
 
-            Assert.IsTrue(((MetaObject)this.Domain.MetaDomain.Find(new Guid("ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9"))).IsString);
-            Assert.IsTrue(((MetaObject)this.Domain.MetaDomain.Find(new Guid("ccd6f134-26de-4103-bff9-a37ec3e997a3"))).IsInteger);
-            Assert.IsTrue(((MetaObject)this.Domain.MetaDomain.Find(new Guid("e8989069-024b-4389-ac77-a98c4dfff25a"))).IsLong);
-            Assert.IsTrue(((MetaObject)this.Domain.MetaDomain.Find(new Guid("da866d8e-2c40-41a8-ae5b-5f6dae0b89c8"))).IsDecimal);
-            Assert.IsTrue(((MetaObject)this.Domain.MetaDomain.Find(new Guid("ffcabd07-f35f-4083-bef6-f6c47970ca5d"))).IsDouble);
-            Assert.IsTrue(((MetaObject)this.Domain.MetaDomain.Find(new Guid("b5ee6cea-4e2b-498e-a5dd-24671d896477"))).IsBoolean);
-            Assert.IsTrue(((MetaObject)this.Domain.MetaDomain.Find(new Guid("c4c09343-61d3-418c-ade2-fe6fd588f128"))).IsDateTime);
-            Assert.IsTrue(((MetaObject)this.Domain.MetaDomain.Find(new Guid("6DC0A1A8-88A4-4614-ADB4-92DD3D017C0E"))).IsUnique);
-            Assert.IsTrue(((MetaObject)this.Domain.MetaDomain.Find(new Guid("c28e515b-cae8-4d6b-95bf-062aec8042fc"))).IsBinary);
+            Assert.IsTrue(((Unit)this.MetaPopulation.Find(new Guid("ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9"))).IsString);
+            Assert.IsTrue(((Unit)this.MetaPopulation.Find(new Guid("ccd6f134-26de-4103-bff9-a37ec3e997a3"))).IsInteger);
+            Assert.IsTrue(((Unit)this.MetaPopulation.Find(new Guid("e8989069-024b-4389-ac77-a98c4dfff25a"))).IsLong);
+            Assert.IsTrue(((Unit)this.MetaPopulation.Find(new Guid("da866d8e-2c40-41a8-ae5b-5f6dae0b89c8"))).IsDecimal);
+            Assert.IsTrue(((Unit)this.MetaPopulation.Find(new Guid("ffcabd07-f35f-4083-bef6-f6c47970ca5d"))).IsDouble);
+            Assert.IsTrue(((Unit)this.MetaPopulation.Find(new Guid("b5ee6cea-4e2b-498e-a5dd-24671d896477"))).IsBoolean);
+            Assert.IsTrue(((Unit)this.MetaPopulation.Find(new Guid("c4c09343-61d3-418c-ade2-fe6fd588f128"))).IsDateTime);
+            Assert.IsTrue(((Unit)this.MetaPopulation.Find(new Guid("6DC0A1A8-88A4-4614-ADB4-92DD3D017C0E"))).IsUnique);
+            Assert.IsTrue(((Unit)this.MetaPopulation.Find(new Guid("c28e515b-cae8-4d6b-95bf-062aec8042fc"))).IsBinary);
+
+            Assert.AreEqual(9, this.MetaPopulation.Units.Count());
         }
 
         [Test]
         public void Validate()
         {
-            var type = this.Domain.AddDeclaredObjectType(Guid.NewGuid());
+            var type = new ClassBuilder(this.Domain, Guid.NewGuid()).Build();
 
-            var validationReport = this.Domain.Validate();
+            var validationReport = this.MetaPopulation.Validate();
             Assert.IsTrue(validationReport.ContainsErrors);
             var errors = validationReport.Errors;
             Assert.AreEqual(2, errors.Length);
@@ -1383,11 +480,13 @@ namespace Allors.Meta.Static
                 Assert.AreEqual(1, error.Members.Length);
                 var member = error.Members[0];
 
-                if (member.Equals(AllorsEmbeddedDomain.ObjectTypeSingularName))
+                Assert.IsTrue(member.StartsWith("ObjectType."));
+
+                if (member.Equals("ObjectType.SingularName"))
                 {
                     Assert.AreEqual(ValidationKind.Required, error.Kind);
                 }
-                else if (member.Equals(AllorsEmbeddedDomain.ObjectTypePluralName))
+                else if (member.Equals("ObjectType.PluralName"))
                 {
                     Assert.AreEqual(ValidationKind.Required, error.Kind);
                 }
@@ -1397,53 +496,53 @@ namespace Allors.Meta.Static
             type.SingularName = string.Empty;
             type.PluralName = "Plural";
 
-            validationReport = this.Domain.Validate();
+            validationReport = this.MetaPopulation.Validate();
             Assert.IsTrue(validationReport.ContainsErrors);
             Assert.AreEqual(1, validationReport.Errors.Length);
             Assert.AreEqual(type, validationReport.Errors[0].Source);
             Assert.AreEqual(1, validationReport.Errors[0].Members.Length);
-            Assert.AreEqual(AllorsEmbeddedDomain.ObjectTypeSingularName, validationReport.Errors[0].Members[0]);
-            Assert.AreEqual(ValidationKind.MinimumLength, validationReport.Errors[0].Kind);
+            Assert.AreEqual("ObjectType.SingularName", validationReport.Errors[0].Members[0]);
+            Assert.AreEqual(ValidationKind.Required, validationReport.Errors[0].Kind);
 
             type.SingularName = "_a";
 
-            validationReport = this.Domain.Validate();
+            validationReport = this.MetaPopulation.Validate();
             Assert.IsTrue(validationReport.ContainsErrors);
             Assert.AreEqual(1, validationReport.Errors.Length);
             Assert.AreEqual(type, validationReport.Errors[0].Source);
             Assert.AreEqual(1, validationReport.Errors[0].Members.Length);
-            Assert.AreEqual(AllorsEmbeddedDomain.ObjectTypeSingularName, validationReport.Errors[0].Members[0]);
+            Assert.AreEqual("ObjectType.SingularName", validationReport.Errors[0].Members[0]);
             Assert.AreEqual(ValidationKind.Format, validationReport.Errors[0].Kind);
 
             type.SingularName = "a_";
 
-            validationReport = this.Domain.Validate();
+            validationReport = this.MetaPopulation.Validate();
             Assert.IsTrue(validationReport.ContainsErrors);
             Assert.AreEqual(1, validationReport.Errors.Length);
             Assert.AreEqual(type, validationReport.Errors[0].Source);
             Assert.AreEqual(1, validationReport.Errors[0].Members.Length);
-            Assert.AreEqual(AllorsEmbeddedDomain.ObjectTypeSingularName, validationReport.Errors[0].Members[0]);
+            Assert.AreEqual("ObjectType.SingularName", validationReport.Errors[0].Members[0]);
             Assert.AreEqual(ValidationKind.Format, validationReport.Errors[0].Kind);
 
             type.SingularName = "11";
 
-            validationReport = this.Domain.Validate();
+            validationReport = this.MetaPopulation.Validate();
             Assert.IsTrue(validationReport.ContainsErrors);
             Assert.AreEqual(1, validationReport.Errors.Length);
             Assert.AreEqual(type, validationReport.Errors[0].Source);
             Assert.AreEqual(1, validationReport.Errors[0].Members.Length);
-            Assert.AreEqual(AllorsEmbeddedDomain.ObjectTypeSingularName, validationReport.Errors[0].Members[0]);
+            Assert.AreEqual("ObjectType.SingularName", validationReport.Errors[0].Members[0]);
             Assert.AreEqual(ValidationKind.Format, validationReport.Errors[0].Kind);
 
             type.SingularName = "a1";
 
-            validationReport = this.Domain.Validate();
+            validationReport = this.MetaPopulation.Validate();
             Assert.IsFalse(validationReport.ContainsErrors);
             Assert.AreEqual(0, validationReport.Errors.Length);
 
             type.SingularName = "aa";
 
-            validationReport = this.Domain.Validate();
+            validationReport = this.MetaPopulation.Validate();
             Assert.IsFalse(validationReport.ContainsErrors);
             Assert.AreEqual(0, validationReport.Errors.Length);
 
@@ -1451,122 +550,111 @@ namespace Allors.Meta.Static
             type.SingularName = "SingularName";
             type.PluralName = null;
 
-            validationReport = this.Domain.Validate();
+            validationReport = this.MetaPopulation.Validate();
             Assert.IsTrue(validationReport.ContainsErrors);
             Assert.AreEqual(1, validationReport.Errors.Length);
             Assert.AreEqual(type, validationReport.Errors[0].Source);
             Assert.AreEqual(1, validationReport.Errors[0].Members.Length);
-            Assert.AreEqual(AllorsEmbeddedDomain.ObjectTypePluralName, validationReport.Errors[0].Members[0]);
+            Assert.AreEqual("ObjectType.PluralName", validationReport.Errors[0].Members[0]);
             Assert.AreEqual(ValidationKind.Required, validationReport.Errors[0].Kind);
 
             type.PluralName = "_a";
 
-            validationReport = this.Domain.Validate();
+            validationReport = this.MetaPopulation.Validate();
             Assert.IsTrue(validationReport.ContainsErrors);
             Assert.AreEqual(1, validationReport.Errors.Length);
             Assert.AreEqual(type, validationReport.Errors[0].Source);
             Assert.AreEqual(1, validationReport.Errors[0].Members.Length);
-            Assert.AreEqual(AllorsEmbeddedDomain.ObjectTypePluralName, validationReport.Errors[0].Members[0]);
+            Assert.AreEqual("ObjectType.PluralName", validationReport.Errors[0].Members[0]);
             Assert.AreEqual(ValidationKind.Format, validationReport.Errors[0].Kind);
 
             type.PluralName = "a_";
 
-            validationReport = this.Domain.Validate();
+            validationReport = this.MetaPopulation.Validate();
             Assert.IsTrue(validationReport.ContainsErrors);
             Assert.AreEqual(1, validationReport.Errors.Length);
             Assert.AreEqual(type, validationReport.Errors[0].Source);
             Assert.AreEqual(1, validationReport.Errors[0].Members.Length);
-            Assert.AreEqual(AllorsEmbeddedDomain.ObjectTypePluralName, validationReport.Errors[0].Members[0]);
+            Assert.AreEqual("ObjectType.PluralName", validationReport.Errors[0].Members[0]);
             Assert.AreEqual(ValidationKind.Format, validationReport.Errors[0].Kind);
 
             type.PluralName = "11";
 
-            validationReport = this.Domain.Validate();
+            validationReport = this.MetaPopulation.Validate();
             Assert.IsTrue(validationReport.ContainsErrors);
             Assert.AreEqual(1, validationReport.Errors.Length);
             Assert.AreEqual(type, validationReport.Errors[0].Source);
             Assert.AreEqual(1, validationReport.Errors[0].Members.Length);
-            Assert.AreEqual(AllorsEmbeddedDomain.ObjectTypePluralName, validationReport.Errors[0].Members[0]);
+            Assert.AreEqual("ObjectType.PluralName", validationReport.Errors[0].Members[0]);
             Assert.AreEqual(ValidationKind.Format, validationReport.Errors[0].Kind);
 
             type.PluralName = "a1";
 
-            validationReport = this.Domain.Validate();
+            validationReport = this.MetaPopulation.Validate();
             Assert.IsFalse(validationReport.ContainsErrors);
             Assert.AreEqual(0, validationReport.Errors.Length);
 
             type.PluralName = "aa";
 
-            validationReport = this.Domain.Validate();
+            validationReport = this.MetaPopulation.Validate();
             Assert.IsFalse(validationReport.ContainsErrors);
             Assert.AreEqual(0, validationReport.Errors.Length);
         }
 
         [Test]
-        public void ValidateDuplicateFullName()
+        public void ValidateDuplicateSingularName()
         {
             this.Populate();
 
-            var type = this.Domain.AddDeclaredObjectType(Guid.NewGuid());
+            var type = new ClassBuilder(this.Domain,Guid.NewGuid()).Build();
             type.SingularName = "Type1";
-            type.PluralName = "Type1s";
+            type.PluralName = "XXX";
 
-            var anotherType = this.Domain.AddDeclaredObjectType(Guid.NewGuid());
+            var anotherType = new ClassBuilder(this.Domain, Guid.NewGuid()).Build();
             anotherType.SingularName = "Type1";
-            anotherType.PluralName = "Type1s";
+            anotherType.PluralName = "YYY";
 
-            Assert.IsFalse(this.Domain.IsValid);
+            Assert.IsFalse(this.MetaPopulation.IsValid);
         }
+
 
         [Test]
-        public void ValidateDuplicateName()
+        public void ValidateDuplicatePluralName()
         {
             this.Populate();
 
-            var objectType1 = this.Domain.AddDeclaredObjectType(Guid.NewGuid());
-            objectType1.SingularName = "ObjectType1";
-            objectType1.PluralName = "ObjectType1s";
-            var objectType2 = this.Domain.AddDeclaredObjectType(Guid.NewGuid());
-            objectType2.SingularName = "ObjectType1";
-            objectType2.PluralName = "ObjectType1s";
+            var type = new ClassBuilder(this.Domain, Guid.NewGuid()).Build();
+            type.SingularName = "XXX";
+            type.PluralName = "Type1s";
 
-            Assert.IsFalse(this.Domain.IsValid);
+            var anotherType = new ClassBuilder(this.Domain, Guid.NewGuid()).Build();
+            anotherType.SingularName = "YYY";
+            anotherType.PluralName = "Type1s";
+
+            Assert.IsFalse(this.MetaPopulation.IsValid);
         }
+
 
         [Test]
         public void ValidateNameMinimumLength()
         {
-            this.Populate();
-
-            var type = this.Domain.AddDeclaredObjectType(Guid.NewGuid());
+            var type = new ClassBuilder(this.Domain, Guid.NewGuid()).Build();
             type.SingularName = "A";
             type.PluralName = "CD";
 
-            Assert.IsFalse(this.Domain.IsValid);
+            Assert.IsFalse(this.MetaPopulation.IsValid);
 
             type.SingularName = "AB";
 
-            Assert.IsTrue(this.Domain.IsValid);
+            Assert.IsTrue(this.MetaPopulation.IsValid);
 
             type.PluralName = "C";
 
-            Assert.IsFalse(this.Domain.IsValid);
+            Assert.IsFalse(this.MetaPopulation.IsValid);
 
             type.PluralName = "CD";
 
-            Assert.IsTrue(this.Domain.IsValid);
-        }
-
-        internal static void RemoveDirectSupertypes(MetaObject subType)
-        {
-            foreach (var inheritance in subType.InheritancesWhereSubtype)
-            {
-            }
-        }
-
-        private void DomainMetaObjectChanged(object sender, MetaObjectChangedEventArgs args)
-        {
-            this.metaObjectChangedEvents.Add(args);
+            Assert.IsTrue(this.MetaPopulation.IsValid);
         }
     }
 

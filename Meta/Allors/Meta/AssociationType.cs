@@ -53,6 +53,7 @@ namespace Allors.Meta
         {
             get
             {
+                this.MetaPopulation.Derive();
                 return this.isMany;
             }
 

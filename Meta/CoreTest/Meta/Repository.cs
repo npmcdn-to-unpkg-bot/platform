@@ -22,7 +22,7 @@ namespace Allors.Meta
 {
     using System;
 
-    using Allors.Meta.Builders;
+    using Allors.Meta;
 
     public static partial class Repository
     {

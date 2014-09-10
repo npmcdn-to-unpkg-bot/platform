@@ -17,7 +17,7 @@
 namespace Allors.Meta.Static
 {
     using System;
-    using Allors.Meta.Builders;
+    using Allors.Meta;
 
     public class Population
     {
@@ -27,7 +27,9 @@ namespace Allors.Meta.Static
         {
             this.metaPopulation = new MetaPopulation();
 
-            var core = Repository.Core(metaPopulation);
+            var core = Repository.Allors(this.metaPopulation);
+
+            var validationlog = this.metaPopulation.Validate();
 
             this.Domain = new Domain(this.MetaPopulation, Guid.NewGuid()) { Name = "Domain" };
             this.Domain.AddDirectSuperdomain(core);
@@ -46,8 +48,6 @@ namespace Allors.Meta.Static
         public Unit DoubleType { get; set; }
 
         public Unit IntegerType { get; set; }
-
-        public Unit[] Interfaces { get; set; }
 
         public Unit LongType { get; set; }
 

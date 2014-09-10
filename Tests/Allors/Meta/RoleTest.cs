@@ -19,7 +19,7 @@ namespace Allors.Meta.Static
 {
     using System;
 
-    using Allors.Meta.Builders;
+    using Allors.Meta;
 
     using NUnit.Framework;
 

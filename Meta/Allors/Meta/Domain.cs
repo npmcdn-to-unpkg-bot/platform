@@ -63,6 +63,8 @@ namespace Allors.Meta
             this.definedAssociationTypes = new List<AssociationType>();
             this.definedRoleTypes = new List<RoleType>();
             this.definedMethodTypes = new List<MethodType>();
+
+            this.MetaPopulation.OnDomainCreated(this);
         }
 
         public string Name
