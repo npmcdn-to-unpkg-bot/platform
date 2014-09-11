@@ -166,7 +166,12 @@ namespace Allors.Meta
             get
             {
                 var validation = this.Validate();
-                return validation.Errors.Length == 0;
+                if (validation.ContainsErrors)
+                {
+                    return false;
+                }
+
+                return true;
             }
         }
 

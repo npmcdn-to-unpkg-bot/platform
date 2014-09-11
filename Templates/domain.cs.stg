@@ -464,7 +464,7 @@ objectTypePlural() ::= <<
 		{
 		}
 
-		public override Allors.Meta.ObjectType ObjectType
+		public override Allors.Meta.Composite ObjectType
 		{
 			get
 			{
