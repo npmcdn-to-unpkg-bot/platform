@@ -91,7 +91,11 @@
     <Compile Include="Allors\Meta\ValidationLog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Allors\domain.xml" />
+    <Content Include="CoreTest\domain.xml" />
+    <Content Include="Core\domain.xml" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Allors\Generate.proj" />
     <None Include="Allors\Meta\Operands.cd" />
