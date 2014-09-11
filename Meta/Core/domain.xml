@@ -1,7 +1,3 @@
-﻿<allors>
-  <domain version="1" id="64580BFC-29F2-4169-8153-E3B39EC5A709">
-    <directSuperDomains>
-      <domain href="../Allors"/>
-    </directSuperDomains>
-  </domain>
-</allors>
+﻿<domain version="1" id="64580BFC-29F2-4169-8153-E3B39EC5A709">
+  <super path="../Allors" />
+</domain>

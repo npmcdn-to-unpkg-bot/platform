@@ -18,25 +18,27 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Configure
+namespace Allors.Configure
 {
     using System;
-    using System.IO;
 
     class Program
     {
         static void Main(string[] args)
         {
-            var metaFileName = args.Length > 1 ? args[1] : null;
-            if (metaFileName == null)
+            var path = args.Length > 0 ? args[0] : null;
+            if (path == null)
             {
-                Console.WriteLine("Missing meta file parameter");
+                Console.WriteLine("Missing parameter: domain path");
             }
             else
             {
-                var metaFileInfo = new FileInfo(metaFileName);
-
+                var configure = new Configure(path);
+                configure.Execute();
             }
+
+            Console.WriteLine("Finished");
+            Console.ReadLine();
         }
     }
 }
