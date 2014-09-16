@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Program.cs" company="Allors bvba">
+// <copyright file="Configure.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 //
 // Dual Licensed under
@@ -18,27 +18,42 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Configure
+namespace Allors.Configure.Tasks
 {
     using System;
+    using System.Collections.Generic;
+    using System.IO;
 
-    class Program
+    using Allors.Configure.Domain;
+
+    using Microsoft.Build.Framework;
+
+    public class Configure : ITask
     {
-        static void Main(string[] args)
-        {
-            var path = args.Length > 0 ? args[0] : null;
-            if (path == null)
-            {
-                Console.WriteLine("Missing parameter: domain path");
-            }
-            else
-            {
-                var configure = new Configure(path);
-                configure.Execute();
-            }
+        public IBuildEngine BuildEngine { get; set; }
 
-            Console.WriteLine("Finished");
-            Console.ReadLine();
+        public ITaskHost HostObject { get; set; }
+
+        [Required]
+        public FileInfo Solution { get; set; }
+
+        public IList<FileInfo> ExternalSolutions { get; set; }
+
+        public Guid Id { get; set; }
+
+        public bool Execute()
+        {
+            var solution = new Solution(this.Solution, this.ExternalSolutions, this.Id);
+            try
+            {
+                solution.Configure();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.InnerException != null ? e.InnerException.Message : e.Message);
+                return false;
+            }
         }
     }
 }

@@ -24,8 +24,8 @@ namespace Allors.Configure.Xml
 
     public class SuperXml
     {
-        [XmlAttribute("path")]
-        public string path;
+        [XmlAttribute("idref")]
+        public string idref;
 
         protected SuperXml()
         {

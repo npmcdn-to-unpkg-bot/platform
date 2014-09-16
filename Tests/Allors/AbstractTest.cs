@@ -38,8 +38,7 @@ namespace Allors.Meta.Static
                 return this.Population.Domain;
             }
         }
-
-
+        
         protected Population Population { get; set; }
 
         [SetUp]

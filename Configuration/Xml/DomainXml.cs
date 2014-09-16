@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="RepositoryXml.cs" company="Allors bvba">
+// <copyright file="DomainXml.cs" company="Allors bvba">
 //   Copyright 2002-2009 Allors bvba.
 // 
 // Dual Licensed under
@@ -23,9 +23,7 @@ namespace Allors.Configure.Xml
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using System.Linq;
     using System.Xml.Serialization;
-
 
     [Serializable]
     [XmlRoot("domain", Namespace = "")]
@@ -37,41 +35,50 @@ namespace Allors.Configure.Xml
         public string Version;
 
         [XmlAttribute("id")]
-        public string Id;
+        public string IdString;
 
-        [XmlElement("name")]
-        public string Name;
+        public Guid Id
+        {
+            get
+            {
+                return new Guid(this.IdString);
+            }
+        }
 
         [XmlElement("super", typeof(SuperXml))]
-        public List<SuperXml> Supers = new List<SuperXml>();
+        public List<SuperXml> SuperXmls = new List<SuperXml>();
+
+        private string lowerCaseName;
 
         protected DomainXml()
         {
         }
 
-        internal static DomainXml Load(DirectoryInfo directoryInfo)
+        public string LowerCaseName
         {
-            var fileInfo = directoryInfo.GetFiles(FileName).FirstOrDefault();
-
-            if (fileInfo == null)
+            get
             {
-                throw new Exception(FileName + " not found in " + directoryInfo.FullName);    
+                return this.lowerCaseName;
             }
+        }
 
+        internal static DomainXml Load(FileInfo fileInfo)
+        {
             var xmlSerializer = new XmlSerializer(typeof(DomainXml));
             DomainXml domainXml;
             using (TextReader textReader = new StreamReader(fileInfo.FullName))
             {
                 domainXml = (DomainXml)xmlSerializer.Deserialize(textReader);
+                domainXml.lowerCaseName = fileInfo.Directory.Name.ToLowerInvariant();
                 textReader.Close();
             }
 
-            if (string.IsNullOrEmpty(domainXml.Name))
-            {
-                domainXml.Name = directoryInfo.Name;
-            }
-
             return domainXml;
+        }
+
+        public override string ToString()
+        {
+            return this.LowerCaseName;
         }
     }
 }
