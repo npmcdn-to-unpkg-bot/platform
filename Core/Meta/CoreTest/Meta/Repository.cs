@@ -26,6 +26,8 @@ namespace Allors.Meta
 
     public static partial class Repository
     {
+        public static readonly MetaPopulation MetaPopulation;
+
         public static Domain BaseTest(MetaPopulation meta)
         {
             // Imports

@@ -52,51 +52,18 @@
     <Compile Include="Allors\Generation\Storage\AllorsFileInfo.cs" />
     <Compile Include="Allors\Generation\Storage\Location.cs" />
     <Compile Include="Allors\Generation\StringTemplate.cs" />
-    <Compile Include="Allors\Meta\MethodTypeBuilder.cs" />
-    <Compile Include="Allors\Meta\MethodTypeBuilder.v.cs" />
-    <Compile Include="Allors\Meta\UnitBuilder.cs" />
-    <Compile Include="Allors\Meta\UnitBuilder.v.cs" />
-    <Compile Include="Allors\Meta\DomainDefinedObject.cs" />
-    <Compile Include="Allors\Meta\RelationTypeBuilder.cs" />
-    <Compile Include="Allors\Meta\InheritanceBuilder.cs" />
-    <Compile Include="Allors\Meta\RelationTypeBuilder.v.cs" />
-    <Compile Include="Allors\Meta\InterfaceBuilder.cs" />
-    <Compile Include="Allors\Meta\InheritanceBuilder.v.cs" />
-    <Compile Include="Allors\Meta\InterfaceBuilder.v.cs" />
-    <Compile Include="Allors\Meta\Builder.cs" />
-    <Compile Include="Allors\Meta\ClassBuilder.cs" />
-    <Compile Include="Allors\Meta\Cardinalities.cs" />
-    <Compile Include="Allors\Meta\LazySet.cs" />
-    <Compile Include="Allors\Meta\AssociationType.cs" />
-    <Compile Include="Allors\Meta\Interface.cs" />
-    <Compile Include="Allors\Meta\Domain.cs" />
-    <Compile Include="Allors\Meta\MetaPopulation.cs" />
-    <Compile Include="Allors\Meta\Inheritance.cs" />
-    <Compile Include="Allors\Meta\MetaObject.cs" />
-    <Compile Include="Allors\Meta\MethodType.cs" />
-    <Compile Include="Allors\Meta\Composite.cs" />
-    <Compile Include="Allors\Meta\Class.cs" />
-    <Compile Include="Allors\Meta\Unit.cs" />
-    <Compile Include="Allors\Meta\ObjectType.cs" />
-    <Compile Include="Allors\Meta\OperandType.cs" />
-    <Compile Include="Allors\Meta\PropertyType.cs" />
-    <Compile Include="Allors\Meta\RelationType.cs" />
-    <Compile Include="Allors\Meta\RoleType.cs" />
-    <Compile Include="Allors\Meta\ClassBuilder.v.cs" />
-    <Compile Include="Allors\Meta\Repository.cs" />
-    <Compile Include="Allors\Meta\UnitIds.cs" />
-    <Compile Include="Allors\Meta\UnitTags.cs" />
-    <Compile Include="Allors\Meta\ValidationError.cs" />
-    <Compile Include="Allors\Meta\ValidationKind.cs" />
-    <Compile Include="Allors\Meta\ValidationLog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Allors\Generate.proj" />
-    <None Include="Allors\Meta\Operands.cd" />
-    <None Include="Allors\Meta\Overview.cd" />
     <None Include="packages.config" />
     <None Include="Settings.StyleCop" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Framework\Framework.csproj">
+      <Project>{84495b8e-1800-41c9-a236-abe6265a23a3}</Project>
+      <Name>Framework</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

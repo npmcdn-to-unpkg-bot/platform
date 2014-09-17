@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Allors\ObjectBase.cs" />
     <Compile Include="Core\Common\Enumeration.cs" />
     <Compile Include="Core\Content\HtmlCharacters.cs" />
     <Compile Include="Core\Content\HtmlDocument.cs" />
@@ -193,35 +194,6 @@
     <Compile Include="Core\Security\UserGroups.cs" />
     <Compile Include="Core\Security\Users.cs" />
     <Compile Include="Core\Setup.cs" />
-    <Compile Include="Allors\Extent.cs" />
-    <Compile Include="Allors\ExtentT.cs" />
-    <Compile Include="Allors\IChangeSet.cs" />
-    <Compile Include="Allors\ICompositePredicate.cs" />
-    <Compile Include="Allors\IConflict.cs" />
-    <Compile Include="Allors\IDatabase.cs" />
-    <Compile Include="Allors\IDatabaseSession.cs" />
-    <Compile Include="Allors\IObject.cs" />
-    <Compile Include="Allors\IObjectFactory.cs" />
-    <Compile Include="Allors\IPopulation.cs" />
-    <Compile Include="Allors\ISession.cs" />
-    <Compile Include="Allors\IStrategy.cs" />
-    <Compile Include="Allors\IWorkspace.cs" />
-    <Compile Include="Allors\IWorkspaceFactory.cs" />
-    <Compile Include="Allors\IWorkspaceSession.cs" />
-    <Compile Include="Allors\ObjectBase.cs" />
-    <Compile Include="Allors\ObjectFactory.cs" />
-    <Compile Include="Allors\ObjectId.cs" />
-    <Compile Include="Allors\ObjectIdInteger.cs" />
-    <Compile Include="Allors\ObjectIdLong.cs" />
-    <Compile Include="Allors\ObjectNotLoadedEventArgs.cs" />
-    <Compile Include="Allors\RelationNotLoadedEventArgs.cs" />
-    <Compile Include="Allors\SessionCommittedEventArgs.cs" />
-    <Compile Include="Allors\SessionCommittingEventArgs.cs" />
-    <Compile Include="Allors\SessionCreatedEventArgs.cs" />
-    <Compile Include="Allors\SessionRolledBackEventArgs.cs" />
-    <Compile Include="Allors\SessionRollingBackEventArgs.cs" />
-    <Compile Include="Allors\Sort.cs" />
-    <Compile Include="Allors\SortDirection.cs" />
     <Compile Include="Generated\AccessControl.g.cs" />
     <Compile Include="Generated\AccessControlledObject.g.cs" />
     <Compile Include="Generated\Address.g.cs" />
@@ -296,6 +268,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Framework\Framework.csproj">
+      <Project>{84495b8e-1800-41c9-a236-abe6265a23a3}</Project>
+      <Name>Framework</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Meta\Meta.csproj">
       <Project>{BA6EFCFE-CB7F-4994-A5A4-C11DDAAC32DD}</Project>
       <Name>Meta</Name>

@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{84495B8E-1800-41C9-A236-ABE6265A23A3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Allors</RootNamespace>
+    <AssemblyName>Allors</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Allors\Extent.cs" />
+    <Compile Include="Allors\ExtentT.cs" />
+    <Compile Include="Allors\IChangeSet.cs" />
+    <Compile Include="Allors\ICompositePredicate.cs" />
+    <Compile Include="Allors\IConflict.cs" />
+    <Compile Include="Allors\IDatabase.cs" />
+    <Compile Include="Allors\IDatabaseSession.cs" />
+    <Compile Include="Allors\IObject.cs" />
+    <Compile Include="Allors\IObjectFactory.cs" />
+    <Compile Include="Allors\IPopulation.cs" />
+    <Compile Include="Allors\ISession.cs" />
+    <Compile Include="Allors\IStrategy.cs" />
+    <Compile Include="Allors\IWorkspace.cs" />
+    <Compile Include="Allors\IWorkspaceFactory.cs" />
+    <Compile Include="Allors\IWorkspaceSession.cs" />
+    <Compile Include="Allors\Meta\AssociationType.cs" />
+    <Compile Include="Allors\Meta\Builder.cs" />
+    <Compile Include="Allors\Meta\Cardinalities.cs" />
+    <Compile Include="Allors\Meta\Class.cs" />
+    <Compile Include="Allors\Meta\ClassBuilder.cs" />
+    <Compile Include="Allors\Meta\ClassBuilder.v.cs" />
+    <Compile Include="Allors\Meta\Composite.cs" />
+    <Compile Include="Allors\Meta\Domain.cs" />
+    <Compile Include="Allors\Meta\DomainDefinedObject.cs" />
+    <Compile Include="Allors\Meta\Inheritance.cs" />
+    <Compile Include="Allors\Meta\InheritanceBuilder.cs" />
+    <Compile Include="Allors\Meta\InheritanceBuilder.v.cs" />
+    <Compile Include="Allors\Meta\Interface.cs" />
+    <Compile Include="Allors\Meta\InterfaceBuilder.cs" />
+    <Compile Include="Allors\Meta\InterfaceBuilder.v.cs" />
+    <Compile Include="Allors\Meta\LazySet.cs" />
+    <Compile Include="Allors\Meta\MetaObject.cs" />
+    <Compile Include="Allors\Meta\MetaPopulation.cs" />
+    <Compile Include="Allors\Meta\MethodType.cs" />
+    <Compile Include="Allors\Meta\MethodTypeBuilder.cs" />
+    <Compile Include="Allors\Meta\MethodTypeBuilder.v.cs" />
+    <Compile Include="Allors\Meta\ObjectType.cs" />
+    <Compile Include="Allors\Meta\OperandType.cs" />
+    <Compile Include="Allors\Meta\PropertyType.cs" />
+    <Compile Include="Allors\Meta\RelationType.cs" />
+    <Compile Include="Allors\Meta\RelationTypeBuilder.cs" />
+    <Compile Include="Allors\Meta\RelationTypeBuilder.v.cs" />
+    <Compile Include="Allors\Meta\RoleType.cs" />
+    <Compile Include="Allors\Meta\Unit.cs" />
+    <Compile Include="Allors\Meta\UnitBuilder.cs" />
+    <Compile Include="Allors\Meta\UnitBuilder.v.cs" />
+    <Compile Include="Allors\Meta\UnitIds.cs" />
+    <Compile Include="Allors\Meta\UnitTags.cs" />
+    <Compile Include="Allors\Meta\ValidationError.cs" />
+    <Compile Include="Allors\Meta\ValidationKind.cs" />
+    <Compile Include="Allors\Meta\ValidationLog.cs" />
+    <Compile Include="Allors\ObjectFactory.cs" />
+    <Compile Include="Allors\ObjectId.cs" />
+    <Compile Include="Allors\ObjectIdInteger.cs" />
+    <Compile Include="Allors\ObjectIdLong.cs" />
+    <Compile Include="Allors\ObjectNotLoadedEventArgs.cs" />
+    <Compile Include="Allors\RelationNotLoadedEventArgs.cs" />
+    <Compile Include="Allors\SessionCommittedEventArgs.cs" />
+    <Compile Include="Allors\SessionCommittingEventArgs.cs" />
+    <Compile Include="Allors\SessionCreatedEventArgs.cs" />
+    <Compile Include="Allors\SessionRolledBackEventArgs.cs" />
+    <Compile Include="Allors\SessionRollingBackEventArgs.cs" />
+    <Compile Include="Allors\Sort.cs" />
+    <Compile Include="Allors\SortDirection.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Allors\Meta\Operands.cd" />
+    <None Include="Allors\Meta\Overview.cd" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
