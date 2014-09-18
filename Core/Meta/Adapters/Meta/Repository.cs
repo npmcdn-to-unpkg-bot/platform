@@ -27,7 +27,7 @@ namespace Allors.Meta
         public static Domain Adapters(MetaPopulation env)
         {
             // Imports
-            var core = (Domain)env.Find(new Guid("CA802192-8186-4C2A-8315-A8DEFAA74A12"));
+            var allors = (Domain)env.Find(new Guid("CA802192-8186-4C2A-8315-A8DEFAA74A12"));
 
             var allorsString = (Unit)env.Find(UnitIds.StringId);
             var allorsInteger = (Unit)env.Find(UnitIds.IntegerId);
@@ -41,7 +41,7 @@ namespace Allors.Meta
 
             // Domain
             var domain = new Domain(env, new Guid("FEEA74C4-D5B6-44DA-BD0E-D4864CC88B88")) { Name = "Adapters" };
-            domain.AddDirectSuperdomain(core);
+            domain.AddDirectSuperdomain(allors);
 
             // Objects
             var c1 = new ClassBuilder(domain, new Guid("7041c691-d896-4628-8f50-1c24f5d03414")).WithSingularName("C1").WithPluralName("C1s").Build();

@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{84495B8E-1800-41C9-A236-ABE6265A23A3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Allors</RootNamespace>
+    <AssemblyName>Allors</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Extent.cs" />
+    <Compile Include="ExtentT.cs" />
+    <Compile Include="IChangeSet.cs" />
+    <Compile Include="ICompositePredicate.cs" />
+    <Compile Include="IConflict.cs" />
+    <Compile Include="IDatabase.cs" />
+    <Compile Include="IDatabaseSession.cs" />
+    <Compile Include="IObject.cs" />
+    <Compile Include="IObjectFactory.cs" />
+    <Compile Include="IPopulation.cs" />
+    <Compile Include="ISession.cs" />
+    <Compile Include="IStrategy.cs" />
+    <Compile Include="IWorkspace.cs" />
+    <Compile Include="IWorkspaceFactory.cs" />
+    <Compile Include="IWorkspaceSession.cs" />
+    <Compile Include="Meta\AssociationType.cs" />
+    <Compile Include="Meta\Builder.cs" />
+    <Compile Include="Meta\Cardinalities.cs" />
+    <Compile Include="Meta\Class.cs" />
+    <Compile Include="Meta\ClassBuilder.cs" />
+    <Compile Include="Meta\ClassBuilder.v.cs" />
+    <Compile Include="Meta\Composite.cs" />
+    <Compile Include="Meta\Domain.cs" />
+    <Compile Include="Meta\DomainDefinedObject.cs" />
+    <Compile Include="Meta\Inheritance.cs" />
+    <Compile Include="Meta\InheritanceBuilder.cs" />
+    <Compile Include="Meta\InheritanceBuilder.v.cs" />
+    <Compile Include="Meta\Interface.cs" />
+    <Compile Include="Meta\InterfaceBuilder.cs" />
+    <Compile Include="Meta\InterfaceBuilder.v.cs" />
+    <Compile Include="Meta\LazySet.cs" />
+    <Compile Include="Meta\MetaObject.cs" />
+    <Compile Include="Meta\MetaPopulation.cs" />
+    <Compile Include="Meta\MethodType.cs" />
+    <Compile Include="Meta\MethodTypeBuilder.cs" />
+    <Compile Include="Meta\MethodTypeBuilder.v.cs" />
+    <Compile Include="Meta\ObjectType.cs" />
+    <Compile Include="Meta\OperandType.cs" />
+    <Compile Include="Meta\PropertyType.cs" />
+    <Compile Include="Meta\RelationType.cs" />
+    <Compile Include="Meta\RelationTypeBuilder.cs" />
+    <Compile Include="Meta\RelationTypeBuilder.v.cs" />
+    <Compile Include="Meta\RoleType.cs" />
+    <Compile Include="Meta\Unit.cs" />
+    <Compile Include="Meta\UnitBuilder.cs" />
+    <Compile Include="Meta\UnitBuilder.v.cs" />
+    <Compile Include="Meta\UnitIds.cs" />
+    <Compile Include="Meta\UnitTags.cs" />
+    <Compile Include="Meta\ValidationError.cs" />
+    <Compile Include="Meta\ValidationKind.cs" />
+    <Compile Include="Meta\ValidationLog.cs" />
+    <Compile Include="ObjectFactory.cs" />
+    <Compile Include="ObjectId.cs" />
+    <Compile Include="ObjectIdInteger.cs" />
+    <Compile Include="ObjectIdLong.cs" />
+    <Compile Include="ObjectNotLoadedEventArgs.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RelationNotLoadedEventArgs.cs" />
+    <Compile Include="SessionCommittedEventArgs.cs" />
+    <Compile Include="SessionCommittingEventArgs.cs" />
+    <Compile Include="SessionCreatedEventArgs.cs" />
+    <Compile Include="SessionRolledBackEventArgs.cs" />
+    <Compile Include="SessionRollingBackEventArgs.cs" />
+    <Compile Include="Sort.cs" />
+    <Compile Include="SortDirection.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Meta\Operands.cd" />
+    <None Include="Meta\Overview.cd" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
