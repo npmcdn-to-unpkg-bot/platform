@@ -17,13 +17,13 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors1.Adapters.General.SqlClient.Connected.IntegerId.ReadCommitted
+namespace Allors.Adapters.General.SqlClient.Connected.IntegerId.ReadCommitted
 {
     using System;
 
-    using Allors1;
-    using Allors1.Adapters;
-    using Allors1.Meta;
+    using Allors;
+    using Allors.Adapters;
+    using Allors.Meta;
 
     using NUnit.Framework;
 

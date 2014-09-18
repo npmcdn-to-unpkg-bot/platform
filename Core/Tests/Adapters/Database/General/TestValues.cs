@@ -13,7 +13,7 @@
 // For more information visit http://www.allors.com/legal
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Allors1.Adapters.General
+namespace Allors.Adapters.General
 {
     using System;
 

@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors1.Adapters.General
+namespace Allors.Adapters.General
 {
     public abstract class ReferenceTest : Test
     {

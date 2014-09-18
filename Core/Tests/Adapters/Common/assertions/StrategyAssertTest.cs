@@ -24,7 +24,7 @@ namespace Allors.Adapters.Special.Assertions
     using Allors;
     using Allors.Meta;
 
-    using global::Domain;
+    using Allors.Domain;
 
     using NUnit.Framework;
 
@@ -36,7 +36,7 @@ namespace Allors.Adapters.Special.Assertions
         [SetUp]
         protected void Init()
         {
-            var configuration = new Configuration { ObjectFactory = new ObjectFactory(Repository.MetaPopulation, typeof(IObject).Assembly, "Domain") };
+            var configuration = new Configuration { ObjectFactory = new ObjectFactory(Repository.MetaPopulation, typeof(ObjectBase).Assembly, "Allors.Domain") };
             var database = new Database(configuration);
             this.session = database.CreateSession();
         }

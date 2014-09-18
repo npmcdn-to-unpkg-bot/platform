@@ -160,7 +160,7 @@ namespace Allors.Adapters.Special
 
         protected ObjectFactory CreateObjectFactory(MetaPopulation metaPopulation)
         {
-            return new ObjectFactory(metaPopulation, typeof(IObject).Assembly, "Domain");
+            return new ObjectFactory(metaPopulation, typeof(ObjectBase).Assembly, "Allors.Domain");
         }
 
         #region Events

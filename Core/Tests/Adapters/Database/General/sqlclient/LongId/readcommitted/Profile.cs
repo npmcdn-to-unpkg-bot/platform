@@ -18,11 +18,11 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors1.Adapters.General.SqlClient.Connected.LongId.ReadCommitted
+namespace Allors.Adapters.General.SqlClient.Connected.LongId.ReadCommitted
 {
-    using Allors1.Adapters;
+    using Allors.Adapters;
 
-    using Allors1.Configuration;
+    using Allors.Configuration;
 
     public class Profile : General.Profile
     {

@@ -3,7 +3,7 @@
 namespace Allors.Domain
 {
 	[System.Diagnostics.DebuggerNonUserCode]
-	public partial class C1 : Allors.ObjectBase , I1
+	public partial class C1 : Allors.ObjectBase , I1, I12
 	{
 		public static readonly C1Meta Meta = C1Meta.Instance;
 
@@ -16,29 +16,195 @@ namespace Allors.Domain
 
 
 
-		virtual public I1 C1I1One2One
-		{ 
+
+		virtual public global::System.Decimal? C1DecimalBetweenA 
+		{
 			get
 			{
-				return (I1) Strategy.GetCompositeRole(Meta.C1I1One2One);
+				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.C1DecimalBetweenA);
 			}
 			set
 			{
-				Strategy.SetCompositeRole(Meta.C1I1One2One ,value);
+				Strategy.SetUnitRole(Meta.C1DecimalBetweenA, value);
 			}
 		}
 
-		virtual public bool ExistC1I1One2One
+		virtual public bool ExistC1DecimalBetweenA{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.C1DecimalBetweenA);
+			}
+		}
+
+		virtual public void RemoveC1DecimalBetweenA()
+		{
+			Strategy.RemoveUnitRole(Meta.C1DecimalBetweenA);
+		}
+
+
+
+		virtual public global::System.Int64? C1LongLessThan 
 		{
 			get
 			{
-				return Strategy.ExistCompositeRole(Meta.C1I1One2One);
+				return (global::System.Int64?) Strategy.GetUnitRole(Meta.C1LongLessThan);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.C1LongLessThan, value);
 			}
 		}
 
-		virtual public void RemoveC1I1One2One()
+		virtual public bool ExistC1LongLessThan{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.C1LongLessThan);
+			}
+		}
+
+		virtual public void RemoveC1LongLessThan()
 		{
-			Strategy.RemoveCompositeRole(Meta.C1I1One2One);
+			Strategy.RemoveUnitRole(Meta.C1LongLessThan);
+		}
+
+
+		virtual public I2 C1I2one2one
+		{ 
+			get
+			{
+				return (I2) Strategy.GetCompositeRole(Meta.C1I2one2one);
+			}
+			set
+			{
+				Strategy.SetCompositeRole(Meta.C1I2one2one ,value);
+			}
+		}
+
+		virtual public bool ExistC1I2one2one
+		{
+			get
+			{
+				return Strategy.ExistCompositeRole(Meta.C1I2one2one);
+			}
+		}
+
+		virtual public void RemoveC1I2one2one()
+		{
+			Strategy.RemoveCompositeRole(Meta.C1I2one2one);
+		}
+
+
+
+		virtual public global::System.Decimal? C1DecimalBetweenB 
+		{
+			get
+			{
+				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.C1DecimalBetweenB);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.C1DecimalBetweenB, value);
+			}
+		}
+
+		virtual public bool ExistC1DecimalBetweenB{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.C1DecimalBetweenB);
+			}
+		}
+
+		virtual public void RemoveC1DecimalBetweenB()
+		{
+			Strategy.RemoveUnitRole(Meta.C1DecimalBetweenB);
+		}
+
+
+
+		virtual public global::System.String Argument 
+		{
+			get
+			{
+				return (global::System.String) Strategy.GetUnitRole(Meta.Argument);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.Argument, value);
+			}
+		}
+
+		virtual public bool ExistArgument{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.Argument);
+			}
+		}
+
+		virtual public void RemoveArgument()
+		{
+			Strategy.RemoveUnitRole(Meta.Argument);
+		}
+
+
+		virtual public global::Allors.Extent<S1> C1S1one2manies
+		{ 
+			get
+			{
+				return Strategy.GetCompositeRoles(Meta.C1S1one2many);
+			}
+			set
+			{
+				Strategy.SetCompositeRoles(Meta.C1S1one2many, value);
+			}
+		}
+
+		virtual public void AddC1S1one2many (S1 value)
+		{
+			Strategy.AddCompositeRole(Meta.C1S1one2many, value);
+		}
+
+		virtual public void RemoveC1S1one2many (S1 value)
+		{
+			Strategy.RemoveCompositeRole(Meta.C1S1one2many,value);
+		}
+
+		virtual public bool ExistC1S1one2manies
+		{
+			get
+			{
+				return Strategy.ExistCompositeRoles(Meta.C1S1one2many);
+			}
+		}
+
+		virtual public void RemoveC1S1one2manies()
+		{
+			Strategy.RemoveCompositeRoles(Meta.C1S1one2many);
+		}
+
+
+		virtual public I12 C1I12one2one
+		{ 
+			get
+			{
+				return (I12) Strategy.GetCompositeRole(Meta.C1I12one2one);
+			}
+			set
+			{
+				Strategy.SetCompositeRole(Meta.C1I12one2one ,value);
+			}
+		}
+
+		virtual public bool ExistC1I12one2one
+		{
+			get
+			{
+				return Strategy.ExistCompositeRole(Meta.C1I12one2one);
+			}
+		}
+
+		virtual public void RemoveC1I12one2one()
+		{
+			Strategy.RemoveCompositeRole(Meta.C1I12one2one);
 		}
 
 
@@ -68,205 +234,677 @@ namespace Allors.Domain
 		}
 
 
-
-		virtual public global::System.DateTime? C1AllorsDateTime 
-		{
-			get
-			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.C1AllorsDateTime);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.C1AllorsDateTime, value);
-			}
-		}
-
-		virtual public bool ExistC1AllorsDateTime{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.C1AllorsDateTime);
-			}
-		}
-
-		virtual public void RemoveC1AllorsDateTime()
-		{
-			Strategy.RemoveUnitRole(Meta.C1AllorsDateTime);
-		}
-
-
-		virtual public C2 C1C2Many2One
+		virtual public C1 C1C1many2one
 		{ 
 			get
 			{
-				return (C2) Strategy.GetCompositeRole(Meta.C1C2Many2One);
+				return (C1) Strategy.GetCompositeRole(Meta.C1C1many2one);
 			}
 			set
 			{
-				Strategy.SetCompositeRole(Meta.C1C2Many2One ,value);
+				Strategy.SetCompositeRole(Meta.C1C1many2one ,value);
 			}
 		}
 
-		virtual public bool ExistC1C2Many2One
+		virtual public bool ExistC1C1many2one
 		{
 			get
 			{
-				return Strategy.ExistCompositeRole(Meta.C1C2Many2One);
+				return Strategy.ExistCompositeRole(Meta.C1C1many2one);
 			}
 		}
 
-		virtual public void RemoveC1C2Many2One()
+		virtual public void RemoveC1C1many2one()
 		{
-			Strategy.RemoveCompositeRole(Meta.C1C2Many2One);
+			Strategy.RemoveCompositeRole(Meta.C1C1many2one);
 		}
 
 
-		virtual public I2 C1I2One2One
+		virtual public S2 C1S2many2one
 		{ 
 			get
 			{
-				return (I2) Strategy.GetCompositeRole(Meta.C1I2One2One);
+				return (S2) Strategy.GetCompositeRole(Meta.C1S2many2one);
 			}
 			set
 			{
-				Strategy.SetCompositeRole(Meta.C1I2One2One ,value);
+				Strategy.SetCompositeRole(Meta.C1S2many2one ,value);
 			}
 		}
 
-		virtual public bool ExistC1I2One2One
+		virtual public bool ExistC1S2many2one
 		{
 			get
 			{
-				return Strategy.ExistCompositeRole(Meta.C1I2One2One);
+				return Strategy.ExistCompositeRole(Meta.C1S2many2one);
 			}
 		}
 
-		virtual public void RemoveC1I2One2One()
+		virtual public void RemoveC1S2many2one()
 		{
-			Strategy.RemoveCompositeRole(Meta.C1I2One2One);
+			Strategy.RemoveCompositeRole(Meta.C1S2many2one);
 		}
 
 
-		virtual public C1 C1C1One2One
+
+		virtual public global::System.Double? C1DoubleBetweenA 
+		{
+			get
+			{
+				return (global::System.Double?) Strategy.GetUnitRole(Meta.C1DoubleBetweenA);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.C1DoubleBetweenA, value);
+			}
+		}
+
+		virtual public bool ExistC1DoubleBetweenA{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.C1DoubleBetweenA);
+			}
+		}
+
+		virtual public void RemoveC1DoubleBetweenA()
+		{
+			Strategy.RemoveUnitRole(Meta.C1DoubleBetweenA);
+		}
+
+
+		virtual public C1 Many2One
 		{ 
 			get
 			{
-				return (C1) Strategy.GetCompositeRole(Meta.C1C1One2One);
+				return (C1) Strategy.GetCompositeRole(Meta.Many2One);
 			}
 			set
 			{
-				Strategy.SetCompositeRole(Meta.C1C1One2One ,value);
+				Strategy.SetCompositeRole(Meta.Many2One ,value);
 			}
 		}
 
-		virtual public bool ExistC1C1One2One
+		virtual public bool ExistMany2One
 		{
 			get
 			{
-				return Strategy.ExistCompositeRole(Meta.C1C1One2One);
+				return Strategy.ExistCompositeRole(Meta.Many2One);
 			}
 		}
 
-		virtual public void RemoveC1C1One2One()
+		virtual public void RemoveMany2One()
 		{
-			Strategy.RemoveCompositeRole(Meta.C1C1One2One);
+			Strategy.RemoveCompositeRole(Meta.Many2One);
 		}
 
 
-		virtual public I1 C1I1Many2One
+		virtual public global::Allors.Extent<C1> C1C1many2manies
 		{ 
 			get
 			{
-				return (I1) Strategy.GetCompositeRole(Meta.C1I1Many2One);
+				return Strategy.GetCompositeRoles(Meta.C1C1many2many);
 			}
 			set
 			{
-				Strategy.SetCompositeRole(Meta.C1I1Many2One ,value);
+				Strategy.SetCompositeRoles(Meta.C1C1many2many, value);
 			}
 		}
 
-		virtual public bool ExistC1I1Many2One
+		virtual public void AddC1C1many2many (C1 value)
+		{
+			Strategy.AddCompositeRole(Meta.C1C1many2many, value);
+		}
+
+		virtual public void RemoveC1C1many2many (C1 value)
+		{
+			Strategy.RemoveCompositeRole(Meta.C1C1many2many,value);
+		}
+
+		virtual public bool ExistC1C1many2manies
 		{
 			get
 			{
-				return Strategy.ExistCompositeRole(Meta.C1I1Many2One);
+				return Strategy.ExistCompositeRoles(Meta.C1C1many2many);
 			}
 		}
 
-		virtual public void RemoveC1I1Many2One()
+		virtual public void RemoveC1C1many2manies()
 		{
-			Strategy.RemoveCompositeRole(Meta.C1I1Many2One);
+			Strategy.RemoveCompositeRoles(Meta.C1C1many2many);
 		}
 
 
-		virtual public global::Allors.Extent<I1> C1I1Many2Manies
+		virtual public global::Allors.Extent<S1> C1S1many2manies
 		{ 
 			get
 			{
-				return Strategy.GetCompositeRoles(Meta.C1I1Many2Many);
+				return Strategy.GetCompositeRoles(Meta.C1S1many2many);
 			}
 			set
 			{
-				Strategy.SetCompositeRoles(Meta.C1I1Many2Many, value);
+				Strategy.SetCompositeRoles(Meta.C1S1many2many, value);
 			}
 		}
 
-		virtual public void AddC1I1Many2Many (I1 value)
+		virtual public void AddC1S1many2many (S1 value)
 		{
-			Strategy.AddCompositeRole(Meta.C1I1Many2Many, value);
+			Strategy.AddCompositeRole(Meta.C1S1many2many, value);
 		}
 
-		virtual public void RemoveC1I1Many2Many (I1 value)
+		virtual public void RemoveC1S1many2many (S1 value)
 		{
-			Strategy.RemoveCompositeRole(Meta.C1I1Many2Many,value);
+			Strategy.RemoveCompositeRole(Meta.C1S1many2many,value);
 		}
 
-		virtual public bool ExistC1I1Many2Manies
+		virtual public bool ExistC1S1many2manies
 		{
 			get
 			{
-				return Strategy.ExistCompositeRoles(Meta.C1I1Many2Many);
+				return Strategy.ExistCompositeRoles(Meta.C1S1many2many);
 			}
 		}
 
-		virtual public void RemoveC1I1Many2Manies()
+		virtual public void RemoveC1S1many2manies()
 		{
-			Strategy.RemoveCompositeRoles(Meta.C1I1Many2Many);
+			Strategy.RemoveCompositeRoles(Meta.C1S1many2many);
 		}
 
 
-		virtual public global::Allors.Extent<I2> C1I2One2Manies
+
+		virtual public global::System.Double? C1DoubleBetweenB 
+		{
+			get
+			{
+				return (global::System.Double?) Strategy.GetUnitRole(Meta.C1DoubleBetweenB);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.C1DoubleBetweenB, value);
+			}
+		}
+
+		virtual public bool ExistC1DoubleBetweenB{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.C1DoubleBetweenB);
+			}
+		}
+
+		virtual public void RemoveC1DoubleBetweenB()
+		{
+			Strategy.RemoveUnitRole(Meta.C1DoubleBetweenB);
+		}
+
+
+		virtual public I1 C1I1one2one
 		{ 
 			get
 			{
-				return Strategy.GetCompositeRoles(Meta.C1I2One2Many);
+				return (I1) Strategy.GetCompositeRole(Meta.C1I1one2one);
 			}
 			set
 			{
-				Strategy.SetCompositeRoles(Meta.C1I2One2Many, value);
+				Strategy.SetCompositeRole(Meta.C1I1one2one ,value);
 			}
 		}
 
-		virtual public void AddC1I2One2Many (I2 value)
-		{
-			Strategy.AddCompositeRole(Meta.C1I2One2Many, value);
-		}
-
-		virtual public void RemoveC1I2One2Many (I2 value)
-		{
-			Strategy.RemoveCompositeRole(Meta.C1I2One2Many,value);
-		}
-
-		virtual public bool ExistC1I2One2Manies
+		virtual public bool ExistC1I1one2one
 		{
 			get
 			{
-				return Strategy.ExistCompositeRoles(Meta.C1I2One2Many);
+				return Strategy.ExistCompositeRole(Meta.C1I1one2one);
 			}
 		}
 
-		virtual public void RemoveC1I2One2Manies()
+		virtual public void RemoveC1I1one2one()
 		{
-			Strategy.RemoveCompositeRoles(Meta.C1I2One2Many);
+			Strategy.RemoveCompositeRole(Meta.C1I1one2one);
+		}
+
+
+
+		virtual public global::System.Int32? C1IntegerLessThan 
+		{
+			get
+			{
+				return (global::System.Int32?) Strategy.GetUnitRole(Meta.C1IntegerLessThan);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.C1IntegerLessThan, value);
+			}
+		}
+
+		virtual public bool ExistC1IntegerLessThan{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.C1IntegerLessThan);
+			}
+		}
+
+		virtual public void RemoveC1IntegerLessThan()
+		{
+			Strategy.RemoveUnitRole(Meta.C1IntegerLessThan);
+		}
+
+
+
+		virtual public global::System.String C1StringLarge 
+		{
+			get
+			{
+				return (global::System.String) Strategy.GetUnitRole(Meta.C1StringLarge);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.C1StringLarge, value);
+			}
+		}
+
+		virtual public bool ExistC1StringLarge{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.C1StringLarge);
+			}
+		}
+
+		virtual public void RemoveC1StringLarge()
+		{
+			Strategy.RemoveUnitRole(Meta.C1StringLarge);
+		}
+
+
+		virtual public global::Allors.Extent<I2> C1I2one2manies
+		{ 
+			get
+			{
+				return Strategy.GetCompositeRoles(Meta.C1I2one2many);
+			}
+			set
+			{
+				Strategy.SetCompositeRoles(Meta.C1I2one2many, value);
+			}
+		}
+
+		virtual public void AddC1I2one2many (I2 value)
+		{
+			Strategy.AddCompositeRole(Meta.C1I2one2many, value);
+		}
+
+		virtual public void RemoveC1I2one2many (I2 value)
+		{
+			Strategy.RemoveCompositeRole(Meta.C1I2one2many,value);
+		}
+
+		virtual public bool ExistC1I2one2manies
+		{
+			get
+			{
+				return Strategy.ExistCompositeRoles(Meta.C1I2one2many);
+			}
+		}
+
+		virtual public void RemoveC1I2one2manies()
+		{
+			Strategy.RemoveCompositeRoles(Meta.C1I2one2many);
+		}
+
+
+		virtual public C1 C1C1one2one
+		{ 
+			get
+			{
+				return (C1) Strategy.GetCompositeRole(Meta.C1C1one2one);
+			}
+			set
+			{
+				Strategy.SetCompositeRole(Meta.C1C1one2one ,value);
+			}
+		}
+
+		virtual public bool ExistC1C1one2one
+		{
+			get
+			{
+				return Strategy.ExistCompositeRole(Meta.C1C1one2one);
+			}
+		}
+
+		virtual public void RemoveC1C1one2one()
+		{
+			Strategy.RemoveCompositeRole(Meta.C1C1one2one);
+		}
+
+
+
+		virtual public global::System.Double? C1DoubleGreaterThan 
+		{
+			get
+			{
+				return (global::System.Double?) Strategy.GetUnitRole(Meta.C1DoubleGreaterThan);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.C1DoubleGreaterThan, value);
+			}
+		}
+
+		virtual public bool ExistC1DoubleGreaterThan{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.C1DoubleGreaterThan);
+			}
+		}
+
+		virtual public void RemoveC1DoubleGreaterThan()
+		{
+			Strategy.RemoveUnitRole(Meta.C1DoubleGreaterThan);
+		}
+
+
+		virtual public I2 C1I2many2one
+		{ 
+			get
+			{
+				return (I2) Strategy.GetCompositeRole(Meta.C1I2many2one);
+			}
+			set
+			{
+				Strategy.SetCompositeRole(Meta.C1I2many2one ,value);
+			}
+		}
+
+		virtual public bool ExistC1I2many2one
+		{
+			get
+			{
+				return Strategy.ExistCompositeRole(Meta.C1I2many2one);
+			}
+		}
+
+		virtual public void RemoveC1I2many2one()
+		{
+			Strategy.RemoveCompositeRole(Meta.C1I2many2one);
+		}
+
+
+		virtual public I12 C1I12many2one
+		{ 
+			get
+			{
+				return (I12) Strategy.GetCompositeRole(Meta.C1I12many2one);
+			}
+			set
+			{
+				Strategy.SetCompositeRole(Meta.C1I12many2one ,value);
+			}
+		}
+
+		virtual public bool ExistC1I12many2one
+		{
+			get
+			{
+				return Strategy.ExistCompositeRole(Meta.C1I12many2one);
+			}
+		}
+
+		virtual public void RemoveC1I12many2one()
+		{
+			Strategy.RemoveCompositeRole(Meta.C1I12many2one);
+		}
+
+
+
+		virtual public global::System.DateTime? C1DateTimeLessThan 
+		{
+			get
+			{
+				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.C1DateTimeLessThan);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.C1DateTimeLessThan, value);
+			}
+		}
+
+		virtual public bool ExistC1DateTimeLessThan{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.C1DateTimeLessThan);
+			}
+		}
+
+		virtual public void RemoveC1DateTimeLessThan()
+		{
+			Strategy.RemoveUnitRole(Meta.C1DateTimeLessThan);
+		}
+
+
+
+		virtual public global::System.DateTime? C1DateTimeBetweenA 
+		{
+			get
+			{
+				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.C1DateTimeBetweenA);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.C1DateTimeBetweenA, value);
+			}
+		}
+
+		virtual public bool ExistC1DateTimeBetweenA{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.C1DateTimeBetweenA);
+			}
+		}
+
+		virtual public void RemoveC1DateTimeBetweenA()
+		{
+			Strategy.RemoveUnitRole(Meta.C1DateTimeBetweenA);
+		}
+
+
+		virtual public global::Allors.Extent<C2> C1C2many2manies
+		{ 
+			get
+			{
+				return Strategy.GetCompositeRoles(Meta.C1C2many2many);
+			}
+			set
+			{
+				Strategy.SetCompositeRoles(Meta.C1C2many2many, value);
+			}
+		}
+
+		virtual public void AddC1C2many2many (C2 value)
+		{
+			Strategy.AddCompositeRole(Meta.C1C2many2many, value);
+		}
+
+		virtual public void RemoveC1C2many2many (C2 value)
+		{
+			Strategy.RemoveCompositeRole(Meta.C1C2many2many,value);
+		}
+
+		virtual public bool ExistC1C2many2manies
+		{
+			get
+			{
+				return Strategy.ExistCompositeRoles(Meta.C1C2many2many);
+			}
+		}
+
+		virtual public void RemoveC1C2many2manies()
+		{
+			Strategy.RemoveCompositeRoles(Meta.C1C2many2many);
+		}
+
+
+		virtual public S1 C1S1many2one
+		{ 
+			get
+			{
+				return (S1) Strategy.GetCompositeRole(Meta.C1S1many2one);
+			}
+			set
+			{
+				Strategy.SetCompositeRole(Meta.C1S1many2one ,value);
+			}
+		}
+
+		virtual public bool ExistC1S1many2one
+		{
+			get
+			{
+				return Strategy.ExistCompositeRole(Meta.C1S1many2one);
+			}
+		}
+
+		virtual public void RemoveC1S1many2one()
+		{
+			Strategy.RemoveCompositeRole(Meta.C1S1many2one);
+		}
+
+
+		virtual public global::Allors.Extent<I1> C1I1many2manies
+		{ 
+			get
+			{
+				return Strategy.GetCompositeRoles(Meta.C1I1many2many);
+			}
+			set
+			{
+				Strategy.SetCompositeRoles(Meta.C1I1many2many, value);
+			}
+		}
+
+		virtual public void AddC1I1many2many (I1 value)
+		{
+			Strategy.AddCompositeRole(Meta.C1I1many2many, value);
+		}
+
+		virtual public void RemoveC1I1many2many (I1 value)
+		{
+			Strategy.RemoveCompositeRole(Meta.C1I1many2many,value);
+		}
+
+		virtual public bool ExistC1I1many2manies
+		{
+			get
+			{
+				return Strategy.ExistCompositeRoles(Meta.C1I1many2many);
+			}
+		}
+
+		virtual public void RemoveC1I1many2manies()
+		{
+			Strategy.RemoveCompositeRoles(Meta.C1I1many2many);
+		}
+
+
+
+		virtual public global::System.Double? C1DoubleLessThan 
+		{
+			get
+			{
+				return (global::System.Double?) Strategy.GetUnitRole(Meta.C1DoubleLessThan);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.C1DoubleLessThan, value);
+			}
+		}
+
+		virtual public bool ExistC1DoubleLessThan{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.C1DoubleLessThan);
+			}
+		}
+
+		virtual public void RemoveC1DoubleLessThan()
+		{
+			Strategy.RemoveUnitRole(Meta.C1DoubleLessThan);
+		}
+
+
+		virtual public I1 C1I1many2one
+		{ 
+			get
+			{
+				return (I1) Strategy.GetCompositeRole(Meta.C1I1many2one);
+			}
+			set
+			{
+				Strategy.SetCompositeRole(Meta.C1I1many2one ,value);
+			}
+		}
+
+		virtual public bool ExistC1I1many2one
+		{
+			get
+			{
+				return Strategy.ExistCompositeRole(Meta.C1I1many2one);
+			}
+		}
+
+		virtual public void RemoveC1I1many2one()
+		{
+			Strategy.RemoveCompositeRole(Meta.C1I1many2one);
+		}
+
+
+
+		virtual public global::System.Int64? C1LongGreaterThan 
+		{
+			get
+			{
+				return (global::System.Int64?) Strategy.GetUnitRole(Meta.C1LongGreaterThan);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.C1LongGreaterThan, value);
+			}
+		}
+
+		virtual public bool ExistC1LongGreaterThan{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.C1LongGreaterThan);
+			}
+		}
+
+		virtual public void RemoveC1LongGreaterThan()
+		{
+			Strategy.RemoveUnitRole(Meta.C1LongGreaterThan);
+		}
+
+
+
+		virtual public global::System.Decimal? C1DecimalGreaterThan 
+		{
+			get
+			{
+				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.C1DecimalGreaterThan);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.C1DecimalGreaterThan, value);
+			}
+		}
+
+		virtual public bool ExistC1DecimalGreaterThan{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.C1DecimalGreaterThan);
+			}
+		}
+
+		virtual public void RemoveC1DecimalGreaterThan()
+		{
+			Strategy.RemoveUnitRole(Meta.C1DecimalGreaterThan);
 		}
 
 
@@ -296,42 +934,6 @@ namespace Allors.Domain
 		}
 
 
-		virtual public global::Allors.Extent<C1> C1C1Many2Manies
-		{ 
-			get
-			{
-				return Strategy.GetCompositeRoles(Meta.C1C1Many2Many);
-			}
-			set
-			{
-				Strategy.SetCompositeRoles(Meta.C1C1Many2Many, value);
-			}
-		}
-
-		virtual public void AddC1C1Many2Many (C1 value)
-		{
-			Strategy.AddCompositeRole(Meta.C1C1Many2Many, value);
-		}
-
-		virtual public void RemoveC1C1Many2Many (C1 value)
-		{
-			Strategy.RemoveCompositeRole(Meta.C1C1Many2Many,value);
-		}
-
-		virtual public bool ExistC1C1Many2Manies
-		{
-			get
-			{
-				return Strategy.ExistCompositeRoles(Meta.C1C1Many2Many);
-			}
-		}
-
-		virtual public void RemoveC1C1Many2Manies()
-		{
-			Strategy.RemoveCompositeRoles(Meta.C1C1Many2Many);
-		}
-
-
 
 		virtual public global::System.Int64? C1AllorsLong 
 		{
@@ -358,39 +960,55 @@ namespace Allors.Domain
 		}
 
 
-		virtual public global::Allors.Extent<I12> C1I12Many2Manies
+		virtual public S2 C1S2one2one
 		{ 
 			get
 			{
-				return Strategy.GetCompositeRoles(Meta.C1I12Many2Many);
+				return (S2) Strategy.GetCompositeRole(Meta.C1S2one2one);
 			}
 			set
 			{
-				Strategy.SetCompositeRoles(Meta.C1I12Many2Many, value);
+				Strategy.SetCompositeRole(Meta.C1S2one2one ,value);
 			}
 		}
 
-		virtual public void AddC1I12Many2Many (I12 value)
-		{
-			Strategy.AddCompositeRole(Meta.C1I12Many2Many, value);
-		}
-
-		virtual public void RemoveC1I12Many2Many (I12 value)
-		{
-			Strategy.RemoveCompositeRole(Meta.C1I12Many2Many,value);
-		}
-
-		virtual public bool ExistC1I12Many2Manies
+		virtual public bool ExistC1S2one2one
 		{
 			get
 			{
-				return Strategy.ExistCompositeRoles(Meta.C1I12Many2Many);
+				return Strategy.ExistCompositeRole(Meta.C1S2one2one);
 			}
 		}
 
-		virtual public void RemoveC1I12Many2Manies()
+		virtual public void RemoveC1S2one2one()
 		{
-			Strategy.RemoveCompositeRoles(Meta.C1I12Many2Many);
+			Strategy.RemoveCompositeRole(Meta.C1S2one2one);
+		}
+
+
+
+		virtual public global::System.DateTime? C1DateTimeBetweenB 
+		{
+			get
+			{
+				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.C1DateTimeBetweenB);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.C1DateTimeBetweenB, value);
+			}
+		}
+
+		virtual public bool ExistC1DateTimeBetweenB{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.C1DateTimeBetweenB);
+			}
+		}
+
+		virtual public void RemoveC1DateTimeBetweenB()
+		{
+			Strategy.RemoveUnitRole(Meta.C1DateTimeBetweenB);
 		}
 
 
@@ -420,163 +1038,241 @@ namespace Allors.Domain
 		}
 
 
-		virtual public global::Allors.Extent<I12> C1I12One2Manies
+
+		virtual public global::System.DateTime? C1DateTimeGreaterThan 
+		{
+			get
+			{
+				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.C1DateTimeGreaterThan);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.C1DateTimeGreaterThan, value);
+			}
+		}
+
+		virtual public bool ExistC1DateTimeGreaterThan{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.C1DateTimeGreaterThan);
+			}
+		}
+
+		virtual public void RemoveC1DateTimeGreaterThan()
+		{
+			Strategy.RemoveUnitRole(Meta.C1DateTimeGreaterThan);
+		}
+
+
+		virtual public S1 C1S1one2one
 		{ 
 			get
 			{
-				return Strategy.GetCompositeRoles(Meta.C1I12One2Many);
+				return (S1) Strategy.GetCompositeRole(Meta.C1S1one2one);
 			}
 			set
 			{
-				Strategy.SetCompositeRoles(Meta.C1I12One2Many, value);
+				Strategy.SetCompositeRole(Meta.C1S1one2one ,value);
 			}
 		}
 
-		virtual public void AddC1I12One2Many (I12 value)
-		{
-			Strategy.AddCompositeRole(Meta.C1I12One2Many, value);
-		}
-
-		virtual public void RemoveC1I12One2Many (I12 value)
-		{
-			Strategy.RemoveCompositeRole(Meta.C1I12One2Many,value);
-		}
-
-		virtual public bool ExistC1I12One2Manies
+		virtual public bool ExistC1S1one2one
 		{
 			get
 			{
-				return Strategy.ExistCompositeRoles(Meta.C1I12One2Many);
+				return Strategy.ExistCompositeRole(Meta.C1S1one2one);
 			}
 		}
 
-		virtual public void RemoveC1I12One2Manies()
+		virtual public void RemoveC1S1one2one()
 		{
-			Strategy.RemoveCompositeRoles(Meta.C1I12One2Many);
+			Strategy.RemoveCompositeRole(Meta.C1S1one2one);
 		}
 
 
-		virtual public global::Allors.Extent<C2> C1C2One2Manies
+		virtual public global::Allors.Extent<C1> C1C1one2manies
 		{ 
 			get
 			{
-				return Strategy.GetCompositeRoles(Meta.C1C2One2Many);
+				return Strategy.GetCompositeRoles(Meta.C1C1one2many);
 			}
 			set
 			{
-				Strategy.SetCompositeRoles(Meta.C1C2One2Many, value);
+				Strategy.SetCompositeRoles(Meta.C1C1one2many, value);
 			}
 		}
 
-		virtual public void AddC1C2One2Many (C2 value)
+		virtual public void AddC1C1one2many (C1 value)
 		{
-			Strategy.AddCompositeRole(Meta.C1C2One2Many, value);
+			Strategy.AddCompositeRole(Meta.C1C1one2many, value);
 		}
 
-		virtual public void RemoveC1C2One2Many (C2 value)
+		virtual public void RemoveC1C1one2many (C1 value)
 		{
-			Strategy.RemoveCompositeRole(Meta.C1C2One2Many,value);
+			Strategy.RemoveCompositeRole(Meta.C1C1one2many,value);
 		}
 
-		virtual public bool ExistC1C2One2Manies
+		virtual public bool ExistC1C1one2manies
 		{
 			get
 			{
-				return Strategy.ExistCompositeRoles(Meta.C1C2One2Many);
+				return Strategy.ExistCompositeRoles(Meta.C1C1one2many);
 			}
 		}
 
-		virtual public void RemoveC1C2One2Manies()
+		virtual public void RemoveC1C1one2manies()
 		{
-			Strategy.RemoveCompositeRoles(Meta.C1C2One2Many);
+			Strategy.RemoveCompositeRoles(Meta.C1C1one2many);
 		}
 
 
-		virtual public global::Allors.Extent<C1> C1C1One2Manies
+		virtual public global::Allors.Extent<I1> C1I1one2manies
 		{ 
 			get
 			{
-				return Strategy.GetCompositeRoles(Meta.C1C1One2Many);
+				return Strategy.GetCompositeRoles(Meta.C1I1one2many);
 			}
 			set
 			{
-				Strategy.SetCompositeRoles(Meta.C1C1One2Many, value);
+				Strategy.SetCompositeRoles(Meta.C1I1one2many, value);
 			}
 		}
 
-		virtual public void AddC1C1One2Many (C1 value)
+		virtual public void AddC1I1one2many (I1 value)
 		{
-			Strategy.AddCompositeRole(Meta.C1C1One2Many, value);
+			Strategy.AddCompositeRole(Meta.C1I1one2many, value);
 		}
 
-		virtual public void RemoveC1C1One2Many (C1 value)
+		virtual public void RemoveC1I1one2many (I1 value)
 		{
-			Strategy.RemoveCompositeRole(Meta.C1C1One2Many,value);
+			Strategy.RemoveCompositeRole(Meta.C1I1one2many,value);
 		}
 
-		virtual public bool ExistC1C1One2Manies
+		virtual public bool ExistC1I1one2manies
 		{
 			get
 			{
-				return Strategy.ExistCompositeRoles(Meta.C1C1One2Many);
+				return Strategy.ExistCompositeRoles(Meta.C1I1one2many);
 			}
 		}
 
-		virtual public void RemoveC1C1One2Manies()
+		virtual public void RemoveC1I1one2manies()
 		{
-			Strategy.RemoveCompositeRoles(Meta.C1C1One2Many);
+			Strategy.RemoveCompositeRoles(Meta.C1I1one2many);
 		}
 
 
-
-		virtual public global::System.String AllorsStringMax 
-		{
-			get
-			{
-				return (global::System.String) Strategy.GetUnitRole(Meta.AllorsStringMax);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.AllorsStringMax, value);
-			}
-		}
-
-		virtual public bool ExistAllorsStringMax{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.AllorsStringMax);
-			}
-		}
-
-		virtual public void RemoveAllorsStringMax()
-		{
-			Strategy.RemoveUnitRole(Meta.AllorsStringMax);
-		}
-
-
-		virtual public C1 C1C1Many2One
+		virtual public C2 C1C2many2one
 		{ 
 			get
 			{
-				return (C1) Strategy.GetCompositeRole(Meta.C1C1Many2One);
+				return (C2) Strategy.GetCompositeRole(Meta.C1C2many2one);
 			}
 			set
 			{
-				Strategy.SetCompositeRole(Meta.C1C1Many2One ,value);
+				Strategy.SetCompositeRole(Meta.C1C2many2one ,value);
 			}
 		}
 
-		virtual public bool ExistC1C1Many2One
+		virtual public bool ExistC1C2many2one
 		{
 			get
 			{
-				return Strategy.ExistCompositeRole(Meta.C1C1Many2One);
+				return Strategy.ExistCompositeRole(Meta.C1C2many2one);
 			}
 		}
 
-		virtual public void RemoveC1C1Many2One()
+		virtual public void RemoveC1C2many2one()
 		{
-			Strategy.RemoveCompositeRole(Meta.C1C1Many2One);
+			Strategy.RemoveCompositeRole(Meta.C1C2many2one);
+		}
+
+
+		virtual public global::Allors.Extent<I12> C1I12one2manies
+		{ 
+			get
+			{
+				return Strategy.GetCompositeRoles(Meta.C1I12one2many);
+			}
+			set
+			{
+				Strategy.SetCompositeRoles(Meta.C1I12one2many, value);
+			}
+		}
+
+		virtual public void AddC1I12one2many (I12 value)
+		{
+			Strategy.AddCompositeRole(Meta.C1I12one2many, value);
+		}
+
+		virtual public void RemoveC1I12one2many (I12 value)
+		{
+			Strategy.RemoveCompositeRole(Meta.C1I12one2many,value);
+		}
+
+		virtual public bool ExistC1I12one2manies
+		{
+			get
+			{
+				return Strategy.ExistCompositeRoles(Meta.C1I12one2many);
+			}
+		}
+
+		virtual public void RemoveC1I12one2manies()
+		{
+			Strategy.RemoveCompositeRoles(Meta.C1I12one2many);
+		}
+
+
+		virtual public S2 C1S2many2many
+		{ 
+			get
+			{
+				return (S2) Strategy.GetCompositeRole(Meta.C1S2many2many);
+			}
+			set
+			{
+				Strategy.SetCompositeRole(Meta.C1S2many2many ,value);
+			}
+		}
+
+		virtual public bool ExistC1S2many2many
+		{
+			get
+			{
+				return Strategy.ExistCompositeRole(Meta.C1S2many2many);
+			}
+		}
+
+		virtual public void RemoveC1S2many2many()
+		{
+			Strategy.RemoveCompositeRole(Meta.C1S2many2many);
+		}
+
+
+		virtual public C2 C1C2one2one
+		{ 
+			get
+			{
+				return (C2) Strategy.GetCompositeRole(Meta.C1C2one2one);
+			}
+			set
+			{
+				Strategy.SetCompositeRole(Meta.C1C2one2one ,value);
+			}
+		}
+
+		virtual public bool ExistC1C2one2one
+		{
+			get
+			{
+				return Strategy.ExistCompositeRole(Meta.C1C2one2one);
+			}
+		}
+
+		virtual public void RemoveC1C2one2one()
+		{
+			Strategy.RemoveCompositeRole(Meta.C1C2one2one);
 		}
 
 
@@ -606,91 +1302,75 @@ namespace Allors.Domain
 		}
 
 
-		virtual public I12 C1I12One2One
+		virtual public global::Allors.Extent<I12> C1I12many2manies
 		{ 
 			get
 			{
-				return (I12) Strategy.GetCompositeRole(Meta.C1I12One2One);
+				return Strategy.GetCompositeRoles(Meta.C1I12many2many);
 			}
 			set
 			{
-				Strategy.SetCompositeRole(Meta.C1I12One2One ,value);
+				Strategy.SetCompositeRoles(Meta.C1I12many2many, value);
 			}
 		}
 
-		virtual public bool ExistC1I12One2One
+		virtual public void AddC1I12many2many (I12 value)
+		{
+			Strategy.AddCompositeRole(Meta.C1I12many2many, value);
+		}
+
+		virtual public void RemoveC1I12many2many (I12 value)
+		{
+			Strategy.RemoveCompositeRole(Meta.C1I12many2many,value);
+		}
+
+		virtual public bool ExistC1I12many2manies
 		{
 			get
 			{
-				return Strategy.ExistCompositeRole(Meta.C1I12One2One);
+				return Strategy.ExistCompositeRoles(Meta.C1I12many2many);
 			}
 		}
 
-		virtual public void RemoveC1I12One2One()
+		virtual public void RemoveC1I12many2manies()
 		{
-			Strategy.RemoveCompositeRole(Meta.C1I12One2One);
+			Strategy.RemoveCompositeRoles(Meta.C1I12many2many);
 		}
 
 
-		virtual public I12 C1I12Many2One
+		virtual public global::Allors.Extent<I2> C1I2many2manies
 		{ 
 			get
 			{
-				return (I12) Strategy.GetCompositeRole(Meta.C1I12Many2One);
+				return Strategy.GetCompositeRoles(Meta.C1I2many2many);
 			}
 			set
 			{
-				Strategy.SetCompositeRole(Meta.C1I12Many2One ,value);
+				Strategy.SetCompositeRoles(Meta.C1I2many2many, value);
 			}
 		}
 
-		virtual public bool ExistC1I12Many2One
+		virtual public void AddC1I2many2many (I2 value)
+		{
+			Strategy.AddCompositeRole(Meta.C1I2many2many, value);
+		}
+
+		virtual public void RemoveC1I2many2many (I2 value)
+		{
+			Strategy.RemoveCompositeRole(Meta.C1I2many2many,value);
+		}
+
+		virtual public bool ExistC1I2many2manies
 		{
 			get
 			{
-				return Strategy.ExistCompositeRole(Meta.C1I12Many2One);
+				return Strategy.ExistCompositeRoles(Meta.C1I2many2many);
 			}
 		}
 
-		virtual public void RemoveC1I12Many2One()
+		virtual public void RemoveC1I2many2manies()
 		{
-			Strategy.RemoveCompositeRole(Meta.C1I12Many2One);
-		}
-
-
-		virtual public global::Allors.Extent<I2> C1I2Many2Manies
-		{ 
-			get
-			{
-				return Strategy.GetCompositeRoles(Meta.C1I2Many2Many);
-			}
-			set
-			{
-				Strategy.SetCompositeRoles(Meta.C1I2Many2Many, value);
-			}
-		}
-
-		virtual public void AddC1I2Many2Many (I2 value)
-		{
-			Strategy.AddCompositeRole(Meta.C1I2Many2Many, value);
-		}
-
-		virtual public void RemoveC1I2Many2Many (I2 value)
-		{
-			Strategy.RemoveCompositeRole(Meta.C1I2Many2Many,value);
-		}
-
-		virtual public bool ExistC1I2Many2Manies
-		{
-			get
-			{
-				return Strategy.ExistCompositeRoles(Meta.C1I2Many2Many);
-			}
-		}
-
-		virtual public void RemoveC1I2Many2Manies()
-		{
-			Strategy.RemoveCompositeRoles(Meta.C1I2Many2Many);
+			Strategy.RemoveCompositeRoles(Meta.C1I2many2many);
 		}
 
 
@@ -720,91 +1400,247 @@ namespace Allors.Domain
 		}
 
 
-		virtual public I2 C1I2Many2One
+		virtual public C3 C1C3one2one
 		{ 
 			get
 			{
-				return (I2) Strategy.GetCompositeRole(Meta.C1I2Many2One);
+				return (C3) Strategy.GetCompositeRole(Meta.C1C3one2one);
 			}
 			set
 			{
-				Strategy.SetCompositeRole(Meta.C1I2Many2One ,value);
+				Strategy.SetCompositeRole(Meta.C1C3one2one ,value);
 			}
 		}
 
-		virtual public bool ExistC1I2Many2One
+		virtual public bool ExistC1C3one2one
 		{
 			get
 			{
-				return Strategy.ExistCompositeRole(Meta.C1I2Many2One);
+				return Strategy.ExistCompositeRole(Meta.C1C3one2one);
 			}
 		}
 
-		virtual public void RemoveC1I2Many2One()
+		virtual public void RemoveC1C3one2one()
 		{
-			Strategy.RemoveCompositeRole(Meta.C1I2Many2One);
+			Strategy.RemoveCompositeRole(Meta.C1C3one2one);
 		}
 
 
-		virtual public global::Allors.Extent<I1> C1I1One2Manies
+		virtual public global::Allors.Extent<C3> C1C3many2manies
 		{ 
 			get
 			{
-				return Strategy.GetCompositeRoles(Meta.C1I1One2Many);
+				return Strategy.GetCompositeRoles(Meta.C1C3many2many);
 			}
 			set
 			{
-				Strategy.SetCompositeRoles(Meta.C1I1One2Many, value);
+				Strategy.SetCompositeRoles(Meta.C1C3many2many, value);
 			}
 		}
 
-		virtual public void AddC1I1One2Many (I1 value)
+		virtual public void AddC1C3many2many (C3 value)
 		{
-			Strategy.AddCompositeRole(Meta.C1I1One2Many, value);
+			Strategy.AddCompositeRole(Meta.C1C3many2many, value);
 		}
 
-		virtual public void RemoveC1I1One2Many (I1 value)
+		virtual public void RemoveC1C3many2many (C3 value)
 		{
-			Strategy.RemoveCompositeRole(Meta.C1I1One2Many,value);
+			Strategy.RemoveCompositeRole(Meta.C1C3many2many,value);
 		}
 
-		virtual public bool ExistC1I1One2Manies
+		virtual public bool ExistC1C3many2manies
 		{
 			get
 			{
-				return Strategy.ExistCompositeRoles(Meta.C1I1One2Many);
+				return Strategy.ExistCompositeRoles(Meta.C1C3many2many);
 			}
 		}
 
-		virtual public void RemoveC1I1One2Manies()
+		virtual public void RemoveC1C3many2manies()
 		{
-			Strategy.RemoveCompositeRoles(Meta.C1I1One2Many);
+			Strategy.RemoveCompositeRoles(Meta.C1C3many2many);
 		}
 
 
-		virtual public C2 C1C2One2One
+
+		virtual public global::System.String C1StringEquals 
+		{
+			get
+			{
+				return (global::System.String) Strategy.GetUnitRole(Meta.C1StringEquals);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.C1StringEquals, value);
+			}
+		}
+
+		virtual public bool ExistC1StringEquals{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.C1StringEquals);
+			}
+		}
+
+		virtual public void RemoveC1StringEquals()
+		{
+			Strategy.RemoveUnitRole(Meta.C1StringEquals);
+		}
+
+
+
+		virtual public global::System.Int64? C1LongBetweenA 
+		{
+			get
+			{
+				return (global::System.Int64?) Strategy.GetUnitRole(Meta.C1LongBetweenA);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.C1LongBetweenA, value);
+			}
+		}
+
+		virtual public bool ExistC1LongBetweenA{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.C1LongBetweenA);
+			}
+		}
+
+		virtual public void RemoveC1LongBetweenA()
+		{
+			Strategy.RemoveUnitRole(Meta.C1LongBetweenA);
+		}
+
+
+
+		virtual public global::System.Int32? C1IntegerGreaterThan 
+		{
+			get
+			{
+				return (global::System.Int32?) Strategy.GetUnitRole(Meta.C1IntegerGreaterThan);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.C1IntegerGreaterThan, value);
+			}
+		}
+
+		virtual public bool ExistC1IntegerGreaterThan{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.C1IntegerGreaterThan);
+			}
+		}
+
+		virtual public void RemoveC1IntegerGreaterThan()
+		{
+			Strategy.RemoveUnitRole(Meta.C1IntegerGreaterThan);
+		}
+
+
+		virtual public C3 C3may2one
 		{ 
 			get
 			{
-				return (C2) Strategy.GetCompositeRole(Meta.C1C2One2One);
+				return (C3) Strategy.GetCompositeRole(Meta.C3may2one);
 			}
 			set
 			{
-				Strategy.SetCompositeRole(Meta.C1C2One2One ,value);
+				Strategy.SetCompositeRole(Meta.C3may2one ,value);
 			}
 		}
 
-		virtual public bool ExistC1C2One2One
+		virtual public bool ExistC3may2one
 		{
 			get
 			{
-				return Strategy.ExistCompositeRole(Meta.C1C2One2One);
+				return Strategy.ExistCompositeRole(Meta.C3may2one);
 			}
 		}
 
-		virtual public void RemoveC1C2One2One()
+		virtual public void RemoveC3may2one()
 		{
-			Strategy.RemoveCompositeRole(Meta.C1C2One2One);
+			Strategy.RemoveCompositeRole(Meta.C3may2one);
+		}
+
+
+
+		virtual public global::System.Int32? C1IntegerBetweenB 
+		{
+			get
+			{
+				return (global::System.Int32?) Strategy.GetUnitRole(Meta.C1IntegerBetweenB);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.C1IntegerBetweenB, value);
+			}
+		}
+
+		virtual public bool ExistC1IntegerBetweenB{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.C1IntegerBetweenB);
+			}
+		}
+
+		virtual public void RemoveC1IntegerBetweenB()
+		{
+			Strategy.RemoveUnitRole(Meta.C1IntegerBetweenB);
+		}
+
+
+
+		virtual public global::System.DateTime? C1AllorsDateTime 
+		{
+			get
+			{
+				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.C1AllorsDateTime);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.C1AllorsDateTime, value);
+			}
+		}
+
+		virtual public bool ExistC1AllorsDateTime{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.C1AllorsDateTime);
+			}
+		}
+
+		virtual public void RemoveC1AllorsDateTime()
+		{
+			Strategy.RemoveUnitRole(Meta.C1AllorsDateTime);
+		}
+
+
+
+		virtual public global::System.Int32? C1IntegerBetweenA 
+		{
+			get
+			{
+				return (global::System.Int32?) Strategy.GetUnitRole(Meta.C1IntegerBetweenA);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.C1IntegerBetweenA, value);
+			}
+		}
+
+		virtual public bool ExistC1IntegerBetweenA{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.C1IntegerBetweenA);
+			}
+		}
+
+		virtual public void RemoveC1IntegerBetweenA()
+		{
+			Strategy.RemoveUnitRole(Meta.C1IntegerBetweenA);
 		}
 
 
@@ -834,39 +1670,101 @@ namespace Allors.Domain
 		}
 
 
-		virtual public global::Allors.Extent<C2> C1C2Many2Manies
-		{ 
+
+		virtual public global::System.Int64? C1LongBetweenB 
+		{
 			get
 			{
-				return Strategy.GetCompositeRoles(Meta.C1C2Many2Many);
+				return (global::System.Int64?) Strategy.GetUnitRole(Meta.C1LongBetweenB);
 			}
 			set
 			{
-				Strategy.SetCompositeRoles(Meta.C1C2Many2Many, value);
+				Strategy.SetUnitRole(Meta.C1LongBetweenB, value);
 			}
 		}
 
-		virtual public void AddC1C2Many2Many (C2 value)
-		{
-			Strategy.AddCompositeRole(Meta.C1C2Many2Many, value);
+		virtual public bool ExistC1LongBetweenB{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.C1LongBetweenB);
+			}
 		}
 
-		virtual public void RemoveC1C2Many2Many (C2 value)
+		virtual public void RemoveC1LongBetweenB()
 		{
-			Strategy.RemoveCompositeRole(Meta.C1C2Many2Many,value);
+			Strategy.RemoveUnitRole(Meta.C1LongBetweenB);
 		}
 
-		virtual public bool ExistC1C2Many2Manies
+
+		virtual public global::Allors.Extent<C2> C1C2one2manies
+		{ 
+			get
+			{
+				return Strategy.GetCompositeRoles(Meta.C1C2one2many);
+			}
+			set
+			{
+				Strategy.SetCompositeRoles(Meta.C1C2one2many, value);
+			}
+		}
+
+		virtual public void AddC1C2one2many (C2 value)
+		{
+			Strategy.AddCompositeRole(Meta.C1C2one2many, value);
+		}
+
+		virtual public void RemoveC1C2one2many (C2 value)
+		{
+			Strategy.RemoveCompositeRole(Meta.C1C2one2many,value);
+		}
+
+		virtual public bool ExistC1C2one2manies
 		{
 			get
 			{
-				return Strategy.ExistCompositeRoles(Meta.C1C2Many2Many);
+				return Strategy.ExistCompositeRoles(Meta.C1C2one2many);
 			}
 		}
 
-		virtual public void RemoveC1C2Many2Manies()
+		virtual public void RemoveC1C2one2manies()
 		{
-			Strategy.RemoveCompositeRoles(Meta.C1C2Many2Many);
+			Strategy.RemoveCompositeRoles(Meta.C1C2one2many);
+		}
+
+
+		virtual public global::Allors.Extent<S2> C1S2one2manies
+		{ 
+			get
+			{
+				return Strategy.GetCompositeRoles(Meta.C1S2one2many);
+			}
+			set
+			{
+				Strategy.SetCompositeRoles(Meta.C1S2one2many, value);
+			}
+		}
+
+		virtual public void AddC1S2one2many (S2 value)
+		{
+			Strategy.AddCompositeRole(Meta.C1S2one2many, value);
+		}
+
+		virtual public void RemoveC1S2one2many (S2 value)
+		{
+			Strategy.RemoveCompositeRole(Meta.C1S2one2many,value);
+		}
+
+		virtual public bool ExistC1S2one2manies
+		{
+			get
+			{
+				return Strategy.ExistCompositeRoles(Meta.C1S2one2many);
+			}
+		}
+
+		virtual public void RemoveC1S2one2manies()
+		{
+			Strategy.RemoveCompositeRoles(Meta.C1S2one2many);
 		}
 
 
@@ -896,127 +1794,293 @@ namespace Allors.Domain
 		}
 
 
-		virtual public I1 I1I1Many2One
-		{ 
+
+		virtual public global::System.Decimal? C1DecimalLessThan 
+		{
 			get
 			{
-				return (I1) Strategy.GetCompositeRole(Meta.I1I1Many2One);
+				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.C1DecimalLessThan);
 			}
 			set
 			{
-				Strategy.SetCompositeRole(Meta.I1I1Many2One ,value);
+				Strategy.SetUnitRole(Meta.C1DecimalLessThan, value);
 			}
 		}
 
-		virtual public bool ExistI1I1Many2One
-		{
+		virtual public bool ExistC1DecimalLessThan{
 			get
 			{
-				return Strategy.ExistCompositeRole(Meta.I1I1Many2One);
+				return Strategy.ExistUnitRole(Meta.C1DecimalLessThan);
 			}
 		}
 
-		virtual public void RemoveI1I1Many2One()
+		virtual public void RemoveC1DecimalLessThan()
 		{
-			Strategy.RemoveCompositeRole(Meta.I1I1Many2One);
+			Strategy.RemoveUnitRole(Meta.C1DecimalLessThan);
 		}
 
 
-		virtual public global::Allors.Extent<I12> I1I12Many2Manies
+		virtual public global::Allors.Extent<C3> C1C3one2manies
 		{ 
 			get
 			{
-				return Strategy.GetCompositeRoles(Meta.I1I12Many2Many);
+				return Strategy.GetCompositeRoles(Meta.C1C3one2many);
 			}
 			set
 			{
-				Strategy.SetCompositeRoles(Meta.I1I12Many2Many, value);
+				Strategy.SetCompositeRoles(Meta.C1C3one2many, value);
 			}
 		}
 
-		virtual public void AddI1I12Many2Many (I12 value)
+		virtual public void AddC1C3one2many (C3 value)
 		{
-			Strategy.AddCompositeRole(Meta.I1I12Many2Many, value);
+			Strategy.AddCompositeRole(Meta.C1C3one2many, value);
 		}
 
-		virtual public void RemoveI1I12Many2Many (I12 value)
+		virtual public void RemoveC1C3one2many (C3 value)
 		{
-			Strategy.RemoveCompositeRole(Meta.I1I12Many2Many,value);
+			Strategy.RemoveCompositeRole(Meta.C1C3one2many,value);
 		}
 
-		virtual public bool ExistI1I12Many2Manies
+		virtual public bool ExistC1C3one2manies
 		{
 			get
 			{
-				return Strategy.ExistCompositeRoles(Meta.I1I12Many2Many);
+				return Strategy.ExistCompositeRoles(Meta.C1C3one2many);
 			}
 		}
 
-		virtual public void RemoveI1I12Many2Manies()
+		virtual public void RemoveC1C3one2manies()
 		{
-			Strategy.RemoveCompositeRoles(Meta.I1I12Many2Many);
+			Strategy.RemoveCompositeRoles(Meta.C1C3one2many);
 		}
 
 
-		virtual public global::Allors.Extent<I2> I1I2Many2Manies
+		virtual public global::Allors.Extent<I34> I1I34one2manies
 		{ 
 			get
 			{
-				return Strategy.GetCompositeRoles(Meta.I1I2Many2Many);
+				return Strategy.GetCompositeRoles(Meta.I1I34one2many);
 			}
 			set
 			{
-				Strategy.SetCompositeRoles(Meta.I1I2Many2Many, value);
+				Strategy.SetCompositeRoles(Meta.I1I34one2many, value);
 			}
 		}
 
-		virtual public void AddI1I2Many2Many (I2 value)
+		virtual public void AddI1I34one2many (I34 value)
 		{
-			Strategy.AddCompositeRole(Meta.I1I2Many2Many, value);
+			Strategy.AddCompositeRole(Meta.I1I34one2many, value);
 		}
 
-		virtual public void RemoveI1I2Many2Many (I2 value)
+		virtual public void RemoveI1I34one2many (I34 value)
 		{
-			Strategy.RemoveCompositeRole(Meta.I1I2Many2Many,value);
+			Strategy.RemoveCompositeRole(Meta.I1I34one2many,value);
 		}
 
-		virtual public bool ExistI1I2Many2Manies
+		virtual public bool ExistI1I34one2manies
 		{
 			get
 			{
-				return Strategy.ExistCompositeRoles(Meta.I1I2Many2Many);
+				return Strategy.ExistCompositeRoles(Meta.I1I34one2many);
 			}
 		}
 
-		virtual public void RemoveI1I2Many2Manies()
+		virtual public void RemoveI1I34one2manies()
 		{
-			Strategy.RemoveCompositeRoles(Meta.I1I2Many2Many);
+			Strategy.RemoveCompositeRoles(Meta.I1I34one2many);
 		}
 
 
-		virtual public I2 I1I2Many2One
+		virtual public global::Allors.Extent<I2> I1I2one2manies
 		{ 
 			get
 			{
-				return (I2) Strategy.GetCompositeRole(Meta.I1I2Many2One);
+				return Strategy.GetCompositeRoles(Meta.I1I2one2many);
 			}
 			set
 			{
-				Strategy.SetCompositeRole(Meta.I1I2Many2One ,value);
+				Strategy.SetCompositeRoles(Meta.I1I2one2many, value);
 			}
 		}
 
-		virtual public bool ExistI1I2Many2One
+		virtual public void AddI1I2one2many (I2 value)
+		{
+			Strategy.AddCompositeRole(Meta.I1I2one2many, value);
+		}
+
+		virtual public void RemoveI1I2one2many (I2 value)
+		{
+			Strategy.RemoveCompositeRole(Meta.I1I2one2many,value);
+		}
+
+		virtual public bool ExistI1I2one2manies
 		{
 			get
 			{
-				return Strategy.ExistCompositeRole(Meta.I1I2Many2One);
+				return Strategy.ExistCompositeRoles(Meta.I1I2one2many);
 			}
 		}
 
-		virtual public void RemoveI1I2Many2One()
+		virtual public void RemoveI1I2one2manies()
 		{
-			Strategy.RemoveCompositeRole(Meta.I1I2Many2One);
+			Strategy.RemoveCompositeRoles(Meta.I1I2one2many);
+		}
+
+
+		virtual public I2 I1I2many2one
+		{ 
+			get
+			{
+				return (I2) Strategy.GetCompositeRole(Meta.I1I2many2one);
+			}
+			set
+			{
+				Strategy.SetCompositeRole(Meta.I1I2many2one ,value);
+			}
+		}
+
+		virtual public bool ExistI1I2many2one
+		{
+			get
+			{
+				return Strategy.ExistCompositeRole(Meta.I1I2many2one);
+			}
+		}
+
+		virtual public void RemoveI1I2many2one()
+		{
+			Strategy.RemoveCompositeRole(Meta.I1I2many2one);
+		}
+
+
+		virtual public C2 I1C2many2one
+		{ 
+			get
+			{
+				return (C2) Strategy.GetCompositeRole(Meta.I1C2many2one);
+			}
+			set
+			{
+				Strategy.SetCompositeRole(Meta.I1C2many2one ,value);
+			}
+		}
+
+		virtual public bool ExistI1C2many2one
+		{
+			get
+			{
+				return Strategy.ExistCompositeRole(Meta.I1C2many2one);
+			}
+		}
+
+		virtual public void RemoveI1C2many2one()
+		{
+			Strategy.RemoveCompositeRole(Meta.I1C2many2one);
+		}
+
+
+		virtual public C2 I1C2one2one
+		{ 
+			get
+			{
+				return (C2) Strategy.GetCompositeRole(Meta.I1C2one2one);
+			}
+			set
+			{
+				Strategy.SetCompositeRole(Meta.I1C2one2one ,value);
+			}
+		}
+
+		virtual public bool ExistI1C2one2one
+		{
+			get
+			{
+				return Strategy.ExistCompositeRole(Meta.I1C2one2one);
+			}
+		}
+
+		virtual public void RemoveI1C2one2one()
+		{
+			Strategy.RemoveCompositeRole(Meta.I1C2one2one);
+		}
+
+
+
+		virtual public global::System.Decimal? I1DecimalBetweenA 
+		{
+			get
+			{
+				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.I1DecimalBetweenA);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.I1DecimalBetweenA, value);
+			}
+		}
+
+		virtual public bool ExistI1DecimalBetweenA{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.I1DecimalBetweenA);
+			}
+		}
+
+		virtual public void RemoveI1DecimalBetweenA()
+		{
+			Strategy.RemoveUnitRole(Meta.I1DecimalBetweenA);
+		}
+
+
+		virtual public S1 I1S1one2one
+		{ 
+			get
+			{
+				return (S1) Strategy.GetCompositeRole(Meta.I1S1one2one);
+			}
+			set
+			{
+				Strategy.SetCompositeRole(Meta.I1S1one2one ,value);
+			}
+		}
+
+		virtual public bool ExistI1S1one2one
+		{
+			get
+			{
+				return Strategy.ExistCompositeRole(Meta.I1S1one2one);
+			}
+		}
+
+		virtual public void RemoveI1S1one2one()
+		{
+			Strategy.RemoveCompositeRole(Meta.I1S1one2one);
+		}
+
+
+		virtual public I12 I1I12many2one
+		{ 
+			get
+			{
+				return (I12) Strategy.GetCompositeRole(Meta.I1I12many2one);
+			}
+			set
+			{
+				Strategy.SetCompositeRole(Meta.I1I12many2one ,value);
+			}
+		}
+
+		virtual public bool ExistI1I12many2one
+		{
+			get
+			{
+				return Strategy.ExistCompositeRole(Meta.I1I12many2one);
+			}
+		}
+
+		virtual public void RemoveI1I12many2one()
+		{
+			Strategy.RemoveCompositeRole(Meta.I1I12many2one);
 		}
 
 
@@ -1046,29 +2110,117 @@ namespace Allors.Domain
 		}
 
 
-		virtual public I12 I1I12Many2One
-		{ 
+
+		virtual public global::System.DateTime? I1DateTimeLessThan 
+		{
 			get
 			{
-				return (I12) Strategy.GetCompositeRole(Meta.I1I12Many2One);
+				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.I1DateTimeLessThan);
 			}
 			set
 			{
-				Strategy.SetCompositeRole(Meta.I1I12Many2One ,value);
+				Strategy.SetUnitRole(Meta.I1DateTimeLessThan, value);
 			}
 		}
 
-		virtual public bool ExistI1I12Many2One
+		virtual public bool ExistI1DateTimeLessThan{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.I1DateTimeLessThan);
+			}
+		}
+
+		virtual public void RemoveI1DateTimeLessThan()
+		{
+			Strategy.RemoveUnitRole(Meta.I1DateTimeLessThan);
+		}
+
+
+		virtual public global::Allors.Extent<C2> I1C2one2manies
+		{ 
+			get
+			{
+				return Strategy.GetCompositeRoles(Meta.I1C2one2many);
+			}
+			set
+			{
+				Strategy.SetCompositeRoles(Meta.I1C2one2many, value);
+			}
+		}
+
+		virtual public void AddI1C2one2many (C2 value)
+		{
+			Strategy.AddCompositeRole(Meta.I1C2one2many, value);
+		}
+
+		virtual public void RemoveI1C2one2many (C2 value)
+		{
+			Strategy.RemoveCompositeRole(Meta.I1C2one2many,value);
+		}
+
+		virtual public bool ExistI1C2one2manies
 		{
 			get
 			{
-				return Strategy.ExistCompositeRole(Meta.I1I12Many2One);
+				return Strategy.ExistCompositeRoles(Meta.I1C2one2many);
 			}
 		}
 
-		virtual public void RemoveI1I12Many2One()
+		virtual public void RemoveI1C2one2manies()
 		{
-			Strategy.RemoveCompositeRole(Meta.I1I12Many2One);
+			Strategy.RemoveCompositeRoles(Meta.I1C2one2many);
+		}
+
+
+
+		virtual public global::System.String I1StringLarge 
+		{
+			get
+			{
+				return (global::System.String) Strategy.GetUnitRole(Meta.I1StringLarge);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.I1StringLarge, value);
+			}
+		}
+
+		virtual public bool ExistI1StringLarge{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.I1StringLarge);
+			}
+		}
+
+		virtual public void RemoveI1StringLarge()
+		{
+			Strategy.RemoveUnitRole(Meta.I1StringLarge);
+		}
+
+
+
+		virtual public global::System.Double? I1DoubleLessThan 
+		{
+			get
+			{
+				return (global::System.Double?) Strategy.GetUnitRole(Meta.I1DoubleLessThan);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.I1DoubleLessThan, value);
+			}
+		}
+
+		virtual public bool ExistI1DoubleLessThan{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.I1DoubleLessThan);
+			}
+		}
+
+		virtual public void RemoveI1DoubleLessThan()
+		{
+			Strategy.RemoveUnitRole(Meta.I1DoubleLessThan);
 		}
 
 
@@ -1098,101 +2250,299 @@ namespace Allors.Domain
 		}
 
 
-		virtual public global::Allors.Extent<I2> I1I2One2Manies
+		virtual public C1 I1C1many2one
 		{ 
 			get
 			{
-				return Strategy.GetCompositeRoles(Meta.I1I2One2Many);
+				return (C1) Strategy.GetCompositeRole(Meta.I1C1many2one);
 			}
 			set
 			{
-				Strategy.SetCompositeRoles(Meta.I1I2One2Many, value);
+				Strategy.SetCompositeRole(Meta.I1C1many2one ,value);
 			}
 		}
 
-		virtual public void AddI1I2One2Many (I2 value)
-		{
-			Strategy.AddCompositeRole(Meta.I1I2One2Many, value);
-		}
-
-		virtual public void RemoveI1I2One2Many (I2 value)
-		{
-			Strategy.RemoveCompositeRole(Meta.I1I2One2Many,value);
-		}
-
-		virtual public bool ExistI1I2One2Manies
+		virtual public bool ExistI1C1many2one
 		{
 			get
 			{
-				return Strategy.ExistCompositeRoles(Meta.I1I2One2Many);
+				return Strategy.ExistCompositeRole(Meta.I1C1many2one);
 			}
 		}
 
-		virtual public void RemoveI1I2One2Manies()
+		virtual public void RemoveI1C1many2one()
 		{
-			Strategy.RemoveCompositeRoles(Meta.I1I2One2Many);
+			Strategy.RemoveCompositeRole(Meta.I1C1many2one);
 		}
 
 
-		virtual public global::Allors.Extent<C2> I1C2One2Manies
+
+		virtual public global::System.Int64? I1LongBetweenB 
+		{
+			get
+			{
+				return (global::System.Int64?) Strategy.GetUnitRole(Meta.I1LongBetweenB);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.I1LongBetweenB, value);
+			}
+		}
+
+		virtual public bool ExistI1LongBetweenB{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.I1LongBetweenB);
+			}
+		}
+
+		virtual public void RemoveI1LongBetweenB()
+		{
+			Strategy.RemoveUnitRole(Meta.I1LongBetweenB);
+		}
+
+
+		virtual public I12 I1I12one2one
 		{ 
 			get
 			{
-				return Strategy.GetCompositeRoles(Meta.I1C2One2Many);
+				return (I12) Strategy.GetCompositeRole(Meta.I1I12one2one);
 			}
 			set
 			{
-				Strategy.SetCompositeRoles(Meta.I1C2One2Many, value);
+				Strategy.SetCompositeRole(Meta.I1I12one2one ,value);
 			}
 		}
 
-		virtual public void AddI1C2One2Many (C2 value)
-		{
-			Strategy.AddCompositeRole(Meta.I1C2One2Many, value);
-		}
-
-		virtual public void RemoveI1C2One2Many (C2 value)
-		{
-			Strategy.RemoveCompositeRole(Meta.I1C2One2Many,value);
-		}
-
-		virtual public bool ExistI1C2One2Manies
+		virtual public bool ExistI1I12one2one
 		{
 			get
 			{
-				return Strategy.ExistCompositeRoles(Meta.I1C2One2Many);
+				return Strategy.ExistCompositeRole(Meta.I1I12one2one);
 			}
 		}
 
-		virtual public void RemoveI1C2One2Manies()
+		virtual public void RemoveI1I12one2one()
 		{
-			Strategy.RemoveCompositeRoles(Meta.I1C2One2Many);
+			Strategy.RemoveCompositeRole(Meta.I1I12one2one);
 		}
 
 
-		virtual public C1 I1C1One2One
+
+		virtual public global::System.Decimal? I1DecimalGreaterThan 
+		{
+			get
+			{
+				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.I1DecimalGreaterThan);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.I1DecimalGreaterThan, value);
+			}
+		}
+
+		virtual public bool ExistI1DecimalGreaterThan{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.I1DecimalGreaterThan);
+			}
+		}
+
+		virtual public void RemoveI1DecimalGreaterThan()
+		{
+			Strategy.RemoveUnitRole(Meta.I1DecimalGreaterThan);
+		}
+
+
+		virtual public C1 I1C1one2one
 		{ 
 			get
 			{
-				return (C1) Strategy.GetCompositeRole(Meta.I1C1One2One);
+				return (C1) Strategy.GetCompositeRole(Meta.I1C1one2one);
 			}
 			set
 			{
-				Strategy.SetCompositeRole(Meta.I1C1One2One ,value);
+				Strategy.SetCompositeRole(Meta.I1C1one2one ,value);
 			}
 		}
 
-		virtual public bool ExistI1C1One2One
+		virtual public bool ExistI1C1one2one
 		{
 			get
 			{
-				return Strategy.ExistCompositeRole(Meta.I1C1One2One);
+				return Strategy.ExistCompositeRole(Meta.I1C1one2one);
 			}
 		}
 
-		virtual public void RemoveI1C1One2One()
+		virtual public void RemoveI1C1one2one()
 		{
-			Strategy.RemoveCompositeRole(Meta.I1C1One2One);
+			Strategy.RemoveCompositeRole(Meta.I1C1one2one);
+		}
+
+
+
+		virtual public global::System.Int64? I1LongLessThan 
+		{
+			get
+			{
+				return (global::System.Int64?) Strategy.GetUnitRole(Meta.I1LongLessThan);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.I1LongLessThan, value);
+			}
+		}
+
+		virtual public bool ExistI1LongLessThan{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.I1LongLessThan);
+			}
+		}
+
+		virtual public void RemoveI1LongLessThan()
+		{
+			Strategy.RemoveUnitRole(Meta.I1LongLessThan);
+		}
+
+
+		virtual public global::Allors.Extent<I2> I1I2many2manies
+		{ 
+			get
+			{
+				return Strategy.GetCompositeRoles(Meta.I1I2many2many);
+			}
+			set
+			{
+				Strategy.SetCompositeRoles(Meta.I1I2many2many, value);
+			}
+		}
+
+		virtual public void AddI1I2many2many (I2 value)
+		{
+			Strategy.AddCompositeRole(Meta.I1I2many2many, value);
+		}
+
+		virtual public void RemoveI1I2many2many (I2 value)
+		{
+			Strategy.RemoveCompositeRole(Meta.I1I2many2many,value);
+		}
+
+		virtual public bool ExistI1I2many2manies
+		{
+			get
+			{
+				return Strategy.ExistCompositeRoles(Meta.I1I2many2many);
+			}
+		}
+
+		virtual public void RemoveI1I2many2manies()
+		{
+			Strategy.RemoveCompositeRoles(Meta.I1I2many2many);
+		}
+
+
+
+		virtual public global::System.Int32? I1IntegerBetweenA 
+		{
+			get
+			{
+				return (global::System.Int32?) Strategy.GetUnitRole(Meta.I1IntegerBetweenA);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.I1IntegerBetweenA, value);
+			}
+		}
+
+		virtual public bool ExistI1IntegerBetweenA{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.I1IntegerBetweenA);
+			}
+		}
+
+		virtual public void RemoveI1IntegerBetweenA()
+		{
+			Strategy.RemoveUnitRole(Meta.I1IntegerBetweenA);
+		}
+
+
+		virtual public I34 I1I34many2one
+		{ 
+			get
+			{
+				return (I34) Strategy.GetCompositeRole(Meta.I1I34many2one);
+			}
+			set
+			{
+				Strategy.SetCompositeRole(Meta.I1I34many2one ,value);
+			}
+		}
+
+		virtual public bool ExistI1I34many2one
+		{
+			get
+			{
+				return Strategy.ExistCompositeRole(Meta.I1I34many2one);
+			}
+		}
+
+		virtual public void RemoveI1I34many2one()
+		{
+			Strategy.RemoveCompositeRole(Meta.I1I34many2one);
+		}
+
+
+
+		virtual public global::System.Double? I1DoubleBetweenA 
+		{
+			get
+			{
+				return (global::System.Double?) Strategy.GetUnitRole(Meta.I1DoubleBetweenA);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.I1DoubleBetweenA, value);
+			}
+		}
+
+		virtual public bool ExistI1DoubleBetweenA{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.I1DoubleBetweenA);
+			}
+		}
+
+		virtual public void RemoveI1DoubleBetweenA()
+		{
+			Strategy.RemoveUnitRole(Meta.I1DoubleBetweenA);
+		}
+
+
+
+		virtual public global::System.Int32? I1IntegerLessThan 
+		{
+			get
+			{
+				return (global::System.Int32?) Strategy.GetUnitRole(Meta.I1IntegerLessThan);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.I1IntegerLessThan, value);
+			}
+		}
+
+		virtual public bool ExistI1IntegerLessThan{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.I1IntegerLessThan);
+			}
+		}
+
+		virtual public void RemoveI1IntegerLessThan()
+		{
+			Strategy.RemoveUnitRole(Meta.I1IntegerLessThan);
 		}
 
 
@@ -1222,111 +2572,29 @@ namespace Allors.Domain
 		}
 
 
-		virtual public global::Allors.Extent<C2> I1C2Many2Manies
+		virtual public S2 I1S2one2one
 		{ 
 			get
 			{
-				return Strategy.GetCompositeRoles(Meta.I1C2Many2Many);
+				return (S2) Strategy.GetCompositeRole(Meta.I1S2one2one);
 			}
 			set
 			{
-				Strategy.SetCompositeRoles(Meta.I1C2Many2Many, value);
+				Strategy.SetCompositeRole(Meta.I1S2one2one ,value);
 			}
 		}
 
-		virtual public void AddI1C2Many2Many (C2 value)
-		{
-			Strategy.AddCompositeRole(Meta.I1C2Many2Many, value);
-		}
-
-		virtual public void RemoveI1C2Many2Many (C2 value)
-		{
-			Strategy.RemoveCompositeRole(Meta.I1C2Many2Many,value);
-		}
-
-		virtual public bool ExistI1C2Many2Manies
+		virtual public bool ExistI1S2one2one
 		{
 			get
 			{
-				return Strategy.ExistCompositeRoles(Meta.I1C2Many2Many);
+				return Strategy.ExistCompositeRole(Meta.I1S2one2one);
 			}
 		}
 
-		virtual public void RemoveI1C2Many2Manies()
+		virtual public void RemoveI1S2one2one()
 		{
-			Strategy.RemoveCompositeRoles(Meta.I1C2Many2Many);
-		}
-
-
-		virtual public global::Allors.Extent<I1> I1I1One2Manies
-		{ 
-			get
-			{
-				return Strategy.GetCompositeRoles(Meta.I1I1One2Many);
-			}
-			set
-			{
-				Strategy.SetCompositeRoles(Meta.I1I1One2Many, value);
-			}
-		}
-
-		virtual public void AddI1I1One2Many (I1 value)
-		{
-			Strategy.AddCompositeRole(Meta.I1I1One2Many, value);
-		}
-
-		virtual public void RemoveI1I1One2Many (I1 value)
-		{
-			Strategy.RemoveCompositeRole(Meta.I1I1One2Many,value);
-		}
-
-		virtual public bool ExistI1I1One2Manies
-		{
-			get
-			{
-				return Strategy.ExistCompositeRoles(Meta.I1I1One2Many);
-			}
-		}
-
-		virtual public void RemoveI1I1One2Manies()
-		{
-			Strategy.RemoveCompositeRoles(Meta.I1I1One2Many);
-		}
-
-
-		virtual public global::Allors.Extent<I1> I1I1Many2Manies
-		{ 
-			get
-			{
-				return Strategy.GetCompositeRoles(Meta.I1I1Many2Many);
-			}
-			set
-			{
-				Strategy.SetCompositeRoles(Meta.I1I1Many2Many, value);
-			}
-		}
-
-		virtual public void AddI1I1Many2Many (I1 value)
-		{
-			Strategy.AddCompositeRole(Meta.I1I1Many2Many, value);
-		}
-
-		virtual public void RemoveI1I1Many2Many (I1 value)
-		{
-			Strategy.RemoveCompositeRole(Meta.I1I1Many2Many,value);
-		}
-
-		virtual public bool ExistI1I1Many2Manies
-		{
-			get
-			{
-				return Strategy.ExistCompositeRoles(Meta.I1I1Many2Many);
-			}
-		}
-
-		virtual public void RemoveI1I1Many2Manies()
-		{
-			Strategy.RemoveCompositeRoles(Meta.I1I1Many2Many);
+			Strategy.RemoveCompositeRole(Meta.I1S2one2one);
 		}
 
 
@@ -1353,6 +2621,94 @@ namespace Allors.Domain
 		virtual public void RemoveI1AllorsBoolean()
 		{
 			Strategy.RemoveUnitRole(Meta.I1AllorsBoolean);
+		}
+
+
+		virtual public I1 I1I1many2one
+		{ 
+			get
+			{
+				return (I1) Strategy.GetCompositeRole(Meta.I1I1many2one);
+			}
+			set
+			{
+				Strategy.SetCompositeRole(Meta.I1I1many2one ,value);
+			}
+		}
+
+		virtual public bool ExistI1I1many2one
+		{
+			get
+			{
+				return Strategy.ExistCompositeRole(Meta.I1I1many2one);
+			}
+		}
+
+		virtual public void RemoveI1I1many2one()
+		{
+			Strategy.RemoveCompositeRole(Meta.I1I1many2one);
+		}
+
+
+		virtual public global::Allors.Extent<C1> I1C1many2manies
+		{ 
+			get
+			{
+				return Strategy.GetCompositeRoles(Meta.I1C1many2many);
+			}
+			set
+			{
+				Strategy.SetCompositeRoles(Meta.I1C1many2many, value);
+			}
+		}
+
+		virtual public void AddI1C1many2many (C1 value)
+		{
+			Strategy.AddCompositeRole(Meta.I1C1many2many, value);
+		}
+
+		virtual public void RemoveI1C1many2many (C1 value)
+		{
+			Strategy.RemoveCompositeRole(Meta.I1C1many2many,value);
+		}
+
+		virtual public bool ExistI1C1many2manies
+		{
+			get
+			{
+				return Strategy.ExistCompositeRoles(Meta.I1C1many2many);
+			}
+		}
+
+		virtual public void RemoveI1C1many2manies()
+		{
+			Strategy.RemoveCompositeRoles(Meta.I1C1many2many);
+		}
+
+
+		virtual public I2 I1I2one2one
+		{ 
+			get
+			{
+				return (I2) Strategy.GetCompositeRole(Meta.I1I2one2one);
+			}
+			set
+			{
+				Strategy.SetCompositeRole(Meta.I1I2one2one ,value);
+			}
+		}
+
+		virtual public bool ExistI1I2one2one
+		{
+			get
+			{
+				return Strategy.ExistCompositeRole(Meta.I1I2one2one);
+			}
+		}
+
+		virtual public void RemoveI1I2one2one()
+		{
+			Strategy.RemoveCompositeRole(Meta.I1I2one2one);
 		}
 
 
@@ -1408,117 +2764,431 @@ namespace Allors.Domain
 		}
 
 
-		virtual public I12 I1I12One2One
+		virtual public global::Allors.Extent<S1> I1S1many2manies
 		{ 
 			get
 			{
-				return (I12) Strategy.GetCompositeRole(Meta.I1I12One2One);
+				return Strategy.GetCompositeRoles(Meta.I1S1many2many);
 			}
 			set
 			{
-				Strategy.SetCompositeRole(Meta.I1I12One2One ,value);
+				Strategy.SetCompositeRoles(Meta.I1S1many2many, value);
 			}
 		}
 
-		virtual public bool ExistI1I12One2One
+		virtual public void AddI1S1many2many (S1 value)
+		{
+			Strategy.AddCompositeRole(Meta.I1S1many2many, value);
+		}
+
+		virtual public void RemoveI1S1many2many (S1 value)
+		{
+			Strategy.RemoveCompositeRole(Meta.I1S1many2many,value);
+		}
+
+		virtual public bool ExistI1S1many2manies
 		{
 			get
 			{
-				return Strategy.ExistCompositeRole(Meta.I1I12One2One);
+				return Strategy.ExistCompositeRoles(Meta.I1S1many2many);
 			}
 		}
 
-		virtual public void RemoveI1I12One2One()
+		virtual public void RemoveI1S1many2manies()
 		{
-			Strategy.RemoveCompositeRole(Meta.I1I12One2One);
+			Strategy.RemoveCompositeRoles(Meta.I1S1many2many);
 		}
 
 
-		virtual public I2 I1I2One2One
+
+		virtual public global::System.DateTime? I1DateTimeGreaterThan 
+		{
+			get
+			{
+				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.I1DateTimeGreaterThan);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.I1DateTimeGreaterThan, value);
+			}
+		}
+
+		virtual public bool ExistI1DateTimeGreaterThan{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.I1DateTimeGreaterThan);
+			}
+		}
+
+		virtual public void RemoveI1DateTimeGreaterThan()
+		{
+			Strategy.RemoveUnitRole(Meta.I1DateTimeGreaterThan);
+		}
+
+
+		virtual public global::Allors.Extent<I34> I1I34many2manies
 		{ 
 			get
 			{
-				return (I2) Strategy.GetCompositeRole(Meta.I1I2One2One);
+				return Strategy.GetCompositeRoles(Meta.I1I34many2many);
 			}
 			set
 			{
-				Strategy.SetCompositeRole(Meta.I1I2One2One ,value);
+				Strategy.SetCompositeRoles(Meta.I1I34many2many, value);
 			}
 		}
 
-		virtual public bool ExistI1I2One2One
+		virtual public void AddI1I34many2many (I34 value)
+		{
+			Strategy.AddCompositeRole(Meta.I1I34many2many, value);
+		}
+
+		virtual public void RemoveI1I34many2many (I34 value)
+		{
+			Strategy.RemoveCompositeRole(Meta.I1I34many2many,value);
+		}
+
+		virtual public bool ExistI1I34many2manies
 		{
 			get
 			{
-				return Strategy.ExistCompositeRole(Meta.I1I2One2One);
+				return Strategy.ExistCompositeRoles(Meta.I1I34many2many);
 			}
 		}
 
-		virtual public void RemoveI1I2One2One()
+		virtual public void RemoveI1I34many2manies()
 		{
-			Strategy.RemoveCompositeRole(Meta.I1I2One2One);
+			Strategy.RemoveCompositeRoles(Meta.I1I34many2many);
 		}
 
 
-		virtual public C2 I1C2One2One
+		virtual public I34 I1I34one2one
 		{ 
 			get
 			{
-				return (C2) Strategy.GetCompositeRole(Meta.I1C2One2One);
+				return (I34) Strategy.GetCompositeRole(Meta.I1I34one2one);
 			}
 			set
 			{
-				Strategy.SetCompositeRole(Meta.I1C2One2One ,value);
+				Strategy.SetCompositeRole(Meta.I1I34one2one ,value);
 			}
 		}
 
-		virtual public bool ExistI1C2One2One
+		virtual public bool ExistI1I34one2one
 		{
 			get
 			{
-				return Strategy.ExistCompositeRole(Meta.I1C2One2One);
+				return Strategy.ExistCompositeRole(Meta.I1I34one2one);
 			}
 		}
 
-		virtual public void RemoveI1C2One2One()
+		virtual public void RemoveI1I34one2one()
 		{
-			Strategy.RemoveCompositeRole(Meta.I1C2One2One);
+			Strategy.RemoveCompositeRole(Meta.I1I34one2one);
 		}
 
 
-		virtual public global::Allors.Extent<C1> I1C1One2Manies
+		virtual public global::Allors.Extent<I1> I1I1one2manies
 		{ 
 			get
 			{
-				return Strategy.GetCompositeRoles(Meta.I1C1One2Many);
+				return Strategy.GetCompositeRoles(Meta.I1I1one2many);
 			}
 			set
 			{
-				Strategy.SetCompositeRoles(Meta.I1C1One2Many, value);
+				Strategy.SetCompositeRoles(Meta.I1I1one2many, value);
 			}
 		}
 
-		virtual public void AddI1C1One2Many (C1 value)
+		virtual public void AddI1I1one2many (I1 value)
 		{
-			Strategy.AddCompositeRole(Meta.I1C1One2Many, value);
+			Strategy.AddCompositeRole(Meta.I1I1one2many, value);
 		}
 
-		virtual public void RemoveI1C1One2Many (C1 value)
+		virtual public void RemoveI1I1one2many (I1 value)
 		{
-			Strategy.RemoveCompositeRole(Meta.I1C1One2Many,value);
+			Strategy.RemoveCompositeRole(Meta.I1I1one2many,value);
 		}
 
-		virtual public bool ExistI1C1One2Manies
+		virtual public bool ExistI1I1one2manies
 		{
 			get
 			{
-				return Strategy.ExistCompositeRoles(Meta.I1C1One2Many);
+				return Strategy.ExistCompositeRoles(Meta.I1I1one2many);
 			}
 		}
 
-		virtual public void RemoveI1C1One2Manies()
+		virtual public void RemoveI1I1one2manies()
 		{
-			Strategy.RemoveCompositeRoles(Meta.I1C1One2Many);
+			Strategy.RemoveCompositeRoles(Meta.I1I1one2many);
+		}
+
+
+		virtual public global::Allors.Extent<I1> I1I1many2manies
+		{ 
+			get
+			{
+				return Strategy.GetCompositeRoles(Meta.I1I1many2many);
+			}
+			set
+			{
+				Strategy.SetCompositeRoles(Meta.I1I1many2many, value);
+			}
+		}
+
+		virtual public void AddI1I1many2many (I1 value)
+		{
+			Strategy.AddCompositeRole(Meta.I1I1many2many, value);
+		}
+
+		virtual public void RemoveI1I1many2many (I1 value)
+		{
+			Strategy.RemoveCompositeRole(Meta.I1I1many2many,value);
+		}
+
+		virtual public bool ExistI1I1many2manies
+		{
+			get
+			{
+				return Strategy.ExistCompositeRoles(Meta.I1I1many2many);
+			}
+		}
+
+		virtual public void RemoveI1I1many2manies()
+		{
+			Strategy.RemoveCompositeRoles(Meta.I1I1many2many);
+		}
+
+
+		virtual public global::Allors.Extent<S2> I1S2many2manies
+		{ 
+			get
+			{
+				return Strategy.GetCompositeRoles(Meta.I1S2many2many);
+			}
+			set
+			{
+				Strategy.SetCompositeRoles(Meta.I1S2many2many, value);
+			}
+		}
+
+		virtual public void AddI1S2many2many (S2 value)
+		{
+			Strategy.AddCompositeRole(Meta.I1S2many2many, value);
+		}
+
+		virtual public void RemoveI1S2many2many (S2 value)
+		{
+			Strategy.RemoveCompositeRole(Meta.I1S2many2many,value);
+		}
+
+		virtual public bool ExistI1S2many2manies
+		{
+			get
+			{
+				return Strategy.ExistCompositeRoles(Meta.I1S2many2many);
+			}
+		}
+
+		virtual public void RemoveI1S2many2manies()
+		{
+			Strategy.RemoveCompositeRoles(Meta.I1S2many2many);
+		}
+
+
+		virtual public global::Allors.Extent<I12> I1I12many2manies
+		{ 
+			get
+			{
+				return Strategy.GetCompositeRoles(Meta.I1I12many2many);
+			}
+			set
+			{
+				Strategy.SetCompositeRoles(Meta.I1I12many2many, value);
+			}
+		}
+
+		virtual public void AddI1I12many2many (I12 value)
+		{
+			Strategy.AddCompositeRole(Meta.I1I12many2many, value);
+		}
+
+		virtual public void RemoveI1I12many2many (I12 value)
+		{
+			Strategy.RemoveCompositeRole(Meta.I1I12many2many,value);
+		}
+
+		virtual public bool ExistI1I12many2manies
+		{
+			get
+			{
+				return Strategy.ExistCompositeRoles(Meta.I1I12many2many);
+			}
+		}
+
+		virtual public void RemoveI1I12many2manies()
+		{
+			Strategy.RemoveCompositeRoles(Meta.I1I12many2many);
+		}
+
+
+
+		virtual public global::System.String I1StringEquals 
+		{
+			get
+			{
+				return (global::System.String) Strategy.GetUnitRole(Meta.I1StringEquals);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.I1StringEquals, value);
+			}
+		}
+
+		virtual public bool ExistI1StringEquals{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.I1StringEquals);
+			}
+		}
+
+		virtual public void RemoveI1StringEquals()
+		{
+			Strategy.RemoveUnitRole(Meta.I1StringEquals);
+		}
+
+
+
+		virtual public global::System.Int64? I1LongGreaterThan 
+		{
+			get
+			{
+				return (global::System.Int64?) Strategy.GetUnitRole(Meta.I1LongGreaterThan);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.I1LongGreaterThan, value);
+			}
+		}
+
+		virtual public bool ExistI1LongGreaterThan{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.I1LongGreaterThan);
+			}
+		}
+
+		virtual public void RemoveI1LongGreaterThan()
+		{
+			Strategy.RemoveUnitRole(Meta.I1LongGreaterThan);
+		}
+
+
+		virtual public global::Allors.Extent<I12> I1I12one2manies
+		{ 
+			get
+			{
+				return Strategy.GetCompositeRoles(Meta.I1I12one2many);
+			}
+			set
+			{
+				Strategy.SetCompositeRoles(Meta.I1I12one2many, value);
+			}
+		}
+
+		virtual public void AddI1I12one2many (I12 value)
+		{
+			Strategy.AddCompositeRole(Meta.I1I12one2many, value);
+		}
+
+		virtual public void RemoveI1I12one2many (I12 value)
+		{
+			Strategy.RemoveCompositeRole(Meta.I1I12one2many,value);
+		}
+
+		virtual public bool ExistI1I12one2manies
+		{
+			get
+			{
+				return Strategy.ExistCompositeRoles(Meta.I1I12one2many);
+			}
+		}
+
+		virtual public void RemoveI1I12one2manies()
+		{
+			Strategy.RemoveCompositeRoles(Meta.I1I12one2many);
+		}
+
+
+		virtual public global::Allors.Extent<S2> I1S2one2manies
+		{ 
+			get
+			{
+				return Strategy.GetCompositeRoles(Meta.I1S2one2many);
+			}
+			set
+			{
+				Strategy.SetCompositeRoles(Meta.I1S2one2many, value);
+			}
+		}
+
+		virtual public void AddI1S2one2many (S2 value)
+		{
+			Strategy.AddCompositeRole(Meta.I1S2one2many, value);
+		}
+
+		virtual public void RemoveI1S2one2many (S2 value)
+		{
+			Strategy.RemoveCompositeRole(Meta.I1S2one2many,value);
+		}
+
+		virtual public bool ExistI1S2one2manies
+		{
+			get
+			{
+				return Strategy.ExistCompositeRoles(Meta.I1S2one2many);
+			}
+		}
+
+		virtual public void RemoveI1S2one2manies()
+		{
+			Strategy.RemoveCompositeRoles(Meta.I1S2one2many);
+		}
+
+
+		virtual public global::Allors.Extent<C2> I1C2many2manies
+		{ 
+			get
+			{
+				return Strategy.GetCompositeRoles(Meta.I1C2many2many);
+			}
+			set
+			{
+				Strategy.SetCompositeRoles(Meta.I1C2many2many, value);
+			}
+		}
+
+		virtual public void AddI1C2many2many (C2 value)
+		{
+			Strategy.AddCompositeRole(Meta.I1C2many2many, value);
+		}
+
+		virtual public void RemoveI1C2many2many (C2 value)
+		{
+			Strategy.RemoveCompositeRole(Meta.I1C2many2many,value);
+		}
+
+		virtual public bool ExistI1C2many2manies
+		{
+			get
+			{
+				return Strategy.ExistCompositeRoles(Meta.I1C2many2many);
+			}
+		}
+
+		virtual public void RemoveI1C2many2manies()
+		{
+			Strategy.RemoveCompositeRoles(Meta.I1C2many2many);
 		}
 
 
@@ -1548,39 +3218,133 @@ namespace Allors.Domain
 		}
 
 
-		virtual public global::Allors.Extent<C1> I1C1Many2Manies
-		{ 
+
+		virtual public global::System.Decimal? I1DecimalBetweenB 
+		{
 			get
 			{
-				return Strategy.GetCompositeRoles(Meta.I1C1Many2Many);
+				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.I1DecimalBetweenB);
 			}
 			set
 			{
-				Strategy.SetCompositeRoles(Meta.I1C1Many2Many, value);
+				Strategy.SetUnitRole(Meta.I1DecimalBetweenB, value);
 			}
 		}
 
-		virtual public void AddI1C1Many2Many (C1 value)
-		{
-			Strategy.AddCompositeRole(Meta.I1C1Many2Many, value);
+		virtual public bool ExistI1DecimalBetweenB{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.I1DecimalBetweenB);
+			}
 		}
 
-		virtual public void RemoveI1C1Many2Many (C1 value)
+		virtual public void RemoveI1DecimalBetweenB()
 		{
-			Strategy.RemoveCompositeRole(Meta.I1C1Many2Many,value);
+			Strategy.RemoveUnitRole(Meta.I1DecimalBetweenB);
 		}
 
-		virtual public bool ExistI1C1Many2Manies
+
+
+		virtual public global::System.Int64? I1LongBetweenA 
 		{
 			get
 			{
-				return Strategy.ExistCompositeRoles(Meta.I1C1Many2Many);
+				return (global::System.Int64?) Strategy.GetUnitRole(Meta.I1LongBetweenA);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.I1LongBetweenA, value);
 			}
 		}
 
-		virtual public void RemoveI1C1Many2Manies()
+		virtual public bool ExistI1LongBetweenA{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.I1LongBetweenA);
+			}
+		}
+
+		virtual public void RemoveI1LongBetweenA()
 		{
-			Strategy.RemoveCompositeRoles(Meta.I1C1Many2Many);
+			Strategy.RemoveUnitRole(Meta.I1LongBetweenA);
+		}
+
+
+
+		virtual public global::System.Double? I1DoubleGreaterThan 
+		{
+			get
+			{
+				return (global::System.Double?) Strategy.GetUnitRole(Meta.I1DoubleGreaterThan);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.I1DoubleGreaterThan, value);
+			}
+		}
+
+		virtual public bool ExistI1DoubleGreaterThan{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.I1DoubleGreaterThan);
+			}
+		}
+
+		virtual public void RemoveI1DoubleGreaterThan()
+		{
+			Strategy.RemoveUnitRole(Meta.I1DoubleGreaterThan);
+		}
+
+
+
+		virtual public global::System.Int32? I1IntegerBetweenB 
+		{
+			get
+			{
+				return (global::System.Int32?) Strategy.GetUnitRole(Meta.I1IntegerBetweenB);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.I1IntegerBetweenB, value);
+			}
+		}
+
+		virtual public bool ExistI1IntegerBetweenB{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.I1IntegerBetweenB);
+			}
+		}
+
+		virtual public void RemoveI1IntegerBetweenB()
+		{
+			Strategy.RemoveUnitRole(Meta.I1IntegerBetweenB);
+		}
+
+
+
+		virtual public global::System.DateTime? I1DateTimeBetweenA 
+		{
+			get
+			{
+				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.I1DateTimeBetweenA);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.I1DateTimeBetweenA, value);
+			}
+		}
+
+		virtual public bool ExistI1DateTimeBetweenA{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.I1DateTimeBetweenA);
+			}
+		}
+
+		virtual public void RemoveI1DateTimeBetweenA()
+		{
+			Strategy.RemoveUnitRole(Meta.I1DateTimeBetweenA);
 		}
 
 
@@ -1610,117 +3374,195 @@ namespace Allors.Domain
 		}
 
 
-		virtual public I1 I1I1One2One
+		virtual public global::Allors.Extent<S1> I1S1one2manies
 		{ 
 			get
 			{
-				return (I1) Strategy.GetCompositeRole(Meta.I1I1One2One);
+				return Strategy.GetCompositeRoles(Meta.I1S1one2many);
 			}
 			set
 			{
-				Strategy.SetCompositeRole(Meta.I1I1One2One ,value);
+				Strategy.SetCompositeRoles(Meta.I1S1one2many, value);
 			}
 		}
 
-		virtual public bool ExistI1I1One2One
+		virtual public void AddI1S1one2many (S1 value)
+		{
+			Strategy.AddCompositeRole(Meta.I1S1one2many, value);
+		}
+
+		virtual public void RemoveI1S1one2many (S1 value)
+		{
+			Strategy.RemoveCompositeRole(Meta.I1S1one2many,value);
+		}
+
+		virtual public bool ExistI1S1one2manies
 		{
 			get
 			{
-				return Strategy.ExistCompositeRole(Meta.I1I1One2One);
+				return Strategy.ExistCompositeRoles(Meta.I1S1one2many);
 			}
 		}
 
-		virtual public void RemoveI1I1One2One()
+		virtual public void RemoveI1S1one2manies()
 		{
-			Strategy.RemoveCompositeRole(Meta.I1I1One2One);
+			Strategy.RemoveCompositeRoles(Meta.I1S1one2many);
 		}
 
 
-		virtual public C1 I1C1Many2One
+		virtual public I1 I1I1one2one
 		{ 
 			get
 			{
-				return (C1) Strategy.GetCompositeRole(Meta.I1C1Many2One);
+				return (I1) Strategy.GetCompositeRole(Meta.I1I1one2one);
 			}
 			set
 			{
-				Strategy.SetCompositeRole(Meta.I1C1Many2One ,value);
+				Strategy.SetCompositeRole(Meta.I1I1one2one ,value);
 			}
 		}
 
-		virtual public bool ExistI1C1Many2One
+		virtual public bool ExistI1I1one2one
 		{
 			get
 			{
-				return Strategy.ExistCompositeRole(Meta.I1C1Many2One);
+				return Strategy.ExistCompositeRole(Meta.I1I1one2one);
 			}
 		}
 
-		virtual public void RemoveI1C1Many2One()
+		virtual public void RemoveI1I1one2one()
 		{
-			Strategy.RemoveCompositeRole(Meta.I1C1Many2One);
+			Strategy.RemoveCompositeRole(Meta.I1I1one2one);
 		}
 
 
-		virtual public global::Allors.Extent<I12> I1I12One2Manies
+
+		virtual public global::System.Int32? I1IntegerGreaterThan 
+		{
+			get
+			{
+				return (global::System.Int32?) Strategy.GetUnitRole(Meta.I1IntegerGreaterThan);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.I1IntegerGreaterThan, value);
+			}
+		}
+
+		virtual public bool ExistI1IntegerGreaterThan{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.I1IntegerGreaterThan);
+			}
+		}
+
+		virtual public void RemoveI1IntegerGreaterThan()
+		{
+			Strategy.RemoveUnitRole(Meta.I1IntegerGreaterThan);
+		}
+
+
+		virtual public S1 I1S1many2one
 		{ 
 			get
 			{
-				return Strategy.GetCompositeRoles(Meta.I1I12One2Many);
+				return (S1) Strategy.GetCompositeRole(Meta.I1S1many2one);
 			}
 			set
 			{
-				Strategy.SetCompositeRoles(Meta.I1I12One2Many, value);
+				Strategy.SetCompositeRole(Meta.I1S1many2one ,value);
 			}
 		}
 
-		virtual public void AddI1I12One2Many (I12 value)
-		{
-			Strategy.AddCompositeRole(Meta.I1I12One2Many, value);
-		}
-
-		virtual public void RemoveI1I12One2Many (I12 value)
-		{
-			Strategy.RemoveCompositeRole(Meta.I1I12One2Many,value);
-		}
-
-		virtual public bool ExistI1I12One2Manies
+		virtual public bool ExistI1S1many2one
 		{
 			get
 			{
-				return Strategy.ExistCompositeRoles(Meta.I1I12One2Many);
+				return Strategy.ExistCompositeRole(Meta.I1S1many2one);
 			}
 		}
 
-		virtual public void RemoveI1I12One2Manies()
+		virtual public void RemoveI1S1many2one()
 		{
-			Strategy.RemoveCompositeRoles(Meta.I1I12One2Many);
+			Strategy.RemoveCompositeRole(Meta.I1S1many2one);
 		}
 
 
-		virtual public C2 I1C2Many2One
-		{ 
+
+		virtual public global::System.Double? I1DoubleBetweenB 
+		{
 			get
 			{
-				return (C2) Strategy.GetCompositeRole(Meta.I1C2Many2One);
+				return (global::System.Double?) Strategy.GetUnitRole(Meta.I1DoubleBetweenB);
 			}
 			set
 			{
-				Strategy.SetCompositeRole(Meta.I1C2Many2One ,value);
+				Strategy.SetUnitRole(Meta.I1DoubleBetweenB, value);
 			}
 		}
 
-		virtual public bool ExistI1C2Many2One
+		virtual public bool ExistI1DoubleBetweenB{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.I1DoubleBetweenB);
+			}
+		}
+
+		virtual public void RemoveI1DoubleBetweenB()
+		{
+			Strategy.RemoveUnitRole(Meta.I1DoubleBetweenB);
+		}
+
+
+
+		virtual public global::System.Decimal? I1DecimalLessThan 
 		{
 			get
 			{
-				return Strategy.ExistCompositeRole(Meta.I1C2Many2One);
+				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.I1DecimalLessThan);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.I1DecimalLessThan, value);
 			}
 		}
 
-		virtual public void RemoveI1C2Many2One()
+		virtual public bool ExistI1DecimalLessThan{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.I1DecimalLessThan);
+			}
+		}
+
+		virtual public void RemoveI1DecimalLessThan()
 		{
-			Strategy.RemoveCompositeRole(Meta.I1C2Many2One);
+			Strategy.RemoveUnitRole(Meta.I1DecimalLessThan);
+		}
+
+
+
+		virtual public global::System.DateTime? I1DateTimeBetweenB 
+		{
+			get
+			{
+				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.I1DateTimeBetweenB);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.I1DateTimeBetweenB, value);
+			}
+		}
+
+		virtual public bool ExistI1DateTimeBetweenB{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.I1DateTimeBetweenB);
+			}
+		}
+
+		virtual public void RemoveI1DateTimeBetweenB()
+		{
+			Strategy.RemoveUnitRole(Meta.I1DateTimeBetweenB);
 		}
 
 
@@ -1750,743 +3592,1029 @@ namespace Allors.Domain
 		}
 
 
-
-		virtual public global::System.Byte[] I12AllorsBinary 
-		{
-			get
-			{
-				return (global::System.Byte[]) Strategy.GetUnitRole(Meta.I12AllorsBinary);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.I12AllorsBinary, value);
-			}
-		}
-
-		virtual public bool ExistI12AllorsBinary{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.I12AllorsBinary);
-			}
-		}
-
-		virtual public void RemoveI12AllorsBinary()
-		{
-			Strategy.RemoveUnitRole(Meta.I12AllorsBinary);
-		}
-
-
-		virtual public C2 I12C2One2One
+		virtual public global::Allors.Extent<C1> I1C1one2manies
 		{ 
 			get
 			{
-				return (C2) Strategy.GetCompositeRole(Meta.I12C2One2One);
+				return Strategy.GetCompositeRoles(Meta.I1C1one2many);
 			}
 			set
 			{
-				Strategy.SetCompositeRole(Meta.I12C2One2One ,value);
+				Strategy.SetCompositeRoles(Meta.I1C1one2many, value);
 			}
 		}
 
-		virtual public bool ExistI12C2One2One
+		virtual public void AddI1C1one2many (C1 value)
+		{
+			Strategy.AddCompositeRole(Meta.I1C1one2many, value);
+		}
+
+		virtual public void RemoveI1C1one2many (C1 value)
+		{
+			Strategy.RemoveCompositeRole(Meta.I1C1one2many,value);
+		}
+
+		virtual public bool ExistI1C1one2manies
 		{
 			get
 			{
-				return Strategy.ExistCompositeRole(Meta.I12C2One2One);
+				return Strategy.ExistCompositeRoles(Meta.I1C1one2many);
 			}
 		}
 
-		virtual public void RemoveI12C2One2One()
+		virtual public void RemoveI1C1one2manies()
 		{
-			Strategy.RemoveCompositeRole(Meta.I12C2One2One);
+			Strategy.RemoveCompositeRoles(Meta.I1C1one2many);
 		}
 
 
-
-		virtual public global::System.Double? I12AllorsDouble 
-		{
-			get
-			{
-				return (global::System.Double?) Strategy.GetUnitRole(Meta.I12AllorsDouble);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.I12AllorsDouble, value);
-			}
-		}
-
-		virtual public bool ExistI12AllorsDouble{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.I12AllorsDouble);
-			}
-		}
-
-		virtual public void RemoveI12AllorsDouble()
-		{
-			Strategy.RemoveUnitRole(Meta.I12AllorsDouble);
-		}
-
-
-		virtual public I1 I12I1Many2One
+		virtual public S2 I1S2many2one
 		{ 
 			get
 			{
-				return (I1) Strategy.GetCompositeRole(Meta.I12I1Many2One);
+				return (S2) Strategy.GetCompositeRole(Meta.I1S2many2one);
 			}
 			set
 			{
-				Strategy.SetCompositeRole(Meta.I12I1Many2One ,value);
+				Strategy.SetCompositeRole(Meta.I1S2many2one ,value);
 			}
 		}
 
-		virtual public bool ExistI12I1Many2One
+		virtual public bool ExistI1S2many2one
 		{
 			get
 			{
-				return Strategy.ExistCompositeRole(Meta.I12I1Many2One);
+				return Strategy.ExistCompositeRole(Meta.I1S2many2one);
 			}
 		}
 
-		virtual public void RemoveI12I1Many2One()
+		virtual public void RemoveI1S2many2one()
 		{
-			Strategy.RemoveCompositeRole(Meta.I12I1Many2One);
+			Strategy.RemoveCompositeRole(Meta.I1S2many2one);
 		}
 
 
 
-		virtual public global::System.String I12AllorsString 
+		virtual public global::System.Decimal? S1AllorsDecimal 
 		{
 			get
 			{
-				return (global::System.String) Strategy.GetUnitRole(Meta.I12AllorsString);
+				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.S1AllorsDecimal);
 			}
 			set
 			{
-				Strategy.SetUnitRole(Meta.I12AllorsString, value);
+				Strategy.SetUnitRole(Meta.S1AllorsDecimal, value);
 			}
 		}
 
-		virtual public bool ExistI12AllorsString{
+		virtual public bool ExistS1AllorsDecimal{
 			get
 			{
-				return Strategy.ExistUnitRole(Meta.I12AllorsString);
+				return Strategy.ExistUnitRole(Meta.S1AllorsDecimal);
 			}
 		}
 
-		virtual public void RemoveI12AllorsString()
+		virtual public void RemoveS1AllorsDecimal()
 		{
-			Strategy.RemoveUnitRole(Meta.I12AllorsString);
+			Strategy.RemoveUnitRole(Meta.S1AllorsDecimal);
 		}
 
 
-		virtual public global::Allors.Extent<I12> I12I12Many2Manies
+
+		virtual public global::System.Int32? S1AllorsInteger 
+		{
+			get
+			{
+				return (global::System.Int32?) Strategy.GetUnitRole(Meta.S1AllorsInteger);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.S1AllorsInteger, value);
+			}
+		}
+
+		virtual public bool ExistS1AllorsInteger{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.S1AllorsInteger);
+			}
+		}
+
+		virtual public void RemoveS1AllorsInteger()
+		{
+			Strategy.RemoveUnitRole(Meta.S1AllorsInteger);
+		}
+
+
+
+		virtual public global::System.Byte[] S1AllorsBinary 
+		{
+			get
+			{
+				return (global::System.Byte[]) Strategy.GetUnitRole(Meta.S1AllorsBinary);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.S1AllorsBinary, value);
+			}
+		}
+
+		virtual public bool ExistS1AllorsBinary{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.S1AllorsBinary);
+			}
+		}
+
+		virtual public void RemoveS1AllorsBinary()
+		{
+			Strategy.RemoveUnitRole(Meta.S1AllorsBinary);
+		}
+
+
+
+		virtual public global::System.Guid? S1AllorsUnique 
+		{
+			get
+			{
+				return (global::System.Guid?) Strategy.GetUnitRole(Meta.S1AllorsUnique);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.S1AllorsUnique, value);
+			}
+		}
+
+		virtual public bool ExistS1AllorsUnique{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.S1AllorsUnique);
+			}
+		}
+
+		virtual public void RemoveS1AllorsUnique()
+		{
+			Strategy.RemoveUnitRole(Meta.S1AllorsUnique);
+		}
+
+
+
+		virtual public global::System.String S1StringLarge 
+		{
+			get
+			{
+				return (global::System.String) Strategy.GetUnitRole(Meta.S1StringLarge);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.S1StringLarge, value);
+			}
+		}
+
+		virtual public bool ExistS1StringLarge{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.S1StringLarge);
+			}
+		}
+
+		virtual public void RemoveS1StringLarge()
+		{
+			Strategy.RemoveUnitRole(Meta.S1StringLarge);
+		}
+
+
+		virtual public S2 S1S2many2one
 		{ 
 			get
 			{
-				return Strategy.GetCompositeRoles(Meta.I12I12Many2Many);
+				return (S2) Strategy.GetCompositeRole(Meta.S1S2many2one);
 			}
 			set
 			{
-				Strategy.SetCompositeRoles(Meta.I12I12Many2Many, value);
+				Strategy.SetCompositeRole(Meta.S1S2many2one ,value);
 			}
 		}
 
-		virtual public void AddI12I12Many2Many (I12 value)
-		{
-			Strategy.AddCompositeRole(Meta.I12I12Many2Many, value);
-		}
-
-		virtual public void RemoveI12I12Many2Many (I12 value)
-		{
-			Strategy.RemoveCompositeRole(Meta.I12I12Many2Many,value);
-		}
-
-		virtual public bool ExistI12I12Many2Manies
+		virtual public bool ExistS1S2many2one
 		{
 			get
 			{
-				return Strategy.ExistCompositeRoles(Meta.I12I12Many2Many);
+				return Strategy.ExistCompositeRole(Meta.S1S2many2one);
 			}
 		}
 
-		virtual public void RemoveI12I12Many2Manies()
+		virtual public void RemoveS1S2many2one()
 		{
-			Strategy.RemoveCompositeRoles(Meta.I12I12Many2Many);
+			Strategy.RemoveCompositeRole(Meta.S1S2many2one);
 		}
 
 
-
-		virtual public global::System.Decimal? I12AllorsDecimal 
-		{
-			get
-			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.I12AllorsDecimal);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.I12AllorsDecimal, value);
-			}
-		}
-
-		virtual public bool ExistI12AllorsDecimal{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.I12AllorsDecimal);
-			}
-		}
-
-		virtual public void RemoveI12AllorsDecimal()
-		{
-			Strategy.RemoveUnitRole(Meta.I12AllorsDecimal);
-		}
-
-
-		virtual public global::Allors.Extent<I2> I12I2Many2Manies
+		virtual public global::Allors.Extent<S2> S1S2one2manies
 		{ 
 			get
 			{
-				return Strategy.GetCompositeRoles(Meta.I12I2Many2Many);
+				return Strategy.GetCompositeRoles(Meta.S1S2one2many);
 			}
 			set
 			{
-				Strategy.SetCompositeRoles(Meta.I12I2Many2Many, value);
+				Strategy.SetCompositeRoles(Meta.S1S2one2many, value);
 			}
 		}
 
-		virtual public void AddI12I2Many2Many (I2 value)
+		virtual public void AddS1S2one2many (S2 value)
 		{
-			Strategy.AddCompositeRole(Meta.I12I2Many2Many, value);
+			Strategy.AddCompositeRole(Meta.S1S2one2many, value);
 		}
 
-		virtual public void RemoveI12I2Many2Many (I2 value)
+		virtual public void RemoveS1S2one2many (S2 value)
 		{
-			Strategy.RemoveCompositeRole(Meta.I12I2Many2Many,value);
+			Strategy.RemoveCompositeRole(Meta.S1S2one2many,value);
 		}
 
-		virtual public bool ExistI12I2Many2Manies
+		virtual public bool ExistS1S2one2manies
 		{
 			get
 			{
-				return Strategy.ExistCompositeRoles(Meta.I12I2Many2Many);
+				return Strategy.ExistCompositeRoles(Meta.S1S2one2many);
 			}
 		}
 
-		virtual public void RemoveI12I2Many2Manies()
+		virtual public void RemoveS1S2one2manies()
 		{
-			Strategy.RemoveCompositeRoles(Meta.I12I2Many2Many);
+			Strategy.RemoveCompositeRoles(Meta.S1S2one2many);
 		}
 
 
-		virtual public global::Allors.Extent<C2> I12C2Many2Manies
+
+		virtual public global::System.Double? S1AllorsDouble 
+		{
+			get
+			{
+				return (global::System.Double?) Strategy.GetUnitRole(Meta.S1AllorsDouble);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.S1AllorsDouble, value);
+			}
+		}
+
+		virtual public bool ExistS1AllorsDouble{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.S1AllorsDouble);
+			}
+		}
+
+		virtual public void RemoveS1AllorsDouble()
+		{
+			Strategy.RemoveUnitRole(Meta.S1AllorsDouble);
+		}
+
+
+
+		virtual public global::System.String S1AllorsString 
+		{
+			get
+			{
+				return (global::System.String) Strategy.GetUnitRole(Meta.S1AllorsString);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.S1AllorsString, value);
+			}
+		}
+
+		virtual public bool ExistS1AllorsString{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.S1AllorsString);
+			}
+		}
+
+		virtual public void RemoveS1AllorsString()
+		{
+			Strategy.RemoveUnitRole(Meta.S1AllorsString);
+		}
+
+
+		virtual public C1 S1C1many2one
 		{ 
 			get
 			{
-				return Strategy.GetCompositeRoles(Meta.I12C2Many2Many);
+				return (C1) Strategy.GetCompositeRole(Meta.S1C1many2one);
 			}
 			set
 			{
-				Strategy.SetCompositeRoles(Meta.I12C2Many2Many, value);
+				Strategy.SetCompositeRole(Meta.S1C1many2one ,value);
 			}
 		}
 
-		virtual public void AddI12C2Many2Many (C2 value)
-		{
-			Strategy.AddCompositeRole(Meta.I12C2Many2Many, value);
-		}
-
-		virtual public void RemoveI12C2Many2Many (C2 value)
-		{
-			Strategy.RemoveCompositeRole(Meta.I12C2Many2Many,value);
-		}
-
-		virtual public bool ExistI12C2Many2Manies
+		virtual public bool ExistS1C1many2one
 		{
 			get
 			{
-				return Strategy.ExistCompositeRoles(Meta.I12C2Many2Many);
+				return Strategy.ExistCompositeRole(Meta.S1C1many2one);
 			}
 		}
 
-		virtual public void RemoveI12C2Many2Manies()
+		virtual public void RemoveS1C1many2one()
 		{
-			Strategy.RemoveCompositeRoles(Meta.I12C2Many2Many);
+			Strategy.RemoveCompositeRole(Meta.S1C1many2one);
 		}
 
 
-		virtual public global::Allors.Extent<I1> I12I1Many2Manies
+		virtual public C1 S1C1one2one
 		{ 
 			get
 			{
-				return Strategy.GetCompositeRoles(Meta.I12I1Many2Many);
+				return (C1) Strategy.GetCompositeRole(Meta.S1C1one2one);
 			}
 			set
 			{
-				Strategy.SetCompositeRoles(Meta.I12I1Many2Many, value);
+				Strategy.SetCompositeRole(Meta.S1C1one2one ,value);
 			}
 		}
 
-		virtual public void AddI12I1Many2Many (I1 value)
-		{
-			Strategy.AddCompositeRole(Meta.I12I1Many2Many, value);
-		}
-
-		virtual public void RemoveI12I1Many2Many (I1 value)
-		{
-			Strategy.RemoveCompositeRole(Meta.I12I1Many2Many,value);
-		}
-
-		virtual public bool ExistI12I1Many2Manies
+		virtual public bool ExistS1C1one2one
 		{
 			get
 			{
-				return Strategy.ExistCompositeRoles(Meta.I12I1Many2Many);
+				return Strategy.ExistCompositeRole(Meta.S1C1one2one);
 			}
 		}
 
-		virtual public void RemoveI12I1Many2Manies()
+		virtual public void RemoveS1C1one2one()
 		{
-			Strategy.RemoveCompositeRoles(Meta.I12I1Many2Many);
+			Strategy.RemoveCompositeRole(Meta.S1C1one2one);
 		}
 
 
-		virtual public global::Allors.Extent<I12> I12I12One2Manies
+
+		virtual public global::System.Boolean? S1AllorsBoolean 
+		{
+			get
+			{
+				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.S1AllorsBoolean);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.S1AllorsBoolean, value);
+			}
+		}
+
+		virtual public bool ExistS1AllorsBoolean{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.S1AllorsBoolean);
+			}
+		}
+
+		virtual public void RemoveS1AllorsBoolean()
+		{
+			Strategy.RemoveUnitRole(Meta.S1AllorsBoolean);
+		}
+
+
+		virtual public global::Allors.Extent<C1> S1C1many2manies
 		{ 
 			get
 			{
-				return Strategy.GetCompositeRoles(Meta.I12I12One2Many);
+				return Strategy.GetCompositeRoles(Meta.S1C1many2many);
 			}
 			set
 			{
-				Strategy.SetCompositeRoles(Meta.I12I12One2Many, value);
+				Strategy.SetCompositeRoles(Meta.S1C1many2many, value);
 			}
 		}
 
-		virtual public void AddI12I12One2Many (I12 value)
+		virtual public void AddS1C1many2many (C1 value)
 		{
-			Strategy.AddCompositeRole(Meta.I12I12One2Many, value);
+			Strategy.AddCompositeRole(Meta.S1C1many2many, value);
 		}
 
-		virtual public void RemoveI12I12One2Many (I12 value)
+		virtual public void RemoveS1C1many2many (C1 value)
 		{
-			Strategy.RemoveCompositeRole(Meta.I12I12One2Many,value);
+			Strategy.RemoveCompositeRole(Meta.S1C1many2many,value);
 		}
 
-		virtual public bool ExistI12I12One2Manies
+		virtual public bool ExistS1C1many2manies
 		{
 			get
 			{
-				return Strategy.ExistCompositeRoles(Meta.I12I12One2Many);
+				return Strategy.ExistCompositeRoles(Meta.S1C1many2many);
 			}
 		}
 
-		virtual public void RemoveI12I12One2Manies()
+		virtual public void RemoveS1C1many2manies()
 		{
-			Strategy.RemoveCompositeRoles(Meta.I12I12One2Many);
+			Strategy.RemoveCompositeRoles(Meta.S1C1many2many);
 		}
 
 
-
-		virtual public global::System.String Name 
-		{
-			get
-			{
-				return (global::System.String) Strategy.GetUnitRole(Meta.Name);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.Name, value);
-			}
-		}
-
-		virtual public bool ExistName{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.Name);
-			}
-		}
-
-		virtual public void RemoveName()
-		{
-			Strategy.RemoveUnitRole(Meta.Name);
-		}
-
-
-		virtual public global::Allors.Extent<C1> I12C1Many2Manies
+		virtual public global::Allors.Extent<S2> S1S2many2manies
 		{ 
 			get
 			{
-				return Strategy.GetCompositeRoles(Meta.I12C1Many2Many);
+				return Strategy.GetCompositeRoles(Meta.S1S2many2many);
 			}
 			set
 			{
-				Strategy.SetCompositeRoles(Meta.I12C1Many2Many, value);
+				Strategy.SetCompositeRoles(Meta.S1S2many2many, value);
 			}
 		}
 
-		virtual public void AddI12C1Many2Many (C1 value)
+		virtual public void AddS1S2many2many (S2 value)
 		{
-			Strategy.AddCompositeRole(Meta.I12C1Many2Many, value);
+			Strategy.AddCompositeRole(Meta.S1S2many2many, value);
 		}
 
-		virtual public void RemoveI12C1Many2Many (C1 value)
+		virtual public void RemoveS1S2many2many (S2 value)
 		{
-			Strategy.RemoveCompositeRole(Meta.I12C1Many2Many,value);
+			Strategy.RemoveCompositeRole(Meta.S1S2many2many,value);
 		}
 
-		virtual public bool ExistI12C1Many2Manies
+		virtual public bool ExistS1S2many2manies
 		{
 			get
 			{
-				return Strategy.ExistCompositeRoles(Meta.I12C1Many2Many);
+				return Strategy.ExistCompositeRoles(Meta.S1S2many2many);
 			}
 		}
 
-		virtual public void RemoveI12C1Many2Manies()
+		virtual public void RemoveS1S2many2manies()
 		{
-			Strategy.RemoveCompositeRoles(Meta.I12C1Many2Many);
+			Strategy.RemoveCompositeRoles(Meta.S1S2many2many);
 		}
 
 
-		virtual public I2 I12I2Many2One
+		virtual public S2 S1S2one2one
 		{ 
 			get
 			{
-				return (I2) Strategy.GetCompositeRole(Meta.I12I2Many2One);
+				return (S2) Strategy.GetCompositeRole(Meta.S1S2one2one);
 			}
 			set
 			{
-				Strategy.SetCompositeRole(Meta.I12I2Many2One ,value);
+				Strategy.SetCompositeRole(Meta.S1S2one2one ,value);
 			}
 		}
 
-		virtual public bool ExistI12I2Many2One
+		virtual public bool ExistS1S2one2one
 		{
 			get
 			{
-				return Strategy.ExistCompositeRole(Meta.I12I2Many2One);
+				return Strategy.ExistCompositeRole(Meta.S1S2one2one);
 			}
 		}
 
-		virtual public void RemoveI12I2Many2One()
+		virtual public void RemoveS1S2one2one()
 		{
-			Strategy.RemoveCompositeRole(Meta.I12I2Many2One);
+			Strategy.RemoveCompositeRole(Meta.S1S2one2one);
 		}
 
 
 
-		virtual public global::System.Guid? I12AllorsUnique 
+		virtual public global::System.Int64? S1AllorsLong 
 		{
 			get
 			{
-				return (global::System.Guid?) Strategy.GetUnitRole(Meta.I12AllorsUnique);
+				return (global::System.Int64?) Strategy.GetUnitRole(Meta.S1AllorsLong);
 			}
 			set
 			{
-				Strategy.SetUnitRole(Meta.I12AllorsUnique, value);
+				Strategy.SetUnitRole(Meta.S1AllorsLong, value);
 			}
 		}
 
-		virtual public bool ExistI12AllorsUnique{
+		virtual public bool ExistS1AllorsLong{
 			get
 			{
-				return Strategy.ExistUnitRole(Meta.I12AllorsUnique);
+				return Strategy.ExistUnitRole(Meta.S1AllorsLong);
 			}
 		}
 
-		virtual public void RemoveI12AllorsUnique()
+		virtual public void RemoveS1AllorsLong()
 		{
-			Strategy.RemoveUnitRole(Meta.I12AllorsUnique);
+			Strategy.RemoveUnitRole(Meta.S1AllorsLong);
 		}
 
 
 
-		virtual public global::System.Int32? I12AllorsInteger 
+		virtual public global::System.DateTime? S1AllorsDateTime 
 		{
 			get
 			{
-				return (global::System.Int32?) Strategy.GetUnitRole(Meta.I12AllorsInteger);
+				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.S1AllorsDateTime);
 			}
 			set
 			{
-				Strategy.SetUnitRole(Meta.I12AllorsInteger, value);
+				Strategy.SetUnitRole(Meta.S1AllorsDateTime, value);
 			}
 		}
 
-		virtual public bool ExistI12AllorsInteger{
+		virtual public bool ExistS1AllorsDateTime{
 			get
 			{
-				return Strategy.ExistUnitRole(Meta.I12AllorsInteger);
+				return Strategy.ExistUnitRole(Meta.S1AllorsDateTime);
 			}
 		}
 
-		virtual public void RemoveI12AllorsInteger()
+		virtual public void RemoveS1AllorsDateTime()
 		{
-			Strategy.RemoveUnitRole(Meta.I12AllorsInteger);
+			Strategy.RemoveUnitRole(Meta.S1AllorsDateTime);
 		}
 
 
-		virtual public global::Allors.Extent<I1> I12I1One2Manies
+		virtual public global::Allors.Extent<C1> S1C1one2manies
 		{ 
 			get
 			{
-				return Strategy.GetCompositeRoles(Meta.I12I1One2Many);
+				return Strategy.GetCompositeRoles(Meta.S1C1one2many);
 			}
 			set
 			{
-				Strategy.SetCompositeRoles(Meta.I12I1One2Many, value);
+				Strategy.SetCompositeRoles(Meta.S1C1one2many, value);
 			}
 		}
 
-		virtual public void AddI12I1One2Many (I1 value)
+		virtual public void AddS1C1one2many (C1 value)
 		{
-			Strategy.AddCompositeRole(Meta.I12I1One2Many, value);
+			Strategy.AddCompositeRole(Meta.S1C1one2many, value);
 		}
 
-		virtual public void RemoveI12I1One2Many (I1 value)
+		virtual public void RemoveS1C1one2many (C1 value)
 		{
-			Strategy.RemoveCompositeRole(Meta.I12I1One2Many,value);
+			Strategy.RemoveCompositeRole(Meta.S1C1one2many,value);
 		}
 
-		virtual public bool ExistI12I1One2Manies
+		virtual public bool ExistS1C1one2manies
 		{
 			get
 			{
-				return Strategy.ExistCompositeRoles(Meta.I12I1One2Many);
+				return Strategy.ExistCompositeRoles(Meta.S1C1one2many);
 			}
 		}
 
-		virtual public void RemoveI12I1One2Manies()
+		virtual public void RemoveS1C1one2manies()
 		{
-			Strategy.RemoveCompositeRoles(Meta.I12I1One2Many);
+			Strategy.RemoveCompositeRoles(Meta.S1C1one2many);
 		}
 
 
-		virtual public C1 I12C1One2One
+
+		virtual public global::System.Double? S1234AllorsDouble 
+		{
+			get
+			{
+				return (global::System.Double?) Strategy.GetUnitRole(Meta.S1234AllorsDouble);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.S1234AllorsDouble, value);
+			}
+		}
+
+		virtual public bool ExistS1234AllorsDouble{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.S1234AllorsDouble);
+			}
+		}
+
+		virtual public void RemoveS1234AllorsDouble()
+		{
+			Strategy.RemoveUnitRole(Meta.S1234AllorsDouble);
+		}
+
+
+
+		virtual public global::System.Decimal? S1234AllorsDecimal 
+		{
+			get
+			{
+				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.S1234AllorsDecimal);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.S1234AllorsDecimal, value);
+			}
+		}
+
+		virtual public bool ExistS1234AllorsDecimal{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.S1234AllorsDecimal);
+			}
+		}
+
+		virtual public void RemoveS1234AllorsDecimal()
+		{
+			Strategy.RemoveUnitRole(Meta.S1234AllorsDecimal);
+		}
+
+
+
+		virtual public global::System.Int32? S1234AllorsInteger 
+		{
+			get
+			{
+				return (global::System.Int32?) Strategy.GetUnitRole(Meta.S1234AllorsInteger);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.S1234AllorsInteger, value);
+			}
+		}
+
+		virtual public bool ExistS1234AllorsInteger{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.S1234AllorsInteger);
+			}
+		}
+
+		virtual public void RemoveS1234AllorsInteger()
+		{
+			Strategy.RemoveUnitRole(Meta.S1234AllorsInteger);
+		}
+
+
+		virtual public S1234 S1234many2one
 		{ 
 			get
 			{
-				return (C1) Strategy.GetCompositeRole(Meta.I12C1One2One);
+				return (S1234) Strategy.GetCompositeRole(Meta.S1234many2one);
 			}
 			set
 			{
-				Strategy.SetCompositeRole(Meta.I12C1One2One ,value);
+				Strategy.SetCompositeRole(Meta.S1234many2one ,value);
 			}
 		}
 
-		virtual public bool ExistI12C1One2One
+		virtual public bool ExistS1234many2one
 		{
 			get
 			{
-				return Strategy.ExistCompositeRole(Meta.I12C1One2One);
+				return Strategy.ExistCompositeRole(Meta.S1234many2one);
 			}
 		}
 
-		virtual public void RemoveI12C1One2One()
+		virtual public void RemoveS1234many2one()
 		{
-			Strategy.RemoveCompositeRole(Meta.I12C1One2One);
+			Strategy.RemoveCompositeRole(Meta.S1234many2one);
 		}
 
 
-
-		virtual public global::System.Int64? I12AllorsLong 
-		{
-			get
-			{
-				return (global::System.Int64?) Strategy.GetUnitRole(Meta.I12AllorsLong);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.I12AllorsLong, value);
-			}
-		}
-
-		virtual public bool ExistI12AllorsLong{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.I12AllorsLong);
-			}
-		}
-
-		virtual public void RemoveI12AllorsLong()
-		{
-			Strategy.RemoveUnitRole(Meta.I12AllorsLong);
-		}
-
-
-		virtual public I12 I12I12One2One
+		virtual public C2 S1234C2one2one
 		{ 
 			get
 			{
-				return (I12) Strategy.GetCompositeRole(Meta.I12I12One2One);
+				return (C2) Strategy.GetCompositeRole(Meta.S1234C2one2one);
 			}
 			set
 			{
-				Strategy.SetCompositeRole(Meta.I12I12One2One ,value);
+				Strategy.SetCompositeRole(Meta.S1234C2one2one ,value);
 			}
 		}
 
-		virtual public bool ExistI12I12One2One
+		virtual public bool ExistS1234C2one2one
 		{
 			get
 			{
-				return Strategy.ExistCompositeRole(Meta.I12I12One2One);
+				return Strategy.ExistCompositeRole(Meta.S1234C2one2one);
 			}
 		}
 
-		virtual public void RemoveI12I12One2One()
+		virtual public void RemoveS1234C2one2one()
 		{
-			Strategy.RemoveCompositeRole(Meta.I12I12One2One);
+			Strategy.RemoveCompositeRole(Meta.S1234C2one2one);
 		}
 
 
-		virtual public I2 I12I2One2One
+		virtual public global::Allors.Extent<C2> S1234C2many2manies
 		{ 
 			get
 			{
-				return (I2) Strategy.GetCompositeRole(Meta.I12I2One2One);
+				return Strategy.GetCompositeRoles(Meta.S1234C2many2many);
 			}
 			set
 			{
-				Strategy.SetCompositeRole(Meta.I12I2One2One ,value);
+				Strategy.SetCompositeRoles(Meta.S1234C2many2many, value);
 			}
 		}
 
-		virtual public bool ExistI12I2One2One
+		virtual public void AddS1234C2many2many (C2 value)
+		{
+			Strategy.AddCompositeRole(Meta.S1234C2many2many, value);
+		}
+
+		virtual public void RemoveS1234C2many2many (C2 value)
+		{
+			Strategy.RemoveCompositeRole(Meta.S1234C2many2many,value);
+		}
+
+		virtual public bool ExistS1234C2many2manies
 		{
 			get
 			{
-				return Strategy.ExistCompositeRole(Meta.I12I2One2One);
+				return Strategy.ExistCompositeRoles(Meta.S1234C2many2many);
 			}
 		}
 
-		virtual public void RemoveI12I2One2One()
+		virtual public void RemoveS1234C2many2manies()
 		{
-			Strategy.RemoveCompositeRole(Meta.I12I2One2One);
+			Strategy.RemoveCompositeRoles(Meta.S1234C2many2many);
 		}
 
 
-		virtual public global::Allors.Extent<I12> Dependencies
+		virtual public global::Allors.Extent<S1234> S1234one2manies
 		{ 
 			get
 			{
-				return Strategy.GetCompositeRoles(Meta.Dependency);
+				return Strategy.GetCompositeRoles(Meta.S1234one2many);
 			}
 			set
 			{
-				Strategy.SetCompositeRoles(Meta.Dependency, value);
+				Strategy.SetCompositeRoles(Meta.S1234one2many, value);
 			}
 		}
 
-		virtual public void AddDependency (I12 value)
+		virtual public void AddS1234one2many (S1234 value)
 		{
-			Strategy.AddCompositeRole(Meta.Dependency, value);
+			Strategy.AddCompositeRole(Meta.S1234one2many, value);
 		}
 
-		virtual public void RemoveDependency (I12 value)
+		virtual public void RemoveS1234one2many (S1234 value)
 		{
-			Strategy.RemoveCompositeRole(Meta.Dependency,value);
+			Strategy.RemoveCompositeRole(Meta.S1234one2many,value);
 		}
 
-		virtual public bool ExistDependencies
+		virtual public bool ExistS1234one2manies
 		{
 			get
 			{
-				return Strategy.ExistCompositeRoles(Meta.Dependency);
+				return Strategy.ExistCompositeRoles(Meta.S1234one2many);
 			}
 		}
 
-		virtual public void RemoveDependencies()
+		virtual public void RemoveS1234one2manies()
 		{
-			Strategy.RemoveCompositeRoles(Meta.Dependency);
+			Strategy.RemoveCompositeRoles(Meta.S1234one2many);
 		}
 
 
-		virtual public global::Allors.Extent<I2> I12I2One2Manies
+		virtual public global::Allors.Extent<C2> S1234C2one2manies
 		{ 
 			get
 			{
-				return Strategy.GetCompositeRoles(Meta.I12I2One2Many);
+				return Strategy.GetCompositeRoles(Meta.S1234C2one2many);
 			}
 			set
 			{
-				Strategy.SetCompositeRoles(Meta.I12I2One2Many, value);
+				Strategy.SetCompositeRoles(Meta.S1234C2one2many, value);
 			}
 		}
 
-		virtual public void AddI12I2One2Many (I2 value)
+		virtual public void AddS1234C2one2many (C2 value)
 		{
-			Strategy.AddCompositeRole(Meta.I12I2One2Many, value);
+			Strategy.AddCompositeRole(Meta.S1234C2one2many, value);
 		}
 
-		virtual public void RemoveI12I2One2Many (I2 value)
+		virtual public void RemoveS1234C2one2many (C2 value)
 		{
-			Strategy.RemoveCompositeRole(Meta.I12I2One2Many,value);
+			Strategy.RemoveCompositeRole(Meta.S1234C2one2many,value);
 		}
 
-		virtual public bool ExistI12I2One2Manies
+		virtual public bool ExistS1234C2one2manies
 		{
 			get
 			{
-				return Strategy.ExistCompositeRoles(Meta.I12I2One2Many);
+				return Strategy.ExistCompositeRoles(Meta.S1234C2one2many);
 			}
 		}
 
-		virtual public void RemoveI12I2One2Manies()
+		virtual public void RemoveS1234C2one2manies()
 		{
-			Strategy.RemoveCompositeRoles(Meta.I12I2One2Many);
+			Strategy.RemoveCompositeRoles(Meta.S1234C2one2many);
 		}
 
 
-		virtual public C2 I12C2Many2One
+		virtual public global::Allors.Extent<S1234> S1234many2manies
 		{ 
 			get
 			{
-				return (C2) Strategy.GetCompositeRole(Meta.I12C2Many2One);
+				return Strategy.GetCompositeRoles(Meta.S1234many2many);
 			}
 			set
 			{
-				Strategy.SetCompositeRole(Meta.I12C2Many2One ,value);
+				Strategy.SetCompositeRoles(Meta.S1234many2many, value);
 			}
 		}
 
-		virtual public bool ExistI12C2Many2One
+		virtual public void AddS1234many2many (S1234 value)
+		{
+			Strategy.AddCompositeRole(Meta.S1234many2many, value);
+		}
+
+		virtual public void RemoveS1234many2many (S1234 value)
+		{
+			Strategy.RemoveCompositeRole(Meta.S1234many2many,value);
+		}
+
+		virtual public bool ExistS1234many2manies
 		{
 			get
 			{
-				return Strategy.ExistCompositeRole(Meta.I12C2Many2One);
+				return Strategy.ExistCompositeRoles(Meta.S1234many2many);
 			}
 		}
 
-		virtual public void RemoveI12C2Many2One()
+		virtual public void RemoveS1234many2manies()
 		{
-			Strategy.RemoveCompositeRole(Meta.I12C2Many2One);
+			Strategy.RemoveCompositeRoles(Meta.S1234many2many);
 		}
 
 
-		virtual public I12 I12I12Many2One
+
+		virtual public global::System.Int64? S1234AllorsLong 
+		{
+			get
+			{
+				return (global::System.Int64?) Strategy.GetUnitRole(Meta.S1234AllorsLong);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.S1234AllorsLong, value);
+			}
+		}
+
+		virtual public bool ExistS1234AllorsLong{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.S1234AllorsLong);
+			}
+		}
+
+		virtual public void RemoveS1234AllorsLong()
+		{
+			Strategy.RemoveUnitRole(Meta.S1234AllorsLong);
+		}
+
+
+
+		virtual public global::System.String ClassName 
+		{
+			get
+			{
+				return (global::System.String) Strategy.GetUnitRole(Meta.ClassName);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.ClassName, value);
+			}
+		}
+
+		virtual public bool ExistClassName{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.ClassName);
+			}
+		}
+
+		virtual public void RemoveClassName()
+		{
+			Strategy.RemoveUnitRole(Meta.ClassName);
+		}
+
+
+
+		virtual public global::System.DateTime? S1234AllorsDateTime 
+		{
+			get
+			{
+				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.S1234AllorsDateTime);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.S1234AllorsDateTime, value);
+			}
+		}
+
+		virtual public bool ExistS1234AllorsDateTime{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.S1234AllorsDateTime);
+			}
+		}
+
+		virtual public void RemoveS1234AllorsDateTime()
+		{
+			Strategy.RemoveUnitRole(Meta.S1234AllorsDateTime);
+		}
+
+
+		virtual public S1234 S1234one2one
 		{ 
 			get
 			{
-				return (I12) Strategy.GetCompositeRole(Meta.I12I12Many2One);
+				return (S1234) Strategy.GetCompositeRole(Meta.S1234one2one);
 			}
 			set
 			{
-				Strategy.SetCompositeRole(Meta.I12I12Many2One ,value);
+				Strategy.SetCompositeRole(Meta.S1234one2one ,value);
 			}
 		}
 
-		virtual public bool ExistI12I12Many2One
+		virtual public bool ExistS1234one2one
 		{
 			get
 			{
-				return Strategy.ExistCompositeRole(Meta.I12I12Many2One);
+				return Strategy.ExistCompositeRole(Meta.S1234one2one);
 			}
 		}
 
-		virtual public void RemoveI12I12Many2One()
+		virtual public void RemoveS1234one2one()
 		{
-			Strategy.RemoveCompositeRole(Meta.I12I12Many2One);
+			Strategy.RemoveCompositeRole(Meta.S1234one2one);
+		}
+
+
+		virtual public C2 S1234C2many2one
+		{ 
+			get
+			{
+				return (C2) Strategy.GetCompositeRole(Meta.S1234C2many2one);
+			}
+			set
+			{
+				Strategy.SetCompositeRole(Meta.S1234C2many2one ,value);
+			}
+		}
+
+		virtual public bool ExistS1234C2many2one
+		{
+			get
+			{
+				return Strategy.ExistCompositeRole(Meta.S1234C2many2one);
+			}
+		}
+
+		virtual public void RemoveS1234C2many2one()
+		{
+			Strategy.RemoveCompositeRole(Meta.S1234C2many2one);
+		}
+
+
+
+		virtual public global::System.String S1234AllorsString 
+		{
+			get
+			{
+				return (global::System.String) Strategy.GetUnitRole(Meta.S1234AllorsString);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.S1234AllorsString, value);
+			}
+		}
+
+		virtual public bool ExistS1234AllorsString{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.S1234AllorsString);
+			}
+		}
+
+		virtual public void RemoveS1234AllorsString()
+		{
+			Strategy.RemoveUnitRole(Meta.S1234AllorsString);
+		}
+
+
+
+		virtual public global::System.Boolean? S1234AllorsBoolean 
+		{
+			get
+			{
+				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.S1234AllorsBoolean);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.S1234AllorsBoolean, value);
+			}
+		}
+
+		virtual public bool ExistS1234AllorsBoolean{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.S1234AllorsBoolean);
+			}
+		}
+
+		virtual public void RemoveS1234AllorsBoolean()
+		{
+			Strategy.RemoveUnitRole(Meta.S1234AllorsBoolean);
 		}
 
 
@@ -2516,29 +4644,443 @@ namespace Allors.Domain
 		}
 
 
-		virtual public I1 I12I1One2One
-		{ 
+
+		virtual public global::System.Int32? I12AllorsInteger 
+		{
 			get
 			{
-				return (I1) Strategy.GetCompositeRole(Meta.I12I1One2One);
+				return (global::System.Int32?) Strategy.GetUnitRole(Meta.I12AllorsInteger);
 			}
 			set
 			{
-				Strategy.SetCompositeRole(Meta.I12I1One2One ,value);
+				Strategy.SetUnitRole(Meta.I12AllorsInteger, value);
 			}
 		}
 
-		virtual public bool ExistI12I1One2One
+		virtual public bool ExistI12AllorsInteger{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.I12AllorsInteger);
+			}
+		}
+
+		virtual public void RemoveI12AllorsInteger()
+		{
+			Strategy.RemoveUnitRole(Meta.I12AllorsInteger);
+		}
+
+
+		virtual public global::Allors.Extent<I34> I12I34one2manies
+		{ 
+			get
+			{
+				return Strategy.GetCompositeRoles(Meta.I12I34one2many);
+			}
+			set
+			{
+				Strategy.SetCompositeRoles(Meta.I12I34one2many, value);
+			}
+		}
+
+		virtual public void AddI12I34one2many (I34 value)
+		{
+			Strategy.AddCompositeRole(Meta.I12I34one2many, value);
+		}
+
+		virtual public void RemoveI12I34one2many (I34 value)
+		{
+			Strategy.RemoveCompositeRole(Meta.I12I34one2many,value);
+		}
+
+		virtual public bool ExistI12I34one2manies
 		{
 			get
 			{
-				return Strategy.ExistCompositeRole(Meta.I12I1One2One);
+				return Strategy.ExistCompositeRoles(Meta.I12I34one2many);
 			}
 		}
 
-		virtual public void RemoveI12I1One2One()
+		virtual public void RemoveI12I34one2manies()
 		{
-			Strategy.RemoveCompositeRole(Meta.I12I1One2One);
+			Strategy.RemoveCompositeRoles(Meta.I12I34one2many);
+		}
+
+
+		virtual public C3 C3many2one
+		{ 
+			get
+			{
+				return (C3) Strategy.GetCompositeRole(Meta.C3many2one);
+			}
+			set
+			{
+				Strategy.SetCompositeRole(Meta.C3many2one ,value);
+			}
+		}
+
+		virtual public bool ExistC3many2one
+		{
+			get
+			{
+				return Strategy.ExistCompositeRole(Meta.C3many2one);
+			}
+		}
+
+		virtual public void RemoveC3many2one()
+		{
+			Strategy.RemoveCompositeRole(Meta.C3many2one);
+		}
+
+
+		virtual public C2 I12C2many2one
+		{ 
+			get
+			{
+				return (C2) Strategy.GetCompositeRole(Meta.I12C2many2one);
+			}
+			set
+			{
+				Strategy.SetCompositeRole(Meta.I12C2many2one ,value);
+			}
+		}
+
+		virtual public bool ExistI12C2many2one
+		{
+			get
+			{
+				return Strategy.ExistCompositeRole(Meta.I12C2many2one);
+			}
+		}
+
+		virtual public void RemoveI12C2many2one()
+		{
+			Strategy.RemoveCompositeRole(Meta.I12C2many2one);
+		}
+
+
+
+		virtual public global::System.Double? I12AllorsDouble 
+		{
+			get
+			{
+				return (global::System.Double?) Strategy.GetUnitRole(Meta.I12AllorsDouble);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.I12AllorsDouble, value);
+			}
+		}
+
+		virtual public bool ExistI12AllorsDouble{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.I12AllorsDouble);
+			}
+		}
+
+		virtual public void RemoveI12AllorsDouble()
+		{
+			Strategy.RemoveUnitRole(Meta.I12AllorsDouble);
+		}
+
+
+		virtual public I34 I12I34many2one
+		{ 
+			get
+			{
+				return (I34) Strategy.GetCompositeRole(Meta.I12I34many2one);
+			}
+			set
+			{
+				Strategy.SetCompositeRole(Meta.I12I34many2one ,value);
+			}
+		}
+
+		virtual public bool ExistI12I34many2one
+		{
+			get
+			{
+				return Strategy.ExistCompositeRole(Meta.I12I34many2one);
+			}
+		}
+
+		virtual public void RemoveI12I34many2one()
+		{
+			Strategy.RemoveCompositeRole(Meta.I12I34many2one);
+		}
+
+
+		virtual public global::Allors.Extent<I34> I12I34many2manies
+		{ 
+			get
+			{
+				return Strategy.GetCompositeRoles(Meta.I12I34many2many);
+			}
+			set
+			{
+				Strategy.SetCompositeRoles(Meta.I12I34many2many, value);
+			}
+		}
+
+		virtual public void AddI12I34many2many (I34 value)
+		{
+			Strategy.AddCompositeRole(Meta.I12I34many2many, value);
+		}
+
+		virtual public void RemoveI12I34many2many (I34 value)
+		{
+			Strategy.RemoveCompositeRole(Meta.I12I34many2many,value);
+		}
+
+		virtual public bool ExistI12I34many2manies
+		{
+			get
+			{
+				return Strategy.ExistCompositeRoles(Meta.I12I34many2many);
+			}
+		}
+
+		virtual public void RemoveI12I34many2manies()
+		{
+			Strategy.RemoveCompositeRoles(Meta.I12I34many2many);
+		}
+
+
+		virtual public C3 I12C3one2one
+		{ 
+			get
+			{
+				return (C3) Strategy.GetCompositeRole(Meta.I12C3one2one);
+			}
+			set
+			{
+				Strategy.SetCompositeRole(Meta.I12C3one2one ,value);
+			}
+		}
+
+		virtual public bool ExistI12C3one2one
+		{
+			get
+			{
+				return Strategy.ExistCompositeRole(Meta.I12C3one2one);
+			}
+		}
+
+		virtual public void RemoveI12C3one2one()
+		{
+			Strategy.RemoveCompositeRole(Meta.I12C3one2one);
+		}
+
+
+		virtual public global::Allors.Extent<C2> I12C2many2manies
+		{ 
+			get
+			{
+				return Strategy.GetCompositeRoles(Meta.I12C2many2many);
+			}
+			set
+			{
+				Strategy.SetCompositeRoles(Meta.I12C2many2many, value);
+			}
+		}
+
+		virtual public void AddI12C2many2many (C2 value)
+		{
+			Strategy.AddCompositeRole(Meta.I12C2many2many, value);
+		}
+
+		virtual public void RemoveI12C2many2many (C2 value)
+		{
+			Strategy.RemoveCompositeRole(Meta.I12C2many2many,value);
+		}
+
+		virtual public bool ExistI12C2many2manies
+		{
+			get
+			{
+				return Strategy.ExistCompositeRoles(Meta.I12C2many2many);
+			}
+		}
+
+		virtual public void RemoveI12C2many2manies()
+		{
+			Strategy.RemoveCompositeRoles(Meta.I12C2many2many);
+		}
+
+
+
+		virtual public global::System.Int64? I12AllorsLong 
+		{
+			get
+			{
+				return (global::System.Int64?) Strategy.GetUnitRole(Meta.I12AllorsLong);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.I12AllorsLong, value);
+			}
+		}
+
+		virtual public bool ExistI12AllorsLong{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.I12AllorsLong);
+			}
+		}
+
+		virtual public void RemoveI12AllorsLong()
+		{
+			Strategy.RemoveUnitRole(Meta.I12AllorsLong);
+		}
+
+
+
+		virtual public global::System.Decimal? I12AllorsDecimal 
+		{
+			get
+			{
+				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.I12AllorsDecimal);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.I12AllorsDecimal, value);
+			}
+		}
+
+		virtual public bool ExistI12AllorsDecimal{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.I12AllorsDecimal);
+			}
+		}
+
+		virtual public void RemoveI12AllorsDecimal()
+		{
+			Strategy.RemoveUnitRole(Meta.I12AllorsDecimal);
+		}
+
+
+		virtual public C2 I12C2one2one
+		{ 
+			get
+			{
+				return (C2) Strategy.GetCompositeRole(Meta.I12C2one2one);
+			}
+			set
+			{
+				Strategy.SetCompositeRole(Meta.I12C2one2one ,value);
+			}
+		}
+
+		virtual public bool ExistI12C2one2one
+		{
+			get
+			{
+				return Strategy.ExistCompositeRole(Meta.I12C2one2one);
+			}
+		}
+
+		virtual public void RemoveI12C2one2one()
+		{
+			Strategy.RemoveCompositeRole(Meta.I12C2one2one);
+		}
+
+
+		virtual public global::Allors.Extent<C3> I12C3one2manies
+		{ 
+			get
+			{
+				return Strategy.GetCompositeRoles(Meta.I12C3one2many);
+			}
+			set
+			{
+				Strategy.SetCompositeRoles(Meta.I12C3one2many, value);
+			}
+		}
+
+		virtual public void AddI12C3one2many (C3 value)
+		{
+			Strategy.AddCompositeRole(Meta.I12C3one2many, value);
+		}
+
+		virtual public void RemoveI12C3one2many (C3 value)
+		{
+			Strategy.RemoveCompositeRole(Meta.I12C3one2many,value);
+		}
+
+		virtual public bool ExistI12C3one2manies
+		{
+			get
+			{
+				return Strategy.ExistCompositeRoles(Meta.I12C3one2many);
+			}
+		}
+
+		virtual public void RemoveI12C3one2manies()
+		{
+			Strategy.RemoveCompositeRoles(Meta.I12C3one2many);
+		}
+
+
+		virtual public global::Allors.Extent<C3> I12C3many2manies
+		{ 
+			get
+			{
+				return Strategy.GetCompositeRoles(Meta.I12C3many2many);
+			}
+			set
+			{
+				Strategy.SetCompositeRoles(Meta.I12C3many2many, value);
+			}
+		}
+
+		virtual public void AddI12C3many2many (C3 value)
+		{
+			Strategy.AddCompositeRole(Meta.I12C3many2many, value);
+		}
+
+		virtual public void RemoveI12C3many2many (C3 value)
+		{
+			Strategy.RemoveCompositeRole(Meta.I12C3many2many,value);
+		}
+
+		virtual public bool ExistI12C3many2manies
+		{
+			get
+			{
+				return Strategy.ExistCompositeRoles(Meta.I12C3many2many);
+			}
+		}
+
+		virtual public void RemoveI12C3many2manies()
+		{
+			Strategy.RemoveCompositeRoles(Meta.I12C3many2many);
+		}
+
+
+
+		virtual public global::System.String PrefetchTest 
+		{
+			get
+			{
+				return (global::System.String) Strategy.GetUnitRole(Meta.PrefetchTest);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.PrefetchTest, value);
+			}
+		}
+
+		virtual public bool ExistPrefetchTest{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.PrefetchTest);
+			}
+		}
+
+		virtual public void RemovePrefetchTest()
+		{
+			Strategy.RemoveUnitRole(Meta.PrefetchTest);
 		}
 
 
@@ -2568,1226 +5110,1153 @@ namespace Allors.Domain
 		}
 
 
-		virtual public global::Allors.Extent<C1> I12C1One2Manies
-		{ 
+
+		virtual public global::System.String I12AllorsString 
+		{
 			get
 			{
-				return Strategy.GetCompositeRoles(Meta.I12C1One2Many);
+				return (global::System.String) Strategy.GetUnitRole(Meta.I12AllorsString);
 			}
 			set
 			{
-				Strategy.SetCompositeRoles(Meta.I12C1One2Many, value);
+				Strategy.SetUnitRole(Meta.I12AllorsString, value);
 			}
 		}
 
-		virtual public void AddI12C1One2Many (C1 value)
-		{
-			Strategy.AddCompositeRole(Meta.I12C1One2Many, value);
-		}
-
-		virtual public void RemoveI12C1One2Many (C1 value)
-		{
-			Strategy.RemoveCompositeRole(Meta.I12C1One2Many,value);
-		}
-
-		virtual public bool ExistI12C1One2Manies
-		{
+		virtual public bool ExistI12AllorsString{
 			get
 			{
-				return Strategy.ExistCompositeRoles(Meta.I12C1One2Many);
+				return Strategy.ExistUnitRole(Meta.I12AllorsString);
 			}
 		}
 
-		virtual public void RemoveI12C1One2Manies()
+		virtual public void RemoveI12AllorsString()
 		{
-			Strategy.RemoveCompositeRoles(Meta.I12C1One2Many);
+			Strategy.RemoveUnitRole(Meta.I12AllorsString);
 		}
 
 
-		virtual public C1 I12C1Many2One
+		virtual public I34 I12I34one2one
 		{ 
 			get
 			{
-				return (C1) Strategy.GetCompositeRole(Meta.I12C1Many2One);
+				return (I34) Strategy.GetCompositeRole(Meta.I12I34one2one);
 			}
 			set
 			{
-				Strategy.SetCompositeRole(Meta.I12C1Many2One ,value);
+				Strategy.SetCompositeRole(Meta.I12I34one2one ,value);
 			}
 		}
 
-		virtual public bool ExistI12C1Many2One
+		virtual public bool ExistI12I34one2one
 		{
 			get
 			{
-				return Strategy.ExistCompositeRole(Meta.I12C1Many2One);
+				return Strategy.ExistCompositeRole(Meta.I12I34one2one);
 			}
 		}
 
-		virtual public void RemoveI12C1Many2One()
+		virtual public void RemoveI12I34one2one()
 		{
-			Strategy.RemoveCompositeRole(Meta.I12C1Many2One);
+			Strategy.RemoveCompositeRole(Meta.I12I34one2one);
 		}
 
 
-
-		virtual public global::System.String DisplayName 
-		{
-			get
-			{
-				return (global::System.String) Strategy.GetUnitRole(Meta.DisplayName);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.DisplayName, value);
-			}
-		}
-
-		virtual public bool ExistDisplayName{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.DisplayName);
-			}
-		}
-
-		virtual public void RemoveDisplayName()
-		{
-			Strategy.RemoveUnitRole(Meta.DisplayName);
-		}
-
-
-		virtual public global::Allors.Extent<Permission> DeniedPermissions
+		virtual public global::Allors.Extent<C2> I12C2one2manies
 		{ 
 			get
 			{
-				return Strategy.GetCompositeRoles(Meta.DeniedPermission);
+				return Strategy.GetCompositeRoles(Meta.I12C2one2many);
 			}
 			set
 			{
-				Strategy.SetCompositeRoles(Meta.DeniedPermission, value);
+				Strategy.SetCompositeRoles(Meta.I12C2one2many, value);
 			}
 		}
 
-		virtual public void AddDeniedPermission (Permission value)
+		virtual public void AddI12C2one2many (C2 value)
 		{
-			Strategy.AddCompositeRole(Meta.DeniedPermission, value);
+			Strategy.AddCompositeRole(Meta.I12C2one2many, value);
 		}
 
-		virtual public void RemoveDeniedPermission (Permission value)
+		virtual public void RemoveI12C2one2many (C2 value)
 		{
-			Strategy.RemoveCompositeRole(Meta.DeniedPermission,value);
+			Strategy.RemoveCompositeRole(Meta.I12C2one2many,value);
 		}
 
-		virtual public bool ExistDeniedPermissions
+		virtual public bool ExistI12C2one2manies
 		{
 			get
 			{
-				return Strategy.ExistCompositeRoles(Meta.DeniedPermission);
+				return Strategy.ExistCompositeRoles(Meta.I12C2one2many);
 			}
 		}
 
-		virtual public void RemoveDeniedPermissions()
+		virtual public void RemoveI12C2one2manies()
 		{
-			Strategy.RemoveCompositeRoles(Meta.DeniedPermission);
+			Strategy.RemoveCompositeRoles(Meta.I12C2one2many);
 		}
 
 
-		virtual public global::Allors.Extent<SecurityToken> SecurityTokens
-		{ 
-			get
-			{
-				return Strategy.GetCompositeRoles(Meta.SecurityToken);
-			}
-			set
-			{
-				Strategy.SetCompositeRoles(Meta.SecurityToken, value);
-			}
-		}
 
-		virtual public void AddSecurityToken (SecurityToken value)
-		{
-			Strategy.AddCompositeRole(Meta.SecurityToken, value);
-		}
-
-		virtual public void RemoveSecurityToken (SecurityToken value)
-		{
-			Strategy.RemoveCompositeRole(Meta.SecurityToken,value);
-		}
-
-		virtual public bool ExistSecurityTokens
+		virtual public global::System.String S12AllorsString 
 		{
 			get
 			{
-				return Strategy.ExistCompositeRoles(Meta.SecurityToken);
-			}
-		}
-
-		virtual public void RemoveSecurityTokens()
-		{
-			Strategy.RemoveCompositeRoles(Meta.SecurityToken);
-		}
-
-
-		virtual public SearchData SearchData
-		{ 
-			get
-			{
-				return (SearchData) Strategy.GetCompositeRole(Meta.SearchData);
+				return (global::System.String) Strategy.GetUnitRole(Meta.S12AllorsString);
 			}
 			set
 			{
-				Strategy.SetCompositeRole(Meta.SearchData ,value);
+				Strategy.SetUnitRole(Meta.S12AllorsString, value);
 			}
 		}
 
-		virtual public bool ExistSearchData
+		virtual public bool ExistS12AllorsString{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.S12AllorsString);
+			}
+		}
+
+		virtual public void RemoveS12AllorsString()
+		{
+			Strategy.RemoveUnitRole(Meta.S12AllorsString);
+		}
+
+
+
+		virtual public global::System.DateTime? S12AllorsDateTime 
 		{
 			get
 			{
-				return Strategy.ExistCompositeRole(Meta.SearchData);
+				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.S12AllorsDateTime);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.S12AllorsDateTime, value);
 			}
 		}
 
-		virtual public void RemoveSearchData()
+		virtual public bool ExistS12AllorsDateTime{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.S12AllorsDateTime);
+			}
+		}
+
+		virtual public void RemoveS12AllorsDateTime()
 		{
-			Strategy.RemoveCompositeRole(Meta.SearchData);
+			Strategy.RemoveUnitRole(Meta.S12AllorsDateTime);
 		}
 
 
-
-		virtual public global::Allors.Extent<I2> I2sWhereC1Many2One
+		virtual public global::Allors.Extent<C2> S12C2many2manies
 		{ 
 			get
 			{
-				return Strategy.GetCompositeAssociations(Meta.I2sWhereC1Many2One);
+				return Strategy.GetCompositeRoles(Meta.S12C2many2many);
+			}
+			set
+			{
+				Strategy.SetCompositeRoles(Meta.S12C2many2many, value);
 			}
 		}
 
-		virtual public bool ExistI2sWhereC1Many2One
+		virtual public void AddS12C2many2many (C2 value)
+		{
+			Strategy.AddCompositeRole(Meta.S12C2many2many, value);
+		}
+
+		virtual public void RemoveS12C2many2many (C2 value)
+		{
+			Strategy.RemoveCompositeRole(Meta.S12C2many2many,value);
+		}
+
+		virtual public bool ExistS12C2many2manies
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociations(Meta.I2sWhereC1Many2One);
+				return Strategy.ExistCompositeRoles(Meta.S12C2many2many);
+			}
+		}
+
+		virtual public void RemoveS12C2many2manies()
+		{
+			Strategy.RemoveCompositeRoles(Meta.S12C2many2many);
+		}
+
+
+		virtual public C2 S12C2many2one
+		{ 
+			get
+			{
+				return (C2) Strategy.GetCompositeRole(Meta.S12C2many2one);
+			}
+			set
+			{
+				Strategy.SetCompositeRole(Meta.S12C2many2one ,value);
+			}
+		}
+
+		virtual public bool ExistS12C2many2one
+		{
+			get
+			{
+				return Strategy.ExistCompositeRole(Meta.S12C2many2one);
+			}
+		}
+
+		virtual public void RemoveS12C2many2one()
+		{
+			Strategy.RemoveCompositeRole(Meta.S12C2many2one);
+		}
+
+
+		virtual public C2 S12C2one2one
+		{ 
+			get
+			{
+				return (C2) Strategy.GetCompositeRole(Meta.S12C2one2one);
+			}
+			set
+			{
+				Strategy.SetCompositeRole(Meta.S12C2one2one ,value);
+			}
+		}
+
+		virtual public bool ExistS12C2one2one
+		{
+			get
+			{
+				return Strategy.ExistCompositeRole(Meta.S12C2one2one);
+			}
+		}
+
+		virtual public void RemoveS12C2one2one()
+		{
+			Strategy.RemoveCompositeRole(Meta.S12C2one2one);
+		}
+
+
+		virtual public global::Allors.Extent<C2> S12C2one2manies
+		{ 
+			get
+			{
+				return Strategy.GetCompositeRoles(Meta.S12C2one2many);
+			}
+			set
+			{
+				Strategy.SetCompositeRoles(Meta.S12C2one2many, value);
+			}
+		}
+
+		virtual public void AddS12C2one2many (C2 value)
+		{
+			Strategy.AddCompositeRole(Meta.S12C2one2many, value);
+		}
+
+		virtual public void RemoveS12C2one2many (C2 value)
+		{
+			Strategy.RemoveCompositeRole(Meta.S12C2one2many,value);
+		}
+
+		virtual public bool ExistS12C2one2manies
+		{
+			get
+			{
+				return Strategy.ExistCompositeRoles(Meta.S12C2one2many);
+			}
+		}
+
+		virtual public void RemoveS12C2one2manies()
+		{
+			Strategy.RemoveCompositeRoles(Meta.S12C2one2many);
+		}
+
+
+
+		virtual public global::System.Boolean? S12AllorsBoolean 
+		{
+			get
+			{
+				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.S12AllorsBoolean);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.S12AllorsBoolean, value);
+			}
+		}
+
+		virtual public bool ExistS12AllorsBoolean{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.S12AllorsBoolean);
+			}
+		}
+
+		virtual public void RemoveS12AllorsBoolean()
+		{
+			Strategy.RemoveUnitRole(Meta.S12AllorsBoolean);
+		}
+
+
+
+		virtual public global::System.Double? S12AllorsDouble 
+		{
+			get
+			{
+				return (global::System.Double?) Strategy.GetUnitRole(Meta.S12AllorsDouble);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.S12AllorsDouble, value);
+			}
+		}
+
+		virtual public bool ExistS12AllorsDouble{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.S12AllorsDouble);
+			}
+		}
+
+		virtual public void RemoveS12AllorsDouble()
+		{
+			Strategy.RemoveUnitRole(Meta.S12AllorsDouble);
+		}
+
+
+
+		virtual public global::System.Int32? S12AllorsInteger 
+		{
+			get
+			{
+				return (global::System.Int32?) Strategy.GetUnitRole(Meta.S12AllorsInteger);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.S12AllorsInteger, value);
+			}
+		}
+
+		virtual public bool ExistS12AllorsInteger{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.S12AllorsInteger);
+			}
+		}
+
+		virtual public void RemoveS12AllorsInteger()
+		{
+			Strategy.RemoveUnitRole(Meta.S12AllorsInteger);
+		}
+
+
+
+		virtual public global::System.Decimal? S12AllorsDecimal 
+		{
+			get
+			{
+				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.S12AllorsDecimal);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.S12AllorsDecimal, value);
+			}
+		}
+
+		virtual public bool ExistS12AllorsDecimal{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.S12AllorsDecimal);
+			}
+		}
+
+		virtual public void RemoveS12AllorsDecimal()
+		{
+			Strategy.RemoveUnitRole(Meta.S12AllorsDecimal);
+		}
+
+
+
+		virtual public global::Allors.Extent<S1> S1sWhereC1many2one
+		{ 
+			get
+			{
+				return Strategy.GetCompositeAssociations(Meta.S1sWhereC1many2one);
+			}
+		}
+
+		virtual public bool ExistS1sWhereC1many2one
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociations(Meta.S1sWhereC1many2one);
 			}
 		}
 
 
-		virtual public I2 I2WhereC1One2Many
+		virtual public S1 S1WhereC1one2one
 		{ 
 			get
 			{
-				return (I2) Strategy.GetCompositeAssociation(Meta.I2WhereC1One2Many);
+				return (S1) Strategy.GetCompositeAssociation(Meta.S1WhereC1one2one);
 			}
 		} 
 
-		virtual public bool ExistI2WhereC1One2Many
+		virtual public bool ExistS1WhereC1one2one
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociation(Meta.I2WhereC1One2Many);
+				return Strategy.ExistCompositeAssociation(Meta.S1WhereC1one2one);
 			}
 		}
 
 
-		virtual public I2 I2WhereC1One2One
+		virtual public global::Allors.Extent<S1> S1sWhereC1many2many
 		{ 
 			get
 			{
-				return (I2) Strategy.GetCompositeAssociation(Meta.I2WhereC1One2One);
+				return Strategy.GetCompositeAssociations(Meta.S1sWhereC1many2many);
+			}
+		}
+
+		virtual public bool ExistS1sWhereC1many2many
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociations(Meta.S1sWhereC1many2many);
+			}
+		}
+
+
+		virtual public S1 S1WhereC1one2many
+		{ 
+			get
+			{
+				return (S1) Strategy.GetCompositeAssociation(Meta.S1WhereC1one2many);
 			}
 		} 
 
-		virtual public bool ExistI2WhereC1One2One
+		virtual public bool ExistS1WhereC1one2many
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociation(Meta.I2WhereC1One2One);
+				return Strategy.ExistCompositeAssociation(Meta.S1WhereC1one2many);
 			}
 		}
 
 
-		virtual public global::Allors.Extent<I2> I2sWhereC1Many2Many
+		virtual public I3 I3WhereC1one2one
 		{ 
 			get
 			{
-				return Strategy.GetCompositeAssociations(Meta.I2sWhereC1Many2Many);
-			}
-		}
-
-		virtual public bool ExistI2sWhereC1Many2Many
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociations(Meta.I2sWhereC1Many2Many);
-			}
-		}
-
-
-		virtual public C1 C1WhereC1One2One
-		{ 
-			get
-			{
-				return (C1) Strategy.GetCompositeAssociation(Meta.C1WhereC1One2One);
+				return (I3) Strategy.GetCompositeAssociation(Meta.I3WhereC1one2one);
 			}
 		} 
 
-		virtual public bool ExistC1WhereC1One2One
+		virtual public bool ExistI3WhereC1one2one
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociation(Meta.C1WhereC1One2One);
+				return Strategy.ExistCompositeAssociation(Meta.I3WhereC1one2one);
 			}
 		}
 
 
-		virtual public global::Allors.Extent<C1> C1sWhereC1Many2Many
+		virtual public global::Allors.Extent<C1> C1sWhereC1many2one
 		{ 
 			get
 			{
-				return Strategy.GetCompositeAssociations(Meta.C1sWhereC1Many2Many);
+				return Strategy.GetCompositeAssociations(Meta.C1sWhereC1many2one);
 			}
 		}
 
-		virtual public bool ExistC1sWhereC1Many2Many
+		virtual public bool ExistC1sWhereC1many2one
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociations(Meta.C1sWhereC1Many2Many);
+				return Strategy.ExistCompositeAssociations(Meta.C1sWhereC1many2one);
 			}
 		}
 
 
-		virtual public C1 C1WhereC1One2Many
+		virtual public global::Allors.Extent<C1> C1sWhereMany2One
 		{ 
 			get
 			{
-				return (C1) Strategy.GetCompositeAssociation(Meta.C1WhereC1One2Many);
+				return Strategy.GetCompositeAssociations(Meta.C1sWhereMany2One);
+			}
+		}
+
+		virtual public bool ExistC1sWhereMany2One
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociations(Meta.C1sWhereMany2One);
+			}
+		}
+
+
+		virtual public global::Allors.Extent<C1> C1sWhereC1many2many
+		{ 
+			get
+			{
+				return Strategy.GetCompositeAssociations(Meta.C1sWhereC1many2many);
+			}
+		}
+
+		virtual public bool ExistC1sWhereC1many2many
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociations(Meta.C1sWhereC1many2many);
+			}
+		}
+
+
+		virtual public C1 C1WhereC1one2one
+		{ 
+			get
+			{
+				return (C1) Strategy.GetCompositeAssociation(Meta.C1WhereC1one2one);
 			}
 		} 
 
-		virtual public bool ExistC1WhereC1One2Many
+		virtual public bool ExistC1WhereC1one2one
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociation(Meta.C1WhereC1One2Many);
+				return Strategy.ExistCompositeAssociation(Meta.C1WhereC1one2one);
 			}
 		}
 
 
-		virtual public global::Allors.Extent<C1> C1sWhereC1Many2One
+		virtual public C1 C1WhereC1one2many
 		{ 
 			get
 			{
-				return Strategy.GetCompositeAssociations(Meta.C1sWhereC1Many2One);
-			}
-		}
-
-		virtual public bool ExistC1sWhereC1Many2One
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociations(Meta.C1sWhereC1Many2One);
-			}
-		}
-
-
-		virtual public C2 C2WhereC1One2One
-		{ 
-			get
-			{
-				return (C2) Strategy.GetCompositeAssociation(Meta.C2WhereC1One2One);
+				return (C1) Strategy.GetCompositeAssociation(Meta.C1WhereC1one2many);
 			}
 		} 
 
-		virtual public bool ExistC2WhereC1One2One
+		virtual public bool ExistC1WhereC1one2many
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociation(Meta.C2WhereC1One2One);
+				return Strategy.ExistCompositeAssociation(Meta.C1WhereC1one2many);
 			}
 		}
 
 
-		virtual public global::Allors.Extent<C2> C2sWhereC1Many2Many
+		virtual public global::Allors.Extent<C2> C2sWhereC1many2many
 		{ 
 			get
 			{
-				return Strategy.GetCompositeAssociations(Meta.C2sWhereC1Many2Many);
+				return Strategy.GetCompositeAssociations(Meta.C2sWhereC1many2many);
 			}
 		}
 
-		virtual public bool ExistC2sWhereC1Many2Many
+		virtual public bool ExistC2sWhereC1many2many
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociations(Meta.C2sWhereC1Many2Many);
+				return Strategy.ExistCompositeAssociations(Meta.C2sWhereC1many2many);
 			}
 		}
 
 
-		virtual public global::Allors.Extent<C2> C2sWhereC1Many2One
+		virtual public global::Allors.Extent<C2> C2sWhereC1many2one
 		{ 
 			get
 			{
-				return Strategy.GetCompositeAssociations(Meta.C2sWhereC1Many2One);
+				return Strategy.GetCompositeAssociations(Meta.C2sWhereC1many2one);
 			}
 		}
 
-		virtual public bool ExistC2sWhereC1Many2One
+		virtual public bool ExistC2sWhereC1many2one
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociations(Meta.C2sWhereC1Many2One);
+				return Strategy.ExistCompositeAssociations(Meta.C2sWhereC1many2one);
 			}
 		}
 
 
-		virtual public C2 C2WhereC1One2Many
+		virtual public C2 C2WhereC1one2one
 		{ 
 			get
 			{
-				return (C2) Strategy.GetCompositeAssociation(Meta.C2WhereC1One2Many);
+				return (C2) Strategy.GetCompositeAssociation(Meta.C2WhereC1one2one);
 			}
 		} 
 
-		virtual public bool ExistC2WhereC1One2Many
+		virtual public bool ExistC2WhereC1one2one
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociation(Meta.C2WhereC1One2Many);
+				return Strategy.ExistCompositeAssociation(Meta.C2WhereC1one2one);
 			}
 		}
 
 
-		virtual public global::Allors.Extent<I12> I12sWhereC1Many2Many
+		virtual public C2 C2WhereC1one2many
 		{ 
 			get
 			{
-				return Strategy.GetCompositeAssociations(Meta.I12sWhereC1Many2Many);
-			}
-		}
-
-		virtual public bool ExistI12sWhereC1Many2Many
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociations(Meta.I12sWhereC1Many2Many);
-			}
-		}
-
-
-		virtual public I12 I12WhereC1One2One
-		{ 
-			get
-			{
-				return (I12) Strategy.GetCompositeAssociation(Meta.I12WhereC1One2One);
+				return (C2) Strategy.GetCompositeAssociation(Meta.C2WhereC1one2many);
 			}
 		} 
 
-		virtual public bool ExistI12WhereC1One2One
+		virtual public bool ExistC2WhereC1one2many
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociation(Meta.I12WhereC1One2One);
+				return Strategy.ExistCompositeAssociation(Meta.C2WhereC1one2many);
 			}
 		}
 
 
-		virtual public I12 I12WhereC1One2Many
+		virtual public global::Allors.Extent<I1> I1sWhereC1many2one
 		{ 
 			get
 			{
-				return (I12) Strategy.GetCompositeAssociation(Meta.I12WhereC1One2Many);
+				return Strategy.GetCompositeAssociations(Meta.I1sWhereC1many2one);
+			}
+		}
+
+		virtual public bool ExistI1sWhereC1many2one
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociations(Meta.I1sWhereC1many2one);
+			}
+		}
+
+
+		virtual public I1 I1WhereC1one2one
+		{ 
+			get
+			{
+				return (I1) Strategy.GetCompositeAssociation(Meta.I1WhereC1one2one);
 			}
 		} 
 
-		virtual public bool ExistI12WhereC1One2Many
+		virtual public bool ExistI1WhereC1one2one
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociation(Meta.I12WhereC1One2Many);
+				return Strategy.ExistCompositeAssociation(Meta.I1WhereC1one2one);
 			}
 		}
 
 
-		virtual public global::Allors.Extent<I12> I12sWhereC1Many2One
+		virtual public global::Allors.Extent<I1> I1sWhereC1many2many
 		{ 
 			get
 			{
-				return Strategy.GetCompositeAssociations(Meta.I12sWhereC1Many2One);
+				return Strategy.GetCompositeAssociations(Meta.I1sWhereC1many2many);
 			}
 		}
 
-		virtual public bool ExistI12sWhereC1Many2One
+		virtual public bool ExistI1sWhereC1many2many
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociations(Meta.I12sWhereC1Many2One);
+				return Strategy.ExistCompositeAssociations(Meta.I1sWhereC1many2many);
 			}
 		}
 
 
-		virtual public I1 I1WhereC1One2One
+		virtual public I1 I1WhereC1one2many
 		{ 
 			get
 			{
-				return (I1) Strategy.GetCompositeAssociation(Meta.I1WhereC1One2One);
+				return (I1) Strategy.GetCompositeAssociation(Meta.I1WhereC1one2many);
 			}
 		} 
 
-		virtual public bool ExistI1WhereC1One2One
+		virtual public bool ExistI1WhereC1one2many
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociation(Meta.I1WhereC1One2One);
+				return Strategy.ExistCompositeAssociation(Meta.I1WhereC1one2many);
 			}
 		}
 
 
-		virtual public I1 I1WhereC1One2Many
+		virtual public C1 C1WhereI1one2one
 		{ 
 			get
 			{
-				return (I1) Strategy.GetCompositeAssociation(Meta.I1WhereC1One2Many);
+				return (C1) Strategy.GetCompositeAssociation(Meta.C1WhereI1one2one);
 			}
 		} 
 
-		virtual public bool ExistI1WhereC1One2Many
+		virtual public bool ExistC1WhereI1one2one
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociation(Meta.I1WhereC1One2Many);
+				return Strategy.ExistCompositeAssociation(Meta.C1WhereI1one2one);
 			}
 		}
 
 
-		virtual public global::Allors.Extent<I1> I1sWhereC1Many2Many
+		virtual public global::Allors.Extent<C1> C1sWhereI1many2many
 		{ 
 			get
 			{
-				return Strategy.GetCompositeAssociations(Meta.I1sWhereC1Many2Many);
+				return Strategy.GetCompositeAssociations(Meta.C1sWhereI1many2many);
 			}
 		}
 
-		virtual public bool ExistI1sWhereC1Many2Many
+		virtual public bool ExistC1sWhereI1many2many
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociations(Meta.I1sWhereC1Many2Many);
+				return Strategy.ExistCompositeAssociations(Meta.C1sWhereI1many2many);
 			}
 		}
 
 
-		virtual public global::Allors.Extent<I1> I1sWhereC1Many2One
+		virtual public global::Allors.Extent<C1> C1sWhereI1many2one
 		{ 
 			get
 			{
-				return Strategy.GetCompositeAssociations(Meta.I1sWhereC1Many2One);
+				return Strategy.GetCompositeAssociations(Meta.C1sWhereI1many2one);
 			}
 		}
 
-		virtual public bool ExistI1sWhereC1Many2One
+		virtual public bool ExistC1sWhereI1many2one
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociations(Meta.I1sWhereC1Many2One);
+				return Strategy.ExistCompositeAssociations(Meta.C1sWhereI1many2one);
 			}
 		}
 
 
-		virtual public global::Allors.Extent<I2> I2sWhereI1Many2One
+		virtual public C1 C1WhereI1one2many
 		{ 
 			get
 			{
-				return Strategy.GetCompositeAssociations(Meta.I2sWhereI1Many2One);
-			}
-		}
-
-		virtual public bool ExistI2sWhereI1Many2One
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociations(Meta.I2sWhereI1Many2One);
-			}
-		}
-
-
-		virtual public global::Allors.Extent<I2> I2sWhereI1Many2Many
-		{ 
-			get
-			{
-				return Strategy.GetCompositeAssociations(Meta.I2sWhereI1Many2Many);
-			}
-		}
-
-		virtual public bool ExistI2sWhereI1Many2Many
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociations(Meta.I2sWhereI1Many2Many);
-			}
-		}
-
-
-		virtual public I2 I2WhereI1One2One
-		{ 
-			get
-			{
-				return (I2) Strategy.GetCompositeAssociation(Meta.I2WhereI1One2One);
+				return (C1) Strategy.GetCompositeAssociation(Meta.C1WhereI1one2many);
 			}
 		} 
 
-		virtual public bool ExistI2WhereI1One2One
+		virtual public bool ExistC1WhereI1one2many
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociation(Meta.I2WhereI1One2One);
+				return Strategy.ExistCompositeAssociation(Meta.C1WhereI1one2many);
 			}
 		}
 
 
-		virtual public I2 I2WhereI1One2Many
+		virtual public global::Allors.Extent<I1> I1sWhereI1many2one
 		{ 
 			get
 			{
-				return (I2) Strategy.GetCompositeAssociation(Meta.I2WhereI1One2Many);
+				return Strategy.GetCompositeAssociations(Meta.I1sWhereI1many2one);
+			}
+		}
+
+		virtual public bool ExistI1sWhereI1many2one
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociations(Meta.I1sWhereI1many2one);
+			}
+		}
+
+
+		virtual public I1 I1WhereI1one2many
+		{ 
+			get
+			{
+				return (I1) Strategy.GetCompositeAssociation(Meta.I1WhereI1one2many);
 			}
 		} 
 
-		virtual public bool ExistI2WhereI1One2Many
+		virtual public bool ExistI1WhereI1one2many
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociation(Meta.I2WhereI1One2Many);
+				return Strategy.ExistCompositeAssociation(Meta.I1WhereI1one2many);
 			}
 		}
 
 
-		virtual public C1 C1WhereI1One2One
+		virtual public global::Allors.Extent<I1> I1sWhereI1many2many
 		{ 
 			get
 			{
-				return (C1) Strategy.GetCompositeAssociation(Meta.C1WhereI1One2One);
+				return Strategy.GetCompositeAssociations(Meta.I1sWhereI1many2many);
+			}
+		}
+
+		virtual public bool ExistI1sWhereI1many2many
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociations(Meta.I1sWhereI1many2many);
+			}
+		}
+
+
+		virtual public I1 I1WhereI1one2one
+		{ 
+			get
+			{
+				return (I1) Strategy.GetCompositeAssociation(Meta.I1WhereI1one2one);
 			}
 		} 
 
-		virtual public bool ExistC1WhereI1One2One
+		virtual public bool ExistI1WhereI1one2one
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociation(Meta.C1WhereI1One2One);
+				return Strategy.ExistCompositeAssociation(Meta.I1WhereI1one2one);
 			}
 		}
 
 
-		virtual public global::Allors.Extent<C1> C1sWhereI1Many2One
+		virtual public C1 C1WhereS1one2many
 		{ 
 			get
 			{
-				return Strategy.GetCompositeAssociations(Meta.C1sWhereI1Many2One);
-			}
-		}
-
-		virtual public bool ExistC1sWhereI1Many2One
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociations(Meta.C1sWhereI1Many2One);
-			}
-		}
-
-
-		virtual public global::Allors.Extent<C1> C1sWhereI1Many2Many
-		{ 
-			get
-			{
-				return Strategy.GetCompositeAssociations(Meta.C1sWhereI1Many2Many);
-			}
-		}
-
-		virtual public bool ExistC1sWhereI1Many2Many
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociations(Meta.C1sWhereI1Many2Many);
-			}
-		}
-
-
-		virtual public C1 C1WhereI1One2Many
-		{ 
-			get
-			{
-				return (C1) Strategy.GetCompositeAssociation(Meta.C1WhereI1One2Many);
+				return (C1) Strategy.GetCompositeAssociation(Meta.C1WhereS1one2many);
 			}
 		} 
 
-		virtual public bool ExistC1WhereI1One2Many
+		virtual public bool ExistC1WhereS1one2many
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociation(Meta.C1WhereI1One2Many);
+				return Strategy.ExistCompositeAssociation(Meta.C1WhereS1one2many);
 			}
 		}
 
 
-		virtual public global::Allors.Extent<C2> C2sWhereI1Many2Many
+		virtual public global::Allors.Extent<C1> C1sWhereS1many2many
 		{ 
 			get
 			{
-				return Strategy.GetCompositeAssociations(Meta.C2sWhereI1Many2Many);
+				return Strategy.GetCompositeAssociations(Meta.C1sWhereS1many2many);
 			}
 		}
 
-		virtual public bool ExistC2sWhereI1Many2Many
+		virtual public bool ExistC1sWhereS1many2many
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociations(Meta.C2sWhereI1Many2Many);
+				return Strategy.ExistCompositeAssociations(Meta.C1sWhereS1many2many);
 			}
 		}
 
 
-		virtual public C2 C2WhereI1One2Many
+		virtual public global::Allors.Extent<C1> C1sWhereS1many2one
 		{ 
 			get
 			{
-				return (C2) Strategy.GetCompositeAssociation(Meta.C2WhereI1One2Many);
+				return Strategy.GetCompositeAssociations(Meta.C1sWhereS1many2one);
+			}
+		}
+
+		virtual public bool ExistC1sWhereS1many2one
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociations(Meta.C1sWhereS1many2one);
+			}
+		}
+
+
+		virtual public C1 C1WhereS1one2one
+		{ 
+			get
+			{
+				return (C1) Strategy.GetCompositeAssociation(Meta.C1WhereS1one2one);
 			}
 		} 
 
-		virtual public bool ExistC2WhereI1One2Many
+		virtual public bool ExistC1WhereS1one2one
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociation(Meta.C2WhereI1One2Many);
+				return Strategy.ExistCompositeAssociation(Meta.C1WhereS1one2one);
 			}
 		}
 
 
-		virtual public global::Allors.Extent<C2> C2sWhereI1Many2One
+		virtual public I1 I1WhereS1one2one
 		{ 
 			get
 			{
-				return Strategy.GetCompositeAssociations(Meta.C2sWhereI1Many2One);
-			}
-		}
-
-		virtual public bool ExistC2sWhereI1Many2One
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociations(Meta.C2sWhereI1Many2One);
-			}
-		}
-
-
-		virtual public C2 C2WhereI1One2One
-		{ 
-			get
-			{
-				return (C2) Strategy.GetCompositeAssociation(Meta.C2WhereI1One2One);
+				return (I1) Strategy.GetCompositeAssociation(Meta.I1WhereS1one2one);
 			}
 		} 
 
-		virtual public bool ExistC2WhereI1One2One
+		virtual public bool ExistI1WhereS1one2one
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociation(Meta.C2WhereI1One2One);
+				return Strategy.ExistCompositeAssociation(Meta.I1WhereS1one2one);
 			}
 		}
 
 
-		virtual public global::Allors.Extent<I12> I12sWhereI1Many2One
+		virtual public global::Allors.Extent<I1> I1sWhereS1many2many
 		{ 
 			get
 			{
-				return Strategy.GetCompositeAssociations(Meta.I12sWhereI1Many2One);
+				return Strategy.GetCompositeAssociations(Meta.I1sWhereS1many2many);
 			}
 		}
 
-		virtual public bool ExistI12sWhereI1Many2One
+		virtual public bool ExistI1sWhereS1many2many
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociations(Meta.I12sWhereI1Many2One);
+				return Strategy.ExistCompositeAssociations(Meta.I1sWhereS1many2many);
 			}
 		}
 
 
-		virtual public global::Allors.Extent<I12> I12sWhereI1Many2Many
+		virtual public I1 I1WhereS1one2many
 		{ 
 			get
 			{
-				return Strategy.GetCompositeAssociations(Meta.I12sWhereI1Many2Many);
-			}
-		}
-
-		virtual public bool ExistI12sWhereI1Many2Many
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociations(Meta.I12sWhereI1Many2Many);
-			}
-		}
-
-
-		virtual public I12 I12WhereI1One2Many
-		{ 
-			get
-			{
-				return (I12) Strategy.GetCompositeAssociation(Meta.I12WhereI1One2Many);
+				return (I1) Strategy.GetCompositeAssociation(Meta.I1WhereS1one2many);
 			}
 		} 
 
-		virtual public bool ExistI12WhereI1One2Many
+		virtual public bool ExistI1WhereS1one2many
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociation(Meta.I12WhereI1One2Many);
+				return Strategy.ExistCompositeAssociation(Meta.I1WhereS1one2many);
 			}
 		}
 
 
-		virtual public I12 I12WhereI1One2One
+		virtual public global::Allors.Extent<I1> I1sWhereS1many2one
 		{ 
 			get
 			{
-				return (I12) Strategy.GetCompositeAssociation(Meta.I12WhereI1One2One);
+				return Strategy.GetCompositeAssociations(Meta.I1sWhereS1many2one);
+			}
+		}
+
+		virtual public bool ExistI1sWhereS1many2one
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociations(Meta.I1sWhereS1many2one);
+			}
+		}
+
+
+		virtual public global::Allors.Extent<S1234> S1234sWhereS1234many2one
+		{ 
+			get
+			{
+				return Strategy.GetCompositeAssociations(Meta.S1234sWhereS1234many2one);
+			}
+		}
+
+		virtual public bool ExistS1234sWhereS1234many2one
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociations(Meta.S1234sWhereS1234many2one);
+			}
+		}
+
+
+		virtual public S1234 S1234WhereS1234one2many
+		{ 
+			get
+			{
+				return (S1234) Strategy.GetCompositeAssociation(Meta.S1234WhereS1234one2many);
 			}
 		} 
 
-		virtual public bool ExistI12WhereI1One2One
+		virtual public bool ExistS1234WhereS1234one2many
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociation(Meta.I12WhereI1One2One);
+				return Strategy.ExistCompositeAssociation(Meta.S1234WhereS1234one2many);
 			}
 		}
 
 
-		virtual public global::Allors.Extent<I1> I1sWhereI1Many2One
+		virtual public global::Allors.Extent<S1234> S1234sWhereS1234many2many
 		{ 
 			get
 			{
-				return Strategy.GetCompositeAssociations(Meta.I1sWhereI1Many2One);
+				return Strategy.GetCompositeAssociations(Meta.S1234sWhereS1234many2many);
 			}
 		}
 
-		virtual public bool ExistI1sWhereI1Many2One
+		virtual public bool ExistS1234sWhereS1234many2many
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociations(Meta.I1sWhereI1Many2One);
+				return Strategy.ExistCompositeAssociations(Meta.S1234sWhereS1234many2many);
 			}
 		}
 
 
-		virtual public I1 I1WhereI1One2Many
+		virtual public S1234 S1234WhereS1234one2one
 		{ 
 			get
 			{
-				return (I1) Strategy.GetCompositeAssociation(Meta.I1WhereI1One2Many);
+				return (S1234) Strategy.GetCompositeAssociation(Meta.S1234WhereS1234one2one);
 			}
 		} 
 
-		virtual public bool ExistI1WhereI1One2Many
+		virtual public bool ExistS1234WhereS1234one2one
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociation(Meta.I1WhereI1One2Many);
+				return Strategy.ExistCompositeAssociation(Meta.S1234WhereS1234one2one);
 			}
 		}
 
 
-		virtual public global::Allors.Extent<I1> I1sWhereI1Many2Many
+		virtual public C1 C1WhereI12one2one
 		{ 
 			get
 			{
-				return Strategy.GetCompositeAssociations(Meta.I1sWhereI1Many2Many);
-			}
-		}
-
-		virtual public bool ExistI1sWhereI1Many2Many
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociations(Meta.I1sWhereI1Many2Many);
-			}
-		}
-
-
-		virtual public I1 I1WhereI1One2One
-		{ 
-			get
-			{
-				return (I1) Strategy.GetCompositeAssociation(Meta.I1WhereI1One2One);
+				return (C1) Strategy.GetCompositeAssociation(Meta.C1WhereI12one2one);
 			}
 		} 
 
-		virtual public bool ExistI1WhereI1One2One
+		virtual public bool ExistC1WhereI12one2one
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociation(Meta.I1WhereI1One2One);
+				return Strategy.ExistCompositeAssociation(Meta.C1WhereI12one2one);
 			}
 		}
 
 
-		virtual public global::Allors.Extent<I2> I2sWhereI12Many2One
+		virtual public global::Allors.Extent<C1> C1sWhereI12many2one
 		{ 
 			get
 			{
-				return Strategy.GetCompositeAssociations(Meta.I2sWhereI12Many2One);
+				return Strategy.GetCompositeAssociations(Meta.C1sWhereI12many2one);
 			}
 		}
 
-		virtual public bool ExistI2sWhereI12Many2One
+		virtual public bool ExistC1sWhereI12many2one
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociations(Meta.I2sWhereI12Many2One);
+				return Strategy.ExistCompositeAssociations(Meta.C1sWhereI12many2one);
 			}
 		}
 
 
-		virtual public I2 I2WhereI12One2Many
+		virtual public C1 C1WhereI12one2many
 		{ 
 			get
 			{
-				return (I2) Strategy.GetCompositeAssociation(Meta.I2WhereI12One2Many);
+				return (C1) Strategy.GetCompositeAssociation(Meta.C1WhereI12one2many);
 			}
 		} 
 
-		virtual public bool ExistI2WhereI12One2Many
+		virtual public bool ExistC1WhereI12one2many
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociation(Meta.I2WhereI12One2Many);
+				return Strategy.ExistCompositeAssociation(Meta.C1WhereI12one2many);
 			}
 		}
 
 
-		virtual public I2 I2WhereI12One2One
+		virtual public global::Allors.Extent<C1> C1sWhereI12many2many
 		{ 
 			get
 			{
-				return (I2) Strategy.GetCompositeAssociation(Meta.I2WhereI12One2One);
+				return Strategy.GetCompositeAssociations(Meta.C1sWhereI12many2many);
+			}
+		}
+
+		virtual public bool ExistC1sWhereI12many2many
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociations(Meta.C1sWhereI12many2many);
+			}
+		}
+
+
+		virtual public global::Allors.Extent<I1> I1sWhereI12many2one
+		{ 
+			get
+			{
+				return Strategy.GetCompositeAssociations(Meta.I1sWhereI12many2one);
+			}
+		}
+
+		virtual public bool ExistI1sWhereI12many2one
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociations(Meta.I1sWhereI12many2one);
+			}
+		}
+
+
+		virtual public I1 I1WhereI12one2one
+		{ 
+			get
+			{
+				return (I1) Strategy.GetCompositeAssociation(Meta.I1WhereI12one2one);
 			}
 		} 
 
-		virtual public bool ExistI2WhereI12One2One
+		virtual public bool ExistI1WhereI12one2one
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociation(Meta.I2WhereI12One2One);
+				return Strategy.ExistCompositeAssociation(Meta.I1WhereI12one2one);
 			}
 		}
 
 
-		virtual public global::Allors.Extent<I2> I2sWhereI12Many2Many
+		virtual public global::Allors.Extent<I1> I1sWhereI12many2many
 		{ 
 			get
 			{
-				return Strategy.GetCompositeAssociations(Meta.I2sWhereI12Many2Many);
+				return Strategy.GetCompositeAssociations(Meta.I1sWhereI12many2many);
 			}
 		}
 
-		virtual public bool ExistI2sWhereI12Many2Many
+		virtual public bool ExistI1sWhereI12many2many
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociations(Meta.I2sWhereI12Many2Many);
+				return Strategy.ExistCompositeAssociations(Meta.I1sWhereI12many2many);
 			}
 		}
 
 
-		virtual public global::Allors.Extent<C1> C1sWhereI12Many2Many
+		virtual public I1 I1WhereI12one2many
 		{ 
 			get
 			{
-				return Strategy.GetCompositeAssociations(Meta.C1sWhereI12Many2Many);
-			}
-		}
-
-		virtual public bool ExistC1sWhereI12Many2Many
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociations(Meta.C1sWhereI12Many2Many);
-			}
-		}
-
-
-		virtual public C1 C1WhereI12One2Many
-		{ 
-			get
-			{
-				return (C1) Strategy.GetCompositeAssociation(Meta.C1WhereI12One2Many);
+				return (I1) Strategy.GetCompositeAssociation(Meta.I1WhereI12one2many);
 			}
 		} 
 
-		virtual public bool ExistC1WhereI12One2Many
+		virtual public bool ExistI1WhereI12one2many
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociation(Meta.C1WhereI12One2Many);
-			}
-		}
-
-
-		virtual public C1 C1WhereI12One2One
-		{ 
-			get
-			{
-				return (C1) Strategy.GetCompositeAssociation(Meta.C1WhereI12One2One);
-			}
-		} 
-
-		virtual public bool ExistC1WhereI12One2One
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociation(Meta.C1WhereI12One2One);
-			}
-		}
-
-
-		virtual public global::Allors.Extent<C1> C1sWhereI12Many2One
-		{ 
-			get
-			{
-				return Strategy.GetCompositeAssociations(Meta.C1sWhereI12Many2One);
-			}
-		}
-
-		virtual public bool ExistC1sWhereI12Many2One
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociations(Meta.C1sWhereI12Many2One);
-			}
-		}
-
-
-		virtual public global::Allors.Extent<C2> C2sWhereI12Many2One
-		{ 
-			get
-			{
-				return Strategy.GetCompositeAssociations(Meta.C2sWhereI12Many2One);
-			}
-		}
-
-		virtual public bool ExistC2sWhereI12Many2One
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociations(Meta.C2sWhereI12Many2One);
-			}
-		}
-
-
-		virtual public C2 C2WhereI12One2One
-		{ 
-			get
-			{
-				return (C2) Strategy.GetCompositeAssociation(Meta.C2WhereI12One2One);
-			}
-		} 
-
-		virtual public bool ExistC2WhereI12One2One
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociation(Meta.C2WhereI12One2One);
-			}
-		}
-
-
-		virtual public global::Allors.Extent<C2> C2sWhereI12Many2Many
-		{ 
-			get
-			{
-				return Strategy.GetCompositeAssociations(Meta.C2sWhereI12Many2Many);
-			}
-		}
-
-		virtual public bool ExistC2sWhereI12Many2Many
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociations(Meta.C2sWhereI12Many2Many);
-			}
-		}
-
-
-		virtual public C2 C2WhereI12One2Many
-		{ 
-			get
-			{
-				return (C2) Strategy.GetCompositeAssociation(Meta.C2WhereI12One2Many);
-			}
-		} 
-
-		virtual public bool ExistC2WhereI12One2Many
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociation(Meta.C2WhereI12One2Many);
-			}
-		}
-
-
-		virtual public global::Allors.Extent<I12> I12sWhereI12Many2Many
-		{ 
-			get
-			{
-				return Strategy.GetCompositeAssociations(Meta.I12sWhereI12Many2Many);
-			}
-		}
-
-		virtual public bool ExistI12sWhereI12Many2Many
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociations(Meta.I12sWhereI12Many2Many);
-			}
-		}
-
-
-		virtual public I12 I12WhereI12One2Many
-		{ 
-			get
-			{
-				return (I12) Strategy.GetCompositeAssociation(Meta.I12WhereI12One2Many);
-			}
-		} 
-
-		virtual public bool ExistI12WhereI12One2Many
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociation(Meta.I12WhereI12One2Many);
-			}
-		}
-
-
-		virtual public I12 I12WhereI12One2One
-		{ 
-			get
-			{
-				return (I12) Strategy.GetCompositeAssociation(Meta.I12WhereI12One2One);
-			}
-		} 
-
-		virtual public bool ExistI12WhereI12One2One
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociation(Meta.I12WhereI12One2One);
-			}
-		}
-
-
-		virtual public global::Allors.Extent<I12> I12sWhereDependency
-		{ 
-			get
-			{
-				return Strategy.GetCompositeAssociations(Meta.I12sWhereDependency);
-			}
-		}
-
-		virtual public bool ExistI12sWhereDependency
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociations(Meta.I12sWhereDependency);
-			}
-		}
-
-
-		virtual public global::Allors.Extent<I12> I12sWhereI12Many2One
-		{ 
-			get
-			{
-				return Strategy.GetCompositeAssociations(Meta.I12sWhereI12Many2One);
-			}
-		}
-
-		virtual public bool ExistI12sWhereI12Many2One
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociations(Meta.I12sWhereI12Many2One);
-			}
-		}
-
-
-		virtual public global::Allors.Extent<I1> I1sWhereI12Many2Many
-		{ 
-			get
-			{
-				return Strategy.GetCompositeAssociations(Meta.I1sWhereI12Many2Many);
-			}
-		}
-
-		virtual public bool ExistI1sWhereI12Many2Many
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociations(Meta.I1sWhereI12Many2Many);
-			}
-		}
-
-
-		virtual public global::Allors.Extent<I1> I1sWhereI12Many2One
-		{ 
-			get
-			{
-				return Strategy.GetCompositeAssociations(Meta.I1sWhereI12Many2One);
-			}
-		}
-
-		virtual public bool ExistI1sWhereI12Many2One
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociations(Meta.I1sWhereI12Many2One);
-			}
-		}
-
-
-		virtual public I1 I1WhereI12One2One
-		{ 
-			get
-			{
-				return (I1) Strategy.GetCompositeAssociation(Meta.I1WhereI12One2One);
-			}
-		} 
-
-		virtual public bool ExistI1WhereI12One2One
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociation(Meta.I1WhereI12One2One);
-			}
-		}
-
-
-		virtual public I1 I1WhereI12One2Many
-		{ 
-			get
-			{
-				return (I1) Strategy.GetCompositeAssociation(Meta.I1WhereI12One2Many);
-			}
-		} 
-
-		virtual public bool ExistI1WhereI12One2Many
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociation(Meta.I1WhereI12One2Many);
+				return Strategy.ExistCompositeAssociation(Meta.I1WhereI12one2many);
 			}
 		}
 
@@ -3799,11 +6268,53 @@ namespace Allors.Domain
 
 		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.C1;
 
-		public global::Allors.Meta.RoleType C1I1One2One 
+		public global::Allors.Meta.RoleType C1DecimalBetweenA 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.C1I1One2One;
+				return global::Allors.Meta.RoleTypes.C1DecimalBetweenA;
+			}
+		} 
+		public global::Allors.Meta.RoleType C1LongLessThan 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.C1LongLessThan;
+			}
+		} 
+		public global::Allors.Meta.RoleType C1I2one2one 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.C1I2one2one;
+			}
+		} 
+		public global::Allors.Meta.RoleType C1DecimalBetweenB 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.C1DecimalBetweenB;
+			}
+		} 
+		public global::Allors.Meta.RoleType Argument 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.C1Argument;
+			}
+		} 
+		public global::Allors.Meta.RoleType C1S1one2many 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.C1S1one2many;
+			}
+		} 
+		public global::Allors.Meta.RoleType C1I12one2one 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.C1I12one2one;
 			}
 		} 
 		public global::Allors.Meta.RoleType C1AllorsString 
@@ -3813,53 +6324,172 @@ namespace Allors.Domain
 				return global::Allors.Meta.RoleTypes.C1AllorsString;
 			}
 		} 
-		public global::Allors.Meta.RoleType C1AllorsDateTime 
+		public global::Allors.Meta.RoleType C1C1many2one 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.C1AllorsDateTime;
+				return global::Allors.Meta.RoleTypes.C1C1many2one;
 			}
 		} 
-		public global::Allors.Meta.RoleType C1C2Many2One 
+		public global::Allors.Meta.RoleType C1S2many2one 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.C1C2Many2One;
+				return global::Allors.Meta.RoleTypes.C1S2many2one;
 			}
 		} 
-		public global::Allors.Meta.RoleType C1I2One2One 
+		public global::Allors.Meta.RoleType C1DoubleBetweenA 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.C1I2One2One;
+				return global::Allors.Meta.RoleTypes.C1DoubleBetweenA;
 			}
 		} 
-		public global::Allors.Meta.RoleType C1C1One2One 
+		public global::Allors.Meta.RoleType Many2One 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.C1C1One2One;
+				return global::Allors.Meta.RoleTypes.C1Many2One;
 			}
 		} 
-		public global::Allors.Meta.RoleType C1I1Many2One 
+		public global::Allors.Meta.RoleType C1C1many2many 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.C1I1Many2One;
+				return global::Allors.Meta.RoleTypes.C1C1many2many;
 			}
 		} 
-		public global::Allors.Meta.RoleType C1I1Many2Many 
+		public global::Allors.Meta.RoleType C1S1many2many 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.C1I1Many2Many;
+				return global::Allors.Meta.RoleTypes.C1S1many2many;
 			}
 		} 
-		public global::Allors.Meta.RoleType C1I2One2Many 
+		public global::Allors.Meta.RoleType C1DoubleBetweenB 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.C1I2One2Many;
+				return global::Allors.Meta.RoleTypes.C1DoubleBetweenB;
+			}
+		} 
+		public global::Allors.Meta.RoleType C1I1one2one 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.C1I1one2one;
+			}
+		} 
+		public global::Allors.Meta.RoleType C1IntegerLessThan 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.C1IntegerLessThan;
+			}
+		} 
+		public global::Allors.Meta.RoleType C1StringLarge 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.C1StringLarge;
+			}
+		} 
+		public global::Allors.Meta.RoleType C1I2one2many 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.C1I2one2many;
+			}
+		} 
+		public global::Allors.Meta.RoleType C1C1one2one 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.C1C1one2one;
+			}
+		} 
+		public global::Allors.Meta.RoleType C1DoubleGreaterThan 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.C1DoubleGreaterThan;
+			}
+		} 
+		public global::Allors.Meta.RoleType C1I2many2one 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.C1I2many2one;
+			}
+		} 
+		public global::Allors.Meta.RoleType C1I12many2one 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.C1I12many2one;
+			}
+		} 
+		public global::Allors.Meta.RoleType C1DateTimeLessThan 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.C1DateTimeLessThan;
+			}
+		} 
+		public global::Allors.Meta.RoleType C1DateTimeBetweenA 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.C1DateTimeBetweenA;
+			}
+		} 
+		public global::Allors.Meta.RoleType C1C2many2many 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.C1C2many2many;
+			}
+		} 
+		public global::Allors.Meta.RoleType C1S1many2one 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.C1S1many2one;
+			}
+		} 
+		public global::Allors.Meta.RoleType C1I1many2many 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.C1I1many2many;
+			}
+		} 
+		public global::Allors.Meta.RoleType C1DoubleLessThan 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.C1DoubleLessThan;
+			}
+		} 
+		public global::Allors.Meta.RoleType C1I1many2one 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.C1I1many2one;
+			}
+		} 
+		public global::Allors.Meta.RoleType C1LongGreaterThan 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.C1LongGreaterThan;
+			}
+		} 
+		public global::Allors.Meta.RoleType C1DecimalGreaterThan 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.C1DecimalGreaterThan;
 			}
 		} 
 		public global::Allors.Meta.RoleType C1AllorsDecimal 
@@ -3869,13 +6499,6 @@ namespace Allors.Domain
 				return global::Allors.Meta.RoleTypes.C1AllorsDecimal;
 			}
 		} 
-		public global::Allors.Meta.RoleType C1C1Many2Many 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.C1C1Many2Many;
-			}
-		} 
 		public global::Allors.Meta.RoleType C1AllorsLong 
 		{
 			get
@@ -3883,11 +6506,18 @@ namespace Allors.Domain
 				return global::Allors.Meta.RoleTypes.C1AllorsLong;
 			}
 		} 
-		public global::Allors.Meta.RoleType C1I12Many2Many 
+		public global::Allors.Meta.RoleType C1S2one2one 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.C1I12Many2Many;
+				return global::Allors.Meta.RoleTypes.C1S2one2one;
+			}
+		} 
+		public global::Allors.Meta.RoleType C1DateTimeBetweenB 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.C1DateTimeBetweenB;
 			}
 		} 
 		public global::Allors.Meta.RoleType C1AllorsBinary 
@@ -3897,39 +6527,60 @@ namespace Allors.Domain
 				return global::Allors.Meta.RoleTypes.C1AllorsBinary;
 			}
 		} 
-		public global::Allors.Meta.RoleType C1I12One2Many 
+		public global::Allors.Meta.RoleType C1DateTimeGreaterThan 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.C1I12One2Many;
+				return global::Allors.Meta.RoleTypes.C1DateTimeGreaterThan;
 			}
 		} 
-		public global::Allors.Meta.RoleType C1C2One2Many 
+		public global::Allors.Meta.RoleType C1S1one2one 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.C1C2One2Many;
+				return global::Allors.Meta.RoleTypes.C1S1one2one;
 			}
 		} 
-		public global::Allors.Meta.RoleType C1C1One2Many 
+		public global::Allors.Meta.RoleType C1C1one2many 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.C1C1One2Many;
+				return global::Allors.Meta.RoleTypes.C1C1one2many;
 			}
 		} 
-		public global::Allors.Meta.RoleType AllorsStringMax 
+		public global::Allors.Meta.RoleType C1I1one2many 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.C1AllorsStringMax;
+				return global::Allors.Meta.RoleTypes.C1I1one2many;
 			}
 		} 
-		public global::Allors.Meta.RoleType C1C1Many2One 
+		public global::Allors.Meta.RoleType C1C2many2one 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.C1C1Many2One;
+				return global::Allors.Meta.RoleTypes.C1C2many2one;
+			}
+		} 
+		public global::Allors.Meta.RoleType C1I12one2many 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.C1I12one2many;
+			}
+		} 
+		public global::Allors.Meta.RoleType C1S2many2many 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.C1S2many2many;
+			}
+		} 
+		public global::Allors.Meta.RoleType C1C2one2one 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.C1C2one2one;
 			}
 		} 
 		public global::Allors.Meta.RoleType C1AllorsBoolean 
@@ -3939,25 +6590,18 @@ namespace Allors.Domain
 				return global::Allors.Meta.RoleTypes.C1AllorsBoolean;
 			}
 		} 
-		public global::Allors.Meta.RoleType C1I12One2One 
+		public global::Allors.Meta.RoleType C1I12many2many 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.C1I12One2One;
+				return global::Allors.Meta.RoleTypes.C1I12many2many;
 			}
 		} 
-		public global::Allors.Meta.RoleType C1I12Many2One 
+		public global::Allors.Meta.RoleType C1I2many2many 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.C1I12Many2One;
-			}
-		} 
-		public global::Allors.Meta.RoleType C1I2Many2Many 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.C1I2Many2Many;
+				return global::Allors.Meta.RoleTypes.C1I2many2many;
 			}
 		} 
 		public global::Allors.Meta.RoleType C1AllorsUnique 
@@ -3967,25 +6611,67 @@ namespace Allors.Domain
 				return global::Allors.Meta.RoleTypes.C1AllorsUnique;
 			}
 		} 
-		public global::Allors.Meta.RoleType C1I2Many2One 
+		public global::Allors.Meta.RoleType C1C3one2one 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.C1I2Many2One;
+				return global::Allors.Meta.RoleTypes.C1C3one2one;
 			}
 		} 
-		public global::Allors.Meta.RoleType C1I1One2Many 
+		public global::Allors.Meta.RoleType C1C3many2many 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.C1I1One2Many;
+				return global::Allors.Meta.RoleTypes.C1C3many2many;
 			}
 		} 
-		public global::Allors.Meta.RoleType C1C2One2One 
+		public global::Allors.Meta.RoleType C1StringEquals 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.C1C2One2One;
+				return global::Allors.Meta.RoleTypes.C1StringEquals;
+			}
+		} 
+		public global::Allors.Meta.RoleType C1LongBetweenA 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.C1LongBetweenA;
+			}
+		} 
+		public global::Allors.Meta.RoleType C1IntegerGreaterThan 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.C1IntegerGreaterThan;
+			}
+		} 
+		public global::Allors.Meta.RoleType C3may2one 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.C1C3may2one;
+			}
+		} 
+		public global::Allors.Meta.RoleType C1IntegerBetweenB 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.C1IntegerBetweenB;
+			}
+		} 
+		public global::Allors.Meta.RoleType C1AllorsDateTime 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.C1AllorsDateTime;
+			}
+		} 
+		public global::Allors.Meta.RoleType C1IntegerBetweenA 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.C1IntegerBetweenA;
 			}
 		} 
 		public global::Allors.Meta.RoleType C1AllorsDouble 
@@ -3995,11 +6681,25 @@ namespace Allors.Domain
 				return global::Allors.Meta.RoleTypes.C1AllorsDouble;
 			}
 		} 
-		public global::Allors.Meta.RoleType C1C2Many2Many 
+		public global::Allors.Meta.RoleType C1LongBetweenB 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.C1C2Many2Many;
+				return global::Allors.Meta.RoleTypes.C1LongBetweenB;
+			}
+		} 
+		public global::Allors.Meta.RoleType C1C2one2many 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.C1C2one2many;
+			}
+		} 
+		public global::Allors.Meta.RoleType C1S2one2many 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.C1S2one2many;
 			}
 		} 
 		public global::Allors.Meta.RoleType C1AllorsInteger 
@@ -4009,32 +6709,74 @@ namespace Allors.Domain
 				return global::Allors.Meta.RoleTypes.C1AllorsInteger;
 			}
 		} 
-		public global::Allors.Meta.RoleType I1I1Many2One 
+		public global::Allors.Meta.RoleType C1DecimalLessThan 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I1I1Many2One;
+				return global::Allors.Meta.RoleTypes.C1DecimalLessThan;
 			}
 		} 
-		public global::Allors.Meta.RoleType I1I12Many2Many 
+		public global::Allors.Meta.RoleType C1C3one2many 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I1I12Many2Many;
+				return global::Allors.Meta.RoleTypes.C1C3one2many;
 			}
 		} 
-		public global::Allors.Meta.RoleType I1I2Many2Many 
+		public global::Allors.Meta.RoleType I1I34one2many 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I1I2Many2Many;
+				return global::Allors.Meta.RoleTypes.I1I34one2many;
 			}
 		} 
-		public global::Allors.Meta.RoleType I1I2Many2One 
+		public global::Allors.Meta.RoleType I1I2one2many 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I1I2Many2One;
+				return global::Allors.Meta.RoleTypes.I1I2one2many;
+			}
+		} 
+		public global::Allors.Meta.RoleType I1I2many2one 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I1I2many2one;
+			}
+		} 
+		public global::Allors.Meta.RoleType I1C2many2one 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I1C2many2one;
+			}
+		} 
+		public global::Allors.Meta.RoleType I1C2one2one 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I1C2one2one;
+			}
+		} 
+		public global::Allors.Meta.RoleType I1DecimalBetweenA 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I1DecimalBetweenA;
+			}
+		} 
+		public global::Allors.Meta.RoleType I1S1one2one 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I1S1one2one;
+			}
+		} 
+		public global::Allors.Meta.RoleType I1I12many2one 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I1I12many2one;
 			}
 		} 
 		public global::Allors.Meta.RoleType I1AllorsString 
@@ -4044,11 +6786,32 @@ namespace Allors.Domain
 				return global::Allors.Meta.RoleTypes.I1AllorsString;
 			}
 		} 
-		public global::Allors.Meta.RoleType I1I12Many2One 
+		public global::Allors.Meta.RoleType I1DateTimeLessThan 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I1I12Many2One;
+				return global::Allors.Meta.RoleTypes.I1DateTimeLessThan;
+			}
+		} 
+		public global::Allors.Meta.RoleType I1C2one2many 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I1C2one2many;
+			}
+		} 
+		public global::Allors.Meta.RoleType I1StringLarge 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I1StringLarge;
+			}
+		} 
+		public global::Allors.Meta.RoleType I1DoubleLessThan 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I1DoubleLessThan;
 			}
 		} 
 		public global::Allors.Meta.RoleType I1AllorsDateTime 
@@ -4058,25 +6821,81 @@ namespace Allors.Domain
 				return global::Allors.Meta.RoleTypes.I1AllorsDateTime;
 			}
 		} 
-		public global::Allors.Meta.RoleType I1I2One2Many 
+		public global::Allors.Meta.RoleType I1C1many2one 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I1I2One2Many;
+				return global::Allors.Meta.RoleTypes.I1C1many2one;
 			}
 		} 
-		public global::Allors.Meta.RoleType I1C2One2Many 
+		public global::Allors.Meta.RoleType I1LongBetweenB 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I1C2One2Many;
+				return global::Allors.Meta.RoleTypes.I1LongBetweenB;
 			}
 		} 
-		public global::Allors.Meta.RoleType I1C1One2One 
+		public global::Allors.Meta.RoleType I1I12one2one 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I1C1One2One;
+				return global::Allors.Meta.RoleTypes.I1I12one2one;
+			}
+		} 
+		public global::Allors.Meta.RoleType I1DecimalGreaterThan 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I1DecimalGreaterThan;
+			}
+		} 
+		public global::Allors.Meta.RoleType I1C1one2one 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I1C1one2one;
+			}
+		} 
+		public global::Allors.Meta.RoleType I1LongLessThan 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I1LongLessThan;
+			}
+		} 
+		public global::Allors.Meta.RoleType I1I2many2many 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I1I2many2many;
+			}
+		} 
+		public global::Allors.Meta.RoleType I1IntegerBetweenA 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I1IntegerBetweenA;
+			}
+		} 
+		public global::Allors.Meta.RoleType I1I34many2one 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I1I34many2one;
+			}
+		} 
+		public global::Allors.Meta.RoleType I1DoubleBetweenA 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I1DoubleBetweenA;
+			}
+		} 
+		public global::Allors.Meta.RoleType I1IntegerLessThan 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I1IntegerLessThan;
 			}
 		} 
 		public global::Allors.Meta.RoleType I1AllorsInteger 
@@ -4086,25 +6905,11 @@ namespace Allors.Domain
 				return global::Allors.Meta.RoleTypes.I1AllorsInteger;
 			}
 		} 
-		public global::Allors.Meta.RoleType I1C2Many2Many 
+		public global::Allors.Meta.RoleType I1S2one2one 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I1C2Many2Many;
-			}
-		} 
-		public global::Allors.Meta.RoleType I1I1One2Many 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.I1I1One2Many;
-			}
-		} 
-		public global::Allors.Meta.RoleType I1I1Many2Many 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.I1I1Many2Many;
+				return global::Allors.Meta.RoleTypes.I1S2one2one;
 			}
 		} 
 		public global::Allors.Meta.RoleType I1AllorsBoolean 
@@ -4112,6 +6917,27 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.RoleTypes.I1AllorsBoolean;
+			}
+		} 
+		public global::Allors.Meta.RoleType I1I1many2one 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I1I1many2one;
+			}
+		} 
+		public global::Allors.Meta.RoleType I1C1many2many 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I1C1many2many;
+			}
+		} 
+		public global::Allors.Meta.RoleType I1I2one2one 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I1I2one2one;
 			}
 		} 
 		public global::Allors.Meta.RoleType I1AllorsLong 
@@ -4128,32 +6954,95 @@ namespace Allors.Domain
 				return global::Allors.Meta.RoleTypes.I1AllorsDecimal;
 			}
 		} 
-		public global::Allors.Meta.RoleType I1I12One2One 
+		public global::Allors.Meta.RoleType I1S1many2many 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I1I12One2One;
+				return global::Allors.Meta.RoleTypes.I1S1many2many;
 			}
 		} 
-		public global::Allors.Meta.RoleType I1I2One2One 
+		public global::Allors.Meta.RoleType I1DateTimeGreaterThan 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I1I2One2One;
+				return global::Allors.Meta.RoleTypes.I1DateTimeGreaterThan;
 			}
 		} 
-		public global::Allors.Meta.RoleType I1C2One2One 
+		public global::Allors.Meta.RoleType I1I34many2many 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I1C2One2One;
+				return global::Allors.Meta.RoleTypes.I1I34many2many;
 			}
 		} 
-		public global::Allors.Meta.RoleType I1C1One2Many 
+		public global::Allors.Meta.RoleType I1I34one2one 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I1C1One2Many;
+				return global::Allors.Meta.RoleTypes.I1I34one2one;
+			}
+		} 
+		public global::Allors.Meta.RoleType I1I1one2many 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I1I1one2many;
+			}
+		} 
+		public global::Allors.Meta.RoleType I1I1many2many 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I1I1many2many;
+			}
+		} 
+		public global::Allors.Meta.RoleType I1S2many2many 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I1S2many2many;
+			}
+		} 
+		public global::Allors.Meta.RoleType I1I12many2many 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I1I12many2many;
+			}
+		} 
+		public global::Allors.Meta.RoleType I1StringEquals 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I1StringEquals;
+			}
+		} 
+		public global::Allors.Meta.RoleType I1LongGreaterThan 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I1LongGreaterThan;
+			}
+		} 
+		public global::Allors.Meta.RoleType I1I12one2many 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I1I12one2many;
+			}
+		} 
+		public global::Allors.Meta.RoleType I1S2one2many 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I1S2one2many;
+			}
+		} 
+		public global::Allors.Meta.RoleType I1C2many2many 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I1C2many2many;
 			}
 		} 
 		public global::Allors.Meta.RoleType I1AllorsBinary 
@@ -4163,11 +7052,39 @@ namespace Allors.Domain
 				return global::Allors.Meta.RoleTypes.I1AllorsBinary;
 			}
 		} 
-		public global::Allors.Meta.RoleType I1C1Many2Many 
+		public global::Allors.Meta.RoleType I1DecimalBetweenB 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I1C1Many2Many;
+				return global::Allors.Meta.RoleTypes.I1DecimalBetweenB;
+			}
+		} 
+		public global::Allors.Meta.RoleType I1LongBetweenA 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I1LongBetweenA;
+			}
+		} 
+		public global::Allors.Meta.RoleType I1DoubleGreaterThan 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I1DoubleGreaterThan;
+			}
+		} 
+		public global::Allors.Meta.RoleType I1IntegerBetweenB 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I1IntegerBetweenB;
+			}
+		} 
+		public global::Allors.Meta.RoleType I1DateTimeBetweenA 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I1DateTimeBetweenA;
 			}
 		} 
 		public global::Allors.Meta.RoleType I1AllorsDouble 
@@ -4177,32 +7094,53 @@ namespace Allors.Domain
 				return global::Allors.Meta.RoleTypes.I1AllorsDouble;
 			}
 		} 
-		public global::Allors.Meta.RoleType I1I1One2One 
+		public global::Allors.Meta.RoleType I1S1one2many 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I1I1One2One;
+				return global::Allors.Meta.RoleTypes.I1S1one2many;
 			}
 		} 
-		public global::Allors.Meta.RoleType I1C1Many2One 
+		public global::Allors.Meta.RoleType I1I1one2one 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I1C1Many2One;
+				return global::Allors.Meta.RoleTypes.I1I1one2one;
 			}
 		} 
-		public global::Allors.Meta.RoleType I1I12One2Many 
+		public global::Allors.Meta.RoleType I1IntegerGreaterThan 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I1I12One2Many;
+				return global::Allors.Meta.RoleTypes.I1IntegerGreaterThan;
 			}
 		} 
-		public global::Allors.Meta.RoleType I1C2Many2One 
+		public global::Allors.Meta.RoleType I1S1many2one 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I1C2Many2One;
+				return global::Allors.Meta.RoleTypes.I1S1many2one;
+			}
+		} 
+		public global::Allors.Meta.RoleType I1DoubleBetweenB 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I1DoubleBetweenB;
+			}
+		} 
+		public global::Allors.Meta.RoleType I1DecimalLessThan 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I1DecimalLessThan;
+			}
+		} 
+		public global::Allors.Meta.RoleType I1DateTimeBetweenB 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I1DateTimeBetweenB;
 			}
 		} 
 		public global::Allors.Meta.RoleType I1AllorsUnique 
@@ -4212,179 +7150,256 @@ namespace Allors.Domain
 				return global::Allors.Meta.RoleTypes.I1AllorsUnique;
 			}
 		} 
-		public global::Allors.Meta.RoleType I12AllorsBinary 
+		public global::Allors.Meta.RoleType I1C1one2many 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I12AllorsBinary;
+				return global::Allors.Meta.RoleTypes.I1C1one2many;
 			}
 		} 
-		public global::Allors.Meta.RoleType I12C2One2One 
+		public global::Allors.Meta.RoleType I1S2many2one 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I12C2One2One;
+				return global::Allors.Meta.RoleTypes.I1S2many2one;
 			}
 		} 
-		public global::Allors.Meta.RoleType I12AllorsDouble 
+		public global::Allors.Meta.RoleType S1AllorsDecimal 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I12AllorsDouble;
+				return global::Allors.Meta.RoleTypes.S1AllorsDecimal;
 			}
 		} 
-		public global::Allors.Meta.RoleType I12I1Many2One 
+		public global::Allors.Meta.RoleType S1AllorsInteger 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I12I1Many2One;
+				return global::Allors.Meta.RoleTypes.S1AllorsInteger;
 			}
 		} 
-		public global::Allors.Meta.RoleType I12AllorsString 
+		public global::Allors.Meta.RoleType S1AllorsBinary 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I12AllorsString;
+				return global::Allors.Meta.RoleTypes.S1AllorsBinary;
 			}
 		} 
-		public global::Allors.Meta.RoleType I12I12Many2Many 
+		public global::Allors.Meta.RoleType S1AllorsUnique 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I12I12Many2Many;
+				return global::Allors.Meta.RoleTypes.S1AllorsUnique;
 			}
 		} 
-		public global::Allors.Meta.RoleType I12AllorsDecimal 
+		public global::Allors.Meta.RoleType S1StringLarge 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I12AllorsDecimal;
+				return global::Allors.Meta.RoleTypes.S1StringLarge;
 			}
 		} 
-		public global::Allors.Meta.RoleType I12I2Many2Many 
+		public global::Allors.Meta.RoleType S1S2many2one 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I12I2Many2Many;
+				return global::Allors.Meta.RoleTypes.S1S2many2one;
 			}
 		} 
-		public global::Allors.Meta.RoleType I12C2Many2Many 
+		public global::Allors.Meta.RoleType S1S2one2many 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I12C2Many2Many;
+				return global::Allors.Meta.RoleTypes.S1S2one2many;
 			}
 		} 
-		public global::Allors.Meta.RoleType I12I1Many2Many 
+		public global::Allors.Meta.RoleType S1AllorsDouble 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I12I1Many2Many;
+				return global::Allors.Meta.RoleTypes.S1AllorsDouble;
 			}
 		} 
-		public global::Allors.Meta.RoleType I12I12One2Many 
+		public global::Allors.Meta.RoleType S1AllorsString 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I12I12One2Many;
+				return global::Allors.Meta.RoleTypes.S1AllorsString;
 			}
 		} 
-		public global::Allors.Meta.RoleType Name 
+		public global::Allors.Meta.RoleType S1C1many2one 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I12Name;
+				return global::Allors.Meta.RoleTypes.S1C1many2one;
 			}
 		} 
-		public global::Allors.Meta.RoleType I12C1Many2Many 
+		public global::Allors.Meta.RoleType S1C1one2one 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I12C1Many2Many;
+				return global::Allors.Meta.RoleTypes.S1C1one2one;
 			}
 		} 
-		public global::Allors.Meta.RoleType I12I2Many2One 
+		public global::Allors.Meta.RoleType S1AllorsBoolean 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I12I2Many2One;
+				return global::Allors.Meta.RoleTypes.S1AllorsBoolean;
 			}
 		} 
-		public global::Allors.Meta.RoleType I12AllorsUnique 
+		public global::Allors.Meta.RoleType S1C1many2many 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I12AllorsUnique;
+				return global::Allors.Meta.RoleTypes.S1C1many2many;
 			}
 		} 
-		public global::Allors.Meta.RoleType I12AllorsInteger 
+		public global::Allors.Meta.RoleType S1S2many2many 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I12AllorsInteger;
+				return global::Allors.Meta.RoleTypes.S1S2many2many;
 			}
 		} 
-		public global::Allors.Meta.RoleType I12I1One2Many 
+		public global::Allors.Meta.RoleType S1S2one2one 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I12I1One2Many;
+				return global::Allors.Meta.RoleTypes.S1S2one2one;
 			}
 		} 
-		public global::Allors.Meta.RoleType I12C1One2One 
+		public global::Allors.Meta.RoleType S1AllorsLong 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I12C1One2One;
+				return global::Allors.Meta.RoleTypes.S1AllorsLong;
 			}
 		} 
-		public global::Allors.Meta.RoleType I12AllorsLong 
+		public global::Allors.Meta.RoleType S1AllorsDateTime 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I12AllorsLong;
+				return global::Allors.Meta.RoleTypes.S1AllorsDateTime;
 			}
 		} 
-		public global::Allors.Meta.RoleType I12I12One2One 
+		public global::Allors.Meta.RoleType S1C1one2many 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I12I12One2One;
+				return global::Allors.Meta.RoleTypes.S1C1one2many;
 			}
 		} 
-		public global::Allors.Meta.RoleType I12I2One2One 
+		public global::Allors.Meta.RoleType S1234AllorsDouble 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I12I2One2One;
+				return global::Allors.Meta.RoleTypes.S1234AllorsDouble;
 			}
 		} 
-		public global::Allors.Meta.RoleType Dependency 
+		public global::Allors.Meta.RoleType S1234AllorsDecimal 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I12Dependency;
+				return global::Allors.Meta.RoleTypes.S1234AllorsDecimal;
 			}
 		} 
-		public global::Allors.Meta.RoleType I12I2One2Many 
+		public global::Allors.Meta.RoleType S1234AllorsInteger 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I12I2One2Many;
+				return global::Allors.Meta.RoleTypes.S1234AllorsInteger;
 			}
 		} 
-		public global::Allors.Meta.RoleType I12C2Many2One 
+		public global::Allors.Meta.RoleType S1234many2one 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I12C2Many2One;
+				return global::Allors.Meta.RoleTypes.S1234S1234many2one;
 			}
 		} 
-		public global::Allors.Meta.RoleType I12I12Many2One 
+		public global::Allors.Meta.RoleType S1234C2one2one 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I12I12Many2One;
+				return global::Allors.Meta.RoleTypes.S1234C2one2one;
+			}
+		} 
+		public global::Allors.Meta.RoleType S1234C2many2many 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.S1234C2many2many;
+			}
+		} 
+		public global::Allors.Meta.RoleType S1234one2many 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.S1234S1234one2many;
+			}
+		} 
+		public global::Allors.Meta.RoleType S1234C2one2many 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.S1234C2one2many;
+			}
+		} 
+		public global::Allors.Meta.RoleType S1234many2many 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.S1234S1234many2many;
+			}
+		} 
+		public global::Allors.Meta.RoleType S1234AllorsLong 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.S1234AllorsLong;
+			}
+		} 
+		public global::Allors.Meta.RoleType ClassName 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.S1234ClassName;
+			}
+		} 
+		public global::Allors.Meta.RoleType S1234AllorsDateTime 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.S1234AllorsDateTime;
+			}
+		} 
+		public global::Allors.Meta.RoleType S1234one2one 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.S1234S1234one2one;
+			}
+		} 
+		public global::Allors.Meta.RoleType S1234C2many2one 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.S1234C2many2one;
+			}
+		} 
+		public global::Allors.Meta.RoleType S1234AllorsString 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.S1234AllorsString;
+			}
+		} 
+		public global::Allors.Meta.RoleType S1234AllorsBoolean 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.S1234AllorsBoolean;
 			}
 		} 
 		public global::Allors.Meta.RoleType I12AllorsBoolean 
@@ -4394,11 +7409,109 @@ namespace Allors.Domain
 				return global::Allors.Meta.RoleTypes.I12AllorsBoolean;
 			}
 		} 
-		public global::Allors.Meta.RoleType I12I1One2One 
+		public global::Allors.Meta.RoleType I12AllorsInteger 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I12I1One2One;
+				return global::Allors.Meta.RoleTypes.I12AllorsInteger;
+			}
+		} 
+		public global::Allors.Meta.RoleType I12I34one2many 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I12I34one2many;
+			}
+		} 
+		public global::Allors.Meta.RoleType C3many2one 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I12C3many2one;
+			}
+		} 
+		public global::Allors.Meta.RoleType I12C2many2one 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I12C2many2one;
+			}
+		} 
+		public global::Allors.Meta.RoleType I12AllorsDouble 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I12AllorsDouble;
+			}
+		} 
+		public global::Allors.Meta.RoleType I12I34many2one 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I12I34many2one;
+			}
+		} 
+		public global::Allors.Meta.RoleType I12I34many2many 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I12I34many2many;
+			}
+		} 
+		public global::Allors.Meta.RoleType I12C3one2one 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I12C3one2one;
+			}
+		} 
+		public global::Allors.Meta.RoleType I12C2many2many 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I12C2many2many;
+			}
+		} 
+		public global::Allors.Meta.RoleType I12AllorsLong 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I12AllorsLong;
+			}
+		} 
+		public global::Allors.Meta.RoleType I12AllorsDecimal 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I12AllorsDecimal;
+			}
+		} 
+		public global::Allors.Meta.RoleType I12C2one2one 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I12C2one2one;
+			}
+		} 
+		public global::Allors.Meta.RoleType I12C3one2many 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I12C3one2many;
+			}
+		} 
+		public global::Allors.Meta.RoleType I12C3many2many 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I12C3many2many;
+			}
+		} 
+		public global::Allors.Meta.RoleType PrefetchTest 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.I12PrefetchTest;
 			}
 		} 
 		public global::Allors.Meta.RoleType I12AllorsDateTime 
@@ -4408,474 +7521,418 @@ namespace Allors.Domain
 				return global::Allors.Meta.RoleTypes.I12AllorsDateTime;
 			}
 		} 
-		public global::Allors.Meta.RoleType I12C1One2Many 
+		public global::Allors.Meta.RoleType I12AllorsString 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I12C1One2Many;
+				return global::Allors.Meta.RoleTypes.I12AllorsString;
 			}
 		} 
-		public global::Allors.Meta.RoleType I12C1Many2One 
+		public global::Allors.Meta.RoleType I12I34one2one 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I12C1Many2One;
+				return global::Allors.Meta.RoleTypes.I12I34one2one;
 			}
 		} 
-		public global::Allors.Meta.RoleType DisplayName 
+		public global::Allors.Meta.RoleType I12C2one2many 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.UserInterfaceableDisplayName;
+				return global::Allors.Meta.RoleTypes.I12C2one2many;
 			}
 		} 
-		public global::Allors.Meta.RoleType DeniedPermission 
+		public global::Allors.Meta.RoleType S12AllorsString 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.AccessControlledObjectDeniedPermission;
+				return global::Allors.Meta.RoleTypes.S12AllorsString;
 			}
 		} 
-		public global::Allors.Meta.RoleType SecurityToken 
+		public global::Allors.Meta.RoleType S12AllorsDateTime 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.AccessControlledObjectSecurityToken;
+				return global::Allors.Meta.RoleTypes.S12AllorsDateTime;
 			}
 		} 
-		public global::Allors.Meta.RoleType SearchData 
+		public global::Allors.Meta.RoleType S12C2many2many 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.SearchableSearchData;
+				return global::Allors.Meta.RoleTypes.S12C2many2many;
+			}
+		} 
+		public global::Allors.Meta.RoleType S12C2many2one 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.S12C2many2one;
+			}
+		} 
+		public global::Allors.Meta.RoleType S12C2one2one 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.S12C2one2one;
+			}
+		} 
+		public global::Allors.Meta.RoleType S12C2one2many 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.S12C2one2many;
+			}
+		} 
+		public global::Allors.Meta.RoleType S12AllorsBoolean 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.S12AllorsBoolean;
+			}
+		} 
+		public global::Allors.Meta.RoleType S12AllorsDouble 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.S12AllorsDouble;
+			}
+		} 
+		public global::Allors.Meta.RoleType S12AllorsInteger 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.S12AllorsInteger;
+			}
+		} 
+		public global::Allors.Meta.RoleType S12AllorsDecimal 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.S12AllorsDecimal;
 			}
 		} 
 
-		public global::Allors.Meta.AssociationType I2sWhereC1Many2One 
+		public global::Allors.Meta.AssociationType S1sWhereC1many2one 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.I2C1Many2One;
+				return global::Allors.Meta.AssociationTypes.S1C1many2one;
 			}
 		} 
-		public global::Allors.Meta.AssociationType I2WhereC1One2Many 
+		public global::Allors.Meta.AssociationType S1WhereC1one2one 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.I2C1One2Many;
+				return global::Allors.Meta.AssociationTypes.S1C1one2one;
 			}
 		} 
-		public global::Allors.Meta.AssociationType I2WhereC1One2One 
+		public global::Allors.Meta.AssociationType S1sWhereC1many2many 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.I2C1One2One;
+				return global::Allors.Meta.AssociationTypes.S1C1many2many;
 			}
 		} 
-		public global::Allors.Meta.AssociationType I2sWhereC1Many2Many 
+		public global::Allors.Meta.AssociationType S1WhereC1one2many 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.I2C1Many2Many;
+				return global::Allors.Meta.AssociationTypes.S1C1one2many;
 			}
 		} 
-		public global::Allors.Meta.AssociationType C1WhereC1One2One 
+		public global::Allors.Meta.AssociationType I3WhereC1one2one 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.C1C1One2One;
+				return global::Allors.Meta.AssociationTypes.I3C1one2one;
 			}
 		} 
-		public global::Allors.Meta.AssociationType C1sWhereC1Many2Many 
+		public global::Allors.Meta.AssociationType C1sWhereC1many2one 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.C1C1Many2Many;
+				return global::Allors.Meta.AssociationTypes.C1C1many2one;
 			}
 		} 
-		public global::Allors.Meta.AssociationType C1WhereC1One2Many 
+		public global::Allors.Meta.AssociationType C1sWhereMany2One 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.C1C1One2Many;
+				return global::Allors.Meta.AssociationTypes.C1Many2One;
 			}
 		} 
-		public global::Allors.Meta.AssociationType C1sWhereC1Many2One 
+		public global::Allors.Meta.AssociationType C1sWhereC1many2many 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.C1C1Many2One;
+				return global::Allors.Meta.AssociationTypes.C1C1many2many;
 			}
 		} 
-		public global::Allors.Meta.AssociationType C2WhereC1One2One 
+		public global::Allors.Meta.AssociationType C1WhereC1one2one 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.C2C1One2One;
+				return global::Allors.Meta.AssociationTypes.C1C1one2one;
 			}
 		} 
-		public global::Allors.Meta.AssociationType C2sWhereC1Many2Many 
+		public global::Allors.Meta.AssociationType C1WhereC1one2many 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.C2C1Many2Many;
+				return global::Allors.Meta.AssociationTypes.C1C1one2many;
 			}
 		} 
-		public global::Allors.Meta.AssociationType C2sWhereC1Many2One 
+		public global::Allors.Meta.AssociationType C2sWhereC1many2many 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.C2C1Many2One;
+				return global::Allors.Meta.AssociationTypes.C2C1many2many;
 			}
 		} 
-		public global::Allors.Meta.AssociationType C2WhereC1One2Many 
+		public global::Allors.Meta.AssociationType C2sWhereC1many2one 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.C2C1One2Many;
+				return global::Allors.Meta.AssociationTypes.C2C1many2one;
 			}
 		} 
-		public global::Allors.Meta.AssociationType I12sWhereC1Many2Many 
+		public global::Allors.Meta.AssociationType C2WhereC1one2one 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.I12C1Many2Many;
+				return global::Allors.Meta.AssociationTypes.C2C1one2one;
 			}
 		} 
-		public global::Allors.Meta.AssociationType I12WhereC1One2One 
+		public global::Allors.Meta.AssociationType C2WhereC1one2many 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.I12C1One2One;
+				return global::Allors.Meta.AssociationTypes.C2C1one2many;
 			}
 		} 
-		public global::Allors.Meta.AssociationType I12WhereC1One2Many 
+		public global::Allors.Meta.AssociationType I1sWhereC1many2one 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.I12C1One2Many;
+				return global::Allors.Meta.AssociationTypes.I1C1many2one;
 			}
 		} 
-		public global::Allors.Meta.AssociationType I12sWhereC1Many2One 
+		public global::Allors.Meta.AssociationType I1WhereC1one2one 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.I12C1Many2One;
+				return global::Allors.Meta.AssociationTypes.I1C1one2one;
 			}
 		} 
-		public global::Allors.Meta.AssociationType I1WhereC1One2One 
+		public global::Allors.Meta.AssociationType I1sWhereC1many2many 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.I1C1One2One;
+				return global::Allors.Meta.AssociationTypes.I1C1many2many;
 			}
 		} 
-		public global::Allors.Meta.AssociationType I1WhereC1One2Many 
+		public global::Allors.Meta.AssociationType I1WhereC1one2many 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.I1C1One2Many;
+				return global::Allors.Meta.AssociationTypes.I1C1one2many;
 			}
 		} 
-		public global::Allors.Meta.AssociationType I1sWhereC1Many2Many 
+		public global::Allors.Meta.AssociationType C1WhereI1one2one 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.I1C1Many2Many;
+				return global::Allors.Meta.AssociationTypes.C1I1one2one;
 			}
 		} 
-		public global::Allors.Meta.AssociationType I1sWhereC1Many2One 
+		public global::Allors.Meta.AssociationType C1sWhereI1many2many 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.I1C1Many2One;
+				return global::Allors.Meta.AssociationTypes.C1I1many2many;
 			}
 		} 
-		public global::Allors.Meta.AssociationType I2sWhereI1Many2One 
+		public global::Allors.Meta.AssociationType C1sWhereI1many2one 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.I2I1Many2One;
+				return global::Allors.Meta.AssociationTypes.C1I1many2one;
 			}
 		} 
-		public global::Allors.Meta.AssociationType I2sWhereI1Many2Many 
+		public global::Allors.Meta.AssociationType C1WhereI1one2many 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.I2I1Many2Many;
+				return global::Allors.Meta.AssociationTypes.C1I1one2many;
 			}
 		} 
-		public global::Allors.Meta.AssociationType I2WhereI1One2One 
+		public global::Allors.Meta.AssociationType I1sWhereI1many2one 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.I2I1One2One;
+				return global::Allors.Meta.AssociationTypes.I1I1many2one;
 			}
 		} 
-		public global::Allors.Meta.AssociationType I2WhereI1One2Many 
+		public global::Allors.Meta.AssociationType I1WhereI1one2many 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.I2I1One2Many;
+				return global::Allors.Meta.AssociationTypes.I1I1one2many;
 			}
 		} 
-		public global::Allors.Meta.AssociationType C1WhereI1One2One 
+		public global::Allors.Meta.AssociationType I1sWhereI1many2many 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.C1I1One2One;
+				return global::Allors.Meta.AssociationTypes.I1I1many2many;
 			}
 		} 
-		public global::Allors.Meta.AssociationType C1sWhereI1Many2One 
+		public global::Allors.Meta.AssociationType I1WhereI1one2one 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.C1I1Many2One;
+				return global::Allors.Meta.AssociationTypes.I1I1one2one;
 			}
 		} 
-		public global::Allors.Meta.AssociationType C1sWhereI1Many2Many 
+		public global::Allors.Meta.AssociationType C1WhereS1one2many 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.C1I1Many2Many;
+				return global::Allors.Meta.AssociationTypes.C1S1one2many;
 			}
 		} 
-		public global::Allors.Meta.AssociationType C1WhereI1One2Many 
+		public global::Allors.Meta.AssociationType C1sWhereS1many2many 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.C1I1One2Many;
+				return global::Allors.Meta.AssociationTypes.C1S1many2many;
 			}
 		} 
-		public global::Allors.Meta.AssociationType C2sWhereI1Many2Many 
+		public global::Allors.Meta.AssociationType C1sWhereS1many2one 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.C2I1Many2Many;
+				return global::Allors.Meta.AssociationTypes.C1S1many2one;
 			}
 		} 
-		public global::Allors.Meta.AssociationType C2WhereI1One2Many 
+		public global::Allors.Meta.AssociationType C1WhereS1one2one 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.C2I1One2Many;
+				return global::Allors.Meta.AssociationTypes.C1S1one2one;
 			}
 		} 
-		public global::Allors.Meta.AssociationType C2sWhereI1Many2One 
+		public global::Allors.Meta.AssociationType I1WhereS1one2one 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.C2I1Many2One;
+				return global::Allors.Meta.AssociationTypes.I1S1one2one;
 			}
 		} 
-		public global::Allors.Meta.AssociationType C2WhereI1One2One 
+		public global::Allors.Meta.AssociationType I1sWhereS1many2many 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.C2I1One2One;
+				return global::Allors.Meta.AssociationTypes.I1S1many2many;
 			}
 		} 
-		public global::Allors.Meta.AssociationType I12sWhereI1Many2One 
+		public global::Allors.Meta.AssociationType I1WhereS1one2many 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.I12I1Many2One;
+				return global::Allors.Meta.AssociationTypes.I1S1one2many;
 			}
 		} 
-		public global::Allors.Meta.AssociationType I12sWhereI1Many2Many 
+		public global::Allors.Meta.AssociationType I1sWhereS1many2one 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.I12I1Many2Many;
+				return global::Allors.Meta.AssociationTypes.I1S1many2one;
 			}
 		} 
-		public global::Allors.Meta.AssociationType I12WhereI1One2Many 
+		public global::Allors.Meta.AssociationType S1234sWhereS1234many2one 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.I12I1One2Many;
+				return global::Allors.Meta.AssociationTypes.S1234S1234many2one;
 			}
 		} 
-		public global::Allors.Meta.AssociationType I12WhereI1One2One 
+		public global::Allors.Meta.AssociationType S1234WhereS1234one2many 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.I12I1One2One;
+				return global::Allors.Meta.AssociationTypes.S1234S1234one2many;
 			}
 		} 
-		public global::Allors.Meta.AssociationType I1sWhereI1Many2One 
+		public global::Allors.Meta.AssociationType S1234sWhereS1234many2many 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.I1I1Many2One;
+				return global::Allors.Meta.AssociationTypes.S1234S1234many2many;
 			}
 		} 
-		public global::Allors.Meta.AssociationType I1WhereI1One2Many 
+		public global::Allors.Meta.AssociationType S1234WhereS1234one2one 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.I1I1One2Many;
+				return global::Allors.Meta.AssociationTypes.S1234S1234one2one;
 			}
 		} 
-		public global::Allors.Meta.AssociationType I1sWhereI1Many2Many 
+		public global::Allors.Meta.AssociationType C1WhereI12one2one 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.I1I1Many2Many;
+				return global::Allors.Meta.AssociationTypes.C1I12one2one;
 			}
 		} 
-		public global::Allors.Meta.AssociationType I1WhereI1One2One 
+		public global::Allors.Meta.AssociationType C1sWhereI12many2one 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.I1I1One2One;
+				return global::Allors.Meta.AssociationTypes.C1I12many2one;
 			}
 		} 
-		public global::Allors.Meta.AssociationType I2sWhereI12Many2One 
+		public global::Allors.Meta.AssociationType C1WhereI12one2many 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.I2I12Many2One;
+				return global::Allors.Meta.AssociationTypes.C1I12one2many;
 			}
 		} 
-		public global::Allors.Meta.AssociationType I2WhereI12One2Many 
+		public global::Allors.Meta.AssociationType C1sWhereI12many2many 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.I2I12One2Many;
+				return global::Allors.Meta.AssociationTypes.C1I12many2many;
 			}
 		} 
-		public global::Allors.Meta.AssociationType I2WhereI12One2One 
+		public global::Allors.Meta.AssociationType I1sWhereI12many2one 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.I2I12One2One;
+				return global::Allors.Meta.AssociationTypes.I1I12many2one;
 			}
 		} 
-		public global::Allors.Meta.AssociationType I2sWhereI12Many2Many 
+		public global::Allors.Meta.AssociationType I1WhereI12one2one 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.I2I12Many2Many;
+				return global::Allors.Meta.AssociationTypes.I1I12one2one;
 			}
 		} 
-		public global::Allors.Meta.AssociationType C1sWhereI12Many2Many 
+		public global::Allors.Meta.AssociationType I1sWhereI12many2many 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.C1I12Many2Many;
+				return global::Allors.Meta.AssociationTypes.I1I12many2many;
 			}
 		} 
-		public global::Allors.Meta.AssociationType C1WhereI12One2Many 
+		public global::Allors.Meta.AssociationType I1WhereI12one2many 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.C1I12One2Many;
-			}
-		} 
-		public global::Allors.Meta.AssociationType C1WhereI12One2One 
-		{
-			get
-			{
-				return global::Allors.Meta.AssociationTypes.C1I12One2One;
-			}
-		} 
-		public global::Allors.Meta.AssociationType C1sWhereI12Many2One 
-		{
-			get
-			{
-				return global::Allors.Meta.AssociationTypes.C1I12Many2One;
-			}
-		} 
-		public global::Allors.Meta.AssociationType C2sWhereI12Many2One 
-		{
-			get
-			{
-				return global::Allors.Meta.AssociationTypes.C2I12Many2One;
-			}
-		} 
-		public global::Allors.Meta.AssociationType C2WhereI12One2One 
-		{
-			get
-			{
-				return global::Allors.Meta.AssociationTypes.C2I12One2One;
-			}
-		} 
-		public global::Allors.Meta.AssociationType C2sWhereI12Many2Many 
-		{
-			get
-			{
-				return global::Allors.Meta.AssociationTypes.C2I12Many2Many;
-			}
-		} 
-		public global::Allors.Meta.AssociationType C2WhereI12One2Many 
-		{
-			get
-			{
-				return global::Allors.Meta.AssociationTypes.C2I12One2Many;
-			}
-		} 
-		public global::Allors.Meta.AssociationType I12sWhereI12Many2Many 
-		{
-			get
-			{
-				return global::Allors.Meta.AssociationTypes.I12I12Many2Many;
-			}
-		} 
-		public global::Allors.Meta.AssociationType I12WhereI12One2Many 
-		{
-			get
-			{
-				return global::Allors.Meta.AssociationTypes.I12I12One2Many;
-			}
-		} 
-		public global::Allors.Meta.AssociationType I12WhereI12One2One 
-		{
-			get
-			{
-				return global::Allors.Meta.AssociationTypes.I12I12One2One;
-			}
-		} 
-		public global::Allors.Meta.AssociationType I12sWhereDependency 
-		{
-			get
-			{
-				return global::Allors.Meta.AssociationTypes.I12Dependency;
-			}
-		} 
-		public global::Allors.Meta.AssociationType I12sWhereI12Many2One 
-		{
-			get
-			{
-				return global::Allors.Meta.AssociationTypes.I12I12Many2One;
-			}
-		} 
-		public global::Allors.Meta.AssociationType I1sWhereI12Many2Many 
-		{
-			get
-			{
-				return global::Allors.Meta.AssociationTypes.I1I12Many2Many;
-			}
-		} 
-		public global::Allors.Meta.AssociationType I1sWhereI12Many2One 
-		{
-			get
-			{
-				return global::Allors.Meta.AssociationTypes.I1I12Many2One;
-			}
-		} 
-		public global::Allors.Meta.AssociationType I1WhereI12One2One 
-		{
-			get
-			{
-				return global::Allors.Meta.AssociationTypes.I1I12One2One;
-			}
-		} 
-		public global::Allors.Meta.AssociationType I1WhereI12One2Many 
-		{
-			get
-			{
-				return global::Allors.Meta.AssociationTypes.I1I12One2Many;
+				return global::Allors.Meta.AssociationTypes.I1I12one2many;
 			}
 		} 
 

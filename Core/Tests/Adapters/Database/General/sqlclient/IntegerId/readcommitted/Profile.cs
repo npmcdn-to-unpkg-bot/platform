@@ -21,11 +21,11 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors1.Adapters.General.SqlClient.Connected.IntegerId.ReadCommitted
+namespace Allors.Adapters.General.SqlClient.Connected.IntegerId.ReadCommitted
 {
-    using Allors1.Adapters;
+    using Allors.Adapters;
 
-    using Allors1.Configuration;
+    using Allors.Configuration;
 
     public class Profile : General.Profile
     {

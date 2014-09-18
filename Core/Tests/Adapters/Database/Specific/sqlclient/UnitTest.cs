@@ -21,7 +21,7 @@
 namespace Allors.Adapters.Special.SqlClient
 {
     using System;
-    using global::Domain;
+    using Allors.Domain;
     using NUnit.Framework;
 
     [TestFixture]

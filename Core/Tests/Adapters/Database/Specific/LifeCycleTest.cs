@@ -130,18 +130,18 @@ namespace Allors.Adapters.Special
                 var total = 0;
                 foreach (var run in runs)
                 {
-                    var allorsObjects = this.Session.Create(C1Meta.ObjectType, run);
+                    var allorsObjects = this.Session.Create(Classes.C1, run);
 
                     Assert.AreEqual(run, allorsObjects.Length);
 
                     total += run;
 
-                    Assert.AreEqual(total, this.GetExtent(C1Meta.ObjectType).Length);
+                    Assert.AreEqual(total, this.GetExtent(Classes.C1).Length);
 
                     var ids = new ArrayList();
                     foreach (C1 allorsObject in allorsObjects)
                     {
-                        Assert.AreEqual(C1Meta.ObjectType, allorsObject.Strategy.ObjectType);
+                        Assert.AreEqual(Classes.C1, allorsObject.Strategy.ObjectType);
                         ids.Add(allorsObject.Strategy.ObjectId);
                         allorsObject.C1AllorsString = "CreateMany";
                     }
@@ -153,11 +153,11 @@ namespace Allors.Adapters.Special
                     allorsObjects = this.Session.Instantiate((ObjectId[])ids.ToArray(typeof(ObjectId)));
                     foreach (C1 allorsObject in allorsObjects)
                     {
-                        Assert.AreEqual(C1Meta.ObjectType, allorsObject.Strategy.ObjectType);
+                        Assert.AreEqual(Classes.C1, allorsObject.Strategy.ObjectType);
                         allorsObject.C1AllorsString = "CreateMany";
                     }
 
-                    var c2s = (C2[])this.Session.Create(C2Meta.ObjectType, run);
+                    var c2s = (C2[])this.Session.Create(Classes.C2, run);
                     Assert.AreEqual(run, c2s.Length);
                 }
             }
@@ -493,7 +493,7 @@ namespace Allors.Adapters.Special
 
                 // Clean up
                 this.Session.Commit();
-                foreach (C1 removeObject in this.GetExtent(C1Meta.ObjectType))
+                foreach (C1 removeObject in this.GetExtent(Classes.C1))
                 {
                     removeObject.Strategy.Delete();
                 }
@@ -750,7 +750,7 @@ namespace Allors.Adapters.Special
 
                     // Clean up
                     databaseSession.Commit();
-                    foreach (C1 removeObject in this.GetExtent(C1Meta.ObjectType))
+                    foreach (C1 removeObject in this.GetExtent(Classes.C1))
                     {
                         removeObject.Strategy.Delete();
                     }
@@ -764,24 +764,24 @@ namespace Allors.Adapters.Special
                 anObject.C1AllorsString = "a";
                 anObject.Strategy.Delete();
 
-                StrategyAssert.RoleExistHasException(anObject, C1Meta.C1AllorsString);
+                StrategyAssert.RoleExistHasException(anObject, RoleTypes.C1AllorsString);
 
                 anObject = C1.Create(this.Session);
                 anObject.C1AllorsString = "a";
                 anObject.Strategy.Delete();
 
-                StrategyAssert.RoleGetHasException(anObject, C1Meta.C1AllorsString);
+                StrategyAssert.RoleGetHasException(anObject, RoleTypes.C1AllorsString);
 
                 C1 secondObject = C1.Create(this.Session);
                 secondObject.C1AllorsString = "b";
                 C1 thirdObject = C1.Create(this.Session);
                 thirdObject.C1AllorsString = "c";
 
-                Assert.AreEqual(2, this.GetExtent(C1Meta.ObjectType).Length);
+                Assert.AreEqual(2, this.GetExtent(Classes.C1).Length);
                 thirdObject.Strategy.Delete();
 
-                Assert.AreEqual(1, this.GetExtent(C1Meta.ObjectType).Length);
-                Assert.AreEqual("b", ((C1)this.GetExtent(C1Meta.ObjectType)[0]).C1AllorsString);
+                Assert.AreEqual(1, this.GetExtent(Classes.C1).Length);
+                Assert.AreEqual("b", ((C1)this.GetExtent(Classes.C1)[0]).C1AllorsString);
 
                 secondObject.Strategy.Delete();
 
@@ -794,7 +794,7 @@ namespace Allors.Adapters.Special
 
                 anObject.Strategy.Delete();
 
-                StrategyAssert.RoleExistHasException(anObject, C1Meta.C1AllorsString);
+                StrategyAssert.RoleExistHasException(anObject, RoleTypes.C1AllorsString);
 
                 anObject = C1.Create(this.Session);
                 anObject.C1AllorsString = "a";
@@ -803,22 +803,22 @@ namespace Allors.Adapters.Special
 
                 anObject.Strategy.Delete();
 
-                StrategyAssert.RoleGetHasException(anObject, C1Meta.C1AllorsString);
+                StrategyAssert.RoleGetHasException(anObject, RoleTypes.C1AllorsString);
 
                 secondObject = C1.Create(this.Session);
                 secondObject.C1AllorsString = "b";
                 thirdObject = C1.Create(this.Session);
                 thirdObject.C1AllorsString = "c";
 
-                Assert.AreEqual(2, this.GetExtent(C1Meta.ObjectType).Length);
+                Assert.AreEqual(2, this.GetExtent(Classes.C1).Length);
 
                 AllorsTestUtils.ForceRoleCaching(secondObject);
                 AllorsTestUtils.ForceRoleCaching(thirdObject);
 
                 thirdObject.Strategy.Delete();
 
-                Assert.AreEqual(1, this.GetExtent(C1Meta.ObjectType).Length);
-                Assert.AreEqual("b", ((C1)this.GetExtent(C1Meta.ObjectType)[0]).C1AllorsString);
+                Assert.AreEqual(1, this.GetExtent(Classes.C1).Length);
+                Assert.AreEqual("b", ((C1)this.GetExtent(Classes.C1)[0]).C1AllorsString);
 
                 secondObject.Strategy.Delete();
 
@@ -830,7 +830,7 @@ namespace Allors.Adapters.Special
 
                 this.Session.Commit();
 
-                StrategyAssert.RoleExistHasException(anObject, C1Meta.C1AllorsString);
+                StrategyAssert.RoleExistHasException(anObject, RoleTypes.C1AllorsString);
 
                 anObject = C1.Create(this.Session);
                 anObject.C1AllorsString = "a";
@@ -838,20 +838,20 @@ namespace Allors.Adapters.Special
 
                 this.Session.Commit();
 
-                StrategyAssert.RoleGetHasException(anObject, C1Meta.C1AllorsString);
+                StrategyAssert.RoleGetHasException(anObject, RoleTypes.C1AllorsString);
 
                 secondObject = C1.Create(this.Session);
                 secondObject.C1AllorsString = "b";
                 thirdObject = C1.Create(this.Session);
                 thirdObject.C1AllorsString = "c";
 
-                Assert.AreEqual(2, this.GetExtent(C1Meta.ObjectType).Length);
+                Assert.AreEqual(2, this.GetExtent(Classes.C1).Length);
                 thirdObject.Strategy.Delete();
 
                 this.Session.Commit();
 
-                Assert.AreEqual(1, this.GetExtent(C1Meta.ObjectType).Length);
-                Assert.AreEqual("b", ((C1)this.GetExtent(C1Meta.ObjectType)[0]).C1AllorsString);
+                Assert.AreEqual(1, this.GetExtent(Classes.C1).Length);
+                Assert.AreEqual("b", ((C1)this.GetExtent(Classes.C1)[0]).C1AllorsString);
 
                 secondObject.Strategy.Delete();
 
@@ -867,7 +867,7 @@ namespace Allors.Adapters.Special
                 anObject.Strategy.Delete();
                 this.Session.Commit();
 
-                StrategyAssert.RoleExistHasException(anObject, C1Meta.C1AllorsString);
+                StrategyAssert.RoleExistHasException(anObject, RoleTypes.C1AllorsString);
 
                 anObject = C1.Create(this.Session);
                 anObject.C1AllorsString = "a";
@@ -877,14 +877,14 @@ namespace Allors.Adapters.Special
                 anObject.Strategy.Delete();
                 this.Session.Commit();
 
-                StrategyAssert.RoleGetHasException(anObject, C1Meta.C1AllorsString);
+                StrategyAssert.RoleGetHasException(anObject, RoleTypes.C1AllorsString);
 
                 secondObject = C1.Create(this.Session);
                 secondObject.C1AllorsString = "b";
                 thirdObject = C1.Create(this.Session);
                 thirdObject.C1AllorsString = "c";
 
-                Assert.AreEqual(2, this.GetExtent(C1Meta.ObjectType).Length);
+                Assert.AreEqual(2, this.GetExtent(Classes.C1).Length);
 
                 AllorsTestUtils.ForceRoleCaching(secondObject);
                 AllorsTestUtils.ForceRoleCaching(thirdObject);
@@ -892,8 +892,8 @@ namespace Allors.Adapters.Special
                 thirdObject.Strategy.Delete();
                 this.Session.Commit();
 
-                Assert.AreEqual(1, this.GetExtent(C1Meta.ObjectType).Length);
-                Assert.AreEqual("b", ((C1)this.GetExtent(C1Meta.ObjectType)[0]).C1AllorsString);
+                Assert.AreEqual(1, this.GetExtent(Classes.C1).Length);
+                Assert.AreEqual("b", ((C1)this.GetExtent(Classes.C1)[0]).C1AllorsString);
 
                 secondObject.Strategy.Delete();
                 this.Session.Commit();
@@ -908,21 +908,21 @@ namespace Allors.Adapters.Special
 
                 this.Session.Rollback();
 
-                Assert.AreEqual(1, this.GetExtent(C1Meta.ObjectType).Length);
-                Assert.AreEqual("a", ((C1)this.GetExtent(C1Meta.ObjectType)[0]).C1AllorsString);
+                Assert.AreEqual(1, this.GetExtent(Classes.C1).Length);
+                Assert.AreEqual("a", ((C1)this.GetExtent(Classes.C1)[0]).C1AllorsString);
 
                 secondObject = C1.Create(this.Session);
                 secondObject.C1AllorsString = "b";
                 thirdObject = C1.Create(this.Session);
                 thirdObject.C1AllorsString = "c";
 
-                Assert.AreEqual(3, this.GetExtent(C1Meta.ObjectType).Length);
+                Assert.AreEqual(3, this.GetExtent(Classes.C1).Length);
                 thirdObject.Strategy.Delete();
 
                 this.Session.Rollback();
 
-                Assert.AreEqual(1, this.GetExtent(C1Meta.ObjectType).Length);
-                Assert.AreEqual("a", ((C1)this.GetExtent(C1Meta.ObjectType)[0]).C1AllorsString);
+                Assert.AreEqual(1, this.GetExtent(Classes.C1).Length);
+                Assert.AreEqual("a", ((C1)this.GetExtent(Classes.C1)[0]).C1AllorsString);
 
                 anObject.Strategy.Delete();
 
@@ -939,15 +939,15 @@ namespace Allors.Adapters.Special
                 anObject.Strategy.Delete();
                 this.Session.Rollback();
 
-                Assert.AreEqual(1, this.GetExtent(C1Meta.ObjectType).Length);
-                Assert.AreEqual("a", ((C1)this.GetExtent(C1Meta.ObjectType)[0]).C1AllorsString);
+                Assert.AreEqual(1, this.GetExtent(Classes.C1).Length);
+                Assert.AreEqual("a", ((C1)this.GetExtent(Classes.C1)[0]).C1AllorsString);
 
                 secondObject = C1.Create(this.Session);
                 secondObject.C1AllorsString = "b";
                 thirdObject = C1.Create(this.Session);
                 thirdObject.C1AllorsString = "c";
 
-                Assert.AreEqual(3, this.GetExtent(C1Meta.ObjectType).Length);
+                Assert.AreEqual(3, this.GetExtent(Classes.C1).Length);
 
                 AllorsTestUtils.ForceRoleCaching(secondObject);
                 AllorsTestUtils.ForceRoleCaching(thirdObject);
@@ -955,8 +955,8 @@ namespace Allors.Adapters.Special
                 thirdObject.Strategy.Delete();
                 this.Session.Rollback();
 
-                Assert.AreEqual(1, this.GetExtent(C1Meta.ObjectType).Length);
-                Assert.AreEqual("a", ((C1)this.GetExtent(C1Meta.ObjectType)[0]).C1AllorsString);
+                Assert.AreEqual(1, this.GetExtent(Classes.C1).Length);
+                Assert.AreEqual("a", ((C1)this.GetExtent(Classes.C1)[0]).C1AllorsString);
 
                 anObject.Strategy.Delete();
                 this.Session.Commit();
@@ -1001,25 +1001,25 @@ namespace Allors.Adapters.Special
                 toC1a.Strategy.Delete();
                 toC1b.Strategy.Delete();
 
-                StrategyAssert.AssociationGetHasException(toC1a, C1Meta.C1WhereC1one2one);
-                StrategyAssert.AssociationGetHasException(toC1a, C1Meta.C1WhereC1one2many);
-                StrategyAssert.AssociationGetHasException(toC1a, C1Meta.C1sWhereC1many2one);
-                StrategyAssert.AssociationGetHasException(toC1a, C1Meta.C1WhereC1one2many);
+                StrategyAssert.AssociationGetHasException(toC1a, AssociationTypes.C1C1one2one);
+                StrategyAssert.AssociationGetHasException(toC1a, AssociationTypes.C1C1one2many);
+                StrategyAssert.AssociationGetHasException(toC1a, AssociationTypes.C1C1many2one);
+                StrategyAssert.AssociationGetHasException(toC1a, AssociationTypes.C1C1many2many);
 
-                StrategyAssert.AssociationExistHasException(toC1a, C1Meta.C1WhereC1one2one);
-                StrategyAssert.AssociationExistHasException(toC1a, C1Meta.C1WhereC1one2many);
-                StrategyAssert.AssociationExistHasException(toC1a, C1Meta.C1sWhereC1many2one);
-                StrategyAssert.AssociationExistHasException(toC1a, C1Meta.C1WhereC1one2many);
+                StrategyAssert.AssociationExistHasException(toC1a, AssociationTypes.C1C1one2one);
+                StrategyAssert.AssociationExistHasException(toC1a, AssociationTypes.C1C1one2many);
+                StrategyAssert.AssociationExistHasException(toC1a, AssociationTypes.C1C1many2one);
+                StrategyAssert.AssociationExistHasException(toC1a, AssociationTypes.C1C1many2many);
 
-                StrategyAssert.AssociationExistHasException(toC1b, C1Meta.C1WhereC1one2one);
-                StrategyAssert.AssociationExistHasException(toC1b, C1Meta.C1WhereC1one2many);
-                StrategyAssert.AssociationExistHasException(toC1b, C1Meta.C1sWhereC1many2one);
-                StrategyAssert.AssociationExistHasException(toC1b, C1Meta.C1WhereC1one2many);
+                StrategyAssert.AssociationExistHasException(toC1b, AssociationTypes.C1C1one2one);
+                StrategyAssert.AssociationExistHasException(toC1b, AssociationTypes.C1C1one2many);
+                StrategyAssert.AssociationExistHasException(toC1b, AssociationTypes.C1C1many2one);
+                StrategyAssert.AssociationExistHasException(toC1b, AssociationTypes.C1C1many2many);
 
-                StrategyAssert.AssociationGetHasException(toC1b, C1Meta.C1WhereC1one2one);
-                StrategyAssert.AssociationGetHasException(toC1b, C1Meta.C1WhereC1one2many);
-                StrategyAssert.AssociationGetHasException(toC1b, C1Meta.C1sWhereC1many2one);
-                StrategyAssert.AssociationGetHasException(toC1b, C1Meta.C1WhereC1one2many);
+                StrategyAssert.AssociationGetHasException(toC1b, AssociationTypes.C1C1one2one);
+                StrategyAssert.AssociationGetHasException(toC1b, AssociationTypes.C1C1one2many);
+                StrategyAssert.AssociationGetHasException(toC1b, AssociationTypes.C1C1many2one);
+                StrategyAssert.AssociationGetHasException(toC1b, AssociationTypes.C1C1many2many);
 
                 Assert.IsFalse(fromC1a.Strategy.IsDeleted);
                 Assert.IsTrue(toC1a.Strategy.IsDeleted);
@@ -1060,25 +1060,25 @@ namespace Allors.Adapters.Special
                 toC2a.Strategy.Delete();
                 toC2b.Strategy.Delete();
 
-                StrategyAssert.AssociationGetHasException(toC2a, C2Meta.C1WhereC2one2one);
-                StrategyAssert.AssociationGetHasException(toC2a, C2Meta.C1WhereC2one2many);
-                StrategyAssert.AssociationGetHasException(toC2a, C2Meta.C1sWhereC2many2one);
-                StrategyAssert.AssociationGetHasException(toC2a, C2Meta.C1WhereC2one2many);
+                StrategyAssert.AssociationGetHasException(toC2a, AssociationTypes.C1C2one2one);
+                StrategyAssert.AssociationGetHasException(toC2a, AssociationTypes.C1C2one2many);
+                StrategyAssert.AssociationGetHasException(toC2a, AssociationTypes.C1C2many2one);
+                StrategyAssert.AssociationGetHasException(toC2a, AssociationTypes.C1C2many2many);
 
-                StrategyAssert.AssociationExistHasException(toC1a, C2Meta.C1WhereC2one2one);
-                StrategyAssert.AssociationExistHasException(toC1a, C2Meta.C1WhereC2one2many);
-                StrategyAssert.AssociationExistHasException(toC1a, C2Meta.C1sWhereC2many2one);
-                StrategyAssert.AssociationExistHasException(toC1a, C2Meta.C1WhereC2one2many);
+                StrategyAssert.AssociationExistHasException(toC1a, AssociationTypes.C1C2one2one);
+                StrategyAssert.AssociationExistHasException(toC1a, AssociationTypes.C1C2one2many);
+                StrategyAssert.AssociationExistHasException(toC1a, AssociationTypes.C1C2many2one);
+                StrategyAssert.AssociationExistHasException(toC1a, AssociationTypes.C1C2many2many);
 
-                StrategyAssert.AssociationExistHasException(toC1b, C2Meta.C1WhereC2one2one);
-                StrategyAssert.AssociationExistHasException(toC1b, C2Meta.C1WhereC2one2many);
-                StrategyAssert.AssociationExistHasException(toC1b, C2Meta.C1sWhereC2many2one);
-                StrategyAssert.AssociationExistHasException(toC1b, C2Meta.C1WhereC2one2many);
+                StrategyAssert.AssociationExistHasException(toC1b, AssociationTypes.C1C2one2one);
+                StrategyAssert.AssociationExistHasException(toC1b, AssociationTypes.C1C2one2many);
+                StrategyAssert.AssociationExistHasException(toC1b, AssociationTypes.C1C2many2one);
+                StrategyAssert.AssociationExistHasException(toC1b, AssociationTypes.C1C2many2many);
 
-                StrategyAssert.AssociationGetHasException(toC1b, C2Meta.C1WhereC2one2one);
-                StrategyAssert.AssociationGetHasException(toC1b, C2Meta.C1WhereC2one2many);
-                StrategyAssert.AssociationGetHasException(toC1b, C2Meta.C1sWhereC2many2one);
-                StrategyAssert.AssociationGetHasException(toC1b, C2Meta.C1WhereC2one2many);
+                StrategyAssert.AssociationGetHasException(toC1b, AssociationTypes.C1C2one2one);
+                StrategyAssert.AssociationGetHasException(toC1b, AssociationTypes.C1C2one2many);
+                StrategyAssert.AssociationGetHasException(toC1b, AssociationTypes.C1C2many2one);
+                StrategyAssert.AssociationGetHasException(toC1b, AssociationTypes.C1C2many2many);
 
                 Assert.IsFalse(fromC1a.Strategy.IsDeleted);
                 Assert.IsTrue(toC2a.Strategy.IsDeleted);
@@ -1131,25 +1131,25 @@ namespace Allors.Adapters.Special
 
                 this.Session.Commit();
 
-                StrategyAssert.AssociationGetHasException(toC1a, C1Meta.C1WhereC1one2one);
-                StrategyAssert.AssociationGetHasException(toC1a, C1Meta.C1WhereC1one2many);
-                StrategyAssert.AssociationGetHasException(toC1a, C1Meta.C1sWhereC1many2one);
-                StrategyAssert.AssociationGetHasException(toC1a, C1Meta.C1WhereC1one2many);
+                StrategyAssert.AssociationGetHasException(toC1a, AssociationTypes.C1C1one2one);
+                StrategyAssert.AssociationGetHasException(toC1a, AssociationTypes.C1C1one2many);
+                StrategyAssert.AssociationGetHasException(toC1a, AssociationTypes.C1C1many2one);
+                StrategyAssert.AssociationGetHasException(toC1a, AssociationTypes.C1C1many2many);
 
-                StrategyAssert.AssociationExistHasException(toC1a, C1Meta.C1WhereC1one2one);
-                StrategyAssert.AssociationExistHasException(toC1a, C1Meta.C1WhereC1one2many);
-                StrategyAssert.AssociationExistHasException(toC1a, C1Meta.C1sWhereC1many2one);
-                StrategyAssert.AssociationExistHasException(toC1a, C1Meta.C1WhereC1one2many);
+                StrategyAssert.AssociationExistHasException(toC1a, AssociationTypes.C1C1one2one);
+                StrategyAssert.AssociationExistHasException(toC1a, AssociationTypes.C1C1one2many);
+                StrategyAssert.AssociationExistHasException(toC1a, AssociationTypes.C1C1many2one);
+                StrategyAssert.AssociationExistHasException(toC1a, AssociationTypes.C1C1many2many);
 
-                StrategyAssert.AssociationExistHasException(toC1b, C1Meta.C1WhereC1one2one);
-                StrategyAssert.AssociationExistHasException(toC1b, C1Meta.C1WhereC1one2many);
-                StrategyAssert.AssociationExistHasException(toC1b, C1Meta.C1sWhereC1many2one);
-                StrategyAssert.AssociationExistHasException(toC1b, C1Meta.C1WhereC1one2many);
+                StrategyAssert.AssociationExistHasException(toC1b, AssociationTypes.C1C1one2one);
+                StrategyAssert.AssociationExistHasException(toC1b, AssociationTypes.C1C1one2many);
+                StrategyAssert.AssociationExistHasException(toC1b, AssociationTypes.C1C1many2one);
+                StrategyAssert.AssociationExistHasException(toC1b, AssociationTypes.C1C1many2many);
 
-                StrategyAssert.AssociationGetHasException(toC1b, C1Meta.C1WhereC1one2one);
-                StrategyAssert.AssociationGetHasException(toC1b, C1Meta.C1WhereC1one2many);
-                StrategyAssert.AssociationGetHasException(toC1b, C1Meta.C1sWhereC1many2one);
-                StrategyAssert.AssociationGetHasException(toC1b, C1Meta.C1WhereC1one2many);
+                StrategyAssert.AssociationGetHasException(toC1b, AssociationTypes.C1C1one2one);
+                StrategyAssert.AssociationGetHasException(toC1b, AssociationTypes.C1C1one2many);
+                StrategyAssert.AssociationGetHasException(toC1b, AssociationTypes.C1C1many2one);
+                StrategyAssert.AssociationGetHasException(toC1b, AssociationTypes.C1C1many2many);
 
                 Assert.IsFalse(fromC1a.Strategy.IsDeleted);
                 Assert.IsTrue(toC1a.Strategy.IsDeleted);
@@ -1198,25 +1198,25 @@ namespace Allors.Adapters.Special
 
                 this.Session.Commit();
 
-                StrategyAssert.AssociationGetHasException(toC2a, C2Meta.C1WhereC2one2one);
-                StrategyAssert.AssociationGetHasException(toC2a, C2Meta.C1WhereC2one2many);
-                StrategyAssert.AssociationGetHasException(toC2a, C2Meta.C1sWhereC2many2one);
-                StrategyAssert.AssociationGetHasException(toC2a, C2Meta.C1WhereC2one2many);
+                StrategyAssert.AssociationGetHasException(toC2a, AssociationTypes.C1C2one2one);
+                StrategyAssert.AssociationGetHasException(toC2a, AssociationTypes.C1C2one2many);
+                StrategyAssert.AssociationGetHasException(toC2a, AssociationTypes.C1C2many2one);
+                StrategyAssert.AssociationGetHasException(toC2a, AssociationTypes.C1C2many2many);
 
-                StrategyAssert.AssociationExistHasException(toC2a, C2Meta.C1WhereC2one2one);
-                StrategyAssert.AssociationExistHasException(toC2a, C2Meta.C1WhereC2one2many);
-                StrategyAssert.AssociationExistHasException(toC2a, C2Meta.C1sWhereC2many2one);
-                StrategyAssert.AssociationExistHasException(toC2a, C2Meta.C1WhereC2one2many);
+                StrategyAssert.AssociationExistHasException(toC2a, AssociationTypes.C1C2one2one);
+                StrategyAssert.AssociationExistHasException(toC2a, AssociationTypes.C1C2one2many);
+                StrategyAssert.AssociationExistHasException(toC2a, AssociationTypes.C1C2many2one);
+                StrategyAssert.AssociationExistHasException(toC2a, AssociationTypes.C1C2many2many);
 
-                StrategyAssert.AssociationExistHasException(toC2b, C2Meta.C1WhereC2one2one);
-                StrategyAssert.AssociationExistHasException(toC2b, C2Meta.C1WhereC2one2many);
-                StrategyAssert.AssociationExistHasException(toC2b, C2Meta.C1sWhereC2many2one);
-                StrategyAssert.AssociationExistHasException(toC2b, C2Meta.C1WhereC2one2many);
+                StrategyAssert.AssociationExistHasException(toC2b, AssociationTypes.C1C2one2one);
+                StrategyAssert.AssociationExistHasException(toC2b, AssociationTypes.C1C2one2many);
+                StrategyAssert.AssociationExistHasException(toC2b, AssociationTypes.C1C2many2one);
+                StrategyAssert.AssociationExistHasException(toC2b, AssociationTypes.C1C2many2many);
 
-                StrategyAssert.AssociationGetHasException(toC2b, C2Meta.C1WhereC2one2one);
-                StrategyAssert.AssociationGetHasException(toC2b, C2Meta.C1WhereC2one2many);
-                StrategyAssert.AssociationGetHasException(toC2b, C2Meta.C1sWhereC2many2one);
-                StrategyAssert.AssociationGetHasException(toC2b, C2Meta.C1WhereC2one2many);
+                StrategyAssert.AssociationGetHasException(toC2b, AssociationTypes.C1C2one2one);
+                StrategyAssert.AssociationGetHasException(toC2b, AssociationTypes.C1C2one2many);
+                StrategyAssert.AssociationGetHasException(toC2b, AssociationTypes.C1C2many2one);
+                StrategyAssert.AssociationGetHasException(toC2b, AssociationTypes.C1C2many2many);
 
                 Assert.IsFalse(fromC1a.Strategy.IsDeleted);
                 Assert.IsTrue(toC2a.Strategy.IsDeleted);
@@ -1456,25 +1456,25 @@ namespace Allors.Adapters.Special
                 toC1a.Strategy.Delete();
                 toC1b.Strategy.Delete();
 
-                StrategyAssert.AssociationGetHasException(toC1a, C1Meta.C1WhereC1one2one);
-                StrategyAssert.AssociationGetHasException(toC1a, C1Meta.C1WhereC1one2many);
-                StrategyAssert.AssociationGetHasException(toC1a, C1Meta.C1sWhereC1many2one);
-                StrategyAssert.AssociationGetHasException(toC1a, C1Meta.C1WhereC1one2many);
+                StrategyAssert.AssociationGetHasException(toC1a, AssociationTypes.C1C1one2one);
+                StrategyAssert.AssociationGetHasException(toC1a, AssociationTypes.C1C1one2many);
+                StrategyAssert.AssociationGetHasException(toC1a, AssociationTypes.C1C1many2one);
+                StrategyAssert.AssociationGetHasException(toC1a, AssociationTypes.C1C1many2many);
 
-                StrategyAssert.AssociationExistHasException(toC1a, C1Meta.C1WhereC1one2one);
-                StrategyAssert.AssociationExistHasException(toC1a, C1Meta.C1WhereC1one2many);
-                StrategyAssert.AssociationExistHasException(toC1a, C1Meta.C1sWhereC1many2one);
-                StrategyAssert.AssociationExistHasException(toC1a, C1Meta.C1WhereC1one2many);
+                StrategyAssert.AssociationExistHasException(toC1a, AssociationTypes.C1C1one2one);
+                StrategyAssert.AssociationExistHasException(toC1a, AssociationTypes.C1C1one2many);
+                StrategyAssert.AssociationExistHasException(toC1a, AssociationTypes.C1C1many2one);
+                StrategyAssert.AssociationExistHasException(toC1a, AssociationTypes.C1C1many2many);
 
-                StrategyAssert.AssociationExistHasException(toC1b, C1Meta.C1WhereC1one2one);
-                StrategyAssert.AssociationExistHasException(toC1b, C1Meta.C1WhereC1one2many);
-                StrategyAssert.AssociationExistHasException(toC1b, C1Meta.C1sWhereC1many2one);
-                StrategyAssert.AssociationExistHasException(toC1b, C1Meta.C1WhereC1one2many);
+                StrategyAssert.AssociationExistHasException(toC1b, AssociationTypes.C1C1one2one);
+                StrategyAssert.AssociationExistHasException(toC1b, AssociationTypes.C1C1one2many);
+                StrategyAssert.AssociationExistHasException(toC1b, AssociationTypes.C1C1many2one);
+                StrategyAssert.AssociationExistHasException(toC1b, AssociationTypes.C1C1many2many);
 
-                StrategyAssert.AssociationGetHasException(toC1b, C1Meta.C1WhereC1one2one);
-                StrategyAssert.AssociationGetHasException(toC1b, C1Meta.C1WhereC1one2many);
-                StrategyAssert.AssociationGetHasException(toC1b, C1Meta.C1sWhereC1many2one);
-                StrategyAssert.AssociationGetHasException(toC1b, C1Meta.C1WhereC1one2many);
+                StrategyAssert.AssociationGetHasException(toC1b, AssociationTypes.C1C1one2one);
+                StrategyAssert.AssociationGetHasException(toC1b, AssociationTypes.C1C1one2many);
+                StrategyAssert.AssociationGetHasException(toC1b, AssociationTypes.C1C1many2one);
+                StrategyAssert.AssociationGetHasException(toC1b, AssociationTypes.C1C1many2many);
 
                 Assert.IsFalse(fromC1a.Strategy.IsDeleted);
                 Assert.IsTrue(toC1a.Strategy.IsDeleted);
@@ -1528,25 +1528,25 @@ namespace Allors.Adapters.Special
 
                 this.Session.Commit();
 
-                StrategyAssert.AssociationGetHasException(toC1a, C1Meta.C1WhereC1one2one);
-                StrategyAssert.AssociationGetHasException(toC1a, C1Meta.C1WhereC1one2many);
-                StrategyAssert.AssociationGetHasException(toC1a, C1Meta.C1sWhereC1many2one);
-                StrategyAssert.AssociationGetHasException(toC1a, C1Meta.C1WhereC1one2many);
+                StrategyAssert.AssociationGetHasException(toC1a, AssociationTypes.C1C1one2one);
+                StrategyAssert.AssociationGetHasException(toC1a, AssociationTypes.C1C1one2many);
+                StrategyAssert.AssociationGetHasException(toC1a, AssociationTypes.C1C1many2one);
+                StrategyAssert.AssociationGetHasException(toC1a, AssociationTypes.C1C1many2many);
 
-                StrategyAssert.AssociationExistHasException(toC1a, C1Meta.C1WhereC1one2one);
-                StrategyAssert.AssociationExistHasException(toC1a, C1Meta.C1WhereC1one2many);
-                StrategyAssert.AssociationExistHasException(toC1a, C1Meta.C1sWhereC1many2one);
-                StrategyAssert.AssociationExistHasException(toC1a, C1Meta.C1WhereC1one2many);
+                StrategyAssert.AssociationExistHasException(toC1a, AssociationTypes.C1C1one2one);
+                StrategyAssert.AssociationExistHasException(toC1a, AssociationTypes.C1C1one2many);
+                StrategyAssert.AssociationExistHasException(toC1a, AssociationTypes.C1C1many2one);
+                StrategyAssert.AssociationExistHasException(toC1a, AssociationTypes.C1C1many2many);
 
-                StrategyAssert.AssociationExistHasException(toC1b, C1Meta.C1WhereC1one2one);
-                StrategyAssert.AssociationExistHasException(toC1b, C1Meta.C1WhereC1one2many);
-                StrategyAssert.AssociationExistHasException(toC1b, C1Meta.C1sWhereC1many2one);
-                StrategyAssert.AssociationExistHasException(toC1b, C1Meta.C1WhereC1one2many);
+                StrategyAssert.AssociationExistHasException(toC1b, AssociationTypes.C1C1one2one);
+                StrategyAssert.AssociationExistHasException(toC1b, AssociationTypes.C1C1one2many);
+                StrategyAssert.AssociationExistHasException(toC1b, AssociationTypes.C1C1many2one);
+                StrategyAssert.AssociationExistHasException(toC1b, AssociationTypes.C1C1many2many);
 
-                StrategyAssert.AssociationGetHasException(toC1b, C1Meta.C1WhereC1one2one);
-                StrategyAssert.AssociationGetHasException(toC1b, C1Meta.C1WhereC1one2many);
-                StrategyAssert.AssociationGetHasException(toC1b, C1Meta.C1sWhereC1many2one);
-                StrategyAssert.AssociationGetHasException(toC1b, C1Meta.C1WhereC1one2many);
+                StrategyAssert.AssociationGetHasException(toC1b, AssociationTypes.C1C1one2one);
+                StrategyAssert.AssociationGetHasException(toC1b, AssociationTypes.C1C1one2many);
+                StrategyAssert.AssociationGetHasException(toC1b, AssociationTypes.C1C1many2one);
+                StrategyAssert.AssociationGetHasException(toC1b, AssociationTypes.C1C1many2many);
 
                 Assert.IsFalse(fromC1a.Strategy.IsDeleted);
                 Assert.IsTrue(toC1a.Strategy.IsDeleted);
@@ -1698,25 +1698,25 @@ namespace Allors.Adapters.Special
                 toC2a.Strategy.Delete();
                 toC2b.Strategy.Delete();
 
-                StrategyAssert.AssociationGetHasException(toC2a, C2Meta.C1WhereC2one2one);
-                StrategyAssert.AssociationGetHasException(toC2a, C2Meta.C1WhereC2one2many);
-                StrategyAssert.AssociationGetHasException(toC2a, C2Meta.C1sWhereC2many2one);
-                StrategyAssert.AssociationGetHasException(toC2a, C2Meta.C1WhereC2one2many);
+                StrategyAssert.AssociationGetHasException(toC2a, AssociationTypes.C1C2one2one);
+                StrategyAssert.AssociationGetHasException(toC2a, AssociationTypes.C1C2one2many);
+                StrategyAssert.AssociationGetHasException(toC2a, AssociationTypes.C1C2many2one);
+                StrategyAssert.AssociationGetHasException(toC2a, AssociationTypes.C1C2one2many);
 
-                StrategyAssert.AssociationExistHasException(toC2a, C2Meta.C1WhereC2one2one);
-                StrategyAssert.AssociationExistHasException(toC2a, C2Meta.C1WhereC2one2many);
-                StrategyAssert.AssociationExistHasException(toC2a, C2Meta.C1sWhereC2many2one);
-                StrategyAssert.AssociationExistHasException(toC2a, C2Meta.C1WhereC2one2many);
+                StrategyAssert.AssociationExistHasException(toC2a, AssociationTypes.C1C2one2one);
+                StrategyAssert.AssociationExistHasException(toC2a, AssociationTypes.C1C2one2many);
+                StrategyAssert.AssociationExistHasException(toC2a, AssociationTypes.C1C2many2one);
+                StrategyAssert.AssociationExistHasException(toC2a, AssociationTypes.C1C2one2many);
 
-                StrategyAssert.AssociationExistHasException(toC2b, C2Meta.C1WhereC2one2one);
-                StrategyAssert.AssociationExistHasException(toC2b, C2Meta.C1WhereC2one2many);
-                StrategyAssert.AssociationExistHasException(toC2b, C2Meta.C1sWhereC2many2one);
-                StrategyAssert.AssociationExistHasException(toC2b, C2Meta.C1WhereC2one2many);
+                StrategyAssert.AssociationExistHasException(toC2b, AssociationTypes.C1C2one2one);
+                StrategyAssert.AssociationExistHasException(toC2b, AssociationTypes.C1C2one2many);
+                StrategyAssert.AssociationExistHasException(toC2b, AssociationTypes.C1C2many2one);
+                StrategyAssert.AssociationExistHasException(toC2b, AssociationTypes.C1C2one2many);
 
-                StrategyAssert.AssociationGetHasException(toC2b, C2Meta.C1WhereC2one2one);
-                StrategyAssert.AssociationGetHasException(toC2b, C2Meta.C1WhereC2one2many);
-                StrategyAssert.AssociationGetHasException(toC2b, C2Meta.C1sWhereC2many2one);
-                StrategyAssert.AssociationGetHasException(toC2b, C2Meta.C1WhereC2one2many);
+                StrategyAssert.AssociationGetHasException(toC2b, AssociationTypes.C1C2one2one);
+                StrategyAssert.AssociationGetHasException(toC2b, AssociationTypes.C1C2one2many);
+                StrategyAssert.AssociationGetHasException(toC2b, AssociationTypes.C1C2many2one);
+                StrategyAssert.AssociationGetHasException(toC2b, AssociationTypes.C1C2one2many);
 
                 Assert.IsFalse(fromC1a.Strategy.IsDeleted);
                 Assert.IsTrue(toC2a.Strategy.IsDeleted);
@@ -1770,25 +1770,25 @@ namespace Allors.Adapters.Special
 
                 this.Session.Commit();
 
-                StrategyAssert.AssociationGetHasException(toC2a, C2Meta.C1WhereC2one2one);
-                StrategyAssert.AssociationGetHasException(toC2a, C2Meta.C1WhereC2one2many);
-                StrategyAssert.AssociationGetHasException(toC2a, C2Meta.C1sWhereC2many2one);
-                StrategyAssert.AssociationGetHasException(toC2a, C2Meta.C1WhereC2one2many);
+                StrategyAssert.AssociationGetHasException(toC2a, AssociationTypes.C1C2one2one);
+                StrategyAssert.AssociationGetHasException(toC2a, AssociationTypes.C1C2one2many);
+                StrategyAssert.AssociationGetHasException(toC2a, AssociationTypes.C1C2many2one);
+                StrategyAssert.AssociationGetHasException(toC2a, AssociationTypes.C1C2one2many);
 
-                StrategyAssert.AssociationExistHasException(toC2a, C2Meta.C1WhereC2one2one);
-                StrategyAssert.AssociationExistHasException(toC2a, C2Meta.C1WhereC2one2many);
-                StrategyAssert.AssociationExistHasException(toC2a, C2Meta.C1sWhereC2many2one);
-                StrategyAssert.AssociationExistHasException(toC2a, C2Meta.C1WhereC2one2many);
+                StrategyAssert.AssociationExistHasException(toC2a, AssociationTypes.C1C2one2one);
+                StrategyAssert.AssociationExistHasException(toC2a, AssociationTypes.C1C2one2many);
+                StrategyAssert.AssociationExistHasException(toC2a, AssociationTypes.C1C2many2one);
+                StrategyAssert.AssociationExistHasException(toC2a, AssociationTypes.C1C2one2many);
 
-                StrategyAssert.AssociationExistHasException(toC2b, C2Meta.C1WhereC2one2one);
-                StrategyAssert.AssociationExistHasException(toC2b, C2Meta.C1WhereC2one2many);
-                StrategyAssert.AssociationExistHasException(toC2b, C2Meta.C1sWhereC2many2one);
-                StrategyAssert.AssociationExistHasException(toC2b, C2Meta.C1WhereC2one2many);
+                StrategyAssert.AssociationExistHasException(toC2b, AssociationTypes.C1C2one2one);
+                StrategyAssert.AssociationExistHasException(toC2b, AssociationTypes.C1C2one2many);
+                StrategyAssert.AssociationExistHasException(toC2b, AssociationTypes.C1C2many2one);
+                StrategyAssert.AssociationExistHasException(toC2b, AssociationTypes.C1C2one2many);
 
-                StrategyAssert.AssociationGetHasException(toC2b, C2Meta.C1WhereC2one2one);
-                StrategyAssert.AssociationGetHasException(toC2b, C2Meta.C1WhereC2one2many);
-                StrategyAssert.AssociationGetHasException(toC2b, C2Meta.C1sWhereC2many2one);
-                StrategyAssert.AssociationGetHasException(toC2b, C2Meta.C1WhereC2one2many);
+                StrategyAssert.AssociationGetHasException(toC2b, AssociationTypes.C1C2one2one);
+                StrategyAssert.AssociationGetHasException(toC2b, AssociationTypes.C1C2one2many);
+                StrategyAssert.AssociationGetHasException(toC2b, AssociationTypes.C1C2many2one);
+                StrategyAssert.AssociationGetHasException(toC2b, AssociationTypes.C1C2one2many);
 
                 Assert.IsFalse(fromC1a.Strategy.IsDeleted);
                 Assert.IsTrue(toC2a.Strategy.IsDeleted);
@@ -1936,15 +1936,15 @@ namespace Allors.Adapters.Special
                 fromC1a.Strategy.Delete();
                 fromC1b.Strategy.Delete();
 
-                StrategyAssert.RoleExistHasException(fromC1a, C1Meta.C1C1one2one);
-                StrategyAssert.RoleExistHasException(fromC1a, C1Meta.C1C1one2many);
-                StrategyAssert.RoleExistHasException(fromC1a, C1Meta.C1C1many2one);
-                StrategyAssert.RoleExistHasException(fromC1a, C1Meta.C1C1many2many);
+                StrategyAssert.RoleExistHasException(fromC1a, RoleTypes.C1C1one2one);
+                StrategyAssert.RoleExistHasException(fromC1a, RoleTypes.C1C1one2many);
+                StrategyAssert.RoleExistHasException(fromC1a, RoleTypes.C1C1many2one);
+                StrategyAssert.RoleExistHasException(fromC1a, RoleTypes.C1C1many2many);
 
-                StrategyAssert.RoleGetHasException(fromC1a, C1Meta.C1C1one2one);
-                StrategyAssert.RoleGetHasException(fromC1a, C1Meta.C1C1one2many);
-                StrategyAssert.RoleGetHasException(fromC1a, C1Meta.C1C1many2one);
-                StrategyAssert.RoleGetHasException(fromC1a, C1Meta.C1C1many2many);
+                StrategyAssert.RoleGetHasException(fromC1a, RoleTypes.C1C1one2one);
+                StrategyAssert.RoleGetHasException(fromC1a, RoleTypes.C1C1one2many);
+                StrategyAssert.RoleGetHasException(fromC1a, RoleTypes.C1C1many2one);
+                StrategyAssert.RoleGetHasException(fromC1a, RoleTypes.C1C1many2many);
 
                 Assert.IsTrue(fromC1a.Strategy.IsDeleted);
                 Assert.IsTrue(fromC1b.Strategy.IsDeleted);
@@ -1983,15 +1983,15 @@ namespace Allors.Adapters.Special
                 fromC1a.Strategy.Delete();
                 fromC1b.Strategy.Delete();
 
-                StrategyAssert.RoleExistHasException(fromC1a, C1Meta.C1C2one2one);
-                StrategyAssert.RoleExistHasException(fromC1a, C1Meta.C1C2one2many);
-                StrategyAssert.RoleExistHasException(fromC1a, C1Meta.C1C2many2one);
-                StrategyAssert.RoleExistHasException(fromC1a, C1Meta.C1C2many2many);
+                StrategyAssert.RoleExistHasException(fromC1a, RoleTypes.C1C2one2one);
+                StrategyAssert.RoleExistHasException(fromC1a, RoleTypes.C1C2one2many);
+                StrategyAssert.RoleExistHasException(fromC1a, RoleTypes.C1C2many2one);
+                StrategyAssert.RoleExistHasException(fromC1a, RoleTypes.C1C2many2many);
 
-                StrategyAssert.RoleGetHasException(fromC1a, C1Meta.C1C2one2one);
-                StrategyAssert.RoleGetHasException(fromC1a, C1Meta.C1C2one2many);
-                StrategyAssert.RoleGetHasException(fromC1a, C1Meta.C1C2many2one);
-                StrategyAssert.RoleGetHasException(fromC1a, C1Meta.C1C2many2many);
+                StrategyAssert.RoleGetHasException(fromC1a, RoleTypes.C1C2one2one);
+                StrategyAssert.RoleGetHasException(fromC1a, RoleTypes.C1C2one2many);
+                StrategyAssert.RoleGetHasException(fromC1a, RoleTypes.C1C2many2one);
+                StrategyAssert.RoleGetHasException(fromC1a, RoleTypes.C1C2many2many);
 
                 Assert.IsTrue(fromC1a.Strategy.IsDeleted);
                 Assert.IsTrue(fromC1b.Strategy.IsDeleted);
@@ -2033,8 +2033,8 @@ namespace Allors.Adapters.Special
 
                 this.Session.Commit();
 
-                StrategyAssert.RoleGetHasException(fromC1a, C1Meta.C1C1one2one);
-                StrategyAssert.RoleExistHasException(fromC1a, C1Meta.C1C1one2one);
+                StrategyAssert.RoleGetHasException(fromC1a, RoleTypes.C1C1one2one);
+                StrategyAssert.RoleExistHasException(fromC1a, RoleTypes.C1C1one2one);
 
                 Assert.IsTrue(fromC1a.Strategy.IsDeleted);
                 Assert.IsFalse(toC1a.Strategy.IsDeleted);
@@ -2073,8 +2073,8 @@ namespace Allors.Adapters.Special
 
                 this.Session.Commit();
 
-                StrategyAssert.RoleGetHasException(fromC1a, C1Meta.C1C2one2one);
-                StrategyAssert.RoleExistHasException(fromC1a, C1Meta.C1C2one2one);
+                StrategyAssert.RoleGetHasException(fromC1a, RoleTypes.C1C2one2one);
+                StrategyAssert.RoleExistHasException(fromC1a, RoleTypes.C1C2one2one);
 
                 Assert.IsTrue(fromC1a.Strategy.IsDeleted);
                 Assert.IsFalse(toC2a.Strategy.IsDeleted);
@@ -2117,25 +2117,25 @@ namespace Allors.Adapters.Special
 
                 this.Session.Rollback();
 
-                StrategyAssert.RoleGetHasException(fromC1a, C1Meta.C1C1one2one);
-                StrategyAssert.RoleGetHasException(fromC1a, C1Meta.C1C1one2many);
-                StrategyAssert.RoleGetHasException(fromC1a, C1Meta.C1C1many2one);
-                StrategyAssert.RoleGetHasException(fromC1a, C1Meta.C1C1one2many);
+                StrategyAssert.RoleGetHasException(fromC1a, RoleTypes.C1C1one2one);
+                StrategyAssert.RoleGetHasException(fromC1a, RoleTypes.C1C1one2many);
+                StrategyAssert.RoleGetHasException(fromC1a, RoleTypes.C1C1many2one);
+                StrategyAssert.RoleGetHasException(fromC1a, RoleTypes.C1C1many2many);
 
-                StrategyAssert.RoleExistHasException(fromC1a, C1Meta.C1C1one2one);
-                StrategyAssert.RoleExistHasException(fromC1a, C1Meta.C1C1one2many);
-                StrategyAssert.RoleExistHasException(fromC1a, C1Meta.C1C1many2one);
-                StrategyAssert.RoleExistHasException(fromC1a, C1Meta.C1C1one2many);
+                StrategyAssert.RoleExistHasException(fromC1a, RoleTypes.C1C1one2one);
+                StrategyAssert.RoleExistHasException(fromC1a, RoleTypes.C1C1one2many);
+                StrategyAssert.RoleExistHasException(fromC1a, RoleTypes.C1C1many2one);
+                StrategyAssert.RoleExistHasException(fromC1a, RoleTypes.C1C1many2many);
 
-                StrategyAssert.RoleExistHasException(fromC1b, C1Meta.C1C1one2one);
-                StrategyAssert.RoleExistHasException(fromC1b, C1Meta.C1C1one2many);
-                StrategyAssert.RoleExistHasException(fromC1b, C1Meta.C1C1many2one);
-                StrategyAssert.RoleExistHasException(fromC1b, C1Meta.C1C1one2many);
+                StrategyAssert.RoleExistHasException(fromC1b, RoleTypes.C1C1one2one);
+                StrategyAssert.RoleExistHasException(fromC1b, RoleTypes.C1C1one2many);
+                StrategyAssert.RoleExistHasException(fromC1b, RoleTypes.C1C1many2one);
+                StrategyAssert.RoleExistHasException(fromC1b, RoleTypes.C1C1many2many);
 
-                StrategyAssert.RoleGetHasException(fromC1b, C1Meta.C1C1one2one);
-                StrategyAssert.RoleGetHasException(fromC1b, C1Meta.C1C1one2many);
-                StrategyAssert.RoleGetHasException(fromC1b, C1Meta.C1C1many2one);
-                StrategyAssert.RoleGetHasException(fromC1b, C1Meta.C1C1one2many);
+                StrategyAssert.RoleGetHasException(fromC1b, RoleTypes.C1C1one2one);
+                StrategyAssert.RoleGetHasException(fromC1b, RoleTypes.C1C1one2many);
+                StrategyAssert.RoleGetHasException(fromC1b, RoleTypes.C1C1many2one);
+                StrategyAssert.RoleGetHasException(fromC1b, RoleTypes.C1C1many2many);
 
                 Assert.IsTrue(fromC1a.Strategy.IsDeleted);
                 Assert.IsTrue(fromC1b.Strategy.IsDeleted);
@@ -2222,25 +2222,25 @@ namespace Allors.Adapters.Special
 
                 this.Session.Rollback();
 
-                StrategyAssert.RoleGetHasException(fromC1a, C1Meta.C1C2one2one);
-                StrategyAssert.RoleGetHasException(fromC1a, C1Meta.C1C2one2many);
-                StrategyAssert.RoleGetHasException(fromC1a, C1Meta.C1C2many2one);
-                StrategyAssert.RoleGetHasException(fromC1a, C1Meta.C1C2one2many);
+                StrategyAssert.RoleGetHasException(fromC1a, RoleTypes.C1C2one2one);
+                StrategyAssert.RoleGetHasException(fromC1a, RoleTypes.C1C2one2many);
+                StrategyAssert.RoleGetHasException(fromC1a, RoleTypes.C1C2many2one);
+                StrategyAssert.RoleGetHasException(fromC1a, RoleTypes.C1C2one2many);
 
-                StrategyAssert.RoleExistHasException(fromC1a, C1Meta.C1C2one2one);
-                StrategyAssert.RoleExistHasException(fromC1a, C1Meta.C1C2one2many);
-                StrategyAssert.RoleExistHasException(fromC1a, C1Meta.C1C2many2one);
-                StrategyAssert.RoleExistHasException(fromC1a, C1Meta.C1C2one2many);
+                StrategyAssert.RoleExistHasException(fromC1a, RoleTypes.C1C2one2one);
+                StrategyAssert.RoleExistHasException(fromC1a, RoleTypes.C1C2one2many);
+                StrategyAssert.RoleExistHasException(fromC1a, RoleTypes.C1C2many2one);
+                StrategyAssert.RoleExistHasException(fromC1a, RoleTypes.C1C2one2many);
 
-                StrategyAssert.RoleExistHasException(fromC1b, C1Meta.C1C2one2one);
-                StrategyAssert.RoleExistHasException(fromC1b, C1Meta.C1C2one2many);
-                StrategyAssert.RoleExistHasException(fromC1b, C1Meta.C1C2many2one);
-                StrategyAssert.RoleExistHasException(fromC1b, C1Meta.C1C2one2many);
+                StrategyAssert.RoleExistHasException(fromC1b, RoleTypes.C1C2one2one);
+                StrategyAssert.RoleExistHasException(fromC1b, RoleTypes.C1C2one2many);
+                StrategyAssert.RoleExistHasException(fromC1b, RoleTypes.C1C2many2one);
+                StrategyAssert.RoleExistHasException(fromC1b, RoleTypes.C1C2one2many);
 
-                StrategyAssert.RoleGetHasException(fromC1b, C1Meta.C1C2one2one);
-                StrategyAssert.RoleGetHasException(fromC1b, C1Meta.C1C2one2many);
-                StrategyAssert.RoleGetHasException(fromC1b, C1Meta.C1C2many2one);
-                StrategyAssert.RoleGetHasException(fromC1b, C1Meta.C1C2one2many);
+                StrategyAssert.RoleGetHasException(fromC1b, RoleTypes.C1C2one2one);
+                StrategyAssert.RoleGetHasException(fromC1b, RoleTypes.C1C2one2many);
+                StrategyAssert.RoleGetHasException(fromC1b, RoleTypes.C1C2many2one);
+                StrategyAssert.RoleGetHasException(fromC1b, RoleTypes.C1C2one2many);
 
                 Assert.IsTrue(fromC1a.Strategy.IsDeleted);
                 Assert.IsTrue(fromC1b.Strategy.IsDeleted);
@@ -2331,15 +2331,15 @@ namespace Allors.Adapters.Special
 
                 Assert.AreEqual(0, toC1a.C1sWhereC1many2one.Count);
 
-                StrategyAssert.RoleExistHasException(fromC1a, C1Meta.C1C1one2one);
-                StrategyAssert.RoleExistHasException(fromC1a, C1Meta.C1C1one2many);
-                StrategyAssert.RoleExistHasException(fromC1a, C1Meta.C1C1many2one);
-                StrategyAssert.RoleExistHasException(fromC1a, C1Meta.C1C1many2many);
+                StrategyAssert.RoleExistHasException(fromC1a, RoleTypes.C1C1one2one);
+                StrategyAssert.RoleExistHasException(fromC1a, RoleTypes.C1C1one2many);
+                StrategyAssert.RoleExistHasException(fromC1a, RoleTypes.C1C1many2one);
+                StrategyAssert.RoleExistHasException(fromC1a, RoleTypes.C1C1many2many);
 
-                StrategyAssert.RoleGetHasException(fromC1a, C1Meta.C1C1one2one);
-                StrategyAssert.RoleGetHasException(fromC1a, C1Meta.C1C1one2many);
-                StrategyAssert.RoleGetHasException(fromC1a, C1Meta.C1C1many2one);
-                StrategyAssert.RoleGetHasException(fromC1a, C1Meta.C1C1many2many);
+                StrategyAssert.RoleGetHasException(fromC1a, RoleTypes.C1C1one2one);
+                StrategyAssert.RoleGetHasException(fromC1a, RoleTypes.C1C1one2many);
+                StrategyAssert.RoleGetHasException(fromC1a, RoleTypes.C1C1many2one);
+                StrategyAssert.RoleGetHasException(fromC1a, RoleTypes.C1C1many2many);
 
                 Assert.IsTrue(fromC1a.Strategy.IsDeleted);
                 Assert.IsTrue(fromC1b.Strategy.IsDeleted);
@@ -2382,8 +2382,8 @@ namespace Allors.Adapters.Special
 
                 this.Session.Commit();
 
-                StrategyAssert.RoleGetHasException(fromC1a, C1Meta.C1C1one2one);
-                StrategyAssert.RoleExistHasException(fromC1a, C1Meta.C1C1one2one);
+                StrategyAssert.RoleGetHasException(fromC1a, RoleTypes.C1C1one2one);
+                StrategyAssert.RoleExistHasException(fromC1a, RoleTypes.C1C1one2one);
 
                 Assert.IsTrue(fromC1a.Strategy.IsDeleted);
                 Assert.IsFalse(toC1a.Strategy.IsDeleted);
@@ -2427,25 +2427,25 @@ namespace Allors.Adapters.Special
 
                 this.Session.Rollback();
 
-                StrategyAssert.RoleGetHasException(fromC1a, C1Meta.C1C1one2one);
-                StrategyAssert.RoleGetHasException(fromC1a, C1Meta.C1C1one2many);
-                StrategyAssert.RoleGetHasException(fromC1a, C1Meta.C1C1many2one);
-                StrategyAssert.RoleGetHasException(fromC1a, C1Meta.C1C1one2many);
+                StrategyAssert.RoleGetHasException(fromC1a, RoleTypes.C1C1one2one);
+                StrategyAssert.RoleGetHasException(fromC1a, RoleTypes.C1C1one2many);
+                StrategyAssert.RoleGetHasException(fromC1a, RoleTypes.C1C1many2one);
+                StrategyAssert.RoleGetHasException(fromC1a, RoleTypes.C1C1many2many);
 
-                StrategyAssert.RoleExistHasException(fromC1a, C1Meta.C1C1one2one);
-                StrategyAssert.RoleExistHasException(fromC1a, C1Meta.C1C1one2many);
-                StrategyAssert.RoleExistHasException(fromC1a, C1Meta.C1C1many2one);
-                StrategyAssert.RoleExistHasException(fromC1a, C1Meta.C1C1one2many);
+                StrategyAssert.RoleExistHasException(fromC1a, RoleTypes.C1C1one2one);
+                StrategyAssert.RoleExistHasException(fromC1a, RoleTypes.C1C1one2many);
+                StrategyAssert.RoleExistHasException(fromC1a, RoleTypes.C1C1many2one);
+                StrategyAssert.RoleExistHasException(fromC1a, RoleTypes.C1C1many2many);
 
-                StrategyAssert.RoleExistHasException(fromC1b, C1Meta.C1C1one2one);
-                StrategyAssert.RoleExistHasException(fromC1b, C1Meta.C1C1one2many);
-                StrategyAssert.RoleExistHasException(fromC1b, C1Meta.C1C1many2one);
-                StrategyAssert.RoleExistHasException(fromC1b, C1Meta.C1C1one2many);
+                StrategyAssert.RoleExistHasException(fromC1b, RoleTypes.C1C1one2one);
+                StrategyAssert.RoleExistHasException(fromC1b, RoleTypes.C1C1one2many);
+                StrategyAssert.RoleExistHasException(fromC1b, RoleTypes.C1C1many2one);
+                StrategyAssert.RoleExistHasException(fromC1b, RoleTypes.C1C1many2many);
 
-                StrategyAssert.RoleGetHasException(fromC1b, C1Meta.C1C1one2one);
-                StrategyAssert.RoleGetHasException(fromC1b, C1Meta.C1C1one2many);
-                StrategyAssert.RoleGetHasException(fromC1b, C1Meta.C1C1many2one);
-                StrategyAssert.RoleGetHasException(fromC1b, C1Meta.C1C1one2many);
+                StrategyAssert.RoleGetHasException(fromC1b, RoleTypes.C1C1one2one);
+                StrategyAssert.RoleGetHasException(fromC1b, RoleTypes.C1C1one2many);
+                StrategyAssert.RoleGetHasException(fromC1b, RoleTypes.C1C1many2one);
+                StrategyAssert.RoleGetHasException(fromC1b, RoleTypes.C1C1many2many);
 
                 Assert.IsTrue(fromC1a.Strategy.IsDeleted);
                 Assert.IsTrue(fromC1b.Strategy.IsDeleted);
@@ -2538,15 +2538,15 @@ namespace Allors.Adapters.Special
 
                 Assert.AreEqual(0, toC2a.C1sWhereC2many2one.Count);
 
-                StrategyAssert.RoleExistHasException(fromC1a, C1Meta.C1C2one2one);
-                StrategyAssert.RoleExistHasException(fromC1a, C1Meta.C1C2one2many);
-                StrategyAssert.RoleExistHasException(fromC1a, C1Meta.C1C2many2one);
-                StrategyAssert.RoleExistHasException(fromC1a, C1Meta.C1C2many2many);
+                StrategyAssert.RoleExistHasException(fromC1a, RoleTypes.C1C2one2one);
+                StrategyAssert.RoleExistHasException(fromC1a, RoleTypes.C1C2one2many);
+                StrategyAssert.RoleExistHasException(fromC1a, RoleTypes.C1C2many2one);
+                StrategyAssert.RoleExistHasException(fromC1a, RoleTypes.C1C2many2many);
 
-                StrategyAssert.RoleGetHasException(fromC1a, C1Meta.C1C2one2one);
-                StrategyAssert.RoleGetHasException(fromC1a, C1Meta.C1C2one2many);
-                StrategyAssert.RoleGetHasException(fromC1a, C1Meta.C1C2many2one);
-                StrategyAssert.RoleGetHasException(fromC1a, C1Meta.C1C2many2many);
+                StrategyAssert.RoleGetHasException(fromC1a, RoleTypes.C1C2one2one);
+                StrategyAssert.RoleGetHasException(fromC1a, RoleTypes.C1C2one2many);
+                StrategyAssert.RoleGetHasException(fromC1a, RoleTypes.C1C2many2one);
+                StrategyAssert.RoleGetHasException(fromC1a, RoleTypes.C1C2many2many);
 
                 Assert.IsTrue(fromC1a.Strategy.IsDeleted);
                 Assert.IsTrue(fromC1b.Strategy.IsDeleted);
@@ -2589,8 +2589,8 @@ namespace Allors.Adapters.Special
 
                 this.Session.Commit();
 
-                StrategyAssert.RoleGetHasException(fromC1a, C1Meta.C1C2one2one);
-                StrategyAssert.RoleExistHasException(fromC1a, C1Meta.C1C2one2one);
+                StrategyAssert.RoleGetHasException(fromC1a, RoleTypes.C1C2one2one);
+                StrategyAssert.RoleExistHasException(fromC1a, RoleTypes.C1C2one2one);
 
                 Assert.IsTrue(fromC1a.Strategy.IsDeleted);
                 Assert.IsFalse(toC2a.Strategy.IsDeleted);
@@ -2634,25 +2634,25 @@ namespace Allors.Adapters.Special
 
                 this.Session.Rollback();
 
-                StrategyAssert.RoleGetHasException(fromC1a, C1Meta.C1C2one2one);
-                StrategyAssert.RoleGetHasException(fromC1a, C1Meta.C1C2one2many);
-                StrategyAssert.RoleGetHasException(fromC1a, C1Meta.C1C2many2one);
-                StrategyAssert.RoleGetHasException(fromC1a, C1Meta.C1C2one2many);
+                StrategyAssert.RoleGetHasException(fromC1a, RoleTypes.C1C2one2one);
+                StrategyAssert.RoleGetHasException(fromC1a, RoleTypes.C1C2one2many);
+                StrategyAssert.RoleGetHasException(fromC1a, RoleTypes.C1C2many2one);
+                StrategyAssert.RoleGetHasException(fromC1a, RoleTypes.C1C2many2many);
 
-                StrategyAssert.RoleExistHasException(fromC1a, C1Meta.C1C2one2one);
-                StrategyAssert.RoleExistHasException(fromC1a, C1Meta.C1C2one2many);
-                StrategyAssert.RoleExistHasException(fromC1a, C1Meta.C1C2many2one);
-                StrategyAssert.RoleExistHasException(fromC1a, C1Meta.C1C2one2many);
+                StrategyAssert.RoleExistHasException(fromC1a, RoleTypes.C1C2one2one);
+                StrategyAssert.RoleExistHasException(fromC1a, RoleTypes.C1C2one2many);
+                StrategyAssert.RoleExistHasException(fromC1a, RoleTypes.C1C2many2one);
+                StrategyAssert.RoleExistHasException(fromC1a, RoleTypes.C1C2many2many);
 
-                StrategyAssert.RoleExistHasException(fromC1b, C1Meta.C1C2one2one);
-                StrategyAssert.RoleExistHasException(fromC1b, C1Meta.C1C2one2many);
-                StrategyAssert.RoleExistHasException(fromC1b, C1Meta.C1C2many2one);
-                StrategyAssert.RoleExistHasException(fromC1b, C1Meta.C1C2one2many);
+                StrategyAssert.RoleExistHasException(fromC1b, RoleTypes.C1C2one2one);
+                StrategyAssert.RoleExistHasException(fromC1b, RoleTypes.C1C2one2many);
+                StrategyAssert.RoleExistHasException(fromC1b, RoleTypes.C1C2many2one);
+                StrategyAssert.RoleExistHasException(fromC1b, RoleTypes.C1C2many2many);
 
-                StrategyAssert.RoleGetHasException(fromC1b, C1Meta.C1C2one2one);
-                StrategyAssert.RoleGetHasException(fromC1b, C1Meta.C1C2one2many);
-                StrategyAssert.RoleGetHasException(fromC1b, C1Meta.C1C2many2one);
-                StrategyAssert.RoleGetHasException(fromC1b, C1Meta.C1C2one2many);
+                StrategyAssert.RoleGetHasException(fromC1b, RoleTypes.C1C2one2one);
+                StrategyAssert.RoleGetHasException(fromC1b, RoleTypes.C1C2one2many);
+                StrategyAssert.RoleGetHasException(fromC1b, RoleTypes.C1C2many2one);
+                StrategyAssert.RoleGetHasException(fromC1b, RoleTypes.C1C2many2many);
 
                 Assert.IsTrue(fromC1a.Strategy.IsDeleted);
                 Assert.IsTrue(fromC1b.Strategy.IsDeleted);
@@ -2964,7 +2964,7 @@ namespace Allors.Adapters.Special
 
                 C1 subject = C1.Instantiate(this.Session, id);
                 subject.Strategy.Delete();
-                StrategyAssert.RoleExistHasException(proxy, C1Meta.C1AllorsString);
+                StrategyAssert.RoleExistHasException(proxy, RoleTypes.C1AllorsString);
 
                 this.Session.Commit();
 
@@ -2974,7 +2974,7 @@ namespace Allors.Adapters.Special
 
                 subject = C1.Instantiate(this.Session, id);
                 subject.Strategy.Delete();
-                StrategyAssert.RoleGetHasException(proxy, C1Meta.C1AllorsString);
+                StrategyAssert.RoleGetHasException(proxy, RoleTypes.C1AllorsString);
 
                 this.Session.Commit();
 
@@ -2989,7 +2989,7 @@ namespace Allors.Adapters.Special
                 this.Session.Commit();
 
                 subject = C1.Instantiate(this.Session, id);
-                StrategyAssert.RoleExistHasException(proxy, C1Meta.C1AllorsString);
+                StrategyAssert.RoleExistHasException(proxy, RoleTypes.C1AllorsString);
 
                 this.Session.Commit();
 
@@ -3002,7 +3002,7 @@ namespace Allors.Adapters.Special
                 this.Session.Commit();
 
                 subject = C1.Instantiate(this.Session, id);
-                StrategyAssert.RoleGetHasException(proxy, C1Meta.C1AllorsString);
+                StrategyAssert.RoleGetHasException(proxy, RoleTypes.C1AllorsString);
 
                 this.Session.Commit();
 
@@ -3222,11 +3222,11 @@ namespace Allors.Adapters.Special
                     long aLongId = long.Parse(a.Strategy.ObjectId.ToString());
                     if (a.Strategy.IsNewInWorkspace)
                     {
-                        b = (C1)session.Insert(C1Meta.ObjectType, (aLongId - 1).ToString());
+                        b = (C1)session.Insert(Classes.C1, (aLongId - 1).ToString());
                     }
                     else
                     {
-                        b = (C1)session.Insert(C1Meta.ObjectType, (aLongId + 1).ToString());
+                        b = (C1)session.Insert(Classes.C1, (aLongId + 1).ToString());
                     }
 
                     C1 c = C1.Create(this.Session);
@@ -3241,7 +3241,7 @@ namespace Allors.Adapters.Special
                         var exceptionThrown = false;
                         try
                         {
-                            session.Insert(C1Meta.ObjectType, id);
+                            session.Insert(Classes.C1, id);
                         }
                         catch
                         {
@@ -3432,18 +3432,18 @@ namespace Allors.Adapters.Special
 
                 StrategyAssert.RolesExistExclusive(
                     fromProxy,
-                    C1Meta.C1AllorsString,
-                    C1Meta.C1C1one2one,
-                    C1Meta.C1C1many2one,
-                    C1Meta.C1C1one2many,
-                    C1Meta.C1C1many2many);
+                    RoleTypes.C1AllorsString,
+                    RoleTypes.C1C1one2one,
+                    RoleTypes.C1C1many2one,
+                    RoleTypes.C1C1one2many,
+                    RoleTypes.C1C1many2many);
 
                 StrategyAssert.AssociationsExistExclusive(
                     toProxy,
-                    C1Meta.C1WhereC1one2one,
-                    C1Meta.C1sWhereC1many2one,
-                    C1Meta.C1WhereC1one2many,
-                    C1Meta.C1sWhereC1many2many);
+                    AssociationTypes.C1C1one2one,
+                    AssociationTypes.C1C1many2one,
+                    AssociationTypes.C1C1one2many,
+                    AssociationTypes.C1C1many2many);
 
                 Assert.AreEqual("a", fromProxy.C1AllorsString);
                 Assert.AreEqual(toProxy, fromProxy.C1C1one2one);
@@ -3606,18 +3606,18 @@ namespace Allors.Adapters.Special
 
                 StrategyAssert.RolesExistExclusive(
                     fromProxy,
-                    C1Meta.C1AllorsString,
-                    C1Meta.C1C1one2one,
-                    C1Meta.C1C1many2one,
-                    C1Meta.C1C1one2many,
-                    C1Meta.C1C1many2many);
+                    RoleTypes.C1AllorsString,
+                    RoleTypes.C1C1one2one,
+                    RoleTypes.C1C1many2one,
+                    RoleTypes.C1C1one2many,
+                    RoleTypes.C1C1many2many);
 
                 StrategyAssert.AssociationsExistExclusive(
                     toProxy,
-                    C1Meta.C1WhereC1one2one,
-                    C1Meta.C1sWhereC1many2one,
-                    C1Meta.C1WhereC1one2many,
-                    C1Meta.C1sWhereC1many2many);
+                    AssociationTypes.C1C1one2one,
+                    AssociationTypes.C1C1many2one,
+                    AssociationTypes.C1C1one2many,
+                    AssociationTypes.C1C1many2many);
 
                 Assert.AreEqual("a", fromProxy.C1AllorsString);
                 Assert.AreEqual(toProxy, fromProxy.C1C1one2one);
@@ -4075,7 +4075,7 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
                 init();
 
                 const int ObjectCount = 10;
-                var allorsObjects = this.Session.Create(CompanyMeta.ObjectType, ObjectCount);
+                var allorsObjects = this.Session.Create(Classes.Company, ObjectCount);
                 var ids = new string[ObjectCount];
                 for (var i = 0; i < ObjectCount; i++)
                 {
@@ -4135,12 +4135,12 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
 
                 // TODO: Move to other tests
                 var withoutValueRoles = ClassWithoutUnitRoles.Create(this.Session);
-                var withoutValueRolesClone = (ClassWithoutUnitRoles)this.GetExtent(ClassWithoutUnitRolesMeta.ObjectType)[0];
+                var withoutValueRolesClone = (ClassWithoutUnitRoles)this.GetExtent(Classes.ClassWithoutUnitRoles)[0];
 
                 Assert.AreEqual(withoutValueRoles, withoutValueRolesClone);
 
                 var withoutRoles = ClassWithoutRoles.Create(this.Session);
-                var withoutRolesClone = (ClassWithoutRoles)this.GetExtent(ClassWithoutRolesMeta.ObjectType)[0];
+                var withoutRolesClone = (ClassWithoutRoles)this.GetExtent(Classes.ClassWithoutRoles)[0];
 
                 Assert.AreEqual(withoutRoles, withoutRolesClone);
             }
@@ -4170,16 +4170,16 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
 
                 var switchC1A = (C1)this.Session.Instantiate(c1A.Id.ToString());
 
-                Assert.AreEqual(C1Meta.ObjectType, switchC1A.Strategy.ObjectType);
+                Assert.AreEqual(Classes.C1, switchC1A.Strategy.ObjectType);
 
                 var switchC2A = switchC1A.C1I12one2one;
 
-                Assert.AreEqual(C2Meta.ObjectType, switchC2A.Strategy.ObjectType);
+                Assert.AreEqual(Classes.C2, switchC2A.Strategy.ObjectType);
 
                 var switchC2BC = switchC1A.C1I12one2manies;
 
-                Assert.AreEqual(C2Meta.ObjectType, switchC2BC[0].Strategy.ObjectType);
-                Assert.AreEqual(C2Meta.ObjectType, switchC2BC[1].Strategy.ObjectType);
+                Assert.AreEqual(Classes.C2, switchC2BC[0].Strategy.ObjectType);
+                Assert.AreEqual(Classes.C2, switchC2BC[1].Strategy.ObjectType);
 
                 this.Session.Commit();
 

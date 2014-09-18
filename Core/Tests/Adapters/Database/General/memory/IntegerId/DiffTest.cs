@@ -19,10 +19,10 @@
 // <summary>Defines the Default type.</summary>
 //------------------------------------------------------------------------------------------------
 
-namespace Allors1.Adapters.General.Memory.Connected.IntegerId
+namespace Allors.Adapters.General.Memory.Connected.IntegerId
 {
-    using Allors1;
-    using Allors1.Meta;
+    using Allors;
+    using Allors.Meta;
 
     using NUnit.Framework;
 

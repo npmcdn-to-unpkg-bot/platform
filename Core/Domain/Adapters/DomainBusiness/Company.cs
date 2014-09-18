@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Domain
+namespace Allors.Domain
 {
     using Allors;
 
@@ -26,12 +26,12 @@ namespace Domain
     {
         public static Company Create(ISession session)
         {
-            return (Company)session.Create(CompanyMeta.ObjectType);
+            return (Company)session.Create(Meta.ObjectType);
         }
 
         public static Company[] Create(ISession session, int count)
         {
-            return (Company[])session.Create(CompanyMeta.ObjectType, count);
+            return (Company[])session.Create(Meta.ObjectType, count);
         }
 
         public static Company[] Instantiate(ISession session, string[] ids)
@@ -41,7 +41,7 @@ namespace Domain
 
         public static Company[] Extent(ISession session)
         {
-            return (Company[])session.Extent(CompanyMeta.ObjectType).ToArray();
+            return (Company[])session.Extent(Meta.ObjectType).ToArray();
         }
 
         public static Company Create(ISession session, string name)

@@ -19,11 +19,11 @@
 // <summary>Defines the Default type.</summary>
 //------------------------------------------------------------------------------------------------
 
-namespace Allors1.Adapters.General.Memory.Connected.LongId
+namespace Allors.Adapters.General.Memory.Connected.LongId
 {
-    using Allors1.Adapters;
+    using Allors.Adapters;
 
-    using Allors1.Configuration;
+    using Allors.Configuration;
 
     public class Profile : General.Profile
     {

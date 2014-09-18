@@ -294,6 +294,7 @@ namespace Allors.Meta
 
             set
             {
+                this.MetaPopulation.AssertUnlocked();
                 this.scale = value;
                 this.MetaPopulation.Stale();
             }
@@ -309,6 +310,7 @@ namespace Allors.Meta
 
             set
             {
+                this.MetaPopulation.AssertUnlocked();
                 this.precision = value;
                 this.MetaPopulation.Stale();
             }
@@ -318,13 +320,13 @@ namespace Allors.Meta
         {
             get
             {
-                this.MetaPopulation.AssertUnlocked();
                 this.MetaPopulation.Derive();
                 return this.size;
             }
 
             set
             {
+                this.MetaPopulation.AssertUnlocked();
                 this.size = value;
                 this.MetaPopulation.Stale();
             }

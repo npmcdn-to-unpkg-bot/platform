@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Domain
+namespace Allors.Domain
 {
     using Allors;
 
@@ -26,12 +26,12 @@ namespace Domain
     {
         public static GT32UnitLT32Composite Create(ISession session)
         {
-            return (GT32UnitLT32Composite)session.Create(GT32UnitLT32CompositeMeta.ObjectType);
+            return (GT32UnitLT32Composite)session.Create(Meta.ObjectType);
         }
 
         public static GT32UnitLT32Composite[] Create(ISession session, int count)
         {
-            return (GT32UnitLT32Composite[])session.Create(GT32UnitLT32CompositeMeta.ObjectType, count);
+            return (GT32UnitLT32Composite[])session.Create(Meta.ObjectType, count);
         }
 
         public static GT32UnitLT32Composite[] Instantiate(ISession session, string[] ids)
@@ -41,7 +41,7 @@ namespace Domain
 
         public static GT32UnitLT32Composite[] Extent(ISession session)
         {
-            return (GT32UnitLT32Composite[])session.Extent(GT32UnitLT32CompositeMeta.ObjectType).ToArray();
+            return (GT32UnitLT32Composite[])session.Extent(Meta.ObjectType).ToArray();
         }
     }
 }

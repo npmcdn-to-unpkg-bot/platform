@@ -18,7 +18,7 @@ namespace Allors1.Adapters.General
 {
     using System;
 
-    using Allors1.Meta;
+    using Allors.Meta;
 
     using NUnit.Framework;
 

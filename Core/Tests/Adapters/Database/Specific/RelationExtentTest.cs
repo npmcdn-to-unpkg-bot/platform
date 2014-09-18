@@ -22,7 +22,7 @@ namespace Allors.Adapters.Special
 
     using Allors;
 
-    using global::Domain;
+    using Allors.Domain;
 
     using NUnit.Framework;
 
@@ -98,7 +98,7 @@ namespace Allors.Adapters.Special
 
                 Assert.AreEqual(2, managedCompanies.Count);
 
-                managedCompanies.Filter.AddLike(NamedMeta.Name, "%ne");
+                managedCompanies.Filter.AddLike(RoleTypes.NamedName, "%ne");
 
                 Assert.AreEqual(1, managedCompanies.Count);
 
@@ -106,7 +106,7 @@ namespace Allors.Adapters.Special
 
                 Assert.AreEqual(2, managedCompanies.Count);
 
-                managedCompanies.AddSort(NamedMeta.Index, SortDirection.Descending);
+                managedCompanies.AddSort(RoleTypes.NamedIndex, SortDirection.Descending);
 
                 Assert.AreEqual(2, managedCompanies.Count);
                 Assert.AreEqual(acme, managedCompanies[0]);
@@ -121,7 +121,7 @@ namespace Allors.Adapters.Special
 
                 Extent janesCompanies = jane.CompaniesWhereOwner;
 
-                janesCompanies.Filter.AddLike(NamedMeta.Name, "%ne");
+                janesCompanies.Filter.AddLike(RoleTypes.NamedName, "%ne");
 
                 Assert.AreEqual(1, janesCompanies.Count);
 
@@ -129,7 +129,7 @@ namespace Allors.Adapters.Special
 
                 Assert.AreEqual(2, janesCompanies.Count);
 
-                janesCompanies.AddSort(NamedMeta.Index);
+                janesCompanies.AddSort(RoleTypes.NamedIndex);
 
                 Assert.AreEqual(2, janesCompanies.Count);
                 Assert.AreEqual(acne, janesCompanies[0]);
@@ -164,7 +164,7 @@ namespace Allors.Adapters.Special
 
                 Assert.AreEqual(2, employees.Count);
 
-                employees.Filter.AddLike(NamedMeta.Name, "Ja%");
+                employees.Filter.AddLike(RoleTypes.NamedName, "Ja%");
 
                 Assert.AreEqual(1, employees.Count);
 
@@ -172,7 +172,7 @@ namespace Allors.Adapters.Special
 
                 Assert.AreEqual(2, employees.Count);
 
-                employees.AddSort(NamedMeta.Index, SortDirection.Descending);
+                employees.AddSort(RoleTypes.NamedIndex, SortDirection.Descending);
 
                 Assert.AreEqual(2, employees.Count);
                 Assert.AreEqual(john, employees[0]);
@@ -188,7 +188,7 @@ namespace Allors.Adapters.Special
                 Extent acmeOwners = acme.Owners;
                 Extent acneOwners = acme.Owners;
 
-                acmeOwners.Filter.AddLike(NamedMeta.Name, "Ja%");
+                acmeOwners.Filter.AddLike(RoleTypes.NamedName, "Ja%");
 
                 Assert.AreEqual(1, acmeOwners.Count);
 
@@ -196,7 +196,7 @@ namespace Allors.Adapters.Special
 
                 Assert.AreEqual(2, acmeOwners.Count);
 
-                acmeOwners.AddSort(NamedMeta.Index);
+                acmeOwners.AddSort(RoleTypes.NamedIndex);
 
                 Assert.AreEqual(2, acmeOwners.Count);
                 Assert.AreEqual(jane, acmeOwners[0]);

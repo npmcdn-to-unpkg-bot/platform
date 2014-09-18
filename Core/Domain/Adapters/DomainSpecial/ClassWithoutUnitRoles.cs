@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Domain
+namespace Allors.Domain
 {
     using Allors;
 
@@ -26,12 +26,12 @@ namespace Domain
     {
         public static ClassWithoutUnitRoles Create(ISession session)
         {
-            return (ClassWithoutUnitRoles)session.Create(ClassWithoutUnitRolesMeta.ObjectType);
+            return (ClassWithoutUnitRoles)session.Create(Meta.ObjectType);
         }
 
         public static ClassWithoutUnitRoles[] Create(ISession session, int count)
         {
-            return (ClassWithoutUnitRoles[])session.Create(ClassWithoutUnitRolesMeta.ObjectType, count);
+            return (ClassWithoutUnitRoles[])session.Create(Meta.ObjectType, count);
         }
 
         public static ClassWithoutUnitRoles[] Instantiate(ISession session, string[] ids)
@@ -41,7 +41,7 @@ namespace Domain
 
         public static ClassWithoutUnitRoles[] Extent(ISession session)
         {
-            return (ClassWithoutUnitRoles[])session.Extent(ClassWithoutUnitRolesMeta.ObjectType).ToArray();
+            return (ClassWithoutUnitRoles[])session.Extent(Meta.ObjectType).ToArray();
         }
     }
 }

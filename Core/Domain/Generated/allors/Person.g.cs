@@ -3,7 +3,7 @@
 namespace Allors.Domain
 {
 	[System.Diagnostics.DebuggerNonUserCode]
-	public partial class Person : Allors.ObjectBase , User, AccessControlledObject, UniquelyIdentifiable, SearchResult, UserInterfaceable, Searchable, Printable
+	public partial class Person : Allors.ObjectBase , Named
 	{
 		public static readonly PersonMeta Meta = PersonMeta.Instance;
 
@@ -16,1017 +16,362 @@ namespace Allors.Domain
 
 
 
-
-		virtual public global::System.String LastName 
-		{
-			get
-			{
-				return (global::System.String) Strategy.GetUnitRole(Meta.LastName);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.LastName, value);
-			}
-		}
-
-		virtual public bool ExistLastName{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.LastName);
-			}
-		}
-
-		virtual public void RemoveLastName()
-		{
-			Strategy.RemoveUnitRole(Meta.LastName);
-		}
-
-
-
-		virtual public global::System.String MiddleName 
-		{
-			get
-			{
-				return (global::System.String) Strategy.GetUnitRole(Meta.MiddleName);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.MiddleName, value);
-			}
-		}
-
-		virtual public bool ExistMiddleName{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.MiddleName);
-			}
-		}
-
-		virtual public void RemoveMiddleName()
-		{
-			Strategy.RemoveUnitRole(Meta.MiddleName);
-		}
-
-
-
-		virtual public global::System.String FirstName 
-		{
-			get
-			{
-				return (global::System.String) Strategy.GetUnitRole(Meta.FirstName);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.FirstName, value);
-			}
-		}
-
-		virtual public bool ExistFirstName{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.FirstName);
-			}
-		}
-
-		virtual public void RemoveFirstName()
-		{
-			Strategy.RemoveUnitRole(Meta.FirstName);
-		}
-
-
-		virtual public Address MainAddress
+		virtual public Person NextPerson
 		{ 
 			get
 			{
-				return (Address) Strategy.GetCompositeRole(Meta.MainAddress);
+				return (Person) Strategy.GetCompositeRole(Meta.NextPerson);
 			}
 			set
 			{
-				Strategy.SetCompositeRole(Meta.MainAddress ,value);
+				Strategy.SetCompositeRole(Meta.NextPerson ,value);
 			}
 		}
 
-		virtual public bool ExistMainAddress
+		virtual public bool ExistNextPerson
 		{
 			get
 			{
-				return Strategy.ExistCompositeRole(Meta.MainAddress);
+				return Strategy.ExistCompositeRole(Meta.NextPerson);
 			}
 		}
 
-		virtual public void RemoveMainAddress()
+		virtual public void RemoveNextPerson()
 		{
-			Strategy.RemoveCompositeRole(Meta.MainAddress);
+			Strategy.RemoveCompositeRole(Meta.NextPerson);
 		}
 
 
-
-		virtual public global::System.String TinyMCEText 
-		{
-			get
-			{
-				return (global::System.String) Strategy.GetUnitRole(Meta.TinyMCEText);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.TinyMCEText, value);
-			}
-		}
-
-		virtual public bool ExistTinyMCEText{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.TinyMCEText);
-			}
-		}
-
-		virtual public void RemoveTinyMCEText()
-		{
-			Strategy.RemoveUnitRole(Meta.TinyMCEText);
-		}
-
-
-
-		virtual public global::System.String Text 
-		{
-			get
-			{
-				return (global::System.String) Strategy.GetUnitRole(Meta.Text);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.Text, value);
-			}
-		}
-
-		virtual public bool ExistText{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.Text);
-			}
-		}
-
-		virtual public void RemoveText()
-		{
-			Strategy.RemoveUnitRole(Meta.Text);
-		}
-
-
-
-		virtual public global::System.Int32? Age 
-		{
-			get
-			{
-				return (global::System.Int32?) Strategy.GetUnitRole(Meta.Age);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.Age, value);
-			}
-		}
-
-		virtual public bool ExistAge{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.Age);
-			}
-		}
-
-		virtual public void RemoveAge()
-		{
-			Strategy.RemoveUnitRole(Meta.Age);
-		}
-
-
-
-		virtual public global::System.Boolean? IsStudent 
-		{
-			get
-			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.IsStudent);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.IsStudent, value);
-			}
-		}
-
-		virtual public bool ExistIsStudent{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.IsStudent);
-			}
-		}
-
-		virtual public void RemoveIsStudent()
-		{
-			Strategy.RemoveUnitRole(Meta.IsStudent);
-		}
-
-
-		virtual public MailboxAddress MailboxAddress
+		virtual public Company Company
 		{ 
 			get
 			{
-				return (MailboxAddress) Strategy.GetCompositeRole(Meta.MailboxAddress);
+				return (Company) Strategy.GetCompositeRole(Meta.Company);
 			}
 			set
 			{
-				Strategy.SetCompositeRole(Meta.MailboxAddress ,value);
+				Strategy.SetCompositeRole(Meta.Company ,value);
 			}
 		}
 
-		virtual public bool ExistMailboxAddress
+		virtual public bool ExistCompany
 		{
 			get
 			{
-				return Strategy.ExistCompositeRole(Meta.MailboxAddress);
+				return Strategy.ExistCompositeRole(Meta.Company);
 			}
 		}
 
-		virtual public void RemoveMailboxAddress()
+		virtual public void RemoveCompany()
 		{
-			Strategy.RemoveCompositeRole(Meta.MailboxAddress);
+			Strategy.RemoveCompositeRole(Meta.Company);
 		}
 
 
-		virtual public Gender Gender
+
+		virtual public global::System.String Name 
+		{
+			get
+			{
+				return (global::System.String) Strategy.GetUnitRole(Meta.Name);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.Name, value);
+			}
+		}
+
+		virtual public bool ExistName{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.Name);
+			}
+		}
+
+		virtual public void RemoveName()
+		{
+			Strategy.RemoveUnitRole(Meta.Name);
+		}
+
+
+
+		virtual public global::System.Int32? Index 
+		{
+			get
+			{
+				return (global::System.Int32?) Strategy.GetUnitRole(Meta.Index);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.Index, value);
+			}
+		}
+
+		virtual public bool ExistIndex{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.Index);
+			}
+		}
+
+		virtual public void RemoveIndex()
+		{
+			Strategy.RemoveUnitRole(Meta.Index);
+		}
+
+
+
+		virtual public Person PersonWhereNextPerson
 		{ 
 			get
 			{
-				return (Gender) Strategy.GetCompositeRole(Meta.Gender);
-			}
-			set
-			{
-				Strategy.SetCompositeRole(Meta.Gender ,value);
-			}
-		}
-
-		virtual public bool ExistGender
-		{
-			get
-			{
-				return Strategy.ExistCompositeRole(Meta.Gender);
-			}
-		}
-
-		virtual public void RemoveGender()
-		{
-			Strategy.RemoveCompositeRole(Meta.Gender);
-		}
-
-
-
-		virtual public global::System.String FullName 
-		{
-			get
-			{
-				return (global::System.String) Strategy.GetUnitRole(Meta.FullName);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.FullName, value);
-			}
-		}
-
-		virtual public bool ExistFullName{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.FullName);
-			}
-		}
-
-		virtual public void RemoveFullName()
-		{
-			Strategy.RemoveUnitRole(Meta.FullName);
-		}
-
-
-
-		virtual public global::System.Int32? ShirtSize 
-		{
-			get
-			{
-				return (global::System.Int32?) Strategy.GetUnitRole(Meta.ShirtSize);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.ShirtSize, value);
-			}
-		}
-
-		virtual public bool ExistShirtSize{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.ShirtSize);
-			}
-		}
-
-		virtual public void RemoveShirtSize()
-		{
-			Strategy.RemoveUnitRole(Meta.ShirtSize);
-		}
-
-
-
-		virtual public global::System.String CKEditorText 
-		{
-			get
-			{
-				return (global::System.String) Strategy.GetUnitRole(Meta.CKEditorText);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.CKEditorText, value);
-			}
-		}
-
-		virtual public bool ExistCKEditorText{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.CKEditorText);
-			}
-		}
-
-		virtual public void RemoveCKEditorText()
-		{
-			Strategy.RemoveUnitRole(Meta.CKEditorText);
-		}
-
-
-
-		virtual public global::System.Boolean? IsMarried 
-		{
-			get
-			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.IsMarried);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.IsMarried, value);
-			}
-		}
-
-		virtual public bool ExistIsMarried{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.IsMarried);
-			}
-		}
-
-		virtual public void RemoveIsMarried()
-		{
-			Strategy.RemoveUnitRole(Meta.IsMarried);
-		}
-
-
-
-		virtual public global::System.DateTime? BirthDate 
-		{
-			get
-			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.BirthDate);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.BirthDate, value);
-			}
-		}
-
-		virtual public bool ExistBirthDate{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.BirthDate);
-			}
-		}
-
-		virtual public void RemoveBirthDate()
-		{
-			Strategy.RemoveUnitRole(Meta.BirthDate);
-		}
-
-
-
-		virtual public global::System.Decimal? Weight 
-		{
-			get
-			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.Weight);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.Weight, value);
-			}
-		}
-
-		virtual public bool ExistWeight{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.Weight);
-			}
-		}
-
-		virtual public void RemoveWeight()
-		{
-			Strategy.RemoveUnitRole(Meta.Weight);
-		}
-
-
-		virtual public Media Photo
-		{ 
-			get
-			{
-				return (Media) Strategy.GetCompositeRole(Meta.Photo);
-			}
-			set
-			{
-				Strategy.SetCompositeRole(Meta.Photo ,value);
-			}
-		}
-
-		virtual public bool ExistPhoto
-		{
-			get
-			{
-				return Strategy.ExistCompositeRole(Meta.Photo);
-			}
-		}
-
-		virtual public void RemovePhoto()
-		{
-			Strategy.RemoveCompositeRole(Meta.Photo);
-		}
-
-
-		virtual public global::Allors.Extent<Address> Addresses
-		{ 
-			get
-			{
-				return Strategy.GetCompositeRoles(Meta.Address);
-			}
-			set
-			{
-				Strategy.SetCompositeRoles(Meta.Address, value);
-			}
-		}
-
-		virtual public void AddAddress (Address value)
-		{
-			Strategy.AddCompositeRole(Meta.Address, value);
-		}
-
-		virtual public void RemoveAddress (Address value)
-		{
-			Strategy.RemoveCompositeRole(Meta.Address,value);
-		}
-
-		virtual public bool ExistAddresses
-		{
-			get
-			{
-				return Strategy.ExistCompositeRoles(Meta.Address);
-			}
-		}
-
-		virtual public void RemoveAddresses()
-		{
-			Strategy.RemoveCompositeRoles(Meta.Address);
-		}
-
-
-
-		virtual public global::System.Boolean? UserEmailConfirmed 
-		{
-			get
-			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.UserEmailConfirmed);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.UserEmailConfirmed, value);
-			}
-		}
-
-		virtual public bool ExistUserEmailConfirmed{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.UserEmailConfirmed);
-			}
-		}
-
-		virtual public void RemoveUserEmailConfirmed()
-		{
-			Strategy.RemoveUnitRole(Meta.UserEmailConfirmed);
-		}
-
-
-
-		virtual public global::System.String UserName 
-		{
-			get
-			{
-				return (global::System.String) Strategy.GetUnitRole(Meta.UserName);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.UserName, value);
-			}
-		}
-
-		virtual public bool ExistUserName{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.UserName);
-			}
-		}
-
-		virtual public void RemoveUserName()
-		{
-			Strategy.RemoveUnitRole(Meta.UserName);
-		}
-
-
-
-		virtual public global::System.String UserEmail 
-		{
-			get
-			{
-				return (global::System.String) Strategy.GetUnitRole(Meta.UserEmail);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.UserEmail, value);
-			}
-		}
-
-		virtual public bool ExistUserEmail{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.UserEmail);
-			}
-		}
-
-		virtual public void RemoveUserEmail()
-		{
-			Strategy.RemoveUnitRole(Meta.UserEmail);
-		}
-
-
-
-		virtual public global::System.String UserPasswordHash 
-		{
-			get
-			{
-				return (global::System.String) Strategy.GetUnitRole(Meta.UserPasswordHash);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.UserPasswordHash, value);
-			}
-		}
-
-		virtual public bool ExistUserPasswordHash{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.UserPasswordHash);
-			}
-		}
-
-		virtual public void RemoveUserPasswordHash()
-		{
-			Strategy.RemoveUnitRole(Meta.UserPasswordHash);
-		}
-
-
-		virtual public SecurityToken OwnerSecurityToken
-		{ 
-			get
-			{
-				return (SecurityToken) Strategy.GetCompositeRole(Meta.OwnerSecurityToken);
-			}
-			set
-			{
-				Strategy.SetCompositeRole(Meta.OwnerSecurityToken ,value);
-			}
-		}
-
-		virtual public bool ExistOwnerSecurityToken
-		{
-			get
-			{
-				return Strategy.ExistCompositeRole(Meta.OwnerSecurityToken);
-			}
-		}
-
-		virtual public void RemoveOwnerSecurityToken()
-		{
-			Strategy.RemoveCompositeRole(Meta.OwnerSecurityToken);
-		}
-
-
-
-		virtual public global::System.String DisplayName 
-		{
-			get
-			{
-				return (global::System.String) Strategy.GetUnitRole(Meta.DisplayName);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.DisplayName, value);
-			}
-		}
-
-		virtual public bool ExistDisplayName{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.DisplayName);
-			}
-		}
-
-		virtual public void RemoveDisplayName()
-		{
-			Strategy.RemoveUnitRole(Meta.DisplayName);
-		}
-
-
-		virtual public global::Allors.Extent<Permission> DeniedPermissions
-		{ 
-			get
-			{
-				return Strategy.GetCompositeRoles(Meta.DeniedPermission);
-			}
-			set
-			{
-				Strategy.SetCompositeRoles(Meta.DeniedPermission, value);
-			}
-		}
-
-		virtual public void AddDeniedPermission (Permission value)
-		{
-			Strategy.AddCompositeRole(Meta.DeniedPermission, value);
-		}
-
-		virtual public void RemoveDeniedPermission (Permission value)
-		{
-			Strategy.RemoveCompositeRole(Meta.DeniedPermission,value);
-		}
-
-		virtual public bool ExistDeniedPermissions
-		{
-			get
-			{
-				return Strategy.ExistCompositeRoles(Meta.DeniedPermission);
-			}
-		}
-
-		virtual public void RemoveDeniedPermissions()
-		{
-			Strategy.RemoveCompositeRoles(Meta.DeniedPermission);
-		}
-
-
-		virtual public global::Allors.Extent<SecurityToken> SecurityTokens
-		{ 
-			get
-			{
-				return Strategy.GetCompositeRoles(Meta.SecurityToken);
-			}
-			set
-			{
-				Strategy.SetCompositeRoles(Meta.SecurityToken, value);
-			}
-		}
-
-		virtual public void AddSecurityToken (SecurityToken value)
-		{
-			Strategy.AddCompositeRole(Meta.SecurityToken, value);
-		}
-
-		virtual public void RemoveSecurityToken (SecurityToken value)
-		{
-			Strategy.RemoveCompositeRole(Meta.SecurityToken,value);
-		}
-
-		virtual public bool ExistSecurityTokens
-		{
-			get
-			{
-				return Strategy.ExistCompositeRoles(Meta.SecurityToken);
-			}
-		}
-
-		virtual public void RemoveSecurityTokens()
-		{
-			Strategy.RemoveCompositeRoles(Meta.SecurityToken);
-		}
-
-
-		virtual public Locale Locale
-		{ 
-			get
-			{
-				return (Locale) Strategy.GetCompositeRole(Meta.Locale);
-			}
-			set
-			{
-				Strategy.SetCompositeRole(Meta.Locale ,value);
-			}
-		}
-
-		virtual public bool ExistLocale
-		{
-			get
-			{
-				return Strategy.ExistCompositeRole(Meta.Locale);
-			}
-		}
-
-		virtual public void RemoveLocale()
-		{
-			Strategy.RemoveCompositeRole(Meta.Locale);
-		}
-
-
-
-		virtual public global::System.Guid? UniqueId 
-		{
-			get
-			{
-				return (global::System.Guid?) Strategy.GetUnitRole(Meta.UniqueId);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.UniqueId, value);
-			}
-		}
-
-		virtual public bool ExistUniqueId{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.UniqueId);
-			}
-		}
-
-		virtual public void RemoveUniqueId()
-		{
-			Strategy.RemoveUnitRole(Meta.UniqueId);
-		}
-
-
-		virtual public SearchData SearchData
-		{ 
-			get
-			{
-				return (SearchData) Strategy.GetCompositeRole(Meta.SearchData);
-			}
-			set
-			{
-				Strategy.SetCompositeRole(Meta.SearchData ,value);
-			}
-		}
-
-		virtual public bool ExistSearchData
-		{
-			get
-			{
-				return Strategy.ExistCompositeRole(Meta.SearchData);
-			}
-		}
-
-		virtual public void RemoveSearchData()
-		{
-			Strategy.RemoveCompositeRole(Meta.SearchData);
-		}
-
-
-
-		virtual public global::System.String PrintContent 
-		{
-			get
-			{
-				return (global::System.String) Strategy.GetUnitRole(Meta.PrintContent);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.PrintContent, value);
-			}
-		}
-
-		virtual public bool ExistPrintContent{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.PrintContent);
-			}
-		}
-
-		virtual public void RemovePrintContent()
-		{
-			Strategy.RemoveUnitRole(Meta.PrintContent);
-		}
-
-
-
-		virtual public global::Allors.Extent<Organisation> OrganisationsWhereShareholder
-		{ 
-			get
-			{
-				return Strategy.GetCompositeAssociations(Meta.OrganisationsWhereShareholder);
-			}
-		}
-
-		virtual public bool ExistOrganisationsWhereShareholder
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociations(Meta.OrganisationsWhereShareholder);
-			}
-		}
-
-
-		virtual public Organisation OrganisationWhereEmployee
-		{ 
-			get
-			{
-				return (Organisation) Strategy.GetCompositeAssociation(Meta.OrganisationWhereEmployee);
+				return (Person) Strategy.GetCompositeAssociation(Meta.PersonWhereNextPerson);
 			}
 		} 
 
-		virtual public bool ExistOrganisationWhereEmployee
+		virtual public bool ExistPersonWhereNextPerson
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociation(Meta.OrganisationWhereEmployee);
+				return Strategy.ExistCompositeAssociation(Meta.PersonWhereNextPerson);
 			}
 		}
 
 
-		virtual public Organisation OrganisationWhereOwner
+		virtual public global::Allors.Extent<Company> CompaniesWhereManager
 		{ 
 			get
 			{
-				return (Organisation) Strategy.GetCompositeAssociation(Meta.OrganisationWhereOwner);
+				return Strategy.GetCompositeAssociations(Meta.CompaniesWhereManager);
+			}
+		}
+
+		virtual public bool ExistCompaniesWhereManager
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociations(Meta.CompaniesWhereManager);
+			}
+		}
+
+
+		virtual public Company CompanyWhereEmployee
+		{ 
+			get
+			{
+				return (Company) Strategy.GetCompositeAssociation(Meta.CompanyWhereEmployee);
 			}
 		} 
 
-		virtual public bool ExistOrganisationWhereOwner
+		virtual public bool ExistCompanyWhereEmployee
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociation(Meta.OrganisationWhereOwner);
+				return Strategy.ExistCompositeAssociation(Meta.CompanyWhereEmployee);
 			}
 		}
 
 
-		virtual public global::Allors.Extent<StatefulCompany> StatefulCompaniesWhereEmployee
+		virtual public Company CompanyWhereFirstPerson
 		{ 
 			get
 			{
-				return Strategy.GetCompositeAssociations(Meta.StatefulCompaniesWhereEmployee);
-			}
-		}
-
-		virtual public bool ExistStatefulCompaniesWhereEmployee
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociations(Meta.StatefulCompaniesWhereEmployee);
-			}
-		}
-
-
-		virtual public global::Allors.Extent<StatefulCompany> StatefulCompaniesWhereManager
-		{ 
-			get
-			{
-				return Strategy.GetCompositeAssociations(Meta.StatefulCompaniesWhereManager);
-			}
-		}
-
-		virtual public bool ExistStatefulCompaniesWhereManager
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociations(Meta.StatefulCompaniesWhereManager);
-			}
-		}
-
-
-		virtual public BadUI BadUIWherePersonMany
-		{ 
-			get
-			{
-				return (BadUI) Strategy.GetCompositeAssociation(Meta.BadUIWherePersonMany);
+				return (Company) Strategy.GetCompositeAssociation(Meta.CompanyWhereFirstPerson);
 			}
 		} 
 
-		virtual public bool ExistBadUIWherePersonMany
+		virtual public bool ExistCompanyWhereFirstPerson
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociation(Meta.BadUIWherePersonMany);
+				return Strategy.ExistCompositeAssociation(Meta.CompanyWhereFirstPerson);
 			}
 		}
 
 
-		virtual public global::Allors.Extent<BadUI> BadUIsWherePersonOne
+		virtual public global::Allors.Extent<Company> CompaniesWhereOwner
 		{ 
 			get
 			{
-				return Strategy.GetCompositeAssociations(Meta.BadUIsWherePersonOne);
+				return Strategy.GetCompositeAssociations(Meta.CompaniesWhereOwner);
 			}
 		}
 
-		virtual public bool ExistBadUIsWherePersonOne
+		virtual public bool ExistCompaniesWhereOwner
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociations(Meta.BadUIsWherePersonOne);
+				return Strategy.ExistCompositeAssociations(Meta.CompaniesWhereOwner);
 			}
 		}
 
 
-		virtual public Singleton SingletonWhereGuest
+		virtual public global::Allors.Extent<Company> CompaniesWhereIndexedMany2ManyPerson
 		{ 
 			get
 			{
-				return (Singleton) Strategy.GetCompositeAssociation(Meta.SingletonWhereGuest);
+				return Strategy.GetCompositeAssociations(Meta.CompaniesWhereIndexedMany2ManyPerson);
+			}
+		}
+
+		virtual public bool ExistCompaniesWhereIndexedMany2ManyPerson
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociations(Meta.CompaniesWhereIndexedMany2ManyPerson);
+			}
+		}
+
+
+		virtual public Company CompanyWherePersonOneSort1
+		{ 
+			get
+			{
+				return (Company) Strategy.GetCompositeAssociation(Meta.CompanyWherePersonOneSort1);
 			}
 		} 
 
-		virtual public bool ExistSingletonWhereGuest
+		virtual public bool ExistCompanyWherePersonOneSort1
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociation(Meta.SingletonWhereGuest);
+				return Strategy.ExistCompositeAssociation(Meta.CompanyWherePersonOneSort1);
 			}
 		}
 
 
-		virtual public global::Allors.Extent<UserGroup> UserGroupsWhereMember
+		virtual public global::Allors.Extent<Company> CompaniesWherePersonManySort1
 		{ 
 			get
 			{
-				return Strategy.GetCompositeAssociations(Meta.UserGroupsWhereMember);
+				return Strategy.GetCompositeAssociations(Meta.CompaniesWherePersonManySort1);
 			}
 		}
 
-		virtual public bool ExistUserGroupsWhereMember
+		virtual public bool ExistCompaniesWherePersonManySort1
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociations(Meta.UserGroupsWhereMember);
+				return Strategy.ExistCompositeAssociations(Meta.CompaniesWherePersonManySort1);
 			}
 		}
 
 
-		virtual public global::Allors.Extent<Login> LoginsWhereUser
+		virtual public global::Allors.Extent<Company> CompaniesWherePersonManySort2
 		{ 
 			get
 			{
-				return Strategy.GetCompositeAssociations(Meta.LoginsWhereUser);
+				return Strategy.GetCompositeAssociations(Meta.CompaniesWherePersonManySort2);
 			}
 		}
 
-		virtual public bool ExistLoginsWhereUser
+		virtual public bool ExistCompaniesWherePersonManySort2
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociations(Meta.LoginsWhereUser);
+				return Strategy.ExistCompositeAssociations(Meta.CompaniesWherePersonManySort2);
 			}
 		}
 
 
-		virtual public global::Allors.Extent<AccessControl> AccessControlsWhereSubject
+		virtual public Company CompanyWherePersonOneSort2
 		{ 
 			get
 			{
-				return Strategy.GetCompositeAssociations(Meta.AccessControlsWhereSubject);
+				return (Company) Strategy.GetCompositeAssociation(Meta.CompanyWherePersonOneSort2);
 			}
-		}
+		} 
 
-		virtual public bool ExistAccessControlsWhereSubject
+		virtual public bool ExistCompanyWherePersonOneSort2
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociations(Meta.AccessControlsWhereSubject);
+				return Strategy.ExistCompositeAssociation(Meta.CompanyWherePersonOneSort2);
 			}
 		}
 
 
-		virtual public global::Allors.Extent<PrintQueue> PrintQueuesWherePrintable
+		virtual public global::Allors.Extent<Company> CompaniesWhereMany2ManyPerson
 		{ 
 			get
 			{
-				return Strategy.GetCompositeAssociations(Meta.PrintQueuesWherePrintable);
+				return Strategy.GetCompositeAssociations(Meta.CompaniesWhereMany2ManyPerson);
 			}
 		}
 
-		virtual public bool ExistPrintQueuesWherePrintable
+		virtual public bool ExistCompaniesWhereMany2ManyPerson
 		{
 			get
 			{
-				return Strategy.ExistCompositeAssociations(Meta.PrintQueuesWherePrintable);
+				return Strategy.ExistCompositeAssociations(Meta.CompaniesWhereMany2ManyPerson);
+			}
+		}
+
+
+		virtual public Company CompanyWhereNamedOneSort2
+		{ 
+			get
+			{
+				return (Company) Strategy.GetCompositeAssociation(Meta.CompanyWhereNamedOneSort2);
+			}
+		} 
+
+		virtual public bool ExistCompanyWhereNamedOneSort2
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociation(Meta.CompanyWhereNamedOneSort2);
+			}
+		}
+
+
+		virtual public global::Allors.Extent<Company> CompaniesWhereNamedManySort1
+		{ 
+			get
+			{
+				return Strategy.GetCompositeAssociations(Meta.CompaniesWhereNamedManySort1);
+			}
+		}
+
+		virtual public bool ExistCompaniesWhereNamedManySort1
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociations(Meta.CompaniesWhereNamedManySort1);
+			}
+		}
+
+
+		virtual public global::Allors.Extent<Company> CompaniesWhereNamedManySort2
+		{ 
+			get
+			{
+				return Strategy.GetCompositeAssociations(Meta.CompaniesWhereNamedManySort2);
+			}
+		}
+
+		virtual public bool ExistCompaniesWhereNamedManySort2
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociations(Meta.CompaniesWhereNamedManySort2);
+			}
+		}
+
+
+		virtual public Company CompanyWhereNamedOneSort1
+		{ 
+			get
+			{
+				return (Company) Strategy.GetCompositeAssociation(Meta.CompanyWhereNamedOneSort1);
+			}
+		} 
+
+		virtual public bool ExistCompanyWhereNamedOneSort1
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociation(Meta.CompanyWhereNamedOneSort1);
 			}
 		}
 
@@ -1038,299 +383,138 @@ namespace Allors.Domain
 
 		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.Person;
 
-		public global::Allors.Meta.RoleType LastName 
+		public global::Allors.Meta.RoleType NextPerson 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.PersonLastName;
+				return global::Allors.Meta.RoleTypes.PersonNextPerson;
 			}
 		} 
-		public global::Allors.Meta.RoleType MiddleName 
+		public global::Allors.Meta.RoleType Company 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.PersonMiddleName;
+				return global::Allors.Meta.RoleTypes.PersonCompany;
 			}
 		} 
-		public global::Allors.Meta.RoleType FirstName 
+		public global::Allors.Meta.RoleType Name 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.PersonFirstName;
+				return global::Allors.Meta.RoleTypes.NamedName;
 			}
 		} 
-		public global::Allors.Meta.RoleType MainAddress 
+		public global::Allors.Meta.RoleType Index 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.PersonMainAddress;
-			}
-		} 
-		public global::Allors.Meta.RoleType TinyMCEText 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.PersonTinyMCEText;
-			}
-		} 
-		public global::Allors.Meta.RoleType Text 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.PersonText;
-			}
-		} 
-		public global::Allors.Meta.RoleType Age 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.PersonAge;
-			}
-		} 
-		public global::Allors.Meta.RoleType IsStudent 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.PersonIsStudent;
-			}
-		} 
-		public global::Allors.Meta.RoleType MailboxAddress 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.PersonMailboxAddress;
-			}
-		} 
-		public global::Allors.Meta.RoleType Gender 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.PersonGender;
-			}
-		} 
-		public global::Allors.Meta.RoleType FullName 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.PersonFullName;
-			}
-		} 
-		public global::Allors.Meta.RoleType ShirtSize 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.PersonShirtSize;
-			}
-		} 
-		public global::Allors.Meta.RoleType CKEditorText 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.PersonCKEditorText;
-			}
-		} 
-		public global::Allors.Meta.RoleType IsMarried 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.PersonIsMarried;
-			}
-		} 
-		public global::Allors.Meta.RoleType BirthDate 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.PersonBirthDate;
-			}
-		} 
-		public global::Allors.Meta.RoleType Weight 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.PersonWeight;
-			}
-		} 
-		public global::Allors.Meta.RoleType Photo 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.PersonPhoto;
-			}
-		} 
-		public global::Allors.Meta.RoleType Address 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.PersonAddress;
-			}
-		} 
-		public global::Allors.Meta.RoleType UserEmailConfirmed 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.UserUserEmailConfirmed;
-			}
-		} 
-		public global::Allors.Meta.RoleType UserName 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.UserUserName;
-			}
-		} 
-		public global::Allors.Meta.RoleType UserEmail 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.UserUserEmail;
-			}
-		} 
-		public global::Allors.Meta.RoleType UserPasswordHash 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.UserUserPasswordHash;
-			}
-		} 
-		public global::Allors.Meta.RoleType OwnerSecurityToken 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.SecurityTokenOwnerOwnerSecurityToken;
-			}
-		} 
-		public global::Allors.Meta.RoleType DisplayName 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.UserInterfaceableDisplayName;
-			}
-		} 
-		public global::Allors.Meta.RoleType DeniedPermission 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.AccessControlledObjectDeniedPermission;
-			}
-		} 
-		public global::Allors.Meta.RoleType SecurityToken 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.AccessControlledObjectSecurityToken;
-			}
-		} 
-		public global::Allors.Meta.RoleType Locale 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.LocalisedLocale;
-			}
-		} 
-		public global::Allors.Meta.RoleType UniqueId 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.UniquelyIdentifiableUniqueId;
-			}
-		} 
-		public global::Allors.Meta.RoleType SearchData 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.SearchableSearchData;
-			}
-		} 
-		public global::Allors.Meta.RoleType PrintContent 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.PrintablePrintContent;
+				return global::Allors.Meta.RoleTypes.NamedIndex;
 			}
 		} 
 
-		public global::Allors.Meta.AssociationType OrganisationsWhereShareholder 
+		public global::Allors.Meta.AssociationType PersonWhereNextPerson 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.OrganisationShareholder;
+				return global::Allors.Meta.AssociationTypes.PersonNextPerson;
 			}
 		} 
-		public global::Allors.Meta.AssociationType OrganisationWhereEmployee 
+		public global::Allors.Meta.AssociationType CompaniesWhereManager 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.OrganisationEmployee;
+				return global::Allors.Meta.AssociationTypes.CompanyManager;
 			}
 		} 
-		public global::Allors.Meta.AssociationType OrganisationWhereOwner 
+		public global::Allors.Meta.AssociationType CompanyWhereEmployee 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.OrganisationOwner;
+				return global::Allors.Meta.AssociationTypes.CompanyEmployee;
 			}
 		} 
-		public global::Allors.Meta.AssociationType StatefulCompaniesWhereEmployee 
+		public global::Allors.Meta.AssociationType CompanyWhereFirstPerson 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.StatefulCompanyEmployee;
+				return global::Allors.Meta.AssociationTypes.CompanyFirstPerson;
 			}
 		} 
-		public global::Allors.Meta.AssociationType StatefulCompaniesWhereManager 
+		public global::Allors.Meta.AssociationType CompaniesWhereOwner 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.StatefulCompanyManager;
+				return global::Allors.Meta.AssociationTypes.CompanyOwner;
 			}
 		} 
-		public global::Allors.Meta.AssociationType BadUIWherePersonMany 
+		public global::Allors.Meta.AssociationType CompaniesWhereIndexedMany2ManyPerson 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.BadUIPersonMany;
+				return global::Allors.Meta.AssociationTypes.CompanyIndexedMany2ManyPerson;
 			}
 		} 
-		public global::Allors.Meta.AssociationType BadUIsWherePersonOne 
+		public global::Allors.Meta.AssociationType CompanyWherePersonOneSort1 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.BadUIPersonOne;
+				return global::Allors.Meta.AssociationTypes.CompanyPersonOneSort1;
 			}
 		} 
-		public global::Allors.Meta.AssociationType SingletonWhereGuest 
+		public global::Allors.Meta.AssociationType CompaniesWherePersonManySort1 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.SingletonGuest;
+				return global::Allors.Meta.AssociationTypes.CompanyPersonManySort1;
 			}
 		} 
-		public global::Allors.Meta.AssociationType UserGroupsWhereMember 
+		public global::Allors.Meta.AssociationType CompaniesWherePersonManySort2 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.UserGroupMember;
+				return global::Allors.Meta.AssociationTypes.CompanyPersonManySort2;
 			}
 		} 
-		public global::Allors.Meta.AssociationType LoginsWhereUser 
+		public global::Allors.Meta.AssociationType CompanyWherePersonOneSort2 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.LoginUser;
+				return global::Allors.Meta.AssociationTypes.CompanyPersonOneSort2;
 			}
 		} 
-		public global::Allors.Meta.AssociationType AccessControlsWhereSubject 
+		public global::Allors.Meta.AssociationType CompaniesWhereMany2ManyPerson 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.AccessControlSubject;
+				return global::Allors.Meta.AssociationTypes.CompanyMany2ManyPerson;
 			}
 		} 
-		public global::Allors.Meta.AssociationType PrintQueuesWherePrintable 
+		public global::Allors.Meta.AssociationType CompanyWhereNamedOneSort2 
 		{
 			get
 			{
-				return global::Allors.Meta.AssociationTypes.PrintQueuePrintable;
+				return global::Allors.Meta.AssociationTypes.CompanyNamedOneSort2;
+			}
+		} 
+		public global::Allors.Meta.AssociationType CompaniesWhereNamedManySort1 
+		{
+			get
+			{
+				return global::Allors.Meta.AssociationTypes.CompanyNamedManySort1;
+			}
+		} 
+		public global::Allors.Meta.AssociationType CompaniesWhereNamedManySort2 
+		{
+			get
+			{
+				return global::Allors.Meta.AssociationTypes.CompanyNamedManySort2;
+			}
+		} 
+		public global::Allors.Meta.AssociationType CompanyWhereNamedOneSort1 
+		{
+			get
+			{
+				return global::Allors.Meta.AssociationTypes.CompanyNamedOneSort1;
 			}
 		} 
 

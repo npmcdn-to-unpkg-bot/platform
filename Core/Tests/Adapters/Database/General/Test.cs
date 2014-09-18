@@ -14,15 +14,15 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors1.Adapters.General
+namespace Allors.Adapters.General
 {
     using System.Collections;
     using System.IO;
     using System.Xml;
 
-    using Allors1;
-    using Allors1.Adapters;
-    using Allors1.Meta;
+    using Allors;
+    using Allors.Adapters;
+    using Allors.Meta;
 
     public abstract class Test
     {

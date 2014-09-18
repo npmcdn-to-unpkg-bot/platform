@@ -22,7 +22,8 @@ namespace Allors.Adapters.Special
 
     using Allors;
 
-    using global::Domain;
+    using Allors.Domain;
+    using Allors.Meta;
 
     using NUnit.Framework;
 
@@ -596,7 +597,7 @@ namespace Allors.Adapters.Special
                             else
                             {
                                 Assert.AreEqual(c1AObjectId, conflict.ObjectId);
-                                Assert.AreEqual(C1Meta.C1C2one2one, conflict.RoleType);
+                                Assert.AreEqual(RoleTypes.C1C2one2one, conflict.RoleType);
                             }
                         }
 
@@ -1101,7 +1102,7 @@ namespace Allors.Adapters.Special
                             IConflict conflict = conflicts[0];
 
                             Assert.AreEqual(c1AObjectId, conflict.ObjectId);
-                            Assert.AreEqual(C1Meta.C1C2one2many, conflict.RoleType);
+                            Assert.AreEqual(RoleTypes.C1C2one2many, conflict.RoleType);
 
                             workspaceSession.Resolve(conflict);
 
@@ -1367,7 +1368,7 @@ namespace Allors.Adapters.Special
                             IConflict conflict = conflicts[0];
 
                             Assert.AreEqual(c1AObjectId, conflict.ObjectId);
-                            Assert.AreEqual(C1Meta.C1C2one2one, conflict.RoleType);
+                            Assert.AreEqual(RoleTypes.C1C2one2one, conflict.RoleType);
 
                             workspaceSession.Resolve(conflict);
 
@@ -1676,7 +1677,7 @@ namespace Allors.Adapters.Special
                             IConflict conflict = conflicts[0];
 
                             Assert.AreEqual(c1AObjectId, conflict.ObjectId);
-                            Assert.AreEqual(C1Meta.C1AllorsString, conflict.RoleType);
+                            Assert.AreEqual(RoleTypes.C1AllorsString, conflict.RoleType);
 
                             workspaceSession.Resolve(conflict);
 
@@ -1878,7 +1879,7 @@ namespace Allors.Adapters.Special
                             IConflict conflict = conflicts[0];
 
                             Assert.AreEqual(c1AObjectId, conflict.ObjectId);
-                            Assert.AreEqual(C1Meta.C1AllorsBinary, conflict.RoleType);
+                            Assert.AreEqual(RoleTypes.C1AllorsBinary, conflict.RoleType);
 
                             workspaceSession.Resolve(conflict);
 

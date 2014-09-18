@@ -22,7 +22,8 @@ namespace Allors.Adapters.Special
 
     using Allors;
 
-    using global::Domain;
+    using Allors.Domain;
+    using Allors.Meta;
 
     using NUnit.Framework;
 
@@ -75,8 +76,8 @@ namespace Allors.Adapters.Special
             {
                 init();
 
-                var a = (C1)this.DatabaseSession.Create(C1Meta.ObjectType);
-                var c = this.DatabaseSession.Create(C3Meta.ObjectType);
+                var a = (C1)this.DatabaseSession.Create(Classes.C1);
+                var c = this.DatabaseSession.Create(Classes.C3);
                 this.DatabaseSession.Commit();
 
                 a = (C1)this.Session.Instantiate(a);
@@ -99,10 +100,10 @@ namespace Allors.Adapters.Special
                 Assert.AreEqual("b changed", b.C2AllorsString);
 
                 Assert.AreEqual(1, changeSet.GetRoleTypes(a.Id).Count());
-                Assert.AreEqual(C1Meta.C1AllorsString, changeSet.GetRoleTypes(a.Id).First());
+                Assert.AreEqual(RoleTypes.C1AllorsString, changeSet.GetRoleTypes(a.Id).First());
 
                 Assert.AreEqual(1, changeSet.GetRoleTypes(b.Id).Count());
-                Assert.AreEqual(C2Meta.C2AllorsString, changeSet.GetRoleTypes(b.Id).First());
+                Assert.AreEqual(RoleTypes.C2AllorsString, changeSet.GetRoleTypes(b.Id).First());
 
                 Assert.IsTrue(associations.Contains(a.Id));
                 Assert.IsTrue(associations.Contains(b.Id));
@@ -125,10 +126,10 @@ namespace Allors.Adapters.Special
                 Assert.IsTrue(associations.Contains(a.Id));
 
                 Assert.AreEqual(1, changeSet.GetRoleTypes(a.Id).Count());
-                Assert.AreEqual(C1Meta.C1AllorsString, changeSet.GetRoleTypes(a.Id).First());
+                Assert.AreEqual(RoleTypes.C1AllorsString, changeSet.GetRoleTypes(a.Id).First());
 
                 Assert.AreEqual(1, changeSet.GetRoleTypes(b.Id).Count());
-                Assert.AreEqual(C2Meta.C2AllorsString, changeSet.GetRoleTypes(b.Id).First());
+                Assert.AreEqual(RoleTypes.C2AllorsString, changeSet.GetRoleTypes(b.Id).First());
 
                 Assert.IsTrue(associations.Contains(a.Id));
                 Assert.IsTrue(associations.Contains(b.Id));
@@ -168,10 +169,10 @@ namespace Allors.Adapters.Special
                 Assert.IsTrue(associations.Contains(a.Id));
 
                 Assert.AreEqual(1, changeSet.GetRoleTypes(a.Id).Count());
-                Assert.AreEqual(C1Meta.C1AllorsString, changeSet.GetRoleTypes(a.Id).First());
+                Assert.AreEqual(RoleTypes.C1AllorsString, changeSet.GetRoleTypes(a.Id).First());
 
                 Assert.AreEqual(1, changeSet.GetRoleTypes(b.Id).Count());
-                Assert.AreEqual(C2Meta.C2AllorsString, changeSet.GetRoleTypes(b.Id).First());
+                Assert.AreEqual(RoleTypes.C2AllorsString, changeSet.GetRoleTypes(b.Id).First());
 
                 Assert.IsTrue(associations.Contains(a.Id));
                 Assert.IsTrue(associations.Contains(b.Id));
@@ -244,8 +245,8 @@ namespace Allors.Adapters.Special
             {
                 init();
 
-                var a = (C1)this.DatabaseSession.Create(C1Meta.ObjectType);
-                var c = (C2)this.DatabaseSession.Create(C2Meta.ObjectType);
+                var a = (C1)this.DatabaseSession.Create(Classes.C1);
+                var c = (C2)this.DatabaseSession.Create(Classes.C2);
 
                 this.DatabaseSession.Commit();
 
@@ -267,7 +268,7 @@ namespace Allors.Adapters.Special
                 Assert.Contains(b.Id, roles);
 
                 Assert.AreEqual(1, changes.GetRoleTypes(a.Id).Count());
-                Assert.AreEqual(C1Meta.C1C2one2one, changes.GetRoleTypes(a.Id).First());
+                Assert.AreEqual(RoleTypes.C1C2one2one, changes.GetRoleTypes(a.Id).First());
 
                 Assert.IsTrue(associations.Contains(a.Id));
                 Assert.IsFalse(associations.Contains(b.Id));
@@ -303,7 +304,7 @@ namespace Allors.Adapters.Special
                 Assert.Contains(c.Id, roles);
 
                 Assert.AreEqual(1, changes.GetRoleTypes(a.Id).Count());
-                Assert.AreEqual(C1Meta.C1C2one2one, changes.GetRoleTypes(a.Id).First());
+                Assert.AreEqual(RoleTypes.C1C2one2one, changes.GetRoleTypes(a.Id).First());
 
                 Assert.IsTrue(associations.Contains(a.Id));
                 Assert.IsFalse(associations.Contains(b.Id));
@@ -338,7 +339,7 @@ namespace Allors.Adapters.Special
                 Assert.Contains(c.Id, roles);
 
                 Assert.AreEqual(1, changes.GetRoleTypes(a.Id).Count());
-                Assert.AreEqual(C1Meta.C1C2one2one, changes.GetRoleTypes(a.Id).First());
+                Assert.AreEqual(RoleTypes.C1C2one2one, changes.GetRoleTypes(a.Id).First());
 
                 Assert.IsTrue(associations.Contains(a.Id));
                 Assert.IsFalse(associations.Contains(b.Id));
@@ -394,8 +395,8 @@ namespace Allors.Adapters.Special
             {
                 init();
 
-                var a = (C1)this.DatabaseSession.Create(C1Meta.ObjectType);
-                var c = (C2)this.DatabaseSession.Create(C2Meta.ObjectType);
+                var a = (C1)this.DatabaseSession.Create(Classes.C1);
+                var c = (C2)this.DatabaseSession.Create(Classes.C2);
 
                 this.DatabaseSession.Commit();
 
@@ -417,7 +418,7 @@ namespace Allors.Adapters.Special
                 Assert.Contains(b.Id, roles);
 
                 Assert.AreEqual(1, changes.GetRoleTypes(a.Id).Count());
-                Assert.AreEqual(C1Meta.C1C2one2many, changes.GetRoleTypes(a.Id).First());
+                Assert.AreEqual(RoleTypes.C1C2one2many, changes.GetRoleTypes(a.Id).First());
 
                 Assert.IsTrue(associations.Contains(a.Id));
                 Assert.IsFalse(associations.Contains(b.Id));
@@ -452,7 +453,7 @@ namespace Allors.Adapters.Special
                 Assert.Contains(c.Id, roles);
 
                 Assert.AreEqual(1, changes.GetRoleTypes(a.Id).Count());
-                Assert.AreEqual(C1Meta.C1C2one2many, changes.GetRoleTypes(a.Id).First());
+                Assert.AreEqual(RoleTypes.C1C2one2many, changes.GetRoleTypes(a.Id).First());
 
                 Assert.IsTrue(associations.Contains(a.Id));
                 Assert.IsFalse(associations.Contains(b.Id));
@@ -487,7 +488,7 @@ namespace Allors.Adapters.Special
                 Assert.Contains(c.Id, roles);
 
                 Assert.AreEqual(1, changes.GetRoleTypes(a.Id).Count());
-                Assert.AreEqual(C1Meta.C1C2one2many, changes.GetRoleTypes(a.Id).First());
+                Assert.AreEqual(RoleTypes.C1C2one2many, changes.GetRoleTypes(a.Id).First());
 
                 Assert.IsTrue(associations.Contains(a.Id));
                 Assert.IsFalse(associations.Contains(b.Id));
@@ -522,7 +523,7 @@ namespace Allors.Adapters.Special
                 Assert.Contains(b.Id, roles);
 
                 Assert.AreEqual(1, changes.GetRoleTypes(a.Id).Count());
-                Assert.AreEqual(C1Meta.C1C2one2many, changes.GetRoleTypes(a.Id).First());
+                Assert.AreEqual(RoleTypes.C1C2one2many, changes.GetRoleTypes(a.Id).First());
 
                 Assert.IsTrue(associations.Contains(a.Id));
                 Assert.IsFalse(associations.Contains(b.Id));
@@ -584,8 +585,8 @@ namespace Allors.Adapters.Special
             {
                 init();
 
-                var a = (C1)this.DatabaseSession.Create(C1Meta.ObjectType);
-                var c = this.DatabaseSession.Create(C3Meta.ObjectType);
+                var a = (C1)this.DatabaseSession.Create(Classes.C1);
+                var c = this.DatabaseSession.Create(Classes.C3);
                 this.DatabaseSession.Commit();
 
                 a = (C1)this.Session.Instantiate(a);
@@ -624,8 +625,8 @@ namespace Allors.Adapters.Special
             {
                 init();
 
-                var a = (C1)this.DatabaseSession.Create(C1Meta.ObjectType);
-                var c = this.DatabaseSession.Create(C3Meta.ObjectType);
+                var a = (C1)this.DatabaseSession.Create(Classes.C1);
+                var c = this.DatabaseSession.Create(Classes.C3);
                 this.DatabaseSession.Commit();
 
                 a = (C1)this.Session.Instantiate(a);

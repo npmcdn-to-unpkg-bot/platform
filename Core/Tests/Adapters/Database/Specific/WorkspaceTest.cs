@@ -25,7 +25,7 @@ namespace Allors.Adapters.Special
 
     using Allors;
 
-    using global::Domain;
+    using Allors.Domain;
 
     using NUnit.Framework;
 

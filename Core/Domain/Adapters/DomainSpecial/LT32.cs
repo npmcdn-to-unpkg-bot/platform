@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Domain
+namespace Allors.Domain
 {
     using Allors;
 
@@ -26,12 +26,12 @@ namespace Domain
     {
         public static LT32 Create(ISession session)
         {
-            return (LT32)session.Create(LT32Meta.ObjectType);
+            return (LT32)session.Create(Meta.ObjectType);
         }
 
         public static LT32[] Create(ISession session, int count)
         {
-            return (LT32[])session.Create(LT32Meta.ObjectType, count);
+            return (LT32[])session.Create(Meta.ObjectType, count);
         }
 
         public static LT32[] Instantiate(ISession session, string[] ids)
@@ -41,7 +41,7 @@ namespace Domain
 
         public static LT32[] Extent(ISession session)
         {
-            return (LT32[])session.Extent(LT32Meta.ObjectType).ToArray();
+            return (LT32[])session.Extent(Meta.ObjectType).ToArray();
         }
     }
 }

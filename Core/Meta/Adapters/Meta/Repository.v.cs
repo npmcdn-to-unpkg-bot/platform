@@ -22,11 +22,13 @@ namespace Allors.Meta
 {
     public static partial class Repository
     {
+        public static MetaPopulation MetaPopulation;
+
         static Repository()
         {
             var env = new MetaPopulation();
 
-            Core(env);
+            Allors(env);
             Adapters(env);
 
             MetaPopulation = env;

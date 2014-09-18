@@ -27,7 +27,7 @@ namespace Allors.Adapters.Special
 
     using Allors;
 
-    using global::Domain;
+    using Allors.Domain;
 
     using NUnit.Framework;
 
@@ -600,10 +600,10 @@ namespace Allors.Adapters.Special
 
         private void AssertPopulation(ISession session)
         {
-            Assert.AreEqual(4, this.GetExtent(session, C1Meta.ObjectType).Length);
-            Assert.AreEqual(4, this.GetExtent(session, C2Meta.ObjectType).Length);
-            Assert.AreEqual(4, this.GetExtent(session, C3Meta.ObjectType).Length);
-            Assert.AreEqual(4, this.GetExtent(session, C4Meta.ObjectType).Length);
+            Assert.AreEqual(4, this.GetExtent(session, Classes.C1).Length);
+            Assert.AreEqual(4, this.GetExtent(session, Classes.C2).Length);
+            Assert.AreEqual(4, this.GetExtent(session, Classes.C3).Length);
+            Assert.AreEqual(4, this.GetExtent(session, Classes.C4).Length);
 
             var c1ACopy = C1.Instantiate(session, this.c1A.Strategy.ObjectId);
             var c1BCopy = C1.Instantiate(session, this.c1B.Strategy.ObjectId);

@@ -22,7 +22,8 @@ namespace Allors.Adapters.Special
 
     using Allors;
 
-    using global::Domain;
+    using Allors.Domain;
+    using Allors.Meta;
 
     using NUnit.Framework;
 
@@ -221,8 +222,8 @@ namespace Allors.Adapters.Special
                     c1.C1AllorsBoolean = true;
 
                     // Force a Flush
-                    Extent<C1> extent = this.Session.Extent(C1Meta.ObjectType);
-                    extent.Filter.AddEquals(C1Meta.C1AllorsBoolean, true);
+                    Extent<C1> extent = this.Session.Extent(Classes.C1);
+                    extent.Filter.AddEquals(RoleTypes.C1AllorsBoolean, true);
                     Assert.IsNotNull(extent.First);
 
                     // Garbage Collect
@@ -473,8 +474,8 @@ namespace Allors.Adapters.Special
                     c1.C1AllorsDateTime = new DateTime(1973, 03, 27, 1, 1, 1);
 
                     // Force a Flush
-                    Extent<C1> extent = this.Session.Extent(C1Meta.ObjectType);
-                    extent.Filter.AddEquals(C1Meta.C1AllorsDateTime, new DateTime(1973, 03, 27, 1, 1, 1));
+                    Extent<C1> extent = this.Session.Extent(Classes.C1);
+                    extent.Filter.AddEquals(RoleTypes.C1AllorsDateTime, new DateTime(1973, 03, 27, 1, 1, 1));
                     Assert.IsNotNull(extent.First);
 
                     // Garbage Collect
@@ -679,8 +680,8 @@ namespace Allors.Adapters.Special
                     c1.C1AllorsDecimal = 1M;
 
                     // Force a Flush
-                    Extent<C1> extent = this.Session.Extent(C1Meta.ObjectType);
-                    extent.Filter.AddEquals(C1Meta.C1AllorsDecimal, 1M);
+                    Extent<C1> extent = this.Session.Extent(Classes.C1);
+                    extent.Filter.AddEquals(RoleTypes.C1AllorsDecimal, 1M);
                     Assert.IsNotNull(extent.First);
 
                     // Garbage Collect
@@ -884,8 +885,8 @@ namespace Allors.Adapters.Special
                     c1.C1AllorsDouble = 1;
 
                     // Force a Flush
-                    Extent<C1> extent = this.Session.Extent(C1Meta.ObjectType);
-                    extent.Filter.AddEquals(C1Meta.C1AllorsDouble, 1);
+                    Extent<C1> extent = this.Session.Extent(Classes.C1);
+                    extent.Filter.AddEquals(RoleTypes.C1AllorsDouble, 1);
                     Assert.IsNotNull(extent.First);
 
                     // Garbage Collect
@@ -1094,8 +1095,8 @@ namespace Allors.Adapters.Special
                     c1.C1AllorsInteger = 1;
 
                     // Force a Flush
-                    Extent<C1> extent = this.Session.Extent(C1Meta.ObjectType);
-                    extent.Filter.AddEquals(C1Meta.C1AllorsInteger, 1);
+                    Extent<C1> extent = this.Session.Extent(Classes.C1);
+                    extent.Filter.AddEquals(RoleTypes.C1AllorsInteger, 1);
                     Assert.IsNotNull(extent.First);
 
                     // Garbage Collect
@@ -1274,8 +1275,8 @@ namespace Allors.Adapters.Special
                     c1.C1StringLarge = aLarge;
 
                     // Force a Flush
-                    Extent<C1> extent = this.Session.Extent(C1Meta.ObjectType);
-                    extent.Filter.AddEquals(C1Meta.C1StringLarge, aLarge);
+                    Extent<C1> extent = this.Session.Extent(Classes.C1);
+                    extent.Filter.AddEquals(RoleTypes.C1StringLarge, aLarge);
                     Assert.IsNotNull(extent.First);
 
                     // Garbage Collect
@@ -1485,8 +1486,8 @@ namespace Allors.Adapters.Special
                     c1.C1AllorsLong = 1;
 
                     // Force a Flush
-                    Extent<C1> extent = this.Session.Extent(C1Meta.ObjectType);
-                    extent.Filter.AddEquals(C1Meta.C1AllorsLong, 1);
+                    Extent<C1> extent = this.Session.Extent(Classes.C1);
+                    extent.Filter.AddEquals(RoleTypes.C1AllorsLong, 1);
                     Assert.IsNotNull(extent.First);
 
                     // Garbage Collect
@@ -1685,8 +1686,8 @@ namespace Allors.Adapters.Special
                     c1.C1AllorsBinary = binary1;
 
                     // Force a Flush
-                    Extent<C1> extent = this.Session.Extent(C1Meta.ObjectType);
-                    extent.Filter.AddEquals(C1Meta.C1AllorsBinary, binary1);
+                    Extent<C1> extent = this.Session.Extent(Classes.C1);
+                    extent.Filter.AddEquals(RoleTypes.C1AllorsBinary, binary1);
                     Assert.IsNotNull(extent.First);
 
                     // Garbage Collect
@@ -1879,8 +1880,8 @@ namespace Allors.Adapters.Special
                     c1.C1AllorsString = "a";
 
                     // Force a Flush
-                    Extent<C1> extent = this.Session.Extent(C1Meta.ObjectType);
-                    extent.Filter.AddEquals(C1Meta.C1AllorsString, "a");
+                    Extent<C1> extent = this.Session.Extent(Classes.C1);
+                    extent.Filter.AddEquals(RoleTypes.C1AllorsString, "a");
                     Assert.IsNotNull(extent.First);
 
                     // Garbage Collect
@@ -2048,8 +2049,8 @@ namespace Allors.Adapters.Special
                     c1.C1AllorsUnique = unique;
 
                     // Force a Flush
-                    Extent<C1> extent = this.Session.Extent(C1Meta.ObjectType);
-                    extent.Filter.AddEquals(C1Meta.C1AllorsUnique, unique);
+                    Extent<C1> extent = this.Session.Extent(Classes.C1);
+                    extent.Filter.AddEquals(RoleTypes.C1AllorsUnique, unique);
                     Assert.IsNotNull(extent.First);
 
                     // Garbage Collect
@@ -2105,7 +2106,7 @@ namespace Allors.Adapters.Special
                     try
                     {
                         mark();
-                        c1A.Strategy.SetUnitRole(C1Meta.C1AllorsBoolean, "Oops");
+                        c1A.Strategy.SetUnitRole(RoleTypes.C1AllorsBoolean, "Oops");
                     }
                     catch (ArgumentException)
                     {
@@ -2118,7 +2119,7 @@ namespace Allors.Adapters.Special
                     try
                     {
                         mark();
-                        c1A.Strategy.SetUnitRole(C1Meta.C1AllorsDecimal, "Oops");
+                        c1A.Strategy.SetUnitRole(RoleTypes.C1AllorsDecimal, "Oops");
                     }
                     catch
                     {
@@ -2131,7 +2132,7 @@ namespace Allors.Adapters.Special
                     try
                     {
                         mark();
-                        c1A.Strategy.SetUnitRole(C1Meta.C1AllorsDouble, "Oops");
+                        c1A.Strategy.SetUnitRole(RoleTypes.C1AllorsDouble, "Oops");
                     }
                     catch
                     {
@@ -2144,7 +2145,7 @@ namespace Allors.Adapters.Special
                     try
                     {
                         mark();
-                        c1A.Strategy.SetUnitRole(C1Meta.C1AllorsInteger, "Oops");
+                        c1A.Strategy.SetUnitRole(RoleTypes.C1AllorsInteger, "Oops");
                     }
                     catch
                     {
@@ -2157,7 +2158,7 @@ namespace Allors.Adapters.Special
                     try
                     {
                         mark();
-                        c1A.Strategy.SetUnitRole(C1Meta.C1AllorsString, 0);
+                        c1A.Strategy.SetUnitRole(RoleTypes.C1AllorsString, 0);
                     }
                     catch
                     {
@@ -2170,7 +2171,7 @@ namespace Allors.Adapters.Special
                     try
                     {
                         mark();
-                        c1A.Strategy.SetUnitRole(C1Meta.C1AllorsInteger, 0L);
+                        c1A.Strategy.SetUnitRole(RoleTypes.C1AllorsInteger, 0L);
                     }
                     catch
                     {
@@ -2184,7 +2185,7 @@ namespace Allors.Adapters.Special
                     try
                     {
                         mark();
-                        c1A.Strategy.SetUnitRole(C1Meta.C1AllorsBoolean, c1B);
+                        c1A.Strategy.SetUnitRole(RoleTypes.C1AllorsBoolean, c1B);
                     }
                     catch
                     {
@@ -2197,7 +2198,7 @@ namespace Allors.Adapters.Special
                     try
                     {
                         mark();
-                        c1A.Strategy.SetUnitRole(C1Meta.C1AllorsDateTime, c1B);
+                        c1A.Strategy.SetUnitRole(RoleTypes.C1AllorsDateTime, c1B);
                     }
                     catch
                     {
@@ -2210,7 +2211,7 @@ namespace Allors.Adapters.Special
                     try
                     {
                         mark();
-                        c1A.Strategy.SetUnitRole(C1Meta.C1AllorsDecimal, c1B);
+                        c1A.Strategy.SetUnitRole(RoleTypes.C1AllorsDecimal, c1B);
                     }
                     catch
                     {
@@ -2223,7 +2224,7 @@ namespace Allors.Adapters.Special
                     try
                     {
                         mark();
-                        c1A.Strategy.SetUnitRole(C1Meta.C1AllorsDouble, c1B);
+                        c1A.Strategy.SetUnitRole(RoleTypes.C1AllorsDouble, c1B);
                     }
                     catch
                     {
@@ -2236,7 +2237,7 @@ namespace Allors.Adapters.Special
                     try
                     {
                         mark();
-                        c1A.Strategy.SetUnitRole(C1Meta.C1AllorsInteger, c1B);
+                        c1A.Strategy.SetUnitRole(RoleTypes.C1AllorsInteger, c1B);
                     }
                     catch
                     {
@@ -2249,7 +2250,7 @@ namespace Allors.Adapters.Special
                     try
                     {
                         mark();
-                        c1A.Strategy.SetUnitRole(C1Meta.C1AllorsString, 0);
+                        c1A.Strategy.SetUnitRole(RoleTypes.C1AllorsString, 0);
                     }
                     catch
                     {
@@ -2263,7 +2264,7 @@ namespace Allors.Adapters.Special
                     try
                     {
                         mark();
-                        c1A.Strategy.SetUnitRole(C2Meta.C2AllorsBoolean, true);
+                        c1A.Strategy.SetUnitRole(RoleTypes.C2AllorsBoolean, true);
                     }
                     catch
                     {
@@ -2276,7 +2277,7 @@ namespace Allors.Adapters.Special
                     try
                     {
                         mark();
-                        c1A.Strategy.SetUnitRole(C2Meta.C2AllorsDateTime, DateTime.Now);
+                        c1A.Strategy.SetUnitRole(RoleTypes.C2AllorsDateTime, DateTime.Now);
                     }
                     catch
                     {
@@ -2289,7 +2290,7 @@ namespace Allors.Adapters.Special
                     try
                     {
                         mark();
-                        c1A.Strategy.SetUnitRole(C2Meta.C2AllorsDecimal, DateTime.Now);
+                        c1A.Strategy.SetUnitRole(RoleTypes.C2AllorsDecimal, DateTime.Now);
                     }
                     catch
                     {
@@ -2302,7 +2303,7 @@ namespace Allors.Adapters.Special
                     try
                     {
                         mark();
-                        c1A.Strategy.SetUnitRole(C2Meta.C2AllorsDouble, 0.01m);
+                        c1A.Strategy.SetUnitRole(RoleTypes.C2AllorsDouble, 0.01m);
                     }
                     catch
                     {
@@ -2315,7 +2316,7 @@ namespace Allors.Adapters.Special
                     try
                     {
                         mark();
-                        c1A.Strategy.SetUnitRole(C2Meta.C2AllorsInteger, 1);
+                        c1A.Strategy.SetUnitRole(RoleTypes.C2AllorsInteger, 1);
                     }
                     catch
                     {
@@ -2328,7 +2329,7 @@ namespace Allors.Adapters.Special
                     try
                     {
                         mark();
-                        c1A.Strategy.SetUnitRole(C2Meta.C2AllorsString, "hello");
+                        c1A.Strategy.SetUnitRole(RoleTypes.C2AllorsString, "hello");
                     }
                     catch
                     {
@@ -2342,7 +2343,7 @@ namespace Allors.Adapters.Special
                     try
                     {
                         mark();
-                        c1A.Strategy.SetUnitRole(C1Meta.C1C1one2one, "Ooops");
+                        c1A.Strategy.SetUnitRole(RoleTypes.C1C1one2one, "Ooops");
                     }
                     catch
                     {

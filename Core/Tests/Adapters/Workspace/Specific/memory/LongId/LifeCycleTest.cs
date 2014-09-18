@@ -18,12 +18,12 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors1.Special.Memory.LongId
+namespace Allors.Special.Memory.LongId
 {
     using System;
 
-    using Allors1;
-    using Allors1.Adapters.Special;
+    using Allors;
+    using Allors.Adapters.Special;
 
     using NUnit.Framework;
 

@@ -14,12 +14,12 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors1.Adapters.General
+namespace Allors.Adapters.General
 {
     using System;
 
-    using Allors1;
-    using Allors1.Meta;
+    using Allors;
+    using Allors.Meta;
 
     using NUnit.Framework;
 

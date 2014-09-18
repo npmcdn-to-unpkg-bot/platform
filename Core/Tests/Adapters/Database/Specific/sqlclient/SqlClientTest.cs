@@ -19,6 +19,7 @@ namespace Allors.Adapters.Special.SqlClient
     using System;
 
     using Allors;
+    using Allors.Meta;
 
     using Domain;
 
@@ -64,8 +65,8 @@ namespace Allors.Adapters.Special.SqlClient
 
                 using (var session = this.CreateSession())
                 {
-                    var c1s = (Extent<C1>)session.Create(C1Meta.ObjectType, Count);
-                    var c2s = (Extent<C2>)session.Create(C2Meta.ObjectType, Count);
+                    var c1s = (Extent<C1>)session.Create(Classes.C1, Count);
+                    var c2s = (Extent<C2>)session.Create(Classes.C2, Count);
 
                     for (var i = 0; i < Count; i++)
                     {

@@ -27,7 +27,8 @@ namespace Allors.Adapters.Special
 
     using Allors;
 
-    using global::Domain;
+    using Allors.Domain;
+    using Allors.Meta;
 
     using NUnit.Framework;
 
@@ -4904,7 +4905,7 @@ namespace Allors.Adapters.Special
                     try
                     {
                         mark();
-                        c1a.Strategy.SetCompositeRole(C1Meta.C1C2many2one, c1b);
+                        c1a.Strategy.SetCompositeRole(RoleTypes.C1C2many2one, c1b);
                     }
                     catch
                     {
@@ -4916,7 +4917,7 @@ namespace Allors.Adapters.Special
                     try
                     {
                         mark();
-                        c1a.Strategy.SetCompositeRole(C1Meta.C1I2many2one, c1b);
+                        c1a.Strategy.SetCompositeRole(RoleTypes.C1I2many2one, c1b);
                     }
                     catch
                     {
@@ -4928,7 +4929,7 @@ namespace Allors.Adapters.Special
                     try
                     {
                         mark();
-                        c1a.Strategy.SetCompositeRole(C1Meta.C1S2many2one, c1b);
+                        c1a.Strategy.SetCompositeRole(RoleTypes.C1S2many2one, c1b);
                     }
                     catch
                     {
@@ -4942,7 +4943,7 @@ namespace Allors.Adapters.Special
                     try
                     {
                         mark();
-                        c1a.Strategy.SetCompositeRole(C2Meta.C1many2one, c1b);
+                        c1a.Strategy.SetCompositeRole(RoleTypes.C2C1many2one, c1b);
                     }
                     catch
                     {
@@ -4954,7 +4955,7 @@ namespace Allors.Adapters.Special
                     try
                     {
                         mark();
-                        c1a.Strategy.SetCompositeRole(C2Meta.C2C2many2one, c2b);
+                        c1a.Strategy.SetCompositeRole(RoleTypes.C2C2many2one, c2b);
                     }
                     catch
                     {
@@ -4966,7 +4967,7 @@ namespace Allors.Adapters.Special
                     try
                     {
                         mark();
-                        c1a.Strategy.SetCompositeRole(C1Meta.C1AllorsString, c1b);
+                        c1a.Strategy.SetCompositeRole(RoleTypes.C1AllorsString, c1b);
                     }
                     catch
                     {
@@ -4978,7 +4979,7 @@ namespace Allors.Adapters.Special
                     try
                     {
                         mark();
-                        c1a.Strategy.SetCompositeRole(C1Meta.C1C2many2many, c2b);
+                        c1a.Strategy.SetCompositeRole(RoleTypes.C1C2many2many, c2b);
                     }
                     catch
                     {

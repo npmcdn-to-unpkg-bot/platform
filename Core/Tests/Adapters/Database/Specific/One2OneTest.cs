@@ -24,7 +24,8 @@ namespace Allors.Adapters.Special
 
     using Allors;
 
-    using global::Domain;
+    using Allors.Domain;
+    using Allors.Meta;
 
     using NUnit.Framework;
 
@@ -550,8 +551,8 @@ namespace Allors.Adapters.Special
                         Assert.AreEqual(null, to.C1WhereC1one2one);
 
                         // 1-1
-                        from.Strategy.SetRole(C1Meta.C1C1one2one, to);
-                        from.Strategy.SetRole(C1Meta.C1C1one2one, to);
+                        from.Strategy.SetRole(RoleTypes.C1C1one2one, to);
+                        from.Strategy.SetRole(RoleTypes.C1C1one2one, to);
 
                         mark();
                         Assert.AreEqual(to, from.C1C1one2one);
@@ -562,9 +563,9 @@ namespace Allors.Adapters.Special
                         // 0-0        
                         from.RemoveC1C1one2one();
                         from.RemoveC1C1one2one();
-                        from.Strategy.SetRole(C1Meta.C1C1one2one, to);
-                        from.Strategy.SetRole(C1Meta.C1C1one2one, null);
-                        from.Strategy.SetRole(C1Meta.C1C1one2one, null);
+                        from.Strategy.SetRole(RoleTypes.C1C1one2one, to);
+                        from.Strategy.SetRole(RoleTypes.C1C1one2one, null);
+                        from.Strategy.SetRole(RoleTypes.C1C1one2one, null);
                         mark();
                         Assert.AreEqual(null, from.C1C1one2one);
                         Assert.AreEqual(null, from.C1C1one2one);
@@ -2847,7 +2848,7 @@ namespace Allors.Adapters.Special
                     try
                     {
                         mark();
-                        c1a.Strategy.SetCompositeRole(C1Meta.C1C2one2one, c1b);
+                        c1a.Strategy.SetCompositeRole(RoleTypes.C1C2one2one, c1b);
                     }
                     catch
                     {
@@ -2860,7 +2861,7 @@ namespace Allors.Adapters.Special
                     try
                     {
                         mark();
-                        c1a.Strategy.SetCompositeRole(C1Meta.C1I2one2one, c1b);
+                        c1a.Strategy.SetCompositeRole(RoleTypes.C1I2one2one, c1b);
                     }
                     catch
                     {
@@ -2873,7 +2874,7 @@ namespace Allors.Adapters.Special
                     try
                     {
                         mark();
-                        c1a.Strategy.SetCompositeRole(C1Meta.C1S2one2one, c1b);
+                        c1a.Strategy.SetCompositeRole(RoleTypes.C1S2one2one, c1b);
                     }
                     catch
                     {
@@ -2887,7 +2888,7 @@ namespace Allors.Adapters.Special
                     try
                     {
                         mark();
-                        c1a.Strategy.SetCompositeRole(C2Meta.C1one2one, c1b);
+                        c1a.Strategy.SetCompositeRole(RoleTypes.C2C1one2one, c1b);
                     }
                     catch
                     {
@@ -2900,7 +2901,7 @@ namespace Allors.Adapters.Special
                     try
                     {
                         mark();
-                        c1a.Strategy.SetCompositeRole(C2Meta.C2C2one2one, c2b);
+                        c1a.Strategy.SetCompositeRole(RoleTypes.C2C2one2one, c2b);
                     }
                     catch
                     {
@@ -2913,7 +2914,7 @@ namespace Allors.Adapters.Special
                     try
                     {
                         mark();
-                        c1a.Strategy.SetCompositeRole(C1Meta.C1AllorsString, c1b);
+                        c1a.Strategy.SetCompositeRole(RoleTypes.C1AllorsString, c1b);
                     }
                     catch
                     {
@@ -2926,7 +2927,7 @@ namespace Allors.Adapters.Special
                     try
                     {
                         mark();
-                        c1a.Strategy.SetCompositeRole(C1Meta.C1C2one2many, c2b);
+                        c1a.Strategy.SetCompositeRole(RoleTypes.C1C2one2many, c2b);
                     }
                     catch
                     {

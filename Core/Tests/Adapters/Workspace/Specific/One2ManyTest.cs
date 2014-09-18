@@ -16,7 +16,7 @@
 //-------------------------------------------------------------------------------------------------
 namespace Allors.Special
 {
-    using global::Domain;
+    using Allors.Domain;
 
     using NUnit.Framework;
 

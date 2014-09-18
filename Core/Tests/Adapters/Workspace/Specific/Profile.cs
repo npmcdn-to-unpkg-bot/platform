@@ -31,7 +31,7 @@ namespace Allors.Special
 
     public abstract class Profile : IProfile
     {
-        private readonly ObjectFactory objectFactory = new ObjectFactory(Repository.MetaPopulation, typeof(IObject).Assembly, "Domain");
+        private readonly ObjectFactory objectFactory = new ObjectFactory(Repository.MetaPopulation, typeof(ObjectBase).Assembly, "Allors.Domain");
 
         private int eventCounter;
         private IPopulation population;

@@ -19,7 +19,7 @@
 // <summary>Defines the Default type.</summary>
 //------------------------------------------------------------------------------------------------
 
-namespace Domain
+namespace Allors.Domain
 {
     public partial interface Named
     {

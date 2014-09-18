@@ -22,7 +22,7 @@ namespace Allors.Special
 
     using Allors;
 
-    using global::Domain;
+    using Allors.Domain;
 
     using NUnit.Framework;
 
@@ -56,7 +56,7 @@ namespace Allors.Special
                 var workspace = (IWorkspace)this.CreatePopulation();
                 using (var session = workspace.CreateSession())
                 {
-                    Assert.AreEqual(0, session.LocalExtent(C1Meta.ObjectType).Count);
+                    Assert.AreEqual(0, session.LocalExtent(Classes.C1).Count);
                 }
 
                 using (var session = workspace.CreateSession())

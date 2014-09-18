@@ -20,11 +20,11 @@
 //------------------------------------------------------------------------------------------------
 
 
-namespace Allors1.Adapters.General.Memory.Connected.IntegerId
+namespace Allors.Adapters.General.Memory.Connected.IntegerId
 {
-    using Allors1.Adapters;
+    using Allors.Adapters;
 
-    using Allors1.Configuration;
+    using Allors.Configuration;
 
     public class Profile : General.Profile
     {

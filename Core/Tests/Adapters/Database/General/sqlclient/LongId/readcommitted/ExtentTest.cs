@@ -21,13 +21,13 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors1.Adapters.General.SqlClient.Connected.LongId.ReadCommitted
+namespace Allors.Adapters.General.SqlClient.Connected.LongId.ReadCommitted
 {
-    using Allors1;
+    using Allors;
 
-    using Allors1.Adapters;
+    using Allors.Adapters;
 
-    using Allors1.Meta;
+    using Allors.Meta;
 
     using NUnit.Framework;
 

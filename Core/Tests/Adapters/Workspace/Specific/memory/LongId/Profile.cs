@@ -18,10 +18,10 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors1.Special.Memory.LongId
+namespace Allors.Special.Memory.LongId
 {
-    using Allors1;
-    using Allors1.Configuration;
+    using Allors;
+    using Allors.Configuration;
 
     public class Profile : Special.Profile
     {

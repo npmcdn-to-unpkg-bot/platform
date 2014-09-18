@@ -20,7 +20,7 @@ namespace Allors.Adapters.Special
 
     using Allors;
 
-    using global::Domain;
+    using Allors.Domain;
 
     // TODO: One2One (c1->c3 & i12->c3)
     internal sealed class Population
