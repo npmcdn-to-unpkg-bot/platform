@@ -63,7 +63,7 @@ namespace Allors
             this.CoreOnDelete();
             this.CustomOnDelete();
 
-            this.XDelete();
+            this.AllorsDelete();
         }
     }
 }

@@ -95,8 +95,7 @@ namespace Allors
             return this.Strategy.ObjectId.GetHashCode();
         }
 
-        // TODO: Rename
-        public void XDelete()
+        private void AllorsDelete()
         {
             this.strategy.Delete();
         }
