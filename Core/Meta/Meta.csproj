@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Allors\Repository.cs" />
     <Compile Include="CoreTest\Meta\Repository.cs" />
     <Compile Include="CoreTest\Meta\Repository.v.cs" />
     <Compile Include="Core\Meta\Path.cs" />

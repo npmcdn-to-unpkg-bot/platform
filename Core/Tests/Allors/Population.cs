@@ -27,12 +27,12 @@ namespace Allors.Meta.Static
         {
             this.metaPopulation = new MetaPopulation();
 
-            var core = (Domain)this.metaPopulation.Find(new Guid("CA802192-8186-4C2A-8315-A8DEFAA74A12"));
+            var allors = Repository.Allors(this.metaPopulation);
 
             var validationlog = this.metaPopulation.Validate();
 
             this.Domain = new Domain(this.MetaPopulation, Guid.NewGuid()) { Name = "Domain" };
-            this.Domain.AddDirectSuperdomain(core);
+            this.Domain.AddDirectSuperdomain(allors);
 
             this.GetUnits();
         }

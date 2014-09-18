@@ -66,19 +66,6 @@ namespace Allors.Meta
             this.methodTypes = new List<MethodType>();
 
             this.metaObjectById = new Dictionary<Guid, MetaObject>();
-
-            // Allors Domain
-            var domain = new Domain(this, new Guid("CA802192-8186-4C2A-8315-A8DEFAA74A12")) { Name = "Allors" };
-
-            new UnitBuilder(domain, UnitIds.StringId).WithSingularName("AllorsString").WithPluralName("AllorsStrings").WithUnitTag(UnitTags.AllorsString).Build();
-            new UnitBuilder(domain, UnitIds.IntegerId).WithSingularName("AllorsInteger").WithPluralName("AllorsIntegers").WithUnitTag(UnitTags.AllorsInteger).Build();
-            new UnitBuilder(domain, UnitIds.LongId).WithSingularName("AllorsLong").WithPluralName("AllorsLongs").WithUnitTag(UnitTags.AllorsLong).Build();
-            new UnitBuilder(domain, UnitIds.DecimalId).WithSingularName("AllorsDecimal").WithPluralName("AllorsDecimals").WithUnitTag(UnitTags.AllorsDecimal).Build();
-            new UnitBuilder(domain, UnitIds.DoubleId).WithSingularName("AllorsDouble").WithPluralName("AllorsDoubles").WithUnitTag(UnitTags.AllorsDouble).Build();
-            new UnitBuilder(domain, UnitIds.BooleanId).WithSingularName("AllorsBoolean").WithPluralName("AllorsBooleans").WithUnitTag(UnitTags.AllorsBoolean).Build();
-            new UnitBuilder(domain, UnitIds.DatetimeId).WithSingularName("AllorsDateTime").WithPluralName("AllorsDateTimes").WithUnitTag(UnitTags.AllorsDateTime).Build();
-            new UnitBuilder(domain, UnitIds.Unique).WithSingularName("AllorsUnique").WithPluralName("AllorsUniques").WithUnitTag(UnitTags.AllorsUnique).Build();
-            new UnitBuilder(domain, UnitIds.BinaryId).WithSingularName("AllorsBinary").WithPluralName("AllorsBinaries").WithUnitTag(UnitTags.AllorsBinary).Build();
         }
 
         public bool IsLocked
