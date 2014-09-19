@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5582AF89-13A9-43B9-A208-230242323001}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Tests</RootNamespace>
+    <AssemblyName>Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\AllorsTestUtils.cs" />
+    <Compile Include="Common\assertions\StrategyAssert.cs" />
+    <Compile Include="Common\assertions\StrategyAssertTest.cs" />
+    <Compile Include="Common\IProfile.cs" />
+    <Compile Include="Common\Population.cs" />
+    <Compile Include="Database\Specific\CacheTest.cs" />
+    <Compile Include="Database\Specific\ChangesTest.cs" />
+    <Compile Include="Database\Specific\ExtentTest.cs" />
+    <Compile Include="Database\Specific\LifeCycleTest.cs" />
+    <Compile Include="Database\Specific\Many2ManyTest.cs" />
+    <Compile Include="Database\Specific\Many2OneTest.cs" />
+    <Compile Include="Database\Specific\memory\IntegerId\ChangesTest.cs" />
+    <Compile Include="Database\Specific\memory\IntegerId\ExtentTest.cs" />
+    <Compile Include="Database\Specific\memory\IntegerId\LifeCycleTest.cs" />
+    <Compile Include="Database\Specific\memory\IntegerId\Many2ManyTest.cs" />
+    <Compile Include="Database\Specific\memory\IntegerId\Many2OneTest.cs" />
+    <Compile Include="Database\Specific\memory\IntegerId\One2ManyTest.cs" />
+    <Compile Include="Database\Specific\memory\IntegerId\One2OneTest.cs" />
+    <Compile Include="Database\Specific\memory\IntegerId\Profile.cs" />
+    <Compile Include="Database\Specific\memory\IntegerId\PropertiesTest.cs" />
+    <Compile Include="Database\Specific\memory\IntegerId\RelationExtentTest.cs" />
+    <Compile Include="Database\Specific\memory\IntegerId\SandboxTest.cs" />
+    <Compile Include="Database\Specific\memory\IntegerId\SerializationTest.cs" />
+    <Compile Include="Database\Specific\memory\IntegerId\SessionEventsTest.cs" />
+    <Compile Include="Database\Specific\memory\IntegerId\SyncTest.cs" />
+    <Compile Include="Database\Specific\memory\IntegerId\UnitTest.cs" />
+    <Compile Include="Database\Specific\memory\IntegerId\WorkspaceTest.cs" />
+    <Compile Include="Database\Specific\memory\LongId\ChangesTest.cs" />
+    <Compile Include="Database\Specific\memory\LongId\ExtentTest.cs" />
+    <Compile Include="Database\Specific\memory\LongId\LifeCycleTest.cs" />
+    <Compile Include="Database\Specific\memory\LongId\Many2ManyTest.cs" />
+    <Compile Include="Database\Specific\memory\LongId\Many2OneTest.cs" />
+    <Compile Include="Database\Specific\memory\LongId\One2ManyTest.cs" />
+    <Compile Include="Database\Specific\memory\LongId\One2OneTest.cs" />
+    <Compile Include="Database\Specific\memory\LongId\Profile.cs" />
+    <Compile Include="Database\Specific\memory\LongId\PropertiesTest.cs" />
+    <Compile Include="Database\Specific\memory\LongId\RelationExtentTest.cs" />
+    <Compile Include="Database\Specific\memory\LongId\SandboxTest.cs" />
+    <Compile Include="Database\Specific\memory\LongId\SerializationTest.cs" />
+    <Compile Include="Database\Specific\memory\LongId\SessionEventsTest.cs" />
+    <Compile Include="Database\Specific\memory\LongId\SyncTest.cs" />
+    <Compile Include="Database\Specific\memory\LongId\UnitTest.cs" />
+    <Compile Include="Database\Specific\memory\LongId\WorkspaceTest.cs" />
+    <Compile Include="Database\Specific\npgsql\IntegerId\ReadCommitted\ChangeSetTest.cs" />
+    <Compile Include="Database\Specific\npgsql\IntegerId\ReadCommitted\ExtentTest.cs" />
+    <Compile Include="Database\Specific\npgsql\IntegerId\ReadCommitted\LifeCycleTest.cs" />
+    <Compile Include="Database\Specific\npgsql\IntegerId\ReadCommitted\Many2ManyTest.cs" />
+    <Compile Include="Database\Specific\npgsql\IntegerId\ReadCommitted\Many2OneTest.cs" />
+    <Compile Include="Database\Specific\npgsql\IntegerId\ReadCommitted\One2ManyTest.cs" />
+    <Compile Include="Database\Specific\npgsql\IntegerId\ReadCommitted\One2OneTest.cs" />
+    <Compile Include="Database\Specific\npgsql\IntegerId\ReadCommitted\Profile.cs" />
+    <Compile Include="Database\Specific\npgsql\IntegerId\ReadCommitted\PropertiesTest.cs" />
+    <Compile Include="Database\Specific\npgsql\IntegerId\ReadCommitted\RelationExtentTest.cs" />
+    <Compile Include="Database\Specific\npgsql\IntegerId\ReadCommitted\SandboxTest.cs" />
+    <Compile Include="Database\Specific\npgsql\IntegerId\ReadCommitted\SchemaTest.cs" />
+    <Compile Include="Database\Specific\npgsql\IntegerId\ReadCommitted\SerializationTest.cs" />
+    <Compile Include="Database\Specific\npgsql\IntegerId\ReadCommitted\SessionEventsTest.cs" />
+    <Compile Include="Database\Specific\npgsql\IntegerId\ReadCommitted\SyncTest.cs" />
+    <Compile Include="Database\Specific\npgsql\IntegerId\ReadCommitted\UnitTest.cs" />
+    <Compile Include="Database\Specific\npgsql\IntegerId\ReadCommitted\WorkspaceTest.cs" />
+    <Compile Include="Database\Specific\npgsql\Profile.cs" />
+    <Compile Include="Database\Specific\npgsql\UnitTest.cs" />
+    <Compile Include="Database\Specific\One2ManyTest.cs" />
+    <Compile Include="Database\Specific\One2OneTest.cs" />
+    <Compile Include="Database\Specific\Profile.cs" />
+    <Compile Include="Database\Specific\PropertiesTest.cs" />
+    <Compile Include="Database\Specific\RelationExtentTest.cs" />
+    <Compile Include="Database\Specific\SandboxTest.cs" />
+    <Compile Include="Database\Specific\SchemaTest.cs" />
+    <Compile Include="Database\Specific\SerializationTest.cs" />
+    <Compile Include="Database\Specific\SessionEventsTest.cs" />
+    <Compile Include="Database\Specific\sqlclient\ExtentTest.cs" />
+    <Compile Include="Database\Specific\sqlclient\IntegerId\ReadCommitted\CacheTest.cs" />
+    <Compile Include="Database\Specific\sqlclient\IntegerId\ReadCommitted\ChangesTest.cs" />
+    <Compile Include="Database\Specific\sqlclient\IntegerId\ReadCommitted\ExtentTest.cs" />
+    <Compile Include="Database\Specific\sqlclient\IntegerId\ReadCommitted\LifeCycleTest.cs" />
+    <Compile Include="Database\Specific\sqlclient\IntegerId\ReadCommitted\Many2ManyTest.cs" />
+    <Compile Include="Database\Specific\sqlclient\IntegerId\ReadCommitted\Many2OneTest.cs" />
+    <Compile Include="Database\Specific\sqlclient\IntegerId\ReadCommitted\One2ManyTest.cs" />
+    <Compile Include="Database\Specific\sqlclient\IntegerId\ReadCommitted\One2OneTest.cs" />
+    <Compile Include="Database\Specific\sqlclient\IntegerId\ReadCommitted\Profile.cs" />
+    <Compile Include="Database\Specific\sqlclient\IntegerId\ReadCommitted\PropertiesTest.cs" />
+    <Compile Include="Database\Specific\sqlclient\IntegerId\ReadCommitted\RelationExtentTest.cs" />
+    <Compile Include="Database\Specific\sqlclient\IntegerId\ReadCommitted\SandboxTest.cs" />
+    <Compile Include="Database\Specific\sqlclient\IntegerId\ReadCommitted\SchemaTest.cs" />
+    <Compile Include="Database\Specific\sqlclient\IntegerId\ReadCommitted\SerializationTest.cs" />
+    <Compile Include="Database\Specific\sqlclient\IntegerId\ReadCommitted\SessionEventsTest.cs" />
+    <Compile Include="Database\Specific\sqlclient\IntegerId\ReadCommitted\SqlClientTest.cs" />
+    <Compile Include="Database\Specific\sqlclient\IntegerId\ReadCommitted\SyncTest.cs" />
+    <Compile Include="Database\Specific\sqlclient\IntegerId\ReadCommitted\UnitTest.cs" />
+    <Compile Include="Database\Specific\sqlclient\IntegerId\ReadCommitted\WorkspaceTest.cs" />
+    <Compile Include="Database\Specific\sqlclient\LongId\ReadCommitted\CacheTest.cs" />
+    <Compile Include="Database\Specific\sqlclient\LongId\ReadCommitted\ChangesTest.cs" />
+    <Compile Include="Database\Specific\sqlclient\LongId\ReadCommitted\ExtentTest.cs" />
+    <Compile Include="Database\Specific\sqlclient\LongId\ReadCommitted\LifeCycleTest.cs" />
+    <Compile Include="Database\Specific\sqlclient\LongId\ReadCommitted\Many2ManyTest.cs" />
+    <Compile Include="Database\Specific\sqlclient\LongId\ReadCommitted\Many2OneTest.cs" />
+    <Compile Include="Database\Specific\sqlclient\LongId\ReadCommitted\One2ManyTest.cs" />
+    <Compile Include="Database\Specific\sqlclient\LongId\ReadCommitted\One2OneTest.cs" />
+    <Compile Include="Database\Specific\sqlclient\LongId\ReadCommitted\Profile.cs" />
+    <Compile Include="Database\Specific\sqlclient\LongId\ReadCommitted\PropertiesTest.cs" />
+    <Compile Include="Database\Specific\sqlclient\LongId\ReadCommitted\RelationExtentTest.cs" />
+    <Compile Include="Database\Specific\sqlclient\LongId\ReadCommitted\SandboxTest.cs" />
+    <Compile Include="Database\Specific\sqlclient\LongId\ReadCommitted\SchemaTest.cs" />
+    <Compile Include="Database\Specific\sqlclient\LongId\ReadCommitted\SerializationTest.cs" />
+    <Compile Include="Database\Specific\sqlclient\LongId\ReadCommitted\SessionEventsTest.cs" />
+    <Compile Include="Database\Specific\sqlclient\LongId\ReadCommitted\SqlClientTest.cs" />
+    <Compile Include="Database\Specific\sqlclient\LongId\ReadCommitted\SyncTest.cs" />
+    <Compile Include="Database\Specific\sqlclient\LongId\ReadCommitted\UnitTest.cs" />
+    <Compile Include="Database\Specific\sqlclient\LongId\ReadCommitted\WorkspaceTest.cs" />
+    <Compile Include="Database\Specific\sqlclient\Profile.cs" />
+    <Compile Include="Database\Specific\sqlclient\SchemaTest.cs" />
+    <Compile Include="Database\Specific\sqlclient\SqlClientTest.cs" />
+    <Compile Include="Database\Specific\sqlclient\UnitTest.cs" />
+    <Compile Include="Database\Specific\SyncTest.cs" />
+    <Compile Include="Database\Specific\UnitTest.cs" />
+    <Compile Include="Database\Specific\WorkspaceTest.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="Workspace\Specific\ExtentTest.cs" />
+    <Compile Include="Workspace\Specific\Many2ManyTest.cs" />
+    <Compile Include="Workspace\Specific\Many2OneTest.cs" />
+    <Compile Include="Workspace\Specific\memory\IntegerId\ChangesTest.cs" />
+    <Compile Include="Workspace\Specific\memory\IntegerId\ExtentTest.cs" />
+    <Compile Include="Workspace\Specific\memory\IntegerId\LifeCycleTest.cs" />
+    <Compile Include="Workspace\Specific\memory\IntegerId\Many2ManyTest.cs" />
+    <Compile Include="Workspace\Specific\memory\IntegerId\Many2OneTest.cs" />
+    <Compile Include="Workspace\Specific\memory\IntegerId\One2ManyTest.cs" />
+    <Compile Include="Workspace\Specific\memory\IntegerId\One2OneTest.cs" />
+    <Compile Include="Workspace\Specific\memory\IntegerId\Profile.cs" />
+    <Compile Include="Workspace\Specific\memory\IntegerId\PropertiesTest.cs" />
+    <Compile Include="Workspace\Specific\memory\IntegerId\RelationExtentTest.cs" />
+    <Compile Include="Workspace\Specific\memory\IntegerId\SandboxTest.cs" />
+    <Compile Include="Workspace\Specific\memory\IntegerId\SerializationTest.cs" />
+    <Compile Include="Workspace\Specific\memory\IntegerId\SessionEventsTest.cs" />
+    <Compile Include="Workspace\Specific\memory\IntegerId\UnitTest.cs" />
+    <Compile Include="Workspace\Specific\One2ManyTest.cs" />
+    <Compile Include="Workspace\Specific\One2OneTest.cs" />
+    <Compile Include="Workspace\Specific\Profile.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+    <None Include="Settings.StyleCop" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Framework\Framework\Framework.csproj">
+      <Project>{84495b8e-1800-41c9-a236-abe6265a23a3}</Project>
+      <Name>Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Adapters\Adapters.csproj">
+      <Project>{233622ff-5493-4981-9529-4337d84c8312}</Project>
+      <Name>Adapters</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{b6c2e17b-53e1-44a4-9299-5350cc854e65}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Meta\Meta.csproj">
+      <Project>{ba6efcfe-cb7f-4994-a5a4-c11ddaac32dd}</Project>
+      <Name>Meta</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

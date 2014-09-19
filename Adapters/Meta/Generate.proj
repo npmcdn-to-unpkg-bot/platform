@@ -1,0 +1,12 @@
+<Project DefaultTargets="Generate" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <UsingTask TaskName="Generate" AssemblyFile="bin\Debug\Meta.dll"/>
+
+  <Target Name="Generate">
+    <Generate Template="../Templates/allors.cs.stg" Output="../Domain/Generated/allors"/> 
+    <Generate Template="../Templates/core.cs.stg" Output="../Domain/Generated/core"/>
+  </Target>
+
+</Project>
+
+

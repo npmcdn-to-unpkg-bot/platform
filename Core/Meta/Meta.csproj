@@ -41,8 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Adapters\Meta\Repository.cs" />
-    <Compile Include="Adapters\Meta\Repository.v.cs" />
     <Compile Include="Allors\Repository.cs" />
     <Compile Include="Allors\Generation\Generate.cs" />
     <Compile Include="Allors\Generation\GenerateLog.cs" />
@@ -51,6 +49,10 @@
     <Compile Include="Allors\Generation\Storage\AllorsFileInfo.cs" />
     <Compile Include="Allors\Generation\Storage\Location.cs" />
     <Compile Include="Allors\Generation\StringTemplate.cs" />
+    <Compile Include="Test\Meta\Repository.cs" />
+    <Compile Include="Test\Meta\Repository.v.cs" />
+    <Compile Include="Core\Meta\Path.cs" />
+    <Compile Include="Core\Meta\Repository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -59,7 +61,7 @@
     <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Framework\Framework.csproj">
+    <ProjectReference Include="..\..\Framework\Framework\Framework.csproj">
       <Project>{84495b8e-1800-41c9-a236-abe6265a23a3}</Project>
       <Name>Framework</Name>
     </ProjectReference>
