@@ -171,9 +171,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void CoreSetup(Setup config)
+        protected override void BaseSetup(Setup config)
         {
-            base.CoreSetup(config);
+            base.BaseSetup(config);
 
             this.Sync();
 

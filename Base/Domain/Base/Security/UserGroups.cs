@@ -50,16 +50,16 @@ namespace Allors.Domain
             get { return this.cache ?? (this.cache = new UniquelyIdentifiableCache<UserGroup>(this.Session)); }
         }
 
-        protected override void CorePrepare(Setup config)
+        protected override void BasePrepare(Setup config)
         {
-            base.CorePrepare(config);
+            base.BasePrepare(config);
 
             config.AddDependency(this.ObjectType, Roles.Meta.ObjectType);
         }
 
-        protected override void CoreSetup(Setup config)
+        protected override void BaseSetup(Setup config)
         {
-            base.CoreSetup(config);
+            base.BaseSetup(config);
 
             // Default Groups
             new UserGroupBuilder(Session).WithName(GuestsName).WithUniqueId(GuestsId).WithRole(new Roles(Session).Guest).Build();
@@ -68,9 +68,9 @@ namespace Allors.Domain
             SecurityCache.Invalidate();
         }
 
-        protected override void CoreSecure(Security config)
+        protected override void BaseSecure(Security config)
         {
-            base.CoreSecure(config);
+            base.BaseSecure(config);
 
             var full = new[] { Operation.Read, Operation.Write, Operation.Execute };
 

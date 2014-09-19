@@ -469,6 +469,11 @@ namespace Allors.Meta
             // Singleton
             new RelationTypeBuilder(domain, new Guid("9ce2ef9b-2376-474d-9aa2-d23fbe1ed236"), new Guid("04bc6904-bd6e-4401-9720-088ebf1fb392"), new Guid("7ab62a77-c098-4ad6-836d-53ae820df951")).WithObjectTypes(singleton, stringTemplate).WithSingularName("PersonTemplate").WithPluralName("PersonTemplates").WithCardinality(Cardinalities.ManyToOne).WithIsIndexed(true).Build();
 
+
+            // MethodTypes
+            // Organisation
+            new MethodTypeBuilder(domain, new Guid("{73F68023-C051-4CAA-B2EF-8DA67E229FEE}")).WithObjectType(organisation).WithName("JustDoIt").Build();
+
             return domain;
        }
     }

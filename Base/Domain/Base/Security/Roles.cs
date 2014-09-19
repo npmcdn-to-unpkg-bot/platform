@@ -59,9 +59,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void CoreSetup(Setup config)
+        protected override void BaseSetup(Setup config)
         {
-            base.CoreSetup(config);
+            base.BaseSetup(config);
 
             // Horizontal Roles
             new RoleBuilder(Session).WithName("Administrator").WithUniqueId(AdministratorId).Build();
@@ -73,9 +73,9 @@ namespace Allors.Domain
             SecurityCache.Invalidate();
         }
 
-        protected override void CoreSecure(Security config)
+        protected override void BaseSecure(Security config)
         {
-            base.CoreSecure(config);
+            base.BaseSecure(config);
 
             var full = new[] { Operation.Read, Operation.Write, Operation.Execute };
 

@@ -11,7 +11,8 @@
 
         public static void Generate()
         {
-            var log = Development.Repository.Tasks.Generate.Execute("../../../Templates/domain.cs.stg", "../../../Domain/Generated");
+            Development.Repository.Tasks.Generate.Execute("../../../../Core/Templates/Core/domain.cs.stg", "../../../Domain/Generated/Core");
+            Development.Repository.Tasks.Generate.Execute("../../../Templates/Base/domain.cs.stg", "../../../Domain/Generated/Base");
             Console.WriteLine("Finished");
             Console.ReadKey();
         }

@@ -103,9 +103,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void CoreSetup(Setup setup)
+        protected override void BaseSetup(Setup setup)
         {
-            base.CoreSetup(setup);
+            base.BaseSetup(setup);
 
             new MediaTypeBuilder(this.Session).WithName(PngName).WithDefaultFileExtension("png").Build();
             new MediaTypeBuilder(this.Session).WithName(JpegName).WithDefaultFileExtension("jpg").Build();
@@ -115,9 +115,9 @@ namespace Allors.Domain
             new MediaTypeBuilder(this.Session).WithName(OctetStreamName).Build();
         }
 
-        protected override void CoreSecure(Security config)
+        protected override void BaseSecure(Security config)
         {
-            base.CoreSecure(config);
+            base.BaseSecure(config);
 
             var full = new[] { Operation.Read, Operation.Write, Operation.Execute };
 

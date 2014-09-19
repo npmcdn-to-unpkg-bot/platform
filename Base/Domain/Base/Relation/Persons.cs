@@ -24,9 +24,9 @@ namespace Allors.Domain
 
     public partial class Persons
     {
-        protected override void CoreSecure(Security config)
+        protected override void BaseSecure(Security config)
         {
-            base.CoreSecure(config);
+            base.BaseSecure(config);
 
             var full = new[] { Operation.Read, Operation.Write, Operation.Execute };
 

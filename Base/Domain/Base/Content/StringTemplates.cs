@@ -24,9 +24,9 @@ namespace Allors.Domain
 
     public partial class StringTemplates
     {
-        protected override void CoreSecure(Domain.Security config)
+        protected override void BaseSecure(Domain.Security config)
         {
-            base.CoreSecure(config);
+            base.BaseSecure(config);
 
             var full = new[] { Operation.Read, Operation.Write, Operation.Execute };
 

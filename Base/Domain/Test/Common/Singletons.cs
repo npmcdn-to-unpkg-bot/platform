@@ -28,9 +28,9 @@ namespace Allors.Domain
     {
         private static readonly Guid PersonTemplateId = new Guid("7432004B-AEBC-4E6C-958E-5E83B4E027C9");
 
-        protected override void CustomSetup(Allors.Setup setup)
+        protected override void TestSetup(Allors.Setup setup)
         {
-            base.CustomSetup(setup);
+            base.TestSetup(setup);
 
             this.Instance.PersonTemplate = new StringTemplateBuilder(this.Session).WithUniqueId(PersonTemplateId)
                                                    .WithName("Person Derivation")

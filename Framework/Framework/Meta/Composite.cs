@@ -169,6 +169,22 @@ namespace Allors.Meta
             }
         }
 
+        public IEnumerable<RoleType> UnitRoleTypes
+        {
+            get
+            {
+                return this.RoleTypes.Where(roleType => roleType.ObjectType.IsUnit).ToArray();
+            }
+        }
+
+        public IEnumerable<RoleType> CompositeRoleTypes
+        {
+            get
+            {
+                return this.RoleTypes.Where(roleType => roleType.ObjectType.IsComposite).ToArray();
+            }
+        }
+
         public IEnumerable<RoleType> RoleTypesWhereObjectType
         {
             get
@@ -185,6 +201,11 @@ namespace Allors.Meta
         {
             get
             {
+                if (this.Name.Equals("Organisation"))
+                {
+                    var x = 1;
+                }
+
                 this.MetaPopulation.Derive();
                 return this.derivedMethodTypes;
             }

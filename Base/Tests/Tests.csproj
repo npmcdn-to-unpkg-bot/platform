@@ -45,14 +45,39 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\CounterTest.cs" />
+    <Compile Include="Common\NamedConstantTest.cs" />
+    <Compile Include="Common\ObjectStateTests.cs" />
+    <Compile Include="Derivations\DefaultDerivationLogTests.cs" />
+    <Compile Include="Derivations\DerivationGraphTest.cs" />
+    <Compile Include="Derivations\DerivationLogTests.cs" />
+    <Compile Include="Derivations\DerivationTest.cs" />
+    <Compile Include="DomainTest.cs" />
+    <Compile Include="Fixture.cs" />
+    <Compile Include="Misc\BuilderTest.cs" />
+    <Compile Include="Misc\CacheTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\AccessControlListTests.cs" />
+    <Compile Include="Security\AccessControlTests.cs" />
+    <Compile Include="Security\LoginTests.cs" />
+    <Compile Include="Security\PermissionTests.cs" />
+    <Compile Include="Security\RoleTests.cs" />
+    <Compile Include="Security\UserGroupTests.cs" />
+    <Compile Include="XmlStrictValidation.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
+    <Content Include="Resources\PdfAs.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
     <None Include="Settings.StyleCop" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Adapters\Adapters\Adapters.csproj">
+      <Project>{233622ff-5493-4981-9529-4337d84c8312}</Project>
+      <Name>Adapters</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Framework\Framework\Framework.csproj">
       <Project>{84495b8e-1800-41c9-a236-abe6265a23a3}</Project>
       <Name>Framework</Name>

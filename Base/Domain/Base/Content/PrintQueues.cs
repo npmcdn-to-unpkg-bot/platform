@@ -34,9 +34,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void CoreSetup(Setup setup)
+        protected override void BaseSetup(Setup setup)
         {
-            base.CoreSetup(setup);
+            base.BaseSetup(setup);
 
             var defaultPrintQueue = new PrintQueueBuilder(this.Session).WithName("Default Print Queue").WithUniqueId(DefaultPrintQueueId).Build();
 
@@ -44,9 +44,9 @@ namespace Allors.Domain
             singleton.DefaultPrintQueue = defaultPrintQueue;
         }
 
-        protected override void CoreSecure(Security config)
+        protected override void BaseSecure(Security config)
         {
-            base.CoreSecure(config);
+            base.BaseSecure(config);
 
             var full = new[] { Operation.Read, Operation.Write, Operation.Execute };
 

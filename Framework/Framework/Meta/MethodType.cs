@@ -49,6 +49,14 @@ namespace Allors.Meta
             }
         }
 
+        public string FullName
+        {
+            get
+            {
+                return this.ObjectType != null ? this.ObjectType.Name + this.name : this.Name;
+            }
+        }
+
         public Composite ObjectType
         {
             get

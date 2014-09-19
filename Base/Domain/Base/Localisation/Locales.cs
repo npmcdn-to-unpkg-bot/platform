@@ -63,9 +63,9 @@ namespace Allors.Domain
             get { return this.FindBy(Meta.Name, DutchBelgiumName); }
         }
 
-        protected override void CoreSecure(Security config)
+        protected override void BaseSecure(Security config)
         {
-            base.CoreSecure(config);
+            base.BaseSecure(config);
 
             var full = new[] { Operation.Read, Operation.Write, Operation.Execute };
 

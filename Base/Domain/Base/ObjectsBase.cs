@@ -92,17 +92,17 @@ namespace Allors
             return (T)extent.First;
         }
 
-        protected virtual void CorePrepare(Setup config)
+        protected virtual void BasePrepare(Setup config)
         {
             new Locales(this.session).Sync();
             config.Add(this);
         }
 
-        protected virtual void CoreSetup(Setup config)
+        protected virtual void BaseSetup(Setup config)
         {
         }
 
-        protected virtual void CoreSecure(Security config)
+        protected virtual void BaseSecure(Security config)
         {
         }
     }

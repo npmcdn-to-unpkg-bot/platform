@@ -26,22 +26,22 @@ namespace Allors
     {
         public void Prepare(Setup setup)
         {
-            this.CorePrepare(setup);
-            this.CustomPrepare(setup);
+            this.BasePrepare(setup);
+            this.TestPrepare(setup);
         }
 
         public void Setup(Setup setup)
         {
-            this.CoreSetup(setup);
-            this.CustomSetup(setup);
+            this.BaseSetup(setup);
+            this.TestSetup(setup);
 
             this.session.Derive(true);
         }
 
         public void Secure(Security security)
         {
-            this.CoreSecure(security);
-            this.CustomSecure(security);
+            this.BaseSecure(security);
+            this.TestSecure(security);
         }
     }
 }

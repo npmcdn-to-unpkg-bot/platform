@@ -64,6 +64,12 @@ namespace Allors.Meta
 }$
 	}
 
+	public partial class MethodTypes
+	{
+		$meta.MethodTypes:{methodType|public static readonly MethodType $methodType.FullName$ = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("$methodType.IdAsString$")));
+}$
+	}
+
 }
 >>
 
@@ -88,6 +94,8 @@ $objectType.associationTypesWhereObjectType:{associationType|$interfaceAssociati
 $objectType.RoleTypes:{roleType|$metaRoleType(relationType=roleType.RelationType,associationType=roleType.AssociationType,roleType=roleType)$
 }$
 $objectType.AssociationTypes:{associationType|$metaAssociationType(relationType=associationType.RelationType,associationType=associationType,roleType=associationType.RoleType)$
+}$
+$objectType.MethodTypes:{methodType|$metaMethodType(methodType=methodType)$
 }$
 	}
 }
@@ -123,6 +131,8 @@ $objectType.AssociationTypes:{associationType|$classAssociationType(relationType
 $objectType.RoleTypes:{roleType|$metaRoleType(relationType=roleType.RelationType,associationType=roleType.AssociationType,roleType=roleType)$
 }$
 $objectType.AssociationTypes:{associationType|$metaAssociationType(relationType=associationType.RelationType,associationType=associationType,roleType=associationType.RoleType)$
+}$
+$objectType.MethodTypes:{methodType|$metaMethodType(methodType=methodType)$
 }$
 	}
 }
@@ -345,6 +355,16 @@ metaAssociationType(relationType,associationType,roleType) ::= <<
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.$associationType.RelationType.Name$;
+			}
+		} 
+>>
+
+metaMethodType(methodType) ::= <<
+		public global::Allors.Meta.MethodType $methodType.Name$ 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.$methodType.FullName$;
 			}
 		} 
 >>
