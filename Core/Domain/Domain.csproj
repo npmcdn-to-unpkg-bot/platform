@@ -42,12 +42,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\ObjectBase.cs" />
-    <Compile Include="Generated\allors\C1.g.cs" />
-    <Compile Include="Generated\allors\C2.g.cs" />
-    <Compile Include="Generated\allors\I1.g.cs" />
-    <Compile Include="Generated\allors\I12.g.cs" />
-    <Compile Include="Generated\allors\I2.g.cs" />
-    <Compile Include="Generated\allors\Meta.g.cs" />
+    <Compile Include="Generated\Core\C1.g.cs" />
+    <Compile Include="Generated\Core\C2.g.cs" />
+    <Compile Include="Generated\Core\I1.g.cs" />
+    <Compile Include="Generated\Core\I12.g.cs" />
+    <Compile Include="Generated\Core\I2.g.cs" />
+    <Compile Include="Generated\Core\Meta.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Test\ObjectBase.v.cs" />
   </ItemGroup>

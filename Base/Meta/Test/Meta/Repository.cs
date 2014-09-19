@@ -26,10 +26,12 @@ namespace Allors.Meta
     {
         public static readonly MetaPopulation MetaPopulation;
 
-        public static Domain BaseTest(MetaPopulation meta)
+        public static Domain Test(MetaPopulation meta)
         {
             // Imports
-            // Allors
+            // Core
+            var core = (Domain)meta.Find(new Guid("CA802192-8186-4C2A-8315-A8DEFAA74A12"));
+
             var allorsString = (Unit)meta.Find(UnitIds.StringId);
             var allorsInteger = (Unit)meta.Find(UnitIds.IntegerId);
             var allorsLong = (Unit)meta.Find(UnitIds.LongId);
@@ -40,8 +42,8 @@ namespace Allors.Meta
             var allorsUnique = (Unit)meta.Find(UnitIds.Unique);
             var allorsBinary = (Unit)meta.Find(UnitIds.BinaryId);
 
-            // Core
-            var core = (Domain)meta.Find(new Guid("AB41FD0C-C887-4A1D-BEDA-CED69527E69A"));
+            // Base
+            var @base = (Domain)meta.Find(new Guid("AB41FD0C-C887-4A1D-BEDA-CED69527E69A"));
 
             var stringTemplate = (Class)meta.Find(new Guid("0c50c02a-cc9c-4617-8530-15a24d4ac969"));
             var printable = (Interface)meta.Find(new Guid("61207a42-3199-4249-baa4-9dd11dc0f5b1"));
@@ -58,7 +60,7 @@ namespace Allors.Meta
 
             // Test
             var domain = new Domain(meta, new Guid("47636693-E55F-4ED3-93B6-3D75F11D5D4B")) { Name = "BaseTest" };
-            domain.AddDirectSuperdomain(core);
+            domain.AddDirectSuperdomain(@base);
 
             // ObjectTypes
             var c1 = new ClassBuilder(domain, new Guid("7041c691-d896-4628-8f50-1c24f5d03414")).WithSingularName("C1").WithPluralName("C1s").Build();

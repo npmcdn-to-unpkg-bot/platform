@@ -120,9 +120,9 @@ namespace Allors.Adapters.Special
                 this.DropTable("C2");
 
                 var environment = new MetaPopulation();
-                var allors = Repository.Allors(environment);
+                var core = Repository.Core(environment);
                 this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
-                this.domain.AddDirectSuperdomain(allors);
+                this.domain.AddDirectSuperdomain(core);
 
                 var c1 = this.CreateClass("C1");
                 this.CreateClass("C2");
@@ -133,9 +133,9 @@ namespace Allors.Adapters.Special
                 this.CreateDatabase(this.domain.MetaPopulation, true);
 
                 environment = new MetaPopulation();
-                allors = Repository.Allors(environment);
+                core = Repository.Core(environment);
                 this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
-                this.domain.AddDirectSuperdomain(allors);
+                this.domain.AddDirectSuperdomain(core);
 
                 c1 = this.CreateClass("C1");
                 this.CreateClass("C2");
@@ -173,9 +173,9 @@ namespace Allors.Adapters.Special
             this.DropTable("C2");
 
             var environment = new MetaPopulation();
-            var allors = Repository.Allors(environment);
+            var core = Repository.Core(environment);
             this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain"};
-            this.domain.AddDirectSuperdomain(allors);
+            this.domain.AddDirectSuperdomain(core);
             
             var c1 = this.CreateClass("C1");
             this.CreateClass("C2");
@@ -189,9 +189,9 @@ namespace Allors.Adapters.Special
             this.CreateDatabase(this.domain.MetaPopulation, true);
 
             environment = new MetaPopulation();
-            allors = Repository.Allors(environment);
+            core = Repository.Core(environment);
             this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
-            this.domain.AddDirectSuperdomain(allors);
+            this.domain.AddDirectSuperdomain(core);
 
             c1 = this.CreateClass("C1");
             this.CreateClass("C2");
@@ -231,9 +231,9 @@ namespace Allors.Adapters.Special
             this.DropTable("C2");
 
             var environment = new MetaPopulation();
-            var allors = Repository.Allors(environment);
+            var core = Repository.Core(environment);
             this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
-            this.domain.AddDirectSuperdomain(allors);
+            this.domain.AddDirectSuperdomain(core);
             
             var c1 = this.CreateClass("C1");
             this.CreateClass("C2");
@@ -247,9 +247,9 @@ namespace Allors.Adapters.Special
             this.CreateDatabase(this.domain.MetaPopulation, true);
 
             environment = new MetaPopulation();
-            allors = Repository.Allors(environment);
+            core = Repository.Core(environment);
             this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
-            this.domain.AddDirectSuperdomain(allors);
+            this.domain.AddDirectSuperdomain(core);
 
             c1 = this.CreateClass("C1");
             this.CreateClass("C2");
@@ -324,9 +324,9 @@ namespace Allors.Adapters.Special
             this.DropTable("C2");
 
             var environment = new MetaPopulation();
-            var allors = Repository.Allors(environment);
+            var core = Repository.Core(environment);
             this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
-            this.domain.AddDirectSuperdomain(allors);
+            this.domain.AddDirectSuperdomain(core);
 
             var c1 = this.CreateClass("C1");
             var c2 = this.CreateClass("C2");
@@ -342,9 +342,9 @@ namespace Allors.Adapters.Special
             this.CreateDatabase(this.domain.MetaPopulation, true);
 
             environment = new MetaPopulation();
-            allors = Repository.Allors(environment);
+            core = Repository.Core(environment);
             this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
-            this.domain.AddDirectSuperdomain(allors);
+            this.domain.AddDirectSuperdomain(core);
 
             c1 = this.CreateClass("C1");
             c2 = this.CreateClass("C2");
@@ -550,9 +550,9 @@ namespace Allors.Adapters.Special
             this.DropTable("C2");
 
             var environment = new MetaPopulation();
-            var allors = Repository.Allors(environment);
+            var core = Repository.Core(environment);
             this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
-            this.domain.AddDirectSuperdomain(allors);
+            this.domain.AddDirectSuperdomain(core);
 
             var c1 = this.CreateClass("C1");
             this.CreateClass("C2");
@@ -565,9 +565,9 @@ namespace Allors.Adapters.Special
             this.CreateDatabase(this.domain.MetaPopulation, true);
 
             environment = new MetaPopulation();
-            allors = Repository.Allors(environment);
+            core = Repository.Core(environment);
             this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
-            this.domain.AddDirectSuperdomain(allors);
+            this.domain.AddDirectSuperdomain(core);
 
             c1 = this.CreateClass("C1");
             this.CreateClass("C2");
@@ -606,9 +606,9 @@ namespace Allors.Adapters.Special
             this.DropTable("C2");
 
             var environment = new MetaPopulation();
-            var allors = Repository.Allors(environment);
+            var core = Repository.Core(environment);
             this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
-            this.domain.AddDirectSuperdomain(allors);
+            this.domain.AddDirectSuperdomain(core);
 
             var c1 = this.CreateClass("C1");
             var c2 = this.CreateClass("C2");
@@ -623,9 +623,9 @@ namespace Allors.Adapters.Special
             this.CreateDatabase(this.domain.MetaPopulation, true);
 
             environment = new MetaPopulation();
-            allors = Repository.Allors(environment);
+            core = Repository.Core(environment);
             this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
-            this.domain.AddDirectSuperdomain(allors);
+            this.domain.AddDirectSuperdomain(core);
 
             c1 = this.CreateClass("C1");
             c2 = this.CreateClass("C2");
@@ -667,9 +667,9 @@ namespace Allors.Adapters.Special
             this.DropTable("C2");
 
             var environment = new MetaPopulation();
-            var allors = Repository.Allors(environment);
+            var core = Repository.Core(environment);
             this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
-            this.domain.AddDirectSuperdomain(allors);
+            this.domain.AddDirectSuperdomain(core);
 
             var c1 = this.CreateClass("C1");
             this.CreateClass("C2");
@@ -683,9 +683,9 @@ namespace Allors.Adapters.Special
             this.CreateDatabase(this.domain.MetaPopulation, true);
 
             environment = new MetaPopulation();
-            allors = Repository.Allors(environment);
+            core = Repository.Core(environment);
             this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
-            this.domain.AddDirectSuperdomain(allors);
+            this.domain.AddDirectSuperdomain(core);
 
             c1 = this.CreateClass("C1");
             this.CreateClass("C2");

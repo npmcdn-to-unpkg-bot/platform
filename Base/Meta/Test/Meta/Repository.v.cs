@@ -26,9 +26,9 @@ namespace Allors.Meta
         {
             var meta = new MetaPopulation();
 
-            Allors(meta);
+            Core(meta);
             Base(meta);
-            BaseTest(meta);
+            Test(meta);
 
             MetaPopulation = meta;
         }

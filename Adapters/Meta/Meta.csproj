@@ -41,20 +41,38 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Adapters\Meta\Repository.cs" />
-    <Compile Include="Adapters\Meta\Repository.v.cs" />
-    <Compile Include="Allors\Repository.cs" />
-    <Compile Include="Allors\Generation\Generate.cs" />
-    <Compile Include="Allors\Generation\GenerateLog.cs" />
-    <Compile Include="Allors\Generation\Log.cs" />
-    <Compile Include="Allors\Generation\Storage\AllorsDirectoryInfo.cs" />
-    <Compile Include="Allors\Generation\Storage\AllorsFileInfo.cs" />
-    <Compile Include="Allors\Generation\Storage\Location.cs" />
-    <Compile Include="Allors\Generation\StringTemplate.cs" />
+    <Compile Include="..\..\Core\Meta\Core\Generation\Generate.cs">
+      <Link>Core\Generation\Generate.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Generation\GenerateLog.cs">
+      <Link>Core\Generation\GenerateLog.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Generation\Log.cs">
+      <Link>Core\Generation\Log.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Generation\Storage\AllorsDirectoryInfo.cs">
+      <Link>Core\Generation\Storage\AllorsDirectoryInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Generation\Storage\AllorsFileInfo.cs">
+      <Link>Core\Generation\Storage\AllorsFileInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Generation\Storage\Location.cs">
+      <Link>Core\Generation\Storage\Location.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Generation\StringTemplate.cs">
+      <Link>Core\Generation\StringTemplate.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Repository.cs">
+      <Link>Core\Repository.cs</Link>
+    </Compile>
+    <Compile Include="Test\Meta\Repository.cs" />
+    <Compile Include="Test\Meta\Repository.v.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Allors\Generate.proj" />
+    <None Include="..\..\Core\Meta\Core\Generate.proj">
+      <Link>Core\Generate.proj</Link>
+    </None>
     <None Include="packages.config" />
     <None Include="Settings.StyleCop" />
   </ItemGroup>

@@ -28,7 +28,7 @@ namespace Allors.Meta
         {
             var env = new MetaPopulation();
 
-            Allors(env);
+            Core(env);
             Adapters(env);
 
             MetaPopulation = env;
