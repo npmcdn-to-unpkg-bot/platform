@@ -41,89 +41,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Adapters\DomainBusiness\Company.cs" />
-    <Compile Include="Adapters\DomainBusiness\Named.cs" />
-    <Compile Include="Adapters\DomainBusiness\Person.cs" />
-    <Compile Include="Adapters\DomainSpecial\ClassWithoutRoles.cs" />
-    <Compile Include="Adapters\DomainSpecial\ClassWithoutUnitRoles.cs" />
-    <Compile Include="Adapters\DomainSpecial\GT32.cs" />
-    <Compile Include="Adapters\DomainSpecial\GT32UnitLT32Composite.cs" />
-    <Compile Include="Adapters\DomainSpecial\IGT32Composite.cs" />
-    <Compile Include="Adapters\DomainSpecial\IGT32Unit.cs" />
-    <Compile Include="Adapters\DomainSpecial\ILT32Composite.cs" />
-    <Compile Include="Adapters\DomainSpecial\ILT32Unit.cs" />
-    <Compile Include="Adapters\DomainSpecial\ISandbox.cs" />
-    <Compile Include="Adapters\DomainSpecial\LT32.cs" />
-    <Compile Include="Adapters\DomainSpecial\LT32UnitGT32Composite.cs" />
-    <Compile Include="Adapters\DomainSpecial\Sandbox.cs" />
-    <Compile Include="Adapters\DomainSpecial\SingleUnit.cs" />
-    <Compile Include="Adapters\DomainSpecial\User.cs" />
-    <Compile Include="Adapters\Domain\C1.cs" />
-    <Compile Include="Adapters\Domain\C2.cs" />
-    <Compile Include="Adapters\Domain\C3.cs" />
-    <Compile Include="Adapters\Domain\C4.cs" />
-    <Compile Include="Adapters\Domain\I1.cs" />
-    <Compile Include="Adapters\Domain\I12.cs" />
-    <Compile Include="Adapters\Domain\I2.cs" />
-    <Compile Include="Adapters\Domain\I23.cs" />
-    <Compile Include="Adapters\Domain\I3.cs" />
-    <Compile Include="Adapters\Domain\I34.cs" />
-    <Compile Include="Adapters\Domain\I4.cs" />
-    <Compile Include="Adapters\Domain\S1.cs" />
-    <Compile Include="Adapters\Domain\S12.cs" />
-    <Compile Include="Adapters\Domain\S1234.cs" />
-    <Compile Include="Adapters\Domain\S2.cs" />
-    <Compile Include="Adapters\Domain\S3.cs" />
-    <Compile Include="Adapters\Domain\S4.cs" />
-    <Compile Include="Adapters\Domain\Subscriber.cs" />
-    <Compile Include="Adapters\ObjectBase.v.cs" />
     <Compile Include="Core\ObjectBase.cs" />
     <Compile Include="Generated\allors\C1.g.cs" />
     <Compile Include="Generated\allors\C2.g.cs" />
-    <Compile Include="Generated\allors\C3.g.cs" />
-    <Compile Include="Generated\allors\C4.g.cs" />
-    <Compile Include="Generated\allors\ClassWithoutRoles.g.cs" />
-    <Compile Include="Generated\allors\ClassWithoutUnitRoles.g.cs" />
-    <Compile Include="Generated\allors\Company.g.cs" />
-    <Compile Include="Generated\allors\GT32.g.cs" />
-    <Compile Include="Generated\allors\GT32UnitLT32Composite.g.cs" />
     <Compile Include="Generated\allors\I1.g.cs" />
     <Compile Include="Generated\allors\I12.g.cs" />
     <Compile Include="Generated\allors\I2.g.cs" />
-    <Compile Include="Generated\allors\I23.g.cs" />
-    <Compile Include="Generated\allors\I3.g.cs" />
-    <Compile Include="Generated\allors\I34.g.cs" />
-    <Compile Include="Generated\allors\I4.g.cs" />
-    <Compile Include="Generated\allors\IGT32Composite.g.cs" />
-    <Compile Include="Generated\allors\IGT32Unit.g.cs" />
-    <Compile Include="Generated\allors\ILT32Composite.g.cs" />
-    <Compile Include="Generated\allors\ILT32Unit.g.cs" />
-    <Compile Include="Generated\allors\InterfaceWithoutConcreteClass.g.cs" />
-    <Compile Include="Generated\allors\ISandbox.g.cs" />
-    <Compile Include="Generated\allors\LT32.g.cs" />
-    <Compile Include="Generated\allors\LT32UnitGT32Composite.g.cs" />
     <Compile Include="Generated\allors\Meta.g.cs" />
-    <Compile Include="Generated\allors\Named.g.cs" />
-    <Compile Include="Generated\allors\Person.g.cs" />
-    <Compile Include="Generated\allors\S1.g.cs" />
-    <Compile Include="Generated\allors\S12.g.cs" />
-    <Compile Include="Generated\allors\S1234.g.cs" />
-    <Compile Include="Generated\allors\S2.g.cs" />
-    <Compile Include="Generated\allors\S3.g.cs" />
-    <Compile Include="Generated\allors\S4.g.cs" />
-    <Compile Include="Generated\allors\Sandbox.g.cs" />
-    <Compile Include="Generated\allors\SingleUnit.g.cs" />
-    <Compile Include="Generated\allors\User.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Test\ObjectBase.v.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework\Framework\Framework.csproj">
+    <ProjectReference Include="..\Framework\Framework.csproj">
       <Project>{84495b8e-1800-41c9-a236-abe6265a23a3}</Project>
       <Name>Framework</Name>
     </ProjectReference>
     <ProjectReference Include="..\Meta\Meta.csproj">
       <Project>{BA6EFCFE-CB7F-4994-A5A4-C11DDAAC32DD}</Project>
       <Name>Meta</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Resources\Resources.csproj">
+      <Project>{a10683f7-b261-4770-81c6-bb589e768acb}</Project>
+      <Name>Resources</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
