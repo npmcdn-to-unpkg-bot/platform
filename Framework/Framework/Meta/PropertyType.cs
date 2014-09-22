@@ -34,6 +34,19 @@ namespace Allors.Meta
         /// </summary>
         public abstract string Name { get; }
 
+        public abstract string DisplayName { get; }
+
+        /// <summary>
+        /// Get the value of the property on this object.
+        /// </summary>
+        /// <param name="strategy">
+        /// The strategy.
+        /// </param>
+        /// <returns>
+        /// The operand value.
+        /// </returns>
+        public abstract object Get(IStrategy strategy);
+
         /// <summary>
         /// Get the object type.
         /// </summary>
@@ -41,7 +54,5 @@ namespace Allors.Meta
         /// The <see cref="ObjectType"/>.
         /// </returns>
         public abstract ObjectType GetObjectType();
-
-        public abstract string DisplayName { get; }
     }
 }

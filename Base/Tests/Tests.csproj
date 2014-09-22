@@ -7,7 +7,7 @@
     <ProjectGuid>{5582AF89-13A9-43B9-A208-230242323001}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Tests</RootNamespace>
+    <RootNamespace>Allors</RootNamespace>
     <AssemblyName>Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.2.1409.1722\lib\net40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
@@ -48,15 +51,34 @@
     <Compile Include="Common\CounterTest.cs" />
     <Compile Include="Common\NamedConstantTest.cs" />
     <Compile Include="Common\ObjectStateTests.cs" />
+    <Compile Include="Content\ContentTests.cs" />
+    <Compile Include="Content\CsvExportFunctionTests.cs" />
+    <Compile Include="Content\CsvExportPathTests.cs" />
+    <Compile Include="Content\HtmlSanitizerTests.cs" />
+    <Compile Include="Content\MediaTest.cs" />
+    <Compile Include="Content\MediatypeTest.cs" />
+    <Compile Include="Content\PathTests.cs" />
+    <Compile Include="Content\StringTemplateTests.cs" />
     <Compile Include="Derivations\DefaultDerivationLogTests.cs" />
     <Compile Include="Derivations\DerivationGraphTest.cs" />
     <Compile Include="Derivations\DerivationLogTests.cs" />
     <Compile Include="Derivations\DerivationTest.cs" />
     <Compile Include="DomainTest.cs" />
     <Compile Include="Fixture.cs" />
+    <Compile Include="Localization\CountryTests.cs" />
+    <Compile Include="Localization\CurrencyTests.cs" />
+    <Compile Include="Localization\LanguageTests.cs" />
+    <Compile Include="Localization\LocaleTests.cs" />
+    <Compile Include="Localization\LocalizedTextTests.cs" />
     <Compile Include="Misc\BuilderTest.cs" />
     <Compile Include="Misc\CacheTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Relation\OrganisationTests.cs" />
+    <Compile Include="Relation\PersonTests.cs" />
+    <Compile Include="Search\SearchDataSkipDerivationTests.cs" />
+    <Compile Include="Search\SearchDataTests.cs" />
+    <Compile Include="Search\SearchFragmentTests.cs" />
+    <Compile Include="Search\SearchResultsTests.cs" />
     <Compile Include="Security\AccessControlListTests.cs" />
     <Compile Include="Security\AccessControlTests.cs" />
     <Compile Include="Security\LoginTests.cs" />
@@ -66,7 +88,7 @@
     <Compile Include="XmlStrictValidation.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\PdfAs.jpg" />
+    <EmbeddedResource Include="Resources\PdfAs.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

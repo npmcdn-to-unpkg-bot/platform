@@ -67,6 +67,10 @@ namespace Allors
                 var reader = new XmlTextReader(stringReader);
                 Databases.Default.Load(reader);
             }
+            else
+            {
+                Databases.Default.Init();
+            }
 
             this.databaseSession = Databases.Default.CreateSession();
             

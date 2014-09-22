@@ -31,74 +31,67 @@ namespace Allors.Security
     [TestFixture]
     public class PermissionTests : DomainTest
     {
-        [Test]
-        public void SyncMethod()
-        {
-            var domain = (Domain)this.DatabaseSession.Population.MetaPopulation.Find(new Guid("AB41FD0C-C887-4A1D-BEDA-CED69527E69A"));
+        //[Test]
+        //public void SyncMethod()
+        //{
+        //    var domain = (Domain)this.DatabaseSession.Population.MetaPopulation.Find(new Guid("AB41FD0C-C887-4A1D-BEDA-CED69527E69A"));
          
-            var methodType = new MethodTypeBuilder(domain, Guid.NewGuid()).Build();
-            methodType.ObjectType = Organisations.Meta.ObjectType;
-            methodType.Name = "Method";
+        //    var methodType = new MethodTypeBuilder(domain, Guid.NewGuid()).Build();
+        //    methodType.ObjectType = Organisations.Meta.ObjectType;
+        //    methodType.Name = "Method";
 
-            var count = new Permissions(this.DatabaseSession).Extent().Count;
+        //    var count = new Permissions(this.DatabaseSession).Extent().Count;
 
-            new Permissions(this.DatabaseSession).Sync();
+        //    new Permissions(this.DatabaseSession).Sync();
 
-            Assert.AreEqual(count + 1, new Permissions(this.DatabaseSession).Extent().Count);
+        //    Assert.AreEqual(count + 1, new Permissions(this.DatabaseSession).Extent().Count);
 
-            var methodPermission = new Permissions(this.DatabaseSession).FindBy(Permissions.Meta.OperandTypePointer, methodType.Id);
-            Assert.IsNotNull(methodPermission);
-            Assert.AreEqual(Operation.Execute, methodPermission.Operation);
-        }
+        //    var methodPermission = new Permissions(this.DatabaseSession).FindBy(Permissions.Meta.OperandTypePointer, methodType.Id);
+        //    Assert.IsNotNull(methodPermission);
+        //    Assert.AreEqual(Operation.Execute, methodPermission.Operation);
+        //}
 
-        [Test]
-        public void SyncRelation()
-        {
-            var domain = (Domain)this.DatabaseSession.Population.MetaPopulation.Find(new Guid("AB41FD0C-C887-4A1D-BEDA-CED69527E69A"));
+        //[Test]
+        //public void SyncRelation()
+        //{
+        //    var domain = (Domain)this.DatabaseSession.Population.MetaPopulation.Find(new Guid("AB41FD0C-C887-4A1D-BEDA-CED69527E69A"));
             
-            var count = new Permissions(this.DatabaseSession).Extent().Count;
+        //    var count = new Permissions(this.DatabaseSession).Extent().Count;
 
-            var relationType = new RelationTypeBuilder(domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
+        //    var relationType = new RelationTypeBuilder(domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
 
-            relationType.AssociationType.ObjectType = Organisations.Meta.ObjectType;
-            relationType.RoleType.ObjectType = Persons.Meta.ObjectType;
-            relationType.RoleType.AssignedSingularName = "Relation";
-            relationType.RoleType.AssignedPluralName = "Relations";
+        //    relationType.AssociationType.ObjectType = Organisations.Meta.ObjectType;
+        //    relationType.RoleType.ObjectType = Persons.Meta.ObjectType;
+        //    relationType.RoleType.AssignedSingularName = "Relation";
+        //    relationType.RoleType.AssignedPluralName = "Relations";
                 
-            new Permissions(this.DatabaseSession).Sync();
+        //    new Permissions(this.DatabaseSession).Sync();
 
-            this.DatabaseSession.Derive(true);
+        //    this.DatabaseSession.Derive(true);
 
-            Assert.AreEqual(count + 3, new Permissions(this.DatabaseSession).Extent().Count);
+        //    Assert.AreEqual(count + 3, new Permissions(this.DatabaseSession).Extent().Count);
 
-            var roleTypePermissions = new Permissions(this.DatabaseSession).Extent();
-            roleTypePermissions.Filter.AddEquals(Permissions.Meta.OperandTypePointer, relationType.RoleType.Id);
-            Assert.AreEqual(2, roleTypePermissions.Count);
+        //    var roleTypePermissions = new Permissions(this.DatabaseSession).Extent();
+        //    roleTypePermissions.Filter.AddEquals(Permissions.Meta.OperandTypePointer, relationType.RoleType.Id);
+        //    Assert.AreEqual(2, roleTypePermissions.Count);
 
-            var associationTypePermissions = new Permissions(this.DatabaseSession).Extent();
-            associationTypePermissions.Filter.AddEquals(Permissions.Meta.OperandTypePointer, relationType.AssociationType.Id);
-            Assert.AreEqual(1, associationTypePermissions.Count);
-        }
+        //    var associationTypePermissions = new Permissions(this.DatabaseSession).Extent();
+        //    associationTypePermissions.Filter.AddEquals(Permissions.Meta.OperandTypePointer, relationType.AssociationType.Id);
+        //    Assert.AreEqual(1, associationTypePermissions.Count);
+        //}
 
         [Test]
         public void WhenSyncingPermissionsThenObsolotePermissionsAreDeleted()
         {
             var domain = (Domain)this.DatabaseSession.Population.MetaPopulation.Find(new Guid("AB41FD0C-C887-4A1D-BEDA-CED69527E69A"));
 
-            var methodType = new MethodTypeBuilder(domain, Guid.NewGuid()).Build();
-
-            methodType.ObjectType = Organisations.Meta.ObjectType;
-            methodType.Name = "Method";
-
-            new Permissions(this.DatabaseSession).Sync();
-
             var count = new Permissions(this.DatabaseSession).Extent().Count;
 
-            // TODO: Delete method
+            var permission = new PermissionBuilder(this.DatabaseSession).WithConcreteClassPointer(new Guid()).WithOperation(Operation.Execute).WithOperandTypePointer(new Guid()).Build();
 
             new Permissions(this.DatabaseSession).Sync();
 
-            Assert.AreEqual(count - 1, new Permissions(this.DatabaseSession).Extent().Count);
+            Assert.AreEqual(count, new Permissions(this.DatabaseSession).Extent().Count);
         }
 
         [Test]

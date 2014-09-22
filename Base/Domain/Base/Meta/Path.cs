@@ -32,139 +32,135 @@ namespace Allors.Meta
     {
         public static object Get(this Path path, IObject allorsObject, IAccessControlListFactory aclFactory)
         {
-            // TODO:
-            //var acl = aclFactory.Create(allorsObject);
-            //if (acl.CanRead(path.PropertyType))
-            //{
-            //    if (path.ExistNext)
-            //    {
-            //        var currentValue = path.PropertyType.Get(allorsObject.Strategy);
+            var acl = aclFactory.Create(allorsObject);
+            if (acl.CanRead(path.PropertyType))
+            {
+                if (path.ExistNext)
+                {
+                    var currentValue = path.PropertyType.Get(allorsObject.Strategy);
 
-            //        if (currentValue != null)
-            //        {
-            //            if (currentValue is IObject)
-            //            {
-            //                return path.Next.Get((IObject)currentValue, aclFactory);
-            //            }
+                    if (currentValue != null)
+                    {
+                        if (currentValue is IObject)
+                        {
+                            return path.Next.Get((IObject)currentValue, aclFactory);
+                        }
 
-            //            var results = new HashSet<object>();
-            //            foreach (var item in (IEnumerable)currentValue)
-            //            {
-            //                var nextValueResult = path.Next.Get((Allors.ObjectBase)item, aclFactory);
-            //                if (nextValueResult is HashSet<object>)
-            //                {
-            //                    results.UnionWith((HashSet<object>)nextValueResult);
-            //                }
-            //                else
-            //                {
-            //                    results.Add(nextValueResult);
-            //                }
-            //            }
+                        var results = new HashSet<object>();
+                        foreach (var item in (IEnumerable)currentValue)
+                        {
+                            var nextValueResult = path.Next.Get((Allors.ObjectBase)item, aclFactory);
+                            if (nextValueResult is HashSet<object>)
+                            {
+                                results.UnionWith((HashSet<object>)nextValueResult);
+                            }
+                            else
+                            {
+                                results.Add(nextValueResult);
+                            }
+                        }
 
-            //            return results;
-            //        }
-            //    }
+                        return results;
+                    }
+                }
 
-            //    if (path.ExistPropertyType)
-            //    {
-            //        return path.PropertyType.Get(allorsObject.Strategy);
-            //    }
-            //}
+                if (path.ExistPropertyType)
+                {
+                    return path.PropertyType.Get(allorsObject.Strategy);
+                }
+            }
 
             return null;
         }
 
         public static bool Set(this Path path, IObject allorsObject, IAccessControlListFactory aclFactory, object value)
         {
-            // TODO:
+            var acl = aclFactory.Create(allorsObject);
+            if (path.ExistNext)
+            {
+                if (acl.CanRead(path.PropertyType))
+                {
+                    var property = path.PropertyType.Get(allorsObject.Strategy) as IObject;
+                    if (property != null)
+                    {
+                        path.Next.Set(property, aclFactory, value);
+                        return true;
+                    }
+                }
 
-            //var acl = aclFactory.Create(allorsObject);
-            //if (path.ExistNext)
-            //{
-            //    if (acl.CanRead(path.PropertyType))
-            //    {
-            //        var property = path.PropertyType.Get(allorsObject.Strategy) as IObject;
-            //        if (property != null)
-            //        {
-            //            path.Next.Set(property, aclFactory, value);
-            //            return true;
-            //        }
-            //    }
+                return false;
+            }
 
-            //    return false;
-            //}
-
-            //var roleType = path.PropertyType as RoleType;
-            //if (roleType != null)
-            //{
-            //    if (acl.CanWrite(roleType))
-            //    {
-            //        roleType.Set(allorsObject.Strategy, value);
-            //        return true;
-            //    }
-            //}
+            var roleType = path.PropertyType as RoleType;
+            if (roleType != null)
+            {
+                if (acl.CanWrite(roleType))
+                {
+                    roleType.Set(allorsObject.Strategy, value);
+                    return true;
+                }
+            }
 
             return false;
         }
 
         public static void Ensure(this Path path, IObject allorsObject, IAccessControlListFactory aclFactory)
         {
-            //TODO: 
-            //var acl = aclFactory.Create(allorsObject);
+            var acl = aclFactory.Create(allorsObject);
 
-            //var roleType = path.PropertyType as RoleType;
-            //if (roleType != null)
-            //{
-            //    if (roleType.IsMany)
-            //    {
-            //        throw new NotSupportedException("RoleType with muliplicity many");
-            //    }
+            var roleType = path.PropertyType as RoleType;
+            if (roleType != null)
+            {
+                if (roleType.IsMany)
+                {
+                    throw new NotSupportedException("RoleType with muliplicity many");
+                }
 
-            //    if (roleType.ObjectType.IsComposite)
-            //    {
-            //        if (acl.CanRead(roleType))
-            //        {
-            //            var role = roleType.Get(allorsObject.Strategy);
-            //            if (role == null)
-            //            {
-            //                if (acl.CanWrite(roleType))
-            //                {
-            //                    role = allorsObject.Strategy.Session.Create(roleType.ObjectType);
-            //                    roleType.Set(allorsObject.Strategy, role);
-            //                }
-            //            }
+                if (roleType.ObjectType.IsComposite)
+                {
+                    if (acl.CanRead(roleType))
+                    {
+                        var role = roleType.Get(allorsObject.Strategy);
+                        if (role == null)
+                        {
+                            if (acl.CanWrite(roleType))
+                            {
+                                role = allorsObject.Strategy.Session.Create((Class)roleType.ObjectType);
+                                roleType.Set(allorsObject.Strategy, role);
+                            }
+                        }
 
-            //            if (path.ExistNext)
-            //            {
-            //                var next = role as Allors.ObjectBase;
-            //                if (next != null)
-            //                {
-            //                    path.Next.Ensure(next, aclFactory);
-            //                }
-            //            }
-            //        }
-            //    }
-            //}
-            //else
-            //{
-            //    var associationType = (AssociationType)path.PropertyType;
-            //    if (associationType.IsMany)
-            //    {
-            //        throw new NotSupportedException("AssociationType with muliplicity many");
-            //    }
+                        if (path.ExistNext)
+                        {
+                            var next = role as Allors.ObjectBase;
+                            if (next != null)
+                            {
+                                path.Next.Ensure(next, aclFactory);
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                var associationType = (AssociationType)path.PropertyType;
+                if (associationType.IsMany)
+                {
+                    throw new NotSupportedException("AssociationType with muliplicity many");
+                }
 
-            //    if (acl.CanRead(associationType))
-            //    {
-            //        var association = associationType.Get(allorsObject.Strategy) as IObject;
-            //        if (association != null)
-            //        {
-            //            if (path.ExistNext)
-            //            {
-            //                path.Next.Ensure(association, aclFactory);
-            //            }
-            //        }
-            //    }
-            //}
+                if (acl.CanRead(associationType))
+                {
+                    var association = associationType.Get(allorsObject.Strategy) as IObject;
+                    if (association != null)
+                    {
+                        if (path.ExistNext)
+                        {
+                            path.Next.Ensure(association, aclFactory);
+                        }
+                    }
+                }
+            }
         }
     }
 }
