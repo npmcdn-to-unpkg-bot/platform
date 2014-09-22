@@ -1,0 +1,377 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B6C2E17B-53E1-44A4-9299-5350CC854E65}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Domain</RootNamespace>
+    <AssemblyName>Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr4.StringTemplate">
+      <HintPath>..\packages\Antlr4.StringTemplate.4.0.6.9004\lib\net35\Antlr4.StringTemplate.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\Core\Domain\Core\ObjectBase.cs">
+      <Link>Core\ObjectBase.cs</Link>
+    </Compile>
+    <Compile Include="Generated\Base\AccessControl.g.cs" />
+    <Compile Include="Generated\Base\AccessControlledObject.g.cs" />
+    <Compile Include="Generated\Base\Address.g.cs" />
+    <Compile Include="Generated\Base\BadUI.g.cs" />
+    <Compile Include="Generated\Base\C1.g.cs" />
+    <Compile Include="Generated\Base\C2.g.cs" />
+    <Compile Include="Generated\Base\ClassWithoutRoles.g.cs" />
+    <Compile Include="Generated\Base\Commentable.g.cs" />
+    <Compile Include="Generated\Base\Counter.g.cs" />
+    <Compile Include="Generated\Base\Country.g.cs" />
+    <Compile Include="Generated\Base\Currency.g.cs" />
+    <Compile Include="Generated\Base\Dependee.g.cs" />
+    <Compile Include="Generated\Base\Dependent.g.cs" />
+    <Compile Include="Generated\Base\DerivationLogC1.g.cs" />
+    <Compile Include="Generated\Base\DerivationLogC2.g.cs" />
+    <Compile Include="Generated\Base\DerivationLogI12.g.cs" />
+    <Compile Include="Generated\Base\Enumeration.g.cs" />
+    <Compile Include="Generated\Base\Extender.g.cs" />
+    <Compile Include="Generated\Base\First.g.cs" />
+    <Compile Include="Generated\Base\Four.g.cs" />
+    <Compile Include="Generated\Base\From.g.cs" />
+    <Compile Include="Generated\Base\Gender.g.cs" />
+    <Compile Include="Generated\Base\HomeAddress.g.cs" />
+    <Compile Include="Generated\Base\I1.g.cs" />
+    <Compile Include="Generated\Base\I12.g.cs" />
+    <Compile Include="Generated\Base\I2.g.cs" />
+    <Compile Include="Generated\Base\Image.g.cs" />
+    <Compile Include="Generated\Base\Language.g.cs" />
+    <Compile Include="Generated\Base\Locale.g.cs" />
+    <Compile Include="Generated\Base\Localised.g.cs" />
+    <Compile Include="Generated\Base\LocalisedText.g.cs" />
+    <Compile Include="Generated\Base\Login.g.cs" />
+    <Compile Include="Generated\Base\MailboxAddress.g.cs" />
+    <Compile Include="Generated\Base\Media.g.cs" />
+    <Compile Include="Generated\Base\MediaContent.g.cs" />
+    <Compile Include="Generated\Base\MediaType.g.cs" />
+    <Compile Include="Generated\Base\Meta.g.cs" />
+    <Compile Include="Generated\Base\ObjectState.g.cs" />
+    <Compile Include="Generated\Base\One.g.cs" />
+    <Compile Include="Generated\Base\Organisation.g.cs" />
+    <Compile Include="Generated\Base\Period.g.cs" />
+    <Compile Include="Generated\Base\Permission.g.cs" />
+    <Compile Include="Generated\Base\Person.g.cs" />
+    <Compile Include="Generated\Base\Place.g.cs" />
+    <Compile Include="Generated\Base\Printable.g.cs" />
+    <Compile Include="Generated\Base\PrintQueue.g.cs" />
+    <Compile Include="Generated\Base\Role.g.cs" />
+    <Compile Include="Generated\Base\Searchable.g.cs" />
+    <Compile Include="Generated\Base\SearchData.g.cs" />
+    <Compile Include="Generated\Base\SearchFragment.g.cs" />
+    <Compile Include="Generated\Base\SearchResult.g.cs" />
+    <Compile Include="Generated\Base\SearchTest.g.cs" />
+    <Compile Include="Generated\Base\Second.g.cs" />
+    <Compile Include="Generated\Base\SecurityToken.g.cs" />
+    <Compile Include="Generated\Base\SecurityTokenOwner.g.cs" />
+    <Compile Include="Generated\Base\Shared.g.cs" />
+    <Compile Include="Generated\Base\Singleton.g.cs" />
+    <Compile Include="Generated\Base\StatefulCompany.g.cs" />
+    <Compile Include="Generated\Base\StringTemplate.g.cs" />
+    <Compile Include="Generated\Base\Subdependee.g.cs" />
+    <Compile Include="Generated\Base\Third.g.cs" />
+    <Compile Include="Generated\Base\Three.g.cs" />
+    <Compile Include="Generated\Base\To.g.cs" />
+    <Compile Include="Generated\Base\Transition.g.cs" />
+    <Compile Include="Generated\Base\Transitional.g.cs" />
+    <Compile Include="Generated\Base\Two.g.cs" />
+    <Compile Include="Generated\Base\UniquelyIdentifiable.g.cs" />
+    <Compile Include="Generated\Base\Unit.g.cs" />
+    <Compile Include="Generated\Base\User.g.cs" />
+    <Compile Include="Generated\Base\UserGroup.g.cs" />
+    <Compile Include="Generated\Base\UserInterfaceable.g.cs" />
+    <Compile Include="Generated\Core\AccessControl.g.cs" />
+    <Compile Include="Generated\Core\AccessControlledObject.g.cs" />
+    <Compile Include="Generated\Core\Address.g.cs" />
+    <Compile Include="Generated\Core\BadUI.g.cs" />
+    <Compile Include="Generated\Core\C1.g.cs" />
+    <Compile Include="Generated\Core\C2.g.cs" />
+    <Compile Include="Generated\Core\ClassWithoutRoles.g.cs" />
+    <Compile Include="Generated\Core\Commentable.g.cs" />
+    <Compile Include="Generated\Core\Counter.g.cs" />
+    <Compile Include="Generated\Core\Country.g.cs" />
+    <Compile Include="Generated\Core\Currency.g.cs" />
+    <Compile Include="Generated\Core\Dependee.g.cs" />
+    <Compile Include="Generated\Core\Dependent.g.cs" />
+    <Compile Include="Generated\Core\DerivationLogC1.g.cs" />
+    <Compile Include="Generated\Core\DerivationLogC2.g.cs" />
+    <Compile Include="Generated\Core\DerivationLogI12.g.cs" />
+    <Compile Include="Generated\Core\Enumeration.g.cs" />
+    <Compile Include="Generated\Core\Extender.g.cs" />
+    <Compile Include="Generated\Core\First.g.cs" />
+    <Compile Include="Generated\Core\Four.g.cs" />
+    <Compile Include="Generated\Core\From.g.cs" />
+    <Compile Include="Generated\Core\Gender.g.cs" />
+    <Compile Include="Generated\Core\HomeAddress.g.cs" />
+    <Compile Include="Generated\Core\I1.g.cs" />
+    <Compile Include="Generated\Core\I12.g.cs" />
+    <Compile Include="Generated\Core\I2.g.cs" />
+    <Compile Include="Generated\Core\Image.g.cs" />
+    <Compile Include="Generated\Core\Language.g.cs" />
+    <Compile Include="Generated\Core\Locale.g.cs" />
+    <Compile Include="Generated\Core\Localised.g.cs" />
+    <Compile Include="Generated\Core\LocalisedText.g.cs" />
+    <Compile Include="Generated\Core\Login.g.cs" />
+    <Compile Include="Generated\Core\MailboxAddress.g.cs" />
+    <Compile Include="Generated\Core\Media.g.cs" />
+    <Compile Include="Generated\Core\MediaContent.g.cs" />
+    <Compile Include="Generated\Core\MediaType.g.cs" />
+    <Compile Include="Generated\Core\Meta.g.cs" />
+    <Compile Include="Generated\Core\ObjectState.g.cs" />
+    <Compile Include="Generated\Core\One.g.cs" />
+    <Compile Include="Generated\Core\Organisation.g.cs" />
+    <Compile Include="Generated\Core\Period.g.cs" />
+    <Compile Include="Generated\Core\Permission.g.cs" />
+    <Compile Include="Generated\Core\Person.g.cs" />
+    <Compile Include="Generated\Core\Place.g.cs" />
+    <Compile Include="Generated\Core\Printable.g.cs" />
+    <Compile Include="Generated\Core\PrintQueue.g.cs" />
+    <Compile Include="Generated\Core\Role.g.cs" />
+    <Compile Include="Generated\Core\Searchable.g.cs" />
+    <Compile Include="Generated\Core\SearchData.g.cs" />
+    <Compile Include="Generated\Core\SearchFragment.g.cs" />
+    <Compile Include="Generated\Core\SearchResult.g.cs" />
+    <Compile Include="Generated\Core\SearchTest.g.cs" />
+    <Compile Include="Generated\Core\Second.g.cs" />
+    <Compile Include="Generated\Core\SecurityToken.g.cs" />
+    <Compile Include="Generated\Core\SecurityTokenOwner.g.cs" />
+    <Compile Include="Generated\Core\Shared.g.cs" />
+    <Compile Include="Generated\Core\Singleton.g.cs" />
+    <Compile Include="Generated\Core\StatefulCompany.g.cs" />
+    <Compile Include="Generated\Core\StringTemplate.g.cs" />
+    <Compile Include="Generated\Core\Subdependee.g.cs" />
+    <Compile Include="Generated\Core\Third.g.cs" />
+    <Compile Include="Generated\Core\Three.g.cs" />
+    <Compile Include="Generated\Core\To.g.cs" />
+    <Compile Include="Generated\Core\Transition.g.cs" />
+    <Compile Include="Generated\Core\Transitional.g.cs" />
+    <Compile Include="Generated\Core\Two.g.cs" />
+    <Compile Include="Generated\Core\UniquelyIdentifiable.g.cs" />
+    <Compile Include="Generated\Core\Unit.g.cs" />
+    <Compile Include="Generated\Core\User.g.cs" />
+    <Compile Include="Generated\Core\UserGroup.g.cs" />
+    <Compile Include="Generated\Core\UserInterfaceable.g.cs" />
+    <Compile Include="Test\Combinations\C1.cs" />
+    <Compile Include="Test\Combinations\C2.cs" />
+    <Compile Include="Test\Common\Singletons.cs" />
+    <Compile Include="Test\Databases.v.cs" />
+    <Compile Include="Test\Derivations\Dependee.cs" />
+    <Compile Include="Test\Derivations\Dependent.cs" />
+    <Compile Include="Test\Derivations\First.cs" />
+    <Compile Include="Test\Derivations\Second.cs" />
+    <Compile Include="Test\Derivations\Subdependee.cs" />
+    <Compile Include="Test\Derivations\Third.cs" />
+    <Compile Include="Test\General\HomeAddress.cs" />
+    <Compile Include="Test\General\MailboxAddress.cs" />
+    <Compile Include="Test\General\Organisation.cs" />
+    <Compile Include="Test\General\Organisations.cs" />
+    <Compile Include="Test\General\Place.cs" />
+    <Compile Include="Test\General\Places.cs" />
+    <Compile Include="Test\General\To.cs" />
+    <Compile Include="Test\General\Units.cs" />
+    <Compile Include="Test\ObjectBase.cs" />
+    <Compile Include="Test\ObjectBase.v.cs" />
+    <Compile Include="Test\ObjectsBase.cs" />
+    <Compile Include="Test\ObjectsBase.v.cs" />
+    <Compile Include="Test\Relation\Person.cs" />
+    <Compile Include="Test\Security\AccessControls.cs" />
+    <Compile Include="Test\Security\Roles.cs" />
+    <Compile Include="Test\Security\Security.cs" />
+    <Compile Include="Test\Security\UserGroups.cs" />
+    <Compile Include="Test\Setup.cs" />
+    <Compile Include="Test\Setup.v.cs" />
+    <Compile Include="Test\Special\DerivationLogC1.cs" />
+    <Compile Include="Test\Special\DerivationLogC2.cs" />
+    <Compile Include="Test\Special\DerivationLogI12.cs" />
+    <Compile Include="Test\Special\Four.cs" />
+    <Compile Include="Test\Special\One.cs" />
+    <Compile Include="Test\Special\Shared.cs" />
+    <Compile Include="Test\Special\Three.cs" />
+    <Compile Include="Test\Special\Two.cs" />
+    <Compile Include="Base\Common\Cache.cs" />
+    <Compile Include="Base\Common\Counter.cs" />
+    <Compile Include="Base\Common\Counters.cs" />
+    <Compile Include="Base\Common\Derivable.cs" />
+    <Compile Include="Base\Common\Derivation.cs" />
+    <Compile Include="Base\Common\DerivationError.cs" />
+    <Compile Include="Base\Common\DerivationErrorAtLeastOne.cs" />
+    <Compile Include="Base\Common\DerivationErrorAtMostOne.cs" />
+    <Compile Include="Base\Common\DerivationErrorConflict.cs" />
+    <Compile Include="Base\Common\DerivationErrorEquals.cs" />
+    <Compile Include="Base\Common\DerivationErrorGeneric.cs" />
+    <Compile Include="Base\Common\DerivationErrorNotAllowed.cs" />
+    <Compile Include="Base\Common\DerivationErrorRequired.cs" />
+    <Compile Include="Base\Common\DerivationErrorUnique.cs" />
+    <Compile Include="Base\Common\DerivationException.cs" />
+    <Compile Include="Base\Common\DerivationGraph.cs" />
+    <Compile Include="Base\Common\DerivationLog.cs" />
+    <Compile Include="Base\Common\DerivationNode.cs" />
+    <Compile Include="Base\Common\DerivationRelation.cs" />
+    <Compile Include="Base\Common\Enumeration.cs" />
+    <Compile Include="Base\Common\IDerivation.cs" />
+    <Compile Include="Base\Common\IDerivationError.cs" />
+    <Compile Include="Base\Common\ObjectState.cs" />
+    <Compile Include="Base\Common\Retry.cs" />
+    <Compile Include="Base\Common\Singleton.cs" />
+    <Compile Include="Base\Common\Singleton.v.cs" />
+    <Compile Include="Base\Common\Singletons.cs" />
+    <Compile Include="Base\Common\Transitional.cs" />
+    <Compile Include="Base\Common\UniquelyIdentifiableCache.cs" />
+    <Compile Include="Base\Content\HtmlCharacters.cs" />
+    <Compile Include="Base\Content\HtmlDocument.cs" />
+    <Compile Include="Base\Content\HtmlProfile.cs" />
+    <Compile Include="Base\Content\HtmlReader.cs" />
+    <Compile Include="Base\Content\HtmlRules.cs" />
+    <Compile Include="Base\Content\HtmlSanitize.cs" />
+    <Compile Include="Base\Content\Image.cs" />
+    <Compile Include="Base\Content\Image.v..cs" />
+    <Compile Include="Base\Content\Media.cs" />
+    <Compile Include="Base\Content\MediaBuilder.cs" />
+    <Compile Include="Base\Content\MediaContent.cs" />
+    <Compile Include="Base\Content\Medias.cs" />
+    <Compile Include="Base\Content\MediaType.cs" />
+    <Compile Include="Base\Content\MediaTypes.cs" />
+    <Compile Include="Base\Content\MediaTypes.v.cs" />
+    <Compile Include="Base\Content\PrintQueue.cs" />
+    <Compile Include="Base\Content\PrintQueues.cs" />
+    <Compile Include="Base\Content\PrintQueues.v.cs" />
+    <Compile Include="Base\Content\StringTemplate.cs" />
+    <Compile Include="Base\Content\StringTemplates.cs" />
+    <Compile Include="Base\Databases.cs" />
+    <Compile Include="Base\Data\CsvExport.cs" />
+    <Compile Include="Base\Data\CsvExportColumn.cs" />
+    <Compile Include="Base\Data\CsvExportFunction.cs" />
+    <Compile Include="Base\Data\CsvExportPath.cs" />
+    <Compile Include="Base\Drawing\BitmapExtensions.cs" />
+    <Compile Include="Base\IObjectBuilder.cs" />
+    <Compile Include="Base\IObjects.cs" />
+    <Compile Include="Base\ISecure.cs" />
+    <Compile Include="Base\ISessionExtensions.cs" />
+    <Compile Include="Base\ISetup.cs" />
+    <Compile Include="Base\Localisation\Countries.cs" />
+    <Compile Include="Base\Localisation\Country.cs" />
+    <Compile Include="Base\Localisation\Country.v.cs" />
+    <Compile Include="Base\Localisation\Currencies.cs" />
+    <Compile Include="Base\Localisation\Currency.cs" />
+    <Compile Include="Base\Localisation\Language.cs" />
+    <Compile Include="Base\Localisation\Languages.cs" />
+    <Compile Include="Base\Localisation\Locale.cs" />
+    <Compile Include="Base\Localisation\Locales.cs" />
+    <Compile Include="Base\Localisation\Locales.v.cs" />
+    <Compile Include="Base\Localisation\LocalisedText.cs" />
+    <Compile Include="Base\Localisation\LocalisedTexts.cs" />
+    <Compile Include="Base\Meta\IObjectTypeExtensions.cs" />
+    <Compile Include="Base\Meta\Path.cs" />
+    <Compile Include="Base\ObjectBase.cs" />
+    <Compile Include="Base\ObjectBuilder.cs" />
+    <Compile Include="Base\ObjectsBase.cs" />
+    <Compile Include="Base\ObjectsGraph.cs" />
+    <Compile Include="Base\ObjectsNode.cs" />
+    <Compile Include="Base\Relation\Person.cs" />
+    <Compile Include="Base\Relation\Person.v.cs" />
+    <Compile Include="Base\Relation\Persons.cs" />
+    <Compile Include="Base\Search\Searchables.cs" />
+    <Compile Include="Base\Search\SearchData.cs" />
+    <Compile Include="Base\Search\SearchData.v.cs" />
+    <Compile Include="Base\Search\SearchDatas.cs" />
+    <Compile Include="Base\Search\SearchFragment.cs" />
+    <Compile Include="Base\Search\SearchFragments.cs" />
+    <Compile Include="Base\Search\SearchResults.cs" />
+    <Compile Include="Base\Security\AccessControl.cs" />
+    <Compile Include="Base\Security\AccessControlledObject.cs" />
+    <Compile Include="Base\Security\AccessControlList.cs" />
+    <Compile Include="Base\Security\AccessControlListCache.cs" />
+    <Compile Include="Base\Security\AccessControls.cs" />
+    <Compile Include="Base\Security\Cache\SecurityCache.cs" />
+    <Compile Include="Base\Security\IAccessControlList.cs" />
+    <Compile Include="Base\Security\IAccessControlListFactory.cs" />
+    <Compile Include="Base\Security\Login.cs" />
+    <Compile Include="Base\Security\Operation.cs" />
+    <Compile Include="Base\Security\Permission.cs" />
+    <Compile Include="Base\Security\PermissionBuilder.cs" />
+    <Compile Include="Base\Security\PermissionComparer.cs" />
+    <Compile Include="Base\Security\Permissions.cs" />
+    <Compile Include="Base\Security\Role.cs" />
+    <Compile Include="Base\Security\Role.v.cs" />
+    <Compile Include="Base\Security\Roles.cs" />
+    <Compile Include="Base\Security\Security.cs" />
+    <Compile Include="Base\Security\SecurityToken.cs" />
+    <Compile Include="Base\Security\SecurityTokens.cs" />
+    <Compile Include="Base\Security\UserExtensions.cs" />
+    <Compile Include="Base\Security\UserGroup.cs" />
+    <Compile Include="Base\Security\UserGroup.v.cs" />
+    <Compile Include="Base\Security\UserGroups.cs" />
+    <Compile Include="Base\Security\Users.cs" />
+    <Compile Include="Base\Setup.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Framework\Framework\Framework.csproj">
+      <Project>{84495b8e-1800-41c9-a236-abe6265a23a3}</Project>
+      <Name>Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Meta\Meta.csproj">
+      <Project>{BA6EFCFE-CB7F-4994-A5A4-C11DDAAC32DD}</Project>
+      <Name>Meta</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Resources\Resources.csproj">
+      <Project>{a10683f7-b261-4770-81c6-bb589e768acb}</Project>
+      <Name>Resources</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Settings.StyleCop" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
