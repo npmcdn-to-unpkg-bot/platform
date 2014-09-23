@@ -68,8 +68,6 @@
     <Compile Include="Apps\Meta\Repository.cs" />
     <Compile Include="Test\Meta\Repository.cs" />
     <Compile Include="Test\Meta\Repository.v.cs" />
-    <Compile Include="Base\Meta\Path.cs" />
-    <Compile Include="Base\Meta\Repository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

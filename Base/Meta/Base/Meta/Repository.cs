@@ -69,7 +69,7 @@ namespace Allors.Meta
 
             var transition = new ClassBuilder(domain, new Guid("a7e490c0-ce29-4298-97c4-519904bb755a")).WithSingularName("Transition").WithPluralName("Transitions").Build();
             var transitional = new InterfaceBuilder(domain, new Guid("ab2179ad-9eac-4b61-8d84-81cd777c4926")).WithSingularName("Transitional").WithPluralName("Transitionals").Build();
-            var objectState = new ClassBuilder(domain, new Guid("f991813f-3146-4431-96d0-554aa2186887")).WithSingularName("ObjectState").WithPluralName("ObjectStates").Build();
+            var objectState = new InterfaceBuilder(domain, new Guid("f991813f-3146-4431-96d0-554aa2186887")).WithSingularName("ObjectState").WithPluralName("ObjectStates").Build();
 
             var stringTemplate = new ClassBuilder(domain, new Guid("0c50c02a-cc9c-4617-8530-15a24d4ac969")).WithSingularName("StringTemplate").WithPluralName("StringTemplates").Build();
 

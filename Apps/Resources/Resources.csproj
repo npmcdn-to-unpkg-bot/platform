@@ -54,8 +54,15 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Apps\" />
     <Folder Include="Core\" />
     <Folder Include="Test\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Base\.svn\entries" />
+    <None Include="Base\.svn\format" />
+    <None Include="Base\.svn\pristine\f4\f4f1aee1b949fac285a5f0f4073d39a153df6fa3.svn-base" />
+    <None Include="Base\.svn\wc.db" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
