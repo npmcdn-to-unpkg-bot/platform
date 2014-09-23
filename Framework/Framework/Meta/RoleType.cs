@@ -504,12 +504,10 @@ namespace Allors.Meta
 
             if (this.ObjectType != null && this.AssociationType.ObjectType != null)
             {
-                this.derivedSingularPropertyName = this.SingularFullName;
+                this.derivedSingularPropertyName = this.SingularName;
 
                 if (this.AssociationType.ObjectType.ExistLeafClasses)
                 {
-                    this.derivedSingularPropertyName = this.SingularName;
-
                     foreach (var leafClass in this.AssociationType.ObjectType.LeafClasses)
                     {
                         foreach (var otherRole in leafClass.RoleTypes)
@@ -537,12 +535,10 @@ namespace Allors.Meta
 
             if (this.ObjectType != null && this.AssociationType.ObjectType != null)
             {
-                this.derivedPluralPropertyName = this.PluralFullName;
+                this.derivedPluralPropertyName = this.PluralName;
 
                 if (this.AssociationType.ObjectType.ExistLeafClasses)
                 {
-                    this.derivedPluralPropertyName = this.PluralName;
-
                     foreach (var leafClass in this.AssociationType.ObjectType.LeafClasses)
                     {
                         foreach (var otherRole in leafClass.RoleTypes)

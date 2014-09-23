@@ -110,6 +110,21 @@ namespace Allors.Meta.Static
 
             companyPerson.RoleType.AssignedSingularName = "Persoon";
             Assert.AreEqual("Persoon", companyPerson.RoleType.SingularPropertyName);
+
+
+            var @interfaceWithoutLeafClass = new InterfaceBuilder(this.Domain, Guid.NewGuid()).WithSingularName("Interface").WithPluralName("Interfaces").Build();
+
+            var interfaceWithoutLeafClassPerson = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid())
+                .WithObjectTypes(@interfaceWithoutLeafClass, person)
+                .Build();
+
+            Assert.AreEqual("Person", interfaceWithoutLeafClassPerson.RoleType.SingularPropertyName);
+
+            interfaceWithoutLeafClassPerson.RoleType.AssignedPluralName = "Personen";
+            Assert.AreEqual("Person", interfaceWithoutLeafClassPerson.RoleType.SingularPropertyName);
+
+            interfaceWithoutLeafClassPerson.RoleType.AssignedSingularName = "Persoon";
+            Assert.AreEqual("Persoon", interfaceWithoutLeafClassPerson.RoleType.SingularPropertyName);
         }
 
         [Test]
@@ -215,6 +230,24 @@ namespace Allors.Meta.Static
 
             Assert.AreEqual("Personen", companyPerson.RoleType.PluralPropertyName);
             Assert.AreEqual("Persons", superPerson.RoleType.PluralPropertyName);
+
+
+
+            var @interfaceWithoutLeafClass = new InterfaceBuilder(this.Domain, Guid.NewGuid()).WithSingularName("Interface").WithPluralName("Interfaces").Build();
+
+            var interfaceWithoutLeafClassPerson = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid())
+                .WithObjectTypes(@interfaceWithoutLeafClass, person)
+                .WithCardinality(Cardinalities.OneToMany)
+                .Build();
+
+            Assert.AreEqual("Persons", interfaceWithoutLeafClassPerson.RoleType.PluralPropertyName);
+
+            interfaceWithoutLeafClassPerson.RoleType.AssignedSingularName = "Persoon";
+            Assert.AreEqual("Persons", interfaceWithoutLeafClassPerson.RoleType.PluralPropertyName);
+
+            interfaceWithoutLeafClassPerson.RoleType.AssignedPluralName = "Personen";
+            Assert.AreEqual("Personen", interfaceWithoutLeafClassPerson.RoleType.PluralPropertyName);
+
         }
 
         [Test]

@@ -6,15 +6,15 @@ namespace Allors.Domain
 	{
 
 
-		global::System.String CommentableComment 
+		global::System.String Comment 
 		{
 			get;
 			set;
 		}
 
-		bool ExistCommentableComment{get;}
+		bool ExistComment{get;}
 
-		void RemoveCommentableComment();
+		void RemoveComment();
 
 	}
 
@@ -24,7 +24,7 @@ namespace Allors.Domain
 
 		public global::Allors.Meta.Interface ObjectType = global::Allors.Meta.Interfaces.Commentable;
 
-		public global::Allors.Meta.RoleType CommentableComment 
+		public global::Allors.Meta.RoleType Comment 
 		{
 			get
 			{

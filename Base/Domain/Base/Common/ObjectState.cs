@@ -20,11 +20,7 @@
 
 namespace Allors.Domain
 {
-    public abstract partial class ObjectState
+    public partial interface ObjectState
     {
-        public void Process(Transitional transitionalObject)
-        {
-            transitionalObject.DeniedPermissions = this.DeniedPermissions;
-        }
     }
 }

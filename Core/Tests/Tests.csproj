@@ -66,13 +66,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Framework\Framework\Framework.csproj">
+      <Project>{84495b8e-1800-41c9-a236-abe6265a23a3}</Project>
+      <Name>Framework</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{b6c2e17b-53e1-44a4-9299-5350cc854e65}</Project>
       <Name>Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Framework\Framework.csproj">
-      <Project>{84495b8e-1800-41c9-a236-abe6265a23a3}</Project>
-      <Name>Framework</Name>
     </ProjectReference>
     <ProjectReference Include="..\Meta\Meta.csproj">
       <Project>{ba6efcfe-cb7f-4994-a5a4-c11ddaac32dd}</Project>

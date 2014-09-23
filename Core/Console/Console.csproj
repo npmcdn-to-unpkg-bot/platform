@@ -49,10 +49,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Framework\Framework.csproj">
-      <Project>{84495b8e-1800-41c9-a236-abe6265a23a3}</Project>
-      <Name>Framework</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Meta\Meta.csproj">
       <Project>{BA6EFCFE-CB7F-4994-A5A4-C11DDAAC32DD}</Project>
       <Name>Meta</Name>

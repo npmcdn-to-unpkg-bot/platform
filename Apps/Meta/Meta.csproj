@@ -65,6 +65,13 @@
     <Compile Include="..\..\Core\Meta\Core\Repository.cs">
       <Link>Core\Repository.cs</Link>
     </Compile>
+    <Compile Include="..\..\Base\Meta\Base\Meta\Repository.cs">
+      <Link>Base\Meta\Repository.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Base\Meta\Base\Meta\Path.cs">
+      <Link>Base\Meta\Path.cs</Link>
+    </Compile>
+
     <Compile Include="Apps\Meta\Repository.cs" />
     <Compile Include="Test\Meta\Repository.cs" />
     <Compile Include="Test\Meta\Repository.v.cs" />

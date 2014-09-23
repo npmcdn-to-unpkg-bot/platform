@@ -26,6 +26,7 @@ namespace Allors.Meta
 		public static readonly Interface SecurityTokenOwner = ((Interface)Repository.MetaPopulation.Find( new System.Guid("a69cad9c-c2f1-463f-9af1-873ce65aeea6")));
 		public static readonly Interface Period = ((Interface)Repository.MetaPopulation.Find( new System.Guid("80adbbfd-952e-46f3-a744-78e0ce42bc80")));
 		public static readonly Interface Transitional = ((Interface)Repository.MetaPopulation.Find( new System.Guid("ab2179ad-9eac-4b61-8d84-81cd777c4926")));
+		public static readonly Interface ObjectState = ((Interface)Repository.MetaPopulation.Find( new System.Guid("f991813f-3146-4431-96d0-554aa2186887")));
 		public static readonly Interface Localised = ((Interface)Repository.MetaPopulation.Find( new System.Guid("7979a17c-0829-46df-a0d4-1b01775cfaac")));
 		public static readonly Interface Commentable = ((Interface)Repository.MetaPopulation.Find( new System.Guid("fdd52472-e863-4e91-bb01-1dada2acc8f6")));
 		public static readonly Interface SearchResult = ((Interface)Repository.MetaPopulation.Find( new System.Guid("a0ac7040-6984-4267-a200-919875e08909")));
@@ -51,7 +52,6 @@ namespace Allors.Meta
 		public static readonly Class SecurityToken = ((Class)Repository.MetaPopulation.Find( new System.Guid("a53f1aed-0e3f-4c3c-9600-dc579cccf893")));
 		public static readonly Class Login = ((Class)Repository.MetaPopulation.Find( new System.Guid("ad7277a8-eda4-4128-a990-b47fe43d120a")));
 		public static readonly Class Transition = ((Class)Repository.MetaPopulation.Find( new System.Guid("a7e490c0-ce29-4298-97c4-519904bb755a")));
-		public static readonly Class ObjectState = ((Class)Repository.MetaPopulation.Find( new System.Guid("f991813f-3146-4431-96d0-554aa2186887")));
 		public static readonly Class StringTemplate = ((Class)Repository.MetaPopulation.Find( new System.Guid("0c50c02a-cc9c-4617-8530-15a24d4ac969")));
 		public static readonly Class Language = ((Class)Repository.MetaPopulation.Find( new System.Guid("4a0eca4b-281f-488d-9c7e-497de882c044")));
 		public static readonly Class Country = ((Class)Repository.MetaPopulation.Find( new System.Guid("c22bf60e-6428-4d10-8194-94f7be396f28")));

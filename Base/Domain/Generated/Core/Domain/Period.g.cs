@@ -6,26 +6,26 @@ namespace Allors.Domain
 	{
 
 
-		global::System.DateTime? PeriodFromDate 
+		global::System.DateTime? FromDate 
 		{
 			get;
 			set;
 		}
 
-		bool ExistPeriodFromDate{get;}
+		bool ExistFromDate{get;}
 
-		void RemovePeriodFromDate();
+		void RemoveFromDate();
 
 
-		global::System.DateTime? PeriodThroughDate 
+		global::System.DateTime? ThroughDate 
 		{
 			get;
 			set;
 		}
 
-		bool ExistPeriodThroughDate{get;}
+		bool ExistThroughDate{get;}
 
-		void RemovePeriodThroughDate();
+		void RemoveThroughDate();
 
 	}
 
@@ -35,14 +35,14 @@ namespace Allors.Domain
 
 		public global::Allors.Meta.Interface ObjectType = global::Allors.Meta.Interfaces.Period;
 
-		public global::Allors.Meta.RoleType PeriodFromDate 
+		public global::Allors.Meta.RoleType FromDate 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.PeriodFromDate;
 			}
 		} 
-		public global::Allors.Meta.RoleType PeriodThroughDate 
+		public global::Allors.Meta.RoleType ThroughDate 
 		{
 			get
 			{
