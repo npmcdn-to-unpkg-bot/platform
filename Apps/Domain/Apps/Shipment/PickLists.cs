@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.R1;
+    
     using Allors.Domain;
 
     public partial class PickLists

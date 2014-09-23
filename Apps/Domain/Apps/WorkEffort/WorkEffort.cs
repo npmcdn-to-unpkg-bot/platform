@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     public static partial class WorkEffortExtensions
     {
-        public static void AppsWorkEffortDerive(WorkEffort workEffort, IDerivation derivation)
+        public static void AppsWorkEffortDerive(this WorkEffort workEffort, IDerivation derivation)
         {
             if (workEffort.ExistCurrentObjectState && !workEffort.CurrentObjectState.Equals(workEffort.PreviousObjectState))
             {
@@ -37,27 +37,27 @@ namespace Allors.Domain
             }
         }
 
-        public static void AppsWorkEffortConfirm(WorkEffort workEffort)
+        public static void AppsWorkEffortConfirm(this WorkEffort workEffort)
         {
             workEffort.CurrentObjectState = new WorkEffortObjectStates(workEffort.Strategy.Session).Confirmed;
         }
 
-        public static void AppsWorkEffortWorkDone(WorkEffort workEffort)
+        public static void AppsWorkEffortWorkDone(this WorkEffort workEffort)
         {
             workEffort.CurrentObjectState = new WorkEffortObjectStates(workEffort.Strategy.Session).Fulffilled;
         }
 
-        public static void AppsWorkEffortFinish(WorkEffort workEffort)
+        public static void AppsWorkEffortFinish(this WorkEffort workEffort)
         {
             workEffort.CurrentObjectState = new WorkEffortObjectStates(workEffort.Strategy.Session).Finished;
         }
 
-        public static void AppsWorkEffortCancel(WorkEffort workEffort)
+        public static void AppsWorkEffortCancel(this WorkEffort workEffort)
         {
             workEffort.CurrentObjectState = new WorkEffortObjectStates(workEffort.Strategy.Session).Cancelled;
         }
 
-        public static void AppsWorkEffortReopen(WorkEffort workEffort)
+        public static void AppsWorkEffortReopen(this WorkEffort workEffort)
         {
             workEffort.CurrentObjectState = new WorkEffortObjectStates(workEffort.Strategy.Session).Created;
         }

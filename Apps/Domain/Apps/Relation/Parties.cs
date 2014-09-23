@@ -20,7 +20,7 @@
 
 namespace Allors.Domain
 {
-    using Allors.R1;
+    
 
     public partial class Parties
     {

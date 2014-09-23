@@ -21,7 +21,7 @@
 namespace Allors.Domain
 {
     using Allors.Domain;
-    using Allors.R1;
+    
 
     using Resources;
 

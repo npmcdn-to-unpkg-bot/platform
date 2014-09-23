@@ -23,7 +23,7 @@ namespace Allors.Domain
     using System;
     using System.Collections.Generic;
 
-    using Allors.R1;
+    
     using Allors.Domain;
 
     public partial class PartyProductRevenueHistories

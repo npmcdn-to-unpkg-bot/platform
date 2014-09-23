@@ -23,7 +23,7 @@ namespace Allors.Domain
     using System;
 
     using Allors.Domain;
-    using Allors.R1;
+    
 
     
 

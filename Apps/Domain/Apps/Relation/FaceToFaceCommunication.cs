@@ -23,7 +23,7 @@ namespace Allors.Domain
     using System.Text;
 
     using Allors.Domain;
-    using Allors.R1;
+    
     
 
     

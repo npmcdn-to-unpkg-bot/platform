@@ -22,5 +22,75 @@ namespace Allors.Domain
 {
     public partial class Activity
     {
+        ObjectState Transitional.PreviousObjectState 
+        {
+            get
+            {
+                return this.PreviousObjectState;
+            }
+        }
+
+        ObjectState Transitional.CurrentObjectState 
+        {
+            get
+            {
+                return this.CurrentObjectState;
+            }
+        }
+
+        public void Confirm()
+        {
+            this.AppsWorkEffortConfirm();
+        }
+
+        public void WorkDone()
+        {
+            this.AppsWorkEffortWorkDone();
+        }
+
+        public void Finish()
+        {
+            this.AppsWorkEffortFinish();
+        }
+
+        public void Cancel()
+        {
+            this.AppsWorkEffortCancel();
+        }
+
+        public void Reopen()
+        {
+            this.AppsWorkEffortReopen();
+        }
+
+        public void DeriveDisplayName()
+        {
+            this.AppsDeriveDisplayName();
+        }
+
+        public void DeriveSearchDataCharacterBoundaryText()
+        {
+            this.AppsDeriveSearchDataCharacterBoundaryText();
+        }
+
+        public void DeriveSearchDataWordBoundaryText()
+        {
+            this.AppsDeriveSearchDataWordBoundaryText();
+        }
+
+        public string ComposeDisplayName()
+        {
+            return this.AppsComposeDisplayName();
+        }
+
+        public string ComposeSearchDataCharacterBoundaryText()
+        {
+            return this.ComposeSearchDataCharacterBoundaryText();
+        }
+
+        public string ComposeSearchDataWordBoundaryText()
+        {
+            return this.ComposeSearchDataWordBoundaryText();
+        }
     }
 }
