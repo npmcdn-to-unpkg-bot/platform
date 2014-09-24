@@ -69,11 +69,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? MaximumAmount 
+		virtual public global::System.Decimal MaximumAmount 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.MaximumAmount);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.MaximumAmount);
 			}
 			set
 			{
@@ -225,11 +225,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? StartDate 
+		virtual public global::System.DateTime StartDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.StartDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.StartDate);
 			}
 			set
 			{
@@ -277,11 +277,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? EstimatedAmount 
+		virtual public global::System.Decimal EstimatedAmount 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.EstimatedAmount);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.EstimatedAmount);
 			}
 			set
 			{
@@ -303,11 +303,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? EndDate 
+		virtual public global::System.DateTime EndDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.EndDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.EndDate);
 			}
 			set
 			{
@@ -329,11 +329,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? ContractDate 
+		virtual public global::System.DateTime ContractDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.ContractDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.ContractDate);
 			}
 			set
 			{

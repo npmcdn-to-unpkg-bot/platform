@@ -31,7 +31,7 @@ namespace Allors.Domain
 		void RemoveDescription();
 
 
-		global::System.DateTime? ExpectedStartDate 
+		global::System.DateTime ExpectedStartDate 
 		{
 			get;
 			set;
@@ -42,7 +42,7 @@ namespace Allors.Domain
 		void RemoveExpectedStartDate();
 
 
-		global::System.DateTime? ExpectedEndDate 
+		global::System.DateTime ExpectedEndDate 
 		{
 			get;
 			set;

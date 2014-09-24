@@ -69,11 +69,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? FromDate 
+		virtual public global::System.DateTime FromDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.FromDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.FromDate);
 			}
 			set
 			{
@@ -95,11 +95,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Int32? Quantity 
+		virtual public global::System.Int32 Quantity 
 		{
 			get
 			{
-				return (global::System.Int32?) Strategy.GetUnitRole(Meta.Quantity);
+				return (global::System.Int32) Strategy.GetUnitRole(Meta.Quantity);
 			}
 			set
 			{

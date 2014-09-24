@@ -17,11 +17,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Guid? OperandTypePointer 
+		virtual public global::System.Guid OperandTypePointer 
 		{
 			get
 			{
-				return (global::System.Guid?) Strategy.GetUnitRole(Meta.OperandTypePointer);
+				return (global::System.Guid) Strategy.GetUnitRole(Meta.OperandTypePointer);
 			}
 			set
 			{
@@ -43,11 +43,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Guid? ConcreteClassPointer 
+		virtual public global::System.Guid ConcreteClassPointer 
 		{
 			get
 			{
-				return (global::System.Guid?) Strategy.GetUnitRole(Meta.ConcreteClassPointer);
+				return (global::System.Guid) Strategy.GetUnitRole(Meta.ConcreteClassPointer);
 			}
 			set
 			{
@@ -69,11 +69,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Int32? OperationEnum 
+		virtual public global::System.Int32 OperationEnum 
 		{
 			get
 			{
-				return (global::System.Int32?) Strategy.GetUnitRole(Meta.OperationEnum);
+				return (global::System.Int32) Strategy.GetUnitRole(Meta.OperationEnum);
 			}
 			set
 			{

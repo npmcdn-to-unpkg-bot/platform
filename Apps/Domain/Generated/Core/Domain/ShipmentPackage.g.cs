@@ -89,11 +89,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? CreationDate 
+		virtual public global::System.DateTime CreationDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.CreationDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.CreationDate);
 			}
 			set
 			{
@@ -115,11 +115,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Int32? SequenceNumber 
+		virtual public global::System.Int32 SequenceNumber 
 		{
 			get
 			{
-				return (global::System.Int32?) Strategy.GetUnitRole(Meta.SequenceNumber);
+				return (global::System.Int32) Strategy.GetUnitRole(Meta.SequenceNumber);
 			}
 			set
 			{
@@ -239,11 +239,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Guid? UniqueId 
+		virtual public global::System.Guid UniqueId 
 		{
 			get
 			{
-				return (global::System.Guid?) Strategy.GetUnitRole(Meta.UniqueId);
+				return (global::System.Guid) Strategy.GetUnitRole(Meta.UniqueId);
 			}
 			set
 			{

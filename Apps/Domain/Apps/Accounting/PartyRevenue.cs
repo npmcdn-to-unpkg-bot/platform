@@ -34,39 +34,36 @@ namespace Allors.Domain
         {
             this.RemoveRevenue();
 
-            if (this.Year != null && this.Month != null)
+            var year = this.Year;
+            var month = this.Month;
+
+            this.Revenue = 0;
+
+            var lastDayOfMonth = new DateTime(year, month, 01).AddMonths(1).AddSeconds(-1).Day;
+
+            var invoices = this.Party.SalesInvoicesWhereBillToCustomer;
+            invoices.Filter.AddEquals(SalesInvoices.Meta.BilledFromInternalOrganisation, this.InternalOrganisation);
+            invoices.Filter.AddNot().AddEquals(SalesInvoices.Meta.CurrentObjectState, new SalesInvoiceObjectStates(this.DatabaseSession).WrittenOff);
+            invoices.Filter.AddBetween(SalesInvoices.Meta.InvoiceDate, new DateTime(year, month, 01), new DateTime(year, month, lastDayOfMonth));
+
+            foreach (SalesInvoice salesInvoice in invoices)
             {
-                var year = this.Year.Value;
-                var month = this.Month.Value;
+                this.Revenue += salesInvoice.TotalExVat;
+            }
 
-                this.Revenue = 0;
+            var months = ((DateTime.Now.Year - this.Year) * 12) + DateTime.Now.Month - this.Month;
+            if (months <= 12)
+            {
+                var histories = this.Party.PartyRevenueHistoriesWhereParty;
+                histories.Filter.AddEquals(PartyRevenueHistories.Meta.InternalOrganisation, this.InternalOrganisation);
+                var history = histories.First ?? new PartyRevenueHistoryBuilder(this.Session)
+                                                        .WithCurrency(this.Currency)
+                                                        .WithInternalOrganisation(this.InternalOrganisation)
+                                                        .WithParty(this.Party)
+                                                        .WithRevenue(0)
+                                                        .Build();
 
-                var lastDayOfMonth = new DateTime(year, month, 01).AddMonths(1).AddSeconds(-1).Day;
-
-                var invoices = this.Party.SalesInvoicesWhereBillToCustomer;
-                invoices.Filter.AddEquals(SalesInvoices.Meta.BilledFromInternalOrganisation, this.InternalOrganisation);
-                invoices.Filter.AddNot().AddEquals(SalesInvoices.Meta.CurrentObjectState, new SalesInvoiceObjectStates(this.DatabaseSession).WrittenOff);
-                invoices.Filter.AddBetween(SalesInvoices.Meta.InvoiceDate, new DateTime(year, month, 01), new DateTime(year, month, lastDayOfMonth));
-
-                foreach (SalesInvoice salesInvoice in invoices)
-                {
-                    this.Revenue += salesInvoice.TotalExVat;
-                }
-
-                var months = ((DateTime.Now.Year - this.Year) * 12) + DateTime.Now.Month - this.Month;
-                if (months <= 12)
-                {
-                    var histories = this.Party.PartyRevenueHistoriesWhereParty;
-                    histories.Filter.AddEquals(PartyRevenueHistories.Meta.InternalOrganisation, this.InternalOrganisation);
-                    var history = histories.First ?? new PartyRevenueHistoryBuilder(this.Session)
-                                                         .WithCurrency(this.Currency)
-                                                         .WithInternalOrganisation(this.InternalOrganisation)
-                                                         .WithParty(this.Party)
-                                                         .WithRevenue(0)
-                                                         .Build();
-
-                    history.AppsDeriveHistory();
-                }
+                history.AppsDeriveHistory();
             }
         }
 

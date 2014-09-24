@@ -24,7 +24,7 @@ namespace Allors.Domain
 		void RemoveLocalisedNames();
 
 
-		global::System.Boolean? IsActive 
+		global::System.Boolean IsActive 
 		{
 			get;
 			set;

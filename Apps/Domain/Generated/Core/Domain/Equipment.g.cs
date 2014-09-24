@@ -43,11 +43,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? LastServiceDate 
+		virtual public global::System.DateTime LastServiceDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.LastServiceDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.LastServiceDate);
 			}
 			set
 			{
@@ -69,11 +69,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? AcquiredDate 
+		virtual public global::System.DateTime AcquiredDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.AcquiredDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.AcquiredDate);
 			}
 			set
 			{
@@ -121,11 +121,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? ProductionCapacity 
+		virtual public global::System.Decimal ProductionCapacity 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.ProductionCapacity);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.ProductionCapacity);
 			}
 			set
 			{
@@ -147,11 +147,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? NextServiceDate 
+		virtual public global::System.DateTime NextServiceDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.NextServiceDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.NextServiceDate);
 			}
 			set
 			{

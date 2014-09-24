@@ -22,10 +22,11 @@ namespace Allors.Domain
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
 
     public partial class AutomatedAgent
     {
-        public IFormatProvider AppsGetCurrencyFormat {
+        public NumberFormatInfo CurrencyFormat {
             get
             {
                 return this.AppsPartyGetCurrencyFormat();

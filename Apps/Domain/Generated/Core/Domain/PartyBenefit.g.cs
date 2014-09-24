@@ -43,11 +43,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? Cost 
+		virtual public global::System.Decimal Cost 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.Cost);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.Cost);
 			}
 			set
 			{
@@ -69,11 +69,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? ActualEmployerPaidPercentage 
+		virtual public global::System.Decimal ActualEmployerPaidPercentage 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.ActualEmployerPaidPercentage);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.ActualEmployerPaidPercentage);
 			}
 			set
 			{
@@ -121,11 +121,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? ActualAvailableTime 
+		virtual public global::System.Decimal ActualAvailableTime 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.ActualAvailableTime);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.ActualAvailableTime);
 			}
 			set
 			{

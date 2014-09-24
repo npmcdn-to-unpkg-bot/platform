@@ -435,11 +435,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? ActualHours 
+		virtual public global::System.Decimal ActualHours 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.ActualHours);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.ActualHours);
 			}
 			set
 			{
@@ -539,11 +539,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? EstimatedHours 
+		virtual public global::System.Decimal EstimatedHours 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.EstimatedHours);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.EstimatedHours);
 			}
 			set
 			{
@@ -689,11 +689,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Guid? UniqueId 
+		virtual public global::System.Guid UniqueId 
 		{
 			get
 			{
-				return (global::System.Guid?) Strategy.GetUnitRole(Meta.UniqueId);
+				return (global::System.Guid) Strategy.GetUnitRole(Meta.UniqueId);
 			}
 			set
 			{
@@ -1170,6 +1170,42 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.WorkEffortInventoryAssignmentAssignment;
+			}
+		} 
+
+		public global::Allors.Meta.MethodType Confirm 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.WorkEffortConfirm;
+			}
+		} 
+		public global::Allors.Meta.MethodType WorkDone 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.WorkEffortWorkDone;
+			}
+		} 
+		public global::Allors.Meta.MethodType Finish 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.WorkEffortFinish;
+			}
+		} 
+		public global::Allors.Meta.MethodType Cancel 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.WorkEffortCancel;
+			}
+		} 
+		public global::Allors.Meta.MethodType Reopen 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.WorkEffortReopen;
 			}
 		} 
 

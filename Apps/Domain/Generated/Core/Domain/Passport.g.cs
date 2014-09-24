@@ -17,11 +17,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? IssueDate 
+		virtual public global::System.DateTime IssueDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.IssueDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.IssueDate);
 			}
 			set
 			{
@@ -43,11 +43,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? ExpiriationDate 
+		virtual public global::System.DateTime ExpiriationDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.ExpiriationDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.ExpiriationDate);
 			}
 			set
 			{

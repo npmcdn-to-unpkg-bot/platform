@@ -33,17 +33,7 @@ namespace Allors.Domain
 
             base.Delete();
         }
-
-        public void RemoveProduct()
-        {
-            this.Product.RemoveFromBasePrices(this);
-        }
-
-        public void RemoveProductFeature()
-        {
-            this.ProductFeature.RemoveFromBasePrices(this);
-        }
-
+        
         protected override void AppsOnPostBuild(IObjectBuilder objectBuilder)
         {
             base.AppsOnPostBuild(objectBuilder);

@@ -52,7 +52,7 @@ namespace Allors.Domain
 		void RemovePartyRelationshipPriority();
 
 
-		global::System.Decimal? SimpleMovingAverage 
+		global::System.Decimal SimpleMovingAverage 
 		{
 			get;
 			set;

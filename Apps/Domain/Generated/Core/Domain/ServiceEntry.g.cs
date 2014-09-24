@@ -6,7 +6,7 @@ namespace Allors.Domain
 	{
 
 
-		global::System.DateTime? ThroughDateTime 
+		global::System.DateTime ThroughDateTime 
 		{
 			get;
 			set;
@@ -31,7 +31,7 @@ namespace Allors.Domain
 		void RemoveEngagementItem();
 
 
-		global::System.Boolean? IsBillable 
+		global::System.Boolean IsBillable 
 		{
 			get;
 			set;
@@ -42,7 +42,7 @@ namespace Allors.Domain
 		void RemoveIsBillable();
 
 
-		global::System.DateTime? FromDateTime 
+		global::System.DateTime FromDateTime 
 		{
 			get;
 			set;

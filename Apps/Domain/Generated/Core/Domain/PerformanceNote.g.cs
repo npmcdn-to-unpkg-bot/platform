@@ -43,11 +43,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? CommunicationDate 
+		virtual public global::System.DateTime CommunicationDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.CommunicationDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.CommunicationDate);
 			}
 			set
 			{

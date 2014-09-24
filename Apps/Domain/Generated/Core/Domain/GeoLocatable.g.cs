@@ -6,7 +6,7 @@ namespace Allors.Domain
 	{
 
 
-		global::System.Decimal? Latitude 
+		global::System.Decimal Latitude 
 		{
 			get;
 			set;
@@ -17,7 +17,7 @@ namespace Allors.Domain
 		void RemoveLatitude();
 
 
-		global::System.Decimal? Longitude 
+		global::System.Decimal Longitude 
 		{
 			get;
 			set;

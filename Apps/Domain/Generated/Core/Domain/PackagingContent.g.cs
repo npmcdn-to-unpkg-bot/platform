@@ -43,11 +43,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? Quantity 
+		virtual public global::System.Decimal Quantity 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.Quantity);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.Quantity);
 			}
 			set
 			{

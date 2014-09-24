@@ -17,11 +17,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? RevisionDate 
+		virtual public global::System.DateTime RevisionDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.RevisionDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.RevisionDate);
 			}
 			set
 			{

@@ -6,7 +6,7 @@ namespace Allors.Domain
 	{
 
 
-		global::System.DateTime? AgreementDate 
+		global::System.DateTime AgreementDate 
 		{
 			get;
 			set;

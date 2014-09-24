@@ -79,11 +79,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? StartDate 
+		virtual public global::System.DateTime StartDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.StartDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.StartDate);
 			}
 			set
 			{
@@ -307,11 +307,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Guid? UniqueId 
+		virtual public global::System.Guid UniqueId 
 		{
 			get
 			{
-				return (global::System.Guid?) Strategy.GetUnitRole(Meta.UniqueId);
+				return (global::System.Guid) Strategy.GetUnitRole(Meta.UniqueId);
 			}
 			set
 			{
@@ -440,6 +440,28 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.CommunicationEventCase;
+			}
+		} 
+
+		public global::Allors.Meta.MethodType Close 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.CaseClose;
+			}
+		} 
+		public global::Allors.Meta.MethodType Complete 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.CaseComplete;
+			}
+		} 
+		public global::Allors.Meta.MethodType Reopen 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.CaseReopen;
 			}
 		} 
 

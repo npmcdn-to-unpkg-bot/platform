@@ -69,11 +69,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean? UseAsDefault 
+		virtual public global::System.Boolean UseAsDefault 
 		{
 			get
 			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.UseAsDefault);
+				return (global::System.Boolean) Strategy.GetUnitRole(Meta.UseAsDefault);
 			}
 			set
 			{
@@ -95,11 +95,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean? NonSolicitationIndicator 
+		virtual public global::System.Boolean NonSolicitationIndicator 
 		{
 			get
 			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.NonSolicitationIndicator);
+				return (global::System.Boolean) Strategy.GetUnitRole(Meta.NonSolicitationIndicator);
 			}
 			set
 			{

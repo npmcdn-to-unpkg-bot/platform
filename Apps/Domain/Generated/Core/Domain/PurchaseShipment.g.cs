@@ -499,11 +499,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? EstimatedShipCost 
+		virtual public global::System.Decimal EstimatedShipCost 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.EstimatedShipCost);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.EstimatedShipCost);
 			}
 			set
 			{
@@ -525,11 +525,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? EstimatedShipDate 
+		virtual public global::System.DateTime EstimatedShipDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.EstimatedShipDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.EstimatedShipDate);
 			}
 			set
 			{
@@ -551,11 +551,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? LatestCancelDate 
+		virtual public global::System.DateTime LatestCancelDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.LatestCancelDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.LatestCancelDate);
 			}
 			set
 			{
@@ -629,11 +629,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? EstimatedReadyDate 
+		virtual public global::System.DateTime EstimatedReadyDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.EstimatedReadyDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.EstimatedReadyDate);
 			}
 			set
 			{
@@ -821,11 +821,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? EstimatedArrivalDate 
+		virtual public global::System.DateTime EstimatedArrivalDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.EstimatedArrivalDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.EstimatedArrivalDate);
 			}
 			set
 			{
@@ -971,11 +971,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Guid? UniqueId 
+		virtual public global::System.Guid UniqueId 
 		{
 			get
 			{
-				return (global::System.Guid?) Strategy.GetUnitRole(Meta.UniqueId);
+				return (global::System.Guid) Strategy.GetUnitRole(Meta.UniqueId);
 			}
 			set
 			{
@@ -1329,6 +1329,14 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.PrintQueuePrintable;
+			}
+		} 
+
+		public global::Allors.Meta.MethodType Cancel 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.PurchaseShipmentCancel;
 			}
 		} 
 

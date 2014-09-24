@@ -43,11 +43,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Int32? Quantity 
+		virtual public global::System.Int32 Quantity 
 		{
 			get
 			{
-				return (global::System.Int32?) Strategy.GetUnitRole(Meta.Quantity);
+				return (global::System.Int32) Strategy.GetUnitRole(Meta.Quantity);
 			}
 			set
 			{
@@ -209,11 +209,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? MaximumAllowedPrice 
+		virtual public global::System.Decimal MaximumAllowedPrice 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.MaximumAllowedPrice);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.MaximumAllowedPrice);
 			}
 			set
 			{
@@ -235,11 +235,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? RequiredByDate 
+		virtual public global::System.DateTime RequiredByDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.RequiredByDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.RequiredByDate);
 			}
 			set
 			{

@@ -38,7 +38,7 @@ namespace Allors.Domain
 		void RemoveCurrentObjectState();
 
 
-		global::System.DateTime? DocumentationDate 
+		global::System.DateTime DocumentationDate 
 		{
 			get;
 			set;
@@ -208,6 +208,14 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.EngineeringChangePartSpecification;
+			}
+		} 
+
+		public global::Allors.Meta.MethodType Approve 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.PartSpecificationApprove;
 			}
 		} 
 

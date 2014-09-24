@@ -6,7 +6,7 @@ namespace Allors.Domain
 	{
 
 
-		global::System.DateTime? ValidFromDate 
+		global::System.DateTime ValidFromDate 
 		{
 			get;
 			set;
@@ -49,7 +49,7 @@ namespace Allors.Domain
 		void RemoveIssuer();
 
 
-		global::System.DateTime? ValidThroughDate 
+		global::System.DateTime ValidThroughDate 
 		{
 			get;
 			set;
@@ -85,7 +85,7 @@ namespace Allors.Domain
 		void RemoveReceiver();
 
 
-		global::System.Decimal? Amount 
+		global::System.Decimal Amount 
 		{
 			get;
 			set;
@@ -96,7 +96,7 @@ namespace Allors.Domain
 		void RemoveAmount();
 
 
-		global::System.DateTime? IssueDate 
+		global::System.DateTime IssueDate 
 		{
 			get;
 			set;

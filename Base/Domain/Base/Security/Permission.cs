@@ -32,7 +32,7 @@ namespace Allors.Domain
         {
             get
             {
-                return (OperandType)(this.OperandTypePointer.HasValue ? this.Session.Population.MetaPopulation.Find(this.OperandTypePointer.Value) : null);
+                return (OperandType)this.Session.Population.MetaPopulation.Find(this.OperandTypePointer);
             }
 
             set
@@ -56,16 +56,16 @@ namespace Allors.Domain
             }
         }
 
-        public Operation? Operation
+        public Operation Operation
         {
             get
             {
-                return (Operation?)this.OperationEnum;
+                return (Operation)this.OperationEnum;
             }
 
             set
             {
-                this.OperationEnum = (int?)value;
+                this.OperationEnum = (int)value;
             }
         }
 
@@ -81,7 +81,7 @@ namespace Allors.Domain
         {
             get
             {
-                return (ObjectType)(this.ConcreteClassPointer.HasValue ? this.Session.Population.MetaPopulation.Find(this.ConcreteClassPointer.Value) : null);
+                return (ObjectType)this.Session.Population.MetaPopulation.Find(this.ConcreteClassPointer);
             }
 
             set
@@ -138,37 +138,34 @@ namespace Allors.Domain
             derivation.Log.AssertExists(this, Meta.ConcreteClassPointer);
             derivation.Log.AssertExists(this, Meta.OperandTypePointer);
 
-            if (this.Operation.HasValue && this.ExistOperandType)
+            switch (this.Operation)
             {
-                switch (this.Operation)
-                {
-                    case global::Allors.Domain.Operation.Read:
-                        // Read Operations should only be allowed on AssociaitonTypes && RoleTypes
-                        if (!(this.OperandType is RoleType || this.OperandType is AssociationType))
-                        {
-                            derivation.Log.AddError(this, Meta.OperationEnum, ErrorMessages.PermissionOnlyReadForRoleOrAssociationType);
-                        }
+                case Operation.Read:
+                    // Read Operations should only be allowed on AssociaitonTypes && RoleTypes
+                    if (!(this.OperandType is RoleType || this.OperandType is AssociationType))
+                    {
+                        derivation.Log.AddError(this, Meta.OperationEnum, ErrorMessages.PermissionOnlyReadForRoleOrAssociationType);
+                    }
 
-                        break;
+                    break;
 
-                    case global::Allors.Domain.Operation.Write:
-                        // Write Operations should only be allowed on RoleTypes
-                        if (!(this.OperandType is RoleType))
-                        {
-                            derivation.Log.AddError(this, Meta.OperationEnum, ErrorMessages.PermissionOnlyWriteForRoleType);
-                        }
+                case Operation.Write:
+                    // Write Operations should only be allowed on RoleTypes
+                    if (!(this.OperandType is RoleType))
+                    {
+                        derivation.Log.AddError(this, Meta.OperationEnum, ErrorMessages.PermissionOnlyWriteForRoleType);
+                    }
 
-                        break;
+                    break;
 
-                    case global::Allors.Domain.Operation.Execute:
-                        // Execute Operations should only be allowed on MethodTypes
-                        if (!(this.OperandType is MethodType))
-                        {
-                            derivation.Log.AddError(this, Meta.OperationEnum, ErrorMessages.PermissionOnlyExecuteForMethodType);
-                        }
+                case Operation.Execute:
+                    // Execute Operations should only be allowed on MethodTypes
+                    if (!(this.OperandType is MethodType))
+                    {
+                        derivation.Log.AddError(this, Meta.OperationEnum, ErrorMessages.PermissionOnlyExecuteForMethodType);
+                    }
 
-                        break;
-                }
+                    break;
             }
 
             SecurityCache.Invalidate();

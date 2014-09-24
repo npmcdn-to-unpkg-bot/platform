@@ -121,11 +121,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean? CashAccount 
+		virtual public global::System.Boolean CashAccount 
 		{
 			get
 			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.CashAccount);
+				return (global::System.Boolean) Strategy.GetUnitRole(Meta.CashAccount);
 			}
 			set
 			{
@@ -147,11 +147,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean? CostCenterAccount 
+		virtual public global::System.Boolean CostCenterAccount 
 		{
 			get
 			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.CostCenterAccount);
+				return (global::System.Boolean) Strategy.GetUnitRole(Meta.CostCenterAccount);
 			}
 			set
 			{
@@ -199,11 +199,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean? BalanceSheetAccount 
+		virtual public global::System.Boolean BalanceSheetAccount 
 		{
 			get
 			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.BalanceSheetAccount);
+				return (global::System.Boolean) Strategy.GetUnitRole(Meta.BalanceSheetAccount);
 			}
 			set
 			{
@@ -225,11 +225,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean? ReconciliationAccount 
+		virtual public global::System.Boolean ReconciliationAccount 
 		{
 			get
 			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.ReconciliationAccount);
+				return (global::System.Boolean) Strategy.GetUnitRole(Meta.ReconciliationAccount);
 			}
 			set
 			{
@@ -277,11 +277,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean? CostCenterRequired 
+		virtual public global::System.Boolean CostCenterRequired 
 		{
 			get
 			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.CostCenterRequired);
+				return (global::System.Boolean) Strategy.GetUnitRole(Meta.CostCenterRequired);
 			}
 			set
 			{
@@ -303,11 +303,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean? CostUnitRequired 
+		virtual public global::System.Boolean CostUnitRequired 
 		{
 			get
 			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.CostUnitRequired);
+				return (global::System.Boolean) Strategy.GetUnitRole(Meta.CostUnitRequired);
 			}
 			set
 			{
@@ -391,11 +391,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean? CostUnitAccount 
+		virtual public global::System.Boolean CostUnitAccount 
 		{
 			get
 			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.CostUnitAccount);
+				return (global::System.Boolean) Strategy.GetUnitRole(Meta.CostUnitAccount);
 			}
 			set
 			{
@@ -479,11 +479,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean? Protected 
+		virtual public global::System.Boolean Protected 
 		{
 			get
 			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.Protected);
+				return (global::System.Boolean) Strategy.GetUnitRole(Meta.Protected);
 			}
 			set
 			{
@@ -505,11 +505,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Guid? UniqueId 
+		virtual public global::System.Guid UniqueId 
 		{
 			get
 			{
-				return (global::System.Guid?) Strategy.GetUnitRole(Meta.UniqueId);
+				return (global::System.Guid) Strategy.GetUnitRole(Meta.UniqueId);
 			}
 			set
 			{

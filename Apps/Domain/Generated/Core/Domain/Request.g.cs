@@ -17,7 +17,7 @@ namespace Allors.Domain
 		void RemoveDescription();
 
 
-		global::System.DateTime? RequiredResponseDate 
+		global::System.DateTime RequiredResponseDate 
 		{
 			get;
 			set;

@@ -43,11 +43,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Int32? StandardLeadTime 
+		virtual public global::System.Int32 StandardLeadTime 
 		{
 			get
 			{
-				return (global::System.Int32?) Strategy.GetUnitRole(Meta.StandardLeadTime);
+				return (global::System.Int32) Strategy.GetUnitRole(Meta.StandardLeadTime);
 			}
 			set
 			{
@@ -131,11 +131,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? MinimalOrderQuantity 
+		virtual public global::System.Decimal MinimalOrderQuantity 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.MinimalOrderQuantity);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.MinimalOrderQuantity);
 			}
 			set
 			{
@@ -287,11 +287,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? FromDate 
+		virtual public global::System.DateTime FromDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.FromDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.FromDate);
 			}
 			set
 			{
@@ -313,11 +313,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? ThroughDate 
+		virtual public global::System.DateTime ThroughDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.ThroughDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.ThroughDate);
 			}
 			set
 			{

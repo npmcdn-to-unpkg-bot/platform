@@ -235,11 +235,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? YTDRevenue 
+		virtual public global::System.Decimal YTDRevenue 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.YTDRevenue);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.YTDRevenue);
 			}
 			set
 			{
@@ -261,11 +261,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? LastYearsRevenue 
+		virtual public global::System.Decimal LastYearsRevenue 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.LastYearsRevenue);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.LastYearsRevenue);
 			}
 			set
 			{
@@ -685,11 +685,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean? ExcludeFromDunning 
+		virtual public global::System.Boolean ExcludeFromDunning 
 		{
 			get
 			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.ExcludeFromDunning);
+				return (global::System.Boolean) Strategy.GetUnitRole(Meta.ExcludeFromDunning);
 			}
 			set
 			{
@@ -1115,11 +1115,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? OpenOrderAmount 
+		virtual public global::System.Decimal OpenOrderAmount 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.OpenOrderAmount);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.OpenOrderAmount);
 			}
 			set
 			{
@@ -1421,11 +1421,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Guid? UniqueId 
+		virtual public global::System.Guid UniqueId 
 		{
 			get
 			{
-				return (global::System.Guid?) Strategy.GetUnitRole(Meta.UniqueId);
+				return (global::System.Guid) Strategy.GetUnitRole(Meta.UniqueId);
 			}
 			set
 			{

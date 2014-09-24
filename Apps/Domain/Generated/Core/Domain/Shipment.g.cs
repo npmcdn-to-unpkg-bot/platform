@@ -169,7 +169,7 @@ namespace Allors.Domain
 		void RemoveShipToAddress();
 
 
-		global::System.Decimal? EstimatedShipCost 
+		global::System.Decimal EstimatedShipCost 
 		{
 			get;
 			set;
@@ -180,7 +180,7 @@ namespace Allors.Domain
 		void RemoveEstimatedShipCost();
 
 
-		global::System.DateTime? EstimatedShipDate 
+		global::System.DateTime EstimatedShipDate 
 		{
 			get;
 			set;
@@ -191,7 +191,7 @@ namespace Allors.Domain
 		void RemoveEstimatedShipDate();
 
 
-		global::System.DateTime? LatestCancelDate 
+		global::System.DateTime LatestCancelDate 
 		{
 			get;
 			set;
@@ -230,7 +230,7 @@ namespace Allors.Domain
 		void RemoveInquireAboutContactMechanism();
 
 
-		global::System.DateTime? EstimatedReadyDate 
+		global::System.DateTime EstimatedReadyDate 
 		{
 			get;
 			set;
@@ -326,7 +326,7 @@ namespace Allors.Domain
 		void RemoveShipmentRouteSegments();
 
 
-		global::System.DateTime? EstimatedArrivalDate 
+		global::System.DateTime EstimatedArrivalDate 
 		{
 			get;
 			set;

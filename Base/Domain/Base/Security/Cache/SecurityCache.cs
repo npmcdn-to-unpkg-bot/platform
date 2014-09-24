@@ -37,24 +37,24 @@ namespace Allors.Domain
             this.operationsByOperandTypeIdByObjectTypeIdByRoleId = new Dictionary<Guid, Dictionary<Guid, Dictionary<Guid, List<Operation>>>>();
             foreach (Role role in new Roles(session).Extent())
             {
-                if (!role.UniqueId.HasValue)
+                if (!role.ExistUniqueId)
                 {
                     throw new Exception("Role " + role + " has no unique id");
                 }
 
                 var operationsByOperandObjectIdByObjectTypeId = new Dictionary<Guid, Dictionary<Guid, List<Operation>>>();
-                this.operationsByOperandTypeIdByObjectTypeIdByRoleId[role.UniqueId.Value] = operationsByOperandObjectIdByObjectTypeId;
+                this.operationsByOperandTypeIdByObjectTypeIdByRoleId[role.UniqueId] = operationsByOperandObjectIdByObjectTypeId;
 
                 foreach (Permission permission in role.Permissions)
                 {
-                    if (!permission.ConcreteClassPointer.HasValue || !permission.OperandTypePointer.HasValue || !permission.Operation.HasValue)
+                    if (!permission.ExistConcreteClassPointer || !permission.ExistOperandTypePointer || !permission.ExistOperation)
                     {
                         throw new Exception("Permission " + permission + " has no concrete class, operand type and/or operation.");
                     }
 
-                    var concreteClassId = permission.ConcreteClassPointer.Value;
-                    var operandTypeId = permission.OperandTypePointer.Value;
-                    var operation = permission.Operation.Value;
+                    var concreteClassId = permission.ConcreteClassPointer;
+                    var operandTypeId = permission.OperandTypePointer;
+                    var operation = permission.Operation;
                     
                     Dictionary<Guid, List<Operation>> operationsByOperandObjectId;
                     if (!operationsByOperandObjectIdByObjectTypeId.TryGetValue(concreteClassId, out operationsByOperandObjectId))
@@ -100,12 +100,12 @@ namespace Allors.Domain
 
             foreach (var role in roles)
             {
-                if (!role.UniqueId.HasValue)
+                if (!role.ExistUniqueId)
                 {
                     throw new Exception("Role " + role + " has no unique id");
                 }
 
-                var roleOperationsByOperandIdByObjectType = this.operationsByOperandTypeIdByObjectTypeIdByRoleId[role.UniqueId.Value];
+                var roleOperationsByOperandIdByObjectType = this.operationsByOperandTypeIdByObjectTypeIdByRoleId[role.UniqueId];
                 Dictionary<Guid, List<Operation>> roleOperationsByOperandObjectId;
                 if (roleOperationsByOperandIdByObjectType.TryGetValue(objectType.Id, out roleOperationsByOperandObjectId))
                 {

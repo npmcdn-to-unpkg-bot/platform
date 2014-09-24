@@ -43,11 +43,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Int64? Number 
+		virtual public global::System.Int64 Number 
 		{
 			get
 			{
-				return (global::System.Int64?) Strategy.GetUnitRole(Meta.Number);
+				return (global::System.Int64) Strategy.GetUnitRole(Meta.Number);
 			}
 			set
 			{
@@ -69,11 +69,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Int32? Year 
+		virtual public global::System.Int32 Year 
 		{
 			get
 			{
-				return (global::System.Int32?) Strategy.GetUnitRole(Meta.Year);
+				return (global::System.Int32) Strategy.GetUnitRole(Meta.Year);
 			}
 			set
 			{

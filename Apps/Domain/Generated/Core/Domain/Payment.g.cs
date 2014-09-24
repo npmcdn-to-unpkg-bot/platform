@@ -6,7 +6,7 @@ namespace Allors.Domain
 	{
 
 
-		global::System.Decimal? Amount 
+		global::System.Decimal Amount 
 		{
 			get;
 			set;
@@ -31,7 +31,7 @@ namespace Allors.Domain
 		void RemovePaymentMethod();
 
 
-		global::System.DateTime? EffectiveDate 
+		global::System.DateTime EffectiveDate 
 		{
 			get;
 			set;

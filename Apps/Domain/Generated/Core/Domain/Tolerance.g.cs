@@ -79,11 +79,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? DocumentationDate 
+		virtual public global::System.DateTime DocumentationDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.DocumentationDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.DocumentationDate);
 			}
 			set
 			{
@@ -183,11 +183,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Guid? UniqueId 
+		virtual public global::System.Guid UniqueId 
 		{
 			get
 			{
-				return (global::System.Guid?) Strategy.GetUnitRole(Meta.UniqueId);
+				return (global::System.Guid) Strategy.GetUnitRole(Meta.UniqueId);
 			}
 			set
 			{
@@ -464,6 +464,14 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.EngineeringChangePartSpecification;
+			}
+		} 
+
+		public global::Allors.Meta.MethodType Approve 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.PartSpecificationApprove;
 			}
 		} 
 

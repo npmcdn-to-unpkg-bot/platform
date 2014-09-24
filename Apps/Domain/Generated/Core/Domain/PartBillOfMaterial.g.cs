@@ -31,7 +31,7 @@ namespace Allors.Domain
 		void RemoveInstruction();
 
 
-		global::System.Int32? QuantityUsed 
+		global::System.Int32 QuantityUsed 
 		{
 			get;
 			set;

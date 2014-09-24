@@ -69,11 +69,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean? ReleasedManually 
+		virtual public global::System.Boolean ReleasedManually 
 		{
 			get
 			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.ReleasedManually);
+				return (global::System.Boolean) Strategy.GetUnitRole(Meta.ReleasedManually);
 			}
 			set
 			{
@@ -183,11 +183,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean? WithoutCharges 
+		virtual public global::System.Boolean WithoutCharges 
 		{
 			get
 			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.WithoutCharges);
+				return (global::System.Boolean) Strategy.GetUnitRole(Meta.WithoutCharges);
 			}
 			set
 			{
@@ -209,11 +209,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean? HeldManually 
+		virtual public global::System.Boolean HeldManually 
 		{
 			get
 			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.HeldManually);
+				return (global::System.Boolean) Strategy.GetUnitRole(Meta.HeldManually);
 			}
 			set
 			{
@@ -235,11 +235,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? ShipmentValue 
+		virtual public global::System.Decimal ShipmentValue 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.ShipmentValue);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.ShipmentValue);
 			}
 			set
 			{
@@ -577,11 +577,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? EstimatedShipCost 
+		virtual public global::System.Decimal EstimatedShipCost 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.EstimatedShipCost);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.EstimatedShipCost);
 			}
 			set
 			{
@@ -603,11 +603,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? EstimatedShipDate 
+		virtual public global::System.DateTime EstimatedShipDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.EstimatedShipDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.EstimatedShipDate);
 			}
 			set
 			{
@@ -629,11 +629,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? LatestCancelDate 
+		virtual public global::System.DateTime LatestCancelDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.LatestCancelDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.LatestCancelDate);
 			}
 			set
 			{
@@ -707,11 +707,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? EstimatedReadyDate 
+		virtual public global::System.DateTime EstimatedReadyDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.EstimatedReadyDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.EstimatedReadyDate);
 			}
 			set
 			{
@@ -899,11 +899,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? EstimatedArrivalDate 
+		virtual public global::System.DateTime EstimatedArrivalDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.EstimatedArrivalDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.EstimatedArrivalDate);
 			}
 			set
 			{
@@ -1049,11 +1049,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Guid? UniqueId 
+		virtual public global::System.Guid UniqueId 
 		{
 			get
 			{
-				return (global::System.Guid?) Strategy.GetUnitRole(Meta.UniqueId);
+				return (global::System.Guid) Strategy.GetUnitRole(Meta.UniqueId);
 			}
 			set
 			{
@@ -1452,6 +1452,35 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.PrintQueuePrintable;
+			}
+		} 
+
+		public global::Allors.Meta.MethodType Cancel 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.CustomerShipmentCancel;
+			}
+		} 
+		public global::Allors.Meta.MethodType Ship 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.CustomerShipmentShip;
+			}
+		} 
+		public global::Allors.Meta.MethodType Hold 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.CustomerShipmentHold;
+			}
+		} 
+		public global::Allors.Meta.MethodType Continue 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.CustomerShipmentContinue;
 			}
 		} 
 

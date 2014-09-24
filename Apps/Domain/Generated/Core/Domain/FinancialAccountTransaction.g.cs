@@ -17,7 +17,7 @@ namespace Allors.Domain
 		void RemoveDescription();
 
 
-		global::System.DateTime? EntryDate 
+		global::System.DateTime EntryDate 
 		{
 			get;
 			set;
@@ -28,7 +28,7 @@ namespace Allors.Domain
 		void RemoveEntryDate();
 
 
-		global::System.DateTime? TransactionDate 
+		global::System.DateTime TransactionDate 
 		{
 			get;
 			set;

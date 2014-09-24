@@ -6,7 +6,7 @@ namespace Allors.Domain
 	{
 
 
-		global::System.Decimal? Cost 
+		global::System.Decimal Cost 
 		{
 			get;
 			set;

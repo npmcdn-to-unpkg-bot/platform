@@ -92,7 +92,7 @@ namespace Allors.Domain
 		void RemoveManufacturerId();
 
 
-		global::System.Int32? ReorderLevel 
+		global::System.Int32 ReorderLevel 
 		{
 			get;
 			set;
@@ -103,7 +103,7 @@ namespace Allors.Domain
 		void RemoveReorderLevel();
 
 
-		global::System.Int32? ReorderQuantity 
+		global::System.Int32 ReorderQuantity 
 		{
 			get;
 			set;

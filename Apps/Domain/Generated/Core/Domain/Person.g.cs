@@ -121,11 +121,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? YTDCommission 
+		virtual public global::System.Decimal YTDCommission 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.YTDCommission);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.YTDCommission);
 			}
 			set
 			{
@@ -199,11 +199,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? LastYearsCommission 
+		virtual public global::System.Decimal LastYearsCommission 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.LastYearsCommission);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.LastYearsCommission);
 			}
 			set
 			{
@@ -287,11 +287,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? BirthDate 
+		virtual public global::System.DateTime BirthDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.BirthDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.BirthDate);
 			}
 			set
 			{
@@ -313,11 +313,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? Height 
+		virtual public global::System.Decimal Height 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.Height);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.Height);
 			}
 			set
 			{
@@ -401,11 +401,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Int32? Weight 
+		virtual public global::System.Int32 Weight 
 		{
 			get
 			{
-				return (global::System.Int32?) Strategy.GetUnitRole(Meta.Weight);
+				return (global::System.Int32) Strategy.GetUnitRole(Meta.Weight);
 			}
 			set
 			{
@@ -463,11 +463,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Int32? TotalYearsWorkExperience 
+		virtual public global::System.Int32 TotalYearsWorkExperience 
 		{
 			get
 			{
-				return (global::System.Int32?) Strategy.GetUnitRole(Meta.TotalYearsWorkExperience);
+				return (global::System.Int32) Strategy.GetUnitRole(Meta.TotalYearsWorkExperience);
 			}
 			set
 			{
@@ -603,11 +603,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? DeceasedDate 
+		virtual public global::System.DateTime DeceasedDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.DeceasedDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.DeceasedDate);
 			}
 			set
 			{
@@ -629,11 +629,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean? UserEmailConfirmed 
+		virtual public global::System.Boolean UserEmailConfirmed 
 		{
 			get
 			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.UserEmailConfirmed);
+				return (global::System.Boolean) Strategy.GetUnitRole(Meta.UserEmailConfirmed);
 			}
 			set
 			{
@@ -883,11 +883,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Guid? UniqueId 
+		virtual public global::System.Guid UniqueId 
 		{
 			get
 			{
-				return (global::System.Guid?) Strategy.GetUnitRole(Meta.UniqueId);
+				return (global::System.Guid) Strategy.GetUnitRole(Meta.UniqueId);
 			}
 			set
 			{
@@ -935,11 +935,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? YTDRevenue 
+		virtual public global::System.Decimal YTDRevenue 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.YTDRevenue);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.YTDRevenue);
 			}
 			set
 			{
@@ -961,11 +961,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? LastYearsRevenue 
+		virtual public global::System.Decimal LastYearsRevenue 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.LastYearsRevenue);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.LastYearsRevenue);
 			}
 			set
 			{
@@ -1385,11 +1385,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean? ExcludeFromDunning 
+		virtual public global::System.Boolean ExcludeFromDunning 
 		{
 			get
 			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.ExcludeFromDunning);
+				return (global::System.Boolean) Strategy.GetUnitRole(Meta.ExcludeFromDunning);
 			}
 			set
 			{
@@ -1815,11 +1815,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? OpenOrderAmount 
+		virtual public global::System.Decimal OpenOrderAmount 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.OpenOrderAmount);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.OpenOrderAmount);
 			}
 			set
 			{

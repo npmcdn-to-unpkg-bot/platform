@@ -376,21 +376,21 @@ $if(objectType.IsUnit)$
 $if(objectType.IsBinary)$
 	global::System.Byte[]
 $elseif(objectType.IsBoolean)$
-	global::System.Boolean?
+	global::System.Boolean
 $elseif(objectType.IsDateTime)$
-	global::System.DateTime?
+	global::System.DateTime
 $elseif(objectType.IsDecimal)$
-	global::System.Decimal?
+	global::System.Decimal
 $elseif(objectType.IsDouble)$
-	global::System.Double?
+	global::System.Double
 $elseif(objectType.IsInteger)$
-	global::System.Int32?
+	global::System.Int32
 $elseif(objectType.IsLong)$
-	global::System.Int64?
+	global::System.Int64
 $elseif(objectType.IsString)$
 	global::System.String
 $elseif(objectType.IsUnique)$
-	global::System.Guid?
+	global::System.Guid
 $endif$
 $else$
 	$objectType.SingularName$

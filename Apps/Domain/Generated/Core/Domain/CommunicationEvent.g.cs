@@ -6,7 +6,7 @@ namespace Allors.Domain
 	{
 
 
-		global::System.DateTime? ScheduledStart 
+		global::System.DateTime ScheduledStart 
 		{
 			get;
 			set;
@@ -53,7 +53,7 @@ namespace Allors.Domain
 		void RemoveInvolvedParties();
 
 
-		global::System.DateTime? InitialScheduledStartDate 
+		global::System.DateTime InitialScheduledStartDate 
 		{
 			get;
 			set;
@@ -210,7 +210,7 @@ namespace Allors.Domain
 		void RemoveCurrentCommunicationEventStatus();
 
 
-		global::System.DateTime? ActualStart 
+		global::System.DateTime ActualStart 
 		{
 			get;
 			set;
@@ -411,6 +411,28 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.RequirementCommunicationCommunicationEvent;
+			}
+		} 
+
+		public global::Allors.Meta.MethodType Close 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.CommunicationEventClose;
+			}
+		} 
+		public global::Allors.Meta.MethodType Reopen 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.CommunicationEventReopen;
+			}
+		} 
+		public global::Allors.Meta.MethodType Cancel 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.CommunicationEventCancel;
 			}
 		} 
 

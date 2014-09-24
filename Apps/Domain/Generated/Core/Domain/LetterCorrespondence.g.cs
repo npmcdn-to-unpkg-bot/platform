@@ -115,11 +115,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? ScheduledStart 
+		virtual public global::System.DateTime ScheduledStart 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.ScheduledStart);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.ScheduledStart);
 			}
 			set
 			{
@@ -213,11 +213,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? InitialScheduledStartDate 
+		virtual public global::System.DateTime InitialScheduledStartDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.InitialScheduledStartDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.InitialScheduledStartDate);
 			}
 			set
 			{
@@ -529,11 +529,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? ActualStart 
+		virtual public global::System.DateTime ActualStart 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.ActualStart);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.ActualStart);
 			}
 			set
 			{
@@ -705,11 +705,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Guid? UniqueId 
+		virtual public global::System.Guid UniqueId 
 		{
 			get
 			{
-				return (global::System.Guid?) Strategy.GetUnitRole(Meta.UniqueId);
+				return (global::System.Guid) Strategy.GetUnitRole(Meta.UniqueId);
 			}
 			set
 			{
@@ -953,6 +953,28 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.RequirementCommunicationCommunicationEvent;
+			}
+		} 
+
+		public global::Allors.Meta.MethodType Close 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.CommunicationEventClose;
+			}
+		} 
+		public global::Allors.Meta.MethodType Reopen 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.CommunicationEventReopen;
+			}
+		} 
+		public global::Allors.Meta.MethodType Cancel 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.CommunicationEventCancel;
 			}
 		} 
 

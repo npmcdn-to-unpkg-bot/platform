@@ -17,11 +17,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? EndKilometers 
+		virtual public global::System.Decimal EndKilometers 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.EndKilometers);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.EndKilometers);
 			}
 			set
 			{
@@ -69,11 +69,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? StartKilometers 
+		virtual public global::System.Decimal StartKilometers 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.StartKilometers);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.StartKilometers);
 			}
 			set
 			{
@@ -121,11 +121,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? EstimatedStartDateTime 
+		virtual public global::System.DateTime EstimatedStartDateTime 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.EstimatedStartDateTime);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.EstimatedStartDateTime);
 			}
 			set
 			{
@@ -173,11 +173,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? EstimatedArrivalDateTime 
+		virtual public global::System.DateTime EstimatedArrivalDateTime 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.EstimatedArrivalDateTime);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.EstimatedArrivalDateTime);
 			}
 			set
 			{
@@ -225,11 +225,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? ActualArrivalDateTime 
+		virtual public global::System.DateTime ActualArrivalDateTime 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.ActualArrivalDateTime);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.ActualArrivalDateTime);
 			}
 			set
 			{
@@ -251,11 +251,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? ActualStartDateTime 
+		virtual public global::System.DateTime ActualStartDateTime 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.ActualStartDateTime);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.ActualStartDateTime);
 			}
 			set
 			{

@@ -26,7 +26,6 @@ namespace Allors.Meta
     {
         public static Domain Core(MetaPopulation meta)
         {
-
             // Allors Domain
             var domain = new Domain(meta, new Guid("CA802192-8186-4C2A-8315-A8DEFAA74A12")) { Name = "Core" };
 

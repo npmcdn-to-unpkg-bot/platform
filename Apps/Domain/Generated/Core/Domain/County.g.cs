@@ -121,11 +121,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? Latitude 
+		virtual public global::System.Decimal Latitude 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.Latitude);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.Latitude);
 			}
 			set
 			{
@@ -147,11 +147,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? Longitude 
+		virtual public global::System.Decimal Longitude 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.Longitude);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.Longitude);
 			}
 			set
 			{
@@ -271,11 +271,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Guid? UniqueId 
+		virtual public global::System.Guid UniqueId 
 		{
 			get
 			{
-				return (global::System.Guid?) Strategy.GetUnitRole(Meta.UniqueId);
+				return (global::System.Guid) Strategy.GetUnitRole(Meta.UniqueId);
 			}
 			set
 			{

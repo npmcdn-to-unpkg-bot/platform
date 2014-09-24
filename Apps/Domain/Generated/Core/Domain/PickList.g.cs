@@ -43,11 +43,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? CreationDate 
+		virtual public global::System.DateTime CreationDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.CreationDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.CreationDate);
 			}
 			set
 			{
@@ -421,11 +421,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Guid? UniqueId 
+		virtual public global::System.Guid UniqueId 
 		{
 			get
 			{
-				return (global::System.Guid?) Strategy.GetUnitRole(Meta.UniqueId);
+				return (global::System.Guid) Strategy.GetUnitRole(Meta.UniqueId);
 			}
 			set
 			{
@@ -615,6 +615,35 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.PrintQueuePrintable;
+			}
+		} 
+
+		public global::Allors.Meta.MethodType Cancel 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.PickListCancel;
+			}
+		} 
+		public global::Allors.Meta.MethodType SetPicked 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.PickListSetPicked;
+			}
+		} 
+		public global::Allors.Meta.MethodType Hold 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.PickListHold;
+			}
+		} 
+		public global::Allors.Meta.MethodType Continue 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.PickListContinue;
 			}
 		} 
 

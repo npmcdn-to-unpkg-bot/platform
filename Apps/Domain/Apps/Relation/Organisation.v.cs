@@ -22,12 +22,13 @@ namespace Allors.Domain
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
 
     using Allors.Domain;
 
     public partial class Organisation
     {
-        public IFormatProvider AppsGetCurrencyFormat
+        public NumberFormatInfo CurrencyFormat
         {
             get
             {

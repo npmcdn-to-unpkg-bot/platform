@@ -34,10 +34,7 @@ namespace Allors.Domain
 
         public void RemoveFromBasePrices(BasePrice basePrice)
         {
-            if (this.AppsPrices.Contains(basePrice))
-            {
-                this.RemoveBasePrice(basePrice);
-            }
+            this.RemoveBasePrice(basePrice);
         }
 
         public void DeriveVirtualProductPriceComponent()

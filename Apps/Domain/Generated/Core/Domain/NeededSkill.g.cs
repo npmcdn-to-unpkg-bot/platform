@@ -43,11 +43,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? YearsExperience 
+		virtual public global::System.Decimal YearsExperience 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.YearsExperience);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.YearsExperience);
 			}
 			set
 			{

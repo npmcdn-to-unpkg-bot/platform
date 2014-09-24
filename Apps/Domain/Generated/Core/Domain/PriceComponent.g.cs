@@ -20,7 +20,7 @@ namespace Allors.Domain
 		void RemoveGeographicBoundary();
 
 
-		global::System.Decimal? Rate 
+		global::System.Decimal Rate 
 		{
 			get;
 			set;
@@ -210,7 +210,7 @@ namespace Allors.Domain
 		void RemoveOrderValue();
 
 
-		global::System.Decimal? Price 
+		global::System.Decimal Price 
 		{
 			get;
 			set;

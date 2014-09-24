@@ -20,7 +20,7 @@ namespace Allors.Domain
 		void RemoveMadeUpOf();
 
 
-		global::System.Decimal? SquareFootage 
+		global::System.Decimal SquareFootage 
 		{
 			get;
 			set;

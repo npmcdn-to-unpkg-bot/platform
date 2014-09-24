@@ -95,11 +95,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean? HasBankStatementTransactions 
+		virtual public global::System.Boolean HasBankStatementTransactions 
 		{
 			get
 			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.HasBankStatementTransactions);
+				return (global::System.Boolean) Strategy.GetUnitRole(Meta.HasBankStatementTransactions);
 			}
 			set
 			{
@@ -297,11 +297,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? FromDate 
+		virtual public global::System.DateTime FromDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.FromDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.FromDate);
 			}
 			set
 			{
@@ -323,11 +323,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? ThroughDate 
+		virtual public global::System.DateTime ThroughDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.ThroughDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.ThroughDate);
 			}
 			set
 			{

@@ -69,11 +69,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? AllocationPercentage 
+		virtual public global::System.Decimal AllocationPercentage 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.AllocationPercentage);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.AllocationPercentage);
 			}
 			set
 			{

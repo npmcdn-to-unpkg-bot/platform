@@ -17,11 +17,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? YearsExperience 
+		virtual public global::System.Decimal YearsExperience 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.YearsExperience);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.YearsExperience);
 			}
 			set
 			{
@@ -43,11 +43,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? StartedUsingDate 
+		virtual public global::System.DateTime StartedUsingDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.StartedUsingDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.StartedUsingDate);
 			}
 			set
 			{

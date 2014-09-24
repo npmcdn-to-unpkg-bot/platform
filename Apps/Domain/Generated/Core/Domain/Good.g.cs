@@ -17,11 +17,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? AvailableToPromise 
+		virtual public global::System.Decimal AvailableToPromise 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.AvailableToPromise);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.AvailableToPromise);
 			}
 			set
 			{
@@ -349,11 +349,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? SupportDiscontinuationDate 
+		virtual public global::System.DateTime SupportDiscontinuationDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.SupportDiscontinuationDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.SupportDiscontinuationDate);
 			}
 			set
 			{
@@ -375,11 +375,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? SalesDiscontinuationDate 
+		virtual public global::System.DateTime SalesDiscontinuationDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.SalesDiscontinuationDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.SalesDiscontinuationDate);
 			}
 			set
 			{
@@ -675,11 +675,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? IntroductionDate 
+		virtual public global::System.DateTime IntroductionDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.IntroductionDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.IntroductionDate);
 			}
 			set
 			{
@@ -1129,11 +1129,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Guid? UniqueId 
+		virtual public global::System.Guid UniqueId 
 		{
 			get
 			{
-				return (global::System.Guid?) Strategy.GetUnitRole(Meta.UniqueId);
+				return (global::System.Guid) Strategy.GetUnitRole(Meta.UniqueId);
 			}
 			set
 			{

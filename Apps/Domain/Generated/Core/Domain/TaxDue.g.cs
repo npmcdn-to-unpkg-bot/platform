@@ -131,11 +131,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? TransactionDate 
+		virtual public global::System.DateTime TransactionDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.TransactionDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.TransactionDate);
 			}
 			set
 			{
@@ -157,11 +157,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? DerivedTotalAmount 
+		virtual public global::System.Decimal DerivedTotalAmount 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.DerivedTotalAmount);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.DerivedTotalAmount);
 			}
 			set
 			{
@@ -209,11 +209,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? EntryDate 
+		virtual public global::System.DateTime EntryDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.EntryDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.EntryDate);
 			}
 			set
 			{

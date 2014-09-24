@@ -217,7 +217,7 @@ namespace Allors.Domain
 		void RemoveConcurrencies();
 
 
-		global::System.Decimal? ActualHours 
+		global::System.Decimal ActualHours 
 		{
 			get;
 			set;
@@ -267,7 +267,7 @@ namespace Allors.Domain
 		void RemoveCurrentObjectState();
 
 
-		global::System.Decimal? EstimatedHours 
+		global::System.Decimal EstimatedHours 
 		{
 			get;
 			set;
@@ -662,6 +662,42 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.WorkEffortInventoryAssignmentAssignment;
+			}
+		} 
+
+		public global::Allors.Meta.MethodType Confirm 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.WorkEffortConfirm;
+			}
+		} 
+		public global::Allors.Meta.MethodType WorkDone 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.WorkEffortWorkDone;
+			}
+		} 
+		public global::Allors.Meta.MethodType Finish 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.WorkEffortFinish;
+			}
+		} 
+		public global::Allors.Meta.MethodType Cancel 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.WorkEffortCancel;
+			}
+		} 
+		public global::Allors.Meta.MethodType Reopen 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.WorkEffortReopen;
 			}
 		} 
 

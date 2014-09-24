@@ -43,11 +43,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean? Temporary 
+		virtual public global::System.Boolean Temporary 
 		{
 			get
 			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.Temporary);
+				return (global::System.Boolean) Strategy.GetUnitRole(Meta.Temporary);
 			}
 			set
 			{
@@ -69,11 +69,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? EstimatedThroughDate 
+		virtual public global::System.DateTime EstimatedThroughDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.EstimatedThroughDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.EstimatedThroughDate);
 			}
 			set
 			{
@@ -95,11 +95,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? EstimatedFromDate 
+		virtual public global::System.DateTime EstimatedFromDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.EstimatedFromDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.EstimatedFromDate);
 			}
 			set
 			{
@@ -147,11 +147,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean? Fulltime 
+		virtual public global::System.Boolean Fulltime 
 		{
 			get
 			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.Fulltime);
+				return (global::System.Boolean) Strategy.GetUnitRole(Meta.Fulltime);
 			}
 			set
 			{
@@ -173,11 +173,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean? Salary 
+		virtual public global::System.Boolean Salary 
 		{
 			get
 			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.Salary);
+				return (global::System.Boolean) Strategy.GetUnitRole(Meta.Salary);
 			}
 			set
 			{
@@ -251,11 +251,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? ActualFromDate 
+		virtual public global::System.DateTime ActualFromDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.ActualFromDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.ActualFromDate);
 			}
 			set
 			{
@@ -277,11 +277,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? ActualThroughDate 
+		virtual public global::System.DateTime ActualThroughDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.ActualThroughDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.ActualThroughDate);
 			}
 			set
 			{

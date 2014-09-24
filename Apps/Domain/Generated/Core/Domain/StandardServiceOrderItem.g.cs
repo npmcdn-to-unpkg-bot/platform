@@ -69,11 +69,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? ExpectedStartDate 
+		virtual public global::System.DateTime ExpectedStartDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.ExpectedStartDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.ExpectedStartDate);
 			}
 			set
 			{
@@ -95,11 +95,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? ExpectedEndDate 
+		virtual public global::System.DateTime ExpectedEndDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.ExpectedEndDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.ExpectedEndDate);
 			}
 			set
 			{

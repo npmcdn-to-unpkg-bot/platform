@@ -69,11 +69,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Int32? ExpirationYear 
+		virtual public global::System.Int32 ExpirationYear 
 		{
 			get
 			{
-				return (global::System.Int32?) Strategy.GetUnitRole(Meta.ExpirationYear);
+				return (global::System.Int32) Strategy.GetUnitRole(Meta.ExpirationYear);
 			}
 			set
 			{
@@ -95,11 +95,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Int32? ExpirationMonth 
+		virtual public global::System.Int32 ExpirationMonth 
 		{
 			get
 			{
-				return (global::System.Int32?) Strategy.GetUnitRole(Meta.ExpirationMonth);
+				return (global::System.Int32) Strategy.GetUnitRole(Meta.ExpirationMonth);
 			}
 			set
 			{

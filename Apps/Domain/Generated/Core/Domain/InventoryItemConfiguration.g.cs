@@ -20,7 +20,7 @@ namespace Allors.Domain
 		void RemoveInventoryItem();
 
 
-		global::System.Int32? Quantity 
+		global::System.Int32 Quantity 
 		{
 			get;
 			set;

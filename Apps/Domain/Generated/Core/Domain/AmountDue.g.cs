@@ -17,11 +17,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? Amount 
+		virtual public global::System.Decimal Amount 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.Amount);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.Amount);
 			}
 			set
 			{
@@ -69,11 +69,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? TransactionDate 
+		virtual public global::System.DateTime TransactionDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.TransactionDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.TransactionDate);
 			}
 			set
 			{
@@ -95,11 +95,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? BlockedForDunning 
+		virtual public global::System.DateTime BlockedForDunning 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.BlockedForDunning);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.BlockedForDunning);
 			}
 			set
 			{
@@ -121,11 +121,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? AmountVat 
+		virtual public global::System.Decimal AmountVat 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.AmountVat);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.AmountVat);
 			}
 			set
 			{
@@ -173,11 +173,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? ReconciliationDate 
+		virtual public global::System.DateTime ReconciliationDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.ReconciliationDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.ReconciliationDate);
 			}
 			set
 			{
@@ -225,11 +225,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Int32? DunningStep 
+		virtual public global::System.Int32 DunningStep 
 		{
 			get
 			{
-				return (global::System.Int32?) Strategy.GetUnitRole(Meta.DunningStep);
+				return (global::System.Int32) Strategy.GetUnitRole(Meta.DunningStep);
 			}
 			set
 			{
@@ -251,11 +251,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Int32? SubAccountNumber 
+		virtual public global::System.Int32 SubAccountNumber 
 		{
 			get
 			{
-				return (global::System.Int32?) Strategy.GetUnitRole(Meta.SubAccountNumber);
+				return (global::System.Int32) Strategy.GetUnitRole(Meta.SubAccountNumber);
 			}
 			set
 			{
@@ -355,11 +355,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean? BlockedForPayment 
+		virtual public global::System.Boolean BlockedForPayment 
 		{
 			get
 			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.BlockedForPayment);
+				return (global::System.Boolean) Strategy.GetUnitRole(Meta.BlockedForPayment);
 			}
 			set
 			{
@@ -381,11 +381,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? DateLastReminder 
+		virtual public global::System.DateTime DateLastReminder 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.DateLastReminder);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.DateLastReminder);
 			}
 			set
 			{
@@ -485,11 +485,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? DueDate 
+		virtual public global::System.DateTime DueDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.DueDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.DueDate);
 			}
 			set
 			{

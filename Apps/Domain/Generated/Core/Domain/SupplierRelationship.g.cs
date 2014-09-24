@@ -43,11 +43,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Int32? SubAccountNumber 
+		virtual public global::System.Int32 SubAccountNumber 
 		{
 			get
 			{
-				return (global::System.Int32?) Strategy.GetUnitRole(Meta.SubAccountNumber);
+				return (global::System.Int32) Strategy.GetUnitRole(Meta.SubAccountNumber);
 			}
 			set
 			{
@@ -69,11 +69,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? LastReminderDate 
+		virtual public global::System.DateTime LastReminderDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.LastReminderDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.LastReminderDate);
 			}
 			set
 			{
@@ -147,11 +147,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? BlockedForDunning 
+		virtual public global::System.DateTime BlockedForDunning 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.BlockedForDunning);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.BlockedForDunning);
 			}
 			set
 			{
@@ -261,11 +261,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? SimpleMovingAverage 
+		virtual public global::System.Decimal SimpleMovingAverage 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.SimpleMovingAverage);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.SimpleMovingAverage);
 			}
 			set
 			{
@@ -323,11 +323,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? FromDate 
+		virtual public global::System.DateTime FromDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.FromDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.FromDate);
 			}
 			set
 			{
@@ -349,11 +349,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? ThroughDate 
+		virtual public global::System.DateTime ThroughDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.ThroughDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.ThroughDate);
 			}
 			set
 			{

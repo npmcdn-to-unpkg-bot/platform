@@ -79,11 +79,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? RequiredByDate 
+		virtual public global::System.DateTime RequiredByDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.RequiredByDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.RequiredByDate);
 			}
 			set
 			{
@@ -411,11 +411,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? EstimatedBudget 
+		virtual public global::System.Decimal EstimatedBudget 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.EstimatedBudget);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.EstimatedBudget);
 			}
 			set
 			{
@@ -463,11 +463,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Int32? Quantity 
+		virtual public global::System.Int32 Quantity 
 		{
 			get
 			{
-				return (global::System.Int32?) Strategy.GetUnitRole(Meta.Quantity);
+				return (global::System.Int32) Strategy.GetUnitRole(Meta.Quantity);
 			}
 			set
 			{
@@ -587,11 +587,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Guid? UniqueId 
+		virtual public global::System.Guid UniqueId 
 		{
 			get
 			{
-				return (global::System.Guid?) Strategy.GetUnitRole(Meta.UniqueId);
+				return (global::System.Guid) Strategy.GetUnitRole(Meta.UniqueId);
 			}
 			set
 			{
@@ -943,6 +943,105 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.RequestItemRequirement;
+			}
+		} 
+
+		public global::Allors.Meta.MethodType Cancel 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.RequirementCancel;
+			}
+		} 
+		public global::Allors.Meta.MethodType Close 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.RequirementClose;
+			}
+		} 
+		public global::Allors.Meta.MethodType Ready 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.RequirementReady;
+			}
+		} 
+		public global::Allors.Meta.MethodType SalesRepNames 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.RequirementSalesRepNames;
+			}
+		} 
+		public global::Allors.Meta.MethodType CancelOrder 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.RequirementCancelOrder;
+			}
+		} 
+		public global::Allors.Meta.MethodType Confirm 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.RequirementConfirm;
+			}
+		} 
+		public global::Allors.Meta.MethodType Reject 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.RequirementReject;
+			}
+		} 
+		public global::Allors.Meta.MethodType Hold 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.RequirementHold;
+			}
+		} 
+		public global::Allors.Meta.MethodType Approve 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.RequirementApprove;
+			}
+		} 
+		public global::Allors.Meta.MethodType Continue 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.RequirementContinue;
+			}
+		} 
+		public global::Allors.Meta.MethodType Complete 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.RequirementComplete;
+			}
+		} 
+		public global::Allors.Meta.MethodType Finish 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.RequirementFinish;
+			}
+		} 
+		public global::Allors.Meta.MethodType Ship 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.RequirementShip;
+			}
+		} 
+		public global::Allors.Meta.MethodType TryShip 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.RequirementTryShip;
 			}
 		} 
 

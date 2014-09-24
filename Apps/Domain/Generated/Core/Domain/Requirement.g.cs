@@ -6,7 +6,7 @@ namespace Allors.Domain
 	{
 
 
-		global::System.DateTime? RequiredByDate 
+		global::System.DateTime RequiredByDate 
 		{
 			get;
 			set;
@@ -176,7 +176,7 @@ namespace Allors.Domain
 		void RemoveServicedBy();
 
 
-		global::System.Decimal? EstimatedBudget 
+		global::System.Decimal EstimatedBudget 
 		{
 			get;
 			set;
@@ -198,7 +198,7 @@ namespace Allors.Domain
 		void RemoveDescription();
 
 
-		global::System.Int32? Quantity 
+		global::System.Int32 Quantity 
 		{
 			get;
 			set;
@@ -464,6 +464,105 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.RequestItemRequirement;
+			}
+		} 
+
+		public global::Allors.Meta.MethodType Cancel 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.RequirementCancel;
+			}
+		} 
+		public global::Allors.Meta.MethodType Close 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.RequirementClose;
+			}
+		} 
+		public global::Allors.Meta.MethodType Ready 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.RequirementReady;
+			}
+		} 
+		public global::Allors.Meta.MethodType SalesRepNames 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.RequirementSalesRepNames;
+			}
+		} 
+		public global::Allors.Meta.MethodType CancelOrder 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.RequirementCancelOrder;
+			}
+		} 
+		public global::Allors.Meta.MethodType Confirm 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.RequirementConfirm;
+			}
+		} 
+		public global::Allors.Meta.MethodType Reject 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.RequirementReject;
+			}
+		} 
+		public global::Allors.Meta.MethodType Hold 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.RequirementHold;
+			}
+		} 
+		public global::Allors.Meta.MethodType Approve 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.RequirementApprove;
+			}
+		} 
+		public global::Allors.Meta.MethodType Continue 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.RequirementContinue;
+			}
+		} 
+		public global::Allors.Meta.MethodType Complete 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.RequirementComplete;
+			}
+		} 
+		public global::Allors.Meta.MethodType Finish 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.RequirementFinish;
+			}
+		} 
+		public global::Allors.Meta.MethodType Ship 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.RequirementShip;
+			}
+		} 
+		public global::Allors.Meta.MethodType TryShip 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.RequirementTryShip;
 			}
 		} 
 

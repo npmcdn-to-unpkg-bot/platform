@@ -26,7 +26,7 @@ namespace Allors.Domain
 
     public static class PartyExtensions
     {
-        public static IFormatProvider AppsPartyGetCurrencyFormat(this Party party)
+        public static NumberFormatInfo AppsPartyGetCurrencyFormat(this Party party)
         {
             var cultureInfo = new CultureInfo(party.Locale.Name, false);
             var currencyFormat = (NumberFormatInfo)cultureInfo.NumberFormat.Clone();

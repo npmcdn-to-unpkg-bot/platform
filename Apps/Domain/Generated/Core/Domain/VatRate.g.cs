@@ -79,11 +79,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? Rate 
+		virtual public global::System.Decimal Rate 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.Rate);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.Rate);
 			}
 			set
 			{
@@ -365,11 +365,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean? ReverseCharge 
+		virtual public global::System.Boolean ReverseCharge 
 		{
 			get
 			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.ReverseCharge);
+				return (global::System.Boolean) Strategy.GetUnitRole(Meta.ReverseCharge);
 			}
 			set
 			{

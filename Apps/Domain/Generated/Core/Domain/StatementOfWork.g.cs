@@ -17,11 +17,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? ValidFromDate 
+		virtual public global::System.DateTime ValidFromDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.ValidFromDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.ValidFromDate);
 			}
 			set
 			{
@@ -105,11 +105,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? ValidThroughDate 
+		virtual public global::System.DateTime ValidThroughDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.ValidThroughDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.ValidThroughDate);
 			}
 			set
 			{
@@ -183,11 +183,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? Amount 
+		virtual public global::System.Decimal Amount 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.Amount);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.Amount);
 			}
 			set
 			{
@@ -209,11 +209,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? IssueDate 
+		virtual public global::System.DateTime IssueDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.IssueDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.IssueDate);
 			}
 			set
 			{

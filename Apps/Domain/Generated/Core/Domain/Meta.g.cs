@@ -4150,6 +4150,72 @@ namespace Allors.Meta
 
 	public partial class MethodTypes
 	{
+		public static readonly MethodType AccountingTransactionDetailDebitCreditString = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("fdc41297-5a41-4bbb-994c-2cf48df0bef9")));
+		public static readonly MethodType BudgetClose = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("2a5694f0-694b-4a66-8e97-50b1c4c597e0")));
+		public static readonly MethodType BudgetReopen = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("5f721966-8dc9-46f7-9891-18ca7251c9a9")));
+		public static readonly MethodType PurchaseInvoiceCancel = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("a6915cf2-bee7-4cf7-8df2-9c4c27b0dc93")));
+		public static readonly MethodType PurchaseInvoiceApprove = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("2de63ac3-68fa-4a40-b258-0cc81dd7720d")));
+		public static readonly MethodType PurchaseInvoiceReady = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("f11b3549-6159-4dcf-a391-878b4ebf75b9")));
+		public static readonly MethodType SalesInvoiceSalesRepNames = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("ea954a7d-3988-4f6f-bdb0-f32ce4214025")));
+		public static readonly MethodType PurchaseInvoiceCancelInvoice = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("aa63bff7-1120-43a7-b869-31db78235445")));
+		public static readonly MethodType PurchaseInvoiceSend = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("f43b75aa-589d-49cf-825d-050c4c6de37d")));
+		public static readonly MethodType PurchaseInvoiceWriteOff = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("cc1da3b5-9cc4-4dc7-91e7-8d2e894397cc")));
+		public static readonly MethodType PurchaseOrderCancel = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("c36c6737-8994-4fef-a6ce-b15276105725")));
+		public static readonly MethodType PurchaseOrderConfirm = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("bd27f062-5647-4039-8d36-74617dfa57d6")));
+		public static readonly MethodType PurchaseOrderReject = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("4fd081e8-79ab-4e7e-b9c5-5af368e218f7")));
+		public static readonly MethodType PurchaseOrderHold = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("61f517d0-e1d1-4653-9cbf-fe0f0233d73a")));
+		public static readonly MethodType PurchaseOrderApprove = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("4dc43c8a-231b-496b-9c6d-36ccc1df09c5")));
+		public static readonly MethodType PurchaseOrderContinue = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("071a8586-ff11-4b21-bad1-c6bc3c1b5581")));
+		public static readonly MethodType PurchaseOrderItemCancel = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("c5865bd8-5361-461b-b981-d97e2ead7a4d")));
+		public static readonly MethodType PurchaseOrderItemReject = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("40e87252-df49-4330-8bc5-2eb187fd1cdc")));
+		public static readonly MethodType PurchaseOrderItemConfirm = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("49c3ffba-5a01-4ce6-a479-54409fd410e2")));
+		public static readonly MethodType PurchaseOrderItemApprove = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("d4a89211-d773-4b09-b86b-94a8e2a040e1")));
+		public static readonly MethodType PurchaseOrderItemComplete = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("68c7b445-8260-4004-bb94-f07efdcda5ee")));
+		public static readonly MethodType PurchaseOrderItemFinish = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("17958a95-5f55-4637-b544-53a6330cca72")));
+		public static readonly MethodType PurchaseOrderItemDelete = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("a2311c03-c375-4b9b-b3f8-05db02cd955f")));
+		public static readonly MethodType RequirementCancel = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("7f643bf6-6500-4ab5-a647-50e4e1d6b3bc")));
+		public static readonly MethodType RequirementClose = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("0c9740a3-f0fa-4965-9aa8-b6ac88142bac")));
+		public static readonly MethodType RequirementReady = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("7017f137-7964-4782-951d-0b5da0186d60")));
+		public static readonly MethodType RequirementSalesRepNames = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("599bb88f-c056-4505-a1dd-319599a9e1c6")));
+		public static readonly MethodType RequirementCancelOrder = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("b114c3a1-e86f-4c3f-933a-626e1772eaff")));
+		public static readonly MethodType RequirementConfirm = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("800d5136-d3ab-4d4e-9855-76158cfb0725")));
+		public static readonly MethodType RequirementReject = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("93e31115-adb1-4ced-928d-febfdff64678")));
+		public static readonly MethodType RequirementHold = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("9cf5be09-fe52-44d7-aedd-cc5d464fac4d")));
+		public static readonly MethodType RequirementApprove = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("8d04d69f-4517-4bc5-b8f2-8a8f31c3c342")));
+		public static readonly MethodType RequirementContinue = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("81b794dc-fe47-4fc5-ab16-9c39082e5271")));
+		public static readonly MethodType RequirementComplete = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("4f108ba5-002e-4d98-96c1-60feba23ec39")));
+		public static readonly MethodType RequirementFinish = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("904c6666-b2d3-44d2-8d90-5e1e6b73cf88")));
+		public static readonly MethodType RequirementShip = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("4117efbf-6b7f-4107-a835-1368db5c9e3c")));
+		public static readonly MethodType RequirementTryShip = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("7e6089b9-689f-4abf-939d-25d7e5cfe0cf")));
+		public static readonly MethodType SalesOrderItemDelete = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("f96b6daf-d344-4916-97ba-f1a4dcde46a4")));
+		public static readonly MethodType SalesOrderItemCancel = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("394072da-1ab2-4031-a72a-ac816599d6e4")));
+		public static readonly MethodType SalesOrderItemConfirm = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("3a934c3e-4291-472a-adf3-7bb5a86dabad")));
+		public static readonly MethodType SalesOrderItemReject = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("8a18ab2c-762c-4f68-b526-29c2b24cf708")));
+		public static readonly MethodType SalesOrderItemApprove = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("d6653fe0-3c09-48c6-b604-6f075d0be3a0")));
+		public static readonly MethodType SalesOrderItemContinue = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("b1fe36cf-270b-4a5c-825a-cdd4082be704")));
+		public static readonly MethodType SalesOrderItemFinish = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("d43e3efe-c8e5-4d3c-9f52-792db7c8c09c")));
+		public static readonly MethodType PartSpecificationApprove = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("7e08ea40-5a3b-4a18-a675-97212ba896de")));
+		public static readonly MethodType CaseClose = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("2424081c-b0ee-44ce-8408-20e9c2506f7e")));
+		public static readonly MethodType CaseComplete = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("4f37d92b-2b2d-4ebc-9c18-6b35b9d74cea")));
+		public static readonly MethodType CaseReopen = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("23811ab1-eb92-473c-9e37-d8c709d15cd9")));
+		public static readonly MethodType CommunicationEventClose = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("0defce41-4f4a-496c-af9d-23da6f3edcd4")));
+		public static readonly MethodType CommunicationEventReopen = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("c59ca8f0-e2fc-4b57-981c-a69480989b64")));
+		public static readonly MethodType CommunicationEventCancel = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("10f20740-eb05-4674-970f-bc41f2354205")));
+		public static readonly MethodType CustomerShipmentCancel = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("ac91935e-8a7b-4342-8f77-02134f56cac9")));
+		public static readonly MethodType CustomerShipmentShip = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("e4a1db81-6ebe-4edf-a80f-421c66871010")));
+		public static readonly MethodType CustomerShipmentHold = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("4955b760-0972-495b-a0ca-e927794074e6")));
+		public static readonly MethodType CustomerShipmentContinue = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("2a529b67-9454-48d4-ab1f-36da3a54a97c")));
+		public static readonly MethodType PickListCancel = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("c525b8ac-7bb3-41fc-9c99-794aa345a153")));
+		public static readonly MethodType PickListSetPicked = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("44c9f165-2394-41a9-895c-ee415d392602")));
+		public static readonly MethodType PickListHold = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("41fa216f-1a0e-47da-9965-32f2feb46f1a")));
+		public static readonly MethodType PickListContinue = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("56f4109e-893c-4e7e-ba3f-93af67830815")));
+		public static readonly MethodType PurchaseShipmentCancel = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("0d49eb0c-c0d9-4bae-b94d-636f04df853a")));
+		public static readonly MethodType WorkEffortConfirm = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("daf547d9-ad4b-47ad-a9aa-c2a54a76a2c3")));
+		public static readonly MethodType WorkEffortWorkDone = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("5359113c-6642-43f8-8134-398c36dd2e45")));
+		public static readonly MethodType WorkEffortFinish = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("499ad64c-1a7c-4962-a56f-94b605f23dec")));
+		public static readonly MethodType WorkEffortCancel = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("79681b12-542b-442d-aba9-6c64e8591eb1")));
+		public static readonly MethodType WorkEffortReopen = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("874a7a4e-09d2-44d2-84e5-4748dbccd2d2")));
+
 	}
 
 }

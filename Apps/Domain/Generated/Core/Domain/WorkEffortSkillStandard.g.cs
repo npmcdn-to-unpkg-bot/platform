@@ -43,11 +43,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Int32? EstimatedNumberOfPeople 
+		virtual public global::System.Int32 EstimatedNumberOfPeople 
 		{
 			get
 			{
-				return (global::System.Int32?) Strategy.GetUnitRole(Meta.EstimatedNumberOfPeople);
+				return (global::System.Int32) Strategy.GetUnitRole(Meta.EstimatedNumberOfPeople);
 			}
 			set
 			{
@@ -69,11 +69,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? EstimatedDuration 
+		virtual public global::System.Decimal EstimatedDuration 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.EstimatedDuration);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.EstimatedDuration);
 			}
 			set
 			{
@@ -95,11 +95,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? EstimatedCost 
+		virtual public global::System.Decimal EstimatedCost 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.EstimatedCost);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.EstimatedCost);
 			}
 			set
 			{

@@ -17,11 +17,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Int32? From 
+		virtual public global::System.Int32 From 
 		{
 			get
 			{
-				return (global::System.Int32?) Strategy.GetUnitRole(Meta.From);
+				return (global::System.Int32) Strategy.GetUnitRole(Meta.From);
 			}
 			set
 			{
@@ -43,11 +43,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Int32? Through 
+		virtual public global::System.Int32 Through 
 		{
 			get
 			{
-				return (global::System.Int32?) Strategy.GetUnitRole(Meta.Through);
+				return (global::System.Int32) Strategy.GetUnitRole(Meta.Through);
 			}
 			set
 			{

@@ -311,11 +311,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? StandardWorkHours 
+		virtual public global::System.Decimal StandardWorkHours 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.StandardWorkHours);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.StandardWorkHours);
 			}
 			set
 			{

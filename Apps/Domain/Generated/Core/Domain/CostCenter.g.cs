@@ -157,11 +157,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean? Active 
+		virtual public global::System.Boolean Active 
 		{
 			get
 			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.Active);
+				return (global::System.Boolean) Strategy.GetUnitRole(Meta.Active);
 			}
 			set
 			{
@@ -183,11 +183,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean? UseGlAccountOfBooking 
+		virtual public global::System.Boolean UseGlAccountOfBooking 
 		{
 			get
 			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.UseGlAccountOfBooking);
+				return (global::System.Boolean) Strategy.GetUnitRole(Meta.UseGlAccountOfBooking);
 			}
 			set
 			{
@@ -333,11 +333,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Guid? UniqueId 
+		virtual public global::System.Guid UniqueId 
 		{
 			get
 			{
-				return (global::System.Guid?) Strategy.GetUnitRole(Meta.UniqueId);
+				return (global::System.Guid) Strategy.GetUnitRole(Meta.UniqueId);
 			}
 			set
 			{

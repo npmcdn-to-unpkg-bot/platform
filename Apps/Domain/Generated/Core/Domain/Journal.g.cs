@@ -17,11 +17,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean? UseAsDefault 
+		virtual public global::System.Boolean UseAsDefault 
 		{
 			get
 			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.UseAsDefault);
+				return (global::System.Boolean) Strategy.GetUnitRole(Meta.UseAsDefault);
 			}
 			set
 			{
@@ -121,11 +121,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean? BlockUnpaidTransactions 
+		virtual public global::System.Boolean BlockUnpaidTransactions 
 		{
 			get
 			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.BlockUnpaidTransactions);
+				return (global::System.Boolean) Strategy.GetUnitRole(Meta.BlockUnpaidTransactions);
 			}
 			set
 			{
@@ -287,11 +287,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean? CloseWhenInBalance 
+		virtual public global::System.Boolean CloseWhenInBalance 
 		{
 			get
 			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.CloseWhenInBalance);
+				return (global::System.Boolean) Strategy.GetUnitRole(Meta.CloseWhenInBalance);
 			}
 			set
 			{

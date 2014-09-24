@@ -17,11 +17,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? ShipmentThreshold 
+		virtual public global::System.Decimal ShipmentThreshold 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.ShipmentThreshold);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.ShipmentThreshold);
 			}
 			set
 			{
@@ -131,11 +131,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Int32? PaymentGracePeriod 
+		virtual public global::System.Int32 PaymentGracePeriod 
 		{
 			get
 			{
-				return (global::System.Int32?) Strategy.GetUnitRole(Meta.PaymentGracePeriod);
+				return (global::System.Int32) Strategy.GetUnitRole(Meta.PaymentGracePeriod);
 			}
 			set
 			{
@@ -183,11 +183,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Int32? PaymentNetDays 
+		virtual public global::System.Int32 PaymentNetDays 
 		{
 			get
 			{
-				return (global::System.Int32?) Strategy.GetUnitRole(Meta.PaymentNetDays);
+				return (global::System.Int32) Strategy.GetUnitRole(Meta.PaymentNetDays);
 			}
 			set
 			{
@@ -297,11 +297,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? CreditLimit 
+		virtual public global::System.Decimal CreditLimit 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.CreditLimit);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.CreditLimit);
 			}
 			set
 			{
@@ -375,11 +375,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? OrderThreshold 
+		virtual public global::System.Decimal OrderThreshold 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.OrderThreshold);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.OrderThreshold);
 			}
 			set
 			{
@@ -427,11 +427,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Int32? NextSalesOrderNumber 
+		virtual public global::System.Int32 NextSalesOrderNumber 
 		{
 			get
 			{
-				return (global::System.Int32?) Strategy.GetUnitRole(Meta.NextSalesOrderNumber);
+				return (global::System.Int32) Strategy.GetUnitRole(Meta.NextSalesOrderNumber);
 			}
 			set
 			{
@@ -577,11 +577,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Int32? NextOutgoingShipmentNumber 
+		virtual public global::System.Int32 NextOutgoingShipmentNumber 
 		{
 			get
 			{
-				return (global::System.Int32?) Strategy.GetUnitRole(Meta.NextOutgoingShipmentNumber);
+				return (global::System.Int32) Strategy.GetUnitRole(Meta.NextOutgoingShipmentNumber);
 			}
 			set
 			{
@@ -639,11 +639,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Int32? NextSalesInvoiceNumber 
+		virtual public global::System.Int32 NextSalesInvoiceNumber 
 		{
 			get
 			{
-				return (global::System.Int32?) Strategy.GetUnitRole(Meta.NextSalesInvoiceNumber);
+				return (global::System.Int32) Strategy.GetUnitRole(Meta.NextSalesInvoiceNumber);
 			}
 			set
 			{
@@ -665,11 +665,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Guid? UniqueId 
+		virtual public global::System.Guid UniqueId 
 		{
 			get
 			{
-				return (global::System.Guid?) Strategy.GetUnitRole(Meta.UniqueId);
+				return (global::System.Guid) Strategy.GetUnitRole(Meta.UniqueId);
 			}
 			set
 			{

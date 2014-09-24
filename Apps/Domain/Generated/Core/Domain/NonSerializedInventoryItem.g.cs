@@ -43,11 +43,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? QuantityCommittedOut 
+		virtual public global::System.Decimal QuantityCommittedOut 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.QuantityCommittedOut);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.QuantityCommittedOut);
 			}
 			set
 			{
@@ -157,11 +157,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? QuantityOnHand 
+		virtual public global::System.Decimal QuantityOnHand 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.QuantityOnHand);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.QuantityOnHand);
 			}
 			set
 			{
@@ -183,11 +183,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? PreviousQuantityOnHand 
+		virtual public global::System.Decimal PreviousQuantityOnHand 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.PreviousQuantityOnHand);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.PreviousQuantityOnHand);
 			}
 			set
 			{
@@ -209,11 +209,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? AvailableToPromise 
+		virtual public global::System.Decimal AvailableToPromise 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.AvailableToPromise);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.AvailableToPromise);
 			}
 			set
 			{
@@ -235,11 +235,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? QuantityExpectedIn 
+		virtual public global::System.Decimal QuantityExpectedIn 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.QuantityExpectedIn);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.QuantityExpectedIn);
 			}
 			set
 			{
@@ -639,11 +639,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Guid? UniqueId 
+		virtual public global::System.Guid UniqueId 
 		{
 			get
 			{
-				return (global::System.Guid?) Strategy.GetUnitRole(Meta.UniqueId);
+				return (global::System.Guid) Strategy.GetUnitRole(Meta.UniqueId);
 			}
 			set
 			{

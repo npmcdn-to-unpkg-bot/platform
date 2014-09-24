@@ -17,7 +17,7 @@ namespace Allors.Domain
 		void RemoveName();
 
 
-		global::System.DateTime? LastServiceDate 
+		global::System.DateTime LastServiceDate 
 		{
 			get;
 			set;
@@ -28,7 +28,7 @@ namespace Allors.Domain
 		void RemoveLastServiceDate();
 
 
-		global::System.DateTime? AcquiredDate 
+		global::System.DateTime AcquiredDate 
 		{
 			get;
 			set;
@@ -50,7 +50,7 @@ namespace Allors.Domain
 		void RemoveDescription();
 
 
-		global::System.Decimal? ProductionCapacity 
+		global::System.Decimal ProductionCapacity 
 		{
 			get;
 			set;
@@ -61,7 +61,7 @@ namespace Allors.Domain
 		void RemoveProductionCapacity();
 
 
-		global::System.DateTime? NextServiceDate 
+		global::System.DateTime NextServiceDate 
 		{
 			get;
 			set;

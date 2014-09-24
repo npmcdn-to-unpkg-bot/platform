@@ -17,11 +17,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean? Required 
+		virtual public global::System.Boolean Required 
 		{
 			get
 			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.Required);
+				return (global::System.Boolean) Strategy.GetUnitRole(Meta.Required);
 			}
 			set
 			{

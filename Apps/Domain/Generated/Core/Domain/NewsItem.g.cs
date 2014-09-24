@@ -17,11 +17,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean? IsPublished 
+		virtual public global::System.Boolean IsPublished 
 		{
 			get
 			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.IsPublished);
+				return (global::System.Boolean) Strategy.GetUnitRole(Meta.IsPublished);
 			}
 			set
 			{
@@ -69,11 +69,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Int32? DisplayOrder 
+		virtual public global::System.Int32 DisplayOrder 
 		{
 			get
 			{
-				return (global::System.Int32?) Strategy.GetUnitRole(Meta.DisplayOrder);
+				return (global::System.Int32) Strategy.GetUnitRole(Meta.DisplayOrder);
 			}
 			set
 			{
@@ -173,11 +173,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? Date 
+		virtual public global::System.DateTime Date 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.Date);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.Date);
 			}
 			set
 			{
@@ -199,11 +199,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean? Announcement 
+		virtual public global::System.Boolean Announcement 
 		{
 			get
 			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.Announcement);
+				return (global::System.Boolean) Strategy.GetUnitRole(Meta.Announcement);
 			}
 			set
 			{

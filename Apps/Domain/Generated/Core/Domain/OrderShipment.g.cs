@@ -43,11 +43,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean? Picked 
+		virtual public global::System.Boolean Picked 
 		{
 			get
 			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.Picked);
+				return (global::System.Boolean) Strategy.GetUnitRole(Meta.Picked);
 			}
 			set
 			{
@@ -95,11 +95,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? Quantity 
+		virtual public global::System.Decimal Quantity 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.Quantity);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.Quantity);
 			}
 			set
 			{

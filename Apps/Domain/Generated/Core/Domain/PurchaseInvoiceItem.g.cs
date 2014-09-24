@@ -183,11 +183,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? TotalIncVatCustomerCurrency 
+		virtual public global::System.Decimal TotalIncVatCustomerCurrency 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.TotalIncVatCustomerCurrency);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.TotalIncVatCustomerCurrency);
 			}
 			set
 			{
@@ -245,11 +245,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? TotalVatCustomerCurrency 
+		virtual public global::System.Decimal TotalVatCustomerCurrency 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.TotalVatCustomerCurrency);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.TotalVatCustomerCurrency);
 			}
 			set
 			{
@@ -271,11 +271,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? TotalBasePrice 
+		virtual public global::System.Decimal TotalBasePrice 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.TotalBasePrice);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.TotalBasePrice);
 			}
 			set
 			{
@@ -297,11 +297,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? TotalSurcharge 
+		virtual public global::System.Decimal TotalSurcharge 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.TotalSurcharge);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.TotalSurcharge);
 			}
 			set
 			{
@@ -323,11 +323,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? TotalInvoiceAdjustment 
+		virtual public global::System.Decimal TotalInvoiceAdjustment 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.TotalInvoiceAdjustment);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.TotalInvoiceAdjustment);
 			}
 			set
 			{
@@ -349,11 +349,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? TotalExVatCustomerCurrency 
+		virtual public global::System.Decimal TotalExVatCustomerCurrency 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.TotalExVatCustomerCurrency);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.TotalExVatCustomerCurrency);
 			}
 			set
 			{
@@ -375,11 +375,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? TotalDiscount 
+		virtual public global::System.Decimal TotalDiscount 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.TotalDiscount);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.TotalDiscount);
 			}
 			set
 			{
@@ -437,11 +437,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? TotalDiscountAsPercentage 
+		virtual public global::System.Decimal TotalDiscountAsPercentage 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.TotalDiscountAsPercentage);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.TotalDiscountAsPercentage);
 			}
 			set
 			{
@@ -463,11 +463,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? CalculatedUnitPrice 
+		virtual public global::System.Decimal CalculatedUnitPrice 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.CalculatedUnitPrice);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.CalculatedUnitPrice);
 			}
 			set
 			{
@@ -489,11 +489,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? UnitDiscount 
+		virtual public global::System.Decimal UnitDiscount 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.UnitDiscount);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.UnitDiscount);
 			}
 			set
 			{
@@ -541,11 +541,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? TotalIncVat 
+		virtual public global::System.Decimal TotalIncVat 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.TotalIncVat);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.TotalIncVat);
 			}
 			set
 			{
@@ -593,11 +593,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? UnitBasePrice 
+		virtual public global::System.Decimal UnitBasePrice 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.UnitBasePrice);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.UnitBasePrice);
 			}
 			set
 			{
@@ -619,11 +619,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? TotalSurchargeCustomerCurrency 
+		virtual public global::System.Decimal TotalSurchargeCustomerCurrency 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.TotalSurchargeCustomerCurrency);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.TotalSurchargeCustomerCurrency);
 			}
 			set
 			{
@@ -733,11 +733,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? ActualUnitPrice 
+		virtual public global::System.Decimal ActualUnitPrice 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.ActualUnitPrice);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.ActualUnitPrice);
 			}
 			set
 			{
@@ -785,11 +785,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? TotalInvoiceAdjustmentCustomerCurrency 
+		virtual public global::System.Decimal TotalInvoiceAdjustmentCustomerCurrency 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.TotalInvoiceAdjustmentCustomerCurrency);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.TotalInvoiceAdjustmentCustomerCurrency);
 			}
 			set
 			{
@@ -811,11 +811,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? AmountPaid 
+		virtual public global::System.Decimal AmountPaid 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.AmountPaid);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.AmountPaid);
 			}
 			set
 			{
@@ -863,11 +863,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? TotalDiscountCustomerCurrency 
+		virtual public global::System.Decimal TotalDiscountCustomerCurrency 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.TotalDiscountCustomerCurrency);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.TotalDiscountCustomerCurrency);
 			}
 			set
 			{
@@ -889,11 +889,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? UnitSurcharge 
+		virtual public global::System.Decimal UnitSurcharge 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.UnitSurcharge);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.UnitSurcharge);
 			}
 			set
 			{
@@ -915,11 +915,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? TotalExVat 
+		virtual public global::System.Decimal TotalExVat 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.TotalExVat);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.TotalExVat);
 			}
 			set
 			{
@@ -941,11 +941,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? Quantity 
+		virtual public global::System.Decimal Quantity 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.Quantity);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.Quantity);
 			}
 			set
 			{
@@ -967,11 +967,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? TotalSurchargeAsPercentage 
+		virtual public global::System.Decimal TotalSurchargeAsPercentage 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.TotalSurchargeAsPercentage);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.TotalSurchargeAsPercentage);
 			}
 			set
 			{
@@ -1019,11 +1019,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? TotalBasePriceCustomerCurrency 
+		virtual public global::System.Decimal TotalBasePriceCustomerCurrency 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.TotalBasePriceCustomerCurrency);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.TotalBasePriceCustomerCurrency);
 			}
 			set
 			{
@@ -1045,11 +1045,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? TotalVat 
+		virtual public global::System.Decimal TotalVat 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.TotalVat);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.TotalVat);
 			}
 			set
 			{
@@ -1097,11 +1097,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? UnitVat 
+		virtual public global::System.Decimal UnitVat 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.UnitVat);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.UnitVat);
 			}
 			set
 			{

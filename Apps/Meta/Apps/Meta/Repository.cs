@@ -4704,6 +4704,105 @@ namespace Allors.Meta
             // UserGroup
             new RelationTypeBuilder(domain, new Guid("6b3e1fa8-5718-4a60-91c6-c6bb42be26fd"), new Guid("35c67ad6-c5ff-4e53-82a7-c457323b02b3"), new Guid("5c5e8dd8-4277-4be0-a59b-cc92dc8dde97")).WithObjectTypes(UserGroup, Party).WithSingularName("Party")  .WithPluralName("Parties")  .WithCardinality(Cardinalities.ManyToOne)  .WithIsIndexed(true)  .Build();
 
+
+            // MehodTypes
+            //AccountingTransactionDetail
+            new MethodTypeBuilder(domain, new Guid("FDC41297-5A41-4bbb-994C-2CF48DF0BEF9")).WithObjectType(AccountingTransactionDetail).WithName("DebitCreditString").Build();
+            
+            // Budget
+            new MethodTypeBuilder(domain, new Guid("2A5694F0-694B-4a66-8E97-50B1C4C597E0")).WithObjectType(Budget).WithName("Close").Build();
+            new MethodTypeBuilder(domain, new Guid("5F721966-8DC9-46f7-9891-18CA7251C9A9")).WithObjectType(Budget).WithName("Reopen").Build();
+
+            // PurchaseInvoice
+            new MethodTypeBuilder(domain, new Guid("A6915CF2-BEE7-4cf7-8DF2-9C4C27B0DC93")).WithObjectType(PurchaseInvoice).WithName("Cancel").Build();
+            new MethodTypeBuilder(domain, new Guid("2DE63AC3-68FA-4a40-B258-0CC81DD7720D")).WithObjectType(PurchaseInvoice).WithName("Approve").Build();
+            new MethodTypeBuilder(domain, new Guid("F11B3549-6159-4dcf-A391-878B4EBF75B9")).WithObjectType(PurchaseInvoice).WithName("Ready").Build();
+            
+            // SalesInvoice
+            new MethodTypeBuilder(domain, new Guid("EA954A7D-3988-4F6F-BDB0-F32CE4214025")).WithObjectType(SalesInvoice).WithName("SalesRepNames").Build();
+            new MethodTypeBuilder(domain, new Guid("AA63BFF7-1120-43a7-B869-31DB78235445")).WithObjectType(PurchaseInvoice).WithName("CancelInvoice").Build();
+            new MethodTypeBuilder(domain, new Guid("F43B75AA-589D-49cf-825D-050C4C6DE37D")).WithObjectType(PurchaseInvoice).WithName("Send").Build();
+            new MethodTypeBuilder(domain, new Guid("CC1DA3B5-9CC4-4dc7-91E7-8D2E894397CC")).WithObjectType(PurchaseInvoice).WithName("WriteOff").Build();
+
+            // PurchaseOrder
+            new MethodTypeBuilder(domain, new Guid("C36C6737-8994-4fef-A6CE-B15276105725")).WithObjectType(PurchaseOrder).WithName("Cancel").Build();
+            new MethodTypeBuilder(domain, new Guid("BD27F062-5647-4039-8D36-74617DFA57D6")).WithObjectType(PurchaseOrder).WithName("Confirm").Build();
+            new MethodTypeBuilder(domain, new Guid("4FD081E8-79AB-4e7e-B9C5-5AF368E218F7")).WithObjectType(PurchaseOrder).WithName("Reject").Build();
+            new MethodTypeBuilder(domain, new Guid("61F517D0-E1D1-4653-9CBF-FE0F0233D73A")).WithObjectType(PurchaseOrder).WithName("Hold").Build();
+            new MethodTypeBuilder(domain, new Guid("4DC43C8A-231B-496b-9C6D-36CCC1DF09C5")).WithObjectType(PurchaseOrder).WithName("Approve").Build();
+            new MethodTypeBuilder(domain, new Guid("071A8586-FF11-4b21-BAD1-C6BC3C1B5581")).WithObjectType(PurchaseOrder).WithName("Continue").Build();
+    
+            // PurchaseOrderItem
+            new MethodTypeBuilder(domain, new Guid("C5865BD8-5361-461b-B981-D97E2EAD7A4D")).WithObjectType(PurchaseOrderItem).WithName("Cancel").Build();
+            new MethodTypeBuilder(domain, new Guid("40E87252-DF49-4330-8BC5-2EB187FD1CDC")).WithObjectType(PurchaseOrderItem).WithName("Reject").Build();
+            new MethodTypeBuilder(domain, new Guid("49C3FFBA-5A01-4CE6-A479-54409FD410E2")).WithObjectType(PurchaseOrderItem).WithName("Confirm").Build();
+            new MethodTypeBuilder(domain, new Guid("D4A89211-D773-4B09-B86B-94A8E2A040E1")).WithObjectType(PurchaseOrderItem).WithName("Approve").Build();
+            new MethodTypeBuilder(domain, new Guid("68C7B445-8260-4004-BB94-F07EFDCDA5EE")).WithObjectType(PurchaseOrderItem).WithName("Complete").Build();
+            new MethodTypeBuilder(domain, new Guid("17958A95-5F55-4637-B544-53A6330CCA72")).WithObjectType(PurchaseOrderItem).WithName("Finish").Build();
+            new MethodTypeBuilder(domain, new Guid("A2311C03-C375-4b9b-B3F8-05DB02CD955F")).WithObjectType(PurchaseOrderItem).WithName("Delete").Build();
+
+            // Requirement
+            new MethodTypeBuilder(domain, new Guid("7F643BF6-6500-4ab5-A647-50E4E1D6B3BC")).WithObjectType(Requirement).WithName("Cancel").Build();
+            new MethodTypeBuilder(domain, new Guid("0C9740A3-F0FA-4965-9AA8-B6AC88142BAC")).WithObjectType(Requirement).WithName("Close").Build();
+            new MethodTypeBuilder(domain, new Guid("7017F137-7964-4782-951D-0B5DA0186D60")).WithObjectType(Requirement).WithName("Ready").Build();
+
+            // SalesOrder
+            new MethodTypeBuilder(domain, new Guid("599BB88F-C056-4505-A1DD-319599A9E1C6")).WithObjectType(Requirement).WithName("SalesRepNames").Build();
+            new MethodTypeBuilder(domain, new Guid("B114C3A1-E86F-4c3f-933A-626E1772EAFF")).WithObjectType(Requirement).WithName("CancelOrder").Build();
+            new MethodTypeBuilder(domain, new Guid("800D5136-D3AB-4d4e-9855-76158CFB0725")).WithObjectType(Requirement).WithName("Confirm").Build();
+            new MethodTypeBuilder(domain, new Guid("93E31115-ADB1-4ced-928D-FEBFDFF64678")).WithObjectType(Requirement).WithName("Reject").Build();
+            new MethodTypeBuilder(domain, new Guid("9CF5BE09-FE52-44d7-AEDD-CC5D464FAC4D")).WithObjectType(Requirement).WithName("Hold").Build();
+            new MethodTypeBuilder(domain, new Guid("8D04D69F-4517-4bc5-B8F2-8A8F31C3C342")).WithObjectType(Requirement).WithName("Approve").Build();
+            new MethodTypeBuilder(domain, new Guid("81B794DC-FE47-4fc5-AB16-9C39082E5271")).WithObjectType(Requirement).WithName("Continue").Build();
+            new MethodTypeBuilder(domain, new Guid("4F108BA5-002E-4D98-96C1-60FEBA23EC39")).WithObjectType(Requirement).WithName("Complete").Build();
+            new MethodTypeBuilder(domain, new Guid("904C6666-B2D3-44D2-8D90-5E1E6B73CF88")).WithObjectType(Requirement).WithName("Finish").Build();
+            new MethodTypeBuilder(domain, new Guid("4117EFBF-6B7F-4107-A835-1368DB5C9E3C")).WithObjectType(Requirement).WithName("Ship").Build();
+            new MethodTypeBuilder(domain, new Guid("7E6089B9-689F-4ABF-939D-25D7E5CFE0CF")).WithObjectType(Requirement).WithName("TryShip").Build();
+
+            // SalesOrderItem
+            new MethodTypeBuilder(domain, new Guid("F96B6DAF-D344-4916-97BA-F1A4DCDE46A4")).WithObjectType(SalesOrderItem).WithName("Delete").Build();
+            new MethodTypeBuilder(domain, new Guid("394072DA-1AB2-4031-A72A-AC816599D6E4")).WithObjectType(SalesOrderItem).WithName("Cancel").Build();
+            new MethodTypeBuilder(domain, new Guid("3A934C3E-4291-472A-ADF3-7BB5A86DABAD")).WithObjectType(SalesOrderItem).WithName("Confirm").Build();
+            new MethodTypeBuilder(domain, new Guid("8A18AB2C-762C-4f68-B526-29C2B24CF708")).WithObjectType(SalesOrderItem).WithName("Reject").Build();
+            new MethodTypeBuilder(domain, new Guid("D6653FE0-3C09-48C6-B604-6F075D0BE3A0")).WithObjectType(SalesOrderItem).WithName("Approve").Build();
+            new MethodTypeBuilder(domain, new Guid("B1FE36CF-270B-4A5C-825A-CDD4082BE704")).WithObjectType(SalesOrderItem).WithName("Continue").Build();
+            new MethodTypeBuilder(domain, new Guid("D43E3EFE-C8E5-4D3C-9F52-792DB7C8C09C")).WithObjectType(SalesOrderItem).WithName("Finish").Build();
+
+            // PartSpecification
+            new MethodTypeBuilder(domain, new Guid("7E08EA40-5A3B-4a18-A675-97212BA896DE")).WithObjectType(PartSpecification).WithName("Approve").Build();
+
+            // Case
+            new MethodTypeBuilder(domain, new Guid("2424081C-B0EE-44ce-8408-20E9C2506F7E")).WithObjectType(Case).WithName("Close").Build();
+            new MethodTypeBuilder(domain, new Guid("4F37D92B-2B2D-4ebc-9C18-6B35B9D74CEA")).WithObjectType(Case).WithName("Complete").Build();
+            new MethodTypeBuilder(domain, new Guid("23811AB1-EB92-473c-9E37-D8C709D15CD9")).WithObjectType(Case).WithName("Reopen").Build();
+
+            // CommunicationEvent
+            new MethodTypeBuilder(domain, new Guid("0DEFCE41-4F4A-496c-AF9D-23DA6F3EDCD4")).WithObjectType(CommunicationEvent).WithName("Close").Build();
+            new MethodTypeBuilder(domain, new Guid("C59CA8F0-E2FC-4b57-981C-A69480989B64")).WithObjectType(CommunicationEvent).WithName("Reopen").Build();
+            new MethodTypeBuilder(domain, new Guid("10F20740-EB05-4674-970F-BC41F2354205")).WithObjectType(CommunicationEvent).WithName("Cancel").Build();
+
+            // CustomerShipment
+            new MethodTypeBuilder(domain, new Guid("AC91935E-8A7B-4342-8F77-02134F56CAC9")).WithObjectType(CustomerShipment).WithName("Cancel").Build();
+            new MethodTypeBuilder(domain, new Guid("E4A1DB81-6EBE-4EDF-A80F-421C66871010")).WithObjectType(CustomerShipment).WithName("Ship").Build();
+            new MethodTypeBuilder(domain, new Guid("4955B760-0972-495B-A0CA-E927794074E6")).WithObjectType(CustomerShipment).WithName("Hold").Build();
+            new MethodTypeBuilder(domain, new Guid("2A529B67-9454-48D4-AB1F-36DA3A54A97C")).WithObjectType(CustomerShipment).WithName("Continue").Build();
+
+            // PickList
+            new MethodTypeBuilder(domain, new Guid("C525B8AC-7BB3-41fc-9C99-794AA345A153")).WithObjectType(PickList).WithName("Cancel").Build();
+            new MethodTypeBuilder(domain, new Guid("44C9F165-2394-41a9-895C-EE415D392602")).WithObjectType(PickList).WithName("SetPicked").Build();
+            new MethodTypeBuilder(domain, new Guid("41FA216F-1A0E-47DA-9965-32F2FEB46F1A")).WithObjectType(PickList).WithName("Hold").Build();
+            new MethodTypeBuilder(domain, new Guid("56F4109E-893C-4E7E-BA3F-93AF67830815")).WithObjectType(PickList).WithName("Continue").Build();
+
+            // PurchaseShipment
+            new MethodTypeBuilder(domain, new Guid("0D49EB0C-C0D9-4BAE-B94D-636F04DF853A")).WithObjectType(PurchaseShipment).WithName("Cancel").Build();
+            
+            // WorkEffort
+            new MethodTypeBuilder(domain, new Guid("DAF547D9-AD4B-47AD-A9AA-C2A54A76A2C3")).WithObjectType(WorkEffort).WithName("Confirm").Build();
+            new MethodTypeBuilder(domain, new Guid("5359113C-6642-43F8-8134-398C36DD2E45")).WithObjectType(WorkEffort).WithName("WorkDone").Build();
+            new MethodTypeBuilder(domain, new Guid("499AD64C-1A7C-4962-A56F-94B605F23DEC")).WithObjectType(WorkEffort).WithName("Finish").Build();
+            new MethodTypeBuilder(domain, new Guid("79681B12-542B-442d-ABA9-6C64E8591EB1")).WithObjectType(WorkEffort).WithName("Cancel").Build();
+            new MethodTypeBuilder(domain, new Guid("874A7A4E-09D2-44d2-84E5-4748DBCCD2D2")).WithObjectType(WorkEffort).WithName("Reopen").Build();
+            
             return domain;
         }
     }

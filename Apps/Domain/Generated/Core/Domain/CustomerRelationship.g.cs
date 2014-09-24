@@ -17,11 +17,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean? BlockedForDunning 
+		virtual public global::System.Boolean BlockedForDunning 
 		{
 			get
 			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.BlockedForDunning);
+				return (global::System.Boolean) Strategy.GetUnitRole(Meta.BlockedForDunning);
 			}
 			set
 			{
@@ -69,11 +69,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? AmountOverDue 
+		virtual public global::System.Decimal AmountOverDue 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.AmountOverDue);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.AmountOverDue);
 			}
 			set
 			{
@@ -147,11 +147,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? AmountDue 
+		virtual public global::System.Decimal AmountDue 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.AmountDue);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.AmountDue);
 			}
 			set
 			{
@@ -173,11 +173,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? YTDRevenue 
+		virtual public global::System.Decimal YTDRevenue 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.YTDRevenue);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.YTDRevenue);
 			}
 			set
 			{
@@ -199,11 +199,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? LastReminderDate 
+		virtual public global::System.DateTime LastReminderDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.LastReminderDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.LastReminderDate);
 			}
 			set
 			{
@@ -225,11 +225,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? CreditLimit 
+		virtual public global::System.Decimal CreditLimit 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.CreditLimit);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.CreditLimit);
 			}
 			set
 			{
@@ -251,11 +251,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Int32? SubAccountNumber 
+		virtual public global::System.Int32 SubAccountNumber 
 		{
 			get
 			{
-				return (global::System.Int32?) Strategy.GetUnitRole(Meta.SubAccountNumber);
+				return (global::System.Int32) Strategy.GetUnitRole(Meta.SubAccountNumber);
 			}
 			set
 			{
@@ -277,11 +277,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? LastYearsRevenue 
+		virtual public global::System.Decimal LastYearsRevenue 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.LastYearsRevenue);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.LastYearsRevenue);
 			}
 			set
 			{
@@ -391,11 +391,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? SimpleMovingAverage 
+		virtual public global::System.Decimal SimpleMovingAverage 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.SimpleMovingAverage);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.SimpleMovingAverage);
 			}
 			set
 			{
@@ -453,11 +453,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? FromDate 
+		virtual public global::System.DateTime FromDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.FromDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.FromDate);
 			}
 			set
 			{
@@ -479,11 +479,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? ThroughDate 
+		virtual public global::System.DateTime ThroughDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.ThroughDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.ThroughDate);
 			}
 			set
 			{

@@ -79,11 +79,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? Amount 
+		virtual public global::System.Decimal Amount 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.Amount);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.Amount);
 			}
 			set
 			{
@@ -131,11 +131,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? EffectiveDate 
+		virtual public global::System.DateTime EffectiveDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.EffectiveDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.EffectiveDate);
 			}
 			set
 			{
@@ -421,11 +421,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Guid? UniqueId 
+		virtual public global::System.Guid UniqueId 
 		{
 			get
 			{
-				return (global::System.Guid?) Strategy.GetUnitRole(Meta.UniqueId);
+				return (global::System.Guid) Strategy.GetUnitRole(Meta.UniqueId);
 			}
 			set
 			{

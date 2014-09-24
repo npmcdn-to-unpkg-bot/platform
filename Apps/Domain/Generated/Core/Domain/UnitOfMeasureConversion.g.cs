@@ -43,11 +43,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? StartDate 
+		virtual public global::System.DateTime StartDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.StartDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.StartDate);
 			}
 			set
 			{
@@ -69,11 +69,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? ConversionFactor 
+		virtual public global::System.Decimal ConversionFactor 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.ConversionFactor);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.ConversionFactor);
 			}
 			set
 			{

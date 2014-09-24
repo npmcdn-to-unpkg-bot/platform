@@ -17,11 +17,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? Amount 
+		virtual public global::System.Decimal Amount 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.Amount);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.Amount);
 			}
 			set
 			{
@@ -69,11 +69,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? Percentage 
+		virtual public global::System.Decimal Percentage 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.Percentage);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.Percentage);
 			}
 			set
 			{

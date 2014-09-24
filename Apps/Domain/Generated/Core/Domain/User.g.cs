@@ -6,7 +6,7 @@ namespace Allors.Domain
 	{
 
 
-		global::System.Boolean? UserEmailConfirmed 
+		global::System.Boolean UserEmailConfirmed 
 		{
 			get;
 			set;

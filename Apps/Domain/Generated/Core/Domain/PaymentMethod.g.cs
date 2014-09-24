@@ -6,7 +6,7 @@ namespace Allors.Domain
 	{
 
 
-		global::System.Decimal? BalanceLimit 
+		global::System.Decimal BalanceLimit 
 		{
 			get;
 			set;
@@ -17,7 +17,7 @@ namespace Allors.Domain
 		void RemoveBalanceLimit();
 
 
-		global::System.Decimal? CurrentBalance 
+		global::System.Decimal CurrentBalance 
 		{
 			get;
 			set;
@@ -106,7 +106,7 @@ namespace Allors.Domain
 		void RemoveCreditor();
 
 
-		global::System.Boolean? IsActive 
+		global::System.Boolean IsActive 
 		{
 			get;
 			set;

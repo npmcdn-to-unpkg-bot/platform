@@ -55,32 +55,28 @@ namespace Allors.Domain
 
             var derivation = new Derivation(this.Session);
 
-            var revenues = this.Session.Extent<PartyPackageRevenue>();
-            foreach (PartyPackageRevenue revenue in revenues)
+            foreach (PartyPackageRevenue revenue in this.Session.Extent<PartyPackageRevenue>())
             {
                 revenue.Derive(derivation);
             }
 
             this.Session.Commit();
 
-            revenues = this.Session.Extent<PartyProductCategoryRevenue>();
-            foreach (PartyProductCategoryRevenue revenue in revenues)
+            foreach (PartyProductCategoryRevenue revenue in this.Session.Extent<PartyProductCategoryRevenue>())
             {
                 revenue.Derive(derivation);
             }
 
             this.Session.Commit();
 
-            revenues = this.Session.Extent<PartyProductRevenue>();
-            foreach (PartyProductRevenue revenue in revenues)
+            foreach (PartyProductRevenue revenue in this.Session.Extent<PartyProductRevenue>())
             {
                 revenue.Derive(derivation);
             }
 
             this.Session.Commit();
 
-            revenues = this.Session.Extent<PartyRevenue>();
-            foreach (PartyRevenue revenue in revenues)
+            foreach (PartyRevenue revenue in this.Session.Extent<PartyRevenue>())
             {
                 revenue.Derive(derivation);
             }

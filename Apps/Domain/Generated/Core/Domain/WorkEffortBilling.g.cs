@@ -43,11 +43,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? Percentage 
+		virtual public global::System.Decimal Percentage 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.Percentage);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.Percentage);
 			}
 			set
 			{

@@ -269,5 +269,20 @@ namespace Allors.Domain
 			}
 		} 
 
+		public global::Allors.Meta.MethodType Close 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.BudgetClose;
+			}
+		} 
+		public global::Allors.Meta.MethodType Reopen 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.BudgetReopen;
+			}
+		} 
+
 	}
 }

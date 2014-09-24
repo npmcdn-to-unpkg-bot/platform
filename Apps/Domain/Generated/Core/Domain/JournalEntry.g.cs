@@ -43,11 +43,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Int64? EntryNumber 
+		virtual public global::System.Int64 EntryNumber 
 		{
 			get
 			{
-				return (global::System.Int64?) Strategy.GetUnitRole(Meta.EntryNumber);
+				return (global::System.Int64) Strategy.GetUnitRole(Meta.EntryNumber);
 			}
 			set
 			{
@@ -69,11 +69,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? EntryDate 
+		virtual public global::System.DateTime EntryDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.EntryDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.EntryDate);
 			}
 			set
 			{
@@ -95,11 +95,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? JournalDate 
+		virtual public global::System.DateTime JournalDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.JournalDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.JournalDate);
 			}
 			set
 			{

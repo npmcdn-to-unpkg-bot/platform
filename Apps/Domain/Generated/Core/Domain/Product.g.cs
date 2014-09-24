@@ -20,7 +20,7 @@ namespace Allors.Domain
 		void RemovePrimaryProductCategory();
 
 
-		global::System.DateTime? SupportDiscontinuationDate 
+		global::System.DateTime SupportDiscontinuationDate 
 		{
 			get;
 			set;
@@ -31,7 +31,7 @@ namespace Allors.Domain
 		void RemoveSupportDiscontinuationDate();
 
 
-		global::System.DateTime? SalesDiscontinuationDate 
+		global::System.DateTime SalesDiscontinuationDate 
 		{
 			get;
 			set;
@@ -175,7 +175,7 @@ namespace Allors.Domain
 		void RemoveName();
 
 
-		global::System.DateTime? IntroductionDate 
+		global::System.DateTime IntroductionDate 
 		{
 			get;
 			set;

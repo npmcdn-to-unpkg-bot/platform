@@ -193,11 +193,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Int32? ReorderLevel 
+		virtual public global::System.Int32 ReorderLevel 
 		{
 			get
 			{
-				return (global::System.Int32?) Strategy.GetUnitRole(Meta.ReorderLevel);
+				return (global::System.Int32) Strategy.GetUnitRole(Meta.ReorderLevel);
 			}
 			set
 			{
@@ -219,11 +219,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Int32? ReorderQuantity 
+		virtual public global::System.Int32 ReorderQuantity 
 		{
 			get
 			{
-				return (global::System.Int32?) Strategy.GetUnitRole(Meta.ReorderQuantity);
+				return (global::System.Int32) Strategy.GetUnitRole(Meta.ReorderQuantity);
 			}
 			set
 			{
@@ -431,11 +431,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Guid? UniqueId 
+		virtual public global::System.Guid UniqueId 
 		{
 			get
 			{
-				return (global::System.Guid?) Strategy.GetUnitRole(Meta.UniqueId);
+				return (global::System.Guid) Strategy.GetUnitRole(Meta.UniqueId);
 			}
 			set
 			{

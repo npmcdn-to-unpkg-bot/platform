@@ -17,11 +17,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? InitialProfitMargin 
+		virtual public global::System.Decimal InitialProfitMargin 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.InitialProfitMargin);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.InitialProfitMargin);
 			}
 			set
 			{
@@ -69,11 +69,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? QuantityShortFalled 
+		virtual public global::System.Decimal QuantityShortFalled 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.QuantityShortFalled);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.QuantityShortFalled);
 			}
 			set
 			{
@@ -131,11 +131,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? MaintainedProfitMargin 
+		virtual public global::System.Decimal MaintainedProfitMargin 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.MaintainedProfitMargin);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.MaintainedProfitMargin);
 			}
 			set
 			{
@@ -157,11 +157,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? RequiredProfitMargin 
+		virtual public global::System.Decimal RequiredProfitMargin 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.RequiredProfitMargin);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.RequiredProfitMargin);
 			}
 			set
 			{
@@ -271,11 +271,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? RequiredMarkupPercentage 
+		virtual public global::System.Decimal RequiredMarkupPercentage 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.RequiredMarkupPercentage);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.RequiredMarkupPercentage);
 			}
 			set
 			{
@@ -297,11 +297,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? QuantityShipped 
+		virtual public global::System.Decimal QuantityShipped 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.QuantityShipped);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.QuantityShipped);
 			}
 			set
 			{
@@ -375,11 +375,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? QuantityPicked 
+		virtual public global::System.Decimal QuantityPicked 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.QuantityPicked);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.QuantityPicked);
 			}
 			set
 			{
@@ -453,11 +453,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? UnitPurchasePrice 
+		virtual public global::System.Decimal UnitPurchasePrice 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.UnitPurchasePrice);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.UnitPurchasePrice);
 			}
 			set
 			{
@@ -531,11 +531,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? QuantityReturned 
+		virtual public global::System.Decimal QuantityReturned 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.QuantityReturned);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.QuantityReturned);
 			}
 			set
 			{
@@ -557,11 +557,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? QuantityReserved 
+		virtual public global::System.Decimal QuantityReserved 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.QuantityReserved);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.QuantityReserved);
 			}
 			set
 			{
@@ -671,11 +671,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? QuantityPendingShipment 
+		virtual public global::System.Decimal QuantityPendingShipment 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.QuantityPendingShipment);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.QuantityPendingShipment);
 			}
 			set
 			{
@@ -697,11 +697,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? MaintainedMarkupPercentage 
+		virtual public global::System.Decimal MaintainedMarkupPercentage 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.MaintainedMarkupPercentage);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.MaintainedMarkupPercentage);
 			}
 			set
 			{
@@ -749,11 +749,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? InitialMarkupPercentage 
+		virtual public global::System.Decimal InitialMarkupPercentage 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.InitialMarkupPercentage);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.InitialMarkupPercentage);
 			}
 			set
 			{
@@ -853,11 +853,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? QuantityRequestsShipping 
+		virtual public global::System.Decimal QuantityRequestsShipping 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.QuantityRequestsShipping);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.QuantityRequestsShipping);
 			}
 			set
 			{
@@ -915,11 +915,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? TotalDiscountAsPercentage 
+		virtual public global::System.Decimal TotalDiscountAsPercentage 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.TotalDiscountAsPercentage);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.TotalDiscountAsPercentage);
 			}
 			set
 			{
@@ -967,11 +967,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? UnitVat 
+		virtual public global::System.Decimal UnitVat 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.UnitVat);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.UnitVat);
 			}
 			set
 			{
@@ -993,11 +993,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? TotalVatCustomerCurrency 
+		virtual public global::System.Decimal TotalVatCustomerCurrency 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.TotalVatCustomerCurrency);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.TotalVatCustomerCurrency);
 			}
 			set
 			{
@@ -1071,11 +1071,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? TotalVat 
+		virtual public global::System.Decimal TotalVat 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.TotalVat);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.TotalVat);
 			}
 			set
 			{
@@ -1097,11 +1097,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? UnitSurcharge 
+		virtual public global::System.Decimal UnitSurcharge 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.UnitSurcharge);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.UnitSurcharge);
 			}
 			set
 			{
@@ -1123,11 +1123,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? UnitDiscount 
+		virtual public global::System.Decimal UnitDiscount 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.UnitDiscount);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.UnitDiscount);
 			}
 			set
 			{
@@ -1149,11 +1149,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? PreviousQuantity 
+		virtual public global::System.Decimal PreviousQuantity 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.PreviousQuantity);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.PreviousQuantity);
 			}
 			set
 			{
@@ -1175,11 +1175,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? QuantityOrdered 
+		virtual public global::System.Decimal QuantityOrdered 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.QuantityOrdered);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.QuantityOrdered);
 			}
 			set
 			{
@@ -1201,11 +1201,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? TotalExVatCustomerCurrency 
+		virtual public global::System.Decimal TotalExVatCustomerCurrency 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.TotalExVatCustomerCurrency);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.TotalExVatCustomerCurrency);
 			}
 			set
 			{
@@ -1253,11 +1253,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? ActualUnitPrice 
+		virtual public global::System.Decimal ActualUnitPrice 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.ActualUnitPrice);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.ActualUnitPrice);
 			}
 			set
 			{
@@ -1279,11 +1279,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? TotalIncVatCustomerCurrency 
+		virtual public global::System.Decimal TotalIncVatCustomerCurrency 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.TotalIncVatCustomerCurrency);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.TotalIncVatCustomerCurrency);
 			}
 			set
 			{
@@ -1331,11 +1331,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? UnitBasePrice 
+		virtual public global::System.Decimal UnitBasePrice 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.UnitBasePrice);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.UnitBasePrice);
 			}
 			set
 			{
@@ -1383,11 +1383,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? CalculatedUnitPrice 
+		virtual public global::System.Decimal CalculatedUnitPrice 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.CalculatedUnitPrice);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.CalculatedUnitPrice);
 			}
 			set
 			{
@@ -1409,11 +1409,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? TotalOrderAdjustmentCustomerCurrency 
+		virtual public global::System.Decimal TotalOrderAdjustmentCustomerCurrency 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.TotalOrderAdjustmentCustomerCurrency);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.TotalOrderAdjustmentCustomerCurrency);
 			}
 			set
 			{
@@ -1435,11 +1435,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? TotalOrderAdjustment 
+		virtual public global::System.Decimal TotalOrderAdjustment 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.TotalOrderAdjustment);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.TotalOrderAdjustment);
 			}
 			set
 			{
@@ -1461,11 +1461,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? TotalSurchargeCustomerCurrency 
+		virtual public global::System.Decimal TotalSurchargeCustomerCurrency 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.TotalSurchargeCustomerCurrency);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.TotalSurchargeCustomerCurrency);
 			}
 			set
 			{
@@ -1513,11 +1513,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? AssignedDeliveryDate 
+		virtual public global::System.DateTime AssignedDeliveryDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.AssignedDeliveryDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.AssignedDeliveryDate);
 			}
 			set
 			{
@@ -1539,11 +1539,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? DeliveryDate 
+		virtual public global::System.DateTime DeliveryDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.DeliveryDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.DeliveryDate);
 			}
 			set
 			{
@@ -1565,11 +1565,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? TotalIncVat 
+		virtual public global::System.Decimal TotalIncVat 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.TotalIncVat);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.TotalIncVat);
 			}
 			set
 			{
@@ -1591,11 +1591,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? TotalSurchargeAsPercentage 
+		virtual public global::System.Decimal TotalSurchargeAsPercentage 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.TotalSurchargeAsPercentage);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.TotalSurchargeAsPercentage);
 			}
 			set
 			{
@@ -1617,11 +1617,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? TotalDiscountCustomerCurrency 
+		virtual public global::System.Decimal TotalDiscountCustomerCurrency 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.TotalDiscountCustomerCurrency);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.TotalDiscountCustomerCurrency);
 			}
 			set
 			{
@@ -1643,11 +1643,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? TotalDiscount 
+		virtual public global::System.Decimal TotalDiscount 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.TotalDiscount);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.TotalDiscount);
 			}
 			set
 			{
@@ -1669,11 +1669,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? TotalSurcharge 
+		virtual public global::System.Decimal TotalSurcharge 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.TotalSurcharge);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.TotalSurcharge);
 			}
 			set
 			{
@@ -1783,11 +1783,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? TotalBasePrice 
+		virtual public global::System.Decimal TotalBasePrice 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.TotalBasePrice);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.TotalBasePrice);
 			}
 			set
 			{
@@ -1845,11 +1845,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? TotalExVat 
+		virtual public global::System.Decimal TotalExVat 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.TotalExVat);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.TotalExVat);
 			}
 			set
 			{
@@ -1871,11 +1871,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? TotalBasePriceCustomerCurrency 
+		virtual public global::System.Decimal TotalBasePriceCustomerCurrency 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.TotalBasePriceCustomerCurrency);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.TotalBasePriceCustomerCurrency);
 			}
 			set
 			{
@@ -2894,6 +2894,56 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.OrderItemAssociation;
+			}
+		} 
+
+		public global::Allors.Meta.MethodType Delete 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.SalesOrderItemDelete;
+			}
+		} 
+		public global::Allors.Meta.MethodType Cancel 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.SalesOrderItemCancel;
+			}
+		} 
+		public global::Allors.Meta.MethodType Confirm 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.SalesOrderItemConfirm;
+			}
+		} 
+		public global::Allors.Meta.MethodType Reject 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.SalesOrderItemReject;
+			}
+		} 
+		public global::Allors.Meta.MethodType Approve 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.SalesOrderItemApprove;
+			}
+		} 
+		public global::Allors.Meta.MethodType Continue 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.SalesOrderItemContinue;
+			}
+		} 
+		public global::Allors.Meta.MethodType Finish 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.SalesOrderItemFinish;
 			}
 		} 
 

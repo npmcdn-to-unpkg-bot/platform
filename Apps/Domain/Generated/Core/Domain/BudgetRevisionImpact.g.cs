@@ -69,11 +69,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean? Deleted 
+		virtual public global::System.Boolean Deleted 
 		{
 			get
 			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.Deleted);
+				return (global::System.Boolean) Strategy.GetUnitRole(Meta.Deleted);
 			}
 			set
 			{
@@ -95,11 +95,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean? Added 
+		virtual public global::System.Boolean Added 
 		{
 			get
 			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.Added);
+				return (global::System.Boolean) Strategy.GetUnitRole(Meta.Added);
 			}
 			set
 			{
@@ -121,11 +121,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? RevisedAmount 
+		virtual public global::System.Decimal RevisedAmount 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.RevisedAmount);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.RevisedAmount);
 			}
 			set
 			{

@@ -43,11 +43,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? LastYearsCommission 
+		virtual public global::System.Decimal LastYearsCommission 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.LastYearsCommission);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.LastYearsCommission);
 			}
 			set
 			{
@@ -131,11 +131,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? YTDCommission 
+		virtual public global::System.Decimal YTDCommission 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.YTDCommission);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.YTDCommission);
 			}
 			set
 			{
@@ -307,11 +307,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? FromDate 
+		virtual public global::System.DateTime FromDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.FromDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.FromDate);
 			}
 			set
 			{
@@ -333,11 +333,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? ThroughDate 
+		virtual public global::System.DateTime ThroughDate 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.ThroughDate);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.ThroughDate);
 			}
 			set
 			{
@@ -447,11 +447,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? SimpleMovingAverage 
+		virtual public global::System.Decimal SimpleMovingAverage 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.SimpleMovingAverage);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.SimpleMovingAverage);
 			}
 			set
 			{

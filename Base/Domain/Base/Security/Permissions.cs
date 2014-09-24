@@ -34,7 +34,7 @@ namespace Allors.Domain
 
             foreach (Permission permission in new Permissions(this.Session).Extent())
             {
-                if (!permission.ExistOperandType || !permission.ExistConcreteClass || !permission.Operation.HasValue)
+                if (!permission.ExistOperandType || !permission.ExistConcreteClass || !permission.ExistOperation)
                 {
                     permission.Delete();
                     return;
@@ -54,7 +54,7 @@ namespace Allors.Domain
                     permissionByOperationByConcreteClass.Add(permission.ConcreteClass, permissionByOperation);
                 }
 
-                permissionByOperation[permission.Operation.Value] = permission;
+                permissionByOperation[permission.Operation] = permission;
             }
 
             var domain = this.Session.Population.ObjectFactory.MetaPopulation;

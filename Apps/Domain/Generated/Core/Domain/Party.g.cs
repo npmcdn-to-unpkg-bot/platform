@@ -6,7 +6,7 @@ namespace Allors.Domain
 	{
 
 
-		global::System.Decimal? YTDRevenue 
+		global::System.Decimal YTDRevenue 
 		{
 			get;
 			set;
@@ -17,7 +17,7 @@ namespace Allors.Domain
 		void RemoveYTDRevenue();
 
 
-		global::System.Decimal? LastYearsRevenue 
+		global::System.Decimal LastYearsRevenue 
 		{
 			get;
 			set;
@@ -234,7 +234,7 @@ namespace Allors.Domain
 		void RemovePartyClassifications();
 
 
-		global::System.Boolean? ExcludeFromDunning 
+		global::System.Boolean ExcludeFromDunning 
 		{
 			get;
 			set;
@@ -454,7 +454,7 @@ namespace Allors.Domain
 		void RemoveShippingAddress();
 
 
-		global::System.Decimal? OpenOrderAmount 
+		global::System.Decimal OpenOrderAmount 
 		{
 			get;
 			set;

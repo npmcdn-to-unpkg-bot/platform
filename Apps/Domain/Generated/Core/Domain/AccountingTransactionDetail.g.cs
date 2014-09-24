@@ -69,11 +69,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? Amount 
+		virtual public global::System.Decimal Amount 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.Amount);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.Amount);
 			}
 			set
 			{
@@ -95,11 +95,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean? Debit 
+		virtual public global::System.Boolean Debit 
 		{
 			get
 			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.Debit);
+				return (global::System.Boolean) Strategy.GetUnitRole(Meta.Debit);
 			}
 			set
 			{
@@ -322,6 +322,14 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.AccountingTransactionDetailAssociatedWith;
+			}
+		} 
+
+		public global::Allors.Meta.MethodType DebitCreditString 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.AccountingTransactionDetailDebitCreditString;
 			}
 		} 
 

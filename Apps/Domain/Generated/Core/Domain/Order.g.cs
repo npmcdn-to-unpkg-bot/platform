@@ -20,7 +20,7 @@ namespace Allors.Domain
 		void RemoveCustomerCurrency();
 
 
-		global::System.Decimal? TotalBasePriceCustomerCurrency 
+		global::System.Decimal TotalBasePriceCustomerCurrency 
 		{
 			get;
 			set;
@@ -31,7 +31,7 @@ namespace Allors.Domain
 		void RemoveTotalBasePriceCustomerCurrency();
 
 
-		global::System.Decimal? TotalIncVatCustomerCurrency 
+		global::System.Decimal TotalIncVatCustomerCurrency 
 		{
 			get;
 			set;
@@ -42,7 +42,7 @@ namespace Allors.Domain
 		void RemoveTotalIncVatCustomerCurrency();
 
 
-		global::System.Decimal? TotalDiscountCustomerCurrency 
+		global::System.Decimal TotalDiscountCustomerCurrency 
 		{
 			get;
 			set;
@@ -78,7 +78,7 @@ namespace Allors.Domain
 		void RemoveFee();
 
 
-		global::System.Decimal? TotalExVat 
+		global::System.Decimal TotalExVat 
 		{
 			get;
 			set;
@@ -107,7 +107,7 @@ namespace Allors.Domain
 		void RemoveOrderTerms();
 
 
-		global::System.Decimal? TotalVat 
+		global::System.Decimal TotalVat 
 		{
 			get;
 			set;
@@ -118,7 +118,7 @@ namespace Allors.Domain
 		void RemoveTotalVat();
 
 
-		global::System.Decimal? TotalSurcharge 
+		global::System.Decimal TotalSurcharge 
 		{
 			get;
 			set;
@@ -158,7 +158,7 @@ namespace Allors.Domain
 		void RemoveOrderNumber();
 
 
-		global::System.Decimal? TotalVatCustomerCurrency 
+		global::System.Decimal TotalVatCustomerCurrency 
 		{
 			get;
 			set;
@@ -169,7 +169,7 @@ namespace Allors.Domain
 		void RemoveTotalVatCustomerCurrency();
 
 
-		global::System.Decimal? TotalDiscount 
+		global::System.Decimal TotalDiscount 
 		{
 			get;
 			set;
@@ -191,7 +191,7 @@ namespace Allors.Domain
 		void RemoveMessage();
 
 
-		global::System.Decimal? TotalShippingAndHandlingCustomerCurrency 
+		global::System.Decimal TotalShippingAndHandlingCustomerCurrency 
 		{
 			get;
 			set;
@@ -202,7 +202,7 @@ namespace Allors.Domain
 		void RemoveTotalShippingAndHandlingCustomerCurrency();
 
 
-		global::System.DateTime? EntryDate 
+		global::System.DateTime EntryDate 
 		{
 			get;
 			set;
@@ -241,7 +241,7 @@ namespace Allors.Domain
 		void RemoveOrderKind();
 
 
-		global::System.Decimal? TotalIncVat 
+		global::System.Decimal TotalIncVat 
 		{
 			get;
 			set;
@@ -252,7 +252,7 @@ namespace Allors.Domain
 		void RemoveTotalIncVat();
 
 
-		global::System.Decimal? TotalSurchargeCustomerCurrency 
+		global::System.Decimal TotalSurchargeCustomerCurrency 
 		{
 			get;
 			set;
@@ -277,7 +277,7 @@ namespace Allors.Domain
 		void RemoveVatRegime();
 
 
-		global::System.Decimal? TotalFeeCustomerCurrency 
+		global::System.Decimal TotalFeeCustomerCurrency 
 		{
 			get;
 			set;
@@ -288,7 +288,7 @@ namespace Allors.Domain
 		void RemoveTotalFeeCustomerCurrency();
 
 
-		global::System.Decimal? TotalShippingAndHandling 
+		global::System.Decimal TotalShippingAndHandling 
 		{
 			get;
 			set;
@@ -313,7 +313,7 @@ namespace Allors.Domain
 		void RemoveShippingAndHandlingCharge();
 
 
-		global::System.DateTime? OrderDate 
+		global::System.DateTime OrderDate 
 		{
 			get;
 			set;
@@ -324,7 +324,7 @@ namespace Allors.Domain
 		void RemoveOrderDate();
 
 
-		global::System.Decimal? TotalExVatCustomerCurrency 
+		global::System.Decimal TotalExVatCustomerCurrency 
 		{
 			get;
 			set;
@@ -335,7 +335,7 @@ namespace Allors.Domain
 		void RemoveTotalExVatCustomerCurrency();
 
 
-		global::System.DateTime? DeliveryDate 
+		global::System.DateTime DeliveryDate 
 		{
 			get;
 			set;
@@ -346,7 +346,7 @@ namespace Allors.Domain
 		void RemoveDeliveryDate();
 
 
-		global::System.Decimal? TotalBasePrice 
+		global::System.Decimal TotalBasePrice 
 		{
 			get;
 			set;
@@ -357,7 +357,7 @@ namespace Allors.Domain
 		void RemoveTotalBasePrice();
 
 
-		global::System.Decimal? TotalFee 
+		global::System.Decimal TotalFee 
 		{
 			get;
 			set;

@@ -17,11 +17,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? Cost 
+		virtual public global::System.Decimal Cost 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.Cost);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.Cost);
 			}
 			set
 			{
@@ -43,11 +43,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? GrossMargin 
+		virtual public global::System.Decimal GrossMargin 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.GrossMargin);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.GrossMargin);
 			}
 			set
 			{
@@ -95,11 +95,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? BillingRate 
+		virtual public global::System.Decimal BillingRate 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.BillingRate);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.BillingRate);
 			}
 			set
 			{
@@ -147,11 +147,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal? AmountOfTime 
+		virtual public global::System.Decimal AmountOfTime 
 		{
 			get
 			{
-				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.AmountOfTime);
+				return (global::System.Decimal) Strategy.GetUnitRole(Meta.AmountOfTime);
 			}
 			set
 			{
@@ -173,11 +173,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? ThroughDateTime 
+		virtual public global::System.DateTime ThroughDateTime 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.ThroughDateTime);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.ThroughDateTime);
 			}
 			set
 			{
@@ -225,11 +225,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean? IsBillable 
+		virtual public global::System.Boolean IsBillable 
 		{
 			get
 			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.IsBillable);
+				return (global::System.Boolean) Strategy.GetUnitRole(Meta.IsBillable);
 			}
 			set
 			{
@@ -251,11 +251,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime? FromDateTime 
+		virtual public global::System.DateTime FromDateTime 
 		{
 			get
 			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.FromDateTime);
+				return (global::System.DateTime) Strategy.GetUnitRole(Meta.FromDateTime);
 			}
 			set
 			{

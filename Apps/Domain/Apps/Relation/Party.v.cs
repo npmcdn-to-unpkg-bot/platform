@@ -22,6 +22,7 @@ namespace Allors.Domain
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
 
     public partial interface Party
     {
@@ -29,7 +30,7 @@ namespace Allors.Domain
 
         bool IsOrganisation { get; }
 
-        IFormatProvider AppsGetCurrencyFormat { get; }
+        NumberFormatInfo CurrencyFormat { get; }
 
         List<SalesOrder> PreOrders { get; }
 
