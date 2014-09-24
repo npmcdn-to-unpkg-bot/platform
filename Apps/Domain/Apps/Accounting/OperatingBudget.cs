@@ -20,9 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-    
-
     public partial class OperatingBudget
     {
         protected override void AppsOnPostBuild(IObjectBuilder objectBuilder)
@@ -42,7 +39,7 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             derivation.Log.AssertExists(this, OperatingBudgets.Meta.FromDate);
             derivation.Log.AssertExists(this, OperatingBudgets.Meta.ThroughDate);
@@ -54,6 +51,22 @@ namespace Allors.Domain
             this.SearchData.RemoveWordBoundaryText();
 
             this.PreviousObjectState = this.CurrentObjectState;
+        }
+
+        ObjectState Transitional.PreviousObjectState
+        {
+            get
+            {
+                return this.PreviousObjectState;
+            }
+        }
+
+        ObjectState Transitional.CurrentObjectState
+        {
+            get
+            {
+                return this.CurrentObjectState;
+            }
         }
     }
 }

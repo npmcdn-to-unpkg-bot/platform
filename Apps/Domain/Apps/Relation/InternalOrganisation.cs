@@ -24,21 +24,21 @@ namespace Allors.Domain
     using System.Collections.Generic;
     using System.Linq;
 
-    
-
     using Allors.Domain;
 
     public partial class InternalOrganisation
     {
-        public override void RemovePaymentMethod(PaymentMethod value)
-        {
-            if (value.Equals(this.DefaultPaymentMethod))
-            {
-                this.RemoveDefaultPaymentMethod();
-            }
+        // TODO: Cascading delete
 
-            base.RemovePaymentMethod(value);
-        }
+        //public override void RemovePaymentMethod(PaymentMethod value)
+        //{
+        //    if (value.Equals(this.DefaultPaymentMethod))
+        //    {
+        //        this.RemoveDefaultPaymentMethod();
+        //    }
+
+        //    base.RemovePaymentMethod(value);
+        //}
 
         public int DeriveNextSubAccountNumber()
         {
@@ -47,14 +47,14 @@ namespace Allors.Domain
 
             repositoryOrganisation.NextSubAccountNumber = repositoryOrganisation.ExistNextSubAccountNumber ? repositoryOrganisation.NextSubAccountNumber : 19;
             var subAccountNumber = repositoryOrganisation.NextSubAccountNumber;
-            repositoryOrganisation.NextSubAccountNumber = this.NextValidElevenTestNumer(subAccountNumber + 1);
+            repositoryOrganisation.NextSubAccountNumber = this.NextValidElevenTestNumer(subAccountNumber.Value + 1);
 
             if (repositorySession.Database.ToString().IndexOf("Memory") < 0)
             {
                 repositorySession.Commit();
             }
 
-            return subAccountNumber;
+            return subAccountNumber.Value;
         }
 
         public string DeriveNextPurchaseInvoiceNumber()
@@ -255,7 +255,7 @@ namespace Allors.Domain
                 this.PreviousCurrency = this.PreferredCurrency;
             }
 
-            base.AppsDerive(derivation);
+            
 
             this.BillingAddress = null;
             this.BillingInquiriesFax = null;
@@ -277,7 +277,7 @@ namespace Allors.Domain
 
             foreach (PartyContactMechanism partyContactMechanism in this.PartyContactMechanisms)
             {
-                if (partyContactMechanism.UseAsDefault)
+                if (partyContactMechanism.UseAsDefault.Value)
                 {
                     if (partyContactMechanism.ContactPurpose.IsBillingAddress)
                     {
@@ -443,7 +443,7 @@ namespace Allors.Domain
 
         private void AppsStartNewFiscalYear()
         {
-            if (this.ExistActualAccountingPeriod && this.ActualAccountingPeriod.Active)
+            if (this.ExistActualAccountingPeriod && this.ActualAccountingPeriod.Active.Value)
             {
                 return;
             }
@@ -451,10 +451,10 @@ namespace Allors.Domain
             int year = DateTime.Now.Year;
             if (this.ExistActualAccountingPeriod)
             {
-                year = this.ActualAccountingPeriod.FromDate.Date.Year + 1;
+                year = this.ActualAccountingPeriod.FromDate.Value.Date.Year + 1;
             }
 
-            var fromDate = new DateTime(year, this.FiscalYearStartMonth, this.FiscalYearStartDay).Date;
+            var fromDate = new DateTime(year, this.FiscalYearStartMonth.Value, this.FiscalYearStartDay.Value).Date;
 
             var yearPeriod = new AccountingPeriodBuilder(this.Session)
                 .WithPeriodNumber(1)
@@ -518,6 +518,20 @@ namespace Allors.Domain
             }
 
             return int.Parse(candidate);
+        }
+
+        public bool IsPerson {
+            get
+            {
+                return false;
+            }
+        }
+
+        public bool IsOrganisation {
+            get
+            {
+                return false;
+            }
         }
     }
 }

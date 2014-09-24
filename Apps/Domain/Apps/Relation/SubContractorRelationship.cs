@@ -26,7 +26,7 @@ namespace Allors.Domain
     {
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             derivation.Log.AssertExists(this, SubContractorRelationships.Meta.Contractor);
             derivation.Log.AssertExists(this, SubContractorRelationships.Meta.SubContractor);

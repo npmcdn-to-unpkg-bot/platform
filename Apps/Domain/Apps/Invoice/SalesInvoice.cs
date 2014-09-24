@@ -24,7 +24,6 @@ namespace Allors.Domain
     using System.Collections.Generic;
     using System.Globalization;
     using System.Text;
-    using System.Windows.Forms.VisualStyles;
 
     using Resources;
 
@@ -162,7 +161,7 @@ namespace Allors.Domain
             get { return this.InvoiceDate.ToShortDateString(); }
         }
 
-        public IFormatProvider CurrencyFormat
+        public NumberFormatInfo CurrencyFormat
         {
             get
             {
@@ -562,7 +561,7 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             derivation.Log.AssertExists(this, SalesInvoices.Meta.InvoiceNumber);
             derivation.Log.AssertExists(this, SalesInvoices.Meta.InvoiceDate);

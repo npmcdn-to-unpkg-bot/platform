@@ -20,51 +20,28 @@
 
 namespace Allors.Domain
 {
-    public abstract partial class CommunicationEvent
+    using System;
+
+    public partial interface CommunicationEvent
     {
-        public void Close()
-        {
-            this.AppsClose();
-        }
+        void Close();
 
-        public void Reopen()
-        {
-            this.AppsReopen();
-        }
+        void Reopen();
 
-        public void Cancel()
-        {
-            this.AppsCancel();
-        }
+        void Cancel();
 
-        public void DeriveDisplayName()
-        {
-            this.AppsDeriveDisplayName();
-        }
+        void DeriveDisplayName();
 
-        public void DeriveSearchDataCharacterBoundaryText()
-        {
-            this.AppsDeriveSearchDataCharacterBoundaryText();
-        }
+        void DeriveSearchDataCharacterBoundaryText();
 
-        public void DeriveSearchDataWordBoundaryText()
-        {
-            this.AppsDeriveSearchDataWordBoundaryText();
-        }
+        void DeriveSearchDataWordBoundaryText();
 
-        public string ComposeDisplayName()
-        {
-            return this.AppsComposeDisplayName();
-        }
+        string ComposeDisplayName();
 
-        public virtual string ComposeSearchDataCharacterBoundaryText()
-        {
-            return this.AppsComposeSearchDataCharacterBoundaryText();
-        }
+        string ComposeSearchDataCharacterBoundaryText();
 
-        public virtual string ComposeSearchDataWordBoundaryText()
-        {
-            return this.AppsComposeSearchDataWordBoundaryText();
-        }
+        string ComposeSearchDataWordBoundaryText();
+
+        DateTime? Start { get; }
     }
 }

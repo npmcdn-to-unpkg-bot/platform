@@ -26,7 +26,7 @@ namespace Allors.Domain
     {
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             derivation.Log.AssertAtLeastOne(this, QuoteItems.Meta.Product, QuoteItems.Meta.ProductFeature, QuoteItems.Meta.Deliverable);
             derivation.Log.AssertExistsAtMostOne(this, QuoteItems.Meta.Product, QuoteItems.Meta.ProductFeature, QuoteItems.Meta.Deliverable);

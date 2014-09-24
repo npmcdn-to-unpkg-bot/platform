@@ -227,9 +227,6 @@
     <Compile Include="..\..\Base\Domain\Base\Localisation\Country.cs">
       <Link>Base\Localisation\Country.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Domain\Base\Localisation\Country.v.cs">
-      <Link>Base\Localisation\Country.v.cs</Link>
-    </Compile>
     <Compile Include="..\..\Base\Domain\Base\Localisation\Currencies.cs">
       <Link>Base\Localisation\Currencies.cs</Link>
     </Compile>
@@ -280,9 +277,6 @@
     </Compile>
     <Compile Include="..\..\Base\Domain\Base\Relation\Person.cs">
       <Link>Base\Relation\Person.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Base\Domain\Base\Relation\Person.v.cs">
-      <Link>Base\Relation\Person.v.cs</Link>
     </Compile>
     <Compile Include="..\..\Base\Domain\Base\Relation\Persons.cs">
       <Link>Base\Relation\Persons.cs</Link>
@@ -417,6 +411,7 @@
     <Compile Include="Apps\Accounting\Budgets.cs" />
     <Compile Include="Apps\Accounting\BudgetStatus.cs" />
     <Compile Include="Apps\Accounting\BudgetStatuses.cs" />
+    <Compile Include="Apps\Accounting\CapitalBudget.v.cs" />
     <Compile Include="Apps\Accounting\CapitalBudget.cs" />
     <Compile Include="Apps\Accounting\CapitalBudgets.cs" />
     <Compile Include="Apps\Accounting\Capitalization.cs" />
@@ -465,6 +460,7 @@
     <Compile Include="Apps\Accounting\Notes.cs" />
     <Compile Include="Apps\Accounting\Obligation.cs" />
     <Compile Include="Apps\Accounting\Obligations.cs" />
+    <Compile Include="Apps\Accounting\OperatingBudget.v.cs" />
     <Compile Include="Apps\Accounting\OperatingBudget.cs" />
     <Compile Include="Apps\Accounting\OperatingBudgets.cs" />
     <Compile Include="Apps\Accounting\OrganisationGlAccount.cs" />
@@ -738,6 +734,7 @@
     <Compile Include="Apps\ObjectsBase.cs" />
     <Compile Include="Apps\Order\CustomEngagementItem.cs" />
     <Compile Include="Apps\Order\CustomEngagementItems.cs" />
+    <Compile Include="Apps\Order\CustomerRequirement.v.cs" />
     <Compile Include="Apps\Order\CustomerRequirement.cs" />
     <Compile Include="Apps\Order\CustomerRequirements.cs" />
     <Compile Include="Apps\Order\DeliverableOrderItem.cs" />
@@ -754,6 +751,7 @@
     <Compile Include="Apps\Order\Fee.v.cs" />
     <Compile Include="Apps\Order\Fees.cs" />
     <Compile Include="Apps\Order\GoodOrderItem.cs" />
+    <Compile Include="Apps\Order\InternalRequirement.v.cs" />
     <Compile Include="Apps\Order\InternalRequirement.cs" />
     <Compile Include="Apps\Order\InternalRequirements.cs" />
     <Compile Include="Apps\Order\NeededSkill.cs" />
@@ -768,12 +766,14 @@
     <Compile Include="Apps\Order\OrderTerms.cs" />
     <Compile Include="Apps\Order\ProductQuote.cs" />
     <Compile Include="Apps\Order\ProductQuotes.cs" />
+    <Compile Include="Apps\Order\ProductRequirement.v.cs" />
     <Compile Include="Apps\Order\ProductRequirement.cs" />
     <Compile Include="Apps\Order\ProductRequirements.cs" />
     <Compile Include="Apps\Order\ProfessionalAssignment.cs" />
     <Compile Include="Apps\Order\ProfessionalAssignments.cs" />
     <Compile Include="Apps\Order\ProfessionalPlacement.cs" />
     <Compile Include="Apps\Order\ProfessionalPlacements.cs" />
+    <Compile Include="Apps\Order\ProjectRequirement.v.cs" />
     <Compile Include="Apps\Order\ProjectRequirement.cs" />
     <Compile Include="Apps\Order\ProjectRequirements.cs" />
     <Compile Include="Apps\Order\Proposal.cs" />
@@ -803,7 +803,7 @@
     <Compile Include="Apps\Order\RequestsForInformation.cs" />
     <Compile Include="Apps\Order\RequestsForProposal.cs" />
     <Compile Include="Apps\Order\RequestsForQuote.cs" />
-    <Compile Include="Apps\Order\Requirement.cs" />
+    <Compile Include="Apps\Order\RequirementExtensions.cs" />
     <Compile Include="Apps\Order\Requirement.v.cs" />
     <Compile Include="Apps\Order\RequirementCommunication.cs" />
     <Compile Include="Apps\Order\RequirementCommunications.cs" />
@@ -811,6 +811,7 @@
     <Compile Include="Apps\Order\Requirements.cs" />
     <Compile Include="Apps\Order\RequirementStatus.cs" />
     <Compile Include="Apps\Order\RequirementStatuses.cs" />
+    <Compile Include="Apps\Order\ResourceRequirement.v.cs" />
     <Compile Include="Apps\Order\ResourceRequirement.cs" />
     <Compile Include="Apps\Order\ResourceRequirements.cs" />
     <Compile Include="Apps\Order\RespondingParties.cs" />
@@ -853,6 +854,7 @@
     <Compile Include="Apps\Product\Colour.cs" />
     <Compile Include="Apps\Product\Colour.v.cs" />
     <Compile Include="Apps\Product\Colours.cs" />
+    <Compile Include="Apps\Product\ConstraintSpecification.v.cs" />
     <Compile Include="Apps\Product\ConstraintSpecification.cs" />
     <Compile Include="Apps\Product\ConstraintSpecifications.cs" />
     <Compile Include="Apps\Product\DeliverableBasedService.cs" />
@@ -920,6 +922,7 @@
     <Compile Include="Apps\Product\NonSerializedInventoryItemStatuses.cs" />
     <Compile Include="Apps\Product\OneTimeCharge.cs" />
     <Compile Include="Apps\Product\OneTimeCharges.cs" />
+    <Compile Include="Apps\Product\OperatingCondition.v.cs" />
     <Compile Include="Apps\Product\OperatingCondition.cs" />
     <Compile Include="Apps\Product\OperatingConditions.cs" />
     <Compile Include="Apps\Product\OrderQuantityBreak.cs" />
@@ -943,6 +946,7 @@
     <Compile Include="Apps\Product\PartSpecificationStatuses.cs" />
     <Compile Include="Apps\Product\PartSubstitute.cs" />
     <Compile Include="Apps\Product\PartSubstitutes.cs" />
+    <Compile Include="Apps\Product\PerformanceSpecification.v.cs" />
     <Compile Include="Apps\Product\PerformanceSpecification.cs" />
     <Compile Include="Apps\Product\PerformanceSpecifications.cs" />
     <Compile Include="Apps\Product\PriceComponents.cs" />
@@ -1002,6 +1006,7 @@
     <Compile Include="Apps\Product\SurchargeComponent.cs" />
     <Compile Include="Apps\Product\SurchargeComponent.v.cs" />
     <Compile Include="Apps\Product\SurchargeComponents.cs" />
+    <Compile Include="Apps\Product\TestingRequirement.v.cs" />
     <Compile Include="Apps\Product\TestingRequirement.cs" />
     <Compile Include="Apps\Product\TestingRequirements.cs" />
     <Compile Include="Apps\Product\TimeAndMaterialsService.cs" />
@@ -1009,6 +1014,7 @@
     <Compile Include="Apps\Product\TimeAndMaterialsServices.cs" />
     <Compile Include="Apps\Product\TimePeriodUsage.cs" />
     <Compile Include="Apps\Product\TimePeriodUsages.cs" />
+    <Compile Include="Apps\Product\Tolerance.v.cs" />
     <Compile Include="Apps\Product\Tolerance.cs" />
     <Compile Include="Apps\Product\Tolerances.cs" />
     <Compile Include="Apps\Product\UnitOfMeasure.cs" />
@@ -1063,6 +1069,7 @@
     <Compile Include="Apps\Relation\EmailAddress.cs" />
     <Compile Include="Apps\Relation\EmailAddress.v.cs" />
     <Compile Include="Apps\Relation\EmailAddresses.cs" />
+    <Compile Include="Apps\Relation\EmailCommunication.v.cs" />
     <Compile Include="Apps\Relation\EmailCommunication.cs" />
     <Compile Include="Apps\Relation\EmailCommunications.cs" />
     <Compile Include="Apps\Relation\EmailTemplate.cs" />
@@ -1071,8 +1078,10 @@
     <Compile Include="Apps\Relation\EmploymentAgreement.cs" />
     <Compile Include="Apps\Relation\EmploymentAgreements.cs" />
     <Compile Include="Apps\Relation\Employments.cs" />
+    <Compile Include="Apps\Relation\FaceToFaceCommunication.v.cs" />
     <Compile Include="Apps\Relation\FaceToFaceCommunication.cs" />
     <Compile Include="Apps\Relation\FaceToFaceCommunications.cs" />
+    <Compile Include="Apps\Relation\FaxCommunication.v.cs" />
     <Compile Include="Apps\Relation\FaxCommunication.cs" />
     <Compile Include="Apps\Relation\FaxCommunications.cs" />
     <Compile Include="Apps\Relation\FinancialTerm.cs" />
@@ -1088,6 +1097,7 @@
     <Compile Include="Apps\Relation\LegalForms.cs" />
     <Compile Include="Apps\Relation\LegalTerm.cs" />
     <Compile Include="Apps\Relation\LegalTerms.cs" />
+    <Compile Include="Apps\Relation\LetterCorrespondence.v.cs" />
     <Compile Include="Apps\Relation\LetterCorrespondence.cs" />
     <Compile Include="Apps\Relation\LetterCorrespondences.cs" />
     <Compile Include="Apps\Relation\MaritalStatuses.cs" />
@@ -1120,6 +1130,7 @@
     <Compile Include="Apps\Relation\Person.v.cs" />
     <Compile Include="Apps\Relation\PersonalTitles.cs" />
     <Compile Include="Apps\Relation\Persons.cs" />
+    <Compile Include="Apps\Relation\PhoneCommunication.v.cs" />
     <Compile Include="Apps\Relation\PhoneCommunication.cs" />
     <Compile Include="Apps\Relation\PhoneCommunications.cs" />
     <Compile Include="Apps\Relation\ProductFeatureApplicabilityRelationship.cs" />
@@ -1152,6 +1163,7 @@
     <Compile Include="Apps\Relation\WebAddress.cs" />
     <Compile Include="Apps\Relation\WebAddress.v.cs" />
     <Compile Include="Apps\Relation\WebAddresses.cs" />
+    <Compile Include="Apps\Relation\WebSiteCommunication.v.cs" />
     <Compile Include="Apps\Relation\WebSiteCommunication.cs" />
     <Compile Include="Apps\Relation\WebSiteCommunications.cs" />
     <Compile Include="Apps\Security\AccessControls.cs" />
@@ -1252,23 +1264,30 @@
     <Compile Include="Apps\WorkEffort\DeliverableTypes.cs" />
     <Compile Include="Apps\WorkEffort\ExpenseEntries.cs" />
     <Compile Include="Apps\WorkEffort\ExpenseEntry.cs" />
+    <Compile Include="Apps\WorkEffort\Maintenance.v.cs" />
     <Compile Include="Apps\WorkEffort\Maintenance.cs" />
     <Compile Include="Apps\WorkEffort\Maintenances.cs" />
     <Compile Include="Apps\WorkEffort\MaterialsUsage.cs" />
     <Compile Include="Apps\WorkEffort\MaterialsUsages.cs" />
     <Compile Include="Apps\WorkEffort\PartyFixedAssetAssignment.cs" />
     <Compile Include="Apps\WorkEffort\PartyFixedAssetAssignments.cs" />
+    <Compile Include="Apps\WorkEffort\Phase.v.cs" />
     <Compile Include="Apps\WorkEffort\Phase.cs" />
     <Compile Include="Apps\WorkEffort\Phases.cs" />
+    <Compile Include="Apps\WorkEffort\ProductionRun.v.cs" />
     <Compile Include="Apps\WorkEffort\ProductionRun.cs" />
     <Compile Include="Apps\WorkEffort\ProductionRuns.cs" />
+    <Compile Include="Apps\WorkEffort\Program.v.cs" />
     <Compile Include="Apps\WorkEffort\Program.cs" />
     <Compile Include="Apps\WorkEffort\Programs.cs" />
+    <Compile Include="Apps\WorkEffort\Project.v.cs" />
     <Compile Include="Apps\WorkEffort\Project.cs" />
     <Compile Include="Apps\WorkEffort\Projects.cs" />
+    <Compile Include="Apps\WorkEffort\Research.v.cs" />
     <Compile Include="Apps\WorkEffort\Research.cs" />
     <Compile Include="Apps\WorkEffort\Researches.cs" />
     <Compile Include="Apps\WorkEffort\ServiceEntryHeader.cs" />
+    <Compile Include="Apps\WorkEffort\Task.v.cs" />
     <Compile Include="Apps\WorkEffort\Task.cs" />
     <Compile Include="Apps\WorkEffort\Tasks.cs" />
     <Compile Include="Apps\WorkEffort\TimeEntries.cs" />
@@ -1299,8 +1318,10 @@
     <Compile Include="Apps\WorkEffort\WorkEffortType.cs" />
     <Compile Include="Apps\WorkEffort\WorkEffortTypeKinds.cs" />
     <Compile Include="Apps\WorkEffort\WorkEffortTypes.cs" />
+    <Compile Include="Apps\WorkEffort\WorkFlow.v.cs" />
     <Compile Include="Apps\WorkEffort\WorkFlow.cs" />
     <Compile Include="Apps\WorkEffort\WorkFlows.cs" />
+    <Compile Include="Apps\WorkEffort\WorkRequirement.v.cs" />
     <Compile Include="Apps\WorkEffort\WorkRequirement.cs" />
     <Compile Include="Apps\WorkEffort\WorkRequirements.cs" />
     <Compile Include="Generated\Base\Domain\AccessControl.g.cs" />
@@ -2361,43 +2382,13 @@
     <Compile Include="Generated\Core\Domain\WorkEffortTypeKind.g.cs" />
     <Compile Include="Generated\Core\Domain\WorkFlow.g.cs" />
     <Compile Include="Generated\Core\Domain\WorkRequirement.g.cs" />
-    <Compile Include="Test\Combinations\C1.cs" />
-    <Compile Include="Test\Combinations\C2.cs" />
-    <Compile Include="Test\Common\Singletons.cs" />
     <Compile Include="Test\Databases.v.cs" />
-    <Compile Include="Test\Derivations\Dependee.cs" />
-    <Compile Include="Test\Derivations\Dependent.cs" />
-    <Compile Include="Test\Derivations\First.cs" />
-    <Compile Include="Test\Derivations\Second.cs" />
-    <Compile Include="Test\Derivations\Subdependee.cs" />
-    <Compile Include="Test\Derivations\Third.cs" />
-    <Compile Include="Test\General\HomeAddress.cs" />
-    <Compile Include="Test\General\MailboxAddress.cs" />
-    <Compile Include="Test\General\Organisation.cs" />
-    <Compile Include="Test\General\Organisations.cs" />
-    <Compile Include="Test\General\Place.cs" />
-    <Compile Include="Test\General\Places.cs" />
-    <Compile Include="Test\General\To.cs" />
-    <Compile Include="Test\General\Units.cs" />
     <Compile Include="Test\ObjectBase.cs" />
     <Compile Include="Test\ObjectBase.v.cs" />
     <Compile Include="Test\ObjectsBase.cs" />
     <Compile Include="Test\ObjectsBase.v.cs" />
-    <Compile Include="Test\Relation\Person.cs" />
-    <Compile Include="Test\Security\AccessControls.cs" />
-    <Compile Include="Test\Security\Roles.cs" />
-    <Compile Include="Test\Security\Security.cs" />
-    <Compile Include="Test\Security\UserGroups.cs" />
     <Compile Include="Test\Setup.cs" />
     <Compile Include="Test\Setup.v.cs" />
-    <Compile Include="Test\Special\DerivationLogC1.cs" />
-    <Compile Include="Test\Special\DerivationLogC2.cs" />
-    <Compile Include="Test\Special\DerivationLogI12.cs" />
-    <Compile Include="Test\Special\Four.cs" />
-    <Compile Include="Test\Special\One.cs" />
-    <Compile Include="Test\Special\Shared.cs" />
-    <Compile Include="Test\Special\Three.cs" />
-    <Compile Include="Test\Special\Two.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

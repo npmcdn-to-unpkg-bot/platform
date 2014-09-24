@@ -48,7 +48,7 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             this.ReceivedDateTime = this.ReceivedDateTime.Date;
 

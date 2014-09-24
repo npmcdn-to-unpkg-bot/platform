@@ -59,7 +59,7 @@ namespace Allors.Domain
         {
             this.AppsValidate(derivation);
 
-            base.AppsDerive(derivation);
+            
 
             derivation.Log.AssertExists(this, PackagingContents.Meta.Quantity);
             derivation.Log.AssertExists(this, PackagingContents.Meta.ShipmentItem);

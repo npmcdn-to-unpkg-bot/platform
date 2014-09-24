@@ -36,13 +36,29 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             derivation.Log.AssertExists(this, ConstraintSpecifications.Meta.Description);
 
             this.DisplayName = this.Description;
 
             this.PreviousObjectState = this.CurrentObjectState;
+        }
+        
+        ObjectState Transitional.PreviousObjectState
+        {
+            get
+            {
+                return this.PreviousObjectState;
+            }
+        }
+
+        ObjectState Transitional.CurrentObjectState
+        {
+            get
+            {
+                return this.CurrentObjectState;
+            }
         }
     }
 }

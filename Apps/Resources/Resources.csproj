@@ -47,6 +47,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Apps\ErrorMessages.nl.resx" />
+    <EmbeddedResource Include="Apps\ErrorMessages.resx" />
     <EmbeddedResource Include="Base\ErrorMessages.resx" />
     <EmbeddedResource Include="ErrorMessages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -54,7 +56,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Apps\" />
     <Folder Include="Core\" />
     <Folder Include="Test\" />
   </ItemGroup>

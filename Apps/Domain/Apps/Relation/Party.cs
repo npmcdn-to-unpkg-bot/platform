@@ -24,83 +24,62 @@ namespace Allors.Domain
     using System.Collections.Generic;
     using System.Globalization;
 
-    using Allors.Domain;
-
-    public abstract partial class Party
+    public static class PartyExtensions
     {
-        public virtual bool IsPerson
+        public static IFormatProvider AppsPartyGetCurrencyFormat(this Party party)
         {
-            get
-            {
-                return false;
-            }
+            var cultureInfo = new CultureInfo(party.Locale.Name, false);
+            var currencyFormat = (NumberFormatInfo)cultureInfo.NumberFormat.Clone();
+            currencyFormat.CurrencySymbol = party.PreferredCurrency.Symbol;
+            return currencyFormat;
         }
 
-        public IFormatProvider CurrencyFormat
+        public static List<SalesOrder> AppsPartyGetPreOrders(this Party party)
         {
-            get
+            var preOrders = new List<SalesOrder>();
+            foreach (SalesOrder salesOrder in party.SalesOrdersWhereBillToCustomer)
             {
-                var cultureInfo = new CultureInfo(this.Locale.Name, false);
-                var currencyFormat = (NumberFormatInfo)cultureInfo.NumberFormat.Clone();
-                currencyFormat.CurrencySymbol = this.PreferredCurrency.Symbol;
-                return currencyFormat;
-            }
-        }
-
-        public List<SalesOrder> PreOrders
-        {
-            get
-            {
-                var preOrders = new List<SalesOrder>();
-                foreach (SalesOrder salesOrder in this.SalesOrdersWhereBillToCustomer)
+                if (salesOrder.CurrentObjectState.Equals(new SalesOrderObjectStates(party.Strategy.DatabaseSession).Provisional))
                 {
-                    if (salesOrder.CurrentObjectState.Equals(new SalesOrderObjectStates(this.DatabaseSession).Provisional))
-                    {
-                        preOrders.Add(salesOrder);
-                    }
+                    preOrders.Add(salesOrder);
                 }
-
-                return preOrders;
             }
+
+            return preOrders;
         }
 
-        public IEnumerable<CustomerShipment> PendingCustomerShipments
+        public static IEnumerable<CustomerShipment> AppsPartyGetPendingCustomerShipments(this Party party)
         {
-            get
+            var shipments = party.ShipmentsWhereShipToParty;
+
+            var pending = new List<CustomerShipment>();
+            foreach (CustomerShipment shipment in shipments)
             {
-                var shipments = this.ShipmentsWhereShipToParty;
-
-                var pending = new List<CustomerShipment>();
-                foreach (CustomerShipment shipment in shipments)
+                if (shipment.CurrentObjectState.Equals(new CustomerShipmentObjectStates(party.Strategy.DatabaseSession).Created) ||
+                    shipment.CurrentObjectState.Equals(new CustomerShipmentObjectStates(party.Strategy.DatabaseSession).Picked) ||
+                    shipment.CurrentObjectState.Equals(new CustomerShipmentObjectStates(party.Strategy.DatabaseSession).OnHold) ||
+                    shipment.CurrentObjectState.Equals(new CustomerShipmentObjectStates(party.Strategy.DatabaseSession).Packed))
                 {
-                    if (shipment.CurrentObjectState.Equals(new CustomerShipmentObjectStates(this.DatabaseSession).Created) ||
-                        shipment.CurrentObjectState.Equals(new CustomerShipmentObjectStates(this.DatabaseSession).Picked) ||
-                        shipment.CurrentObjectState.Equals(new CustomerShipmentObjectStates(this.DatabaseSession).OnHold) ||
-                        shipment.CurrentObjectState.Equals(new CustomerShipmentObjectStates(this.DatabaseSession).Packed))
-                    {
-                        pending.Add(shipment);
-                    }
+                    pending.Add(shipment);
                 }
-
-                return pending;
             }
+
+            return pending;
         }
 
-        public abstract string DeriveDisplayName();
-
-        public CustomerShipment GetPendingCustomerShipmentForStore(PostalAddress address, Store store, ShipmentMethod shipmentMethod)
+        public static CustomerShipment AppsPartyGetPendingCustomerShipmentForStore(this Party party, PostalAddress address, Store store, ShipmentMethod shipmentMethod)
         {
-            var shipments = this.ShipmentsWhereShipToParty;
+            var shipments = party.ShipmentsWhereShipToParty;
             shipments.Filter.AddEquals(Shipments.Meta.ShipToAddress, address);
             shipments.Filter.AddEquals(Shipments.Meta.Store, store);
             shipments.Filter.AddEquals(Shipments.Meta.ShipmentMethod, shipmentMethod);
 
             foreach (CustomerShipment shipment in shipments)
             {
-                if (shipment.CurrentObjectState.Equals(new CustomerShipmentObjectStates(this.DatabaseSession).Created) ||
-                    shipment.CurrentObjectState.Equals(new CustomerShipmentObjectStates(this.DatabaseSession).Picked) ||
-                    shipment.CurrentObjectState.Equals(new CustomerShipmentObjectStates(this.DatabaseSession).OnHold) ||
-                    shipment.CurrentObjectState.Equals(new CustomerShipmentObjectStates(this.DatabaseSession).Packed))
+                if (shipment.CurrentObjectState.Equals(new CustomerShipmentObjectStates(party.Strategy.DatabaseSession).Created) ||
+                    shipment.CurrentObjectState.Equals(new CustomerShipmentObjectStates(party.Strategy.DatabaseSession).Picked) ||
+                    shipment.CurrentObjectState.Equals(new CustomerShipmentObjectStates(party.Strategy.DatabaseSession).OnHold) ||
+                    shipment.CurrentObjectState.Equals(new CustomerShipmentObjectStates(party.Strategy.DatabaseSession).Packed))
                 {
                     return shipment;
                 }                
@@ -109,74 +88,70 @@ namespace Allors.Domain
             return null;
         }
 
-        protected override void AppsOnPostBuild(IObjectBuilder objectBuilder)
+        public static void AppsPartyOnPostBuild(this Party party, IObjectBuilder objectBuilder)
         {
-            base.AppsOnPostBuild(objectBuilder);
-
-            if (!this.ExistLocale && Singleton.Instance(this.Session).ExistDefaultInternalOrganisation)
+            if (!party.ExistLocale && Singleton.Instance(party.Strategy.Session).ExistDefaultInternalOrganisation)
             {
-                this.Locale = Singleton.Instance(this.Session).DefaultInternalOrganisation.Locale;
+                party.Locale = Singleton.Instance(party.Strategy.Session).DefaultInternalOrganisation.Locale;
             }
 
-            if (!this.ExistPreferredCurrency && Singleton.Instance(this.Session).ExistDefaultInternalOrganisation)
+            if (!party.ExistPreferredCurrency && Singleton.Instance(party.Strategy.Session).ExistDefaultInternalOrganisation)
             {
-                this.PreferredCurrency = Singleton.Instance(this.Session).DefaultInternalOrganisation.PreferredCurrency;
+                party.PreferredCurrency = Singleton.Instance(party.Strategy.Session).DefaultInternalOrganisation.PreferredCurrency;
             }
         }
 
-        protected override void AppsDerive(IDerivation derivation)
+        public static void AppsPartyDerive(this Party party, IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            party.DeriveCurrentSalesReps(derivation);
+            party.DeriveOpenOrderAmount();
+            party.DeriveRevenue();
 
-            this.DeriveCurrentSalesReps(derivation);
-            this.DeriveOpenOrderAmount();
-            this.DeriveRevenue();
-
-            this.PartyName = this.DeriveDisplayName();
+            party.PartyName = party.DeriveDisplayName();
         }
 
-        private void AppsDeriveCurrentSalesReps(IDerivation derivation)
+        public static void AppsPartyDeriveCurrentSalesReps(this Party party, IDerivation derivation)
         {
-            this.RemoveCurrentSalesReps();
+            party.RemoveCurrentSalesReps();
 
-            foreach (SalesRepRelationship salesRepRelationship in this.SalesRepRelationshipsWhereCustomer)
+            foreach (SalesRepRelationship salesRepRelationship in party.SalesRepRelationshipsWhereCustomer)
             {
                 if (salesRepRelationship.FromDate <= DateTime.Now &&
                     (!salesRepRelationship.ExistThroughDate || salesRepRelationship.ThroughDate >= DateTime.Now))
                 {
-                    this.AddCurrentSalesRep(salesRepRelationship.SalesRepresentative);
+                    party.AddCurrentSalesRep(salesRepRelationship.SalesRepresentative);
                 }
             }
         }
 
-        private void AppsDeriveOpenOrderAmount()
+        public static void AppsPartyDeriveOpenOrderAmount(this Party party)
         {
-            this.OpenOrderAmount = 0;
-            foreach (SalesOrder salesOrder in this.SalesOrdersWhereBillToCustomer)
+            party.OpenOrderAmount = 0;
+            foreach (SalesOrder salesOrder in party.SalesOrdersWhereBillToCustomer)
             {
-                if (!salesOrder.CurrentObjectState.Equals(new SalesOrderObjectStates(this.Session).Finished) &&
-                    !salesOrder.CurrentObjectState.Equals(new SalesOrderObjectStates(this.Session).Cancelled))
+                if (!salesOrder.CurrentObjectState.Equals(new SalesOrderObjectStates(party.Strategy.Session).Finished) &&
+                    !salesOrder.CurrentObjectState.Equals(new SalesOrderObjectStates(party.Strategy.Session).Cancelled))
                 {
-                    this.OpenOrderAmount += salesOrder.TotalIncVat;
+                    party.OpenOrderAmount += salesOrder.TotalIncVat;
                 }
             }
         }
 
-        private void AppsDeriveRevenue()
+        public static void AppsPartyDeriveRevenue(this Party party)
         {
-            this.YTDRevenue = 0;
-            this.LastYearsRevenue = 0;
+            party.YTDRevenue = 0;
+            party.LastYearsRevenue = 0;
 
-            foreach (PartyRevenue partyRevenue in this.PartyRevenuesWhereParty)
+            foreach (PartyRevenue partyRevenue in party.PartyRevenuesWhereParty)
             {
                 if (partyRevenue.Year == DateTime.Now.Year)
                 {
-                    this.YTDRevenue += partyRevenue.Revenue;
+                    party.YTDRevenue += partyRevenue.Revenue;
                 }
 
                 if (partyRevenue.Year == DateTime.Now.AddYears(-1).Year)
                 {
-                    this.LastYearsRevenue += partyRevenue.Revenue;
+                    party.LastYearsRevenue += partyRevenue.Revenue;
                 }
             }
         }

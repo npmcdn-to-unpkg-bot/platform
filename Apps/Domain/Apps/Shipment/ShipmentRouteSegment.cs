@@ -28,7 +28,7 @@ namespace Allors.Domain
     {
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             this.DisplayName = string.Format(
                 "Estimated start time {0} from {1}",

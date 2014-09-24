@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class TestingRequirement
     {
         protected override void AppsOnPostBuild(IObjectBuilder objectBuilder)
@@ -36,7 +34,7 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             derivation.Log.AssertExists(this, TestingRequirements.Meta.Description);
 

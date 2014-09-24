@@ -20,15 +20,8 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-    
-
     public partial class Building
     {
-        public void Locate()
-        {
-        }
-
         protected override void AppsOnPostBuild(IObjectBuilder builder)
         {
             base.AppsOnPostBuild(builder);
@@ -41,15 +34,13 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             derivation.Log.AssertExists(this, Buildings.Meta.Name);
 
             this.DeriveDisplayName();
             this.DeriveSearchDataCharacterBoundaryText();
             this.DeriveSearchDataWordBoundaryText();
-
-            this.Locate();
         }
 
         private void AppsDeriveDisplayName()

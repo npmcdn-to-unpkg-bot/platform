@@ -20,46 +20,26 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
-    public partial class PartSpecification
+    public static partial class PartSpecificationExtensions
     {
-        ObjectState Transitional.PreviousObjectState
+        public static void AppsPartSpecificationDerive(this PartSpecification partSpecification, IDerivation derivation)
         {
-            get
+            if (partSpecification.ExistCurrentObjectState && !partSpecification.CurrentObjectState.Equals(partSpecification.PreviousObjectState))
             {
-                return this.PreviousObjectState;
+                var currentStatus = new PartSpecificationStatusBuilder(partSpecification.Strategy.Session).WithPartSpecificationObjectState(partSpecification.CurrentObjectState).Build();
+                partSpecification.AddPartSpecificationStatus(currentStatus);
+                partSpecification.CurrentPartSpecificationStatus = currentStatus;
+            }
+
+            if (partSpecification.ExistCurrentObjectState)
+            {
+                partSpecification.CurrentObjectState.Process(partSpecification);
             }
         }
 
-        ObjectState Transitional.CurrentObjectState
+        public static void AppsPartSpecificationApprove(this PartSpecification partSpecification)
         {
-            get
-            {
-                return this.CurrentObjectState;
-            }
-        }
-
-        protected override void AppsDerive(IDerivation derivation)
-        {
-            base.AppsDerive(derivation);
-
-            if (this.ExistCurrentObjectState && !this.CurrentObjectState.Equals(this.PreviousObjectState))
-            {
-                var currentStatus = new PartSpecificationStatusBuilder(this.Session).WithPartSpecificationObjectState(this.CurrentObjectState).Build();
-                this.AddPartSpecificationStatus(currentStatus);
-                this.CurrentPartSpecificationStatus = currentStatus;
-            }
-
-            if (this.ExistCurrentObjectState)
-            {
-                this.CurrentObjectState.Process(this);
-            }
-        }
-
-        private void AppsApprove()
-        {
-            this.CurrentObjectState = new PartSpecificationObjectStates(Session).Approved;
+            partSpecification.CurrentObjectState = new PartSpecificationObjectStates(partSpecification.Strategy.Session).Approved;
         }
     }
 }

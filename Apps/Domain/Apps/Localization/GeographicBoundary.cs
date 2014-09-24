@@ -20,10 +20,7 @@
 
 namespace Allors.Domain
 {
-    public abstract partial class GeographicBoundary
+    public static partial class GeographicBoundaryExtensions
     {
-        public void Locate()
-        {
-        }
     }
 }

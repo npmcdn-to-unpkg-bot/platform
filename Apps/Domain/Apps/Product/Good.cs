@@ -158,7 +158,7 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             derivation.Log.AssertExists(this, Goods.Meta.Name);
             derivation.Log.AssertExists(this, Goods.Meta.VatRate);

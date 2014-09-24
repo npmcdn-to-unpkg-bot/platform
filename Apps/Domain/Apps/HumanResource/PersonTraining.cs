@@ -28,7 +28,7 @@ namespace Allors.Domain
     {
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             derivation.Log.AssertExists(this, PersonTrainings.Meta.FromDate);
             derivation.Log.AssertExists(this, PersonTrainings.Meta.ThroughDate);

@@ -34,7 +34,7 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             derivation.Log.AssertExists(this, Passports.Meta.Number);
             derivation.Log.AssertIsUnique(this, Passports.Meta.Number);

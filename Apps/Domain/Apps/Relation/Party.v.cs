@@ -20,27 +20,33 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
+    using System;
+    using System.Collections.Generic;
 
-    public abstract partial class Party
+    public partial interface Party
     {
-        public void DeriveCurrentSalesReps(IDerivation derivation)
-        {
-            this.AppsDeriveCurrentSalesReps(derivation);
-        }
+        bool IsPerson { get; }
 
-        public void DeriveOpenOrderAmount()
-        {
-            this.AppsDeriveOpenOrderAmount();
-        }
+        bool IsOrganisation { get; }
 
-        public void DeriveRevenue()
-        {
-            this.AppsDeriveRevenue();
-        }
+        IFormatProvider AppsGetCurrencyFormat { get; }
 
-        public abstract string DeriveSearchDataCharacterBoundaryText();
+        List<SalesOrder> PreOrders { get; }
 
-        public abstract string DeriveSearchDataWordBoundaryText();
+        IEnumerable<CustomerShipment> PendingCustomerShipments { get; }
+
+        void DeriveCurrentSalesReps(IDerivation derivation);
+
+        void DeriveOpenOrderAmount();
+
+        void DeriveRevenue();
+
+        string DeriveSearchDataCharacterBoundaryText();
+
+        string DeriveSearchDataWordBoundaryText();
+
+        string DeriveDisplayName();
+
+        CustomerShipment GetPendingCustomerShipmentForStore(PostalAddress address, Store store, ShipmentMethod shipmentMethod);
     }
 }

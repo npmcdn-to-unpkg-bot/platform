@@ -100,7 +100,7 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             derivation.Log.AssertExists(this, PurchaseInvoiceItems.Meta.Part);
             derivation.Log.AssertExists(this, PurchaseInvoiceItems.Meta.Quantity);

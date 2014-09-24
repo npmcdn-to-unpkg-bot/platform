@@ -296,7 +296,7 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             foreach (SalesOrderItem featureItem in this.OrderedWithFeatures)
             {

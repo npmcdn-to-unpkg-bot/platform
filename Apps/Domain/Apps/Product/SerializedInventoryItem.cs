@@ -67,7 +67,7 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             derivation.Log.AssertExists(this, SerializedInventoryItems.Meta.SerialNumber);
             derivation.Log.AssertIsUnique(this, SerializedInventoryItems.Meta.SerialNumber);
@@ -87,7 +87,7 @@ namespace Allors.Domain
 
         private void AppsDeriveCurrentObjectState(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             if (this.ExistCurrentObjectState && !this.CurrentObjectState.Equals(this.PreviousObjectState))
             {

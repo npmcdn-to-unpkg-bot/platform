@@ -117,6 +117,30 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccountNumberUniqueWithinChartOfAccounts" xml:space="preserve">
+    <value>AccountNumber must be unique within Chart of accounts</value>
+  </data>
+  <data name="ActiveDeploymentRegistered" xml:space="preserve">
+    <value>active deployment registered at {0}</value>
+  </data>
+  <data name="BasePriceOrderQuantityBreakNotAllowed" xml:space="preserve">
+    <value>order quantity break not allowed for a base price</value>
+  </data>
+  <data name="BasePriceOrderValueNotAllowed" xml:space="preserve">
+    <value>order value break not allowed for a base price</value>
+  </data>
+  <data name="BasePriceRevenueQuantityBreakNotAllowed" xml:space="preserve">
+    <value>revenue quantity break not allowed for a base price</value>
+  </data>
+  <data name="BasePriceRevenueValueBreakNotAllowed" xml:space="preserve">
+    <value>revenue value break not allowed for a base price</value>
+  </data>
+  <data name="CostCenterNotAllowed" xml:space="preserve">
+    <value>Cost center not in list of allowed cost centers</value>
+  </data>
+  <data name="CostUnitNotAllowed" xml:space="preserve">
+    <value>Cost unit not in list of allowed cost units</value>
+  </data>
   <data name="DerivationErrorAtLeastOne" xml:space="preserve">
     <value>{0} at least one</value>
   </data>
@@ -138,6 +162,60 @@
   <data name="DerivationErrorUnique" xml:space="preserve">
     <value>{0} is not unique</value>
   </data>
+  <data name="GeneralLedgerAccountNotBalanceAccount" xml:space="preserve">
+    <value>General Ledger Account must be balance sheet account</value>
+  </data>
+  <data name="GeneralLedgerAccountNotNeutral" xml:space="preserve">
+    <value>General Ledger Account not applicable</value>
+  </data>
+  <data name="IbanCheckDigitsError" xml:space="preserve">
+    <value>The check digits of IBAN are wrong</value>
+  </data>
+  <data name="IbanIllegalCharacters" xml:space="preserve">
+    <value>The IBAN contains illegal characters</value>
+  </data>
+  <data name="IbanIncorrect" xml:space="preserve">
+    <value>The IBAN is incorrect</value>
+  </data>
+  <data name="IbanLengthFailure" xml:space="preserve">
+    <value>IBAN length is wrong</value>
+  </data>
+  <data name="IbanStructuralFailure" xml:space="preserve">
+    <value>The country specific structure of IBAN is wrong</value>
+  </data>
+  <data name="IbanValidationUnavailable" xml:space="preserve">
+    <value>IBAN validation rules for this country are not known</value>
+  </data>
+  <data name="NotACostCenterAccount" xml:space="preserve">
+    <value>Account is not a cost center account</value>
+  </data>
+  <data name="NotACostUnitAccount" xml:space="preserve">
+    <value>Account is not a cost unit account</value>
+  </data>
+  <data name="NotAValidBic" xml:space="preserve">
+    <value>Not a valid BIC code</value>
+  </data>
+  <data name="PackagingContentMaximum" xml:space="preserve">
+    <value>maximum package content</value>
+  </data>
+  <data name="PartyIsNotACustomer" xml:space="preserve">
+    <value>Party choosen is not a customer for this internal organisation</value>
+  </data>
+  <data name="PartyIsNotASupplier" xml:space="preserve">
+    <value>Party choosen is not a supplier for this internal organisation</value>
+  </data>
+  <data name="PaymentApplicationNotLargerThanInvoiceAmount" xml:space="preserve">
+    <value>amount can not be larger then invoice amount</value>
+  </data>
+  <data name="PaymentApplicationNotLargerThanInvoiceItemAmount" xml:space="preserve">
+    <value>amount can not be larger then invoice item amount</value>
+  </data>
+  <data name="PaymentApplicationNotLargerThanPaymentAmount" xml:space="preserve">
+    <value>amount can not be larger then payment amount</value>
+  </data>
+  <data name="PaymentMethodNotAllowedForInternalOrganisation" xml:space="preserve">
+    <value>Payment method not listed for owner of this store</value>
+  </data>
   <data name="PermissionOnlyExecuteForMethodType" xml:space="preserve">
     <value>only execute is allowed for method type</value>
   </data>
@@ -146,5 +224,20 @@
   </data>
   <data name="PermissionOnlyWriteForRoleType" xml:space="preserve">
     <value>only write is allowed for a role type</value>
+  </data>
+  <data name="PickListItemQuantityMoreThanAllowed" xml:space="preserve">
+    <value>quantity more than allowed</value>
+  </data>
+  <data name="ProductCategoryPackageOnlyAtLowestLevel" xml:space="preserve">
+    <value>package only allowed at lowest level</value>
+  </data>
+  <data name="ReceiptAmountIsToSmall" xml:space="preserve">
+    <value>amount is to small</value>
+  </data>
+  <data name="SalesOrderItemLessThanAlreadeyShipped" xml:space="preserve">
+    <value>quantity less than already shipped</value>
+  </data>
+  <data name="SalesOrderItemProductChangeNotAllowed" xml:space="preserve">
+    <value>product change not allowed, user cancel orderitem instead</value>
   </data>
 </root>

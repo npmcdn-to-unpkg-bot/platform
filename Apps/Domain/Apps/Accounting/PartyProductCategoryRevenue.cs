@@ -36,7 +36,7 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             this.PartyProductCategoryName = string.Concat(this.Party.DeriveDisplayName(), "/", this.ProductCategory.Description);
 

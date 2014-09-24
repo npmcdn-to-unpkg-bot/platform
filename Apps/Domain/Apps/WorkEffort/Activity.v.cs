@@ -22,22 +22,6 @@ namespace Allors.Domain
 {
     public partial class Activity
     {
-        ObjectState Transitional.PreviousObjectState 
-        {
-            get
-            {
-                return this.PreviousObjectState;
-            }
-        }
-
-        ObjectState Transitional.CurrentObjectState 
-        {
-            get
-            {
-                return this.CurrentObjectState;
-            }
-        }
-
         public void Confirm()
         {
             this.AppsWorkEffortConfirm();

@@ -22,94 +22,61 @@ namespace Allors.Domain
 {
     using System;
 
-    public abstract partial class CommunicationEvent
+    public static partial class CommunicationEventExtensions
     {
-        public DateTime? Start
+        public static DateTime? AppsCommunicationEventGetStart(this CommunicationEvent communicationEvent)
         {
-            get
+            if (communicationEvent.ExistActualStart)
             {
-                if (this.ExistActualStart)
-                {
-                    return ActualStart;
-                }
+                return communicationEvent.ActualStart;
+            }
 
-                if (ExistScheduledStart)
-                {
-                    return ScheduledStart;
-                }
+            if (communicationEvent.ExistScheduledStart)
+            {
+                return communicationEvent.ScheduledStart;
+            }
 
-                return null;
+            return null;
+        }
+        
+        public static void AppsCommunicationEventDerive(this CommunicationEvent communicationEvent, IDerivation derivation)
+        {
+            if (!communicationEvent.ExistOwner)
+            {
+                communicationEvent.Owner = (Person)new Users(communicationEvent.Strategy.Session).GetCurrentAuthenticatedUser();
+            }
+
+            if (communicationEvent.ExistCurrentObjectState && !communicationEvent.CurrentObjectState.Equals(communicationEvent.PreviousObjectState))
+            {
+                var currentStatus = new CommunicationEventStatusBuilder(communicationEvent.Strategy.Session).WithCommunicationEventObjectState(communicationEvent.CurrentObjectState).Build();
+                communicationEvent.AddCommunicationEventStatus(currentStatus);
+                communicationEvent.CurrentCommunicationEventStatus = currentStatus;
+            }
+
+            if (communicationEvent.ExistCurrentObjectState)
+            {
+                communicationEvent.CurrentObjectState.Process(communicationEvent);
+            }
+
+            if (!communicationEvent.ExistInitialScheduledStartDate && communicationEvent.ExistScheduledStart)
+            {
+                communicationEvent.InitialScheduledStartDate = communicationEvent.ScheduledStart;
             }
         }
 
-        ObjectState Transitional.PreviousObjectState
+        public static void AppsCommunicationEventClose(this CommunicationEvent communicationEvent)
         {
-            get
-            {
-                return this.PreviousObjectState;
-            }
+            communicationEvent.CurrentObjectState = new CommunicationEventObjectStates(communicationEvent.Strategy.Session).Closed;
         }
 
-        ObjectState Transitional.CurrentObjectState
+        public static void AppsCommunicationEventReopen(this CommunicationEvent communicationEvent)
         {
-            get
-            {
-                return this.CurrentObjectState;
-            }
+            communicationEvent.CurrentObjectState = new CommunicationEventObjectStates(communicationEvent.Strategy.Session).Opened;
         }
 
-        protected abstract void AppsDeriveDisplayName();
-
-        protected abstract void AppsDeriveSearchDataCharacterBoundaryText();
-
-        protected abstract void AppsDeriveSearchDataWordBoundaryText();
-
-        protected abstract string AppsComposeDisplayName();
-
-        protected abstract string AppsComposeSearchDataCharacterBoundaryText();
-
-        protected abstract string AppsComposeSearchDataWordBoundaryText();
-
-        protected override void AppsDerive(IDerivation derivation)
+        public static void AppsCommunicationEventCancel(this CommunicationEvent communicationEvent)
         {
-            base.AppsDerive(derivation);
-
-            if (!this.ExistOwner)
-            {
-                this.Owner = (Person)new Users(this.Session).GetCurrentAuthenticatedUser();
-            }
-
-            if (this.ExistCurrentObjectState && !this.CurrentObjectState.Equals(this.PreviousObjectState))
-            {
-                var currentStatus = new CommunicationEventStatusBuilder(this.Session).WithCommunicationEventObjectState(this.CurrentObjectState).Build();
-                this.AddCommunicationEventStatus(currentStatus);
-                this.CurrentCommunicationEventStatus = currentStatus;
-            }
-
-            if (this.ExistCurrentObjectState)
-            {
-                this.CurrentObjectState.Process(this);
-            }
-
-            if (!this.ExistInitialScheduledStartDate && this.ExistScheduledStart)
-            {
-                this.InitialScheduledStartDate = this.ScheduledStart;
-            }
-        }
-
-        private void AppsClose()
-        {
-            this.CurrentObjectState = new CommunicationEventObjectStates(Session).Closed;
-        }
-
-        private void AppsReopen()
-        {
-            this.CurrentObjectState = new CommunicationEventObjectStates(Session).Opened;
-        }
-
-        private void AppsCancel()
-        {
-            this.CurrentObjectState = new CommunicationEventObjectStates(Session).Cancelled;
+            communicationEvent.CurrentObjectState = new CommunicationEventObjectStates(communicationEvent.Strategy.Session).Cancelled;
         }
     }
 }

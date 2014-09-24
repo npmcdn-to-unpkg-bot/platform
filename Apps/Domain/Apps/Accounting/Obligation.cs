@@ -39,7 +39,7 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             derivation.Log.AssertExists(this, Obligations.Meta.EntryDate);
             derivation.Log.AssertExists(this, Obligations.Meta.TransactionDate);

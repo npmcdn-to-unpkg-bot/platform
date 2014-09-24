@@ -38,7 +38,7 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             this.DisplayName = string.Format(
                 "{0} deployed with product offering {1}",

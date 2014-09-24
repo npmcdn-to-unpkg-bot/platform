@@ -42,7 +42,7 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             derivation.Log.AssertExists(this, Engagements.Meta.Description);
             derivation.Log.AssertExists(this, Engagements.Meta.BillToParty);

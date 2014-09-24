@@ -20,51 +20,24 @@
 
 namespace Allors.Domain
 {
-    public partial class Requirement
+    public partial interface Requirement
     {
-        public void Cancel()
-        {
-            this.AppsCancel();
-        }
+        void Cancel();
 
-        public void Hold()
-        {
-            this.AppsHold();
-        }
+        void Hold();
 
-        public void Close()
-        {
-            this.AppsClose();
-        }
+        void Close();
 
-        public void DeriveDisplayName()
-        {
-            this.AppsDeriveDisplayName();
-        }
+        void DeriveDisplayName();
 
-        public void DeriveSearchDataCharacterBoundaryText()
-        {
-            this.AppsDeriveSearchDataCharacterBoundaryText();
-        }
+        void DeriveSearchDataCharacterBoundaryText();
 
-        public void DeriveSearchDataWordBoundaryText()
-        {
-            this.AppsDeriveSearchDataWordBoundaryText();
-        }
+        void DeriveSearchDataWordBoundaryText();
 
-        public string ComposeDisplayName()
-        {
-            return this.AppsComposeDisplayName();
-        }
+        string ComposeDisplayName();
 
-        public virtual string ComposeSearchDataCharacterBoundaryText()
-        {
-            return this.AppsComposeSearchDataCharacterBoundaryText();
-        }
+        string ComposeSearchDataCharacterBoundaryText();
 
-        public virtual string ComposeSearchDataWordBoundaryText()
-        {
-            return this.AppsComposeSearchDataWordBoundaryText();
-        }
+        string ComposeSearchDataWordBoundaryText();
     }
 }

@@ -20,51 +20,31 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
-    public partial class Budget
+    public static partial class BudgetExtensions
     {
-        ObjectState Transitional.PreviousObjectState
+        public static void AppsBudgetDerive(this Budget budget, IDerivation derivation)
         {
-            get
+            if (budget.ExistCurrentObjectState && !budget.CurrentObjectState.Equals(budget.PreviousObjectState))
             {
-                return this.PreviousObjectState;
+                var currentStatus = new BudgetStatusBuilder(budget.Strategy.Session).WithBudgetObjectState(budget.CurrentObjectState).Build();
+                budget.AddBudgetStatus(currentStatus);
+                budget.CurrentBudgetStatus = currentStatus;
+            }
+
+            if (budget.ExistCurrentObjectState)
+            {
+                budget.CurrentObjectState.Process(budget);
             }
         }
 
-        ObjectState Transitional.CurrentObjectState
+        public static void AppsBudgetClose(this Budget budget)
         {
-            get
-            {
-                return this.CurrentObjectState;
-            }
+            budget.CurrentObjectState = new BudgetObjectStates(budget.Strategy.Session).Closed;
         }
 
-        protected override void AppsDerive(IDerivation derivation)
+        public static void AppsBudgetReopen(this Budget budget)
         {
-            base.AppsDerive(derivation);
-
-            if (this.ExistCurrentObjectState && !this.CurrentObjectState.Equals(this.PreviousObjectState))
-            {
-                var currentStatus = new BudgetStatusBuilder(this.Session).WithBudgetObjectState(this.CurrentObjectState).Build();
-                this.AddBudgetStatus(currentStatus);
-                this.CurrentBudgetStatus = currentStatus;
-            }
-
-            if (this.ExistCurrentObjectState)
-            {
-                this.CurrentObjectState.Process(this);
-            }
-        }
-
-        private void AppsClose()
-        {
-            this.CurrentObjectState = new BudgetObjectStates(Session).Closed;
-        }
-
-        private void AppsReopen()
-        {
-            this.CurrentObjectState = new BudgetObjectStates(Session).Opened;
+            budget.CurrentObjectState = new BudgetObjectStates(budget.Strategy.Session).Opened;
         }
     }
 }

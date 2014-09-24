@@ -20,9 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-    
-
     public partial class ResourceRequirement
     {
         protected override void AppsOnPostBuild(IObjectBuilder objectBuilder)
@@ -42,8 +39,6 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
-
             derivation.Log.AssertExists(this, ResourceRequirements.Meta.Description);
 
             this.DeriveDisplayName();
@@ -53,34 +48,48 @@ namespace Allors.Domain
             this.PreviousObjectState = this.CurrentObjectState;
         }
 
-        protected override void AppsDeriveDisplayName()
+        protected void AppsDeriveDisplayName()
         {
             this.DisplayName = this.ComposeDisplayName();
         }
 
-        protected override void AppsDeriveSearchDataCharacterBoundaryText()
+        protected void AppsDeriveSearchDataCharacterBoundaryText()
         {
             this.SearchData.CharacterBoundaryText = this.AppsComposeSearchDataCharacterBoundaryText();
         }
 
-        protected override void AppsDeriveSearchDataWordBoundaryText()
+        protected void AppsDeriveSearchDataWordBoundaryText()
         {
             this.SearchData.WordBoundaryText = this.AppsComposeSearchDataWordBoundaryText();
         }
 
-        protected override string AppsComposeDisplayName()
+        protected string AppsComposeDisplayName()
         {
             return this.Description;
         }
 
-        protected override string AppsComposeSearchDataCharacterBoundaryText()
+        protected string AppsComposeSearchDataCharacterBoundaryText()
         {
             return this.Description;
         }
 
-        protected override string AppsComposeSearchDataWordBoundaryText()
+        protected string AppsComposeSearchDataWordBoundaryText()
         {
             return null;
+        }
+
+        ObjectState Transitional.PreviousObjectState {
+            get
+            {
+                return this.PreviousObjectState;
+            }
+        }
+
+        ObjectState Transitional.CurrentObjectState {
+            get
+            {
+                return this.CurrentObjectState;
+            }
         }
     }
 }

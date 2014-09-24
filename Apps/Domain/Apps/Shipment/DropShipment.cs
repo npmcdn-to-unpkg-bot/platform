@@ -60,7 +60,7 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             derivation.Log.AssertExists(this, Shipments.Meta.ShipmentNumber);
             derivation.Log.AssertExists(this, Shipments.Meta.ShipToParty);
@@ -104,7 +104,7 @@ namespace Allors.Domain
 
         private void AppsDeriveCurrentObjectState(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             if (this.ExistCurrentObjectState && !this.CurrentObjectState.Equals(this.PreviousObjectState))
             {

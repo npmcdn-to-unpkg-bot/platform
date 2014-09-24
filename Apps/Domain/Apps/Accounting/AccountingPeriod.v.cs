@@ -26,5 +26,15 @@ namespace Allors.Domain
         {
             return this.AppsAddNextMonth();
         }
+
+        public void Close()
+        {
+            this.AppsBudgetClose();
+        }
+
+        public void Reopen()
+        {
+            this.AppsBudgetReopen();
+        }
     }
 }

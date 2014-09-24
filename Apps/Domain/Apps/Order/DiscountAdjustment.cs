@@ -62,7 +62,7 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             derivation.Log.AssertAtLeastOne(this, DiscountAdjustments.Meta.Amount, DiscountAdjustments.Meta.Percentage);
             derivation.Log.AssertExistsAtMostOne(this, DiscountAdjustments.Meta.Amount, DiscountAdjustments.Meta.Percentage);

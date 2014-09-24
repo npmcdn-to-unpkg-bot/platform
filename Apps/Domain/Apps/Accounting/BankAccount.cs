@@ -56,7 +56,7 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             derivation.Log.AssertExists(this, BankAccounts.Meta.Iban);
             derivation.Log.AssertIsUnique(this, BankAccounts.Meta.Iban);

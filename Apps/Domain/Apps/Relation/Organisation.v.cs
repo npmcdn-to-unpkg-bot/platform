@@ -21,11 +21,56 @@
 namespace Allors.Domain
 {
     using System;
+    using System.Collections.Generic;
 
     using Allors.Domain;
 
     public partial class Organisation
     {
+        public IFormatProvider AppsGetCurrencyFormat
+        {
+            get
+            {
+                return this.AppsPartyGetCurrencyFormat();
+            }
+        }
+
+        public List<SalesOrder> PreOrders
+        {
+            get
+            {
+                return this.AppsPartyGetPreOrders();
+            }
+        }
+
+        public IEnumerable<CustomerShipment> PendingCustomerShipments
+        {
+            get
+            {
+                return this.AppsPartyGetPendingCustomerShipments();
+            }
+        }
+
+        public void DeriveCurrentSalesReps(IDerivation derivation)
+        {
+            this.AppsPartyDeriveCurrentSalesReps(derivation);
+        }
+
+        public void DeriveOpenOrderAmount()
+        {
+            this.AppsPartyDeriveOpenOrderAmount();
+        }
+
+        public void DeriveRevenue()
+        {
+            this.AppsPartyDeriveRevenue();
+        }
+
+        public CustomerShipment GetPendingCustomerShipmentForStore(PostalAddress address, Store store, ShipmentMethod shipmentMethod)
+        {
+            return this.AppsPartyGetPendingCustomerShipmentForStore(address, store, shipmentMethod);
+        }
+
         public bool IsActiveCustomer(DateTime? date)
         {
             return this.AppsIsActiveCustomer(date);
@@ -51,17 +96,17 @@ namespace Allors.Domain
             this.AppsDeriveCurrentContacts(derivation);
         }
 
-        public override string DeriveDisplayName()
+        public string DeriveDisplayName()
         {
             return this.AppsDeriveDisplayName();
         }
 
-        public override string DeriveSearchDataCharacterBoundaryText()
+        public string DeriveSearchDataCharacterBoundaryText()
         {
             return this.AppsDeriveSearchDataCharacterBoundaryText();
         }
 
-        public override string DeriveSearchDataWordBoundaryText()
+        public string DeriveSearchDataWordBoundaryText()
         {
             return this.AppsDeriveSearchDataWordBoundaryText();
         }

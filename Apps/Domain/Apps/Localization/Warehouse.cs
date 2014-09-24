@@ -20,15 +20,8 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-    
-
     public partial class Warehouse
     {
-        public void Locate()
-        {
-        }
-
         protected override void AppsOnPostBuild(IObjectBuilder builder)
         {
             base.AppsOnPostBuild(builder);
@@ -41,7 +34,7 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             derivation.Log.AssertExists(this, Warehouses.Meta.Name);
             derivation.Log.AssertExists(this, Warehouses.Meta.Owner);

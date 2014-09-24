@@ -192,11 +192,6 @@ namespace Allors.Domain
 			}
 		}
 
-		virtual public void RemoveProduct()
-		{
-			Strategy.RemoveCompositeRole(Meta.Product);
-		}
-
 
 		virtual public RevenueQuantityBreak RevenueQuantityBreak
 		{ 
@@ -269,12 +264,6 @@ namespace Allors.Domain
 				return Strategy.ExistCompositeRole(Meta.ProductFeature);
 			}
 		}
-
-		virtual public void RemoveProductFeature()
-		{
-			Strategy.RemoveCompositeRole(Meta.ProductFeature);
-		}
-
 
 		virtual public AgreementPricingProgram AgreementPricingProgram
 		{ 

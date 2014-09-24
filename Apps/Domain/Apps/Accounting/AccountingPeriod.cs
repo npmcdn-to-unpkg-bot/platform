@@ -22,9 +22,6 @@ namespace Allors.Domain
 {
     using System.Text;
 
-    using Allors.Domain;
-    
-
     public partial class AccountingPeriod
     {
         protected override void AppsOnPostBuild(IObjectBuilder objectBuilder)
@@ -39,7 +36,7 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             derivation.Log.AssertExists(this, AccountingPeriods.Meta.PeriodNumber);
             derivation.Log.AssertExists(this, AccountingPeriods.Meta.TimeFrequency);
@@ -136,6 +133,22 @@ namespace Allors.Domain
 
             this.InternalOrganisationWhereAccountingPeriod.AddAccountingPeriod(newSemester);
             return newSemester;
+        }
+
+        ObjectState Transitional.PreviousObjectState 
+        {
+            get
+            {
+                return this.PreviousObjectState;
+            }
+        }
+
+        ObjectState Transitional.CurrentObjectState 
+        {
+            get
+            {
+                return this.CurrentObjectState;
+            }
         }
     }
 }

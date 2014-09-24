@@ -22,32 +22,32 @@ namespace Allors.Domain
 {
     public partial class Territory
     {
-        public override void DeriveDisplayName()
+        public void DeriveDisplayName()
         {
             this.AppsDeriveDisplayName();
         }
 
-        public override void DeriveSearchDataCharacterBoundaryText()
+        public void DeriveSearchDataCharacterBoundaryText()
         {
             this.AppsDeriveSearchDataCharacterBoundaryText();
         }
 
-        public override void DeriveSearchDataWordBoundaryText()
+        public void DeriveSearchDataWordBoundaryText()
         {
             this.AppsDeriveSearchDataWordBoundaryText();
         }
 
-        public override string ComposeDisplayName()
+        public string ComposeDisplayName()
         {
             return this.AppsComposeDisplayName();
         }
 
-        public override string ComposeSearchDataCharacterBoundaryText()
+        public string ComposeSearchDataCharacterBoundaryText()
         {
             return this.AppsComposeSearchDataCharacterBoundaryText();
         }
 
-        public override string ComposeSearchDataWordBoundaryText()
+        public string ComposeSearchDataWordBoundaryText()
         {
             return this.AppsComposeSearchDataWordBoundaryText();
         }

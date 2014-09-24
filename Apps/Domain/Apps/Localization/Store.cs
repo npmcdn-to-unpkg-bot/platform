@@ -36,7 +36,7 @@ namespace Allors.Domain
             if (repositoryStore.Owner.InvoiceSequence.Equals(new Allors.Domain.InvoiceSequences(this.Session).EnforcedSequence))
             {
                 repositoryStore.NextSalesInvoiceNumber = repositoryStore.ExistNextSalesInvoiceNumber ? repositoryStore.NextSalesInvoiceNumber : 1;
-                salesInvoiceNumber = repositoryStore.NextSalesInvoiceNumber;
+                salesInvoiceNumber = repositoryStore.NextSalesInvoiceNumber.Value;
                 repositoryStore.NextSalesInvoiceNumber++;
             }
             else
@@ -68,15 +68,16 @@ namespace Allors.Domain
             return string.Format(repositoryStore.SalesInvoiceNumberPrefix, salesInvoiceNumber);
         }
 
-        public override void RemovePaymentMethod(PaymentMethod value)
-        {
-            if (value.Equals(this.DefaultPaymentMethod))
-            {
-                this.RemoveDefaultPaymentMethod();
-            }
+        // TODO: Cascading delete
+        //public override void RemovePaymentMethod(PaymentMethod value)
+        //{
+        //    if (value.Equals(this.DefaultPaymentMethod))
+        //    {
+        //        this.RemoveDefaultPaymentMethod();
+        //    }
 
-            base.RemovePaymentMethod(value);
-        }
+        //    base.RemovePaymentMethod(value);
+        //}
 
         public string DeriveNextShipmentNumber()
         {
@@ -199,7 +200,7 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             if (!this.ExistOwner)
             {

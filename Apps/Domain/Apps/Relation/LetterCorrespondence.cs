@@ -22,9 +22,6 @@ namespace Allors.Domain
 {
     using System.Text;
 
-    using Allors.Domain;
-    
-    
     public partial class LetterCorrespondence
     {
         protected override void AppsOnPostBuild(IObjectBuilder objectBuilder)
@@ -44,7 +41,7 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             derivation.Log.AssertExists(this, LetterCorrespondences.Meta.Description);
 
@@ -57,22 +54,22 @@ namespace Allors.Domain
             this.AppsDeriveInvolvedPersons();
         }
 
-        protected override void AppsDeriveDisplayName()
+        protected void AppsDeriveDisplayName()
         {
             this.DisplayName = this.ComposeDisplayName();
         }
 
-        protected override void AppsDeriveSearchDataCharacterBoundaryText()
+        protected void AppsDeriveSearchDataCharacterBoundaryText()
         {
             this.SearchData.CharacterBoundaryText = this.AppsComposeSearchDataCharacterBoundaryText();
         }
 
-        protected override void AppsDeriveSearchDataWordBoundaryText()
+        protected void AppsDeriveSearchDataWordBoundaryText()
         {
             this.SearchData.WordBoundaryText = this.AppsComposeSearchDataWordBoundaryText();
         }
 
-        protected override string AppsComposeDisplayName()
+        protected string AppsComposeDisplayName()
         {
             var searchText = new StringBuilder();
             searchText.Append("Letter ");
@@ -93,7 +90,7 @@ namespace Allors.Domain
             return searchText.ToString();
         }
 
-        protected override string AppsComposeSearchDataCharacterBoundaryText()
+        protected string AppsComposeSearchDataCharacterBoundaryText()
         {
             var text = string.Format(
                 "{0} {1}",
@@ -108,7 +105,7 @@ namespace Allors.Domain
             return text;
         }
 
-        protected override string AppsComposeSearchDataWordBoundaryText()
+        protected string AppsComposeSearchDataWordBoundaryText()
         {
             var text = this.ExistOriginator ? this.Originator.DeriveSearchDataWordBoundaryText() : null;
 
@@ -126,6 +123,22 @@ namespace Allors.Domain
             this.InvolvedParties = this.Receivers;
             this.AddInvolvedParty(this.Owner);
             this.AddInvolvedParty(this.Originator);
+        }
+
+        ObjectState Transitional.PreviousObjectState
+        {
+            get
+            {
+                return this.PreviousObjectState;
+            }
+        }
+
+        ObjectState Transitional.CurrentObjectState
+        {
+            get
+            {
+                return this.CurrentObjectState;
+            }
         }
     }
 }

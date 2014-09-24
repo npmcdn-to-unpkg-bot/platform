@@ -38,7 +38,7 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             derivation.Log.AssertExists(this, PickListStatuses.Meta.StartDateTime);
             derivation.Log.AssertExists(this, PickListStatuses.Meta.PickListObjectState);

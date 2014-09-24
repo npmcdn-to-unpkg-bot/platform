@@ -24,17 +24,21 @@ namespace Allors.Domain
     using System.Collections.Generic;
     using System.Text;
 
-    using Allors.Domain;
-
-    using PostalAddress = Allors.Domain.PostalAddress;
-
     public partial class Person
     {
-        public override bool IsPerson
+        public bool IsPerson
         {
             get
             {
                 return true;
+            }
+        }
+
+        public bool IsOrganisation
+        {
+            get
+            {
+                return false;
             }
         }
 
@@ -153,7 +157,7 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             this.BillingAddress = null;
             this.BillingInquiriesFax = null;

@@ -47,7 +47,7 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             derivation.Log.AssertExists(this, SalesRepRelationships.Meta.Customer);
             derivation.Log.AssertExists(this, SalesRepRelationships.Meta.InternalOrganisation);

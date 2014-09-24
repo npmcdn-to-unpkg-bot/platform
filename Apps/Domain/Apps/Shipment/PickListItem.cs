@@ -30,7 +30,7 @@ namespace Allors.Domain
     {
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             derivation.Log.AssertExists(this, PickListItems.Meta.InventoryItem);
             derivation.Log.AssertExists(this, PickListItems.Meta.RequestedQuantity);

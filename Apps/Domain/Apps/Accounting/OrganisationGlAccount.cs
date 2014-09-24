@@ -97,7 +97,7 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             derivation.Log.AssertExists(this, OrganisationGlAccounts.Meta.GeneralLedgerAccount);
             derivation.Log.AssertExists(this, OrganisationGlAccounts.Meta.InternalOrganisation);

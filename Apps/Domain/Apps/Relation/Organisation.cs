@@ -22,10 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    
-
-    using Allors.Domain;
-
     public partial class Organisation
     {
         protected override void AppsOnPostBuild(IObjectBuilder objectBuilder)
@@ -52,7 +48,7 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             if (!this.ExistOwnerSecurityToken)
             {
@@ -354,6 +350,20 @@ namespace Allors.Domain
         private string AppsDeriveSearchDataWordBoundaryText()
         {
             return null;
+        }
+
+        public bool IsPerson {
+            get
+            {
+                return false;
+            }
+        }
+
+        public bool IsOrganisation {
+            get
+            {
+                return true;
+            }
         }
     }
 }

@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class PerformanceSpecification
     {
         protected override void AppsOnPostBuild(IObjectBuilder objectBuilder)
@@ -36,7 +34,7 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             derivation.Log.AssertExists(this, PerformanceSpecifications.Meta.Description);
 
@@ -45,5 +43,20 @@ namespace Allors.Domain
             this.PreviousObjectState = this.CurrentObjectState;
         }
 
+        ObjectState Transitional.PreviousObjectState
+        {
+            get
+            {
+                return this.PreviousObjectState;
+            }
+        }
+
+        ObjectState Transitional.CurrentObjectState
+        {
+            get
+            {
+                return this.CurrentObjectState;
+            }
+        }
     }
 }

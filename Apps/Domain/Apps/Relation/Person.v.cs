@@ -20,6 +20,9 @@
 
 namespace Allors.Domain
 {
+    using System;
+    using System.Collections.Generic;
+
     public partial class Person
     {
         public override void Delete()
@@ -35,24 +38,60 @@ namespace Allors.Domain
             this.AppsDeriveCommission();
         }
 
-        public override string DeriveSearchDataCharacterBoundaryText()
+        public void DeriveCurrentSalesReps(IDerivation derivation)
+        {
+            this.AppsPartyDeriveCurrentSalesReps(derivation);
+        }
+
+        public void DeriveOpenOrderAmount()
+        {
+            this.AppsPartyDeriveOpenOrderAmount();
+        }
+
+        public void DeriveRevenue()
+        {
+            this.AppsPartyDeriveRevenue();
+        }
+
+        public string DeriveSearchDataCharacterBoundaryText()
         {
             return this.AppsDeriveSearchDataCharacterBoundaryText();
         }
 
-        public override string DeriveSearchDataWordBoundaryText()
+        public string DeriveSearchDataWordBoundaryText()
         {
             return this.AppsDeriveSearchDataWordBoundaryText();
         }
 
-        public override string DeriveDisplayName()
+        public IFormatProvider AppsGetCurrencyFormat {
+            get
+            {
+                return this.AppsPartyGetCurrencyFormat();
+            }
+        }
+
+        public List<SalesOrder> PreOrders {
+            get
+            {
+                return this.AppsPartyGetPreOrders();
+            }
+        }
+
+        public IEnumerable<CustomerShipment> PendingCustomerShipments {
+            get
+            {
+                return this.AppsPartyGetPendingCustomerShipments();
+            }
+        }
+
+        public string DeriveDisplayName()
         {
             return this.AppsDeriveDisplayName();
         }
 
-        private string DeriveUserId()
+        public CustomerShipment GetPendingCustomerShipmentForStore(PostalAddress address, Store store, ShipmentMethod shipmentMethod)
         {
-            return this.CoreDeriveUserId();
+            return this.AppsPartyGetPendingCustomerShipmentForStore(address, store, shipmentMethod);
         }
 
         private void DeriveCurrentEmployment(IDerivation derivation)

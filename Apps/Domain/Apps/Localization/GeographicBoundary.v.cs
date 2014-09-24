@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="GeographicBoundary.cs" company="Allors bvba">
+// <copyright file="GeographicBoundary.v.cs" company="Allors bvba">
 //   Copyright 2002-2012 Allors bvba.
 // 
 // Dual Licensed under
@@ -20,18 +20,18 @@
 
 namespace Allors.Domain
 {
-    public abstract partial class GeographicBoundary
+    public partial interface GeographicBoundary
     {
-        public abstract void DeriveDisplayName();
+        void DeriveDisplayName();
 
-        public abstract void DeriveSearchDataCharacterBoundaryText();
+        void DeriveSearchDataCharacterBoundaryText();
 
-        public abstract void DeriveSearchDataWordBoundaryText();
+        void DeriveSearchDataWordBoundaryText();
 
-        public abstract string ComposeDisplayName();
+        string ComposeDisplayName();
 
-        public abstract string ComposeSearchDataCharacterBoundaryText();
+        string ComposeSearchDataCharacterBoundaryText();
 
-        public abstract string ComposeSearchDataWordBoundaryText();
+        string ComposeSearchDataWordBoundaryText();
     }
 }

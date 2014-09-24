@@ -22,12 +22,6 @@ namespace Allors.Domain
 {
     using System.Text;
 
-    using Allors.Domain;
-    
-    
-
-    
-
     public partial class FaceToFaceCommunication
     {
         protected override void AppsOnPostBuild(IObjectBuilder objectBuilder)
@@ -47,7 +41,7 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             derivation.Log.AssertExists(this, FaxCommunications.Meta.Description);
 
@@ -95,22 +89,22 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsDeriveDisplayName()
+        protected void AppsDeriveDisplayName()
         {
             this.DisplayName = this.ComposeDisplayName();
         }
 
-        protected override void AppsDeriveSearchDataCharacterBoundaryText()
+        protected void AppsDeriveSearchDataCharacterBoundaryText()
         {
             this.SearchData.CharacterBoundaryText = this.AppsComposeSearchDataCharacterBoundaryText();
         }
 
-        protected override void AppsDeriveSearchDataWordBoundaryText()
+        protected void AppsDeriveSearchDataWordBoundaryText()
         {
             this.SearchData.WordBoundaryText = this.AppsComposeSearchDataWordBoundaryText();
         }
 
-        protected override string AppsComposeDisplayName()
+        protected string AppsComposeDisplayName()
         {
             var text = new StringBuilder();
             text.Append("Face to Face meeting between");
@@ -124,7 +118,7 @@ namespace Allors.Domain
             return text.ToString();
         }
 
-        protected override string AppsComposeSearchDataCharacterBoundaryText()
+        protected string AppsComposeSearchDataCharacterBoundaryText()
         {
             var text = this.Description;
 
@@ -136,7 +130,7 @@ namespace Allors.Domain
             return text;
         }
 
-        protected override string AppsComposeSearchDataWordBoundaryText()
+        protected string AppsComposeSearchDataWordBoundaryText()
         {
             var text = string.Empty;
 
@@ -146,6 +140,22 @@ namespace Allors.Domain
             }
 
             return text;
+        }
+        
+        ObjectState Transitional.PreviousObjectState
+        {
+            get
+            {
+                return this.PreviousObjectState;
+            }
+        }
+
+        ObjectState Transitional.CurrentObjectState
+        {
+            get
+            {
+                return this.CurrentObjectState;
+            }
         }
     }
 }

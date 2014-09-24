@@ -20,11 +20,8 @@
 
 namespace Allors.Domain
 {
-    public partial class PartSpecification
+    public partial interface PartSpecification
     {
-        public void Approve()
-        {
-            this.AppsApprove();
-        }
+        void Approve();
     }
 }

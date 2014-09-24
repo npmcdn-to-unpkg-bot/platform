@@ -61,6 +61,78 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AccountNumber must be unique within Chart of accounts.
+        /// </summary>
+        public static string AccountNumberUniqueWithinChartOfAccounts {
+            get {
+                return ResourceManager.GetString("AccountNumberUniqueWithinChartOfAccounts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to active deployment registered at {0}.
+        /// </summary>
+        public static string ActiveDeploymentRegistered {
+            get {
+                return ResourceManager.GetString("ActiveDeploymentRegistered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to order quantity break not allowed for a base price.
+        /// </summary>
+        public static string BasePriceOrderQuantityBreakNotAllowed {
+            get {
+                return ResourceManager.GetString("BasePriceOrderQuantityBreakNotAllowed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to order value break not allowed for a base price.
+        /// </summary>
+        public static string BasePriceOrderValueNotAllowed {
+            get {
+                return ResourceManager.GetString("BasePriceOrderValueNotAllowed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to revenue quantity break not allowed for a base price.
+        /// </summary>
+        public static string BasePriceRevenueQuantityBreakNotAllowed {
+            get {
+                return ResourceManager.GetString("BasePriceRevenueQuantityBreakNotAllowed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to revenue value break not allowed for a base price.
+        /// </summary>
+        public static string BasePriceRevenueValueBreakNotAllowed {
+            get {
+                return ResourceManager.GetString("BasePriceRevenueValueBreakNotAllowed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cost center not in list of allowed cost centers.
+        /// </summary>
+        public static string CostCenterNotAllowed {
+            get {
+                return ResourceManager.GetString("CostCenterNotAllowed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cost unit not in list of allowed cost units.
+        /// </summary>
+        public static string CostUnitNotAllowed {
+            get {
+                return ResourceManager.GetString("CostUnitNotAllowed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} at least one.
         /// </summary>
         public static string DerivationErrorAtLeastOne {
@@ -124,6 +196,168 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to General Ledger Account must be balance sheet account.
+        /// </summary>
+        public static string GeneralLedgerAccountNotBalanceAccount {
+            get {
+                return ResourceManager.GetString("GeneralLedgerAccountNotBalanceAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to General Ledger Account not applicable.
+        /// </summary>
+        public static string GeneralLedgerAccountNotNeutral {
+            get {
+                return ResourceManager.GetString("GeneralLedgerAccountNotNeutral", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The check digits of IBAN are wrong.
+        /// </summary>
+        public static string IbanCheckDigitsError {
+            get {
+                return ResourceManager.GetString("IbanCheckDigitsError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The IBAN contains illegal characters.
+        /// </summary>
+        public static string IbanIllegalCharacters {
+            get {
+                return ResourceManager.GetString("IbanIllegalCharacters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The IBAN is incorrect.
+        /// </summary>
+        public static string IbanIncorrect {
+            get {
+                return ResourceManager.GetString("IbanIncorrect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IBAN length is wrong.
+        /// </summary>
+        public static string IbanLengthFailure {
+            get {
+                return ResourceManager.GetString("IbanLengthFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The country specific structure of IBAN is wrong.
+        /// </summary>
+        public static string IbanStructuralFailure {
+            get {
+                return ResourceManager.GetString("IbanStructuralFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IBAN validation rules for this country are not known.
+        /// </summary>
+        public static string IbanValidationUnavailable {
+            get {
+                return ResourceManager.GetString("IbanValidationUnavailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account is not a cost center account.
+        /// </summary>
+        public static string NotACostCenterAccount {
+            get {
+                return ResourceManager.GetString("NotACostCenterAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account is not a cost unit account.
+        /// </summary>
+        public static string NotACostUnitAccount {
+            get {
+                return ResourceManager.GetString("NotACostUnitAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not a valid BIC code.
+        /// </summary>
+        public static string NotAValidBic {
+            get {
+                return ResourceManager.GetString("NotAValidBic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to maximum package content.
+        /// </summary>
+        public static string PackagingContentMaximum {
+            get {
+                return ResourceManager.GetString("PackagingContentMaximum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Party choosen is not a customer for this internal organisation.
+        /// </summary>
+        public static string PartyIsNotACustomer {
+            get {
+                return ResourceManager.GetString("PartyIsNotACustomer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Party choosen is not a supplier for this internal organisation.
+        /// </summary>
+        public static string PartyIsNotASupplier {
+            get {
+                return ResourceManager.GetString("PartyIsNotASupplier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to amount can not be larger then invoice amount.
+        /// </summary>
+        public static string PaymentApplicationNotLargerThanInvoiceAmount {
+            get {
+                return ResourceManager.GetString("PaymentApplicationNotLargerThanInvoiceAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to amount can not be larger then invoice item amount.
+        /// </summary>
+        public static string PaymentApplicationNotLargerThanInvoiceItemAmount {
+            get {
+                return ResourceManager.GetString("PaymentApplicationNotLargerThanInvoiceItemAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to amount can not be larger then payment amount.
+        /// </summary>
+        public static string PaymentApplicationNotLargerThanPaymentAmount {
+            get {
+                return ResourceManager.GetString("PaymentApplicationNotLargerThanPaymentAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payment method not listed for owner of this store.
+        /// </summary>
+        public static string PaymentMethodNotAllowedForInternalOrganisation {
+            get {
+                return ResourceManager.GetString("PaymentMethodNotAllowedForInternalOrganisation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to only execute is allowed for method type.
         /// </summary>
         public static string PermissionOnlyExecuteForMethodType {
@@ -147,6 +381,51 @@ namespace Resources {
         public static string PermissionOnlyWriteForRoleType {
             get {
                 return ResourceManager.GetString("PermissionOnlyWriteForRoleType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to quantity more than allowed.
+        /// </summary>
+        public static string PickListItemQuantityMoreThanAllowed {
+            get {
+                return ResourceManager.GetString("PickListItemQuantityMoreThanAllowed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to package only allowed at lowest level.
+        /// </summary>
+        public static string ProductCategoryPackageOnlyAtLowestLevel {
+            get {
+                return ResourceManager.GetString("ProductCategoryPackageOnlyAtLowestLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to amount is to small.
+        /// </summary>
+        public static string ReceiptAmountIsToSmall {
+            get {
+                return ResourceManager.GetString("ReceiptAmountIsToSmall", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to quantity less than already shipped.
+        /// </summary>
+        public static string SalesOrderItemLessThanAlreadeyShipped {
+            get {
+                return ResourceManager.GetString("SalesOrderItemLessThanAlreadeyShipped", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to product change not allowed, user cancel orderitem instead.
+        /// </summary>
+        public static string SalesOrderItemProductChangeNotAllowed {
+            get {
+                return ResourceManager.GetString("SalesOrderItemProductChangeNotAllowed", resourceCulture);
             }
         }
     }

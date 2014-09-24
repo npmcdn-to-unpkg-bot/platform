@@ -26,7 +26,7 @@ namespace Allors.Domain
     {
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             derivation.Log.AssertExists(this, DistributionChannelRelationships.Meta.Distributor);
             derivation.Log.AssertExists(this, DistributionChannelRelationships.Meta.InternalOrganisation);

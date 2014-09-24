@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class InternalOrganisations
     {
         protected override void AppsSecure(Security config)

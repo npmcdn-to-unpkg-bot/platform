@@ -52,7 +52,7 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             if (!this.ExistDescription && this.ExistBankAccount)
             {

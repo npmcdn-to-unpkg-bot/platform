@@ -22,10 +22,6 @@ namespace Allors.Domain
 {
     using System.Text;
 
-    using Allors.Domain;
-    
-    
-
     public partial class PhoneCommunication
     {
         protected override void AppsOnPostBuild(IObjectBuilder objectBuilder)
@@ -45,7 +41,7 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             derivation.Log.AssertExists(this, PhoneCommunications.Meta.Description);
 
@@ -58,22 +54,22 @@ namespace Allors.Domain
             this.AppsDeriveInvolvedPersons(derivation);
         }
 
-        protected override void AppsDeriveDisplayName()
+        protected void AppsDeriveDisplayName()
         {
             this.DisplayName = this.ComposeDisplayName();
         }
 
-        protected override void AppsDeriveSearchDataCharacterBoundaryText()
+        protected void AppsDeriveSearchDataCharacterBoundaryText()
         {
             this.SearchData.CharacterBoundaryText = this.AppsComposeSearchDataCharacterBoundaryText();
         }
 
-        protected override void AppsDeriveSearchDataWordBoundaryText()
+        protected void AppsDeriveSearchDataWordBoundaryText()
         {
             this.SearchData.WordBoundaryText = this.AppsComposeSearchDataWordBoundaryText();
         }
 
-        protected override string AppsComposeDisplayName()
+        protected string AppsComposeDisplayName()
         {
             var searchText = new StringBuilder();
             searchText.Append("Phone conversation ");
@@ -94,7 +90,7 @@ namespace Allors.Domain
             return searchText.ToString();
         }
 
-        protected override string AppsComposeSearchDataCharacterBoundaryText()
+        protected string AppsComposeSearchDataCharacterBoundaryText()
         {
             return string.Format(
                 "{0} {1}",
@@ -102,7 +98,7 @@ namespace Allors.Domain
                 this.ExistCaller ? this.Caller.DeriveSearchDataCharacterBoundaryText() : null);
         }
 
-        protected override string AppsComposeSearchDataWordBoundaryText()
+        protected string AppsComposeSearchDataWordBoundaryText()
         {
             var text = this.ExistCaller ? this.Caller.DeriveSearchDataWordBoundaryText() : null;
 
@@ -120,6 +116,22 @@ namespace Allors.Domain
             this.InvolvedParties = (Extent)this.Receivers;
             this.AddInvolvedParty(this.Owner);
             this.AddInvolvedParty(this.Caller);
+        }
+
+        ObjectState Transitional.PreviousObjectState
+        {
+            get
+            {
+                return this.PreviousObjectState;
+            }
+        }
+
+        ObjectState Transitional.CurrentObjectState
+        {
+            get
+            {
+                return this.CurrentObjectState;
+            }
         }
     }
 }

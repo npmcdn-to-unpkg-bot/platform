@@ -20,16 +20,10 @@
 
 namespace Allors.Domain
 {
-    public partial class Budget
+    public partial interface Budget
     {
-        public void Close()
-        {
-            this.AppsClose();
-        }
+        void Close();
 
-        public void Reopen()
-        {
-            this.AppsReopen();
-        }
+        void Reopen();
     }
 }

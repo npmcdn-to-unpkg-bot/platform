@@ -22,6 +22,21 @@ namespace Allors.Domain
 {
     public partial class AutomatedAgent
     {
+        public bool IsPerson 
+        {
+            get
+            {
+                return false;
+            }
+        }
+
+        public bool IsOrganisation {
+            get
+            {
+                return false;
+            }
+        }
+
         protected override void AppsOnPostBuild(IObjectBuilder objectBuilder)
         {
             base.AppsOnPostBuild(objectBuilder);
@@ -34,7 +49,7 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             derivation.Log.AssertExists(this, AutomatedAgents.Meta.Description);
 

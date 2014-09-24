@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System.Text;
 
-    using Allors.Domain;
-
     using Resources;
 
     public partial class BasePrice
@@ -36,16 +34,14 @@ namespace Allors.Domain
             base.Delete();
         }
 
-        public override void RemoveProduct()
+        public void RemoveProduct()
         {
             this.Product.RemoveFromBasePrices(this);
-            base.RemoveProduct();
         }
 
-        public override void RemoveProductFeature()
+        public void RemoveProductFeature()
         {
             this.ProductFeature.RemoveFromBasePrices(this);
-            base.RemoveProductFeature();
         }
 
         protected override void AppsOnPostBuild(IObjectBuilder objectBuilder)
@@ -65,7 +61,7 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             derivation.Log.AssertExists(this, BasePrices.Meta.SpecifiedFor);
             derivation.Log.AssertExists(this, BasePrices.Meta.Price);

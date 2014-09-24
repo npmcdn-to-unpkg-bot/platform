@@ -38,10 +38,6 @@ namespace Allors.Domain
             }
         }
 
-        public void Locate()
-        {
-        }
-
         protected override void AppsOnPostBuild(IObjectBuilder builder)
         {
             base.AppsOnPostBuild(builder);
@@ -64,7 +60,7 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             derivation.Log.AssertExists(this, PostalAddresses.Meta.Address1);
             derivation.Log.AssertAtLeastOne(this, PostalAddresses.Meta.GeographicBoundary, PostalAddresses.Meta.PostalBoundary);

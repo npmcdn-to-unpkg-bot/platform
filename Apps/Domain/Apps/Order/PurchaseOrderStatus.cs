@@ -36,7 +36,7 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            base.AppsDerive(derivation);
+            
 
             derivation.Log.AssertExists(this, PurchaseOrderStatuses.Meta.StartDateTime);
             derivation.Log.AssertExists(this, PurchaseOrderStatuses.Meta.PurchaseOrderObjectState);
