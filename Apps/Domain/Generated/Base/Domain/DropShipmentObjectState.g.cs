@@ -8,7 +8,9 @@ namespace Allors.Domain
 		internal override void OnBuild(global::Allors.IObjectBuilder objectBuilder)
 		{
 			var builder = (DropShipmentObjectStateBuilder)objectBuilder;
-			
+
+			this.Name = builder.Name;
+					
 
 			if(builder.UniqueId.HasValue)
 			{
@@ -43,6 +45,16 @@ namespace Allors.Domain
 		        }		
 
 				
+				public global::System.String Name {get; set;}
+
+				/// <exclude/>
+				public DropShipmentObjectStateBuilder WithName(global::System.String value)
+		        {
+				    if(this.Name!=null){throw new global::System.ArgumentException("One multicplicity");}
+		            this.Name = value;
+		            return this;
+		        }	
+
 				public global::System.Guid? UniqueId {get; set;}
 
 				/// <exclude/>

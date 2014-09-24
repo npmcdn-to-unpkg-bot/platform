@@ -22,10 +22,16 @@ namespace Allors.Domain
 {
     using System.Drawing.Imaging;
 
-    using Allors.Domain;
-
     public partial class MediaType
     {
+        public bool IsImage
+        {
+            get
+            {
+                return this.ExistName && this.Name.StartsWith("image");
+            }
+        }
+
         public ImageFormat ImageFormat
         {
             get

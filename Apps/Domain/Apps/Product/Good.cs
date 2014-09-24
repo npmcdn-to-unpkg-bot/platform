@@ -105,15 +105,16 @@ namespace Allors.Domain
 
         public void DeriveThumbnail()
         {
-            if (this.ExistPhoto && this.Photo.ExistMediaType && this.Photo.MediaType.IsImage && this.Photo.ExistContent)
+            if (this.ExistPhoto && this.Photo.ExistMediaType && this.Photo.MediaType.IsImage && this.Photo.ExistMediaContent)
             {
                 if (!this.ExistThumbnail)
                 {
                     this.Thumbnail = new MediaBuilder(this.Session).Build();
                 }
 
-                var thumbNail = Media.CreateThumbnail(this.Photo.Bitmap, ThumbnailWidth);
-                this.Thumbnail.Load(thumbNail, ImageFormat.Jpeg);
+                // TODO: Resize
+                //var thumbNail = Media.CreateThumbnail(this.Photo.Bitmap, ThumbnailWidth);
+                //this.Thumbnail.Load(thumbNail, ImageFormat.Jpeg);
             }
             else
             {

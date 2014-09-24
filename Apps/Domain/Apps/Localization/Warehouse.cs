@@ -42,8 +42,6 @@ namespace Allors.Domain
             this.DeriveDisplayName();
             this.DeriveSearchDataCharacterBoundaryText();
             this.DeriveSearchDataWordBoundaryText();
-            
-            this.Locate();
         }
 
         private void AppsDeriveDisplayName()

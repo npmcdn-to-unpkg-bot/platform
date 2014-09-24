@@ -75,36 +75,26 @@ namespace Allors.Domain
             new CaseObjectStateBuilder(Session)
                 .WithUniqueId(ClosedId)
                 .WithName("Closed")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Closed").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Gesloten").WithLocale(dutchLocale).Build())
                 .Build();
 
             new CaseObjectStateBuilder(Session)
                 .WithUniqueId(CompletedId)
                 .WithName("Completed")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Completed").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Voltooid").WithLocale(dutchLocale).Build())
                 .Build();
 
             new CaseObjectStateBuilder(Session)
                 .WithUniqueId(InProgressId)
                 .WithName("In Progress")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("In Progress").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("In behandeling").WithLocale(dutchLocale).Build())
                 .Build();
 
             new CaseObjectStateBuilder(Session)
                 .WithUniqueId(OpenedId)
                 .WithName("Open")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Open").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Open").WithLocale(dutchLocale).Build())
                 .Build();
 
             new CaseObjectStateBuilder(Session)
                 .WithUniqueId(ReadId)
                 .WithName("Read")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Read").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Gelezen").WithLocale(dutchLocale).Build())
                 .Build();
         }
 

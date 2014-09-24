@@ -99,7 +99,7 @@ namespace Allors.Domain
             return newMonth;
         }
 
-        private AccountingPeriod BaseAddNextQuarter(AccountingPeriod previousPeriod)
+        private AccountingPeriod AppsAddNextQuarter(AccountingPeriod previousPeriod)
         {
             var newQuarter = new AccountingPeriodBuilder(this.Session)
                 .WithPeriodNumber(previousPeriod.PeriodNumber + 1)
@@ -121,7 +121,7 @@ namespace Allors.Domain
             return newQuarter;
         }
 
-        private AccountingPeriod BaseAddNextSemester(AccountingPeriod previousPeriod)
+        private AccountingPeriod AppsAddNextSemester(AccountingPeriod previousPeriod)
         {
             var newSemester = new AccountingPeriodBuilder(this.Session)
                 .WithPeriodNumber(previousPeriod.PeriodNumber + 1)

@@ -47,14 +47,14 @@ namespace Allors.Domain
 
             repositoryOrganisation.NextSubAccountNumber = repositoryOrganisation.ExistNextSubAccountNumber ? repositoryOrganisation.NextSubAccountNumber : 19;
             var subAccountNumber = repositoryOrganisation.NextSubAccountNumber;
-            repositoryOrganisation.NextSubAccountNumber = this.NextValidElevenTestNumer(subAccountNumber.Value + 1);
+            repositoryOrganisation.NextSubAccountNumber = this.NextValidElevenTestNumer(subAccountNumber + 1);
 
             if (repositorySession.Database.ToString().IndexOf("Memory") < 0)
             {
                 repositorySession.Commit();
             }
 
-            return subAccountNumber.Value;
+            return subAccountNumber;
         }
 
         public string DeriveNextPurchaseInvoiceNumber()
@@ -277,7 +277,7 @@ namespace Allors.Domain
 
             foreach (PartyContactMechanism partyContactMechanism in this.PartyContactMechanisms)
             {
-                if (partyContactMechanism.UseAsDefault.Value)
+                if (partyContactMechanism.UseAsDefault)
                 {
                     if (partyContactMechanism.ContactPurpose.IsBillingAddress)
                     {
@@ -443,7 +443,7 @@ namespace Allors.Domain
 
         private void AppsStartNewFiscalYear()
         {
-            if (this.ExistActualAccountingPeriod && this.ActualAccountingPeriod.Active.Value)
+            if (this.ExistActualAccountingPeriod && this.ActualAccountingPeriod.Active)
             {
                 return;
             }
@@ -451,10 +451,10 @@ namespace Allors.Domain
             int year = DateTime.Now.Year;
             if (this.ExistActualAccountingPeriod)
             {
-                year = this.ActualAccountingPeriod.FromDate.Value.Date.Year + 1;
+                year = this.ActualAccountingPeriod.FromDate.Date.Year + 1;
             }
 
-            var fromDate = new DateTime(year, this.FiscalYearStartMonth.Value, this.FiscalYearStartDay.Value).Date;
+            var fromDate = new DateTime(year, this.FiscalYearStartMonth, this.FiscalYearStartDay).Date;
 
             var yearPeriod = new AccountingPeriodBuilder(this.Session)
                 .WithPeriodNumber(1)

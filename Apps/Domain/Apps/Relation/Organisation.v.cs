@@ -72,17 +72,17 @@ namespace Allors.Domain
             return this.AppsPartyGetPendingCustomerShipmentForStore(address, store, shipmentMethod);
         }
 
-        public bool IsActiveCustomer(DateTime? date)
+        public bool IsActiveCustomer(DateTime date)
         {
             return this.AppsIsActiveCustomer(date);
         }
 
-        public bool IsActiveSupplier(DateTime? date)
+        public bool IsActiveSupplier(DateTime date)
         {
             return this.AppsIsActiveSupplier(date);
         }
 
-        public bool IsActivePartner(DateTime? date)
+        public bool IsActivePartner(DateTime date)
         {
             return this.AppsIsActivePartner(date);
         }

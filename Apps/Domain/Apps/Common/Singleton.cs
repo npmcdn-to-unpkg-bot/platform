@@ -110,80 +110,70 @@ namespace Allors.Domain
             SalesChannelRevenues.AppsDeriveRevenues(this.Session);
             this.Session.Commit();
 
-            revenues = this.Session.Extent<InternalOrganisationRevenue>();
-            foreach (InternalOrganisationRevenue revenue in revenues)
+            foreach (InternalOrganisationRevenue revenue in this.Session.Extent<InternalOrganisationRevenue>())
             {
                 revenue.Derive(derivation);
             }
 
             this.Session.Commit();
 
-            revenues = this.Session.Extent<PackageRevenue>();
-            foreach (PackageRevenue revenue in revenues)
+            foreach (PackageRevenue revenue in this.Session.Extent<PackageRevenue>())
             {
                 revenue.Derive(derivation);
             }
 
             this.Session.Commit();
 
-            revenues = this.Session.Extent<ProductCategoryRevenue>();
-            foreach (ProductCategoryRevenue revenue in revenues)
+            foreach (ProductCategoryRevenue revenue in this.Session.Extent<ProductCategoryRevenue>())
             {
                 revenue.Derive(derivation);
             }
 
             this.Session.Commit();
 
-            revenues = this.Session.Extent<ProductRevenue>();
-            foreach (ProductRevenue revenue in revenues)
+            foreach (ProductRevenue revenue in this.Session.Extent<ProductRevenue>())
             {
                 revenue.Derive(derivation);
             }
 
             this.Session.Commit();
 
-            revenues = this.Session.Extent<SalesRepPartyProductCategoryRevenue>();
-            foreach (SalesRepPartyProductCategoryRevenue revenue in revenues)
+            foreach (SalesRepPartyProductCategoryRevenue revenue in this.Session.Extent<SalesRepPartyProductCategoryRevenue>())
             {
                 revenue.Derive(derivation);
             }
 
             this.Session.Commit();
 
-            revenues = this.Session.Extent<SalesRepPartyRevenue>();
-            foreach (SalesRepPartyRevenue revenue in revenues)
+            foreach (SalesRepPartyRevenue revenue in this.Session.Extent<SalesRepPartyRevenue>())
             {
                 revenue.Derive(derivation);
             }
 
             this.Session.Commit();
 
-            revenues = this.Session.Extent<SalesRepProductCategoryRevenue>();
-            foreach (SalesRepProductCategoryRevenue revenue in revenues)
+            foreach (SalesRepProductCategoryRevenue revenue in this.Session.Extent<SalesRepProductCategoryRevenue>())
             {
                 revenue.Derive(derivation);
             }
 
             this.Session.Commit();
 
-            revenues = this.Session.Extent<SalesRepRevenue>();
-            foreach (SalesRepRevenue revenue in revenues)
+            foreach (SalesRepRevenue revenue in this.Session.Extent<SalesRepRevenue>())
             {
                 revenue.Derive(derivation);
             }
 
             this.Session.Commit();
 
-            revenues = this.Session.Extent<StoreRevenue>();
-            foreach (StoreRevenue revenue in revenues)
+            foreach (StoreRevenue revenue in this.Session.Extent<StoreRevenue>())
             {
                 revenue.Derive(derivation);
             }
 
             this.Session.Commit();
 
-            revenues = this.Session.Extent<SalesChannelRevenue>();
-            foreach (SalesChannelRevenue revenue in revenues)
+            foreach (SalesChannelRevenue revenue in this.Session.Extent<SalesChannelRevenue>())
             {
                 revenue.Derive(derivation);
             }
@@ -222,24 +212,21 @@ namespace Allors.Domain
 
             this.Session.Commit();
 
-            revenues = this.Session.Extent<PartyProductCategoryRevenueHistory>();
-            foreach (PartyProductCategoryRevenueHistory revenue in revenues)
+            foreach (PartyProductCategoryRevenueHistory revenue in this.Session.Extent<PartyProductCategoryRevenueHistory>())
             {
                 revenue.Derive(derivation);
             }
 
             this.Session.Commit();
 
-            revenues = this.Session.Extent<PartyProductRevenueHistory>();
-            foreach (PartyProductRevenueHistory revenue in revenues)
+            foreach (PartyProductRevenueHistory revenue in this.Session.Extent<PartyProductRevenueHistory>())
             {
                 revenue.Derive(derivation);
             }
 
             this.Session.Commit();
 
-            revenues = this.Session.Extent<PartyRevenueHistory>();
-            foreach (PartyRevenueHistory revenue in revenues)
+            foreach (PartyRevenueHistory revenue in this.Session.Extent<PartyRevenueHistory>())
             {
                 revenue.Derive(derivation);
             }
@@ -261,56 +248,49 @@ namespace Allors.Domain
             StoreRevenueHistories.AppsDeriveHistory(this.Session);
             this.Session.Commit();
 
-            var revenueHistories = this.Session.Extent<InternalOrganisationRevenueHistory>();
-            foreach (InternalOrganisationRevenueHistory revenueHistory in revenueHistories)
+            foreach (InternalOrganisationRevenueHistory revenueHistory in this.Session.Extent<InternalOrganisationRevenueHistory>())
             {
                 revenueHistory.Derive(derivation);
             }
 
             this.Session.Commit();
 
-            revenueHistories = this.Session.Extent<PackageRevenueHistory>();
-            foreach (PackageRevenueHistory revenueHistory in revenueHistories)
+            foreach (PackageRevenueHistory revenueHistory in this.Session.Extent<PackageRevenueHistory>())
             {
                 revenueHistory.Derive(derivation);
             }
 
             this.Session.Commit();
 
-            revenueHistories = this.Session.Extent<ProductCategoryRevenueHistory>();
-            foreach (ProductCategoryRevenueHistory revenueHistory in revenueHistories)
+            foreach (ProductCategoryRevenueHistory revenueHistory in this.Session.Extent<ProductCategoryRevenueHistory>())
             {
                 revenueHistory.Derive(derivation);
             }
 
             this.Session.Commit();
 
-            revenueHistories = this.Session.Extent<ProductRevenueHistory>();
-            foreach (ProductRevenueHistory revenueHistory in revenueHistories)
+            foreach (ProductRevenueHistory revenueHistory in this.Session.Extent<ProductRevenueHistory>())
             {
                 revenueHistory.Derive(derivation);
             }
 
             this.Session.Commit();
 
-            revenueHistories = this.Session.Extent<SalesChannelRevenueHistory>();
-            foreach (SalesChannelRevenueHistory revenueHistory in revenueHistories)
+            foreach (SalesChannelRevenueHistory revenueHistory in this.Session.Extent<SalesChannelRevenueHistory>())
             {
                 revenueHistory.Derive(derivation);
             }
 
             this.Session.Commit();
 
-            revenueHistories = this.Session.Extent<SalesRepRevenueHistory>();
-            foreach (SalesRepRevenueHistory revenueHistory in revenueHistories)
+            foreach (SalesRepRevenueHistory revenueHistory in this.Session.Extent<SalesRepRevenueHistory>())
             {
                 revenueHistory.Derive(derivation);
             }
 
             this.Session.Commit();
 
-            revenueHistories = this.Session.Extent<StoreRevenueHistory>();
-            foreach (StoreRevenueHistory revenueHistory in revenueHistories)
+            foreach (StoreRevenueHistory revenueHistory in this.Session.Extent<StoreRevenueHistory>())
             {
                 revenueHistory.Derive(derivation);
             }

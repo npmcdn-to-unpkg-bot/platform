@@ -45,7 +45,7 @@ namespace Allors.Domain
             }
         }
 
-        public IFormatProvider CurrencyFormat
+        public NumberFormatInfo CurrencyFormat
         {
             get
             {
@@ -149,8 +149,7 @@ namespace Allors.Domain
         {
             get
             {
-                decimal? nothing = 0;
-                return DecimalExtensions.AsCurrencyString(nothing, this.CurrencyFormat);
+                return DecimalExtensions.AsCurrencyString(0, this.CurrencyFormat);
             }
         }
 

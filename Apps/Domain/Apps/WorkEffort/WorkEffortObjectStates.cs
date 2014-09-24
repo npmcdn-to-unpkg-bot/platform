@@ -83,43 +83,31 @@ namespace Allors.Domain
             new WorkEffortObjectStateBuilder(Session)
                 .WithUniqueId(CreatedId)
                 .WithName("Created")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Created").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Gemaakt").WithLocale(dutchLocale).Build())
                 .Build();
 
             new WorkEffortObjectStateBuilder(Session)
                 .WithUniqueId(ConfirmedId)
                 .WithName("Confirmed")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Confirmed").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Bevestigd").WithLocale(dutchLocale).Build())
                 .Build();
 
             new WorkEffortObjectStateBuilder(Session)
                 .WithUniqueId(FulffilledId)
                 .WithName("Fullfilled")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Fullfilled").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Verricht").WithLocale(dutchLocale).Build())
                 .Build();
 
             new WorkEffortObjectStateBuilder(Session)
                 .WithUniqueId(InProgressId)
                 .WithName("In Progress")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("In Progress").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Lopend").WithLocale(dutchLocale).Build())
                 .Build();
 
             new WorkEffortObjectStateBuilder(Session)
                 .WithUniqueId(FinishedId)
                 .WithName("Finished")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Finished").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Afgewerkt").WithLocale(dutchLocale).Build())
                 .Build();
 
             new WorkEffortObjectStateBuilder(Session)
                 .WithUniqueId(CancelledId)
                 .WithName("Cancelled")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Cancelled").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Genannuleerd").WithLocale(dutchLocale).Build())
                 .Build();
         }
 

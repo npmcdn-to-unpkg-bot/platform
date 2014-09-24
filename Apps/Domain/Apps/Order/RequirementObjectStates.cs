@@ -89,50 +89,36 @@ namespace Allors.Domain
             new RequirementObjectStateBuilder(Session)
                 .WithUniqueId(ActiveId)
                 .WithName("Active")
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Active").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Actief").WithLocale(dutchLocale).Build())
                 .Build();
 
             new RequirementObjectStateBuilder(Session)
                 .WithUniqueId(InactiveId)
                 .WithName("Inactive")
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Inactive").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Inactief").WithLocale(dutchLocale).Build())
                 .Build();
 
             new RequirementObjectStateBuilder(Session)
                 .WithUniqueId(OnHoldId)
                 .WithName("On Hold")
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("On Hold").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("In wacht").WithLocale(dutchLocale).Build())
                 .Build();
 
             new RequirementObjectStateBuilder(Session)
                 .WithUniqueId(CancelledId)
                 .WithName("Cancelled")
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Cancelled").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Geannuleerd").WithLocale(dutchLocale).Build())
                 .Build();
 
             new RequirementObjectStateBuilder(Session)
                 .WithUniqueId(ClosedId)
                 .WithName("Closed")
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Closed").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Gesloten").WithLocale(dutchLocale).Build())
                 .Build();
 
             new RequirementObjectStateBuilder(Session)
                 .WithUniqueId(PendingApprovalFromClientId)
                 .WithName("Pending Approval From Client")
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Pending Approval From Client").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Wacht op goedkeuring klant").WithLocale(dutchLocale).Build())
                 .Build();
 
             new RequirementObjectStateBuilder(Session)
                 .WithUniqueId(FullfilledByOtherEnterpriseId)
                 .WithName("Fullfilled By Other Enterprise")
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Fullfilled By Other Enterprise").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Uitgevoerd door ander bedrijf").WithLocale(dutchLocale).Build())
                 .Build();
         }
 

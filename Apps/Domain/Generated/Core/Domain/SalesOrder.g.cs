@@ -2616,5 +2616,83 @@ namespace Allors.Domain
 			}
 		} 
 
+		public global::Allors.Meta.MethodType SalesRepNames 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.SalesOrderSalesRepNames;
+			}
+		} 
+		public global::Allors.Meta.MethodType CancelOrder 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.SalesOrderCancelOrder;
+			}
+		} 
+		public global::Allors.Meta.MethodType Confirm 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.SalesOrderConfirm;
+			}
+		} 
+		public global::Allors.Meta.MethodType Reject 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.SalesOrderReject;
+			}
+		} 
+		public global::Allors.Meta.MethodType Hold 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.SalesOrderHold;
+			}
+		} 
+		public global::Allors.Meta.MethodType Approve 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.SalesOrderApprove;
+			}
+		} 
+		public global::Allors.Meta.MethodType Continue 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.SalesOrderContinue;
+			}
+		} 
+		public global::Allors.Meta.MethodType Complete 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.SalesOrderComplete;
+			}
+		} 
+		public global::Allors.Meta.MethodType Finish 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.SalesOrderFinish;
+			}
+		} 
+		public global::Allors.Meta.MethodType Ship 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.SalesOrderShip;
+			}
+		} 
+		public global::Allors.Meta.MethodType TryShip 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.SalesOrderTryShip;
+			}
+		} 
+
 	}
 }

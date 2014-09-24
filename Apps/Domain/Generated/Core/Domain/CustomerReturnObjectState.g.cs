@@ -53,6 +53,32 @@ namespace Allors.Domain
 
 
 
+		virtual public global::System.String Name 
+		{
+			get
+			{
+				return (global::System.String) Strategy.GetUnitRole(Meta.Name);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.Name, value);
+			}
+		}
+
+		virtual public bool ExistName{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.Name);
+			}
+		}
+
+		virtual public void RemoveName()
+		{
+			Strategy.RemoveUnitRole(Meta.Name);
+		}
+
+
+
 		virtual public global::System.Guid UniqueId 
 		{
 			get
@@ -176,6 +202,13 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.RoleTypes.ObjectStateDeniedPermission;
+			}
+		} 
+		public global::Allors.Meta.RoleType Name 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.ObjectStateName;
 			}
 		} 
 		public global::Allors.Meta.RoleType UniqueId 

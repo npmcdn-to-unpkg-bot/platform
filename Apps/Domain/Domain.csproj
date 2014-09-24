@@ -206,6 +206,9 @@
     <Compile Include="..\..\Base\Domain\Base\Drawing\BitmapExtensions.cs">
       <Link>Base\Drawing\BitmapExtensions.cs</Link>
     </Compile>
+    <Compile Include="..\..\Base\Domain\Base\IObjectBase.cs">
+      <Link>Base\IObjectBase.cs</Link>
+    </Compile>
     <Compile Include="..\..\Base\Domain\Base\IObjectBuilder.cs">
       <Link>Base\IObjectBuilder.cs</Link>
     </Compile>
@@ -379,6 +382,9 @@
     </Compile>
     <Compile Include="..\..\Base\Domain\Base\Setup.cs">
       <Link>Base\Setup.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Domain\Core\IObjectBase.cs">
+      <Link>Core\IObjectBase.cs</Link>
     </Compile>
     <Compile Include="..\..\Core\Domain\Core\ObjectBase.cs">
       <Link>Core\ObjectBase.cs</Link>
@@ -730,6 +736,7 @@
     <Compile Include="Apps\Localization\Warehouse.cs" />
     <Compile Include="Apps\Localization\Warehouse.v.cs" />
     <Compile Include="Apps\Localization\Warehouses.cs" />
+    <Compile Include="Apps\IObjectBase.cs" />
     <Compile Include="Apps\ObjectBase.cs" />
     <Compile Include="Apps\ObjectsBase.cs" />
     <Compile Include="Apps\Order\CustomEngagementItem.cs" />

@@ -83,43 +83,31 @@ namespace Allors.Domain
             new PurchaseInvoiceObjectStateBuilder(Session)
                 .WithUniqueId(InProcessId)
                 .WithName("In Process")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("In Process").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("In voorbereiding").WithLocale(dutchLocale).Build())
                 .Build();
 
             new PurchaseInvoiceObjectStateBuilder(Session)
                 .WithUniqueId(ApprovedId)
                 .WithName("Approved")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Approved").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Goedgekeurd").WithLocale(dutchLocale).Build())
                 .Build();
 
             new PurchaseInvoiceObjectStateBuilder(Session)
                 .WithUniqueId(ReceivedId)
                 .WithName("Received")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Received").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Ontvangen").WithLocale(dutchLocale).Build())
                 .Build();
 
             new PurchaseInvoiceObjectStateBuilder(Session)
                 .WithUniqueId(ReadyForPostingId)
                 .WithName("Ready For Posting")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Ready For Posting").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Gereed ter verzending").WithLocale(dutchLocale).Build())
                 .Build();
 
             new PurchaseInvoiceObjectStateBuilder(Session)
                 .WithUniqueId(PaidId)
                 .WithName("Paid")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Paid").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Betaald").WithLocale(dutchLocale).Build())
                 .Build();
 
             new PurchaseInvoiceObjectStateBuilder(Session)
                 .WithUniqueId(CancelledId)
                 .WithName("Cancelled")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Cancelled").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Geannuleerd").WithLocale(dutchLocale).Build())
                 .Build();
         }
 

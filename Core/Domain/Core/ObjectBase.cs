@@ -23,9 +23,9 @@ namespace Allors
     using System.Diagnostics;
 
     /// <summary>
-    /// A base implementation for a static <see cref="IObject"/>.
+    /// A domain inheritable class for <see cref="IObject"/>.
     /// </summary>
-    public abstract partial class ObjectBase : IObject
+    public abstract partial class ObjectBase : IObjectBase
     {
         /// <summary>
         /// The <see cref="Strategy"/>.

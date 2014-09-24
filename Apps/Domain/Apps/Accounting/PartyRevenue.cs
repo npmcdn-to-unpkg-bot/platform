@@ -76,8 +76,6 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            
-
             this.PartyName = this.Party.DeriveDisplayName();
 
             this.AppsDeriveDisplayName(derivation);

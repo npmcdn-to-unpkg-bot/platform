@@ -77,36 +77,26 @@ namespace Allors.Domain
             new SerializedInventoryItemObjectStateBuilder(Session)
                 .WithUniqueId(GoodId)
                 .WithName("Good")
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Good").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Goed").WithLocale(dutchLocale).Build())
                 .Build();
 
             new SerializedInventoryItemObjectStateBuilder(Session)
                 .WithUniqueId(BeingReparedId)
                 .WithName("Being Repared")
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Being Repared").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("In herstelling").WithLocale(dutchLocale).Build())
                 .Build();
 
             new SerializedInventoryItemObjectStateBuilder(Session)
                 .WithUniqueId(SlightlyDamagedId)
                 .WithName("Slightly Damaged")
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Slightly Damaged").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Licht beschadigd").WithLocale(dutchLocale).Build())
                 .Build();
 
             new SerializedInventoryItemObjectStateBuilder(Session)
                 .WithUniqueId(DefectiveId)
                 .WithName("Defective")
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Defective").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Defect").WithLocale(dutchLocale).Build())
                 .Build();
 
             new SerializedInventoryItemObjectStateBuilder(Session)
                 .WithUniqueId(ScrapId)
                 .WithName("Scrap")
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Scrap").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Schroot").WithLocale(dutchLocale).Build())
                 .Build();
         }
 

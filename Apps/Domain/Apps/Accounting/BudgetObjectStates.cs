@@ -59,22 +59,16 @@ namespace Allors.Domain
             new BudgetObjectStateBuilder(Session)
                 .WithUniqueId(OpenedId)
                 .WithName("Open")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Open").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Open").WithLocale(dutchLocale).Build())
                 .Build();
 
             new BudgetObjectStateBuilder(Session)
                 .WithUniqueId(ClosedId)
                 .WithName("Closed")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Closed").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Afgewerkt").WithLocale(dutchLocale).Build())
                 .Build();
 
             new BudgetObjectStateBuilder(Session)
                 .WithUniqueId(ClosedId)
                 .WithName("Reopened")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Reopened").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Heropend").WithLocale(dutchLocale).Build())
                 .Build();
         }
 

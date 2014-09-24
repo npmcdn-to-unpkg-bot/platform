@@ -4706,7 +4706,7 @@ namespace Allors.Meta
 
 
             // MehodTypes
-            //AccountingTransactionDetail
+            // AccountingTransactionDetail
             new MethodTypeBuilder(domain, new Guid("FDC41297-5A41-4bbb-994C-2CF48DF0BEF9")).WithObjectType(AccountingTransactionDetail).WithName("DebitCreditString").Build();
             
             // Budget
@@ -4720,9 +4720,9 @@ namespace Allors.Meta
             
             // SalesInvoice
             new MethodTypeBuilder(domain, new Guid("EA954A7D-3988-4F6F-BDB0-F32CE4214025")).WithObjectType(SalesInvoice).WithName("SalesRepNames").Build();
-            new MethodTypeBuilder(domain, new Guid("AA63BFF7-1120-43a7-B869-31DB78235445")).WithObjectType(PurchaseInvoice).WithName("CancelInvoice").Build();
-            new MethodTypeBuilder(domain, new Guid("F43B75AA-589D-49cf-825D-050C4C6DE37D")).WithObjectType(PurchaseInvoice).WithName("Send").Build();
-            new MethodTypeBuilder(domain, new Guid("CC1DA3B5-9CC4-4dc7-91E7-8D2E894397CC")).WithObjectType(PurchaseInvoice).WithName("WriteOff").Build();
+            new MethodTypeBuilder(domain, new Guid("AA63BFF7-1120-43a7-B869-31DB78235445")).WithObjectType(SalesInvoice).WithName("CancelInvoice").Build();
+            new MethodTypeBuilder(domain, new Guid("F43B75AA-589D-49cf-825D-050C4C6DE37D")).WithObjectType(SalesInvoice).WithName("Send").Build();
+            new MethodTypeBuilder(domain, new Guid("CC1DA3B5-9CC4-4dc7-91E7-8D2E894397CC")).WithObjectType(SalesInvoice).WithName("WriteOff").Build();
 
             // PurchaseOrder
             new MethodTypeBuilder(domain, new Guid("C36C6737-8994-4fef-A6CE-B15276105725")).WithObjectType(PurchaseOrder).WithName("Cancel").Build();
@@ -4747,17 +4747,17 @@ namespace Allors.Meta
             new MethodTypeBuilder(domain, new Guid("7017F137-7964-4782-951D-0B5DA0186D60")).WithObjectType(Requirement).WithName("Ready").Build();
 
             // SalesOrder
-            new MethodTypeBuilder(domain, new Guid("599BB88F-C056-4505-A1DD-319599A9E1C6")).WithObjectType(Requirement).WithName("SalesRepNames").Build();
-            new MethodTypeBuilder(domain, new Guid("B114C3A1-E86F-4c3f-933A-626E1772EAFF")).WithObjectType(Requirement).WithName("CancelOrder").Build();
-            new MethodTypeBuilder(domain, new Guid("800D5136-D3AB-4d4e-9855-76158CFB0725")).WithObjectType(Requirement).WithName("Confirm").Build();
-            new MethodTypeBuilder(domain, new Guid("93E31115-ADB1-4ced-928D-FEBFDFF64678")).WithObjectType(Requirement).WithName("Reject").Build();
-            new MethodTypeBuilder(domain, new Guid("9CF5BE09-FE52-44d7-AEDD-CC5D464FAC4D")).WithObjectType(Requirement).WithName("Hold").Build();
-            new MethodTypeBuilder(domain, new Guid("8D04D69F-4517-4bc5-B8F2-8A8F31C3C342")).WithObjectType(Requirement).WithName("Approve").Build();
-            new MethodTypeBuilder(domain, new Guid("81B794DC-FE47-4fc5-AB16-9C39082E5271")).WithObjectType(Requirement).WithName("Continue").Build();
-            new MethodTypeBuilder(domain, new Guid("4F108BA5-002E-4D98-96C1-60FEBA23EC39")).WithObjectType(Requirement).WithName("Complete").Build();
-            new MethodTypeBuilder(domain, new Guid("904C6666-B2D3-44D2-8D90-5E1E6B73CF88")).WithObjectType(Requirement).WithName("Finish").Build();
-            new MethodTypeBuilder(domain, new Guid("4117EFBF-6B7F-4107-A835-1368DB5C9E3C")).WithObjectType(Requirement).WithName("Ship").Build();
-            new MethodTypeBuilder(domain, new Guid("7E6089B9-689F-4ABF-939D-25D7E5CFE0CF")).WithObjectType(Requirement).WithName("TryShip").Build();
+            new MethodTypeBuilder(domain, new Guid("599BB88F-C056-4505-A1DD-319599A9E1C6")).WithObjectType(SalesOrder).WithName("SalesRepNames").Build();
+            new MethodTypeBuilder(domain, new Guid("B114C3A1-E86F-4c3f-933A-626E1772EAFF")).WithObjectType(SalesOrder).WithName("CancelOrder").Build();
+            new MethodTypeBuilder(domain, new Guid("800D5136-D3AB-4d4e-9855-76158CFB0725")).WithObjectType(SalesOrder).WithName("Confirm").Build();
+            new MethodTypeBuilder(domain, new Guid("93E31115-ADB1-4ced-928D-FEBFDFF64678")).WithObjectType(SalesOrder).WithName("Reject").Build();
+            new MethodTypeBuilder(domain, new Guid("9CF5BE09-FE52-44d7-AEDD-CC5D464FAC4D")).WithObjectType(SalesOrder).WithName("Hold").Build();
+            new MethodTypeBuilder(domain, new Guid("8D04D69F-4517-4bc5-B8F2-8A8F31C3C342")).WithObjectType(SalesOrder).WithName("Approve").Build();
+            new MethodTypeBuilder(domain, new Guid("81B794DC-FE47-4fc5-AB16-9C39082E5271")).WithObjectType(SalesOrder).WithName("Continue").Build();
+            new MethodTypeBuilder(domain, new Guid("4F108BA5-002E-4D98-96C1-60FEBA23EC39")).WithObjectType(SalesOrder).WithName("Complete").Build();
+            new MethodTypeBuilder(domain, new Guid("904C6666-B2D3-44D2-8D90-5E1E6B73CF88")).WithObjectType(SalesOrder).WithName("Finish").Build();
+            new MethodTypeBuilder(domain, new Guid("4117EFBF-6B7F-4107-A835-1368DB5C9E3C")).WithObjectType(SalesOrder).WithName("Ship").Build();
+            new MethodTypeBuilder(domain, new Guid("7E6089B9-689F-4ABF-939D-25D7E5CFE0CF")).WithObjectType(SalesOrder).WithName("TryShip").Build();
 
             // SalesOrderItem
             new MethodTypeBuilder(domain, new Guid("F96B6DAF-D344-4916-97BA-F1A4DCDE46A4")).WithObjectType(SalesOrderItem).WithName("Delete").Build();

@@ -2410,6 +2410,27 @@ namespace Allors.Domain
 				return global::Allors.Meta.MethodTypes.SalesInvoiceSalesRepNames;
 			}
 		} 
+		public global::Allors.Meta.MethodType CancelInvoice 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.SalesInvoiceCancelInvoice;
+			}
+		} 
+		public global::Allors.Meta.MethodType Send 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.SalesInvoiceSend;
+			}
+		} 
+		public global::Allors.Meta.MethodType WriteOff 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.SalesInvoiceWriteOff;
+			}
+		} 
 
 	}
 }

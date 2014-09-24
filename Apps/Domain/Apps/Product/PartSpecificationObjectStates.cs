@@ -79,36 +79,26 @@ namespace Allors.Domain
             new PartSpecificationObjectStateBuilder(Session)
                 .WithUniqueId(CreatedId)
                 .WithName("Created")
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Created").WithLocale(englishtLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Gemaakt").WithLocale(dutchLocale).Build())
                 .Build();
 
             new PartSpecificationObjectStateBuilder(Session)
                 .WithUniqueId(DesignedId)
                 .WithName("Designed")
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Designed").WithLocale(englishtLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Ontworpen").WithLocale(dutchLocale).Build())
                 .Build();
 
             new PartSpecificationObjectStateBuilder(Session)
                 .WithUniqueId(TestedId)
                 .WithName("Tested")
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Tested").WithLocale(englishtLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Getest").WithLocale(dutchLocale).Build())
                 .Build();
 
             new PartSpecificationObjectStateBuilder(Session)
                 .WithUniqueId(ApprovedId)
                 .WithName("Approved")
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Approved").WithLocale(englishtLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Goedgekeurd").WithLocale(dutchLocale).Build())
                 .Build();
 
             new PartSpecificationObjectStateBuilder(Session)
                 .WithUniqueId(RequirementSpecifiedId)
                 .WithName("Requirement Specified")
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Requirement Specified").WithLocale(englishtLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Requirement Specified").WithLocale(dutchLocale).Build())
                 .Build();
         }
 
@@ -120,6 +110,5 @@ namespace Allors.Domain
 
             config.GrantAdministrator(this.ObjectType, full);
         }
-
     }
 }

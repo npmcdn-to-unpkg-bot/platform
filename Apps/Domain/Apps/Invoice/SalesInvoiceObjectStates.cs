@@ -83,43 +83,31 @@ namespace Allors.Domain
             new SalesInvoiceObjectStateBuilder(Session)
                 .WithUniqueId(SentId)
                 .WithName("Sent")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Sent").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Verzonden").WithLocale(dutchLocale).Build())
                 .Build();
 
             new SalesInvoiceObjectStateBuilder(Session)
                 .WithUniqueId(PaidId)
                 .WithName("Paid")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Paid").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Betaald").WithLocale(dutchLocale).Build())
                 .Build();
 
             new SalesInvoiceObjectStateBuilder(Session)
                 .WithUniqueId(PartiallyPaidId)
                 .WithName("Partially Paid")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Partially Paid").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Gedeeltelijk betaald").WithLocale(dutchLocale).Build())
                 .Build();
 
             new SalesInvoiceObjectStateBuilder(Session)
                 .WithUniqueId(ReadyForPostingId)
                 .WithName("Ready For Posting")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Ready For Posting").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Gereed voor verzending").WithLocale(dutchLocale).Build())
                 .Build();
 
             new SalesInvoiceObjectStateBuilder(Session)
                 .WithUniqueId(WrittenOffId)
                 .WithName("Written Off")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Written Off").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Afgeschreven").WithLocale(dutchLocale).Build())
                 .Build();
 
             new SalesInvoiceObjectStateBuilder(Session)
                 .WithUniqueId(CancelledId)
                 .WithName("Cancelled")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Cancelled").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Geannuleerd").WithLocale(dutchLocale).Build())
                 .Build();
         }
 

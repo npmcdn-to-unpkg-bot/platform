@@ -59,15 +59,11 @@ namespace Allors.Domain
             new PurchaseReturnObjectStateBuilder(Session)
                 .WithUniqueId(CreatedId)
                 .WithName("Created")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Created").WithLocale(engllishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Gemaakt").WithLocale(dutchLocale).Build())
                 .Build();
 
             new PurchaseReturnObjectStateBuilder(Session)
                 .WithUniqueId(CancelledId)
                 .WithName("Cancelled")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Cancelled").WithLocale(engllishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Geannuleerd").WithLocale(dutchLocale).Build())
                 .Build();
         }
 

@@ -65,7 +65,7 @@ namespace Allors.Domain
 
             if (this.ExistInvoice && this.Invoice.AmountPaid > this.Invoice.TotalIncVat)
             {
-                derivation.Log.AddError(this, PaymentApplications.Meta.AmountApplied, ErrorMessages.PaymentApplicationNotLargerThanInvoiceAmountId);
+                derivation.Log.AddError(this, PaymentApplications.Meta.AmountApplied, ErrorMessages.PaymentApplicationNotLargerThanInvoiceAmount);
             }
 
             if (this.ExistInvoiceItem && this.InvoiceItem.AmountPaid > this.InvoiceItem.TotalIncVat)

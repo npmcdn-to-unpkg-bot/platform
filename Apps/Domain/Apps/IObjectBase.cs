@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DecimalExtensions.cs" company="Allors bvba">
+// <copyright file="IObjectBase.cs" company="Allors bvba">
 //   Copyright 2002-2012 Allors bvba.
 // 
 // Dual Licensed under
@@ -20,26 +20,7 @@
 
 namespace Allors
 {
-    using System.Globalization;
-
-    using Allors.Domain;
-
-    public static class DecimalExtensions
+    public partial interface IObjectBase
     {
-        public static string ToString(this decimal dec, Locale locale)
-        {
-            var cultureInfo = locale != null ? locale.CultureInfo : null;
-            return dec.ToString(cultureInfo);
-        }
-
-        public static string AsCurrencyString(this decimal dec, NumberFormatInfo numberFormatInfo)
-        {
-            return dec.ToString("C", numberFormatInfo);
-        }
-
-        public static string AsCurrencyString(this decimal? dec, NumberFormatInfo numberFormatInfo)
-        {
-            return dec.HasValue ? dec.Value.AsCurrencyString(numberFormatInfo) : null;
-        }
     }
 }

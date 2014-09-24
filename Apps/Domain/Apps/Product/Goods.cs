@@ -62,11 +62,11 @@ namespace Allors.Domain
 
                     try
                     {
-                        good.Photo.Load(fileInfo);
+                        good.Photo.Content = File.ReadAllBytes(fileInfo.FullName);
                     }
                     catch (Exception e)
                     {
-                        Console.Write(good.Photo.OriginalFileName + @" " + e.Message);
+                        Console.Write(fileInfo.FullName + @" " + e.Message);
                         good.Photo.Delete();
                     }
                 }

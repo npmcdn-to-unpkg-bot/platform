@@ -28,7 +28,7 @@ namespace Allors.Domain
 
     public partial class ProductPurchasePrice
     {
-        public IFormatProvider CurrencyFormat
+        public NumberFormatInfo CurrencyFormat
         {
             get
             {

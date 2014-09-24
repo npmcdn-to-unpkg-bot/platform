@@ -249,6 +249,7 @@ namespace Allors.Meta
 
             // ObjectState
             new RelationTypeBuilder(domain, new Guid("59338f0b-40e7-49e8-ba1a-3ecebf96aebe"), new Guid("fca0f3f6-bdd6-4405-93b3-35dd769bff0e"), new Guid("c338f087-559c-4239-9c6a-1f691e58ed16")).WithObjectTypes(objectState, permission).WithSingularName("DeniedPermission").WithPluralName("DeniedPermissions").WithCardinality(Cardinalities.ManyToMany).WithIsIndexed(true).Build();
+            new RelationTypeBuilder(domain, new Guid("75E8E8B6-6A6A-45E9-9701-C99967F7DA9F"), new Guid("845EBF06-82D3-4EE5-84C8-4F5DEB236BB5"), new Guid("FA1F194E-FFDD-4ECA-95DA-D251CE817410")).WithObjectTypes(objectState, allorsString).WithSingularName("Name").WithPluralName("Names").WithIsIndexed(true).Build();
             
             // LocalisedText
             new RelationTypeBuilder(domain, new Guid("50dc85f0-3d22-4bc1-95d9-153674b89f7a"), new Guid("accd061b-20b9-4a24-bb2c-c2f7276f43ab"), new Guid("8d3f68e1-fa6e-414f-aa4d-25fcc2c975d6")).WithObjectTypes(localisedText, allorsString).WithSingularName("Text").WithPluralName("Texts").WithSize(-1).Build();

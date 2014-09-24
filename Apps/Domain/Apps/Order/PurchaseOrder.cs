@@ -70,7 +70,7 @@ namespace Allors.Domain
             }
         }
 
-        public IFormatProvider CurrencyFormat
+        public NumberFormatInfo CurrencyFormat
         {
             get
             {

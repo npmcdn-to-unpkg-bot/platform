@@ -194,7 +194,7 @@ namespace Allors.Domain
             this.DeriveCurrentContacts(derivation);
         }
 
-        private bool BaseIsActiveCustomer(DateTime? date)
+        private bool AppsIsActiveCustomer(DateTime? date)
         {
             if (date == DateTime.MinValue)
             {
@@ -214,7 +214,7 @@ namespace Allors.Domain
             return false;
         }
 
-        private bool BaseIsActiveSupplier(DateTime? date)
+        private bool AppsIsActiveSupplier(DateTime? date)
         {
             if (date == DateTime.MinValue)
             {
@@ -234,7 +234,7 @@ namespace Allors.Domain
             return false;
         }
 
-        private bool BaseIsActivePartner(DateTime? date)
+        private bool AppsIsActivePartner(DateTime? date)
         {
             if (date == DateTime.MinValue)
             {

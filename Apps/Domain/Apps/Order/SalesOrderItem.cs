@@ -850,12 +850,12 @@ namespace Allors.Domain
             var baseprices = new PriceComponent[0];
             if (this.ExistProduct && this.Product.ExistBasePrices)
             {
-                baseprices = Domain.Product.BasePrices;
+                baseprices = Product.BasePrices;
             }
 
             if (this.ExistProductFeature && this.ProductFeature.ExistBasePrices)
             {
-                baseprices = Domain.ProductFeature.BasePrices;
+                baseprices = ProductFeature.BasePrices;
             }
 
             foreach (BasePrice priceComponent in baseprices)
@@ -1317,7 +1317,7 @@ namespace Allors.Domain
             {
                 if (this.ExistProduct)
                 {
-                    this.SalesRep = SalesRepRelationships.SalesRep(customer, Domain.Product.PrimaryProductCategory, this.SalesOrderWhereSalesOrderItem.OrderDate);
+                    this.SalesRep = SalesRepRelationships.SalesRep(customer, Product.PrimaryProductCategory, this.SalesOrderWhereSalesOrderItem.OrderDate);
                 }
                 else
                 {

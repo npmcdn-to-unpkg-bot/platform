@@ -254,14 +254,14 @@ namespace Allors.Domain
                         {
                             if (deniedPermission.ConcreteClassPointer.Equals(this.objectType.Id))
                             {
-                                if (deniedPermission.OperandTypePointer.HasValue && deniedPermission.Operation.HasValue)
+                                if (deniedPermission.ExistOperandTypePointer && deniedPermission.ExistOperation)
                                 {
                                     IList<Operation> operations;
                                     if (this.operationsByOperandId.TryGetValue(
-                                        deniedPermission.OperandTypePointer.Value,
+                                        deniedPermission.OperandTypePointer,
                                         out operations))
                                     {
-                                        operations.Remove(deniedPermission.Operation.Value);
+                                        operations.Remove(deniedPermission.Operation);
                                     }
                                 }
                                 else

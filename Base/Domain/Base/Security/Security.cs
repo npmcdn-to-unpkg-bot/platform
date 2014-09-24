@@ -54,12 +54,12 @@ namespace Allors.Domain
             this.roleById = new Dictionary<Guid, Role>();
             foreach (Role role in session.Extent<Role>())
             {
-                if (!role.UniqueId.HasValue)
+                if (!role.ExistUniqueId)
                 {
                     throw new Exception("Role " + role + " has no unique id");
                 }
 
-                this.roleById[role.UniqueId.Value] = role;
+                this.roleById[role.UniqueId] = role;
             }
 
             this.readPermissionsByObjectTypeId = new Dictionary<Guid, Dictionary<OperandType, Permission>>();
@@ -70,16 +70,16 @@ namespace Allors.Domain
 
             foreach (Permission permission in session.Extent<Permission>())
             {
-                if (!permission.ConcreteClassPointer.HasValue || !permission.OperandTypePointer.HasValue || !permission.Operation.HasValue)
+                if (!permission.ExistConcreteClassPointer || !permission.ExistOperandTypePointer || !permission.ExistOperation)
                 {
                     throw new Exception("Permission " + permission + " has no concrete class, operand type and/or operation");
                 }
 
-                var objectId = permission.ConcreteClassPointer.Value;
+                var objectId = permission.ConcreteClassPointer;
 
                 if (permission.Operation != Operation.Read)
                 {
-                    var operandType = permission.OperandTypePointer.Value;
+                    var operandType = permission.OperandTypePointer;
 
                     Dictionary<Guid, Permission> deniablePermissionByOperandTypeId;
                     if (!this.deniablePermissionByOperandTypeIdByObjectTypeId.TryGetValue(objectId, out deniablePermissionByOperandTypeId))

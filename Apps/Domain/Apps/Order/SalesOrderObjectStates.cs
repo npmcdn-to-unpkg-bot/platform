@@ -119,85 +119,61 @@ namespace Allors.Domain
             new SalesOrderObjectStateBuilder(Session)
                 .WithUniqueId(ProvisionalId)
                 .WithName("Created")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Created").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Gemaakt").WithLocale(dutchLocale).Build())
                 .Build();
 
             new SalesOrderObjectStateBuilder(Session)
                 .WithUniqueId(RequestsApprovalId)
                 .WithName("Requests Approval")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Requests Approval").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Goedgekeuring gevraagd").WithLocale(dutchLocale).Build())
                 .Build();
 
             new SalesOrderObjectStateBuilder(Session)
                 .WithUniqueId(CancelledId)
                 .WithName("Cancelled")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Cancelled").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Geannuleerd").WithLocale(dutchLocale).Build())
                 .Build();
 
             new SalesOrderObjectStateBuilder(Session)
                 .WithUniqueId(PartiallyShippedId)
                 .WithName("Partially Shipped")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Partially Shipped").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Gedeeltelijk verzonden").WithLocale(dutchLocale).Build())
                 .Build();
 
             new SalesOrderObjectStateBuilder(Session)
                 .WithUniqueId(ShippedId)
                 .WithName("Shipped")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Shipped").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Verzonden").WithLocale(dutchLocale).Build())
                 .Build();
 
             new SalesOrderObjectStateBuilder(Session)
                 .WithUniqueId(CompletedId)
                 .WithName("Completed")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Completed").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Afgewerkt").WithLocale(dutchLocale).Build())
                 .Build();
 
             new SalesOrderObjectStateBuilder(Session)
                 .WithUniqueId(PaidId)
                 .WithName("Paid")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Paid").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Betaald").WithLocale(dutchLocale).Build())
                 .Build();
 
             new SalesOrderObjectStateBuilder(Session)
                 .WithUniqueId(PartiallyPaidId)
                 .WithName("Partially Paid")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Partially Paid").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Gedeeltelijk betaald").WithLocale(dutchLocale).Build())
                 .Build();
 
             new SalesOrderObjectStateBuilder(Session)
                 .WithUniqueId(RejectedId)
                 .WithName("Rejected")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Rejected").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Afgewezen").WithLocale(dutchLocale).Build())
                 .Build();
 
             new SalesOrderObjectStateBuilder(Session)
                 .WithUniqueId(OnHoldId)
                 .WithName("On Hold")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("On Hold").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("In Wachtstand").WithLocale(dutchLocale).Build())
                 .Build();
 
             new SalesOrderObjectStateBuilder(Session)
                 .WithUniqueId(InProcessId)
                 .WithName("In Process")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("In Process").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("In Uitvoering").WithLocale(dutchLocale).Build())
                 .Build();
 
             new SalesOrderObjectStateBuilder(Session)
                 .WithUniqueId(FinishedId)
                 .WithName("Finished")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Finished").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Klaar").WithLocale(dutchLocale).Build())
                 .Build();
         }
 

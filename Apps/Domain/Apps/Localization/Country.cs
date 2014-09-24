@@ -52,8 +52,6 @@ namespace Allors.Domain
                 this.RemoveIbanLength();
                 this.RemoveIbanRegex();
             }
-
-            this.Locate();
         }
 
         private void AppsDeriveSearchDataCharacterBoundaryText()

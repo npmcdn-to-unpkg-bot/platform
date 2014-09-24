@@ -71,29 +71,21 @@ namespace Allors.Domain
             new PickListObjectStateBuilder(Session)
                 .WithUniqueId(CreatedId)
                 .WithName("Created")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Created").WithLocale(englischLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Gemaakt").WithLocale(dutchLocale).Build())
                 .Build();
 
             new PickListObjectStateBuilder(Session)
                 .WithUniqueId(PickedId)
                 .WithName("Picked")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Picked").WithLocale(englischLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Picked").WithLocale(dutchLocale).Build())
                 .Build();
 
             new PickListObjectStateBuilder(Session)
                 .WithUniqueId(CancelledId)
                 .WithName("Cancelled")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Cancelled").WithLocale(englischLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Geannuleerd").WithLocale(dutchLocale).Build())
                 .Build();
 
             new PickListObjectStateBuilder(Session)
                 .WithUniqueId(OnHoldId)
                 .WithName("On Hold")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("On Hold").WithLocale(englischLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("In Wachtstand").WithLocale(dutchLocale).Build())
                 .Build();
         }
 

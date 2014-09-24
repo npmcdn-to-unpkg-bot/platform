@@ -76,16 +76,9 @@ namespace Allors.Domain
         private static long NextValueNonShared(ISession session, Guid counterId)
         {
             var counter = new Counters(session).CounterById[counterId];
-            if (counter.Value.HasValue)
-            {
-                counter.Value = counter.Value.Value + 1;
-            }
-            else
-            {
-                counter.Value = 1;
-            }
+            counter.Value = counter.Value + 1;
 
-            return counter.Value.Value;
+            return counter.Value;
         }
 
         private static long NextValueSerializable(IDatabase database, Guid counterId)
@@ -93,7 +86,7 @@ namespace Allors.Domain
             using (var counterSession = database.CreateSession())
             {
                 var counter = new Counters(counterSession).CounterById[counterId];
-                var newValue = counter.Value.HasValue ? counter.Value.Value + 1 : 1;
+                var newValue = counter.Value + 1;
                 counter.Value = newValue;
 
                 counterSession.Commit();
@@ -112,7 +105,7 @@ namespace Allors.Domain
                     using (var counterSession = database.CreateSession())
                     {
                         var counter = new Counters(counterSession).CounterById[counterId];
-                        var newValue = counter.Value.HasValue ? counter.Value.Value + 1 : 1;
+                        var newValue = counter.Value + 1;
                         counter.Value = newValue;
 
                         counterSession.Commit();

@@ -270,7 +270,7 @@ namespace Allors.Domain
         {
             get
             {
-                if (this.ExistOrderKind && this.OrderKind.ScheduleManually.Value)
+                if (this.ExistOrderKind && this.OrderKind.ScheduleManually)
                 {
                     return true;
                 }
@@ -736,8 +736,8 @@ namespace Allors.Domain
             {
                 if (customerRelationship.FromDate <= DateTime.Now && (!customerRelationship.ExistThroughDate || customerRelationship.ThroughDate >= DateTime.Now))
                 {
-                    creditLimit = customerRelationship.ExistCreditLimit ? customerRelationship.CreditLimit.Value : this.Store.ExistCreditLimit ? this.Store.CreditLimit.Value : 0;
-                    amountOverDue = customerRelationship.AmountOverDue.Value;
+                    creditLimit = customerRelationship.ExistCreditLimit ? customerRelationship.CreditLimit : this.Store.ExistCreditLimit ? this.Store.CreditLimit : 0;
+                    amountOverDue = customerRelationship.AmountOverDue;
                 }
             }
             
@@ -930,14 +930,14 @@ namespace Allors.Domain
         {
             if (this.ExistDiscountAdjustment)
             {
-                decimal discount = this.DiscountAdjustment.ExistPercentage ? decimal.Round((this.TotalExVat.Value * this.DiscountAdjustment.Percentage.Value) / 100, 2) : this.DiscountAdjustment.Amount.Value;
+                decimal discount = this.DiscountAdjustment.ExistPercentage ? decimal.Round((this.TotalExVat * this.DiscountAdjustment.Percentage) / 100, 2) : this.DiscountAdjustment.Amount;
 
                 this.TotalDiscount += discount;
                 this.TotalExVat -= discount;
 
                 if (this.ExistVatRegime)
                 {
-                    decimal vat = decimal.Round((discount * this.VatRegime.VatRate.Rate.Value) / 100, 2);
+                    decimal vat = decimal.Round((discount * this.VatRegime.VatRate.Rate) / 100, 2);
 
                     this.TotalVat -= vat;
                     this.TotalIncVat -= discount + vat;
@@ -946,14 +946,14 @@ namespace Allors.Domain
 
             if (this.ExistSurchargeAdjustment)
             {
-                decimal surcharge = this.SurchargeAdjustment.ExistPercentage ? decimal.Round((this.TotalExVat.Value * this.SurchargeAdjustment.Percentage.Value) / 100, 2) : this.SurchargeAdjustment.Amount.Value;
+                decimal surcharge = this.SurchargeAdjustment.ExistPercentage ? decimal.Round((this.TotalExVat * this.SurchargeAdjustment.Percentage) / 100, 2) : this.SurchargeAdjustment.Amount;
 
                 this.TotalSurcharge += surcharge;
                 this.TotalExVat += surcharge;
 
                 if (this.ExistVatRegime)
                 {
-                    decimal vat = decimal.Round((surcharge * this.VatRegime.VatRate.Rate.Value) / 100, 2);
+                    decimal vat = decimal.Round((surcharge * this.VatRegime.VatRate.Rate) / 100, 2);
                     this.TotalVat += vat;
                     this.TotalIncVat += surcharge + vat;
                 }
@@ -964,14 +964,14 @@ namespace Allors.Domain
         {
             if (this.ExistFee)
             {
-                decimal fee = this.Fee.ExistPercentage ? decimal.Round((this.TotalExVat.Value * this.Fee.Percentage.Value) / 100, 2) : this.Fee.Amount.Value;
+                decimal fee = this.Fee.ExistPercentage ? decimal.Round((this.TotalExVat * this.Fee.Percentage) / 100, 2) : this.Fee.Amount;
 
                 this.TotalFee += fee;
                 this.TotalExVat += fee;
 
                 if (this.Fee.ExistVatRate)
                 {
-                    decimal vat = decimal.Round((fee * this.Fee.VatRate.Rate.Value) / 100, 2);
+                    decimal vat = decimal.Round((fee * this.Fee.VatRate.Rate) / 100, 2);
                     this.TotalVat += vat;
                     this.TotalIncVat += fee + vat;
                 }
@@ -983,15 +983,15 @@ namespace Allors.Domain
             if (this.ExistShippingAndHandlingCharge)
             {
                 decimal shipping = this.ShippingAndHandlingCharge.ExistPercentage ? 
-                    decimal.Round((this.TotalExVat.Value * this.ShippingAndHandlingCharge.Percentage.Value) / 100, 2) :
-                    this.ShippingAndHandlingCharge.Amount.Value;
+                    decimal.Round((this.TotalExVat * this.ShippingAndHandlingCharge.Percentage) / 100, 2) :
+                    this.ShippingAndHandlingCharge.Amount;
 
                 this.TotalShippingAndHandling += shipping;
                 this.TotalExVat += shipping;
 
                 if (this.ShippingAndHandlingCharge.ExistVatRate)
                 {
-                    decimal vat = decimal.Round((shipping * this.ShippingAndHandlingCharge.VatRate.Rate.Value) / 100, 2);
+                    decimal vat = decimal.Round((shipping * this.ShippingAndHandlingCharge.VatRate.Rate) / 100, 2);
                     this.TotalVat += vat;
                     this.TotalIncVat += shipping + vat;
                 }
@@ -1010,9 +1010,9 @@ namespace Allors.Domain
             {
                 if (item.TotalExVat > 0)
                 {
-                    totalPurchasePrice += item.UnitPurchasePrice.Value;
-                    totalUnitBasePrice += item.UnitBasePrice.Value;
-                    totalListPrice += item.CalculatedUnitPrice.Value;
+                    totalPurchasePrice += item.UnitPurchasePrice;
+                    totalUnitBasePrice += item.UnitBasePrice;
+                    totalListPrice += item.CalculatedUnitPrice;
                 }
             }
 
@@ -1086,13 +1086,13 @@ namespace Allors.Domain
 
                 foreach (SalesOrderItem salesOrderItem in this.ValidOrderItems)
                 {
-                    if (!this.PartiallyShip.Value && salesOrderItem.QuantityRequestsShipping != salesOrderItem.QuantityOrdered)
+                    if (!this.PartiallyShip && salesOrderItem.QuantityRequestsShipping != salesOrderItem.QuantityOrdered)
                     {
                         allItemsAvailable = false;
                         break;
                     }
 
-                    if (this.PartiallyShip.Value && salesOrderItem.QuantityRequestsShipping > 0)
+                    if (this.PartiallyShip && salesOrderItem.QuantityRequestsShipping > 0)
                     {
                         somethingToShip = true;
                     }
@@ -1106,7 +1106,7 @@ namespace Allors.Domain
             }
         }
 
-        private List<Shipment> BaseShip(IDerivation derivation)
+        private List<Shipment> AppsShip(IDerivation derivation)
         {
             var addresses = this.ShipToAddresses();
             var shipments = new List<Shipment>();
@@ -1121,7 +1121,7 @@ namespace Allors.Domain
             return shipments;
         }
 
-        private CustomerShipment BaseShip(IDerivation derivation, KeyValuePair<PostalAddress, Party> address)
+        private CustomerShipment AppsShip(IDerivation derivation, KeyValuePair<PostalAddress, Party> address)
         {
             var pendingShipment = address.Value.GetPendingCustomerShipmentForStore(address.Key, this.Store, this.ShipmentMethod);
 

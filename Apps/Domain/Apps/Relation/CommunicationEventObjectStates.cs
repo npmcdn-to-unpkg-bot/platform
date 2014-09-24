@@ -76,36 +76,26 @@ namespace Allors.Domain
 
             new CommunicationEventObjectStateBuilder(this.Session)
                 .WithName("Opened")
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Opened").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Geopend").WithLocale(durchLocale).Build())
                 .WithUniqueId(OpenedId)
                 .Build();
 
             new CommunicationEventObjectStateBuilder(this.Session)
                 .WithName("Read")
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Read").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Gelezen").WithLocale(durchLocale).Build())
                 .WithUniqueId(ReadId)
                 .Build();
 
             new CommunicationEventObjectStateBuilder(this.Session)
                 .WithName("In Progress")
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("In Progress").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Lopend").WithLocale(durchLocale).Build())
                 .WithUniqueId(InProgressId)
                 .Build();
 
             new CommunicationEventObjectStateBuilder(this.Session)
                 .WithName("Closed")
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Closed").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Afgewerkt").WithLocale(durchLocale).Build())
                 .WithUniqueId(ClosedId)
                 .Build();
 
             new CommunicationEventObjectStateBuilder(this.Session)
                 .WithName("Cancelled")
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Cancelled").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Geannuleerd").WithLocale(durchLocale).Build())
                 .WithUniqueId(CancelledId)
                 .Build();
         }

@@ -257,7 +257,7 @@ namespace Allors.Domain
                     {
                         var gracePeriod = salesInvoice.Store.PaymentGracePeriod;
 
-                        var dueDate = salesInvoice.DueDate.AddDays(gracePeriod);
+                        var dueDate = salesInvoice.DueDate.Value.AddDays(gracePeriod);
 
                         if (DateTime.Now > dueDate)
                         {

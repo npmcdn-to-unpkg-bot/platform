@@ -88,50 +88,36 @@ namespace Allors.Domain
             new CustomerShipmentObjectStateBuilder(Session)
                 .WithUniqueId(CreatedId)
                 .WithName("Created")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Created").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Gemaakt").WithLocale(dutchLocale).Build())
                 .Build();
 
             new CustomerShipmentObjectStateBuilder(Session)
                 .WithUniqueId(PickedId)
                 .WithName("Picked")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Picked").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Gepikt").WithLocale(dutchLocale).Build())
                 .Build();
 
             new CustomerShipmentObjectStateBuilder(Session)
                 .WithUniqueId(PackedId)
                 .WithName("Packed")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Packed").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Verpakt").WithLocale(dutchLocale).Build())
                 .Build();
 
             new CustomerShipmentObjectStateBuilder(Session)
                 .WithUniqueId(ShippedId)
                 .WithName("Shipped")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Shipped").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Verzonden").WithLocale(dutchLocale).Build())
                 .Build();
 
             new CustomerShipmentObjectStateBuilder(Session)
                 .WithUniqueId(DeliveredId)
                 .WithName("Delivered")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Delivered").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Afgeleverd").WithLocale(dutchLocale).Build())
                 .Build();
 
             new CustomerShipmentObjectStateBuilder(Session)
                 .WithUniqueId(CancelledId)
                 .WithName("Cancelled")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Cancelled").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("Geannuleerd").WithLocale(dutchLocale).Build())
                 .Build();
 
             new CustomerShipmentObjectStateBuilder(Session)
                 .WithUniqueId(OnHoldId)
                 .WithName("On hold")
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("On hold").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(Session).WithText("in wachtstand").WithLocale(dutchLocale).Build())
                 .Build();
         }
 

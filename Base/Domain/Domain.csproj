@@ -41,9 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\Core\Domain\Core\IObjectBase.cs">
+      <Link>Core\IObjectBase.cs</Link>
+    </Compile>
     <Compile Include="..\..\Core\Domain\Core\ObjectBase.cs">
       <Link>Core\ObjectBase.cs</Link>
     </Compile>
+    <Compile Include="Base\IObjectBase.cs" />
     <Compile Include="Generated\Base\Domain\AccessControl.g.cs" />
     <Compile Include="Generated\Base\Domain\AccessControlledObject.g.cs" />
     <Compile Include="Generated\Base\Domain\Address.g.cs" />

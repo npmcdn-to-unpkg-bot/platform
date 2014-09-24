@@ -115,10 +115,8 @@ namespace Allors.Domain
         {
             get
             {
-                if (this.InvoiceDate != null) 
+                if (this.ExistInvoiceDate) 
                 {
-                    var invoiceDate = this.InvoiceDate.Value;
-
                     if (this.ExistBilledFromInternalOrganisation && this.ExistBillToCustomer && this.BillToCustomer.ExistCustomerRelationshipsWhereCustomer)
                     {
                         var customerRelationships = this.BillToCustomer.CustomerRelationshipsWhereCustomer;
@@ -128,14 +126,14 @@ namespace Allors.Domain
                         if (customerRelationship != null && customerRelationship.PaymentNetDays != null)
                         {
                             var paymentNetDays = customerRelationship.PaymentNetDays.Value;
-                            return invoiceDate.AddDays(paymentNetDays);
+                            return this.InvoiceDate.AddDays(paymentNetDays);
                         }
                     }
 
-                    if (this.ExistStore && this.Store.PaymentNetDays != null)
+                    if (this.ExistStore && this.Store.ExistPaymentNetDays)
                     {
-                        var storePaymentNetDays = this.Store.PaymentNetDays.Value;
-                        return invoiceDate.AddDays(storePaymentNetDays);
+                        var storePaymentNetDays = this.Store.PaymentNetDays;
+                        return this.InvoiceDate.AddDays(storePaymentNetDays);
                     }
                 }
 
@@ -256,9 +254,9 @@ namespace Allors.Domain
         {
             get
             {
-                if (this.ExistDiscountAdjustment && this.DiscountAdjustment.Percentage != null)
+                if (this.ExistDiscountAdjustment && this.DiscountAdjustment.ExistPercentage)
                 {
-                    var percentage = this.DiscountAdjustment.Percentage.Value;
+                    var percentage = this.DiscountAdjustment.Percentage;
 
                     if (this.ExistLocale)
                     {
@@ -406,7 +404,7 @@ namespace Allors.Domain
 
             if (!this.ExistInvoiceNumber && this.ExistStore)
             {
-                this.InvoiceNumber = this.Store.DeriveNextInvoiceNumber(this.InvoiceDate.Value.Year);
+                this.InvoiceNumber = this.Store.DeriveNextInvoiceNumber(this.InvoiceDate.Year);
             }
 
             if (!this.ExistSalesInvoiceType)
@@ -840,14 +838,14 @@ namespace Allors.Domain
         {
             if (this.DiscountAdjustment != null)
             {
-                decimal discount = this.DiscountAdjustment.ExistPercentage ? decimal.Round((this.TotalExVat.Value * this.DiscountAdjustment.Percentage.Value) / 100, 2) : this.DiscountAdjustment.Amount.Value;
+                decimal discount = this.DiscountAdjustment.ExistPercentage ? decimal.Round((this.TotalExVat * this.DiscountAdjustment.Percentage) / 100, 2) : this.DiscountAdjustment.Amount;
 
                 this.TotalDiscount += discount;
                 this.TotalExVat -= discount;
 
                 if (this.ExistVatRegime)
                 {
-                    decimal vat = decimal.Round((discount * this.VatRegime.VatRate.Rate.Value) / 100, 2);
+                    decimal vat = decimal.Round((discount * this.VatRegime.VatRate.Rate) / 100, 2);
                     this.TotalVat -= vat;
                     this.TotalIncVat -= discount + vat;
                 }
@@ -858,14 +856,14 @@ namespace Allors.Domain
         {
             if (this.ExistSurchargeAdjustment)
             {
-                decimal surcharge = this.SurchargeAdjustment.ExistPercentage ? decimal.Round((this.TotalExVat.Value * this.SurchargeAdjustment.Percentage.Value) / 100, 2) : this.SurchargeAdjustment.Amount.Value;
+                decimal surcharge = this.SurchargeAdjustment.ExistPercentage ? decimal.Round((this.TotalExVat * this.SurchargeAdjustment.Percentage) / 100, 2) : this.SurchargeAdjustment.Amount;
 
                 this.TotalSurcharge += surcharge;
                 this.TotalExVat += surcharge;
 
                 if (this.ExistVatRegime)
                 {
-                    decimal vat = decimal.Round((surcharge * this.VatRegime.VatRate.Rate.Value) / 100, 2);
+                    decimal vat = decimal.Round((surcharge * this.VatRegime.VatRate.Rate) / 100, 2);
                     this.TotalVat += vat;
                     this.TotalIncVat += surcharge + vat;
                 }
@@ -876,14 +874,14 @@ namespace Allors.Domain
         {
             if (this.ExistFee)
             {
-                decimal fee = this.Fee.ExistPercentage ? decimal.Round((this.TotalExVat.Value * this.Fee.Percentage.Value) / 100, 2) : this.Fee.Amount.Value;
+                decimal fee = this.Fee.ExistPercentage ? decimal.Round((this.TotalExVat * this.Fee.Percentage) / 100, 2) : this.Fee.Amount;
 
                 this.TotalFee += fee;
                 this.TotalExVat += fee;
 
                 if (this.Fee.ExistVatRate)
                 {
-                    decimal vat = decimal.Round((fee * this.Fee.VatRate.Rate.Value) / 100, 2);
+                    decimal vat = decimal.Round((fee * this.Fee.VatRate.Rate) / 100, 2);
                     this.TotalVat += vat;
                     this.TotalIncVat += fee + vat;
                 }
@@ -895,14 +893,14 @@ namespace Allors.Domain
             if (this.ExistShippingAndHandlingCharge)
             {
                 decimal shipping = this.ShippingAndHandlingCharge.ExistPercentage ? 
-                    decimal.Round((this.TotalExVat.Value * this.ShippingAndHandlingCharge.Percentage.Value) / 100, 2) : this.ShippingAndHandlingCharge.Amount.Value;
+                    decimal.Round((this.TotalExVat * this.ShippingAndHandlingCharge.Percentage) / 100, 2) : this.ShippingAndHandlingCharge.Amount;
 
                 this.TotalShippingAndHandling += shipping;
                 this.TotalExVat += shipping;
 
                 if (this.ShippingAndHandlingCharge.ExistVatRate)
                 {
-                    decimal vat = decimal.Round((shipping * this.ShippingAndHandlingCharge.VatRate.Rate.Value) / 100, 2);
+                    decimal vat = decimal.Round((shipping * this.ShippingAndHandlingCharge.VatRate.Rate) / 100, 2);
 
                     this.TotalVat += vat;
                     this.TotalIncVat += shipping + vat;
@@ -922,9 +920,9 @@ namespace Allors.Domain
             {
                 if (item.TotalExVat > 0 && item.InitialMarkupPercentage > 0)
                 {
-                    totalPurchasePrice += item.UnitPurchasePrice.Value;
-                    totalUnitBasePrice += item.UnitBasePrice.Value;
-                    totalListPrice += item.CalculatedUnitPrice.Value;
+                    totalPurchasePrice += item.UnitPurchasePrice;
+                    totalUnitBasePrice += item.UnitBasePrice;
+                    totalListPrice += item.CalculatedUnitPrice;
                 }
             }
 
@@ -1024,13 +1022,13 @@ namespace Allors.Domain
                     {
                         if (!quantityInvoicedByProduct.ContainsKey(salesInvoiceItem.Product))
                         {
-                            quantityInvoicedByProduct.Add(salesInvoiceItem.Product, salesInvoiceItem.Quantity.Value);
-                            totalBasePriceByProduct.Add(salesInvoiceItem.Product, salesInvoiceItem.TotalBasePrice.Value);
+                            quantityInvoicedByProduct.Add(salesInvoiceItem.Product, salesInvoiceItem.Quantity);
+                            totalBasePriceByProduct.Add(salesInvoiceItem.Product, salesInvoiceItem.TotalBasePrice);
                         }
                         else
                         {
-                            quantityInvoicedByProduct[salesInvoiceItem.Product] += salesInvoiceItem.Quantity.Value;
-                            totalBasePriceByProduct[salesInvoiceItem.Product] += salesInvoiceItem.TotalBasePrice.Value;
+                            quantityInvoicedByProduct[salesInvoiceItem.Product] += salesInvoiceItem.Quantity;
+                            totalBasePriceByProduct[salesInvoiceItem.Product] += salesInvoiceItem.TotalBasePrice;
                         }
                     }
                 }

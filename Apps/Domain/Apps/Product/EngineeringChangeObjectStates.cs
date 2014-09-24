@@ -65,22 +65,16 @@ namespace Allors.Domain
             new EngineeringChangeObjectStateBuilder(Session)
                 .WithUniqueId(RequestedId)
                 .WithName("Requested")
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Requested").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Aangevraagd").WithLocale(dutchLocale).Build())
                 .Build();
 
             new EngineeringChangeObjectStateBuilder(Session)
                 .WithUniqueId(NoticedId)
                 .WithName("Notice")
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Notice").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Kennisgeving").WithLocale(dutchLocale).Build())
                 .Build();
 
             new EngineeringChangeObjectStateBuilder(Session)
                 .WithUniqueId(ReleasedId)
                 .WithName("Released")
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Released").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Vrijgegeven").WithLocale(dutchLocale).Build())
                 .Build();
         }
 
