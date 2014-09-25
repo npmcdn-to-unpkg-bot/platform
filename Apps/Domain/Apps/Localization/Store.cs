@@ -137,28 +137,33 @@ namespace Allors.Domain
                 this.PaymentGracePeriod = 0;
             }
 
-            if (new Domain.TemplatePurposes(this.Session).SalesInvoice != null &&
-                new Domain.TemplatePurposes(this.Session).SalesInvoice.StringTemplatesWhereTemplatePurpose.Count > 0)
+            if (!this.ExistSalesInvoiceNumberPrefix)
+            {
+                this.SalesInvoiceNumberPrefix = "{0}";
+            }
+
+            if (new TemplatePurposes(this.Session).SalesInvoice != null &&
+                new TemplatePurposes(this.Session).SalesInvoice.StringTemplatesWhereTemplatePurpose.Count > 0)
             {
                 if (!this.ExistSalesInvoiceTemplates)
                 {
-                    Extent<Domain.StringTemplate> templates;
+                    Extent<StringTemplate> templates;
                     if (this.ExistOwner && this.Owner.ExistLocale)
                     {
                         templates = this.Owner.Locale.StringTemplatesWhereLocale;
                     }
                     else
                     {
-                        templates = Domain.Singleton.Instance(this.Session).DefaultLocale.StringTemplatesWhereLocale;
+                        templates = Singleton.Instance(this.Session).DefaultLocale.StringTemplatesWhereLocale;
                     }
 
-                    templates.Filter.AddEquals(StringTemplates.Meta.TemplatePurpose, new Domain.TemplatePurposes(this.Session).SalesInvoice);
+                    templates.Filter.AddEquals(StringTemplates.Meta.TemplatePurpose, new TemplatePurposes(this.Session).SalesInvoice);
                     this.AddSalesInvoiceTemplate(templates.First);
                 }
             }
 
-            if (new Domain.TemplatePurposes(this.Session).SalesOrder != null &&
-                new Domain.TemplatePurposes(this.Session).SalesOrder.StringTemplatesWhereTemplatePurpose.Count > 0)
+            if (new TemplatePurposes(this.Session).SalesOrder != null &&
+                new TemplatePurposes(this.Session).SalesOrder.StringTemplatesWhereTemplatePurpose.Count > 0)
             {
                 if (!this.ExistSalesOrderTemplates)
                 {
@@ -177,8 +182,8 @@ namespace Allors.Domain
                 }
             }
 
-            if (new Domain.TemplatePurposes(this.Session).CustomerShipment != null &&
-                new Domain.TemplatePurposes(this.Session).CustomerShipment.StringTemplatesWhereTemplatePurpose.Count > 0)
+            if (new TemplatePurposes(this.Session).CustomerShipment != null &&
+                new TemplatePurposes(this.Session).CustomerShipment.StringTemplatesWhereTemplatePurpose.Count > 0)
             {
                 if (!this.ExistCustomerShipmentTemplates)
                 {

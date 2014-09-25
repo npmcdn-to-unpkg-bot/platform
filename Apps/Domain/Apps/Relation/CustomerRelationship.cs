@@ -257,11 +257,14 @@ namespace Allors.Domain
                     {
                         var gracePeriod = salesInvoice.Store.PaymentGracePeriod;
 
-                        var dueDate = salesInvoice.DueDate.Value.AddDays(gracePeriod);
-
-                        if (DateTime.Now > dueDate)
+                        if (salesInvoice.DueDate.HasValue)
                         {
-                            this.AmountOverDue += salesInvoice.TotalIncVat - salesInvoice.AmountPaid;
+                            var dueDate = salesInvoice.DueDate.Value.AddDays(gracePeriod);
+
+                            if (DateTime.Now > dueDate)
+                            {
+                                this.AmountOverDue += salesInvoice.TotalIncVat - salesInvoice.AmountPaid;
+                            }
                         }
                     }
                 }
