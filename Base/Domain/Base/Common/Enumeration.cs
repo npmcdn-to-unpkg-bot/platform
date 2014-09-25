@@ -22,48 +22,41 @@ namespace Allors.Domain
 {
     using System.Linq;
 
-    using Allors.Domain;
-
-    public partial interface Enumeration
+    public static partial class EnumerationExtensions
     {
-        // TODO:
-        //public string GetLocalisedName(Domain.Locale locale)
-        //{
-        //    var localisedName = this.LocalisedNames.FirstOrDefault(localizedText => localizedText.Locale.Equals(locale));
-        //    return localisedName != null ? localisedName.Text : this.Name;
-        //}
+        public static string GetLocalisedName(this Enumeration enumeration, Locale locale)
+        {
+            var localisedName = enumeration.LocalisedNames.FirstOrDefault(localizedText => localizedText.Locale.Equals(locale));
+            return localisedName != null ? localisedName.Text : enumeration.Name;
+        }
 
-        //public void SetLocalisedName(Domain.Locale locale, string name)
-        //{
-        //    var localisedName = this.LocalisedNames.FirstOrDefault(localizedText => localizedText.Locale.Equals(locale));
-        //    if (localisedName == null)
-        //    {
-        //        localisedName = new LocalisedTextBuilder(this.Session).WithText(name).WithLocale(locale).Build();
-        //        this.AddLocalisedName(localisedName);
-        //    }
-        //    else
-        //    {
-        //        localisedName.Text = name;
-        //    }
-        //}
+        public static void SetLocalisedName(this Enumeration enumeration, Locale locale, string name)
+        {
+            var localisedName = enumeration.LocalisedNames.FirstOrDefault(localizedText => localizedText.Locale.Equals(locale));
+            if (localisedName == null)
+            {
+                localisedName = new LocalisedTextBuilder(enumeration.Strategy.Session).WithText(name).WithLocale(locale).Build();
+                enumeration.AddLocalisedName(localisedName);
+            }
+            else
+            {
+                localisedName.Text = name;
+            }
+        }
 
-        //protected override void CoreOnPostBuild(IObjectBuilder builder)
-        //{
-        //    base.BaseOnPostBuild(builder);
+        public static void AppsEnumerationOnPostBuild(this Enumeration enumeration, IObjectBuilder builder)
+        {
+            if (!enumeration.ExistIsActive)
+            {
+                enumeration.IsActive = true;
+            }
+        }
 
-        //    if (!this.ExistIsActive)
-        //    {
-        //        this.IsActive = true;
-        //    }
-        //}
+        public static void AppsEnumerationDerive(this Enumeration enumeration, IDerivation derivation)
+        {
+            derivation.Log.AssertExists(enumeration, Enumerations.Meta.Name);
 
-        //protected override void CoreDerive(IDerivation derivation)
-        //{
-        //    base.BaseDerive(derivation);
-
-        //    derivation.Log.AssertExists(this, Enumerations.Meta.Name);
-
-        //    this.DisplayName = this.Name;
-        //}
+            enumeration.DisplayName = enumeration.Name;
+        }
     }
 }

@@ -401,6 +401,7 @@
     <Compile Include="Apps\Accounting\Bank.cs" />
     <Compile Include="Apps\Accounting\BankAccount.cs" />
     <Compile Include="Apps\Accounting\BankAccount.v.cs" />
+    <Compile Include="Apps\Accounting\AccountingTransactionType.cs" />
     <Compile Include="Apps\Accounting\BankAccounts.cs" />
     <Compile Include="Apps\Accounting\Banks.cs" />
     <Compile Include="Apps\Accounting\Budget.cs" />
@@ -426,7 +427,9 @@
     <Compile Include="Apps\Accounting\ChartOfAccounts.cs" />
     <Compile Include="Apps\Accounting\CostCenter.cs" />
     <Compile Include="Apps\Accounting\CostCenterCategory.cs" />
+    <Compile Include="Apps\Accounting\CostCenterSplitMethod.cs" />
     <Compile Include="Apps\Accounting\CostCenterSplitMethods.cs" />
+    <Compile Include="Apps\Accounting\CostOfGoodsSoldMethod.cs" />
     <Compile Include="Apps\Accounting\CostOfGoodsSoldMethods.cs" />
     <Compile Include="Apps\Accounting\CreditCard.cs" />
     <Compile Include="Apps\Accounting\CreditCard.v.cs" />
@@ -435,6 +438,7 @@
     <Compile Include="Apps\Accounting\CreditCards.cs" />
     <Compile Include="Apps\Accounting\CreditLine.cs" />
     <Compile Include="Apps\Accounting\CreditLines.cs" />
+    <Compile Include="Apps\Accounting\DebitCreditConstant.cs" />
     <Compile Include="Apps\Accounting\DebitCreditConstants.cs" />
     <Compile Include="Apps\Accounting\Depreciation.cs" />
     <Compile Include="Apps\Accounting\DepreciationMethod.cs" />
@@ -1060,6 +1064,7 @@
     <Compile Include="Apps\Relation\CommunicationEvent.cs" />
     <Compile Include="Apps\Relation\CommunicationEvent.v.cs" />
     <Compile Include="Apps\Relation\CommunicationEventObjectStates.cs" />
+    <Compile Include="Apps\Relation\CommunicationEventPurpose.cs" />
     <Compile Include="Apps\Relation\CommunicationEventPurposes.cs" />
     <Compile Include="Apps\Relation\CommunicationEvents.cs" />
     <Compile Include="Apps\Relation\CommunicationEventStatus.cs" />
@@ -1263,6 +1268,7 @@
     <Compile Include="Apps\WorkEffort\Activities.cs" />
     <Compile Include="Apps\WorkEffort\Activity.v.cs" />
     <Compile Include="Apps\WorkEffort\Activity.cs" />
+    <Compile Include="Apps\WorkEffort\AssetAssignmentStatus.cs" />
     <Compile Include="Apps\WorkEffort\AssetAssignmentStatuses.cs" />
     <Compile Include="Apps\WorkEffort\Deliverable.cs" />
     <Compile Include="Apps\WorkEffort\Deliverables.cs" />

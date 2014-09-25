@@ -29,9 +29,9 @@ namespace Allors.Domain
 
     public partial class SurchargeComponent
     {
-        protected override void AppsOnPostBuild(IObjectBuilder objectBuilder)
+        protected override void AppsOnPostBuild(IObjectBuilder builder)
         {
-            base.AppsOnPostBuild(objectBuilder);
+            base.AppsOnPostBuild(builder);
 
             if (!this.ExistSpecifiedFor)
             {

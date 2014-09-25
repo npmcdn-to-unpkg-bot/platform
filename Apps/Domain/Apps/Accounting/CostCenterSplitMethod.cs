@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="NonSerializedInventoryItemStatus.cs" company="Allors bvba">
+// <copyright file="CostCenterSplitMethod.cs" company="Allors bvba">
 //   Copyright 2002-2012 Allors bvba.
 // 
 // Dual Licensed under
@@ -20,33 +20,16 @@
 
 namespace Allors.Domain
 {
-    using System;
-
-    using Allors.Domain;
-
-    public partial class NonSerializedInventoryItemStatus
+    public partial class CostCenterSplitMethod
     {
         protected override void AppsOnPostBuild(IObjectBuilder builder)
         {
-            base.AppsOnPostBuild(builder);
-
-            if (!this.ExistStartDateTime)
-            {
-                this.StartDateTime = DateTime.Now;
-            }
+            this.AppsEnumerationOnPostBuild(builder);
         }
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            
-
-            derivation.Log.AssertExists(this, NonSerializedInventoryItemStatuses.Meta.StartDateTime);
-            derivation.Log.AssertExists(this, NonSerializedInventoryItemStatuses.Meta.NonSerializedInventoryItemObjectState);
-
-            this.DisplayName = string.Format(
-                "{0} starting {1}",
-                this.ExistNonSerializedInventoryItemObjectState ? this.NonSerializedInventoryItemObjectState.Name : null,
-                this.ExistStartDateTime ? this.StartDateTime : DateTime.MinValue);
+            this.AppsEnumerationDerive(derivation);
         }
     }
 }

@@ -42,9 +42,9 @@ namespace Allors.Domain
             return string.Format("{0} {1}", this.ExistEffectiveDate ? this.EffectiveDate : DateTime.MinValue, this.ExistAmount ? this.Amount : 0);
         }
 
-        protected override void AppsOnPostBuild(IObjectBuilder objectBuilder)
+        protected override void AppsOnPostBuild(IObjectBuilder builder)
         {
-            base.AppsOnPostBuild(objectBuilder);
+            base.AppsOnPostBuild(builder);
 
             if (!this.ExistSearchData)
             {

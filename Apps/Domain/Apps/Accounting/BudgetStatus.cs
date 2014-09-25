@@ -26,9 +26,9 @@ namespace Allors.Domain
 
     public partial class BudgetStatus
     {
-        protected override void AppsOnPostBuild(IObjectBuilder objectBuilder)
+        protected override void AppsOnPostBuild(IObjectBuilder builder)
         {
-            base.AppsOnPostBuild(objectBuilder);
+            base.AppsOnPostBuild(builder);
 
             if (!this.ExistStartDateTime)
             {

@@ -34,10 +34,10 @@ namespace Allors.Domain
         {
             this.RemoveBasePrice(basePrice);
         }
-    
-        protected override void AppsOnPostBuild(IObjectBuilder objectBuilder)
+
+        protected override void AppsOnPostBuild(IObjectBuilder builder)
         {
-            base.AppsOnPostBuild(objectBuilder);
+            this.AppsEnumerationOnPostBuild(builder);
 
             if (!this.ExistSearchData)
             {
@@ -47,7 +47,7 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            
+            this.AppsEnumerationDerive(derivation);
 
             this.DeriveDisplayName();
             this.DeriveSearchDataCharacterBoundaryText();

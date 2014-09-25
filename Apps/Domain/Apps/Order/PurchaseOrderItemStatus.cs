@@ -27,9 +27,9 @@ namespace Allors.Domain
 
     public partial class PurchaseOrderItemStatus
     {
-        protected override void AppsOnPostBuild(IObjectBuilder objectBuilder)
+        protected override void AppsOnPostBuild(IObjectBuilder builder)
         {
-            base.AppsOnPostBuild(objectBuilder);
+            base.AppsOnPostBuild(builder);
 
             this.AppsEnsure();
         }

@@ -82,6 +82,10 @@ namespace Allors.Domain
             }
 
             this.DisplayName = this.Name;
+            if (string.IsNullOrEmpty(this.DisplayName))
+            {
+                this.DisplayName = this.Description;
+            }
 
             this.SearchData.CharacterBoundaryText = this.DisplayName;
             this.SearchData.RemoveWordBoundaryText();

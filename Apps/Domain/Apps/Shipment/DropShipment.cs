@@ -43,9 +43,9 @@ namespace Allors.Domain
             this.PrintContent = "not implemented";
         }
 
-        protected override void AppsOnPostBuild(IObjectBuilder objectBuilder)
+        protected override void AppsOnPostBuild(IObjectBuilder builder)
         {
-            base.AppsOnPostBuild(objectBuilder);
+            base.AppsOnPostBuild(builder);
 
             if (!this.ExistCurrentObjectState)
             {
