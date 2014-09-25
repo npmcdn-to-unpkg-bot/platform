@@ -24,27 +24,27 @@ namespace Allors
 
     public abstract partial class ObjectBase
     {
-        protected virtual void CustomOnPostBuild(IObjectBuilder builder)
+        protected virtual void TestOnPostBuild(IObjectBuilder builder)
         {
         }
 
-        protected virtual void CustomApplySecurityOnPostBuild()
+        protected virtual void TestApplySecurityOnPostBuild()
         {
         }
 
-        protected virtual void CustomPrepareDerivation(IDerivation derivation)
+        protected virtual void TestPrepareDerivation(IDerivation derivation)
         {
         }
 
-        protected virtual void CustomDerive(IDerivation derivation)
+        protected virtual void TestDerive(IDerivation derivation)
         {
         }
 
-        protected virtual void CustomApplySecurityOnDerive()
+        protected virtual void TestApplySecurityOnDerive()
         {
         }
 
-        protected virtual void CustomOnDelete()
+        protected virtual void TestOnDelete()
         {
         }
     }

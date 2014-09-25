@@ -22,11 +22,10 @@
 namespace Allors.Domain
 {
     using Allors;
-    using Allors.Domain;
 
     public partial class Organisation
     {
-        protected override void CustomOnPostBuild(IObjectBuilder builder)
+        protected override void TestOnPostBuild(IObjectBuilder builder)
         {
             if (!this.ExistSearchData)
             {
@@ -34,9 +33,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void CustomDerive(IDerivation derivation)
+        protected override void TestDerive(IDerivation derivation)
         {
-            base.CustomDerive(derivation);
+            base.TestDerive(derivation);
 
             derivation.Log.AssertExists(this, Organisations.Meta.Name);
 

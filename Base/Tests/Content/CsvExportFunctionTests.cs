@@ -70,7 +70,7 @@ namespace Allors.Domain
 
             var csvFile = new CsvExport("Test");
             csvFile.Columns.Add(new CsvExportPath(C1s.Meta.C1AllorsString));
-            csvFile.Columns.Add(new CsvExportFunction<C1>("Function", (c1, acl, cultureInfo) => CsvExport.Escape(c1.C1AllorsDecimal.Value.ToString(cultureInfo))));
+            csvFile.Columns.Add(new CsvExportFunction<C1>("Function", (c1, acl, cultureInfo) => CsvExport.Escape(c1.C1AllorsDecimal.ToString(cultureInfo))));
 
             var extent = this.DatabaseSession.Extent(C1s.Meta.ObjectType).AddSort(C1s.Meta.C1AllorsString);
 

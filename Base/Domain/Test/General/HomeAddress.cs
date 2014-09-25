@@ -23,8 +23,6 @@ namespace Allors.Domain
 {
     using global::System.Text;
 
-    using Allors.Domain;
-
     /// <summary>
     /// A HomeAddress is a fysical address with a street/number and a place
     /// </summary>
@@ -35,10 +33,8 @@ namespace Allors.Domain
             return DisplayName;
         }
 
-        protected override void CoreDerive(IDerivation derivation)
+        protected override void TestDerive(IDerivation derivation)
         {
-            base.CoreDerive(derivation);
-
             derivation.Log.AssertExists(this, HomeAddresses.Meta.Street);
             derivation.Log.AssertNonEmptyString(this, HomeAddresses.Meta.Street);
 

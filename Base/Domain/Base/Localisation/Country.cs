@@ -44,19 +44,19 @@ namespace Allors.Domain
             }
         }
 
-        protected void CoreDeriveDisplayName()
+        protected void BaseDeriveDisplayName()
         {
             this.DisplayName = this.ComposeDisplayName();
         }
 
-        protected string CoreComposeDisplayName()
+        protected string BaseComposeDisplayName()
         {
             return this.Name;
         }
 
-        protected override void CoreOnPostBuild(IObjectBuilder objectBuilder)
+        protected override void BaseOnPostBuild(IObjectBuilder objectBuilder)
         {
-            base.CoreOnPostBuild(objectBuilder);
+            base.BaseOnPostBuild(objectBuilder);
 
             if (!this.ExistSearchData)
             {
@@ -64,9 +64,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void CoreDerive(IDerivation derivation)
+        protected override void BaseDerive(IDerivation derivation)
         {
-            base.CoreDerive(derivation);
+            base.BaseDerive(derivation);
 
             derivation.Log.AssertExists(this, Countries.Meta.IsoCode);
             derivation.Log.AssertIsUnique(this, Countries.Meta.IsoCode);

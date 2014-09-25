@@ -36,7 +36,7 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            
+            this.AppsPartSpecificationDerive(derivation);
 
             derivation.Log.AssertExists(this, ConstraintSpecifications.Meta.Description);
 

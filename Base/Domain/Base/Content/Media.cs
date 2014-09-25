@@ -51,9 +51,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void CoreOnPostBuild(IObjectBuilder builder)
+        protected override void BaseOnPostBuild(IObjectBuilder builder)
         {
-            base.CoreOnPostBuild(builder);
+            base.BaseOnPostBuild(builder);
 
             if (!this.ExistUniqueId)
             {
@@ -67,9 +67,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void CoreDerive(IDerivation derivation)
+        protected override void BaseDerive(IDerivation derivation)
         {
-            base.CoreDerive(derivation);
+            base.BaseDerive(derivation);
 
             derivation.Log.AssertExists(this, Medias.Meta.UniqueId);
             derivation.Log.AssertExists(this, Medias.Meta.MediaType);

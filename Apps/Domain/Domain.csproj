@@ -1299,7 +1299,7 @@
     <Compile Include="Apps\WorkEffort\Tasks.cs" />
     <Compile Include="Apps\WorkEffort\TimeEntries.cs" />
     <Compile Include="Apps\WorkEffort\TimeEntry.cs" />
-    <Compile Include="Apps\WorkEffort\WorkEffort.cs" />
+    <Compile Include="Apps\WorkEffort\WorkEffortExtensions.cs" />
     <Compile Include="Apps\WorkEffort\WorkEffort.v.cs" />
     <Compile Include="Apps\WorkEffort\WorkEffortAssignment.cs" />
     <Compile Include="Apps\WorkEffort\WorkEffortAssignmentRate.cs" />

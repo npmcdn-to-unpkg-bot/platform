@@ -52,7 +52,7 @@ namespace Allors.Domain
         {
             get
             {
-                return this.OperandType != null;
+                return this.ExistOperandTypePointer;
             }
         }
 
@@ -132,7 +132,7 @@ namespace Allors.Domain
             this.ConcreteClassPointer = concreteClass.Id;
         }
 
-        protected override void CoreDerive(IDerivation derivation)
+        protected override void BaseDerive(IDerivation derivation)
         {
             derivation.Log.AssertExists(this, Meta.OperationEnum);
             derivation.Log.AssertExists(this, Meta.ConcreteClassPointer);

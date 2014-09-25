@@ -57,9 +57,9 @@ namespace Allors.Domain
             return false;
         }
 
-        protected override void CoreOnPostBuild(IObjectBuilder objectBuilder)
+        protected override void BaseOnPostBuild(IObjectBuilder objectBuilder)
         {
-            base.CoreOnPostBuild(objectBuilder);
+            base.BaseOnPostBuild(objectBuilder);
 
             if (!this.ExistUserEmailConfirmed)
             {
@@ -74,9 +74,9 @@ namespace Allors.Domain
             this.BuildOwnerSecurityToken();
         }
 
-        protected override void CoreDerive(IDerivation derivation)
+        protected override void BaseDerive(IDerivation derivation)
         {
-            base.CoreDerive(derivation);
+            base.BaseDerive(derivation);
             
             this.DisplayName = this.DeriveDisplayName();
             this.SearchData.CharacterBoundaryText = this.DeriveSearchDataCharacterBoundaryText();

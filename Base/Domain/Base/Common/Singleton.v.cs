@@ -24,7 +24,7 @@ namespace Allors.Domain
     {
         public override void PrepareDerivation(IDerivation derivation)
         {
-            this.CorePrepareDerivation(derivation);
+            this.BasePrepareDerivation(derivation);
         }
     }
 }

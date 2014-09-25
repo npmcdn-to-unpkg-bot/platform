@@ -26,25 +26,21 @@ namespace Allors.Domain
 
     public partial class C1
     {
-        protected override void CoreOnPostBuild(IObjectBuilder builder)
+        protected override void TestOnPostBuild(IObjectBuilder builder)
         {
             this.DisplayName = this.Name;
         }
 
-        protected override void CorePrepareDerivation(IDerivation derivation)
+        protected override void TestPrepareDerivation(IDerivation derivation)
         {
-            base.CorePrepareDerivation(derivation);
-
             foreach (Derivable dependency in this.Dependencies)
             {
                 derivation.AddDependency(this, dependency);
             }
         }
 
-        protected override void CoreDerive(IDerivation derivation)
+        protected override void TestDerive(IDerivation derivation)
         {
-            base.CoreDerive(derivation);
-
             var sequence = (IList<IObject>)derivation["sequence"];
             if (sequence != null)
             {

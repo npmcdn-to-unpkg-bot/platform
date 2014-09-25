@@ -51,9 +51,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void CoreDerive(IDerivation derivation)
+        protected override void BaseDerive(IDerivation derivation)
         {
-            base.CoreDerive(derivation);
+            base.BaseDerive(derivation);
 
             derivation.Log.AssertExists(this, Currencies.Meta.IsoCode);
             derivation.Log.AssertExists(this, Currencies.Meta.Symbol);

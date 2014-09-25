@@ -30,10 +30,8 @@ namespace Allors.Domain
             return places;
         }
 
-        protected override void BaseSecure(Security config)
+        protected override void TestSecure(Security config)
         {
-            base.BaseSecure(config);
-
             var full = new[] { Operation.Read, Operation.Write, Operation.Execute };
 
             config.GrantAdministrator(this.ObjectType, full);

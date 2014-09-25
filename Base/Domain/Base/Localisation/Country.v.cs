@@ -24,12 +24,12 @@ namespace Allors.Domain
     {
         public void DeriveDisplayName()
         {
-            this.CoreDeriveDisplayName();
+            this.BaseDeriveDisplayName();
         }
 
         public string ComposeDisplayName()
         {
-            return this.CoreComposeDisplayName();
+            return this.BaseComposeDisplayName();
         }
     }
 }

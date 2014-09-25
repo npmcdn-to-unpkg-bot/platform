@@ -37,9 +37,9 @@ namespace Allors.Domain
             return false;
         }
 
-        protected override void CorePrepareDerivation(IDerivation derivation)
+        protected override void BasePrepareDerivation(IDerivation derivation)
         {
-            base.CorePrepareDerivation(derivation);
+            base.BasePrepareDerivation(derivation);
 
             foreach (Derivable member in this.Members)
             {
@@ -47,9 +47,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void CoreDerive(IDerivation derivation)
+        protected override void BaseDerive(IDerivation derivation)
         {
-            base.CoreDerive(derivation);
+            base.BaseDerive(derivation);
 
             derivation.Log.AssertExists(this, Meta.Name);
             derivation.Log.AssertIsUnique(this, Meta.Name);
@@ -76,7 +76,7 @@ namespace Allors.Domain
             }
         }
 
-        private void CoreDeriveDisplayName()
+        private void BaseDeriveDisplayName()
         {
             var uiText = new StringBuilder();
 

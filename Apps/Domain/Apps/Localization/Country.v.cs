@@ -24,7 +24,7 @@ namespace Allors.Domain
     {
         public void DeriveDisplayName()
         {
-            this.CoreDeriveDisplayName();
+            this.BaseDeriveDisplayName();
         }
 
         public void DeriveSearchDataCharacterBoundaryText()
@@ -39,7 +39,7 @@ namespace Allors.Domain
 
         public string ComposeDisplayName()
         {
-            return this.CoreComposeDisplayName();
+            return this.BaseComposeDisplayName();
         }
 
         public string ComposeSearchDataCharacterBoundaryText()

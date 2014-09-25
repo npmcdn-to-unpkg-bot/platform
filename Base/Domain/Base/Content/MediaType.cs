@@ -56,16 +56,16 @@ namespace Allors.Domain
             }
         }
 
-        protected override void CoreOnPostBuild(IObjectBuilder builder)
+        protected override void BaseOnPostBuild(IObjectBuilder builder)
         {
-            base.CoreOnPostBuild(builder);
+            base.BaseOnPostBuild(builder);
 
             this.NameToLowerCase();
         }
 
-        protected override void CoreDerive(IDerivation derivation)
+        protected override void BaseDerive(IDerivation derivation)
         {
-            base.CoreDerive(derivation);
+            base.BaseDerive(derivation);
 
             derivation.Log.AssertExists(this, MediaTypes.Meta.Name);
 

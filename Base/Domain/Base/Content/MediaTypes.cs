@@ -142,7 +142,7 @@ namespace Allors.Domain
             return false;
         }
 
-        private MediaType CoreInfer(byte[] content)
+        private MediaType BaseInfer(byte[] content)
         {
             if (Match(content, PngSignature))
             {

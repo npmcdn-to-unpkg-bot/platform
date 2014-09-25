@@ -65,8 +65,6 @@ namespace Allors.Domain
 
         protected override void AppsSetup(Setup setup)
         {
-            base.AppsSetup(setup);
-
             new RoleBuilder(Session).WithName("Customer").WithUniqueId(CustomerRoleId).Build();
             new RoleBuilder(Session).WithName("Supplier").WithUniqueId(SupplierRoleId).Build();
             new RoleBuilder(Session).WithName("Partner").WithUniqueId(PartnerRoleId).Build();

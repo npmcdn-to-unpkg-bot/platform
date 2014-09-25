@@ -23,8 +23,6 @@ namespace Allors.Domain
 {
     using global::System.Text;
 
-    using Allors.Domain;
-
     /// <summary>
     /// A MailboxAddress is a address in a mailbox in the postoffice
     /// </summary>
@@ -35,7 +33,7 @@ namespace Allors.Domain
             return DisplayName;
         }
 
-        protected override void CoreDerive(IDerivation derivation)
+        protected override void TestDerive(IDerivation derivation)
         {
             derivation.Log.AssertExists(this, MailboxAddresses.Meta.PoBox);
             derivation.Log.AssertNonEmptyString(this, MailboxAddresses.Meta.PoBox);

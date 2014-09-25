@@ -26,42 +26,42 @@ namespace Allors
     {
         public virtual void OnPostBuild(IObjectBuilder builder)
         {
-            this.CoreOnPostBuild(builder);
-            this.CustomOnPostBuild(builder);
+            this.BaseOnPostBuild(builder);
+            this.TestOnPostBuild(builder);
             
             this.ApplySecurityOnPostBuild();
         }
 
         public virtual void ApplySecurityOnPostBuild()
         {
-            this.CoreApplySecurityOnPostBuild();
-            this.CustomApplySecurityOnPostBuild();
+            this.BaseApplySecurityOnPostBuild();
+            this.TestApplySecurityOnPostBuild();
         }
 
         public virtual void PrepareDerivation(IDerivation derivation)
         {
-            this.CorePrepareDerivation(derivation);
-            this.CustomPrepareDerivation(derivation);
+            this.BasePrepareDerivation(derivation);
+            this.TestPrepareDerivation(derivation);
         }
 
         public virtual void Derive(IDerivation derivation)
         {
-            this.CoreDerive(derivation);
-            this.CustomDerive(derivation);
+            this.BaseDerive(derivation);
+            this.TestDerive(derivation);
 
             this.ApplySecurityOnDerive();
         }
 
         public virtual void ApplySecurityOnDerive()
         {
-            this.CoreApplySecurityOnDerive();
-            this.CustomApplySecurityOnDerive();
+            this.BaseApplySecurityOnDerive();
+            this.TestApplySecurityOnDerive();
         }
 
         public virtual void Delete()
         {
-            this.CoreOnDelete();
-            this.CustomOnDelete();
+            this.BaseOnDelete();
+            this.TestOnDelete();
 
             this.CoreDelete();
         }

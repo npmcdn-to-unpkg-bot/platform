@@ -64,14 +64,11 @@ namespace Allors.Domain
 
             this.DatabaseSession.Derive(true);
 
-            Assert.IsTrue(first.IsDerived.HasValue);
-            Assert.IsTrue(first.IsDerived.Value);
+            Assert.IsTrue(first.ExistIsDerived);
 
-            Assert.IsTrue(first.Second.IsDerived.HasValue);
-            Assert.IsTrue(first.Second.IsDerived.Value);
+            Assert.IsTrue(first.Second.ExistIsDerived);
 
-            Assert.IsTrue(first.Second.Third.IsDerived.HasValue);
-            Assert.IsTrue(first.Second.Third.IsDerived.Value);
+            Assert.IsTrue(first.Second.Third.ExistIsDerived);
         }
 
         [Test]

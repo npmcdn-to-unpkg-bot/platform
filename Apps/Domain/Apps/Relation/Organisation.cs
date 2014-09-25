@@ -32,6 +32,11 @@ namespace Allors.Domain
             {
                 this.SearchData = new SearchDataBuilder(this.Session).Build();
             }
+
+            if (!this.ExistLocale)
+            {
+                this.Locale = Singleton.Instance(this.Session).DefaultLocale;
+            }
         }
 
         protected override void AppsApplySecurityOnDerive()
@@ -48,7 +53,7 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            
+            this.AppsPartyDerive(derivation);
 
             if (!this.ExistOwnerSecurityToken)
             {

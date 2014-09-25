@@ -50,9 +50,9 @@ namespace Allors.Domain
             return base.ToString();
         }
 
-        protected override void CustomOnPostBuild(IObjectBuilder objectBuilder)
+        protected override void TestOnPostBuild(IObjectBuilder objectBuilder)
         {
-            base.CustomOnPostBuild(objectBuilder);
+            base.TestOnPostBuild(objectBuilder);
 
             if (!this.ExistSearchData)
             {
@@ -60,9 +60,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void CustomDerive(IDerivation derivation)
+        protected override void TestDerive(IDerivation derivation)
         {
-            base.CustomDerive(derivation);
+            base.TestDerive(derivation);
 
             if (!this.ExistOwnerSecurityToken)
             {
@@ -70,7 +70,7 @@ namespace Allors.Domain
                 this.OwnerSecurityToken = mySecurityToken;
             }
 
-            this.DisplayName = this.CustomComposeDisplayName();
+            this.DisplayName = this.TestComposeDisplayName();
 
             this.SearchData.CharacterBoundaryText = this.DisplayName;
             this.SearchData.RemoveWordBoundaryText();
@@ -94,7 +94,7 @@ namespace Allors.Domain
             this.PrintContent = template.Apply(new Dictionary<string, object> { { "this", this } });
         }
 
-        private string CustomComposeDisplayName()
+        private string TestComposeDisplayName()
         {
             if (this.ExistFirstName && this.ExistMiddleName && this.ExistLastName)
             {

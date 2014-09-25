@@ -38,7 +38,10 @@ namespace Allors.Domain
 
         public Role Administrator
         {
-            get { return this.RoleCache.Get(AdministratorId); }
+            get
+            {
+                return this.RoleCache.Get(AdministratorId);
+            }
         }
 
         public Role Guest

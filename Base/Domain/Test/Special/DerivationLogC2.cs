@@ -22,9 +22,9 @@ namespace Allors.Domain
 {
     public partial class DerivationLogC2
     {
-        protected override void CustomDerive(Domain.IDerivation derivation)
+        protected override void TestDerive(Domain.IDerivation derivation)
         {
-            base.CustomDerive(derivation);
+            base.TestDerive(derivation);
 
             derivation.Log.AssertIsUnique(this, DerivationLogC1s.Meta.UniqueId);
         }

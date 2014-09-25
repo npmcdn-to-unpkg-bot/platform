@@ -90,7 +90,7 @@ namespace Allors
             return null;
         }
 
-        private void CoreOnPrePrepare()
+        private void BaseOnPrePrepare()
         {
             var singleton = new SingletonBuilder(this.session).Build();
 
@@ -98,7 +98,7 @@ namespace Allors
             singleton.AdministratorSecurityToken = new SecurityTokenBuilder(this.session).Build();
         }
 
-        private void CoreOnPostSetup()
+        private void BaseOnPostSetup()
         {
             var guest = new PersonBuilder(this.session).WithUserName("guest").WithLastName("Guest").Build();
             new UserGroups(this.session).Guests.AddMember(guest);
@@ -108,11 +108,11 @@ namespace Allors
             new UserGroups(this.session).Administrators.AddMember(administrator);
         }
 
-        private void CoreOnPostPrepare()
+        private void BaseOnPostPrepare()
         {
         }
 
-        private void CoreOnPreSetup()
+        private void BaseOnPreSetup()
         {
         }
     }

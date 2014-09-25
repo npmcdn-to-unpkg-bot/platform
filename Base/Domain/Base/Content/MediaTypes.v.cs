@@ -31,7 +31,7 @@ namespace Allors.Domain
         /// <returns>the inferred MediaType</returns>
         public MediaType Infer(byte[] content)
         {
-            return this.CoreInfer(content);
+            return this.BaseInfer(content);
         }
     }
 }

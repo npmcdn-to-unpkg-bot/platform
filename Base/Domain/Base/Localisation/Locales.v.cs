@@ -24,7 +24,7 @@ namespace Allors.Domain
     {
         public void Sync()
         {
-            this.CoreSync();
+            this.BaseSync();
         }
     }
 }

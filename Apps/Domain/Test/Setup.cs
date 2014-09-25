@@ -20,21 +20,25 @@
 
 namespace Allors
 {
+    using Allors.Domain;
+
     public partial class Setup
     {
-        private void CustomOnPrePrepare()
+        private void TestOnPrePrepare()
         {
         }
 
-        private void CustomOnPostPrepare()
+        private void TestOnPostPrepare()
+        {
+            var singleton = Singleton.Instance(session);
+            singleton.DefaultLocale = new Locales(session).EnglishGreatBritain;
+        }
+
+        private void TestOnPreSetup()
         {
         }
 
-        private void CustomOnPreSetup()
-        {
-        }
-
-        private void CustomOnPostSetup()
+        private void TestOnPostSetup()
         {
         }
     }

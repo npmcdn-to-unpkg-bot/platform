@@ -24,9 +24,9 @@ namespace Allors.Domain
 
     public partial class LocalisedText
     {
-        protected override void CoreOnDelete()
+        protected override void BaseOnDelete()
         {
-            base.CoreOnDelete();
+            base.BaseOnDelete();
 
             if (this.ExistSearchData)
             {
@@ -34,9 +34,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void CoreOnPostBuild(IObjectBuilder objectBuilder)
+        protected override void BaseOnPostBuild(IObjectBuilder objectBuilder)
         {
-            base.CoreOnPostBuild(objectBuilder);
+            base.BaseOnPostBuild(objectBuilder);
 
             if (!this.ExistSearchData)
             {
@@ -44,9 +44,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void CoreDerive(IDerivation derivation)
+        protected override void BaseDerive(IDerivation derivation)
         {
-            base.CoreDerive(derivation);
+            base.BaseDerive(derivation);
 
             derivation.Log.AssertExists(this, LocalisedTexts.Meta.Text);
 

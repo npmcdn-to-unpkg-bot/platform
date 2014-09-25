@@ -72,7 +72,7 @@ namespace Allors.Domain
             config.GrantAdministrator(this.ObjectType, full);
         }
 
-        private void CoreSync()
+        private void BaseSync()
         {
             var englishNameByCountry = new Dictionary<Country, string>();
             var englishNameByCurrency = new Dictionary<Currency, string>();

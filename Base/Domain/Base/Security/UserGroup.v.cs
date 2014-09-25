@@ -25,7 +25,7 @@ namespace Allors.Domain
     {
         public void DeriveDisplayName()
         {
-            this.CoreDeriveDisplayName();
+            this.BaseDeriveDisplayName();
         }
     }
 }

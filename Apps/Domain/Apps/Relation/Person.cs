@@ -157,7 +157,7 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            
+            this.AppsPartyDerive(derivation);
 
             this.BillingAddress = null;
             this.BillingInquiriesFax = null;
@@ -364,14 +364,16 @@ namespace Allors.Domain
                 //// In case person does not belong to any group (i.e. private person placing an order) this person should be granted customer permissions.
                 if (!this.ExistAccessControlsWhereSubject && this.IsInDatabase)
                 {
+                    var customerRole = new Roles(this.DatabaseSession).Customer;
                     new AccessControlBuilder(this.DatabaseSession)
-                        .WithRole(new Roles(this.DatabaseSession).Customer)
+                        .WithRole(customerRole)
                         .WithSubject(this)
                         .WithObject(this.OwnerSecurityToken)
                         .Build();
 
+                    var ownerRole = new Roles(this.DatabaseSession).Owner;
                     new AccessControlBuilder(this.DatabaseSession)
-                        .WithRole(new Roles(this.DatabaseSession).Owner)
+                        .WithRole(ownerRole)
                         .WithSubject(this)
                         .WithObject(this.OwnerSecurityToken)
                         .Build();

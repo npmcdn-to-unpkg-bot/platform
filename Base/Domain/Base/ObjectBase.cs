@@ -67,15 +67,15 @@ namespace Allors
             }
         }
 
-        protected virtual void CoreOnPostBuild(IObjectBuilder builder)
+        protected virtual void BaseOnPostBuild(IObjectBuilder builder)
         {
         }
 
-        protected virtual void CoreApplySecurityOnPostBuild()
+        protected virtual void BaseApplySecurityOnPostBuild()
         {
         }
 
-        protected virtual void CorePrepareDerivation(IDerivation derivation)
+        protected virtual void BasePrepareDerivation(IDerivation derivation)
         {
             var changeSet = derivation.ChangeSet;
             if (derivation.IsForced(this.Id) || changeSet.Associations.Contains(this.Id) || changeSet.Created.Contains(this.Id))
@@ -87,15 +87,15 @@ namespace Allors
             }
         }
 
-        protected virtual void CoreDerive(IDerivation derivation)
+        protected virtual void BaseDerive(IDerivation derivation)
         {
         }
 
-        protected virtual void CoreApplySecurityOnDerive()
+        protected virtual void BaseApplySecurityOnDerive()
         {
         }
 
-        protected virtual void CoreOnDelete()
+        protected virtual void BaseOnDelete()
         {
         }
         

@@ -24,7 +24,7 @@ namespace Allors.Domain
     {
         public PrintQueue Locate(Printable printable)
         {
-            return this.CoreLocate(printable);
+            return this.BaseLocate(printable);
         }
     }
 }

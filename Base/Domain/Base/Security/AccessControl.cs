@@ -22,9 +22,9 @@ namespace Allors.Domain
 {
     public partial class AccessControl
     {
-        protected override void CoreDerive(IDerivation derivation)
+        protected override void BaseDerive(IDerivation derivation)
         {
-            base.CoreDerive(derivation);
+            base.BaseDerive(derivation);
 
             derivation.Log.AssertExists(this, Meta.Role);
             derivation.Log.AssertAtLeastOne(this, Meta.Subject, Meta.SubjectGroup);

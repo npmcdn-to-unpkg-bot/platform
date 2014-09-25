@@ -41,7 +41,7 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            
+            this.AppsCommunicationEventDerive(derivation);
 
             derivation.Log.AssertExists(this, FaxCommunications.Meta.Description);
 

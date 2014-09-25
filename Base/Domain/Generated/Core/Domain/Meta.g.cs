@@ -130,6 +130,7 @@ namespace Allors.Meta
 		public static readonly AssociationType AccessControlledObjectSecurityToken = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("b816fccd-08e0-46e0-a49c-7213c3604416"))).AssociationType;
 		public static readonly AssociationType UserInterfaceableDisplayName = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("6412301d-95ec-44c2-8c71-cc03de5327b9"))).AssociationType;
 		public static readonly AssociationType ObjectStateDeniedPermission = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("59338f0b-40e7-49e8-ba1a-3ecebf96aebe"))).AssociationType;
+		public static readonly AssociationType ObjectStateName = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("75e8e8b6-6a6a-45e9-9701-c99967f7da9f"))).AssociationType;
 		public static readonly AssociationType LocalisedTextText = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("50dc85f0-3d22-4bc1-95d9-153674b89f7a"))).AssociationType;
 		public static readonly AssociationType StringTemplateBody = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("2f88f9f8-3c22-40d3-885c-2abd43af96cc"))).AssociationType;
 		public static readonly AssociationType StringTemplateName = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("c501103b-037a-4961-93df-2dbb74b88a76"))).AssociationType;
@@ -437,6 +438,7 @@ namespace Allors.Meta
 		public static readonly RoleType AccessControlledObjectSecurityToken = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("b816fccd-08e0-46e0-a49c-7213c3604416"))).RoleType;
 		public static readonly RoleType UserInterfaceableDisplayName = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("6412301d-95ec-44c2-8c71-cc03de5327b9"))).RoleType;
 		public static readonly RoleType ObjectStateDeniedPermission = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("59338f0b-40e7-49e8-ba1a-3ecebf96aebe"))).RoleType;
+		public static readonly RoleType ObjectStateName = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("75e8e8b6-6a6a-45e9-9701-c99967f7da9f"))).RoleType;
 		public static readonly RoleType LocalisedTextText = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("50dc85f0-3d22-4bc1-95d9-153674b89f7a"))).RoleType;
 		public static readonly RoleType StringTemplateBody = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("2f88f9f8-3c22-40d3-885c-2abd43af96cc"))).RoleType;
 		public static readonly RoleType StringTemplateName = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("c501103b-037a-4961-93df-2dbb74b88a76"))).RoleType;

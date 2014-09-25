@@ -36,7 +36,7 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            
+            this.AppsBudgetDerive(derivation);
 
             derivation.Log.AssertExists(this, AccountingPeriods.Meta.PeriodNumber);
             derivation.Log.AssertExists(this, AccountingPeriods.Meta.TimeFrequency);

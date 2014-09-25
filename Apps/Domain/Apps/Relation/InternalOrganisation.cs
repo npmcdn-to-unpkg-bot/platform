@@ -194,7 +194,7 @@ namespace Allors.Domain
 
         protected override void AppsPrepareDerivation(IDerivation derivation)
         {
-            base.AppsPrepareDerivation(derivation);
+            this.AppsPartyDerive(derivation);
 
             // TODO:
             if (derivation.ChangeSet.Associations.Contains(this.Id))

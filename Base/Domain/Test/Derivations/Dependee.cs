@@ -35,6 +35,11 @@ namespace Allors.Domain
             {
                 this.Subcounter = 0;
             }
+
+            if (!this.ExistDeleteDependent)
+            {
+                this.DeleteDependent = false;
+            }
         }
 
         public override void PrepareDerivation(IDerivation derivation)
@@ -58,7 +63,7 @@ namespace Allors.Domain
                 this.Subcounter = this.Subdependee.Subcounter;
             }
 
-            if (this.DeleteDependent != null && this.DeleteDependent.Value)
+            if (this.DeleteDependent)
             {
                 this.DependentWhereDependee.Delete();
             }

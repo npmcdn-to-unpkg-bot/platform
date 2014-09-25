@@ -23,8 +23,6 @@ namespace Allors.Domain
 {
     using global::System.Text;
 
-    using Allors.Domain;
-
     /// <summary>
     /// A Place is a fysical location somewhere on earth, defined as a postalcode/city and a country
     /// </summary>
@@ -35,17 +33,15 @@ namespace Allors.Domain
             return DisplayName;
         }
 
-        protected override void CoreOnPostBuild(Allors.IObjectBuilder builder)
+        protected override void TestOnPostBuild(Allors.IObjectBuilder builder)
         {
-            base.CoreOnPostBuild(builder);
-
             if (!this.ExistSearchData)
             {
                 this.SearchData = new SearchDataBuilder(this.Session).Build();
             }
         }
 
-        protected override void CoreDerive(IDerivation derivation)
+        protected override void TestDerive(IDerivation derivation)
         {
             derivation.Log.AssertExists(this, Places.Meta.PostalCode);
             derivation.Log.AssertNonEmptyString(this, Places.Meta.PostalCode);
