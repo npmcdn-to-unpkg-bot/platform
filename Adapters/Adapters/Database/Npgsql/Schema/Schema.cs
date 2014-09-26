@@ -326,7 +326,7 @@ FROM information_schema.columns"))
                                                             break;
 
                                                         case "timestamp":
-                                                            if (unitTypeTag != UnitTags.AllorsDateTime)
+                                                            if (unitTypeTag != UnitTags.AllorsDate)
                                                             {
                                                                 AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Incompatible);
                                                             }
@@ -938,7 +938,7 @@ $$ language plpgsql;
                                     this.procedureByName.Add(procedure.Name, procedure);
                                     break;
 
-                                case UnitTags.AllorsDateTime:
+                                case UnitTags.AllorsDate:
                                     // Set DateTime Role
                                     procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularPropertyName };
                                     procedure.Definition =

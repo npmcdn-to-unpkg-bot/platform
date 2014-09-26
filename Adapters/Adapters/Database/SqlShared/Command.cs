@@ -110,7 +110,7 @@ namespace Allors.Adapters.Database.Sql
                     return this.GetDouble(reader, i);
                 case UnitTags.AllorsBoolean:
                     return this.GetBoolean(reader, i);
-                case UnitTags.AllorsDateTime:
+                case UnitTags.AllorsDate:
                     return this.GetDateTime(reader, i);
                 case UnitTags.AllorsUnique:
                     return this.GetUnique(reader, i);

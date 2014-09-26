@@ -115,7 +115,7 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
                         arrayParam = schema.BooleanRelationArrayParam;
                         break;
 
-                    case UnitTags.AllorsDateTime:
+                    case UnitTags.AllorsDate:
                         arrayParam = schema.DateTimeRelationArrayParam;
                         break;
 

@@ -38,7 +38,7 @@ namespace Allors.Meta
         /// <summary>
         /// The tag for the date time <see cref="ObjectType"/>.
         /// </summary>
-        AllorsDateTime,
+        AllorsDate,
 
         /// <summary>
         /// The tag for the decimal <see cref="ObjectType"/>.

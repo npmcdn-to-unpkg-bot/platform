@@ -250,15 +250,20 @@ namespace Allors.Adapters.Special
                     {
                         // year, day & month
                         var values = C1.Create(this.Session);
-                        values.C1AllorsDateTime = new DateTime(1973, 03, 27);
-                        values.I1AllorsDateTime = new DateTime(1973, 03, 27);
-                        values.S1AllorsDateTime = new DateTime(1973, 03, 27);
+
+                        var date = new DateTime(1973, 03, 27);
+
+                        values.C1AllorsDate = date;
+                        values.I1AllorsDate = date;
+                        values.S1AllorsDate = date;
 
                         mark();
 
-                        Assert.AreEqual(new DateTime(1973, 03, 27, 0, 0, 0, DateTimeKind.Utc), values.C1AllorsDateTime);
-                        Assert.AreEqual(new DateTime(1973, 03, 27, 0, 0, 0, DateTimeKind.Utc), values.I1AllorsDateTime);
-                        Assert.AreEqual(new DateTime(1973, 03, 27, 0, 0, 0, DateTimeKind.Utc), values.S1AllorsDateTime);
+                        var dateUniversal = new DateTime(date.Year, date.Month, date.Day, 0, 0, 0, DateTimeKind.Utc);
+
+                        Assert.AreEqual(dateUniversal, values.C1AllorsDate);
+                        Assert.AreEqual(dateUniversal, values.I1AllorsDate);
+                        Assert.AreEqual(dateUniversal, values.S1AllorsDate);
                     }
 
                     {
@@ -267,17 +272,17 @@ namespace Allors.Adapters.Special
 
                         var low = new DateTime(1, 1, 1);
 
-                        values.C1AllorsDateTime = low;
-                        values.I1AllorsDateTime = low;
-                        values.S1AllorsDateTime = low;
+                        values.C1AllorsDate = low;
+                        values.I1AllorsDate = low;
+                        values.S1AllorsDate = low;
 
                         mark();
 
-                        var minUniversal = new DateTime(low.Year, low.Month, low.Day, 0, 0, 0, DateTimeKind.Utc);
+                        var lowUniversal = new DateTime(low.Year, low.Month, low.Day, 0, 0, 0, DateTimeKind.Utc);
 
-                        Assert.AreEqual(DateTime.MinValue, minUniversal);
-                        Assert.AreEqual(DateTime.MinValue, minUniversal);
-                        Assert.AreEqual(DateTime.MinValue, minUniversal);
+                        Assert.AreEqual(lowUniversal, lowUniversal);
+                        Assert.AreEqual(lowUniversal, lowUniversal);
+                        Assert.AreEqual(lowUniversal, lowUniversal);
                     }
 
                     {
@@ -286,15 +291,17 @@ namespace Allors.Adapters.Special
 
                         var high = new DateTime(9999, 1, 1);
 
-                        values.C1AllorsDateTime = high;
-                        values.I1AllorsDateTime = high;
-                        values.S1AllorsDateTime = high;
+                        values.C1AllorsDate = high;
+                        values.I1AllorsDate = high;
+                        values.S1AllorsDate = high;
 
                         mark();
 
-                        Assert.AreEqual(high, values.C1AllorsDateTime);
-                        Assert.AreEqual(high, values.I1AllorsDateTime);
-                        Assert.AreEqual(high, values.S1AllorsDateTime);
+                        var highUniversal = new DateTime(high.Year, high.Month, high.Day, 0, 0, 0, DateTimeKind.Utc);
+
+                        Assert.AreEqual(highUniversal, values.C1AllorsDate);
+                        Assert.AreEqual(highUniversal, values.I1AllorsDate);
+                        Assert.AreEqual(highUniversal, values.S1AllorsDate);
                     }
 
                     {
@@ -303,17 +310,17 @@ namespace Allors.Adapters.Special
 
                         var values = C1.Create(this.Session);
                         
-                        values.C1AllorsDateTime = now;
-                        values.I1AllorsDateTime = now;
-                        values.S1AllorsDateTime = now;
+                        values.C1AllorsDate = now;
+                        values.I1AllorsDate = now;
+                        values.S1AllorsDate = now;
 
                         mark();
                         
                         var nowUniversal = new DateTime(now.Year, now.Month, now.Day, 0, 0, 0, DateTimeKind.Utc);
                         
-                        Assert.AreEqual(nowUniversal, values.C1AllorsDateTime);
-                        Assert.AreEqual(nowUniversal, values.I1AllorsDateTime);
-                        Assert.AreEqual(nowUniversal, values.S1AllorsDateTime);
+                        Assert.AreEqual(nowUniversal, values.C1AllorsDate);
+                        Assert.AreEqual(nowUniversal, values.I1AllorsDate);
+                        Assert.AreEqual(nowUniversal, values.S1AllorsDate);
                     }
 
                     {
@@ -324,24 +331,24 @@ namespace Allors.Adapters.Special
 
                         mark();
 
-                        value = values.C1AllorsDateTime;
+                        value = values.C1AllorsDate;
                         Assert.IsNull(value);
 
                         mark();
                         
-                        value = values.I1AllorsDateTime;
+                        value = values.I1AllorsDate;
                         Assert.IsNull(value);
 
                         mark();
                         
-                        value = values.S1AllorsDateTime;
+                        value = values.S1AllorsDate;
                         Assert.IsNull(value);
 
                         mark();
                         
-                        Assert.IsFalse(values.ExistC1AllorsDateTime);
-                        Assert.IsFalse(values.ExistI1AllorsDateTime);
-                        Assert.IsFalse(values.ExistS1AllorsDateTime);
+                        Assert.IsFalse(values.ExistC1AllorsDate);
+                        Assert.IsFalse(values.ExistI1AllorsDate);
+                        Assert.IsFalse(values.ExistS1AllorsDate);
 
                         mark();
 
@@ -349,85 +356,85 @@ namespace Allors.Adapters.Special
 
                         mark();
                         
-                        value = values.C1AllorsDateTime;
+                        value = values.C1AllorsDate;
                         Assert.IsNull(value);
 
                         mark();
                         
-                        value = values.I1AllorsDateTime;
+                        value = values.I1AllorsDate;
                         Assert.IsNull(value);
 
                         mark();
                         
-                        value = values.S1AllorsDateTime;
+                        value = values.S1AllorsDate;
                         Assert.IsNull(value);
 
                         mark();
                         
-                        Assert.IsFalse(values.ExistC1AllorsDateTime);
-                        Assert.IsFalse(values.ExistI1AllorsDateTime);
-                        Assert.IsFalse(values.ExistS1AllorsDateTime);
+                        Assert.IsFalse(values.ExistC1AllorsDate);
+                        Assert.IsFalse(values.ExistI1AllorsDate);
+                        Assert.IsFalse(values.ExistS1AllorsDate);
                     }
 
                     {
                         // reset empty
                         var values = C1.Create(this.Session);
-                        values.C1AllorsDateTime = DateTime.Now;
-                        values.I1AllorsDateTime = DateTime.Now;
-                        values.S1AllorsDateTime = DateTime.Now;
+                        values.C1AllorsDate = DateTime.Now;
+                        values.I1AllorsDate = DateTime.Now;
+                        values.S1AllorsDate = DateTime.Now;
 
                         mark();
 
-                        Assert.IsTrue(values.ExistC1AllorsDateTime);
-                        Assert.IsTrue(values.ExistI1AllorsDateTime);
-                        Assert.IsTrue(values.ExistS1AllorsDateTime);
+                        Assert.IsTrue(values.ExistC1AllorsDate);
+                        Assert.IsTrue(values.ExistI1AllorsDate);
+                        Assert.IsTrue(values.ExistS1AllorsDate);
 
-                        values.RemoveC1AllorsDateTime();
-                        values.RemoveI1AllorsDateTime();
-                        values.RemoveS1AllorsDateTime();
+                        values.RemoveC1AllorsDate();
+                        values.RemoveI1AllorsDate();
+                        values.RemoveS1AllorsDate();
 
                         DateTime? value = null;
 
                         mark();
 
-                        value = values.C1AllorsDateTime;
+                        value = values.C1AllorsDate;
                         Assert.IsNull(value);
 
                         mark();
 
-                        value = values.I1AllorsDateTime;
+                        value = values.I1AllorsDate;
                         Assert.IsNull(value);
 
                         mark();
 
-                        value = values.S1AllorsDateTime;
+                        value = values.S1AllorsDate;
                         Assert.IsNull(value);
 
                         mark();
 
-                        Assert.IsFalse(values.ExistC1AllorsDateTime);
-                        Assert.IsFalse(values.ExistI1AllorsDateTime);
-                        Assert.IsFalse(values.ExistS1AllorsDateTime);
+                        Assert.IsFalse(values.ExistC1AllorsDate);
+                        Assert.IsFalse(values.ExistI1AllorsDate);
+                        Assert.IsFalse(values.ExistS1AllorsDate);
 
                         this.Session.Commit();
 
                         value = null;
                         mark();
-                        value = values.C1AllorsDateTime;
+                        value = values.C1AllorsDate;
                         Assert.IsNull(value);
 
                         mark();
-                        value = values.I1AllorsDateTime;
+                        value = values.I1AllorsDate;
                         Assert.IsNull(value);
 
                         mark();
-                        value = values.S1AllorsDateTime;
+                        value = values.S1AllorsDate;
                         Assert.IsNull(value);
 
                         mark();
-                        Assert.IsFalse(values.ExistC1AllorsDateTime);
-                        Assert.IsFalse(values.ExistI1AllorsDateTime);
-                        Assert.IsFalse(values.ExistS1AllorsDateTime);
+                        Assert.IsFalse(values.ExistC1AllorsDate);
+                        Assert.IsFalse(values.ExistI1AllorsDate);
+                        Assert.IsFalse(values.ExistS1AllorsDate);
                     }
                 }
             }
@@ -447,21 +454,21 @@ namespace Allors.Adapters.Special
                     var universal = new DateTime(1973, 3, 27, 12, 0, 0, 0, DateTimeKind.Utc);
 
                     var c1 = C1.Create(this.Session);
-                    c1.C1AllorsDateTime = local;
-                    c1.I1AllorsDateTime = unspecified;
-                    c1.S1AllorsDateTime = universal;
+                    c1.C1AllorsDate = local;
+                    c1.I1AllorsDate = unspecified;
+                    c1.S1AllorsDate = universal;
 
-                    var dateTime = new DateTime(1973, 03, 27, 0, 0, 0, DateTimeKind.Utc);
+                    var date = new DateTime(1973, 03, 27, 0, 0, 0, DateTimeKind.Utc);
 
                     mark();
 
-                    Assert.AreEqual(dateTime, c1.C1AllorsDateTime);
-                    Assert.AreEqual(dateTime, c1.I1AllorsDateTime);
-                    Assert.AreEqual(dateTime, c1.S1AllorsDateTime);
+                    Assert.AreEqual(date, c1.C1AllorsDate);
+                    Assert.AreEqual(date, c1.I1AllorsDate);
+                    Assert.AreEqual(date, c1.S1AllorsDate);
 
-                    Assert.AreEqual(DateTimeKind.Utc, c1.C1AllorsDateTime.Value.Kind);
-                    Assert.AreEqual(DateTimeKind.Utc, c1.I1AllorsDateTime.Value.Kind);
-                    Assert.AreEqual(DateTimeKind.Utc, c1.S1AllorsDateTime.Value.Kind);
+                    Assert.AreEqual(DateTimeKind.Utc, c1.C1AllorsDate.Kind);
+                    Assert.AreEqual(DateTimeKind.Utc, c1.I1AllorsDate.Kind);
+                    Assert.AreEqual(DateTimeKind.Utc, c1.S1AllorsDate.Kind);
                 }
             }
         }
@@ -477,11 +484,11 @@ namespace Allors.Adapters.Special
                     var c1 = C1.Create(this.Session);
                     var c1Id = c1.Id.ToString();
 
-                    c1.C1AllorsDateTime = new DateTime(1973, 03, 27, 1, 1, 1);
+                    c1.C1AllorsDate = new DateTime(1973, 03, 27, 1, 1, 1);
 
                     // Force a Flush
                     Extent<C1> extent = this.Session.Extent(Classes.C1);
-                    extent.Filter.AddEquals(RoleTypes.C1AllorsDateTime, new DateTime(1973, 03, 27, 1, 1, 1));
+                    extent.Filter.AddEquals(RoleTypes.C1AllorsDate, new DateTime(1973, 03, 27, 1, 1, 1));
                     Assert.IsNotNull(extent.First);
 
                     // Garbage Collect
@@ -492,7 +499,7 @@ namespace Allors.Adapters.Special
 
                     c1 = (C1)this.Session.Instantiate(c1Id);
 
-                    Assert.AreEqual(new DateTime(1973, 03, 27, 1, 1, 1).ToUniversalTime(), c1.C1AllorsDateTime);
+                    Assert.AreEqual(new DateTime(1973, 03, 27, 1, 1, 1).ToUniversalTime(), c1.C1AllorsDate);
                 }
             }
         }
@@ -2204,7 +2211,7 @@ namespace Allors.Adapters.Special
                     try
                     {
                         mark();
-                        c1A.Strategy.SetUnitRole(RoleTypes.C1AllorsDateTime, c1B);
+                        c1A.Strategy.SetUnitRole(RoleTypes.C1AllorsDate, c1B);
                     }
                     catch
                     {
@@ -2283,7 +2290,7 @@ namespace Allors.Adapters.Special
                     try
                     {
                         mark();
-                        c1A.Strategy.SetUnitRole(RoleTypes.C2AllorsDateTime, DateTime.Now);
+                        c1A.Strategy.SetUnitRole(RoleTypes.C2AllorsDate, DateTime.Now);
                     }
                     catch
                     {

@@ -184,7 +184,7 @@ namespace Allors.Adapters
                     }
 
                     break;
-                case UnitTags.AllorsDateTime:
+                case UnitTags.AllorsDate:
                     if (!(unit is DateTime))
                     {
                         throw new ArgumentException("RoleType is not a DateTime.");

@@ -12453,7 +12453,7 @@ namespace Allors.Adapters.Special
         }
         
         [Test]
-        public void RoleDateTimeBetweenValue()
+        public void RoleDateBetweenValue()
         {
             foreach (var init in this.Inits)
             {
@@ -12462,31 +12462,31 @@ namespace Allors.Adapters.Special
 
                 foreach (var flag in TrueFalse)
                 {
-                    var dateTime1 = new DateTime(2000, 1, 1, 0, 0, 1);
-                    var dateTime2 = new DateTime(2000, 1, 1, 0, 0, 2);
-                    var dateTime3 = new DateTime(2000, 1, 1, 0, 0, 3);
-                    var dateTime4 = new DateTime(2000, 1, 1, 0, 0, 4);
-                    var dateTime5 = new DateTime(2000, 1, 1, 0, 0, 5);
-                    var dateTime6 = new DateTime(2000, 1, 1, 0, 0, 6);
-                    var dateTime7 = new DateTime(2000, 1, 1, 0, 0, 7);
-                    var dateTime10 = new DateTime(2000, 1, 1, 0, 0, 10);
+                    var date1 = new DateTime(2000, 1, 1);
+                    var date2 = new DateTime(2000, 1, 2);
+                    var date3 = new DateTime(2000, 1, 3);
+                    var date4 = new DateTime(2000, 1, 4);
+                    var date5 = new DateTime(2000, 1, 5);
+                    var date6 = new DateTime(2000, 1, 6);
+                    var date7 = new DateTime(2000, 1, 7);
+                    var date10 = new DateTime(2000, 1, 10);
 
                     if (flag)
                     {
-                        dateTime1 = dateTime1.ToUniversalTime();
-                        dateTime2 = dateTime2.ToUniversalTime();
-                        dateTime3 = dateTime3.ToUniversalTime();
-                        dateTime4 = dateTime4.ToUniversalTime();
-                        dateTime5 = dateTime5.ToUniversalTime();
-                        dateTime6 = dateTime6.ToUniversalTime();
-                        dateTime7 = dateTime7.ToUniversalTime();
-                        dateTime10 = dateTime10.ToUniversalTime();
+                        date1 = date1;
+                        date2 = date2;
+                        date3 = date3;
+                        date4 = date4;
+                        date5 = date5;
+                        date6 = date6;
+                        date7 = date7;
+                        date10 = date10;
                     }
 
                     // Class
                     // Between 1 and 3
                     var extent = this.LocalExtent(Classes.C1);
-                    extent.Filter.AddBetween(RoleTypes.C1AllorsDateTime, dateTime1, dateTime3);
+                    extent.Filter.AddBetween(RoleTypes.C1AllorsDate, date1, date3);
 
                     Assert.AreEqual(0, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -12496,7 +12496,7 @@ namespace Allors.Adapters.Special
 
                     // Between 3 and 4
                     extent = this.LocalExtent(Classes.C1);
-                    extent.Filter.AddBetween(RoleTypes.C1AllorsDateTime, dateTime3, dateTime4);
+                    extent.Filter.AddBetween(RoleTypes.C1AllorsDate, date3, date4);
 
                     Assert.AreEqual(1, extent.Count);
                     this.AssertC1(extent, false, true, false, false);
@@ -12506,7 +12506,7 @@ namespace Allors.Adapters.Special
 
                     // Between 4 and 5
                     extent = this.LocalExtent(Classes.C1);
-                    extent.Filter.AddBetween(RoleTypes.C1AllorsDateTime, dateTime4, dateTime5);
+                    extent.Filter.AddBetween(RoleTypes.C1AllorsDate, date4, date5);
 
                     Assert.AreEqual(3, extent.Count);
                     this.AssertC1(extent, false, true, true, true);
@@ -12516,7 +12516,7 @@ namespace Allors.Adapters.Special
 
                     // Between 6 and 10
                     extent = this.LocalExtent(Classes.C1);
-                    extent.Filter.AddBetween(RoleTypes.C1AllorsDateTime, dateTime6, dateTime10);
+                    extent.Filter.AddBetween(RoleTypes.C1AllorsDate, date6, date10);
 
                     Assert.AreEqual(0, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -12527,7 +12527,7 @@ namespace Allors.Adapters.Special
                     // Interface
                     // Between 1 and 3
                     extent = this.LocalExtent(Interfaces.I12);
-                    extent.Filter.AddBetween(RoleTypes.I12AllorsDateTime, dateTime1, dateTime3);
+                    extent.Filter.AddBetween(RoleTypes.I12AllorsDate, date1, date3);
 
                     Assert.AreEqual(0, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -12537,7 +12537,7 @@ namespace Allors.Adapters.Special
 
                     // Between 3 and 4
                     extent = this.LocalExtent(Interfaces.I12);
-                    extent.Filter.AddBetween(RoleTypes.I12AllorsDateTime, dateTime3, dateTime4);
+                    extent.Filter.AddBetween(RoleTypes.I12AllorsDate, date3, date4);
 
                     Assert.AreEqual(2, extent.Count);
                     this.AssertC1(extent, false, true, false, false);
@@ -12547,7 +12547,7 @@ namespace Allors.Adapters.Special
 
                     // Between 4 and 5
                     extent = this.LocalExtent(Interfaces.I12);
-                    extent.Filter.AddBetween(RoleTypes.I12AllorsDateTime, dateTime4, dateTime5);
+                    extent.Filter.AddBetween(RoleTypes.I12AllorsDate, date4, date5);
 
                     Assert.AreEqual(6, extent.Count);
                     this.AssertC1(extent, false, true, true, true);
@@ -12557,7 +12557,7 @@ namespace Allors.Adapters.Special
 
                     // Between 6 and 10
                     extent = this.LocalExtent(Interfaces.I12);
-                    extent.Filter.AddBetween(RoleTypes.I12AllorsDateTime, dateTime6, dateTime10);
+                    extent.Filter.AddBetween(RoleTypes.I12AllorsDate, date6, date10);
 
                     Assert.AreEqual(0, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -12568,7 +12568,7 @@ namespace Allors.Adapters.Special
                     // Super Interface
                     // Between 1 and 3
                     extent = this.LocalExtent(Interfaces.S1234);
-                    extent.Filter.AddBetween(RoleTypes.S1234AllorsDateTime, dateTime1, dateTime3);
+                    extent.Filter.AddBetween(RoleTypes.S1234AllorsDate, date1, date3);
 
                     Assert.AreEqual(0, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -12578,7 +12578,7 @@ namespace Allors.Adapters.Special
 
                     // Between 3 and 4
                     extent = this.LocalExtent(Interfaces.S1234);
-                    extent.Filter.AddBetween(RoleTypes.S1234AllorsDateTime, dateTime3, dateTime4);
+                    extent.Filter.AddBetween(RoleTypes.S1234AllorsDate, date3, date4);
 
                     Assert.AreEqual(4, extent.Count);
                     this.AssertC1(extent, false, true, false, false);
@@ -12588,7 +12588,7 @@ namespace Allors.Adapters.Special
 
                     // Between 4 and 5
                     extent = this.LocalExtent(Interfaces.S1234);
-                    extent.Filter.AddBetween(RoleTypes.S1234AllorsDateTime, dateTime4, dateTime5);
+                    extent.Filter.AddBetween(RoleTypes.S1234AllorsDate, date4, date5);
 
                     Assert.AreEqual(12, extent.Count);
                     this.AssertC1(extent, false, true, true, true);
@@ -12598,7 +12598,7 @@ namespace Allors.Adapters.Special
 
                     // Between 6 and 10
                     extent = this.LocalExtent(Interfaces.S1234);
-                    extent.Filter.AddBetween(RoleTypes.S1234AllorsDateTime, dateTime6, dateTime10);
+                    extent.Filter.AddBetween(RoleTypes.S1234AllorsDate, date6, date10);
 
                     Assert.AreEqual(0, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -12613,7 +12613,7 @@ namespace Allors.Adapters.Special
                     var exception = false;
                     try
                     {
-                        extent.Filter.AddBetween(RoleTypes.C2AllorsDateTime, dateTime1, dateTime3);
+                        extent.Filter.AddBetween(RoleTypes.C2AllorsDate, date1, date3);
                     }
                     catch
                     {
@@ -12628,7 +12628,7 @@ namespace Allors.Adapters.Special
                     exception = false;
                     try
                     {
-                        extent.Filter.AddBetween(RoleTypes.C2AllorsDateTime, dateTime3, dateTime4);
+                        extent.Filter.AddBetween(RoleTypes.C2AllorsDate, date3, date4);
                     }
                     catch
                     {
@@ -12643,7 +12643,7 @@ namespace Allors.Adapters.Special
                     exception = false;
                     try
                     {
-                        extent.Filter.AddBetween(RoleTypes.C2AllorsDateTime, dateTime4, dateTime5);
+                        extent.Filter.AddBetween(RoleTypes.C2AllorsDate, date4, date5);
                     }
                     catch
                     {
@@ -12658,7 +12658,7 @@ namespace Allors.Adapters.Special
                     exception = false;
                     try
                     {
-                        extent.Filter.AddBetween(RoleTypes.C2AllorsDateTime, dateTime6, dateTime10);
+                        extent.Filter.AddBetween(RoleTypes.C2AllorsDate, date6, date10);
                     }
                     catch
                     {
@@ -12671,7 +12671,7 @@ namespace Allors.Adapters.Special
         }
 
         [Test]
-        public void RoleDateTimeLessThanValue()
+        public void RoleDateLessThanValue()
         {
             foreach (var init in this.Inits)
             {
@@ -12680,31 +12680,31 @@ namespace Allors.Adapters.Special
 
                 foreach (var flag in TrueFalse)
                 {
-                    var dateTime1 = new DateTime(2000, 1, 1, 0, 0, 1);
-                    var dateTime2 = new DateTime(2000, 1, 1, 0, 0, 2);
-                    var dateTime3 = new DateTime(2000, 1, 1, 0, 0, 3);
-                    var dateTime4 = new DateTime(2000, 1, 1, 0, 0, 4);
-                    var dateTime5 = new DateTime(2000, 1, 1, 0, 0, 5);
-                    var dateTime6 = new DateTime(2000, 1, 1, 0, 0, 6);
-                    var dateTime7 = new DateTime(2000, 1, 1, 0, 0, 7);
-                    var dateTime10 = new DateTime(2000, 1, 1, 0, 0, 10);
+                    var date1 = new DateTime(2000, 1, 1);
+                    var date2 = new DateTime(2000, 1, 2);
+                    var date3 = new DateTime(2000, 1, 3);
+                    var date4 = new DateTime(2000, 1, 4);
+                    var date5 = new DateTime(2000, 1, 5);
+                    var date6 = new DateTime(2000, 1, 6);
+                    var date7 = new DateTime(2000, 1, 7);
+                    var date10 = new DateTime(2000, 1, 10);
 
                     if (flag)
                     {
-                        dateTime1 = dateTime1.ToUniversalTime();
-                        dateTime2 = dateTime2.ToUniversalTime();
-                        dateTime3 = dateTime3.ToUniversalTime();
-                        dateTime4 = dateTime4.ToUniversalTime();
-                        dateTime5 = dateTime5.ToUniversalTime();
-                        dateTime6 = dateTime6.ToUniversalTime();
-                        dateTime7 = dateTime7.ToUniversalTime();
-                        dateTime10 = dateTime10.ToUniversalTime();
+                        date1 = date1;
+                        date2 = date2;
+                        date3 = date3;
+                        date4 = date4;
+                        date5 = date5;
+                        date6 = date6;
+                        date7 = date7;
+                        date10 = date10;
                     }
 
                     // Class
                     // Less Than 4
                     var extent = this.LocalExtent(Classes.C1);
-                    extent.Filter.AddLessThan(RoleTypes.C1AllorsDateTime, dateTime4);
+                    extent.Filter.AddLessThan(RoleTypes.C1AllorsDate, date4);
 
                     Assert.AreEqual(0, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -12714,7 +12714,7 @@ namespace Allors.Adapters.Special
 
                     // Less Than 5
                     extent = this.LocalExtent(Classes.C1);
-                    extent.Filter.AddLessThan(RoleTypes.C1AllorsDateTime, dateTime5);
+                    extent.Filter.AddLessThan(RoleTypes.C1AllorsDate, date5);
 
                     Assert.AreEqual(1, extent.Count);
                     this.AssertC1(extent, false, true, false, false);
@@ -12724,7 +12724,7 @@ namespace Allors.Adapters.Special
 
                     // Less Than 6
                     extent = this.LocalExtent(Classes.C1);
-                    extent.Filter.AddLessThan(RoleTypes.C1AllorsDateTime, dateTime6);
+                    extent.Filter.AddLessThan(RoleTypes.C1AllorsDate, date6);
 
                     Assert.AreEqual(3, extent.Count);
                     this.AssertC1(extent, false, true, true, true);
@@ -12735,7 +12735,7 @@ namespace Allors.Adapters.Special
                     // Interface
                     // Less Than 4
                     extent = this.LocalExtent(Interfaces.I12);
-                    extent.Filter.AddLessThan(RoleTypes.I12AllorsDateTime, dateTime4);
+                    extent.Filter.AddLessThan(RoleTypes.I12AllorsDate, date4);
 
                     Assert.AreEqual(0, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -12745,7 +12745,7 @@ namespace Allors.Adapters.Special
 
                     // Less Than 5
                     extent = this.LocalExtent(Interfaces.I12);
-                    extent.Filter.AddLessThan(RoleTypes.I12AllorsDateTime, dateTime5);
+                    extent.Filter.AddLessThan(RoleTypes.I12AllorsDate, date5);
 
                     Assert.AreEqual(2, extent.Count);
                     this.AssertC1(extent, false, true, false, false);
@@ -12755,7 +12755,7 @@ namespace Allors.Adapters.Special
 
                     // Less Than 6
                     extent = this.LocalExtent(Interfaces.I12);
-                    extent.Filter.AddLessThan(RoleTypes.I12AllorsDateTime, dateTime6);
+                    extent.Filter.AddLessThan(RoleTypes.I12AllorsDate, date6);
 
                     Assert.AreEqual(6, extent.Count);
                     this.AssertC1(extent, false, true, true, true);
@@ -12766,7 +12766,7 @@ namespace Allors.Adapters.Special
                     // Super Interface
                     // Less Than 4
                     extent = this.LocalExtent(Interfaces.S1234);
-                    extent.Filter.AddLessThan(RoleTypes.S1234AllorsDateTime, dateTime4);
+                    extent.Filter.AddLessThan(RoleTypes.S1234AllorsDate, date4);
 
                     Assert.AreEqual(0, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -12776,7 +12776,7 @@ namespace Allors.Adapters.Special
 
                     // Less Than 5
                     extent = this.LocalExtent(Interfaces.S1234);
-                    extent.Filter.AddLessThan(RoleTypes.S1234AllorsDateTime, dateTime5);
+                    extent.Filter.AddLessThan(RoleTypes.S1234AllorsDate, date5);
 
                     Assert.AreEqual(4, extent.Count);
                     this.AssertC1(extent, false, true, false, false);
@@ -12786,7 +12786,7 @@ namespace Allors.Adapters.Special
 
                     // Less Than 6
                     extent = this.LocalExtent(Interfaces.S1234);
-                    extent.Filter.AddLessThan(RoleTypes.S1234AllorsDateTime, dateTime6);
+                    extent.Filter.AddLessThan(RoleTypes.S1234AllorsDate, date6);
 
                     Assert.AreEqual(12, extent.Count);
                     this.AssertC1(extent, false, true, true, true);
@@ -12802,7 +12802,7 @@ namespace Allors.Adapters.Special
                     var exception = false;
                     try
                     {
-                        extent.Filter.AddLessThan(RoleTypes.C2AllorsDateTime, dateTime4);
+                        extent.Filter.AddLessThan(RoleTypes.C2AllorsDate, date4);
                     }
                     catch
                     {
@@ -12817,7 +12817,7 @@ namespace Allors.Adapters.Special
                     exception = false;
                     try
                     {
-                        extent.Filter.AddLessThan(RoleTypes.C2AllorsDateTime, dateTime5);
+                        extent.Filter.AddLessThan(RoleTypes.C2AllorsDate, date5);
                     }
                     catch
                     {
@@ -12832,7 +12832,7 @@ namespace Allors.Adapters.Special
                     exception = false;
                     try
                     {
-                        extent.Filter.AddLessThan(RoleTypes.C2AllorsDateTime, dateTime6);
+                        extent.Filter.AddLessThan(RoleTypes.C2AllorsDate, date6);
                     }
                     catch
                     {
@@ -12848,7 +12848,7 @@ namespace Allors.Adapters.Special
                     exception = false;
                     try
                     {
-                        extent.Filter.AddLessThan(RoleTypes.I2AllorsDateTime, dateTime4);
+                        extent.Filter.AddLessThan(RoleTypes.I2AllorsDate, date4);
                     }
                     catch
                     {
@@ -12863,7 +12863,7 @@ namespace Allors.Adapters.Special
                     exception = false;
                     try
                     {
-                        extent.Filter.AddLessThan(RoleTypes.I2AllorsDateTime, dateTime5);
+                        extent.Filter.AddLessThan(RoleTypes.I2AllorsDate, date5);
                     }
                     catch
                     {
@@ -12878,7 +12878,7 @@ namespace Allors.Adapters.Special
                     exception = false;
                     try
                     {
-                        extent.Filter.AddLessThan(RoleTypes.I2AllorsDateTime, dateTime6);
+                        extent.Filter.AddLessThan(RoleTypes.I2AllorsDate, date6);
                     }
                     catch
                     {
@@ -12894,7 +12894,7 @@ namespace Allors.Adapters.Special
                     exception = false;
                     try
                     {
-                        extent.Filter.AddLessThan(RoleTypes.S2AllorsDateTime, dateTime4);
+                        extent.Filter.AddLessThan(RoleTypes.S2AllorsDate, date4);
                     }
                     catch
                     {
@@ -12909,7 +12909,7 @@ namespace Allors.Adapters.Special
                     exception = false;
                     try
                     {
-                        extent.Filter.AddLessThan(RoleTypes.S2AllorsDateTime, dateTime5);
+                        extent.Filter.AddLessThan(RoleTypes.S2AllorsDate, date5);
                     }
                     catch
                     {
@@ -12924,7 +12924,7 @@ namespace Allors.Adapters.Special
                     exception = false;
                     try
                     {
-                        extent.Filter.AddLessThan(RoleTypes.S2AllorsDateTime, dateTime6);
+                        extent.Filter.AddLessThan(RoleTypes.S2AllorsDate, date6);
                     }
                     catch
                     {
@@ -12937,7 +12937,7 @@ namespace Allors.Adapters.Special
         }
 
         [Test]
-        public void RoleDateTimeGreaterThanValue()
+        public void RoleDateGreaterThanValue()
         {
             foreach (var init in this.Inits)
             {
@@ -12946,31 +12946,31 @@ namespace Allors.Adapters.Special
 
                 foreach (var flag in TrueFalse)
                 {
-                    var dateTime1 = new DateTime(2000, 1, 1, 0, 0, 1);
-                    var dateTime2 = new DateTime(2000, 1, 1, 0, 0, 2);
-                    var dateTime3 = new DateTime(2000, 1, 1, 0, 0, 3);
-                    var dateTime4 = new DateTime(2000, 1, 1, 0, 0, 4);
-                    var dateTime5 = new DateTime(2000, 1, 1, 0, 0, 5);
-                    var dateTime6 = new DateTime(2000, 1, 1, 0, 0, 6);
-                    var dateTime7 = new DateTime(2000, 1, 1, 0, 0, 7);
-                    var dateTime10 = new DateTime(2000, 1, 1, 0, 0, 10);
+                    var date1 = new DateTime(2000, 1, 1);
+                    var date2 = new DateTime(2000, 1, 2);
+                    var date3 = new DateTime(2000, 1, 3);
+                    var date4 = new DateTime(2000, 1, 4);
+                    var date5 = new DateTime(2000, 1, 5);
+                    var date6 = new DateTime(2000, 1, 6);
+                    var date7 = new DateTime(2000, 1, 7);
+                    var date10 = new DateTime(2000, 1, 10);
 
                     if (flag)
                     {
-                        dateTime1 = dateTime1.ToUniversalTime();
-                        dateTime2 = dateTime2.ToUniversalTime();
-                        dateTime3 = dateTime3.ToUniversalTime();
-                        dateTime4 = dateTime4.ToUniversalTime();
-                        dateTime5 = dateTime5.ToUniversalTime();
-                        dateTime6 = dateTime6.ToUniversalTime();
-                        dateTime7 = dateTime7.ToUniversalTime();
-                        dateTime10 = dateTime10.ToUniversalTime();
+                        date1 = date1;
+                        date2 = date2;
+                        date3 = date3;
+                        date4 = date4;
+                        date5 = date5;
+                        date6 = date6;
+                        date7 = date7;
+                        date10 = date10;
                     }
 
                     // Class
                     // Greater Than 3
                     var extent = this.LocalExtent(Classes.C1);
-                    extent.Filter.AddGreaterThan(RoleTypes.C1AllorsDateTime, dateTime3);
+                    extent.Filter.AddGreaterThan(RoleTypes.C1AllorsDate, date3);
 
                     Assert.AreEqual(3, extent.Count);
                     this.AssertC1(extent, false, true, true, true);
@@ -12980,7 +12980,7 @@ namespace Allors.Adapters.Special
 
                     // Greater Than 4
                     extent = this.LocalExtent(Classes.C1);
-                    extent.Filter.AddGreaterThan(RoleTypes.C1AllorsDateTime, dateTime4);
+                    extent.Filter.AddGreaterThan(RoleTypes.C1AllorsDate, date4);
 
                     Assert.AreEqual(2, extent.Count);
                     this.AssertC1(extent, false, false, true, true);
@@ -12990,7 +12990,7 @@ namespace Allors.Adapters.Special
 
                     // Greater Than 5
                     extent = this.LocalExtent(Classes.C1);
-                    extent.Filter.AddGreaterThan(RoleTypes.C1AllorsDateTime, dateTime5);
+                    extent.Filter.AddGreaterThan(RoleTypes.C1AllorsDate, date5);
 
                     Assert.AreEqual(0, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -13001,7 +13001,7 @@ namespace Allors.Adapters.Special
                     // Interface
                     // Greater Than 3
                     extent = this.LocalExtent(Interfaces.I12);
-                    extent.Filter.AddGreaterThan(RoleTypes.I12AllorsDateTime, dateTime3);
+                    extent.Filter.AddGreaterThan(RoleTypes.I12AllorsDate, date3);
 
                     Assert.AreEqual(6, extent.Count);
                     this.AssertC1(extent, false, true, true, true);
@@ -13011,7 +13011,7 @@ namespace Allors.Adapters.Special
 
                     // Greater Than 4
                     extent = this.LocalExtent(Interfaces.I12);
-                    extent.Filter.AddGreaterThan(RoleTypes.I12AllorsDateTime, dateTime4);
+                    extent.Filter.AddGreaterThan(RoleTypes.I12AllorsDate, date4);
 
                     Assert.AreEqual(4, extent.Count);
                     this.AssertC1(extent, false, false, true, true);
@@ -13021,7 +13021,7 @@ namespace Allors.Adapters.Special
 
                     // Greater Than 5
                     extent = this.LocalExtent(Interfaces.I12);
-                    extent.Filter.AddGreaterThan(RoleTypes.I12AllorsDateTime, dateTime5);
+                    extent.Filter.AddGreaterThan(RoleTypes.I12AllorsDate, date5);
 
                     Assert.AreEqual(0, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -13032,7 +13032,7 @@ namespace Allors.Adapters.Special
                     // Super Interface
                     // Greater Than 3
                     extent = this.LocalExtent(Interfaces.S1234);
-                    extent.Filter.AddGreaterThan(RoleTypes.S1234AllorsDateTime, dateTime3);
+                    extent.Filter.AddGreaterThan(RoleTypes.S1234AllorsDate, date3);
 
                     Assert.AreEqual(12, extent.Count);
                     this.AssertC1(extent, false, true, true, true);
@@ -13042,7 +13042,7 @@ namespace Allors.Adapters.Special
 
                     // Greater Than 4
                     extent = this.LocalExtent(Interfaces.S1234);
-                    extent.Filter.AddGreaterThan(RoleTypes.S1234AllorsDateTime, dateTime4);
+                    extent.Filter.AddGreaterThan(RoleTypes.S1234AllorsDate, date4);
 
                     Assert.AreEqual(8, extent.Count);
                     this.AssertC1(extent, false, false, true, true);
@@ -13052,7 +13052,7 @@ namespace Allors.Adapters.Special
 
                     // Greater Than 5
                     extent = this.LocalExtent(Interfaces.S1234);
-                    extent.Filter.AddGreaterThan(RoleTypes.S1234AllorsDateTime, dateTime5);
+                    extent.Filter.AddGreaterThan(RoleTypes.S1234AllorsDate, date5);
 
                     Assert.AreEqual(0, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -13068,7 +13068,7 @@ namespace Allors.Adapters.Special
                     var exception = false;
                     try
                     {
-                        extent.Filter.AddGreaterThan(RoleTypes.C2AllorsDateTime, dateTime3);
+                        extent.Filter.AddGreaterThan(RoleTypes.C2AllorsDate, date3);
                     }
                     catch
                     {
@@ -13083,7 +13083,7 @@ namespace Allors.Adapters.Special
                     exception = false;
                     try
                     {
-                        extent.Filter.AddGreaterThan(RoleTypes.C2AllorsDateTime, dateTime4);
+                        extent.Filter.AddGreaterThan(RoleTypes.C2AllorsDate, date4);
                     }
                     catch
                     {
@@ -13098,7 +13098,7 @@ namespace Allors.Adapters.Special
                     exception = false;
                     try
                     {
-                        extent.Filter.AddGreaterThan(RoleTypes.C2AllorsDateTime, dateTime5);
+                        extent.Filter.AddGreaterThan(RoleTypes.C2AllorsDate, date5);
                     }
                     catch
                     {
@@ -13115,7 +13115,7 @@ namespace Allors.Adapters.Special
                     exception = false;
                     try
                     {
-                        extent.Filter.AddGreaterThan(RoleTypes.I2AllorsDateTime, dateTime3);
+                        extent.Filter.AddGreaterThan(RoleTypes.I2AllorsDate, date3);
                     }
                     catch
                     {
@@ -13130,7 +13130,7 @@ namespace Allors.Adapters.Special
                     exception = false;
                     try
                     {
-                        extent.Filter.AddGreaterThan(RoleTypes.I2AllorsDateTime, dateTime4);
+                        extent.Filter.AddGreaterThan(RoleTypes.I2AllorsDate, date4);
                     }
                     catch
                     {
@@ -13145,7 +13145,7 @@ namespace Allors.Adapters.Special
                     exception = false;
                     try
                     {
-                        extent.Filter.AddGreaterThan(RoleTypes.I2AllorsDateTime, dateTime5);
+                        extent.Filter.AddGreaterThan(RoleTypes.I2AllorsDate, date5);
                     }
                     catch
                     {
@@ -13162,7 +13162,7 @@ namespace Allors.Adapters.Special
                     exception = false;
                     try
                     {
-                        extent.Filter.AddGreaterThan(RoleTypes.I2AllorsDateTime, dateTime3);
+                        extent.Filter.AddGreaterThan(RoleTypes.I2AllorsDate, date3);
                     }
                     catch
                     {
@@ -13177,7 +13177,7 @@ namespace Allors.Adapters.Special
                     exception = false;
                     try
                     {
-                        extent.Filter.AddGreaterThan(RoleTypes.I2AllorsDateTime, dateTime4);
+                        extent.Filter.AddGreaterThan(RoleTypes.I2AllorsDate, date4);
                     }
                     catch
                     {
@@ -13192,7 +13192,7 @@ namespace Allors.Adapters.Special
                     exception = false;
                     try
                     {
-                        extent.Filter.AddGreaterThan(RoleTypes.I2AllorsDateTime, dateTime5);
+                        extent.Filter.AddGreaterThan(RoleTypes.I2AllorsDate, date5);
                     }
                     catch
                     {
@@ -13205,7 +13205,7 @@ namespace Allors.Adapters.Special
         }
 
         [Test]
-        public void RoleDateTimeEquals()
+        public void RoleDateEquals()
         {
             foreach (var init in this.Inits)
             {
@@ -13214,31 +13214,31 @@ namespace Allors.Adapters.Special
 
                 foreach (var flag in TrueFalse)
                 {
-                    var dateTime1 = new DateTime(2000, 1, 1, 0, 0, 1);
-                    var dateTime2 = new DateTime(2000, 1, 1, 0, 0, 2);
-                    var dateTime3 = new DateTime(2000, 1, 1, 0, 0, 3);
-                    var dateTime4 = new DateTime(2000, 1, 1, 0, 0, 4);
-                    var dateTime5 = new DateTime(2000, 1, 1, 0, 0, 5);
-                    var dateTime6 = new DateTime(2000, 1, 1, 0, 0, 6);
-                    var dateTime7 = new DateTime(2000, 1, 1, 0, 0, 7);
-                    var dateTime10 = new DateTime(2000, 1, 1, 0, 0, 10);
+                    var date1 = new DateTime(2000, 1, 1);
+                    var date2 = new DateTime(2000, 1, 2);
+                    var date3 = new DateTime(2000, 1, 3);
+                    var date4 = new DateTime(2000, 1, 4);
+                    var date5 = new DateTime(2000, 1, 5);
+                    var date6 = new DateTime(2000, 1, 6);
+                    var date7 = new DateTime(2000, 1, 7);
+                    var date10 = new DateTime(2000, 1, 10);
 
                     if (flag)
                     {
-                        dateTime1 = dateTime1.ToUniversalTime();
-                        dateTime2 = dateTime2.ToUniversalTime();
-                        dateTime3 = dateTime3.ToUniversalTime();
-                        dateTime4 = dateTime4.ToUniversalTime();
-                        dateTime5 = dateTime5.ToUniversalTime();
-                        dateTime6 = dateTime6.ToUniversalTime();
-                        dateTime7 = dateTime7.ToUniversalTime();
-                        dateTime10 = dateTime10.ToUniversalTime();
+                        date1 = date1;
+                        date2 = date2;
+                        date3 = date3;
+                        date4 = date4;
+                        date5 = date5;
+                        date6 = date6;
+                        date7 = date7;
+                        date10 = date10;
                     }
 
                     // Class
                     // Equal 3
                     var extent = this.LocalExtent(Classes.C1);
-                    extent.Filter.AddEquals(RoleTypes.C1AllorsDateTime, dateTime3);
+                    extent.Filter.AddEquals(RoleTypes.C1AllorsDate, date3);
 
                     Assert.AreEqual(0, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -13248,7 +13248,7 @@ namespace Allors.Adapters.Special
 
                     // Equal 4
                     extent = this.LocalExtent(Classes.C1);
-                    extent.Filter.AddEquals(RoleTypes.C1AllorsDateTime, dateTime4);
+                    extent.Filter.AddEquals(RoleTypes.C1AllorsDate, date4);
 
                     Assert.AreEqual(1, extent.Count);
                     this.AssertC1(extent, false, true, false, false);
@@ -13258,7 +13258,7 @@ namespace Allors.Adapters.Special
                     
                     // Equal 5
                     extent = this.LocalExtent(Classes.C1);
-                    extent.Filter.AddEquals(RoleTypes.C1AllorsDateTime, dateTime5);
+                    extent.Filter.AddEquals(RoleTypes.C1AllorsDate, date5);
 
                     Assert.AreEqual(2, extent.Count);
                     this.AssertC1(extent, false, false, true, true);
@@ -13269,7 +13269,7 @@ namespace Allors.Adapters.Special
                     // Interface
                     // Equal 3
                     extent = this.LocalExtent(Interfaces.I12);
-                    extent.Filter.AddEquals(RoleTypes.I12AllorsDateTime, dateTime3);
+                    extent.Filter.AddEquals(RoleTypes.I12AllorsDate, date3);
 
                     Assert.AreEqual(0, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -13279,7 +13279,7 @@ namespace Allors.Adapters.Special
 
                     // Equal 4
                     extent = this.LocalExtent(Interfaces.I12);
-                    extent.Filter.AddEquals(RoleTypes.I12AllorsDateTime, dateTime4);
+                    extent.Filter.AddEquals(RoleTypes.I12AllorsDate, date4);
 
                     Assert.AreEqual(2, extent.Count);
                     this.AssertC1(extent, false, true, false, false);
@@ -13289,7 +13289,7 @@ namespace Allors.Adapters.Special
 
                     // Equal 5
                     extent = this.LocalExtent(Interfaces.I12);
-                    extent.Filter.AddEquals(RoleTypes.I12AllorsDateTime, dateTime5);
+                    extent.Filter.AddEquals(RoleTypes.I12AllorsDate, date5);
 
                     Assert.AreEqual(4, extent.Count);
                     this.AssertC1(extent, false, false, true, true);
@@ -13300,7 +13300,7 @@ namespace Allors.Adapters.Special
                     // Super Interface
                     // Equal 3
                     extent = this.LocalExtent(Interfaces.S1234);
-                    extent.Filter.AddEquals(RoleTypes.S1234AllorsDateTime, dateTime3);
+                    extent.Filter.AddEquals(RoleTypes.S1234AllorsDate, date3);
 
                     Assert.AreEqual(0, extent.Count);
                     this.AssertC1(extent, false, false, false, false);
@@ -13310,7 +13310,7 @@ namespace Allors.Adapters.Special
 
                     // Equal 4
                     extent = this.LocalExtent(Interfaces.S1234);
-                    extent.Filter.AddEquals(RoleTypes.S1234AllorsDateTime, dateTime4);
+                    extent.Filter.AddEquals(RoleTypes.S1234AllorsDate, date4);
 
                     Assert.AreEqual(4, extent.Count);
                     this.AssertC1(extent, false, true, false, false);
@@ -13320,7 +13320,7 @@ namespace Allors.Adapters.Special
 
                     // Equal 5
                     extent = this.LocalExtent(Interfaces.S1234);
-                    extent.Filter.AddEquals(RoleTypes.S1234AllorsDateTime, dateTime5);
+                    extent.Filter.AddEquals(RoleTypes.S1234AllorsDate, date5);
 
                     Assert.AreEqual(8, extent.Count);
                     this.AssertC1(extent, false, false, true, true);
@@ -13335,7 +13335,7 @@ namespace Allors.Adapters.Special
                     var exception = false;
                     try
                     {
-                        extent.Filter.AddEquals(RoleTypes.C2AllorsDateTime, dateTime3);
+                        extent.Filter.AddEquals(RoleTypes.C2AllorsDate, date3);
                     }
                     catch
                     {
@@ -13350,7 +13350,7 @@ namespace Allors.Adapters.Special
                     exception = false;
                     try
                     {
-                        extent.Filter.AddEquals(RoleTypes.C2AllorsDateTime, dateTime4);
+                        extent.Filter.AddEquals(RoleTypes.C2AllorsDate, date4);
                     }
                     catch
                     {
@@ -13365,7 +13365,7 @@ namespace Allors.Adapters.Special
                     exception = false;
                     try
                     {
-                        extent.Filter.AddEquals(RoleTypes.C2AllorsDateTime, dateTime5);
+                        extent.Filter.AddEquals(RoleTypes.C2AllorsDate, date5);
                     }
                     catch
                     {
@@ -13381,7 +13381,7 @@ namespace Allors.Adapters.Special
                     exception = false;
                     try
                     {
-                        extent.Filter.AddEquals(RoleTypes.I2AllorsDateTime, dateTime3);
+                        extent.Filter.AddEquals(RoleTypes.I2AllorsDate, date3);
                     }
                     catch
                     {
@@ -13396,7 +13396,7 @@ namespace Allors.Adapters.Special
                     exception = false;
                     try
                     {
-                        extent.Filter.AddEquals(RoleTypes.I2AllorsDateTime, dateTime4);
+                        extent.Filter.AddEquals(RoleTypes.I2AllorsDate, date4);
                     }
                     catch
                     {
@@ -13411,7 +13411,7 @@ namespace Allors.Adapters.Special
                     exception = false;
                     try
                     {
-                        extent.Filter.AddEquals(RoleTypes.I2AllorsDateTime, dateTime5);
+                        extent.Filter.AddEquals(RoleTypes.I2AllorsDate, date5);
                     }
                     catch
                     {
@@ -13427,7 +13427,7 @@ namespace Allors.Adapters.Special
                     exception = false;
                     try
                     {
-                        extent.Filter.AddEquals(RoleTypes.S2AllorsDateTime, dateTime3);
+                        extent.Filter.AddEquals(RoleTypes.S2AllorsDate, date3);
                     }
                     catch
                     {
@@ -13442,7 +13442,7 @@ namespace Allors.Adapters.Special
                     exception = false;
                     try
                     {
-                        extent.Filter.AddEquals(RoleTypes.S2AllorsDateTime, dateTime4);
+                        extent.Filter.AddEquals(RoleTypes.S2AllorsDate, date4);
                     }
                     catch
                     {
@@ -13457,7 +13457,7 @@ namespace Allors.Adapters.Special
                     exception = false;
                     try
                     {
-                        extent.Filter.AddEquals(RoleTypes.S2AllorsDateTime, dateTime5);
+                        extent.Filter.AddEquals(RoleTypes.S2AllorsDate, date5);
                     }
                     catch
                     {

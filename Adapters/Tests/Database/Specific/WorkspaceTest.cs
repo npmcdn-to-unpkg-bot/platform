@@ -284,7 +284,7 @@ namespace Allors.Adapters.Special
         }
 
         [Test]
-        public void DateTime()
+        public void Date()
         {
             foreach (var init in this.Inits)
             {
@@ -298,21 +298,13 @@ namespace Allors.Adapters.Special
                     var c2B = C2.Create(workspaceSession.DatabaseSession);
                     var c2C = C2.Create(workspaceSession.DatabaseSession);
 
-                    var local = new DateTime(1973, 3, 27, 12, 0, 0, 0, DateTimeKind.Utc).ToLocalTime();
-                    var unspecified = new DateTime(
-                        local.Year,
-                        local.Month,
-                        local.Day,
-                        local.Hour,
-                        local.Minute,
-                        local.Second,
-                        local.Millisecond,
-                        DateTimeKind.Unspecified);
+                    var local = new DateTime(1973, 3, 27, 12, 0, 0, DateTimeKind.Local);
+                    var unspecified = new DateTime(1973, 3, 27, 12, 0, 0, DateTimeKind.Unspecified);
                     var universal = new DateTime(1973, 3, 27, 12, 0, 0, 0, DateTimeKind.Utc);
 
-                    c2A.C2AllorsDateTime = local;
-                    c2B.C2AllorsDateTime = unspecified;
-                    c2C.C2AllorsDateTime = universal;
+                    c2A.C2AllorsDate = local;
+                    c2B.C2AllorsDate = unspecified;
+                    c2C.C2AllorsDate = universal;
 
                     workspaceSession.DatabaseSession.Commit();
                     workspaceSession.Commit();
@@ -322,24 +314,20 @@ namespace Allors.Adapters.Special
                     var workC2B = (C2)workspaceSession.Instantiate(c2B.Strategy.ObjectId.ToString());
                     var workC2C = (C2)workspaceSession.Instantiate(c2C.Strategy.ObjectId.ToString());
 
+                    var date = new DateTime(1973, 03, 27, 0, 0, 0, DateTimeKind.Utc);
+
                     Assert.IsNotNull(workC2A);
-                    Assert.AreEqual(
-                        new DateTime(1973, 3, 27, 12, 0, 0, 0, DateTimeKind.Utc),
-                        workC2A.C2AllorsDateTime.Value.ToUniversalTime());
+                    Assert.AreEqual(date, workC2A.C2AllorsDate.ToUniversalTime());
 
                     Assert.IsNotNull(workC2B);
-                    Assert.AreEqual(
-                        new DateTime(1973, 3, 27, 12, 0, 0, 0, DateTimeKind.Utc),
-                        workC2B.C2AllorsDateTime.Value.ToUniversalTime());
+                    Assert.AreEqual(date, workC2B.C2AllorsDate.ToUniversalTime());
 
                     Assert.IsNotNull(workC2C);
-                    Assert.AreEqual(
-                        new DateTime(1973, 3, 27, 12, 0, 0, 0, DateTimeKind.Utc),
-                        workC2C.C2AllorsDateTime.Value.ToUniversalTime());
+                    Assert.AreEqual(date, workC2C.C2AllorsDate.ToUniversalTime());
 
-                    workC2A.C2AllorsDateTime = unspecified;
-                    workC2B.C2AllorsDateTime = universal;
-                    workC2C.C2AllorsDateTime = local;
+                    workC2A.C2AllorsDate = unspecified;
+                    workC2B.C2AllorsDate = universal;
+                    workC2C.C2AllorsDate = local;
 
                     Assert.AreEqual(0, workspaceSession.Conflicts.Length);
 

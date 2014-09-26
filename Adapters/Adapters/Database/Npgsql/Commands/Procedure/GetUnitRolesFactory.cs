@@ -127,7 +127,7 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
                                     case UnitTags.AllorsBoolean:
                                         unit = reader.GetBoolean(i);
                                         break;
-                                    case UnitTags.AllorsDateTime:
+                                    case UnitTags.AllorsDate:
                                         var dateTime = reader.GetDateTime(i);
                                         unit = new DateTime(dateTime.Ticks, DateTimeKind.Utc);
                                         break;

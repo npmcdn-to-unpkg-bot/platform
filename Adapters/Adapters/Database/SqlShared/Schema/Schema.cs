@@ -336,7 +336,7 @@ namespace Allors.Adapters.Database.Sql
                     return DbType.Double;
                 case UnitTags.AllorsBoolean:
                     return DbType.Boolean;
-                case UnitTags.AllorsDateTime:
+                case UnitTags.AllorsDate:
                     return DbType.DateTime;
                 case UnitTags.AllorsUnique:
                     return DbType.Guid;

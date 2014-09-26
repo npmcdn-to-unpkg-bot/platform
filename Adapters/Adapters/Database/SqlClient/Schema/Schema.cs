@@ -320,7 +320,7 @@ FROM information_schema.columns"))
 
                                                             break;
 
-                                                        case UnitTags.AllorsDateTime:
+                                                        case UnitTags.AllorsDate:
                                                             if (
                                                                 !dataType.Equals(
                                                                     SqlDbType.DateTime2.ToString().ToLower()))
@@ -720,7 +720,7 @@ AS
                                     this.procedureByName.Add(procedure.Name, procedure);
                                     break;
 
-                                case UnitTags.AllorsDateTime:
+                                case UnitTags.AllorsDate:
                                     // Set DateTime Role
                                     procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularPropertyName };
                                     procedure.Definition = "CREATE PROCEDURE " + procedure.Name + @"

@@ -117,7 +117,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
                         tableParam = schema.BooleanRelationTableParam;
                         break;
 
-                    case UnitTags.AllorsDateTime:
+                    case UnitTags.AllorsDate:
                         tableParam = schema.DateTimeRelationTableParam;
                         break;
 

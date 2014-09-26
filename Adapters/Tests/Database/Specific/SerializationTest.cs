@@ -651,7 +651,7 @@ namespace Allors.Adapters.Special
             Assert.AreEqual(this.c1A.C1AllorsDecimal, 1.1m);
             Assert.AreEqual(this.c1A.C1AllorsDouble, 1.1d);
             Assert.AreEqual(this.c1A.C1AllorsBoolean, true);
-            Assert.AreEqual(this.c1A.C1AllorsDateTime, new DateTime(1973, 3, 27, 12, 0, 0, 0).ToUniversalTime());
+            Assert.AreEqual(this.c1A.C1AllorsDate, new DateTime(1973, 3, 27, 0, 0, 0, DateTimeKind.Utc));
             Assert.AreEqual(this.c1A.C1AllorsUnique, new Guid(GuidString));
 
             Assert.AreEqual(this.c1A.C1AllorsBinary, new byte[0]);
@@ -712,7 +712,7 @@ namespace Allors.Adapters.Special
             this.c1A.C1AllorsDecimal = 1.1m;
             this.c1A.C1AllorsDouble = 1.1d;
             this.c1A.C1AllorsBoolean = true;
-            this.c1A.C1AllorsDateTime = new DateTime(1973, 3, 27, 12, 0, 0, 0);
+            this.c1A.C1AllorsDate = new DateTime(1973, 3, 27, 12, 0, 0, 0);
             this.c1A.C1AllorsUnique = new Guid(GuidString);
             this.c1A.C1AllorsBinary = new byte[0];
 
