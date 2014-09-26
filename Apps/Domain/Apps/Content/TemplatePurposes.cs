@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class TemplatePurposes
     {
         public static readonly Guid PurchaseInvoiceId = new Guid("2EBC99D1-C8C0-4a3b-971A-66076E51BF2E");

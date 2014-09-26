@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class DeliverableTypes
     {
         public static readonly Guid ProjectPlanId = new Guid("AFAC9785-9DA9-4a74-BC04-113EEB52949D");

@@ -22,8 +22,6 @@ namespace Allors.Meta
 {
     using System;
 
-    using Allors.Meta;
-
     public static partial class Repository
     {
         public static Domain Base(MetaPopulation meta)

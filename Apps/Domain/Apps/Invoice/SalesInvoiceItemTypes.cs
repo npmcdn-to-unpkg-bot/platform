@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class SalesInvoiceItemTypes
     {
         public static readonly Guid FeeId = new Guid("90E9010A-E040-484c-9644-735C750B5A7C");

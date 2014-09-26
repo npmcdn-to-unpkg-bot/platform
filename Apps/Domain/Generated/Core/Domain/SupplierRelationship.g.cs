@@ -93,32 +93,6 @@ namespace Allors.Domain
 		}
 
 
-		virtual public DunningType DunningType
-		{ 
-			get
-			{
-				return (DunningType) Strategy.GetCompositeRole(Meta.DunningType);
-			}
-			set
-			{
-				Strategy.SetCompositeRole(Meta.DunningType ,value);
-			}
-		}
-
-		virtual public bool ExistDunningType
-		{
-			get
-			{
-				return Strategy.ExistCompositeRole(Meta.DunningType);
-			}
-		}
-
-		virtual public void RemoveDunningType()
-		{
-			Strategy.RemoveCompositeRole(Meta.DunningType);
-		}
-
-
 		virtual public InternalOrganisation InternalOrganisation
 		{ 
 			get
@@ -541,13 +515,6 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.RoleTypes.SupplierRelationshipLastReminderDate;
-			}
-		} 
-		public global::Allors.Meta.RoleType DunningType 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.SupplierRelationshipDunningType;
 			}
 		} 
 		public global::Allors.Meta.RoleType InternalOrganisation 

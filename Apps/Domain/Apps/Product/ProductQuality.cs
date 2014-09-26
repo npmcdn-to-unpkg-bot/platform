@@ -37,7 +37,7 @@ namespace Allors.Domain
 
         protected override void AppsOnPostBuild(IObjectBuilder builder)
         {
-            base.AppsOnPostBuild(builder);
+            this.AppsEnumerationOnPostBuild(builder);
 
             if (!this.ExistSearchData)
             {
@@ -47,7 +47,7 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            
+            this.AppsEnumerationDerive(derivation);
 
             this.DeriveDisplayName();
             this.DeriveSearchDataCharacterBoundaryText();

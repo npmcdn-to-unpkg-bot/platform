@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Colour.cs" company="Allors bvba">
+// <copyright file="UnitOfMeasure.cs" company="Allors bvba">
 //   Copyright 2002-2012 Allors bvba.
 // 
 // Dual Licensed under
@@ -25,6 +25,16 @@ namespace Allors.Domain
         public string GetName()
         {
             return this.Name;
+        }
+
+        protected override void AppsOnPostBuild(IObjectBuilder builder)
+        {
+            this.AppsEnumerationOnPostBuild(builder);
+        }
+
+        protected override void AppsDerive(IDerivation derivation)
+        {
+            this.AppsEnumerationDerive(derivation);
         }
     }
 }

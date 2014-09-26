@@ -26,5 +26,15 @@ namespace Allors.Domain
         {
             return this.Name;
         }
+
+        protected override void AppsOnPostBuild(IObjectBuilder builder)
+        {
+            this.AppsEnumerationOnPostBuild(builder);
+        }
+
+        protected override void AppsDerive(IDerivation derivation)
+        {
+            this.AppsEnumerationDerive(derivation);
+        }
     }
 }

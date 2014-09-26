@@ -56,10 +56,6 @@ namespace Allors.Domain
 
 
 
-			this.DunningType = builder.DunningType;
-
-
-
 			this.InternalOrganisation = builder.InternalOrganisation;
 
 
@@ -131,17 +127,6 @@ namespace Allors.Domain
 		            return this;
 		        }	
 
-				public DunningType DunningType {get; set;}
-
-				/// <exclude/>
-				public SupplierRelationshipBuilder WithDunningType(DunningType value)
-		        {
-		            if(this.DunningType!=null){throw new global::System.ArgumentException("One multicplicity");}
-					this.DunningType = value;
-		            return this;
-		        }		
-
-				
 				public InternalOrganisation InternalOrganisation {get; set;}
 
 				/// <exclude/>

@@ -234,7 +234,6 @@ namespace Allors.Meta
 		public static readonly Class PartyClassification = ((Class)Repository.MetaPopulation.Find( new System.Guid("3bb83aa5-e58a-4421-bdbc-3c9fa0b2324f")));
 		public static readonly Class PartyProductCategoryRevenue = ((Class)Repository.MetaPopulation.Find( new System.Guid("3f2c4c17-ec80-44ad-b452-76cf694f3d6a")));
 		public static readonly Class PartyFixedAssetAssignment = ((Class)Repository.MetaPopulation.Find( new System.Guid("40ee178e-7564-4dfa-ab6f-8bcd4e62b498")));
-		public static readonly Class DunningType = ((Class)Repository.MetaPopulation.Find( new System.Guid("4117ba43-c7fd-4ba5-965e-50e2ce5b5058")));
 		public static readonly Class CapitalBudget = ((Class)Repository.MetaPopulation.Find( new System.Guid("41f1aa5a-5043-42bb-aaf5-7d57a9deaccb")));
 		public static readonly Class AccountAdjustment = ((Class)Repository.MetaPopulation.Find( new System.Guid("4211ece6-a127-4359-9fa4-6537943a37a5")));
 		public static readonly Class PositionStatus = ((Class)Repository.MetaPopulation.Find( new System.Guid("4250a005-4fec-4118-a5b4-725886c59269")));
@@ -893,7 +892,6 @@ namespace Allors.Meta
 		public static readonly AssociationType SupplierRelationshipSupplier = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("1546c9f0-84ce-4795-bcea-634d6a78e867"))).AssociationType;
 		public static readonly AssociationType SupplierRelationshipSubAccountNumber = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("17aa6ceb-0cbd-45fa-9f6d-848ce4a365b1"))).AssociationType;
 		public static readonly AssociationType SupplierRelationshipLastReminderDate = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("b12a68f6-0eaa-4a8a-a741-398a0be43f62"))).AssociationType;
-		public static readonly AssociationType SupplierRelationshipDunningType = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("b1832c65-8b46-4060-bd2a-22c12ff01714"))).AssociationType;
 		public static readonly AssociationType SupplierRelationshipInternalOrganisation = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("e96a79e7-c161-4ed9-a5cc-8de4f67bf954"))).AssociationType;
 		public static readonly AssociationType SupplierRelationshipBlockedForDunning = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("ee871786-8840-404d-9b41-932a9f59be13"))).AssociationType;
 		public static readonly AssociationType EventRegistrationPerson = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("af4b8828-bea1-43e5-b109-9934311cc2df"))).AssociationType;
@@ -1004,7 +1002,6 @@ namespace Allors.Meta
 		public static readonly AssociationType CustomerRelationshipInternalOrganisation = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("35f92e67-aedd-4e62-aa1b-57f6489c0083"))).AssociationType;
 		public static readonly AssociationType CustomerRelationshipAmountOverDue = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("42e3b2c4-376d-4e8b-bb49-2af031881ed0"))).AssociationType;
 		public static readonly AssociationType CustomerRelationshipCustomer = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("5c7c79e1-6b61-4f64-b8d1-608984f91268"))).AssociationType;
-		public static readonly AssociationType CustomerRelationshipDunningType = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("76b46019-c145-403d-9f99-cd8e1001c968"))).AssociationType;
 		public static readonly AssociationType CustomerRelationshipAmountDue = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("894f4ff2-9c41-4201-ad36-ac10dafd65dd"))).AssociationType;
 		public static readonly AssociationType CustomerRelationshipYTDRevenue = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("a484eb38-4beb-495c-9c54-522238e0e639"))).AssociationType;
 		public static readonly AssociationType CustomerRelationshipLastReminderDate = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("af50ade8-5964-4963-819d-c87689c6434e"))).AssociationType;
@@ -2691,7 +2688,6 @@ namespace Allors.Meta
 		public static readonly RoleType SupplierRelationshipSupplier = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("1546c9f0-84ce-4795-bcea-634d6a78e867"))).RoleType;
 		public static readonly RoleType SupplierRelationshipSubAccountNumber = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("17aa6ceb-0cbd-45fa-9f6d-848ce4a365b1"))).RoleType;
 		public static readonly RoleType SupplierRelationshipLastReminderDate = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("b12a68f6-0eaa-4a8a-a741-398a0be43f62"))).RoleType;
-		public static readonly RoleType SupplierRelationshipDunningType = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("b1832c65-8b46-4060-bd2a-22c12ff01714"))).RoleType;
 		public static readonly RoleType SupplierRelationshipInternalOrganisation = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("e96a79e7-c161-4ed9-a5cc-8de4f67bf954"))).RoleType;
 		public static readonly RoleType SupplierRelationshipBlockedForDunning = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("ee871786-8840-404d-9b41-932a9f59be13"))).RoleType;
 		public static readonly RoleType EventRegistrationPerson = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("af4b8828-bea1-43e5-b109-9934311cc2df"))).RoleType;
@@ -2802,7 +2798,6 @@ namespace Allors.Meta
 		public static readonly RoleType CustomerRelationshipInternalOrganisation = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("35f92e67-aedd-4e62-aa1b-57f6489c0083"))).RoleType;
 		public static readonly RoleType CustomerRelationshipAmountOverDue = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("42e3b2c4-376d-4e8b-bb49-2af031881ed0"))).RoleType;
 		public static readonly RoleType CustomerRelationshipCustomer = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("5c7c79e1-6b61-4f64-b8d1-608984f91268"))).RoleType;
-		public static readonly RoleType CustomerRelationshipDunningType = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("76b46019-c145-403d-9f99-cd8e1001c968"))).RoleType;
 		public static readonly RoleType CustomerRelationshipAmountDue = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("894f4ff2-9c41-4201-ad36-ac10dafd65dd"))).RoleType;
 		public static readonly RoleType CustomerRelationshipYTDRevenue = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("a484eb38-4beb-495c-9c54-522238e0e639"))).RoleType;
 		public static readonly RoleType CustomerRelationshipLastReminderDate = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("af50ade8-5964-4963-819d-c87689c6434e"))).RoleType;

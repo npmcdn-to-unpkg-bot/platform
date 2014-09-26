@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class PartyRelationshipStatuses
     {
         private UniquelyIdentifiableCache<PartyRelationshipStatus> cache;

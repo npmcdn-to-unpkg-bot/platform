@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class Ordinals
     {
         public static readonly Guid FirstId = new Guid("E312891F-7744-43ba-A69F-13878B1FC66B");

@@ -90,10 +90,6 @@ namespace Allors.Domain
 
 
 
-			this.DunningType = builder.DunningType;
-
-
-
 			this.PartyRelationshipStatus = builder.PartyRelationshipStatus;
 
 
@@ -168,17 +164,6 @@ namespace Allors.Domain
 		        {
 		            if(this.Customer!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.Customer = value;
-		            return this;
-		        }		
-
-				
-				public DunningType DunningType {get; set;}
-
-				/// <exclude/>
-				public CustomerRelationshipBuilder WithDunningType(DunningType value)
-		        {
-		            if(this.DunningType!=null){throw new global::System.ArgumentException("One multicplicity");}
-					this.DunningType = value;
 		            return this;
 		        }		
 

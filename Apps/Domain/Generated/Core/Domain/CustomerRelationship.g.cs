@@ -119,32 +119,6 @@ namespace Allors.Domain
 		}
 
 
-		virtual public DunningType DunningType
-		{ 
-			get
-			{
-				return (DunningType) Strategy.GetCompositeRole(Meta.DunningType);
-			}
-			set
-			{
-				Strategy.SetCompositeRole(Meta.DunningType ,value);
-			}
-		}
-
-		virtual public bool ExistDunningType
-		{
-			get
-			{
-				return Strategy.ExistCompositeRole(Meta.DunningType);
-			}
-		}
-
-		virtual public void RemoveDunningType()
-		{
-			Strategy.RemoveCompositeRole(Meta.DunningType);
-		}
-
-
 
 		virtual public global::System.Decimal AmountDue 
 		{
@@ -660,13 +634,6 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.RoleTypes.CustomerRelationshipCustomer;
-			}
-		} 
-		public global::Allors.Meta.RoleType DunningType 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.CustomerRelationshipDunningType;
 			}
 		} 
 		public global::Allors.Meta.RoleType AmountDue 

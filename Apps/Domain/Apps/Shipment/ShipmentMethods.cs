@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class ShipmentMethods
     {
         public static readonly Guid GroundId = new Guid("8E534609-12C4-4701-A868-D7B3B3D4D6D9");

@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class PositionStatuses
     {
         public static readonly Guid PlannedForId = new Guid("6B5FA0D0-1E9C-4661-977C-A00CD985D614");

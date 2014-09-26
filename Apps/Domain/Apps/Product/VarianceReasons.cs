@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class VarianceReasons
     {
         public static readonly Guid OrderId = new Guid("81D45DC9-03D8-480b-B210-1CC641A9CBD3");
