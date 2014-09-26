@@ -35,7 +35,7 @@ namespace Allors.Meta
             var allorsDecimal = (Unit)env.Find(UnitIds.DecimalId);
             var allorsDouble = (Unit)env.Find(UnitIds.DoubleId);
             var allorsBoolean = (Unit)env.Find(UnitIds.BooleanId);
-            var allorsDateTime = (Unit)env.Find(UnitIds.DatetimeId);
+            var allorsDateTime = (Unit)env.Find(UnitIds.DateId);
             var allorsUnique = (Unit)env.Find(UnitIds.Unique);
             var allorsBinary = (Unit)env.Find(UnitIds.BinaryId);
 

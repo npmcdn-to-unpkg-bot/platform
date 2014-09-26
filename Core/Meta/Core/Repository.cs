@@ -35,7 +35,7 @@ namespace Allors.Meta
             new UnitBuilder(domain, UnitIds.DecimalId).WithSingularName("AllorsDecimal").WithPluralName("AllorsDecimals").WithUnitTag(UnitTags.AllorsDecimal).Build();
             new UnitBuilder(domain, UnitIds.DoubleId).WithSingularName("AllorsDouble").WithPluralName("AllorsDoubles").WithUnitTag(UnitTags.AllorsDouble).Build();
             new UnitBuilder(domain, UnitIds.BooleanId).WithSingularName("AllorsBoolean").WithPluralName("AllorsBooleans").WithUnitTag(UnitTags.AllorsBoolean).Build();
-            new UnitBuilder(domain, UnitIds.DatetimeId).WithSingularName("AllorsDateTime").WithPluralName("AllorsDateTimes").WithUnitTag(UnitTags.AllorsDateTime).Build();
+            new UnitBuilder(domain, UnitIds.DateId).WithSingularName("AllorsDateTime").WithPluralName("AllorsDateTimes").WithUnitTag(UnitTags.AllorsDateTime).Build();
             new UnitBuilder(domain, UnitIds.Unique).WithSingularName("AllorsUnique").WithPluralName("AllorsUniques").WithUnitTag(UnitTags.AllorsUnique).Build();
             new UnitBuilder(domain, UnitIds.BinaryId).WithSingularName("AllorsBinary").WithPluralName("AllorsBinaries").WithUnitTag(UnitTags.AllorsBinary).Build();
 

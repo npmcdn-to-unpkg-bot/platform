@@ -75,7 +75,7 @@ namespace Allors.Meta
         /// </value>
         public bool IsDateTime
         {
-            get { return this.Id.Equals(UnitIds.DatetimeId); }
+            get { return this.Id.Equals(UnitIds.DateId); }
         }
 
         /// <summary>

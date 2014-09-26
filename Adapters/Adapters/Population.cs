@@ -198,7 +198,7 @@ namespace Allors.Adapters
                     }
                     else
                     {
-                        normalizedUnit = dateTime.ToUniversalTime();
+                        normalizedUnit = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 0, 0, 0, DateTimeKind.Utc);
                     }
 
                     break;

@@ -56,179 +56,179 @@ namespace Allors.Adapters.Special.Npgsql
             }
         }
 
-        [Test]
-        public override void AllorsDateTime()
-        {
-            // year, day & month
-            {
-                var values = C1.Create(this.Session);
-                values.C1AllorsDateTime = new DateTime(1973, 03, 27);
-                values.I1AllorsDateTime = new DateTime(1973, 03, 27);
-                Assert.AreEqual(new DateTime(1973, 03, 27).ToUniversalTime(), values.C1AllorsDateTime);
-                Assert.AreEqual(new DateTime(1973, 03, 27).ToUniversalTime(), values.I1AllorsDateTime);
-            }
+        //[Test]
+        //public override void AllorsDate()
+        //{
+        //    // year, day & month
+        //    {
+        //        var values = C1.Create(this.Session);
+        //        values.C1AllorsDateTime = new DateTime(1973, 03, 27);
+        //        values.I1AllorsDateTime = new DateTime(1973, 03, 27);
+        //        Assert.AreEqual(new DateTime(1973, 03, 27).ToUniversalTime(), values.C1AllorsDateTime);
+        //        Assert.AreEqual(new DateTime(1973, 03, 27).ToUniversalTime(), values.I1AllorsDateTime);
+        //    }
 
-            // Minimum
-            {
-                var values = C1.Create(this.Session);
-                values.C1AllorsDateTime = MINIMUM_DATETIME;
-                values.I1AllorsDateTime = MINIMUM_DATETIME;
-                Assert.AreEqual(MINIMUM_DATETIME, values.C1AllorsDateTime);
-                Assert.AreEqual(MINIMUM_DATETIME, values.I1AllorsDateTime);
-            }
+        //    // Minimum
+        //    {
+        //        var values = C1.Create(this.Session);
+        //        values.C1AllorsDateTime = MINIMUM_DATETIME;
+        //        values.I1AllorsDateTime = MINIMUM_DATETIME;
+        //        Assert.AreEqual(MINIMUM_DATETIME, values.C1AllorsDateTime);
+        //        Assert.AreEqual(MINIMUM_DATETIME, values.I1AllorsDateTime);
+        //    }
 
-            // Maximum
-            {
-                var values = C1.Create(this.Session);
-                values.C1AllorsDateTime = MAXIMUM_DATETIME;
-                values.I1AllorsDateTime = MAXIMUM_DATETIME;
-                Assert.AreEqual(MAXIMUM_DATETIME, values.C1AllorsDateTime);
-                Assert.AreEqual(MAXIMUM_DATETIME, values.I1AllorsDateTime);
-            }
+        //    // Maximum
+        //    {
+        //        var values = C1.Create(this.Session);
+        //        values.C1AllorsDateTime = MAXIMUM_DATETIME;
+        //        values.I1AllorsDateTime = MAXIMUM_DATETIME;
+        //        Assert.AreEqual(MAXIMUM_DATETIME, values.C1AllorsDateTime);
+        //        Assert.AreEqual(MAXIMUM_DATETIME, values.I1AllorsDateTime);
+        //    }
 
-            // initial empty
-            {
-                var values = C1.Create(this.Session);
+        //    // initial empty
+        //    {
+        //        var values = C1.Create(this.Session);
 
-                DateTime? value = DateTime.Now;
-                var valueOld = value;
-                var exceptionThrown = false;
-                try
-                {
-                    value = values.C1AllorsDateTime;
-                }
-                catch { exceptionThrown = true; }
-                Assert.IsTrue(exceptionThrown);
-                exceptionThrown = false;
-                try
-                {
-                    value = values.I1AllorsDateTime;
-                }
-                catch { exceptionThrown = true; }
-                Assert.IsTrue(exceptionThrown);
-                exceptionThrown = false;
-                try
-                {
-                    value = values.S1AllorsDateTime;
-                }
-                catch { exceptionThrown = true; }
-                Assert.IsTrue(exceptionThrown);
-                Assert.AreEqual(valueOld, value);
+        //        DateTime? value = DateTime.Now;
+        //        var valueOld = value;
+        //        var exceptionThrown = false;
+        //        try
+        //        {
+        //            value = values.C1AllorsDateTime;
+        //        }
+        //        catch { exceptionThrown = true; }
+        //        Assert.IsTrue(exceptionThrown);
+        //        exceptionThrown = false;
+        //        try
+        //        {
+        //            value = values.I1AllorsDateTime;
+        //        }
+        //        catch { exceptionThrown = true; }
+        //        Assert.IsTrue(exceptionThrown);
+        //        exceptionThrown = false;
+        //        try
+        //        {
+        //            value = values.S1AllorsDateTime;
+        //        }
+        //        catch { exceptionThrown = true; }
+        //        Assert.IsTrue(exceptionThrown);
+        //        Assert.AreEqual(valueOld, value);
 
-                Assert.IsFalse(values.ExistC1AllorsDateTime);
-                Assert.IsFalse(values.ExistI1AllorsDateTime);
-                Assert.IsFalse(values.ExistS1AllorsDateTime);
+        //        Assert.IsFalse(values.ExistC1AllorsDateTime);
+        //        Assert.IsFalse(values.ExistI1AllorsDateTime);
+        //        Assert.IsFalse(values.ExistS1AllorsDateTime);
 
-                this.Session.Commit();
+        //        this.Session.Commit();
 
-                value = DateTime.Now;
-                valueOld = value;
-                exceptionThrown = false;
-                try
-                {
-                    value = values.C1AllorsDateTime;
-                }
-                catch { exceptionThrown = true; }
-                Assert.IsTrue(exceptionThrown);
-                exceptionThrown = false;
-                try
-                {
-                    value = values.I1AllorsDateTime;
-                }
-                catch { exceptionThrown = true; }
-                Assert.IsTrue(exceptionThrown);
-                exceptionThrown = false;
-                try
-                {
-                    value = values.S1AllorsDateTime;
-                }
-                catch { exceptionThrown = true; }
-                Assert.IsTrue(exceptionThrown);
-                Assert.AreEqual(valueOld, value);
+        //        value = DateTime.Now;
+        //        valueOld = value;
+        //        exceptionThrown = false;
+        //        try
+        //        {
+        //            value = values.C1AllorsDateTime;
+        //        }
+        //        catch { exceptionThrown = true; }
+        //        Assert.IsTrue(exceptionThrown);
+        //        exceptionThrown = false;
+        //        try
+        //        {
+        //            value = values.I1AllorsDateTime;
+        //        }
+        //        catch { exceptionThrown = true; }
+        //        Assert.IsTrue(exceptionThrown);
+        //        exceptionThrown = false;
+        //        try
+        //        {
+        //            value = values.S1AllorsDateTime;
+        //        }
+        //        catch { exceptionThrown = true; }
+        //        Assert.IsTrue(exceptionThrown);
+        //        Assert.AreEqual(valueOld, value);
 
-                Assert.IsFalse(values.ExistC1AllorsDateTime);
-                Assert.IsFalse(values.ExistI1AllorsDateTime);
-                Assert.IsFalse(values.ExistS1AllorsDateTime);
-            }
+        //        Assert.IsFalse(values.ExistC1AllorsDateTime);
+        //        Assert.IsFalse(values.ExistI1AllorsDateTime);
+        //        Assert.IsFalse(values.ExistS1AllorsDateTime);
+        //    }
 
-            // reset empty
-            {
-                var values = C1.Create(this.Session);
-                values.C1AllorsDateTime = DateTime.Now;
-                values.I1AllorsDateTime = DateTime.Now;
-                values.S1AllorsDateTime = DateTime.Now;
+        //    // reset empty
+        //    {
+        //        var values = C1.Create(this.Session);
+        //        values.C1AllorsDateTime = DateTime.Now;
+        //        values.I1AllorsDateTime = DateTime.Now;
+        //        values.S1AllorsDateTime = DateTime.Now;
 
-                this.Session.Commit();
+        //        this.Session.Commit();
 
-                Assert.IsTrue(values.ExistC1AllorsDateTime);
-                Assert.IsTrue(values.ExistI1AllorsDateTime);
-                Assert.IsTrue(values.ExistS1AllorsDateTime);
+        //        Assert.IsTrue(values.ExistC1AllorsDateTime);
+        //        Assert.IsTrue(values.ExistI1AllorsDateTime);
+        //        Assert.IsTrue(values.ExistS1AllorsDateTime);
 
-                values.RemoveC1AllorsDateTime();
-                values.RemoveI1AllorsDateTime();
-                values.RemoveS1AllorsDateTime();
+        //        values.RemoveC1AllorsDateTime();
+        //        values.RemoveI1AllorsDateTime();
+        //        values.RemoveS1AllorsDateTime();
 
-                DateTime? value = DateTime.Now;
-                var valueOld = value;
-                var exceptionThrown = false;
-                try
-                {
-                    value = values.C1AllorsDateTime;
-                }
-                catch { exceptionThrown = true; }
-                Assert.IsTrue(exceptionThrown);
-                exceptionThrown = false;
-                try
-                {
-                    value = values.I1AllorsDateTime;
-                }
-                catch { exceptionThrown = true; }
-                Assert.IsTrue(exceptionThrown);
-                exceptionThrown = false;
-                try
-                {
-                    value = values.S1AllorsDateTime;
-                }
-                catch { exceptionThrown = true; }
-                Assert.IsTrue(exceptionThrown);
-                Assert.AreEqual(valueOld, value);
+        //        DateTime? value = DateTime.Now;
+        //        var valueOld = value;
+        //        var exceptionThrown = false;
+        //        try
+        //        {
+        //            value = values.C1AllorsDateTime;
+        //        }
+        //        catch { exceptionThrown = true; }
+        //        Assert.IsTrue(exceptionThrown);
+        //        exceptionThrown = false;
+        //        try
+        //        {
+        //            value = values.I1AllorsDateTime;
+        //        }
+        //        catch { exceptionThrown = true; }
+        //        Assert.IsTrue(exceptionThrown);
+        //        exceptionThrown = false;
+        //        try
+        //        {
+        //            value = values.S1AllorsDateTime;
+        //        }
+        //        catch { exceptionThrown = true; }
+        //        Assert.IsTrue(exceptionThrown);
+        //        Assert.AreEqual(valueOld, value);
 
-                Assert.IsFalse(values.ExistC1AllorsDateTime);
-                Assert.IsFalse(values.ExistI1AllorsDateTime);
-                Assert.IsFalse(values.ExistS1AllorsDateTime);
+        //        Assert.IsFalse(values.ExistC1AllorsDateTime);
+        //        Assert.IsFalse(values.ExistI1AllorsDateTime);
+        //        Assert.IsFalse(values.ExistS1AllorsDateTime);
 
-                this.Session.Commit();
+        //        this.Session.Commit();
 
-                value = DateTime.Now;
-                valueOld = value;
-                exceptionThrown = false;
-                try
-                {
-                    value = values.C1AllorsDateTime;
-                }
-                catch { exceptionThrown = true; }
-                Assert.IsTrue(exceptionThrown);
-                exceptionThrown = false;
-                try
-                {
-                    value = values.I1AllorsDateTime;
-                }
-                catch { exceptionThrown = true; }
-                Assert.IsTrue(exceptionThrown);
-                exceptionThrown = false;
-                try
-                {
-                    value = values.S1AllorsDateTime;
-                }
-                catch { exceptionThrown = true; }
-                Assert.IsTrue(exceptionThrown);
-                Assert.AreEqual(valueOld, value);
+        //        value = DateTime.Now;
+        //        valueOld = value;
+        //        exceptionThrown = false;
+        //        try
+        //        {
+        //            value = values.C1AllorsDateTime;
+        //        }
+        //        catch { exceptionThrown = true; }
+        //        Assert.IsTrue(exceptionThrown);
+        //        exceptionThrown = false;
+        //        try
+        //        {
+        //            value = values.I1AllorsDateTime;
+        //        }
+        //        catch { exceptionThrown = true; }
+        //        Assert.IsTrue(exceptionThrown);
+        //        exceptionThrown = false;
+        //        try
+        //        {
+        //            value = values.S1AllorsDateTime;
+        //        }
+        //        catch { exceptionThrown = true; }
+        //        Assert.IsTrue(exceptionThrown);
+        //        Assert.AreEqual(valueOld, value);
 
-                Assert.IsFalse(values.ExistC1AllorsDateTime);
-                Assert.IsFalse(values.ExistI1AllorsDateTime);
-                Assert.IsFalse(values.ExistS1AllorsDateTime);
-            }
-        }
+        //        Assert.IsFalse(values.ExistC1AllorsDateTime);
+        //        Assert.IsFalse(values.ExistI1AllorsDateTime);
+        //        Assert.IsFalse(values.ExistS1AllorsDateTime);
+        //    }
+        //}
 
         [Test]
         public override void AllorsDecimal()
