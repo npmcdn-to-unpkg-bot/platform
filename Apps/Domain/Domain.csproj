@@ -2458,6 +2458,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Apps\Order\Overview.cd" />
     <None Include="packages.config" />
     <None Include="Settings.StyleCop" />
   </ItemGroup>

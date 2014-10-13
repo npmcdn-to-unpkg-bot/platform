@@ -255,8 +255,6 @@ namespace Allors.Domain
                 this.PreviousCurrency = this.PreferredCurrency;
             }
 
-            
-
             this.BillingAddress = null;
             this.BillingInquiriesFax = null;
             this.BillingInquiriesPhone = null;

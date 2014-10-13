@@ -20,6 +20,8 @@
 
 namespace Allors.Domain
 {
+    using System.Linq;
+
     using NUnit.Framework;
 
     [TestFixture]
@@ -30,36 +32,13 @@ namespace Allors.Domain
         {
             var builder = new CountryBuilder(this.DatabaseSession);
             builder.Build();
-            
-            Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
-
-            builder.WithIsoCode("XX").Build();
-            builder.Build();
-
-            Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
-
-            this.DatabaseSession.Rollback();
-
-            builder.WithLocalisedName(new LocalisedTexts(this.DatabaseSession).Extent().First);
-
-            builder.Build();
-
-            Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
-
-            this.DatabaseSession.Rollback();
-
-            builder.WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"));
-            builder.Build();
-
-            Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
-
-            this.DatabaseSession.Rollback();
-
-            builder.WithEuMemberState(false);
-            builder.Build();
 
             var log = this.DatabaseSession.Derive();
-            Assert.IsFalse(log.HasErrors);
+
+            Assert.IsTrue(log.HasErrors);
+            Assert.AreEqual(5, log.Errors.Count());
+
+            
         }
     }
 }

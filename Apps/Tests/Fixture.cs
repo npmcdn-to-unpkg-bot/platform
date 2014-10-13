@@ -68,7 +68,8 @@ namespace Allors
             Databases.Default = new Adapters.Database.Memory.IntegerId.Database(configuration);
             
             SearchDatas.SkipDerivation = true;
-            Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("nl-BE");
+            Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-GB");
+            Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-GB");
 
             var database = Databases.Default;
             database.Init();
@@ -102,7 +103,8 @@ namespace Allors
             Databases.Default = new Adapters.Database.Memory.IntegerId.Database(configuration);
 
             SearchDatas.SkipDerivation = true;
-            Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("nl-BE");
+            Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-GB");
+            Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-GB");
 
             var database = Databases.Default;
             database.Init();

@@ -26,8 +26,6 @@ namespace Allors.Domain
     {
         protected override void AppsDerive(IDerivation derivation)
         {
-            
-
             derivation.Log.AssertExists(this, Countries.Meta.Currency);
 
             if (this.ExistIsoCode)

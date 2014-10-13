@@ -35,7 +35,7 @@ namespace Allors.Meta
             var allorsDecimal = (Unit)meta.Find(UnitIds.DecimalId);
             var allorsDouble = (Unit)meta.Find(UnitIds.DoubleId);
             var allorsBoolean = (Unit)meta.Find(UnitIds.BooleanId);
-            var allorsDateTime = (Unit)meta.Find(UnitIds.DatetimeId);
+            var allorsDate = (Unit)meta.Find(UnitIds.DateId);
             var allorsUnique = (Unit)meta.Find(UnitIds.Unique);
             var allorsBinary = (Unit)meta.Find(UnitIds.BinaryId);
 
@@ -288,8 +288,8 @@ namespace Allors.Meta
             new RelationTypeBuilder(domain, new Guid("8c005a4e-5ffe-45fd-b279-778e274f4d83"), new Guid("6684d98b-cd43-4612-bf9d-afefe02a0d43"), new Guid("d43b92ac-9e6f-4238-9625-1e889be054cf")).WithObjectTypes(localised, locale).WithSingularName("Locale").WithPluralName("Locales").WithCardinality(Cardinalities.ManyToOne).WithIsIndexed(true).Build();
 
             // Period
-            new RelationTypeBuilder(domain, new Guid("5aeb31c7-03d4-4314-bbb2-fca5704b1eab"), new Guid("8cf0bd14-753d-4f34-99b3-7a6b0d90c3d4"), new Guid("0da8ef4e-53b7-4152-b219-7e0cebbca268")).WithObjectTypes(period, allorsDateTime).WithSingularName("FromDate").WithPluralName("FromDates").Build();
-            new RelationTypeBuilder(domain, new Guid("d7576ce2-da27-487a-86aa-b0912f745bc0"), new Guid("cb2fa6c1-f826-45f0-a03f-00e6cb268ebb"), new Guid("4e021875-5bae-4f01-8deb-641016cd2f8d")).WithObjectTypes(period, allorsDateTime).WithSingularName("ThroughDate").WithPluralName("ThroughDates").Build();
+            new RelationTypeBuilder(domain, new Guid("5aeb31c7-03d4-4314-bbb2-fca5704b1eab"), new Guid("8cf0bd14-753d-4f34-99b3-7a6b0d90c3d4"), new Guid("0da8ef4e-53b7-4152-b219-7e0cebbca268")).WithObjectTypes(period, allorsDate).WithSingularName("FromDate").WithPluralName("FromDates").Build();
+            new RelationTypeBuilder(domain, new Guid("d7576ce2-da27-487a-86aa-b0912f745bc0"), new Guid("cb2fa6c1-f826-45f0-a03f-00e6cb268ebb"), new Guid("4e021875-5bae-4f01-8deb-641016cd2f8d")).WithObjectTypes(period, allorsDate).WithSingularName("ThroughDate").WithPluralName("ThroughDates").Build();
 
             // MediaType
             new RelationTypeBuilder(domain, new Guid("19e52bd9-26cb-4e74-9c28-9f01e684f3da"), new Guid("b1928c18-ef98-4cee-b03c-660221046486"), new Guid("7223c1e2-d722-440b-8345-ab4cfe56d0e9")).WithObjectTypes(mediaType, allorsString).WithSingularName("DefaultFileExtension").WithPluralName("DefaultFileExtensions").WithIsDerived(true).WithSize(256).Build();

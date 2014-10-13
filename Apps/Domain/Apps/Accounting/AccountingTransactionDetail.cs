@@ -20,6 +20,8 @@
 
 namespace Allors.Domain
 {
+    using System.Threading;
+
     public partial class AccountingTransactionDetail
     {
         public string AppsDebitCreditString
@@ -42,8 +44,6 @@ namespace Allors.Domain
 
         protected override void AppsDerive(IDerivation derivation)
         {
-            
-
             derivation.Log.AssertExists(this, AccountingTransactionDetails.Meta.Amount);
             derivation.Log.AssertExists(this, AccountingTransactionDetails.Meta.Debit);
             derivation.Log.AssertExists(this, AccountingTransactionDetails.Meta.OrganisationGlAccountBalance);

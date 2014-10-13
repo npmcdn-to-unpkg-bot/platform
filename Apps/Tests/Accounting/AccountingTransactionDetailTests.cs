@@ -24,7 +24,6 @@ namespace Allors.Domain
     using System;
 
     using NUnit.Framework;
-    using Allors.Domain;
 
     [TestFixture]
     public class AccountingTransactionDetailTests : DomainTest

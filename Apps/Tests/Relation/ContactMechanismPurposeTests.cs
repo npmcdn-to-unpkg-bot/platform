@@ -32,7 +32,7 @@ namespace Allors.Domain
         public void GivenContactMechanismPurpose_WhenDeriving_ThenDisplayNameIsSet()
         {
             var contactMechanismPurpose = new ContactMechanismPurposes(this.DatabaseSession).GeneralPhoneNumber;
-            Assert.AreEqual("General PhoneNumber", contactMechanismPurpose.DisplayName);
+            Assert.AreEqual("General Phone Number", contactMechanismPurpose.DisplayName);
         }
     }
 }
