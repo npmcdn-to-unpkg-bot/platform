@@ -71,7 +71,7 @@
     <Compile Include="Meta\InterfaceBuilder.v.cs" />
     <Compile Include="Meta\LazySet.cs" />
     <Compile Include="Meta\MetaObject.cs" />
-    <Compile Include="Meta\MetaPopulation.cs" />
+    <Compile Include="Meta\IMetaPopulation.cs" />
     <Compile Include="Meta\MethodType.cs" />
     <Compile Include="Meta\MethodTypeBuilder.cs" />
     <Compile Include="Meta\MethodTypeBuilder.v.cs" />

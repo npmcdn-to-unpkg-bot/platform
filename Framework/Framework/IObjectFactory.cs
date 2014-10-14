@@ -44,7 +44,7 @@ namespace Allors
         /// Gets the domain.
         /// </summary>
         /// <value>The domain.</value>
-        MetaPopulation MetaPopulation { get; }
+        IMetaPopulation MetaPopulation { get; }
 
         /// <summary>
         /// Create a new IObject instance.

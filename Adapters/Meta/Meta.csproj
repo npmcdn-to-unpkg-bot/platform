@@ -65,6 +65,9 @@
     <Compile Include="..\..\Core\Meta\Core\Generation\StringTemplate.cs">
       <Link>Core\Generation\StringTemplate.cs</Link>
     </Compile>
+    <Compile Include="..\..\Core\Meta\Core\MetaPopulation.cs">
+      <Link>Core\MetaPopulation.cs</Link>
+    </Compile>
     <Compile Include="..\..\Core\Meta\Core\Repository.cs">
       <Link>Core\Repository.cs</Link>
     </Compile>

@@ -49,7 +49,7 @@ namespace Allors.Meta
 
         private IList<MethodType> definedMethodTypes;
 
-        public IDomain(MetaPopulation metaPopulation, Guid id)
+        public IDomain(IMetaPopulation metaPopulation, Guid id)
             : base(metaPopulation, id)
         {
             this.directSuperdomains = new List<IDomain>();

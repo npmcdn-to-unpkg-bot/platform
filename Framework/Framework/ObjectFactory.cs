@@ -35,7 +35,7 @@ namespace Allors
         /// <summary>
         /// The domain.
         /// </summary>
-        private readonly MetaPopulation metaPopulation;
+        private readonly IMetaPopulation metaPopulation;
 
         /// <summary>
         ///  The assembly.
@@ -79,7 +79,7 @@ namespace Allors
         /// <param name="namespace">
         /// The namespace
         /// </param>
-        public ObjectFactory(MetaPopulation metaPopulation, Assembly assembly, string @namespace)
+        public ObjectFactory(IMetaPopulation metaPopulation, Assembly assembly, string @namespace)
         {
             this.metaPopulation = metaPopulation;
             this.assembly = assembly;
@@ -152,7 +152,7 @@ namespace Allors
         /// <summary>
         /// Gets the domain.
         /// </summary>
-        public MetaPopulation MetaPopulation 
+        public IMetaPopulation MetaPopulation 
         {
             get
             {

@@ -49,8 +49,8 @@ namespace Allors.Adapters.Special.SqlClient.IntegerId.ReadCommitted
                 return markers.ToArray();
             }
         }
-        
-        public IDatabase CreateDatabase(MetaPopulation metaPopulation, bool init)
+
+        public IDatabase CreateDatabase(IMetaPopulation metaPopulation, bool init)
         {
             var configuration = new Adapters.Database.SqlClient.IntegerId.Configuration
                                     {

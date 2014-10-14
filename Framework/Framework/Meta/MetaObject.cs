@@ -30,13 +30,13 @@ namespace Allors.Meta
     {
         private Guid id;
 
-        protected MetaObject(MetaPopulation metaPopulation, Guid id)
+        protected MetaObject(IMetaPopulation metaPopulation, Guid id)
         {
             this.MetaPopulation = metaPopulation;
             this.Id = id;
         }
-        
-        public MetaPopulation MetaPopulation { get; private set; }
+
+        public IMetaPopulation MetaPopulation { get; private set; }
 
         /// <summary>
         /// Gets the id.

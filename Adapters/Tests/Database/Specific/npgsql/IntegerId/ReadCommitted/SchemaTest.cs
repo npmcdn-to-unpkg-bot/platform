@@ -17,6 +17,7 @@
 namespace Allors.Adapters.Special.Npgsql.IntegerId.ReadCommitted
 {
     using Allors.Adapters.Database.Sql;
+    using Allors.Meta;
 
     using NUnit.Framework;
 
@@ -35,7 +36,7 @@ namespace Allors.Adapters.Special.Npgsql.IntegerId.ReadCommitted
             }
         }
 
-        protected override IDatabase CreateDatabase(Meta.MetaPopulation metaPopulation, bool init)
+        protected override IDatabase CreateDatabase(IMetaPopulation metaPopulation, bool init)
         {
             return this.profile.CreateDatabase(metaPopulation, init);
         }

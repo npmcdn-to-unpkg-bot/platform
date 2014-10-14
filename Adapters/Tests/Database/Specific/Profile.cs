@@ -158,7 +158,7 @@ namespace Allors.Adapters.Special
             }
         }
 
-        protected ObjectFactory CreateObjectFactory(MetaPopulation metaPopulation)
+        protected ObjectFactory CreateObjectFactory(IMetaPopulation metaPopulation)
         {
             return new ObjectFactory(metaPopulation, typeof(ObjectBase).Assembly, "Allors.Domain");
         }

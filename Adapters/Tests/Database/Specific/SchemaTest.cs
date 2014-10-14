@@ -790,7 +790,7 @@ namespace Allors.Adapters.Special
             return new InterfaceBuilder(this.domain, Guid.NewGuid()).WithSingularName(name).WithPluralName(name + "s").Build();
         }
 
-        protected abstract IDatabase CreateDatabase(MetaPopulation metaPopulation, bool init);
+        protected abstract IDatabase CreateDatabase(IMetaPopulation metaPopulation, bool init);
 
         protected IDatabase CreateDatabase()
         {

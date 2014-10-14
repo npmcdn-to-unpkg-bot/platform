@@ -28,7 +28,7 @@ namespace Allors.Meta
     /// <summary>
     /// A Domain is a container for <see cref="ObjectType"/>s, <see cref="RelationType"/>s.
     /// </summary>
-    public sealed partial class MetaPopulation
+    public abstract partial class IMetaPopulation
     {
         private readonly Dictionary<Guid, MetaObject> metaObjectById;
 
@@ -49,7 +49,7 @@ namespace Allors.Meta
         private IList<RoleType> roleTypes;
         private IList<MethodType> methodTypes;
         
-        public MetaPopulation()
+        public IMetaPopulation()
         {
             this.isStale = true;
             this.isDeriving = false;

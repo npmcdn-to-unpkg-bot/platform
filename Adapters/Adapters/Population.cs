@@ -56,7 +56,7 @@ namespace Allors.Adapters
 
         public abstract bool IsWorkspace { get; }
 
-        public MetaPopulation MetaPopulation 
+        public IMetaPopulation MetaPopulation 
         {
             get
             {

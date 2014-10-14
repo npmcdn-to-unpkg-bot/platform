@@ -20,8 +20,7 @@ namespace Allors.Adapters.Special.Npgsql.IntegerId.ReadCommitted
     using System.Collections.Generic;
 
     using Allors.Adapters.Database.Npgsql.IntegerId;
-
-    using Configuration = Allors.Adapters.Configuration;
+    using Allors.Meta;
 
     public class Profile : Npgsql.Profile
     {
@@ -51,7 +50,7 @@ namespace Allors.Adapters.Special.Npgsql.IntegerId.ReadCommitted
             }
         }
 
-        public IDatabase CreateDatabase(Meta.MetaPopulation metaPopulation, bool init)
+        public IDatabase CreateDatabase(IMetaPopulation metaPopulation, bool init)
         {
             var configuration = new Adapters.Database.Npgsql.IntegerId.Configuration
             {
