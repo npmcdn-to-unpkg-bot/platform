@@ -300,7 +300,7 @@ namespace Allors.Adapters.Database.Sql
                                     }
                                     else
                                     {
-                                        var relationsByExclusiveLeafClass = new Dictionary<ObjectType, List<UnitRelation>>();
+                                        var relationsByExclusiveLeafClass = new Dictionary<IObjectType, List<UnitRelation>>();
                                         this.LoadUnitRelations(relationType, relationsByExclusiveLeafClass);
 
                                         foreach (var dictionaryEntry in relationsByExclusiveLeafClass)
@@ -314,7 +314,7 @@ namespace Allors.Adapters.Database.Sql
                                 }
                                 else if (this.reader.Name.Equals(Serialization.RelationTypeComposite))
                                 {
-                                    if (relationType == null || relationType.RoleType.ObjectType is Unit)
+                                    if (relationType == null || relationType.RoleType.ObjectType is IUnit)
                                     {
                                         this.CantLoadCompositeRole(relationTypeId);
                                     }
@@ -350,7 +350,7 @@ namespace Allors.Adapters.Database.Sql
             }
         }
 
-        protected void LoadUnitRelations(RelationType relationType, Dictionary<ObjectType, List<UnitRelation>> relationsByExclusiveLeafClass)
+        protected void LoadUnitRelations(RelationType relationType, Dictionary<IObjectType, List<UnitRelation>> relationsByExclusiveLeafClass)
         {
             while (this.reader.Read())
             {
@@ -379,7 +379,7 @@ namespace Allors.Adapters.Database.Sql
                                 else
                                 {
                                     var exclusiveLeafClass = associationConcreteClass.ExclusiveLeafClass;
-                                    var unitType = (Unit)relationType.RoleType.ObjectType;
+                                    var unitType = (IUnit)relationType.RoleType.ObjectType;
                                     switch (unitType.UnitTag)
                                     {
                                         case UnitTags.AllorsString:
@@ -431,7 +431,7 @@ namespace Allors.Adapters.Database.Sql
                                     try
                                     {
                                         var exclusiveLeafClass = associationConcreteClass.ExclusiveLeafClass;
-                                        var unitType = (Unit)relationType.RoleType.ObjectType;
+                                        var unitType = (IUnit)relationType.RoleType.ObjectType;
                                         var unitTypeTag = unitType.UnitTag;
                                         var unit = Serialization.ReadString(value, unitTypeTag);
 

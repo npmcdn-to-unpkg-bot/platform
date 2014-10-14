@@ -16,7 +16,7 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the ObjectType type.</summary>
+// <summary>Defines the IObjectType type.</summary>
 //-------------------------------------------------------------------------------------------------
 
 namespace Allors.Meta
@@ -128,7 +128,7 @@ namespace Allors.Meta
         /// <returns>
         /// True if this contains the concrete class.
         /// </returns>
-        public override bool ContainsLeafClass(ObjectType objectType)
+        public override bool ContainsLeafClass(IObjectType objectType)
         {
             this.MetaPopulation.Derive();
             return this.derivedLeafClasses.Contains(objectType);
@@ -202,7 +202,7 @@ namespace Allors.Meta
         /// </summary>
         /// <param name="type">The type .</param>
         /// <param name="subTypes">The super types.</param>
-        private void DeriveSubtypesRecursively(ObjectType type, HashSet<Composite> subTypes)
+        private void DeriveSubtypesRecursively(IObjectType type, HashSet<Composite> subTypes)
         {
             foreach (var directSubtype in this.derivedDirectSubtypes)
             {

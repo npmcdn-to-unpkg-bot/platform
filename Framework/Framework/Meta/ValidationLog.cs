@@ -39,7 +39,7 @@ namespace Allors.Meta
         private readonly HashSet<Guid> ids;
 
         /// <summary>
-        /// The set of all <see cref="ObjectType"/> names.
+        /// The set of all <see cref="IObjectType"/> names.
         /// </summary>
         private readonly HashSet<string> objectTypeNames;
 

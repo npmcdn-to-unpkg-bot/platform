@@ -142,7 +142,7 @@ namespace Allors.Adapters.Workspace.Memory
 
         public virtual object GetRole(RoleType roleType)
         {
-            if (roleType.ObjectType is Unit)
+            if (roleType.ObjectType is IUnit)
             {
                 return this.GetUnitRole(roleType);
             }
@@ -157,7 +157,7 @@ namespace Allors.Adapters.Workspace.Memory
 
         public virtual void SetRole(RoleType roleType, object value)
         {
-            if (roleType.ObjectType is Unit)
+            if (roleType.ObjectType is IUnit)
             {
                 this.SetUnitRole(roleType, value);
             }
@@ -183,7 +183,7 @@ namespace Allors.Adapters.Workspace.Memory
 
         public virtual void RemoveRole(RoleType roleType)
         {
-            if (roleType.ObjectType is Unit)
+            if (roleType.ObjectType is IUnit)
             {
                 this.RemoveUnitRole(roleType);
             }
@@ -202,7 +202,7 @@ namespace Allors.Adapters.Workspace.Memory
 
         public virtual bool ExistRole(RoleType roleType)
         {
-            if (roleType.ObjectType is Unit)
+            if (roleType.ObjectType is IUnit)
             {
                 return this.ExistUnitRole(roleType);
             }
@@ -481,7 +481,7 @@ namespace Allors.Adapters.Workspace.Memory
 
         internal static object LoadUnit(XmlReader reader, RoleType roleType, string value)
         {
-            var unitType = (Unit)roleType.ObjectType;
+            var unitType = (IUnit)roleType.ObjectType;
             var unitTypeTag = unitType.UnitTag;
             if (reader.IsEmptyElement)
             {
@@ -495,7 +495,7 @@ namespace Allors.Adapters.Workspace.Memory
                     return EmptyByteArray;
                 }
 
-                throw new ArgumentException("Unit can not be empty for Unit ObjectType " + roleType.ObjectType);
+                throw new ArgumentException("Unit can not be empty for Unit IObjectType " + roleType.ObjectType);
             }
 
             return Serialization.ReadString(value, unitTypeTag);

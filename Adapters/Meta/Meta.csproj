@@ -71,6 +71,15 @@
     <Compile Include="..\..\Core\Meta\Core\Repository.cs">
       <Link>Core\Repository.cs</Link>
     </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Unit.cs">
+      <Link>Core\Unit.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\UnitBuilder.cs">
+      <Link>Core\UnitBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\UnitBuilder.v.cs">
+      <Link>Core\UnitBuilder.v.cs</Link>
+    </Compile>
     <Compile Include="Test\Meta\Repository.cs" />
     <Compile Include="Test\Meta\Repository.v.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

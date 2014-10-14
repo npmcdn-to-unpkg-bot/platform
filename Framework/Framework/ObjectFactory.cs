@@ -48,24 +48,24 @@ namespace Allors
         private readonly string ns;
 
         /// <summary>
-        /// <see cref="Type"/> by <see cref="ObjectType"/> cache.
+        /// <see cref="Type"/> by <see cref="IObjectType"/> cache.
         /// </summary>
-        private readonly Dictionary<ObjectType, Type> typeByObjectType;
+        private readonly Dictionary<IObjectType, Type> typeByObjectType;
 
         /// <summary>
-        /// <see cref="Type"/> by <see cref="ObjectType"/> id cache.
+        /// <see cref="Type"/> by <see cref="IObjectType"/> id cache.
         /// </summary>
-        private readonly Dictionary<Type, ObjectType> objectTypeByType;
+        private readonly Dictionary<Type, IObjectType> objectTypeByType;
 
         /// <summary>
-        /// <see cref="ObjectType"/> by <see cref="ObjectType"/> id cache.
+        /// <see cref="IObjectType"/> by <see cref="IObjectType"/> id cache.
         /// </summary>
-        private readonly Dictionary<Guid, ObjectType> objectTypeByObjectTypeId;
+        private readonly Dictionary<Guid, IObjectType> objectTypeByObjectTypeId;
 
         /// <summary>
-        /// <see cref="ConstructorInfo"/> by <see cref="ObjectType"/> cache.
+        /// <see cref="ConstructorInfo"/> by <see cref="IObjectType"/> cache.
         /// </summary>
-        private readonly Dictionary<ObjectType, ConstructorInfo> contructorInfoByObjectType;
+        private readonly Dictionary<IObjectType, ConstructorInfo> contructorInfoByObjectType;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ObjectFactory"/> class.
@@ -93,10 +93,10 @@ namespace Allors
 
             metaPopulation.Lock();
             
-            this.typeByObjectType = new Dictionary<ObjectType, Type>();
-            this.objectTypeByType = new Dictionary<Type, ObjectType>();
-            this.objectTypeByObjectTypeId = new Dictionary<Guid, ObjectType>();
-            this.contructorInfoByObjectType = new Dictionary<ObjectType, ConstructorInfo>();
+            this.typeByObjectType = new Dictionary<IObjectType, Type>();
+            this.objectTypeByType = new Dictionary<Type, IObjectType>();
+            this.objectTypeByObjectTypeId = new Dictionary<Guid, IObjectType>();
+            this.contructorInfoByObjectType = new Dictionary<IObjectType, ConstructorInfo>();
 
             var types = assembly.GetTypes().Where(type => 
                 type.Namespace != null && 
@@ -175,32 +175,32 @@ namespace Allors
         }
 
         /// <summary>
-        /// Gets the .Net <see cref="Type"/> given the Allors <see cref="ObjectType"/>.
+        /// Gets the .Net <see cref="Type"/> given the Allors <see cref="IObjectType"/>.
         /// </summary>
         /// <param name="type">The .Net <see cref="Type"/>.</param>
-        /// <returns>The Allors <see cref="ObjectType"/>.</returns>
-        public ObjectType GetObjectTypeForType(Type type)
+        /// <returns>The Allors <see cref="IObjectType"/>.</returns>
+        public IObjectType GetObjectTypeForType(Type type)
         {
-            ObjectType objectType;
+            IObjectType objectType;
             return !this.objectTypeByType.TryGetValue(type, out objectType) ? null : objectType;
         }
 
         /// <summary>
-        /// Gets the .Net <see cref="Type"/> given the Allors <see cref="ObjectType"/>.
+        /// Gets the .Net <see cref="Type"/> given the Allors <see cref="IObjectType"/>.
         /// </summary>
-        /// <param name="objectType">The Allors <see cref="ObjectType"/>.</param>
+        /// <param name="objectType">The Allors <see cref="IObjectType"/>.</param>
         /// <returns>The .Net <see cref="Type"/>.</returns>
-        public Type GetTypeForObjectType(ObjectType objectType)
+        public Type GetTypeForObjectType(IObjectType objectType)
         {
             return this.typeByObjectType[objectType];
         }
 
         /// <summary>
-        /// Gets the .Net <see cref="Type"/> given the Allors <see cref="ObjectType"/>.
+        /// Gets the .Net <see cref="Type"/> given the Allors <see cref="IObjectType"/>.
         /// </summary>
-        /// <param name="objectTypeId">The Allors <see cref="ObjectType"/> id.</param>
+        /// <param name="objectTypeId">The Allors <see cref="IObjectType"/> id.</param>
         /// <returns>The .Net <see cref="Type"/>.</returns>
-        public ObjectType GetObjectTypeForType(Guid objectTypeId)
+        public IObjectType GetObjectTypeForType(Guid objectTypeId)
         {
             return this.objectTypeByObjectTypeId[objectTypeId];
         }

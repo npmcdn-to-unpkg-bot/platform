@@ -30,7 +30,7 @@ namespace Allors.Adapters.Database.SqlClient
         private const int BatchSize = 1000;
         private readonly DatabaseSession session;
 
-        private Dictionary<ObjectType, Dictionary<RoleType, List<UnitRelation>>> setUnitRoleRelationsByRoleTypeByExclusiveLeafClass;
+        private Dictionary<IObjectType, Dictionary<RoleType, List<UnitRelation>>> setUnitRoleRelationsByRoleTypeByExclusiveLeafClass;
         private Dictionary<RoleType, List<CompositeRelation>> setCompositeRoleRelationsByRoleType;
         private Dictionary<RoleType, List<CompositeRelation>> addCompositeRoleRelationsByRoleType;
         private Dictionary<RoleType, List<CompositeRelation>> removeCompositeRoleRelationsByRoleType;
@@ -139,7 +139,7 @@ namespace Allors.Adapters.Database.SqlClient
         {
             if (this.setUnitRoleRelationsByRoleTypeByExclusiveLeafClass == null)
             {
-                this.setUnitRoleRelationsByRoleTypeByExclusiveLeafClass = new Dictionary<ObjectType, Dictionary<RoleType, List<UnitRelation>>>();
+                this.setUnitRoleRelationsByRoleTypeByExclusiveLeafClass = new Dictionary<IObjectType, Dictionary<RoleType, List<UnitRelation>>>();
             }
 
             var exclusiveLeafClass = association.ObjectType.ExclusiveLeafClass;

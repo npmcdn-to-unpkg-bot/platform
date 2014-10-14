@@ -117,7 +117,7 @@ namespace Allors.Adapters.Database.Sql
                 case UnitTags.AllorsBinary:
                     return this.GetBinary(reader, i);
                 default:
-                    throw new ArgumentException("Unknown Unit ObjectType: " + unitTypeTag);
+                    throw new ArgumentException("Unknown Unit IObjectType: " + unitTypeTag);
             }
         }
 

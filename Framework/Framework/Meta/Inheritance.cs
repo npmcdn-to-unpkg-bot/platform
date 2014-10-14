@@ -25,9 +25,9 @@ namespace Allors.Meta
     using System.Linq;
 
     /// <summary>
-    /// Defines a subtype/supertype relation between two <see cref="ObjectType"/>s.
+    /// Defines a subtype/supertype relation between two <see cref="IObjectType"/>s.
     /// </summary>
-    public sealed partial class Inheritance : DomainDefinedObject
+    public sealed partial class Inheritance : IDomainDefinedObject
     {
         private Composite subtype;
 
@@ -112,7 +112,7 @@ namespace Allors.Meta
                     validationLog.AddError(message, this, ValidationKind.Unique, "Inheritance.Supertype");
                 }
 
-                ObjectType tempQualifier = this.Supertype;
+                IObjectType tempQualifier = this.Supertype;
                 if (tempQualifier is Class)
                 {
                     var message = this.ValidationName + " can not have a concrete superclass";

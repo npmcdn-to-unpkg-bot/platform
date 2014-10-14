@@ -146,25 +146,25 @@ namespace Allors
         ICompositePredicate AddGreaterThan(RoleType role, object value);
 
         /// <summary>
-        /// Adds a Predicate that evaluates to true if the object under evaluation is an instance of the ObjectType.
+        /// Adds a Predicate that evaluates to true if the object under evaluation is an instance of the IObjectType.
         /// </summary>
-        /// <param name="objectType">the ObjectType.</param>
+        /// <param name="objectType">the IObjectType.</param>
         /// <returns>the composing CompositePredicate</returns>
         ICompositePredicate AddInstanceof(Composite objectType);
 
         /// <summary>
-        /// Adds a Predicate that evaluates to true if the role of the object under evaluation is an instance of the ObjectType.
+        /// Adds a Predicate that evaluates to true if the role of the object under evaluation is an instance of the IObjectType.
         /// </summary>
         /// <param name="role">the RoleType .</param>
-        /// <param name="objectType">the ObjectType.</param>
+        /// <param name="objectType">the IObjectType.</param>
         /// <returns>the composing CompositePredicate</returns>
         ICompositePredicate AddInstanceof(RoleType role, Composite objectType);
 
         /// <summary>
-        /// Adds a Predicate that evaluates to true if the association of the object under evaluation is an instance of the ObjectType.
+        /// Adds a Predicate that evaluates to true if the association of the object under evaluation is an instance of the IObjectType.
         /// </summary>
         /// <param name="association">the AssociationType.</param>
-        /// <param name="objectType">the ObjectType.</param>
+        /// <param name="objectType">the IObjectType.</param>
         /// <returns>the composing CompositePredicate</returns>
         ICompositePredicate AddInstanceof(AssociationType association, Composite objectType);
 

@@ -24,7 +24,7 @@ namespace Allors.Adapters.Database.Sql
 
     /// <summary>
     /// <para>Raised during the validation of the <see cref="MetaPopulation"/> against the Sql schema.</para>
-    /// <para>The <see cref="TableSchemaValidationError#ObjectType"/>, <see cref="TableSchemaValidationError#RelationType"/>
+    /// <para>The <see cref="TableSchemaValidationError#IObjectType"/>, <see cref="TableSchemaValidationError#RelationType"/>
     /// and <see cref="TableSchemaValidationError#RoleType"/> objects are mutually exclusive.
     /// </para>
     /// </summary>
@@ -63,7 +63,7 @@ namespace Allors.Adapters.Database.Sql
         /// <summary>
         /// The object type.
         /// </summary>
-        private readonly ObjectType objectType;
+        private readonly IObjectType objectType;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TableSchemaValidationError"/> class.
@@ -75,7 +75,7 @@ namespace Allors.Adapters.Database.Sql
         /// <param name="columnName">Name of the column.</param>
         /// <param name="errorKind">The kind of validation error.</param>
         /// <param name="message">The validation error message.</param>
-        public TableSchemaValidationError(ObjectType objectType, RelationType relationType, RoleType role, string tableName, string columnName, SchemaValidationErrorKind errorKind, string message)
+        public TableSchemaValidationError(IObjectType objectType, RelationType relationType, RoleType role, string tableName, string columnName, SchemaValidationErrorKind errorKind, string message)
         {
             this.objectType = objectType;
             this.relationType = relationType;
@@ -144,7 +144,7 @@ namespace Allors.Adapters.Database.Sql
         /// Gets the invalid object type. 
         /// </summary>
         /// <value>The Object Type.</value>
-        public ObjectType ObjectType
+        public IObjectType ObjectType
         {
             get { return this.objectType; }
         }

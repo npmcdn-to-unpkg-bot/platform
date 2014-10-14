@@ -37,7 +37,7 @@ namespace Allors.Meta
 
         private readonly RelationType relationType;
 
-        private ObjectType objectType;
+        private IObjectType objectType;
 
         private string derivedSingularPropertyName;
 
@@ -63,7 +63,7 @@ namespace Allors.Meta
             relationType.DefiningDomain.OnRoleTypeCreated(this);
         }
 
-        public ObjectType ObjectType
+        public IObjectType ObjectType
         {
             get
             {
@@ -403,7 +403,7 @@ namespace Allors.Meta
         /// <returns>
         /// The <see cref="ObjectType"/>.
         /// </returns>
-        public override ObjectType GetObjectType()
+        public override IObjectType GetObjectType()
         {
             return this.ObjectType;
         }
@@ -431,7 +431,7 @@ namespace Allors.Meta
         /// </summary>
         internal void DeriveMultiplicity()
         {
-            if (this.ObjectType is Unit && this.IsMany)
+            if (this.ObjectType is IUnit && this.IsMany)
             {
                 this.IsMany = false;
             }
@@ -442,7 +442,7 @@ namespace Allors.Meta
         /// </summary>
         internal void DeriveScaleAndSize()
         {
-            var unitType = this.ObjectType as Unit;
+            var unitType = this.ObjectType as IUnit;
             if (unitType != null)
             {
                 switch (unitType.UnitTag)
@@ -568,8 +568,8 @@ namespace Allors.Meta
         {
             if (this.ObjectType == null)
             {
-                var message = this.ValidationName + " has no ObjectType";
-                validationLog.AddError(message, this, ValidationKind.Required, "RoleType.ObjectType");
+                var message = this.ValidationName + " has no IObjectType";
+                validationLog.AddError(message, this, ValidationKind.Required, "RoleType.IObjectType");
             }
             
             if (!string.IsNullOrEmpty(this.AssignedSingularName) && string.IsNullOrEmpty(this.AssignedPluralName))

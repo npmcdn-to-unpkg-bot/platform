@@ -44,7 +44,7 @@ namespace Allors.Adapters.Database.Sql
         private readonly int commandTimeout;
         private readonly IsolationLevel isolationLevel;
 
-        private readonly Dictionary<ObjectType, RoleType[]> sortedUnitRolesByObjectType;
+        private readonly Dictionary<IObjectType, RoleType[]> sortedUnitRolesByObjectType;
         private readonly ICache cache;
 
         protected Database(Configuration configuration)
@@ -57,7 +57,7 @@ namespace Allors.Adapters.Database.Sql
             this.commandTimeout = configuration.CommandTimeout;
             this.isolationLevel = configuration.IsolationLevel;
 
-            this.sortedUnitRolesByObjectType = new Dictionary<ObjectType, RoleType[]>();
+            this.sortedUnitRolesByObjectType = new Dictionary<IObjectType, RoleType[]>();
             
             this.cache = configuration.CacheFactory.CreateCache(this);
         }
@@ -323,7 +323,7 @@ namespace Allors.Adapters.Database.Sql
             return this.workspaceFactory.CreateWorkspace(this);
         }
 
-        public Type GetDomainType(ObjectType objectType)
+        public Type GetDomainType(IObjectType objectType)
         {
             return this.ObjectFactory.GetTypeForObjectType(objectType);
         }
@@ -333,7 +333,7 @@ namespace Allors.Adapters.Database.Sql
             RoleType[] sortedUnitRoles;
             if (!this.sortedUnitRolesByObjectType.TryGetValue(objectType, out sortedUnitRoles))
             {
-                var sortedUnitRoleList = new List<RoleType>(objectType.RoleTypes.Where(roleType => roleType.ObjectType is Unit));
+                var sortedUnitRoleList = new List<RoleType>(objectType.RoleTypes.Where(roleType => roleType.ObjectType is IUnit));
                 sortedUnitRoleList.Sort(RoleType.IdComparer);
                 sortedUnitRoles = sortedUnitRoleList.ToArray();
                 this.sortedUnitRolesByObjectType[objectType] = sortedUnitRoles;

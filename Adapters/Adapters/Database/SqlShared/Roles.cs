@@ -329,7 +329,7 @@ namespace Allors.Adapters.Database.Sql
             List<RoleType> unitRoles = null;
             foreach (var flushRole in this.RequireFlushRoles)
             {
-                if (flushRole.ObjectType is Unit)
+                if (flushRole.ObjectType is IUnit)
                 {
                     if (unitRole == null)
                     {

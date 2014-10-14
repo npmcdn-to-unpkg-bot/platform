@@ -40,12 +40,12 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
 
         private class InsertObject : DatabaseCommand, IInsertObject
         {
-            private readonly Dictionary<ObjectType, NpgsqlCommand> commandByObjectType;
+            private readonly Dictionary<IObjectType, NpgsqlCommand> commandByObjectType;
 
             public InsertObject(Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
-                this.commandByObjectType = new Dictionary<ObjectType, NpgsqlCommand>();
+                this.commandByObjectType = new Dictionary<IObjectType, NpgsqlCommand>();
             }
 
             public Reference Execute(Class objectType, ObjectId objectId)

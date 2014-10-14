@@ -127,7 +127,7 @@ namespace Allors.Adapters.Special
                 var c1 = this.CreateClass("C1");
                 this.CreateClass("C2");
 
-                var allorsBinary = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.BinaryId);
+                var allorsBinary = (IObjectType)this.domain.MetaPopulation.Find(UnitIds.BinaryId);
                 new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).WithObjectTypes(c1, allorsBinary).WithSize(200).Build();
 
                 this.CreateDatabase(this.domain.MetaPopulation, true);
@@ -140,7 +140,7 @@ namespace Allors.Adapters.Special
                 c1 = this.CreateClass("C1");
                 this.CreateClass("C2");
 
-                allorsBinary = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.BinaryId);
+                allorsBinary = (IObjectType)this.domain.MetaPopulation.Find(UnitIds.BinaryId);
                 var c1RelationType = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).WithObjectTypes(c1, allorsBinary).Build();
 
                 // Different Size
@@ -182,7 +182,7 @@ namespace Allors.Adapters.Special
 
             var c1RelationType = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
             c1RelationType.AssociationType.ObjectType = c1;
-            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.DecimalId);
+            c1RelationType.RoleType.ObjectType = (IObjectType)this.domain.MetaPopulation.Find(UnitIds.DecimalId);
             c1RelationType.RoleType.Precision = 10;
             c1RelationType.RoleType.Scale = 2;
 
@@ -198,7 +198,7 @@ namespace Allors.Adapters.Special
 
             c1RelationType = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
             c1RelationType.AssociationType.ObjectType = c1;
-            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.DecimalId);
+            c1RelationType.RoleType.ObjectType = (IObjectType)this.domain.MetaPopulation.Find(UnitIds.DecimalId);
             c1RelationType.RoleType.Precision = 10;
             c1RelationType.RoleType.Scale = 2;
 
@@ -240,7 +240,7 @@ namespace Allors.Adapters.Special
 
             var c1RelationType = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
             c1RelationType.AssociationType.ObjectType = c1;
-            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.DecimalId);
+            c1RelationType.RoleType.ObjectType = (IObjectType)this.domain.MetaPopulation.Find(UnitIds.DecimalId);
             c1RelationType.RoleType.Precision = 10;
             c1RelationType.RoleType.Scale = 2;
 
@@ -256,7 +256,7 @@ namespace Allors.Adapters.Special
 
             c1RelationType = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
             c1RelationType.AssociationType.ObjectType = c1;
-            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.DecimalId);
+            c1RelationType.RoleType.ObjectType = (IObjectType)this.domain.MetaPopulation.Find(UnitIds.DecimalId);
             c1RelationType.RoleType.Precision = 10;
             c1RelationType.RoleType.Scale = 2;
 
@@ -335,7 +335,7 @@ namespace Allors.Adapters.Special
 
             var i12AllorsString = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
             i12AllorsString.AssociationType.ObjectType = i12;
-            i12AllorsString.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.BooleanId);
+            i12AllorsString.RoleType.ObjectType = (IObjectType)this.domain.MetaPopulation.Find(UnitIds.BooleanId);
 
             new InheritanceBuilder(this.domain, Guid.NewGuid()).WithSubtype(c1).WithSupertype(i12).Build();
  
@@ -353,7 +353,7 @@ namespace Allors.Adapters.Special
 
             i12AllorsString = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
             i12AllorsString.AssociationType.ObjectType = i12;
-            i12AllorsString.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.BooleanId);
+            i12AllorsString.RoleType.ObjectType = (IObjectType)this.domain.MetaPopulation.Find(UnitIds.BooleanId);
 
             new InheritanceBuilder(this.domain, Guid.NewGuid()).WithSubtype(c1).WithSupertype(i12).Build();
 
@@ -559,7 +559,7 @@ namespace Allors.Adapters.Special
 
             var c1RelationType = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
             c1RelationType.AssociationType.ObjectType = c1;
-            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.StringId);
+            c1RelationType.RoleType.ObjectType = (IObjectType)this.domain.MetaPopulation.Find(UnitIds.StringId);
             c1RelationType.RoleType.Size = 100;
 
             this.CreateDatabase(this.domain.MetaPopulation, true);
@@ -574,7 +574,7 @@ namespace Allors.Adapters.Special
 
             c1RelationType = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
             c1RelationType.AssociationType.ObjectType = c1;
-            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.StringId);
+            c1RelationType.RoleType.ObjectType = (IObjectType)this.domain.MetaPopulation.Find(UnitIds.StringId);
             c1RelationType.RoleType.Size = 100;
 
             // Different size
@@ -615,7 +615,7 @@ namespace Allors.Adapters.Special
 
             var c1RelationType = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
             c1RelationType.AssociationType.ObjectType = c1;
-            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.StringId);
+            c1RelationType.RoleType.ObjectType = (IObjectType)this.domain.MetaPopulation.Find(UnitIds.StringId);
             c1RelationType.RoleType.Size = 100;
             c1RelationType.RoleType.AssignedSingularName = "RelationType";
             c1RelationType.RoleType.AssignedPluralName = "RelationTypes";
@@ -632,7 +632,7 @@ namespace Allors.Adapters.Special
 
             c1RelationType = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
             c1RelationType.AssociationType.ObjectType = c1;
-            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.StringId);
+            c1RelationType.RoleType.ObjectType = (IObjectType)this.domain.MetaPopulation.Find(UnitIds.StringId);
             c1RelationType.RoleType.Size = 100;
             c1RelationType.RoleType.AssignedSingularName = "RelationType";
             c1RelationType.RoleType.AssignedPluralName = "RelationTypes";
@@ -676,7 +676,7 @@ namespace Allors.Adapters.Special
 
             var c1RelationType = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
             c1RelationType.AssociationType.ObjectType = c1;
-            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.BooleanId);
+            c1RelationType.RoleType.ObjectType = (IObjectType)this.domain.MetaPopulation.Find(UnitIds.BooleanId);
             c1RelationType.RoleType.AssignedSingularName = "RelationType";
             c1RelationType.RoleType.AssignedPluralName = "RelationTypes";
 
@@ -692,12 +692,12 @@ namespace Allors.Adapters.Special
 
             c1RelationType = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
             c1RelationType.AssociationType.ObjectType = c1;
-            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.BooleanId);
+            c1RelationType.RoleType.ObjectType = (IObjectType)this.domain.MetaPopulation.Find(UnitIds.BooleanId);
             c1RelationType.RoleType.AssignedSingularName = "RelationType";
             c1RelationType.RoleType.AssignedPluralName = "RelationTypes";
 
             // Different type
-            c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.Unique);
+            c1RelationType.RoleType.ObjectType = (IObjectType)this.domain.MetaPopulation.Find(UnitIds.Unique);
 
             var database = this.CreateDatabase(this.domain.MetaPopulation, false);
 

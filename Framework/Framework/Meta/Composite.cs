@@ -25,7 +25,7 @@ namespace Allors.Meta
     using System.Collections.Generic;
     using System.Linq;
     
-    public abstract partial class Composite : ObjectType
+    public abstract partial class Composite : IObjectType
     {
         private LazySet<Interface> derivedDirectSupertypes;
         private LazySet<Interface> derivedSupertypes;
@@ -238,7 +238,7 @@ namespace Allors.Meta
         /// <returns>
         /// True if this contains the concrete class.
         /// </returns>
-        public abstract bool ContainsLeafClass(ObjectType objectType);
+        public abstract bool ContainsLeafClass(IObjectType objectType);
         
         /// <summary>
         /// Derive direct super type derivations.
@@ -347,7 +347,7 @@ namespace Allors.Meta
         /// </summary>
         /// <param name="type">The type .</param>
         /// <param name="superTypes">The super types.</param>
-        private void DeriveSupertypesRecursively(ObjectType type, HashSet<Interface> superTypes)
+        private void DeriveSupertypesRecursively(IObjectType type, HashSet<Interface> superTypes)
         {
             foreach (var directSupertype in this.derivedDirectSupertypes)
             {

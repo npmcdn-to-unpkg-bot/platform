@@ -31,7 +31,7 @@ namespace Allors.Adapters.Database.Memory
     {
         private static readonly HashSet<Strategy> EmptyStrategies = new HashSet<Strategy>();
 
-        private readonly Dictionary<ObjectType, ObjectType[]> concreteClassesByObjectType;
+        private readonly Dictionary<IObjectType, IObjectType[]> concreteClassesByObjectType;
 
         private readonly Database database;
 
@@ -40,7 +40,7 @@ namespace Allors.Adapters.Database.Memory
         private bool busyCommittingOrRollingBack;
 
         private Dictionary<ObjectId, Strategy> strategyByObjectId;
-        private Dictionary<ObjectType, HashSet<Strategy>> strategiesByObjectType;
+        private Dictionary<IObjectType, HashSet<Strategy>> strategiesByObjectType;
 
         private Dictionary<string, object> properties;
 
@@ -49,7 +49,7 @@ namespace Allors.Adapters.Database.Memory
             this.database = database;
             this.busyCommittingOrRollingBack = false;
 
-            this.concreteClassesByObjectType = new Dictionary<ObjectType, ObjectType[]>();
+            this.concreteClassesByObjectType = new Dictionary<IObjectType, IObjectType[]>();
 
             this.changeSet = new ChangeSet();
         }
@@ -250,7 +250,7 @@ namespace Allors.Adapters.Database.Memory
             var @class = objectType as Class;
             if (@class == null)
             {
-                throw new Exception("ObjectType should be a class");
+                throw new Exception("IObjectType should be a class");
             }
             
             return (T)this.Create(@class);
@@ -420,7 +420,7 @@ namespace Allors.Adapters.Database.Memory
             this.Reset();
         }
 
-        internal Type GetTypeForObjectType(ObjectType objectType)
+        internal Type GetTypeForObjectType(IObjectType objectType)
         {
             return this.database.ObjectFactory.GetTypeForObjectType(objectType);
         }
@@ -446,7 +446,7 @@ namespace Allors.Adapters.Database.Memory
         {
             // Strategies
             this.strategyByObjectId = new Dictionary<ObjectId, Strategy>();
-            this.strategiesByObjectType = new Dictionary<ObjectType, HashSet<Strategy>>();
+            this.strategiesByObjectType = new Dictionary<IObjectType, HashSet<Strategy>>();
 
             this.properties = null;
         }
@@ -491,12 +491,12 @@ namespace Allors.Adapters.Database.Memory
             strategies.Add(strategy);
         }
 
-        internal virtual HashSet<Strategy> GetStrategiesForExtentIncludingDeleted(ObjectType type)
+        internal virtual HashSet<Strategy> GetStrategiesForExtentIncludingDeleted(IObjectType type)
         {
-            ObjectType[] concreteClasses;
+            IObjectType[] concreteClasses;
             if (!this.concreteClassesByObjectType.TryGetValue(type, out concreteClasses))
             {
-                var sortedClassAndSubclassList = new List<ObjectType>();
+                var sortedClassAndSubclassList = new List<IObjectType>();
 
                 if (type is Class)
                 {
@@ -556,7 +556,7 @@ namespace Allors.Adapters.Database.Memory
 
         internal void Save(XmlWriter writer)
         {
-            var sortedNonDeletedStrategiesByObjectType = new Dictionary<ObjectType, List<Strategy>>();
+            var sortedNonDeletedStrategiesByObjectType = new Dictionary<IObjectType, List<Strategy>>();
             foreach (var dictionaryEntry in this.strategyByObjectId)
             {
                 var strategy = dictionaryEntry.Value;

@@ -26,11 +26,11 @@ namespace Allors.Meta
     using System.Linq;
 
     /// <summary>
-    /// A Domain is a container for <see cref="ObjectType"/>s, <see cref="RelationType"/>s.
+    /// A Domain is a container for <see cref="IObjectType"/>s, <see cref="RelationType"/>s.
     /// </summary>
     public abstract partial class IMetaPopulation
     {
-        private readonly Dictionary<Guid, MetaObject> metaObjectById;
+        private readonly Dictionary<Guid, IMetaObject> metaObjectById;
 
         private Composite[] derivedComposites;
 
@@ -40,7 +40,7 @@ namespace Allors.Meta
         private bool isDeriving;
 
         private IList<IDomain> domains;
-        private IList<Unit> units;
+        private IList<IUnit> units;
         private IList<Interface> interfaces;
         private IList<Class> classes;
         private IList<Inheritance> inheritances;
@@ -55,7 +55,7 @@ namespace Allors.Meta
             this.isDeriving = false;
 
             this.domains = new List<IDomain>();
-            this.units = new List<Unit>();
+            this.units = new List<IUnit>();
             this.interfaces = new List<Interface>();
             this.classes = new List<Class>();
             this.inheritances = new List<Inheritance>();
@@ -64,7 +64,7 @@ namespace Allors.Meta
             this.roleTypes = new List<RoleType>();
             this.methodTypes = new List<MethodType>();
 
-            this.metaObjectById = new Dictionary<Guid, MetaObject>();
+            this.metaObjectById = new Dictionary<Guid, IMetaObject>();
         }
 
         public bool IsLocked
@@ -83,7 +83,7 @@ namespace Allors.Meta
             }
         }
 
-        public IEnumerable<Unit> Units
+        public IEnumerable<IUnit> Units
         {
             get
             {
@@ -181,11 +181,11 @@ namespace Allors.Meta
         /// The meta object id.
         /// </param>
         /// <returns>
-        /// The <see cref="MetaObject"/>.
+        /// The <see cref="IMetaObject"/>.
         /// </returns>
-        public MetaObject Find(Guid id)
+        public IMetaObject Find(Guid id)
         {
-            MetaObject @object;
+            IMetaObject @object;
             this.metaObjectById.TryGetValue(id, out @object);
 
             return @object;
@@ -420,7 +420,7 @@ namespace Allors.Meta
             this.Stale();
         }
 
-        internal void OnUnitCreated(Unit unit)
+        internal void OnUnitCreated(IUnit unit)
         {
             this.units.Add(unit);
             this.metaObjectById.Add(unit.Id, unit);

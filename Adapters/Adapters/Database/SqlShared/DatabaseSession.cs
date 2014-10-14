@@ -490,7 +490,7 @@ namespace Allors.Adapters.Database.Sql
             var @class = objectType as Class;
             if (@class == null)
             {
-                throw new Exception("ObjectType is not a Class");
+                throw new Exception("IObjectType is not a Class");
             }
 
             return (T)this.Create(@class);
@@ -580,7 +580,7 @@ namespace Allors.Adapters.Database.Sql
                 var @class = objectType as Class;
                 if (@class == null)
                 {
-                    throw new Exception("ObjectType should be a class");
+                    throw new Exception("IObjectType should be a class");
                 }
 
                 association = this.CreateReference(@class, objectId, false);

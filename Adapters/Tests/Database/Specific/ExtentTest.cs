@@ -16588,7 +16588,7 @@ namespace Allors.Adapters.Special
             return this.Session.Extent(objectType);
         }
 
-        private static Unit GetAllorsString(ObjectType objectType)
+        private static Unit GetAllorsString(IObjectType objectType)
         {
             return (Unit)objectType.MetaPopulation.Find(UnitIds.StringId);
         }

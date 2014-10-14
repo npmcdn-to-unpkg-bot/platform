@@ -51,13 +51,13 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
         {
             private readonly DatabaseSession session;
 
-            private readonly Dictionary<ObjectType, Dictionary<IList<RoleType>, SqlCommand>> commandByKeyByObjectType; 
+            private readonly Dictionary<IObjectType, Dictionary<IList<RoleType>, SqlCommand>> commandByKeyByObjectType; 
 
             public SetUnitRoles(Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.session = (DatabaseSession)session;
-                this.commandByKeyByObjectType = new Dictionary<ObjectType, Dictionary<IList<RoleType>, SqlCommand>>();
+                this.commandByKeyByObjectType = new Dictionary<IObjectType, Dictionary<IList<RoleType>, SqlCommand>>();
             }
 
             public void Execute(Roles roles, IList<RoleType> sortedRoleTypes)

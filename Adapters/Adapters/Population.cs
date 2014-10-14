@@ -30,14 +30,14 @@ namespace Allors.Adapters
     {
         private readonly IObjectFactory objectFactory;
 
-        private readonly Dictionary<ObjectType, object> concreteClassesByObjectType;
+        private readonly Dictionary<IObjectType, object> concreteClassesByObjectType;
 
         protected Dictionary<string, object> Properties;
 
         protected Population(Configuration configuration)
         {
             this.objectFactory = configuration.ObjectFactory;
-            this.concreteClassesByObjectType = new Dictionary<ObjectType, object>();
+            this.concreteClassesByObjectType = new Dictionary<IObjectType, object>();
         }
         
         public abstract event SessionCreatedEventHandler SessionCreated;
@@ -103,7 +103,7 @@ namespace Allors.Adapters
         public abstract void Save(XmlWriter writer);
 
         /// <summary>
-        /// Assert that the unit is compatible with the ObjectType of the RoleType.
+        /// Assert that the unit is compatible with the IObjectType of the RoleType.
         /// </summary>
         /// <param name="unit">
         /// The unit .
@@ -116,7 +116,7 @@ namespace Allors.Adapters
         /// </returns>
         public object Internalize(object unit, RoleType roleType)
         {
-            var unitType = (Unit)roleType.ObjectType;
+            var unitType = (IUnit)roleType.ObjectType;
             var unitTypeTag = unitType.UnitTag;
 
             var normalizedUnit = unit;
@@ -217,13 +217,13 @@ namespace Allors.Adapters
 
                     break;
                 default:
-                    throw new ArgumentException("Unknown Unit ObjectType: " + unitTypeTag);
+                    throw new ArgumentException("Unknown Unit IObjectType: " + unitTypeTag);
             }
 
             return normalizedUnit;
         }
 
-        public bool ContainsConcreteClass(Composite objectType, ObjectType concreteClass)
+        public bool ContainsConcreteClass(Composite objectType, IObjectType concreteClass)
         {
             object concreteClassOrClasses;
             if (!this.concreteClassesByObjectType.TryGetValue(objectType, out concreteClassOrClasses))
@@ -235,17 +235,17 @@ namespace Allors.Adapters
                 }
                 else
                 {
-                    concreteClassOrClasses = new HashSet<ObjectType>(objectType.LeafClasses);
+                    concreteClassOrClasses = new HashSet<IObjectType>(objectType.LeafClasses);
                     this.concreteClassesByObjectType[objectType] = concreteClassOrClasses;
                 }
             }
 
-            if (concreteClassOrClasses is ObjectType)
+            if (concreteClassOrClasses is IObjectType)
             {
                 return concreteClass.Equals(concreteClassOrClasses);
             }
 
-            var concreteClasses = (HashSet<ObjectType>)concreteClassOrClasses;
+            var concreteClasses = (HashSet<IObjectType>)concreteClassOrClasses;
             return concreteClasses.Contains(concreteClass);
         }
 

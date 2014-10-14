@@ -39,7 +39,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
             this.ManagementSession = session;
         }
 
-        public ILoadObjects Create(ObjectType objectType)
+        public ILoadObjects Create(IObjectType objectType)
         {
             return new LoadObjects(this);
         }

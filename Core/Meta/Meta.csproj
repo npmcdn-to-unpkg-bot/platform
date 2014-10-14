@@ -43,6 +43,9 @@
   <ItemGroup>
     <Compile Include="Core\Domain.cs" />
     <Compile Include="Core\MetaPopulation.cs" />
+    <Compile Include="Core\Unit.cs" />
+    <Compile Include="Core\UnitBuilder.cs" />
+    <Compile Include="Core\UnitBuilder.v.cs" />
     <Compile Include="Test\Meta\Repository.cs" />
     <Compile Include="Test\Meta\Repository.v.cs" />
     <Compile Include="Core\Repository.cs" />

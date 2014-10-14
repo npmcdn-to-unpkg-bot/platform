@@ -54,29 +54,29 @@ namespace Allors
         IObject Create(IStrategy strategy);
 
         /// <summary>
-        /// Gets the ObjectType with the specified id.
+        /// Gets the IObjectType with the specified id.
         /// </summary>
         /// <param name="objectTypeId">
         /// The object type id.
         /// </param>
         /// <returns>
-        /// The <see cref="ObjectType"/>.
+        /// The <see cref="IObjectType"/>.
         /// </returns>
-        ObjectType GetObjectTypeForType(Guid objectTypeId);
+        IObjectType GetObjectTypeForType(Guid objectTypeId);
         
         /// <summary>
-        /// Gets the Type for the specified ObjectType
+        /// Gets the Type for the specified IObjectType
         /// </summary>
         /// <param name="objectType">The object type</param>
         /// <returns>The type</returns>
-        Type GetTypeForObjectType(ObjectType objectType);
+        Type GetTypeForObjectType(IObjectType objectType);
 
         /// <summary>
-        /// Gets the ObjectType for the specified Type.
+        /// Gets the IObjectType for the specified Type.
         /// Only works for static domains.
         /// </summary>
         /// <param name="type">The type</param>
         /// <returns>The object type</returns>
-        ObjectType GetObjectTypeForType(Type type);
+        IObjectType GetObjectTypeForType(Type type);
     }
 }

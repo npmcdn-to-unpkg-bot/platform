@@ -24,10 +24,10 @@ namespace Allors.Adapters.Database.Sql
 
     public sealed class RoleInstanceof : Predicate
     {
-        private readonly ObjectType[] instanceClasses;
+        private readonly IObjectType[] instanceClasses;
         private readonly RoleType role;
 
-        public RoleInstanceof(ExtentFiltered extent, RoleType role, ObjectType instanceType, ObjectType[] instanceClasses)
+        public RoleInstanceof(ExtentFiltered extent, RoleType role, IObjectType instanceType, IObjectType[] instanceClasses)
         {
             extent.CheckRole(role);
             CompositePredicateAssertions.ValidateRoleInstanceOf(role, instanceType);

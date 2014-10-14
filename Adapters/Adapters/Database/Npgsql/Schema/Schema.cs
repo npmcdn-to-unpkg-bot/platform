@@ -85,7 +85,7 @@ namespace Allors.Adapters.Database.Npgsql
             foreach (var relationType in database.ObjectFactory.MetaPopulation.RelationTypes)
             {
                 var roleType = relationType.RoleType;
-                var unitType = roleType.ObjectType as Unit;
+                var unitType = roleType.ObjectType as IUnit;
                 if (unitType != null && unitType.IsDecimal)
                 {
                     var precision = roleType.Precision;
@@ -228,7 +228,7 @@ FROM information_schema.columns"))
                                                 }
                                                 else
                                                 {
-                                                    var unitType = (Unit)column.RelationType.RoleType.ObjectType;
+                                                    var unitType = (IUnit)column.RelationType.RoleType.ObjectType;
                                                     var unitTypeTag = unitType.UnitTag;
                                                     switch (dataType)
                                                     {
@@ -750,9 +750,9 @@ $$ language plpgsql;
                         var roleType = relationType.RoleType;
                         var associationType = relationType.AssociationType;
 
-                        if (relationType.RoleType.ObjectType is Unit)
+                        if (relationType.RoleType.ObjectType is IUnit)
                         {
-                            var unitType = (Unit)relationType.RoleType.ObjectType;
+                            var unitType = (IUnit)relationType.RoleType.ObjectType;
                             var unitTypeTag = unitType.UnitTag;
                             switch (unitTypeTag)
                             {
@@ -1015,7 +1015,7 @@ $$ language plpgsql;
                                     break;
 
                                 default:
-                                    throw new ArgumentException("Unknown Unit ObjectType: " + roleType.ObjectType.SingularName);
+                                    throw new ArgumentException("Unknown Unit IObjectType: " + roleType.ObjectType.SingularName);
                             }
                         }
                         else

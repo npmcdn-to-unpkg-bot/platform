@@ -50,18 +50,18 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
         private class CreateObjects : DatabaseCommand, ICreateObjects
         {
             private readonly CreateObjectsFactory factory;
-            private readonly Dictionary<ObjectType, SqlCommand> commandByObjectType;
+            private readonly Dictionary<IObjectType, SqlCommand> commandByObjectType;
 
             public CreateObjects(CreateObjectsFactory factory, Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
-                this.commandByObjectType = new Dictionary<ObjectType, SqlCommand>();
+                this.commandByObjectType = new Dictionary<IObjectType, SqlCommand>();
             }
 
             public IList<Reference> Execute(Class objectType, int count)
             {
-                ObjectType exclusiveLeafClass = objectType.ExclusiveLeafClass;
+                IObjectType exclusiveLeafClass = objectType.ExclusiveLeafClass;
                 Sql.Schema schema = this.Database.Schema;
 
                 SqlCommand command;

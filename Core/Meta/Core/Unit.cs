@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="Class.cs" company="Allors bvba">
+// <copyright file="Unit.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -22,46 +22,12 @@
 namespace Allors.Meta
 {
     using System;
-    using System.Collections.Generic;
 
-    public partial class Class : Composite
+    public partial class Unit : IUnit
     {
-        private readonly Class[] leafClasses;
-
-        internal Class(IDomain domain, Guid id)
+        public Unit(IDomain domain, Guid id)
             : base(domain, id)
         {
-            this.leafClasses = new[] { this };
-            domain.OnClassCreated(this);
-        }
-        
-        public override IEnumerable<Class> LeafClasses
-        {
-            get
-            {
-                return this.leafClasses;
-            }
-        }
-
-        public override bool ExistLeafClasses
-        {
-            get
-            {
-                return true;
-            }
-        }
-
-        public override Class ExclusiveLeafClass
-        {
-            get
-            {
-                return this;
-            }
-        }
-
-        public override bool ContainsLeafClass(IObjectType objectType)
-        {
-            return this.Equals(objectType);
         }
     }
 }

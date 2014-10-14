@@ -55,7 +55,7 @@ namespace Allors.Adapters
 
         /// <summary>
         /// This attribute is used for <see cref="ObjectType#Id"/> and <see cref="RelationType#Id"/>.
-        /// Attribute of the <see cref="Serialization#ObjectType"/> and <see cref="Serialization#RelationType"/> element.
+        /// Attribute of the <see cref="Serialization#IObjectType"/> and <see cref="Serialization#RelationType"/> element.
         /// </summary>
         public const string Id = "i";
 
@@ -190,7 +190,7 @@ namespace Allors.Adapters
                 case UnitTags.AllorsBinary:
                     return Convert.FromBase64String(xmlValue);
                 default:
-                    throw new ArgumentException("Unknown Unit ObjectType: " + unitTypeTag);
+                    throw new ArgumentException("Unknown Unit IObjectType: " + unitTypeTag);
             }
         }
 
@@ -223,7 +223,7 @@ namespace Allors.Adapters
                 case UnitTags.AllorsBinary:
                     return Convert.ToBase64String((byte[])unit);
                 default:
-                    throw new ArgumentException("Unknown Unit ObjectType: " + unitTypeTag);
+                    throw new ArgumentException("Unknown Unit IObjectType: " + unitTypeTag);
             }
         }
     }

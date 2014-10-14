@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MetaObject.cs" company="Allors bvba">
+// <copyright file="IMetaObject.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -21,16 +21,15 @@
 namespace Allors.Meta
 {
     using System;
-    using System.Collections.Generic;
 
     /// <summary>
     /// Base class for Meta objects.
     /// </summary>
-    public abstract partial class MetaObject
+    public abstract partial class IMetaObject
     {
         private Guid id;
 
-        protected MetaObject(IMetaPopulation metaPopulation, Guid id)
+        protected IMetaObject(IMetaPopulation metaPopulation, Guid id)
         {
             this.MetaPopulation = metaPopulation;
             this.Id = id;
@@ -80,7 +79,7 @@ namespace Allors.Meta
         /// </summary>
         protected internal abstract string ValidationName { get; }
 
-        public static int IdComparer(MetaObject x, MetaObject y)
+        public static int IdComparer(IMetaObject x, IMetaObject y)
         {
             return x.Id.CompareTo(y.Id);
         }
@@ -96,14 +95,14 @@ namespace Allors.Meta
             if (this.Id == Guid.Empty)
             {
                 var message = "id on " + this.ValidationName + " is required";
-                validationLog.AddError(message, this, ValidationKind.Unique, "MetaObject.Id");
+                validationLog.AddError(message, this, ValidationKind.Unique, "IMetaObject.Id");
             }
             else
             {
                 if (validationLog.ExistId(this.Id))
                 {
                     var message = "id " + this.ValidationName + " is already in use";
-                    validationLog.AddError(message, this, ValidationKind.Unique, "MetaObject.Id");
+                    validationLog.AddError(message, this, ValidationKind.Unique, "IMetaObject.Id");
                 }
                 else
                 {

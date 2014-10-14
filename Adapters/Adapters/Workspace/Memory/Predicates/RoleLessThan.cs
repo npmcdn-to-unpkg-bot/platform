@@ -53,7 +53,7 @@ namespace Allors.Adapters.Workspace.Memory
             }
             else
             {
-                if (this.roleType.ObjectType is Unit)
+                if (this.roleType.ObjectType is IUnit)
                 {
                     compareValue = this.extent.Session.MemoryWorkspace.Internalize(this.compare, this.roleType);
                 }

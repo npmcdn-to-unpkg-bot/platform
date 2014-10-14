@@ -90,7 +90,7 @@ namespace Allors
         IChangeSet Checkpoint();
         
         /// <summary>
-        /// Creates an Extent for the specified ObjectType.
+        /// Creates an Extent for the specified IObjectType.
         /// Only works for static domains.
         /// </summary>
         /// <typeparam name="T">The type for the extent.</typeparam>
@@ -98,7 +98,7 @@ namespace Allors
         Extent<T> Extent<T>() where T : IObject;
 
         /// <summary>
-        /// Creates an Extent for the specified <see cref="ObjectType"/>.
+        /// Creates an Extent for the specified <see cref="IObjectType"/>.
         /// </summary>
         /// <param name="objectType">The objectType.</param>
         /// <returns>The extent.</returns>
@@ -144,21 +144,21 @@ namespace Allors
         /// Creates an Allors Object.
         /// Only works for static domains.
         /// </summary>
-        /// <typeparam name="T">The ObjectType</typeparam>
+        /// <typeparam name="T">The IObjectType</typeparam>
         /// <returns>a new <see cref="IObject"/></returns>
         T Create<T>() where T : IObject;
 
         /// <summary>
         /// Creates an Allors Object.
         /// </summary>
-        /// <param name="objectType">The ObjectType.</param>
+        /// <param name="objectType">The IObjectType.</param>
         /// <returns>a new <see cref="IObject"/></returns>
         IObject Create(Class objectType);
 
         /// <summary>
         /// Creates a specified amount of AllorsObjects.
         /// </summary>
-        /// <param name="objectType">The ObjectType.</param>
+        /// <param name="objectType">The IObjectType.</param>
         /// <param name="count">The count.</param>
         /// <returns>The created objects.</returns>
         IObject[] Create(Class objectType, int count);

@@ -37,12 +37,12 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
     public class SetUnitRoleFactory : ISetUnitRoleFactory
     {
         public readonly Database Database;
-        private readonly Dictionary<ObjectType, Dictionary<RoleType, string>> sqlByRoleTypeByObjectType;
+        private readonly Dictionary<IObjectType, Dictionary<RoleType, string>> sqlByRoleTypeByObjectType;
 
         public SetUnitRoleFactory(Database database)
         {
             this.Database = database;
-            this.sqlByRoleTypeByObjectType = new Dictionary<ObjectType, Dictionary<RoleType, string>>();
+            this.sqlByRoleTypeByObjectType = new Dictionary<IObjectType, Dictionary<RoleType, string>>();
         }
 
         public ISetUnitRole Create(Sql.DatabaseSession session)
@@ -50,7 +50,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
             return new SetUnitRole(this, session);
         }
 
-        public string GetSql(ObjectType objectType, RoleType roleType)
+        public string GetSql(IObjectType objectType, RoleType roleType)
         {
             Dictionary<RoleType, string> sqlByRoleType;
             if (!this.sqlByRoleTypeByObjectType.TryGetValue(objectType, out sqlByRoleType))
@@ -71,16 +71,16 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
         private class SetUnitRole : DatabaseCommand, ISetUnitRole
         {
             private readonly SetUnitRoleFactory factory;
-            private readonly Dictionary<ObjectType, Dictionary<RoleType, SqlCommand>> commandByRoleTypeByObjectType;
+            private readonly Dictionary<IObjectType, Dictionary<RoleType, SqlCommand>> commandByRoleTypeByObjectType;
 
             public SetUnitRole(SetUnitRoleFactory factory, Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
-                this.commandByRoleTypeByObjectType = new Dictionary<ObjectType, Dictionary<RoleType, SqlCommand>>();
+                this.commandByRoleTypeByObjectType = new Dictionary<IObjectType, Dictionary<RoleType, SqlCommand>>();
             }
 
-            public void Execute(IList<UnitRelation> relation, ObjectType exclusiveLeafClass, RoleType roleType)
+            public void Execute(IList<UnitRelation> relation, IObjectType exclusiveLeafClass, RoleType roleType)
             {
                 var schema = this.Database.SqlClientSchema;
 
@@ -93,7 +93,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
 
                 SchemaTableParameter tableParam;
 
-                var unitType = (Unit)roleType.ObjectType;
+                var unitType = (IUnit)roleType.ObjectType;
                 var unitTypeTag = unitType.UnitTag;
                 switch (unitTypeTag)
                 {
@@ -134,7 +134,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
                         break;
 
                     default:
-                        throw new ArgumentException("Unknown Unit ObjectType: " + unitTypeTag);
+                        throw new ArgumentException("Unknown Unit IObjectType: " + unitTypeTag);
                 }
 
                 SqlCommand command;

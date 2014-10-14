@@ -16,18 +16,18 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the ObjectType type.</summary>
+// <summary>Defines the IObjectType type.</summary>
 //-------------------------------------------------------------------------------------------------
 
 namespace Allors.Meta
 {
     using System;
 
-    public partial class Unit : ObjectType
+    public partial class IUnit : IObjectType
     {
         private UnitTags unitTag;
 
-        internal Unit(IDomain domain, Guid id)
+        protected IUnit(IDomain domain, Guid id)
             : base(domain, id)
         {
             domain.OnUnitCreated(this);

@@ -320,7 +320,7 @@ namespace Allors.Adapters.Database.Sql
         
         protected virtual DbType GetDbType(RoleType role)
         {
-            var unitType = (Unit)role.ObjectType;
+            var unitType = (IUnit)role.ObjectType;
             var unitTypeTag = unitType.UnitTag;
             switch (unitTypeTag)
             {
@@ -367,7 +367,7 @@ namespace Allors.Adapters.Database.Sql
                 }
                 else
                 {
-                    if (roleType.ObjectType is Unit)
+                    if (roleType.ObjectType is IUnit)
                     {
                         var column = new SchemaColumn(this, roleType.SingularPropertyName, this.GetDbType(roleType), false, false, relationType.IsIndexed ? SchemaIndexType.Single : SchemaIndexType.None, relationType, roleType.Size, roleType.Precision, roleType.Scale);
                         this.ColumnsByRelationType.Add(relationType, column);
@@ -433,7 +433,7 @@ namespace Allors.Adapters.Database.Sql
                     {
                         var relationType = roleType.RelationType;
                         var associationType = relationType.AssociationType;
-                        if (roleType.ObjectType is Unit)
+                        if (roleType.ObjectType is IUnit)
                         {
                             schemaTable.AddColumn(this.Column(relationType));
                         }

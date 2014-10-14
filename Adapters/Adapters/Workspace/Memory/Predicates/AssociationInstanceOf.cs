@@ -29,9 +29,9 @@ namespace Allors.Adapters.Workspace.Memory
     internal sealed class AssociationInstanceOf : Predicate
     {
         private readonly AssociationType associationType;
-        private readonly ObjectType objectType;
+        private readonly IObjectType objectType;
 
-        internal AssociationInstanceOf(Extent extent, AssociationType associationType, ObjectType instanceObjectType)
+        internal AssociationInstanceOf(Extent extent, AssociationType associationType, IObjectType instanceObjectType)
         {
             extent.CheckForAssociationType(associationType);
             CompositePredicateAssertions.ValidateAssociationInstanceof(associationType, instanceObjectType);

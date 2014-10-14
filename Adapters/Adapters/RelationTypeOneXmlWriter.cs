@@ -96,7 +96,7 @@ namespace Allors.Adapters
             if (!this.isInUse)
             {
                 this.isInUse = true;
-                if (this.relationType.RoleType.ObjectType is Unit)
+                if (this.relationType.RoleType.ObjectType is IUnit)
                 {
                     this.xmlWriter.WriteStartElement(Serialization.RelationTypeUnit);
                 }

@@ -43,12 +43,12 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
 
         private class CreateObject : DatabaseCommand, ICreateObject
         {
-            private readonly Dictionary<ObjectType, NpgsqlCommand> commandByObjectType;
+            private readonly Dictionary<IObjectType, NpgsqlCommand> commandByObjectType;
 
             public CreateObject(Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
-                this.commandByObjectType = new Dictionary<ObjectType, NpgsqlCommand>();
+                this.commandByObjectType = new Dictionary<IObjectType, NpgsqlCommand>();
             }
 
             public Reference Execute(Class objectType)

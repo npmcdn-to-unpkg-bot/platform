@@ -133,7 +133,7 @@ namespace Allors.Adapters.Workspace.Memory
 
         public ICompositePredicate AddEquals(RoleType role, object obj)
         {
-            if (role.ObjectType is Unit)
+            if (role.ObjectType is IUnit)
             {
                 this.predicates.Add(new RoleUnitEquals(this.extent, role, obj));
             }

@@ -181,7 +181,7 @@ namespace Allors.Adapters.Database.Memory
 
         public object GetRole(RoleType roleType)
         {
-            if (roleType.ObjectType is Unit)
+            if (roleType.ObjectType is IUnit)
             {
                 return this.GetUnitRole(roleType);
             }
@@ -196,7 +196,7 @@ namespace Allors.Adapters.Database.Memory
 
         public void SetRole(RoleType roleType, object value)
         {
-            if (roleType.ObjectType is Unit)
+            if (roleType.ObjectType is IUnit)
             {
                 this.SetUnitRole(roleType, value);
             }
@@ -222,7 +222,7 @@ namespace Allors.Adapters.Database.Memory
 
         public void RemoveRole(RoleType roleType)
         {
-            if (roleType.ObjectType is Unit)
+            if (roleType.ObjectType is IUnit)
             {
                 this.RemoveUnitRole(roleType);
             }
@@ -241,7 +241,7 @@ namespace Allors.Adapters.Database.Memory
 
         public bool ExistRole(RoleType roleType)
         {
-            if (roleType.ObjectType is Unit)
+            if (roleType.ObjectType is IUnit)
             {
                 return this.ExistUnitRole(roleType);
             }
@@ -518,7 +518,7 @@ namespace Allors.Adapters.Database.Memory
             {
                 if (this.ExistRole(roleType))
                 {
-                    if (roleType.ObjectType is Unit)
+                    if (roleType.ObjectType is IUnit)
                     {
                         this.RemoveUnitRole(roleType);
                     }
@@ -930,7 +930,7 @@ namespace Allors.Adapters.Database.Memory
 
         internal void SaveUnit(XmlWriter writer, RoleType roleType)
         {
-            var unitType = (Unit)roleType.ObjectType;
+            var unitType = (IUnit)roleType.ObjectType;
             var value = Serialization.WriteString(unitType.UnitTag, this.unitRoleByRoleType[roleType]);
 
             writer.WriteStartElement(Serialization.Relation);

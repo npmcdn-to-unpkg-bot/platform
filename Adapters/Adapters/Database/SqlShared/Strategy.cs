@@ -171,7 +171,7 @@ namespace Allors.Adapters.Database.Sql
 
         public virtual bool ExistRole(RoleType roleType)
         {
-            if (roleType.ObjectType is Unit)
+            if (roleType.ObjectType is IUnit)
             {
                 return this.ExistUnitRole(roleType);
             }
@@ -186,7 +186,7 @@ namespace Allors.Adapters.Database.Sql
 
         public virtual object GetRole(RoleType roleType)
         {
-            if (roleType.ObjectType is Unit)
+            if (roleType.ObjectType is IUnit)
             {
                 return this.GetUnitRole(roleType);
             }
@@ -201,7 +201,7 @@ namespace Allors.Adapters.Database.Sql
 
         public virtual void SetRole(RoleType roleType, object value)
         {
-            if (roleType.ObjectType is Unit)
+            if (roleType.ObjectType is IUnit)
             {
                 this.SetUnitRole(roleType, value);
             }
@@ -227,7 +227,7 @@ namespace Allors.Adapters.Database.Sql
 
         public virtual void RemoveRole(RoleType roleType)
         {
-            if (roleType.ObjectType is Unit)
+            if (roleType.ObjectType is IUnit)
             {
                 this.RemoveUnitRole(roleType);
             }

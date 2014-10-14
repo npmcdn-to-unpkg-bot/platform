@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="ObjectType.cs" company="Allors bvba">
+// <copyright file="IObjectType.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -16,20 +16,20 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the ObjectType type.</summary>
+// <summary>Defines the IObjectType type.</summary>
 //-------------------------------------------------------------------------------------------------
 
 namespace Allors.Meta
 {
     using System;
 
-    public abstract partial class ObjectType : DomainDefinedObject, IComparable
+    public abstract partial class IObjectType : IDomainDefinedObject, IComparable
     {
         private string singularName;
 
         private string pluralName;
 
-        protected ObjectType(IDomain domain, Guid id)
+        protected IObjectType(IDomain domain, Guid id)
             : base(domain, id)
         {
         }
@@ -80,7 +80,7 @@ namespace Allors.Meta
         {
             get
             {
-                return this is Unit;
+                return this is IUnit;
             }
         }
 
@@ -136,7 +136,7 @@ namespace Allors.Meta
         /// <paramref name="obj"/> is not the same type as this instance. </exception>
         public int CompareTo(object obj)
         {
-            var that = obj as ObjectType;
+            var that = obj as IObjectType;
             if (that != null)
             {
                 return string.CompareOrdinal(this.Name, that.Name);
@@ -174,14 +174,14 @@ namespace Allors.Meta
                 if (this.SingularName.Length < 2)
                 {
                     var message = this.ValidationName + " should have a singular name with at least 2 characters";
-                    validationLog.AddError(message, this, ValidationKind.MinimumLength, "ObjectType.SingularName");
+                    validationLog.AddError(message, this, ValidationKind.MinimumLength, "IObjectType.SingularName");
                 }
                 else
                 {
                     if (!char.IsLetter(this.SingularName[0]))
                     {
                         var message = this.ValidationName + "'s singular name should start with an alfabetical character";
-                        validationLog.AddError(message, this, ValidationKind.Format, "ObjectType.SingularName");
+                        validationLog.AddError(message, this, ValidationKind.Format, "IObjectType.SingularName");
                     }
 
                     for (var i = 1; i < this.SingularName.Length; i++)
@@ -189,7 +189,7 @@ namespace Allors.Meta
                         if (!char.IsLetter(this.SingularName[i]) && !char.IsDigit(this.SingularName[i]))
                         {
                             var message = this.ValidationName + "'s singular name should only contain alfanumerical characters";
-                            validationLog.AddError(message, this, ValidationKind.Format, "ObjectType.SingularName");
+                            validationLog.AddError(message, this, ValidationKind.Format, "IObjectType.SingularName");
                             break;
                         }
                     }
@@ -198,7 +198,7 @@ namespace Allors.Meta
                 if (validationLog.ExistObjectTypeName(this.SingularName))
                 {
                     var message = "The singular name of " + this.ValidationName + " is already in use";
-                    validationLog.AddError(message, this, ValidationKind.Unique, "ObjectType.SingularName");
+                    validationLog.AddError(message, this, ValidationKind.Unique, "IObjectType.SingularName");
                 }
                 else
                 {
@@ -207,7 +207,7 @@ namespace Allors.Meta
             }
             else
             {
-                validationLog.AddError(this.ValidationName + " has no singular name", this, ValidationKind.Required, "ObjectType.SingularName");
+                validationLog.AddError(this.ValidationName + " has no singular name", this, ValidationKind.Required, "IObjectType.SingularName");
             }
 
             if (!string.IsNullOrEmpty(this.PluralName))
@@ -215,14 +215,14 @@ namespace Allors.Meta
                 if (this.PluralName.Length < 2)
                 {
                     var message = this.ValidationName + " should have a plural name with at least 2 characters";
-                    validationLog.AddError(message, this, ValidationKind.MinimumLength, "ObjectType.PluralName");
+                    validationLog.AddError(message, this, ValidationKind.MinimumLength, "IObjectType.PluralName");
                 }
                 else
                 {
                     if (!char.IsLetter(this.PluralName[0]))
                     {
                         var message = this.ValidationName + "'s plural name should start with an alfabetical character";
-                        validationLog.AddError(message, this, ValidationKind.Format, "ObjectType.PluralName");
+                        validationLog.AddError(message, this, ValidationKind.Format, "IObjectType.PluralName");
                     }
 
                     for (var i = 1; i < this.PluralName.Length; i++)
@@ -230,7 +230,7 @@ namespace Allors.Meta
                         if (!char.IsLetter(this.PluralName[i]) && !char.IsDigit(this.PluralName[i]))
                         {
                             var message = this.ValidationName + "'s plural name should only contain alfanumerical characters";
-                            validationLog.AddError(message, this, ValidationKind.Format, "ObjectType.PluralName");
+                            validationLog.AddError(message, this, ValidationKind.Format, "IObjectType.PluralName");
                             break;
                         }
                     }
@@ -239,7 +239,7 @@ namespace Allors.Meta
                 if (validationLog.ExistObjectTypeName(this.PluralName))
                 {
                     var message = "The plural name of " + this.ValidationName + " is already in use";
-                    validationLog.AddError(message, this, ValidationKind.Unique, "ObjectType.PluralName");
+                    validationLog.AddError(message, this, ValidationKind.Unique, "IObjectType.PluralName");
                 }
                 else
                 {
@@ -248,7 +248,7 @@ namespace Allors.Meta
             }
             else
             {
-                validationLog.AddError(this.ValidationName + " has no plural name", this, ValidationKind.Required, "ObjectType.PluralName");
+                validationLog.AddError(this.ValidationName + " has no plural name", this, ValidationKind.Required, "IObjectType.PluralName");
             }
         }
     }

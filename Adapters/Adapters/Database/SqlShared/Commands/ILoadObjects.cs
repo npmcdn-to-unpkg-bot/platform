@@ -31,6 +31,6 @@ namespace Allors.Adapters.Database.Sql.Commands
 
     public interface ILoadObjectsFactory
     {
-        ILoadObjects Create(ObjectType objectType);
+        ILoadObjects Create(IObjectType objectType);
     }
 }

@@ -28,7 +28,7 @@ namespace Allors.Meta
     /// A <see cref="RelationType"/> defines the state and behavior for
     /// a set of <see cref="AssociationType"/>s and <see cref="RoleType"/>s.
     /// </summary>
-    public partial class RelationType : DomainDefinedObject, IComparable
+    public partial class RelationType : IDomainDefinedObject, IComparable
     {
         private readonly AssociationType associationType;
         private readonly RoleType roleType;

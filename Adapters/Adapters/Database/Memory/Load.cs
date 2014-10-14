@@ -258,7 +258,7 @@ namespace Allors.Adapters.Database.Memory
                                 }
                                 else if (this.reader.Name.Equals(Serialization.RelationTypeComposite))
                                 {
-                                    if (relationType == null || relationType.RoleType.ObjectType is Unit)
+                                    if (relationType == null || relationType.RoleType.ObjectType is IUnit)
                                     {
                                         this.CantLoadCompositeRole(relationTypeId);
                                     }
@@ -319,7 +319,7 @@ namespace Allors.Adapters.Database.Memory
                                     this.session.MemoryDatabase.UnitRoleChecks(strategy, relationType.RoleType);
                                     if (this.reader.IsEmptyElement)
                                     {
-                                        var unitType = (Unit)relationType.RoleType.ObjectType;
+                                        var unitType = (IUnit)relationType.RoleType.ObjectType;
                                         switch (unitType.UnitTag)
                                         {
                                             case UnitTags.AllorsString:
@@ -332,7 +332,7 @@ namespace Allors.Adapters.Database.Memory
                                     }
                                     else
                                     {
-                                        var unitType = (Unit)relationType.RoleType.ObjectType;
+                                        var unitType = (IUnit)relationType.RoleType.ObjectType;
                                         var unitTypeTag = unitType.UnitTag;
 
                                         var unit = Serialization.ReadString(value, unitTypeTag);

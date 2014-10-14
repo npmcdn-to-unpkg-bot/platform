@@ -36,7 +36,7 @@ namespace Allors.Adapters.Database.Sql
         public override bool BuildWhere(ExtentStatement statement, string alias)
         {
             var schema = statement.Schema;
-            if (this.role.ObjectType is Unit)
+            if (this.role.ObjectType is IUnit)
             {
                 statement.Append(" " + alias + "." + schema.Column(this.role) + " IS NOT NULL");
             }

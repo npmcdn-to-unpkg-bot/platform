@@ -22,7 +22,7 @@ namespace Allors.Meta
 {
     using System;
 
-    public partial class UnitBuilder : Builder<Unit>
+    public partial class UnitBuilder : Builder<IUnit>
     {
         private string singularName;
         private string pluralName;
@@ -51,7 +51,7 @@ namespace Allors.Meta
             return this;
         }
 
-        private void AllorsBuild(Unit instance)
+        private void AllorsBuild(IUnit instance)
         {
             instance.SingularName = this.singularName;
             instance.PluralName = this.pluralName;

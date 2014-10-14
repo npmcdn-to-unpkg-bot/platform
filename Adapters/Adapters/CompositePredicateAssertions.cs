@@ -97,14 +97,14 @@ namespace Allors.Adapters
         }
 
         /// <summary>
-        /// Asserts that the <see cref="AssociationType"/> and the <see cref="ObjectType"/> are compatible with
+        /// Asserts that the <see cref="AssociationType"/> and the <see cref="IObjectType"/> are compatible with
         /// <see cref="ICompositePredicate#AddInstanceof"/>.
         /// </summary>
         /// <param name="association">The association.</param>
         /// <param name="objectType">The object type.</param>
-        public static void ValidateAssociationInstanceof(AssociationType association, ObjectType objectType)
+        public static void ValidateAssociationInstanceof(AssociationType association, IObjectType objectType)
         {
-            if (objectType is Unit)
+            if (objectType is IUnit)
             {
                 throw new ArgumentException("AddInstanceof() can only be used with a composite type.");
             }
@@ -117,13 +117,13 @@ namespace Allors.Adapters
         }
 
         /// <summary>
-        /// Asserts that the <see cref="ObjectType"/> is compatible with
+        /// Asserts that the <see cref="IObjectType"/> is compatible with
         /// <see cref="ICompositePredicate#AddInstanceof"/>.
         /// </summary>
         /// <param name="objectType">The object type.</param>
-        public static void ValidateInstanceof(ObjectType objectType)
+        public static void ValidateInstanceof(IObjectType objectType)
         {
-            if (objectType is Unit)
+            if (objectType is IUnit)
             {
                 throw new ArgumentException("AddInstanceOf() can only be used with composite types.");
             }
@@ -151,8 +151,8 @@ namespace Allors.Adapters
 
             var firstRole = firstObject as RoleType;
             var secondRole = secondObject as RoleType;
-            if ((firstRole != null && !(firstRole.ObjectType is Unit)) ||
-                (secondRole != null && !(secondRole.ObjectType is Unit)))
+            if ((firstRole != null && !(firstRole.ObjectType is IUnit)) ||
+                (secondRole != null && !(secondRole.ObjectType is IUnit)))
             {
                 throw new ArgumentException("AddBetween() can only be used with roles having unit types.");
             }
@@ -166,7 +166,7 @@ namespace Allors.Adapters
         /// <param name="extent">The extent.</param>
         public static void ValidateRoleContainedIn(RoleType role, Extent extent)
         {
-            if (role.ObjectType is Unit)
+            if (role.ObjectType is IUnit)
             {
                 throw new ArgumentException("AddContainedIn() can only be used with composite types.");
             }
@@ -179,7 +179,7 @@ namespace Allors.Adapters
 
         public static void ValidateRoleContainedIn(RoleType role, IEnumerable<IObject> enumerable)
         {
-            if (role.ObjectType is Unit)
+            if (role.ObjectType is IUnit)
             {
                 throw new ArgumentException("AddContainedIn() can only be used with composite types.");
             }
@@ -271,14 +271,14 @@ namespace Allors.Adapters
         }
 
         /// <summary>
-        /// Asserts that the <see cref="RoleType"/> and the <see cref="ObjectType"/> are compatible with
+        /// Asserts that the <see cref="RoleType"/> and the <see cref="IObjectType"/> are compatible with
         /// <see cref="ICompositePredicate#AddInstanceOf"/>.
         /// </summary>
         /// <param name="role">The role .</param>
         /// <param name="objectType">Type object type.</param>
-        public static void ValidateRoleInstanceOf(RoleType role, ObjectType objectType)
+        public static void ValidateRoleInstanceOf(RoleType role, IObjectType objectType)
         {
-            if (objectType is Unit)
+            if (objectType is IUnit)
             {
                 throw new ArgumentException("AddInstanceOf() can only be used with composite types.");
             }
@@ -322,7 +322,7 @@ namespace Allors.Adapters
         /// <param name="unit">The unit .</param>
         public static void ValidateRoleLikeFilter(RoleType role, string unit)
         {
-            var unitType = role.ObjectType as Unit;
+            var unitType = role.ObjectType as IUnit;
             if (unitType == null || !unitType.IsString)
             {
                 throw new ArgumentException("AddLike() can only be used with String.");

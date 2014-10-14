@@ -26,9 +26,9 @@ namespace Allors.Adapters.Database.Memory
     {
         private readonly Session session;
         private readonly XmlWriter writer;
-        private readonly Dictionary<ObjectType, List<Strategy>> sortedNonDeletedStrategiesByObjectType;
+        private readonly Dictionary<IObjectType, List<Strategy>> sortedNonDeletedStrategiesByObjectType;
 
-        public Save(Session session, XmlWriter writer, Dictionary<ObjectType, List<Strategy>> sortedNonDeletedStrategiesByObjectType)
+        public Save(Session session, XmlWriter writer, Dictionary<IObjectType, List<Strategy>> sortedNonDeletedStrategiesByObjectType)
         {
             this.session = session;
             this.writer = writer;
@@ -71,8 +71,8 @@ namespace Allors.Adapters.Database.Memory
             this.writer.WriteStartElement(Serialization.Objects);
             this.writer.WriteStartElement(Serialization.Database);
 
-            var sortedObjectTypes = new List<ObjectType>(this.sortedNonDeletedStrategiesByObjectType.Keys);
-            sortedObjectTypes.Sort(MetaObject.IdComparer);
+            var sortedObjectTypes = new List<IObjectType>(this.sortedNonDeletedStrategiesByObjectType.Keys);
+            sortedObjectTypes.Sort(IMetaObject.IdComparer);
 
             foreach (var objectType in sortedObjectTypes)
             {
@@ -133,15 +133,15 @@ namespace Allors.Adapters.Database.Memory
 
                 if (strategies != null)
                 {
-                    this.writer.WriteStartElement(roleType.ObjectType is Unit
+                    this.writer.WriteStartElement(roleType.ObjectType is IUnit
                                                  ? Serialization.RelationTypeUnit
                                                  : Serialization.RelationTypeComposite);
 
                     this.writer.WriteAttributeString(Serialization.Id, relationType.IdAsString);
 
-                    if (roleType.ObjectType is Unit)
+                    if (roleType.ObjectType is IUnit)
                     {
-                        var unitType = (Unit)roleType.ObjectType;
+                        var unitType = (IUnit)roleType.ObjectType;
                         foreach (var strategy in strategies)
                         {
                             strategy.SaveUnit(this.writer, roleType);

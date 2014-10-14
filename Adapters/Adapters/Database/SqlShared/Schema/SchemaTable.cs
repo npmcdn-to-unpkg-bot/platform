@@ -31,12 +31,12 @@ namespace Allors.Adapters.Database.Sql
         public readonly string Name;
         public readonly RelationType RelationType;
         public readonly Schema Schema;
-        public readonly ObjectType ObjectType;
+        public readonly IObjectType ObjectType;
         public readonly string StatementName;
 
         private readonly Dictionary<string, SchemaColumn> columnsByName;
 
-        public SchemaTable(Schema schema, string name, SchemaTableKind kind, ObjectType objectType) 
+        public SchemaTable(Schema schema, string name, SchemaTableKind kind, IObjectType objectType) 
             : this(schema, name, kind)
         {
             this.ObjectType = objectType;

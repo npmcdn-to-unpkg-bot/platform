@@ -37,12 +37,12 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
     public class GetUnitRolesFactory : IGetUnitRolesFactory
     {
         public readonly Database Database;
-        private readonly Dictionary<ObjectType, string> sqlByObjectType;
+        private readonly Dictionary<IObjectType, string> sqlByObjectType;
 
         public GetUnitRolesFactory(Database database)
         {
             this.Database = database;
-            this.sqlByObjectType = new Dictionary<ObjectType, string>();
+            this.sqlByObjectType = new Dictionary<IObjectType, string>();
         }
 
         public IGetUnitRoles Create(Sql.DatabaseSession session)
@@ -50,7 +50,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
             return new GetUnitRoles(this, session);
         }
 
-        public string GetSql(ObjectType objectType)
+        public string GetSql(IObjectType objectType)
         {
             if (!this.sqlByObjectType.ContainsKey(objectType))
             {
@@ -64,13 +64,13 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
         public class GetUnitRoles : DatabaseCommand, IGetUnitRoles
         {
             private readonly GetUnitRolesFactory factory;
-            private readonly Dictionary<ObjectType, SqlCommand> commandByObjectType;
+            private readonly Dictionary<IObjectType, SqlCommand> commandByObjectType;
 
             public GetUnitRoles(GetUnitRolesFactory factory, Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
-                this.commandByObjectType = new Dictionary<ObjectType, SqlCommand>();
+                this.commandByObjectType = new Dictionary<IObjectType, SqlCommand>();
             }
 
             public void Execute(Roles roles)
@@ -105,7 +105,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
                             object unit = null;
                             if (!reader.IsDBNull(i))
                             {
-                                var unitType = (Unit)roleType.ObjectType;
+                                var unitType = (IUnit)roleType.ObjectType;
                                 var unitTypeTag = unitType.UnitTag;
                                 switch (unitTypeTag)
                                 {
@@ -139,7 +139,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
                                         unit = byteArray;
                                         break;
                                     default:
-                                        throw new ArgumentException("Unknown Unit ObjectType: " + roleType.ObjectType.Name);
+                                        throw new ArgumentException("Unknown Unit IObjectType: " + roleType.ObjectType.Name);
                                 }
                             }
 

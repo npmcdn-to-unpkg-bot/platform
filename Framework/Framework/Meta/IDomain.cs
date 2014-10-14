@@ -25,7 +25,7 @@ namespace Allors.Meta
     using System.Collections.Generic;
     using System.Linq;
 
-    public abstract class IDomain : MetaObject, IComparable
+    public abstract class IDomain : IMetaObject, IComparable
     {
         private string name;
 
@@ -33,7 +33,7 @@ namespace Allors.Meta
 
         private IList<IDomain> derivedSuperdomains;
 
-        private IList<Unit> definedUnits;
+        private IList<IUnit> definedUnits;
 
         private IList<Interface> definedInterfaces;
 
@@ -54,7 +54,7 @@ namespace Allors.Meta
         {
             this.directSuperdomains = new List<IDomain>();
 
-            this.definedUnits = new List<Unit>();
+            this.definedUnits = new List<IUnit>();
             this.definedInterfaces = new List<Interface>();
             this.definedClasses = new List<Class>();
             this.definedInheritances = new List<Inheritance>();
@@ -98,7 +98,7 @@ namespace Allors.Meta
             }
         }
 
-        public IEnumerable<Unit> DefinedUnits
+        public IEnumerable<IUnit> DefinedUnits
         {
             get
             {
@@ -200,7 +200,7 @@ namespace Allors.Meta
         /// <paramref name="obj"/> is not the same type as this instance. </exception>
         public int CompareTo(object obj)
         {
-            var that = obj as ObjectType;
+            var that = obj as IObjectType;
             if (that != null)
             {
                 return string.CompareOrdinal(this.Name, that.Name);
@@ -238,7 +238,7 @@ namespace Allors.Meta
             this.definedMethodTypes = this.definedMethodTypes.ToArray();
         }
 
-        internal void OnUnitCreated(Unit unit)
+        internal void OnUnitCreated(IUnit unit)
         {
             this.definedUnits.Add(unit);
             this.MetaPopulation.OnUnitCreated(unit);
@@ -330,7 +330,7 @@ namespace Allors.Meta
 
             if (this.Id == Guid.Empty)
             {
-                validationLog.AddError(this.ValidationName + " has no id", this, ValidationKind.Required, "MetaObject.Id");
+                validationLog.AddError(this.ValidationName + " has no id", this, ValidationKind.Required, "IMetaObject.Id");
             }
         }
 

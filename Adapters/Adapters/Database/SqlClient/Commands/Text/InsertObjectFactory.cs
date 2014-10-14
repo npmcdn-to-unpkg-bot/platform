@@ -85,13 +85,13 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
         private class InsertObject : DatabaseCommand, IInsertObject
         {
             private readonly InsertObjectFactory factory;
-            private readonly Dictionary<ObjectType, SqlCommand> commandByObjectType;
+            private readonly Dictionary<IObjectType, SqlCommand> commandByObjectType;
 
             public InsertObject(InsertObjectFactory factory, Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
-                this.commandByObjectType = new Dictionary<ObjectType, SqlCommand>();
+                this.commandByObjectType = new Dictionary<IObjectType, SqlCommand>();
             }
 
             public Reference Execute(Class objectType, ObjectId objectId)

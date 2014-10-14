@@ -26,47 +26,47 @@ namespace Allors.Meta
     public enum UnitTags
     {
         /// <summary>
-        /// The tag for the binary <see cref="ObjectType"/>.
+        /// The tag for the binary <see cref="IObjectType"/>.
         /// </summary>
         AllorsBinary,
 
         /// <summary>
-        /// The tag for the boolean <see cref="ObjectType"/>.
+        /// The tag for the boolean <see cref="IObjectType"/>.
         /// </summary>
         AllorsBoolean,
 
         /// <summary>
-        /// The tag for the date time <see cref="ObjectType"/>.
+        /// The tag for the date time <see cref="IObjectType"/>.
         /// </summary>
         AllorsDate,
 
         /// <summary>
-        /// The tag for the decimal <see cref="ObjectType"/>.
+        /// The tag for the decimal <see cref="IObjectType"/>.
         /// </summary>
         AllorsDecimal,
 
         /// <summary>
-        /// The tag for the double <see cref="ObjectType"/>.
+        /// The tag for the double <see cref="IObjectType"/>.
         /// </summary>
         AllorsDouble,
 
         /// <summary>
-        /// The tag for the integer <see cref="ObjectType"/>.
+        /// The tag for the integer <see cref="IObjectType"/>.
         /// </summary>
         AllorsInteger,
 
         /// <summary>
-        /// The tag for the long integer <see cref="ObjectType"/>.
+        /// The tag for the long integer <see cref="IObjectType"/>.
         /// </summary>
         AllorsLong,
 
         /// <summary>
-        /// The tag for the string <see cref="ObjectType"/>.
+        /// The tag for the string <see cref="IObjectType"/>.
         /// </summary>
         AllorsString,
 
         /// <summary>
-        /// The tag for the unique <see cref="ObjectType"/>.
+        /// The tag for the unique <see cref="IObjectType"/>.
         /// </summary>
         AllorsUnique,
     }

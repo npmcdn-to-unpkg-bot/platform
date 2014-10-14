@@ -273,7 +273,7 @@ namespace Allors.Meta
         /// <returns>
         /// The <see cref="ObjectType"/>.
         /// </returns>
-        public override ObjectType GetObjectType()
+        public override IObjectType GetObjectType()
         {
             return this.ObjectType;
         }
@@ -301,7 +301,7 @@ namespace Allors.Meta
         /// </summary>
         internal void DeriveMultiplicity()
         {
-            if (this.RoleType != null && this.RoleType.ObjectType != null && this.RoleType.ObjectType is Unit)
+            if (this.RoleType != null && this.RoleType.ObjectType != null && this.RoleType.ObjectType is IUnit)
             {
                 this.IsMany = false;
             }
@@ -316,7 +316,7 @@ namespace Allors.Meta
             if (this.ObjectType == null)
             {
                 var message = this.ValidationName + " has no object type";
-                validationLog.AddError(message, this, ValidationKind.Required, "AssociationType.ObjectType");
+                validationLog.AddError(message, this, ValidationKind.Required, "AssociationType.IObjectType");
             }
 
             if (this.RelationType == null)

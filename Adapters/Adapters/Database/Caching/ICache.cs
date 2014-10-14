@@ -25,15 +25,15 @@ namespace Allors.Adapters.Database.Caching
     using Allors.Meta;
 
     /// <summary>
-    /// The Cache holds a CachedObject and/or ObjectType by ObjectId.
+    /// The Cache holds a CachedObject and/or IObjectType by ObjectId.
     /// </summary>
     public interface ICache
     {
-        ICachedObject GetOrCreateCachedObject(ObjectType concreteClass, ObjectId objectId, int localCacheId);
+        ICachedObject GetOrCreateCachedObject(IObjectType concreteClass, ObjectId objectId, int localCacheId);
 
-        ObjectType GetObjectType(ObjectId objectId);
+        IObjectType GetObjectType(ObjectId objectId);
 
-        void SetObjectType(ObjectId objectId, ObjectType objectType);
+        void SetObjectType(ObjectId objectId, IObjectType objectType);
 
         void OnCommit(IList<ObjectId> accessedObjectIds, IList<ObjectId> changedObjectIds);
 

@@ -35,7 +35,7 @@ namespace Allors
         /// <summary>
         /// Inserts an Allors Object with the specified id.
         /// </summary>
-        /// <param name="objectType">The ObjectType.</param>
+        /// <param name="objectType">The IObjectType.</param>
         /// <param name="objectId">The object id.</param>
         /// <returns>The inserted object.</returns>
         IObject Insert(Class objectType, string objectId);
@@ -43,7 +43,7 @@ namespace Allors
         /// <summary>
         /// Inserts an Allors Object with the specified id.
         /// </summary>
-        /// <param name="objectType">The <see cref="ObjectType"/>.</param>
+        /// <param name="objectType">The <see cref="IObjectType"/>.</param>
         /// <param name="objectId">The object id.</param>
         /// <returns>The inserted object.</returns>
         IObject Insert(Class objectType, ObjectId objectId);

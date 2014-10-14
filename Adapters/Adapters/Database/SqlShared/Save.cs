@@ -73,7 +73,7 @@ namespace Allors.Adapters.Database.Sql
         protected void SaveObjects(ManagementSession session)
         {
             var concreteCompositeType = new List<Class>(this.database.MetaPopulation.Classes);
-            concreteCompositeType.Sort(MetaObject.IdComparer);
+            concreteCompositeType.Sort(IMetaObject.IdComparer);
             foreach (var type in concreteCompositeType)
             {
                 var atLeastOne = false;
@@ -120,10 +120,10 @@ namespace Allors.Adapters.Database.Sql
 
         protected void SaveRelations(ManagementSession session)
         {
-            var exclusiveLeafClassesByObjectType = new Dictionary<ObjectType, HashSet<Class>>();
+            var exclusiveLeafClassesByObjectType = new Dictionary<IObjectType, HashSet<Class>>();
 
             var relations = new List<RelationType>(this.database.MetaPopulation.RelationTypes);
-            relations.Sort(MetaObject.IdComparer);
+            relations.Sort(IMetaObject.IdComparer);
 
             foreach (var relation in relations)
             {
@@ -134,7 +134,7 @@ namespace Allors.Adapters.Database.Sql
                     var roleType = relation.RoleType;
                 
                     var sql = string.Empty;
-                    if (roleType.ObjectType is Unit)
+                    if (roleType.ObjectType is IUnit)
                     {
                         HashSet<Class> exclusiveLeafClasses;
                         if (!exclusiveLeafClassesByObjectType.TryGetValue(associationType.ObjectType, out exclusiveLeafClasses))
@@ -223,9 +223,9 @@ namespace Allors.Adapters.Database.Sql
                                     {
                                         var a = long.Parse(reader[0].ToString());
 
-                                        if (roleType.ObjectType is Unit)
+                                        if (roleType.ObjectType is IUnit)
                                         {
-                                            var unitType = (Unit)roleType.ObjectType;
+                                            var unitType = (IUnit)roleType.ObjectType;
                                             var unitTypeTag = unitType.UnitTag;
                                             var r = command.GetValue(reader, unitTypeTag, 1);
                                             var content = Serialization.WriteString(unitTypeTag, r);

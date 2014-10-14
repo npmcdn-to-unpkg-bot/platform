@@ -34,12 +34,12 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
     public class LoadUnitRelationsFactory : ILoadUnitRelationsFactory
     {
         public readonly SqlClient.ManagementSession ManagementSession;
-        private readonly Dictionary<ObjectType, Dictionary<RoleType, string>> sqlByRoleTypeByObjectType;
+        private readonly Dictionary<IObjectType, Dictionary<RoleType, string>> sqlByRoleTypeByObjectType;
 
         public LoadUnitRelationsFactory(SqlClient.ManagementSession session)
         {
             this.ManagementSession = session;
-            this.sqlByRoleTypeByObjectType = new Dictionary<ObjectType, Dictionary<RoleType, string>>();
+            this.sqlByRoleTypeByObjectType = new Dictionary<IObjectType, Dictionary<RoleType, string>>();
         }
 
         public ILoadUnitRelations Create()
@@ -47,7 +47,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
             return new LoadUnitRelations(this);
         }
 
-        public string GetSql(ObjectType objectType, RoleType roleType)
+        public string GetSql(IObjectType objectType, RoleType roleType)
         {
             Dictionary<RoleType, string> sqlByRoleType;
             if (!this.sqlByRoleTypeByObjectType.TryGetValue(objectType, out sqlByRoleType))
@@ -68,15 +68,15 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
         private class LoadUnitRelations : Commands.Command, ILoadUnitRelations
         {
             private readonly LoadUnitRelationsFactory factory;
-            private readonly Dictionary<ObjectType, Dictionary<RoleType, SqlCommand>> commandByRoleTypeByObjectType;
+            private readonly Dictionary<IObjectType, Dictionary<RoleType, SqlCommand>> commandByRoleTypeByObjectType;
 
             public LoadUnitRelations(LoadUnitRelationsFactory factory)
             {
                 this.factory = factory;
-                this.commandByRoleTypeByObjectType = new Dictionary<ObjectType, Dictionary<RoleType, SqlCommand>>();
+                this.commandByRoleTypeByObjectType = new Dictionary<IObjectType, Dictionary<RoleType, SqlCommand>>();
             }
 
-            public void Execute(IList<UnitRelation> relations, ObjectType exclusiveLeafClass, RoleType roleType)
+            public void Execute(IList<UnitRelation> relations, IObjectType exclusiveLeafClass, RoleType roleType)
             {
                 var database = this.factory.ManagementSession.SqlClientDatabase;
                 var schema = database.SqlClientSchema;
@@ -90,7 +90,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
 
                 SchemaTableParameter tableParam;
 
-                var unitType = (Unit)roleType.ObjectType;
+                var unitType = (IUnit)roleType.ObjectType;
                 var unitTypeTag = unitType.UnitTag;
                 switch (unitTypeTag)
                 {
@@ -131,7 +131,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
                         break;
 
                     default:
-                        throw new ArgumentException("Unknown Unit ObjectType: " + unitTypeTag);
+                        throw new ArgumentException("Unknown Unit IObjectType: " + unitTypeTag);
                 }
 
                 SqlCommand command;

@@ -22,7 +22,7 @@ namespace Allors.Meta
 {
     using System;
 
-    public abstract partial class PropertyType : DomainDefinedObject, OperandType
+    public abstract partial class PropertyType : IDomainDefinedObject, OperandType
     {
         protected PropertyType(IDomain domain, Guid id)
             : base(domain, id)
@@ -51,8 +51,8 @@ namespace Allors.Meta
         /// Get the object type.
         /// </summary>
         /// <returns>
-        /// The <see cref="ObjectType"/>.
+        /// The <see cref="IObjectType"/>.
         /// </returns>
-        public abstract ObjectType GetObjectType();
+        public abstract IObjectType GetObjectType();
     }
 }

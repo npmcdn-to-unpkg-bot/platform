@@ -22,7 +22,7 @@ namespace Allors.Meta
 {
     using System;
 
-    public partial class MethodType : DomainDefinedObject, OperandType
+    public partial class MethodType : IDomainDefinedObject, OperandType
     {
         private string name;
 

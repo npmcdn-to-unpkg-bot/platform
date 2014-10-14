@@ -31,7 +31,7 @@ namespace Allors.Adapters.Workspace.Memory
 
     public class WorkspaceSession : IWorkspaceSession
     {
-        private readonly Dictionary<ObjectType, ObjectType[]> concreteClassesByObjectType;
+        private readonly Dictionary<IObjectType, IObjectType[]> concreteClassesByObjectType;
         private ChangeSet changeSet;
         
         private IDatabaseSession databaseSession;
@@ -89,7 +89,7 @@ namespace Allors.Adapters.Workspace.Memory
             this.strategyByObjectId = new Dictionary<ObjectId, Strategy>();
             this.preSyncIdsByPostSyncId = new Dictionary<ObjectId, ObjectId>();
 
-            this.concreteClassesByObjectType = new Dictionary<ObjectType, ObjectType[]>();
+            this.concreteClassesByObjectType = new Dictionary<IObjectType, IObjectType[]>();
 
             this.busyCommittingOrRollingBack = false;
             this.synced = false;
@@ -335,7 +335,7 @@ namespace Allors.Adapters.Workspace.Memory
             {
                 var roleType = conflict.RoleType;
 
-                if (roleType.ObjectType is Unit)
+                if (roleType.ObjectType is IUnit)
                 {
                     Dictionary<Strategy, object> originalUnitRoleByAssociation;
                     if (this.originalUnitRoleByAssociationByRoleType.TryGetValue(roleType, out originalUnitRoleByAssociation))
@@ -390,7 +390,7 @@ namespace Allors.Adapters.Workspace.Memory
 
                     foreach (var roleType in strategy.ObjectType.RoleTypes)
                     {
-                        if (roleType.ObjectType is Unit)
+                        if (roleType.ObjectType is IUnit)
                         {
                             Dictionary<Strategy, object> originalUnitRoleByStrategy;
                             if (this.originalUnitRoleByAssociationByRoleType.TryGetValue(roleType, out originalUnitRoleByStrategy))
@@ -970,7 +970,7 @@ namespace Allors.Adapters.Workspace.Memory
             var @class = objectType as Class;
             if (@class == null)
             {
-                throw new Exception("ObjectType should be a class");
+                throw new Exception("IObjectType should be a class");
             }
 
             return (T)this.Create(@class);
@@ -1277,7 +1277,7 @@ namespace Allors.Adapters.Workspace.Memory
         {
             foreach (var roleType in association.ObjectType.RoleTypes)
             {
-                if (roleType.ObjectType is Unit)
+                if (roleType.ObjectType is IUnit)
                 {
                     Dictionary<Strategy, object> diffUnitRoleByStrategy;
                     if (this.diffUnitRoleByAssociationByRoleType.TryGetValue(roleType, out diffUnitRoleByStrategy))
@@ -1749,12 +1749,12 @@ namespace Allors.Adapters.Workspace.Memory
             this.synced = false;
         }
 
-        internal virtual HashSet<Strategy> GetStrategiesForExtent(ObjectType objectType)
+        internal virtual HashSet<Strategy> GetStrategiesForExtent(IObjectType objectType)
         {
-            ObjectType[] concreteClasses;
+            IObjectType[] concreteClasses;
             if (!this.concreteClassesByObjectType.TryGetValue(objectType, out concreteClasses))
             {
-                var sortedClassAndSubclassList = new List<ObjectType>();
+                var sortedClassAndSubclassList = new List<IObjectType>();
 
                 if (objectType is Class)
                 {
@@ -1878,9 +1878,9 @@ namespace Allors.Adapters.Workspace.Memory
         {
             writer.WriteStartElement(Serialization.Objects);
 
-            var databaseStrategiesByObjectType = new Dictionary<ObjectType, List<Strategy>>();
-            var newStrategiesByObjectType = new Dictionary<ObjectType, List<Strategy>>();
-            var deletedStrategiesByObjectType = new Dictionary<ObjectType, List<Strategy>>();
+            var databaseStrategiesByObjectType = new Dictionary<IObjectType, List<Strategy>>();
+            var newStrategiesByObjectType = new Dictionary<IObjectType, List<Strategy>>();
+            var deletedStrategiesByObjectType = new Dictionary<IObjectType, List<Strategy>>();
 
             foreach (var strategiesByObjectIdEntry in this.strategyByObjectId)
             {
@@ -1957,7 +1957,7 @@ namespace Allors.Adapters.Workspace.Memory
                             writer.WriteStartElement(Serialization.Relation);
                             writer.WriteAttributeString(Serialization.Association, association.ObjectId.ToString());
 
-                            var unitType = (Unit)roleType.ObjectType;
+                            var unitType = (IUnit)roleType.ObjectType;
                             var unitTypeTag = (UnitTags)unitType.UnitTag;
                             var roleString = Serialization.WriteString(unitTypeTag, role);
                             writer.WriteString(roleString);
@@ -2076,7 +2076,7 @@ namespace Allors.Adapters.Workspace.Memory
                         writer.WriteStartElement(Serialization.Relation);
                         writer.WriteAttributeString(Serialization.Association, association.ObjectId.ToString());
 
-                        var unitType = (Unit)roleType.ObjectType;
+                        var unitType = (IUnit)roleType.ObjectType;
                         var unitTypeTag = (UnitTags)unitType.UnitTag;
                         var roleString = Serialization.WriteString(unitTypeTag, role);
                         writer.WriteString(roleString);
@@ -2264,12 +2264,12 @@ namespace Allors.Adapters.Workspace.Memory
             if (!reader.IsEmptyElement)
             {
                 if (roleType == null ||
-                    roleType.ObjectType is Unit != isUnit)
+                    roleType.ObjectType is IUnit != isUnit)
                 {
                     throw new Exception("RoleType changed during Save/Load");
                 }
 
-                if (roleType.ObjectType is Unit)
+                if (roleType.ObjectType is IUnit)
                 {
                     this.LoadDatabaseUnitRelations(reader, roleType);
                 }
@@ -2580,12 +2580,12 @@ namespace Allors.Adapters.Workspace.Memory
             if (!reader.IsEmptyElement)
             {
                 if (relationType == null ||
-                    relationType.ObjectType is Unit != isUnit)
+                    relationType.ObjectType is IUnit != isUnit)
                 {
                     throw new Exception("RoleType changed during Save/Load");
                 }
 
-                if (relationType.ObjectType is Unit)
+                if (relationType.ObjectType is IUnit)
                 {
                     this.LoadWorkspaceUnitRelations(reader, relationType);
                 }
@@ -2823,7 +2823,7 @@ namespace Allors.Adapters.Workspace.Memory
                     return false;
                 }
 
-                var unitType = roleType.ObjectType as Unit;
+                var unitType = roleType.ObjectType as IUnit;
                 if (unitType != null && unitType.IsBinary)
                 {
                     var binary1 = (byte[])role1;
@@ -2891,7 +2891,7 @@ namespace Allors.Adapters.Workspace.Memory
             return true;
         }
 
-        private static void SaveDatabaseStrategies(XmlWriter writer, Dictionary<ObjectType, List<Strategy>> databaseStrategiesByObjectType)
+        private static void SaveDatabaseStrategies(XmlWriter writer, Dictionary<IObjectType, List<Strategy>> databaseStrategiesByObjectType)
         {
             writer.WriteStartElement(Serialization.Database);
 
@@ -2906,7 +2906,7 @@ namespace Allors.Adapters.Workspace.Memory
             writer.WriteEndElement();
         }
 
-        private static void SaveWorkStrategies(XmlWriter writer, Dictionary<ObjectType, List<Strategy>> newStrategiesByObjectType, Dictionary<ObjectType, List<Strategy>> deletedStrategiesByObjectType)
+        private static void SaveWorkStrategies(XmlWriter writer, Dictionary<IObjectType, List<Strategy>> newStrategiesByObjectType, Dictionary<IObjectType, List<Strategy>> deletedStrategiesByObjectType)
         {
             writer.WriteStartElement(Serialization.Workspace);
 
@@ -2937,7 +2937,7 @@ namespace Allors.Adapters.Workspace.Memory
             writer.WriteEndElement();
         }
 
-        private static void SaveStrategies(XmlWriter writer, ObjectType objectType, List<Strategy> strategies)
+        private static void SaveStrategies(XmlWriter writer, IObjectType objectType, List<Strategy> strategies)
         {
             writer.WriteStartElement(Serialization.ObjectType);
             writer.WriteAttributeString(Serialization.Id, objectType.IdAsString);

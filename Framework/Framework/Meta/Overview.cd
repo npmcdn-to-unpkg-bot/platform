@@ -14,13 +14,14 @@
     </ShowAsCollectionAssociation>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Allors.Meta.MetaObject">
+  <Class Name="Allors.Meta.IMetaObject">
     <Position X="3.5" Y="0.5" Width="1.5" />
     <Members>
       <Field Name="id" Hidden="true" />
       <Property Name="IdAsNumberString" Hidden="true" />
       <Property Name="IdAsString" Hidden="true" />
       <Method Name="IdComparer" Hidden="true" />
+      <Method Name="IMetaObject" Hidden="true" />
       <Method Name="Validate" Hidden="true" />
       <Property Name="ValidationName" Hidden="true" />
     </Members>
@@ -29,8 +30,11 @@
     </Compartments>
     <TypeIdentifier>
       <HashCode>AAACAAAAAACAAAAAAACAAACAAAAAAAAAAAAAAEBBAgA=</HashCode>
-      <FileName>Meta\MetaObject.cs</FileName>
+      <FileName>Meta\IMetaObject.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="MetaPopulation" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="Allors.Meta.Class" Collapsed="true">
     <Position X="2.5" Y="7.5" Width="1.5" />
@@ -95,16 +99,16 @@
       <Property Name="Supertype" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="Allors.Meta.ObjectType">
+  <Class Name="Allors.Meta.IObjectType">
     <Position X="2.75" Y="4" Width="1.5" />
     <Members>
       <Method Name="CompareTo" Hidden="true" />
+      <Method Name="IObjectType" Hidden="true" />
       <Property Name="IsClass" Hidden="true" />
       <Property Name="IsComposite" Hidden="true" />
       <Property Name="IsInterface" Hidden="true" />
       <Property Name="IsUnit" Hidden="true" />
       <Property Name="Name" Hidden="true" />
-      <Method Name="ObjectType" Hidden="true" />
       <Field Name="pluralName" Hidden="true" />
       <Field Name="singularName" Hidden="true" />
       <Method Name="ToString" Hidden="true" />
@@ -116,7 +120,7 @@
     </Compartments>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAgCAAAYEAACAAAQAACKAAAACAAAAAUAAAAA=</HashCode>
-      <FileName>Meta\ObjectType.cs</FileName>
+      <FileName>Meta\IObjectType.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
@@ -128,6 +132,7 @@
       <Method Name="DeriveMultiplicity" Hidden="true" />
       <Property Name="DisplayName" Hidden="true" />
       <Property Name="FullName" Hidden="true" />
+      <Method Name="Get" Hidden="true" />
       <Method Name="GetObjectType" Hidden="true" />
       <Field Name="isMany" Hidden="true" />
       <Property Name="IsOne" Hidden="true" />
@@ -172,7 +177,9 @@
       <Method Name="DeriveSingularPropertyName" Hidden="true" />
       <Property Name="DisplayName" Hidden="true" />
       <Property Name="FullName" Hidden="true" />
+      <Method Name="Get" Hidden="true" />
       <Method Name="GetObjectType" Hidden="true" />
+      <Method Name="IdComparer" Hidden="true" />
       <Field Name="isMany" Hidden="true" />
       <Field Name="MaximumSize" Hidden="true" />
       <Property Name="Name" Hidden="true" />
@@ -186,6 +193,7 @@
       <Property Name="RelationType" Hidden="true" />
       <Method Name="RoleType" Hidden="true" />
       <Field Name="scale" Hidden="true" />
+      <Method Name="Set" Hidden="true" />
       <Property Name="SingularFullName" Hidden="true" />
       <Property Name="SingularName" Hidden="true" />
       <Property Name="SingularPropertyName" Hidden="true" />
@@ -268,15 +276,15 @@
   <Class Name="Allors.Meta.IMetaPopulation" Collapsed="true">
     <Position X="7.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AIJQCAAAQAHCBAABqAgAVCgAEAAaAEAAFMRBQAmCBEg=</HashCode>
       <FileName>Meta\IMetaPopulation.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Allors.Meta.DomainDefinedObject" Collapsed="true">
+  <Class Name="Allors.Meta.IDomainDefinedObject" Collapsed="true">
     <Position X="5.5" Y="2.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Meta\DomainDefinedObject.cs</FileName>
+      <FileName>Meta\IDomainDefinedObject.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="DefiningDomain" />

@@ -126,7 +126,7 @@ namespace Allors
         /// Gets the type.
         /// </summary>
         /// <value>The type of the Extent.</value>
-        public ObjectType ObjectType
+        public IObjectType ObjectType
         {
             get { return this.extent.ObjectType; }
         }
@@ -345,7 +345,7 @@ namespace Allors
         /// <param name="arrayIndex">The zero-based index in array at which copying begins.</param>
         /// <exception cref="T:System.ArgumentOutOfRangeException">arrayIndex is less than 0.</exception>
         /// <exception cref="T:System.ArgumentNullException">array is null.</exception>
-        /// <exception cref="T:System.ArgumentException">array is multidimensional.-or-arrayIndex is equal to or greater than the length of array.-or-The number of elements in the source <see cref="T:System.Collections.Generic.ICollection`1"></see> is greater than the available space from arrayIndex to the end of the destination array.-or-ObjectType T cannot be cast automatically to the type of the destination array.</exception>
+        /// <exception cref="T:System.ArgumentException">array is multidimensional.-or-arrayIndex is equal to or greater than the length of array.-or-The number of elements in the source <see cref="T:System.Collections.Generic.ICollection`1"></see> is greater than the available space from arrayIndex to the end of the destination array.-or-IObjectType T cannot be cast automatically to the type of the destination array.</exception>
         public void CopyTo(T[] array, int arrayIndex)
         {
             this.extent.CopyTo(array, arrayIndex);

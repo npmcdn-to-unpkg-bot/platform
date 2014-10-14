@@ -51,12 +51,12 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
 
         private class CreateObject : DatabaseCommand, ICreateObject
         {
-            private readonly Dictionary<ObjectType, SqlCommand> commandByObjectType;
+            private readonly Dictionary<IObjectType, SqlCommand> commandByObjectType;
 
             public CreateObject(Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
-                this.commandByObjectType = new Dictionary<ObjectType, SqlCommand>();
+                this.commandByObjectType = new Dictionary<IObjectType, SqlCommand>();
             }
 
             public Reference Execute(Class objectType)

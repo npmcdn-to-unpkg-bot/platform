@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="DomainDefinedObject.cs" company="Allors bvba">
+// <copyright file="IDomainDefinedObject.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -23,9 +23,9 @@ namespace Allors.Meta
 {
     using System;
 
-    public abstract partial class DomainDefinedObject : MetaObject
+    public abstract partial class IDomainDefinedObject : IMetaObject
     {
-        public DomainDefinedObject(IDomain definingDomain, Guid id)
+        public IDomainDefinedObject(IDomain definingDomain, Guid id)
             : base(definingDomain.MetaPopulation, id)
         {
             this.DefiningDomain = definingDomain;

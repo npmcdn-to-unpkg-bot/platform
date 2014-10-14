@@ -27,9 +27,9 @@ namespace Allors
     using Allors.Meta;
 
     /// <summary>
-    /// The Extent of a <see cref="Meta.ObjectType"/> is the set of all objects that either
-    /// - are of the specified <see cref="Meta.ObjectType"/>
-    /// - inherit from the specified <see cref="Meta.ObjectType"/>
+    /// The Extent of a <see cref="IObjectType"/> is the set of all objects that either
+    /// - are of the specified <see cref="IObjectType"/>
+    /// - inherit from the specified <see cref="IObjectType"/>
     /// The extent can be filtered based on predicates.
     /// </summary>
     [DebuggerTypeProxy(typeof(ExtentDebugView))]

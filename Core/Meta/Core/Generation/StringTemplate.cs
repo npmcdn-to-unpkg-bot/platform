@@ -133,7 +133,7 @@ namespace Allors.Development.Repository.Generation
                     if (generation.HasAttribute(InputKey))
                     {
                         var input = new Guid(generation.GetAttribute(InputKey));
-                        var objectType = metaPopulation.Find(input) as ObjectType;
+                        var objectType = metaPopulation.Find(input) as IObjectType;
                         if (objectType != null)
                         {
                             template.Add(ObjectTypeKey, objectType);

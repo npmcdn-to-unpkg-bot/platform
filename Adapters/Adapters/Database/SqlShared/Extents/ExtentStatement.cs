@@ -71,7 +71,7 @@ namespace Allors.Adapters.Database.Sql
             get { return this.extent.ObjectType; }
         }
 
-        public void AddJoins(ObjectType leafClass, string alias)
+        public void AddJoins(IObjectType leafClass, string alias)
         {
             foreach (RoleType role in this.referenceRoles)
             {
@@ -167,7 +167,7 @@ namespace Allors.Adapters.Database.Sql
 
         public abstract string AddParameter(object obj);
 
-        public bool AddWhere(ObjectType leafClass, string alias)
+        public bool AddWhere(IObjectType leafClass, string alias)
         {
             var useWhere = !this.Extent.ObjectType.ExistExclusiveLeafClass;
             

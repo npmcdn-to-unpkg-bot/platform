@@ -3995,7 +3995,7 @@ namespace Allors.Adapters.Special
 
                     Assert.IsTrue(exceptionThrown);
 
-                    // Illegal Role ObjectType
+                    // Illegal Role IObjectType
                     exceptionThrown = false;
                     try
                     {
