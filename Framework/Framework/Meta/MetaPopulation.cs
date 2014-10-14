@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="Environment.cs" company="Allors bvba">
+// <copyright file="IMetaPopulation.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -22,7 +22,6 @@
 namespace Allors.Meta
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -40,7 +39,7 @@ namespace Allors.Meta
         private bool isStale;
         private bool isDeriving;
 
-        private IList<Domain> domains;
+        private IList<IDomain> domains;
         private IList<Unit> units;
         private IList<Interface> interfaces;
         private IList<Class> classes;
@@ -55,7 +54,7 @@ namespace Allors.Meta
             this.isStale = true;
             this.isDeriving = false;
 
-            this.domains = new List<Domain>();
+            this.domains = new List<IDomain>();
             this.units = new List<Unit>();
             this.interfaces = new List<Interface>();
             this.classes = new List<Class>();
@@ -76,7 +75,7 @@ namespace Allors.Meta
             }
         }
 
-        public IEnumerable<Domain> Domains
+        public IEnumerable<IDomain> Domains
         {
             get
             {
@@ -309,7 +308,7 @@ namespace Allors.Meta
                 {
                     this.isDeriving = true;
 
-                    var sharedDomains = new HashSet<Domain>();
+                    var sharedDomains = new HashSet<IDomain>();
                     var sharedCompositeTypes = new HashSet<Composite>();
                     var sharedInterfaces = new HashSet<Interface>();
                     var sharedClasses = new HashSet<Class>();
@@ -413,7 +412,7 @@ namespace Allors.Meta
             }
         }
 
-        internal void OnDomainCreated(Domain domain)
+        internal void OnDomainCreated(IDomain domain)
         {
             this.domains.Add(domain);
             this.metaObjectById.Add(domain.Id, domain);

@@ -24,7 +24,7 @@ namespace Allors.Meta
 
     public abstract partial class PropertyType : DomainDefinedObject, OperandType
     {
-        protected PropertyType(Domain domain, Guid id)
+        protected PropertyType(IDomain domain, Guid id)
             : base(domain, id)
         {
         }

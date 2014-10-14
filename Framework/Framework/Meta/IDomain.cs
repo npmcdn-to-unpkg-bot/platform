@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="Domain.cs" company="Allors bvba">
+// <copyright file="IDomain.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -25,16 +25,13 @@ namespace Allors.Meta
     using System.Collections.Generic;
     using System.Linq;
 
-    /// <summary>
-    /// A Part is a Domain that can be used together with other parts to form a whole.
-    /// </summary>
-    public sealed partial class Domain : MetaObject, IComparable
+    public abstract class IDomain : MetaObject, IComparable
     {
         private string name;
 
-        private IList<Domain> directSuperdomains;
+        private IList<IDomain> directSuperdomains;
 
-        private IList<Domain> derivedSuperdomains;
+        private IList<IDomain> derivedSuperdomains;
 
         private IList<Unit> definedUnits;
 
@@ -52,10 +49,10 @@ namespace Allors.Meta
 
         private IList<MethodType> definedMethodTypes;
 
-        public Domain(MetaPopulation metaPopulation, Guid id)
+        public IDomain(MetaPopulation metaPopulation, Guid id)
             : base(metaPopulation, id)
         {
-            this.directSuperdomains = new List<Domain>();
+            this.directSuperdomains = new List<IDomain>();
 
             this.definedUnits = new List<Unit>();
             this.definedInterfaces = new List<Interface>();
@@ -84,7 +81,7 @@ namespace Allors.Meta
             }
         }
 
-        public IEnumerable<Domain> DirectSuperdomains
+        public IEnumerable<IDomain> DirectSuperdomains
         {
             get
             {
@@ -92,7 +89,7 @@ namespace Allors.Meta
             }
         }
 
-        public IEnumerable<Domain> Superdomains
+        public IEnumerable<IDomain> Superdomains
         {
             get
             {
@@ -181,7 +178,7 @@ namespace Allors.Meta
             }
         }
 
-        public void AddDirectSuperdomain(Domain superdomain)
+        public void AddDirectSuperdomain(IDomain superdomain)
         {
             if (superdomain.Equals(this) || superdomain.Superdomains.Contains(this))
             {
@@ -288,8 +285,8 @@ namespace Allors.Meta
             this.definedMethodTypes.Add(methodType);
             this.MetaPopulation.OnMethodTypeCreated(methodType);
         }
-        
-        internal void DeriveSuperdomains(HashSet<Domain> sharedDomains)
+
+        internal void DeriveSuperdomains(HashSet<IDomain> sharedDomains)
         {
             sharedDomains.Clear();
             foreach (var directSuperdomain in this.DirectSuperdomains)
@@ -337,7 +334,7 @@ namespace Allors.Meta
             }
         }
 
-        private void DeriveSuperdomains(Domain subdomain, HashSet<Domain> superdomains)
+        private void DeriveSuperdomains(IDomain subdomain, HashSet<IDomain> superdomains)
         {
             if (this.Equals(subdomain))
             {

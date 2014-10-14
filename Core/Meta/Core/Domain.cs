@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="InheritanceBuilder.cs" company="Allors bvba">
+// <copyright file="Domain.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -16,38 +16,18 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
+// <summary>Defines the Domain type.</summary>
 //-------------------------------------------------------------------------------------------------
 
 namespace Allors.Meta
 {
     using System;
 
-    public partial class InheritanceBuilder : Builder<Inheritance>
+    public sealed partial class Domain : IDomain
     {
-        private Composite subtype;
-        private Interface supertype;
-
-        public InheritanceBuilder(IDomain domain, Guid id)
-            : base(domain, id)
+        public Domain(MetaPopulation metaPopulation, Guid id)
+            : base(metaPopulation, id)
         {
-        }
-
-        public InheritanceBuilder WithSubtype(Composite value)
-        {
-            this.subtype = value;
-            return this;
-        }
-
-        public InheritanceBuilder WithSupertype(Interface value)
-        {
-            this.supertype = value;
-            return this;
-        }
-
-        private void AllorsBuild(Inheritance instance)
-        {
-            instance.Subtype = this.subtype;
-            instance.Supertype = this.supertype;
         }
     }
 }

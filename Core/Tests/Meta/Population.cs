@@ -176,7 +176,7 @@ namespace Allors.Meta.Static
         {
             this.BinaryType = (Unit)this.metaPopulation.Find(UnitIds.BinaryId);
             this.BooleanType = (Unit)this.metaPopulation.Find(UnitIds.BooleanId);
-            this.DateTimeType = (Unit)this.metaPopulation.Find(UnitIds.DatetimeId);
+            this.DateTimeType = (Unit)this.metaPopulation.Find(UnitIds.DateId);
             this.DecimalType = (Unit)this.metaPopulation.Find(UnitIds.DecimalId);
             this.DoubleType = (Unit)this.metaPopulation.Find(UnitIds.DoubleId);
             this.IntegerType = (Unit)this.metaPopulation.Find(UnitIds.IntegerId);

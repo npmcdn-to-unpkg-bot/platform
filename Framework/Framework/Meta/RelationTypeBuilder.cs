@@ -39,7 +39,7 @@ namespace Allors.Meta
         private int? scale;
         private int? size;
 
-        public RelationTypeBuilder(Domain domain, Guid id, Guid associationTypeId, Guid roleTypeId)
+        public RelationTypeBuilder(IDomain domain, Guid id, Guid associationTypeId, Guid roleTypeId)
             : base(domain, id)
         {
             this.associationTypeId = associationTypeId;

@@ -27,7 +27,7 @@ namespace Allors.Meta
         private Composite objectType;
         private string name;
 
-        public MethodTypeBuilder(Domain domain, Guid id)
+        public MethodTypeBuilder(IDomain domain, Guid id)
             : base(domain, id)
         {
         }

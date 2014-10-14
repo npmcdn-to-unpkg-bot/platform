@@ -28,7 +28,7 @@ namespace Allors.Meta
 
         private Composite objectType;
 
-        internal MethodType(Domain domain, Guid id)
+        internal MethodType(IDomain domain, Guid id)
             : base(domain, id)
         {
             domain.OnMethodTypeCreated(this);

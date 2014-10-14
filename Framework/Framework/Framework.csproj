@@ -61,7 +61,7 @@
     <Compile Include="Meta\ClassBuilder.cs" />
     <Compile Include="Meta\ClassBuilder.v.cs" />
     <Compile Include="Meta\Composite.cs" />
-    <Compile Include="Meta\Domain.cs" />
+    <Compile Include="Meta\IDomain.cs" />
     <Compile Include="Meta\DomainDefinedObject.cs" />
     <Compile Include="Meta\Inheritance.cs" />
     <Compile Include="Meta\InheritanceBuilder.cs" />

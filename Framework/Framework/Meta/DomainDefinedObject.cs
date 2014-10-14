@@ -25,12 +25,12 @@ namespace Allors.Meta
 
     public abstract partial class DomainDefinedObject : MetaObject
     {
-        public DomainDefinedObject(Domain definingDomain, Guid id)
+        public DomainDefinedObject(IDomain definingDomain, Guid id)
             : base(definingDomain.MetaPopulation, id)
         {
             this.DefiningDomain = definingDomain;
         }
-        
-        public Domain DefiningDomain { get; private set; }
+
+        public IDomain DefiningDomain { get; private set; }
     }
 }

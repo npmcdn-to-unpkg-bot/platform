@@ -28,7 +28,7 @@ namespace Allors.Meta
         private string pluralName;
         private UnitTags unitTag;
 
-        public UnitBuilder(Domain domain, Guid id)
+        public UnitBuilder(IDomain domain, Guid id)
             : base(domain, id)
         {
         }

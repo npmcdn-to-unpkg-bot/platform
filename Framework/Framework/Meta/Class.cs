@@ -26,9 +26,9 @@ namespace Allors.Meta
 
     public partial class Class : Composite
     {
-        private readonly Class[] leafClasses; 
+        private readonly Class[] leafClasses;
 
-        internal Class(Domain domain, Guid id)
+        internal Class(IDomain domain, Guid id)
             : base(domain, id)
         {
             this.leafClasses = new[] { this };

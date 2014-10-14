@@ -29,7 +29,7 @@ namespace Allors.Meta
 
         private string pluralName;
 
-        protected ObjectType(Domain domain, Guid id)
+        protected ObjectType(IDomain domain, Guid id)
             : base(domain, id)
         {
         }
