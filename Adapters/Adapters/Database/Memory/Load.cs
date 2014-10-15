@@ -243,7 +243,7 @@ namespace Allors.Adapters.Database.Memory
                                 }
 
                                 var relationTypeId = new Guid(relationTypeIdString);
-                                var relationType = (RelationType)this.session.Database.MetaPopulation.Find(relationTypeId);
+                                var relationType = (IRelationType)this.session.Database.MetaPopulation.Find(relationTypeId);
 
                                 if (this.reader.Name.Equals(Serialization.RelationTypeUnit))
                                 {
@@ -288,7 +288,7 @@ namespace Allors.Adapters.Database.Memory
             }
         }
 
-        private void LoadUnitRelations(RelationType relationType)
+        private void LoadUnitRelations(IRelationType relationType)
         {
             while (this.reader.Read())
             {
@@ -362,7 +362,7 @@ namespace Allors.Adapters.Database.Memory
             }
         }
 
-        private void LoadCompositeRelations(RelationType relationType)
+        private void LoadCompositeRelations(IRelationType relationType)
         {
             while (this.reader.Read())
             {

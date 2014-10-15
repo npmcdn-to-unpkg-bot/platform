@@ -35,13 +35,13 @@ namespace Allors.Meta
         /// </summary>
         private const string Where = "Where";
 
-        private readonly RelationType relationType;
+        private readonly IRelationType relationType;
 
         private bool isMany;
 
         private Composite objectType;
 
-        internal AssociationType(RelationType relationType, Guid id)
+        internal AssociationType(IRelationType relationType, Guid id)
             : base(relationType.DefiningDomain, id)
         {
             this.relationType = relationType;
@@ -80,7 +80,7 @@ namespace Allors.Meta
             }
         }
 
-        public RelationType RelationType
+        public IRelationType RelationType
         {
             get
             {

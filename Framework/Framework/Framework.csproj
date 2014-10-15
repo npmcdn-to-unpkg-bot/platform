@@ -74,9 +74,7 @@
     <Compile Include="Meta\IObjectType.cs" />
     <Compile Include="Meta\OperandType.cs" />
     <Compile Include="Meta\PropertyType.cs" />
-    <Compile Include="Meta\RelationType.cs" />
-    <Compile Include="Meta\RelationTypeBuilder.cs" />
-    <Compile Include="Meta\RelationTypeBuilder.v.cs" />
+    <Compile Include="Meta\IRelationType.cs" />
     <Compile Include="Meta\RoleType.cs" />
     <Compile Include="Meta\IUnit.cs" />
     <Compile Include="Meta\UnitIds.cs" />

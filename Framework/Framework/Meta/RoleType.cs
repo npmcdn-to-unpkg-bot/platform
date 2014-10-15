@@ -35,7 +35,7 @@ namespace Allors.Meta
         /// </summary>
         public const int MaximumSize = -1;
 
-        private readonly RelationType relationType;
+        private readonly IRelationType relationType;
 
         private IObjectType objectType;
 
@@ -55,7 +55,7 @@ namespace Allors.Meta
 
         private int? size;
 
-        internal RoleType(RelationType relationType, Guid id)
+        internal RoleType(IRelationType relationType, Guid id)
             : base(relationType.DefiningDomain, id)
         {
             this.relationType = relationType;
@@ -124,7 +124,7 @@ namespace Allors.Meta
             }
         }
 
-        public RelationType RelationType
+        public IRelationType RelationType
         {
             get
             {

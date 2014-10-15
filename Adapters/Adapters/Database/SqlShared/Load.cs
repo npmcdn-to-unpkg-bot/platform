@@ -290,7 +290,7 @@ namespace Allors.Adapters.Database.Sql
                                 }
 
                                 var relationTypeId = new Guid(relationTypeIdString);
-                                var relationType = (RelationType)this.database.MetaPopulation.Find(relationTypeId);
+                                var relationType = (IRelationType)this.database.MetaPopulation.Find(relationTypeId);
 
                                 if (this.reader.Name.Equals(Serialization.RelationTypeUnit))
                                 {
@@ -350,7 +350,7 @@ namespace Allors.Adapters.Database.Sql
             }
         }
 
-        protected void LoadUnitRelations(RelationType relationType, Dictionary<IObjectType, List<UnitRelation>> relationsByExclusiveLeafClass)
+        protected void LoadUnitRelations(IRelationType relationType, Dictionary<IObjectType, List<UnitRelation>> relationsByExclusiveLeafClass)
         {
             while (this.reader.Read())
             {
@@ -469,7 +469,7 @@ namespace Allors.Adapters.Database.Sql
             }
         }
 
-        protected void LoadCompositeRelations(RelationType relationType, List<CompositeRelation> relations)
+        protected void LoadCompositeRelations(IRelationType relationType, List<CompositeRelation> relations)
         {
             while (this.reader.Read())
             {

@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="RelationType.cs" company="Allors bvba">
+// <copyright file="IRelationType.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -25,10 +25,10 @@ namespace Allors.Meta
     using System.Text;
 
     /// <summary>
-    /// A <see cref="RelationType"/> defines the state and behavior for
+    /// A relation type defines the state and behavior for
     /// a set of <see cref="AssociationType"/>s and <see cref="RoleType"/>s.
     /// </summary>
-    public partial class RelationType : IDomainDefinedObject, IComparable
+    public partial class IRelationType : IDomainDefinedObject, IComparable
     {
         private readonly AssociationType associationType;
         private readonly RoleType roleType;
@@ -38,7 +38,7 @@ namespace Allors.Meta
         private bool isIndexed;
 
 
-        public RelationType(IDomain domain, Guid id, Guid associationTypeId, Guid roleTypdId)
+        public IRelationType(IDomain domain, Guid id, Guid associationTypeId, Guid roleTypdId)
             : base(domain, id)
         {
             this.associationType = new AssociationType(this, associationTypeId);
@@ -202,7 +202,7 @@ namespace Allors.Meta
         /// <paramref name="obj"/> is not the same type as this instance. </exception>
         public int CompareTo(object obj)
         {
-            var that = obj as RelationType;
+            var that = obj as IRelationType;
             return that != null ? string.CompareOrdinal(this.Name, that.Name) : -1;
         }
 

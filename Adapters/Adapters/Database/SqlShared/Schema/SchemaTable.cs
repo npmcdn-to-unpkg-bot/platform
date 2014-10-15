@@ -29,7 +29,7 @@ namespace Allors.Adapters.Database.Sql
     {
         public readonly SchemaTableKind Kind;
         public readonly string Name;
-        public readonly RelationType RelationType;
+        public readonly IRelationType RelationType;
         public readonly Schema Schema;
         public readonly IObjectType ObjectType;
         public readonly string StatementName;
@@ -42,7 +42,7 @@ namespace Allors.Adapters.Database.Sql
             this.ObjectType = objectType;
         }
 
-        public SchemaTable(Schema schema, string name, SchemaTableKind kind, RelationType relationType)
+        public SchemaTable(Schema schema, string name, SchemaTableKind kind, IRelationType relationType)
             : this(schema, name, kind)
         {
             this.RelationType = relationType;

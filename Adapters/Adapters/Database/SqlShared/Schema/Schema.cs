@@ -47,9 +47,9 @@ namespace Allors.Adapters.Database.Sql
 
         private readonly string prefix;
         private readonly string postfix;
-        
-        private Dictionary<RelationType, SchemaColumn> columnsByRelationType;
-        private Dictionary<RelationType, SchemaTable> tablesByRelationType;
+
+        private Dictionary<IRelationType, SchemaColumn> columnsByRelationType;
+        private Dictionary<IRelationType, SchemaTable> tablesByRelationType;
         private Dictionary<IClass, SchemaTable> tableByClass;
         private Dictionary<string, SchemaTable> tablesByName;
 
@@ -164,7 +164,7 @@ namespace Allors.Adapters.Database.Sql
             get { return this.database; }
         }
 
-        protected Dictionary<RelationType, SchemaColumn> ColumnsByRelationType
+        protected Dictionary<IRelationType, SchemaColumn> ColumnsByRelationType
         {
             get { return this.columnsByRelationType; }
         }
@@ -174,7 +174,7 @@ namespace Allors.Adapters.Database.Sql
             get { return this.tablesByName; }
         }
 
-        protected Dictionary<RelationType, SchemaTable> TablesByRelationType
+        protected Dictionary<IRelationType, SchemaTable> TablesByRelationType
         {
             get { return this.tablesByRelationType; }
         }
@@ -235,7 +235,7 @@ namespace Allors.Adapters.Database.Sql
             return this.tablesByName.Values.GetEnumerator();
         }
 
-        public SchemaColumn Column(RelationType relationType)
+        public SchemaColumn Column(IRelationType relationType)
         {
             return this.columnsByRelationType[relationType];
         }
@@ -255,7 +255,7 @@ namespace Allors.Adapters.Database.Sql
             return this.tableByClass[type];
         }
 
-        public SchemaTable Table(RelationType relationType)
+        public SchemaTable Table(IRelationType relationType)
         {
             return this.tablesByRelationType[relationType];
         }
@@ -295,8 +295,8 @@ namespace Allors.Adapters.Database.Sql
             this.tablesByName = new Dictionary<string, SchemaTable>();
 
             this.tableByClass = new Dictionary<IClass, SchemaTable>();
-            this.tablesByRelationType = new Dictionary<RelationType, SchemaTable>();
-            this.columnsByRelationType = new Dictionary<RelationType, SchemaColumn>();
+            this.tablesByRelationType = new Dictionary<IRelationType, SchemaTable>();
+            this.columnsByRelationType = new Dictionary<IRelationType, SchemaColumn>();
 
             this.objectId = new SchemaColumn(this, "O", this.ObjectDbType, false, true, SchemaIndexType.None);
             this.cacheId = new SchemaColumn(this, "C", this.CacheDbType, false, false, SchemaIndexType.None);

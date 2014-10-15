@@ -122,7 +122,7 @@ namespace Allors.Adapters.Database.Sql
         {
             var exclusiveLeafClassesByObjectType = new Dictionary<IObjectType, HashSet<IClass>>();
 
-            var relations = new List<RelationType>(this.database.MetaPopulation.RelationTypes);
+            var relations = new List<IRelationType>(this.database.MetaPopulation.RelationTypes);
             relations.Sort(IMetaObject.IdComparer);
 
             foreach (var relation in relations)

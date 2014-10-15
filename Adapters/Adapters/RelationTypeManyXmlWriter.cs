@@ -33,7 +33,7 @@ namespace Allors.Adapters
         /// <summary>
         /// The <see cref="relationType"/>.
         /// </summary>
-        private readonly RelationType relationType;
+        private readonly IRelationType relationType;
 
         /// <summary>
         /// The <see cref="xmlWriter"/>.
@@ -65,7 +65,7 @@ namespace Allors.Adapters
         /// </summary>
         /// <param name="relationType">The relation type.</param>
         /// <param name="xmlWriter">The XML writer.</param>
-        public RelationTypeManyXmlWriter(RelationType relationType, XmlWriter xmlWriter)
+        public RelationTypeManyXmlWriter(IRelationType relationType, XmlWriter xmlWriter)
         {
             this.relationType = relationType;
             this.xmlWriter = xmlWriter;
