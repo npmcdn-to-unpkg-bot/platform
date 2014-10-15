@@ -41,7 +41,7 @@ namespace Allors.Meta
 
         private IComposite objectType;
 
-        protected internal IAssociationType(IRelationType relationType, Guid id)
+        public IAssociationType(IRelationType relationType, Guid id)
             : base(relationType.DefiningDomain, id)
         {
             this.relationType = relationType;
@@ -239,7 +239,7 @@ namespace Allors.Meta
         /// Gets the validation name.
         /// </summary>
         /// <value>The name of the validation.</value>
-        protected internal override string ValidationName
+        public override string ValidationName
         {
             get
             {
@@ -299,7 +299,7 @@ namespace Allors.Meta
         /// <summary>
         /// Derive the multiplicity.
         /// </summary>
-        internal void DeriveMultiplicity()
+        public void DeriveMultiplicity()
         {
             if (this.RoleType != null && this.RoleType.ObjectType != null && this.RoleType.ObjectType is IUnit)
             {
@@ -311,7 +311,7 @@ namespace Allors.Meta
         /// Validates this object.
         /// </summary>
         /// <param name="validationLog">The validation information.</param>
-        protected internal override void Validate(ValidationLog validationLog)
+        public override void Validate(ValidationLog validationLog)
         {
             if (this.ObjectType == null)
             {

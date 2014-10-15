@@ -28,7 +28,7 @@ namespace Allors.Meta
 
         private IComposite objectType;
 
-        protected internal IMethodType(IDomain domain, Guid id)
+        public IMethodType(IDomain domain, Guid id)
             : base(domain, id)
         {
             domain.OnMethodTypeCreated(this);
@@ -87,7 +87,7 @@ namespace Allors.Meta
         /// Gets the validation name.
         /// </summary>
         /// <value>The validation name.</value>
-        protected internal override string ValidationName
+        public override string ValidationName
         {
             get
             {
@@ -104,7 +104,7 @@ namespace Allors.Meta
         /// Validates the instance.
         /// </summary>
         /// <param name="validationLog">The validation.</param>
-        protected internal override void Validate(ValidationLog validationLog)
+        public override void Validate(ValidationLog validationLog)
         {
             base.Validate(validationLog);
 

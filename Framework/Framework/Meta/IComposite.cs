@@ -244,7 +244,7 @@ namespace Allors.Meta
         /// Derive direct super type derivations.
         /// </summary>
         /// <param name="directSupertypes">The direct super types.</param>
-        internal void DeriveDirectSupertypes(HashSet<IInterface> directSupertypes)
+        public void DeriveDirectSupertypes(HashSet<IInterface> directSupertypes)
         {
             directSupertypes.Clear();
             foreach (var inheritance in this.MetaPopulation.Inheritances.Where(inheritance => this.Equals(inheritance.Subtype)))
@@ -259,7 +259,7 @@ namespace Allors.Meta
         /// Derive super types.
         /// </summary>
         /// <param name="superTypes">The super types.</param>
-        internal void DeriveSupertypes(HashSet<IInterface> superTypes)
+        public void DeriveSupertypes(HashSet<IInterface> superTypes)
         {
             superTypes.Clear();
 
@@ -274,7 +274,7 @@ namespace Allors.Meta
         /// <param name="methodTypes">
         /// The method types.
         /// </param>
-        internal void DeriveMethodTypes(HashSet<IMethodType> methodTypes)
+        public void DeriveMethodTypes(HashSet<IMethodType> methodTypes)
         {
             methodTypes.Clear();
             foreach (var methodType in this.MetaPopulation.MethodTypes.Where(m => this.Equals(m.ObjectType)))
@@ -298,7 +298,7 @@ namespace Allors.Meta
         /// Derive role types.
         /// </summary>
         /// <param name="roleTypes">The role types.</param>
-        internal void DeriveRoleTypes(HashSet<IRoleType> roleTypes)
+        public void DeriveRoleTypes(HashSet<IRoleType> roleTypes)
         {
             roleTypes.Clear();
             foreach (var relationType in this.MetaPopulation.RelationTypes.Where(rel => this.Equals(rel.AssociationType.ObjectType)))
@@ -322,7 +322,7 @@ namespace Allors.Meta
         /// Derive association types.
         /// </summary>
         /// <param name="associations">The associations.</param>
-        internal void DeriveAssociationTypes(HashSet<IAssociationType> associations)
+        public void DeriveAssociationTypes(HashSet<IAssociationType> associations)
         {
             associations.Clear();
             foreach (var relationType in this.MetaPopulation.RelationTypes.Where(rel => this.Equals(rel.RoleType.ObjectType)))

@@ -55,7 +55,7 @@ namespace Allors.Meta
 
         private int? size;
 
-        internal protected IRoleType(IRelationType relationType, Guid id)
+        public IRoleType(IRelationType relationType, Guid id)
             : base(relationType.DefiningDomain, id)
         {
             this.relationType = relationType;
@@ -336,7 +336,7 @@ namespace Allors.Meta
         /// Gets the validation name.
         /// </summary>
         /// <value>The validation name.</value>
-        protected internal override string ValidationName
+        public override string ValidationName
         {
             get
             {
@@ -429,7 +429,7 @@ namespace Allors.Meta
         /// <summary>
         /// Derive multiplicity, scale and size.
         /// </summary>
-        internal void DeriveMultiplicity()
+        public void DeriveMultiplicity()
         {
             if (this.ObjectType is IUnit && this.IsMany)
             {
@@ -440,7 +440,7 @@ namespace Allors.Meta
         /// <summary>
         /// Derive multiplicity, scale and size.
         /// </summary>
-        internal void DeriveScaleAndSize()
+        public void DeriveScaleAndSize()
         {
             var unitType = this.ObjectType as IUnit;
             if (unitType != null)
@@ -498,7 +498,7 @@ namespace Allors.Meta
             }
         }
 
-        internal void DeriveSingularPropertyName()
+        public void DeriveSingularPropertyName()
         {
             this.derivedSingularPropertyName = null;
 
@@ -529,7 +529,7 @@ namespace Allors.Meta
             }
         }
 
-        internal void DerivePluralPropertyName()
+        public void DerivePluralPropertyName()
         {
             this.derivedPluralPropertyName = null;
 
@@ -564,7 +564,7 @@ namespace Allors.Meta
         /// Validates the instance.
         /// </summary>
         /// <param name="validationLog">The validation.</param>
-        protected internal void Validate(ValidationLog validationLog)
+        public void Validate(ValidationLog validationLog)
         {
             if (this.ObjectType == null)
             {

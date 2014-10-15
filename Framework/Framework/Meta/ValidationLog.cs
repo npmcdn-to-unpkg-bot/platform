@@ -51,7 +51,7 @@ namespace Allors.Meta
         /// <summary>
         /// Initializes a new instance of the <see cref="ValidationLog"/> class.
         /// </summary>
-        internal ValidationLog()
+        public ValidationLog()
         {
             this.errors = new List<ValidationError>();
 
@@ -132,7 +132,7 @@ namespace Allors.Meta
         /// Adds an id.
         /// </summary>
         /// <param name="id">The id   .</param>
-        internal void AddId(Guid id)
+        public void AddId(Guid id)
         {
             this.ids.Add(id);
         }
@@ -141,7 +141,7 @@ namespace Allors.Meta
         /// Adds the name of the object type.
         /// </summary>
         /// <param name="type">The type .</param>
-        internal void AddObjectTypeName(string type)
+        public void AddObjectTypeName(string type)
         {
             this.objectTypeNames.Add(type);
         }
@@ -150,7 +150,7 @@ namespace Allors.Meta
         /// Adds the name of the relation type.
         /// </summary>
         /// <param name="relation">The relation.</param>
-        internal void AddRelationTypeName(string relation)
+        public void AddRelationTypeName(string relation)
         {
             this.relationTypeNames.Add(relation);
         }
@@ -160,7 +160,7 @@ namespace Allors.Meta
         /// </summary>
         /// <param name="id">The id   .</param>
         /// <returns>The value indicating whether the id already exists.</returns>
-        internal bool ExistId(Guid id)
+        public bool ExistId(Guid id)
         {
             return this.ids.Contains(id);
         }
@@ -170,7 +170,7 @@ namespace Allors.Meta
         /// </summary>
         /// <param name="relationName">The name of the relation.</param>
         /// <returns>The value indicating whether the name of the relation already exists.</returns>
-        internal bool ExistRelationName(string relationName)
+        public bool ExistRelationName(string relationName)
         {
             return this.relationTypeNames.Contains(relationName);
         }
@@ -180,7 +180,7 @@ namespace Allors.Meta
         /// </summary>
         /// <param name="typeName">The short name of the type.</param>
         /// <returns>The value indicating whether the name of the type already exists.</returns>
-        internal bool ExistObjectTypeName(string typeName)
+        public bool ExistObjectTypeName(string typeName)
         {
             return this.objectTypeNames.Contains(typeName);
         }
