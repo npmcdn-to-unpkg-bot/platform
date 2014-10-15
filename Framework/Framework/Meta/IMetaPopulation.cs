@@ -43,7 +43,7 @@ namespace Allors.Meta
         private IList<IUnit> units;
         private IList<IInterface> interfaces;
         private IList<IClass> classes;
-        private IList<Inheritance> inheritances;
+        private IList<IInheritance> inheritances;
         private IList<IRelationType> relationTypes;
         private IList<IAssociationType> associationTypes;
         private IList<IRoleType> roleTypes;
@@ -58,7 +58,7 @@ namespace Allors.Meta
             this.units = new List<IUnit>();
             this.interfaces = new List<IInterface>();
             this.classes = new List<IClass>();
-            this.inheritances = new List<Inheritance>();
+            this.inheritances = new List<IInheritance>();
             this.relationTypes = new List<IRelationType>();
             this.associationTypes = new List<IAssociationType>();
             this.roleTypes = new List<IRoleType>();
@@ -107,7 +107,7 @@ namespace Allors.Meta
             }
         }
 
-        public IEnumerable<Inheritance> Inheritances
+        public IEnumerable<IInheritance> Inheritances
         {
             get
             {
@@ -235,16 +235,16 @@ namespace Allors.Meta
             }
 
 
-            var inheritancesBySubtype = new Dictionary<Composite, List<Inheritance>>();
+            var inheritancesBySubtype = new Dictionary<Composite, List<IInheritance>>();
             foreach (var inheritance in this.Inheritances)
             {
                 var subtype = inheritance.Subtype;
                 if (subtype != null)
                 {
-                    List<Inheritance> inheritanceList;
+                    List<IInheritance> inheritanceList;
                     if (!inheritancesBySubtype.TryGetValue(subtype, out inheritanceList))
                     {
-                        inheritanceList = new List<Inheritance>();
+                        inheritanceList = new List<IInheritance>();
                         inheritancesBySubtype[subtype] = inheritanceList;
                     }
 
@@ -444,7 +444,7 @@ namespace Allors.Meta
             this.Stale();
         }
 
-        internal void OnInheritanceCreated(Inheritance inheritance)
+        internal void OnInheritanceCreated(IInheritance inheritance)
         {
             this.inheritances.Add(inheritance);
             this.metaObjectById.Add(inheritance.Id, inheritance);
@@ -489,7 +489,7 @@ namespace Allors.Meta
             this.isStale = true;
         }
 
-        private bool HasCycle(Composite subtype, HashSet<IInterface> supertypes, Dictionary<Composite, List<Inheritance>> inheritancesBySubtype)
+        private bool HasCycle(Composite subtype, HashSet<IInterface> supertypes, Dictionary<Composite, List<IInheritance>> inheritancesBySubtype)
         {
             foreach (var inheritance in inheritancesBySubtype[subtype])
             {
@@ -506,7 +506,7 @@ namespace Allors.Meta
             return false;
         }
 
-        private bool HasCycle(Composite originalSubtype, IInterface currentSupertype, HashSet<IInterface> supertypes, Dictionary<Composite, List<Inheritance>> inheritancesBySubtype)
+        private bool HasCycle(Composite originalSubtype, IInterface currentSupertype, HashSet<IInterface> supertypes, Dictionary<Composite, List<IInheritance>> inheritancesBySubtype)
         {
             if (supertypes.Contains(originalSubtype))
             {
@@ -517,7 +517,7 @@ namespace Allors.Meta
             {
                 supertypes.Add(currentSupertype);
 
-                List<Inheritance> currentSuperInheritances;
+                List<IInheritance> currentSuperInheritances;
                 if (inheritancesBySubtype.TryGetValue(currentSupertype, out currentSuperInheritances))
                 {
                     foreach (var inheritance in currentSuperInheritances)

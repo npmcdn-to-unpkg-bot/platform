@@ -77,6 +77,15 @@
     <Compile Include="..\..\Core\Meta\Core\Generation\StringTemplate.cs">
       <Link>Core\Generation\StringTemplate.cs</Link>
     </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Inheritance.cs">
+      <Link>Core\Inheritance.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\InheritanceBuilder.cs">
+      <Link>Core\InheritanceBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\InheritanceBuilder.v.cs">
+      <Link>Core\InheritanceBuilder.v.cs</Link>
+    </Compile>
     <Compile Include="..\..\Core\Meta\Core\Interface.cs">
       <Link>Core\Interface.cs</Link>
     </Compile>

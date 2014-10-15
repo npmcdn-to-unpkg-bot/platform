@@ -61,9 +61,7 @@
     <Compile Include="Meta\Composite.cs" />
     <Compile Include="Meta\IDomain.cs" />
     <Compile Include="Meta\IDomainDefinedObject.cs" />
-    <Compile Include="Meta\Inheritance.cs" />
-    <Compile Include="Meta\InheritanceBuilder.cs" />
-    <Compile Include="Meta\InheritanceBuilder.v.cs" />
+    <Compile Include="Meta\IInheritance.cs" />
     <Compile Include="Meta\IInterface.cs" />
     <Compile Include="Meta\LazySet.cs" />
     <Compile Include="Meta\IMetaObject.cs" />

@@ -69,10 +69,10 @@
       <FileName>Meta\IInterface.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Allors.Meta.Inheritance" Collapsed="true">
+  <Class Name="Allors.Meta.IInheritance" Collapsed="true">
     <Position X="5.75" Y="4" Width="1.5" />
     <Members>
-      <Method Name="Inheritance" Hidden="true" />
+      <Method Name="IInheritance" Hidden="true" />
       <Field Name="subtype" Hidden="true" />
       <Field Name="supertype" Hidden="true" />
       <Method Name="ToString" Hidden="true" />
@@ -92,7 +92,7 @@
     </AssociationLine>
     <TypeIdentifier>
       <HashCode>ABAAAAAAAACAAAAEAACAAAAAAAAAAAAAEAAAABAQAAA=</HashCode>
-      <FileName>Meta\Inheritance.cs</FileName>
+      <FileName>Meta\IInheritance.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Subtype" />
