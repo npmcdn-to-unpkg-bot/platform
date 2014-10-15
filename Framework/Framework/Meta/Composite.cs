@@ -32,7 +32,7 @@ namespace Allors.Meta
 
         private LazySet<IAssociationType> derivedAssociationTypes;
         private LazySet<IRoleType> derivedRoleTypes;
-        private LazySet<MethodType> derivedMethodTypes;
+        private LazySet<IMethodType> derivedMethodTypes;
 
         protected Composite(IDomain domain, Guid id)
             : base(domain, id)
@@ -197,7 +197,7 @@ namespace Allors.Meta
         /// Gets the method types.
         /// </summary>
         /// <value>The method types.</value>
-        public IEnumerable<MethodType> MethodTypes
+        public IEnumerable<IMethodType> MethodTypes
         {
             get
             {
@@ -274,7 +274,7 @@ namespace Allors.Meta
         /// <param name="methodTypes">
         /// The method types.
         /// </param>
-        internal void DeriveMethodTypes(HashSet<MethodType> methodTypes)
+        internal void DeriveMethodTypes(HashSet<IMethodType> methodTypes)
         {
             methodTypes.Clear();
             foreach (var methodType in this.MetaPopulation.MethodTypes.Where(m => this.Equals(m.ObjectType)))
@@ -291,7 +291,7 @@ namespace Allors.Meta
                 }
             }
 
-            this.derivedMethodTypes = new LazySet<MethodType>(methodTypes);
+            this.derivedMethodTypes = new LazySet<IMethodType>(methodTypes);
         }
 
         /// <summary>

@@ -47,7 +47,7 @@ namespace Allors.Meta
         private IList<IRelationType> relationTypes;
         private IList<IAssociationType> associationTypes;
         private IList<IRoleType> roleTypes;
-        private IList<MethodType> methodTypes;
+        private IList<IMethodType> methodTypes;
         
         public IMetaPopulation()
         {
@@ -62,7 +62,7 @@ namespace Allors.Meta
             this.relationTypes = new List<IRelationType>();
             this.associationTypes = new List<IAssociationType>();
             this.roleTypes = new List<IRoleType>();
-            this.methodTypes = new List<MethodType>();
+            this.methodTypes = new List<IMethodType>();
 
             this.metaObjectById = new Dictionary<Guid, IMetaObject>();
         }
@@ -139,7 +139,7 @@ namespace Allors.Meta
             }
         }
 
-        public IEnumerable<MethodType> MethodTypes
+        public IEnumerable<IMethodType> MethodTypes
         {
             get
             {
@@ -395,7 +395,7 @@ namespace Allors.Meta
                         relationType.RoleType.DerivePluralPropertyName();
                     }
 
-                    var sharedMethodTypeList = new HashSet<MethodType>();
+                    var sharedMethodTypeList = new HashSet<IMethodType>();
 
                     // MethodTypes
                     foreach (var type in this.derivedComposites)
@@ -476,7 +476,7 @@ namespace Allors.Meta
             this.Stale();
         }
 
-        internal void OnMethodTypeCreated(MethodType methodType)
+        internal void OnMethodTypeCreated(IMethodType methodType)
         {
             this.methodTypes.Add(methodType);
             this.metaObjectById.Add(methodType.Id, methodType);

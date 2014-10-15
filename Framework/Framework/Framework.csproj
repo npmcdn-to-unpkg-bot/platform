@@ -66,9 +66,7 @@
     <Compile Include="Meta\LazySet.cs" />
     <Compile Include="Meta\IMetaObject.cs" />
     <Compile Include="Meta\IMetaPopulation.cs" />
-    <Compile Include="Meta\MethodType.cs" />
-    <Compile Include="Meta\MethodTypeBuilder.cs" />
-    <Compile Include="Meta\MethodTypeBuilder.v.cs" />
+    <Compile Include="Meta\IMethodType.cs" />
     <Compile Include="Meta\IObjectType.cs" />
     <Compile Include="Meta\OperandType.cs" />
     <Compile Include="Meta\PropertyType.cs" />

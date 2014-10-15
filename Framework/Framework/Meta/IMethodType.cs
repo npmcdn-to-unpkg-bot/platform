@@ -22,13 +22,13 @@ namespace Allors.Meta
 {
     using System;
 
-    public partial class MethodType : IDomainDefinedObject, OperandType
+    public partial class IMethodType : IDomainDefinedObject, OperandType
     {
         private string name;
 
         private Composite objectType;
 
-        internal MethodType(IDomain domain, Guid id)
+        protected internal IMethodType(IDomain domain, Guid id)
             : base(domain, id)
         {
             domain.OnMethodTypeCreated(this);

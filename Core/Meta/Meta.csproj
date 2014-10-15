@@ -49,6 +49,9 @@
     <Compile Include="Core\Inheritance.cs" />
     <Compile Include="Core\InheritanceBuilder.cs" />
     <Compile Include="Core\InheritanceBuilder.v.cs" />
+    <Compile Include="Core\MethodType.cs" />
+    <Compile Include="Core\MethodTypeBuilder.cs" />
+    <Compile Include="Core\MethodTypeBuilder.v.cs" />
     <Compile Include="Core\RelationType.cs" />
     <Compile Include="Core\RelationTypeBuilder.cs" />
     <Compile Include="Core\RelationTypeBuilder.v.cs" />

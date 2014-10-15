@@ -98,6 +98,15 @@
     <Compile Include="..\..\Core\Meta\Core\MetaPopulation.cs">
       <Link>Core\MetaPopulation.cs</Link>
     </Compile>
+    <Compile Include="..\..\Core\Meta\Core\MethodType.cs">
+      <Link>Core\MethodType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\MethodTypeBuilder.cs">
+      <Link>Core\MethodTypeBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\MethodTypeBuilder.v.cs">
+      <Link>Core\MethodTypeBuilder.v.cs</Link>
+    </Compile>
     <Compile Include="..\..\Core\Meta\Core\RelationType.cs">
       <Link>Core\RelationType.cs</Link>
     </Compile>
