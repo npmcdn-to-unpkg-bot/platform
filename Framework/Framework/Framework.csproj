@@ -64,9 +64,7 @@
     <Compile Include="Meta\Inheritance.cs" />
     <Compile Include="Meta\InheritanceBuilder.cs" />
     <Compile Include="Meta\InheritanceBuilder.v.cs" />
-    <Compile Include="Meta\Interface.cs" />
-    <Compile Include="Meta\InterfaceBuilder.cs" />
-    <Compile Include="Meta\InterfaceBuilder.v.cs" />
+    <Compile Include="Meta\IInterface.cs" />
     <Compile Include="Meta\LazySet.cs" />
     <Compile Include="Meta\IMetaObject.cs" />
     <Compile Include="Meta\IMetaPopulation.cs" />
