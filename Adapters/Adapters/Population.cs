@@ -223,7 +223,7 @@ namespace Allors.Adapters
             return normalizedUnit;
         }
 
-        public bool ContainsConcreteClass(Composite objectType, IObjectType concreteClass)
+        public bool ContainsConcreteClass(IComposite objectType, IObjectType concreteClass)
         {
             object concreteClassOrClasses;
             if (!this.concreteClassesByObjectType.TryGetValue(objectType, out concreteClassOrClasses))
@@ -256,7 +256,7 @@ namespace Allors.Adapters
                 throw new ArgumentException(strategy.ObjectType + " is not a valid association object type for " + relationType + ".");
             }
 
-            if (relationType.ObjectType is Composite)
+            if (relationType.ObjectType is IComposite)
             {
                 throw new ArgumentException(relationType.ObjectType + " on relationType " + relationType + " is not a unit type.");
             }
@@ -304,7 +304,7 @@ namespace Allors.Adapters
                     throw new ArgumentException(roleType + " on object " + strategy + " is removed.");
                 }
 
-                var compositeType = roleType.ObjectType as Composite;
+                var compositeType = roleType.ObjectType as IComposite;
 
                 if (compositeType == null)
                 {

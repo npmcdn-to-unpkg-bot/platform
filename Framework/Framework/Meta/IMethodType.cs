@@ -22,11 +22,11 @@ namespace Allors.Meta
 {
     using System;
 
-    public partial class IMethodType : IDomainDefinedObject, OperandType
+    public partial class IMethodType : IDomainDefinedObject, IOperandType
     {
         private string name;
 
-        private Composite objectType;
+        private IComposite objectType;
 
         protected internal IMethodType(IDomain domain, Guid id)
             : base(domain, id)
@@ -57,7 +57,7 @@ namespace Allors.Meta
             }
         }
 
-        public Composite ObjectType
+        public IComposite ObjectType
         {
             get
             {

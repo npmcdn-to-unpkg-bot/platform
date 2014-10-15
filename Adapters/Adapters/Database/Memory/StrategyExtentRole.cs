@@ -61,9 +61,9 @@ namespace Allors.Adapters.Database.Memory
             }
         }
 
-        public override Composite ObjectType
+        public override IComposite ObjectType
         {
-            get { return (Composite)this.roleType.ObjectType; }
+            get { return (IComposite)this.roleType.ObjectType; }
         }
         
         internal override Session Session

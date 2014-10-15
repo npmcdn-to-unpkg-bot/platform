@@ -225,7 +225,7 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public ICompositePredicate AddInstanceof(Composite type)
+        public ICompositePredicate AddInstanceof(IComposite type)
         {
             this.CheckUnarity();
             this.extent.FlushCache();
@@ -233,7 +233,7 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public ICompositePredicate AddInstanceof(IRoleType role, Composite type)
+        public ICompositePredicate AddInstanceof(IRoleType role, IComposite type)
         {
             this.CheckUnarity();
             this.extent.FlushCache();
@@ -241,7 +241,7 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public ICompositePredicate AddInstanceof(IAssociationType association, Composite type)
+        public ICompositePredicate AddInstanceof(IAssociationType association, IComposite type)
         {
             this.CheckUnarity();
             this.extent.FlushCache();

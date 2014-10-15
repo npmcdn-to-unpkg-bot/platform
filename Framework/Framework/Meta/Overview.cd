@@ -46,7 +46,7 @@
       <FileName>Meta\IClass.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Allors.Meta.Composite" Collapsed="true">
+  <Class Name="Allors.Meta.IComposite" Collapsed="true">
     <Position X="3.75" Y="6" Width="1.5" />
     <Compartments>
       <Compartment Name="Methods" Collapsed="true" />
@@ -54,7 +54,7 @@
     </Compartments>
     <TypeIdentifier>
       <HashCode>AgJAhgAAAAEEAAAgKSABBIACwQkAEABAARBAAAABAEE=</HashCode>
-      <FileName>Meta\Composite.cs</FileName>
+      <FileName>Meta\IComposite.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Allors.Meta.IInterface" Collapsed="true">
@@ -82,7 +82,7 @@
     <Compartments>
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
-    <AssociationLine Name="Subtype" Type="Allors.Meta.Composite" FixedFromPoint="true" FixedToPoint="true">
+    <AssociationLine Name="Subtype" Type="Allors.Meta.IComposite" FixedFromPoint="true" FixedToPoint="true">
       <Path>
         <Point X="5.75" Y="4.312" />
         <Point X="5.5" Y="4.312" />
@@ -286,19 +286,19 @@
       <Property Name="DefiningDomain" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="Allors.Meta.PropertyType" Collapsed="true">
+  <Class Name="Allors.Meta.IPropertyType" Collapsed="true">
     <Position X="9.75" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACEAAAAAAAAABAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Meta\PropertyType.cs</FileName>
+      <FileName>Meta\IPropertyType.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Interface Name="Allors.Meta.OperandType" Collapsed="true">
+  <Interface Name="Allors.Meta.IOperandType" Collapsed="true">
     <Position X="10.5" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Meta\OperandType.cs</FileName>
+      <FileName>Meta\IOperandType.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Font Name="Segoe UI" Size="9" />

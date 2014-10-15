@@ -499,7 +499,7 @@ namespace Allors.Adapters.Workspace.Memory
             return objects.ToArray();
         }
 
-        public virtual Allors.Extent LocalExtent(Composite objectType)
+        public virtual Allors.Extent LocalExtent(IComposite objectType)
         {
             return new ExtentObject(this, objectType);
         }
@@ -708,7 +708,7 @@ namespace Allors.Adapters.Workspace.Memory
                         this.diffRollbackUnitRoleByAssociationByRoleType[roleType] = new Dictionary<Strategy, object>(unitRoleByStrategy);
                     }
 
-                    // Composite
+                    // IComposite
                     this.originalRollbackCompositeRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<Strategy, Strategy>>();
                     foreach (var dictionaryEntry in this.originalCompositeRoleByAssociationByRoleType)
                     {
@@ -858,7 +858,7 @@ namespace Allors.Adapters.Workspace.Memory
                         }
                     }
  
-                    // Composite
+                    // IComposite
                     this.originalCompositeRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<Strategy, Strategy>>();
                     if (this.originalRollbackCompositeRoleByAssociationByRoleType != null)
                     {
@@ -1065,7 +1065,7 @@ namespace Allors.Adapters.Workspace.Memory
             throw new NotSupportedException();
         }
 
-        public virtual Allors.Extent Extent(Composite objectType)
+        public virtual Allors.Extent Extent(IComposite objectType)
         {
             throw new NotSupportedException();
         }

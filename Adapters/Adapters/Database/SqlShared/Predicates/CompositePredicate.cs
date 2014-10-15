@@ -99,7 +99,7 @@ namespace Allors.Adapters.Database.Sql
             }
         }
 
-        public static IClass[] GetConcreteSubClasses(Composite type)
+        public static IClass[] GetConcreteSubClasses(IComposite type)
         {
             var @interface = type as IInterface;
             if (@interface != null)
@@ -253,21 +253,21 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public ICompositePredicate AddInstanceof(Composite type)
+        public ICompositePredicate AddInstanceof(IComposite type)
         {
             this.Extent.FlushCache();
             this.Filters.Add(new InstanceOf(type, GetConcreteSubClasses(type)));
             return this;
         }
 
-        public ICompositePredicate AddInstanceof(IRoleType role, Composite type)
+        public ICompositePredicate AddInstanceof(IRoleType role, IComposite type)
         {
             this.Extent.FlushCache();
             this.Filters.Add(new RoleInstanceof(this.Extent, role, type, GetConcreteSubClasses(type)));
             return this;
         }
 
-        public ICompositePredicate AddInstanceof(IAssociationType association, Composite type)
+        public ICompositePredicate AddInstanceof(IAssociationType association, IComposite type)
         {
             this.Extent.FlushCache();
             this.Filters.Add(new AssociationInstanceOf(this.Extent, association, type, GetConcreteSubClasses(type)));

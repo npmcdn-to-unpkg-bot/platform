@@ -36,9 +36,9 @@ namespace Allors.Adapters.Workspace.Memory
             this.roleType = roleType;
         }
 
-        public override Composite ObjectType
+        public override IComposite ObjectType
         {
-            get { return (Composite)this.roleType.ObjectType; }
+            get { return (IComposite)this.roleType.ObjectType; }
         }
         
         internal override WorkspaceSession Session

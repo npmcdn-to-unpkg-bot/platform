@@ -25,11 +25,11 @@ namespace Allors.Meta
     using System.Collections.Generic;
     using System.Linq;
 
-    public partial class IInterface : Composite
+    public partial class IInterface : IComposite
     {
-        private LazySet<Composite> derivedDirectSubtypes;
+        private LazySet<IComposite> derivedDirectSubtypes;
 
-        private LazySet<Composite> derivedSubtypes;
+        private LazySet<IComposite> derivedSubtypes;
 
         private LazySet<IClass> derivedSubclasses;
 
@@ -90,7 +90,7 @@ namespace Allors.Meta
         /// Gets the sub types.
         /// </summary>
         /// <value>The super types.</value>
-        public IEnumerable<Composite> Subtypes
+        public IEnumerable<IComposite> Subtypes
         {
             get
             {
@@ -140,7 +140,7 @@ namespace Allors.Meta
         /// Derive direct sub type derivations.
         /// </summary>
         /// <param name="directSubtypes">The direct super types.</param>
-        internal void DeriveDirectSubtypes(HashSet<Composite> directSubtypes)
+        internal void DeriveDirectSubtypes(HashSet<IComposite> directSubtypes)
         {
             directSubtypes.Clear();
             foreach (var inheritance in this.MetaPopulation.Inheritances.Where(inheritance => this.Equals(inheritance.Supertype)))
@@ -148,7 +148,7 @@ namespace Allors.Meta
                 directSubtypes.Add(inheritance.Subtype);
             }
 
-            this.derivedDirectSubtypes = new LazySet<Composite>(directSubtypes);
+            this.derivedDirectSubtypes = new LazySet<IComposite>(directSubtypes);
         }
 
         /// <summary>
@@ -173,12 +173,12 @@ namespace Allors.Meta
         /// Derive sub types.
         /// </summary>
         /// <param name="subTypes">The super types.</param>
-        internal void DeriveSubtypes(HashSet<Composite> subTypes)
+        internal void DeriveSubtypes(HashSet<IComposite> subTypes)
         {
             subTypes.Clear();
             this.DeriveSubtypesRecursively(this, subTypes);
 
-            this.derivedSubtypes = new LazySet<Composite>(subTypes);
+            this.derivedSubtypes = new LazySet<IComposite>(subTypes);
         }
 
         /// <summary>
@@ -202,7 +202,7 @@ namespace Allors.Meta
         /// </summary>
         /// <param name="type">The type .</param>
         /// <param name="subTypes">The super types.</param>
-        private void DeriveSubtypesRecursively(IObjectType type, HashSet<Composite> subTypes)
+        private void DeriveSubtypesRecursively(IObjectType type, HashSet<IComposite> subTypes)
         {
             foreach (var directSubtype in this.derivedDirectSubtypes)
             {

@@ -60,7 +60,7 @@ namespace Allors.Adapters.Database.Memory
             }
         }
 
-        public override Composite ObjectType
+        public override IComposite ObjectType
         {
             get { return this.associationType.ObjectType; }
         }

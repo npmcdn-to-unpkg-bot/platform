@@ -138,7 +138,7 @@ namespace Allors.Adapters
         /// <param name="secondObject">The second object.</param>
         public static void ValidateRoleBetween(IRoleType role, object firstObject, object secondObject)
         {
-            if (role.ObjectType is Composite)
+            if (role.ObjectType is IComposite)
             {
                 throw new ArgumentException("AddBetween() can only be used with unit types.");
             }
@@ -229,7 +229,7 @@ namespace Allors.Adapters
             }
 
             var compareRole = compareObject as IRoleType;
-            if (compareRole != null && compareRole.ObjectType is Composite)
+            if (compareRole != null && compareRole.ObjectType is IComposite)
             {
                 throw new ArgumentException("AddRoleEqual() for composites can only be used with objects (not other roles).");
             }
@@ -253,7 +253,7 @@ namespace Allors.Adapters
         /// <param name="unit">The unit .</param>
         public static void ValidateRoleGreaterThan(IRoleType role, object unit)
         {
-            if (role.ObjectType is Composite)
+            if (role.ObjectType is IComposite)
             {
                 throw new ArgumentException("AddGreaterThan() can only be used with unit types.");
             }
@@ -264,7 +264,7 @@ namespace Allors.Adapters
             }
 
             var compareRole = unit as IRoleType;
-            if (compareRole != null && compareRole.ObjectType is Composite)
+            if (compareRole != null && compareRole.ObjectType is IComposite)
             {
                 throw new ArgumentException("AAddGreaterThan() can only be used with roles having unit types.");
             }
@@ -297,7 +297,7 @@ namespace Allors.Adapters
         /// <param name="unit">The unit .</param>
         public static void ValidateRoleLessThan(IRoleType role, object unit)
         {
-            if (role.ObjectType is Composite)
+            if (role.ObjectType is IComposite)
             {
                 throw new ArgumentException("AddLessThan() can only be used with unit types.");
             }
@@ -308,7 +308,7 @@ namespace Allors.Adapters
             }
 
             var compareRole = unit as IRoleType;
-            if (compareRole != null && compareRole.ObjectType is Composite)
+            if (compareRole != null && compareRole.ObjectType is IComposite)
             {
                 throw new ArgumentException("AddLessThan() can only be used with roles having unit types.");
             }

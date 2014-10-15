@@ -520,7 +520,7 @@ namespace Allors.Adapters.Workspace.Memory
 
         internal virtual void RoleUnitChecks(IRoleType relationType)
         {
-            if (relationType.ObjectType is Composite)
+            if (relationType.ObjectType is IComposite)
             {
                 throw new ArgumentException(relationType.ObjectType + " on relationType " + relationType + " is not a unit type.");
             }
@@ -542,7 +542,7 @@ namespace Allors.Adapters.Workspace.Memory
                     throw new ArgumentException(roleType + " on object " + this + " is removed.");
                 }
 
-                var compositeType = roleType.ObjectType as Composite;
+                var compositeType = roleType.ObjectType as IComposite;
 
                 if (compositeType == null)
                 {
@@ -730,7 +730,7 @@ namespace Allors.Adapters.Workspace.Memory
                 throw new ArgumentException(roleType + " on object " + this + " is removed.");
             }
 
-            var compositeType = roleType.ObjectType as Composite;
+            var compositeType = roleType.ObjectType as IComposite;
 
             if (compositeType == null)
             {

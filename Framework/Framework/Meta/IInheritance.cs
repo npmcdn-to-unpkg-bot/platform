@@ -29,7 +29,7 @@ namespace Allors.Meta
     /// </summary>
     public partial class IInheritance : IDomainDefinedObject
     {
-        private Composite subtype;
+        private IComposite subtype;
 
         private IInterface supertype;
 
@@ -39,7 +39,7 @@ namespace Allors.Meta
             domain.OnInheritanceCreated(this);
         }
 
-        public Composite Subtype
+        public IComposite Subtype
         {
             get
             {

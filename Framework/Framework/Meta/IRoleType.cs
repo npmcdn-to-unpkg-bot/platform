@@ -28,7 +28,7 @@ namespace Allors.Meta
     /// This is also called the 'passive' side.
     /// RoleTypes can have composite and unit <see cref="ObjectType"/>s.
     /// </summary>
-    public partial class IRoleType : PropertyType, IComparable
+    public partial class IRoleType : IPropertyType, IComparable
     {
         /// <summary>
         /// The maximum size value.

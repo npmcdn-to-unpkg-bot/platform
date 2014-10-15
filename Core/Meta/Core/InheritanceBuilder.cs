@@ -24,7 +24,7 @@ namespace Allors.Meta
 
     public partial class InheritanceBuilder : Builder<Inheritance>
     {
-        private Composite subtype;
+        private IComposite subtype;
         private IInterface supertype;
 
         public InheritanceBuilder(IDomain domain, Guid id)
@@ -32,7 +32,7 @@ namespace Allors.Meta
         {
         }
 
-        public InheritanceBuilder WithSubtype(Composite value)
+        public InheritanceBuilder WithSubtype(IComposite value)
         {
             this.subtype = value;
             return this;

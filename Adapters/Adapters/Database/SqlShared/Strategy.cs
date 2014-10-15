@@ -121,7 +121,7 @@ namespace Allors.Adapters.Database.Sql
 
             foreach (var roleType in this.ObjectType.RoleTypes)
             {
-                if (roleType.ObjectType is Composite)
+                if (roleType.ObjectType is IComposite)
                 {
                     this.RemoveRole(roleType);
                 }

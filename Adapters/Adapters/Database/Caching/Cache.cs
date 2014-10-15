@@ -34,7 +34,7 @@ namespace Allors.Adapters.Database.Caching
         private readonly Dictionary<ObjectId, CachedObject> cachedObjectByObjectId;
         private readonly Dictionary<ObjectId, IObjectType> objectTypeByObjectId;
 
-        public Cache(Composite[] transientObjectTypes)
+        public Cache(IComposite[] transientObjectTypes)
         {
             this.cachedObjectByObjectId = new Dictionary<ObjectId, CachedObject>();
             this.objectTypeByObjectId = new Dictionary<ObjectId, IObjectType>();

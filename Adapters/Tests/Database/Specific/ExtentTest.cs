@@ -16583,7 +16583,7 @@ namespace Allors.Adapters.Special
 
         // IDatabaseSession.Extent for Repositories and
         // IWorkspaceSession.WorkspaceExtent for Workspaces.
-        protected virtual Extent LocalExtent(Composite objectType)
+        protected virtual Extent LocalExtent(IComposite objectType)
         {
             return this.Session.Extent(objectType);
         }

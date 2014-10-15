@@ -27,9 +27,9 @@ namespace Allors.Adapters.Workspace.Memory
     internal sealed class RoleInstanceof : Predicate
     {
         private readonly IRoleType roleType;
-        private readonly Composite objectType;
+        private readonly IComposite objectType;
 
-        internal RoleInstanceof(Extent extent, IRoleType roleType, Composite objectType)
+        internal RoleInstanceof(Extent extent, IRoleType roleType, IComposite objectType)
         {
             extent.CheckForRoleType(roleType);
             CompositePredicateAssertions.ValidateRoleInstanceOf(roleType, objectType);

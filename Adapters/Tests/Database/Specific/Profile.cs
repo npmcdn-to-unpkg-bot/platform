@@ -79,7 +79,7 @@ namespace Allors.Adapters.Special
                         {
                             this.CacheFactory = new CacheFactory
                                                     {
-                                                        TransientObjectTypes = this.database.ObjectFactory.MetaPopulation.Classes.Cast<Composite>().ToArray(),
+                                                        TransientObjectTypes = this.database.ObjectFactory.MetaPopulation.Classes.Cast<IComposite>().ToArray(),
                                                     };
                             this.Init();
                         });

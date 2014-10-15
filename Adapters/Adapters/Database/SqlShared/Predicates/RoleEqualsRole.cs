@@ -49,8 +49,8 @@ namespace Allors.Adapters.Database.Sql
             }
             else
             {
-                var roleCompositeType = this.role.ObjectType as Composite;
-                var equalsRoleCompositeType = this.equalsRole.ObjectType as Composite;
+                var roleCompositeType = this.role.ObjectType as IComposite;
+                var equalsRoleCompositeType = this.equalsRole.ObjectType as IComposite;
 
                 if (roleCompositeType != null && roleCompositeType.ExclusiveLeafClass != null && 
                     equalsRoleCompositeType != null && equalsRoleCompositeType.ExclusiveLeafClass != null)

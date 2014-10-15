@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="OperandType.cs" company="Allors bvba">
+// <copyright file="IOperandType.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -22,7 +22,7 @@ namespace Allors.Meta
 {
     using System;
 
-    public partial interface OperandType
+    public partial interface IOperandType
     {
         Guid Id { get; }
 

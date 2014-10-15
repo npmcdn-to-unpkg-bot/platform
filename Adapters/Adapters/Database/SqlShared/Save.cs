@@ -188,7 +188,7 @@ namespace Allors.Adapters.Database.Sql
                             else
                             {
                                 // role.Many
-                                var compositeType = (Composite)roleType.ObjectType;
+                                var compositeType = (IComposite)roleType.ObjectType;
                                 sql += "SELECT " + this.database.Schema.Column(associationType) + " As " + this.database.Schema.AssociationId + ", " + this.database.Schema.ObjectId + " As " + this.database.Schema.RoleId + "\n";
                                 sql += "FROM " + this.database.Schema.Table(compositeType.ExclusiveLeafClass) + "\n";
                                 sql += "WHERE " + this.database.Schema.Column(associationType) + " IS NOT NULL\n";

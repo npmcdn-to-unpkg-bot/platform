@@ -88,7 +88,7 @@ namespace Allors.Meta
         {
             get
             {
-                return this is Composite;
+                return this is IComposite;
             }
         }
 

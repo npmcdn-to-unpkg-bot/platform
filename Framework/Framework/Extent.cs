@@ -100,7 +100,7 @@ namespace Allors
         /// Gets the object type of this extent.
         /// </summary>
         /// <value>The type of the Extent.</value>
-        public abstract Composite ObjectType { get; }
+        public abstract IComposite ObjectType { get; }
 
         /// <summary>
         /// Gets the <see cref="IObject"/> at the specified index.
@@ -373,7 +373,7 @@ namespace Allors
             /// Gets the object type of this extent.
             /// </summary>
             /// <value>The type of the Extent.</value>
-            public override Composite ObjectType
+            public override IComposite ObjectType
             {
                 get { return null; }
             }

@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="Composite.cs" company="Allors bvba">
+// <copyright file="IComposite.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -25,7 +25,7 @@ namespace Allors.Meta
     using System.Collections.Generic;
     using System.Linq;
     
-    public abstract partial class Composite : IObjectType
+    public abstract partial class IComposite : IObjectType
     {
         private LazySet<IInterface> derivedDirectSupertypes;
         private LazySet<IInterface> derivedSupertypes;
@@ -34,7 +34,7 @@ namespace Allors.Meta
         private LazySet<IRoleType> derivedRoleTypes;
         private LazySet<IMethodType> derivedMethodTypes;
 
-        protected Composite(IDomain domain, Guid id)
+        protected IComposite(IDomain domain, Guid id)
             : base(domain, id)
         {
         }

@@ -84,7 +84,7 @@ namespace Allors.Adapters.Database.Sql
             }
         }
 
-        public override Composite ObjectType
+        public override IComposite ObjectType
         {
             get
             {

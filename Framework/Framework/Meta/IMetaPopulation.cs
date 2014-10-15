@@ -32,7 +32,7 @@ namespace Allors.Meta
     {
         private readonly Dictionary<Guid, IMetaObject> metaObjectById;
 
-        private Composite[] derivedComposites;
+        private IComposite[] derivedComposites;
 
         private bool isLocked;
 
@@ -147,7 +147,7 @@ namespace Allors.Meta
             }
         }
 
-        public IEnumerable<Composite> Composites
+        public IEnumerable<IComposite> Composites
         {
             get
             {
@@ -235,7 +235,7 @@ namespace Allors.Meta
             }
 
 
-            var inheritancesBySubtype = new Dictionary<Composite, List<IInheritance>>();
+            var inheritancesBySubtype = new Dictionary<IComposite, List<IInheritance>>();
             foreach (var inheritance in this.Inheritances)
             {
                 var subtype = inheritance.Subtype;
@@ -259,7 +259,7 @@ namespace Allors.Meta
                 if (this.HasCycle(subtype, supertypes, inheritancesBySubtype))
                 {
                     var message = subtype.ValidationName + " has a cycle in its inheritance hierarchy";
-                    log.AddError(message, subtype, ValidationKind.Cyclic, "Composite.Supertypes");
+                    log.AddError(message, subtype, ValidationKind.Cyclic, "IComposite.Supertypes");
                 }
             }
 
@@ -309,7 +309,7 @@ namespace Allors.Meta
                     this.isDeriving = true;
 
                     var sharedDomains = new HashSet<IDomain>();
-                    var sharedCompositeTypes = new HashSet<Composite>();
+                    var sharedCompositeTypes = new HashSet<IComposite>();
                     var sharedInterfaces = new HashSet<IInterface>();
                     var sharedClasses = new HashSet<IClass>();
                     var sharedAssociationTypes = new HashSet<IAssociationType>();
@@ -321,8 +321,8 @@ namespace Allors.Meta
                         domain.DeriveSuperdomains(sharedDomains);
                     }
 
-                    // Unit & Composite ObjectTypes
-                    var compositeTypes = new List<Composite>(this.Interfaces);
+                    // Unit & IComposite ObjectTypes
+                    var compositeTypes = new List<IComposite>(this.Interfaces);
                     compositeTypes.AddRange(this.Classes);
                     this.derivedComposites = compositeTypes.ToArray();
 
@@ -489,7 +489,7 @@ namespace Allors.Meta
             this.isStale = true;
         }
 
-        private bool HasCycle(Composite subtype, HashSet<IInterface> supertypes, Dictionary<Composite, List<IInheritance>> inheritancesBySubtype)
+        private bool HasCycle(IComposite subtype, HashSet<IInterface> supertypes, Dictionary<IComposite, List<IInheritance>> inheritancesBySubtype)
         {
             foreach (var inheritance in inheritancesBySubtype[subtype])
             {
@@ -506,7 +506,7 @@ namespace Allors.Meta
             return false;
         }
 
-        private bool HasCycle(Composite originalSubtype, IInterface currentSupertype, HashSet<IInterface> supertypes, Dictionary<Composite, List<IInheritance>> inheritancesBySubtype)
+        private bool HasCycle(IComposite originalSubtype, IInterface currentSupertype, HashSet<IInterface> supertypes, Dictionary<IComposite, List<IInheritance>> inheritancesBySubtype)
         {
             if (supertypes.Contains(originalSubtype))
             {

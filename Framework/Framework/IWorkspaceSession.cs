@@ -81,6 +81,6 @@ namespace Allors
         /// <returns>
         /// The local extent.
         /// </returns>
-        Extent LocalExtent(Composite objectType);
+        Extent LocalExtent(IComposite objectType);
     }
 }

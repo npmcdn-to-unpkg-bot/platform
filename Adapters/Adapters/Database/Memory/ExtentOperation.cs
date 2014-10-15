@@ -48,7 +48,7 @@ namespace Allors.Adapters.Database.Memory
             get { return null; }
         }
 
-        public override Composite ObjectType
+        public override IComposite ObjectType
         {
             get { return this.firstOperand.ObjectType; }
         }

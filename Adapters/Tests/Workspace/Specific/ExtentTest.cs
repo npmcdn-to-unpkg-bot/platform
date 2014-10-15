@@ -90,7 +90,7 @@ namespace Allors.Special
         {
         }
         
-        protected override Extent LocalExtent(Composite objectType)
+        protected override Extent LocalExtent(IComposite objectType)
         {
             var workspaceSession = (IWorkspaceSession)this.Session;
             return workspaceSession.LocalExtent(objectType);

@@ -328,7 +328,7 @@ namespace Allors.Adapters.Database.Sql
             return this.ObjectFactory.GetTypeForObjectType(objectType);
         }
 
-        public IRoleType[] GetSortedUnitRolesByObjectType(Composite objectType)
+        public IRoleType[] GetSortedUnitRolesByObjectType(IComposite objectType)
         {
             IRoleType[] sortedUnitRoles;
             if (!this.sortedUnitRolesByObjectType.TryGetValue(objectType, out sortedUnitRoles))

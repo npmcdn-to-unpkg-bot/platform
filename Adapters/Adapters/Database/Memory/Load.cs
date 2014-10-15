@@ -247,7 +247,7 @@ namespace Allors.Adapters.Database.Memory
 
                                 if (this.reader.Name.Equals(Serialization.RelationTypeUnit))
                                 {
-                                    if (relationType == null || relationType.RoleType.ObjectType is Composite)
+                                    if (relationType == null || relationType.RoleType.ObjectType is IComposite)
                                     {
                                         this.CantLoadUnitRole(relationTypeId);
                                     }
@@ -401,7 +401,7 @@ namespace Allors.Adapters.Database.Memory
                                     {
                                         var roleIdString = this.session.ObjectIds.Parse(roleIdStringArray[0]);
                                         var role = this.LoadInstantiateStrategy(roleIdString);
-                                        if (role == null || !this.session.MemoryDatabase.ContainsConcreteClass((Composite)relationType.RoleType.ObjectType, role.ObjectType))
+                                        if (role == null || !this.session.MemoryDatabase.ContainsConcreteClass((IComposite)relationType.RoleType.ObjectType, role.ObjectType))
                                         {
                                             this.session.MemoryDatabase.OnRelationNotLoaded(relationType.Id, associationId.ToString(), roleIdStringArray[0]);
                                         }
@@ -424,7 +424,7 @@ namespace Allors.Adapters.Database.Memory
                                         {
                                             var roleId = this.session.ObjectIds.Parse(roleIdString);
                                             var role = this.LoadInstantiateStrategy(roleId);
-                                            if (role == null || !this.session.MemoryDatabase.ContainsConcreteClass((Composite)relationType.RoleType.ObjectType, role.ObjectType))
+                                            if (role == null || !this.session.MemoryDatabase.ContainsConcreteClass((IComposite)relationType.RoleType.ObjectType, role.ObjectType))
                                             {
                                                 this.session.MemoryDatabase.OnRelationNotLoaded(relationType.Id, associationId.ToString(), roleId.ToString());
                                             }

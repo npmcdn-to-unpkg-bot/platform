@@ -294,7 +294,7 @@ namespace Allors.Adapters.Database.Sql
 
                                 if (this.reader.Name.Equals(Serialization.RelationTypeUnit))
                                 {
-                                    if (relationType == null || relationType.RoleType.ObjectType is Composite)
+                                    if (relationType == null || relationType.RoleType.ObjectType is IComposite)
                                     {
                                         this.CantLoadUnitRole(relationTypeId);
                                     }
@@ -514,7 +514,7 @@ namespace Allors.Adapters.Database.Sql
                                     this.objectTypeByObjectId.TryGetValue(role, out roleConcreteClass);
 
                                     if (roleConcreteClass == null ||
-                                        !this.database.ContainsConcreteClass((Composite)relationType.RoleType.ObjectType, roleConcreteClass))
+                                        !this.database.ContainsConcreteClass((IComposite)relationType.RoleType.ObjectType, roleConcreteClass))
                                     {
                                         this.OnRelationNotLoaded(relationType.Id, associationIdString, r);
                                     }

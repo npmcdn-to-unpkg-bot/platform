@@ -29,12 +29,12 @@ namespace Allors.Adapters.Database.Sql
     public class ExtentFiltered : SqlExtent
     {
         private readonly DatabaseSession session;
-        private readonly Composite objectType;
+        private readonly IComposite objectType;
 
         private AndPredicate filter;
 
         public ExtentFiltered(DatabaseSession session, Strategy strategy, IRoleType roleType)
-            : this(session, (Composite)roleType.ObjectType)
+            : this(session, (IComposite)roleType.ObjectType)
         {
             this.Strategy = strategy;
             this.RoleType = roleType;
@@ -47,7 +47,7 @@ namespace Allors.Adapters.Database.Sql
             this.AssociationType = associationType;
         }
 
-        public ExtentFiltered(DatabaseSession session, Composite objectType)
+        public ExtentFiltered(DatabaseSession session, IComposite objectType)
         {
             this.session = session;
             this.objectType = objectType;
@@ -72,7 +72,7 @@ namespace Allors.Adapters.Database.Sql
             get { return this.session; }
         }
 
-        public override Composite ObjectType
+        public override IComposite ObjectType
         {
             get { return this.objectType; }
         }
@@ -356,7 +356,7 @@ namespace Allors.Adapters.Database.Sql
                         var inRole = inStatement.RoleType;
                         var inRelationType = inRole.RelationType;
 
-                        if (!((Composite)inRole.ObjectType).LeafClasses.Contains(leafClass))
+                        if (!((IComposite)inRole.ObjectType).LeafClasses.Contains(leafClass))
                         {
                             continue;
                         }

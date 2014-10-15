@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="PropertyType.cs" company="Allors bvba">
+// <copyright file="IPropertyType.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -22,9 +22,9 @@ namespace Allors.Meta
 {
     using System;
 
-    public abstract partial class PropertyType : IDomainDefinedObject, OperandType
+    public abstract partial class IPropertyType : IDomainDefinedObject, IOperandType
     {
-        protected PropertyType(IDomain domain, Guid id)
+        protected IPropertyType(IDomain domain, Guid id)
             : base(domain, id)
         {
         }

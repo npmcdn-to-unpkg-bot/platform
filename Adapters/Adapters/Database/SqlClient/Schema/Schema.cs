@@ -231,7 +231,7 @@ FROM information_schema.columns"))
                                             {
                                                 var dataType = existingColumn.DataType.ToLower();
 
-                                                if (column.RelationType.RoleType.ObjectType is Composite)
+                                                if (column.RelationType.RoleType.ObjectType is IComposite)
                                                 {
                                                     if (!dataType.Equals(this.SqlDbType.ToString().ToLower()))
                                                     {
@@ -775,7 +775,7 @@ AS
                         {
                             if (roleType.IsOne)
                             {
-                                // Get Composite Role (1-1 and *-1) [object table]
+                                // Get IComposite Role (1-1 and *-1) [object table]
                                 procedure = new SchemaProcedure { Name = AllorsPrefix + "GR_" + objectType.Name + "_" + roleType.SingularPropertyName };
                                 procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
@@ -789,7 +789,7 @@ AS
 
                                 if (associationType.IsOne)
                                 {
-                                    // Get Composite Association (1-1) [object table]
+                                    // Get IComposite Association (1-1) [object table]
                                     procedure = new SchemaProcedure { Name = AllorsPrefix + "GA_" + objectType.Name + "_" + associationType.Name };
                                     procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
@@ -803,7 +803,7 @@ AS
                                 }
                                 else
                                 {
-                                    // Get Composite Association (*-1) [object table]
+                                    // Get IComposite Association (*-1) [object table]
                                     procedure = new SchemaProcedure { Name = AllorsPrefix + "GA_" + objectType.Name + "_" + associationType.Name };
                                     procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
@@ -816,7 +816,7 @@ AS
                                     this.procedureByName.Add(procedure.Name, procedure);
                                 }
 
-                                // Set Composite Role (1-1 and *-1) [object table]
+                                // Set IComposite Role (1-1 and *-1) [object table]
                                 procedure = new SchemaProcedure { Name = AllorsPrefix + "S_" + objectType.Name + "_" + roleType.SingularPropertyName };
                                 procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
@@ -831,7 +831,7 @@ AS
 
                                 this.procedureByName.Add(procedure.Name, procedure);
 
-                                // Clear Composite Role (1-1 and *-1) [object table]
+                                // Clear IComposite Role (1-1 and *-1) [object table]
                                 procedure = new SchemaProcedure { Name = AllorsPrefix + "C_" + objectType.Name + "_" + roleType.SingularPropertyName };
                                 procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
@@ -861,7 +861,7 @@ AS
 
                                 if (associationType.IsOne)
                                 {
-                                    // Get Composite Association (1-*) [object table]
+                                    // Get IComposite Association (1-*) [object table]
                                     procedure = new SchemaProcedure { Name = AllorsPrefix + "GA_" + objectType.Name + "_" + associationType.Name };
                                     procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
@@ -874,7 +874,7 @@ AS
                                     this.procedureByName.Add(procedure.Name, procedure);
                                 }
 
-                                // Add Composite Role (1-*) [object table]
+                                // Add IComposite Role (1-*) [object table]
                                 procedure = new SchemaProcedure { Name = AllorsPrefix + "A_" + objectType.Name + "_" + associationType.Name };
                                 procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
@@ -888,7 +888,7 @@ AS
 
                                 this.procedureByName.Add(procedure.Name, procedure);
 
-                                // Remove Composite Role (1-*) [object table]
+                                // Remove IComposite Role (1-*) [object table]
                                 procedure = new SchemaProcedure { Name = AllorsPrefix + "R_" + objectType.Name + "_" + associationType.Name };
                                 procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
@@ -944,7 +944,7 @@ AS
 
                     this.procedureByName.Add(procedure.Name, procedure);
 
-                    // Add Composite Role (1-* and *-*) [relation table]
+                    // Add IComposite Role (1-* and *-*) [relation table]
                     procedure = new SchemaProcedure { Name = AllorsPrefix + "A_" + roleType.SingularFullName };
                     procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
@@ -956,7 +956,7 @@ AS
 
                     this.procedureByName.Add(procedure.Name, procedure);
 
-                    // Remove Composite Role (1-* and *-*) [relation table]
+                    // Remove IComposite Role (1-* and *-*) [relation table]
                     procedure = new SchemaProcedure { Name = AllorsPrefix + "R_" + roleType.SingularFullName };
                     procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
@@ -972,7 +972,7 @@ AS
                 }
                 else
                 {
-                    // Get Composite Role (1-1 and *-1) [relation table]
+                    // Get IComposite Role (1-1 and *-1) [relation table]
                     procedure = new SchemaProcedure { Name = AllorsPrefix + "GR_" + roleType.SingularFullName };
                     procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
@@ -984,7 +984,7 @@ AS
 
                     this.procedureByName.Add(procedure.Name, procedure);
 
-                    // Set Composite Role (1-1 and *-1) [relation table]
+                    // Set IComposite Role (1-1 and *-1) [relation table]
                     procedure = new SchemaProcedure { Name = AllorsPrefix + "S_" + roleType.SingularFullName };
                     procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
@@ -1006,7 +1006,7 @@ AS
 
                 if (associationType.IsOne)
                 {
-                    // Get Composite Association (1-1) [relation table]
+                    // Get IComposite Association (1-1) [relation table]
                     procedure = new SchemaProcedure { Name = AllorsPrefix + "GA_" + roleType.SingularFullName };
                     procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
@@ -1020,7 +1020,7 @@ AS
                 }
                 else
                 {
-                    // Get Composite Association (*-1) [relation table]
+                    // Get IComposite Association (*-1) [relation table]
                     procedure = new SchemaProcedure { Name = AllorsPrefix + "GA_" + roleType.SingularFullName };
                     procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
@@ -1033,7 +1033,7 @@ AS
                     this.procedureByName.Add(procedure.Name, procedure);
                 }
 
-                // Clear Composite Role (1-1 and *-1) [relation table]
+                // Clear IComposite Role (1-1 and *-1) [relation table]
                 procedure = new SchemaProcedure { Name = AllorsPrefix + "C_" + roleType.SingularFullName };
                 procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"

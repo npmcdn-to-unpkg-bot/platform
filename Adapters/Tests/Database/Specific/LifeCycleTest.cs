@@ -961,7 +961,7 @@ namespace Allors.Adapters.Special
                 anObject.Strategy.Delete();
                 this.Session.Commit();
 
-                //// Composite
+                //// IComposite
 
                 //// Role
 
@@ -3414,7 +3414,7 @@ namespace Allors.Adapters.Special
                 Assert.AreEqual("d", subject.C1AllorsString);
                 this.Session.Commit();
 
-                //// Composite
+                //// IComposite
 
                 C1 fromProxy = C1.Create(this.Session);
                 C1 toProxy = C1.Create(this.Session);
@@ -3594,7 +3594,7 @@ namespace Allors.Adapters.Special
                 Assert.IsFalse(subject.ExistC1AllorsString);
                 this.Session.Rollback();
 
-                //// Composite
+                //// IComposite
 
                 from = C1.Instantiate(this.Session, fromId);
                 to = C1.Instantiate(this.Session, toId);
@@ -4326,7 +4326,7 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
             Assert.Fail();
         }
 
-        private IObject[] GetExtent(Composite objectType)
+        private IObject[] GetExtent(IComposite objectType)
         {
             var workspaceSession = this.Session as IWorkspaceSession;
 

@@ -62,7 +62,7 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Text
                 }
                 else
                 {
-                    var compositeType = (Composite)roleType.ObjectType;
+                    var compositeType = (IComposite)roleType.ObjectType;
                     sql = Schema.AllorsPrefix + "GR_" + compositeType.ExclusiveLeafClass.Name + "_" + associationType.Name;
                 }
  

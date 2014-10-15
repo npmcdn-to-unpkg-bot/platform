@@ -172,7 +172,7 @@ namespace Allors.Adapters.Workspace.Memory
             return this;
         }
 
-        public ICompositePredicate AddInstanceof(Composite type)
+        public ICompositePredicate AddInstanceof(IComposite type)
         {
             this.CheckUnarity();
             this.predicate = new Instanceof(type);
@@ -180,7 +180,7 @@ namespace Allors.Adapters.Workspace.Memory
             return this;
         }
 
-        public ICompositePredicate AddInstanceof(IRoleType role, Composite type)
+        public ICompositePredicate AddInstanceof(IRoleType role, IComposite type)
         {
             this.CheckUnarity();
             this.predicate = new RoleInstanceof(this.extent, role, type);
@@ -188,7 +188,7 @@ namespace Allors.Adapters.Workspace.Memory
             return this;
         }
 
-        public ICompositePredicate AddInstanceof(IAssociationType association, Composite type)
+        public ICompositePredicate AddInstanceof(IAssociationType association, IComposite type)
         {
             this.CheckUnarity();
             this.predicate = new AssociationInstanceOf(this.extent, association, type);

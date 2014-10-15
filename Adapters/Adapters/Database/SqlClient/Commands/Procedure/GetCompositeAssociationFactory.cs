@@ -64,7 +64,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
                     }
                     else
                     {
-                        var compositeType = (Composite)roleType.ObjectType;
+                        var compositeType = (IComposite)roleType.ObjectType;
                         sql = Sql.Schema.AllorsPrefix + "GA_" + compositeType.ExclusiveLeafClass.Name + "_" + associationType.Name;
                     }
                 }

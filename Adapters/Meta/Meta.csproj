@@ -44,6 +44,9 @@
     <Compile Include="..\..\Core\Meta\Core\AssociationType.cs">
       <Link>Core\AssociationType.cs</Link>
     </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Builder.cs">
+      <Link>Core\Builder.cs</Link>
+    </Compile>
     <Compile Include="..\..\Core\Meta\Core\Class.cs">
       <Link>Core\Class.cs</Link>
     </Compile>
