@@ -56,7 +56,7 @@ namespace Allors.Adapters.Workspace.Memory
                 return ThreeValuedLogic.True;
             }
 
-            var @interface = this.objectType as Interface;
+            var @interface = this.objectType as IInterface;
             return (@interface != null && associationObjectType.ContainsSupertype(@interface))
                        ? ThreeValuedLogic.True
                        : ThreeValuedLogic.False;

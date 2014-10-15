@@ -101,7 +101,7 @@ namespace Allors.Adapters.Database.Sql
 
         public static IClass[] GetConcreteSubClasses(Composite type)
         {
-            var @interface = type as Interface;
+            var @interface = type as IInterface;
             if (@interface != null)
             {
                 return @interface.Subclasses.ToArray();

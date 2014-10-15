@@ -74,8 +74,26 @@
     <Compile Include="..\..\Core\Meta\Core\Generation\StringTemplate.cs">
       <Link>Core\Generation\StringTemplate.cs</Link>
     </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Interface.cs">
+      <Link>Core\Interface.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\InterfaceBuilder.cs">
+      <Link>Core\InterfaceBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\InterfaceBuilder.v.cs">
+      <Link>Core\InterfaceBuilder.v.cs</Link>
+    </Compile>
     <Compile Include="..\..\Core\Meta\Core\MetaPopulation.cs">
       <Link>Core\MetaPopulation.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\RelationType.cs">
+      <Link>Core\RelationType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\RelationTypeBuilder.cs">
+      <Link>Core\RelationTypeBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\RelationTypeBuilder.v.cs">
+      <Link>Core\RelationTypeBuilder.v.cs</Link>
     </Compile>
     <Compile Include="..\..\Core\Meta\Core\Repository.cs">
       <Link>Core\Repository.cs</Link>

@@ -31,7 +31,7 @@ namespace Allors.Meta
     {
         private Composite subtype;
 
-        private Interface supertype;
+        private IInterface supertype;
 
         internal Inheritance(IDomain domain, Guid id)
             : base(domain, id)
@@ -54,7 +54,7 @@ namespace Allors.Meta
             }
         }
 
-        public Interface Supertype
+        public IInterface Supertype
         {
             get
             {

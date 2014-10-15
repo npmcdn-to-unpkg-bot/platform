@@ -175,7 +175,7 @@ namespace Allors.Adapters.Database.Sql
             {
                 this.Append(" WHERE ( ");
                 this.Append(" " + alias + "." + this.Schema.TypeId + "=" + this.AddParameter(this.Type.Id));
-                var @interface = this.Type as Interface;
+                var @interface = this.Type as IInterface;
                 if (@interface != null)
                 {
                     foreach (var subClass in @interface.Subclasses)

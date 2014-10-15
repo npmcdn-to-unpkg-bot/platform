@@ -36,14 +36,14 @@
       <Property Name="MetaPopulation" />
     </ShowAsAssociation>
   </Class>
-  <Class Name="Allors.Meta.Class" Collapsed="true">
+  <Class Name="Allors.Meta.IClass" Collapsed="true">
     <Position X="2.5" Y="7.5" Width="1.5" />
     <Compartments>
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
       <HashCode>AAAABgAAAAUAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Meta\Class.cs</FileName>
+      <FileName>Meta\IClass.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Allors.Meta.Composite" Collapsed="true">
@@ -57,7 +57,7 @@
       <FileName>Meta\Composite.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Allors.Meta.Interface" Collapsed="true">
+  <Class Name="Allors.Meta.IInterface" Collapsed="true">
     <Position X="4.75" Y="7.5" Width="1.5" />
     <Compartments>
       <Compartment Name="Properties" Collapsed="true" />
@@ -66,7 +66,7 @@
     </Compartments>
     <TypeIdentifier>
       <HashCode>IAAAFgEAAEEAAAAAJAAAAAAAQAAAAEAAAAKIFAIAAAE=</HashCode>
-      <FileName>Meta\Interface.cs</FileName>
+      <FileName>Meta\IInterface.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Allors.Meta.Inheritance" Collapsed="true">
@@ -223,12 +223,13 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Allors.Meta.RelationType">
+  <Class Name="Allors.Meta.IRelationType">
     <Position X="8" Y="4" Width="1.5" />
     <Members>
       <Field Name="associationType" Hidden="true" />
       <Method Name="CompareTo" Hidden="true" />
       <Property Name="ExistExclusiveLeafClasses" Hidden="true" />
+      <Method Name="IRelationType" Hidden="true" />
       <Field Name="isDerived" Hidden="true" />
       <Field Name="isIndexed" Hidden="true" />
       <Property Name="IsManyToMany" Hidden="true" />
@@ -236,7 +237,6 @@
       <Property Name="IsOneToMany" Hidden="true" />
       <Property Name="IsOneToOne" Hidden="true" />
       <Property Name="Name" Hidden="true" />
-      <Method Name="RelationType" Hidden="true" />
       <Property Name="ReverseName" Hidden="true" />
       <Field Name="roleType" Hidden="true" />
       <Method Name="ToString" Hidden="true" />
@@ -245,7 +245,7 @@
     </Members>
     <TypeIdentifier>
       <HashCode>AAIAAAAAAACAACQEAKGABAQggAAQABAAEAIAAAACAAA=</HashCode>
-      <FileName>Meta\RelationType.cs</FileName>
+      <FileName>Meta\IRelationType.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="AssociationType" />
@@ -253,7 +253,7 @@
     </ShowAsAssociation>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Allors.Meta.Unit">
+  <Class Name="Allors.Meta.IUnit">
     <Position X="1" Y="6" Width="1.5" />
     <Members>
       <Property Name="IsBinary" Hidden="true" />
@@ -265,12 +265,12 @@
       <Property Name="IsLong" Hidden="true" />
       <Property Name="IsString" Hidden="true" />
       <Property Name="IsUnique" Hidden="true" />
-      <Method Name="Unit" Hidden="true" />
+      <Method Name="IUnit" Hidden="true" />
       <Field Name="unitTag" Hidden="true" />
     </Members>
     <TypeIdentifier>
       <HashCode>AAAIACAAAAAAAABIgAAAQAABAAAAAAAQAAAAAQAACAA=</HashCode>
-      <FileName>Meta\Unit.cs</FileName>
+      <FileName>Meta\IUnit.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Allors.Meta.IMetaPopulation" Collapsed="true">

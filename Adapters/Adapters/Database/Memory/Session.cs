@@ -498,9 +498,9 @@ namespace Allors.Adapters.Database.Memory
                     sortedClassAndSubclassList.Add(type);
                 }
 
-                if (type is Interface)
+                if (type is IInterface)
                 {
-                    foreach (var subClass in ((Interface)type).Subclasses)
+                    foreach (var subClass in ((IInterface)type).Subclasses)
                     {
                         sortedClassAndSubclassList.Add(subClass);
                     }

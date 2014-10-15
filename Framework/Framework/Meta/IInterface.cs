@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="Interface.cs" company="Allors bvba">
+// <copyright file="IInterface.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -25,7 +25,7 @@ namespace Allors.Meta
     using System.Collections.Generic;
     using System.Linq;
 
-    public partial class Interface : Composite
+    public partial class IInterface : Composite
     {
         private LazySet<Composite> derivedDirectSubtypes;
 
@@ -37,7 +37,7 @@ namespace Allors.Meta
 
         private IClass derivedExclusiveLeafClass;
 
-        internal Interface(IDomain domain, Guid id)
+        protected IInterface(IDomain domain, Guid id)
             : base(domain, id)
         {
             domain.OnInterfaceCreated(this);
@@ -209,9 +209,9 @@ namespace Allors.Meta
                 if (!Equals(directSubtype, type))
                 {
                     subTypes.Add(directSubtype);
-                    if (directSubtype is Interface)
+                    if (directSubtype is IInterface)
                     {
-                        ((Interface)directSubtype).DeriveSubtypesRecursively(this, subTypes);
+                        ((IInterface)directSubtype).DeriveSubtypesRecursively(this, subTypes);
                     }
                 }
             }

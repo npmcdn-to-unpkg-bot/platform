@@ -35,13 +35,13 @@ namespace Allors.Meta
 
         private IList<IUnit> definedUnits;
 
-        private IList<Interface> definedInterfaces;
+        private IList<IInterface> definedInterfaces;
 
         private IList<IClass> definedClasses;
 
         private IList<Inheritance> definedInheritances;
 
-        private IList<RelationType> definedRelationTypes;
+        private IList<IRelationType> definedRelationTypes;
 
         private IList<AssociationType> definedAssociationTypes;
 
@@ -55,10 +55,10 @@ namespace Allors.Meta
             this.directSuperdomains = new List<IDomain>();
 
             this.definedUnits = new List<IUnit>();
-            this.definedInterfaces = new List<Interface>();
+            this.definedInterfaces = new List<IInterface>();
             this.definedClasses = new List<IClass>();
             this.definedInheritances = new List<Inheritance>();
-            this.definedRelationTypes = new List<RelationType>();
+            this.definedRelationTypes = new List<IRelationType>();
             this.definedAssociationTypes = new List<AssociationType>();
             this.definedRoleTypes = new List<RoleType>();
             this.definedMethodTypes = new List<MethodType>();
@@ -106,7 +106,7 @@ namespace Allors.Meta
             }
         }
 
-        public IEnumerable<Interface> DefinedInterfaces
+        public IEnumerable<IInterface> DefinedInterfaces
         {
             get
             {
@@ -130,7 +130,7 @@ namespace Allors.Meta
             }
         }
 
-        public IEnumerable<RelationType> DefinedRelationTypes
+        public IEnumerable<IRelationType> DefinedRelationTypes
         {
             get
             {
@@ -244,7 +244,7 @@ namespace Allors.Meta
             this.MetaPopulation.OnUnitCreated(unit);
         }
 
-        internal void OnInterfaceCreated(Interface @interface)
+        internal void OnInterfaceCreated(IInterface @interface)
         {
             this.definedInterfaces.Add(@interface);
             this.MetaPopulation.OnInterfaceCreated(@interface);
@@ -262,7 +262,7 @@ namespace Allors.Meta
             this.MetaPopulation.OnInheritanceCreated(inheritance);
         }
 
-        internal void OnRelationTypeCreated(RelationType relationType)
+        internal void OnRelationTypeCreated(IRelationType relationType)
         {
             this.definedRelationTypes.Add(relationType);
             this.MetaPopulation.OnRelationTypeCreated(relationType);

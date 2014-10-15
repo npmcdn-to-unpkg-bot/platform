@@ -1761,14 +1761,11 @@ namespace Allors.Adapters.Workspace.Memory
                     sortedClassAndSubclassList.Add(objectType);
                 }
 
-                if (objectType is Interface)
+                if (objectType is IInterface)
                 {
-                    foreach (var subClass in ((Interface)objectType).Subclasses)
+                    foreach (var subClass in ((IInterface)objectType).Subclasses)
                     {
-                        if (subClass is IClass)
-                        {
-                            sortedClassAndSubclassList.Add(subClass);
-                        }
+                        sortedClassAndSubclassList.Add(subClass);
                     }
                 }
 
@@ -2259,7 +2256,7 @@ namespace Allors.Adapters.Workspace.Memory
             }
 
             var relationTypeId = new Guid(relationTypeIdString);
-            var roleType = ((RelationType)this.Workspace.Database.MetaPopulation.Find(relationTypeId)).RoleType;
+            var roleType = ((IRelationType)this.Workspace.Database.MetaPopulation.Find(relationTypeId)).RoleType;
 
             if (!reader.IsEmptyElement)
             {
@@ -2575,7 +2572,7 @@ namespace Allors.Adapters.Workspace.Memory
             }
 
             var relationTypeId = new Guid(relationTypeIdString);
-            var relationType = ((RelationType)this.Workspace.Database.MetaPopulation.Find(relationTypeId)).RoleType;
+            var relationType = ((IRelationType)this.Workspace.Database.MetaPopulation.Find(relationTypeId)).RoleType;
 
             if (!reader.IsEmptyElement)
             {

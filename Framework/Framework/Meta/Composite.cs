@@ -27,8 +27,8 @@ namespace Allors.Meta
     
     public abstract partial class Composite : IObjectType
     {
-        private LazySet<Interface> derivedDirectSupertypes;
-        private LazySet<Interface> derivedSupertypes;
+        private LazySet<IInterface> derivedDirectSupertypes;
+        private LazySet<IInterface> derivedSupertypes;
 
         private LazySet<AssociationType> derivedAssociationTypes;
         private LazySet<RoleType> derivedRoleTypes;
@@ -113,7 +113,7 @@ namespace Allors.Meta
         /// Gets the direct super types.
         /// </summary>
         /// <value>The super types.</value>
-        public IEnumerable<Interface> DirectSupertypes
+        public IEnumerable<IInterface> DirectSupertypes
         {
             get
             {
@@ -126,7 +126,7 @@ namespace Allors.Meta
         /// Gets the super types.
         /// </summary>
         /// <value>The super types.</value>
-        public IEnumerable<Interface> Supertypes
+        public IEnumerable<IInterface> Supertypes
         {
             get
             {
@@ -211,7 +211,7 @@ namespace Allors.Meta
             }
         }
 
-        public bool ContainsSupertype(Interface @interface)
+        public bool ContainsSupertype(IInterface @interface)
         {
             this.MetaPopulation.Derive();
             return this.derivedSupertypes.Contains(@interface);
@@ -244,7 +244,7 @@ namespace Allors.Meta
         /// Derive direct super type derivations.
         /// </summary>
         /// <param name="directSupertypes">The direct super types.</param>
-        internal void DeriveDirectSupertypes(HashSet<Interface> directSupertypes)
+        internal void DeriveDirectSupertypes(HashSet<IInterface> directSupertypes)
         {
             directSupertypes.Clear();
             foreach (var inheritance in this.MetaPopulation.Inheritances.Where(inheritance => this.Equals(inheritance.Subtype)))
@@ -252,20 +252,20 @@ namespace Allors.Meta
                 directSupertypes.Add(inheritance.Supertype);
             }
 
-            this.derivedDirectSupertypes = new LazySet<Interface>(directSupertypes);
+            this.derivedDirectSupertypes = new LazySet<IInterface>(directSupertypes);
         }
 
         /// <summary>
         /// Derive super types.
         /// </summary>
         /// <param name="superTypes">The super types.</param>
-        internal void DeriveSupertypes(HashSet<Interface> superTypes)
+        internal void DeriveSupertypes(HashSet<IInterface> superTypes)
         {
             superTypes.Clear();
 
             this.DeriveSupertypesRecursively(this, superTypes);
 
-            this.derivedSupertypes = new LazySet<Interface>(superTypes);
+            this.derivedSupertypes = new LazySet<IInterface>(superTypes);
         }
 
         /// <summary>
@@ -347,7 +347,7 @@ namespace Allors.Meta
         /// </summary>
         /// <param name="type">The type .</param>
         /// <param name="superTypes">The super types.</param>
-        private void DeriveSupertypesRecursively(IObjectType type, HashSet<Interface> superTypes)
+        private void DeriveSupertypesRecursively(IObjectType type, HashSet<IInterface> superTypes)
         {
             foreach (var directSupertype in this.derivedDirectSupertypes)
             {

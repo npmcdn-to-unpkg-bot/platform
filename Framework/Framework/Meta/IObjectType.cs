@@ -96,7 +96,7 @@ namespace Allors.Meta
         {
             get
             {
-                return this is Interface;
+                return this is IInterface;
             }
         }
 

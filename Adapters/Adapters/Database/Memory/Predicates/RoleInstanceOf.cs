@@ -52,7 +52,7 @@ namespace Allors.Adapters.Database.Memory
                 return ThreeValuedLogic.True;
             }
 
-            var @interface = this.objectType as Interface;
+            var @interface = this.objectType as IInterface;
             return (@interface != null && roleObjectType.ContainsSupertype(@interface))
                        ? ThreeValuedLogic.True
                        : ThreeValuedLogic.False;

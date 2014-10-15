@@ -41,10 +41,10 @@ namespace Allors.Meta
 
         private IList<IDomain> domains;
         private IList<IUnit> units;
-        private IList<Interface> interfaces;
+        private IList<IInterface> interfaces;
         private IList<IClass> classes;
         private IList<Inheritance> inheritances;
-        private IList<RelationType> relationTypes;
+        private IList<IRelationType> relationTypes;
         private IList<AssociationType> associationTypes;
         private IList<RoleType> roleTypes;
         private IList<MethodType> methodTypes;
@@ -56,10 +56,10 @@ namespace Allors.Meta
 
             this.domains = new List<IDomain>();
             this.units = new List<IUnit>();
-            this.interfaces = new List<Interface>();
+            this.interfaces = new List<IInterface>();
             this.classes = new List<IClass>();
             this.inheritances = new List<Inheritance>();
-            this.relationTypes = new List<RelationType>();
+            this.relationTypes = new List<IRelationType>();
             this.associationTypes = new List<AssociationType>();
             this.roleTypes = new List<RoleType>();
             this.methodTypes = new List<MethodType>();
@@ -91,7 +91,7 @@ namespace Allors.Meta
             }
         }
 
-        public IEnumerable<Interface> Interfaces
+        public IEnumerable<IInterface> Interfaces
         {
             get
             {
@@ -115,7 +115,7 @@ namespace Allors.Meta
             }
         }
 
-        public IEnumerable<RelationType> RelationTypes
+        public IEnumerable<IRelationType> RelationTypes
         {
             get
             {
@@ -252,7 +252,7 @@ namespace Allors.Meta
                 }
             }
 
-            var supertypes = new HashSet<Interface>();
+            var supertypes = new HashSet<IInterface>();
             foreach (var subtype in inheritancesBySubtype.Keys)
             {
                 supertypes.Clear();
@@ -310,7 +310,7 @@ namespace Allors.Meta
 
                     var sharedDomains = new HashSet<IDomain>();
                     var sharedCompositeTypes = new HashSet<Composite>();
-                    var sharedInterfaces = new HashSet<Interface>();
+                    var sharedInterfaces = new HashSet<IInterface>();
                     var sharedClasses = new HashSet<IClass>();
                     var sharedAssociationTypes = new HashSet<AssociationType>();
                     var sharedRoleTypes = new HashSet<RoleType>();
@@ -428,7 +428,7 @@ namespace Allors.Meta
             this.Stale();
         }
 
-        internal void OnInterfaceCreated(Interface @interface)
+        internal void OnInterfaceCreated(IInterface @interface)
         {
             this.interfaces.Add(@interface);
             this.metaObjectById.Add(@interface.Id, @interface);
@@ -452,7 +452,7 @@ namespace Allors.Meta
             this.Stale();
         }
 
-        internal void OnRelationTypeCreated(RelationType relationType)
+        internal void OnRelationTypeCreated(IRelationType relationType)
         {
             this.relationTypes.Add(relationType);
             this.metaObjectById.Add(relationType.Id, relationType);
@@ -489,7 +489,7 @@ namespace Allors.Meta
             this.isStale = true;
         }
 
-        private bool HasCycle(Composite subtype, HashSet<Interface> supertypes, Dictionary<Composite, List<Inheritance>> inheritancesBySubtype)
+        private bool HasCycle(Composite subtype, HashSet<IInterface> supertypes, Dictionary<Composite, List<Inheritance>> inheritancesBySubtype)
         {
             foreach (var inheritance in inheritancesBySubtype[subtype])
             {
@@ -506,7 +506,7 @@ namespace Allors.Meta
             return false;
         }
 
-        private bool HasCycle(Composite originalSubtype, Interface currentSupertype, HashSet<Interface> supertypes, Dictionary<Composite, List<Inheritance>> inheritancesBySubtype)
+        private bool HasCycle(Composite originalSubtype, IInterface currentSupertype, HashSet<IInterface> supertypes, Dictionary<Composite, List<Inheritance>> inheritancesBySubtype)
         {
             if (supertypes.Contains(originalSubtype))
             {
