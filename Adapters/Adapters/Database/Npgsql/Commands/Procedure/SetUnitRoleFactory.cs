@@ -35,12 +35,12 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
     public class SetUnitRoleFactory : ISetUnitRoleFactory
     {
         public readonly Database Database;
-        private readonly Dictionary<IObjectType, Dictionary<RoleType, string>> sqlByRoleTypeByObjectType;
+        private readonly Dictionary<IObjectType, Dictionary<IRoleType, string>> sqlByRoleTypeByObjectType;
 
         public SetUnitRoleFactory(Database database)
         {
             this.Database = database;
-            this.sqlByRoleTypeByObjectType = new Dictionary<IObjectType, Dictionary<RoleType, string>>();
+            this.sqlByRoleTypeByObjectType = new Dictionary<IObjectType, Dictionary<IRoleType, string>>();
         }
 
         public ISetUnitRole Create(Sql.DatabaseSession session)
@@ -48,12 +48,12 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
             return new SetUnitRole(this, session);
         }
 
-        public string GetSql(IObjectType objectType, RoleType roleType)
+        public string GetSql(IObjectType objectType, IRoleType roleType)
         {
-            Dictionary<RoleType, string> sqlByRoleType;
+            Dictionary<IRoleType, string> sqlByRoleType;
             if (!this.sqlByRoleTypeByObjectType.TryGetValue(objectType, out sqlByRoleType))
             {
-                sqlByRoleType = new Dictionary<RoleType, string>();
+                sqlByRoleType = new Dictionary<IRoleType, string>();
                 this.sqlByRoleTypeByObjectType.Add(objectType, sqlByRoleType);
             }
 
@@ -69,23 +69,23 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
         private class SetUnitRole : DatabaseCommand, ISetUnitRole
         {
             private readonly SetUnitRoleFactory factory;
-            private readonly Dictionary<IObjectType, Dictionary<RoleType, NpgsqlCommand>> commandByRoleTypeByObjectType;
+            private readonly Dictionary<IObjectType, Dictionary<IRoleType, NpgsqlCommand>> commandByRoleTypeByObjectType;
 
             public SetUnitRole(SetUnitRoleFactory factory, Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
-                this.commandByRoleTypeByObjectType = new Dictionary<IObjectType, Dictionary<RoleType, NpgsqlCommand>>();
+                this.commandByRoleTypeByObjectType = new Dictionary<IObjectType, Dictionary<IRoleType, NpgsqlCommand>>();
             }
 
-            public void Execute(IList<UnitRelation> relation, IObjectType exclusiveLeafClass, RoleType roleType)
+            public void Execute(IList<UnitRelation> relation, IObjectType exclusiveLeafClass, IRoleType roleType)
             {
                 var schema = this.Database.NpgsqlSchema;
 
-                Dictionary<RoleType, NpgsqlCommand> commandByRoleType;
+                Dictionary<IRoleType, NpgsqlCommand> commandByRoleType;
                 if (!this.commandByRoleTypeByObjectType.TryGetValue(exclusiveLeafClass, out commandByRoleType))
                 {
-                    commandByRoleType = new Dictionary<RoleType, NpgsqlCommand>();
+                    commandByRoleType = new Dictionary<IRoleType, NpgsqlCommand>();
                     this.commandByRoleTypeByObjectType.Add(exclusiveLeafClass, commandByRoleType);
                 }
 

@@ -24,7 +24,7 @@ namespace Allors.Adapters.Database.Sql.Commands
 
     public interface IGetCompositeRole
     {
-        void Execute(Roles roles, RoleType roleType);
+        void Execute(Roles roles, IRoleType roleType);
     }
 
     public interface IGetCompositeRoleFactory

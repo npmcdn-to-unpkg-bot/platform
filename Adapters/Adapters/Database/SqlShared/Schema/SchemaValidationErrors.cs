@@ -125,7 +125,7 @@ namespace Allors.Adapters.Database.Sql
         /// <param name="columnName">Name of the column.</param>
         /// <param name="kind">The kind of validation error.</param>
         /// <param name="message">The validation error message.</param>
-        public void AddTableError(IObjectType objectType, IRelationType relationType, RoleType roleType, string tableName, string columnName, SchemaValidationErrorKind kind, string message)
+        public void AddTableError(IObjectType objectType, IRelationType relationType, IRoleType roleType, string tableName, string columnName, SchemaValidationErrorKind kind, string message)
         {
             this.errors.Add(new TableSchemaValidationError(objectType, relationType, roleType, tableName, columnName, kind, message));
         }

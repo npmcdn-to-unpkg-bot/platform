@@ -33,6 +33,6 @@ namespace Allors.Adapters.Database.Sql.Commands
 
     public interface ILoadCompositeRelationsFactory
     {
-        ILoadCompositeRelations Create(RoleType roleType);
+        ILoadCompositeRelations Create(IRoleType roleType);
     }
 }

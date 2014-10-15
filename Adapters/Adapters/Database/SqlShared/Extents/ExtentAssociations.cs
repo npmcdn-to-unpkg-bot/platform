@@ -162,7 +162,7 @@ namespace Allors.Adapters.Database.Sql
             return objects;
         }
 
-        public override Allors.Extent AddSort(RoleType sort)
+        public override Allors.Extent AddSort(IRoleType sort)
         {
             this.LazyUpgrade();
 
@@ -171,7 +171,7 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public override Allors.Extent AddSort(RoleType sort, SortDirection direction)
+        public override Allors.Extent AddSort(IRoleType sort, SortDirection direction)
         {
             this.LazyUpgrade();
 

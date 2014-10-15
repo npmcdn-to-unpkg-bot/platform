@@ -143,70 +143,70 @@ namespace Allors.Domain
 
 		public global::Allors.Meta.Interface ObjectType = global::Allors.Meta.Interfaces.S12;
 
-		public global::Allors.Meta.RoleType S12AllorsString 
+		public global::Allors.Meta.IRoleType S12AllorsString 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S12AllorsString;
 			}
 		} 
-		public global::Allors.Meta.RoleType S12AllorsDate 
+		public global::Allors.Meta.IRoleType S12AllorsDate 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S12AllorsDate;
 			}
 		} 
-		public global::Allors.Meta.RoleType S12C2many2many 
+		public global::Allors.Meta.IRoleType S12C2many2many 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S12C2many2many;
 			}
 		} 
-		public global::Allors.Meta.RoleType S12C2many2one 
+		public global::Allors.Meta.IRoleType S12C2many2one 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S12C2many2one;
 			}
 		} 
-		public global::Allors.Meta.RoleType S12C2one2one 
+		public global::Allors.Meta.IRoleType S12C2one2one 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S12C2one2one;
 			}
 		} 
-		public global::Allors.Meta.RoleType S12C2one2many 
+		public global::Allors.Meta.IRoleType S12C2one2many 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S12C2one2many;
 			}
 		} 
-		public global::Allors.Meta.RoleType S12AllorsBoolean 
+		public global::Allors.Meta.IRoleType S12AllorsBoolean 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S12AllorsBoolean;
 			}
 		} 
-		public global::Allors.Meta.RoleType S12AllorsDouble 
+		public global::Allors.Meta.IRoleType S12AllorsDouble 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S12AllorsDouble;
 			}
 		} 
-		public global::Allors.Meta.RoleType S12AllorsInteger 
+		public global::Allors.Meta.IRoleType S12AllorsInteger 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S12AllorsInteger;
 			}
 		} 
-		public global::Allors.Meta.RoleType S12AllorsDecimal 
+		public global::Allors.Meta.IRoleType S12AllorsDecimal 
 		{
 			get
 			{

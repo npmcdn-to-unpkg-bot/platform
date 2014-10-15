@@ -52,7 +52,7 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Text
         {
             if (!this.sqlByAssociationType.ContainsKey(associationType))
             {
-                RoleType roleType = associationType.RoleType;
+                IRoleType roleType = associationType.RoleType;
 
                 string sql;
                 if (roleType.IsMany || !associationType.RelationType.ExistExclusiveLeafClasses)

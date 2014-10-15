@@ -24,7 +24,7 @@ namespace Allors
 
     public class Sort
     {
-        public RoleType RoleType { get; set; }
+        public IRoleType RoleType { get; set; }
 
         public SortDirection Direction { get; set; }
     }

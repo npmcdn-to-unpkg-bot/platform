@@ -114,7 +114,7 @@ namespace Allors.Adapters
         /// <returns>
         /// The normalize.
         /// </returns>
-        public object Internalize(object unit, RoleType roleType)
+        public object Internalize(object unit, IRoleType roleType)
         {
             var unitType = (IUnit)roleType.ObjectType;
             var unitTypeTag = unitType.UnitTag;
@@ -249,7 +249,7 @@ namespace Allors.Adapters
             return concreteClasses.Contains(concreteClass);
         }
 
-        public void UnitRoleChecks(IStrategy strategy, RoleType relationType)
+        public void UnitRoleChecks(IStrategy strategy, IRoleType relationType)
         {
             if (!this.ContainsConcreteClass(relationType.AssociationType.ObjectType, strategy.ObjectType))
             {
@@ -262,12 +262,12 @@ namespace Allors.Adapters
             }
         }
 
-        public void CompositeRoleChecks(IStrategy strategy, RoleType roleType)
+        public void CompositeRoleChecks(IStrategy strategy, IRoleType roleType)
         {
             this.CompositeSharedChecks(strategy, roleType, null);
         }
 
-        public void CompositeRoleChecks(IStrategy strategy, RoleType roleType, IObject role)
+        public void CompositeRoleChecks(IStrategy strategy, IRoleType roleType, IObject role)
         {
             this.CompositeSharedChecks(strategy, roleType, role);
             if (!roleType.IsOne)
@@ -276,7 +276,7 @@ namespace Allors.Adapters
             }
         }
 
-        public void CompositeRolesChecks(IStrategy strategy, RoleType roleType, IObject role)
+        public void CompositeRolesChecks(IStrategy strategy, IRoleType roleType, IObject role)
         {
             this.CompositeSharedChecks(strategy, roleType, role);
             if (!roleType.IsMany)
@@ -285,7 +285,7 @@ namespace Allors.Adapters
             }
         }
 
-        private void CompositeSharedChecks(IStrategy strategy, RoleType roleType, IObject role)
+        private void CompositeSharedChecks(IStrategy strategy, IRoleType roleType, IObject role)
         {
             if (!this.ContainsConcreteClass(roleType.AssociationType.ObjectType, strategy.ObjectType))
             {

@@ -25,10 +25,10 @@ namespace Allors.Adapters.Database.Sql
     public class ExtentStatementChild : ExtentStatement
     {
         private readonly IAssociationType associationType;
-        private readonly RoleType roleType;
+        private readonly IRoleType roleType;
         private readonly ExtentStatementRoot root;
 
-        public ExtentStatementChild(ExtentStatementRoot root, SqlExtent extent, RoleType roleType)
+        public ExtentStatementChild(ExtentStatementRoot root, SqlExtent extent, IRoleType roleType)
             : base(extent)
         {
             this.root = root;
@@ -52,7 +52,7 @@ namespace Allors.Adapters.Database.Sql
             get { return false; }
         }
 
-        public RoleType RoleType
+        public IRoleType RoleType
         {
             get { return this.roleType; }
         }
@@ -82,7 +82,7 @@ namespace Allors.Adapters.Database.Sql
             return new ExtentStatementChild(this.root, extent, association);
         }
 
-        public override ExtentStatement CreateChild(SqlExtent extent, RoleType role)
+        public override ExtentStatement CreateChild(SqlExtent extent, IRoleType role)
         {
             return new ExtentStatementChild(this.root, extent, role);
         }

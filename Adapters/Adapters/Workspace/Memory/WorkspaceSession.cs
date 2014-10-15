@@ -40,20 +40,20 @@ namespace Allors.Adapters.Workspace.Memory
         private List<Strategy> syncedDeletedStrategies;
         private List<Strategy> rollbackSyncedDeletedStrategies;
 
-        private Dictionary<RoleType, Dictionary<Strategy, object>> originalUnitRoleByAssociationByRoleType;
-        private Dictionary<RoleType, Dictionary<Strategy, object>> orignalRollbackUnitRoleByAssociationByRoleType;
-        private Dictionary<RoleType, Dictionary<Strategy, object>> diffUnitRoleByAssociationByRoleType;
-        private Dictionary<RoleType, Dictionary<Strategy, object>> diffRollbackUnitRoleByAssociationByRoleType;
+        private Dictionary<IRoleType, Dictionary<Strategy, object>> originalUnitRoleByAssociationByRoleType;
+        private Dictionary<IRoleType, Dictionary<Strategy, object>> orignalRollbackUnitRoleByAssociationByRoleType;
+        private Dictionary<IRoleType, Dictionary<Strategy, object>> diffUnitRoleByAssociationByRoleType;
+        private Dictionary<IRoleType, Dictionary<Strategy, object>> diffRollbackUnitRoleByAssociationByRoleType;
 
-        private Dictionary<RoleType, Dictionary<Strategy, Strategy>> originalCompositeRoleByAssociationByRoleType;
-        private Dictionary<RoleType, Dictionary<Strategy, Strategy>> originalRollbackCompositeRoleByAssociationByRoleType;
-        private Dictionary<RoleType, Dictionary<Strategy, Strategy>> diffCompositeRoleByAssociationByRoleType;
-        private Dictionary<RoleType, Dictionary<Strategy, Strategy>> diffRollbackCompositeRoleByAssociationByRoleType;
+        private Dictionary<IRoleType, Dictionary<Strategy, Strategy>> originalCompositeRoleByAssociationByRoleType;
+        private Dictionary<IRoleType, Dictionary<Strategy, Strategy>> originalRollbackCompositeRoleByAssociationByRoleType;
+        private Dictionary<IRoleType, Dictionary<Strategy, Strategy>> diffCompositeRoleByAssociationByRoleType;
+        private Dictionary<IRoleType, Dictionary<Strategy, Strategy>> diffRollbackCompositeRoleByAssociationByRoleType;
 
-        private Dictionary<RoleType, Dictionary<Strategy, HashSet<Strategy>>> originalCompositeRolesByAssociationByRoleType;
-        private Dictionary<RoleType, Dictionary<Strategy, HashSet<Strategy>>> originalrollbackCompositeRolesByAssociationByRoleType;
-        private Dictionary<RoleType, Dictionary<Strategy, HashSet<Strategy>>> diffCompositeRolesByAssociationByRoleType;
-        private Dictionary<RoleType, Dictionary<Strategy, HashSet<Strategy>>> diffRollbackCompositeRolesByAssociationByRoleType;
+        private Dictionary<IRoleType, Dictionary<Strategy, HashSet<Strategy>>> originalCompositeRolesByAssociationByRoleType;
+        private Dictionary<IRoleType, Dictionary<Strategy, HashSet<Strategy>>> originalrollbackCompositeRolesByAssociationByRoleType;
+        private Dictionary<IRoleType, Dictionary<Strategy, HashSet<Strategy>>> diffCompositeRolesByAssociationByRoleType;
+        private Dictionary<IRoleType, Dictionary<Strategy, HashSet<Strategy>>> diffRollbackCompositeRolesByAssociationByRoleType;
 
         private Dictionary<ObjectId, ObjectId> preSyncIdsByPostSyncId;
 
@@ -71,20 +71,20 @@ namespace Allors.Adapters.Workspace.Memory
             this.syncedDeletedStrategies = new List<Strategy>();
             this.rollbackSyncedDeletedStrategies = new List<Strategy>();
 
-            this.diffUnitRoleByAssociationByRoleType = new Dictionary<RoleType, Dictionary<Strategy, object>>();
-            this.diffRollbackUnitRoleByAssociationByRoleType = new Dictionary<RoleType, Dictionary<Strategy, object>>();
-            this.originalUnitRoleByAssociationByRoleType = new Dictionary<RoleType, Dictionary<Strategy, object>>();
-            this.diffRollbackUnitRoleByAssociationByRoleType = new Dictionary<RoleType, Dictionary<Strategy, object>>();
+            this.diffUnitRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<Strategy, object>>();
+            this.diffRollbackUnitRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<Strategy, object>>();
+            this.originalUnitRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<Strategy, object>>();
+            this.diffRollbackUnitRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<Strategy, object>>();
 
-            this.diffCompositeRoleByAssociationByRoleType = new Dictionary<RoleType, Dictionary<Strategy, Strategy>>();
-            this.diffRollbackCompositeRoleByAssociationByRoleType = new Dictionary<RoleType, Dictionary<Strategy, Strategy>>();
-            this.diffRollbackCompositeRoleByAssociationByRoleType = new Dictionary<RoleType, Dictionary<Strategy, Strategy>>();
-            this.originalCompositeRoleByAssociationByRoleType = new Dictionary<RoleType, Dictionary<Strategy, Strategy>>();
+            this.diffCompositeRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<Strategy, Strategy>>();
+            this.diffRollbackCompositeRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<Strategy, Strategy>>();
+            this.diffRollbackCompositeRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<Strategy, Strategy>>();
+            this.originalCompositeRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<Strategy, Strategy>>();
 
-            this.diffCompositeRolesByAssociationByRoleType = new Dictionary<RoleType, Dictionary<Strategy, HashSet<Strategy>>>();
-            this.diffRollbackCompositeRolesByAssociationByRoleType = new Dictionary<RoleType, Dictionary<Strategy, HashSet<Strategy>>>();
-            this.diffRollbackCompositeRolesByAssociationByRoleType = new Dictionary<RoleType, Dictionary<Strategy, HashSet<Strategy>>>();
-            this.originalCompositeRolesByAssociationByRoleType = new Dictionary<RoleType, Dictionary<Strategy, HashSet<Strategy>>>();
+            this.diffCompositeRolesByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<Strategy, HashSet<Strategy>>>();
+            this.diffRollbackCompositeRolesByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<Strategy, HashSet<Strategy>>>();
+            this.diffRollbackCompositeRolesByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<Strategy, HashSet<Strategy>>>();
+            this.originalCompositeRolesByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<Strategy, HashSet<Strategy>>>();
 
             this.strategyByObjectId = new Dictionary<ObjectId, Strategy>();
             this.preSyncIdsByPostSyncId = new Dictionary<ObjectId, ObjectId>();
@@ -654,14 +654,14 @@ namespace Allors.Adapters.Workspace.Memory
                 }
             }
 
-            this.originalUnitRoleByAssociationByRoleType = new Dictionary<RoleType, Dictionary<Strategy, object>>();
-            this.diffUnitRoleByAssociationByRoleType = new Dictionary<RoleType, Dictionary<Strategy, object>>();
+            this.originalUnitRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<Strategy, object>>();
+            this.diffUnitRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<Strategy, object>>();
 
-            this.originalCompositeRoleByAssociationByRoleType = new Dictionary<RoleType, Dictionary<Strategy, Strategy>>();
-            this.diffCompositeRoleByAssociationByRoleType = new Dictionary<RoleType, Dictionary<Strategy, Strategy>>();
+            this.originalCompositeRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<Strategy, Strategy>>();
+            this.diffCompositeRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<Strategy, Strategy>>();
 
-            this.originalCompositeRolesByAssociationByRoleType = new Dictionary<RoleType, Dictionary<Strategy, HashSet<Strategy>>>();
-            this.diffCompositeRolesByAssociationByRoleType = new Dictionary<RoleType, Dictionary<Strategy, HashSet<Strategy>>>();
+            this.originalCompositeRolesByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<Strategy, HashSet<Strategy>>>();
+            this.diffCompositeRolesByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<Strategy, HashSet<Strategy>>>();
 
             this.changeSet = new ChangeSet();
         }
@@ -692,7 +692,7 @@ namespace Allors.Adapters.Workspace.Memory
 
                     // Copy current state to rollback state
                     // Unit
-                    this.orignalRollbackUnitRoleByAssociationByRoleType = new Dictionary<RoleType, Dictionary<Strategy, object>>();
+                    this.orignalRollbackUnitRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<Strategy, object>>();
                     foreach (var dictionaryEntry in this.originalUnitRoleByAssociationByRoleType)
                     {
                         var roleType = dictionaryEntry.Key;
@@ -700,7 +700,7 @@ namespace Allors.Adapters.Workspace.Memory
                         this.orignalRollbackUnitRoleByAssociationByRoleType[roleType] = new Dictionary<Strategy, object>(originalUnitRoleByStrategy);
                     }
 
-                    this.diffRollbackUnitRoleByAssociationByRoleType = new Dictionary<RoleType, Dictionary<Strategy, object>>();
+                    this.diffRollbackUnitRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<Strategy, object>>();
                     foreach (var dictionaryEntry in this.diffUnitRoleByAssociationByRoleType)
                     {
                         var roleType = dictionaryEntry.Key;
@@ -709,7 +709,7 @@ namespace Allors.Adapters.Workspace.Memory
                     }
 
                     // Composite
-                    this.originalRollbackCompositeRoleByAssociationByRoleType = new Dictionary<RoleType, Dictionary<Strategy, Strategy>>();
+                    this.originalRollbackCompositeRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<Strategy, Strategy>>();
                     foreach (var dictionaryEntry in this.originalCompositeRoleByAssociationByRoleType)
                     {
                         var roleType = dictionaryEntry.Key;
@@ -717,7 +717,7 @@ namespace Allors.Adapters.Workspace.Memory
                         this.originalRollbackCompositeRoleByAssociationByRoleType[roleType] = new Dictionary<Strategy, Strategy>(orignalCompositeRoleByStrategy);
                     }
 
-                    this.diffRollbackCompositeRoleByAssociationByRoleType = new Dictionary<RoleType, Dictionary<Strategy, Strategy>>();
+                    this.diffRollbackCompositeRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<Strategy, Strategy>>();
                     foreach (var dictionaryEntry in this.diffCompositeRoleByAssociationByRoleType)
                     {
                         var roleType = dictionaryEntry.Key;
@@ -726,7 +726,7 @@ namespace Allors.Adapters.Workspace.Memory
                     }
 
                     // Composites
-                    this.originalrollbackCompositeRolesByAssociationByRoleType = new Dictionary<RoleType, Dictionary<Strategy, HashSet<Strategy>>>();
+                    this.originalrollbackCompositeRolesByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<Strategy, HashSet<Strategy>>>();
                     foreach (var dictionaryEntry in this.originalCompositeRolesByAssociationByRoleType)
                     {
                         var roleType = dictionaryEntry.Key;
@@ -749,7 +749,7 @@ namespace Allors.Adapters.Workspace.Memory
                         this.originalrollbackCompositeRolesByAssociationByRoleType[roleType] = rollbackOriginalCompositesRoleByAssociation;
                     }
 
-                    this.diffRollbackCompositeRolesByAssociationByRoleType = new Dictionary<RoleType, Dictionary<Strategy, HashSet<Strategy>>>();
+                    this.diffRollbackCompositeRolesByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<Strategy, HashSet<Strategy>>>();
                     foreach (var dictionaryEntry in this.diffCompositeRolesByAssociationByRoleType)
                     {
                         var roleType = dictionaryEntry.Key;
@@ -836,7 +836,7 @@ namespace Allors.Adapters.Workspace.Memory
 
                     // Copy rollback state to current state
                     // Unit
-                    this.originalUnitRoleByAssociationByRoleType = new Dictionary<RoleType, Dictionary<Strategy, object>>();
+                    this.originalUnitRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<Strategy, object>>();
                     if (this.orignalRollbackUnitRoleByAssociationByRoleType != null)
                     {
                         foreach (var dictionaryEntry in this.orignalRollbackUnitRoleByAssociationByRoleType)
@@ -847,7 +847,7 @@ namespace Allors.Adapters.Workspace.Memory
                         }
                     }
 
-                    this.diffUnitRoleByAssociationByRoleType = new Dictionary<RoleType, Dictionary<Strategy, object>>();
+                    this.diffUnitRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<Strategy, object>>();
                     if (this.diffRollbackUnitRoleByAssociationByRoleType != null)
                     {
                         foreach (var dictionaryEntry in this.diffRollbackUnitRoleByAssociationByRoleType)
@@ -859,7 +859,7 @@ namespace Allors.Adapters.Workspace.Memory
                     }
  
                     // Composite
-                    this.originalCompositeRoleByAssociationByRoleType = new Dictionary<RoleType, Dictionary<Strategy, Strategy>>();
+                    this.originalCompositeRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<Strategy, Strategy>>();
                     if (this.originalRollbackCompositeRoleByAssociationByRoleType != null)
                     {
                         foreach (var dictionaryEntry in this.originalRollbackCompositeRoleByAssociationByRoleType)
@@ -870,7 +870,7 @@ namespace Allors.Adapters.Workspace.Memory
                         }
                     }
 
-                    this.diffCompositeRoleByAssociationByRoleType = new Dictionary<RoleType, Dictionary<Strategy, Strategy>>();
+                    this.diffCompositeRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<Strategy, Strategy>>();
                     if (this.diffRollbackCompositeRoleByAssociationByRoleType != null)
                     {
                         foreach (var dictionaryEntry in this.diffRollbackCompositeRoleByAssociationByRoleType)
@@ -882,7 +882,7 @@ namespace Allors.Adapters.Workspace.Memory
                     }
  
                     // Composites
-                    this.originalCompositeRolesByAssociationByRoleType = new Dictionary<RoleType, Dictionary<Strategy, HashSet<Strategy>>>();
+                    this.originalCompositeRolesByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<Strategy, HashSet<Strategy>>>();
                     if (this.originalrollbackCompositeRolesByAssociationByRoleType != null)
                     {
                         foreach (var dictionaryEntry in this.originalrollbackCompositeRolesByAssociationByRoleType)
@@ -908,7 +908,7 @@ namespace Allors.Adapters.Workspace.Memory
                         }
                     }
 
-                    this.diffCompositeRolesByAssociationByRoleType = new Dictionary<RoleType, Dictionary<Strategy, HashSet<Strategy>>>();
+                    this.diffCompositeRolesByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<Strategy, HashSet<Strategy>>>();
                     if (this.diffRollbackCompositeRolesByAssociationByRoleType != null)
                     {
                         foreach (var dictionaryEntry in this.diffRollbackCompositeRolesByAssociationByRoleType)
@@ -1362,7 +1362,7 @@ namespace Allors.Adapters.Workspace.Memory
             }
         }
 
-        internal virtual object GetUnitRole(Strategy association, RoleType roleType)
+        internal virtual object GetUnitRole(Strategy association, IRoleType roleType)
         {
             var originalUnitRole = this.GetOriginalUnitRole(roleType, association);
 
@@ -1377,7 +1377,7 @@ namespace Allors.Adapters.Workspace.Memory
             return originalUnitRole;
         }
 
-        internal virtual void SetUnitRole(Strategy association, RoleType roleType, object role)
+        internal virtual void SetUnitRole(Strategy association, IRoleType roleType, object role)
         {
             var originalUnitRole = this.GetOriginalUnitRole(roleType, association);
 
@@ -1403,7 +1403,7 @@ namespace Allors.Adapters.Workspace.Memory
             }
         }
 
-        internal virtual Strategy GetCompositeRole(Strategy association, RoleType roleType)
+        internal virtual Strategy GetCompositeRole(Strategy association, IRoleType roleType)
         {
             var originalCompositeRole = this.GetOriginalCompositeRole(association, roleType);
             
@@ -1418,7 +1418,7 @@ namespace Allors.Adapters.Workspace.Memory
             return originalCompositeRole;
         }
 
-        internal virtual void SetCompositeRole(Strategy association, RoleType roleType, Strategy role, Strategy previousRole)
+        internal virtual void SetCompositeRole(Strategy association, IRoleType roleType, Strategy role, Strategy previousRole)
         {
             // 1 - 1
             if (roleType.AssociationType.IsOne)
@@ -1453,7 +1453,7 @@ namespace Allors.Adapters.Workspace.Memory
             }
         }
 
-        internal virtual void RemoveCompositeRole(Strategy association, RoleType roleType, Strategy previousRoleStrategy)
+        internal virtual void RemoveCompositeRole(Strategy association, IRoleType roleType, Strategy previousRoleStrategy)
         {
             var originalCompositeRole = this.GetOriginalCompositeRole(association, roleType);
 
@@ -1468,7 +1468,7 @@ namespace Allors.Adapters.Workspace.Memory
             }
         }
 
-        internal virtual HashSet<Strategy> GetCompositeRoles(Strategy association, RoleType roleType)
+        internal virtual HashSet<Strategy> GetCompositeRoles(Strategy association, IRoleType roleType)
         {
             var originalCompositeRoles = this.GetOriginalCompositeRoles(association, roleType);
 
@@ -1483,7 +1483,7 @@ namespace Allors.Adapters.Workspace.Memory
             return originalCompositeRoles;
         }
 
-        internal virtual void AddCompositeRole(Strategy association, RoleType roleType, Strategy role)
+        internal virtual void AddCompositeRole(Strategy association, IRoleType roleType, Strategy role)
         {
             var originalCompositeRoles = this.GetOriginalCompositeRoles(association, roleType);
             var compositeRolesByAssociation = this.GetCompositeRolesByAssociation(roleType);
@@ -1524,7 +1524,7 @@ namespace Allors.Adapters.Workspace.Memory
             }
         }
 
-        internal virtual void RemoveCompositeRole(Strategy association, RoleType roleType, Strategy role, HashSet<Strategy> previousRoles)
+        internal virtual void RemoveCompositeRole(Strategy association, IRoleType roleType, Strategy role, HashSet<Strategy> previousRoles)
         {
             var compositeRolesByAssociation = this.GetCompositeRolesByAssociation(roleType);
             var originalCompositeRoles = this.GetOriginalCompositeRoles(association, roleType);
@@ -1550,7 +1550,7 @@ namespace Allors.Adapters.Workspace.Memory
             }
         }
 
-        internal virtual void RemoveCompositeRoles(Strategy association, RoleType roleType, HashSet<Strategy> previousRoleStrategy)
+        internal virtual void RemoveCompositeRoles(Strategy association, IRoleType roleType, HashSet<Strategy> previousRoleStrategy)
         {
             var originalCompositeRoles = this.GetOriginalCompositeRoles(association, roleType);
             var compositeRolesByAssociation = this.GetCompositeRolesByAssociation(roleType);
@@ -1787,7 +1787,7 @@ namespace Allors.Adapters.Workspace.Memory
             return strategies;
         }
 
-        internal Strategy GetLocalCompositeRole(Strategy association, RoleType roleType)
+        internal Strategy GetLocalCompositeRole(Strategy association, IRoleType roleType)
         {
             Strategy compositeRole;
             Dictionary<Strategy, Strategy> compositeRoleByStrategy;
@@ -1810,7 +1810,7 @@ namespace Allors.Adapters.Workspace.Memory
             return null;
         }
 
-        internal HashSet<Strategy> GetLocalCompositeRoles(Strategy association, RoleType roleType)
+        internal HashSet<Strategy> GetLocalCompositeRoles(Strategy association, IRoleType roleType)
         {
             HashSet<Strategy> compositesRole;
             Dictionary<Strategy, HashSet<Strategy>> compositesRoleByStrategy;
@@ -1833,7 +1833,7 @@ namespace Allors.Adapters.Workspace.Memory
             return null;
         }
 
-        protected internal virtual Strategy GetOriginalCompositeRole(Strategy association, RoleType roleType)
+        protected internal virtual Strategy GetOriginalCompositeRole(Strategy association, IRoleType roleType)
         {
             Dictionary<Strategy, Strategy> originalCompositeRoleByAssociation;
             if (!this.originalCompositeRoleByAssociationByRoleType.TryGetValue(roleType, out originalCompositeRoleByAssociation))
@@ -1852,7 +1852,7 @@ namespace Allors.Adapters.Workspace.Memory
             return originalComposite;
         }
 
-        protected internal virtual HashSet<Strategy> GetOriginalCompositeRoles(Strategy association, RoleType roleType)
+        protected internal virtual HashSet<Strategy> GetOriginalCompositeRoles(Strategy association, IRoleType roleType)
         {
             Dictionary<Strategy, HashSet<Strategy>> originalCompositeRolesByAssociation;
             if (!this.originalCompositeRolesByAssociationByRoleType.TryGetValue(roleType, out originalCompositeRolesByAssociation))
@@ -2277,7 +2277,7 @@ namespace Allors.Adapters.Workspace.Memory
             }
         }
 
-        protected virtual void LoadDatabaseUnitRelations(XmlReader reader, RoleType roleType)
+        protected virtual void LoadDatabaseUnitRelations(XmlReader reader, IRoleType roleType)
         {
             while (reader.Read())
             {
@@ -2333,7 +2333,7 @@ namespace Allors.Adapters.Workspace.Memory
             }
         }
 
-        protected virtual void LoadDatabaseCompositeRelations(XmlReader reader, RoleType roleType)
+        protected virtual void LoadDatabaseCompositeRelations(XmlReader reader, IRoleType roleType)
         {
             while (reader.Read())
             {
@@ -2593,7 +2593,7 @@ namespace Allors.Adapters.Workspace.Memory
             }
         }
 
-        protected virtual void LoadWorkspaceUnitRelations(XmlReader reader, RoleType roleType)
+        protected virtual void LoadWorkspaceUnitRelations(XmlReader reader, IRoleType roleType)
         {
             while (reader.Read())
             {
@@ -2655,7 +2655,7 @@ namespace Allors.Adapters.Workspace.Memory
             }
         }
 
-        protected virtual void LoadWorkspaceCompositeRelations(XmlReader reader, RoleType roleType)
+        protected virtual void LoadWorkspaceCompositeRelations(XmlReader reader, IRoleType roleType)
         {
             while (reader.Read())
             {
@@ -2746,7 +2746,7 @@ namespace Allors.Adapters.Workspace.Memory
             }
         }
 
-        protected virtual object GetOriginalUnitRole(RoleType roleType, Strategy association)
+        protected virtual object GetOriginalUnitRole(IRoleType roleType, Strategy association)
         {
             Dictionary<Strategy, object> originalUnitRoleByAssociation;
             if (!this.originalUnitRoleByAssociationByRoleType.TryGetValue(roleType, out originalUnitRoleByAssociation))
@@ -2765,7 +2765,7 @@ namespace Allors.Adapters.Workspace.Memory
             return originalUnit;
         }
 
-        protected virtual Dictionary<Strategy, Strategy> GetCompositeRoleByAssociation(RoleType roleType)
+        protected virtual Dictionary<Strategy, Strategy> GetCompositeRoleByAssociation(IRoleType roleType)
         {
             Dictionary<Strategy, Strategy> compositeRoleByAssociation;
             if (!this.diffCompositeRoleByAssociationByRoleType.TryGetValue(roleType, out compositeRoleByAssociation))
@@ -2777,7 +2777,7 @@ namespace Allors.Adapters.Workspace.Memory
             return compositeRoleByAssociation;
         }
 
-        protected virtual Dictionary<Strategy, HashSet<Strategy>> GetCompositeRolesByAssociation(RoleType roleType)
+        protected virtual Dictionary<Strategy, HashSet<Strategy>> GetCompositeRolesByAssociation(IRoleType roleType)
         {
             Dictionary<Strategy, HashSet<Strategy>> compositeRolesByAssociation;
             if (!this.diffCompositeRolesByAssociationByRoleType.TryGetValue(roleType, out compositeRolesByAssociation))
@@ -2804,7 +2804,7 @@ namespace Allors.Adapters.Workspace.Memory
             return new Strategy(this, objectType, objectId, false);
         }
 
-        private static bool AreUnitsEqual(RoleType roleType, object role1, object role2)
+        private static bool AreUnitsEqual(IRoleType roleType, object role1, object role2)
         {
             if (role1 == null)
             {

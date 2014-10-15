@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="IConflict.cs" company="Allors bvba">
+// <copyright file="RoleType.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -16,32 +16,18 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the IConflict type.</summary>
+// <summary>Defines the RoleType type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors
+namespace Allors.Meta
 {
-    using Allors.Meta;
+    using System;
 
-    /// <summary>
-    /// An object or relation conflict between a Workspace and a Database relation.
-    /// </summary>
-    public interface IConflict
+    public partial class RoleType : IRoleType
     {
-        /// <summary>
-        /// Gets Object.
-        /// </summary>
-        IObject Object { get; }
-
-        /// <summary>
-        /// Gets ObjectId.
-        /// </summary>
-        ObjectId ObjectId { get; }
-
-        /// <summary>
-        /// Gets the relation type.
-        /// </summary>
-        /// <value>The relation type.</value>
-        IRoleType RoleType { get; }
+        protected internal RoleType(IRelationType relationType, Guid id)
+            : base(relationType, id)
+        {
+        }
     }
 }

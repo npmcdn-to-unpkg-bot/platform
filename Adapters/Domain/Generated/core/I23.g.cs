@@ -24,7 +24,7 @@ namespace Allors.Domain
 
 		public global::Allors.Meta.Interface ObjectType = global::Allors.Meta.Interfaces.I23;
 
-		public global::Allors.Meta.RoleType I23AllorsString 
+		public global::Allors.Meta.IRoleType I23AllorsString 
 		{
 			get
 			{

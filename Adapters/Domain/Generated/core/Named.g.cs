@@ -80,14 +80,14 @@ namespace Allors.Domain
 
 		public global::Allors.Meta.Interface ObjectType = global::Allors.Meta.Interfaces.Named;
 
-		public global::Allors.Meta.RoleType Name 
+		public global::Allors.Meta.IRoleType Name 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.NamedName;
 			}
 		} 
-		public global::Allors.Meta.RoleType Index 
+		public global::Allors.Meta.IRoleType Index 
 		{
 			get
 			{

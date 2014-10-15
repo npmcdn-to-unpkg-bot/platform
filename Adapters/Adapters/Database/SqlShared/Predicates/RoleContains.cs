@@ -28,9 +28,9 @@ namespace Allors.Adapters.Database.Sql
     public sealed class RoleContains : Predicate
     {
         private readonly IObject allorsObject;
-        private readonly RoleType role;
+        private readonly IRoleType role;
 
-        public RoleContains(ExtentFiltered extent, RoleType role, IObject allorsObject)
+        public RoleContains(ExtentFiltered extent, IRoleType role, IObject allorsObject)
         {
             extent.CheckRole(role);
             CompositePredicateAssertions.ValidateRoleContains(role, allorsObject);

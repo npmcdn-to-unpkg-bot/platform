@@ -169,7 +169,7 @@ namespace Allors.Adapters.Database.Sql
             this.SqlSession.SqlChangeSet.OnDeleted(this.ObjectId);
         }
 
-        public virtual bool ExistRole(RoleType roleType)
+        public virtual bool ExistRole(IRoleType roleType)
         {
             if (roleType.ObjectType is IUnit)
             {
@@ -184,7 +184,7 @@ namespace Allors.Adapters.Database.Sql
             return this.ExistCompositeRole(roleType);
         }
 
-        public virtual object GetRole(RoleType roleType)
+        public virtual object GetRole(IRoleType roleType)
         {
             if (roleType.ObjectType is IUnit)
             {
@@ -199,7 +199,7 @@ namespace Allors.Adapters.Database.Sql
             return this.GetCompositeRole(roleType);
         }
 
-        public virtual void SetRole(RoleType roleType, object value)
+        public virtual void SetRole(IRoleType roleType, object value)
         {
             if (roleType.ObjectType is IUnit)
             {
@@ -225,7 +225,7 @@ namespace Allors.Adapters.Database.Sql
             }
         }
 
-        public virtual void RemoveRole(RoleType roleType)
+        public virtual void RemoveRole(IRoleType roleType)
         {
             if (roleType.ObjectType is IUnit)
             {
@@ -244,19 +244,19 @@ namespace Allors.Adapters.Database.Sql
             }
         }
 
-        public virtual bool ExistUnitRole(RoleType roleType)
+        public virtual bool ExistUnitRole(IRoleType roleType)
         {
             return this.GetUnitRole(roleType) != null;
         }
 
-        public virtual object GetUnitRole(RoleType roleType)
+        public virtual object GetUnitRole(IRoleType roleType)
         {
             this.AssertExist();
 
             return this.Roles.GetUnitRole(roleType);
         }
 
-        public virtual void SetUnitRole(RoleType roleType, object role)
+        public virtual void SetUnitRole(IRoleType roleType, object role)
         {
             this.AssertExist();
 
@@ -274,24 +274,24 @@ namespace Allors.Adapters.Database.Sql
             }
         }
 
-        public virtual void RemoveUnitRole(RoleType roleType)
+        public virtual void RemoveUnitRole(IRoleType roleType)
         {
             this.SetUnitRole(roleType, null);
         }
 
-        public virtual bool ExistCompositeRole(RoleType roleType)
+        public virtual bool ExistCompositeRole(IRoleType roleType)
         {
             return this.GetCompositeRole(roleType) != null;
         }
 
-        public virtual IObject GetCompositeRole(RoleType roleType)
+        public virtual IObject GetCompositeRole(IRoleType roleType)
         {
             this.AssertExist();
             var role = this.Roles.GetCompositeRole(roleType);
             return (role == null) ? null : this.SqlSession.GetOrCreateAssociationForExistingObject(role).Strategy.GetObject();
         }
 
-        public virtual void SetCompositeRole(RoleType roleType, IObject newRoleObject)
+        public virtual void SetCompositeRole(IRoleType roleType, IObject newRoleObject)
         {
             if (newRoleObject == null)
             {
@@ -308,7 +308,7 @@ namespace Allors.Adapters.Database.Sql
             this.Roles.SetCompositeRole(roleType, newRoleObjectId);
         }
 
-        public virtual void RemoveCompositeRole(RoleType roleType)
+        public virtual void RemoveCompositeRole(IRoleType roleType)
         {
             this.AssertExist();
 
@@ -317,19 +317,19 @@ namespace Allors.Adapters.Database.Sql
             this.Roles.RemoveCompositeRole(roleType);
         }
 
-        public virtual bool ExistCompositeRoles(RoleType roleType)
+        public virtual bool ExistCompositeRoles(IRoleType roleType)
         {
             return this.GetCompositeRoles(roleType).Count != 0;
         }
 
-        public virtual Allors.Extent GetCompositeRoles(RoleType roleType)
+        public virtual Allors.Extent GetCompositeRoles(IRoleType roleType)
         {
             this.AssertExist();
 
             return new ExtentRoles(this, roleType);
         }
 
-        public virtual void AddCompositeRole(RoleType roleType, IObject roleObject)
+        public virtual void AddCompositeRole(IRoleType roleType, IObject roleObject)
         {
             this.AssertExist();
 
@@ -343,7 +343,7 @@ namespace Allors.Adapters.Database.Sql
             }
         }
 
-        public virtual void RemoveCompositeRole(RoleType roleType, IObject roleObject)
+        public virtual void RemoveCompositeRole(IRoleType roleType, IObject roleObject)
         {
             this.AssertExist();
             
@@ -357,7 +357,7 @@ namespace Allors.Adapters.Database.Sql
             }
         }
 
-        public virtual void SetCompositeRoles(RoleType roleType, Allors.Extent roleObjects)
+        public virtual void SetCompositeRoles(IRoleType roleType, Allors.Extent roleObjects)
         {
             if (roleObjects == null || roleObjects.Count == 0)
             {
@@ -397,7 +397,7 @@ namespace Allors.Adapters.Database.Sql
             }
         }
 
-        public virtual void RemoveCompositeRoles(RoleType roleType)
+        public virtual void RemoveCompositeRoles(IRoleType roleType)
         {
             this.AssertExist();
 
@@ -466,26 +466,26 @@ namespace Allors.Adapters.Database.Sql
             this.roles = null;
         }
 
-        internal int ExtentRolesGetCount(RoleType roleType)
+        internal int ExtentRolesGetCount(IRoleType roleType)
         {
             this.AssertExist();
 
             return this.Roles.ExtentCount(roleType);
         }
 
-        internal IObject ExtentRolesFirst(RoleType roleType)
+        internal IObject ExtentRolesFirst(IRoleType roleType)
         {
             this.AssertExist();
 
             return this.Roles.ExtentFirst(this.SqlSession, roleType);
         }
 
-        internal void ExtentRolesCopyTo(RoleType roleType, Array array, int index)
+        internal void ExtentRolesCopyTo(IRoleType roleType, Array array, int index)
         {
             this.Roles.ExtentCopyTo(this.SqlSession, roleType, array, index);
         }
 
-        internal int ExtentIndexOf(RoleType roleType, IObject value)
+        internal int ExtentIndexOf(IRoleType roleType, IObject value)
         {
             var i = 0;
             foreach (var oid in this.Roles.GetCompositeRoles(roleType))
@@ -500,7 +500,7 @@ namespace Allors.Adapters.Database.Sql
             return -1;
         }
 
-        internal IObject ExtentGetItem(RoleType roleType, int index)
+        internal IObject ExtentGetItem(IRoleType roleType, int index)
         {
             var i = 0;
             foreach (var oid in this.Roles.GetCompositeRoles(roleType))
@@ -515,7 +515,7 @@ namespace Allors.Adapters.Database.Sql
             return null;
         }
 
-        internal bool ExtentRolesContains(RoleType roleType, IObject value)
+        internal bool ExtentRolesContains(IRoleType roleType, IObject value)
         {
             return this.Roles.ExtentContains(roleType, value.Id);
         }

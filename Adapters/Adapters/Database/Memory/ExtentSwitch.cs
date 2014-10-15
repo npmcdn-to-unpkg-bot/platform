@@ -34,7 +34,7 @@ namespace Allors.Adapters.Database.Memory
             this.strategyExtent = new StrategyExtentAssociation(strategy, associationType);
         }
 
-        public ExtentSwitch(Strategy strategy, RoleType roleType)
+        public ExtentSwitch(Strategy strategy, IRoleType roleType)
         {
             this.strategyExtent = new StrategyExtentRole(strategy, roleType);
         }
@@ -88,13 +88,13 @@ namespace Allors.Adapters.Database.Memory
             }
         }
 
-        public override Allors.Extent AddSort(RoleType roleType)
+        public override Allors.Extent AddSort(IRoleType roleType)
         {
             this.Upgrade();
             return this.extent.AddSort(roleType);
         }
 
-        public override Allors.Extent AddSort(RoleType roleType, SortDirection direction)
+        public override Allors.Extent AddSort(IRoleType roleType, SortDirection direction)
         {
             this.Upgrade();
             return this.extent.AddSort(roleType, direction);

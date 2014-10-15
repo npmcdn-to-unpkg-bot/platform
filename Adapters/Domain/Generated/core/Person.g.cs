@@ -382,28 +382,28 @@ namespace Allors.Domain
 
 		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.Person;
 
-		public global::Allors.Meta.RoleType NextPerson 
+		public global::Allors.Meta.IRoleType NextPerson 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.PersonNextPerson;
 			}
 		} 
-		public global::Allors.Meta.RoleType Company 
+		public global::Allors.Meta.IRoleType Company 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.PersonCompany;
 			}
 		} 
-		public global::Allors.Meta.RoleType Name 
+		public global::Allors.Meta.IRoleType Name 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.NamedName;
 			}
 		} 
-		public global::Allors.Meta.RoleType Index 
+		public global::Allors.Meta.IRoleType Index 
 		{
 			get
 			{

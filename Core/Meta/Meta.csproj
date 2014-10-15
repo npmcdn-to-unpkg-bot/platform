@@ -53,6 +53,7 @@
     <Compile Include="Core\InterfaceBuilder.cs" />
     <Compile Include="Core\InterfaceBuilder.v.cs" />
     <Compile Include="Core\MetaPopulation.cs" />
+    <Compile Include="Core\RoleType.cs" />
     <Compile Include="Core\Unit.cs" />
     <Compile Include="Core\UnitBuilder.cs" />
     <Compile Include="Core\UnitBuilder.v.cs" />

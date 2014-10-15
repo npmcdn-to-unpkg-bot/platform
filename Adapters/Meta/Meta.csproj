@@ -101,6 +101,9 @@
     <Compile Include="..\..\Core\Meta\Core\Repository.cs">
       <Link>Core\Repository.cs</Link>
     </Compile>
+    <Compile Include="..\..\Core\Meta\Core\RoleType.cs">
+      <Link>Core\RoleType.cs</Link>
+    </Compile>
     <Compile Include="..\..\Core\Meta\Core\Unit.cs">
       <Link>Core\Unit.cs</Link>
     </Compile>

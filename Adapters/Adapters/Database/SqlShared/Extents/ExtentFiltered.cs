@@ -33,7 +33,7 @@ namespace Allors.Adapters.Database.Sql
 
         private AndPredicate filter;
 
-        public ExtentFiltered(DatabaseSession session, Strategy strategy, RoleType roleType)
+        public ExtentFiltered(DatabaseSession session, Strategy strategy, IRoleType roleType)
             : this(session, (Composite)roleType.ObjectType)
         {
             this.Strategy = strategy;
@@ -79,7 +79,7 @@ namespace Allors.Adapters.Database.Sql
 
         public IAssociationType AssociationType { get; private set; }
 
-        public RoleType RoleType { get; private set; }
+        public IRoleType RoleType { get; private set; }
 
         public Strategy Strategy { get; private set; }
 
@@ -109,7 +109,7 @@ namespace Allors.Adapters.Database.Sql
             }
         }
 
-        public void CheckRole(RoleType role)
+        public void CheckRole(IRoleType role)
         {
             if (!this.objectType.ContainsRoleType(role))
             {

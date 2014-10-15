@@ -27,10 +27,10 @@ namespace Allors.Adapters.Database.Memory
     public sealed class ExtentSort : IComparer<Strategy>
     {
         private readonly SortDirection direction;
-        private readonly RoleType roleType;
+        private readonly IRoleType roleType;
         private ExtentSort subSorter;
 
-        internal ExtentSort(RoleType roleType, SortDirection direction)
+        internal ExtentSort(IRoleType roleType, SortDirection direction)
         {
             this.roleType = roleType;
             this.direction = direction;
@@ -84,8 +84,8 @@ namespace Allors.Adapters.Database.Memory
 
             return thatResult;
         }
-        
-        internal void AddSort(RoleType subSortRoleType, SortDirection subSortDirection)
+
+        internal void AddSort(IRoleType subSortRoleType, SortDirection subSortDirection)
         {
             if (this.subSorter == null)
             {

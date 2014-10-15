@@ -77,12 +77,12 @@ namespace Allors.Adapters.Database.Sql
             return (ICompositePredicate)this.filter;
         }
 
-        public ICompositePredicate AddBetween(RoleType role, object firstValue, object secondValue)
+        public ICompositePredicate AddBetween(IRoleType role, object firstValue, object secondValue)
         {
             this.CheckUnarity();
             this.extent.FlushCache();
-            var betweenRoleA = firstValue as RoleType;
-            var betweenRoleB = secondValue as RoleType;
+            var betweenRoleA = firstValue as IRoleType;
+            var betweenRoleB = secondValue as IRoleType;
             var betweenAssociationA = firstValue as IAssociationType;
             var betweenAssociationB = secondValue as IAssociationType;
             if (betweenRoleA != null && betweenRoleB != null)
@@ -101,7 +101,7 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public ICompositePredicate AddContainedIn(RoleType role, Allors.Extent containingExtent)
+        public ICompositePredicate AddContainedIn(IRoleType role, Allors.Extent containingExtent)
         {
             this.CheckUnarity();
             this.extent.FlushCache();
@@ -109,7 +109,7 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public ICompositePredicate AddContainedIn(RoleType role, IEnumerable<IObject> containingEnumerable)
+        public ICompositePredicate AddContainedIn(IRoleType role, IEnumerable<IObject> containingEnumerable)
         {
             this.CheckUnarity();
             this.extent.FlushCache();
@@ -133,7 +133,7 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public ICompositePredicate AddContains(RoleType role, IObject containedObject)
+        public ICompositePredicate AddContains(IRoleType role, IObject containedObject)
         {
             this.CheckUnarity();
             this.extent.FlushCache();
@@ -157,11 +157,11 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public ICompositePredicate AddEquals(RoleType role, object obj)
+        public ICompositePredicate AddEquals(IRoleType role, object obj)
         {
             this.CheckUnarity();
             this.extent.FlushCache();
-            var equalsRole = obj as RoleType;
+            var equalsRole = obj as IRoleType;
             var equalsAssociation = obj as IAssociationType;
             if (equalsRole != null)
             {
@@ -187,7 +187,7 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public ICompositePredicate AddExists(RoleType role)
+        public ICompositePredicate AddExists(IRoleType role)
         {
             this.CheckUnarity();
             this.extent.FlushCache();
@@ -203,11 +203,11 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public ICompositePredicate AddGreaterThan(RoleType role, object value)
+        public ICompositePredicate AddGreaterThan(IRoleType role, object value)
         {
             this.CheckUnarity();
             this.extent.FlushCache();
-            var greaterThanRole = value as RoleType;
+            var greaterThanRole = value as IRoleType;
             var greaterThanAssociation = value as IAssociationType;
             if (greaterThanRole != null)
             {
@@ -233,7 +233,7 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public ICompositePredicate AddInstanceof(RoleType role, Composite type)
+        public ICompositePredicate AddInstanceof(IRoleType role, Composite type)
         {
             this.CheckUnarity();
             this.extent.FlushCache();
@@ -249,11 +249,11 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public ICompositePredicate AddLessThan(RoleType role, object value)
+        public ICompositePredicate AddLessThan(IRoleType role, object value)
         {
             this.CheckUnarity();
             this.extent.FlushCache();
-            var lessThanRole = value as RoleType;
+            var lessThanRole = value as IRoleType;
             var lessThanAssociation = value as IAssociationType;
             if (lessThanRole != null)
             {
@@ -271,7 +271,7 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public ICompositePredicate AddLike(RoleType role, string value)
+        public ICompositePredicate AddLike(IRoleType role, string value)
         {
             this.CheckUnarity();
             this.extent.FlushCache();

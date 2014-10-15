@@ -53,7 +53,7 @@ namespace Allors.Adapters.Database.Sql
         /// <summary>
         /// The invalid role.
         /// </summary>
-        private readonly RoleType role;
+        private readonly IRoleType role;
 
         /// <summary>
         /// The name of the table.
@@ -75,7 +75,7 @@ namespace Allors.Adapters.Database.Sql
         /// <param name="columnName">Name of the column.</param>
         /// <param name="errorKind">The kind of validation error.</param>
         /// <param name="message">The validation error message.</param>
-        public TableSchemaValidationError(IObjectType objectType, IRelationType relationType, RoleType role, string tableName, string columnName, SchemaValidationErrorKind errorKind, string message)
+        public TableSchemaValidationError(IObjectType objectType, IRelationType relationType, IRoleType role, string tableName, string columnName, SchemaValidationErrorKind errorKind, string message)
         {
             this.objectType = objectType;
             this.relationType = relationType;
@@ -126,7 +126,7 @@ namespace Allors.Adapters.Database.Sql
         /// Gets the invalid role.
         /// </summary>
         /// <value>The role .</value>
-        public RoleType Role
+        public IRoleType Role
         {
             get { return this.role; }
         }

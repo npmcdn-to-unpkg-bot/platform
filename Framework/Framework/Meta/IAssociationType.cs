@@ -220,7 +220,7 @@ namespace Allors.Meta
         /// Gets the role.
         /// </summary>
         /// <value>The role .</value>
-        public RoleType RoleType
+        public IRoleType RoleType
         {
             get { return RelationType.RoleType; }
         }

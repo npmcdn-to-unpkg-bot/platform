@@ -223,49 +223,49 @@ namespace Allors.Domain
 
 		public global::Allors.Meta.Interface ObjectType = global::Allors.Meta.Interfaces.S2;
 
-		public global::Allors.Meta.RoleType S2AllorsString 
+		public global::Allors.Meta.IRoleType S2AllorsString 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S2AllorsString;
 			}
 		} 
-		public global::Allors.Meta.RoleType S2AllorsInteger 
+		public global::Allors.Meta.IRoleType S2AllorsInteger 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S2AllorsInteger;
 			}
 		} 
-		public global::Allors.Meta.RoleType S2AllorsDouble 
+		public global::Allors.Meta.IRoleType S2AllorsDouble 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S2AllorsDouble;
 			}
 		} 
-		public global::Allors.Meta.RoleType S2AllorsBoolean 
+		public global::Allors.Meta.IRoleType S2AllorsBoolean 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S2AllorsBoolean;
 			}
 		} 
-		public global::Allors.Meta.RoleType S2AllorsDecimal 
+		public global::Allors.Meta.IRoleType S2AllorsDecimal 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S2AllorsDecimal;
 			}
 		} 
-		public global::Allors.Meta.RoleType S2AllorsDate 
+		public global::Allors.Meta.IRoleType S2AllorsDate 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S2AllorsDate;
 			}
 		} 
-		public global::Allors.Meta.RoleType S2AllorsLong 
+		public global::Allors.Meta.IRoleType S2AllorsLong 
 		{
 			get
 			{

@@ -30,11 +30,11 @@ namespace Allors.Adapters.Database.Npgsql
         private const int BatchSize = 1000;
         private readonly DatabaseSession session;
 
-        private Dictionary<IObjectType, Dictionary<RoleType, List<UnitRelation>>> setUnitRoleRelationsByRoleTypeByExclusiveLeafClass;
-        private Dictionary<RoleType, List<CompositeRelation>> setCompositeRoleRelationsByRoleType;
-        private Dictionary<RoleType, List<CompositeRelation>> addCompositeRoleRelationsByRoleType;
-        private Dictionary<RoleType, List<CompositeRelation>> removeCompositeRoleRelationsByRoleType;
-        private Dictionary<RoleType, IList<ObjectId>> clearCompositeRoleRelationsByRoleType;
+        private Dictionary<IObjectType, Dictionary<IRoleType, List<UnitRelation>>> setUnitRoleRelationsByRoleTypeByExclusiveLeafClass;
+        private Dictionary<IRoleType, List<CompositeRelation>> setCompositeRoleRelationsByRoleType;
+        private Dictionary<IRoleType, List<CompositeRelation>> addCompositeRoleRelationsByRoleType;
+        private Dictionary<IRoleType, List<CompositeRelation>> removeCompositeRoleRelationsByRoleType;
+        private Dictionary<IRoleType, IList<ObjectId>> clearCompositeRoleRelationsByRoleType;
 
         public Flush(DatabaseSession session, Dictionary<Reference, Roles> unsyncedRolesByReference)
         {
@@ -130,24 +130,24 @@ namespace Allors.Adapters.Database.Npgsql
             this.clearCompositeRoleRelationsByRoleType = null;
         }
 
-        public void SetUnitRoles(Roles roles, List<RoleType> unitRoles)
+        public void SetUnitRoles(Roles roles, List<IRoleType> unitRoles)
         {
             roles.Reference.Session.SessionCommands.SetUnitRolesCommand.Execute(roles, unitRoles);
         }
 
-        public void SetUnitRole(Reference association, RoleType roleType, object role)
+        public void SetUnitRole(Reference association, IRoleType roleType, object role)
         {
             if (this.setUnitRoleRelationsByRoleTypeByExclusiveLeafClass == null)
             {
-                this.setUnitRoleRelationsByRoleTypeByExclusiveLeafClass = new Dictionary<IObjectType, Dictionary<RoleType, List<UnitRelation>>>();
+                this.setUnitRoleRelationsByRoleTypeByExclusiveLeafClass = new Dictionary<IObjectType, Dictionary<IRoleType, List<UnitRelation>>>();
             }
 
             var exclusiveLeafClass = association.ObjectType.ExclusiveLeafClass;
 
-            Dictionary<RoleType, List<UnitRelation>> setUnitRoleRelationsByRoleType;
+            Dictionary<IRoleType, List<UnitRelation>> setUnitRoleRelationsByRoleType;
             if (!this.setUnitRoleRelationsByRoleTypeByExclusiveLeafClass.TryGetValue(exclusiveLeafClass, out setUnitRoleRelationsByRoleType))
             {
-                setUnitRoleRelationsByRoleType = new Dictionary<RoleType, List<UnitRelation>>();
+                setUnitRoleRelationsByRoleType = new Dictionary<IRoleType, List<UnitRelation>>();
                 this.setUnitRoleRelationsByRoleTypeByExclusiveLeafClass[exclusiveLeafClass] = setUnitRoleRelationsByRoleType;
             }
 
@@ -168,11 +168,11 @@ namespace Allors.Adapters.Database.Npgsql
             }
         }
 
-        public void SetCompositeRole(Reference association, RoleType roleType, ObjectId role)
+        public void SetCompositeRole(Reference association, IRoleType roleType, ObjectId role)
         {
             if (this.setCompositeRoleRelationsByRoleType == null)
             {
-                this.setCompositeRoleRelationsByRoleType = new Dictionary<RoleType, List<CompositeRelation>>();
+                this.setCompositeRoleRelationsByRoleType = new Dictionary<IRoleType, List<CompositeRelation>>();
             }
 
             List<CompositeRelation> relations;
@@ -191,11 +191,11 @@ namespace Allors.Adapters.Database.Npgsql
             }
         }
 
-        public void AddCompositeRole(Reference association, RoleType roleType, HashSet<ObjectId> added)
+        public void AddCompositeRole(Reference association, IRoleType roleType, HashSet<ObjectId> added)
         {
             if (this.addCompositeRoleRelationsByRoleType == null)
             {
-                this.addCompositeRoleRelationsByRoleType = new Dictionary<RoleType, List<CompositeRelation>>();
+                this.addCompositeRoleRelationsByRoleType = new Dictionary<IRoleType, List<CompositeRelation>>();
             }
 
             List<CompositeRelation> relations;
@@ -217,11 +217,11 @@ namespace Allors.Adapters.Database.Npgsql
             }
         }
 
-        public void RemoveCompositeRole(Reference association, RoleType roleType, HashSet<ObjectId> removed)
+        public void RemoveCompositeRole(Reference association, IRoleType roleType, HashSet<ObjectId> removed)
         {
             if (this.removeCompositeRoleRelationsByRoleType == null)
             {
-                this.removeCompositeRoleRelationsByRoleType = new Dictionary<RoleType, List<CompositeRelation>>();
+                this.removeCompositeRoleRelationsByRoleType = new Dictionary<IRoleType, List<CompositeRelation>>();
             }
 
             List<CompositeRelation> relations;
@@ -243,11 +243,11 @@ namespace Allors.Adapters.Database.Npgsql
             }
         }
 
-        public void ClearCompositeAndCompositesRole(Reference association, RoleType roleType)
+        public void ClearCompositeAndCompositesRole(Reference association, IRoleType roleType)
         {
             if (this.clearCompositeRoleRelationsByRoleType == null)
             {
-                this.clearCompositeRoleRelationsByRoleType = new Dictionary<RoleType, IList<ObjectId>>();
+                this.clearCompositeRoleRelationsByRoleType = new Dictionary<IRoleType, IList<ObjectId>>();
             }
 
             IList<ObjectId> relations;

@@ -245,7 +245,7 @@ namespace Allors.Adapters.Database.Sql
             return this.columnsByRelationType[association.RelationType];
         }
 
-        public SchemaColumn Column(RoleType role)
+        public SchemaColumn Column(IRoleType role)
         {
             return this.columnsByRelationType[role.RelationType];
         }
@@ -265,7 +265,7 @@ namespace Allors.Adapters.Database.Sql
             return this.tablesByRelationType[association.RelationType];
         }
 
-        public SchemaTable Table(RoleType role)
+        public SchemaTable Table(IRoleType role)
         {
             return this.tablesByRelationType[role.RelationType];
         }
@@ -317,8 +317,8 @@ namespace Allors.Adapters.Database.Sql
 
             this.CreateTablesFromMeta();
         }
-        
-        protected virtual DbType GetDbType(RoleType role)
+
+        protected virtual DbType GetDbType(IRoleType role)
         {
             var unitType = (IUnit)role.ObjectType;
             var unitTypeTag = unitType.UnitTag;
@@ -400,7 +400,7 @@ namespace Allors.Adapters.Database.Sql
                     schemaTable.AddColumn(this.ObjectId);
                     schemaTable.AddColumn(this.TypeId);
 
-                    var roleTypes = new List<RoleType>();
+                    var roleTypes = new List<IRoleType>();
                     var associationTypes = new List<IAssociationType>();
 
                     foreach (var roleType in @class.RoleTypes)

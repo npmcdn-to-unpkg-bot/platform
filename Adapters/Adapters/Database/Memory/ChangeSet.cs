@@ -25,7 +25,7 @@ namespace Allors.Adapters.Database.Memory
 
     public sealed class ChangeSet : IChangeSet
     {
-        private readonly EmptySet<RoleType> emptySet;
+        private readonly EmptySet<IRoleType> emptySet;
 
         private readonly HashSet<ObjectId> created;
         private readonly HashSet<ObjectId> deleted; 
@@ -33,16 +33,16 @@ namespace Allors.Adapters.Database.Memory
         private readonly HashSet<ObjectId> associations;
         private readonly HashSet<ObjectId> roles;
 
-        private readonly Dictionary<ObjectId, ISet<RoleType>> roleTypesByAssociation;
+        private readonly Dictionary<ObjectId, ISet<IRoleType>> roleTypesByAssociation;
         
         public ChangeSet()
         {
-            this.emptySet = new EmptySet<RoleType>(); 
+            this.emptySet = new EmptySet<IRoleType>(); 
             this.created = new HashSet<ObjectId>();
             this.deleted = new HashSet<ObjectId>();
             this.associations = new HashSet<ObjectId>();
             this.roles = new HashSet<ObjectId>();
-            this.roleTypesByAssociation = new Dictionary<ObjectId, ISet<RoleType>>();
+            this.roleTypesByAssociation = new Dictionary<ObjectId, ISet<IRoleType>>();
         }
 
         public ISet<ObjectId> Created
@@ -77,7 +77,7 @@ namespace Allors.Adapters.Database.Memory
             }
         }
 
-        public IDictionary<ObjectId, ISet<RoleType>> RoleTypesByAssociation
+        public IDictionary<ObjectId, ISet<IRoleType>> RoleTypesByAssociation
         {
             get
             {
@@ -85,9 +85,9 @@ namespace Allors.Adapters.Database.Memory
             }
         }
 
-        public ISet<RoleType> GetRoleTypes(ObjectId association)
+        public ISet<IRoleType> GetRoleTypes(ObjectId association)
         {
-            ISet<RoleType> roleTypes;
+            ISet<IRoleType> roleTypes;
             if (this.RoleTypesByAssociation.TryGetValue(association, out roleTypes))
             {
                 return roleTypes;
@@ -106,14 +106,14 @@ namespace Allors.Adapters.Database.Memory
             this.deleted.Add(strategy.ObjectId);
         }
 
-        public void OnChangingUnitRole(Strategy association, RoleType roleType)
+        public void OnChangingUnitRole(Strategy association, IRoleType roleType)
         {
             this.associations.Add(association.ObjectId);
 
             this.RoleTypes(association.ObjectId).Add(roleType);
         }
 
-        public void OnChangingCompositeRole(Strategy association, RoleType roleType, IObject previousRole, IObject newRole)
+        public void OnChangingCompositeRole(Strategy association, IRoleType roleType, IObject previousRole, IObject newRole)
         {
             this.associations.Add(association.ObjectId);
 
@@ -130,7 +130,7 @@ namespace Allors.Adapters.Database.Memory
             this.RoleTypes(association.ObjectId).Add(roleType);
         }
 
-        public void OnChangingCompositesRole(Strategy association, RoleType roleType, Strategy changedRole)
+        public void OnChangingCompositesRole(Strategy association, IRoleType roleType, Strategy changedRole)
         {
             this.associations.Add(association.ObjectId);
 
@@ -142,7 +142,7 @@ namespace Allors.Adapters.Database.Memory
             this.RoleTypes(association.ObjectId).Add(roleType);
         }
 
-        public void OnChangingCompositesRole(Strategy association, RoleType roleType, HashSet<Strategy> previousRoles)
+        public void OnChangingCompositesRole(Strategy association, IRoleType roleType, HashSet<Strategy> previousRoles)
         {
             this.associations.Add(association.ObjectId);
 
@@ -157,12 +157,12 @@ namespace Allors.Adapters.Database.Memory
             this.RoleTypes(association.ObjectId).Add(roleType);
         }
 
-        private ISet<RoleType> RoleTypes(ObjectId associationId)
+        private ISet<IRoleType> RoleTypes(ObjectId associationId)
         {
-            ISet<RoleType> roleTypes;
+            ISet<IRoleType> roleTypes;
             if (!this.RoleTypesByAssociation.TryGetValue(associationId, out roleTypes))
             {
-                roleTypes = new HashSet<RoleType>();
+                roleTypes = new HashSet<IRoleType>();
                 this.RoleTypesByAssociation[associationId] = roleTypes;
             }
 

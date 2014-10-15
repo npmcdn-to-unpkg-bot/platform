@@ -26,7 +26,7 @@ namespace Allors.Adapters.Database.Sql.Commands
 
     public interface ILoadUnitRelations
     {
-        void Execute(IList<UnitRelation> relations, IObjectType exclusiveLeafClass, RoleType roleType);
+        void Execute(IList<UnitRelation> relations, IObjectType exclusiveLeafClass, IRoleType roleType);
     }
 
     public interface ILoadUnitRelationsFactory

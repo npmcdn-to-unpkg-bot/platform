@@ -73,7 +73,7 @@ namespace Allors.Adapters.Database.Sql
 
         public void AddJoins(IObjectType leafClass, string alias)
         {
-            foreach (RoleType role in this.referenceRoles)
+            foreach (IRoleType role in this.referenceRoles)
             {
                 var relationType = role.RelationType;
                 var association = relationType.AssociationType;
@@ -97,7 +97,7 @@ namespace Allors.Adapters.Database.Sql
                 }
             }
 
-            foreach (RoleType role in this.referenceRoleInstances)
+            foreach (IRoleType role in this.referenceRoleInstances)
             {
                 var relationType = role.RelationType;
 
@@ -196,14 +196,14 @@ namespace Allors.Adapters.Database.Sql
 
         public abstract ExtentStatement CreateChild(SqlExtent extent, IAssociationType association);
 
-        public abstract ExtentStatement CreateChild(SqlExtent extent, RoleType role);
+        public abstract ExtentStatement CreateChild(SqlExtent extent, IRoleType role);
 
         public string GetJoinName(IAssociationType association)
         {
             return association.SingularName + "_AC";
         }
 
-        public string GetJoinName(RoleType role)
+        public string GetJoinName(IRoleType role)
         {
             return role.SingularFullName + "_RC";
         }
@@ -224,7 +224,7 @@ namespace Allors.Adapters.Database.Sql
             }
         }
 
-        public void UseRole(RoleType role)
+        public void UseRole(IRoleType role)
         {
             if (role.ObjectType is Composite && !this.referenceRoles.Contains(role))
             {
@@ -232,7 +232,7 @@ namespace Allors.Adapters.Database.Sql
             }
         }
 
-        public void UseRoleInstance(RoleType role)
+        public void UseRoleInstance(IRoleType role)
         {
             if (!this.referenceRoleInstances.Contains(role))
             {

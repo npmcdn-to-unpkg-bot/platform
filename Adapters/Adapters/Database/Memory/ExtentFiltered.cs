@@ -61,7 +61,7 @@ namespace Allors.Adapters.Database.Memory
             }
         }
 
-        internal void CheckForRoleType(RoleType roleType)
+        internal void CheckForRoleType(IRoleType roleType)
         {
             if (!this.objectType.ContainsRoleType(roleType))
             {

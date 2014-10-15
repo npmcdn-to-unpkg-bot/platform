@@ -25,9 +25,9 @@ namespace Allors.Adapters.Database.Sql
     public sealed class RoleContainedInExtent : In
     {
         private readonly SqlExtent inExtent;
-        private readonly RoleType role;
+        private readonly IRoleType role;
 
-        public RoleContainedInExtent(ExtentFiltered extent, RoleType role, Allors.Extent inExtent)
+        public RoleContainedInExtent(ExtentFiltered extent, IRoleType role, Allors.Extent inExtent)
         {
             extent.CheckRole(role);
             CompositePredicateAssertions.ValidateRoleContainedIn(role, inExtent);

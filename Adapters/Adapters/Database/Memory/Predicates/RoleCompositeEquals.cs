@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="RoleCompositeEquals.cs" company="Allors bvba">
+// <copyright file="RoleCompositeEqualsValue.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // Dual Licensed under
 //   a) the Lesser General Public Licence v3 (LGPL)
@@ -20,10 +20,10 @@ namespace Allors.Adapters.Database.Memory
 
     internal sealed class RoleCompositeEqualsValue : Predicate
     {
-        private readonly RoleType roleType;
+        private readonly IRoleType roleType;
         private readonly object equals;
 
-        internal RoleCompositeEqualsValue(ExtentFiltered extent, RoleType roleType, object equals)
+        internal RoleCompositeEqualsValue(ExtentFiltered extent, IRoleType roleType, object equals)
         {
             extent.CheckForRoleType(roleType);
             CompositePredicateAssertions.ValidateRoleEquals(roleType, equals);
@@ -43,9 +43,9 @@ namespace Allors.Adapters.Database.Memory
 
             object equalsValue = this.equals;
 
-            if (this.equals is RoleType)
+            if (this.equals is IRoleType)
             {
-                var equalsRole = (RoleType)this.equals;
+                var equalsRole = (IRoleType)this.equals;
                 equalsValue = strategy.GetCompositeRole(equalsRole);
             }
 

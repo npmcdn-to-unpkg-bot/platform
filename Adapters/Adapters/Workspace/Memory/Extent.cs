@@ -153,12 +153,12 @@ namespace Allors.Adapters.Workspace.Memory
             return (IObject[])Array.CreateInstance(type, 0);
         }
 
-        public override Allors.Extent AddSort(RoleType roleType)
+        public override Allors.Extent AddSort(IRoleType roleType)
         {
             return this.AddSort(roleType, SortDirection.Ascending);
         }
 
-        public override Allors.Extent AddSort(RoleType roleType, SortDirection direction)
+        public override Allors.Extent AddSort(IRoleType roleType, SortDirection direction)
         {
             if (this.sorter == null)
             {
@@ -187,7 +187,7 @@ namespace Allors.Adapters.Workspace.Memory
             }
         }
 
-        internal virtual void CheckForRoleType(RoleType role)
+        internal virtual void CheckForRoleType(IRoleType role)
         {
             // TODO: Optimize
             if (!this.ObjectType.RoleTypes.Contains(role))

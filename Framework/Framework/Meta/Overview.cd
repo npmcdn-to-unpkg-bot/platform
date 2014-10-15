@@ -162,7 +162,7 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Allors.Meta.RoleType">
+  <Class Name="Allors.Meta.IRoleType">
     <Position X="10.75" Y="7" Width="2" />
     <Members>
       <Field Name="assignedPluralName" Hidden="true" />
@@ -180,6 +180,7 @@
       <Method Name="Get" Hidden="true" />
       <Method Name="GetObjectType" Hidden="true" />
       <Method Name="IdComparer" Hidden="true" />
+      <Method Name="IRoleType" Hidden="true" />
       <Field Name="isMany" Hidden="true" />
       <Field Name="MaximumSize" Hidden="true" />
       <Property Name="Name" Hidden="true" />
@@ -191,7 +192,6 @@
       <Property Name="PropertyName" Hidden="true" />
       <Field Name="relationType" Hidden="true" />
       <Property Name="RelationType" Hidden="true" />
-      <Method Name="RoleType" Hidden="true" />
       <Field Name="scale" Hidden="true" />
       <Method Name="Set" Hidden="true" />
       <Property Name="SingularFullName" Hidden="true" />
@@ -207,7 +207,7 @@
     </Compartments>
     <TypeIdentifier>
       <HashCode>AAIGmACCAAGgxIZGAMLAAAQCgAAQAIASAJIQAEDAEAg=</HashCode>
-      <FileName>Meta\RoleType.cs</FileName>
+      <FileName>Meta\IRoleType.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
@@ -247,9 +247,6 @@
       <HashCode>AAIAAAAAAACAACQEAKGABAQggAAQABAAEAIAAAACAAA=</HashCode>
       <FileName>Meta\IRelationType.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="RoleType" />
-    </ShowAsAssociation>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Allors.Meta.IUnit">

@@ -839,231 +839,231 @@ namespace Allors.Domain
 
 		public global::Allors.Meta.Interface ObjectType = global::Allors.Meta.Interfaces.IGT32Composite;
 
-		public global::Allors.Meta.RoleType Self13 
+		public global::Allors.Meta.IRoleType Self13 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32CompositeSelf13;
 			}
 		} 
-		public global::Allors.Meta.RoleType Self31 
+		public global::Allors.Meta.IRoleType Self31 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32CompositeSelf31;
 			}
 		} 
-		public global::Allors.Meta.RoleType Self14 
+		public global::Allors.Meta.IRoleType Self14 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32CompositeSelf14;
 			}
 		} 
-		public global::Allors.Meta.RoleType Self21 
+		public global::Allors.Meta.IRoleType Self21 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32CompositeSelf21;
 			}
 		} 
-		public global::Allors.Meta.RoleType Self2 
+		public global::Allors.Meta.IRoleType Self2 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32CompositeSelf2;
 			}
 		} 
-		public global::Allors.Meta.RoleType Self23 
+		public global::Allors.Meta.IRoleType Self23 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32CompositeSelf23;
 			}
 		} 
-		public global::Allors.Meta.RoleType Self22 
+		public global::Allors.Meta.IRoleType Self22 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32CompositeSelf22;
 			}
 		} 
-		public global::Allors.Meta.RoleType Self18 
+		public global::Allors.Meta.IRoleType Self18 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32CompositeSelf18;
 			}
 		} 
-		public global::Allors.Meta.RoleType Self17 
+		public global::Allors.Meta.IRoleType Self17 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32CompositeSelf17;
 			}
 		} 
-		public global::Allors.Meta.RoleType Self3 
+		public global::Allors.Meta.IRoleType Self3 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32CompositeSelf3;
 			}
 		} 
-		public global::Allors.Meta.RoleType Self29 
+		public global::Allors.Meta.IRoleType Self29 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32CompositeSelf29;
 			}
 		} 
-		public global::Allors.Meta.RoleType Self26 
+		public global::Allors.Meta.IRoleType Self26 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32CompositeSelf26;
 			}
 		} 
-		public global::Allors.Meta.RoleType Self4 
+		public global::Allors.Meta.IRoleType Self4 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32CompositeSelf4;
 			}
 		} 
-		public global::Allors.Meta.RoleType Self8 
+		public global::Allors.Meta.IRoleType Self8 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32CompositeSelf8;
 			}
 		} 
-		public global::Allors.Meta.RoleType Self24 
+		public global::Allors.Meta.IRoleType Self24 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32CompositeSelf24;
 			}
 		} 
-		public global::Allors.Meta.RoleType Self12 
+		public global::Allors.Meta.IRoleType Self12 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32CompositeSelf12;
 			}
 		} 
-		public global::Allors.Meta.RoleType Self7 
+		public global::Allors.Meta.IRoleType Self7 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32CompositeSelf7;
 			}
 		} 
-		public global::Allors.Meta.RoleType Self6 
+		public global::Allors.Meta.IRoleType Self6 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32CompositeSelf6;
 			}
 		} 
-		public global::Allors.Meta.RoleType Self25 
+		public global::Allors.Meta.IRoleType Self25 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32CompositeSelf25;
 			}
 		} 
-		public global::Allors.Meta.RoleType Self20 
+		public global::Allors.Meta.IRoleType Self20 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32CompositeSelf20;
 			}
 		} 
-		public global::Allors.Meta.RoleType Self9 
+		public global::Allors.Meta.IRoleType Self9 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32CompositeSelf9;
 			}
 		} 
-		public global::Allors.Meta.RoleType Self11 
+		public global::Allors.Meta.IRoleType Self11 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32CompositeSelf11;
 			}
 		} 
-		public global::Allors.Meta.RoleType Self32 
+		public global::Allors.Meta.IRoleType Self32 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32CompositeSelf32;
 			}
 		} 
-		public global::Allors.Meta.RoleType Self28 
+		public global::Allors.Meta.IRoleType Self28 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32CompositeSelf28;
 			}
 		} 
-		public global::Allors.Meta.RoleType Self33 
+		public global::Allors.Meta.IRoleType Self33 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32CompositeSelf33;
 			}
 		} 
-		public global::Allors.Meta.RoleType Self27 
+		public global::Allors.Meta.IRoleType Self27 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32CompositeSelf27;
 			}
 		} 
-		public global::Allors.Meta.RoleType Self30 
+		public global::Allors.Meta.IRoleType Self30 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32CompositeSelf30;
 			}
 		} 
-		public global::Allors.Meta.RoleType Self1 
+		public global::Allors.Meta.IRoleType Self1 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32CompositeSelf1;
 			}
 		} 
-		public global::Allors.Meta.RoleType Self15 
+		public global::Allors.Meta.IRoleType Self15 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32CompositeSelf15;
 			}
 		} 
-		public global::Allors.Meta.RoleType Self5 
+		public global::Allors.Meta.IRoleType Self5 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32CompositeSelf5;
 			}
 		} 
-		public global::Allors.Meta.RoleType Self19 
+		public global::Allors.Meta.IRoleType Self19 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32CompositeSelf19;
 			}
 		} 
-		public global::Allors.Meta.RoleType Self10 
+		public global::Allors.Meta.IRoleType Self10 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32CompositeSelf10;
 			}
 		} 
-		public global::Allors.Meta.RoleType Self16 
+		public global::Allors.Meta.IRoleType Self16 
 		{
 			get
 			{

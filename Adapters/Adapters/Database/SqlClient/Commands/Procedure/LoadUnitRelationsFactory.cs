@@ -34,12 +34,12 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
     public class LoadUnitRelationsFactory : ILoadUnitRelationsFactory
     {
         public readonly SqlClient.ManagementSession ManagementSession;
-        private readonly Dictionary<IObjectType, Dictionary<RoleType, string>> sqlByRoleTypeByObjectType;
+        private readonly Dictionary<IObjectType, Dictionary<IRoleType, string>> sqlByRoleTypeByObjectType;
 
         public LoadUnitRelationsFactory(SqlClient.ManagementSession session)
         {
             this.ManagementSession = session;
-            this.sqlByRoleTypeByObjectType = new Dictionary<IObjectType, Dictionary<RoleType, string>>();
+            this.sqlByRoleTypeByObjectType = new Dictionary<IObjectType, Dictionary<IRoleType, string>>();
         }
 
         public ILoadUnitRelations Create()
@@ -47,12 +47,12 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
             return new LoadUnitRelations(this);
         }
 
-        public string GetSql(IObjectType objectType, RoleType roleType)
+        public string GetSql(IObjectType objectType, IRoleType roleType)
         {
-            Dictionary<RoleType, string> sqlByRoleType;
+            Dictionary<IRoleType, string> sqlByRoleType;
             if (!this.sqlByRoleTypeByObjectType.TryGetValue(objectType, out sqlByRoleType))
             {
-                sqlByRoleType = new Dictionary<RoleType, string>();
+                sqlByRoleType = new Dictionary<IRoleType, string>();
                 this.sqlByRoleTypeByObjectType.Add(objectType, sqlByRoleType);
             }
 
@@ -68,23 +68,23 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
         private class LoadUnitRelations : Commands.Command, ILoadUnitRelations
         {
             private readonly LoadUnitRelationsFactory factory;
-            private readonly Dictionary<IObjectType, Dictionary<RoleType, SqlCommand>> commandByRoleTypeByObjectType;
+            private readonly Dictionary<IObjectType, Dictionary<IRoleType, SqlCommand>> commandByRoleTypeByObjectType;
 
             public LoadUnitRelations(LoadUnitRelationsFactory factory)
             {
                 this.factory = factory;
-                this.commandByRoleTypeByObjectType = new Dictionary<IObjectType, Dictionary<RoleType, SqlCommand>>();
+                this.commandByRoleTypeByObjectType = new Dictionary<IObjectType, Dictionary<IRoleType, SqlCommand>>();
             }
 
-            public void Execute(IList<UnitRelation> relations, IObjectType exclusiveLeafClass, RoleType roleType)
+            public void Execute(IList<UnitRelation> relations, IObjectType exclusiveLeafClass, IRoleType roleType)
             {
                 var database = this.factory.ManagementSession.SqlClientDatabase;
                 var schema = database.SqlClientSchema;
 
-                Dictionary<RoleType, SqlCommand> commandByRoleType;
+                Dictionary<IRoleType, SqlCommand> commandByRoleType;
                 if (!this.commandByRoleTypeByObjectType.TryGetValue(exclusiveLeafClass, out commandByRoleType))
                 {
-                    commandByRoleType = new Dictionary<RoleType, SqlCommand>();
+                    commandByRoleType = new Dictionary<IRoleType, SqlCommand>();
                     this.commandByRoleTypeByObjectType.Add(exclusiveLeafClass, commandByRoleType);
                 }
 

@@ -157,35 +157,35 @@ namespace Allors.Domain
 
 		public global::Allors.Meta.Interface ObjectType = global::Allors.Meta.Interfaces.I34;
 
-		public global::Allors.Meta.RoleType I34AllorsDecimal 
+		public global::Allors.Meta.IRoleType I34AllorsDecimal 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.I34AllorsDecimal;
 			}
 		} 
-		public global::Allors.Meta.RoleType I34AllorsBoolean 
+		public global::Allors.Meta.IRoleType I34AllorsBoolean 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.I34AllorsBoolean;
 			}
 		} 
-		public global::Allors.Meta.RoleType I34AllorsDouble 
+		public global::Allors.Meta.IRoleType I34AllorsDouble 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.I34AllorsDouble;
 			}
 		} 
-		public global::Allors.Meta.RoleType I34AllorsInteger 
+		public global::Allors.Meta.IRoleType I34AllorsInteger 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.I34AllorsInteger;
 			}
 		} 
-		public global::Allors.Meta.RoleType I34AllorsString 
+		public global::Allors.Meta.IRoleType I34AllorsString 
 		{
 			get
 			{

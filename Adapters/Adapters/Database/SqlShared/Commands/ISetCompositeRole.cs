@@ -31,7 +31,7 @@ namespace Allors.Adapters.Database.Sql.Commands
 
     public interface ISetCompositeRole
     {
-        void Execute(IList<CompositeRelation> relation, RoleType roleType);
+        void Execute(IList<CompositeRelation> relation, IRoleType roleType);
     }
 
     public interface ISetCompositeRoleFactory

@@ -46,7 +46,7 @@ namespace Allors.Meta
         private IList<Inheritance> inheritances;
         private IList<IRelationType> relationTypes;
         private IList<IAssociationType> associationTypes;
-        private IList<RoleType> roleTypes;
+        private IList<IRoleType> roleTypes;
         private IList<MethodType> methodTypes;
         
         public IMetaPopulation()
@@ -61,7 +61,7 @@ namespace Allors.Meta
             this.inheritances = new List<Inheritance>();
             this.relationTypes = new List<IRelationType>();
             this.associationTypes = new List<IAssociationType>();
-            this.roleTypes = new List<RoleType>();
+            this.roleTypes = new List<IRoleType>();
             this.methodTypes = new List<MethodType>();
 
             this.metaObjectById = new Dictionary<Guid, IMetaObject>();
@@ -131,7 +131,7 @@ namespace Allors.Meta
             }
         }
 
-        public IEnumerable<RoleType> RoleTypes
+        public IEnumerable<IRoleType> RoleTypes
         {
             get
             {
@@ -313,7 +313,7 @@ namespace Allors.Meta
                     var sharedInterfaces = new HashSet<IInterface>();
                     var sharedClasses = new HashSet<IClass>();
                     var sharedAssociationTypes = new HashSet<IAssociationType>();
-                    var sharedRoleTypes = new HashSet<RoleType>();
+                    var sharedRoleTypes = new HashSet<IRoleType>();
 
                     // Domains
                     foreach (var domain in this.domains)
@@ -468,7 +468,7 @@ namespace Allors.Meta
             this.Stale();
         }
 
-        internal void OnRoleTypeCreated(RoleType roleType)
+        internal void OnRoleTypeCreated(IRoleType roleType)
         {
             this.roleTypes.Add(roleType);
             this.metaObjectById.Add(roleType.Id, roleType);

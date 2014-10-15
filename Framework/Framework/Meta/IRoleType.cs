@@ -24,11 +24,11 @@ namespace Allors.Meta
     using System;
 
     /// <summary>
-    /// A <see cref="RoleType"/> defines the role side of a relation.
+    /// A <see cref="IRoleType"/> defines the role side of a relation.
     /// This is also called the 'passive' side.
     /// RoleTypes can have composite and unit <see cref="ObjectType"/>s.
     /// </summary>
-    public partial class RoleType : PropertyType, IComparable
+    public partial class IRoleType : PropertyType, IComparable
     {
         /// <summary>
         /// The maximum size value.
@@ -55,7 +55,7 @@ namespace Allors.Meta
 
         private int? size;
 
-        internal RoleType(IRelationType relationType, Guid id)
+        internal protected IRoleType(IRelationType relationType, Guid id)
             : base(relationType.DefiningDomain, id)
         {
             this.relationType = relationType;
@@ -344,7 +344,7 @@ namespace Allors.Meta
             }
         }
 
-        public static int IdComparer(RoleType x, RoleType y)
+        public static int IdComparer(IRoleType x, IRoleType y)
         {
             return x.RelationType.Id.CompareTo(y.RelationType.Id);
         }
@@ -360,7 +360,7 @@ namespace Allors.Meta
         /// <paramref name="obj"/> is not the same type as this instance. </exception>
         public int CompareTo(object obj)
         {
-            var that = obj as RoleType;
+            var that = obj as IRoleType;
             if (that != null)
             {
                 return string.CompareOrdinal(this.SingularName, that.SingularName);

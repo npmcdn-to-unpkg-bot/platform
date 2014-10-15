@@ -34,12 +34,12 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
     public class ClearCompositeAndCompositesRoleFactory : IClearCompositeAndCompositesRoleFactory
     {
         public readonly Database Database;
-        private readonly Dictionary<RoleType, string> sqlByRoleType;
+        private readonly Dictionary<IRoleType, string> sqlByRoleType;
 
         public ClearCompositeAndCompositesRoleFactory(Database database)
         {
             this.Database = database;
-            this.sqlByRoleType = new Dictionary<RoleType, string>();
+            this.sqlByRoleType = new Dictionary<IRoleType, string>();
         }
 
         public IClearCompositeAndCompositesRole Create(Sql.DatabaseSession session)
@@ -47,7 +47,7 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
             return new ClearCompositeAndCompositesRole(this, session);
         }
 
-        public string GetSql(RoleType roleType)
+        public string GetSql(IRoleType roleType)
         {
             if (!this.sqlByRoleType.ContainsKey(roleType))
             {
@@ -80,16 +80,16 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
         private class ClearCompositeAndCompositesRole : DatabaseCommand, IClearCompositeAndCompositesRole
         {
             private readonly ClearCompositeAndCompositesRoleFactory factory;
-            private readonly Dictionary<RoleType, NpgsqlCommand> commandByRoleType;
+            private readonly Dictionary<IRoleType, NpgsqlCommand> commandByRoleType;
 
             public ClearCompositeAndCompositesRole(ClearCompositeAndCompositesRoleFactory factory, Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
-                this.commandByRoleType = new Dictionary<RoleType, NpgsqlCommand>();
+                this.commandByRoleType = new Dictionary<IRoleType, NpgsqlCommand>();
             }
 
-            public void Execute(IList<ObjectId> associations, RoleType roleType)
+            public void Execute(IList<ObjectId> associations, IRoleType roleType)
             {
                 var schema = this.factory.Database.NpgsqlSchema;
 

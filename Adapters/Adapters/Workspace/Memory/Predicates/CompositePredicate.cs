@@ -59,14 +59,14 @@ namespace Allors.Adapters.Workspace.Memory
             return andFilter;
         }
 
-        public ICompositePredicate AddBetween(RoleType role, object firstValue, object secondValue)
+        public ICompositePredicate AddBetween(IRoleType role, object firstValue, object secondValue)
         {
             this.predicates.Add(new RoleBetween(this.extent, role, firstValue, secondValue));
             this.extent.Invalidate();
             return this;
         }
 
-        public ICompositePredicate AddContainedIn(RoleType role, Allors.Extent containingExtent)
+        public ICompositePredicate AddContainedIn(IRoleType role, Allors.Extent containingExtent)
         {
             if (role.IsMany)
             {
@@ -81,7 +81,7 @@ namespace Allors.Adapters.Workspace.Memory
             return this;
         }
 
-        public ICompositePredicate AddContainedIn(RoleType role, IEnumerable<IObject> containingEnumerable)
+        public ICompositePredicate AddContainedIn(IRoleType role, IEnumerable<IObject> containingEnumerable)
         {
             if (role.IsMany)
             {
@@ -110,7 +110,7 @@ namespace Allors.Adapters.Workspace.Memory
             return this;
         }
 
-        public ICompositePredicate AddContains(RoleType role, IObject containedObject)
+        public ICompositePredicate AddContains(IRoleType role, IObject containedObject)
         {
             this.predicates.Add(new RoleContains(this.extent, role, containedObject));
             this.extent.Invalidate();
@@ -131,7 +131,7 @@ namespace Allors.Adapters.Workspace.Memory
             return this;
         }
 
-        public ICompositePredicate AddEquals(RoleType role, object obj)
+        public ICompositePredicate AddEquals(IRoleType role, object obj)
         {
             if (role.ObjectType is IUnit)
             {
@@ -153,7 +153,7 @@ namespace Allors.Adapters.Workspace.Memory
             return this;
         }
 
-        public ICompositePredicate AddExists(RoleType role)
+        public ICompositePredicate AddExists(IRoleType role)
         {
             this.predicates.Add(new RoleExists(this.extent, role));
             this.extent.Invalidate();
@@ -167,7 +167,7 @@ namespace Allors.Adapters.Workspace.Memory
             return this;
         }
 
-        public ICompositePredicate AddGreaterThan(RoleType role, object value)
+        public ICompositePredicate AddGreaterThan(IRoleType role, object value)
         {
             this.predicates.Add(new RoleGreaterThan(this.extent, role, value));
             this.extent.Invalidate();
@@ -181,7 +181,7 @@ namespace Allors.Adapters.Workspace.Memory
             return this;
         }
 
-        public ICompositePredicate AddInstanceof(RoleType role, Composite type)
+        public ICompositePredicate AddInstanceof(IRoleType role, Composite type)
         {
             this.predicates.Add(new RoleInstanceof(this.extent, role, type));
             this.extent.Invalidate();
@@ -195,14 +195,14 @@ namespace Allors.Adapters.Workspace.Memory
             return this;
         }
 
-        public ICompositePredicate AddLessThan(RoleType role, object value)
+        public ICompositePredicate AddLessThan(IRoleType role, object value)
         {
             this.predicates.Add(new RoleLessThan(this.extent, role, value));
             this.extent.Invalidate();
             return this;
         }
 
-        public ICompositePredicate AddLike(RoleType role, string value)
+        public ICompositePredicate AddLike(IRoleType role, string value)
         {
             this.predicates.Add(new RoleLike(this.extent, role, value));
             this.extent.Invalidate();

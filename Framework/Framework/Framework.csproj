@@ -75,7 +75,7 @@
     <Compile Include="Meta\OperandType.cs" />
     <Compile Include="Meta\PropertyType.cs" />
     <Compile Include="Meta\IRelationType.cs" />
-    <Compile Include="Meta\RoleType.cs" />
+    <Compile Include="Meta\IRoleType.cs" />
     <Compile Include="Meta\IUnit.cs" />
     <Compile Include="Meta\UnitIds.cs" />
     <Compile Include="Meta\UnitTags.cs" />

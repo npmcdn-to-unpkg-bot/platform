@@ -48,7 +48,7 @@ namespace Allors.Domain
 
 		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.SingleUnit;
 
-		public global::Allors.Meta.RoleType AllorsInteger 
+		public global::Allors.Meta.IRoleType AllorsInteger 
 		{
 			get
 			{

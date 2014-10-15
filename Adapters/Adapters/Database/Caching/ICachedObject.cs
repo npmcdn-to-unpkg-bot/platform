@@ -24,8 +24,8 @@ namespace Allors.Adapters.Database.Caching
 
     public interface ICachedObject
     {
-        bool TryGetValue(RoleType roleType, out object value);
+        bool TryGetValue(IRoleType roleType, out object value);
 
-        void SetValue(RoleType roleType, object value);
+        void SetValue(IRoleType roleType, object value);
     }
 }

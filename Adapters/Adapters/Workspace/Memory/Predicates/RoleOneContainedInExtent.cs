@@ -26,10 +26,10 @@ namespace Allors.Adapters.Workspace.Memory
 
     internal sealed class RoleOneContainedInExtent : Predicate
     {
-        private readonly RoleType roleType;
+        private readonly IRoleType roleType;
         private readonly Allors.Extent containingExtent;
-        
-        internal RoleOneContainedInExtent(Extent extent, RoleType roleType, Allors.Extent containingExtent)
+
+        internal RoleOneContainedInExtent(Extent extent, IRoleType roleType, Allors.Extent containingExtent)
         {
             extent.CheckForRoleType(roleType);
             CompositePredicateAssertions.ValidateRoleContainedIn(roleType, containingExtent);

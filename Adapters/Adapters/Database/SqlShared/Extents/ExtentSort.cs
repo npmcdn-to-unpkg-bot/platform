@@ -25,18 +25,18 @@ namespace Allors.Adapters.Database.Sql
     public class ExtentSort
     {
         private readonly SortDirection direction;
-        private readonly RoleType roleType;
+        private readonly IRoleType roleType;
         private readonly DatabaseSession session;
         private ExtentSort subSorter;
 
-        public ExtentSort(DatabaseSession session, RoleType roleType, SortDirection direction)
+        public ExtentSort(DatabaseSession session, IRoleType roleType, SortDirection direction)
         {
             this.session = session;
             this.roleType = roleType;
             this.direction = direction;
         }
 
-        public void AddSort(RoleType subSortRoleType, SortDirection subSortDirection)
+        public void AddSort(IRoleType subSortRoleType, SortDirection subSortDirection)
         {
             if (this.subSorter == null)
             {

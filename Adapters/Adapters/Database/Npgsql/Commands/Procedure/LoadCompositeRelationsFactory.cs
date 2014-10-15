@@ -36,7 +36,7 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
             this.ManagementSession = session;
         }
 
-        public ILoadCompositeRelations Create(RoleType roleType)
+        public ILoadCompositeRelations Create(IRoleType roleType)
         {
             var associationType = roleType.AssociationType;
 

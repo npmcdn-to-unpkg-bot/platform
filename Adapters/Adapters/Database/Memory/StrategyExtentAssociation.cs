@@ -70,12 +70,12 @@ namespace Allors.Adapters.Database.Memory
             get { return this.roleStrategy.MemorySession; }
         }
 
-        public override Allors.Extent AddSort(RoleType roleType)
+        public override Allors.Extent AddSort(IRoleType roleType)
         {
             throw new NotSupportedException();
         }
 
-        public override Allors.Extent AddSort(RoleType roleType, SortDirection direction)
+        public override Allors.Extent AddSort(IRoleType roleType, SortDirection direction)
         {
             throw new NotSupportedException();
         }

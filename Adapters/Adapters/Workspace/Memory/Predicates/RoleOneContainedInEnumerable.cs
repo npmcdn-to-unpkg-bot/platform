@@ -28,10 +28,10 @@ namespace Allors.Adapters.Workspace.Memory
 
     internal sealed class RoleOneContainedInEnumerable : Predicate
     {
-        private readonly RoleType roleType;
+        private readonly IRoleType roleType;
         private readonly IEnumerable<IObject> containingEnumerable;
 
-        internal RoleOneContainedInEnumerable(Extent extent, RoleType roleType, IEnumerable<IObject> containingEnumerable)
+        internal RoleOneContainedInEnumerable(Extent extent, IRoleType roleType, IEnumerable<IObject> containingEnumerable)
         {
             extent.CheckForRoleType(roleType);
             CompositePredicateAssertions.ValidateRoleContainedIn(roleType, containingEnumerable);

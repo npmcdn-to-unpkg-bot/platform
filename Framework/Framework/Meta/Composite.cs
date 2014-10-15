@@ -31,7 +31,7 @@ namespace Allors.Meta
         private LazySet<IInterface> derivedSupertypes;
 
         private LazySet<IAssociationType> derivedAssociationTypes;
-        private LazySet<RoleType> derivedRoleTypes;
+        private LazySet<IRoleType> derivedRoleTypes;
         private LazySet<MethodType> derivedMethodTypes;
 
         protected Composite(IDomain domain, Guid id)
@@ -160,7 +160,7 @@ namespace Allors.Meta
         /// Gets the roles.
         /// </summary>
         /// <value>The roles.</value>
-        public IEnumerable<RoleType> RoleTypes
+        public IEnumerable<IRoleType> RoleTypes
         {
             get
             {
@@ -169,7 +169,7 @@ namespace Allors.Meta
             }
         }
 
-        public IEnumerable<RoleType> UnitRoleTypes
+        public IEnumerable<IRoleType> UnitRoleTypes
         {
             get
             {
@@ -177,7 +177,7 @@ namespace Allors.Meta
             }
         }
 
-        public IEnumerable<RoleType> CompositeRoleTypes
+        public IEnumerable<IRoleType> CompositeRoleTypes
         {
             get
             {
@@ -185,7 +185,7 @@ namespace Allors.Meta
             }
         }
 
-        public IEnumerable<RoleType> RoleTypesWhereObjectType
+        public IEnumerable<IRoleType> RoleTypesWhereObjectType
         {
             get
             {
@@ -223,7 +223,7 @@ namespace Allors.Meta
             return this.derivedAssociationTypes.Contains(associationType);
         }
 
-        public bool ContainsRoleType(RoleType roleType)
+        public bool ContainsRoleType(IRoleType roleType)
         {
             this.MetaPopulation.Derive();
             return this.derivedRoleTypes.Contains(roleType);
@@ -298,7 +298,7 @@ namespace Allors.Meta
         /// Derive role types.
         /// </summary>
         /// <param name="roleTypes">The role types.</param>
-        internal void DeriveRoleTypes(HashSet<RoleType> roleTypes)
+        internal void DeriveRoleTypes(HashSet<IRoleType> roleTypes)
         {
             roleTypes.Clear();
             foreach (var relationType in this.MetaPopulation.RelationTypes.Where(rel => this.Equals(rel.AssociationType.ObjectType)))
@@ -315,7 +315,7 @@ namespace Allors.Meta
                 }
             }
 
-            this.derivedRoleTypes = new LazySet<RoleType>(roleTypes);
+            this.derivedRoleTypes = new LazySet<IRoleType>(roleTypes);
         }
         
         /// <summary>

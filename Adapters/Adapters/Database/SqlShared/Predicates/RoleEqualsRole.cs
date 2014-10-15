@@ -29,10 +29,10 @@ namespace Allors.Adapters.Database.Sql
 
     public sealed class RoleEqualsRole : Predicate
     {
-        private readonly RoleType equalsRole;
-        private readonly RoleType role;
+        private readonly IRoleType equalsRole;
+        private readonly IRoleType role;
 
-        public RoleEqualsRole(ExtentFiltered extent, RoleType role, RoleType equalsRole)
+        public RoleEqualsRole(ExtentFiltered extent, IRoleType role, IRoleType equalsRole)
         {
             extent.CheckRole(role);
             CompositePredicateAssertions.ValidateRoleEquals(role, equalsRole);

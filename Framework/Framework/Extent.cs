@@ -174,7 +174,7 @@ namespace Allors
         /// </summary>
         /// <param name="roleType">The role type by which to sort.</param>
         /// <returns>The current extent.</returns>
-        public abstract Extent AddSort(RoleType roleType);
+        public abstract Extent AddSort(IRoleType roleType);
 
         /// <summary>
         /// Adds sorting based on the specified role type and direction.
@@ -182,7 +182,7 @@ namespace Allors
         /// <param name="roleType">The role type by which to sort.</param>
         /// <param name="direction">The sort direction.</param>
         /// <returns>The current extent.</returns>
-        public abstract Extent AddSort(RoleType roleType, SortDirection direction);
+        public abstract Extent AddSort(IRoleType roleType, SortDirection direction);
 
         /// <summary>
         /// Adds sorting based on the specified sort specification.
@@ -383,7 +383,7 @@ namespace Allors
             /// </summary>
             /// <param name="roleType">The role type by which to sort.</param>
             /// <returns>The current extent.</returns>
-            public override Extent AddSort(RoleType roleType)
+            public override Extent AddSort(IRoleType roleType)
             {
                 throw new NotSupportedException("A converted extent does not support sorting");
             }
@@ -394,7 +394,7 @@ namespace Allors
             /// <param name="roleType">The role type by which to sort.</param>
             /// <param name="direction">The sort direction.</param>
             /// <returns>The current extent.</returns>
-            public override Extent AddSort(RoleType roleType, SortDirection direction)
+            public override Extent AddSort(IRoleType roleType, SortDirection direction)
             {
                 throw new NotSupportedException("A converted extent does not support sorting");
             }

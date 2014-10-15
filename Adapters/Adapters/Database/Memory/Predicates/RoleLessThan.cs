@@ -26,10 +26,10 @@ namespace Allors.Adapters.Database.Memory
     internal sealed class RoleLessThan : Predicate
     {
         private readonly ExtentFiltered extent;
-        private readonly RoleType roleType;
+        private readonly IRoleType roleType;
         private readonly object compare;
 
-        internal RoleLessThan(ExtentFiltered extent, RoleType roleType, object compare)
+        internal RoleLessThan(ExtentFiltered extent, IRoleType roleType, object compare)
         {
             extent.CheckForRoleType(roleType);
             CompositePredicateAssertions.ValidateRoleLessThan(roleType, compare);
@@ -43,7 +43,7 @@ namespace Allors.Adapters.Database.Memory
         {
             var compareValue = this.compare;
 
-            var compareRole = this.compare as RoleType;
+            var compareRole = this.compare as IRoleType;
             if (compareRole != null)
             {
                 compareValue = strategy.GetInternalizedUnitRole(compareRole);

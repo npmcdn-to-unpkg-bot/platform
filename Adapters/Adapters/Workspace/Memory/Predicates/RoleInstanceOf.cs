@@ -20,19 +20,16 @@
 
 namespace Allors.Adapters.Workspace.Memory
 {
-    using System;
-    using System.Runtime.InteropServices;
-
     using Allors.Adapters;
 
     using Allors.Meta;
 
     internal sealed class RoleInstanceof : Predicate
     {
-        private readonly RoleType roleType;
+        private readonly IRoleType roleType;
         private readonly Composite objectType;
 
-        internal RoleInstanceof(Extent extent, RoleType roleType, Composite objectType)
+        internal RoleInstanceof(Extent extent, IRoleType roleType, Composite objectType)
         {
             extent.CheckForRoleType(roleType);
             CompositePredicateAssertions.ValidateRoleInstanceOf(roleType, objectType);

@@ -78,7 +78,7 @@ namespace Allors.Adapters.Database.Sql
             return new ExtentStatementChild(this, extent, association);
         }
 
-        public override ExtentStatement CreateChild(SqlExtent extent, RoleType role)
+        public override ExtentStatement CreateChild(SqlExtent extent, IRoleType role)
         {
             return new ExtentStatementChild(this, extent, role);
         }

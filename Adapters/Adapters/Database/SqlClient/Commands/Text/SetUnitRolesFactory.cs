@@ -22,7 +22,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
 {
     using System.Collections.Generic;
     using System.Data.SqlClient;
-    using System.Linq;
+
     using System.Text;
 
     using Allors.Adapters.Database.Sql;
@@ -51,25 +51,25 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
         {
             private readonly DatabaseSession session;
 
-            private readonly Dictionary<IObjectType, Dictionary<IList<RoleType>, SqlCommand>> commandByKeyByObjectType; 
+            private readonly Dictionary<IObjectType, Dictionary<IList<IRoleType>, SqlCommand>> commandByKeyByObjectType; 
 
             public SetUnitRoles(Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.session = (DatabaseSession)session;
-                this.commandByKeyByObjectType = new Dictionary<IObjectType, Dictionary<IList<RoleType>, SqlCommand>>();
+                this.commandByKeyByObjectType = new Dictionary<IObjectType, Dictionary<IList<IRoleType>, SqlCommand>>();
             }
 
-            public void Execute(Roles roles, IList<RoleType> sortedRoleTypes)
+            public void Execute(Roles roles, IList<IRoleType> sortedRoleTypes)
             {
                 var schema = this.Database.Schema;
 
                 var exclusiveLeafClass = roles.Reference.ObjectType.ExclusiveLeafClass;
 
-                Dictionary<IList<RoleType>, SqlCommand> commandByKey;
+                Dictionary<IList<IRoleType>, SqlCommand> commandByKey;
                 if (!this.commandByKeyByObjectType.TryGetValue(exclusiveLeafClass, out commandByKey))
                 {
-                    commandByKey = new Dictionary<IList<RoleType>, SqlCommand>(new SortedRoleTypesComparer());
+                    commandByKey = new Dictionary<IList<IRoleType>, SqlCommand>(new SortedRoleTypesComparer());
                     this.commandByKeyByObjectType.Add(exclusiveLeafClass, commandByKey);
                 }
 
@@ -122,9 +122,9 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
                 }
             }
 
-            private class SortedRoleTypesComparer : IEqualityComparer<IList<RoleType>>
+            private class SortedRoleTypesComparer : IEqualityComparer<IList<IRoleType>>
             {
-                public bool Equals(IList<RoleType> x, IList<RoleType> y)
+                public bool Equals(IList<IRoleType> x, IList<IRoleType> y)
                 {
                     if (x.Count == y.Count)
                     {
@@ -142,7 +142,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
                     return false;
                 }
 
-                public int GetHashCode(IList<RoleType> roleTypes)
+                public int GetHashCode(IList<IRoleType> roleTypes)
                 {
                     var hashCode = 0;
                     foreach (var roleType in roleTypes)

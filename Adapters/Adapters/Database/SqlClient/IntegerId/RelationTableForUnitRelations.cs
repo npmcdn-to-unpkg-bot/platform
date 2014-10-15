@@ -32,10 +32,10 @@ namespace Allors.Adapters.Database.SqlClient.IntegerId
     public class RelationTableForUnitRelations : IEnumerable<SqlDataRecord>
     {
         private readonly Database database;
-        private readonly RoleType roleType;
+        private readonly IRoleType roleType;
         private readonly IEnumerable<UnitRelation> relations;
- 
-        public RelationTableForUnitRelations(Database database, RoleType roleType, IEnumerable<UnitRelation> relations)
+
+        public RelationTableForUnitRelations(Database database, IRoleType roleType, IEnumerable<UnitRelation> relations)
         {
             this.database = database;
             this.roleType = roleType;

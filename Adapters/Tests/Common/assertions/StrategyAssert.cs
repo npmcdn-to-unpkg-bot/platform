@@ -97,7 +97,7 @@ namespace Allors.Adapters.Special.Assertions
             }
         }
 
-        public static void RoleExistHasException(IObject allorsObject, RoleType roleType)
+        public static void RoleExistHasException(IObject allorsObject, IRoleType roleType)
         {
             bool exceptionOccured = false;
             try
@@ -115,7 +115,7 @@ namespace Allors.Adapters.Special.Assertions
             }
         }
 
-        public static void RoleGetHasException(IObject allorsObject, RoleType roleType)
+        public static void RoleGetHasException(IObject allorsObject, IRoleType roleType)
         {
             bool exceptionOccured = false;
             try
@@ -133,9 +133,9 @@ namespace Allors.Adapters.Special.Assertions
             }
         }
 
-        public static void RolesExistExclusive(IObject allorsObject, params RoleType[] roleTypes)
+        public static void RolesExistExclusive(IObject allorsObject, params IRoleType[] roleTypes)
         {
-            foreach (RoleType roleType in roleTypes)
+            foreach (IRoleType roleType in roleTypes)
             {
                 if (!allorsObject.Strategy.ObjectType.ContainsRoleType(roleType))
                 {
@@ -143,7 +143,7 @@ namespace Allors.Adapters.Special.Assertions
                 }
             }
 
-            foreach (RoleType roleType in allorsObject.Strategy.ObjectType.RoleTypes)
+            foreach (IRoleType roleType in allorsObject.Strategy.ObjectType.RoleTypes)
             {
                 if (Array.IndexOf(roleTypes, roleType) >= 0)
                 {

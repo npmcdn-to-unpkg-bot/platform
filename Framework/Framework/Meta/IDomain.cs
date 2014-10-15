@@ -45,7 +45,7 @@ namespace Allors.Meta
 
         private IList<IAssociationType> definedAssociationTypes;
 
-        private IList<RoleType> definedRoleTypes;
+        private IList<IRoleType> definedRoleTypes;
 
         private IList<MethodType> definedMethodTypes;
 
@@ -60,7 +60,7 @@ namespace Allors.Meta
             this.definedInheritances = new List<Inheritance>();
             this.definedRelationTypes = new List<IRelationType>();
             this.definedAssociationTypes = new List<IAssociationType>();
-            this.definedRoleTypes = new List<RoleType>();
+            this.definedRoleTypes = new List<IRoleType>();
             this.definedMethodTypes = new List<MethodType>();
 
             this.MetaPopulation.OnDomainCreated(this);
@@ -146,7 +146,7 @@ namespace Allors.Meta
             }
         }
 
-        public IEnumerable<RoleType> DefinedRoleTypes
+        public IEnumerable<IRoleType> DefinedRoleTypes
         {
             get
             {
@@ -274,7 +274,7 @@ namespace Allors.Meta
             this.MetaPopulation.OnAssociationTypeCreated(associationType);
         }
 
-        internal void OnRoleTypeCreated(RoleType roleType)
+        internal void OnRoleTypeCreated(IRoleType roleType)
         {
             this.definedRoleTypes.Add(roleType);
             this.MetaPopulation.OnRoleTypeCreated(roleType);

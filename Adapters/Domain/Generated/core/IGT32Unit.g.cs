@@ -376,231 +376,231 @@ namespace Allors.Domain
 
 		public global::Allors.Meta.Interface ObjectType = global::Allors.Meta.Interfaces.IGT32Unit;
 
-		public global::Allors.Meta.RoleType AllorsString2 
+		public global::Allors.Meta.IRoleType AllorsString2 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32UnitAllorsString2;
 			}
 		} 
-		public global::Allors.Meta.RoleType AllorsString5 
+		public global::Allors.Meta.IRoleType AllorsString5 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32UnitAllorsString5;
 			}
 		} 
-		public global::Allors.Meta.RoleType AllorsString19 
+		public global::Allors.Meta.IRoleType AllorsString19 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32UnitAllorsString19;
 			}
 		} 
-		public global::Allors.Meta.RoleType AllorsString18 
+		public global::Allors.Meta.IRoleType AllorsString18 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32UnitAllorsString18;
 			}
 		} 
-		public global::Allors.Meta.RoleType AllorsString21 
+		public global::Allors.Meta.IRoleType AllorsString21 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32UnitAllorsString21;
 			}
 		} 
-		public global::Allors.Meta.RoleType AllorsString31 
+		public global::Allors.Meta.IRoleType AllorsString31 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32UnitAllorsString31;
 			}
 		} 
-		public global::Allors.Meta.RoleType AllorsString15 
+		public global::Allors.Meta.IRoleType AllorsString15 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32UnitAllorsString15;
 			}
 		} 
-		public global::Allors.Meta.RoleType AllorsString6 
+		public global::Allors.Meta.IRoleType AllorsString6 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32UnitAllorsString6;
 			}
 		} 
-		public global::Allors.Meta.RoleType AllorsString27 
+		public global::Allors.Meta.IRoleType AllorsString27 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32UnitAllorsString27;
 			}
 		} 
-		public global::Allors.Meta.RoleType AllorsString11 
+		public global::Allors.Meta.IRoleType AllorsString11 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32UnitAllorsString11;
 			}
 		} 
-		public global::Allors.Meta.RoleType AllorsString33 
+		public global::Allors.Meta.IRoleType AllorsString33 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32UnitAllorsString33;
 			}
 		} 
-		public global::Allors.Meta.RoleType AllorsString32 
+		public global::Allors.Meta.IRoleType AllorsString32 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32UnitAllorsString32;
 			}
 		} 
-		public global::Allors.Meta.RoleType AllorsString25 
+		public global::Allors.Meta.IRoleType AllorsString25 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32UnitAllorsString25;
 			}
 		} 
-		public global::Allors.Meta.RoleType AllorsString8 
+		public global::Allors.Meta.IRoleType AllorsString8 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32UnitAllorsString8;
 			}
 		} 
-		public global::Allors.Meta.RoleType AllorsString28 
+		public global::Allors.Meta.IRoleType AllorsString28 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32UnitAllorsString28;
 			}
 		} 
-		public global::Allors.Meta.RoleType AllorsString29 
+		public global::Allors.Meta.IRoleType AllorsString29 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32UnitAllorsString29;
 			}
 		} 
-		public global::Allors.Meta.RoleType AllorsString20 
+		public global::Allors.Meta.IRoleType AllorsString20 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32UnitAllorsString20;
 			}
 		} 
-		public global::Allors.Meta.RoleType AllorsString16 
+		public global::Allors.Meta.IRoleType AllorsString16 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32UnitAllorsString16;
 			}
 		} 
-		public global::Allors.Meta.RoleType AllorsString30 
+		public global::Allors.Meta.IRoleType AllorsString30 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32UnitAllorsString30;
 			}
 		} 
-		public global::Allors.Meta.RoleType AllorsString12 
+		public global::Allors.Meta.IRoleType AllorsString12 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32UnitAllorsString12;
 			}
 		} 
-		public global::Allors.Meta.RoleType AllorsString26 
+		public global::Allors.Meta.IRoleType AllorsString26 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32UnitAllorsString26;
 			}
 		} 
-		public global::Allors.Meta.RoleType AllorsString17 
+		public global::Allors.Meta.IRoleType AllorsString17 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32UnitAllorsString17;
 			}
 		} 
-		public global::Allors.Meta.RoleType AllorsString4 
+		public global::Allors.Meta.IRoleType AllorsString4 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32UnitAllorsString4;
 			}
 		} 
-		public global::Allors.Meta.RoleType AllorsString10 
+		public global::Allors.Meta.IRoleType AllorsString10 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32UnitAllorsString10;
 			}
 		} 
-		public global::Allors.Meta.RoleType AllorsString23 
+		public global::Allors.Meta.IRoleType AllorsString23 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32UnitAllorsString23;
 			}
 		} 
-		public global::Allors.Meta.RoleType AllorsString24 
+		public global::Allors.Meta.IRoleType AllorsString24 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32UnitAllorsString24;
 			}
 		} 
-		public global::Allors.Meta.RoleType AllorsString1 
+		public global::Allors.Meta.IRoleType AllorsString1 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32UnitAllorsString1;
 			}
 		} 
-		public global::Allors.Meta.RoleType AllorsString14 
+		public global::Allors.Meta.IRoleType AllorsString14 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32UnitAllorsString14;
 			}
 		} 
-		public global::Allors.Meta.RoleType AllorsString13 
+		public global::Allors.Meta.IRoleType AllorsString13 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32UnitAllorsString13;
 			}
 		} 
-		public global::Allors.Meta.RoleType AllorsString22 
+		public global::Allors.Meta.IRoleType AllorsString22 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32UnitAllorsString22;
 			}
 		} 
-		public global::Allors.Meta.RoleType AllorsString3 
+		public global::Allors.Meta.IRoleType AllorsString3 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32UnitAllorsString3;
 			}
 		} 
-		public global::Allors.Meta.RoleType AllorsString7 
+		public global::Allors.Meta.IRoleType AllorsString7 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.IGT32UnitAllorsString7;
 			}
 		} 
-		public global::Allors.Meta.RoleType AllorsString9 
+		public global::Allors.Meta.IRoleType AllorsString9 
 		{
 			get
 			{

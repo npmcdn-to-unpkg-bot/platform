@@ -107,7 +107,7 @@ namespace Allors.Adapters.Database.Memory
             this.writer.WriteStartElement(Serialization.Relations);
             this.writer.WriteStartElement(Serialization.Database);
 
-            var sortedStrategiesByRoleType = new Dictionary<RoleType, List<Strategy>>();
+            var sortedStrategiesByRoleType = new Dictionary<IRoleType, List<Strategy>>();
             foreach (var dictionaryEntry in this.sortedNonDeletedStrategiesByObjectType)
             {
                 var strategies = dictionaryEntry.Value;

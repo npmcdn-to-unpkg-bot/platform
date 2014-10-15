@@ -136,7 +136,7 @@ namespace Allors.Adapters
         /// <param name="role">The role .</param>
         /// <param name="firstObject">The first object.</param>
         /// <param name="secondObject">The second object.</param>
-        public static void ValidateRoleBetween(RoleType role, object firstObject, object secondObject)
+        public static void ValidateRoleBetween(IRoleType role, object firstObject, object secondObject)
         {
             if (role.ObjectType is Composite)
             {
@@ -149,8 +149,8 @@ namespace Allors.Adapters
                     "AddBetween() requires a first and second object, use AddLessThan() or AddGreaterThan() instead.");
             }
 
-            var firstRole = firstObject as RoleType;
-            var secondRole = secondObject as RoleType;
+            var firstRole = firstObject as IRoleType;
+            var secondRole = secondObject as IRoleType;
             if ((firstRole != null && !(firstRole.ObjectType is IUnit)) ||
                 (secondRole != null && !(secondRole.ObjectType is IUnit)))
             {
@@ -164,7 +164,7 @@ namespace Allors.Adapters
         /// </summary>
         /// <param name="role">The role .</param>
         /// <param name="extent">The extent.</param>
-        public static void ValidateRoleContainedIn(RoleType role, Extent extent)
+        public static void ValidateRoleContainedIn(IRoleType role, Extent extent)
         {
             if (role.ObjectType is IUnit)
             {
@@ -177,7 +177,7 @@ namespace Allors.Adapters
             }
         }
 
-        public static void ValidateRoleContainedIn(RoleType role, IEnumerable<IObject> enumerable)
+        public static void ValidateRoleContainedIn(IRoleType role, IEnumerable<IObject> enumerable)
         {
             if (role.ObjectType is IUnit)
             {
@@ -196,7 +196,7 @@ namespace Allors.Adapters
         /// </summary>
         /// <param name="role">The role .</param>
         /// <param name="allorsObject">The allors object.</param>
-        public static void ValidateRoleContains(RoleType role, IObject allorsObject)
+        public static void ValidateRoleContains(IRoleType role, IObject allorsObject)
         {
             if (role.IsOne)
             {
@@ -215,7 +215,7 @@ namespace Allors.Adapters
         /// </summary>
         /// <param name="role">The role .</param>
         /// <param name="compareObject">The compare object.</param>
-        public static void ValidateRoleEquals(RoleType role, object compareObject)
+        public static void ValidateRoleEquals(IRoleType role, object compareObject)
         {
             if (role.IsMany)
             {
@@ -228,7 +228,7 @@ namespace Allors.Adapters
                     "AddEquals() requires a non-null value or object, use AddNot().AddExists() instead.");
             }
 
-            var compareRole = compareObject as RoleType;
+            var compareRole = compareObject as IRoleType;
             if (compareRole != null && compareRole.ObjectType is Composite)
             {
                 throw new ArgumentException("AddRoleEqual() for composites can only be used with objects (not other roles).");
@@ -240,7 +240,7 @@ namespace Allors.Adapters
         /// <see cref="ICompositePredicate#Exists"/>.
         /// </summary>
         /// <param name="role">The role .</param>
-        public static void ValidateRoleExists(RoleType role)
+        public static void ValidateRoleExists(IRoleType role)
         {
             // TODO: ?
         }
@@ -251,7 +251,7 @@ namespace Allors.Adapters
         /// </summary>
         /// <param name="role">The role .</param>
         /// <param name="unit">The unit .</param>
-        public static void ValidateRoleGreaterThan(RoleType role, object unit)
+        public static void ValidateRoleGreaterThan(IRoleType role, object unit)
         {
             if (role.ObjectType is Composite)
             {
@@ -263,7 +263,7 @@ namespace Allors.Adapters
                 throw new ArgumentException("AddGreaterThan() requires a non-null value.");
             }
 
-            var compareRole = unit as RoleType;
+            var compareRole = unit as IRoleType;
             if (compareRole != null && compareRole.ObjectType is Composite)
             {
                 throw new ArgumentException("AAddGreaterThan() can only be used with roles having unit types.");
@@ -276,7 +276,7 @@ namespace Allors.Adapters
         /// </summary>
         /// <param name="role">The role .</param>
         /// <param name="objectType">Type object type.</param>
-        public static void ValidateRoleInstanceOf(RoleType role, IObjectType objectType)
+        public static void ValidateRoleInstanceOf(IRoleType role, IObjectType objectType)
         {
             if (objectType is IUnit)
             {
@@ -295,7 +295,7 @@ namespace Allors.Adapters
         /// </summary>
         /// <param name="role">The role .</param>
         /// <param name="unit">The unit .</param>
-        public static void ValidateRoleLessThan(RoleType role, object unit)
+        public static void ValidateRoleLessThan(IRoleType role, object unit)
         {
             if (role.ObjectType is Composite)
             {
@@ -307,7 +307,7 @@ namespace Allors.Adapters
                 throw new ArgumentException("AddLessThan() requires a value.");
             }
 
-            var compareRole = unit as RoleType;
+            var compareRole = unit as IRoleType;
             if (compareRole != null && compareRole.ObjectType is Composite)
             {
                 throw new ArgumentException("AddLessThan() can only be used with roles having unit types.");
@@ -320,7 +320,7 @@ namespace Allors.Adapters
         /// </summary>
         /// <param name="role">The role .</param>
         /// <param name="unit">The unit .</param>
-        public static void ValidateRoleLikeFilter(RoleType role, string unit)
+        public static void ValidateRoleLikeFilter(IRoleType role, string unit)
         {
             var unitType = role.ObjectType as IUnit;
             if (unitType == null || !unitType.IsString)

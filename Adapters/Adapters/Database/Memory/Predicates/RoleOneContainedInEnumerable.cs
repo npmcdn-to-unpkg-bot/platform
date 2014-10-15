@@ -26,10 +26,10 @@ namespace Allors.Adapters.Database.Memory
 
     internal sealed class RoleOneContainedInEnumerable : Predicate
     {
-        private readonly RoleType roleType;
+        private readonly IRoleType roleType;
         private readonly IEnumerable<IObject> containingEnumerable;
 
-        internal RoleOneContainedInEnumerable(ExtentFiltered extent, RoleType roleType, IEnumerable<IObject> containingEnumerable)
+        internal RoleOneContainedInEnumerable(ExtentFiltered extent, IRoleType roleType, IEnumerable<IObject> containingEnumerable)
         {
             extent.CheckForRoleType(roleType);
             CompositePredicateAssertions.ValidateRoleContainedIn(roleType, containingEnumerable);
@@ -41,7 +41,7 @@ namespace Allors.Adapters.Database.Memory
         internal override ThreeValuedLogic Evaluate(Strategy strategy)
         {
             var containing = new HashSet<IObject>(this.containingEnumerable);
-            IObject roleStrategy = strategy.GetCompositeRole(this.roleType);
+            var roleStrategy = strategy.GetCompositeRole(this.roleType);
 
             if (roleStrategy == null)
             {
