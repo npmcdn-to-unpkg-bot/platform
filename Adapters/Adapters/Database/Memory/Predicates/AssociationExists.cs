@@ -24,9 +24,9 @@ namespace Allors.Adapters.Database.Memory
 
     internal sealed class AssociationExists : Predicate
     {
-        private readonly AssociationType associationType;
+        private readonly IAssociationType associationType;
 
-        internal AssociationExists(ExtentFiltered extent, AssociationType associationType)
+        internal AssociationExists(ExtentFiltered extent, IAssociationType associationType)
         {
             extent.CheckForAssociationType(associationType);
             CompositePredicateAssertions.ValidateAssociationExists(associationType);

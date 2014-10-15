@@ -807,42 +807,42 @@ namespace Allors.Domain
 			}
 		} 
 
-		public global::Allors.Meta.AssociationType PersonsWhereCompany 
+		public global::Allors.Meta.IAssociationType PersonsWhereCompany 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.PersonCompany;
 			}
 		} 
-		public global::Allors.Meta.AssociationType CompanyWhereChild 
+		public global::Allors.Meta.IAssociationType CompanyWhereChild 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.CompanyChild;
 			}
 		} 
-		public global::Allors.Meta.AssociationType CompanyWhereNamedOneSort2 
+		public global::Allors.Meta.IAssociationType CompanyWhereNamedOneSort2 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.CompanyNamedOneSort2;
 			}
 		} 
-		public global::Allors.Meta.AssociationType CompaniesWhereNamedManySort1 
+		public global::Allors.Meta.IAssociationType CompaniesWhereNamedManySort1 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.CompanyNamedManySort1;
 			}
 		} 
-		public global::Allors.Meta.AssociationType CompaniesWhereNamedManySort2 
+		public global::Allors.Meta.IAssociationType CompaniesWhereNamedManySort2 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.CompanyNamedManySort2;
 			}
 		} 
-		public global::Allors.Meta.AssociationType CompanyWhereNamedOneSort1 
+		public global::Allors.Meta.IAssociationType CompanyWhereNamedOneSort1 
 		{
 			get
 			{

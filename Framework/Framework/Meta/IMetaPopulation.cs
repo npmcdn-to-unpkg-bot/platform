@@ -45,7 +45,7 @@ namespace Allors.Meta
         private IList<IClass> classes;
         private IList<Inheritance> inheritances;
         private IList<IRelationType> relationTypes;
-        private IList<AssociationType> associationTypes;
+        private IList<IAssociationType> associationTypes;
         private IList<RoleType> roleTypes;
         private IList<MethodType> methodTypes;
         
@@ -60,7 +60,7 @@ namespace Allors.Meta
             this.classes = new List<IClass>();
             this.inheritances = new List<Inheritance>();
             this.relationTypes = new List<IRelationType>();
-            this.associationTypes = new List<AssociationType>();
+            this.associationTypes = new List<IAssociationType>();
             this.roleTypes = new List<RoleType>();
             this.methodTypes = new List<MethodType>();
 
@@ -123,7 +123,7 @@ namespace Allors.Meta
             }
         }
 
-        public IEnumerable<AssociationType> AssociationTypes
+        public IEnumerable<IAssociationType> AssociationTypes
         {
             get
             {
@@ -312,7 +312,7 @@ namespace Allors.Meta
                     var sharedCompositeTypes = new HashSet<Composite>();
                     var sharedInterfaces = new HashSet<IInterface>();
                     var sharedClasses = new HashSet<IClass>();
-                    var sharedAssociationTypes = new HashSet<AssociationType>();
+                    var sharedAssociationTypes = new HashSet<IAssociationType>();
                     var sharedRoleTypes = new HashSet<RoleType>();
 
                     // Domains
@@ -460,7 +460,7 @@ namespace Allors.Meta
             this.Stale();
         }
 
-        internal void OnAssociationTypeCreated(AssociationType associationType)
+        internal void OnAssociationTypeCreated(IAssociationType associationType)
         {
             this.associationTypes.Add(associationType);
             this.metaObjectById.Add(associationType.Id, associationType);

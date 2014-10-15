@@ -29,11 +29,11 @@ namespace Allors.Adapters.Database.Sql
     public class ExtentAssociations : Extent
     {
         private readonly Strategy strategy;
-        private readonly AssociationType associationType;
+        private readonly IAssociationType associationType;
 
         private ExtentFiltered upgrade;
 
-        public ExtentAssociations(Strategy strategy, AssociationType associationType)
+        public ExtentAssociations(Strategy strategy, IAssociationType associationType)
         {
             this.strategy = strategy;
             this.associationType = associationType;

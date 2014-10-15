@@ -24,10 +24,10 @@ namespace Allors.Adapters.Database.Memory
 
     internal sealed class AssociationEquals : Predicate
     {
-        private readonly AssociationType associationType;
+        private readonly IAssociationType associationType;
         private readonly IObject equals;
 
-        internal AssociationEquals(ExtentFiltered extent, AssociationType associationType, IObject equals)
+        internal AssociationEquals(ExtentFiltered extent, IAssociationType associationType, IObject equals)
         {
             extent.CheckForAssociationType(associationType);
             CompositePredicateAssertions.AssertAssociationEquals(associationType, equals);

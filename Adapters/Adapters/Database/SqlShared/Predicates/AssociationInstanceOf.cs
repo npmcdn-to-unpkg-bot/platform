@@ -24,10 +24,10 @@ namespace Allors.Adapters.Database.Sql
 
     public sealed class AssociationInstanceOf : Predicate
     {
-        private readonly AssociationType association;
+        private readonly IAssociationType association;
         private readonly IObjectType[] instanceClasses;
 
-        public AssociationInstanceOf(ExtentFiltered extent, AssociationType association, IObjectType instanceType, IObjectType[] instanceClasses)
+        public AssociationInstanceOf(ExtentFiltered extent, IAssociationType association, IObjectType instanceType, IObjectType[] instanceClasses)
         {
             extent.CheckAssociation(association);
             CompositePredicateAssertions.ValidateAssociationInstanceof(association, instanceType);

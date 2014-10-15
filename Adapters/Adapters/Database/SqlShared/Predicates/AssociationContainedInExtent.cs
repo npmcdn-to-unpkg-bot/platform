@@ -24,10 +24,10 @@ namespace Allors.Adapters.Database.Sql
 
     public sealed class AssociationContainedInExtent : In
     {
-        private readonly AssociationType association;
+        private readonly IAssociationType association;
         private readonly SqlExtent inExtent;
 
-        public AssociationContainedInExtent(ExtentFiltered extent, AssociationType association, Allors.Extent inExtent)
+        public AssociationContainedInExtent(ExtentFiltered extent, IAssociationType association, Allors.Extent inExtent)
         {
             extent.CheckAssociation(association);
             CompositePredicateAssertions.AssertAssociationContainedIn(association, inExtent);

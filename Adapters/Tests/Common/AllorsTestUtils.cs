@@ -21,13 +21,12 @@
 namespace Allors.Adapters.Special
 {
     using Allors;
-    using Allors.Meta;
 
     public class AllorsTestUtils
     {
         public static void ForceRoleCaching(IObject allorsObject)
         {
-            foreach (RoleType role in allorsObject.Strategy.ObjectType.RoleTypes)
+            foreach (var role in allorsObject.Strategy.ObjectType.RoleTypes)
             {
                 allorsObject.Strategy.GetRole(role);
             }
@@ -35,7 +34,7 @@ namespace Allors.Adapters.Special
 
         public static void ForceAssociationCaching(IObject allorsObject)
         {
-            foreach (AssociationType association in allorsObject.Strategy.ObjectType.AssociationTypes)
+            foreach (var association in allorsObject.Strategy.ObjectType.AssociationTypes)
             {
                 allorsObject.Strategy.GetAssociation(association);
             }

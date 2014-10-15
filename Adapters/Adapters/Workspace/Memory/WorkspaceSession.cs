@@ -1565,7 +1565,7 @@ namespace Allors.Adapters.Workspace.Memory
             }
         }
 
-        internal virtual Strategy GetAssociation(Strategy role, AssociationType associationType)
+        internal virtual Strategy GetAssociation(Strategy role, IAssociationType associationType)
         {
             var roleType = associationType.RoleType;
 
@@ -1638,7 +1638,7 @@ namespace Allors.Adapters.Workspace.Memory
             }
         }
 
-        internal virtual HashSet<Strategy> GetAssociations(Strategy role, AssociationType associationType)
+        internal virtual HashSet<Strategy> GetAssociations(Strategy role, IAssociationType associationType)
         {
             var associations = new HashSet<Strategy>();
             var roleType = associationType.RoleType;

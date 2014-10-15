@@ -25,9 +25,9 @@ namespace Allors.Adapters.Database.Sql
     public sealed class AssociationEquals : Predicate
     {
         private readonly IObject allorsObject;
-        private readonly AssociationType association;
+        private readonly IAssociationType association;
 
-        public AssociationEquals(ExtentFiltered extent, AssociationType association, IObject allorsObject)
+        public AssociationEquals(ExtentFiltered extent, IAssociationType association, IObject allorsObject)
         {
             extent.CheckAssociation(association);
             CompositePredicateAssertions.AssertAssociationEquals(association, allorsObject);

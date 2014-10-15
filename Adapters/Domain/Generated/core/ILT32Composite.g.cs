@@ -111,21 +111,21 @@ namespace Allors.Domain
 			}
 		} 
 
-		public global::Allors.Meta.AssociationType ILT32CompositesWhereSelf3 
+		public global::Allors.Meta.IAssociationType ILT32CompositesWhereSelf3 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.ILT32CompositeSelf3;
 			}
 		} 
-		public global::Allors.Meta.AssociationType ILT32CompositesWhereSelf2 
+		public global::Allors.Meta.IAssociationType ILT32CompositesWhereSelf2 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.ILT32CompositeSelf2;
 			}
 		} 
-		public global::Allors.Meta.AssociationType ILT32CompositesWhereSelf1 
+		public global::Allors.Meta.IAssociationType ILT32CompositesWhereSelf1 
 		{
 			get
 			{

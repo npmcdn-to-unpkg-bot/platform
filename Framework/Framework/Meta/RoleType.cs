@@ -278,7 +278,7 @@ namespace Allors.Meta
         /// Gets the association.
         /// </summary>
         /// <value>The association.</value>
-        public AssociationType AssociationType
+        public IAssociationType AssociationType
         {
             get { return this.RelationType.AssociationType; }
         }

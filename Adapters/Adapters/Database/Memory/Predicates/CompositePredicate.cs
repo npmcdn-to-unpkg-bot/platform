@@ -97,14 +97,14 @@ namespace Allors.Adapters.Database.Memory
             return this;
         }
 
-        public ICompositePredicate AddContainedIn(AssociationType association, Allors.Extent containingExtent)
+        public ICompositePredicate AddContainedIn(IAssociationType association, Allors.Extent containingExtent)
         {
             this.predicates.Add(new AssociationContainedInExtent(this.extent, association, containingExtent));
             this.extent.Invalidate();
             return this;
         }
 
-        public ICompositePredicate AddContainedIn(AssociationType association, IEnumerable<IObject> containingEnumerable)
+        public ICompositePredicate AddContainedIn(IAssociationType association, IEnumerable<IObject> containingEnumerable)
         {
             this.predicates.Add(new AssociationContainedInEnumerable(this.extent, association, containingEnumerable));
             this.extent.Invalidate();
@@ -118,7 +118,7 @@ namespace Allors.Adapters.Database.Memory
             return this;
         }
 
-        public ICompositePredicate AddContains(AssociationType association, IObject containedObject)
+        public ICompositePredicate AddContains(IAssociationType association, IObject containedObject)
         {
             this.predicates.Add(new AssociationContains(this.extent, association, containedObject));
             this.extent.Invalidate();
@@ -147,7 +147,7 @@ namespace Allors.Adapters.Database.Memory
             return this;
         }
 
-        public ICompositePredicate AddEquals(AssociationType association, IObject allorsObject)
+        public ICompositePredicate AddEquals(IAssociationType association, IObject allorsObject)
         {
             this.predicates.Add(new AssociationEquals(this.extent, association, allorsObject));
             this.extent.Invalidate();
@@ -161,7 +161,7 @@ namespace Allors.Adapters.Database.Memory
             return this;
         }
 
-        public ICompositePredicate AddExists(AssociationType association)
+        public ICompositePredicate AddExists(IAssociationType association)
         {
             this.predicates.Add(new AssociationExists(this.extent, association));
             this.extent.Invalidate();
@@ -189,7 +189,7 @@ namespace Allors.Adapters.Database.Memory
             return this;
         }
 
-        public ICompositePredicate AddInstanceof(AssociationType association, Composite type)
+        public ICompositePredicate AddInstanceof(IAssociationType association, Composite type)
         {
             this.predicates.Add(new AssociationInstanceOf(this.extent, association, type));
             this.extent.Invalidate();

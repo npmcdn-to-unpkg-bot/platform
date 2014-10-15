@@ -24,7 +24,7 @@ namespace Allors.Adapters.Database.Sql.Commands
 
     public interface IGetCompositeAssociations
     {
-        ObjectId[] Execute(Strategy role, AssociationType associationType);
+        ObjectId[] Execute(Strategy role, IAssociationType associationType);
     }
 
     public interface IGetCompositeAssociationsFactory

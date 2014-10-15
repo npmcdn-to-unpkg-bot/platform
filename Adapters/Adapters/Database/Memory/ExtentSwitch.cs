@@ -29,7 +29,7 @@ namespace Allors.Adapters.Database.Memory
         private readonly StrategyExtent strategyExtent;
         private Extent extent;
 
-        public ExtentSwitch(Strategy strategy, AssociationType associationType)
+        public ExtentSwitch(Strategy strategy, IAssociationType associationType)
         {
             this.strategyExtent = new StrategyExtentAssociation(strategy, associationType);
         }

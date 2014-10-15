@@ -36,12 +36,12 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
     public class GetCompositeAssociationFactory : IGetCompositeAssociationFactory
     {
         public readonly Database Database;
-        private readonly Dictionary<AssociationType, string> sqlByAssociationType;
+        private readonly Dictionary<IAssociationType, string> sqlByAssociationType;
 
         public GetCompositeAssociationFactory(Database database)
         {
             this.Database = database;
-            this.sqlByAssociationType = new Dictionary<AssociationType, string>();
+            this.sqlByAssociationType = new Dictionary<IAssociationType, string>();
         }
 
         public IGetCompositeAssociation Create(Sql.DatabaseSession session)
@@ -49,7 +49,7 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
             return new GetCompositeAssociation(this, session);
         }
 
-        public string GetSql(AssociationType associationType)
+        public string GetSql(IAssociationType associationType)
         {
             if (!this.sqlByAssociationType.ContainsKey(associationType))
             {
@@ -82,16 +82,16 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
         private class GetCompositeAssociation : DatabaseCommand, IGetCompositeAssociation
         {
             private readonly GetCompositeAssociationFactory factory;
-            private readonly Dictionary<AssociationType, NpgsqlCommand> commandByAssociationType;
+            private readonly Dictionary<IAssociationType, NpgsqlCommand> commandByAssociationType;
 
             public GetCompositeAssociation(GetCompositeAssociationFactory factory, Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
-                this.commandByAssociationType = new Dictionary<AssociationType, NpgsqlCommand>();
+                this.commandByAssociationType = new Dictionary<IAssociationType, NpgsqlCommand>();
             }
 
-            public Reference Execute(Reference role, AssociationType associationType)
+            public Reference Execute(Reference role, IAssociationType associationType)
             {
                 Reference associationObject = null;
 

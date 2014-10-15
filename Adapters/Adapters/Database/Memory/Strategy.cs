@@ -36,14 +36,14 @@ namespace Allors.Adapters.Database.Memory
         private readonly Dictionary<RoleType, object> unitRoleByRoleType;
         private readonly Dictionary<RoleType, Strategy> compositeRoleByRoleType;
         private readonly Dictionary<RoleType, HashSet<Strategy>> compositesRoleByRoleType;
-        private readonly Dictionary<AssociationType, Strategy> compositeAssociationByAssociationType;
-        private readonly Dictionary<AssociationType, HashSet<Strategy>> compositesAssociationByAssociationType;
+        private readonly Dictionary<IAssociationType, Strategy> compositeAssociationByAssociationType;
+        private readonly Dictionary<IAssociationType, HashSet<Strategy>> compositesAssociationByAssociationType;
         
         private Dictionary<RoleType, object> rollbackUnitRoleByRoleType;
         private Dictionary<RoleType, Strategy> rollbackCompositeRoleByRoleType;
         private Dictionary<RoleType, HashSet<Strategy>> rollbackCompositesRoleByRoleType;
-        private Dictionary<AssociationType, Strategy> rollbackCompositeAssociationByAssociationType;
-        private Dictionary<AssociationType, HashSet<Strategy>> rollbackCompositesAssociationByAssociationType;
+        private Dictionary<IAssociationType, Strategy> rollbackCompositeAssociationByAssociationType;
+        private Dictionary<IAssociationType, HashSet<Strategy>> rollbackCompositesAssociationByAssociationType;
         
         // TODO: move to a BitFlag
         private bool isDeleted;
@@ -65,8 +65,8 @@ namespace Allors.Adapters.Database.Memory
             this.unitRoleByRoleType = new Dictionary<RoleType, object>();
             this.compositeRoleByRoleType = new Dictionary<RoleType, Strategy>();
             this.compositesRoleByRoleType = new Dictionary<RoleType, HashSet<Strategy>>();
-            this.compositeAssociationByAssociationType = new Dictionary<AssociationType, Strategy>();
-            this.compositesAssociationByAssociationType = new Dictionary<AssociationType, HashSet<Strategy>>();
+            this.compositeAssociationByAssociationType = new Dictionary<IAssociationType, Strategy>();
+            this.compositesAssociationByAssociationType = new Dictionary<IAssociationType, HashSet<Strategy>>();
 
             this.rollbackUnitRoleByRoleType = null;
             this.rollbackCompositeRoleByRoleType = null;
@@ -156,21 +156,21 @@ namespace Allors.Adapters.Database.Memory
             }
         }
 
-        private Dictionary<AssociationType, Strategy> RollbackCompositeAssociationByAssociationType 
+        private Dictionary<IAssociationType, Strategy> RollbackCompositeAssociationByAssociationType 
         {
             get
             {
                 return this.rollbackCompositeAssociationByAssociationType
-                    ?? (this.rollbackCompositeAssociationByAssociationType = new Dictionary<AssociationType, Strategy>());
+                    ?? (this.rollbackCompositeAssociationByAssociationType = new Dictionary<IAssociationType, Strategy>());
             }
         }
 
-        private Dictionary<AssociationType, HashSet<Strategy>> RollbackCompositesAssociationByAssociationType 
+        private Dictionary<IAssociationType, HashSet<Strategy>> RollbackCompositesAssociationByAssociationType 
         {
             get
             {
                 return this.rollbackCompositesAssociationByAssociationType
-                    ?? (this.rollbackCompositesAssociationByAssociationType = new Dictionary<AssociationType, HashSet<Strategy>>());
+                    ?? (this.rollbackCompositesAssociationByAssociationType = new Dictionary<IAssociationType, HashSet<Strategy>>());
             }
         }
         
@@ -455,7 +455,7 @@ namespace Allors.Adapters.Database.Memory
             return roleStrategies != null;
         }
 
-        public object GetAssociation(AssociationType associationType)
+        public object GetAssociation(IAssociationType associationType)
         {
             if (associationType.IsMany)
             {
@@ -465,7 +465,7 @@ namespace Allors.Adapters.Database.Memory
             return this.GetCompositeAssociation(associationType);
         }
 
-        public bool ExistAssociation(AssociationType associationType)
+        public bool ExistAssociation(IAssociationType associationType)
         {
             if (associationType.IsMany)
             {
@@ -475,7 +475,7 @@ namespace Allors.Adapters.Database.Memory
             return this.ExistCompositeAssociation(associationType);
         }
 
-        public IObject GetCompositeAssociation(AssociationType associationType)
+        public IObject GetCompositeAssociation(IAssociationType associationType)
         {
             this.CheckRemoved();
             Strategy strategy;
@@ -488,19 +488,19 @@ namespace Allors.Adapters.Database.Memory
             return null;
         }
 
-        public bool ExistCompositeAssociation(AssociationType associationType)
+        public bool ExistCompositeAssociation(IAssociationType associationType)
         {
             return this.GetCompositeAssociation(associationType) != null;
         }
 
-        public Allors.Extent GetCompositeAssociations(AssociationType associationType)
+        public Allors.Extent GetCompositeAssociations(IAssociationType associationType)
         {
             this.CheckRemoved();
 
             return new ExtentSwitch(this, associationType);
         }
 
-        public bool ExistCompositeAssociations(AssociationType associationType)
+        public bool ExistCompositeAssociations(IAssociationType associationType)
         {
             this.CheckRemoved();
             HashSet<Strategy> strategies;
@@ -731,7 +731,7 @@ namespace Allors.Adapters.Database.Memory
             return unitRole;
         }
 
-        internal List<Strategy> GetStrategies(AssociationType associationType)
+        internal List<Strategy> GetStrategies(IAssociationType associationType)
         {
             HashSet<Strategy> strategies;
             this.compositesAssociationByAssociationType.TryGetValue(associationType, out strategies);
@@ -1018,7 +1018,7 @@ namespace Allors.Adapters.Database.Memory
             }
         }
 
-        private void Backup(AssociationType associationType)
+        private void Backup(IAssociationType associationType)
         {
             if (associationType.IsMany)
             {

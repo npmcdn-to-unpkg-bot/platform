@@ -29,7 +29,7 @@ namespace Allors.Adapters.Special.Assertions
 
     public class StrategyAssert
     {
-        public static void AssociationExistHasException(IObject allorsObject, AssociationType associationType)
+        public static void AssociationExistHasException(IObject allorsObject, IAssociationType associationType)
         {
             bool exceptionOccured = false;
             try
@@ -47,7 +47,7 @@ namespace Allors.Adapters.Special.Assertions
             }
         }
 
-        public static void AssociationGetHasException(IObject allorsObject, AssociationType associationType)
+        public static void AssociationGetHasException(IObject allorsObject, IAssociationType associationType)
         {
             bool exceptionOccured = false;
             try
@@ -65,9 +65,9 @@ namespace Allors.Adapters.Special.Assertions
             }
         }
 
-        public static void AssociationsExistExclusive(IObject allorsObject, params AssociationType[] associationTypes)
+        public static void AssociationsExistExclusive(IObject allorsObject, params IAssociationType[] associationTypes)
         {
-            foreach (AssociationType associationType in associationTypes)
+            foreach (var associationType in associationTypes)
             {
                 if (!allorsObject.Strategy.ObjectType.ContainsAssociationType(associationType))
                 {
@@ -75,7 +75,7 @@ namespace Allors.Adapters.Special.Assertions
                 }
             }
 
-            foreach (AssociationType associationType in allorsObject.Strategy.ObjectType.AssociationTypes)
+            foreach (var associationType in allorsObject.Strategy.ObjectType.AssociationTypes)
             {
                 if (Array.IndexOf(associationTypes, associationType) >= 0)
                 {

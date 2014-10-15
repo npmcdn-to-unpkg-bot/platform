@@ -401,7 +401,7 @@ namespace Allors.Adapters.Workspace.Memory
             return this.GetCompositeRoles(roleType).Count > 0;
         }
 
-        public virtual object GetAssociation(AssociationType associationType)
+        public virtual object GetAssociation(IAssociationType associationType)
         {
             if (associationType.IsMany)
             {
@@ -411,7 +411,7 @@ namespace Allors.Adapters.Workspace.Memory
             return this.GetCompositeAssociation(associationType);
         }
 
-        public virtual bool ExistAssociation(AssociationType associationType)
+        public virtual bool ExistAssociation(IAssociationType associationType)
         {
             if (associationType.IsMany)
             {
@@ -421,7 +421,7 @@ namespace Allors.Adapters.Workspace.Memory
             return this.ExistCompositeAssociation(associationType);
         }
 
-        public virtual IObject GetCompositeAssociation(AssociationType associationType)
+        public virtual IObject GetCompositeAssociation(IAssociationType associationType)
         {
             this.CheckRemoved();
 
@@ -430,19 +430,19 @@ namespace Allors.Adapters.Workspace.Memory
             return association != null ? association.GetObject() : null;
         }
 
-        public virtual bool ExistCompositeAssociation(AssociationType associationType)
+        public virtual bool ExistCompositeAssociation(IAssociationType associationType)
         {
             return this.GetCompositeAssociation(associationType) != null;
         }
 
-        public virtual Allors.Extent GetCompositeAssociations(AssociationType associationType)
+        public virtual Allors.Extent GetCompositeAssociations(IAssociationType associationType)
         {
             this.CheckRemoved();
 
             return new ExtentAssociation(this, associationType);
         }
 
-        public virtual bool ExistCompositeAssociations(AssociationType associationType)
+        public virtual bool ExistCompositeAssociations(IAssociationType associationType)
         {
             return this.GetCompositeAssociations(associationType).Count > 0;
         }
@@ -648,7 +648,7 @@ namespace Allors.Adapters.Workspace.Memory
             return roles;
         }
 
-        internal virtual Strategy GetOriginalCompositeAssociation(AssociationType associationType)
+        internal virtual Strategy GetOriginalCompositeAssociation(IAssociationType associationType)
         {
             if (this.DatabaseStrategy != null &&
                 !this.DatabaseStrategy.IsDeleted)
@@ -660,7 +660,7 @@ namespace Allors.Adapters.Workspace.Memory
             return null;
         }
 
-        internal virtual HashSet<Strategy> GetOriginalCompositesAssociation(AssociationType associationType)
+        internal virtual HashSet<Strategy> GetOriginalCompositesAssociation(IAssociationType associationType)
         {
             var associations = new HashSet<Strategy>();
 

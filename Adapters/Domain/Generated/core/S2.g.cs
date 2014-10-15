@@ -273,84 +273,84 @@ namespace Allors.Domain
 			}
 		} 
 
-		public global::Allors.Meta.AssociationType S1sWhereS2many2one 
+		public global::Allors.Meta.IAssociationType S1sWhereS2many2one 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.S1S2many2one;
 			}
 		} 
-		public global::Allors.Meta.AssociationType S1WhereS2one2many 
+		public global::Allors.Meta.IAssociationType S1WhereS2one2many 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.S1S2one2many;
 			}
 		} 
-		public global::Allors.Meta.AssociationType S1sWhereS2many2many 
+		public global::Allors.Meta.IAssociationType S1sWhereS2many2many 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.S1S2many2many;
 			}
 		} 
-		public global::Allors.Meta.AssociationType S1WhereS2one2one 
+		public global::Allors.Meta.IAssociationType S1WhereS2one2one 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.S1S2one2one;
 			}
 		} 
-		public global::Allors.Meta.AssociationType C1sWhereS2many2one 
+		public global::Allors.Meta.IAssociationType C1sWhereS2many2one 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.C1S2many2one;
 			}
 		} 
-		public global::Allors.Meta.AssociationType C1WhereS2one2one 
+		public global::Allors.Meta.IAssociationType C1WhereS2one2one 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.C1S2one2one;
 			}
 		} 
-		public global::Allors.Meta.AssociationType C1sWhereS2many2many 
+		public global::Allors.Meta.IAssociationType C1sWhereS2many2many 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.C1S2many2many;
 			}
 		} 
-		public global::Allors.Meta.AssociationType C1WhereS2one2many 
+		public global::Allors.Meta.IAssociationType C1WhereS2one2many 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.C1S2one2many;
 			}
 		} 
-		public global::Allors.Meta.AssociationType I1WhereS2one2one 
+		public global::Allors.Meta.IAssociationType I1WhereS2one2one 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.I1S2one2one;
 			}
 		} 
-		public global::Allors.Meta.AssociationType I1sWhereS2many2many 
+		public global::Allors.Meta.IAssociationType I1sWhereS2many2many 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.I1S2many2many;
 			}
 		} 
-		public global::Allors.Meta.AssociationType I1WhereS2one2many 
+		public global::Allors.Meta.IAssociationType I1WhereS2one2many 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.I1S2one2many;
 			}
 		} 
-		public global::Allors.Meta.AssociationType I1sWhereS2many2one 
+		public global::Allors.Meta.IAssociationType I1sWhereS2many2one 
 		{
 			get
 			{

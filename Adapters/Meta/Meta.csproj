@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\Core\Meta\Core\AssociationType.cs">
+      <Link>Core\AssociationType.cs</Link>
+    </Compile>
     <Compile Include="..\..\Core\Meta\Core\Class.cs">
       <Link>Core\Class.cs</Link>
     </Compile>

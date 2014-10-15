@@ -30,7 +30,7 @@ namespace Allors.Meta
     /// </summary>
     public partial class IRelationType : IDomainDefinedObject, IComparable
     {
-        private readonly AssociationType associationType;
+        private readonly IAssociationType associationType;
         private readonly RoleType roleType;
 
         private bool isDerived;
@@ -41,7 +41,7 @@ namespace Allors.Meta
         public IRelationType(IDomain domain, Guid id, Guid associationTypeId, Guid roleTypdId)
             : base(domain, id)
         {
-            this.associationType = new AssociationType(this, associationTypeId);
+            this.associationType = new IAssociationType(this, associationTypeId);
             this.roleType = new RoleType(this, roleTypdId);
 
             domain.OnRelationTypeCreated(this);
@@ -77,7 +77,7 @@ namespace Allors.Meta
             }
         }
 
-        public AssociationType AssociationType
+        public IAssociationType AssociationType
         {
             get
             {

@@ -54,7 +54,7 @@
     <Compile Include="IWorkspace.cs" />
     <Compile Include="IWorkspaceFactory.cs" />
     <Compile Include="IWorkspaceSession.cs" />
-    <Compile Include="Meta\AssociationType.cs" />
+    <Compile Include="Meta\IAssociationType.cs" />
     <Compile Include="Meta\Builder.cs" />
     <Compile Include="Meta\Cardinalities.cs" />
     <Compile Include="Meta\IClass.cs" />

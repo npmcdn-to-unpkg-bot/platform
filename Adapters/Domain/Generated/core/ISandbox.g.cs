@@ -101,14 +101,14 @@ namespace Allors.Domain
 			}
 		} 
 
-		public global::Allors.Meta.AssociationType ISandboxesWhereInvisibleMany 
+		public global::Allors.Meta.IAssociationType ISandboxesWhereInvisibleMany 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.ISandboxInvisibleMany;
 			}
 		} 
-		public global::Allors.Meta.AssociationType ISandboxWhereInvisibleOne 
+		public global::Allors.Meta.IAssociationType ISandboxWhereInvisibleOne 
 		{
 			get
 			{

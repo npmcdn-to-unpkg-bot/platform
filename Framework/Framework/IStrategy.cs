@@ -214,41 +214,41 @@ namespace Allors
         /// </summary>
         /// <param name="associationType">The relation type.</param>
         /// <returns><c>true</c>if the association exists; otherwise,<c>false</c> </returns>
-        bool ExistAssociation(AssociationType associationType);
+        bool ExistAssociation(IAssociationType associationType);
 
         /// <summary>
         /// Gets the association.
         /// </summary>
         /// <param name="roleType">Type of the relation.</param>
         /// <returns>The association object.</returns>
-        object GetAssociation(AssociationType roleType);
+        object GetAssociation(IAssociationType roleType);
 
         /// <summary>
         /// Gets a value indicating whether the composite association exists.
         /// </summary>
         /// <param name="associationType">The relation type.</param>
         /// <returns><c>true</c>if the composite association exists; otherwise,<c>false</c> </returns>
-        bool ExistCompositeAssociation(AssociationType associationType);
+        bool ExistCompositeAssociation(IAssociationType associationType);
 
         /// <summary>
         /// Gets the composite association.
         /// </summary>
         /// <param name="associationType">Type of the relation.</param>
         /// <returns>The association object.</returns>
-        IObject GetCompositeAssociation(AssociationType associationType);
+        IObject GetCompositeAssociation(IAssociationType associationType);
 
         /// <summary>
         /// Gets a value indicating whether the composite associations exists.
         /// </summary>
         /// <param name="associationType">The relation type.</param>
         /// <returns><c>true</c>if the composite associations exists; otherwise,<c>false</c> </returns>
-        bool ExistCompositeAssociations(AssociationType associationType);
+        bool ExistCompositeAssociations(IAssociationType associationType);
 
         /// <summary>
         /// Gets the composite associations.
         /// </summary>
         /// <param name="associationType">Type of the relation.</param>
         /// <returns>The association objects.</returns>
-        Extent GetCompositeAssociations(AssociationType associationType);
+        Extent GetCompositeAssociations(IAssociationType associationType);
     }
 }

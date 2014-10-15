@@ -240,7 +240,7 @@ namespace Allors.Adapters.Database.Sql
             return this.columnsByRelationType[relationType];
         }
 
-        public SchemaColumn Column(AssociationType association)
+        public SchemaColumn Column(IAssociationType association)
         {
             return this.columnsByRelationType[association.RelationType];
         }
@@ -260,7 +260,7 @@ namespace Allors.Adapters.Database.Sql
             return this.tablesByRelationType[relationType];
         }
 
-        public SchemaTable Table(AssociationType association)
+        public SchemaTable Table(IAssociationType association)
         {
             return this.tablesByRelationType[association.RelationType];
         }
@@ -401,7 +401,7 @@ namespace Allors.Adapters.Database.Sql
                     schemaTable.AddColumn(this.TypeId);
 
                     var roleTypes = new List<RoleType>();
-                    var associationTypes = new List<AssociationType>();
+                    var associationTypes = new List<IAssociationType>();
 
                     foreach (var roleType in @class.RoleTypes)
                     {

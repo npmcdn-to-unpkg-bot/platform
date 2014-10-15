@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="AssociationType.cs" company="Allors bvba">
+// <copyright file="IAssociationType.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -24,11 +24,11 @@ namespace Allors.Meta
     using System;
     
     /// <summary>
-    /// An <see cref="AssociationType"/> defines the association side of a relation.
+    /// An association type defines the association side of a relation.
     /// This is also called the 'active', 'controlling' or 'owning' side.
     /// AssociationTypes can only have composite <see cref="ObjectType"/>s.
     /// </summary>
-    public sealed partial class AssociationType : PropertyType, IComparable
+    public partial class IAssociationType : PropertyType, IComparable
     {
         /// <summary>
         /// Used to create property names.
@@ -41,7 +41,7 @@ namespace Allors.Meta
 
         private Composite objectType;
 
-        internal AssociationType(IRelationType relationType, Guid id)
+        protected internal IAssociationType(IRelationType relationType, Guid id)
             : base(relationType.DefiningDomain, id)
         {
             this.relationType = relationType;
@@ -258,7 +258,7 @@ namespace Allors.Meta
         /// <paramref name="obj"/> is not the same type as this instance. </exception>
         public int CompareTo(object obj)
         {
-            var that = obj as AssociationType;
+            var that = obj as IAssociationType;
             if (that != null)
             {
                 return string.CompareOrdinal(this.SingularName, that.SingularName);

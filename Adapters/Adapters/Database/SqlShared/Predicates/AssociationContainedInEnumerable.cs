@@ -27,10 +27,10 @@ namespace Allors.Adapters.Database.Sql
 
     public sealed class AssociationContainedInEnumerable : In
     {
-        private readonly AssociationType association;
+        private readonly IAssociationType association;
         private readonly IEnumerable<IObject> enumerable;
 
-        public AssociationContainedInEnumerable(ExtentFiltered extent, AssociationType association, IEnumerable<IObject> enumerable)
+        public AssociationContainedInEnumerable(ExtentFiltered extent, IAssociationType association, IEnumerable<IObject> enumerable)
         {
             extent.CheckAssociation(association);
             CompositePredicateAssertions.AssertAssociationContainedIn(association, this.enumerable);

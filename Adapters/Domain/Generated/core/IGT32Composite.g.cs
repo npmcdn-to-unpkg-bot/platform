@@ -1071,231 +1071,231 @@ namespace Allors.Domain
 			}
 		} 
 
-		public global::Allors.Meta.AssociationType IGT32CompositeWhereSelf13 
+		public global::Allors.Meta.IAssociationType IGT32CompositeWhereSelf13 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.IGT32CompositeSelf13;
 			}
 		} 
-		public global::Allors.Meta.AssociationType IGT32CompositeWhereSelf31 
+		public global::Allors.Meta.IAssociationType IGT32CompositeWhereSelf31 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.IGT32CompositeSelf31;
 			}
 		} 
-		public global::Allors.Meta.AssociationType IGT32CompositeWhereSelf14 
+		public global::Allors.Meta.IAssociationType IGT32CompositeWhereSelf14 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.IGT32CompositeSelf14;
 			}
 		} 
-		public global::Allors.Meta.AssociationType IGT32CompositeWhereSelf21 
+		public global::Allors.Meta.IAssociationType IGT32CompositeWhereSelf21 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.IGT32CompositeSelf21;
 			}
 		} 
-		public global::Allors.Meta.AssociationType IGT32CompositeWhereSelf2 
+		public global::Allors.Meta.IAssociationType IGT32CompositeWhereSelf2 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.IGT32CompositeSelf2;
 			}
 		} 
-		public global::Allors.Meta.AssociationType IGT32CompositeWhereSelf23 
+		public global::Allors.Meta.IAssociationType IGT32CompositeWhereSelf23 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.IGT32CompositeSelf23;
 			}
 		} 
-		public global::Allors.Meta.AssociationType IGT32CompositeWhereSelf22 
+		public global::Allors.Meta.IAssociationType IGT32CompositeWhereSelf22 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.IGT32CompositeSelf22;
 			}
 		} 
-		public global::Allors.Meta.AssociationType IGT32CompositeWhereSelf18 
+		public global::Allors.Meta.IAssociationType IGT32CompositeWhereSelf18 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.IGT32CompositeSelf18;
 			}
 		} 
-		public global::Allors.Meta.AssociationType IGT32CompositeWhereSelf17 
+		public global::Allors.Meta.IAssociationType IGT32CompositeWhereSelf17 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.IGT32CompositeSelf17;
 			}
 		} 
-		public global::Allors.Meta.AssociationType IGT32CompositeWhereSelf3 
+		public global::Allors.Meta.IAssociationType IGT32CompositeWhereSelf3 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.IGT32CompositeSelf3;
 			}
 		} 
-		public global::Allors.Meta.AssociationType IGT32CompositeWhereSelf29 
+		public global::Allors.Meta.IAssociationType IGT32CompositeWhereSelf29 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.IGT32CompositeSelf29;
 			}
 		} 
-		public global::Allors.Meta.AssociationType IGT32CompositeWhereSelf26 
+		public global::Allors.Meta.IAssociationType IGT32CompositeWhereSelf26 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.IGT32CompositeSelf26;
 			}
 		} 
-		public global::Allors.Meta.AssociationType IGT32CompositeWhereSelf4 
+		public global::Allors.Meta.IAssociationType IGT32CompositeWhereSelf4 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.IGT32CompositeSelf4;
 			}
 		} 
-		public global::Allors.Meta.AssociationType IGT32CompositeWhereSelf8 
+		public global::Allors.Meta.IAssociationType IGT32CompositeWhereSelf8 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.IGT32CompositeSelf8;
 			}
 		} 
-		public global::Allors.Meta.AssociationType IGT32CompositeWhereSelf24 
+		public global::Allors.Meta.IAssociationType IGT32CompositeWhereSelf24 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.IGT32CompositeSelf24;
 			}
 		} 
-		public global::Allors.Meta.AssociationType IGT32CompositeWhereSelf12 
+		public global::Allors.Meta.IAssociationType IGT32CompositeWhereSelf12 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.IGT32CompositeSelf12;
 			}
 		} 
-		public global::Allors.Meta.AssociationType IGT32CompositeWhereSelf7 
+		public global::Allors.Meta.IAssociationType IGT32CompositeWhereSelf7 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.IGT32CompositeSelf7;
 			}
 		} 
-		public global::Allors.Meta.AssociationType IGT32CompositeWhereSelf6 
+		public global::Allors.Meta.IAssociationType IGT32CompositeWhereSelf6 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.IGT32CompositeSelf6;
 			}
 		} 
-		public global::Allors.Meta.AssociationType IGT32CompositeWhereSelf25 
+		public global::Allors.Meta.IAssociationType IGT32CompositeWhereSelf25 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.IGT32CompositeSelf25;
 			}
 		} 
-		public global::Allors.Meta.AssociationType IGT32CompositeWhereSelf20 
+		public global::Allors.Meta.IAssociationType IGT32CompositeWhereSelf20 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.IGT32CompositeSelf20;
 			}
 		} 
-		public global::Allors.Meta.AssociationType IGT32CompositeWhereSelf9 
+		public global::Allors.Meta.IAssociationType IGT32CompositeWhereSelf9 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.IGT32CompositeSelf9;
 			}
 		} 
-		public global::Allors.Meta.AssociationType IGT32CompositeWhereSelf11 
+		public global::Allors.Meta.IAssociationType IGT32CompositeWhereSelf11 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.IGT32CompositeSelf11;
 			}
 		} 
-		public global::Allors.Meta.AssociationType IGT32CompositeWhereSelf32 
+		public global::Allors.Meta.IAssociationType IGT32CompositeWhereSelf32 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.IGT32CompositeSelf32;
 			}
 		} 
-		public global::Allors.Meta.AssociationType IGT32CompositeWhereSelf28 
+		public global::Allors.Meta.IAssociationType IGT32CompositeWhereSelf28 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.IGT32CompositeSelf28;
 			}
 		} 
-		public global::Allors.Meta.AssociationType IGT32CompositeWhereSelf33 
+		public global::Allors.Meta.IAssociationType IGT32CompositeWhereSelf33 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.IGT32CompositeSelf33;
 			}
 		} 
-		public global::Allors.Meta.AssociationType IGT32CompositeWhereSelf27 
+		public global::Allors.Meta.IAssociationType IGT32CompositeWhereSelf27 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.IGT32CompositeSelf27;
 			}
 		} 
-		public global::Allors.Meta.AssociationType IGT32CompositeWhereSelf30 
+		public global::Allors.Meta.IAssociationType IGT32CompositeWhereSelf30 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.IGT32CompositeSelf30;
 			}
 		} 
-		public global::Allors.Meta.AssociationType IGT32CompositeWhereSelf1 
+		public global::Allors.Meta.IAssociationType IGT32CompositeWhereSelf1 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.IGT32CompositeSelf1;
 			}
 		} 
-		public global::Allors.Meta.AssociationType IGT32CompositeWhereSelf15 
+		public global::Allors.Meta.IAssociationType IGT32CompositeWhereSelf15 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.IGT32CompositeSelf15;
 			}
 		} 
-		public global::Allors.Meta.AssociationType IGT32CompositeWhereSelf5 
+		public global::Allors.Meta.IAssociationType IGT32CompositeWhereSelf5 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.IGT32CompositeSelf5;
 			}
 		} 
-		public global::Allors.Meta.AssociationType IGT32CompositeWhereSelf19 
+		public global::Allors.Meta.IAssociationType IGT32CompositeWhereSelf19 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.IGT32CompositeSelf19;
 			}
 		} 
-		public global::Allors.Meta.AssociationType IGT32CompositeWhereSelf10 
+		public global::Allors.Meta.IAssociationType IGT32CompositeWhereSelf10 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.IGT32CompositeSelf10;
 			}
 		} 
-		public global::Allors.Meta.AssociationType IGT32CompositeWhereSelf16 
+		public global::Allors.Meta.IAssociationType IGT32CompositeWhereSelf16 
 		{
 			get
 			{

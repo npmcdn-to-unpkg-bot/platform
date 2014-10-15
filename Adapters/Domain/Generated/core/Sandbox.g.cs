@@ -233,14 +233,14 @@ namespace Allors.Domain
 			}
 		} 
 
-		public global::Allors.Meta.AssociationType SandboxesWhereInvisibleMany 
+		public global::Allors.Meta.IAssociationType SandboxesWhereInvisibleMany 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.SandboxInvisibleMany;
 			}
 		} 
-		public global::Allors.Meta.AssociationType SandboxWhereInvisibleOne 
+		public global::Allors.Meta.IAssociationType SandboxWhereInvisibleOne 
 		{
 			get
 			{

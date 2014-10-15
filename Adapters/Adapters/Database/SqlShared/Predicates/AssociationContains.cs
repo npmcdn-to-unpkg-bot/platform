@@ -25,9 +25,9 @@ namespace Allors.Adapters.Database.Sql
     public sealed class AssociationContains : Predicate
     {
         private readonly IObject allorsObject;
-        private readonly AssociationType association;
+        private readonly IAssociationType association;
 
-        public AssociationContains(ExtentFiltered extent, AssociationType association, IObject allorsObject)
+        public AssociationContains(ExtentFiltered extent, IAssociationType association, IObject allorsObject)
         {
             extent.CheckAssociation(association);
             CompositePredicateAssertions.AssertAssociationContains(association, allorsObject);

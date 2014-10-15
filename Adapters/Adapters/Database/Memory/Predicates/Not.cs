@@ -88,7 +88,7 @@ namespace Allors.Adapters.Database.Memory
             return this;
         }
 
-        public ICompositePredicate AddContainedIn(AssociationType association, Allors.Extent containingExtent)
+        public ICompositePredicate AddContainedIn(IAssociationType association, Allors.Extent containingExtent)
         {
             this.CheckUnarity();
             this.predicate = new AssociationContainedInExtent(this.extent, association, containingExtent);
@@ -96,7 +96,7 @@ namespace Allors.Adapters.Database.Memory
             return this;
         }
 
-        public ICompositePredicate AddContainedIn(AssociationType association, IEnumerable<IObject> containingEnumerable)
+        public ICompositePredicate AddContainedIn(IAssociationType association, IEnumerable<IObject> containingEnumerable)
         {
             this.CheckUnarity();
             this.predicate = new AssociationContainedInEnumerable(this.extent, association, containingEnumerable);
@@ -112,7 +112,7 @@ namespace Allors.Adapters.Database.Memory
             return this;
         }
 
-        public ICompositePredicate AddContains(AssociationType association, IObject containedObject)
+        public ICompositePredicate AddContains(IAssociationType association, IObject containedObject)
         {
             this.CheckUnarity();
             this.predicate = new AssociationContains(this.extent, association, containedObject);
@@ -144,7 +144,7 @@ namespace Allors.Adapters.Database.Memory
             return this;
         }
 
-        public ICompositePredicate AddEquals(AssociationType association, IObject allorsObject)
+        public ICompositePredicate AddEquals(IAssociationType association, IObject allorsObject)
         {
             this.CheckUnarity();
             this.predicate = new AssociationEquals(this.extent, association, allorsObject);
@@ -160,7 +160,7 @@ namespace Allors.Adapters.Database.Memory
             return this;
         }
 
-        public ICompositePredicate AddExists(AssociationType association)
+        public ICompositePredicate AddExists(IAssociationType association)
         {
             this.CheckUnarity();
             this.predicate = new AssociationExists(this.extent, association);
@@ -192,7 +192,7 @@ namespace Allors.Adapters.Database.Memory
             return this;
         }
 
-        public ICompositePredicate AddInstanceof(AssociationType association, Composite type)
+        public ICompositePredicate AddInstanceof(IAssociationType association, Composite type)
         {
             this.CheckUnarity();
             this.predicate = new AssociationInstanceOf(this.extent, association, type);

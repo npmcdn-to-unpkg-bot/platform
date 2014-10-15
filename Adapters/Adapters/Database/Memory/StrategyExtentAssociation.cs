@@ -30,13 +30,13 @@ namespace Allors.Adapters.Database.Memory
     {
         private static readonly List<Strategy> EmptyList = new List<Strategy>();
         private readonly Strategy roleStrategy;
-        private readonly AssociationType associationType;
+        private readonly IAssociationType associationType;
 
         private IObject[] defaultObjectArray;
 
         private List<Strategy> associations;
 
-        public StrategyExtentAssociation(Strategy roleStrategy, AssociationType associationType)
+        public StrategyExtentAssociation(Strategy roleStrategy, IAssociationType associationType)
         {
             this.roleStrategy = roleStrategy;
             this.associationType = associationType;

@@ -123,8 +123,8 @@ namespace Allors.Adapters.Database.Sql
             this.Extent.FlushCache();
             var betweenRoleA = firstValue as RoleType;
             var betweenRoleB = secondValue as RoleType;
-            var betweenAssociationA = firstValue as AssociationType;
-            var betweenAssociationB = secondValue as AssociationType;
+            var betweenAssociationA = firstValue as IAssociationType;
+            var betweenAssociationB = secondValue as IAssociationType;
             if (betweenRoleA != null && betweenRoleB != null)
             {
                 this.Filters.Add(new RoleBetweenRole(this.Extent, role, betweenRoleA, betweenRoleB));
@@ -155,14 +155,14 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public ICompositePredicate AddContainedIn(AssociationType association, Allors.Extent containingExtent)
+        public ICompositePredicate AddContainedIn(IAssociationType association, Allors.Extent containingExtent)
         {
             this.Extent.FlushCache();
             this.Filters.Add(new AssociationContainedInExtent(this.Extent, association, containingExtent));
             return this;
         }
 
-        public ICompositePredicate AddContainedIn(AssociationType association, IEnumerable<IObject> containingEnumerable)
+        public ICompositePredicate AddContainedIn(IAssociationType association, IEnumerable<IObject> containingEnumerable)
         {
             this.Extent.FlushCache();
             this.Filters.Add(new AssociationContainedInEnumerable(this.Extent, association, containingEnumerable));
@@ -176,7 +176,7 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public ICompositePredicate AddContains(AssociationType association, IObject containedObject)
+        public ICompositePredicate AddContains(IAssociationType association, IObject containedObject)
         {
             this.Extent.FlushCache();
             this.Filters.Add(new AssociationContains(this.Extent, association, containedObject));
@@ -194,7 +194,7 @@ namespace Allors.Adapters.Database.Sql
         {
             this.Extent.FlushCache();
             var equalsRole = obj as RoleType;
-            var equalsAssociation = obj as AssociationType;
+            var equalsAssociation = obj as IAssociationType;
             if (equalsRole != null)
             {
                 this.Filters.Add(new RoleEqualsRole(this.Extent, role, equalsRole));
@@ -211,7 +211,7 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public ICompositePredicate AddEquals(AssociationType association, IObject allorsObject)
+        public ICompositePredicate AddEquals(IAssociationType association, IObject allorsObject)
         {
             this.Extent.FlushCache();
             this.Filters.Add(new AssociationEquals(this.Extent, association, allorsObject));
@@ -225,7 +225,7 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public ICompositePredicate AddExists(AssociationType association)
+        public ICompositePredicate AddExists(IAssociationType association)
         {
             this.Extent.FlushCache();
             this.Filters.Add(new AssociationExists(this.Extent, association));
@@ -236,7 +236,7 @@ namespace Allors.Adapters.Database.Sql
         {
             this.Extent.FlushCache();
             var greaterThanRole = value as RoleType;
-            var greaterThanAssociation = value as AssociationType;
+            var greaterThanAssociation = value as IAssociationType;
             if (greaterThanRole != null)
             {
                 this.Filters.Add(new RoleGreaterThanRole(this.Extent, role, greaterThanRole));
@@ -267,7 +267,7 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public ICompositePredicate AddInstanceof(AssociationType association, Composite type)
+        public ICompositePredicate AddInstanceof(IAssociationType association, Composite type)
         {
             this.Extent.FlushCache();
             this.Filters.Add(new AssociationInstanceOf(this.Extent, association, type, GetConcreteSubClasses(type)));
@@ -278,7 +278,7 @@ namespace Allors.Adapters.Database.Sql
         {
             this.Extent.FlushCache();
             var lessThanRole = value as RoleType;
-            var lessThanAssociation = value as AssociationType;
+            var lessThanAssociation = value as IAssociationType;
             if (lessThanRole != null)
             {
                 this.Filters.Add(new RoleLessThanRole(this.Extent, role, lessThanRole));

@@ -411,7 +411,7 @@ namespace Allors.Adapters.Database.Sql
             }
         }
 
-        public virtual bool ExistAssociation(AssociationType associationType)
+        public virtual bool ExistAssociation(IAssociationType associationType)
         {
             if (associationType.IsMany)
             {
@@ -421,7 +421,7 @@ namespace Allors.Adapters.Database.Sql
             return this.ExistCompositeAssociation(associationType);
         }
 
-        public virtual object GetAssociation(AssociationType associationType)
+        public virtual object GetAssociation(IAssociationType associationType)
         {
             if (associationType.IsMany)
             {
@@ -430,13 +430,13 @@ namespace Allors.Adapters.Database.Sql
 
             return this.GetCompositeAssociation(associationType);
         }
-        
-        public virtual bool ExistCompositeAssociation(AssociationType associationType)
+
+        public virtual bool ExistCompositeAssociation(IAssociationType associationType)
         {
             return this.GetCompositeAssociation(associationType) != null;
         }
 
-        public virtual IObject GetCompositeAssociation(AssociationType associationType)
+        public virtual IObject GetCompositeAssociation(IAssociationType associationType)
         {
             this.AssertExist();
 
@@ -445,12 +445,12 @@ namespace Allors.Adapters.Database.Sql
             return association == null ? null : association.Strategy.GetObject();
         }
 
-        public virtual bool ExistCompositeAssociations(AssociationType associationType)
+        public virtual bool ExistCompositeAssociations(IAssociationType associationType)
         {
             return this.GetCompositeAssociations(associationType).Count != 0;
         }
 
-        public virtual Allors.Extent GetCompositeAssociations(AssociationType associationType)
+        public virtual Allors.Extent GetCompositeAssociations(IAssociationType associationType)
         {
             this.AssertExist();
             return new ExtentAssociations(this, associationType);
@@ -520,7 +520,7 @@ namespace Allors.Adapters.Database.Sql
             return this.Roles.ExtentContains(roleType, value.Id);
         }
 
-        internal virtual ObjectId[] ExtentGetCompositeAssociations(AssociationType associationType)
+        internal virtual ObjectId[] ExtentGetCompositeAssociations(IAssociationType associationType)
         {
             this.AssertExist();
 

@@ -83,8 +83,8 @@ namespace Allors.Adapters.Database.Sql
             this.extent.FlushCache();
             var betweenRoleA = firstValue as RoleType;
             var betweenRoleB = secondValue as RoleType;
-            var betweenAssociationA = firstValue as AssociationType;
-            var betweenAssociationB = secondValue as AssociationType;
+            var betweenAssociationA = firstValue as IAssociationType;
+            var betweenAssociationB = secondValue as IAssociationType;
             if (betweenRoleA != null && betweenRoleB != null)
             {
                 this.filter = new RoleBetweenRole(this.extent, role, betweenRoleA, betweenRoleB);
@@ -117,7 +117,7 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public ICompositePredicate AddContainedIn(AssociationType association, Allors.Extent containingExtent)
+        public ICompositePredicate AddContainedIn(IAssociationType association, Allors.Extent containingExtent)
         {
             this.CheckUnarity();
             this.extent.FlushCache();
@@ -125,7 +125,7 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public ICompositePredicate AddContainedIn(AssociationType association, IEnumerable<IObject> containingEnumerable)
+        public ICompositePredicate AddContainedIn(IAssociationType association, IEnumerable<IObject> containingEnumerable)
         {
             this.CheckUnarity();
             this.extent.FlushCache();
@@ -141,7 +141,7 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public ICompositePredicate AddContains(AssociationType association, IObject containedObject)
+        public ICompositePredicate AddContains(IAssociationType association, IObject containedObject)
         {
             this.CheckUnarity();
             this.extent.FlushCache();
@@ -162,7 +162,7 @@ namespace Allors.Adapters.Database.Sql
             this.CheckUnarity();
             this.extent.FlushCache();
             var equalsRole = obj as RoleType;
-            var equalsAssociation = obj as AssociationType;
+            var equalsAssociation = obj as IAssociationType;
             if (equalsRole != null)
             {
                 this.filter = new RoleEqualsRole(this.extent, role, equalsRole);
@@ -179,7 +179,7 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public ICompositePredicate AddEquals(AssociationType association, IObject allorsObject)
+        public ICompositePredicate AddEquals(IAssociationType association, IObject allorsObject)
         {
             this.CheckUnarity();
             this.extent.FlushCache();
@@ -195,7 +195,7 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public ICompositePredicate AddExists(AssociationType association)
+        public ICompositePredicate AddExists(IAssociationType association)
         {
             this.CheckUnarity();
             this.extent.FlushCache();
@@ -208,7 +208,7 @@ namespace Allors.Adapters.Database.Sql
             this.CheckUnarity();
             this.extent.FlushCache();
             var greaterThanRole = value as RoleType;
-            var greaterThanAssociation = value as AssociationType;
+            var greaterThanAssociation = value as IAssociationType;
             if (greaterThanRole != null)
             {
                 this.filter = new RoleGreaterThanRole(this.extent, role, greaterThanRole);
@@ -241,7 +241,7 @@ namespace Allors.Adapters.Database.Sql
             return this;
         }
 
-        public ICompositePredicate AddInstanceof(AssociationType association, Composite type)
+        public ICompositePredicate AddInstanceof(IAssociationType association, Composite type)
         {
             this.CheckUnarity();
             this.extent.FlushCache();
@@ -254,7 +254,7 @@ namespace Allors.Adapters.Database.Sql
             this.CheckUnarity();
             this.extent.FlushCache();
             var lessThanRole = value as RoleType;
-            var lessThanAssociation = value as AssociationType;
+            var lessThanAssociation = value as IAssociationType;
             if (lessThanRole != null)
             {
                 this.filter = new RoleLessThanRole(this.extent, role, lessThanRole);

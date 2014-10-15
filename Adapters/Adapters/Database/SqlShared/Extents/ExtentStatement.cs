@@ -116,7 +116,7 @@ namespace Allors.Adapters.Database.Sql
                 }
             }
 
-            foreach (AssociationType association in this.referenceAssociations)
+            foreach (IAssociationType association in this.referenceAssociations)
             {
                 var relationType = association.RelationType;
                 var role = relationType.RoleType;
@@ -136,7 +136,7 @@ namespace Allors.Adapters.Database.Sql
                 }
             }
 
-            foreach (AssociationType association in this.referenceAssociationInstances)
+            foreach (IAssociationType association in this.referenceAssociationInstances)
             {
                 var relationType = association.RelationType;
                 var role = relationType.RoleType;
@@ -194,11 +194,11 @@ namespace Allors.Adapters.Database.Sql
 
         public abstract string CreateAlias();
 
-        public abstract ExtentStatement CreateChild(SqlExtent extent, AssociationType association);
+        public abstract ExtentStatement CreateChild(SqlExtent extent, IAssociationType association);
 
         public abstract ExtentStatement CreateChild(SqlExtent extent, RoleType role);
 
-        public string GetJoinName(AssociationType association)
+        public string GetJoinName(IAssociationType association)
         {
             return association.SingularName + "_AC";
         }
@@ -208,7 +208,7 @@ namespace Allors.Adapters.Database.Sql
             return role.SingularFullName + "_RC";
         }
 
-        public void UseAssociation(AssociationType association)
+        public void UseAssociation(IAssociationType association)
         {
             if (association.ObjectType is Composite && !this.referenceAssociations.Contains(association))
             {
@@ -216,7 +216,7 @@ namespace Allors.Adapters.Database.Sql
             }
         }
 
-        public void UseAssociationInstance(AssociationType association)
+        public void UseAssociationInstance(IAssociationType association)
         {
             if (!this.referenceAssociationInstances.Contains(association))
             {

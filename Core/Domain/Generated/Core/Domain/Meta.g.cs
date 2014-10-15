@@ -33,13 +33,13 @@ namespace Allors.Meta
 
 	public partial class AssociationTypes
 	{
-		public static readonly AssociationType I12AllorsBoolean = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("35040d7c-ab7f-4a99-9d09-e01e24ca3cb9"))).AssociationType;
-		public static readonly AssociationType I12AllorsDecimal = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("4f095abd-8803-4610-87f0-2847ddd5e9f4"))).AssociationType;
-		public static readonly AssociationType I12AllorsDateTime = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("81d9eb2f-55a7-4d1c-853d-4369eb691ba5"))).AssociationType;
-		public static readonly AssociationType I12AllorsString = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("9f91841c-f63f-4ffa-bee6-62e100f3cd15"))).AssociationType;
-		public static readonly AssociationType I12AllorsLong = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("d0c49b92-a108-48b5-bc95-72d2e6109ad2"))).AssociationType;
-		public static readonly AssociationType I12AllorsInteger = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("d30dd036-6d28-48df-873b-3a76da8c029e"))).AssociationType;
-		public static readonly AssociationType I12AllorsDouble = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("fbad33e7-ede1-41fc-97e9-ddf33a0f6459"))).AssociationType;
+        public static readonly IAssociationType I12AllorsBoolean = ((RelationType)Repository.MetaPopulation.Find(new System.Guid("35040d7c-ab7f-4a99-9d09-e01e24ca3cb9"))).AssociationType;
+        public static readonly IAssociationType I12AllorsDecimal = ((RelationType)Repository.MetaPopulation.Find(new System.Guid("4f095abd-8803-4610-87f0-2847ddd5e9f4"))).AssociationType;
+        public static readonly IAssociationType I12AllorsDateTime = ((RelationType)Repository.MetaPopulation.Find(new System.Guid("81d9eb2f-55a7-4d1c-853d-4369eb691ba5"))).AssociationType;
+        public static readonly IAssociationType I12AllorsString = ((RelationType)Repository.MetaPopulation.Find(new System.Guid("9f91841c-f63f-4ffa-bee6-62e100f3cd15"))).AssociationType;
+        public static readonly IAssociationType I12AllorsLong = ((RelationType)Repository.MetaPopulation.Find(new System.Guid("d0c49b92-a108-48b5-bc95-72d2e6109ad2"))).AssociationType;
+        public static readonly IAssociationType I12AllorsInteger = ((RelationType)Repository.MetaPopulation.Find(new System.Guid("d30dd036-6d28-48df-873b-3a76da8c029e"))).AssociationType;
+        public static readonly IAssociationType I12AllorsDouble = ((RelationType)Repository.MetaPopulation.Find(new System.Guid("fbad33e7-ede1-41fc-97e9-ddf33a0f6459"))).AssociationType;
 
 	}
 

@@ -74,7 +74,7 @@ namespace Allors
         /// <param name="association">The association.</param>
         /// <param name="containingExtent">The extent.</param>
         /// <returns>the composing CompositePredicate</returns>
-        ICompositePredicate AddContainedIn(AssociationType association, Extent containingExtent);
+        ICompositePredicate AddContainedIn(IAssociationType association, Extent containingExtent);
 
         /// <summary>
         /// Adds a Predicate that evaluates to true if any object of the role of the object under evaluation is contained in the containingExtent.
@@ -82,7 +82,7 @@ namespace Allors
         /// <param name="association">The association.</param>
         /// <param name="containingEnumerable">The enumerable.</param>
         /// <returns>This CompositePredicate. </returns>
-        ICompositePredicate AddContainedIn(AssociationType association, IEnumerable<IObject> containingEnumerable);
+        ICompositePredicate AddContainedIn(IAssociationType association, IEnumerable<IObject> containingEnumerable);
 
         /// <summary>
         /// Adds a Predicate that evaluates to true if the role of the object under evaluation contains the allorsObject.
@@ -98,7 +98,7 @@ namespace Allors
         /// <param name="association">The association.</param>
         /// <param name="containedObject">The allors object.</param>
         /// <returns>the composing CompositePredicate</returns>
-        ICompositePredicate AddContains(AssociationType association, IObject containedObject);
+        ICompositePredicate AddContains(IAssociationType association, IObject containedObject);
 
         /// <summary>
         /// Adds a Predicate that evaluates to true if the object under evaluation equals the allorsObject.
@@ -121,7 +121,7 @@ namespace Allors
         /// <param name="association">The association.</param>
         /// <param name="allorsObject">The allors object.</param>
         /// <returns>the composing CompositePredicate</returns>
-        ICompositePredicate AddEquals(AssociationType association, IObject allorsObject);
+        ICompositePredicate AddEquals(IAssociationType association, IObject allorsObject);
 
         /// <summary>
         /// Adds a Predicate that evaluates to true if the role of the object under evaluation exists.
@@ -135,7 +135,7 @@ namespace Allors
         /// </summary>
         /// <param name="assocation">The assocation.</param>
         /// <returns>the composing CompositePredicate</returns>
-        ICompositePredicate AddExists(AssociationType assocation);
+        ICompositePredicate AddExists(IAssociationType assocation);
 
         /// <summary>
         /// Adds a Predicate that evaluates to true if the role of the object under evaluation is greater than the object.
@@ -166,7 +166,7 @@ namespace Allors
         /// <param name="association">the AssociationType.</param>
         /// <param name="objectType">the IObjectType.</param>
         /// <returns>the composing CompositePredicate</returns>
-        ICompositePredicate AddInstanceof(AssociationType association, Composite objectType);
+        ICompositePredicate AddInstanceof(IAssociationType association, Composite objectType);
 
         /// <summary>
         /// Adds a Predicate that evaluates to true if the role of the object under evaluation is less than the object.

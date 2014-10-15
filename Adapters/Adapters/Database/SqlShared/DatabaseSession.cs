@@ -33,13 +33,13 @@ namespace Allors.Adapters.Database.Sql
 
         private Dictionary<Reference, Roles> modifiedRolesByReference;
         private Dictionary<Reference, Roles> unflushedRolesByReference;
-        private Dictionary<AssociationType, HashSet<ObjectId>> triggersFlushRolesByAssociationType;
+        private Dictionary<IAssociationType, HashSet<ObjectId>> triggersFlushRolesByAssociationType;
 
         private Dictionary<ObjectId, Reference> referenceByObjectId;
         private HashSet<Reference> referencesWithoutCacheId;
 
-        private Dictionary<AssociationType, Dictionary<Reference, Reference>> associationByRoleByAssociationType;
-        private Dictionary<AssociationType, Dictionary<Reference, ObjectId[]>> associationsByRoleByAssociationType;
+        private Dictionary<IAssociationType, Dictionary<Reference, Reference>> associationByRoleByAssociationType;
+        private Dictionary<IAssociationType, Dictionary<Reference, ObjectId[]>> associationsByRoleByAssociationType;
         
         private bool busyCommittingOrRollingBack;
 
@@ -50,8 +50,8 @@ namespace Allors.Adapters.Database.Sql
             this.referenceByObjectId = new Dictionary<ObjectId, Reference>();
             this.referencesWithoutCacheId = new HashSet<Reference>();
 
-            this.associationByRoleByAssociationType = new Dictionary<AssociationType, Dictionary<Reference, Reference>>();
-            this.associationsByRoleByAssociationType = new Dictionary<AssociationType, Dictionary<Reference, ObjectId[]>>();
+            this.associationByRoleByAssociationType = new Dictionary<IAssociationType, Dictionary<Reference, Reference>>();
+            this.associationsByRoleByAssociationType = new Dictionary<IAssociationType, Dictionary<Reference, ObjectId[]>>();
 
             this.changeSet = new ChangeSet();
         }
@@ -395,8 +395,8 @@ namespace Allors.Adapters.Database.Sql
                         this.referenceByObjectId[reference.ObjectId] = reference;
                     }
 
-                    this.associationByRoleByAssociationType = new Dictionary<AssociationType, Dictionary<Reference, Reference>>();
-                    this.associationsByRoleByAssociationType = new Dictionary<AssociationType, Dictionary<Reference, ObjectId[]>>();
+                    this.associationByRoleByAssociationType = new Dictionary<IAssociationType, Dictionary<Reference, Reference>>();
+                    this.associationsByRoleByAssociationType = new Dictionary<IAssociationType, Dictionary<Reference, ObjectId[]>>();
 
                     this.changeSet = new ChangeSet();
 
@@ -450,8 +450,8 @@ namespace Allors.Adapters.Database.Sql
                     this.modifiedRolesByReference = null;
                     this.triggersFlushRolesByAssociationType = null;
 
-                    this.associationByRoleByAssociationType = new Dictionary<AssociationType, Dictionary<Reference, Reference>>();
-                    this.associationsByRoleByAssociationType = new Dictionary<AssociationType, Dictionary<Reference, ObjectId[]>>();
+                    this.associationByRoleByAssociationType = new Dictionary<IAssociationType, Dictionary<Reference, Reference>>();
+                    this.associationsByRoleByAssociationType = new Dictionary<IAssociationType, Dictionary<Reference, ObjectId[]>>();
 
                     this.changeSet = new ChangeSet();
 
@@ -485,8 +485,8 @@ namespace Allors.Adapters.Database.Sql
 
             return (T)this.Create(@class);
         }
-        
-        public virtual Reference GetAssociation(Strategy roleStrategy, AssociationType associationType)
+
+        public virtual Reference GetAssociation(Strategy roleStrategy, IAssociationType associationType)
         {
             var associationByRole = this.GetAssociationByRole(associationType);
 
@@ -501,13 +501,13 @@ namespace Allors.Adapters.Database.Sql
             return association;
         }
 
-        public void SetAssociation(Reference previousAssociation, Strategy roleStrategy, AssociationType associationType)
+        public void SetAssociation(Reference previousAssociation, Strategy roleStrategy, IAssociationType associationType)
         {
             var associationByRole = this.GetAssociationByRole(associationType);
             associationByRole[roleStrategy.Reference] = previousAssociation;
         }
 
-        public virtual ObjectId[] GetAssociations(Strategy roleStrategy, AssociationType associationType)
+        public virtual ObjectId[] GetAssociations(Strategy roleStrategy, IAssociationType associationType)
         {
             var associationsByRole = this.GetAssociationsByRole(associationType);
 
@@ -522,7 +522,7 @@ namespace Allors.Adapters.Database.Sql
             return associations;
         }
 
-        public void AddAssociation(Reference association, Reference role, AssociationType associationType)
+        public void AddAssociation(Reference association, Reference role, IAssociationType associationType)
         {
             var associationsByRole = this.GetAssociationsByRole(associationType);
 
@@ -536,7 +536,7 @@ namespace Allors.Adapters.Database.Sql
             }
         }
 
-        public void RemoveAssociation(Reference association, Reference role, AssociationType associationType)
+        public void RemoveAssociation(Reference association, Reference role, IAssociationType associationType)
         {
             var associationsByRole = this.GetAssociationsByRole(associationType);
 
@@ -646,7 +646,7 @@ namespace Allors.Adapters.Database.Sql
             this.triggersFlushRolesByAssociationType = null;
         }
 
-        public virtual void FlushConditionally(Strategy strategy, AssociationType associationType)
+        public virtual void FlushConditionally(Strategy strategy, IAssociationType associationType)
         {
             if (this.triggersFlushRolesByAssociationType != null)
             {
@@ -703,11 +703,11 @@ namespace Allors.Adapters.Database.Sql
             this.modifiedRolesByReference[association] = roles;
         }
 
-        protected internal virtual void TriggerFlush(ObjectId role, AssociationType associationType)
+        protected internal virtual void TriggerFlush(ObjectId role, IAssociationType associationType)
         {
             if (this.triggersFlushRolesByAssociationType == null)
             {
-                this.triggersFlushRolesByAssociationType = new Dictionary<AssociationType, HashSet<ObjectId>>();    
+                this.triggersFlushRolesByAssociationType = new Dictionary<IAssociationType, HashSet<ObjectId>>();    
             }
 
             HashSet<ObjectId> associations;
@@ -761,7 +761,7 @@ namespace Allors.Adapters.Database.Sql
             return strategyReference;
         }
 
-        private Dictionary<Reference, Reference> GetAssociationByRole(AssociationType associationType)
+        private Dictionary<Reference, Reference> GetAssociationByRole(IAssociationType associationType)
         {
             Dictionary<Reference, Reference> associationByRole;
             if (!this.associationByRoleByAssociationType.TryGetValue(associationType, out associationByRole))
@@ -773,7 +773,7 @@ namespace Allors.Adapters.Database.Sql
             return associationByRole;
         }
 
-        private Dictionary<Reference, ObjectId[]> GetAssociationsByRole(AssociationType associationType)
+        private Dictionary<Reference, ObjectId[]> GetAssociationsByRole(IAssociationType associationType)
         {
             Dictionary<Reference, ObjectId[]> associationsByRole;
             if (!this.associationsByRoleByAssociationType.TryGetValue(associationType, out associationsByRole))

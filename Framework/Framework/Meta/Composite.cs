@@ -30,7 +30,7 @@ namespace Allors.Meta
         private LazySet<IInterface> derivedDirectSupertypes;
         private LazySet<IInterface> derivedSupertypes;
 
-        private LazySet<AssociationType> derivedAssociationTypes;
+        private LazySet<IAssociationType> derivedAssociationTypes;
         private LazySet<RoleType> derivedRoleTypes;
         private LazySet<MethodType> derivedMethodTypes;
 
@@ -139,7 +139,7 @@ namespace Allors.Meta
         /// Gets the associations.
         /// </summary>
         /// <value>The associations.</value>
-        public IEnumerable<AssociationType> AssociationTypes
+        public IEnumerable<IAssociationType> AssociationTypes
         {
             get
             {
@@ -148,7 +148,7 @@ namespace Allors.Meta
             }
         }
 
-        public IEnumerable<AssociationType> AssociationTypesWhereObjectType
+        public IEnumerable<IAssociationType> AssociationTypesWhereObjectType
         {
             get
             {
@@ -217,7 +217,7 @@ namespace Allors.Meta
             return this.derivedSupertypes.Contains(@interface);
         }
 
-        public bool ContainsAssociationType(AssociationType associationType)
+        public bool ContainsAssociationType(IAssociationType associationType)
         {
             this.MetaPopulation.Derive();
             return this.derivedAssociationTypes.Contains(associationType);
@@ -322,7 +322,7 @@ namespace Allors.Meta
         /// Derive association types.
         /// </summary>
         /// <param name="associations">The associations.</param>
-        internal void DeriveAssociationTypes(HashSet<AssociationType> associations)
+        internal void DeriveAssociationTypes(HashSet<IAssociationType> associations)
         {
             associations.Clear();
             foreach (var relationType in this.MetaPopulation.RelationTypes.Where(rel => this.Equals(rel.RoleType.ObjectType)))
@@ -339,7 +339,7 @@ namespace Allors.Meta
                 }
             }
 
-            this.derivedAssociationTypes = new LazySet<AssociationType>(associations);
+            this.derivedAssociationTypes = new LazySet<IAssociationType>(associations);
         }
         
         /// <summary>

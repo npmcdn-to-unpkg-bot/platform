@@ -35,12 +35,12 @@ namespace Allors.Adapters
         /// </summary>
         /// <param name="association">The association.</param>
         /// <param name="extent">The extent.</param>
-        public static void AssertAssociationContainedIn(AssociationType association, Extent extent)
+        public static void AssertAssociationContainedIn(IAssociationType association, Extent extent)
         {
             // TODO: ?
         }
 
-        public static void AssertAssociationContainedIn(AssociationType association, IEnumerable<IObject> enumerable)
+        public static void AssertAssociationContainedIn(IAssociationType association, IEnumerable<IObject> enumerable)
         {
             // TODO: ?
         }
@@ -51,7 +51,7 @@ namespace Allors.Adapters
         /// </summary>
         /// <param name="association">The association.</param>
         /// <param name="allorsObject">The allors object.</param>
-        public static void AssertAssociationContains(AssociationType association, IObject allorsObject)
+        public static void AssertAssociationContains(IAssociationType association, IObject allorsObject)
         {
             if (!association.IsMany)
             {
@@ -71,7 +71,7 @@ namespace Allors.Adapters
         /// </summary>
         /// <param name="association">The association.</param>
         /// <param name="allorsObject">The allors object.</param>
-        public static void AssertAssociationEquals(AssociationType association, IObject allorsObject)
+        public static void AssertAssociationEquals(IAssociationType association, IObject allorsObject)
         {
             if (!association.IsOne)
             {
@@ -91,7 +91,7 @@ namespace Allors.Adapters
         /// <see cref="ICompositePredicate#AddExists"/>.
         /// </summary>
         /// <param name="association">The association.</param>
-        public static void ValidateAssociationExists(AssociationType association)
+        public static void ValidateAssociationExists(IAssociationType association)
         {
             // TODO: ?
         }
@@ -102,7 +102,7 @@ namespace Allors.Adapters
         /// </summary>
         /// <param name="association">The association.</param>
         /// <param name="objectType">The object type.</param>
-        public static void ValidateAssociationInstanceof(AssociationType association, IObjectType objectType)
+        public static void ValidateAssociationInstanceof(IAssociationType association, IObjectType objectType)
         {
             if (objectType is IUnit)
             {

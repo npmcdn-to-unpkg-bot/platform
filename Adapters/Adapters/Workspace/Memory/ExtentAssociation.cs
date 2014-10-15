@@ -28,9 +28,9 @@ namespace Allors.Adapters.Workspace.Memory
         private static readonly HashSet<Strategy> EmptySet = new HashSet<Strategy>();
 
         private readonly Strategy roleStrategy;
-        private readonly AssociationType associationType;
+        private readonly IAssociationType associationType;
 
-        public ExtentAssociation(Strategy roleStrategy, AssociationType associationType)
+        public ExtentAssociation(Strategy roleStrategy, IAssociationType associationType)
         {
             this.roleStrategy = roleStrategy;
             this.associationType = associationType;

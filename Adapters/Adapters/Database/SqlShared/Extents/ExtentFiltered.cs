@@ -40,7 +40,7 @@ namespace Allors.Adapters.Database.Sql
             this.RoleType = roleType;
         }
 
-        public ExtentFiltered(DatabaseSession session, Strategy strategy, AssociationType associationType)
+        public ExtentFiltered(DatabaseSession session, Strategy strategy, IAssociationType associationType)
             : this(session, associationType.ObjectType)
         {
             this.Strategy = strategy;
@@ -77,7 +77,7 @@ namespace Allors.Adapters.Database.Sql
             get { return this.objectType; }
         }
 
-        public AssociationType AssociationType { get; private set; }
+        public IAssociationType AssociationType { get; private set; }
 
         public RoleType RoleType { get; private set; }
 
@@ -101,7 +101,7 @@ namespace Allors.Adapters.Database.Sql
             return null;
         }
 
-        public void CheckAssociation(AssociationType association)
+        public void CheckAssociation(IAssociationType association)
         {
             if (!this.objectType.ContainsAssociationType(association))
             {

@@ -117,7 +117,7 @@ namespace Allors.Domain
 			}
 		} 
 
-		public global::Allors.Meta.AssociationType UsersWhereSelect 
+		public global::Allors.Meta.IAssociationType UsersWhereSelect 
 		{
 			get
 			{

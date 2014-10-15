@@ -178,7 +178,7 @@ namespace Allors.Adapters.Workspace.Memory
             this.strategies = null;
         }
 
-        internal virtual void CheckForAssociationType(AssociationType association)
+        internal virtual void CheckForAssociationType(IAssociationType association)
         {
             // TODO: Optimize
             if (!this.ObjectType.AssociationTypes.Contains(association))

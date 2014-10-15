@@ -53,7 +53,7 @@ namespace Allors.Adapters.Database.Memory
             get { return this.objectType; }
         }
 
-        internal void CheckForAssociationType(AssociationType association)
+        internal void CheckForAssociationType(IAssociationType association)
         {
             if (!this.objectType.ContainsAssociationType(association))
             {
