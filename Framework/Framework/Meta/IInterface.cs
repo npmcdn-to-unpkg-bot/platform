@@ -140,7 +140,7 @@ namespace Allors.Meta
         /// Derive direct sub type derivations.
         /// </summary>
         /// <param name="directSubtypes">The direct super types.</param>
-        public void DeriveDirectSubtypes(HashSet<IComposite> directSubtypes)
+        internal void DeriveDirectSubtypes(HashSet<IComposite> directSubtypes)
         {
             directSubtypes.Clear();
             foreach (var inheritance in this.MetaPopulation.Inheritances.Where(inheritance => this.Equals(inheritance.Supertype)))
@@ -155,7 +155,7 @@ namespace Allors.Meta
         /// Derive subclasses.
         /// </summary>
         /// <param name="subClasses">The sub classes.</param>
-        public void DeriveSubclasses(HashSet<IClass> subClasses)
+        internal void DeriveSubclasses(HashSet<IClass> subClasses)
         {
             subClasses.Clear();
             foreach (var subType in this.derivedSubtypes)
@@ -173,7 +173,7 @@ namespace Allors.Meta
         /// Derive sub types.
         /// </summary>
         /// <param name="subTypes">The super types.</param>
-        public void DeriveSubtypes(HashSet<IComposite> subTypes)
+        internal void DeriveSubtypes(HashSet<IComposite> subTypes)
         {
             subTypes.Clear();
             this.DeriveSubtypesRecursively(this, subTypes);
@@ -184,7 +184,7 @@ namespace Allors.Meta
         /// <summary>
         /// Derive exclusive concrete leaf classes.
         /// </summary>
-        public void DeriveExclusiveLeafClass()
+        internal void DeriveExclusiveLeafClass()
         {
             this.derivedExclusiveLeafClass = this.derivedLeafClasses.Count == 1 ? this.derivedLeafClasses.First() : null;
         }
@@ -192,7 +192,7 @@ namespace Allors.Meta
         /// <summary>
         /// Derive root class for classes.
         /// </summary>
-        public void DeriveLeafClasses()
+        internal void DeriveLeafClasses()
         {
             this.derivedLeafClasses = new LazySet<IClass>(this.derivedSubclasses);
         }

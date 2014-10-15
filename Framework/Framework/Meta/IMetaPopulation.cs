@@ -23,49 +23,518 @@ namespace Allors.Meta
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
-    public interface IMetaPopulation
+    /// <summary>
+    /// A Domain is a container for <see cref="IObjectType"/>s, <see cref="RelationType"/>s.
+    /// </summary>
+    public abstract partial class IMetaPopulation
     {
-        void AssertUnlocked();
+        private readonly Dictionary<Guid, IMetaObject> metaObjectById;
 
-        void Stale();
+        private IComposite[] derivedComposites;
 
-        IEnumerable<IComposite> Composites { get; }
+        private bool isLocked;
 
-        IEnumerable<IClass> Classes { get; }
+        private bool isStale;
+        private bool isDeriving;
 
-        IEnumerable<IInheritance> Inheritances { get; }
+        private IList<IDomain> domains;
+        private IList<IUnit> units;
+        private IList<IInterface> interfaces;
+        private IList<IClass> classes;
+        private IList<IInheritance> inheritances;
+        private IList<IRelationType> relationTypes;
+        private IList<IAssociationType> associationTypes;
+        private IList<IRoleType> roleTypes;
+        private IList<IMethodType> methodTypes;
+        
+        public IMetaPopulation()
+        {
+            this.isStale = true;
+            this.isDeriving = false;
 
-        IEnumerable<IMethodType> MethodTypes { get; }
+            this.domains = new List<IDomain>();
+            this.units = new List<IUnit>();
+            this.interfaces = new List<IInterface>();
+            this.classes = new List<IClass>();
+            this.inheritances = new List<IInheritance>();
+            this.relationTypes = new List<IRelationType>();
+            this.associationTypes = new List<IAssociationType>();
+            this.roleTypes = new List<IRoleType>();
+            this.methodTypes = new List<IMethodType>();
 
-        IEnumerable<IRelationType> RelationTypes { get; }
+            this.metaObjectById = new Dictionary<Guid, IMetaObject>();
+        }
 
-        bool IsValid { get; }
+        public bool IsLocked
+        {
+            get
+            {
+                return this.isLocked;
+            }
+        }
 
-        void Derive();
+        public IEnumerable<IDomain> Domains
+        {
+            get
+            {
+                return this.domains;
+            }
+        }
 
-        void Lock();
+        public IEnumerable<IUnit> Units
+        {
+            get
+            {
+                return this.units;
+            }
+        }
 
-        ValidationLog Validate();
+        public IEnumerable<IInterface> Interfaces
+        {
+            get
+            {
+                return this.interfaces;
+            }
+        }
 
-        void OnUnitCreated(IUnit unit);
+        public IEnumerable<IClass> Classes
+        {
+            get
+            {
+                return this.classes;
+            }
+        }
 
-        void OnInterfaceCreated(IInterface @interface);
+        public IEnumerable<IInheritance> Inheritances
+        {
+            get
+            {
+                return this.inheritances;
+            }
+        }
 
-        void OnClassCreated(IClass @class);
+        public IEnumerable<IRelationType> RelationTypes
+        {
+            get
+            {
+                return this.relationTypes;
+            }
+        }
 
-        void OnInheritanceCreated(IInheritance inheritance);
+        public IEnumerable<IAssociationType> AssociationTypes
+        {
+            get
+            {
+                return this.associationTypes;
+            }
+        }
 
-        void OnRelationTypeCreated(IRelationType relationType);
+        public IEnumerable<IRoleType> RoleTypes
+        {
+            get
+            {
+                return this.roleTypes;
+            }
+        }
 
-        void OnAssociationTypeCreated(IAssociationType associationType);
+        public IEnumerable<IMethodType> MethodTypes
+        {
+            get
+            {
+                return this.methodTypes;
+            }
+        }
 
-        void OnRoleTypeCreated(IRoleType roleType);
+        public IEnumerable<IComposite> Composites
+        {
+            get
+            {
+                this.Derive();
+                return this.derivedComposites;
+            }
+        }
 
-        void OnMethodTypeCreated(IMethodType methodType);
+        /// <summary>
+        /// Gets a value indicating whether this instance is valid.
+        /// </summary>
+        /// <value><c>true</c> if this instance is valid; otherwise, <c>false</c>.</value>
+        public bool IsValid
+        {
+            get
+            {
+                var validation = this.Validate();
+                if (validation.ContainsErrors)
+                {
+                    return false;
+                }
 
-        void OnDomainCreated(IDomain domain);
+                return true;
+            }
+        }
 
-        IMetaObject Find(Guid metaObjectId);
+        /// <summary>
+        /// Find a meta object by meta object id.
+        /// </summary>
+        /// <param name="id">
+        /// The meta object id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IMetaObject"/>.
+        /// </returns>
+        public IMetaObject Find(Guid id)
+        {
+            IMetaObject @object;
+            this.metaObjectById.TryGetValue(id, out @object);
+
+            return @object;
+        }
+        
+        /// <summary>
+        /// Validates this instance.
+        /// </summary>
+        /// <returns>The Validate.</returns>
+        public ValidationLog Validate()
+        {
+            var log = new ValidationLog();
+
+            foreach (var domain in this.Domains)
+            {
+                domain.Validate(log);
+            }
+
+            foreach (var unitType in this.Units)
+            {
+                unitType.Validate(log);
+            }
+
+            foreach (var @interface in this.Interfaces)
+            {
+                @interface.Validate(log);
+            }
+
+            foreach (var @class in this.Classes)
+            {
+                @class.Validate(log);
+            }
+
+            foreach (var inheritance in this.Inheritances)
+            {
+                inheritance.Validate(log);
+            }
+
+            foreach (var relationType in this.RelationTypes)
+            {
+                relationType.Validate(log);
+            }
+
+            foreach (var methodType in this.MethodTypes)
+            {
+                methodType.Validate(log);
+            }
+
+
+            var inheritancesBySubtype = new Dictionary<IComposite, List<IInheritance>>();
+            foreach (var inheritance in this.Inheritances)
+            {
+                var subtype = inheritance.Subtype;
+                if (subtype != null)
+                {
+                    List<IInheritance> inheritanceList;
+                    if (!inheritancesBySubtype.TryGetValue(subtype, out inheritanceList))
+                    {
+                        inheritanceList = new List<IInheritance>();
+                        inheritancesBySubtype[subtype] = inheritanceList;
+                    }
+
+                    inheritanceList.Add(inheritance);
+                }
+            }
+
+            var supertypes = new HashSet<IInterface>();
+            foreach (var subtype in inheritancesBySubtype.Keys)
+            {
+                supertypes.Clear();
+                if (this.HasCycle(subtype, supertypes, inheritancesBySubtype))
+                {
+                    var message = subtype.ValidationName + " has a cycle in its inheritance hierarchy";
+                    log.AddError(message, subtype, ValidationKind.Cyclic, "IComposite.Supertypes");
+                }
+            }
+
+
+            return log;
+        }
+
+        public void Lock()
+        {
+            if (!this.IsLocked)
+            {
+                this.Derive();
+
+                this.isLocked = true;
+
+                this.domains = this.domains.ToArray();
+                this.units = this.units.ToArray();
+                this.interfaces = this.interfaces.ToArray();
+                this.classes = this.classes.ToArray();
+                this.inheritances = this.inheritances.ToArray();
+                this.relationTypes = this.relationTypes.ToArray();
+                this.associationTypes = this.associationTypes.ToArray();
+                this.roleTypes = this.roleTypes.ToArray();
+                this.methodTypes = this.methodTypes.ToArray();
+
+                foreach (var domain in this.domains)
+                {
+                    domain.Lock();
+                }
+            }
+        }
+
+        internal void AssertUnlocked()
+        {
+            if (this.IsLocked)
+            {
+                throw new Exception("Environment is locked");
+            }
+        }
+
+        internal void Derive()
+        {
+            if (this.isStale && !this.isDeriving)
+            {
+                try
+                {
+                    this.isDeriving = true;
+
+                    var sharedDomains = new HashSet<IDomain>();
+                    var sharedCompositeTypes = new HashSet<IComposite>();
+                    var sharedInterfaces = new HashSet<IInterface>();
+                    var sharedClasses = new HashSet<IClass>();
+                    var sharedAssociationTypes = new HashSet<IAssociationType>();
+                    var sharedRoleTypes = new HashSet<IRoleType>();
+
+                    // Domains
+                    foreach (var domain in this.domains)
+                    {
+                        domain.DeriveSuperdomains(sharedDomains);
+                    }
+
+                    // Unit & IComposite ObjectTypes
+                    var compositeTypes = new List<IComposite>(this.Interfaces);
+                    compositeTypes.AddRange(this.Classes);
+                    this.derivedComposites = compositeTypes.ToArray();
+
+                    // DirectSupertypes
+                    foreach (var type in this.derivedComposites)
+                    {
+                        type.DeriveDirectSupertypes(sharedInterfaces);
+                    }
+
+                    // DirectSubtypes
+                    foreach (var type in this.Interfaces)
+                    {
+                        type.DeriveDirectSubtypes(sharedCompositeTypes);
+                    }
+
+                    // Supertypes
+                    foreach (var type in this.derivedComposites)
+                    {
+                        type.DeriveSupertypes(sharedInterfaces);
+                    }
+
+                    // Subtypes
+                    foreach (var type in this.Interfaces)
+                    {
+                        type.DeriveSubtypes(sharedCompositeTypes);
+                    }
+
+                    // Subclasses
+                    foreach (var type in this.Interfaces)
+                    {
+                        type.DeriveSubclasses(sharedClasses);
+                    }
+
+                    // LeafClasses
+                    foreach (var type in this.Interfaces)
+                    {
+                        type.DeriveLeafClasses();
+                    }
+
+                    // Exclusive Root Class
+                    foreach (var type in this.Interfaces)
+                    {
+                        type.DeriveExclusiveLeafClass();
+                    }
+
+                    // RoleTypes
+                    foreach (var type in this.derivedComposites)
+                    {
+                        type.DeriveRoleTypes(sharedRoleTypes);
+                    }
+
+                    // AssociationTypes
+                    foreach (var type in this.derivedComposites)
+                    {
+                        type.DeriveAssociationTypes(sharedAssociationTypes);
+                    }
+
+                    // Association & RoleType
+                    foreach (var relationType in this.RelationTypes)
+                    {
+                        relationType.AssociationType.DeriveMultiplicity();
+                        relationType.RoleType.DeriveMultiplicity();
+                        relationType.RoleType.DeriveScaleAndSize();
+                    }
+
+                    // RoleType Property Names
+                    foreach (var relationType in this.RelationTypes)
+                    {
+                        relationType.RoleType.DeriveSingularPropertyName();
+                        relationType.RoleType.DerivePluralPropertyName();
+                    }
+
+                    var sharedMethodTypeList = new HashSet<IMethodType>();
+
+                    // MethodTypes
+                    foreach (var type in this.derivedComposites)
+                    {
+                        type.DeriveMethodTypes(sharedMethodTypeList);
+                    }
+                }
+                finally
+                {
+                    // Ignore stale requests during a derivation
+                    this.isStale = false;
+                    this.isDeriving = false;
+                }
+            }
+        }
+
+        internal void OnDomainCreated(IDomain domain)
+        {
+            this.domains.Add(domain);
+            this.metaObjectById.Add(domain.Id, domain);
+
+            this.Stale();
+        }
+
+        internal void OnUnitCreated(IUnit unit)
+        {
+            this.units.Add(unit);
+            this.metaObjectById.Add(unit.Id, unit);
+
+            this.Stale();
+        }
+
+        internal void OnInterfaceCreated(IInterface @interface)
+        {
+            this.interfaces.Add(@interface);
+            this.metaObjectById.Add(@interface.Id, @interface);
+
+            this.Stale();
+        }
+
+        internal void OnClassCreated(IClass @class)
+        {
+            this.classes.Add(@class);
+            this.metaObjectById.Add(@class.Id, @class);
+            
+            this.Stale();
+        }
+
+        internal void OnInheritanceCreated(IInheritance inheritance)
+        {
+            this.inheritances.Add(inheritance);
+            this.metaObjectById.Add(inheritance.Id, inheritance);
+
+            this.Stale();
+        }
+
+        internal void OnRelationTypeCreated(IRelationType relationType)
+        {
+            this.relationTypes.Add(relationType);
+            this.metaObjectById.Add(relationType.Id, relationType);
+
+            this.Stale();
+        }
+
+        internal void OnAssociationTypeCreated(IAssociationType associationType)
+        {
+            this.associationTypes.Add(associationType);
+            this.metaObjectById.Add(associationType.Id, associationType);
+
+            this.Stale();
+        }
+
+        internal void OnRoleTypeCreated(IRoleType roleType)
+        {
+            this.roleTypes.Add(roleType);
+            this.metaObjectById.Add(roleType.Id, roleType);
+
+            this.Stale();
+        }
+
+        internal void OnMethodTypeCreated(IMethodType methodType)
+        {
+            this.methodTypes.Add(methodType);
+            this.metaObjectById.Add(methodType.Id, methodType);
+
+            this.Stale();
+        }
+
+        internal void Stale()
+        {
+            this.isStale = true;
+        }
+
+        private bool HasCycle(IComposite subtype, HashSet<IInterface> supertypes, Dictionary<IComposite, List<IInheritance>> inheritancesBySubtype)
+        {
+            foreach (var inheritance in inheritancesBySubtype[subtype])
+            {
+                var supertype = inheritance.Supertype;
+                if (supertype != null)
+                {
+                    if (this.HasCycle(subtype, supertype, supertypes, inheritancesBySubtype))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        private bool HasCycle(IComposite originalSubtype, IInterface currentSupertype, HashSet<IInterface> supertypes, Dictionary<IComposite, List<IInheritance>> inheritancesBySubtype)
+        {
+            if (supertypes.Contains(originalSubtype))
+            {
+                return true;
+            }
+
+            if (!supertypes.Contains(currentSupertype))
+            {
+                supertypes.Add(currentSupertype);
+
+                List<IInheritance> currentSuperInheritances;
+                if (inheritancesBySubtype.TryGetValue(currentSupertype, out currentSuperInheritances))
+                {
+                    foreach (var inheritance in currentSuperInheritances)
+                    {
+                        var newSupertype = inheritance.Supertype;
+                        if (newSupertype != null)
+                        {
+                            if (this.HasCycle(originalSubtype, newSupertype, supertypes, inheritancesBySubtype))
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return false;
+        }
     }
 }

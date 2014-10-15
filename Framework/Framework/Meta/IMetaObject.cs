@@ -77,7 +77,7 @@ namespace Allors.Meta
         /// <summary>
         /// Gets the validation name.
         /// </summary>
-        public abstract string ValidationName { get; }
+        protected internal abstract string ValidationName { get; }
 
         public static int IdComparer(IMetaObject x, IMetaObject y)
         {
@@ -90,7 +90,7 @@ namespace Allors.Meta
         /// <param name="validationLog">
         /// The validation log.
         /// </param>
-        public virtual void Validate(ValidationLog validationLog)
+        protected internal virtual void Validate(ValidationLog validationLog)
         {
             if (this.Id == Guid.Empty)
             {

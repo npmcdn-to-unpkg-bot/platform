@@ -317,7 +317,7 @@ namespace Allors
             /// Initializes a new instance of the AllorsExtentConverted class.
             /// </summary>
             /// <param name="objects">The objects.</param>
-            public AllorsExtentConverted(IObject[] objects)
+            internal AllorsExtentConverted(IObject[] objects)
             {
                 if (objects == null)
                 {

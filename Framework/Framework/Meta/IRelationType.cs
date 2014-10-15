@@ -186,7 +186,7 @@ namespace Allors.Meta
         /// Gets the validation name.
         /// </summary>
         /// <value>The validation name.</value>
-        public override string ValidationName
+        protected internal override string ValidationName
         {
             get { return "relation type" + this.Name; }
         }
@@ -228,7 +228,7 @@ namespace Allors.Meta
         /// Validates this. instance.
         /// </summary>
         /// <param name="validationLog">The validation.</param>
-        public override void Validate(ValidationLog validationLog)
+        protected internal override void Validate(ValidationLog validationLog)
         {
             base.Validate(validationLog);
 

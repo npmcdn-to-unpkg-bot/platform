@@ -33,7 +33,7 @@ namespace Allors.Meta
 
         private IInterface supertype;
 
-        public IInheritance(IDomain domain, Guid id)
+        internal protected IInheritance(IDomain domain, Guid id)
             : base(domain, id)
         {
             domain.OnInheritanceCreated(this);
@@ -72,7 +72,7 @@ namespace Allors.Meta
         /// <summary>
         /// Gets the validation name.
         /// </summary>
-        public override string ValidationName
+        protected internal override string ValidationName
         {
             get
             {
@@ -100,7 +100,7 @@ namespace Allors.Meta
         /// Validates this instance.
         /// </summary>
         /// <param name="validationLog">The validation.</param>
-        public override void Validate(ValidationLog validationLog)
+        protected internal override void Validate(ValidationLog validationLog)
         {
             base.Validate(validationLog);
 

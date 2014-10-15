@@ -25,12 +25,12 @@ namespace Allors.Meta
     using System.Collections.Generic;
     using System.Linq;
 
-    public sealed class LazySet<T> : IEnumerable<T>
+    internal sealed class LazySet<T> : IEnumerable<T>
     {
         private readonly IList<T> array;
         private HashSet<T> set;
 
-        public LazySet(IEnumerable<T> collection)
+        internal LazySet(IEnumerable<T> collection)
         {
             this.array = collection.ToArray();
         }

@@ -165,7 +165,7 @@ namespace Allors.Meta
         /// <summary>
         /// Gets the validation name.
         /// </summary>
-        public override string ValidationName
+        protected internal override string ValidationName
         {
             get
             {
@@ -225,7 +225,7 @@ namespace Allors.Meta
             return this.IdAsString;
         }
 
-        public void Lock()
+        internal void Lock()
         {
             this.directSuperdomains = this.directSuperdomains.ToArray();
             this.definedUnits = this.definedUnits.ToArray();
@@ -238,55 +238,55 @@ namespace Allors.Meta
             this.definedMethodTypes = this.definedMethodTypes.ToArray();
         }
 
-        public void OnUnitCreated(IUnit unit)
+        internal void OnUnitCreated(IUnit unit)
         {
             this.definedUnits.Add(unit);
             this.MetaPopulation.OnUnitCreated(unit);
         }
 
-        public void OnInterfaceCreated(IInterface @interface)
+        internal void OnInterfaceCreated(IInterface @interface)
         {
             this.definedInterfaces.Add(@interface);
             this.MetaPopulation.OnInterfaceCreated(@interface);
         }
 
-        public void OnClassCreated(IClass @class)
+        internal void OnClassCreated(IClass @class)
         {
             this.definedClasses.Add(@class);
             this.MetaPopulation.OnClassCreated(@class);
         }
 
-        public void OnInheritanceCreated(IInheritance inheritance)
+        internal void OnInheritanceCreated(IInheritance inheritance)
         {
             this.definedInheritances.Add(inheritance);
             this.MetaPopulation.OnInheritanceCreated(inheritance);
         }
 
-        public void OnRelationTypeCreated(IRelationType relationType)
+        internal void OnRelationTypeCreated(IRelationType relationType)
         {
             this.definedRelationTypes.Add(relationType);
             this.MetaPopulation.OnRelationTypeCreated(relationType);
         }
 
-        public void OnAssociationTypeCreated(IAssociationType associationType)
+        internal void OnAssociationTypeCreated(IAssociationType associationType)
         {
             this.definedAssociationTypes.Add(associationType);
             this.MetaPopulation.OnAssociationTypeCreated(associationType);
         }
 
-        public void OnRoleTypeCreated(IRoleType roleType)
+        internal void OnRoleTypeCreated(IRoleType roleType)
         {
             this.definedRoleTypes.Add(roleType);
             this.MetaPopulation.OnRoleTypeCreated(roleType);
         }
 
-        public void OnMethodTypeCreated(IMethodType methodType)
+        internal void OnMethodTypeCreated(IMethodType methodType)
         {
             this.definedMethodTypes.Add(methodType);
             this.MetaPopulation.OnMethodTypeCreated(methodType);
         }
 
-        public void DeriveSuperdomains(HashSet<IDomain> sharedDomains)
+        internal void DeriveSuperdomains(HashSet<IDomain> sharedDomains)
         {
             sharedDomains.Clear();
             foreach (var directSuperdomain in this.DirectSuperdomains)
@@ -301,7 +301,7 @@ namespace Allors.Meta
         /// Validates the domain.
         /// </summary>
         /// <param name="validationLog">The validation.</param>
-        public override void Validate(ValidationLog validationLog)
+        protected internal override void Validate(ValidationLog validationLog)
         {
             base.Validate(validationLog);
 
