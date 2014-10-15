@@ -50,7 +50,7 @@ namespace Allors.Adapters.Database.Sql
         
         private Dictionary<RelationType, SchemaColumn> columnsByRelationType;
         private Dictionary<RelationType, SchemaTable> tablesByRelationType;
-        private Dictionary<Class, SchemaTable> tableByClass;
+        private Dictionary<IClass, SchemaTable> tableByClass;
         private Dictionary<string, SchemaTable> tablesByName;
 
         private SchemaColumn objectId;
@@ -179,7 +179,7 @@ namespace Allors.Adapters.Database.Sql
             get { return this.tablesByRelationType; }
         }
 
-        protected Dictionary<Class, SchemaTable> TableByClass
+        protected Dictionary<IClass, SchemaTable> TableByClass
         {
             get { return this.tableByClass; }
         }
@@ -250,7 +250,7 @@ namespace Allors.Adapters.Database.Sql
             return this.columnsByRelationType[role.RelationType];
         }
 
-        public SchemaTable Table(Class type)
+        public SchemaTable Table(IClass type)
         {
             return this.tableByClass[type];
         }
@@ -294,7 +294,7 @@ namespace Allors.Adapters.Database.Sql
 
             this.tablesByName = new Dictionary<string, SchemaTable>();
 
-            this.tableByClass = new Dictionary<Class, SchemaTable>();
+            this.tableByClass = new Dictionary<IClass, SchemaTable>();
             this.tablesByRelationType = new Dictionary<RelationType, SchemaTable>();
             this.columnsByRelationType = new Dictionary<RelationType, SchemaColumn>();
 
@@ -390,7 +390,7 @@ namespace Allors.Adapters.Database.Sql
 
             foreach (var objectType in this.Database.MetaPopulation.Composites)
             {
-                var @class = objectType as Class;
+                var @class = objectType as IClass;
                 if (@class != null)
                 {
                     var schemaTable = new SchemaTable(this, objectType.SingularName, SchemaTableKind.Object, objectType);

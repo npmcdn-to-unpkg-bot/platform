@@ -33,7 +33,7 @@ namespace Allors.Adapters.Workspace.Memory
         private static readonly byte[] EmptyByteArray = new byte[0];
         
         private readonly WorkspaceSession session;
-        private readonly Class objectType;
+        private readonly IClass objectType;
 
         // TODO: move to a BitFlag
         private bool isDeleted;
@@ -43,7 +43,7 @@ namespace Allors.Adapters.Workspace.Memory
         private WeakReference allorizedObjectWeakReference;
 
         // New
-        internal Strategy(WorkspaceSession session, Class objectType, ObjectId objectId)
+        internal Strategy(WorkspaceSession session, IClass objectType, ObjectId objectId)
         {
             this.session = session;
             this.objectType = objectType;
@@ -63,7 +63,7 @@ namespace Allors.Adapters.Workspace.Memory
         }
 
         // Load
-        internal Strategy(WorkspaceSession worspaceSession, Class objectType, ObjectId objectId, bool deleted)
+        internal Strategy(WorkspaceSession worspaceSession, IClass objectType, ObjectId objectId, bool deleted)
             : this(worspaceSession, objectType, objectId)
         {
             if (deleted)
@@ -98,7 +98,7 @@ namespace Allors.Adapters.Workspace.Memory
 
         public ObjectId ObjectId { get; internal set; }
 
-        public Class ObjectType
+        public IClass ObjectType
         {
             get { return this.objectType; }
         }

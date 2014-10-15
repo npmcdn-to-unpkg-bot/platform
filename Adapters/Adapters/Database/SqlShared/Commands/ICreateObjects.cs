@@ -26,7 +26,7 @@ namespace Allors.Adapters.Database.Sql.Commands
 
     public interface ICreateObjects
     {
-        IList<Reference> Execute(Class objectType, int count);
+        IList<Reference> Execute(IClass objectType, int count);
     }
 
     public interface ICreateObjectsFactory

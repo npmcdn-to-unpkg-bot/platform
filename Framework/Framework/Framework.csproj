@@ -57,9 +57,7 @@
     <Compile Include="Meta\AssociationType.cs" />
     <Compile Include="Meta\Builder.cs" />
     <Compile Include="Meta\Cardinalities.cs" />
-    <Compile Include="Meta\Class.cs" />
-    <Compile Include="Meta\ClassBuilder.cs" />
-    <Compile Include="Meta\ClassBuilder.v.cs" />
+    <Compile Include="Meta\IClass.cs" />
     <Compile Include="Meta\Composite.cs" />
     <Compile Include="Meta\IDomain.cs" />
     <Compile Include="Meta\IDomainDefinedObject.cs" />

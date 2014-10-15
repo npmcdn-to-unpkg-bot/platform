@@ -48,7 +48,7 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
                 this.commandByObjectType = new Dictionary<IObjectType, NpgsqlCommand>();
             }
 
-            public Reference Execute(Class objectType, ObjectId objectId)
+            public Reference Execute(IClass objectType, ObjectId objectId)
             {
                 var exclusiveLeafClass = objectType.ExclusiveLeafClass;
                 var schema = this.Database.Schema;

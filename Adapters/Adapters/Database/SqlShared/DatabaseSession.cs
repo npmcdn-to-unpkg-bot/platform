@@ -136,13 +136,8 @@ namespace Allors.Adapters.Database.Sql
             get { return this.SqlDatabase.Schema; }
         }
 
-        public virtual IObject Create(Class objectType)
+        public virtual IObject Create(IClass objectType)
         {
-            if (!(objectType is Class))
-            {
-                throw new ArgumentException("Can not create non concrete composite type " + objectType);
-            }
-
             var strategyReference = this.SessionCommands.CreateObjectCommand.Execute(objectType);
             this.referenceByObjectId[strategyReference.ObjectId] = strategyReference;
 
@@ -154,13 +149,8 @@ namespace Allors.Adapters.Database.Sql
         }
 
 
-        public virtual IObject[] Create(Class objectType, int count)
+        public virtual IObject[] Create(IClass objectType, int count)
         {
-            if (!(objectType is Class))
-            {
-                throw new ArgumentException("Can not create non concrete composite type " + objectType);
-            }
-
             var strategyReferences = this.SessionCommands.CreateObjectsCommand.Execute(objectType, count);
 
             var arrayType = this.SqlDatabase.ObjectFactory.GetTypeForObjectType(objectType);
@@ -179,7 +169,7 @@ namespace Allors.Adapters.Database.Sql
             return domainObjects;
         }
 
-        public virtual IObject Insert(Class domainType, string objectIdString)
+        public virtual IObject Insert(IClass domainType, string objectIdString)
         {
             var objectId = this.SqlDatabase.AllorsObjectIds.Parse(objectIdString);
             var insertedObject = this.Insert(domainType, objectId);
@@ -189,7 +179,7 @@ namespace Allors.Adapters.Database.Sql
             return insertedObject;
         }
 
-        public virtual IObject Insert(Class domainType, ObjectId objectId)
+        public virtual IObject Insert(IClass domainType, ObjectId objectId)
         {
             if (this.referenceByObjectId.ContainsKey(objectId))
             {
@@ -487,7 +477,7 @@ namespace Allors.Adapters.Database.Sql
         public virtual T Create<T>() where T : IObject
         {
             var objectType = this.SqlDatabase.ObjectFactory.GetObjectTypeForType(typeof(T));
-            var @class = objectType as Class;
+            var @class = objectType as IClass;
             if (@class == null)
             {
                 throw new Exception("IObjectType is not a Class");
@@ -577,7 +567,7 @@ namespace Allors.Adapters.Database.Sql
                     this.SqlDatabase.Cache.SetObjectType(objectId, objectType);
                 }
 
-                var @class = objectType as Class;
+                var @class = objectType as IClass;
                 if (@class == null)
                 {
                     throw new Exception("IObjectType should be a class");
@@ -591,7 +581,7 @@ namespace Allors.Adapters.Database.Sql
             return association;
         }
 
-        public virtual Reference GetOrCreateAssociationForExistingObject(Class objectType, ObjectId objectId)
+        public virtual Reference GetOrCreateAssociationForExistingObject(IClass objectType, ObjectId objectId)
         {
             Reference association;
             if (!this.referenceByObjectId.TryGetValue(objectId, out association))
@@ -604,7 +594,7 @@ namespace Allors.Adapters.Database.Sql
             return association;
         }
 
-        public virtual Reference GetOrCreateAssociationForExistingObject(Class objectType, ObjectId objectId, int cacheId)
+        public virtual Reference GetOrCreateAssociationForExistingObject(IClass objectType, ObjectId objectId, int cacheId)
         {
             Reference association;
             if (!this.referenceByObjectId.TryGetValue(objectId, out association))
@@ -616,7 +606,7 @@ namespace Allors.Adapters.Database.Sql
             return association;
         }
 
-        public virtual Reference CreateAssociationForNewObject(Class objectType, ObjectId objectId)
+        public virtual Reference CreateAssociationForNewObject(IClass objectType, ObjectId objectId)
         {
             var strategyReference = this.CreateReference(objectType, objectId, true);
             this.referenceByObjectId[objectId] = strategyReference;
@@ -741,12 +731,12 @@ namespace Allors.Adapters.Database.Sql
 
         protected abstract void SqlRollback();
 
-        protected virtual Reference CreateReference(Class objectType, ObjectId objectId, bool isNew)
+        protected virtual Reference CreateReference(IClass objectType, ObjectId objectId, bool isNew)
         {
             return new Reference(this, objectType, objectId, isNew);
         }
 
-        protected virtual Reference CreateReference(Class objectType, ObjectId objectId, int cacheId)
+        protected virtual Reference CreateReference(IClass objectType, ObjectId objectId, int cacheId)
         {
             return new Reference(this, objectType, objectId, cacheId);
         }

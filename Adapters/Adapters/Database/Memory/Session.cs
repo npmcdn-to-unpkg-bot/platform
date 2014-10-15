@@ -246,8 +246,8 @@ namespace Allors.Adapters.Database.Memory
         public T Create<T>() where T : IObject
         {
             var objectType = this.database.ObjectFactory.GetObjectTypeForType(typeof(T));
-            
-            var @class = objectType as Class;
+
+            var @class = objectType as IClass;
             if (@class == null)
             {
                 throw new Exception("IObjectType should be a class");
@@ -256,7 +256,7 @@ namespace Allors.Adapters.Database.Memory
             return (T)this.Create(@class);
         }
 
-        public IObject[] Create(Class objectType, int count)
+        public IObject[] Create(IClass objectType, int count)
         {
             var arrayType = this.database.ObjectFactory.GetTypeForObjectType(objectType);
             var allorsObjects = (IObject[])Array.CreateInstance(arrayType, count);
@@ -268,13 +268,13 @@ namespace Allors.Adapters.Database.Memory
             return allorsObjects;
         }
 
-        public IObject Insert(Class objectType, string objectId)
+        public IObject Insert(IClass objectType, string objectId)
         {
             var id = this.ObjectIds.Parse(objectId);
             return this.Insert(objectType, id);
         }
 
-        public IObject Insert(Class objectType, ObjectId objectId)
+        public IObject Insert(IClass objectType, ObjectId objectId)
         {
             var strategy = this.InsertStrategy(objectType, objectId);
             return strategy.GetObject();
@@ -400,13 +400,8 @@ namespace Allors.Adapters.Database.Memory
                 ExtentOperationType.Except);
         }
 
-        public virtual IObject Create(Class objectType)
+        public virtual IObject Create(IClass objectType)
         {
-            if (!(objectType is Class))
-            {
-                throw new ArgumentException("Can not create non concrete composite type " + objectType);
-            }
-
             var strategy = new Strategy(this, objectType, this.ObjectIds.Next());
             this.AddStrategy(strategy);
 
@@ -425,7 +420,7 @@ namespace Allors.Adapters.Database.Memory
             return this.database.ObjectFactory.GetTypeForObjectType(objectType);
         }
 
-        internal virtual Strategy InsertStrategy(Class objectType, ObjectId objectId)
+        internal virtual Strategy InsertStrategy(IClass objectType, ObjectId objectId)
         {
             var strategy = this.GetStrategy(objectId);
             if (strategy != null)
@@ -498,7 +493,7 @@ namespace Allors.Adapters.Database.Memory
             {
                 var sortedClassAndSubclassList = new List<IObjectType>();
 
-                if (type is Class)
+                if (type is IClass)
                 {
                     sortedClassAndSubclassList.Add(type);
                 }
@@ -507,10 +502,7 @@ namespace Allors.Adapters.Database.Memory
                 {
                     foreach (var subClass in ((Interface)type).Subclasses)
                     {
-                        if (subClass is Class)
-                        {
-                            sortedClassAndSubclassList.Add(subClass);
-                        }
+                        sortedClassAndSubclassList.Add(subClass);
                     }
                 }
 

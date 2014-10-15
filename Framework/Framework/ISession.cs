@@ -153,7 +153,7 @@ namespace Allors
         /// </summary>
         /// <param name="objectType">The IObjectType.</param>
         /// <returns>a new <see cref="IObject"/></returns>
-        IObject Create(Class objectType);
+        IObject Create(IClass objectType);
 
         /// <summary>
         /// Creates a specified amount of AllorsObjects.
@@ -161,7 +161,7 @@ namespace Allors
         /// <param name="objectType">The IObjectType.</param>
         /// <param name="count">The count.</param>
         /// <returns>The created objects.</returns>
-        IObject[] Create(Class objectType, int count);
+        IObject[] Create(IClass objectType, int count);
 
         /// <summary>
         /// Instantiates an Allors Object.

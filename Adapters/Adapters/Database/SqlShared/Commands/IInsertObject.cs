@@ -24,7 +24,7 @@ namespace Allors.Adapters.Database.Sql.Commands
 
     public interface IInsertObject
     {
-        Reference Execute(Class objectType, ObjectId objectId);
+        Reference Execute(IClass objectType, ObjectId objectId);
     }
     
     public interface IInsertObjectFactory

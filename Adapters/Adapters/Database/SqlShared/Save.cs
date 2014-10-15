@@ -72,7 +72,7 @@ namespace Allors.Adapters.Database.Sql
 
         protected void SaveObjects(ManagementSession session)
         {
-            var concreteCompositeType = new List<Class>(this.database.MetaPopulation.Classes);
+            var concreteCompositeType = new List<IClass>(this.database.MetaPopulation.Classes);
             concreteCompositeType.Sort(IMetaObject.IdComparer);
             foreach (var type in concreteCompositeType)
             {
@@ -120,7 +120,7 @@ namespace Allors.Adapters.Database.Sql
 
         protected void SaveRelations(ManagementSession session)
         {
-            var exclusiveLeafClassesByObjectType = new Dictionary<IObjectType, HashSet<Class>>();
+            var exclusiveLeafClassesByObjectType = new Dictionary<IObjectType, HashSet<IClass>>();
 
             var relations = new List<RelationType>(this.database.MetaPopulation.RelationTypes);
             relations.Sort(IMetaObject.IdComparer);
@@ -136,10 +136,10 @@ namespace Allors.Adapters.Database.Sql
                     var sql = string.Empty;
                     if (roleType.ObjectType is IUnit)
                     {
-                        HashSet<Class> exclusiveLeafClasses;
+                        HashSet<IClass> exclusiveLeafClasses;
                         if (!exclusiveLeafClassesByObjectType.TryGetValue(associationType.ObjectType, out exclusiveLeafClasses))
                         {
-                            exclusiveLeafClasses = new HashSet<Class>();
+                            exclusiveLeafClasses = new HashSet<IClass>();
                             foreach (var concreteClass in associationType.ObjectType.LeafClasses)
                             {
                                 exclusiveLeafClasses.Add(concreteClass.ExclusiveLeafClass);

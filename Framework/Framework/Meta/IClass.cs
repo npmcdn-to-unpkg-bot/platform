@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="Class.cs" company="Allors bvba">
+// <copyright file="IClass.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -24,18 +24,18 @@ namespace Allors.Meta
     using System;
     using System.Collections.Generic;
 
-    public partial class Class : Composite
+    public partial class IClass : Composite
     {
-        private readonly Class[] leafClasses;
+        private readonly IClass[] leafClasses;
 
-        internal Class(IDomain domain, Guid id)
+        protected IClass(IDomain domain, Guid id)
             : base(domain, id)
         {
             this.leafClasses = new[] { this };
             domain.OnClassCreated(this);
         }
-        
-        public override IEnumerable<Class> LeafClasses
+
+        public override IEnumerable<IClass> LeafClasses
         {
             get
             {
@@ -51,7 +51,7 @@ namespace Allors.Meta
             }
         }
 
-        public override Class ExclusiveLeafClass
+        public override IClass ExclusiveLeafClass
         {
             get
             {

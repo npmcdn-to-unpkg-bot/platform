@@ -55,7 +55,7 @@ namespace Allors.Adapters.Database.Sql
             }
         }
 
-        public Class ObjectType
+        public IClass ObjectType
         {
             get { return this.reference.ObjectType; }
         }

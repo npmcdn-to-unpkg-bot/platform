@@ -26,7 +26,7 @@ namespace Allors.Adapters.Database.Sql.Commands
 
     public interface ILoadObjects
     {
-        void Execute(Class objectType, IEnumerable<ObjectId> objectids);
+        void Execute(IClass objectType, IEnumerable<ObjectId> objectids);
     }
 
     public interface ILoadObjectsFactory

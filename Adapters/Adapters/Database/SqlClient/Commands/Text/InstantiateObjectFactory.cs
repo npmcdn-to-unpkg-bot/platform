@@ -77,7 +77,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
                         var classId = this.GetClassId(reader, 0);
                         var cacheId = this.GetCachId(reader, 1);
 
-                        var type = (Class)this.factory.Database.MetaPopulation.Find(classId);
+                        var type = (IClass)this.factory.Database.MetaPopulation.Find(classId);
                         return this.Session.GetOrCreateAssociationForExistingObject(type, objectId, cacheId);
                     }
 

@@ -41,6 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\Core\Meta\Core\Class.cs">
+      <Link>Core\Class.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\ClassBuilder.cs">
+      <Link>Core\ClassBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\ClassBuilder.v.cs">
+      <Link>Core\ClassBuilder.v.cs</Link>
+    </Compile>
     <Compile Include="..\..\Core\Meta\Core\Domain.cs">
       <Link>Core\Domain.cs</Link>
     </Compile>

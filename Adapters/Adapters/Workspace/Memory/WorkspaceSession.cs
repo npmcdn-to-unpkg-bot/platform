@@ -967,7 +967,7 @@ namespace Allors.Adapters.Workspace.Memory
         public virtual T Create<T>() where T : IObject
         {
             var objectType = this.MemoryWorkspace.Database.ObjectFactory.GetObjectTypeForType(typeof(T));
-            var @class = objectType as Class;
+            var @class = objectType as IClass;
             if (@class == null)
             {
                 throw new Exception("IObjectType should be a class");
@@ -976,7 +976,7 @@ namespace Allors.Adapters.Workspace.Memory
             return (T)this.Create(@class);
         }
 
-        public virtual IObject[] Create(Class objectType, int count)
+        public virtual IObject[] Create(IClass objectType, int count)
         {
             var arrayType = this.MemoryWorkspace.Database.ObjectFactory.GetTypeForObjectType(objectType);
             var allorsObjects = (IObject[])Array.CreateInstance(arrayType, count);
@@ -1085,7 +1085,7 @@ namespace Allors.Adapters.Workspace.Memory
             throw new NotSupportedException();
         }
 
-        public virtual IObject Create(Class objectType)
+        public virtual IObject Create(IClass objectType)
         {
             var strategy = this.CreateNewStrategy(objectType);
             this.strategyByObjectId.Add(strategy.ObjectId, strategy);
@@ -1756,7 +1756,7 @@ namespace Allors.Adapters.Workspace.Memory
             {
                 var sortedClassAndSubclassList = new List<IObjectType>();
 
-                if (objectType is Class)
+                if (objectType is IClass)
                 {
                     sortedClassAndSubclassList.Add(objectType);
                 }
@@ -1765,7 +1765,7 @@ namespace Allors.Adapters.Workspace.Memory
                 {
                     foreach (var subClass in ((Interface)objectType).Subclasses)
                     {
-                        if (subClass is Class)
+                        if (subClass is IClass)
                         {
                             sortedClassAndSubclassList.Add(subClass);
                         }
@@ -2194,7 +2194,7 @@ namespace Allors.Adapters.Workspace.Memory
                                 {
                                     var objectId = this.MemoryWorkspace.ObjectIds.Parse(objectIdString);
 
-                                    var @class = objectType as Class;
+                                    var @class = objectType as IClass;
                                     if (@class == null)
                                     {
                                         throw new Exception("Could not load object with id " + objectId);
@@ -2456,7 +2456,7 @@ namespace Allors.Adapters.Workspace.Memory
                                 {
                                     var objectId = this.MemoryWorkspace.ObjectIds.Parse(objectIdString);
 
-                                    var @class = objectType as Class;
+                                    var @class = objectType as IClass;
                                     if (@class == null)
                                     {
                                         throw new Exception("Could not load object with id " + objectId);
@@ -2510,7 +2510,7 @@ namespace Allors.Adapters.Workspace.Memory
                                 {
                                     var objectId = this.MemoryWorkspace.ObjectIds.Parse(objectIdString);
 
-                                    var @class = objectType as Class;
+                                    var @class = objectType as IClass;
                                     if (@class == null)
                                     {
                                         throw new Exception("Could not load object with id " + objectId);
@@ -2792,7 +2792,7 @@ namespace Allors.Adapters.Workspace.Memory
             return compositeRolesByAssociation;
         }
 
-        protected virtual Strategy CreateNewStrategy(Class objectType)
+        protected virtual Strategy CreateNewStrategy(IClass objectType)
         {
             return new Strategy(this, objectType, this.MemoryWorkspace.ObjectIds.Next());
         }
@@ -2802,7 +2802,7 @@ namespace Allors.Adapters.Workspace.Memory
             return new Strategy(this, databaseStrategy);
         }
 
-        protected virtual Strategy LoadStrategy(Class objectType, ObjectId objectId)
+        protected virtual Strategy LoadStrategy(IClass objectType, ObjectId objectId)
         {
             return new Strategy(this, objectType, objectId, false);
         }

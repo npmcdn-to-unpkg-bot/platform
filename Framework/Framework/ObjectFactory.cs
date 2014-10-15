@@ -113,7 +113,7 @@ namespace Allors
                 this.objectTypeByType[type] = objectType;
                 this.objectTypeByObjectTypeId[objectType.Id] = objectType;
 
-                if (objectType is Class)
+                if (objectType is IClass)
                 {
                     var parameterTypes = new[] { typeof(IStrategy) };
                     var constructor = type.GetConstructor(parameterTypes);

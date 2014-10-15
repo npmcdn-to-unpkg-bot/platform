@@ -34,12 +34,12 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
     internal class InsertObjectFactory : IInsertObjectFactory
     {
         internal readonly Database Database;
-        private readonly Dictionary<Class, string> sqlByMetaType;
+        private readonly Dictionary<IClass, string> sqlByMetaType;
 
         public InsertObjectFactory(Database database)
         {
             this.Database = database;
-            this.sqlByMetaType = new Dictionary<Class, string>();
+            this.sqlByMetaType = new Dictionary<IClass, string>();
         }
 
         public IInsertObject Create(Sql.DatabaseSession session)
@@ -47,7 +47,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
             return new InsertObject(this, session);
         }
 
-        internal string GetSql(Class objectType)
+        internal string GetSql(IClass objectType)
         {
             if (!this.sqlByMetaType.ContainsKey(objectType))
             {
@@ -94,7 +94,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
                 this.commandByObjectType = new Dictionary<IObjectType, SqlCommand>();
             }
 
-            public Reference Execute(Class objectType, ObjectId objectId)
+            public Reference Execute(IClass objectType, ObjectId objectId)
             {
                 SqlCommand command;
                 if (!this.commandByObjectType.TryGetValue(objectType, out command))

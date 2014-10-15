@@ -31,11 +31,11 @@ namespace Allors.Meta
 
         private LazySet<Composite> derivedSubtypes;
 
-        private LazySet<Class> derivedSubclasses;
+        private LazySet<IClass> derivedSubclasses;
 
-        private LazySet<Class> derivedLeafClasses;
+        private LazySet<IClass> derivedLeafClasses;
 
-        private Class derivedExclusiveLeafClass;
+        private IClass derivedExclusiveLeafClass;
 
         internal Interface(IDomain domain, Guid id)
             : base(domain, id)
@@ -77,7 +77,7 @@ namespace Allors.Meta
         /// Gets the subclasses.
         /// </summary>
         /// <value>The subclasses.</value>
-        public IEnumerable<Class> Subclasses
+        public IEnumerable<IClass> Subclasses
         {
             get
             {
@@ -99,7 +99,7 @@ namespace Allors.Meta
             }
         }
 
-        public override IEnumerable<Class> LeafClasses
+        public override IEnumerable<IClass> LeafClasses
         {
             get
             {
@@ -108,7 +108,7 @@ namespace Allors.Meta
             }
         }
 
-        public override Class ExclusiveLeafClass
+        public override IClass ExclusiveLeafClass
         {
             get
             {
@@ -155,18 +155,18 @@ namespace Allors.Meta
         /// Derive subclasses.
         /// </summary>
         /// <param name="subClasses">The sub classes.</param>
-        internal void DeriveSubclasses(HashSet<Class> subClasses)
+        internal void DeriveSubclasses(HashSet<IClass> subClasses)
         {
             subClasses.Clear();
             foreach (var subType in this.derivedSubtypes)
             {
-                if (subType is Class)
+                if (subType is IClass)
                 {
-                    subClasses.Add((Class)subType);
+                    subClasses.Add((IClass)subType);
                 }
             }
 
-            this.derivedSubclasses = new LazySet<Class>(subClasses);
+            this.derivedSubclasses = new LazySet<IClass>(subClasses);
         }
 
         /// <summary>
@@ -194,7 +194,7 @@ namespace Allors.Meta
         /// </summary>
         internal void DeriveLeafClasses()
         {
-            this.derivedLeafClasses = new LazySet<Class>(this.derivedSubclasses);
+            this.derivedLeafClasses = new LazySet<IClass>(this.derivedSubclasses);
         }
 
         /// <summary>

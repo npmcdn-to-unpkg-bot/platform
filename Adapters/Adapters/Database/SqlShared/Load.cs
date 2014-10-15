@@ -36,7 +36,7 @@ namespace Allors.Adapters.Database.Sql
         private readonly RelationNotLoadedEventHandler relationNotLoaded;
         private readonly XmlReader reader;
 
-        private readonly Dictionary<ObjectId, Class> objectTypeByObjectId;
+        private readonly Dictionary<ObjectId, IClass> objectTypeByObjectId;
 
         protected Load(Database database, ObjectNotLoadedEventHandler objectNotLoaded, RelationNotLoadedEventHandler relationNotLoaded, XmlReader reader)
         {
@@ -45,7 +45,7 @@ namespace Allors.Adapters.Database.Sql
             this.relationNotLoaded = relationNotLoaded;
             this.reader = reader;
 
-            this.objectTypeByObjectId = new Dictionary<ObjectId, Class>();
+            this.objectTypeByObjectId = new Dictionary<ObjectId, IClass>();
         }
 
         public void Execute(ManagementSession session)
@@ -166,7 +166,7 @@ namespace Allors.Adapters.Database.Sql
 
                                 var objectTypeId = new Guid(objectTypeIdString);
                                 var objectType = this.database.ObjectFactory.GetObjectTypeForType(objectTypeId);
-                                var canLoad = objectType is Class;
+                                var canLoad = objectType is IClass;
 
                                 var objectIdsString = this.reader.ReadString();
                                 var objectIdStringArray = objectIdsString.Split(Serialization.ObjectsSplitterCharArray);
@@ -180,7 +180,7 @@ namespace Allors.Adapters.Database.Sql
                                     {
                                         var objectId = this.database.AllorsObjectIds.Parse(objectIdString);
                                         objectIds[i] = objectId;
-                                        this.objectTypeByObjectId[objectId] = (Class)objectType;
+                                        this.objectTypeByObjectId[objectId] = (IClass)objectType;
                                     }
                                     else
                                     {
@@ -191,7 +191,7 @@ namespace Allors.Adapters.Database.Sql
                                 if (canLoad)
                                 {
                                     var loadObjects = session.LoadObjectsFactory.Create(objectType);
-                                    loadObjects.Execute((Class)objectType, objectIds);
+                                    loadObjects.Execute((IClass)objectType, objectIds);
                                 }
                             }
                         }
@@ -216,7 +216,7 @@ namespace Allors.Adapters.Database.Sql
         {
             foreach (var type in this.database.MetaPopulation.Composites)
             {
-                if (type is Class)
+                if (type is IClass)
                 {
                     var sql = new StringBuilder();
                     sql.Append("INSERT INTO " + this.database.Schema.Objects + " (" + this.database.Schema.ObjectId + "," + this.database.Schema.TypeId + "," + this.database.Schema.CacheId + ")\n");
@@ -366,7 +366,7 @@ namespace Allors.Adapters.Database.Sql
                             }
 
                             var associationId = this.database.AllorsObjectIds.Parse(associationIdString);
-                            Class associationConcreteClass;
+                            IClass associationConcreteClass;
                             this.objectTypeByObjectId.TryGetValue(associationId, out associationConcreteClass);
 
                             if (this.reader.IsEmptyElement)
@@ -490,7 +490,7 @@ namespace Allors.Adapters.Database.Sql
                             }
 
                             var association = this.database.AllorsObjectIds.Parse(associationIdString);
-                            Class associationConcreteClass;
+                            IClass associationConcreteClass;
                             this.objectTypeByObjectId.TryGetValue(association, out associationConcreteClass);
 
                             var value = this.reader.ReadString();
@@ -510,7 +510,7 @@ namespace Allors.Adapters.Database.Sql
                                 foreach (var r in rs)
                                 {
                                     var role = this.database.AllorsObjectIds.Parse(r);
-                                    Class roleConcreteClass;
+                                    IClass roleConcreteClass;
                                     this.objectTypeByObjectId.TryGetValue(role, out roleConcreteClass);
 
                                     if (roleConcreteClass == null ||

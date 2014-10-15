@@ -47,7 +47,7 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Text
             return new DeleteObject(this, session);
         }
 
-        public string GetSql(Class objectType)
+        public string GetSql(IClass objectType)
         {
             if (!this.sqlByMetaType.ContainsKey(objectType))
             {

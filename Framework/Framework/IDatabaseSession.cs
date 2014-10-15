@@ -38,7 +38,7 @@ namespace Allors
         /// <param name="objectType">The IObjectType.</param>
         /// <param name="objectId">The object id.</param>
         /// <returns>The inserted object.</returns>
-        IObject Insert(Class objectType, string objectId);
+        IObject Insert(IClass objectType, string objectId);
 
         /// <summary>
         /// Inserts an Allors Object with the specified id.
@@ -46,7 +46,7 @@ namespace Allors
         /// <param name="objectType">The <see cref="IObjectType"/>.</param>
         /// <param name="objectId">The object id.</param>
         /// <returns>The inserted object.</returns>
-        IObject Insert(Class objectType, ObjectId objectId);
+        IObject Insert(IClass objectType, ObjectId objectId);
 
         /// <summary>
         /// Instantiate a strategy.

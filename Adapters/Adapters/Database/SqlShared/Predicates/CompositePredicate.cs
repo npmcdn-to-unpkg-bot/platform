@@ -99,7 +99,7 @@ namespace Allors.Adapters.Database.Sql
             }
         }
 
-        public static Class[] GetConcreteSubClasses(Composite type)
+        public static IClass[] GetConcreteSubClasses(Composite type)
         {
             var @interface = type as Interface;
             if (@interface != null)
@@ -107,7 +107,7 @@ namespace Allors.Adapters.Database.Sql
                 return @interface.Subclasses.ToArray();
             }
 
-            return new[] { (Class)type };
+            return new[] { (IClass)type };
         }
 
         public ICompositePredicate AddAnd()

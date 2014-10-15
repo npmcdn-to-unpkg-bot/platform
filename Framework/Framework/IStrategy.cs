@@ -44,7 +44,7 @@ namespace Allors
         /// Gets the <see cref="ObjectType"/>.
         /// </summary>
         /// <value>The object type.</value>
-        Class ObjectType { get; }
+        IClass ObjectType { get; }
 
         /// <summary>
         /// Gets the <see cref="Allors.ObjectId"/>.

@@ -101,13 +101,13 @@ namespace Allors.Meta
         /// Gets the exclusive concrete subclass.
         /// </summary>
         /// <value>The exclusive concrete subclass.</value>
-        public abstract Class ExclusiveLeafClass { get; }
+        public abstract IClass ExclusiveLeafClass { get; }
 
         /// <summary>
         /// Gets the root classes.
         /// </summary>
         /// <value>The root classes.</value>
-        public abstract IEnumerable<Class> LeafClasses { get; }
+        public abstract IEnumerable<IClass> LeafClasses { get; }
 
         /// <summary>
         /// Gets the direct super types.

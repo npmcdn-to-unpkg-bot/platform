@@ -42,7 +42,7 @@ namespace Allors.Meta
         private IList<IDomain> domains;
         private IList<IUnit> units;
         private IList<Interface> interfaces;
-        private IList<Class> classes;
+        private IList<IClass> classes;
         private IList<Inheritance> inheritances;
         private IList<RelationType> relationTypes;
         private IList<AssociationType> associationTypes;
@@ -57,7 +57,7 @@ namespace Allors.Meta
             this.domains = new List<IDomain>();
             this.units = new List<IUnit>();
             this.interfaces = new List<Interface>();
-            this.classes = new List<Class>();
+            this.classes = new List<IClass>();
             this.inheritances = new List<Inheritance>();
             this.relationTypes = new List<RelationType>();
             this.associationTypes = new List<AssociationType>();
@@ -99,7 +99,7 @@ namespace Allors.Meta
             }
         }
 
-        public IEnumerable<Class> Classes
+        public IEnumerable<IClass> Classes
         {
             get
             {
@@ -311,7 +311,7 @@ namespace Allors.Meta
                     var sharedDomains = new HashSet<IDomain>();
                     var sharedCompositeTypes = new HashSet<Composite>();
                     var sharedInterfaces = new HashSet<Interface>();
-                    var sharedClasses = new HashSet<Class>();
+                    var sharedClasses = new HashSet<IClass>();
                     var sharedAssociationTypes = new HashSet<AssociationType>();
                     var sharedRoleTypes = new HashSet<RoleType>();
 
@@ -435,8 +435,8 @@ namespace Allors.Meta
 
             this.Stale();
         }
-        
-        internal void OnClassCreated(Class @class)
+
+        internal void OnClassCreated(IClass @class)
         {
             this.classes.Add(@class);
             this.metaObjectById.Add(@class.Id, @class);

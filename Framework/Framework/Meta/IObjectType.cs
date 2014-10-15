@@ -104,7 +104,7 @@ namespace Allors.Meta
         {
             get
             {
-                return this is Class;
+                return this is IClass;
             }
         }
 

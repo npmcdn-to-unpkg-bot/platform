@@ -53,7 +53,7 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
                 this.factory = factory;
             }
 
-            public void Execute(Class objectType, IEnumerable<ObjectId> objectIds)
+            public void Execute(IClass objectType, IEnumerable<ObjectId> objectIds)
             {
                 var database = this.factory.ManagementSession.NpgsqlDatabase;
 

@@ -159,9 +159,9 @@ namespace Allors.Adapters.Database.Memory
                                 {
                                     var objectId = this.session.ObjectIds.Parse(objectIdString);
 
-                                    if (objectType is Class)
+                                    if (objectType is IClass)
                                     {
-                                        this.session.InsertStrategy((Class)objectType, objectId);
+                                        this.session.InsertStrategy((IClass)objectType, objectId);
                                     }
                                     else
                                     {

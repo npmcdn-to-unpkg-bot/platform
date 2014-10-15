@@ -113,7 +113,7 @@ namespace Allors.Meta
                 }
 
                 IObjectType tempQualifier = this.Supertype;
-                if (tempQualifier is Class)
+                if (tempQualifier is IClass)
                 {
                     var message = this.ValidationName + " can not have a concrete superclass";
                     validationLog.AddError(message, this, ValidationKind.Hierarchy, "Inheritance.Supertype");

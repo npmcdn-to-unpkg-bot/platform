@@ -59,7 +59,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
                 this.commandByObjectType = new Dictionary<IObjectType, SqlCommand>();
             }
 
-            public IList<Reference> Execute(Class objectType, int count)
+            public IList<Reference> Execute(IClass objectType, int count)
             {
                 IObjectType exclusiveLeafClass = objectType.ExclusiveLeafClass;
                 Sql.Schema schema = this.Database.Schema;
