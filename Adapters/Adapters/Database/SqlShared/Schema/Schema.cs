@@ -305,7 +305,7 @@ namespace Allors.Adapters.Database.Sql
             this.typeId = new SchemaColumn(this, "T", this.TypeDbType, false, false, SchemaIndexType.None);
 
             // Objects
-            this.objects = new SchemaTable(this, AllorsPrefix + "O", SchemaTableKind.System);
+            this.objects = new SchemaTable(this, SchemaTableKind.System, AllorsPrefix + "O");
             this.objectsObjectId = new SchemaColumn(this, this.ObjectId.Name, this.ObjectDbType, true, true, SchemaIndexType.None);
             this.objectsCacheId = new SchemaColumn(this, "C", this.CacheDbType, false, false, SchemaIndexType.None);
             this.objectsTypeId = new SchemaColumn(this, this.TypeId.Name, this.TypeDbType, false, false, SchemaIndexType.None);
@@ -381,7 +381,7 @@ namespace Allors.Adapters.Database.Sql
                         }
                         else
                         {
-                            var column = new SchemaColumn(this, associationType.Name, this.ObjectDbType, false, false, relationType.IsIndexed ? SchemaIndexType.Combined : SchemaIndexType.None, relationType);
+                            var column = new SchemaColumn(this, associationType.SingularName, this.ObjectDbType, false, false, relationType.IsIndexed ? SchemaIndexType.Combined : SchemaIndexType.None, relationType);
                             this.ColumnsByRelationType.Add(relationType, column);
                         }
                     }
@@ -393,7 +393,7 @@ namespace Allors.Adapters.Database.Sql
                 var @class = objectType as IClass;
                 if (@class != null)
                 {
-                    var schemaTable = new SchemaTable(this, objectType.SingularName, SchemaTableKind.Object, objectType);
+                    var schemaTable = new SchemaTable(this, SchemaTableKind.Object, objectType);
                     this.TablesByName.Add(schemaTable.Name, schemaTable);
                     this.TableByClass.Add(@class, schemaTable);
 
@@ -455,7 +455,7 @@ namespace Allors.Adapters.Database.Sql
 
                 if (roleType.ObjectType is IComposite && ((associationType.IsMany && roleType.IsMany) || !relationType.ExistExclusiveLeafClasses))
                 {
-                    var schemaTable = new SchemaTable(this, relationType.Name, SchemaTableKind.Relation, relationType);
+                    var schemaTable = new SchemaTable(this, SchemaTableKind.Relation, relationType);
                     this.TablesByName.Add(schemaTable.Name, schemaTable);
                     this.TablesByRelationType.Add(relationType, schemaTable);
 

@@ -54,7 +54,7 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
         {
             if (!this.sqlByObjectType.ContainsKey(objectType))
             {
-                var sql = Sql.Schema.AllorsPrefix + "GU_" + objectType.Name;
+                var sql = Sql.Schema.AllorsPrefix + "GU_" + objectType.SingularName;
                 this.sqlByObjectType[objectType] = sql;
             }
 
@@ -139,7 +139,7 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
                                         unit = byteArray;
                                         break;
                                     default:
-                                        throw new ArgumentException("Unknown Unit IObjectType: " + roleType.ObjectType.Name);
+                                        throw new ArgumentException("Unknown Unit IObjectType: " + roleType.ObjectType.SingularName);
                                 }
                             }
 

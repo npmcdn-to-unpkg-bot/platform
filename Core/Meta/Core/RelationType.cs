@@ -216,7 +216,7 @@ namespace Allors.Meta
         /// <paramref name="obj"/> is not the same type as this instance. </exception>
         public int CompareTo(object obj)
         {
-            var that = obj as IRelationType;
+            var that = obj as RelationType;
             return that != null ? string.CompareOrdinal(this.Name, that.Name) : -1;
         }
 

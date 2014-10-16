@@ -363,11 +363,6 @@ namespace Allors.Meta
             }
         }
 
-        public static int IdComparer(RoleType x, RoleType y)
-        {
-            return x.RelationType.Id.CompareTo(y.RelationType.Id);
-        }
-
         /// <summary>
         /// Compares the current instance with another object of the same type.
         /// </summary>
@@ -379,7 +374,7 @@ namespace Allors.Meta
         /// <paramref name="obj"/> is not the same type as this instance. </exception>
         public int CompareTo(object obj)
         {
-            var that = obj as IRoleType;
+            var that = obj as RoleType;
             if (that != null)
             {
                 return string.CompareOrdinal(this.SingularName, that.SingularName);

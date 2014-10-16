@@ -28,7 +28,7 @@ namespace Allors.Meta
     /// This is also called the 'passive' side.
     /// RoleTypes can have composite and unit <see cref="ObjectType"/>s.
     /// </summary>
-    public interface IRoleType : IPropertyType, IComparable
+    public interface IRoleType : IDomainObject, IComparable
     {
         string SingularName { get; }
 
@@ -45,8 +45,6 @@ namespace Allors.Meta
         string SingularFullName { get; }
 
         bool IsOne { get; }
-
-        string Name { get; }
 
         int? Size { get; }
 

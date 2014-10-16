@@ -790,7 +790,7 @@ AS
                                 if (associationType.IsOne)
                                 {
                                     // Get IComposite Association (1-1) [object table]
-                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GA_" + objectType.Name + "_" + associationType.Name };
+                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GA_" + objectType.Name + "_" + associationType.SingularName };
                                     procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.RoleId.Param + @" " + this.database.GetSqlType(this.RoleId) + @"
@@ -804,7 +804,7 @@ AS
                                 else
                                 {
                                     // Get IComposite Association (*-1) [object table]
-                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GA_" + objectType.Name + "_" + associationType.Name };
+                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GA_" + objectType.Name + "_" + associationType.SingularName };
                                     procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.RoleId.Param + @" " + this.database.GetSqlType(this.RoleId) + @"
@@ -848,7 +848,7 @@ AS
                             else
                             {
                                 // Get Composites Role (1-*) [object table]
-                                procedure = new SchemaProcedure { Name = AllorsPrefix + "GR_" + objectType.Name + "_" + associationType.Name };
+                                procedure = new SchemaProcedure { Name = AllorsPrefix + "GR_" + objectType.Name + "_" + associationType.SingularName };
                                 procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.AssociationId.Param + @" " + this.database.GetSqlType(this.AssociationId) + @"
@@ -862,7 +862,7 @@ AS
                                 if (associationType.IsOne)
                                 {
                                     // Get IComposite Association (1-*) [object table]
-                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GA_" + objectType.Name + "_" + associationType.Name };
+                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GA_" + objectType.Name + "_" + associationType.SingularName };
                                     procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.RoleId.Param + @" " + this.database.GetSqlType(this.RoleId) + @"
@@ -875,7 +875,7 @@ AS
                                 }
 
                                 // Add IComposite Role (1-*) [object table]
-                                procedure = new SchemaProcedure { Name = AllorsPrefix + "A_" + objectType.Name + "_" + associationType.Name };
+                                procedure = new SchemaProcedure { Name = AllorsPrefix + "A_" + objectType.Name + "_" + associationType.SingularName };
                                 procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.CompositeRelationTableParam + @" " + this.CompositeRelationTable + @" READONLY
@@ -889,7 +889,7 @@ AS
                                 this.procedureByName.Add(procedure.Name, procedure);
 
                                 // Remove IComposite Role (1-*) [object table]
-                                procedure = new SchemaProcedure { Name = AllorsPrefix + "R_" + objectType.Name + "_" + associationType.Name };
+                                procedure = new SchemaProcedure { Name = AllorsPrefix + "R_" + objectType.Name + "_" + associationType.SingularName };
                                 procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.CompositeRelationTableParam + @" " + this.CompositeRelationTable + @" READONLY
@@ -904,7 +904,7 @@ AS
                                 this.procedureByName.Add(procedure.Name, procedure);
 
                                 // Clear Composites Role (1-*) [object table]
-                                procedure = new SchemaProcedure { Name = AllorsPrefix + "C_" + objectType.Name + "_" + associationType.Name };
+                                procedure = new SchemaProcedure { Name = AllorsPrefix + "C_" + objectType.Name + "_" + associationType.SingularName };
                                 procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.ObjectTableParam + @" " + this.ObjectTable + @" READONLY

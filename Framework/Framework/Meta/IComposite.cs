@@ -25,7 +25,6 @@ namespace Allors.Meta
 
     public interface IComposite : IObjectType
     {
-        string Name { get; }
 
         bool ExistExclusiveLeafClass { get; }
 
@@ -38,6 +37,8 @@ namespace Allors.Meta
         IEnumerable<IAssociationType> AssociationTypes { get; }
 
         IEnumerable<IRoleType> RoleTypes { get; }
+
+        string Name { get; }
 
         bool ContainsSupertype(IInterface @interface);
 

@@ -98,7 +98,7 @@ namespace Allors.Meta
             }
         }
 
-        public IEnumerable<IUnit> DefinedUnits
+        public IEnumerable<Unit> DefinedUnits
         {
             get
             {
@@ -106,7 +106,7 @@ namespace Allors.Meta
             }
         }
 
-        public IEnumerable<IInterface> DefinedInterfaces
+        public IEnumerable<Interface> DefinedInterfaces
         {
             get
             {
@@ -114,7 +114,7 @@ namespace Allors.Meta
             }
         }
 
-        public IEnumerable<IClass> DefinedClasses
+        public IEnumerable<Class> DefinedClasses
         {
             get
             {
@@ -122,7 +122,7 @@ namespace Allors.Meta
             }
         }
 
-        public IEnumerable<IInheritance> DefinedInheritances
+        public IEnumerable<Inheritance> DefinedInheritances
         {
             get
             {
@@ -130,7 +130,7 @@ namespace Allors.Meta
             }
         }
 
-        public IEnumerable<IRelationType> DefinedRelationTypes
+        public IEnumerable<RelationType> DefinedRelationTypes
         {
             get
             {
@@ -138,7 +138,7 @@ namespace Allors.Meta
             }
         }
 
-        public IEnumerable<IAssociationType> DefinedAssociationTypes
+        public IEnumerable<AssociationType> DefinedAssociationTypes
         {
             get
             {
@@ -146,7 +146,7 @@ namespace Allors.Meta
             }
         }
 
-        public IEnumerable<IRoleType> DefinedRoleTypes
+        public IEnumerable<RoleType> DefinedRoleTypes
         {
             get
             {
@@ -154,7 +154,7 @@ namespace Allors.Meta
             }
         }
 
-        public IEnumerable<IMethodType> DefinedMethodTypes
+        public IEnumerable<MethodType> DefinedMethodTypes
         {
             get
             {
@@ -200,7 +200,7 @@ namespace Allors.Meta
         /// <paramref name="obj"/> is not the same type as this instance. </exception>
         public int CompareTo(object obj)
         {
-            var that = obj as IObjectType;
+            var that = obj as Domain;
             if (that != null)
             {
                 return string.CompareOrdinal(this.Name, that.Name);

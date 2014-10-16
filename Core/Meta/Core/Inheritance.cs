@@ -24,7 +24,7 @@ namespace Allors.Meta
     using System;
     using System.Linq;
 
-    public sealed partial class Inheritance : DomainObject, IInheritance
+    public sealed partial class Inheritance : DomainObject
     {
         private Composite subtype;
 

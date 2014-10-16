@@ -48,7 +48,7 @@
     <Compile Include="Core\ClassBuilder.cs" />
     <Compile Include="Core\ClassBuilder.v.cs" />
     <Compile Include="Core\Domain.cs" />
-    <Compile Include="Core\DomainDefinedObject.cs" />
+    <Compile Include="Core\DomainObject.cs" />
     <Compile Include="Core\Composite.cs" />
     <Compile Include="Core\LazySet.cs" />
     <Compile Include="Core\PropertyType.cs" />

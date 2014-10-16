@@ -65,8 +65,8 @@
     <Compile Include="..\..\Core\Meta\Core\Domain.cs">
       <Link>Core\Domain.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\DomainDefinedObject.cs">
-      <Link>Core\DomainDefinedObject.cs</Link>
+    <Compile Include="..\..\Core\Meta\Core\DomainObject.cs">
+      <Link>Core\DomainObject.cs</Link>
     </Compile>
     <Compile Include="..\..\Core\Meta\Core\Generation\Generate.cs">
       <Link>Core\Generation\Generate.cs</Link>

@@ -43,7 +43,7 @@ namespace Allors.Adapters.Database.Sql
                 }
                 else
                 {
-                    throw new Exception("Role Object Type " + roleType.ObjectType.Name + " doesn't support enumerations.");
+                    throw new Exception("Role Object Type " + roleType.ObjectType.SingularName + " doesn't support enumerations.");
                 }
             }
             else

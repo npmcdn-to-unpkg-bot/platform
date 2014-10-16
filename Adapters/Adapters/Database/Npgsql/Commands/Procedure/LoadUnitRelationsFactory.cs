@@ -57,7 +57,7 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Text
 
             if (!sqlByRoleType.ContainsKey(roleType))
             {
-                var sql = Schema.AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularPropertyName;
+                var sql = Schema.AllorsPrefix + "SR_" + objectType.SingularName + "_" + roleType.SingularPropertyName;
                 sqlByRoleType[roleType] = sql;
             }
 

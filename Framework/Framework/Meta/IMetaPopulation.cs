@@ -26,10 +26,6 @@ namespace Allors.Meta
 
     public interface IMetaPopulation
     {
-        IValidationLog Validate();
-
-        void Lock();
-
         IEnumerable<IComposite> Composites { get; }
 
         IEnumerable<IClass> Classes { get; }
@@ -39,5 +35,9 @@ namespace Allors.Meta
         bool IsValid { get; }
 
         IMetaObject Find(Guid metaObjectId);
+
+        IValidationLog Validate();
+
+        void Lock();
     }
 }

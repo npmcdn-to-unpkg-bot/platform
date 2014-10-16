@@ -36,19 +36,19 @@ namespace Allors.Adapters.Database.Sql
 
         private readonly Dictionary<string, SchemaColumn> columnsByName;
 
-        public SchemaTable(Schema schema, string name, SchemaTableKind kind, IObjectType objectType) 
-            : this(schema, name, kind)
+        public SchemaTable(Schema schema, SchemaTableKind kind, IObjectType objectType)
+            : this(schema, kind, objectType.SingularName)
         {
             this.ObjectType = objectType;
         }
 
-        public SchemaTable(Schema schema, string name, SchemaTableKind kind, IRelationType relationType)
-            : this(schema, name, kind)
+        public SchemaTable(Schema schema, SchemaTableKind kind, IRelationType relationType)
+            : this(schema, kind, relationType.AssociationType.SingularName + relationType.RoleType.SingularName)
         {
             this.RelationType = relationType;
         }
 
-        public SchemaTable(Schema schema, string name, SchemaTableKind kind)
+        public SchemaTable(Schema schema, SchemaTableKind kind, string name)
         {
             this.Schema = schema;
             this.Name = name.ToLowerInvariant();

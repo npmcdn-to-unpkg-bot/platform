@@ -22,7 +22,7 @@ namespace Allors.Meta
 {
     using System;
 
-    public abstract partial class PropertyType : DomainObject, IPropertyType
+    public abstract partial class PropertyType : DomainObject
     {
         protected PropertyType(Domain domain, Guid id)
             : base(domain, id)

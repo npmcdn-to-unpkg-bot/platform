@@ -50,7 +50,7 @@ namespace Allors.Adapters.Database.Sql
             }
             else
             {
-                statement.Append(" " + this.association.Name + "_A." + schema.ObjectId + " = " + this.allorsObject.Strategy.ObjectId);
+                statement.Append(" " + this.association.SingularName + "_A." + schema.ObjectId + " = " + this.allorsObject.Strategy.ObjectId);
             }
 
             return this.Include;

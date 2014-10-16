@@ -29,7 +29,6 @@ namespace Allors.Meta
     /// </summary>
     public interface IRelationType : IDomainObject, IComparable
     {
-        string Name { get; }
 
         IRoleType RoleType { get; }
 
