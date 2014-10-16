@@ -1,304 +1,146 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="Allors.Meta.IDomain" Collapsed="true">
-    <Position X="0.75" Y="2.25" Width="1.5" />
-    <Compartments>
-      <Compartment Name="Methods" Collapsed="true" />
-    </Compartments>
+  <Interface Name="Allors.Meta.IAssociationType">
+    <Position X="9.25" Y="8.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BAIxBYBAAACCBAREAACAUAQIEAAEAAUAAYiFAAkCAAI=</HashCode>
+      <HashCode>AAIAiAAAAAAAAAIAAEAAAAQAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Meta\IAssociationType.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ObjectType" />
+    </ShowAsAssociation>
+  </Interface>
+  <Interface Name="Allors.Meta.IClass">
+    <Position X="3.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Meta\IClass.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Allors.Meta.IComposite">
+    <Position X="4.5" Y="7" Width="1.5" />
+    <Members>
+      <Method Name="ContainsAssociationType" Hidden="true" />
+      <Method Name="ContainsLeafClass" Hidden="true" />
+      <Method Name="ContainsRoleType" Hidden="true" />
+      <Method Name="ContainsSupertype" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAIABgAAAAEAAAAgIAAAAAQAAAEAAAAAAABAAAABAAA=</HashCode>
+      <FileName>Meta\IComposite.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Allors.Meta.IDomain">
+    <Position X="2" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Meta\IDomain.cs</FileName>
     </TypeIdentifier>
-    <ShowAsCollectionAssociation>
-      <Property Name="DirectSuperdomains" />
-    </ShowAsCollectionAssociation>
-    <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="Allors.Meta.IMetaObject">
-    <Position X="3.5" Y="0.5" Width="1.5" />
-    <Members>
-      <Field Name="id" Hidden="true" />
-      <Property Name="IdAsNumberString" Hidden="true" />
-      <Property Name="IdAsString" Hidden="true" />
-      <Method Name="IdComparer" Hidden="true" />
-      <Method Name="IMetaObject" Hidden="true" />
-      <Method Name="Validate" Hidden="true" />
-      <Property Name="ValidationName" Hidden="true" />
-    </Members>
-    <Compartments>
-      <Compartment Name="Methods" Collapsed="true" />
-    </Compartments>
+  </Interface>
+  <Interface Name="Allors.Meta.IDomainObject">
+    <Position X="6" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAACAAAAAAACAAACAAAAAAAAAAAAAAEBBAgA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Meta\IDomainObject.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Allors.Meta.IInheritance">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Meta\IInheritance.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Allors.Meta.IInterface">
+    <Position X="5.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Meta\IInterface.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Allors.Meta.IMetaObject">
+    <Position X="4.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAABAAAA=</HashCode>
       <FileName>Meta\IMetaObject.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="MetaPopulation" />
     </ShowAsAssociation>
-  </Class>
-  <Class Name="Allors.Meta.IClass" Collapsed="true">
-    <Position X="2.5" Y="7.5" Width="1.5" />
-    <Compartments>
-      <Compartment Name="Methods" Collapsed="true" />
-    </Compartments>
-    <TypeIdentifier>
-      <HashCode>AAAABgAAAAUAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Meta\IClass.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Allors.Meta.IComposite" Collapsed="true">
-    <Position X="3.75" Y="6" Width="1.5" />
-    <Compartments>
-      <Compartment Name="Methods" Collapsed="true" />
-      <Compartment Name="Fields" Collapsed="true" />
-    </Compartments>
-    <TypeIdentifier>
-      <HashCode>AgJAhgAAAAEEAAAgKSABBIACwQkAEABAARBAAAABAEE=</HashCode>
-      <FileName>Meta\IComposite.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Allors.Meta.IInterface" Collapsed="true">
-    <Position X="4.75" Y="7.5" Width="1.5" />
-    <Compartments>
-      <Compartment Name="Properties" Collapsed="true" />
-      <Compartment Name="Methods" Collapsed="true" />
-      <Compartment Name="Fields" Collapsed="true" />
-    </Compartments>
-    <TypeIdentifier>
-      <HashCode>IAAAFgEAAEEAAAAAJAAAAAAAQAAAAEAAAAKIFAIAAAE=</HashCode>
-      <FileName>Meta\IInterface.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Allors.Meta.IInheritance" Collapsed="true">
-    <Position X="5.75" Y="4" Width="1.5" />
+  </Interface>
+  <Interface Name="Allors.Meta.IMetaPopulation">
+    <Position X="0.5" Y="0.5" Width="1.5" />
     <Members>
-      <Method Name="IInheritance" Hidden="true" />
-      <Field Name="subtype" Hidden="true" />
-      <Field Name="supertype" Hidden="true" />
-      <Method Name="ToString" Hidden="true" />
+      <Method Name="Find" Hidden="true" />
+      <Method Name="Lock" Hidden="true" />
       <Method Name="Validate" Hidden="true" />
-      <Property Name="ValidationName" Hidden="true" />
-    </Members>
-    <Compartments>
-      <Compartment Name="Methods" Collapsed="true" />
-    </Compartments>
-    <AssociationLine Name="Subtype" Type="Allors.Meta.IComposite" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="5.75" Y="4.312" />
-        <Point X="5.5" Y="4.312" />
-        <Point X="5.5" Y="6.346" />
-        <Point X="5.25" Y="6.346" />
-      </Path>
-    </AssociationLine>
-    <TypeIdentifier>
-      <HashCode>ABAAAAAAAACAAAAEAACAAAAAAAAAAAAAEAAAABAQAAA=</HashCode>
-      <FileName>Meta\IInheritance.cs</FileName>
-    </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="Subtype" />
-      <Property Name="Supertype" />
-    </ShowAsAssociation>
-  </Class>
-  <Class Name="Allors.Meta.IObjectType">
-    <Position X="2.75" Y="4" Width="1.5" />
-    <Members>
-      <Method Name="CompareTo" Hidden="true" />
-      <Method Name="IObjectType" Hidden="true" />
-      <Property Name="IsClass" Hidden="true" />
-      <Property Name="IsComposite" Hidden="true" />
-      <Property Name="IsInterface" Hidden="true" />
-      <Property Name="IsUnit" Hidden="true" />
-      <Property Name="Name" Hidden="true" />
-      <Field Name="pluralName" Hidden="true" />
-      <Field Name="singularName" Hidden="true" />
-      <Method Name="ToString" Hidden="true" />
-      <Method Name="Validate" Hidden="true" />
-      <Property Name="ValidationName" Hidden="true" />
-    </Members>
-    <Compartments>
-      <Compartment Name="Methods" Collapsed="true" />
-    </Compartments>
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAgCAAAYEAACAAAQAACKAAAACAAAAAUAAAAA=</HashCode>
-      <FileName>Meta\IObjectType.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="Allors.Meta.IAssociationType">
-    <Position X="9" Y="7" Width="1.5" />
-    <Members>
-      <Method Name="CompareTo" Hidden="true" />
-      <Method Name="DeriveMultiplicity" Hidden="true" />
-      <Property Name="DisplayName" Hidden="true" />
-      <Property Name="FullName" Hidden="true" />
-      <Method Name="Get" Hidden="true" />
-      <Method Name="GetObjectType" Hidden="true" />
-      <Method Name="IAssociationType" Hidden="true" />
-      <Field Name="isMany" Hidden="true" />
-      <Property Name="IsOne" Hidden="true" />
-      <Property Name="Name" Hidden="true" />
-      <Field Name="objectType" Hidden="true" />
-      <Property Name="PluralFullName" Hidden="true" />
-      <Property Name="PluralName" Hidden="true" />
-      <Property Name="PluralPropertyName" Hidden="true" />
-      <Property Name="PropertyName" Hidden="true" />
-      <Field Name="relationType" Hidden="true" />
-      <Property Name="RelationType" Hidden="true" />
-      <Property Name="RoleType" Hidden="true" />
-      <Property Name="SingularFullName" Hidden="true" />
-      <Property Name="SingularName" Hidden="true" />
-      <Property Name="SingularPropertyName" Hidden="true" />
-      <Method Name="ToString" Hidden="true" />
-      <Method Name="Validate" Hidden="true" />
-      <Property Name="ValidationName" Hidden="true" />
-      <Field Name="Where" Hidden="true" />
-    </Members>
-    <Compartments>
-      <Compartment Name="Methods" Collapsed="true" />
-    </Compartments>
-    <TypeIdentifier>
-      <HashCode>AAIGmACAAACAQIZGAECAAAQAAAEAAAASAJIAAABAAAg=</HashCode>
-      <FileName>Meta\IAssociationType.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="Allors.Meta.IRoleType">
-    <Position X="10.75" Y="7" Width="2" />
-    <Members>
-      <Field Name="assignedPluralName" Hidden="true" />
-      <Field Name="assignedSingularName" Hidden="true" />
-      <Property Name="AssociationType" Hidden="true" />
-      <Method Name="CompareTo" Hidden="true" />
-      <Field Name="derivedPluralPropertyName" Hidden="true" />
-      <Field Name="derivedSingularPropertyName" Hidden="true" />
-      <Method Name="DeriveMultiplicity" Hidden="true" />
-      <Method Name="DerivePluralPropertyName" Hidden="true" />
-      <Method Name="DeriveScaleAndSize" Hidden="true" />
-      <Method Name="DeriveSingularPropertyName" Hidden="true" />
-      <Property Name="DisplayName" Hidden="true" />
-      <Property Name="FullName" Hidden="true" />
-      <Method Name="Get" Hidden="true" />
-      <Method Name="GetObjectType" Hidden="true" />
-      <Method Name="IdComparer" Hidden="true" />
-      <Method Name="IRoleType" Hidden="true" />
-      <Field Name="isMany" Hidden="true" />
-      <Field Name="MaximumSize" Hidden="true" />
-      <Property Name="Name" Hidden="true" />
-      <Field Name="objectType" Hidden="true" />
-      <Property Name="PluralFullName" Hidden="true" />
-      <Property Name="PluralName" Hidden="true" />
-      <Property Name="PluralPropertyName" Hidden="true" />
-      <Field Name="precision" Hidden="true" />
-      <Property Name="PropertyName" Hidden="true" />
-      <Field Name="relationType" Hidden="true" />
-      <Property Name="RelationType" Hidden="true" />
-      <Field Name="scale" Hidden="true" />
-      <Method Name="Set" Hidden="true" />
-      <Property Name="SingularFullName" Hidden="true" />
-      <Property Name="SingularName" Hidden="true" />
-      <Property Name="SingularPropertyName" Hidden="true" />
-      <Field Name="size" Hidden="true" />
-      <Method Name="ToString" Hidden="true" />
-      <Method Name="Validate" Hidden="true" />
-      <Property Name="ValidationName" Hidden="true" />
-    </Members>
-    <Compartments>
-      <Compartment Name="Methods" Collapsed="true" />
-    </Compartments>
-    <TypeIdentifier>
-      <HashCode>AAIGmACCAAGgxIZGAMLAAAQCgAAQAIASAJIQAEDAEAg=</HashCode>
-      <FileName>Meta\IRoleType.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="Allors.Meta.IMethodType" Collapsed="true">
-    <Position X="11.75" Y="5.5" Width="1.5" />
-    <Compartments>
-      <Compartment Name="Properties" Collapsed="true" />
-      <Compartment Name="Methods" Collapsed="true" />
-    </Compartments>
-    <TypeIdentifier>
-      <HashCode>AAAAEACAAACAAIAAAACAAAQAAAAEAAAAAIAAAAAAAAA=</HashCode>
-      <FileName>Meta\IMethodType.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="Allors.Meta.IRelationType">
-    <Position X="8" Y="4" Width="1.5" />
-    <Members>
-      <Field Name="associationType" Hidden="true" />
-      <Method Name="CompareTo" Hidden="true" />
-      <Property Name="ExistExclusiveLeafClasses" Hidden="true" />
-      <Method Name="IRelationType" Hidden="true" />
-      <Field Name="isDerived" Hidden="true" />
-      <Field Name="isIndexed" Hidden="true" />
-      <Property Name="IsManyToMany" Hidden="true" />
-      <Property Name="IsManyToOne" Hidden="true" />
-      <Property Name="IsOneToMany" Hidden="true" />
-      <Property Name="IsOneToOne" Hidden="true" />
-      <Property Name="Name" Hidden="true" />
-      <Property Name="ReverseName" Hidden="true" />
-      <Field Name="roleType" Hidden="true" />
-      <Method Name="ToString" Hidden="true" />
-      <Method Name="Validate" Hidden="true" />
-      <Property Name="ValidationName" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AAIAAAAAAACAACQEAKGABAQggAAQABAAEAIAAAACAAA=</HashCode>
-      <FileName>Meta\IRelationType.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="Allors.Meta.IUnit">
-    <Position X="1" Y="6" Width="1.5" />
-    <Members>
-      <Property Name="IsBinary" Hidden="true" />
-      <Property Name="IsBoolean" Hidden="true" />
-      <Property Name="IsDateTime" Hidden="true" />
-      <Property Name="IsDecimal" Hidden="true" />
-      <Property Name="IsDouble" Hidden="true" />
-      <Property Name="IsInteger" Hidden="true" />
-      <Property Name="IsLong" Hidden="true" />
-      <Property Name="IsString" Hidden="true" />
-      <Property Name="IsUnique" Hidden="true" />
-      <Method Name="IUnit" Hidden="true" />
-      <Field Name="unitTag" Hidden="true" />
-    </Members>
-    <TypeIdentifier>
-      <HashCode>AAAIACAAAAAAAABIgAAAQAABAAAAAAAQAAAAAQAACAA=</HashCode>
-      <FileName>Meta\IUnit.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Allors.Meta.IMetaPopulation" Collapsed="true">
-    <Position X="7.25" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AIJQCAAAQAHCBAABqAgAVCgAEAAaAEAAFMRBQAmCBEg=</HashCode>
+      <HashCode>AAAQAAAAAAGCAAAAAAgAACAAAAAIAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Meta\IMetaPopulation.cs</FileName>
     </TypeIdentifier>
-  </Class>
-  <Class Name="Allors.Meta.IDomainDefinedObject" Collapsed="true">
-    <Position X="5.5" Y="2.5" Width="1.75" />
+  </Interface>
+  <Interface Name="Allors.Meta.IMethodType">
+    <Position X="12.25" Y="6.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Meta\IDomainDefinedObject.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Meta\IMethodType.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="DefiningDomain" />
-    </ShowAsAssociation>
-  </Class>
-  <Class Name="Allors.Meta.IPropertyType" Collapsed="true">
-    <Position X="9.75" Y="5.5" Width="1.5" />
+  </Interface>
+  <Interface Name="Allors.Meta.IObjectType">
+    <Position X="3" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACEAAAAAAAAABAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Meta\IPropertyType.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Meta\IObjectType.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
-  <Interface Name="Allors.Meta.IOperandType" Collapsed="true">
-    <Position X="10.5" Y="4" Width="1.5" />
+  </Interface>
+  <Interface Name="Allors.Meta.IOperandType">
+    <Position X="11.25" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Meta\IOperandType.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Allors.Meta.IPropertyType">
+    <Position X="10.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Meta\IPropertyType.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Allors.Meta.IRelationType">
+    <Position X="7.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAACAAAAEAAAQggAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Meta\IRelationType.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="RoleType" />
+      <Property Name="AssociationType" />
+    </ShowAsAssociation>
+  </Interface>
+  <Interface Name="Allors.Meta.IRoleType">
+    <Position X="11.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAiAAAAAAAgAIAAEIAAAQAgAAAAAAQAJAAAAAAEAA=</HashCode>
+      <FileName>Meta\IRoleType.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ObjectType" />
+    </ShowAsAssociation>
+  </Interface>
+  <Interface Name="Allors.Meta.IUnit">
+    <Position X="1" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAQAABAAAAAAAQAAAAAQAAAAA=</HashCode>
+      <FileName>Meta\IUnit.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Allors.Meta.IValidationLog" Collapsed="true">
+    <Position X="19.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Meta\IValidationLog.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Font Name="Segoe UI" Size="9" />

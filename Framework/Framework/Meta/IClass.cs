@@ -21,47 +21,9 @@
 
 namespace Allors.Meta
 {
-    using System;
     using System.Collections.Generic;
 
-    public partial class IClass : IComposite
+    public interface IClass : IComposite
     {
-        private readonly IClass[] leafClasses;
-
-        protected IClass(IDomain domain, Guid id)
-            : base(domain, id)
-        {
-            this.leafClasses = new[] { this };
-            domain.OnClassCreated(this);
-        }
-
-        public override IEnumerable<IClass> LeafClasses
-        {
-            get
-            {
-                return this.leafClasses;
-            }
-        }
-
-        public override bool ExistLeafClasses
-        {
-            get
-            {
-                return true;
-            }
-        }
-
-        public override IClass ExclusiveLeafClass
-        {
-            get
-            {
-                return this;
-            }
-        }
-
-        public override bool ContainsLeafClass(IObjectType objectType)
-        {
-            return this.Equals(objectType);
-        }
     }
 }

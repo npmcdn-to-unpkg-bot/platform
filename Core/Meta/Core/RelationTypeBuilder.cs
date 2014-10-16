@@ -27,8 +27,8 @@ namespace Allors.Meta
         private Guid associationTypeId;
         private Guid roleTypeId;
 
-        private IComposite associationObjectType;
-        private IObjectType roleObjectType;
+        private Composite associationObjectType;
+        private ObjectType roleObjectType;
         private Cardinalities cardinality;
         private bool isDerived;
         private bool isIndexed;
@@ -39,17 +39,17 @@ namespace Allors.Meta
         private int? scale;
         private int? size;
 
-        public RelationTypeBuilder(IDomain domain, Guid id, Guid associationTypeId, Guid roleTypeId)
+        public RelationTypeBuilder(Domain domain, Guid id, Guid associationTypeId, Guid roleTypeId)
             : base(domain, id)
         {
             this.associationTypeId = associationTypeId;
             this.roleTypeId = roleTypeId;
         }
 
-        public RelationTypeBuilder WithObjectTypes(IComposite associationObjectType, IObjectType roleObjectType)
+        public RelationTypeBuilder WithObjectTypes(Composite associationObjectType, ObjectType roleObjectType)
         {
-            this.roleObjectType = roleObjectType;
             this.associationObjectType = associationObjectType;
+            this.roleObjectType = roleObjectType;
             return this;
         }
 

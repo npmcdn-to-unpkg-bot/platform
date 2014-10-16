@@ -43,10 +43,17 @@
   <ItemGroup>
     <Compile Include="Core\AssociationType.cs" />
     <Compile Include="Core\Builder.cs" />
+    <Compile Include="Core\Cardinalities.cs" />
     <Compile Include="Core\Class.cs" />
     <Compile Include="Core\ClassBuilder.cs" />
     <Compile Include="Core\ClassBuilder.v.cs" />
     <Compile Include="Core\Domain.cs" />
+    <Compile Include="Core\DomainDefinedObject.cs" />
+    <Compile Include="Core\Composite.cs" />
+    <Compile Include="Core\LazySet.cs" />
+    <Compile Include="Core\PropertyType.cs" />
+    <Compile Include="Core\ObjectType.cs" />
+    <Compile Include="Core\MetaObject.cs" />
     <Compile Include="Core\Inheritance.cs" />
     <Compile Include="Core\InheritanceBuilder.cs" />
     <Compile Include="Core\InheritanceBuilder.v.cs" />
@@ -64,6 +71,9 @@
     <Compile Include="Core\Unit.cs" />
     <Compile Include="Core\UnitBuilder.cs" />
     <Compile Include="Core\UnitBuilder.v.cs" />
+    <Compile Include="Core\ValidationError.cs" />
+    <Compile Include="Core\ValidationKind.cs" />
+    <Compile Include="Core\ValidationLog.cs" />
     <Compile Include="Test\Meta\Repository.cs" />
     <Compile Include="Test\Meta\Repository.v.cs" />
     <Compile Include="Core\Repository.cs" />

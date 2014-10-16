@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="Inheritance.cs" company="Allors bvba">
+// <copyright file="MetaObjectComparer.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -16,18 +16,24 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the Inheritance type.</summary>
+// <summary>Defines the Serialization type.</summary>
 //-------------------------------------------------------------------------------------------------
-
-namespace Allors.Meta
+namespace Allors.Adapters
 {
-    using System;
-    using System.Linq;
+    using System.Xml;
+
+    using Allors.Meta;
 
     /// <summary>
-    /// Defines a subtype/supertype relation between two <see cref="IObjectType"/>s.
+    /// Xml tag definitions and utility methods for Xml Serialization.
+    /// An <see cref="IDatabase"/> is serialized to a <see cref="XmlDocument"/> 
+    /// according to the Allors Serialization Xml Schema.
     /// </summary>
-    public interface IInheritance : IDomainObject
+    public static class MetaObjectComparer
     {
+        public static int ById(IMetaObject x, IMetaObject y)
+        {
+            return x.Id.CompareTo(y.Id);
+        }
     }
 }

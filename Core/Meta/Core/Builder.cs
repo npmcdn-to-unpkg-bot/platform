@@ -24,13 +24,13 @@ namespace Allors.Meta
 
     public abstract partial class Builder<T>
     {
-        protected Builder(IDomain domain, Guid id)
+        protected Builder(Domain domain, Guid id)
         {
             this.Domain = domain;
             this.Id = id;
         }
 
-        protected IDomain Domain { get; private set; }
+        protected Domain Domain { get; private set; }
 
         protected Guid Id { get; private set; }
         

@@ -24,15 +24,15 @@ namespace Allors.Meta
 
     public partial class MethodTypeBuilder : Builder<MethodType>
     {
-        private IComposite objectType;
+        private Composite objectType;
         private string name;
 
-        public MethodTypeBuilder(IDomain domain, Guid id)
+        public MethodTypeBuilder(Domain domain, Guid id)
             : base(domain, id)
         {
         }
 
-        public MethodTypeBuilder WithObjectType(IComposite value)
+        public MethodTypeBuilder WithObjectType(Composite value)
         {
             this.objectType = value;
             return this;

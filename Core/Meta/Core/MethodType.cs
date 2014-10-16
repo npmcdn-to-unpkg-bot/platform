@@ -22,11 +22,97 @@ namespace Allors.Meta
 {
     using System;
 
-    public partial class MethodType : IMethodType
+    public sealed partial class MethodType : DomainObject, IMethodType
     {
-        protected internal MethodType(IDomain domain, Guid id)
+        private string name;
+
+        private Composite objectType;
+
+        internal MethodType(Domain domain, Guid id)
             : base(domain, id)
         {
+            domain.OnMethodTypeCreated(this);
+        }
+
+        public string Name
+        {
+            get
+            {
+                return this.name;
+            }
+
+            set
+            {
+                this.MetaPopulation.AssertUnlocked();
+                this.name = value;
+                this.MetaPopulation.Stale();
+            }
+        }
+
+        public string FullName
+        {
+            get
+            {
+                return this.ObjectType != null ? this.ObjectType.Name + this.name : this.Name;
+            }
+        }
+
+        public Composite ObjectType
+        {
+            get
+            {
+                return this.objectType;
+            }
+
+            set
+            {
+                this.MetaPopulation.AssertUnlocked();
+                this.objectType = value;
+                this.MetaPopulation.Stale();
+            }
+        }
+
+        /// <summary>
+        /// Gets the display name.
+        /// </summary>
+        public string DisplayName
+        {
+            get
+            {
+                return this.name;
+            }
+        }
+
+        /// <summary>
+        /// Gets the validation name.
+        /// </summary>
+        /// <value>The validation name.</value>
+        protected internal override string ValidationName
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(this.name))
+                {
+                    return "method type " + this.name;
+                }
+
+                return "unknown method type";
+            }
+        }
+
+        /// <summary>
+        /// Validates the instance.
+        /// </summary>
+        /// <param name="validationLog">The validation.</param>
+        protected internal override void Validate(ValidationLog validationLog)
+        {
+            base.Validate(validationLog);
+
+            if (string.IsNullOrEmpty(this.name))
+            {
+                var message = this.ValidationName + " has no name";
+                validationLog.AddError(message, this, ValidationKind.Required, "MethodType.Name");
+            }
         }
     }
 }

@@ -26,7 +26,7 @@ namespace Allors.Meta
     /// <summary>
     /// The report of the validation.
     /// </summary>
-    public class ValidationLog
+    public class ValidationLog : IValidationLog
     {
         /// <summary>
         /// The list of errors.

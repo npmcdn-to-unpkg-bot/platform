@@ -22,7 +22,7 @@ namespace Allors.Meta
 {
     public partial class UnitBuilder
     {
-        public override IUnit Build()
+        public override Unit Build()
         {
             var instance = new Unit(this.Domain, this.Id);
 

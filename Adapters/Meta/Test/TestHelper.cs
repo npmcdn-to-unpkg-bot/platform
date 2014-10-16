@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="Inheritance.cs" company="Allors bvba">
+// <copyright file="Repository.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -16,18 +16,17 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the Inheritance type.</summary>
 //-------------------------------------------------------------------------------------------------
 
 namespace Allors.Meta
 {
     using System;
-    using System.Linq;
 
-    /// <summary>
-    /// Defines a subtype/supertype relation between two <see cref="IObjectType"/>s.
-    /// </summary>
-    public interface IInheritance : IDomainObject
+    public static class TestHelper
     {
+        public static Domain CreateDomain(MetaPopulation metaPopulation, string name = "MyDomain")
+        {
+            return new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = name};
+        }
     }
 }

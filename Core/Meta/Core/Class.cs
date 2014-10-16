@@ -22,12 +22,46 @@
 namespace Allors.Meta
 {
     using System;
+    using System.Collections.Generic;
 
-    public partial class Class : IClass
+    public sealed partial class Class : Composite, IClass
     {
-        public Class(IDomain domain, Guid id)
+        private readonly Class[] leafClasses;
+
+        internal Class(Domain domain, Guid id)
             : base(domain, id)
         {
+            this.leafClasses = new[] { this };
+            domain.OnClassCreated(this);
+        }
+
+        public override IEnumerable<Class> LeafClasses
+        {
+            get
+            {
+                return this.leafClasses;
+            }
+        }
+
+        public override bool ExistLeafClasses
+        {
+            get
+            {
+                return true;
+            }
+        }
+
+        public override Class ExclusiveLeafClass
+        {
+            get
+            {
+                return this;
+            }
+        }
+
+        public override bool ContainsLeafClass(IClass objectType)
+        {
+            return this.Equals(objectType);
         }
     }
 }

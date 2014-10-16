@@ -55,14 +55,12 @@
     <Compile Include="IWorkspaceFactory.cs" />
     <Compile Include="IWorkspaceSession.cs" />
     <Compile Include="Meta\IAssociationType.cs" />
-    <Compile Include="Meta\Cardinalities.cs" />
     <Compile Include="Meta\IClass.cs" />
     <Compile Include="Meta\IComposite.cs" />
     <Compile Include="Meta\IDomain.cs" />
-    <Compile Include="Meta\IDomainDefinedObject.cs" />
+    <Compile Include="Meta\IDomainObject.cs" />
     <Compile Include="Meta\IInheritance.cs" />
     <Compile Include="Meta\IInterface.cs" />
-    <Compile Include="Meta\LazySet.cs" />
     <Compile Include="Meta\IMetaObject.cs" />
     <Compile Include="Meta\IMetaPopulation.cs" />
     <Compile Include="Meta\IMethodType.cs" />
@@ -72,11 +70,9 @@
     <Compile Include="Meta\IRelationType.cs" />
     <Compile Include="Meta\IRoleType.cs" />
     <Compile Include="Meta\IUnit.cs" />
+    <Compile Include="Meta\IValidationLog.cs" />
     <Compile Include="Meta\UnitIds.cs" />
     <Compile Include="Meta\UnitTags.cs" />
-    <Compile Include="Meta\ValidationError.cs" />
-    <Compile Include="Meta\ValidationKind.cs" />
-    <Compile Include="Meta\ValidationLog.cs" />
     <Compile Include="ObjectFactory.cs" />
     <Compile Include="ObjectId.cs" />
     <Compile Include="ObjectIdInteger.cs" />
@@ -93,7 +89,6 @@
     <Compile Include="SortDirection.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Meta\Operands.cd" />
     <None Include="Meta\Overview.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -334,7 +334,7 @@ namespace Allors.Adapters.Database.Sql
             if (!this.sortedUnitRolesByObjectType.TryGetValue(objectType, out sortedUnitRoles))
             {
                 var sortedUnitRoleList = new List<IRoleType>(objectType.RoleTypes.Where(roleType => roleType.ObjectType is IUnit));
-                sortedUnitRoleList.Sort(IRoleType.IdComparer);
+                sortedUnitRoleList.Sort(MetaObjectComparer.ById);
                 sortedUnitRoles = sortedUnitRoleList.ToArray();
                 this.sortedUnitRolesByObjectType[objectType] = sortedUnitRoles;
             }

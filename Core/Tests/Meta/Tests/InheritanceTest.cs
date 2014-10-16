@@ -56,7 +56,7 @@ namespace Allors.Meta.Static
             Assert.IsTrue(validation.ContainsErrors);
             Assert.AreEqual(i1, validation.Errors[0].Source);
             Assert.AreEqual(1, validation.Errors[0].Members.Length);
-            Assert.AreEqual("Composite.Supertypes", validation.Errors[0].Members[0]);
+            Assert.AreEqual("IComposite.Supertypes", validation.Errors[0].Members[0]);
             Assert.AreEqual(ValidationKind.Cyclic, validation.Errors[0].Kind);
         }
     }

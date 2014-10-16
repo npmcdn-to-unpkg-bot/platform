@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="Inheritance.cs" company="Allors bvba">
+// <copyright file="IDomainObject.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -16,18 +16,12 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the Inheritance type.</summary>
+// <summary>Defines the Domain type.</summary>
 //-------------------------------------------------------------------------------------------------
 
 namespace Allors.Meta
 {
-    using System;
-    using System.Linq;
-
-    /// <summary>
-    /// Defines a subtype/supertype relation between two <see cref="IObjectType"/>s.
-    /// </summary>
-    public interface IInheritance : IDomainObject
+    public interface IDomainObject : IMetaObject
     {
     }
 }

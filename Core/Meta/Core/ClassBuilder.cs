@@ -27,7 +27,7 @@ namespace Allors.Meta
         private string singularName;
         private string pluralName;
 
-        public ClassBuilder(IDomain domain, Guid id)
+        public ClassBuilder(Domain domain, Guid id)
             : base(domain, id)
         {
         }

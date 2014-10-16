@@ -23,92 +23,14 @@ namespace Allors.Meta
     using System;
 
     /// <summary>
-    /// Base class for Meta objects.
+    /// Base interface for Meta objects.
     /// </summary>
-    public abstract partial class IMetaObject
+    public interface IMetaObject
     {
-        private Guid id;
+        Guid Id { get; }
 
-        protected IMetaObject(IMetaPopulation metaPopulation, Guid id)
-        {
-            this.MetaPopulation = metaPopulation;
-            this.Id = id;
-        }
+        string IdAsString { get; }
 
-        public IMetaPopulation MetaPopulation { get; private set; }
-
-        /// <summary>
-        /// Gets the id.
-        /// </summary>
-        /// <value>The meta object id.</value>
-        public Guid Id
-        {
-            get
-            {
-                return this.id;
-            }
-
-            private set
-            {
-                this.MetaPopulation.AssertUnlocked();
-                this.id = value;
-                this.MetaPopulation.Stale();
-            }
-        }
-
-        /// <summary>
-        /// Gets the id as a number only string.
-        /// </summary>
-        /// <value>The id as a number only string.</value>
-        public string IdAsNumberString
-        {
-            get { return this.Id.ToString("N").ToLower(); }
-        }
-
-        /// <summary>
-        /// Gets the id as a string.
-        /// </summary>
-        /// <value>The id as a string.</value>
-        public string IdAsString
-        {
-            get { return this.Id.ToString("D").ToLower(); }
-        }
-
-        /// <summary>
-        /// Gets the validation name.
-        /// </summary>
-        protected internal abstract string ValidationName { get; }
-
-        public static int IdComparer(IMetaObject x, IMetaObject y)
-        {
-            return x.Id.CompareTo(y.Id);
-        }
-
-        /// <summary>
-        /// Validate this object.
-        /// </summary>
-        /// <param name="validationLog">
-        /// The validation log.
-        /// </param>
-        protected internal virtual void Validate(ValidationLog validationLog)
-        {
-            if (this.Id == Guid.Empty)
-            {
-                var message = "id on " + this.ValidationName + " is required";
-                validationLog.AddError(message, this, ValidationKind.Unique, "IMetaObject.Id");
-            }
-            else
-            {
-                if (validationLog.ExistId(this.Id))
-                {
-                    var message = "id " + this.ValidationName + " is already in use";
-                    validationLog.AddError(message, this, ValidationKind.Unique, "IMetaObject.Id");
-                }
-                else
-                {
-                    validationLog.AddId(this.Id);
-                }
-            }
-        }
+        IMetaPopulation MetaPopulation { get; }
     }
 }

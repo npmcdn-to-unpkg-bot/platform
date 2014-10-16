@@ -73,7 +73,7 @@ namespace Allors.Adapters.Database.Sql
         protected void SaveObjects(ManagementSession session)
         {
             var concreteCompositeType = new List<IClass>(this.database.MetaPopulation.Classes);
-            concreteCompositeType.Sort(IMetaObject.IdComparer);
+            concreteCompositeType.Sort(MetaObjectComparer.ById);
             foreach (var type in concreteCompositeType)
             {
                 var atLeastOne = false;
@@ -123,7 +123,7 @@ namespace Allors.Adapters.Database.Sql
             var exclusiveLeafClassesByObjectType = new Dictionary<IObjectType, HashSet<IClass>>();
 
             var relations = new List<IRelationType>(this.database.MetaPopulation.RelationTypes);
-            relations.Sort(IMetaObject.IdComparer);
+            relations.Sort(MetaObjectComparer.ById);
 
             foreach (var relation in relations)
             {

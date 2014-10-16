@@ -480,13 +480,13 @@ namespace Allors.Meta.Static
                 Assert.AreEqual(1, error.Members.Length);
                 var member = error.Members[0];
 
-                Assert.IsTrue(member.StartsWith("ObjectType."));
+                Assert.IsTrue(member.StartsWith("IObjectType."));
 
-                if (member.Equals("ObjectType.SingularName"))
+                if (member.Equals("IObjectType.SingularName"))
                 {
                     Assert.AreEqual(ValidationKind.Required, error.Kind);
                 }
-                else if (member.Equals("ObjectType.PluralName"))
+                else if (member.Equals("IObjectType.PluralName"))
                 {
                     Assert.AreEqual(ValidationKind.Required, error.Kind);
                 }
@@ -501,7 +501,7 @@ namespace Allors.Meta.Static
             Assert.AreEqual(1, validationReport.Errors.Length);
             Assert.AreEqual(type, validationReport.Errors[0].Source);
             Assert.AreEqual(1, validationReport.Errors[0].Members.Length);
-            Assert.AreEqual("ObjectType.SingularName", validationReport.Errors[0].Members[0]);
+            Assert.AreEqual("IObjectType.SingularName", validationReport.Errors[0].Members[0]);
             Assert.AreEqual(ValidationKind.Required, validationReport.Errors[0].Kind);
 
             type.SingularName = "_a";
@@ -511,7 +511,7 @@ namespace Allors.Meta.Static
             Assert.AreEqual(1, validationReport.Errors.Length);
             Assert.AreEqual(type, validationReport.Errors[0].Source);
             Assert.AreEqual(1, validationReport.Errors[0].Members.Length);
-            Assert.AreEqual("ObjectType.SingularName", validationReport.Errors[0].Members[0]);
+            Assert.AreEqual("IObjectType.SingularName", validationReport.Errors[0].Members[0]);
             Assert.AreEqual(ValidationKind.Format, validationReport.Errors[0].Kind);
 
             type.SingularName = "a_";
@@ -521,7 +521,7 @@ namespace Allors.Meta.Static
             Assert.AreEqual(1, validationReport.Errors.Length);
             Assert.AreEqual(type, validationReport.Errors[0].Source);
             Assert.AreEqual(1, validationReport.Errors[0].Members.Length);
-            Assert.AreEqual("ObjectType.SingularName", validationReport.Errors[0].Members[0]);
+            Assert.AreEqual("IObjectType.SingularName", validationReport.Errors[0].Members[0]);
             Assert.AreEqual(ValidationKind.Format, validationReport.Errors[0].Kind);
 
             type.SingularName = "11";
@@ -531,7 +531,7 @@ namespace Allors.Meta.Static
             Assert.AreEqual(1, validationReport.Errors.Length);
             Assert.AreEqual(type, validationReport.Errors[0].Source);
             Assert.AreEqual(1, validationReport.Errors[0].Members.Length);
-            Assert.AreEqual("ObjectType.SingularName", validationReport.Errors[0].Members[0]);
+            Assert.AreEqual("IObjectType.SingularName", validationReport.Errors[0].Members[0]);
             Assert.AreEqual(ValidationKind.Format, validationReport.Errors[0].Kind);
 
             type.SingularName = "a1";
@@ -555,7 +555,7 @@ namespace Allors.Meta.Static
             Assert.AreEqual(1, validationReport.Errors.Length);
             Assert.AreEqual(type, validationReport.Errors[0].Source);
             Assert.AreEqual(1, validationReport.Errors[0].Members.Length);
-            Assert.AreEqual("ObjectType.PluralName", validationReport.Errors[0].Members[0]);
+            Assert.AreEqual("IObjectType.PluralName", validationReport.Errors[0].Members[0]);
             Assert.AreEqual(ValidationKind.Required, validationReport.Errors[0].Kind);
 
             type.PluralName = "_a";
@@ -565,7 +565,7 @@ namespace Allors.Meta.Static
             Assert.AreEqual(1, validationReport.Errors.Length);
             Assert.AreEqual(type, validationReport.Errors[0].Source);
             Assert.AreEqual(1, validationReport.Errors[0].Members.Length);
-            Assert.AreEqual("ObjectType.PluralName", validationReport.Errors[0].Members[0]);
+            Assert.AreEqual("IObjectType.PluralName", validationReport.Errors[0].Members[0]);
             Assert.AreEqual(ValidationKind.Format, validationReport.Errors[0].Kind);
 
             type.PluralName = "a_";
@@ -575,7 +575,7 @@ namespace Allors.Meta.Static
             Assert.AreEqual(1, validationReport.Errors.Length);
             Assert.AreEqual(type, validationReport.Errors[0].Source);
             Assert.AreEqual(1, validationReport.Errors[0].Members.Length);
-            Assert.AreEqual("ObjectType.PluralName", validationReport.Errors[0].Members[0]);
+            Assert.AreEqual("IObjectType.PluralName", validationReport.Errors[0].Members[0]);
             Assert.AreEqual(ValidationKind.Format, validationReport.Errors[0].Kind);
 
             type.PluralName = "11";
@@ -585,7 +585,7 @@ namespace Allors.Meta.Static
             Assert.AreEqual(1, validationReport.Errors.Length);
             Assert.AreEqual(type, validationReport.Errors[0].Source);
             Assert.AreEqual(1, validationReport.Errors[0].Members.Length);
-            Assert.AreEqual("ObjectType.PluralName", validationReport.Errors[0].Members[0]);
+            Assert.AreEqual("IObjectType.PluralName", validationReport.Errors[0].Members[0]);
             Assert.AreEqual(ValidationKind.Format, validationReport.Errors[0].Kind);
 
             type.PluralName = "a1";

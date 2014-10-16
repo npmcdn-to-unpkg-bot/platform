@@ -22,37 +22,7 @@ namespace Allors.Meta
 {
     using System;
 
-    public abstract partial class IPropertyType : IDomainDefinedObject, IOperandType
+    public interface IPropertyType : IDomainObject, IOperandType
     {
-        protected IPropertyType(IDomain domain, Guid id)
-            : base(domain, id)
-        {
-        }
-
-        /// <summary>
-        /// Gets the operand name.
-        /// </summary>
-        public abstract string Name { get; }
-
-        public abstract string DisplayName { get; }
-
-        /// <summary>
-        /// Get the value of the property on this object.
-        /// </summary>
-        /// <param name="strategy">
-        /// The strategy.
-        /// </param>
-        /// <returns>
-        /// The operand value.
-        /// </returns>
-        public abstract object Get(IStrategy strategy);
-
-        /// <summary>
-        /// Get the object type.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="IObjectType"/>.
-        /// </returns>
-        public abstract IObjectType GetObjectType();
     }
 }

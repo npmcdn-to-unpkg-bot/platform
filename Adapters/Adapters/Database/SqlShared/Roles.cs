@@ -369,7 +369,7 @@ namespace Allors.Adapters.Database.Sql
 
             if (unitRoles != null)
             {
-                unitRoles.Sort(IRoleType.IdComparer);
+                unitRoles.Sort(MetaObjectComparer.ById);
                 flush.SetUnitRoles(this, unitRoles);
             }
             else if (unitRole != null)

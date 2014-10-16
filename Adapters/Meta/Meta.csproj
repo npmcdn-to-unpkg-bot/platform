@@ -47,6 +47,9 @@
     <Compile Include="..\..\Core\Meta\Core\Builder.cs">
       <Link>Core\Builder.cs</Link>
     </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Cardinalities.cs">
+      <Link>Core\Cardinalities.cs</Link>
+    </Compile>
     <Compile Include="..\..\Core\Meta\Core\Class.cs">
       <Link>Core\Class.cs</Link>
     </Compile>
@@ -56,8 +59,14 @@
     <Compile Include="..\..\Core\Meta\Core\ClassBuilder.v.cs">
       <Link>Core\ClassBuilder.v.cs</Link>
     </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Composite.cs">
+      <Link>Core\Composite.cs</Link>
+    </Compile>
     <Compile Include="..\..\Core\Meta\Core\Domain.cs">
       <Link>Core\Domain.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\DomainDefinedObject.cs">
+      <Link>Core\DomainDefinedObject.cs</Link>
     </Compile>
     <Compile Include="..\..\Core\Meta\Core\Generation\Generate.cs">
       <Link>Core\Generation\Generate.cs</Link>
@@ -98,6 +107,12 @@
     <Compile Include="..\..\Core\Meta\Core\InterfaceBuilder.v.cs">
       <Link>Core\InterfaceBuilder.v.cs</Link>
     </Compile>
+    <Compile Include="..\..\Core\Meta\Core\LazySet.cs">
+      <Link>Core\LazySet.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\MetaObject.cs">
+      <Link>Core\MetaObject.cs</Link>
+    </Compile>
     <Compile Include="..\..\Core\Meta\Core\MetaPopulation.cs">
       <Link>Core\MetaPopulation.cs</Link>
     </Compile>
@@ -109,6 +124,12 @@
     </Compile>
     <Compile Include="..\..\Core\Meta\Core\MethodTypeBuilder.v.cs">
       <Link>Core\MethodTypeBuilder.v.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\ObjectType.cs">
+      <Link>Core\ObjectType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\PropertyType.cs">
+      <Link>Core\PropertyType.cs</Link>
     </Compile>
     <Compile Include="..\..\Core\Meta\Core\RelationType.cs">
       <Link>Core\RelationType.cs</Link>
@@ -134,8 +155,18 @@
     <Compile Include="..\..\Core\Meta\Core\UnitBuilder.v.cs">
       <Link>Core\UnitBuilder.v.cs</Link>
     </Compile>
-    <Compile Include="Test\Meta\Repository.cs" />
-    <Compile Include="Test\Meta\Repository.v.cs" />
+    <Compile Include="..\..\Core\Meta\Core\ValidationError.cs">
+      <Link>Core\ValidationError.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\ValidationKind.cs">
+      <Link>Core\ValidationKind.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\ValidationLog.cs">
+      <Link>Core\ValidationLog.cs</Link>
+    </Compile>
+    <Compile Include="Test\TestHelper.cs" />
+    <Compile Include="Test\Repository.cs" />
+    <Compile Include="Test\Repository.v.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
