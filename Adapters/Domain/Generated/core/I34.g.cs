@@ -157,35 +157,35 @@ namespace Allors.Domain
 
 		public global::Allors.Meta.Interface ObjectType = global::Allors.Meta.Interfaces.I34;
 
-		public global::Allors.Meta.IRoleType I34AllorsDecimal 
+		public global::Allors.Meta.RoleType I34AllorsDecimal 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.I34AllorsDecimal;
 			}
 		} 
-		public global::Allors.Meta.IRoleType I34AllorsBoolean 
+		public global::Allors.Meta.RoleType I34AllorsBoolean 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.I34AllorsBoolean;
 			}
 		} 
-		public global::Allors.Meta.IRoleType I34AllorsDouble 
+		public global::Allors.Meta.RoleType I34AllorsDouble 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.I34AllorsDouble;
 			}
 		} 
-		public global::Allors.Meta.IRoleType I34AllorsInteger 
+		public global::Allors.Meta.RoleType I34AllorsInteger 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.I34AllorsInteger;
 			}
 		} 
-		public global::Allors.Meta.IRoleType I34AllorsString 
+		public global::Allors.Meta.RoleType I34AllorsString 
 		{
 			get
 			{
@@ -193,56 +193,56 @@ namespace Allors.Domain
 			}
 		} 
 
-		public global::Allors.Meta.IAssociationType I12WhereI34one2many 
+		public global::Allors.Meta.AssociationType I12WhereI34one2many 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.I12I34one2many;
 			}
 		} 
-		public global::Allors.Meta.IAssociationType I12sWhereI34many2one 
+		public global::Allors.Meta.AssociationType I12sWhereI34many2one 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.I12I34many2one;
 			}
 		} 
-		public global::Allors.Meta.IAssociationType I12sWhereI34many2many 
+		public global::Allors.Meta.AssociationType I12sWhereI34many2many 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.I12I34many2many;
 			}
 		} 
-		public global::Allors.Meta.IAssociationType I12WhereI34one2one 
+		public global::Allors.Meta.AssociationType I12WhereI34one2one 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.I12I34one2one;
 			}
 		} 
-		public global::Allors.Meta.IAssociationType I1WhereI34one2many 
+		public global::Allors.Meta.AssociationType I1WhereI34one2many 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.I1I34one2many;
 			}
 		} 
-		public global::Allors.Meta.IAssociationType I1sWhereI34many2one 
+		public global::Allors.Meta.AssociationType I1sWhereI34many2one 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.I1I34many2one;
 			}
 		} 
-		public global::Allors.Meta.IAssociationType I1sWhereI34many2many 
+		public global::Allors.Meta.AssociationType I1sWhereI34many2many 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.I1I34many2many;
 			}
 		} 
-		public global::Allors.Meta.IAssociationType I1WhereI34one2one 
+		public global::Allors.Meta.AssociationType I1WhereI34one2one 
 		{
 			get
 			{

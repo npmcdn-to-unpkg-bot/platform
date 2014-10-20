@@ -204,17 +204,6 @@ namespace Allors.Domain
 		void RemoveS1S2one2one();
 
 
-		global::System.Int64 S1AllorsLong 
-		{
-			get;
-			set;
-		}
-
-		bool ExistS1AllorsLong{get;}
-
-		void RemoveS1AllorsLong();
-
-
 		global::System.DateTime S1AllorsDate 
 		{
 			get;
@@ -340,238 +329,224 @@ namespace Allors.Domain
 
 		public global::Allors.Meta.Interface ObjectType = global::Allors.Meta.Interfaces.S1;
 
-		public global::Allors.Meta.IRoleType S1AllorsDecimal 
+		public global::Allors.Meta.RoleType S1AllorsDecimal 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S1AllorsDecimal;
 			}
 		} 
-		public global::Allors.Meta.IRoleType S1AllorsInteger 
+		public global::Allors.Meta.RoleType S1AllorsInteger 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S1AllorsInteger;
 			}
 		} 
-		public global::Allors.Meta.IRoleType S1AllorsBinary 
+		public global::Allors.Meta.RoleType S1AllorsBinary 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S1AllorsBinary;
 			}
 		} 
-		public global::Allors.Meta.IRoleType S1AllorsUnique 
+		public global::Allors.Meta.RoleType S1AllorsUnique 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S1AllorsUnique;
 			}
 		} 
-		public global::Allors.Meta.IRoleType S1StringLarge 
+		public global::Allors.Meta.RoleType S1StringLarge 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S1StringLarge;
 			}
 		} 
-		public global::Allors.Meta.IRoleType S1S2many2one 
+		public global::Allors.Meta.RoleType S1S2many2one 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S1S2many2one;
 			}
 		} 
-		public global::Allors.Meta.IRoleType S1S2one2many 
+		public global::Allors.Meta.RoleType S1S2one2many 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S1S2one2many;
 			}
 		} 
-		public global::Allors.Meta.IRoleType S1AllorsDouble 
+		public global::Allors.Meta.RoleType S1AllorsDouble 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S1AllorsDouble;
 			}
 		} 
-		public global::Allors.Meta.IRoleType S1AllorsString 
+		public global::Allors.Meta.RoleType S1AllorsString 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S1AllorsString;
 			}
 		} 
-		public global::Allors.Meta.IRoleType S1C1many2one 
+		public global::Allors.Meta.RoleType S1C1many2one 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S1C1many2one;
 			}
 		} 
-		public global::Allors.Meta.IRoleType S1C1one2one 
+		public global::Allors.Meta.RoleType S1C1one2one 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S1C1one2one;
 			}
 		} 
-		public global::Allors.Meta.IRoleType S1AllorsBoolean 
+		public global::Allors.Meta.RoleType S1AllorsBoolean 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S1AllorsBoolean;
 			}
 		} 
-		public global::Allors.Meta.IRoleType S1C1many2many 
+		public global::Allors.Meta.RoleType S1C1many2many 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S1C1many2many;
 			}
 		} 
-		public global::Allors.Meta.IRoleType S1S2many2many 
+		public global::Allors.Meta.RoleType S1S2many2many 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S1S2many2many;
 			}
 		} 
-		public global::Allors.Meta.IRoleType S1S2one2one 
+		public global::Allors.Meta.RoleType S1S2one2one 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S1S2one2one;
 			}
 		} 
-		public global::Allors.Meta.IRoleType S1AllorsLong 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.S1AllorsLong;
-			}
-		} 
-		public global::Allors.Meta.IRoleType S1AllorsDate 
+		public global::Allors.Meta.RoleType S1AllorsDate 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S1AllorsDate;
 			}
 		} 
-		public global::Allors.Meta.IRoleType S1C1one2many 
+		public global::Allors.Meta.RoleType S1C1one2many 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S1C1one2many;
 			}
 		} 
-		public global::Allors.Meta.IRoleType S1234AllorsDouble 
+		public global::Allors.Meta.RoleType S1234AllorsDouble 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S1234AllorsDouble;
 			}
 		} 
-		public global::Allors.Meta.IRoleType S1234AllorsDecimal 
+		public global::Allors.Meta.RoleType S1234AllorsDecimal 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S1234AllorsDecimal;
 			}
 		} 
-		public global::Allors.Meta.IRoleType S1234AllorsInteger 
+		public global::Allors.Meta.RoleType S1234AllorsInteger 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S1234AllorsInteger;
 			}
 		} 
-		public global::Allors.Meta.IRoleType S1234many2one 
+		public global::Allors.Meta.RoleType S1234many2one 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S1234S1234many2one;
 			}
 		} 
-		public global::Allors.Meta.IRoleType S1234C2one2one 
+		public global::Allors.Meta.RoleType S1234C2one2one 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S1234C2one2one;
 			}
 		} 
-		public global::Allors.Meta.IRoleType S1234C2many2many 
+		public global::Allors.Meta.RoleType S1234C2many2many 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S1234C2many2many;
 			}
 		} 
-		public global::Allors.Meta.IRoleType S1234one2many 
+		public global::Allors.Meta.RoleType S1234one2many 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S1234S1234one2many;
 			}
 		} 
-		public global::Allors.Meta.IRoleType S1234C2one2many 
+		public global::Allors.Meta.RoleType S1234C2one2many 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S1234C2one2many;
 			}
 		} 
-		public global::Allors.Meta.IRoleType S1234many2many 
+		public global::Allors.Meta.RoleType S1234many2many 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S1234S1234many2many;
 			}
 		} 
-		public global::Allors.Meta.IRoleType S1234AllorsLong 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.S1234AllorsLong;
-			}
-		} 
-		public global::Allors.Meta.IRoleType ClassName 
+		public global::Allors.Meta.RoleType ClassName 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S1234ClassName;
 			}
 		} 
-		public global::Allors.Meta.IRoleType S1234AllorsDate 
+		public global::Allors.Meta.RoleType S1234AllorsDate 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S1234AllorsDate;
 			}
 		} 
-		public global::Allors.Meta.IRoleType S1234one2one 
+		public global::Allors.Meta.RoleType S1234one2one 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S1234S1234one2one;
 			}
 		} 
-		public global::Allors.Meta.IRoleType S1234C2many2one 
+		public global::Allors.Meta.RoleType S1234C2many2one 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S1234C2many2one;
 			}
 		} 
-		public global::Allors.Meta.IRoleType S1234AllorsString 
+		public global::Allors.Meta.RoleType S1234AllorsString 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S1234AllorsString;
 			}
 		} 
-		public global::Allors.Meta.IRoleType S1234AllorsBoolean 
+		public global::Allors.Meta.RoleType S1234AllorsBoolean 
 		{
 			get
 			{
@@ -579,84 +554,84 @@ namespace Allors.Domain
 			}
 		} 
 
-		public global::Allors.Meta.IAssociationType C1WhereS1one2many 
+		public global::Allors.Meta.AssociationType C1WhereS1one2many 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.C1S1one2many;
 			}
 		} 
-		public global::Allors.Meta.IAssociationType C1sWhereS1many2many 
+		public global::Allors.Meta.AssociationType C1sWhereS1many2many 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.C1S1many2many;
 			}
 		} 
-		public global::Allors.Meta.IAssociationType C1sWhereS1many2one 
+		public global::Allors.Meta.AssociationType C1sWhereS1many2one 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.C1S1many2one;
 			}
 		} 
-		public global::Allors.Meta.IAssociationType C1WhereS1one2one 
+		public global::Allors.Meta.AssociationType C1WhereS1one2one 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.C1S1one2one;
 			}
 		} 
-		public global::Allors.Meta.IAssociationType I1WhereS1one2one 
+		public global::Allors.Meta.AssociationType I1WhereS1one2one 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.I1S1one2one;
 			}
 		} 
-		public global::Allors.Meta.IAssociationType I1sWhereS1many2many 
+		public global::Allors.Meta.AssociationType I1sWhereS1many2many 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.I1S1many2many;
 			}
 		} 
-		public global::Allors.Meta.IAssociationType I1WhereS1one2many 
+		public global::Allors.Meta.AssociationType I1WhereS1one2many 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.I1S1one2many;
 			}
 		} 
-		public global::Allors.Meta.IAssociationType I1sWhereS1many2one 
+		public global::Allors.Meta.AssociationType I1sWhereS1many2one 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.I1S1many2one;
 			}
 		} 
-		public global::Allors.Meta.IAssociationType S1234sWhereS1234many2one 
+		public global::Allors.Meta.AssociationType S1234sWhereS1234many2one 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.S1234S1234many2one;
 			}
 		} 
-		public global::Allors.Meta.IAssociationType S1234WhereS1234one2many 
+		public global::Allors.Meta.AssociationType S1234WhereS1234one2many 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.S1234S1234one2many;
 			}
 		} 
-		public global::Allors.Meta.IAssociationType S1234sWhereS1234many2many 
+		public global::Allors.Meta.AssociationType S1234sWhereS1234many2many 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.S1234S1234many2many;
 			}
 		} 
-		public global::Allors.Meta.IAssociationType S1234WhereS1234one2one 
+		public global::Allors.Meta.AssociationType S1234WhereS1234one2one 
 		{
 			get
 			{

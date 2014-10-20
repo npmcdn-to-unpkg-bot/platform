@@ -46,21 +46,21 @@ namespace Allors.Domain
 
 		public global::Allors.Meta.Interface ObjectType = global::Allors.Meta.Interfaces.ILT32Unit;
 
-		public global::Allors.Meta.IRoleType AllorsString1 
+		public global::Allors.Meta.RoleType AllorsString1 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.ILT32UnitAllorsString1;
 			}
 		} 
-		public global::Allors.Meta.IRoleType AllorsString3 
+		public global::Allors.Meta.RoleType AllorsString3 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.ILT32UnitAllorsString3;
 			}
 		} 
-		public global::Allors.Meta.IRoleType AllorsString2 
+		public global::Allors.Meta.RoleType AllorsString2 
 		{
 			get
 			{

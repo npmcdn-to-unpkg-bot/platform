@@ -102,14 +102,14 @@ namespace Allors.Domain
 
 		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.User;
 
-		public global::Allors.Meta.IRoleType Select 
+		public global::Allors.Meta.RoleType Select 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.UserSelect;
 			}
 		} 
-		public global::Allors.Meta.IRoleType From 
+		public global::Allors.Meta.RoleType From 
 		{
 			get
 			{
@@ -117,7 +117,7 @@ namespace Allors.Domain
 			}
 		} 
 
-		public global::Allors.Meta.IAssociationType UsersWhereSelect 
+		public global::Allors.Meta.AssociationType UsersWhereSelect 
 		{
 			get
 			{

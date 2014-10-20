@@ -102,10 +102,6 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Text
                         tableParam = schema.IntegerRelationTableParam;
                         break;
 
-                    case UnitTags.AllorsLong:
-                        tableParam = schema.LongRelationTableParam;
-                        break;
-
                     case UnitTags.AllorsDouble:
                         tableParam = schema.DoubleRelationTableParam;
                         break;

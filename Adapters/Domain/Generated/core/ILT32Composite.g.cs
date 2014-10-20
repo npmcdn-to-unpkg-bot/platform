@@ -89,21 +89,21 @@ namespace Allors.Domain
 
 		public global::Allors.Meta.Interface ObjectType = global::Allors.Meta.Interfaces.ILT32Composite;
 
-		public global::Allors.Meta.IRoleType Self3 
+		public global::Allors.Meta.RoleType Self3 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.ILT32CompositeSelf3;
 			}
 		} 
-		public global::Allors.Meta.IRoleType Self2 
+		public global::Allors.Meta.RoleType Self2 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.ILT32CompositeSelf2;
 			}
 		} 
-		public global::Allors.Meta.IRoleType Self1 
+		public global::Allors.Meta.RoleType Self1 
 		{
 			get
 			{
@@ -111,21 +111,21 @@ namespace Allors.Domain
 			}
 		} 
 
-		public global::Allors.Meta.IAssociationType ILT32CompositesWhereSelf3 
+		public global::Allors.Meta.AssociationType ILT32CompositesWhereSelf3 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.ILT32CompositeSelf3;
 			}
 		} 
-		public global::Allors.Meta.IAssociationType ILT32CompositesWhereSelf2 
+		public global::Allors.Meta.AssociationType ILT32CompositesWhereSelf2 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.ILT32CompositeSelf2;
 			}
 		} 
-		public global::Allors.Meta.IAssociationType ILT32CompositesWhereSelf1 
+		public global::Allors.Meta.AssociationType ILT32CompositesWhereSelf1 
 		{
 			get
 			{

@@ -186,55 +186,7 @@ namespace Allors.Adapters.Special
             this.C4B.S1234AllorsInteger = 1;
             this.C4C.S1234AllorsInteger = 2;
             this.C4D.S1234AllorsInteger = 2;
-
-            // Long
-            this.C1B.C1AllorsLong = 1;
-            this.C1C.C1AllorsLong = 2;
-            this.C1D.C1AllorsLong = 2;
-
-            this.C1B.C1LongLessThan = 0;
-            this.C1C.C1LongLessThan = 2;
-            this.C1D.C1LongLessThan = 4;
-
-            this.C1B.C1LongGreaterThan = 0;
-            this.C1C.C1LongGreaterThan = 2;
-            this.C1D.C1LongGreaterThan = 4;
-
-            this.C1B.C1LongBetweenA = -10;
-            this.C1B.C1LongBetweenB = 0;
-            this.C1C.C1LongBetweenA = 2;
-            this.C1C.C1LongBetweenB = 2;
-            this.C1D.C1LongBetweenA = 0;
-            this.C1D.C1LongBetweenB = 10;
-
-            this.C1B.I1AllorsLong = 1;
-            this.C1C.I1AllorsLong = 2;
-            this.C1D.I1AllorsLong = 2;
-
-            this.C1B.S1AllorsLong = 1;
-            this.C1C.S1AllorsLong = 2;
-            this.C1D.S1AllorsLong = 2;
-
-            this.C1B.I12AllorsLong = 1;
-            this.C1C.I12AllorsLong = 2;
-            this.C1D.I12AllorsLong = 2;
-            this.C2B.I12AllorsLong = 1;
-            this.C2C.I12AllorsLong = 2;
-            this.C2D.I12AllorsLong = 2;
-
-            this.C1B.S1234AllorsLong = 1;
-            this.C1C.S1234AllorsLong = 2;
-            this.C1D.S1234AllorsLong = 2;
-            this.C2B.S1234AllorsLong = 1;
-            this.C2C.S1234AllorsLong = 2;
-            this.C2D.S1234AllorsLong = 2;
-            this.C3B.S1234AllorsLong = 1;
-            this.C3C.S1234AllorsLong = 2;
-            this.C3D.S1234AllorsLong = 2;
-            this.C4B.S1234AllorsLong = 1;
-            this.C4C.S1234AllorsLong = 2;
-            this.C4D.S1234AllorsLong = 2;
-
+            
             // Double
             this.C1B.C1AllorsDouble = 1;
             this.C1C.C1AllorsDouble = 2;

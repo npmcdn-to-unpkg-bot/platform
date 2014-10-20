@@ -197,35 +197,35 @@ namespace Allors.Domain
 
 		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.Sandbox;
 
-		public global::Allors.Meta.IRoleType InvisibleMany 
+		public global::Allors.Meta.RoleType InvisibleMany 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.SandboxInvisibleMany;
 			}
 		} 
-		public global::Allors.Meta.IRoleType InvisibleOne 
+		public global::Allors.Meta.RoleType InvisibleOne 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.SandboxInvisibleOne;
 			}
 		} 
-		public global::Allors.Meta.IRoleType InvisibleValue 
+		public global::Allors.Meta.RoleType InvisibleValue 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.SandboxInvisibleValue;
 			}
 		} 
-		public global::Allors.Meta.IRoleType Test 
+		public global::Allors.Meta.RoleType Test 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.SandboxTest;
 			}
 		} 
-		public global::Allors.Meta.IRoleType AllorsString 
+		public global::Allors.Meta.RoleType AllorsString 
 		{
 			get
 			{
@@ -233,14 +233,14 @@ namespace Allors.Domain
 			}
 		} 
 
-		public global::Allors.Meta.IAssociationType SandboxesWhereInvisibleMany 
+		public global::Allors.Meta.AssociationType SandboxesWhereInvisibleMany 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.SandboxInvisibleMany;
 			}
 		} 
-		public global::Allors.Meta.IAssociationType SandboxWhereInvisibleOne 
+		public global::Allors.Meta.AssociationType SandboxWhereInvisibleOne 
 		{
 			get
 			{

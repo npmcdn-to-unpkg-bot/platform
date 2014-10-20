@@ -2,7 +2,7 @@ group CoreDomainCSharp;
 
 TemplateId() ::= <<680A5CEE-D7A0-440a-B14C-879B74B0E769>>
 TemplateName() ::= <<Core Domain C#>>
-TemplateVersion() ::= <<1.0.70>>
+TemplateVersion() ::= <<1.0.71>>
 TemplateAllors() ::= <<1.0>>
 TemplateConfiguration(meta) ::= <<
 $!
@@ -384,8 +384,6 @@ $elseif(objectType.IsDouble)$
 	global::System.Double
 $elseif(objectType.IsInteger)$
 	global::System.Int32
-$elseif(objectType.IsLong)$
-	global::System.Int64
 $elseif(objectType.IsString)$
 	global::System.String
 $elseif(objectType.IsUnique)$

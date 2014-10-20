@@ -56,11 +56,6 @@ namespace Allors.Meta
         AllorsInteger,
 
         /// <summary>
-        /// The tag for the long integer <see cref="IObjectType"/>.
-        /// </summary>
-        AllorsLong,
-
-        /// <summary>
         /// The tag for the string <see cref="IObjectType"/>.
         /// </summary>
         AllorsString,

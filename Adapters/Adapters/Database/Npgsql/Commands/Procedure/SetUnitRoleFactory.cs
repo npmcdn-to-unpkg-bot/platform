@@ -103,10 +103,6 @@ namespace Allors.Adapters.Database.Npgsql.Commands.Procedure
                         arrayParam = schema.IntegerRelationArrayParam;
                         break;
 
-                    case UnitTags.AllorsLong:
-                        arrayParam = schema.LongRelationArrayParam;
-                        break;
-
                     case UnitTags.AllorsDouble:
                         arrayParam = schema.DoubleRelationArrayParam;
                         break;

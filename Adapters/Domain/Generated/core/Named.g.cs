@@ -80,14 +80,14 @@ namespace Allors.Domain
 
 		public global::Allors.Meta.Interface ObjectType = global::Allors.Meta.Interfaces.Named;
 
-		public global::Allors.Meta.IRoleType Name 
+		public global::Allors.Meta.RoleType Name 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.NamedName;
 			}
 		} 
-		public global::Allors.Meta.IRoleType Index 
+		public global::Allors.Meta.RoleType Index 
 		{
 			get
 			{
@@ -95,28 +95,28 @@ namespace Allors.Domain
 			}
 		} 
 
-		public global::Allors.Meta.IAssociationType CompanyWhereNamedOneSort2 
+		public global::Allors.Meta.AssociationType CompanyWhereNamedOneSort2 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.CompanyNamedOneSort2;
 			}
 		} 
-		public global::Allors.Meta.IAssociationType CompaniesWhereNamedManySort1 
+		public global::Allors.Meta.AssociationType CompaniesWhereNamedManySort1 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.CompanyNamedManySort1;
 			}
 		} 
-		public global::Allors.Meta.IAssociationType CompaniesWhereNamedManySort2 
+		public global::Allors.Meta.AssociationType CompaniesWhereNamedManySort2 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.CompanyNamedManySort2;
 			}
 		} 
-		public global::Allors.Meta.IAssociationType CompanyWhereNamedOneSort1 
+		public global::Allors.Meta.AssociationType CompanyWhereNamedOneSort1 
 		{
 			get
 			{

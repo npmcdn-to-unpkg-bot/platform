@@ -31,7 +31,6 @@ namespace Allors.Meta
 
             var allorsString = (Unit)env.Find(UnitIds.StringId);
             var allorsInteger = (Unit)env.Find(UnitIds.IntegerId);
-            var allorsLong = (Unit)env.Find(UnitIds.LongId);
             var allorsDecimal = (Unit)env.Find(UnitIds.DecimalId);
             var allorsDouble = (Unit)env.Find(UnitIds.DoubleId);
             var allorsBoolean = (Unit)env.Find(UnitIds.BooleanId);
@@ -68,7 +67,6 @@ namespace Allors.Meta
             new RelationTypeBuilder(domain, new Guid("4f095abd-8803-4610-87f0-2847ddd5e9f4"), new Guid("e1a86fa0-c857-4be0-8abc-704339bbdc82"), new Guid("c7cb9a8b-7df5-4677-902f-b6f4b9aec802")).WithObjectTypes(i12, allorsDecimal).Build();
             new RelationTypeBuilder(domain, new Guid("81d9eb2f-55a7-4d1c-853d-4369eb691ba5"), new Guid("fa701a92-ee96-4194-8ea9-3da451b2c775"), new Guid("f4c841cb-821e-4e9c-ab2a-dc56aa3234ab")).WithObjectTypes(i12, allorsDate).Build();
             new RelationTypeBuilder(domain, new Guid("9f91841c-f63f-4ffa-bee6-62e100f3cd15"), new Guid("8841f638-0522-46b6-a6cf-797548264f0d"), new Guid("15ba5c39-5269-4f61-b595-7b8b6fcefe9a")).WithObjectTypes(i12, allorsString).Build();
-            new RelationTypeBuilder(domain, new Guid("d0c49b92-a108-48b5-bc95-72d2e6109ad2"), new Guid("d018b41d-1075-4d96-8fde-80310343ef43"), new Guid("6d96ffff-b781-43eb-9152-57caf15f09aa")).WithObjectTypes(i12, allorsLong).Build();
             new RelationTypeBuilder(domain, new Guid("d30dd036-6d28-48df-873b-3a76da8c029e"), new Guid("ee50ff17-39d8-44f7-8d14-e63f4c822ed4"), new Guid("25cb17ec-01e2-4658-a06b-2a620f152923")).WithObjectTypes(i12, allorsInteger).Build();
             new RelationTypeBuilder(domain, new Guid("fbad33e7-ede1-41fc-97e9-ddf33a0f6459"), new Guid("a9f79b82-bb7c-4cdc-ac16-333a1b994387"), new Guid("81acc49f-16c9-4677-80f4-c3e768a7b9e3")).WithObjectTypes(i12, allorsDouble).Build();
             

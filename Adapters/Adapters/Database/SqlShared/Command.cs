@@ -102,8 +102,6 @@ namespace Allors.Adapters.Database.Sql
                     return this.GetString(reader, i);
                 case UnitTags.AllorsInteger:
                     return this.GetInteger(reader, i);
-                case UnitTags.AllorsLong:
-                    return this.GetLong(reader, i);
                 case UnitTags.AllorsDecimal:
                     return this.GetDecimal(reader, i);
                 case UnitTags.AllorsDouble:

@@ -79,21 +79,21 @@ namespace Allors.Domain
 
 		public global::Allors.Meta.Interface ObjectType = global::Allors.Meta.Interfaces.ISandbox;
 
-		public global::Allors.Meta.IRoleType InvisibleValue 
+		public global::Allors.Meta.RoleType InvisibleValue 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.ISandboxInvisibleValue;
 			}
 		} 
-		public global::Allors.Meta.IRoleType InvisibleMany 
+		public global::Allors.Meta.RoleType InvisibleMany 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.ISandboxInvisibleMany;
 			}
 		} 
-		public global::Allors.Meta.IRoleType InvisibleOne 
+		public global::Allors.Meta.RoleType InvisibleOne 
 		{
 			get
 			{
@@ -101,14 +101,14 @@ namespace Allors.Domain
 			}
 		} 
 
-		public global::Allors.Meta.IAssociationType ISandboxesWhereInvisibleMany 
+		public global::Allors.Meta.AssociationType ISandboxesWhereInvisibleMany 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.ISandboxInvisibleMany;
 			}
 		} 
-		public global::Allors.Meta.IAssociationType ISandboxWhereInvisibleOne 
+		public global::Allors.Meta.AssociationType ISandboxWhereInvisibleOne 
 		{
 			get
 			{

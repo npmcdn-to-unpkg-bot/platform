@@ -276,15 +276,6 @@ FROM information_schema.columns"))
 
                                                             break;
 
-                                                        case "int8":
-                                                        case "bigint":
-                                                            if (unitTypeTag != UnitTags.AllorsLong)
-                                                            {
-                                                                AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Incompatible);
-                                                            }
-
-                                                            break;
-
                                                         case "numeric":
                                                             if (unitTypeTag != UnitTags.AllorsDecimal)
                                                             {
@@ -824,32 +815,6 @@ FOR i IN array_lower(" + this.ObjectArrayParam + @", 1) .. array_upper(" + this.
 
     UPDATE " + table + @"
     SET " + this.Column(roleType) + @" = " + this.IntegerRelationArrayParam + @"[i]
-    WHERE " + this.ObjectId + @" = " + this.ObjectArrayParam + @"[i];
-
-    END LOOP;
-
-END
-$$ language plpgsql;
-";
-
-                                    this.procedureByName.Add(procedure.Name, procedure);
-                                    break;
-
-                                case UnitTags.AllorsLong:
-                                    // Set Long Role
-                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularPropertyName };
-                                    procedure.Definition =
-@"DROP FUNCTION IF EXISTS " + procedure.Name + @"(" + this.ObjectArrayParam.TypeName + ", " + this.LongRelationArrayParam.TypeName + @");
-CREATE FUNCTION " + procedure.Name + @"(" + this.ObjectArrayParam + @" " + this.ObjectArrayParam.TypeName + @", " + this.LongRelationArrayParam + @" " + this.LongRelationArrayParam.TypeName + @")
-RETURNS void
-AS $$ 
-BEGIN
-
-FOR i IN array_lower(" + this.ObjectArrayParam + @", 1) .. array_upper(" + this.ObjectArrayParam + @", 1)
-    LOOP
-
-    UPDATE " + table + @"
-    SET " + this.Column(roleType) + @" = " + this.LongRelationArrayParam + @"[i]
     WHERE " + this.ObjectId + @" = " + this.ObjectArrayParam + @"[i];
 
     END LOOP;

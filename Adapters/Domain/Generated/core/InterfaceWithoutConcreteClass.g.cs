@@ -24,7 +24,7 @@ namespace Allors.Domain
 
 		public global::Allors.Meta.Interface ObjectType = global::Allors.Meta.Interfaces.InterfaceWithoutConcreteClass;
 
-		public global::Allors.Meta.IRoleType AllorsBoolean 
+		public global::Allors.Meta.RoleType AllorsBoolean 
 		{
 			get
 			{

@@ -144,17 +144,6 @@ namespace Allors.Adapters
                     }
 
                     break;
-                case UnitTags.AllorsLong:
-                    if (unit is int)
-                    {
-                        normalizedUnit = Convert.ToInt64(unit);
-                    }
-                    else if (!(unit is long))
-                    {
-                        throw new ArgumentException("RoleType is not a Long.");
-                    }
-
-                    break;
                 case UnitTags.AllorsDecimal:
                     if (unit is int || unit is long || unit is float || unit is double)
                     {

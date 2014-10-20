@@ -328,8 +328,6 @@ namespace Allors.Adapters.Database.Sql
                     return DbType.String;
                 case UnitTags.AllorsInteger:
                     return DbType.Int32;
-                case UnitTags.AllorsLong:
-                    return DbType.Int64;
                 case UnitTags.AllorsDecimal:
                     return DbType.Decimal;
                 case UnitTags.AllorsDouble:

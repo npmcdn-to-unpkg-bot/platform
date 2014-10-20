@@ -272,14 +272,6 @@ FROM information_schema.columns"))
 
                                                             break;
 
-                                                        case UnitTags.AllorsLong:
-                                                            if (!dataType.Equals(SqlDbType.BigInt.ToString().ToLower()))
-                                                            {
-                                                                AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Incompatible);
-                                                            }
-
-                                                            break;
-
                                                         case UnitTags.AllorsDecimal:
                                                             if (!dataType.Equals(SqlDbType.Decimal.ToString().ToLower()))
                                                             {
@@ -642,22 +634,6 @@ AS
                                     procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularPropertyName };
                                     procedure.Definition = "CREATE PROCEDURE " + procedure.Name + @"
     " + this.IntegerRelationTableParam + @" " + this.IntegerRelationTable + @" READONLY
-AS 
-    UPDATE " + table + @"
-    SET " + this.Column(roleType) + " = r." + this.RelationTableRole + @"
-    FROM " + table + @"
-    INNER JOIN " + this.CompositeRelationTableParam + @" AS r
-    ON " + this.ObjectId + " = r." + this.RelationTableAssociation + @"
-";
-
-                                    this.procedureByName.Add(procedure.Name, procedure);
-                                    break;
-
-                                case UnitTags.AllorsLong:
-                                    // Set Long Role
-                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularPropertyName };
-                                    procedure.Definition = "CREATE PROCEDURE " + procedure.Name + @"
-    " + this.LongRelationTableParam + @" " + this.LongRelationTable + @" READONLY
 AS 
     UPDATE " + table + @"
     SET " + this.Column(roleType) + " = r." + this.RelationTableRole + @"

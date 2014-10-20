@@ -180,7 +180,6 @@ namespace Allors.Meta.Static
             this.DecimalType = (Unit)this.metaPopulation.Find(UnitIds.DecimalId);
             this.DoubleType = (Unit)this.metaPopulation.Find(UnitIds.DoubleId);
             this.IntegerType = (Unit)this.metaPopulation.Find(UnitIds.IntegerId);
-            this.LongType = (Unit)this.metaPopulation.Find(UnitIds.LongId);
             this.StringType = (Unit)this.metaPopulation.Find(UnitIds.StringId);
             this.UniqueType = (Unit)this.metaPopulation.Find(UnitIds.Unique);
         }

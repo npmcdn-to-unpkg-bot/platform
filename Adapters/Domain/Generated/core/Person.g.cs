@@ -382,28 +382,28 @@ namespace Allors.Domain
 
 		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.Person;
 
-		public global::Allors.Meta.IRoleType NextPerson 
+		public global::Allors.Meta.RoleType NextPerson 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.PersonNextPerson;
 			}
 		} 
-		public global::Allors.Meta.IRoleType Company 
+		public global::Allors.Meta.RoleType Company 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.PersonCompany;
 			}
 		} 
-		public global::Allors.Meta.IRoleType Name 
+		public global::Allors.Meta.RoleType Name 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.NamedName;
 			}
 		} 
-		public global::Allors.Meta.IRoleType Index 
+		public global::Allors.Meta.RoleType Index 
 		{
 			get
 			{
@@ -411,105 +411,105 @@ namespace Allors.Domain
 			}
 		} 
 
-		public global::Allors.Meta.IAssociationType PersonWhereNextPerson 
+		public global::Allors.Meta.AssociationType PersonWhereNextPerson 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.PersonNextPerson;
 			}
 		} 
-		public global::Allors.Meta.IAssociationType CompaniesWhereManager 
+		public global::Allors.Meta.AssociationType CompaniesWhereManager 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.CompanyManager;
 			}
 		} 
-		public global::Allors.Meta.IAssociationType CompanyWhereEmployee 
+		public global::Allors.Meta.AssociationType CompanyWhereEmployee 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.CompanyEmployee;
 			}
 		} 
-		public global::Allors.Meta.IAssociationType CompanyWhereFirstPerson 
+		public global::Allors.Meta.AssociationType CompanyWhereFirstPerson 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.CompanyFirstPerson;
 			}
 		} 
-		public global::Allors.Meta.IAssociationType CompaniesWhereOwner 
+		public global::Allors.Meta.AssociationType CompaniesWhereOwner 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.CompanyOwner;
 			}
 		} 
-		public global::Allors.Meta.IAssociationType CompaniesWhereIndexedMany2ManyPerson 
+		public global::Allors.Meta.AssociationType CompaniesWhereIndexedMany2ManyPerson 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.CompanyIndexedMany2ManyPerson;
 			}
 		} 
-		public global::Allors.Meta.IAssociationType CompanyWherePersonOneSort1 
+		public global::Allors.Meta.AssociationType CompanyWherePersonOneSort1 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.CompanyPersonOneSort1;
 			}
 		} 
-		public global::Allors.Meta.IAssociationType CompaniesWherePersonManySort1 
+		public global::Allors.Meta.AssociationType CompaniesWherePersonManySort1 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.CompanyPersonManySort1;
 			}
 		} 
-		public global::Allors.Meta.IAssociationType CompaniesWherePersonManySort2 
+		public global::Allors.Meta.AssociationType CompaniesWherePersonManySort2 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.CompanyPersonManySort2;
 			}
 		} 
-		public global::Allors.Meta.IAssociationType CompanyWherePersonOneSort2 
+		public global::Allors.Meta.AssociationType CompanyWherePersonOneSort2 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.CompanyPersonOneSort2;
 			}
 		} 
-		public global::Allors.Meta.IAssociationType CompaniesWhereMany2ManyPerson 
+		public global::Allors.Meta.AssociationType CompaniesWhereMany2ManyPerson 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.CompanyMany2ManyPerson;
 			}
 		} 
-		public global::Allors.Meta.IAssociationType CompanyWhereNamedOneSort2 
+		public global::Allors.Meta.AssociationType CompanyWhereNamedOneSort2 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.CompanyNamedOneSort2;
 			}
 		} 
-		public global::Allors.Meta.IAssociationType CompaniesWhereNamedManySort1 
+		public global::Allors.Meta.AssociationType CompaniesWhereNamedManySort1 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.CompanyNamedManySort1;
 			}
 		} 
-		public global::Allors.Meta.IAssociationType CompaniesWhereNamedManySort2 
+		public global::Allors.Meta.AssociationType CompaniesWhereNamedManySort2 
 		{
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.CompanyNamedManySort2;
 			}
 		} 
-		public global::Allors.Meta.IAssociationType CompanyWhereNamedOneSort1 
+		public global::Allors.Meta.AssociationType CompanyWhereNamedOneSort1 
 		{
 			get
 			{

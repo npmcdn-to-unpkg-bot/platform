@@ -111,15 +111,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Gets a value indicating whether this instance is long.
-        /// </summary>
-        /// <value><c>true</c> if this instance is a long; otherwise, <c>false</c>.</value>
-        public bool IsLong
-        {
-            get { return this.Id.Equals(UnitIds.LongId); }
-        }
-
-        /// <summary>
         /// Gets a value indicating whether this instance is a string.
         /// </summary>
         /// <value><c>true</c> if this instance is a string; otherwise, <c>false</c>.</value>

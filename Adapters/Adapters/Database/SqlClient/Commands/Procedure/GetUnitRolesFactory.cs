@@ -115,9 +115,6 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
                                     case UnitTags.AllorsInteger:
                                         unit = reader.GetInt32(i);
                                         break;
-                                    case UnitTags.AllorsLong:
-                                        unit = reader.GetInt64(i);
-                                        break;
                                     case UnitTags.AllorsDecimal:
                                         unit = reader.GetDecimal(i);
                                         break;

@@ -60,11 +60,6 @@ namespace Allors.Meta
         public static readonly Guid IntegerId = new Guid("ccd6f134-26de-4103-bff9-a37ec3e997a3");
 
         /// <summary>
-        /// The id of the long integer type.
-        /// </summary>
-        public static readonly Guid LongId = new Guid("e8989069-024b-4389-ac77-a98c4dfff25a");
-
-        /// <summary>
         /// The id of the string type.
         /// </summary>
         public static readonly Guid StringId = new Guid("ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9");

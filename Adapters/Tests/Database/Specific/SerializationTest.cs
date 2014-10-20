@@ -647,7 +647,6 @@ namespace Allors.Adapters.Special
             }
 
             Assert.AreEqual(this.c1A.C1AllorsInteger, -1);
-            Assert.AreEqual(this.c1A.C1AllorsLong, -0x100000000);
             Assert.AreEqual(this.c1A.C1AllorsDecimal, 1.1m);
             Assert.AreEqual(this.c1A.C1AllorsDouble, 1.1d);
             Assert.AreEqual(this.c1A.C1AllorsBoolean, true);
@@ -708,7 +707,6 @@ namespace Allors.Adapters.Special
 
             this.c1A.C1AllorsString = string.Empty; // emtpy string
             this.c1A.C1AllorsInteger = -1;
-            this.c1A.C1AllorsLong = -0x100000000;
             this.c1A.C1AllorsDecimal = 1.1m;
             this.c1A.C1AllorsDouble = 1.1d;
             this.c1A.C1AllorsBoolean = true;
