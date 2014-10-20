@@ -29,15 +29,15 @@ namespace Allors
     public partial class Setup
     {
         private readonly IDatabaseSession session;
-        private readonly Dictionary<ObjectType, IObjects> objectsByObjectType;
+        private readonly Dictionary<IObjectType, IObjects> objectsByObjectType;
         private readonly ObjectsGraph objectsGraph;
 
         public Setup(IDatabaseSession session)
         {
             this.session = session;
 
-            this.objectsByObjectType = new Dictionary<ObjectType, IObjects>();
-            foreach (var objectType in session.Database.MetaPopulation.Composites)
+            this.objectsByObjectType = new Dictionary<IObjectType, IObjects>();
+            foreach (ObjectType objectType in session.Database.MetaPopulation.Composites)
             {
                 this.objectsByObjectType[objectType] = objectType.GetObjects(session);
             }

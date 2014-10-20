@@ -30,10 +30,10 @@ namespace Allors.Domain
 	    {
 	    }
 
-				public global::System.Int64? Value {get; set;}
+				public global::System.Int32? Value {get; set;}
 
 				/// <exclude/>
-				public CounterBuilder WithValue(global::System.Int64? value)
+				public CounterBuilder WithValue(global::System.Int32? value)
 		        {
 				    if(this.Value!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.Value = value;

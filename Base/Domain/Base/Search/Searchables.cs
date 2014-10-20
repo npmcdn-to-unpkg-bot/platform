@@ -66,7 +66,7 @@ namespace Allors.Domain
                 return;
             }
 
-            if (concreteClasses != null && !concreteClasses.Contains(searchResult.Strategy.ObjectType))
+            if (concreteClasses != null && !concreteClasses.Contains((ObjectType)searchResult.Strategy.ObjectType))
             {
                 return;
             }

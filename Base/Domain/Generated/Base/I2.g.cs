@@ -44,7 +44,7 @@ namespace Allors.Domain
 
 		
 
-		global::System.DateTime? I2AllorsDateTime {get;}
+		global::System.DateTime? I2AllorsDate {get;}
 
 		
 
@@ -88,10 +88,6 @@ namespace Allors.Domain
 
 		
 
-		global::System.Int64? I2AllorsLong {get;}
-
-		
-
 		global::System.Int32? I2AllorsInteger {get;}
 
 		
@@ -107,7 +103,7 @@ namespace Allors.Domain
 
 		
 
-		global::System.Double? I2AllorsDouble {get;}
+		global::System.Double? I2AllorsFloat {get;}
 
 		
 	}

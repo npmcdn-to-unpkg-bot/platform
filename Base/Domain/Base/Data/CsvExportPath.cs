@@ -123,15 +123,11 @@ namespace Allors.Domain
                             stringValue = ((int)value).ToString(formatProvider);
                             break;
 
-                        case UnitTags.AllorsLong:
-                            stringValue = ((long)value).ToString(formatProvider);
-                            break;
-
                         case UnitTags.AllorsDecimal:
                             stringValue = ((decimal)value).ToString(formatProvider);
                             break;
 
-                        case UnitTags.AllorsDouble:
+                        case UnitTags.AllorsFloat:
                             stringValue = ((double)value).ToString(formatProvider);
                             break;
 

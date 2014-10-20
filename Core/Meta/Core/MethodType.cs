@@ -22,7 +22,7 @@ namespace Allors.Meta
 {
     using System;
 
-    public sealed partial class MethodType : DomainObject
+    public sealed partial class MethodType : OperandType
     {
         private string name;
 
@@ -75,7 +75,7 @@ namespace Allors.Meta
         /// <summary>
         /// Gets the display name.
         /// </summary>
-        public string DisplayName
+        public override string DisplayName
         {
             get
             {

@@ -2,7 +2,7 @@ group BaseDomainCSharp;
 
 TemplateId() ::= <<17ED40F8-BDF8-4A7C-9AE9-1C4D2AD6BA2B>>
 TemplateName() ::= <<C# Domain Core>>
-TemplateVersion() ::= <<1.0.70>>
+TemplateVersion() ::= <<1.0.71>>
 TemplateAllors() ::= <<1.0>>
 TemplateConfiguration(meta) ::= <<
 $!
@@ -448,12 +448,10 @@ $elseif(objectType.IsDateTime)$
 	global::System.DateTime?
 $elseif(objectType.IsDecimal)$
 	global::System.Decimal?
-$elseif(objectType.IsDouble)$
+$elseif(objectType.IsFloat)$
 	global::System.Double?
 $elseif(objectType.IsInteger)$
 	global::System.Int32?
-$elseif(objectType.IsLong)$
-	global::System.Int64?
 $elseif(objectType.IsString)$
 	global::System.String
 $elseif(objectType.IsUnique)$

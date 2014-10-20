@@ -6,11 +6,10 @@ namespace Allors.Meta
 	{
 		public static readonly Unit AllorsString = ((Unit)Repository.MetaPopulation.Find( new System.Guid("ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9")));
 		public static readonly Unit AllorsInteger = ((Unit)Repository.MetaPopulation.Find( new System.Guid("ccd6f134-26de-4103-bff9-a37ec3e997a3")));
-		public static readonly Unit AllorsLong = ((Unit)Repository.MetaPopulation.Find( new System.Guid("e8989069-024b-4389-ac77-a98c4dfff25a")));
 		public static readonly Unit AllorsDecimal = ((Unit)Repository.MetaPopulation.Find( new System.Guid("da866d8e-2c40-41a8-ae5b-5f6dae0b89c8")));
-		public static readonly Unit AllorsDouble = ((Unit)Repository.MetaPopulation.Find( new System.Guid("ffcabd07-f35f-4083-bef6-f6c47970ca5d")));
+		public static readonly Unit AllorsFloat = ((Unit)Repository.MetaPopulation.Find( new System.Guid("ffcabd07-f35f-4083-bef6-f6c47970ca5d")));
 		public static readonly Unit AllorsBoolean = ((Unit)Repository.MetaPopulation.Find( new System.Guid("b5ee6cea-4e2b-498e-a5dd-24671d896477")));
-		public static readonly Unit AllorsDateTime = ((Unit)Repository.MetaPopulation.Find( new System.Guid("c4c09343-61d3-418c-ade2-fe6fd588f128")));
+		public static readonly Unit AllorsDate = ((Unit)Repository.MetaPopulation.Find( new System.Guid("c4c09343-61d3-418c-ade2-fe6fd588f128")));
 		public static readonly Unit AllorsUnique = ((Unit)Repository.MetaPopulation.Find( new System.Guid("6dc0a1a8-88a4-4614-adb4-92dd3d017c0e")));
 		public static readonly Unit AllorsBinary = ((Unit)Repository.MetaPopulation.Find( new System.Guid("c28e515b-cae8-4d6b-95bf-062aec8042fc")));
 
@@ -130,6 +129,7 @@ namespace Allors.Meta
 		public static readonly AssociationType AccessControlledObjectSecurityToken = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("b816fccd-08e0-46e0-a49c-7213c3604416"))).AssociationType;
 		public static readonly AssociationType UserInterfaceableDisplayName = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("6412301d-95ec-44c2-8c71-cc03de5327b9"))).AssociationType;
 		public static readonly AssociationType ObjectStateDeniedPermission = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("59338f0b-40e7-49e8-ba1a-3ecebf96aebe"))).AssociationType;
+		public static readonly AssociationType ObjectStateName = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("75e8e8b6-6a6a-45e9-9701-c99967f7da9f"))).AssociationType;
 		public static readonly AssociationType LocalisedTextText = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("50dc85f0-3d22-4bc1-95d9-153674b89f7a"))).AssociationType;
 		public static readonly AssociationType StringTemplateBody = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("2f88f9f8-3c22-40d3-885c-2abd43af96cc"))).AssociationType;
 		public static readonly AssociationType StringTemplateName = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("c501103b-037a-4961-93df-2dbb74b88a76"))).AssociationType;
@@ -197,7 +197,7 @@ namespace Allors.Meta
 		public static readonly AssociationType I2AllorsBinary = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("62a8a93d-3744-49de-9f9a-9997b6ef4da6"))).AssociationType;
 		public static readonly AssociationType I2AllorsUnique = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("663559c4-ef64-4e78-89b4-bfa00691c627"))).AssociationType;
 		public static readonly AssociationType I2I1Many2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("6bb406bc-627b-444c-9c16-df9878e05e9c"))).AssociationType;
-		public static readonly AssociationType I2AllorsDateTime = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("81d9eb2f-55a7-4d1c-853d-4369eb691ba5"))).AssociationType;
+		public static readonly AssociationType I2AllorsDate = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("81d9eb2f-55a7-4d1c-853d-4369eb691ba5"))).AssociationType;
 		public static readonly AssociationType I2I12One2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("83dc0581-e04a-4f51-a44e-4fef63d44356"))).AssociationType;
 		public static readonly AssociationType I2I12One2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("87499e99-ed77-44c1-89d6-b4f570b6f217"))).AssociationType;
 		public static readonly AssociationType I2C2Many2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("92fdb313-0b90-48f6-b054-a4ab38f880ba"))).AssociationType;
@@ -209,12 +209,11 @@ namespace Allors.Meta
 		public static readonly AssociationType I2I1One2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("bbb01166-2671-4ca1-8b1e-12e6ae8aeb03"))).AssociationType;
 		public static readonly AssociationType I2I12Many2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("cb9f21e0-a841-45de-8ba4-991b4ceca616"))).AssociationType;
 		public static readonly AssociationType I2I2One2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("cc4c704c-ab7e-45d4-baa9-b67cfff9448e"))).AssociationType;
-		public static readonly AssociationType I2AllorsLong = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("d0c49b92-a108-48b5-bc95-72d2e6109ad2"))).AssociationType;
 		public static readonly AssociationType I2AllorsInteger = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("d30dd036-6d28-48df-873b-3a76da8c029e"))).AssociationType;
 		public static readonly AssociationType I2I2One2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("deb9cbd3-386f-4599-802c-be50945b9f1d"))).AssociationType;
 		public static readonly AssociationType I2C1Many2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("f364c9fe-ad36-4305-80fd-4921451c70a5"))).AssociationType;
 		public static readonly AssociationType I2C2One2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("f85c2d97-10b9-478d-9b82-2700d95d5cb1"))).AssociationType;
-		public static readonly AssociationType I2AllorsDouble = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("fbad33e7-ede1-41fc-97e9-ddf33a0f6459"))).AssociationType;
+		public static readonly AssociationType I2AllorsFloat = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("fbad33e7-ede1-41fc-97e9-ddf33a0f6459"))).AssociationType;
 		public static readonly AssociationType HomeAddressStreet = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("6f0f42c4-9b47-47c2-a632-da8e08116be4"))).AssociationType;
 		public static readonly AssociationType HomeAddressHouseNumber = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("b181d077-e897-4add-9456-67b9760d32e8"))).AssociationType;
 		public static readonly AssociationType PlaceCountry = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("1bf1cc1e-75bf-4a3f-87bd-a2fae2697855"))).AssociationType;
@@ -237,11 +236,10 @@ namespace Allors.Meta
 		public static readonly AssociationType OrganisationLogo = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("b201d2a0-2335-47a1-aa8d-8416e89a9fec"))).AssociationType;
 		public static readonly AssociationType OrganisationSize = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("bac702b8-7874-45c3-a410-102e1caea4a7"))).AssociationType;
 		public static readonly AssociationType SubdependeeSubcounter = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("194930f9-9c3f-458d-93ec-3d7bea4cd538"))).AssociationType;
-		public static readonly AssociationType UnitAllorsLong = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("09bfade2-1739-4a7b-80ec-982fe43428ce"))).AssociationType;
-		public static readonly AssociationType UnitAllorsDateTime = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("0cbfa00c-e3e1-4dca-ad75-cd5c57a0df9f"))).AssociationType;
+		public static readonly AssociationType UnitAllorsDate = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("0cbfa00c-e3e1-4dca-ad75-cd5c57a0df9f"))).AssociationType;
 		public static readonly AssociationType UnitAllorsBinary = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("24771d5b-f920-4820-aff7-ea6391b4a45c"))).AssociationType;
 		public static readonly AssociationType UnitAllorsBoolean = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("5a788ebe-65e9-4d5e-853a-91bb4addabb5"))).AssociationType;
-		public static readonly AssociationType UnitAllorsDouble = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("74a35820-ef8c-4373-9447-6215ee8279c0"))).AssociationType;
+		public static readonly AssociationType UnitAllorsFloat = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("74a35820-ef8c-4373-9447-6215ee8279c0"))).AssociationType;
 		public static readonly AssociationType UnitAllorsInteger = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("b817ba76-876e-44ea-8e5a-51d552d4045e"))).AssociationType;
 		public static readonly AssociationType UnitAllorsString = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("c724c733-972a-411c-aecb-e865c2628a90"))).AssociationType;
 		public static readonly AssociationType UnitAllorsUnique = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("ed58ae4c-24e0-4dd1-8b1c-0909df1e0fcd"))).AssociationType;
@@ -253,7 +251,7 @@ namespace Allors.Meta
 		public static readonly AssociationType StatefulCompanyManager = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("9940e8ed-189e-42c6-b0d1-7c01920b9fac"))).AssociationType;
 		public static readonly AssociationType C1I1One2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("0e7f529b-bc91-4a40-a7e7-a17341c6bf5b"))).AssociationType;
 		public static readonly AssociationType C1AllorsString = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("20713860-8abd-4d71-8ccc-2b4d1b88bce3"))).AssociationType;
-		public static readonly AssociationType C1AllorsDateTime = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("37f696e4-88f1-4953-8d1b-000263cbf1ae"))).AssociationType;
+		public static readonly AssociationType C1AllorsDate = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("37f696e4-88f1-4953-8d1b-000263cbf1ae"))).AssociationType;
 		public static readonly AssociationType C1C2Many2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("5490dc63-a8f6-4a86-91ef-fef97a86f119"))).AssociationType;
 		public static readonly AssociationType C1I2One2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("6def7988-4bcf-4964-9de6-c6ede41d5e5a"))).AssociationType;
 		public static readonly AssociationType C1C1One2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("79c00218-bb4f-40e9-af7d-61af444a4a54"))).AssociationType;
@@ -262,7 +260,6 @@ namespace Allors.Meta
 		public static readonly AssociationType C1I2One2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("82f5fb26-c260-41bc-a784-a2d5e35243bd"))).AssociationType;
 		public static readonly AssociationType C1AllorsDecimal = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("87eb0d19-73a7-4aae-aeed-66dc9163233c"))).AssociationType;
 		public static readonly AssociationType C1C1Many2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("8c198447-e943-4f5a-b749-9534b181c664"))).AssociationType;
-		public static readonly AssociationType C1AllorsLong = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("91e8b23b-48fb-4d20-8a71-89c5630f1c78"))).AssociationType;
 		public static readonly AssociationType C1I12Many2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("94a2b37d-9431-4496-b992-630cda5b9851"))).AssociationType;
 		public static readonly AssociationType C1AllorsBinary = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("97f31053-0e7b-42a0-90c2-ce6f09c56e86"))).AssociationType;
 		public static readonly AssociationType C1I12One2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("98c5f58b-1777-4d9a-8828-37dbf7051510"))).AssociationType;
@@ -278,7 +275,7 @@ namespace Allors.Meta
 		public static readonly AssociationType C1I2Many2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("d0341bed-2732-4bcb-b1bb-9f9589de5d03"))).AssociationType;
 		public static readonly AssociationType C1I1One2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("e0656d9a-75a6-4e59-aaa1-3ff03d440059"))).AssociationType;
 		public static readonly AssociationType C1C2One2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("e97fc754-c736-4359-9662-19dce9429f89"))).AssociationType;
-		public static readonly AssociationType C1AllorsDouble = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("f268783d-42ed-41c1-b0b0-b8a60e30a601"))).AssociationType;
+		public static readonly AssociationType C1AllorsFloat = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("f268783d-42ed-41c1-b0b0-b8a60e30a601"))).AssociationType;
 		public static readonly AssociationType C1C2Many2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("f29d4a52-9ba5-40f6-ba99-050cbd03e554"))).AssociationType;
 		public static readonly AssociationType C1AllorsInteger = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("f4920d94-8cd0-45b6-be00-f18d377368fd"))).AssociationType;
 		public static readonly AssociationType C2AllorsDecimal = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("07eaa992-322a-40e9-bf2c-aa33b69f54cd"))).AssociationType;
@@ -286,13 +283,12 @@ namespace Allors.Meta
 		public static readonly AssociationType C2C2Many2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("12896fc2-c9e9-4a89-b875-0aeb92e298e5"))).AssociationType;
 		public static readonly AssociationType C2AllorsUnique = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("1444d919-6ca1-4642-8d18-9d955c817581"))).AssociationType;
 		public static readonly AssociationType C2I12Many2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("165cc83e-935d-4d0d-aec7-5da155300086"))).AssociationType;
-		public static readonly AssociationType C2AllorsDateTime = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("1afae917-7f62-4472-8a9c-22113b1af77f"))).AssociationType;
+		public static readonly AssociationType C2AllorsDate = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("1afae917-7f62-4472-8a9c-22113b1af77f"))).AssociationType;
 		public static readonly AssociationType C2I12One2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("1d0c57c9-a3d1-4134-bc7d-7bb587d8250f"))).AssociationType;
 		public static readonly AssociationType C2I1Many2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("1d98eda7-6dba-43f1-a5ce-44f7ed104cf9"))).AssociationType;
-		public static readonly AssociationType C2AllorsDouble = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("262ad367-a52c-4d8b-94e2-b477bb098423"))).AssociationType;
+		public static readonly AssociationType C2AllorsFloat = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("262ad367-a52c-4d8b-94e2-b477bb098423"))).AssociationType;
 		public static readonly AssociationType C2I1One2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("2ac55066-c748-4f90-9d0f-1090fe02cc76"))).AssociationType;
 		public static readonly AssociationType C2I2One2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("38063edc-271a-410d-b857-807a9100c7b5"))).AssociationType;
-		public static readonly AssociationType C2AllorsLong = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("41cd7805-0f93-460f-8572-9c479f3db206"))).AssociationType;
 		public static readonly AssociationType C2AllorsInteger = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("42f9f4b6-3b35-4168-93cb-35171dbf83f4"))).AssociationType;
 		public static readonly AssociationType C2I2Many2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("4a963639-72c3-4e9f-9058-bcfc8fe0bc9e"))).AssociationType;
 		public static readonly AssociationType C2I12Many2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("50300577-b5fb-4c16-9ac5-41151543f958"))).AssociationType;
@@ -317,7 +313,7 @@ namespace Allors.Meta
 		public static readonly AssociationType SearchTestText = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("89c930ae-82ce-4f05-9c1f-a9bf9d8e8bb4"))).AssociationType;
 		public static readonly AssociationType I12AllorsBinary = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("042d1311-1c06-4d7c-b68e-eb734f9c7327"))).AssociationType;
 		public static readonly AssociationType I12C2One2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("107c212d-cc1c-41b2-9c1d-b40c0102072c"))).AssociationType;
-		public static readonly AssociationType I12AllorsDouble = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("1611cb5d-4676-4e85-bfc5-5572e8ff1138"))).AssociationType;
+		public static readonly AssociationType I12AllorsFloat = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("1611cb5d-4676-4e85-bfc5-5572e8ff1138"))).AssociationType;
 		public static readonly AssociationType I12I1Many2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("167b53c0-644c-467e-9f7c-fcb9415d02c6"))).AssociationType;
 		public static readonly AssociationType I12AllorsString = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("199a84c4-c7cb-4f23-8b6c-078b14525e18"))).AssociationType;
 		public static readonly AssociationType I12I12Many2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("1bf2abe0-9273-4fb9-b491-020320f1f8db"))).AssociationType;
@@ -333,7 +329,6 @@ namespace Allors.Meta
 		public static readonly AssociationType I12AllorsInteger = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("95551e3a-bad2-4136-923f-c8e5f0f2aec7"))).AssociationType;
 		public static readonly AssociationType I12I1One2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("95c77a0f-7f4c-4142-a93f-f688cfd554af"))).AssociationType;
 		public static readonly AssociationType I12C1One2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("9aefdda0-e547-4c9b-bf28-431669f8ea2e"))).AssociationType;
-		public static readonly AssociationType I12AllorsLong = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("9bcbb810-fe3e-4829-8b1c-40219d16b60b"))).AssociationType;
 		public static readonly AssociationType I12I12One2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("a89b4c06-bba5-4b05-bd6f-c32bc195c32f"))).AssociationType;
 		public static readonly AssociationType I12I2One2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("ac920d1d-290b-484b-9283-3829337182bc"))).AssociationType;
 		public static readonly AssociationType I12Dependency = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("b2e3ddda-0cc3-4cfd-a114-9040882ec58a"))).AssociationType;
@@ -342,7 +337,7 @@ namespace Allors.Meta
 		public static readonly AssociationType I12I12Many2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("c6ecc142-0fbd-48b7-98ae-994fa9b5b814"))).AssociationType;
 		public static readonly AssociationType I12AllorsBoolean = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("ccdd1ae2-263e-4221-9841-4cff1907ee8d"))).AssociationType;
 		public static readonly AssociationType I12I1One2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("ce0f7d58-b415-43f3-989b-9d8b34754e4b"))).AssociationType;
-		public static readonly AssociationType I12AllorsDateTime = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("ed4811bc-c1fc-453b-967f-bd5b6cb6f83f"))).AssociationType;
+		public static readonly AssociationType I12AllorsDate = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("ed4811bc-c1fc-453b-967f-bd5b6cb6f83f"))).AssociationType;
 		public static readonly AssociationType I12C1One2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("f302dd07-1abc-409e-aa71-ec9f7ac439aa"))).AssociationType;
 		public static readonly AssociationType I12C1Many2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("f6436bc9-e307-4001-8f1f-5b37553ab3c6"))).AssociationType;
 		public static readonly AssociationType BadUIPersonMany = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("8a999086-ca90-40a1-90ae-475d231bb1eb"))).AssociationType;
@@ -361,7 +356,7 @@ namespace Allors.Meta
 		public static readonly AssociationType I1I2Many2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("194580f4-e0e3-4b52-b9ba-6020171be4e9"))).AssociationType;
 		public static readonly AssociationType I1AllorsString = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("28ceffc2-c776-4a0a-9825-a6d1bcb265dc"))).AssociationType;
 		public static readonly AssociationType I1I12Many2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("2e85d74a-8d13-4bc0-ae4f-42b305e79373"))).AssociationType;
-		public static readonly AssociationType I1AllorsDateTime = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("32fc21cc-4be7-4a0e-ac71-df135be95e68"))).AssociationType;
+		public static readonly AssociationType I1AllorsDate = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("32fc21cc-4be7-4a0e-ac71-df135be95e68"))).AssociationType;
 		public static readonly AssociationType I1I2One2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("39e28141-fd6b-4f49-8884-d5400f6c57ff"))).AssociationType;
 		public static readonly AssociationType I1C2One2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("4506a14b-22f1-41fe-972b-40fab7c6dd31"))).AssociationType;
 		public static readonly AssociationType I1C1One2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("593914b1-af95-4992-9703-2b60f4ea0926"))).AssociationType;
@@ -370,7 +365,6 @@ namespace Allors.Meta
 		public static readonly AssociationType I1I1One2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("670c753e-8ea0-40b1-bfc9-7388074191d3"))).AssociationType;
 		public static readonly AssociationType I1I1Many2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("6bb3ba6d-ffc7-4700-9723-c323b9b2d233"))).AssociationType;
 		public static readonly AssociationType I1AllorsBoolean = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("6c3d04be-6f95-44b8-863a-245e150e3110"))).AssociationType;
-		public static readonly AssociationType I1AllorsLong = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("75fb2012-0b49-4442-a9b4-8239cffb1d37"))).AssociationType;
 		public static readonly AssociationType I1AllorsDecimal = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("818b4013-5ef1-4455-9f0d-9a39fa3425bb"))).AssociationType;
 		public static readonly AssociationType I1I12One2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("a51d9d21-40ec-44b9-853d-8c18f54d659d"))).AssociationType;
 		public static readonly AssociationType I1I2One2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("a5761a0e-5c10-407a-bd68-0c4f69d78968"))).AssociationType;
@@ -378,7 +372,7 @@ namespace Allors.Meta
 		public static readonly AssociationType I1C1One2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("b89092f1-8775-4b6a-99ef-f8626bc770bd"))).AssociationType;
 		public static readonly AssociationType I1AllorsBinary = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("b9c67658-4abc-41f3-9434-c8512a482179"))).AssociationType;
 		public static readonly AssociationType I1C1Many2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("bcc9eee6-fa07-4d37-be84-b691bfce24be"))).AssociationType;
-		public static readonly AssociationType I1AllorsDouble = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("cdb758bf-ecaf-4d99-88fb-58df9258c13c"))).AssociationType;
+		public static readonly AssociationType I1AllorsFloat = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("cdb758bf-ecaf-4d99-88fb-58df9258c13c"))).AssociationType;
 		public static readonly AssociationType I1I1One2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("e1b13216-7210-4c24-a668-83b40162a21b"))).AssociationType;
 		public static readonly AssociationType I1C1Many2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("e3126228-342a-4415-a2e8-d52eceaeaf89"))).AssociationType;
 		public static readonly AssociationType I1I12One2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("e386cca6-e738-4c37-8bfc-b23057d7a0be"))).AssociationType;
@@ -437,6 +431,7 @@ namespace Allors.Meta
 		public static readonly RoleType AccessControlledObjectSecurityToken = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("b816fccd-08e0-46e0-a49c-7213c3604416"))).RoleType;
 		public static readonly RoleType UserInterfaceableDisplayName = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("6412301d-95ec-44c2-8c71-cc03de5327b9"))).RoleType;
 		public static readonly RoleType ObjectStateDeniedPermission = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("59338f0b-40e7-49e8-ba1a-3ecebf96aebe"))).RoleType;
+		public static readonly RoleType ObjectStateName = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("75e8e8b6-6a6a-45e9-9701-c99967f7da9f"))).RoleType;
 		public static readonly RoleType LocalisedTextText = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("50dc85f0-3d22-4bc1-95d9-153674b89f7a"))).RoleType;
 		public static readonly RoleType StringTemplateBody = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("2f88f9f8-3c22-40d3-885c-2abd43af96cc"))).RoleType;
 		public static readonly RoleType StringTemplateName = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("c501103b-037a-4961-93df-2dbb74b88a76"))).RoleType;
@@ -504,7 +499,7 @@ namespace Allors.Meta
 		public static readonly RoleType I2AllorsBinary = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("62a8a93d-3744-49de-9f9a-9997b6ef4da6"))).RoleType;
 		public static readonly RoleType I2AllorsUnique = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("663559c4-ef64-4e78-89b4-bfa00691c627"))).RoleType;
 		public static readonly RoleType I2I1Many2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("6bb406bc-627b-444c-9c16-df9878e05e9c"))).RoleType;
-		public static readonly RoleType I2AllorsDateTime = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("81d9eb2f-55a7-4d1c-853d-4369eb691ba5"))).RoleType;
+		public static readonly RoleType I2AllorsDate = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("81d9eb2f-55a7-4d1c-853d-4369eb691ba5"))).RoleType;
 		public static readonly RoleType I2I12One2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("83dc0581-e04a-4f51-a44e-4fef63d44356"))).RoleType;
 		public static readonly RoleType I2I12One2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("87499e99-ed77-44c1-89d6-b4f570b6f217"))).RoleType;
 		public static readonly RoleType I2C2Many2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("92fdb313-0b90-48f6-b054-a4ab38f880ba"))).RoleType;
@@ -516,12 +511,11 @@ namespace Allors.Meta
 		public static readonly RoleType I2I1One2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("bbb01166-2671-4ca1-8b1e-12e6ae8aeb03"))).RoleType;
 		public static readonly RoleType I2I12Many2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("cb9f21e0-a841-45de-8ba4-991b4ceca616"))).RoleType;
 		public static readonly RoleType I2I2One2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("cc4c704c-ab7e-45d4-baa9-b67cfff9448e"))).RoleType;
-		public static readonly RoleType I2AllorsLong = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("d0c49b92-a108-48b5-bc95-72d2e6109ad2"))).RoleType;
 		public static readonly RoleType I2AllorsInteger = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("d30dd036-6d28-48df-873b-3a76da8c029e"))).RoleType;
 		public static readonly RoleType I2I2One2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("deb9cbd3-386f-4599-802c-be50945b9f1d"))).RoleType;
 		public static readonly RoleType I2C1Many2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("f364c9fe-ad36-4305-80fd-4921451c70a5"))).RoleType;
 		public static readonly RoleType I2C2One2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("f85c2d97-10b9-478d-9b82-2700d95d5cb1"))).RoleType;
-		public static readonly RoleType I2AllorsDouble = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("fbad33e7-ede1-41fc-97e9-ddf33a0f6459"))).RoleType;
+		public static readonly RoleType I2AllorsFloat = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("fbad33e7-ede1-41fc-97e9-ddf33a0f6459"))).RoleType;
 		public static readonly RoleType HomeAddressStreet = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("6f0f42c4-9b47-47c2-a632-da8e08116be4"))).RoleType;
 		public static readonly RoleType HomeAddressHouseNumber = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("b181d077-e897-4add-9456-67b9760d32e8"))).RoleType;
 		public static readonly RoleType PlaceCountry = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("1bf1cc1e-75bf-4a3f-87bd-a2fae2697855"))).RoleType;
@@ -544,11 +538,10 @@ namespace Allors.Meta
 		public static readonly RoleType OrganisationLogo = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("b201d2a0-2335-47a1-aa8d-8416e89a9fec"))).RoleType;
 		public static readonly RoleType OrganisationSize = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("bac702b8-7874-45c3-a410-102e1caea4a7"))).RoleType;
 		public static readonly RoleType SubdependeeSubcounter = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("194930f9-9c3f-458d-93ec-3d7bea4cd538"))).RoleType;
-		public static readonly RoleType UnitAllorsLong = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("09bfade2-1739-4a7b-80ec-982fe43428ce"))).RoleType;
-		public static readonly RoleType UnitAllorsDateTime = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("0cbfa00c-e3e1-4dca-ad75-cd5c57a0df9f"))).RoleType;
+		public static readonly RoleType UnitAllorsDate = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("0cbfa00c-e3e1-4dca-ad75-cd5c57a0df9f"))).RoleType;
 		public static readonly RoleType UnitAllorsBinary = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("24771d5b-f920-4820-aff7-ea6391b4a45c"))).RoleType;
 		public static readonly RoleType UnitAllorsBoolean = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("5a788ebe-65e9-4d5e-853a-91bb4addabb5"))).RoleType;
-		public static readonly RoleType UnitAllorsDouble = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("74a35820-ef8c-4373-9447-6215ee8279c0"))).RoleType;
+		public static readonly RoleType UnitAllorsFloat = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("74a35820-ef8c-4373-9447-6215ee8279c0"))).RoleType;
 		public static readonly RoleType UnitAllorsInteger = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("b817ba76-876e-44ea-8e5a-51d552d4045e"))).RoleType;
 		public static readonly RoleType UnitAllorsString = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("c724c733-972a-411c-aecb-e865c2628a90"))).RoleType;
 		public static readonly RoleType UnitAllorsUnique = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("ed58ae4c-24e0-4dd1-8b1c-0909df1e0fcd"))).RoleType;
@@ -560,7 +553,7 @@ namespace Allors.Meta
 		public static readonly RoleType StatefulCompanyManager = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("9940e8ed-189e-42c6-b0d1-7c01920b9fac"))).RoleType;
 		public static readonly RoleType C1I1One2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("0e7f529b-bc91-4a40-a7e7-a17341c6bf5b"))).RoleType;
 		public static readonly RoleType C1AllorsString = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("20713860-8abd-4d71-8ccc-2b4d1b88bce3"))).RoleType;
-		public static readonly RoleType C1AllorsDateTime = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("37f696e4-88f1-4953-8d1b-000263cbf1ae"))).RoleType;
+		public static readonly RoleType C1AllorsDate = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("37f696e4-88f1-4953-8d1b-000263cbf1ae"))).RoleType;
 		public static readonly RoleType C1C2Many2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("5490dc63-a8f6-4a86-91ef-fef97a86f119"))).RoleType;
 		public static readonly RoleType C1I2One2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("6def7988-4bcf-4964-9de6-c6ede41d5e5a"))).RoleType;
 		public static readonly RoleType C1C1One2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("79c00218-bb4f-40e9-af7d-61af444a4a54"))).RoleType;
@@ -569,7 +562,6 @@ namespace Allors.Meta
 		public static readonly RoleType C1I2One2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("82f5fb26-c260-41bc-a784-a2d5e35243bd"))).RoleType;
 		public static readonly RoleType C1AllorsDecimal = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("87eb0d19-73a7-4aae-aeed-66dc9163233c"))).RoleType;
 		public static readonly RoleType C1C1Many2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("8c198447-e943-4f5a-b749-9534b181c664"))).RoleType;
-		public static readonly RoleType C1AllorsLong = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("91e8b23b-48fb-4d20-8a71-89c5630f1c78"))).RoleType;
 		public static readonly RoleType C1I12Many2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("94a2b37d-9431-4496-b992-630cda5b9851"))).RoleType;
 		public static readonly RoleType C1AllorsBinary = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("97f31053-0e7b-42a0-90c2-ce6f09c56e86"))).RoleType;
 		public static readonly RoleType C1I12One2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("98c5f58b-1777-4d9a-8828-37dbf7051510"))).RoleType;
@@ -585,7 +577,7 @@ namespace Allors.Meta
 		public static readonly RoleType C1I2Many2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("d0341bed-2732-4bcb-b1bb-9f9589de5d03"))).RoleType;
 		public static readonly RoleType C1I1One2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("e0656d9a-75a6-4e59-aaa1-3ff03d440059"))).RoleType;
 		public static readonly RoleType C1C2One2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("e97fc754-c736-4359-9662-19dce9429f89"))).RoleType;
-		public static readonly RoleType C1AllorsDouble = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("f268783d-42ed-41c1-b0b0-b8a60e30a601"))).RoleType;
+		public static readonly RoleType C1AllorsFloat = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("f268783d-42ed-41c1-b0b0-b8a60e30a601"))).RoleType;
 		public static readonly RoleType C1C2Many2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("f29d4a52-9ba5-40f6-ba99-050cbd03e554"))).RoleType;
 		public static readonly RoleType C1AllorsInteger = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("f4920d94-8cd0-45b6-be00-f18d377368fd"))).RoleType;
 		public static readonly RoleType C2AllorsDecimal = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("07eaa992-322a-40e9-bf2c-aa33b69f54cd"))).RoleType;
@@ -593,13 +585,12 @@ namespace Allors.Meta
 		public static readonly RoleType C2C2Many2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("12896fc2-c9e9-4a89-b875-0aeb92e298e5"))).RoleType;
 		public static readonly RoleType C2AllorsUnique = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("1444d919-6ca1-4642-8d18-9d955c817581"))).RoleType;
 		public static readonly RoleType C2I12Many2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("165cc83e-935d-4d0d-aec7-5da155300086"))).RoleType;
-		public static readonly RoleType C2AllorsDateTime = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("1afae917-7f62-4472-8a9c-22113b1af77f"))).RoleType;
+		public static readonly RoleType C2AllorsDate = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("1afae917-7f62-4472-8a9c-22113b1af77f"))).RoleType;
 		public static readonly RoleType C2I12One2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("1d0c57c9-a3d1-4134-bc7d-7bb587d8250f"))).RoleType;
 		public static readonly RoleType C2I1Many2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("1d98eda7-6dba-43f1-a5ce-44f7ed104cf9"))).RoleType;
-		public static readonly RoleType C2AllorsDouble = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("262ad367-a52c-4d8b-94e2-b477bb098423"))).RoleType;
+		public static readonly RoleType C2AllorsFloat = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("262ad367-a52c-4d8b-94e2-b477bb098423"))).RoleType;
 		public static readonly RoleType C2I1One2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("2ac55066-c748-4f90-9d0f-1090fe02cc76"))).RoleType;
 		public static readonly RoleType C2I2One2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("38063edc-271a-410d-b857-807a9100c7b5"))).RoleType;
-		public static readonly RoleType C2AllorsLong = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("41cd7805-0f93-460f-8572-9c479f3db206"))).RoleType;
 		public static readonly RoleType C2AllorsInteger = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("42f9f4b6-3b35-4168-93cb-35171dbf83f4"))).RoleType;
 		public static readonly RoleType C2I2Many2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("4a963639-72c3-4e9f-9058-bcfc8fe0bc9e"))).RoleType;
 		public static readonly RoleType C2I12Many2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("50300577-b5fb-4c16-9ac5-41151543f958"))).RoleType;
@@ -624,7 +615,7 @@ namespace Allors.Meta
 		public static readonly RoleType SearchTestText = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("89c930ae-82ce-4f05-9c1f-a9bf9d8e8bb4"))).RoleType;
 		public static readonly RoleType I12AllorsBinary = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("042d1311-1c06-4d7c-b68e-eb734f9c7327"))).RoleType;
 		public static readonly RoleType I12C2One2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("107c212d-cc1c-41b2-9c1d-b40c0102072c"))).RoleType;
-		public static readonly RoleType I12AllorsDouble = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("1611cb5d-4676-4e85-bfc5-5572e8ff1138"))).RoleType;
+		public static readonly RoleType I12AllorsFloat = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("1611cb5d-4676-4e85-bfc5-5572e8ff1138"))).RoleType;
 		public static readonly RoleType I12I1Many2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("167b53c0-644c-467e-9f7c-fcb9415d02c6"))).RoleType;
 		public static readonly RoleType I12AllorsString = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("199a84c4-c7cb-4f23-8b6c-078b14525e18"))).RoleType;
 		public static readonly RoleType I12I12Many2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("1bf2abe0-9273-4fb9-b491-020320f1f8db"))).RoleType;
@@ -640,7 +631,6 @@ namespace Allors.Meta
 		public static readonly RoleType I12AllorsInteger = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("95551e3a-bad2-4136-923f-c8e5f0f2aec7"))).RoleType;
 		public static readonly RoleType I12I1One2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("95c77a0f-7f4c-4142-a93f-f688cfd554af"))).RoleType;
 		public static readonly RoleType I12C1One2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("9aefdda0-e547-4c9b-bf28-431669f8ea2e"))).RoleType;
-		public static readonly RoleType I12AllorsLong = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("9bcbb810-fe3e-4829-8b1c-40219d16b60b"))).RoleType;
 		public static readonly RoleType I12I12One2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("a89b4c06-bba5-4b05-bd6f-c32bc195c32f"))).RoleType;
 		public static readonly RoleType I12I2One2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("ac920d1d-290b-484b-9283-3829337182bc"))).RoleType;
 		public static readonly RoleType I12Dependency = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("b2e3ddda-0cc3-4cfd-a114-9040882ec58a"))).RoleType;
@@ -649,7 +639,7 @@ namespace Allors.Meta
 		public static readonly RoleType I12I12Many2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("c6ecc142-0fbd-48b7-98ae-994fa9b5b814"))).RoleType;
 		public static readonly RoleType I12AllorsBoolean = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("ccdd1ae2-263e-4221-9841-4cff1907ee8d"))).RoleType;
 		public static readonly RoleType I12I1One2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("ce0f7d58-b415-43f3-989b-9d8b34754e4b"))).RoleType;
-		public static readonly RoleType I12AllorsDateTime = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("ed4811bc-c1fc-453b-967f-bd5b6cb6f83f"))).RoleType;
+		public static readonly RoleType I12AllorsDate = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("ed4811bc-c1fc-453b-967f-bd5b6cb6f83f"))).RoleType;
 		public static readonly RoleType I12C1One2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("f302dd07-1abc-409e-aa71-ec9f7ac439aa"))).RoleType;
 		public static readonly RoleType I12C1Many2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("f6436bc9-e307-4001-8f1f-5b37553ab3c6"))).RoleType;
 		public static readonly RoleType BadUIPersonMany = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("8a999086-ca90-40a1-90ae-475d231bb1eb"))).RoleType;
@@ -668,7 +658,7 @@ namespace Allors.Meta
 		public static readonly RoleType I1I2Many2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("194580f4-e0e3-4b52-b9ba-6020171be4e9"))).RoleType;
 		public static readonly RoleType I1AllorsString = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("28ceffc2-c776-4a0a-9825-a6d1bcb265dc"))).RoleType;
 		public static readonly RoleType I1I12Many2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("2e85d74a-8d13-4bc0-ae4f-42b305e79373"))).RoleType;
-		public static readonly RoleType I1AllorsDateTime = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("32fc21cc-4be7-4a0e-ac71-df135be95e68"))).RoleType;
+		public static readonly RoleType I1AllorsDate = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("32fc21cc-4be7-4a0e-ac71-df135be95e68"))).RoleType;
 		public static readonly RoleType I1I2One2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("39e28141-fd6b-4f49-8884-d5400f6c57ff"))).RoleType;
 		public static readonly RoleType I1C2One2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("4506a14b-22f1-41fe-972b-40fab7c6dd31"))).RoleType;
 		public static readonly RoleType I1C1One2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("593914b1-af95-4992-9703-2b60f4ea0926"))).RoleType;
@@ -677,7 +667,6 @@ namespace Allors.Meta
 		public static readonly RoleType I1I1One2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("670c753e-8ea0-40b1-bfc9-7388074191d3"))).RoleType;
 		public static readonly RoleType I1I1Many2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("6bb3ba6d-ffc7-4700-9723-c323b9b2d233"))).RoleType;
 		public static readonly RoleType I1AllorsBoolean = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("6c3d04be-6f95-44b8-863a-245e150e3110"))).RoleType;
-		public static readonly RoleType I1AllorsLong = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("75fb2012-0b49-4442-a9b4-8239cffb1d37"))).RoleType;
 		public static readonly RoleType I1AllorsDecimal = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("818b4013-5ef1-4455-9f0d-9a39fa3425bb"))).RoleType;
 		public static readonly RoleType I1I12One2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("a51d9d21-40ec-44b9-853d-8c18f54d659d"))).RoleType;
 		public static readonly RoleType I1I2One2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("a5761a0e-5c10-407a-bd68-0c4f69d78968"))).RoleType;
@@ -685,7 +674,7 @@ namespace Allors.Meta
 		public static readonly RoleType I1C1One2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("b89092f1-8775-4b6a-99ef-f8626bc770bd"))).RoleType;
 		public static readonly RoleType I1AllorsBinary = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("b9c67658-4abc-41f3-9434-c8512a482179"))).RoleType;
 		public static readonly RoleType I1C1Many2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("bcc9eee6-fa07-4d37-be84-b691bfce24be"))).RoleType;
-		public static readonly RoleType I1AllorsDouble = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("cdb758bf-ecaf-4d99-88fb-58df9258c13c"))).RoleType;
+		public static readonly RoleType I1AllorsFloat = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("cdb758bf-ecaf-4d99-88fb-58df9258c13c"))).RoleType;
 		public static readonly RoleType I1I1One2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("e1b13216-7210-4c24-a668-83b40162a21b"))).RoleType;
 		public static readonly RoleType I1C1Many2One = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("e3126228-342a-4415-a2e8-d52eceaeaf89"))).RoleType;
 		public static readonly RoleType I1I12One2Many = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("e386cca6-e738-4c37-8bfc-b23057d7a0be"))).RoleType;

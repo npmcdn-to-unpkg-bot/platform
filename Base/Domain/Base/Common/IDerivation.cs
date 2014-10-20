@@ -45,7 +45,7 @@ namespace Allors.Domain
 
         bool IsForced(ObjectId objectId);
 
-        ISet<RoleType> GetChangedRoleTypes(IObject association);
+        ISet<IRoleType> GetChangedRoleTypes(IObject association);
 
         void AddDerivable(Derivable derivable);
 

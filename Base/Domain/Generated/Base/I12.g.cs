@@ -12,7 +12,7 @@ namespace Allors.Domain
 
 		
 
-		global::System.Double? I12AllorsDouble {get;}
+		global::System.Double? I12AllorsFloat {get;}
 
 		
 		I1 I12I1Many2One {get;}
@@ -72,10 +72,6 @@ namespace Allors.Domain
 		C1 I12C1One2One {get;}
 
 		
-
-		global::System.Int64? I12AllorsLong {get;}
-
-		
 		I12 I12I12One2One {get;}
 
 		
@@ -104,7 +100,7 @@ namespace Allors.Domain
 
 		
 
-		global::System.DateTime? I12AllorsDateTime {get;}
+		global::System.DateTime? I12AllorsDate {get;}
 
 		
 

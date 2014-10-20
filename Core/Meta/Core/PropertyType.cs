@@ -22,7 +22,7 @@ namespace Allors.Meta
 {
     using System;
 
-    public abstract partial class PropertyType : DomainObject
+    public abstract partial class PropertyType : OperandType
     {
         protected PropertyType(Domain domain, Guid id)
             : base(domain, id)
@@ -33,8 +33,6 @@ namespace Allors.Meta
         /// Gets the operand name.
         /// </summary>
         public abstract string Name { get; }
-
-        public abstract string DisplayName { get; }
 
         /// <summary>
         /// Get the value of the property on this object.
@@ -53,6 +51,6 @@ namespace Allors.Meta
         /// <returns>
         /// The <see cref="IObjectType"/>.
         /// </returns>
-        public abstract IObjectType GetObjectType();
+        public abstract ObjectType GetObjectType();
     }
 }

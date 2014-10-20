@@ -297,7 +297,7 @@ namespace Allors.Meta
         /// <returns>
         /// The <see cref="ObjectType"/>.
         /// </returns>
-        public override IObjectType GetObjectType()
+        public override ObjectType GetObjectType()
         {
             return this.ObjectType;
         }

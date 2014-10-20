@@ -46,7 +46,7 @@ namespace Allors.Domain
             this.session = session;
 
             this.objectsByObjectType = new Dictionary<ObjectType, IObjects>();
-            foreach (var objectType in session.Database.MetaPopulation.Composites)
+            foreach (ObjectType objectType in session.Database.MetaPopulation.Composites)
             {
                 this.objectsByObjectType[objectType] = objectType.GetObjects(session);
             }

@@ -51,6 +51,7 @@
     <Compile Include="Core\DomainObject.cs" />
     <Compile Include="Core\Composite.cs" />
     <Compile Include="Core\LazySet.cs" />
+    <Compile Include="Core\OperandType.cs" />
     <Compile Include="Core\PropertyType.cs" />
     <Compile Include="Core\ObjectType.cs" />
     <Compile Include="Core\MetaObject.cs" />
@@ -88,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Core\Generate.proj" />
+    <None Include="Core\Overview.cd" />
     <None Include="packages.config" />
     <None Include="Settings.StyleCop" />
   </ItemGroup>

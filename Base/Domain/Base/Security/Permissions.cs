@@ -57,7 +57,7 @@ namespace Allors.Domain
                 permissionByOperation[permission.Operation] = permission;
             }
 
-            var domain = this.Session.Population.ObjectFactory.MetaPopulation;
+            var domain = (MetaPopulation)this.Session.Population.ObjectFactory.MetaPopulation;
             foreach (var relationType in domain.RelationTypes)
             {
                 {

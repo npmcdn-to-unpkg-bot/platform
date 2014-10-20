@@ -31,9 +31,8 @@ namespace Allors.Meta
 
             var allorsString = (Unit)meta.Find(UnitIds.StringId);
             var allorsInteger = (Unit)meta.Find(UnitIds.IntegerId);
-            var allorsLong = (Unit)meta.Find(UnitIds.LongId);
             var allorsDecimal = (Unit)meta.Find(UnitIds.DecimalId);
-            var allorsDouble = (Unit)meta.Find(UnitIds.DoubleId);
+            var allorsFloat = (Unit)meta.Find(UnitIds.FloatId);
             var allorsBoolean = (Unit)meta.Find(UnitIds.BooleanId);
             var allorsDate = (Unit)meta.Find(UnitIds.DateId);
             var allorsUnique = (Unit)meta.Find(UnitIds.Unique);
@@ -189,7 +188,7 @@ namespace Allors.Meta
 
             // RelationTypes
             // Counter
-            new RelationTypeBuilder(domain, new Guid("309d07d9-8dea-4e99-a3b8-53c0d360bc54"), new Guid("0c807020-5397-4cdb-8380-52899b7af6b7"), new Guid("ab60f6a7-d913-4377-ab47-97f0fb9d8f3b")).WithObjectTypes(counter, allorsLong).WithSingularName("Value").WithPluralName("Values").Build();
+            new RelationTypeBuilder(domain, new Guid("309d07d9-8dea-4e99-a3b8-53c0d360bc54"), new Guid("0c807020-5397-4cdb-8380-52899b7af6b7"), new Guid("ab60f6a7-d913-4377-ab47-97f0fb9d8f3b")).WithObjectTypes(counter, allorsInteger).WithSingularName("Value").WithPluralName("Values").Build();
 
             // UniquelyIdentifiable
             new RelationTypeBuilder(domain, new Guid("e1842d87-8157-40e7-b06e-4375f311f2c3"), new Guid("fe413e96-cfcf-4e8d-9f23-0fa4f457fdf1"), new Guid("d73fd9a4-13ee-4fa9-8925-d93eca328bf6")).WithObjectTypes(uniquelyIdentifiable, allorsUnique).WithSingularName("UniqueId").WithPluralName("UniqueIds").WithIsDerived(true).WithIsIndexed(true).Build();

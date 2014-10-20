@@ -37,7 +37,7 @@ namespace Allors.Domain
 
         private readonly AccessControlledObject accessControlledObject;
         private readonly User user;
-        private readonly ObjectType objectType;
+        private readonly IObjectType objectType;
         private readonly IDatabaseSession databaseSession;
 
         private Dictionary<Guid, IList<Operation>> operationsByOperandId;
@@ -248,7 +248,7 @@ namespace Allors.Domain
                         }
 
                         var securityCache = SecurityCache.GetSingleton(this.databaseSession);
-                        this.operationsByOperandId = securityCache.GetOperationsByOperandObjectId(accessControls, this.objectType, out this.hasWriteOperation, out this.hasReadOperation);
+                        this.operationsByOperandId = securityCache.GetOperationsByOperandObjectId(accessControls, (ObjectType)this.objectType, out this.hasWriteOperation, out this.hasReadOperation);
 
                         foreach (var deniedPermission in deniedPermissions)
                         {

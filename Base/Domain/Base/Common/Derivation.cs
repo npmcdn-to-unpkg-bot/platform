@@ -187,7 +187,7 @@ namespace Allors.Domain
             return this.ForcedDerivations.Contains(objectId);
         }
 
-        public ISet<RoleType> GetChangedRoleTypes(IObject association)
+        public ISet<IRoleType> GetChangedRoleTypes(IObject association)
         {
             return this.changeSet.GetRoleTypes(association.Id);
         }

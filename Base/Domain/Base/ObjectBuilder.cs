@@ -134,13 +134,10 @@ namespace Allors
                     case UnitTags.AllorsInteger:
                         return 0;
 
-                    case UnitTags.AllorsLong:
-                        return 0L;
-
                     case UnitTags.AllorsDecimal:
                         return 0m;
 
-                    case UnitTags.AllorsDouble:
+                    case UnitTags.AllorsFloat:
                         return 0d;
 
                     case UnitTags.AllorsBoolean:

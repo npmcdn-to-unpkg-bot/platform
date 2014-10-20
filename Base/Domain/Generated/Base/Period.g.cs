@@ -5,11 +5,11 @@ namespace Allors.Domain
 	public partial interface PeriodBuilder :  global::System.IDisposable
 	{	
 
-		global::System.DateTime? PeriodFromDate {get;}
+		global::System.DateTime? FromDate {get;}
 
 		
 
-		global::System.DateTime? PeriodThroughDate {get;}
+		global::System.DateTime? ThroughDate {get;}
 
 		
 	}

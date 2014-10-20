@@ -22,21 +22,15 @@ namespace Allors.Domain
 			}			
 					
 
-			if(builder.C2AllorsDateTime.HasValue)
+			if(builder.C2AllorsDate.HasValue)
 			{
-				this.C2AllorsDateTime = builder.C2AllorsDateTime.Value;
+				this.C2AllorsDate = builder.C2AllorsDate.Value;
 			}			
 					
 
-			if(builder.C2AllorsDouble.HasValue)
+			if(builder.C2AllorsFloat.HasValue)
 			{
-				this.C2AllorsDouble = builder.C2AllorsDouble.Value;
-			}			
-					
-
-			if(builder.C2AllorsLong.HasValue)
-			{
-				this.C2AllorsLong = builder.C2AllorsLong.Value;
+				this.C2AllorsFloat = builder.C2AllorsFloat.Value;
 			}			
 					
 
@@ -79,19 +73,13 @@ namespace Allors.Domain
 			}			
 					
 
-			if(builder.I2AllorsDateTime.HasValue)
+			if(builder.I2AllorsDate.HasValue)
 			{
-				this.I2AllorsDateTime = builder.I2AllorsDateTime.Value;
+				this.I2AllorsDate = builder.I2AllorsDate.Value;
 			}			
 		
 
 			this.I2AllorsString = builder.I2AllorsString;
-					
-
-			if(builder.I2AllorsLong.HasValue)
-			{
-				this.I2AllorsLong = builder.I2AllorsLong.Value;
-			}			
 					
 
 			if(builder.I2AllorsInteger.HasValue)
@@ -100,18 +88,18 @@ namespace Allors.Domain
 			}			
 					
 
-			if(builder.I2AllorsDouble.HasValue)
+			if(builder.I2AllorsFloat.HasValue)
 			{
-				this.I2AllorsDouble = builder.I2AllorsDouble.Value;
+				this.I2AllorsFloat = builder.I2AllorsFloat.Value;
 			}			
 		
 
 			this.I12AllorsBinary = builder.I12AllorsBinary;
 					
 
-			if(builder.I12AllorsDouble.HasValue)
+			if(builder.I12AllorsFloat.HasValue)
 			{
-				this.I12AllorsDouble = builder.I12AllorsDouble.Value;
+				this.I12AllorsFloat = builder.I12AllorsFloat.Value;
 			}			
 		
 
@@ -139,21 +127,15 @@ namespace Allors.Domain
 			}			
 					
 
-			if(builder.I12AllorsLong.HasValue)
-			{
-				this.I12AllorsLong = builder.I12AllorsLong.Value;
-			}			
-					
-
 			if(builder.I12AllorsBoolean.HasValue)
 			{
 				this.I12AllorsBoolean = builder.I12AllorsBoolean.Value;
 			}			
 					
 
-			if(builder.I12AllorsDateTime.HasValue)
+			if(builder.I12AllorsDate.HasValue)
 			{
-				this.I12AllorsDateTime = builder.I12AllorsDateTime.Value;
+				this.I12AllorsDate = builder.I12AllorsDate.Value;
 			}			
 		
 
@@ -505,13 +487,13 @@ namespace Allors.Domain
 		        }		
 
 				
-				public global::System.DateTime? C2AllorsDateTime {get; set;}
+				public global::System.DateTime? C2AllorsDate {get; set;}
 
 				/// <exclude/>
-				public C2Builder WithC2AllorsDateTime(global::System.DateTime? value)
+				public C2Builder WithC2AllorsDate(global::System.DateTime? value)
 		        {
-				    if(this.C2AllorsDateTime!=null){throw new global::System.ArgumentException("One multicplicity");}
-		            this.C2AllorsDateTime = value;
+				    if(this.C2AllorsDate!=null){throw new global::System.ArgumentException("One multicplicity");}
+		            this.C2AllorsDate = value;
 		            return this;
 		        }	
 
@@ -540,13 +522,13 @@ namespace Allors.Domain
 		        }		
 
 				
-				public global::System.Double? C2AllorsDouble {get; set;}
+				public global::System.Double? C2AllorsFloat {get; set;}
 
 				/// <exclude/>
-				public C2Builder WithC2AllorsDouble(global::System.Double? value)
+				public C2Builder WithC2AllorsFloat(global::System.Double? value)
 		        {
-				    if(this.C2AllorsDouble!=null){throw new global::System.ArgumentException("One multicplicity");}
-		            this.C2AllorsDouble = value;
+				    if(this.C2AllorsFloat!=null){throw new global::System.ArgumentException("One multicplicity");}
+		            this.C2AllorsFloat = value;
 		            return this;
 		        }	
 
@@ -575,16 +557,6 @@ namespace Allors.Domain
 		        }		
 
 				
-				public global::System.Int64? C2AllorsLong {get; set;}
-
-				/// <exclude/>
-				public C2Builder WithC2AllorsLong(global::System.Int64? value)
-		        {
-				    if(this.C2AllorsLong!=null){throw new global::System.ArgumentException("One multicplicity");}
-		            this.C2AllorsLong = value;
-		            return this;
-		        }	
-
 				public global::System.Int32? C2AllorsInteger {get; set;}
 
 				/// <exclude/>
@@ -915,13 +887,13 @@ namespace Allors.Domain
 		        }		
 
 				
-				public global::System.DateTime? I2AllorsDateTime {get; set;}
+				public global::System.DateTime? I2AllorsDate {get; set;}
 
 				/// <exclude/>
-				public C2Builder WithI2AllorsDateTime(global::System.DateTime? value)
+				public C2Builder WithI2AllorsDate(global::System.DateTime? value)
 		        {
-				    if(this.I2AllorsDateTime!=null){throw new global::System.ArgumentException("One multicplicity");}
-		            this.I2AllorsDateTime = value;
+				    if(this.I2AllorsDate!=null){throw new global::System.ArgumentException("One multicplicity");}
+		            this.I2AllorsDate = value;
 		            return this;
 		        }	
 
@@ -1063,16 +1035,6 @@ namespace Allors.Domain
 		        }		
 
 				
-				public global::System.Int64? I2AllorsLong {get; set;}
-
-				/// <exclude/>
-				public C2Builder WithI2AllorsLong(global::System.Int64? value)
-		        {
-				    if(this.I2AllorsLong!=null){throw new global::System.ArgumentException("One multicplicity");}
-		            this.I2AllorsLong = value;
-		            return this;
-		        }	
-
 				public global::System.Int32? I2AllorsInteger {get; set;}
 
 				/// <exclude/>
@@ -1122,13 +1084,13 @@ namespace Allors.Domain
 		        }		
 
 				
-				public global::System.Double? I2AllorsDouble {get; set;}
+				public global::System.Double? I2AllorsFloat {get; set;}
 
 				/// <exclude/>
-				public C2Builder WithI2AllorsDouble(global::System.Double? value)
+				public C2Builder WithI2AllorsFloat(global::System.Double? value)
 		        {
-				    if(this.I2AllorsDouble!=null){throw new global::System.ArgumentException("One multicplicity");}
-		            this.I2AllorsDouble = value;
+				    if(this.I2AllorsFloat!=null){throw new global::System.ArgumentException("One multicplicity");}
+		            this.I2AllorsFloat = value;
 		            return this;
 		        }	
 
@@ -1153,13 +1115,13 @@ namespace Allors.Domain
 		        }		
 
 				
-				public global::System.Double? I12AllorsDouble {get; set;}
+				public global::System.Double? I12AllorsFloat {get; set;}
 
 				/// <exclude/>
-				public C2Builder WithI12AllorsDouble(global::System.Double? value)
+				public C2Builder WithI12AllorsFloat(global::System.Double? value)
 		        {
-				    if(this.I12AllorsDouble!=null){throw new global::System.ArgumentException("One multicplicity");}
-		            this.I12AllorsDouble = value;
+				    if(this.I12AllorsFloat!=null){throw new global::System.ArgumentException("One multicplicity");}
+		            this.I12AllorsFloat = value;
 		            return this;
 		        }	
 
@@ -1344,16 +1306,6 @@ namespace Allors.Domain
 		        }		
 
 				
-				public global::System.Int64? I12AllorsLong {get; set;}
-
-				/// <exclude/>
-				public C2Builder WithI12AllorsLong(global::System.Int64? value)
-		        {
-				    if(this.I12AllorsLong!=null){throw new global::System.ArgumentException("One multicplicity");}
-		            this.I12AllorsLong = value;
-		            return this;
-		        }	
-
 				public I12 I12I12One2One {get; set;}
 
 				/// <exclude/>
@@ -1447,13 +1399,13 @@ namespace Allors.Domain
 		        }		
 
 				
-				public global::System.DateTime? I12AllorsDateTime {get; set;}
+				public global::System.DateTime? I12AllorsDate {get; set;}
 
 				/// <exclude/>
-				public C2Builder WithI12AllorsDateTime(global::System.DateTime? value)
+				public C2Builder WithI12AllorsDate(global::System.DateTime? value)
 		        {
-				    if(this.I12AllorsDateTime!=null){throw new global::System.ArgumentException("One multicplicity");}
-		            this.I12AllorsDateTime = value;
+				    if(this.I12AllorsDate!=null){throw new global::System.ArgumentException("One multicplicity");}
+		            this.I12AllorsDate = value;
 		            return this;
 		        }	
 

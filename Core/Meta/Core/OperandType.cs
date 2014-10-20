@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="IAssociationType.cs" company="Allors bvba">
+// <copyright file="OperandType.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -16,32 +16,19 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the AssociationType type.</summary>
 //-------------------------------------------------------------------------------------------------
 
 namespace Allors.Meta
 {
     using System;
-    
-    /// <summary>
-    /// An association type defines the association side of a relation.
-    /// This is also called the 'active', 'controlling' or 'owning' side.
-    /// AssociationTypes can only have composite <see cref="ObjectType"/>s.
-    /// </summary>
-    public interface IAssociationType : IDomainObject, IComparable
+
+    public abstract partial class OperandType : DomainObject
     {
-        string SingularName { get; }
+        public OperandType(Domain definingDomain, Guid id)
+            : base(definingDomain, id)
+        {
+        }
 
-        string SingularPropertyName { get; }
-
-        bool IsMany { get; }
-
-        IRelationType RelationType { get; }
-
-        IComposite ObjectType { get; }
-
-        bool IsOne { get; }
-
-        IRoleType RoleType { get; }
+        public abstract string DisplayName { get; }
     }
 }

@@ -60,7 +60,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
                 {
                     if (roleType.IsOne)
                     {
-                        sql = Sql.Schema.AllorsPrefix + "GA_" + associationType.ObjectType.ExclusiveLeafClass.Name + "_" + associationType.SingularName;
+                        sql = Sql.Schema.AllorsPrefix + "GA_" + associationType.ObjectType.ExclusiveLeafClass.Name + "_" + associationType.SingularPropertyName;
                     }
                     else
                     {

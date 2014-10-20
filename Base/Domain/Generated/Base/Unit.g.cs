@@ -10,15 +10,9 @@ namespace Allors.Domain
 			var builder = (UnitBuilder)objectBuilder;
 			
 
-			if(builder.AllorsLong.HasValue)
+			if(builder.AllorsDate.HasValue)
 			{
-				this.AllorsLong = builder.AllorsLong.Value;
-			}			
-					
-
-			if(builder.AllorsDateTime.HasValue)
-			{
-				this.AllorsDateTime = builder.AllorsDateTime.Value;
+				this.AllorsDate = builder.AllorsDate.Value;
 			}			
 		
 
@@ -31,9 +25,9 @@ namespace Allors.Domain
 			}			
 					
 
-			if(builder.AllorsDouble.HasValue)
+			if(builder.AllorsFloat.HasValue)
 			{
-				this.AllorsDouble = builder.AllorsDouble.Value;
+				this.AllorsFloat = builder.AllorsFloat.Value;
 			}			
 					
 
@@ -79,23 +73,13 @@ namespace Allors.Domain
 	    {
 	    }
 
-				public global::System.Int64? AllorsLong {get; set;}
+				public global::System.DateTime? AllorsDate {get; set;}
 
 				/// <exclude/>
-				public UnitBuilder WithAllorsLong(global::System.Int64? value)
+				public UnitBuilder WithAllorsDate(global::System.DateTime? value)
 		        {
-				    if(this.AllorsLong!=null){throw new global::System.ArgumentException("One multicplicity");}
-		            this.AllorsLong = value;
-		            return this;
-		        }	
-
-				public global::System.DateTime? AllorsDateTime {get; set;}
-
-				/// <exclude/>
-				public UnitBuilder WithAllorsDateTime(global::System.DateTime? value)
-		        {
-				    if(this.AllorsDateTime!=null){throw new global::System.ArgumentException("One multicplicity");}
-		            this.AllorsDateTime = value;
+				    if(this.AllorsDate!=null){throw new global::System.ArgumentException("One multicplicity");}
+		            this.AllorsDate = value;
 		            return this;
 		        }	
 
@@ -119,13 +103,13 @@ namespace Allors.Domain
 		            return this;
 		        }	
 
-				public global::System.Double? AllorsDouble {get; set;}
+				public global::System.Double? AllorsFloat {get; set;}
 
 				/// <exclude/>
-				public UnitBuilder WithAllorsDouble(global::System.Double? value)
+				public UnitBuilder WithAllorsFloat(global::System.Double? value)
 		        {
-				    if(this.AllorsDouble!=null){throw new global::System.ArgumentException("One multicplicity");}
-		            this.AllorsDouble = value;
+				    if(this.AllorsFloat!=null){throw new global::System.ArgumentException("One multicplicity");}
+		            this.AllorsFloat = value;
 		            return this;
 		        }	
 

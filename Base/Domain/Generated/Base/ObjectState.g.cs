@@ -5,7 +5,11 @@ namespace Allors.Domain
 	public partial interface ObjectStateBuilder : UniquelyIdentifiableBuilder , global::System.IDisposable
 	{	
 
-		global::System.Collections.Generic.List<Permission> ObjectStateDeniedPermissions {get;}		
+		global::System.Collections.Generic.List<Permission> DeniedPermissions {get;}		
+
+		
+
+		global::System.String Name {get;}
 
 		
 	}

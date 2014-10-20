@@ -26,5 +26,7 @@ namespace Allors.Meta
     public interface IObjectType : IDomainObject, IComparable
     {
         string SingularName { get; }
+
+        string PluralName { get; }
     }
 }

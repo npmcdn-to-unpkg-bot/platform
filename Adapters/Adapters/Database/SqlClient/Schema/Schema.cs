@@ -766,7 +766,7 @@ AS
                                 if (associationType.IsOne)
                                 {
                                     // Get IComposite Association (1-1) [object table]
-                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GA_" + objectType.Name + "_" + associationType.SingularName };
+                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GA_" + objectType.Name + "_" + associationType.SingularPropertyName };
                                     procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.RoleId.Param + @" " + this.database.GetSqlType(this.RoleId) + @"
@@ -780,7 +780,7 @@ AS
                                 else
                                 {
                                     // Get IComposite Association (*-1) [object table]
-                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GA_" + objectType.Name + "_" + associationType.SingularName };
+                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GA_" + objectType.Name + "_" + associationType.SingularPropertyName };
                                     procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.RoleId.Param + @" " + this.database.GetSqlType(this.RoleId) + @"

@@ -5,7 +5,7 @@ namespace Allors.Domain
 	public partial interface CommentableBuilder :  global::System.IDisposable
 	{	
 
-		global::System.String CommentableComment {get;}
+		global::System.String Comment {get;}
 
 		
 	}

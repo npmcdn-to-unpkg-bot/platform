@@ -69,7 +69,7 @@ namespace Allors.Domain
         {
             foreach (var conflict in conflicts)
             {
-                var derivationRole = new DerivationRelation(conflict.Object, conflict.RoleType);
+                var derivationRole = new DerivationRelation(conflict.Object, (RoleType)conflict.RoleType);
                 var derivationErrorConflict = new DerivationErrorConflict(this, derivationRole);
                 this.AddError(derivationErrorConflict);
             }
