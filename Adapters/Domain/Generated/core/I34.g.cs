@@ -28,15 +28,15 @@ namespace Allors.Domain
 		void RemoveI34AllorsBoolean();
 
 
-		global::System.Double I34AllorsDouble 
+		global::System.Double I34AllorsFloat 
 		{
 			get;
 			set;
 		}
 
-		bool ExistI34AllorsDouble{get;}
+		bool ExistI34AllorsFloat{get;}
 
-		void RemoveI34AllorsDouble();
+		void RemoveI34AllorsFloat();
 
 
 		global::System.Int32 I34AllorsInteger 
@@ -171,11 +171,11 @@ namespace Allors.Domain
 				return global::Allors.Meta.RoleTypes.I34AllorsBoolean;
 			}
 		} 
-		public global::Allors.Meta.RoleType I34AllorsDouble 
+		public global::Allors.Meta.RoleType I34AllorsFloat 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I34AllorsDouble;
+				return global::Allors.Meta.RoleTypes.I34AllorsFloat;
 			}
 		} 
 		public global::Allors.Meta.RoleType I34AllorsInteger 

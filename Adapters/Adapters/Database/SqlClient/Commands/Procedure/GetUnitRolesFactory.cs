@@ -118,7 +118,7 @@ namespace Allors.Adapters.Database.SqlClient.Commands.Procedure
                                     case UnitTags.AllorsDecimal:
                                         unit = reader.GetDecimal(i);
                                         break;
-                                    case UnitTags.AllorsDouble:
+                                    case UnitTags.AllorsFloat:
                                         unit = reader.GetDouble(i);
                                         break;
                                     case UnitTags.AllorsBoolean:

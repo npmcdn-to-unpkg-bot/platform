@@ -187,53 +187,53 @@ namespace Allors.Adapters.Special
             this.C4C.S1234AllorsInteger = 2;
             this.C4D.S1234AllorsInteger = 2;
             
-            // Double
-            this.C1B.C1AllorsDouble = 1;
-            this.C1C.C1AllorsDouble = 2;
-            this.C1D.C1AllorsDouble = 2;
+            // Float
+            this.C1B.C1AllorsFloat = 1;
+            this.C1C.C1AllorsFloat = 2;
+            this.C1D.C1AllorsFloat = 2;
 
-            this.C1B.C1DoubleLessThan = 0;
-            this.C1C.C1DoubleLessThan = 2;
-            this.C1D.C1DoubleLessThan = 4;
+            this.C1B.C1FloatLessThan = 0;
+            this.C1C.C1FloatLessThan = 2;
+            this.C1D.C1FloatLessThan = 4;
 
-            this.C1B.C1DoubleGreaterThan = 0;
-            this.C1C.C1DoubleGreaterThan = 2;
-            this.C1D.C1DoubleGreaterThan = 4;
+            this.C1B.C1FloatGreaterThan = 0;
+            this.C1C.C1FloatGreaterThan = 2;
+            this.C1D.C1FloatGreaterThan = 4;
 
-            this.C1B.C1DoubleBetweenA = -10;
-            this.C1B.C1DoubleBetweenB = 0;
-            this.C1C.C1DoubleBetweenA = 2;
-            this.C1C.C1DoubleBetweenB = 2;
-            this.C1D.C1DoubleBetweenA = 0;
-            this.C1D.C1DoubleBetweenB = 10;
+            this.C1B.C1FloatBetweenA = -10;
+            this.C1B.C1FloatBetweenB = 0;
+            this.C1C.C1FloatBetweenA = 2;
+            this.C1C.C1FloatBetweenB = 2;
+            this.C1D.C1FloatBetweenA = 0;
+            this.C1D.C1FloatBetweenB = 10;
 
-            this.C1B.I1AllorsDouble = 1;
-            this.C1C.I1AllorsDouble = 2;
-            this.C1D.I1AllorsDouble = 2;
+            this.C1B.I1AllorsFloat = 1;
+            this.C1C.I1AllorsFloat = 2;
+            this.C1D.I1AllorsFloat = 2;
 
-            this.C1B.S1AllorsDouble = 1;
-            this.C1C.S1AllorsDouble = 2;
-            this.C1D.S1AllorsDouble = 2;
+            this.C1B.S1AllorsFloat = 1;
+            this.C1C.S1AllorsFloat = 2;
+            this.C1D.S1AllorsFloat = 2;
 
-            this.C1B.I12AllorsDouble = 1;
-            this.C1C.I12AllorsDouble = 2;
-            this.C1D.I12AllorsDouble = 2;
-            this.C2B.I12AllorsDouble = 1;
-            this.C2C.I12AllorsDouble = 2;
-            this.C2D.I12AllorsDouble = 2;
+            this.C1B.I12AllorsFloat = 1;
+            this.C1C.I12AllorsFloat = 2;
+            this.C1D.I12AllorsFloat = 2;
+            this.C2B.I12AllorsFloat = 1;
+            this.C2C.I12AllorsFloat = 2;
+            this.C2D.I12AllorsFloat = 2;
 
-            this.C1B.S1234AllorsDouble = 1;
-            this.C1C.S1234AllorsDouble = 2;
-            this.C1D.S1234AllorsDouble = 2;
-            this.C2B.S1234AllorsDouble = 1;
-            this.C2C.S1234AllorsDouble = 2;
-            this.C2D.S1234AllorsDouble = 2;
-            this.C3B.S1234AllorsDouble = 1;
-            this.C3C.S1234AllorsDouble = 2;
-            this.C3D.S1234AllorsDouble = 2;
-            this.C4B.S1234AllorsDouble = 1;
-            this.C4C.S1234AllorsDouble = 2;
-            this.C4D.S1234AllorsDouble = 2;
+            this.C1B.S1234AllorsFloat = 1;
+            this.C1C.S1234AllorsFloat = 2;
+            this.C1D.S1234AllorsFloat = 2;
+            this.C2B.S1234AllorsFloat = 1;
+            this.C2C.S1234AllorsFloat = 2;
+            this.C2D.S1234AllorsFloat = 2;
+            this.C3B.S1234AllorsFloat = 1;
+            this.C3C.S1234AllorsFloat = 2;
+            this.C3D.S1234AllorsFloat = 2;
+            this.C4B.S1234AllorsFloat = 1;
+            this.C4C.S1234AllorsFloat = 2;
+            this.C4D.S1234AllorsFloat = 2;
 
             // Decimal
             this.C1B.C1AllorsDecimal = 1;

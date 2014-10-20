@@ -177,7 +177,7 @@ namespace Allors.Adapters
                     return XmlConvert.ToInt32(xmlValue);
                 case UnitTags.AllorsDecimal:
                     return XmlConvert.ToDecimal(xmlValue);
-                case UnitTags.AllorsDouble:
+                case UnitTags.AllorsFloat:
                     return XmlConvert.ToDouble(xmlValue);
                 case UnitTags.AllorsBoolean:
                     return XmlConvert.ToBoolean(xmlValue);
@@ -208,7 +208,7 @@ namespace Allors.Adapters
                     return XmlConvert.ToString((int)unit);
                 case UnitTags.AllorsDecimal:
                     return XmlConvert.ToString((decimal)unit);
-                case UnitTags.AllorsDouble:
+                case UnitTags.AllorsFloat:
                     return XmlConvert.ToString((double)unit);
                 case UnitTags.AllorsBoolean:
                     return XmlConvert.ToString((bool)unit);

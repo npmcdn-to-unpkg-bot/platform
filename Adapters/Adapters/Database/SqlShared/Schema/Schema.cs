@@ -330,7 +330,7 @@ namespace Allors.Adapters.Database.Sql
                     return DbType.Int32;
                 case UnitTags.AllorsDecimal:
                     return DbType.Decimal;
-                case UnitTags.AllorsDouble:
+                case UnitTags.AllorsFloat:
                     return DbType.Double;
                 case UnitTags.AllorsBoolean:
                     return DbType.Boolean;

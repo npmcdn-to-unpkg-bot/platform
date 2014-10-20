@@ -178,7 +178,7 @@ namespace Allors.Meta.Static
             this.BooleanType = (Unit)this.metaPopulation.Find(UnitIds.BooleanId);
             this.DateTimeType = (Unit)this.metaPopulation.Find(UnitIds.DateId);
             this.DecimalType = (Unit)this.metaPopulation.Find(UnitIds.DecimalId);
-            this.DoubleType = (Unit)this.metaPopulation.Find(UnitIds.DoubleId);
+            this.DoubleType = (Unit)this.metaPopulation.Find(UnitIds.FloatId);
             this.IntegerType = (Unit)this.metaPopulation.Find(UnitIds.IntegerId);
             this.StringType = (Unit)this.metaPopulation.Find(UnitIds.StringId);
             this.UniqueType = (Unit)this.metaPopulation.Find(UnitIds.Unique);

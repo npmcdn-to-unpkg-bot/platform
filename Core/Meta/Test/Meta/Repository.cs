@@ -32,7 +32,7 @@ namespace Allors.Meta
             var allorsString = (Unit)env.Find(UnitIds.StringId);
             var allorsInteger = (Unit)env.Find(UnitIds.IntegerId);
             var allorsDecimal = (Unit)env.Find(UnitIds.DecimalId);
-            var allorsDouble = (Unit)env.Find(UnitIds.DoubleId);
+            var allorsDouble = (Unit)env.Find(UnitIds.FloatId);
             var allorsBoolean = (Unit)env.Find(UnitIds.BooleanId);
             var allorsDate = (Unit)env.Find(UnitIds.DateId);
             var allorsUnique = (Unit)env.Find(UnitIds.Unique);

@@ -101,11 +101,11 @@ namespace Allors.Domain
 
 		public global::Allors.Meta.Interface ObjectType = global::Allors.Meta.Interfaces.I4;
 
-		public global::Allors.Meta.RoleType S1234AllorsDouble 
+		public global::Allors.Meta.RoleType S1234AllorsFloat 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.S1234AllorsDouble;
+				return global::Allors.Meta.RoleTypes.S1234AllorsFloat;
 			}
 		} 
 		public global::Allors.Meta.RoleType S1234AllorsDecimal 

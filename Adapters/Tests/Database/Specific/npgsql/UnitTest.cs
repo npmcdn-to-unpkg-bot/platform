@@ -30,7 +30,7 @@ namespace Allors.Adapters.Special.Npgsql
     [TestFixture]
     public abstract class UnitTest : Special.UnitTest
     {
-        protected override bool UseDoubleMaximum
+        protected override bool UseFloatMaximum
         {
             get
             {
@@ -38,7 +38,7 @@ namespace Allors.Adapters.Special.Npgsql
             }
         }
 
-        protected override bool UseDoubleMinimum
+        protected override bool UseFloatMinimum
         {
             get
             {

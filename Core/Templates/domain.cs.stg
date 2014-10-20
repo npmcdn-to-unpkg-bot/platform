@@ -380,7 +380,7 @@ $elseif(objectType.IsDateTime)$
 	global::System.DateTime
 $elseif(objectType.IsDecimal)$
 	global::System.Decimal
-$elseif(objectType.IsDouble)$
+$elseif(objectType.IsFloat)$
 	global::System.Double
 $elseif(objectType.IsInteger)$
 	global::System.Int32

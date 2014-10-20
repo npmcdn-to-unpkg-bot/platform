@@ -103,15 +103,15 @@ namespace Allors.Domain
 		void RemoveS12AllorsBoolean();
 
 
-		global::System.Double S12AllorsDouble 
+		global::System.Double S12AllorsFloat 
 		{
 			get;
 			set;
 		}
 
-		bool ExistS12AllorsDouble{get;}
+		bool ExistS12AllorsFloat{get;}
 
-		void RemoveS12AllorsDouble();
+		void RemoveS12AllorsFloat();
 
 
 		global::System.Int32 S12AllorsInteger 
@@ -192,11 +192,11 @@ namespace Allors.Domain
 				return global::Allors.Meta.RoleTypes.S12AllorsBoolean;
 			}
 		} 
-		public global::Allors.Meta.RoleType S12AllorsDouble 
+		public global::Allors.Meta.RoleType S12AllorsFloat 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.S12AllorsDouble;
+				return global::Allors.Meta.RoleTypes.S12AllorsFloat;
 			}
 		} 
 		public global::Allors.Meta.RoleType S12AllorsInteger 

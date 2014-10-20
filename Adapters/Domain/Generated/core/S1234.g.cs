@@ -6,15 +6,15 @@ namespace Allors.Domain
 	{
 
 
-		global::System.Double S1234AllorsDouble 
+		global::System.Double S1234AllorsFloat 
 		{
 			get;
 			set;
 		}
 
-		bool ExistS1234AllorsDouble{get;}
+		bool ExistS1234AllorsFloat{get;}
 
-		void RemoveS1234AllorsDouble();
+		void RemoveS1234AllorsFloat();
 
 
 		global::System.Decimal S1234AllorsDecimal 
@@ -263,11 +263,11 @@ namespace Allors.Domain
 
 		public global::Allors.Meta.Interface ObjectType = global::Allors.Meta.Interfaces.S1234;
 
-		public global::Allors.Meta.RoleType S1234AllorsDouble 
+		public global::Allors.Meta.RoleType S1234AllorsFloat 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.S1234AllorsDouble;
+				return global::Allors.Meta.RoleTypes.S1234AllorsFloat;
 			}
 		} 
 		public global::Allors.Meta.RoleType S1234AllorsDecimal 

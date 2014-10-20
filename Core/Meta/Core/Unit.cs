@@ -91,12 +91,12 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Gets a value indicating whether this instance is a double.
+        /// Gets a value indicating whether this instance is a float.
         /// </summary>
-        /// <value><c>true</c> if this instance is a double; otherwise, <c>false</c>.</value>
-        public bool IsDouble
+        /// <value><c>true</c> if this instance is a float; otherwise, <c>false</c>.</value>
+        public bool IsFloat
         {
-            get { return this.Id.Equals(UnitIds.DoubleId); }
+            get { return this.Id.Equals(UnitIds.FloatId); }
         }
 
         /// <summary>

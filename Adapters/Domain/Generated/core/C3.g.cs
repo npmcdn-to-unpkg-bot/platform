@@ -766,28 +766,28 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Double S1234AllorsDouble 
+		virtual public global::System.Double S1234AllorsFloat 
 		{
 			get
 			{
-				return (global::System.Double) Strategy.GetUnitRole(Meta.S1234AllorsDouble);
+				return (global::System.Double) Strategy.GetUnitRole(Meta.S1234AllorsFloat);
 			}
 			set
 			{
-				Strategy.SetUnitRole(Meta.S1234AllorsDouble, value);
+				Strategy.SetUnitRole(Meta.S1234AllorsFloat, value);
 			}
 		}
 
-		virtual public bool ExistS1234AllorsDouble{
+		virtual public bool ExistS1234AllorsFloat{
 			get
 			{
-				return Strategy.ExistUnitRole(Meta.S1234AllorsDouble);
+				return Strategy.ExistUnitRole(Meta.S1234AllorsFloat);
 			}
 		}
 
-		virtual public void RemoveS1234AllorsDouble()
+		virtual public void RemoveS1234AllorsFloat()
 		{
-			Strategy.RemoveUnitRole(Meta.S1234AllorsDouble);
+			Strategy.RemoveUnitRole(Meta.S1234AllorsFloat);
 		}
 
 
@@ -1274,28 +1274,28 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Double I34AllorsDouble 
+		virtual public global::System.Double I34AllorsFloat 
 		{
 			get
 			{
-				return (global::System.Double) Strategy.GetUnitRole(Meta.I34AllorsDouble);
+				return (global::System.Double) Strategy.GetUnitRole(Meta.I34AllorsFloat);
 			}
 			set
 			{
-				Strategy.SetUnitRole(Meta.I34AllorsDouble, value);
+				Strategy.SetUnitRole(Meta.I34AllorsFloat, value);
 			}
 		}
 
-		virtual public bool ExistI34AllorsDouble{
+		virtual public bool ExistI34AllorsFloat{
 			get
 			{
-				return Strategy.ExistUnitRole(Meta.I34AllorsDouble);
+				return Strategy.ExistUnitRole(Meta.I34AllorsFloat);
 			}
 		}
 
-		virtual public void RemoveI34AllorsDouble()
+		virtual public void RemoveI34AllorsFloat()
 		{
-			Strategy.RemoveUnitRole(Meta.I34AllorsDouble);
+			Strategy.RemoveUnitRole(Meta.I34AllorsFloat);
 		}
 
 
@@ -1908,11 +1908,11 @@ namespace Allors.Domain
 				return global::Allors.Meta.RoleTypes.I3C1one2one;
 			}
 		} 
-		public global::Allors.Meta.RoleType S1234AllorsDouble 
+		public global::Allors.Meta.RoleType S1234AllorsFloat 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.S1234AllorsDouble;
+				return global::Allors.Meta.RoleTypes.S1234AllorsFloat;
 			}
 		} 
 		public global::Allors.Meta.RoleType S1234AllorsDecimal 
@@ -2034,11 +2034,11 @@ namespace Allors.Domain
 				return global::Allors.Meta.RoleTypes.I34AllorsBoolean;
 			}
 		} 
-		public global::Allors.Meta.RoleType I34AllorsDouble 
+		public global::Allors.Meta.RoleType I34AllorsFloat 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I34AllorsDouble;
+				return global::Allors.Meta.RoleTypes.I34AllorsFloat;
 			}
 		} 
 		public global::Allors.Meta.RoleType I34AllorsInteger 

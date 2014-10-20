@@ -296,7 +296,7 @@ FROM information_schema.columns"))
 
                                                             break;
 
-                                                        case UnitTags.AllorsDouble:
+                                                        case UnitTags.AllorsFloat:
                                                             if (!dataType.Equals(SqlDbType.Float.ToString().ToLower()))
                                                             {
                                                                 AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Incompatible);
@@ -664,7 +664,7 @@ ON " + this.ObjectId + " = r." + this.RelationTableAssociation + @"
 
                                     break;
 
-                                case UnitTags.AllorsDouble:
+                                case UnitTags.AllorsFloat:
                                     // Set Double Role
                                     procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularPropertyName };
                                     procedure.Definition = "CREATE PROCEDURE " + procedure.Name + @"

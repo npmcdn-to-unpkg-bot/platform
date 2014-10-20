@@ -301,7 +301,7 @@ FROM information_schema.columns"))
                                                             break;
 
                                                         case "double precision":
-                                                            if (unitTypeTag != UnitTags.AllorsDouble)
+                                                            if (unitTypeTag != UnitTags.AllorsFloat)
                                                             {
                                                                 AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Incompatible);
                                                             }
@@ -852,7 +852,7 @@ $$ language plpgsql;
 
                                     break;
 
-                                case UnitTags.AllorsDouble:
+                                case UnitTags.AllorsFloat:
                                     // Set Double Role
                                     procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularPropertyName };
                                     procedure.Definition =

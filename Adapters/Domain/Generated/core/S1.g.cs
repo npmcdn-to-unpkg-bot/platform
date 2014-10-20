@@ -93,15 +93,15 @@ namespace Allors.Domain
 		void RemoveS1S2one2manies();
 
 
-		global::System.Double S1AllorsDouble 
+		global::System.Double S1AllorsFloat 
 		{
 			get;
 			set;
 		}
 
-		bool ExistS1AllorsDouble{get;}
+		bool ExistS1AllorsFloat{get;}
 
-		void RemoveS1AllorsDouble();
+		void RemoveS1AllorsFloat();
 
 
 		global::System.String S1AllorsString 
@@ -378,11 +378,11 @@ namespace Allors.Domain
 				return global::Allors.Meta.RoleTypes.S1S2one2many;
 			}
 		} 
-		public global::Allors.Meta.RoleType S1AllorsDouble 
+		public global::Allors.Meta.RoleType S1AllorsFloat 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.S1AllorsDouble;
+				return global::Allors.Meta.RoleTypes.S1AllorsFloat;
 			}
 		} 
 		public global::Allors.Meta.RoleType S1AllorsString 
@@ -448,11 +448,11 @@ namespace Allors.Domain
 				return global::Allors.Meta.RoleTypes.S1C1one2many;
 			}
 		} 
-		public global::Allors.Meta.RoleType S1234AllorsDouble 
+		public global::Allors.Meta.RoleType S1234AllorsFloat 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.S1234AllorsDouble;
+				return global::Allors.Meta.RoleTypes.S1234AllorsFloat;
 			}
 		} 
 		public global::Allors.Meta.RoleType S1234AllorsDecimal 

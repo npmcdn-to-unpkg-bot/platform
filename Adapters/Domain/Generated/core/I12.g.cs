@@ -74,15 +74,15 @@ namespace Allors.Domain
 		void RemoveI12C2many2one();
 
 
-		global::System.Double I12AllorsDouble 
+		global::System.Double I12AllorsFloat 
 		{
 			get;
 			set;
 		}
 
-		bool ExistI12AllorsDouble{get;}
+		bool ExistI12AllorsFloat{get;}
 
-		void RemoveI12AllorsDouble();
+		void RemoveI12AllorsFloat();
 
 
 		I34 I12I34many2one
@@ -406,11 +406,11 @@ namespace Allors.Domain
 				return global::Allors.Meta.RoleTypes.I12C2many2one;
 			}
 		} 
-		public global::Allors.Meta.RoleType I12AllorsDouble 
+		public global::Allors.Meta.RoleType I12AllorsFloat 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.I12AllorsDouble;
+				return global::Allors.Meta.RoleTypes.I12AllorsFloat;
 			}
 		} 
 		public global::Allors.Meta.RoleType I12I34many2one 
@@ -553,11 +553,11 @@ namespace Allors.Domain
 				return global::Allors.Meta.RoleTypes.S12AllorsBoolean;
 			}
 		} 
-		public global::Allors.Meta.RoleType S12AllorsDouble 
+		public global::Allors.Meta.RoleType S12AllorsFloat 
 		{
 			get
 			{
-				return global::Allors.Meta.RoleTypes.S12AllorsDouble;
+				return global::Allors.Meta.RoleTypes.S12AllorsFloat;
 			}
 		} 
 		public global::Allors.Meta.RoleType S12AllorsInteger 

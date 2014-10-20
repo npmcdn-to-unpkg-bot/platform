@@ -46,9 +46,9 @@ namespace Allors.Meta
         AllorsDecimal,
 
         /// <summary>
-        /// The tag for the double <see cref="IObjectType"/>.
+        /// The tag for the float <see cref="IObjectType"/>.
         /// </summary>
-        AllorsDouble,
+        AllorsFloat,
 
         /// <summary>
         /// The tag for the integer <see cref="IObjectType"/>.

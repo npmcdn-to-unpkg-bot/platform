@@ -155,7 +155,7 @@ namespace Allors.Adapters
                     }
 
                     break;
-                case UnitTags.AllorsDouble:
+                case UnitTags.AllorsFloat:
                     if (unit is int || unit is long || unit is float)
                     {
                         normalizedUnit = Convert.ToDouble(unit);

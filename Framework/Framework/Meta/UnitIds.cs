@@ -50,9 +50,9 @@ namespace Allors.Meta
         public static readonly Guid DecimalId = new Guid("da866d8e-2c40-41a8-ae5b-5f6dae0b89c8");
 
         /// <summary>
-        /// The id of the double type.
+        /// The id of the float type.
         /// </summary>
-        public static readonly Guid DoubleId = new Guid("ffcabd07-f35f-4083-bef6-f6c47970ca5d");
+        public static readonly Guid FloatId = new Guid("ffcabd07-f35f-4083-bef6-f6c47970ca5d");
 
         /// <summary>
         /// The id of the integer type.
