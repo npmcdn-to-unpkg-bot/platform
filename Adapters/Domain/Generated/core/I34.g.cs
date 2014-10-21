@@ -6,7 +6,7 @@ namespace Allors.Domain
 	{
 
 
-		global::System.Decimal I34AllorsDecimal 
+		global::System.Decimal? I34AllorsDecimal 
 		{
 			get;
 			set;
@@ -17,7 +17,7 @@ namespace Allors.Domain
 		void RemoveI34AllorsDecimal();
 
 
-		global::System.Boolean I34AllorsBoolean 
+		global::System.Boolean? I34AllorsBoolean 
 		{
 			get;
 			set;
@@ -28,7 +28,7 @@ namespace Allors.Domain
 		void RemoveI34AllorsBoolean();
 
 
-		global::System.Double I34AllorsFloat 
+		global::System.Double? I34AllorsFloat 
 		{
 			get;
 			set;
@@ -39,7 +39,7 @@ namespace Allors.Domain
 		void RemoveI34AllorsFloat();
 
 
-		global::System.Int32 I34AllorsInteger 
+		global::System.Int32? I34AllorsInteger 
 		{
 			get;
 			set;

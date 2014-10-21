@@ -17,7 +17,7 @@ namespace Allors.Domain
 		void RemoveS12AllorsString();
 
 
-		global::System.DateTime S12AllorsDate 
+		global::System.DateTime? S12AllorsDate 
 		{
 			get;
 			set;
@@ -92,7 +92,7 @@ namespace Allors.Domain
 		void RemoveS12C2one2manies();
 
 
-		global::System.Boolean S12AllorsBoolean 
+		global::System.Boolean? S12AllorsBoolean 
 		{
 			get;
 			set;
@@ -103,7 +103,7 @@ namespace Allors.Domain
 		void RemoveS12AllorsBoolean();
 
 
-		global::System.Double S12AllorsFloat 
+		global::System.Double? S12AllorsFloat 
 		{
 			get;
 			set;
@@ -114,7 +114,7 @@ namespace Allors.Domain
 		void RemoveS12AllorsFloat();
 
 
-		global::System.Int32 S12AllorsInteger 
+		global::System.Int32? S12AllorsInteger 
 		{
 			get;
 			set;
@@ -125,7 +125,7 @@ namespace Allors.Domain
 		void RemoveS12AllorsInteger();
 
 
-		global::System.Decimal S12AllorsDecimal 
+		global::System.Decimal? S12AllorsDecimal 
 		{
 			get;
 			set;

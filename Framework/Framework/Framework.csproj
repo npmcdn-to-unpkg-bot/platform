@@ -70,6 +70,9 @@
     <Compile Include="Meta\UnitIds.cs" />
     <Compile Include="Meta\UnitTags.cs" />
     <Compile Include="ObjectFactory.cs" />
+    <Compile Include="ObjectIdsInteger.cs" />
+    <Compile Include="ObjectIdsLong.cs" />
+    <Compile Include="ObjectIds.cs" />
     <Compile Include="ObjectId.cs" />
     <Compile Include="ObjectIdInteger.cs" />
     <Compile Include="ObjectIdLong.cs" />

@@ -94,11 +94,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Int32 Index 
+		virtual public global::System.Int32? Index 
 		{
 			get
 			{
-				return (global::System.Int32) Strategy.GetUnitRole(Meta.Index);
+				return (global::System.Int32?) Strategy.GetUnitRole(Meta.Index);
 			}
 			set
 			{

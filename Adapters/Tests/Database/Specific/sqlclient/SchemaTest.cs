@@ -22,49 +22,49 @@ namespace Allors.Adapters.Special.SqlClient
 {
     using NUnit.Framework;
 
-    public abstract class SchemaIntegerIdTest : Special.SchemaIntegerIdTest
-    {
-        [Test]
-        [Explicit]
-        public void Recover()
-        {
-            this.InitAndCreateSession();
+    //public abstract class SchemaIntegerIdTest : Special.SchemaIntegerIdTest
+    //{
+    //    [Test]
+    //    [Explicit]
+    //    public void Recover()
+    //    {
+    //        this.InitAndCreateSession();
 
-            this.DropProcedure("_GC");
+    //        this.DropProcedure("_GC");
 
-            var repository = (Database.Sql.IDatabase)this.CreateDatabase();
+    //        var repository = (Database.Sql.IDatabase)this.CreateDatabase();
 
-            var exceptionThrown = false;
-            try
-            {
-                repository.CreateSession();
-            }
-            catch
-            {
-                exceptionThrown = true;
-            }
+    //        var exceptionThrown = false;
+    //        try
+    //        {
+    //            repository.CreateSession();
+    //        }
+    //        catch
+    //        {
+    //            exceptionThrown = true;
+    //        }
 
-            Assert.IsTrue(exceptionThrown);
+    //        Assert.IsTrue(exceptionThrown);
 
-            repository.Recover();
+    //        repository.Recover();
 
-            Assert.IsTrue(this.ExistProcedure("_GC"));
+    //        Assert.IsTrue(this.ExistProcedure("_GC"));
 
-            exceptionThrown = false;
-            try
-            {
-                repository.CreateSession();
-            }
-            catch
-            {
-                exceptionThrown = true;
-            }
+    //        exceptionThrown = false;
+    //        try
+    //        {
+    //            repository.CreateSession();
+    //        }
+    //        catch
+    //        {
+    //            exceptionThrown = true;
+    //        }
 
-            Assert.IsFalse(exceptionThrown);
-        }
-    }
+    //        Assert.IsFalse(exceptionThrown);
+    //    }
+    //}
 
-    public abstract class SchemaLongIdTest : Special.SchemaLongIdTest
-    {
-    }
+    //public abstract class SchemaLongIdTest : Special.SchemaLongIdTest
+    //{
+    //}
 }

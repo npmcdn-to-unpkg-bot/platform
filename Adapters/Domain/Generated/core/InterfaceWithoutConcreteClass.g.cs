@@ -6,7 +6,7 @@ namespace Allors.Domain
 	{
 
 
-		global::System.Boolean AllorsBoolean 
+		global::System.Boolean? AllorsBoolean 
 		{
 			get;
 			set;

@@ -147,7 +147,7 @@ namespace Allors.Adapters.Database.Memory
                     if (this.Committing != null)
                     {
                         // Errors thrown in Committing event handlers 
-                        // should have no effect on the current state of the Session.
+                        // should have no effect on the current state of the DatabaseSession.
                         this.Committing(this, new SessionCommittingEventArgs(this));
                     }
 

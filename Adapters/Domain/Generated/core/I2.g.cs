@@ -6,7 +6,7 @@ namespace Allors.Domain
 	{
 
 
-		global::System.Boolean I2AllorsBoolean 
+		global::System.Boolean? I2AllorsBoolean 
 		{
 			get;
 			set;
@@ -17,7 +17,7 @@ namespace Allors.Domain
 		void RemoveI2AllorsBoolean();
 
 
-		global::System.Decimal I2AllorsDecimal 
+		global::System.Decimal? I2AllorsDecimal 
 		{
 			get;
 			set;
@@ -28,7 +28,7 @@ namespace Allors.Domain
 		void RemoveI2AllorsDecimal();
 
 
-		global::System.DateTime I2AllorsDate 
+		global::System.DateTime? I2AllorsDate 
 		{
 			get;
 			set;
@@ -50,7 +50,7 @@ namespace Allors.Domain
 		void RemoveI2AllorsString();
 
 
-		global::System.Int32 I2AllorsInteger 
+		global::System.Int32? I2AllorsInteger 
 		{
 			get;
 			set;
@@ -61,7 +61,7 @@ namespace Allors.Domain
 		void RemoveI2AllorsInteger();
 
 
-		global::System.Double I2AllorsFloat 
+		global::System.Double? I2AllorsFloat 
 		{
 			get;
 			set;

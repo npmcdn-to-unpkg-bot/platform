@@ -84,7 +84,7 @@ namespace Allors.Domain
 		void RemoveI1C2one2one();
 
 
-		global::System.Decimal I1DecimalBetweenA 
+		global::System.Decimal? I1DecimalBetweenA 
 		{
 			get;
 			set;
@@ -134,7 +134,7 @@ namespace Allors.Domain
 		void RemoveI1AllorsString();
 
 
-		global::System.DateTime I1DateLessThan 
+		global::System.DateTime? I1DateLessThan 
 		{
 			get;
 			set;
@@ -174,7 +174,7 @@ namespace Allors.Domain
 		void RemoveI1StringLarge();
 
 
-		global::System.Double I1FloatLessThan 
+		global::System.Double? I1FloatLessThan 
 		{
 			get;
 			set;
@@ -185,7 +185,7 @@ namespace Allors.Domain
 		void RemoveI1FloatLessThan();
 
 
-		global::System.DateTime I1AllorsDate 
+		global::System.DateTime? I1AllorsDate 
 		{
 			get;
 			set;
@@ -224,7 +224,7 @@ namespace Allors.Domain
 		void RemoveI1I12one2one();
 
 
-		global::System.Decimal I1DecimalGreaterThan 
+		global::System.Decimal? I1DecimalGreaterThan 
 		{
 			get;
 			set;
@@ -267,7 +267,7 @@ namespace Allors.Domain
 		void RemoveI1I2many2manies();
 
 
-		global::System.Int32 I1IntegerBetweenA 
+		global::System.Int32? I1IntegerBetweenA 
 		{
 			get;
 			set;
@@ -292,7 +292,7 @@ namespace Allors.Domain
 		void RemoveI1I34many2one();
 
 
-		global::System.Double I1FloatBetweenA 
+		global::System.Double? I1FloatBetweenA 
 		{
 			get;
 			set;
@@ -303,7 +303,7 @@ namespace Allors.Domain
 		void RemoveI1FloatBetweenA();
 
 
-		global::System.Int32 I1IntegerLessThan 
+		global::System.Int32? I1IntegerLessThan 
 		{
 			get;
 			set;
@@ -314,7 +314,7 @@ namespace Allors.Domain
 		void RemoveI1IntegerLessThan();
 
 
-		global::System.Int32 I1AllorsInteger 
+		global::System.Int32? I1AllorsInteger 
 		{
 			get;
 			set;
@@ -339,7 +339,7 @@ namespace Allors.Domain
 		void RemoveI1S2one2one();
 
 
-		global::System.Boolean I1AllorsBoolean 
+		global::System.Boolean? I1AllorsBoolean 
 		{
 			get;
 			set;
@@ -396,7 +396,7 @@ namespace Allors.Domain
 		void RemoveI1I2one2one();
 
 
-		global::System.Decimal I1AllorsDecimal 
+		global::System.Decimal? I1AllorsDecimal 
 		{
 			get;
 			set;
@@ -425,7 +425,7 @@ namespace Allors.Domain
 		void RemoveI1S1many2manies();
 
 
-		global::System.DateTime I1DateGreaterThan 
+		global::System.DateTime? I1DateGreaterThan 
 		{
 			get;
 			set;
@@ -616,7 +616,7 @@ namespace Allors.Domain
 		void RemoveI1AllorsBinary();
 
 
-		global::System.Decimal I1DecimalBetweenB 
+		global::System.Decimal? I1DecimalBetweenB 
 		{
 			get;
 			set;
@@ -627,7 +627,7 @@ namespace Allors.Domain
 		void RemoveI1DecimalBetweenB();
 
 
-		global::System.Double I1FloatGreaterThan 
+		global::System.Double? I1FloatGreaterThan 
 		{
 			get;
 			set;
@@ -638,7 +638,7 @@ namespace Allors.Domain
 		void RemoveI1FloatGreaterThan();
 
 
-		global::System.Int32 I1IntegerBetweenB 
+		global::System.Int32? I1IntegerBetweenB 
 		{
 			get;
 			set;
@@ -649,7 +649,7 @@ namespace Allors.Domain
 		void RemoveI1IntegerBetweenB();
 
 
-		global::System.DateTime I1DateBetweenA 
+		global::System.DateTime? I1DateBetweenA 
 		{
 			get;
 			set;
@@ -660,7 +660,7 @@ namespace Allors.Domain
 		void RemoveI1DateBetweenA();
 
 
-		global::System.Double I1AllorsFloat 
+		global::System.Double? I1AllorsFloat 
 		{
 			get;
 			set;
@@ -703,7 +703,7 @@ namespace Allors.Domain
 		void RemoveI1I1one2one();
 
 
-		global::System.Int32 I1IntegerGreaterThan 
+		global::System.Int32? I1IntegerGreaterThan 
 		{
 			get;
 			set;
@@ -728,7 +728,7 @@ namespace Allors.Domain
 		void RemoveI1S1many2one();
 
 
-		global::System.Double I1FloatBetweenB 
+		global::System.Double? I1FloatBetweenB 
 		{
 			get;
 			set;
@@ -739,7 +739,7 @@ namespace Allors.Domain
 		void RemoveI1FloatBetweenB();
 
 
-		global::System.Decimal I1DecimalLessThan 
+		global::System.Decimal? I1DecimalLessThan 
 		{
 			get;
 			set;
@@ -750,7 +750,7 @@ namespace Allors.Domain
 		void RemoveI1DecimalLessThan();
 
 
-		global::System.DateTime I1DateBetweenB 
+		global::System.DateTime? I1DateBetweenB 
 		{
 			get;
 			set;
@@ -761,7 +761,7 @@ namespace Allors.Domain
 		void RemoveI1DateBetweenB();
 
 
-		global::System.Guid I1AllorsUnique 
+		global::System.Guid? I1AllorsUnique 
 		{
 			get;
 			set;

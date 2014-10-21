@@ -466,9 +466,9 @@ namespace Allors.Adapters.Special
                     Assert.AreEqual(date, c1.I1AllorsDate);
                     Assert.AreEqual(date, c1.S1AllorsDate);
 
-                    Assert.AreEqual(DateTimeKind.Utc, c1.C1AllorsDate.Kind);
-                    Assert.AreEqual(DateTimeKind.Utc, c1.I1AllorsDate.Kind);
-                    Assert.AreEqual(DateTimeKind.Utc, c1.S1AllorsDate.Kind);
+                    Assert.AreEqual(DateTimeKind.Utc, c1.C1AllorsDate.Value.Kind);
+                    Assert.AreEqual(DateTimeKind.Utc, c1.I1AllorsDate.Value.Kind);
+                    Assert.AreEqual(DateTimeKind.Utc, c1.S1AllorsDate.Value.Kind);
                 }
             }
         }

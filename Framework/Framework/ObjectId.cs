@@ -21,7 +21,6 @@
 namespace Allors
 {
     using System;
-    using System.Collections.Generic;
 
     /// <summary>
     /// Every <see cref="IObject"/> has an Id.

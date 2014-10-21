@@ -6,7 +6,7 @@ namespace Allors.Domain
 	{
 
 
-		global::System.Double S1234AllorsFloat 
+		global::System.Double? S1234AllorsFloat 
 		{
 			get;
 			set;
@@ -17,7 +17,7 @@ namespace Allors.Domain
 		void RemoveS1234AllorsFloat();
 
 
-		global::System.Decimal S1234AllorsDecimal 
+		global::System.Decimal? S1234AllorsDecimal 
 		{
 			get;
 			set;
@@ -28,7 +28,7 @@ namespace Allors.Domain
 		void RemoveS1234AllorsDecimal();
 
 
-		global::System.Int32 S1234AllorsInteger 
+		global::System.Int32? S1234AllorsInteger 
 		{
 			get;
 			set;
@@ -150,7 +150,7 @@ namespace Allors.Domain
 		void RemoveClassName();
 
 
-		global::System.DateTime S1234AllorsDate 
+		global::System.DateTime? S1234AllorsDate 
 		{
 			get;
 			set;
@@ -200,7 +200,7 @@ namespace Allors.Domain
 		void RemoveS1234AllorsString();
 
 
-		global::System.Boolean S1234AllorsBoolean 
+		global::System.Boolean? S1234AllorsBoolean 
 		{
 			get;
 			set;

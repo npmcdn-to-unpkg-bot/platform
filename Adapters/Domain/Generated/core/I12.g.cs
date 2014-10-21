@@ -6,7 +6,7 @@ namespace Allors.Domain
 	{
 
 
-		global::System.Boolean I12AllorsBoolean 
+		global::System.Boolean? I12AllorsBoolean 
 		{
 			get;
 			set;
@@ -17,7 +17,7 @@ namespace Allors.Domain
 		void RemoveI12AllorsBoolean();
 
 
-		global::System.Int32 I12AllorsInteger 
+		global::System.Int32? I12AllorsInteger 
 		{
 			get;
 			set;
@@ -74,7 +74,7 @@ namespace Allors.Domain
 		void RemoveI12C2many2one();
 
 
-		global::System.Double I12AllorsFloat 
+		global::System.Double? I12AllorsFloat 
 		{
 			get;
 			set;
@@ -149,7 +149,7 @@ namespace Allors.Domain
 		void RemoveI12C2many2manies();
 
 
-		global::System.Decimal I12AllorsDecimal 
+		global::System.Decimal? I12AllorsDecimal 
 		{
 			get;
 			set;
@@ -221,7 +221,7 @@ namespace Allors.Domain
 		void RemovePrefetchTest();
 
 
-		global::System.DateTime I12AllorsDate 
+		global::System.DateTime? I12AllorsDate 
 		{
 			get;
 			set;

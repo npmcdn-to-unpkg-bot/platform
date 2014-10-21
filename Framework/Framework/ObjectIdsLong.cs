@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="Session.cs" company="Allors bvba">
+// <copyright file="ObjectIdsLong.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -16,39 +16,16 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the DatabaseSession type.</summary>
+// <summary>Defines the ObjectIdInteger type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-using Allors;
-
-namespace Allors.Adapters.Database.Memory.LongId
+namespace Allors
 {
-    using System;
-
-    internal sealed class Session : Memory.Session
+    public sealed class ObjectIdsLong : ObjectIds
     {
-        private ObjectIds objectIds;
-
-        public Session(Memory.Database database)
-            : base(database)
+        public override ObjectId Parse(string value)
         {
-            this.Reset();
-        }
-
-        public override IWorkspaceSession WorkspaceSession
-        {
-            get { throw new NotSupportedException(); }
-        }
-
-        internal override Memory.ObjectIds ObjectIds
-        {
-            get { return this.objectIds; }
-        }
-        
-        internal override void Reset()
-        {
-            base.Reset();
-            this.objectIds = new ObjectIds();
+            return new ObjectIdLong(value);
         }
     }
 }

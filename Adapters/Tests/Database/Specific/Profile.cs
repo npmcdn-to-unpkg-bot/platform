@@ -27,10 +27,7 @@ namespace Allors.Adapters.Special
     using System.Text;
 
     using Allors;
-    using Allors.Adapters.Database.Caching;
     using Allors.Meta;
-
-    using Domain;
 
     public abstract class Profile : IProfile
     {
@@ -42,7 +39,6 @@ namespace Allors.Adapters.Special
 
         protected Profile()
         {
-            this.CacheFactory = new CacheFactory();
             this.objectFactory = this.CreateObjectFactory(Repository.MetaPopulation);
         }
 
@@ -77,10 +73,6 @@ namespace Allors.Adapters.Special
                     caches.Add(
                         () =>
                         {
-                            this.CacheFactory = new CacheFactory
-                                                    {
-                                                        TransientObjectTypes = this.database.ObjectFactory.MetaPopulation.Classes.Cast<IComposite>().ToArray(),
-                                                    };
                             this.Init();
                         });
                 }
@@ -88,8 +80,6 @@ namespace Allors.Adapters.Special
                 return caches.ToArray();
             }
         }
-
-        protected ICacheFactory CacheFactory { get; set; }
 
         public void SwitchDatabase()
         {
@@ -115,21 +105,21 @@ namespace Allors.Adapters.Special
 
         public abstract IWorkspace CreateWorkspace(IDatabase database);
 
-        public void DropProcedure(string procedure)
-        {
-            using (var connection = ((Database.Sql.Database)this.CreateDatabase()).CreateDbConnection())
-            {
-                connection.Open();
-                using (var command = connection.CreateCommand())
-                {
-                    var sql = new StringBuilder();
-                    sql.Append("DROP PROCEDURE " + procedure);
+        //public void DropProcedure(string procedure)
+        //{
+        //    using (var connection = ((Database.Sql.Database)this.CreateDatabase()).CreateDbConnection())
+        //    {
+        //        connection.Open();
+        //        using (var command = connection.CreateCommand())
+        //        {
+        //            var sql = new StringBuilder();
+        //            sql.Append("DROP PROCEDURE " + procedure);
 
-                    command.CommandText = sql.ToString();
-                    command.ExecuteNonQuery();
-                }
-            }
-        }
+        //            command.CommandText = sql.ToString();
+        //            command.ExecuteNonQuery();
+        //        }
+        //    }
+        //}
 
         internal ISession CreateSession()
         {

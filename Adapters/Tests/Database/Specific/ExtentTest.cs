@@ -12917,7 +12917,7 @@ namespace Allors.Adapters.Special
                     // {
                     // var inExtentA = c1_1.Strategy.GetCompositeRoles(RoleTypes.C1C1one2many);
                     // var inExtentB = c1_1.Strategy.GetCompositeRoles(RoleTypes.C1C1one2many);
-                    // inExtent = Session.Union(inExtentA, inExtentB);
+                    // inExtent = DatabaseSession.Union(inExtentA, inExtentB);
                     // }
                     extent = this.LocalExtent(Classes.C1);
                     extent.Filter.AddContainedIn(RoleTypes.C1C1many2many, inExtent);

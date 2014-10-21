@@ -21,7 +21,6 @@
 namespace Allors.Adapters.Special
 {
     using Allors;
-    using Allors.Adapters.Database.Sql;
 
     using Domain;
 
@@ -124,7 +123,6 @@ namespace Allors.Adapters.Special
             }
         }
 
-        protected abstract DatabaseSession CreateSession();
 
         protected abstract IDatabase CreateDatabase();
     }

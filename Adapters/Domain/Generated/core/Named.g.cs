@@ -17,7 +17,7 @@ namespace Allors.Domain
 		void RemoveName();
 
 
-		global::System.Int32 Index 
+		global::System.Int32? Index 
 		{
 			get;
 			set;

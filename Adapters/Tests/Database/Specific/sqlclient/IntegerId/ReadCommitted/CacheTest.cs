@@ -20,31 +20,25 @@
 
 namespace Allors.Adapters.Special.SqlClient.IntegerId.ReadCommitted
 {
-    using Allors.Adapters.Database.Sql;
+    //[TestFixture]
+    //public class CacheTest : Special.CacheTest
+    //{
+    //    private readonly Profile profile = new Profile();
 
-    using NUnit.Framework;
+    //    protected override DatabaseSession CreateSession()
+    //    {
+    //        return (DatabaseSession)this.profile.CreateSession();
+    //    }
 
-    using IDatabase = IDatabase;
+    //    protected override IDatabase CreateDatabase()
+    //    {
+    //        return this.profile.CreateDatabase();
+    //    }
 
-    [TestFixture]
-    public class CacheTest : Special.CacheTest
-    {
-        private readonly Profile profile = new Profile();
-
-        protected override DatabaseSession CreateSession()
-        {
-            return (DatabaseSession)this.profile.CreateSession();
-        }
-
-        protected override IDatabase CreateDatabase()
-        {
-            return this.profile.CreateDatabase();
-        }
-
-        [TearDown]
-        protected void Dispose()
-        {
-            this.profile.Dispose();
-        }
-    }
+    //    [TearDown]
+    //    protected void Dispose()
+    //    {
+    //        this.profile.Dispose();
+    //    }
+    //}
 }

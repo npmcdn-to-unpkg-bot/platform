@@ -317,13 +317,13 @@ namespace Allors.Adapters.Special
                     var date = new DateTime(1973, 03, 27, 0, 0, 0, DateTimeKind.Utc);
 
                     Assert.IsNotNull(workC2A);
-                    Assert.AreEqual(date, workC2A.C2AllorsDate.ToUniversalTime());
+                    Assert.AreEqual(date, workC2A.C2AllorsDate.Value.ToUniversalTime());
 
                     Assert.IsNotNull(workC2B);
-                    Assert.AreEqual(date, workC2B.C2AllorsDate.ToUniversalTime());
+                    Assert.AreEqual(date, workC2B.C2AllorsDate.Value.ToUniversalTime());
 
                     Assert.IsNotNull(workC2C);
-                    Assert.AreEqual(date, workC2C.C2AllorsDate.ToUniversalTime());
+                    Assert.AreEqual(date, workC2C.C2AllorsDate.Value.ToUniversalTime());
 
                     workC2A.C2AllorsDate = unspecified;
                     workC2B.C2AllorsDate = universal;

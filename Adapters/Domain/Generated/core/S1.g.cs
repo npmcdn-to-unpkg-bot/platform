@@ -6,7 +6,7 @@ namespace Allors.Domain
 	{
 
 
-		global::System.Decimal S1AllorsDecimal 
+		global::System.Decimal? S1AllorsDecimal 
 		{
 			get;
 			set;
@@ -17,7 +17,7 @@ namespace Allors.Domain
 		void RemoveS1AllorsDecimal();
 
 
-		global::System.Int32 S1AllorsInteger 
+		global::System.Int32? S1AllorsInteger 
 		{
 			get;
 			set;
@@ -39,7 +39,7 @@ namespace Allors.Domain
 		void RemoveS1AllorsBinary();
 
 
-		global::System.Guid S1AllorsUnique 
+		global::System.Guid? S1AllorsUnique 
 		{
 			get;
 			set;
@@ -93,7 +93,7 @@ namespace Allors.Domain
 		void RemoveS1S2one2manies();
 
 
-		global::System.Double S1AllorsFloat 
+		global::System.Double? S1AllorsFloat 
 		{
 			get;
 			set;
@@ -143,7 +143,7 @@ namespace Allors.Domain
 		void RemoveS1C1one2one();
 
 
-		global::System.Boolean S1AllorsBoolean 
+		global::System.Boolean? S1AllorsBoolean 
 		{
 			get;
 			set;
@@ -204,7 +204,7 @@ namespace Allors.Domain
 		void RemoveS1S2one2one();
 
 
-		global::System.DateTime S1AllorsDate 
+		global::System.DateTime? S1AllorsDate 
 		{
 			get;
 			set;

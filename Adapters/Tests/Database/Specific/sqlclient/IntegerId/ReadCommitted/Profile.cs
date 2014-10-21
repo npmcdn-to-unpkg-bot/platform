@@ -19,7 +19,7 @@ namespace Allors.Adapters.Special.SqlClient.IntegerId.ReadCommitted
     using System;
     using System.Collections.Generic;
 
-    using Allors.Adapters.Database.SqlClient.IntegerId;
+    using Allors.Adapters.Database.SqlClient;
     using Allors.Meta;
 
     public class Profile : SqlClient.Profile
@@ -42,7 +42,7 @@ namespace Allors.Adapters.Special.SqlClient.IntegerId.ReadCommitted
                         () =>
                         {
                             this.Session.Commit();
-                            ((Database)this.Session.Population).Cache.Invalidate();
+                            //((Database)this.DatabaseSession.Population).Cache.Invalidate();
                         });
                 }
 
@@ -52,10 +52,9 @@ namespace Allors.Adapters.Special.SqlClient.IntegerId.ReadCommitted
 
         public IDatabase CreateDatabase(IMetaPopulation metaPopulation, bool init)
         {
-            var configuration = new Adapters.Database.SqlClient.IntegerId.Configuration
+            var configuration = new Configuration
                                     {
                                         ObjectFactory = this.CreateObjectFactory(metaPopulation),
-                                        CacheFactory = this.CacheFactory,
                                         Id = Guid.NewGuid(),
                                         ConnectionString = ConnectionString
                                     };
@@ -71,10 +70,9 @@ namespace Allors.Adapters.Special.SqlClient.IntegerId.ReadCommitted
 
         public override IDatabase CreateDatabase()
         {
-            var configuration = new Adapters.Database.SqlClient.IntegerId.Configuration
+            var configuration = new Configuration
             {
                 ObjectFactory = this.ObjectFactory,
-                CacheFactory = this.CacheFactory,
                 Id = Guid.NewGuid(),
                 ConnectionString = ConnectionString
             };

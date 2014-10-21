@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="Session.cs" company="Allors bvba">
+// <copyright file="DatabaseSession.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // Dual Licensed under
 //   a) the Lesser General Public Licence v3 (LGPL)
@@ -12,7 +12,7 @@
 // GNU General Public License for more details.
 // For more information visit http://www.allors.com/legal
 // </copyright>
-// <summary>Defines the Session type.</summary>
+// <summary>Defines the DatabaseSession type.</summary>
 //-------------------------------------------------------------------------------------------------
 using Allors;
 
