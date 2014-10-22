@@ -29,7 +29,7 @@ namespace Allors.Meta
 
         private Composite associationObjectType;
         private ObjectType roleObjectType;
-        private Cardinalities cardinality;
+        private Multiplicity multiplicity;
         private bool isDerived;
         private bool isIndexed;
 
@@ -65,9 +65,9 @@ namespace Allors.Meta
             return this;
         }
 
-        public RelationTypeBuilder WithCardinality(Cardinalities value)
+        public RelationTypeBuilder WithCardinality(Multiplicity value)
         {
-            this.cardinality = value;
+            this.multiplicity = value;
             return this;
         }
 
@@ -107,30 +107,7 @@ namespace Allors.Meta
             instance.RoleType.ObjectType = this.roleObjectType;
             instance.IsDerived = this.isDerived;
             instance.IsIndexed = this.isIndexed;
-
-            switch (this.cardinality)
-            {
-                case Cardinalities.OneToOne:
-                    instance.AssociationType.IsOne = true;
-                    instance.RoleType.IsOne = true;
-                    break;
-
-                case Cardinalities.OneToMany:
-                    instance.AssociationType.IsOne = true;
-                    instance.RoleType.IsMany = true;
-                    break;
-
-                case Cardinalities.ManyToOne:
-                    instance.AssociationType.IsMany = true;
-                    instance.RoleType.IsOne = true;
-                    break;
-
-                case Cardinalities.ManyToMany:
-                    instance.AssociationType.IsMany = true;
-                    instance.RoleType.IsMany = true;
-                    break;
-            }
-
+            instance.Multiplicity = this.multiplicity;
 
             instance.RoleType.AssignedSingularName = this.singularName;
             instance.RoleType.AssignedPluralName = this.pluralName;

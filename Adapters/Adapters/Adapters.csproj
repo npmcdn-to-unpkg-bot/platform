@@ -106,11 +106,13 @@
     <Compile Include="Database\Memory\StrategyExtentAssociation.cs" />
     <Compile Include="Database\Memory\StrategyExtentRole.cs" />
     <Compile Include="Database\SqlClient\Configuration.cs" />
+    <Compile Include="Database\SqlClient\ObjectIdExtent.cs" />
     <Compile Include="Database\SqlClient\Schema.cs" />
     <Compile Include="Database\SqlClient\Strategy.cs" />
     <Compile Include="Database\SqlClient\DatabaseSession.cs" />
     <Compile Include="Database\SqlClient\Database.cs" />
     <Compile Include="EmptySet.cs" />
+    <Compile Include="Extensions\RoleTypeExtensions.cs" />
     <Compile Include="Population.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RelationTypeManyXmlWriter.cs" />

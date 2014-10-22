@@ -58,7 +58,7 @@ namespace Allors.Adapters.Workspace.Memory
             {
                 if (this.roleType.ObjectType is IUnit)
                 {
-                    compareValue = this.extent.Session.MemoryWorkspace.Internalize(this.compare, this.roleType);
+                    compareValue = RoleTypeExtensions.Normalize(this.roleType, this.compare);
                 }
             }
 

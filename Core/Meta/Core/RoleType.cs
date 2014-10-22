@@ -42,8 +42,6 @@ namespace Allors.Meta
 
         private string assignedPluralName;
 
-        private bool isMany;
-
         private int? scale;
 
         private int? precision;
@@ -111,19 +109,28 @@ namespace Allors.Meta
             }
         }
 
+        /// <summary>
+        /// Gets a value indicating whether this instance has a multiplicity of one.
+        /// </summary>
+        /// <value><c>true</c> if this instance is one; otherwise, <c>false</c>.</value>
+        public bool IsOne
+        {
+            get { return !this.IsMany; }
+        }
+
         public bool IsMany
         {
             get
             {
-                this.MetaPopulation.Derive();
-                return this.isMany;
-            }
+                switch (this.relationType.Multiplicity)
+                {
+                    case Multiplicity.OneToMany:
+                    case Multiplicity.ManyToMany:
+                        return true;
 
-            set
-            {
-                this.MetaPopulation.AssertUnlocked();
-                this.isMany = value;
-                this.MetaPopulation.Stale();
+                    default:
+                        return false;
+                }
             }
         }
 
@@ -273,16 +280,6 @@ namespace Allors.Meta
                 this.MetaPopulation.Derive();
                 return this.derivedPluralPropertyName;
             }
-        }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether this instance has multiplicity one.
-        /// </summary>
-        /// <value><c>true</c> if this instance's multiplicity is one; otherwise, <c>false</c>.</value>
-        public bool IsOne
-        {
-            get { return !this.IsMany; }
-            set { this.IsMany = !value; }
         }
 
         IAssociationType IRoleType.AssociationType
@@ -437,17 +434,6 @@ namespace Allors.Meta
             catch
             {
                 return base.ToString();
-            }
-        }
-
-        /// <summary>
-        /// Derive multiplicity, scale and size.
-        /// </summary>
-        internal void DeriveMultiplicity()
-        {
-            if (this.ObjectType is IUnit && this.IsMany)
-            {
-                this.IsMany = false;
             }
         }
 

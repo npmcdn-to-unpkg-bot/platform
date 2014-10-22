@@ -52,7 +52,7 @@ namespace Allors.Adapters.Database.Memory
             {
                 if (this.roleType.ObjectType is IUnit)
                 {
-                    compareValue = this.extent.Session.MemoryDatabase.Internalize(this.compare, this.roleType);
+                    compareValue = RoleTypeExtensions.Normalize(this.roleType, this.compare);
                 }
             }
 

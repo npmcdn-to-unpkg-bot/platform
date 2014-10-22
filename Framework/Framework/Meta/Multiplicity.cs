@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------------------------- 
-// <copyright file="Cardinalities.cs" company="Allors bvba">
+// <copyright file="Multiplicity.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -21,7 +21,7 @@
 
 namespace Allors.Meta
 {
-    public enum Cardinalities
+    public enum Multiplicity
     {
         /// <summary>
         /// One to one.

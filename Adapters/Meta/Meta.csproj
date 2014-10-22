@@ -47,9 +47,6 @@
     <Compile Include="..\..\Core\Meta\Core\Builder.cs">
       <Link>Core\Builder.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Cardinalities.cs">
-      <Link>Core\Cardinalities.cs</Link>
-    </Compile>
     <Compile Include="..\..\Core\Meta\Core\Class.cs">
       <Link>Core\Class.cs</Link>
     </Compile>

@@ -29,14 +29,13 @@ namespace Allors.Meta
     /// </summary>
     public interface IRelationType : IDomainObject, IComparable
     {
+        IAssociationType AssociationType { get; }
 
         IRoleType RoleType { get; }
 
         bool ExistExclusiveLeafClasses { get; }
 
-        IAssociationType AssociationType { get; }
-
-        bool IsManyToMany { get; }
+        Multiplicity Multiplicity { get; }
 
         bool IsIndexed { get; }
     }

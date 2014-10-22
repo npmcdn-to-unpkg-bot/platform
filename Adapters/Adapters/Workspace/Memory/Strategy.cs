@@ -237,7 +237,7 @@ namespace Allors.Adapters.Workspace.Memory
             }
             else
             {
-                role = this.session.MemoryWorkspace.Internalize(role, roleType);
+                role = RoleTypeExtensions.Normalize(roleType, role);
 
                 this.session.SetUnitRole(this, roleType, role);
             }

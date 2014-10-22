@@ -159,8 +159,8 @@ namespace Allors
         /// Sets the composite role.
         /// </summary>
         /// <param name="roleType">Type of the relation.</param>
-        /// <param name="composite">The composite.</param>
-        void SetCompositeRole(IRoleType roleType, IObject composite);
+        /// <param name="role">The role.</param>
+        void SetCompositeRole(IRoleType roleType, IObject role);
 
         /// <summary>
         /// Removes the composite role.
@@ -186,15 +186,15 @@ namespace Allors
         /// Adds the composite role.
         /// </summary>
         /// <param name="roleType">The relation type..</param>
-        /// <param name="objectToAdd">The object to add.</param>
-        void AddCompositeRole(IRoleType roleType, IObject objectToAdd);
+        /// <param name="role">The role.</param>
+        void AddCompositeRole(IRoleType roleType, IObject role);
 
         /// <summary>
         /// Removes the composite role.
         /// </summary>
         /// <param name="roleType">Type of the relation.</param>
-        /// <param name="objectToRemove">The object to remove.</param>
-        void RemoveCompositeRole(IRoleType roleType, IObject objectToRemove);
+        /// <param name="role">The role.</param>
+        void RemoveCompositeRole(IRoleType roleType, IObject role);
 
         /// <summary>
         /// Sets the composite roles.

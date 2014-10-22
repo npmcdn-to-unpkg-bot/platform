@@ -33,9 +33,8 @@ namespace Allors.Meta
         private readonly RoleType roleType;
 
         private bool isDerived;
-
         private bool isIndexed;
-        
+
         internal RelationType(Domain domain, Guid id, Guid associationTypeId, Guid roleTypdId)
             : base(domain, id)
         {
@@ -58,6 +57,11 @@ namespace Allors.Meta
                 this.isDerived = value;
                 this.MetaPopulation.Stale();
             }
+        }
+
+        public Multiplicity Multiplicity 
+        {
+            get; internal set;
         }
 
         public bool IsIndexed

@@ -37,8 +37,6 @@ namespace Allors.Meta
 
         private readonly RelationType relationType;
 
-        private bool isMany;
-
         private Composite objectType;
 
         internal AssociationType(RelationType relationType, Guid id)
@@ -49,19 +47,28 @@ namespace Allors.Meta
             relationType.DefiningDomain.OnAssociationTypeCreated(this);
         }
 
+        /// <summary>
+        /// Gets a value indicating whether this instance has a multiplicity of one.
+        /// </summary>
+        /// <value><c>true</c> if this instance is one; otherwise, <c>false</c>.</value>
+        public bool IsOne
+        {
+            get { return !this.IsMany; }
+        }
+
         public bool IsMany
         {
             get
             {
-                this.MetaPopulation.Derive();
-                return this.isMany;
-            }
+                switch (this.relationType.Multiplicity)
+                {
+                    case Multiplicity.ManyToOne:
+                    case Multiplicity.ManyToMany:
+                        return true;
 
-            set
-            {
-                this.MetaPopulation.AssertUnlocked();
-                this.isMany = value;
-                this.MetaPopulation.Stale();
+                    default:
+                        return false;
+                }
             }
         }
 
@@ -250,16 +257,6 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this instance has a multiplicity of one.
-        /// </summary>
-        /// <value><c>true</c> if this instance is one; otherwise, <c>false</c>.</value>
-        public bool IsOne
-        {
-            get { return !this.IsMany; }
-            set { this.IsMany = !value; }
-        }
-
-        /// <summary>
         /// Gets the validation name.
         /// </summary>
         /// <value>The name of the validation.</value>
@@ -317,17 +314,6 @@ namespace Allors.Meta
             catch
             {
                 return base.ToString();
-            }
-        }
-
-        /// <summary>
-        /// Derive the multiplicity.
-        /// </summary>
-        internal void DeriveMultiplicity()
-        {
-            if (this.RoleType != null && this.RoleType.ObjectType != null && this.RoleType.ObjectType is IUnit)
-            {
-                this.IsMany = false;
             }
         }
 

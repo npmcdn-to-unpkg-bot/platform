@@ -281,7 +281,7 @@ namespace Allors.Adapters.Database.Memory
             }
             else
             {
-                role = this.session.MemoryDatabase.Internalize(role, roleType);
+                role = RoleTypeExtensions.Normalize(roleType, role);
                 this.unitRoleByRoleType[roleType] = role;
             }
         }

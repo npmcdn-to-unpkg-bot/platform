@@ -74,7 +74,7 @@ namespace Allors.Adapters.Database.Memory
             {
                 if (this.roleType.ObjectType is IUnit)
                 {
-                    equalsValue = this.extent.Session.MemoryDatabase.Internalize(this.equals, this.roleType);
+                    equalsValue = RoleTypeExtensions.Normalize(this.roleType, this.@equals);
                 }
             }
 

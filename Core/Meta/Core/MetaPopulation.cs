@@ -414,8 +414,6 @@ namespace Allors.Meta
                     // Association & RoleType
                     foreach (var relationType in this.RelationTypes)
                     {
-                        relationType.AssociationType.DeriveMultiplicity();
-                        relationType.RoleType.DeriveMultiplicity();
                         relationType.RoleType.DeriveScaleAndSize();
                     }
 

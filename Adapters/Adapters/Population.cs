@@ -102,116 +102,6 @@ namespace Allors.Adapters
 
         public abstract void Save(XmlWriter writer);
 
-        /// <summary>
-        /// Assert that the unit is compatible with the IObjectType of the RoleType.
-        /// </summary>
-        /// <param name="unit">
-        /// The unit .
-        /// </param>
-        /// <param name="roleType">
-        /// The role type.
-        /// </param>
-        /// <returns>
-        /// The normalize.
-        /// </returns>
-        public object Internalize(object unit, IRoleType roleType)
-        {
-            var unitType = (IUnit)roleType.ObjectType;
-            var unitTypeTag = unitType.UnitTag;
-
-            var normalizedUnit = unit;
-
-            switch (unitTypeTag)
-            {
-                case UnitTags.AllorsString:
-                    if (!(unit is string))
-                    {
-                        throw new ArgumentException("RoleType is not a String.");
-                    }
-
-                    var stringUnit = (string)unit;
-                    var size = roleType.Size;
-                    if (size > -1 && stringUnit.Length > size)
-                    {
-                        throw new ArgumentException("Size of relationType " + roleType + " is too big (" + stringUnit.Length + ">" + size + ").");
-                    }
-
-                    break;
-                case UnitTags.AllorsInteger:
-                    if (!(unit is int))
-                    {
-                        throw new ArgumentException("RoleType is not an Integer.");
-                    }
-
-                    break;
-                case UnitTags.AllorsDecimal:
-                    if (unit is int || unit is long || unit is float || unit is double)
-                    {
-                        normalizedUnit = Convert.ToDecimal(unit);
-                    }
-                    else if (!(unit is decimal))
-                    {
-                        throw new ArgumentException("RoleType is not a Decimal.");
-                    }
-
-                    break;
-                case UnitTags.AllorsFloat:
-                    if (unit is int || unit is long || unit is float)
-                    {
-                        normalizedUnit = Convert.ToDouble(unit);
-                    }
-                    else if (!(unit is double))
-                    {
-                        throw new ArgumentException("RoleType is not a Double.");
-                    }
-
-                    break;
-                case UnitTags.AllorsBoolean:
-                    if (!(unit is bool))
-                    {
-                        throw new ArgumentException("RoleType is not a Boolean.");
-                    }
-
-                    break;
-                case UnitTags.AllorsDate:
-                    if (!(unit is DateTime))
-                    {
-                        throw new ArgumentException("RoleType is not a DateTime.");
-                    }
-
-                    var dateTime = (DateTime)unit;
-
-                    if (dateTime == DateTime.MaxValue || dateTime == DateTime.MinValue)
-                    {
-                        normalizedUnit = unit;
-                    }
-                    else
-                    {
-                        normalizedUnit = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 0, 0, 0, DateTimeKind.Utc);
-                    }
-
-                    break;
-                case UnitTags.AllorsUnique:
-                    if (!(unit is Guid))
-                    {
-                        throw new ArgumentException("RoleType is not a Boolean.");
-                    }
-
-                    break;
-                case UnitTags.AllorsBinary:
-                    if (!(unit is byte[]))
-                    {
-                        throw new ArgumentException("RoleType is not a Boolean.");
-                    }
-
-                    break;
-                default:
-                    throw new ArgumentException("Unknown Unit IObjectType: " + unitTypeTag);
-            }
-
-            return normalizedUnit;
-        }
-
         public bool ContainsConcreteClass(IComposite objectType, IObjectType concreteClass)
         {
             object concreteClassOrClasses;
@@ -238,16 +128,16 @@ namespace Allors.Adapters
             return concreteClasses.Contains(concreteClass);
         }
 
-        public void UnitRoleChecks(IStrategy strategy, IRoleType relationType)
+        public void UnitRoleChecks(IStrategy strategy, IRoleType roleType)
         {
-            if (!this.ContainsConcreteClass(relationType.AssociationType.ObjectType, strategy.ObjectType))
+            if (!this.ContainsConcreteClass(roleType.AssociationType.ObjectType, strategy.ObjectType))
             {
-                throw new ArgumentException(strategy.ObjectType + " is not a valid association object type for " + relationType + ".");
+                throw new ArgumentException(strategy.ObjectType + " is not a valid association object type for " + roleType + ".");
             }
 
-            if (relationType.ObjectType is IComposite)
+            if (roleType.ObjectType is IComposite)
             {
-                throw new ArgumentException(relationType.ObjectType + " on relationType " + relationType + " is not a unit type.");
+                throw new ArgumentException(roleType.ObjectType + " on roleType " + roleType + " is not a unit type.");
             }
         }
 
@@ -278,7 +168,7 @@ namespace Allors.Adapters
         {
             if (!this.ContainsConcreteClass(roleType.AssociationType.ObjectType, strategy.ObjectType))
             {
-                throw new ArgumentException(strategy.ObjectType + " has no relationType with role " + roleType + ".");
+                throw new ArgumentException(strategy.ObjectType + " has no roleType with role " + roleType + ".");
             }
 
             if (role != null)

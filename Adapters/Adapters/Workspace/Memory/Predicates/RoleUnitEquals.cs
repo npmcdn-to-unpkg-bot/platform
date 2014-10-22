@@ -77,7 +77,7 @@ namespace Allors.Adapters.Workspace.Memory
             {
                 if (this.roleType.ObjectType is IUnit)
                 {
-                    equalsValue = this.extent.Session.MemoryWorkspace.Internalize(this.equals, this.roleType);
+                    equalsValue = RoleTypeExtensions.Normalize(this.roleType, this.@equals);
                 }
             }
 

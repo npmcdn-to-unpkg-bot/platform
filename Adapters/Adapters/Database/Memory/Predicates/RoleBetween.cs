@@ -56,7 +56,7 @@ namespace Allors.Adapters.Database.Memory
             {
                 if (this.roleType.ObjectType is IUnit)
                 {
-                    firstValue = this.extent.Session.MemoryDatabase.Internalize(this.first, this.roleType);
+                    firstValue = RoleTypeExtensions.Normalize(this.roleType, this.first);
                 }
             }
 
@@ -69,7 +69,7 @@ namespace Allors.Adapters.Database.Memory
             {
                 if (this.roleType.ObjectType is IUnit)
                 {
-                    secondValue = this.extent.Session.MemoryDatabase.Internalize(this.second, this.roleType);
+                    secondValue = RoleTypeExtensions.Normalize(this.roleType, this.second);
                 }
             }
 
