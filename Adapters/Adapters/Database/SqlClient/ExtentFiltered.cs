@@ -19,13 +19,15 @@
 // <summary>Defines the AllorsExtentFilteredSql type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-using System;
-using System.Collections;
-using System.Data.Common;
-using Allors.Meta;
-
 namespace Allors.Adapters.Database.SqlClient
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Data.Common;
+
+    using Allors.Meta;
+
     public class AllorsExtentFilteredSql : AllorsExtentSql
     {
         internal readonly DatabaseSession session;
@@ -36,7 +38,7 @@ namespace Allors.Adapters.Database.SqlClient
         // IRelationTypes direct from Strategy
         internal Strategy strategy;
 
-        internal AllorsExtentFilteredSql(DatabaseSession session, Strategy strategy, IRoleType role) : this(session, role.ObjectType)
+        internal AllorsExtentFilteredSql(DatabaseSession session, Strategy strategy, IRoleType role) : this(session, (IComposite)role.ObjectType)
         {
             this.strategy = strategy;
             this.role = role;
@@ -78,21 +80,22 @@ namespace Allors.Adapters.Database.SqlClient
             get { return type; }
         }
 
-        protected override ArrayList GetObjects()
+        protected override ObjectId[] GetObjects()
         {
-            if (strategy != null)
+            if (this.strategy != null)
             {
-                if (role != null)
+                if (this.role != null)
                 {
-                    return strategy.ExtentGetCompositeRoles(role);
+                    return this.strategy.ExtentGetCompositeRoles(this.role);
                 }
+
                 return this.strategy.ExtentGetCompositeAssociations(this.association);
             }
 
-            this.session.Sync();
+            this.session.Flush();
 
             var statement = new AllorsExtentStatementRootSql(this);
-            var objects = new ArrayList();
+            var objects = new List<ObjectId>();
 
             this.BuildSql(statement);
 
@@ -107,36 +110,34 @@ namespace Allors.Adapters.Database.SqlClient
                 {
                     while (reader.Read())
                     {
-                        ObjectId objectId = this.session.Database.allorsObjectIds.Parse(reader.GetValue(0).ToString());
-                        Guid typeId = command.GetUnique(reader, 1);
-                        IObjectType instantiateObjectType = this.Session.Database.MetaTypesById[typeId];
-                        objects.Add(this.session.InstantiateExistingStrategy(instantiateObjectType, objectId).GetAllorsObject());
+                        var objectId = this.session.Database.ObjectIds.Parse(reader.GetValue(0).ToString());
+                        objects.Add(objectId);
                     }
 
                     reader.Close();
                 }
             }
 
-            return objects;
+            return objects.ToArray();
         }
 
         protected override void LazyLoadFilter()
         {
-            if (filter == null)
+            if (this.filter == null)
             {
-                filter = new AllorsPredicateAndSql(this);
-                strategy = null;
-                association = null;
-                role = null;
-                FlushCache();
+                this.filter = new AllorsPredicateAndSql(this);
+                this.strategy = null;
+                this.association = null;
+                this.role = null;
+                this.FlushCache();
             }
         }
 
         internal override string BuildSql(AllorsExtentStatementSql statement)
         {
-            if (filter != null)
+            if (this.filter != null)
             {
-                filter.Setup(this, statement);
+                this.filter.Setup(this, statement);
             }
 
             string alias = statement.CreateAlias();
@@ -144,7 +145,7 @@ namespace Allors.Adapters.Database.SqlClient
             if (statement.IsRoot)
             {
                 //TODO: DISTINCT isn't always necessary
-                statement.Append("SELECT DISTINCT " + alias + "." + Schema.ColumnNameForObject + ", " + alias + "." + Schema.C);
+                statement.Append("SELECT DISTINCT " + alias + "." + Schema.ColumnNameForObject);
 
                 if (statement.Sorter != null)
                 {
@@ -152,54 +153,54 @@ namespace Allors.Adapters.Database.SqlClient
                     statement.Sorter.BuildSelect(this, Schema, statement);
                 }
 
-                statement.Append(" FROM " + Schema.ColumnNameForType + " " + alias);
+                statement.Append(" FROM " + Schema.TableNameForObjects + " " + alias);
 
                 statement.AddJoins(alias);
                 statement.AddWhere(alias);
 
-                if (filter != null)
+                if (this.filter != null)
                 {
-                    filter.BuildWhere(this, Schema, statement, type, alias);
+                    this.filter.BuildWhere(this, Schema, statement, this.type, alias);
                 }
             }
             else
             {
-                AllorsExtentStatementChildSql inStatement = (AllorsExtentStatementChildSql) statement;
+                var inStatement = (AllorsExtentStatementChildSql)statement;
                 if (inStatement.Role != null)
                 {
-                    IRoleType inRole = inStatement.Role;
-                    IAssociationType inAssociation = inRole.AssociationType;
+                    var inRole = inStatement.Role;
+                    var inAssociation = inRole.AssociationType;
                     statement.Append("SELECT " + inAssociation.SingularFullName + "_A." + Schema.ColumnNameForAssociation);
                 }
                 else
                 {
-                    IAssociationType inAssociation = inStatement.Association;
-                    IRoleType inRole = inAssociation.RoleType;
+                    var inAssociation = inStatement.Association;
+                    var inRole = inAssociation.RoleType;
                     statement.Append("SELECT " + inRole.SingularFullName + "_R." + Schema.ColumnNameForRole);
                 }
 
-                statement.Append(" FROM " + Schema.ColumnNameForType + " " + alias);
+                statement.Append(" FROM " + Schema.TableNameForObjects + " " + alias);
 
                 statement.AddJoins(alias);
                 statement.AddWhere(alias);
 
-                if (filter != null)
+                if (this.filter != null)
                 {
-                    filter.BuildWhere(this, Schema, statement, type, alias);
+                    this.filter.BuildWhere(this, Schema, statement, this.type, alias);
                 }
 
                 statement.Append(" AND ");
 
                 if (inStatement.Role != null)
                 {
-                    IRoleType inRole = inStatement.Role;
-                    IAssociationType inAssociation = inRole.AssociationType;
+                    var inRole = inStatement.Role;
+                    var inAssociation = inRole.AssociationType;
                     statement.Append(inAssociation.SingularFullName + "_A." + Schema.ColumnNameForAssociation + " IS NOT NULL ");
                 }
                 else
                 {
-                    IAssociationType inAssociation = inStatement.Association;
-                    IRoleType inRole = inAssociation.RoleType;
+                    var inAssociation = inStatement.Association;
+                    var inRole = inAssociation.RoleType;
                     statement.Append(inRole.SingularFullName + "_R." + Schema.ColumnNameForRole + " IS NOT NULL ");
                 }
             }
@@ -207,19 +208,21 @@ namespace Allors.Adapters.Database.SqlClient
             return alias;
         }
 
-        internal void CheckAssociation(IAssociationType association)
+        internal void CheckAssociation(IAssociationType associationType)
         {
-            if (Array.IndexOf(type.AssociationTypes, association) < 0)
+            // TODO: Optimize
+            if (!new List<IAssociationType>(this.type.AssociationTypes).Contains(associationType))
             {
-                throw new ArgumentException("Extent does not implement association " + association.SingularFullName);
+                throw new ArgumentException("Extent does not implement association " + associationType.SingularFullName);
             }
         }
 
-        internal void CheckRole(IRoleType role)
+        internal void CheckRole(IRoleType roleType)
         {
-            if (Array.IndexOf(type.RoleTypes, role) < 0)
+            // TODO: Optimize
+            if (!new List<IRoleType>(this.type.RoleTypes).Contains(roleType))
             {
-                throw new ArgumentException("Extent does not implement role " + role.SingularFullName);
+                throw new ArgumentException("Extent does not implement role " + roleType.SingularFullName);
             }
         }
     }

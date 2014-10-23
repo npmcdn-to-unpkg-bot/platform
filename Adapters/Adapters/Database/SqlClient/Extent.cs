@@ -23,34 +23,35 @@ namespace Allors.Adapters.Database.SqlClient
 {
     using System;
     using System.Collections;
+    using System.Xml.Schema;
 
     using Allors.Meta;
 
     public abstract class AllorsExtentSql : Extent
     {
-        private ArrayList objects;
+        private ObjectId[] objects;
         private AllorsExtentOperationSql parentOperationExtent;
         private AllorsExtentSortSql sorter;
 
         public override int Count
         {
-            get { return this.Objects.Count; }
+            get { return this.Objects.Length; }
         }
 
         public override IObject First
         {
             get
             {
-                if (this.Objects.Count > 0)
+                if (this.Objects.Length > 0)
                 {
-                    return (IObject)this.Objects[0];
+                    return this.Session.InstantiateStrategy(this.Objects[0]).GetObject();
                 }
 
                 return null;
             }
         }
 
-        private ArrayList Objects
+        private ObjectId[] Objects
         {
             get
             {
@@ -99,7 +100,13 @@ namespace Allors.Adapters.Database.SqlClient
 
         public override bool Contains(object value)
         {
-            return this.Objects.Contains(value);
+            if (value != null)
+            {
+                var obj = (IObject)value;
+                return Array.IndexOf(this.Objects, obj.Id) >= 0;
+            }
+
+            return false;
         }
 
         public override void CopyTo(Array array, int index)
@@ -114,26 +121,40 @@ namespace Allors.Adapters.Database.SqlClient
 
         public override int IndexOf(object value)
         {
-            return this.Objects.IndexOf(value);
+            return Array.IndexOf(this.objects, value);
         }
 
         public override IObject[] ToArray()
         {
-            Type clrType = this.Session.Database.ObjectFactory.GetTypeForObjectType(this.ObjectType);
-            return (IObject[])this.Objects.ToArray(clrType);
+            var clrType = this.Session.Database.ObjectFactory.GetTypeForObjectType(this.ObjectType);
+            var list = new ArrayList(this.objects.Length);
+            for (var i = 0; i < list.Count; i++)
+            {
+                var objectId = this.objects[i];
+                list[i] = this.Session.InstantiateStrategy(objectId).GetObject();
+            }
+
+            return (IObject[])list.ToArray(clrType);
         }
 
         public override IObject[] ToArray(Type type)
         {
-            return (IObject[])this.Objects.ToArray(type);
+            var list = new ArrayList(this.objects.Length);
+            for (var i = 0; i < list.Count; i++)
+            {
+                var objectId = this.objects[i];
+                list[i] = this.Session.InstantiateStrategy(objectId).GetObject();
+            }
+
+            return (IObject[])list.ToArray(type);
         }
 
         protected override IObject GetItem(int index)
         {
-            return (IObject)this.Objects[index];
+            return this.Session.InstantiateStrategy(this.Objects[index]).GetObject();
         }
 
-        protected abstract ArrayList GetObjects();
+        protected abstract ObjectId[] GetObjects();
 
         protected abstract void LazyLoadFilter();
 

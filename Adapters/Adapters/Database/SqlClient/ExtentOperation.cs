@@ -22,7 +22,7 @@
 namespace Allors.Adapters.Database.SqlClient
 {
     using System;
-    using System.Collections;
+    using System.Collections.Generic;
     using System.Data.Common;
 
     using Allors.Meta;
@@ -74,7 +74,7 @@ namespace Allors.Adapters.Database.SqlClient
             return this.AddSort(roleType, SortDirection.Ascending);
         }
 
-        protected override ArrayList GetObjects()
+        protected override ObjectId[] GetObjects()
         {
             this.first.Session.Flush();
 
@@ -87,7 +87,7 @@ namespace Allors.Adapters.Database.SqlClient
                 statement.Sorter.BuildOrder(this.Sorter, this.Session.Database.Schema, statement);
             }
 
-            var objects = new ArrayList();
+            var objects = new List<ObjectId>();
             using (var command = statement.CreateSqlCommand())
             {
                 using (DbDataReader reader = command.ExecuteReader())
@@ -95,16 +95,14 @@ namespace Allors.Adapters.Database.SqlClient
                     while (reader.Read())
                     {
                         var objectId = this.Session.Database.ObjectIds.Parse(reader.GetValue(0).ToString());
-                        var typeId = command.GetUnique(reader, 1);
-                        var instantiateObjectType = (IObjectType)this.Session.Database.ObjectFactory.MetaPopulation.Find(typeId);
-                        objects.Add(this.Session.InstantiateExistingStrategy(instantiateObjectType, objectId).GetAllorsObject());
+                        objects.Add(objectId);
                     }
 
                     reader.Close();
                 }
             }
 
-            return objects;
+            return objects.ToArray();
         }
 
         //TODO: Refactor this
@@ -114,9 +112,9 @@ namespace Allors.Adapters.Database.SqlClient
 
         internal override string BuildSql(AllorsExtentStatementSql statement)
         {
-            first.BuildSql(statement);
+            this.first.BuildSql(statement);
 
-            switch (operationType)
+            switch (this.operationType)
             {
                 case AllorsExtentOperationTypeSqlBundled.UNION:
                     statement.Append("\nUNION\n");
@@ -125,12 +123,12 @@ namespace Allors.Adapters.Database.SqlClient
                     statement.Append("\nINTERSECT\n");
                     break;
                 case AllorsExtentOperationTypeSqlBundled.EXCEPT:
-                    statement.Append("\n" + Session.Database.Except + "\n");
+                    statement.Append("\nEXCEPT\n");
                     break;
             }
 
             statement.Append("(");
-            second.BuildSql(statement);
+            this.second.BuildSql(statement);
             statement.Append(")");
 
             return null;

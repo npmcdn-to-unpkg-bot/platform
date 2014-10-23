@@ -328,20 +328,7 @@ namespace Allors.Adapters.Database.SqlClient
 
         public Extent GetCompositeRoles(IRoleType roleType)
         {
-            ObjectId[] roles;
-            switch (roleType.RelationType.Multiplicity)
-            {
-                case Multiplicity.OneToMany:
-                    roles = this.session.GetCompositeRolesOneToMany(this.objectId, roleType);
-                    break;
-                case Multiplicity.ManyToMany:
-                    roles = this.session.GetCompositeRolesManyToMany(this.objectId, roleType);
-                    break;
-                default:
-                    throw new Exception("Unsupported multiplicity " + roleType.RelationType.Multiplicity);
-            }
-
-            return new ObjectIdExtent(this.session, roles);
+            return new AllorsExtentFilteredSql(this.session, this, roleType);
         }
 
         public void AddCompositeRole(IRoleType roleType, IObject role)
@@ -502,6 +489,29 @@ namespace Allors.Adapters.Database.SqlClient
 
         public Extent GetCompositeAssociations(IAssociationType associationType)
         {
+            return new AllorsExtentFilteredSql(this.session, this, associationType);
+        }
+
+        public ObjectId[] ExtentGetCompositeRoles(IRoleType roleType)
+        {
+            ObjectId[] roles;
+            switch (roleType.RelationType.Multiplicity)
+            {
+                case Multiplicity.OneToMany:
+                    roles = this.session.GetCompositeRolesOneToMany(this.objectId, roleType);
+                    break;
+                case Multiplicity.ManyToMany:
+                    roles = this.session.GetCompositeRolesManyToMany(this.objectId, roleType);
+                    break;
+                default:
+                    throw new Exception("Unsupported multiplicity " + roleType.RelationType.Multiplicity);
+            }
+
+            return roles;
+        }
+
+        public ObjectId[] ExtentGetCompositeAssociations(IAssociationType associationType)
+        {
             ObjectId[] associations;
             switch (associationType.RelationType.Multiplicity)
             {
@@ -515,7 +525,7 @@ namespace Allors.Adapters.Database.SqlClient
                     throw new Exception("Unsupported multiplicity " + associationType.RelationType.Multiplicity);
             }
 
-            return new ObjectIdExtent(this.session, associations);
+            return associations;
         }
     }
 }

@@ -19,6 +19,7 @@ namespace Allors.Adapters.Database.SqlClient
     using System;
     using System.Collections.Generic;
     using System.Data.SqlClient;
+    using System.Linq;
 
     using Allors.Meta;
 
@@ -39,6 +40,7 @@ namespace Allors.Adapters.Database.SqlClient
         private Dictionary<IRoleType, HashSet<ObjectId>> flushAssociationsByRoleType;
 
         private Dictionary<IAssociationType, Dictionary<ObjectId, object>> associationByRoleByAssociationType;
+        private Dictionary<IAssociationType, HashSet<ObjectId>> triggerFlushRolesByAssociationType;
 
         public DatabaseSession(Database database)
         {
@@ -438,6 +440,116 @@ SELECT " + Schema.ColumnNameForObject + @" = SCOPE_IDENTITY();
         }
         #endregion
 
+        #region Composite Many <-> One
+        internal bool ExistCompositeRoleManyToOne(ObjectId association, IRoleType roleType)
+        {
+            return this.GetCompositeRoleManyToOne(association, roleType) != null;
+        }
+
+        internal ObjectId GetCompositeRoleManyToOne(ObjectId association, IRoleType roleType)
+        {
+            var roleByAssociation = this.GetRoleByAssociation(roleType);
+
+            object role;
+            if (!roleByAssociation.TryGetValue(association, out role))
+            {
+                role = this.FetchCompositeRole(association, roleType);
+                roleByAssociation[association] = role;
+            }
+
+            return (ObjectId)role;
+        }
+
+        internal void SetCompositeRoleManyToOne(ObjectId association, IRoleType roleType, ObjectId role)
+        {
+            var existingRole = this.GetCompositeRoleManyToOne(association, roleType);
+            if (!Equals(role, existingRole))
+            {
+                var roleByAssociation = this.GetRoleByAssociation(roleType);
+                var flushAssociations = this.GetFlushAssociations(roleType);
+
+                var associationByRole = this.GetAssociationByRole(roleType.AssociationType);
+                var triggerFlushRoles = this.GetTriggerFlushRoles(roleType.AssociationType);
+
+                // Association <- Existing Role
+                if (existingRole != null)
+                {
+                    associationByRole.Remove(existingRole);
+                    triggerFlushRoles.Add(existingRole);
+                }
+
+                // Association <- Role
+                associationByRole.Remove(role);
+                triggerFlushRoles.Add(role);
+
+                // Association -> Role
+                roleByAssociation[association] = role;
+                flushAssociations.Add(association);
+            }
+        }
+
+        internal void RemoveCompositeRoleManyToOne(ObjectId association, IRoleType roleType)
+        {
+            var existingRole = this.GetCompositeRoleManyToOne(association, roleType);
+            if (existingRole != null)
+            {
+                var roleByAssociation = this.GetRoleByAssociation(roleType);
+                var flushAssociations = this.GetFlushAssociations(roleType);
+
+                var associationByRole = this.GetAssociationByRole(roleType.AssociationType);
+                var triggerFlushRoles = this.GetTriggerFlushRoles(roleType.AssociationType);
+
+                // Association <- Existing Role
+                object existingAssociations;
+                if (associationByRole.TryGetValue(existingRole, out existingAssociations))
+                {
+                    var associations = new List<ObjectId>((ObjectId[])existingAssociations);
+                    associations.Remove(association);
+                    associationByRole[existingRole] = associations.Count != 0 ? associations.ToArray() : null;
+                }
+                else
+                {
+                    triggerFlushRoles.Add(existingRole);
+                }
+
+                // Association -> Role
+                roleByAssociation[association] = null;
+                flushAssociations.Add(association);
+            }
+        }
+
+        internal bool ExistCompositeAssociationsManyToOne(ObjectId role, IAssociationType associationType)
+        {
+            return this.GetCompositeAssociationsManyToOne(role, associationType).Count() > 0;
+        }
+
+        internal ObjectId[] GetCompositeAssociationsManyToOne(ObjectId role, IAssociationType associationType)
+        {
+            if (this.triggerFlushRolesByAssociationType != null)
+            {
+                HashSet<ObjectId> triggerFlushRoles;
+                if (this.triggerFlushRolesByAssociationType.TryGetValue(associationType, out triggerFlushRoles))
+                {
+                    if (triggerFlushRoles.Contains(role))
+                    {
+                        this.FlushCompositeManyToOne(associationType.RoleType);
+                        this.triggerFlushRolesByAssociationType.Remove(associationType);
+                    }
+                }
+            }
+
+            var associationByRole = this.GetAssociationByRole(associationType);
+            object associations;
+            if (!associationByRole.TryGetValue(role, out associations))
+            {
+                associations = this.FetchCompositeAssociations(role, associationType);
+                associationByRole[role] = associations;
+            }
+
+            return (ObjectId[])associations ?? EmptyObjectIds;
+        }
+        #endregion
+
         #region Composite One <-> Many
         internal bool ExistCompositeRoleOneToMany(ObjectId association, IRoleType roleType)
         {
@@ -477,108 +589,6 @@ SELECT " + Schema.ColumnNameForObject + @" = SCOPE_IDENTITY();
         internal ObjectId GetCompositeAssociationOneToMany(ObjectId role, IAssociationType associationType)
         {
             throw new NotImplementedException();
-        }
-        #endregion
-
-        #region Composite Many <-> One
-        internal bool ExistCompositeRoleManyToOne(ObjectId association, IRoleType roleType)
-        {
-            return this.GetCompositeRoleManyToOne(association, roleType) != null;
-        }
-
-        internal ObjectId GetCompositeRoleManyToOne(ObjectId association, IRoleType roleType)
-        {
-            var roleByAssociation = this.GetRoleByAssociation(roleType);
-
-            object role;
-            if (!roleByAssociation.TryGetValue(association, out role))
-            {
-                role = this.FetchCompositeRole(association, roleType);
-                roleByAssociation[association] = role;
-            }
-
-            return (ObjectId)role;
-        }
-
-        internal void SetCompositeRoleManyToOne(ObjectId association, IRoleType roleType, ObjectId role)
-        {
-            var existingRole = this.GetCompositeRoleManyToOne(association, roleType);
-            if (!Equals(role, existingRole))
-            {
-                var roleByAssociation = this.GetRoleByAssociation(roleType);
-                var associationByRole = this.GetAssociationByRole(roleType.AssociationType);
-
-                // Existing Association -> Role
-                object existingAssociation;
-                if (!associationByRole.TryGetValue(role, out existingAssociation))
-                {
-                    foreach (var kvp in roleByAssociation)
-                    {
-                        if (role.Equals(kvp.Value))
-                        {
-                            existingAssociation = kvp.Key;
-                            break;
-                        }
-                    }
-                }
-
-                if (existingAssociation != null)
-                {
-                    roleByAssociation[(ObjectId)existingAssociation] = null;
-                }
-
-                // Association <- Existing Role
-                if (existingRole != null)
-                {
-                    associationByRole[existingRole] = null;
-                }
-
-                // Association <- Role
-                associationByRole[role] = association;
-
-                // Association -> Role
-                roleByAssociation[association] = role;
-
-                var flushAssociations = this.GetFlushAssociations(roleType);
-                flushAssociations.Add(association);
-            }
-        }
-
-        internal void RemoveCompositeRoleManyToOne(ObjectId association, IRoleType roleType)
-        {
-            var existingRole = this.GetCompositeRoleManyToOne(association, roleType);
-            if (existingRole != null)
-            {
-                var roleByAssociation = this.GetRoleByAssociation(roleType);
-                var associationByRole = this.GetAssociationByRole(roleType.AssociationType);
-
-                // Association <- Role
-                associationByRole[existingRole] = null;
-
-                // Association -> Role
-                roleByAssociation[association] = null;
-
-                var flushAssociations = this.GetFlushAssociations(roleType);
-                flushAssociations.Add(association);
-            }
-        }
-
-        internal bool ExistCompositeAssociationsManyToOne(ObjectId role, IAssociationType associationType)
-        {
-            return this.GetCompositeAssociationsManyToOne(role, associationType) != null;
-        }
-
-        internal ObjectId[] GetCompositeAssociationsManyToOne(ObjectId role, IAssociationType associationType)
-        {
-            var associationByRole = this.GetAssociationByRole(associationType);
-            object associations;
-            if (!associationByRole.TryGetValue(role, out associations))
-            {
-                associations = this.FetchCompositeAssociations(role, associationType);
-                associationByRole[role] = associations;
-            }
-
-            return (ObjectId[])associations;
         }
         #endregion
 
@@ -725,6 +735,23 @@ SELECT " + Schema.ColumnNameForObject + @" = SCOPE_IDENTITY();
             return roleByAssociation;
         }
 
+        private HashSet<ObjectId> GetFlushAssociations(IRoleType roleType)
+        {
+            if (this.flushAssociationsByRoleType == null)
+            {
+                this.flushAssociationsByRoleType = new Dictionary<IRoleType, HashSet<ObjectId>>();
+            }
+
+            HashSet<ObjectId> flushAssociations;
+            if (!this.flushAssociationsByRoleType.TryGetValue(roleType, out flushAssociations))
+            {
+                flushAssociations = new HashSet<ObjectId>();
+                this.flushAssociationsByRoleType[roleType] = flushAssociations;
+            }
+
+            return flushAssociations;
+        }
+
         private Dictionary<ObjectId, object> GetAssociationByRole(IAssociationType associationType)
         {
             if (this.associationByRoleByAssociationType == null)
@@ -742,20 +769,21 @@ SELECT " + Schema.ColumnNameForObject + @" = SCOPE_IDENTITY();
             return associationByRole;
         }
 
-        private HashSet<ObjectId> GetFlushAssociations(IRoleType roleType)
+        private HashSet<ObjectId> GetTriggerFlushRoles(IAssociationType associationType)
         {
-            if (this.flushAssociationsByRoleType == null)
+            if (this.triggerFlushRolesByAssociationType == null)
             {
-                this.flushAssociationsByRoleType = new Dictionary<IRoleType, HashSet<ObjectId>>();
+                this.triggerFlushRolesByAssociationType = new Dictionary<IAssociationType, HashSet<ObjectId>>();
             }
 
-            HashSet<ObjectId> flushAssociations;
-            if (!this.flushAssociationsByRoleType.TryGetValue(roleType, out flushAssociations))
+            HashSet<ObjectId> triggerFlushRoles;
+            if (!this.triggerFlushRolesByAssociationType.TryGetValue(associationType, out triggerFlushRoles))
             {
-                flushAssociations = new HashSet<ObjectId>();
-                this.flushAssociationsByRoleType[roleType] = flushAssociations;
+                triggerFlushRoles = new HashSet<ObjectId>();
+                this.triggerFlushRolesByAssociationType[associationType] = triggerFlushRoles;
             }
-            return flushAssociations;
+
+            return triggerFlushRoles;
         }
 
         private Strategy FetchStrategy(ObjectId objectId, bool isNew, bool? isDeleted)
@@ -1023,6 +1051,8 @@ VALUES(" + Schema.ParameterNameForAssociation + @", " + Schema.ParameterNameForR
                         }
                     }
                 }
+
+                this.flushAssociationsByRoleType.Remove(roleType);
             }
         }
 
@@ -1092,6 +1122,8 @@ VALUES(" + Schema.ParameterNameForAssociation + @", " + Schema.ParameterNameForR
                         }
                     }
                 }
+
+                this.flushAssociationsByRoleType.Remove(roleType);
             }
         }
 
