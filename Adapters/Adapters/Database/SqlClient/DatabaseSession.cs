@@ -24,12 +24,16 @@ namespace Allors.Adapters.Database.SqlClient
 
     public class DatabaseSession : IDatabaseSession
     {
+        private static readonly ObjectId[] EmptyObjectIds = { };
+        private static readonly IObject[] EmptyObjects = { };
+
         private readonly Database database;
 
         private SqlConnection connection;
         private SqlTransaction transaction;
 
         private Dictionary<ObjectId, Strategy> strategyByObjectId;
+        private Dictionary<ObjectId, int> cacheIdByObjectId;
 
         private Dictionary<IRoleType, Dictionary<ObjectId, object>> roleByAssociationByRoleType;
         private Dictionary<IRoleType, HashSet<ObjectId>> flushAssociationsByRoleType;
@@ -120,36 +124,10 @@ namespace Allors.Adapters.Database.SqlClient
         {
             try
             {
-                if (this.flushAssociationsByRoleType != null)
-                {
-                    foreach (var roleType in new List<IRoleType>(this.flushAssociationsByRoleType.Keys))
-                    {
-                        if (roleType.ObjectType is IUnit)
-                        {
-                            this.FlushUnit(roleType);
-                        }
-                        else
-                        {
-                            switch (roleType.RelationType.Multiplicity)
-                            {
-                                case Multiplicity.OneToOne:
-                                    this.FlushCompositeOneToOne(roleType);
-                                    break;
-                                case Multiplicity.OneToMany:
-                                    this.FlushCompositeOneToMany(roleType);
-                                    break;
-                                case Multiplicity.ManyToOne:
-                                    this.FlushCompositeManyToOne(roleType);
-                                    break;
-                                case Multiplicity.ManyToMany:
-                                    this.FlushCompositeManyToMany(roleType);
-                                    break;
-                            }
-                        }
-                    }
-                }
+                this.Flush();
 
                 this.strategyByObjectId = null;
+                this.cacheIdByObjectId = null;
                 this.roleByAssociationByRoleType = null;
                 this.associationByRoleByAssociationType = null;
                 this.flushAssociationsByRoleType = null;
@@ -172,6 +150,7 @@ namespace Allors.Adapters.Database.SqlClient
             {
 
                 this.strategyByObjectId = null;
+                this.cacheIdByObjectId = null;
                 this.roleByAssociationByRoleType = null;
                 this.associationByRoleByAssociationType = null;
                 this.flushAssociationsByRoleType = null;
@@ -191,19 +170,19 @@ namespace Allors.Adapters.Database.SqlClient
         {
             this.LazyConnect();
 
-            var cmdText = @"
+            const string CmdText = @"
 INSERT INTO " + Schema.TableNameForObjects + " (" + Schema.ColumnNameForType + ", " + Schema.ColumnNameForCache + @")
 VALUES (" + Schema.ParameterNameForType + ", " + Schema.ParameterNameForCache + @");
 
 SELECT " + Schema.ColumnNameForObject + @" = SCOPE_IDENTITY();
 ";
-            using (var command = new SqlCommand(cmdText, this.connection, this.transaction))
+            using (var command = new SqlCommand(CmdText, this.connection, this.transaction))
             {
                 command.Parameters.Add(Schema.ParameterNameForType, Schema.SqlDbTypeForType).Value = objectType.Id;
                 command.Parameters.Add(Schema.ParameterNameForCache, Schema.SqlDbTypeForCache).Value = int.MaxValue;
                 var result = command.ExecuteScalar().ToString();
                 var objectId = this.database.ObjectIds.Parse(result);
-                var strategy = new Strategy(this, objectType, objectId, true);
+                var strategy = new Strategy(this, objectType, objectId, true, false);
                 return strategy.GetObject();
             }
         }
@@ -215,32 +194,66 @@ SELECT " + Schema.ColumnNameForObject + @" = SCOPE_IDENTITY();
 
         public IObject Instantiate(IObject obj)
         {
-            throw new NotImplementedException();
+            return this.Instantiate(obj.Id);
         }
 
         public IObject Instantiate(string objectId)
         {
-            throw new NotImplementedException();
+            return this.Instantiate(this.Database.ObjectIds.Parse(objectId));
         }
 
         public IObject Instantiate(ObjectId objectId)
         {
-            throw new NotImplementedException();
+            var strategy = this.InstantiateStrategy(objectId);
+            return strategy != null ? strategy.GetObject() : null;
         }
 
         public IObject[] Instantiate(IObject[] objects)
         {
-            throw new NotImplementedException();
+            var objectIds = new List<ObjectId>(objects.Length);
+            foreach (var obj in objects)
+            {
+                if (obj != null)
+                {
+                    objectIds.Add(obj.Id);
+                }
+            }
+
+            return this.Instantiate(objectIds.ToArray());
         }
 
-        public IObject[] Instantiate(string[] objectIds)
+        public IObject[] Instantiate(string[] objectIdStrings)
         {
-            throw new NotImplementedException();
+            var objectIds = new List<ObjectId>(objectIdStrings.Length);
+            foreach (var objectIdString in objectIdStrings)
+            {
+                if (objectIdString != null)
+                {
+                    objectIds.Add(this.Database.ObjectIds.Parse(objectIdString));
+                }
+            }
+
+            return this.Instantiate(objectIds.ToArray());
         }
 
         public IObject[] Instantiate(ObjectId[] objectIds)
         {
-            throw new NotImplementedException();
+            List<IObject> objects = null;
+            foreach (var objectId in objectIds)
+            {
+                var strategy = this.InstantiateStrategy(objectId);
+                if (strategy != null)
+                {
+                    if (objects == null)
+                    {
+                        objects = new List<IObject>();
+                    }
+
+                    objects.Add(strategy.GetObject());
+                }
+            }
+
+            return objects != null ? objects.ToArray() : EmptyObjects;
         }
 
         public IObject Insert(IClass objectType, string objectId)
@@ -256,7 +269,6 @@ SELECT " + Schema.ColumnNameForObject + @" = SCOPE_IDENTITY();
         public IStrategy InstantiateStrategy(ObjectId objectId)
         {
             this.LazyConnect();
-            var schema = this.database.Schema;
 
             if (this.strategyByObjectId != null)
             {
@@ -267,35 +279,7 @@ SELECT " + Schema.ColumnNameForObject + @" = SCOPE_IDENTITY();
                 }
             }
 
-            var cmdText = @"
-SELECT  " + Schema.ColumnNameForType + ", " + Schema.ColumnNameForCache + @"
-FROM " + Schema.TableNameForObjects + @"
-WHERE " + Schema.ColumnNameForObject + @" = " + Schema.ParameterNameForObject + @"
-";
-            using (var command = new SqlCommand(cmdText, this.connection, this.transaction))
-            {
-                command.Parameters.Add(Schema.ParameterNameForObject, schema.SqlDbTypeForId).Value = objectId.Value;
-                using (var reader = command.ExecuteReader())
-                {
-                    if (reader.Read())
-                    {
-                        var typeId = reader.GetGuid(0);
-                        var cache = reader.GetInt32(1);
-                        var type = (IClass)this.database.ObjectFactory.MetaPopulation.Find(typeId);
-
-                        if (this.strategyByObjectId == null)
-                        {
-                            this.strategyByObjectId = new Dictionary<ObjectId, Strategy>();
-                        }
-
-                        var strategy = new Strategy(this, type, objectId, false);
-                        this.strategyByObjectId[objectId] = strategy;
-                        return strategy;
-                    }
-                }
-
-                return null;
-            }
+            return this.FetchStrategy(objectId, false, null);
         }
 
         public void Dispose()
@@ -499,32 +483,102 @@ WHERE " + Schema.ColumnNameForObject + @" = " + Schema.ParameterNameForObject + 
         #region Composite Many <-> One
         internal bool ExistCompositeRoleManyToOne(ObjectId association, IRoleType roleType)
         {
-            throw new NotImplementedException();
+            return this.GetCompositeRoleManyToOne(association, roleType) != null;
         }
 
         internal ObjectId GetCompositeRoleManyToOne(ObjectId association, IRoleType roleType)
         {
-            throw new NotImplementedException();
+            var roleByAssociation = this.GetRoleByAssociation(roleType);
+
+            object role;
+            if (!roleByAssociation.TryGetValue(association, out role))
+            {
+                role = this.FetchCompositeRole(association, roleType);
+                roleByAssociation[association] = role;
+            }
+
+            return (ObjectId)role;
         }
 
         internal void SetCompositeRoleManyToOne(ObjectId association, IRoleType roleType, ObjectId role)
         {
-            throw new NotImplementedException();
+            var existingRole = this.GetCompositeRoleManyToOne(association, roleType);
+            if (!Equals(role, existingRole))
+            {
+                var roleByAssociation = this.GetRoleByAssociation(roleType);
+                var associationByRole = this.GetAssociationByRole(roleType.AssociationType);
+
+                // Existing Association -> Role
+                object existingAssociation;
+                if (!associationByRole.TryGetValue(role, out existingAssociation))
+                {
+                    foreach (var kvp in roleByAssociation)
+                    {
+                        if (role.Equals(kvp.Value))
+                        {
+                            existingAssociation = kvp.Key;
+                            break;
+                        }
+                    }
+                }
+
+                if (existingAssociation != null)
+                {
+                    roleByAssociation[(ObjectId)existingAssociation] = null;
+                }
+
+                // Association <- Existing Role
+                if (existingRole != null)
+                {
+                    associationByRole[existingRole] = null;
+                }
+
+                // Association <- Role
+                associationByRole[role] = association;
+
+                // Association -> Role
+                roleByAssociation[association] = role;
+
+                var flushAssociations = this.GetFlushAssociations(roleType);
+                flushAssociations.Add(association);
+            }
         }
 
         internal void RemoveCompositeRoleManyToOne(ObjectId association, IRoleType roleType)
         {
-            throw new NotImplementedException();
+            var existingRole = this.GetCompositeRoleManyToOne(association, roleType);
+            if (existingRole != null)
+            {
+                var roleByAssociation = this.GetRoleByAssociation(roleType);
+                var associationByRole = this.GetAssociationByRole(roleType.AssociationType);
+
+                // Association <- Role
+                associationByRole[existingRole] = null;
+
+                // Association -> Role
+                roleByAssociation[association] = null;
+
+                var flushAssociations = this.GetFlushAssociations(roleType);
+                flushAssociations.Add(association);
+            }
         }
 
         internal bool ExistCompositeAssociationsManyToOne(ObjectId role, IAssociationType associationType)
         {
-            throw new NotImplementedException();
+            return this.GetCompositeAssociationsManyToOne(role, associationType) != null;
         }
 
         internal ObjectId[] GetCompositeAssociationsManyToOne(ObjectId role, IAssociationType associationType)
         {
-            throw new NotImplementedException();
+            var associationByRole = this.GetAssociationByRole(associationType);
+            object associations;
+            if (!associationByRole.TryGetValue(role, out associations))
+            {
+                associations = this.FetchCompositeAssociations(role, associationType);
+                associationByRole[role] = associations;
+            }
+
+            return (ObjectId[])associations;
         }
         #endregion
 
@@ -569,6 +623,58 @@ WHERE " + Schema.ColumnNameForObject + @" = " + Schema.ParameterNameForObject + 
             throw new NotImplementedException();
         }
         #endregion
+
+        internal SqlCommand CreateCommand(string cmdText)
+        {
+            this.LazyConnect();
+            return new SqlCommand(cmdText, this.connection, this.transaction);
+        }
+
+        internal void Flush()
+        {
+            if (this.flushAssociationsByRoleType != null)
+            {
+                foreach (var roleType in new List<IRoleType>(this.flushAssociationsByRoleType.Keys))
+                {
+                    if (roleType.ObjectType is IUnit)
+                    {
+                        this.FlushUnit(roleType);
+                    }
+                    else
+                    {
+                        switch (roleType.RelationType.Multiplicity)
+                        {
+                            case Multiplicity.OneToOne:
+                                this.FlushCompositeOneToOne(roleType);
+                                break;
+                            case Multiplicity.OneToMany:
+                                this.FlushCompositeOneToMany(roleType);
+                                break;
+                            case Multiplicity.ManyToOne:
+                                this.FlushCompositeManyToOne(roleType);
+                                break;
+                            case Multiplicity.ManyToMany:
+                                this.FlushCompositeManyToMany(roleType);
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+
+        internal Strategy InstantiateExistingStrategy(IObjectType instantiateObjectType, ObjectId objectId)
+        {
+            if (this.strategyByObjectId != null)
+            {
+                Strategy strategy;
+                if (this.strategyByObjectId.TryGetValue(objectId, out strategy))
+                {
+                    return strategy;
+                }
+            }
+
+            return this.FetchStrategy(objectId, false, false);
+        }
 
         private static void SplitFlushAssociations(IEnumerable<ObjectId> flushAssociations, IReadOnlyDictionary<ObjectId, object> roleByAssociation, out IList<ObjectId> flushDeleted, out IList<ObjectId> flushChanged)
         {
@@ -652,9 +758,49 @@ WHERE " + Schema.ColumnNameForObject + @" = " + Schema.ParameterNameForObject + 
             return flushAssociations;
         }
 
+        private Strategy FetchStrategy(ObjectId objectId, bool isNew, bool? isDeleted)
+        {
+            var cmdText = @"
+SELECT  " + Schema.ColumnNameForType + ", " + Schema.ColumnNameForCache + @"
+FROM " + Schema.TableNameForObjects + @"
+WHERE " + Schema.ColumnNameForObject + @" = " + Schema.ParameterNameForObject + @"
+";
+            using (var command = new SqlCommand(cmdText, this.connection, this.transaction))
+            {
+                command.Parameters.Add(Schema.ParameterNameForObject, this.database.Schema.SqlDbTypeForId).Value = objectId.Value;
+                using (var reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        var typeId = reader.GetGuid(0);
+                        var cache = reader.GetInt32(1);
+                        var type = (IClass)this.database.ObjectFactory.MetaPopulation.Find(typeId);
+
+                        if (this.strategyByObjectId == null)
+                        {
+                            this.strategyByObjectId = new Dictionary<ObjectId, Strategy>();
+                        }
+
+                        if (this.cacheIdByObjectId == null)
+                        {
+                            this.cacheIdByObjectId = new Dictionary<ObjectId, int>();
+                        }
+
+                        var strategy = new Strategy(this, type, objectId, isNew, isDeleted);
+
+                        this.strategyByObjectId[objectId] = strategy;
+                        this.cacheIdByObjectId[objectId] = cache;
+
+                        return strategy;
+                    }
+                }
+
+                return null;
+            }
+        }
+
         private object FetchUnitRole(ObjectId association, IRoleType roleType)
         {
-            this.LazyConnect();
             var schema = this.database.Schema;
 
             var cmdText = @"
@@ -662,7 +808,7 @@ SELECT " + Schema.ColumnNameForRole + @"
 FROM " + schema.GetTableName(roleType.RelationType) + @"
 WHERE " + Schema.ColumnNameForAssociation + @"=" + Schema.ParameterNameForAssociation + @";
 ";
-            using (var command = new SqlCommand(cmdText, this.connection, this.transaction))
+            using (var command = this.CreateCommand(cmdText))
             {
                 command.Parameters.Add(Schema.ParameterNameForAssociation, schema.SqlDbTypeForId).Value = association.Value;
                 return command.ExecuteScalar();
@@ -671,7 +817,6 @@ WHERE " + Schema.ColumnNameForAssociation + @"=" + Schema.ParameterNameForAssoci
 
         private ObjectId FetchCompositeRole(ObjectId association, IRoleType roleType)
         {
-            this.LazyConnect();
             var schema = this.database.Schema;
 
             var cmdText = @"
@@ -679,7 +824,7 @@ SELECT " + Schema.ColumnNameForRole + @"
 FROM " + schema.GetTableName(roleType.RelationType) + @"
 WHERE " + Schema.ColumnNameForAssociation + @"=" + Schema.ParameterNameForAssociation + @";
 ";
-            using (var command = new SqlCommand(cmdText, this.connection, this.transaction))
+            using (var command = this.CreateCommand(cmdText))
             {
                 command.Parameters.Add(Schema.ParameterNameForAssociation, schema.SqlDbTypeForId).Value = association.Value;
                 var result = command.ExecuteScalar();
@@ -695,7 +840,6 @@ WHERE " + Schema.ColumnNameForAssociation + @"=" + Schema.ParameterNameForAssoci
 
         private ObjectId FetchCompositeAssociation(ObjectId role, IAssociationType associationType)
         {
-            this.LazyConnect();
             var schema = this.database.Schema;
 
             var cmdText = @"
@@ -703,7 +847,7 @@ SELECT " + Schema.ColumnNameForAssociation + @"
 FROM " + schema.GetTableName(associationType.RelationType) + @"
 WHERE " + Schema.ColumnNameForRole + @"=" + Schema.ParameterNameForRole + @";
 ";
-            using (var command = new SqlCommand(cmdText, this.connection, this.transaction))
+            using (var command = this.CreateCommand(cmdText))
             {
                 command.Parameters.Add(Schema.ParameterNameForRole, schema.SqlDbTypeForId).Value = role.Value;
                 var result = command.ExecuteScalar();
@@ -716,7 +860,39 @@ WHERE " + Schema.ColumnNameForRole + @"=" + Schema.ParameterNameForRole + @";
 
             return null;
         }
-        
+
+        private ObjectId[] FetchCompositeAssociations(ObjectId role, IAssociationType associationType)
+        {
+            var schema = this.database.Schema;
+
+            var cmdText = @"
+SELECT " + Schema.ColumnNameForAssociation + @"
+FROM " + schema.GetTableName(associationType.RelationType) + @"
+WHERE " + Schema.ColumnNameForRole + @"=" + Schema.ParameterNameForRole + @";
+";
+            List<ObjectId> associations = null;
+            using (var command = this.CreateCommand(cmdText))
+            {
+                command.Parameters.Add(Schema.ParameterNameForRole, schema.SqlDbTypeForId).Value = role.Value;
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        if (associations == null)
+                        {
+                            associations = new List<ObjectId>();
+                        }
+
+                        var value = reader.GetValue(0).ToString();
+                        var association = this.database.ObjectIds.Parse(value);
+                        associations.Add(association);
+                    }
+                }
+            }
+
+            return associations != null ? associations.ToArray() : EmptyObjectIds;
+        }
+
         private void FlushUnit(IRoleType roleType)
         {
             if (this.flushAssociationsByRoleType != null)

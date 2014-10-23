@@ -34,6 +34,8 @@ namespace Allors.Meta
 
         string SingularPropertyName { get; }
 
+        string SingularFullName { get; }
+
         bool IsMany { get; }
 
         IRelationType RelationType { get; }
@@ -43,5 +45,6 @@ namespace Allors.Meta
         bool IsOne { get; }
 
         IRoleType RoleType { get; }
+
     }
 }

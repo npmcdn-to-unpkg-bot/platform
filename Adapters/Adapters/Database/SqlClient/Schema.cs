@@ -27,6 +27,8 @@ namespace Allors.Adapters.Database.SqlClient
 
     public class Schema
     {
+        public const string ParamPrefix = "@";
+
         public const string TableNameForObjects = "_O";
 
         public const string ColumnNameForObject = "o";
@@ -35,11 +37,11 @@ namespace Allors.Adapters.Database.SqlClient
         public const string ColumnNameForAssociation = "a";
         public const string ColumnNameForRole = "r";
 
-        public const string ParameterNameForObject = "@o";
-        public const string ParameterNameForType = "@t";
-        public const string ParameterNameForCache = "@c";
-        public const string ParameterNameForAssociation = "@a";
-        public const string ParameterNameForRole = "@r";
+        public const string ParameterNameForObject = ParamPrefix + "o";
+        public const string ParameterNameForType = ParamPrefix + "t";
+        public const string ParameterNameForCache = ParamPrefix + "c";
+        public const string ParameterNameForAssociation = ParamPrefix + "a";
+        public const string ParameterNameForRole = ParamPrefix + "r";
 
         public const string SqlTypeForType = "UNIQUEIDENTIFIER";
         public const string SqlTypeForCache = "INT";
@@ -56,7 +58,7 @@ namespace Allors.Adapters.Database.SqlClient
         private readonly Dictionary<IRelationType, string> tableNameByRelationType;
         private readonly Dictionary<IRoleType, string> sqlTypeByRoleType;
         private readonly Dictionary<IRoleType, SqlDbType> sqlDbTypeByRoleType;
-        
+
         public Schema(IMetaPopulation metaPopulation, string connectionString, ObjectIds objectIds)
         {
             if (!metaPopulation.IsValid)
@@ -283,7 +285,17 @@ ELSE
                 }
             }
         }
-        
+
+        public string GetTableName(IAssociationType associationType)
+        {
+            return this.GetTableName(associationType.RelationType);
+        }
+
+        public string GetTableName(IRoleType roleType)
+        {
+            return this.GetTableName(roleType.RelationType);
+        }
+
         public string GetTableName(IRelationType relationType)
         {
             string tableName;

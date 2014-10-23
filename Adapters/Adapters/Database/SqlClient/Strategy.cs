@@ -18,12 +18,8 @@ namespace Allors.Adapters.Database.SqlClient
 {
     using System;
     using System.Collections;
-    using System.Collections.Generic;
-    using System.Diagnostics;
 
     using Allors.Meta;
-
-    using Npgsql;
 
     public class Strategy : IStrategy
     {
@@ -33,14 +29,15 @@ namespace Allors.Adapters.Database.SqlClient
 
         private IClass objectType;
         private bool isNew;
-        private bool isDeleted;
+        private bool? isDeleted;
         
-        public Strategy(DatabaseSession session, IClass objectType, ObjectId objectId, bool isNew)
+        public Strategy(DatabaseSession session, IClass objectType, ObjectId objectId, bool isNew, bool? isDeleted)
         {
             this.session = session;
             this.objectType = objectType;
             this.objectId = objectId;
             this.isNew = isNew;
+            this.isDeleted = isDeleted;
         }
 
         ISession IStrategy.Session 
@@ -95,7 +92,12 @@ namespace Allors.Adapters.Database.SqlClient
         {
             get
             {
-                return this.isDeleted;
+                if (this.isDeleted.HasValue)
+                {
+                    return this.isDeleted.Value;
+                }
+
+                throw new NotImplementedException();
             }
         }
 

@@ -25,6 +25,9 @@ namespace Allors.Meta
 
     public interface IComposite : IObjectType
     {
+        IEnumerable<IAssociationType> AssociationTypes { get; }
+
+        IEnumerable<IRoleType> RoleTypes { get; }
 
         bool ExistExclusiveLeafClass { get; }
 
@@ -33,10 +36,6 @@ namespace Allors.Meta
         IClass ExclusiveLeafClass { get; }
 
         bool ExistLeafClasses { get; }
-
-        IEnumerable<IAssociationType> AssociationTypes { get; }
-
-        IEnumerable<IRoleType> RoleTypes { get; }
 
         string Name { get; }
 
