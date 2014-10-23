@@ -49,7 +49,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CompositePredicateAssertions.cs" />
-    <Compile Include="CompositeRelation.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Database\Configuration.cs" />
     <Compile Include="Database\Memory\ChangeSet.cs" />
@@ -112,11 +111,10 @@
     <Compile Include="Database\SqlClient\DatabaseSession.cs" />
     <Compile Include="Database\SqlClient\Database.cs" />
     <Compile Include="EmptySet.cs" />
-    <Compile Include="Extensions\RoleTypeExtensions.cs" />
+    <Compile Include="RoleChecks.cs" />
+    <Compile Include="RoleTypeExtensions.cs" />
     <Compile Include="Population.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RelationTypeManyXmlWriter.cs" />
-    <Compile Include="RelationTypeOneXmlWriter.cs" />
     <Compile Include="MetaObjectComparer.cs" />
     <Compile Include="Serialization.cs" />
     <Compile Include="UnitRelation.cs" />

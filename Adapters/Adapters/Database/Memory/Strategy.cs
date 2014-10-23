@@ -394,14 +394,14 @@ namespace Allors.Adapters.Database.Memory
             }
         }
 
-        public void AddCompositeRole(IRoleType roleType, IObject objectToAdd)
+        public void AddCompositeRole(IRoleType roleType, IObject role)
         {
             this.CheckRemoved();
-            if (objectToAdd != null)
+            if (role != null)
             {
-                this.session.MemoryDatabase.CompositeRolesChecks(this, roleType, objectToAdd);
+                this.session.MemoryDatabase.CompositeRolesChecks(this, roleType, role);
 
-                var roleStrategy = this.session.GetStrategy(objectToAdd.Strategy.ObjectId);
+                var roleStrategy = this.session.GetStrategy(role.Strategy.ObjectId);
 
                 if (roleType.AssociationType.IsMany)
                 {
@@ -414,14 +414,14 @@ namespace Allors.Adapters.Database.Memory
             }
         }
 
-        public void RemoveCompositeRole(IRoleType roleType, IObject objectToRemove)
+        public void RemoveCompositeRole(IRoleType roleType, IObject role)
         {
             this.CheckRemoved();
-            if (objectToRemove != null)
+            if (role != null)
             {
-                this.session.MemoryDatabase.CompositeRolesChecks(this, roleType, objectToRemove);
+                this.session.MemoryDatabase.CompositeRolesChecks(this, roleType, role);
 
-                var roleStrategy = this.session.GetStrategy(objectToRemove.Strategy.ObjectId);
+                var roleStrategy = this.session.GetStrategy(role.Strategy.ObjectId);
 
                 if (roleType.AssociationType.IsMany)
                 {

@@ -23,6 +23,8 @@ namespace Allors.Adapters.Database.SqlClient
 
     using Allors.Meta;
 
+    using Npgsql;
+
     public class Strategy : IStrategy
     {
         private readonly DatabaseSession session;
@@ -41,7 +43,7 @@ namespace Allors.Adapters.Database.SqlClient
             this.isNew = isNew;
         }
 
-        public ISession Session 
+        ISession IStrategy.Session 
         {
             get
             {
@@ -49,7 +51,23 @@ namespace Allors.Adapters.Database.SqlClient
             }
         }
 
-        public IDatabaseSession DatabaseSession 
+        public DatabaseSession Session
+        {
+            get
+            {
+                return this.session;
+            }
+        }
+
+        IDatabaseSession IStrategy.DatabaseSession 
+        {
+            get
+            {
+                return this.session;
+            }
+        }
+
+        public DatabaseSession DatabaseSession
         {
             get
             {
@@ -213,6 +231,7 @@ namespace Allors.Adapters.Database.SqlClient
                 return;
             }
 
+            this.Session.Database.RoleChecks.UnitRoleChecks(this, roleType);
             this.session.SetUnitRole(this.objectId, roleType, unit);
         }
 
@@ -260,6 +279,8 @@ namespace Allors.Adapters.Database.SqlClient
                 return;
             }
 
+            this.Session.Database.RoleChecks.CompositeRoleChecks(this, roleType, role);
+
             switch (roleType.RelationType.Multiplicity)
             {
                 case Multiplicity.OneToOne:
@@ -275,6 +296,8 @@ namespace Allors.Adapters.Database.SqlClient
 
         public void RemoveCompositeRole(IRoleType roleType)
         {
+            this.Session.Database.RoleChecks.CompositeRoleChecks(this, roleType);
+
             switch (roleType.RelationType.Multiplicity)
             {
                 case Multiplicity.OneToOne:
@@ -319,59 +342,66 @@ namespace Allors.Adapters.Database.SqlClient
             return new ObjectIdExtent(this.session, roles);
         }
 
-        public void AddCompositeRole(IRoleType roleType, IObject objectToAdd)
+        public void AddCompositeRole(IRoleType roleType, IObject role)
         {
-            if (objectToAdd == null)
+            if (role == null)
             {
                 return;
             }
 
+            this.Session.Database.RoleChecks.CompositeRolesChecks(this, roleType, role);
+
             switch (roleType.RelationType.Multiplicity)
             {
                 case Multiplicity.OneToMany:
-                    this.session.AddCompositeRoleOneToMany(this.objectId, roleType, objectToAdd.Id);
+                    this.session.AddCompositeRoleOneToMany(this.objectId, roleType, role.Id);
                     return;
                 case Multiplicity.ManyToMany:
-                    this.session.AddCompositeRoleManyToMany(this.objectId, roleType, objectToAdd.Id);
+                    this.session.AddCompositeRoleManyToMany(this.objectId, roleType, role.Id);
                     return;
                 default:
                     throw new Exception("Unsupported multiplicity " + roleType.RelationType.Multiplicity);
             }
         }
 
-        public void RemoveCompositeRole(IRoleType roleType, IObject objectToRemove)
+        public void RemoveCompositeRole(IRoleType roleType, IObject role)
         {
-            if (objectToRemove == null)
+            if (role == null)
             {
                 return;
             }
 
+            this.Session.Database.RoleChecks.CompositeRolesChecks(this, roleType, role);
+
             switch (roleType.RelationType.Multiplicity)
             {
                 case Multiplicity.OneToMany:
-                    this.session.RemoveCompositeRoleOneToMany(this.objectId, roleType, objectToRemove.Id);
+                    this.session.RemoveCompositeRoleOneToMany(this.objectId, roleType, role.Id);
                     return;
                 case Multiplicity.ManyToMany:
-                    this.session.RemoveCompositeRoleManyToMany(this.objectId, roleType, objectToRemove.Id);
+                    this.session.RemoveCompositeRoleManyToMany(this.objectId, roleType, role.Id);
                     return;
                 default:
                     throw new Exception("Unsupported multiplicity " + roleType.RelationType.Multiplicity);
             }
         }
 
-        public void SetCompositeRoles(IRoleType roleType, Extent roleExtent)
+        public void SetCompositeRoles(IRoleType roleType, Extent roles)
         {
-            if (roleExtent == null || roleExtent.Count == 0)
+            if (roles == null || roles.Count == 0)
             {
                 this.RemoveCompositeRoles(roleType);
                 return;
             }
 
-            var roleArray = roleExtent.ToArray();
-            var roleObjectIds = new ObjectId[roleArray.Length];
-            for (var i = 0; i < roleArray.Length; i++)
+            var roleObjectIds = new ObjectId[roles.Count];
+            for (var i = 0; i < roles.Count; i++)
             {
-                roleObjectIds[i] = roleArray[i].Id;
+                var role = roles[i];
+                
+                this.Session.Database.RoleChecks.CompositeRolesChecks(this, roleType, role);
+
+                roleObjectIds[i] = role.Id;
             }
 
             switch (roleType.RelationType.Multiplicity)
@@ -389,6 +419,8 @@ namespace Allors.Adapters.Database.SqlClient
 
         public void RemoveCompositeRoles(IRoleType roleType)
         {
+            this.Session.Database.RoleChecks.CompositeRolesChecks(this, roleType);
+
             switch (roleType.RelationType.Multiplicity)
             {
                 case Multiplicity.OneToMany:

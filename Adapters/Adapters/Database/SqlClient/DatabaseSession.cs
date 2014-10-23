@@ -49,7 +49,7 @@ namespace Allors.Adapters.Database.SqlClient
 
         public event SessionRolledBackEventHandler RolledBack;
 
-        public IPopulation Population 
+        IPopulation ISession.Population 
         {
             get
             {
@@ -57,14 +57,22 @@ namespace Allors.Adapters.Database.SqlClient
             }
         }
 
-        public IDatabase Database 
+        IDatabase IDatabaseSession.Database 
         {
             get
             {
                 return this.database;
             }
         }
-        
+
+        public Database Database
+        {
+            get
+            {
+                return this.database;
+            }
+        }
+
         public object this[string name]
         {
             get

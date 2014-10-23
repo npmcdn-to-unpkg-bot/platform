@@ -33,6 +33,7 @@ namespace Allors.Adapters.Database.SqlClient
         private readonly int commandTimeout;
         private readonly IsolationLevel isolationLevel;
         private readonly Schema schema;
+        private readonly RoleChecks roleChecks;
 
         private Dictionary<string, object> properties;
 
@@ -46,6 +47,7 @@ namespace Allors.Adapters.Database.SqlClient
             this.connectionString = configuration.ConnectionString;
             this.commandTimeout = configuration.CommandTimeout;
             this.isolationLevel = configuration.IsolationLevel;
+            this.roleChecks = new RoleChecks();
 
             this.schema = new Schema(this.MetaPopulation, this.ConnectionString, this.ObjectIds);
         }
@@ -141,6 +143,14 @@ namespace Allors.Adapters.Database.SqlClient
             get
             {
                 return this.schema;
+            }
+        }
+
+        internal RoleChecks RoleChecks
+        {
+            get
+            {
+                return this.roleChecks;
             }
         }
 

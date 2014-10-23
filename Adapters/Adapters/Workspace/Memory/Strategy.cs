@@ -342,15 +342,15 @@ namespace Allors.Adapters.Workspace.Memory
             }
         }
 
-        public virtual void AddCompositeRole(IRoleType roleType, IObject objectToAdd)
+        public virtual void AddCompositeRole(IRoleType roleType, IObject role)
         {
             this.CheckRemoved();
-            if (objectToAdd != null)
+            if (role != null)
             {
-                this.RoleCompositesChecks(roleType, objectToAdd);
+                this.RoleCompositesChecks(roleType, role);
 
                 var previousRoles = this.session.GetCompositeRoles(this, roleType);
-                var roleStrategy = this.session.GetStrategy(objectToAdd.Strategy.ObjectId);
+                var roleStrategy = this.session.GetStrategy(role.Strategy.ObjectId);
 
                 if (previousRoles == null || !previousRoles.Contains(roleStrategy))
                 {
@@ -360,16 +360,16 @@ namespace Allors.Adapters.Workspace.Memory
             }
         }
 
-        public virtual void RemoveCompositeRole(IRoleType roleType, IObject objectToRemove)
+        public virtual void RemoveCompositeRole(IRoleType roleType, IObject role)
         {
             this.CheckRemoved();
 
-            if (objectToRemove != null)
+            if (role != null)
             {
-                this.RoleCompositesChecks(roleType, objectToRemove);
+                this.RoleCompositesChecks(roleType, role);
 
                 var previousRoles = this.session.GetCompositeRoles(this, roleType);
-                var roleStrategy = this.session.GetStrategy(objectToRemove.Strategy.ObjectId);
+                var roleStrategy = this.session.GetStrategy(role.Strategy.ObjectId);
 
                 this.ChangeSet.OnChangingCompositesRole(this, roleType, roleStrategy);
 
