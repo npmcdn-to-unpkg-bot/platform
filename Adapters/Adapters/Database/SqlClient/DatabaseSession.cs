@@ -176,15 +176,13 @@ namespace Allors.Adapters.Database.SqlClient
 
         public IObject Create(IClass objectType)
         {
-            this.LazyConnect();
-
             const string CmdText = @"
 INSERT INTO " + Schema.TableNameForObjects + " (" + Schema.ColumnNameForType + ", " + Schema.ColumnNameForCache + @")
 VALUES (" + Schema.ParameterNameForType + ", " + Schema.ParameterNameForCache + @");
 
 SELECT " + Schema.ColumnNameForObject + @" = SCOPE_IDENTITY();
 ";
-            using (var command = new SqlCommand(CmdText, this.connection, this.transaction))
+            using (var command = this.CreateCommand(CmdText))
             {
                 command.Parameters.Add(Schema.ParameterNameForType, Schema.SqlDbTypeForType).Value = objectType.Id;
                 command.Parameters.Add(Schema.ParameterNameForCache, Schema.SqlDbTypeForCache).Value = int.MaxValue;
@@ -1006,7 +1004,7 @@ SELECT  " + Schema.ColumnNameForType + ", " + Schema.ColumnNameForCache + @"
 FROM " + Schema.TableNameForObjects + @"
 WHERE " + Schema.ColumnNameForObject + @" = " + Schema.ParameterNameForObject + @"
 ";
-            using (var command = new SqlCommand(cmdText, this.connection, this.transaction))
+            using (var command = this.CreateCommand(cmdText))
             {
                 command.Parameters.Add(Schema.ParameterNameForObject, this.database.Schema.SqlDbTypeForId).Value = objectId.Value;
                 using (var reader = command.ExecuteReader())
@@ -1170,9 +1168,6 @@ WHERE " + Schema.ColumnNameForRole + @"=" + Schema.ParameterNameForRole + @";
         {
             if (this.unitFlushAssociationsByRoleType != null)
             {
-                this.LazyConnect();
-                var schema = this.database.Schema;
-                
                 HashSet<ObjectId> flushAssociations;
                 if(this.unitFlushAssociationsByRoleType.TryGetValue(roleType, out flushAssociations))
                 {
@@ -1184,10 +1179,11 @@ WHERE " + Schema.ColumnNameForRole + @"=" + Schema.ParameterNameForRole + @";
 
                     if (flushDeleted != null)
                     {
+                        var schema = this.database.Schema;
                         var cmdText = @"
 DELETE FROM " + schema.GetTableName(roleType.RelationType) + @"
 WHERE " + Schema.ColumnNameForAssociation + @" = " + Schema.ParameterNameForAssociation;
-                        using (var command = new SqlCommand(cmdText, this.connection, this.transaction))
+                        using (var command = this.CreateCommand(cmdText))
                         {
                             var associationParam = command.Parameters.Add(Schema.ParameterNameForAssociation, schema.SqlDbTypeForId);
 
@@ -1201,6 +1197,7 @@ WHERE " + Schema.ColumnNameForAssociation + @" = " + Schema.ParameterNameForAsso
 
                     if (flushChanged != null)
                     {
+                        var schema = this.database.Schema;
                         var cmdText = @"
 MERGE " + schema.GetTableName(roleType.RelationType) + @" AS _X
 USING (SELECT " + Schema.ParameterNameForAssociation + @" AS " + Schema.ColumnNameForAssociation + @") AS _Y
@@ -1212,7 +1209,7 @@ WHEN NOT MATCHED THEN
 INSERT (" + Schema.ColumnNameForAssociation + @", " + Schema.ColumnNameForRole + @")
 VALUES(" + Schema.ParameterNameForAssociation + @", " + Schema.ParameterNameForRole + @");
 ";
-                        using (var command = new SqlCommand(cmdText, this.connection, this.transaction))
+                        using (var command = this.CreateCommand(cmdText))
                         {
                             var associationParam = command.Parameters.Add(Schema.ParameterNameForAssociation, schema.SqlDbTypeForId);
                             var roleParam = command.Parameters.Add(Schema.ParameterNameForRole, schema.GetSqlDbType(roleType));
@@ -1235,9 +1232,6 @@ VALUES(" + Schema.ParameterNameForAssociation + @", " + Schema.ParameterNameForR
         {
             if (this.oneToOneFlushAssociationsByRoleType != null)
             {
-                this.LazyConnect();
-                var schema = this.database.Schema;
-                
                 HashSet<ObjectId> flushAssociations;
                 if(this.oneToOneFlushAssociationsByRoleType.TryGetValue(roleType, out flushAssociations))
                 {
@@ -1249,10 +1243,11 @@ VALUES(" + Schema.ParameterNameForAssociation + @", " + Schema.ParameterNameForR
 
                     if (flushDeleted != null)
                     {
+                        var schema = this.database.Schema;
                         var cmdText = @"
 DELETE FROM " + schema.GetTableName(roleType.RelationType) + @"
 WHERE " + Schema.ColumnNameForAssociation + @" = " + Schema.ParameterNameForAssociation;
-                        using (var command = new SqlCommand(cmdText, this.connection, this.transaction))
+                        using (var command = this.CreateCommand(cmdText))
                         {
                             var associationParam = command.Parameters.Add(Schema.ParameterNameForAssociation, schema.SqlDbTypeForId);
 
@@ -1266,6 +1261,7 @@ WHERE " + Schema.ColumnNameForAssociation + @" = " + Schema.ParameterNameForAsso
 
                     if (flushChanged != null)
                     {
+                        var schema = this.database.Schema;
                         var cmdText = @"
 DELETE FROM " + schema.GetTableName(roleType.RelationType) + @"
 WHERE " + Schema.ColumnNameForRole + @" = " + Schema.ParameterNameForRole + @";
@@ -1280,7 +1276,7 @@ WHEN NOT MATCHED THEN
 INSERT (" + Schema.ColumnNameForAssociation + @", " + Schema.ColumnNameForRole + @")
 VALUES(" + Schema.ParameterNameForAssociation + @", " + Schema.ParameterNameForRole + @");
 ";
-                        using (var command = new SqlCommand(cmdText, this.connection, this.transaction))
+                        using (var command = this.CreateCommand(cmdText))
                         {
                             var associationParam = command.Parameters.Add(Schema.ParameterNameForAssociation, schema.SqlDbTypeForId);
                             var roleParam = command.Parameters.Add(Schema.ParameterNameForRole, schema.GetSqlDbType(roleType));
@@ -1305,9 +1301,6 @@ VALUES(" + Schema.ParameterNameForAssociation + @", " + Schema.ParameterNameForR
         {
             if (this.manyToOneFlushAssociationsByRoleType != null)
             {
-                this.LazyConnect();
-                var schema = this.database.Schema;
-
                 HashSet<ObjectId> flushAssociations;
                 if (this.manyToOneFlushAssociationsByRoleType.TryGetValue(roleType, out flushAssociations))
                 {
@@ -1319,10 +1312,11 @@ VALUES(" + Schema.ParameterNameForAssociation + @", " + Schema.ParameterNameForR
 
                     if (flushDeleted != null)
                     {
+                        var schema = this.database.Schema;
                         var cmdText = @"
 DELETE FROM " + schema.GetTableName(roleType.RelationType) + @"
 WHERE " + Schema.ColumnNameForAssociation + @" = " + Schema.ParameterNameForAssociation;
-                        using (var command = new SqlCommand(cmdText, this.connection, this.transaction))
+                        using (var command = this.CreateCommand(cmdText))
                         {
                             var associationParam = command.Parameters.Add(Schema.ParameterNameForAssociation, schema.SqlDbTypeForId);
 
@@ -1336,6 +1330,7 @@ WHERE " + Schema.ColumnNameForAssociation + @" = " + Schema.ParameterNameForAsso
 
                     if (flushChanged != null)
                     {
+                        var schema = this.database.Schema;
                         var cmdText = @"
 MERGE " + schema.GetTableName(roleType.RelationType) + @" AS _X
 USING (SELECT " + Schema.ParameterNameForAssociation + @" AS " + Schema.ColumnNameForAssociation + @") AS _Y
@@ -1372,9 +1367,6 @@ VALUES(" + Schema.ParameterNameForAssociation + @", " + Schema.ParameterNameForR
         {
             if (this.oneToManyFlushAssociationsByRoleType != null)
             {
-                this.LazyConnect();
-                var schema = this.database.Schema;
-
                 HashSet<ObjectId> flushAssociations;
                 if (this.oneToManyFlushAssociationsByRoleType.TryGetValue(roleType, out flushAssociations))
                 {
@@ -1386,10 +1378,11 @@ VALUES(" + Schema.ParameterNameForAssociation + @", " + Schema.ParameterNameForR
 
                     if (flushDeleted != null)
                     {
+                        var schema = this.database.Schema;
                         var cmdText = @"
 DELETE FROM " + schema.GetTableName(roleType.RelationType) + @"
 WHERE " + Schema.ColumnNameForAssociation + @" = " + Schema.ParameterNameForAssociation;
-                        using (var command = new SqlCommand(cmdText, this.connection, this.transaction))
+                        using (var command = this.CreateCommand(cmdText))
                         {
                             var associationParam = command.Parameters.Add(Schema.ParameterNameForAssociation, schema.SqlDbTypeForId);
 
@@ -1403,6 +1396,7 @@ WHERE " + Schema.ColumnNameForAssociation + @" = " + Schema.ParameterNameForAsso
 
                     if (flushChanged != null)
                     {
+                        var schema = this.database.Schema;
                         var cmdText = @"
 DELETE FROM " + schema.GetTableName(roleType.RelationType) + @"
 WHERE " + Schema.ColumnNameForRole + @" = " + Schema.ParameterNameForRole + @";
@@ -1417,7 +1411,7 @@ WHEN NOT MATCHED THEN
 INSERT (" + Schema.ColumnNameForAssociation + @", " + Schema.ColumnNameForRole + @")
 VALUES(" + Schema.ParameterNameForAssociation + @", " + Schema.ParameterNameForRole + @");
 ";
-                        using (var command = new SqlCommand(cmdText, this.connection, this.transaction))
+                        using (var command = this.CreateCommand(cmdText))
                         {
                             var associationParam = command.Parameters.Add(Schema.ParameterNameForAssociation, schema.SqlDbTypeForId);
                             var roleParam = command.Parameters.Add(Schema.ParameterNameForRole, schema.GetSqlDbType(roleType));
@@ -1442,9 +1436,6 @@ VALUES(" + Schema.ParameterNameForAssociation + @", " + Schema.ParameterNameForR
         {
             if (this.manyToManyFlushAssociationsByRoleType != null)
             {
-                this.LazyConnect();
-                var schema = this.database.Schema;
-
                 HashSet<ObjectId> flushAssociations;
                 if (this.manyToManyFlushAssociationsByRoleType.TryGetValue(roleType, out flushAssociations))
                 {
@@ -1456,10 +1447,11 @@ VALUES(" + Schema.ParameterNameForAssociation + @", " + Schema.ParameterNameForR
 
                     if (flushDeleted != null)
                     {
+                        var schema = this.database.Schema;
                         var cmdText = @"
 DELETE FROM " + schema.GetTableName(roleType.RelationType) + @"
 WHERE " + Schema.ColumnNameForAssociation + @" = " + Schema.ParameterNameForAssociation;
-                        using (var command = new SqlCommand(cmdText, this.connection, this.transaction))
+                        using (var command = this.CreateCommand(cmdText))
                         {
                             var associationParam = command.Parameters.Add(Schema.ParameterNameForAssociation, schema.SqlDbTypeForId);
 
@@ -1473,6 +1465,7 @@ WHERE " + Schema.ColumnNameForAssociation + @" = " + Schema.ParameterNameForAsso
 
                     if (flushChanged != null)
                     {
+                        var schema = this.database.Schema;
                         var cmdText = @"
 MERGE " + schema.GetTableName(roleType.RelationType) + @" AS _X
 USING (SELECT " + Schema.ParameterNameForAssociation + @" AS " + Schema.ColumnNameForAssociation + @") AS _Y
@@ -1484,7 +1477,7 @@ WHEN NOT MATCHED THEN
 INSERT (" + Schema.ColumnNameForAssociation + @", " + Schema.ColumnNameForRole + @")
 VALUES(" + Schema.ParameterNameForAssociation + @", " + Schema.ParameterNameForRole + @");
 ";
-                        using (var command = new SqlCommand(cmdText, this.connection, this.transaction))
+                        using (var command = this.CreateCommand(cmdText))
                         {
                             var associationParam = command.Parameters.Add(Schema.ParameterNameForAssociation, schema.SqlDbTypeForId);
                             var roleParam = command.Parameters.Add(Schema.ParameterNameForRole, schema.GetSqlDbType(roleType));
