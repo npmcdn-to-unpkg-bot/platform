@@ -134,17 +134,6 @@ namespace Allors.Domain
 		void RemoveI1AllorsString();
 
 
-		global::System.DateTime? I1DateLessThan 
-		{
-			get;
-			set;
-		}
-
-		bool ExistI1DateLessThan{get;}
-
-		void RemoveI1DateLessThan();
-
-
 		global::Allors.Extent<C2> I1C2one2manies
 		{ 
 			get;
@@ -183,17 +172,6 @@ namespace Allors.Domain
 		bool ExistI1FloatLessThan{get;}
 
 		void RemoveI1FloatLessThan();
-
-
-		global::System.DateTime? I1AllorsDate 
-		{
-			get;
-			set;
-		}
-
-		bool ExistI1AllorsDate{get;}
-
-		void RemoveI1AllorsDate();
 
 
 		C1 I1C1many2one
@@ -425,17 +403,6 @@ namespace Allors.Domain
 		void RemoveI1S1many2manies();
 
 
-		global::System.DateTime? I1DateGreaterThan 
-		{
-			get;
-			set;
-		}
-
-		bool ExistI1DateGreaterThan{get;}
-
-		void RemoveI1DateGreaterThan();
-
-
 		global::Allors.Extent<I34> I1I34many2manies
 		{ 
 			get;
@@ -649,17 +616,6 @@ namespace Allors.Domain
 		void RemoveI1IntegerBetweenB();
 
 
-		global::System.DateTime? I1DateBetweenA 
-		{
-			get;
-			set;
-		}
-
-		bool ExistI1DateBetweenA{get;}
-
-		void RemoveI1DateBetweenA();
-
-
 		global::System.Double? I1AllorsFloat 
 		{
 			get;
@@ -748,17 +704,6 @@ namespace Allors.Domain
 		bool ExistI1DecimalLessThan{get;}
 
 		void RemoveI1DecimalLessThan();
-
-
-		global::System.DateTime? I1DateBetweenB 
-		{
-			get;
-			set;
-		}
-
-		bool ExistI1DateBetweenB{get;}
-
-		void RemoveI1DateBetweenB();
 
 
 		global::System.Guid? I1AllorsUnique 
@@ -963,13 +908,6 @@ namespace Allors.Domain
 				return global::Allors.Meta.RoleTypes.I1AllorsString;
 			}
 		} 
-		public global::Allors.Meta.RoleType I1DateLessThan 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.I1DateLessThan;
-			}
-		} 
 		public global::Allors.Meta.RoleType I1C2one2many 
 		{
 			get
@@ -989,13 +927,6 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.RoleTypes.I1FloatLessThan;
-			}
-		} 
-		public global::Allors.Meta.RoleType I1AllorsDate 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.I1AllorsDate;
 			}
 		} 
 		public global::Allors.Meta.RoleType I1C1many2one 
@@ -1117,13 +1048,6 @@ namespace Allors.Domain
 				return global::Allors.Meta.RoleTypes.I1S1many2many;
 			}
 		} 
-		public global::Allors.Meta.RoleType I1DateGreaterThan 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.I1DateGreaterThan;
-			}
-		} 
 		public global::Allors.Meta.RoleType I1I34many2many 
 		{
 			get
@@ -1222,13 +1146,6 @@ namespace Allors.Domain
 				return global::Allors.Meta.RoleTypes.I1IntegerBetweenB;
 			}
 		} 
-		public global::Allors.Meta.RoleType I1DateBetweenA 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.I1DateBetweenA;
-			}
-		} 
 		public global::Allors.Meta.RoleType I1AllorsFloat 
 		{
 			get
@@ -1276,13 +1193,6 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.RoleTypes.I1DecimalLessThan;
-			}
-		} 
-		public global::Allors.Meta.RoleType I1DateBetweenB 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.I1DateBetweenB;
 			}
 		} 
 		public global::Allors.Meta.RoleType I1AllorsUnique 
@@ -1411,13 +1321,6 @@ namespace Allors.Domain
 				return global::Allors.Meta.RoleTypes.S1S2one2one;
 			}
 		} 
-		public global::Allors.Meta.RoleType S1AllorsDate 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.S1AllorsDate;
-			}
-		} 
 		public global::Allors.Meta.RoleType S1C1one2many 
 		{
 			get
@@ -1493,13 +1396,6 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S1234ClassName;
-			}
-		} 
-		public global::Allors.Meta.RoleType S1234AllorsDate 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.S1234AllorsDate;
 			}
 		} 
 		public global::Allors.Meta.RoleType S1234one2one 

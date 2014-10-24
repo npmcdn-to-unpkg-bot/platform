@@ -324,13 +324,6 @@ namespace Allors.Domain
 				return global::Allors.Meta.RoleTypes.S1234ClassName;
 			}
 		} 
-		public global::Allors.Meta.RoleType S1234AllorsDate 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.S1234AllorsDate;
-			}
-		} 
 		public global::Allors.Meta.RoleType S1234one2one 
 		{
 			get

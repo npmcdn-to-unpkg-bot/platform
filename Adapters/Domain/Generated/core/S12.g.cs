@@ -17,17 +17,6 @@ namespace Allors.Domain
 		void RemoveS12AllorsString();
 
 
-		global::System.DateTime? S12AllorsDate 
-		{
-			get;
-			set;
-		}
-
-		bool ExistS12AllorsDate{get;}
-
-		void RemoveS12AllorsDate();
-
-
 		global::Allors.Extent<C2> S12C2many2manies
 		{ 
 			get;
@@ -148,13 +137,6 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S12AllorsString;
-			}
-		} 
-		public global::Allors.Meta.RoleType S12AllorsDate 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.S12AllorsDate;
 			}
 		} 
 		public global::Allors.Meta.RoleType S12C2many2many 

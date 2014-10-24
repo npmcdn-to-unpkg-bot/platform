@@ -221,17 +221,6 @@ namespace Allors.Domain
 		void RemovePrefetchTest();
 
 
-		global::System.DateTime? I12AllorsDate 
-		{
-			get;
-			set;
-		}
-
-		bool ExistI12AllorsDate{get;}
-
-		void RemoveI12AllorsDate();
-
-
 		global::System.String I12AllorsString 
 		{
 			get;
@@ -476,13 +465,6 @@ namespace Allors.Domain
 				return global::Allors.Meta.RoleTypes.I12PrefetchTest;
 			}
 		} 
-		public global::Allors.Meta.RoleType I12AllorsDate 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.I12AllorsDate;
-			}
-		} 
 		public global::Allors.Meta.RoleType I12AllorsString 
 		{
 			get
@@ -509,13 +491,6 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S12AllorsString;
-			}
-		} 
-		public global::Allors.Meta.RoleType S12AllorsDate 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.S12AllorsDate;
 			}
 		} 
 		public global::Allors.Meta.RoleType S12C2many2many 

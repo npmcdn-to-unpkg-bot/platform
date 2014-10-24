@@ -150,17 +150,6 @@ namespace Allors.Domain
 		void RemoveClassName();
 
 
-		global::System.DateTime? S1234AllorsDate 
-		{
-			get;
-			set;
-		}
-
-		bool ExistS1234AllorsDate{get;}
-
-		void RemoveS1234AllorsDate();
-
-
 		S1234 S1234one2one
 		{ 
 			get;
@@ -331,13 +320,6 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S1234ClassName;
-			}
-		} 
-		public global::Allors.Meta.RoleType S1234AllorsDate 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.S1234AllorsDate;
 			}
 		} 
 		public global::Allors.Meta.RoleType S1234one2one 

@@ -18,6 +18,7 @@ namespace Allors.Adapters.Database.SqlClient
 {
     using System;
     using System.Collections;
+    using System.Collections.Generic;
 
     using Allors.Meta;
 
@@ -383,23 +384,46 @@ namespace Allors.Adapters.Database.SqlClient
                 return;
             }
 
-            var roleObjectIds = new ObjectId[roles.Count];
+            List<ObjectId> roleObjectIds = null;
             for (var i = 0; i < roles.Count; i++)
             {
                 var role = roles[i];
-                
-                this.Session.Database.RoleChecks.CompositeRolesChecks(this, roleType, role);
 
-                roleObjectIds[i] = role.Id;
+                if (role != null)
+                {
+                    if (roleObjectIds == null)
+                    {
+                        roleObjectIds = new List<ObjectId>(roles.Count);
+
+                        this.Session.Database.RoleChecks.CompositeRolesChecks(this, roleType, role);
+
+                        roleObjectIds.Add(role.Id);
+                    }
+                }
+            }
+
+            if (roleObjectIds == null)
+            {
+                switch (roleType.RelationType.Multiplicity)
+                {
+                    case Multiplicity.OneToMany:
+                        this.session.RemoveCompositeRolesOneToMany(this.objectId, roleType);
+                        return;
+                    case Multiplicity.ManyToMany:
+                        this.session.RemoveCompositeRolesManyToMany(this.objectId, roleType);
+                        return;
+                    default:
+                        throw new Exception("Unsupported multiplicity " + roleType.RelationType.Multiplicity);
+                }
             }
 
             switch (roleType.RelationType.Multiplicity)
             {
                 case Multiplicity.OneToMany:
-                    this.session.SetCompositeRoleOneToMany(this.objectId, roleType, roleObjectIds);
+                    this.session.SetCompositeRoleOneToMany(this.objectId, roleType, roleObjectIds.ToArray());
                     return;
                 case Multiplicity.ManyToMany:
-                    this.session.SetCompositeRoleManyToMany(this.objectId, roleType, roleObjectIds);
+                    this.session.SetCompositeRoleManyToMany(this.objectId, roleType, roleObjectIds.ToArray());
                     return;
                 default:
                     throw new Exception("Unsupported multiplicity " + roleType.RelationType.Multiplicity);

@@ -284,66 +284,6 @@ namespace Allors.Adapters.Special
         }
 
         [Test]
-        public void Date()
-        {
-            foreach (var init in this.Inits)
-            {
-                init();
-                
-                var workspace = this.CreateWorkspace();
-                using (var workspaceSession = workspace.CreateSession())
-                {
-                    var c1 = C1.Create(workspaceSession.DatabaseSession);
-                    var c2A = C2.Create(workspaceSession.DatabaseSession);
-                    var c2B = C2.Create(workspaceSession.DatabaseSession);
-                    var c2C = C2.Create(workspaceSession.DatabaseSession);
-
-                    var local = new DateTime(1973, 3, 27, 12, 0, 0, DateTimeKind.Local);
-                    var unspecified = new DateTime(1973, 3, 27, 12, 0, 0, DateTimeKind.Unspecified);
-                    var universal = new DateTime(1973, 3, 27, 12, 0, 0, 0, DateTimeKind.Utc);
-
-                    c2A.C2AllorsDate = local;
-                    c2B.C2AllorsDate = unspecified;
-                    c2C.C2AllorsDate = universal;
-
-                    workspaceSession.DatabaseSession.Commit();
-                    workspaceSession.Commit();
-
-                    var workC1 = (C1)workspaceSession.Instantiate(c1.Strategy.ObjectId);
-                    var workC2A = (C2)workspaceSession.Instantiate(c2A.Strategy.ObjectId);
-                    var workC2B = (C2)workspaceSession.Instantiate(c2B.Strategy.ObjectId.ToString());
-                    var workC2C = (C2)workspaceSession.Instantiate(c2C.Strategy.ObjectId.ToString());
-
-                    var date = new DateTime(1973, 03, 27, 0, 0, 0, DateTimeKind.Utc);
-
-                    Assert.IsNotNull(workC2A);
-                    Assert.AreEqual(date, workC2A.C2AllorsDate.Value.ToUniversalTime());
-
-                    Assert.IsNotNull(workC2B);
-                    Assert.AreEqual(date, workC2B.C2AllorsDate.Value.ToUniversalTime());
-
-                    Assert.IsNotNull(workC2C);
-                    Assert.AreEqual(date, workC2C.C2AllorsDate.Value.ToUniversalTime());
-
-                    workC2A.C2AllorsDate = unspecified;
-                    workC2B.C2AllorsDate = universal;
-                    workC2C.C2AllorsDate = local;
-
-                    Assert.AreEqual(0, workspaceSession.Conflicts.Length);
-
-                    var workspaceSession2 = this.SaveLoad(
-                        workspaceSession.DatabaseSession.Database,
-                        workspaceSession.Workspace,
-                        workspaceSession);
-
-                    Assert.AreEqual(0, workspaceSession.Conflicts.Length);
-
-                    workspaceSession2.Rollback();
-                }
-            }
-        }
-
-        [Test]
         public void One2One()
         {
             foreach (var init in this.Inits)

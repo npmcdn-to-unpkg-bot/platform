@@ -120,12 +120,6 @@ namespace Allors.Adapters.Database.SqlClient
                             sqlType = "BIT";
                             break;
 
-                        case UnitTags.AllorsDate:
-                            tableName = tableName + "_DATE";
-                            sqlDbType = SqlDbType.Date;
-                            sqlType = "DATE";
-                            break;
-
                         case UnitTags.AllorsDecimal:
                             tableName = tableName + "_DECIMAL";
                             sqlDbType = SqlDbType.Decimal;

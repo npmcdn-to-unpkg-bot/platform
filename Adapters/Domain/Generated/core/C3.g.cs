@@ -1065,32 +1065,6 @@ namespace Allors.Domain
 		}
 
 
-
-		virtual public global::System.DateTime? S1234AllorsDate 
-		{
-			get
-			{
-				return (global::System.DateTime?) Strategy.GetUnitRole(Meta.S1234AllorsDate);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.S1234AllorsDate, value);
-			}
-		}
-
-		virtual public bool ExistS1234AllorsDate{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.S1234AllorsDate);
-			}
-		}
-
-		virtual public void RemoveS1234AllorsDate()
-		{
-			Strategy.RemoveUnitRole(Meta.S1234AllorsDate);
-		}
-
-
 		virtual public S1234 S1234one2one
 		{ 
 			get
@@ -1976,13 +1950,6 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S1234ClassName;
-			}
-		} 
-		public global::Allors.Meta.RoleType S1234AllorsDate 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.S1234AllorsDate;
 			}
 		} 
 		public global::Allors.Meta.RoleType S1234one2one 

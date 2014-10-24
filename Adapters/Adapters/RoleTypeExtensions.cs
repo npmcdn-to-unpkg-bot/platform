@@ -97,24 +97,6 @@ namespace Allors.Adapters
                     }
 
                     break;
-                case UnitTags.AllorsDate:
-                    if (!(unit is DateTime))
-                    {
-                        throw new ArgumentException("RoleType is not a DateTime.");
-                    }
-
-                    var dateTime = (DateTime)unit;
-
-                    if (dateTime == DateTime.MaxValue || dateTime == DateTime.MinValue)
-                    {
-                        normalizedUnit = unit;
-                    }
-                    else
-                    {
-                        normalizedUnit = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 0, 0, 0, DateTimeKind.Utc);
-                    }
-
-                    break;
                 case UnitTags.AllorsUnique:
                     if (!(unit is Guid))
                     {

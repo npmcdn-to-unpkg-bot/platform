@@ -28,17 +28,6 @@ namespace Allors.Domain
 		void RemoveI2AllorsDecimal();
 
 
-		global::System.DateTime? I2AllorsDate 
-		{
-			get;
-			set;
-		}
-
-		bool ExistI2AllorsDate{get;}
-
-		void RemoveI2AllorsDate();
-
-
 		global::System.String I2AllorsString 
 		{
 			get;
@@ -182,13 +171,6 @@ namespace Allors.Domain
 				return global::Allors.Meta.RoleTypes.I2AllorsDecimal;
 			}
 		} 
-		public global::Allors.Meta.RoleType I2AllorsDate 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.I2AllorsDate;
-			}
-		} 
 		public global::Allors.Meta.RoleType I2AllorsString 
 		{
 			get
@@ -280,13 +262,6 @@ namespace Allors.Domain
 				return global::Allors.Meta.RoleTypes.S1234ClassName;
 			}
 		} 
-		public global::Allors.Meta.RoleType S1234AllorsDate 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.S1234AllorsDate;
-			}
-		} 
 		public global::Allors.Meta.RoleType S1234one2one 
 		{
 			get
@@ -348,13 +323,6 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S2AllorsDecimal;
-			}
-		} 
-		public global::Allors.Meta.RoleType S2AllorsDate 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.S2AllorsDate;
 			}
 		} 
 

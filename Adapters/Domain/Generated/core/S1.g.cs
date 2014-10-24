@@ -204,17 +204,6 @@ namespace Allors.Domain
 		void RemoveS1S2one2one();
 
 
-		global::System.DateTime? S1AllorsDate 
-		{
-			get;
-			set;
-		}
-
-		bool ExistS1AllorsDate{get;}
-
-		void RemoveS1AllorsDate();
-
-
 		global::Allors.Extent<C1> S1C1one2manies
 		{ 
 			get;
@@ -434,13 +423,6 @@ namespace Allors.Domain
 				return global::Allors.Meta.RoleTypes.S1S2one2one;
 			}
 		} 
-		public global::Allors.Meta.RoleType S1AllorsDate 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.S1AllorsDate;
-			}
-		} 
 		public global::Allors.Meta.RoleType S1C1one2many 
 		{
 			get
@@ -516,13 +498,6 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S1234ClassName;
-			}
-		} 
-		public global::Allors.Meta.RoleType S1234AllorsDate 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.S1234AllorsDate;
 			}
 		} 
 		public global::Allors.Meta.RoleType S1234one2one 

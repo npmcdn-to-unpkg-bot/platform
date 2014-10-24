@@ -283,54 +283,6 @@ namespace Allors.Adapters.Special
             this.C4C.S1234AllorsDecimal = 2;
             this.C4D.S1234AllorsDecimal = 2;
 
-            // Date
-            this.C1B.C1AllorsDate = new DateTime(2000, 1, 4);
-            this.C1C.C1AllorsDate = new DateTime(2000, 1, 5);
-            this.C1D.C1AllorsDate = new DateTime(2000, 1, 5);
-
-            this.C1B.C1DateLessThan = new DateTime(2000, 1, 3);
-            this.C1C.C1DateLessThan = new DateTime(2000, 1, 5);
-            this.C1D.C1DateLessThan = new DateTime(2000, 1, 7);
-
-            this.C1B.C1DateGreaterThan = new DateTime(2000, 1, 3);
-            this.C1C.C1DateGreaterThan = new DateTime(2000, 1, 5);
-            this.C1D.C1DateGreaterThan = new DateTime(2000, 1, 7);
-
-            this.C1B.C1DateBetweenA = new DateTime(2000, 1, 1);
-            this.C1B.C1DateBetweenB = new DateTime(2000, 1, 3);
-            this.C1C.C1DateBetweenA = new DateTime(2000, 1, 5);
-            this.C1C.C1DateBetweenB = new DateTime(2000, 1, 5);
-            this.C1D.C1DateBetweenA = new DateTime(2000, 1, 3);
-            this.C1D.C1DateBetweenB = new DateTime(2000, 1, 10);
-
-            this.C1B.I1AllorsDate = new DateTime(2000, 1, 4);
-            this.C1C.I1AllorsDate = new DateTime(2000, 1, 5);
-            this.C1D.I1AllorsDate = new DateTime(2000, 1, 5);
-
-            this.C1B.S1AllorsDate = new DateTime(2000, 1, 4);
-            this.C1C.S1AllorsDate = new DateTime(2000, 1, 5);
-            this.C1D.S1AllorsDate = new DateTime(2000, 1, 5);
-
-            this.C1B.I12AllorsDate = new DateTime(2000, 1, 4);
-            this.C1C.I12AllorsDate = new DateTime(2000, 1, 5);
-            this.C1D.I12AllorsDate = new DateTime(2000, 1, 5);
-            this.C2B.I12AllorsDate = new DateTime(2000, 1, 4);
-            this.C2C.I12AllorsDate = new DateTime(2000, 1, 5);
-            this.C2D.I12AllorsDate = new DateTime(2000, 1, 5);
-
-            this.C1B.S1234AllorsDate = new DateTime(2000, 1, 4);
-            this.C1C.S1234AllorsDate = new DateTime(2000, 1, 5);
-            this.C1D.S1234AllorsDate = new DateTime(2000, 1, 5);
-            this.C2B.S1234AllorsDate = new DateTime(2000, 1, 4);
-            this.C2C.S1234AllorsDate = new DateTime(2000, 1, 5);
-            this.C2D.S1234AllorsDate = new DateTime(2000, 1, 5);
-            this.C3B.S1234AllorsDate = new DateTime(2000, 1, 4);
-            this.C3C.S1234AllorsDate = new DateTime(2000, 1, 5);
-            this.C3D.S1234AllorsDate = new DateTime(2000, 1, 5);
-            this.C4B.S1234AllorsDate = new DateTime(2000, 1, 4);
-            this.C4C.S1234AllorsDate = new DateTime(2000, 1, 5);
-            this.C4D.S1234AllorsDate = new DateTime(2000, 1, 5);
-
             // Composites
             this.C1B.C1C1one2one = this.C1B;
             this.C1C.C1C1one2one = this.C1C;

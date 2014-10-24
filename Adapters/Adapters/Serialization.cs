@@ -181,8 +181,6 @@ namespace Allors.Adapters
                     return XmlConvert.ToDouble(xmlValue);
                 case UnitTags.AllorsBoolean:
                     return XmlConvert.ToBoolean(xmlValue);
-                case UnitTags.AllorsDate:
-                    return XmlConvert.ToDateTime(xmlValue, XmlDateTimeSerializationMode.Utc);
                 case UnitTags.AllorsUnique:
                     return XmlConvert.ToGuid(xmlValue);
                 case UnitTags.AllorsBinary:
@@ -212,8 +210,6 @@ namespace Allors.Adapters
                     return XmlConvert.ToString((double)unit);
                 case UnitTags.AllorsBoolean:
                     return XmlConvert.ToString((bool)unit);
-                case UnitTags.AllorsDate:
-                    return XmlConvert.ToString((DateTime)unit, XmlDateTimeSerializationMode.Utc);
                 case UnitTags.AllorsUnique:
                     return XmlConvert.ToString((Guid)unit);
                 case UnitTags.AllorsBinary:

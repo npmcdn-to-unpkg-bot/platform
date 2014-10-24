@@ -36,11 +36,6 @@ namespace Allors.Meta
         AllorsBoolean,
 
         /// <summary>
-        /// The tag for the date time <see cref="IObjectType"/>.
-        /// </summary>
-        AllorsDate,
-
-        /// <summary>
         /// The tag for the decimal <see cref="IObjectType"/>.
         /// </summary>
         AllorsDecimal,

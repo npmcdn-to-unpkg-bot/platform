@@ -61,17 +61,6 @@ namespace Allors.Domain
 		void RemoveS2AllorsDecimal();
 
 
-		global::System.DateTime? S2AllorsDate 
-		{
-			get;
-			set;
-		}
-
-		bool ExistS2AllorsDate{get;}
-
-		void RemoveS2AllorsDate();
-
-
 
 		global::Allors.Extent<S1> S1sWhereS2many2one
 		{ 
@@ -245,13 +234,6 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.RoleTypes.S2AllorsDecimal;
-			}
-		} 
-		public global::Allors.Meta.RoleType S2AllorsDate 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.S2AllorsDate;
 			}
 		} 
 
