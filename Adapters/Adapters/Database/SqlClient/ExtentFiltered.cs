@@ -80,7 +80,7 @@ namespace Allors.Adapters.Database.SqlClient
             get { return type; }
         }
 
-        protected override ObjectId[] GetObjects()
+        protected override ObjectId[] GetObjectIds()
         {
             if (this.strategy != null)
             {

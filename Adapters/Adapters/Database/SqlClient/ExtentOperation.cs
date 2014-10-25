@@ -74,7 +74,7 @@ namespace Allors.Adapters.Database.SqlClient
             return this.AddSort(roleType, SortDirection.Ascending);
         }
 
-        protected override ObjectId[] GetObjects()
+        protected override ObjectId[] GetObjectIds()
         {
             this.first.Session.Flush();
 

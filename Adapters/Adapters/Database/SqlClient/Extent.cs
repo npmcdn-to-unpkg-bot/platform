@@ -23,47 +23,35 @@ namespace Allors.Adapters.Database.SqlClient
 {
     using System;
     using System.Collections;
-    using System.Xml.Schema;
 
     using Allors.Meta;
 
     public abstract class AllorsExtentSql : Extent
     {
-        private ObjectId[] objects;
-        private AllorsExtentOperationSql parentOperationExtent;
+        private ObjectId[] objectIds;
+
         private AllorsExtentSortSql sorter;
 
         public override int Count
         {
-            get { return this.Objects.Length; }
+            get { return this.ObjectIds.Length; }
         }
 
         public override IObject First
         {
             get
             {
-                if (this.Objects.Length > 0)
+                if (this.ObjectIds.Length > 0)
                 {
-                    return this.Session.InstantiateStrategy(this.Objects[0]).GetObject();
+                    var firstObjectId = this.ObjectIds[0];
+                    return this.GetObject(firstObjectId);
                 }
 
                 return null;
             }
         }
 
-        private ObjectId[] Objects
-        {
-            get
-            {
-                return this.objects ?? (this.objects = this.GetObjects());
-            }
-        }
-
-        internal AllorsExtentOperationSql ParentOperationExtent
-        {
-            get { return this.parentOperationExtent; }
-            set { this.parentOperationExtent = value; }
-        }
+        internal AllorsExtentOperationSql ParentOperationExtent { get; set; }
 
         internal abstract DatabaseSession Session { get; }
 
@@ -72,11 +60,19 @@ namespace Allors.Adapters.Database.SqlClient
             get { return this.sorter; }
         }
 
+        private ObjectId[] ObjectIds
+        {
+            get
+            {
+                return this.objectIds ?? (this.objectIds = this.GetObjectIds());
+            }
+        }
+
         public new IObject this[int index]
         {
             get { return this.GetItem(index); }
         }
-
+        
         public override Extent AddSort(IRoleType roleType)
         {
             return this.AddSort(roleType, SortDirection.Ascending);
@@ -103,7 +99,7 @@ namespace Allors.Adapters.Database.SqlClient
             if (value != null)
             {
                 var obj = (IObject)value;
-                return Array.IndexOf(this.Objects, obj.Id) >= 0;
+                return Array.IndexOf(this.ObjectIds, obj.Id) >= 0;
             }
 
             return false;
@@ -111,62 +107,76 @@ namespace Allors.Adapters.Database.SqlClient
 
         public override void CopyTo(Array array, int index)
         {
-            this.Objects.CopyTo(array, index);
+            for (var i = index; i < array.Length; i++)
+            {
+                var objectId = this.ObjectIds[i];
+                var obj = this.GetObject(objectId);
+                array.SetValue(obj, i);
+            }
         }
 
         public override IEnumerator GetEnumerator()
         {
-            return this.Objects.GetEnumerator();
+            foreach (var objectId in this.ObjectIds)
+            {
+                yield return this.GetObject(objectId);
+            }
         }
 
         public override int IndexOf(object value)
         {
-            return Array.IndexOf(this.objects, value);
+            return Array.IndexOf(this.ObjectIds, ((IObject)value).Id);
         }
 
         public override IObject[] ToArray()
         {
             var clrType = this.Session.Database.ObjectFactory.GetTypeForObjectType(this.ObjectType);
-            var list = new ArrayList(this.objects.Length);
-            for (var i = 0; i < list.Count; i++)
+            var array = (IObject[])Array.CreateInstance(clrType, this.ObjectIds.Length);
+            for (var i = 0; i < array.Length; i++)
             {
-                var objectId = this.objects[i];
-                list[i] = this.Session.InstantiateStrategy(objectId).GetObject();
+                var objectId = this.ObjectIds[i];
+                array[i] = this.GetObject(objectId);
             }
 
-            return (IObject[])list.ToArray(clrType);
+            return array;
         }
 
         public override IObject[] ToArray(Type type)
         {
-            var list = new ArrayList(this.objects.Length);
+            var list = new ArrayList(this.GetObjectIds().Length);
             for (var i = 0; i < list.Count; i++)
             {
-                var objectId = this.objects[i];
-                list[i] = this.Session.InstantiateStrategy(objectId).GetObject();
+                var objectId = this.ObjectIds[i];
+                list[i] = this.GetObject(objectId);
             }
 
             return (IObject[])list.ToArray(type);
         }
 
-        protected override IObject GetItem(int index)
-        {
-            return this.Session.InstantiateStrategy(this.Objects[index]).GetObject();
-        }
-
-        protected abstract ObjectId[] GetObjects();
-
-        protected abstract void LazyLoadFilter();
-
         internal abstract string BuildSql(AllorsExtentStatementSql statement);
 
         internal void FlushCache()
         {
-            this.objects = null;
+            this.objectIds = null;
             if (this.ParentOperationExtent != null)
             {
                 this.ParentOperationExtent.FlushCache();
             }
+        }
+
+        protected override IObject GetItem(int index)
+        {
+            var objectId = this.ObjectIds[index];
+            return this.GetObject(objectId);
+        }
+
+        protected abstract ObjectId[] GetObjectIds();
+
+        protected abstract void LazyLoadFilter();
+
+        private IObject GetObject(ObjectId objectId)
+        {
+            return this.Session.InstantiateExistingStrategy(objectId).GetObject();
         }
     }
 }

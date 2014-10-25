@@ -384,36 +384,13 @@ namespace Allors.Adapters.Database.SqlClient
                 return;
             }
 
-            List<ObjectId> roleObjectIds = null;
-            for (var i = 0; i < roles.Count; i++)
+            var roleObjectIds = new List<ObjectId>();
+            foreach (IObject role in roles)
             {
-                var role = roles[i];
-
                 if (role != null)
                 {
-                    if (roleObjectIds == null)
-                    {
-                        roleObjectIds = new List<ObjectId>(roles.Count);
-
-                        this.Session.Database.RoleChecks.CompositeRolesChecks(this, roleType, role);
-
-                        roleObjectIds.Add(role.Id);
-                    }
-                }
-            }
-
-            if (roleObjectIds == null)
-            {
-                switch (roleType.RelationType.Multiplicity)
-                {
-                    case Multiplicity.OneToMany:
-                        this.session.RemoveCompositeRolesOneToMany(this.objectId, roleType);
-                        return;
-                    case Multiplicity.ManyToMany:
-                        this.session.RemoveCompositeRolesManyToMany(this.objectId, roleType);
-                        return;
-                    default:
-                        throw new Exception("Unsupported multiplicity " + roleType.RelationType.Multiplicity);
+                    this.Session.Database.RoleChecks.CompositeRolesChecks(this, roleType, role);
+                    roleObjectIds.Add(role.Id);
                 }
             }
 
