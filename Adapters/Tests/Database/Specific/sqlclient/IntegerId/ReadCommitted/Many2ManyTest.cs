@@ -23,10 +23,6 @@
 
 namespace Allors.Adapters.Special.SqlClient.IntegerId.ReadCommitted
 {
-    using System;
-
-    using Allors;
-
     using NUnit.Framework;
 
     [TestFixture]
