@@ -70,7 +70,7 @@ namespace Allors.Adapters.Database.SqlClient
 
         internal void BuildSelect(AllorsExtentFilteredSql extent, Schema schema, AllorsExtentStatementSql statement)
         {
-            statement.Append(" , " + this.roleType.SingularFullName + "_R" + ".ColumnNameForRole ");
+            statement.Append(" , " + this.roleType.SingularFullName + "_R." + Schema.ColumnNameForRole + " ");
             if (this.subSorter != null)
             {
                 this.subSorter.BuildSelect(extent, schema, statement);

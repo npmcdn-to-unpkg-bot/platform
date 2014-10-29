@@ -143,14 +143,14 @@ namespace Allors.Adapters.Database.SqlClient
 
         public override IObject[] ToArray(Type type)
         {
-            var list = new ArrayList(this.GetObjectIds().Length);
-            for (var i = 0; i < list.Count; i++)
+            var array = (IObject[])Array.CreateInstance(type, this.ObjectIds.Length);
+            for (var i = 0; i < array.Length; i++)
             {
                 var objectId = this.ObjectIds[i];
-                list[i] = this.GetObject(objectId);
+                array[i] = this.GetObject(objectId);
             }
 
-            return (IObject[])list.ToArray(type);
+            return array;
         }
 
         internal abstract string BuildSql(AllorsExtentStatementSql statement);

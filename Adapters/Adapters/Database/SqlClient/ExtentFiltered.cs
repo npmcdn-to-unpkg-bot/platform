@@ -106,6 +106,8 @@ namespace Allors.Adapters.Database.SqlClient
 
             using (var command = statement.CreateSqlCommand())
             {
+Console.WriteLine("xxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+Console.WriteLine(command.CommandText);
                 using (DbDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
@@ -135,6 +137,13 @@ namespace Allors.Adapters.Database.SqlClient
 
         internal override string BuildSql(AllorsExtentStatementSql statement)
         {
+            if (this.role != null || this.association != null)
+            {
+                // We're being used in another Extent so we need to
+                // migrate from role/associatin to filter
+                this.LazyLoadFilter();
+            }
+
             if (this.filter != null)
             {
                 this.filter.Setup(this, statement);

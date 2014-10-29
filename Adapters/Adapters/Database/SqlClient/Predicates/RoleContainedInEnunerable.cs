@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="RoleContainedInExtent.cs" company="Allors bvba">
+// <copyright file="RoleContainedInEnumerable.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -20,30 +20,36 @@
 
 namespace Allors.Adapters.Database.SqlClient
 {
+    using System.Collections.Generic;
+    using System.Text;
+
     using Meta;
 
-    internal sealed class AllorsPredicateRoleInExtentSql : AllorsPredicateSql
+    internal sealed class RoleContainedInEnumerable : AllorsPredicateSql
     {
-        private readonly AllorsExtentSql inExtent;
+        private readonly IEnumerable<IObject> enumerable;
         private readonly IRoleType role;
 
-        public AllorsPredicateRoleInExtentSql(AllorsExtentFilteredSql extent, IRoleType role, Allors.Extent inExtent)
+        public RoleContainedInEnumerable(AllorsExtentFilteredSql extent, IRoleType role, IEnumerable<IObject> enumerable)
         {
             extent.CheckRole(role);
-            CompositePredicateAssertions.ValidateRoleContainedIn(role, inExtent);
+            CompositePredicateAssertions.ValidateRoleContainedIn(role, this.enumerable);
             this.role = role;
-            this.inExtent = (AllorsExtentSql)inExtent;
+            this.enumerable = enumerable;
         }
 
         internal override bool BuildWhere(AllorsExtentFilteredSql extent, Schema schema, AllorsExtentStatementSql statement, IObjectType type, string alias)
         {
-            var inStatement = statement.CreateChild(this.inExtent, this.role);
+            var inStatement = new StringBuilder("0");
+            foreach (var inObject in this.enumerable)
+            {
+                inStatement.Append(",");
+                inStatement.Append(inObject.Id);
+            }
 
-            inStatement.UseAssociation(this.role.AssociationType);
-
-            statement.Append(" (" + this.role.SingularFullName + "_R." + Schema.ColumnNameForRole + " IS NOT NULL AND ");
-            statement.Append(" " + this.role.SingularFullName + "_R." + Schema.ColumnNameForAssociation + " IN (");
-            this.inExtent.BuildSql(inStatement);
+            statement.Append(" (" + this.role.SingularPropertyName + "_R." + Schema.ColumnNameForRole + " IS NOT NULL AND ");
+            statement.Append(" " + this.role.SingularPropertyName + "_R." + Schema.ColumnNameForAssociation + " IN (");
+            statement.Append(inStatement.ToString());
             statement.Append(" ))");
 
             return this.Include;

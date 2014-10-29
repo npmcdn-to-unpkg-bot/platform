@@ -28,25 +28,40 @@ namespace Allors.Adapters.Database.SqlClient
     internal sealed class AllorsPredicateRoleUnitEqualsValueSql : AllorsPredicateSql
     {
         private readonly object obj;
-        private readonly IRoleType role;
+        private readonly IRoleType roleType;
 
-        internal AllorsPredicateRoleUnitEqualsValueSql(AllorsExtentFilteredSql extent, IRoleType role, Object obj)
+        internal AllorsPredicateRoleUnitEqualsValueSql(AllorsExtentFilteredSql extent, IRoleType roleType, Object obj)
         {
-            extent.CheckRole(role);
-            CompositePredicateAssertions.ValidateRoleEquals(role, obj);
-            this.role = role;
-            this.obj = obj;
+            extent.CheckRole(roleType);
+            CompositePredicateAssertions.ValidateRoleEquals(roleType, obj);
+            this.roleType = roleType;
+            if (obj is Enum)
+            {
+                var unitType = roleType.ObjectType as IUnit;
+                if (unitType != null && unitType.IsInteger)
+                {
+                    this.obj = (int)obj;
+                }
+                else
+                {
+                    throw new Exception("Role Object Type " + roleType.ObjectType.SingularName + " doesn't support enumerations.");
+                }
+            }
+            else
+            {
+                this.obj = roleType.ObjectType is IUnit ? roleType.Normalize(obj) : obj;
+            }
         }
 
         internal override bool BuildWhere(AllorsExtentFilteredSql extent, Schema schema, AllorsExtentStatementSql statement, IObjectType type, string alias)
         {
-            statement.Append(" " + this.role.SingularFullName + "_R." + Schema.ColumnNameForRole + "=" + statement.AddParameter(this.obj));
+            statement.Append(" " + this.roleType.SingularFullName + "_R." + Schema.ColumnNameForRole + "=" + statement.AddParameter(this.obj));
             return this.Include;
         }
 
         internal override void Setup(AllorsExtentFilteredSql extent, AllorsExtentStatementSql statement)
         {
-            statement.UseRole(this.role);
+            statement.UseRole(this.roleType);
         }
     }
 }

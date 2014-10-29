@@ -122,7 +122,9 @@ namespace Allors.Adapters.Database.SqlClient
 
         public ICompositePredicate AddContainedIn(IRoleType role, IEnumerable<IObject> containingEnumerable)
         {
-            throw new NotImplementedException();
+            this.extent.FlushCache();
+            this.filters.Add(new RoleContainedInEnumerable(this.extent, role, containingEnumerable));
+            return this;
         }
 
         public ICompositePredicate AddContainedIn(IAssociationType association, Extent containingExtent)
@@ -134,7 +136,9 @@ namespace Allors.Adapters.Database.SqlClient
 
         public ICompositePredicate AddContainedIn(IAssociationType association, IEnumerable<IObject> containingEnumerable)
         {
-            throw new NotImplementedException();
+            this.extent.FlushCache();
+            this.filters.Add(new AssociationContainedInEnumerable(this.extent, association, containingEnumerable));
+            return this;
         }
 
         public ICompositePredicate AddContains(IRoleType role, IObject containedObject)

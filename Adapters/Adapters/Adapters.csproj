@@ -100,6 +100,7 @@
     <Compile Include="Database\SqlClient\ExtentOperation.cs" />
     <Compile Include="Database\SqlClient\ExtentSort.cs" />
     <Compile Include="Database\SqlClient\Predicates\And.cs" />
+    <Compile Include="Database\SqlClient\Predicates\AssociationContainedInEnumerable.cs" />
     <Compile Include="Database\SqlClient\Predicates\AssociationContainedInExtent.cs" />
     <Compile Include="Database\SqlClient\Predicates\AssociationContains.cs" />
     <Compile Include="Database\SqlClient\Predicates\AssociationEquals.cs" />
@@ -114,6 +115,7 @@
     <Compile Include="Database\SqlClient\Predicates\RoleBetweenRole.cs" />
     <Compile Include="Database\SqlClient\Predicates\RoleBetweenValue.cs" />
     <Compile Include="Database\SqlClient\Predicates\RoleCompositeEquals.cs" />
+    <Compile Include="Database\SqlClient\Predicates\RoleContainedInEnunerable.cs" />
     <Compile Include="Database\SqlClient\Predicates\RoleContainedInExtent.cs" />
     <Compile Include="Database\SqlClient\Predicates\RoleContains.cs" />
     <Compile Include="Database\SqlClient\Predicates\RoleExists.cs" />

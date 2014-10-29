@@ -384,20 +384,18 @@ namespace Allors.Adapters.Database.Memory
 
         public virtual Allors.Extent Intersect(Allors.Extent firstOperand, Allors.Extent secondOperand)
         {
-            return new ExtentOperation(
-                this,
-                (Extent)firstOperand,
-                (Extent)secondOperand,
-                ExtentOperationType.Intersect);
+            var firstExtent = firstOperand as Extent ?? ((ExtentSwitch)firstOperand).Extent;
+            var secondExtent = secondOperand as Extent ?? ((ExtentSwitch)secondOperand).Extent;
+
+            return new ExtentOperation(this, firstExtent, secondExtent, ExtentOperationType.Intersect);
         }
 
         public virtual Allors.Extent Except(Allors.Extent firstOperand, Allors.Extent secondOperand)
         {
-            return new ExtentOperation(
-                this,
-                (Extent)firstOperand,
-                (Extent)secondOperand,
-                ExtentOperationType.Except);
+            var firstExtent = firstOperand as Extent ?? ((ExtentSwitch)firstOperand).Extent;
+            var secondExtent = secondOperand as Extent ?? ((ExtentSwitch)secondOperand).Extent;
+
+            return new ExtentOperation(this, firstExtent, secondExtent, ExtentOperationType.Except);
         }
 
         public virtual IObject Create(IClass objectType)

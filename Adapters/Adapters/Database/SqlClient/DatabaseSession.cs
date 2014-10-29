@@ -125,17 +125,17 @@ namespace Allors.Adapters.Database.SqlClient
 
         public Extent Except(Extent firstOperand, Extent secondOperand)
         {
-            throw new NotImplementedException();
+            return new AllorsExtentOperationSql((AllorsExtentSql)firstOperand, (AllorsExtentSql)secondOperand, AllorsExtentOperationTypeSqlBundled.EXCEPT);
         }
 
         public Extent Intersect(Extent firstOperand, Extent secondOperand)
         {
-            throw new NotImplementedException();
+            return new AllorsExtentOperationSql((AllorsExtentSql)firstOperand, (AllorsExtentSql)secondOperand, AllorsExtentOperationTypeSqlBundled.INTERSECT);
         }
 
         public Extent Union(Extent firstOperand, Extent secondOperand)
         {
-            throw new NotImplementedException();
+            return new AllorsExtentOperationSql((AllorsExtentSql)firstOperand, (AllorsExtentSql)secondOperand, AllorsExtentOperationTypeSqlBundled.UNION);
         }
 
         public void Commit()

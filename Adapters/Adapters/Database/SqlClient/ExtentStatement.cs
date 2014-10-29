@@ -86,7 +86,7 @@ namespace Allors.Adapters.Database.SqlClient
 
             foreach (IRoleType role in this.roleInstances)
             {
-                this.Append(" LEFT OUTER JOIN " + Schema.ColumnNameForType + " " + this.GetJoinName(role));
+                this.Append(" LEFT OUTER JOIN " + Schema.TableNameForObjects + " " + this.GetJoinName(role));
                 this.Append(" ON " + this.GetJoinName(role) + "." + Schema.ColumnNameForObject + "=" + role.SingularFullName + "_R." + Schema.ColumnNameForRole + " ");
             }
 
@@ -98,7 +98,7 @@ namespace Allors.Adapters.Database.SqlClient
 
             foreach (IAssociationType association in this.associationInstances)
             {
-                this.Append(" LEFT OUTER JOIN " + Schema.ColumnNameForType + " " + this.GetJoinName(association));
+                this.Append(" LEFT OUTER JOIN " + Schema.TableNameForObjects + " " + this.GetJoinName(association));
                 this.Append(" ON " + this.GetJoinName(association) + "." + Schema.ColumnNameForObject + "=" + association.SingularFullName + "_A." + Schema.ColumnNameForAssociation + " ");
             }
         }

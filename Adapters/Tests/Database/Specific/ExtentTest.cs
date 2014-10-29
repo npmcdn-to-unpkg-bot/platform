@@ -3087,6 +3087,27 @@ namespace Allors.Adapters.Special
                 this.AssertC3(extent, false, false, false, false);
                 this.AssertC4(extent, false, false, false, false);
 
+                // Shortcut
+                firstExtent = this.c1B.Strategy.GetCompositeRoles(RoleTypes.C1C1one2many);
+                secondExtent = this.c1B.Strategy.GetCompositeRoles(RoleTypes.C1C1one2many);
+                extent = this.Session.Except(firstExtent, secondExtent);
+
+                Assert.AreEqual(0, extent.Count);
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
+
+                firstExtent = this.c1B.Strategy.GetCompositeRoles(RoleTypes.C1C1one2many);
+                secondExtent = this.c1C.Strategy.GetCompositeRoles(RoleTypes.C1C1one2many);
+                extent = this.Session.Except(firstExtent, secondExtent);
+
+                Assert.AreEqual(1, extent.Count);
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
+
                 // Different Classes
                 firstExtent = this.LocalExtent(Classes.C1);
                 secondExtent = this.LocalExtent(Classes.C2);
@@ -3242,6 +3263,27 @@ namespace Allors.Adapters.Special
                 this.AssertC3(extent, false, false, false, false);
                 this.AssertC4(extent, false, false, false, false);
 
+                // Shortcut
+                firstExtent = this.c1B.Strategy.GetCompositeRoles(RoleTypes.C1C1one2many);
+                secondExtent = this.c1B.Strategy.GetCompositeRoles(RoleTypes.C1C1one2many);
+                extent = this.Session.Intersect(firstExtent, secondExtent);
+
+                Assert.AreEqual(1, extent.Count);
+                this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
+
+                firstExtent = this.c1B.Strategy.GetCompositeRoles(RoleTypes.C1C1one2many);
+                secondExtent = this.c1C.Strategy.GetCompositeRoles(RoleTypes.C1C1one2many);
+                extent = this.Session.Intersect(firstExtent, secondExtent);
+
+                Assert.AreEqual(0, extent.Count);
+                this.AssertC1(extent, false, false, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
+                
                 // Different Classes
                 firstExtent = this.LocalExtent(Classes.C1);
                 secondExtent = this.LocalExtent(Classes.C2);
@@ -11905,8 +11947,8 @@ namespace Allors.Adapters.Special
                     extent = this.LocalExtent(Classes.C1);
                     extent.Filter.AddContainedIn(RoleTypes.C1C1many2many, inExtent);
 
-                    Assert.AreEqual(2, extent.Count);
-                    this.AssertC1(extent, false, false, true, true);
+                    Assert.AreEqual(3, extent.Count);
+                    this.AssertC1(extent, false, true, true, true);
                     this.AssertC2(extent, false, false, false, false);
                     this.AssertC3(extent, false, false, false, false);
                     this.AssertC4(extent, false, false, false, false);
@@ -14147,6 +14189,16 @@ namespace Allors.Adapters.Special
 
                 Assert.AreEqual(1, extent.Count);
                 this.AssertC1(extent, false, true, false, false);
+                this.AssertC2(extent, false, false, false, false);
+                this.AssertC3(extent, false, false, false, false);
+                this.AssertC4(extent, false, false, false, false);
+
+                firstExtent = this.c1B.Strategy.GetCompositeRoles(RoleTypes.C1C1one2many);
+                secondExtent = this.c1C.Strategy.GetCompositeRoles(RoleTypes.C1C1one2many);
+                extent = this.Session.Union(firstExtent, secondExtent);
+
+                Assert.AreEqual(3, extent.Count);
+                this.AssertC1(extent, false, true, true, true);
                 this.AssertC2(extent, false, false, false, false);
                 this.AssertC3(extent, false, false, false, false);
                 this.AssertC4(extent, false, false, false, false);
