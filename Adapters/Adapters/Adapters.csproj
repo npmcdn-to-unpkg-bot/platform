@@ -95,6 +95,7 @@
     <Compile Include="Database\Memory\StrategyExtentAssociation.cs" />
     <Compile Include="Database\Memory\StrategyExtentRole.cs" />
     <Compile Include="Database\SqlClient\Configuration.cs" />
+    <Compile Include="Database\SqlClient\ChangeSet.cs" />
     <Compile Include="Database\SqlClient\Extent.cs" />
     <Compile Include="Database\SqlClient\ExtentFiltered.cs" />
     <Compile Include="Database\SqlClient\ExtentOperation.cs" />

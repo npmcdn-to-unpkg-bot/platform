@@ -37,6 +37,9 @@ namespace Allors.Adapters.Database.SqlClient
         private Dictionary<ObjectId, Strategy> strategyByObjectId;
         private Dictionary<ObjectId, int> cacheIdByObjectId;
 
+        private HashSet<ObjectId> deletedObjects;
+        private HashSet<ObjectId> flushDeletedObjects;
+
         private Dictionary<IRoleType, Dictionary<ObjectId, object>> unitRoleByAssociationByRoleType;
         private Dictionary<IRoleType, HashSet<ObjectId>> unitFlushAssociationsByRoleType;
 
@@ -57,6 +60,8 @@ namespace Allors.Adapters.Database.SqlClient
         private Dictionary<IRoleType, Dictionary<ObjectId, ObjectId[]>> manyToManyOriginalRoleByAssociationByRoleType;
         private Dictionary<IAssociationType, Dictionary<ObjectId, ObjectId[]>> manyToManyAssociationByRoleByAssociationType;
         private Dictionary<IAssociationType, HashSet<ObjectId>> manyToManyTriggerFlushRolesByAssociationType;
+
+        private ChangeSet changeSet;
 
         public DatabaseSession(Database database)
         {
@@ -95,6 +100,14 @@ namespace Allors.Adapters.Database.SqlClient
             }
         }
 
+        internal ChangeSet ChangeSet
+        {
+            get
+            {
+                return this.changeSet ?? (this.changeSet = new ChangeSet());
+            }
+        }
+
         public object this[string name]
         {
             get
@@ -110,7 +123,14 @@ namespace Allors.Adapters.Database.SqlClient
 
         public IChangeSet Checkpoint()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return this.ChangeSet;
+            }
+            finally
+            {
+                this.changeSet = null;
+            }
         }
 
         public Extent<T> Extent<T>() where T : IObject
@@ -172,12 +192,19 @@ namespace Allors.Adapters.Database.SqlClient
 
         public T Create<T>() where T : IObject
         {
-            throw new NotImplementedException();
+            var objectType = this.Database.ObjectFactory.GetObjectTypeForType(typeof(T));
+            var @class = objectType as IClass;
+            if (@class == null)
+            {
+                throw new Exception("IObjectType is not a Class");
+            }
+
+            return (T)this.Create(@class);
         }
 
         public IObject Create(IClass objectType)
         {
-            const string CmdText = @"
+           const string CmdText = @"
 INSERT INTO " + Schema.TableNameForObjects + " (" + Schema.ColumnNameForType + ", " + Schema.ColumnNameForCache + @")
 VALUES (" + Schema.ParameterNameForType + ", " + Schema.ParameterNameForCache + @");
 
@@ -190,7 +217,11 @@ SELECT " + Schema.ColumnNameForObject + @" = SCOPE_IDENTITY();
                 var result = command.ExecuteScalar().ToString();
                 var objectId = this.database.ObjectIds.Parse(result);
                 var strategy = new Strategy(this, objectType, objectId, true, false);
-                return strategy.GetObject();
+                var domainObject = strategy.GetObject();
+
+                this.ChangeSet.OnCreated(domainObject.Id);
+
+                return domainObject;
             }
         }
 
@@ -271,14 +302,19 @@ SELECT " + Schema.ColumnNameForObject + @" = SCOPE_IDENTITY();
             return objects != null ? objects.ToArray() : EmptyObjects;
         }
 
-        public IObject Insert(IClass objectType, string objectId)
+        public IObject Insert(IClass objectType, string objectIdString)
         {
-            throw new NotImplementedException();
+             var objectId = this.Database.ObjectIds.Parse(objectIdString);
+             var insertedObject = this.Insert(objectType, objectId);
+
+            return insertedObject;
         }
 
         public IObject Insert(IClass objectType, ObjectId objectId)
         {
             throw new NotImplementedException();
+
+            this.ChangeSet.OnCreated(objectId);
         }
 
         public IStrategy InstantiateStrategy(ObjectId objectId)
@@ -334,6 +370,8 @@ SELECT " + Schema.ColumnNameForObject + @" = SCOPE_IDENTITY();
 
                 roleByAssociation[association] = role;
                 flushAssociations.Add(association);
+
+                this.ChangeSet.OnChangingUnitRole(association, roleType);
             }
         }
 
@@ -347,6 +385,8 @@ SELECT " + Schema.ColumnNameForObject + @" = SCOPE_IDENTITY();
 
                 roleByAssociation[association] = null;
                 flushAssociations.Add(association);
+
+                this.ChangeSet.OnChangingUnitRole(association, roleType);
             }
         }
         #endregion
@@ -412,6 +452,8 @@ SELECT " + Schema.ColumnNameForObject + @" = SCOPE_IDENTITY();
                 // Association -> Role
                 roleByAssociation[association] = role;
                 flushAssociations.Add(association);
+
+                this.ChangeSet.OnChangingCompositeRole(association, roleType, existingRole, role);
             }
         }
 
@@ -431,6 +473,8 @@ SELECT " + Schema.ColumnNameForObject + @" = SCOPE_IDENTITY();
 
                 var flushAssociations = this.GetOneToOneFlushAssociations(roleType);
                 flushAssociations.Add(association);
+
+                this.ChangeSet.OnChangingCompositeRole(association, roleType, existingRole, null);
             }
         }
 
@@ -498,6 +542,8 @@ SELECT " + Schema.ColumnNameForObject + @" = SCOPE_IDENTITY();
                 // Association -> Role
                 roleByAssociation[association] = role;
                 flushAssociations.Add(association);
+
+                this.ChangeSet.OnChangingCompositeRole(association, roleType, existingRole, role);
             }
         }
 
@@ -528,6 +574,8 @@ SELECT " + Schema.ColumnNameForObject + @" = SCOPE_IDENTITY();
                 // Association -> Role
                 roleByAssociation[association] = null;
                 flushAssociations.Add(association);
+
+                this.ChangeSet.OnChangingCompositeRole(association, roleType, existingRole, null);
             }
         }
 
@@ -630,6 +678,8 @@ SELECT " + Schema.ColumnNameForObject + @" = SCOPE_IDENTITY();
                 
                 existingRoles.Add(role);
                 currentRoleByAssociation[association] = existingRoles.ToArray();
+
+                this.ChangeSet.OnChangingCompositesRole(association, roleType, role);
             }
         }
 
@@ -655,6 +705,8 @@ SELECT " + Schema.ColumnNameForObject + @" = SCOPE_IDENTITY();
 
                 existingRoles.Remove(role);
                 currentRoleByAssociation[association] = existingRoles.ToArray();
+
+                this.ChangeSet.OnChangingCompositesRole(association, roleType, role);
             }
         }
 
@@ -753,6 +805,8 @@ SELECT " + Schema.ColumnNameForObject + @" = SCOPE_IDENTITY();
 
                 existingRoles.Add(role);
                 currentRoleByAssociation[association] = existingRoles.ToArray();
+
+                this.ChangeSet.OnChangingCompositesRole(association, roleType, role);
             }
         }
 
@@ -780,6 +834,8 @@ SELECT " + Schema.ColumnNameForObject + @" = SCOPE_IDENTITY();
 
                 existingRoles.Remove(role);
                 currentRoleByAssociation[association] = existingRoles.ToArray();
+
+                this.ChangeSet.OnChangingCompositesRole(association, roleType, role);
             }
         }
 
@@ -846,6 +902,37 @@ SELECT " + Schema.ColumnNameForObject + @" = SCOPE_IDENTITY();
         }
         #endregion
 
+        internal bool? IsDeleted(ObjectId objectId)
+        {
+            if (this.deletedObjects != null)
+            {
+                if (this.deletedObjects.Contains(objectId))
+                {
+                    return true;
+                }
+            }
+
+            // TODO;
+        }
+
+        internal void Delete(ObjectId objectId)
+        {
+            if (this.deletedObjects == null)
+            {
+                this.deletedObjects = new HashSet<ObjectId>();
+            }
+
+            if (this.flushDeletedObjects == null)
+            {
+                this.flushDeletedObjects = new HashSet<ObjectId>();
+            }
+
+            this.deletedObjects.Add(objectId);
+            this.flushDeletedObjects.Add(objectId);
+
+            this.ChangeSet.OnDeleted(objectId);
+        }
+
         internal SqlCommand CreateCommand(string cmdText)
         {
             this.LazyConnect();
@@ -893,6 +980,8 @@ SELECT " + Schema.ColumnNameForObject + @" = SCOPE_IDENTITY();
                     this.FlushManyToMany(roleType);
                 }
             }
+
+            this.FlushDeletedObjects();
         }
 
         internal Strategy InstantiateExistingStrategy(ObjectId objectId)
@@ -1138,6 +1227,27 @@ WHERE " + Schema.ColumnNameForRole + @"=" + Schema.ParameterNameForRole + @";
             }
 
             return associations != null ? associations.ToArray() : EmptyObjectIds;
+        }
+
+        private void FlushDeletedObjects()
+        {
+            if (this.flushDeletedObjects != null)
+            {
+                var schema = this.database.Schema;
+                var cmdText = @"
+DELETE FROM " + Schema.TableNameForObjects + @"
+WHERE " + Schema.ColumnNameForAssociation + @" = " + Schema.ParameterNameForAssociation;
+                using (var command = this.CreateCommand(cmdText))
+                {
+                    var associationParam = command.Parameters.Add(Schema.ParameterNameForAssociation, schema.SqlDbTypeForId);
+
+                    foreach (var association in this.flushDeletedObjects)
+                    {
+                        associationParam.Value = association.Value;
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
         }
 
         private void FlushUnit(IRoleType roleType)
@@ -1614,6 +1724,9 @@ AND " + Schema.ColumnNameForRole + @" = " + Schema.ParameterNameForRole + @";
             this.strategyByObjectId = null;
             this.cacheIdByObjectId = null;
 
+            this.deletedObjects = null;
+            this.flushDeletedObjects = null;
+
             this.unitRoleByAssociationByRoleType = null;
             this.unitFlushAssociationsByRoleType = null;
 
@@ -1634,6 +1747,8 @@ AND " + Schema.ColumnNameForRole + @" = " + Schema.ParameterNameForRole + @";
             this.manyToManyOriginalRoleByAssociationByRoleType = null;
             this.manyToManyAssociationByRoleByAssociationType = null;
             this.manyToManyTriggerFlushRolesByAssociationType = null;
+
+            this.changeSet = null;
         }
 
         private void LazyConnect()

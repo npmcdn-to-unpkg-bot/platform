@@ -26,12 +26,12 @@ namespace Allors.Adapters.Database.SqlClient
     {
         private readonly DatabaseSession session;
         private readonly ObjectId objectId;
-        private WeakReference<IObject> weakReferenceToObject;
-
         private IClass objectType;
         private bool isNew;
         private bool? isDeleted;
-        
+
+        private IObject domainObject;
+       
         public Strategy(DatabaseSession session, IClass objectType, ObjectId objectId, bool isNew, bool? isDeleted)
         {
             this.session = session;
@@ -120,24 +120,19 @@ namespace Allors.Adapters.Database.SqlClient
 
         public IObject GetObject()
         {
-            IObject obj = null;
-            if (this.weakReferenceToObject != null)
-            {
-                this.weakReferenceToObject.TryGetTarget(out obj);
-            }
-
-            if (obj == null)
-            {
-                obj = this.session.Database.ObjectFactory.Create(this);
-                this.weakReferenceToObject = new WeakReference<IObject>(obj);
-            }
-
-            return obj;
+            return this.domainObject ?? (this.domainObject = this.session.Database.ObjectFactory.Create(this));
         }
 
         public void Delete()
         {
-            throw new NotImplementedException();
+            this.AssertIsNotDeleted();
+
+            foreach (var roleType in this.ObjectType.RoleTypes)
+            {
+                this.RemoveRole(roleType);
+            }
+
+            this.Session.Delete(this.objectId);
         }
 
         public virtual bool ExistRole(IRoleType roleType)
@@ -527,6 +522,21 @@ namespace Allors.Adapters.Database.SqlClient
             }
 
             return associations;
+        }
+
+        private void AssertIsNotDeleted()
+        {
+            if (this.isDeleted.HasValue)
+            {
+                if (this.isDeleted.Value)
+                {
+                    throw new Exception("Object with id " + this.objectId + " is deleted.");
+                }
+            }
+            else
+            {
+                this.isDeleted = this.Session.IsDeleted(this.objectId);
+            }
         }
     }
 }
