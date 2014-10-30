@@ -26,30 +26,15 @@ namespace Allors.Adapters.Database.SqlClient
     {
         private readonly DatabaseSession session;
         private readonly ObjectId objectId;
-        private IClass objectType;
-        private bool isNew;
-        private bool? isDeleted;
-
         private IObject domainObject;
        
-        public Strategy(DatabaseSession session, IClass objectType, ObjectId objectId, bool isNew, bool? isDeleted)
+        public Strategy(DatabaseSession session, ObjectId objectId)
         {
             this.session = session;
-            this.objectType = objectType;
             this.objectId = objectId;
-            this.isNew = isNew;
-            this.isDeleted = isDeleted;
         }
 
         ISession IStrategy.Session 
-        {
-            get
-            {
-                return this.session;
-            }
-        }
-
-        public DatabaseSession Session
         {
             get
             {
@@ -64,24 +49,8 @@ namespace Allors.Adapters.Database.SqlClient
                 return this.session;
             }
         }
-
-        public DatabaseSession DatabaseSession
-        {
-            get
-            {
-                return this.session;
-            }
-        }
-
-        public IClass ObjectType 
-        {
-            get
-            {
-                return this.objectType;
-            }
-        }
-
-        public ObjectId ObjectId 
+        
+        public ObjectId ObjectId
         {
             get
             {
@@ -93,12 +62,7 @@ namespace Allors.Adapters.Database.SqlClient
         {
             get
             {
-                if (this.isDeleted.HasValue)
-                {
-                    return this.isDeleted.Value;
-                }
-
-                throw new NotImplementedException();
+                return this.session.IsDeleted(this.objectId);
             }
         }
 
@@ -106,7 +70,7 @@ namespace Allors.Adapters.Database.SqlClient
         {
             get
             {
-                return this.isNew;
+                return this.session.IsNew(this.ObjectId);
             }
         }
 
@@ -118,21 +82,110 @@ namespace Allors.Adapters.Database.SqlClient
             }
         }
 
+        public IClass ObjectType
+        {
+            get
+            {
+                this.AssertNotDeleted();
+                return this.session.GetObjectType(this.ObjectId);
+            }
+        }
+
         public IObject GetObject()
         {
+            this.AssertNotDeleted();
             return this.domainObject ?? (this.domainObject = this.session.Database.ObjectFactory.Create(this));
         }
 
         public void Delete()
         {
-            this.AssertIsNotDeleted();
+            this.AssertNotDeleted();
 
             foreach (var roleType in this.ObjectType.RoleTypes)
             {
-                this.RemoveRole(roleType);
+                if (roleType.ObjectType is IUnit)
+                {
+                    this.session.RemoveUnitRole(this.objectId, roleType);
+                }
+                else
+                {
+                    if (roleType.IsMany)
+                    {
+                        switch (roleType.RelationType.Multiplicity)
+                        {
+                            case Multiplicity.OneToMany:
+                                this.session.RemoveCompositeRolesOneToMany(this.objectId, roleType);
+                                break;
+                            case Multiplicity.ManyToMany:
+                                this.session.RemoveCompositeRolesManyToMany(this.objectId, roleType);
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        switch (roleType.RelationType.Multiplicity)
+                        {
+                            case Multiplicity.OneToOne:
+                                this.session.RemoveCompositeRoleOneToOne(this.objectId, roleType);
+                                break;
+                            case Multiplicity.ManyToOne:
+                                this.session.RemoveCompositeRoleManyToOne(this.objectId, roleType);
+                                break;
+                        }
+                    }
+                }
             }
 
-            this.Session.Delete(this.objectId);
+            foreach (var associationType in this.ObjectType.AssociationTypes)
+            {
+                var roleType = associationType.RoleType;
+
+                if (associationType.IsMany)
+                {
+                    switch (associationType.RelationType.Multiplicity)
+                    {
+                        case Multiplicity.ManyToOne:
+                            foreach (var association in this.session.GetCompositeAssociationsManyToOne(this.objectId, associationType))
+                            {
+                                this.session.RemoveCompositeRoleManyToOne(association, roleType);
+                            }
+
+                            break;
+                        case Multiplicity.ManyToMany:
+                            foreach (var association in this.session.GetCompositeAssociationsManyToMany(this.objectId, associationType))
+                            {
+                                this.session.RemoveCompositeRoleManyToMany(association, roleType, this.objectId);
+                            }
+
+                            break;
+                    }
+                }
+                else
+                {
+                    ObjectId association;
+                    switch (associationType.RelationType.Multiplicity)
+                    {
+                        case Multiplicity.OneToOne:
+                            association = this.session.GetCompositeAssociationOneToOne(this.objectId, associationType);
+                            if (association != null)
+                            {
+                                this.session.RemoveCompositeRoleOneToOne(association, roleType);
+                            }
+
+                            break;
+                        case Multiplicity.OneToMany:
+                            association = this.session.GetCompositeAssociationOneToMany(this.objectId, associationType);
+                            if (association != null)
+                            {
+                                this.session.RemoveCompositeRoleOneToMany(association, roleType, this.objectId);
+                            }
+
+                            break;
+                    }
+                }
+            }
+
+            this.session.Delete(this.objectId);
         }
 
         public virtual bool ExistRole(IRoleType roleType)
@@ -213,11 +266,15 @@ namespace Allors.Adapters.Database.SqlClient
         
         public bool ExistUnitRole(IRoleType roleType)
         {
+            this.AssertNotDeleted();
+
             return this.session.ExistUnitRole(this.objectId, roleType);
         }
 
         public object GetUnitRole(IRoleType roleType)
         {
+            this.AssertNotDeleted();
+
             return this.session.GetUnitRole(this.ObjectId, roleType);
         }
 
@@ -229,17 +286,23 @@ namespace Allors.Adapters.Database.SqlClient
                 return;
             }
 
-            this.Session.Database.RoleChecks.UnitRoleChecks(this, roleType);
+            this.AssertNotDeleted();
+
+            this.session.Database.RoleChecks.UnitRoleChecks(this, roleType);
             this.session.SetUnitRole(this.objectId, roleType, unit);
         }
 
         public void RemoveUnitRole(IRoleType roleType)
         {
+            this.AssertNotDeleted();
+            
             this.session.RemoveUnitRole(this.objectId, roleType);
         }
 
         public bool ExistCompositeRole(IRoleType roleType)
         {
+            this.AssertNotDeleted();
+            
             switch (roleType.RelationType.Multiplicity)
             {
                 case Multiplicity.OneToOne:
@@ -253,6 +316,8 @@ namespace Allors.Adapters.Database.SqlClient
 
         public IObject GetCompositeRole(IRoleType roleType)
         {
+            this.AssertNotDeleted();
+            
             ObjectId role;
             switch (roleType.RelationType.Multiplicity)
             {
@@ -266,18 +331,20 @@ namespace Allors.Adapters.Database.SqlClient
                     throw new Exception("Unsupported multiplicity " + roleType.RelationType.Multiplicity);
             }
 
-            return role != null ? this.session.InstantiateStrategy(role).GetObject() : null;
+            return role != null ? new Strategy(this.session, role).GetObject() : null;
         }
 
         public void SetCompositeRole(IRoleType roleType, IObject role)
         {
+            this.AssertNotDeleted();
+
             if (role == null)
             {
                 this.RemoveCompositeRole(roleType);
                 return;
             }
 
-            this.Session.Database.RoleChecks.CompositeRoleChecks(this, roleType, role);
+            this.session.Database.RoleChecks.CompositeRoleChecks(this, roleType, role);
 
             switch (roleType.RelationType.Multiplicity)
             {
@@ -294,7 +361,8 @@ namespace Allors.Adapters.Database.SqlClient
 
         public void RemoveCompositeRole(IRoleType roleType)
         {
-            this.Session.Database.RoleChecks.CompositeRoleChecks(this, roleType);
+            this.AssertNotDeleted();
+            this.session.Database.RoleChecks.CompositeRoleChecks(this, roleType);
 
             switch (roleType.RelationType.Multiplicity)
             {
@@ -311,6 +379,8 @@ namespace Allors.Adapters.Database.SqlClient
 
         public bool ExistCompositeRoles(IRoleType roleType)
         {
+            this.AssertNotDeleted();
+
             switch (roleType.RelationType.Multiplicity)
             {
                 case Multiplicity.OneToMany:
@@ -324,6 +394,8 @@ namespace Allors.Adapters.Database.SqlClient
 
         public Extent GetCompositeRoles(IRoleType roleType)
         {
+            this.AssertNotDeleted();
+
             return new AllorsExtentFilteredSql(this.session, this, roleType);
         }
 
@@ -334,7 +406,8 @@ namespace Allors.Adapters.Database.SqlClient
                 return;
             }
 
-            this.Session.Database.RoleChecks.CompositeRolesChecks(this, roleType, role);
+            this.AssertNotDeleted();
+            this.session.Database.RoleChecks.CompositeRolesChecks(this, roleType, role);
 
             switch (roleType.RelationType.Multiplicity)
             {
@@ -356,7 +429,8 @@ namespace Allors.Adapters.Database.SqlClient
                 return;
             }
 
-            this.Session.Database.RoleChecks.CompositeRolesChecks(this, roleType, role);
+            this.AssertNotDeleted();
+            this.session.Database.RoleChecks.CompositeRolesChecks(this, roleType, role);
 
             switch (roleType.RelationType.Multiplicity)
             {
@@ -379,12 +453,14 @@ namespace Allors.Adapters.Database.SqlClient
                 return;
             }
 
+            this.AssertNotDeleted();
+
             var roleObjectIds = new List<ObjectId>();
             foreach (IObject role in roles)
             {
                 if (role != null)
                 {
-                    this.Session.Database.RoleChecks.CompositeRolesChecks(this, roleType, role);
+                    this.session.Database.RoleChecks.CompositeRolesChecks(this, roleType, role);
                     roleObjectIds.Add(role.Id);
                 }
             }
@@ -404,7 +480,8 @@ namespace Allors.Adapters.Database.SqlClient
 
         public void RemoveCompositeRoles(IRoleType roleType)
         {
-            this.Session.Database.RoleChecks.CompositeRolesChecks(this, roleType);
+            this.AssertNotDeleted();
+            this.session.Database.RoleChecks.CompositeRolesChecks(this, roleType);
 
             switch (roleType.RelationType.Multiplicity)
             {
@@ -421,6 +498,8 @@ namespace Allors.Adapters.Database.SqlClient
 
         public virtual bool ExistAssociation(IAssociationType associationType)
         {
+            this.AssertNotDeleted();
+            
             if (associationType.IsMany)
             {
                 return this.ExistCompositeAssociations(associationType);
@@ -431,6 +510,8 @@ namespace Allors.Adapters.Database.SqlClient
 
         public virtual object GetAssociation(IAssociationType associationType)
         {
+            this.AssertNotDeleted();
+
             if (associationType.IsMany)
             {
                 return this.GetCompositeAssociations(associationType);
@@ -441,6 +522,8 @@ namespace Allors.Adapters.Database.SqlClient
 
         public bool ExistCompositeAssociation(IAssociationType associationType)
         {
+            this.AssertNotDeleted();
+
             switch (associationType.RelationType.Multiplicity)
             {
                 case Multiplicity.OneToOne:
@@ -454,6 +537,8 @@ namespace Allors.Adapters.Database.SqlClient
 
         public IObject GetCompositeAssociation(IAssociationType associationType)
         {
+            this.AssertNotDeleted();
+
             ObjectId association;
             switch (associationType.RelationType.Multiplicity)
             {
@@ -467,11 +552,13 @@ namespace Allors.Adapters.Database.SqlClient
                     throw new Exception("Unsupported multiplicity " + associationType.RelationType.Multiplicity);
             }
 
-            return association != null ? this.session.InstantiateStrategy(association).GetObject() : null;
+            return association != null ? new Strategy(this.session, association).GetObject() : null;
         }
 
         public bool ExistCompositeAssociations(IAssociationType associationType)
         {
+            this.AssertNotDeleted();
+
             switch (associationType.RelationType.Multiplicity)
             {
                 case Multiplicity.ManyToOne:
@@ -485,6 +572,8 @@ namespace Allors.Adapters.Database.SqlClient
 
         public Extent GetCompositeAssociations(IAssociationType associationType)
         {
+            this.AssertNotDeleted();
+
             return new AllorsExtentFilteredSql(this.session, this, associationType);
         }
 
@@ -524,18 +613,11 @@ namespace Allors.Adapters.Database.SqlClient
             return associations;
         }
 
-        private void AssertIsNotDeleted()
+        private void AssertNotDeleted()
         {
-            if (this.isDeleted.HasValue)
+            if (this.session.IsDeleted(this.ObjectId))
             {
-                if (this.isDeleted.Value)
-                {
-                    throw new Exception("Object with id " + this.objectId + " is deleted.");
-                }
-            }
-            else
-            {
-                this.isDeleted = this.Session.IsDeleted(this.objectId);
+                throw new Exception("Object with id " + this.ObjectId + " has been deleted.");
             }
         }
     }

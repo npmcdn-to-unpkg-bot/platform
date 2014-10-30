@@ -24,11 +24,10 @@ namespace Allors.Adapters.Special
     using System.Collections;
     using System.Collections.Generic;
 
-    using Allors.Adapters.Special.Assertions;
     using Allors;
+    using Allors.Adapters.Special.Assertions;
+    using Allors.Domain;
     using Allors.Meta;
-
-    using Domain;
 
     using NUnit.Framework;
 
@@ -57,40 +56,6 @@ namespace Allors.Adapters.Special
             get
             {
                 return this.Profile.Inits;
-            }
-        }
-
-        [Test]
-        public void Committing()
-        {
-            foreach (var init in this.Inits)
-            {
-                init();
-
-                var company = Company.Create(this.Session, "Acme");
-                var id = company.Strategy.ObjectId;
-
-                this.Session.Committing += this.SessionCommitting;
-                this.Session.Committed += this.SessionCommitted;
-
-                Assert.AreEqual("Acme", company.Name);
-
-                try
-                {
-                    this.Session.Commit();
-                    Assert.Fail();
-                }
-                catch (ApplicationException e)
-                {
-                }
-
-                var companyClone = (Company)this.Session.Instantiate(id);
-                companyClone.Name = string.Empty;
-
-                Assert.AreEqual(string.Empty, company.Name);
-
-                this.Session.Committing -= this.SessionCommitting;
-                this.Session.Committed -= this.SessionCommitted;
             }
         }
 
@@ -4094,39 +4059,6 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
         }
 
         [Test]
-        public void RollingBack()
-        {
-            foreach (var init in this.Inits)
-            {
-                init();
-
-                var company = Company.Create(this.Session, "Acme");
-                var id = company.Strategy.ObjectId;
-
-                this.Session.RollingBack += this.SessionRollingBack;
-                this.Session.RolledBack += this.SessionRolledBack;
-                Assert.AreEqual("Acme", company.Name);
-
-                try
-                {
-                    this.Session.Rollback();
-                    Assert.Fail();
-                }
-                catch (ApplicationException e)
-                {
-                }
-
-                var companyClone = (Company)this.Session.Instantiate(id);
-                companyClone.Name = string.Empty;
-
-                Assert.AreEqual(string.Empty, company.Name);
-
-                this.Session.RollingBack -= this.SessionRollingBack;
-                this.Session.RolledBack -= this.SessionRolledBack;
-            }
-        }
-
-        [Test]
         public void WihtoutRoles()
         {
             foreach (var init in this.Inits)
@@ -4311,21 +4243,6 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
 
         protected abstract ISession CreateSession();
 
-        private void SessionCommitted(object sender, SessionCommittedEventArgs args)
-        {
-            Assert.Fail();
-        }
-
-        private void SessionCommitting(object sender, SessionCommittingEventArgs args)
-        {
-            throw new ApplicationException();
-        }
-
-        private void SessionRolledBack(object sender, SessionRolledBackEventArgs args)
-        {
-            Assert.Fail();
-        }
-
         private IObject[] GetExtent(IComposite objectType)
         {
             var workspaceSession = this.Session as IWorkspaceSession;
@@ -4336,11 +4253,6 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
             }
 
             return this.Session.Extent(objectType);
-        }
-
-        private void SessionRollingBack(object sender, SessionRollingBackEventArgs args)
-        {
-            throw new ApplicationException();
         }
     }
 

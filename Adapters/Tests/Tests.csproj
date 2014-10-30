@@ -68,7 +68,6 @@
     <Compile Include="Database\Specific\memory\IntegerId\RelationExtentTest.cs" />
     <Compile Include="Database\Specific\memory\IntegerId\SandboxTest.cs" />
     <Compile Include="Database\Specific\memory\IntegerId\SerializationTest.cs" />
-    <Compile Include="Database\Specific\memory\IntegerId\SessionEventsTest.cs" />
     <Compile Include="Database\Specific\memory\IntegerId\SyncTest.cs" />
     <Compile Include="Database\Specific\memory\IntegerId\UnitTest.cs" />
     <Compile Include="Database\Specific\memory\IntegerId\WorkspaceTest.cs" />
@@ -84,7 +83,6 @@
     <Compile Include="Database\Specific\memory\LongId\RelationExtentTest.cs" />
     <Compile Include="Database\Specific\memory\LongId\SandboxTest.cs" />
     <Compile Include="Database\Specific\memory\LongId\SerializationTest.cs" />
-    <Compile Include="Database\Specific\memory\LongId\SessionEventsTest.cs" />
     <Compile Include="Database\Specific\memory\LongId\SyncTest.cs" />
     <Compile Include="Database\Specific\memory\LongId\UnitTest.cs" />
     <Compile Include="Database\Specific\memory\LongId\WorkspaceTest.cs" />
@@ -96,7 +94,6 @@
     <Compile Include="Database\Specific\SandboxTest.cs" />
     <Compile Include="Database\Specific\SchemaTest.cs" />
     <Compile Include="Database\Specific\SerializationTest.cs" />
-    <Compile Include="Database\Specific\SessionEventsTest.cs" />
     <Compile Include="Database\Specific\sqlclient\ExtentTest.cs" />
     <Compile Include="Database\Specific\sqlclient\IntegerId\ReadCommitted\CacheTest.cs" />
     <Compile Include="Database\Specific\sqlclient\IntegerId\ReadCommitted\ChangesTest.cs" />
@@ -114,7 +111,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Database\Specific\sqlclient\IntegerId\ReadCommitted\SerializationTest.cs" />
-    <Compile Include="Database\Specific\sqlclient\IntegerId\ReadCommitted\SessionEventsTest.cs" />
     <Compile Include="Database\Specific\sqlclient\IntegerId\ReadCommitted\SqlClientTest.cs" />
     <Compile Include="Database\Specific\sqlclient\IntegerId\ReadCommitted\SyncTest.cs" />
     <Compile Include="Database\Specific\sqlclient\IntegerId\ReadCommitted\UnitTest.cs" />
@@ -142,7 +138,6 @@
     <Compile Include="Workspace\Specific\memory\IntegerId\RelationExtentTest.cs" />
     <Compile Include="Workspace\Specific\memory\IntegerId\SandboxTest.cs" />
     <Compile Include="Workspace\Specific\memory\IntegerId\SerializationTest.cs" />
-    <Compile Include="Workspace\Specific\memory\IntegerId\SessionEventsTest.cs" />
     <Compile Include="Workspace\Specific\memory\IntegerId\UnitTest.cs" />
     <Compile Include="Workspace\Specific\One2ManyTest.cs" />
     <Compile Include="Workspace\Specific\One2OneTest.cs" />

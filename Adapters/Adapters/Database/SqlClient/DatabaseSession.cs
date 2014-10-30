@@ -34,10 +34,14 @@ namespace Allors.Adapters.Database.SqlClient
         private SqlConnection connection;
         private SqlTransaction transaction;
 
-        private Dictionary<ObjectId, Strategy> strategyByObjectId;
+        private Dictionary<string, object> properties;
+
+        private Dictionary<ObjectId, IClass> classByObjectId;
         private Dictionary<ObjectId, int> cacheIdByObjectId;
 
+        private HashSet<ObjectId> newObjects;
         private HashSet<ObjectId> deletedObjects;
+
         private HashSet<ObjectId> flushDeletedObjects;
 
         private Dictionary<IRoleType, Dictionary<ObjectId, object>> unitRoleByAssociationByRoleType;
@@ -67,14 +71,6 @@ namespace Allors.Adapters.Database.SqlClient
         {
             this.database = database;
         }
-
-        public event SessionCommittedEventHandler Committed;
-
-        public event SessionCommittingEventHandler Committing;
-
-        public event SessionRollingBackEventHandler RollingBack;
-
-        public event SessionRolledBackEventHandler RolledBack;
 
         IPopulation ISession.Population 
         {
@@ -112,12 +108,35 @@ namespace Allors.Adapters.Database.SqlClient
         {
             get
             {
-                throw new NotImplementedException();
+                if (this.properties == null)
+                {
+                    return null;
+                }
+
+                object value;
+                this.properties.TryGetValue(name, out value);
+                return value;
             }
 
             set
             {
-                throw new NotImplementedException();
+                if (this.properties == null)
+                {
+                    this.properties = new Dictionary<string, object>();
+                }
+
+                if (value == null)
+                {
+                    this.properties.Remove(name);
+                    if (this.properties.Count == 0)
+                    {
+                        this.properties = null;
+                    }
+                }
+                else
+                {
+                    this.properties[name] = value;
+                }
             }
         }
 
@@ -212,14 +231,29 @@ SELECT " + Schema.ColumnNameForObject + @" = SCOPE_IDENTITY();
 ";
             using (var command = this.CreateCommand(CmdText))
             {
+                var cacheId = int.MaxValue;
                 command.Parameters.Add(Schema.ParameterNameForType, Schema.SqlDbTypeForType).Value = objectType.Id;
-                command.Parameters.Add(Schema.ParameterNameForCache, Schema.SqlDbTypeForCache).Value = int.MaxValue;
+                command.Parameters.Add(Schema.ParameterNameForCache, Schema.SqlDbTypeForCache).Value = cacheId;
                 var result = command.ExecuteScalar().ToString();
+                
                 var objectId = this.database.ObjectIds.Parse(result);
-                var strategy = new Strategy(this, objectType, objectId, true, false);
-                var domainObject = strategy.GetObject();
 
-                this.ChangeSet.OnCreated(domainObject.Id);
+                if (this.classByObjectId == null)
+                {
+                    this.classByObjectId = new Dictionary<ObjectId, IClass>();
+                }
+
+                if (this.cacheIdByObjectId == null)
+                {
+                    this.cacheIdByObjectId = new Dictionary<ObjectId, int>();
+                }
+
+                this.classByObjectId[objectId] = objectType;
+                this.cacheIdByObjectId[objectId] = cacheId;
+
+                this.ChangeSet.OnCreated(objectId);
+                var strategy = new Strategy(this, objectId);
+                var domainObject = strategy.GetObject();
 
                 return domainObject;
             }
@@ -312,30 +346,109 @@ SELECT " + Schema.ColumnNameForObject + @" = SCOPE_IDENTITY();
 
         public IObject Insert(IClass objectType, ObjectId objectId)
         {
-            throw new NotImplementedException();
-
-            this.ChangeSet.OnCreated(objectId);
-        }
-
-        public IStrategy InstantiateStrategy(ObjectId objectId)
-        {
-            this.LazyConnect();
-
-            if (this.strategyByObjectId != null)
+            if (this.flushDeletedObjects != null)
             {
-                Strategy strategy;
-                if (this.strategyByObjectId.TryGetValue(objectId, out strategy))
-                {
-                    return strategy;
-                }
+                this.Flush();
             }
 
-            return this.FetchStrategy(objectId, false, null);
+            const string CmdText = @"
+BEGIN
+SET IDENTITY_INSERT " + Schema.TableNameForObjects + @" ON;
+INSERT INTO " + Schema.TableNameForObjects + " (" + Schema.ColumnNameForObject + ", " + Schema.ColumnNameForType + ", " + Schema.ColumnNameForCache + @")
+VALUES (" + Schema.ParameterNameForObject + ", " + Schema.ParameterNameForType + @", " + Schema.ParameterNameForCache + @");
+SET IDENTITY_INSERT " + Schema.TableNameForObjects + @" OFF;
+END
+";
+            using (var command = this.CreateCommand(CmdText))
+            {
+                var cacheId = int.MaxValue;
+                command.Parameters.Add(Schema.ParameterNameForObject, Schema.SqlDbTypeForObject).Value = objectId.Value;
+                command.Parameters.Add(Schema.ParameterNameForType, Schema.SqlDbTypeForType).Value = objectType.Id;
+                command.Parameters.Add(Schema.ParameterNameForCache, Schema.SqlDbTypeForCache).Value = cacheId;
+                command.ExecuteNonQuery();
+
+                if (this.classByObjectId == null)
+                {
+                    this.classByObjectId = new Dictionary<ObjectId, IClass>();
+                }
+
+                if (this.cacheIdByObjectId == null)
+                {
+                    this.cacheIdByObjectId = new Dictionary<ObjectId, int>();
+                }
+
+                this.classByObjectId[objectId] = objectType;
+                this.cacheIdByObjectId[objectId] = cacheId;
+
+                this.ChangeSet.OnCreated(objectId);
+                var strategy = new Strategy(this, objectId);
+                var domainObject = strategy.GetObject();
+
+                return domainObject;
+            }
+        }
+
+        IStrategy IDatabaseSession.InstantiateStrategy(ObjectId objectId)
+        {
+            return this.InstantiateStrategy(objectId);
         }
 
         public void Dispose()
         {
             this.Rollback();
+        }
+
+        internal IClass GetObjectType(ObjectId objectId)
+        {
+            return this.classByObjectId[objectId];
+        }
+
+        internal bool IsNew(ObjectId objectId)
+        {
+            return this.newObjects != null && this.newObjects.Contains(objectId);
+        }
+
+        internal bool IsDeleted(ObjectId objectId)
+        {
+            if (this.deletedObjects != null && this.deletedObjects.Contains(objectId))
+            {
+                return true;
+            }
+
+            if (this.classByObjectId != null && this.classByObjectId.ContainsKey(objectId))
+            {
+                return false;
+            }
+
+            this.FetchObject(objectId);
+
+            if (this.deletedObjects != null)
+            {
+                if (this.deletedObjects.Contains(objectId))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        internal void Delete(ObjectId objectId)
+        {
+            if (this.deletedObjects == null)
+            {
+                this.deletedObjects = new HashSet<ObjectId>();
+            }
+
+            if (this.flushDeletedObjects == null)
+            {
+                this.flushDeletedObjects = new HashSet<ObjectId>();
+            }
+
+            this.deletedObjects.Add(objectId);
+            this.flushDeletedObjects.Add(objectId);
+
+            this.ChangeSet.OnDeleted(objectId);
         }
 
         #region Unit
@@ -902,37 +1015,6 @@ SELECT " + Schema.ColumnNameForObject + @" = SCOPE_IDENTITY();
         }
         #endregion
 
-        internal bool? IsDeleted(ObjectId objectId)
-        {
-            if (this.deletedObjects != null)
-            {
-                if (this.deletedObjects.Contains(objectId))
-                {
-                    return true;
-                }
-            }
-
-            // TODO;
-        }
-
-        internal void Delete(ObjectId objectId)
-        {
-            if (this.deletedObjects == null)
-            {
-                this.deletedObjects = new HashSet<ObjectId>();
-            }
-
-            if (this.flushDeletedObjects == null)
-            {
-                this.flushDeletedObjects = new HashSet<ObjectId>();
-            }
-
-            this.deletedObjects.Add(objectId);
-            this.flushDeletedObjects.Add(objectId);
-
-            this.ChangeSet.OnDeleted(objectId);
-        }
-
         internal SqlCommand CreateCommand(string cmdText)
         {
             this.LazyConnect();
@@ -983,21 +1065,7 @@ SELECT " + Schema.ColumnNameForObject + @" = SCOPE_IDENTITY();
 
             this.FlushDeletedObjects();
         }
-
-        internal Strategy InstantiateExistingStrategy(ObjectId objectId)
-        {
-            if (this.strategyByObjectId != null)
-            {
-                Strategy strategy;
-                if (this.strategyByObjectId.TryGetValue(objectId, out strategy))
-                {
-                    return strategy;
-                }
-            }
-
-            return this.FetchStrategy(objectId, false, false);
-        }
-
+        
         private static void SplitFlushAssociations(IEnumerable<ObjectId> flushAssociations, IReadOnlyDictionary<ObjectId, object> roleByAssociation, out IList<ObjectId> flushDeleted, out IList<ObjectId> flushChanged)
         {
             IList<ObjectId> deleted = null;
@@ -1062,7 +1130,29 @@ SELECT " + Schema.ColumnNameForObject + @" = SCOPE_IDENTITY();
             flushChanged = changed;
         }
 
-        private Strategy FetchStrategy(ObjectId objectId, bool isNew, bool? isDeleted)
+        private IStrategy InstantiateStrategy(ObjectId objectId)
+        {
+            if (this.deletedObjects != null && this.deletedObjects.Contains(objectId))
+            {
+                return null;
+            }
+
+            if (this.classByObjectId!=null && this.classByObjectId.ContainsKey(objectId))
+            {
+                return new Strategy(this, objectId);
+            }
+
+            this.FetchObject(objectId);
+
+            if (this.deletedObjects != null && this.deletedObjects.Contains(objectId))
+            {
+                return null;
+            }
+
+            return new Strategy(this, objectId);
+        }
+
+        private void FetchObject(ObjectId objectId)
         {
             var cmdText = @"
 SELECT  " + Schema.ColumnNameForType + ", " + Schema.ColumnNameForCache + @"
@@ -1080,9 +1170,9 @@ WHERE " + Schema.ColumnNameForObject + @" = " + Schema.ParameterNameForObject + 
                         var cache = reader.GetInt32(1);
                         var type = (IClass)this.database.ObjectFactory.MetaPopulation.Find(typeId);
 
-                        if (this.strategyByObjectId == null)
+                        if (this.classByObjectId == null)
                         {
-                            this.strategyByObjectId = new Dictionary<ObjectId, Strategy>();
+                            this.classByObjectId = new Dictionary<ObjectId, IClass>();
                         }
 
                         if (this.cacheIdByObjectId == null)
@@ -1090,16 +1180,19 @@ WHERE " + Schema.ColumnNameForObject + @" = " + Schema.ParameterNameForObject + 
                             this.cacheIdByObjectId = new Dictionary<ObjectId, int>();
                         }
 
-                        var strategy = new Strategy(this, type, objectId, isNew, isDeleted);
-
-                        this.strategyByObjectId[objectId] = strategy;
+                        this.classByObjectId[objectId] = type;
                         this.cacheIdByObjectId[objectId] = cache;
+                    }
+                    else
+                    {
+                        if (this.deletedObjects == null)
+                        {
+                            this.deletedObjects = new HashSet<ObjectId>();
+                        }
 
-                        return strategy;
+                        this.deletedObjects.Add(objectId);
                     }
                 }
-
-                return null;
             }
         }
 
@@ -1236,10 +1329,10 @@ WHERE " + Schema.ColumnNameForRole + @"=" + Schema.ParameterNameForRole + @";
                 var schema = this.database.Schema;
                 var cmdText = @"
 DELETE FROM " + Schema.TableNameForObjects + @"
-WHERE " + Schema.ColumnNameForAssociation + @" = " + Schema.ParameterNameForAssociation;
+WHERE " + Schema.ColumnNameForObject + @" = " + Schema.ParameterNameForObject;
                 using (var command = this.CreateCommand(cmdText))
                 {
-                    var associationParam = command.Parameters.Add(Schema.ParameterNameForAssociation, schema.SqlDbTypeForId);
+                    var associationParam = command.Parameters.Add(Schema.ParameterNameForObject, schema.SqlDbTypeForId);
 
                     foreach (var association in this.flushDeletedObjects)
                     {
@@ -1721,9 +1814,10 @@ AND " + Schema.ColumnNameForRole + @" = " + Schema.ParameterNameForRole + @";
 
         private void Reset()
         {
-            this.strategyByObjectId = null;
+            this.classByObjectId = null;
             this.cacheIdByObjectId = null;
 
+            this.newObjects = null;
             this.deletedObjects = null;
             this.flushDeletedObjects = null;
 

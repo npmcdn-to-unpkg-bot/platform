@@ -54,14 +54,6 @@ namespace Allors.Adapters.Database.Memory
             this.changeSet = new ChangeSet();
         }
 
-        public event SessionCommittedEventHandler Committed;
-
-        public event SessionCommittingEventHandler Committing;
-
-        public event SessionRolledBackEventHandler RolledBack;
-
-        public event SessionRollingBackEventHandler RollingBack;
-
         public abstract IWorkspaceSession WorkspaceSession { get; }
 
         public IDatabaseSession DatabaseSession
@@ -144,12 +136,6 @@ namespace Allors.Adapters.Database.Memory
                 try
                 {
                     this.busyCommittingOrRollingBack = true;
-                    if (this.Committing != null)
-                    {
-                        // Errors thrown in Committing event handlers 
-                        // should have no effect on the current state of the DatabaseSession.
-                        this.Committing(this, new SessionCommittingEventArgs(this));
-                    }
 
                     IList<Strategy> strategiesToDelete = null;
                     foreach (var dictionaryEntry in this.strategyByObjectId)
@@ -184,11 +170,6 @@ namespace Allors.Adapters.Database.Memory
                     }
 
                     this.changeSet = new ChangeSet();
-
-                    if (this.Committed != null)
-                    {
-                        this.Committed(this, new SessionCommittedEventArgs(this));
-                    }
                 }
                 finally
                 {
@@ -204,10 +185,6 @@ namespace Allors.Adapters.Database.Memory
                 try
                 {
                     this.busyCommittingOrRollingBack = true;
-                    if (this.RollingBack != null)
-                    {
-                        this.RollingBack(this, new SessionRollingBackEventArgs(this));
-                    }
 
                     foreach (var strategy in new List<Strategy>(this.strategyByObjectId.Values))
                     {
@@ -225,11 +202,6 @@ namespace Allors.Adapters.Database.Memory
                     }
 
                     this.changeSet = new ChangeSet();
-
-                    if (this.RolledBack != null)
-                    {
-                        this.RolledBack(this, new SessionRolledBackEventArgs(this));
-                    }
                 }
                 finally
                 {

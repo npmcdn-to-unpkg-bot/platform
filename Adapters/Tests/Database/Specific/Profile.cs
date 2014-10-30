@@ -86,7 +86,6 @@ namespace Allors.Adapters.Special
             this.session.Rollback();
             this.database = this.CreateDatabase();
             this.session = this.database.CreateSession();
-            this.AddEvents(this.session);
             this.session.Commit();
         }
 
@@ -138,7 +137,6 @@ namespace Allors.Adapters.Special
                 this.database = this.CreateDatabase();
                 this.database.Init();
                 this.session = this.database.CreateSession();
-                this.AddEvents(this.session);
                 this.session.Commit();
             }
             catch (Exception e)
@@ -152,37 +150,5 @@ namespace Allors.Adapters.Special
         {
             return new ObjectFactory(metaPopulation, typeof(ObjectBase).Assembly, "Allors.Domain");
         }
-
-        #region Events
-        [Conditional("WITH_EVENTS")]
-        private void AddEvents(ISession sessionWithEvents)
-        {
-            sessionWithEvents.Committed += this.SessionCommitted;
-            sessionWithEvents.Committing += this.SessionCommitting;
-            sessionWithEvents.RolledBack += this.SessionRolledBack;
-            sessionWithEvents.RollingBack += this.SessionRollingBack;
-        }
-
-        private void SessionCommitted(object sender, SessionCommittedEventArgs args)
-        {
-            ++this.eventCounter;
-        }
-
-        private void SessionCommitting(object sender, SessionCommittingEventArgs args)
-        {
-            ++this.eventCounter;
-        }
-
-        private void SessionRolledBack(object sender, SessionRolledBackEventArgs args)
-        {
-            ++this.eventCounter;
-        }
-
-        private void SessionRollingBack(object sender, SessionRollingBackEventArgs args)
-        {
-            ++this.eventCounter;
-        }
-
-        #endregion
     }
 }

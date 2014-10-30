@@ -176,7 +176,7 @@ namespace Allors.Adapters.Database.SqlClient
 
         private IObject GetObject(ObjectId objectId)
         {
-            return this.Session.InstantiateExistingStrategy(objectId).GetObject();
+            return new Strategy(this.Session, objectId).GetObject();
         }
     }
 }

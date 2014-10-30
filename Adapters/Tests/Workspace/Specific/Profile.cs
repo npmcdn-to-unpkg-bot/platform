@@ -90,7 +90,6 @@ namespace Allors.Special
             try
             {
                 this.population = this.CreatePopulation();
-                this.AddEvents(this.session);
             }
             catch (Exception e)
             {
@@ -98,36 +97,5 @@ namespace Allors.Special
                 throw;
             }
         }
-        
-        #region Events
-        [Conditional("WITH_EVENTS")]
-        private void AddEvents(ISession sessionWithEvents)
-        {
-            sessionWithEvents.Committed += this.SessionCommitted;
-            sessionWithEvents.Committing += this.SessionCommitting;
-            sessionWithEvents.RolledBack += this.SessionRolledBack;
-            sessionWithEvents.RollingBack += this.SessionRollingBack;
-        }
-
-        private void SessionCommitted(object sender, SessionCommittedEventArgs args)
-        {
-            ++this.eventCounter;
-        }
-
-        private void SessionCommitting(object sender, SessionCommittingEventArgs args)
-        {
-            ++this.eventCounter;
-        }
-
-        private void SessionRolledBack(object sender, SessionRolledBackEventArgs args)
-        {
-            ++this.eventCounter;
-        }
-
-        private void SessionRollingBack(object sender, SessionRollingBackEventArgs args)
-        {
-            ++this.eventCounter;
-        }
-        #endregion
     }
 }

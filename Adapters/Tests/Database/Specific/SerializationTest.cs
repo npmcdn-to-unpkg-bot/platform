@@ -98,7 +98,6 @@ namespace Allors.Adapters.Special
         }
 
         [Test]
-        [Category("Save & Load")]
         public void DifferentVersion()
         {
             foreach (var init in this.Inits)
@@ -196,7 +195,6 @@ namespace Allors.Adapters.Special
         }
 
         [Test]
-        [Category("Save & Load")]
         public void Load()
         {
             foreach (var init in this.Inits)
@@ -231,7 +229,6 @@ namespace Allors.Adapters.Special
         }
 
         [Test]
-        [Category("Save & Load")]
         public void LoadRollback()
         {
             foreach (var init in this.Inits)
@@ -268,7 +265,6 @@ namespace Allors.Adapters.Special
         }
 
         [Test]
-        [Category("Save & Load")]
         public void LoadDifferenMode()
         {
             foreach (var init in this.Inits)
@@ -353,7 +349,6 @@ namespace Allors.Adapters.Special
         }
 
         [Test]
-        [Category("Save & Load")]
         public void LoadDifferenVersion()
         {
             foreach (var init in this.Inits)
@@ -461,7 +456,6 @@ namespace Allors.Adapters.Special
         }
 
         [Test]
-        [Category("Save & Load")]
         public void Save()
         {
             foreach (var init in this.Inits)
@@ -543,7 +537,6 @@ namespace Allors.Adapters.Special
         }
 
         [Test]
-        [Category("Save & Load")]
         public void LoadBinary()
         {
             foreach (var init in this.Inits)

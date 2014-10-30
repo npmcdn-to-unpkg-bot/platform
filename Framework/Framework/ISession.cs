@@ -36,32 +36,6 @@ namespace Allors
     public interface ISession : IDisposable
     {
         /// <summary>
-        /// Occurs when the Commit() method is left.
-        /// Changes to the database are allowed but they occur in a new transaction. 
-        /// </summary>
-        event SessionCommittedEventHandler Committed;
-
-        /// <summary>
-        /// Occurs when the Commit() method is entered.
-        /// Changes to the database are allowed and are within the current transaction. 
-        /// Calls to Commit() and Rollback() during this event are ignored.
-        /// </summary>
-        event SessionCommittingEventHandler Committing;
-
-        /// <summary>
-        /// Occurs when the Rollback() method is entered.
-        /// Changes to the database are allowed but will have no effect because the transaction will be rolled back. 
-        /// Calls to Commit() and Rollback() during this event are ignored.
-        /// </summary>
-        event SessionRollingBackEventHandler RollingBack;
-
-        /// <summary>
-        /// Occurs when the Rollback() method is left.
-        /// Changes to the database are allowed but they occur in a new transaction. 
-        /// </summary>
-        event SessionRolledBackEventHandler RolledBack;
-
-        /// <summary>
         /// Gets the database.
         /// </summary>
         /// <value>The database.</value>
