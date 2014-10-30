@@ -11947,8 +11947,8 @@ namespace Allors.Adapters.Special
                     extent = this.LocalExtent(Classes.C1);
                     extent.Filter.AddContainedIn(RoleTypes.C1C1many2many, inExtent);
 
-                    Assert.AreEqual(3, extent.Count);
-                    this.AssertC1(extent, false, true, true, true);
+                    Assert.AreEqual(2, extent.Count);
+                    this.AssertC1(extent, false, false, true, true);
                     this.AssertC2(extent, false, false, false, false);
                     this.AssertC3(extent, false, false, false, false);
                     this.AssertC4(extent, false, false, false, false);

@@ -92,6 +92,11 @@ namespace Allors.Adapters.Database.SqlClient
                 return this.strategy.ExtentGetCompositeAssociations(this.association);
             }
 
+            if (!this.type.ExistLeafClasses)
+            {
+                return ObjectId.EmptyObjectIds;
+            }
+            
             this.session.Flush();
 
             var statement = new AllorsExtentStatementRootSql(this);
@@ -106,8 +111,6 @@ namespace Allors.Adapters.Database.SqlClient
 
             using (var command = statement.CreateSqlCommand())
             {
-Console.WriteLine("xxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-Console.WriteLine(command.CommandText);
                 using (DbDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())

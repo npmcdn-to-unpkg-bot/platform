@@ -91,10 +91,6 @@ namespace Allors.Adapters.Database.SqlClient
             var objects = new List<ObjectId>();
             using (var command = statement.CreateSqlCommand())
             {
-                Console.WriteLine();
-                Console.WriteLine();
-                Console.WriteLine("-------------------------");
-                Console.WriteLine(command.CommandText);
                 using (DbDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
