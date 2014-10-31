@@ -20,6 +20,7 @@ namespace Allors.Adapters.Special
     using System.Globalization;
     using System.IO;
     using System.Text;
+    using System.Text.RegularExpressions;
     using System.Threading;
     using System.Xml;
 
@@ -34,6 +35,8 @@ namespace Allors.Adapters.Special
     public abstract class SerializationTest
     {
         private static readonly string GuidString = Guid.NewGuid().ToString();
+
+        private string PopulationXml;
 
         #region population
         private C1 c1A;
@@ -97,6 +100,27 @@ namespace Allors.Adapters.Special
             }
         }
 
+        [SetUp]
+        public void SetUp()
+        {
+            var database = new Database.Memory.IntegerId.Database(new Database.Memory.IntegerId.Configuration { ObjectFactory = this.Profile.ObjectFactory });
+            using (var session = database.CreateSession())
+            {
+                this.Populate(session);
+                session.Commit();
+
+                using (var stringWriter = new StringWriter())
+                {
+                    using (var writer = new XmlTextWriter(stringWriter))
+                    {
+                        database.Save(writer);
+                    }
+
+                    this.PopulationXml = stringWriter.ToString();
+                }
+            }
+        }
+
         [Test]
         public void DifferentVersion()
         {
@@ -116,6 +140,8 @@ namespace Allors.Adapters.Special
                     writer.Close();
 
                     var xml = stringWriter.ToString();
+                    this.AssertXml(this.PopulationXml, xml);
+
                     var xmlDocument = new XmlDocument();
                     xmlDocument.LoadXml(xml);
                     var populationElement = (XmlElement)xmlDocument.SelectSingleNode("//population");
@@ -213,7 +239,7 @@ namespace Allors.Adapters.Special
                     writer.Close();
 
                     var xml = stringWriter.ToString();
-                    Console.Out.WriteLine(xml);
+                    this.AssertXml(this.PopulationXml, xml);
 
                     var stringReader = new StringReader(stringWriter.ToString());
                     var reader = new XmlTextReader(stringReader);
@@ -247,7 +273,7 @@ namespace Allors.Adapters.Special
                     writer.Close();
 
                     var xml = stringWriter.ToString();
-                    Console.Out.WriteLine(xml);
+                    this.AssertXml(this.PopulationXml, xml);
 
                     var stringReader = new StringReader(stringWriter.ToString());
                     var reader = new XmlTextReader(stringReader);
@@ -284,9 +310,8 @@ namespace Allors.Adapters.Special
                     population.Save(writer);
                     writer.Close();
 
-                    writer = new XmlTextWriter(@"population.xml", new UTF8Encoding());
-                    population.Save(writer);
-                    writer.Close();
+                    var xml = stringWriter.ToString();
+                    this.AssertXml(this.PopulationXml, xml);
 
                     var stringReader = new StringReader(stringWriter.ToString());
                     var reader = new XmlTextReader(stringReader);
@@ -331,6 +356,9 @@ namespace Allors.Adapters.Special
                 loadSession.Population.Save(writer);
                 writer.Close();
 
+                var xml = stringWriter.ToString();
+                this.AssertXml(this.PopulationXml, xml);
+
                 Thread.CurrentThread.CurrentCulture = readCultureInfo;
                 Thread.CurrentThread.CurrentUICulture = readCultureInfo;
 
@@ -354,8 +382,7 @@ namespace Allors.Adapters.Special
             foreach (var init in this.Inits)
             {
                 init();
-
-
+                
                 var population = this.CreatePopulation();
                 var session = population.CreateSession();
 
@@ -369,9 +396,8 @@ namespace Allors.Adapters.Special
                     population.Save(writer);
                     writer.Close();
 
-                    //writer = new XmlTextWriter(@"population.xml", new UTF8Encoding());
-                    //population.Save(writer);
-                    //writer.Close();
+                    var xml = stringWriter.ToString();
+                    this.AssertXml(this.PopulationXml, xml);
 
                     var xmlDocument = new XmlDocument();
                     xmlDocument.LoadXml(stringWriter.ToString());
@@ -426,10 +452,6 @@ namespace Allors.Adapters.Special
                     savePopulation.Save(writer);
                     writer.Close();
 
-                    //writer = new XmlTextWriter(@"population.xml", Encoding.UTF8);
-                    //saveSession.Population.Save(writer);
-                    //writer.Close();
-
                     var stringReader = new StringReader(stringWriter.ToString());
                     var reader = new XmlTextReader(stringReader);
                     this.Population.Load(reader);
@@ -471,20 +493,17 @@ namespace Allors.Adapters.Special
                     this.Population.Save(writer);
                     writer.Close();
 
-                    //writer = new XmlTextWriter("population.xml", new UTF8Encoding());
-                    //this.Population.Save(writer);
-                    //writer.Close();
-
                     var xml = stringWriter.ToString();
+                    this.AssertXml(this.PopulationXml, xml);
 
                     var stringReader = new StringReader(xml);
                     var reader = new XmlTextReader(stringReader);
 
-                    var savePopulation = this.CreatePopulation();
-                    savePopulation.Load(reader);
+                    var testPopulation = this.CreatePopulation();
+                    testPopulation.Load(reader);
                     reader.Close();
 
-                    using (var saveSession = savePopulation.CreateSession())
+                    using (var saveSession = testPopulation.CreateSession())
                     {
                         this.AssertPopulation(saveSession);
                     }
@@ -514,20 +533,19 @@ namespace Allors.Adapters.Special
                     session.Population.Save(writer);
                     writer.Close();
 
-                    writer = new XmlTextWriter(@"population.xml", new UTF8Encoding());
-                    session.Population.Save(writer);
-                    writer.Close();
-
+                    var xml = stringWriter.ToString();
+                    this.AssertXml(this.PopulationXml, xml); 
+                    
                     Thread.CurrentThread.CurrentCulture = readCultureInfo;
                     Thread.CurrentThread.CurrentUICulture = readCultureInfo;
 
                     var stringReader = new StringReader(stringWriter.ToString());
                     var reader = new XmlTextReader(stringReader);
-                    var savePopulation = this.CreatePopulation();
-                    savePopulation.Load(reader);
+                    var testPopulation = this.CreatePopulation();
+                    testPopulation.Load(reader);
                     reader.Close();
 
-                    var saveSession = savePopulation.CreateSession();
+                    var saveSession = testPopulation.CreateSession();
 
                     this.AssertPopulation(saveSession);
 
@@ -562,10 +580,7 @@ namespace Allors.Adapters.Special
                     var writer = new XmlTextWriter(stringWriter);
                     otherPopulation.Save(writer);
                     writer.Close();
-
-                    var xml = stringWriter.ToString();
-                    Console.WriteLine(xml);
-
+                   
                     var stringReader = new StringReader(stringWriter.ToString());
                     var reader = new XmlTextReader(stringReader);
                     this.Population.Load(reader);
@@ -639,15 +654,15 @@ namespace Allors.Adapters.Special
                 Assert.AreEqual(this.c1A.C1AllorsString, string.Empty);
             }
 
-            Assert.AreEqual(this.c1A.C1AllorsInteger, -1);
-            Assert.AreEqual(this.c1A.C1AllorsDecimal, 1.1m);
-            Assert.AreEqual(this.c1A.C1AllorsFloat, 1.1d);
-            Assert.AreEqual(this.c1A.C1AllorsBoolean, true);
-            Assert.AreEqual(this.c1A.C1AllorsUnique, new Guid(GuidString));
+            Assert.AreEqual(-1, this.c1A.C1AllorsInteger);
+            Assert.AreEqual(1.1m, this.c1A.C1AllorsDecimal);
+            Assert.AreEqual(1.1d, this.c1A.C1AllorsFloat);
+            Assert.AreEqual(true, this.c1A.C1AllorsBoolean);
+            Assert.AreEqual(new Guid(GuidString), this.c1A.C1AllorsUnique);
 
-            Assert.AreEqual(this.c1A.C1AllorsBinary, new byte[0]);
-            Assert.AreEqual(this.c1B.C1AllorsBinary, new byte[] { 0, 1, 2, 3 });
-            Assert.AreEqual(this.c1C.C1AllorsBinary, null);
+            Assert.AreEqual(new byte[0], this.c1A.C1AllorsBinary);
+            Assert.AreEqual(new byte[] { 0, 1, 2, 3 }, this.c1B.C1AllorsBinary);
+            Assert.AreEqual(null, this.c1C.C1AllorsBinary);
 
             Assert.AreEqual("a1", c2ACopy.C1WhereC2one2one.C1AllorsString);
             Assert.AreEqual("a1", c2ACopy.C1WhereC2one2many.C1AllorsString);
@@ -746,6 +761,25 @@ namespace Allors.Adapters.Special
             }
 
             return session.Extent(objectType);
+        }
+
+        private void AssertXml(string expectedXml, string xml)
+        {
+            var xmlDocument = new XmlDocument();
+            xmlDocument.LoadXml(xml);
+
+            var actualXml = this.ToComparableXml(xmlDocument.InnerXml);
+            Assert.AreEqual(this.ToComparableXml(expectedXml), actualXml);
+        }
+
+        private string ToComparableXml(string xml)
+        {
+            var xmlDocument = new XmlDocument();
+            xmlDocument.LoadXml(xml);
+            xmlDocument.Normalize();
+
+            var stripWhiteSpace = new Regex(@">(\n|\s)*<");
+            return stripWhiteSpace.Replace(xmlDocument.InnerXml, "><");
         }
     }
 }

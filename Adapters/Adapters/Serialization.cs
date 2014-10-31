@@ -21,6 +21,7 @@
 namespace Allors.Adapters
 {
     using System;
+    using System.Globalization;
     using System.Xml;
     using Allors.Meta;
     
@@ -164,27 +165,27 @@ namespace Allors.Adapters
         /// <summary>
         /// <see cref="XmlConvert"/> from the xml unit value.
         /// </summary>
-        /// <param name="xmlValue">The XML value.</param>
+        /// <param name="value">The XML value.</param>
         /// <param name="unitTypeTag">The unit type tag.</param>
         /// <returns>The converted value</returns>
-        public static object ReadString(string xmlValue, UnitTags unitTypeTag)
+        public static object ReadString(string value, UnitTags unitTypeTag)
         {
             switch (unitTypeTag)
             {
                 case UnitTags.AllorsString:
-                    return xmlValue;
+                    return value;
                 case UnitTags.AllorsInteger:
-                    return XmlConvert.ToInt32(xmlValue);
+                    return int.Parse(value, NumberFormatInfo.InvariantInfo);
                 case UnitTags.AllorsDecimal:
-                    return XmlConvert.ToDecimal(xmlValue);
+                    return decimal.Parse(value, NumberFormatInfo.InvariantInfo);
                 case UnitTags.AllorsFloat:
-                    return XmlConvert.ToDouble(xmlValue);
+                    return double.Parse(value, NumberFormatInfo.InvariantInfo);
                 case UnitTags.AllorsBoolean:
-                    return XmlConvert.ToBoolean(xmlValue);
+                    return bool.Parse(value);
                 case UnitTags.AllorsUnique:
-                    return XmlConvert.ToGuid(xmlValue);
+                    return Guid.Parse(value);
                 case UnitTags.AllorsBinary:
-                    return Convert.FromBase64String(xmlValue);
+                    return Convert.FromBase64String(value);
                 default:
                     throw new ArgumentException("Unknown Unit IObjectType: " + unitTypeTag);
             }
@@ -203,15 +204,15 @@ namespace Allors.Adapters
                 case UnitTags.AllorsString:
                     return (string)unit;
                 case UnitTags.AllorsInteger:
-                    return XmlConvert.ToString((int)unit);
+                    return ((int)unit).ToString(NumberFormatInfo.InvariantInfo);
                 case UnitTags.AllorsDecimal:
-                    return XmlConvert.ToString((decimal)unit);
+                    return ((decimal)unit).ToString("0.#############################", NumberFormatInfo.InvariantInfo);
                 case UnitTags.AllorsFloat:
-                    return XmlConvert.ToString((double)unit);
+                    return ((double)unit).ToString(NumberFormatInfo.InvariantInfo);
                 case UnitTags.AllorsBoolean:
-                    return XmlConvert.ToString((bool)unit);
+                    return ((bool)unit).ToString(NumberFormatInfo.InvariantInfo);
                 case UnitTags.AllorsUnique:
-                    return XmlConvert.ToString((Guid)unit);
+                    return ((Guid)unit).ToString("N");
                 case UnitTags.AllorsBinary:
                     return Convert.ToBase64String((byte[])unit);
                 default:

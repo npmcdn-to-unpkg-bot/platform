@@ -28,6 +28,8 @@ namespace Allors.Adapters.Special
 
         Action[] Inits { get; }
 
+        IObjectFactory ObjectFactory { get; }
+
         IDatabase CreateDatabase();
 
         IWorkspace CreateWorkspace(IDatabase database);

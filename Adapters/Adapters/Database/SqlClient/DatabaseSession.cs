@@ -231,9 +231,8 @@ SELECT " + Schema.ColumnNameForObject + @" = SCOPE_IDENTITY();
 ";
             using (var command = this.CreateCommand(CmdText))
             {
-                var cacheId = int.MaxValue;
                 command.Parameters.Add(Schema.ParameterNameForType, Schema.SqlDbTypeForType).Value = objectType.Id;
-                command.Parameters.Add(Schema.ParameterNameForCache, Schema.SqlDbTypeForCache).Value = cacheId;
+                command.Parameters.Add(Schema.ParameterNameForCache, Schema.SqlDbTypeForCache).Value = Database.CacheDefaultValue;
                 var result = command.ExecuteScalar().ToString();
                 
                 var objectId = this.database.ObjectIds.Parse(result);
@@ -249,7 +248,7 @@ SELECT " + Schema.ColumnNameForObject + @" = SCOPE_IDENTITY();
                 }
 
                 this.classByObjectId[objectId] = objectType;
-                this.cacheIdByObjectId[objectId] = cacheId;
+                this.cacheIdByObjectId[objectId] = Database.CacheDefaultValue;
 
                 this.ChangeSet.OnCreated(objectId);
                 var strategy = new Strategy(this, objectId);
@@ -361,10 +360,9 @@ END
 ";
             using (var command = this.CreateCommand(CmdText))
             {
-                var cacheId = int.MaxValue;
                 command.Parameters.Add(Schema.ParameterNameForObject, Schema.SqlDbTypeForObject).Value = objectId.Value;
                 command.Parameters.Add(Schema.ParameterNameForType, Schema.SqlDbTypeForType).Value = objectType.Id;
-                command.Parameters.Add(Schema.ParameterNameForCache, Schema.SqlDbTypeForCache).Value = cacheId;
+                command.Parameters.Add(Schema.ParameterNameForCache, Schema.SqlDbTypeForCache).Value = Database.CacheDefaultValue;
                 command.ExecuteNonQuery();
 
                 if (this.classByObjectId == null)
@@ -378,7 +376,7 @@ END
                 }
 
                 this.classByObjectId[objectId] = objectType;
-                this.cacheIdByObjectId[objectId] = cacheId;
+                this.cacheIdByObjectId[objectId] = Database.CacheDefaultValue;
 
                 this.ChangeSet.OnCreated(objectId);
                 var strategy = new Strategy(this, objectId);
@@ -1017,7 +1015,13 @@ END
 
         internal SqlCommand CreateCommand(string cmdText)
         {
-            this.LazyConnect();
+            if (this.connection == null)
+            {
+                this.connection = new SqlConnection(this.database.ConnectionString);
+                this.connection.Open();
+                this.transaction = this.connection.BeginTransaction();
+            }
+
             return new SqlCommand(cmdText, this.connection, this.transaction);
         }
 
@@ -1843,16 +1847,6 @@ AND " + Schema.ColumnNameForRole + @" = " + Schema.ParameterNameForRole + @";
             this.manyToManyTriggerFlushRolesByAssociationType = null;
 
             this.changeSet = null;
-        }
-
-        private void LazyConnect()
-        {
-            if (this.connection == null)
-            {
-                this.connection = new SqlConnection(this.database.ConnectionString);
-                this.connection.Open();
-                this.transaction = this.connection.BeginTransaction();
-            }
         }
 
         private void LazyDisconnect()

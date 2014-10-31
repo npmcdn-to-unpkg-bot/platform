@@ -124,7 +124,9 @@ namespace Allors.Adapters.Database.Memory
                 strategies.Sort(strategySorter);
             }
 
-            foreach (var relationType in this.session.Population.MetaPopulation.RelationTypes)
+            var sortedRelationTypes = new List<IRelationType>(this.session.Population.MetaPopulation.RelationTypes);
+            sortedRelationTypes.Sort(MetaObjectComparer.ById);
+            foreach (var relationType in sortedRelationTypes)
             {
                 var roleType = relationType.RoleType;
 
@@ -141,7 +143,6 @@ namespace Allors.Adapters.Database.Memory
 
                     if (roleType.ObjectType is IUnit)
                     {
-                        var unitType = (IUnit)roleType.ObjectType;
                         foreach (var strategy in strategies)
                         {
                             strategy.SaveUnit(this.writer, roleType);

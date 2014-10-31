@@ -20,13 +20,16 @@ namespace Allors.Adapters.Database.SqlClient
     using System.Collections.Generic;
     using System.Data;
     using System.Data.Common;
-    using System.Text;
+    using System.Data.SqlClient;
     using System.Xml;
 
     using Allors.Meta;
 
     public class Database : IDatabase
     {
+        internal const int CacheDefaultValue = int.MaxValue;
+        private static readonly byte[] EmptyByteArray = new byte[0];
+
         private readonly Guid id;
         private readonly ObjectIds objectIds;
         private readonly IObjectFactory objectFactory;
@@ -38,6 +41,9 @@ namespace Allors.Adapters.Database.SqlClient
         private readonly RoleChecks roleChecks;
 
         private Dictionary<string, object> properties;
+
+        private SqlConnection connection;
+        private SqlTransaction transaction;
 
         public Database(Configuration configuration)
         {
@@ -223,8 +229,6 @@ namespace Allors.Adapters.Database.SqlClient
         {
             this.Init();
 
-            this.LoadPreProcess();
-
             this.LoadAllors(reader);
         }
 
@@ -236,23 +240,30 @@ namespace Allors.Adapters.Database.SqlClient
         #region Serialization
         private void LoadAllors(XmlReader reader)
         {
-            while (reader.Read())
+            try
             {
-                // only process elements, ignore others
-                if (reader.NodeType.Equals(XmlNodeType.Element))
+                while (reader.Read())
                 {
-                    if (reader.Name.Equals(Serialization.Population))
+                    // only process elements, ignore others
+                    if (reader.NodeType.Equals(XmlNodeType.Element))
                     {
-                        Serialization.CheckVersion(reader);
-
-                        if (!reader.IsEmptyElement)
+                        if (reader.Name.Equals(Serialization.Population))
                         {
-                            this.LoadPopulation(reader);
-                        }
+                            Serialization.CheckVersion(reader);
 
-                        return;
+                            if (!reader.IsEmptyElement)
+                            {
+                                this.LoadPopulation(reader);
+                            }
+
+                            return;
+                        }
                     }
                 }
+            }
+            finally
+            {
+                this.Commit();
             }
         }
 
@@ -267,16 +278,29 @@ namespace Allors.Adapters.Database.SqlClient
                         {
                             if (!reader.IsEmptyElement)
                             {
-                                this.LoadMetaTypes(reader);
-                            }
+                                using (var command = this.CreateCommand("SET IDENTITY_INSERT " + Schema.TableNameForObjects + " ON;"))
+                                {
+                                    command.ExecuteNonQuery();
+                                }
 
-                            this.LoadObjectsPostProcess();
+                                try
+                                {
+                                    this.LoadObjectsX(reader);
+                                }
+                                finally
+                                {
+                                    using (var command = this.CreateCommand("SET IDENTITY_INSERT " + Schema.TableNameForObjects + " OFF;"))
+                                    {
+                                        command.ExecuteNonQuery();
+                                    }
+                                }
+                            }
                         }
                         else if (reader.Name.Equals(Serialization.Relations))
                         {
                             if (!reader.IsEmptyElement)
                             {
-                                LoadMetaRelations(reader);
+                                this.LoadRelationTypes(reader);
                             }
                         }
 
@@ -287,11 +311,115 @@ namespace Allors.Adapters.Database.SqlClient
             }
         }
 
+        private void LoadObjectsX(XmlReader reader)
+        {
+            while (reader.Read())
+            {
+                switch (reader.NodeType)
+                {
+                    case XmlNodeType.Element:
+                        if (reader.Name.Equals(Serialization.Database))
+                        {
+                            if (!reader.IsEmptyElement)
+                            {
+                                this.LoadObjectTypes(reader);
+                            }
+                        }
+                        else if (reader.Name.Equals(Serialization.Workspace))
+                        {
+                            throw new Exception("Can not load workspace objects in a database.");
+                        }
+                        else
+                        {
+                            throw new Exception("Unknown child element <" + reader.Name + "> in parent element <" + Serialization.Objects + ">");
+                        }
+
+                        break;
+                    case XmlNodeType.EndElement:
+                        if (!reader.Name.Equals(Serialization.Objects))
+                        {
+                            throw new Exception("Expected closing element </" + Serialization.Objects + ">");
+                        }
+
+                        return;
+                }
+            }
+        }
+
+        private void LoadObjectTypes(XmlReader reader)
+        {
+            while (reader.Read())
+            {
+                switch (reader.NodeType)
+                {
+                    // only process elements, ignore others
+                    case XmlNodeType.Element:
+                        if (reader.Name.Equals(Serialization.ObjectType))
+                        {
+                            if (!reader.IsEmptyElement)
+                            {
+                                this.LoadObjects(reader);
+                            }
+                        }
+                        else
+                        {
+                            throw new Exception("Unknown child element <" + reader.Name + "> in parent element <" + Serialization.Database + ">");
+                        }
+
+                        break;
+                    case XmlNodeType.EndElement:
+                        if (!reader.Name.Equals(Serialization.Database))
+                        {
+                            throw new Exception("Expected closing element </" + Serialization.Database + ">");
+                        }
+
+                        return;
+                }
+            }
+        }
+
+        private void LoadObjects(XmlReader reader)
+        {
+            var metaObjectIdString = reader.GetAttribute(Serialization.Id);
+            var metaObjectId = new Guid(metaObjectIdString);
+
+            var objectType = (IObjectType)this.ObjectFactory.MetaPopulation.Find(metaObjectId);
+
+            if (!reader.IsEmptyElement)
+            {
+                var oidsString = reader.ReadString();
+                var oids = oidsString.Split(Serialization.ObjectsSplitterCharArray);
+
+                for (var i = 0; i < oids.Length; i++)
+                {
+                    var objectId = ObjectIds.Parse(oids[i]);
+
+                    if (!(objectType is IClass))
+                    {
+                        this.OnObjectNotLoaded(metaObjectId, objectId.ToString());
+                    }
+                    else
+                    {
+                        // Objects
+                        var cmdText = @"
+INSERT INTO " + Schema.TableNameForObjects + " (" + Schema.ColumnNameForObject + "," + Schema.ColumnNameForType + "," + Schema.ColumnNameForCache + @")
+VALUES (" + Schema.ParameterNameForObject + "," + Schema.ParameterNameForType + "," + Schema.ParameterNameForCache + ")";
+
+                        using (var command = this.CreateCommand(cmdText))
+                        {
+                            command.Parameters.Add(Schema.ParameterNameForObject, Schema.SqlDbTypeForObject).Value = objectId.Value;
+                            command.Parameters.Add(Schema.ParameterNameForType, Schema.SqlDbTypeForType).Value = objectType.Id;
+                            command.Parameters.Add(Schema.ParameterNameForCache, Schema.SqlDbTypeForCache).Value = CacheDefaultValue;
+
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                }
+            }
+        }
 
         private void LoadCompositeRelations(XmlReader reader, IRelationType relationType)
         {
-            LoadComposites loadComposites = LoadCompositesFactory.Create(relationType);
-
             while (reader.Read())
             {
                 switch (reader.NodeType)
@@ -299,8 +427,8 @@ namespace Allors.Adapters.Database.SqlClient
                     case XmlNodeType.Element:
                         if (reader.Name.Equals(Serialization.Relation))
                         {
-                            var associationStringValue = reader.GetAttribute(Serialization.Association);
-                            var association = int.Parse(associationStringValue);
+                            var associationString = reader.GetAttribute(Serialization.Association);
+                            var association = ObjectIds.Parse(associationString);
 
                             if (reader.IsEmptyElement)
                             {
@@ -309,25 +437,36 @@ namespace Allors.Adapters.Database.SqlClient
                             else
                             {
                                 var value = reader.ReadString();
-                                var rs = value.Split(Serialization.ObjectsSplitterCharArray);
+                                var roleStrings = value.Split(Serialization.ObjectsSplitterCharArray);
 
-                                if ((relationType.RoleType.IsOne && rs.Length > 1))
+                                if (relationType.RoleType.IsOne && roleStrings.Length > 1)
                                 {
-                                    foreach (string r in rs)
+                                    foreach (var roleString in roleStrings)
                                     {
-                                        this.OnRelationNotLoaded(relationType.Id, association.ToString(), r);
+                                        this.OnRelationNotLoaded(relationType.Id, association.ToString(), roleString);
                                     }
                                 }
 
-                                foreach (string r in rs)
+                                foreach (var roleString in roleStrings)
                                 {
-                                    if (!loadComposites.Execute(association, Int32.Parse(r)))
+                                    var role = ObjectIds.Parse(roleString);
+                                    //this.OnRelationNotLoaded(relationType.Id, association.ToString(), r);
+
+                                    var cmdText = @"
+INSERT INTO " + this.Schema.GetTableName(relationType) + " (" + Schema.ColumnNameForAssociation + "," + Schema.ColumnNameForRole + @")
+VALUES (" + Schema.ParameterNameForAssociation + "," + Schema.ParameterNameForRole + ")";
+
+                                    using (var command = this.CreateCommand(cmdText))
                                     {
-                                        this.OnRelationNotLoaded(relationType.Id, association.ToString(), r);
+                                        command.Parameters.Add(Schema.ParameterNameForAssociation, Schema.SqlDbTypeForObject).Value = association.Value;
+                                        command.Parameters.Add(Schema.ParameterNameForRole, Schema.SqlDbTypeForObject).Value = role.Value;
+
+                                        command.ExecuteNonQuery();
                                     }
                                 }
                             }
                         }
+
                         break;
                     case XmlNodeType.EndElement:
                         return;
@@ -335,7 +474,7 @@ namespace Allors.Adapters.Database.SqlClient
             }
         }
 
-        private void LoadMetaRelations(XmlReader reader)
+        private void LoadRelationTypes(XmlReader reader)
         {
             while (reader.Read())
             {
@@ -346,7 +485,7 @@ namespace Allors.Adapters.Database.SqlClient
                         {
                             if (!reader.IsEmptyElement)
                             {
-                                LoadRelations(reader, true);
+                                this.LoadRelations(reader, true);
                             }
                         }
                         else if (reader.Name.Equals(Serialization.RelationTypeComposite))
@@ -360,149 +499,32 @@ namespace Allors.Adapters.Database.SqlClient
                         break;
                     case XmlNodeType.EndElement:
                         return;
-                    default:
-                        // eat everything but elements
-                        break;
-                }
-            }
-        }
-
-        private void LoadMetaTypes(XmlReader reader)
-        {
-            while (reader.Read())
-            {
-                switch (reader.NodeType)
-                {
-                    case XmlNodeType.Element:
-                        if (reader.Name.Equals(Serialization.ObjectType))
-                        {
-                            if (!reader.IsEmptyElement)
-                            {
-                                LoadObjects(reader);
-                            }
-                        }
-                        break;
-                    case XmlNodeType.EndElement:
-                        return;
-                    default:
-                        // eat everything but elements
-                        break;
-                }
-            }
-        }
-
-        private void LoadObjects(XmlReader reader)
-        {
-            string metaObjectIdString = new Guid(reader.GetAttribute(Serialization.Id)).ToString();
-            Guid metaObjectId = new Guid(metaObjectIdString);
-
-            ObjectType type = Domain.FindObjectType(metaObjectId);
-
-            if (!reader.IsEmptyElement)
-            {
-                string oidsString = reader.ReadString();
-                string[] oids = oidsString.Split(Serialization.ObjectsSplitterCharArray);
-
-                for (int i = 0; i < oids.Length; i++)
-                {
-                    ObjectId objectId = allorsObjectIds.Parse(oids[i]);
-
-                    if (type == null || !type.IsConcreteComposite)
-                    {
-                        OnObjectNotLoaded(metaObjectId, objectId.ToString());
-                    }
-                    else
-                    {
-                        string sql = "INSERT INTO " + Schema.OC + " (" + Schema.O + "," + Schema.C + ")\n";
-                        sql += "VALUES (" + Schema.O.Param + "," + Schema.C.Param + ")";
-
-                        using (AllorsCommand command = CreateCommand(sql))
-                        {
-                            command.AddInParameter(Schema.C.Param.Name, type.Id);
-                            command.AddInParameter(Schema.O.Param.Name, objectId.Value);
-
-                            command.ExecuteNonQuery();
-                        }
-                    }
-                }
-            }
-        }
-
-        private void LoadObjectsPostProcess()
-        {
-        }
-
-        private void LoadPreProcess()
-        {
-            DropTable(Schema.AC);
-            DropTable(Schema.RC);
-            CreateTable(Schema.AC);
-            CreateTable(Schema.RC);
-
-            StringBuilder sql = new StringBuilder();
-            sql.Append("INSERT INTO " + Schema.AC + " (" + Schema.A + "," + Schema.C + ")\n");
-            sql.Append("VALUES (" + Schema.A.Param + "," + Schema.C.Param + ")");
-            using (AllorsCommand command = CreateCommand(sql.ToString()))
-            {
-                command.AddInParameter(Schema.ACA.Param, DBNull.Value);
-                command.AddInParameter(Schema.ACC.Param, DBNull.Value);
-
-                foreach (RelationType relation in Domain.RelationTypes)
-                {
-                    foreach (ObjectType concreteClass in relation.AssociationType.ObjectType.ConcreteClasses)
-                    {
-                        command.SetParameterValue(Schema.ACA.Param, relation.Id);
-                        command.SetParameterValue(Schema.ACC.Param, concreteClass.Id);
-                        command.ExecuteNonQuery();
-                    }
-                }
-            }
-
-            sql = new StringBuilder();
-            sql.Append("INSERT INTO " + Schema.RC.StatementName + " (" + Schema.R + "," + Schema.C + ")\n");
-            sql.Append("VALUES (" + Schema.R.Param + "," + Schema.C.Param + ")");
-            using (AllorsCommand command = CreateCommand(sql.ToString()))
-            {
-                command.AddInParameter(Schema.RCR.Param, DBNull.Value);
-                command.AddInParameter(Schema.RCC.Param, DBNull.Value);
-
-                foreach (RelationType relation in Domain.RelationTypes)
-                {
-                    if (relation.RoleType.ObjectType.IsComposite)
-                    {
-                        foreach (ObjectType concreteClass in relation.RoleType.ObjectType.ConcreteClasses)
-                        {
-                            command.SetParameterValue(Schema.RCR.Param, relation.Id);
-                            command.SetParameterValue(Schema.RCC.Param, concreteClass.Id);
-                            command.ExecuteNonQuery();
-                        }
-                    }
                 }
             }
         }
 
         private void LoadRelations(XmlReader reader, bool isUnit)
         {
-            string metaRelationIdString = reader.GetAttribute(Serialization.Id);
-            Guid metaRelationId = new Guid(metaRelationIdString);
+            var metaRelationIdString = reader.GetAttribute(Serialization.Id);
+            var metaRelationId = new Guid(metaRelationIdString);
 
-            RelationType relationType = Domain.FindRelationType(metaRelationId);
+            var relationType = (IRelationType)this.ObjectFactory.MetaPopulation.Find(metaRelationId);
 
             if (!reader.IsEmptyElement)
             {
-                if (relationType == null || relationType.RoleType.ObjectType.IsUnit != isUnit)
+                if (relationType == null || (relationType.RoleType.ObjectType is IUnit) != isUnit)
                 {
-                    CantLoadRelation(reader, metaRelationId);
+                    this.CantLoadRelation(reader, metaRelationId);
                 }
                 else
                 {
-                    if (relationType.RoleType.ObjectType.IsUnit)
+                    if (relationType.RoleType.ObjectType is IUnit)
                     {
-                        LoadUnitRelations(reader, relationType);
+                        this.LoadUnitRelations(reader, relationType);
                     }
                     else
                     {
-                        LoadCompositeRelations(reader, relationType);
+                        this.LoadCompositeRelations(reader, relationType);
                     }
                 }
             }
@@ -510,8 +532,6 @@ namespace Allors.Adapters.Database.SqlClient
 
         private void LoadUnitRelations(XmlReader reader, IRelationType relationType)
         {
-            LoadUnits loadUnits = LoadUnitsFactory.Create(relationType);
-
             while (reader.Read())
             {
                 switch (reader.NodeType)
@@ -519,39 +539,67 @@ namespace Allors.Adapters.Database.SqlClient
                     case XmlNodeType.Element:
                         if (reader.Name.Equals(Serialization.Relation))
                         {
-                            int a = Int32.Parse(reader.GetAttribute(Serialization.Association));
+                            var associationString = reader.GetAttribute(Serialization.Association);
+                            var association = ObjectIds.Parse(associationString);
                             if (reader.IsEmptyElement)
                             {
-                                if (relationType.RoleType.ObjectType.UnitTag == (int)UnitTypeTag.AllorsString)
+                                object role;
+
+                                // OnRelationNotLoaded(relationType.Id, association.ToString(), String.Empty);
+                                if (relationType.RoleType.ObjectType.Id == UnitIds.StringId)
                                 {
-                                    if (!loadUnits.Execute(a, String.Empty))
-                                    {
-                                        OnRelationNotLoaded(relationType.Id, a.ToString(), String.Empty);
-                                    }
+                                    role = string.Empty;
+                                }
+                                else if (relationType.RoleType.ObjectType.Id == UnitIds.BinaryId)
+                                {
+                                    role = EmptyByteArray;
                                 }
                                 else
                                 {
-                                    OnRelationNotLoaded(relationType.Id, a.ToString(), String.Empty);
+                                    this.OnRelationNotLoaded(relationType.Id, association.ToString(), string.Empty);
+                                    continue;
+                                }
+
+                                var cmdText = @"
+INSERT INTO " + this.Schema.GetTableName(relationType) + " (" + Schema.ColumnNameForAssociation + "," + Schema.ColumnNameForRole + @")
+VALUES (" + Schema.ParameterNameForAssociation + "," + Schema.ParameterNameForRole + ")";
+
+                                using (var command = this.CreateCommand(cmdText))
+                                {
+                                    command.Parameters.Add(Schema.ParameterNameForAssociation, Schema.SqlDbTypeForObject).Value = association.Value;
+                                    command.Parameters.Add(Schema.ParameterNameForRole, this.Schema.GetSqlDbType(relationType.RoleType)).Value = role;
+
+                                    command.ExecuteNonQuery();
                                 }
                             }
                             else
                             {
-                                string value = reader.ReadString();
+                                var value = reader.ReadString();
                                 try
                                 {
-                                    UnitTypeTag unitTypeTag = (UnitTypeTag)relationType.RoleType.ObjectType.UnitTag;
-                                    object unit = Serialization.XmlConvertFrom(value, unitTypeTag);
-                                    if (!loadUnits.Execute(a, unit))
+                                    // OnRelationNotLoaded(relationType.Id, association.ToString(), value);
+                                    var unitTypeTag = ((IUnit)relationType.RoleType.ObjectType).UnitTag;
+                                    var role = Serialization.ReadString(value, unitTypeTag);
+
+                                    var cmdText = @"
+INSERT INTO " + this.Schema.GetTableName(relationType) + " (" + Schema.ColumnNameForAssociation + "," + Schema.ColumnNameForRole + @")
+VALUES (" + Schema.ParameterNameForAssociation + "," + Schema.ParameterNameForRole + ")";
+
+                                    using (var command = this.CreateCommand(cmdText))
                                     {
-                                        OnRelationNotLoaded(relationType.Id, a.ToString(), value);
+                                        command.Parameters.Add(Schema.ParameterNameForAssociation, Schema.SqlDbTypeForObject).Value = association.Value;
+                                        command.Parameters.Add(Schema.ParameterNameForRole, this.Schema.GetSqlDbType(relationType.RoleType)).Value = role;
+
+                                        command.ExecuteNonQuery();
                                     }
                                 }
                                 catch
                                 {
-                                    OnRelationNotLoaded(relationType.Id, a.ToString(), value);
+                                    this.OnRelationNotLoaded(relationType.Id, association.ToString(), value);
                                 }
                             }
                         }
+
                         break;
                     case XmlNodeType.EndElement:
                         return;
@@ -561,9 +609,9 @@ namespace Allors.Adapters.Database.SqlClient
 
         private void OnObjectNotLoaded(Guid metaTypeId, string allorsObjectId)
         {
-            if (ObjectNotLoaded != null)
+            if (this.ObjectNotLoaded != null)
             {
-                ObjectNotLoaded(this, new ObjectNotLoadedEventArgs(metaTypeId, allorsObjectId));
+                this.ObjectNotLoaded(this, new ObjectNotLoadedEventArgs(metaTypeId, allorsObjectId));
             }
             else
             {
@@ -573,10 +621,10 @@ namespace Allors.Adapters.Database.SqlClient
 
         private void OnRelationNotLoaded(Guid metaRelationId, string associationObjectId, string roleContents)
         {
-            RelationNotLoadedEventArgs args = new RelationNotLoadedEventArgs(metaRelationId, associationObjectId, roleContents);
-            if (RelationNotLoaded != null)
+            var args = new RelationNotLoadedEventArgs(metaRelationId, associationObjectId, roleContents);
+            if (this.RelationNotLoaded != null)
             {
-                RelationNotLoaded(this, args);
+                this.RelationNotLoaded(this, args);
             }
             else
             {
@@ -584,39 +632,90 @@ namespace Allors.Adapters.Database.SqlClient
             }
         }
 
+        private void CantLoadRelation(XmlReader reader, Guid metaRelationId)
+        {
+            while (reader.Read())
+            {
+                switch (reader.NodeType)
+                {
+                    case XmlNodeType.Element:
+                        if (reader.Name.Equals(Serialization.Relation))
+                        {
+                            var a = reader.GetAttribute(Serialization.Association);
+                            var value = string.Empty;
+
+                            if (!reader.IsEmptyElement)
+                            {
+                                value = reader.ReadString();
+                            }
+
+                            this.OnRelationNotLoaded(metaRelationId, a, value);
+                        }
+
+                        break;
+                    case XmlNodeType.EndElement:
+                        return;
+                }
+            }
+        }
+
         private void SaveAllors(XmlWriter writer)
         {
-            bool writeDocument = false;
-            if (writer.WriteState == WriteState.Start)
+            try
             {
-                writer.WriteStartDocument();
-                writeDocument = true;
+                var writeDocument = false;
+                if (writer.WriteState == WriteState.Start)
+                {
+                    writer.WriteStartDocument();
+                    writer.WriteStartElement(Serialization.Allors);
+                    writeDocument = true;
+                }
+
+                writer.WriteStartElement(Serialization.Population);
+                writer.WriteAttributeString(Serialization.Version, Serialization.VersionCurrent);
+
+                writer.WriteStartElement(Serialization.Objects);
+                writer.WriteStartElement(Serialization.Database);
+                SaveObjects(writer);
+                writer.WriteEndElement();
+                writer.WriteEndElement();
+
+                writer.WriteStartElement(Serialization.Relations);
+                writer.WriteStartElement(Serialization.Database);
+                SaveRelations(writer);
+                writer.WriteEndElement();
+                writer.WriteEndElement();
+
+                writer.WriteEndElement();
+
+                if (writeDocument)
+                {
+                    writer.WriteEndElement();
+                    writer.WriteEndDocument();
+                }
             }
-            writer.WriteStartElement(Serialization.Allors);
-            writer.WriteAttributeString(Serialization.Version, Serialization.VersionCurrent);
-
-            SavePopulation(writer);
-
-            writer.WriteEndElement();
-            if (writeDocument)
+            finally
             {
-                writer.WriteEndDocument();
+                this.Rollback();
             }
         }
 
         private void SaveObjects(XmlWriter writer)
         {
-            foreach (ObjectType type in Domain.ConcreteCompositeTypes)
+            var orderedClasses = new List<IClass>(this.ObjectFactory.MetaPopulation.Classes);
+            orderedClasses.Sort(MetaObjectComparer.ById);
+            foreach (var type in orderedClasses)
             {
-                bool atLeastOne = false;
+                var atLeastOne = false;
 
-                string sql = "SELECT " + Schema.O + "\n";
-                sql += "FROM " + Schema.OC + "\n";
-                sql += "WHERE " + Schema.C + "=" + Schema.C.Param;
+                var cmdText = @"
+SELECT " + Schema.ColumnNameForObject + @"
+FROM " + Schema.TableNameForObjects + @"
+WHERE " + Schema.ColumnNameForType + "=" + Schema.ParameterNameForType;
 
-                using (AllorsCommand command = CreateCommand(sql))
+                using (var command = this.CreateCommand(cmdText))
                 {
-                    command.AddInParameter(Schema.C.Param.Name, type.Id);
+                    command.Parameters.Add(Schema.ParameterNameForType, Schema.SqlDbTypeForType).Value = type.Id;
 
                     using (DbDataReader reader = command.ExecuteReader())
                     {
@@ -634,10 +733,10 @@ namespace Allors.Adapters.Database.SqlClient
                                 writer.WriteString(Serialization.ObjectsSplitter);
                             }
 
-                            long id = Int64.Parse(reader[0].ToString());
-
-                            writer.WriteString(id.ToString());
+                            var role = reader[0].ToString();
+                            writer.WriteString(role);
                         }
+
                         reader.Close();
                     }
                 }
@@ -649,74 +748,61 @@ namespace Allors.Adapters.Database.SqlClient
             }
         }
 
-        private void SavePopulation(XmlWriter writer)
-        {
-            writer.WriteStartElement(Serialization.Population);
-            writer.WriteAttributeString(Serialization.Mode, Serialization.ModeConnected);
-
-            writer.WriteStartElement(Serialization.Objects);
-            SaveObjects(writer);
-            writer.WriteEndElement();
-
-            writer.WriteStartElement(Serialization.Relations);
-            SaveRelations(writer);
-            writer.WriteEndElement();
-
-            writer.WriteEndElement();
-        }
-
         private void SaveRelations(XmlWriter writer)
         {
-            foreach (RelationType relation in Domain.RelationTypes)
+            var orderedRelationType = new List<IRelationType>(this.ObjectFactory.MetaPopulation.RelationTypes);
+            orderedRelationType.Sort(MetaObjectComparer.ById);
+            foreach (var relation in orderedRelationType)
             {
-                if (relation.AssociationType.ObjectType.ConcreteClasses.Length > 0)
+                if (relation.AssociationType.ObjectType.ExistLeafClasses)
                 {
-                    RoleType role = relation.RoleType;
+                    var role = relation.RoleType;
+                    
+                    var cmdText = @"
+SELECT " + Schema.ColumnNameForAssociation + "," + Schema.ColumnNameForRole + @"
+FROM " + this.Schema.GetTableName(relation) + @"
+ORDER BY " + Schema.ColumnNameForAssociation + "," + Schema.ColumnNameForRole;
 
-                    string sql = "";
-                    //TODO: ORDER BY ???
-                    sql += "SELECT " + Schema.A + "," + Schema.R + "\n";
-                    sql += "FROM " + Schema.Table(relation) + "\n";
-                    sql += "ORDER BY " + Schema.A + "\n";
-
-                    using (AllorsCommand command = CreateCommand(sql))
+                    using (var command = this.CreateCommand(cmdText))
                     {
                         using (DbDataReader reader = command.ExecuteReader())
                         {
                             if (role.IsMany)
                             {
-                                using (RelationTypeManyXmlWriter relationTypeManyXmlWriter = new RelationTypeManyXmlWriter(relation, writer))
+                                using (var relationTypeManyXmlWriter = new RelationTypeManyXmlWriter(relation, writer))
                                 {
                                     while (reader.Read())
                                     {
-                                        long a = Int64.Parse(reader[Schema.A.Name].ToString());
-                                        long r = Int64.Parse(reader[Schema.R.Name].ToString());
+                                        var a = long.Parse(reader.GetValue(0).ToString());
+                                        var r = long.Parse(reader.GetValue(1).ToString());
                                         relationTypeManyXmlWriter.Write(a, r);
                                     }
+
                                     relationTypeManyXmlWriter.Close();
                                 }
                             }
                             else
                             {
-                                using (RelationTypeOneXmlWriter relationTypeOneXmlWriter = new RelationTypeOneXmlWriter(relation, writer))
+                                using (var relationTypeOneXmlWriter = new RelationTypeOneXmlWriter(relation, writer))
                                 {
                                     while (reader.Read())
                                     {
-                                        long a = Int64.Parse(reader[Schema.A.Name].ToString());
+                                        var a = long.Parse(reader.GetValue(0).ToString());
 
-                                        if (role.ObjectType.IsUnit)
+                                        if (role.ObjectType is IUnit)
                                         {
-                                            UnitTypeTag unitTypeTag = (UnitTypeTag)role.ObjectType.UnitTag;
-                                            object r = command.GetValue(reader, unitTypeTag, reader.GetOrdinal(Schema.R.Name));
-                                            string content = Serialization.XmlConvertTo(unitTypeTag, r);
+                                            var unitTypeTag = ((IUnit)role.ObjectType).UnitTag;
+                                            var r = reader.GetValue(1);
+                                            var content = Serialization.WriteString(unitTypeTag, r);
                                             relationTypeOneXmlWriter.Write(a, content);
                                         }
                                         else
                                         {
-                                            object r = reader[Schema.R.Name];
-                                            relationTypeOneXmlWriter.Write(a, XmlConvert.ToString(Int64.Parse(r.ToString())));
+                                            var r = reader.GetValue(1);
+                                            relationTypeOneXmlWriter.Write(a, XmlConvert.ToString(long.Parse(r.ToString())));
                                         }
                                     }
+
                                     relationTypeOneXmlWriter.Close();
                                 }
                             }
@@ -727,5 +813,69 @@ namespace Allors.Adapters.Database.SqlClient
         }
 
         #endregion
+
+        private SqlCommand CreateCommand(string cmdText)
+        {
+            if (this.connection == null)
+            {
+                this.connection = new SqlConnection(this.ConnectionString);
+                this.connection.Open();
+                this.transaction = this.connection.BeginTransaction();
+            }
+
+            return new SqlCommand(cmdText, this.connection, this.transaction);
+        }
+
+        private void Commit()
+        {
+            try
+            {
+                if (this.transaction != null)
+                {
+                    this.transaction.Commit();
+                }
+            }
+            finally
+            {
+                this.transaction = null;
+                if (this.connection != null)
+                {
+                    try
+                    {
+                        this.connection.Close();
+                    }
+                    finally
+                    {
+                        this.connection = null;
+                    }
+                }
+            }
+        }
+
+        private void Rollback()
+        {
+            try
+            {
+                if (this.transaction != null)
+                {
+                    this.transaction.Rollback();
+                }
+            }
+            finally
+            {
+                this.transaction = null;
+                if (this.connection != null)
+                {
+                    try
+                    {
+                        this.connection.Close();
+                    }
+                    finally
+                    {
+                        this.connection = null;
+                    }
+                }
+            }
+        }
     }
 }
