@@ -165,7 +165,7 @@ namespace Allors.Adapters.Database.SqlClient
                     statement.Sorter.BuildSelect(this, this.Mapping, statement);
                 }
 
-                statement.Append(" FROM " + this.Mapping.SchemaName + "." + Mapping.TableNameForObjects + " " + alias);
+                statement.Append(" FROM " + this.Session.Database.SchemaName + "." + Mapping.TableNameForObjects + " " + alias);
 
                 statement.AddJoins(alias);
                 statement.AddWhere(alias);
@@ -191,7 +191,7 @@ namespace Allors.Adapters.Database.SqlClient
                     statement.Append("SELECT " + inRole.SingularFullName + "_R." + Mapping.ColumnNameForRole);
                 }
 
-                statement.Append(" FROM " + this.Mapping.SchemaName + "." + Mapping.TableNameForObjects + " " + alias);
+                statement.Append(" FROM " + this.Session.Database.SchemaName + "." + Mapping.TableNameForObjects + " " + alias);
 
                 statement.AddJoins(alias);
                 statement.AddWhere(alias);

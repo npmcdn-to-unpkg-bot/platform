@@ -834,6 +834,6 @@ namespace Allors.Adapters.Special
 
         protected abstract bool ExistProcedure(string schema, string procedure);
 
-        protected abstract ValidateResult GetSchemaValidation(IDatabase database);
+        protected abstract Validation Validate(IDatabase database);
     }
 }

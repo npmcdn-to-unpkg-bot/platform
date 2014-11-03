@@ -80,25 +80,25 @@ namespace Allors.Adapters.Database.SqlClient
         {
             foreach (IRoleType role in this.roles)
             {
-                this.Append(" LEFT OUTER JOIN " + this.Mapping.SchemaName + "." + this.Mapping.GetTableName(role) + " " + role.SingularFullName + "_R");
+                this.Append(" LEFT OUTER JOIN " + this.Session.Database.SchemaName + "." + this.Mapping.GetTableName(role) + " " + role.SingularFullName + "_R");
                 this.Append(" ON " + alias + "." + Mapping.ColumnNameForObject + "=" + role.SingularFullName + "_R." + Mapping.ColumnNameForAssociation);
             }
 
             foreach (IRoleType role in this.roleInstances)
             {
-                this.Append(" LEFT OUTER JOIN " + this.Mapping.SchemaName + "." + Mapping.TableNameForObjects + " " + this.GetJoinName(role));
+                this.Append(" LEFT OUTER JOIN " + this.Session.Database.SchemaName + "." + Mapping.TableNameForObjects + " " + this.GetJoinName(role));
                 this.Append(" ON " + this.GetJoinName(role) + "." + Mapping.ColumnNameForObject + "=" + role.SingularFullName + "_R." + Mapping.ColumnNameForRole + " ");
             }
 
             foreach (IAssociationType association in this.associations)
             {
-                this.Append(" LEFT OUTER JOIN " + this.Mapping.SchemaName + "." + this.Mapping.GetTableName(association) + " " + association.SingularFullName + "_A");
+                this.Append(" LEFT OUTER JOIN " + this.Session.Database.SchemaName + "." + this.Mapping.GetTableName(association) + " " + association.SingularFullName + "_A");
                 this.Append(" ON " + alias + "." + Mapping.ColumnNameForObject + "=" + association.SingularFullName + "_A." + Mapping.ColumnNameForRole);
             }
 
             foreach (IAssociationType association in this.associationInstances)
             {
-                this.Append(" LEFT OUTER JOIN " + this.Mapping.SchemaName + "." + Mapping.TableNameForObjects + " " + this.GetJoinName(association));
+                this.Append(" LEFT OUTER JOIN " + this.Session.Database.SchemaName + "." + Mapping.TableNameForObjects + " " + this.GetJoinName(association));
                 this.Append(" ON " + this.GetJoinName(association) + "." + Mapping.ColumnNameForObject + "=" + association.SingularFullName + "_A." + Mapping.ColumnNameForAssociation + " ");
             }
         }

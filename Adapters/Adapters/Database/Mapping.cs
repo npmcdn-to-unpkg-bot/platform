@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Schema.cs" company="Allors bvba">
+// <copyright file="Mapping.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // Dual Licensed under
 //   a) the Lesser General Public Licence v3 (LGPL)
@@ -27,7 +27,7 @@ namespace Allors.Adapters.Database.SqlClient
     {
         public const string ParamPrefix = "@";
 
-        public const string TableNameForObjects = "_o";
+        public const string TableNameForObjects = "_O";
 
         public const string ColumnNameForObject = "o";
         public const string ColumnNameForType = "t";
@@ -48,11 +48,7 @@ namespace Allors.Adapters.Database.SqlClient
         public const SqlDbType SqlDbTypeForType = SqlDbType.UniqueIdentifier;
         public const SqlDbType SqlDbTypeForCache = SqlDbType.Int;
 
-        private readonly object lockObject = new object();
-
-        private readonly string connectionString;
-        private readonly string schemaName;
-        private readonly IMetaPopulation metaPopulation;
+        private readonly Database database;
 
         private readonly string sqlTypeForId;
         private readonly SqlDbType sqlDbTypeForId;
@@ -61,40 +57,35 @@ namespace Allors.Adapters.Database.SqlClient
         private readonly Dictionary<IRoleType, string> sqlTypeByRoleType;
         private readonly Dictionary<IRoleType, SqlDbType> sqlDbTypeByRoleType;
 
-        private bool? isValid;
-
-        public Mapping(Configuration configuration)
+        public Mapping(Database database)
         {
-            this.metaPopulation = configuration.ObjectFactory.MetaPopulation;
-            this.connectionString = configuration.ConnectionString;
-            this.schemaName = configuration.SchemaName;
-            var objectIds = configuration.ObjectIds;
+            this.database = database;
 
-            if (!this.metaPopulation.IsValid)
+            if (!this.database.MetaPopulation.IsValid)
             {
                 throw new Exception("MetaPopulation is invalid.");
             }
 
-            if (objectIds is ObjectIdsInteger)
+            if (this.database.ObjectIds is ObjectIdsInteger)
             {
-                this.sqlTypeForId = "INT";
+                this.sqlTypeForId = "int";
                 this.sqlDbTypeForId = SqlDbType.Int;
             }
-            else if (objectIds is ObjectIdsLong)
+            else if (this.database.ObjectIds is ObjectIdsLong)
             {
-                this.sqlTypeForId = "BIGINT";
+                this.sqlTypeForId = "bigint";
                 this.sqlDbTypeForId = SqlDbType.BigInt;
             }
             else
             {
-                throw new NotSupportedException("ObjectIds of type " + objectIds.GetType() + " are not supported.");
+                throw new NotSupportedException("ObjectIds of type " + this.database.ObjectIds.GetType() + " are not supported.");
             }
 
             this.tableNameByRelationType = new Dictionary<IRelationType, string>();
             this.sqlTypeByRoleType = new Dictionary<IRoleType, string>();
             this.sqlDbTypeByRoleType = new Dictionary<IRoleType, SqlDbType>();
 
-            foreach (var relationType in this.MetaPopulation.RelationTypes)
+            foreach (var relationType in this.Database.MetaPopulation.RelationTypes)
             {
                 var tableName = "_" + relationType.Id.ToString("N").ToUpperInvariant();
                 SqlDbType sqlDbType;
@@ -111,11 +102,11 @@ namespace Allors.Adapters.Database.SqlClient
                             sqlDbType = SqlDbType.VarBinary;
                             if (roleType.Size != -1 && roleType.Size <= 8000)
                             {
-                                sqlType = "VARBINARY(" + roleType.Size + ")";
+                                sqlType = "varbinary(" + roleType.Size + ")";
                             }
                             else
                             {
-                                sqlType = "VARBINARY(MAX)";
+                                sqlType = "varbinary(MAX)";
                             }
                             
                             break;
@@ -123,25 +114,25 @@ namespace Allors.Adapters.Database.SqlClient
                         case UnitTags.AllorsBoolean:
                             tableName = tableName + "_BOOLEAN";
                             sqlDbType = SqlDbType.Bit;
-                            sqlType = "BIT";
+                            sqlType = "bit";
                             break;
 
                         case UnitTags.AllorsDecimal:
                             tableName = tableName + "_DECIMAL";
                             sqlDbType = SqlDbType.Decimal;
-                            sqlType = "DECIMAL(" + roleType.Precision + "," + roleType.Scale + ") ";
+                            sqlType = "decimal(" + roleType.Precision + "," + roleType.Scale + ") ";
                             break;
 
                         case UnitTags.AllorsFloat:
                             tableName = tableName + "_FLOAT";
                             sqlDbType = SqlDbType.Float;
-                            sqlType = "FLOAT";
+                            sqlType = "float";
                             break;
 
                         case UnitTags.AllorsInteger:
                             tableName = tableName + "_INTEGER";
                             sqlDbType = SqlDbType.Int;
-                            sqlType = "INT";
+                            sqlType = "int";
                             break;
 
                         case UnitTags.AllorsString:
@@ -149,11 +140,11 @@ namespace Allors.Adapters.Database.SqlClient
                             sqlDbType = SqlDbType.NVarChar;
                             if (roleType.Size != -1 && roleType.Size <= 4000)
                             {
-                                sqlType = "NVARCHAR(" + roleType.Size + ")";
+                                sqlType = "nvarchar(" + roleType.Size + ")";
                             }
                             else
                             {
-                                sqlType = "NVARCHAR(MAX)";
+                                sqlType = "nvarchar(MAX)";
                             }
 
                             break;
@@ -161,7 +152,7 @@ namespace Allors.Adapters.Database.SqlClient
                         case UnitTags.AllorsUnique:
                             tableName = tableName + "_UNIQUE";
                             sqlDbType = SqlDbType.UniqueIdentifier;
-                            sqlType = "UNIQUEIDENTIFIER";
+                            sqlType = "uniqueidentifier";
                             break;
 
                         default:
@@ -205,61 +196,18 @@ namespace Allors.Adapters.Database.SqlClient
             }
         }
 
-        public bool IsValid 
+        public Database Database
         {
             get
             {
-                if (!this.isValid.HasValue)
-                {
-                    lock (this.lockObject)
-                    {
-                        if (!this.isValid.HasValue)
-                        {
-                            var validate = this.Validate();
-                            return validate.Success;
-                        }
-                    }
-                }
-
-                return this.isValid.Value;
+                return this.database;
             }
-        }
-
-        public string ConnectionString
-        {
-            get
-            {
-                return this.connectionString;
-            }
-        }
-
-        public IMetaPopulation MetaPopulation
-        {
-            get
-            {
-                return this.metaPopulation;
-            }
-        }
-
-        public string SchemaName
-        {
-            get
-            {
-                return this.schemaName;
-            }
-        }
-
-        public ValidateResult Validate()
-        {
-            var validateResult = new ValidateResult(this);
-            this.isValid = validateResult.Success;
-            return validateResult;
         }
 
         public void Init()
         {
             bool schemaExists;
-            using (var connection = new SqlConnection(this.ConnectionString))
+            using (var connection = new SqlConnection(this.Database.ConnectionString))
             {
                 connection.Open();
                 try
@@ -270,7 +218,7 @@ FROM    information_schema.schemata
 WHERE   schema_name = @schemaName";
                     using (var command = new SqlCommand(cmdText, connection))
                     {
-                        command.Parameters.Add("@schemaName", SqlDbType.NVarChar).Value = this.schemaName;
+                        command.Parameters.Add("@schemaName", SqlDbType.NVarChar).Value = this.Database.SchemaName;
                         var schemaCount = (int)command.ExecuteScalar();
                         schemaExists = schemaCount != 0;
                     }
@@ -282,7 +230,7 @@ WHERE   schema_name = @schemaName";
             }
 
             // CREATE SCHEMA must be in its own batch
-            using (var connection = new SqlConnection(this.ConnectionString))
+            using (var connection = new SqlConnection(this.Database.ConnectionString))
             {
                 connection.Open();
                 try
@@ -290,7 +238,7 @@ WHERE   schema_name = @schemaName";
                     if (!schemaExists)
                     {
                         var cmdText = @"
-CREATE SCHEMA " + this.schemaName;
+CREATE SCHEMA " + this.Database.SchemaName;
                         using (var command = new SqlCommand(cmdText, connection))
                         {
                             command.ExecuteNonQuery();
@@ -303,7 +251,7 @@ CREATE SCHEMA " + this.schemaName;
                 }
             }
 
-            using (var connection = new SqlConnection(this.ConnectionString))
+            using (var connection = new SqlConnection(this.Database.ConnectionString))
             {
                 connection.Open();
                 try
@@ -312,11 +260,11 @@ CREATE SCHEMA " + this.schemaName;
                     var cmdText = @"
 IF EXISTS (SELECT * FROM information_schema.tables WHERE table_name = @tableName AND table_schema = @tableSchema)
 BEGIN
-TRUNCATE TABLE " + this.SchemaName + "." + TableNameForObjects + @"
+TRUNCATE TABLE " + this.Database.SchemaName + "." + TableNameForObjects + @"
 END
 ELSE
 BEGIN
-CREATE TABLE " + this.SchemaName + "." + TableNameForObjects + @"
+CREATE TABLE " + this.Database.SchemaName + "." + TableNameForObjects + @"
 (
 " + ColumnNameForObject + @" " + this.SqlTypeForId + @" IDENTITY(1,1),
 " + ColumnNameForType + @" " + SqlTypeForType + @",
@@ -328,13 +276,13 @@ END
                     using (var command = new SqlCommand(cmdText, connection))
                     {
                         command.Parameters.Add("@tableName", SqlDbType.NVarChar).Value = TableNameForObjects;
-                        command.Parameters.Add("@tableSchema", SqlDbType.NVarChar).Value = this.schemaName;
+                        command.Parameters.Add("@tableSchema", SqlDbType.NVarChar).Value = this.Database.SchemaName;
                         command.ExecuteNonQuery();
                     }
 
 
                     // Relations
-                    foreach (var relationType in this.MetaPopulation.RelationTypes)
+                    foreach (var relationType in this.Database.MetaPopulation.RelationTypes)
                     {
                         var roleType = relationType.RoleType;
 
@@ -349,11 +297,11 @@ END
                         cmdText = @"
 IF EXISTS (SELECT * FROM information_schema.tables WHERE table_name = @tableName AND table_schema = @tableSchema)
 BEGIN
-TRUNCATE TABLE " + this.SchemaName + "." + tableName + @"
+TRUNCATE TABLE " + this.Database.SchemaName + "." + tableName + @"
 END
 ELSE
 BEGIN
-CREATE TABLE " + this.SchemaName + "." + tableName + @"
+CREATE TABLE " + this.Database.SchemaName + "." + tableName + @"
 (
 " + ColumnNameForAssociation + @" " + this.SqlTypeForId + @",
 " + ColumnNameForRole + @" " + sqlTypeForRole + @",
@@ -364,7 +312,7 @@ END
                         using (var command = new SqlCommand(cmdText, connection))
                         {
                             command.Parameters.Add("@tableName", SqlDbType.NVarChar).Value = tableName;
-                            command.Parameters.Add("@tableSchema", SqlDbType.NVarChar).Value = this.schemaName;
+                            command.Parameters.Add("@tableSchema", SqlDbType.NVarChar).Value = this.Database.SchemaName;
                             command.ExecuteNonQuery();
                         }
                     }

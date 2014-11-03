@@ -28,22 +28,30 @@ namespace Allors.Adapters.Database.SqlClient
     public class Database : IDatabase
     {
         internal const int CacheDefaultValue = int.MaxValue;
+
         private static readonly byte[] EmptyByteArray = new byte[0];
+
+        private readonly object lockObject = new object();
 
         private readonly Guid id;
         private readonly ObjectIds objectIds;
         private readonly IObjectFactory objectFactory;
         private readonly IWorkspaceFactory workspaceFactory;
+        private readonly RoleChecks roleChecks;
+        private readonly Mapping mapping;
+
+        // Configuration
         private readonly string connectionString;
         private readonly int commandTimeout;
+        private readonly string schemaName;
         private readonly IsolationLevel isolationLevel;
-        private readonly Mapping mapping;
-        private readonly RoleChecks roleChecks;
 
         private Dictionary<string, object> properties;
 
         private SqlConnection connection;
         private SqlTransaction transaction;
+
+        private bool? isValid;
 
         public Database(Configuration configuration)
         {
@@ -52,12 +60,14 @@ namespace Allors.Adapters.Database.SqlClient
             this.objectIds = configuration.ObjectIds;
             this.objectFactory = configuration.ObjectFactory;
             this.workspaceFactory = configuration.WorkspaceFactory;
-            this.connectionString = configuration.ConnectionString;
-            this.commandTimeout = configuration.CommandTimeout;
-            this.isolationLevel = configuration.IsolationLevel;
             this.roleChecks = new RoleChecks();
 
-            this.mapping = new Mapping(configuration);
+            this.connectionString = configuration.ConnectionString;
+            this.commandTimeout = configuration.CommandTimeout;
+            this.schemaName = configuration.SchemaName;
+            this.isolationLevel = configuration.IsolationLevel;
+            
+            this.mapping = new Mapping(this);
         }
 
         public event ObjectNotLoadedEventHandler ObjectNotLoaded;
@@ -120,6 +130,14 @@ namespace Allors.Adapters.Database.SqlClient
             }
         }
 
+        public string SchemaName
+        {
+            get
+            {
+                return this.schemaName;
+            }
+        }
+
         public int CommandTimeout
         {
             get
@@ -149,6 +167,26 @@ namespace Allors.Adapters.Database.SqlClient
             get
             {
                 return this.mapping;
+            }
+        }
+
+        public bool IsValid
+        {
+            get
+            {
+                if (!this.isValid.HasValue)
+                {
+                    lock (this.lockObject)
+                    {
+                        if (!this.isValid.HasValue)
+                        {
+                            var validate = this.Validate();
+                            return validate.Success;
+                        }
+                    }
+                }
+
+                return this.isValid.Value;
             }
         }
 
@@ -220,7 +258,7 @@ namespace Allors.Adapters.Database.SqlClient
 
         public DatabaseSession CreateSession()
         {
-            if (!this.Mapping.IsValid)
+            if (!this.IsValid)
             {
                 throw new Exception("Schema is invalid.");
             }
@@ -238,6 +276,13 @@ namespace Allors.Adapters.Database.SqlClient
         public void Save(XmlWriter writer)
         {
             this.SaveAllors(writer);
+        }
+
+        public Validation Validate()
+        {
+            var validateResult = new Validation(this);
+            this.isValid = validateResult.Success;
+            return validateResult;
         }
 
         #region Serialization
@@ -281,7 +326,7 @@ namespace Allors.Adapters.Database.SqlClient
                         {
                             if (!reader.IsEmptyElement)
                             {
-                                using (var command = this.CreateCommand("SET IDENTITY_INSERT " + this.Mapping.SchemaName + "." + Mapping.TableNameForObjects + " ON;"))
+                                using (var command = this.CreateCommand("SET IDENTITY_INSERT " + this.SchemaName + "." + Mapping.TableNameForObjects + " ON;"))
                                 {
                                     command.ExecuteNonQuery();
                                 }
@@ -292,7 +337,7 @@ namespace Allors.Adapters.Database.SqlClient
                                 }
                                 finally
                                 {
-                                    using (var command = this.CreateCommand("SET IDENTITY_INSERT " + this.Mapping.SchemaName + "." + Mapping.TableNameForObjects + " OFF;"))
+                                    using (var command = this.CreateCommand("SET IDENTITY_INSERT " + this.SchemaName + "." + Mapping.TableNameForObjects + " OFF;"))
                                     {
                                         command.ExecuteNonQuery();
                                     }
@@ -405,7 +450,7 @@ namespace Allors.Adapters.Database.SqlClient
                     {
                         // Objects
                         var cmdText = @"
-INSERT INTO " + this.Mapping.SchemaName + "." + Mapping.TableNameForObjects + " (" + Mapping.ColumnNameForObject + "," + Mapping.ColumnNameForType + "," + Mapping.ColumnNameForCache + @")
+INSERT INTO " + this.SchemaName + "." + Mapping.TableNameForObjects + " (" + Mapping.ColumnNameForObject + "," + Mapping.ColumnNameForType + "," + Mapping.ColumnNameForCache + @")
 VALUES (" + Mapping.ParameterNameForObject + "," + Mapping.ParameterNameForType + "," + Mapping.ParameterNameForCache + ")";
 
                         using (var command = this.CreateCommand(cmdText))
@@ -456,7 +501,7 @@ VALUES (" + Mapping.ParameterNameForObject + "," + Mapping.ParameterNameForType 
                                     //this.OnRelationNotLoaded(relationType.Id, association.ToString(), r);
 
                                     var cmdText = @"
-INSERT INTO " + this.mapping.SchemaName + "." + this.Mapping.GetTableName(relationType) + " (" + Mapping.ColumnNameForAssociation + "," + Mapping.ColumnNameForRole + @")
+INSERT INTO " + this.SchemaName + "." + this.Mapping.GetTableName(relationType) + " (" + Mapping.ColumnNameForAssociation + "," + Mapping.ColumnNameForRole + @")
 VALUES (" + Mapping.ParameterNameForAssociation + "," + Mapping.ParameterNameForRole + ")";
 
                                     using (var command = this.CreateCommand(cmdText))
@@ -564,7 +609,7 @@ VALUES (" + Mapping.ParameterNameForAssociation + "," + Mapping.ParameterNameFor
                                 }
 
                                 var cmdText = @"
-INSERT INTO " + this.mapping.SchemaName + "." + this.Mapping.GetTableName(relationType) + " (" + Mapping.ColumnNameForAssociation + "," + Mapping.ColumnNameForRole + @")
+INSERT INTO " + this.SchemaName + "." + this.Mapping.GetTableName(relationType) + " (" + Mapping.ColumnNameForAssociation + "," + Mapping.ColumnNameForRole + @")
 VALUES (" + Mapping.ParameterNameForAssociation + "," + Mapping.ParameterNameForRole + ")";
 
                                 using (var command = this.CreateCommand(cmdText))
@@ -585,7 +630,7 @@ VALUES (" + Mapping.ParameterNameForAssociation + "," + Mapping.ParameterNameFor
                                     var role = Serialization.ReadString(value, unitTypeTag);
 
                                     var cmdText = @"
-INSERT INTO " + this.mapping.SchemaName + "." + this.Mapping.GetTableName(relationType) + " (" + Mapping.ColumnNameForAssociation + "," + Mapping.ColumnNameForRole + @")
+INSERT INTO " + this.SchemaName + "." + this.Mapping.GetTableName(relationType) + " (" + Mapping.ColumnNameForAssociation + "," + Mapping.ColumnNameForRole + @")
 VALUES (" + Mapping.ParameterNameForAssociation + "," + Mapping.ParameterNameForRole + ")";
 
                                     using (var command = this.CreateCommand(cmdText))
@@ -713,7 +758,7 @@ VALUES (" + Mapping.ParameterNameForAssociation + "," + Mapping.ParameterNameFor
 
                 var cmdText = @"
 SELECT " + Mapping.ColumnNameForObject + @"
-FROM " + this.Mapping.SchemaName + "." + Mapping.TableNameForObjects + @"
+FROM " + this.SchemaName + "." + Mapping.TableNameForObjects + @"
 WHERE " + Mapping.ColumnNameForType + "=" + Mapping.ParameterNameForType;
 
                 using (var command = this.CreateCommand(cmdText))
@@ -763,7 +808,7 @@ WHERE " + Mapping.ColumnNameForType + "=" + Mapping.ParameterNameForType;
                     
                     var cmdText = @"
 SELECT " + Mapping.ColumnNameForAssociation + "," + Mapping.ColumnNameForRole + @"
-FROM " + this.mapping.SchemaName + "." + this.Mapping.GetTableName(relation) + @"
+FROM " + this.SchemaName + "." + this.Mapping.GetTableName(relation) + @"
 ORDER BY " + Mapping.ColumnNameForAssociation + "," + Mapping.ColumnNameForRole;
 
                     using (var command = this.CreateCommand(cmdText))
@@ -823,10 +868,14 @@ ORDER BY " + Mapping.ColumnNameForAssociation + "," + Mapping.ColumnNameForRole;
             {
                 this.connection = new SqlConnection(this.ConnectionString);
                 this.connection.Open();
-                this.transaction = this.connection.BeginTransaction();
+                this.transaction = this.connection.BeginTransaction(this.IsolationLevel);
             }
 
-            return new SqlCommand(cmdText, this.connection, this.transaction);
+            var command = new SqlCommand(cmdText, this.connection, this.transaction)
+                              {
+                                  CommandTimeout = this.CommandTimeout
+                              };
+            return command;
         }
 
         private void Commit()
