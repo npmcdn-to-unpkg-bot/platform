@@ -30,7 +30,7 @@ namespace Allors.Adapters.Database.SqlClient
             get { return true; }
         }
 
-        internal abstract bool BuildWhere(AllorsExtentFilteredSql extent, Schema schema, AllorsExtentStatementSql statement, IObjectType type, string alias);
+        internal abstract bool BuildWhere(AllorsExtentFilteredSql extent, Mapping mapping, AllorsExtentStatementSql statement, IObjectType type, string alias);
 
         internal abstract void Setup(AllorsExtentFilteredSql extent, AllorsExtentStatementSql statement);
     }

@@ -85,7 +85,7 @@ namespace Allors.Adapters.Database.SqlClient
 
             if (statement.Sorter != null)
             {
-                statement.Sorter.BuildOrder(this.Sorter, this.Session.Database.Schema, statement);
+                statement.Sorter.BuildOrder(this.Sorter, this.Session.Database.Mapping, statement);
             }
 
             var objects = new List<ObjectId>();

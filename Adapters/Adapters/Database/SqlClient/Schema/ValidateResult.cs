@@ -9,16 +9,16 @@ namespace Allors.Adapters.Database.SqlClient
     {
         public readonly HashSet<string> MissingTables;
 
-        private readonly Schema schema;
+        private readonly Mapping mapping;
 
         private readonly HashSet<string> tableNames; 
         private readonly Dictionary<string, Dictionary<string, Column>> columnByColumnNameByTableName;
         
         private readonly bool success;
 
-        public ValidateResult(Schema schema)
+        public ValidateResult(Mapping mapping)
         {
-            this.schema = schema;
+            this.mapping = mapping;
 
             this.tableNames = new HashSet<string>();
             this.columnByColumnNameByTableName = new Dictionary<string, Dictionary<string, Column>>();
@@ -43,7 +43,7 @@ namespace Allors.Adapters.Database.SqlClient
 
         private void FillTableNames()
         {
-            using (var connection = new SqlConnection(this.schema.ConnectionString))
+            using (var connection = new SqlConnection(this.mapping.ConnectionString))
             {
                 connection.Open();
                 try
@@ -60,7 +60,7 @@ WHERE table_schema = @tableSchema";
 
                             using (var command = new SqlCommand(cmdText, connection, transaction))
                             {
-                                command.Parameters.Add("@tableSchema", SqlDbType.NVarChar).Value = this.schema.SchemaName;
+                                command.Parameters.Add("@tableSchema", SqlDbType.NVarChar).Value = this.mapping.SchemaName;
                                 using (var reader = command.ExecuteReader())
                                 {
                                     while (reader.Read())
@@ -87,7 +87,7 @@ WHERE table_schema = @tableSchema";
 
         private void FillColumnByColumnNameByTableName()
         {
-            using (var connection = new SqlConnection(this.schema.ConnectionString))
+            using (var connection = new SqlConnection(this.mapping.ConnectionString))
             {
                 connection.Open();
                 try
@@ -109,7 +109,7 @@ WHERE table_schema = @tableSchema";
 
                             using (var command = new SqlCommand(cmdText, connection, transaction))
                             {
-                                command.Parameters.Add("@tableSchema", SqlDbType.NVarChar).Value = this.schema.SchemaName;
+                                command.Parameters.Add("@tableSchema", SqlDbType.NVarChar).Value = this.mapping.SchemaName;
                                 using (var reader = command.ExecuteReader())
                                 {
                                     var tableNameOrdinal = reader.GetOrdinal("table_name");
@@ -166,9 +166,9 @@ WHERE table_schema = @tableSchema";
         private void Validate()
         {
             // Objects Table
-            if (!this.tableNames.Contains(Schema.TableNameForObjects))
+            if (!this.tableNames.Contains(Mapping.TableNameForObjects))
             {
-                this.MissingTables.Add(Schema.TableNameForObjects);
+                this.MissingTables.Add(Mapping.TableNameForObjects);
             }
         }
 

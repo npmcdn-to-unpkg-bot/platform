@@ -23,7 +23,7 @@ namespace Allors.Adapters.Database.SqlClient
 
     using Allors.Meta;
 
-    public class Schema
+    public class Mapping
     {
         public const string ParamPrefix = "@";
 
@@ -63,7 +63,7 @@ namespace Allors.Adapters.Database.SqlClient
 
         private bool? isValid;
 
-        public Schema(Configuration configuration)
+        public Mapping(Configuration configuration)
         {
             this.metaPopulation = configuration.ObjectFactory.MetaPopulation;
             this.connectionString = configuration.ConnectionString;

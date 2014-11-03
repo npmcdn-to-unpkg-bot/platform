@@ -36,14 +36,14 @@ namespace Allors.Adapters.Database.SqlClient
             this.allorsObject = allorsObject;
         }
 
-        internal override bool BuildWhere(AllorsExtentFilteredSql extent, Schema schema, AllorsExtentStatementSql statement, IObjectType type, string alias)
+        internal override bool BuildWhere(AllorsExtentFilteredSql extent, Mapping mapping, AllorsExtentStatementSql statement, IObjectType type, string alias)
         {
             statement.Append("\n");
             statement.Append("EXISTS(\n");
-            statement.Append("SELECT " + Schema.ColumnNameForObject + "\n");
-            statement.Append("FROM " + schema.SchemaName + "." + schema.GetTableName(this.role) + "\n");
-            statement.Append("WHERE " + Schema.ColumnNameForAssociation + "=" + alias + "." + Schema.ColumnNameForObject + "\n");
-            statement.Append("AND " + Schema.ColumnNameForRole + "=" + this.allorsObject.Strategy.ObjectId + "\n");
+            statement.Append("SELECT " + Mapping.ColumnNameForObject + "\n");
+            statement.Append("FROM " + mapping.SchemaName + "." + mapping.GetTableName(this.role) + "\n");
+            statement.Append("WHERE " + Mapping.ColumnNameForAssociation + "=" + alias + "." + Mapping.ColumnNameForObject + "\n");
+            statement.Append("AND " + Mapping.ColumnNameForRole + "=" + this.allorsObject.Strategy.ObjectId + "\n");
             statement.Append(")\n");
             return this.Include;
         }

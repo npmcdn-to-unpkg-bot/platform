@@ -40,9 +40,9 @@ namespace Allors.Adapters.Database.SqlClient
             this.second = second;
         }
 
-        internal override bool BuildWhere(AllorsExtentFilteredSql extent, Schema schema, AllorsExtentStatementSql statement, IObjectType type, string alias)
+        internal override bool BuildWhere(AllorsExtentFilteredSql extent, Mapping mapping, AllorsExtentStatementSql statement, IObjectType type, string alias)
         {
-            statement.Append(" " + this.role.SingularFullName + "_R." + Schema.ColumnNameForRole + " BETWEEN " + statement.AddParameter(this.first) + " AND " + statement.AddParameter(this.second) + " ");
+            statement.Append(" " + this.role.SingularFullName + "_R." + Mapping.ColumnNameForRole + " BETWEEN " + statement.AddParameter(this.first) + " AND " + statement.AddParameter(this.second) + " ");
             return this.Include;
         }
 

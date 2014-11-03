@@ -36,9 +36,9 @@ namespace Allors.Adapters.Database.SqlClient
             this.greaterThanRole = greaterThanRole;
         }
 
-        internal override bool BuildWhere(AllorsExtentFilteredSql extent, Schema schema, AllorsExtentStatementSql statement, IObjectType type, string alias)
+        internal override bool BuildWhere(AllorsExtentFilteredSql extent, Mapping mapping, AllorsExtentStatementSql statement, IObjectType type, string alias)
         {
-            statement.Append(" " + this.role.SingularFullName + "_R." + Schema.ColumnNameForRole + " > " + this.greaterThanRole.SingularFullName + "_R." + Schema.ColumnNameForRole);
+            statement.Append(" " + this.role.SingularFullName + "_R." + Mapping.ColumnNameForRole + " > " + this.greaterThanRole.SingularFullName + "_R." + Mapping.ColumnNameForRole);
             return this.Include;
         }
 

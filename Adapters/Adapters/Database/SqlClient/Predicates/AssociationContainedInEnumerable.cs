@@ -38,7 +38,7 @@ namespace Allors.Adapters.Database.SqlClient
             this.enumerable = enumerable;
         }
 
-        internal override bool BuildWhere(AllorsExtentFilteredSql extent, Schema schema, AllorsExtentStatementSql statement, IObjectType type, string alias)
+        internal override bool BuildWhere(AllorsExtentFilteredSql extent, Mapping mapping, AllorsExtentStatementSql statement, IObjectType type, string alias)
         {
             var inStatement = new StringBuilder("0");
             foreach (var inObject in this.enumerable)
@@ -47,8 +47,8 @@ namespace Allors.Adapters.Database.SqlClient
                 inStatement.Append(inObject.Id);
             }
 
-            statement.Append(" (" + this.association.SingularFullName + "_A." + Schema.ColumnNameForAssociation + " IS NOT NULL AND ");
-            statement.Append(" " + this.association.SingularFullName + "_A." + Schema.ColumnNameForAssociation + " IN (\n");
+            statement.Append(" (" + this.association.SingularFullName + "_A." + Mapping.ColumnNameForAssociation + " IS NOT NULL AND ");
+            statement.Append(" " + this.association.SingularFullName + "_A." + Mapping.ColumnNameForAssociation + " IN (\n");
             statement.Append(inStatement.ToString());
             statement.Append(" ))\n");
 

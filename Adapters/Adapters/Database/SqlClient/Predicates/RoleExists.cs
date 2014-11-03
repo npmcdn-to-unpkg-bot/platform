@@ -34,9 +34,9 @@ namespace Allors.Adapters.Database.SqlClient
             this.role = role;
         }
 
-        internal override bool BuildWhere(AllorsExtentFilteredSql extent, Schema schema, AllorsExtentStatementSql statement, IObjectType type, string alias)
+        internal override bool BuildWhere(AllorsExtentFilteredSql extent, Mapping mapping, AllorsExtentStatementSql statement, IObjectType type, string alias)
         {
-            statement.Append(" " + role.SingularFullName + "_R." + Schema.ColumnNameForRole + " IS NOT NULL");
+            statement.Append(" " + role.SingularFullName + "_R." + Mapping.ColumnNameForRole + " IS NOT NULL");
             return Include;
         }
 

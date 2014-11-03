@@ -49,7 +49,7 @@ namespace Allors.Adapters.Database.SqlClient
             }
         }
 
-        internal void BuildOrder(AllorsExtentSortSql sorter, Schema schema, AllorsExtentStatementSql statement)
+        internal void BuildOrder(AllorsExtentSortSql sorter, Mapping mapping, AllorsExtentStatementSql statement)
         {
             if (sorter.Equals(this))
             {
@@ -64,16 +64,16 @@ namespace Allors.Adapters.Database.SqlClient
 
             if (this.subSorter != null)
             {
-                this.subSorter.BuildOrder(sorter, schema, statement);
+                this.subSorter.BuildOrder(sorter, mapping, statement);
             }
         }
 
-        internal void BuildSelect(AllorsExtentFilteredSql extent, Schema schema, AllorsExtentStatementSql statement)
+        internal void BuildSelect(AllorsExtentFilteredSql extent, Mapping mapping, AllorsExtentStatementSql statement)
         {
-            statement.Append(" , " + this.roleType.SingularFullName + "_R." + Schema.ColumnNameForRole + " ");
+            statement.Append(" , " + this.roleType.SingularFullName + "_R." + Mapping.ColumnNameForRole + " ");
             if (this.subSorter != null)
             {
-                this.subSorter.BuildSelect(extent, schema, statement);
+                this.subSorter.BuildSelect(extent, mapping, statement);
             }
         }
 

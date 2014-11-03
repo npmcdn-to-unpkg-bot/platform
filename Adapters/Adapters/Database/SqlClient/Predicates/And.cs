@@ -29,7 +29,7 @@ namespace Allors.Adapters.Database.SqlClient
         {
         }
 
-        internal override bool BuildWhere(AllorsExtentFilteredSql extent, Schema schema, AllorsExtentStatementSql statement, IObjectType type, string alias)
+        internal override bool BuildWhere(AllorsExtentFilteredSql extent, Mapping mapping, AllorsExtentStatementSql statement, IObjectType type, string alias)
         {
             if (this.Include)
             {
@@ -44,7 +44,7 @@ namespace Allors.Adapters.Database.SqlClient
                         statement.Append(" AND ");
                     }
 
-                    if (filter.BuildWhere(extent, schema, statement, type, alias))
+                    if (filter.BuildWhere(extent, mapping, statement, type, alias))
                     {
                         atLeastOneChildIncluded = true;
                     }

@@ -36,20 +36,20 @@ namespace Allors.Adapters.Database.SqlClient
             this.instanceClasses = instanceClasses;
         }
 
-        internal override bool BuildWhere(AllorsExtentFilteredSql extent, Schema schema, AllorsExtentStatementSql statement, IObjectType type, string alias)
+        internal override bool BuildWhere(AllorsExtentFilteredSql extent, Mapping mapping, AllorsExtentStatementSql statement, IObjectType type, string alias)
         {
             if (this.instanceClasses.Length == 1)
             {
-                statement.Append(" (" + statement.GetJoinName(this.association) + "." + Schema.ColumnNameForType + " IS NOT NULL AND ");
-                statement.Append(" " + statement.GetJoinName(this.association) + "." + Schema.ColumnNameForType + "=" + statement.AddParameter(this.instanceClasses[0].Id) + ")");
+                statement.Append(" (" + statement.GetJoinName(this.association) + "." + Mapping.ColumnNameForType + " IS NOT NULL AND ");
+                statement.Append(" " + statement.GetJoinName(this.association) + "." + Mapping.ColumnNameForType + "=" + statement.AddParameter(this.instanceClasses[0].Id) + ")");
             }
             else if (this.instanceClasses.Length > 1)
             {
                 statement.Append(" ( ");
                 for (var i = 0; i < this.instanceClasses.Length; i++)
                 {
-                    statement.Append(" (" + statement.GetJoinName(this.association) + "." + Schema.ColumnNameForType + " IS NOT NULL AND ");
-                    statement.Append(" " + statement.GetJoinName(this.association) + "." + Schema.ColumnNameForType + "=" + statement.AddParameter(this.instanceClasses[i].Id) + ")");
+                    statement.Append(" (" + statement.GetJoinName(this.association) + "." + Mapping.ColumnNameForType + " IS NOT NULL AND ");
+                    statement.Append(" " + statement.GetJoinName(this.association) + "." + Mapping.ColumnNameForType + "=" + statement.AddParameter(this.instanceClasses[i].Id) + ")");
                     if (i < this.instanceClasses.Length - 1)
                     {
                         statement.Append(" OR ");

@@ -38,9 +38,9 @@ namespace Allors.Adapters.Database.SqlClient
             this.str = str;
         }
 
-        internal override bool BuildWhere(AllorsExtentFilteredSql extent, Schema schema, AllorsExtentStatementSql statement, IObjectType type, string alias)
+        internal override bool BuildWhere(AllorsExtentFilteredSql extent, Mapping mapping, AllorsExtentStatementSql statement, IObjectType type, string alias)
         {
-            statement.Append(" " + role.SingularFullName + "_R." + Schema.ColumnNameForRole + " LIKE " + statement.AddParameter(this.str));
+            statement.Append(" " + role.SingularFullName + "_R." + Mapping.ColumnNameForRole + " LIKE " + statement.AddParameter(this.str));
             return this.Include;
         }
 

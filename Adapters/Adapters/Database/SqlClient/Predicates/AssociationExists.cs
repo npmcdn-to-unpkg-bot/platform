@@ -34,9 +34,9 @@ namespace Allors.Adapters.Database.SqlClient
             this.association = association;
         }
 
-        internal override bool BuildWhere(AllorsExtentFilteredSql extent, Schema schema, AllorsExtentStatementSql statement, IObjectType type, string alias)
+        internal override bool BuildWhere(AllorsExtentFilteredSql extent, Mapping mapping, AllorsExtentStatementSql statement, IObjectType type, string alias)
         {
-            statement.Append(" " + this.association.SingularFullName + "_A." + Schema.ColumnNameForAssociation + " IS NOT NULL");
+            statement.Append(" " + this.association.SingularFullName + "_A." + Mapping.ColumnNameForAssociation + " IS NOT NULL");
             return this.Include;
         }
 

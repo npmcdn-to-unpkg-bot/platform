@@ -36,13 +36,13 @@ namespace Allors.Adapters.Database.SqlClient
             this.inExtent = (AllorsExtentSql) inExtent;
         }
 
-        internal override bool BuildWhere(AllorsExtentFilteredSql extent, Schema schema, AllorsExtentStatementSql statement, IObjectType type, string alias)
+        internal override bool BuildWhere(AllorsExtentFilteredSql extent, Mapping mapping, AllorsExtentStatementSql statement, IObjectType type, string alias)
         {
             AllorsExtentStatementSql inStatement = statement.CreateChild(inExtent, association);
             inStatement.UseRole(association.RoleType);
 
-            statement.Append(" (" + association.SingularFullName + "_A." + Schema.ColumnNameForRole + " IS NOT NULL AND ");
-            statement.Append(" " + association.SingularFullName + "_A." + Schema.ColumnNameForRole + " IN (\n");
+            statement.Append(" (" + association.SingularFullName + "_A." + Mapping.ColumnNameForRole + " IS NOT NULL AND ");
+            statement.Append(" " + association.SingularFullName + "_A." + Mapping.ColumnNameForRole + " IN (\n");
             inExtent.BuildSql(inStatement);
             statement.Append(" ))\n");
             return Include;

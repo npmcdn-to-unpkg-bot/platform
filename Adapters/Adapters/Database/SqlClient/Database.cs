@@ -37,7 +37,7 @@ namespace Allors.Adapters.Database.SqlClient
         private readonly string connectionString;
         private readonly int commandTimeout;
         private readonly IsolationLevel isolationLevel;
-        private readonly Schema schema;
+        private readonly Mapping mapping;
         private readonly RoleChecks roleChecks;
 
         private Dictionary<string, object> properties;
@@ -57,7 +57,7 @@ namespace Allors.Adapters.Database.SqlClient
             this.isolationLevel = configuration.IsolationLevel;
             this.roleChecks = new RoleChecks();
 
-            this.schema = new Schema(configuration);
+            this.mapping = new Mapping(configuration);
         }
 
         public event ObjectNotLoadedEventHandler ObjectNotLoaded;
@@ -144,11 +144,11 @@ namespace Allors.Adapters.Database.SqlClient
             }
         }
 
-        public Schema Schema
+        public Mapping Mapping
         {
             get
             {
-                return this.schema;
+                return this.mapping;
             }
         }
 
@@ -194,7 +194,7 @@ namespace Allors.Adapters.Database.SqlClient
 
         public void Init()
         {
-            this.Schema.Init();
+            this.Mapping.Init();
             this.properties = null;
         }
         
@@ -220,7 +220,7 @@ namespace Allors.Adapters.Database.SqlClient
 
         public DatabaseSession CreateSession()
         {
-            if (!this.Schema.IsValid)
+            if (!this.Mapping.IsValid)
             {
                 throw new Exception("Schema is invalid.");
             }
@@ -281,7 +281,7 @@ namespace Allors.Adapters.Database.SqlClient
                         {
                             if (!reader.IsEmptyElement)
                             {
-                                using (var command = this.CreateCommand("SET IDENTITY_INSERT " + this.Schema.SchemaName + "." + Schema.TableNameForObjects + " ON;"))
+                                using (var command = this.CreateCommand("SET IDENTITY_INSERT " + this.Mapping.SchemaName + "." + Mapping.TableNameForObjects + " ON;"))
                                 {
                                     command.ExecuteNonQuery();
                                 }
@@ -292,7 +292,7 @@ namespace Allors.Adapters.Database.SqlClient
                                 }
                                 finally
                                 {
-                                    using (var command = this.CreateCommand("SET IDENTITY_INSERT " + this.Schema.SchemaName + "." + Schema.TableNameForObjects + " OFF;"))
+                                    using (var command = this.CreateCommand("SET IDENTITY_INSERT " + this.Mapping.SchemaName + "." + Mapping.TableNameForObjects + " OFF;"))
                                     {
                                         command.ExecuteNonQuery();
                                     }
@@ -405,14 +405,14 @@ namespace Allors.Adapters.Database.SqlClient
                     {
                         // Objects
                         var cmdText = @"
-INSERT INTO " + this.Schema.SchemaName + "." + Schema.TableNameForObjects + " (" + Schema.ColumnNameForObject + "," + Schema.ColumnNameForType + "," + Schema.ColumnNameForCache + @")
-VALUES (" + Schema.ParameterNameForObject + "," + Schema.ParameterNameForType + "," + Schema.ParameterNameForCache + ")";
+INSERT INTO " + this.Mapping.SchemaName + "." + Mapping.TableNameForObjects + " (" + Mapping.ColumnNameForObject + "," + Mapping.ColumnNameForType + "," + Mapping.ColumnNameForCache + @")
+VALUES (" + Mapping.ParameterNameForObject + "," + Mapping.ParameterNameForType + "," + Mapping.ParameterNameForCache + ")";
 
                         using (var command = this.CreateCommand(cmdText))
                         {
-                            command.Parameters.Add(Schema.ParameterNameForObject, Schema.SqlDbTypeForObject).Value = objectId.Value;
-                            command.Parameters.Add(Schema.ParameterNameForType, Schema.SqlDbTypeForType).Value = objectType.Id;
-                            command.Parameters.Add(Schema.ParameterNameForCache, Schema.SqlDbTypeForCache).Value = CacheDefaultValue;
+                            command.Parameters.Add(Mapping.ParameterNameForObject, Mapping.SqlDbTypeForObject).Value = objectId.Value;
+                            command.Parameters.Add(Mapping.ParameterNameForType, Mapping.SqlDbTypeForType).Value = objectType.Id;
+                            command.Parameters.Add(Mapping.ParameterNameForCache, Mapping.SqlDbTypeForCache).Value = CacheDefaultValue;
 
                             command.ExecuteNonQuery();
                         }
@@ -456,13 +456,13 @@ VALUES (" + Schema.ParameterNameForObject + "," + Schema.ParameterNameForType + 
                                     //this.OnRelationNotLoaded(relationType.Id, association.ToString(), r);
 
                                     var cmdText = @"
-INSERT INTO " + this.schema.SchemaName + "." + this.Schema.GetTableName(relationType) + " (" + Schema.ColumnNameForAssociation + "," + Schema.ColumnNameForRole + @")
-VALUES (" + Schema.ParameterNameForAssociation + "," + Schema.ParameterNameForRole + ")";
+INSERT INTO " + this.mapping.SchemaName + "." + this.Mapping.GetTableName(relationType) + " (" + Mapping.ColumnNameForAssociation + "," + Mapping.ColumnNameForRole + @")
+VALUES (" + Mapping.ParameterNameForAssociation + "," + Mapping.ParameterNameForRole + ")";
 
                                     using (var command = this.CreateCommand(cmdText))
                                     {
-                                        command.Parameters.Add(Schema.ParameterNameForAssociation, Schema.SqlDbTypeForObject).Value = association.Value;
-                                        command.Parameters.Add(Schema.ParameterNameForRole, Schema.SqlDbTypeForObject).Value = role.Value;
+                                        command.Parameters.Add(Mapping.ParameterNameForAssociation, Mapping.SqlDbTypeForObject).Value = association.Value;
+                                        command.Parameters.Add(Mapping.ParameterNameForRole, Mapping.SqlDbTypeForObject).Value = role.Value;
 
                                         command.ExecuteNonQuery();
                                     }
@@ -564,13 +564,13 @@ VALUES (" + Schema.ParameterNameForAssociation + "," + Schema.ParameterNameForRo
                                 }
 
                                 var cmdText = @"
-INSERT INTO " + this.schema.SchemaName + "." + this.Schema.GetTableName(relationType) + " (" + Schema.ColumnNameForAssociation + "," + Schema.ColumnNameForRole + @")
-VALUES (" + Schema.ParameterNameForAssociation + "," + Schema.ParameterNameForRole + ")";
+INSERT INTO " + this.mapping.SchemaName + "." + this.Mapping.GetTableName(relationType) + " (" + Mapping.ColumnNameForAssociation + "," + Mapping.ColumnNameForRole + @")
+VALUES (" + Mapping.ParameterNameForAssociation + "," + Mapping.ParameterNameForRole + ")";
 
                                 using (var command = this.CreateCommand(cmdText))
                                 {
-                                    command.Parameters.Add(Schema.ParameterNameForAssociation, Schema.SqlDbTypeForObject).Value = association.Value;
-                                    command.Parameters.Add(Schema.ParameterNameForRole, this.Schema.GetSqlDbType(relationType.RoleType)).Value = role;
+                                    command.Parameters.Add(Mapping.ParameterNameForAssociation, Mapping.SqlDbTypeForObject).Value = association.Value;
+                                    command.Parameters.Add(Mapping.ParameterNameForRole, this.Mapping.GetSqlDbType(relationType.RoleType)).Value = role;
 
                                     command.ExecuteNonQuery();
                                 }
@@ -585,13 +585,13 @@ VALUES (" + Schema.ParameterNameForAssociation + "," + Schema.ParameterNameForRo
                                     var role = Serialization.ReadString(value, unitTypeTag);
 
                                     var cmdText = @"
-INSERT INTO " + this.schema.SchemaName + "." + this.Schema.GetTableName(relationType) + " (" + Schema.ColumnNameForAssociation + "," + Schema.ColumnNameForRole + @")
-VALUES (" + Schema.ParameterNameForAssociation + "," + Schema.ParameterNameForRole + ")";
+INSERT INTO " + this.mapping.SchemaName + "." + this.Mapping.GetTableName(relationType) + " (" + Mapping.ColumnNameForAssociation + "," + Mapping.ColumnNameForRole + @")
+VALUES (" + Mapping.ParameterNameForAssociation + "," + Mapping.ParameterNameForRole + ")";
 
                                     using (var command = this.CreateCommand(cmdText))
                                     {
-                                        command.Parameters.Add(Schema.ParameterNameForAssociation, Schema.SqlDbTypeForObject).Value = association.Value;
-                                        command.Parameters.Add(Schema.ParameterNameForRole, this.Schema.GetSqlDbType(relationType.RoleType)).Value = role;
+                                        command.Parameters.Add(Mapping.ParameterNameForAssociation, Mapping.SqlDbTypeForObject).Value = association.Value;
+                                        command.Parameters.Add(Mapping.ParameterNameForRole, this.Mapping.GetSqlDbType(relationType.RoleType)).Value = role;
 
                                         command.ExecuteNonQuery();
                                     }
@@ -712,13 +712,13 @@ VALUES (" + Schema.ParameterNameForAssociation + "," + Schema.ParameterNameForRo
                 var atLeastOne = false;
 
                 var cmdText = @"
-SELECT " + Schema.ColumnNameForObject + @"
-FROM " + this.Schema.SchemaName + "." + Schema.TableNameForObjects + @"
-WHERE " + Schema.ColumnNameForType + "=" + Schema.ParameterNameForType;
+SELECT " + Mapping.ColumnNameForObject + @"
+FROM " + this.Mapping.SchemaName + "." + Mapping.TableNameForObjects + @"
+WHERE " + Mapping.ColumnNameForType + "=" + Mapping.ParameterNameForType;
 
                 using (var command = this.CreateCommand(cmdText))
                 {
-                    command.Parameters.Add(Schema.ParameterNameForType, Schema.SqlDbTypeForType).Value = type.Id;
+                    command.Parameters.Add(Mapping.ParameterNameForType, Mapping.SqlDbTypeForType).Value = type.Id;
 
                     using (DbDataReader reader = command.ExecuteReader())
                     {
@@ -762,9 +762,9 @@ WHERE " + Schema.ColumnNameForType + "=" + Schema.ParameterNameForType;
                     var role = relation.RoleType;
                     
                     var cmdText = @"
-SELECT " + Schema.ColumnNameForAssociation + "," + Schema.ColumnNameForRole + @"
-FROM " + this.schema.SchemaName + "." + this.Schema.GetTableName(relation) + @"
-ORDER BY " + Schema.ColumnNameForAssociation + "," + Schema.ColumnNameForRole;
+SELECT " + Mapping.ColumnNameForAssociation + "," + Mapping.ColumnNameForRole + @"
+FROM " + this.mapping.SchemaName + "." + this.Mapping.GetTableName(relation) + @"
+ORDER BY " + Mapping.ColumnNameForAssociation + "," + Mapping.ColumnNameForRole;
 
                     using (var command = this.CreateCommand(cmdText))
                     {

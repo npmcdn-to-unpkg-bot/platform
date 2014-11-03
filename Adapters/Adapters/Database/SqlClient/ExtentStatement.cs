@@ -56,9 +56,9 @@ namespace Allors.Adapters.Database.SqlClient
 
         internal abstract bool IsRoot { get; }
 
-        internal Schema Schema
+        internal Mapping Mapping
         {
-            get { return Session.Database.Schema; }
+            get { return Session.Database.Mapping; }
         }
 
         protected DatabaseSession Session
@@ -80,26 +80,26 @@ namespace Allors.Adapters.Database.SqlClient
         {
             foreach (IRoleType role in this.roles)
             {
-                this.Append(" LEFT OUTER JOIN " + this.Schema.SchemaName + "." + Schema.GetTableName(role) + " " + role.SingularFullName + "_R");
-                this.Append(" ON " + alias + "." + Schema.ColumnNameForObject + "=" + role.SingularFullName + "_R." + Schema.ColumnNameForAssociation);
+                this.Append(" LEFT OUTER JOIN " + this.Mapping.SchemaName + "." + this.Mapping.GetTableName(role) + " " + role.SingularFullName + "_R");
+                this.Append(" ON " + alias + "." + Mapping.ColumnNameForObject + "=" + role.SingularFullName + "_R." + Mapping.ColumnNameForAssociation);
             }
 
             foreach (IRoleType role in this.roleInstances)
             {
-                this.Append(" LEFT OUTER JOIN " + this.Schema.SchemaName + "." + Schema.TableNameForObjects + " " + this.GetJoinName(role));
-                this.Append(" ON " + this.GetJoinName(role) + "." + Schema.ColumnNameForObject + "=" + role.SingularFullName + "_R." + Schema.ColumnNameForRole + " ");
+                this.Append(" LEFT OUTER JOIN " + this.Mapping.SchemaName + "." + Mapping.TableNameForObjects + " " + this.GetJoinName(role));
+                this.Append(" ON " + this.GetJoinName(role) + "." + Mapping.ColumnNameForObject + "=" + role.SingularFullName + "_R." + Mapping.ColumnNameForRole + " ");
             }
 
             foreach (IAssociationType association in this.associations)
             {
-                this.Append(" LEFT OUTER JOIN " + this.Schema.SchemaName + "." + Schema.GetTableName(association) + " " + association.SingularFullName + "_A");
-                this.Append(" ON " + alias + "." + Schema.ColumnNameForObject + "=" + association.SingularFullName + "_A." + Schema.ColumnNameForRole);
+                this.Append(" LEFT OUTER JOIN " + this.Mapping.SchemaName + "." + this.Mapping.GetTableName(association) + " " + association.SingularFullName + "_A");
+                this.Append(" ON " + alias + "." + Mapping.ColumnNameForObject + "=" + association.SingularFullName + "_A." + Mapping.ColumnNameForRole);
             }
 
             foreach (IAssociationType association in this.associationInstances)
             {
-                this.Append(" LEFT OUTER JOIN " + this.Schema.SchemaName + "." + Schema.TableNameForObjects + " " + this.GetJoinName(association));
-                this.Append(" ON " + this.GetJoinName(association) + "." + Schema.ColumnNameForObject + "=" + association.SingularFullName + "_A." + Schema.ColumnNameForAssociation + " ");
+                this.Append(" LEFT OUTER JOIN " + this.Mapping.SchemaName + "." + Mapping.TableNameForObjects + " " + this.GetJoinName(association));
+                this.Append(" ON " + this.GetJoinName(association) + "." + Mapping.ColumnNameForObject + "=" + association.SingularFullName + "_A." + Mapping.ColumnNameForAssociation + " ");
             }
         }
 
@@ -110,7 +110,7 @@ namespace Allors.Adapters.Database.SqlClient
             this.Append(" WHERE (");
             if (this.Type is IClass)
             {
-                this.Append(" " + alias + "." + Schema.ColumnNameForType + "=" + this.AddParameter(this.Type.Id));
+                this.Append(" " + alias + "." + Mapping.ColumnNameForType + "=" + this.AddParameter(this.Type.Id));
             }
             else
             {
@@ -126,7 +126,7 @@ namespace Allors.Adapters.Database.SqlClient
                         this.Append(" OR ");
                     }
 
-                    this.Append(" " + alias + "." + Schema.ColumnNameForType + "=" + this.AddParameter(subClass.Id));
+                    this.Append(" " + alias + "." + Mapping.ColumnNameForType + "=" + this.AddParameter(subClass.Id));
                 }
             }
 
@@ -214,7 +214,7 @@ namespace Allors.Adapters.Database.SqlClient
         {
             if (!this.paramNameByParamValue.ContainsKey(obj))
             {
-                var param = Schema.ParamPrefix + "p" + (this.parameterIndex++);
+                var param = Mapping.ParamPrefix + "p" + (this.parameterIndex++);
                 this.paramNameByParamValue[obj] = param;
                 return param;
             }

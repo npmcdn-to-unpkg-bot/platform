@@ -36,10 +36,10 @@ namespace Allors.Adapters.Database.SqlClient
             this.allorsObject = allorsObject;
         }
 
-        internal override bool BuildWhere(AllorsExtentFilteredSql extent, Schema schema, AllorsExtentStatementSql statement, IObjectType type, string alias)
+        internal override bool BuildWhere(AllorsExtentFilteredSql extent, Mapping mapping, AllorsExtentStatementSql statement, IObjectType type, string alias)
         {
-            statement.Append(" (" + this.association.SingularFullName + "_A." + Schema.ColumnNameForAssociation + " IS NOT NULL AND ");
-            statement.Append(" " + this.association.SingularFullName + "_A." + Schema.ColumnNameForAssociation + "=" + this.allorsObject.Strategy.ObjectId + ")");
+            statement.Append(" (" + this.association.SingularFullName + "_A." + Mapping.ColumnNameForAssociation + " IS NOT NULL AND ");
+            statement.Append(" " + this.association.SingularFullName + "_A." + Mapping.ColumnNameForAssociation + "=" + this.allorsObject.Strategy.ObjectId + ")");
             return this.Include;
         }
 

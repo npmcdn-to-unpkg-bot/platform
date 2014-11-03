@@ -65,9 +65,9 @@ namespace Allors.Adapters.Database.SqlClient
             }
         }
 
-        internal Schema Schema
+        internal Mapping Mapping
         {
-            get { return session.Database.Schema; }
+            get { return session.Database.Mapping; }
         }
 
         internal override DatabaseSession Session
@@ -106,7 +106,7 @@ namespace Allors.Adapters.Database.SqlClient
 
             if (statement.Sorter != null)
             {
-                statement.Sorter.BuildOrder(statement.Sorter, this.Schema, statement);
+                statement.Sorter.BuildOrder(statement.Sorter, this.Mapping, statement);
             }
 
             using (var command = statement.CreateSqlCommand())
@@ -157,22 +157,22 @@ namespace Allors.Adapters.Database.SqlClient
             if (statement.IsRoot)
             {
                 //TODO: DISTINCT isn't always necessary
-                statement.Append("SELECT DISTINCT " + alias + "." + Schema.ColumnNameForObject);
+                statement.Append("SELECT DISTINCT " + alias + "." + Mapping.ColumnNameForObject);
 
                 if (statement.Sorter != null)
                 {
                     statement.Sorter.Setup(this, statement);
-                    statement.Sorter.BuildSelect(this, Schema, statement);
+                    statement.Sorter.BuildSelect(this, this.Mapping, statement);
                 }
 
-                statement.Append(" FROM " + this.Schema.SchemaName + "." + Schema.TableNameForObjects + " " + alias);
+                statement.Append(" FROM " + this.Mapping.SchemaName + "." + Mapping.TableNameForObjects + " " + alias);
 
                 statement.AddJoins(alias);
                 statement.AddWhere(alias);
 
                 if (this.filter != null)
                 {
-                    this.filter.BuildWhere(this, Schema, statement, this.type, alias);
+                    this.filter.BuildWhere(this, this.Mapping, statement, this.type, alias);
                 }
             }
             else
@@ -182,23 +182,23 @@ namespace Allors.Adapters.Database.SqlClient
                 {
                     var inRole = inStatement.Role;
                     var inAssociation = inRole.AssociationType;
-                    statement.Append("SELECT " + inAssociation.SingularFullName + "_A." + Schema.ColumnNameForAssociation);
+                    statement.Append("SELECT " + inAssociation.SingularFullName + "_A." + Mapping.ColumnNameForAssociation);
                 }
                 else
                 {
                     var inAssociation = inStatement.Association;
                     var inRole = inAssociation.RoleType;
-                    statement.Append("SELECT " + inRole.SingularFullName + "_R." + Schema.ColumnNameForRole);
+                    statement.Append("SELECT " + inRole.SingularFullName + "_R." + Mapping.ColumnNameForRole);
                 }
 
-                statement.Append(" FROM " + this.Schema.SchemaName + "." + Schema.TableNameForObjects + " " + alias);
+                statement.Append(" FROM " + this.Mapping.SchemaName + "." + Mapping.TableNameForObjects + " " + alias);
 
                 statement.AddJoins(alias);
                 statement.AddWhere(alias);
 
                 if (this.filter != null)
                 {
-                    this.filter.BuildWhere(this, Schema, statement, this.type, alias);
+                    this.filter.BuildWhere(this, this.Mapping, statement, this.type, alias);
                 }
 
                 statement.Append(" AND ");
@@ -207,13 +207,13 @@ namespace Allors.Adapters.Database.SqlClient
                 {
                     var inRole = inStatement.Role;
                     var inAssociation = inRole.AssociationType;
-                    statement.Append(inAssociation.SingularFullName + "_A." + Schema.ColumnNameForAssociation + " IS NOT NULL ");
+                    statement.Append(inAssociation.SingularFullName + "_A." + Mapping.ColumnNameForAssociation + " IS NOT NULL ");
                 }
                 else
                 {
                     var inAssociation = inStatement.Association;
                     var inRole = inAssociation.RoleType;
-                    statement.Append(inRole.SingularFullName + "_R." + Schema.ColumnNameForRole + " IS NOT NULL ");
+                    statement.Append(inRole.SingularFullName + "_R." + Mapping.ColumnNameForRole + " IS NOT NULL ");
                 }
             }
 

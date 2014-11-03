@@ -83,7 +83,7 @@ namespace Allors.Adapters.Special.SqlClient.IntegerId.ReadCommitted
 
         protected override ValidateResult GetSchemaValidation(IDatabase repository)
         {
-            return ((Database)repository).Schema.Validate();
+            return ((Database)repository).Mapping.Validate();
         }
 
         protected override void DropProcedure(string schema, string procedure)

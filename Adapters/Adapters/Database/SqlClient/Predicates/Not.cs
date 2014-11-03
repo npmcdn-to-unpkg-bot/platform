@@ -304,12 +304,12 @@ namespace Allors.Adapters.Database.SqlClient
             return (ICompositePredicate)this.filter;
         }
 
-        internal override bool BuildWhere(AllorsExtentFilteredSql extent, Schema schema, AllorsExtentStatementSql statement, IObjectType type, string alias)
+        internal override bool BuildWhere(AllorsExtentFilteredSql extent, Mapping mapping, AllorsExtentStatementSql statement, IObjectType type, string alias)
         {
             if (this.Include)
             {
                 statement.Append(" NOT (");
-                this.filter.BuildWhere(extent, schema, statement, type, alias);
+                this.filter.BuildWhere(extent, mapping, statement, type, alias);
                 statement.Append(")");
             }
 
