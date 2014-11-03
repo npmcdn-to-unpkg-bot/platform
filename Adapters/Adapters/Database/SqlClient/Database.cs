@@ -233,6 +233,7 @@ namespace Allors.Adapters.Database.SqlClient
         public void Init()
         {
             this.Mapping.Init();
+
             this.properties = null;
         }
         

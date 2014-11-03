@@ -1,5 +1,7 @@
 namespace Allors.Adapters.Database.SqlClient
 {
+    using System;
+
     public class Column
     {
         private readonly Table table;
@@ -37,6 +39,14 @@ namespace Allors.Adapters.Database.SqlClient
             }
         }
 
+        public string LowercaseColumnName
+        {
+            get
+            {
+                return this.lowercaseColumnName;
+            }
+        }
+
         public string DataType
         {
             get
@@ -68,5 +78,6 @@ namespace Allors.Adapters.Database.SqlClient
                 return this.numericScale;
             }
         }
+
     }
 }

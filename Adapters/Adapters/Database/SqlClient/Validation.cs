@@ -7,6 +7,9 @@ namespace Allors.Adapters.Database.SqlClient
         public readonly HashSet<string> MissingTableNames;
         public readonly Dictionary<Table, HashSet<string>> MissingColumnNamesByTable;
 
+        public readonly HashSet<Table> InvalidTables;
+        public readonly HashSet<Column> InvalidColumns; 
+
         private readonly Database database;
         private readonly Schema schema;
 
@@ -20,9 +23,15 @@ namespace Allors.Adapters.Database.SqlClient
             this.MissingTableNames = new HashSet<string>();
             this.MissingColumnNamesByTable = new Dictionary<Table, HashSet<string>>();
             
+            this.InvalidTables = new HashSet<Table>();
+            this.InvalidColumns = new HashSet<Column>();
+
             this.Validate();
 
-            this.success = this.MissingTableNames.Count == 0 & this.MissingTableNames.Count == 0;
+            this.success = this.MissingTableNames.Count == 0 & 
+                           this.MissingTableNames.Count == 0 &
+                           this.InvalidTables.Count == 0 & 
+                           this.InvalidColumns.Count == 0;
         }
 
         public bool Success
@@ -63,22 +72,49 @@ namespace Allors.Adapters.Database.SqlClient
                 var typeColumn = objectsTable[Mapping.ColumnNameForType];
                 var cacheColumn = objectsTable[Mapping.ColumnNameForCache];
 
+                if (objectsTable.ColumnByLowercaseColumnName.Count != 3)
+                {
+                    this.InvalidTables.Add(objectsTable);
+                }
+
                 if (objectColumn == null)
                 {
                     this.AddMissingColumnName(objectsTable, Mapping.ColumnNameForObject);
+                }
+                else
+                {
+                    if (!objectColumn.DataType.Equals(this.Database.Mapping.SqlTypeForId))
+                    {
+                        this.InvalidColumns.Add(objectColumn);
+                    }
                 }
 
                 if (typeColumn == null)
                 {
                     this.AddMissingColumnName(objectsTable, Mapping.ColumnNameForType);
                 }
+                else
+                {
+                    if (!typeColumn.DataType.Equals(Mapping.SqlTypeForType))
+                    {
+                        this.InvalidColumns.Add(typeColumn);
+                    }
+                }
 
                 if (cacheColumn == null)
                 {
                     this.AddMissingColumnName(objectsTable, Mapping.ColumnNameForCache);
                 }
+                else
+                {
+                    if (!cacheColumn.DataType.Equals(Mapping.SqlTypeForCache))
+                    {
+                        this.InvalidColumns.Add(cacheColumn);
+                    }
+                }
             }
         }
+        
 
         private void AddMissingColumnName(Table table, string columnName)
         {

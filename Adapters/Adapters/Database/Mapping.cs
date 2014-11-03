@@ -27,7 +27,7 @@ namespace Allors.Adapters.Database.SqlClient
     {
         public const string ParamPrefix = "@";
 
-        public const string TableNameForObjects = "_O";
+        public const string TableNameForObjects = "_o";
 
         public const string ColumnNameForObject = "o";
         public const string ColumnNameForType = "t";
@@ -87,7 +87,7 @@ namespace Allors.Adapters.Database.SqlClient
 
             foreach (var relationType in this.Database.MetaPopulation.RelationTypes)
             {
-                var tableName = "_" + relationType.Id.ToString("N").ToUpperInvariant();
+                var tableName = "_" + relationType.Id.ToString("N");
                 SqlDbType sqlDbType;
                 string sqlType;
 
@@ -98,59 +98,61 @@ namespace Allors.Adapters.Database.SqlClient
                     switch (unit.UnitTag)
                     {
                         case UnitTags.AllorsBinary:
-                            tableName = tableName + "_BINARY";
                             sqlDbType = SqlDbType.VarBinary;
                             if (roleType.Size != -1 && roleType.Size <= 8000)
                             {
+                                tableName = tableName + "_binary_" + roleType.Size;
                                 sqlType = "varbinary(" + roleType.Size + ")";
                             }
                             else
                             {
+                                tableName = tableName + "_binary";
                                 sqlType = "varbinary(MAX)";
                             }
                             
                             break;
 
                         case UnitTags.AllorsBoolean:
-                            tableName = tableName + "_BOOLEAN";
+                            tableName = tableName + "_boolean";
                             sqlDbType = SqlDbType.Bit;
                             sqlType = "bit";
                             break;
 
                         case UnitTags.AllorsDecimal:
-                            tableName = tableName + "_DECIMAL";
+                            tableName = tableName + "_decimal_" + roleType.Precision + "_" + roleType.Scale;
                             sqlDbType = SqlDbType.Decimal;
                             sqlType = "decimal(" + roleType.Precision + "," + roleType.Scale + ") ";
                             break;
 
                         case UnitTags.AllorsFloat:
-                            tableName = tableName + "_FLOAT";
+                            tableName = tableName + "_float";
                             sqlDbType = SqlDbType.Float;
                             sqlType = "float";
                             break;
 
                         case UnitTags.AllorsInteger:
-                            tableName = tableName + "_INTEGER";
+                            tableName = tableName + "_integer";
                             sqlDbType = SqlDbType.Int;
                             sqlType = "int";
                             break;
 
                         case UnitTags.AllorsString:
-                            tableName = tableName + "_STRING";
                             sqlDbType = SqlDbType.NVarChar;
                             if (roleType.Size != -1 && roleType.Size <= 4000)
                             {
+                                tableName = tableName + "_string_" + roleType.Size;
                                 sqlType = "nvarchar(" + roleType.Size + ")";
                             }
                             else
                             {
+                                tableName = tableName + "_string";
                                 sqlType = "nvarchar(MAX)";
                             }
 
                             break;
 
                         case UnitTags.AllorsUnique:
-                            tableName = tableName + "_UNIQUE";
+                            tableName = tableName + "_unique";
                             sqlDbType = SqlDbType.UniqueIdentifier;
                             sqlType = "uniqueidentifier";
                             break;
@@ -163,18 +165,18 @@ namespace Allors.Adapters.Database.SqlClient
                 {
                     if (roleType.IsMany)
                     {
-                        tableName = tableName + "_MANY";
+                        tableName = tableName + "_many";
                     }
                     else
                     {
-                        tableName = tableName + "_ONE";
+                        tableName = tableName + "_one";
                     }
 
                     sqlDbType = this.SqlDbTypeForId;
                     sqlType = this.SqlTypeForId;
                 }
 
-                this.tableNameByRelationType[relationType] = tableName;
+                this.tableNameByRelationType[relationType] = tableName.ToLowerInvariant();
                 this.sqlDbTypeByRoleType[roleType] = sqlDbType;
                 this.sqlTypeByRoleType[roleType] = sqlType;
             }
@@ -204,8 +206,51 @@ namespace Allors.Adapters.Database.SqlClient
             }
         }
 
-        public void Init()
+        public string GetTableName(IAssociationType associationType)
         {
+            return this.GetTableName(associationType.RelationType);
+        }
+
+        public string GetTableName(IRoleType roleType)
+        {
+            return this.GetTableName(roleType.RelationType);
+        }
+
+        public string GetTableName(IRelationType relationType)
+        {
+            string tableName;
+            this.tableNameByRelationType.TryGetValue(relationType, out tableName);
+            return tableName;
+        }
+        
+        public SqlDbType GetSqlDbType(IRoleType roleType)
+        {
+            SqlDbType sqlDbType;
+            this.sqlDbTypeByRoleType.TryGetValue(roleType, out sqlDbType);
+            return sqlDbType;
+        }
+
+        internal void Init()
+        {
+            using (var connection = new SqlConnection(this.Database.ConnectionString))
+            {
+                connection.Open();
+                try
+                {
+                    var cmdText = @"
+alter database " + connection.Database + @"
+set allow_snapshot_isolation on";
+                    using (var command = new SqlCommand(cmdText, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
             bool schemaExists;
             using (var connection = new SqlConnection(this.Database.ConnectionString))
             {
@@ -280,7 +325,6 @@ END
                         command.ExecuteNonQuery();
                     }
 
-
                     // Relations
                     foreach (var relationType in this.Database.MetaPopulation.RelationTypes)
                     {
@@ -322,30 +366,6 @@ END
                     connection.Close();
                 }
             }
-        }
-
-        public string GetTableName(IAssociationType associationType)
-        {
-            return this.GetTableName(associationType.RelationType);
-        }
-
-        public string GetTableName(IRoleType roleType)
-        {
-            return this.GetTableName(roleType.RelationType);
-        }
-
-        public string GetTableName(IRelationType relationType)
-        {
-            string tableName;
-            this.tableNameByRelationType.TryGetValue(relationType, out tableName);
-            return tableName;
-        }
-        
-        public SqlDbType GetSqlDbType(IRoleType roleType)
-        {
-            SqlDbType sqlDbType;
-            this.sqlDbTypeByRoleType.TryGetValue(roleType, out sqlDbType);
-            return sqlDbType;
         }
     }
 }
