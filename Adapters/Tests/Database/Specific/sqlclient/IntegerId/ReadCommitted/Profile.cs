@@ -24,8 +24,6 @@ namespace Allors.Adapters.Special.SqlClient.IntegerId.ReadCommitted
 
     public class Profile : SqlClient.Profile
     {
-        private static readonly string ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["sqlclient"].ConnectionString;
-
         public override Action[] Markers
         {
             get
@@ -47,6 +45,14 @@ namespace Allors.Adapters.Special.SqlClient.IntegerId.ReadCommitted
                 }
 
                 return markers.ToArray();
+            }
+        }
+
+        protected override string ConnectionString
+        {
+            get
+            {
+                return System.Configuration.ConfigurationManager.ConnectionStrings["sqlclient"].ConnectionString;
             }
         }
 
@@ -85,6 +91,37 @@ namespace Allors.Adapters.Special.SqlClient.IntegerId.ReadCommitted
         {
             var configuration = new Workspace.Memory.IntegerId.Configuration { Database = database };
             return new Workspace.Memory.IntegerId.Workspace(configuration);
+        }
+
+        protected override bool Match(ColumnTypes columnType, string dataType)
+        {
+            dataType = dataType.Trim().ToLowerInvariant();
+
+            switch (columnType)
+            {
+                case ColumnTypes.ObjectId:
+                    return dataType.Equals("int");
+                case ColumnTypes.TypeId:
+                    return dataType.Equals("uniqueidentifier");
+                case ColumnTypes.CacheId:
+                    return dataType.Equals("int");
+                case ColumnTypes.Binary:
+                    return dataType.Equals("varbinary");
+                case ColumnTypes.Boolean:
+                    return dataType.Equals("bit");
+                case ColumnTypes.Decimal:
+                    return dataType.Equals("decimal");
+                case ColumnTypes.Float:
+                    return dataType.Equals("float");
+                case ColumnTypes.Integer:
+                    return dataType.Equals("int");
+                case ColumnTypes.String:
+                    return dataType.Equals("nvarchar");
+                case ColumnTypes.Unique:
+                    return dataType.Equals("uniqueidentifier");
+                default:
+                    throw new Exception("Unsupported columntype " + columnType);
+            }
         }
     }
 }

@@ -32,8 +32,6 @@ namespace Allors.Adapters.Database.Memory
             this.workspaceFactory = configuration.WorkspaceFactory;
         }
 
-        public override event SessionCreatedEventHandler SessionCreated;
-
         public event ObjectNotLoadedEventHandler ObjectNotLoaded;
 
         public event RelationNotLoadedEventHandler RelationNotLoaded;
@@ -95,11 +93,6 @@ namespace Allors.Adapters.Database.Memory
 
         public IDatabaseSession CreateDatabaseSession()
         {
-            if (this.SessionCreated != null)
-            {
-                this.SessionCreated.Invoke(this, new SessionCreatedEventArgs(this.Session));
-            }
-
             return this.Session;
         }
 

@@ -20,8 +20,6 @@ namespace Allors.Adapters.Database.SqlClient
     using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
-    using System.Runtime.InteropServices.WindowsRuntime;
-    using System.Text;
 
     using Allors.Meta;
 
@@ -29,7 +27,7 @@ namespace Allors.Adapters.Database.SqlClient
     {
         public const string ParamPrefix = "@";
 
-        public const string TableNameForObjects = "_O";
+        public const string TableNameForObjects = "_o";
 
         public const string ColumnNameForObject = "o";
         public const string ColumnNameForType = "t";
@@ -43,14 +41,17 @@ namespace Allors.Adapters.Database.SqlClient
         public const string ParameterNameForAssociation = ParamPrefix + "a";
         public const string ParameterNameForRole = ParamPrefix + "r";
 
-        public const string SqlTypeForType = "UNIQUEIDENTIFIER";
-        public const string SqlTypeForCache = "INT";
+        public const string SqlTypeForType = "uniqueidentifier";
+        public const string SqlTypeForCache = "int";
 
         public const SqlDbType SqlDbTypeForObject = SqlDbType.Int;
         public const SqlDbType SqlDbTypeForType = SqlDbType.UniqueIdentifier;
         public const SqlDbType SqlDbTypeForCache = SqlDbType.Int;
 
+        private readonly object lockObject = new object();
+
         private readonly string connectionString;
+        private readonly string schemaName;
         private readonly IMetaPopulation metaPopulation;
 
         private readonly string sqlTypeForId;
@@ -60,15 +61,19 @@ namespace Allors.Adapters.Database.SqlClient
         private readonly Dictionary<IRoleType, string> sqlTypeByRoleType;
         private readonly Dictionary<IRoleType, SqlDbType> sqlDbTypeByRoleType;
 
-        public Schema(IMetaPopulation metaPopulation, string connectionString, ObjectIds objectIds)
+        private bool? isValid;
+
+        public Schema(Configuration configuration)
         {
-            if (!metaPopulation.IsValid)
+            this.metaPopulation = configuration.ObjectFactory.MetaPopulation;
+            this.connectionString = configuration.ConnectionString;
+            this.schemaName = configuration.SchemaName;
+            var objectIds = configuration.ObjectIds;
+
+            if (!this.metaPopulation.IsValid)
             {
                 throw new Exception("MetaPopulation is invalid.");
             }
-
-            this.connectionString = connectionString;
-            this.metaPopulation = metaPopulation;
 
             if (objectIds is ObjectIdsInteger)
             {
@@ -89,7 +94,7 @@ namespace Allors.Adapters.Database.SqlClient
             this.sqlTypeByRoleType = new Dictionary<IRoleType, string>();
             this.sqlDbTypeByRoleType = new Dictionary<IRoleType, SqlDbType>();
 
-            foreach (var relationType in this.metaPopulation.RelationTypes)
+            foreach (var relationType in this.MetaPopulation.RelationTypes)
             {
                 var tableName = "_" + relationType.Id.ToString("N").ToUpperInvariant();
                 SqlDbType sqlDbType;
@@ -196,81 +201,171 @@ namespace Allors.Adapters.Database.SqlClient
         {
             get
             {
-                return sqlDbTypeForId;
+                return this.sqlDbTypeForId;
             }
+        }
+
+        public bool IsValid 
+        {
+            get
+            {
+                if (!this.isValid.HasValue)
+                {
+                    lock (this.lockObject)
+                    {
+                        if (!this.isValid.HasValue)
+                        {
+                            var validate = this.Validate();
+                            return validate.Success;
+                        }
+                    }
+                }
+
+                return this.isValid.Value;
+            }
+        }
+
+        public string ConnectionString
+        {
+            get
+            {
+                return this.connectionString;
+            }
+        }
+
+        public IMetaPopulation MetaPopulation
+        {
+            get
+            {
+                return this.metaPopulation;
+            }
+        }
+
+        public string SchemaName
+        {
+            get
+            {
+                return this.schemaName;
+            }
+        }
+
+        public ValidateResult Validate()
+        {
+            var validateResult = new ValidateResult(this);
+            this.isValid = validateResult.Success;
+            return validateResult;
         }
 
         public void Init()
         {
-            using (var connection = new SqlConnection(this.connectionString))
+            bool schemaExists;
+            using (var connection = new SqlConnection(this.ConnectionString))
             {
                 connection.Open();
                 try
                 {
-                    using (var transaction = connection.BeginTransaction())
+                    var cmdText = @"
+SELECT  count(schema_name)
+FROM    information_schema.schemata
+WHERE   schema_name = @schemaName";
+                    using (var command = new SqlCommand(cmdText, connection))
                     {
-                        try
+                        command.Parameters.Add("@schemaName", SqlDbType.NVarChar).Value = this.schemaName;
+                        var schemaCount = (int)command.ExecuteScalar();
+                        schemaExists = schemaCount != 0;
+                    }
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
+            // CREATE SCHEMA must be in its own batch
+            using (var connection = new SqlConnection(this.ConnectionString))
+            {
+                connection.Open();
+                try
+                {
+                    if (!schemaExists)
+                    {
+                        var cmdText = @"
+CREATE SCHEMA " + this.schemaName;
+                        using (var command = new SqlCommand(cmdText, connection))
                         {
-                            // Objects
-                            var cmdText = @"
-IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'" + TableNameForObjects + @"'))
-    BEGIN
-    TRUNCATE TABLE " + TableNameForObjects + @"
-    END
-ELSE
-    BEGIN
-    CREATE TABLE " + TableNameForObjects + @"
-    (
-        " + ColumnNameForObject + @" " + this.SqlTypeForId + @" IDENTITY(1,1),
-	    " + ColumnNameForType + @" " + SqlTypeForType + @",
-	    " + ColumnNameForCache + @" " + SqlTypeForCache + @",
-        PRIMARY KEY (O)
-    )
-    END
-";
-                            using (var command = new SqlCommand(cmdText, connection, transaction))
-                            {
-                                command.ExecuteNonQuery();
-                            }
-
-
-                            // Relations
-                            foreach (var relationType in this.metaPopulation.RelationTypes)
-                            {
-                                var roleType = relationType.RoleType;
-
-                                var tableName = this.tableNameByRelationType[relationType];
-                                var sqlTypeForRole = this.sqlTypeByRoleType[roleType];
-                                var primaryKeys = "a";
-                                if (roleType.ObjectType is IComposite && roleType.IsMany)
-                                {
-                                    primaryKeys = ColumnNameForAssociation + @" , " + ColumnNameForRole;
-                                }
-
-                                cmdText = @"
-IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'" + tableName + @"'))
-    BEGIN
-    TRUNCATE TABLE " + tableName + @"
-    END
-ELSE
-    BEGIN
-    CREATE TABLE " + tableName + @"
-    (
-        " + ColumnNameForAssociation + @" " + this.SqlTypeForId + @",
-        " + ColumnNameForRole + @" " + sqlTypeForRole + @",
-        PRIMARY KEY ( " + primaryKeys + @")
-    )
-    END
-";
-                                using (var command = new SqlCommand(cmdText, connection, transaction))
-                                {
-                                    command.ExecuteNonQuery();
-                                }
-                            }
+                            command.ExecuteNonQuery();
                         }
-                        finally
+                    }
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
+            using (var connection = new SqlConnection(this.ConnectionString))
+            {
+                connection.Open();
+                try
+                {
+                    // Objects
+                    var cmdText = @"
+IF EXISTS (SELECT * FROM information_schema.tables WHERE table_name = @tableName AND table_schema = @tableSchema)
+BEGIN
+TRUNCATE TABLE " + this.SchemaName + "." + TableNameForObjects + @"
+END
+ELSE
+BEGIN
+CREATE TABLE " + this.SchemaName + "." + TableNameForObjects + @"
+(
+" + ColumnNameForObject + @" " + this.SqlTypeForId + @" IDENTITY(1,1),
+" + ColumnNameForType + @" " + SqlTypeForType + @",
+" + ColumnNameForCache + @" " + SqlTypeForCache + @",
+PRIMARY KEY (O)
+)
+END
+";
+                    using (var command = new SqlCommand(cmdText, connection))
+                    {
+                        command.Parameters.Add("@tableName", SqlDbType.NVarChar).Value = TableNameForObjects;
+                        command.Parameters.Add("@tableSchema", SqlDbType.NVarChar).Value = this.schemaName;
+                        command.ExecuteNonQuery();
+                    }
+
+
+                    // Relations
+                    foreach (var relationType in this.MetaPopulation.RelationTypes)
+                    {
+                        var roleType = relationType.RoleType;
+
+                        var tableName = this.tableNameByRelationType[relationType];
+                        var sqlTypeForRole = this.sqlTypeByRoleType[roleType];
+                        var primaryKeys = "a";
+                        if (roleType.ObjectType is IComposite && roleType.IsMany)
                         {
-                            transaction.Commit();
+                            primaryKeys = ColumnNameForAssociation + @" , " + ColumnNameForRole;
+                        }
+
+                        cmdText = @"
+IF EXISTS (SELECT * FROM information_schema.tables WHERE table_name = @tableName AND table_schema = @tableSchema)
+BEGIN
+TRUNCATE TABLE " + this.SchemaName + "." + tableName + @"
+END
+ELSE
+BEGIN
+CREATE TABLE " + this.SchemaName + "." + tableName + @"
+(
+" + ColumnNameForAssociation + @" " + this.SqlTypeForId + @",
+" + ColumnNameForRole + @" " + sqlTypeForRole + @",
+PRIMARY KEY ( " + primaryKeys + @")
+)
+END
+";
+                        using (var command = new SqlCommand(cmdText, connection))
+                        {
+                            command.Parameters.Add("@tableName", SqlDbType.NVarChar).Value = tableName;
+                            command.Parameters.Add("@tableSchema", SqlDbType.NVarChar).Value = this.schemaName;
+                            command.ExecuteNonQuery();
                         }
                     }
                 }
@@ -297,14 +392,7 @@ ELSE
             this.tableNameByRelationType.TryGetValue(relationType, out tableName);
             return tableName;
         }
-
-        public string GetSqlType(IRoleType roleType)
-        {
-            string sqlType;
-            this.sqlTypeByRoleType.TryGetValue(roleType, out sqlType);
-            return sqlType;
-        }
-
+        
         public SqlDbType GetSqlDbType(IRoleType roleType)
         {
             SqlDbType sqlDbType;

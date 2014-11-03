@@ -41,7 +41,7 @@ namespace Allors.Adapters.Database.SqlClient
             statement.Append("\n");
             statement.Append("EXISTS(\n");
             statement.Append("SELECT " + Schema.ColumnNameForObject + "\n");
-            statement.Append("FROM " + schema.GetTableName(this.role) + "\n");
+            statement.Append("FROM " + schema.SchemaName + "." + schema.GetTableName(this.role) + "\n");
             statement.Append("WHERE " + Schema.ColumnNameForAssociation + "=" + alias + "." + Schema.ColumnNameForObject + "\n");
             statement.Append("AND " + Schema.ColumnNameForRole + "=" + this.allorsObject.Strategy.ObjectId + "\n");
             statement.Append(")\n");

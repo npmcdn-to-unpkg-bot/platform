@@ -41,16 +41,16 @@ namespace Allors.Adapters.Database.SqlClient
             statement.Append("\n");
             statement.Append("EXISTS(\n");
             statement.Append("SELECT " + Schema.ColumnNameForObject + "\n");
-            statement.Append("FROM " + schema.GetTableName(association) + "\n");
-            statement.Append("WHERE " + Schema.ColumnNameForAssociation + "=" + allorsObject.Strategy.ObjectId + "\n");
+            statement.Append("FROM " + schema.SchemaName + "." + schema.GetTableName(this.association) + "\n");
+            statement.Append("WHERE " + Schema.ColumnNameForAssociation + "=" + this.allorsObject.Strategy.ObjectId + "\n");
             statement.Append("AND " + Schema.ColumnNameForRole + "=" + Schema.ColumnNameForObject + "\n");
             statement.Append(")");
-            return Include;
+            return this.Include;
         }
 
         internal override void Setup(AllorsExtentFilteredSql extent, AllorsExtentStatementSql statement)
         {
-            statement.UseAssociation(association);
+            statement.UseAssociation(this.association);
         }
     }
 }

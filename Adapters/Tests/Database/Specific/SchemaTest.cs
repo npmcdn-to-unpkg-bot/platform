@@ -23,813 +23,817 @@ namespace Allors.Adapters.Special
     using System;
 
     using Allors;
+    using Allors.Adapters.Database.SqlClient;
     using Allors.Meta;
 
     using NUnit.Framework;
 
     using IDatabase = IDatabase;
 
-    //public abstract class SchemaTest
-    //{
-    //    private Domain domain;
-
-    //    protected virtual bool DetectBinarySizedDifferences
-    //    {
-    //        get { return true; }
-    //    }
-
-    //    protected abstract IProfile Profile { get; }
-
-    //    protected ISession DatabaseSession
-    //    {
-    //        get
-    //        {
-    //            return this.Profile.DatabaseSession;
-    //        }
-    //    }
-
-    //    protected Action[] Markers
-    //    {
-    //        get
-    //        {
-    //            return this.Profile.Markers;
-    //        }
-    //    }
-
-    //    protected Action[] Inits
-    //    {
-    //        get
-    //        {
-    //            return this.Profile.Inits;
-    //        }
-    //    }
-
-    //    [Test]
-    //    public void InitAndCreateSession()
-    //    {
-    //        this.DropTable("C1");
-    //        this.DropTable("C2");
-
-    //        this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
-
-    //        this.CreateClass("C1");
-
-    //        var database = this.CreateDatabase(this.domain.MetaPopulation, true);
-    //        ISession session = database.CreateSession();
-    //        session.Rollback();
-
-    //        this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
-
-    //        this.CreateClass("C1");
-    //        this.CreateClass("C2");
-
-    //        database = this.CreateDatabase(this.domain.MetaPopulation, true);
-    //        session = database.CreateSession();
-    //        session.Rollback();
-    //    }
-
-    //    [Test]
-    //    [ExpectedException]
-    //    public void InitInvalidDomain()
-    //    {
-    //        this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
-
-    //        new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
-
-    //        this.CreateDatabase(this.domain.MetaPopulation, true);
-    //    }
-
-    //    [Test]
-    //    public void SystemTables()
-    //    {
-    //        Assert.IsTrue(this.IsUnique("_O", "T"));
-    //        Assert.IsTrue(this.IsInteger("_O", "C"));
-
-    //        Assert.IsTrue(this.ExistPrimaryKey("_O", "O"));
-    //        Assert.IsFalse(this.ExistIndex("_O", "T"));
-    //        Assert.IsFalse(this.ExistIndex("_O", "C"));
-    //    }
-
-    //    [Test]
-    //    public void ValidateBinaryRelationDifferentSize()
-    //    {
-    //        if (this.DetectBinarySizedDifferences)
-    //        {
-    //            this.DropTable("C1");
-    //            this.DropTable("C2");
+    public enum ColumnTypes
+    {
+        ObjectId,
+        TypeId,
+        CacheId,
+
+        Binary,
+        Boolean,
+        Decimal,
+        Float,
+        Integer,
+        String,
+        Unique,
+    }
+
+    public abstract class SchemaTest
+    {
+        private Domain domain;
+
+        protected virtual bool DetectBinarySizedDifferences
+        {
+            get { return true; }
+        }
+
+        protected abstract IProfile Profile { get; }
+
+        protected ISession DatabaseSession
+        {
+            get
+            {
+                return this.Profile.Session;
+            }
+        }
+
+        protected Action[] Markers
+        {
+            get
+            {
+                return this.Profile.Markers;
+            }
+        }
+
+        protected Action[] Inits
+        {
+            get
+            {
+                return this.Profile.Inits;
+            }
+        }
+
+        [Test]
+        public void ObjectsTable()
+        {
+            this.DropTable("allors", "_o");
+
+            this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
+
+            var database = this.CreateDatabase(this.domain.MetaPopulation, true);
+            ISession session = database.CreateSession();
+            session.Rollback();
+
+            Assert.IsTrue(this.ExistTable("allors", "_o"));
+            Assert.AreEqual(3, this.ColumnCount("allors", "_o"));
+            Assert.IsTrue(this.ExistColumn("allors", "_o", "o", ColumnTypes.ObjectId));
+            Assert.IsTrue(this.ExistColumn("allors", "_o", "t", ColumnTypes.TypeId));
+            Assert.IsTrue(this.ExistColumn("allors", "_o", "c", ColumnTypes.CacheId));
+
+            this.DropTable("allors", "_o");
+
+            database = this.CreateDatabase(this.domain.MetaPopulation, false);
+
+            var exceptionThrown = false;
+            try
+            {
+                database.CreateSession();
+            }
+            catch
+            {
+                exceptionThrown = true;
+            }
+
+            Assert.IsTrue(exceptionThrown);
+        }
+
+        //[Test]
+        //[ExpectedException]
+        //public void InitInvalidDomain()
+        //{
+        //    this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
+
+        //    new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
+
+        //    this.CreateDatabase(this.domain.MetaPopulation, true);
+        //}
+
+        //[Test]
+        //public void SystemTables()
+        //{
+        //    Assert.IsTrue(this.IsUnique("_O", "T"));
+        //    Assert.IsTrue(this.IsInteger("_O", "C"));
+
+        //    Assert.IsTrue(this.ExistPrimaryKey("_O", "O"));
+        //    Assert.IsFalse(this.ExistIndex("_O", "T"));
+        //    Assert.IsFalse(this.ExistIndex("_O", "C"));
+        //}
 
-    //            var environment = new MetaPopulation();
-    //            var core = Repository.Core(environment);
-    //            this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
-    //            this.domain.AddDirectSuperdomain(core);
-
-    //            var c1 = this.CreateClass("C1");
-    //            this.CreateClass("C2");
+        //[Test]
+        //public void ValidateBinaryRelationDifferentSize()
+        //{
+        //    if (this.DetectBinarySizedDifferences)
+        //    {
+        //        this.DropTable("C1");
+        //        this.DropTable("C2");
 
-    //            var allorsBinary = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.BinaryId);
-    //            new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).WithObjectTypes(c1, allorsBinary).WithSize(200).Build();
-
-    //            this.CreateDatabase(this.domain.MetaPopulation, true);
+        //        var environment = new MetaPopulation();
+        //        var core = Repository.Core(environment);
+        //        this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
+        //        this.domain.AddDirectSuperdomain(core);
 
-    //            environment = new MetaPopulation();
-    //            core = Repository.Core(environment);
-    //            this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
-    //            this.domain.AddDirectSuperdomain(core);
+        //        var c1 = this.CreateClass("C1");
+        //        this.CreateClass("C2");
 
-    //            c1 = this.CreateClass("C1");
-    //            this.CreateClass("C2");
+        //        var allorsBinary = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.BinaryId);
+        //        new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).WithObjectTypes(c1, allorsBinary).WithSize(200).Build();
 
-    //            allorsBinary = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.BinaryId);
-    //            var c1RelationType = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).WithObjectTypes(c1, allorsBinary).Build();
+        //        this.CreateDatabase(this.domain.MetaPopulation, true);
 
-    //            // Different Size
-    //            c1RelationType.RoleType.Size = 300;
+        //        environment = new MetaPopulation();
+        //        core = Repository.Core(environment);
+        //        this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
+        //        this.domain.AddDirectSuperdomain(core);
 
-    //            var database = this.CreateDatabase(this.domain.MetaPopulation, false);
+        //        c1 = this.CreateClass("C1");
+        //        this.CreateClass("C2");
 
-    //            var validationErrors = this.GetSchemaValidation(database);
+        //        allorsBinary = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.BinaryId);
+        //        var c1RelationType = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).WithObjectTypes(c1, allorsBinary).Build();
 
-    //            var tableErrors = validationErrors.TableErrors;
+        //        // Different Size
+        //        c1RelationType.RoleType.Size = 300;
 
-    //            Assert.AreEqual(1, tableErrors.Length);
-    //            Assert.AreEqual(SchemaValidationErrorKind.Incompatible, tableErrors[0].Kind);
+        //        var database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
-    //            var error = tableErrors[0];
+        //        var validationErrors = this.GetSchemaValidation(database);
 
-    //            Assert.AreEqual(null, error.ObjectType);
-    //            Assert.AreEqual(null, error.RelationType);
-    //            Assert.AreEqual(c1RelationType.RoleType, error.Role);
+        //        var tableErrors = validationErrors.TableErrors;
 
-    //            Assert.AreEqual("c1", error.TableName);
-    //            Assert.AreEqual("allorsbinary", error.ColumnName);
-    //        }
-    //    }
+        //        Assert.AreEqual(1, tableErrors.Length);
+        //        Assert.AreEqual(SchemaValidationErrorKind.Incompatible, tableErrors[0].Kind);
 
-    //    [Test]
-    //    public void ValidateDecimalRelationDifferentPrecision()
-    //    {
-    //        this.DropTable("C1");
-    //        this.DropTable("C2");
+        //        var error = tableErrors[0];
 
-    //        var environment = new MetaPopulation();
-    //        var core = Repository.Core(environment);
-    //        this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain"};
-    //        this.domain.AddDirectSuperdomain(core);
-            
-    //        var c1 = this.CreateClass("C1");
-    //        this.CreateClass("C2");
+        //        Assert.AreEqual(null, error.ObjectType);
+        //        Assert.AreEqual(null, error.RelationType);
+        //        Assert.AreEqual(c1RelationType.RoleType, error.Role);
 
-    //        var c1RelationType = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
-    //        c1RelationType.AssociationType.ObjectType = c1;
-    //        c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.DecimalId);
-    //        c1RelationType.RoleType.Precision = 10;
-    //        c1RelationType.RoleType.Scale = 2;
+        //        Assert.AreEqual("c1", error.TableName);
+        //        Assert.AreEqual("allorsbinary", error.ColumnName);
+        //    }
+        //}
 
-    //        this.CreateDatabase(this.domain.MetaPopulation, true);
+        //[Test]
+        //public void ValidateDecimalRelationDifferentPrecision()
+        //{
+        //    this.DropTable("C1");
+        //    this.DropTable("C2");
 
-    //        environment = new MetaPopulation();
-    //        core = Repository.Core(environment);
-    //        this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
-    //        this.domain.AddDirectSuperdomain(core);
+        //    var environment = new MetaPopulation();
+        //    var core = Repository.Core(environment);
+        //    this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
+        //    this.domain.AddDirectSuperdomain(core);
 
-    //        c1 = this.CreateClass("C1");
-    //        this.CreateClass("C2");
+        //    var c1 = this.CreateClass("C1");
+        //    this.CreateClass("C2");
 
-    //        c1RelationType = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
-    //        c1RelationType.AssociationType.ObjectType = c1;
-    //        c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.DecimalId);
-    //        c1RelationType.RoleType.Precision = 10;
-    //        c1RelationType.RoleType.Scale = 2;
+        //    var c1RelationType = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
+        //    c1RelationType.AssociationType.ObjectType = c1;
+        //    c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.DecimalId);
+        //    c1RelationType.RoleType.Precision = 10;
+        //    c1RelationType.RoleType.Scale = 2;
 
-    //        // Different precision
-    //        c1RelationType.RoleType.Precision = 11;
+        //    this.CreateDatabase(this.domain.MetaPopulation, true);
 
-    //        var database = this.CreateDatabase(this.domain.MetaPopulation, false);
+        //    environment = new MetaPopulation();
+        //    core = Repository.Core(environment);
+        //    this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
+        //    this.domain.AddDirectSuperdomain(core);
 
-    //        var validationErrors = this.GetSchemaValidation(database);
+        //    c1 = this.CreateClass("C1");
+        //    this.CreateClass("C2");
 
-    //        var tableErrors = validationErrors.TableErrors;
+        //    c1RelationType = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
+        //    c1RelationType.AssociationType.ObjectType = c1;
+        //    c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.DecimalId);
+        //    c1RelationType.RoleType.Precision = 10;
+        //    c1RelationType.RoleType.Scale = 2;
 
-    //        Assert.AreEqual(1, tableErrors.Length);
-    //        Assert.AreEqual(SchemaValidationErrorKind.Incompatible, tableErrors[0].Kind);
+        //    // Different precision
+        //    c1RelationType.RoleType.Precision = 11;
 
-    //        var error = tableErrors[0];
+        //    var database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
-    //        Assert.AreEqual(null, error.ObjectType);
-    //        Assert.AreEqual(null, error.RelationType);
-    //        Assert.AreEqual(c1RelationType.RoleType, error.Role);
+        //    var validationErrors = this.GetSchemaValidation(database);
 
-    //        Assert.AreEqual("c1", error.TableName);
-    //        Assert.AreEqual("allorsdecimal", error.ColumnName);
-    //    }
+        //    var tableErrors = validationErrors.TableErrors;
 
-    //    [Test]
-    //    public void ValidateDecimalRelationDifferentScale()
-    //    {
-    //        this.DropTable("C1");
-    //        this.DropTable("C2");
+        //    Assert.AreEqual(1, tableErrors.Length);
+        //    Assert.AreEqual(SchemaValidationErrorKind.Incompatible, tableErrors[0].Kind);
 
-    //        var environment = new MetaPopulation();
-    //        var core = Repository.Core(environment);
-    //        this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
-    //        this.domain.AddDirectSuperdomain(core);
-            
-    //        var c1 = this.CreateClass("C1");
-    //        this.CreateClass("C2");
+        //    var error = tableErrors[0];
 
-    //        var c1RelationType = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
-    //        c1RelationType.AssociationType.ObjectType = c1;
-    //        c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.DecimalId);
-    //        c1RelationType.RoleType.Precision = 10;
-    //        c1RelationType.RoleType.Scale = 2;
+        //    Assert.AreEqual(null, error.ObjectType);
+        //    Assert.AreEqual(null, error.RelationType);
+        //    Assert.AreEqual(c1RelationType.RoleType, error.Role);
 
-    //        this.CreateDatabase(this.domain.MetaPopulation, true);
+        //    Assert.AreEqual("c1", error.TableName);
+        //    Assert.AreEqual("allorsdecimal", error.ColumnName);
+        //}
 
-    //        environment = new MetaPopulation();
-    //        core = Repository.Core(environment);
-    //        this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
-    //        this.domain.AddDirectSuperdomain(core);
+        //[Test]
+        //public void ValidateDecimalRelationDifferentScale()
+        //{
+        //    this.DropTable("C1");
+        //    this.DropTable("C2");
 
-    //        c1 = this.CreateClass("C1");
-    //        this.CreateClass("C2");
+        //    var environment = new MetaPopulation();
+        //    var core = Repository.Core(environment);
+        //    this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
+        //    this.domain.AddDirectSuperdomain(core);
 
-    //        c1RelationType = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
-    //        c1RelationType.AssociationType.ObjectType = c1;
-    //        c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.DecimalId);
-    //        c1RelationType.RoleType.Precision = 10;
-    //        c1RelationType.RoleType.Scale = 2;
+        //    var c1 = this.CreateClass("C1");
+        //    this.CreateClass("C2");
 
-    //        // Different scale
-    //        c1RelationType.RoleType.Scale = 3;
+        //    var c1RelationType = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
+        //    c1RelationType.AssociationType.ObjectType = c1;
+        //    c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.DecimalId);
+        //    c1RelationType.RoleType.Precision = 10;
+        //    c1RelationType.RoleType.Scale = 2;
 
-    //        var database = this.CreateDatabase(this.domain.MetaPopulation, false);
+        //    this.CreateDatabase(this.domain.MetaPopulation, true);
 
-    //        var validationErrors = this.GetSchemaValidation(database);
+        //    environment = new MetaPopulation();
+        //    core = Repository.Core(environment);
+        //    this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
+        //    this.domain.AddDirectSuperdomain(core);
 
-    //        var tableErrors = validationErrors.TableErrors;
+        //    c1 = this.CreateClass("C1");
+        //    this.CreateClass("C2");
 
-    //        Assert.AreEqual(1, tableErrors.Length);
-    //        Assert.AreEqual(SchemaValidationErrorKind.Incompatible, tableErrors[0].Kind);
+        //    c1RelationType = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
+        //    c1RelationType.AssociationType.ObjectType = c1;
+        //    c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.DecimalId);
+        //    c1RelationType.RoleType.Precision = 10;
+        //    c1RelationType.RoleType.Scale = 2;
 
-    //        var error = tableErrors[0];
+        //    // Different scale
+        //    c1RelationType.RoleType.Scale = 3;
 
-    //        Assert.AreEqual(null, error.ObjectType);
-    //        Assert.AreEqual(null, error.RelationType);
-    //        Assert.AreEqual(c1RelationType.RoleType, error.Role);
+        //    var database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
-    //        Assert.AreEqual("c1", error.TableName);
-    //        Assert.AreEqual("allorsdecimal", error.ColumnName);
-    //    }
+        //    var validationErrors = this.GetSchemaValidation(database);
 
-    //    [Test]
-    //    public void ValidateNewConcreteClass()
-    //    {
-    //        this.DropTable("C1");
-    //        this.DropTable("C2");
+        //    var tableErrors = validationErrors.TableErrors;
 
-    //        this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
-    //        this.domain.Name = "MyDomain";
+        //    Assert.AreEqual(1, tableErrors.Length);
+        //    Assert.AreEqual(SchemaValidationErrorKind.Incompatible, tableErrors[0].Kind);
 
-    //        this.CreateClass("C1");
+        //    var error = tableErrors[0];
 
-    //        this.CreateDatabase(this.domain.MetaPopulation, true);
+        //    Assert.AreEqual(null, error.ObjectType);
+        //    Assert.AreEqual(null, error.RelationType);
+        //    Assert.AreEqual(c1RelationType.RoleType, error.Role);
 
-    //        this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
-    //        this.domain.Name = "MyDomain";
+        //    Assert.AreEqual("c1", error.TableName);
+        //    Assert.AreEqual("allorsdecimal", error.ColumnName);
+        //}
 
-    //        this.CreateClass("C1");
+        //[Test]
+        //public void ValidateNewConcreteClass()
+        //{
+        //    this.DropTable("C1");
+        //    this.DropTable("C2");
 
-    //        // Extra class            
-    //        this.CreateClass("C2");
+        //    this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
+        //    this.domain.Name = "MyDomain";
 
-    //        var database = this.CreateDatabase(this.domain.MetaPopulation, false);
+        //    this.CreateClass("C1");
 
-    //        var validationErrors = this.GetSchemaValidation(database);
+        //    this.CreateDatabase(this.domain.MetaPopulation, true);
 
-    //        var tableErrors = validationErrors.TableErrors;
+        //    this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
+        //    this.domain.Name = "MyDomain";
 
-    //        Assert.AreEqual(1, tableErrors.Length);
+        //    this.CreateClass("C1");
 
-    //        var error = tableErrors[0];
+        //    // Extra class            
+        //    this.CreateClass("C2");
 
-    //        Assert.AreEqual("c2", error.TableName);
-    //        Assert.AreEqual(SchemaValidationErrorKind.Missing, tableErrors[0].Kind);
-    //    }
+        //    var database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
-    //    [Test]
-    //    public void ValidateNewInterfaceInheritanceWithBooleanRelation()
-    //    {
-    //        this.DropTable("C1");
-    //        this.DropTable("C2");
+        //    var validationErrors = this.GetSchemaValidation(database);
 
-    //        var environment = new MetaPopulation();
-    //        var core = Repository.Core(environment);
-    //        this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
-    //        this.domain.AddDirectSuperdomain(core);
+        //    var tableErrors = validationErrors.TableErrors;
 
-    //        var c1 = this.CreateClass("C1");
-    //        var c2 = this.CreateClass("C2");
+        //    Assert.AreEqual(1, tableErrors.Length);
 
-    //        var i12 = this.CreateInterface("I12");
+        //    var error = tableErrors[0];
 
-    //        var i12AllorsString = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
-    //        i12AllorsString.AssociationType.ObjectType = i12;
-    //        i12AllorsString.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.BooleanId);
+        //    Assert.AreEqual("c2", error.TableName);
+        //    Assert.AreEqual(SchemaValidationErrorKind.Missing, tableErrors[0].Kind);
+        //}
 
-    //        new InheritanceBuilder(this.domain, Guid.NewGuid()).WithSubtype(c1).WithSupertype(i12).Build();
- 
-    //        this.CreateDatabase(this.domain.MetaPopulation, true);
+        //[Test]
+        //public void ValidateNewInterfaceInheritanceWithBooleanRelation()
+        //{
+        //    this.DropTable("C1");
+        //    this.DropTable("C2");
 
-    //        environment = new MetaPopulation();
-    //        core = Repository.Core(environment);
-    //        this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
-    //        this.domain.AddDirectSuperdomain(core);
+        //    var environment = new MetaPopulation();
+        //    var core = Repository.Core(environment);
+        //    this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
+        //    this.domain.AddDirectSuperdomain(core);
 
-    //        c1 = this.CreateClass("C1");
-    //        c2 = this.CreateClass("C2");
+        //    var c1 = this.CreateClass("C1");
+        //    var c2 = this.CreateClass("C2");
 
-    //        i12 = this.CreateInterface("I12");
+        //    var i12 = this.CreateInterface("I12");
 
-    //        i12AllorsString = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
-    //        i12AllorsString.AssociationType.ObjectType = i12;
-    //        i12AllorsString.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.BooleanId);
+        //    var i12AllorsString = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
+        //    i12AllorsString.AssociationType.ObjectType = i12;
+        //    i12AllorsString.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.BooleanId);
 
-    //        new InheritanceBuilder(this.domain, Guid.NewGuid()).WithSubtype(c1).WithSupertype(i12).Build();
+        //    new InheritanceBuilder(this.domain, Guid.NewGuid()).WithSubtype(c1).WithSupertype(i12).Build();
 
-    //        // Extra inheritance
-    //        new InheritanceBuilder(this.domain, Guid.NewGuid()).WithSubtype(c2).WithSupertype(i12).Build();
+        //    this.CreateDatabase(this.domain.MetaPopulation, true);
 
-    //        var database = this.CreateDatabase(this.domain.MetaPopulation, false);
+        //    environment = new MetaPopulation();
+        //    core = Repository.Core(environment);
+        //    this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
+        //    this.domain.AddDirectSuperdomain(core);
 
-    //        var validationErrors = this.GetSchemaValidation(database);
+        //    c1 = this.CreateClass("C1");
+        //    c2 = this.CreateClass("C2");
 
-    //        var tableErrors = validationErrors.TableErrors;
+        //    i12 = this.CreateInterface("I12");
 
-    //        Assert.AreEqual(1, tableErrors.Length);
+        //    i12AllorsString = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
+        //    i12AllorsString.AssociationType.ObjectType = i12;
+        //    i12AllorsString.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.BooleanId);
 
-    //        var error = tableErrors[0];
+        //    new InheritanceBuilder(this.domain, Guid.NewGuid()).WithSubtype(c1).WithSupertype(i12).Build();
 
-    //        Assert.AreEqual("c2", error.TableName);
-    //        Assert.AreEqual("allorsboolean", error.ColumnName);
-    //        Assert.AreEqual(SchemaValidationErrorKind.Missing, tableErrors[0].Kind);
-    //    }
+        //    // Extra inheritance
+        //    new InheritanceBuilder(this.domain, Guid.NewGuid()).WithSubtype(c2).WithSupertype(i12).Build();
 
-    //    [Test]
-    //    public void ValidateNewMany2ManyRelation()
-    //    {
-    //        this.DropTable("C1");
-    //        this.DropTable("C2");
+        //    var database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
-    //        this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
+        //    var validationErrors = this.GetSchemaValidation(database);
 
-    //        var c1 = this.CreateClass("C1");
-    //        var c2 = this.CreateClass("C2");
+        //    var tableErrors = validationErrors.TableErrors;
 
-    //        this.CreateDatabase(this.domain.MetaPopulation, true);
+        //    Assert.AreEqual(1, tableErrors.Length);
 
-    //        this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
+        //    var error = tableErrors[0];
 
-    //        c1 = this.CreateClass("C1");
-    //        c2 = this.CreateClass("C2");
+        //    Assert.AreEqual("c2", error.TableName);
+        //    Assert.AreEqual("allorsboolean", error.ColumnName);
+        //    Assert.AreEqual(SchemaValidationErrorKind.Missing, tableErrors[0].Kind);
+        //}
 
-    //        // Extra relation
-    //        var fromC1ToC2 = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
-    //        fromC1ToC2.AssociationType.ObjectType = c1;
-    //        fromC1ToC2.AssociationType.IsMany = true;
-    //        fromC1ToC2.RoleType.ObjectType = c2;
-    //        fromC1ToC2.RoleType.IsMany = true;
+        //[Test]
+        //public void ValidateNewMany2ManyRelation()
+        //{
+        //    this.DropTable("C1");
+        //    this.DropTable("C2");
 
-    //        var database = this.CreateDatabase(this.domain.MetaPopulation, false);
+        //    this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
 
-    //        var validationErrors = this.GetSchemaValidation(database);
+        //    var c1 = this.CreateClass("C1");
+        //    var c2 = this.CreateClass("C2");
 
-    //        var tableErros = validationErrors.TableErrors;
+        //    this.CreateDatabase(this.domain.MetaPopulation, true);
 
-    //        Assert.AreEqual(1, tableErros.Length);
-    //        Assert.AreEqual(SchemaValidationErrorKind.Missing, tableErros[0].Kind);
+        //    this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
 
-    //        var error = tableErros[0];
+        //    c1 = this.CreateClass("C1");
+        //    c2 = this.CreateClass("C2");
 
-    //        Assert.AreEqual(null, error.ObjectType);
-    //        Assert.AreEqual(fromC1ToC2, error.RelationType);
-    //        Assert.AreEqual(null, error.Role);
+        //    // Extra relation
+        //    var fromC1ToC2 = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).WithCardinality(Multiplicity.ManyToMany).Build();
+        //    fromC1ToC2.AssociationType.ObjectType = c1;
+        //    fromC1ToC2.RoleType.ObjectType = c2;
 
-    //        Assert.AreEqual("c1c2", error.TableName);
-    //        Assert.AreEqual(null, error.ColumnName);
-    //    }
+        //    var database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
-    //    [Test]
-    //    public void ValidateNewMany2OneRelation()
-    //    {
-    //        this.DropTable("C1");
-    //        this.DropTable("C2");
+        //    var validationErrors = this.GetSchemaValidation(database);
 
-    //        this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
+        //    var tableErros = validationErrors.TableErrors;
 
-    //        var c1 = this.CreateClass("C1");
-    //        var c2 = this.CreateClass("C2");
+        //    Assert.AreEqual(1, tableErros.Length);
+        //    Assert.AreEqual(SchemaValidationErrorKind.Missing, tableErros[0].Kind);
 
-    //        this.CreateDatabase(this.domain.MetaPopulation, true);
+        //    var error = tableErros[0];
 
-    //        this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
+        //    Assert.AreEqual(null, error.ObjectType);
+        //    Assert.AreEqual(fromC1ToC2, error.RelationType);
+        //    Assert.AreEqual(null, error.Role);
 
-    //        c1 = this.CreateClass("C1");
-    //        c2 = this.CreateClass("C2");
+        //    Assert.AreEqual("c1c2", error.TableName);
+        //    Assert.AreEqual(null, error.ColumnName);
+        //}
 
-    //        // Extra relation
-    //        var fromC1ToC2 = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
-    //        fromC1ToC2.AssociationType.ObjectType = c1;
-    //        fromC1ToC2.AssociationType.IsMany = true;
-    //        fromC1ToC2.RoleType.ObjectType = c2;
+        //[Test]
+        //public void ValidateNewMany2OneRelation()
+        //{
+        //    this.DropTable("C1");
+        //    this.DropTable("C2");
 
-    //        var database = this.CreateDatabase(this.domain.MetaPopulation, false);
+        //    this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
 
-    //        var validationErrors = this.GetSchemaValidation(database);
-    //        var tableErros = validationErrors.TableErrors;
+        //    var c1 = this.CreateClass("C1");
+        //    var c2 = this.CreateClass("C2");
 
-    //        Assert.AreEqual(1, tableErros.Length);
-    //        Assert.AreEqual(SchemaValidationErrorKind.Missing, tableErros[0].Kind);
+        //    this.CreateDatabase(this.domain.MetaPopulation, true);
 
-    //        var error = tableErros[0];
+        //    this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
 
-    //        Assert.AreEqual(null, error.ObjectType);
-    //        Assert.AreEqual(null, error.RelationType);
-    //        Assert.AreEqual(fromC1ToC2.RoleType, error.Role);
-    //        Assert.AreEqual("c1", error.TableName);
-    //        Assert.AreEqual("c2", error.ColumnName);
-    //    }
+        //    c1 = this.CreateClass("C1");
+        //    c2 = this.CreateClass("C2");
 
-    //    [Test]
-    //    public void ValidateNewOne2ManyRelation()
-    //    {
-    //        this.DropTable("C1");
-    //        this.DropTable("C2");
+        //    // Extra relation
+        //    var fromC1ToC2 = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).WithCardinality(Multiplicity.ManyToOne).Build();
+        //    fromC1ToC2.AssociationType.ObjectType = c1;
+        //    fromC1ToC2.RoleType.ObjectType = c2;
 
-    //        this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
+        //    var database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
-    //        var c1 = this.CreateClass("C1");
-    //        var c2 = this.CreateClass("C2");
+        //    var validationErrors = this.GetSchemaValidation(database);
+        //    var tableErros = validationErrors.TableErrors;
 
-    //        this.CreateDatabase(this.domain.MetaPopulation, true);
+        //    Assert.AreEqual(1, tableErros.Length);
+        //    Assert.AreEqual(SchemaValidationErrorKind.Missing, tableErros[0].Kind);
 
-    //        this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
+        //    var error = tableErros[0];
 
-    //        c1 = this.CreateClass("C1");
-    //        c2 = this.CreateClass("C2");
+        //    Assert.AreEqual(null, error.ObjectType);
+        //    Assert.AreEqual(null, error.RelationType);
+        //    Assert.AreEqual(fromC1ToC2.RoleType, error.Role);
+        //    Assert.AreEqual("c1", error.TableName);
+        //    Assert.AreEqual("c2", error.ColumnName);
+        //}
 
-    //        // extra relation
-    //        var fromC1ToC2 = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
-    //        fromC1ToC2.AssociationType.ObjectType = c1;
-    //        fromC1ToC2.RoleType.ObjectType = c2;
-    //        fromC1ToC2.RoleType.IsMany = true;
+        //[Test]
+        //public void ValidateNewOne2ManyRelation()
+        //{
+        //    this.DropTable("C1");
+        //    this.DropTable("C2");
 
-    //        var database = this.CreateDatabase(this.domain.MetaPopulation, false);
+        //    this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
 
-    //        var validationErrors = this.GetSchemaValidation(database);
+        //    var c1 = this.CreateClass("C1");
+        //    var c2 = this.CreateClass("C2");
 
-    //        var tableErrors = validationErrors.TableErrors;
+        //    this.CreateDatabase(this.domain.MetaPopulation, true);
 
-    //        Assert.AreEqual(1, tableErrors.Length);
-    //        Assert.AreEqual(SchemaValidationErrorKind.Missing, tableErrors[0].Kind);
+        //    this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
 
-    //        var error = tableErrors[0];
+        //    c1 = this.CreateClass("C1");
+        //    c2 = this.CreateClass("C2");
 
-    //        Assert.AreEqual(null, error.ObjectType);
-    //        Assert.AreEqual(null, error.RelationType);
-    //        Assert.AreEqual(fromC1ToC2.RoleType, error.Role);
-    //        Assert.AreEqual("c2", error.TableName);
-    //        Assert.AreEqual("c2c1", error.ColumnName);
-    //    }
+        //    // extra relation
+        //    var fromC1ToC2 = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).WithCardinality(Multiplicity.OneToMany).Build();
+        //    fromC1ToC2.AssociationType.ObjectType = c1;
+        //    fromC1ToC2.RoleType.ObjectType = c2;
 
-    //    [Test]
-    //    public void ValidateNewOne2OneRelation()
-    //    {
-    //        this.DropTable("C1");
-    //        this.DropTable("C2");
+        //    var database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
-    //        this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
+        //    var validationErrors = this.GetSchemaValidation(database);
 
-    //        var c1 = this.CreateClass("C1");
-    //        var c2 = this.CreateClass("C2");
+        //    var tableErrors = validationErrors.TableErrors;
 
-    //        this.CreateDatabase(this.domain.MetaPopulation, true);
+        //    Assert.AreEqual(1, tableErrors.Length);
+        //    Assert.AreEqual(SchemaValidationErrorKind.Missing, tableErrors[0].Kind);
 
-    //        this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
+        //    var error = tableErrors[0];
 
-    //        c1 = this.CreateClass("C1");
-    //        c2 = this.CreateClass("C2");
+        //    Assert.AreEqual(null, error.ObjectType);
+        //    Assert.AreEqual(null, error.RelationType);
+        //    Assert.AreEqual(fromC1ToC2.RoleType, error.Role);
+        //    Assert.AreEqual("c2", error.TableName);
+        //    Assert.AreEqual("c2c1", error.ColumnName);
+        //}
 
-    //        // extra relation
-    //        var fromC1ToC2 = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
-    //        fromC1ToC2.AssociationType.ObjectType = c1;
-    //        fromC1ToC2.RoleType.ObjectType = c2;
+        //[Test]
+        //public void ValidateNewOne2OneRelation()
+        //{
+        //    this.DropTable("C1");
+        //    this.DropTable("C2");
 
-    //        var database = this.CreateDatabase(this.domain.MetaPopulation, false);
+        //    this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
 
-    //        var validationErrors = this.GetSchemaValidation(database);
+        //    var c1 = this.CreateClass("C1");
+        //    var c2 = this.CreateClass("C2");
 
-    //        var tableErrors = validationErrors.TableErrors;
+        //    this.CreateDatabase(this.domain.MetaPopulation, true);
 
-    //        Assert.AreEqual(1, tableErrors.Length);
-    //        Assert.AreEqual(SchemaValidationErrorKind.Missing, tableErrors[0].Kind);
+        //    this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
 
-    //        var error = tableErrors[0];
+        //    c1 = this.CreateClass("C1");
+        //    c2 = this.CreateClass("C2");
 
-    //        Assert.AreEqual(null, error.ObjectType);
-    //        Assert.AreEqual(null, error.RelationType);
-    //        Assert.AreEqual(fromC1ToC2.RoleType, error.Role);
-    //        Assert.AreEqual("c1", error.TableName);
-    //        Assert.AreEqual("c2", error.ColumnName);
-    //    }
+        //    // extra relation
+        //    var fromC1ToC2 = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
+        //    fromC1ToC2.AssociationType.ObjectType = c1;
+        //    fromC1ToC2.RoleType.ObjectType = c2;
 
-    //    [Test]
-    //    public void ValidateStringRelationDifferentSize()
-    //    {
-    //        this.DropTable("C1");
-    //        this.DropTable("C2");
+        //    var database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
-    //        var environment = new MetaPopulation();
-    //        var core = Repository.Core(environment);
-    //        this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
-    //        this.domain.AddDirectSuperdomain(core);
+        //    var validationErrors = this.GetSchemaValidation(database);
 
-    //        var c1 = this.CreateClass("C1");
-    //        this.CreateClass("C2");
+        //    var tableErrors = validationErrors.TableErrors;
 
-    //        var c1RelationType = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
-    //        c1RelationType.AssociationType.ObjectType = c1;
-    //        c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.StringId);
-    //        c1RelationType.RoleType.Size = 100;
+        //    Assert.AreEqual(1, tableErrors.Length);
+        //    Assert.AreEqual(SchemaValidationErrorKind.Missing, tableErrors[0].Kind);
 
-    //        this.CreateDatabase(this.domain.MetaPopulation, true);
+        //    var error = tableErrors[0];
 
-    //        environment = new MetaPopulation();
-    //        core = Repository.Core(environment);
-    //        this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
-    //        this.domain.AddDirectSuperdomain(core);
+        //    Assert.AreEqual(null, error.ObjectType);
+        //    Assert.AreEqual(null, error.RelationType);
+        //    Assert.AreEqual(fromC1ToC2.RoleType, error.Role);
+        //    Assert.AreEqual("c1", error.TableName);
+        //    Assert.AreEqual("c2", error.ColumnName);
+        //}
 
-    //        c1 = this.CreateClass("C1");
-    //        this.CreateClass("C2");
+        //[Test]
+        //public void ValidateStringRelationDifferentSize()
+        //{
+        //    this.DropTable("C1");
+        //    this.DropTable("C2");
 
-    //        c1RelationType = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
-    //        c1RelationType.AssociationType.ObjectType = c1;
-    //        c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.StringId);
-    //        c1RelationType.RoleType.Size = 100;
+        //    var environment = new MetaPopulation();
+        //    var core = Repository.Core(environment);
+        //    this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
+        //    this.domain.AddDirectSuperdomain(core);
 
-    //        // Different size
-    //        c1RelationType.RoleType.Size = 101;
+        //    var c1 = this.CreateClass("C1");
+        //    this.CreateClass("C2");
 
-    //        var database = this.CreateDatabase(this.domain.MetaPopulation, false);
+        //    var c1RelationType = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
+        //    c1RelationType.AssociationType.ObjectType = c1;
+        //    c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.StringId);
+        //    c1RelationType.RoleType.Size = 100;
 
-    //        var validationErrors = this.GetSchemaValidation(database);
+        //    this.CreateDatabase(this.domain.MetaPopulation, true);
 
-    //        var tableErrors = validationErrors.TableErrors;
+        //    environment = new MetaPopulation();
+        //    core = Repository.Core(environment);
+        //    this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
+        //    this.domain.AddDirectSuperdomain(core);
 
-    //        Assert.AreEqual(1, tableErrors.Length);
-    //        Assert.AreEqual(SchemaValidationErrorKind.Incompatible, tableErrors[0].Kind);
+        //    c1 = this.CreateClass("C1");
+        //    this.CreateClass("C2");
 
-    //        var error = tableErrors[0];
+        //    c1RelationType = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
+        //    c1RelationType.AssociationType.ObjectType = c1;
+        //    c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.StringId);
+        //    c1RelationType.RoleType.Size = 100;
 
-    //        Assert.AreEqual(null, error.ObjectType);
-    //        Assert.AreEqual(null, error.RelationType);
-    //        Assert.AreEqual(c1RelationType.RoleType, error.Role);
+        //    // Different size
+        //    c1RelationType.RoleType.Size = 101;
 
-    //        Assert.AreEqual("c1", error.TableName);
-    //        Assert.AreEqual("allorsstring", error.ColumnName);
-    //    }
+        //    var database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
-    //    [Test]
-    //    public void ValidateStringToOne2One()
-    //    {
-    //        this.DropTable("C1");
-    //        this.DropTable("C2");
+        //    var validationErrors = this.GetSchemaValidation(database);
 
-    //        var environment = new MetaPopulation();
-    //        var core = Repository.Core(environment);
-    //        this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
-    //        this.domain.AddDirectSuperdomain(core);
+        //    var tableErrors = validationErrors.TableErrors;
 
-    //        var c1 = this.CreateClass("C1");
-    //        var c2 = this.CreateClass("C2");
+        //    Assert.AreEqual(1, tableErrors.Length);
+        //    Assert.AreEqual(SchemaValidationErrorKind.Incompatible, tableErrors[0].Kind);
 
-    //        var c1RelationType = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
-    //        c1RelationType.AssociationType.ObjectType = c1;
-    //        c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.StringId);
-    //        c1RelationType.RoleType.Size = 100;
-    //        c1RelationType.RoleType.AssignedSingularName = "RelationType";
-    //        c1RelationType.RoleType.AssignedPluralName = "RelationTypes";
+        //    var error = tableErrors[0];
 
-    //        this.CreateDatabase(this.domain.MetaPopulation, true);
+        //    Assert.AreEqual(null, error.ObjectType);
+        //    Assert.AreEqual(null, error.RelationType);
+        //    Assert.AreEqual(c1RelationType.RoleType, error.Role);
 
-    //        environment = new MetaPopulation();
-    //        core = Repository.Core(environment);
-    //        this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
-    //        this.domain.AddDirectSuperdomain(core);
+        //    Assert.AreEqual("c1", error.TableName);
+        //    Assert.AreEqual("allorsstring", error.ColumnName);
+        //}
 
-    //        c1 = this.CreateClass("C1");
-    //        c2 = this.CreateClass("C2");
+        //[Test]
+        //public void ValidateStringToOne2One()
+        //{
+        //    this.DropTable("C1");
+        //    this.DropTable("C2");
 
-    //        c1RelationType = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
-    //        c1RelationType.AssociationType.ObjectType = c1;
-    //        c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.StringId);
-    //        c1RelationType.RoleType.Size = 100;
-    //        c1RelationType.RoleType.AssignedSingularName = "RelationType";
-    //        c1RelationType.RoleType.AssignedPluralName = "RelationTypes";
+        //    var environment = new MetaPopulation();
+        //    var core = Repository.Core(environment);
+        //    this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
+        //    this.domain.AddDirectSuperdomain(core);
 
-    //        // From string to one2one
-    //        c1RelationType.RoleType.Size = null;
-    //        c1RelationType.RoleType.ObjectType = c2;
+        //    var c1 = this.CreateClass("C1");
+        //    var c2 = this.CreateClass("C2");
 
-    //        var database = this.CreateDatabase(this.domain.MetaPopulation, false);
+        //    var c1RelationType = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
+        //    c1RelationType.AssociationType.ObjectType = c1;
+        //    c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.StringId);
+        //    c1RelationType.RoleType.Size = 100;
+        //    c1RelationType.RoleType.AssignedSingularName = "RelationType";
+        //    c1RelationType.RoleType.AssignedPluralName = "RelationTypes";
 
-    //        var validationErrors = this.GetSchemaValidation(database);
+        //    this.CreateDatabase(this.domain.MetaPopulation, true);
 
-    //        var tableErrors = validationErrors.TableErrors;
+        //    environment = new MetaPopulation();
+        //    core = Repository.Core(environment);
+        //    this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
+        //    this.domain.AddDirectSuperdomain(core);
 
-    //        Assert.AreEqual(1, tableErrors.Length);
-    //        Assert.AreEqual(SchemaValidationErrorKind.Incompatible, tableErrors[0].Kind);
+        //    c1 = this.CreateClass("C1");
+        //    c2 = this.CreateClass("C2");
 
-    //        var error = tableErrors[0];
+        //    c1RelationType = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
+        //    c1RelationType.AssociationType.ObjectType = c1;
+        //    c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.StringId);
+        //    c1RelationType.RoleType.Size = 100;
+        //    c1RelationType.RoleType.AssignedSingularName = "RelationType";
+        //    c1RelationType.RoleType.AssignedPluralName = "RelationTypes";
 
-    //        Assert.AreEqual(null, error.ObjectType);
-    //        Assert.AreEqual(null, error.RelationType);
-    //        Assert.AreEqual(c1RelationType.RoleType, error.Role);
+        //    // From string to one2one
+        //    c1RelationType.RoleType.Size = null;
+        //    c1RelationType.RoleType.ObjectType = c2;
 
-    //        Assert.AreEqual("c1", error.TableName);
-    //        Assert.AreEqual("relationtype", error.ColumnName);
-    //    }
+        //    var database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
-    //    [Test]
-    //    public void ValidateUnitRelationDifferentType()
-    //    {
-    //        this.DropTable("C1");
-    //        this.DropTable("C2");
+        //    var validationErrors = this.GetSchemaValidation(database);
 
-    //        var environment = new MetaPopulation();
-    //        var core = Repository.Core(environment);
-    //        this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
-    //        this.domain.AddDirectSuperdomain(core);
+        //    var tableErrors = validationErrors.TableErrors;
 
-    //        var c1 = this.CreateClass("C1");
-    //        this.CreateClass("C2");
+        //    Assert.AreEqual(1, tableErrors.Length);
+        //    Assert.AreEqual(SchemaValidationErrorKind.Incompatible, tableErrors[0].Kind);
 
-    //        var c1RelationType = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
-    //        c1RelationType.AssociationType.ObjectType = c1;
-    //        c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.BooleanId);
-    //        c1RelationType.RoleType.AssignedSingularName = "RelationType";
-    //        c1RelationType.RoleType.AssignedPluralName = "RelationTypes";
+        //    var error = tableErrors[0];
 
-    //        this.CreateDatabase(this.domain.MetaPopulation, true);
+        //    Assert.AreEqual(null, error.ObjectType);
+        //    Assert.AreEqual(null, error.RelationType);
+        //    Assert.AreEqual(c1RelationType.RoleType, error.Role);
 
-    //        environment = new MetaPopulation();
-    //        core = Repository.Core(environment);
-    //        this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
-    //        this.domain.AddDirectSuperdomain(core);
+        //    Assert.AreEqual("c1", error.TableName);
+        //    Assert.AreEqual("relationtype", error.ColumnName);
+        //}
 
-    //        c1 = this.CreateClass("C1");
-    //        this.CreateClass("C2");
+        //[Test]
+        //public void ValidateUnitRelationDifferentType()
+        //{
+        //    this.DropTable("C1");
+        //    this.DropTable("C2");
 
-    //        c1RelationType = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
-    //        c1RelationType.AssociationType.ObjectType = c1;
-    //        c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.BooleanId);
-    //        c1RelationType.RoleType.AssignedSingularName = "RelationType";
-    //        c1RelationType.RoleType.AssignedPluralName = "RelationTypes";
+        //    var environment = new MetaPopulation();
+        //    var core = Repository.Core(environment);
+        //    this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
+        //    this.domain.AddDirectSuperdomain(core);
 
-    //        // Different type
-    //        c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.Unique);
+        //    var c1 = this.CreateClass("C1");
+        //    this.CreateClass("C2");
 
-    //        var database = this.CreateDatabase(this.domain.MetaPopulation, false);
+        //    var c1RelationType = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
+        //    c1RelationType.AssociationType.ObjectType = c1;
+        //    c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.BooleanId);
+        //    c1RelationType.RoleType.AssignedSingularName = "RelationType";
+        //    c1RelationType.RoleType.AssignedPluralName = "RelationTypes";
 
-    //        var validationErrors = this.GetSchemaValidation(database);
+        //    this.CreateDatabase(this.domain.MetaPopulation, true);
 
-    //        var tableErrors = validationErrors.TableErrors;
+        //    environment = new MetaPopulation();
+        //    core = Repository.Core(environment);
+        //    this.domain = new Domain(environment, Guid.NewGuid()) { Name = "MyDomain" };
+        //    this.domain.AddDirectSuperdomain(core);
 
-    //        Assert.AreEqual(1, tableErrors.Length);
-    //        Assert.AreEqual(SchemaValidationErrorKind.Incompatible, tableErrors[0].Kind);
+        //    c1 = this.CreateClass("C1");
+        //    this.CreateClass("C2");
 
-    //        var error = tableErrors[0];
+        //    c1RelationType = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
+        //    c1RelationType.AssociationType.ObjectType = c1;
+        //    c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.BooleanId);
+        //    c1RelationType.RoleType.AssignedSingularName = "RelationType";
+        //    c1RelationType.RoleType.AssignedPluralName = "RelationTypes";
 
-    //        Assert.AreEqual(null, error.ObjectType);
-    //        Assert.AreEqual(null, error.RelationType);
-    //        Assert.AreEqual(c1RelationType.RoleType, error.Role);
+        //    // Different type
+        //    c1RelationType.RoleType.ObjectType = (ObjectType)this.domain.MetaPopulation.Find(UnitIds.Unique);
 
-    //        Assert.AreEqual("c1", error.TableName);
-    //        Assert.AreEqual("relationtype", error.ColumnName);
-    //    }
+        //    var database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
-    //    [Test]
-    //    public void IndexesMany2Many()
-    //    {
-    //        this.CreateDatabase().Init();
+        //    var validationErrors = this.GetSchemaValidation(database);
 
-    //        Assert.IsTrue(this.ExistIndex("CompanyIndexedMany2ManyPerson", "R"));
-    //        Assert.IsFalse(this.ExistIndex("CompanyMany2ManyPerson", "R"));
-    //    }
+        //    var tableErrors = validationErrors.TableErrors;
 
-    //    [Test]
-    //    public void IndexesUnits()
-    //    {
-    //        this.CreateDatabase().Init();
+        //    Assert.AreEqual(1, tableErrors.Length);
+        //    Assert.AreEqual(SchemaValidationErrorKind.Incompatible, tableErrors[0].Kind);
 
-    //        Assert.IsTrue(this.ExistIndex("C1", "C1AllorsInteger"));
-    //        Assert.IsFalse(this.ExistIndex("C1", "C1AllorsString"));
-    //    }
+        //    var error = tableErrors[0];
 
-    //    [Test]
-    //    public void IncompatiblePopulation()
-    //    {
-    //        this.DropTable("C1");
-    //        this.DropTable("C2");
+        //    Assert.AreEqual(null, error.ObjectType);
+        //    Assert.AreEqual(null, error.RelationType);
+        //    Assert.AreEqual(c1RelationType.RoleType, error.Role);
 
-    //        this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
+        //    Assert.AreEqual("c1", error.TableName);
+        //    Assert.AreEqual("relationtype", error.ColumnName);
+        //}
 
-    //        var c1 = this.CreateClass("C1");
-    //        var c2 = this.CreateClass("C2");
-            
-    //        this.CreateDatabase(this.domain.MetaPopulation, true);
+        //[Test]
+        //public void IndexesMany2Many()
+        //{
+        //    this.CreateDatabase().Init();
 
-    //        this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
+        //    Assert.IsTrue(this.ExistIndex("CompanyIndexedMany2ManyPerson", "R"));
+        //    Assert.IsFalse(this.ExistIndex("CompanyMany2ManyPerson", "R"));
+        //}
 
-    //        c1 = this.CreateClass("C1");
-    //        c2 = this.CreateClass("C2");
+        //[Test]
+        //public void IndexesUnits()
+        //{
+        //    this.CreateDatabase().Init();
 
-    //        var c1c2 = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
-    //        c1c2.AssociationType.ObjectType = c1;
-    //        c1c2.RoleType.ObjectType = c2;
+        //    Assert.IsTrue(this.ExistIndex("C1", "C1AllorsInteger"));
+        //    Assert.IsFalse(this.ExistIndex("C1", "C1AllorsString"));
+        //}
 
-    //        var database = this.CreateDatabase(this.domain.MetaPopulation, false);
+        //[Test]
+        //public void IncompatiblePopulation()
+        //{
+        //    this.DropTable("C1");
+        //    this.DropTable("C2");
 
-    //        ISession session = null;
-    //        try
-    //        {
-    //            session = database.CreateSession();
-    //            Assert.Fail();
-    //        }
-    //        catch (SchemaValidationException e)
-    //        {
-    //            var validationErrors = e.ValidationErrors;
-    //            Assert.IsTrue(validationErrors.HasErrors);
-    //        }
-    //        finally
-    //        {
-    //            if (session != null)
-    //            {
-    //                session.Rollback();
-    //            }
-    //        }
-    //    }
-        
-    //    protected Class CreateClass(string name)
-    //    {
-    //        return new ClassBuilder(this.domain, Guid.NewGuid()).WithSingularName(name).WithPluralName(name + "s").Build();
-    //    }
+        //    this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
 
-    //    protected Interface CreateInterface(string name)
-    //    {
-    //        return new InterfaceBuilder(this.domain, Guid.NewGuid()).WithSingularName(name).WithPluralName(name + "s").Build();
-    //    }
+        //    var c1 = this.CreateClass("C1");
+        //    var c2 = this.CreateClass("C2");
 
-    //    protected abstract IDatabase CreateDatabase(IMetaPopulation metaPopulation, bool init);
+        //    this.CreateDatabase(this.domain.MetaPopulation, true);
 
-    //    protected IDatabase CreateDatabase()
-    //    {
-    //        return this.Profile.CreateDatabase();
-    //    }
+        //    this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
 
-    //    protected abstract void DropTable(string tableName);
+        //    c1 = this.CreateClass("C1");
+        //    c2 = this.CreateClass("C2");
 
-    //    protected abstract void DropProcedure(string procedure);
+        //    var c1c2 = new RelationTypeBuilder(this.domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
+        //    c1c2.AssociationType.ObjectType = c1;
+        //    c1c2.RoleType.ObjectType = c2;
 
-    //    protected abstract bool ExistProcedure(string procedure);
+        //    var database = this.CreateDatabase(this.domain.MetaPopulation, false);
 
-    //    protected abstract bool ExistPrimaryKey(string table, string column);
+        //    ISession session = null;
+        //    try
+        //    {
+        //        session = database.CreateSession();
+        //        Assert.Fail();
+        //    }
+        //    catch (SchemaValidationException e)
+        //    {
+        //        var validationErrors = e.ValidationErrors;
+        //        Assert.IsTrue(validationErrors.HasErrors);
+        //    }
+        //    finally
+        //    {
+        //        if (session != null)
+        //        {
+        //            session.Rollback();
+        //        }
+        //    }
+        //}
 
-    //    protected abstract bool ExistIndex(string table, string column);
+        protected Class CreateClass(string name)
+        {
+            return new ClassBuilder(this.domain, Guid.NewGuid()).WithSingularName(name).WithPluralName(name + "s").Build();
+        }
 
-    //    protected abstract bool IsInteger(string table, string column);
+        protected Interface CreateInterface(string name)
+        {
+            return new InterfaceBuilder(this.domain, Guid.NewGuid()).WithSingularName(name).WithPluralName(name + "s").Build();
+        }
 
-    //    protected abstract bool IsLong(string table, string column);
+        protected abstract IDatabase CreateDatabase(IMetaPopulation metaPopulation, bool init);
 
-    //    protected abstract bool IsUnique(string table, string column);
+        protected IDatabase CreateDatabase()
+        {
+            return this.Profile.CreateDatabase();
+        }
 
-    //    protected abstract SchemaValidationErrors GetSchemaValidation(IDatabase database);
-    //}
+        protected abstract void DropTable(string schema, string tableName);
 
-    //public abstract class SchemaIntegerIdTest : SchemaTest
-    //{
-    //    [Test]
-    //    public void AssertIntegerIds()
-    //    {
-    //        Assert.IsTrue(this.IsInteger("_O", "O"));
-    //    }
-    //}
+        protected abstract void DropProcedure(string schema, string procedure);
 
-    //public abstract class SchemaLongIdTest : SchemaTest
-    //{
-    //    [Test]
-    //    public void AssertLongIds()
-    //    {
-    //        Assert.IsTrue(this.IsLong("_O", "O"));
-    //    }
-    //}
+        protected abstract bool ExistTable(string schema, string table);
+
+        protected abstract int ColumnCount(string schema, string table);
+
+        protected abstract bool ExistColumn(string schema, string table, string column, ColumnTypes columnType);
+
+        protected abstract bool ExistPrimaryKey(string schema, string table, string column);
+
+        protected abstract bool ExistIndex(string schema, string table, string column);
+
+        protected abstract bool ExistProcedure(string schema, string procedure);
+
+        protected abstract ValidateResult GetSchemaValidation(IDatabase database);
+    }
 }

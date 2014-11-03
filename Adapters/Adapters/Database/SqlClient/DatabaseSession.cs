@@ -223,13 +223,15 @@ namespace Allors.Adapters.Database.SqlClient
 
         public IObject Create(IClass objectType)
         {
-           const string CmdText = @"
-INSERT INTO " + Schema.TableNameForObjects + " (" + Schema.ColumnNameForType + ", " + Schema.ColumnNameForCache + @")
+            var schema = this.Database.Schema;
+
+            var cmdText = @"
+INSERT INTO " + schema.SchemaName + "." + Schema.TableNameForObjects + " (" + Schema.ColumnNameForType + ", " + Schema.ColumnNameForCache + @")
 VALUES (" + Schema.ParameterNameForType + ", " + Schema.ParameterNameForCache + @");
 
 SELECT " + Schema.ColumnNameForObject + @" = SCOPE_IDENTITY();
 ";
-            using (var command = this.CreateCommand(CmdText))
+            using (var command = this.CreateCommand(cmdText))
             {
                 command.Parameters.Add(Schema.ParameterNameForType, Schema.SqlDbTypeForType).Value = objectType.Id;
                 command.Parameters.Add(Schema.ParameterNameForCache, Schema.SqlDbTypeForCache).Value = Database.CacheDefaultValue;
@@ -350,15 +352,16 @@ SELECT " + Schema.ColumnNameForObject + @" = SCOPE_IDENTITY();
                 this.Flush();
             }
 
-            const string CmdText = @"
+            var schema = this.Database.Schema;
+            var cmdText = @"
 BEGIN
-SET IDENTITY_INSERT " + Schema.TableNameForObjects + @" ON;
-INSERT INTO " + Schema.TableNameForObjects + " (" + Schema.ColumnNameForObject + ", " + Schema.ColumnNameForType + ", " + Schema.ColumnNameForCache + @")
+SET IDENTITY_INSERT " + schema.SchemaName + "." + Schema.TableNameForObjects + @" ON;
+INSERT INTO " + schema.SchemaName + "." + Schema.TableNameForObjects + " (" + Schema.ColumnNameForObject + ", " + Schema.ColumnNameForType + ", " + Schema.ColumnNameForCache + @")
 VALUES (" + Schema.ParameterNameForObject + ", " + Schema.ParameterNameForType + @", " + Schema.ParameterNameForCache + @");
-SET IDENTITY_INSERT " + Schema.TableNameForObjects + @" OFF;
+SET IDENTITY_INSERT " + schema.SchemaName + "." + Schema.TableNameForObjects + @" OFF;
 END
 ";
-            using (var command = this.CreateCommand(CmdText))
+            using (var command = this.CreateCommand(cmdText))
             {
                 command.Parameters.Add(Schema.ParameterNameForObject, Schema.SqlDbTypeForObject).Value = objectId.Value;
                 command.Parameters.Add(Schema.ParameterNameForType, Schema.SqlDbTypeForType).Value = objectType.Id;
@@ -1158,9 +1161,10 @@ END
 
         private void FetchObject(ObjectId objectId)
         {
+            var schema = this.Database.Schema;
             var cmdText = @"
 SELECT  " + Schema.ColumnNameForType + ", " + Schema.ColumnNameForCache + @"
-FROM " + Schema.TableNameForObjects + @"
+FROM " + schema.SchemaName + "." + Schema.TableNameForObjects + @"
 WHERE " + Schema.ColumnNameForObject + @" = " + Schema.ParameterNameForObject + @"
 ";
             using (var command = this.CreateCommand(cmdText))
@@ -1206,7 +1210,7 @@ WHERE " + Schema.ColumnNameForObject + @" = " + Schema.ParameterNameForObject + 
 
             var cmdText = @"
 SELECT " + Schema.ColumnNameForRole + @"
-FROM " + schema.GetTableName(roleType.RelationType) + @"
+FROM " + schema.SchemaName + "." + schema.GetTableName(roleType.RelationType) + @"
 WHERE " + Schema.ColumnNameForAssociation + @"=" + Schema.ParameterNameForAssociation + @";
 ";
             using (var command = this.CreateCommand(cmdText))
@@ -1222,7 +1226,7 @@ WHERE " + Schema.ColumnNameForAssociation + @"=" + Schema.ParameterNameForAssoci
 
             var cmdText = @"
 SELECT " + Schema.ColumnNameForRole + @"
-FROM " + schema.GetTableName(roleType.RelationType) + @"
+FROM " + schema.SchemaName + "." + schema.GetTableName(roleType.RelationType) + @"
 WHERE " + Schema.ColumnNameForAssociation + @"=" + Schema.ParameterNameForAssociation + @";
 ";
             using (var command = this.CreateCommand(cmdText))
@@ -1245,7 +1249,7 @@ WHERE " + Schema.ColumnNameForAssociation + @"=" + Schema.ParameterNameForAssoci
 
             var cmdText = @"
 SELECT " + Schema.ColumnNameForRole + @"
-FROM " + schema.GetTableName(roleType.RelationType) + @"
+FROM " + schema.SchemaName + "." + schema.GetTableName(roleType.RelationType) + @"
 WHERE " + Schema.ColumnNameForAssociation + @"=" + Schema.ParameterNameForAssociation + @";
 ";
             List<ObjectId> roles = null;
@@ -1277,7 +1281,7 @@ WHERE " + Schema.ColumnNameForAssociation + @"=" + Schema.ParameterNameForAssoci
 
             var cmdText = @"
 SELECT " + Schema.ColumnNameForAssociation + @"
-FROM " + schema.GetTableName(associationType.RelationType) + @"
+FROM " + schema.SchemaName + "." + schema.GetTableName(associationType.RelationType) + @"
 WHERE " + Schema.ColumnNameForRole + @"=" + Schema.ParameterNameForRole + @";
 ";
             using (var command = this.CreateCommand(cmdText))
@@ -1300,7 +1304,7 @@ WHERE " + Schema.ColumnNameForRole + @"=" + Schema.ParameterNameForRole + @";
 
             var cmdText = @"
 SELECT " + Schema.ColumnNameForAssociation + @"
-FROM " + schema.GetTableName(associationType.RelationType) + @"
+FROM " + schema.SchemaName + "." + schema.GetTableName(associationType.RelationType) + @"
 WHERE " + Schema.ColumnNameForRole + @"=" + Schema.ParameterNameForRole + @";
 ";
             List<ObjectId> associations = null;
@@ -1331,8 +1335,9 @@ WHERE " + Schema.ColumnNameForRole + @"=" + Schema.ParameterNameForRole + @";
             if (this.flushDeletedObjects != null)
             {
                 var schema = this.database.Schema;
+
                 var cmdText = @"
-DELETE FROM " + Schema.TableNameForObjects + @"
+DELETE FROM " + schema.SchemaName + "." + Schema.TableNameForObjects + @"
 WHERE " + Schema.ColumnNameForObject + @" = " + Schema.ParameterNameForObject;
                 using (var command = this.CreateCommand(cmdText))
                 {
@@ -1364,7 +1369,7 @@ WHERE " + Schema.ColumnNameForObject + @" = " + Schema.ParameterNameForObject;
                     {
                         var schema = this.database.Schema;
                         var cmdText = @"
-DELETE FROM " + schema.GetTableName(roleType.RelationType) + @"
+DELETE FROM " + schema.SchemaName + "." + schema.GetTableName(roleType.RelationType) + @"
 WHERE " + Schema.ColumnNameForAssociation + @" = " + Schema.ParameterNameForAssociation;
                         using (var command = this.CreateCommand(cmdText))
                         {
@@ -1382,7 +1387,7 @@ WHERE " + Schema.ColumnNameForAssociation + @" = " + Schema.ParameterNameForAsso
                     {
                         var schema = this.database.Schema;
                         var cmdText = @"
-MERGE " + schema.GetTableName(roleType.RelationType) + @" AS _X
+MERGE " + schema.SchemaName + "." + schema.GetTableName(roleType.RelationType) + @" AS _X
 USING (SELECT " + Schema.ParameterNameForAssociation + @" AS " + Schema.ColumnNameForAssociation + @") AS _Y
     ON _X." + Schema.ColumnNameForAssociation + @" = _Y." + Schema.ColumnNameForAssociation + @"
 WHEN MATCHED THEN
@@ -1428,7 +1433,7 @@ VALUES(" + Schema.ParameterNameForAssociation + @", " + Schema.ParameterNameForR
                     {
                         var schema = this.database.Schema;
                         var cmdText = @"
-DELETE FROM " + schema.GetTableName(roleType.RelationType) + @"
+DELETE FROM " + schema.SchemaName + "." + schema.GetTableName(roleType.RelationType) + @"
 WHERE " + Schema.ColumnNameForAssociation + @" = " + Schema.ParameterNameForAssociation;
                         using (var command = this.CreateCommand(cmdText))
                         {
@@ -1446,10 +1451,10 @@ WHERE " + Schema.ColumnNameForAssociation + @" = " + Schema.ParameterNameForAsso
                     {
                         var schema = this.database.Schema;
                         var cmdText = @"
-DELETE FROM " + schema.GetTableName(roleType.RelationType) + @"
+DELETE FROM " + schema.SchemaName + "." + schema.GetTableName(roleType.RelationType) + @"
 WHERE " + Schema.ColumnNameForRole + @" = " + Schema.ParameterNameForRole + @";
 
-MERGE " + schema.GetTableName(roleType.RelationType) + @" AS _X
+MERGE " + schema.SchemaName + "." + schema.GetTableName(roleType.RelationType) + @" AS _X
 USING (SELECT " + Schema.ParameterNameForAssociation + @" AS " + Schema.ColumnNameForAssociation + @") AS _Y
     ON _X." + Schema.ColumnNameForAssociation + @" = _Y." + Schema.ColumnNameForAssociation + @"
 WHEN MATCHED THEN
@@ -1497,7 +1502,7 @@ VALUES(" + Schema.ParameterNameForAssociation + @", " + Schema.ParameterNameForR
                     {
                         var schema = this.database.Schema;
                         var cmdText = @"
-DELETE FROM " + schema.GetTableName(roleType.RelationType) + @"
+DELETE FROM " + schema.SchemaName + "." + schema.GetTableName(roleType.RelationType) + @"
 WHERE " + Schema.ColumnNameForAssociation + @" = " + Schema.ParameterNameForAssociation;
                         using (var command = this.CreateCommand(cmdText))
                         {
@@ -1515,7 +1520,7 @@ WHERE " + Schema.ColumnNameForAssociation + @" = " + Schema.ParameterNameForAsso
                     {
                         var schema = this.database.Schema;
                         var cmdText = @"
-MERGE " + schema.GetTableName(roleType.RelationType) + @" AS _X
+MERGE " + schema.SchemaName + "." + schema.GetTableName(roleType.RelationType) + @" AS _X
 USING (SELECT " + Schema.ParameterNameForAssociation + @" AS " + Schema.ColumnNameForAssociation + @") AS _Y
     ON _X." + Schema.ColumnNameForAssociation + @" = _Y." + Schema.ColumnNameForAssociation + @"
 WHEN MATCHED THEN
@@ -1606,7 +1611,7 @@ VALUES(" + Schema.ParameterNameForAssociation + @", " + Schema.ParameterNameForR
                     {
                         var schema = this.database.Schema;
                         var cmdText = @"
-DELETE FROM " + schema.GetTableName(roleType.RelationType) + @"
+DELETE FROM " + schema.SchemaName + "." + schema.GetTableName(roleType.RelationType) + @"
 WHERE " + Schema.ColumnNameForAssociation + @" = " + Schema.ParameterNameForAssociation;
                         using (var command = this.CreateCommand(cmdText))
                         {
@@ -1624,10 +1629,10 @@ WHERE " + Schema.ColumnNameForAssociation + @" = " + Schema.ParameterNameForAsso
                     {
                         var schema = this.database.Schema;
                         var cmdText = @"
-DELETE FROM " + schema.GetTableName(roleType.RelationType) + @"
+DELETE FROM " + schema.SchemaName + "." + schema.GetTableName(roleType.RelationType) + @"
 WHERE " + Schema.ColumnNameForRole + @" = " + Schema.ParameterNameForRole + @";
 
-INSERT INTO " + schema.GetTableName(roleType.RelationType) + @" (" + Schema.ColumnNameForAssociation + @", " + Schema.ColumnNameForRole + @")
+INSERT INTO " + schema.SchemaName + "." + schema.GetTableName(roleType.RelationType) + @" (" + Schema.ColumnNameForAssociation + @", " + Schema.ColumnNameForRole + @")
 VALUES(" + Schema.ParameterNameForAssociation + @", " + Schema.ParameterNameForRole + @");
 ";
                         using (var command = this.CreateCommand(cmdText))
@@ -1654,7 +1659,7 @@ VALUES(" + Schema.ParameterNameForAssociation + @", " + Schema.ParameterNameForR
                     {
                         var schema = this.database.Schema;
                         var cmdText = @"
-DELETE FROM " + schema.GetTableName(roleType.RelationType) + @"
+DELETE FROM " + schema.SchemaName + "." + schema.GetTableName(roleType.RelationType) + @"
 WHERE " + Schema.ColumnNameForAssociation + @" = " + Schema.ParameterNameForAssociation + @"
 AND " + Schema.ColumnNameForRole + @" = " + Schema.ParameterNameForRole + @";
 ";
@@ -1742,7 +1747,7 @@ AND " + Schema.ColumnNameForRole + @" = " + Schema.ParameterNameForRole + @";
                     {
                         var schema = this.database.Schema;
                         var cmdText = @"
-DELETE FROM " + schema.GetTableName(roleType.RelationType) + @"
+DELETE FROM " + schema.SchemaName + "." + schema.GetTableName(roleType.RelationType) + @"
 WHERE " + Schema.ColumnNameForAssociation + @" = " + Schema.ParameterNameForAssociation;
                         using (var command = this.CreateCommand(cmdText))
                         {
@@ -1760,7 +1765,7 @@ WHERE " + Schema.ColumnNameForAssociation + @" = " + Schema.ParameterNameForAsso
                     {
                         var schema = this.database.Schema;
                         var cmdText = @"
-INSERT INTO " + schema.GetTableName(roleType.RelationType) + @" (" + Schema.ColumnNameForAssociation + @", " + Schema.ColumnNameForRole + @")
+INSERT INTO " + schema.SchemaName + "." + schema.GetTableName(roleType.RelationType) + @" (" + Schema.ColumnNameForAssociation + @", " + Schema.ColumnNameForRole + @")
 VALUES(" + Schema.ParameterNameForAssociation + @", " + Schema.ParameterNameForRole + @");
 ";
                         using (var command = this.CreateCommand(cmdText))
@@ -1787,7 +1792,7 @@ VALUES(" + Schema.ParameterNameForAssociation + @", " + Schema.ParameterNameForR
                     {
                         var schema = this.database.Schema;
                         var cmdText = @"
-DELETE FROM " + schema.GetTableName(roleType.RelationType) + @"
+DELETE FROM " + schema.SchemaName + "." + schema.GetTableName(roleType.RelationType) + @"
 WHERE " + Schema.ColumnNameForAssociation + @" = " + Schema.ParameterNameForAssociation + @"
 AND " + Schema.ColumnNameForRole + @" = " + Schema.ParameterNameForRole + @";
 ";

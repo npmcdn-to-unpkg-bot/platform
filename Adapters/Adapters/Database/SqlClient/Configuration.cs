@@ -28,6 +28,7 @@ namespace Allors.Adapters.Database.SqlClient
     {
         public Configuration()
         {
+            this.SchemaName = "allors";
             this.CommandTimeout = 30;
             this.IsolationLevel = IsolationLevel.Snapshot;
             this.ObjectIds = new ObjectIdsInteger();
@@ -36,6 +37,8 @@ namespace Allors.Adapters.Database.SqlClient
         public Guid Id { get; set; }
 
         public string ConnectionString { get; set; }
+
+        public string SchemaName { get; set; }
 
         public int CommandTimeout { get; set; }
 

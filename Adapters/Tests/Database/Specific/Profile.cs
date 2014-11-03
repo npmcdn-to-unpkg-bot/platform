@@ -22,8 +22,7 @@ namespace Allors.Adapters.Special
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Linq;
+    using System.Data.SqlClient;
     using System.Text;
 
     using Allors;
@@ -103,22 +102,6 @@ namespace Allors.Adapters.Special
         public abstract IDatabase CreateDatabase();
 
         public abstract IWorkspace CreateWorkspace(IDatabase database);
-
-        //public void DropProcedure(string procedure)
-        //{
-        //    using (var connection = ((Database.Sql.Database)this.CreateDatabase()).CreateDbConnection())
-        //    {
-        //        connection.Open();
-        //        using (var command = connection.CreateCommand())
-        //        {
-        //            var sql = new StringBuilder();
-        //            sql.Append("DROP PROCEDURE " + procedure);
-
-        //            command.CommandText = sql.ToString();
-        //            command.ExecuteNonQuery();
-        //        }
-        //    }
-        //}
 
         internal ISession CreateSession()
         {

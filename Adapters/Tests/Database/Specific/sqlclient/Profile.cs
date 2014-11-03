@@ -20,129 +20,207 @@
 
 namespace Allors.Adapters.Special.SqlClient
 {
+    using System.Data;
+    using System.Data.SqlClient;
     using System.Text;
 
     public abstract class Profile : Special.Profile
     {
-//        public void DropTable(string tableName)
-//        {
-//            using (var connection = ((Database)this.CreateDatabase()).CreateDbConnection())
-//            {
-//                connection.Open();
-//                using (var command = connection.CreateCommand())
-//                {
-//                    var sql = new StringBuilder();
-//                    sql.Append("IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'" + tableName + "'))\n");
-//                    sql.Append("DROP TABLE " + tableName);
-//                    command.CommandText = sql.ToString();
-//                    command.ExecuteNonQuery();
-//                }
-//            }
-//        }
+        protected abstract string ConnectionString { get; }
 
-//        public bool ExistIndex(string table, string column)
-//        {
-//            using (var connection = ((Adapters.Database.SqlClient.Database)this.CreateDatabase()).CreateDbConnection())
-//            {
-//                connection.Open();
-//                using (var command = connection.CreateCommand())
-//                {
-//                    var sql = new StringBuilder();
-//                    sql.Append("SELECT COUNT(*)\n");
-//                    sql.Append("FROM sys.indexes AS idx\n");
-//                    sql.Append("JOIN sys.index_columns idxcol\n");
-//                    sql.Append("ON idx.object_id = idxcol.object_id AND idx.index_id=idxcol.index_id\n");
-//                    sql.Append("WHERE idx.type = 2 -- Non Clusterd\n");
-//                    sql.Append("and key_ordinal = 1 -- 1 based\n");
+        public void DropProcedure(string procedure)
+        {
+            using (var connection = new SqlConnection(this.ConnectionString))
+            {
+                connection.Open();
+                using (var command = connection.CreateCommand())
+                {
+                    var sql = new StringBuilder();
+                    sql.Append("DROP PROCEDURE " + procedure);
 
-//                    sql.Append("and object_name(idx.object_id) = '" + table + "'\n");
-//                    sql.Append("and col_name(idx.object_id,idxcol.column_id) = '" + column + "'\n");
+                    command.CommandText = sql.ToString();
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
 
-//                    command.CommandText = sql.ToString();
-//                    var count = (int)command.ExecuteScalar();
+        public void DropTable(string schema, string table)
+        {
+            using (var connection = new SqlConnection(this.ConnectionString))
+            {
+                connection.Open();
+                var cmdText = @"
+IF EXISTS (SELECT * FROM information_schema.tables WHERE table_name = @tableName AND table_schema = @tableSchema)
+BEGIN
+DROP TABLE " + schema + "." + table + @"
+END
+";
+                using (var command = new SqlCommand(cmdText, connection))
+                {
+                    command.Parameters.Add("@tableName", SqlDbType.NVarChar).Value = table;
+                    command.Parameters.Add("@tableSchema", SqlDbType.NVarChar).Value = schema;
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
 
-//                    return count != 0;
-//                }
-//            }
-//        }
+        public bool ExistTable(string schema, string table)
+        {
+            using (var connection = new SqlConnection(this.ConnectionString))
+            {
+                connection.Open();
+                using (var command = connection.CreateCommand())
+                {
+                    var cmdText = @"
+SELECT COUNT(*) 
+FROM information_schema.tables 
+WHERE table_name = @tableName AND table_schema = @tableSchema";
 
-//        public bool ExistProcedure(string procedure)
-//        {
-//            using (var connection = ((Adapters.Database.SqlClient.Database)this.CreateDatabase()).CreateDbConnection())
-//            {
-//                connection.Open();
-//                using (var command = connection.CreateCommand())
-//                {
-//                    var sql = new StringBuilder();
-//                    sql.Append(
-//@"SELECT count(name)
-//FROM sys.procedures
-//WHERE name='" + procedure + "'");
+                    command.CommandText = cmdText;
 
-//                    command.CommandText = sql.ToString();
-//                    var count = (int)command.ExecuteScalar();
+                    command.Parameters.Add("@tableName", SqlDbType.NVarChar).Value = table;
+                    command.Parameters.Add("@tableSchema", SqlDbType.NVarChar).Value = schema;
+                    var count = (int)command.ExecuteScalar();
 
-//                    return count != 0;
-//                }
-//            }
-//        }
+                    return count != 0;
+                }
+            }
+        }
 
-//        public bool ExistPrimaryKey(string table, string column)
-//        {
-//            using (var connection = ((Adapters.Database.SqlClient.Database)this.CreateDatabase()).CreateDbConnection())
-//            {
-//                connection.Open();
-//                using (var command = connection.CreateCommand())
-//                {
-//                    var sql = new StringBuilder();
-//                    sql.Append(
-//@"SELECT count(*)
-//FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
-//WHERE OBJECTPROPERTY(OBJECT_ID(constraint_name), 'IsPrimaryKey') = 1
-//AND table_name = '" + table + "'");
+        public int ColumnCount(string schema, string table)
+        {
+            using (var connection = new SqlConnection(this.ConnectionString))
+            {
+                connection.Open();
+                using (var command = connection.CreateCommand())
+                {
+                    var cmdText = @"
+SELECT count(table_name)
+FROM information_schema.columns
+WHERE table_name = @tableName AND table_schema = @tableSchema";
 
-//                    command.CommandText = sql.ToString();
-//                    var count = (int)command.ExecuteScalar();
+                    command.CommandText = cmdText;
+                    command.Parameters.Add("@tableName", SqlDbType.NVarChar).Value = table;
+                    command.Parameters.Add("@tableSchema", SqlDbType.NVarChar).Value = schema;
+                    var count = (int)command.ExecuteScalar();
 
-//                    return count != 0;
-//                }
-//            }
-//        }
+                    return count;
+                }
+            }
+        }
 
-//        public bool IsInteger(string table, string column)
-//        {
-//            return this.GetDataType(table, column).Equals("int");
-//        }
+        public bool ExistColumn(string schema, string table, string column, ColumnTypes columnType)
+        {
+            using (var connection = new SqlConnection(this.ConnectionString))
+            {
+                connection.Open();
+                using (var command = connection.CreateCommand())
+                {
+                    var cmdText = @"
+SELECT data_type
+FROM information_schema.columns
+WHERE table_name = @tableName AND table_schema = @tableSchema AND
+column_name=@columnName";
 
-//        public bool IsLong(string table, string column)
-//        {
-//            return this.GetDataType(table, column).Equals("bigint");
-//        }
+                    command.CommandText = cmdText;
 
-//        public bool IsUnique(string table, string column)
-//        {
-//            return this.GetDataType(table, column).Equals("uniqueidentifier");
-//        }
+                    command.Parameters.Add("@tableName", SqlDbType.NVarChar).Value = table;
+                    command.Parameters.Add("@tableSchema", SqlDbType.NVarChar).Value = schema;
+                    command.Parameters.Add("@columnName", SqlDbType.NVarChar).Value = column;
 
-//        private string GetDataType(string table, string column)
-//        {
-//            using (var connection = ((Adapters.Database.SqlClient.Database)this.CreateDatabase()).CreateDbConnection())
-//            {
-//                connection.Open();
-//                using (var command = connection.CreateCommand())
-//                {
-//                    var sql = new StringBuilder();
-//                    sql.Append("SELECT DATA_TYPE\n");
-//                    sql.Append("FROM INFORMATION_SCHEMA.COLUMNS\n");
-//                    sql.Append("WHERE COLUMN_NAME = '" + column + "'\n");
-//                    sql.Append("AND TABLE_NAME = '" + table + "'\n");
+                    var dataType = (string)command.ExecuteScalar();
+                    if (string.IsNullOrWhiteSpace(dataType))
+                    {
+                        return false;
+                    }
 
-//                    command.CommandText = sql.ToString();
-//                    var dataType = (string)command.ExecuteScalar();
+                    return this.Match(columnType, dataType);
+                }
+            }
+        }
 
-//                    return dataType;
-//                }
-//            }
-//        }
+        public bool ExistIndex(string schema, string table, string column)
+        {
+            using (var connection = new SqlConnection(this.ConnectionString))
+            {
+                connection.Open();
+                using (var command = connection.CreateCommand())
+                {
+                    var cmdText = @"
+SELECT COUNT(*)
+FROM sys.indexes AS idx
+JOIN sys.index_columns idxcol
+ON idx.object_id = idxcol.object_id AND idx.index_id=idxcol.index_id
+WHERE idx.type = 2 -- Non Clusterd
+and key_ordinal = 1 -- 1 based
+
+and object_name(idx.object_id) = @tableName
+and object_schema_name(idx.object_id) = @tableSchema
+and col_name(idx.object_id,idxcol.column_id) = @columnName";
+
+                    command.CommandText = cmdText;
+                    command.Parameters.Add("@tableName", SqlDbType.NVarChar).Value = table;
+                    command.Parameters.Add("@tableSchema", SqlDbType.NVarChar).Value = schema;
+                    command.Parameters.Add("@columnName", SqlDbType.NVarChar).Value = column;
+
+                    var count = (int)command.ExecuteScalar();
+
+                    return count != 0;
+                }
+            }
+        }
+
+        public bool ExistProcedure(string schema, string procedure)
+        {
+            using (var connection = new SqlConnection(this.ConnectionString))
+            {
+                connection.Open();
+                using (var command = connection.CreateCommand())
+                {
+                    var cmdText = @"
+SELECT count(*)
+FROM INFORMATION_SCHEMA.ROUTINES
+WHERE routine_schema = @routineSchema 
+AND routine_name=@routineName";
+
+                    command.CommandText = cmdText;
+                    command.Parameters.Add("@routineSchema", SqlDbType.NVarChar).Value = schema;
+                    command.Parameters.Add("@routineName", SqlDbType.NVarChar).Value = procedure;
+
+                    var count = (int)command.ExecuteScalar();
+
+                    return count != 0;
+                }
+            }
+        }
+
+        public bool ExistPrimaryKey(string schema, string table, string column)
+        {
+            using (var connection = new SqlConnection(this.ConnectionString))
+            {
+                connection.Open();
+                using (var command = connection.CreateCommand())
+                {
+                    var cmdText = @"
+SELECT count(*)
+FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+WHERE OBJECTPROPERTY(OBJECT_ID(constraint_name), 'IsPrimaryKey') = 1
+AND table_name = @tableName 
+AND table_schema = @tableSchema 
+AND column_name=@columnName";
+
+                    command.CommandText = cmdText;
+                    command.Parameters.Add("@tableName", SqlDbType.NVarChar).Value = table;
+                    command.Parameters.Add("@tableSchema", SqlDbType.NVarChar).Value = schema;
+                    command.Parameters.Add("@columnName", SqlDbType.NVarChar).Value = column;
+
+                    var count = (int)command.ExecuteScalar();
+
+                    return count != 0;
+                }
+            }
+        }
+
+        protected abstract bool Match(ColumnTypes columnType, string dataType);
     }
 }

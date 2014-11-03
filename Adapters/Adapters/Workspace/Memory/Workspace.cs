@@ -33,8 +33,6 @@ namespace Allors.Adapters.Workspace.Memory
             this.database = configuration.Database;
         }
 
-        public override event SessionCreatedEventHandler SessionCreated;
-
         public override bool IsDatabase
         {
             get
@@ -156,11 +154,6 @@ namespace Allors.Adapters.Workspace.Memory
 
         protected virtual IWorkspaceSession CreateWorkspaceSession()
         {
-            if (this.SessionCreated != null)
-            {
-                this.SessionCreated.Invoke(this, new SessionCreatedEventArgs(this.WorkspaceSession));
-            }
-
             return this.WorkspaceSession;
         }
     }

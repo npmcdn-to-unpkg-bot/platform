@@ -16,78 +16,79 @@
 
 namespace Allors.Adapters.Special.SqlClient.IntegerId.ReadCommitted
 {
+    using Allors.Adapters.Database.SqlClient;
     using Allors.Meta;
 
     using NUnit.Framework;
 
 
-    //[TestFixture]
-    //public class SchemaTest : SchemaIntegerIdTest
-    //{
-    //    private readonly Profile profile = new Profile();
+    [TestFixture]
+    public class SchemaTest : SchemaIntegerIdTest
+    {
+        private readonly Profile profile = new Profile();
 
-    //    protected override IProfile Profile
-    //    {
-    //        get
-    //        {
-    //            return this.profile;
-    //        }
-    //    }
+        protected override IProfile Profile
+        {
+            get
+            {
+                return this.profile;
+            }
+        }
 
-    //    protected override IDatabase CreateDatabase(IMetaPopulation metaPopulation, bool init)
-    //    {
-    //        return this.profile.CreateDatabase(metaPopulation, init);
-    //    }
+        protected override IDatabase CreateDatabase(IMetaPopulation metaPopulation, bool init)
+        {
+            return this.profile.CreateDatabase(metaPopulation, init);
+        }
 
-    //    [TearDown]
-    //    protected void Dispose()
-    //    {
-    //        this.profile.Dispose();
-    //    }
+        [TearDown]
+        protected void Dispose()
+        {
+            this.profile.Dispose();
+        }
 
-    //    protected override void DropTable(string tableName)
-    //    {
-    //        this.profile.DropTable(tableName);
-    //    }
+        protected override void DropTable(string schema, string tableName)
+        {
+            this.profile.DropTable(schema, tableName);
+        }
 
-    //    protected override bool ExistProcedure(string procedure)
-    //    {
-    //        return this.profile.ExistProcedure(procedure);
-    //    }
+        protected override bool ExistTable(string schema, string table)
+        {
+            return this.profile.ExistTable(schema, table);
+        }
 
-    //    protected override bool ExistPrimaryKey(string table, string column)
-    //    {
-    //        return this.profile.ExistPrimaryKey(table, column);
-    //    }
+        protected override int ColumnCount(string schema, string table)
+        {
+            return this.profile.ColumnCount(schema, table);
+        }
 
-    //    protected override bool ExistIndex(string table, string column)
-    //    {
-    //        return this.profile.ExistIndex(table, column);
-    //    }
+        protected override bool ExistColumn(string schema, string table, string column, ColumnTypes columnType)
+        {
+            return this.profile.ExistColumn(schema, table, column, columnType);
+        }
 
-    //    protected override bool IsInteger(string table, string column)
-    //    {
-    //        return this.profile.IsInteger(table, column);
-    //    }
+        protected override bool ExistPrimaryKey(string schema, string table, string column)
+        {
+            return this.profile.ExistPrimaryKey(schema, table, column);
+        }
 
-    //    protected override bool IsLong(string table, string column)
-    //    {
-    //        return this.profile.IsLong(table, column);
-    //    }
+        protected override bool ExistProcedure(string schema, string procedure)
+        {
+            return this.profile.ExistProcedure(schema, procedure);
+        }
 
-    //    protected override bool IsUnique(string table, string column)
-    //    {
-    //        return this.profile.IsUnique(table, column);
-    //    }
+        protected override bool ExistIndex(string schema, string table, string column)
+        {
+            return this.profile.ExistIndex(schema, table, column);
+        }
 
-    //    protected override SchemaValidationErrors GetSchemaValidation(IDatabase repository)
-    //    {
-    //        return ((Database)repository).Schema.SchemaValidationErrors;
-    //    }
+        protected override ValidateResult GetSchemaValidation(IDatabase repository)
+        {
+            return ((Database)repository).Schema.Validate();
+        }
 
-    //    protected override void DropProcedure(string procedure)
-    //    {
-    //        this.profile.DropProcedure(procedure);
-    //    }
-    //}
+        protected override void DropProcedure(string schema, string procedure)
+        {
+            this.profile.DropProcedure(procedure);
+        }
+    }
 }

@@ -132,6 +132,7 @@
     <Compile Include="Database\SqlClient\Schema.cs" />
     <Compile Include="Database\SqlClient\ExtentStatement.cs" />
     <Compile Include="Database\SqlClient\RelationTypeManyXmlWriter.cs" />
+    <Compile Include="Database\SqlClient\ValidateResult.cs" />
     <Compile Include="Database\SqlClient\Strategy.cs" />
     <Compile Include="Database\SqlClient\DatabaseSession.cs" />
     <Compile Include="Database\SqlClient\Database.cs" />

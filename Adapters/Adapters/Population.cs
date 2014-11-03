@@ -40,8 +40,6 @@ namespace Allors.Adapters
             this.concreteClassesByObjectType = new Dictionary<IObjectType, object>();
         }
         
-        public abstract event SessionCreatedEventHandler SessionCreated;
-
         public IObjectFactory ObjectFactory
         {
             get

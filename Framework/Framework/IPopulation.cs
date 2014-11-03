@@ -31,11 +31,6 @@ namespace Allors
     public interface IPopulation
     {
         /// <summary>
-        /// Occurs when a session is created.
-        /// </summary>
-        event SessionCreatedEventHandler SessionCreated;
-
-        /// <summary>
         ///  Gets
         /// <ul>
         /// <li>the id of this database</li>

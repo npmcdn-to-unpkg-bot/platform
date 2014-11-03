@@ -80,25 +80,25 @@ namespace Allors.Adapters.Database.SqlClient
         {
             foreach (IRoleType role in this.roles)
             {
-                this.Append(" LEFT OUTER JOIN " + Schema.GetTableName(role) + " " + role.SingularFullName + "_R");
+                this.Append(" LEFT OUTER JOIN " + this.Schema.SchemaName + "." + Schema.GetTableName(role) + " " + role.SingularFullName + "_R");
                 this.Append(" ON " + alias + "." + Schema.ColumnNameForObject + "=" + role.SingularFullName + "_R." + Schema.ColumnNameForAssociation);
             }
 
             foreach (IRoleType role in this.roleInstances)
             {
-                this.Append(" LEFT OUTER JOIN " + Schema.TableNameForObjects + " " + this.GetJoinName(role));
+                this.Append(" LEFT OUTER JOIN " + this.Schema.SchemaName + "." + Schema.TableNameForObjects + " " + this.GetJoinName(role));
                 this.Append(" ON " + this.GetJoinName(role) + "." + Schema.ColumnNameForObject + "=" + role.SingularFullName + "_R." + Schema.ColumnNameForRole + " ");
             }
 
             foreach (IAssociationType association in this.associations)
             {
-                this.Append(" LEFT OUTER JOIN " + Schema.GetTableName(association) + " " + association.SingularFullName + "_A");
+                this.Append(" LEFT OUTER JOIN " + this.Schema.SchemaName + "." + Schema.GetTableName(association) + " " + association.SingularFullName + "_A");
                 this.Append(" ON " + alias + "." + Schema.ColumnNameForObject + "=" + association.SingularFullName + "_A." + Schema.ColumnNameForRole);
             }
 
             foreach (IAssociationType association in this.associationInstances)
             {
-                this.Append(" LEFT OUTER JOIN " + Schema.TableNameForObjects + " " + this.GetJoinName(association));
+                this.Append(" LEFT OUTER JOIN " + this.Schema.SchemaName + "." + Schema.TableNameForObjects + " " + this.GetJoinName(association));
                 this.Append(" ON " + this.GetJoinName(association) + "." + Schema.ColumnNameForObject + "=" + association.SingularFullName + "_A." + Schema.ColumnNameForAssociation + " ");
             }
         }

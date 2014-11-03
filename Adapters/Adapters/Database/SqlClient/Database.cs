@@ -57,10 +57,8 @@ namespace Allors.Adapters.Database.SqlClient
             this.isolationLevel = configuration.IsolationLevel;
             this.roleChecks = new RoleChecks();
 
-            this.schema = new Schema(this.MetaPopulation, this.ConnectionString, this.ObjectIds);
+            this.schema = new Schema(configuration);
         }
-
-        public event SessionCreatedEventHandler SessionCreated;
 
         public event ObjectNotLoadedEventHandler ObjectNotLoaded;
 
@@ -222,6 +220,11 @@ namespace Allors.Adapters.Database.SqlClient
 
         public DatabaseSession CreateSession()
         {
+            if (!this.Schema.IsValid)
+            {
+                throw new Exception("Schema is invalid.");
+            }
+
             return new DatabaseSession(this);
         }
 
@@ -278,7 +281,7 @@ namespace Allors.Adapters.Database.SqlClient
                         {
                             if (!reader.IsEmptyElement)
                             {
-                                using (var command = this.CreateCommand("SET IDENTITY_INSERT " + Schema.TableNameForObjects + " ON;"))
+                                using (var command = this.CreateCommand("SET IDENTITY_INSERT " + this.Schema.SchemaName + "." + Schema.TableNameForObjects + " ON;"))
                                 {
                                     command.ExecuteNonQuery();
                                 }
@@ -289,7 +292,7 @@ namespace Allors.Adapters.Database.SqlClient
                                 }
                                 finally
                                 {
-                                    using (var command = this.CreateCommand("SET IDENTITY_INSERT " + Schema.TableNameForObjects + " OFF;"))
+                                    using (var command = this.CreateCommand("SET IDENTITY_INSERT " + this.Schema.SchemaName + "." + Schema.TableNameForObjects + " OFF;"))
                                     {
                                         command.ExecuteNonQuery();
                                     }
@@ -402,7 +405,7 @@ namespace Allors.Adapters.Database.SqlClient
                     {
                         // Objects
                         var cmdText = @"
-INSERT INTO " + Schema.TableNameForObjects + " (" + Schema.ColumnNameForObject + "," + Schema.ColumnNameForType + "," + Schema.ColumnNameForCache + @")
+INSERT INTO " + this.Schema.SchemaName + "." + Schema.TableNameForObjects + " (" + Schema.ColumnNameForObject + "," + Schema.ColumnNameForType + "," + Schema.ColumnNameForCache + @")
 VALUES (" + Schema.ParameterNameForObject + "," + Schema.ParameterNameForType + "," + Schema.ParameterNameForCache + ")";
 
                         using (var command = this.CreateCommand(cmdText))
@@ -453,7 +456,7 @@ VALUES (" + Schema.ParameterNameForObject + "," + Schema.ParameterNameForType + 
                                     //this.OnRelationNotLoaded(relationType.Id, association.ToString(), r);
 
                                     var cmdText = @"
-INSERT INTO " + this.Schema.GetTableName(relationType) + " (" + Schema.ColumnNameForAssociation + "," + Schema.ColumnNameForRole + @")
+INSERT INTO " + this.schema.SchemaName + "." + this.Schema.GetTableName(relationType) + " (" + Schema.ColumnNameForAssociation + "," + Schema.ColumnNameForRole + @")
 VALUES (" + Schema.ParameterNameForAssociation + "," + Schema.ParameterNameForRole + ")";
 
                                     using (var command = this.CreateCommand(cmdText))
@@ -561,7 +564,7 @@ VALUES (" + Schema.ParameterNameForAssociation + "," + Schema.ParameterNameForRo
                                 }
 
                                 var cmdText = @"
-INSERT INTO " + this.Schema.GetTableName(relationType) + " (" + Schema.ColumnNameForAssociation + "," + Schema.ColumnNameForRole + @")
+INSERT INTO " + this.schema.SchemaName + "." + this.Schema.GetTableName(relationType) + " (" + Schema.ColumnNameForAssociation + "," + Schema.ColumnNameForRole + @")
 VALUES (" + Schema.ParameterNameForAssociation + "," + Schema.ParameterNameForRole + ")";
 
                                 using (var command = this.CreateCommand(cmdText))
@@ -582,7 +585,7 @@ VALUES (" + Schema.ParameterNameForAssociation + "," + Schema.ParameterNameForRo
                                     var role = Serialization.ReadString(value, unitTypeTag);
 
                                     var cmdText = @"
-INSERT INTO " + this.Schema.GetTableName(relationType) + " (" + Schema.ColumnNameForAssociation + "," + Schema.ColumnNameForRole + @")
+INSERT INTO " + this.schema.SchemaName + "." + this.Schema.GetTableName(relationType) + " (" + Schema.ColumnNameForAssociation + "," + Schema.ColumnNameForRole + @")
 VALUES (" + Schema.ParameterNameForAssociation + "," + Schema.ParameterNameForRole + ")";
 
                                     using (var command = this.CreateCommand(cmdText))
@@ -710,7 +713,7 @@ VALUES (" + Schema.ParameterNameForAssociation + "," + Schema.ParameterNameForRo
 
                 var cmdText = @"
 SELECT " + Schema.ColumnNameForObject + @"
-FROM " + Schema.TableNameForObjects + @"
+FROM " + this.Schema.SchemaName + "." + Schema.TableNameForObjects + @"
 WHERE " + Schema.ColumnNameForType + "=" + Schema.ParameterNameForType;
 
                 using (var command = this.CreateCommand(cmdText))
@@ -760,7 +763,7 @@ WHERE " + Schema.ColumnNameForType + "=" + Schema.ParameterNameForType;
                     
                     var cmdText = @"
 SELECT " + Schema.ColumnNameForAssociation + "," + Schema.ColumnNameForRole + @"
-FROM " + this.Schema.GetTableName(relation) + @"
+FROM " + this.schema.SchemaName + "." + this.Schema.GetTableName(relation) + @"
 ORDER BY " + Schema.ColumnNameForAssociation + "," + Schema.ColumnNameForRole;
 
                     using (var command = this.CreateCommand(cmdText))
