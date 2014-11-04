@@ -65,7 +65,7 @@ namespace Allors.Meta
             return this;
         }
 
-        public RelationTypeBuilder WithCardinality(Multiplicity value)
+        public RelationTypeBuilder WithMultiplicity(Multiplicity value)
         {
             this.multiplicity = value;
             return this;

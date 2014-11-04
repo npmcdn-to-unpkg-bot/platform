@@ -163,14 +163,29 @@ namespace Allors.Adapters.Database.SqlClient
                 }
                 else
                 {
-                    if (roleType.IsMany)
+                    if (relationType.AssociationType.IsOne)
                     {
-                        tableName = tableName + "_many";
+                        if (roleType.IsOne)
+                        {
+                            tableName = tableName + "_11";
+                        }
+                        else
+                        {
+                            tableName = tableName + "_1m";
+                        }
                     }
                     else
                     {
-                        tableName = tableName + "_one";
+                        if (roleType.IsOne)
+                        {
+                            tableName = tableName + "_m1";
+                        }
+                        else
+                        {
+                            tableName = tableName + "_mm";
+                        }
                     }
+
 
                     sqlDbType = this.SqlDbTypeForId;
                     sqlType = this.SqlTypeForId;
@@ -228,6 +243,13 @@ namespace Allors.Adapters.Database.SqlClient
             SqlDbType sqlDbType;
             this.sqlDbTypeByRoleType.TryGetValue(roleType, out sqlDbType);
             return sqlDbType;
+        }
+
+        public string GetSqlType(IRoleType roleType)
+        {
+            string sqlType;
+            this.sqlTypeByRoleType.TryGetValue(roleType, out sqlType);
+            return sqlType;
         }
 
         internal void Init()

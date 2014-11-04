@@ -457,7 +457,6 @@ namespace Allors.Meta.Static
             Assert.IsTrue(((Unit)this.MetaPopulation.Find(new Guid("da866d8e-2c40-41a8-ae5b-5f6dae0b89c8"))).IsDecimal);
             Assert.IsTrue(((Unit)this.MetaPopulation.Find(new Guid("ffcabd07-f35f-4083-bef6-f6c47970ca5d"))).IsFloat);
             Assert.IsTrue(((Unit)this.MetaPopulation.Find(new Guid("b5ee6cea-4e2b-498e-a5dd-24671d896477"))).IsBoolean);
-            Assert.IsTrue(((Unit)this.MetaPopulation.Find(new Guid("c4c09343-61d3-418c-ade2-fe6fd588f128"))).IsDateTime);
             Assert.IsTrue(((Unit)this.MetaPopulation.Find(new Guid("6DC0A1A8-88A4-4614-ADB4-92DD3D017C0E"))).IsUnique);
             Assert.IsTrue(((Unit)this.MetaPopulation.Find(new Guid("c28e515b-cae8-4d6b-95bf-062aec8042fc"))).IsBinary);
 

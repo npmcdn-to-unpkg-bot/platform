@@ -2,6 +2,8 @@ namespace Allors.Adapters.Database.SqlClient
 {
     using System.Collections.Generic;
 
+    using Allors.Meta;
+
     public class Validation
     {
         public readonly HashSet<string> MissingTableNames;
@@ -60,6 +62,8 @@ namespace Allors.Adapters.Database.SqlClient
 
         private void Validate()
         {
+            var mapping = this.Database.Mapping;
+
             // Objects Table
             var objectsTable = this.Schema[Mapping.TableNameForObjects];
             if (objectsTable == null)
@@ -113,6 +117,56 @@ namespace Allors.Adapters.Database.SqlClient
                     }
                 }
             }
+            
+            // Relations
+            foreach (var relationType in this.Database.MetaPopulation.RelationTypes)
+            {
+                var tableName = mapping.GetTableName(relationType);
+                var table = this.Schema[tableName];
+                if (table == null)
+                {
+                    this.MissingTableNames.Add(tableName);
+                }
+                else
+                {
+                    if (table.ColumnByLowercaseColumnName.Count != 2)
+                    {
+                        this.InvalidTables.Add(table);
+                    }
+
+                    var associationColumn = objectsTable[Mapping.ColumnNameForAssociation];
+                    var roleColumn = objectsTable[Mapping.ColumnNameForRole];
+
+                    if (associationColumn == null)
+                    {
+                        this.AddMissingColumnName(objectsTable, Mapping.ColumnNameForAssociation);
+                    }
+                    else
+                    {
+                        if (!associationColumn.DataType.Equals(this.Database.Mapping.SqlTypeForId))
+                        {
+                            this.InvalidColumns.Add(associationColumn);
+                        }
+                    }
+
+                    if (roleColumn == null)
+                    {
+                        this.AddMissingColumnName(objectsTable, Mapping.ColumnNameForRole);
+                    }
+                    else
+                    {
+                        var sqlType = mapping.GetSqlType(relationType.RoleType);
+                        if (!roleColumn.DataType.Equals(sqlType))
+                        {
+                            this.InvalidColumns.Add(roleColumn);
+                        }
+                    }
+
+
+                }
+            }
+
+
         }
         
 

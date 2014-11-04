@@ -81,7 +81,7 @@ namespace Allors.Adapters.Special
         }
 
         [Test]
-        public void ObjectsTable()
+        public void Objects()
         {
             this.DropTable("allors", "_o");
 
@@ -91,11 +91,12 @@ namespace Allors.Adapters.Special
             ISession session = database.CreateSession();
             session.Rollback();
 
-            Assert.IsTrue(this.ExistTable("allors", "_o"));
-            Assert.AreEqual(3, this.ColumnCount("allors", "_o"));
-            Assert.IsTrue(this.ExistColumn("allors", "_o", "o", ColumnTypes.ObjectId));
-            Assert.IsTrue(this.ExistColumn("allors", "_o", "t", ColumnTypes.TypeId));
-            Assert.IsTrue(this.ExistColumn("allors", "_o", "c", ColumnTypes.CacheId));
+            var tableName = "_o";
+            Assert.IsTrue(this.ExistTable("allors", tableName));
+            Assert.AreEqual(3, this.ColumnCount("allors", tableName));
+            Assert.IsTrue(this.ExistColumn("allors", tableName, "o", ColumnTypes.ObjectId));
+            Assert.IsTrue(this.ExistColumn("allors", tableName, "t", ColumnTypes.TypeId));
+            Assert.IsTrue(this.ExistColumn("allors", tableName, "c", ColumnTypes.CacheId));
 
             this.DropTable("allors", "_o");
 
@@ -112,6 +113,87 @@ namespace Allors.Adapters.Special
             }
 
             Assert.IsTrue(exceptionThrown);
+        }
+
+        [Test]
+        public void OneToOne()
+        {
+            var relationTypeId = new Guid("89479CC3-2BE0-46A9-8008-E9D5F1377897");
+
+            this.CreateDomainWithUnitRelationType(relationTypeId, UnitIds.StringId);
+            this.CreateDatabase(this.domain.MetaPopulation, true);
+            
+            var relationType = this.CreateDomainWithCompositeRelationType(relationTypeId, Multiplicity.OneToOne);
+            var database = this.CreateDatabase(this.domain.MetaPopulation, false);
+
+            var exceptionThrown = false;
+            try
+            {
+                using (database.CreateSession())
+                {
+                }
+            }
+            catch
+            {
+                exceptionThrown = true;
+            }
+
+            Assert.IsTrue(exceptionThrown);
+
+            database = this.CreateDatabase(this.domain.MetaPopulation, true);
+
+            using (database.CreateSession())
+            {
+            }
+
+            var tableName = "_" + relationType.Id.ToString("n") + "_11";
+            Assert.IsTrue(this.ExistTable("allors", tableName));
+            Assert.AreEqual(2, this.ColumnCount("allors", tableName));
+            Assert.IsTrue(this.ExistColumn("allors", tableName, "a", ColumnTypes.ObjectId));
+            Assert.IsTrue(this.ExistColumn("allors", tableName, "r", ColumnTypes.ObjectId));
+
+            this.DropTable("allors", tableName);
+
+            database = this.CreateDatabase(this.domain.MetaPopulation, false);
+
+            exceptionThrown = false;
+            try
+            {
+                database.CreateSession();
+            }
+            catch
+            {
+                exceptionThrown = true;
+            }
+
+            Assert.IsTrue(exceptionThrown);
+        }
+
+        private RelationType CreateDomainWithCompositeRelationType(Guid relationTypeId, Multiplicity multiplicity)
+        {
+            this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
+
+            var c1 = new ClassBuilder(this.domain, Guid.NewGuid()).WithSingularName("C1").WithPluralName("C1s").Build();
+            var c2 = new ClassBuilder(this.domain, Guid.NewGuid()).WithSingularName("C2").WithPluralName("C2s").Build();
+
+            return new RelationTypeBuilder(this.domain, relationTypeId, Guid.NewGuid(), Guid.NewGuid())
+                .WithMultiplicity(multiplicity)
+                .WithObjectTypes(c1, c2)
+                .Build();
+        }
+
+        private RelationType CreateDomainWithUnitRelationType(Guid relationTypeId, Guid roleTypeObjectId)
+        {
+            this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
+            Repository.Core(this.domain.MetaPopulation);
+
+            var c1 = new ClassBuilder(this.domain, Guid.NewGuid()).WithSingularName("C1").WithPluralName("C1s").Build();
+            var unitType = (ObjectType)this.domain.MetaPopulation.Find(roleTypeObjectId);
+
+            return new RelationTypeBuilder(this.domain, relationTypeId, Guid.NewGuid(), Guid.NewGuid())
+                .WithMultiplicity(Multiplicity.OneToOne)
+                .WithObjectTypes(c1, unitType)
+                .Build();
         }
 
         //[Test]

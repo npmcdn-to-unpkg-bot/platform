@@ -49,9 +49,9 @@ namespace Allors.Meta.Static
             Assert.AreEqual(roleType.Id.ToString(), roleType.SingularName);
             Assert.AreEqual(roleType.Id.ToString(), roleType.PluralName);
 
-            roleType.IsMany = false;
+            relationType.Multiplicity = Multiplicity.OneToOne;
             Assert.AreEqual(roleType.Id.ToString(), roleType.Name);
-            roleType.IsMany = true;
+            relationType.Multiplicity = Multiplicity.OneToMany;
             Assert.AreEqual(roleType.Id.ToString(), roleType.Name);
         }
 
@@ -164,7 +164,7 @@ namespace Allors.Meta.Static
 
             var companyPerson = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid())
                 .WithObjectTypes(company, person)
-                .WithCardinality(Cardinalities.OneToMany)
+                .WithMultiplicity(Multiplicity.OneToMany)
                 .Build();
 
             Assert.AreEqual("Persons", companyPerson.RoleType.PluralName);
@@ -186,7 +186,7 @@ namespace Allors.Meta.Static
 
             var companyPerson = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid())
                 .WithObjectTypes(company, person)
-                .WithCardinality(Cardinalities.OneToMany)
+                .WithMultiplicity(Multiplicity.OneToMany)
                 .Build();
 
             Assert.AreEqual("CompanyPersons", companyPerson.RoleType.PluralFullName);
@@ -208,7 +208,7 @@ namespace Allors.Meta.Static
 
             var companyPerson = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid())
                 .WithObjectTypes(company, person)
-                .WithCardinality(Cardinalities.OneToMany)
+                .WithMultiplicity(Multiplicity.OneToMany)
                 .Build();
 
             var super = new InterfaceBuilder(this.Domain, Guid.NewGuid()).WithSingularName("Company").WithPluralName("Companies").Build();
@@ -237,7 +237,7 @@ namespace Allors.Meta.Static
 
             var interfaceWithoutLeafClassPerson = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid())
                 .WithObjectTypes(@interfaceWithoutLeafClass, person)
-                .WithCardinality(Cardinalities.OneToMany)
+                .WithMultiplicity(Multiplicity.OneToMany)
                 .Build();
 
             Assert.AreEqual("Persons", interfaceWithoutLeafClassPerson.RoleType.PluralPropertyName);

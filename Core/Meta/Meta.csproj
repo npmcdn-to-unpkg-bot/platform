@@ -43,7 +43,6 @@
   <ItemGroup>
     <Compile Include="Core\AssociationType.cs" />
     <Compile Include="Core\Builder.cs" />
-    <Compile Include="Core\Cardinalities.cs" />
     <Compile Include="Core\Class.cs" />
     <Compile Include="Core\ClassBuilder.cs" />
     <Compile Include="Core\ClassBuilder.v.cs" />

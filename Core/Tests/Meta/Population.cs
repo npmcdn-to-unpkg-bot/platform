@@ -41,8 +41,6 @@ namespace Allors.Meta.Static
 
         public Unit BooleanType { get; set; }
 
-        public Unit DateTimeType { get; set; }
-
         public Unit DecimalType { get; set; }
 
         public Unit DoubleType { get; set; }
@@ -176,7 +174,6 @@ namespace Allors.Meta.Static
         {
             this.BinaryType = (Unit)this.metaPopulation.Find(UnitIds.BinaryId);
             this.BooleanType = (Unit)this.metaPopulation.Find(UnitIds.BooleanId);
-            this.DateTimeType = (Unit)this.metaPopulation.Find(UnitIds.DateId);
             this.DecimalType = (Unit)this.metaPopulation.Find(UnitIds.DecimalId);
             this.DoubleType = (Unit)this.metaPopulation.Find(UnitIds.FloatId);
             this.IntegerType = (Unit)this.metaPopulation.Find(UnitIds.IntegerId);

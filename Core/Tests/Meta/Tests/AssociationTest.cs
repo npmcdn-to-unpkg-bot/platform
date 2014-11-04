@@ -49,9 +49,9 @@ namespace Allors.Meta.Static
             Assert.AreEqual(associationType.Id.ToString().ToLower(), associationType.SingularName);
             Assert.AreEqual(associationType.Id.ToString().ToLower(), associationType.PluralName);
 
-            associationType.IsMany = false;
+            relationType.Multiplicity = Multiplicity.OneToOne;
             Assert.AreEqual(associationType.Id.ToString(), associationType.Name);
-            associationType.IsMany = true;
+            relationType.Multiplicity = Multiplicity.OneToMany;
             Assert.AreEqual(associationType.Id.ToString(), associationType.Name);
         }
 
@@ -108,7 +108,7 @@ namespace Allors.Meta.Static
 
             var companyPerson = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid())
                 .WithObjectTypes(company, person)
-                .WithCardinality(Cardinalities.ManyToOne)
+                .WithMultiplicity(Multiplicity.ManyToOne)
                 .Build();
 
             Assert.AreEqual("Companies", companyPerson.AssociationType.PluralName);
@@ -122,7 +122,7 @@ namespace Allors.Meta.Static
 
             var companyPerson = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid())
                 .WithObjectTypes(company, person)
-                .WithCardinality(Cardinalities.ManyToOne)
+                .WithMultiplicity(Multiplicity.ManyToOne)
                 .Build();
 
             Assert.AreEqual("PersonCompanies", companyPerson.AssociationType.PluralFullName);
@@ -136,7 +136,7 @@ namespace Allors.Meta.Static
 
             var companyPerson = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid())
                 .WithObjectTypes(company, person)
-                .WithCardinality(Cardinalities.ManyToOne)
+                .WithMultiplicity(Multiplicity.ManyToOne)
                 .Build();
 
             Assert.AreEqual("CompaniesWherePerson", companyPerson.AssociationType.PluralPropertyName);
