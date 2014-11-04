@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Adapters.Database
+namespace Allors.Databases
 {
     public abstract class Configuration : Populations.Configuration
     {
