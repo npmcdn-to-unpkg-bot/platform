@@ -21,6 +21,7 @@
 namespace Allors.Adapters.Database.Memory
 {
     using Allors.Meta;
+    using Allors.Populations;
 
     internal sealed class RoleInstanceof : Predicate
     {

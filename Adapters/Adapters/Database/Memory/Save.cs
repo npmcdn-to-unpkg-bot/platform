@@ -21,6 +21,7 @@ namespace Allors.Adapters.Database.Memory
     using System.Xml;
 
     using Allors.Meta;
+    using Allors.Populations;
 
     public class Save
     {

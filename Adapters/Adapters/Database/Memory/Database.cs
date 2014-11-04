@@ -19,6 +19,8 @@ namespace Allors.Adapters.Database.Memory
     using System;
     using System.Xml;
 
+    using Allors.Populations;
+
     public abstract class Database : Population, IDatabase
     {
         private readonly Guid id;

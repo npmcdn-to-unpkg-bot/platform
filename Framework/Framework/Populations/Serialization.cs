@@ -18,7 +18,7 @@
 // </copyright>
 // <summary>Defines the Serialization type.</summary>
 //-------------------------------------------------------------------------------------------------
-namespace Allors.Adapters
+namespace Allors.Populations
 {
     using System;
     using System.Globalization;

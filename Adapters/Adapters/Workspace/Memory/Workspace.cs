@@ -20,6 +20,7 @@ namespace Allors.Adapters.Workspace.Memory
     using System.Xml;
 
     using Allors.Adapters;
+    using Allors.Populations;
 
     public abstract class Workspace : Population, IWorkspace
     {

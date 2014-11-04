@@ -22,6 +22,7 @@ namespace Allors.Adapters.Database.Memory
 {
     using System;
     using Allors.Meta;
+    using Allors.Populations;
 
     internal sealed class RoleUnitEquals : Predicate
     {

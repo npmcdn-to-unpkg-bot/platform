@@ -19,6 +19,7 @@ namespace Allors.Adapters.Workspace.Memory
     using Allors.Adapters;
 
     using Allors.Meta;
+    using Allors.Populations;
 
     internal sealed class RoleCompositeEquals : Predicate
     {

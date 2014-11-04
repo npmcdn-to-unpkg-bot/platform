@@ -20,6 +20,8 @@
 
 namespace Allors.Adapters.Database.SqlClient
 {
+    using Allors.Populations;
+
     using Meta;
 
     internal sealed class AllorsPredicateRoleInExtentSql : AllorsPredicateSql

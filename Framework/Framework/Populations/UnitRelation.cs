@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Adapters
+namespace Allors.Populations
 {
     public class UnitRelation
     {

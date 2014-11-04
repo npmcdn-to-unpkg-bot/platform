@@ -24,6 +24,7 @@ namespace Allors.Adapters.Database.SqlClient
     using System.Xml;
 
     using Allors.Meta;
+    using Allors.Populations;
 
     public class Database : IDatabase
     {

@@ -24,6 +24,7 @@ namespace Allors.Adapters.Database.SqlClient
     using System;
 
     using Allors.Meta;
+    using Allors.Populations;
 
     internal sealed class AllorsPredicateRoleLikeSql : AllorsPredicateSql
     {

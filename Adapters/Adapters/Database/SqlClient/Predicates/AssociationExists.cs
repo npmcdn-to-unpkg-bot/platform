@@ -22,6 +22,7 @@
 namespace Allors.Adapters.Database.SqlClient
 {
     using Allors.Meta;
+    using Allors.Populations;
 
     internal sealed class AllorsPredicateAssociationExistsSql : AllorsPredicateSql
     {

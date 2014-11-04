@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Databases\Configuration.cs" />
     <Compile Include="Extent.cs" />
     <Compile Include="ExtentT.cs" />
     <Compile Include="IChangeSet.cs" />
@@ -78,6 +79,15 @@
     <Compile Include="ObjectIdInteger.cs" />
     <Compile Include="ObjectIdLong.cs" />
     <Compile Include="ObjectNotLoadedEventArgs.cs" />
+    <Compile Include="Populations\CompositePredicateAssertions.cs" />
+    <Compile Include="Populations\Configuration.cs" />
+    <Compile Include="Populations\EmptySet.cs" />
+    <Compile Include="Populations\MetaObjectComparer.cs" />
+    <Compile Include="Populations\Population.cs" />
+    <Compile Include="Populations\RoleChecks.cs" />
+    <Compile Include="Populations\RoleTypeExtensions.cs" />
+    <Compile Include="Populations\Serialization.cs" />
+    <Compile Include="Populations\UnitRelation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RelationNotLoadedEventArgs.cs" />
     <Compile Include="SessionCommittedEventArgs.cs" />

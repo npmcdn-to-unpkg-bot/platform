@@ -24,6 +24,7 @@ namespace Allors.Adapters.Workspace.Memory
     using Allors.Meta;
 
     using Allors.Adapters;
+    using Allors.Populations;
 
     public sealed class ChangeSet : IChangeSet
     {

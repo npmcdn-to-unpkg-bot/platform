@@ -23,6 +23,7 @@ namespace Allors.Adapters.Database.SqlClient
     using System.Runtime.InteropServices;
 
     using Allors.Meta;
+    using Allors.Populations;
 
     public class DatabaseSession : IDatabaseSession
     {

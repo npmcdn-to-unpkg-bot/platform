@@ -23,6 +23,7 @@ namespace Allors.Adapters.Database.Memory
     using System.Collections.Generic;
 
     using Allors.Meta;
+    using Allors.Populations;
 
     internal sealed class AssociationContainedInEnumerable : Predicate
     {

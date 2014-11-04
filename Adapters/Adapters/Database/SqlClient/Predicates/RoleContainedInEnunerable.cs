@@ -23,6 +23,8 @@ namespace Allors.Adapters.Database.SqlClient
     using System.Collections.Generic;
     using System.Text;
 
+    using Allors.Populations;
+
     using Meta;
 
     internal sealed class RoleContainedInEnumerable : AllorsPredicateSql

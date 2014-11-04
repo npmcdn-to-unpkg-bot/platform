@@ -19,6 +19,7 @@ namespace Allors.Adapters.Database.SqlClient
     using System.Collections.Generic;
 
     using Allors.Meta;
+    using Allors.Populations;
 
     public class ChangeSet : IChangeSet
     {

@@ -16,6 +16,8 @@
 
 namespace Allors.Adapters.Database.Memory
 {
+    using Allors.Populations;
+
     internal sealed class Equals : Predicate
     {
         private readonly IObject equals;

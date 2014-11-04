@@ -38,9 +38,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CompositePredicateAssertions.cs" />
-    <Compile Include="Configuration.cs" />
-    <Compile Include="Database\Configuration.cs" />
     <Compile Include="Database\Memory\ChangeSet.cs" />
     <Compile Include="Database\Memory\Configuration.cs" />
     <Compile Include="Database\Memory\Database.cs" />
@@ -139,14 +136,7 @@
     <Compile Include="Database\SqlClient\Strategy.cs" />
     <Compile Include="Database\SqlClient\DatabaseSession.cs" />
     <Compile Include="Database\SqlClient\Database.cs" />
-    <Compile Include="EmptySet.cs" />
-    <Compile Include="RoleChecks.cs" />
-    <Compile Include="RoleTypeExtensions.cs" />
-    <Compile Include="Population.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MetaObjectComparer.cs" />
-    <Compile Include="Serialization.cs" />
-    <Compile Include="UnitRelation.cs" />
     <Compile Include="Workspace\Memory\ChangeSet.cs" />
     <Compile Include="Workspace\Memory\Configuration.cs" />
     <Compile Include="Workspace\Memory\Conflict.cs" />

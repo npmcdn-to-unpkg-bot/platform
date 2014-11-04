@@ -18,10 +18,10 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Adapters
+namespace Allors.Adapters.Database
 {
-    public abstract class Configuration
+    public abstract class Configuration : Populations.Configuration
     {
-        public IObjectFactory ObjectFactory { get; set; }
+        public IWorkspaceFactory WorkspaceFactory { get; set; }
     }
 }

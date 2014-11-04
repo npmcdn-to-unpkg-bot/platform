@@ -17,7 +17,7 @@
 // For more information visit http://www.allors.com/legal
 // </copyright>
 //-------------------------------------------------------------------------------------------------
-namespace Allors.Adapters
+namespace Allors.Populations
 {
     using System;
     using System.Collections.Generic;

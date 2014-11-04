@@ -17,6 +17,7 @@
 namespace Allors.Adapters.Workspace.Memory
 {
     using Allors.Adapters;
+    using Allors.Populations;
 
     internal sealed class Equals : Predicate
     {

@@ -23,6 +23,8 @@ using Allors.Meta;
 
 namespace Allors.Adapters.Database.SqlClient
 {
+    using Allors.Populations;
+
     internal sealed class AllorsPredicateAssociationInExtentSql : AllorsPredicateSql
     {
         private readonly IAssociationType association;

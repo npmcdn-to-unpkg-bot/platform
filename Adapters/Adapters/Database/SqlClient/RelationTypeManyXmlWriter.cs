@@ -23,6 +23,7 @@ namespace Allors.Adapters.Database.SqlClient
     using System.Xml;
 
     using Allors.Meta;
+    using Allors.Populations;
 
     /// <summary>
     /// Writes all relations from a <see cref="RelationType"/> with a <see cref="RoleType"/> with multiplicity of many 

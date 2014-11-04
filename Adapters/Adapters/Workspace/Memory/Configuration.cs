@@ -16,7 +16,7 @@
 
 namespace Allors.Adapters.Workspace.Memory
 {
-    public abstract class Configuration : Adapters.Configuration
+    public abstract class Configuration : Populations.Configuration
     {
         public IDatabase Database { get; set; }
     }

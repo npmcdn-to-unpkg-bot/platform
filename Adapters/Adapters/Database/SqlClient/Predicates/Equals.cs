@@ -22,7 +22,8 @@
 namespace Allors.Adapters.Database.SqlClient
 {
     using Allors.Meta;
-    
+    using Allors.Populations;
+
     internal sealed class AllorsPredicateEqualsSql : AllorsPredicateSql
     {
         private readonly IObject obj;
