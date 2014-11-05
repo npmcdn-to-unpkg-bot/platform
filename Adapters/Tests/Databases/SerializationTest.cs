@@ -104,7 +104,7 @@ namespace Allors.Databases
         [SetUp]
         public void SetUp()
         {
-            var database = new Databases.Memory.IntegerId.Database(new Databases.Memory.IntegerId.Configuration { ObjectFactory = this.Profile.ObjectFactory });
+            var database = new Memory.IntegerId.Database(new Memory.IntegerId.Configuration { ObjectFactory = this.Profile.ObjectFactory });
             using (var session = database.CreateSession())
             {
                 this.Populate(session);

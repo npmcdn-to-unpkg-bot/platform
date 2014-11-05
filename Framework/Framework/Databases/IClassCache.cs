@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Configuration.cs" company="Allors bvba">
+// <copyright file="IClassCache.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -20,14 +20,14 @@
 
 namespace Allors.Databases
 {
-    using System;
+    using Allors.Meta;
 
-    public abstract class Configuration : Populations.Configuration
+    public interface IClassCache
     {
-        public Guid Id { get; set; }
+        bool TryGet(ObjectId @object, out IClass @class);
+       
+        void Set(ObjectId @object, IClass @class);
 
-        public IRoleCache RoleCache { get; set; }
-
-        public IClassCache ClassCache { get; set; }
+        void Invalidate();
     }
 }

@@ -43,6 +43,7 @@ namespace Allors.Adapters.Database.SqlClient
         private readonly ObjectIds objectIds;
         private readonly IObjectFactory objectFactory;
         private readonly IRoleCache roleCache;
+        private readonly IClassCache classCache;
         private readonly string connectionString;
         private readonly int commandTimeout;
         private readonly string schemaName;
@@ -77,6 +78,7 @@ namespace Allors.Adapters.Database.SqlClient
 
             this.objectIds = configuration.ObjectIds ?? new ObjectIdsInteger();
             this.roleCache = configuration.RoleCache ?? new RoleCache();
+            this.classCache = configuration.ClassCache ?? new ClassCache();
             this.commandTimeout = configuration.CommandTimeout ?? 30;
             this.schemaName = configuration.SchemaName ?? "allors";
             this.isolationLevel = configuration.IsolationLevel ?? IsolationLevel.Snapshot;
@@ -102,6 +104,14 @@ namespace Allors.Adapters.Database.SqlClient
             get
             {
                 return this.objectFactory;
+            }
+        }
+
+        public IClassCache ClassCache
+        {
+            get
+            {
+                return this.classCache;
             }
         }
 

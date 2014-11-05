@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Configuration.cs" company="Allors bvba">
+// <copyright file="RoleCache.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -20,14 +20,31 @@
 
 namespace Allors.Databases
 {
-    using System;
+    using System.Collections.Generic;
+    using Allors.Meta;
 
-    public abstract class Configuration : Populations.Configuration
+    public class ClassCache : IClassCache
     {
-        public Guid Id { get; set; }
+        private Dictionary<ObjectId, IClass> classByObject;
 
-        public IRoleCache RoleCache { get; set; }
+        public ClassCache()
+        {
+            this.classByObject = new Dictionary<ObjectId, IClass>();
+        }
 
-        public IClassCache ClassCache { get; set; }
+        public bool TryGet(ObjectId @object, out IClass @class)
+        {
+            return this.classByObject.TryGetValue(@object, out @class);
+        }
+
+        public void Set(ObjectId @object, IClass @class)
+        {
+            this.classByObject[@object] = @class;
+        }
+
+        public void Invalidate()
+        {
+            this.classByObject = new Dictionary<ObjectId, IClass>();
+        }
     }
 }

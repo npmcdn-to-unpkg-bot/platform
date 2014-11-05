@@ -31,6 +31,7 @@ namespace Allors.Adapters.Database.SqlClient
 
         private readonly Database database;
         private readonly IRoleCache roleCache;
+        private readonly IClassCache classCache;
 
         private SqlConnection connection;
         private SqlTransaction transaction;
@@ -72,6 +73,7 @@ namespace Allors.Adapters.Database.SqlClient
         {
             this.database = database;
             this.roleCache = database.RoleCache;
+            this.classCache = database.ClassCache;
         }
 
         IPopulation ISession.Population 
@@ -768,7 +770,12 @@ END
             ObjectId[] role;
             if (!roleByAssociation.TryGetValue(association, out role))
             {
-                role = this.FetchCompositeRoles(association, roleType);
+                var cacheId = this.GetCacheId(association);
+                if (!this.roleCache.TryGetComposites(association, cacheId, roleType, out role))
+                {
+                    role = this.FetchCompositeRoles(association, roleType);
+                }
+
                 roleByAssociation[association] = role;
             }
 
@@ -790,13 +797,20 @@ END
                 ObjectId existingAssociation;
                 if (!associationByRole.TryGetValue(role, out existingAssociation))
                 {
+                    var existingAssociationFound = false;
                     foreach (var kvp in currentRoleByAssociation)
                     {
                         if (role.Equals(kvp.Value))
                         {
                             existingAssociation = kvp.Key;
+                            existingAssociationFound = true;
                             break;
                         }
+                    }
+
+                    if (!existingAssociationFound)
+                    {
+                        existingAssociation = this.GetCompositeAssociationOneToOne(role, roleType.AssociationType);
                     }
                 }
 
@@ -809,6 +823,8 @@ END
                         newRolesOfExistingAssociation.Remove(role);
                         currentRoleByAssociation[existingAssociation] = newRolesOfExistingAssociation.ToArray();
                     }
+
+                    this.OnObjectChanged(existingAssociation);
                 }
 
                 // Association <- Role
@@ -1190,7 +1206,7 @@ END
                 return null;
             }
 
-            if (this.classByObjectId!=null && this.classByObjectId.ContainsKey(objectId))
+            if (this.classByObjectId != null && this.classByObjectId.ContainsKey(objectId))
             {
                 return new Strategy(this, objectId);
             }
@@ -1204,7 +1220,7 @@ END
 
             return new Strategy(this, objectId);
         }
-
+        
         private void FetchObject(ObjectId objectId)
         {
             var cmdText = @"
@@ -1232,9 +1248,11 @@ WHERE " + Mapping.ColumnNameForObject + @" = " + Mapping.ParameterNameForObject 
                         {
                             this.cacheIdByObjectId = new Dictionary<ObjectId, int>();
                         }
-
+                        
                         this.classByObjectId[objectId] = type;
                         this.cacheIdByObjectId[objectId] = cacheId;
+
+                        this.classCache.Set(objectId, type);
                     }
                     else
                     {
@@ -1326,7 +1344,12 @@ WHERE " + Mapping.ColumnNameForAssociation + @"=" + Mapping.ParameterNameForAsso
                 }
             }
 
-            return roles != null ? roles.ToArray() : EmptyObjectIds;
+            var roleArray = roles != null ? roles.ToArray() : EmptyObjectIds;
+
+            var cacheId = this.GetCacheId(association);
+            this.roleCache.SetComposites(association, cacheId, roleType, roleArray);
+
+            return roleArray;
         }
 
         private ObjectId FetchCompositeAssociation(ObjectId role, IAssociationType associationType)

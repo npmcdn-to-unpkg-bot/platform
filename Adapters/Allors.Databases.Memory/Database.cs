@@ -28,12 +28,7 @@ namespace Allors.Databases.Memory
         protected Database(Configuration configuration)
             : base(configuration)
         {
-            this.id = configuration.Id;
-            if (this.id == Guid.Empty)
-            {
-                throw new Exception("Configuration.Id is missing");
-            }
-        
+            this.id = configuration.Id.Equals(Guid.Empty) ? Guid.NewGuid() : configuration.Id;
         }
 
         public event ObjectNotLoadedEventHandler ObjectNotLoaded;

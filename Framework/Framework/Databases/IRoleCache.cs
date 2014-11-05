@@ -32,6 +32,10 @@ namespace Allors.Databases
 
         void SetComposite(ObjectId association, object cacheId, IRoleType roleType, ObjectId role);
 
+        bool TryGetComposites(ObjectId association, object cacheId, IRoleType roleType, out ObjectId[] role);
+
+        void SetComposites(ObjectId association, object cacheId, IRoleType roleType, ObjectId[] role);
+
         void Invalidate();
     }
 }
