@@ -54,13 +54,5 @@ namespace Allors
         /// </summary>
         /// <returns>a newly created AllorsSession</returns>
         new IDatabaseSession CreateSession();
-
-        /// <summary>
-        /// Creates a new workspace for this database.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="IWorkspace"/>.
-        /// </returns>
-        IWorkspace CreateWorkspace();
     }
 }

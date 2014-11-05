@@ -16,10 +16,7 @@
 
 namespace Allors.Databases.Memory
 {
-    using System;
-
     public abstract class Configuration : Databases.Configuration
     {
-        public Guid Id { get; set; }
     }
 }

@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Configuration.cs" company="Allors bvba">
+// <copyright file="IRoleCache.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -18,18 +18,16 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Adapters.Database.SqlClient
+namespace Allors.Databases
 {
-    using System.Data;
+    using Allors.Meta;
 
-    public class Configuration : Databases.Configuration
+    public interface IRoleCache
     {
-        public string ConnectionString { get; set; }
+        bool TryGet(ObjectId association, object cacheId, IRoleType roleType, out object role);
+       
+        void Set(ObjectId association, object cacheId, IRoleType roleType, object role);
 
-        public string SchemaName { get; set; }
-
-        public int? CommandTimeout { get; set; }
-
-        public IsolationLevel? IsolationLevel { get; set; }
+        void Invalidate();
     }
 }

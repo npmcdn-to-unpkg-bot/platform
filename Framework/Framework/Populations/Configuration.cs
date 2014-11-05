@@ -23,5 +23,7 @@ namespace Allors.Populations
     public abstract class Configuration
     {
         public IObjectFactory ObjectFactory { get; set; }
+
+        public ObjectIds ObjectIds { get; set; }
     }
 }

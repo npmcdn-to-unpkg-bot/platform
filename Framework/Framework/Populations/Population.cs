@@ -37,6 +37,11 @@ namespace Allors.Populations
         protected Population(Configuration configuration)
         {
             this.objectFactory = configuration.ObjectFactory;
+            if (this.objectFactory == null)
+            {
+                throw new Exception("Configuration.ObjectFactory is missing");
+            }
+
             this.concreteClassesByObjectType = new Dictionary<IObjectType, object>();
         }
         

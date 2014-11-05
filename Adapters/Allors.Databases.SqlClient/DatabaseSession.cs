@@ -18,10 +18,9 @@ namespace Allors.Adapters.Database.SqlClient
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.Data.SqlClient;
-    using System.Runtime.InteropServices;
 
+    using Allors.Databases;
     using Allors.Meta;
     using Allors.Populations;
 
@@ -31,6 +30,7 @@ namespace Allors.Adapters.Database.SqlClient
         private static readonly IObject[] EmptyObjects = { };
 
         private readonly Database database;
+        private readonly IRoleCache roleCache;
 
         private SqlConnection connection;
         private SqlTransaction transaction;
@@ -42,8 +42,10 @@ namespace Allors.Adapters.Database.SqlClient
 
         private HashSet<ObjectId> newObjects;
         private HashSet<ObjectId> deletedObjects;
-
         private HashSet<ObjectId> flushDeletedObjects;
+        private HashSet<ObjectId> changedObjects;
+
+        private ChangeSet changeSet;
 
         private Dictionary<IRoleType, Dictionary<ObjectId, object>> unitRoleByAssociationByRoleType;
         private Dictionary<IRoleType, HashSet<ObjectId>> unitFlushAssociationsByRoleType;
@@ -66,11 +68,10 @@ namespace Allors.Adapters.Database.SqlClient
         private Dictionary<IAssociationType, Dictionary<ObjectId, ObjectId[]>> manyToManyAssociationByRoleByAssociationType;
         private Dictionary<IAssociationType, HashSet<ObjectId>> manyToManyTriggerFlushRolesByAssociationType;
 
-        private ChangeSet changeSet;
-
         public DatabaseSession(Database database)
         {
             this.database = database;
+            this.roleCache = database.RoleCache;
         }
 
         IPopulation ISession.Population 
@@ -183,7 +184,7 @@ namespace Allors.Adapters.Database.SqlClient
             try
             {
                 this.Flush();
-
+                this.UpdateCacheIds();
                 this.Reset();
 
                 if (this.transaction != null)
@@ -464,7 +465,12 @@ END
             object role;
             if (!roleByAssociation.TryGetValue(association, out role))
             {
-                role = this.FetchUnitRole(association, roleType);
+                var cacheId = this.GetCacheId(association);
+                if (!this.roleCache.TryGet(association, cacheId, roleType, out role))
+                {
+                    role = this.FetchUnitRole(association, roleType);
+                }
+                
                 roleByAssociation[association] = role;
             }
 
@@ -485,6 +491,7 @@ END
                 flushAssociations.Add(association);
 
                 this.ChangeSet.OnChangingUnitRole(association, roleType);
+                this.OnObjectChanged(association);
             }
         }
 
@@ -500,8 +507,10 @@ END
                 flushAssociations.Add(association);
 
                 this.ChangeSet.OnChangingUnitRole(association, roleType);
+                this.OnObjectChanged(association);
             }
         }
+
         #endregion
 
         #region One <-> One
@@ -567,6 +576,7 @@ END
                 flushAssociations.Add(association);
 
                 this.ChangeSet.OnChangingCompositeRole(association, roleType, existingRole, role);
+                this.OnObjectChanged(association);
             }
         }
 
@@ -588,6 +598,7 @@ END
                 flushAssociations.Add(association);
 
                 this.ChangeSet.OnChangingCompositeRole(association, roleType, existingRole, null);
+                this.OnObjectChanged(association);
             }
         }
 
@@ -657,6 +668,7 @@ END
                 flushAssociations.Add(association);
 
                 this.ChangeSet.OnChangingCompositeRole(association, roleType, existingRole, role);
+                this.OnObjectChanged(association);
             }
         }
 
@@ -689,6 +701,7 @@ END
                 flushAssociations.Add(association);
 
                 this.ChangeSet.OnChangingCompositeRole(association, roleType, existingRole, null);
+                this.OnObjectChanged(association);
             }
         }
 
@@ -793,6 +806,7 @@ END
                 currentRoleByAssociation[association] = existingRoles.ToArray();
 
                 this.ChangeSet.OnChangingCompositesRole(association, roleType, role);
+                this.OnObjectChanged(association);
             }
         }
 
@@ -820,6 +834,7 @@ END
                 currentRoleByAssociation[association] = existingRoles.ToArray();
 
                 this.ChangeSet.OnChangingCompositesRole(association, roleType, role);
+                this.OnObjectChanged(association);
             }
         }
 
@@ -920,6 +935,7 @@ END
                 currentRoleByAssociation[association] = existingRoles.ToArray();
 
                 this.ChangeSet.OnChangingCompositesRole(association, roleType, role);
+                this.OnObjectChanged(association);
             }
         }
 
@@ -949,6 +965,7 @@ END
                 currentRoleByAssociation[association] = existingRoles.ToArray();
 
                 this.ChangeSet.OnChangingCompositesRole(association, roleType, role);
+                this.OnObjectChanged(association);
             }
         }
 
@@ -1136,6 +1153,18 @@ END
             flushChanged = changed;
         }
 
+        private int GetCacheId(ObjectId objectId)
+        {
+            int cacheId;
+            if (!this.cacheIdByObjectId.TryGetValue(objectId, out cacheId))
+            {
+                this.FetchObject(objectId);
+                cacheId = this.cacheIdByObjectId[objectId];
+            }
+
+            return cacheId;
+        }
+
         private IStrategy InstantiateStrategy(ObjectId objectId)
         {
             if (this.deletedObjects != null && this.deletedObjects.Contains(objectId))
@@ -1160,7 +1189,6 @@ END
 
         private void FetchObject(ObjectId objectId)
         {
-            var schema = this.Database.Mapping;
             var cmdText = @"
 SELECT  " + Mapping.ColumnNameForType + ", " + Mapping.ColumnNameForCache + @"
 FROM " + this.Database.SchemaName + "." + Mapping.TableNameForObjects + @"
@@ -1174,7 +1202,7 @@ WHERE " + Mapping.ColumnNameForObject + @" = " + Mapping.ParameterNameForObject 
                     if (reader.Read())
                     {
                         var typeId = reader.GetGuid(0);
-                        var cache = reader.GetInt32(1);
+                        var cacheId = reader.GetInt32(1);
                         var type = (IClass)this.database.ObjectFactory.MetaPopulation.Find(typeId);
 
                         if (this.classByObjectId == null)
@@ -1188,7 +1216,7 @@ WHERE " + Mapping.ColumnNameForObject + @" = " + Mapping.ParameterNameForObject 
                         }
 
                         this.classByObjectId[objectId] = type;
-                        this.cacheIdByObjectId[objectId] = cache;
+                        this.cacheIdByObjectId[objectId] = cacheId;
                     }
                     else
                     {
@@ -1215,7 +1243,12 @@ WHERE " + Mapping.ColumnNameForAssociation + @"=" + Mapping.ParameterNameForAsso
             using (var command = this.CreateCommand(cmdText))
             {
                 command.Parameters.Add(Mapping.ParameterNameForAssociation, schema.SqlDbTypeForId).Value = association.Value;
-                return command.ExecuteScalar();
+                var role = command.ExecuteScalar();
+
+                var cacheId = this.GetCacheId(association);
+                this.roleCache.Set(association, cacheId, roleType, role);
+                
+                return role;
             }
         }
 
@@ -1820,6 +1853,38 @@ AND " + Mapping.ColumnNameForRole + @" = " + Mapping.ParameterNameForRole + @";
             }
         }
 
+        private void UpdateCacheIds()
+        {
+            if (this.changedObjects != null)
+            {
+                var schema = this.database.Mapping;
+                var cmdText = @"
+UPDATE " + this.Database.SchemaName + "." + Mapping.TableNameForObjects + @"
+SET " + Mapping.ColumnNameForCache + " = " + Mapping.ColumnNameForCache + @" - 1
+WHERE " + Mapping.ColumnNameForObject + " = " + Mapping.ParameterNameForObject;
+                using (var command = this.CreateCommand(cmdText))
+                {
+                    var objectParam = command.Parameters.Add(Mapping.ParameterNameForObject, schema.SqlDbTypeForId);
+
+                    foreach (var changedObject in this.changedObjects)
+                    {
+                        objectParam.Value = changedObject.Value;
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+        }
+
+        private void OnObjectChanged(ObjectId association)
+        {
+            if (this.changedObjects == null)
+            {
+                this.changedObjects = new HashSet<ObjectId>();
+            }
+
+            this.changedObjects.Add(association);
+        }
+
         private void Reset()
         {
             this.classByObjectId = null;
@@ -1828,6 +1893,7 @@ AND " + Mapping.ColumnNameForRole + @" = " + Mapping.ParameterNameForRole + @";
             this.newObjects = null;
             this.deletedObjects = null;
             this.flushDeletedObjects = null;
+            this.changedObjects = null;
 
             this.unitRoleByAssociationByRoleType = null;
             this.unitFlushAssociationsByRoleType = null;

@@ -39,6 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Databases\RoleCache.cs" />
+    <Compile Include="Databases\IRoleCache.cs" />
     <Compile Include="Databases\Configuration.cs" />
     <Compile Include="Extent.cs" />
     <Compile Include="ExtentT.cs" />

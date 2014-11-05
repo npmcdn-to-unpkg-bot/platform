@@ -25,13 +25,15 @@ namespace Allors.Databases.Memory
     {
         private readonly Guid id;
 
-        private readonly IWorkspaceFactory workspaceFactory;
-
         protected Database(Configuration configuration)
             : base(configuration)
         {
             this.id = configuration.Id;
-            this.workspaceFactory = configuration.WorkspaceFactory;
+            if (this.id == Guid.Empty)
+            {
+                throw new Exception("Configuration.Id is missing");
+            }
+        
         }
 
         public event ObjectNotLoadedEventHandler ObjectNotLoaded;
@@ -72,20 +74,6 @@ namespace Allors.Databases.Memory
         public override ISession CreateSession()
         {
             return this.CreateDatabaseSession();
-        }
-
-        public IWorkspace CreateWorkspace()
-        {
-            if (this.workspaceFactory == null)
-            {
-                throw new Exception("No workspacefactory defined");
-            }
-
-            return this.workspaceFactory.CreateWorkspace(this);
-        }
-
-        public void Recover()
-        {
         }
 
         IDatabaseSession IDatabase.CreateSession()

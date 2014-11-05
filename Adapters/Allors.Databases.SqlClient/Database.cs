@@ -23,6 +23,7 @@ namespace Allors.Adapters.Database.SqlClient
     using System.Data.SqlClient;
     using System.Xml;
 
+    using Allors.Databases;
     using Allors.Meta;
     using Allors.Populations;
 
@@ -34,14 +35,14 @@ namespace Allors.Adapters.Database.SqlClient
 
         private readonly object lockObject = new object();
 
-        private readonly Guid id;
-        private readonly ObjectIds objectIds;
-        private readonly IObjectFactory objectFactory;
-        private readonly IWorkspaceFactory workspaceFactory;
         private readonly RoleChecks roleChecks;
         private readonly Mapping mapping;
 
         // Configuration
+        private readonly Guid id;
+        private readonly ObjectIds objectIds;
+        private readonly IObjectFactory objectFactory;
+        private readonly IRoleCache roleCache;
         private readonly string connectionString;
         private readonly int commandTimeout;
         private readonly string schemaName;
@@ -57,17 +58,30 @@ namespace Allors.Adapters.Database.SqlClient
         public Database(Configuration configuration)
         {
             this.id = configuration.Id;
+            if (this.id == Guid.Empty)
+            {
+                throw new Exception("Configuration.Id is missing");
+            }
 
-            this.objectIds = configuration.ObjectIds;
             this.objectFactory = configuration.ObjectFactory;
-            this.workspaceFactory = configuration.WorkspaceFactory;
-            this.roleChecks = new RoleChecks();
+            if (this.objectFactory == null)
+            {
+                throw new Exception("Configuration.ObjectFactory is missing");
+            }
 
             this.connectionString = configuration.ConnectionString;
-            this.commandTimeout = configuration.CommandTimeout;
-            this.schemaName = configuration.SchemaName;
-            this.isolationLevel = configuration.IsolationLevel;
-            
+            if (this.connectionString == null)
+            {
+                throw new Exception("Configuration.ConnectionString is missing");
+            }
+
+            this.objectIds = configuration.ObjectIds ?? new ObjectIdsInteger();
+            this.roleCache = configuration.RoleCache ?? new RoleCache();
+            this.commandTimeout = configuration.CommandTimeout ?? 30;
+            this.schemaName = configuration.SchemaName ?? "allors";
+            this.isolationLevel = configuration.IsolationLevel ?? IsolationLevel.Snapshot;
+
+            this.roleChecks = new RoleChecks();
             this.mapping = new Mapping(this);
         }
 
@@ -88,6 +102,14 @@ namespace Allors.Adapters.Database.SqlClient
             get
             {
                 return this.objectFactory;
+            }
+        }
+
+        public IRoleCache RoleCache
+        {
+            get
+            {
+                return this.roleCache;
             }
         }
 
@@ -234,18 +256,9 @@ namespace Allors.Adapters.Database.SqlClient
         public void Init()
         {
             this.Mapping.Init();
+            this.RoleCache.Invalidate();
 
             this.properties = null;
-        }
-        
-        public IWorkspace CreateWorkspace()
-        {
-            if (this.workspaceFactory == null)
-            {
-                throw new Exception("No workspacefactory defined");
-            }
-
-            return this.workspaceFactory.CreateWorkspace(this);
         }
 
         IDatabaseSession IDatabase.CreateSession()
