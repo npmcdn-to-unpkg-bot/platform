@@ -24,9 +24,13 @@ namespace Allors.Databases
 
     public interface IRoleCache
     {
-        bool TryGet(ObjectId association, object cacheId, IRoleType roleType, out object role);
+        bool TryGetUnit(ObjectId association, object cacheId, IRoleType roleType, out object role);
        
-        void Set(ObjectId association, object cacheId, IRoleType roleType, object role);
+        void SetUnit(ObjectId association, object cacheId, IRoleType roleType, object role);
+
+        bool TryGetComposite(ObjectId association, object cacheId, IRoleType roleType, out ObjectId role);
+
+        void SetComposite(ObjectId association, object cacheId, IRoleType roleType, ObjectId role);
 
         void Invalidate();
     }

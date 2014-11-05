@@ -466,7 +466,7 @@ END
             if (!roleByAssociation.TryGetValue(association, out role))
             {
                 var cacheId = this.GetCacheId(association);
-                if (!this.roleCache.TryGet(association, cacheId, roleType, out role))
+                if (!this.roleCache.TryGetUnit(association, cacheId, roleType, out role))
                 {
                     role = this.FetchUnitRole(association, roleType);
                 }
@@ -526,7 +526,12 @@ END
             ObjectId role;
             if (!roleByAssociation.TryGetValue(association, out role))
             {
-                role = this.FetchCompositeRole(association, roleType);
+                var cacheId = this.GetCacheId(association);
+                if (!this.roleCache.TryGetComposite(association, cacheId, roleType, out role))
+                {
+                    role = this.FetchCompositeRole(association, roleType);
+                }
+                
                 roleByAssociation[association] = role;
             }
 
@@ -547,19 +552,27 @@ END
                 ObjectId existingAssociation;
                 if (!associationByRole.TryGetValue(role, out existingAssociation))
                 {
+                    var existingAssociationFound = false;
                     foreach (var kvp in roleByAssociation)
                     {
                         if (role.Equals(kvp.Value))
                         {
                             existingAssociation = kvp.Key;
+                            existingAssociationFound = true;
                             break;
                         }
+                    }
+
+                    if (!existingAssociationFound)
+                    {
+                        existingAssociation = this.GetCompositeAssociationOneToOne(role, roleType.AssociationType);
                     }
                 }
 
                 if (existingAssociation != null)
                 {
                     roleByAssociation[existingAssociation] = null;
+                    this.OnObjectChanged(existingAssociation);
                 }
                 
                 // Association <- Existing Role
@@ -634,7 +647,12 @@ END
             ObjectId role;
             if (!roleByAssociation.TryGetValue(association, out role))
             {
-                role = this.FetchCompositeRole(association, roleType);
+                var cacheId = this.GetCacheId(association);
+                if (!this.roleCache.TryGetComposite(association, cacheId, roleType, out role))
+                {
+                    role = this.FetchCompositeRole(association, roleType);
+                }
+
                 roleByAssociation[association] = role;
             }
 
@@ -1246,7 +1264,7 @@ WHERE " + Mapping.ColumnNameForAssociation + @"=" + Mapping.ParameterNameForAsso
                 var role = command.ExecuteScalar();
 
                 var cacheId = this.GetCacheId(association);
-                this.roleCache.Set(association, cacheId, roleType, role);
+                this.roleCache.SetUnit(association, cacheId, roleType, role);
                 
                 return role;
             }
@@ -1263,16 +1281,20 @@ WHERE " + Mapping.ColumnNameForAssociation + @"=" + Mapping.ParameterNameForAsso
 ";
             using (var command = this.CreateCommand(cmdText))
             {
+                ObjectId role = null;
+
                 command.Parameters.Add(Mapping.ParameterNameForAssociation, schema.SqlDbTypeForId).Value = association.Value;
                 var result = command.ExecuteScalar();
                 if (result != null)
                 {
-                    var objectId = this.database.ObjectIds.Parse(result.ToString());
-                    return objectId;
+                    role = this.database.ObjectIds.Parse(result.ToString());
                 }
-            }
 
-            return null;
+                var cacheId = this.GetCacheId(association);
+                this.roleCache.SetComposite(association, cacheId, roleType, role);
+
+                return role;
+            }
         }
 
         private ObjectId[] FetchCompositeRoles(ObjectId association, IRoleType roleType)
