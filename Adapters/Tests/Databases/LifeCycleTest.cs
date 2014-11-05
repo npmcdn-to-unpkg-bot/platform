@@ -4237,6 +4237,46 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
             }
         }
 
+        [Test]
+        public void ObjectType()
+        {
+            foreach (var init in this.Inits)
+            {
+                init();
+
+                var c1a = this.Session.Create(Classes.C1);
+                Assert.AreEqual(Classes.C1, c1a.Strategy.ObjectType);
+
+                this.Session.Commit();
+
+                Assert.AreEqual(Classes.C1, c1a.Strategy.ObjectType);
+
+                var c1b = this.Session.Create(Classes.C1);
+
+                this.Session.Rollback();
+
+                var exceptionThrown = false;
+
+                try
+                {
+                    var objectType = c1b.Strategy.ObjectType;
+                }
+                catch
+                {
+                    exceptionThrown = true;
+                }
+
+                Assert.IsTrue(exceptionThrown);
+
+                var c2a = this.Session.Create(Classes.C2);
+                Assert.AreEqual(Classes.C2, c2a.Strategy.ObjectType);
+
+                this.Session.Commit();
+
+                Assert.AreEqual(Classes.C2, c2a.Strategy.ObjectType);
+            }
+        }
+
         protected abstract void SwitchDatabase();
 
         protected abstract IPopulation CreatePopulation();

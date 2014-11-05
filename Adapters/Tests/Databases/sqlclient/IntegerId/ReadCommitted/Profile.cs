@@ -78,14 +78,20 @@ namespace Allors.Databases.SqlClient.IntegerId.ReadCommitted
             return database;
         }
 
+        public override IPopulation CreatePopulation()
+        {
+            return new Memory.IntegerId.Database(new Memory.IntegerId.Configuration { ObjectFactory = this.ObjectFactory });
+        }
+
         public override IDatabase CreateDatabase()
         {
             var configuration = new Configuration
             {
                 ObjectFactory = this.ObjectFactory,
                 Id = Guid.NewGuid(),
-                ConnectionString = ConnectionString
+                ConnectionString = this.ConnectionString
             };
+
             var database = new Database(configuration);
 
             return database;

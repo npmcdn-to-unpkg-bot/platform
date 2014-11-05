@@ -28,8 +28,8 @@ namespace Allors.Databases.Memory.LongId
             : base(configuration)
         {
         }
-       
-        internal override Memory.Session Session
+
+        protected override Memory.Session Session
         {
             get { return this.session ?? (this.session = new Session(this)); }
         }

@@ -22,8 +22,6 @@ namespace Allors.Databases
 {
     using System;
     using System.Collections.Generic;
-    using System.Data.SqlClient;
-    using System.Text;
 
     using Allors;
     using Allors.Meta;
@@ -100,8 +98,10 @@ namespace Allors.Databases
             this.database = null;
         }
 
-        public abstract IDatabase CreateDatabase();
+        public abstract IPopulation CreatePopulation();
 
+        public abstract IDatabase CreateDatabase();
+        
         public abstract IWorkspace CreateWorkspace(IDatabase database);
 
         internal ISession CreateSession()

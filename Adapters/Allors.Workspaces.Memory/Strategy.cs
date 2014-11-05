@@ -100,7 +100,11 @@ namespace Allors.Workspaces.Memory
 
         public IClass ObjectType
         {
-            get { return this.objectType; }
+            get
+            {
+                this.CheckRemoved();
+                return this.objectType;
+            }
         }
 
         public ISession Session

@@ -19,16 +19,13 @@ namespace Allors.Databases
     using System;
     using System.Globalization;
     using System.IO;
-    using System.Text;
     using System.Text.RegularExpressions;
     using System.Threading;
     using System.Xml;
 
-    using Allors.Meta;
-
     using Allors;
-
     using Allors.Domain;
+    using Allors.Meta;
     using Allors.Populations;
 
     using NUnit.Framework;
@@ -36,8 +33,6 @@ namespace Allors.Databases
     public abstract class SerializationTest
     {
         private static readonly string GuidString = Guid.NewGuid().ToString();
-
-        private string PopulationXml;
 
         #region population
         private C1 c1A;
@@ -58,14 +53,6 @@ namespace Allors.Databases
         private C4 c4C;
         private C4 c4D;
         #endregion
-
-        protected virtual bool EmptyStringIsNull
-        {
-            get
-            {
-                return false;
-            }
-        }
 
         protected abstract IProfile Profile { get; }
 
@@ -101,27 +88,6 @@ namespace Allors.Databases
             }
         }
 
-        [SetUp]
-        public void SetUp()
-        {
-            var database = new Memory.IntegerId.Database(new Memory.IntegerId.Configuration { ObjectFactory = this.Profile.ObjectFactory });
-            using (var session = database.CreateSession())
-            {
-                this.Populate(session);
-                session.Commit();
-
-                using (var stringWriter = new StringWriter())
-                {
-                    using (var writer = new XmlTextWriter(stringWriter))
-                    {
-                        database.Save(writer);
-                    }
-
-                    this.PopulationXml = stringWriter.ToString();
-                }
-            }
-        }
-
         [Test]
         public void DifferentVersion()
         {
@@ -141,7 +107,6 @@ namespace Allors.Databases
                     writer.Close();
 
                     var xml = stringWriter.ToString();
-                    this.AssertXml(this.PopulationXml, xml);
 
                     var xmlDocument = new XmlDocument();
                     xmlDocument.LoadXml(xml);
@@ -240,7 +205,6 @@ namespace Allors.Databases
                     writer.Close();
 
                     var xml = stringWriter.ToString();
-                    this.AssertXml(this.PopulationXml, xml);
 
                     var stringReader = new StringReader(stringWriter.ToString());
                     var reader = new XmlTextReader(stringReader);
@@ -274,7 +238,6 @@ namespace Allors.Databases
                     writer.Close();
 
                     var xml = stringWriter.ToString();
-                    this.AssertXml(this.PopulationXml, xml);
 
                     var stringReader = new StringReader(stringWriter.ToString());
                     var reader = new XmlTextReader(stringReader);
@@ -312,7 +275,6 @@ namespace Allors.Databases
                     writer.Close();
 
                     var xml = stringWriter.ToString();
-                    this.AssertXml(this.PopulationXml, xml);
 
                     var stringReader = new StringReader(stringWriter.ToString());
                     var reader = new XmlTextReader(stringReader);
@@ -358,7 +320,6 @@ namespace Allors.Databases
                 writer.Close();
 
                 var xml = stringWriter.ToString();
-                this.AssertXml(this.PopulationXml, xml);
 
                 Thread.CurrentThread.CurrentCulture = readCultureInfo;
                 Thread.CurrentThread.CurrentUICulture = readCultureInfo;
@@ -398,7 +359,6 @@ namespace Allors.Databases
                     writer.Close();
 
                     var xml = stringWriter.ToString();
-                    this.AssertXml(this.PopulationXml, xml);
 
                     var xmlDocument = new XmlDocument();
                     xmlDocument.LoadXml(stringWriter.ToString());
@@ -495,7 +455,6 @@ namespace Allors.Databases
                     writer.Close();
 
                     var xml = stringWriter.ToString();
-                    this.AssertXml(this.PopulationXml, xml);
 
                     var stringReader = new StringReader(xml);
                     var reader = new XmlTextReader(stringReader);
@@ -504,9 +463,9 @@ namespace Allors.Databases
                     testPopulation.Load(reader);
                     reader.Close();
 
-                    using (var saveSession = testPopulation.CreateSession())
+                    using (var testSession = testPopulation.CreateSession())
                     {
-                        this.AssertPopulation(saveSession);
+                        this.AssertPopulation(testSession);
                     }
                 }
             }
@@ -535,7 +494,6 @@ namespace Allors.Databases
                     writer.Close();
 
                     var xml = stringWriter.ToString();
-                    this.AssertXml(this.PopulationXml, xml); 
                     
                     Thread.CurrentThread.CurrentCulture = readCultureInfo;
                     Thread.CurrentThread.CurrentUICulture = readCultureInfo;
@@ -646,24 +604,17 @@ namespace Allors.Databases
                 Assert.IsNotNull(allorsObject);
             }
 
-            if (this.EmptyStringIsNull)
-            {
-                Assert.IsFalse(c1ACopy.ExistC1AllorsString);
-            }
-            else
-            {
-                Assert.AreEqual(this.c1A.C1AllorsString, string.Empty);
-            }
+            Assert.AreEqual(c1ACopy.C1AllorsString, string.Empty);
 
-            Assert.AreEqual(-1, this.c1A.C1AllorsInteger);
-            Assert.AreEqual(1.1m, this.c1A.C1AllorsDecimal);
-            Assert.AreEqual(1.1d, this.c1A.C1AllorsFloat);
-            Assert.AreEqual(true, this.c1A.C1AllorsBoolean);
-            Assert.AreEqual(new Guid(GuidString), this.c1A.C1AllorsUnique);
+            Assert.AreEqual(-1, c1ACopy.C1AllorsInteger);
+            Assert.AreEqual(1.1m, c1ACopy.C1AllorsDecimal);
+            Assert.AreEqual(1.1d, c1ACopy.C1AllorsFloat);
+            Assert.AreEqual(true, c1ACopy.C1AllorsBoolean);
+            Assert.AreEqual(new Guid(GuidString), c1ACopy.C1AllorsUnique);
 
-            Assert.AreEqual(new byte[0], this.c1A.C1AllorsBinary);
-            Assert.AreEqual(new byte[] { 0, 1, 2, 3 }, this.c1B.C1AllorsBinary);
-            Assert.AreEqual(null, this.c1C.C1AllorsBinary);
+            Assert.AreEqual(new byte[0], c1ACopy.C1AllorsBinary);
+            Assert.AreEqual(new byte[] { 0, 1, 2, 3 }, c1BCopy.C1AllorsBinary);
+            Assert.AreEqual(null, c1CCopy.C1AllorsBinary);
 
             Assert.AreEqual("a1", c2ACopy.C1WhereC2one2one.C1AllorsString);
             Assert.AreEqual("a1", c2ACopy.C1WhereC2one2many.C1AllorsString);

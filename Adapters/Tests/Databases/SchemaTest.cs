@@ -121,6 +121,9 @@ namespace Allors.Databases
         {
             var relationTypeId = new Guid("89479CC3-2BE0-46A9-8008-E9D5F1377897");
 
+            this.DropTable("allors", "_89479cc32be046a98008e9d5f1377897_string_256");
+            this.DropTable("allors", "_89479cc32be046a98008e9d5f1377897_11");
+
             this.CreateDomainWithUnitRelationType(relationTypeId, UnitIds.StringId);
             this.CreateDatabase(this.domain.MetaPopulation, true);
             

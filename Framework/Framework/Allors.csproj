@@ -87,7 +87,6 @@
     <Compile Include="Populations\Configuration.cs" />
     <Compile Include="Populations\EmptySet.cs" />
     <Compile Include="Populations\MetaObjectComparer.cs" />
-    <Compile Include="Populations\Population.cs" />
     <Compile Include="Populations\RoleChecks.cs" />
     <Compile Include="Populations\RoleTypeExtensions.cs" />
     <Compile Include="Populations\Serialization.cs" />

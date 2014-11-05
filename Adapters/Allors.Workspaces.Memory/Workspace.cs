@@ -17,41 +17,28 @@
 namespace Allors.Workspaces.Memory
 {
     using System;
+    using System.Collections.Generic;
     using System.Xml;
 
+    using Allors.Meta;
     using Allors.Populations;
 
-    public abstract class Workspace : Population, IWorkspace
+    public abstract class Workspace : IWorkspace
     {
         private readonly IDatabase database;
+        private readonly IObjectFactory objectFactory;
+        private readonly Dictionary<IObjectType, object> concreteClassesByObjectType;
+
+        private Dictionary<string, object> properties;
 
         private WorkspaceSession workspaceSession;
 
         protected Workspace(Configuration configuration)
-            : base(configuration)
         {
             this.database = configuration.Database;
-        }
+            this.objectFactory = configuration.ObjectFactory ?? this.database.ObjectFactory;
 
-        public override bool IsDatabase
-        {
-            get
-            {
-                return false;
-            }
-        }
-
-        public override bool IsWorkspace
-        {
-            get
-            {
-                return true;
-            }
-        }
-
-        public override Guid Id
-        {
-            get { return this.Database.Id; }
+            this.concreteClassesByObjectType = new Dictionary<IObjectType, object>();
         }
 
         public IDatabase Database
@@ -62,19 +49,46 @@ namespace Allors.Workspaces.Memory
             }
         }
 
-        public bool AreSessionsShared
+        public IObjectFactory ObjectFactory
         {
-            get { return true; }
+            get
+            {
+                return this.objectFactory;
+            }
+        }
+        
+        public bool IsDatabase
+        {
+            get
+            {
+                return false;
+            }
         }
 
-        public bool IsPopulationShared
+        public bool IsWorkspace
         {
-            get { return false; }
+            get
+            {
+                return true;
+            }
+        }
+
+        public Guid Id
+        {
+            get { return this.Database.Id; }
+        }
+
+        public IMetaPopulation MetaPopulation 
+        {
+            get
+            {
+                return this.objectFactory.MetaPopulation;
+            }
         }
 
         internal abstract ObjectIds ObjectIds { get; }
 
-        internal virtual WorkspaceSession WorkspaceSession
+        private WorkspaceSession WorkspaceSession
         {
             get
             {
@@ -82,7 +96,39 @@ namespace Allors.Workspaces.Memory
             }
         }
 
-        public override ISession CreateSession()
+        public object this[string name]
+        {
+            get
+            {
+                if (this.properties == null)
+                {
+                    return null;
+                }
+
+                object value;
+                this.properties.TryGetValue(name, out value);
+                return value;
+            }
+
+            set
+            {
+                if (this.properties == null)
+                {
+                    this.properties = new Dictionary<string, object>();
+                }
+
+                if (value == null)
+                {
+                    this.properties.Remove(name);
+                }
+                else
+                {
+                    this.properties[name] = value;
+                }
+            }
+        }
+
+        public ISession CreateSession()
         {
             return this.CreateWorkspaceSession();
         }
@@ -92,7 +138,7 @@ namespace Allors.Workspaces.Memory
             return this.CreateWorkspaceSession();
         }
 
-        public override void Load(XmlReader reader)
+        public void Load(XmlReader reader)
         {
             if (this.workspaceSession != null)
             {
@@ -102,7 +148,7 @@ namespace Allors.Workspaces.Memory
 
             this.workspaceSession = null;
 
-            while (reader.Read()) 
+            while (reader.Read())
             {
                 // only process elements, ignore others
                 if (reader.NodeType.Equals(XmlNodeType.Element))
@@ -124,7 +170,7 @@ namespace Allors.Workspaces.Memory
             this.WorkspaceSession.Commit();
         }
 
-        public override void Save(XmlWriter writer)
+        public void Save(XmlWriter writer)
         {
             var writeDocument = false;
             if (writer.WriteState == WriteState.Start)
@@ -143,18 +189,113 @@ namespace Allors.Workspaces.Memory
             }
         }
 
+        public void UnitRoleChecks(IStrategy strategy, IRoleType roleType)
+        {
+            if (!this.ContainsConcreteClass(roleType.AssociationType.ObjectType, strategy.ObjectType))
+            {
+                throw new ArgumentException(strategy.ObjectType + " is not a valid association object type for " + roleType + ".");
+            }
+
+            if (roleType.ObjectType is IComposite)
+            {
+                throw new ArgumentException(roleType.ObjectType + " on roleType " + roleType + " is not a unit type.");
+            }
+        }
+
+        public void CompositeRoleChecks(IStrategy strategy, IRoleType roleType)
+        {
+            this.CompositeSharedChecks(strategy, roleType, null);
+        }
+
+        public void CompositeRoleChecks(IStrategy strategy, IRoleType roleType, IObject role)
+        {
+            this.CompositeSharedChecks(strategy, roleType, role);
+            if (!roleType.IsOne)
+            {
+                throw new ArgumentException("RelationType " + roleType + " has multiplicity many.");
+            }
+        }
+
+        public void CompositeRolesChecks(IStrategy strategy, IRoleType roleType, IObject role)
+        {
+            this.CompositeSharedChecks(strategy, roleType, role);
+            if (!roleType.IsMany)
+            {
+                throw new ArgumentException("RelationType " + roleType + " has multiplicity one.");
+            }
+        }
+
         internal abstract bool IsWorkspaceNew(ObjectId objectId);
 
         protected abstract void ResetObjectIds();
 
-        protected virtual WorkspaceSession CreateNewWorkspaceSession()
+        private bool ContainsConcreteClass(IComposite objectType, IObjectType concreteClass)
+        {
+            object concreteClassOrClasses;
+            if (!this.concreteClassesByObjectType.TryGetValue(objectType, out concreteClassOrClasses))
+            {
+                if (objectType.ExistExclusiveLeafClass)
+                {
+                    concreteClassOrClasses = objectType.ExclusiveLeafClass;
+                    this.concreteClassesByObjectType[objectType] = concreteClassOrClasses;
+                }
+                else
+                {
+                    concreteClassOrClasses = new HashSet<IObjectType>(objectType.LeafClasses);
+                    this.concreteClassesByObjectType[objectType] = concreteClassOrClasses;
+                }
+            }
+
+            if (concreteClassOrClasses is IObjectType)
+            {
+                return concreteClass.Equals(concreteClassOrClasses);
+            }
+
+            var concreteClasses = (HashSet<IObjectType>)concreteClassOrClasses;
+            return concreteClasses.Contains(concreteClass);
+        }
+
+        private WorkspaceSession CreateNewWorkspaceSession()
         {
             return new WorkspaceSession(this);
         }
 
-        protected virtual IWorkspaceSession CreateWorkspaceSession()
+        private IWorkspaceSession CreateWorkspaceSession()
         {
             return this.WorkspaceSession;
+        }
+
+        private void CompositeSharedChecks(IStrategy strategy, IRoleType roleType, IObject role)
+        {
+            if (!this.ContainsConcreteClass(roleType.AssociationType.ObjectType, strategy.ObjectType))
+            {
+                throw new ArgumentException(strategy.ObjectType + " has no roleType with role " + roleType + ".");
+            }
+
+            if (role != null)
+            {
+                if (!strategy.Session.Equals(role.Strategy.Session))
+                {
+                    throw new ArgumentException(role + " is from different session");
+                }
+
+                if (role.Strategy.IsDeleted)
+                {
+                    throw new ArgumentException(roleType + " on object " + strategy + " is removed.");
+                }
+
+                var compositeType = roleType.ObjectType as IComposite;
+
+                if (compositeType == null)
+                {
+                    throw new ArgumentException(role + " has no CompositeType");
+                }
+
+                if (!compositeType.ContainsLeafClass(role.Strategy.ObjectType))
+                {
+                    throw new ArgumentException(role.Strategy.ObjectType + " is not compatible with type " + roleType.ObjectType + " of role " + roleType + ".");
+                }
+            }
         }
     }
 }

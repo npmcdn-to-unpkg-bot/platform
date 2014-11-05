@@ -40,7 +40,7 @@ namespace Allors.Databases.Memory.LongId
 
         protected override IPopulation CreatePopulation()
         {
-            return this.profile.CreateDatabase();
+            return this.profile.CreatePopulation();
         }
 
         [TearDown]

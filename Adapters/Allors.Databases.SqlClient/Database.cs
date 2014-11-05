@@ -266,7 +266,9 @@ namespace Allors.Adapters.Database.SqlClient
         public void Init()
         {
             this.Mapping.Init();
-            this.RoleCache.Invalidate();
+
+            this.roleCache.Invalidate();
+            this.classCache.Invalidate();
 
             this.properties = null;
         }
@@ -296,6 +298,9 @@ namespace Allors.Adapters.Database.SqlClient
             this.Init();
 
             this.LoadAllors(reader);
+
+            this.roleCache.Invalidate();
+            this.classCache.Invalidate();
         }
 
         public void Save(XmlWriter writer)

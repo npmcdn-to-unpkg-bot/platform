@@ -23,8 +23,8 @@ namespace Allors.Databases.Memory.IntegerId
     using System;
     using System.Collections.Generic;
 
-    using Allors.Workspaces.Memory.IntegerId;
     using Allors.Populations;
+    using Allors.Workspaces.Memory.IntegerId;
 
     public class Profile : Databases.Profile
     {
@@ -50,6 +50,11 @@ namespace Allors.Databases.Memory.IntegerId
 
                 return markers.ToArray();
             }
+        }
+
+        public override IPopulation CreatePopulation()
+        {
+            return this.CreateDatabase();
         }
 
         public override IDatabase CreateDatabase()

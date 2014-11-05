@@ -29,7 +29,7 @@ namespace Allors.Databases.Memory.IntegerId
         {
         }
 
-        internal override Memory.Session Session
+        protected override Memory.Session Session
         {
             get { return this.session ?? (this.session = new Session(this)); }
         }

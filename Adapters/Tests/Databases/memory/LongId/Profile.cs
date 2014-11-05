@@ -23,8 +23,8 @@ namespace Allors.Databases.Memory.LongId
     using System;
     using System.Collections.Generic;
 
-    using Allors.Workspaces.Memory.LongId;
     using Allors.Populations;
+    using Allors.Workspaces.Memory.LongId;
 
     public class Profile : Databases.Profile
     {
@@ -52,9 +52,14 @@ namespace Allors.Databases.Memory.LongId
             }
         }
 
+        public override IPopulation CreatePopulation()
+        {
+            return this.CreateDatabase();
+        }
+
         public override IDatabase CreateDatabase()
         {
-            return new Databases.Memory.LongId.Database(new Databases.Memory.LongId.Configuration { ObjectFactory = this.ObjectFactory });
+            return new Database(new Configuration { ObjectFactory = this.ObjectFactory });
         }
 
         public override IWorkspace CreateWorkspace(IDatabase database)
