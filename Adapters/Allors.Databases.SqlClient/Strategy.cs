@@ -28,7 +28,7 @@ namespace Allors.Adapters.Database.SqlClient
         private readonly ObjectId objectId;
         private IObject domainObject;
        
-        public Strategy(DatabaseSession session, ObjectId objectId)
+        internal Strategy(DatabaseSession session, ObjectId objectId)
         {
             this.session = session;
             this.objectId = objectId;
@@ -91,6 +91,14 @@ namespace Allors.Adapters.Database.SqlClient
             }
         }
 
+        internal IClass UncheckedObjectType
+        {
+            get
+            {
+                return this.session.GetObjectType(this.ObjectId);
+            }
+        }
+
         public IObject GetObject()
         {
             this.AssertNotDeleted();
@@ -101,7 +109,7 @@ namespace Allors.Adapters.Database.SqlClient
         {
             this.AssertNotDeleted();
 
-            foreach (var roleType in this.ObjectType.RoleTypes)
+            foreach (var roleType in this.UncheckedObjectType.RoleTypes)
             {
                 if (roleType.ObjectType is IUnit)
                 {
@@ -136,7 +144,7 @@ namespace Allors.Adapters.Database.SqlClient
                 }
             }
 
-            foreach (var associationType in this.ObjectType.AssociationTypes)
+            foreach (var associationType in this.UncheckedObjectType.AssociationTypes)
             {
                 var roleType = associationType.RoleType;
 
@@ -331,7 +339,7 @@ namespace Allors.Adapters.Database.SqlClient
                     throw new Exception("Unsupported multiplicity " + roleType.RelationType.Multiplicity);
             }
 
-            return role != null ? new Strategy(this.session, role).GetObject() : null;
+            return role != null ? this.session.CreateStrategyForExistingObject(role).GetObject() : null;
         }
 
         public void SetCompositeRole(IRoleType roleType, IObject role)

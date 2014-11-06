@@ -388,7 +388,7 @@ namespace Allors.Databases.Memory
                                 var roleIdStringArray = roleIdsString.Split(Serialization.ObjectsSplitterCharArray);
 
                                 if (association == null ||
-                                    !this.session.MemoryDatabase.ContainsConcreteClass(relationType.AssociationType.ObjectType, association.ObjectType) || 
+                                    !this.session.MemoryDatabase.ContainsConcreteClass(relationType.AssociationType.ObjectType, association.UncheckedObjectType) || 
                                     (relationType.RoleType.IsOne && roleIdStringArray.Length != 1))
                                 {
                                     foreach (var roleId in roleIdStringArray)
@@ -402,7 +402,7 @@ namespace Allors.Databases.Memory
                                     {
                                         var roleIdString = this.session.ObjectIds.Parse(roleIdStringArray[0]);
                                         var role = this.LoadInstantiateStrategy(roleIdString);
-                                        if (role == null || !this.session.MemoryDatabase.ContainsConcreteClass((IComposite)relationType.RoleType.ObjectType, role.ObjectType))
+                                        if (role == null || !this.session.MemoryDatabase.ContainsConcreteClass((IComposite)relationType.RoleType.ObjectType, role.UncheckedObjectType))
                                         {
                                             this.session.MemoryDatabase.OnRelationNotLoaded(relationType.Id, associationId.ToString(), roleIdStringArray[0]);
                                         }
@@ -425,7 +425,7 @@ namespace Allors.Databases.Memory
                                         {
                                             var roleId = this.session.ObjectIds.Parse(roleIdString);
                                             var role = this.LoadInstantiateStrategy(roleId);
-                                            if (role == null || !this.session.MemoryDatabase.ContainsConcreteClass((IComposite)relationType.RoleType.ObjectType, role.ObjectType))
+                                            if (role == null || !this.session.MemoryDatabase.ContainsConcreteClass((IComposite)relationType.RoleType.ObjectType, role.UncheckedObjectType))
                                             {
                                                 this.session.MemoryDatabase.OnRelationNotLoaded(relationType.Id, associationId.ToString(), roleId.ToString());
                                             }

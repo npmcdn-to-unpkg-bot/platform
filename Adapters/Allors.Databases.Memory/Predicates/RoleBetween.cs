@@ -57,7 +57,7 @@ namespace Allors.Databases.Memory
             {
                 if (this.roleType.ObjectType is IUnit)
                 {
-                    firstValue = RoleTypeExtensions.Normalize(this.roleType, this.first);
+                    firstValue = this.roleType.Normalize(this.first);
                 }
             }
 
@@ -70,7 +70,7 @@ namespace Allors.Databases.Memory
             {
                 if (this.roleType.ObjectType is IUnit)
                 {
-                    secondValue = RoleTypeExtensions.Normalize(this.roleType, this.second);
+                    secondValue = this.roleType.Normalize(this.second);
                 }
             }
 

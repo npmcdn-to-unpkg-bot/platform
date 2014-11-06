@@ -401,6 +401,20 @@ END
             this.Rollback();
         }
 
+        internal Strategy CreateStrategyForExistingObject(ObjectId objectId)
+        {
+            if (!this.classByObjectId.ContainsKey(objectId))
+            {
+                IClass @class;
+                if (this.classCache.TryGet(objectId, out @class))
+                {
+                    this.classByObjectId[objectId] = @class;
+                }
+            }
+
+            return new Strategy(this, objectId);
+        }
+
         internal IClass GetObjectType(ObjectId objectId)
         {
             return this.classByObjectId[objectId];
@@ -1122,7 +1136,7 @@ END
 
             this.FlushDeletedObjects();
         }
-        
+
         private static void SplitFlushAssociations(IEnumerable<ObjectId> flushAssociations, IReadOnlyDictionary<ObjectId, object> roleByAssociation, out IList<ObjectId> flushDeleted, out IList<ObjectId> flushChanged)
         {
             IList<ObjectId> deleted = null;
@@ -1220,7 +1234,7 @@ END
 
             return new Strategy(this, objectId);
         }
-        
+
         private void FetchObject(ObjectId objectId)
         {
             var cmdText = @"

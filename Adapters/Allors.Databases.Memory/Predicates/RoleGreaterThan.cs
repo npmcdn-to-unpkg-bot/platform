@@ -56,7 +56,7 @@ namespace Allors.Databases.Memory
             {
                 if (this.roleType.ObjectType is IUnit)
                 {
-                    compareValue = RoleTypeExtensions.Normalize(this.roleType, this.compare);
+                    compareValue = this.roleType.Normalize(this.compare);
                 }
             }
 

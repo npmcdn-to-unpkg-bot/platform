@@ -102,7 +102,7 @@ namespace Allors.Workspaces.Memory
         {
             get
             {
-                this.CheckRemoved();
+                this.AssertNotDeleted();
                 return this.objectType;
             }
         }
@@ -117,6 +117,14 @@ namespace Allors.Workspaces.Memory
             get
             {
                 return this.session.DatabaseSession;
+            }
+        }
+
+        internal IClass UncheckedObjectType
+        {
+            get
+            {
+                return this.objectType;
             }
         }
 
@@ -221,7 +229,7 @@ namespace Allors.Workspaces.Memory
 
         public virtual object GetUnitRole(IRoleType roleType)
         {
-            this.CheckRemoved();
+            this.AssertNotDeleted();
             this.RoleUnitChecks(roleType);
 
             var unitRole = this.GetInternalizedUnitRole(roleType);
@@ -230,7 +238,7 @@ namespace Allors.Workspaces.Memory
 
         public virtual void SetUnitRole(IRoleType roleType, object role)
         {
-            this.CheckRemoved();
+            this.AssertNotDeleted();
             this.RoleUnitChecks(roleType);
 
             this.ChangeSet.OnChangingUnitRole(this, roleType);
@@ -259,7 +267,7 @@ namespace Allors.Workspaces.Memory
 
         public virtual IObject GetCompositeRole(IRoleType roleType)
         {
-            this.CheckRemoved();
+            this.AssertNotDeleted();
             this.RoleCompositeChecks(roleType);
 
             var roleStrategy = this.session.GetCompositeRole(this, roleType);
@@ -274,7 +282,7 @@ namespace Allors.Workspaces.Memory
             }
             else
             {
-                this.CheckRemoved();
+                this.AssertNotDeleted();
                 this.RoleCompositeChecks(roleType, role);
 
                 var roleStrategy = this.session.GetStrategy(role);
@@ -290,7 +298,7 @@ namespace Allors.Workspaces.Memory
 
         public virtual void RemoveCompositeRole(IRoleType roleType)
         {
-            this.CheckRemoved();
+            this.AssertNotDeleted();
             this.RoleCompositeChecks(roleType);
 
             var previousRoleStrategy = this.session.GetCompositeRole(this, roleType);
@@ -310,7 +318,7 @@ namespace Allors.Workspaces.Memory
 
         public virtual Allors.Extent GetCompositeRoles(IRoleType roleType)
         {
-            this.CheckRemoved();
+            this.AssertNotDeleted();
 
             return new ExtentRole(this, roleType);
         }
@@ -323,7 +331,7 @@ namespace Allors.Workspaces.Memory
             }
             else
             {
-                this.CheckRemoved();
+                this.AssertNotDeleted();
 
                 this.RoleCompositesChecks(roleType);
                 foreach (IObject allorsObject in roles)
@@ -348,7 +356,7 @@ namespace Allors.Workspaces.Memory
 
         public virtual void AddCompositeRole(IRoleType roleType, IObject role)
         {
-            this.CheckRemoved();
+            this.AssertNotDeleted();
             if (role != null)
             {
                 this.RoleCompositesChecks(roleType, role);
@@ -366,7 +374,7 @@ namespace Allors.Workspaces.Memory
 
         public virtual void RemoveCompositeRole(IRoleType roleType, IObject role)
         {
-            this.CheckRemoved();
+            this.AssertNotDeleted();
 
             if (role != null)
             {
@@ -386,7 +394,7 @@ namespace Allors.Workspaces.Memory
 
         public virtual void RemoveCompositeRoles(IRoleType roleType)
         {
-            this.CheckRemoved();
+            this.AssertNotDeleted();
             this.RoleCompositesChecks(roleType);
 
             var previousRoleStrategies = this.session.GetCompositeRoles(this, roleType);
@@ -427,7 +435,7 @@ namespace Allors.Workspaces.Memory
 
         public virtual IObject GetCompositeAssociation(IAssociationType associationType)
         {
-            this.CheckRemoved();
+            this.AssertNotDeleted();
 
             // TODO: check associationType (see roleType checks)
             var association = this.session.GetAssociation(this, associationType);
@@ -441,7 +449,7 @@ namespace Allors.Workspaces.Memory
 
         public virtual Allors.Extent GetCompositeAssociations(IAssociationType associationType)
         {
-            this.CheckRemoved();
+            this.AssertNotDeleted();
 
             return new ExtentAssociation(this, associationType);
         }
@@ -453,7 +461,7 @@ namespace Allors.Workspaces.Memory
 
         public virtual void Delete()
         {
-            this.CheckRemoved();
+            this.AssertNotDeleted();
 
             this.session.Delete(this);
 
@@ -692,7 +700,7 @@ namespace Allors.Workspaces.Memory
             }
         }
 
-        private void CheckRemoved()
+        private void AssertNotDeleted()
         {
             if (this.isDeleted)
             {

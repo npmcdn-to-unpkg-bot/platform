@@ -388,7 +388,7 @@ namespace Allors.Workspaces.Memory
                 {
                     strategy.Delete();
 
-                    foreach (var roleType in strategy.ObjectType.RoleTypes)
+                    foreach (var roleType in strategy.UncheckedObjectType.RoleTypes)
                     {
                         if (roleType.ObjectType is IUnit)
                         {
@@ -419,7 +419,7 @@ namespace Allors.Workspaces.Memory
                         }
                     }
 
-                    foreach (var associationType in strategy.ObjectType.AssociationTypes)
+                    foreach (var associationType in strategy.UncheckedObjectType.AssociationTypes)
                     {
                         var roleType = associationType.RoleType;
                         if (roleType.IsMany)
@@ -533,7 +533,7 @@ namespace Allors.Workspaces.Memory
 
             foreach (Strategy newWorkspaceStrategy in newWorkspaceStrategies)
             {
-                var databaseObject = this.DatabaseSession.Create(newWorkspaceStrategy.ObjectType);
+                var databaseObject = this.DatabaseSession.Create(newWorkspaceStrategy.UncheckedObjectType);
 
                 var oldId = newWorkspaceStrategy.ObjectId;
                 var newId = databaseObject.Strategy.ObjectId;
@@ -1275,7 +1275,7 @@ namespace Allors.Workspaces.Memory
 
         internal virtual void Delete(Strategy association)
         {
-            foreach (var roleType in association.ObjectType.RoleTypes)
+            foreach (var roleType in association.UncheckedObjectType.RoleTypes)
             {
                 if (roleType.ObjectType is IUnit)
                 {
@@ -1306,7 +1306,7 @@ namespace Allors.Workspaces.Memory
                 }
             }
 
-            foreach (var associationType in association.ObjectType.AssociationTypes)
+            foreach (var associationType in association.UncheckedObjectType.AssociationTypes)
             {
                 var roleType = associationType.RoleType;
                 if (roleType.IsMany)
@@ -1778,7 +1778,7 @@ namespace Allors.Workspaces.Memory
             foreach (var strategyByObjectIdEntry in this.strategyByObjectId)
             {
                 var strategy = strategyByObjectIdEntry.Value;
-                if (!strategy.IsDeleted && concreteClasses.Contains(strategy.ObjectType))
+                if (!strategy.IsDeleted && concreteClasses.Contains(strategy.UncheckedObjectType))
                 {
                     strategies.Add(strategy);
                 }
@@ -1888,10 +1888,10 @@ namespace Allors.Workspaces.Memory
                     if (!strategy.IsNewInWorkspace)
                     {
                         List<Strategy> deletedStrategies;
-                        if (!deletedStrategiesByObjectType.TryGetValue(strategy.ObjectType, out deletedStrategies))
+                        if (!deletedStrategiesByObjectType.TryGetValue(strategy.UncheckedObjectType, out deletedStrategies))
                         {
                             deletedStrategies = new List<Strategy>();
-                            deletedStrategiesByObjectType.Add(strategy.ObjectType, deletedStrategies);
+                            deletedStrategiesByObjectType.Add(strategy.UncheckedObjectType, deletedStrategies);
                         }
 
                         deletedStrategies.Add(strategy);
@@ -1902,10 +1902,10 @@ namespace Allors.Workspaces.Memory
                     if (strategy.IsNewInWorkspace)
                     {
                         List<Strategy> newStrategies;
-                        if (!newStrategiesByObjectType.TryGetValue(strategy.ObjectType, out newStrategies))
+                        if (!newStrategiesByObjectType.TryGetValue(strategy.UncheckedObjectType, out newStrategies))
                         {
                             newStrategies = new List<Strategy>();
-                            newStrategiesByObjectType.Add(strategy.ObjectType, newStrategies);
+                            newStrategiesByObjectType.Add(strategy.UncheckedObjectType, newStrategies);
                         }
 
                         newStrategies.Add(strategy);
@@ -1913,10 +1913,10 @@ namespace Allors.Workspaces.Memory
                     else
                     {
                         List<Strategy> databaseStrategies;
-                        if (!databaseStrategiesByObjectType.TryGetValue(strategy.ObjectType, out databaseStrategies))
+                        if (!databaseStrategiesByObjectType.TryGetValue(strategy.UncheckedObjectType, out databaseStrategies))
                         {
                             databaseStrategies = new List<Strategy>();
-                            databaseStrategiesByObjectType.Add(strategy.ObjectType, databaseStrategies);
+                            databaseStrategiesByObjectType.Add(strategy.UncheckedObjectType, databaseStrategies);
                         }
 
                         databaseStrategies.Add(strategy);

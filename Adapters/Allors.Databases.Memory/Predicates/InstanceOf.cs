@@ -36,13 +36,13 @@ namespace Allors.Databases.Memory
 
         internal override ThreeValuedLogic Evaluate(Strategy strategy)
         {
-            if (strategy.ObjectType.Equals(this.objectType))
+            if (strategy.UncheckedObjectType.Equals(this.objectType))
             {
                 return ThreeValuedLogic.True;
             }
 
             var @interface = this.objectType as IInterface;
-            return (@interface != null && strategy.ObjectType.ContainsSupertype(@interface))
+            return (@interface != null && strategy.UncheckedObjectType.ContainsSupertype(@interface))
                        ? ThreeValuedLogic.True
                        : ThreeValuedLogic.False;
         }

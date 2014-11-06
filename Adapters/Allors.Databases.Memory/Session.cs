@@ -162,7 +162,7 @@ namespace Allors.Databases.Memory
                             this.strategyByObjectId.Remove(strategy.ObjectId);
 
                             HashSet<Strategy> strategies;
-                            if (this.strategiesByObjectType.TryGetValue(strategy.ObjectType, out strategies))
+                            if (this.strategiesByObjectType.TryGetValue(strategy.UncheckedObjectType, out strategies))
                             {
                                 strategies.Remove(strategy);
                             }
@@ -194,7 +194,7 @@ namespace Allors.Databases.Memory
                             this.strategyByObjectId.Remove(strategy.ObjectId);
 
                             HashSet<Strategy> strategies;
-                            if (this.strategiesByObjectType.TryGetValue(strategy.ObjectType, out strategies))
+                            if (this.strategiesByObjectType.TryGetValue(strategy.UncheckedObjectType, out strategies))
                             {
                                 strategies.Remove(strategy);
                             }
@@ -447,10 +447,10 @@ namespace Allors.Databases.Memory
             this.strategyByObjectId.Add(strategy.ObjectId, strategy);
 
             HashSet<Strategy> strategies;
-            if (!this.strategiesByObjectType.TryGetValue(strategy.ObjectType, out strategies))
+            if (!this.strategiesByObjectType.TryGetValue(strategy.UncheckedObjectType, out strategies))
             {
                 strategies = new HashSet<Strategy>();
-                this.strategiesByObjectType.Add(strategy.ObjectType, strategies);
+                this.strategiesByObjectType.Add(strategy.UncheckedObjectType, strategies);
             }
 
             strategies.Add(strategy);
@@ -524,7 +524,7 @@ namespace Allors.Databases.Memory
                 var strategy = dictionaryEntry.Value;
                 if (!strategy.IsDeleted)
                 {
-                    var objectType = strategy.ObjectType;
+                    var objectType = strategy.UncheckedObjectType;
 
                     List<Strategy> sortedNonDeletedStrategies;
                     if (!sortedNonDeletedStrategiesByObjectType.TryGetValue(objectType, out sortedNonDeletedStrategies))
