@@ -34,7 +34,7 @@ namespace Allors.Adapters.Database.SqlClient
         internal AllorsPredicateRoleUnitEqualsValueSql(AllorsExtentFilteredSql extent, IRoleType roleType, Object obj)
         {
             extent.CheckRole(roleType);
-            CompositePredicateAssertions.ValidateRoleEquals(roleType, obj);
+            PredicateAssertions.ValidateRoleEquals(roleType, obj);
             this.roleType = roleType;
             if (obj is Enum)
             {

@@ -35,7 +35,7 @@ namespace Allors.Adapters.Database.SqlClient
         public RoleContainedInEnumerable(AllorsExtentFilteredSql extent, IRoleType role, IEnumerable<IObject> enumerable)
         {
             extent.CheckRole(role);
-            CompositePredicateAssertions.ValidateRoleContainedIn(role, this.enumerable);
+            PredicateAssertions.ValidateRoleContainedIn(role, this.enumerable);
             this.role = role;
             this.enumerable = enumerable;
         }

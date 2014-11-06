@@ -33,7 +33,7 @@ namespace Allors.Databases.Memory
         internal RoleUnitEquals(ExtentFiltered extent, IRoleType roleType, object equals)
         {
             extent.CheckForRoleType(roleType);
-            CompositePredicateAssertions.ValidateRoleEquals(roleType, equals);
+            PredicateAssertions.ValidateRoleEquals(roleType, equals);
 
             this.extent = extent;
             this.roleType = roleType;

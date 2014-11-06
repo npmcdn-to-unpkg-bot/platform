@@ -24,7 +24,7 @@ namespace Allors.Databases.Memory
 
         internal Equals(IObject equals)
         {
-            CompositePredicateAssertions.ValidateEquals(equals);
+            PredicateAssertions.ValidateEquals(equals);
             this.equals = equals;
         }
 

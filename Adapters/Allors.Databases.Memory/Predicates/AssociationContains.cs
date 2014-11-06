@@ -31,7 +31,7 @@ namespace Allors.Databases.Memory
         internal AssociationContains(ExtentFiltered extent, IAssociationType associationType, IObject containedObject)
         {
             extent.CheckForAssociationType(associationType);
-            CompositePredicateAssertions.AssertAssociationContains(associationType, containedObject);
+            PredicateAssertions.AssertAssociationContains(associationType, containedObject);
 
             this.associationType = associationType;
             this.containedObject = containedObject;

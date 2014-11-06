@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Population.cs" company="Allors bvba">
+// <copyright file="RoleChecks.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -25,18 +25,11 @@ namespace Allors.Populations
 
     using Allors.Meta;
 
-    public class RoleChecks 
+    public static class RoleAssertions 
     {
-        private readonly Dictionary<IObjectType, object> concreteClassesByObjectType;
-
-        public RoleChecks()
+        public static void UnitRoleChecks(IStrategy strategy, IRoleType roleType)
         {
-            this.concreteClassesByObjectType = new Dictionary<IObjectType, object>();
-        }
-
-        public void UnitRoleChecks(IStrategy strategy, IRoleType roleType)
-        {
-            if (!this.ContainsConcreteClass(roleType.AssociationType.ObjectType, strategy.ObjectType))
+            if (!roleType.AssociationType.ObjectType.ContainsLeafClass(strategy.ObjectType))
             {
                 throw new ArgumentException(strategy.ObjectType + " is not a valid association object type for " + roleType + ".");
             }
@@ -47,41 +40,41 @@ namespace Allors.Populations
             }
         }
 
-        public void CompositeRoleChecks(IStrategy strategy, IRoleType roleType)
+        public static void CompositeRoleChecks(IStrategy strategy, IRoleType roleType)
         {
-            this.CompositeSharedChecks(strategy, roleType, null);
+            CompositeSharedChecks(strategy, roleType, null);
         }
 
-        public void CompositeRoleChecks(IStrategy strategy, IRoleType roleType, IObject role)
+        public static void CompositeRoleChecks(IStrategy strategy, IRoleType roleType, IObject role)
         {
-            this.CompositeSharedChecks(strategy, roleType, role);
+            CompositeSharedChecks(strategy, roleType, role);
             if (!roleType.IsOne)
             {
                 throw new ArgumentException("RelationType " + roleType + " has multiplicity many.");
             }
         }
 
-        public void CompositeRolesChecks(IStrategy strategy, IRoleType roleType)
+        public static void CompositeRolesChecks(IStrategy strategy, IRoleType roleType)
         {
-            this.CompositeSharedChecks(strategy, roleType, null);
+            CompositeSharedChecks(strategy, roleType, null);
             if (!roleType.IsMany)
             {
                 throw new ArgumentException("RelationType " + roleType + " has multiplicity one.");
             }
         }
 
-        public void CompositeRolesChecks(IStrategy strategy, IRoleType roleType, IObject role)
+        public static void CompositeRolesChecks(IStrategy strategy, IRoleType roleType, IObject role)
         {
-            this.CompositeSharedChecks(strategy, roleType, role);
+            CompositeSharedChecks(strategy, roleType, role);
             if (!roleType.IsMany)
             {
                 throw new ArgumentException("RelationType " + roleType + " has multiplicity one.");
             }
         }
 
-        private void CompositeSharedChecks(IStrategy strategy, IRoleType roleType, IObject role)
+        private static void CompositeSharedChecks(IStrategy strategy, IRoleType roleType, IObject role)
         {
-            if (!this.ContainsConcreteClass(roleType.AssociationType.ObjectType, strategy.ObjectType))
+            if (!roleType.AssociationType.ObjectType.ContainsLeafClass(strategy.ObjectType))
             {
                 throw new ArgumentException(strategy.ObjectType + " has no roleType with role " + roleType + ".");
             }
@@ -110,32 +103,6 @@ namespace Allors.Populations
                     throw new ArgumentException(role.Strategy.ObjectType + " is not compatible with type " + roleType.ObjectType + " of role " + roleType + ".");
                 }
             }
-        }
-
-        private bool ContainsConcreteClass(IComposite objectType, IObjectType concreteClass)
-        {
-            object concreteClassOrClasses;
-            if (!this.concreteClassesByObjectType.TryGetValue(objectType, out concreteClassOrClasses))
-            {
-                if (objectType.ExistExclusiveLeafClass)
-                {
-                    concreteClassOrClasses = objectType.ExclusiveLeafClass;
-                    this.concreteClassesByObjectType[objectType] = concreteClassOrClasses;
-                }
-                else
-                {
-                    concreteClassOrClasses = new HashSet<IObjectType>(objectType.LeafClasses);
-                    this.concreteClassesByObjectType[objectType] = concreteClassOrClasses;
-                }
-            }
-
-            if (concreteClassOrClasses is IObjectType)
-            {
-                return concreteClass.Equals(concreteClassOrClasses);
-            }
-
-            var concreteClasses = (HashSet<IObjectType>)concreteClassOrClasses;
-            return concreteClasses.Contains(concreteClass);
         }
     }
 }

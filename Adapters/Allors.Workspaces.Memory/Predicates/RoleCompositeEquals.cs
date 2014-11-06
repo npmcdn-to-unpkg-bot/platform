@@ -27,7 +27,7 @@ namespace Allors.Workspaces.Memory
         internal RoleCompositeEquals(Extent extent, IRoleType roleType, object equals)
         {
             extent.CheckForRoleType(roleType);
-            CompositePredicateAssertions.ValidateRoleEquals(roleType, equals);
+            PredicateAssertions.ValidateRoleEquals(roleType, equals);
 
             this.roleType = roleType;
             this.equals = equals;

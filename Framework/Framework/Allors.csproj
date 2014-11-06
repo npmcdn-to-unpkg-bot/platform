@@ -83,14 +83,13 @@
     <Compile Include="ObjectIdInteger.cs" />
     <Compile Include="ObjectIdLong.cs" />
     <Compile Include="ObjectNotLoadedEventArgs.cs" />
-    <Compile Include="Populations\CompositePredicateAssertions.cs" />
+    <Compile Include="Populations\PredicateAssertions.cs" />
     <Compile Include="Populations\Configuration.cs" />
     <Compile Include="Populations\EmptySet.cs" />
     <Compile Include="Populations\MetaObjectComparer.cs" />
-    <Compile Include="Populations\RoleChecks.cs" />
+    <Compile Include="Populations\RoleAssertions.cs" />
     <Compile Include="Populations\RoleTypeExtensions.cs" />
     <Compile Include="Populations\Serialization.cs" />
-    <Compile Include="Populations\UnitRelation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RelationNotLoadedEventArgs.cs" />
     <Compile Include="SessionCommittedEventArgs.cs" />

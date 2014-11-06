@@ -37,7 +37,7 @@ namespace Allors.Workspaces.Memory
         internal RoleGreaterThan(Extent extent, IRoleType roleType, object compare)
         {
             extent.CheckForRoleType(roleType);
-            CompositePredicateAssertions.ValidateRoleGreaterThan(roleType, compare);
+            PredicateAssertions.ValidateRoleGreaterThan(roleType, compare);
 
             this.extent = extent;
             this.roleType = roleType;

@@ -33,7 +33,7 @@ namespace Allors.Adapters.Database.SqlClient
         internal AllorsPredicateRoleLessThanRoleSql(AllorsExtentFilteredSql extent, IRoleType role, IRoleType lessThanRole)
         {
             extent.CheckRole(role);
-            CompositePredicateAssertions.ValidateRoleLessThan(role, lessThanRole);
+            PredicateAssertions.ValidateRoleLessThan(role, lessThanRole);
             this.role = role;
             this.lessThanRole = lessThanRole;
         }

@@ -31,7 +31,7 @@ namespace Allors.Workspaces.Memory
         internal AssociationEquals(Extent extent, IAssociationType associationType, IObject equals)
         {
             extent.CheckForAssociationType(associationType);
-            CompositePredicateAssertions.AssertAssociationEquals(associationType, equals);
+            PredicateAssertions.AssertAssociationEquals(associationType, equals);
 
             this.associationType = associationType;
             this.equals = equals;

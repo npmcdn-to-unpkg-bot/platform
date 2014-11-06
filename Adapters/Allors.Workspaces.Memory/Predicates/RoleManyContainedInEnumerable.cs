@@ -33,7 +33,7 @@ namespace Allors.Workspaces.Memory
         internal RoleManyContainedInEnumerable(Extent extent, IRoleType roleType, IEnumerable<IObject> containingEnumerable)
         {
             extent.CheckForRoleType(roleType);
-            CompositePredicateAssertions.ValidateRoleContainedIn(roleType, containingEnumerable);
+            PredicateAssertions.ValidateRoleContainedIn(roleType, containingEnumerable);
 
             this.roleType = roleType;
             this.containingEnumerable = containingEnumerable;

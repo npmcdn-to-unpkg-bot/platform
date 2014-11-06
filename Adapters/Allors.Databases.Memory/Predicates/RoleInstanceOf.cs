@@ -31,7 +31,7 @@ namespace Allors.Databases.Memory
         internal RoleInstanceof(ExtentFiltered extent, IRoleType roleType, IComposite objectType)
         {
             extent.CheckForRoleType(roleType);
-            CompositePredicateAssertions.ValidateRoleInstanceOf(roleType, objectType);
+            PredicateAssertions.ValidateRoleInstanceOf(roleType, objectType);
 
             this.roleType = roleType;
             this.objectType = objectType;

@@ -35,7 +35,6 @@ namespace Allors.Adapters.Database.SqlClient
 
         private readonly object lockObject = new object();
 
-        private readonly RoleChecks roleChecks;
         private readonly Mapping mapping;
 
         // Configuration
@@ -83,7 +82,6 @@ namespace Allors.Adapters.Database.SqlClient
             this.schemaName = configuration.SchemaName ?? "allors";
             this.isolationLevel = configuration.IsolationLevel ?? IsolationLevel.Snapshot;
 
-            this.roleChecks = new RoleChecks();
             this.mapping = new Mapping(this);
         }
 
@@ -220,14 +218,6 @@ namespace Allors.Adapters.Database.SqlClient
                 }
 
                 return this.isValid.Value;
-            }
-        }
-
-        internal RoleChecks RoleChecks
-        {
-            get
-            {
-                return this.roleChecks;
             }
         }
 

@@ -30,7 +30,7 @@ namespace Allors.Workspaces.Memory
         internal RoleExists(Extent extent, IRoleType roleType)
         {
             extent.CheckForRoleType(roleType);
-            CompositePredicateAssertions.ValidateRoleExists(roleType);
+            PredicateAssertions.ValidateRoleExists(roleType);
 
             this.roleType = roleType;
         }

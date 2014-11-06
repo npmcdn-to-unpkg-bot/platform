@@ -31,7 +31,7 @@ namespace Allors.Databases.Memory
         internal RoleOneContainedInExtent(ExtentFiltered extent, IRoleType roleType, Allors.Extent containingExtent)
         {
             extent.CheckForRoleType(roleType);
-            CompositePredicateAssertions.ValidateRoleContainedIn(roleType, containingExtent);
+            PredicateAssertions.ValidateRoleContainedIn(roleType, containingExtent);
 
             this.roleType = roleType;
             this.containingExtent = containingExtent;

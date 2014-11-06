@@ -34,7 +34,7 @@ namespace Allors.Workspaces.Memory
         internal RoleLike(Extent extent, IRoleType roleType, string like)
         {
             extent.CheckForRoleType(roleType);
-            CompositePredicateAssertions.ValidateRoleLikeFilter(roleType, like);
+            PredicateAssertions.ValidateRoleLikeFilter(roleType, like);
 
             this.roleType = roleType;
             this.isEmpty = like.Length == 0;

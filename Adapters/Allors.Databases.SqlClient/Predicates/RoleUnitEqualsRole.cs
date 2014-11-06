@@ -33,7 +33,7 @@ namespace Allors.Adapters.Database.SqlClient
         internal AllorsPredicateRoleUnitEqualsRoleSql(AllorsExtentFilteredSql extent, IRoleType role, IRoleType equalsRole)
         {
             extent.CheckRole(role);
-            CompositePredicateAssertions.ValidateRoleEquals(role, equalsRole);
+            PredicateAssertions.ValidateRoleEquals(role, equalsRole);
             this.role = role;
             this.equalsRole = equalsRole;
         }

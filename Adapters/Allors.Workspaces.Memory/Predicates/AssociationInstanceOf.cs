@@ -33,7 +33,7 @@ namespace Allors.Workspaces.Memory
         internal AssociationInstanceOf(Extent extent, IAssociationType associationType, IObjectType instanceObjectType)
         {
             extent.CheckForAssociationType(associationType);
-            CompositePredicateAssertions.ValidateAssociationInstanceof(associationType, instanceObjectType);
+            PredicateAssertions.ValidateAssociationInstanceof(associationType, instanceObjectType);
 
             this.associationType = associationType;
             this.objectType = instanceObjectType;

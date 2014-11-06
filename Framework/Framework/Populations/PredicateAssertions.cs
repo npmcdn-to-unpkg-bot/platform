@@ -27,7 +27,7 @@ namespace Allors.Populations
     /// <summary>
     /// Utility class for <see cref="ICompositePredicate"/>s containing several assertions.
     /// </summary>
-    public class CompositePredicateAssertions
+    public class PredicateAssertions
     {
         /// <summary>
         /// Asserts that the <see cref="AssociationType"/> and the <see cref="Extent"/> are compatible with

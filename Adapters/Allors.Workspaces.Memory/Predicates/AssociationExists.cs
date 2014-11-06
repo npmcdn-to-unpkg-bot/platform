@@ -30,7 +30,7 @@ namespace Allors.Workspaces.Memory
         internal AssociationExists(Extent extent, IAssociationType associationType)
         {
             extent.CheckForAssociationType(associationType);
-            CompositePredicateAssertions.ValidateAssociationExists(associationType);
+            PredicateAssertions.ValidateAssociationExists(associationType);
 
             this.associationType = associationType;
         }

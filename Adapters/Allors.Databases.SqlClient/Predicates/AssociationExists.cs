@@ -31,7 +31,7 @@ namespace Allors.Adapters.Database.SqlClient
         internal AllorsPredicateAssociationExistsSql(AllorsExtentFilteredSql extent, IAssociationType association)
         {
             extent.CheckAssociation(association);
-            CompositePredicateAssertions.ValidateAssociationExists(association);
+            PredicateAssertions.ValidateAssociationExists(association);
             this.association = association;
         }
 

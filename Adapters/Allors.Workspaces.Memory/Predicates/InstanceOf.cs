@@ -31,7 +31,7 @@ namespace Allors.Workspaces.Memory
 
         internal Instanceof(IObjectType objectType)
         {
-            CompositePredicateAssertions.ValidateInstanceof(objectType);
+            PredicateAssertions.ValidateInstanceof(objectType);
 
             this.objectType = objectType;
         }

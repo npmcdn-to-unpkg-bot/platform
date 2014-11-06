@@ -31,7 +31,7 @@ namespace Allors.Workspaces.Memory
         internal AssociationContainedInExtent(Extent extent, IAssociationType associationType, Allors.Extent containingExtent)
         {
             extent.CheckForAssociationType(associationType);
-            CompositePredicateAssertions.AssertAssociationContainedIn(associationType, containingExtent);
+            PredicateAssertions.AssertAssociationContainedIn(associationType, containingExtent);
 
             this.associationType = associationType;
             this.containingExtent = containingExtent;

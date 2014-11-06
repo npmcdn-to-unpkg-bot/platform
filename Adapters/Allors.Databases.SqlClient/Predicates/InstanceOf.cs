@@ -30,7 +30,7 @@ namespace Allors.Adapters.Database.SqlClient
 
         internal AllorsPredicateInstanceOfSql(AllorsExtentFilteredSql extent, IObjectType instanceType, IClass[] instanceClasses)
         {
-            CompositePredicateAssertions.ValidateInstanceof(instanceType);
+            PredicateAssertions.ValidateInstanceof(instanceType);
             this.instanceClasses = instanceClasses;
         }
 

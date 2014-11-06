@@ -35,7 +35,7 @@ namespace Allors.Adapters.Database.SqlClient
         internal AllorsPredicateRoleBetweenValueSql(AllorsExtentFilteredSql extent, IRoleType role, Object first, Object second)
         {
             extent.CheckRole(role);
-            CompositePredicateAssertions.ValidateRoleBetween(role, first, second);
+            PredicateAssertions.ValidateRoleBetween(role, first, second);
             this.role = role;
             this.first = first;
             this.second = second;

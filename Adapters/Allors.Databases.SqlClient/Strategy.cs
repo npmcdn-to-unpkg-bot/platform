@@ -21,6 +21,7 @@ namespace Allors.Adapters.Database.SqlClient
     using System.Collections.Generic;
 
     using Allors.Meta;
+    using Allors.Populations;
 
     public class Strategy : IStrategy
     {
@@ -296,7 +297,7 @@ namespace Allors.Adapters.Database.SqlClient
 
             this.AssertNotDeleted();
 
-            this.session.Database.RoleChecks.UnitRoleChecks(this, roleType);
+            RoleAssertions.UnitRoleChecks(this, roleType);
             this.session.SetUnitRole(this.objectId, roleType, unit);
         }
 
@@ -352,7 +353,7 @@ namespace Allors.Adapters.Database.SqlClient
                 return;
             }
 
-            this.session.Database.RoleChecks.CompositeRoleChecks(this, roleType, role);
+            RoleAssertions.CompositeRoleChecks(this, roleType, role);
 
             switch (roleType.RelationType.Multiplicity)
             {
@@ -370,7 +371,7 @@ namespace Allors.Adapters.Database.SqlClient
         public void RemoveCompositeRole(IRoleType roleType)
         {
             this.AssertNotDeleted();
-            this.session.Database.RoleChecks.CompositeRoleChecks(this, roleType);
+            RoleAssertions.CompositeRoleChecks(this, roleType);
 
             switch (roleType.RelationType.Multiplicity)
             {
@@ -415,7 +416,7 @@ namespace Allors.Adapters.Database.SqlClient
             }
 
             this.AssertNotDeleted();
-            this.session.Database.RoleChecks.CompositeRolesChecks(this, roleType, role);
+            RoleAssertions.CompositeRolesChecks(this, roleType, role);
 
             switch (roleType.RelationType.Multiplicity)
             {
@@ -438,7 +439,7 @@ namespace Allors.Adapters.Database.SqlClient
             }
 
             this.AssertNotDeleted();
-            this.session.Database.RoleChecks.CompositeRolesChecks(this, roleType, role);
+            RoleAssertions.CompositeRolesChecks(this, roleType, role);
 
             switch (roleType.RelationType.Multiplicity)
             {
@@ -468,7 +469,7 @@ namespace Allors.Adapters.Database.SqlClient
             {
                 if (role != null)
                 {
-                    this.session.Database.RoleChecks.CompositeRolesChecks(this, roleType, role);
+                    RoleAssertions.CompositeRolesChecks(this, roleType, role);
                     roleObjectIds.Add(role.Id);
                 }
             }
@@ -489,7 +490,7 @@ namespace Allors.Adapters.Database.SqlClient
         public void RemoveCompositeRoles(IRoleType roleType)
         {
             this.AssertNotDeleted();
-            this.session.Database.RoleChecks.CompositeRolesChecks(this, roleType);
+            RoleAssertions.CompositeRolesChecks(this, roleType);
 
             switch (roleType.RelationType.Multiplicity)
             {

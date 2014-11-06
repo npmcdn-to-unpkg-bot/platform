@@ -35,7 +35,7 @@ namespace Allors.Adapters.Database.SqlClient
         public AssociationContainedInEnumerable(AllorsExtentFilteredSql extent, IAssociationType association, IEnumerable<IObject> enumerable)
         {
             extent.CheckAssociation(association);
-            CompositePredicateAssertions.AssertAssociationContainedIn(association, this.enumerable);
+            PredicateAssertions.AssertAssociationContainedIn(association, this.enumerable);
             this.association = association;
             this.enumerable = enumerable;
         }

@@ -33,7 +33,7 @@ namespace Allors.Adapters.Database.SqlClient
         internal AllorsPredicateAssociationContainsSql(AllorsExtentFilteredSql extent, IAssociationType association, IObject allorsObject)
         {
             extent.CheckAssociation(association);
-            CompositePredicateAssertions.AssertAssociationContains(association, allorsObject);
+            PredicateAssertions.AssertAssociationContains(association, allorsObject);
             this.association = association;
             this.allorsObject = allorsObject;
         }

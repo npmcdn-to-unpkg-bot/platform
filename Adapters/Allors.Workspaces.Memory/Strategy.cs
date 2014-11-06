@@ -147,6 +147,14 @@ namespace Allors.Workspaces.Memory
             }
         }
 
+        private ChangeSet ChangeSet
+        {
+            get
+            {
+                return this.WorkspaceSession.WorkspaceChangeSet;
+            }
+        }
+
         public override string ToString()
         {
             return this.objectType.Name + " " + this.ObjectId;
@@ -230,7 +238,7 @@ namespace Allors.Workspaces.Memory
         public virtual object GetUnitRole(IRoleType roleType)
         {
             this.AssertNotDeleted();
-            this.RoleUnitChecks(roleType);
+            RoleAssertions.UnitRoleChecks(this, roleType);
 
             var unitRole = this.GetInternalizedUnitRole(roleType);
             return unitRole;
@@ -239,7 +247,7 @@ namespace Allors.Workspaces.Memory
         public virtual void SetUnitRole(IRoleType roleType, object role)
         {
             this.AssertNotDeleted();
-            this.RoleUnitChecks(roleType);
+            RoleAssertions.UnitRoleChecks(this, roleType);
 
             this.ChangeSet.OnChangingUnitRole(this, roleType);
 
@@ -530,19 +538,6 @@ namespace Allors.Workspaces.Memory
             return this.session.GetUnitRole(this, roleType);
         }
 
-        internal virtual void RoleUnitChecks(IRoleType relationType)
-        {
-            if (relationType.ObjectType is IComposite)
-            {
-                throw new ArgumentException(relationType.ObjectType + " on relationType " + relationType + " is not a unit type.");
-            }
-
-            if (!relationType.AssociationType.ObjectType.ContainsLeafClass(this.objectType))
-            {
-                throw new ArgumentException(this.objectType + " has no relationType with role " + relationType + ".");
-            }
-        }
-
         internal virtual void RoleCompositeChecks(IRoleType roleType, IObject role)
         {
             this.RoleCompositeChecks(roleType);
@@ -577,7 +572,7 @@ namespace Allors.Workspaces.Memory
 
         internal virtual object LoadUnitRole(XmlReader reader, IRoleType roleType)
         {
-            this.RoleUnitChecks(roleType);
+            RoleAssertions.UnitRoleChecks(this, roleType);
             var value = string.Empty;
             if (!reader.IsEmptyElement)
             {
@@ -690,14 +685,6 @@ namespace Allors.Workspaces.Memory
             }
 
             return associations;
-        }
-
-        private ChangeSet ChangeSet
-        {
-            get
-            {
-                return this.WorkspaceSession.WorkspaceChangeSet;
-            }
         }
 
         private void AssertNotDeleted()

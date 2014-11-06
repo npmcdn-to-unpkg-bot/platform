@@ -29,7 +29,7 @@ namespace Allors.Databases.Memory
 
         internal Instanceof(IObjectType objectType)
         {
-            CompositePredicateAssertions.ValidateInstanceof(objectType);
+            PredicateAssertions.ValidateInstanceof(objectType);
 
             this.objectType = objectType;
         }

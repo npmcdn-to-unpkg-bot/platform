@@ -32,7 +32,7 @@ namespace Allors.Adapters.Database.SqlClient
         internal AllorsPredicateAssociationInstanceofSql(AllorsExtentFilteredSql extent, IAssociationType association, IObjectType instanceType, IClass[] instanceClasses)
         {
             extent.CheckAssociation(association);
-            CompositePredicateAssertions.ValidateAssociationInstanceof(association, instanceType);
+            PredicateAssertions.ValidateAssociationInstanceof(association, instanceType);
             this.association = association;
             this.instanceClasses = instanceClasses;
         }

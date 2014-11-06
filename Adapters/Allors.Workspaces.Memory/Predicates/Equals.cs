@@ -24,7 +24,7 @@ namespace Allors.Workspaces.Memory
 
         internal Equals(IObject equals)
         {
-            CompositePredicateAssertions.ValidateEquals(equals);
+            PredicateAssertions.ValidateEquals(equals);
             this.equals = equals;
         }
 

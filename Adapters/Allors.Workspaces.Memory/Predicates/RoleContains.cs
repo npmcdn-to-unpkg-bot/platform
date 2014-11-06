@@ -31,7 +31,7 @@ namespace Allors.Workspaces.Memory
         internal RoleContains(Extent extent, IRoleType roleType, IObject containedObject)
         {
             extent.CheckForRoleType(roleType);
-            CompositePredicateAssertions.ValidateRoleContains(roleType, containedObject);
+            PredicateAssertions.ValidateRoleContains(roleType, containedObject);
 
             this.roleType = roleType;
             this.containedObject = containedObject;

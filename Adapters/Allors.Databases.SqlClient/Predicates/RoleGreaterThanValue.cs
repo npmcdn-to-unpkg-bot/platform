@@ -34,7 +34,7 @@ namespace Allors.Adapters.Database.SqlClient
         internal AllorsPredicateRoleGreaterThanValueSql(AllorsExtentFilteredSql extent, IRoleType role, Object allorsObject)
         {
             extent.CheckRole(role);
-            CompositePredicateAssertions.ValidateRoleGreaterThan(role, allorsObject);
+            PredicateAssertions.ValidateRoleGreaterThan(role, allorsObject);
             this.role = role;
             this.obj = allorsObject;
         }

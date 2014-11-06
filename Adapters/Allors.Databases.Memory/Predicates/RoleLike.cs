@@ -33,7 +33,7 @@ namespace Allors.Databases.Memory
         internal RoleLike(ExtentFiltered extent, IRoleType roleType, string like)
         {
             extent.CheckForRoleType(roleType);
-            CompositePredicateAssertions.ValidateRoleLikeFilter(roleType, like);
+            PredicateAssertions.ValidateRoleLikeFilter(roleType, like);
 
             this.roleType = roleType;
             this.isEmpty = like.Length == 0;

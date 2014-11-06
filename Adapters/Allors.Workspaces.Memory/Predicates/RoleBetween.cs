@@ -35,7 +35,7 @@ namespace Allors.Workspaces.Memory
         internal RoleBetween(Extent extent, IRoleType roleType, object first, object second)
         {
             extent.CheckForRoleType(roleType);
-            CompositePredicateAssertions.ValidateRoleBetween(roleType, first, second);
+            PredicateAssertions.ValidateRoleBetween(roleType, first, second);
 
             this.extent = extent;
             this.roleType = roleType;

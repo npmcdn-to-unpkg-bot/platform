@@ -25,16 +25,16 @@ namespace Allors.Populations
 
     public class EmptySet<T> : ISet<T>
     {
-        private HashSet<T> empty = new HashSet<T>();
+        private static readonly HashSet<T> StaticEmptySet = new HashSet<T>();
 
         public IEnumerator<T> GetEnumerator()
         {
-            return this.empty.GetEnumerator();
+            return StaticEmptySet.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return this.empty.GetEnumerator();
+            return StaticEmptySet.GetEnumerator();
         }
 
         public void UnionWith(IEnumerable<T> other)
@@ -59,32 +59,32 @@ namespace Allors.Populations
 
         public bool IsSubsetOf(IEnumerable<T> other)
         {
-            return this.empty.IsSubsetOf(other);
+            return StaticEmptySet.IsSubsetOf(other);
         }
 
         public bool IsSupersetOf(IEnumerable<T> other)
         {
-            return this.empty.IsSupersetOf(other);
+            return StaticEmptySet.IsSupersetOf(other);
         }
 
         public bool IsProperSupersetOf(IEnumerable<T> other)
         {
-            return this.empty.IsProperSupersetOf(other);
+            return StaticEmptySet.IsProperSupersetOf(other);
         }
 
         public bool IsProperSubsetOf(IEnumerable<T> other)
         {
-            return this.empty.IsProperSubsetOf(other);
+            return StaticEmptySet.IsProperSubsetOf(other);
         }
 
         public bool Overlaps(IEnumerable<T> other)
         {
-            return this.empty.Overlaps(other);
+            return StaticEmptySet.Overlaps(other);
         }
 
         public bool SetEquals(IEnumerable<T> other)
         {
-            return this.empty.SetEquals(other);
+            return StaticEmptySet.SetEquals(other);
         }
 
         public bool Add(T item)
@@ -104,12 +104,12 @@ namespace Allors.Populations
 
         public bool Contains(T item)
         {
-            return this.empty.Contains(item);
+            return StaticEmptySet.Contains(item);
         }
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            this.empty.CopyTo(array, arrayIndex);
+            StaticEmptySet.CopyTo(array, arrayIndex);
         }
 
         public bool Remove(T item)
@@ -121,7 +121,7 @@ namespace Allors.Populations
         { 
             get
             {
-                return this.empty.Count;
+                return StaticEmptySet.Count;
             }
         }
 

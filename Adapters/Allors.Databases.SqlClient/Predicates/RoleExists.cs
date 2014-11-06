@@ -32,7 +32,7 @@ namespace Allors.Adapters.Database.SqlClient
         internal AllorsPredicateRoleExistsSql(AllorsExtentFilteredSql extent, IRoleType role)
         {
             extent.CheckRole(role);
-            CompositePredicateAssertions.ValidateRoleExists(role);
+            PredicateAssertions.ValidateRoleExists(role);
             this.role = role;
         }
 

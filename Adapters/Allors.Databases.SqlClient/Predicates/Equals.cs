@@ -30,7 +30,7 @@ namespace Allors.Adapters.Database.SqlClient
 
         internal AllorsPredicateEqualsSql(AllorsExtentFilteredSql extent, IObject obj)
         {
-            CompositePredicateAssertions.ValidateEquals(obj);
+            PredicateAssertions.ValidateEquals(obj);
             this.obj = obj;
         }
 

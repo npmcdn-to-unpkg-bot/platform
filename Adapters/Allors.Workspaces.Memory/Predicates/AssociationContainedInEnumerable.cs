@@ -33,7 +33,7 @@ namespace Allors.Workspaces.Memory
         internal AssociationContainedInEnumerable(Extent extent, IAssociationType associationType, IEnumerable<IObject> containingEnumerable)
         {
             extent.CheckForAssociationType(associationType);
-            CompositePredicateAssertions.AssertAssociationContainedIn(associationType, containingEnumerable);
+            PredicateAssertions.AssertAssociationContainedIn(associationType, containingEnumerable);
 
             this.associationType = associationType;
             this.containingEnumerable = containingEnumerable;

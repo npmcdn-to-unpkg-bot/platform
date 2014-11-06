@@ -34,7 +34,7 @@ namespace Allors.Adapters.Database.SqlClient
         internal AllorsPredicateRoleLikeSql(AllorsExtentFilteredSql extent, IRoleType role, String str)
         {
             extent.CheckRole(role);
-            CompositePredicateAssertions.ValidateRoleLikeFilter(role, str);
+            PredicateAssertions.ValidateRoleLikeFilter(role, str);
             this.role = role;
             this.str = str;
         }
