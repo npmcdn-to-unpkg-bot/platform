@@ -255,8 +255,8 @@ namespace Allors.Adapters.Database.SqlClient
 
         public void Init()
         {
-            this.Mapping.Init();
-
+            new Initialization(this.Mapping, new Schema(this)).Execute();
+            
             this.roleCache.Invalidate();
             this.classCache.Invalidate();
 
