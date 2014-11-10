@@ -123,6 +123,12 @@ namespace Allors.Adapters.Database.SqlClient
             {
                 var tableName = mapping.GetTableName(relationType);
                 var table = this.Schema[tableName];
+
+                if (tableName.Equals("_o"))
+                {
+                    System.Diagnostics.Debugger.Break();
+                }
+
                 if (table == null)
                 {
                     this.MissingTableNames.Add(tableName);
@@ -134,12 +140,12 @@ namespace Allors.Adapters.Database.SqlClient
                         this.InvalidTables.Add(table);
                     }
 
-                    var associationColumn = objectsTable[Mapping.ColumnNameForAssociation];
-                    var roleColumn = objectsTable[Mapping.ColumnNameForRole];
+                    var associationColumn = table[Mapping.ColumnNameForAssociation];
+                    var roleColumn = table[Mapping.ColumnNameForRole];
 
                     if (associationColumn == null)
                     {
-                        this.AddMissingColumnName(objectsTable, Mapping.ColumnNameForAssociation);
+                        this.AddMissingColumnName(table, Mapping.ColumnNameForAssociation);
                     }
                     else
                     {
@@ -151,22 +157,18 @@ namespace Allors.Adapters.Database.SqlClient
 
                     if (roleColumn == null)
                     {
-                        this.AddMissingColumnName(objectsTable, Mapping.ColumnNameForRole);
+                        this.AddMissingColumnName(table, Mapping.ColumnNameForRole);
                     }
                     else
                     {
                         var sqlType = mapping.GetSqlType(relationType.RoleType);
-                        if (!roleColumn.DataType.Equals(sqlType))
+                        if (!roleColumn.SqlType.Equals(sqlType))
                         {
                             this.InvalidColumns.Add(roleColumn);
                         }
                     }
-
-
                 }
             }
-
-
         }
         
 

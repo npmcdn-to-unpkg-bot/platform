@@ -120,7 +120,7 @@ namespace Allors.Adapters.Database.SqlClient
                         case UnitTags.AllorsDecimal:
                             tableName = tableName + "_decimal_" + roleType.Precision + "_" + roleType.Scale;
                             sqlDbType = SqlDbType.Decimal;
-                            sqlType = "decimal(" + roleType.Precision + "," + roleType.Scale + ") ";
+                            sqlType = "decimal(" + roleType.Precision + "," + roleType.Scale + ")";
                             break;
 
                         case UnitTags.AllorsFloat:
@@ -177,11 +177,11 @@ namespace Allors.Adapters.Database.SqlClient
                     {
                         if (roleType.IsOne)
                         {
-                            tableName = tableName + "_m1";
+                            tableName = tableName + "_n1";
                         }
                         else
                         {
-                            tableName = tableName + "_mm";
+                            tableName = tableName + "_nm";
                         }
                     }
 

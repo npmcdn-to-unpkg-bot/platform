@@ -55,6 +55,32 @@ namespace Allors.Adapters.Database.SqlClient
             }
         }
 
+        public string SqlType
+        {
+            get
+            {
+                if (this.dataType.Equals("nvarchar"))
+                {
+                    var length = this.CharacterMaximumLength == -1 ? "MAX" : this.CharacterMaximumLength.ToString();
+                    return "nvarchar(" + length + ")";
+                }
+
+                if (this.dataType.Equals("varbinary"))
+                {
+                    var length = this.CharacterMaximumLength == -1 ? "MAX" : this.CharacterMaximumLength.ToString();
+                    return "varbinary(" + length + ")";
+                }
+
+
+                if (this.dataType.Equals("decimal"))
+                {
+                    return "decimal(" + this.numericPrecision + "," + this.numericScale + ")";
+                }
+
+                return this.dataType;
+            }
+        }
+
         public int? CharacterMaximumLength
         {
             get
@@ -79,5 +105,9 @@ namespace Allors.Adapters.Database.SqlClient
             }
         }
 
+        public override string ToString()
+        {
+            return this.ColumnName;
+        }
     }
 }

@@ -111,5 +111,10 @@ AND table_name = @tableName";
                 return column;
             }
         }
+
+        public override string ToString()
+        {
+            return this.TableName;
+        }
     }
 }
