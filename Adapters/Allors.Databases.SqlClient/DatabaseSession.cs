@@ -187,6 +187,7 @@ namespace Allors.Adapters.Database.SqlClient
             {
                 this.Flush();
                 this.UpdateCacheIds();
+                this.UpdateCache();
                 this.Reset();
 
                 if (this.transaction != null)
@@ -354,7 +355,7 @@ SELECT " + Mapping.ColumnNameForObject + @" = SCOPE_IDENTITY();
                 this.Flush();
             }
 
-            var schema = this.Database.Mapping;
+            var mapping = this.Database.Mapping;
             var cmdText = @"
 BEGIN
 SET IDENTITY_INSERT " + this.Database.SchemaName + "." + Mapping.TableNameForObjects + @" ON;
@@ -365,7 +366,7 @@ END
 ";
             using (var command = this.CreateCommand(cmdText))
             {
-                command.Parameters.Add(Mapping.ParameterNameForObject, Mapping.SqlDbTypeForObject).Value = objectId.Value;
+                command.Parameters.Add(Mapping.ParameterNameForObject, mapping.SqlDbTypeForId).Value = objectId.Value;
                 command.Parameters.Add(Mapping.ParameterNameForType, Mapping.SqlDbTypeForType).Value = objectType.Id;
                 command.Parameters.Add(Mapping.ParameterNameForCache, Mapping.SqlDbTypeForCache).Value = Database.CacheDefaultValue;
                 command.ExecuteNonQuery();
@@ -1084,12 +1085,16 @@ END
         {
             if (this.connection == null)
             {
-                this.connection = new SqlConnection(this.database.ConnectionString);
+                this.connection = new SqlConnection(this.Database.ConnectionString);
                 this.connection.Open();
-                this.transaction = this.connection.BeginTransaction();
+                this.transaction = this.connection.BeginTransaction(this.Database.IsolationLevel);
             }
 
-            return new SqlCommand(cmdText, this.connection, this.transaction);
+            var command = new SqlCommand(cmdText, this.connection, this.transaction)
+            {
+                CommandTimeout = this.Database.CommandTimeout
+            };
+            return command;
         }
 
         internal void Flush()
@@ -1931,6 +1936,22 @@ WHERE " + Mapping.ColumnNameForObject + " = " + Mapping.ParameterNameForObject;
                         command.ExecuteNonQuery();
                     }
                 }
+            }
+        }
+
+        private void UpdateCache()
+        {
+            if (this.deletedObjects != null && this.deletedObjects.Count > 0)
+            {
+                var deletedObjectsArray = new List<ObjectId>(this.deletedObjects).ToArray();
+                this.roleCache.Invalidate(deletedObjectsArray);
+                this.classCache.Invalidate(deletedObjectsArray);
+            }
+
+            if (this.changedObjects != null && this.changedObjects.Count > 0)
+            {
+                var changedObjectsArray = new List<ObjectId>(this.changedObjects).ToArray();
+                this.roleCache.Invalidate(changedObjectsArray);
             }
         }
 

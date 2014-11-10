@@ -37,5 +37,7 @@ namespace Allors.Databases
         void SetComposites(ObjectId association, object cacheId, IRoleType roleType, ObjectId[] role);
 
         void Invalidate();
+
+        void Invalidate(ObjectId[] objectsToInvalidate);
     }
 }

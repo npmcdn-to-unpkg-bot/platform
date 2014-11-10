@@ -475,7 +475,7 @@ VALUES (" + Mapping.ParameterNameForObject + "," + Mapping.ParameterNameForType 
 
                         using (var command = this.CreateCommand(cmdText))
                         {
-                            command.Parameters.Add(Mapping.ParameterNameForObject, Mapping.SqlDbTypeForObject).Value = objectId.Value;
+                            command.Parameters.Add(Mapping.ParameterNameForObject, this.mapping.SqlDbTypeForId).Value = objectId.Value;
                             command.Parameters.Add(Mapping.ParameterNameForType, Mapping.SqlDbTypeForType).Value = objectType.Id;
                             command.Parameters.Add(Mapping.ParameterNameForCache, Mapping.SqlDbTypeForCache).Value = CacheDefaultValue;
 
@@ -526,8 +526,8 @@ VALUES (" + Mapping.ParameterNameForAssociation + "," + Mapping.ParameterNameFor
 
                                     using (var command = this.CreateCommand(cmdText))
                                     {
-                                        command.Parameters.Add(Mapping.ParameterNameForAssociation, Mapping.SqlDbTypeForObject).Value = association.Value;
-                                        command.Parameters.Add(Mapping.ParameterNameForRole, Mapping.SqlDbTypeForObject).Value = role.Value;
+                                        command.Parameters.Add(Mapping.ParameterNameForAssociation, this.mapping.SqlDbTypeForId).Value = association.Value;
+                                        command.Parameters.Add(Mapping.ParameterNameForRole, this.mapping.SqlDbTypeForId).Value = role.Value;
 
                                         command.ExecuteNonQuery();
                                     }
@@ -634,8 +634,8 @@ VALUES (" + Mapping.ParameterNameForAssociation + "," + Mapping.ParameterNameFor
 
                                 using (var command = this.CreateCommand(cmdText))
                                 {
-                                    command.Parameters.Add(Mapping.ParameterNameForAssociation, Mapping.SqlDbTypeForObject).Value = association.Value;
-                                    command.Parameters.Add(Mapping.ParameterNameForRole, this.Mapping.GetSqlDbType(relationType.RoleType)).Value = role;
+                                    command.Parameters.Add(Mapping.ParameterNameForAssociation, this.mapping.SqlDbTypeForId).Value = association.Value;
+                                    command.Parameters.Add(Mapping.ParameterNameForRole, this.mapping.GetSqlDbType(relationType.RoleType)).Value = role;
 
                                     command.ExecuteNonQuery();
                                 }
@@ -655,7 +655,7 @@ VALUES (" + Mapping.ParameterNameForAssociation + "," + Mapping.ParameterNameFor
 
                                     using (var command = this.CreateCommand(cmdText))
                                     {
-                                        command.Parameters.Add(Mapping.ParameterNameForAssociation, Mapping.SqlDbTypeForObject).Value = association.Value;
+                                        command.Parameters.Add(Mapping.ParameterNameForAssociation, this.mapping.SqlDbTypeForId).Value = association.Value;
                                         command.Parameters.Add(Mapping.ParameterNameForRole, this.Mapping.GetSqlDbType(relationType.RoleType)).Value = role;
 
                                         command.ExecuteNonQuery();

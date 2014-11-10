@@ -117,7 +117,7 @@ namespace Allors.Databases
         }
 
         [Test]
-        public void ConflictsSync()
+        public void ConflictsSyncWithCommit()
         {
             foreach (var init in this.Inits)
             {
@@ -128,30 +128,78 @@ namespace Allors.Databases
                     var database = this.Profile.CreateDatabase();
                     database.Init();
 
-                    ObjectId c1AObjectId = null;
-
-                    using (var session = database.CreateSession())
+                    ObjectId c1AObjectId;
+                    using (var databaseSession = database.CreateSession())
                     {
-                        C1 c1A = C1.Create(session);
+                        var c1A = C1.Create(databaseSession);
 
                         c1AObjectId = c1A.Id;
 
                         c1A.C1AllorsString = "a";
-                        session.Commit();
+                        databaseSession.Commit();
                     }
 
                     var workspace = this.Profile.CreateWorkspace(database);
-
                     var workspaceSession = workspace.CreateSession();
                     try
                     {
                         var workC1A = (C1)workspaceSession.Instantiate(c1AObjectId);
+                        var allorsString = workC1A.C1AllorsString;
 
+                        workspaceSession.Commit();
+
+                        using (var session = database.CreateSession())
+                        {
+                            var c1A = (C1)session.Instantiate(c1AObjectId);
+
+                            c1A.C1AllorsString = "b";
+                            session.Commit();
+                            workspaceSession.DatabaseSession.Rollback();
+                        }
+
+                        Assert.IsTrue(workspaceSession.Conflicts.Length > 0);
+                    }
+                    finally
+                    {
+                        workspaceSession.Rollback();
+                    }
+                }
+            }
+        }
+
+        [Test]
+        public virtual void ConflictsSyncWithoutCommit()
+        {
+            foreach (var init in this.Inits)
+            {
+                init();
+
+                foreach (var saveRepeat in SaveRepeats)
+                {
+                    var database = this.Profile.CreateDatabase();
+                    database.Init();
+
+                    ObjectId c1AObjectId;
+                    using (var databaseSession = database.CreateSession())
+                    {
+                        var c1A = C1.Create(databaseSession);
+
+                        c1AObjectId = c1A.Id;
+
+                        c1A.C1AllorsString = "a";
+                        databaseSession.Commit();
+                    }
+
+                    var workspace = this.Profile.CreateWorkspace(database);
+                    var workspaceSession = workspace.CreateSession();
+                    try
+                    {
+                        var workC1A = (C1)workspaceSession.Instantiate(c1AObjectId);
                         var allorsString = workC1A.C1AllorsString;
 
                         using (var session = database.CreateSession())
                         {
-                            C1 c1A = (C1)session.Instantiate(c1AObjectId);
+                            var c1A = (C1)session.Instantiate(c1AObjectId);
 
                             c1A.C1AllorsString = "b";
                             session.Commit();

@@ -869,8 +869,6 @@ namespace Allors.Databases
 
         protected abstract bool ExistProcedure(string schema, string procedure);
 
-        protected abstract Validation Validate(IDatabase database);
-
         private bool CreateSessionThrowsException(IDatabase database)
         {
             try

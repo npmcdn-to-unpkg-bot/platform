@@ -2656,18 +2656,28 @@ namespace Allors.Databases
                 Assert.IsFalse(extent.Contains(this.c4B));
                 Assert.IsFalse(extent.Contains(this.c4C));
                 Assert.IsFalse(extent.Contains(this.c4D));
+            }
+        }
+
+        [Test]
+        public virtual void CombinationWithMultipleOperations()
+        {
+            foreach (var init in this.Inits)
+            {
+                init();
+                this.Populate();
 
                 // Except + Union
-                firstExtent = this.LocalExtent(Classes.C1);
+                var firstExtent = this.LocalExtent(Classes.C1);
                 firstExtent.Filter.AddNot().AddExists(RoleTypes.C1AllorsString);
 
-                secondExtent = this.LocalExtent(Classes.C1);
+                var secondExtent = this.LocalExtent(Classes.C1);
                 secondExtent.Filter.AddLike(RoleTypes.C1AllorsString, "Abracadabra");
 
                 var unionExtent = this.Session.Union(firstExtent, secondExtent);
                 var topExtent = this.LocalExtent(Classes.C1);
 
-                extent = this.Session.Except(topExtent, unionExtent);
+                var extent = this.Session.Except(topExtent, unionExtent);
 
                 Assert.AreEqual(1, extent.Count);
                 Assert.IsFalse(extent.Contains(this.c1A));
@@ -2774,7 +2784,7 @@ namespace Allors.Databases
                 Assert.IsFalse(extent.Contains(this.c4D));
             }
         }
-        
+
         [Test]
         public void NoConcreteClass()
         {

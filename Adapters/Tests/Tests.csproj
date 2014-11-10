@@ -13,6 +13,7 @@
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <NuGetPackageImportStamp>1fedd57e</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,6 +39,10 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite, Version=1.0.94.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\System.Data.SQLite.Core.1.0.94.0\lib\net45\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,6 +50,93 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Databases\sqlclient\ExtentTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Databases\sqlclient\Profile.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Databases\sqlclient\SchemaTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Databases\sqlclient\SqlClientTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Databases\sqlclient\UnitTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Databases\sqlite\ExtentTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Databases\sqlite\LongId\CacheTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Databases\sqlite\LongId\ChangesTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Databases\sqlite\LongId\ExtentTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Databases\sqlite\LongId\LifeCycleTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Databases\sqlite\LongId\Many2ManyTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Databases\sqlite\LongId\Many2OneTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Databases\sqlite\LongId\One2ManyTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Databases\sqlite\LongId\One2OneTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Databases\sqlite\LongId\Profile.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Databases\sqlite\LongId\PropertiesTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Databases\sqlite\LongId\RelationExtentTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Databases\sqlite\LongId\SandboxTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Databases\sqlite\LongId\SchemaTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Databases\sqlite\LongId\SerializationTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Databases\sqlite\LongId\SqlClientTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Databases\sqlite\LongId\SyncTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Databases\sqlite\LongId\UnitTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Databases\sqlite\LongId\WorkspaceTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Databases\sqlite\Profile.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Databases\sqlite\SchemaTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Databases\sqlite\SqlClientTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Databases\sqlite\LifeCycleTest.cs" />
+    <Compile Include="Databases\sqlite\SyncTest.cs" />
+    <Compile Include="Databases\sqlite\WorkspaceTest.cs" />
+    <Compile Include="Databases\sqlite\UnitTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Populations\AllorsTestUtils.cs" />
     <Compile Include="Populations\assertions\StrategyAssert.cs" />
     <Compile Include="Populations\assertions\StrategyAssertTest.cs" />
@@ -79,7 +171,6 @@
     <Compile Include="Databases\SandboxTest.cs" />
     <Compile Include="Databases\SchemaTest.cs" />
     <Compile Include="Databases\SerializationTest.cs" />
-    <Compile Include="Databases\sqlclient\ExtentTest.cs" />
     <Compile Include="Databases\sqlclient\IntegerId\ReadCommitted\CacheTest.cs" />
     <Compile Include="Databases\sqlclient\IntegerId\ReadCommitted\ChangesTest.cs" />
     <Compile Include="Databases\sqlclient\IntegerId\ReadCommitted\ExtentTest.cs" />
@@ -100,10 +191,6 @@
     <Compile Include="Databases\sqlclient\IntegerId\ReadCommitted\SyncTest.cs" />
     <Compile Include="Databases\sqlclient\IntegerId\ReadCommitted\UnitTest.cs" />
     <Compile Include="Databases\sqlclient\IntegerId\ReadCommitted\WorkspaceTest.cs" />
-    <Compile Include="Databases\sqlclient\Profile.cs" />
-    <Compile Include="Databases\sqlclient\SchemaTest.cs" />
-    <Compile Include="Databases\sqlclient\SqlClientTest.cs" />
-    <Compile Include="Databases\sqlclient\UnitTest.cs" />
     <Compile Include="Databases\SyncTest.cs" />
     <Compile Include="Databases\UnitTest.cs" />
     <Compile Include="Databases\WorkspaceTest.cs" />
@@ -148,6 +235,10 @@
       <Project>{457bddeb-41cf-46c6-bbcc-13618aeb646f}</Project>
       <Name>Allors.Databases.SqlClient</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Allors.Databases.SQLite\Allors.Databases.SQLite.csproj">
+      <Project>{76db148d-bfbb-48be-929b-4631c860f2a1}</Project>
+      <Name>Allors.Databases.SQLite</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Allors.Workspaces.Memory\Allors.Workspaces.Memory.csproj">
       <Project>{d09daf58-d524-40c2-887c-eadbf5609794}</Project>
       <Name>Allors.Workspaces.Memory</Name>
@@ -168,7 +259,9 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+    <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.94.0\build\net45\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.94.0\build\net45\System.Data.SQLite.Core.targets'))" />
   </Target>
+  <Import Project="..\packages\System.Data.SQLite.Core.1.0.94.0\build\net45\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.94.0\build\net45\System.Data.SQLite.Core.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

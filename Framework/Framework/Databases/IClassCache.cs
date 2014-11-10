@@ -29,5 +29,7 @@ namespace Allors.Databases
         void Set(ObjectId @object, IClass @class);
 
         void Invalidate();
+
+        void Invalidate(ObjectId[] objectsToInvalidate);
     }
 }

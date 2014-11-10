@@ -46,5 +46,13 @@ namespace Allors.Databases
         {
             this.classByObject = new Dictionary<ObjectId, IClass>();
         }
+
+        public void Invalidate(ObjectId[] objectsToInvalidate)
+        {
+            foreach (var objectToInvalidate in objectsToInvalidate)
+            {
+                this.classByObject.Remove(objectToInvalidate);
+            }
+        }
     }
 }

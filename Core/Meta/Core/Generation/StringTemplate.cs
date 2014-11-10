@@ -124,11 +124,6 @@ namespace Allors.Development.Repository.Generation
                     var template = group.GetInstanceOf(templateName);
                     var output = generation.GetAttribute(OutputKey);
 
-                    if (template == null)
-                    {
-                        System.Console.WriteLine(0);
-                    }
-
                     template.Add(MetaKey, metaPopulation);
                     if (generation.HasAttribute(InputKey))
                     {

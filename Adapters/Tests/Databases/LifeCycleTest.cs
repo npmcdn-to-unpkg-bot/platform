@@ -30,6 +30,7 @@ namespace Allors.Databases
     using Allors.Populations;
 
     using NUnit.Framework;
+    using System.Reflection;
 
     public abstract class LifeCycleTest
     {
@@ -3016,15 +3017,15 @@ namespace Allors.Databases
             {
                 init();
 
-                ISession secondSession = this.CreateSession();
+                var secondSession = this.CreateSession();
 
                 try
                 {
-                    C1 c1a = C1.Create(this.Session);
-                    C1 c1b = C1.Create(this.Session);
+                    var c1a = C1.Create(this.Session);
+                    var c1b = C1.Create(this.Session);
 
-                    C2 c2a = C2.Create(secondSession);
-                    C2 c2b = C2.Create(secondSession);
+                    var c2a = C2.Create(secondSession);
+                    var c2b = C2.Create(secondSession);
                     C2[] c2Array = { c2a, c2b };
 
                     this.Session.Commit();
@@ -4208,7 +4209,7 @@ int[] runs = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048 };
         }
 
         [Test]
-        public void CreateManyPopulations()
+        public virtual void CreateManyPopulations()
         {
             foreach (var init in this.Inits)
             {

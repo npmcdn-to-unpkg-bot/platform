@@ -82,11 +82,6 @@ namespace Allors.Databases.SqlClient.IntegerId.ReadCommitted
             return this.profile.ExistIndex(schema, table, column);
         }
 
-        protected override Validation Validate(IDatabase repository)
-        {
-            return ((Database)repository).Validate();
-        }
-
         protected override void DropProcedure(string schema, string procedure)
         {
             this.profile.DropProcedure(procedure);

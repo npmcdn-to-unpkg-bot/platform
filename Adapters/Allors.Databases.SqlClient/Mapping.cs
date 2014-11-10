@@ -44,7 +44,6 @@ namespace Allors.Adapters.Database.SqlClient
         public const string SqlTypeForType = "uniqueidentifier";
         public const string SqlTypeForCache = "int";
 
-        public const SqlDbType SqlDbTypeForObject = SqlDbType.Int;
         public const SqlDbType SqlDbTypeForType = SqlDbType.UniqueIdentifier;
         public const SqlDbType SqlDbTypeForCache = SqlDbType.Int;
 

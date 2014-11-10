@@ -198,6 +198,8 @@ namespace Allors.Databases
                     workspaceSession.Workspace.Save(writer);
                     writer.Close();
 
+                    workspaceSession.DatabaseSession.Commit();
+
                     var xml = stringWriter.ToString();
                     Console.Out.WriteLine(xml);
 
@@ -207,15 +209,15 @@ namespace Allors.Databases
                     workspace2.Load(reader);
                     reader.Close();
 
-                    using (var newWorkSpaceSession = workspace2.CreateSession())
+                    using (var workSpace2Session = workspace2.CreateSession())
                     {
-                        workC1A = C1.Instantiate(newWorkSpaceSession, c1A.Id);
+                        workC1A = C1.Instantiate(workSpace2Session, c1A.Id);
 
                         Assert.IsFalse(workC1A.ExistC1AllorsString);
                         Assert.IsFalse(workC1A.ExistC1C2one2one);
                         Assert.IsFalse(workC1A.ExistC1C2many2manies);
 
-                        workC1B = C1.Instantiate(newWorkSpaceSession, workC1B.Id);
+                        workC1B = C1.Instantiate(workSpace2Session, workC1B.Id);
                         Assert.IsNull(workC1B);
                     }
                 }
@@ -799,7 +801,7 @@ namespace Allors.Databases
         }
 
         [Test]
-        public void AutoInstantiateDifferentDatabaseSession()
+        public virtual void AutoInstantiateDifferentDatabaseSession()
         {
             foreach (var init in this.Inits)
             {
@@ -808,16 +810,16 @@ namespace Allors.Databases
                 var workspace = this.CreateWorkspace();
                 using (var workspaceSession = workspace.CreateSession())
                 {
-                var c1 = C1.Create(workspaceSession.DatabaseSession);
+                    var c1 = C1.Create(workspaceSession.DatabaseSession);
 
-                var c2A = C2.Create(workspaceSession.DatabaseSession);
-                var c2B = C2.Create(workspaceSession.DatabaseSession);
-                var c2C = C2.Create(workspaceSession.DatabaseSession);
-                var c2D = C2.Create(workspaceSession.DatabaseSession);
-                var c2E = C2.Create(workspaceSession.DatabaseSession);
-                var c2F = C2.Create(workspaceSession.DatabaseSession);
+                    var c2A = C2.Create(workspaceSession.DatabaseSession);
+                    var c2B = C2.Create(workspaceSession.DatabaseSession);
+                    var c2C = C2.Create(workspaceSession.DatabaseSession);
+                    var c2D = C2.Create(workspaceSession.DatabaseSession);
+                    var c2E = C2.Create(workspaceSession.DatabaseSession);
+                    var c2F = C2.Create(workspaceSession.DatabaseSession);
 
-                workspaceSession.DatabaseSession.Commit();
+                    workspaceSession.DatabaseSession.Commit();
 
                     using (var differentDatabaseSession = workspaceSession.DatabaseSession.Database.CreateSession())
                     {

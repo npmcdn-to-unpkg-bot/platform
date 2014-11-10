@@ -30,8 +30,8 @@ namespace Allors.Adapters.Database.SqlClient
 
             this.Validate();
 
-            this.success = this.MissingTableNames.Count == 0 & 
-                           this.MissingTableNames.Count == 0 &
+            this.success = this.MissingTableNames.Count == 0 &
+                           this.MissingColumnNamesByTable.Count == 0 &
                            this.InvalidTables.Count == 0 & 
                            this.InvalidColumns.Count == 0;
         }

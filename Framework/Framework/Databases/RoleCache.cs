@@ -141,6 +141,36 @@ namespace Allors.Databases
             this.cachedCompositesRoleByAssociationByRoleType = new Dictionary<IRoleType, Dictionary<ObjectId, CachedCompositesRole>>();
         }
 
+        public void Invalidate(ObjectId[] objectsToInvalidate)
+        {
+            foreach (var roleByAssociationEntry in this.cachedCompositeRoleByAssociationByRoleType)
+            {
+                var roleByAssociation = roleByAssociationEntry.Value;
+                foreach (var objectToInvalidate in objectsToInvalidate)
+                {
+                    roleByAssociation.Remove(objectToInvalidate);
+                }
+            }
+
+            foreach (var roleByAssociationEntry in this.cachedCompositeRoleByAssociationByRoleType)
+            {
+                var roleByAssociation = roleByAssociationEntry.Value;
+                foreach (var objectToInvalidate in objectsToInvalidate)
+                {
+                    roleByAssociation.Remove(objectToInvalidate);
+                }
+            }
+
+            foreach (var roleByAssociationEntry in this.cachedCompositesRoleByAssociationByRoleType)
+            {
+                var roleByAssociation = roleByAssociationEntry.Value;
+                foreach (var objectToInvalidate in objectsToInvalidate)
+                {
+                    roleByAssociation.Remove(objectToInvalidate);
+                }
+            }
+        }
+
         private class CachedUnitRole
         {
             private readonly object cacheId;
