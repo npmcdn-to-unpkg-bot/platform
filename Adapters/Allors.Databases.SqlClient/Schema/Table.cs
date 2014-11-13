@@ -8,19 +8,19 @@ namespace Allors.Adapters.Database.SqlClient
     public class Table
     {
         private readonly Schema schema;
-        private readonly string tableName;
-        private readonly string lowercaseTableName;
-        private readonly Dictionary<string, Column> columnByLowercaseColumnName;
+        private readonly string name;
+        private readonly string lowercaseName;
+        private readonly Dictionary<string, TableColumn> columnByLowercaseColumnName;
 
-        public Table(Schema schema, string tableName)
+        public Table(Schema schema, string name)
         {
             this.schema = schema;
-            this.tableName = tableName;
-            this.lowercaseTableName = tableName.ToLowerInvariant();
+            this.name = name;
+            this.lowercaseName = name.ToLowerInvariant();
 
             using (var connection = new SqlConnection(schema.Database.ConnectionString))
             {
-                this.columnByLowercaseColumnName = new Dictionary<string, Column>();
+                this.columnByLowercaseColumnName = new Dictionary<string, TableColumn>();
 
                 connection.Open();
                 try
@@ -39,7 +39,7 @@ AND table_name = @tableName";
                     using (var command = new SqlCommand(cmdText, connection))
                     {
                         command.Parameters.Add("@tableSchema", SqlDbType.NVarChar).Value = this.Schema.Database.SchemaName;
-                        command.Parameters.Add("@tableName", SqlDbType.NVarChar).Value = this.TableName;
+                        command.Parameters.Add("@tableName", SqlDbType.NVarChar).Value = this.Name;
                         using (var reader = command.ExecuteReader())
                         {
                             var columnNameOrdinal = reader.GetOrdinal("column_name");
@@ -56,7 +56,7 @@ AND table_name = @tableName";
                                 var numericPrecision = reader.IsDBNull(numericPrecisionOrdinal) ? (int?)null : Convert.ToInt32(reader.GetValue(numericPrecisionOrdinal));
                                 var numericScale = reader.IsDBNull(numericScaleOrdinal) ? (int?)null : Convert.ToInt32(reader.GetValue(numericScaleOrdinal));
 
-                                var column = new Column(this, columnName, dataType, characterMaximumLength, numericPrecision, numericScale);
+                                var column = new TableColumn(this, columnName, dataType, characterMaximumLength, numericPrecision, numericScale);
                                 this.ColumnByLowercaseColumnName[columnName.ToLowerInvariant()] = column;
                             }
                         }
@@ -70,15 +70,15 @@ AND table_name = @tableName";
 
         }
 
-        public string TableName
+        public string Name
         {
             get
             {
-                return this.tableName;
+                return this.name;
             }
         }
 
-        public Dictionary<string, Column> ColumnByLowercaseColumnName
+        public Dictionary<string, TableColumn> ColumnByLowercaseColumnName
         {
             get
             {
@@ -86,11 +86,11 @@ AND table_name = @tableName";
             }
         }
 
-        public string LowercaseTableName
+        public string LowercaseName
         {
             get
             {
-                return this.lowercaseTableName;
+                return this.lowercaseName;
             }
         }
 
@@ -102,19 +102,16 @@ AND table_name = @tableName";
             }
         }
 
-        public Column this[string columnName]
+        public TableColumn GetColumn(string columnName)
         {
-            get
-            {
-                Column column;
-                this.columnByLowercaseColumnName.TryGetValue(columnName.ToLowerInvariant(), out column);
-                return column;
-            }
+            TableColumn tableColumn;
+            this.columnByLowercaseColumnName.TryGetValue(columnName.ToLowerInvariant(), out tableColumn);
+            return tableColumn;
         }
 
         public override string ToString()
         {
-            return this.TableName;
+            return this.Name;
         }
     }
 }

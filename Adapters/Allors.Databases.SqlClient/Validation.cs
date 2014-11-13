@@ -10,7 +10,7 @@ namespace Allors.Adapters.Database.SqlClient
         public readonly Dictionary<Table, HashSet<string>> MissingColumnNamesByTable;
 
         public readonly HashSet<Table> InvalidTables;
-        public readonly HashSet<Column> InvalidColumns; 
+        public readonly HashSet<TableColumn> InvalidColumns; 
 
         private readonly Database database;
         private readonly Schema schema;
@@ -26,7 +26,7 @@ namespace Allors.Adapters.Database.SqlClient
             this.MissingColumnNamesByTable = new Dictionary<Table, HashSet<string>>();
             
             this.InvalidTables = new HashSet<Table>();
-            this.InvalidColumns = new HashSet<Column>();
+            this.InvalidColumns = new HashSet<TableColumn>();
 
             this.Validate();
 
@@ -65,16 +65,16 @@ namespace Allors.Adapters.Database.SqlClient
             var mapping = this.Database.Mapping;
 
             // Objects Table
-            var objectsTable = this.Schema[Mapping.TableNameForObjects];
+            var objectsTable = this.Schema.GetTable(Mapping.TableNameForObjects);
             if (objectsTable == null)
             {
                 this.MissingTableNames.Add(Mapping.TableNameForObjects);
             }
             else
             {
-                var objectColumn = objectsTable[Mapping.ColumnNameForObject];
-                var typeColumn = objectsTable[Mapping.ColumnNameForType];
-                var cacheColumn = objectsTable[Mapping.ColumnNameForCache];
+                var objectColumn = objectsTable.GetColumn(Mapping.ColumnNameForObject);
+                var typeColumn = objectsTable.GetColumn(Mapping.ColumnNameForType);
+                var cacheColumn = objectsTable.GetColumn(Mapping.ColumnNameForCache);
 
                 if (objectsTable.ColumnByLowercaseColumnName.Count != 3)
                 {
@@ -122,7 +122,7 @@ namespace Allors.Adapters.Database.SqlClient
             foreach (var relationType in this.Database.MetaPopulation.RelationTypes)
             {
                 var tableName = mapping.GetTableName(relationType);
-                var table = this.Schema[tableName];
+                var table = this.Schema.GetTable(tableName);
 
                 if (tableName.Equals("_o"))
                 {
@@ -140,8 +140,8 @@ namespace Allors.Adapters.Database.SqlClient
                         this.InvalidTables.Add(table);
                     }
 
-                    var associationColumn = table[Mapping.ColumnNameForAssociation];
-                    var roleColumn = table[Mapping.ColumnNameForRole];
+                    var associationColumn = table.GetColumn(Mapping.ColumnNameForAssociation);
+                    var roleColumn = table.GetColumn(Mapping.ColumnNameForRole);
 
                     if (associationColumn == null)
                     {
@@ -170,7 +170,6 @@ namespace Allors.Adapters.Database.SqlClient
                 }
             }
         }
-        
 
         private void AddMissingColumnName(Table table, string columnName)
         {

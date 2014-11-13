@@ -19,7 +19,6 @@ namespace Allors.Adapters.Database.SqlClient
     using System;
     using System.Collections.Generic;
     using System.Data;
-    using System.Data.SqlClient;
 
     using Allors.Meta;
 
@@ -28,12 +27,14 @@ namespace Allors.Adapters.Database.SqlClient
         public const string ParamPrefix = "@";
 
         public const string TableNameForObjects = "_o";
-
         public const string ColumnNameForObject = "o";
         public const string ColumnNameForType = "t";
         public const string ColumnNameForCache = "c";
         public const string ColumnNameForAssociation = "a";
         public const string ColumnNameForRole = "r";
+
+        public const string TableTypeNameForObjects = "_t_o";
+        public const string ColumnNameForTableType = "_t";
 
         public const string ParameterNameForObject = ParamPrefix + "o";
         public const string ParameterNameForType = ParamPrefix + "t";
@@ -55,6 +56,9 @@ namespace Allors.Adapters.Database.SqlClient
         private readonly Dictionary<IRelationType, string> tableNameByRelationType;
         private readonly Dictionary<IRoleType, string> sqlTypeByRoleType;
         private readonly Dictionary<IRoleType, SqlDbType> sqlDbTypeByRoleType;
+
+        private readonly Dictionary<IRelationType, string> tableTypeNameByRelationType;
+        private readonly Dictionary<IRelationType, string> tableTypeSqlTypeByRelationType;
 
         public Mapping(Database database)
         {
@@ -84,11 +88,17 @@ namespace Allors.Adapters.Database.SqlClient
             this.sqlTypeByRoleType = new Dictionary<IRoleType, string>();
             this.sqlDbTypeByRoleType = new Dictionary<IRoleType, SqlDbType>();
 
+            this.tableTypeNameByRelationType = new Dictionary<IRelationType, string>();
+            this.tableTypeSqlTypeByRelationType = new Dictionary<IRelationType, string>();
+
             foreach (var relationType in this.Database.MetaPopulation.RelationTypes)
             {
                 var tableName = "_" + relationType.Id.ToString("N");
                 SqlDbType sqlDbType;
                 string sqlType;
+
+                var tableTypeName = TableTypeNameForObjects;
+                var tableTypeSqlType = this.sqlTypeForId;
 
                 var roleType = relationType.RoleType;
                 var unit = roleType.ObjectType as IUnit;
@@ -109,30 +119,44 @@ namespace Allors.Adapters.Database.SqlClient
                                 sqlType = "varbinary(MAX)";
                             }
                             
+                            tableTypeName = "_t_bi";
+                            tableTypeSqlType = "varbinary(MAX)";
                             break;
 
                         case UnitTags.AllorsBoolean:
                             tableName = tableName + "_boolean";
                             sqlDbType = SqlDbType.Bit;
                             sqlType = "bit";
+
+                            tableTypeName = "_t_bo";
+                            tableTypeSqlType = sqlType;
                             break;
 
                         case UnitTags.AllorsDecimal:
                             tableName = tableName + "_decimal_" + roleType.Precision + "_" + roleType.Scale;
                             sqlDbType = SqlDbType.Decimal;
                             sqlType = "decimal(" + roleType.Precision + "," + roleType.Scale + ")";
+
+                            tableTypeName = "_t_d_" + roleType.Precision + "_" + roleType.Scale;
+                            tableTypeSqlType = sqlType;
                             break;
 
                         case UnitTags.AllorsFloat:
                             tableName = tableName + "_float";
                             sqlDbType = SqlDbType.Float;
                             sqlType = "float";
+
+                            tableTypeName = "_t_f";
+                            tableTypeSqlType = sqlType;
                             break;
 
                         case UnitTags.AllorsInteger:
                             tableName = tableName + "_integer";
                             sqlDbType = SqlDbType.Int;
                             sqlType = "int";
+
+                            tableTypeName = "_t_i";
+                            tableTypeSqlType = sqlType;
                             break;
 
                         case UnitTags.AllorsString:
@@ -148,12 +172,17 @@ namespace Allors.Adapters.Database.SqlClient
                                 sqlType = "nvarchar(MAX)";
                             }
 
+                            tableTypeName = "_t_s";
+                            tableTypeSqlType = "nvarchar(MAX)";
                             break;
 
                         case UnitTags.AllorsUnique:
                             tableName = tableName + "_unique";
                             sqlDbType = SqlDbType.UniqueIdentifier;
                             sqlType = "uniqueidentifier";
+
+                            tableTypeName = "_t_i";
+                            tableTypeSqlType = sqlType;
                             break;
 
                         default:
@@ -193,6 +222,9 @@ namespace Allors.Adapters.Database.SqlClient
                 this.tableNameByRelationType[relationType] = tableName.ToLowerInvariant();
                 this.sqlDbTypeByRoleType[roleType] = sqlDbType;
                 this.sqlTypeByRoleType[roleType] = sqlType;
+
+                this.tableTypeNameByRelationType[relationType] = tableTypeName.ToLowerInvariant();
+                this.tableTypeSqlTypeByRelationType[relationType] = tableTypeSqlType.ToLowerInvariant();
             }
         }
 
@@ -249,6 +281,20 @@ namespace Allors.Adapters.Database.SqlClient
             string sqlType;
             this.sqlTypeByRoleType.TryGetValue(roleType, out sqlType);
             return sqlType;
+        }
+
+        public string GetTableTypeName(IRelationType relationType)
+        {
+            string tableTypeName;
+            this.tableTypeNameByRelationType.TryGetValue(relationType, out tableTypeName);
+            return tableTypeName;
+        }
+
+        public string GetTableTypeSqlType(IRelationType relationType)
+        {
+            string tableTypeSqlType;
+            this.tableTypeSqlTypeByRelationType.TryGetValue(relationType, out tableTypeSqlType);
+            return tableTypeSqlType;
         }
     }
 }

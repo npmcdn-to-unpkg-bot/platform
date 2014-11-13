@@ -1,22 +1,20 @@
 namespace Allors.Adapters.Database.SqlClient
 {
-    using System;
-
-    public class Column
+    public class TableColumn
     {
         private readonly Table table;
-        private readonly string columnName;
-        private readonly string lowercaseColumnName;
+        private readonly string name;
+        private readonly string lowercaseName;
         private readonly string dataType;
         private readonly int? characterMaximumLength;
         private readonly int? numericPrecision;
         private readonly int? numericScale;
 
-        public Column(Table table, string columnName, string dataType, int? characterMaximumLength, int? numericPrecision, int? numericScale)
+        public TableColumn(Table table, string name, string dataType, int? characterMaximumLength, int? numericPrecision, int? numericScale)
         {
             this.table = table;
-            this.columnName = columnName;
-            this.lowercaseColumnName = columnName.ToLowerInvariant();
+            this.name = name;
+            this.lowercaseName = name.ToLowerInvariant();
             this.dataType = dataType;
             this.characterMaximumLength = characterMaximumLength;
             this.numericPrecision = numericPrecision;
@@ -31,19 +29,19 @@ namespace Allors.Adapters.Database.SqlClient
             }
         }
 
-        public string ColumnName
+        public string Name
         {
             get
             {
-                return this.columnName;
+                return this.name;
             }
         }
 
-        public string LowercaseColumnName
+        public string LowercaseName
         {
             get
             {
-                return this.lowercaseColumnName;
+                return this.lowercaseName;
             }
         }
 
@@ -107,7 +105,7 @@ namespace Allors.Adapters.Database.SqlClient
 
         public override string ToString()
         {
-            return this.ColumnName;
+            return this.Name;
         }
     }
 }

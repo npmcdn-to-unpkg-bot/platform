@@ -18,8 +18,10 @@ namespace Allors.Adapters.Database.SqlClient
 {
     using System;
     using System.Collections.Generic;
+    using System.Data;
     using System.Data.SqlClient;
 
+    using Allors.Adapters.Database.SqlClient.IntegerId;
     using Allors.Databases;
     using Allors.Meta;
     using Allors.Populations;
@@ -1463,19 +1465,17 @@ WHERE " + Mapping.ColumnNameForObject + @" = " + Mapping.ParameterNameForObject;
 
                     if (flushDeleted != null)
                     {
-                        var schema = this.database.Mapping;
+                        var mapping = this.database.Mapping;
                         var cmdText = @"
-DELETE FROM " + this.Database.SchemaName + "." + schema.GetTableName(roleType.RelationType) + @"
-WHERE " + Mapping.ColumnNameForAssociation + @" = " + Mapping.ParameterNameForAssociation;
+DELETE FROM " + this.Database.SchemaName + "." + mapping.GetTableName(roleType.RelationType) + @"
+WHERE " + Mapping.ColumnNameForAssociation + @" IN ( SELECT * FROM " + Mapping.ParameterNameForAssociation + ");";
                         using (var command = this.CreateCommand(cmdText))
                         {
-                            var associationParam = command.Parameters.Add(Mapping.ParameterNameForAssociation, schema.SqlDbTypeForId);
-
-                            foreach (var association in flushDeleted)
-                            {
-                                associationParam.Value = association.Value;
-                                command.ExecuteNonQuery();
-                            }
+                            var objectDataRecords = new ObjectDataRecords(mapping, flushDeleted);
+                            var parameter = command.Parameters.Add(Mapping.ParameterNameForAssociation, SqlDbType.Structured);
+                            parameter.TypeName = this.Database.SchemaName + "." + Mapping.TableTypeNameForObjects;
+                            parameter.Value = objectDataRecords;
+                            command.ExecuteNonQuery();
                         }
                     }
 
@@ -1527,19 +1527,17 @@ VALUES(" + Mapping.ParameterNameForAssociation + @", " + Mapping.ParameterNameFo
 
                     if (flushDeleted != null)
                     {
-                        var schema = this.database.Mapping;
+                        var mapping = this.database.Mapping;
                         var cmdText = @"
-DELETE FROM " + this.Database.SchemaName + "." + schema.GetTableName(roleType.RelationType) + @"
-WHERE " + Mapping.ColumnNameForAssociation + @" = " + Mapping.ParameterNameForAssociation;
+DELETE FROM " + this.Database.SchemaName + "." + mapping.GetTableName(roleType.RelationType) + @"
+WHERE " + Mapping.ColumnNameForAssociation + @" IN ( SELECT * FROM " + Mapping.ParameterNameForAssociation + ");";
                         using (var command = this.CreateCommand(cmdText))
                         {
-                            var associationParam = command.Parameters.Add(Mapping.ParameterNameForAssociation, schema.SqlDbTypeForId);
-
-                            foreach (var association in flushDeleted)
-                            {
-                                associationParam.Value = association.Value;
-                                command.ExecuteNonQuery();
-                            }
+                            var objectDataRecords = new ObjectDataRecords(mapping, flushDeleted);
+                            var parameter = command.Parameters.Add(Mapping.ParameterNameForAssociation, SqlDbType.Structured);
+                            parameter.TypeName = this.Database.SchemaName + "." + Mapping.TableTypeNameForObjects;
+                            parameter.Value = objectDataRecords;
+                            command.ExecuteNonQuery();
                         }
                     }
 
@@ -1596,19 +1594,17 @@ VALUES(" + Mapping.ParameterNameForAssociation + @", " + Mapping.ParameterNameFo
 
                     if (flushDeleted != null)
                     {
-                        var schema = this.database.Mapping;
+                        var mapping = this.database.Mapping;
                         var cmdText = @"
-DELETE FROM " + this.Database.SchemaName + "." + schema.GetTableName(roleType.RelationType) + @"
-WHERE " + Mapping.ColumnNameForAssociation + @" = " + Mapping.ParameterNameForAssociation;
+DELETE FROM " + this.Database.SchemaName + "." + mapping.GetTableName(roleType.RelationType) + @"
+WHERE " + Mapping.ColumnNameForAssociation + @" IN ( SELECT * FROM " + Mapping.ParameterNameForAssociation + ");";
                         using (var command = this.CreateCommand(cmdText))
                         {
-                            var associationParam = command.Parameters.Add(Mapping.ParameterNameForAssociation, schema.SqlDbTypeForId);
-
-                            foreach (var association in flushDeleted)
-                            {
-                                associationParam.Value = association.Value;
-                                command.ExecuteNonQuery();
-                            }
+                            var objectDataRecords = new ObjectDataRecords(mapping, flushDeleted);
+                            var parameter = command.Parameters.Add(Mapping.ParameterNameForAssociation, SqlDbType.Structured);
+                            parameter.TypeName = this.Database.SchemaName + "." + Mapping.TableTypeNameForObjects;
+                            parameter.Value = objectDataRecords;
+                            command.ExecuteNonQuery();
                         }
                     }
 
@@ -1705,19 +1701,17 @@ VALUES(" + Mapping.ParameterNameForAssociation + @", " + Mapping.ParameterNameFo
 
                     if (flushDeleted != null)
                     {
-                        var schema = this.database.Mapping;
+                        var mapping = this.database.Mapping;
                         var cmdText = @"
-DELETE FROM " + this.Database.SchemaName + "." + schema.GetTableName(roleType.RelationType) + @"
-WHERE " + Mapping.ColumnNameForAssociation + @" = " + Mapping.ParameterNameForAssociation;
+DELETE FROM " + this.Database.SchemaName + "." + mapping.GetTableName(roleType.RelationType) + @"
+WHERE " + Mapping.ColumnNameForAssociation + @" IN ( SELECT * FROM " + Mapping.ParameterNameForAssociation + ");";
                         using (var command = this.CreateCommand(cmdText))
                         {
-                            var associationParam = command.Parameters.Add(Mapping.ParameterNameForAssociation, schema.SqlDbTypeForId);
-
-                            foreach (var association in flushDeleted)
-                            {
-                                associationParam.Value = association.Value;
-                                command.ExecuteNonQuery();
-                            }
+                            var objectDataRecords = new ObjectDataRecords(mapping, flushDeleted);
+                            var parameter = command.Parameters.Add(Mapping.ParameterNameForAssociation, SqlDbType.Structured);
+                            parameter.TypeName = this.Database.SchemaName + "." + Mapping.TableTypeNameForObjects;
+                            parameter.Value = objectDataRecords;
+                            command.ExecuteNonQuery();
                         }
                     }
 
@@ -1841,19 +1835,17 @@ AND " + Mapping.ColumnNameForRole + @" = " + Mapping.ParameterNameForRole + @";
 
                     if (flushDeleted != null)
                     {
-                        var schema = this.database.Mapping;
+                        var mapping = this.database.Mapping;
                         var cmdText = @"
-DELETE FROM " + this.Database.SchemaName + "." + schema.GetTableName(roleType.RelationType) + @"
-WHERE " + Mapping.ColumnNameForAssociation + @" = " + Mapping.ParameterNameForAssociation;
+DELETE FROM " + this.Database.SchemaName + "." + mapping.GetTableName(roleType.RelationType) + @"
+WHERE " + Mapping.ColumnNameForAssociation + @" IN ( SELECT * FROM " + Mapping.ParameterNameForAssociation + ");";
                         using (var command = this.CreateCommand(cmdText))
                         {
-                            var associationParam = command.Parameters.Add(Mapping.ParameterNameForAssociation, schema.SqlDbTypeForId);
-
-                            foreach (var association in flushDeleted)
-                            {
-                                associationParam.Value = association.Value;
-                                command.ExecuteNonQuery();
-                            }
+                            var objectDataRecords = new ObjectDataRecords(mapping, flushDeleted);
+                            var parameter = command.Parameters.Add(Mapping.ParameterNameForAssociation, SqlDbType.Structured);
+                            parameter.TypeName = this.Database.SchemaName + "." + Mapping.TableTypeNameForObjects;
+                            parameter.Value = objectDataRecords;
+                            command.ExecuteNonQuery();
                         }
                     }
 

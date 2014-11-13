@@ -7,20 +7,36 @@ namespace Allors.Adapters.Database.SqlClient
     public class Schema
     {
         private readonly Database database;
+
+        private readonly bool exists;
         private readonly Dictionary<string, Table> tableByLowercaseTableName;
+        private readonly Dictionary<string, TableType> tableTypeByLowercaseTableTypeName;
 
         public Schema(Database database)
         {
             this.database = database;
             this.tableByLowercaseTableName = new Dictionary<string, Table>();
+            this.tableTypeByLowercaseTableTypeName = new Dictionary<string, TableType>();
 
             using (var connection = new SqlConnection(database.ConnectionString))
             {
                 connection.Open();
                 try
                 {
-                    // Objects
+                    // Schema
                     var cmdText = @"
+SELECT  count(schema_name)
+FROM    information_schema.schemata
+WHERE   schema_name = @schemaName";
+                    using (var command = new SqlCommand(cmdText, connection))
+                    {
+                        command.Parameters.Add("@schemaName", SqlDbType.NVarChar).Value = database.SchemaName;
+                        var schemaCount = (int)command.ExecuteScalar();
+                        this.exists = schemaCount != 0;
+                    }
+
+                    // Objects
+                    cmdText = @"
 SELECT  table_name
 FROM information_schema.tables
 WHERE table_schema = @tableSchema";
@@ -35,6 +51,27 @@ WHERE table_schema = @tableSchema";
                                 var tableName = (string)reader["table_name"];
                                 tableName = tableName.Trim().ToLowerInvariant();
                                 this.TableByLowercaseTableName[tableName] = new Table(this, tableName);
+                            }
+                        }
+                    }
+
+                    // Table Types
+                    cmdText = @"
+SELECT domain_name
+FROM information_schema.domains
+WHERE data_type='table type' AND
+domain_schema = @domainSchema";
+
+                    using (var command = new SqlCommand(cmdText, connection))
+                    {
+                        command.Parameters.Add("@domainSchema", SqlDbType.NVarChar).Value = database.SchemaName;
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                var tableTypeName = (string)reader["domain_name"];
+                                tableTypeName = tableTypeName.Trim().ToLowerInvariant();
+                                this.TableTypeByLowercaseTableTypeName[tableTypeName] = new TableType(this, tableTypeName);
                             }
                         }
                     }
@@ -54,6 +91,14 @@ WHERE table_schema = @tableSchema";
             }
         }
 
+        public Dictionary<string, TableType> TableTypeByLowercaseTableTypeName
+        {
+            get
+            {
+                return this.tableTypeByLowercaseTableTypeName;
+            }
+        }
+
         public Database Database
         {
             get
@@ -62,14 +107,26 @@ WHERE table_schema = @tableSchema";
             }
         }
 
-        public Table this[string tableName]
+        public bool Exists
         {
             get
             {
-                Table table;
-                this.tableByLowercaseTableName.TryGetValue(tableName.ToLowerInvariant(), out table);
-                return table;
+                return this.exists;
             }
+        }
+
+        public Table GetTable(string tableName)
+        {
+            Table table;
+            this.tableByLowercaseTableName.TryGetValue(tableName.ToLowerInvariant(), out table);
+            return table;
+        }
+
+        public TableType GetTableType(string tableTypeName)
+        {
+            TableType tableType;
+            this.tableTypeByLowercaseTableTypeName.TryGetValue(tableTypeName.ToLowerInvariant(), out tableType);
+            return tableType;
         }
     }
 }

@@ -52,6 +52,7 @@ CREATE TABLE " + Mapping.TableNameForObjects + @"
             // Relations
             foreach (var relationType in this.mapping.Database.MetaPopulation.RelationTypes)
             {
+                var associationType = relationType.RoleType;
                 var roleType = relationType.RoleType;
 
                 var tableName = this.mapping.GetTableName(relationType);
@@ -65,10 +66,17 @@ DELETE FROM " + tableName + @";
                 }
                 else
                 {
-                    var primaryKeys = "a";
-                    if (roleType.ObjectType is IComposite && roleType.IsMany)
+                    var primaryKeys = Mapping.ColumnNameForAssociation;
+                    if (roleType.ObjectType is IComposite)
                     {
-                        primaryKeys = Mapping.ColumnNameForAssociation + @" , " + Mapping.ColumnNameForRole;
+                        if (associationType.IsMany && roleType.IsMany)
+                        {
+                            primaryKeys = Mapping.ColumnNameForAssociation + @" , " + Mapping.ColumnNameForRole;
+                        }
+                        else if (roleType.IsMany)
+                        {
+                            primaryKeys = Mapping.ColumnNameForRole;
+                        }
                     }
 
                     cmdText.Append(@"
