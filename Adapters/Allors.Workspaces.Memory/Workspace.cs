@@ -73,7 +73,7 @@ namespace Allors.Workspaces.Memory
             }
         }
 
-        public Guid Id
+        public string Id
         {
             get { return this.Database.Id; }
         }

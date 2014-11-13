@@ -37,7 +37,7 @@ namespace Allors
         /// <li>the id of the database from this workspace</li>
         /// </ul>
         /// </summary>
-        Guid Id { get; }
+        string Id { get; }
 
         /// <summary>
         /// Gets the object factory.

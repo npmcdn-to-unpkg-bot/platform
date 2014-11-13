@@ -18,5 +18,6 @@ namespace Allors.Databases.Memory
 {
     public abstract class Configuration : Databases.Configuration
     {
+        public string Id { get; set; }
     }
 }

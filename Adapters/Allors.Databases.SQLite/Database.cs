@@ -21,6 +21,7 @@ namespace Allors.Adapters.Database.SQLite
     using System.Data;
     using System.Data.Common;
     using System.Data.SQLite;
+    using System.IO;
     using System.Xml;
 
     using Allors.Databases;
@@ -31,14 +32,19 @@ namespace Allors.Adapters.Database.SQLite
     {
         internal const int CacheDefaultValue = int.MaxValue;
 
+        private const string FullUriKey = "fulluri";
+        private const string SharedCacheKey = "?cache=shared";
+        private const string InMemoryKey = ":memory:";
+        private const string UriQueySeparator = "?";
+        
         private static readonly byte[] EmptyByteArray = new byte[0];
 
         private readonly object lockObject = new object();
-
         private readonly Mapping mapping;
+        private readonly bool isInMemory;
 
         // Configuration
-        private readonly Guid id;
+        private readonly string id;
         private readonly IObjectFactory objectFactory;
         private readonly IRoleCache roleCache;
         private readonly IClassCache classCache;
@@ -47,7 +53,9 @@ namespace Allors.Adapters.Database.SQLite
         private readonly IsolationLevel isolationLevel;
         private readonly bool autoIncrement;
 
-        private readonly SQLiteConnection sharedMemoryConnection;
+        private readonly SQLiteConnection inMemoryConnection;
+
+        private readonly IdSequence idSequence;
 
         private Dictionary<string, object> properties;
 
@@ -58,10 +66,38 @@ namespace Allors.Adapters.Database.SQLite
 
         public Database(Configuration configuration)
         {
-            this.id = configuration.Id;
-            if (this.id == Guid.Empty)
+            this.connectionString = configuration.ConnectionString;
+            if (this.connectionString == null)
             {
-                throw new Exception("Configuration.Id is missing");
+                throw new Exception("Configuration.ConnectionString is missing");
+            }
+
+            if (!this.connectionString.ToLowerInvariant().Contains(FullUriKey))
+            {
+                throw new Exception("Configuration.ConnectionString has no FullUri");
+            }
+
+            this.isInMemory = this.connectionString.ToLowerInvariant().Contains(InMemoryKey);
+
+            if (this.isInMemory && !this.connectionString.ToLowerInvariant().Contains(SharedCacheKey))
+            {
+                throw new Exception("Configuration.ConnectionString is in memory and FullUri has no \"?cache=shared\" parameter");
+            }
+
+            if (this.isInMemory)
+            {
+                this.id = Guid.NewGuid().ToString("N").ToLowerInvariant();
+            }
+            else
+            {
+                var connectionStringBuilder = new SQLiteConnectionStringBuilder(this.connectionString);
+                var dataSource = connectionStringBuilder.FullUri;
+                if (dataSource.Contains(UriQueySeparator))
+                {
+                    dataSource = dataSource.Substring(0, dataSource.IndexOf(UriQueySeparator, StringComparison.Ordinal));
+                }
+
+                this.id = Path.GetFileName(dataSource);
             }
 
             this.objectFactory = configuration.ObjectFactory;
@@ -70,40 +106,42 @@ namespace Allors.Adapters.Database.SQLite
                 throw new Exception("Configuration.ObjectFactory is missing");
             }
 
-            this.connectionString = configuration.ConnectionString;
-            if (this.connectionString == null)
-            {
-                throw new Exception("Configuration.ConnectionString is missing");
-            }
-
             this.roleCache = configuration.RoleCache ?? new RoleCache();
             this.classCache = configuration.ClassCache ?? new ClassCache();
             this.commandTimeout = configuration.CommandTimeout ?? 30;
             this.isolationLevel = configuration.IsolationLevel ?? IsolationLevel.Serializable;
-            this.autoIncrement = configuration.AutoIncrement ?? true;
+            this.autoIncrement = configuration.AutoIncrement ?? false;
 
             this.mapping = new Mapping(this);
 
-            // This is necessarry to prevent an in memory database to be deleted
-            // after the last connection closes.
-            this.sharedMemoryConnection = new SQLiteConnection(this.ConnectionString);
-            this.sharedMemoryConnection.Open();
+            if (this.isInMemory)
+            {
+                this.inMemoryConnection = new SQLiteConnection(this.ConnectionString);
+                this.inMemoryConnection.Open();
+            }
+
+            this.idSequence = IdSequence.GetOrCreate(this);
         }
 
         ~Database()
         {
             try
             {
-                this.sharedMemoryConnection.Close();
+                if (this.isInMemory)
+                {
+                    this.inMemoryConnection.Close();
+                }
             }
-            catch { }
+            catch
+            {
+            }
         }
         
         public event ObjectNotLoadedEventHandler ObjectNotLoaded;
 
         public event RelationNotLoadedEventHandler RelationNotLoaded;
         
-        public Guid Id 
+        public string Id 
         {
             get
             {
@@ -227,6 +265,14 @@ namespace Allors.Adapters.Database.SQLite
             }
         }
 
+        internal IdSequence IdSequence
+        {
+            get
+            {
+                return this.idSequence;
+            }
+        }
+
         public object this[string name]
         {
             get
@@ -262,7 +308,9 @@ namespace Allors.Adapters.Database.SQLite
         public void Init()
         {
             new Initialization(this.Mapping, new Schema(this), this.AutoIncrement).Execute();
-            
+
+            this.idSequence.Reset();
+
             this.roleCache.Invalidate();
             this.classCache.Invalidate();
 
@@ -309,6 +357,22 @@ namespace Allors.Adapters.Database.SQLite
             var validateResult = new Validation(this);
             this.isValid = validateResult.Success;
             return validateResult;
+        }
+
+        public SQLiteCommand CreateCommand(string cmdText)
+        {
+            if (this.connection == null)
+            {
+                this.connection = new SQLiteConnection(this.ConnectionString);
+                this.connection.Open();
+                this.transaction = this.connection.BeginTransaction(this.IsolationLevel);
+            }
+
+            var command = new SQLiteCommand(cmdText, this.connection, this.transaction)
+            {
+                CommandTimeout = this.CommandTimeout
+            };
+            return command;
         }
 
         #region Serialization
@@ -466,7 +530,7 @@ VALUES (" + Mapping.ParameterNameForObject + "," + Mapping.ParameterNameForType 
 
                         using (var command = this.CreateCommand(cmdText))
                         {
-                            command.Parameters.Add(Mapping.ParameterNameForObject, this.mapping.DbTypeForId).Value = objectId.Value;
+                            command.Parameters.Add(Mapping.ParameterNameForObject, Mapping.DbTypeForId).Value = objectId.Value;
                             command.Parameters.Add(Mapping.ParameterNameForType, Mapping.DbTypeForType).Value = objectType.Id;
                             command.Parameters.Add(Mapping.ParameterNameForCache, Mapping.DbTypeForCache).Value = CacheDefaultValue;
 
@@ -517,8 +581,8 @@ VALUES (" + Mapping.ParameterNameForAssociation + "," + Mapping.ParameterNameFor
 
                                     using (var command = this.CreateCommand(cmdText))
                                     {
-                                        command.Parameters.Add(Mapping.ParameterNameForAssociation, this.mapping.DbTypeForId).Value = association.Value;
-                                        command.Parameters.Add(Mapping.ParameterNameForRole, this.mapping.DbTypeForId).Value = role.Value;
+                                        command.Parameters.Add(Mapping.ParameterNameForAssociation, Mapping.DbTypeForId).Value = association.Value;
+                                        command.Parameters.Add(Mapping.ParameterNameForRole, Mapping.DbTypeForId).Value = role.Value;
 
                                         command.ExecuteNonQuery();
                                     }
@@ -625,8 +689,8 @@ VALUES (" + Mapping.ParameterNameForAssociation + "," + Mapping.ParameterNameFor
 
                                 using (var command = this.CreateCommand(cmdText))
                                 {
-                                    command.Parameters.Add(Mapping.ParameterNameForAssociation, this.Mapping.DbTypeForId).Value = association.Value;
-                                    command.Parameters.Add(Mapping.ParameterNameForRole, this.Mapping.GetSqlDbType(relationType.RoleType)).Value = role;
+                                    command.Parameters.Add(Mapping.ParameterNameForAssociation, Mapping.DbTypeForId).Value = association.Value;
+                                    command.Parameters.Add(Mapping.ParameterNameForRole, Mapping.GetSqlDbType(relationType.RoleType)).Value = role;
 
                                     command.ExecuteNonQuery();
                                 }
@@ -646,8 +710,8 @@ VALUES (" + Mapping.ParameterNameForAssociation + "," + Mapping.ParameterNameFor
 
                                     using (var command = this.CreateCommand(cmdText))
                                     {
-                                        command.Parameters.Add(Mapping.ParameterNameForAssociation, this.Mapping.DbTypeForId).Value = association.Value;
-                                        command.Parameters.Add(Mapping.ParameterNameForRole, this.Mapping.GetSqlDbType(relationType.RoleType)).Value = role;
+                                        command.Parameters.Add(Mapping.ParameterNameForAssociation, Mapping.DbTypeForId).Value = association.Value;
+                                        command.Parameters.Add(Mapping.ParameterNameForRole, Mapping.GetSqlDbType(relationType.RoleType)).Value = role;
 
                                         command.ExecuteNonQuery();
                                     }
@@ -899,22 +963,6 @@ ORDER BY " + Mapping.ColumnNameForAssociation + "," + Mapping.ColumnNameForRole;
         }
 
         #endregion
-
-        private SQLiteCommand CreateCommand(string cmdText)
-        {
-            if (this.connection == null)
-            {
-                this.connection = new SQLiteConnection(this.ConnectionString);
-                this.connection.Open();
-                this.transaction = this.connection.BeginTransaction(this.IsolationLevel);
-            }
-
-            var command = new SQLiteCommand(cmdText, this.connection, this.transaction)
-                              {
-                                  CommandTimeout = this.CommandTimeout
-                              };
-            return command;
-        }
 
         private void Commit()
         {

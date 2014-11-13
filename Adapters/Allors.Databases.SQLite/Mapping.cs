@@ -44,13 +44,13 @@ namespace Allors.Adapters.Database.SQLite
         public const string SqlTypeForType = "blob";
         public const string SqlTypeForCache = "integer";
 
+        public const DbType DbTypeForId = DbType.Int64;
         public const DbType DbTypeForType = DbType.Guid;
         public const DbType DbTypeForCache = DbType.Int32;
 
         private readonly Database database;
 
         private readonly string sqlTypeForId;
-        private readonly DbType dbTypeForId;
 
         private readonly Dictionary<IRelationType, string> tableNameByRelationType;
         private readonly Dictionary<IRoleType, string> sqlTypeByRoleType;
@@ -66,7 +66,6 @@ namespace Allors.Adapters.Database.SQLite
             }
 
             this.sqlTypeForId = "integer";
-            this.dbTypeForId = DbType.Int64;
 
             this.tableNameByRelationType = new Dictionary<IRelationType, string>();
             this.sqlTypeByRoleType = new Dictionary<IRoleType, string>();
@@ -158,7 +157,7 @@ namespace Allors.Adapters.Database.SQLite
                     }
 
 
-                    dbType = this.DbTypeForId;
+                    dbType = DbTypeForId;
                     sqlType = this.SqlTypeForId;
                 }
 
@@ -173,14 +172,6 @@ namespace Allors.Adapters.Database.SQLite
             get
             {
                 return this.sqlTypeForId;
-            }
-        }
-
-        public DbType DbTypeForId
-        {
-            get
-            {
-                return this.dbTypeForId;
             }
         }
 

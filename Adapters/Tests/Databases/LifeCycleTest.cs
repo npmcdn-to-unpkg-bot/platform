@@ -30,7 +30,6 @@ namespace Allors.Databases
     using Allors.Populations;
 
     using NUnit.Framework;
-    using System.Reflection;
 
     public abstract class LifeCycleTest
     {
@@ -185,10 +184,10 @@ namespace Allors.Databases
             {
                 init();
 
-                C1 c1A = C1.Create(this.Session);
+                var c1A = C1.Create(this.Session);
 
-                C2 c2A = C2.Create(this.Session);
-                C2 c2B = C2.Create(this.Session);
+                var c2A = C2.Create(this.Session);
+                var c2B = C2.Create(this.Session);
 
                 this.Session.Commit();
 

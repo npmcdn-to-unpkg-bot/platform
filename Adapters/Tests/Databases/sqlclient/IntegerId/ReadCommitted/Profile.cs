@@ -65,8 +65,7 @@ namespace Allors.Databases.SqlClient.IntegerId.ReadCommitted
             var configuration = new Configuration
                                     {
                                         ObjectFactory = this.CreateObjectFactory(metaPopulation),
-                                        Id = Guid.NewGuid(),
-                                        ConnectionString = ConnectionString
+                                        ConnectionString = this.ConnectionString
                                     };
             var database = new Database(configuration);
 
@@ -88,7 +87,6 @@ namespace Allors.Databases.SqlClient.IntegerId.ReadCommitted
             var configuration = new Configuration
             {
                 ObjectFactory = this.ObjectFactory,
-                Id = Guid.NewGuid(),
                 ConnectionString = this.ConnectionString
             };
 

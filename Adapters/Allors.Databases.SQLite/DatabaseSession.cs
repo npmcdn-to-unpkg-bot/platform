@@ -232,17 +232,42 @@ namespace Allors.Adapters.Database.SQLite
         public IObject Create(IClass objectType)
         {
             var cmdText = @"
-INSERT INTO " + Mapping.TableNameForObjects + " (" + Mapping.ColumnNameForType + ", " + Mapping.ColumnNameForCache + @")
-VALUES (" + Mapping.ParameterNameForType + ", " + Mapping.ParameterNameForCache + @");
-SELECT last_insert_rowid();
+INSERT INTO " + Mapping.TableNameForObjects + " (" + Mapping.ColumnNameForObject + ", " + Mapping.ColumnNameForType + ", " + Mapping.ColumnNameForCache + @")
+VALUES (" + Mapping.ParameterNameForObject + ", " + Mapping.ParameterNameForType + ", " + Mapping.ParameterNameForCache + @");
 ";
             using (var command = this.CreateCommand(cmdText))
             {
-                command.Parameters.Add(Mapping.ParameterNameForType, Mapping.DbTypeForType).Value = objectType.Id;
-                command.Parameters.Add(Mapping.ParameterNameForCache, Mapping.DbTypeForCache).Value = Database.CacheDefaultValue;
-                var result = command.ExecuteScalar().ToString();
+                var idSequence = this.database.IdSequence;
+                var id = idSequence.Next(this);
 
-                var objectId = new ObjectIdLong(result);
+                try
+                {
+                    command.Parameters.Add(Mapping.ParameterNameForObject, Mapping.DbTypeForId).Value = id;
+                    command.Parameters.Add(Mapping.ParameterNameForType, Mapping.DbTypeForType).Value = objectType.Id;
+                    command.Parameters.Add(Mapping.ParameterNameForCache, Mapping.DbTypeForCache).Value = Database.CacheDefaultValue;
+
+                    command.ExecuteNonQuery();
+                }
+                catch (SQLiteException sqliteException)
+                {
+                    if (sqliteException.ResultCode != SQLiteErrorCode.Constraint)
+                    {
+                        throw;
+                    }
+
+                    idSequence.Reset();
+                    
+                    id = idSequence.Next(this);
+
+                    command.Parameters.Add(Mapping.ParameterNameForObject, Mapping.DbTypeForId).Value = id;
+                    command.Parameters.Add(Mapping.ParameterNameForType, Mapping.DbTypeForType).Value = objectType.Id;
+                    command.Parameters.Add(Mapping.ParameterNameForCache, Mapping.DbTypeForCache).Value = Database.CacheDefaultValue;
+
+                    command.ExecuteNonQuery();
+                }
+
+
+                var objectId = new ObjectIdLong(id);
 
                 if (this.classByObjectId == null)
                 {
@@ -364,7 +389,7 @@ VALUES (" + Mapping.ParameterNameForObject + ", " + Mapping.ParameterNameForType
 ";
             using (var command = this.CreateCommand(cmdText))
             {
-                command.Parameters.Add(Mapping.ParameterNameForObject, mapping.DbTypeForId).Value = objectId.Value;
+                command.Parameters.Add(Mapping.ParameterNameForObject, Mapping.DbTypeForId).Value = objectId.Value;
                 command.Parameters.Add(Mapping.ParameterNameForType, Mapping.DbTypeForType).Value = objectType.Id;
                 command.Parameters.Add(Mapping.ParameterNameForCache, Mapping.DbTypeForCache).Value = Database.CacheDefaultValue;
                 command.ExecuteNonQuery();
@@ -393,6 +418,23 @@ VALUES (" + Mapping.ParameterNameForObject + ", " + Mapping.ParameterNameForType
         IStrategy IDatabaseSession.InstantiateStrategy(ObjectId objectId)
         {
             return this.InstantiateStrategy(objectId);
+        }
+
+        public SQLiteCommand CreateCommand(string cmdText)
+        {
+            if (this.connection == null)
+            {
+                this.connection = new SQLiteConnection(this.database.ConnectionString);
+                this.connection.Open();
+                this.transaction = this.connection.BeginTransaction(this.Database.IsolationLevel);
+            }
+
+            var command = new SQLiteCommand(cmdText, this.connection, this.transaction)
+            {
+                CommandTimeout = this.Database.CommandTimeout
+            };
+
+            return command;
         }
 
         public void Dispose()
@@ -1079,23 +1121,6 @@ VALUES (" + Mapping.ParameterNameForObject + ", " + Mapping.ParameterNameForType
         }
         #endregion
 
-        internal SQLiteCommand CreateCommand(string cmdText)
-        {
-            if (this.connection == null)
-            {
-                this.connection = new SQLiteConnection(this.database.ConnectionString);
-                this.connection.Open();
-                this.transaction = this.connection.BeginTransaction(this.Database.IsolationLevel);
-            }
-
-            var command = new SQLiteCommand(cmdText, this.connection, this.transaction)
-            {
-                CommandTimeout = this.Database.CommandTimeout
-            };
-
-            return command;
-        }
-
         internal void Flush()
         {
             if (this.unitFlushAssociationsByRoleType != null)
@@ -1248,7 +1273,7 @@ WHERE " + Mapping.ColumnNameForObject + @" = " + Mapping.ParameterNameForObject 
 ";
             using (var command = this.CreateCommand(cmdText))
             {
-                command.Parameters.Add(Mapping.ParameterNameForObject, this.database.Mapping.DbTypeForId).Value = objectId.Value;
+                command.Parameters.Add(Mapping.ParameterNameForObject, Mapping.DbTypeForId).Value = objectId.Value;
                 using (var reader = command.ExecuteReader())
                 {
                     if (reader.Read())
@@ -1287,16 +1312,16 @@ WHERE " + Mapping.ColumnNameForObject + @" = " + Mapping.ParameterNameForObject 
 
         private object FetchUnitRole(ObjectId association, IRoleType roleType)
         {
-            var schema = this.database.Mapping;
+            var mapping = this.database.Mapping;
 
             var cmdText = @"
 SELECT " + Mapping.ColumnNameForRole + @"
-FROM " + schema.GetTableName(roleType.RelationType) + @"
+FROM " + mapping.GetTableName(roleType.RelationType) + @"
 WHERE " + Mapping.ColumnNameForAssociation + @"=" + Mapping.ParameterNameForAssociation + @";
 ";
             using (var command = this.CreateCommand(cmdText))
             {
-                command.Parameters.Add(Mapping.ParameterNameForAssociation, schema.DbTypeForId).Value = association.Value;
+                command.Parameters.Add(Mapping.ParameterNameForAssociation, Mapping.DbTypeForId).Value = association.Value;
 
                 object role = null;
                 using (var reader = command.ExecuteReader(CommandBehavior.SingleRow | CommandBehavior.SingleResult))
@@ -1342,18 +1367,18 @@ WHERE " + Mapping.ColumnNameForAssociation + @"=" + Mapping.ParameterNameForAsso
 
         private ObjectId FetchCompositeRole(ObjectId association, IRoleType roleType)
         {
-            var schema = this.database.Mapping;
+            var mapping = this.database.Mapping;
 
             var cmdText = @"
 SELECT " + Mapping.ColumnNameForRole + @"
-FROM " + schema.GetTableName(roleType.RelationType) + @"
+FROM " + mapping.GetTableName(roleType.RelationType) + @"
 WHERE " + Mapping.ColumnNameForAssociation + @"=" + Mapping.ParameterNameForAssociation + @";
 ";
             using (var command = this.CreateCommand(cmdText))
             {
                 ObjectId role = null;
 
-                command.Parameters.Add(Mapping.ParameterNameForAssociation, schema.DbTypeForId).Value = association.Value;
+                command.Parameters.Add(Mapping.ParameterNameForAssociation, Mapping.DbTypeForId).Value = association.Value;
                 var result = command.ExecuteScalar();
                 if (result != null)
                 {
@@ -1369,17 +1394,17 @@ WHERE " + Mapping.ColumnNameForAssociation + @"=" + Mapping.ParameterNameForAsso
 
         private ObjectId[] FetchCompositeRoles(ObjectId association, IRoleType roleType)
         {
-            var schema = this.database.Mapping;
+            var mapping = this.database.Mapping;
 
             var cmdText = @"
 SELECT " + Mapping.ColumnNameForRole + @"
-FROM " + schema.GetTableName(roleType.RelationType) + @"
+FROM " + mapping.GetTableName(roleType.RelationType) + @"
 WHERE " + Mapping.ColumnNameForAssociation + @"=" + Mapping.ParameterNameForAssociation + @";
 ";
             List<ObjectId> roles = null;
             using (var command = this.CreateCommand(cmdText))
             {
-                command.Parameters.Add(Mapping.ParameterNameForAssociation, schema.DbTypeForId).Value = association.Value;
+                command.Parameters.Add(Mapping.ParameterNameForAssociation, Mapping.DbTypeForId).Value = association.Value;
                 using (var reader = command.ExecuteReader())
                 {
                     while (reader.Read())
@@ -1406,16 +1431,16 @@ WHERE " + Mapping.ColumnNameForAssociation + @"=" + Mapping.ParameterNameForAsso
 
         private ObjectId FetchCompositeAssociation(ObjectId role, IAssociationType associationType)
         {
-            var schema = this.database.Mapping;
+            var mapping = this.database.Mapping;
 
             var cmdText = @"
 SELECT " + Mapping.ColumnNameForAssociation + @"
-FROM " + schema.GetTableName(associationType.RelationType) + @"
+FROM " + mapping.GetTableName(associationType.RelationType) + @"
 WHERE " + Mapping.ColumnNameForRole + @"=" + Mapping.ParameterNameForRole + @";
 ";
             using (var command = this.CreateCommand(cmdText))
             {
-                command.Parameters.Add(Mapping.ParameterNameForRole, schema.DbTypeForId).Value = role.Value;
+                command.Parameters.Add(Mapping.ParameterNameForRole, Mapping.DbTypeForId).Value = role.Value;
                 var result = command.ExecuteScalar();
                 if (result != null)
                 {
@@ -1429,17 +1454,17 @@ WHERE " + Mapping.ColumnNameForRole + @"=" + Mapping.ParameterNameForRole + @";
 
         private ObjectId[] FetchCompositeAssociations(ObjectId role, IAssociationType associationType)
         {
-            var schema = this.database.Mapping;
+            var mapping = this.database.Mapping;
 
             var cmdText = @"
 SELECT " + Mapping.ColumnNameForAssociation + @"
-FROM " + schema.GetTableName(associationType.RelationType) + @"
+FROM " + mapping.GetTableName(associationType.RelationType) + @"
 WHERE " + Mapping.ColumnNameForRole + @"=" + Mapping.ParameterNameForRole + @";
 ";
             List<ObjectId> associations = null;
             using (var command = this.CreateCommand(cmdText))
             {
-                command.Parameters.Add(Mapping.ParameterNameForRole, schema.DbTypeForId).Value = role.Value;
+                command.Parameters.Add(Mapping.ParameterNameForRole, Mapping.DbTypeForId).Value = role.Value;
                 using (var reader = command.ExecuteReader())
                 {
                     while (reader.Read())
@@ -1463,14 +1488,12 @@ WHERE " + Mapping.ColumnNameForRole + @"=" + Mapping.ParameterNameForRole + @";
         {
             if (this.flushDeletedObjects != null)
             {
-                var schema = this.database.Mapping;
-
                 var cmdText = @"
 DELETE FROM " + Mapping.TableNameForObjects + @"
 WHERE " + Mapping.ColumnNameForObject + @" = " + Mapping.ParameterNameForObject;
                 using (var command = this.CreateCommand(cmdText))
                 {
-                    var associationParam = command.Parameters.Add(Mapping.ParameterNameForObject, schema.DbTypeForId);
+                    var associationParam = command.Parameters.Add(Mapping.ParameterNameForObject, Mapping.DbTypeForId);
 
                     foreach (var association in this.flushDeletedObjects)
                     {
@@ -1496,13 +1519,13 @@ WHERE " + Mapping.ColumnNameForObject + @" = " + Mapping.ParameterNameForObject;
 
                     if (flushDeleted != null)
                     {
-                        var schema = this.database.Mapping;
+                        var mapping = this.database.Mapping;
                         var cmdText = @"
-DELETE FROM " + schema.GetTableName(roleType.RelationType) + @"
+DELETE FROM " + mapping.GetTableName(roleType.RelationType) + @"
 WHERE " + Mapping.ColumnNameForAssociation + @" = " + Mapping.ParameterNameForAssociation;
                         using (var command = this.CreateCommand(cmdText))
                         {
-                            var associationParam = command.Parameters.Add(Mapping.ParameterNameForAssociation, schema.DbTypeForId);
+                            var associationParam = command.Parameters.Add(Mapping.ParameterNameForAssociation, Mapping.DbTypeForId);
 
                             foreach (var association in flushDeleted)
                             {
@@ -1514,15 +1537,15 @@ WHERE " + Mapping.ColumnNameForAssociation + @" = " + Mapping.ParameterNameForAs
 
                     if (flushChanged != null)
                     {
-                        var schema = this.database.Mapping;
+                        var mapping = this.database.Mapping;
                         var cmdText = @"
-INSERT OR REPLACE INTO " + schema.GetTableName(roleType.RelationType) + @" (" + Mapping.ColumnNameForAssociation + @", " + Mapping.ColumnNameForRole + @")
+INSERT OR REPLACE INTO " + mapping.GetTableName(roleType.RelationType) + @" (" + Mapping.ColumnNameForAssociation + @", " + Mapping.ColumnNameForRole + @")
 VALUES (" + Mapping.ParameterNameForAssociation + @", " + Mapping.ParameterNameForRole + @");
 ";
                         using (var command = this.CreateCommand(cmdText))
                         {
-                            var associationParam = command.Parameters.Add(Mapping.ParameterNameForAssociation, schema.DbTypeForId);
-                            var roleParam = command.Parameters.Add(Mapping.ParameterNameForRole, schema.GetSqlDbType(roleType));
+                            var associationParam = command.Parameters.Add(Mapping.ParameterNameForAssociation, Mapping.DbTypeForId);
+                            var roleParam = command.Parameters.Add(Mapping.ParameterNameForRole, mapping.GetSqlDbType(roleType));
 
                             foreach (var association in flushChanged)
                             {
@@ -1553,13 +1576,13 @@ VALUES (" + Mapping.ParameterNameForAssociation + @", " + Mapping.ParameterNameF
 
                     if (flushDeleted != null)
                     {
-                        var schema = this.database.Mapping;
+                        var mapping = this.database.Mapping;
                         var cmdText = @"
-DELETE FROM " + schema.GetTableName(roleType.RelationType) + @"
+DELETE FROM " + mapping.GetTableName(roleType.RelationType) + @"
 WHERE " + Mapping.ColumnNameForAssociation + @" = " + Mapping.ParameterNameForAssociation;
                         using (var command = this.CreateCommand(cmdText))
                         {
-                            var associationParam = command.Parameters.Add(Mapping.ParameterNameForAssociation, schema.DbTypeForId);
+                            var associationParam = command.Parameters.Add(Mapping.ParameterNameForAssociation, Mapping.DbTypeForId);
 
                             foreach (var association in flushDeleted)
                             {
@@ -1571,18 +1594,18 @@ WHERE " + Mapping.ColumnNameForAssociation + @" = " + Mapping.ParameterNameForAs
 
                     if (flushChanged != null)
                     {
-                        var schema = this.database.Mapping;
+                        var mapping = this.database.Mapping;
                         var cmdText = @"
-DELETE FROM " + schema.GetTableName(roleType.RelationType) + @"
+DELETE FROM " + mapping.GetTableName(roleType.RelationType) + @"
 WHERE " + Mapping.ColumnNameForRole + @" = " + Mapping.ParameterNameForRole + @";
 
-INSERT OR REPLACE INTO " + schema.GetTableName(roleType.RelationType) + @" (" + Mapping.ColumnNameForAssociation + @", " + Mapping.ColumnNameForRole + @")
+INSERT OR REPLACE INTO " + mapping.GetTableName(roleType.RelationType) + @" (" + Mapping.ColumnNameForAssociation + @", " + Mapping.ColumnNameForRole + @")
 VALUES (" + Mapping.ParameterNameForAssociation + @", " + Mapping.ParameterNameForRole + @");
 ";
                         using (var command = this.CreateCommand(cmdText))
                         {
-                            var associationParam = command.Parameters.Add(Mapping.ParameterNameForAssociation, schema.DbTypeForId);
-                            var roleParam = command.Parameters.Add(Mapping.ParameterNameForRole, schema.GetSqlDbType(roleType));
+                            var associationParam = command.Parameters.Add(Mapping.ParameterNameForAssociation, Mapping.DbTypeForId);
+                            var roleParam = command.Parameters.Add(Mapping.ParameterNameForRole, mapping.GetSqlDbType(roleType));
 
                             foreach (var association in flushChanged)
                             {
@@ -1615,13 +1638,13 @@ VALUES (" + Mapping.ParameterNameForAssociation + @", " + Mapping.ParameterNameF
 
                     if (flushDeleted != null)
                     {
-                        var schema = this.database.Mapping;
+                        var mapping = this.database.Mapping;
                         var cmdText = @"
-DELETE FROM " + schema.GetTableName(roleType.RelationType) + @"
+DELETE FROM " + mapping.GetTableName(roleType.RelationType) + @"
 WHERE " + Mapping.ColumnNameForAssociation + @" = " + Mapping.ParameterNameForAssociation;
                         using (var command = this.CreateCommand(cmdText))
                         {
-                            var associationParam = command.Parameters.Add(Mapping.ParameterNameForAssociation, schema.DbTypeForId);
+                            var associationParam = command.Parameters.Add(Mapping.ParameterNameForAssociation, Mapping.DbTypeForId);
 
                             foreach (var association in flushDeleted)
                             {
@@ -1633,15 +1656,15 @@ WHERE " + Mapping.ColumnNameForAssociation + @" = " + Mapping.ParameterNameForAs
 
                     if (flushChanged != null)
                     {
-                        var schema = this.database.Mapping;
+                        var mapping = this.database.Mapping;
                         var cmdText = @"
-INSERT OR REPLACE INTO " + schema.GetTableName(roleType.RelationType) + @" (" + Mapping.ColumnNameForAssociation + @", " + Mapping.ColumnNameForRole + @")
+INSERT OR REPLACE INTO " + mapping.GetTableName(roleType.RelationType) + @" (" + Mapping.ColumnNameForAssociation + @", " + Mapping.ColumnNameForRole + @")
 VALUES (" + Mapping.ParameterNameForAssociation + @", " + Mapping.ParameterNameForRole + @");
 ";
                         using (var command = new SQLiteCommand(cmdText, this.connection, this.transaction))
                         {
-                            var associationParam = command.Parameters.Add(Mapping.ParameterNameForAssociation, schema.DbTypeForId);
-                            var roleParam = command.Parameters.Add(Mapping.ParameterNameForRole, schema.GetSqlDbType(roleType));
+                            var associationParam = command.Parameters.Add(Mapping.ParameterNameForAssociation, Mapping.DbTypeForId);
+                            var roleParam = command.Parameters.Add(Mapping.ParameterNameForRole, mapping.GetSqlDbType(roleType));
 
                             foreach (var association in flushChanged)
                             {
@@ -1717,13 +1740,13 @@ VALUES (" + Mapping.ParameterNameForAssociation + @", " + Mapping.ParameterNameF
 
                     if (flushDeleted != null)
                     {
-                        var schema = this.database.Mapping;
+                        var mapping = this.database.Mapping;
                         var cmdText = @"
-DELETE FROM " + schema.GetTableName(roleType.RelationType) + @"
+DELETE FROM " + mapping.GetTableName(roleType.RelationType) + @"
 WHERE " + Mapping.ColumnNameForAssociation + @" = " + Mapping.ParameterNameForAssociation;
                         using (var command = this.CreateCommand(cmdText))
                         {
-                            var associationParam = command.Parameters.Add(Mapping.ParameterNameForAssociation, schema.DbTypeForId);
+                            var associationParam = command.Parameters.Add(Mapping.ParameterNameForAssociation, Mapping.DbTypeForId);
 
                             foreach (var association in flushDeleted)
                             {
@@ -1735,18 +1758,18 @@ WHERE " + Mapping.ColumnNameForAssociation + @" = " + Mapping.ParameterNameForAs
 
                     if (flushAddedRoleByAssociation != null)
                     {
-                        var schema = this.database.Mapping;
+                        var mapping = this.database.Mapping;
                         var cmdText = @"
-DELETE FROM " + schema.GetTableName(roleType.RelationType) + @"
+DELETE FROM " + mapping.GetTableName(roleType.RelationType) + @"
 WHERE " + Mapping.ColumnNameForRole + @" = " + Mapping.ParameterNameForRole + @";
 
-INSERT INTO " + schema.GetTableName(roleType.RelationType) + @" (" + Mapping.ColumnNameForAssociation + @", " + Mapping.ColumnNameForRole + @")
+INSERT INTO " + mapping.GetTableName(roleType.RelationType) + @" (" + Mapping.ColumnNameForAssociation + @", " + Mapping.ColumnNameForRole + @")
 VALUES(" + Mapping.ParameterNameForAssociation + @", " + Mapping.ParameterNameForRole + @");
 ";
                         using (var command = this.CreateCommand(cmdText))
                         {
-                            var associationParam = command.Parameters.Add(Mapping.ParameterNameForAssociation, schema.DbTypeForId);
-                            var roleParam = command.Parameters.Add(Mapping.ParameterNameForRole, schema.GetSqlDbType(roleType));
+                            var associationParam = command.Parameters.Add(Mapping.ParameterNameForAssociation, Mapping.DbTypeForId);
+                            var roleParam = command.Parameters.Add(Mapping.ParameterNameForRole, mapping.GetSqlDbType(roleType));
 
                             foreach (var kvp in flushAddedRoleByAssociation)
                             {
@@ -1765,16 +1788,16 @@ VALUES(" + Mapping.ParameterNameForAssociation + @", " + Mapping.ParameterNameFo
 
                     if (flushRemovedRoleByAssociation != null)
                     {
-                        var schema = this.database.Mapping;
+                        var mapping = this.database.Mapping;
                         var cmdText = @"
-DELETE FROM " + schema.GetTableName(roleType.RelationType) + @"
+DELETE FROM " + mapping.GetTableName(roleType.RelationType) + @"
 WHERE " + Mapping.ColumnNameForAssociation + @" = " + Mapping.ParameterNameForAssociation + @"
 AND " + Mapping.ColumnNameForRole + @" = " + Mapping.ParameterNameForRole + @";
 ";
                         using (var command = this.CreateCommand(cmdText))
                         {
-                            var associationParam = command.Parameters.Add(Mapping.ParameterNameForAssociation, schema.DbTypeForId);
-                            var roleParam = command.Parameters.Add(Mapping.ParameterNameForRole, schema.GetSqlDbType(roleType));
+                            var associationParam = command.Parameters.Add(Mapping.ParameterNameForAssociation, Mapping.DbTypeForId);
+                            var roleParam = command.Parameters.Add(Mapping.ParameterNameForRole, mapping.GetSqlDbType(roleType));
 
                             foreach (var kvp in flushRemovedRoleByAssociation)
                             {
@@ -1853,13 +1876,13 @@ AND " + Mapping.ColumnNameForRole + @" = " + Mapping.ParameterNameForRole + @";
 
                     if (flushDeleted != null)
                     {
-                        var schema = this.database.Mapping;
+                        var mapping = this.database.Mapping;
                         var cmdText = @"
-DELETE FROM " + schema.GetTableName(roleType.RelationType) + @"
+DELETE FROM " + mapping.GetTableName(roleType.RelationType) + @"
 WHERE " + Mapping.ColumnNameForAssociation + @" = " + Mapping.ParameterNameForAssociation;
                         using (var command = this.CreateCommand(cmdText))
                         {
-                            var associationParam = command.Parameters.Add(Mapping.ParameterNameForAssociation, schema.DbTypeForId);
+                            var associationParam = command.Parameters.Add(Mapping.ParameterNameForAssociation, Mapping.DbTypeForId);
 
                             foreach (var association in flushDeleted)
                             {
@@ -1871,15 +1894,15 @@ WHERE " + Mapping.ColumnNameForAssociation + @" = " + Mapping.ParameterNameForAs
 
                     if (flushAddedRoleByAssociation != null)
                     {
-                        var schema = this.database.Mapping;
+                        var mapping = this.database.Mapping;
                         var cmdText = @"
-INSERT INTO " + schema.GetTableName(roleType.RelationType) + @" (" + Mapping.ColumnNameForAssociation + @", " + Mapping.ColumnNameForRole + @")
+INSERT INTO " + mapping.GetTableName(roleType.RelationType) + @" (" + Mapping.ColumnNameForAssociation + @", " + Mapping.ColumnNameForRole + @")
 VALUES(" + Mapping.ParameterNameForAssociation + @", " + Mapping.ParameterNameForRole + @");
 ";
                         using (var command = this.CreateCommand(cmdText))
                         {
-                            var associationParam = command.Parameters.Add(Mapping.ParameterNameForAssociation, schema.DbTypeForId);
-                            var roleParam = command.Parameters.Add(Mapping.ParameterNameForRole, schema.GetSqlDbType(roleType));
+                            var associationParam = command.Parameters.Add(Mapping.ParameterNameForAssociation, Mapping.DbTypeForId);
+                            var roleParam = command.Parameters.Add(Mapping.ParameterNameForRole, mapping.GetSqlDbType(roleType));
 
                             foreach (var kvp in flushAddedRoleByAssociation)
                             {
@@ -1898,16 +1921,16 @@ VALUES(" + Mapping.ParameterNameForAssociation + @", " + Mapping.ParameterNameFo
 
                     if (flushRemovedRoleByAssociation != null)
                     {
-                        var schema = this.database.Mapping;
+                        var mapping = this.database.Mapping;
                         var cmdText = @"
-DELETE FROM " + schema.GetTableName(roleType.RelationType) + @"
+DELETE FROM " + mapping.GetTableName(roleType.RelationType) + @"
 WHERE " + Mapping.ColumnNameForAssociation + @" = " + Mapping.ParameterNameForAssociation + @"
 AND " + Mapping.ColumnNameForRole + @" = " + Mapping.ParameterNameForRole + @";
 ";
                         using (var command = this.CreateCommand(cmdText))
                         {
-                            var associationParam = command.Parameters.Add(Mapping.ParameterNameForAssociation, schema.DbTypeForId);
-                            var roleParam = command.Parameters.Add(Mapping.ParameterNameForRole, schema.GetSqlDbType(roleType));
+                            var associationParam = command.Parameters.Add(Mapping.ParameterNameForAssociation, Mapping.DbTypeForId);
+                            var roleParam = command.Parameters.Add(Mapping.ParameterNameForRole, mapping.GetSqlDbType(roleType));
 
                             foreach (var kvp in flushRemovedRoleByAssociation)
                             {
@@ -1933,14 +1956,13 @@ AND " + Mapping.ColumnNameForRole + @" = " + Mapping.ParameterNameForRole + @";
         {
             if (this.changedObjects != null)
             {
-                var schema = this.database.Mapping;
                 var cmdText = @"
 UPDATE " + Mapping.TableNameForObjects + @"
 SET " + Mapping.ColumnNameForCache + " = " + Mapping.ColumnNameForCache + @" - 1
 WHERE " + Mapping.ColumnNameForObject + " = " + Mapping.ParameterNameForObject;
                 using (var command = this.CreateCommand(cmdText))
                 {
-                    var objectParam = command.Parameters.Add(Mapping.ParameterNameForObject, schema.DbTypeForId);
+                    var objectParam = command.Parameters.Add(Mapping.ParameterNameForObject, Mapping.DbTypeForId);
 
                     foreach (var changedObject in this.changedObjects)
                     {

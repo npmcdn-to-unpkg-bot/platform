@@ -24,13 +24,12 @@ namespace Allors.Databases.Memory
 
     public abstract class Database : IDatabase
     {
-                private readonly IObjectFactory objectFactory;
-
+        private readonly IObjectFactory objectFactory;
         private readonly Dictionary<IObjectType, object> concreteClassesByObjectType;
 
         protected Dictionary<string, object> Properties;
 
-        private readonly Guid id;
+        private readonly string id;
 
         protected Database(Configuration configuration)
         {
@@ -42,14 +41,14 @@ namespace Allors.Databases.Memory
 
             this.concreteClassesByObjectType = new Dictionary<IObjectType, object>();
 
-            this.id = configuration.Id.Equals(Guid.Empty) ? Guid.NewGuid() : configuration.Id;
+            this.id = string.IsNullOrWhiteSpace(configuration.Id) ? Guid.NewGuid().ToString("N").ToLowerInvariant() : configuration.Id;
         }
 
         public event ObjectNotLoadedEventHandler ObjectNotLoaded;
 
         public event RelationNotLoadedEventHandler RelationNotLoaded;
 
-        public Guid Id
+        public string Id
         {
             get { return this.id; }
         }

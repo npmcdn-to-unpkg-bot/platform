@@ -65,7 +65,6 @@ namespace Allors.Databases.SQLite.LongId.ReadCommitted
             var configuration = new Configuration
                                     {
                                         ObjectFactory = this.CreateObjectFactory(metaPopulation),
-                                        Id = Guid.NewGuid(),
                                         ConnectionString = ConnectionString
                                     };
             var database = new Database(configuration);
@@ -88,7 +87,6 @@ namespace Allors.Databases.SQLite.LongId.ReadCommitted
             var configuration = new Configuration
             {
                 ObjectFactory = this.ObjectFactory,
-                Id = Guid.NewGuid(),
                 ConnectionString = this.ConnectionString
             };
 

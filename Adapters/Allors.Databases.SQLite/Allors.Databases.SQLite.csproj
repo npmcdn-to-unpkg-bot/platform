@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IdSequence.cs" />
     <Compile Include="ChangeSet.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Database.cs" />

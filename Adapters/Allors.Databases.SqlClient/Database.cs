@@ -37,8 +37,9 @@ namespace Allors.Adapters.Database.SqlClient
 
         private readonly Mapping mapping;
 
+        private readonly string id;
+
         // Configuration
-        private readonly Guid id;
         private readonly ObjectIds objectIds;
         private readonly IObjectFactory objectFactory;
         private readonly IRoleCache roleCache;
@@ -57,22 +58,38 @@ namespace Allors.Adapters.Database.SqlClient
 
         public Database(Configuration configuration)
         {
-            this.id = configuration.Id;
-            if (this.id == Guid.Empty)
+            this.connectionString = configuration.ConnectionString;
+            if (this.connectionString == null)
             {
-                throw new Exception("Configuration.Id is missing");
+                throw new Exception("Configuration.ConnectionString is missing");
+            }
+
+            var connectionStringBuilder = new SqlConnectionStringBuilder(this.connectionString);
+            var applicationName = connectionStringBuilder.ApplicationName.Trim();
+            if (!string.IsNullOrWhiteSpace(applicationName))
+            {
+                this.id = applicationName;
+            }
+            else
+            {
+                if (!string.IsNullOrWhiteSpace(connectionStringBuilder.InitialCatalog))
+                {
+                    this.id = connectionStringBuilder.InitialCatalog.ToLowerInvariant();
+                }
+                else
+                {
+                    using (this.connection = new SqlConnection(this.connectionString))
+                    {
+                        this.connection.Open();
+                        this.id = this.connection.Database.ToLowerInvariant();
+                    }
+                }
             }
 
             this.objectFactory = configuration.ObjectFactory;
             if (this.objectFactory == null)
             {
                 throw new Exception("Configuration.ObjectFactory is missing");
-            }
-
-            this.connectionString = configuration.ConnectionString;
-            if (this.connectionString == null)
-            {
-                throw new Exception("Configuration.ConnectionString is missing");
             }
 
             this.objectIds = configuration.ObjectIds ?? new ObjectIdsInteger();
@@ -89,7 +106,7 @@ namespace Allors.Adapters.Database.SqlClient
 
         public event RelationNotLoadedEventHandler RelationNotLoaded;
         
-        public Guid Id 
+        public string Id 
         {
             get
             {
