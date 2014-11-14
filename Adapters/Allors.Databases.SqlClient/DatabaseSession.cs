@@ -71,6 +71,8 @@ namespace Allors.Adapters.Database.SqlClient
         private Dictionary<IAssociationType, Dictionary<ObjectId, ObjectId[]>> manyToManyAssociationByRoleByAssociationType;
         private Dictionary<IAssociationType, HashSet<ObjectId>> manyToManyTriggerFlushRolesByAssociationType;
 
+        private HashSet<ObjectId> objectsToFetch;
+
         public DatabaseSession(Database database)
         {
             this.database = database;
@@ -189,7 +191,22 @@ namespace Allors.Adapters.Database.SqlClient
             {
                 this.Flush();
                 this.UpdateCacheIds();
-                this.UpdateCache();
+
+                // update class cache
+                if (this.deletedObjects != null && this.deletedObjects.Count > 0)
+                {
+                    var deletedObjectsArray = new List<ObjectId>(this.deletedObjects).ToArray();
+                    this.roleCache.Invalidate(deletedObjectsArray);
+                    this.classCache.Invalidate(deletedObjectsArray);
+                }
+
+                // update role cache
+                if (this.changedObjects != null && this.changedObjects.Count > 0)
+                {
+                    var changedObjectsArray = new List<ObjectId>(this.changedObjects).ToArray();
+                    this.roleCache.Invalidate(changedObjectsArray);
+                }
+
                 this.Reset();
 
                 if (this.transaction != null)
@@ -232,9 +249,8 @@ namespace Allors.Adapters.Database.SqlClient
         {
             var cmdText = @"
 INSERT INTO " + this.Database.SchemaName + "." + Mapping.TableNameForObjects + " (" + Mapping.ColumnNameForType + ", " + Mapping.ColumnNameForCache + @")
+OUTPUT INSERTED." + Mapping.ColumnNameForObject + @"
 VALUES (" + Mapping.ParameterNameForType + ", " + Mapping.ParameterNameForCache + @");
-
-SELECT " + Mapping.ColumnNameForObject + @" = SCOPE_IDENTITY();
 ";
             using (var command = this.CreateCommand(cmdText))
             {
@@ -265,14 +281,64 @@ SELECT " + Mapping.ColumnNameForObject + @" = SCOPE_IDENTITY();
             }
         }
 
+
         public IObject[] Create(IClass objectType, int count)
         {
-            // TODO: Optimize
             var arrayType = this.Database.ObjectFactory.GetTypeForObjectType(objectType);
             var domainObjects = (IObject[])Array.CreateInstance(arrayType, count);
-            for (var i = 0; i < count; i++)
+
+            var cmdText = @"
+DECLARE @_x TABLE(
+    Id " + this.database.Mapping.SqlTypeForObject + @"
+);
+
+DECLARE @i INT = 0;
+
+WHILE @i < " + Mapping.ParameterNameForCount + @"
+BEGIN
+
+INSERT INTO " + this.Database.SchemaName + "." + Mapping.TableNameForObjects + " (" + Mapping.ColumnNameForType + ", " + Mapping.ColumnNameForCache + @")
+OUTPUT INSERTED." + Mapping.ColumnNameForObject + @" INTO @_x
+VALUES (" + Mapping.ParameterNameForType + ", " + Mapping.ParameterNameForCache + @");
+
+SET @i = @i + 1
+END
+
+
+SELECT Id from @_x;
+";
+            using (var command = this.CreateCommand(cmdText))
             {
-                domainObjects[i] = this.Create(objectType);
+                command.Parameters.Add(Mapping.ParameterNameForCount, SqlDbType.Int).Value = count;
+                command.Parameters.Add(Mapping.ParameterNameForType, Mapping.SqlDbTypeForType).Value = objectType.Id;
+                command.Parameters.Add(Mapping.ParameterNameForCache, Mapping.SqlDbTypeForCache).Value = Database.CacheDefaultValue;
+
+                if (this.classByObjectId == null)
+                {
+                    this.classByObjectId = new Dictionary<ObjectId, IClass>();
+                }
+
+                if (this.cacheIdByObjectId == null)
+                {
+                    this.cacheIdByObjectId = new Dictionary<ObjectId, int>();
+                }
+
+                using (var reader = command.ExecuteReader())
+                {
+                    var i = 0;
+                    while (reader.Read())
+                    {
+                        var objectId = this.database.ObjectIds.Parse(reader[0].ToString());
+
+                        this.classByObjectId[objectId] = objectType;
+                        this.cacheIdByObjectId[objectId] = Database.CacheDefaultValue;
+
+                        this.ChangeSet.OnCreated(objectId);
+                        var strategy = new Strategy(this, objectId);
+                        var domainObject = strategy.GetObject();
+                        domainObjects[i++] = domainObject;
+                    }
+                }
             }
 
             return domainObjects;
@@ -1830,22 +1896,6 @@ WHERE " + Mapping.ColumnNameForObject + " = " + Mapping.ParameterNameForObject;
                         command.ExecuteNonQuery();
                     }
                 }
-            }
-        }
-
-        private void UpdateCache()
-        {
-            if (this.deletedObjects != null && this.deletedObjects.Count > 0)
-            {
-                var deletedObjectsArray = new List<ObjectId>(this.deletedObjects).ToArray();
-                this.roleCache.Invalidate(deletedObjectsArray);
-                this.classCache.Invalidate(deletedObjectsArray);
-            }
-
-            if (this.changedObjects != null && this.changedObjects.Count > 0)
-            {
-                var changedObjectsArray = new List<ObjectId>(this.changedObjects).ToArray();
-                this.roleCache.Invalidate(changedObjectsArray);
             }
         }
 

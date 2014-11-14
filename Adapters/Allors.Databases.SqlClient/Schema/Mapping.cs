@@ -44,6 +44,7 @@ namespace Allors.Adapters.Database.SqlClient
         public const string TableTypeColumnNameForAssociation = "_a";
         public const string TableTypeColumnNameForRole = "_r";
 
+        public const string ParameterNameForCount = ParamPrefix + "cnt";
         public const string ParameterNameForObject = ParamPrefix + "o";
         public const string ParameterNameForType = ParamPrefix + "t";
         public const string ParameterNameForCache = ParamPrefix + "c";
