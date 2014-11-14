@@ -87,7 +87,7 @@ namespace Allors.Adapters.Database.SqlClient
                 }
                 else
                 {
-                    if (!objectColumn.DataType.Equals(this.Database.Mapping.SqlTypeForId))
+                    if (!objectColumn.DataType.Equals(this.Database.Mapping.SqlTypeForObject))
                     {
                         this.InvalidColumns.Add(objectColumn);
                     }
@@ -149,7 +149,7 @@ namespace Allors.Adapters.Database.SqlClient
                     }
                     else
                     {
-                        if (!associationColumn.DataType.Equals(this.Database.Mapping.SqlTypeForId))
+                        if (!associationColumn.DataType.Equals(this.Database.Mapping.SqlTypeForObject))
                         {
                             this.InvalidColumns.Add(associationColumn);
                         }

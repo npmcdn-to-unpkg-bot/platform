@@ -88,7 +88,7 @@ CREATE SCHEMA " + this.mapping.Database.SchemaName;
                     {
                         var cmdText = @"
 CREATE TYPE " + this.mapping.Database.SchemaName + "." + Mapping.TableTypeNameForObjects + @" AS TABLE
-(" + Mapping.TableTypeColumnNameForObject + " " + this.mapping.SqlTypeForId + @")
+(" + Mapping.TableTypeColumnNameForObject + " " + this.mapping.SqlTypeForObject + @")
 ";
                         using (var command = new SqlCommand(cmdText, connection))
                         {
@@ -109,7 +109,7 @@ CREATE TYPE " + this.mapping.Database.SchemaName + "." + Mapping.TableTypeNameFo
 
                                 var cmdText = @"
 CREATE TYPE " + this.mapping.Database.SchemaName + "." + tableTypeName + @" AS TABLE
-(" + Mapping.TableTypeColumnNameForAssociation + " " + this.mapping.SqlTypeForId + @",
+(" + Mapping.TableTypeColumnNameForAssociation + " " + this.mapping.SqlTypeForObject + @",
 " + Mapping.TableTypeColumnNameForRole + " " + tableTypeSqlType + @")
 ";
                                 using (var command = new SqlCommand(cmdText, connection))
@@ -140,7 +140,7 @@ TRUNCATE TABLE " + this.mapping.Database.SchemaName + "." + Mapping.TableNameFor
                          var cmdText = @"
 CREATE TABLE " + this.mapping.Database.SchemaName + "." + Mapping.TableNameForObjects + @"
 (
-    " + Mapping.ColumnNameForObject + @" " + this.mapping.SqlTypeForId + @" IDENTITY(1,1),
+    " + Mapping.ColumnNameForObject + @" " + this.mapping.SqlTypeForObject + @" IDENTITY(1,1),
     " + Mapping.ColumnNameForType + @" " + Mapping.SqlTypeForType + @",
     " + Mapping.ColumnNameForCache + @" " + Mapping.SqlTypeForCache + @",
     PRIMARY KEY (O)
@@ -191,7 +191,7 @@ TRUNCATE TABLE " + this.mapping.Database.SchemaName + "." + tableName + @";
                             var cmdText = @"
 CREATE TABLE " + this.mapping.Database.SchemaName + "." + tableName + @"
 (
-    " + Mapping.ColumnNameForAssociation + @" " + this.mapping.SqlTypeForId + @",
+    " + Mapping.ColumnNameForAssociation + @" " + this.mapping.SqlTypeForObject + @",
     " + Mapping.ColumnNameForRole + @" " + sqlTypeForRole + @",
     PRIMARY KEY ( " + primaryKeys + @")
 );

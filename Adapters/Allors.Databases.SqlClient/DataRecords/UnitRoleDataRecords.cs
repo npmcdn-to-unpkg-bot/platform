@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="CompositeRoleDataRecords.cs" company="Allors bvba">
+// <copyright file="UnitRoleDataRecords.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -46,31 +46,7 @@ namespace Allors.Adapters.Database.SqlClient.IntegerId
 
         public IEnumerator<SqlDataRecord> GetEnumerator()
         {
-            SqlMetaData unitMetaData;
-
-            var unit = (IUnit)roleType.ObjectType;
-            switch (unit.UnitTag)
-            {
-                case UnitTags.AllorsBinary:
-                case UnitTags.AllorsString:
-                    unitMetaData = new SqlMetaData(Mapping.TableTypeColumnNameForRole, this.mapping.GetSqlDbType(this.roleType), -1);
-                    break;
-                case UnitTags.AllorsDecimal:
-                    unitMetaData = new SqlMetaData(Mapping.TableTypeColumnNameForRole, this.mapping.GetSqlDbType(this.roleType), (byte)roleType.Precision.Value, (byte)roleType.Scale.Value);
-                    break;
-                default:
-                    unitMetaData = new SqlMetaData(Mapping.TableTypeColumnNameForRole, this.mapping.GetSqlDbType(this.roleType));
-                    break;
-            }
-
-
-            var metaData = new[]
-                {
-                    new SqlMetaData(Mapping.TableTypeColumnNameForAssociation, this.mapping.SqlDbTypeForId),
-                    unitMetaData
-                };
-
-            var sqlDataRecord = new SqlDataRecord(metaData);
+            var sqlDataRecord = new SqlDataRecord(this.mapping.GetSqlMetaData(this.roleType));
             foreach (var association in this.associations)
             {
                 sqlDataRecord.SetValue(0, association.Value);

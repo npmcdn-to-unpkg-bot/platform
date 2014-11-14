@@ -23,29 +23,28 @@ namespace Allors.Adapters.Database.SqlClient.IntegerId
     using System.Collections;
     using System.Collections.Generic;
 
+    using Allors.Meta;
+
     using Microsoft.SqlServer.Server;
 
     public class CompositeRoleDataRecords : IEnumerable<SqlDataRecord>
     {
         private readonly Mapping mapping;
+        private readonly IRoleType roleType;
         private readonly IList<ObjectId> associations;
         private readonly Dictionary<ObjectId, ObjectId> roleByAssociation;
 
-        public CompositeRoleDataRecords(Mapping mapping, IList<ObjectId> associations, Dictionary<ObjectId, ObjectId> roleByAssociation)
+        public CompositeRoleDataRecords(Mapping mapping, IRoleType roleType, IList<ObjectId> associations, Dictionary<ObjectId, ObjectId> roleByAssociation)
         {
             this.mapping = mapping;
+            this.roleType = roleType;
             this.associations = associations;
             this.roleByAssociation = roleByAssociation;
         }
 
         public IEnumerator<SqlDataRecord> GetEnumerator()
         {
-            var metaData = new[]
-                {
-                    new SqlMetaData(Mapping.TableTypeColumnNameForAssociation, this.mapping.SqlDbTypeForId), 
-                    new SqlMetaData(Mapping.TableTypeColumnNameForRole, this.mapping.SqlDbTypeForId)
-                };
-            var sqlDataRecord = new SqlDataRecord(metaData);
+            var sqlDataRecord = new SqlDataRecord(this.mapping.GetSqlMetaData(this.roleType));
             foreach (var association in this.associations)
             {
                 sqlDataRecord.SetValue(0, association.Value);

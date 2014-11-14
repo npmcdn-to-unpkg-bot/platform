@@ -39,8 +39,7 @@ namespace Allors.Adapters.Database.SqlClient.IntegerId
 
         public IEnumerator<SqlDataRecord> GetEnumerator()
         {
-            var metaData = new SqlMetaData(Mapping.TableTypeColumnNameForObject, this.mapping.SqlDbTypeForId);
-            var sqlDataRecord = new SqlDataRecord(metaData);
+            var sqlDataRecord = new SqlDataRecord(this.mapping.SqlMetaDataForObject);
             foreach (var objectId in this.objectIds)
             {
                 sqlDataRecord.SetInt32(0, (int)objectId.Value);

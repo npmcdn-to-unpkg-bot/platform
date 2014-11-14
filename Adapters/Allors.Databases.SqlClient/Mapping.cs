@@ -22,6 +22,8 @@ namespace Allors.Adapters.Database.SqlClient
 
     using Allors.Meta;
 
+    using Microsoft.SqlServer.Server;
+
     public class Mapping
     {
         public const string ParamPrefix = "@";
@@ -41,7 +43,7 @@ namespace Allors.Adapters.Database.SqlClient
         public const string TableTypeNameForCompositeRelations = "_t_c";
         public const string TableTypeColumnNameForAssociation = "_a";
         public const string TableTypeColumnNameForRole = "_r";
-        
+
         public const string ParameterNameForObject = ParamPrefix + "o";
         public const string ParameterNameForType = ParamPrefix + "t";
         public const string ParameterNameForCache = ParamPrefix + "c";
@@ -57,8 +59,8 @@ namespace Allors.Adapters.Database.SqlClient
 
         private readonly Database database;
 
-        private readonly string sqlTypeForId;
-        private readonly SqlDbType sqlDbTypeForId;
+        private readonly string sqlTypeForObject;
+        private readonly SqlDbType sqlDbTypeForObject;
 
         private readonly Dictionary<IRelationType, string> tableNameByRelationType;
         private readonly Dictionary<IRoleType, string> sqlTypeByRoleType;
@@ -66,6 +68,10 @@ namespace Allors.Adapters.Database.SqlClient
 
         private readonly Dictionary<IRelationType, string> tableTypeNameByRelationType;
         private readonly Dictionary<IRelationType, string> tableTypeSqlTypeByRelationType;
+
+        private readonly SqlMetaData sqlMetaDataForObject;
+        private readonly SqlMetaData[] sqlMetaDataForCompositeRelation;
+        private readonly Dictionary<IRoleType, SqlMetaData[]> sqlMetaDataByRoleType;
 
         public Mapping(Database database)
         {
@@ -78,13 +84,13 @@ namespace Allors.Adapters.Database.SqlClient
 
             if (this.database.ObjectIds is ObjectIdsInteger)
             {
-                this.sqlTypeForId = "int";
-                this.sqlDbTypeForId = SqlDbType.Int;
+                this.sqlTypeForObject = "int";
+                this.sqlDbTypeForObject = SqlDbType.Int;
             }
             else if (this.database.ObjectIds is ObjectIdsLong)
             {
-                this.sqlTypeForId = "bigint";
-                this.sqlDbTypeForId = SqlDbType.BigInt;
+                this.sqlTypeForObject = "bigint";
+                this.sqlDbTypeForObject = SqlDbType.BigInt;
             }
             else
             {
@@ -98,15 +104,26 @@ namespace Allors.Adapters.Database.SqlClient
             this.tableTypeNameByRelationType = new Dictionary<IRelationType, string>();
             this.tableTypeSqlTypeByRelationType = new Dictionary<IRelationType, string>();
 
+            this.sqlMetaDataByRoleType = new Dictionary<IRoleType, SqlMetaData[]>();
+            this.sqlMetaDataForObject = new SqlMetaData(TableTypeColumnNameForObject, this.SqlDbTypeForObject);
+            this.sqlMetaDataForCompositeRelation = new[]
+            {
+                new SqlMetaData(TableTypeColumnNameForAssociation, this.SqlDbTypeForObject), 
+                new SqlMetaData(TableTypeColumnNameForRole, this.SqlDbTypeForObject)
+            };
+
+            var sqlMetaDataBySqlType = new Dictionary<string, SqlMetaData[]>();
             foreach (var relationType in this.Database.MetaPopulation.RelationTypes)
             {
                 var tableName = "_" + relationType.Id.ToString("N");
                 SqlDbType sqlDbType;
                 string sqlType;
 
-                var tableTypeName = TableTypeNameForCompositeRelations;
-                var tableTypeSqlType = this.sqlTypeForId;
+                var sqlMetaData = this.sqlMetaDataForCompositeRelation;
 
+                var tableTypeName = TableTypeNameForCompositeRelations;
+                var tableTypeSqlType = this.sqlTypeForObject;
+                
                 var roleType = relationType.RoleType;
                 var unit = roleType.ObjectType as IUnit;
                 if (unit != null)
@@ -128,6 +145,18 @@ namespace Allors.Adapters.Database.SqlClient
                             
                             tableTypeName = "_t_bi";
                             tableTypeSqlType = "varbinary(MAX)";
+
+                            if (!sqlMetaDataBySqlType.ContainsKey(tableTypeSqlType))
+                            {
+                                sqlMetaDataBySqlType[tableTypeSqlType] = new[]
+                                    {
+                                        new SqlMetaData(TableTypeColumnNameForAssociation, this.SqlDbTypeForObject), 
+                                        new SqlMetaData(TableTypeColumnNameForRole, sqlDbType, -1)
+                                    };    
+                            }
+
+                            sqlMetaData = sqlMetaDataBySqlType[tableTypeSqlType];
+
                             break;
 
                         case UnitTags.AllorsBoolean:
@@ -137,6 +166,17 @@ namespace Allors.Adapters.Database.SqlClient
 
                             tableTypeName = "_t_bo";
                             tableTypeSqlType = sqlType;
+
+                            if (!sqlMetaDataBySqlType.ContainsKey(tableTypeSqlType))
+                            {
+                                sqlMetaDataBySqlType[tableTypeSqlType] = new[]
+                                    {
+                                        new SqlMetaData(TableTypeColumnNameForAssociation, this.SqlDbTypeForObject), 
+                                        new SqlMetaData(TableTypeColumnNameForRole, sqlDbType)
+                                    };    
+                            }
+
+                            sqlMetaData = sqlMetaDataBySqlType[tableTypeSqlType];
                             break;
 
                         case UnitTags.AllorsDecimal:
@@ -146,6 +186,17 @@ namespace Allors.Adapters.Database.SqlClient
 
                             tableTypeName = "_t_d_" + roleType.Precision + "_" + roleType.Scale;
                             tableTypeSqlType = sqlType;
+
+                            if (!sqlMetaDataBySqlType.ContainsKey(tableTypeSqlType))
+                            {
+                                sqlMetaDataBySqlType[tableTypeSqlType] = new[]
+                                    {
+                                        new SqlMetaData(TableTypeColumnNameForAssociation, this.SqlDbTypeForObject), 
+                                        new SqlMetaData(TableTypeColumnNameForRole, sqlDbType, (byte)roleType.Precision.Value, (byte)roleType.Scale.Value)
+                                    };    
+                            }
+
+                            sqlMetaData = sqlMetaDataBySqlType[tableTypeSqlType];
                             break;
 
                         case UnitTags.AllorsFloat:
@@ -155,6 +206,17 @@ namespace Allors.Adapters.Database.SqlClient
 
                             tableTypeName = "_t_f";
                             tableTypeSqlType = sqlType;
+
+                            if (!sqlMetaDataBySqlType.ContainsKey(tableTypeSqlType))
+                            {
+                                sqlMetaDataBySqlType[tableTypeSqlType] = new[]
+                                    {
+                                        new SqlMetaData(TableTypeColumnNameForAssociation, this.SqlDbTypeForObject), 
+                                        new SqlMetaData(TableTypeColumnNameForRole, sqlDbType)
+                                    };    
+                            }
+
+                            sqlMetaData = sqlMetaDataBySqlType[tableTypeSqlType];
                             break;
 
                         case UnitTags.AllorsInteger:
@@ -164,6 +226,17 @@ namespace Allors.Adapters.Database.SqlClient
 
                             tableTypeName = "_t_i";
                             tableTypeSqlType = sqlType;
+                            
+                            if (!sqlMetaDataBySqlType.ContainsKey(tableTypeSqlType))
+                            {
+                                sqlMetaDataBySqlType[tableTypeSqlType] = new[]
+                                    {
+                                        new SqlMetaData(TableTypeColumnNameForAssociation, this.SqlDbTypeForObject), 
+                                        new SqlMetaData(TableTypeColumnNameForRole, sqlDbType)
+                                    };    
+                            }
+
+                            sqlMetaData = sqlMetaDataBySqlType[tableTypeSqlType];
                             break;
 
                         case UnitTags.AllorsString:
@@ -181,6 +254,17 @@ namespace Allors.Adapters.Database.SqlClient
 
                             tableTypeName = "_t_s";
                             tableTypeSqlType = "nvarchar(MAX)";
+
+                            if (!sqlMetaDataBySqlType.ContainsKey(tableTypeSqlType))
+                            {
+                                sqlMetaDataBySqlType[tableTypeSqlType] = new[]
+                                    {
+                                        new SqlMetaData(TableTypeColumnNameForAssociation, this.SqlDbTypeForObject), 
+                                        new SqlMetaData(TableTypeColumnNameForRole, sqlDbType, -1)
+                                    };    
+                            }
+
+                            sqlMetaData = sqlMetaDataBySqlType[tableTypeSqlType];
                             break;
 
                         case UnitTags.AllorsUnique:
@@ -190,6 +274,17 @@ namespace Allors.Adapters.Database.SqlClient
 
                             tableTypeName = "_t_u";
                             tableTypeSqlType = sqlType;
+
+                            if (!sqlMetaDataBySqlType.ContainsKey(tableTypeSqlType))
+                            {
+                                sqlMetaDataBySqlType[tableTypeSqlType] = new[]
+                                    {
+                                        new SqlMetaData(TableTypeColumnNameForAssociation, this.SqlDbTypeForObject), 
+                                        new SqlMetaData(TableTypeColumnNameForRole, sqlDbType)
+                                    };    
+                            }
+
+                            sqlMetaData = sqlMetaDataBySqlType[tableTypeSqlType];
                             break;
 
                         default:
@@ -222,8 +317,8 @@ namespace Allors.Adapters.Database.SqlClient
                     }
 
 
-                    sqlDbType = this.SqlDbTypeForId;
-                    sqlType = this.SqlTypeForId;
+                    sqlDbType = this.SqlDbTypeForObject;
+                    sqlType = this.SqlTypeForObject;
                 }
 
                 this.tableNameByRelationType[relationType] = tableName.ToLowerInvariant();
@@ -232,22 +327,24 @@ namespace Allors.Adapters.Database.SqlClient
 
                 this.tableTypeNameByRelationType[relationType] = tableTypeName.ToLowerInvariant();
                 this.tableTypeSqlTypeByRelationType[relationType] = tableTypeSqlType.ToLowerInvariant();
+
+                this.sqlMetaDataByRoleType[roleType] = sqlMetaData;
             }
         }
 
-        public string SqlTypeForId
+        public string SqlTypeForObject
         {
             get
             {
-                return this.sqlTypeForId;
+                return this.sqlTypeForObject;
             }
         }
 
-        public SqlDbType SqlDbTypeForId
+        public SqlDbType SqlDbTypeForObject
         {
             get
             {
-                return this.sqlDbTypeForId;
+                return this.sqlDbTypeForObject;
             }
         }
 
@@ -256,6 +353,14 @@ namespace Allors.Adapters.Database.SqlClient
             get
             {
                 return this.database;
+            }
+        }
+
+        public SqlMetaData SqlMetaDataForObject
+        {
+            get
+            {
+                return this.sqlMetaDataForObject;
             }
         }
 
@@ -302,6 +407,13 @@ namespace Allors.Adapters.Database.SqlClient
             string tableTypeSqlType;
             this.tableTypeSqlTypeByRelationType.TryGetValue(relationType, out tableTypeSqlType);
             return tableTypeSqlType;
+        }
+
+        public SqlMetaData[] GetSqlMetaData(IRoleType roleType)
+        {
+            SqlMetaData[] sqlMetaData;
+            this.sqlMetaDataByRoleType.TryGetValue(roleType, out sqlMetaData);
+            return sqlMetaData;
         }
     }
 }

@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="CompositeRoleDataRecords.cs" company="Allors bvba">
+// <copyright file="CompositesRoleDataRecords.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -23,27 +23,26 @@ namespace Allors.Adapters.Database.SqlClient.IntegerId
     using System.Collections;
     using System.Collections.Generic;
 
+    using Allors.Meta;
+
     using Microsoft.SqlServer.Server;
 
     public class CompositesRoleDataRecords : IEnumerable<SqlDataRecord>
     {
         private readonly Mapping mapping;
+        private readonly IRoleType roleType;
         private readonly Dictionary<ObjectId, ObjectId[]> roleByAssociation;
 
-        public CompositesRoleDataRecords(Mapping mapping, Dictionary<ObjectId, ObjectId[]> roleByAssociation)
+        public CompositesRoleDataRecords(Mapping mapping, IRoleType roleType, Dictionary<ObjectId, ObjectId[]> roleByAssociation)
         {
             this.mapping = mapping;
+            this.roleType = roleType;
             this.roleByAssociation = roleByAssociation;
         }
 
         public IEnumerator<SqlDataRecord> GetEnumerator()
         {
-            var metaData = new[]
-                {
-                    new SqlMetaData(Mapping.TableTypeColumnNameForAssociation, this.mapping.SqlDbTypeForId), 
-                    new SqlMetaData(Mapping.TableTypeColumnNameForRole, this.mapping.SqlDbTypeForId)
-                };
-            var sqlDataRecord = new SqlDataRecord(metaData);
+            var sqlDataRecord = new SqlDataRecord(this.mapping.GetSqlMetaData(this.roleType));
             foreach (var entry in this.roleByAssociation)
             {
                 var association = entry.Key;

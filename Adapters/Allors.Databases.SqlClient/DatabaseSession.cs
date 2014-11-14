@@ -368,7 +368,7 @@ END
 ";
             using (var command = this.CreateCommand(cmdText))
             {
-                command.Parameters.Add(Mapping.ParameterNameForObject, mapping.SqlDbTypeForId).Value = objectId.Value;
+                command.Parameters.Add(Mapping.ParameterNameForObject, mapping.SqlDbTypeForObject).Value = objectId.Value;
                 command.Parameters.Add(Mapping.ParameterNameForType, Mapping.SqlDbTypeForType).Value = objectType.Id;
                 command.Parameters.Add(Mapping.ParameterNameForCache, Mapping.SqlDbTypeForCache).Value = Database.CacheDefaultValue;
                 command.ExecuteNonQuery();
@@ -1251,7 +1251,7 @@ WHERE " + Mapping.ColumnNameForObject + @" = " + Mapping.ParameterNameForObject 
 ";
             using (var command = this.CreateCommand(cmdText))
             {
-                command.Parameters.Add(Mapping.ParameterNameForObject, this.database.Mapping.SqlDbTypeForId).Value = objectId.Value;
+                command.Parameters.Add(Mapping.ParameterNameForObject, this.database.Mapping.SqlDbTypeForObject).Value = objectId.Value;
                 using (var reader = command.ExecuteReader())
                 {
                     if (reader.Read())
@@ -1299,7 +1299,7 @@ WHERE " + Mapping.ColumnNameForAssociation + @"=" + Mapping.ParameterNameForAsso
 ";
             using (var command = this.CreateCommand(cmdText))
             {
-                command.Parameters.Add(Mapping.ParameterNameForAssociation, schema.SqlDbTypeForId).Value = association.Value;
+                command.Parameters.Add(Mapping.ParameterNameForAssociation, schema.SqlDbTypeForObject).Value = association.Value;
                 var role = command.ExecuteScalar();
 
                 var cacheId = this.GetCacheId(association);
@@ -1322,7 +1322,7 @@ WHERE " + Mapping.ColumnNameForAssociation + @"=" + Mapping.ParameterNameForAsso
             {
                 ObjectId role = null;
 
-                command.Parameters.Add(Mapping.ParameterNameForAssociation, schema.SqlDbTypeForId).Value = association.Value;
+                command.Parameters.Add(Mapping.ParameterNameForAssociation, schema.SqlDbTypeForObject).Value = association.Value;
                 var result = command.ExecuteScalar();
                 if (result != null)
                 {
@@ -1348,7 +1348,7 @@ WHERE " + Mapping.ColumnNameForAssociation + @"=" + Mapping.ParameterNameForAsso
             List<ObjectId> roles = null;
             using (var command = this.CreateCommand(cmdText))
             {
-                command.Parameters.Add(Mapping.ParameterNameForAssociation, schema.SqlDbTypeForId).Value = association.Value;
+                command.Parameters.Add(Mapping.ParameterNameForAssociation, schema.SqlDbTypeForObject).Value = association.Value;
                 using (var reader = command.ExecuteReader())
                 {
                     while (reader.Read())
@@ -1384,7 +1384,7 @@ WHERE " + Mapping.ColumnNameForRole + @"=" + Mapping.ParameterNameForRole + @";
 ";
             using (var command = this.CreateCommand(cmdText))
             {
-                command.Parameters.Add(Mapping.ParameterNameForRole, schema.SqlDbTypeForId).Value = role.Value;
+                command.Parameters.Add(Mapping.ParameterNameForRole, schema.SqlDbTypeForObject).Value = role.Value;
                 var result = command.ExecuteScalar();
                 if (result != null)
                 {
@@ -1408,7 +1408,7 @@ WHERE " + Mapping.ColumnNameForRole + @"=" + Mapping.ParameterNameForRole + @";
             List<ObjectId> associations = null;
             using (var command = this.CreateCommand(cmdText))
             {
-                command.Parameters.Add(Mapping.ParameterNameForRole, schema.SqlDbTypeForId).Value = role.Value;
+                command.Parameters.Add(Mapping.ParameterNameForRole, schema.SqlDbTypeForObject).Value = role.Value;
                 using (var reader = command.ExecuteReader())
                 {
                     while (reader.Read())
@@ -1439,7 +1439,7 @@ DELETE FROM " + this.Database.SchemaName + "." + Mapping.TableNameForObjects + @
 WHERE " + Mapping.ColumnNameForObject + @" = " + Mapping.ParameterNameForObject;
                 using (var command = this.CreateCommand(cmdText))
                 {
-                    var associationParam = command.Parameters.Add(Mapping.ParameterNameForObject, schema.SqlDbTypeForId);
+                    var associationParam = command.Parameters.Add(Mapping.ParameterNameForObject, schema.SqlDbTypeForObject);
 
                     foreach (var association in this.flushDeletedObjects)
                     {
@@ -1528,7 +1528,7 @@ WHEN NOT MATCHED THEN
 ";
                         using (var command = this.CreateCommand(cmdText))
                         {
-                            var compositeRoleDataRecords = new CompositeRoleDataRecords(mapping, flushChanged, roleByAssociation);
+                            var compositeRoleDataRecords = new CompositeRoleDataRecords(mapping, roleType, flushChanged, roleByAssociation);
                             var parameter = command.Parameters.Add(Mapping.ParameterNameForRelationTable, SqlDbType.Structured);
                             parameter.TypeName = this.Database.SchemaName + "." + mapping.GetTableTypeName(relationType);
                             parameter.Value = compositeRoleDataRecords;
@@ -1573,7 +1573,7 @@ VALUES(_Y." + Mapping.TableTypeColumnNameForAssociation + @", _Y." + Mapping.Tab
 ";
                         using (var command = new SqlCommand(cmdText, this.connection, this.transaction))
                         {
-                            var compositeRoleDataRecords = new CompositeRoleDataRecords(mapping, flushChanged, roleByAssociation);
+                            var compositeRoleDataRecords = new CompositeRoleDataRecords(mapping, roleType, flushChanged, roleByAssociation);
                             var parameter = command.Parameters.Add(Mapping.ParameterNameForRelationTable, SqlDbType.Structured);
                             parameter.TypeName = this.Database.SchemaName + "." + mapping.GetTableTypeName(relationType);
                             parameter.Value = compositeRoleDataRecords;
@@ -1657,7 +1657,7 @@ SELECT " + Mapping.TableTypeColumnNameForAssociation + ", " + Mapping.TableTypeC
 ";
                         using (var command = this.CreateCommand(cmdText))
                         {
-                            var compositesRoleDataRecords = new CompositesRoleDataRecords(mapping, flushAddedRoleByAssociation);
+                            var compositesRoleDataRecords = new CompositesRoleDataRecords(mapping, roleType, flushAddedRoleByAssociation);
                             var parameter = command.Parameters.Add(Mapping.ParameterNameForRelationTable, SqlDbType.Structured);
                             parameter.TypeName = this.Database.SchemaName + "." + mapping.GetTableTypeName(relationType);
                             parameter.Value = compositesRoleDataRecords;
@@ -1678,7 +1678,7 @@ WHERE _x." + Mapping.ColumnNameForRole + @" = _y." + Mapping.TableTypeColumnName
 ";
                         using (var command = this.CreateCommand(cmdText))
                         {
-                            var compositesRoleDataRecords = new CompositesRoleDataRecords(mapping, flushRemovedRoleByAssociation);
+                            var compositesRoleDataRecords = new CompositesRoleDataRecords(mapping, roleType, flushRemovedRoleByAssociation);
                             var parameter = command.Parameters.Add(Mapping.ParameterNameForRelationTable, SqlDbType.Structured);
                             parameter.TypeName = this.Database.SchemaName + "." + mapping.GetTableTypeName(relationType);
                             parameter.Value = compositesRoleDataRecords;
@@ -1758,7 +1758,7 @@ SELECT " + Mapping.TableTypeColumnNameForAssociation + ", " + Mapping.TableTypeC
 ";
                         using (var command = this.CreateCommand(cmdText))
                         {
-                            var compositesRoleDataRecords = new CompositesRoleDataRecords(mapping, flushAddedRoleByAssociation);
+                            var compositesRoleDataRecords = new CompositesRoleDataRecords(mapping, roleType, flushAddedRoleByAssociation);
                             var parameter = command.Parameters.Add(Mapping.ParameterNameForRelationTable, SqlDbType.Structured);
                             parameter.TypeName = this.Database.SchemaName + "." + mapping.GetTableTypeName(relationType);
                             parameter.Value = compositesRoleDataRecords;
@@ -1779,7 +1779,7 @@ WHERE _x." + Mapping.ColumnNameForRole + @" = _y." + Mapping.TableTypeColumnName
 ";
                         using (var command = this.CreateCommand(cmdText))
                         {
-                            var compositesRoleDataRecords = new CompositesRoleDataRecords(mapping, flushRemovedRoleByAssociation);
+                            var compositesRoleDataRecords = new CompositesRoleDataRecords(mapping, roleType, flushRemovedRoleByAssociation);
                             var parameter = command.Parameters.Add(Mapping.ParameterNameForRelationTable, SqlDbType.Structured);
                             parameter.TypeName = this.Database.SchemaName + "." + mapping.GetTableTypeName(relationType);
                             parameter.Value = compositesRoleDataRecords;
@@ -1822,7 +1822,7 @@ SET " + Mapping.ColumnNameForCache + " = " + Mapping.ColumnNameForCache + @" - 1
 WHERE " + Mapping.ColumnNameForObject + " = " + Mapping.ParameterNameForObject;
                 using (var command = this.CreateCommand(cmdText))
                 {
-                    var objectParam = command.Parameters.Add(Mapping.ParameterNameForObject, schema.SqlDbTypeForId);
+                    var objectParam = command.Parameters.Add(Mapping.ParameterNameForObject, schema.SqlDbTypeForObject);
 
                     foreach (var changedObject in this.changedObjects)
                     {
