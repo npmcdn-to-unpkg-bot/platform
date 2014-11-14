@@ -99,7 +99,19 @@ namespace Allors.Adapters.Database.SqlClient
             this.schemaName = configuration.SchemaName ?? "allors";
             this.isolationLevel = configuration.IsolationLevel ?? IsolationLevel.Snapshot;
 
-            this.mapping = new Mapping(this);
+
+            if (this.ObjectIds is ObjectIdsInteger)
+            {
+                this.mapping = new MappingInteger(this);
+            }
+            else if (this.ObjectIds is ObjectIdsLong)
+            {
+                this.mapping = new MappingLong(this);
+            }
+            else
+            {
+                throw new NotSupportedException("ObjectIds of type " + this.ObjectIds.GetType() + " are not supported.");
+            }   
         }
 
         public event ObjectNotLoadedEventHandler ObjectNotLoaded;

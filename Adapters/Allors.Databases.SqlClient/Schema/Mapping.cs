@@ -24,7 +24,7 @@ namespace Allors.Adapters.Database.SqlClient
 
     using Microsoft.SqlServer.Server;
 
-    public class Mapping
+    public abstract class Mapping
     {
         public const string ParamPrefix = "@";
 
@@ -70,31 +70,17 @@ namespace Allors.Adapters.Database.SqlClient
         private readonly Dictionary<IRelationType, string> tableTypeSqlTypeByRelationType;
 
         private readonly SqlMetaData sqlMetaDataForObject;
-        private readonly SqlMetaData[] sqlMetaDataForCompositeRelation;
         private readonly Dictionary<IRoleType, SqlMetaData[]> sqlMetaDataByRoleType;
 
-        public Mapping(Database database)
+        protected Mapping(Database database, string sqlTypeForObject, SqlDbType sqlDbTypeForObject)
         {
             this.database = database;
+            this.sqlTypeForObject = sqlTypeForObject;
+            this.sqlDbTypeForObject = sqlDbTypeForObject;
 
             if (!this.database.MetaPopulation.IsValid)
             {
                 throw new Exception("MetaPopulation is invalid.");
-            }
-
-            if (this.database.ObjectIds is ObjectIdsInteger)
-            {
-                this.sqlTypeForObject = "int";
-                this.sqlDbTypeForObject = SqlDbType.Int;
-            }
-            else if (this.database.ObjectIds is ObjectIdsLong)
-            {
-                this.sqlTypeForObject = "bigint";
-                this.sqlDbTypeForObject = SqlDbType.BigInt;
-            }
-            else
-            {
-                throw new NotSupportedException("ObjectIds of type " + this.database.ObjectIds.GetType() + " are not supported.");
             }
 
             this.tableNameByRelationType = new Dictionary<IRelationType, string>();
@@ -106,20 +92,21 @@ namespace Allors.Adapters.Database.SqlClient
 
             this.sqlMetaDataByRoleType = new Dictionary<IRoleType, SqlMetaData[]>();
             this.sqlMetaDataForObject = new SqlMetaData(TableTypeColumnNameForObject, this.SqlDbTypeForObject);
-            this.sqlMetaDataForCompositeRelation = new[]
+            
+            var sqlMetaDataBySqlType = new Dictionary<string, SqlMetaData[]>();
+            var sqlMetaDataForCompositeRelation = new[]
             {
                 new SqlMetaData(TableTypeColumnNameForAssociation, this.SqlDbTypeForObject), 
                 new SqlMetaData(TableTypeColumnNameForRole, this.SqlDbTypeForObject)
             };
 
-            var sqlMetaDataBySqlType = new Dictionary<string, SqlMetaData[]>();
             foreach (var relationType in this.Database.MetaPopulation.RelationTypes)
             {
                 var tableName = "_" + relationType.Id.ToString("N");
                 SqlDbType sqlDbType;
                 string sqlType;
 
-                var sqlMetaData = this.sqlMetaDataForCompositeRelation;
+                var sqlMetaData = sqlMetaDataForCompositeRelation;
 
                 var tableTypeName = TableTypeNameForCompositeRelations;
                 var tableTypeSqlType = this.sqlTypeForObject;
@@ -331,6 +318,10 @@ namespace Allors.Adapters.Database.SqlClient
                 this.sqlMetaDataByRoleType[roleType] = sqlMetaData;
             }
         }
+
+        public abstract bool IsObjectIdInteger { get; }
+
+        public abstract bool IsObjectIdLong { get; }
 
         public string SqlTypeForObject
         {

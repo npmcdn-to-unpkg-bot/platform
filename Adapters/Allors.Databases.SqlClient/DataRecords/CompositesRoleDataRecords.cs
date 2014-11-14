@@ -48,11 +48,23 @@ namespace Allors.Adapters.Database.SqlClient.IntegerId
                 var association = entry.Key;
                 var roles = entry.Value;
 
-                foreach (var role in roles)
+                if (this.mapping.IsObjectIdInteger)
                 {
-                    sqlDataRecord.SetValue(0, association.Value);
-                    sqlDataRecord.SetValue(1, role.Value);
-                    yield return sqlDataRecord;
+                    foreach (var role in roles)
+                    {
+                        sqlDataRecord.SetInt32(0, (int)association.Value);
+                        sqlDataRecord.SetInt32(1, (int)role.Value);
+                        yield return sqlDataRecord;
+                    }
+                }
+                else
+                {
+                    foreach (var role in roles)
+                    {
+                        sqlDataRecord.SetInt64(0, (long)association.Value);
+                        sqlDataRecord.SetInt64(1, (long)role.Value);
+                        yield return sqlDataRecord;
+                    }
                 }
             }
         }

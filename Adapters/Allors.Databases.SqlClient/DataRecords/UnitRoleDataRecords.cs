@@ -20,6 +20,7 @@
 
 namespace Allors.Adapters.Database.SqlClient.IntegerId
 {
+    using System;
     using System.Collections;
     using System.Collections.Generic;
 
@@ -32,7 +33,6 @@ namespace Allors.Adapters.Database.SqlClient.IntegerId
         private readonly Mapping mapping;
 
         private readonly IRoleType roleType;
-
         private readonly IList<ObjectId> associations;
         private readonly Dictionary<ObjectId, object> roleByAssociation;
 
@@ -47,11 +47,154 @@ namespace Allors.Adapters.Database.SqlClient.IntegerId
         public IEnumerator<SqlDataRecord> GetEnumerator()
         {
             var sqlDataRecord = new SqlDataRecord(this.mapping.GetSqlMetaData(this.roleType));
-            foreach (var association in this.associations)
+            var unitTypeTag = ((IUnit)this.roleType.ObjectType).UnitTag;
+
+            if (this.mapping.IsObjectIdInteger)
             {
-                sqlDataRecord.SetValue(0, association.Value);
-                sqlDataRecord.SetValue(1, this.roleByAssociation[association]);
-                yield return sqlDataRecord;
+                switch (unitTypeTag)
+                {
+                    case UnitTags.AllorsBinary:
+                        foreach (var association in this.associations)
+                        {
+                            sqlDataRecord.SetInt32(0, (int)association.Value);
+                            sqlDataRecord.SetValue(1, this.roleByAssociation[association]);
+                            yield return sqlDataRecord;
+                        }
+
+                        break;
+
+                    case UnitTags.AllorsBoolean:
+                        foreach (var association in this.associations)
+                        {
+                            sqlDataRecord.SetInt32(0, (int)association.Value);
+                            sqlDataRecord.SetBoolean(1, (bool)this.roleByAssociation[association]);
+                            yield return sqlDataRecord;
+                        }
+
+                        break;
+                    case UnitTags.AllorsDecimal:
+                        foreach (var association in this.associations)
+                        {
+                            sqlDataRecord.SetInt32(0, (int)association.Value);
+                            sqlDataRecord.SetDecimal(1, (decimal)this.roleByAssociation[association]);
+                            yield return sqlDataRecord;
+                        }
+
+                        break;
+                    case UnitTags.AllorsFloat:
+                        foreach (var association in this.associations)
+                        {
+                            sqlDataRecord.SetInt32(0, (int)association.Value);
+                            sqlDataRecord.SetDouble(1, (double)this.roleByAssociation[association]);
+                            yield return sqlDataRecord;
+                        }
+
+                        break;
+                    case UnitTags.AllorsInteger:
+                        foreach (var association in this.associations)
+                        {
+                            sqlDataRecord.SetInt32(0, (int)association.Value);
+                            sqlDataRecord.SetInt32(1, (int)this.roleByAssociation[association]);
+                            yield return sqlDataRecord;
+                        }
+
+                        break;
+                    case UnitTags.AllorsString:
+                        foreach (var association in this.associations)
+                        {
+                            sqlDataRecord.SetInt32(0, (int)association.Value);
+                            sqlDataRecord.SetString(1, (string)this.roleByAssociation[association]);
+                            yield return sqlDataRecord;
+                        }
+
+                        break;
+
+                    case UnitTags.AllorsUnique:
+                        foreach (var association in this.associations)
+                        {
+                            sqlDataRecord.SetInt32(0, (int)association.Value);
+                            sqlDataRecord.SetGuid(1, (Guid)this.roleByAssociation[association]);
+                            yield return sqlDataRecord;
+                        }
+
+                        break;
+                    default:
+                        throw new NotSupportedException("Unit type tag " + unitTypeTag + " is not supported.");
+                }
+
+            }
+            else
+            {
+                switch (unitTypeTag)
+                {
+                    case UnitTags.AllorsBinary:
+                        foreach (var association in this.associations)
+                        {
+                            sqlDataRecord.SetInt64(0, (long)association.Value);
+                            sqlDataRecord.SetValue(1, this.roleByAssociation[association]);
+                            yield return sqlDataRecord;
+                        }
+
+                        break;
+
+                    case UnitTags.AllorsBoolean:
+                        foreach (var association in this.associations)
+                        {
+                            sqlDataRecord.SetInt64(0, (long)association.Value);
+                            sqlDataRecord.SetBoolean(1, (bool)this.roleByAssociation[association]);
+                            yield return sqlDataRecord;
+                        }
+
+                        break;
+                    case UnitTags.AllorsDecimal:
+                        foreach (var association in this.associations)
+                        {
+                            sqlDataRecord.SetInt64(0, (long)association.Value);
+                            sqlDataRecord.SetDecimal(1, (decimal)this.roleByAssociation[association]);
+                            yield return sqlDataRecord;
+                        }
+
+                        break;
+                    case UnitTags.AllorsFloat:
+                        foreach (var association in this.associations)
+                        {
+                            sqlDataRecord.SetInt64(0, (long)association.Value);
+                            sqlDataRecord.SetDouble(1, (double)this.roleByAssociation[association]);
+                            yield return sqlDataRecord;
+                        }
+
+                        break;
+                    case UnitTags.AllorsInteger:
+                        foreach (var association in this.associations)
+                        {
+                            sqlDataRecord.SetInt64(0, (long)association.Value);
+                            sqlDataRecord.SetInt32(1, (int)this.roleByAssociation[association]);
+                            yield return sqlDataRecord;
+                        }
+
+                        break;
+                    case UnitTags.AllorsString:
+                        foreach (var association in this.associations)
+                        {
+                            sqlDataRecord.SetInt64(0, (long)association.Value);
+                            sqlDataRecord.SetString(1, (string)this.roleByAssociation[association]);
+                            yield return sqlDataRecord;
+                        }
+
+                        break;
+
+                    case UnitTags.AllorsUnique:
+                        foreach (var association in this.associations)
+                        {
+                            sqlDataRecord.SetInt64(0, (long)association.Value);
+                            sqlDataRecord.SetGuid(1, (Guid)this.roleByAssociation[association]);
+                            yield return sqlDataRecord;
+                        }
+
+                        break;
+                    default:
+                        throw new NotSupportedException("Unit type tag " + unitTypeTag + " is not supported.");
+                }
             }
         }
 

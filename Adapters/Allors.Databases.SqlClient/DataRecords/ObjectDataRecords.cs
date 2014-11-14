@@ -40,10 +40,21 @@ namespace Allors.Adapters.Database.SqlClient.IntegerId
         public IEnumerator<SqlDataRecord> GetEnumerator()
         {
             var sqlDataRecord = new SqlDataRecord(this.mapping.SqlMetaDataForObject);
-            foreach (var objectId in this.objectIds)
+            if (this.mapping.IsObjectIdInteger)
             {
-                sqlDataRecord.SetInt32(0, (int)objectId.Value);
-                yield return sqlDataRecord;
+                foreach (var objectId in this.objectIds)
+                {
+                    sqlDataRecord.SetInt32(0, (int)objectId.Value);
+                    yield return sqlDataRecord;
+                }
+            }
+            else
+            {
+                foreach (var objectId in this.objectIds)
+                {
+                    sqlDataRecord.SetInt64(0, (long)objectId.Value);
+                    yield return sqlDataRecord;
+                }
             }
         }
 
