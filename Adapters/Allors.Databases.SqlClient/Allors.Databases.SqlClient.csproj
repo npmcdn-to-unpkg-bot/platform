@@ -39,6 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataRecords\UnitRoleDataRecords.cs" />
+    <Compile Include="DataRecords\CompositesRoleDataRecords.cs" />
+    <Compile Include="DataRecords\CompositeRoleDataRecords.cs" />
     <Compile Include="Initialization.cs" />
     <Compile Include="ChangeSet.cs" />
     <Compile Include="Configuration.cs" />

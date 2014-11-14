@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ObjectDataRecords.cs" company="Allors bvba">
+// <copyright file="CompositeRoleDataRecords.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -25,26 +25,36 @@ namespace Allors.Adapters.Database.SqlClient.IntegerId
 
     using Microsoft.SqlServer.Server;
 
-    public class ObjectDataRecords : IEnumerable<SqlDataRecord>
+    public class CompositesRoleDataRecords : IEnumerable<SqlDataRecord>
     {
         private readonly Mapping mapping;
+        private readonly Dictionary<ObjectId, ObjectId[]> roleByAssociation;
 
-        private readonly IEnumerable<ObjectId> objectIds;
-
-        public ObjectDataRecords(Mapping mapping, IEnumerable<ObjectId> objectIds)
+        public CompositesRoleDataRecords(Mapping mapping, Dictionary<ObjectId, ObjectId[]> roleByAssociation)
         {
             this.mapping = mapping;
-            this.objectIds = objectIds;
+            this.roleByAssociation = roleByAssociation;
         }
 
         public IEnumerator<SqlDataRecord> GetEnumerator()
         {
-            var metaData = new SqlMetaData(Mapping.TableTypeColumnNameForObject, this.mapping.SqlDbTypeForId);
+            var metaData = new[]
+                {
+                    new SqlMetaData(Mapping.TableTypeColumnNameForAssociation, this.mapping.SqlDbTypeForId), 
+                    new SqlMetaData(Mapping.TableTypeColumnNameForRole, this.mapping.SqlDbTypeForId)
+                };
             var sqlDataRecord = new SqlDataRecord(metaData);
-            foreach (var objectId in this.objectIds)
+            foreach (var entry in this.roleByAssociation)
             {
-                sqlDataRecord.SetInt32(0, (int)objectId.Value);
-                yield return sqlDataRecord;
+                var association = entry.Key;
+                var roles = entry.Value;
+
+                foreach (var role in roles)
+                {
+                    sqlDataRecord.SetValue(0, association.Value);
+                    sqlDataRecord.SetValue(1, role.Value);
+                    yield return sqlDataRecord;
+                }
             }
         }
 

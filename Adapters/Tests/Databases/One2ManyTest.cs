@@ -61,6 +61,7 @@ namespace Allors.Databases
                 return this.Profile.Inits;
             }
         }
+
         [Test]
         public void C1_C1one2manies()
         {

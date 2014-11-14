@@ -26,6 +26,9 @@ namespace Allors.Adapters.Database.SqlClient
     {
         public const string ParamPrefix = "@";
 
+        public const string Alias1 = "_x";
+        public const string Alias2 = "_y";
+
         public const string TableNameForObjects = "_o";
         public const string ColumnNameForObject = "o";
         public const string ColumnNameForType = "t";
@@ -34,13 +37,17 @@ namespace Allors.Adapters.Database.SqlClient
         public const string ColumnNameForRole = "r";
 
         public const string TableTypeNameForObjects = "_t_o";
-        public const string ColumnNameForTableType = "_t";
-
+        public const string TableTypeColumnNameForObject = "_o";
+        public const string TableTypeNameForCompositeRelations = "_t_c";
+        public const string TableTypeColumnNameForAssociation = "_a";
+        public const string TableTypeColumnNameForRole = "_r";
+        
         public const string ParameterNameForObject = ParamPrefix + "o";
         public const string ParameterNameForType = ParamPrefix + "t";
         public const string ParameterNameForCache = ParamPrefix + "c";
         public const string ParameterNameForAssociation = ParamPrefix + "a";
         public const string ParameterNameForRole = ParamPrefix + "r";
+        public const string ParameterNameForRelationTable = ParamPrefix + "rt";
 
         public const string SqlTypeForType = "uniqueidentifier";
         public const string SqlTypeForCache = "int";
@@ -97,7 +104,7 @@ namespace Allors.Adapters.Database.SqlClient
                 SqlDbType sqlDbType;
                 string sqlType;
 
-                var tableTypeName = TableTypeNameForObjects;
+                var tableTypeName = TableTypeNameForCompositeRelations;
                 var tableTypeSqlType = this.sqlTypeForId;
 
                 var roleType = relationType.RoleType;
@@ -181,7 +188,7 @@ namespace Allors.Adapters.Database.SqlClient
                             sqlDbType = SqlDbType.UniqueIdentifier;
                             sqlType = "uniqueidentifier";
 
-                            tableTypeName = "_t_i";
+                            tableTypeName = "_t_u";
                             tableTypeSqlType = sqlType;
                             break;
 

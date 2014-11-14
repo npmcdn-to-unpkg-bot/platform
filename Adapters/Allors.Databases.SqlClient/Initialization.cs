@@ -88,7 +88,7 @@ CREATE SCHEMA " + this.mapping.Database.SchemaName;
                     {
                         var cmdText = @"
 CREATE TYPE " + this.mapping.Database.SchemaName + "." + Mapping.TableTypeNameForObjects + @" AS TABLE
-(" + Mapping.ColumnNameForTableType + " " + this.mapping.SqlTypeForId + @")
+(" + Mapping.TableTypeColumnNameForObject + " " + this.mapping.SqlTypeForId + @")
 ";
                         using (var command = new SqlCommand(cmdText, connection))
                         {
@@ -109,7 +109,8 @@ CREATE TYPE " + this.mapping.Database.SchemaName + "." + Mapping.TableTypeNameFo
 
                                 var cmdText = @"
 CREATE TYPE " + this.mapping.Database.SchemaName + "." + tableTypeName + @" AS TABLE
-(" + Mapping.ColumnNameForTableType + " " + tableTypeSqlType + @")
+(" + Mapping.TableTypeColumnNameForAssociation + " " + this.mapping.SqlTypeForId + @",
+" + Mapping.TableTypeColumnNameForRole + " " + tableTypeSqlType + @")
 ";
                                 using (var command = new SqlCommand(cmdText, connection))
                                 {
