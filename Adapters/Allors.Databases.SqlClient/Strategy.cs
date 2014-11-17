@@ -340,7 +340,7 @@ namespace Allors.Adapters.Database.SqlClient
                     throw new Exception("Unsupported multiplicity " + roleType.RelationType.Multiplicity);
             }
 
-            return role != null ? this.session.CreateStrategyForExistingObject(role).GetObject() : null;
+            return role != null ? new Strategy(this.session, role).GetObject() : null;
         }
 
         public void SetCompositeRole(IRoleType roleType, IObject role)

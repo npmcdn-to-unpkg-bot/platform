@@ -40,8 +40,8 @@ namespace Allors.Adapters.Database.SqlClient
 
         private Dictionary<string, object> properties;
 
-        private Dictionary<ObjectId, IClass> classByObjectId;
         private Dictionary<ObjectId, int> cacheIdByObjectId;
+        private Dictionary<ObjectId, IClass> classByObjectId;
 
         private HashSet<ObjectId> newObjects;
         private HashSet<ObjectId> deletedObjects;
@@ -260,18 +260,18 @@ VALUES (" + Mapping.ParameterNameForType + ", " + Mapping.ParameterNameForCache 
                 
                 var objectId = this.database.ObjectIds.Parse(result);
 
-                if (this.classByObjectId == null)
-                {
-                    this.classByObjectId = new Dictionary<ObjectId, IClass>();
-                }
-
                 if (this.cacheIdByObjectId == null)
                 {
                     this.cacheIdByObjectId = new Dictionary<ObjectId, int>();
                 }
 
-                this.classByObjectId[objectId] = objectType;
+                if (this.classByObjectId == null)
+                {
+                    this.classByObjectId = new Dictionary<ObjectId, IClass>();
+                }
+
                 this.cacheIdByObjectId[objectId] = Database.CacheDefaultValue;
+                this.classByObjectId[objectId] = objectType;
 
                 this.ChangeSet.OnCreated(objectId);
                 var strategy = new Strategy(this, objectId);
@@ -311,14 +311,14 @@ SELECT Id from @_x;
                 command.Parameters.Add(Mapping.ParameterNameForType, Mapping.SqlDbTypeForType).Value = objectType.Id;
                 command.Parameters.Add(Mapping.ParameterNameForCache, Mapping.SqlDbTypeForCache).Value = Database.CacheDefaultValue;
 
-                if (this.classByObjectId == null)
-                {
-                    this.classByObjectId = new Dictionary<ObjectId, IClass>();
-                }
-
                 if (this.cacheIdByObjectId == null)
                 {
                     this.cacheIdByObjectId = new Dictionary<ObjectId, int>();
+                }
+
+                if (this.classByObjectId == null)
+                {
+                    this.classByObjectId = new Dictionary<ObjectId, IClass>();
                 }
 
                 using (var reader = command.ExecuteReader())
@@ -434,18 +434,18 @@ END
                 command.Parameters.Add(Mapping.ParameterNameForCache, Mapping.SqlDbTypeForCache).Value = Database.CacheDefaultValue;
                 command.ExecuteNonQuery();
 
-                if (this.classByObjectId == null)
-                {
-                    this.classByObjectId = new Dictionary<ObjectId, IClass>();
-                }
-
                 if (this.cacheIdByObjectId == null)
                 {
                     this.cacheIdByObjectId = new Dictionary<ObjectId, int>();
                 }
 
-                this.classByObjectId[objectId] = objectType;
+                if (this.classByObjectId == null)
+                {
+                    this.classByObjectId = new Dictionary<ObjectId, IClass>();
+                }
+
                 this.cacheIdByObjectId[objectId] = Database.CacheDefaultValue;
+                this.classByObjectId[objectId] = objectType;
 
                 this.ChangeSet.OnCreated(objectId);
                 var strategy = new Strategy(this, objectId);
@@ -465,20 +465,6 @@ END
             this.Rollback();
         }
 
-        internal Strategy CreateStrategyForExistingObject(ObjectId objectId)
-        {
-            if (!this.classByObjectId.ContainsKey(objectId))
-            {
-                IClass @class;
-                if (this.classCache.TryGet(objectId, out @class))
-                {
-                    this.classByObjectId[objectId] = @class;
-                }
-            }
-
-            return new Strategy(this, objectId);
-        }
-
         internal IClass GetObjectType(ObjectId objectId)
         {
             return this.classByObjectId[objectId];
@@ -496,7 +482,7 @@ END
                 return true;
             }
 
-            if (this.classByObjectId != null && this.classByObjectId.ContainsKey(objectId))
+            if (this.cacheIdByObjectId != null && this.cacheIdByObjectId.ContainsKey(objectId))
             {
                 return false;
             }
@@ -532,7 +518,7 @@ END
 
             this.ChangeSet.OnDeleted(objectId);
         }
-
+        
         #region Unit
         internal bool ExistUnitRole(ObjectId association, IRoleType roleType)
         {
@@ -1338,8 +1324,7 @@ END
 
             return strategies.ToArray();
         }
-
-
+        
         private void FetchObjects()
         {
             var mapping = this.Database.Mapping;
@@ -1440,6 +1425,7 @@ WHERE " + Mapping.ColumnNameForAssociation + @"=" + Mapping.ParameterNameForAsso
                 if (result != null)
                 {
                     role = this.database.ObjectIds.Parse(result.ToString());
+                    this.AddObjectToFetchIfNotCached(role);
                 }
 
                 var cacheId = this.GetCacheId(association);
@@ -1474,6 +1460,8 @@ WHERE " + Mapping.ColumnNameForAssociation + @"=" + Mapping.ParameterNameForAsso
                         var value = reader.GetValue(0).ToString();
                         var role = this.database.ObjectIds.Parse(value);
                         roles.Add(role);
+
+                        this.AddObjectToFetchIfNotCached(role);
                     }
                 }
             }
@@ -1501,8 +1489,11 @@ WHERE " + Mapping.ColumnNameForRole + @"=" + Mapping.ParameterNameForRole + @";
                 var result = command.ExecuteScalar();
                 if (result != null)
                 {
-                    var objectId = this.database.ObjectIds.Parse(result.ToString());
-                    return objectId;
+                    var association = this.database.ObjectIds.Parse(result.ToString());
+
+                    this.AddObjectToFetchIfNotCached(association);
+
+                    return association;
                 }
             }
 
@@ -1534,6 +1525,8 @@ WHERE " + Mapping.ColumnNameForRole + @"=" + Mapping.ParameterNameForRole + @";
                         var value = reader.GetValue(0).ToString();
                         var association = this.database.ObjectIds.Parse(value);
                         associations.Add(association);
+
+                        this.AddObjectToFetchIfNotCached(association);
                     }
                 }
             }
@@ -2016,6 +2009,14 @@ WHERE " + Mapping.ColumnNameForObject + " = " + Mapping.ParameterNameForObject;
                 {
                     this.connection = null;
                 }
+            }
+        }
+
+        private void AddObjectToFetchIfNotCached(ObjectId objectId)
+        {
+            if (this.cacheIdByObjectId == null || !this.cacheIdByObjectId.ContainsKey(objectId))
+            {
+                this.AddObjectToFetch(objectId);
             }
         }
 
