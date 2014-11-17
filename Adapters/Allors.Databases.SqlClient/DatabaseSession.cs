@@ -1329,10 +1329,9 @@ END
         {
             var mapping = this.Database.Mapping;
             var cmdText = @"
-SELECT  _X." + Mapping.ColumnNameForObject + ", _Y." + Mapping.TableTypeColumnNameForObject + ", _X." + Mapping.ColumnNameForType + ", _X." + Mapping.ColumnNameForCache + @"
-FROM " + this.Database.SchemaName + "." + Mapping.TableNameForObjects + @" AS _X
-RIGHT JOIN " + Mapping.ParameterNameForObjectTable + @" AS _Y
-ON _X." + Mapping.ColumnNameForObject + @"=_Y." + Mapping.TableTypeColumnNameForObject + @"
+SELECT " + Mapping.ColumnNameForObject + ", " + Mapping.ColumnNameForType + ", " + Mapping.ColumnNameForCache + @"
+FROM " + this.Database.SchemaName + "." + Mapping.TableNameForObjects + @"
+WHERE " + Mapping.ColumnNameForObject + @" IN (SELECT " + Mapping.TableTypeColumnNameForObject + " FROM " + Mapping.ParameterNameForObjectTable + @");
 ";
             using (var command = this.CreateCommand(cmdText))
             {
@@ -1345,40 +1344,37 @@ ON _X." + Mapping.ColumnNameForObject + @"=_Y." + Mapping.TableTypeColumnNameFor
                 {
                     while (reader.Read())
                     {
-                        var objectId = this.database.ObjectIds.Parse(reader.GetValue(1).ToString());
+                        var objectId = this.database.ObjectIds.Parse(reader.GetValue(0).ToString());
+                        var typeId = reader.GetGuid(1);
+                        var cacheId = reader.GetInt32(2);
+                        var type = (IClass)this.database.ObjectFactory.MetaPopulation.Find(typeId);
 
-                        if (!reader.IsDBNull(0))
+                        if (this.classByObjectId == null)
                         {
-                            var typeId = reader.GetGuid(2);
-                            var cacheId = reader.GetInt32(3);
-                            var type = (IClass)this.database.ObjectFactory.MetaPopulation.Find(typeId);
+                            this.classByObjectId = new Dictionary<ObjectId, IClass>();
+                        }
 
-                            if (this.classByObjectId == null)
-                            {
-                                this.classByObjectId = new Dictionary<ObjectId, IClass>();
-                            }
-
-                            if (this.cacheIdByObjectId == null)
-                            {
-                                this.cacheIdByObjectId = new Dictionary<ObjectId, int>();
-                            }
+                        if (this.cacheIdByObjectId == null)
+                        {
+                            this.cacheIdByObjectId = new Dictionary<ObjectId, int>();
+                        }
                         
-                            this.classByObjectId[objectId] = type;
-                            this.cacheIdByObjectId[objectId] = cacheId;
+                        this.classByObjectId[objectId] = type;
+                        this.cacheIdByObjectId[objectId] = cacheId;
 
-                            this.classCache.Set(objectId, type);
-                        }
-                        else
-                        {
-                            if (this.deletedObjects == null)
-                            {
-                                this.deletedObjects = new HashSet<ObjectId>();
-                            }
-
-                            this.deletedObjects.Add(objectId);
-                        }
+                        this.classCache.Set(objectId, type);
 
                         this.objectsToFetch.Remove(objectId);
+                    }
+
+                    foreach (var objectId in this.objectsToFetch)
+                    {
+                        if (this.deletedObjects == null)
+                        {
+                            this.deletedObjects = new HashSet<ObjectId>();
+                        }
+
+                        this.deletedObjects.Add(objectId);
                     }
                 }
 
