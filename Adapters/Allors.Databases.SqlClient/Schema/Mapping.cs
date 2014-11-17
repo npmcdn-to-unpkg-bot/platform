@@ -46,6 +46,7 @@ namespace Allors.Adapters.Database.SqlClient
 
         public const string ParameterNameForCount = ParamPrefix + "cnt";
         public const string ParameterNameForObject = ParamPrefix + "o";
+        public const string ParameterNameForObjectTable = ParamPrefix + "ot";
         public const string ParameterNameForType = ParamPrefix + "t";
         public const string ParameterNameForCache = ParamPrefix + "c";
         public const string ParameterNameForAssociation = ParamPrefix + "a";

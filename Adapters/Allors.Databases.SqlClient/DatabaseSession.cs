@@ -280,8 +280,7 @@ VALUES (" + Mapping.ParameterNameForType + ", " + Mapping.ParameterNameForCache 
                 return domainObject;
             }
         }
-
-
+        
         public IObject[] Create(IClass objectType, int count)
         {
             var arrayType = this.Database.ObjectFactory.GetTypeForObjectType(objectType);
@@ -303,7 +302,6 @@ VALUES (" + Mapping.ParameterNameForType + ", " + Mapping.ParameterNameForCache 
 
 SET @i = @i + 1
 END
-
 
 SELECT Id from @_x;
 ";
@@ -390,22 +388,19 @@ SELECT Id from @_x;
 
         public IObject[] Instantiate(ObjectId[] objectIds)
         {
-            List<IObject> objects = null;
-            foreach (var objectId in objectIds)
+            var strategies = this.InstantiateStrategies(objectIds);
+            if (strategies == null || strategies.Length == 0)
             {
-                var strategy = this.InstantiateStrategy(objectId);
-                if (strategy != null)
-                {
-                    if (objects == null)
-                    {
-                        objects = new List<IObject>();
-                    }
-
-                    objects.Add(strategy.GetObject());
-                }
+                return EmptyObjects;
             }
 
-            return objects != null ? objects.ToArray() : EmptyObjects;
+            var objects = new IObject[strategies.Length];
+            for (var i = 0; i < objects.Length; i++)
+            {
+                objects[i] = strategies[i].GetObject();
+            }
+
+            return objects;
         }
 
         public IObject Insert(IClass objectType, string objectIdString)
@@ -506,7 +501,8 @@ END
                 return false;
             }
 
-            this.FetchObject(objectId);
+            this.AddObjectToFetch(objectId);            
+            this.FetchObjects();
 
             if (this.deletedObjects != null)
             {
@@ -1277,9 +1273,10 @@ END
         private int GetCacheId(ObjectId objectId)
         {
             int cacheId;
-            if (!this.cacheIdByObjectId.TryGetValue(objectId, out cacheId))
+            if (this.cacheIdByObjectId == null || !this.cacheIdByObjectId.TryGetValue(objectId, out cacheId))
             {
-                this.FetchObject(objectId);
+                this.AddObjectToFetch(objectId);
+                this.FetchObjects();
                 cacheId = this.cacheIdByObjectId[objectId];
             }
 
@@ -1293,12 +1290,11 @@ END
                 return null;
             }
 
-            if (this.classByObjectId != null && this.classByObjectId.ContainsKey(objectId))
+            if (this.cacheIdByObjectId == null || !this.cacheIdByObjectId.ContainsKey(objectId))
             {
-                return new Strategy(this, objectId);
+                this.AddObjectToFetch(objectId);
+                this.FetchObjects();
             }
-
-            this.FetchObject(objectId);
 
             if (this.deletedObjects != null && this.deletedObjects.Contains(objectId))
             {
@@ -1307,50 +1303,101 @@ END
 
             return new Strategy(this, objectId);
         }
-
-        private void FetchObject(ObjectId objectId)
+        
+        private IStrategy[] InstantiateStrategies(ObjectId[] objectIds)
         {
+            var fetchRequired = false;
+            foreach (var objectId in objectIds)
+            {
+                if (this.deletedObjects != null && this.deletedObjects.Contains(objectId))
+                {
+                    continue;
+                }
+
+                if (this.cacheIdByObjectId == null || !this.cacheIdByObjectId.ContainsKey(objectId))
+                {
+                    this.AddObjectToFetch(objectId);
+                    fetchRequired = true;
+                }
+            }
+
+            if (fetchRequired)
+            {
+                this.FetchObjects();
+            }
+
+            var strategies = new List<IStrategy>();
+            foreach (var objectId in objectIds)
+            {
+                if (this.deletedObjects == null || !this.deletedObjects.Contains(objectId))
+                {
+                    var strategy = new Strategy(this, objectId);
+                    strategies.Add(strategy);
+                }
+            }
+
+            return strategies.ToArray();
+        }
+
+
+        private void FetchObjects()
+        {
+            var mapping = this.Database.Mapping;
             var cmdText = @"
-SELECT  " + Mapping.ColumnNameForType + ", " + Mapping.ColumnNameForCache + @"
-FROM " + this.Database.SchemaName + "." + Mapping.TableNameForObjects + @"
-WHERE " + Mapping.ColumnNameForObject + @" = " + Mapping.ParameterNameForObject + @"
+SELECT  _X." + Mapping.ColumnNameForObject + ", _Y." + Mapping.TableTypeColumnNameForObject + ", _X." + Mapping.ColumnNameForType + ", _X." + Mapping.ColumnNameForCache + @"
+FROM " + this.Database.SchemaName + "." + Mapping.TableNameForObjects + @" AS _X
+RIGHT JOIN " + Mapping.ParameterNameForObjectTable + @" AS _Y
+ON _X." + Mapping.ColumnNameForObject + @"=_Y." + Mapping.TableTypeColumnNameForObject + @"
 ";
             using (var command = this.CreateCommand(cmdText))
             {
-                command.Parameters.Add(Mapping.ParameterNameForObject, this.database.Mapping.SqlDbTypeForObject).Value = objectId.Value;
+                var objectDataRecords = new ObjectDataRecords(mapping, this.objectsToFetch);
+                var parameter = command.Parameters.Add(Mapping.ParameterNameForObjectTable, SqlDbType.Structured);
+                parameter.TypeName = this.Database.SchemaName + "." + Mapping.TableTypeNameForObjects;
+                parameter.Value = objectDataRecords;
+                
                 using (var reader = command.ExecuteReader())
                 {
-                    if (reader.Read())
+                    while (reader.Read())
                     {
-                        var typeId = reader.GetGuid(0);
-                        var cacheId = reader.GetInt32(1);
-                        var type = (IClass)this.database.ObjectFactory.MetaPopulation.Find(typeId);
+                        var objectId = this.database.ObjectIds.Parse(reader.GetValue(1).ToString());
 
-                        if (this.classByObjectId == null)
+                        if (!reader.IsDBNull(0))
                         {
-                            this.classByObjectId = new Dictionary<ObjectId, IClass>();
-                        }
+                            var typeId = reader.GetGuid(2);
+                            var cacheId = reader.GetInt32(3);
+                            var type = (IClass)this.database.ObjectFactory.MetaPopulation.Find(typeId);
 
-                        if (this.cacheIdByObjectId == null)
-                        {
-                            this.cacheIdByObjectId = new Dictionary<ObjectId, int>();
-                        }
+                            if (this.classByObjectId == null)
+                            {
+                                this.classByObjectId = new Dictionary<ObjectId, IClass>();
+                            }
+
+                            if (this.cacheIdByObjectId == null)
+                            {
+                                this.cacheIdByObjectId = new Dictionary<ObjectId, int>();
+                            }
                         
-                        this.classByObjectId[objectId] = type;
-                        this.cacheIdByObjectId[objectId] = cacheId;
+                            this.classByObjectId[objectId] = type;
+                            this.cacheIdByObjectId[objectId] = cacheId;
 
-                        this.classCache.Set(objectId, type);
-                    }
-                    else
-                    {
-                        if (this.deletedObjects == null)
+                            this.classCache.Set(objectId, type);
+                        }
+                        else
                         {
-                            this.deletedObjects = new HashSet<ObjectId>();
+                            if (this.deletedObjects == null)
+                            {
+                                this.deletedObjects = new HashSet<ObjectId>();
+                            }
+
+                            this.deletedObjects.Add(objectId);
                         }
 
-                        this.deletedObjects.Add(objectId);
+                        this.objectsToFetch.Remove(objectId);
                     }
                 }
+
+                this.objectsToFetch = null;
             }
         }
 
@@ -1914,6 +1961,8 @@ WHERE " + Mapping.ColumnNameForObject + " = " + Mapping.ParameterNameForObject;
             this.classByObjectId = null;
             this.cacheIdByObjectId = null;
 
+            this.objectsToFetch = null;
+
             this.newObjects = null;
             this.deletedObjects = null;
             this.flushDeletedObjects = null;
@@ -1970,6 +2019,16 @@ WHERE " + Mapping.ColumnNameForObject + " = " + Mapping.ParameterNameForObject;
             }
         }
 
+        private void AddObjectToFetch(ObjectId objectId)
+        {
+            if (this.objectsToFetch == null)
+            {
+                this.objectsToFetch = new HashSet<ObjectId>();
+            }
+
+            this.objectsToFetch.Add(objectId);
+        }
+        
         #region Lazy Dictionaries
         private Dictionary<ObjectId, object> GetUnitRoleByAssociation(IRoleType roleType)
         {
