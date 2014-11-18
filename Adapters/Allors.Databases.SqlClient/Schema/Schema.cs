@@ -12,12 +12,14 @@ namespace Allors.Adapters.Database.SqlClient
         private readonly bool exists;
         private readonly Dictionary<string, Table> tableByLowercaseTableName;
         private readonly Dictionary<string, TableType> tableTypeByLowercaseTableTypeName;
+        private readonly Dictionary<string, Procedure> procedureByLowercaseProcedureName;
 
         public Schema(Database database)
         {
             this.database = database;
             this.tableByLowercaseTableName = new Dictionary<string, Table>();
             this.tableTypeByLowercaseTableTypeName = new Dictionary<string, TableType>();
+            this.procedureByLowercaseProcedureName = new Dictionary<string, Procedure>();
 
             using (var connection = new SqlConnection(database.ConnectionString))
             {
@@ -36,7 +38,7 @@ WHERE   schema_name = @schemaName";
                         this.exists = schemaCount != 0;
                     }
 
-                    // Objects
+                    // Tables
                     cmdText = @"
 SELECT T.table_name,
        C.column_name, 
@@ -103,8 +105,29 @@ domain_schema = @domainSchema";
                             while (reader.Read())
                             {
                                 var tableTypeName = (string)reader["domain_name"];
-                                tableTypeName = tableTypeName.Trim().ToLowerInvariant();
-                                this.TableTypeByLowercaseTableTypeName[tableTypeName] = new TableType(this, tableTypeName);
+                                var lowercaseTableTypeName = tableTypeName.Trim().ToLowerInvariant();
+                                this.TableTypeByLowercaseTableTypeName[lowercaseTableTypeName] = new TableType(this, tableTypeName);
+                            }
+                        }
+                    }
+
+                    // Procedures
+                    cmdText = @"
+SELECT routine_name, routine_definition
+FROM information_schema.routines
+WHERE routine_schema = @routineSchema";
+
+                    using (var command = new SqlCommand(cmdText, connection))
+                    {
+                        command.Parameters.Add("@routineSchema", SqlDbType.NVarChar).Value = database.SchemaName;
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                var routineName = (string)reader["routine_name"];
+                                var routineDefinition = (string)reader["routine_definition"];
+                                var lowercaseRoutineName = routineName.Trim().ToLowerInvariant();
+                                this.ProcedureByLowercaseProcedureName[lowercaseRoutineName] = new Procedure(this, routineName, routineDefinition);
                             }
                         }
                     }
@@ -129,6 +152,14 @@ domain_schema = @domainSchema";
             get
             {
                 return this.tableTypeByLowercaseTableTypeName;
+            }
+        }
+
+        public Dictionary<string, Procedure> ProcedureByLowercaseProcedureName
+        {
+            get
+            {
+                return this.procedureByLowercaseProcedureName;
             }
         }
 
@@ -160,6 +191,13 @@ domain_schema = @domainSchema";
             TableType tableType;
             this.tableTypeByLowercaseTableTypeName.TryGetValue(tableTypeName.ToLowerInvariant(), out tableType);
             return tableType;
+        }
+
+        public Procedure GetProcedure(string procedureName)
+        {
+            Procedure procedure;
+            this.procedureByLowercaseProcedureName.TryGetValue(procedureName.ToLowerInvariant(), out procedure);
+            return procedure;
         }
     }
 }

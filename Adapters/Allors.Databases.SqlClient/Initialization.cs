@@ -36,6 +36,14 @@ namespace Allors.Adapters.Database.SqlClient
 
         internal void Execute()
         {
+            this.EnableSnapshotIsolation();
+            this.CreateSchema();
+            this.CreateTables();
+            this.CreateProcedures();
+        }
+
+        private void EnableSnapshotIsolation()
+        {
             using (var connection = new SqlConnection(this.mapping.Database.ConnectionString))
             {
                 connection.Open();
@@ -54,7 +62,10 @@ set allow_snapshot_isolation on";
                     connection.Close();
                 }
             }
+        }
 
+        private void CreateSchema()
+        {
             if (!this.schema.Exists)
             {
                 // CREATE SCHEMA must be in its own batch
@@ -76,7 +87,10 @@ CREATE SCHEMA " + this.mapping.Database.SchemaName;
                     }
                 }
             }
-            
+        }
+
+        private void CreateTables()
+        {
             using (var connection = new SqlConnection(this.mapping.Database.ConnectionString))
             {
                 connection.Open();
@@ -137,7 +151,7 @@ TRUNCATE TABLE " + this.mapping.Database.SchemaName + "." + Mapping.TableNameFor
                     }
                     else
                     {
-                         var cmdText = @"
+                        var cmdText = @"
 CREATE TABLE " + this.mapping.Database.SchemaName + "." + Mapping.TableNameForObjects + @"
 (
     " + Mapping.ColumnNameForObject + @" " + this.mapping.SqlTypeForObject + @" IDENTITY(1,1),
@@ -146,10 +160,10 @@ CREATE TABLE " + this.mapping.Database.SchemaName + "." + Mapping.TableNameForOb
     PRIMARY KEY (O)
 );
 ";
-                         using (var command = new SqlCommand(cmdText, connection))
-                         {
-                             command.ExecuteNonQuery();
-                         }
+                        using (var command = new SqlCommand(cmdText, connection))
+                        {
+                            command.ExecuteNonQuery();
+                        }
                     }
 
                     // Relations (tables)
@@ -200,6 +214,49 @@ CREATE TABLE " + this.mapping.Database.SchemaName + "." + tableName + @"
                             {
                                 command.ExecuteNonQuery();
                             }
+                        }
+                    }
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
+
+        private void CreateProcedures()
+        {
+            using (var connection = new SqlConnection(this.mapping.Database.ConnectionString))
+            {
+                connection.Open();
+                try
+                {
+                    // Create Object
+                    var createDefinition = @"
+CREATE PROCEDURE " + this.mapping.Database.SchemaName + "." + Mapping.ProcedureNameForCreate + @"
+    " + Mapping.ParameterNameForType + @" " + Mapping.SqlTypeForType + @",
+    " + Mapping.ParameterNameForCache + @" " + Mapping.SqlTypeForCache + @"
+AS 
+    INSERT INTO " + this.mapping.Database.SchemaName + "." + Mapping.TableNameForObjects + " (" + Mapping.ColumnNameForType + ", " + Mapping.ColumnNameForCache + @")
+    OUTPUT INSERTED." + Mapping.ColumnNameForObject + @"
+    VALUES (" + Mapping.ParameterNameForType + ", " + Mapping.ParameterNameForCache + @");
+";
+                    
+                    var procedure = this.schema.GetProcedure(Mapping.ProcedureNameForCreate);
+                    if (procedure != null && !procedure.IsDefinitionCompatible(createDefinition))
+                    {
+                        using (var command = new SqlCommand("DROP PROCEDURE " + this.mapping.Database.SchemaName + "." + Mapping.ProcedureNameForCreate, connection))
+                        {
+                            command.ExecuteNonQuery();
+                            procedure = null;
+                        }
+                    }
+
+                    if (procedure == null)
+                    {
+                        using (var command = new SqlCommand(createDefinition, connection))
+                        {
+                            command.ExecuteNonQuery();
                         }
                     }
                 }

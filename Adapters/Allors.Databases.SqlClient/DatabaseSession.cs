@@ -247,15 +247,12 @@ namespace Allors.Adapters.Database.SqlClient
 
         public IObject Create(IClass objectType)
         {
-            var cmdText = @"
-INSERT INTO " + this.Database.SchemaName + "." + Mapping.TableNameForObjects + " (" + Mapping.ColumnNameForType + ", " + Mapping.ColumnNameForCache + @")
-OUTPUT INSERTED." + Mapping.ColumnNameForObject + @"
-VALUES (" + Mapping.ParameterNameForType + ", " + Mapping.ParameterNameForCache + @");
-";
-            using (var command = this.CreateCommand(cmdText))
+            using (var command = this.CreateCommand(this.Database.SchemaName + "." + Mapping.ProcedureNameForCreate))
             {
+                command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.Add(Mapping.ParameterNameForType, Mapping.SqlDbTypeForType).Value = objectType.Id;
                 command.Parameters.Add(Mapping.ParameterNameForCache, Mapping.SqlDbTypeForCache).Value = Database.CacheDefaultValue;
+
                 var result = command.ExecuteScalar().ToString();
                 
                 var objectId = this.database.ObjectIds.Parse(result);
@@ -1534,20 +1531,20 @@ WHERE " + Mapping.ColumnNameForRole + @"=" + Mapping.ParameterNameForRole + @";
         {
             if (this.flushDeletedObjects != null)
             {
-                var schema = this.database.Mapping;
+                var mapping = this.database.Mapping;
 
                 var cmdText = @"
 DELETE FROM " + this.Database.SchemaName + "." + Mapping.TableNameForObjects + @"
-WHERE " + Mapping.ColumnNameForObject + @" = " + Mapping.ParameterNameForObject;
+WHERE " + Mapping.ColumnNameForObject + @" IN (SELECT " + Mapping.TableTypeColumnNameForObject + " FROM " + Mapping.ParameterNameForObjectTable + @");
+";
                 using (var command = this.CreateCommand(cmdText))
                 {
-                    var associationParam = command.Parameters.Add(Mapping.ParameterNameForObject, schema.SqlDbTypeForObject);
+                    var objectDataRecords = new ObjectDataRecords(mapping, this.flushDeletedObjects);
+                    var parameter = command.Parameters.Add(Mapping.ParameterNameForObjectTable, SqlDbType.Structured);
+                    parameter.TypeName = this.Database.SchemaName + "." + Mapping.TableTypeNameForObjects;
+                    parameter.Value = objectDataRecords;
 
-                    foreach (var association in this.flushDeletedObjects)
-                    {
-                        associationParam.Value = association.Value;
-                        command.ExecuteNonQuery();
-                    }
+                    command.ExecuteNonQuery();
                 }
             }
         }
