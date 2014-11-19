@@ -1835,7 +1835,7 @@ END
                     command.CommandType = CommandType.StoredProcedure;
 
                     var objectDataRecords = new ObjectDataRecords(mapping, flushDeleted);
-                    var parameter = command.Parameters.Add(Mapping.ParameterNameForAssociation, SqlDbType.Structured);
+                    var parameter = command.Parameters.Add(Mapping.ParameterNameForObjectTable, SqlDbType.Structured);
                     parameter.TypeName = this.Database.SchemaName + "." + Mapping.TableTypeNameForObjects;
                     parameter.Value = objectDataRecords;
                     command.ExecuteNonQuery();

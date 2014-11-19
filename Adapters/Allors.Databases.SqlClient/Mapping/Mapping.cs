@@ -137,7 +137,7 @@ namespace Allors.Adapters.Database.SqlClient
                 this.procedureNameForSetRoleByRelationType.Add(relationType, "_sr_" + relationType.Id.ToString("N").ToLowerInvariant());
                 this.procedureNameForAddRoleByRelationType.Add(relationType, "_ar_" + relationType.Id.ToString("N").ToLowerInvariant());
                 this.procedureNameForRemoveRoleByRelationType.Add(relationType, "_rr_" + relationType.Id.ToString("N").ToLowerInvariant());
-                this.procedureNameForDeleteRoleByRelationType.Add(relationType, "_rr_" + relationType.Id.ToString("N").ToLowerInvariant());
+                this.procedureNameForDeleteRoleByRelationType.Add(relationType, "_dr_" + relationType.Id.ToString("N").ToLowerInvariant());
 
                 var tableTypeName = TableTypeNameForCompositeRelations;
                 var tableTypeSqlType = this.sqlTypeForObject;

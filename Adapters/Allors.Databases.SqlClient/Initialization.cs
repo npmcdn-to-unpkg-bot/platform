@@ -573,11 +573,11 @@ WHERE _x." + Mapping.ColumnNameForRole + @" = _y." + Mapping.TableTypeColumnName
                         procedureName = this.mapping.GetProcedureNameForDeleteRole(relationType);
                         definition = @"
 CREATE PROCEDURE " + this.mapping.Database.SchemaName + "." + procedureName + @"
-    " + Mapping.ParameterNameForRelationTable + @" " + this.mapping.GetTableTypeName(relationType) + @" READONLY
+    " + Mapping.ParameterNameForObjectTable + @" " + Mapping.TableTypeNameForObjects + @" READONLY
 AS 
 
 DELETE FROM " + this.mapping.Database.SchemaName + "." + this.mapping.GetTableName(roleType.RelationType) + @"
-WHERE " + Mapping.ColumnNameForAssociation + @" IN ( SELECT * FROM " + Mapping.ParameterNameForAssociation + @");
+WHERE " + Mapping.ColumnNameForAssociation + @" IN ( SELECT * FROM " + Mapping.ParameterNameForObjectTable + @");
 ";
 
                         this.CreateProcedure(connection, procedureName, definition);
