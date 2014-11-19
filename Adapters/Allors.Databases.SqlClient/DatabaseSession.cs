@@ -1497,10 +1497,12 @@ END
             {
                 var mapping = this.database.Mapping;
 
-                using (var command = this.CreateCommand(this.Database.SchemaName + "." + Mapping.ProcedureNameForDeleteObjects))
+                var cmdText = @"
+DELETE FROM " + this.Database.SchemaName + "." + Mapping.TableNameForObjects + @"
+WHERE " + Mapping.ColumnNameForObject + @" IN (SELECT " + Mapping.TableTypeColumnNameForObject + " FROM " + Mapping.ParameterNameForObjectTable + @");
+";
+                using (var command = this.CreateCommand(cmdText))
                 {
-                    command.CommandType = CommandType.StoredProcedure;
-
                     var objectDataRecords = new ObjectDataRecords(mapping, this.flushDeletedObjects);
                     var parameter = command.Parameters.Add(Mapping.ParameterNameForObjectTable, SqlDbType.Structured);
                     parameter.TypeName = this.Database.SchemaName + "." + Mapping.TableTypeNameForObjects;
