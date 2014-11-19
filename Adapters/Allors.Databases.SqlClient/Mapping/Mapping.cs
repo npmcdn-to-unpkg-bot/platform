@@ -48,6 +48,7 @@ namespace Allors.Adapters.Database.SqlClient
         public const string ProcedureNameForCreateObjects = "_cos";
         public const string ProcedureNameForInsertObject = "_io";
         public const string ProcedureNameForFetchObjects = "_fo";
+        public const string ProcedureNameForDeleteObjects = "_fd";
 
         public const string ParameterNameForCount = ParamPrefix + "cnt";
         public const string ParameterNameForObject = ParamPrefix + "o";
