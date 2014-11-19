@@ -26,10 +26,12 @@ namespace Allors.Adapters.Database.SqlClient
     {
         public string ConnectionString { get; set; }
 
-        public string SchemaName { get; set; }
-
         public int? CommandTimeout { get; set; }
 
         public IsolationLevel? IsolationLevel { get; set; }
+
+        public string SchemaName { get; set; }
+
+        public bool? UseViews { get; set; }
     }
 }

@@ -87,6 +87,8 @@
     <Compile Include="RelationTypeManyXmlWriter.cs" />
     <Compile Include="RelationTypeOneXmlWriter.cs" />
     <Compile Include="Schema\Procedure.cs" />
+    <Compile Include="Schema\ViewColumn.cs" />
+    <Compile Include="Schema\View.cs" />
     <Compile Include="Schema\TableColumn.cs" />
     <Compile Include="Schema\Schema.cs" />
     <Compile Include="Schema\TableType.cs" />

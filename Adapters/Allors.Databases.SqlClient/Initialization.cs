@@ -19,6 +19,7 @@ namespace Allors.Adapters.Database.SqlClient
     using System;
     using System.Collections.Generic;
     using System.Data.SqlClient;
+    using System.Text;
 
     using Allors.Meta;
 
@@ -26,11 +27,13 @@ namespace Allors.Adapters.Database.SqlClient
     {
         private readonly Mapping mapping;
         private readonly Schema schema;
+        private readonly bool useViews;
 
-        internal Initialization(Mapping mapping, Schema schema)
+        internal Initialization(Mapping mapping, Schema schema, bool useViews)
         {
             this.mapping = mapping;
             this.schema = schema;
+            this.useViews = useViews;
         }
 
         internal void Execute()
@@ -39,6 +42,15 @@ namespace Allors.Adapters.Database.SqlClient
             this.CreateSchema();
             this.CreateTables();
             this.CreateProcedures();
+
+            if (this.useViews)
+            {
+                this.CreateViews();
+            }
+            else
+            {
+                this.DeleteViews();
+            }
         }
 
         private void EnableSnapshotIsolation()
@@ -607,6 +619,154 @@ WHERE " + Mapping.ColumnNameForAssociation + @" IN ( SELECT * FROM " + Mapping.P
                 using (var command = new SqlCommand(definition, connection))
                 {
                     command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        private void CreateViews()
+        {
+            using (var connection = new SqlConnection(this.mapping.Database.ConnectionString))
+            {
+                connection.Open();
+                try
+                {
+                    foreach (var objectType in this.mapping.Database.MetaPopulation.Classes)
+                    {
+                        var stringBuilder = new StringBuilder();
+                        stringBuilder.Append("CREATE VIEW " + this.mapping.Database.SchemaName + ".[" + objectType.Name + "]\n");
+                        stringBuilder.Append("AS\n");
+                        stringBuilder.Append("SELECT * FROM " + this.mapping.Database.SchemaName + "." + Mapping.TableNameForObjects + "\n");
+
+                    //    var schemaTable = new SchemaTable(this, objectType.SingularName, SchemaTableKind.Object, objectType);
+                    //    this.TablesByName.Add(schemaTable.Name, schemaTable);
+                    //    this.TableByObjectType.Add(objectType, schemaTable);
+
+                    //    schemaTable.AddColumn(this.ObjectId);
+                    //    schemaTable.AddColumn(this.TypeId);
+
+                    //    var roleTypes = new List<RoleType>();
+                    //    var associationTypes = new List<AssociationType>();
+
+                    //    var subClassesAndSelf = new List<ObjectType>(objectType.Subclasses) { objectType };
+
+                    //    foreach (var subClass in subClassesAndSelf)
+                    //    {
+                    //        foreach (var roleType in subClass.ExclusiveRoleTypes)
+                    //        {
+                    //            if (!roleTypes.Contains(roleType))
+                    //            {
+                    //                roleTypes.Add(roleType);
+                    //            }
+                    //        }
+
+                    //        foreach (var associationType in subClass.ExclusiveAssociationTypes)
+                    //        {
+                    //            if (!associationTypes.Contains(associationType))
+                    //            {
+                    //                associationTypes.Add(associationType);
+                    //            }
+                    //        }
+                    //    }
+
+                    //    foreach (var associationType in associationTypes)
+                    //    {
+                    //        var relationType = associationType.RelationTypeWhereAssociationType;
+                    //        var roleType = relationType.RoleType;
+                    //        if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveRootClasses && roleType.IsMany)
+                    //        {
+                    //            schemaTable.AddColumn(this.Column(relationType));
+                    //        }
+                    //    }
+
+                    //    foreach (var roleType in roleTypes)
+                    //    {
+                    //        var relationType = roleType.RelationTypeWhereRoleType;
+                    //        var associationType = relationType.AssociationType;
+                    //        if (roleType.ObjectType.IsUnit)
+                    //        {
+                    //            schemaTable.AddColumn(this.Column(relationType));
+                    //        }
+                    //        else
+                    //        {
+                    //            if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveRootClasses && !roleType.IsMany)
+                    //            {
+                    //                schemaTable.AddColumn(this.Column(relationType));
+                    //            }
+                    //        }
+                    //    }
+                    //}
+
+                    //foreach (var relationType in this.Database.Domain.RelationTypes)
+                    //{
+                    //    var associationType = relationType.AssociationType;
+                    //    var roleType = relationType.RoleType;
+
+                    //    if (!roleType.ObjectType.IsUnit && ((associationType.IsMany && roleType.IsMany) || !relationType.ExistExclusiveRootClasses))
+                    //    {
+                    //        var schemaTable = new SchemaTable(this, relationType.Name, SchemaTableKind.Relation, relationType);
+                    //        this.TablesByName.Add(schemaTable.Name, schemaTable);
+                    //        this.TablesByRelationType.Add(relationType, schemaTable);
+
+                    //        schemaTable.AddColumn(this.AssociationId);
+                    //        schemaTable.AddColumn(this.Column(relationType));
+                    //    }
+
+
+                        var definition = stringBuilder.ToString();
+                        var view = this.schema.GetView(objectType.Name);
+                        if (view != null && !view.IsDefinitionCompatible(definition))
+                        {
+                            using (var command = new SqlCommand("DROP VIEW " + this.mapping.Database.SchemaName + ".[" + objectType.Name + "]", connection))
+                            {
+                                command.ExecuteNonQuery();
+                                view = null;
+                            }
+                        }
+
+                        if (view == null)
+                        {
+                            using (var command = new SqlCommand(definition, connection))
+                            {
+                                try
+                                {
+                                    command.ExecuteNonQuery();
+                                }
+                                catch
+                                {
+                                    Console.WriteLine(1);
+                                }
+                            }
+                        }
+                    }
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
+
+        private void DeleteViews()
+        {
+            using (var connection = new SqlConnection(this.mapping.Database.ConnectionString))
+            {
+                connection.Open();
+                try
+                {
+                    foreach (var view in this.schema.ViewByLowercaseViewName.Values)
+                    {
+                        var cmdText = @"
+DROP VIEW " + this.mapping.Database.SchemaName + ".[" + view.Name + @"]
+";
+                        using (var command = new SqlCommand(cmdText, connection))
+                        {
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                }
+                finally
+                {
+                    connection.Close();
                 }
             }
         }

@@ -13,6 +13,7 @@ namespace Allors.Adapters.Database.SqlClient
         private readonly Dictionary<string, Table> tableByLowercaseTableName;
         private readonly Dictionary<string, TableType> tableTypeByLowercaseTableTypeName;
         private readonly Dictionary<string, Procedure> procedureByLowercaseProcedureName;
+        private readonly Dictionary<string, View> viewByLowercaseViewName;
 
         public Schema(Database database)
         {
@@ -20,6 +21,7 @@ namespace Allors.Adapters.Database.SqlClient
             this.tableByLowercaseTableName = new Dictionary<string, Table>();
             this.tableTypeByLowercaseTableTypeName = new Dictionary<string, TableType>();
             this.procedureByLowercaseProcedureName = new Dictionary<string, Procedure>();
+            this.viewByLowercaseViewName = new Dictionary<string, View>();
 
             using (var connection = new SqlConnection(database.ConnectionString))
             {
@@ -49,6 +51,7 @@ SELECT T.table_name,
 FROM information_schema.tables AS T
 FULL OUTER JOIN information_schema.columns AS C
 ON T.table_name = C.table_name
+WHERE T.table_type = 'BASE TABLE'
 AND T.table_schema = @tableSchema
 AND C.table_schema = @tableSchema";
 
@@ -131,6 +134,50 @@ WHERE routine_schema = @routineSchema";
                             }
                         }
                     }
+
+                    // Views
+                    cmdText = @"
+SELECT  _u.view_name,
+        _u.table_name,
+        _v.view_definition
+FROM information_schema.views AS _v
+INNER JOIN information_schema.view_table_usage AS _u
+ON _v.table_name = _u.view_name
+WHERE _v.table_schema = @tableSchema
+AND _u.view_schema = @tableSchema
+AND _u.table_schema = @tableSchema";
+
+                    using (var command = new SqlCommand(cmdText, connection))
+                    {
+                        command.Parameters.Add("@tableSchema", SqlDbType.NVarChar).Value = database.SchemaName;
+                        using (var reader = command.ExecuteReader())
+                        {
+                            var viewNameOrdinal = reader.GetOrdinal("view_name");
+                            var tableNameOrdinal = reader.GetOrdinal("table_name");
+                            var viewDefinitionOrdinal = reader.GetOrdinal("view_definition");
+
+                            while (reader.Read())
+                            {
+                                var viewName = reader.GetString(viewNameOrdinal);
+                                var tableName = reader.GetString(tableNameOrdinal);
+                                var viewDefinition = reader.GetString(viewDefinitionOrdinal);
+
+                                viewName = viewName.Trim().ToLowerInvariant();
+                                View view;
+                                if (!this.ViewByLowercaseViewName.TryGetValue(viewName, out view))
+                                {
+                                    view = new View(this, viewName, viewDefinition);
+                                    this.ViewByLowercaseViewName[viewName] = view;
+                                }
+
+                                Table table;
+                                if (this.TableByLowercaseTableName.TryGetValue(tableName.ToLowerInvariant(), out table))
+                                {
+                                    view.Tables.Add(table);
+                                }
+                            }
+                        }
+                    }
                 }
                 finally
                 {
@@ -160,6 +207,14 @@ WHERE routine_schema = @routineSchema";
             get
             {
                 return this.procedureByLowercaseProcedureName;
+            }
+        }
+
+        public Dictionary<string, View> ViewByLowercaseViewName
+        {
+            get
+            {
+                return this.viewByLowercaseViewName;
             }
         }
 
@@ -198,6 +253,13 @@ WHERE routine_schema = @routineSchema";
             Procedure procedure;
             this.procedureByLowercaseProcedureName.TryGetValue(procedureName.ToLowerInvariant(), out procedure);
             return procedure;
+        }
+
+        public View GetView(string viewName)
+        {
+            View view;
+            this.viewByLowercaseViewName.TryGetValue(viewName.ToLowerInvariant(), out view);
+            return view;
         }
     }
 }

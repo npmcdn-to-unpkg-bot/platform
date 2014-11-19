@@ -45,9 +45,10 @@ namespace Allors.Adapters.Database.SqlClient
         private readonly IRoleCache roleCache;
         private readonly IClassCache classCache;
         private readonly string connectionString;
+        private readonly IsolationLevel isolationLevel;
         private readonly int commandTimeout;
         private readonly string schemaName;
-        private readonly IsolationLevel isolationLevel;
+        private readonly bool useViews;
 
         private Dictionary<string, object> properties;
 
@@ -96,10 +97,10 @@ namespace Allors.Adapters.Database.SqlClient
             this.roleCache = configuration.RoleCache ?? new RoleCache();
             this.classCache = configuration.ClassCache ?? new ClassCache();
             this.commandTimeout = configuration.CommandTimeout ?? 30;
-            this.schemaName = configuration.SchemaName ?? "allors";
             this.isolationLevel = configuration.IsolationLevel ?? IsolationLevel.Snapshot;
-
-
+            this.schemaName = configuration.SchemaName ?? "allors";
+            this.useViews = configuration.UseViews ?? true;
+            
             if (this.ObjectIds is ObjectIdsInteger)
             {
                 this.mapping = new MappingInteger(this);
@@ -284,7 +285,7 @@ namespace Allors.Adapters.Database.SqlClient
 
         public void Init()
         {
-            new Initialization(this.Mapping, new Schema(this)).Execute();
+            new Initialization(this.Mapping, new Schema(this), this.useViews).Execute();
             
             this.roleCache.Invalidate();
             this.classCache.Invalidate();
