@@ -1360,6 +1360,25 @@ END
             }
         }
 
+        private void UpdateCacheIds()
+        {
+            if (this.changedObjects != null)
+            {
+                var mapping = this.database.Mapping;
+                using (var command = this.CreateCommand(this.Database.SchemaName + "." + Mapping.ProcedureNameForUpdateCacheIds))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    var objectDataRecords = new ObjectDataRecords(mapping, this.changedObjects);
+                    var parameter = command.Parameters.Add(Mapping.ParameterNameForObjectTable, SqlDbType.Structured);
+                    parameter.TypeName = this.Database.SchemaName + "." + Mapping.TableTypeNameForObjects;
+                    parameter.Value = objectDataRecords;
+
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
         private object FetchUnitRole(ObjectId association, IRoleType roleType)
         {
             var mapping = this.database.Mapping;
@@ -1821,28 +1840,6 @@ WHERE " + Mapping.ColumnNameForAssociation + @" IN ( SELECT * FROM " + Mapping.P
                     parameter.TypeName = this.Database.SchemaName + "." + Mapping.TableTypeNameForObjects;
                     parameter.Value = objectDataRecords;
                     command.ExecuteNonQuery();
-                }
-            }
-        }
-
-        private void UpdateCacheIds()
-        {
-            if (this.changedObjects != null)
-            {
-                var schema = this.database.Mapping;
-                var cmdText = @"
-UPDATE " + this.Database.SchemaName + "." + Mapping.TableNameForObjects + @"
-SET " + Mapping.ColumnNameForCache + " = " + Mapping.ColumnNameForCache + @" - 1
-WHERE " + Mapping.ColumnNameForObject + " = " + Mapping.ParameterNameForObject;
-                using (var command = this.CreateCommand(cmdText))
-                {
-                    var objectParam = command.Parameters.Add(Mapping.ParameterNameForObject, schema.SqlDbTypeForObject);
-
-                    foreach (var changedObject in this.changedObjects)
-                    {
-                        objectParam.Value = changedObject.Value;
-                        command.ExecuteNonQuery();
-                    }
                 }
             }
         }

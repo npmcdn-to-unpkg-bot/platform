@@ -321,6 +321,20 @@ WHERE " + Mapping.ColumnNameForObject + @" IN (SELECT " + Mapping.TableTypeColum
 
                     this.CreateProcedure(connection, procedureName, definition);
 
+                    // Update Cache Ids
+                    procedureName = Mapping.ProcedureNameForUpdateCacheIds;
+                    definition = @"
+CREATE PROCEDURE " + this.mapping.Database.SchemaName + "." + procedureName + @"
+    " + Mapping.ParameterNameForObjectTable + @" " + Mapping.TableTypeNameForObjects + @" READONLY
+AS 
+
+UPDATE " + this.mapping.Database.SchemaName + "." + Mapping.TableNameForObjects + @"
+SET " + Mapping.ColumnNameForCache + " = " + Mapping.ColumnNameForCache + @" - 1
+WHERE " + Mapping.ColumnNameForObject + " IN ( SELECT * FROM " + Mapping.ParameterNameForObjectTable + @");
+";
+
+                    this.CreateProcedure(connection, procedureName, definition);
+
                     foreach (IRelationType relationType in this.mapping.Database.MetaPopulation.RelationTypes)
                     {
                         var associationType = relationType.AssociationType;
