@@ -81,6 +81,7 @@ namespace Allors.Adapters.Database.SqlClient
         private readonly Dictionary<IRoleType, SqlMetaData[]> sqlMetaDataByRoleType;
 
         private readonly Dictionary<IRelationType, string> procedureNameForFetchRoleByRelationType;
+        private readonly Dictionary<IRelationType, string> procedureNameForFetchAssociationByRelationType;
 
         protected Mapping(Database database, string sqlTypeForObject, SqlDbType sqlDbTypeForObject)
         {
@@ -104,6 +105,7 @@ namespace Allors.Adapters.Database.SqlClient
             this.sqlMetaDataForObject = new SqlMetaData(TableTypeColumnNameForObject, this.SqlDbTypeForObject);
             
             this.procedureNameForFetchRoleByRelationType = new Dictionary<IRelationType, string>();
+            this.procedureNameForFetchAssociationByRelationType = new Dictionary<IRelationType, string>();
 
             var sqlMetaDataBySqlType = new Dictionary<string, SqlMetaData[]>();
             var sqlMetaDataForCompositeRelation = new[]
@@ -121,6 +123,7 @@ namespace Allors.Adapters.Database.SqlClient
                 var sqlMetaData = sqlMetaDataForCompositeRelation;
 
                 this.procedureNameForFetchRoleByRelationType.Add(relationType, "_fr_" + relationType.Id.ToString("N").ToLowerInvariant());
+                this.procedureNameForFetchAssociationByRelationType.Add(relationType, "_fa_" + relationType.Id.ToString("N").ToLowerInvariant());
 
                 var tableTypeName = TableTypeNameForCompositeRelations;
                 var tableTypeSqlType = this.sqlTypeForObject;
@@ -317,7 +320,6 @@ namespace Allors.Adapters.Database.SqlClient
                         }
                     }
 
-
                     sqlDbType = this.SqlDbTypeForObject;
                     sqlType = this.SqlTypeForObject;
                 }
@@ -425,6 +427,13 @@ namespace Allors.Adapters.Database.SqlClient
         {
             string procedureName;
             this.procedureNameForFetchRoleByRelationType.TryGetValue(relationType, out procedureName);
+            return procedureName;
+        }
+
+        public string GetProcedureNameForFetchAssociation(IRelationType relationType)
+        {
+            string procedureName;
+            this.procedureNameForFetchAssociationByRelationType.TryGetValue(relationType, out procedureName);
             return procedureName;
         }
     }

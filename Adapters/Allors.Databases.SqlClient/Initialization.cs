@@ -309,6 +309,7 @@ WHERE " + Mapping.ColumnNameForObject + @" IN (SELECT " + Mapping.TableTypeColum
 
                     foreach (IRelationType relationType in this.mapping.Database.MetaPopulation.RelationTypes)
                     {
+                        var associationType = relationType.AssociationType;
                         var roleType = relationType.RoleType;
 
                         if (roleType.ObjectType is IUnit)
@@ -357,6 +358,39 @@ AS
 SELECT " + Mapping.ColumnNameForRole + @"
 FROM " + this.mapping.Database.SchemaName + "." + this.mapping.GetTableName(roleType.RelationType) + @"
 WHERE " + Mapping.ColumnNameForAssociation + @"=" + Mapping.ParameterNameForAssociation + @";
+";
+
+                                this.CreateProcedure(connection, procedureName, definition);
+                            }
+
+                            if (associationType.IsOne)
+                            {
+                                // Fetch Composite Association
+                                procedureName = this.mapping.GetProcedureNameForFetchAssociation(relationType);
+                                definition = @"
+CREATE PROCEDURE " + this.mapping.Database.SchemaName + "." + procedureName + @"
+    " + Mapping.ParameterNameForRole + @" " + this.mapping.SqlTypeForObject + @"
+AS 
+
+SELECT " + Mapping.ColumnNameForAssociation + @"
+FROM " + this.mapping.Database.SchemaName + "." + this.mapping.GetTableName(associationType.RelationType) + @"
+WHERE " + Mapping.ColumnNameForRole + @"=" + Mapping.ParameterNameForRole + @";
+";
+
+                                this.CreateProcedure(connection, procedureName, definition);
+                            }
+                            else
+                            {
+                                // Fetch Composites Association
+                                procedureName = this.mapping.GetProcedureNameForFetchAssociation(relationType);
+                                definition = @"
+CREATE PROCEDURE " + this.mapping.Database.SchemaName + "." + procedureName + @"
+    " + Mapping.ParameterNameForRole + @" " + this.mapping.SqlTypeForObject + @"
+AS 
+
+SELECT " + Mapping.ColumnNameForAssociation + @"
+FROM " + this.mapping.Database.SchemaName + "." + this.mapping.GetTableName(associationType.RelationType) + @"
+WHERE " + Mapping.ColumnNameForRole + @"=" + Mapping.ParameterNameForRole + @";
 ";
 
                                 this.CreateProcedure(connection, procedureName, definition);

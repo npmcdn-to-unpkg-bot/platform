@@ -1439,16 +1439,13 @@ END
 
         private ObjectId FetchCompositeAssociation(ObjectId role, IAssociationType associationType)
         {
-            var schema = this.database.Mapping;
+            var mapping = this.database.Mapping;
 
-            var cmdText = @"
-SELECT " + Mapping.ColumnNameForAssociation + @"
-FROM " + this.Database.SchemaName + "." + schema.GetTableName(associationType.RelationType) + @"
-WHERE " + Mapping.ColumnNameForRole + @"=" + Mapping.ParameterNameForRole + @";
-";
-            using (var command = this.CreateCommand(cmdText))
+            using (var command = this.CreateCommand(this.Database.SchemaName + "." + mapping.GetProcedureNameForFetchAssociation(associationType.RelationType)))
             {
-                command.Parameters.Add(Mapping.ParameterNameForRole, schema.SqlDbTypeForObject).Value = role.Value;
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.Add(Mapping.ParameterNameForRole, mapping.SqlDbTypeForObject).Value = role.Value;
                 var result = command.ExecuteScalar();
                 if (result != null)
                 {
@@ -1465,17 +1462,14 @@ WHERE " + Mapping.ColumnNameForRole + @"=" + Mapping.ParameterNameForRole + @";
 
         private ObjectId[] FetchCompositeAssociations(ObjectId role, IAssociationType associationType)
         {
-            var schema = this.database.Mapping;
+            var mapping = this.database.Mapping;
 
-            var cmdText = @"
-SELECT " + Mapping.ColumnNameForAssociation + @"
-FROM " + this.Database.SchemaName + "." + schema.GetTableName(associationType.RelationType) + @"
-WHERE " + Mapping.ColumnNameForRole + @"=" + Mapping.ParameterNameForRole + @";
-";
             List<ObjectId> associations = null;
-            using (var command = this.CreateCommand(cmdText))
+            using (var command = this.CreateCommand(this.Database.SchemaName + "." + mapping.GetProcedureNameForFetchAssociation(associationType.RelationType)))
             {
-                command.Parameters.Add(Mapping.ParameterNameForRole, schema.SqlDbTypeForObject).Value = role.Value;
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.Add(Mapping.ParameterNameForRole, mapping.SqlDbTypeForObject).Value = role.Value;
                 using (var reader = command.ExecuteReader())
                 {
                     while (reader.Read())
