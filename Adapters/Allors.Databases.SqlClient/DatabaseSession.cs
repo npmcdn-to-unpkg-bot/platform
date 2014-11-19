@@ -1564,22 +1564,10 @@ END
                     {
                         var relationType = roleType.RelationType;
                         var mapping = this.database.Mapping;
-                        var cmdText = @"
-DELETE FROM " + this.Database.SchemaName + "." + mapping.GetTableName(roleType.RelationType) + @"
-WHERE " + Mapping.ColumnNameForRole + @" IN (SELECT " + Mapping.TableTypeColumnNameForRole + " FROM " + Mapping.ParameterNameForRelationTable + @");
-
-MERGE " + this.Database.SchemaName + "." + mapping.GetTableName(roleType.RelationType) + @" AS _X
-USING (SELECT * FROM " + Mapping.ParameterNameForRelationTable + @") AS _Y
-    ON _X." + Mapping.ColumnNameForAssociation + @" = _Y." + Mapping.TableTypeColumnNameForAssociation + @"
-WHEN MATCHED THEN
-UPDATE
-    SET " + Mapping.ColumnNameForRole + @" = _Y." + Mapping.TableTypeColumnNameForRole + @"
-WHEN NOT MATCHED THEN
-    INSERT (" + Mapping.ColumnNameForAssociation + @", " + Mapping.ColumnNameForRole + @")
-    VALUES(_Y." + Mapping.TableTypeColumnNameForAssociation + @", _Y." + Mapping.TableTypeColumnNameForRole + @");
-";
-                        using (var command = this.CreateCommand(cmdText))
+                        using (var command = this.CreateCommand(this.Database.SchemaName + "." + mapping.GetProcedureNameForSetRole(relationType)))
                         {
+                            command.CommandType = CommandType.StoredProcedure;
+
                             var compositeRoleDataRecords = new CompositeRoleDataRecords(mapping, roleType, flushChanged, roleByAssociation);
                             var parameter = command.Parameters.Add(Mapping.ParameterNameForRelationTable, SqlDbType.Structured);
                             parameter.TypeName = this.Database.SchemaName + "." + mapping.GetTableTypeName(relationType);
@@ -1612,19 +1600,10 @@ WHEN NOT MATCHED THEN
                     {
                         var relationType = roleType.RelationType;
                         var mapping = this.database.Mapping;
-                        var cmdText = @"
-MERGE " + this.Database.SchemaName + "." + mapping.GetTableName(roleType.RelationType) + @" AS _X
-USING (SELECT * FROM " + Mapping.ParameterNameForRelationTable + @") AS _Y
-    ON _X." + Mapping.ColumnNameForAssociation + @" = _Y." + Mapping.TableTypeColumnNameForAssociation + @"
-WHEN MATCHED THEN
-UPDATE
-        SET " + Mapping.ColumnNameForRole + @" = _Y." + Mapping.TableTypeColumnNameForRole + @"
-WHEN NOT MATCHED THEN
-INSERT (" + Mapping.ColumnNameForAssociation + @", " + Mapping.ColumnNameForRole + @")
-VALUES(_Y." + Mapping.TableTypeColumnNameForAssociation + @", _Y." + Mapping.TableTypeColumnNameForRole + @");
-";
-                        using (var command = new SqlCommand(cmdText, this.connection, this.transaction))
+                        using (var command = this.CreateCommand(this.Database.SchemaName + "." + mapping.GetProcedureNameForSetRole(relationType)))
                         {
+                            command.CommandType = CommandType.StoredProcedure;
+
                             var compositeRoleDataRecords = new CompositeRoleDataRecords(mapping, roleType, flushChanged, roleByAssociation);
                             var parameter = command.Parameters.Add(Mapping.ParameterNameForRelationTable, SqlDbType.Structured);
                             parameter.TypeName = this.Database.SchemaName + "." + mapping.GetTableTypeName(relationType);

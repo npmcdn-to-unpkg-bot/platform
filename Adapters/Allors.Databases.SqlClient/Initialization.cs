@@ -16,6 +16,7 @@
 
 namespace Allors.Adapters.Database.SqlClient
 {
+    using System;
     using System.Collections.Generic;
     using System.Data.SqlClient;
 
@@ -428,6 +429,68 @@ WHERE " + Mapping.ColumnNameForRole + @"=" + Mapping.ParameterNameForRole + @";
 
                                 this.CreateProcedure(connection, procedureName, definition);
                             }
+
+                            switch (relationType.Multiplicity)
+                            {
+                                case Multiplicity.OneToOne:
+
+                                    // Set Composite Role
+                                    procedureName = this.mapping.GetProcedureNameForSetRole(relationType);
+                                    definition = @"
+CREATE PROCEDURE " + this.mapping.Database.SchemaName + "." + procedureName + @"
+    " + Mapping.ParameterNameForRelationTable + @" " + this.mapping.GetTableTypeName(relationType) + @" READONLY
+AS 
+
+DELETE FROM " + this.mapping.Database.SchemaName + "." + this.mapping.GetTableName(roleType.RelationType) + @"
+WHERE " + Mapping.ColumnNameForRole + @" IN (SELECT " + Mapping.TableTypeColumnNameForRole + " FROM " + Mapping.ParameterNameForRelationTable + @");
+
+MERGE " + this.mapping.Database.SchemaName + "." + this.mapping.GetTableName(roleType.RelationType) + @" AS _X
+USING (SELECT * FROM " + Mapping.ParameterNameForRelationTable + @") AS _Y
+    ON _X." + Mapping.ColumnNameForAssociation + @" = _Y." + Mapping.TableTypeColumnNameForAssociation + @"
+WHEN MATCHED THEN
+UPDATE
+    SET " + Mapping.ColumnNameForRole + @" = _Y." + Mapping.TableTypeColumnNameForRole + @"
+WHEN NOT MATCHED THEN
+    INSERT (" + Mapping.ColumnNameForAssociation + @", " + Mapping.ColumnNameForRole + @")
+    VALUES(_Y." + Mapping.TableTypeColumnNameForAssociation + @", _Y." + Mapping.TableTypeColumnNameForRole + @");
+";
+
+                                    this.CreateProcedure(connection, procedureName, definition);
+                                    
+                                    break;
+
+                                case Multiplicity.ManyToOne:
+
+                                    // Set Composite Role
+                                    procedureName = this.mapping.GetProcedureNameForSetRole(relationType);
+                                    definition = @"
+CREATE PROCEDURE " + this.mapping.Database.SchemaName + "." + procedureName + @"
+    " + Mapping.ParameterNameForRelationTable + @" " + this.mapping.GetTableTypeName(relationType) + @" READONLY
+AS 
+
+MERGE " + this.mapping.Database.SchemaName + "." + this.mapping.GetTableName(roleType.RelationType) + @" AS _X
+USING (SELECT * FROM " + Mapping.ParameterNameForRelationTable + @") AS _Y
+    ON _X." + Mapping.ColumnNameForAssociation + @" = _Y." + Mapping.TableTypeColumnNameForAssociation + @"
+WHEN MATCHED THEN
+UPDATE
+        SET " + Mapping.ColumnNameForRole + @" = _Y." + Mapping.TableTypeColumnNameForRole + @"
+WHEN NOT MATCHED THEN
+INSERT (" + Mapping.ColumnNameForAssociation + @", " + Mapping.ColumnNameForRole + @")
+VALUES(_Y." + Mapping.TableTypeColumnNameForAssociation + @", _Y." + Mapping.TableTypeColumnNameForRole + @");
+";
+
+                                    this.CreateProcedure(connection, procedureName, definition);
+                                
+                                    break;
+
+                                case Multiplicity.OneToMany:
+                                    break;
+                                case Multiplicity.ManyToMany:
+                                    break;
+                                default:
+                                    throw new Exception("unknown multiplicity");
+                            }
+
                         }
                     }
                 }
