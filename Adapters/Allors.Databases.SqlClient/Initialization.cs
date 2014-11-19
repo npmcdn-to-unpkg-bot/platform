@@ -16,9 +16,7 @@
 
 namespace Allors.Adapters.Database.SqlClient
 {
-    using System;
     using System.Collections.Generic;
-    using System.Data;
     using System.Data.SqlClient;
 
     using Allors.Meta;
@@ -232,37 +230,164 @@ CREATE TABLE " + this.mapping.Database.SchemaName + "." + tableName + @"
                 try
                 {
                     // Create Object
-                    var createDefinition = @"
-CREATE PROCEDURE " + this.mapping.Database.SchemaName + "." + Mapping.ProcedureNameForCreate + @"
+                    var procedureName = Mapping.ProcedureNameForCreateObject;
+                    var definition = @"
+CREATE PROCEDURE " + this.mapping.Database.SchemaName + "." + procedureName + @"
     " + Mapping.ParameterNameForType + @" " + Mapping.SqlTypeForType + @",
     " + Mapping.ParameterNameForCache + @" " + Mapping.SqlTypeForCache + @"
 AS 
-    INSERT INTO " + this.mapping.Database.SchemaName + "." + Mapping.TableNameForObjects + " (" + Mapping.ColumnNameForType + ", " + Mapping.ColumnNameForCache + @")
-    OUTPUT INSERTED." + Mapping.ColumnNameForObject + @"
-    VALUES (" + Mapping.ParameterNameForType + ", " + Mapping.ParameterNameForCache + @");
-";
-                    
-                    var procedure = this.schema.GetProcedure(Mapping.ProcedureNameForCreate);
-                    if (procedure != null && !procedure.IsDefinitionCompatible(createDefinition))
-                    {
-                        using (var command = new SqlCommand("DROP PROCEDURE " + this.mapping.Database.SchemaName + "." + Mapping.ProcedureNameForCreate, connection))
-                        {
-                            command.ExecuteNonQuery();
-                            procedure = null;
-                        }
-                    }
 
-                    if (procedure == null)
+INSERT INTO " + this.mapping.Database.SchemaName + "." + Mapping.TableNameForObjects + " (" + Mapping.ColumnNameForType + ", " + Mapping.ColumnNameForCache + @")
+OUTPUT INSERTED." + Mapping.ColumnNameForObject + @"
+VALUES (" + Mapping.ParameterNameForType + ", " + Mapping.ParameterNameForCache + @");
+";
+
+                    this.CreateProcedure(connection, procedureName, definition);
+
+                    // Create Objects
+                    procedureName = Mapping.ProcedureNameForCreateObjects;
+                    definition = @"
+CREATE PROCEDURE " + this.mapping.Database.SchemaName + "." + procedureName + @"
+    " + Mapping.ParameterNameForCount + @" " + Mapping.SqlTypeForCount + @",
+    " + Mapping.ParameterNameForType + @" " + Mapping.SqlTypeForType + @",
+    " + Mapping.ParameterNameForCache + @" " + Mapping.SqlTypeForCache + @"
+AS 
+
+DECLARE @_x TABLE(
+    Id " + this.mapping.SqlTypeForObject + @"
+);
+
+DECLARE @i INT = 0;
+
+WHILE @i < " + Mapping.ParameterNameForCount + @"
+BEGIN
+
+INSERT INTO " + this.mapping.Database.SchemaName + "." + Mapping.TableNameForObjects + " (" + Mapping.ColumnNameForType + ", " + Mapping.ColumnNameForCache + @")
+OUTPUT INSERTED." + Mapping.ColumnNameForObject + @" INTO @_x
+VALUES (" + Mapping.ParameterNameForType + ", " + Mapping.ParameterNameForCache + @");
+
+SET @i = @i + 1
+END
+
+SELECT Id from @_x;
+";
+
+                    this.CreateProcedure(connection, procedureName, definition);
+                    
+                    // Insert Object
+                    procedureName = Mapping.ProcedureNameForInsertObject;
+                    definition = @"
+CREATE PROCEDURE " + this.mapping.Database.SchemaName + "." + procedureName + @"
+    " + Mapping.ParameterNameForObject + @" " + this.mapping.SqlTypeForObject + @",
+    " + Mapping.ParameterNameForType + @" " + Mapping.SqlTypeForType + @",
+    " + Mapping.ParameterNameForCache + @" " + Mapping.SqlTypeForCache + @"
+AS 
+
+SET IDENTITY_INSERT " + this.mapping.Database.SchemaName + "." + Mapping.TableNameForObjects + @" ON;
+
+INSERT INTO " + this.mapping.Database.SchemaName + "." + Mapping.TableNameForObjects + " (" + Mapping.ColumnNameForObject + ", " + Mapping.ColumnNameForType + ", " + Mapping.ColumnNameForCache + @")
+VALUES (" + Mapping.ParameterNameForObject + ", " + Mapping.ParameterNameForType + @", " + Mapping.ParameterNameForCache + @");
+
+SET IDENTITY_INSERT " + this.mapping.Database.SchemaName + "." + Mapping.TableNameForObjects + @" OFF;
+";
+
+                    this.CreateProcedure(connection, procedureName, definition);
+
+                    // Fetch Object
+                    procedureName = Mapping.ProcedureNameForFetchObjects;
+                    definition = @"
+CREATE PROCEDURE " + this.mapping.Database.SchemaName + "." + procedureName + @"
+    " + Mapping.ParameterNameForObjectTable + @" " + Mapping.TableTypeNameForObjects + @" READONLY
+AS 
+
+SELECT " + Mapping.ColumnNameForObject + ", " + Mapping.ColumnNameForType + ", " + Mapping.ColumnNameForCache + @"
+FROM " + this.mapping.Database.SchemaName + "." + Mapping.TableNameForObjects + @"
+WHERE " + Mapping.ColumnNameForObject + @" IN (SELECT " + Mapping.TableTypeColumnNameForObject + " FROM " + Mapping.ParameterNameForObjectTable + @");
+";
+
+                    this.CreateProcedure(connection, procedureName, definition);
+
+                    foreach (IRelationType relationType in this.mapping.Database.MetaPopulation.RelationTypes)
                     {
-                        using (var command = new SqlCommand(createDefinition, connection))
+                        var roleType = relationType.RoleType;
+
+                        if (roleType.ObjectType is IUnit)
                         {
-                            command.ExecuteNonQuery();
+                            // Fetch Unit Role
+                            procedureName = this.mapping.GetProcedureNameForFetchRole(relationType);
+                            definition = @"
+CREATE PROCEDURE " + this.mapping.Database.SchemaName + "." + procedureName + @"
+    " + Mapping.ParameterNameForAssociation + @" " + this.mapping.SqlTypeForObject + @"
+AS 
+
+SELECT " + Mapping.ColumnNameForRole + @"
+FROM " + this.mapping.Database.SchemaName + "." + this.mapping.GetTableName(roleType.RelationType) + @"
+WHERE " + Mapping.ColumnNameForAssociation + @"=" + Mapping.ParameterNameForAssociation + @";
+";
+
+                            this.CreateProcedure(connection, procedureName, definition);
+                        }
+                        else
+                        {
+                            if (roleType.IsOne)
+                            {
+                                // Fetch Composite Role
+                                procedureName = this.mapping.GetProcedureNameForFetchRole(relationType);
+                                definition = @"
+CREATE PROCEDURE " + this.mapping.Database.SchemaName + "." + procedureName + @"
+    " + Mapping.ParameterNameForAssociation + @" " + this.mapping.SqlTypeForObject + @"
+AS 
+
+SELECT " + Mapping.ColumnNameForRole + @"
+FROM " + this.mapping.Database.SchemaName + "." + this.mapping.GetTableName(roleType.RelationType) + @"
+WHERE " + Mapping.ColumnNameForAssociation + @"=" + Mapping.ParameterNameForAssociation + @";
+";
+
+                                this.CreateProcedure(connection, procedureName, definition);
+                            }
+                            else
+                            {
+                                // Fetch Composite Roles
+                                procedureName = this.mapping.GetProcedureNameForFetchRole(relationType);
+                                definition = @"
+CREATE PROCEDURE " + this.mapping.Database.SchemaName + "." + procedureName + @"
+    " + Mapping.ParameterNameForAssociation + @" " + this.mapping.SqlTypeForObject + @"
+AS 
+
+SELECT " + Mapping.ColumnNameForRole + @"
+FROM " + this.mapping.Database.SchemaName + "." + this.mapping.GetTableName(roleType.RelationType) + @"
+WHERE " + Mapping.ColumnNameForAssociation + @"=" + Mapping.ParameterNameForAssociation + @";
+";
+
+                                this.CreateProcedure(connection, procedureName, definition);
+                            }
                         }
                     }
                 }
                 finally
                 {
                     connection.Close();
+                }
+            }
+        }
+
+        private void CreateProcedure(SqlConnection connection, string procedureName, string definition)
+        {
+            var procedure = this.schema.GetProcedure(procedureName);
+            if (procedure != null && !procedure.IsDefinitionCompatible(definition))
+            {
+                using (var command = new SqlCommand("DROP PROCEDURE " + this.mapping.Database.SchemaName + "." + procedureName, connection))
+                {
+                    command.ExecuteNonQuery();
+                    procedure = null;
+                }
+            }
+
+            if (procedure == null)
+            {
+                using (var command = new SqlCommand(definition, connection))
+                {
+                    command.ExecuteNonQuery();
                 }
             }
         }

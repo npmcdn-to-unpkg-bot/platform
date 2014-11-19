@@ -247,7 +247,7 @@ namespace Allors.Adapters.Database.SqlClient
 
         public IObject Create(IClass objectType)
         {
-            using (var command = this.CreateCommand(this.Database.SchemaName + "." + Mapping.ProcedureNameForCreate))
+            using (var command = this.CreateCommand(this.Database.SchemaName + "." + Mapping.ProcedureNameForCreateObject))
             {
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.Add(Mapping.ParameterNameForType, Mapping.SqlDbTypeForType).Value = objectType.Id;
@@ -283,28 +283,11 @@ namespace Allors.Adapters.Database.SqlClient
             var arrayType = this.Database.ObjectFactory.GetTypeForObjectType(objectType);
             var domainObjects = (IObject[])Array.CreateInstance(arrayType, count);
 
-            var cmdText = @"
-DECLARE @_x TABLE(
-    Id " + this.database.Mapping.SqlTypeForObject + @"
-);
-
-DECLARE @i INT = 0;
-
-WHILE @i < " + Mapping.ParameterNameForCount + @"
-BEGIN
-
-INSERT INTO " + this.Database.SchemaName + "." + Mapping.TableNameForObjects + " (" + Mapping.ColumnNameForType + ", " + Mapping.ColumnNameForCache + @")
-OUTPUT INSERTED." + Mapping.ColumnNameForObject + @" INTO @_x
-VALUES (" + Mapping.ParameterNameForType + ", " + Mapping.ParameterNameForCache + @");
-
-SET @i = @i + 1
-END
-
-SELECT Id from @_x;
-";
-            using (var command = this.CreateCommand(cmdText))
+            using (var command = this.CreateCommand(this.Database.SchemaName + "." + Mapping.ProcedureNameForCreateObjects))
             {
-                command.Parameters.Add(Mapping.ParameterNameForCount, SqlDbType.Int).Value = count;
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.Add(Mapping.ParameterNameForCount, Mapping.SqlTypeForCount).Value = count;
                 command.Parameters.Add(Mapping.ParameterNameForType, Mapping.SqlDbTypeForType).Value = objectType.Id;
                 command.Parameters.Add(Mapping.ParameterNameForCache, Mapping.SqlDbTypeForCache).Value = Database.CacheDefaultValue;
 
@@ -424,8 +407,10 @@ VALUES (" + Mapping.ParameterNameForObject + ", " + Mapping.ParameterNameForType
 SET IDENTITY_INSERT " + this.Database.SchemaName + "." + Mapping.TableNameForObjects + @" OFF;
 END
 ";
-            using (var command = this.CreateCommand(cmdText))
+            using (var command = this.CreateCommand(this.Database.SchemaName + "." + Mapping.ProcedureNameForInsertObject))
             {
+                command.CommandType = CommandType.StoredProcedure;
+
                 command.Parameters.Add(Mapping.ParameterNameForObject, mapping.SqlDbTypeForObject).Value = objectId.Value;
                 command.Parameters.Add(Mapping.ParameterNameForType, Mapping.SqlDbTypeForType).Value = objectType.Id;
                 command.Parameters.Add(Mapping.ParameterNameForCache, Mapping.SqlDbTypeForCache).Value = Database.CacheDefaultValue;
@@ -1324,14 +1309,10 @@ END
         
         private void FetchObjects()
         {
-            var mapping = this.Database.Mapping;
-            var cmdText = @"
-SELECT " + Mapping.ColumnNameForObject + ", " + Mapping.ColumnNameForType + ", " + Mapping.ColumnNameForCache + @"
-FROM " + this.Database.SchemaName + "." + Mapping.TableNameForObjects + @"
-WHERE " + Mapping.ColumnNameForObject + @" IN (SELECT " + Mapping.TableTypeColumnNameForObject + " FROM " + Mapping.ParameterNameForObjectTable + @");
-";
-            using (var command = this.CreateCommand(cmdText))
+            var mapping = this.database.Mapping;
+            using (var command = this.CreateCommand(this.Database.SchemaName + "." + Mapping.ProcedureNameForFetchObjects))
             {
+                command.CommandType = CommandType.StoredProcedure;
                 var objectDataRecords = new ObjectDataRecords(mapping, this.objectsToFetch);
                 var parameter = command.Parameters.Add(Mapping.ParameterNameForObjectTable, SqlDbType.Structured);
                 parameter.TypeName = this.Database.SchemaName + "." + Mapping.TableTypeNameForObjects;
@@ -1381,16 +1362,11 @@ WHERE " + Mapping.ColumnNameForObject + @" IN (SELECT " + Mapping.TableTypeColum
 
         private object FetchUnitRole(ObjectId association, IRoleType roleType)
         {
-            var schema = this.database.Mapping;
-
-            var cmdText = @"
-SELECT " + Mapping.ColumnNameForRole + @"
-FROM " + this.Database.SchemaName + "." + schema.GetTableName(roleType.RelationType) + @"
-WHERE " + Mapping.ColumnNameForAssociation + @"=" + Mapping.ParameterNameForAssociation + @";
-";
-            using (var command = this.CreateCommand(cmdText))
+            var mapping = this.database.Mapping;
+            using (var command = this.CreateCommand(this.Database.SchemaName + "." + mapping.GetProcedureNameForFetchRole(roleType.RelationType)))
             {
-                command.Parameters.Add(Mapping.ParameterNameForAssociation, schema.SqlDbTypeForObject).Value = association.Value;
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add(Mapping.ParameterNameForAssociation, mapping.SqlDbTypeForObject).Value = association.Value;
                 var role = command.ExecuteScalar();
 
                 var cacheId = this.GetCacheId(association);
@@ -1402,18 +1378,15 @@ WHERE " + Mapping.ColumnNameForAssociation + @"=" + Mapping.ParameterNameForAsso
 
         private ObjectId FetchCompositeRole(ObjectId association, IRoleType roleType)
         {
-            var schema = this.database.Mapping;
+            var mapping = this.database.Mapping;
 
-            var cmdText = @"
-SELECT " + Mapping.ColumnNameForRole + @"
-FROM " + this.Database.SchemaName + "." + schema.GetTableName(roleType.RelationType) + @"
-WHERE " + Mapping.ColumnNameForAssociation + @"=" + Mapping.ParameterNameForAssociation + @";
-";
-            using (var command = this.CreateCommand(cmdText))
+            using (var command = this.CreateCommand(this.Database.SchemaName + "." + mapping.GetProcedureNameForFetchRole(roleType.RelationType)))
             {
                 ObjectId role = null;
+                
+                command.CommandType = CommandType.StoredProcedure;
 
-                command.Parameters.Add(Mapping.ParameterNameForAssociation, schema.SqlDbTypeForObject).Value = association.Value;
+                command.Parameters.Add(Mapping.ParameterNameForAssociation, mapping.SqlDbTypeForObject).Value = association.Value;
                 var result = command.ExecuteScalar();
                 if (result != null)
                 {
@@ -1430,17 +1403,14 @@ WHERE " + Mapping.ColumnNameForAssociation + @"=" + Mapping.ParameterNameForAsso
 
         private ObjectId[] FetchCompositeRoles(ObjectId association, IRoleType roleType)
         {
-            var schema = this.database.Mapping;
+            var mapping = this.database.Mapping;
 
-            var cmdText = @"
-SELECT " + Mapping.ColumnNameForRole + @"
-FROM " + this.Database.SchemaName + "." + schema.GetTableName(roleType.RelationType) + @"
-WHERE " + Mapping.ColumnNameForAssociation + @"=" + Mapping.ParameterNameForAssociation + @";
-";
             List<ObjectId> roles = null;
-            using (var command = this.CreateCommand(cmdText))
+            using (var command = this.CreateCommand(this.Database.SchemaName + "." + mapping.GetProcedureNameForFetchRole(roleType.RelationType)))
             {
-                command.Parameters.Add(Mapping.ParameterNameForAssociation, schema.SqlDbTypeForObject).Value = association.Value;
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.Add(Mapping.ParameterNameForAssociation, mapping.SqlDbTypeForObject).Value = association.Value;
                 using (var reader = command.ExecuteReader())
                 {
                     while (reader.Read())
