@@ -84,6 +84,8 @@ namespace Allors.Adapters.Database.SqlClient
         private readonly Dictionary<IRelationType, string> procedureNameForGetRoleByRelationType;
         private readonly Dictionary<IRelationType, string> procedureNameForGetAssociationByRelationType;
         private readonly Dictionary<IRelationType, string> procedureNameForSetRoleByRelationType;
+        private readonly Dictionary<IRelationType, string> procedureNameForAddRoleByRelationType;
+        private readonly Dictionary<IRelationType, string> procedureNameForRemoveRoleByRelationType;
 
         protected Mapping(Database database, string sqlTypeForObject, SqlDbType sqlDbTypeForObject)
         {
@@ -109,6 +111,8 @@ namespace Allors.Adapters.Database.SqlClient
             this.procedureNameForGetRoleByRelationType = new Dictionary<IRelationType, string>();
             this.procedureNameForGetAssociationByRelationType = new Dictionary<IRelationType, string>();
             this.procedureNameForSetRoleByRelationType = new Dictionary<IRelationType, string>();
+            this.procedureNameForAddRoleByRelationType = new Dictionary<IRelationType, string>();
+            this.procedureNameForRemoveRoleByRelationType = new Dictionary<IRelationType, string>();
 
             var sqlMetaDataBySqlType = new Dictionary<string, SqlMetaData[]>();
             var sqlMetaDataForCompositeRelation = new[]
@@ -128,6 +132,8 @@ namespace Allors.Adapters.Database.SqlClient
                 this.procedureNameForGetRoleByRelationType.Add(relationType, "_gr_" + relationType.Id.ToString("N").ToLowerInvariant());
                 this.procedureNameForGetAssociationByRelationType.Add(relationType, "_ga_" + relationType.Id.ToString("N").ToLowerInvariant());
                 this.procedureNameForSetRoleByRelationType.Add(relationType, "_sr_" + relationType.Id.ToString("N").ToLowerInvariant());
+                this.procedureNameForAddRoleByRelationType.Add(relationType, "_ar_" + relationType.Id.ToString("N").ToLowerInvariant());
+                this.procedureNameForRemoveRoleByRelationType.Add(relationType, "_rr_" + relationType.Id.ToString("N").ToLowerInvariant());
 
                 var tableTypeName = TableTypeNameForCompositeRelations;
                 var tableTypeSqlType = this.sqlTypeForObject;
@@ -445,6 +451,20 @@ namespace Allors.Adapters.Database.SqlClient
         {
             string procedureName;
             this.procedureNameForSetRoleByRelationType.TryGetValue(relationType, out procedureName);
+            return procedureName;
+        }
+
+        public string GetProcedureNameForAddRole(IRelationType relationType)
+        {
+            string procedureName;
+            this.procedureNameForAddRoleByRelationType.TryGetValue(relationType, out procedureName);
+            return procedureName;
+        }
+
+        public string GetProcedureNameForRemoveRole(IRelationType relationType)
+        {
+            string procedureName;
+            this.procedureNameForRemoveRoleByRelationType.TryGetValue(relationType, out procedureName);
             return procedureName;
         }
     }

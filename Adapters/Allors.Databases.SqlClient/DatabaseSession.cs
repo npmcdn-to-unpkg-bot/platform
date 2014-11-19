@@ -1679,15 +1679,10 @@ END
                     {
                         var relationType = roleType.RelationType;
                         var mapping = this.database.Mapping;
-                        var cmdText = @"
-DELETE FROM " + this.Database.SchemaName + "." + mapping.GetTableName(roleType.RelationType) + @"
-WHERE " + Mapping.ColumnNameForRole + @" IN (SELECT " + Mapping.TableTypeColumnNameForRole + " FROM " + Mapping.ParameterNameForRelationTable + @");
-                    
-INSERT INTO " + this.Database.SchemaName + "." + mapping.GetTableName(roleType.RelationType) + @" (" + Mapping.ColumnNameForAssociation + @", " + Mapping.ColumnNameForRole + @")
-SELECT " + Mapping.TableTypeColumnNameForAssociation + ", " + Mapping.TableTypeColumnNameForRole + " FROM " + Mapping.ParameterNameForRelationTable + @";
-";
-                        using (var command = this.CreateCommand(cmdText))
+                        using (var command = this.CreateCommand(this.Database.SchemaName + "." + mapping.GetProcedureNameForAddRole(relationType)))
                         {
+                            command.CommandType = CommandType.StoredProcedure;
+
                             var compositesRoleDataRecords = new CompositesRoleDataRecords(mapping, roleType, flushAddedRoleByAssociation);
                             var parameter = command.Parameters.Add(Mapping.ParameterNameForRelationTable, SqlDbType.Structured);
                             parameter.TypeName = this.Database.SchemaName + "." + mapping.GetTableTypeName(relationType);
@@ -1700,15 +1695,10 @@ SELECT " + Mapping.TableTypeColumnNameForAssociation + ", " + Mapping.TableTypeC
                     {
                         var relationType = roleType.RelationType;
                         var mapping = this.database.Mapping;
-                        var cmdText = @"
-DELETE _x
-FROM " + (this.Database.SchemaName + "." + mapping.GetTableName(roleType.RelationType)) + @" AS _x
-INNER JOIN " + Mapping.ParameterNameForRelationTable + @" AS _y
-ON _x." + Mapping.ColumnNameForAssociation + @"=_y." + Mapping.TableTypeColumnNameForAssociation + @"
-WHERE _x." + Mapping.ColumnNameForRole + @" = _y." + Mapping.TableTypeColumnNameForRole + @";
-";
-                        using (var command = this.CreateCommand(cmdText))
+                        using (var command = this.CreateCommand(this.Database.SchemaName + "." + mapping.GetProcedureNameForRemoveRole(relationType)))
                         {
+                            command.CommandType = CommandType.StoredProcedure;
+
                             var compositesRoleDataRecords = new CompositesRoleDataRecords(mapping, roleType, flushRemovedRoleByAssociation);
                             var parameter = command.Parameters.Add(Mapping.ParameterNameForRelationTable, SqlDbType.Structured);
                             parameter.TypeName = this.Database.SchemaName + "." + mapping.GetTableTypeName(relationType);
@@ -1783,12 +1773,10 @@ WHERE _x." + Mapping.ColumnNameForRole + @" = _y." + Mapping.TableTypeColumnName
                     {
                         var relationType = roleType.RelationType;
                         var mapping = this.database.Mapping;
-                        var cmdText = @"
-INSERT INTO " + this.Database.SchemaName + "." + mapping.GetTableName(roleType.RelationType) + @" (" + Mapping.ColumnNameForAssociation + @", " + Mapping.ColumnNameForRole + @")
-SELECT " + Mapping.TableTypeColumnNameForAssociation + ", " + Mapping.TableTypeColumnNameForRole + " FROM " + Mapping.ParameterNameForRelationTable + @";
-";
-                        using (var command = this.CreateCommand(cmdText))
+                        using (var command = this.CreateCommand(this.Database.SchemaName + "." + mapping.GetProcedureNameForAddRole(relationType)))
                         {
+                            command.CommandType = CommandType.StoredProcedure;
+
                             var compositesRoleDataRecords = new CompositesRoleDataRecords(mapping, roleType, flushAddedRoleByAssociation);
                             var parameter = command.Parameters.Add(Mapping.ParameterNameForRelationTable, SqlDbType.Structured);
                             parameter.TypeName = this.Database.SchemaName + "." + mapping.GetTableTypeName(relationType);
@@ -1801,15 +1789,10 @@ SELECT " + Mapping.TableTypeColumnNameForAssociation + ", " + Mapping.TableTypeC
                     {
                         var relationType = roleType.RelationType;
                         var mapping = this.database.Mapping;
-                        var cmdText = @"
-DELETE _x
-FROM " + (this.Database.SchemaName + "." + mapping.GetTableName(roleType.RelationType)) + @" AS _x
-INNER JOIN " + Mapping.ParameterNameForRelationTable + @" AS _y
-ON _x." + Mapping.ColumnNameForAssociation + @"=_y." + Mapping.TableTypeColumnNameForAssociation + @"
-WHERE _x." + Mapping.ColumnNameForRole + @" = _y." + Mapping.TableTypeColumnNameForRole + @";
-";
-                        using (var command = this.CreateCommand(cmdText))
+                        using (var command = this.CreateCommand(this.Database.SchemaName + "." + mapping.GetProcedureNameForRemoveRole(relationType)))
                         {
+                            command.CommandType = CommandType.StoredProcedure;
+
                             var compositesRoleDataRecords = new CompositesRoleDataRecords(mapping, roleType, flushRemovedRoleByAssociation);
                             var parameter = command.Parameters.Add(Mapping.ParameterNameForRelationTable, SqlDbType.Structured);
                             parameter.TypeName = this.Database.SchemaName + "." + mapping.GetTableTypeName(relationType);

@@ -484,8 +484,71 @@ VALUES(_Y." + Mapping.TableTypeColumnNameForAssociation + @", _Y." + Mapping.Tab
                                     break;
 
                                 case Multiplicity.OneToMany:
+
+                                    // Add Composite Role
+                                    procedureName = this.mapping.GetProcedureNameForAddRole(relationType);
+                                    definition = @"
+CREATE PROCEDURE " + this.mapping.Database.SchemaName + "." + procedureName + @"
+    " + Mapping.ParameterNameForRelationTable + @" " + this.mapping.GetTableTypeName(relationType) + @" READONLY
+AS 
+
+DELETE FROM " + this.mapping.Database.SchemaName + "." + this.mapping.GetTableName(roleType.RelationType) + @"
+WHERE " + Mapping.ColumnNameForRole + @" IN (SELECT " + Mapping.TableTypeColumnNameForRole + " FROM " + Mapping.ParameterNameForRelationTable + @");
+                    
+INSERT INTO " + this.mapping.Database.SchemaName + "." + this.mapping.GetTableName(roleType.RelationType) + @" (" + Mapping.ColumnNameForAssociation + @", " + Mapping.ColumnNameForRole + @")
+SELECT " + Mapping.TableTypeColumnNameForAssociation + ", " + Mapping.TableTypeColumnNameForRole + " FROM " + Mapping.ParameterNameForRelationTable + @";
+";
+
+                                    this.CreateProcedure(connection, procedureName, definition);
+
+                                    // Remove Composite Role
+                                    procedureName = this.mapping.GetProcedureNameForRemoveRole(relationType);
+                                    definition = @"
+CREATE PROCEDURE " + this.mapping.Database.SchemaName + "." + procedureName + @"
+    " + Mapping.ParameterNameForRelationTable + @" " + this.mapping.GetTableTypeName(relationType) + @" READONLY
+AS 
+
+DELETE _x
+FROM " + (this.mapping.Database.SchemaName + "." + this.mapping.GetTableName(roleType.RelationType)) + @" AS _x
+INNER JOIN " + Mapping.ParameterNameForRelationTable + @" AS _y
+ON _x." + Mapping.ColumnNameForAssociation + @"=_y." + Mapping.TableTypeColumnNameForAssociation + @"
+WHERE _x." + Mapping.ColumnNameForRole + @" = _y." + Mapping.TableTypeColumnNameForRole + @";
+";
+
+                                    this.CreateProcedure(connection, procedureName, definition);
+
                                     break;
                                 case Multiplicity.ManyToMany:
+
+                                    // Add Composite Role
+                                    procedureName = this.mapping.GetProcedureNameForAddRole(relationType);
+                                    definition = @"
+CREATE PROCEDURE " + this.mapping.Database.SchemaName + "." + procedureName + @"
+    " + Mapping.ParameterNameForRelationTable + @" " + this.mapping.GetTableTypeName(relationType) + @" READONLY
+AS 
+
+INSERT INTO " + this.mapping.Database.SchemaName + "." + this.mapping.GetTableName(roleType.RelationType) + @" (" + Mapping.ColumnNameForAssociation + @", " + Mapping.ColumnNameForRole + @")
+SELECT " + Mapping.TableTypeColumnNameForAssociation + ", " + Mapping.TableTypeColumnNameForRole + " FROM " + Mapping.ParameterNameForRelationTable + @";
+";
+
+                                    this.CreateProcedure(connection, procedureName, definition);
+
+                                    // Remove Composite Role
+                                    procedureName = this.mapping.GetProcedureNameForRemoveRole(relationType);
+                                    definition = @"
+CREATE PROCEDURE " + this.mapping.Database.SchemaName + "." + procedureName + @"
+    " + Mapping.ParameterNameForRelationTable + @" " + this.mapping.GetTableTypeName(relationType) + @" READONLY
+AS 
+
+DELETE _x
+FROM " + (this.mapping.Database.SchemaName + "." + this.mapping.GetTableName(roleType.RelationType)) + @" AS _x
+INNER JOIN " + Mapping.ParameterNameForRelationTable + @" AS _y
+ON _x." + Mapping.ColumnNameForAssociation + @"=_y." + Mapping.TableTypeColumnNameForAssociation + @"
+WHERE _x." + Mapping.ColumnNameForRole + @" = _y." + Mapping.TableTypeColumnNameForRole + @";
+";
+
+                                    this.CreateProcedure(connection, procedureName, definition);
+
                                     break;
                                 default:
                                     throw new Exception("unknown multiplicity");
