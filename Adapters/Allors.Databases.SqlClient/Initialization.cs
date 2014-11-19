@@ -397,6 +397,19 @@ WHERE " + Mapping.ColumnNameForRole + @"=" + Mapping.ParameterNameForRole + @";
                             }
                         }
                     }
+
+                    // Delete Objects
+                    procedureName = Mapping.ProcedureNameForDeleteObjects;
+                    definition = @"
+CREATE PROCEDURE " + this.mapping.Database.SchemaName + "." + procedureName + @"
+    " + Mapping.ParameterNameForObjectTable + @" " + Mapping.TableTypeNameForObjects + @" READONLY
+AS 
+
+DELETE FROM " + this.mapping.Database.SchemaName + "." + Mapping.TableNameForObjects + @"
+WHERE " + Mapping.ColumnNameForObject + @" IN (SELECT " + Mapping.TableTypeColumnNameForObject + " FROM " + Mapping.ParameterNameForObjectTable + @");
+";
+
+                    this.CreateProcedure(connection, procedureName, definition);
                 }
                 finally
                 {
