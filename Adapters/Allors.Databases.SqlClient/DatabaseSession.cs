@@ -1830,11 +1830,10 @@ END
             if (flushDeleted != null)
             {
                 var mapping = this.database.Mapping;
-                var cmdText = @"
-DELETE FROM " + this.Database.SchemaName + "." + mapping.GetTableName(roleType.RelationType) + @"
-WHERE " + Mapping.ColumnNameForAssociation + @" IN ( SELECT * FROM " + Mapping.ParameterNameForAssociation + ");";
-                using (var command = this.CreateCommand(cmdText))
+                using (var command = this.CreateCommand(this.Database.SchemaName + "." + mapping.GetProcedureNameForDeleteRole(roleType.RelationType)))
                 {
+                    command.CommandType = CommandType.StoredProcedure;
+
                     var objectDataRecords = new ObjectDataRecords(mapping, flushDeleted);
                     var parameter = command.Parameters.Add(Mapping.ParameterNameForAssociation, SqlDbType.Structured);
                     parameter.TypeName = this.Database.SchemaName + "." + Mapping.TableTypeNameForObjects;

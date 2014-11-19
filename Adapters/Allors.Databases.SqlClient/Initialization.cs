@@ -335,7 +335,7 @@ WHERE " + Mapping.ColumnNameForObject + " IN ( SELECT * FROM " + Mapping.Paramet
 
                     this.CreateProcedure(connection, procedureName, definition);
 
-                    foreach (IRelationType relationType in this.mapping.Database.MetaPopulation.RelationTypes)
+                    foreach (var relationType in this.mapping.Database.MetaPopulation.RelationTypes)
                     {
                         var associationType = relationType.AssociationType;
                         var roleType = relationType.RoleType;
@@ -567,8 +567,20 @@ WHERE _x." + Mapping.ColumnNameForRole + @" = _y." + Mapping.TableTypeColumnName
                                 default:
                                     throw new Exception("unknown multiplicity");
                             }
-
                         }
+
+                        // Delete Role
+                        procedureName = this.mapping.GetProcedureNameForDeleteRole(relationType);
+                        definition = @"
+CREATE PROCEDURE " + this.mapping.Database.SchemaName + "." + procedureName + @"
+    " + Mapping.ParameterNameForRelationTable + @" " + this.mapping.GetTableTypeName(relationType) + @" READONLY
+AS 
+
+DELETE FROM " + this.mapping.Database.SchemaName + "." + this.mapping.GetTableName(roleType.RelationType) + @"
+WHERE " + Mapping.ColumnNameForAssociation + @" IN ( SELECT * FROM " + Mapping.ParameterNameForAssociation + @");
+";
+
+                        this.CreateProcedure(connection, procedureName, definition);
                     }
                 }
                 finally
