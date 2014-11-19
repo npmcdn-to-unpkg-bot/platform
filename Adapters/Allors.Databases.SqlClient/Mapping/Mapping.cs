@@ -81,8 +81,9 @@ namespace Allors.Adapters.Database.SqlClient
         private readonly SqlMetaData sqlMetaDataForObject;
         private readonly Dictionary<IRoleType, SqlMetaData[]> sqlMetaDataByRoleType;
 
-        private readonly Dictionary<IRelationType, string> procedureNameForFetchRoleByRelationType;
-        private readonly Dictionary<IRelationType, string> procedureNameForFetchAssociationByRelationType;
+        private readonly Dictionary<IRelationType, string> procedureNameForGetRoleByRelationType;
+        private readonly Dictionary<IRelationType, string> procedureNameForGetAssociationByRelationType;
+        private readonly Dictionary<IRelationType, string> procedureNameForSetRoleByRelationType;
 
         protected Mapping(Database database, string sqlTypeForObject, SqlDbType sqlDbTypeForObject)
         {
@@ -105,8 +106,9 @@ namespace Allors.Adapters.Database.SqlClient
             this.sqlMetaDataByRoleType = new Dictionary<IRoleType, SqlMetaData[]>();
             this.sqlMetaDataForObject = new SqlMetaData(TableTypeColumnNameForObject, this.SqlDbTypeForObject);
             
-            this.procedureNameForFetchRoleByRelationType = new Dictionary<IRelationType, string>();
-            this.procedureNameForFetchAssociationByRelationType = new Dictionary<IRelationType, string>();
+            this.procedureNameForGetRoleByRelationType = new Dictionary<IRelationType, string>();
+            this.procedureNameForGetAssociationByRelationType = new Dictionary<IRelationType, string>();
+            this.procedureNameForSetRoleByRelationType = new Dictionary<IRelationType, string>();
 
             var sqlMetaDataBySqlType = new Dictionary<string, SqlMetaData[]>();
             var sqlMetaDataForCompositeRelation = new[]
@@ -123,8 +125,9 @@ namespace Allors.Adapters.Database.SqlClient
 
                 var sqlMetaData = sqlMetaDataForCompositeRelation;
 
-                this.procedureNameForFetchRoleByRelationType.Add(relationType, "_fr_" + relationType.Id.ToString("N").ToLowerInvariant());
-                this.procedureNameForFetchAssociationByRelationType.Add(relationType, "_fa_" + relationType.Id.ToString("N").ToLowerInvariant());
+                this.procedureNameForGetRoleByRelationType.Add(relationType, "_gr_" + relationType.Id.ToString("N").ToLowerInvariant());
+                this.procedureNameForGetAssociationByRelationType.Add(relationType, "_ga_" + relationType.Id.ToString("N").ToLowerInvariant());
+                this.procedureNameForSetRoleByRelationType.Add(relationType, "_sr_" + relationType.Id.ToString("N").ToLowerInvariant());
 
                 var tableTypeName = TableTypeNameForCompositeRelations;
                 var tableTypeSqlType = this.sqlTypeForObject;
@@ -424,17 +427,24 @@ namespace Allors.Adapters.Database.SqlClient
             return sqlMetaData;
         }
 
-        public string GetProcedureNameForFetchRole(IRelationType relationType)
+        public string GetProcedureNameForGetRole(IRelationType relationType)
         {
             string procedureName;
-            this.procedureNameForFetchRoleByRelationType.TryGetValue(relationType, out procedureName);
+            this.procedureNameForGetRoleByRelationType.TryGetValue(relationType, out procedureName);
             return procedureName;
         }
 
-        public string GetProcedureNameForFetchAssociation(IRelationType relationType)
+        public string GetProcedureNameForGetAssociation(IRelationType relationType)
         {
             string procedureName;
-            this.procedureNameForFetchAssociationByRelationType.TryGetValue(relationType, out procedureName);
+            this.procedureNameForGetAssociationByRelationType.TryGetValue(relationType, out procedureName);
+            return procedureName;
+        }
+
+        public string GetProcedureNameForSetRole(IRelationType relationType)
+        {
+            string procedureName;
+            this.procedureNameForSetRoleByRelationType.TryGetValue(relationType, out procedureName);
             return procedureName;
         }
     }

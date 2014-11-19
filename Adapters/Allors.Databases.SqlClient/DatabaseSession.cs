@@ -1363,7 +1363,7 @@ END
         private object FetchUnitRole(ObjectId association, IRoleType roleType)
         {
             var mapping = this.database.Mapping;
-            using (var command = this.CreateCommand(this.Database.SchemaName + "." + mapping.GetProcedureNameForFetchRole(roleType.RelationType)))
+            using (var command = this.CreateCommand(this.Database.SchemaName + "." + mapping.GetProcedureNameForGetRole(roleType.RelationType)))
             {
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.Add(Mapping.ParameterNameForAssociation, mapping.SqlDbTypeForObject).Value = association.Value;
@@ -1380,7 +1380,7 @@ END
         {
             var mapping = this.database.Mapping;
 
-            using (var command = this.CreateCommand(this.Database.SchemaName + "." + mapping.GetProcedureNameForFetchRole(roleType.RelationType)))
+            using (var command = this.CreateCommand(this.Database.SchemaName + "." + mapping.GetProcedureNameForGetRole(roleType.RelationType)))
             {
                 ObjectId role = null;
                 
@@ -1406,7 +1406,7 @@ END
             var mapping = this.database.Mapping;
 
             List<ObjectId> roles = null;
-            using (var command = this.CreateCommand(this.Database.SchemaName + "." + mapping.GetProcedureNameForFetchRole(roleType.RelationType)))
+            using (var command = this.CreateCommand(this.Database.SchemaName + "." + mapping.GetProcedureNameForGetRole(roleType.RelationType)))
             {
                 command.CommandType = CommandType.StoredProcedure;
 
@@ -1441,7 +1441,7 @@ END
         {
             var mapping = this.database.Mapping;
 
-            using (var command = this.CreateCommand(this.Database.SchemaName + "." + mapping.GetProcedureNameForFetchAssociation(associationType.RelationType)))
+            using (var command = this.CreateCommand(this.Database.SchemaName + "." + mapping.GetProcedureNameForGetAssociation(associationType.RelationType)))
             {
                 command.CommandType = CommandType.StoredProcedure;
 
@@ -1465,7 +1465,7 @@ END
             var mapping = this.database.Mapping;
 
             List<ObjectId> associations = null;
-            using (var command = this.CreateCommand(this.Database.SchemaName + "." + mapping.GetProcedureNameForFetchAssociation(associationType.RelationType)))
+            using (var command = this.CreateCommand(this.Database.SchemaName + "." + mapping.GetProcedureNameForGetAssociation(associationType.RelationType)))
             {
                 command.CommandType = CommandType.StoredProcedure;
 
@@ -1530,19 +1530,10 @@ END
                     {
                         var relationType = roleType.RelationType;
                         var mapping = this.database.Mapping;
-                        var cmdText = @"
-MERGE " + this.Database.SchemaName + "." + mapping.GetTableName(roleType.RelationType) + @" AS _X
-USING (SELECT * FROM " + Mapping.ParameterNameForRelationTable + @") AS _Y
-    ON _X." + Mapping.ColumnNameForAssociation + @" = _Y." + Mapping.TableTypeColumnNameForAssociation + @"
-WHEN MATCHED THEN
-UPDATE
-    SET " + Mapping.ColumnNameForRole + @" = _Y." + Mapping.TableTypeColumnNameForRole + @"
-WHEN NOT MATCHED THEN
-    INSERT (" + Mapping.ColumnNameForAssociation + @", " + Mapping.ColumnNameForRole + @")
-    VALUES(_Y." + Mapping.TableTypeColumnNameForAssociation + @", _Y." + Mapping.TableTypeColumnNameForRole + @");
-";
-                        using (var command = this.CreateCommand(cmdText))
+                        using (var command = this.CreateCommand(this.Database.SchemaName + "." + mapping.GetProcedureNameForSetRole(relationType)))
                         {
+                            command.CommandType = CommandType.StoredProcedure;
+
                             var unitRoleDataRecords = new UnitRoleDataRecords(mapping, roleType, flushChanged, roleByAssociation);
                             var parameter = command.Parameters.Add(Mapping.ParameterNameForRelationTable, SqlDbType.Structured);
                             parameter.TypeName = this.Database.SchemaName + "." + mapping.GetTableTypeName(relationType);

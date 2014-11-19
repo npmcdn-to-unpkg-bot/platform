@@ -327,8 +327,8 @@ WHERE " + Mapping.ColumnNameForObject + @" IN (SELECT " + Mapping.TableTypeColum
 
                         if (roleType.ObjectType is IUnit)
                         {
-                            // Fetch Unit Role
-                            procedureName = this.mapping.GetProcedureNameForFetchRole(relationType);
+                            // Get Unit Role
+                            procedureName = this.mapping.GetProcedureNameForGetRole(relationType);
                             definition = @"
 CREATE PROCEDURE " + this.mapping.Database.SchemaName + "." + procedureName + @"
     " + Mapping.ParameterNameForAssociation + @" " + this.mapping.SqlTypeForObject + @"
@@ -340,13 +340,33 @@ WHERE " + Mapping.ColumnNameForAssociation + @"=" + Mapping.ParameterNameForAsso
 ";
 
                             this.CreateProcedure(connection, procedureName, definition);
+
+                            // Set Unit Role
+                            procedureName = this.mapping.GetProcedureNameForSetRole(relationType);
+                            definition = @"
+CREATE PROCEDURE " + this.mapping.Database.SchemaName + "." + procedureName + @"
+    " + Mapping.ParameterNameForRelationTable + @" " + this.mapping.GetTableTypeName(relationType) + @" READONLY
+AS 
+
+MERGE " + this.mapping.Database.SchemaName + "." + this.mapping.GetTableName(roleType.RelationType) + @" AS _X
+USING (SELECT * FROM " + Mapping.ParameterNameForRelationTable + @") AS _Y
+    ON _X." + Mapping.ColumnNameForAssociation + @" = _Y." + Mapping.TableTypeColumnNameForAssociation + @"
+WHEN MATCHED THEN
+UPDATE
+    SET " + Mapping.ColumnNameForRole + @" = _Y." + Mapping.TableTypeColumnNameForRole + @"
+WHEN NOT MATCHED THEN
+    INSERT (" + Mapping.ColumnNameForAssociation + @", " + Mapping.ColumnNameForRole + @")
+    VALUES(_Y." + Mapping.TableTypeColumnNameForAssociation + @", _Y." + Mapping.TableTypeColumnNameForRole + @");
+";
+
+                            this.CreateProcedure(connection, procedureName, definition);
                         }
                         else
                         {
                             if (roleType.IsOne)
                             {
-                                // Fetch Composite Role
-                                procedureName = this.mapping.GetProcedureNameForFetchRole(relationType);
+                                // Get Composite Role
+                                procedureName = this.mapping.GetProcedureNameForGetRole(relationType);
                                 definition = @"
 CREATE PROCEDURE " + this.mapping.Database.SchemaName + "." + procedureName + @"
     " + Mapping.ParameterNameForAssociation + @" " + this.mapping.SqlTypeForObject + @"
@@ -361,8 +381,8 @@ WHERE " + Mapping.ColumnNameForAssociation + @"=" + Mapping.ParameterNameForAsso
                             }
                             else
                             {
-                                // Fetch Composite Roles
-                                procedureName = this.mapping.GetProcedureNameForFetchRole(relationType);
+                                // Get Composite Roles
+                                procedureName = this.mapping.GetProcedureNameForGetRole(relationType);
                                 definition = @"
 CREATE PROCEDURE " + this.mapping.Database.SchemaName + "." + procedureName + @"
     " + Mapping.ParameterNameForAssociation + @" " + this.mapping.SqlTypeForObject + @"
@@ -378,8 +398,8 @@ WHERE " + Mapping.ColumnNameForAssociation + @"=" + Mapping.ParameterNameForAsso
 
                             if (associationType.IsOne)
                             {
-                                // Fetch Composite Association
-                                procedureName = this.mapping.GetProcedureNameForFetchAssociation(relationType);
+                                // Get Composite Association
+                                procedureName = this.mapping.GetProcedureNameForGetAssociation(relationType);
                                 definition = @"
 CREATE PROCEDURE " + this.mapping.Database.SchemaName + "." + procedureName + @"
     " + Mapping.ParameterNameForRole + @" " + this.mapping.SqlTypeForObject + @"
@@ -394,8 +414,8 @@ WHERE " + Mapping.ColumnNameForRole + @"=" + Mapping.ParameterNameForRole + @";
                             }
                             else
                             {
-                                // Fetch Composites Association
-                                procedureName = this.mapping.GetProcedureNameForFetchAssociation(relationType);
+                                // Get Composites Association
+                                procedureName = this.mapping.GetProcedureNameForGetAssociation(relationType);
                                 definition = @"
 CREATE PROCEDURE " + this.mapping.Database.SchemaName + "." + procedureName + @"
     " + Mapping.ParameterNameForRole + @" " + this.mapping.SqlTypeForObject + @"
