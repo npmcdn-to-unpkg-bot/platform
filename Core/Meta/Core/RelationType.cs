@@ -32,6 +32,9 @@ namespace Allors.Meta
         private readonly AssociationType associationType;
         private readonly RoleType roleType;
 
+        private Multiplicity assignedMultiplicity;
+        private Multiplicity multiplicity;
+
         private bool isDerived;
         private bool isIndexed;
 
@@ -59,9 +62,28 @@ namespace Allors.Meta
             }
         }
 
+        public Multiplicity AssignedMultiplicity 
+        {
+            get
+            {
+                return this.assignedMultiplicity;
+            }
+
+            set
+            {
+                this.MetaPopulation.AssertUnlocked();
+                this.assignedMultiplicity = value;
+                this.MetaPopulation.Stale();
+            }
+        }
+
         public Multiplicity Multiplicity 
         {
-            get; internal set;
+            get
+            {
+                this.MetaPopulation.Derive();
+                return this.multiplicity;
+            }
         }
 
         public bool IsIndexed
@@ -112,10 +134,10 @@ namespace Allors.Meta
         }
 
         /// <summary>
-        /// Gets a value indicating whether there exist exclusive root classes.
+        /// Gets a value indicating whether there exist exclusive leaf classes.
         /// </summary>
         /// <value>
-        ///  <c>true</c> if [exist exclusive root classes]; otherwise, <c>false</c>.
+        ///  <c>true</c> if [exist exclusive leaf classes]; otherwise, <c>false</c>.
         /// </value>
         public bool ExistExclusiveLeafClasses
         {
@@ -239,6 +261,18 @@ namespace Allors.Meta
             catch
             {
                 return this.IdAsString;
+            }
+        }
+
+        internal void DeriveMultiplicity()
+        {
+            if (this.RoleType != null && this.RoleType.ObjectType !=null && this.RoleType.ObjectType.IsUnit)
+            {
+                this.multiplicity = Multiplicity.OneToOne;
+            }
+            else
+            {
+                this.multiplicity = this.AssignedMultiplicity;
             }
         }
 

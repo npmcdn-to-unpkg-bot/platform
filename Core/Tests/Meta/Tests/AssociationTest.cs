@@ -49,9 +49,9 @@ namespace Allors.Meta.Static
             Assert.AreEqual(associationType.Id.ToString().ToLower(), associationType.SingularName);
             Assert.AreEqual(associationType.Id.ToString().ToLower(), associationType.PluralName);
 
-            relationType.Multiplicity = Multiplicity.OneToOne;
+            relationType.AssignedMultiplicity = Multiplicity.OneToOne;
             Assert.AreEqual(associationType.Id.ToString(), associationType.Name);
-            relationType.Multiplicity = Multiplicity.OneToMany;
+            relationType.AssignedMultiplicity = Multiplicity.OneToMany;
             Assert.AreEqual(associationType.Id.ToString(), associationType.Name);
         }
 

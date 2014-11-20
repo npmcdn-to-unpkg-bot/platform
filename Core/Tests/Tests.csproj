@@ -66,9 +66,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework\Framework\Framework.csproj">
+    <ProjectReference Include="..\..\Framework\Framework\Allors.csproj">
       <Project>{84495b8e-1800-41c9-a236-abe6265a23a3}</Project>
-      <Name>Framework</Name>
+      <Name>Allors</Name>
     </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{b6c2e17b-53e1-44a4-9299-5350cc854e65}</Project>

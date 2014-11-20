@@ -92,15 +92,15 @@ namespace Allors.Meta.Static
 
             Assert.IsTrue(relationType.IsOneToOne);
 
-            relationType.Multiplicity = Meta.Multiplicity.OneToMany;
+            relationType.AssignedMultiplicity = Meta.Multiplicity.OneToMany;
 
             Assert.IsTrue(relationType.IsOneToMany);
 
-            relationType.Multiplicity = Meta.Multiplicity.ManyToMany;
+            relationType.AssignedMultiplicity = Meta.Multiplicity.ManyToMany;
 
             Assert.IsTrue(relationType.IsManyToMany);
 
-            relationType.Multiplicity = Meta.Multiplicity.ManyToOne;
+            relationType.AssignedMultiplicity = Meta.Multiplicity.ManyToOne;
 
             Assert.IsTrue(relationType.IsManyToOne);
         }
@@ -114,14 +114,14 @@ namespace Allors.Meta.Static
             relationType.AssociationType.ObjectType = this.Population.C1;
             relationType.RoleType.ObjectType = this.Population.IntegerType;
 
-            relationType.Multiplicity = Meta.Multiplicity.OneToOne;
+            relationType.AssignedMultiplicity = Meta.Multiplicity.OneToOne;
 
             Assert.IsTrue(this.MetaPopulation.IsValid);
 
-            relationType.Multiplicity = Meta.Multiplicity.ManyToOne;
+            relationType.AssignedMultiplicity = Meta.Multiplicity.ManyToOne;
             Assert.IsFalse(relationType.AssociationType.IsMany);
 
-            relationType.Multiplicity = Meta.Multiplicity.ManyToMany;
+            relationType.AssignedMultiplicity = Meta.Multiplicity.ManyToMany;
             Assert.IsFalse(relationType.RoleType.IsMany);
         }
 
@@ -134,23 +134,23 @@ namespace Allors.Meta.Static
             relationType.AssociationType.ObjectType = this.Population.C1;
             relationType.RoleType.ObjectType = this.Population.C2;
 
-            relationType.Multiplicity = Meta.Multiplicity.OneToOne;
+            relationType.AssignedMultiplicity = Meta.Multiplicity.OneToOne;
 
             Assert.IsTrue(this.MetaPopulation.IsValid);
 
-            relationType.Multiplicity = Meta.Multiplicity.ManyToOne;
+            relationType.AssignedMultiplicity = Meta.Multiplicity.ManyToOne;
 
             Assert.IsTrue(this.MetaPopulation.IsValid);
 
-            relationType.Multiplicity = Meta.Multiplicity.OneToMany;
+            relationType.AssignedMultiplicity = Meta.Multiplicity.OneToMany;
 
             Assert.IsTrue(this.MetaPopulation.IsValid);
 
-            relationType.Multiplicity = Meta.Multiplicity.ManyToMany;
+            relationType.AssignedMultiplicity = Meta.Multiplicity.ManyToMany;
 
             Assert.IsTrue(this.MetaPopulation.IsValid);
 
-            relationType.Multiplicity = Meta.Multiplicity.OneToOne;
+            relationType.AssignedMultiplicity = Meta.Multiplicity.OneToOne;
 
             Assert.IsTrue(this.MetaPopulation.IsValid);
         }

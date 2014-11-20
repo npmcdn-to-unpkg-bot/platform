@@ -107,7 +107,7 @@ namespace Allors.Meta
             instance.RoleType.ObjectType = this.roleObjectType;
             instance.IsDerived = this.isDerived;
             instance.IsIndexed = this.isIndexed;
-            instance.Multiplicity = this.multiplicity;
+            instance.AssignedMultiplicity = this.multiplicity;
 
             instance.RoleType.AssignedSingularName = this.singularName;
             instance.RoleType.AssignedPluralName = this.pluralName;

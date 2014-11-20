@@ -411,7 +411,7 @@ namespace Allors.Meta
                         type.DeriveAssociationTypes(sharedAssociationTypes);
                     }
 
-                    // Association & RoleType
+                    // RoleType
                     foreach (var relationType in this.RelationTypes)
                     {
                         relationType.RoleType.DeriveScaleAndSize();
@@ -422,6 +422,12 @@ namespace Allors.Meta
                     {
                         relationType.RoleType.DeriveSingularPropertyName();
                         relationType.RoleType.DerivePluralPropertyName();
+                    }
+
+                    // RelationType Multiplicity
+                    foreach (var relationType in this.RelationTypes)
+                    {
+                        relationType.DeriveMultiplicity();
                     }
 
                     var sharedMethodTypeList = new HashSet<MethodType>();

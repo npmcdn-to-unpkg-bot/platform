@@ -19,8 +19,6 @@ namespace Allors.Meta.Static
     using System;
     using System.Linq;
 
-    using Allors.Domain;
-
     using NUnit.Framework;
 
     using Unit = Allors.Meta.Unit;

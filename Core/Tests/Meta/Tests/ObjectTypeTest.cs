@@ -460,7 +460,7 @@ namespace Allors.Meta.Static
             Assert.IsTrue(((Unit)this.MetaPopulation.Find(new Guid("6DC0A1A8-88A4-4614-ADB4-92DD3D017C0E"))).IsUnique);
             Assert.IsTrue(((Unit)this.MetaPopulation.Find(new Guid("c28e515b-cae8-4d6b-95bf-062aec8042fc"))).IsBinary);
 
-            Assert.AreEqual(8, this.MetaPopulation.Units.Count());
+            Assert.AreEqual(7, this.MetaPopulation.Units.Count());
         }
 
         [Test]

@@ -93,9 +93,9 @@
     <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework\Framework\Framework.csproj">
+    <ProjectReference Include="..\..\Framework\Framework\Allors.csproj">
       <Project>{84495b8e-1800-41c9-a236-abe6265a23a3}</Project>
-      <Name>Framework</Name>
+      <Name>Allors</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -33,9 +33,9 @@ namespace Allors.Meta
 
         IRoleType RoleType { get; }
 
-        bool ExistExclusiveLeafClasses { get; }
-
         Multiplicity Multiplicity { get; }
+
+        bool ExistExclusiveLeafClasses { get; }
 
         bool IsIndexed { get; }
     }
