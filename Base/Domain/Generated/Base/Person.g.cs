@@ -54,12 +54,6 @@ namespace Allors.Domain
 			}			
 					
 
-			if(builder.BirthDate.HasValue)
-			{
-				this.BirthDate = builder.BirthDate.Value;
-			}			
-					
-
 			if(builder.Weight.HasValue)
 			{
 				this.Weight = builder.Weight.Value;
@@ -284,16 +278,6 @@ namespace Allors.Domain
 		        {
 				    if(this.IsMarried!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.IsMarried = value;
-		            return this;
-		        }	
-
-				public global::System.DateTime? BirthDate {get; set;}
-
-				/// <exclude/>
-				public PersonBuilder WithBirthDate(global::System.DateTime? value)
-		        {
-				    if(this.BirthDate!=null){throw new global::System.ArgumentException("One multicplicity");}
-		            this.BirthDate = value;
 		            return this;
 		        }	
 

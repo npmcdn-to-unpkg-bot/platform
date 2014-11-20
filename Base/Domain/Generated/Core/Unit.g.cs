@@ -16,32 +16,6 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime AllorsDate 
-		{
-			get
-			{
-				return (global::System.DateTime) Strategy.GetUnitRole(Meta.AllorsDate);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.AllorsDate, value);
-			}
-		}
-
-		virtual public bool ExistAllorsDate{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.AllorsDate);
-			}
-		}
-
-		virtual public void RemoveAllorsDate()
-		{
-			Strategy.RemoveUnitRole(Meta.AllorsDate);
-		}
-
-
-
 		virtual public global::System.Byte[] AllorsBinary 
 		{
 			get
@@ -68,11 +42,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean AllorsBoolean 
+		virtual public global::System.Boolean? AllorsBoolean 
 		{
 			get
 			{
-				return (global::System.Boolean) Strategy.GetUnitRole(Meta.AllorsBoolean);
+				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.AllorsBoolean);
 			}
 			set
 			{
@@ -94,11 +68,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Double AllorsFloat 
+		virtual public global::System.Double? AllorsFloat 
 		{
 			get
 			{
-				return (global::System.Double) Strategy.GetUnitRole(Meta.AllorsFloat);
+				return (global::System.Double?) Strategy.GetUnitRole(Meta.AllorsFloat);
 			}
 			set
 			{
@@ -120,11 +94,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Int32 AllorsInteger 
+		virtual public global::System.Int32? AllorsInteger 
 		{
 			get
 			{
-				return (global::System.Int32) Strategy.GetUnitRole(Meta.AllorsInteger);
+				return (global::System.Int32?) Strategy.GetUnitRole(Meta.AllorsInteger);
 			}
 			set
 			{
@@ -172,11 +146,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Guid AllorsUnique 
+		virtual public global::System.Guid? AllorsUnique 
 		{
 			get
 			{
-				return (global::System.Guid) Strategy.GetUnitRole(Meta.AllorsUnique);
+				return (global::System.Guid?) Strategy.GetUnitRole(Meta.AllorsUnique);
 			}
 			set
 			{
@@ -198,11 +172,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal AllorsDecimal 
+		virtual public global::System.Decimal? AllorsDecimal 
 		{
 			get
 			{
-				return (global::System.Decimal) Strategy.GetUnitRole(Meta.AllorsDecimal);
+				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.AllorsDecimal);
 			}
 			set
 			{
@@ -328,13 +302,6 @@ namespace Allors.Domain
 
 		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.Unit;
 
-		public global::Allors.Meta.RoleType AllorsDate 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.UnitAllorsDate;
-			}
-		} 
 		public global::Allors.Meta.RoleType AllorsBinary 
 		{
 			get

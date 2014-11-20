@@ -43,9 +43,8 @@ namespace Allors
         [SetUp]
         public void SetUp()
         {
-            var configuration = new Databases.Memory.IntegerId.Configuration { ObjectFactory = Config.ObjectFactory};
+            var configuration = new Databases.Memory.IntegerId.Configuration { ObjectFactory = Config.ObjectFactory, WorkspaceFactory = new WorkspaceFactory() };
             Config.Default = new Databases.Memory.IntegerId.Database(configuration);
-            Config.WorkspaceFactory = new WorkspaceFactory();
 
             Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("nl-BE");
 

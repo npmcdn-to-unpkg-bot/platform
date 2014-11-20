@@ -19,7 +19,7 @@
 // <summary>Defines the AllorsPredicateRoleBetweenValueSql type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.Database.SqlClient
+namespace Allors.Databases.SqlClient
 {
     using System;
 

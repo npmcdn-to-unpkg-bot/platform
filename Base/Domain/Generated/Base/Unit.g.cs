@@ -8,13 +8,6 @@ namespace Allors.Domain
 		internal override void OnBuild(global::Allors.IObjectBuilder objectBuilder)
 		{
 			var builder = (UnitBuilder)objectBuilder;
-			
-
-			if(builder.AllorsDate.HasValue)
-			{
-				this.AllorsDate = builder.AllorsDate.Value;
-			}			
-		
 
 			this.AllorsBinary = builder.AllorsBinary;
 					
@@ -72,16 +65,6 @@ namespace Allors.Domain
 		public UnitBuilder(Allors.ISession session) : base(session)
 	    {
 	    }
-
-				public global::System.DateTime? AllorsDate {get; set;}
-
-				/// <exclude/>
-				public UnitBuilder WithAllorsDate(global::System.DateTime? value)
-		        {
-				    if(this.AllorsDate!=null){throw new global::System.ArgumentException("One multicplicity");}
-		            this.AllorsDate = value;
-		            return this;
-		        }	
 
 				public global::System.Byte[] AllorsBinary {get; set;}
 

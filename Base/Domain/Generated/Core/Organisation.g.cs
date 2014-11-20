@@ -140,11 +140,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean Incorporated 
+		virtual public global::System.Boolean? Incorporated 
 		{
 			get
 			{
-				return (global::System.Boolean) Strategy.GetUnitRole(Meta.Incorporated);
+				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.Incorporated);
 			}
 			set
 			{
@@ -166,11 +166,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean IsSupplier 
+		virtual public global::System.Boolean? IsSupplier 
 		{
 			get
 			{
-				return (global::System.Boolean) Strategy.GetUnitRole(Meta.IsSupplier);
+				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.IsSupplier);
 			}
 			set
 			{
@@ -188,32 +188,6 @@ namespace Allors.Domain
 		virtual public void RemoveIsSupplier()
 		{
 			Strategy.RemoveUnitRole(Meta.IsSupplier);
-		}
-
-
-
-		virtual public global::System.DateTime IncorporationDate 
-		{
-			get
-			{
-				return (global::System.DateTime) Strategy.GetUnitRole(Meta.IncorporationDate);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.IncorporationDate, value);
-			}
-		}
-
-		virtual public bool ExistIncorporationDate{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.IncorporationDate);
-			}
-		}
-
-		virtual public void RemoveIncorporationDate()
-		{
-			Strategy.RemoveUnitRole(Meta.IncorporationDate);
 		}
 
 
@@ -358,11 +332,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Guid UniqueId 
+		virtual public global::System.Guid? UniqueId 
 		{
 			get
 			{
-				return (global::System.Guid) Strategy.GetUnitRole(Meta.UniqueId);
+				return (global::System.Guid?) Strategy.GetUnitRole(Meta.UniqueId);
 			}
 			set
 			{
@@ -563,13 +537,6 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.RoleTypes.OrganisationIsSupplier;
-			}
-		} 
-		public global::Allors.Meta.RoleType IncorporationDate 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.OrganisationIncorporationDate;
 			}
 		} 
 		public global::Allors.Meta.RoleType Address 

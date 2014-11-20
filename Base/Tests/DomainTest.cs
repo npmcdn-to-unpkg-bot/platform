@@ -54,7 +54,7 @@ namespace Allors
 
         public IWorkspaceSession CreateWorkspaceSession()
         {
-            var workspace = Config.WorkspaceFactory.CreateWorkspace(Config.Default);
+            var workspace = Config.Default.CreateWorkspace();
             return workspace.CreateSession();
         }
 

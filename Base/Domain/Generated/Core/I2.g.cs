@@ -48,7 +48,7 @@ namespace Allors.Domain
 		void RemoveI2I12Many2One();
 
 
-		global::System.Boolean I2AllorsBoolean 
+		global::System.Boolean? I2AllorsBoolean 
 		{
 			get;
 			set;
@@ -91,7 +91,7 @@ namespace Allors.Domain
 		void RemoveI2C1One2One();
 
 
-		global::System.Decimal I2AllorsDecimal 
+		global::System.Decimal? I2AllorsDecimal 
 		{
 			get;
 			set;
@@ -131,7 +131,7 @@ namespace Allors.Domain
 		void RemoveI2AllorsBinary();
 
 
-		global::System.Guid I2AllorsUnique 
+		global::System.Guid? I2AllorsUnique 
 		{
 			get;
 			set;
@@ -154,17 +154,6 @@ namespace Allors.Domain
 		}
 
 		void RemoveI2I1Many2One();
-
-
-		global::System.DateTime I2AllorsDate 
-		{
-			get;
-			set;
-		}
-
-		bool ExistI2AllorsDate{get;}
-
-		void RemoveI2AllorsDate();
 
 
 		global::Allors.Extent<I12> I2I12One2Manies
@@ -342,7 +331,7 @@ namespace Allors.Domain
 		void RemoveI2I2One2One();
 
 
-		global::System.Int32 I2AllorsInteger 
+		global::System.Int32? I2AllorsInteger 
 		{
 			get;
 			set;
@@ -403,7 +392,7 @@ namespace Allors.Domain
 		void RemoveI2C2One2One();
 
 
-		global::System.Double I2AllorsFloat 
+		global::System.Double? I2AllorsFloat 
 		{
 			get;
 			set;
@@ -719,13 +708,6 @@ namespace Allors.Domain
 				return global::Allors.Meta.RoleTypes.I2I1Many2One;
 			}
 		} 
-		public global::Allors.Meta.RoleType I2AllorsDate 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.I2AllorsDate;
-			}
-		} 
 		public global::Allors.Meta.RoleType I2I12One2Many 
 		{
 			get
@@ -1018,13 +1000,6 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.RoleTypes.I12I1One2One;
-			}
-		} 
-		public global::Allors.Meta.RoleType I12AllorsDate 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.I12AllorsDate;
 			}
 		} 
 		public global::Allors.Meta.RoleType I12C1One2Many 

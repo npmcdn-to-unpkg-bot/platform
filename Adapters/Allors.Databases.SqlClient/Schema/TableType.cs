@@ -1,4 +1,4 @@
-namespace Allors.Database.SqlClient
+namespace Allors.Databases.SqlClient
 {
     public class TableType
     {

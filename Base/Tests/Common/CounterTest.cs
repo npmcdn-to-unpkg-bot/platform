@@ -27,7 +27,8 @@ namespace Allors.Common
     using System.Data;
 
     using Allors.Domain;
-  
+    using Allors.Workspaces.Memory.IntegerId;
+
     using NUnit.Framework;
 
     [TestFixture]
@@ -57,14 +58,13 @@ namespace Allors.Common
 
             try
             {
-                var configuration = new Allors.Databases..IntegerId.Configuration
+                var configuration = new Databases.SqlClient.Configuration
                 {
-                    Id = Guid.NewGuid(),
-                    ObjectFactory = Databases.ObjectFactory,
+                    ObjectFactory = Config.ObjectFactory,
                     WorkspaceFactory = new WorkspaceFactory()
                 };
-                Databases.Default = new Adapters.Database.SqlClient.IntegerId.Database(configuration);
-                Databases.Serializable = null;
+                Config.Default = new Databases.SqlClient.Database(configuration);
+                Config.Serializable = null;
 
                 this.Init(true);
 
@@ -92,14 +92,13 @@ namespace Allors.Common
 
             try
             {
-                var configuration = new Adapters.Database.SqlClient.IntegerId.Configuration
+                var configuration = new Databases.SqlClient.Configuration
                                         {
-                                            Id = Guid.NewGuid(),
-                                            ObjectFactory = Databases.ObjectFactory,
+                                            ObjectFactory = Config.ObjectFactory,
                                             WorkspaceFactory = new WorkspaceFactory()
                                         };
-                Databases.Default = new Adapters.Database.SqlClient.IntegerId.Database(configuration);
-                Databases.Serializable = null;
+                Config.Default = new Databases.SqlClient.Database(configuration);
+                Config.Serializable = null;
 
                 this.Init(true);
 
@@ -128,16 +127,14 @@ namespace Allors.Common
             try
             {
                 var workspaceFactory = new WorkspaceFactory();
-                Databases.Default = new Adapters.Database.SqlClient.IntegerId.Database(new Adapters.Database.SqlClient.IntegerId.Configuration
+                Config.Default = new Databases.SqlClient.Database(new Databases.SqlClient.Configuration
                                                                                                     {
-                                                                                                        Id = Guid.NewGuid(),
-                                                                                                        ObjectFactory = Databases.ObjectFactory,
+                                                                                                        ObjectFactory = Config.ObjectFactory,
                                                                                                         WorkspaceFactory = workspaceFactory
                                                                                                     });
-                Databases.Serializable = new Adapters.Database.SqlClient.IntegerId.Database(new Adapters.Database.SqlClient.IntegerId.Configuration
+                Config.Serializable = new Databases.SqlClient.Database(new Databases.SqlClient.Configuration
                                                                                                 {
-                                                                                                    Id = Guid.NewGuid(),
-                                                                                                    ObjectFactory = Databases.ObjectFactory,
+                                                                                                    ObjectFactory = Config.ObjectFactory,
                                                                                                     WorkspaceFactory = workspaceFactory,
                                                                                                     IsolationLevel = IsolationLevel.Serializable
                                                                                                 });
@@ -163,14 +160,14 @@ namespace Allors.Common
 
         private void SaveApplication()
         {
-            this.previousDatabase = Databases.Default;
-            this.previousSerializableDatabase = Databases.Serializable;
+            this.previousDatabase = Config.Default;
+            this.previousSerializableDatabase = Config.Serializable;
         }
 
         private void RestoreApplication()
         {
-            Databases.Default = this.previousDatabase;
-            Databases.Serializable = this.previousSerializableDatabase;
+            Config.Default = this.previousDatabase;
+            Config.Serializable = this.previousSerializableDatabase;
         }
     }
 }

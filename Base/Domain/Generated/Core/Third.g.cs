@@ -16,11 +16,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean IsDerived 
+		virtual public global::System.Boolean? IsDerived 
 		{
 			get
 			{
-				return (global::System.Boolean) Strategy.GetUnitRole(Meta.IsDerived);
+				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.IsDerived);
 			}
 			set
 			{

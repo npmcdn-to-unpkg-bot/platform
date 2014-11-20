@@ -444,8 +444,6 @@ $if(objectType.IsBinary)$
 	global::System.Byte[]
 $elseif(objectType.IsBoolean)$
 	global::System.Boolean?
-$elseif(objectType.IsDateTime)$
-	global::System.DateTime?
 $elseif(objectType.IsDecimal)$
 	global::System.Decimal?
 $elseif(objectType.IsFloat)$

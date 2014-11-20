@@ -20,10 +20,10 @@
 
 namespace Allors.Databases
 {
-    using System;
-
     public abstract class Configuration : Populations.Configuration
     {
+        public IWorkspaceFactory WorkspaceFactory { get; set; }
+
         public IRoleCache RoleCache { get; set; }
 
         public IClassCache ClassCache { get; set; }

@@ -14,7 +14,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Database.SQLite
+namespace Allors.Databases.SQLite
 {
     using System;
     using System.Collections;

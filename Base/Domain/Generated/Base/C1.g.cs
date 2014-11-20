@@ -12,12 +12,6 @@ namespace Allors.Domain
 			this.C1AllorsString = builder.C1AllorsString;
 					
 
-			if(builder.C1AllorsDate.HasValue)
-			{
-				this.C1AllorsDate = builder.C1AllorsDate.Value;
-			}			
-					
-
 			if(builder.C1AllorsDecimal.HasValue)
 			{
 				this.C1AllorsDecimal = builder.C1AllorsDecimal.Value;
@@ -55,12 +49,6 @@ namespace Allors.Domain
 		
 
 			this.I1AllorsString = builder.I1AllorsString;
-					
-
-			if(builder.I1AllorsDate.HasValue)
-			{
-				this.I1AllorsDate = builder.I1AllorsDate.Value;
-			}			
 					
 
 			if(builder.I1AllorsInteger.HasValue)
@@ -132,12 +120,6 @@ namespace Allors.Domain
 			if(builder.I12AllorsBoolean.HasValue)
 			{
 				this.I12AllorsBoolean = builder.I12AllorsBoolean.Value;
-			}			
-					
-
-			if(builder.I12AllorsDate.HasValue)
-			{
-				this.I12AllorsDate = builder.I12AllorsDate.Value;
 			}			
 		
 
@@ -454,16 +436,6 @@ namespace Allors.Domain
 		        {
 				    if(this.C1AllorsString!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.C1AllorsString = value;
-		            return this;
-		        }	
-
-				public global::System.DateTime? C1AllorsDate {get; set;}
-
-				/// <exclude/>
-				public C1Builder WithC1AllorsDate(global::System.DateTime? value)
-		        {
-				    if(this.C1AllorsDate!=null){throw new global::System.ArgumentException("One multicplicity");}
-		            this.C1AllorsDate = value;
 		            return this;
 		        }	
 
@@ -847,16 +819,6 @@ namespace Allors.Domain
 		        }		
 
 				
-				public global::System.DateTime? I1AllorsDate {get; set;}
-
-				/// <exclude/>
-				public C1Builder WithI1AllorsDate(global::System.DateTime? value)
-		        {
-				    if(this.I1AllorsDate!=null){throw new global::System.ArgumentException("One multicplicity");}
-		            this.I1AllorsDate = value;
-		            return this;
-		        }	
-
 				public global::System.Collections.Generic.List<I2> I1I2One2Manies {get; set;}	
 
 				/// <exclude/>
@@ -1411,16 +1373,6 @@ namespace Allors.Domain
 		        }		
 
 				
-				public global::System.DateTime? I12AllorsDate {get; set;}
-
-				/// <exclude/>
-				public C1Builder WithI12AllorsDate(global::System.DateTime? value)
-		        {
-				    if(this.I12AllorsDate!=null){throw new global::System.ArgumentException("One multicplicity");}
-		            this.I12AllorsDate = value;
-		            return this;
-		        }	
-
 				public global::System.Collections.Generic.List<C1> I12C1One2Manies {get; set;}	
 
 				/// <exclude/>

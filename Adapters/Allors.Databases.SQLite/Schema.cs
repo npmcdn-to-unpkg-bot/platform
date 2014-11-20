@@ -1,4 +1,4 @@
-namespace Allors.Database.SQLite
+namespace Allors.Databases.SQLite
 {
     using System.Collections.Generic;
     using System.Data.SQLite;

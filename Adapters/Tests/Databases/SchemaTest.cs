@@ -23,7 +23,7 @@ namespace Allors.Databases
     using System;
 
     using Allors;
-    using Allors.Database.SqlClient;
+    using Allors.Databases.SqlClient;
     using Allors.Meta;
     using Allors.Populations;
 

@@ -21,7 +21,7 @@
 
 using Allors.Meta;
 
-namespace Allors.Database.SQLite
+namespace Allors.Databases.SQLite
 {
     using Allors.Populations;
 

@@ -30,7 +30,5 @@ namespace Allors
         public static IDatabase Default { get; set; }
 
         public static IDatabase Serializable { get; set; }
-
-        public static IWorkspaceFactory WorkspaceFactory { get; set; }
     }
 }

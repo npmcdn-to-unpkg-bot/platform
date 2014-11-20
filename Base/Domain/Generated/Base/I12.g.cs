@@ -100,10 +100,6 @@ namespace Allors.Domain
 
 		
 
-		global::System.DateTime? I12AllorsDate {get;}
-
-		
-
 		global::System.Collections.Generic.List<C1> I12C1One2Manies {get;}		
 
 		

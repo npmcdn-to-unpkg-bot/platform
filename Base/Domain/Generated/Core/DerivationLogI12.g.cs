@@ -6,7 +6,7 @@ namespace Allors.Domain
 	{
 
 
-		global::System.Guid UniqueId 
+		global::System.Guid? UniqueId 
 		{
 			get;
 			set;

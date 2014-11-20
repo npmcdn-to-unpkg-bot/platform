@@ -14,7 +14,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Database.SqlClient
+namespace Allors.Databases.SqlClient
 {
     using System;
     using System.Collections.Generic;
@@ -49,6 +49,7 @@ namespace Allors.Database.SqlClient
         private readonly int commandTimeout;
         private readonly string schemaName;
         private readonly bool useViews;
+        private readonly IWorkspaceFactory workspaceFactory;
 
         private Dictionary<string, object> properties;
 
@@ -64,6 +65,8 @@ namespace Allors.Database.SqlClient
             {
                 throw new Exception("Configuration.ConnectionString is missing");
             }
+
+            this.workspaceFactory = configuration.WorkspaceFactory;
 
             var connectionStringBuilder = new SqlConnectionStringBuilder(this.connectionString);
             var applicationName = connectionStringBuilder.ApplicationName.Trim();
@@ -291,6 +294,11 @@ namespace Allors.Database.SqlClient
             this.classCache.Invalidate();
 
             this.properties = null;
+        }
+
+        public IWorkspace CreateWorkspace()
+        {
+            return this.workspaceFactory.CreateWorkspace(this);
         }
 
         IDatabaseSession IDatabase.CreateSession()
@@ -824,7 +832,7 @@ WHERE " + Mapping.ColumnNameForType + "=" + Mapping.ParameterNameForType;
                                 atLeastOne = true;
 
                                 writer.WriteStartElement(Serialization.ObjectType);
-                                writer.WriteAttributeString(Serialization.Id, type.IdAsString);
+                                writer.WriteAttributeString(Serialization.Id, type.Id.ToString("N").ToLowerInvariant());
                             }
                             else
                             {

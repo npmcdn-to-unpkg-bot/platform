@@ -25,12 +25,6 @@ namespace Allors.Domain
 			{
 				this.IsSupplier = builder.IsSupplier.Value;
 			}			
-					
-
-			if(builder.IncorporationDate.HasValue)
-			{
-				this.IncorporationDate = builder.IncorporationDate.Value;
-			}			
 		
 
 			this.Size = builder.Size;
@@ -155,16 +149,6 @@ namespace Allors.Domain
 		        {
 				    if(this.IsSupplier!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.IsSupplier = value;
-		            return this;
-		        }	
-
-				public global::System.DateTime? IncorporationDate {get; set;}
-
-				/// <exclude/>
-				public OrganisationBuilder WithIncorporationDate(global::System.DateTime? value)
-		        {
-				    if(this.IncorporationDate!=null){throw new global::System.ArgumentException("One multicplicity");}
-		            this.IncorporationDate = value;
 		            return this;
 		        }	
 

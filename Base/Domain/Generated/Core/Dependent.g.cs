@@ -42,11 +42,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Int32 Counter 
+		virtual public global::System.Int32? Counter 
 		{
 			get
 			{
-				return (global::System.Int32) Strategy.GetUnitRole(Meta.Counter);
+				return (global::System.Int32?) Strategy.GetUnitRole(Meta.Counter);
 			}
 			set
 			{
@@ -68,11 +68,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Int32 Subcounter 
+		virtual public global::System.Int32? Subcounter 
 		{
 			get
 			{
-				return (global::System.Int32) Strategy.GetUnitRole(Meta.Subcounter);
+				return (global::System.Int32?) Strategy.GetUnitRole(Meta.Subcounter);
 			}
 			set
 			{

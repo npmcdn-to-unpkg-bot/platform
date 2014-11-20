@@ -14,7 +14,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Database.SQLite
+namespace Allors.Databases.SQLite
 {
     using System;
     using System.Xml;
@@ -103,7 +103,7 @@ namespace Allors.Database.SQLite
                     this.xmlWriter.WriteStartElement(Serialization.RelationTypeComposite);
                 }
 
-                this.xmlWriter.WriteAttributeString(Serialization.Id, this.relationType.IdAsString);
+                this.xmlWriter.WriteAttributeString(Serialization.Id, this.relationType.Id.ToString("N").ToLowerInvariant());
             }
 
             this.xmlWriter.WriteStartElement(Serialization.Relation);

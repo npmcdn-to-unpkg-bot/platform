@@ -14,15 +14,15 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Database.SqlClient
+namespace Allors.Databases.SqlClient
 {
     using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
 
-    using Allors.Database.SqlClient.IntegerId;
     using Allors.Databases;
+    using Allors.Databases.SqlClient;
     using Allors.Meta;
     using Allors.Populations;
 

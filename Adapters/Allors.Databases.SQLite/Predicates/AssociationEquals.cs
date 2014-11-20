@@ -19,7 +19,7 @@
 // <summary>Defines the AllorsPredicateAssociationEqualsSql type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.Database.SQLite
+namespace Allors.Databases.SQLite
 {
     using Allors.Meta;
     using Allors.Populations;

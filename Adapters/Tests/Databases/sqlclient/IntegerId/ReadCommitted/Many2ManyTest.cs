@@ -21,7 +21,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases.SqlClient.IntegerId.ReadCommitted
+namespace Allors.Databases.SqlClient.ReadCommitted
 {
     using Allors.Populations;
 

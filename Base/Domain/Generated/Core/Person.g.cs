@@ -172,11 +172,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Int32 Age 
+		virtual public global::System.Int32? Age 
 		{
 			get
 			{
-				return (global::System.Int32) Strategy.GetUnitRole(Meta.Age);
+				return (global::System.Int32?) Strategy.GetUnitRole(Meta.Age);
 			}
 			set
 			{
@@ -198,11 +198,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean IsStudent 
+		virtual public global::System.Boolean? IsStudent 
 		{
 			get
 			{
-				return (global::System.Boolean) Strategy.GetUnitRole(Meta.IsStudent);
+				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.IsStudent);
 			}
 			set
 			{
@@ -302,11 +302,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Int32 ShirtSize 
+		virtual public global::System.Int32? ShirtSize 
 		{
 			get
 			{
-				return (global::System.Int32) Strategy.GetUnitRole(Meta.ShirtSize);
+				return (global::System.Int32?) Strategy.GetUnitRole(Meta.ShirtSize);
 			}
 			set
 			{
@@ -354,11 +354,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean IsMarried 
+		virtual public global::System.Boolean? IsMarried 
 		{
 			get
 			{
-				return (global::System.Boolean) Strategy.GetUnitRole(Meta.IsMarried);
+				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.IsMarried);
 			}
 			set
 			{
@@ -380,37 +380,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.DateTime BirthDate 
+		virtual public global::System.Decimal? Weight 
 		{
 			get
 			{
-				return (global::System.DateTime) Strategy.GetUnitRole(Meta.BirthDate);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.BirthDate, value);
-			}
-		}
-
-		virtual public bool ExistBirthDate{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.BirthDate);
-			}
-		}
-
-		virtual public void RemoveBirthDate()
-		{
-			Strategy.RemoveUnitRole(Meta.BirthDate);
-		}
-
-
-
-		virtual public global::System.Decimal Weight 
-		{
-			get
-			{
-				return (global::System.Decimal) Strategy.GetUnitRole(Meta.Weight);
+				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.Weight);
 			}
 			set
 			{
@@ -494,11 +468,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean UserEmailConfirmed 
+		virtual public global::System.Boolean? UserEmailConfirmed 
 		{
 			get
 			{
-				return (global::System.Boolean) Strategy.GetUnitRole(Meta.UserEmailConfirmed);
+				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.UserEmailConfirmed);
 			}
 			set
 			{
@@ -748,11 +722,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Guid UniqueId 
+		virtual public global::System.Guid? UniqueId 
 		{
 			get
 			{
-				return (global::System.Guid) Strategy.GetUnitRole(Meta.UniqueId);
+				return (global::System.Guid?) Strategy.GetUnitRole(Meta.UniqueId);
 			}
 			set
 			{
@@ -1133,13 +1107,6 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.RoleTypes.PersonIsMarried;
-			}
-		} 
-		public global::Allors.Meta.RoleType BirthDate 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.PersonBirthDate;
 			}
 		} 
 		public global::Allors.Meta.RoleType Weight 

@@ -21,7 +21,7 @@
 
 using Allors.Meta;
 
-namespace Allors.Database.SQLite
+namespace Allors.Databases.SQLite
 {
     internal sealed class AllorsPredicateOrSql : AllorsPredicateCompositeSql
     {

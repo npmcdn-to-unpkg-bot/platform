@@ -14,7 +14,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Database.SQLite
+namespace Allors.Databases.SQLite
 {
     using System;
     using System.Collections.Generic;
@@ -52,6 +52,7 @@ namespace Allors.Database.SQLite
         private readonly int commandTimeout;
         private readonly IsolationLevel isolationLevel;
         private readonly bool autoIncrement;
+        private readonly IWorkspaceFactory workspaceFactory;
 
         private readonly SQLiteConnection inMemoryConnection;
 
@@ -105,6 +106,8 @@ namespace Allors.Database.SQLite
             {
                 throw new Exception("Configuration.ObjectFactory is missing");
             }
+
+            this.workspaceFactory = configuration.WorkspaceFactory;
 
             this.roleCache = configuration.RoleCache ?? new RoleCache();
             this.classCache = configuration.ClassCache ?? new ClassCache();
@@ -315,6 +318,11 @@ namespace Allors.Database.SQLite
             this.classCache.Invalidate();
 
             this.properties = null;
+        }
+
+        public IWorkspace CreateWorkspace()
+        {
+            return this.workspaceFactory.CreateWorkspace(this);
         }
 
         IDatabaseSession IDatabase.CreateSession()
@@ -849,7 +857,7 @@ WHERE " + Mapping.ColumnNameForType + "=" + Mapping.ParameterNameForType;
                                 atLeastOne = true;
 
                                 writer.WriteStartElement(Serialization.ObjectType);
-                                writer.WriteAttributeString(Serialization.Id, type.IdAsString);
+                                writer.WriteAttributeString(Serialization.Id, type.Id.ToString("N").ToLowerInvariant());
                             }
                             else
                             {

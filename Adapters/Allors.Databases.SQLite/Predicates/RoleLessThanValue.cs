@@ -19,7 +19,7 @@
 // <summary>Defines the AllorsPredicateRoleLessThanValueSql type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.Database.SQLite
+namespace Allors.Databases.SQLite
 {
     using System;
 

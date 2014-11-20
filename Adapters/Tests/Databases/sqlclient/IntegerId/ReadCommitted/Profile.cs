@@ -14,17 +14,17 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases.SqlClient.IntegerId.ReadCommitted
+namespace Allors.Databases.SqlClient.ReadCommitted
 {
     using System;
     using System.Collections.Generic;
 
-    using Allors.Database.SqlClient;
+    using Allors.Databases.SqlClient;
     using Allors.Workspaces.Memory.IntegerId;
     using Allors.Meta;
     using Allors.Populations;
 
-    using Configuration = Allors.Database.SqlClient.Configuration;
+    using Configuration = Allors.Databases.SqlClient.Configuration;
 
     public class Profile : SqlClient.Profile
     {

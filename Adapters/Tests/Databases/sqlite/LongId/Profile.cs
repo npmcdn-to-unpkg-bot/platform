@@ -19,12 +19,12 @@ namespace Allors.Databases.SQLite.LongId.ReadCommitted
     using System;
     using System.Collections.Generic;
 
-    using Allors.Database.SQLite;
+    using Allors.Databases.SQLite;
     using Allors.Meta;
     using Allors.Populations;
     using Allors.Workspaces.Memory.LongId;
 
-    using Configuration = Allors.Database.SQLite.Configuration;
+    using Configuration = Allors.Databases.SQLite.Configuration;
 
     public class Profile : SQLite.Profile
     {

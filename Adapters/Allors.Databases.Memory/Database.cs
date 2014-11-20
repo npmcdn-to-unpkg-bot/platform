@@ -27,9 +27,10 @@ namespace Allors.Databases.Memory
         private readonly IObjectFactory objectFactory;
         private readonly Dictionary<IObjectType, object> concreteClassesByObjectType;
 
-        protected Dictionary<string, object> Properties;
-
+        private readonly IWorkspaceFactory workspaceFactory;
         private readonly string id;
+        
+        protected Dictionary<string, object> Properties;
 
         protected Database(Configuration configuration)
         {
@@ -38,6 +39,8 @@ namespace Allors.Databases.Memory
             {
                 throw new Exception("Configuration.ObjectFactory is missing");
             }
+
+            this.workspaceFactory = configuration.WorkspaceFactory;
 
             this.concreteClassesByObjectType = new Dictionary<IObjectType, object>();
 
@@ -125,6 +128,11 @@ namespace Allors.Databases.Memory
                     this.Properties[name] = value;
                 }
             }
+        }
+
+        public IWorkspace CreateWorkspace()
+        {
+            return this.workspaceFactory.CreateWorkspace(this);
         }
 
         public ISession CreateSession()

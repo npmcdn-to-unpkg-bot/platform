@@ -1940,7 +1940,7 @@ namespace Allors.Workspaces.Memory
                 var originalUnitRoleByAssociation = originalUnitRoleByAssociationByRoleTypeEntry.Value;
 
                 writer.WriteStartElement(Serialization.RelationTypeUnit);
-                writer.WriteAttributeString(Serialization.Id, roleType.RelationType.IdAsString);
+                writer.WriteAttributeString(Serialization.Id, roleType.RelationType.Id.ToString("N").ToLowerInvariant());
 
                 foreach (var originalUnitRoleByAssociationEntry in originalUnitRoleByAssociation)
                 {
@@ -1977,7 +1977,7 @@ namespace Allors.Workspaces.Memory
                 var originalCompositeRoleByAssociation = originalCompositeRoleByAssociationByRoleTypeEntry.Value;
 
                 writer.WriteStartElement(Serialization.RelationTypeComposite);
-                writer.WriteAttributeString(Serialization.Id, roleType.RelationType.IdAsString);
+                writer.WriteAttributeString(Serialization.Id, roleType.RelationType.Id.ToString("N").ToLowerInvariant());
 
                 foreach (var originalCompositeRoleByAssociationEntry in originalCompositeRoleByAssociation)
                 {
@@ -2011,7 +2011,7 @@ namespace Allors.Workspaces.Memory
                 var originalCompositeRoleByAssociation = originalCompositeRolesByAssociationByRoleTypeEntry.Value;
 
                 writer.WriteStartElement(Serialization.RelationTypeComposite);
-                writer.WriteAttributeString(Serialization.Id, roleType.RelationType.IdAsString);
+                writer.WriteAttributeString(Serialization.Id, roleType.RelationType.Id.ToString("N").ToLowerInvariant());
 
                 foreach (var originalCompositeRolesByAssociationEntry in originalCompositeRoleByAssociation)
                 {
@@ -2061,7 +2061,7 @@ namespace Allors.Workspaces.Memory
                 var unitRoleByAssociation = unitRoleByAssociationByRoleTypeEntry.Value;
 
                 writer.WriteStartElement(Serialization.RelationTypeUnit);
-                writer.WriteAttributeString(Serialization.Id, roleType.RelationType.IdAsString);
+                writer.WriteAttributeString(Serialization.Id, roleType.RelationType.Id.ToString("N").ToLowerInvariant());
 
                 foreach (var unitRoleByAssociationEntry in unitRoleByAssociation)
                 {
@@ -2095,7 +2095,7 @@ namespace Allors.Workspaces.Memory
                 var compositeRoleByAssociation = compositeRoleByAssociationByRoleTypeEntry.Value;
 
                 writer.WriteStartElement(Serialization.RelationTypeComposite);
-                writer.WriteAttributeString(Serialization.Id, roleType.RelationType.IdAsString);
+                writer.WriteAttributeString(Serialization.Id, roleType.RelationType.Id.ToString("N").ToLowerInvariant());
 
                 foreach (var compositeRoleByAssociationEntry in compositeRoleByAssociation)
                 {
@@ -2126,7 +2126,7 @@ namespace Allors.Workspaces.Memory
                 var compositeRoleByAssociation = compositeRolesByAssociationByRoleTypeEntry.Value;
 
                 writer.WriteStartElement(Serialization.RelationTypeComposite);
-                writer.WriteAttributeString(Serialization.Id, roleType.RelationType.IdAsString);
+                writer.WriteAttributeString(Serialization.Id, roleType.RelationType.Id.ToString("N").ToLowerInvariant());
 
                 foreach (var compositeRolesByAssociationEntry in compositeRoleByAssociation)
                 {
@@ -2937,7 +2937,7 @@ namespace Allors.Workspaces.Memory
         private static void SaveStrategies(XmlWriter writer, IObjectType objectType, List<Strategy> strategies)
         {
             writer.WriteStartElement(Serialization.ObjectType);
-            writer.WriteAttributeString(Serialization.Id, objectType.IdAsString);
+            writer.WriteAttributeString(Serialization.Id, objectType.Id.ToString("N").ToLowerInvariant());
 
             for (var i = 0; i < strategies.Count; i++)
             {

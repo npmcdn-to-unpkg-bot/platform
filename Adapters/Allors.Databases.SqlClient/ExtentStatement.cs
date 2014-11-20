@@ -25,7 +25,7 @@ using System.Collections.Generic;
 using System.Text;
 using Allors.Meta;
 
-namespace Allors.Database.SqlClient
+namespace Allors.Databases.SqlClient
 {
     using System.Data.SqlClient;
 

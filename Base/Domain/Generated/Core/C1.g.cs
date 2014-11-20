@@ -67,32 +67,6 @@ namespace Allors.Domain
 		}
 
 
-
-		virtual public global::System.DateTime C1AllorsDate 
-		{
-			get
-			{
-				return (global::System.DateTime) Strategy.GetUnitRole(Meta.C1AllorsDate);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.C1AllorsDate, value);
-			}
-		}
-
-		virtual public bool ExistC1AllorsDate{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.C1AllorsDate);
-			}
-		}
-
-		virtual public void RemoveC1AllorsDate()
-		{
-			Strategy.RemoveUnitRole(Meta.C1AllorsDate);
-		}
-
-
 		virtual public C2 C1C2Many2One
 		{ 
 			get
@@ -270,11 +244,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal C1AllorsDecimal 
+		virtual public global::System.Decimal? C1AllorsDecimal 
 		{
 			get
 			{
-				return (global::System.Decimal) Strategy.GetUnitRole(Meta.C1AllorsDecimal);
+				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.C1AllorsDecimal);
 			}
 			set
 			{
@@ -554,11 +528,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean C1AllorsBoolean 
+		virtual public global::System.Boolean? C1AllorsBoolean 
 		{
 			get
 			{
-				return (global::System.Boolean) Strategy.GetUnitRole(Meta.C1AllorsBoolean);
+				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.C1AllorsBoolean);
 			}
 			set
 			{
@@ -668,11 +642,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Guid C1AllorsUnique 
+		virtual public global::System.Guid? C1AllorsUnique 
 		{
 			get
 			{
-				return (global::System.Guid) Strategy.GetUnitRole(Meta.C1AllorsUnique);
+				return (global::System.Guid?) Strategy.GetUnitRole(Meta.C1AllorsUnique);
 			}
 			set
 			{
@@ -782,11 +756,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Double C1AllorsFloat 
+		virtual public global::System.Double? C1AllorsFloat 
 		{
 			get
 			{
-				return (global::System.Double) Strategy.GetUnitRole(Meta.C1AllorsFloat);
+				return (global::System.Double?) Strategy.GetUnitRole(Meta.C1AllorsFloat);
 			}
 			set
 			{
@@ -844,11 +818,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Int32 C1AllorsInteger 
+		virtual public global::System.Int32? C1AllorsInteger 
 		{
 			get
 			{
-				return (global::System.Int32) Strategy.GetUnitRole(Meta.C1AllorsInteger);
+				return (global::System.Int32?) Strategy.GetUnitRole(Meta.C1AllorsInteger);
 			}
 			set
 			{
@@ -1045,32 +1019,6 @@ namespace Allors.Domain
 		}
 
 
-
-		virtual public global::System.DateTime I1AllorsDate 
-		{
-			get
-			{
-				return (global::System.DateTime) Strategy.GetUnitRole(Meta.I1AllorsDate);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.I1AllorsDate, value);
-			}
-		}
-
-		virtual public bool ExistI1AllorsDate{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.I1AllorsDate);
-			}
-		}
-
-		virtual public void RemoveI1AllorsDate()
-		{
-			Strategy.RemoveUnitRole(Meta.I1AllorsDate);
-		}
-
-
 		virtual public global::Allors.Extent<I2> I1I2One2Manies
 		{ 
 			get
@@ -1170,11 +1118,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Int32 I1AllorsInteger 
+		virtual public global::System.Int32? I1AllorsInteger 
 		{
 			get
 			{
-				return (global::System.Int32) Strategy.GetUnitRole(Meta.I1AllorsInteger);
+				return (global::System.Int32?) Strategy.GetUnitRole(Meta.I1AllorsInteger);
 			}
 			set
 			{
@@ -1304,11 +1252,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean I1AllorsBoolean 
+		virtual public global::System.Boolean? I1AllorsBoolean 
 		{
 			get
 			{
-				return (global::System.Boolean) Strategy.GetUnitRole(Meta.I1AllorsBoolean);
+				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.I1AllorsBoolean);
 			}
 			set
 			{
@@ -1330,11 +1278,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal I1AllorsDecimal 
+		virtual public global::System.Decimal? I1AllorsDecimal 
 		{
 			get
 			{
-				return (global::System.Decimal) Strategy.GetUnitRole(Meta.I1AllorsDecimal);
+				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.I1AllorsDecimal);
 			}
 			set
 			{
@@ -1532,11 +1480,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Double I1AllorsFloat 
+		virtual public global::System.Double? I1AllorsFloat 
 		{
 			get
 			{
-				return (global::System.Double) Strategy.GetUnitRole(Meta.I1AllorsFloat);
+				return (global::System.Double?) Strategy.GetUnitRole(Meta.I1AllorsFloat);
 			}
 			set
 			{
@@ -1672,11 +1620,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Guid I1AllorsUnique 
+		virtual public global::System.Guid? I1AllorsUnique 
 		{
 			get
 			{
-				return (global::System.Guid) Strategy.GetUnitRole(Meta.I1AllorsUnique);
+				return (global::System.Guid?) Strategy.GetUnitRole(Meta.I1AllorsUnique);
 			}
 			set
 			{
@@ -1750,11 +1698,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Double I12AllorsFloat 
+		virtual public global::System.Double? I12AllorsFloat 
 		{
 			get
 			{
-				return (global::System.Double) Strategy.GetUnitRole(Meta.I12AllorsFloat);
+				return (global::System.Double?) Strategy.GetUnitRole(Meta.I12AllorsFloat);
 			}
 			set
 			{
@@ -1864,11 +1812,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Decimal I12AllorsDecimal 
+		virtual public global::System.Decimal? I12AllorsDecimal 
 		{
 			get
 			{
-				return (global::System.Decimal) Strategy.GetUnitRole(Meta.I12AllorsDecimal);
+				return (global::System.Decimal?) Strategy.GetUnitRole(Meta.I12AllorsDecimal);
 			}
 			set
 			{
@@ -2122,11 +2070,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Guid I12AllorsUnique 
+		virtual public global::System.Guid? I12AllorsUnique 
 		{
 			get
 			{
-				return (global::System.Guid) Strategy.GetUnitRole(Meta.I12AllorsUnique);
+				return (global::System.Guid?) Strategy.GetUnitRole(Meta.I12AllorsUnique);
 			}
 			set
 			{
@@ -2148,11 +2096,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Int32 I12AllorsInteger 
+		virtual public global::System.Int32? I12AllorsInteger 
 		{
 			get
 			{
-				return (global::System.Int32) Strategy.GetUnitRole(Meta.I12AllorsInteger);
+				return (global::System.Int32?) Strategy.GetUnitRole(Meta.I12AllorsInteger);
 			}
 			set
 			{
@@ -2412,11 +2360,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean I12AllorsBoolean 
+		virtual public global::System.Boolean? I12AllorsBoolean 
 		{
 			get
 			{
-				return (global::System.Boolean) Strategy.GetUnitRole(Meta.I12AllorsBoolean);
+				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.I12AllorsBoolean);
 			}
 			set
 			{
@@ -2460,32 +2408,6 @@ namespace Allors.Domain
 		virtual public void RemoveI12I1One2One()
 		{
 			Strategy.RemoveCompositeRole(Meta.I12I1One2One);
-		}
-
-
-
-		virtual public global::System.DateTime I12AllorsDate 
-		{
-			get
-			{
-				return (global::System.DateTime) Strategy.GetUnitRole(Meta.I12AllorsDate);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.I12AllorsDate, value);
-			}
-		}
-
-		virtual public bool ExistI12AllorsDate{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.I12AllorsDate);
-			}
-		}
-
-		virtual public void RemoveI12AllorsDate()
-		{
-			Strategy.RemoveUnitRole(Meta.I12AllorsDate);
 		}
 
 
@@ -3734,13 +3656,6 @@ namespace Allors.Domain
 				return global::Allors.Meta.RoleTypes.C1AllorsString;
 			}
 		} 
-		public global::Allors.Meta.RoleType C1AllorsDate 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.C1AllorsDate;
-			}
-		} 
 		public global::Allors.Meta.RoleType C1C2Many2One 
 		{
 			get
@@ -3963,13 +3878,6 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.RoleTypes.I1I12Many2One;
-			}
-		} 
-		public global::Allors.Meta.RoleType I1AllorsDate 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.I1AllorsDate;
 			}
 		} 
 		public global::Allors.Meta.RoleType I1I2One2Many 
@@ -4299,13 +4207,6 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.RoleTypes.I12I1One2One;
-			}
-		} 
-		public global::Allors.Meta.RoleType I12AllorsDate 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.I12AllorsDate;
 			}
 		} 
 		public global::Allors.Meta.RoleType I12C1One2Many 

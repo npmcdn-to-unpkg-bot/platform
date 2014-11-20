@@ -14,9 +14,9 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Databases.SqlClient.IntegerId.ReadCommitted
+namespace Allors.Databases.SqlClient.ReadCommitted
 {
-    using Allors.Database.SqlClient;
+    using Allors.Databases.SqlClient;
     using Allors.Meta;
     using Allors.Populations;
 

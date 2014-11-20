@@ -42,11 +42,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean CreateCycle 
+		virtual public global::System.Boolean? CreateCycle 
 		{
 			get
 			{
-				return (global::System.Boolean) Strategy.GetUnitRole(Meta.CreateCycle);
+				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.CreateCycle);
 			}
 			set
 			{
@@ -68,11 +68,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean IsDerived 
+		virtual public global::System.Boolean? IsDerived 
 		{
 			get
 			{
-				return (global::System.Boolean) Strategy.GetUnitRole(Meta.IsDerived);
+				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.IsDerived);
 			}
 			set
 			{

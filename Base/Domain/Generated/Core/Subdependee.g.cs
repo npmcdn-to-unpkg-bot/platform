@@ -16,11 +16,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Int32 Subcounter 
+		virtual public global::System.Int32? Subcounter 
 		{
 			get
 			{
-				return (global::System.Int32) Strategy.GetUnitRole(Meta.Subcounter);
+				return (global::System.Int32?) Strategy.GetUnitRole(Meta.Subcounter);
 			}
 			set
 			{

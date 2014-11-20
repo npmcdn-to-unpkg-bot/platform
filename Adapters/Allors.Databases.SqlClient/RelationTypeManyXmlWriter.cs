@@ -14,7 +14,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Database.SqlClient
+namespace Allors.Databases.SqlClient
 {
     using System;
     using System.Collections;
@@ -120,7 +120,7 @@ namespace Allors.Database.SqlClient
                     this.xmlWriter.WriteStartElement(Serialization.RelationTypeComposite);
                 }
 
-                this.xmlWriter.WriteAttributeString(Serialization.Id, this.relationType.IdAsString);
+                this.xmlWriter.WriteAttributeString(Serialization.Id, this.relationType.Id.ToString("N").ToLowerInvariant());
             }
 
             if (this.previousAssociationId != associationId)

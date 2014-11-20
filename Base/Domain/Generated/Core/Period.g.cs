@@ -6,7 +6,7 @@ namespace Allors.Domain
 	{
 
 
-		global::System.DateTime FromDate 
+		global::System.String FromDate 
 		{
 			get;
 			set;
@@ -17,7 +17,7 @@ namespace Allors.Domain
 		void RemoveFromDate();
 
 
-		global::System.DateTime ThroughDate 
+		global::System.String ThroughDate 
 		{
 			get;
 			set;

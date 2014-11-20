@@ -19,7 +19,7 @@
 // <summary>Defines the AllorsPredicateCompositeSql type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.Database.SQLite
+namespace Allors.Databases.SQLite
 {
     using System;
     using System.Collections.Generic;
