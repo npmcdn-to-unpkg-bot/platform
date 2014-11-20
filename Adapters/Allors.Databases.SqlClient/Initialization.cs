@@ -632,109 +632,108 @@ WHERE " + Mapping.ColumnNameForAssociation + @" IN ( SELECT * FROM " + Mapping.P
                 {
                     foreach (var objectType in this.mapping.Database.MetaPopulation.Classes)
                     {
-                        var stringBuilder = new StringBuilder();
-                        stringBuilder.Append("CREATE VIEW " + this.mapping.Database.SchemaName + ".[" + objectType.Name + "]\n");
-                        stringBuilder.Append("AS\n");
-                        stringBuilder.Append("SELECT * FROM " + this.mapping.Database.SchemaName + "." + Mapping.TableNameForObjects + "\n");
+                        // Table view
+                        var associationTypes = new List<IAssociationType>();
+                        var roleTypes = new List<IRoleType>();
 
-                    //    var schemaTable = new SchemaTable(this, objectType.SingularName, SchemaTableKind.Object, objectType);
-                    //    this.TablesByName.Add(schemaTable.Name, schemaTable);
-                    //    this.TableByObjectType.Add(objectType, schemaTable);
-
-                    //    schemaTable.AddColumn(this.ObjectId);
-                    //    schemaTable.AddColumn(this.TypeId);
-
-                    //    var roleTypes = new List<RoleType>();
-                    //    var associationTypes = new List<AssociationType>();
-
-                    //    var subClassesAndSelf = new List<ObjectType>(objectType.Subclasses) { objectType };
-
-                    //    foreach (var subClass in subClassesAndSelf)
-                    //    {
-                    //        foreach (var roleType in subClass.ExclusiveRoleTypes)
-                    //        {
-                    //            if (!roleTypes.Contains(roleType))
-                    //            {
-                    //                roleTypes.Add(roleType);
-                    //            }
-                    //        }
-
-                    //        foreach (var associationType in subClass.ExclusiveAssociationTypes)
-                    //        {
-                    //            if (!associationTypes.Contains(associationType))
-                    //            {
-                    //                associationTypes.Add(associationType);
-                    //            }
-                    //        }
-                    //    }
-
-                    //    foreach (var associationType in associationTypes)
-                    //    {
-                    //        var relationType = associationType.RelationTypeWhereAssociationType;
-                    //        var roleType = relationType.RoleType;
-                    //        if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveRootClasses && roleType.IsMany)
-                    //        {
-                    //            schemaTable.AddColumn(this.Column(relationType));
-                    //        }
-                    //    }
-
-                    //    foreach (var roleType in roleTypes)
-                    //    {
-                    //        var relationType = roleType.RelationTypeWhereRoleType;
-                    //        var associationType = relationType.AssociationType;
-                    //        if (roleType.ObjectType.IsUnit)
-                    //        {
-                    //            schemaTable.AddColumn(this.Column(relationType));
-                    //        }
-                    //        else
-                    //        {
-                    //            if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveRootClasses && !roleType.IsMany)
-                    //            {
-                    //                schemaTable.AddColumn(this.Column(relationType));
-                    //            }
-                    //        }
-                    //    }
-                    //}
-
-                    //foreach (var relationType in this.Database.Domain.RelationTypes)
-                    //{
-                    //    var associationType = relationType.AssociationType;
-                    //    var roleType = relationType.RoleType;
-
-                    //    if (!roleType.ObjectType.IsUnit && ((associationType.IsMany && roleType.IsMany) || !relationType.ExistExclusiveRootClasses))
-                    //    {
-                    //        var schemaTable = new SchemaTable(this, relationType.Name, SchemaTableKind.Relation, relationType);
-                    //        this.TablesByName.Add(schemaTable.Name, schemaTable);
-                    //        this.TablesByRelationType.Add(relationType, schemaTable);
-
-                    //        schemaTable.AddColumn(this.AssociationId);
-                    //        schemaTable.AddColumn(this.Column(relationType));
-                    //    }
-
-
-                        var definition = stringBuilder.ToString();
-                        var view = this.schema.GetView(objectType.Name);
-                        if (view != null && !view.IsDefinitionCompatible(definition))
+                        foreach (var associationType in objectType.AssociationTypes)
                         {
-                            using (var command = new SqlCommand("DROP VIEW " + this.mapping.Database.SchemaName + ".[" + objectType.Name + "]", connection))
+                            var relationType = associationType.RelationType;
+                            var roleType = relationType.RoleType;
+                            if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveLeafClasses && roleType.IsMany)
                             {
-                                command.ExecuteNonQuery();
-                                view = null;
+                                associationTypes.Add(associationType);
                             }
                         }
 
-                        if (view == null)
+                        foreach (var roleType in objectType.RoleTypes)
                         {
-                            using (var command = new SqlCommand(definition, connection))
+                            var relationType = roleType.RelationType;
+                            var associationType = relationType.AssociationType;
+                            if (roleType.ObjectType is IUnit)
                             {
-                                try
+                                roleTypes.Add(roleType);
+                            }
+                            else
+                            {
+                                if (!(associationType.IsMany && roleType.IsMany) && relationType.ExistExclusiveLeafClasses && !roleType.IsMany)
                                 {
-                                    command.ExecuteNonQuery();
+                                    roleTypes.Add(roleType);
                                 }
-                                catch
-                                {
-                                    Console.WriteLine(1);
-                                }
+                            }
+                        }
+
+                        var viewName = objectType.Name;
+
+                        var stringBuilder = new StringBuilder();
+                        stringBuilder.Append("CREATE VIEW " + this.mapping.Database.SchemaName + ".[" + viewName + "]\n");
+
+                        stringBuilder.Append("(o");
+                        foreach (var roleType in roleTypes)
+                        {
+                            stringBuilder.Append(", [" + roleType.SingularPropertyName + "]");
+                        }
+
+                        foreach (var associationType in associationTypes)
+                        {
+                            stringBuilder.Append(", [" + associationType.SingularPropertyName + "]");
+                        }
+
+                        stringBuilder.Append(")\n");
+
+                        stringBuilder.Append("AS\n");
+                        stringBuilder.Append("SELECT " + this.mapping.Database.SchemaName + "." + Mapping.TableNameForObjects + "." + Mapping.ColumnNameForObject);
+
+                        foreach (var roleType in roleTypes)
+                        {
+                            stringBuilder.Append(
+                                ",\n" + this.mapping.Database.SchemaName + "." + this.mapping.GetTableName(roleType.RelationType) + "." + Mapping.ColumnNameForRole);
+                        }
+
+                        foreach (var associationType in associationTypes)
+                        {
+                            stringBuilder.Append(
+                                ",\n" + this.mapping.Database.SchemaName + "." + this.mapping.GetTableName(associationType.RelationType) + "." + Mapping.ColumnNameForAssociation);
+                        }
+
+                        stringBuilder.Append("\nFROM " + this.mapping.Database.SchemaName + "." + Mapping.TableNameForObjects + "\n");
+
+                        foreach (var roleType in roleTypes)
+                        {
+                            stringBuilder.Append("LEFT JOIN " + this.mapping.Database.SchemaName + "." + this.mapping.GetTableName(roleType.RelationType) + " ON ");
+                            stringBuilder.Append(this.mapping.Database.SchemaName + "." + Mapping.TableNameForObjects + "." + Mapping.ColumnNameForObject + "=");
+                            stringBuilder.Append(
+                                this.mapping.Database.SchemaName + "." + this.mapping.GetTableName(roleType.RelationType) + "." + Mapping.ColumnNameForAssociation + "\n");
+                        }
+
+                        foreach (var associationType in associationTypes)
+                        {
+                            stringBuilder.Append("LEFT JOIN " + this.mapping.Database.SchemaName + "." + this.mapping.GetTableName(associationType.RelationType) + " ON ");
+                            stringBuilder.Append(this.mapping.Database.SchemaName + "." + Mapping.TableNameForObjects + "." + Mapping.ColumnNameForObject + "=");
+                            stringBuilder.Append(this.mapping.Database.SchemaName + "." + this.mapping.GetTableName(associationType.RelationType) + "." + Mapping.ColumnNameForRole + "\n");
+                        }
+
+                        stringBuilder.Append("WHERE " + this.mapping.Database.SchemaName + "." + Mapping.TableNameForObjects + "." + Mapping.ColumnNameForType + "='" + objectType.Id + "'\n");
+
+                        var definition = stringBuilder.ToString();
+                        this.CreateView(connection, viewName, definition);
+
+                        // Column views
+                        foreach (var relationType in this.mapping.Database.MetaPopulation.RelationTypes)
+                        {
+                            var associationType = relationType.AssociationType;
+                            var roleType = relationType.RoleType;
+
+                            if (!(roleType.ObjectType is IUnit) && ((associationType.IsMany && roleType.IsMany) || !relationType.ExistExclusiveLeafClasses))
+                            {
+                                viewName = relationType.RoleType.SingularFullName;
+
+                                definition = @"
+CREATE VIEW " + this.mapping.Database.SchemaName + ".[" + viewName + @"]
+AS
+SELECT * FROM " + this.mapping.Database.SchemaName + "." + this.mapping.GetTableName(associationType.RelationType) + @"
+";
+                                this.CreateView(connection, viewName, definition);
                             }
                         }
                     }
@@ -744,6 +743,28 @@ WHERE " + Mapping.ColumnNameForAssociation + @" IN ( SELECT * FROM " + Mapping.P
                     connection.Close();
                 }
             }
+        }
+
+        private void CreateView(SqlConnection connection, string viewName, string definition)
+        {
+            var view = this.schema.GetView(viewName);
+            if (view != null && !view.IsDefinitionCompatible(definition))
+            {
+                using (var command = new SqlCommand("DROP VIEW " + this.mapping.Database.SchemaName + ".[" + viewName + "]", connection))
+                {
+                    command.ExecuteNonQuery();
+                    view = null;
+                }
+            }
+
+            if (view == null)
+            {
+                using (var command = new SqlCommand(definition, connection))
+                {
+                    command.ExecuteNonQuery();
+                }
+            }
+
         }
 
         private void DeleteViews()
