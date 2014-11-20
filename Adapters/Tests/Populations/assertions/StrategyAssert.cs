@@ -69,7 +69,7 @@ namespace Allors.Populations
         {
             foreach (var associationType in associationTypes)
             {
-                if (!allorsObject.Strategy.ObjectType.ContainsAssociationType(associationType))
+                if (!allorsObject.Strategy.ObjectType.ExistAssociationType(associationType))
                 {
                     Assert.Fail();
                 }
@@ -137,7 +137,7 @@ namespace Allors.Populations
         {
             foreach (IRoleType roleType in roleTypes)
             {
-                if (!allorsObject.Strategy.ObjectType.ContainsRoleType(roleType))
+                if (!allorsObject.Strategy.ObjectType.ExistRoleType(roleType))
                 {
                     Assert.Fail();
                 }

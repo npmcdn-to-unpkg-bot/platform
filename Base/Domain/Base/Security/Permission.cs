@@ -32,7 +32,7 @@ namespace Allors.Domain
         {
             get
             {
-                return (OperandType)this.Session.Population.MetaPopulation.Find(this.OperandTypePointer);
+                return (OperandType)this.Session.Population.MetaPopulation.Find(this.OperandTypePointer); 
             }
 
             set

@@ -29,22 +29,24 @@ namespace Allors.Meta
 
         IEnumerable<IRoleType> RoleTypes { get; }
 
-        bool ExistExclusiveLeafClass { get; }
+        IEnumerable<IInterface> DirectSupertypes { get; }
 
-        IEnumerable<IClass> LeafClasses { get; }
-
-        IClass ExclusiveLeafClass { get; }
+        IEnumerable<IInterface> Supertypes { get; }
 
         bool ExistLeafClasses { get; }
 
-        string Name { get; }
+        IEnumerable<IClass> LeafClasses { get; }
 
-        bool ContainsSupertype(IInterface @interface);
+        bool ExistExclusiveLeafClass { get; }
 
-        bool ContainsAssociationType(IAssociationType association);
+        IClass ExclusiveLeafClass { get; }
+        
+        bool ExistSupertype(IInterface @interface);
 
-        bool ContainsRoleType(IRoleType roleType);
+        bool ExistLeafClass(IClass objectType);
 
-        bool ContainsLeafClass(IClass objectType);
+        bool ExistAssociationType(IAssociationType association);
+
+        bool ExistRoleType(IRoleType roleType);
     }
 }

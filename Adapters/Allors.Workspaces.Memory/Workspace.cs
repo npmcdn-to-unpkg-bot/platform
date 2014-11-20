@@ -291,7 +291,7 @@ namespace Allors.Workspaces.Memory
                     throw new ArgumentException(role + " has no CompositeType");
                 }
 
-                if (!compositeType.ContainsLeafClass(role.Strategy.ObjectType))
+                if (!compositeType.ExistLeafClass(role.Strategy.ObjectType))
                 {
                     throw new ArgumentException(role.Strategy.ObjectType + " is not compatible with type " + roleType.ObjectType + " of role " + roleType + ".");
                 }

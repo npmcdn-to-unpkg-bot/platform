@@ -54,7 +54,7 @@ namespace Allors.Databases.Memory
             }
 
             var @interface = this.objectType as IInterface;
-            return (@interface != null && associationObjectType.ContainsSupertype(@interface))
+            return (@interface != null && associationObjectType.ExistSupertype(@interface))
                        ? ThreeValuedLogic.True
                        : ThreeValuedLogic.False;
         }

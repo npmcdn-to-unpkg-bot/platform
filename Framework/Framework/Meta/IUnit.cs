@@ -23,14 +23,20 @@ namespace Allors.Meta
 {
     public interface IUnit : IObjectType
     {
-        UnitTags UnitTag { get; }
+        bool IsBinary { get; }
 
-        bool IsInteger { get; }
+        bool IsBoolean { get; }
 
         bool IsDecimal { get; }
 
+        bool IsFloat { get; }
+
+        bool IsInteger { get; }
+        
         bool IsString { get; }
 
-        bool IsBinary { get; }
+        bool IsUnique { get; }
+
+        UnitTags UnitTag { get; }
     }
 }

@@ -123,6 +123,14 @@ namespace Allors.Meta
         /// <value>The root classes.</value>
         public abstract IEnumerable<Class> LeafClasses { get; }
 
+        IEnumerable<IInterface> IComposite.DirectSupertypes
+        {
+            get
+            {
+                return this.DirectSupertypes;
+            }
+        }
+
         /// <summary>
         /// Gets the direct super types.
         /// </summary>
@@ -133,6 +141,14 @@ namespace Allors.Meta
             {
                 this.MetaPopulation.Derive();
                 return this.derivedDirectSupertypes;
+            }
+        }
+
+        IEnumerable<IInterface> IComposite.Supertypes
+        {
+            get
+            {
+                return this.Supertypes;
             }
         }
 
@@ -242,19 +258,19 @@ namespace Allors.Meta
             }
         }
         
-        public bool ContainsSupertype(IInterface @interface)
+        public bool ExistSupertype(IInterface @interface)
         {
             this.MetaPopulation.Derive();
             return this.derivedSupertypes.Contains(@interface);
         }
 
-        public bool ContainsAssociationType(IAssociationType associationType)
+        public bool ExistAssociationType(IAssociationType associationType)
         {
             this.MetaPopulation.Derive();
             return this.derivedAssociationTypes.Contains(associationType);
         }
 
-        public bool ContainsRoleType(IRoleType roleType)
+        public bool ExistRoleType(IRoleType roleType)
         {
             this.MetaPopulation.Derive();
             return this.derivedRoleTypes.Contains(roleType);
@@ -269,7 +285,7 @@ namespace Allors.Meta
         /// <returns>
         /// True if this contains the concrete class.
         /// </returns>
-        public abstract bool ContainsLeafClass(IClass objectType);
+        public abstract bool ExistLeafClass(IClass objectType);
 
         /// <summary>
         /// Derive direct super type derivations.

@@ -556,7 +556,7 @@ namespace Allors.Workspaces.Memory
                     throw new ArgumentException(roleType + " has no CompositeType");
                 }
 
-                if (!compositeType.ContainsLeafClass(role.Strategy.ObjectType))
+                if (!compositeType.ExistLeafClass(role.Strategy.ObjectType))
                 {
                     throw new ArgumentException(role.Strategy.ObjectType + " is not compatible with type " + roleType.ObjectType + " of role " + roleType + ".");
                 }
@@ -698,7 +698,7 @@ namespace Allors.Workspaces.Memory
 
         private void RoleCompositeChecks(IRoleType roleType)
         {
-            if (!roleType.AssociationType.ObjectType.ContainsLeafClass(this.objectType))
+            if (!roleType.AssociationType.ObjectType.ExistLeafClass(this.objectType))
             {
                 throw new ArgumentException(this.objectType + " has no relationType with role " + roleType + ".");
             }
@@ -711,7 +711,7 @@ namespace Allors.Workspaces.Memory
 
         private void RoleCompositesChecks(IRoleType roleType)
         {
-            if (!roleType.AssociationType.ObjectType.ContainsLeafClass(this.objectType))
+            if (!roleType.AssociationType.ObjectType.ExistLeafClass(this.objectType))
             {
                 throw new ArgumentException(this.objectType + " has no relationType with role " + roleType + ".");
             }
@@ -736,7 +736,7 @@ namespace Allors.Workspaces.Memory
                 throw new ArgumentException(roleType + " has no CompositeType");
             }
 
-            if (!compositeType.ContainsLeafClass(allorsObject.Strategy.ObjectType))
+            if (!compositeType.ExistLeafClass(allorsObject.Strategy.ObjectType))
             {
                 throw new ArgumentException(allorsObject.Strategy.ObjectType + " is not compatible with type " + roleType.ObjectType + " of role " + roleType + ".");
             }

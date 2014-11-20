@@ -54,7 +54,7 @@ namespace Allors.Workspaces.Memory
             }
 
             var @interface = this.objectType as IInterface;
-            return (@interface != null && roleObjectType.ContainsSupertype(@interface))
+            return (@interface != null && roleObjectType.ExistSupertype(@interface))
                        ? ThreeValuedLogic.True
                        : ThreeValuedLogic.False;
         }

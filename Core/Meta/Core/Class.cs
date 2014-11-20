@@ -59,7 +59,7 @@ namespace Allors.Meta
             }
         }
 
-        public override bool ContainsLeafClass(IClass objectType)
+        public override bool ExistLeafClass(IClass objectType)
         {
             return this.Equals(objectType);
         }

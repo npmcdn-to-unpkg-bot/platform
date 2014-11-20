@@ -25,7 +25,7 @@ namespace Allors.Meta
     using System.Collections.Generic;
     using System.Linq;
 
-    public sealed partial class Domain : MetaObject, IDomain
+    public sealed partial class Domain : MetaObject
     {
         private string name;
 
@@ -89,7 +89,7 @@ namespace Allors.Meta
             }
         }
 
-        public IEnumerable<IDomain> Superdomains
+        public IEnumerable<Domain> Superdomains
         {
             get
             {

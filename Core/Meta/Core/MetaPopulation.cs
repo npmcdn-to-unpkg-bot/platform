@@ -80,11 +80,27 @@ namespace Allors.Meta
             }
         }
 
+        IEnumerable<IUnit> IMetaPopulation.Units 
+        {
+            get
+            {
+                return this.Units;
+            }
+        }
+
         public IEnumerable<Unit> Units
         {
             get
             {
                 return this.units;
+            }
+        }
+
+        IEnumerable<IInterface> IMetaPopulation.Interfaces
+        {
+            get
+            {
+                return this.Interfaces;
             }
         }
 

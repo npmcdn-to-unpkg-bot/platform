@@ -26,15 +26,19 @@ namespace Allors.Meta
 
     public interface IMetaPopulation
     {
-        IEnumerable<IComposite> Composites { get; }
+        IEnumerable<IUnit> Units { get; }
 
+        IEnumerable<IComposite> Composites { get; }
+        
         IEnumerable<IClass> Classes { get; }
+
+        IEnumerable<IInterface> Interfaces { get; }
 
         IEnumerable<IRelationType> RelationTypes { get; }
 
-        bool IsValid { get; }
-
         IMetaObject Find(Guid metaObjectId);
+
+        bool IsValid { get; }
 
         IValidationLog Validate();
 

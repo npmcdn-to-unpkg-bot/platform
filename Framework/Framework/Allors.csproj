@@ -63,8 +63,6 @@
     <Compile Include="Meta\IAssociationType.cs" />
     <Compile Include="Meta\IClass.cs" />
     <Compile Include="Meta\IComposite.cs" />
-    <Compile Include="Meta\IDomain.cs" />
-    <Compile Include="Meta\IDomainObject.cs" />
     <Compile Include="Meta\IInterface.cs" />
     <Compile Include="Meta\IMetaObject.cs" />
     <Compile Include="Meta\IMetaPopulation.cs" />

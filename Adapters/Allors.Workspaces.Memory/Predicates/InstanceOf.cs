@@ -44,7 +44,7 @@ namespace Allors.Workspaces.Memory
             }
 
             var @interface = this.objectType as IInterface;
-            return (@interface != null && strategy.UncheckedObjectType.ContainsSupertype(@interface))
+            return (@interface != null && strategy.UncheckedObjectType.ExistSupertype(@interface))
                        ? ThreeValuedLogic.True
                        : ThreeValuedLogic.False;
         }

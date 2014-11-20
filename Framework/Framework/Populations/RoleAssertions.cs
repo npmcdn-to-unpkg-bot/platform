@@ -29,7 +29,7 @@ namespace Allors.Populations
     {
         public static void UnitRoleChecks(IStrategy strategy, IRoleType roleType)
         {
-            if (!roleType.AssociationType.ObjectType.ContainsLeafClass(strategy.ObjectType))
+            if (!roleType.AssociationType.ObjectType.ExistLeafClass(strategy.ObjectType))
             {
                 throw new ArgumentException(strategy.ObjectType + " is not a valid association object type for " + roleType + ".");
             }
@@ -74,7 +74,7 @@ namespace Allors.Populations
 
         private static void CompositeSharedChecks(IStrategy strategy, IRoleType roleType, IObject role)
         {
-            if (!roleType.AssociationType.ObjectType.ContainsLeafClass(strategy.ObjectType))
+            if (!roleType.AssociationType.ObjectType.ExistLeafClass(strategy.ObjectType))
             {
                 throw new ArgumentException(strategy.ObjectType + " has no roleType with role " + roleType + ".");
             }
@@ -98,7 +98,7 @@ namespace Allors.Populations
                     throw new ArgumentException(role + " has no CompositeType");
                 }
 
-                if (!compositeType.ContainsLeafClass(role.Strategy.ObjectType))
+                if (!compositeType.ExistLeafClass(role.Strategy.ObjectType))
                 {
                     throw new ArgumentException(role.Strategy.ObjectType + " is not compatible with type " + roleType.ObjectType + " of role " + roleType + ".");
                 }

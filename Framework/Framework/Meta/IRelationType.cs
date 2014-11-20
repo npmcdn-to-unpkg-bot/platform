@@ -27,7 +27,7 @@ namespace Allors.Meta
     /// A relation type defines the state and behavior for
     /// a set of association types and role types.
     /// </summary>
-    public interface IRelationType : IDomainObject, IComparable
+    public interface IRelationType : IMetaObject, IComparable
     {
         IAssociationType AssociationType { get; }
 
@@ -36,6 +36,8 @@ namespace Allors.Meta
         Multiplicity Multiplicity { get; }
 
         bool ExistExclusiveLeafClasses { get; }
+
+        bool IsDerived { get; }
 
         bool IsIndexed { get; }
     }

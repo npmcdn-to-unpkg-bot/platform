@@ -94,6 +94,14 @@ namespace Allors.Meta
             }
         }
 
+        IEnumerable<IComposite> IInterface.Subtypes
+        {
+            get
+            {
+                return this.Subtypes;
+            }
+        }
+
         /// <summary>
         /// Gets the sub types.
         /// </summary>
@@ -136,7 +144,7 @@ namespace Allors.Meta
         /// <returns>
         /// True if this contains the concrete class.
         /// </returns>
-        public override bool ContainsLeafClass(IClass objectType)
+        public override bool ExistLeafClass(IClass objectType)
         {
             this.MetaPopulation.Derive();
             return this.derivedLeafClasses.Contains(objectType);

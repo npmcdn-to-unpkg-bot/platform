@@ -23,7 +23,7 @@ namespace Allors.Meta
 {
     using System;
 
-    public abstract partial class DomainObject : MetaObject, IDomainObject
+    public abstract partial class DomainObject : MetaObject
     {
         protected DomainObject(Domain definingDomain, Guid id)
             : base(definingDomain.MetaPopulation, id)

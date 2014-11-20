@@ -112,24 +112,24 @@ namespace Allors.Meta.Static
             c1_c2.AssociationType.ObjectType = c1;
             c1_c2.RoleType.ObjectType = c2;
 
-            Assert.IsFalse(c1.ContainsAssociationType(c1_c2.AssociationType));
-            Assert.IsTrue(c2.ContainsAssociationType(c1_c2.AssociationType));
-            Assert.IsFalse(c3.ContainsAssociationType(c1_c2.AssociationType));
-            Assert.IsFalse(c4.ContainsAssociationType(c1_c2.AssociationType));
+            Assert.IsFalse(c1.ExistAssociationType(c1_c2.AssociationType));
+            Assert.IsTrue(c2.ExistAssociationType(c1_c2.AssociationType));
+            Assert.IsFalse(c3.ExistAssociationType(c1_c2.AssociationType));
+            Assert.IsFalse(c4.ExistAssociationType(c1_c2.AssociationType));
 
             var c1_c3 = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
             c1_c3.AssociationType.ObjectType = c1;
             c1_c3.RoleType.ObjectType = c3;
 
-            Assert.IsFalse(c1.ContainsAssociationType(c1_c2.AssociationType));
-            Assert.IsTrue(c2.ContainsAssociationType(c1_c2.AssociationType));
-            Assert.IsFalse(c3.ContainsAssociationType(c1_c2.AssociationType));
-            Assert.IsFalse(c4.ContainsAssociationType(c1_c2.AssociationType));
+            Assert.IsFalse(c1.ExistAssociationType(c1_c2.AssociationType));
+            Assert.IsTrue(c2.ExistAssociationType(c1_c2.AssociationType));
+            Assert.IsFalse(c3.ExistAssociationType(c1_c2.AssociationType));
+            Assert.IsFalse(c4.ExistAssociationType(c1_c2.AssociationType));
 
-            Assert.IsFalse(c1.ContainsAssociationType(c1_c3.AssociationType));
-            Assert.IsFalse(c2.ContainsAssociationType(c1_c3.AssociationType));
-            Assert.IsTrue(c3.ContainsAssociationType(c1_c3.AssociationType));
-            Assert.IsFalse(c4.ContainsAssociationType(c1_c3.AssociationType));
+            Assert.IsFalse(c1.ExistAssociationType(c1_c3.AssociationType));
+            Assert.IsFalse(c2.ExistAssociationType(c1_c3.AssociationType));
+            Assert.IsTrue(c3.ExistAssociationType(c1_c3.AssociationType));
+            Assert.IsFalse(c4.ExistAssociationType(c1_c3.AssociationType));
         }
 
         [Test]
@@ -146,24 +146,24 @@ namespace Allors.Meta.Static
             c1_c2.AssociationType.ObjectType = c1;
             c1_c2.RoleType.ObjectType = c2;
 
-            Assert.IsTrue(c1.ContainsRoleType(c1_c2.RoleType));
-            Assert.IsFalse(c2.ContainsRoleType(c1_c2.RoleType));
-            Assert.IsFalse(c3.ContainsRoleType(c1_c2.RoleType));
-            Assert.IsFalse(c4.ContainsRoleType(c1_c2.RoleType));
+            Assert.IsTrue(c1.ExistRoleType(c1_c2.RoleType));
+            Assert.IsFalse(c2.ExistRoleType(c1_c2.RoleType));
+            Assert.IsFalse(c3.ExistRoleType(c1_c2.RoleType));
+            Assert.IsFalse(c4.ExistRoleType(c1_c2.RoleType));
 
             var c1_c3 = new RelationTypeBuilder(this.Domain, Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid()).Build();
             c1_c3.AssociationType.ObjectType = c1;
             c1_c3.RoleType.ObjectType = c3;
 
-            Assert.IsTrue(c1.ContainsRoleType(c1_c2.RoleType));
-            Assert.IsFalse(c2.ContainsRoleType(c1_c2.RoleType));
-            Assert.IsFalse(c3.ContainsRoleType(c1_c2.RoleType));
-            Assert.IsFalse(c4.ContainsRoleType(c1_c2.RoleType));
+            Assert.IsTrue(c1.ExistRoleType(c1_c2.RoleType));
+            Assert.IsFalse(c2.ExistRoleType(c1_c2.RoleType));
+            Assert.IsFalse(c3.ExistRoleType(c1_c2.RoleType));
+            Assert.IsFalse(c4.ExistRoleType(c1_c2.RoleType));
 
-            Assert.IsTrue(c1.ContainsRoleType(c1_c3.RoleType));
-            Assert.IsFalse(c2.ContainsRoleType(c1_c3.RoleType));
-            Assert.IsFalse(c3.ContainsRoleType(c1_c3.RoleType));
-            Assert.IsFalse(c4.ContainsRoleType(c1_c3.RoleType));
+            Assert.IsTrue(c1.ExistRoleType(c1_c3.RoleType));
+            Assert.IsFalse(c2.ExistRoleType(c1_c3.RoleType));
+            Assert.IsFalse(c3.ExistRoleType(c1_c3.RoleType));
+            Assert.IsFalse(c4.ExistRoleType(c1_c3.RoleType));
         }
 
         [Test]

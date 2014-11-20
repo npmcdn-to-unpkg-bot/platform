@@ -55,7 +55,7 @@ namespace Allors.Databases.Memory
 
         internal void CheckForAssociationType(IAssociationType association)
         {
-            if (!this.objectType.ContainsAssociationType(association))
+            if (!this.objectType.ExistAssociationType(association))
             {
                 throw new ArgumentException("Extent does not have association " + association);
             }
@@ -63,7 +63,7 @@ namespace Allors.Databases.Memory
 
         internal void CheckForRoleType(IRoleType roleType)
         {
-            if (!this.objectType.ContainsRoleType(roleType))
+            if (!this.objectType.ExistRoleType(roleType))
             {
                 throw new ArgumentException("Extent does not have role " + roleType.SingularName);
             }

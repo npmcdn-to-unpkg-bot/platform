@@ -23,10 +23,20 @@ namespace Allors.Meta
 {
     using System;
 
-    public interface IObjectType : IDomainObject, IComparable
+    public interface IObjectType : IMetaObject, IComparable
     {
         string SingularName { get; }
 
         string PluralName { get; }
+
+        bool IsUnit { get; }
+
+        bool IsComposite { get; }
+
+        bool IsInterface { get; }
+
+        bool IsClass { get; }
+
+        string Name { get; }
     }
 }
