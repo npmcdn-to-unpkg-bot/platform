@@ -187,15 +187,43 @@ namespace Allors.Meta
 
             // RelationTypes
             // Counter
-            new RelationTypeBuilder(domain, new Guid("309d07d9-8dea-4e99-a3b8-53c0d360bc54"), new Guid("0c807020-5397-4cdb-8380-52899b7af6b7"), new Guid("ab60f6a7-d913-4377-ab47-97f0fb9d8f3b")).WithObjectTypes(counter, allorsInteger).WithSingularName("Value").WithPluralName("Values").Build();
+            new RelationTypeBuilder(domain, new Guid("309d07d9-8dea-4e99-a3b8-53c0d360bc54"), new Guid("0c807020-5397-4cdb-8380-52899b7af6b7"), new Guid("ab60f6a7-d913-4377-ab47-97f0fb9d8f3b"))
+                .WithObjectTypes(counter, allorsInteger)
+                .WithSingularName("Value")
+                .WithPluralName("Values")
+                .WithIsRequired(true)
+                .Build();
 
             // UniquelyIdentifiable
-            new RelationTypeBuilder(domain, new Guid("e1842d87-8157-40e7-b06e-4375f311f2c3"), new Guid("fe413e96-cfcf-4e8d-9f23-0fa4f457fdf1"), new Guid("d73fd9a4-13ee-4fa9-8925-d93eca328bf6")).WithObjectTypes(uniquelyIdentifiable, allorsUnique).WithSingularName("UniqueId").WithPluralName("UniqueIds").WithIsDerived(true).WithIsIndexed(true).Build();
+            new RelationTypeBuilder(domain, new Guid("e1842d87-8157-40e7-b06e-4375f311f2c3"), new Guid("fe413e96-cfcf-4e8d-9f23-0fa4f457fdf1"), new Guid("d73fd9a4-13ee-4fa9-8925-d93eca328bf6"))
+                .WithObjectTypes(uniquelyIdentifiable, allorsUnique)
+                .WithSingularName("UniqueId")
+                .WithPluralName("UniqueIds")
+                .WithIsDerived(true)
+                .WithIsIndexed(true)
+                .WithIsRequired(true)
+                .Build();
 
             // Singleton
-            new RelationTypeBuilder(domain, new Guid("d9ea02e5-9aa1-4cbe-9318-06324529a923"), new Guid("6247e69d-4789-4ee0-a75b-c2de44a5fcce"), new Guid("c11f31e1-75a7-4b23-9d58-7dfec256b658")).WithObjectTypes(singleton, securityToken).WithSingularName("AdministratorSecurityToken").WithPluralName("AdministratorSecurityTokens").WithMultiplicity(Multiplicity.ManyToOne).WithIsIndexed(true).Build();
-            new RelationTypeBuilder(domain, new Guid("f16652b0-b712-43d7-8d4e-34a22487514d"), new Guid("c92466b5-55ba-496a-8880-2821f32f8f8e"), new Guid("3a12d798-40c3-40e0-ba9f-9d01b1e39e89")).WithObjectTypes(singleton, user).WithSingularName("Guest").WithPluralName("Guests").Build();
-            new RelationTypeBuilder(domain, new Guid("f579494b-e550-4be6-9d93-84618ac78704"), new Guid("33f17e75-99cc-417e-99f3-c29080f08f0a"), new Guid("ca9e3469-583c-4950-ba2c-1bc3a0fc3e96")).WithObjectTypes(singleton, securityToken).WithSingularName("DefaultSecurityToken").WithPluralName("DefaultSecurityTokens").WithMultiplicity(Multiplicity.ManyToOne).WithIsIndexed(true).Build();
+            new RelationTypeBuilder(domain, new Guid("d9ea02e5-9aa1-4cbe-9318-06324529a923"), new Guid("6247e69d-4789-4ee0-a75b-c2de44a5fcce"), new Guid("c11f31e1-75a7-4b23-9d58-7dfec256b658"))
+                .WithObjectTypes(singleton, securityToken)
+                .WithSingularName("AdministratorSecurityToken")
+                .WithPluralName("AdministratorSecurityTokens")
+                .WithMultiplicity(Multiplicity.ManyToOne)
+                .WithIsIndexed(true)
+                .Build();
+            new RelationTypeBuilder(domain, new Guid("f16652b0-b712-43d7-8d4e-34a22487514d"), new Guid("c92466b5-55ba-496a-8880-2821f32f8f8e"), new Guid("3a12d798-40c3-40e0-ba9f-9d01b1e39e89"))
+                .WithObjectTypes(singleton, user)
+                .WithSingularName("Guest")
+                .WithPluralName("Guests")
+                .Build();
+            new RelationTypeBuilder(domain, new Guid("f579494b-e550-4be6-9d93-84618ac78704"), new Guid("33f17e75-99cc-417e-99f3-c29080f08f0a"), new Guid("ca9e3469-583c-4950-ba2c-1bc3a0fc3e96"))
+                .WithObjectTypes(singleton, securityToken)
+                .WithSingularName("DefaultSecurityToken")
+                .WithPluralName("DefaultSecurityTokens")
+                .WithMultiplicity(Multiplicity.ManyToOne)
+                .WithIsIndexed(true)
+                .Build();
 
             // UserGroup
             new RelationTypeBuilder(domain, new Guid("2f8cf270-a153-4e0d-b844-991d577222d4"), new Guid("46f531f2-b211-4f2a-902d-7198cda9c50d"), new Guid("a1b92c88-79d9-4a4f-bb99-0fde4e251a28")).WithObjectTypes(userGroup, role).WithIsDerived(true).WithIsIndexed(true).Build();
@@ -204,9 +232,27 @@ namespace Allors.Meta
             new RelationTypeBuilder(domain, new Guid("e94e7f05-78bd-4291-923f-38f82d00e3f4"), new Guid("75859e2c-c1a3-4f4c-bb37-4064d0aa81d0"), new Guid("9d3c1eec-bf10-4a79-a37f-bc6a20ff2a79")).WithObjectTypes(userGroup, allorsString).WithSingularName("Name").WithPluralName("Names").WithIsIndexed(true).WithSize(256).Build();
 
             // Permission
-            new RelationTypeBuilder(domain, new Guid("097bb620-f068-440e-8d02-ef9d8be1d0f0"), new Guid("3442728c-164a-477c-87be-19a789229585"), new Guid("3fd81194-2f6f-43e7-9c6b-91f5e3e118ac")).WithObjectTypes(permission, allorsUnique).WithSingularName("OperandTypePointer").WithPluralName("OperandTypePointers").WithIsIndexed(true).Build();
-            new RelationTypeBuilder(domain, new Guid("29b80857-e51b-4dec-b859-887ed74b1626"), new Guid("8ffed1eb-b64e-4341-bbb6-348ed7f06e83"), new Guid("cadaca05-55ba-4a13-8758-786ff29c8e46")).WithObjectTypes(permission, allorsUnique).WithSingularName("ConcreteClassPointer").WithPluralName("ConcreteClassePointers").WithIsIndexed(true).Build();
-            new RelationTypeBuilder(domain, new Guid("9d73d437-4918-4f20-b9a7-3ce23a04bd7b"), new Guid("891734d6-4855-4b33-8b3b-f46fd6103149"), new Guid("d29ce0ed-fba8-409d-8675-dc95e1566cfb")).WithObjectTypes(permission, allorsInteger).WithSingularName("OperationEnum").WithPluralName("OperationEnums").WithIsIndexed(true).Build();
+            new RelationTypeBuilder(domain, new Guid("097bb620-f068-440e-8d02-ef9d8be1d0f0"), new Guid("3442728c-164a-477c-87be-19a789229585"), new Guid("3fd81194-2f6f-43e7-9c6b-91f5e3e118ac"))
+                .WithObjectTypes(permission, allorsUnique)
+                .WithSingularName("OperandTypePointer")
+                .WithPluralName("OperandTypePointers")
+                .WithIsIndexed(true)
+                .WithIsRequired(true)
+                .Build();
+            new RelationTypeBuilder(domain, new Guid("29b80857-e51b-4dec-b859-887ed74b1626"), new Guid("8ffed1eb-b64e-4341-bbb6-348ed7f06e83"), new Guid("cadaca05-55ba-4a13-8758-786ff29c8e46"))
+                .WithObjectTypes(permission, allorsUnique)
+                .WithSingularName("ConcreteClassPointer")
+                .WithPluralName("ConcreteClassePointers")
+                .WithIsIndexed(true)
+                .WithIsRequired(true)
+                .Build();
+            new RelationTypeBuilder(domain, new Guid("9d73d437-4918-4f20-b9a7-3ce23a04bd7b"), new Guid("891734d6-4855-4b33-8b3b-f46fd6103149"), new Guid("d29ce0ed-fba8-409d-8675-dc95e1566cfb"))
+                .WithObjectTypes(permission, allorsInteger)
+                .WithSingularName("OperationEnum")
+                .WithPluralName("OperationEnums")
+                .WithIsIndexed(true)
+                .WithIsRequired(true)
+                .Build();
 
             // User
             new RelationTypeBuilder(domain, new Guid("0b3b650b-fcd4-4475-b5c4-e2ee4f39b0be"), new Guid("c89a8e3f-6f76-41ac-b4dc-839f9080d917"), new Guid("1b1409b8-add7-494c-a895-002fc969ac7b")).WithObjectTypes(user, allorsBoolean).WithSingularName("UserEmailConfirmed").WithPluralName("UserEmailConfirmeds").Build();

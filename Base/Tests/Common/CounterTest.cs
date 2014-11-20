@@ -60,6 +60,7 @@ namespace Allors.Common
             {
                 var configuration = new Databases.SqlClient.Configuration
                 {
+                    ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["allors"].ConnectionString,
                     ObjectFactory = Config.ObjectFactory,
                     WorkspaceFactory = new WorkspaceFactory()
                 };
@@ -94,6 +95,7 @@ namespace Allors.Common
             {
                 var configuration = new Databases.SqlClient.Configuration
                                         {
+                                            ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["allors"].ConnectionString,
                                             ObjectFactory = Config.ObjectFactory,
                                             WorkspaceFactory = new WorkspaceFactory()
                                         };
@@ -129,11 +131,13 @@ namespace Allors.Common
                 var workspaceFactory = new WorkspaceFactory();
                 Config.Default = new Databases.SqlClient.Database(new Databases.SqlClient.Configuration
                                                                                                     {
+                                                                                                        ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["allors"].ConnectionString,
                                                                                                         ObjectFactory = Config.ObjectFactory,
                                                                                                         WorkspaceFactory = workspaceFactory
                                                                                                     });
                 Config.Serializable = new Databases.SqlClient.Database(new Databases.SqlClient.Configuration
                                                                                                 {
+                                                                                                    ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["allors"].ConnectionString,
                                                                                                     ObjectFactory = Config.ObjectFactory,
                                                                                                     WorkspaceFactory = workspaceFactory,
                                                                                                     IsolationLevel = IsolationLevel.Serializable

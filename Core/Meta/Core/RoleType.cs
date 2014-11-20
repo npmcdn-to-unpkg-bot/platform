@@ -48,6 +48,8 @@ namespace Allors.Meta
 
         private int? size;
 
+        private bool isRequired;
+
         internal RoleType(RelationType relationType, Guid id)
             : base(relationType.DefiningDomain, id)
         {
@@ -298,8 +300,7 @@ namespace Allors.Meta
         {
             get { return this.RelationType.AssociationType; }
         }
-
-
+        
         public int? Scale
         {
             get
@@ -345,6 +346,19 @@ namespace Allors.Meta
                 this.MetaPopulation.AssertUnlocked();
                 this.size = value;
                 this.MetaPopulation.Stale();
+            }
+        }
+
+        public bool IsRequired
+        {
+            get
+            {
+                return this.isRequired;
+            }
+
+            set
+            {
+                this.isRequired = value;
             }
         }
 

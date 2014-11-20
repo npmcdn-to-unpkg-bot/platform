@@ -63,7 +63,7 @@ namespace Allors.Domain
                 this.Subcounter = this.Subdependee.Subcounter;
             }
 
-            if (this.DeleteDependent)
+            if (this.DeleteDependent.HasValue && this.DeleteDependent.Value)
             {
                 this.DependentWhereDependee.Delete();
             }

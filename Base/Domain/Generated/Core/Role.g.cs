@@ -176,11 +176,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Guid? UniqueId 
+		virtual public global::System.Guid UniqueId 
 		{
 			get
 			{
-				return (global::System.Guid?) Strategy.GetUnitRole(Meta.UniqueId);
+				return (global::System.Guid) Strategy.GetUnitRole(Meta.UniqueId);
 			}
 			set
 			{

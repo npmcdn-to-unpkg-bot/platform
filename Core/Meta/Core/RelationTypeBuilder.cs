@@ -39,6 +39,8 @@ namespace Allors.Meta
         private int? scale;
         private int? size;
 
+        private bool isRequired;
+
         public RelationTypeBuilder(Domain domain, Guid id, Guid associationTypeId, Guid roleTypeId)
             : base(domain, id)
         {
@@ -101,6 +103,12 @@ namespace Allors.Meta
             return this;
         }
 
+        public RelationTypeBuilder WithIsRequired(bool value)
+        {
+            this.isRequired = value;
+            return this;
+        }
+
         private void AllorsBuild(RelationType instance)
         {
             instance.AssociationType.ObjectType = this.associationObjectType;
@@ -114,6 +122,8 @@ namespace Allors.Meta
             instance.RoleType.Precision = this.precision;
             instance.RoleType.Scale = this.scale;
             instance.RoleType.Size = this.size;
+
+            instance.RoleType.IsRequired = this.isRequired;
         }
     }
 }
