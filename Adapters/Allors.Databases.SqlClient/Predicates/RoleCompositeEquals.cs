@@ -19,7 +19,7 @@
 // <summary>Defines the AllorsPredicateRoleCompositeEqualsSql type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.Adapters.Database.SqlClient
+namespace Allors.Database.SqlClient
 {
     using System;
 

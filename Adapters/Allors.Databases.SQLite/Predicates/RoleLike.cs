@@ -19,7 +19,7 @@
 // <summary>Defines the AllorsPredicateRoleLikeSql type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.Adapters.Database.SQLite
+namespace Allors.Database.SQLite
 {
     using System;
 

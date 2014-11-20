@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Adapters.Database.SqlClient
+namespace Allors.Database.SqlClient
 {
     using Allors.Populations;
 

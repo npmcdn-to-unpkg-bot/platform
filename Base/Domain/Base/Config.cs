@@ -1,5 +1,5 @@
 ﻿// ------------------------------------------------------------------------------------------------
-// <copyright file="Databases.cs" company="Allors bvba">
+// <copyright file="Config.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 //
 // Dual Licensed under
@@ -22,14 +22,15 @@ namespace Allors
 {
     using Allors.Domain;
     using Allors.Meta;
-    using Allors;
 
-    public static partial class Databases
+    public static partial class Config
     {
-        public static readonly ObjectFactory ObjectFactory = new ObjectFactory(Repository.MetaPopulation, typeof(Databases).Assembly, typeof(Singleton).Namespace);
+        public static readonly ObjectFactory ObjectFactory = new ObjectFactory(Repository.MetaPopulation, typeof(Config).Assembly, typeof(Singleton).Namespace);
 
         public static IDatabase Default { get; set; }
 
         public static IDatabase Serializable { get; set; }
+
+        public static IWorkspaceFactory WorkspaceFactory { get; set; }
     }
 }

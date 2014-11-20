@@ -146,10 +146,6 @@ namespace Allors
                     case UnitTags.AllorsBinary:
                         return new byte[0];
 
-                    case UnitTags.AllorsDate:
-                        var now = DateTime.Now;
-                        return new DateTime(now.Year, now.Month, now.Day, 0, 0, 0, DateTimeKind.Utc);
-
                     case UnitTags.AllorsUnique:
                         return Guid.NewGuid();
 

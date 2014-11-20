@@ -19,7 +19,7 @@
 // <summary>Defines the AllorsPredicateRoleCompositeEqualsSql type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.Adapters.Database.SQLite
+namespace Allors.Database.SQLite
 {
     using Allors.Meta;
     using Allors.Populations;

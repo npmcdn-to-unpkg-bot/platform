@@ -19,7 +19,7 @@
 // <summary>Defines the AllorsPredicateRoleLessThanValueSql type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.Adapters.Database.SqlClient
+namespace Allors.Database.SqlClient
 {
     using System;
 

@@ -19,7 +19,7 @@
 // <summary>Defines the AllorsPredicateInstanceOfSql type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.Adapters.Database.SqlClient
+namespace Allors.Database.SqlClient
 {
     using Allors.Meta;
     using Allors.Populations;

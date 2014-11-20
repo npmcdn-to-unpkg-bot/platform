@@ -19,12 +19,12 @@ namespace Allors.Databases.SqlClient.IntegerId.ReadCommitted
     using System;
     using System.Collections.Generic;
 
-    using Allors.Adapters.Database.SqlClient;
+    using Allors.Database.SqlClient;
     using Allors.Workspaces.Memory.IntegerId;
     using Allors.Meta;
     using Allors.Populations;
 
-    using Configuration = Allors.Adapters.Database.SqlClient.Configuration;
+    using Configuration = Allors.Database.SqlClient.Configuration;
 
     public class Profile : SqlClient.Profile
     {

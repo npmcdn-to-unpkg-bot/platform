@@ -19,7 +19,7 @@
 // <summary>Defines the AllorsExtentFilteredSql type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.Adapters.Database.SqlClient
+namespace Allors.Database.SqlClient
 {
     using System;
     using System.Collections;

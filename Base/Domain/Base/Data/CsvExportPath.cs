@@ -135,10 +135,6 @@ namespace Allors.Domain
                             stringValue = ((bool)value).ToString(formatProvider);
                             break;
 
-                        case UnitTags.AllorsDate:
-                            stringValue = ((DateTime)value).ToString(formatProvider);
-                            break;
-
                         case UnitTags.AllorsUnique:
                             stringValue = ((Guid)value).ToString();
                             break;

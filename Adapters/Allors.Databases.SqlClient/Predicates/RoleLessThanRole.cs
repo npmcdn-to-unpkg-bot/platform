@@ -21,7 +21,7 @@
 
 using Allors.Meta;
 
-namespace Allors.Adapters.Database.SqlClient
+namespace Allors.Database.SqlClient
 {
     using Allors.Populations;
 

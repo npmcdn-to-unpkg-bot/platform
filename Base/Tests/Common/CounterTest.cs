@@ -26,7 +26,6 @@ namespace Allors.Common
     using System;
     using System.Data;
 
-    using Allors.Adapters.Workspace.Memory.IntegerId;
     using Allors.Domain;
   
     using NUnit.Framework;
@@ -58,7 +57,7 @@ namespace Allors.Common
 
             try
             {
-                var configuration = new Adapters.Database.SqlClient.IntegerId.Configuration
+                var configuration = new Allors.Databases..IntegerId.Configuration
                 {
                     Id = Guid.NewGuid(),
                     ObjectFactory = Databases.ObjectFactory,

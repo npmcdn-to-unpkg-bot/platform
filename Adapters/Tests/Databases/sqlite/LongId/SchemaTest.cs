@@ -16,7 +16,7 @@
 
 namespace Allors.Databases.SQLite.LongId.ReadCommitted
 {
-    using Allors.Adapters.Database.SQLite;
+    using Allors.Database.SQLite;
     using Allors.Meta;
     using Allors.Populations;
 

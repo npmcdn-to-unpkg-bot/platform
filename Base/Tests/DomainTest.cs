@@ -24,7 +24,6 @@ namespace Allors
     using System.IO;
     using System.Xml;
 
-    
     using Allors.Meta;
 
     using global::Allors.Domain;
@@ -55,7 +54,7 @@ namespace Allors
 
         public IWorkspaceSession CreateWorkspaceSession()
         {
-            var workspace = Databases.Default.CreateWorkspace();
+            var workspace = Config.WorkspaceFactory.CreateWorkspace(Config.Default);
             return workspace.CreateSession();
         }
 
@@ -65,14 +64,14 @@ namespace Allors
             {
                 var stringReader = new StringReader(Fixture.DefaultXml);
                 var reader = new XmlTextReader(stringReader);
-                Databases.Default.Load(reader);
+                Config.Default.Load(reader);
             }
             else
             {
-                Databases.Default.Init();
+                Config.Default.Init();
             }
 
-            this.databaseSession = Databases.Default.CreateSession();
+            this.databaseSession = Config.Default.CreateSession();
             
             SecurityCache.Invalidate();
         }

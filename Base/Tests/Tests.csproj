@@ -96,13 +96,25 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Adapters\Adapters\Adapters.csproj">
+    <ProjectReference Include="..\..\Adapters\Allors.Databases.Memory\Allors.Databases.Memory.csproj">
       <Project>{233622ff-5493-4981-9529-4337d84c8312}</Project>
-      <Name>Adapters</Name>
+      <Name>Allors.Databases.Memory</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Framework\Framework\Framework.csproj">
+    <ProjectReference Include="..\..\Adapters\Allors.Databases.SqlClient\Allors.Databases.SqlClient.csproj">
+      <Project>{457bddeb-41cf-46c6-bbcc-13618aeb646f}</Project>
+      <Name>Allors.Databases.SqlClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Adapters\Allors.Databases.SQLite\Allors.Databases.SQLite.csproj">
+      <Project>{76db148d-bfbb-48be-929b-4631c860f2a1}</Project>
+      <Name>Allors.Databases.SQLite</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Adapters\Allors.Workspaces.Memory\Allors.Workspaces.Memory.csproj">
+      <Project>{d09daf58-d524-40c2-887c-eadbf5609794}</Project>
+      <Name>Allors.Workspaces.Memory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Framework\Framework\Allors.csproj">
       <Project>{84495b8e-1800-41c9-a236-abe6265a23a3}</Project>
-      <Name>Framework</Name>
+      <Name>Allors</Name>
     </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{b6c2e17b-53e1-44a4-9299-5350cc854e65}</Project>

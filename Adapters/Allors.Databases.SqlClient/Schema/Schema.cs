@@ -1,4 +1,4 @@
-namespace Allors.Adapters.Database.SqlClient
+namespace Allors.Database.SqlClient
 {
     using System;
     using System.Collections.Generic;
@@ -137,15 +137,15 @@ WHERE routine_schema = @routineSchema";
 
                     // Views
                     cmdText = @"
-SELECT  _u.view_name,
-        _u.table_name,
-        _v.view_definition
+SELECT  _v.table_name AS view_name,
+        _v.view_definition,
+        _u.table_name
 FROM information_schema.views AS _v
-INNER JOIN information_schema.view_table_usage AS _u
+LEFT JOIN information_schema.view_table_usage AS _u
 ON _v.table_name = _u.view_name
-WHERE _v.table_schema = @tableSchema
-AND _u.view_schema = @tableSchema
-AND _u.table_schema = @tableSchema";
+AND _v.table_schema = _u.view_schema
+AND _v.table_schema = _u.table_schema
+WHERE _v.table_schema = @tableSchema";
 
                     using (var command = new SqlCommand(cmdText, connection))
                     {
@@ -153,13 +153,12 @@ AND _u.table_schema = @tableSchema";
                         using (var reader = command.ExecuteReader())
                         {
                             var viewNameOrdinal = reader.GetOrdinal("view_name");
-                            var tableNameOrdinal = reader.GetOrdinal("table_name");
                             var viewDefinitionOrdinal = reader.GetOrdinal("view_definition");
+                            var tableNameOrdinal = reader.GetOrdinal("table_name");
 
                             while (reader.Read())
                             {
                                 var viewName = reader.GetString(viewNameOrdinal);
-                                var tableName = reader.GetString(tableNameOrdinal);
                                 var viewDefinition = reader.GetString(viewDefinitionOrdinal);
 
                                 viewName = viewName.Trim().ToLowerInvariant();
@@ -170,10 +169,15 @@ AND _u.table_schema = @tableSchema";
                                     this.ViewByLowercaseViewName[viewName] = view;
                                 }
 
-                                Table table;
-                                if (this.TableByLowercaseTableName.TryGetValue(tableName.ToLowerInvariant(), out table))
+                                if (!reader.IsDBNull(tableNameOrdinal))
                                 {
-                                    view.Tables.Add(table);
+                                    var tableName = reader.GetString(tableNameOrdinal);
+
+                                    Table table;
+                                    if (this.TableByLowercaseTableName.TryGetValue(tableName.ToLowerInvariant(), out table))
+                                    {
+                                        view.Tables.Add(table);
+                                    }
                                 }
                             }
                         }

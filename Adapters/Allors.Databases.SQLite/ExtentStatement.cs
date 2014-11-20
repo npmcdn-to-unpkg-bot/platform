@@ -25,7 +25,7 @@ using System.Collections.Generic;
 using System.Text;
 using Allors.Meta;
 
-namespace Allors.Adapters.Database.SQLite
+namespace Allors.Database.SQLite
 {
     using System.Data.SQLite;
 

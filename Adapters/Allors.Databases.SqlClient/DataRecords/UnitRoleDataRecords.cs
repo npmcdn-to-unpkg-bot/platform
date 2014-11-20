@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Adapters.Database.SqlClient.IntegerId
+namespace Allors.Database.SqlClient.IntegerId
 {
     using System;
     using System.Collections;

@@ -61,14 +61,14 @@ namespace Allors.Domain
                 return NextValueNonShared(session, counterId);
             }
 
-            database = Databases.Serializable;
+            database = Config.Serializable;
            
             if (database != null)
             {
                 return NextValueSerializable(database, counterId);
             }
 
-            database = Databases.Default;
+            database = Config.Default;
 
             return NextValueSnapshot(database, counterId, snapshotRetryCount);
         }

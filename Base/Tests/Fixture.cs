@@ -24,16 +24,14 @@ namespace Allors
     using System.Diagnostics;
     using System.Globalization;
     using System.IO;
-    using System.Linq;
     using System.Threading;
     using System.Xml;
 
-    using Allors.Adapters.Workspace.Memory.IntegerId;
     using Allors.Domain;
+    using Allors.Workspaces.Memory.IntegerId;
 
     using NUnit.Framework;
 
-    using Configuration = Allors.Adapters.Database.Memory.IntegerId.Configuration;
 
     [SetUpFixture]
     public class Fixture
@@ -45,12 +43,13 @@ namespace Allors
         [SetUp]
         public void SetUp()
         {
-            var configuration = new Configuration { Id = Guid.NewGuid(), ObjectFactory = Databases.ObjectFactory, WorkspaceFactory = new WorkspaceFactory() };
-            Databases.Default = new Adapters.Database.Memory.IntegerId.Database(configuration);
+            var configuration = new Databases.Memory.IntegerId.Configuration { ObjectFactory = Config.ObjectFactory};
+            Config.Default = new Databases.Memory.IntegerId.Database(configuration);
+            Config.WorkspaceFactory = new WorkspaceFactory();
 
             Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("nl-BE");
 
-            var database = Databases.Default;
+            var database = Config.Default;
             database.Init();
 
             using (var session = database.CreateSession())

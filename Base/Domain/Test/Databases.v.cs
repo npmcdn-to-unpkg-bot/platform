@@ -20,7 +20,7 @@
 
 namespace Allors
 {
-    public static partial class Databases
+    public static partial class Config
     {
     }
 }

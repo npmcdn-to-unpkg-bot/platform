@@ -47,9 +47,6 @@
     <Compile Include="..\..\Core\Meta\Core\Builder.cs">
       <Link>Core\Builder.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Cardinalities.cs">
-      <Link>Core\Cardinalities.cs</Link>
-    </Compile>
     <Compile Include="..\..\Core\Meta\Core\Class.cs">
       <Link>Core\Class.cs</Link>
     </Compile>
@@ -177,13 +174,16 @@
     <None Include="..\..\Core\Meta\Core\Generate.proj">
       <Link>Core\Generate.proj</Link>
     </None>
+    <None Include="..\..\Core\Meta\Core\Overview.cd">
+      <Link>Core\Overview.cd</Link>
+    </None>
     <None Include="packages.config" />
     <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework\Framework\Framework.csproj">
+    <ProjectReference Include="..\..\Framework\Framework\Allors.csproj">
       <Project>{84495b8e-1800-41c9-a236-abe6265a23a3}</Project>
-      <Name>Framework</Name>
+      <Name>Allors</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

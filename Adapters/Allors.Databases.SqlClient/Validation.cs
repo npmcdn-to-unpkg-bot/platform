@@ -1,4 +1,4 @@
-namespace Allors.Adapters.Database.SqlClient
+namespace Allors.Database.SqlClient
 {
     using System.Collections.Generic;
 

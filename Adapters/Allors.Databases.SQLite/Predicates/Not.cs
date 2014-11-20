@@ -19,7 +19,7 @@
 // <summary>Defines the AllorsPredicateNotSql type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.Adapters.Database.SQLite
+namespace Allors.Database.SQLite
 {
     using System;
     using System.Collections;
