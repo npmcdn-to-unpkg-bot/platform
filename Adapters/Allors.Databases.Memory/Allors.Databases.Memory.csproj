@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{233622FF-5493-4981-9529-4337D84C8312}</ProjectGuid>
+    <ProjectGuid>{AD0D7FC3-9071-429A-B9DA-E39FD515599E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Allors.Databases.Memory</RootNamespace>

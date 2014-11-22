@@ -14,6 +14,7 @@ namespace Allors.Databases.SqlClient
         private readonly Dictionary<string, TableType> tableTypeByLowercaseTableTypeName;
         private readonly Dictionary<string, Procedure> procedureByLowercaseProcedureName;
         private readonly Dictionary<string, View> viewByLowercaseViewName;
+        private readonly Dictionary<string, Index> indexByLowercaseIndexName;
 
         public Schema(Database database)
         {
@@ -22,6 +23,7 @@ namespace Allors.Databases.SqlClient
             this.tableTypeByLowercaseTableTypeName = new Dictionary<string, TableType>();
             this.procedureByLowercaseProcedureName = new Dictionary<string, Procedure>();
             this.viewByLowercaseViewName = new Dictionary<string, View>();
+            this.indexByLowercaseIndexName = new Dictionary<string, Index>();
 
             using (var connection = new SqlConnection(database.ConnectionString))
             {
@@ -182,6 +184,54 @@ WHERE _v.table_schema = @tableSchema";
                             }
                         }
                     }
+
+                    // Indeces
+                    cmdText = @"
+SELECT	o.name AS table_name,
+		i.name AS index_name
+FROM		
+		sys.indexes i
+		INNER JOIN sys.objects o ON i.object_id = o.object_id
+		INNER JOIN sys.schemas s ON o.schema_id = s.schema_id
+WHERE 
+	i.name IS NOT NULL
+	AND o.type = 'U'
+	AND i.type = 2
+	AND s.name = @tableSchema";
+
+                    using (var command = new SqlCommand(cmdText, connection))
+                    {
+                        command.Parameters.Add("@tableSchema", SqlDbType.NVarChar).Value = database.SchemaName;
+                        using (var reader = command.ExecuteReader())
+                        {
+                            var tableNameOrdinal = reader.GetOrdinal("table_name");
+                            var indexNameOrdinal = reader.GetOrdinal("index_name");
+
+                            while (reader.Read())
+                            {
+                                var indexName = reader.GetString(indexNameOrdinal);
+
+                                indexName = indexName.Trim().ToLowerInvariant();
+                                Index index;
+                                if (!this.IndexByLowercaseIndexName.TryGetValue(indexName, out index))
+                                {
+                                    index = new Index(this, indexName);
+                                    this.IndexByLowercaseIndexName[indexName] = index;
+                                }
+
+                                if (!reader.IsDBNull(tableNameOrdinal))
+                                {
+                                    var tableName = reader.GetString(tableNameOrdinal);
+
+                                    Table table;
+                                    if (this.TableByLowercaseTableName.TryGetValue(tableName.ToLowerInvariant(), out table))
+                                    {
+                                        index.Table = table;
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
                 finally
                 {
@@ -219,6 +269,14 @@ WHERE _v.table_schema = @tableSchema";
             get
             {
                 return this.viewByLowercaseViewName;
+            }
+        }
+
+        public Dictionary<string, Index> IndexByLowercaseIndexName
+        {
+            get
+            {
+                return this.indexByLowercaseIndexName;
             }
         }
 
@@ -264,6 +322,13 @@ WHERE _v.table_schema = @tableSchema";
             View view;
             this.viewByLowercaseViewName.TryGetValue(viewName.ToLowerInvariant(), out view);
             return view;
+        }
+
+        public Index GetIndex(string indexName)
+        {
+            Index index;
+            this.indexByLowercaseIndexName.TryGetValue(indexName.ToLowerInvariant(), out index);
+            return index;
         }
     }
 }

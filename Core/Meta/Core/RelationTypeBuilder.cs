@@ -31,7 +31,7 @@ namespace Allors.Meta
         private ObjectType roleObjectType;
         private Multiplicity multiplicity;
         private bool isDerived;
-        private bool isIndexed;
+        private bool? isIndexed;
 
         private string singularName;
         private string pluralName;
@@ -114,7 +114,18 @@ namespace Allors.Meta
             instance.AssociationType.ObjectType = this.associationObjectType;
             instance.RoleType.ObjectType = this.roleObjectType;
             instance.IsDerived = this.isDerived;
-            instance.IsIndexed = this.isIndexed;
+            if (this.isIndexed.HasValue)
+            {
+                instance.IsIndexed = this.isIndexed.Value;
+            }
+            else
+            {
+                if (this.roleObjectType != null && this.roleObjectType.IsComposite)
+                {
+                    instance.IsIndexed = true;
+                }
+            }
+
             instance.AssignedMultiplicity = this.multiplicity;
 
             instance.RoleType.AssignedSingularName = this.singularName;

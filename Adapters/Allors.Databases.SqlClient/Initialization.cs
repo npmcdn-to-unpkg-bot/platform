@@ -22,6 +22,7 @@ namespace Allors.Databases.SqlClient
     using System.Text;
 
     using Allors.Meta;
+    using Allors.Populations;
 
     internal class Initialization 
     {
@@ -42,6 +43,7 @@ namespace Allors.Databases.SqlClient
             this.CreateSchema();
             this.CreateTables();
             this.CreateProcedures();
+            this.CreateIndeces();
 
             if (this.useViews)
             {
@@ -168,7 +170,8 @@ CREATE TABLE " + this.mapping.Database.SchemaName + "." + Mapping.TableNameForOb
     " + Mapping.ColumnNameForObject + @" " + this.mapping.SqlTypeForObject + @" IDENTITY(1,1),
     " + Mapping.ColumnNameForType + @" " + Mapping.SqlTypeForType + @",
     " + Mapping.ColumnNameForCache + @" " + Mapping.SqlTypeForCache + @",
-    PRIMARY KEY (O)
+    CONSTRAINT " + Mapping.TableNameForObjects + @"_pk PRIMARY KEY CLUSTERED
+    (" + Mapping.ColumnNameForObject + @")
 );
 ";
                         using (var command = new SqlCommand(cmdText, connection))
@@ -218,7 +221,8 @@ CREATE TABLE " + this.mapping.Database.SchemaName + "." + tableName + @"
 (
     " + Mapping.ColumnNameForAssociation + @" " + this.mapping.SqlTypeForObject + @",
     " + Mapping.ColumnNameForRole + @" " + sqlTypeForRole + @",
-    PRIMARY KEY ( " + primaryKeys + @")
+    CONSTRAINT " + tableName + @"_pk PRIMARY KEY CLUSTERED
+    (" + primaryKeys + @" ASC)
 );
 ";
                             using (var command = new SqlCommand(cmdText, connection))
@@ -619,6 +623,66 @@ WHERE " + Mapping.ColumnNameForAssociation + @" IN ( SELECT * FROM " + Mapping.P
                 using (var command = new SqlCommand(definition, connection))
                 {
                     command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        private void CreateIndeces()
+        {
+            using (var connection = new SqlConnection(this.mapping.Database.ConnectionString))
+            {
+                connection.Open();
+                try
+                {
+                    foreach (var relationType in this.mapping.Database.MetaPopulation.RelationTypes)
+                    {
+                        if (relationType.IsIndexed)
+                        {
+                            var associationType = relationType.AssociationType;
+                            var roleType = relationType.RoleType;
+
+                            var unitType = roleType.ObjectType as IUnit;
+                            if (unitType != null)
+                            {
+                                if (unitType.IsString || unitType.IsBinary)
+                                {
+                                    if (roleType.Size == -1 || roleType.Size > 4000)
+                                    {
+                                        continue;
+                                    }
+                                }
+                            }
+                                
+                            var tableName = this.mapping.GetTableName(relationType);
+                            var indexName = tableName + "_index";
+
+                            var index = this.schema.GetIndex(indexName);
+                            if (index == null)
+                            {
+                                var column = Mapping.ColumnNameForRole;
+                                if (roleType.ObjectType is IComposite)
+                                {
+                                    if (associationType.IsOne && roleType.IsMany)
+                                    {
+                                        column = Mapping.ColumnNameForAssociation;
+                                    }
+                                }
+
+                                var cmdText = @"
+CREATE INDEX " + indexName + @" ON " + this.mapping.Database.SchemaName + "." + tableName + @"
+( " + column + @" );
+";
+                                using (var command = new SqlCommand(cmdText, connection))
+                                {
+                                    command.ExecuteNonQuery();
+                                }
+                            }
+                        }
+                    }
+                }
+                finally
+                {
+                    connection.Close();
                 }
             }
         }
