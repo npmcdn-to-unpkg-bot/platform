@@ -34,6 +34,16 @@
             // Ignore control- and viewstate.
         }
 
+        protected override object SaveControlState()
+        {
+            return null;
+        }
+
+        protected override object SaveViewState()
+        {
+            return null;
+        }
+
         protected abstract Session GetDesktopSession();
     }
 }

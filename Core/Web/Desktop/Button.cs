@@ -1,22 +1,15 @@
 ﻿namespace Allors.Web.Desktop
 {
-    using System;
-
     public class Button : System.Web.UI.WebControls.Button
     {
-        protected override void OnClick(EventArgs e)
+        protected override object SaveControlState()
         {
-            base.OnClick(e);
+            return null;
         }
 
-        protected override void RaisePostBackEvent(string eventArgument)
+        protected override object SaveViewState()
         {
-            base.RaisePostBackEvent(eventArgument);
-        }
-
-        public override void Dispose()
-        {
-            base.Dispose();
+            return null;
         }
     }
 }
