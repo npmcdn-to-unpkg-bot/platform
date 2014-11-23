@@ -17,10 +17,34 @@
 
 namespace Allors.Meta.Static
 {
+    using System.IO;
+
+    using Allors.Testing.Webforms;
+
     using NUnit.Framework;
 
     [TestFixture]
-    public class MergeTest
+    public class Tests
     {
+        private Application application;
+
+        [TestFixtureSetUp]
+        public virtual void Setup()
+        {
+            var directory = new DirectoryInfo(@"..\..\..\Allors.Testing.Webforms.Tests.WebApplication");
+            var applicationFactory = new ApplicationFactory(directory, "/");
+            this.application = applicationFactory.Create();
+        }
+
+        [TestFixtureTearDown]
+        public virtual void Dispose()
+        {
+        }
+
+        [Test]
+        public void TextBox()
+        {
+            this.application.Test(typeof(TextBoxTest));
+        }
     }
 }
