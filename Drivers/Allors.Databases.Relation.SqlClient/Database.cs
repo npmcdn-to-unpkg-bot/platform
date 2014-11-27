@@ -683,6 +683,7 @@ VALUES (" + Mapping.ParameterNameForAssociation + "," + Mapping.ParameterNameFor
                                 var value = reader.ReadString();
                                 try
                                 {
+                                    // TODO:
                                     // OnRelationNotLoaded(relationType.Id, association.ToString(), value);
                                     var unitTypeTag = ((IUnit)relationType.RoleType.ObjectType).UnitTag;
                                     var role = Serialization.ReadString(value, unitTypeTag);

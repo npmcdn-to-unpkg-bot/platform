@@ -18,16 +18,17 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient.Commands.Text
+namespace Allors.Databases.Object.SqlClient.Commands.Text
 {
     using System.Collections.Generic;
     using System.Data.SqlClient;
 
-    using Allors.R1.Adapters.Database.Sql;
-    using Allors.R1.Adapters.Database.Sql.Commands;
+    using Allors.Adapters.Database.Sql;
+    using Allors.Adapters.Database.Sql.Commands;
+    using Allors.Meta;
 
     using Database = Database;
-    using DatabaseSession = Allors.R1.Adapters.Database.SqlClient.DatabaseSession;
+    using DatabaseSession = DatabaseSession;
 
     internal class InstantiateObjectsFactory : IInstantiateObjectsFactory
     {
@@ -43,7 +44,7 @@ namespace Allors.R1.Adapters.Database.SqlClient.Commands.Text
             this.Sql += "( SELECT " + this.Database.SqlClientSchema.ObjectTableObject + " FROM " + this.Database.SqlClientSchema.ObjectTableParam.Name + " )\n";
         }
 
-        public IInstantiateObjects Create(Sql.DatabaseSession session)
+        public IInstantiateObjects Create(Adapters.Database.Sql.DatabaseSession session)
         {
             return new InstantiateObjects(this, session);
         }
@@ -53,7 +54,7 @@ namespace Allors.R1.Adapters.Database.SqlClient.Commands.Text
             private readonly InstantiateObjectsFactory factory;
             private SqlCommand command;
 
-            public InstantiateObjects(InstantiateObjectsFactory factory, Sql.DatabaseSession session)
+            public InstantiateObjects(InstantiateObjectsFactory factory, Adapters.Database.Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
@@ -82,7 +83,7 @@ namespace Allors.R1.Adapters.Database.SqlClient.Commands.Text
                         var cacheId = this.GetCachId(reader, 2);
 
                         var objectId = this.Database.AllorsObjectIds.Parse(objectIdString);
-                        var type = this.Database.ObjectFactory.GetObjectTypeForType(classId);
+                        var type = (IClass)this.Database.ObjectFactory.GetObjectTypeForType(classId);
                         strategies.Add(this.Session.GetOrCreateAssociationForExistingObject(type, objectId, cacheId));
                     }
                 }

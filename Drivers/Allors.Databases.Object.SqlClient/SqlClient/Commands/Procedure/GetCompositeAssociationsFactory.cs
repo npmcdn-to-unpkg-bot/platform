@@ -18,81 +18,81 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient.Commands.Text
+namespace Allors.Databases.Object.SqlClient.Commands.Text
 {
     using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
 
-    using Allors.R1.Adapters.Database.Sql;
-    using Allors.R1.Adapters.Database.Sql.Commands;
+    using Allors.Adapters.Database.Sql;
+    using Allors.Adapters.Database.Sql.Commands;
 
     using Meta;
 
     using Database = Database;
-    using DatabaseSession = Allors.R1.Adapters.Database.SqlClient.DatabaseSession;
+    using DatabaseSession = DatabaseSession;
     using Schema = Schema;
 
     public class GetCompositeAssociationsFactory : IGetCompositeAssociationsFactory
     {
         public readonly Database Database;
-        private readonly Dictionary<AssociationType, string> sqlByAssociationType;
+        private readonly Dictionary<IAssociationType, string> sqlByIAssociationType;
 
         public GetCompositeAssociationsFactory(Database database)
         {
             this.Database = database;
-            this.sqlByAssociationType = new Dictionary<AssociationType, string>();
+            this.sqlByIAssociationType = new Dictionary<IAssociationType, string>();
         }
 
-        public IGetCompositeAssociations Create(Sql.DatabaseSession session)
+        public IGetCompositeAssociations Create(Adapters.Database.Sql.DatabaseSession session)
         {
             return new GetCompositeAssociations(this, session);
         }
 
-        public string GetSql(AssociationType associationType)
+        public string GetSql(IAssociationType associationType)
         {
-            if (!this.sqlByAssociationType.ContainsKey(associationType))
+            if (!this.sqlByIAssociationType.ContainsKey(associationType))
             {
-                RoleType roleType = associationType.RoleType;
+                IRoleType roleType = associationType.RoleType;
 
                 string sql;
-                if (roleType.IsMany || !associationType.RelationType.ExistExclusiveRootClasses)
+                if (roleType.IsMany || !associationType.RelationType.ExistExclusiveLeafClasses)
                 {
-                    sql = Sql.Schema.AllorsPrefix + "GA_" + roleType.FullSingularName;
+                    sql = Adapters.Database.Sql.Schema.AllorsPrefix + "GA_" + roleType.SingularFullName;
                 }
                 else
                 {
-                    sql = Sql.Schema.AllorsPrefix + "GA_" + associationType.ObjectType.ExclusiveRootClass.Name + "_" + associationType.RootName;
+                    sql = Adapters.Database.Sql.Schema.AllorsPrefix + "GA_" + associationType.ObjectType.ExclusiveLeafClass.Name + "_" + associationType.SingularFullName;
                 }
 
-                this.sqlByAssociationType[associationType] = sql;
+                this.sqlByIAssociationType[associationType] = sql;
             }
 
-            return this.sqlByAssociationType[associationType];
+            return this.sqlByIAssociationType[associationType];
         }
 
         public class GetCompositeAssociations : DatabaseCommand, IGetCompositeAssociations
         {
             private readonly GetCompositeAssociationsFactory factory;
-            private readonly Dictionary<AssociationType, SqlCommand> commandByAssociationType;
+            private readonly Dictionary<IAssociationType, SqlCommand> commandByIAssociationType;
 
-            public GetCompositeAssociations(GetCompositeAssociationsFactory factory, Sql.DatabaseSession session)
+            public GetCompositeAssociations(GetCompositeAssociationsFactory factory, Adapters.Database.Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
-                this.commandByAssociationType = new Dictionary<AssociationType, SqlCommand>();
+                this.commandByIAssociationType = new Dictionary<IAssociationType, SqlCommand>();
             }
 
-            public ObjectId[] Execute(Strategy role, AssociationType associationType)
+            public ObjectId[] Execute(Strategy role, IAssociationType associationType)
             {
                 SqlCommand command;
-                if (!this.commandByAssociationType.TryGetValue(associationType, out command))
+                if (!this.commandByIAssociationType.TryGetValue(associationType, out command))
                 {
                     command = this.Session.CreateSqlCommand(this.factory.GetSql(associationType));
                     command.CommandType = CommandType.StoredProcedure;
                     this.AddInObject(command, this.Database.Schema.RoleId.Param, role.ObjectId.Value);
 
-                    this.commandByAssociationType[associationType] = command;
+                    this.commandByIAssociationType[associationType] = command;
                 }
                 else
                 {

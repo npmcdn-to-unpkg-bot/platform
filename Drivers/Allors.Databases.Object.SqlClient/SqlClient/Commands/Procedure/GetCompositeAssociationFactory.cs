@@ -18,91 +18,91 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient.Commands.Procedure
+namespace Allors.Databases.Object.SqlClient.Commands.Procedure
 {
     using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
 
-    using Allors.R1.Adapters.Database.Sql;
-    using Allors.R1.Adapters.Database.Sql.Commands;
+    using Allors.Adapters.Database.Sql;
+    using Allors.Adapters.Database.Sql.Commands;
 
     using Meta;
 
     using Database = Database;
-    using DatabaseSession = Allors.R1.Adapters.Database.SqlClient.DatabaseSession;
+    using DatabaseSession = DatabaseSession;
     using Schema = Schema;
 
     public class GetCompositeAssociationFactory : IGetCompositeAssociationFactory
     {
         public readonly Database Database;
-        private readonly Dictionary<AssociationType, string> sqlByAssociationType;
+        private readonly Dictionary<IAssociationType, string> sqlByIAssociationType;
 
         public GetCompositeAssociationFactory(Database database)
         {
             this.Database = database;
-            this.sqlByAssociationType = new Dictionary<AssociationType, string>();
+            this.sqlByIAssociationType = new Dictionary<IAssociationType, string>();
         }
 
-        public IGetCompositeAssociation Create(Sql.DatabaseSession session)
+        public IGetCompositeAssociation Create(Adapters.Database.Sql.DatabaseSession session)
         {
             return new GetCompositeAssociation(this, session);
         }
 
-        public string GetSql(AssociationType associationType)
+        public string GetSql(IAssociationType associationType)
         {
-            if (!this.sqlByAssociationType.ContainsKey(associationType))
+            if (!this.sqlByIAssociationType.ContainsKey(associationType))
             {
                 var roleType = associationType.RoleType;
 
                 string sql;
-                if (associationType.RelationType.ExistExclusiveRootClasses)
+                if (associationType.RelationType.ExistExclusiveLeafClasses)
                 {
                     if (roleType.IsOne)
                     {
-                        sql = Sql.Schema.AllorsPrefix + "GA_" + associationType.ObjectType.ExclusiveRootClass.Name + "_" + associationType.RootName;
+                        sql = Adapters.Database.Sql.Schema.AllorsPrefix + "GA_" + associationType.ObjectType.ExclusiveLeafClass.Name + "_" + associationType.SingularFullName;
                     }
                     else
                     {
-                        sql = Sql.Schema.AllorsPrefix + "GA_" + roleType.ObjectType.ExclusiveRootClass.Name + "_" + associationType.RootName;
+                        sql = Adapters.Database.Sql.Schema.AllorsPrefix + "GA_" + ((IComposite)roleType.ObjectType).ExclusiveLeafClass.Name + "_" + associationType.SingularFullName;
                     }
                 }
                 else
                 {
-                    sql = Sql.Schema.AllorsPrefix + "GA_" + roleType.FullSingularName;
+                    sql = Adapters.Database.Sql.Schema.AllorsPrefix + "GA_" + roleType.SingularFullName;
                 }
 
-                this.sqlByAssociationType[associationType] = sql;
+                this.sqlByIAssociationType[associationType] = sql;
             }
 
-            return this.sqlByAssociationType[associationType];
+            return this.sqlByIAssociationType[associationType];
         }
 
         private class GetCompositeAssociation : DatabaseCommand, IGetCompositeAssociation
         {
             private readonly GetCompositeAssociationFactory factory;
-            private readonly Dictionary<AssociationType, SqlCommand> commandByAssociationType;
+            private readonly Dictionary<IAssociationType, SqlCommand> commandByIAssociationType;
 
-            public GetCompositeAssociation(GetCompositeAssociationFactory factory, Sql.DatabaseSession session)
+            public GetCompositeAssociation(GetCompositeAssociationFactory factory, Adapters.Database.Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
-                this.commandByAssociationType = new Dictionary<AssociationType, SqlCommand>();
+                this.commandByIAssociationType = new Dictionary<IAssociationType, SqlCommand>();
             }
 
-            public Reference Execute(Reference role, AssociationType associationType)
+            public Reference Execute(Reference role, IAssociationType associationType)
             {
                 Reference associationObject = null;
 
                 SqlCommand command;
-                if (!this.commandByAssociationType.TryGetValue(associationType, out command))
+                if (!this.commandByIAssociationType.TryGetValue(associationType, out command))
                 {
                     command = this.Session.CreateSqlCommand(this.factory.GetSql(associationType));
                     command.CommandType = CommandType.StoredProcedure;
                     this.AddInObject(command, this.Database.Schema.RoleId.Param, role.ObjectId.Value);
 
-                    this.commandByAssociationType[associationType] = command;
+                    this.commandByIAssociationType[associationType] = command;
                 }
                 else
                 {
@@ -115,9 +115,9 @@ namespace Allors.R1.Adapters.Database.SqlClient.Commands.Procedure
                 {
                     ObjectId id = this.Database.AllorsObjectIds.Parse(result.ToString());
 
-                    if (associationType.ObjectType.ExistExclusiveRootClass && associationType.ObjectType.ExclusiveRootClass.ExistExclusiveConcreteSubclass)
+                    if (associationType.ObjectType.ExistExclusiveLeafClass)
                     {
-                        associationObject = this.Session.GetOrCreateAssociationForExistingObject(associationType.ObjectType.ExclusiveRootClass.ExclusiveConcreteSubclass, id);
+                        associationObject = this.Session.GetOrCreateAssociationForExistingObject(associationType.ObjectType.ExclusiveLeafClass, id);
                     }
                     else
                     {

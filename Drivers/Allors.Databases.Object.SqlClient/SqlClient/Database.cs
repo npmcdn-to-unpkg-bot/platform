@@ -14,7 +14,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient
+namespace Allors.Databases.Object.SqlClient
 {
     using System;
     using System.Collections.Generic;
@@ -23,20 +23,45 @@ namespace Allors.R1.Adapters.Database.SqlClient
     using System.Data.SqlClient;
     using System.Text;
 
-    using Allors.R1.Meta;
+    using Allors.Adapters;
+    using Allors.Adapters.Database.Sql;
+    using Allors.Meta;
 
     using Microsoft.SqlServer.Server;
 
-    using Sql;
-
-    public abstract class Database : Sql.Database
+    public abstract class Database : Adapters.Database.Sql.Database
     {
         private readonly CommandFactories commandFactories;
+
+        private string id;
 
         protected Database(Configuration configuration)
             : base(configuration)
         {
             this.commandFactories = new CommandFactories(this);
+
+            var connectionStringBuilder = new SqlConnectionStringBuilder(this.ConnectionString);
+            var applicationName = connectionStringBuilder.ApplicationName.Trim();
+            if (!string.IsNullOrWhiteSpace(applicationName))
+            {
+                this.id = applicationName;
+            }
+            else
+            {
+                if (!string.IsNullOrWhiteSpace(connectionStringBuilder.InitialCatalog))
+                {
+                    this.id = connectionStringBuilder.InitialCatalog.ToLowerInvariant();
+                }
+                else
+                {
+                    using (var connection = new SqlConnection(this.ConnectionString))
+                    {
+                        connection.Open();
+                        this.id = connection.Database.ToLowerInvariant();
+                    }
+                }
+            }
+
         }
 
         public CommandFactories SqlClientCommandFactories
@@ -47,7 +72,7 @@ namespace Allors.R1.Adapters.Database.SqlClient
             }
         }
 
-        public override Sql.Schema Schema
+        public override Adapters.Database.Sql.Schema Schema
         {
             get
             {
@@ -57,20 +82,27 @@ namespace Allors.R1.Adapters.Database.SqlClient
 
         public abstract Schema SqlClientSchema { get; }
 
-        public override Sql.CommandFactories CommandFactories
+        public override Adapters.Database.Sql.CommandFactories CommandFactories
         {
             get { return this.commandFactories; }
         }
 
+        public override string Id
+        {
+            get
+            {
+                return this.id;
+            }
+        }
 
         public override DbConnection CreateDbConnection()
         {
             return new SqlConnection(this.ConnectionString);
         }
 
-        public override void DropIndex(Sql.ManagementSession session, SchemaTable table, SchemaColumn column)
+        public override void DropIndex(Adapters.Database.Sql.ManagementSession session, SchemaTable table, SchemaColumn column)
         {
-            var indexName = Sql.Schema.AllorsPrefix + table.Name + "_" + column.Name;
+            var indexName = Adapters.Database.Sql.Schema.AllorsPrefix + table.Name + "_" + column.Name;
 
             var sql = new StringBuilder();
             sql.Append("IF EXISTS (\n");
@@ -92,7 +124,7 @@ namespace Allors.R1.Adapters.Database.SqlClient
 
         internal abstract IEnumerable<SqlDataRecord> CreateRelationTable(IEnumerable<CompositeRelation> compositeRelations);
 
-        internal abstract IEnumerable<SqlDataRecord> CreateRelationTable(RoleType roleType, IEnumerable<UnitRelation> unitRelations);
+        internal abstract IEnumerable<SqlDataRecord> CreateRelationTable(IRoleType roleType, IEnumerable<UnitRelation> unitRelations);
 
         internal SqlMetaData GetSqlMetaData(string name, SchemaColumn column)
         {
@@ -190,12 +222,12 @@ namespace Allors.R1.Adapters.Database.SqlClient
             return new ManagementSession(this);
         }
 
-        protected override Sql.ManagementSession CreateManagementSession()
+        protected internal override Adapters.Database.Sql.ManagementSession CreateManagementSession()
         {
             return this.CreateSqlClientManagementSession();
         }
 
-        protected override void CreateUserDefinedTypes(Sql.ManagementSession session)
+        protected override void CreateUserDefinedTypes(Adapters.Database.Sql.ManagementSession session)
         {
             var sql = new StringBuilder();
             sql.Append("CREATE TYPE " + this.SqlClientSchema.ObjectTable + " AS TABLE\n");
@@ -219,15 +251,9 @@ namespace Allors.R1.Adapters.Database.SqlClient
             sql.Append("(" + this.SqlClientSchema.RelationTableAssociation + " " + this.GetSqlType(this.Schema.AssociationId) + ",\n");
             sql.Append(this.SqlClientSchema.RelationTableRole + " INT)\n");
             session.ExecuteSql(sql.ToString());
-
+            
             sql = new StringBuilder();
-            sql.Append("CREATE TYPE " + this.SqlClientSchema.LongRelationTable + " AS TABLE\n");
-            sql.Append("(" + this.SqlClientSchema.RelationTableAssociation + " " + this.GetSqlType(this.Schema.AssociationId) + ",\n");
-            sql.Append(this.SqlClientSchema.RelationTableRole + " BIGINT)\n");
-            session.ExecuteSql(sql.ToString());
-           
-            sql = new StringBuilder();
-            sql.Append("CREATE TYPE " + this.SqlClientSchema.DoubleRelationTable + " AS TABLE\n");
+            sql.Append("CREATE TYPE " + this.SqlClientSchema.FloatRelationTable + " AS TABLE\n");
             sql.Append("(" + this.SqlClientSchema.RelationTableAssociation + " " + this.GetSqlType(this.Schema.AssociationId) + ",\n");
             sql.Append(this.SqlClientSchema.RelationTableRole + " FLOAT)\n");
             session.ExecuteSql(sql.ToString());
@@ -236,18 +262,6 @@ namespace Allors.R1.Adapters.Database.SqlClient
             sql.Append("CREATE TYPE " + this.SqlClientSchema.BooleanRelationTable + " AS TABLE\n");
             sql.Append("(" + this.SqlClientSchema.RelationTableAssociation + " " + this.GetSqlType(this.Schema.AssociationId) + ",\n");
             sql.Append(this.SqlClientSchema.RelationTableRole + " BIT)\n");
-            session.ExecuteSql(sql.ToString());
-            
-            sql = new StringBuilder();
-            sql.Append("CREATE TYPE " + this.SqlClientSchema.DateRelationTable + " AS TABLE\n");
-            sql.Append("(" + this.SqlClientSchema.RelationTableAssociation + " " + this.GetSqlType(this.Schema.AssociationId) + ",\n");
-            sql.Append(this.SqlClientSchema.RelationTableRole + " DATE)\n");
-            session.ExecuteSql(sql.ToString());
-            
-            sql = new StringBuilder();
-            sql.Append("CREATE TYPE " + this.SqlClientSchema.DateTimeRelationTable + " AS TABLE\n");
-            sql.Append("(" + this.SqlClientSchema.RelationTableAssociation + " " + this.GetSqlType(this.Schema.AssociationId) + ",\n");
-            sql.Append(this.SqlClientSchema.RelationTableRole + " DATETIME2)\n");
             session.ExecuteSql(sql.ToString());
             
             sql = new StringBuilder();
@@ -284,17 +298,14 @@ namespace Allors.R1.Adapters.Database.SqlClient
             return new DatabaseSession(this);
         }
 
-        protected override void DropUserDefinedTypes(Sql.ManagementSession session)
+        protected override void DropUserDefinedTypes(Adapters.Database.Sql.ManagementSession session)
         {
             this.DropUserDefinedType(session, this.SqlClientSchema.ObjectTable);
             this.DropUserDefinedType(session, this.SqlClientSchema.CompositeRelationTable);
             this.DropUserDefinedType(session, this.SqlClientSchema.StringRelationTable);
             this.DropUserDefinedType(session, this.SqlClientSchema.IntegerRelationTable);
-            this.DropUserDefinedType(session, this.SqlClientSchema.LongRelationTable);
-            this.DropUserDefinedType(session, this.SqlClientSchema.DoubleRelationTable);
+            this.DropUserDefinedType(session, this.SqlClientSchema.FloatRelationTable);
             this.DropUserDefinedType(session, this.SqlClientSchema.BooleanRelationTable);
-            this.DropUserDefinedType(session, this.SqlClientSchema.DateRelationTable);
-            this.DropUserDefinedType(session, this.SqlClientSchema.DateTimeRelationTable);
             this.DropUserDefinedType(session, this.SqlClientSchema.UniqueRelationTable);
             this.DropUserDefinedType(session, this.SqlClientSchema.BinaryRelationTable);
             foreach (var precisionEntry in this.SqlClientSchema.DecimalRelationTableByScaleByPrecision)
@@ -307,7 +318,7 @@ namespace Allors.R1.Adapters.Database.SqlClient
             }
         }
 
-        protected override void DropTable(Sql.ManagementSession session, SchemaTable schemaTable)
+        protected override void DropTable(Adapters.Database.Sql.ManagementSession session, SchemaTable schemaTable)
         {
             var sql = new StringBuilder();
             sql.Append("IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'" + schemaTable.Name + "'))\n");
@@ -315,7 +326,7 @@ namespace Allors.R1.Adapters.Database.SqlClient
             session.ExecuteSql(sql.ToString());
         }
 
-        protected override void CreateTable(Sql.ManagementSession session, SchemaTable table)
+        protected override void CreateTable(Adapters.Database.Sql.ManagementSession session, SchemaTable table)
         {
             var sql = new StringBuilder();
             sql.Append("CREATE TABLE " + table + "\n");
@@ -358,7 +369,7 @@ namespace Allors.R1.Adapters.Database.SqlClient
             session.ExecuteSql(sql.ToString());
         }
 
-        protected override void DropProcedures(Sql.ManagementSession session)
+        protected override void DropProcedures(Adapters.Database.Sql.ManagementSession session)
         {
             var allorsProcedureNames = new List<string>();
             lock (this)
@@ -370,7 +381,7 @@ namespace Allors.R1.Adapters.Database.SqlClient
                         while (reader.Read())
                         {
                             var procedureName = reader.GetString(0);
-                            if (procedureName.StartsWith(Sql.Schema.AllorsPrefix))
+                            if (procedureName.StartsWith(Adapters.Database.Sql.Schema.AllorsPrefix))
                             {
                                 allorsProcedureNames.Add(procedureName);
                             }
@@ -385,14 +396,14 @@ namespace Allors.R1.Adapters.Database.SqlClient
             }
         }
 
-        protected override void CreateProcedure(Sql.ManagementSession session, SchemaProcedure storedProcedure)
+        protected override void CreateProcedure(Adapters.Database.Sql.ManagementSession session, SchemaProcedure storedProcedure)
         {
             session.ExecuteSql(storedProcedure.Definition);
         }
 
-        protected override void CreateIndex(Sql.ManagementSession session, SchemaTable table, SchemaColumn column)
+        protected override void CreateIndex(Adapters.Database.Sql.ManagementSession session, SchemaTable table, SchemaColumn column)
         {
-            var indexName = Sql.Schema.AllorsPrefix + table.Name + "_" + column.Name;
+            var indexName = Adapters.Database.Sql.Schema.AllorsPrefix + table.Name + "_" + column.Name;
 
             if (column.IndexType == SchemaIndexType.Single)
             {
@@ -410,24 +421,24 @@ namespace Allors.R1.Adapters.Database.SqlClient
             }
         }
 
-        protected override void TruncateTables(Sql.ManagementSession session, SchemaTable table)
+        protected override void TruncateTables(Adapters.Database.Sql.ManagementSession session, SchemaTable table)
         {
             var sql = new StringBuilder();
             sql.Append("TRUNCATE TABLE " + table.StatementName);
             session.ExecuteSql(sql.ToString());
         }
 
-        protected override Sql.Load CreateLoad(ObjectNotLoadedEventHandler objectNotLoaded, RelationNotLoadedEventHandler relationNotLoaded, System.Xml.XmlReader reader)
+        protected override Adapters.Database.Sql.Load CreateLoad(ObjectNotLoadedEventHandler objectNotLoaded, RelationNotLoadedEventHandler relationNotLoaded, System.Xml.XmlReader reader)
         {
             return new Load(this, objectNotLoaded, relationNotLoaded, reader);
         }
 
-        protected override Sql.Save CreateSave(System.Xml.XmlWriter writer)
+        protected override Adapters.Database.Sql.Save CreateSave(System.Xml.XmlWriter writer)
         {
             return new Save(this, writer);
         }
 
-        private void DropUserDefinedType(Sql.ManagementSession session, string userDefinedType)
+        private void DropUserDefinedType(Adapters.Database.Sql.ManagementSession session, string userDefinedType)
         {
             var sql = new StringBuilder();
             sql.Append("IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.DOMAINS WHERE DOMAIN_NAME = N'" + userDefinedType + "')\n");
@@ -435,7 +446,7 @@ namespace Allors.R1.Adapters.Database.SqlClient
             session.ExecuteSql(sql.ToString());
         }
 
-        private void DropProcedure(Sql.ManagementSession session, string procedureName)
+        private void DropProcedure(Adapters.Database.Sql.ManagementSession session, string procedureName)
         {
             var sql = new StringBuilder();
             sql.Append("IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_NAME = N'" + procedureName + "')\n");

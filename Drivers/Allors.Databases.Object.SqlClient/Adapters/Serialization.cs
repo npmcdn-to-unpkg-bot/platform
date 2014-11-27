@@ -18,7 +18,7 @@
 // </copyright>
 // <summary>Defines the Serialization type.</summary>
 //-------------------------------------------------------------------------------------------------
-namespace Allors.R1.Adapters
+namespace Allors.Adapters
 {
     using System;
     using System.Xml;
@@ -54,8 +54,8 @@ namespace Allors.R1.Adapters
         public const string Association = "a";
 
         /// <summary>
-        /// This attribute is used for <see cref="ObjectType#Id"/> and <see cref="RelationType#Id"/>.
-        /// Attribute of the <see cref="Serialization#ObjectType"/> and <see cref="Serialization#RelationType"/> element.
+        /// This attribute is used for <see cref="ObjectType#Id"/> and <see cref="IRelationType#Id"/>.
+        /// Attribute of the <see cref="Serialization#IObjectType"/> and <see cref="Serialization#IRelationType"/> element.
         /// </summary>
         public const string Id = "i";
 
@@ -108,13 +108,13 @@ namespace Allors.R1.Adapters
         
         /// <summary>
         /// This element holds a relation.
-        /// Child element of the <see cref="Serialization#RelationType"/> element.
+        /// Child element of the <see cref="Serialization#IRelationType"/> element.
         /// </summary>
         public const string Relation = "r";
 
         /// <summary>
         /// This element holds a relation.
-        /// Child element of the <see cref="Serialization#RelationType"/> element.
+        /// Child element of the <see cref="Serialization#IRelationType"/> element.
         /// </summary>
         public const string NoRelation = "x";
 
@@ -125,14 +125,14 @@ namespace Allors.R1.Adapters
         public const string Relations = "relations";
 
         /// <summary>
-        /// This element groups relations having the same <see cref="RelationType"/> and 
+        /// This element groups relations having the same <see cref="IRelationType"/> and 
         /// where the role's <see cref="ObjectType"/> is a composite.
         /// Child element of the <see cref="Serialization#Relations"/> element.
         /// </summary>
         public const string RelationTypeComposite = "rtc";
 
         /// <summary>
-        /// This element groups relations having the same <see cref="RelationType"/> and 
+        /// This element groups relations having the same <see cref="IRelationType"/> and 
         /// where the role's <see cref="ObjectType"/> is a unit.
         /// Child element of the <see cref="Serialization#Relations"/> element.
         /// </summary>
@@ -167,27 +167,23 @@ namespace Allors.R1.Adapters
         /// <param name="xmlValue">The XML value.</param>
         /// <param name="unitTypeTag">The unit type tag.</param>
         /// <returns>The converted value</returns>
-        public static object ReadString(string xmlValue, UnitTypeTags unitTypeTag)
+        public static object ReadString(string xmlValue, UnitTags unitTypeTag)
         {
             switch (unitTypeTag)
             {
-                case UnitTypeTags.AllorsString:
+                case UnitTags.AllorsString:
                     return xmlValue;
-                case UnitTypeTags.AllorsInteger:
+                case UnitTags.AllorsInteger:
                     return XmlConvert.ToInt32(xmlValue);
-                case UnitTypeTags.AllorsLong:
-                    return XmlConvert.ToInt64(xmlValue);
-                case UnitTypeTags.AllorsDecimal:
-                    return XmlConvert.ToDecimal(xmlValue);
-                case UnitTypeTags.AllorsDouble:
+                case UnitTags.AllorsFloat:
                     return XmlConvert.ToDouble(xmlValue);
-                case UnitTypeTags.AllorsBoolean:
+                case UnitTags.AllorsDecimal:
+                    return XmlConvert.ToDecimal(xmlValue);
+                case UnitTags.AllorsBoolean:
                     return XmlConvert.ToBoolean(xmlValue);
-                case UnitTypeTags.AllorsDateTime:
-                    return XmlConvert.ToDateTime(xmlValue, XmlDateTimeSerializationMode.Utc);
-                case UnitTypeTags.AllorsUnique:
+                case UnitTags.AllorsUnique:
                     return XmlConvert.ToGuid(xmlValue);
-                case UnitTypeTags.AllorsBinary:
+                case UnitTags.AllorsBinary:
                     return Convert.FromBase64String(xmlValue);
                 default:
                     throw new ArgumentException("Unknown Unit ObjectType: " + unitTypeTag);
@@ -200,27 +196,23 @@ namespace Allors.R1.Adapters
         /// <param name="unitTypeTag">The unit type tag.</param>
         /// <param name="unit">The unit .</param>
         /// <returns>The XML Value</returns>
-        public static string WriteString(UnitTypeTags unitTypeTag, object unit)
+        public static string WriteString(UnitTags unitTypeTag, object unit)
         {
             switch (unitTypeTag)
             {
-                case UnitTypeTags.AllorsString:
+                case UnitTags.AllorsString:
                     return (string)unit;
-                case UnitTypeTags.AllorsInteger:
+                case UnitTags.AllorsInteger:
                     return XmlConvert.ToString((int)unit);
-                case UnitTypeTags.AllorsLong:
-                    return XmlConvert.ToString((long)unit);
-                case UnitTypeTags.AllorsDecimal:
-                    return XmlConvert.ToString((decimal)unit);
-                case UnitTypeTags.AllorsDouble:
+                case UnitTags.AllorsFloat:
                     return XmlConvert.ToString((double)unit);
-                case UnitTypeTags.AllorsBoolean:
+                case UnitTags.AllorsDecimal:
+                    return XmlConvert.ToString((decimal)unit);
+                case UnitTags.AllorsBoolean:
                     return XmlConvert.ToString((bool)unit);
-                case UnitTypeTags.AllorsDateTime:
-                    return XmlConvert.ToString((DateTime)unit, XmlDateTimeSerializationMode.Utc);
-                case UnitTypeTags.AllorsUnique:
+                case UnitTags.AllorsUnique:
                     return XmlConvert.ToString((Guid)unit);
-                case UnitTypeTags.AllorsBinary:
+                case UnitTags.AllorsBinary:
                     return Convert.ToBase64String((byte[])unit);
                 default:
                     throw new ArgumentException("Unknown Unit ObjectType: " + unitTypeTag);

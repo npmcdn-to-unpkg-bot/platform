@@ -18,20 +18,20 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.Caching
+namespace Allors.Adapters.Database.Caching
 {
-    using Allors.R1.Meta;
+    using Allors.Meta;
 
     /// <summary>
     /// Factory for default cache.
     /// </summary>
     public sealed class CacheFactory : ICacheFactory
     {
-        public ObjectType[] TransientObjectTypes { get; set; } 
+        public IClass[] TransientIObjectTypes { get; set; } 
 
         public ICache CreateCache(IDatabase database)
         {
-            return new Cache(this.TransientObjectTypes);
+            return new Cache(this.TransientIObjectTypes);
         }
     }
 }

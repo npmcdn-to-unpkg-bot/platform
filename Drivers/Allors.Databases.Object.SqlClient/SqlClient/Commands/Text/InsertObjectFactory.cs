@@ -18,36 +18,36 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient.Commands.Text
+namespace Allors.Databases.Object.SqlClient.Commands.Text
 {
     using System;
     using System.Collections.Generic;
     using System.Data.SqlClient;
 
-    using Allors.R1.Adapters.Database.Sql;
-    using Allors.R1.Adapters.Database.Sql.Commands;
-    using Allors.R1.Meta;
+    using Allors.Adapters.Database.Sql;
+    using Allors.Adapters.Database.Sql.Commands;
+    using Allors.Meta;
 
     using Database = Database;
-    using DatabaseSession = Allors.R1.Adapters.Database.SqlClient.DatabaseSession;
+    using DatabaseSession = DatabaseSession;
 
     internal class InsertObjectFactory : IInsertObjectFactory
     {
         internal readonly Database Database;
-        private readonly Dictionary<ObjectType, string> sqlByMetaType;
+        private readonly Dictionary<IObjectType, string> sqlByMetaType;
 
         public InsertObjectFactory(Database database)
         {
             this.Database = database;
-            this.sqlByMetaType = new Dictionary<ObjectType, string>();
+            this.sqlByMetaType = new Dictionary<IObjectType, string>();
         }
 
-        public IInsertObject Create(Sql.DatabaseSession session)
+        public IInsertObject Create(Adapters.Database.Sql.DatabaseSession session)
         {
             return new InsertObject(this, session);
         }
 
-        internal string GetSql(ObjectType objectType)
+        internal string GetSql(IClass objectType)
         {
             if (!this.sqlByMetaType.ContainsKey(objectType))
             {
@@ -56,7 +56,7 @@ namespace Allors.R1.Adapters.Database.SqlClient.Commands.Text
                 // TODO: Make this a single pass Query.
                 var sql = "IF EXISTS (\n";
                 sql += "    SELECT " + schema.ObjectId + "\n";
-                sql += "    FROM " + schema.Table(objectType.ExclusiveRootClass) + "\n";
+                sql += "    FROM " + schema.Table(objectType.ExclusiveLeafClass) + "\n";
                 sql += "    WHERE " + schema.ObjectId + "=" + schema.ObjectId.Param + "\n";
                 sql += ")\n";
                 sql += "    SELECT 1\n";
@@ -70,7 +70,7 @@ namespace Allors.R1.Adapters.Database.SqlClient.Commands.Text
 
                 sql += "    SET IDENTITY_INSERT " + schema.Objects.StatementName + " OFF;\n";
 
-                sql += "    INSERT INTO " + schema.Table(objectType.ExclusiveRootClass) + " (" + schema.ObjectId + "," + schema.TypeId + ")\n";
+                sql += "    INSERT INTO " + schema.Table(objectType.ExclusiveLeafClass) + " (" + schema.ObjectId + "," + schema.TypeId + ")\n";
                 sql += "    VALUES (" + schema.ObjectId.Param + "," + schema.TypeId.Param + ");\n";
 
                 sql += "    SELECT 0;\n";
@@ -85,26 +85,26 @@ namespace Allors.R1.Adapters.Database.SqlClient.Commands.Text
         private class InsertObject : DatabaseCommand, IInsertObject
         {
             private readonly InsertObjectFactory factory;
-            private readonly Dictionary<ObjectType, SqlCommand> commandByObjectType;
+            private readonly Dictionary<IObjectType, SqlCommand> commandByIObjectType;
 
-            public InsertObject(InsertObjectFactory factory, Sql.DatabaseSession session)
+            public InsertObject(InsertObjectFactory factory, Adapters.Database.Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
-                this.commandByObjectType = new Dictionary<ObjectType, SqlCommand>();
+                this.commandByIObjectType = new Dictionary<IObjectType, SqlCommand>();
             }
 
-            public Reference Execute(ObjectType objectType, ObjectId objectId)
+            public Reference Execute(IClass objectType, ObjectId objectId)
             {
                 SqlCommand command;
-                if (!this.commandByObjectType.TryGetValue(objectType, out command))
+                if (!this.commandByIObjectType.TryGetValue(objectType, out command))
                 {
                     command = this.Session.CreateSqlCommand(this.factory.GetSql(objectType));
 
                     this.AddInObject(command, this.Database.Schema.ObjectId.Param, objectId.Value);
                     this.AddInObject(command, this.Database.Schema.TypeId.Param, objectType.Id);
 
-                    this.commandByObjectType[objectType] = command;
+                    this.commandByIObjectType[objectType] = command;
                 }
                 else
                 {

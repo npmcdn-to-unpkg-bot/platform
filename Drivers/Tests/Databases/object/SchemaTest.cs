@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ICacheFactory.cs" company="Allors bvba">
-//   Copyright 2002-2013 Allors bvba.
+// <copyright file="SchemaTest.cs" company="Allors bvba">
+//   Copyright 2002-2012 Allors bvba.
 // 
 // Dual Licensed under
 //   a) the Lesser General Public Licence v3 (LGPL)
@@ -18,13 +18,15 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Adapters.Database.Caching
+namespace Allors.Databases.Object
 {
-    /// <summary>
-    /// The cache factory is a factory for cache objects.
-    /// </summary>
-    public interface ICacheFactory
+    using System;
+
+    using Allors.Meta;
+
+    using NUnit.Framework;
+
+    public abstract class SchemaTest : Databases.SchemaTest
     {
-        ICache CreateCache(IDatabase database);
     }
 }

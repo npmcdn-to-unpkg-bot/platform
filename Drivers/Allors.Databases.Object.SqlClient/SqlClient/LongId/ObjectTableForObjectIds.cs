@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient.LongId
+namespace Allors.Databases.Object.SqlClient.LongId
 {
     using System.Collections;
     using System.Collections.Generic;

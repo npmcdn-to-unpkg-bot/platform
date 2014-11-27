@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient.Commands.Procedure
+namespace Allors.Databases.Object.SqlClient.Commands.Procedure
 {
     using System;
     using System.Collections.Generic;
@@ -26,51 +26,51 @@ namespace Allors.R1.Adapters.Database.SqlClient.Commands.Procedure
     using System.Data.Common;
     using System.Data.SqlClient;
 
-    using Allors.R1.Adapters.Database.Sql;
-    using Allors.R1.Adapters.Database.Sql.Commands;
+    using Allors.Adapters.Database.Sql;
+    using Allors.Adapters.Database.Sql.Commands;
 
     using Meta;
 
     using Database = Database;
-    using DatabaseSession = Allors.R1.Adapters.Database.SqlClient.DatabaseSession;
+    using DatabaseSession = DatabaseSession;
 
     public class GetUnitRolesFactory : IGetUnitRolesFactory
     {
         public readonly Database Database;
-        private readonly Dictionary<ObjectType, string> sqlByObjectType;
+        private readonly Dictionary<IObjectType, string> sqlByIObjectType;
 
         public GetUnitRolesFactory(Database database)
         {
             this.Database = database;
-            this.sqlByObjectType = new Dictionary<ObjectType, string>();
+            this.sqlByIObjectType = new Dictionary<IObjectType, string>();
         }
 
-        public IGetUnitRoles Create(Sql.DatabaseSession session)
+        public IGetUnitRoles Create(Adapters.Database.Sql.DatabaseSession session)
         {
             return new GetUnitRoles(this, session);
         }
 
-        public string GetSql(ObjectType objectType)
+        public string GetSql(IObjectType objectType)
         {
-            if (!this.sqlByObjectType.ContainsKey(objectType))
+            if (!this.sqlByIObjectType.ContainsKey(objectType))
             {
-                var sql = Sql.Schema.AllorsPrefix + "GU_" + objectType.Name;
-                this.sqlByObjectType[objectType] = sql;
+                var sql = Schema.AllorsPrefix + "GU_" + objectType.Name;
+                this.sqlByIObjectType[objectType] = sql;
             }
 
-            return this.sqlByObjectType[objectType];
+            return this.sqlByIObjectType[objectType];
         }
 
         public class GetUnitRoles : DatabaseCommand, IGetUnitRoles
         {
             private readonly GetUnitRolesFactory factory;
-            private readonly Dictionary<ObjectType, SqlCommand> commandByObjectType;
+            private readonly Dictionary<IObjectType, SqlCommand> commandByIObjectType;
 
-            public GetUnitRoles(GetUnitRolesFactory factory, Sql.DatabaseSession session)
+            public GetUnitRoles(GetUnitRolesFactory factory, Adapters.Database.Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
-                this.commandByObjectType = new Dictionary<ObjectType, SqlCommand>();
+                this.commandByIObjectType = new Dictionary<IObjectType, SqlCommand>();
             }
 
             public void Execute(Roles roles)
@@ -79,13 +79,13 @@ namespace Allors.R1.Adapters.Database.SqlClient.Commands.Procedure
                 var objectType = reference.ObjectType;
 
                 SqlCommand command;
-                if (!this.commandByObjectType.TryGetValue(objectType, out command))
+                if (!this.commandByIObjectType.TryGetValue(objectType, out command))
                 {
                     command = this.Session.CreateSqlCommand(this.factory.GetSql(objectType));
                     command.CommandType = CommandType.StoredProcedure;
                     this.AddInObject(command, this.Database.Schema.ObjectId.Param, reference.ObjectId.Value);
 
-                    this.commandByObjectType[objectType] = command;
+                    this.commandByIObjectType[objectType] = command;
                 }
                 else
                 {
@@ -96,7 +96,7 @@ namespace Allors.R1.Adapters.Database.SqlClient.Commands.Procedure
                 {
                     if (reader.Read())
                     {
-                        var sortedUnitRoles = this.Database.GetSortedUnitRolesByObjectType(reference.ObjectType);
+                        var sortedUnitRoles = this.Database.GetSortedUnitRolesByIObjectType(reference.ObjectType);
 
                         for (var i = 0; i < sortedUnitRoles.Length; i++)
                         {
@@ -105,35 +105,28 @@ namespace Allors.R1.Adapters.Database.SqlClient.Commands.Procedure
                             object unit = null;
                             if (!reader.IsDBNull(i))
                             {
-                                var unitTypeTag = (UnitTypeTags)roleType.ObjectType.UnitTag;
+                                var unitTypeTag = ((IUnit)roleType.ObjectType).UnitTag;
                                 switch (unitTypeTag)
                                 {
-                                    case UnitTypeTags.AllorsString:
+                                    case UnitTags.AllorsString:
                                         unit = reader.GetString(i);
                                         break;
-                                    case UnitTypeTags.AllorsInteger:
+                                    case UnitTags.AllorsInteger:
                                         unit = reader.GetInt32(i);
                                         break;
-                                    case UnitTypeTags.AllorsLong:
-                                        unit = reader.GetInt64(i);
-                                        break;
-                                    case UnitTypeTags.AllorsDecimal:
-                                        unit = reader.GetDecimal(i);
-                                        break;
-                                    case UnitTypeTags.AllorsDouble:
+                                    case UnitTags.AllorsFloat:
                                         unit = reader.GetDouble(i);
                                         break;
-                                    case UnitTypeTags.AllorsBoolean:
+                                    case UnitTags.AllorsDecimal:
+                                        unit = reader.GetDecimal(i);
+                                        break;
+                                    case UnitTags.AllorsBoolean:
                                         unit = reader.GetBoolean(i);
                                         break;
-                                    case UnitTypeTags.AllorsDateTime:
-                                        var dateTime = reader.GetDateTime(i);
-                                        unit = new DateTime(dateTime.Ticks, DateTimeKind.Utc);
-                                        break;
-                                    case UnitTypeTags.AllorsUnique:
+                                    case UnitTags.AllorsUnique:
                                         unit = reader.GetGuid(i);
                                         break;
-                                    case UnitTypeTags.AllorsBinary:
+                                    case UnitTags.AllorsBinary:
                                         var byteArray = (byte[])reader.GetValue(i);
                                         unit = byteArray;
                                         break;

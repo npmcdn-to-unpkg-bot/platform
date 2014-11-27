@@ -18,33 +18,33 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.Caching
+namespace Allors.Adapters.Database.Caching
 {
     using System.Collections.Generic;
 
-    using Allors.R1.Meta;
+    using Allors.Meta;
 
     /// <summary>
-    /// The Cache holds a CachedObject and/or ObjectType by ObjectId.
+    /// The Cache holds a CachedObject and/or IObjectType by ObjectId.
     /// </summary>
     public sealed class Cache : ICache
     {
-        private readonly HashSet<ObjectType> transientConcreteClasses; 
+        private readonly HashSet<IClass> transientConcreteClasses; 
 
         private readonly Dictionary<ObjectId, CachedObject> cachedObjectByObjectId;
-        private readonly Dictionary<ObjectId, ObjectType> objectTypeByObjectId;
+        private readonly Dictionary<ObjectId, IClass> objectTypeByObjectId;
 
-        public Cache(ObjectType[] transientObjectTypes)
+        public Cache(IComposite[] transientObjectTypes)
         {
             this.cachedObjectByObjectId = new Dictionary<ObjectId, CachedObject>();
-            this.objectTypeByObjectId = new Dictionary<ObjectId, ObjectType>();
+            this.objectTypeByObjectId = new Dictionary<ObjectId, IClass>();
 
             if (transientObjectTypes != null)
             {
-                this.transientConcreteClasses = new HashSet<ObjectType>();
+                this.transientConcreteClasses = new HashSet<IClass>();
                 foreach (var transientObjectType in transientObjectTypes)
                 {
-                    foreach (var transientConcreteClass in transientObjectType.ConcreteClasses)
+                    foreach (var transientConcreteClass in transientObjectType.LeafClasses)
                     {
                         this.transientConcreteClasses.Add(transientConcreteClass);
                     }
@@ -66,7 +66,7 @@ namespace Allors.R1.Adapters.Database.Caching
             this.objectTypeByObjectId.Clear();
         }
 
-        public ICachedObject GetOrCreateCachedObject(ObjectType concreteClass, ObjectId objectId, int localCacheId)
+        public ICachedObject GetOrCreateCachedObject(IClass concreteClass, ObjectId objectId, int localCacheId)
         {
             if (this.transientConcreteClasses != null && this.transientConcreteClasses.Contains(concreteClass))
             {
@@ -91,14 +91,14 @@ namespace Allors.R1.Adapters.Database.Caching
             return cachedObject;
         }
 
-        public ObjectType GetObjectType(ObjectId objectId)
+        public IClass GetObjectType(ObjectId objectId)
         {
-            ObjectType objectType;
+            IClass objectType;
             this.objectTypeByObjectId.TryGetValue(objectId, out objectType);
             return objectType;
         }
 
-        public void SetObjectType(ObjectId objectId, ObjectType objectType)
+        public void SetObjectType(ObjectId objectId, IClass objectType)
         {
             this.objectTypeByObjectId[objectId] = objectType;
         }

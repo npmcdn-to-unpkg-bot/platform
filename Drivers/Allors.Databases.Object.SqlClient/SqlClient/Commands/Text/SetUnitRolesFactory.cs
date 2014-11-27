@@ -18,20 +18,20 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient.Commands.Text
+namespace Allors.Databases.Object.SqlClient.Commands.Text
 {
     using System.Collections.Generic;
     using System.Data.SqlClient;
     using System.Linq;
     using System.Text;
 
-    using Allors.R1.Adapters.Database.Sql;
-    using Allors.R1.Adapters.Database.Sql.Commands;
+    using Allors.Adapters.Database.Sql;
+    using Allors.Adapters.Database.Sql.Commands;
 
     using Meta;
 
     using Database = Database;
-    using DatabaseSession = Allors.R1.Adapters.Database.SqlClient.DatabaseSession;
+    using DatabaseSession = DatabaseSession;
 
     public class SetUnitRolesFactory : ISetUnitRolesFactory
     {
@@ -42,7 +42,7 @@ namespace Allors.R1.Adapters.Database.SqlClient.Commands.Text
             this.Database = database;
         }
 
-        public ISetUnitRoles Create(Sql.DatabaseSession session)
+        public ISetUnitRoles Create(Adapters.Database.Sql.DatabaseSession session)
         {
             return new SetUnitRoles(session);
         }
@@ -51,30 +51,30 @@ namespace Allors.R1.Adapters.Database.SqlClient.Commands.Text
         {
             private readonly DatabaseSession session;
 
-            private readonly Dictionary<ObjectType, Dictionary<IList<RoleType>, SqlCommand>> commandByKeyByObjectType; 
+            private readonly Dictionary<IObjectType, Dictionary<IList<IRoleType>, SqlCommand>> commandByKeyByIObjectType; 
 
-            public SetUnitRoles(Sql.DatabaseSession session)
+            public SetUnitRoles(Adapters.Database.Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.session = (DatabaseSession)session;
-                this.commandByKeyByObjectType = new Dictionary<ObjectType, Dictionary<IList<RoleType>, SqlCommand>>();
+                this.commandByKeyByIObjectType = new Dictionary<IObjectType, Dictionary<IList<IRoleType>, SqlCommand>>();
             }
 
-            public void Execute(Roles roles, IList<RoleType> sortedRoleTypes)
+            public void Execute(Roles roles, IList<IRoleType> sortedIRoleTypes)
             {
                 var schema = this.Database.Schema;
 
-                var exclusiveRootClass = roles.Reference.ObjectType.ExclusiveRootClass;
+                var exclusiveRootClass = roles.Reference.ObjectType.ExclusiveLeafClass;
 
-                Dictionary<IList<RoleType>, SqlCommand> commandByKey;
-                if (!this.commandByKeyByObjectType.TryGetValue(exclusiveRootClass, out commandByKey))
+                Dictionary<IList<IRoleType>, SqlCommand> commandByKey;
+                if (!this.commandByKeyByIObjectType.TryGetValue(exclusiveRootClass, out commandByKey))
                 {
-                    commandByKey = new Dictionary<IList<RoleType>, SqlCommand>(new SortedRoleTypesComparer());
-                    this.commandByKeyByObjectType.Add(exclusiveRootClass, commandByKey);
+                    commandByKey = new Dictionary<IList<IRoleType>, SqlCommand>(new SortedIRoleTypesComparer());
+                    this.commandByKeyByIObjectType.Add(exclusiveRootClass, commandByKey);
                 }
 
                 SqlCommand command;
-                if (!commandByKey.TryGetValue(sortedRoleTypes, out command))
+                if (!commandByKey.TryGetValue(sortedIRoleTypes, out command))
                 {
                     command = this.session.CreateSqlCommand();
                     this.AddInObject(command, schema.ObjectId.Param, roles.Reference.ObjectId.Value);
@@ -83,7 +83,7 @@ namespace Allors.R1.Adapters.Database.SqlClient.Commands.Text
                     sql.Append("UPDATE " + schema.Table(exclusiveRootClass) + " SET\n");
 
                     var count = 0;
-                    foreach (var roleType in sortedRoleTypes)
+                    foreach (var roleType in sortedIRoleTypes)
                     {
                         if (count > 0)
                         {
@@ -95,7 +95,7 @@ namespace Allors.R1.Adapters.Database.SqlClient.Commands.Text
                         var column = schema.Column(roleType);
                         sql.Append(column + "=" + column.Param);
 
-                        var unit = roles.ModifiedRoleByRoleType[roleType];
+                        var unit = roles.ModifiedRoleByIRoleType[roleType];
                         this.AddInObject(command, column.Param, unit);
                     }
 
@@ -104,17 +104,17 @@ namespace Allors.R1.Adapters.Database.SqlClient.Commands.Text
                     command.CommandText = sql.ToString();
                     command.ExecuteNonQuery();
 
-                    commandByKey.Add(sortedRoleTypes, command);
+                    commandByKey.Add(sortedIRoleTypes, command);
                 }
                 else
                 {
                     this.SetInObject(command, schema.ObjectId.Param, roles.Reference.ObjectId.Value);
                     
-                    foreach (var roleType in sortedRoleTypes)
+                    foreach (var roleType in sortedIRoleTypes)
                     {
                         var column = schema.Column(roleType);
 
-                        var unit = roles.ModifiedRoleByRoleType[roleType];
+                        var unit = roles.ModifiedRoleByIRoleType[roleType];
                         this.SetInObject(command, column.Param, unit);
                     }
 
@@ -122,9 +122,9 @@ namespace Allors.R1.Adapters.Database.SqlClient.Commands.Text
                 }
             }
 
-            private class SortedRoleTypesComparer : IEqualityComparer<IList<RoleType>>
+            private class SortedIRoleTypesComparer : IEqualityComparer<IList<IRoleType>>
             {
-                public bool Equals(IList<RoleType> x, IList<RoleType> y)
+                public bool Equals(IList<IRoleType> x, IList<IRoleType> y)
                 {
                     if (x.Count == y.Count)
                     {
@@ -142,7 +142,7 @@ namespace Allors.R1.Adapters.Database.SqlClient.Commands.Text
                     return false;
                 }
 
-                public int GetHashCode(IList<RoleType> roleTypes)
+                public int GetHashCode(IList<IRoleType> roleTypes)
                 {
                     var hashCode = 0;
                     foreach (var roleType in roleTypes)

@@ -18,24 +18,25 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient.LongId
+namespace Allors.Databases.Object.SqlClient.LongId
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Data;
 
-    using Allors.R1.Meta;
+    using Allors.Adapters;
+    using Allors.Meta;
 
     using Microsoft.SqlServer.Server;
 
     public class RelationTableForUnitRelations : IEnumerable<SqlDataRecord>
     {
         private readonly Database database;
-        private readonly RoleType roleType;
+        private readonly IRoleType roleType;
         private readonly IEnumerable<UnitRelation> relations;
 
-        public RelationTableForUnitRelations(Database database, RoleType roleType, IEnumerable<UnitRelation> relations)
+        public RelationTableForUnitRelations(Database database, IRoleType roleType, IEnumerable<UnitRelation> relations)
         {
             this.database = database;
             this.roleType = roleType;

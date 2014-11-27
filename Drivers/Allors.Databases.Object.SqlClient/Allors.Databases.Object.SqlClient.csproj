@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -150,7 +151,6 @@
     <Compile Include="Adapters\Database\Sql\SyncBatch.cs" />
     <Compile Include="Adapters\EmptySet.cs" />
     <Compile Include="Adapters\Population.cs" />
-    <Compile Include="Adapters\Properties\AssemblyInfo.cs" />
     <Compile Include="Adapters\RelationTypeManyXmlWriter.cs" />
     <Compile Include="Adapters\RelationTypeOneXmlWriter.cs" />
     <Compile Include="Adapters\Serialization.cs" />
@@ -207,18 +207,11 @@
     <Compile Include="SqlClient\LongId\RelationTableForUnitRelations.cs" />
     <Compile Include="SqlClient\LongId\Schema.cs" />
     <Compile Include="SqlClient\ManagementSession.cs" />
-    <Compile Include="SqlClient\properties\AssemblyInfo.cs" />
     <Compile Include="SqlClient\Save.cs" />
     <Compile Include="SqlClient\SchemaTableParameter.cs" />
     <Compile Include="SqlClient\Schema\Schema.cs" />
     <Compile Include="SqlClient\Schema\SchemaParameter.cs" />
     <Compile Include="SqlClient\SessionCommands.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Framework\Framework\Allors.csproj">
-      <Project>{84495b8e-1800-41c9-a236-abe6265a23a3}</Project>
-      <Name>Allors</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="SqlClient\RepositoryCommands\Text\" />
@@ -228,6 +221,12 @@
     <None Include="Adapters\Database\Sql\Overview.cd" />
     <None Include="Adapters\Diagrams\Schema.cd" />
     <None Include="Adapters\Diagrams\Strategy.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Framework\Framework\Allors.csproj">
+      <Project>{84495b8e-1800-41c9-a236-abe6265a23a3}</Project>
+      <Name>Allors</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

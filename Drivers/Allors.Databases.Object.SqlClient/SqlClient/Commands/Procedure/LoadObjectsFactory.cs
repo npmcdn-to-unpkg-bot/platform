@@ -21,14 +21,14 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient.Commands.Procedure
+namespace Allors.Databases.Object.SqlClient.Commands.Procedure
 {
     using System.Collections.Generic;
     using System.Data;
 
-    using Allors.R1.Adapters.Database.Sql;
-    using Allors.R1.Adapters.Database.Sql.Commands;
-    using Allors.R1.Meta;
+    using Allors.Adapters.Database.Sql;
+    using Allors.Adapters.Database.Sql.Commands;
+    using Allors.Meta;
 
     internal class LoadObjectsFactory : ILoadObjectsFactory
     {
@@ -39,7 +39,7 @@ namespace Allors.R1.Adapters.Database.SqlClient.Commands.Procedure
             this.ManagementSession = session;
         }
 
-        public ILoadObjects Create(ObjectType objectType)
+        public ILoadObjects Create(IObjectType objectType)
         {
             return new LoadObjects(this);
         }
@@ -53,11 +53,11 @@ namespace Allors.R1.Adapters.Database.SqlClient.Commands.Procedure
                 this.factory = factory;
             }
 
-            public void Execute(ObjectType objectType, IEnumerable<ObjectId> objectIds)
+            public void Execute(IObjectType objectType, IEnumerable<ObjectId> objectIds)
             {
                 var database = this.factory.ManagementSession.SqlClientDatabase;
 
-                var exclusiveRootClass = objectType.ExclusiveRootClass;
+                var exclusiveRootClass = ((IComposite)objectType).ExclusiveLeafClass;
                 var schema = database.SqlClientSchema;
 
                 lock (database)

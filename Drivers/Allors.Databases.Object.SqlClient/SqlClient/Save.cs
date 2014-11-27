@@ -14,11 +14,11 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient
+namespace Allors.Databases.Object.SqlClient
 {
     using System.Xml;
 
-    public class Save : Sql.Save
+    public class Save : Adapters.Database.Sql.Save
     {
         private Database database;
 

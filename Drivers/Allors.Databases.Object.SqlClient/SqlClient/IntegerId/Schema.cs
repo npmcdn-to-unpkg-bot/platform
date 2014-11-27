@@ -19,7 +19,7 @@
 // <summary>Defines the Schema type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient.IntegerId
+namespace Allors.Databases.Object.SqlClient.IntegerId
 {
     using System.Data;
 

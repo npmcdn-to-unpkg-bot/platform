@@ -18,22 +18,22 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.Caching
+namespace Allors.Adapters.Database.Caching
 {
     using System.Collections.Generic;
 
-    using Allors.R1.Meta;
+    using Allors.Meta;
 
     /// <summary>
-    /// The Cache holds a CachedObject and/or ObjectType by ObjectId.
+    /// The Cache holds a CachedObject and/or IObjectType by ObjectId.
     /// </summary>
     public interface ICache
     {
-        ICachedObject GetOrCreateCachedObject(ObjectType concreteClass, ObjectId objectId, int localCacheId);
+        ICachedObject GetOrCreateCachedObject(IClass concreteClass, ObjectId objectId, int localCacheId);
 
-        ObjectType GetObjectType(ObjectId objectId);
+        IClass GetObjectType(ObjectId objectId);
 
-        void SetObjectType(ObjectId objectId, ObjectType objectType);
+        void SetObjectType(ObjectId objectId, IClass objectType);
 
         void OnCommit(IList<ObjectId> accessedObjectIds, IList<ObjectId> changedObjectIds);
 

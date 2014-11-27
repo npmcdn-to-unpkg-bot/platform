@@ -18,18 +18,18 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient.Commands.Procedure
+namespace Allors.Databases.Object.SqlClient.Commands.Procedure
 {
     using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
 
-    using Allors.R1.Adapters.Database.Sql;
+    using Allors.Adapters.Database.Sql;
 
-    using Allors.R1.Adapters.Database.Sql.Commands;
+    using Allors.Adapters.Database.Sql.Commands;
 
     using Database = Database;
-    using DatabaseSession = Allors.R1.Adapters.Database.SqlClient.DatabaseSession;
+    using DatabaseSession = DatabaseSession;
     using Schema = Schema;
 
     public class UpdateCacheIdsFactory : IUpdateCacheIdsFactory
@@ -49,7 +49,7 @@ namespace Allors.R1.Adapters.Database.SqlClient.Commands.Procedure
             }
         }
 
-        public IUpdateCacheIds Create(Sql.DatabaseSession session)
+        public IUpdateCacheIds Create(Adapters.Database.Sql.DatabaseSession session)
         {
             return new UpdateCacheIds(this, session);
         }
@@ -59,7 +59,7 @@ namespace Allors.R1.Adapters.Database.SqlClient.Commands.Procedure
             private readonly UpdateCacheIdsFactory factory;
             private SqlCommand command;
 
-            public UpdateCacheIds(UpdateCacheIdsFactory factory, Sql.DatabaseSession session)
+            public UpdateCacheIds(UpdateCacheIdsFactory factory, Adapters.Database.Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
@@ -71,7 +71,7 @@ namespace Allors.R1.Adapters.Database.SqlClient.Commands.Procedure
 
                 if (this.command == null)
                 {
-                    this.command = this.Session.CreateSqlCommand(Sql.Schema.AllorsPrefix + "UC");
+                    this.command = this.Session.CreateSqlCommand(Adapters.Database.Sql.Schema.AllorsPrefix + "UC");
                     this.command.CommandType = CommandType.StoredProcedure;
                     this.AddInTable(this.command, schema.ObjectTableParam, this.Database.CreateObjectTable(modifiedRolesByReference.Keys));
                 }

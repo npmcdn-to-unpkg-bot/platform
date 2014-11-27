@@ -21,18 +21,18 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient.Commands.Procedure
+namespace Allors.Databases.Object.SqlClient.Commands.Procedure
 {
     using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
 
-    using Allors.R1.Adapters.Database.Sql;
-    using Allors.R1.Adapters.Database.Sql.Commands;
-    using Allors.R1.Meta;
+    using Allors.Adapters.Database.Sql;
+    using Allors.Adapters.Database.Sql.Commands;
+    using Allors.Meta;
 
     using Database = Database;
-    using DatabaseSession = Allors.R1.Adapters.Database.SqlClient.DatabaseSession;
+    using DatabaseSession = DatabaseSession;
     using Schema = Schema;
 
     internal class CreateObjectFactory : ICreateObjectFactory
@@ -44,34 +44,34 @@ namespace Allors.R1.Adapters.Database.SqlClient.Commands.Procedure
             this.Database = database;
         }
 
-        public ICreateObject Create(Sql.DatabaseSession session)
+        public ICreateObject Create(Adapters.Database.Sql.DatabaseSession session)
         {
             return new CreateObject(session);
         }
 
         private class CreateObject : DatabaseCommand, ICreateObject
         {
-            private readonly Dictionary<ObjectType, SqlCommand> commandByObjectType;
+            private readonly Dictionary<IObjectType, SqlCommand> commandByIObjectType;
 
-            public CreateObject(Sql.DatabaseSession session)
+            public CreateObject(Adapters.Database.Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
-                this.commandByObjectType = new Dictionary<ObjectType, SqlCommand>();
+                this.commandByIObjectType = new Dictionary<IObjectType, SqlCommand>();
             }
 
-            public Reference Execute(ObjectType objectType)
+            public Reference Execute(IClass objectType)
             {
-                var exclusiveRootClass = objectType.ExclusiveRootClass;
+                var exclusiveRootClass = ((IComposite)objectType).ExclusiveLeafClass;
                 var schema = this.Database.Schema;
 
                 SqlCommand command;
-                if (!this.commandByObjectType.TryGetValue(exclusiveRootClass, out command))
+                if (!this.commandByIObjectType.TryGetValue(exclusiveRootClass, out command))
                 {
-                    command = this.Session.CreateSqlCommand(Sql.Schema.AllorsPrefix + "CO_" + exclusiveRootClass.Name);
+                    command = this.Session.CreateSqlCommand(Adapters.Database.Sql.Schema.AllorsPrefix + "CO_" + exclusiveRootClass.Name);
                     command.CommandType = CommandType.StoredProcedure;
                     this.AddInObject(command, schema.TypeId.Param, objectType.Id);
 
-                    this.commandByObjectType[exclusiveRootClass] = command;
+                    this.commandByIObjectType[exclusiveRootClass] = command;
                 }
                 else
                 {

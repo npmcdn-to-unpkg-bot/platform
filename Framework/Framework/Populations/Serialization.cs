@@ -158,7 +158,7 @@ namespace Allors.Populations
 
             if (!VersionCurrent.Equals(version))
             {
-                throw new ArgumentException("database supports version " + VersionCurrent + " but found version " + version + ".");
+                throw new ArgumentException("Database supports version " + VersionCurrent + " but found version " + version + ".");
             }
         }
 
@@ -187,7 +187,7 @@ namespace Allors.Populations
                 case UnitTags.AllorsBinary:
                     return Convert.FromBase64String(value);
                 default:
-                    throw new ArgumentException("Unknown Unit IObjectType: " + unitTypeTag);
+                    throw new ArgumentException("Unknown Unit ObjectType: " + unitTypeTag);
             }
         }
 
@@ -210,13 +210,13 @@ namespace Allors.Populations
                 case UnitTags.AllorsFloat:
                     return ((double)unit).ToString(NumberFormatInfo.InvariantInfo);
                 case UnitTags.AllorsBoolean:
-                    return ((bool)unit).ToString(NumberFormatInfo.InvariantInfo);
+                    return ((bool)unit).ToString(NumberFormatInfo.InvariantInfo).ToLowerInvariant();
                 case UnitTags.AllorsUnique:
                     return ((Guid)unit).ToString("N");
                 case UnitTags.AllorsBinary:
                     return Convert.ToBase64String((byte[])unit);
                 default:
-                    throw new ArgumentException("Unknown Unit IObjectType: " + unitTypeTag);
+                    throw new ArgumentException("Unknown Unit ObjectType: " + unitTypeTag);
             }
         }
     }

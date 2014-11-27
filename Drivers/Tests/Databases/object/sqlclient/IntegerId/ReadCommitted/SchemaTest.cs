@@ -16,7 +16,7 @@
 
 namespace Allors.Databases.Object.SqlClient.ReadCommitted
 {
-    using Allors.Databases.Relation.SqlClient;
+    using Allors.Databases.Object.SqlClient;
     using Allors.Meta;
     using Allors.Populations;
 

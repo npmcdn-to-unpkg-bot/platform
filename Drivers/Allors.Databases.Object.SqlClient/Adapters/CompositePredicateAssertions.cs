@@ -17,7 +17,7 @@
 // For more information visit http://www.allors.com/legal
 // </copyright>
 //-------------------------------------------------------------------------------------------------
-namespace Allors.R1.Adapters
+namespace Allors.Adapters
 {
     using System;
     using System.Collections.Generic;
@@ -30,28 +30,28 @@ namespace Allors.R1.Adapters
     public class CompositePredicateAssertions
     {
         /// <summary>
-        /// Asserts that the <see cref="AssociationType"/> and the <see cref="Extent"/> are compatible with
+        /// Asserts that the <see cref="IAssociationType"/> and the <see cref="Extent"/> are compatible with
         /// <see cref="ICompositePredicate#AddContainedIn"/>.
         /// </summary>
         /// <param name="association">The association.</param>
         /// <param name="extent">The extent.</param>
-        public static void AssertAssociationContainedIn(AssociationType association, Extent extent)
+        public static void AssertAssociationContainedIn(IAssociationType association, Extent extent)
         {
             // TODO: ?
         }
 
-        public static void AssertAssociationContainedIn(AssociationType association, IEnumerable<IObject> enumerable)
+        public static void AssertAssociationContainedIn(IAssociationType association, IEnumerable<IObject> enumerable)
         {
             // TODO: ?
         }
 
         /// <summary>
-        /// Asserts that the <see cref="AssociationType"/> and the <see cref="IObject"/> are compatible with
+        /// Asserts that the <see cref="IAssociationType"/> and the <see cref="IObject"/> are compatible with
         /// <see cref="ICompositePredicate#AddContains"/>.
         /// </summary>
         /// <param name="association">The association.</param>
         /// <param name="allorsObject">The allors object.</param>
-        public static void AssertAssociationContains(AssociationType association, IObject allorsObject)
+        public static void AssertAssociationContains(IAssociationType association, IObject allorsObject)
         {
             if (!association.IsMany)
             {
@@ -66,12 +66,12 @@ namespace Allors.R1.Adapters
         }
 
         /// <summary>
-        /// Asserts that the <see cref="AssociationType"/> and the <see cref="IObject"/> are compatible with
+        /// Asserts that the <see cref="IAssociationType"/> and the <see cref="IObject"/> are compatible with
         /// <see cref="ICompositePredicate#AddEquals"/>.
         /// </summary>
         /// <param name="association">The association.</param>
         /// <param name="allorsObject">The allors object.</param>
-        public static void AssertAssociationEquals(AssociationType association, IObject allorsObject)
+        public static void AssertAssociationEquals(IAssociationType association, IObject allorsObject)
         {
             if (!association.IsOne)
             {
@@ -87,22 +87,22 @@ namespace Allors.R1.Adapters
         }
 
         /// <summary>
-        /// Asserts that the <see cref="AssociationType"/> is compatible with
+        /// Asserts that the <see cref="IAssociationType"/> is compatible with
         /// <see cref="ICompositePredicate#AddExists"/>.
         /// </summary>
         /// <param name="association">The association.</param>
-        public static void ValidateAssociationExists(AssociationType association)
+        public static void ValidateAssociationExists(IAssociationType association)
         {
             // TODO: ?
         }
 
         /// <summary>
-        /// Asserts that the <see cref="AssociationType"/> and the <see cref="ObjectType"/> are compatible with
+        /// Asserts that the <see cref="IAssociationType"/> and the <see cref="IObjectType"/> are compatible with
         /// <see cref="ICompositePredicate#AddInstanceof"/>.
         /// </summary>
         /// <param name="association">The association.</param>
         /// <param name="objectType">The object type.</param>
-        public static void ValidateAssociationInstanceof(AssociationType association, ObjectType objectType)
+        public static void ValidateAssociationInstanceof(IAssociationType association, IObjectType objectType)
         {
             if (objectType.IsUnit)
             {
@@ -117,11 +117,11 @@ namespace Allors.R1.Adapters
         }
 
         /// <summary>
-        /// Asserts that the <see cref="ObjectType"/> is compatible with
+        /// Asserts that the <see cref="IObjectType"/> is compatible with
         /// <see cref="ICompositePredicate#AddInstanceof"/>.
         /// </summary>
         /// <param name="objectType">The object type.</param>
-        public static void ValidateInstanceof(ObjectType objectType)
+        public static void ValidateInstanceof(IObjectType objectType)
         {
             if (objectType.IsUnit)
             {
@@ -130,13 +130,13 @@ namespace Allors.R1.Adapters
         }
 
         /// <summary>
-        /// Asserts that the <see cref="RoleType"/>, the first <see cref="IObject"/> and the second <see cref="IObject"/> are compatible with
+        /// Asserts that the <see cref="IRoleType"/>, the first <see cref="IObject"/> and the second <see cref="IObject"/> are compatible with
         /// <see cref="ICompositePredicate#AddBetween"/>.
         /// </summary>
         /// <param name="role">The role .</param>
         /// <param name="firstObject">The first object.</param>
         /// <param name="secondObject">The second object.</param>
-        public static void ValidateRoleBetween(RoleType role, object firstObject, object secondObject)
+        public static void ValidateRoleBetween(IRoleType role, object firstObject, object secondObject)
         {
             if (!role.ObjectType.IsUnit)
             {
@@ -149,8 +149,8 @@ namespace Allors.R1.Adapters
                     "AddBetween() requires a first and second object, use AddLessThan() or AddGreaterThan() instead.");
             }
 
-            var firstRole = firstObject as RoleType;
-            var secondRole = secondObject as RoleType;
+            var firstRole = firstObject as IRoleType;
+            var secondRole = secondObject as IRoleType;
             if ((firstRole != null && !firstRole.ObjectType.IsUnit) ||
                 (secondRole != null && !secondRole.ObjectType.IsUnit))
             {
@@ -159,12 +159,12 @@ namespace Allors.R1.Adapters
         }
 
         /// <summary>
-        /// Asserts that the <see cref="RoleType"/> and the <see cref="Extent"/> are compatible with
+        /// Asserts that the <see cref="IRoleType"/> and the <see cref="Extent"/> are compatible with
         /// <see cref="ICompositePredicate#AddContainedIn"/>.
         /// </summary>
         /// <param name="role">The role .</param>
         /// <param name="extent">The extent.</param>
-        public static void ValidateRoleContainedIn(RoleType role, Extent extent)
+        public static void ValidateRoleContainedIn(IRoleType role, Extent extent)
         {
             if (role.ObjectType.IsUnit)
             {
@@ -177,7 +177,7 @@ namespace Allors.R1.Adapters
             }
         }
 
-        public static void ValidateRoleContainedIn(RoleType role, IEnumerable<IObject> enumerable)
+        public static void ValidateRoleContainedIn(IRoleType role, IEnumerable<IObject> enumerable)
         {
             if (role.ObjectType.IsUnit)
             {
@@ -191,12 +191,12 @@ namespace Allors.R1.Adapters
         }
 
         /// <summary>
-        /// Asserts that the <see cref="RoleType"/> and the <see cref="IObject"/> are compatible with
+        /// Asserts that the <see cref="IRoleType"/> and the <see cref="IObject"/> are compatible with
         /// <see cref="ICompositePredicate#AddContainedIn"/>.
         /// </summary>
         /// <param name="role">The role .</param>
         /// <param name="allorsObject">The allors object.</param>
-        public static void ValidateRoleContains(RoleType role, IObject allorsObject)
+        public static void ValidateRoleContains(IRoleType role, IObject allorsObject)
         {
             if (role.IsOne)
             {
@@ -210,12 +210,12 @@ namespace Allors.R1.Adapters
         }
 
         /// <summary>
-        /// Asserts that the <see cref="RoleType"/> and the object are compatible with
+        /// Asserts that the <see cref="IRoleType"/> and the object are compatible with
         /// <see cref="ICompositePredicate#AddEquals"/>.
         /// </summary>
         /// <param name="role">The role .</param>
         /// <param name="compareObject">The compare object.</param>
-        public static void ValidateRoleEquals(RoleType role, object compareObject)
+        public static void ValidateRoleEquals(IRoleType role, object compareObject)
         {
             if (role.IsMany)
             {
@@ -228,7 +228,7 @@ namespace Allors.R1.Adapters
                     "AddEquals() requires a non-null value or object, use AddNot().AddExists() instead.");
             }
 
-            var compareRole = compareObject as RoleType;
+            var compareRole = compareObject as IRoleType;
             if (compareRole != null && compareRole.ObjectType.IsComposite)
             {
                 throw new ArgumentException("AddRoleEqual() for composites can only be used with objects (not other roles).");
@@ -236,22 +236,22 @@ namespace Allors.R1.Adapters
         }
 
         /// <summary>
-        /// Asserts that the <see cref="RoleType"/> is compatible with
+        /// Asserts that the <see cref="IRoleType"/> is compatible with
         /// <see cref="ICompositePredicate#Exists"/>.
         /// </summary>
         /// <param name="role">The role .</param>
-        public static void ValidateRoleExists(RoleType role)
+        public static void ValidateRoleExists(IRoleType role)
         {
             // TODO: ?
         }
 
         /// <summary>
-        /// Asserts that the <see cref="RoleType"/> and the unit are compatible with
+        /// Asserts that the <see cref="IRoleType"/> and the unit are compatible with
         /// <see cref="ICompositePredicate#AddGreaterThan"/>.
         /// </summary>
         /// <param name="role">The role .</param>
         /// <param name="unit">The unit .</param>
-        public static void ValidateRoleGreaterThan(RoleType role, object unit)
+        public static void ValidateRoleGreaterThan(IRoleType role, object unit)
         {
             if (!role.ObjectType.IsUnit)
             {
@@ -263,7 +263,7 @@ namespace Allors.R1.Adapters
                 throw new ArgumentException("AddGreaterThan() requires a non-null value.");
             }
 
-            var compareRole = unit as RoleType;
+            var compareRole = unit as IRoleType;
             if (compareRole != null && !compareRole.ObjectType.IsUnit)
             {
                 throw new ArgumentException("AAddGreaterThan() can only be used with roles having unit types.");
@@ -271,12 +271,12 @@ namespace Allors.R1.Adapters
         }
 
         /// <summary>
-        /// Asserts that the <see cref="RoleType"/> and the <see cref="ObjectType"/> are compatible with
+        /// Asserts that the <see cref="IRoleType"/> and the <see cref="IObjectType"/> are compatible with
         /// <see cref="ICompositePredicate#AddInstanceOf"/>.
         /// </summary>
         /// <param name="role">The role .</param>
         /// <param name="objectType">Type object type.</param>
-        public static void ValidateRoleInstanceOf(RoleType role, ObjectType objectType)
+        public static void ValidateRoleInstanceOf(IRoleType role, IObjectType objectType)
         {
             if (objectType.IsUnit)
             {
@@ -290,12 +290,12 @@ namespace Allors.R1.Adapters
         }
 
         /// <summary>
-        /// Asserts that the <see cref="RoleType"/> and the unit are compatible with
+        /// Asserts that the <see cref="IRoleType"/> and the unit are compatible with
         /// <see cref="ICompositePredicate#AddLessThan"/>.
         /// </summary>
         /// <param name="role">The role .</param>
         /// <param name="unit">The unit .</param>
-        public static void ValidateRoleLessThan(RoleType role, object unit)
+        public static void ValidateRoleLessThan(IRoleType role, object unit)
         {
             if (!role.ObjectType.IsUnit)
             {
@@ -307,7 +307,7 @@ namespace Allors.R1.Adapters
                 throw new ArgumentException("AddLessThan() requires a value.");
             }
 
-            var compareRole = unit as RoleType;
+            var compareRole = unit as IRoleType;
             if (compareRole != null && !compareRole.ObjectType.IsUnit)
             {
                 throw new ArgumentException("AddLessThan() can only be used with roles having unit types.");
@@ -315,14 +315,14 @@ namespace Allors.R1.Adapters
         }
 
         /// <summary>
-        /// Asserts that the <see cref="RoleType"/> and the unit are compatible with
+        /// Asserts that the <see cref="IRoleType"/> and the unit are compatible with
         /// <see cref="ICompositePredicate#AddLike"/>.
         /// </summary>
         /// <param name="role">The role .</param>
         /// <param name="unit">The unit .</param>
-        public static void ValidateRoleLikeFilter(RoleType role, string unit)
+        public static void ValidateRoleLikeFilter(IRoleType role, string unit)
         {
-            if (!role.ObjectType.IsString)
+            if (!((IUnit)role.ObjectType).IsString)
             {
                 throw new ArgumentException("AddLike() can only be used with String.");
             }

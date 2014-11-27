@@ -18,16 +18,16 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient
+namespace Allors.Databases.Object.SqlClient
 {
-    using Allors.R1.Adapters.Database.Sql.Commands;
+    using Allors.Adapters.Database.Sql.Commands;
 
-    public sealed class SessionCommands : Sql.SessionCommands
+    public sealed class SessionCommands : Adapters.Database.Sql.SessionCommands
     {
         private readonly DatabaseSession session;
-        private readonly Sql.CommandFactories commandFactories;
+        private readonly Adapters.Database.Sql.CommandFactories commandFactories;
 
-        private IGetObjectType getObjectType;
+        private IGetIObjectType getIObjectType;
         private ICreateObject createObjectCommand;
         private ICreateObjects createObjects;
         private IInsertObject insertObject;
@@ -54,11 +54,11 @@ namespace Allors.R1.Adapters.Database.SqlClient
             this.commandFactories = this.session.SqlClientDatabase.SqlClientCommandFactories;
         }
 
-        public override IGetObjectType GetObjectType
+        public override IGetIObjectType GetObjectType
         {
             get
             {
-                return this.getObjectType ?? (this.getObjectType = this.commandFactories.GetObjectTypeFactory.Create(this.session));
+                return this.getIObjectType ?? (this.getIObjectType = this.commandFactories.GetIObjectTypeFactory.Create(this.session));
             }
         }
 

@@ -18,12 +18,13 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient.LongId
+namespace Allors.Databases.Object.SqlClient.LongId
 {
     using System.Collections.Generic;
 
-    using Allors.R1.Adapters.Database.Sql;
-    using Allors.R1.Meta;
+    using Allors.Adapters;
+    using Allors.Adapters.Database.Sql;
+    using Allors.Meta;
 
     using Microsoft.SqlServer.Server;
 
@@ -48,7 +49,7 @@ namespace Allors.R1.Adapters.Database.SqlClient.LongId
         {
             get
             {
-                if (this.ObjectFactory.Domain != null)
+                if (this.ObjectFactory.MetaPopulation != null)
                 {
                     if (this.schema == null)
                     {
@@ -85,7 +86,7 @@ namespace Allors.R1.Adapters.Database.SqlClient.LongId
             return new RelationTableForCompositeRelations(this.schema, relations);
         }
 
-        internal override IEnumerable<SqlDataRecord> CreateRelationTable(RoleType roleType, IEnumerable<UnitRelation> relations)
+        internal override IEnumerable<SqlDataRecord> CreateRelationTable(IRoleType roleType, IEnumerable<UnitRelation> relations)
         {
             return new RelationTableForUnitRelations(this, roleType, relations);
         }

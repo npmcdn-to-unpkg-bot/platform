@@ -18,14 +18,14 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient.Commands
+namespace Allors.Databases.Object.SqlClient.Commands
 {
     using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
 
-    using Allors.R1.Adapters.Database.Sql;
+    using Allors.Adapters.Database.Sql;
 
     using Microsoft.SqlServer.Server;
 
@@ -33,7 +33,7 @@ namespace Allors.R1.Adapters.Database.SqlClient.Commands
 
     public abstract class Command
     {
-        public void AddInObject(SqlCommand command, Sql.SchemaParameter parameter, object value)
+        public void AddInObject(SqlCommand command, Adapters.Database.Sql.SchemaParameter parameter, object value)
         {
             var schemaParameter = (SchemaParameter)parameter;
 
@@ -45,7 +45,7 @@ namespace Allors.R1.Adapters.Database.SqlClient.Commands
             command.Parameters.Add(sqlParameter);
         }
 
-        public void SetInObject(SqlCommand command, Sql.SchemaParameter param, object value)
+        public void SetInObject(SqlCommand command, Adapters.Database.Sql.SchemaParameter param, object value)
         {
             command.Parameters[param.Name].Value = Normalize(value);
         }

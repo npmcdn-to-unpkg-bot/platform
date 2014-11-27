@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.Sql
+namespace Allors.Adapters.Database.Sql
 {
     public class SchemaTableParameter
     {

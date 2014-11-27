@@ -18,20 +18,20 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient
+namespace Allors.Databases.Object.SqlClient
 {
-    using Allors.R1.Adapters.Database.Sql.Commands;
-    using Allors.R1.Adapters.Database.SqlClient.Commands.Procedure;
-    using Allors.R1.Adapters.Database.SqlClient.Commands.Text;
+    using Allors.Adapters.Database.Sql.Commands;
+    using Allors.Databases.Object.SqlClient.Commands.Procedure;
+    using Allors.Databases.Object.SqlClient.Commands.Text;
 
-    using AddCompositeRoleFactory = Allors.R1.Adapters.Database.SqlClient.Commands.Procedure.AddCompositeRoleFactory;
+    using AddCompositeRoleFactory = Allors.Databases.Object.SqlClient.Commands.Procedure.AddCompositeRoleFactory;
 
-    public sealed class CommandFactories : Sql.CommandFactories
+    public sealed class CommandFactories : Adapters.Database.Sql.CommandFactories
     {
         private readonly Database database;
 
         // Session
-        private IGetObjectTypeFactory getObjectTypeFactory;
+        private IGetIObjectTypeFactory getIObjectTypeFactory;
         private IInstantiateObjectsFactory instantiateObjectsFactory;
         private IAddCompositeRoleFactory addCompositeRoleFactory;
         private IRemoveCompositeRoleFactory removeCompositeRoleFactory;
@@ -57,11 +57,11 @@ namespace Allors.R1.Adapters.Database.SqlClient
             this.database = database;
         }
 
-        public override IGetObjectTypeFactory GetObjectTypeFactory
+        public override IGetIObjectTypeFactory GetIObjectTypeFactory
         {
             get
             {
-                return this.getObjectTypeFactory ?? (this.getObjectTypeFactory = new GetObjectTypeFactory(this.database));
+                return this.getIObjectTypeFactory ?? (this.getIObjectTypeFactory = new GetIObjectTypeFactory(this.database));
             }
         }
 
@@ -217,7 +217,7 @@ namespace Allors.R1.Adapters.Database.SqlClient
             }
         }
 
-        protected override Sql.Database Database
+        protected override Adapters.Database.Sql.Database Database
         {
             get { return this.SqlClientDatabase; }
         }

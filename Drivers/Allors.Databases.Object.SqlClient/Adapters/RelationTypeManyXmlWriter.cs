@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="RelationTypeManyXmlWriter.cs" company="Allors bvba">
+// <copyright file="IRelationTypeManyXmlWriter.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -17,7 +17,7 @@
 // For more information visit http://www.allors.com/legal
 // </copyright>
 //-------------------------------------------------------------------------------------------------
-namespace Allors.R1.Adapters
+namespace Allors.Adapters
 {
     using System;
     using System.Text;
@@ -25,15 +25,15 @@ namespace Allors.R1.Adapters
     using Meta;
 
     /// <summary>
-    /// Writes all relations from a <see cref="RelationType"/> with a <see cref="RoleType"/> with multiplicity of many 
+    /// Writes all relations from a <see cref="IRelationType"/> with a <see cref="IRoleType"/> with multiplicity of many 
     /// to the <see cref="XmlWriter"/> during a <see cref="IDatabase#Save"/>.
     /// </summary>
-    public class RelationTypeManyXmlWriter : IDisposable
+    public class IRelationTypeManyXmlWriter : IDisposable
     {
         /// <summary>
         /// The <see cref="relationType"/>.
         /// </summary>
-        private readonly RelationType relationType;
+        private readonly IRelationType relationType;
 
         /// <summary>
         /// The <see cref="xmlWriter"/>.
@@ -46,7 +46,7 @@ namespace Allors.R1.Adapters
         private bool isInUse;
 
         /// <summary>
-        /// Indicates that this <see cref="RelationTypeOneXmlWriter"/> has been closed.
+        /// Indicates that this <see cref="IRelationTypeOneXmlWriter"/> has been closed.
         /// </summary>
         private bool isClosed;
 
@@ -61,11 +61,11 @@ namespace Allors.R1.Adapters
         private StringBuilder rolesStringBuilder;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="RelationTypeManyXmlWriter"/> class.
+        /// Initializes a new instance of the <see cref="IRelationTypeManyXmlWriter"/> class.
         /// </summary>
         /// <param name="relationType">The relation type.</param>
         /// <param name="xmlWriter">The XML writer.</param>
-        public RelationTypeManyXmlWriter(RelationType relationType, XmlWriter xmlWriter)
+        public IRelationTypeManyXmlWriter(IRelationType relationType, XmlWriter xmlWriter)
         {
             this.relationType = relationType;
             this.xmlWriter = xmlWriter;
@@ -75,7 +75,7 @@ namespace Allors.R1.Adapters
         }
 
         /// <summary>
-        /// Closes this "<see cref="RelationTypeManyXmlWriter"/>.
+        /// Closes this "<see cref="IRelationTypeManyXmlWriter"/>.
         /// </summary>
         public void Close()
         {
@@ -119,7 +119,7 @@ namespace Allors.R1.Adapters
                     this.xmlWriter.WriteStartElement(Serialization.RelationTypeComposite);
                 }
 
-                this.xmlWriter.WriteAttributeString(Serialization.Id, this.relationType.IdAsString);
+                this.xmlWriter.WriteAttributeString(Serialization.Id, this.relationType.Id.ToString());
             }
 
             if (this.previousAssociationId != associationId)
@@ -138,7 +138,7 @@ namespace Allors.R1.Adapters
         }
 
         /// <summary>
-        /// Writes the roles if the <see cref="RelationTypeManyXmlWriter#rolesStringBuilder"/> contains accumulated roles.
+        /// Writes the roles if the <see cref="IRelationTypeManyXmlWriter#rolesStringBuilder"/> contains accumulated roles.
         /// </summary>
         private void WriteRolesIfPresent()
         {

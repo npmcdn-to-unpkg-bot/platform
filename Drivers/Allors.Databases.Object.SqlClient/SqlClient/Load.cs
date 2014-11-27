@@ -14,12 +14,12 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient
+namespace Allors.Databases.Object.SqlClient
 {
     using System.Text;
     using System.Xml;
 
-    public class Load : Sql.Load
+    public class Load : Adapters.Database.Sql.Load
     {
         private readonly Database database;
 
@@ -29,7 +29,7 @@ namespace Allors.R1.Adapters.Database.SqlClient
             this.database = database;
         }
 
-        protected override void LoadObjectsPostProcess(Sql.ManagementSession session)
+        protected override void LoadObjectsPostProcess(Adapters.Database.Sql.ManagementSession session)
         {
             var sql = new StringBuilder();
 

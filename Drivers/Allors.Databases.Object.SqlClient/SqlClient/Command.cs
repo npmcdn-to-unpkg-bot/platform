@@ -18,14 +18,14 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient
+namespace Allors.Databases.Object.SqlClient
 {
     using System;
     using System.Data;
     using System.Data.Common;
     using System.Data.SqlClient;
 
-    internal class Command : Sql.Command
+    internal class Command : Adapters.Database.Sql.Command
     {
         private readonly SqlCommand command;
 
@@ -52,7 +52,7 @@ namespace Allors.R1.Adapters.Database.SqlClient
             this.SetParameterValue(parameterName, value);
         }
 
-        public override void AddInParameter(Sql.SchemaParameter parameter, object value)
+        public override void AddInParameter(Adapters.Database.Sql.SchemaParameter parameter, object value)
         {
             var sqlParameter = this.command.Parameters.Contains(parameter.Name) ? this.command.Parameters[parameter.Name] : null;
             if (sqlParameter == null)
@@ -76,7 +76,7 @@ namespace Allors.R1.Adapters.Database.SqlClient
             this.command.Parameters.Add(parameter);
         }
 
-        public override void AddOutParameter(Sql.SchemaParameter parameter)
+        public override void AddOutParameter(Adapters.Database.Sql.SchemaParameter parameter)
         {
             var sqlParameter = this.command.Parameters.Contains(parameter.Name) ? this.command.Parameters[parameter.Name] : null;
             if (sqlParameter == null)
@@ -91,7 +91,7 @@ namespace Allors.R1.Adapters.Database.SqlClient
             this.command.Parameters.Add(sqlParameter);
         }
 
-        public override void SetParameterValue(Sql.SchemaParameter parameter, object value)
+        public override void SetParameterValue(Adapters.Database.Sql.SchemaParameter parameter, object value)
         {
             this.SetParameterValue(parameter.Name, value);
         }

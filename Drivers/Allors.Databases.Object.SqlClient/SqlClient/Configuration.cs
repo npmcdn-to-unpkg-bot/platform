@@ -14,11 +14,11 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient
+namespace Allors.Databases.Object.SqlClient
 {
     using System.Data;
 
-    public abstract class Configuration : Sql.Configuration
+    public abstract class Configuration : Adapters.Database.Sql.Configuration
     {
         protected Configuration()
         {

@@ -19,16 +19,16 @@
 // <summary>Defines the Schema type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient
+namespace Allors.Databases.Object.SqlClient
 {
     using System;
     using System.Collections.Generic;
     using System.Data;
 
-    using Allors.R1.Adapters.Database.Sql;
-    using Allors.R1.Meta;
+    using Allors.Adapters.Database.Sql;
+    using Allors.Meta;
 
-    public abstract class Schema : Sql.Schema
+    public abstract class Schema : Adapters.Database.Sql.Schema
     {
         public readonly string ObjectTable = AllorsPrefix + "_O";
         public readonly string ObjectTableObject = "_o";
@@ -46,20 +46,11 @@ namespace Allors.R1.Adapters.Database.SqlClient
         public readonly string IntegerRelationTable = AllorsPrefix + "_IntegerR";
         public readonly SchemaTableParameter IntegerRelationTableParam;
         
-        public readonly string LongRelationTable = AllorsPrefix + "_LongR";
-        public readonly SchemaTableParameter LongRelationTableParam;
-       
-        public readonly string DoubleRelationTable = AllorsPrefix + "_DoubleR";
-        public readonly SchemaTableParameter DoubleRelationTableParam;
+        public readonly string FloatRelationTable = AllorsPrefix + "_FloatR";
+        public readonly SchemaTableParameter FloatRelationTableParam;
         
         public readonly string BooleanRelationTable = AllorsPrefix + "_BooleanR";
         public readonly SchemaTableParameter BooleanRelationTableParam;
-        
-        public readonly string DateRelationTable = AllorsPrefix + "_DateR";
-        public readonly SchemaTableParameter DateRelationTableParam;
-        
-        public readonly string DateTimeRelationTable = AllorsPrefix + "_DateTimeR";
-        public readonly SchemaTableParameter DateTimeRelationTableParam;
         
         public readonly string UniqueRelationTable = AllorsPrefix + "_UniqueR";
         public readonly SchemaTableParameter UniqueRelationTableParam;
@@ -83,18 +74,15 @@ namespace Allors.R1.Adapters.Database.SqlClient
             this.CompositeRelationTableParam = new SchemaTableParameter(this, AllorsPrefix + "p_r", this.CompositeRelationTable);
             this.StringRelationTableParam = new SchemaTableParameter(this, AllorsPrefix + "p_r", this.StringRelationTable);
             this.IntegerRelationTableParam = new SchemaTableParameter(this, AllorsPrefix + "p_r", this.IntegerRelationTable);
-            this.LongRelationTableParam = new SchemaTableParameter(this, AllorsPrefix + "p_r", this.LongRelationTable);
-            this.DoubleRelationTableParam = new SchemaTableParameter(this, AllorsPrefix + "p_r", this.DoubleRelationTable);
+            this.FloatRelationTableParam = new SchemaTableParameter(this, AllorsPrefix + "p_r", this.FloatRelationTable);
             this.BooleanRelationTableParam = new SchemaTableParameter(this, AllorsPrefix + "p_r", this.BooleanRelationTable);
-            this.DateRelationTableParam = new SchemaTableParameter(this, AllorsPrefix + "p_r", this.DateRelationTable);
-            this.DateTimeRelationTableParam = new SchemaTableParameter(this, AllorsPrefix + "p_r", this.DateTimeRelationTable);
             this.UniqueRelationTableParam = new SchemaTableParameter(this, AllorsPrefix + "p_r", this.UniqueRelationTable);
             this.BinaryRelationTableParam = new SchemaTableParameter(this, AllorsPrefix + "p_r", this.BinaryRelationTable);
 
-            foreach (var relationType in database.Domain.RelationTypes)
+            foreach (var relationType in database.MetaPopulation.RelationTypes)
             {
                 var roleType = relationType.RoleType;
-                if (roleType.ObjectType.IsDecimal)
+                if (roleType.ObjectType.IsUnit && ((IUnit)roleType.ObjectType).IsDecimal)
                 {
                     var precision = roleType.Precision;
                     var scale = roleType.Scale;
@@ -103,28 +91,28 @@ namespace Allors.R1.Adapters.Database.SqlClient
 
                     // table
                     Dictionary<int, string> decimalRelationTableByScale;
-                    if (!this.DecimalRelationTableByScaleByPrecision.TryGetValue(precision, out decimalRelationTableByScale))
+                    if (!this.DecimalRelationTableByScaleByPrecision.TryGetValue(precision.Value, out decimalRelationTableByScale))
                     {
                         decimalRelationTableByScale = new Dictionary<int, string>();
-                        this.DecimalRelationTableByScaleByPrecision[precision] = decimalRelationTableByScale;
+                        this.DecimalRelationTableByScaleByPrecision[precision.Value] = decimalRelationTableByScale;
                     }
 
-                    if (!decimalRelationTableByScale.ContainsKey(scale))
+                    if (!decimalRelationTableByScale.ContainsKey(scale.Value))
                     {
-                        decimalRelationTableByScale[scale] = tableName;
+                        decimalRelationTableByScale[scale.Value] = tableName;
                     }
 
                     // param
                     Dictionary<int, SchemaTableParameter> schemaTableParameterByScale;
-                    if (!this.DecimalRelationTableParameterByScaleByPrecision.TryGetValue(precision, out schemaTableParameterByScale))
+                    if (!this.DecimalRelationTableParameterByScaleByPrecision.TryGetValue(precision.Value, out schemaTableParameterByScale))
                     {
                         schemaTableParameterByScale = new Dictionary<int, SchemaTableParameter>();
-                        this.DecimalRelationTableParameterByScaleByPrecision[precision] = schemaTableParameterByScale;
+                        this.DecimalRelationTableParameterByScaleByPrecision[precision.Value] = schemaTableParameterByScale;
                     }
 
-                    if (!schemaTableParameterByScale.ContainsKey(scale))
+                    if (!schemaTableParameterByScale.ContainsKey(scale.Value))
                     {
-                        schemaTableParameterByScale[scale] = new SchemaTableParameter(this, AllorsPrefix + "p_r", tableName); 
+                        schemaTableParameterByScale[scale.Value] = new SchemaTableParameter(this, AllorsPrefix + "p_r", tableName); 
                     }
                 }
             }
@@ -239,11 +227,10 @@ FROM information_schema.columns"))
                                                 }
                                                 else
                                                 {
-                                                    var unitTypeTag =
-                                                        (UnitTypeTags)column.RelationType.RoleType.ObjectType.UnitTag;
+                                                    var unitTypeTag = ((IUnit)column.RelationType.RoleType.ObjectType).UnitTag;
                                                     switch (unitTypeTag)
                                                     {
-                                                        case UnitTypeTags.AllorsString:
+                                                        case UnitTags.AllorsString:
                                                             if (
                                                                 !dataType.Equals(
                                                                     SqlDbType.NVarChar.ToString().ToLower()))
@@ -263,7 +250,7 @@ FROM information_schema.columns"))
 
                                                             break;
 
-                                                        case UnitTypeTags.AllorsInteger:
+                                                        case UnitTags.AllorsInteger:
                                                             if (!dataType.Equals(SqlDbType.Int.ToString().ToLower()))
                                                             {
                                                                 AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Incompatible);
@@ -271,15 +258,15 @@ FROM information_schema.columns"))
 
                                                             break;
 
-                                                        case UnitTypeTags.AllorsLong:
-                                                            if (!dataType.Equals(SqlDbType.BigInt.ToString().ToLower()))
+                                                        case UnitTags.AllorsFloat:
+                                                            if (!dataType.Equals(SqlDbType.Float.ToString().ToLower()))
                                                             {
                                                                 AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Incompatible);
                                                             }
 
                                                             break;
 
-                                                        case UnitTypeTags.AllorsDecimal:
+                                                        case UnitTags.AllorsDecimal:
                                                             if (!dataType.Equals(SqlDbType.Decimal.ToString().ToLower()))
                                                             {
                                                                 AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Incompatible);
@@ -303,15 +290,7 @@ FROM information_schema.columns"))
 
                                                             break;
 
-                                                        case UnitTypeTags.AllorsDouble:
-                                                            if (!dataType.Equals(SqlDbType.Float.ToString().ToLower()))
-                                                            {
-                                                                AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Incompatible);
-                                                            }
-
-                                                            break;
-
-                                                        case UnitTypeTags.AllorsBoolean:
+                                                        case UnitTags.AllorsBoolean:
                                                             if (!dataType.Equals(SqlDbType.Bit.ToString().ToLower()))
                                                             {
                                                                 AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Incompatible);
@@ -319,17 +298,7 @@ FROM information_schema.columns"))
 
                                                             break;
 
-                                                        case UnitTypeTags.AllorsDateTime:
-                                                            if (
-                                                                !dataType.Equals(
-                                                                    SqlDbType.DateTime2.ToString().ToLower()))
-                                                            {
-                                                                AddError(this.schemaValidationErrors, table, column, SchemaValidationErrorKind.Incompatible);
-                                                            }
-
-                                                            break;
-
-                                                        case UnitTypeTags.AllorsUnique:
+                                                        case UnitTags.AllorsUnique:
                                                             if (
                                                                 !dataType.Equals(
                                                                     SqlDbType.UniqueIdentifier.ToString().ToLower()))
@@ -339,7 +308,7 @@ FROM information_schema.columns"))
 
                                                             break;
 
-                                                        case UnitTypeTags.AllorsBinary:
+                                                        case UnitTags.AllorsBinary:
                                                             if (
                                                                 !dataType.Equals(
                                                                     SqlDbType.VarBinary.ToString().ToLower()))
@@ -452,7 +421,7 @@ FROM information_schema.columns"))
             get;
         }
 
-        public override Sql.SchemaParameter CreateParameter(string name, DbType dbType)
+        public override Adapters.Database.Sql.SchemaParameter CreateParameter(string name, DbType dbType)
         {
             return new SchemaParameter(this, name, dbType);
         }
@@ -501,20 +470,20 @@ AS
 
             this.procedureByName.Add(procedure.Name, procedure);
 
-            foreach (var concreteComposite in this.Database.Domain.ConcreteCompositeObjectTypes)
+            foreach (var @class in this.Database.MetaPopulation.Classes)
             {
-                var sortedUnitRoleTypes = this.Database.GetSortedUnitRolesByObjectType(concreteComposite);
+                var sortedUnitIRoleTypes = this.Database.GetSortedUnitRolesByIObjectType(@class);
 
-                if (sortedUnitRoleTypes.Length > 0)
+                if (sortedUnitIRoleTypes.Length > 0)
                 {
                     // Get Unit Roles
-                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GU_" + concreteComposite.Name };
+                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GU_" + @class.Name };
                     procedure.Definition = @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.ObjectId.Param + " AS " + this.database.GetSqlType(this.ObjectId) + @"
 AS 
     SELECT ";
                     var first = true;
-                    foreach (var role in sortedUnitRoleTypes)
+                    foreach (var role in sortedUnitIRoleTypes)
                     {
                         if (first)
                         {
@@ -525,11 +494,11 @@ AS
                             procedure.Definition += ", ";
                         }
 
-                        procedure.Definition += this.ColumnsByRelationType[role.RelationTypeWhereRoleType];
+                        procedure.Definition += this.ColumnsByRelationType[role.RelationType];
                     }
 
                     procedure.Definition += @"
-    FROM " + this.Table(concreteComposite.ExclusiveRootClass) + @"
+    FROM " + this.Table(@class.ExclusiveLeafClass) + @"
     WHERE " + this.ObjectId + "=" + this.ObjectId.Param;
 
                     this.procedureByName.Add(procedure.Name, procedure);
@@ -598,7 +567,7 @@ WHILE @COUNTER < " + this.CountParam + @"
     SET @COUNTER = @COUNTER+1;
     END
 
-INSERT INTO " + this.Table(objectType.ExclusiveRootClass) + " (" + this.ObjectId + "," + this.TypeId + @")
+INSERT INTO " + this.Table(((IComposite)objectType).ExclusiveLeafClass) + " (" + this.ObjectId + "," + this.TypeId + @")
 SELECT ID," + this.TypeId.Param + @" FROM @IDS;
 
 SELECT id FROM @IDS;
@@ -616,12 +585,12 @@ END";
 
                         if (relationType.RoleType.ObjectType.IsUnit)
                         {
-                            var unitTypeTag = (UnitTypeTags)relationType.RoleType.ObjectType.UnitTag;
+                            var unitTypeTag = ((IUnit)relationType.RoleType.ObjectType).UnitTag;
                             switch (unitTypeTag)
                             {
-                                case UnitTypeTags.AllorsString:
+                                case UnitTags.AllorsString:
                                     // Set String Role
-                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.RootName };
+                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularFullName };
                                     procedure.Definition = "CREATE PROCEDURE " + procedure.Name + @"
     " + this.StringRelationTableParam + @" " + this.StringRelationTable + @" READONLY
 AS 
@@ -635,9 +604,9 @@ AS
                                     this.procedureByName.Add(procedure.Name, procedure);
                                     break;
 
-                                case UnitTypeTags.AllorsInteger:
+                                case UnitTags.AllorsInteger:
                                     // Set Integer Role
-                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.RootName };
+                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularFullName };
                                     procedure.Definition = "CREATE PROCEDURE " + procedure.Name + @"
     " + this.IntegerRelationTableParam + @" " + this.IntegerRelationTable + @" READONLY
 AS 
@@ -651,11 +620,11 @@ AS
                                     this.procedureByName.Add(procedure.Name, procedure);
                                     break;
 
-                                case UnitTypeTags.AllorsLong:
-                                    // Set Long Role
-                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.RootName };
+                                case UnitTags.AllorsFloat:
+                                    // Set Double Role
+                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularFullName };
                                     procedure.Definition = "CREATE PROCEDURE " + procedure.Name + @"
-    " + this.LongRelationTableParam + @" " + this.LongRelationTable + @" READONLY
+    " + this.FloatRelationTableParam + @" " + this.FloatRelationTable + @" READONLY
 AS 
     UPDATE " + table + @"
     SET " + this.Column(roleType) + " = r." + this.RelationTableRole + @"
@@ -667,12 +636,12 @@ AS
                                     this.procedureByName.Add(procedure.Name, procedure);
                                     break;
 
-                                case UnitTypeTags.AllorsDecimal:
+                                case UnitTags.AllorsDecimal:
                                     // Set Decimal Role
-                                    var decimalRelationTable = this.DecimalRelationTableByScaleByPrecision[roleType.Precision][roleType.Scale];
-                                    var decimalRelationParameter = this.DecimalRelationTableParameterByScaleByPrecision[roleType.Precision][roleType.Scale];
+                                    var decimalRelationTable = this.DecimalRelationTableByScaleByPrecision[roleType.Precision.Value][roleType.Scale.Value];
+                                    var decimalRelationParameter = this.DecimalRelationTableParameterByScaleByPrecision[roleType.Precision.Value][roleType.Scale.Value];
 
-                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.RootName };
+                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularFullName };
                                     procedure.Definition = "CREATE PROCEDURE " + procedure.Name + @"
 " + decimalRelationParameter + @" " + decimalRelationTable + @" READONLY
 AS 
@@ -686,25 +655,9 @@ ON " + this.ObjectId + " = r." + this.RelationTableAssociation + @"
 
                                     break;
 
-                                case UnitTypeTags.AllorsDouble:
-                                    // Set Double Role
-                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.RootName };
-                                    procedure.Definition = "CREATE PROCEDURE " + procedure.Name + @"
-    " + this.DoubleRelationTableParam + @" " + this.DoubleRelationTable + @" READONLY
-AS 
-    UPDATE " + table + @"
-    SET " + this.Column(roleType) + " = r." + this.RelationTableRole + @"
-    FROM " + table + @"
-    INNER JOIN " + this.CompositeRelationTableParam + @" AS r
-    ON " + this.ObjectId + " = r." + this.RelationTableAssociation + @"
-";
-                                    
-                                    this.procedureByName.Add(procedure.Name, procedure);
-                                    break;
-
-                                case UnitTypeTags.AllorsBoolean:
+                                case UnitTags.AllorsBoolean:
                                     // Set Boolean Role
-                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.RootName };
+                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularFullName };
                                     procedure.Definition = "CREATE PROCEDURE " + procedure.Name + @"
     " + this.BooleanRelationTableParam + @" " + this.BooleanRelationTable + @" READONLY
 AS 
@@ -718,25 +671,9 @@ AS
                                     this.procedureByName.Add(procedure.Name, procedure);
                                     break;
 
-                                case UnitTypeTags.AllorsDateTime:
-                                    // Set DateTime Role
-                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.RootName };
-                                    procedure.Definition = "CREATE PROCEDURE " + procedure.Name + @"
-    " + this.DateTimeRelationTableParam + @" " + this.DateTimeRelationTable + @" READONLY
-AS 
-    UPDATE " + table + @"
-    SET " + this.Column(roleType) + " = r." + this.RelationTableRole + @"
-    FROM " + table + @"
-    INNER JOIN " + this.CompositeRelationTableParam + @" AS r
-    ON " + this.ObjectId + " = r." + this.RelationTableAssociation + @"
-";
-
-                                    this.procedureByName.Add(procedure.Name, procedure);
-                                    break;
-
-                                case UnitTypeTags.AllorsUnique:
+                                case UnitTags.AllorsUnique:
                                     // Set Unique Role
-                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.RootName };
+                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularFullName };
                                     procedure.Definition = "CREATE PROCEDURE " + procedure.Name + @"
     " + this.UniqueRelationTableParam + @" " + this.UniqueRelationTable + @" READONLY
 AS 
@@ -749,9 +686,9 @@ AS
                                     this.procedureByName.Add(procedure.Name, procedure);
                                     break;
 
-                                case UnitTypeTags.AllorsBinary:
+                                case UnitTags.AllorsBinary:
                                     // Set Binary Role
-                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.RootName };
+                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularFullName };
                                     procedure.Definition = "CREATE PROCEDURE " + procedure.Name + @"
     " + this.BinaryRelationTableParam + @" " + this.BinaryRelationTable + @" READONLY
 AS 
@@ -774,7 +711,7 @@ AS
                             if (roleType.IsOne)
                             {
                                 // Get Composite Role (1-1 and *-1) [object table]
-                                procedure = new SchemaProcedure { Name = AllorsPrefix + "GR_" + objectType.Name + "_" + roleType.RootName };
+                                procedure = new SchemaProcedure { Name = AllorsPrefix + "GR_" + objectType.Name + "_" + roleType.SingularFullName };
                                 procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.AssociationId.Param + @" " + this.database.GetSqlType(this.AssociationId) + @"
@@ -788,7 +725,7 @@ AS
                                 if (associationType.IsOne)
                                 {
                                     // Get Composite Association (1-1) [object table]
-                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GA_" + objectType.Name + "_" + associationType.RootName };
+                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GA_" + objectType.Name + "_" + associationType.SingularFullName };
                                     procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.RoleId.Param + @" " + this.database.GetSqlType(this.RoleId) + @"
@@ -802,7 +739,7 @@ AS
                                 else
                                 {
                                     // Get Composite Association (*-1) [object table]
-                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GA_" + objectType.Name + "_" + associationType.RootName };
+                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GA_" + objectType.Name + "_" + associationType.SingularFullName };
                                     procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.RoleId.Param + @" " + this.database.GetSqlType(this.RoleId) + @"
@@ -815,7 +752,7 @@ AS
                                 }
 
                                 // Set Composite Role (1-1 and *-1) [object table]
-                                procedure = new SchemaProcedure { Name = AllorsPrefix + "S_" + objectType.Name + "_" + roleType.RootName };
+                                procedure = new SchemaProcedure { Name = AllorsPrefix + "S_" + objectType.Name + "_" + roleType.SingularFullName };
                                 procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.CompositeRelationTableParam + @" " + this.CompositeRelationTable + @" READONLY
@@ -830,7 +767,7 @@ AS
                                 this.procedureByName.Add(procedure.Name, procedure);
 
                                 // Clear Composite Role (1-1 and *-1) [object table]
-                                procedure = new SchemaProcedure { Name = AllorsPrefix + "C_" + objectType.Name + "_" + roleType.RootName };
+                                procedure = new SchemaProcedure { Name = AllorsPrefix + "C_" + objectType.Name + "_" + roleType.SingularFullName };
                                 procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.ObjectTableParam + @" " + this.ObjectTable + @" READONLY
@@ -846,7 +783,7 @@ AS
                             else
                             {
                                 // Get Composites Role (1-*) [object table]
-                                procedure = new SchemaProcedure { Name = AllorsPrefix + "GR_" + objectType.Name + "_" + associationType.RootName };
+                                procedure = new SchemaProcedure { Name = AllorsPrefix + "GR_" + objectType.Name + "_" + associationType.SingularFullName };
                                 procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.AssociationId.Param + @" " + this.database.GetSqlType(this.AssociationId) + @"
@@ -860,7 +797,7 @@ AS
                                 if (associationType.IsOne)
                                 {
                                     // Get Composite Association (1-*) [object table]
-                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GA_" + objectType.Name + "_" + associationType.RootName };
+                                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GA_" + objectType.Name + "_" + associationType.SingularFullName };
                                     procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.RoleId.Param + @" " + this.database.GetSqlType(this.RoleId) + @"
@@ -873,7 +810,7 @@ AS
                                 }
 
                                 // Add Composite Role (1-*) [object table]
-                                procedure = new SchemaProcedure { Name = AllorsPrefix + "A_" + objectType.Name + "_" + associationType.RootName };
+                                procedure = new SchemaProcedure { Name = AllorsPrefix + "A_" + objectType.Name + "_" + associationType.SingularFullName };
                                 procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.CompositeRelationTableParam + @" " + this.CompositeRelationTable + @" READONLY
@@ -887,7 +824,7 @@ AS
                                 this.procedureByName.Add(procedure.Name, procedure);
 
                                 // Remove Composite Role (1-*) [object table]
-                                procedure = new SchemaProcedure { Name = AllorsPrefix + "R_" + objectType.Name + "_" + associationType.RootName };
+                                procedure = new SchemaProcedure { Name = AllorsPrefix + "R_" + objectType.Name + "_" + associationType.SingularFullName };
                                 procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.CompositeRelationTableParam + @" " + this.CompositeRelationTable + @" READONLY
@@ -902,7 +839,7 @@ AS
                                 this.procedureByName.Add(procedure.Name, procedure);
 
                                 // Clear Composites Role (1-*) [object table]
-                                procedure = new SchemaProcedure { Name = AllorsPrefix + "C_" + objectType.Name + "_" + associationType.RootName };
+                                procedure = new SchemaProcedure { Name = AllorsPrefix + "C_" + objectType.Name + "_" + associationType.SingularFullName };
                                 procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.ObjectTableParam + @" " + this.ObjectTable + @" READONLY
@@ -930,7 +867,7 @@ AS
                 if (roleType.IsMany)
                 {
                     // Get Composites Role (1-* and *-*) [relation table]
-                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GR_" + roleType.FullSingularName };
+                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GR_" + roleType.SingularFullName };
                     procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.AssociationId.Param + @" " + this.database.GetSqlType(this.AssociationId) + @",
@@ -943,7 +880,7 @@ AS
                     this.procedureByName.Add(procedure.Name, procedure);
 
                     // Add Composite Role (1-* and *-*) [relation table]
-                    procedure = new SchemaProcedure { Name = AllorsPrefix + "A_" + roleType.FullSingularName };
+                    procedure = new SchemaProcedure { Name = AllorsPrefix + "A_" + roleType.SingularFullName };
                     procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.CompositeRelationTableParam + @" " + this.CompositeRelationTable + @" READONLY
@@ -955,7 +892,7 @@ AS
                     this.procedureByName.Add(procedure.Name, procedure);
 
                     // Remove Composite Role (1-* and *-*) [relation table]
-                    procedure = new SchemaProcedure { Name = AllorsPrefix + "R_" + roleType.FullSingularName };
+                    procedure = new SchemaProcedure { Name = AllorsPrefix + "R_" + roleType.SingularFullName };
                     procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.CompositeRelationTableParam + @" " + this.CompositeRelationTable + @" READONLY
@@ -971,7 +908,7 @@ AS
                 else
                 {
                     // Get Composite Role (1-1 and *-1) [relation table]
-                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GR_" + roleType.FullSingularName };
+                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GR_" + roleType.SingularFullName };
                     procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.AssociationId.Param + @" " + this.database.GetSqlType(this.AssociationId) + @"
@@ -983,7 +920,7 @@ AS
                     this.procedureByName.Add(procedure.Name, procedure);
 
                     // Set Composite Role (1-1 and *-1) [relation table]
-                    procedure = new SchemaProcedure { Name = AllorsPrefix + "S_" + roleType.FullSingularName };
+                    procedure = new SchemaProcedure { Name = AllorsPrefix + "S_" + roleType.SingularFullName };
                     procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.CompositeRelationTableParam + @" " + this.CompositeRelationTable + @" READONLY
@@ -1005,7 +942,7 @@ AS
                 if (associationType.IsOne)
                 {
                     // Get Composite Association (1-1) [relation table]
-                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GA_" + roleType.FullSingularName };
+                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GA_" + roleType.SingularFullName };
                     procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.RoleId.Param + @" " + this.database.GetSqlType(this.RoleId) + @"
@@ -1019,7 +956,7 @@ AS
                 else
                 {
                     // Get Composite Association (*-1) [relation table]
-                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GA_" + roleType.FullSingularName };
+                    procedure = new SchemaProcedure { Name = AllorsPrefix + "GA_" + roleType.SingularFullName };
                     procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.RoleId.Param + @" " + this.database.GetSqlType(this.RoleId) + @"
@@ -1032,7 +969,7 @@ AS
                 }
 
                 // Clear Composite Role (1-1 and *-1) [relation table]
-                procedure = new SchemaProcedure { Name = AllorsPrefix + "C_" + roleType.FullSingularName };
+                procedure = new SchemaProcedure { Name = AllorsPrefix + "C_" + roleType.SingularFullName };
                 procedure.Definition =
 @"CREATE PROCEDURE " + procedure.Name + @"
     " + this.ObjectTableParam + @" " + this.ObjectTable + @" READONLY

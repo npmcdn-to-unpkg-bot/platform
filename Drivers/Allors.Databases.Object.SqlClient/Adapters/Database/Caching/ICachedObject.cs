@@ -18,14 +18,14 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.Caching
+namespace Allors.Adapters.Database.Caching
 {
-    using Allors.R1.Meta;
+    using Allors.Meta;
 
     public interface ICachedObject
     {
-        bool TryGetValue(RoleType roleType, out object value);
+        bool TryGetValue(IRoleType roleType, out object value);
 
-        void SetValue(RoleType roleType, object value);
+        void SetValue(IRoleType roleType, object value);
     }
 }

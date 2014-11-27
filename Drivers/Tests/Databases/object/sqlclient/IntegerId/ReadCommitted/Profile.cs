@@ -62,12 +62,12 @@ namespace Allors.Databases.Object.SqlClient.ReadCommitted
 
         public IDatabase CreateDatabase(IMetaPopulation metaPopulation, bool init)
         {
-            var configuration = new SqlClient.Configuration
+            var configuration = new IntegerId.Configuration
                                     {
                                         ObjectFactory = this.CreateObjectFactory(metaPopulation),
                                         ConnectionString = this.ConnectionString
                                     };
-            var database = new SqlClient.Database(configuration);
+            var database = new IntegerId.Database(configuration);
 
             if (init)
             {
@@ -84,13 +84,13 @@ namespace Allors.Databases.Object.SqlClient.ReadCommitted
 
         public override IDatabase CreateDatabase()
         {
-            var configuration = new Configuration
+            var configuration = new IntegerId.Configuration
             {
                 ObjectFactory = this.ObjectFactory,
                 ConnectionString = this.ConnectionString
             };
 
-            var database = new Database(configuration);
+            var database = new IntegerId.Database(configuration);
 
             return database;
         }

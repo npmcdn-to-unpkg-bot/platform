@@ -18,14 +18,15 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient.Commands.Procedure
+namespace Allors.Databases.Object.SqlClient.Commands.Procedure
 {
     using System.Collections.Generic;
     using System.Data;
 
-    using Allors.R1.Adapters.Database.Sql;
-    using Allors.R1.Adapters.Database.Sql.Commands;
-    using Allors.R1.Meta;
+    using Allors.Adapters;
+    using Allors.Adapters.Database.Sql;
+    using Allors.Adapters.Database.Sql.Commands;
+    using Allors.Meta;
 
     internal class LoadCompositeRelationsFactory : ILoadCompositeRelationsFactory
     {
@@ -36,31 +37,31 @@ namespace Allors.R1.Adapters.Database.SqlClient.Commands.Procedure
             this.ManagementSession = session;
         }
 
-        public ILoadCompositeRelations Create(RoleType roleType)
+        public ILoadCompositeRelations Create(IRoleType roleType)
         {
             var associationType = roleType.AssociationType;
 
             string sql;
             if (roleType.IsMany)
             {
-                if (associationType.IsMany || !roleType.RelationType.ExistExclusiveRootClasses)
+                if (associationType.IsMany || !roleType.RelationType.ExistExclusiveLeafClasses)
                 {
-                    sql = Sql.Schema.AllorsPrefix + "A_" + roleType.FullSingularName;
+                    sql = Schema.AllorsPrefix + "A_" + roleType.SingularFullName;
                 }
                 else
                 {
-                    sql = Sql.Schema.AllorsPrefix + "A_" + roleType.ObjectType.ExclusiveRootClass.Name + "_" + associationType.RootName;
+                    sql = Schema.AllorsPrefix + "A_" + ((IComposite)roleType.ObjectType).ExclusiveLeafClass.Name + "_" + associationType.SingularFullName;
                 }
             }
             else
             {
-                if (!roleType.RelationType.ExistExclusiveRootClasses)
+                if (!roleType.RelationType.ExistExclusiveLeafClasses)
                 {
-                    sql = Sql.Schema.AllorsPrefix + "S_" + roleType.FullSingularName;
+                    sql = Schema.AllorsPrefix + "S_" + roleType.SingularFullName;
                 }
                 else
                 {
-                    sql = Schema.AllorsPrefix + "S_" + associationType.ObjectType.ExclusiveRootClass.Name + "_" + roleType.RootName;
+                    sql = Schema.AllorsPrefix + "S_" + associationType.ObjectType.ExclusiveLeafClass.Name + "_" + roleType.SingularFullName;
                 }
             }
 

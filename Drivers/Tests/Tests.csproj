@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Databases\object\SchemaTest.cs" />
     <Compile Include="Databases\object\sqlclient\ExtentTest.cs" />
     <Compile Include="Databases\object\sqlclient\IntegerId\ReadCommitted\CacheTest.cs" />
     <Compile Include="Databases\object\sqlclient\IntegerId\ReadCommitted\ChangesTest.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Databases\object\sqlclient\SchemaTest.cs" />
     <Compile Include="Databases\object\sqlclient\SqlClientTest.cs" />
     <Compile Include="Databases\object\sqlclient\UnitTest.cs" />
+    <Compile Include="Databases\relation\SchemaTest.cs" />
     <Compile Include="Databases\relation\sqlclient\ExtentTest.cs">
       <SubType>Code</SubType>
     </Compile>

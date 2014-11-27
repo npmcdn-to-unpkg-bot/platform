@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters
+namespace Allors.Adapters
 {
     using System.Collections;
     using System.Collections.Generic;

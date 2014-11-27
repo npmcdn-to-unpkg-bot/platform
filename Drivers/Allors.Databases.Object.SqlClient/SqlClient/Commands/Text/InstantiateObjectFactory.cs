@@ -18,16 +18,16 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient.Commands.Text
+namespace Allors.Databases.Object.SqlClient.Commands.Text
 {
     using System.Data.SqlClient;
 
-    using Allors.R1.Adapters.Database.Sql;
-    using Allors.R1.Adapters.Database.Sql.Commands;
-    using Allors.R1.Meta;
+    using Allors.Adapters.Database.Sql;
+    using Allors.Adapters.Database.Sql.Commands;
+    using Allors.Meta;
 
     using Database = Database;
-    using DatabaseSession = Allors.R1.Adapters.Database.SqlClient.DatabaseSession;
+    using DatabaseSession = DatabaseSession;
 
     public class InstantiateObjectFactory : IInstantiateObjectFactory
     {
@@ -42,7 +42,7 @@ namespace Allors.R1.Adapters.Database.SqlClient.Commands.Text
             this.Sql += "WHERE " + database.Schema.ObjectId + "=" + database.Schema.ObjectId.Param + "\n";
         }
 
-        public IInstantiateObject Create(Sql.DatabaseSession session)
+        public IInstantiateObject Create(Adapters.Database.Sql.DatabaseSession session)
         {
             return new InstantiateObject(this, session);
         }
@@ -52,7 +52,7 @@ namespace Allors.R1.Adapters.Database.SqlClient.Commands.Text
             private readonly InstantiateObjectFactory factory;
             private SqlCommand command;
 
-            public InstantiateObject(InstantiateObjectFactory factory, Sql.DatabaseSession session)
+            public InstantiateObject(InstantiateObjectFactory factory, Adapters.Database.Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
@@ -77,7 +77,7 @@ namespace Allors.R1.Adapters.Database.SqlClient.Commands.Text
                         var classId = this.GetClassId(reader, 0);
                         var cacheId = this.GetCachId(reader, 1);
 
-                        var type = (ObjectType)this.factory.Database.Domain.Domain.Find(classId);
+                        var type = (IClass)this.factory.Database.MetaPopulation.Find(classId);
                         return this.Session.GetOrCreateAssociationForExistingObject(type, objectId, cacheId);
                     }
 

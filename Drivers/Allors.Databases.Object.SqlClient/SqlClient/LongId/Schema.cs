@@ -19,7 +19,7 @@
 // <summary>Defines the Schema type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient.LongId
+namespace Allors.Databases.Object.SqlClient.LongId
 {
     using System.Data;
 

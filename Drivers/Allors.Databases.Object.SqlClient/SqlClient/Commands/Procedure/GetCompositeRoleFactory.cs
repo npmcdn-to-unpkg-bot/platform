@@ -18,84 +18,84 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient.Commands.Procedure
+namespace Allors.Databases.Object.SqlClient.Commands.Procedure
 {
     using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
 
-    using Allors.R1.Adapters.Database.Sql;
-    using Allors.R1.Adapters.Database.Sql.Commands;
+    using Allors.Adapters.Database.Sql;
+    using Allors.Adapters.Database.Sql.Commands;
 
     using Meta;
 
     using Database = Database;
-    using DatabaseSession = Allors.R1.Adapters.Database.SqlClient.DatabaseSession;
+    using DatabaseSession = DatabaseSession;
     using Schema = Schema;
 
     public class GetCompositeRoleFactory : IGetCompositeRoleFactory
     {
         public readonly Database Database;
-        private readonly Dictionary<RoleType, string> sqlByRoleType;
+        private readonly Dictionary<IRoleType, string> sqlByIRoleType;
 
         public GetCompositeRoleFactory(Database database)
         {
             this.Database = database;
-            this.sqlByRoleType = new Dictionary<RoleType, string>();
+            this.sqlByIRoleType = new Dictionary<IRoleType, string>();
         }
 
-        public IGetCompositeRole Create(Sql.DatabaseSession session)
+        public IGetCompositeRole Create(Adapters.Database.Sql.DatabaseSession session)
         {
             return new GetCompositeRole(this, session);
         }
 
-        public string GetSql(RoleType roleType)
+        public string GetSql(IRoleType roleType)
         {
-            if (!this.sqlByRoleType.ContainsKey(roleType))
+            if (!this.sqlByIRoleType.ContainsKey(roleType))
             {
-                AssociationType associationType = roleType.AssociationType;
+                IAssociationType associationType = roleType.AssociationType;
 
                 string sql;
-                if (!roleType.RelationType.ExistExclusiveRootClasses)
+                if (!roleType.RelationType.ExistExclusiveLeafClasses)
                 {
-                    sql = Sql.Schema.AllorsPrefix + "GR_" + roleType.FullSingularName;
+                    sql = Adapters.Database.Sql.Schema.AllorsPrefix + "GR_" + roleType.SingularFullName;
                 }
                 else
                 {
-                    sql = Sql.Schema.AllorsPrefix + "GR_" + associationType.ObjectType.ExclusiveRootClass.Name + "_" + roleType.RootName;
+                    sql = Adapters.Database.Sql.Schema.AllorsPrefix + "GR_" + associationType.ObjectType.ExclusiveLeafClass.Name + "_" + roleType.SingularFullName;
                 }
 
-                this.sqlByRoleType[roleType] = sql;
+                this.sqlByIRoleType[roleType] = sql;
             }
 
-            return this.sqlByRoleType[roleType];
+            return this.sqlByIRoleType[roleType];
         }
 
         private class GetCompositeRole : DatabaseCommand, IGetCompositeRole
         {
             private readonly GetCompositeRoleFactory factory;
-            private readonly Dictionary<RoleType, SqlCommand> commandByRoleType;
+            private readonly Dictionary<IRoleType, SqlCommand> commandByIRoleType;
 
-            public GetCompositeRole(GetCompositeRoleFactory factory, Sql.DatabaseSession session)
+            public GetCompositeRole(GetCompositeRoleFactory factory, Adapters.Database.Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
-                this.commandByRoleType = new Dictionary<RoleType, SqlCommand>();
+                this.commandByIRoleType = new Dictionary<IRoleType, SqlCommand>();
             }
 
-            public void Execute(Roles roles, RoleType roleType)
+            public void Execute(Roles roles, IRoleType roleType)
             {
                 var reference = roles.Reference;
 
                 SqlCommand command;
-                if (!this.commandByRoleType.TryGetValue(roleType, out command))
+                if (!this.commandByIRoleType.TryGetValue(roleType, out command))
                 {
                     command = this.Session.CreateSqlCommand(this.factory.GetSql(roleType));
                     command.CommandType = CommandType.StoredProcedure;
                     this.AddInObject(command, this.Database.Schema.AssociationId.Param, reference.ObjectId.Value);
 
-                    this.commandByRoleType[roleType] = command;
+                    this.commandByIRoleType[roleType] = command;
                 }
                 else
                 {

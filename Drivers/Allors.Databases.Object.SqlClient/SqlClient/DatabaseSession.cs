@@ -19,14 +19,14 @@
 // <summary>Defines the Session type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient
+namespace Allors.Databases.Object.SqlClient
 {
     using System.Collections.Generic;
     using System.Data.SqlClient;
 
-    using Allors.R1.Adapters.Database.Sql;
+    using Allors.Adapters.Database.Sql;
 
-    public class DatabaseSession : Sql.DatabaseSession, ICommandFactory
+    public class DatabaseSession : Adapters.Database.Sql.DatabaseSession, ICommandFactory
     {
         private readonly Database database;
 
@@ -40,12 +40,12 @@ namespace Allors.R1.Adapters.Database.SqlClient
             this.database = database;
         }
         
-        public override R1.IDatabase Database
+        public override Allors.IDatabase Database
         {
             get { return this.database; }
         }
 
-        public override Sql.Database SqlDatabase
+        public override Adapters.Database.Sql.Database SqlDatabase
         {
             get { return this.database; }
         }
@@ -55,7 +55,7 @@ namespace Allors.R1.Adapters.Database.SqlClient
             get { return this.database; }
         }
 
-        public override Sql.SessionCommands SessionCommands
+        public override Adapters.Database.Sql.SessionCommands SessionCommands
         {
             get
             {
@@ -85,7 +85,7 @@ namespace Allors.R1.Adapters.Database.SqlClient
             return command;
         }
 
-        public override Sql.Command CreateCommand(string commandText)
+        public override Adapters.Database.Sql.Command CreateCommand(string commandText)
         {
             return new Command(this, commandText);
         }

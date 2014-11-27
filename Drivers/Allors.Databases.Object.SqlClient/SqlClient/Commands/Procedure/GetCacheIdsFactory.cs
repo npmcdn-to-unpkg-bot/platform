@@ -18,18 +18,18 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient.Commands.Procedure
+namespace Allors.Databases.Object.SqlClient.Commands.Procedure
 {
     using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
 
-    using Allors.R1.Adapters.Database.Sql;
+    using Allors.Adapters.Database.Sql;
 
-    using Allors.R1.Adapters.Database.Sql.Commands;
+    using Allors.Adapters.Database.Sql.Commands;
 
     using Database = Database;
-    using DatabaseSession = Allors.R1.Adapters.Database.SqlClient.DatabaseSession;
+    using DatabaseSession = DatabaseSession;
 
     public class GetCacheIdsFactory : IGetCacheIdsFactory
     {
@@ -48,7 +48,7 @@ namespace Allors.R1.Adapters.Database.SqlClient.Commands.Procedure
             }
         }
 
-        public IGetCacheIds Create(Sql.DatabaseSession session)
+        public IGetCacheIds Create(Adapters.Database.Sql.DatabaseSession session)
         {
             return new GetCacheIds(this, session);
         }
@@ -58,7 +58,7 @@ namespace Allors.R1.Adapters.Database.SqlClient.Commands.Procedure
             private readonly GetCacheIdsFactory factory;
             private SqlCommand command;
 
-            public GetCacheIds(GetCacheIdsFactory factory, Sql.DatabaseSession session)
+            public GetCacheIds(GetCacheIdsFactory factory, Adapters.Database.Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
@@ -70,7 +70,7 @@ namespace Allors.R1.Adapters.Database.SqlClient.Commands.Procedure
 
                 if (this.command == null)
                 {
-                    this.command = this.Session.CreateSqlCommand(Sql.Schema.AllorsPrefix + "GC");
+                    this.command = this.Session.CreateSqlCommand(Schema.AllorsPrefix + "GC");
                     this.command.CommandType = CommandType.StoredProcedure;
                     this.AddInTable(this.command, schema.ObjectTableParam, this.Database.CreateObjectTable(strategyReferences));
                 }

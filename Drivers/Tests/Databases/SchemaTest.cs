@@ -48,7 +48,7 @@ namespace Allors.Databases
 
     public abstract class SchemaTest
     {
-        private Domain domain;
+        protected Domain domain;
 
         protected virtual bool DetectBinarySizedDifferences
         {
@@ -114,39 +114,6 @@ namespace Allors.Databases
             }
 
             Assert.IsTrue(exceptionThrown);
-        }
-
-        [Test]
-        public void OneToOne()
-        {
-            var relationTypeId = new Guid("89479CC3-2BE0-46A9-8008-E9D5F1377897");
-
-            this.DropTable("allors", "_89479cc32be046a98008e9d5f1377897_string_256");
-            this.DropTable("allors", "_89479cc32be046a98008e9d5f1377897_11");
-
-            this.CreateDomainWithUnitRelationType(relationTypeId, UnitIds.StringId);
-            this.CreateDatabase(this.domain.MetaPopulation, true);
-            
-            var relationType = this.CreateDomainWithCompositeRelationType(relationTypeId, Multiplicity.OneToOne);
-            var database = this.CreateDatabase(this.domain.MetaPopulation, false);
-
-            Assert.IsTrue(this.CreateSessionThrowsException(database));
-
-            database = this.CreateDatabase(this.domain.MetaPopulation, true);
-
-            Assert.IsFalse(this.CreateSessionThrowsException(database));
-
-            var tableName = "_" + relationType.Id.ToString("n") + "_11";
-            Assert.IsTrue(this.ExistTable("allors", tableName));
-            Assert.AreEqual(2, this.ColumnCount("allors", tableName));
-            Assert.IsTrue(this.ExistColumn("allors", tableName, "a", ColumnTypes.ObjectId));
-            Assert.IsTrue(this.ExistColumn("allors", tableName, "r", ColumnTypes.ObjectId));
-
-            this.DropTable("allors", tableName);
-
-            database = this.CreateDatabase(this.domain.MetaPopulation, false);
-
-            Assert.IsTrue(this.CreateSessionThrowsException(database));
         }
 
         //[Test]
@@ -869,7 +836,7 @@ namespace Allors.Databases
 
         protected abstract bool ExistProcedure(string schema, string procedure);
 
-        private bool CreateSessionThrowsException(IDatabase database)
+        protected bool CreateSessionThrowsException(IDatabase database)
         {
             try
             {
@@ -885,7 +852,7 @@ namespace Allors.Databases
             }
         }
 
-        private RelationType CreateDomainWithCompositeRelationType(Guid relationTypeId, Multiplicity multiplicity)
+        protected RelationType CreateDomainWithCompositeRelationType(Guid relationTypeId, Multiplicity multiplicity)
         {
             this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
 
@@ -898,7 +865,7 @@ namespace Allors.Databases
                 .Build();
         }
 
-        private RelationType CreateDomainWithUnitRelationType(Guid relationTypeId, Guid roleTypeObjectId)
+        protected RelationType CreateDomainWithUnitRelationType(Guid relationTypeId, Guid roleTypeObjectId)
         {
             this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
             Repository.Core(this.domain.MetaPopulation);

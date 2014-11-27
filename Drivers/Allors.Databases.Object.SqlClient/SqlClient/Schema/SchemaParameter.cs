@@ -18,14 +18,14 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient
+namespace Allors.Databases.Object.SqlClient
 {
     using System;
     using System.Data;
 
-    public class SchemaParameter : Sql.SchemaParameter
+    public class SchemaParameter : Adapters.Database.Sql.SchemaParameter
     {
-        public SchemaParameter(Sql.Schema schema, string name, DbType type)
+        public SchemaParameter(Adapters.Database.Sql.Schema schema, string name, DbType type)
             : base(schema, name, type)
         {
         }

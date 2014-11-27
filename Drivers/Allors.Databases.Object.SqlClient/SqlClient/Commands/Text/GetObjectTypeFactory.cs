@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="GetObjectTypeFactory.cs" company="Allors bvba">
+// <copyright file="GetIObjectTypeFactory.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -18,23 +18,23 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient.Commands.Text
+namespace Allors.Databases.Object.SqlClient.Commands.Text
 {
     using System;
     using System.Data.SqlClient;
 
-    using Allors.R1.Adapters.Database.Sql.Commands;
-    using Allors.R1.Meta;
+    using Allors.Adapters.Database.Sql.Commands;
+    using Allors.Meta;
 
     using Database = Database;
-    using DatabaseSession = Allors.R1.Adapters.Database.SqlClient.DatabaseSession;
+    using DatabaseSession = DatabaseSession;
 
-    public class GetObjectTypeFactory : IGetObjectTypeFactory
+    public class GetIObjectTypeFactory : IGetIObjectTypeFactory
     {
         public readonly Database Database;
         public readonly string Sql;
 
-        public GetObjectTypeFactory(Database database)
+        public GetIObjectTypeFactory(Database database)
         {
             this.Database = database;
             this.Sql = "SELECT " + database.Schema.TypeId + "\n";
@@ -42,23 +42,23 @@ namespace Allors.R1.Adapters.Database.SqlClient.Commands.Text
             this.Sql += "WHERE " + database.Schema.ObjectId + "=" + database.Schema.ObjectId.Param + "\n";
         }
 
-        public IGetObjectType Create(Sql.DatabaseSession session)
+        public IGetIObjectType Create(Adapters.Database.Sql.DatabaseSession session)
         {
             return new GetObjectType(this, session);
         }
 
-        private class GetObjectType : DatabaseCommand, IGetObjectType
+        private class GetObjectType : DatabaseCommand, IGetIObjectType
         {
-            private readonly GetObjectTypeFactory factory;
+            private readonly GetIObjectTypeFactory factory;
             private SqlCommand command;
 
-            public GetObjectType(GetObjectTypeFactory factory, Sql.DatabaseSession session)
+            public GetObjectType(GetIObjectTypeFactory factory, Adapters.Database.Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
             }
 
-            public ObjectType Execute(ObjectId objectId)
+            public IClass Execute(ObjectId objectId)
             {
                 if (this.command == null)
                 {
@@ -76,7 +76,7 @@ namespace Allors.R1.Adapters.Database.SqlClient.Commands.Text
                     return null;
                 }
 
-                return this.Session.SqlClientDatabase.ObjectFactory.GetObjectTypeForType((Guid)result);
+                return (IClass)this.Session.SqlClientDatabase.ObjectFactory.GetObjectTypeForType((Guid)result);
             }
         }
     }

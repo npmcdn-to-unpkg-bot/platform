@@ -14,17 +14,17 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.R1.Adapters.Database.SqlClient
+namespace Allors.Databases.Object.SqlClient
 {
     using System;
     using System.Data.Common;
     using System.Data.SqlClient;
 
-    using Allors.R1.Adapters.Database.Sql.Commands;
-    using Allors.R1.Adapters.Database.SqlClient.Commands.Procedure;
-    using Allors.R1.Adapters.Database.SqlClient.Commands.Text;
+    using Allors.Adapters.Database.Sql.Commands;
+    using Allors.Databases.Object.SqlClient.Commands.Procedure;
+    using Allors.Databases.Object.SqlClient.Commands.Text;
 
-    public class ManagementSession : Sql.ManagementSession, ICommandFactory
+    public class ManagementSession : Adapters.Database.Sql.ManagementSession, ICommandFactory
     {
         private readonly Database database;
         
@@ -69,7 +69,7 @@ namespace Allors.R1.Adapters.Database.SqlClient
             }
         }
 
-        public override Sql.Database Database
+        public override Adapters.Database.Sql.Database Database
         {
             get
             {
@@ -102,7 +102,7 @@ namespace Allors.R1.Adapters.Database.SqlClient
             }
         }
 
-        public override Sql.Command CreateCommand(string commandText)
+        public override Adapters.Database.Sql.Command CreateCommand(string commandText)
         {
             return new Command(this, commandText);
         }
