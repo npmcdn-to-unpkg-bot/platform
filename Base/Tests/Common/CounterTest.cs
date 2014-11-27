@@ -58,13 +58,13 @@ namespace Allors.Common
 
             try
             {
-                var configuration = new Databases.SqlClient.Configuration
+                var configuration = new Databases.Relation.SqlClient.Configuration
                 {
                     ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["allors"].ConnectionString,
                     ObjectFactory = Config.ObjectFactory,
                     WorkspaceFactory = new WorkspaceFactory()
                 };
-                Config.Default = new Databases.SqlClient.Database(configuration);
+                Config.Default = new Databases.Relation.SqlClient.Database(configuration);
                 Config.Serializable = null;
 
                 this.Init(true);
@@ -93,13 +93,13 @@ namespace Allors.Common
 
             try
             {
-                var configuration = new Databases.SqlClient.Configuration
+                var configuration = new Databases.Relation.SqlClient.Configuration
                                         {
                                             ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["allors"].ConnectionString,
                                             ObjectFactory = Config.ObjectFactory,
                                             WorkspaceFactory = new WorkspaceFactory()
                                         };
-                Config.Default = new Databases.SqlClient.Database(configuration);
+                Config.Default = new Databases.Relation.SqlClient.Database(configuration);
                 Config.Serializable = null;
 
                 this.Init(true);
@@ -129,13 +129,13 @@ namespace Allors.Common
             try
             {
                 var workspaceFactory = new WorkspaceFactory();
-                Config.Default = new Databases.SqlClient.Database(new Databases.SqlClient.Configuration
+                Config.Default = new Databases.Relation.SqlClient.Database(new Databases.Relation.SqlClient.Configuration
                                                                                                     {
                                                                                                         ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["allors"].ConnectionString,
                                                                                                         ObjectFactory = Config.ObjectFactory,
                                                                                                         WorkspaceFactory = workspaceFactory
                                                                                                     });
-                Config.Serializable = new Databases.SqlClient.Database(new Databases.SqlClient.Configuration
+                Config.Serializable = new Databases.Relation.SqlClient.Database(new Databases.Relation.SqlClient.Configuration
                                                                                                 {
                                                                                                     ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["allors"].ConnectionString,
                                                                                                     ObjectFactory = Config.ObjectFactory,
