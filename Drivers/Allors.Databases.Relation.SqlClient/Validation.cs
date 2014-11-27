@@ -124,11 +124,6 @@ namespace Allors.Databases.Relation.SqlClient
                 var tableName = mapping.GetTableName(relationType);
                 var table = this.Schema.GetTable(tableName);
 
-                if (tableName.Equals("_o"))
-                {
-                    System.Diagnostics.Debugger.Break();
-                }
-
                 if (table == null)
                 {
                     this.MissingTableNames.Add(tableName);

@@ -22,7 +22,6 @@ namespace Allors.Databases.Relation.SqlClient
     using System.Data.SqlClient;
 
     using Allors.Databases;
-    using Allors.Databases.Relation.SqlClient;
     using Allors.Meta;
     using Allors.Populations;
 

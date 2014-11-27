@@ -50,91 +50,114 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Databases\sqlclient\ExtentTest.cs">
+    <Compile Include="Databases\object\sqlclient\ExtentTest.cs" />
+    <Compile Include="Databases\object\sqlclient\IntegerId\ReadCommitted\CacheTest.cs" />
+    <Compile Include="Databases\object\sqlclient\IntegerId\ReadCommitted\ChangesTest.cs" />
+    <Compile Include="Databases\object\sqlclient\IntegerId\ReadCommitted\ExtentTest.cs" />
+    <Compile Include="Databases\object\sqlclient\IntegerId\ReadCommitted\LifeCycleTest.cs" />
+    <Compile Include="Databases\object\sqlclient\IntegerId\ReadCommitted\Many2ManyTest.cs" />
+    <Compile Include="Databases\object\sqlclient\IntegerId\ReadCommitted\Many2OneTest.cs" />
+    <Compile Include="Databases\object\sqlclient\IntegerId\ReadCommitted\One2ManyTest.cs" />
+    <Compile Include="Databases\object\sqlclient\IntegerId\ReadCommitted\One2OneTest.cs" />
+    <Compile Include="Databases\object\sqlclient\IntegerId\ReadCommitted\Profile.cs" />
+    <Compile Include="Databases\object\sqlclient\IntegerId\ReadCommitted\PropertiesTest.cs" />
+    <Compile Include="Databases\object\sqlclient\IntegerId\ReadCommitted\RelationExtentTest.cs" />
+    <Compile Include="Databases\object\sqlclient\IntegerId\ReadCommitted\SandboxTest.cs" />
+    <Compile Include="Databases\object\sqlclient\IntegerId\ReadCommitted\SchemaTest.cs" />
+    <Compile Include="Databases\object\sqlclient\IntegerId\ReadCommitted\SerializationTest.cs" />
+    <Compile Include="Databases\object\sqlclient\IntegerId\ReadCommitted\SqlClientTest.cs" />
+    <Compile Include="Databases\object\sqlclient\IntegerId\ReadCommitted\SyncTest.cs" />
+    <Compile Include="Databases\object\sqlclient\IntegerId\ReadCommitted\UnitTest.cs" />
+    <Compile Include="Databases\object\sqlclient\IntegerId\ReadCommitted\WorkspaceTest.cs" />
+    <Compile Include="Databases\object\sqlclient\Profile.cs" />
+    <Compile Include="Databases\object\sqlclient\SchemaTest.cs" />
+    <Compile Include="Databases\object\sqlclient\SqlClientTest.cs" />
+    <Compile Include="Databases\object\sqlclient\UnitTest.cs" />
+    <Compile Include="Databases\relation\sqlclient\ExtentTest.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Databases\sqlclient\Profile.cs">
+    <Compile Include="Databases\relation\sqlclient\Profile.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Databases\sqlclient\SchemaTest.cs">
+    <Compile Include="Databases\relation\sqlclient\SchemaTest.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Databases\sqlclient\SqlClientTest.cs">
+    <Compile Include="Databases\relation\sqlclient\SqlClientTest.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Databases\sqlclient\UnitTest.cs">
+    <Compile Include="Databases\relation\sqlclient\UnitTest.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Databases\sqlite\ExtentTest.cs">
+    <Compile Include="Databases\relation\sqlite\ExtentTest.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Databases\sqlite\LongId\CacheTest.cs">
+    <Compile Include="Databases\relation\sqlite\LongId\CacheTest.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Databases\sqlite\LongId\ChangesTest.cs">
+    <Compile Include="Databases\relation\sqlite\LongId\ChangesTest.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Databases\sqlite\LongId\ExtentTest.cs">
+    <Compile Include="Databases\relation\sqlite\LongId\ExtentTest.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Databases\sqlite\LongId\LifeCycleTest.cs">
+    <Compile Include="Databases\relation\sqlite\LongId\LifeCycleTest.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Databases\sqlite\LongId\Many2ManyTest.cs">
+    <Compile Include="Databases\relation\sqlite\LongId\Many2ManyTest.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Databases\sqlite\LongId\Many2OneTest.cs">
+    <Compile Include="Databases\relation\sqlite\LongId\Many2OneTest.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Databases\sqlite\LongId\One2ManyTest.cs">
+    <Compile Include="Databases\relation\sqlite\LongId\One2ManyTest.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Databases\sqlite\LongId\One2OneTest.cs">
+    <Compile Include="Databases\relation\sqlite\LongId\One2OneTest.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Databases\sqlite\LongId\Profile.cs">
+    <Compile Include="Databases\relation\sqlite\LongId\Profile.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Databases\sqlite\LongId\PropertiesTest.cs">
+    <Compile Include="Databases\relation\sqlite\LongId\PropertiesTest.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Databases\sqlite\LongId\RelationExtentTest.cs">
+    <Compile Include="Databases\relation\sqlite\LongId\RelationExtentTest.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Databases\sqlite\LongId\SandboxTest.cs">
+    <Compile Include="Databases\relation\sqlite\LongId\SandboxTest.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Databases\sqlite\LongId\SchemaTest.cs">
+    <Compile Include="Databases\relation\sqlite\LongId\SchemaTest.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Databases\sqlite\LongId\SerializationTest.cs">
+    <Compile Include="Databases\relation\sqlite\LongId\SerializationTest.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Databases\sqlite\LongId\SqlClientTest.cs">
+    <Compile Include="Databases\relation\sqlite\LongId\SqlClientTest.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Databases\sqlite\LongId\SyncTest.cs">
+    <Compile Include="Databases\relation\sqlite\LongId\SyncTest.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Databases\sqlite\LongId\UnitTest.cs">
+    <Compile Include="Databases\relation\sqlite\LongId\UnitTest.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Databases\sqlite\LongId\WorkspaceTest.cs">
+    <Compile Include="Databases\relation\sqlite\LongId\WorkspaceTest.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Databases\sqlite\Profile.cs">
+    <Compile Include="Databases\relation\sqlite\Profile.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Databases\sqlite\SchemaTest.cs">
+    <Compile Include="Databases\relation\sqlite\SchemaTest.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Databases\sqlite\SqlClientTest.cs">
+    <Compile Include="Databases\relation\sqlite\SqlClientTest.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Databases\sqlite\LifeCycleTest.cs" />
-    <Compile Include="Databases\sqlite\SyncTest.cs" />
-    <Compile Include="Databases\sqlite\WorkspaceTest.cs" />
-    <Compile Include="Databases\sqlite\UnitTest.cs">
+    <Compile Include="Databases\relation\sqlite\LifeCycleTest.cs" />
+    <Compile Include="Databases\relation\sqlite\SyncTest.cs" />
+    <Compile Include="Databases\relation\sqlite\WorkspaceTest.cs" />
+    <Compile Include="Databases\relation\sqlite\UnitTest.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Populations\AllorsTestUtils.cs" />
@@ -171,26 +194,26 @@
     <Compile Include="Databases\SandboxTest.cs" />
     <Compile Include="Databases\SchemaTest.cs" />
     <Compile Include="Databases\SerializationTest.cs" />
-    <Compile Include="Databases\sqlclient\IntegerId\ReadCommitted\CacheTest.cs" />
-    <Compile Include="Databases\sqlclient\IntegerId\ReadCommitted\ChangesTest.cs" />
-    <Compile Include="Databases\sqlclient\IntegerId\ReadCommitted\ExtentTest.cs" />
-    <Compile Include="Databases\sqlclient\IntegerId\ReadCommitted\LifeCycleTest.cs" />
-    <Compile Include="Databases\sqlclient\IntegerId\ReadCommitted\Many2ManyTest.cs" />
-    <Compile Include="Databases\sqlclient\IntegerId\ReadCommitted\Many2OneTest.cs" />
-    <Compile Include="Databases\sqlclient\IntegerId\ReadCommitted\One2ManyTest.cs" />
-    <Compile Include="Databases\sqlclient\IntegerId\ReadCommitted\One2OneTest.cs" />
-    <Compile Include="Databases\sqlclient\IntegerId\ReadCommitted\Profile.cs" />
-    <Compile Include="Databases\sqlclient\IntegerId\ReadCommitted\PropertiesTest.cs" />
-    <Compile Include="Databases\sqlclient\IntegerId\ReadCommitted\RelationExtentTest.cs" />
-    <Compile Include="Databases\sqlclient\IntegerId\ReadCommitted\SandboxTest.cs" />
-    <Compile Include="Databases\sqlclient\IntegerId\ReadCommitted\SchemaTest.cs">
+    <Compile Include="Databases\relation\sqlclient\IntegerId\ReadCommitted\CacheTest.cs" />
+    <Compile Include="Databases\relation\sqlclient\IntegerId\ReadCommitted\ChangesTest.cs" />
+    <Compile Include="Databases\relation\sqlclient\IntegerId\ReadCommitted\ExtentTest.cs" />
+    <Compile Include="Databases\relation\sqlclient\IntegerId\ReadCommitted\LifeCycleTest.cs" />
+    <Compile Include="Databases\relation\sqlclient\IntegerId\ReadCommitted\Many2ManyTest.cs" />
+    <Compile Include="Databases\relation\sqlclient\IntegerId\ReadCommitted\Many2OneTest.cs" />
+    <Compile Include="Databases\relation\sqlclient\IntegerId\ReadCommitted\One2ManyTest.cs" />
+    <Compile Include="Databases\relation\sqlclient\IntegerId\ReadCommitted\One2OneTest.cs" />
+    <Compile Include="Databases\relation\sqlclient\IntegerId\ReadCommitted\Profile.cs" />
+    <Compile Include="Databases\relation\sqlclient\IntegerId\ReadCommitted\PropertiesTest.cs" />
+    <Compile Include="Databases\relation\sqlclient\IntegerId\ReadCommitted\RelationExtentTest.cs" />
+    <Compile Include="Databases\relation\sqlclient\IntegerId\ReadCommitted\SandboxTest.cs" />
+    <Compile Include="Databases\relation\sqlclient\IntegerId\ReadCommitted\SchemaTest.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Databases\sqlclient\IntegerId\ReadCommitted\SerializationTest.cs" />
-    <Compile Include="Databases\sqlclient\IntegerId\ReadCommitted\SqlClientTest.cs" />
-    <Compile Include="Databases\sqlclient\IntegerId\ReadCommitted\SyncTest.cs" />
-    <Compile Include="Databases\sqlclient\IntegerId\ReadCommitted\UnitTest.cs" />
-    <Compile Include="Databases\sqlclient\IntegerId\ReadCommitted\WorkspaceTest.cs" />
+    <Compile Include="Databases\relation\sqlclient\IntegerId\ReadCommitted\SerializationTest.cs" />
+    <Compile Include="Databases\relation\sqlclient\IntegerId\ReadCommitted\SqlClientTest.cs" />
+    <Compile Include="Databases\relation\sqlclient\IntegerId\ReadCommitted\SyncTest.cs" />
+    <Compile Include="Databases\relation\sqlclient\IntegerId\ReadCommitted\UnitTest.cs" />
+    <Compile Include="Databases\relation\sqlclient\IntegerId\ReadCommitted\WorkspaceTest.cs" />
     <Compile Include="Databases\SyncTest.cs" />
     <Compile Include="Databases\UnitTest.cs" />
     <Compile Include="Databases\WorkspaceTest.cs" />
@@ -231,11 +254,15 @@
       <Project>{ad0d7fc3-9071-429a-b9da-e39fd515599e}</Project>
       <Name>Allors.Databases.Memory</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Allors.Databases.SqlClient\Allors.Databases.Relation.SqlClient.csproj">
+    <ProjectReference Include="..\Allors.Databases.Object.SqlClient\Allors.Databases.Object.SqlClient.csproj">
+      <Project>{489d90a9-b63e-4983-86cc-2a061d8f6055}</Project>
+      <Name>Allors.Databases.Object.SqlClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Allors.Databases.Relation.SqlClient\Allors.Databases.Relation.SqlClient.csproj">
       <Project>{457bddeb-41cf-46c6-bbcc-13618aeb646f}</Project>
       <Name>Allors.Databases.Relation.SqlClient</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Allors.Databases.SQLite\Allors.Databases.Relation.SQLite.csproj">
+    <ProjectReference Include="..\Allors.Databases.Relation.SQLite\Allors.Databases.Relation.SQLite.csproj">
       <Project>{76db148d-bfbb-48be-929b-4631c860f2a1}</Project>
       <Name>Allors.Databases.Relation.SQLite</Name>
     </ProjectReference>

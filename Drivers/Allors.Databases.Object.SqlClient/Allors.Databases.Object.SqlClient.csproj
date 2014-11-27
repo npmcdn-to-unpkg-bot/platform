@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{489D90A9-B63E-4983-86CC-2A061D8F6055}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Allors.Databases.Object.SqlClient</RootNamespace>
+    <AssemblyName>Allors.Databases.Object.SqlClient</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Adapters\CompositePredicateAssertions.cs" />
+    <Compile Include="Adapters\CompositeRelation.cs" />
+    <Compile Include="Adapters\Configuration.cs" />
+    <Compile Include="Adapters\Database\Caching\Cache.cs" />
+    <Compile Include="Adapters\Database\Caching\CachedObject.cs" />
+    <Compile Include="Adapters\Database\Caching\CacheFactory.cs" />
+    <Compile Include="Adapters\Database\Caching\ICache.cs" />
+    <Compile Include="Adapters\Database\Caching\ICachedObject.cs" />
+    <Compile Include="Adapters\Database\Caching\ICacheFactory.cs" />
+    <Compile Include="Adapters\Database\Configuration.cs" />
+    <Compile Include="Adapters\Database\Sql\ChangeSet.cs" />
+    <Compile Include="Adapters\Database\Sql\Command.cs" />
+    <Compile Include="Adapters\Database\Sql\CommandFactories.cs" />
+    <Compile Include="Adapters\Database\Sql\Commands\IAddCompositeRole.cs" />
+    <Compile Include="Adapters\Database\Sql\Commands\IAddToCompositeRoles.cs" />
+    <Compile Include="Adapters\Database\Sql\Commands\IClearCompositeAndCompositesRole.cs" />
+    <Compile Include="Adapters\Database\Sql\Commands\ICreateObject.cs" />
+    <Compile Include="Adapters\Database\Sql\Commands\ICreateObjects.cs" />
+    <Compile Include="Adapters\Database\Sql\Commands\IDeleteObject.cs" />
+    <Compile Include="Adapters\Database\Sql\Commands\IGetCacheIds.cs" />
+    <Compile Include="Adapters\Database\Sql\Commands\IGetCompositeAssociation.cs" />
+    <Compile Include="Adapters\Database\Sql\Commands\IGetCompositeAssociations.cs" />
+    <Compile Include="Adapters\Database\Sql\Commands\IGetCompositeRole.cs" />
+    <Compile Include="Adapters\Database\Sql\Commands\IGetCompositeRoles.cs" />
+    <Compile Include="Adapters\Database\Sql\Commands\IGetObjectType.cs" />
+    <Compile Include="Adapters\Database\Sql\Commands\IGetUnitRoles.cs" />
+    <Compile Include="Adapters\Database\Sql\Commands\IInsertObject.cs" />
+    <Compile Include="Adapters\Database\Sql\Commands\IInstantiateObject.cs" />
+    <Compile Include="Adapters\Database\Sql\Commands\IInstantiateObjects.cs" />
+    <Compile Include="Adapters\Database\Sql\Commands\ILoadCompositeRelations.cs" />
+    <Compile Include="Adapters\Database\Sql\Commands\ILoadObjects.cs" />
+    <Compile Include="Adapters\Database\Sql\Commands\ILoadUnitRelations.cs" />
+    <Compile Include="Adapters\Database\Sql\Commands\IRemoveCompositeRole.cs" />
+    <Compile Include="Adapters\Database\Sql\Commands\IRemoveFromCompositeRoles.cs" />
+    <Compile Include="Adapters\Database\Sql\Commands\ISetCompositeRole.cs" />
+    <Compile Include="Adapters\Database\Sql\Commands\ISetUnitRole.cs" />
+    <Compile Include="Adapters\Database\Sql\Commands\ISetUnitRoles.cs" />
+    <Compile Include="Adapters\Database\Sql\Commands\IUpdateCacheIds.cs" />
+    <Compile Include="Adapters\Database\Sql\CompositeRoles.cs" />
+    <Compile Include="Adapters\Database\Sql\Configuration.cs" />
+    <Compile Include="Adapters\Database\Sql\Database.cs" />
+    <Compile Include="Adapters\Database\Sql\DatabaseSession.cs" />
+    <Compile Include="Adapters\Database\Sql\Extents\Extent.cs" />
+    <Compile Include="Adapters\Database\Sql\Extents\ExtentAssociations.cs" />
+    <Compile Include="Adapters\Database\Sql\Extents\ExtentEnumerator.cs" />
+    <Compile Include="Adapters\Database\Sql\Extents\ExtentFiltered.cs" />
+    <Compile Include="Adapters\Database\Sql\Extents\ExtentOperation.cs" />
+    <Compile Include="Adapters\Database\Sql\Extents\ExtentOperations.cs" />
+    <Compile Include="Adapters\Database\Sql\Extents\ExtentRoles.cs" />
+    <Compile Include="Adapters\Database\Sql\Extents\ExtentSort.cs" />
+    <Compile Include="Adapters\Database\Sql\Extents\ExtentStatement.cs" />
+    <Compile Include="Adapters\Database\Sql\Extents\ExtentStatementChild.cs" />
+    <Compile Include="Adapters\Database\Sql\Extents\ExtentStatementRoot.cs" />
+    <Compile Include="Adapters\Database\Sql\Extents\SqlExtent.cs" />
+    <Compile Include="Adapters\Database\Sql\IDatabase.cs" />
+    <Compile Include="Adapters\Database\Sql\IFlush.cs" />
+    <Compile Include="Adapters\Database\Sql\IObjectIds.cs" />
+    <Compile Include="Adapters\Database\Sql\Load.cs" />
+    <Compile Include="Adapters\Database\Sql\ManagementSession.cs" />
+    <Compile Include="Adapters\Database\Sql\ObjectIntegerIds.cs" />
+    <Compile Include="Adapters\Database\Sql\ObjectLongIds.cs" />
+    <Compile Include="Adapters\Database\Sql\Predicates\AndPredicate.cs" />
+    <Compile Include="Adapters\Database\Sql\Predicates\AssociationContainedInEnumerable.cs" />
+    <Compile Include="Adapters\Database\Sql\Predicates\AssociationContainedInExtent.cs" />
+    <Compile Include="Adapters\Database\Sql\Predicates\AssociationContains.cs" />
+    <Compile Include="Adapters\Database\Sql\Predicates\AssociationEquals.cs" />
+    <Compile Include="Adapters\Database\Sql\Predicates\AssociationExists.cs" />
+    <Compile Include="Adapters\Database\Sql\Predicates\AssociationInstanceOf.cs" />
+    <Compile Include="Adapters\Database\Sql\Predicates\CompositePredicate.cs" />
+    <Compile Include="Adapters\Database\Sql\Predicates\Equals.cs" />
+    <Compile Include="Adapters\Database\Sql\Predicates\In.cs" />
+    <Compile Include="Adapters\Database\Sql\Predicates\InstanceOf.cs" />
+    <Compile Include="Adapters\Database\Sql\Predicates\Not.cs" />
+    <Compile Include="Adapters\Database\Sql\Predicates\Or.cs" />
+    <Compile Include="Adapters\Database\Sql\Predicates\Predicate.cs" />
+    <Compile Include="Adapters\Database\Sql\Predicates\RoleBetweenRole.cs" />
+    <Compile Include="Adapters\Database\Sql\Predicates\RoleBetweenValue.cs" />
+    <Compile Include="Adapters\Database\Sql\Predicates\RoleContainedInEnumerable.cs" />
+    <Compile Include="Adapters\Database\Sql\Predicates\RoleContainedInExtent.cs" />
+    <Compile Include="Adapters\Database\Sql\Predicates\RoleContains.cs" />
+    <Compile Include="Adapters\Database\Sql\Predicates\RoleEqualsRole.cs" />
+    <Compile Include="Adapters\Database\Sql\Predicates\RoleEqualsValue.cs" />
+    <Compile Include="Adapters\Database\Sql\Predicates\RoleExists.cs" />
+    <Compile Include="Adapters\Database\Sql\Predicates\RoleGreaterThanRole.cs" />
+    <Compile Include="Adapters\Database\Sql\Predicates\RoleGreaterThanValue.cs" />
+    <Compile Include="Adapters\Database\Sql\Predicates\RoleInstanceof.cs" />
+    <Compile Include="Adapters\Database\Sql\Predicates\RoleLessThanRole.cs" />
+    <Compile Include="Adapters\Database\Sql\Predicates\RoleLessThanValue.cs" />
+    <Compile Include="Adapters\Database\Sql\Predicates\RoleLike.cs" />
+    <Compile Include="Adapters\Database\Sql\Reference.cs" />
+    <Compile Include="Adapters\Database\Sql\Roles.cs" />
+    <Compile Include="Adapters\Database\Sql\Save.cs" />
+    <Compile Include="Adapters\Database\Sql\Schema\ISchemaValidationError.cs" />
+    <Compile Include="Adapters\Database\Sql\Schema\ProcedureSchemaValidationError.cs" />
+    <Compile Include="Adapters\Database\Sql\Schema\ReservedWords.cs" />
+    <Compile Include="Adapters\Database\Sql\Schema\Schema.cs" />
+    <Compile Include="Adapters\Database\Sql\Schema\SchemaColumn.cs" />
+    <Compile Include="Adapters\Database\Sql\Schema\SchemaIndexType.cs" />
+    <Compile Include="Adapters\Database\Sql\Schema\SchemaParameter.cs" />
+    <Compile Include="Adapters\Database\Sql\Schema\SchemaProcedure.cs" />
+    <Compile Include="Adapters\Database\Sql\Schema\SchemaTable.cs" />
+    <Compile Include="Adapters\Database\Sql\Schema\SchemaTableKind.cs" />
+    <Compile Include="Adapters\Database\Sql\Schema\SchemaValidationErrorKind.cs" />
+    <Compile Include="Adapters\Database\Sql\Schema\SchemaValidationErrors.cs" />
+    <Compile Include="Adapters\Database\Sql\Schema\SchemaValidationException.cs" />
+    <Compile Include="Adapters\Database\Sql\Schema\TableSchemaValidationError.cs" />
+    <Compile Include="Adapters\Database\Sql\SessionCommands.cs" />
+    <Compile Include="Adapters\Database\Sql\Strategy.cs" />
+    <Compile Include="Adapters\Database\Sql\SyncBatch.cs" />
+    <Compile Include="Adapters\EmptySet.cs" />
+    <Compile Include="Adapters\Population.cs" />
+    <Compile Include="Adapters\Properties\AssemblyInfo.cs" />
+    <Compile Include="Adapters\RelationTypeManyXmlWriter.cs" />
+    <Compile Include="Adapters\RelationTypeOneXmlWriter.cs" />
+    <Compile Include="Adapters\Serialization.cs" />
+    <Compile Include="Adapters\UnitRelation.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SqlClient\Command.cs" />
+    <Compile Include="SqlClient\CommandFactories.cs" />
+    <Compile Include="SqlClient\Commands\Command.cs" />
+    <Compile Include="SqlClient\Commands\DatabaseCommand.cs" />
+    <Compile Include="SqlClient\Commands\Procedure\AddCompositeRoleFactory.cs" />
+    <Compile Include="SqlClient\Commands\Procedure\ClearCompositeAndCompositesRoleFactory.cs" />
+    <Compile Include="SqlClient\Commands\Procedure\CreateObjectFactory.cs" />
+    <Compile Include="SqlClient\Commands\Procedure\CreateObjectsFactory.cs" />
+    <Compile Include="SqlClient\Commands\Procedure\GetCacheIdsFactory.cs" />
+    <Compile Include="SqlClient\Commands\Procedure\GetCompositeAssociationFactory.cs" />
+    <Compile Include="SqlClient\Commands\Procedure\GetCompositeAssociationsFactory.cs" />
+    <Compile Include="SqlClient\Commands\Procedure\GetCompositeRoleFactory.cs" />
+    <Compile Include="SqlClient\Commands\Procedure\GetCompositeRolesFactory.cs" />
+    <Compile Include="SqlClient\Commands\Procedure\GetUnitRolesFactory.cs" />
+    <Compile Include="SqlClient\Commands\Procedure\LoadCompositeRelationsFactory.cs" />
+    <Compile Include="SqlClient\Commands\Procedure\LoadObjectsFactory.cs" />
+    <Compile Include="SqlClient\Commands\Procedure\LoadUnitRelationsFactory.cs" />
+    <Compile Include="SqlClient\Commands\Procedure\RemoveCompositeRoleFactory.cs" />
+    <Compile Include="SqlClient\Commands\Procedure\SetCompositeRoleFactory.cs" />
+    <Compile Include="SqlClient\Commands\Procedure\SetUnitRoleFactory.cs" />
+    <Compile Include="SqlClient\Commands\Procedure\UpdateCacheIdsFactory.cs" />
+    <Compile Include="SqlClient\Commands\Text\DeleteObjectFactory.cs" />
+    <Compile Include="SqlClient\Commands\Text\GetObjectTypeFactory.cs" />
+    <Compile Include="SqlClient\Commands\Text\InsertObjectFactory.cs" />
+    <Compile Include="SqlClient\Commands\Text\InstantiateObjectFactory.cs" />
+    <Compile Include="SqlClient\Commands\Text\InstantiateObjectsFactory.cs" />
+    <Compile Include="SqlClient\Commands\Text\SetUnitRolesFactory.cs" />
+    <Compile Include="SqlClient\Configuration.cs" />
+    <Compile Include="SqlClient\Constants.cs" />
+    <Compile Include="SqlClient\Database.cs" />
+    <Compile Include="SqlClient\DatabaseSession.cs" />
+    <Compile Include="SqlClient\Flush.cs" />
+    <Compile Include="SqlClient\ICommandFactory.cs" />
+    <Compile Include="SqlClient\IntegerId\Configuration.cs" />
+    <Compile Include="SqlClient\IntegerId\Database.cs" />
+    <Compile Include="SqlClient\IntegerId\ObjectTableForObjectIds.cs" />
+    <Compile Include="SqlClient\IntegerId\ObjectTableForRolesByReference.cs" />
+    <Compile Include="SqlClient\IntegerId\ObjectTableForStrategies.cs" />
+    <Compile Include="SqlClient\IntegerId\RelationTableForCompositeRelations.cs" />
+    <Compile Include="SqlClient\IntegerId\RelationTableForUnitRelations.cs" />
+    <Compile Include="SqlClient\IntegerId\Schema.cs" />
+    <Compile Include="SqlClient\Load.cs" />
+    <Compile Include="SqlClient\LongId\Configuration.cs" />
+    <Compile Include="SqlClient\LongId\Database.cs" />
+    <Compile Include="SqlClient\LongId\ObjectTableForObjectIds.cs" />
+    <Compile Include="SqlClient\LongId\ObjectTableForRolesByReference.cs" />
+    <Compile Include="SqlClient\LongId\ObjectTableForStrategies.cs" />
+    <Compile Include="SqlClient\LongId\RelationTableForCompositeRelations.cs" />
+    <Compile Include="SqlClient\LongId\RelationTableForUnitRelations.cs" />
+    <Compile Include="SqlClient\LongId\Schema.cs" />
+    <Compile Include="SqlClient\ManagementSession.cs" />
+    <Compile Include="SqlClient\properties\AssemblyInfo.cs" />
+    <Compile Include="SqlClient\Save.cs" />
+    <Compile Include="SqlClient\SchemaTableParameter.cs" />
+    <Compile Include="SqlClient\Schema\Schema.cs" />
+    <Compile Include="SqlClient\Schema\SchemaParameter.cs" />
+    <Compile Include="SqlClient\SessionCommands.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Framework\Framework\Allors.csproj">
+      <Project>{84495b8e-1800-41c9-a236-abe6265a23a3}</Project>
+      <Name>Allors</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SqlClient\RepositoryCommands\Text\" />
+    <Folder Include="SqlClient\SessionCommands\Text\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Adapters\Database\Sql\Overview.cd" />
+    <None Include="Adapters\Diagrams\Schema.cd" />
+    <None Include="Adapters\Diagrams\Strategy.cd" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
