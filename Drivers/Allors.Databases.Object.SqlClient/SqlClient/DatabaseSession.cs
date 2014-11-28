@@ -834,7 +834,7 @@ namespace Allors.Databases.Object.SqlClient
             return command;
         }
 
-        public Adapters.Database.Sql.Command CreateCommand(string commandText)
+        public Command CreateCommand(string commandText)
         {
             return new Command(this, commandText);
         }

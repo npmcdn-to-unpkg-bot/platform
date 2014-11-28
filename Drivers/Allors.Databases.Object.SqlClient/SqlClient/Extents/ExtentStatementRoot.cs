@@ -31,7 +31,7 @@ namespace Allors.Databases.Object.SqlClient
         private readonly Dictionary<object, string> paramNameByParamValue;
         private readonly StringBuilder sql;
         private int aliasIndex;
-        private Adapters.Database.Sql.Command command;
+        private Command command;
         private int parameterIndex;
 
         public ExtentStatementRoot(SqlExtent extent) : base(extent)
@@ -84,7 +84,7 @@ namespace Allors.Databases.Object.SqlClient
             return new ExtentStatementChild(this, extent, role);
         }
 
-        public Adapters.Database.Sql.Command CreateDbCommand(string alias)
+        public Command CreateDbCommand(string alias)
         {
             if (this.sql.Length == 0)
             {

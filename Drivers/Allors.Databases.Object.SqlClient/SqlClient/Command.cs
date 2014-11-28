@@ -25,8 +25,119 @@ namespace Allors.Databases.Object.SqlClient
     using System.Data.Common;
     using System.Data.SqlClient;
 
-    internal class Command : Adapters.Database.Sql.Command
+    using Allors.Meta;
+
+    public class Command : IDisposable
     {
+        public virtual byte[] GetBinary(DbDataReader reader, int i)
+        {
+            return (byte[])reader.GetValue(i);
+        }
+
+        public virtual bool GetBoolean(DbDataReader reader, int i)
+        {
+            return reader.GetBoolean(i);
+        }
+
+
+        public virtual decimal GetDecimal(DbDataReader reader, int i)
+        {
+            return reader.GetDecimal(i);
+        }
+
+        public virtual double GetFloat(DbDataReader reader, int i)
+        {
+            return reader.GetDouble(i);
+        }
+
+        public virtual int GetInteger(DbDataReader reader, int i)
+        {
+            return reader.GetInt32(i);
+        }
+
+        public virtual object GetParameterValue(SchemaParameter parameter)
+        {
+            return this.DbCommand.Parameters[parameter.Name].Value;
+        }
+
+        public virtual string GetString(DbDataReader reader, int i)
+        {
+            return reader.GetString(i);
+        }
+
+        public virtual Guid GetUnique(DbDataReader reader, int i)
+        {
+            return reader.GetGuid(i);
+        }
+
+        public virtual object GetValue(DbDataReader reader, int i)
+        {
+            return reader.GetValue(i);
+        }
+
+        public virtual object GetValue(DbDataReader reader, UnitTags unitTypeTag, int i)
+        {
+            switch (unitTypeTag)
+            {
+                case UnitTags.AllorsString:
+                    return this.GetString(reader, i);
+                case UnitTags.AllorsInteger:
+                    return this.GetInteger(reader, i);
+                case UnitTags.AllorsFloat:
+                    return this.GetFloat(reader, i);
+                case UnitTags.AllorsDecimal:
+                    return this.GetDecimal(reader, i);
+                case UnitTags.AllorsBoolean:
+                    return this.GetBoolean(reader, i);
+                case UnitTags.AllorsUnique:
+                    return this.GetUnique(reader, i);
+                case UnitTags.AllorsBinary:
+                    return this.GetBinary(reader, i);
+                default:
+                    throw new ArgumentException("Unknown Unit ObjectType: " + unitTypeTag);
+            }
+        }
+
+        public virtual void ExecuteNonQuery()
+        {
+            this.DbCommand.ExecuteNonQuery();
+        }
+
+        public virtual DbDataReader ExecuteReader()
+        {
+            return this.DbCommand.ExecuteReader();
+        }
+
+        public virtual object ExecuteReaderGetValue()
+        {
+            using (var reader = this.ExecuteReader())
+            {
+                if (reader.Read())
+                {
+                    return this.GetValue(reader, 0);
+                }
+
+                throw new Exception("Reader returned no rows");
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         private readonly SqlCommand command;
 
         public Command(ICommandFactory commandFactory, string commandText)
@@ -34,12 +145,12 @@ namespace Allors.Databases.Object.SqlClient
             this.command = commandFactory.CreateSqlCommand(commandText);
         }
 
-        protected override DbCommand DbCommand
+        protected DbCommand DbCommand
         {
             get { return this.command; }
         }
 
-        public override void AddInParameter(string parameterName, object value)
+        public void AddInParameter(string parameterName, object value)
         {
             var sqlParameter = this.command.Parameters.Contains(parameterName) ? this.command.Parameters[parameterName] : null;
             if (sqlParameter == null)
@@ -52,7 +163,7 @@ namespace Allors.Databases.Object.SqlClient
             this.SetParameterValue(parameterName, value);
         }
 
-        public override void AddInParameter(Adapters.Database.Sql.SchemaParameter parameter, object value)
+        public void AddInParameter(Adapters.Database.Sql.SchemaParameter parameter, object value)
         {
             var sqlParameter = this.command.Parameters.Contains(parameter.Name) ? this.command.Parameters[parameter.Name] : null;
             if (sqlParameter == null)
@@ -66,7 +177,7 @@ namespace Allors.Databases.Object.SqlClient
             this.SetParameterValue(parameter.Name, value);
         }
 
-        public override void AddInParameter(DbParameter parameter)
+        public void AddInParameter(DbParameter parameter)
         {
             if (this.command.Parameters.Contains(parameter.ParameterName))
             {
@@ -76,7 +187,7 @@ namespace Allors.Databases.Object.SqlClient
             this.command.Parameters.Add(parameter);
         }
 
-        public override void AddOutParameter(Adapters.Database.Sql.SchemaParameter parameter)
+        public void AddOutParameter(Adapters.Database.Sql.SchemaParameter parameter)
         {
             var sqlParameter = this.command.Parameters.Contains(parameter.Name) ? this.command.Parameters[parameter.Name] : null;
             if (sqlParameter == null)
@@ -91,12 +202,12 @@ namespace Allors.Databases.Object.SqlClient
             this.command.Parameters.Add(sqlParameter);
         }
 
-        public override void SetParameterValue(Adapters.Database.Sql.SchemaParameter parameter, object value)
+        public void SetParameterValue(Adapters.Database.Sql.SchemaParameter parameter, object value)
         {
             this.SetParameterValue(parameter.Name, value);
         }
 
-        public override void Dispose()
+        public void Dispose()
         {
             this.command.Dispose();
         }
