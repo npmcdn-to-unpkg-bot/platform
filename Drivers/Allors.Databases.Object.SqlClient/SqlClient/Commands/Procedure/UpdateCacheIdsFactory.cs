@@ -30,16 +30,16 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
     using DatabaseSession = DatabaseSession;
     using Schema = Schema;
 
-    public class UpdateCacheIdsFactory
+    internal class UpdateCacheIdsFactory
     {
         private readonly Database database;
 
-        public UpdateCacheIdsFactory(Database database)
+        internal UpdateCacheIdsFactory(Database database)
         {
             this.database = database;
         }
 
-        public Database Database
+        internal Database Database
         {
             get
             {
@@ -47,23 +47,23 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             }
         }
 
-        public UpdateCacheIds Create(DatabaseSession session)
+        internal UpdateCacheIds Create(DatabaseSession session)
         {
             return new UpdateCacheIds(this, session);
         }
 
-        public class UpdateCacheIds : DatabaseCommand
+        internal class UpdateCacheIds : DatabaseCommand
         {
             private readonly UpdateCacheIdsFactory factory;
             private SqlCommand command;
 
-            public UpdateCacheIds(UpdateCacheIdsFactory factory, DatabaseSession session)
+            internal UpdateCacheIds(UpdateCacheIdsFactory factory, DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
             }
 
-            public void Execute(Dictionary<Reference, Roles> modifiedRolesByReference)
+            internal void Execute(Dictionary<Reference, Roles> modifiedRolesByReference)
             {
                 var schema = this.factory.Database.SqlClientSchema;
 

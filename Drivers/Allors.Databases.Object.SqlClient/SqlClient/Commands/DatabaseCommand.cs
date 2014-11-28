@@ -20,7 +20,7 @@
 
 namespace Allors.Databases.Object.SqlClient.Commands
 {
-    public abstract class DatabaseCommand : Command
+    internal abstract class DatabaseCommand : Command
     {
         protected readonly DatabaseSession Session;
         protected readonly Database Database;

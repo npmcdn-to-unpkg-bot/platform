@@ -32,23 +32,23 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
     using Database = Database;
     using DatabaseSession = DatabaseSession;
 
-    public class GetCompositeAssociationFactory
+    internal class GetCompositeAssociationFactory
     {
-        public readonly Database Database;
+        internal readonly Database Database;
         private readonly Dictionary<IAssociationType, string> sqlByIAssociationType;
 
-        public GetCompositeAssociationFactory(Database database)
+        internal GetCompositeAssociationFactory(Database database)
         {
             this.Database = database;
             this.sqlByIAssociationType = new Dictionary<IAssociationType, string>();
         }
 
-        public GetCompositeAssociation Create(DatabaseSession session)
+        internal GetCompositeAssociation Create(DatabaseSession session)
         {
             return new GetCompositeAssociation(this, session);
         }
 
-        public string GetSql(IAssociationType associationType)
+        internal string GetSql(IAssociationType associationType)
         {
             if (!this.sqlByIAssociationType.ContainsKey(associationType))
             {
@@ -77,19 +77,19 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             return this.sqlByIAssociationType[associationType];
         }
 
-        public class GetCompositeAssociation : DatabaseCommand
+        internal class GetCompositeAssociation : DatabaseCommand
         {
             private readonly GetCompositeAssociationFactory factory;
             private readonly Dictionary<IAssociationType, SqlCommand> commandByIAssociationType;
 
-            public GetCompositeAssociation(GetCompositeAssociationFactory factory, DatabaseSession session)
+            internal GetCompositeAssociation(GetCompositeAssociationFactory factory, DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
                 this.commandByIAssociationType = new Dictionary<IAssociationType, SqlCommand>();
             }
 
-            public Reference Execute(Reference role, IAssociationType associationType)
+            internal Reference Execute(Reference role, IAssociationType associationType)
             {
                 Reference associationObject = null;
 

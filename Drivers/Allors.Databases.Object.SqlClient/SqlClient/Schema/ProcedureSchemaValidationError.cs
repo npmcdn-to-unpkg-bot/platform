@@ -20,25 +20,17 @@
 
 namespace Allors.Databases.Object.SqlClient
 {
-    public class ProcedureSchemaValidationError : ISchemaValidationError
+    internal class ProcedureSchemaValidationError : ISchemaValidationError
     {
         private readonly SchemaProcedure schemaProcedure;
         private readonly SchemaValidationErrorKind kind;
         private readonly string message;
 
-        public ProcedureSchemaValidationError(SchemaProcedure schemaProcedure, SchemaValidationErrorKind kind, string message)
+        internal ProcedureSchemaValidationError(SchemaProcedure schemaProcedure, SchemaValidationErrorKind kind, string message)
         {
             this.schemaProcedure = schemaProcedure;
             this.kind = kind;
             this.message = message;
-        }
-
-        public SchemaProcedure SchemaProcedure
-        {
-            get
-            {
-                return this.schemaProcedure;
-            }
         }
 
         public SchemaValidationErrorKind Kind
@@ -59,7 +51,7 @@ namespace Allors.Databases.Object.SqlClient
 
         public override string ToString()
         {
-            return this.SchemaProcedure.ToString();
+            return this.schemaProcedure.ToString();
         }
     }
 }

@@ -26,12 +26,12 @@ namespace Allors.Databases.Object.SqlClient.IntegerId
 
     using Microsoft.SqlServer.Server;
 
-    public class ObjectTableForObjectIds : IEnumerable<SqlDataRecord>
+    internal class ObjectTableForObjectIds : IEnumerable<SqlDataRecord>
     {
         private readonly Schema schema;
         private readonly IEnumerable<ObjectId> objectIds;
 
-        public ObjectTableForObjectIds(Schema schema, IEnumerable<ObjectId> objectIds)
+        internal ObjectTableForObjectIds(Schema schema, IEnumerable<ObjectId> objectIds)
         {
             this.schema = schema;
             this.objectIds = objectIds;

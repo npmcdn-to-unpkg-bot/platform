@@ -23,13 +23,13 @@ namespace Allors.Databases.Object.SqlClient
     using Allors.Meta;
     using Allors.Populations;
 
-    public sealed class RoleBetweenRole : Predicate
+    internal sealed class RoleBetweenRole : Predicate
     {
         private readonly IRoleType first;
         private readonly IRoleType role;
         private readonly IRoleType second;
 
-        public RoleBetweenRole(ExtentFiltered extent, IRoleType role, IRoleType first, IRoleType second)
+        internal RoleBetweenRole(ExtentFiltered extent, IRoleType role, IRoleType first, IRoleType second)
         {
             extent.CheckRole(role);
             PredicateAssertions.ValidateRoleBetween(role, first, second);
@@ -38,14 +38,14 @@ namespace Allors.Databases.Object.SqlClient
             this.second = second;
         }
 
-        public override bool BuildWhere(ExtentStatement statement, string alias)
+        internal override bool BuildWhere(ExtentStatement statement, string alias)
         {
             var schema = statement.Schema;
             statement.Append(" (" + alias + "." + schema.Column(this.role) + " BETWEEN " + alias + "." + schema.Column(this.first) + " AND " + alias + "." + schema.Column(this.second) + ")");
             return this.Include;
         }
 
-        public override void Setup(ExtentStatement statement)
+        internal override void Setup(ExtentStatement statement)
         {
             statement.UseRole(this.role);
             statement.UseRole(this.first);

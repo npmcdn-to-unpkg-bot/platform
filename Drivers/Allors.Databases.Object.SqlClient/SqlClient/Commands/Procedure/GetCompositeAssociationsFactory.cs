@@ -31,23 +31,23 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
     using Database = Database;
     using DatabaseSession = DatabaseSession;
 
-    public class GetCompositeAssociationsFactory
+    internal class GetCompositeAssociationsFactory
     {
-        public readonly Database Database;
+        internal readonly Database Database;
         private readonly Dictionary<IAssociationType, string> sqlByIAssociationType;
 
-        public GetCompositeAssociationsFactory(Database database)
+        internal GetCompositeAssociationsFactory(Database database)
         {
             this.Database = database;
             this.sqlByIAssociationType = new Dictionary<IAssociationType, string>();
         }
 
-        public GetCompositeAssociations Create(DatabaseSession session)
+        internal GetCompositeAssociations Create(DatabaseSession session)
         {
             return new GetCompositeAssociations(this, session);
         }
 
-        public string GetSql(IAssociationType associationType)
+        internal string GetSql(IAssociationType associationType)
         {
             if (!this.sqlByIAssociationType.ContainsKey(associationType))
             {
@@ -69,19 +69,19 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
             return this.sqlByIAssociationType[associationType];
         }
 
-        public class GetCompositeAssociations : DatabaseCommand
+        internal class GetCompositeAssociations : DatabaseCommand
         {
             private readonly GetCompositeAssociationsFactory factory;
             private readonly Dictionary<IAssociationType, SqlCommand> commandByIAssociationType;
 
-            public GetCompositeAssociations(GetCompositeAssociationsFactory factory, DatabaseSession session)
+            internal GetCompositeAssociations(GetCompositeAssociationsFactory factory, DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
                 this.commandByIAssociationType = new Dictionary<IAssociationType, SqlCommand>();
             }
 
-            public ObjectId[] Execute(Strategy role, IAssociationType associationType)
+            internal ObjectId[] Execute(Strategy role, IAssociationType associationType)
             {
                 SqlCommand command;
                 if (!this.commandByIAssociationType.TryGetValue(associationType, out command))

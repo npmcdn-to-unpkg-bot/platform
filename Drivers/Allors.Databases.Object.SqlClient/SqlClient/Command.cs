@@ -31,80 +31,45 @@ namespace Allors.Databases.Object.SqlClient
     {
         private readonly SqlCommand command;
 
-        public Command(ICommandFactory commandFactory, string commandText)
+        internal Command(ICommandFactory commandFactory, string commandText)
         {
             this.command = commandFactory.CreateSqlCommand(commandText);
         }
 
-        public byte[] GetBinary(DbDataReader reader, int i)
-        {
-            return (byte[])reader.GetValue(i);
-        }
-
-        public bool GetBoolean(DbDataReader reader, int i)
-        {
-            return reader.GetBoolean(i);
-        }
-
-        public decimal GetDecimal(DbDataReader reader, int i)
-        {
-            return reader.GetDecimal(i);
-        }
-
-        public double GetFloat(DbDataReader reader, int i)
-        {
-            return reader.GetDouble(i);
-        }
-
-        public int GetInteger(DbDataReader reader, int i)
-        {
-            return reader.GetInt32(i);
-        }
-
-        public string GetString(DbDataReader reader, int i)
-        {
-            return reader.GetString(i);
-        }
-
-        public Guid GetUnique(DbDataReader reader, int i)
-        {
-            return reader.GetGuid(i);
-        }
-
-        public object GetValue(DbDataReader reader, UnitTags unitTypeTag, int i)
+        internal object GetValue(DbDataReader reader, UnitTags unitTypeTag, int i)
         {
             switch (unitTypeTag)
             {
                 case UnitTags.AllorsString:
-                    return this.GetString(reader, i);
+                    return reader.GetString(i);
                 case UnitTags.AllorsInteger:
-                    return this.GetInteger(reader, i);
+                    return reader.GetInt32(i);
                 case UnitTags.AllorsFloat:
-                    return this.GetFloat(reader, i);
+                    return reader.GetDouble(i);
                 case UnitTags.AllorsDecimal:
-                    return this.GetDecimal(reader, i);
+                    return reader.GetDecimal(i);
                 case UnitTags.AllorsBoolean:
-                    return this.GetBoolean(reader, i);
+                    return reader.GetBoolean(i);
                 case UnitTags.AllorsUnique:
-                    return this.GetUnique(reader, i);
+                    return reader.GetGuid(i);
                 case UnitTags.AllorsBinary:
-                    return this.GetBinary(reader, i);
+                    return reader.GetValue(i);
                 default:
                     throw new ArgumentException("Unknown Unit ObjectType: " + unitTypeTag);
             }
         }
 
-        public void ExecuteNonQuery()
+        internal void ExecuteNonQuery()
         {
             this.command.ExecuteNonQuery();
         }
 
-        public DbDataReader ExecuteReader()
+        internal DbDataReader ExecuteReader()
         {
             return ((DbCommand)this.command).ExecuteReader();
         }
 
-        public void AddInParameter(string parameterName, object value)
+        internal void AddInParameter(string parameterName, object value)
         {
             var sqlParameter = this.command.Parameters.Contains(parameterName) ? this.command.Parameters[parameterName] : null;
             if (sqlParameter == null)

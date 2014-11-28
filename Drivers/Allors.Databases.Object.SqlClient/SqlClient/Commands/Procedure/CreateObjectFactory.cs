@@ -33,31 +33,31 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
     using Database = Database;
     using DatabaseSession = DatabaseSession;
 
-    public class CreateObjectFactory
+    internal class CreateObjectFactory
     {
         internal readonly Database Database;
 
-        public CreateObjectFactory(Database database)
+        internal CreateObjectFactory(Database database)
         {
             this.Database = database;
         }
 
-        public CreateObject Create(DatabaseSession session)
+        internal CreateObject Create(DatabaseSession session)
         {
             return new CreateObject(session);
         }
 
-        public class CreateObject : DatabaseCommand
+        internal class CreateObject : DatabaseCommand
         {
             private readonly Dictionary<IObjectType, SqlCommand> commandByIObjectType;
 
-            public CreateObject(DatabaseSession session)
+            internal CreateObject(DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.commandByIObjectType = new Dictionary<IObjectType, SqlCommand>();
             }
 
-            public Reference Execute(IClass objectType)
+            internal Reference Execute(IClass objectType)
             {
                 var exclusiveRootClass = ((IComposite)objectType).ExclusiveLeafClass;
                 var schema = this.Database.Schema;

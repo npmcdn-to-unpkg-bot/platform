@@ -28,12 +28,12 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
     using Database = Database;
     using DatabaseSession = DatabaseSession;
 
-    public class GetIObjectTypeFactory
+    internal class GetIObjectTypeFactory
     {
-        public readonly Database Database;
-        public readonly string Sql;
+        internal readonly Database Database;
+        internal readonly string Sql;
 
-        public GetIObjectTypeFactory(Database database)
+        internal GetIObjectTypeFactory(Database database)
         {
             this.Database = database;
             this.Sql = "SELECT " + database.Schema.TypeId + "\n";
@@ -41,23 +41,23 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
             this.Sql += "WHERE " + database.Schema.ObjectId + "=" + database.Schema.ObjectId.Param + "\n";
         }
 
-        public GetIObjectType Create(DatabaseSession session)
+        internal GetIObjectType Create(DatabaseSession session)
         {
             return new GetIObjectType(this, session);
         }
 
-        public class GetIObjectType : DatabaseCommand
+        internal class GetIObjectType : DatabaseCommand
         {
             private readonly GetIObjectTypeFactory factory;
             private SqlCommand command;
 
-            public GetIObjectType(GetIObjectTypeFactory factory, DatabaseSession session)
+            internal GetIObjectType(GetIObjectTypeFactory factory, DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
             }
 
-            public IClass Execute(ObjectId objectId)
+            internal IClass Execute(ObjectId objectId)
             {
                 if (this.command == null)
                 {

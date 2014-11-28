@@ -24,12 +24,12 @@ namespace Allors.Databases.Object.SqlClient
 
     using Meta;
 
-    public sealed class RoleContainedInExtent : In
+    internal sealed class RoleContainedInExtent : In
     {
         private readonly SqlExtent inExtent;
         private readonly IRoleType role;
 
-        public RoleContainedInExtent(ExtentFiltered extent, IRoleType role, Allors.Extent inExtent)
+        internal RoleContainedInExtent(ExtentFiltered extent, IRoleType role, Allors.Extent inExtent)
         {
             extent.CheckRole(role);
             PredicateAssertions.ValidateRoleContainedIn(role, inExtent);
@@ -37,7 +37,7 @@ namespace Allors.Databases.Object.SqlClient
             this.inExtent = ((Extent)inExtent).ContainedInExtent;
         }
 
-        public override bool BuildWhere(ExtentStatement statement, string alias)
+        internal override bool BuildWhere(ExtentStatement statement, string alias)
         {
             var schema = statement.Schema;
             var inStatement = statement.CreateChild(this.inExtent, this.role);
@@ -72,7 +72,7 @@ namespace Allors.Databases.Object.SqlClient
             return this.Include;
         }
 
-        public override void Setup(ExtentStatement statement)
+        internal override void Setup(ExtentStatement statement)
         {
             statement.UseRole(this.role);
         }

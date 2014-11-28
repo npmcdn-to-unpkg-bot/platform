@@ -24,35 +24,35 @@ namespace Allors.Databases.Object.SqlClient
 
     using Allors.Meta;
 
-    public class SchemaColumn
+    internal class SchemaColumn
     {
-        public readonly string Name;
-        public readonly DbType DbType;
+        internal readonly string Name;
+        internal readonly DbType DbType;
 
-        public readonly bool IsIdentity;
-        public readonly bool IsKey;
-        public readonly SchemaIndexType IndexType;
+        internal readonly bool IsIdentity;
+        internal readonly bool IsKey;
+        internal readonly SchemaIndexType IndexType;
 
-        public readonly SchemaParameter Param;
-        public readonly string StatementName;
+        internal readonly SchemaParameter Param;
+        internal readonly string StatementName;
 
-        public readonly int? Precision;
-        public readonly int? Scale;
-        public readonly int? Size;
+        internal readonly int? Precision;
+        internal readonly int? Scale;
+        internal readonly int? Size;
 
-        public readonly IRelationType RelationType;
+        internal readonly IRelationType RelationType;
 
-        public SchemaColumn(Schema schema, string name, DbType dbType, bool isIdentity, bool isKey, SchemaIndexType indexType)
+        internal SchemaColumn(Schema schema, string name, DbType dbType, bool isIdentity, bool isKey, SchemaIndexType indexType)
             : this(schema, name, dbType, isIdentity, isKey, indexType, null, null, null, null)
         {
         }
 
-        public SchemaColumn(Schema schema, string name, DbType dbType, bool isIdentity, bool isKey, SchemaIndexType indexType, IRelationType relationType)
+        internal SchemaColumn(Schema schema, string name, DbType dbType, bool isIdentity, bool isKey, SchemaIndexType indexType, IRelationType relationType)
             : this(schema, name, dbType, isIdentity, isKey, indexType, relationType, null, null, null)
         {
         }
 
-        public SchemaColumn(Schema schema, string name, DbType dbType, bool isIdentity, bool isKey, SchemaIndexType indexType, IRelationType relationType, int? size, int? precision, int? scale)
+        internal SchemaColumn(Schema schema, string name, DbType dbType, bool isIdentity, bool isKey, SchemaIndexType indexType, IRelationType relationType, int? size, int? precision, int? scale)
         {
             this.Name = name.ToLowerInvariant();
             this.StatementName = schema.EscapeIfReserved(this.Name);

@@ -31,34 +31,34 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
     using Database = Database;
     using DatabaseSession = DatabaseSession;
 
-    public class SetUnitRolesFactory
+    internal class SetUnitRolesFactory
     {
-        public readonly Database Database;
+        internal readonly Database Database;
 
-        public SetUnitRolesFactory(Database database)
+        internal SetUnitRolesFactory(Database database)
         {
             this.Database = database;
         }
 
-        public SetUnitRoles Create(DatabaseSession session)
+        internal SetUnitRoles Create(DatabaseSession session)
         {
             return new SetUnitRoles(session);
         }
 
-        public class SetUnitRoles : DatabaseCommand
+        internal class SetUnitRoles : DatabaseCommand
         {
             private readonly DatabaseSession session;
 
             private readonly Dictionary<IObjectType, Dictionary<IList<IRoleType>, SqlCommand>> commandByKeyByIObjectType; 
 
-            public SetUnitRoles(DatabaseSession session)
+            internal SetUnitRoles(DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.session = (DatabaseSession)session;
                 this.commandByKeyByIObjectType = new Dictionary<IObjectType, Dictionary<IList<IRoleType>, SqlCommand>>();
             }
 
-            public void Execute(Roles roles, IList<IRoleType> sortedIRoleTypes)
+            internal void Execute(Roles roles, IList<IRoleType> sortedIRoleTypes)
             {
                 var schema = this.Database.Schema;
 

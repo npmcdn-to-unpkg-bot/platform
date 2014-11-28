@@ -22,13 +22,13 @@ namespace Allors.Databases.Object.SqlClient
 {
     using Allors.Databases.Object.SqlClient;
 
-    public sealed class AndPredicate : CompositePredicate
+    internal sealed class AndPredicate : CompositePredicate
     {
-        public AndPredicate(ExtentFiltered extent) : base(extent)
+        internal AndPredicate(ExtentFiltered extent) : base(extent)
         {
         }
 
-        public override bool BuildWhere(ExtentStatement statement, string alias)
+        internal override bool BuildWhere(ExtentStatement statement, string alias)
         {
             if (this.Include)
             {

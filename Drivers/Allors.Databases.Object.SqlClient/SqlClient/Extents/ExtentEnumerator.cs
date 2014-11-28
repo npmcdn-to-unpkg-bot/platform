@@ -25,11 +25,11 @@ namespace Allors.Databases.Object.SqlClient
 
     using Allors.Databases.Object.SqlClient;
 
-    public class ExtentEnumerator : IEnumerator
+    internal class ExtentEnumerator : IEnumerator
     {
         private readonly IEnumerator enumerator;
 
-        public ExtentEnumerator(IEnumerable<Reference> references)
+        internal ExtentEnumerator(IEnumerable<Reference> references)
         {
             this.enumerator = references.GetEnumerator();
         }

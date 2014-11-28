@@ -29,16 +29,16 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
     using Database = Database;
     using DatabaseSession = DatabaseSession;
 
-    public class GetCacheIdsFactory
+    internal class GetCacheIdsFactory
     {
         private readonly Database database;
 
-        public GetCacheIdsFactory(Database database)
+        internal GetCacheIdsFactory(Database database)
         {
             this.database = database;
         }
 
-        public Database Database
+        internal Database Database
         {
             get
             {
@@ -46,23 +46,23 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             }
         }
 
-        public GetCacheIds Create(DatabaseSession session)
+        internal GetCacheIds Create(DatabaseSession session)
         {
             return new GetCacheIds(this, session);
         }
 
-        public class GetCacheIds : DatabaseCommand
+        internal class GetCacheIds : DatabaseCommand
         {
             private readonly GetCacheIdsFactory factory;
             private SqlCommand command;
 
-            public GetCacheIds(GetCacheIdsFactory factory, DatabaseSession session)
+            internal GetCacheIds(GetCacheIdsFactory factory, DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
             }
 
-            public Dictionary<ObjectId, int> Execute(ISet<Reference> strategyReferences)
+            internal Dictionary<ObjectId, int> Execute(ISet<Reference> strategyReferences)
             {
                 var schema = this.factory.Database.SqlClientSchema;
 

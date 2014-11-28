@@ -27,7 +27,7 @@ namespace Allors.Databases.Object.SqlClient
     /// <summary>
     /// Thrown when the <see cref="IDatabase"/> encounters a Sql schema that is incompatible with the <see cref="Domain"/>.
     /// </summary>
-    public class SchemaValidationException : Exception
+    internal class SchemaValidationException : Exception
     {
         /// <summary>
         /// The validation errors.
@@ -40,7 +40,7 @@ namespace Allors.Databases.Object.SqlClient
         /// <param name="validationErrors">The validation errors.</param>
         /// <param name="message">The message.</param>
         /// <param name="innerException">The inner exception.</param>
-        public SchemaValidationException(SchemaValidationErrors validationErrors, string message, Exception innerException) : base(message, innerException)
+        internal SchemaValidationException(SchemaValidationErrors validationErrors, string message, Exception innerException) : base(message, innerException)
         {
             this.validationErrors = validationErrors;
         }
@@ -50,7 +50,7 @@ namespace Allors.Databases.Object.SqlClient
         /// </summary>
         /// <param name="validationErrors">The validation errors.</param>
         /// <param name="message">The message.</param>
-        public SchemaValidationException(SchemaValidationErrors validationErrors, string message) : base(message)
+        internal SchemaValidationException(SchemaValidationErrors validationErrors, string message) : base(message)
         {
             this.validationErrors = validationErrors;
         }
@@ -59,7 +59,7 @@ namespace Allors.Databases.Object.SqlClient
         /// Gets the validation errors.
         /// </summary>
         /// <value>The validation errors.</value>
-        public SchemaValidationErrors ValidationErrors
+        internal SchemaValidationErrors ValidationErrors
         {
             get { return this.validationErrors; }
         }

@@ -20,7 +20,7 @@
 
 namespace Allors.Databases.Object.SqlClient
 {
-    public enum SchemaTableKind
+    internal enum SchemaTableKind
     {
         /// <summary>
         /// A system table

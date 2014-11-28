@@ -20,7 +20,6 @@
 
 namespace Allors
 {
-    using System;
     using System.Xml;
 
     using Allors.Meta;

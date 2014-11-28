@@ -28,12 +28,12 @@ namespace Allors.Databases.Object.SqlClient.IntegerId
 
     using Microsoft.SqlServer.Server;
 
-    public class ObjectTableForStrategies : IEnumerable<SqlDataRecord>
+    internal class ObjectTableForStrategies : IEnumerable<SqlDataRecord>
     {
         private readonly Schema schema;
         private readonly IEnumerable<Reference> strategies;
 
-        public ObjectTableForStrategies(Schema schema, IEnumerable<Reference> strategies)
+        internal ObjectTableForStrategies(Schema schema, IEnumerable<Reference> strategies)
         {
             this.schema = schema;
             this.strategies = strategies;

@@ -31,9 +31,9 @@ namespace Allors.Databases.Object.SqlClient.Commands
 
     using SchemaParameter = SchemaParameter;
 
-    public abstract class Command
+    internal abstract class Command
     {
-        public void AddInObject(SqlCommand command, SqlClient.SchemaParameter parameter, object value)
+        internal void AddInObject(SqlCommand command, SqlClient.SchemaParameter parameter, object value)
         {
             var schemaParameter = (SchemaParameter)parameter;
 
@@ -45,12 +45,12 @@ namespace Allors.Databases.Object.SqlClient.Commands
             command.Parameters.Add(sqlParameter);
         }
 
-        public void SetInObject(SqlCommand command, SqlClient.SchemaParameter param, object value)
+        internal void SetInObject(SqlCommand command, SqlClient.SchemaParameter param, object value)
         {
             command.Parameters[param.Name].Value = Normalize(value);
         }
 
-        public void AddInTable(SqlCommand command, SchemaTableParameter parameter, IEnumerable<SqlDataRecord> array)
+        internal void AddInTable(SqlCommand command, SchemaTableParameter parameter, IEnumerable<SqlDataRecord> array)
         {
             var sqlParameter = command.CreateParameter();
             sqlParameter.SqlDbType = SqlDbType.Structured;
@@ -61,17 +61,17 @@ namespace Allors.Databases.Object.SqlClient.Commands
             command.Parameters.Add(sqlParameter);
         }
 
-        public void SetInTable(SqlCommand command, SchemaTableParameter param, IEnumerable<SqlDataRecord> array)
+        internal void SetInTable(SqlCommand command, SchemaTableParameter param, IEnumerable<SqlDataRecord> array)
         {
             command.Parameters[param.Name].Value = array;
         }
 
-        public int GetCachId(SqlDataReader reader, int i)
+        internal int GetCachId(SqlDataReader reader, int i)
         {
             return reader.GetInt32(i);
         }
 
-        public Guid GetClassId(SqlDataReader reader, int i)
+        internal Guid GetClassId(SqlDataReader reader, int i)
         {
             return reader.GetGuid(i);
         }

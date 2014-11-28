@@ -23,12 +23,12 @@ namespace Allors.Databases.Object.SqlClient
     using Allors.Meta;
     using Allors.Populations;
 
-    public sealed class AssociationContains : Predicate
+    internal sealed class AssociationContains : Predicate
     {
         private readonly IObject allorsObject;
         private readonly IAssociationType association;
 
-        public AssociationContains(ExtentFiltered extent, IAssociationType association, IObject allorsObject)
+        internal AssociationContains(ExtentFiltered extent, IAssociationType association, IObject allorsObject)
         {
             extent.CheckAssociation(association);
             PredicateAssertions.AssertAssociationContains(association, allorsObject);
@@ -36,7 +36,7 @@ namespace Allors.Databases.Object.SqlClient
             this.allorsObject = allorsObject;
         }
 
-        public override bool BuildWhere(ExtentStatement statement, string alias)
+        internal override bool BuildWhere(ExtentStatement statement, string alias)
         {
             var schema = statement.Schema;
             if ((this.association.IsMany && this.association.RoleType.IsMany) || !this.association.RelationType.ExistExclusiveLeafClasses)
@@ -57,7 +57,7 @@ namespace Allors.Databases.Object.SqlClient
             return this.Include;
         }
 
-        public override void Setup(ExtentStatement statement)
+        internal override void Setup(ExtentStatement statement)
         {
             statement.UseAssociation(this.association);
         }

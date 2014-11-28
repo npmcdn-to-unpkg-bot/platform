@@ -24,7 +24,7 @@ namespace Allors.Databases.Object.SqlClient
     using Allors.Meta;
     using Allors.Populations;
 
-    public sealed class ChangeSet : IChangeSet
+    internal sealed class ChangeSet : IChangeSet
     {
         private readonly EmptySet<IRoleType> emptySet;
         
@@ -36,7 +36,7 @@ namespace Allors.Databases.Object.SqlClient
 
         private readonly Dictionary<ObjectId, ISet<IRoleType>> roleTypesByAssociation;
 
-        public ChangeSet()
+        internal ChangeSet()
         {
             this.emptySet = new EmptySet<IRoleType>();
             this.created = new HashSet<ObjectId>();
@@ -97,24 +97,24 @@ namespace Allors.Databases.Object.SqlClient
             return this.emptySet;
         }
 
-        public void OnCreated(ObjectId objectId)
+        internal void OnCreated(ObjectId objectId)
         {
             this.created.Add(objectId);
         }
 
-        public void OnDeleted(ObjectId objectId)
+        internal void OnDeleted(ObjectId objectId)
         {
             this.deleted.Add(objectId);
         }
 
-        public void OnChangingUnitRole(Roles association, IRoleType roleType)
+        internal void OnChangingUnitRole(Roles association, IRoleType roleType)
         {
             this.associations.Add(association.Reference.ObjectId);
 
             this.RoleTypes(association.Reference.ObjectId).Add(roleType);
         }
 
-        public void OnChangingCompositeRole(Roles association, IRoleType roleType, ObjectId previousRole, ObjectId newRole)
+        internal void OnChangingCompositeRole(Roles association, IRoleType roleType, ObjectId previousRole, ObjectId newRole)
         {
             this.associations.Add(association.Reference.ObjectId);
 
@@ -131,7 +131,7 @@ namespace Allors.Databases.Object.SqlClient
             this.RoleTypes(association.Reference.ObjectId).Add(roleType);
         }
 
-        public void OnChangingCompositesRole(Roles association, IRoleType roleType, Strategy changedRole)
+        internal void OnChangingCompositesRole(Roles association, IRoleType roleType, Strategy changedRole)
         {
             this.associations.Add(association.Reference.ObjectId);
 

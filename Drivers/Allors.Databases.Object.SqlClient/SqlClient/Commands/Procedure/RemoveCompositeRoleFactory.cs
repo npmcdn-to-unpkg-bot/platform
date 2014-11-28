@@ -30,7 +30,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
     using Database = Database;
     using DatabaseSession = DatabaseSession;
 
-    public class RemoveCompositeRoleFactory
+    internal class RemoveCompositeRoleFactory
     {
         internal readonly Database Database;
         private readonly Dictionary<IRoleType, string> sqlByIRoleType;
@@ -41,7 +41,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             this.sqlByIRoleType = new Dictionary<IRoleType, string>();
         }
 
-        public RemoveCompositeRole Create(DatabaseSession session)
+        internal RemoveCompositeRole Create(DatabaseSession session)
         {
             return new RemoveCompositeRole(this, session);
         }
@@ -68,19 +68,19 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             return this.sqlByIRoleType[roleType];
         }
 
-        public class RemoveCompositeRole : DatabaseCommand
+        internal class RemoveCompositeRole : DatabaseCommand
         {
             private readonly RemoveCompositeRoleFactory factory;
             private readonly Dictionary<IRoleType, SqlCommand> commandByIRoleType;
 
-            public RemoveCompositeRole(RemoveCompositeRoleFactory factory, DatabaseSession session)
+            internal RemoveCompositeRole(RemoveCompositeRoleFactory factory, DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
                 this.commandByIRoleType = new Dictionary<IRoleType, SqlCommand>();
             }
 
-            public void Execute(IList<CompositeRelation> relations, IRoleType roleType)
+            internal void Execute(IList<CompositeRelation> relations, IRoleType roleType)
             {
                 SqlCommand command;
                 if (!this.commandByIRoleType.TryGetValue(roleType, out command))

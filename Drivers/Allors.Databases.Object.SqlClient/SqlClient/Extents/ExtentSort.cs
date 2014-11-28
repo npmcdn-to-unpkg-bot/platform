@@ -22,21 +22,21 @@ namespace Allors.Databases.Object.SqlClient
 {
     using Meta;
 
-    public class ExtentSort
+    internal class ExtentSort
     {
         private readonly SortDirection direction;
         private readonly IRoleType roleType;
         private readonly DatabaseSession session;
         private ExtentSort subSorter;
 
-        public ExtentSort(DatabaseSession session, IRoleType roleType, SortDirection direction)
+        internal ExtentSort(DatabaseSession session, IRoleType roleType, SortDirection direction)
         {
             this.session = session;
             this.roleType = roleType;
             this.direction = direction;
         }
 
-        public void AddSort(IRoleType subSortIRoleType, SortDirection subSortDirection)
+        internal void AddSort(IRoleType subSortIRoleType, SortDirection subSortDirection)
         {
             if (this.subSorter == null)
             {
@@ -48,7 +48,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public void BuildOrder(ExtentStatement statement)
+        internal void BuildOrder(ExtentStatement statement)
         {
             if (statement.Sorter.Equals(this))
             {
@@ -76,7 +76,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public void BuildOrder(ExtentStatement statement, string alias)
+        internal void BuildOrder(ExtentStatement statement, string alias)
         {
             if (statement.Sorter.Equals(this))
             {
@@ -104,7 +104,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public void BuildSelect(ExtentStatement statement)
+        internal void BuildSelect(ExtentStatement statement)
         {
             statement.Append(" , " + statement.Schema.Column(this.roleType) + " ");
             if (this.subSorter != null)
@@ -113,7 +113,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public void BuildSelect(ExtentStatement statement, string alias)
+        internal void BuildSelect(ExtentStatement statement, string alias)
         {
             statement.Append(" , " + alias + "." + statement.Schema.Column(this.roleType) + " ");
             if (this.subSorter != null)

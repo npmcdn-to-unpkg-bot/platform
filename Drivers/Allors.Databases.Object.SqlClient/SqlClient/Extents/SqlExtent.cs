@@ -28,13 +28,13 @@ namespace Allors.Databases.Object.SqlClient
 
     using Meta;
 
-    public abstract class SqlExtent : Extent
+    internal abstract class SqlExtent : Extent
     {
         private IList<ObjectId> objectIds;
 
         private ExtentSort sorter;
 
-        public override SqlExtent ContainedInExtent
+        internal override SqlExtent ContainedInExtent
         {
             get
             {
@@ -60,11 +60,11 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public virtual ExtentOperation ParentOperationExtent { get; set; }
+        internal virtual ExtentOperation ParentOperationExtent { get; set; }
 
-        public abstract DatabaseSession Session { get; }
+        internal abstract DatabaseSession Session { get; }
 
-        public virtual ExtentSort Sorter
+        internal virtual ExtentSort Sorter
         {
             get { return this.sorter; }
         }
@@ -77,7 +77,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public new IObject this[int index]
+        internal new IObject this[int index]
         {
             get { return this.GetItem(index); }
         }
@@ -152,9 +152,9 @@ namespace Allors.Databases.Object.SqlClient
             return (IObject[])array;
         }
 
-        public abstract string BuildSql(ExtentStatement statement);
+        internal abstract string BuildSql(ExtentStatement statement);
 
-        public virtual void FlushCache()
+        internal virtual void FlushCache()
         {
             this.objectIds = null;
             if (this.ParentOperationExtent != null)

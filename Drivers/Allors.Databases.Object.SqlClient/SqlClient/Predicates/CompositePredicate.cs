@@ -21,15 +21,12 @@
 namespace Allors.Databases.Object.SqlClient
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
 
-    using Allors.Databases.Object.SqlClient;
-
     using Meta;
 
-    public abstract class CompositePredicate : Predicate, ICompositePredicate
+    internal abstract class CompositePredicate : Predicate, ICompositePredicate
     {
         private readonly ExtentFiltered extent;
         private readonly List<Predicate> filters;
@@ -69,7 +66,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public override bool Include
+        internal override bool Include
         {
             get
             {
@@ -99,18 +96,6 @@ namespace Allors.Databases.Object.SqlClient
             {
                 return this.filters;
             }
-        }
-
-        public static IObjectType[] GetConcreteSubClasses(IObjectType type)
-        {
-            if (type.IsInterface)
-            {
-                return ((IInterface)type).Subclasses.ToArray();
-            }
-
-            var concreteSubclasses = new IObjectType[1];
-            concreteSubclasses[0] = type;
-            return concreteSubclasses;
         }
 
         public ICompositePredicate AddAnd()
@@ -321,7 +306,19 @@ namespace Allors.Databases.Object.SqlClient
             return anyFilter;
         }
 
-        public override void Setup(ExtentStatement statement)
+        internal static IObjectType[] GetConcreteSubClasses(IObjectType type)
+        {
+            if (type.IsInterface)
+            {
+                return ((IInterface)type).Subclasses.ToArray();
+            }
+
+            var concreteSubclasses = new IObjectType[1];
+            concreteSubclasses[0] = type;
+            return concreteSubclasses;
+        }
+
+        internal override void Setup(ExtentStatement statement)
         {
             foreach (var filter in this.Filters)
             {

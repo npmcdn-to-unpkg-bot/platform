@@ -26,12 +26,12 @@ namespace Allors.Databases.Object.SqlClient.LongId
 
     using Microsoft.SqlServer.Server;
 
-    public class RelationTableForCompositeRelations : IEnumerable<SqlDataRecord>
+    internal class RelationTableForCompositeRelations : IEnumerable<SqlDataRecord>
     {
         private readonly Schema schema;
         private readonly IEnumerable<CompositeRelation> relations;
 
-        public RelationTableForCompositeRelations(Schema schema, IEnumerable<CompositeRelation> relations)
+        internal RelationTableForCompositeRelations(Schema schema, IEnumerable<CompositeRelation> relations)
         {
             this.schema = schema;
             this.relations = relations;

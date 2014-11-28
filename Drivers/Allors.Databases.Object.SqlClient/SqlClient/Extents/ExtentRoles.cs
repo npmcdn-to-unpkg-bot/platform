@@ -27,20 +27,20 @@ namespace Allors.Databases.Object.SqlClient
 
     using Meta;
 
-    public class ExtentRoles : Extent
+    internal class ExtentRoles : Extent
     {
         private readonly Strategy strategy;
         private readonly IRoleType roleType;
 
         private ExtentFiltered upgrade;
 
-        public ExtentRoles(Strategy strategy, IRoleType roleType)
+        internal ExtentRoles(Strategy strategy, IRoleType roleType)
         {
             this.strategy = strategy;
             this.roleType = roleType;
         }
 
-        public override SqlExtent ContainedInExtent
+        internal override SqlExtent ContainedInExtent
         {
             get
             {

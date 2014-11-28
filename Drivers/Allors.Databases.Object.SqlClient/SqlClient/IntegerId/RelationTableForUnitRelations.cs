@@ -29,13 +29,13 @@ namespace Allors.Databases.Object.SqlClient.IntegerId
 
     using Microsoft.SqlServer.Server;
 
-    public class RelationTableForUnitRelations : IEnumerable<SqlDataRecord>
+    internal class RelationTableForUnitRelations : IEnumerable<SqlDataRecord>
     {
         private readonly Database database;
         private readonly IRoleType roleType;
         private readonly IEnumerable<UnitRelation> relations;
  
-        public RelationTableForUnitRelations(Database database, IRoleType roleType, IEnumerable<UnitRelation> relations)
+        internal RelationTableForUnitRelations(Database database, IRoleType roleType, IEnumerable<UnitRelation> relations)
         {
             this.database = database;
             this.roleType = roleType;

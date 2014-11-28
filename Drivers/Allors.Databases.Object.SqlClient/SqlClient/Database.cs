@@ -25,7 +25,6 @@ namespace Allors.Databases.Object.SqlClient
     using System.Text;
     using System.Xml;
 
-    using Allors.Databases.Object.SqlClient;
     using Allors.Databases.Object.SqlClient.Caching;
     using Allors.Meta;
     using Allors.Populations;
@@ -102,7 +101,7 @@ namespace Allors.Databases.Object.SqlClient
         /// <returns>
         /// The normalize.
         /// </returns>
-        public object Internalize(object unit, IRoleType roleType)
+        internal object Internalize(object unit, IRoleType roleType)
         {
             var objectType = (IUnit)roleType.ObjectType;
             var unitTypeTag = objectType.UnitTag;
@@ -182,7 +181,7 @@ namespace Allors.Databases.Object.SqlClient
             return normalizedUnit;
         }
 
-        public bool ContainsConcreteClass(IObjectType objectType, IObjectType concreteClass)
+        internal bool ContainsConcreteClass(IObjectType objectType, IObjectType concreteClass)
         {
             object concreteClassOrClasses;
             if (!this.concreteClassesByIObjectType.TryGetValue(objectType, out concreteClassOrClasses))
@@ -208,7 +207,7 @@ namespace Allors.Databases.Object.SqlClient
             return concreteClasses.Contains(concreteClass);
         }
 
-        public void UnitRoleChecks(IStrategy strategy, IRoleType relationType)
+        internal void UnitRoleChecks(IStrategy strategy, IRoleType relationType)
         {
             if (!this.ContainsConcreteClass(relationType.AssociationType.ObjectType, strategy.ObjectType))
             {
@@ -221,12 +220,12 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public void CompositeRoleChecks(IStrategy strategy, IRoleType roleType)
+        internal void CompositeRoleChecks(IStrategy strategy, IRoleType roleType)
         {
             this.CompositeSharedChecks(strategy, roleType, null);
         }
 
-        public void CompositeRoleChecks(IStrategy strategy, IRoleType roleType, IObject role)
+        internal void CompositeRoleChecks(IStrategy strategy, IRoleType roleType, IObject role)
         {
             this.CompositeSharedChecks(strategy, roleType, role);
             if (!roleType.IsOne)
@@ -235,7 +234,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public void CompositeRolesChecks(IStrategy strategy, IRoleType roleType, IObject role)
+        internal void CompositeRolesChecks(IStrategy strategy, IRoleType roleType, IObject role)
         {
             this.CompositeSharedChecks(strategy, roleType, role);
             if (!roleType.IsMany)
@@ -280,8 +279,6 @@ namespace Allors.Databases.Object.SqlClient
         private readonly Dictionary<IObjectType, IRoleType[]> sortedUnitRolesByIObjectType;
         private readonly ICache cache;
 
-        public event SessionCreatedEventHandler SessionCreated;
-
         public event ObjectNotLoadedEventHandler ObjectNotLoaded;
 
         public event RelationNotLoadedEventHandler RelationNotLoaded;
@@ -310,22 +307,22 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public virtual string AscendingSortAppendix
+        internal virtual string AscendingSortAppendix
         {
             get { return null; }
         }
 
-        public virtual string DescendingSortAppendix
+        internal virtual string DescendingSortAppendix
         {
             get { return null; }
         }
 
-        public virtual string Except
+        internal virtual string Except
         {
             get { return "EXCEPT"; }
         }
 
-        public ICache Cache
+        internal ICache Cache
         {
             get
             {
@@ -333,7 +330,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public string ConnectionString
+        internal string ConnectionString
         {
             get
             {
@@ -346,7 +343,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public int CommandTimeout
+        internal int CommandTimeout
         {
             get
             {
@@ -354,7 +351,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public IsolationLevel IsolationLevel
+        internal IsolationLevel IsolationLevel
         {
             get
             {
@@ -367,7 +364,7 @@ namespace Allors.Databases.Object.SqlClient
             return this.CreateDatabaseSession();
         }
 
-        public void Recover()
+        internal void Recover()
         {
             if (!ObjectFactory.MetaPopulation.IsValid)
             {
@@ -410,7 +407,7 @@ namespace Allors.Databases.Object.SqlClient
             return this.CreateDatabaseSession();
         }
 
-        public virtual IDatabaseSession CreateDatabaseSession()
+        internal virtual IDatabaseSession CreateDatabaseSession()
         {
             if (Schema.SchemaValidationErrors.HasErrors)
             {
@@ -425,12 +422,6 @@ namespace Allors.Databases.Object.SqlClient
             }
 
             var session = this.CreateSqlSession();
-
-            if (this.SessionCreated != null)
-            {
-                this.SessionCreated.Invoke(this, new SessionCreatedEventArgs(session));
-            }
-
             return session;
         }
 
@@ -439,7 +430,7 @@ namespace Allors.Databases.Object.SqlClient
             this.Init(true);
         }
 
-        public void Init(bool allowTruncate)
+        private void Init(bool allowTruncate)
         {
             if (!ObjectFactory.MetaPopulation.IsValid)
             {
@@ -532,12 +523,12 @@ namespace Allors.Databases.Object.SqlClient
             return this.workspaceFactory.CreateWorkspace(this);
         }
 
-        public Type GetDomainType(IObjectType objectType)
+        internal Type GetDomainType(IObjectType objectType)
         {
             return this.ObjectFactory.GetTypeForObjectType(objectType);
         }
 
-        public IRoleType[] GetSortedUnitRolesByIObjectType(IObjectType objectType)
+        internal IRoleType[] GetSortedUnitRolesByIObjectType(IObjectType objectType)
         {
             IRoleType[] sortedUnitRoles;
             if (!this.sortedUnitRolesByIObjectType.TryGetValue(objectType, out sortedUnitRoles))
@@ -551,7 +542,7 @@ namespace Allors.Databases.Object.SqlClient
             return sortedUnitRoles;
         }
 
-        protected virtual void TruncateTables(ManagementSession session)
+        private void TruncateTables(ManagementSession session)
         {
             this.ResetSequence(session);
 
@@ -568,11 +559,11 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        protected virtual void CreateFunctions(ManagementSession session)
+        private void CreateFunctions(ManagementSession session)
         {
         }
 
-        protected virtual void CreateIndexes(ManagementSession session)
+        private void CreateIndexes(ManagementSession session)
         {
             foreach (SchemaTable table in Schema)
             {
@@ -586,7 +577,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        protected virtual void DropIndexes(ManagementSession session)
+        private void DropIndexes(ManagementSession session)
         {
             foreach (SchemaTable table in Schema)
             {
@@ -600,7 +591,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        protected virtual void CreateProcedures(ManagementSession session)
+        private void CreateProcedures(ManagementSession session)
         {
             foreach (var procedure in Schema.Procedures)
             {
@@ -608,7 +599,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        protected virtual void CreateTables(ManagementSession session)
+        private void CreateTables(ManagementSession session)
         {
             foreach (SchemaTable table in Schema)
             {
@@ -616,15 +607,15 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        protected virtual void CreateTriggers(ManagementSession session)
+        private void CreateTriggers(ManagementSession session)
         {
         }
 
-        protected virtual void DropFunctions(ManagementSession session)
+        private void DropFunctions(ManagementSession session)
         {
         }
 
-        protected virtual void DropTables(ManagementSession session)
+        private void DropTables(ManagementSession session)
         {
             foreach (SchemaTable table in Schema)
             {
@@ -632,11 +623,11 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        protected virtual void DropTriggers(ManagementSession session)
+        private void DropTriggers(ManagementSession session)
         {
         }
 
-        protected virtual void ResetSequence(ManagementSession session)
+        private void ResetSequence(ManagementSession session)
         {
         }
 
@@ -699,9 +690,9 @@ namespace Allors.Databases.Object.SqlClient
 
         }
 
-        public abstract IObjectIds AllorsObjectIds { get; }
+        internal abstract IObjectIds AllorsObjectIds { get; }
 
-        public CommandFactories SqlClientCommandFactories
+        internal CommandFactories SqlClientCommandFactories
         {
             get
             {
@@ -709,7 +700,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public Schema Schema
+        internal Schema Schema
         {
             get
             {
@@ -717,9 +708,9 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public abstract Schema SqlClientSchema { get; }
+        internal abstract Schema SqlClientSchema { get; }
 
-        public CommandFactories CommandFactories
+        internal CommandFactories CommandFactories
         {
             get { return this.commandFactories; }
         }
@@ -732,12 +723,12 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public DbConnection CreateDbConnection()
+        internal DbConnection CreateDbConnection()
         {
             return new SqlConnection(this.ConnectionString);
         }
 
-        public void DropIndex(ManagementSession session, SchemaTable table, SchemaColumn column)
+        internal void DropIndex(ManagementSession session, SchemaTable table, SchemaColumn column)
         {
             var indexName = SqlClient.Schema.AllorsPrefix + table.Name + "_" + column.Name;
 
@@ -859,12 +850,12 @@ namespace Allors.Databases.Object.SqlClient
             return new ManagementSession(this);
         }
 
-        protected internal ManagementSession CreateManagementSession()
+        private ManagementSession CreateManagementSession()
         {
             return this.CreateSqlClientManagementSession();
         }
 
-        protected void CreateUserDefinedTypes(ManagementSession session)
+        private void CreateUserDefinedTypes(ManagementSession session)
         {
             var sql = new StringBuilder();
             sql.Append("CREATE TYPE " + this.SqlClientSchema.ObjectTable + " AS TABLE\n");
@@ -930,12 +921,12 @@ namespace Allors.Databases.Object.SqlClient
              }
         }
 
-        protected IDatabaseSession CreateSqlSession()
+        private IDatabaseSession CreateSqlSession()
         {
             return new DatabaseSession(this);
         }
 
-        protected void DropUserDefinedTypes(ManagementSession session)
+        private void DropUserDefinedTypes(ManagementSession session)
         {
             this.DropUserDefinedType(session, this.SqlClientSchema.ObjectTable);
             this.DropUserDefinedType(session, this.SqlClientSchema.CompositeRelationTable);
@@ -955,7 +946,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        protected void DropTable(ManagementSession session, SchemaTable schemaTable)
+        private void DropTable(ManagementSession session, SchemaTable schemaTable)
         {
             var sql = new StringBuilder();
             sql.Append("IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'" + schemaTable.Name + "'))\n");
@@ -963,7 +954,7 @@ namespace Allors.Databases.Object.SqlClient
             session.ExecuteSql(sql.ToString());
         }
 
-        protected void CreateTable(ManagementSession session, SchemaTable table)
+        private void CreateTable(ManagementSession session, SchemaTable table)
         {
             var sql = new StringBuilder();
             sql.Append("CREATE TABLE " + table + "\n");
@@ -1006,7 +997,7 @@ namespace Allors.Databases.Object.SqlClient
             session.ExecuteSql(sql.ToString());
         }
 
-        protected void DropProcedures(ManagementSession session)
+        private void DropProcedures(ManagementSession session)
         {
             var allorsProcedureNames = new List<string>();
             lock (this)
@@ -1033,12 +1024,12 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        protected void CreateProcedure(ManagementSession session, SchemaProcedure storedProcedure)
+        private void CreateProcedure(ManagementSession session, SchemaProcedure storedProcedure)
         {
             session.ExecuteSql(storedProcedure.Definition);
         }
 
-        protected void CreateIndex(ManagementSession session, SchemaTable table, SchemaColumn column)
+        private void CreateIndex(ManagementSession session, SchemaTable table, SchemaColumn column)
         {
             var indexName = SqlClient.Schema.AllorsPrefix + table.Name + "_" + column.Name;
 
@@ -1058,19 +1049,19 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        protected void TruncateTables(ManagementSession session, SchemaTable table)
+        private void TruncateTables(ManagementSession session, SchemaTable table)
         {
             var sql = new StringBuilder();
             sql.Append("TRUNCATE TABLE " + table.StatementName);
             session.ExecuteSql(sql.ToString());
         }
 
-        protected Load CreateLoad(ObjectNotLoadedEventHandler objectNotLoaded, RelationNotLoadedEventHandler relationNotLoaded, System.Xml.XmlReader reader)
+        private Load CreateLoad(ObjectNotLoadedEventHandler objectNotLoaded, RelationNotLoadedEventHandler relationNotLoaded, System.Xml.XmlReader reader)
         {
             return new Load(this, objectNotLoaded, relationNotLoaded, reader);
         }
 
-        protected Save CreateSave(XmlWriter writer)
+        private Save CreateSave(XmlWriter writer)
         {
             return new Save(this, writer);
         }

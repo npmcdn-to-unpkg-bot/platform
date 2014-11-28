@@ -20,13 +20,13 @@
 
 namespace Allors.Databases.Object.SqlClient
 {
-    public class SchemaTableParameter
+    internal class SchemaTableParameter
     {
-        public readonly string TypeName;
-        public readonly string Name;
-        public readonly string InvocationName;
+        internal readonly string TypeName;
+        internal readonly string Name;
+        internal readonly string InvocationName;
 
-        public SchemaTableParameter(Schema schema, string name, string typeName)
+        internal SchemaTableParameter(Schema schema, string name, string typeName)
         {
             this.Name = string.Format(schema.ParamFormat, name);
             this.InvocationName = string.Format(schema.ParamInvocationFormat, name);

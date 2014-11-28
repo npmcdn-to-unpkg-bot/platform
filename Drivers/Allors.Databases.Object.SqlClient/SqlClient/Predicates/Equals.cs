@@ -22,21 +22,21 @@ namespace Allors.Databases.Object.SqlClient
 {
     using Allors.Populations;
 
-    public sealed class Equals : Predicate
+    internal sealed class Equals : Predicate
     {
         private readonly IObject obj;
 
-        public Equals(IObject obj)
+        internal Equals(IObject obj)
         {
             PredicateAssertions.ValidateEquals(obj);
             this.obj = obj;
         }
 
-        public override void Setup(ExtentStatement statement)
+        internal override void Setup(ExtentStatement statement)
         {
         }
 
-        public override bool BuildWhere(ExtentStatement statement, string alias)
+        internal override bool BuildWhere(ExtentStatement statement, string alias)
         {
             var schema = statement.Schema;
             statement.Append(" (" + alias + "." + schema.ObjectId + "=" + statement.AddParameter(this.obj) + ") ");

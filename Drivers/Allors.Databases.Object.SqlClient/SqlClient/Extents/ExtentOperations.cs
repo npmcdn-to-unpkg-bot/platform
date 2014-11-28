@@ -20,7 +20,7 @@
 
 namespace Allors.Databases.Object.SqlClient
 {
-    public enum ExtentOperations
+    internal enum ExtentOperations
     {
         /// <summary>
         /// The Union of two Extents.

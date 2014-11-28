@@ -23,12 +23,12 @@ namespace Allors.Databases.Object.SqlClient
     using Allors.Meta;
     using Allors.Populations;
 
-    public sealed class RoleInstanceof : Predicate
+    internal sealed class RoleInstanceof : Predicate
     {
         private readonly IObjectType[] instanceClasses;
         private readonly IRoleType role;
 
-        public RoleInstanceof(ExtentFiltered extent, IRoleType role, IObjectType instanceType, IObjectType[] instanceClasses)
+        internal RoleInstanceof(ExtentFiltered extent, IRoleType role, IObjectType instanceType, IObjectType[] instanceClasses)
         {
             extent.CheckRole(role);
             PredicateAssertions.ValidateRoleInstanceOf(role, instanceType);
@@ -36,7 +36,7 @@ namespace Allors.Databases.Object.SqlClient
             this.instanceClasses = instanceClasses;
         }
 
-        public override bool BuildWhere(ExtentStatement statement, string alias)
+        internal override bool BuildWhere(ExtentStatement statement, string alias)
         {
             var schema = statement.Schema;
             if (this.instanceClasses.Length == 1)
@@ -63,7 +63,7 @@ namespace Allors.Databases.Object.SqlClient
             return this.Include;
         }
 
-        public override void Setup(ExtentStatement statement)
+        internal override void Setup(ExtentStatement statement)
         {
             statement.UseRole(this.role);
             statement.UseRoleInstance(this.role);

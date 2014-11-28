@@ -23,12 +23,12 @@ namespace Allors.Databases.Object.SqlClient
     using Allors.Meta;
     using Allors.Populations;
 
-    public sealed class RoleGreaterThanValue : Predicate
+    internal sealed class RoleGreaterThanValue : Predicate
     {
         private readonly object obj;
         private readonly IRoleType roleType;
 
-        public RoleGreaterThanValue(ExtentFiltered extent, IRoleType roleType, object obj)
+        internal RoleGreaterThanValue(ExtentFiltered extent, IRoleType roleType, object obj)
         {
             extent.CheckRole(roleType);
             PredicateAssertions.ValidateRoleGreaterThan(roleType, obj);
@@ -36,14 +36,14 @@ namespace Allors.Databases.Object.SqlClient
             this.obj = extent.Session.SqlDatabase.Internalize(obj, roleType);
         }
 
-        public override bool BuildWhere(ExtentStatement statement, string alias)
+        internal override bool BuildWhere(ExtentStatement statement, string alias)
         {
             var schema = statement.Schema;
             statement.Append(" " + alias + "." + schema.Column(this.roleType) + ">" + statement.AddParameter(this.obj));
             return this.Include;
         }
 
-        public override void Setup(ExtentStatement statement)
+        internal override void Setup(ExtentStatement statement)
         {
             statement.UseRole(this.roleType);
         }

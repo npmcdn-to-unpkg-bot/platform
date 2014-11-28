@@ -23,11 +23,11 @@ namespace Allors.Databases.Object.SqlClient
     using System;
     using System.Data;
 
-    public class SchemaParameter
+    internal class SchemaParameter
     {
-        public readonly DbType DbType;
-        public readonly string Name;
-        public readonly string InvocationName;
+        internal readonly DbType DbType;
+        internal readonly string Name;
+        internal readonly string InvocationName;
 
         /// <summary>
         /// Returns a String which represents the object instance.
@@ -51,14 +51,14 @@ namespace Allors.Databases.Object.SqlClient
 
 
 
-        public SchemaParameter(Schema schema, string name, DbType type)
+        internal SchemaParameter(Schema schema, string name, DbType type)
         {
             this.Name = string.Format(schema.ParamFormat, name);
             this.InvocationName = string.Format(schema.ParamInvocationFormat, name);
             this.DbType = type;
         }
 
-        public SqlDbType SqlDbType
+        internal SqlDbType SqlDbType
         {
             get
             {

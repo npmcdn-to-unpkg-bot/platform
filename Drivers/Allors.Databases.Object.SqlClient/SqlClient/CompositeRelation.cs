@@ -20,12 +20,12 @@
 
 namespace Allors.Databases.Object.SqlClient
 {
-    public class CompositeRelation
+    internal class CompositeRelation
     {
-        public readonly ObjectId Association;
-        public readonly ObjectId Role;
+        internal readonly ObjectId Association;
+        internal readonly ObjectId Role;
 
-        public CompositeRelation(ObjectId association, ObjectId role)
+        internal CompositeRelation(ObjectId association, ObjectId role)
         {
             this.Association = association;
             this.Role = role;

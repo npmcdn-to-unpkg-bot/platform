@@ -23,12 +23,12 @@ namespace Allors.Databases.Object.SqlClient
     using Allors.Meta;
     using Allors.Populations;
 
-    public sealed class RoleLike : Predicate
+    internal sealed class RoleLike : Predicate
     {
         private readonly IRoleType role;
         private readonly string like;
 
-        public RoleLike(ExtentFiltered extent, IRoleType role, string like)
+        internal RoleLike(ExtentFiltered extent, IRoleType role, string like)
         {
             extent.CheckRole(role);
             PredicateAssertions.ValidateRoleLikeFilter(role, like);
@@ -36,14 +36,14 @@ namespace Allors.Databases.Object.SqlClient
             this.like = like;
         }
 
-        public override bool BuildWhere(ExtentStatement statement, string alias)
+        internal override bool BuildWhere(ExtentStatement statement, string alias)
         {
             var schema = statement.Schema;
             statement.Append(" " + alias + "." + schema.Column(this.role) + " LIKE " + statement.AddParameter(this.like));
             return this.Include;
         }
 
-        public override void Setup(ExtentStatement statement)
+        internal override void Setup(ExtentStatement statement)
         {
             statement.UseRole(this.role);
         }

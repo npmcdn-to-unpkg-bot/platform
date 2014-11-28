@@ -38,12 +38,12 @@ namespace Allors.Databases.Object.SqlClient.IntegerId
             this.allorsObjectIds = new ObjectIntegerIds();
         }
 
-        public override IObjectIds AllorsObjectIds
+        internal override IObjectIds AllorsObjectIds
         {
             get { return this.allorsObjectIds; }
         }
 
-        public override SqlClient.Schema SqlClientSchema
+        internal override SqlClient.Schema SqlClientSchema
         {
             get
             {

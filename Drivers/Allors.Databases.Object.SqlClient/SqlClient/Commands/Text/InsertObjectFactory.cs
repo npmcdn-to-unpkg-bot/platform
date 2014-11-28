@@ -30,18 +30,18 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
     using Database = Database;
     using DatabaseSession = DatabaseSession;
 
-    public class InsertObjectFactory
+    internal class InsertObjectFactory
     {
         internal readonly Database Database;
         private readonly Dictionary<IObjectType, string> sqlByMetaType;
 
-        public InsertObjectFactory(Database database)
+        internal InsertObjectFactory(Database database)
         {
             this.Database = database;
             this.sqlByMetaType = new Dictionary<IObjectType, string>();
         }
 
-        public InsertObject Create(DatabaseSession session)
+        internal InsertObject Create(DatabaseSession session)
         {
             return new InsertObject(this, session);
         }
@@ -81,19 +81,19 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
             return this.sqlByMetaType[objectType];
         }
 
-        public class InsertObject : DatabaseCommand
+        internal class InsertObject : DatabaseCommand
         {
             private readonly InsertObjectFactory factory;
             private readonly Dictionary<IObjectType, SqlCommand> commandByIObjectType;
 
-            public InsertObject(InsertObjectFactory factory, DatabaseSession session)
+            internal InsertObject(InsertObjectFactory factory, DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
                 this.commandByIObjectType = new Dictionary<IObjectType, SqlCommand>();
             }
 
-            public Reference Execute(IClass objectType, ObjectId objectId)
+            internal Reference Execute(IClass objectType, ObjectId objectId)
             {
                 SqlCommand command;
                 if (!this.commandByIObjectType.TryGetValue(objectType, out command))

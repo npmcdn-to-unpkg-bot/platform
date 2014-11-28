@@ -28,7 +28,7 @@ namespace Allors.Databases.Object.SqlClient
     /// Holds the <see cref="ISchemaValidationError"/>s that occured during the validation
     /// of the <see cref="Domain"/> against the database schema.
     /// </summary>
-    public class SchemaValidationErrors
+    internal class SchemaValidationErrors
     {
         /// <summary>
         /// The errors that occured during validation of the <see cref="Domain"/> against the Sql schema.
@@ -38,7 +38,7 @@ namespace Allors.Databases.Object.SqlClient
         /// <summary>
         /// Initializes a new instance of the <see cref="SchemaValidationErrors"/> class.
         /// </summary>
-        public SchemaValidationErrors()
+        internal SchemaValidationErrors()
         {
             this.errors = new List<ISchemaValidationError>();
         }
@@ -47,12 +47,12 @@ namespace Allors.Databases.Object.SqlClient
         /// Gets the schema validation errors.
         /// </summary>
         /// <value>The errors.</value>
-        public ISchemaValidationError[] Errors
+        internal ISchemaValidationError[] Errors
         {
             get { return this.errors.ToArray(); }
         }
 
-        public TableSchemaValidationError[] TableErrors
+        internal TableSchemaValidationError[] TableErrors
         {
             get
             {
@@ -69,7 +69,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public ProcedureSchemaValidationError[] ProcedureErrors
+        internal ProcedureSchemaValidationError[] ProcedureErrors
         {
             get
             {
@@ -92,7 +92,7 @@ namespace Allors.Databases.Object.SqlClient
         /// <value>
         ///   <c>true</c> if this instance has errors; otherwise, <c>false</c>.
         /// </value>
-        public bool HasErrors
+        internal bool HasErrors
         {
             get { return this.errors.Count > 0; }
         }
@@ -101,7 +101,7 @@ namespace Allors.Databases.Object.SqlClient
         /// Gets the validation error messages.
         /// </summary>
         /// <value>The validation error messages.</value>
-        public string[] Messages
+        internal string[] Messages
         {
             get
             {
@@ -125,12 +125,12 @@ namespace Allors.Databases.Object.SqlClient
         /// <param name="columnName">Name of the column.</param>
         /// <param name="kind">The kind of validation error.</param>
         /// <param name="message">The validation error message.</param>
-        public void AddTableError(IObjectType objectType, IRelationType relationType, IRoleType roleType, string tableName, string columnName, SchemaValidationErrorKind kind, string message)
+        internal void AddTableError(IObjectType objectType, IRelationType relationType, IRoleType roleType, string tableName, string columnName, SchemaValidationErrorKind kind, string message)
         {
             this.errors.Add(new TableSchemaValidationError(objectType, relationType, roleType, tableName, columnName, kind, message));
         }
 
-        public void AddProcedureError(SchemaProcedure schemaProcedure, SchemaValidationErrorKind kind, string message)
+        internal void AddProcedureError(SchemaProcedure schemaProcedure, SchemaValidationErrorKind kind, string message)
         {
             this.errors.Add(new ProcedureSchemaValidationError(schemaProcedure, kind, message));
         }

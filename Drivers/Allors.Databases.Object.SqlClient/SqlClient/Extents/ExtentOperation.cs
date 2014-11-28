@@ -25,13 +25,13 @@ namespace Allors.Databases.Object.SqlClient
 
     using Meta;
 
-    public class ExtentOperation : SqlExtent
+    internal class ExtentOperation : SqlExtent
     {
         private readonly SqlExtent first;
         private readonly ExtentOperations operationType;
         private readonly SqlExtent second;
 
-        public ExtentOperation(SqlExtent first, SqlExtent second, ExtentOperations operationType)
+        internal ExtentOperation(SqlExtent first, SqlExtent second, ExtentOperations operationType)
         {
             if (!first.ObjectType.Equals(second.ObjectType))
             {
@@ -51,7 +51,7 @@ namespace Allors.Databases.Object.SqlClient
             get { return null; }
         }
 
-        public override DatabaseSession Session
+        internal override DatabaseSession Session
         {
             get { return this.first.Session; }
         }
@@ -61,7 +61,7 @@ namespace Allors.Databases.Object.SqlClient
             get { return this.first.ObjectType; }
         }
 
-        public override string BuildSql(ExtentStatement statement)
+        internal override string BuildSql(ExtentStatement statement)
         {
             this.first.BuildSql(statement);
 

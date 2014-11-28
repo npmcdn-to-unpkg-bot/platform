@@ -23,16 +23,14 @@ namespace Allors.Databases.Object.SqlClient
     using System;
     using System.Collections.Generic;
 
-    using Allors.Databases.Object.SqlClient;
-
     using Meta;
 
-    public sealed class Not : Predicate, ICompositePredicate
+    internal sealed class Not : Predicate, ICompositePredicate
     {
         private readonly ExtentFiltered extent;
         private Predicate filter;
 
-        public Not(ExtentFiltered extent)
+        internal Not(ExtentFiltered extent)
         {
             this.extent = extent;
 
@@ -66,7 +64,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public override bool Include
+        internal override bool Include
         {
             get { return this.filter != null && this.filter.Include; }
         }
@@ -297,7 +295,7 @@ namespace Allors.Databases.Object.SqlClient
             return (ICompositePredicate)this.filter;
         }
 
-        public override bool BuildWhere(ExtentStatement statement, string alias)
+        internal override bool BuildWhere(ExtentStatement statement, string alias)
         {
             if (this.Include)
             {
@@ -309,7 +307,7 @@ namespace Allors.Databases.Object.SqlClient
             return this.Include;
         }
 
-        public override void Setup(ExtentStatement statement)
+        internal override void Setup(ExtentStatement statement)
         {
             if (this.filter != null)
             {

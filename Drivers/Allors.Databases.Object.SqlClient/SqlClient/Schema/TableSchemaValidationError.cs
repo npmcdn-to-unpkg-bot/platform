@@ -28,7 +28,7 @@ namespace Allors.Databases.Object.SqlClient
     /// and <see cref="TableSchemaValidationError#IRoleType"/> objects are mutually exclusive.
     /// </para>
     /// </summary>
-    public class TableSchemaValidationError : ISchemaValidationError
+    internal class TableSchemaValidationError : ISchemaValidationError
     {
         /// <summary>
         /// The column name.
@@ -75,7 +75,7 @@ namespace Allors.Databases.Object.SqlClient
         /// <param name="columnName">Name of the column.</param>
         /// <param name="errorKind">The kind of validation error.</param>
         /// <param name="message">The validation error message.</param>
-        public TableSchemaValidationError(IObjectType objectType, IRelationType relationType, IRoleType role, string tableName, string columnName, SchemaValidationErrorKind errorKind, string message)
+        internal TableSchemaValidationError(IObjectType objectType, IRelationType relationType, IRoleType role, string tableName, string columnName, SchemaValidationErrorKind errorKind, string message)
         {
             this.objectType = objectType;
             this.relationType = relationType;
@@ -90,7 +90,7 @@ namespace Allors.Databases.Object.SqlClient
         /// Gets the name of the column.
         /// </summary>
         /// <value>The name of the column.</value>
-        public string ColumnName
+        internal string ColumnName
         {
             get { return this.columnName; }
         }
@@ -117,7 +117,7 @@ namespace Allors.Databases.Object.SqlClient
         /// Gets the invalid relation type.
         /// </summary>
         /// <value>The ChangedRelations Type.</value>
-        public IRelationType IRelationType
+        internal IRelationType IRelationType
         {
             get { return this.relationType; }
         }
@@ -126,7 +126,7 @@ namespace Allors.Databases.Object.SqlClient
         /// Gets the invalid role.
         /// </summary>
         /// <value>The role .</value>
-        public IRoleType Role
+        internal IRoleType Role
         {
             get { return this.role; }
         }
@@ -135,7 +135,7 @@ namespace Allors.Databases.Object.SqlClient
         /// Gets the name of the table.
         /// </summary>
         /// <value>The name of the table.</value>
-        public string TableName
+        internal string TableName
         {
             get { return this.tableName; }
         }
@@ -144,7 +144,7 @@ namespace Allors.Databases.Object.SqlClient
         /// Gets the invalid object type. 
         /// </summary>
         /// <value>The Object Type.</value>
-        public IObjectType IObjectType
+        internal IObjectType IObjectType
         {
             get { return this.objectType; }
         }

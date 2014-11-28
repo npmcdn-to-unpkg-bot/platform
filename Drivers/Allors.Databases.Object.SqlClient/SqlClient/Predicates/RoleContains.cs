@@ -26,12 +26,12 @@ namespace Allors.Databases.Object.SqlClient
     using Allors.Meta;
     using Allors.Populations;
 
-    public sealed class RoleContains : Predicate
+    internal sealed class RoleContains : Predicate
     {
         private readonly IObject allorsObject;
         private readonly IRoleType role;
 
-        public RoleContains(ExtentFiltered extent, IRoleType role, IObject allorsObject)
+        internal RoleContains(ExtentFiltered extent, IRoleType role, IObject allorsObject)
         {
             extent.CheckRole(role);
             PredicateAssertions.ValidateRoleContains(role, allorsObject);
@@ -39,7 +39,7 @@ namespace Allors.Databases.Object.SqlClient
             this.allorsObject = allorsObject;
         }
 
-        public override bool BuildWhere(ExtentStatement statement, string alias)
+        internal override bool BuildWhere(ExtentStatement statement, string alias)
         {
             var schema = statement.Schema;
             if ((this.role.IsMany && this.role.RelationType.AssociationType.IsMany) || !this.role.RelationType.ExistExclusiveLeafClasses)
@@ -72,7 +72,7 @@ namespace Allors.Databases.Object.SqlClient
             return this.Include;
         }
 
-        public override void Setup(ExtentStatement statement)
+        internal override void Setup(ExtentStatement statement)
         {
             //extent.UseRole(role);
         }

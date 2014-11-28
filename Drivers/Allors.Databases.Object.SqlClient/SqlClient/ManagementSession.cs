@@ -23,7 +23,7 @@ namespace Allors.Databases.Object.SqlClient
     using Allors.Databases.Object.SqlClient.Commands.Procedure;
     using Allors.Databases.Object.SqlClient.Commands.Text;
 
-    public class ManagementSession : ICommandFactory, IDisposable
+    internal class ManagementSession : ICommandFactory, IDisposable
     {
         private readonly Database database;
         
@@ -34,7 +34,7 @@ namespace Allors.Databases.Object.SqlClient
         private LoadCompositeRelationsFactory loadCompositeRelationsFactory;
         private LoadUnitRelationsFactory loadUnitRelationsFactory;
 
-        public ManagementSession(Database database)
+        internal ManagementSession(Database database)
         {
             this.database = database;
         }
@@ -49,7 +49,7 @@ namespace Allors.Databases.Object.SqlClient
             this.Rollback();
         }
 
-        public LoadObjectsFactory LoadObjectsFactory
+        internal LoadObjectsFactory LoadObjectsFactory
         {
             get
             {
@@ -57,7 +57,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public LoadCompositeRelationsFactory LoadCompositeRelationsFactory
+        internal LoadCompositeRelationsFactory LoadCompositeRelationsFactory
         {
             get
             {
@@ -65,7 +65,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public LoadUnitRelationsFactory LoadUnitRelationsFactory
+        internal LoadUnitRelationsFactory LoadUnitRelationsFactory
         {
             get
             {
@@ -73,7 +73,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public Database Database
+        internal Database Database
         {
             get
             {
@@ -81,7 +81,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public Database SqlClientDatabase
+        internal Database SqlClientDatabase
         {
             get
             {
@@ -89,7 +89,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public void ExecuteSql(string sql)
+        internal void ExecuteSql(string sql)
         {
             this.LazyConnect();
             using (DbCommand command = this.CreateSqlCommand(sql))
@@ -121,7 +121,7 @@ namespace Allors.Databases.Object.SqlClient
             return command;
         }
 
-        public void Commit()
+        internal void Commit()
         {
             try
             {
@@ -136,7 +136,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public void Rollback()
+        internal void Rollback()
         {
             try
             {

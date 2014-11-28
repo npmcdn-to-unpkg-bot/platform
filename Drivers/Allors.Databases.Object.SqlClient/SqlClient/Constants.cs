@@ -20,9 +20,9 @@
 
 namespace Allors.Databases.Object.SqlClient
 {
-    public static class Constants
+    internal static class Constants
     {
-        public const string SqlObjectDelimiter = ":";
-        public const string SqlObjectsDelimiter = ",";
+        internal const string SqlObjectDelimiter = ":";
+        internal const string SqlObjectsDelimiter = ",";
     }
 }

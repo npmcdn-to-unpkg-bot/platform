@@ -28,12 +28,12 @@ namespace Allors.Databases.Object.SqlClient.IntegerId
 
     using Microsoft.SqlServer.Server;
 
-    public class ObjectTableForRolesByReference : IEnumerable<SqlDataRecord>
+    internal class ObjectTableForRolesByReference : IEnumerable<SqlDataRecord>
     {
         private readonly Schema schema;
         private readonly Dictionary<Reference, Roles> rolesByReference;
 
-        public ObjectTableForRolesByReference(Schema schema, Dictionary<Reference, Roles> rolesByReference)
+        internal ObjectTableForRolesByReference(Schema schema, Dictionary<Reference, Roles> rolesByReference)
         {
             this.schema = schema;
             this.rolesByReference = rolesByReference;

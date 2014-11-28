@@ -27,9 +27,9 @@ namespace Allors.Databases.Object.SqlClient
     using Allors.Meta;
     using Allors.Populations;
 
-    public class Roles
+    internal class Roles
     {
-        public readonly Reference Reference;
+        internal readonly Reference Reference;
 
         private ICachedObject cachedObject;
         
@@ -40,12 +40,12 @@ namespace Allors.Databases.Object.SqlClient
 
         private HashSet<IRoleType> requireFlushRoles;
 
-        public Roles(Reference reference)
+        internal Roles(Reference reference)
         {
             this.Reference = reference;
         }
 
-        public ICachedObject CachedObject
+        internal ICachedObject CachedObject
         {
             get
             {
@@ -59,7 +59,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
         
-        public Dictionary<IRoleType, object> OriginalRoleByIRoleType
+        internal Dictionary<IRoleType, object> OriginalRoleByIRoleType
         {
             get
             {
@@ -67,7 +67,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
         
-        public Dictionary<IRoleType, object> ModifiedRoleByIRoleType
+        internal Dictionary<IRoleType, object> ModifiedRoleByIRoleType
         {
             get
             {
@@ -75,7 +75,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public Dictionary<IRoleType, CompositeRoles> ModifiedRolesByIRoleType
+        internal Dictionary<IRoleType, CompositeRoles> ModifiedRolesByIRoleType
         {
             get
             {
@@ -83,7 +83,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public HashSet<IRoleType> RequireFlushRoles
+        internal HashSet<IRoleType> RequireFlushRoles
         {
             get
             {
@@ -99,7 +99,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public object GetUnitRole(IRoleType roleType)
+        internal object GetUnitRole(IRoleType roleType)
         {
             object role = null;
             if (this.modifiedRoleByIRoleType == null || !this.modifiedRoleByIRoleType.TryGetValue(roleType, out role))
@@ -117,7 +117,7 @@ namespace Allors.Databases.Object.SqlClient
             return role;
         }
 
-        public void SetUnitRole(IRoleType roleType, object role)
+        internal void SetUnitRole(IRoleType roleType, object role)
         {
             this.ChangeSet.OnChangingUnitRole(this, roleType);
 
@@ -129,7 +129,7 @@ namespace Allors.Databases.Object.SqlClient
             this.Reference.Session.RequireFlush(this.Reference, this);
         }
 
-        public virtual ObjectId GetCompositeRole(IRoleType roleType)
+        internal virtual ObjectId GetCompositeRole(IRoleType roleType)
         {
             object role = null;
             if (this.modifiedRoleByIRoleType == null || !this.modifiedRoleByIRoleType.TryGetValue(roleType, out role))
@@ -147,7 +147,7 @@ namespace Allors.Databases.Object.SqlClient
             return (ObjectId)role;
         }
 
-        public void SetCompositeRole(IRoleType roleType, Strategy newRoleStrategy)
+        internal void SetCompositeRole(IRoleType roleType, Strategy newRoleStrategy)
         {
             var previousRole = this.GetCompositeRole(roleType);
             var newRole = newRoleStrategy == null ? null : newRoleStrategy.Reference.ObjectId;
@@ -210,7 +210,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public void RemoveCompositeRole(IRoleType roleType)
+        internal void RemoveCompositeRole(IRoleType roleType)
         {
             var currentRole = this.GetCompositeRole(roleType);
             if (currentRole != null)
@@ -236,7 +236,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public virtual IEnumerable<ObjectId> GetCompositeRoles(IRoleType roleType)
+        internal virtual IEnumerable<ObjectId> GetCompositeRoles(IRoleType roleType)
         {
             CompositeRoles compositeRoles;
             if (this.ModifiedRolesByIRoleType != null && this.ModifiedRolesByIRoleType.TryGetValue(roleType, out compositeRoles))
@@ -247,7 +247,7 @@ namespace Allors.Databases.Object.SqlClient
             return this.GetNonModifiedCompositeRoles(roleType);
         }
 
-        public void AddCompositeRole(IRoleType roleType, Strategy role)
+        internal void AddCompositeRole(IRoleType roleType, Strategy role)
         {
             CompositeRoles compositeRoles;
             if (this.ModifiedRolesByIRoleType == null || !this.ModifiedRolesByIRoleType.TryGetValue(roleType, out compositeRoles))
@@ -284,7 +284,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public void RemoveCompositeRole(IRoleType roleType, Strategy role)
+        internal void RemoveCompositeRole(IRoleType roleType, Strategy role)
         {
             CompositeRoles compositeRoles;
             if (this.ModifiedRolesByIRoleType == null || !this.ModifiedRolesByIRoleType.TryGetValue(roleType, out compositeRoles))
@@ -314,7 +314,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public void AddRequiresFlushIRoleType(IRoleType roleType)
+        internal void AddRequiresFlushIRoleType(IRoleType roleType)
         {
             if (this.requireFlushRoles == null)
             {
@@ -324,7 +324,7 @@ namespace Allors.Databases.Object.SqlClient
             this.requireFlushRoles.Add(roleType);
         }
 
-        public void Flush(Flush flush)
+        internal void Flush(Flush flush)
         {
             IRoleType unitRole = null;
             List<IRoleType> unitRoles = null;
@@ -381,7 +381,7 @@ namespace Allors.Databases.Object.SqlClient
             this.requireFlushRoles = null;
         }
 
-        public int ExtentCount(IRoleType roleType)
+        internal int ExtentCount(IRoleType roleType)
         {
             CompositeRoles compositeRoles;
             if (this.ModifiedRolesByIRoleType != null && this.ModifiedRolesByIRoleType.TryGetValue(roleType, out compositeRoles))
@@ -392,7 +392,7 @@ namespace Allors.Databases.Object.SqlClient
             return this.GetNonModifiedCompositeRoles(roleType).Length;
         }
 
-        public IObject ExtentFirst(DatabaseSession session, IRoleType roleType)
+        internal IObject ExtentFirst(DatabaseSession session, IRoleType roleType)
         {
             CompositeRoles compositeRoles;
             if (this.ModifiedRolesByIRoleType != null && this.ModifiedRolesByIRoleType.TryGetValue(roleType, out compositeRoles))
@@ -410,7 +410,7 @@ namespace Allors.Databases.Object.SqlClient
             return null;
         }
 
-        public void ExtentCopyTo(DatabaseSession session, IRoleType roleType, Array array, int index)
+        internal void ExtentCopyTo(DatabaseSession session, IRoleType roleType, Array array, int index)
         {
             CompositeRoles compositeRoles;
             if (this.ModifiedRolesByIRoleType != null && this.ModifiedRolesByIRoleType.TryGetValue(roleType, out compositeRoles))
@@ -433,7 +433,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public bool ExtentContains(IRoleType roleType, ObjectId objectId)
+        internal bool ExtentContains(IRoleType roleType, ObjectId objectId)
         {
             CompositeRoles compositeRoles;
             if (this.ModifiedRolesByIRoleType != null && this.ModifiedRolesByIRoleType.TryGetValue(roleType, out compositeRoles))

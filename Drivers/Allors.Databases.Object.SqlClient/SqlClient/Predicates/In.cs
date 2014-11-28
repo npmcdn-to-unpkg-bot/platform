@@ -20,7 +20,7 @@
 
 namespace Allors.Databases.Object.SqlClient
 {
-    public abstract class In : Predicate
+    internal abstract class In : Predicate
     {
     }
 }

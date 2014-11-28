@@ -20,11 +20,11 @@
 
 namespace Allors.Databases.Object.SqlClient
 {
-    public sealed class SchemaProcedure
+    internal sealed class SchemaProcedure
     {
-        public string Name;
+        internal string Name;
 
-        public string Definition;
+        internal string Definition;
 
         public override string ToString()
         {

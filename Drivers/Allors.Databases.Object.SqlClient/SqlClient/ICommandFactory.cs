@@ -22,7 +22,7 @@ namespace Allors.Databases.Object.SqlClient
 {
     using System.Data.SqlClient;
 
-    public interface ICommandFactory
+    internal interface ICommandFactory
     {
         SqlCommand CreateSqlCommand(string sql);
     }

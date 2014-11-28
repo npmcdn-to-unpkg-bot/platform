@@ -23,18 +23,18 @@ namespace Allors.Databases.Object.SqlClient
     using Allors.Meta;
     using Allors.Populations;
 
-    public sealed class RoleExists : Predicate
+    internal sealed class RoleExists : Predicate
     {
         private readonly IRoleType role;
 
-        public RoleExists(ExtentFiltered extent, IRoleType role)
+        internal RoleExists(ExtentFiltered extent, IRoleType role)
         {
             extent.CheckRole(role);
             PredicateAssertions.ValidateRoleExists(role);
             this.role = role;
         }
 
-        public override bool BuildWhere(ExtentStatement statement, string alias)
+        internal override bool BuildWhere(ExtentStatement statement, string alias)
         {
             var schema = statement.Schema;
             if (this.role.ObjectType.IsUnit)
@@ -63,7 +63,7 @@ namespace Allors.Databases.Object.SqlClient
             return this.Include;
         }
 
-        public override void Setup(ExtentStatement statement)
+        internal override void Setup(ExtentStatement statement)
         {
             statement.UseRole(this.role);
         }

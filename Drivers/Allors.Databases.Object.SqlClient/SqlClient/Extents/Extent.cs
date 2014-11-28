@@ -20,8 +20,8 @@
 
 namespace Allors.Databases.Object.SqlClient
 {
-    public abstract class Extent : Allors.Extent
+    internal abstract class Extent : Allors.Extent
     {
-        public abstract SqlExtent ContainedInExtent { get; }
+        internal abstract SqlExtent ContainedInExtent { get; }
     }
 }

@@ -26,7 +26,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
     using Allors.Databases.Object.SqlClient;
     using Allors.Meta;
 
-    public class LoadCompositeRelationsFactory
+    internal class LoadCompositeRelationsFactory
     {
         internal readonly SqlClient.ManagementSession ManagementSession;
         
@@ -35,7 +35,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             this.ManagementSession = session;
         }
 
-        public LoadCompositeRelations Create(IRoleType roleType)
+        internal LoadCompositeRelations Create(IRoleType roleType)
         {
             var associationType = roleType.AssociationType;
 
@@ -66,18 +66,18 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             return new LoadCompositeRelations(this, sql);
         }
 
-        public class LoadCompositeRelations : Commands.Command
+        internal class LoadCompositeRelations : Commands.Command
         {
             private readonly LoadCompositeRelationsFactory factory;
             private readonly string sql;
 
-            public LoadCompositeRelations(LoadCompositeRelationsFactory factory, string sql)
+            internal LoadCompositeRelations(LoadCompositeRelationsFactory factory, string sql)
             {
                 this.factory = factory;
                 this.sql = sql;
             }
 
-            public void Execute(IList<CompositeRelation> relations)
+            internal void Execute(IList<CompositeRelation> relations)
             {
                 var database = this.factory.ManagementSession.SqlClientDatabase;
 

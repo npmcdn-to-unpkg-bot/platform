@@ -25,11 +25,11 @@ namespace Allors.Databases.Object.SqlClient
     /// <summary>
     /// As of Sql Server 2008 R2
     /// </summary>
-    public static class ReservedWords
+    internal static class ReservedWords
     {
-        public static readonly HashSet<string> Names;
+        internal static readonly HashSet<string> Names;
 
-        public static readonly string[] Current = 
+        internal static readonly string[] Current = 
         {
                                              "ADD", "ALL", "ALTER", "AND", "ANY", "AS", "ASC", "AUTHORIZATION", "BACKUP",
                                              "BEGIN", "BETWEEN", "BREAK", "BROWSE", "BULK", "BY", "CASCADE", "CASE",
@@ -59,7 +59,7 @@ namespace Allors.Databases.Object.SqlClient
                                              "WITH", "WRITETEXT"
                                          };
 
-        public static readonly string[] Future = 
+        internal static readonly string[] Future = 
         {
                                                      "ABSOLUTE", "ACTION", "ADMIN", "AFTER", "AGGREGATE", "ALIAS",
                                                      "ALLOCATE", "ARE", "ARRAY", "ASENSITIVE", "ASSERTION", "ASYMMETRIC",

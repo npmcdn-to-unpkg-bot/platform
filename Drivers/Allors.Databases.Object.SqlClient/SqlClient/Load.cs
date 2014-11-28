@@ -24,7 +24,7 @@ namespace Allors.Databases.Object.SqlClient
     using Allors.Meta;
     using Allors.Populations;
 
-    public class Load
+    internal class Load
     {
         private static readonly byte[] EmptyByteArray = new byte[0];
 
@@ -35,7 +35,7 @@ namespace Allors.Databases.Object.SqlClient
 
         private readonly Dictionary<ObjectId, IObjectType> objectTypeByObjectId;
 
-        public void Execute(Databases.Object.SqlClient.ManagementSession session)
+        internal void Execute(Databases.Object.SqlClient.ManagementSession session)
         {
             while (this.reader.Read())
             {
@@ -615,7 +615,7 @@ namespace Allors.Databases.Object.SqlClient
 
 
 
-        public Load(Database database, ObjectNotLoadedEventHandler objectNotLoaded, RelationNotLoadedEventHandler relationNotLoaded, XmlReader reader)
+        internal Load(Database database, ObjectNotLoadedEventHandler objectNotLoaded, RelationNotLoadedEventHandler relationNotLoaded, XmlReader reader)
         {
             this.database = database;
             this.objectNotLoaded = objectNotLoaded;

@@ -28,12 +28,12 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
     using Database = Database;
     using DatabaseSession = DatabaseSession;
 
-    public class InstantiateObjectFactory
+    internal class InstantiateObjectFactory
     {
-        public readonly Database Database;
-        public readonly string Sql;
+        internal readonly Database Database;
+        internal readonly string Sql;
 
-        public InstantiateObjectFactory(Database database)
+        internal InstantiateObjectFactory(Database database)
         {
             this.Database = database;
             this.Sql = "SELECT " + database.Schema.TypeId + ", " + database.Schema.CacheId + "\n";
@@ -41,23 +41,23 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
             this.Sql += "WHERE " + database.Schema.ObjectId + "=" + database.Schema.ObjectId.Param + "\n";
         }
 
-        public InstantiateObject Create(DatabaseSession session)
+        internal InstantiateObject Create(DatabaseSession session)
         {
             return new InstantiateObject(this, session);
         }
 
-        public class InstantiateObject : DatabaseCommand
+        internal class InstantiateObject : DatabaseCommand
         {
             private readonly InstantiateObjectFactory factory;
             private SqlCommand command;
 
-            public InstantiateObject(InstantiateObjectFactory factory, DatabaseSession session)
+            internal InstantiateObject(InstantiateObjectFactory factory, DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
             }
 
-            public Reference Execute(ObjectId objectId)
+            internal Reference Execute(ObjectId objectId)
             {
                 if (this.command == null)
                 {

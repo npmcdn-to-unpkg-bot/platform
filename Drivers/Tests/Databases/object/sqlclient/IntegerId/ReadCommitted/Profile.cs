@@ -19,12 +19,9 @@ namespace Allors.Databases.Object.SqlClient.ReadCommitted
     using System;
     using System.Collections.Generic;
 
-    using Allors.Databases.Object.SqlClient;
     using Allors.Meta;
     using Allors.Populations;
     using Allors.Workspaces.Memory.IntegerId;
-
-    using Configuration = Allors.Databases.Object.SqlClient.Configuration;
 
     public class Profile : SqlClient.Profile
     {

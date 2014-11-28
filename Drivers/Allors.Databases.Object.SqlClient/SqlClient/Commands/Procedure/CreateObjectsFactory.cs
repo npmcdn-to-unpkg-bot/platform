@@ -31,7 +31,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
     using Database = Database;
     using DatabaseSession = DatabaseSession;
 
-    public class CreateObjectsFactory
+    internal class CreateObjectsFactory
     {
         internal readonly Database Database;
 
@@ -40,24 +40,24 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             this.Database = database;
         }
 
-        public CreateObjects Create(DatabaseSession session)
+        internal CreateObjects Create(DatabaseSession session)
         {
             return new CreateObjects(this, session);
         }
 
-        public class CreateObjects : DatabaseCommand
+        internal class CreateObjects : DatabaseCommand
         {
             private readonly CreateObjectsFactory factory;
             private readonly Dictionary<IObjectType, SqlCommand> commandByIObjectType;
 
-            public CreateObjects(CreateObjectsFactory factory, DatabaseSession session)
+            internal CreateObjects(CreateObjectsFactory factory, DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
                 this.commandByIObjectType = new Dictionary<IObjectType, SqlCommand>();
             }
 
-            public IList<Reference> Execute(IClass objectType, int count)
+            internal IList<Reference> Execute(IClass objectType, int count)
             {
                 IObjectType exclusiveRootClass = ((IComposite)objectType).ExclusiveLeafClass;
                 SqlClient.Schema schema = this.Database.Schema;

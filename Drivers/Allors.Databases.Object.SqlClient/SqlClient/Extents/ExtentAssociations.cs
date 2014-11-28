@@ -24,24 +24,22 @@ namespace Allors.Databases.Object.SqlClient
     using System.Collections;
     using System.Collections.Generic;
 
-    using Allors.Databases.Object.SqlClient;
-
     using Meta;
 
-    public class ExtentAssociations : Extent
+    internal class ExtentAssociations : Extent
     {
         private readonly Strategy strategy;
         private readonly IAssociationType associationType;
 
         private ExtentFiltered upgrade;
 
-        public ExtentAssociations(Strategy strategy, IAssociationType associationType)
+        internal ExtentAssociations(Strategy strategy, IAssociationType associationType)
         {
             this.strategy = strategy;
             this.associationType = associationType;
         }
 
-        public override SqlExtent ContainedInExtent
+        internal override SqlExtent ContainedInExtent
         {
             get
             {

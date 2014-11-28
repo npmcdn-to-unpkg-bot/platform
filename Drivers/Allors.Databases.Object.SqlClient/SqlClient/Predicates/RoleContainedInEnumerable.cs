@@ -27,12 +27,12 @@ namespace Allors.Databases.Object.SqlClient
 
     using Meta;
 
-    public sealed class RoleContainedInEnumerable : In
+    internal sealed class RoleContainedInEnumerable : In
     {
         private readonly IEnumerable<IObject> enumerable;
         private readonly IRoleType role;
 
-        public RoleContainedInEnumerable(ExtentFiltered extent, IRoleType role, IEnumerable<IObject> enumerable)
+        internal RoleContainedInEnumerable(ExtentFiltered extent, IRoleType role, IEnumerable<IObject> enumerable)
         {
             extent.CheckRole(role);
             PredicateAssertions.ValidateRoleContainedIn(role, this.enumerable);
@@ -40,7 +40,7 @@ namespace Allors.Databases.Object.SqlClient
             this.enumerable = enumerable;
         }
 
-        public override bool BuildWhere(ExtentStatement statement, string alias)
+        internal override bool BuildWhere(ExtentStatement statement, string alias)
         {
             var schema = statement.Schema;
 
@@ -79,7 +79,7 @@ namespace Allors.Databases.Object.SqlClient
             return this.Include;
         }
 
-        public override void Setup(ExtentStatement statement)
+        internal override void Setup(ExtentStatement statement)
         {
             statement.UseRole(this.role);
         }

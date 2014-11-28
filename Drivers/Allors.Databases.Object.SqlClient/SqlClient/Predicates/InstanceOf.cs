@@ -23,17 +23,17 @@ namespace Allors.Databases.Object.SqlClient
     using Allors.Meta;
     using Allors.Populations;
 
-    public sealed class InstanceOf : Predicate
+    internal sealed class InstanceOf : Predicate
     {
         private readonly IObjectType[] instanceClasses;
 
-        public InstanceOf(IObjectType instanceType, IObjectType[] instanceClasses)
+        internal InstanceOf(IObjectType instanceType, IObjectType[] instanceClasses)
         {
             PredicateAssertions.ValidateInstanceof(instanceType);
             this.instanceClasses = instanceClasses;
         }
 
-        public override bool BuildWhere(ExtentStatement statement, string alias)
+        internal override bool BuildWhere(ExtentStatement statement, string alias)
         {
             var schema = statement.Schema;
             if (this.instanceClasses.Length == 1)
@@ -58,7 +58,7 @@ namespace Allors.Databases.Object.SqlClient
             return this.Include;
         }
 
-        public override void Setup(ExtentStatement statement)
+        internal override void Setup(ExtentStatement statement)
         {
         }
     }

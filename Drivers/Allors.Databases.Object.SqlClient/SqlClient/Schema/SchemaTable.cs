@@ -25,30 +25,30 @@ namespace Allors.Databases.Object.SqlClient
 
     using Allors.Meta;
 
-    public sealed class SchemaTable : IEnumerable<SchemaColumn>
+    internal sealed class SchemaTable : IEnumerable<SchemaColumn>
     {
-        public readonly SchemaTableKind Kind;
-        public readonly string Name;
-        public readonly IRelationType RelationType;
-        public readonly Schema Schema;
-        public readonly IObjectType ObjectType;
-        public readonly string StatementName;
+        internal readonly SchemaTableKind Kind;
+        internal readonly string Name;
+        internal readonly IRelationType RelationType;
+        internal readonly Schema Schema;
+        internal readonly IObjectType ObjectType;
+        internal readonly string StatementName;
 
         private readonly Dictionary<string, SchemaColumn> columnsByName;
 
-        public SchemaTable(Schema schema, string name, SchemaTableKind kind, IObjectType objectType) 
+        internal SchemaTable(Schema schema, string name, SchemaTableKind kind, IObjectType objectType) 
             : this(schema, name, kind)
         {
             this.ObjectType = objectType;
         }
 
-        public SchemaTable(Schema schema, string name, SchemaTableKind kind, IRelationType relationType)
+        internal SchemaTable(Schema schema, string name, SchemaTableKind kind, IRelationType relationType)
             : this(schema, name, kind)
         {
             this.RelationType = relationType;
         }
 
-        public SchemaTable(Schema schema, string name, SchemaTableKind kind)
+        internal SchemaTable(Schema schema, string name, SchemaTableKind kind)
         {
             this.Schema = schema;
             this.Name = name.ToLowerInvariant();
@@ -58,7 +58,7 @@ namespace Allors.Databases.Object.SqlClient
             this.columnsByName = new Dictionary<string, SchemaColumn>();
         }
 
-        public SchemaColumn FirstKeyColumn
+        internal SchemaColumn FirstKeyColumn
         {
             get
             {
@@ -75,7 +75,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public SchemaColumn this[string columnName]
+        internal SchemaColumn this[string columnName]
         {
             get { return this.columnsByName[columnName.ToLowerInvariant()]; }
         }
@@ -99,12 +99,12 @@ namespace Allors.Databases.Object.SqlClient
             return this.StatementName;
         }
 
-        public void AddColumn(SchemaColumn column)
+        internal void AddColumn(SchemaColumn column)
         {
             this.columnsByName[column.Name] = column;
         }
 
-        public bool Contains(string columName)
+        internal bool Contains(string columName)
         {
             return this.columnsByName.ContainsKey(columName.ToLowerInvariant());
         }

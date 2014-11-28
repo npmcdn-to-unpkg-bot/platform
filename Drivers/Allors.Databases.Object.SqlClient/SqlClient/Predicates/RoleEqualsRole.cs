@@ -28,12 +28,12 @@ namespace Allors.Databases.Object.SqlClient
     using Allors.Meta;
     using Allors.Populations;
 
-    public sealed class RoleEqualsRole : Predicate
+    internal sealed class RoleEqualsRole : Predicate
     {
         private readonly IRoleType equalsRole;
         private readonly IRoleType role;
 
-        public RoleEqualsRole(ExtentFiltered extent, IRoleType role, IRoleType equalsRole)
+        internal RoleEqualsRole(ExtentFiltered extent, IRoleType role, IRoleType equalsRole)
         {
             extent.CheckRole(role);
             PredicateAssertions.ValidateRoleEquals(role, equalsRole);
@@ -41,7 +41,7 @@ namespace Allors.Databases.Object.SqlClient
             this.equalsRole = equalsRole;
         }
 
-        public override bool BuildWhere(ExtentStatement statement, string alias)
+        internal override bool BuildWhere(ExtentStatement statement, string alias)
         {
             var schema = statement.Schema;
             if (this.role.ObjectType.IsUnit && this.equalsRole.ObjectType.IsUnit)
@@ -60,7 +60,7 @@ namespace Allors.Databases.Object.SqlClient
             return this.Include;
         }
 
-        public override void Setup(ExtentStatement statement)
+        internal override void Setup(ExtentStatement statement)
         {
             statement.UseRole(this.role);
             statement.UseRole(this.equalsRole);

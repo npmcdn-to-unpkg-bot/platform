@@ -25,7 +25,7 @@ namespace Allors.Databases.Object.SqlClient
     using Allors.Databases.Object.SqlClient;
     using Allors.Meta;
 
-    public abstract class ExtentStatement
+    internal abstract class ExtentStatement
     {
         private readonly ArrayList referenceAssociationInstances;
         private readonly ArrayList referenceAssociations;
@@ -45,19 +45,19 @@ namespace Allors.Databases.Object.SqlClient
             this.referenceAssociationInstances = new ArrayList();
         }
 
-        public SqlExtent Extent
+        internal SqlExtent Extent
         {
             get { return this.extent; }
         }
 
-        public abstract bool IsRoot { get; }
+        internal abstract bool IsRoot { get; }
 
-        public SqlClient.Schema Schema
+        internal SqlClient.Schema Schema
         {
             get { return this.Session.SqlDatabase.Schema; }
         }
 
-        public ExtentSort Sorter
+        internal ExtentSort Sorter
         {
             get { return this.extent.Sorter; }
         }
@@ -72,7 +72,7 @@ namespace Allors.Databases.Object.SqlClient
             get { return this.extent.ObjectType; }
         }
 
-        public void AddJoins(IObjectType rootClass, string alias)
+        internal void AddJoins(IObjectType rootClass, string alias)
         {
             foreach (IRoleType role in this.referenceRoles)
             {
@@ -165,9 +165,9 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public abstract string AddParameter(object obj);
+        internal abstract string AddParameter(object obj);
 
-        public bool AddWhere(IObjectType rootClass, string alias)
+        internal bool AddWhere(IObjectType rootClass, string alias)
         {
             var useWhere = !this.Extent.ObjectType.ExistExclusiveLeafClass;
             
@@ -202,25 +202,25 @@ namespace Allors.Databases.Object.SqlClient
             return useWhere;
         }
 
-        public abstract void Append(string part);
+        internal abstract void Append(string part);
 
-        public abstract string CreateAlias();
+        internal abstract string CreateAlias();
 
-        public abstract ExtentStatement CreateChild(SqlExtent extent, IAssociationType association);
+        internal abstract ExtentStatement CreateChild(SqlExtent extent, IAssociationType association);
 
-        public abstract ExtentStatement CreateChild(SqlExtent extent, IRoleType role);
+        internal abstract ExtentStatement CreateChild(SqlExtent extent, IRoleType role);
 
-        public string GetJoinName(IAssociationType association)
+        internal string GetJoinName(IAssociationType association)
         {
             return association.SingularFullName + "_AC";
         }
 
-        public string GetJoinName(IRoleType role)
+        internal string GetJoinName(IRoleType role)
         {
             return role.SingularFullName + "_RC";
         }
 
-        public void UseAssociation(IAssociationType association)
+        internal void UseAssociation(IAssociationType association)
         {
             if (!association.ObjectType.IsUnit && !this.referenceAssociations.Contains(association))
             {
@@ -228,7 +228,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public void UseAssociationInstance(IAssociationType association)
+        internal void UseAssociationInstance(IAssociationType association)
         {
             if (!this.referenceAssociationInstances.Contains(association))
             {
@@ -236,7 +236,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public void UseRole(IRoleType role)
+        internal void UseRole(IRoleType role)
         {
             if (!role.ObjectType.IsUnit && !this.referenceRoles.Contains(role))
             {
@@ -244,7 +244,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public void UseRoleInstance(IRoleType role)
+        internal void UseRoleInstance(IRoleType role)
         {
             if (!this.referenceRoleInstances.Contains(role))
             {

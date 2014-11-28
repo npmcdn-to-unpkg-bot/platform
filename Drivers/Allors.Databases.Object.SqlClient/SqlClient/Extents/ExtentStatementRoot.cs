@@ -26,7 +26,7 @@ namespace Allors.Databases.Object.SqlClient
     using Allors.Databases.Object.SqlClient;
     using Allors.Meta;
 
-    public class ExtentStatementRoot : ExtentStatement
+    internal class ExtentStatementRoot : ExtentStatement
     {
         private readonly Dictionary<object, string> paramNameByParamValue;
         private readonly StringBuilder sql;
@@ -34,7 +34,7 @@ namespace Allors.Databases.Object.SqlClient
         private Command command;
         private int parameterIndex;
 
-        public ExtentStatementRoot(SqlExtent extent) : base(extent)
+        internal ExtentStatementRoot(SqlExtent extent) : base(extent)
         {
             this.parameterIndex = 0;
             this.aliasIndex = 0;
@@ -42,7 +42,7 @@ namespace Allors.Databases.Object.SqlClient
             this.paramNameByParamValue = new Dictionary<object, string>();
         }
 
-        public override bool IsRoot
+        internal override bool IsRoot
         {
             get { return true; }
         }
@@ -52,7 +52,7 @@ namespace Allors.Databases.Object.SqlClient
             return this.sql.ToString();
         }
 
-        public override string AddParameter(object obj)
+        internal override string AddParameter(object obj)
         {
             if (!this.paramNameByParamValue.ContainsKey(obj))
             {
@@ -64,22 +64,22 @@ namespace Allors.Databases.Object.SqlClient
             return this.paramNameByParamValue[obj];
         }
 
-        public override void Append(string part)
+        internal override void Append(string part)
         {
             this.sql.Append(part);
         }
 
-        public override string CreateAlias()
+        internal override string CreateAlias()
         {
             return "alias" + (this.aliasIndex++);
         }
 
-        public override ExtentStatement CreateChild(SqlExtent extent, IAssociationType association)
+        internal override ExtentStatement CreateChild(SqlExtent extent, IAssociationType association)
         {
             return new ExtentStatementChild(this, extent, association);
         }
 
-        public override ExtentStatement CreateChild(SqlExtent extent, IRoleType role)
+        internal override ExtentStatement CreateChild(SqlExtent extent, IRoleType role)
         {
             return new ExtentStatementChild(this, extent, role);
         }

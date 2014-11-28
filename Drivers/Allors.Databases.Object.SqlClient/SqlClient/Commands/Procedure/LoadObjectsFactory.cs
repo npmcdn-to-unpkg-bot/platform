@@ -29,30 +29,30 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
     using Allors.Databases.Object.SqlClient;
     using Allors.Meta;
 
-    public class LoadObjectsFactory
+    internal class LoadObjectsFactory
     {
         internal readonly SqlClient.ManagementSession ManagementSession;
 
-        public LoadObjectsFactory(SqlClient.ManagementSession session)
+        internal LoadObjectsFactory(SqlClient.ManagementSession session)
         {
             this.ManagementSession = session;
         }
 
-        public LoadObjects Create(IObjectType objectType)
+        internal LoadObjects Create(IObjectType objectType)
         {
             return new LoadObjects(this);
         }
 
-        public class LoadObjects : Commands.Command
+        internal class LoadObjects : Commands.Command
         {
             private readonly LoadObjectsFactory factory;
 
-            public LoadObjects(LoadObjectsFactory factory)
+            internal LoadObjects(LoadObjectsFactory factory)
             {
                 this.factory = factory;
             }
 
-            public void Execute(IObjectType objectType, IEnumerable<ObjectId> objectIds)
+            internal void Execute(IObjectType objectType, IEnumerable<ObjectId> objectIds)
             {
                 var database = this.factory.ManagementSession.SqlClientDatabase;
 

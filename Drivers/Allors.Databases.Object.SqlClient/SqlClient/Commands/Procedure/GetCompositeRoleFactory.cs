@@ -33,23 +33,23 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
     using DatabaseSession = DatabaseSession;
     using Schema = Schema;
 
-    public class GetCompositeRoleFactory
+    internal class GetCompositeRoleFactory
     {
-        public readonly Database Database;
+        internal readonly Database Database;
         private readonly Dictionary<IRoleType, string> sqlByIRoleType;
 
-        public GetCompositeRoleFactory(Database database)
+        internal GetCompositeRoleFactory(Database database)
         {
             this.Database = database;
             this.sqlByIRoleType = new Dictionary<IRoleType, string>();
         }
 
-        public GetCompositeRole Create(DatabaseSession session)
+        internal GetCompositeRole Create(DatabaseSession session)
         {
             return new GetCompositeRole(this, session);
         }
 
-        public string GetSql(IRoleType roleType)
+        internal string GetSql(IRoleType roleType)
         {
             if (!this.sqlByIRoleType.ContainsKey(roleType))
             {
@@ -71,19 +71,19 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             return this.sqlByIRoleType[roleType];
         }
 
-        public class GetCompositeRole : DatabaseCommand
+        internal class GetCompositeRole : DatabaseCommand
         {
             private readonly GetCompositeRoleFactory factory;
             private readonly Dictionary<IRoleType, SqlCommand> commandByIRoleType;
 
-            public GetCompositeRole(GetCompositeRoleFactory factory, DatabaseSession session)
+            internal GetCompositeRole(GetCompositeRoleFactory factory, DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
                 this.commandByIRoleType = new Dictionary<IRoleType, SqlCommand>();
             }
 
-            public void Execute(Roles roles, IRoleType roleType)
+            internal void Execute(Roles roles, IRoleType roleType)
             {
                 var reference = roles.Reference;
 

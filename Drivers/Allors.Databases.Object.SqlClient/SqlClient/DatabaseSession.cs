@@ -29,7 +29,7 @@ namespace Allors.Databases.Object.SqlClient
     using Allors.Databases.Object.SqlClient;
     using Allors.Meta;
 
-    public class DatabaseSession : IDatabaseSession, ICommandFactory
+    internal class DatabaseSession : IDatabaseSession, ICommandFactory
     {
         private ChangeSet changeSet;
 
@@ -47,13 +47,13 @@ namespace Allors.Databases.Object.SqlClient
 
         private Dictionary<string, object> properties;
 
-        public event SessionCommittingEventHandler Committing;
+        internal event SessionCommittingEventHandler Committing;
 
-        public event SessionCommittedEventHandler Committed;
+        internal event SessionCommittedEventHandler Committed;
 
-        public event SessionRollingBackEventHandler RollingBack;
+        internal event SessionRollingBackEventHandler RollingBack;
 
-        public event SessionRolledBackEventHandler RolledBack;
+        internal event SessionRolledBackEventHandler RolledBack;
 
         public IPopulation Population
         {
@@ -95,7 +95,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public ChangeSet SqlChangeSet
+        internal ChangeSet SqlChangeSet
         {
             get
             {
@@ -103,7 +103,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public IChangeSet Changes
+        internal IChangeSet Changes
         {
             get
             {
@@ -111,12 +111,12 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public IWorkspaceSession WorkspaceSession
+        internal IWorkspaceSession WorkspaceSession
         {
             get { throw new NotSupportedException(); }
         }
 
-        public Schema Schema
+        internal Schema Schema
         {
             get { return this.SqlDatabase.Schema; }
         }
@@ -467,7 +467,7 @@ namespace Allors.Databases.Object.SqlClient
             return (T)this.Create(objectType);
         }
 
-        public virtual Reference GetAssociation(Strategy roleStrategy, IAssociationType associationType)
+        internal virtual Reference GetAssociation(Strategy roleStrategy, IAssociationType associationType)
         {
             var associationByRole = this.GetAssociationByRole(associationType);
 
@@ -482,13 +482,13 @@ namespace Allors.Databases.Object.SqlClient
             return association;
         }
 
-        public void SetAssociation(Reference previousAssociation, Strategy roleStrategy, IAssociationType associationType)
+        internal void SetAssociation(Reference previousAssociation, Strategy roleStrategy, IAssociationType associationType)
         {
             var associationByRole = this.GetAssociationByRole(associationType);
             associationByRole[roleStrategy.Reference] = previousAssociation;
         }
 
-        public virtual ObjectId[] GetAssociations(Strategy roleStrategy, IAssociationType associationType)
+        internal virtual ObjectId[] GetAssociations(Strategy roleStrategy, IAssociationType associationType)
         {
             var associationsByRole = this.GetAssociationsByRole(associationType);
 
@@ -503,7 +503,7 @@ namespace Allors.Databases.Object.SqlClient
             return associations;
         }
 
-        public void AddAssociation(Reference association, Reference role, IAssociationType associationType)
+        internal void AddAssociation(Reference association, Reference role, IAssociationType associationType)
         {
             var associationsByRole = this.GetAssociationsByRole(associationType);
 
@@ -517,7 +517,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public void RemoveAssociation(Reference association, Reference role, IAssociationType associationType)
+        internal void RemoveAssociation(Reference association, Reference role, IAssociationType associationType)
         {
             var associationsByRole = this.GetAssociationsByRole(associationType);
 
@@ -531,12 +531,12 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public virtual Reference[] GetOrCreateAssociationsForExistingObjects(IEnumerable<ObjectId> objectIds)
+        internal virtual Reference[] GetOrCreateAssociationsForExistingObjects(IEnumerable<ObjectId> objectIds)
         {
             return objectIds.Select(this.GetOrCreateAssociationForExistingObject).ToArray();
         }
 
-        public virtual Reference GetOrCreateAssociationForExistingObject(ObjectId objectId)
+        internal virtual Reference GetOrCreateAssociationForExistingObject(ObjectId objectId)
         {
             Reference association;
             if (!this.referenceByObjectId.TryGetValue(objectId, out association))
@@ -556,7 +556,7 @@ namespace Allors.Databases.Object.SqlClient
             return association;
         }
 
-        public virtual Reference GetOrCreateAssociationForExistingObject(IClass objectType, ObjectId objectId)
+        internal virtual Reference GetOrCreateAssociationForExistingObject(IClass objectType, ObjectId objectId)
         {
             Reference association;
             if (!this.referenceByObjectId.TryGetValue(objectId, out association))
@@ -569,7 +569,7 @@ namespace Allors.Databases.Object.SqlClient
             return association;
         }
 
-        public virtual Reference GetOrCreateAssociationForExistingObject(IClass objectType, ObjectId objectId, int cacheId)
+        internal virtual Reference GetOrCreateAssociationForExistingObject(IClass objectType, ObjectId objectId, int cacheId)
         {
             Reference association;
             if (!this.referenceByObjectId.TryGetValue(objectId, out association))
@@ -581,14 +581,14 @@ namespace Allors.Databases.Object.SqlClient
             return association;
         }
 
-        public virtual Reference CreateAssociationForNewObject(IClass objectType, ObjectId objectId)
+        internal virtual Reference CreateAssociationForNewObject(IClass objectType, ObjectId objectId)
         {
             var strategyReference = this.CreateReference(objectType, objectId, true);
             this.referenceByObjectId[objectId] = strategyReference;
             return strategyReference;
         }
 
-        public virtual Roles GetOrCreateRoles(Reference reference)
+        internal virtual Roles GetOrCreateRoles(Reference reference)
         {
             if (this.modifiedRolesByReference != null)
             {
@@ -607,7 +607,7 @@ namespace Allors.Databases.Object.SqlClient
             return "Session[id=" + this.GetHashCode() + "] " + this.Population;
         }
 
-        public virtual void Flush()
+        internal virtual void Flush()
         {
             if (this.unflushedRolesByReference != null)
             {
@@ -619,7 +619,7 @@ namespace Allors.Databases.Object.SqlClient
             this.triggersFlushRolesByIAssociationType = null;
         }
 
-        public virtual void FlushConditionally(Strategy strategy, IAssociationType associationType)
+        internal virtual void FlushConditionally(Strategy strategy, IAssociationType associationType)
         {
             if (this.triggersFlushRolesByIAssociationType != null)
             {
@@ -788,23 +788,23 @@ namespace Allors.Databases.Object.SqlClient
 
             this.changeSet = new ChangeSet();
         }
-        
+
         public Allors.IDatabase Database
         {
             get { return this.database; }
         }
 
-        public Database SqlDatabase
+        internal Database SqlDatabase
         {
             get { return this.database; }
         }
 
-        public Database SqlClientDatabase
+        internal Database SqlClientDatabase
         {
             get { return this.database; }
         }
 
-        public SessionCommands SessionCommands
+        internal SessionCommands SessionCommands
         {
             get
             {
@@ -819,7 +819,7 @@ namespace Allors.Databases.Object.SqlClient
             return command;
         }
 
-        public virtual SqlCommand CreateSqlCommand()
+        internal virtual SqlCommand CreateSqlCommand()
         {
             if (this.connection == null)
             {

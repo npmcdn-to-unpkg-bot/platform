@@ -24,12 +24,12 @@ namespace Allors.Databases.Object.SqlClient
 
     using Meta;
 
-    public sealed class AssociationContainedInExtent : In
+    internal sealed class AssociationContainedInExtent : In
     {
         private readonly IAssociationType association;
         private readonly SqlExtent inExtent;
 
-        public AssociationContainedInExtent(ExtentFiltered extent, IAssociationType association, Allors.Extent inExtent)
+        internal AssociationContainedInExtent(ExtentFiltered extent, IAssociationType association, Allors.Extent inExtent)
         {
             extent.CheckAssociation(association);
             PredicateAssertions.AssertAssociationContainedIn(association, inExtent);
@@ -37,7 +37,7 @@ namespace Allors.Databases.Object.SqlClient
             this.inExtent = ((Extent)inExtent).ContainedInExtent;
         }
 
-        public override bool BuildWhere(ExtentStatement statement, string alias)
+        internal override bool BuildWhere(ExtentStatement statement, string alias)
         {
             var schema = statement.Schema;
             var inStatement = statement.CreateChild(this.inExtent, this.association);
@@ -72,7 +72,7 @@ namespace Allors.Databases.Object.SqlClient
             return this.Include;
         }
 
-        public override void Setup(ExtentStatement statement)
+        internal override void Setup(ExtentStatement statement)
         {
             statement.UseAssociation(this.association);
         }

@@ -23,37 +23,37 @@ namespace Allors.Databases.Object.SqlClient
     using Allors.Databases.Object.SqlClient;
     using Allors.Meta;
 
-    public class ExtentStatementChild : ExtentStatement
+    internal class ExtentStatementChild : ExtentStatement
     {
         private readonly IAssociationType associationType;
         private readonly IRoleType roleType;
         private readonly ExtentStatementRoot root;
 
-        public ExtentStatementChild(ExtentStatementRoot root, SqlExtent extent, IRoleType roleType)
+        internal ExtentStatementChild(ExtentStatementRoot root, SqlExtent extent, IRoleType roleType)
             : base(extent)
         {
             this.root = root;
             this.roleType = roleType;
         }
 
-        public ExtentStatementChild(ExtentStatementRoot root, SqlExtent extent, IAssociationType associationType)
+        internal ExtentStatementChild(ExtentStatementRoot root, SqlExtent extent, IAssociationType associationType)
             : base(extent)
         {
             this.root = root;
             this.associationType = associationType;
         }
 
-        public IAssociationType AssociationType
+        internal IAssociationType AssociationType
         {
             get { return this.associationType; }
         }
 
-        public override bool IsRoot
+        internal override bool IsRoot
         {
             get { return false; }
         }
 
-        public IRoleType RoleType
+        internal IRoleType RoleType
         {
             get { return this.roleType; }
         }
@@ -63,27 +63,27 @@ namespace Allors.Databases.Object.SqlClient
             return this.root.ToString();
         }
 
-        public override string AddParameter(object obj)
+        internal override string AddParameter(object obj)
         {
             return this.root.AddParameter(obj);
         }
 
-        public override void Append(string part)
+        internal override void Append(string part)
         {
             this.root.Append(part);
         }
 
-        public override string CreateAlias()
+        internal override string CreateAlias()
         {
             return this.root.CreateAlias();
         }
 
-        public override ExtentStatement CreateChild(SqlExtent extent, IAssociationType association)
+        internal override ExtentStatement CreateChild(SqlExtent extent, IAssociationType association)
         {
             return new ExtentStatementChild(this.root, extent, association);
         }
 
-        public override ExtentStatement CreateChild(SqlExtent extent, IRoleType role)
+        internal override ExtentStatement CreateChild(SqlExtent extent, IRoleType role)
         {
             return new ExtentStatementChild(this.root, extent, role);
         }

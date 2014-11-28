@@ -20,7 +20,7 @@
 
 namespace Allors.Databases.Object.SqlClient
 {
-    public interface ISchemaValidationError
+    internal interface ISchemaValidationError
     {
         string Message { get; }
 

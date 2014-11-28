@@ -23,7 +23,7 @@ namespace Allors.Databases.Object.SqlClient
     using Allors.Databases.Object.SqlClient.Commands.Procedure;
     using Allors.Databases.Object.SqlClient.Commands.Text;
 
-    public sealed class SessionCommands
+    internal sealed class SessionCommands
     {
         private readonly DatabaseSession session;
         private readonly CommandFactories commandFactories;
@@ -55,7 +55,7 @@ namespace Allors.Databases.Object.SqlClient
             this.commandFactories = this.session.SqlClientDatabase.SqlClientCommandFactories;
         }
 
-        public GetIObjectTypeFactory.GetIObjectType GetObjectType
+        internal GetIObjectTypeFactory.GetIObjectType GetObjectType
         {
             get
             {
@@ -63,7 +63,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public CreateObjectFactory.CreateObject CreateObjectCommand
+        internal CreateObjectFactory.CreateObject CreateObjectCommand
         {
             get
             {
@@ -71,7 +71,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public CreateObjectsFactory.CreateObjects CreateObjectsCommand
+        internal CreateObjectsFactory.CreateObjects CreateObjectsCommand
         {
             get
             {
@@ -79,7 +79,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public InsertObjectFactory.InsertObject InsertObjectCommand
+        internal InsertObjectFactory.InsertObject InsertObjectCommand
         {
             get
             {
@@ -87,7 +87,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public DeleteObjectFactory.DeleteObject DeleteObjectCommand
+        internal DeleteObjectFactory.DeleteObject DeleteObjectCommand
         {
             get
             {
@@ -95,7 +95,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public InstantiateObjectFactory.InstantiateObject InstantiateObjectCommand
+        internal InstantiateObjectFactory.InstantiateObject InstantiateObjectCommand
         {
             get
             {
@@ -103,7 +103,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public InstantiateObjectsFactory.InstantiateObjects InstantiateObjectsCommand
+        internal InstantiateObjectsFactory.InstantiateObjects InstantiateObjectsCommand
         {
             get
             {
@@ -111,7 +111,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public GetUnitRolesFactory.GetUnitRoles GetUnitRolesCommand
+        internal GetUnitRolesFactory.GetUnitRoles GetUnitRolesCommand
         {
             get
             {
@@ -119,7 +119,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public SetUnitRoleFactory.SetUnitRole SetUnitRoleCommand
+        internal SetUnitRoleFactory.SetUnitRole SetUnitRoleCommand
         {
             get
             {
@@ -127,7 +127,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public SetUnitRolesFactory.SetUnitRoles SetUnitRolesCommand
+        internal SetUnitRolesFactory.SetUnitRoles SetUnitRolesCommand
         {
             get
             {
@@ -135,7 +135,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public GetCompositeRoleFactory.GetCompositeRole GetCompositeRoleCommand
+        internal GetCompositeRoleFactory.GetCompositeRole GetCompositeRoleCommand
         {
             get
             {
@@ -143,7 +143,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public SetCompositeRoleFactory.SetCompositeRole SetCompositeRoleCommand
+        internal SetCompositeRoleFactory.SetCompositeRole SetCompositeRoleCommand
         {
             get
             {
@@ -151,7 +151,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public ClearCompositeAndCompositesRoleFactory.ClearCompositeAndCompositesRole ClearCompositeAndCompositesRoleCommand
+        internal ClearCompositeAndCompositesRoleFactory.ClearCompositeAndCompositesRole ClearCompositeAndCompositesRoleCommand
         {
             get
             {
@@ -159,7 +159,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public GetCompositeAssociationFactory.GetCompositeAssociation GetCompositeAssociationCommand
+        internal GetCompositeAssociationFactory.GetCompositeAssociation GetCompositeAssociationCommand
         {
             get
             {
@@ -167,7 +167,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public GetCompositeRolesFactory.GetCompositeRoles GetCompositeRolesCommand
+        internal GetCompositeRolesFactory.GetCompositeRoles GetCompositeRolesCommand
         {
             get
             {
@@ -175,7 +175,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public AddCompositeRoleFactory.AddCompositeRole AddCompositeRoleCommand
+        internal AddCompositeRoleFactory.AddCompositeRole AddCompositeRoleCommand
         {
             get
             {
@@ -183,7 +183,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public RemoveCompositeRoleFactory.RemoveCompositeRole RemoveCompositeRoleCommand
+        internal RemoveCompositeRoleFactory.RemoveCompositeRole RemoveCompositeRoleCommand
         {
             get
             {
@@ -191,7 +191,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public GetCompositeAssociationsFactory.GetCompositeAssociations GetCompositeAssociationsCommand
+        internal GetCompositeAssociationsFactory.GetCompositeAssociations GetCompositeAssociationsCommand
         {
             get
             {
@@ -199,7 +199,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public UpdateCacheIdsFactory.UpdateCacheIds UpdateCacheIdsCommand
+        internal UpdateCacheIdsFactory.UpdateCacheIds UpdateCacheIdsCommand
         {
             get
             {
@@ -207,7 +207,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public GetCacheIdsFactory.GetCacheIds GetCacheIdsCommand
+        internal GetCacheIdsFactory.GetCacheIds GetCacheIdsCommand
         {
             get
             {

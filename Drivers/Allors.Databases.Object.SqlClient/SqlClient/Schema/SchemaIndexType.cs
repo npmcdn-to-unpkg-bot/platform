@@ -20,7 +20,7 @@
 
 namespace Allors.Databases.Object.SqlClient
 {
-    public enum SchemaIndexType
+    internal enum SchemaIndexType
     {
         /// <summary>
         /// Don't use an index

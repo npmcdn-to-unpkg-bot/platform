@@ -26,10 +26,10 @@ namespace Allors.Databases.Object.SqlClient
 
     using Allors.Meta;
 
-    public class Reference
+    internal class Reference
     {
-        public const int UnknownCacheId = int.MaxValue;
-        public const int InitialCacheId = int.MaxValue - 1;
+        internal const int UnknownCacheId = int.MaxValue;
+        internal const int InitialCacheId = int.MaxValue - 1;
 
         private static readonly int MaskIsNew = BitVector32.CreateMask();
         private static readonly int MaskExists = BitVector32.CreateMask(MaskIsNew);
@@ -44,7 +44,7 @@ namespace Allors.Databases.Object.SqlClient
 
         private WeakReference weakReference;
 
-        public Reference(DatabaseSession session, IClass objectType, ObjectId objectId, bool isNew)
+        internal Reference(DatabaseSession session, IClass objectType, ObjectId objectId, bool isNew)
         {
             this.session = session;
             this.objectType = objectType;
@@ -58,7 +58,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public Reference(DatabaseSession session, IClass objectType, ObjectId objectId, int cacheId)
+        internal Reference(DatabaseSession session, IClass objectType, ObjectId objectId, int cacheId)
             : this(session, objectType, objectId, false)
         {
             this.cacheId = cacheId;
@@ -66,7 +66,7 @@ namespace Allors.Databases.Object.SqlClient
             this.flags[MaskExists] = true;
         }
 
-        public virtual Strategy Strategy
+        internal virtual Strategy Strategy
         {
             get
             {
@@ -82,7 +82,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public DatabaseSession Session
+        internal DatabaseSession Session
         {
             get
             {
@@ -90,7 +90,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public IClass ObjectType
+        internal IClass ObjectType
         {
             get
             {
@@ -98,7 +98,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public ObjectId ObjectId
+        internal ObjectId ObjectId
         {
             get
             {
@@ -106,7 +106,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public int CacheId
+        internal int CacheId
         {
             get
             {
@@ -124,7 +124,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public bool IsNew
+        internal bool IsNew
         {
             get
             {
@@ -132,7 +132,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public bool Exists
+        internal bool Exists
         {
             get
             {
@@ -153,7 +153,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public Strategy Target
+        internal Strategy Target
         {
             get
             {
@@ -177,7 +177,7 @@ namespace Allors.Databases.Object.SqlClient
             return "[" + this.objectType + ":" + this.ObjectId + "]";
         }
 
-        public virtual void Commit(HashSet<Reference> referencesWithStrategy)
+        internal virtual void Commit(HashSet<Reference> referencesWithStrategy)
         {
             this.flags[MaskExistsKnown] = false;
             this.flags[MaskIsNew] = false;
@@ -191,7 +191,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public virtual void Rollback(HashSet<Reference> referencesWithStrategy)
+        internal virtual void Rollback(HashSet<Reference> referencesWithStrategy)
         {
             if (this.flags[MaskIsNew])
             {

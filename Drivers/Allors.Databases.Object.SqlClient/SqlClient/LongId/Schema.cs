@@ -23,9 +23,9 @@ namespace Allors.Databases.Object.SqlClient.LongId
 {
     using System.Data;
 
-    public sealed class Schema : SqlClient.Schema
+    internal sealed class Schema : SqlClient.Schema
     {
-        public Schema(SqlClient.Database database) : base(database)
+        internal Schema(SqlClient.Database database) : base(database)
         {
             this.OnConstructed();
         }

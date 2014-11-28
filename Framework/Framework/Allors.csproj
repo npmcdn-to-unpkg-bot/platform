@@ -92,7 +92,6 @@
     <Compile Include="RelationNotLoadedEventArgs.cs" />
     <Compile Include="SessionCommittedEventArgs.cs" />
     <Compile Include="SessionCommittingEventArgs.cs" />
-    <Compile Include="SessionCreatedEventArgs.cs" />
     <Compile Include="SessionRolledBackEventArgs.cs" />
     <Compile Include="SessionRollingBackEventArgs.cs" />
     <Compile Include="Sort.cs" />

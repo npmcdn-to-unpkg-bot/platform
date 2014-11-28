@@ -33,23 +33,23 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
     using Database = Database;
     using DatabaseSession = DatabaseSession;
 
-    public class GetUnitRolesFactory
+    internal class GetUnitRolesFactory
     {
-        public readonly Database Database;
+        internal readonly Database Database;
         private readonly Dictionary<IObjectType, string> sqlByIObjectType;
 
-        public GetUnitRolesFactory(Database database)
+        internal GetUnitRolesFactory(Database database)
         {
             this.Database = database;
             this.sqlByIObjectType = new Dictionary<IObjectType, string>();
         }
 
-        public GetUnitRoles Create(DatabaseSession session)
+        internal GetUnitRoles Create(DatabaseSession session)
         {
             return new GetUnitRoles(this, session);
         }
 
-        public string GetSql(IObjectType objectType)
+        internal string GetSql(IObjectType objectType)
         {
             if (!this.sqlByIObjectType.ContainsKey(objectType))
             {
@@ -60,19 +60,19 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             return this.sqlByIObjectType[objectType];
         }
 
-        public class GetUnitRoles : DatabaseCommand
+        internal class GetUnitRoles : DatabaseCommand
         {
             private readonly GetUnitRolesFactory factory;
             private readonly Dictionary<IObjectType, SqlCommand> commandByIObjectType;
 
-            public GetUnitRoles(GetUnitRolesFactory factory, DatabaseSession session)
+            internal GetUnitRoles(GetUnitRolesFactory factory, DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
                 this.commandByIObjectType = new Dictionary<IObjectType, SqlCommand>();
             }
 
-            public void Execute(Roles roles)
+            internal void Execute(Roles roles)
             {
                 var reference = roles.Reference;
                 var objectType = reference.ObjectType;

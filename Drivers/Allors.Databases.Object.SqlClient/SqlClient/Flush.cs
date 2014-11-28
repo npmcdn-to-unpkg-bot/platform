@@ -25,7 +25,7 @@ namespace Allors.Databases.Object.SqlClient
     using Allors.Databases.Object.SqlClient;
     using Allors.Meta;
 
-    public class Flush
+    internal class Flush
     {
         private const int BatchSize = 1000;
         private readonly DatabaseSession session;
@@ -36,7 +36,7 @@ namespace Allors.Databases.Object.SqlClient
         private Dictionary<IRoleType, List<CompositeRelation>> removeCompositeRoleRelationsByIRoleType;
         private Dictionary<IRoleType, IList<ObjectId>> clearCompositeRoleRelationsByIRoleType;
 
-        public Flush(DatabaseSession session, Dictionary<Reference, Roles> unsyncedRolesByReference)
+        internal Flush(DatabaseSession session, Dictionary<Reference, Roles> unsyncedRolesByReference)
         {
             this.session = session;
 
@@ -47,7 +47,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public void Execute()
+        internal void Execute()
         {
             if (this.setUnitRoleRelationsByIRoleTypeByExclusiveRootClass != null)
             {
@@ -130,12 +130,12 @@ namespace Allors.Databases.Object.SqlClient
             this.clearCompositeRoleRelationsByIRoleType = null;
         }
 
-        public void SetUnitRoles(Roles roles, List<IRoleType> unitRoles)
+        internal void SetUnitRoles(Roles roles, List<IRoleType> unitRoles)
         {
             roles.Reference.Session.SessionCommands.SetUnitRolesCommand.Execute(roles, unitRoles);
         }
 
-        public void SetUnitRole(Reference association, IRoleType roleType, object role)
+        internal void SetUnitRole(Reference association, IRoleType roleType, object role)
         {
             if (this.setUnitRoleRelationsByIRoleTypeByExclusiveRootClass == null)
             {
@@ -168,7 +168,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public void SetCompositeRole(Reference association, IRoleType roleType, ObjectId role)
+        internal void SetCompositeRole(Reference association, IRoleType roleType, ObjectId role)
         {
             if (this.setCompositeRoleRelationsByIRoleType == null)
             {
@@ -191,7 +191,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public void AddCompositeRole(Reference association, IRoleType roleType, HashSet<ObjectId> added)
+        internal void AddCompositeRole(Reference association, IRoleType roleType, HashSet<ObjectId> added)
         {
             if (this.addCompositeRoleRelationsByIRoleType == null)
             {
@@ -217,7 +217,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public void RemoveCompositeRole(Reference association, IRoleType roleType, HashSet<ObjectId> removed)
+        internal void RemoveCompositeRole(Reference association, IRoleType roleType, HashSet<ObjectId> removed)
         {
             if (this.removeCompositeRoleRelationsByIRoleType == null)
             {
@@ -243,7 +243,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public void ClearCompositeAndCompositesRole(Reference association, IRoleType roleType)
+        internal void ClearCompositeAndCompositesRole(Reference association, IRoleType roleType)
         {
             if (this.clearCompositeRoleRelationsByIRoleType == null)
             {

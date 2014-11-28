@@ -29,7 +29,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
     using Database = Database;
     using DatabaseSession = DatabaseSession;
 
-    public class InstantiateObjectsFactory
+    internal class InstantiateObjectsFactory
     {
         internal readonly Database Database;
         internal readonly string Sql;
@@ -43,23 +43,23 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
             this.Sql += "( SELECT " + this.Database.SqlClientSchema.ObjectTableObject + " FROM " + this.Database.SqlClientSchema.ObjectTableParam.Name + " )\n";
         }
 
-        public InstantiateObjects Create(DatabaseSession session)
+        internal InstantiateObjects Create(DatabaseSession session)
         {
             return new InstantiateObjects(this, session);
         }
 
-        public class InstantiateObjects : DatabaseCommand
+        internal class InstantiateObjects : DatabaseCommand
         {
             private readonly InstantiateObjectsFactory factory;
             private SqlCommand command;
 
-            public InstantiateObjects(InstantiateObjectsFactory factory, DatabaseSession session)
+            internal InstantiateObjects(InstantiateObjectsFactory factory, DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
             }
 
-            public IList<Reference> Execute(IList<ObjectId> objectids)
+            internal IList<Reference> Execute(IList<ObjectId> objectids)
             {
                 var strategies = new List<Reference>();
 

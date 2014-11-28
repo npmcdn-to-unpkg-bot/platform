@@ -20,7 +20,7 @@
 
 namespace Allors.Databases.Object.SqlClient
 {
-    public class ObjectLongIds : IObjectIds
+    internal class ObjectLongIds : IObjectIds
     {
         public ObjectId Parse(string idString)
         {

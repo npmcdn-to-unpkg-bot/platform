@@ -20,7 +20,7 @@
 
 namespace Allors.Databases.Object.SqlClient
 {
-    public interface IObjectIds
+    internal interface IObjectIds
     {
         ObjectId Parse(string idString);
     }

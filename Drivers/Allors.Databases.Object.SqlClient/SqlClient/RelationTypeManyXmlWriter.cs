@@ -31,7 +31,7 @@ namespace Allors.Databases.Object.SqlClient
     /// Writes all relations from a <see cref="IRelationType"/> with a <see cref="IRoleType"/> with multiplicity of many 
     /// to the <see cref="XmlWriter"/> during a <see cref="IDatabase#Save"/>.
     /// </summary>
-    public class RelationTypeManyXmlWriter : IDisposable
+    internal class RelationTypeManyXmlWriter : IDisposable
     {
         /// <summary>
         /// The <see cref="relationType"/>.
@@ -68,7 +68,7 @@ namespace Allors.Databases.Object.SqlClient
         /// </summary>
         /// <param name="relationType">The relation type.</param>
         /// <param name="xmlWriter">The XML writer.</param>
-        public RelationTypeManyXmlWriter(IRelationType relationType, XmlWriter xmlWriter)
+        internal RelationTypeManyXmlWriter(IRelationType relationType, XmlWriter xmlWriter)
         {
             this.relationType = relationType;
             this.xmlWriter = xmlWriter;
@@ -80,7 +80,7 @@ namespace Allors.Databases.Object.SqlClient
         /// <summary>
         /// Closes this "<see cref="RelationTypeManyXmlWriter"/>.
         /// </summary>
-        public void Close()
+        internal void Close()
         {
             if (!this.isClosed)
             {
@@ -108,7 +108,7 @@ namespace Allors.Databases.Object.SqlClient
         /// </summary>
         /// <param name="associationId">The association id.</param>
         /// <param name="roleId">The role id.</param>
-        public void Write(long associationId, long roleId)
+        internal void Write(long associationId, long roleId)
         {
             if (!this.isInUse)
             {

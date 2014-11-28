@@ -30,7 +30,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
     using Database = Database;
     using DatabaseSession = DatabaseSession;
 
-    public class AddCompositeRoleFactory
+    internal class AddCompositeRoleFactory
     {
         internal readonly Database Database;
         private readonly Dictionary<IRoleType, string> sqlByIRoleType;
@@ -41,7 +41,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             this.sqlByIRoleType = new Dictionary<IRoleType, string>();
         }
 
-        public AddCompositeRole Create(DatabaseSession session)
+        internal AddCompositeRole Create(DatabaseSession session)
         {
             return new AddCompositeRole(this, session);
         }
@@ -68,19 +68,19 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             return this.sqlByIRoleType[roleType];
         }
 
-        public class AddCompositeRole : DatabaseCommand
+        internal class AddCompositeRole : DatabaseCommand
         {
             private readonly AddCompositeRoleFactory factory;
             private readonly Dictionary<IRoleType, SqlCommand> commandByIRoleType;
 
-            public AddCompositeRole(AddCompositeRoleFactory factory, DatabaseSession session)
+            internal AddCompositeRole(AddCompositeRoleFactory factory, DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
                 this.commandByIRoleType = new Dictionary<IRoleType, SqlCommand>();
             }
 
-            public void Execute(IList<CompositeRelation> relations, IRoleType roleType)
+            internal void Execute(IList<CompositeRelation> relations, IRoleType roleType)
             {
                 var schema = this.factory.Database.SqlClientSchema;
 

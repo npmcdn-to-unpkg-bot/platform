@@ -23,7 +23,7 @@ namespace Allors.Databases.Object.SqlClient
     /// <summary>
     /// The kinds of <see cref="SchemaValidationError"/>s.
     /// </summary>
-    public enum SchemaValidationErrorKind
+    internal enum SchemaValidationErrorKind
     {
         /// <summary>
         /// Indicates that a Sql table or field is missing.

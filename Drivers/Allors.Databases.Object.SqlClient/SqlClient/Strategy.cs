@@ -31,7 +31,7 @@ namespace Allors.Databases.Object.SqlClient
 
     using Meta;
 
-    public class Strategy : IStrategy
+    internal class Strategy : IStrategy
     {
         private readonly Reference reference;
         private readonly ObjectId objectId;
@@ -39,7 +39,7 @@ namespace Allors.Databases.Object.SqlClient
         private IObject allorsObject;
         private Roles roles;
 
-        public Strategy(Reference reference)
+        internal Strategy(Reference reference)
         {
             this.reference = reference;
             this.objectId = reference.ObjectId;
@@ -67,7 +67,7 @@ namespace Allors.Databases.Object.SqlClient
         {
             get { return this.objectId; }
         }
-        
+
         public bool IsDeleted
         {
             get
@@ -92,12 +92,12 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public DatabaseSession SqlSession
+        internal DatabaseSession SqlSession
         {
             get { return this.reference.Session; }
         }
 
-        public Roles Roles
+        internal Roles Roles
         {
             get
             {
@@ -433,7 +433,7 @@ namespace Allors.Databases.Object.SqlClient
 
             return this.GetCompositeAssociation(associationType);
         }
-        
+
         public virtual bool ExistCompositeAssociation(IAssociationType associationType)
         {
             return this.GetCompositeAssociation(associationType) != null;
@@ -464,7 +464,7 @@ namespace Allors.Databases.Object.SqlClient
             return "[" + this.ObjectType + ":" + this.ObjectId + "]";
         }
 
-        public virtual void Release()
+        internal virtual void Release()
         {
             this.roles = null;
         }

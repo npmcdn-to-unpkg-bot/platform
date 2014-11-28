@@ -24,19 +24,19 @@ namespace Allors.Databases.Object.SqlClient
 
     using Allors.Meta;
 
-    public class CompositeRoles
+    internal class CompositeRoles
     {
         private readonly HashSet<ObjectId> baseline;
         private HashSet<ObjectId> original; 
         private HashSet<ObjectId> added;
         private HashSet<ObjectId> removed;
 
-        public CompositeRoles(IEnumerable<ObjectId> compositeRoles)
+        internal CompositeRoles(IEnumerable<ObjectId> compositeRoles)
         {
             this.baseline = new HashSet<ObjectId>(compositeRoles);
         }
 
-        public HashSet<ObjectId> ObjectIds
+        internal HashSet<ObjectId> ObjectIds
         {
             get
             {
@@ -60,7 +60,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public int Count
+        internal int Count
         {
             get
             {
@@ -71,7 +71,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public ObjectId First
+        internal ObjectId First
         {
             get
             {
@@ -100,7 +100,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public bool Contains(ObjectId objectId)
+        internal bool Contains(ObjectId objectId)
         {
             if (this.removed != null && this.removed.Contains(objectId))
             {
@@ -110,7 +110,7 @@ namespace Allors.Databases.Object.SqlClient
             return this.baseline.Contains(objectId) || (this.added != null && this.added.Contains(objectId));
         }
 
-        public void Add(ObjectId objectId)
+        internal void Add(ObjectId objectId)
         {
             if (this.original == null)
             {
@@ -134,7 +134,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public void Remove(ObjectId objectId)
+        internal void Remove(ObjectId objectId)
         {
             if (this.original == null)
             {
@@ -158,7 +158,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public void Flush(Flush flush, Roles roles, IRoleType roleType)
+        internal void Flush(Flush flush, Roles roles, IRoleType roleType)
         {
             if (this.Count == 0)
             {

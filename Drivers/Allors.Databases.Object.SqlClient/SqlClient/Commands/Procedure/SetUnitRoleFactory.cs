@@ -31,23 +31,23 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
     using Database = Database;
     using DatabaseSession = DatabaseSession;
 
-    public class SetUnitRoleFactory
+    internal class SetUnitRoleFactory
     {
-        public readonly Database Database;
+        internal readonly Database Database;
         private readonly Dictionary<IObjectType, Dictionary<IRoleType, string>> sqlByIRoleTypeByIObjectType;
 
-        public SetUnitRoleFactory(Database database)
+        internal SetUnitRoleFactory(Database database)
         {
             this.Database = database;
             this.sqlByIRoleTypeByIObjectType = new Dictionary<IObjectType, Dictionary<IRoleType, string>>();
         }
 
-        public SetUnitRole Create(DatabaseSession session)
+        internal SetUnitRole Create(DatabaseSession session)
         {
             return new SetUnitRole(this, session);
         }
 
-        public string GetSql(IObjectType objectType, IRoleType roleType)
+        internal string GetSql(IObjectType objectType, IRoleType roleType)
         {
             Dictionary<IRoleType, string> sqlByIRoleType;
             if (!this.sqlByIRoleTypeByIObjectType.TryGetValue(objectType, out sqlByIRoleType))
@@ -65,19 +65,19 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             return sqlByIRoleType[roleType];
         }
 
-        public class SetUnitRole : DatabaseCommand
+        internal class SetUnitRole : DatabaseCommand
         {
             private readonly SetUnitRoleFactory factory;
             private readonly Dictionary<IObjectType, Dictionary<IRoleType, SqlCommand>> commandByIRoleTypeByIObjectType;
 
-            public SetUnitRole(SetUnitRoleFactory factory, DatabaseSession session)
+            internal SetUnitRole(SetUnitRoleFactory factory, DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
                 this.commandByIRoleTypeByIObjectType = new Dictionary<IObjectType, Dictionary<IRoleType, SqlCommand>>();
             }
 
-            public void Execute(IList<UnitRelation> relation, IObjectType exclusiveRootClass, IRoleType roleType)
+            internal void Execute(IList<UnitRelation> relation, IObjectType exclusiveRootClass, IRoleType roleType)
             {
                 var schema = this.Database.SqlClientSchema;
 

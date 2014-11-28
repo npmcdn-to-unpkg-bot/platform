@@ -30,23 +30,23 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
     using DatabaseSession = DatabaseSession;
     using Schema = Schema;
 
-    public class SetCompositeRoleFactory
+    internal class SetCompositeRoleFactory
     {
-        public readonly Database Database;
+        internal readonly Database Database;
         private readonly Dictionary<IRoleType, string> sqlByIRoleType;
 
-        public SetCompositeRoleFactory(Database database)
+        internal SetCompositeRoleFactory(Database database)
         {
             this.Database = database;
             this.sqlByIRoleType = new Dictionary<IRoleType, string>();
         }
 
-        public SetCompositeRole Create(DatabaseSession session)
+        internal SetCompositeRole Create(DatabaseSession session)
         {
             return new SetCompositeRole(this, session);
         }
 
-        public string GetSql(IRoleType roleType)
+        internal string GetSql(IRoleType roleType)
         {
             if (!this.sqlByIRoleType.ContainsKey(roleType))
             {
@@ -68,19 +68,19 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
             return this.sqlByIRoleType[roleType];
         }
 
-        public class SetCompositeRole : DatabaseCommand
+        internal class SetCompositeRole : DatabaseCommand
         {
             private readonly SetCompositeRoleFactory factory;
             private readonly Dictionary<IRoleType, SqlCommand> commandByIRoleType;
 
-            public SetCompositeRole(SetCompositeRoleFactory factory, DatabaseSession session)
+            internal SetCompositeRole(SetCompositeRoleFactory factory, DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
                 this.commandByIRoleType = new Dictionary<IRoleType, SqlCommand>();
             }
 
-            public void Execute(IList<CompositeRelation> relations, IRoleType roleType)
+            internal void Execute(IList<CompositeRelation> relations, IRoleType roleType)
             {
                 var schema = this.factory.Database.SqlClientSchema;
 

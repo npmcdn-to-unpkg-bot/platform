@@ -20,15 +20,15 @@
 
 namespace Allors.Databases.Object.SqlClient
 {
-    public abstract class Predicate
+    internal abstract class Predicate
     {
-        public virtual bool Include
+        internal virtual bool Include
         {
             get { return true; }
         }
 
-        public abstract bool BuildWhere(ExtentStatement statement, string alias);
+        internal abstract bool BuildWhere(ExtentStatement statement, string alias);
 
-        public abstract void Setup(ExtentStatement statement);
+        internal abstract void Setup(ExtentStatement statement);
     }
 }

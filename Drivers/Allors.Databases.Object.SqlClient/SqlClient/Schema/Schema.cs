@@ -29,7 +29,7 @@ namespace Allors.Databases.Object.SqlClient
     using Allors.Databases.Object.SqlClient;
     using Allors.Meta;
 
-    public abstract class Schema : IEnumerable<SchemaTable>
+    internal abstract class Schema : IEnumerable<SchemaTable>
     {
         /// <summary>
         /// This prefix will be used for
@@ -40,10 +40,10 @@ namespace Allors.Databases.Object.SqlClient
         /// </ul>
         /// in order to avoid naming conflictts with existing tables
         /// </summary>
-        public const string AllorsPrefix = "_";
+        internal const string AllorsPrefix = "_";
 
-        public readonly string ParamInvocationFormat;
-        public readonly string ParamFormat;
+        internal readonly string ParamInvocationFormat;
+        internal readonly string ParamFormat;
 
         private readonly string prefix;
         private readonly string postfix;
@@ -78,62 +78,62 @@ namespace Allors.Databases.Object.SqlClient
         /// Is used in CreateObjects to denote the amount of objects to create.
         /// </example>
         /// </summary>
-        public SchemaParameter CountParam
+        internal SchemaParameter CountParam
         {
             get { return this.countParam; }
         }
 
-        public SchemaParameter MatchRoleParam
+        internal SchemaParameter MatchRoleParam
         {
             get { return this.matchRoleParam; }
         }
 
-        public SchemaColumn TypeId
+        internal SchemaColumn TypeId
         {
             get { return this.typeId; }
         }
 
-        public SchemaColumn CacheId
+        internal SchemaColumn CacheId
         {
             get { return this.cacheId; }
         }
 
-        public SchemaColumn AssociationId
+        internal SchemaColumn AssociationId
         {
             get { return this.associationId; }
         }
 
-        public SchemaColumn RoleId
+        internal SchemaColumn RoleId
         {
             get { return this.roleId; }
         }
 
-        public SchemaColumn ObjectId
+        internal SchemaColumn ObjectId
         {
             get { return this.objectId; }
         }
 
-        public SchemaTable Objects
+        internal SchemaTable Objects
         {
             get { return this.objects; }
         }
 
-        public SchemaColumn ObjectsObjectId
+        internal SchemaColumn ObjectsObjectId
         {
             get { return this.objectsObjectId; }
         }
 
-        public SchemaColumn ObjectsTypeId
+        internal SchemaColumn ObjectsTypeId
         {
             get { return this.objectsTypeId; }
         }
 
-        public SchemaColumn ObjectsCacheId
+        internal SchemaColumn ObjectsCacheId
         {
             get { return this.objectsCacheId; }
         }
 
-        public int SingletonValue
+        internal int SingletonValue
         {
             get
             {
@@ -191,23 +191,23 @@ namespace Allors.Databases.Object.SqlClient
             get { return this.singletonDbType; }
         }
 
-        public SchemaTable this[string tableName]
+        internal SchemaTable this[string tableName]
         {
             get { return this.tablesByName[tableName.ToLowerInvariant()]; }
         }
 
-        public static void AddError(SchemaValidationErrors schemaValidationErrors, SchemaTable table, SchemaValidationErrorKind kind)
+        internal static void AddError(SchemaValidationErrors schemaValidationErrors, SchemaTable table, SchemaValidationErrorKind kind)
         {
             schemaValidationErrors.AddTableError(table.ObjectType, table.RelationType, null, table.ToString(), null, kind, kind + ": " + table);
         }
 
-        public static void AddError(SchemaValidationErrors schemaValidationErrors, SchemaTable table, SchemaColumn column, SchemaValidationErrorKind kind)
+        internal static void AddError(SchemaValidationErrors schemaValidationErrors, SchemaTable table, SchemaColumn column, SchemaValidationErrorKind kind)
         {
             var roleType = column.RelationType == null ? null : column.RelationType.RoleType;
             schemaValidationErrors.AddTableError(null, null, roleType, table.ToString(), column.ToString(), kind, kind + ": " + table + "." + column);
         }
 
-        public static void AddError(SchemaValidationErrors schemaValidationErrors, SchemaProcedure schemaProcedure, SchemaValidationErrorKind kind, string message)
+        internal static void AddError(SchemaValidationErrors schemaValidationErrors, SchemaProcedure schemaProcedure, SchemaValidationErrorKind kind, string message)
         {
             schemaValidationErrors.AddProcedureError(schemaProcedure, kind, message);
         }
@@ -222,42 +222,42 @@ namespace Allors.Databases.Object.SqlClient
             return this.tablesByName.Values.GetEnumerator();
         }
 
-        public SchemaColumn Column(IRelationType relationType)
+        internal SchemaColumn Column(IRelationType relationType)
         {
             return this.columnsByRelationType[relationType];
         }
 
-        public SchemaColumn Column(IAssociationType association)
+        internal SchemaColumn Column(IAssociationType association)
         {
             return this.columnsByRelationType[association.RelationType];
         }
 
-        public SchemaColumn Column(IRoleType role)
+        internal SchemaColumn Column(IRoleType role)
         {
             return this.columnsByRelationType[role.RelationType];
         }
 
-        public SchemaTable Table(IObjectType type)
+        internal SchemaTable Table(IObjectType type)
         {
             return this.tableByObjectType[type];
         }
 
-        public SchemaTable Table(IRelationType relationType)
+        internal SchemaTable Table(IRelationType relationType)
         {
             return this.tablesByRelationType[relationType];
         }
 
-        public SchemaTable Table(IAssociationType association)
+        internal SchemaTable Table(IAssociationType association)
         {
             return this.tablesByRelationType[association.RelationType];
         }
 
-        public SchemaTable Table(IRoleType role)
+        internal SchemaTable Table(IRoleType role)
         {
             return this.tablesByRelationType[role.RelationType];
         }
 
-        public string EscapeIfReserved(string name)
+        internal string EscapeIfReserved(string name)
         {
             if (ReservedWords.Names.Contains(name.ToLowerInvariant()))
             {
@@ -429,36 +429,36 @@ namespace Allors.Databases.Object.SqlClient
 
 
 
-        public readonly string ObjectTable = AllorsPrefix + "_O";
-        public readonly string ObjectTableObject = "_o";
-        public readonly SchemaTableParameter ObjectTableParam;
+        internal readonly string ObjectTable = AllorsPrefix + "_O";
+        internal readonly string ObjectTableObject = "_o";
+        internal readonly SchemaTableParameter ObjectTableParam;
 
-        public readonly string RelationTableAssociation = "_a";
-        public readonly string RelationTableRole = "_r";
+        internal readonly string RelationTableAssociation = "_a";
+        internal readonly string RelationTableRole = "_r";
 
-        public readonly string CompositeRelationTable = AllorsPrefix + "_CompositeR";
-        public readonly SchemaTableParameter CompositeRelationTableParam;
+        internal readonly string CompositeRelationTable = AllorsPrefix + "_CompositeR";
+        internal readonly SchemaTableParameter CompositeRelationTableParam;
 
-        public readonly string StringRelationTable = AllorsPrefix + "_StringR";
-        public readonly SchemaTableParameter StringRelationTableParam;
+        internal readonly string StringRelationTable = AllorsPrefix + "_StringR";
+        internal readonly SchemaTableParameter StringRelationTableParam;
 
-        public readonly string IntegerRelationTable = AllorsPrefix + "_IntegerR";
-        public readonly SchemaTableParameter IntegerRelationTableParam;
+        internal readonly string IntegerRelationTable = AllorsPrefix + "_IntegerR";
+        internal readonly SchemaTableParameter IntegerRelationTableParam;
         
-        public readonly string FloatRelationTable = AllorsPrefix + "_FloatR";
-        public readonly SchemaTableParameter FloatRelationTableParam;
+        internal readonly string FloatRelationTable = AllorsPrefix + "_FloatR";
+        internal readonly SchemaTableParameter FloatRelationTableParam;
         
-        public readonly string BooleanRelationTable = AllorsPrefix + "_BooleanR";
-        public readonly SchemaTableParameter BooleanRelationTableParam;
+        internal readonly string BooleanRelationTable = AllorsPrefix + "_BooleanR";
+        internal readonly SchemaTableParameter BooleanRelationTableParam;
         
-        public readonly string UniqueRelationTable = AllorsPrefix + "_UniqueR";
-        public readonly SchemaTableParameter UniqueRelationTableParam;
+        internal readonly string UniqueRelationTable = AllorsPrefix + "_UniqueR";
+        internal readonly SchemaTableParameter UniqueRelationTableParam;
 
-        public readonly string BinaryRelationTable = AllorsPrefix + "_BinaryR";
-        public readonly SchemaTableParameter BinaryRelationTableParam;
+        internal readonly string BinaryRelationTable = AllorsPrefix + "_BinaryR";
+        internal readonly SchemaTableParameter BinaryRelationTableParam;
 
-        public readonly Dictionary<int, Dictionary<int, string>> DecimalRelationTableByScaleByPrecision = new Dictionary<int, Dictionary<int, string>>();
-        public readonly Dictionary<int, Dictionary<int, SchemaTableParameter>> DecimalRelationTableParameterByScaleByPrecision = new Dictionary<int, Dictionary<int, SchemaTableParameter>>(); 
+        internal readonly Dictionary<int, Dictionary<int, string>> DecimalRelationTableByScaleByPrecision = new Dictionary<int, Dictionary<int, string>>();
+        internal readonly Dictionary<int, Dictionary<int, SchemaTableParameter>> DecimalRelationTableParameterByScaleByPrecision = new Dictionary<int, Dictionary<int, SchemaTableParameter>>(); 
 
         private readonly Database database;
 
@@ -522,7 +522,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public SchemaValidationErrors SchemaValidationErrors
+        internal SchemaValidationErrors SchemaValidationErrors
         {
             get
             {
@@ -804,7 +804,7 @@ FROM information_schema.columns"))
             }
         }
 
-        public IEnumerable<SchemaProcedure> Procedures
+        internal IEnumerable<SchemaProcedure> Procedures
         {
             get
             {
@@ -825,7 +825,7 @@ FROM information_schema.columns"))
             get;
         }
 
-        public SchemaParameter CreateParameter(string name, DbType dbType)
+        internal SchemaParameter CreateParameter(string name, DbType dbType)
         {
             return new SchemaParameter(this, name, dbType);
         }
@@ -1417,19 +1417,19 @@ AS
             }
         }
 
-        public class SchemaExistingColumn
+        internal class SchemaExistingColumn
         {
-            public string DataType { get; set; }
+            internal string DataType { get; set; }
 
-            public int CharacterMaximumLength { get; set; }
+            internal int CharacterMaximumLength { get; set; }
 
-            public int CharacterOctetLength { get; set; }
+            internal int CharacterOctetLength { get; set; }
 
-            public int NumericPrecision { get; set; }
+            internal int NumericPrecision { get; set; }
 
-            public int NumericScale { get; set; }
+            internal int NumericScale { get; set; }
 
-            public int DateTimePrecision { get; set; }
+            internal int DateTimePrecision { get; set; }
         }
     }
 }

@@ -20,7 +20,7 @@
 
 namespace Allors.Databases.Object.SqlClient.LongId
 {
-    public class Configuration : SqlClient.Configuration
+    internal class Configuration : SqlClient.Configuration
     {
     }
 }

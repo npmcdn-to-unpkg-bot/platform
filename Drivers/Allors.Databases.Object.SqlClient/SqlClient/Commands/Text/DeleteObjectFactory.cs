@@ -29,23 +29,23 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
     using Database = Database;
     using DatabaseSession = DatabaseSession;
 
-    public class DeleteObjectFactory
+    internal class DeleteObjectFactory
     {
-        public readonly Database Database;
+        internal readonly Database Database;
         private readonly Dictionary<IObjectType, string> sqlByMetaType;
 
-        public DeleteObjectFactory(Database database)
+        internal DeleteObjectFactory(Database database)
         {
             this.Database = database;
             this.sqlByMetaType = new Dictionary<IObjectType, string>();
         }
 
-        public DeleteObject Create(DatabaseSession session)
+        internal DeleteObject Create(DatabaseSession session)
         {
             return new DeleteObject(this, session);
         }
 
-        public string GetSql(IObjectType objectType)
+        internal string GetSql(IObjectType objectType)
         {
             if (!this.sqlByMetaType.ContainsKey(objectType))
             {
@@ -69,19 +69,19 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
             return this.sqlByMetaType[objectType];
         }
 
-        public class DeleteObject : DatabaseCommand
+        internal class DeleteObject : DatabaseCommand
         {
             private readonly DeleteObjectFactory factory;
             private readonly Dictionary<IObjectType, SqlCommand> commandByIObjectType;
 
-            public DeleteObject(DeleteObjectFactory factory, DatabaseSession session)
+            internal DeleteObject(DeleteObjectFactory factory, DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
                 this.commandByIObjectType = new Dictionary<IObjectType, SqlCommand>();
             }
 
-            public void Execute(Strategy strategy)
+            internal void Execute(Strategy strategy)
             {
                 var objectType = strategy.ObjectType;
 

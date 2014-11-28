@@ -20,12 +20,12 @@
 
 namespace Allors.Databases.Object.SqlClient
 {
-    public class UnitRelation
+    internal class UnitRelation
     {
-        public readonly ObjectId Association;
-        public readonly object Role;
+        internal readonly ObjectId Association;
+        internal readonly object Role;
 
-        public UnitRelation(ObjectId association, object role)
+        internal UnitRelation(ObjectId association, object role)
         {
             this.Association = association;
             this.Role = role;

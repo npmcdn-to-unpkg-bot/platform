@@ -22,18 +22,18 @@ namespace Allors.Databases.Object.SqlClient
     using Allors.Meta;
     using Allors.Populations;
 
-    public class Save
+    internal class Save
     {
         private readonly Database database;
         private readonly XmlWriter writer;
 
-        public Save(Database database, XmlWriter writer)
+        internal Save(Database database, XmlWriter writer)
         {
             this.database = database;
             this.writer = writer;
         }
 
-        public virtual void Execute(Databases.Object.SqlClient.ManagementSession session)
+        internal virtual void Execute(Databases.Object.SqlClient.ManagementSession session)
         {
             var writeDocument = false;
             if (this.writer.WriteState == WriteState.Start)

@@ -28,28 +28,28 @@ namespace Allors.Databases.Object.SqlClient
 
     using Meta;
 
-    public class ExtentFiltered : SqlExtent
+    internal class ExtentFiltered : SqlExtent
     {
         private readonly DatabaseSession session;
         private readonly IComposite objectType;
 
         private AndPredicate filter;
 
-        public ExtentFiltered(DatabaseSession session, Strategy strategy, IRoleType roleType)
+        internal ExtentFiltered(DatabaseSession session, Strategy strategy, IRoleType roleType)
             : this(session, (IComposite)roleType.ObjectType)
         {
             this.Strategy = strategy;
             this.RoleType = roleType;
         }
 
-        public ExtentFiltered(DatabaseSession session, Strategy strategy, IAssociationType associationType)
+        internal ExtentFiltered(DatabaseSession session, Strategy strategy, IAssociationType associationType)
             : this(session, associationType.ObjectType)
         {
             this.Strategy = strategy;
             this.AssociationType = associationType;
         }
 
-        public ExtentFiltered(DatabaseSession session, IComposite objectType)
+        internal ExtentFiltered(DatabaseSession session, IComposite objectType)
         {
             this.session = session;
             this.objectType = objectType;
@@ -64,12 +64,12 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public SqlClient.Schema Schema
+        internal SqlClient.Schema Schema
         {
             get { return this.session.SqlDatabase.Schema; }
         }
 
-        public override DatabaseSession Session
+        internal override DatabaseSession Session
         {
             get { return this.session; }
         }
@@ -79,13 +79,13 @@ namespace Allors.Databases.Object.SqlClient
             get { return this.objectType; }
         }
 
-        public IAssociationType AssociationType { get; private set; }
+        internal IAssociationType AssociationType { get; private set; }
 
-        public IRoleType RoleType { get; private set; }
+        internal IRoleType RoleType { get; private set; }
 
-        public Strategy Strategy { get; private set; }
+        internal Strategy Strategy { get; private set; }
 
-        public override string BuildSql(ExtentStatement statement)
+        internal override string BuildSql(ExtentStatement statement)
         {
             this.LazyLoadFilter();
             this.filter.Setup(statement);
