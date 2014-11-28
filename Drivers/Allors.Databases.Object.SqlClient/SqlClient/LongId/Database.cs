@@ -61,7 +61,7 @@ namespace Allors.Databases.Object.SqlClient.LongId
             }
         }
 
-        public override void ResetSchema()
+        protected override void ResetSchema()
         {
             this.schema = null;
         }

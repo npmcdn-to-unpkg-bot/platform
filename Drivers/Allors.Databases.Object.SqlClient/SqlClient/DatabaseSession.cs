@@ -45,7 +45,7 @@ namespace Allors.Databases.Object.SqlClient
             get { return this.database; }
         }
 
-        public override Adapters.Database.Sql.Database SqlDatabase
+        public override Database SqlDatabase
         {
             get { return this.database; }
         }

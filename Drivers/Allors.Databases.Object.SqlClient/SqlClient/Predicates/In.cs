@@ -1,5 +1,5 @@
-// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Configuration.cs" company="Allors bvba">
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="In.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -18,10 +18,9 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Adapters
+namespace Allors.Databases.Object.SqlClient
 {
-    public abstract class Configuration
+    public abstract class In : Predicate
     {
-        public IObjectFactory ObjectFactory { get; set; }
     }
 }

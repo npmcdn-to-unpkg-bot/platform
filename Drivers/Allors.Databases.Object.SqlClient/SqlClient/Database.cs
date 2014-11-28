@@ -21,23 +21,659 @@ namespace Allors.Databases.Object.SqlClient
     using System.Data;
     using System.Data.Common;
     using System.Data.SqlClient;
+    using System.Linq;
     using System.Text;
+    using System.Xml;
 
     using Allors.Adapters;
     using Allors.Adapters.Database.Sql;
+    using Allors.Databases.Object.SqlClient.Caching;
     using Allors.Meta;
+    using Allors.Populations;
 
     using Microsoft.SqlServer.Server;
 
-    public abstract class Database : Adapters.Database.Sql.Database
+    public abstract class Database : IDatabase
     {
+        private readonly IObjectFactory objectFactory;
+
+        private readonly Dictionary<IObjectType, object> concreteClassesByIObjectType;
+
+        private readonly string id;
+
+        protected Dictionary<string, object> Properties;
+
+        public IObjectFactory ObjectFactory
+        {
+            get
+            {
+                return this.objectFactory;
+            }
+        }
+
+        public IMetaPopulation MetaPopulation
+        {
+            get
+            {
+                return this.objectFactory.MetaPopulation;
+            }
+        }
+
+        public object this[string name]
+        {
+            get
+            {
+                if (this.Properties == null)
+                {
+                    return null;
+                }
+
+                object value;
+                this.Properties.TryGetValue(name, out value);
+                return value;
+            }
+
+            set
+            {
+                if (this.Properties == null)
+                {
+                    this.Properties = new Dictionary<string, object>();
+                }
+
+                if (value == null)
+                {
+                    this.Properties.Remove(name);
+                }
+                else
+                {
+                    this.Properties[name] = value;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Assert that the unit is compatible with the IObjectType of the IRoleType.
+        /// </summary>
+        /// <param name="unit">
+        /// The unit .
+        /// </param>
+        /// <param name="roleType">
+        /// The role type.
+        /// </param>
+        /// <returns>
+        /// The normalize.
+        /// </returns>
+        public object Internalize(object unit, IRoleType roleType)
+        {
+            var objectType = (IUnit)roleType.ObjectType;
+            var unitTypeTag = objectType.UnitTag;
+
+            var normalizedUnit = unit;
+
+            switch (unitTypeTag)
+            {
+                case UnitTags.AllorsString:
+                    if (!(unit is string))
+                    {
+                        throw new ArgumentException("IRoleType is not a String.");
+                    }
+
+                    var stringUnit = (string)unit;
+                    var size = roleType.Size;
+                    if (size > -1 && stringUnit.Length > size)
+                    {
+                        throw new ArgumentException("Size of relationType " + roleType + " is too big (" + stringUnit.Length + ">" + size + ").");
+                    }
+
+                    break;
+                case UnitTags.AllorsInteger:
+                    if (!(unit is int))
+                    {
+                        throw new ArgumentException("IRoleType is not an Integer.");
+                    }
+
+                    break;
+                case UnitTags.AllorsFloat:
+                    if (unit is int || unit is long || unit is float)
+                    {
+                        normalizedUnit = Convert.ToDouble(unit);
+                    }
+                    else if (!(unit is double))
+                    {
+                        throw new ArgumentException("RoleType is not a Double.");
+                    }
+
+                    break;
+                case UnitTags.AllorsDecimal:
+                    if (unit is int || unit is long || unit is float || unit is double)
+                    {
+                        normalizedUnit = Convert.ToDecimal(unit);
+                    }
+                    else if (!(unit is decimal))
+                    {
+                        throw new ArgumentException("IRoleType is not a Decimal.");
+                    }
+
+                    break;
+                case UnitTags.AllorsBoolean:
+                    if (!(unit is bool))
+                    {
+                        throw new ArgumentException("IRoleType is not a Boolean.");
+                    }
+
+                    break;
+                case UnitTags.AllorsUnique:
+                    if (!(unit is Guid))
+                    {
+                        throw new ArgumentException("IRoleType is not a Boolean.");
+                    }
+
+                    break;
+                case UnitTags.AllorsBinary:
+                    if (!(unit is byte[]))
+                    {
+                        throw new ArgumentException("IRoleType is not a Boolean.");
+                    }
+
+                    break;
+                default:
+                    throw new ArgumentException("Unknown Unit ObjectType: " + unitTypeTag);
+            }
+
+            return normalizedUnit;
+        }
+
+        public bool ContainsConcreteClass(IObjectType objectType, IObjectType concreteClass)
+        {
+            object concreteClassOrClasses;
+            if (!this.concreteClassesByIObjectType.TryGetValue(objectType, out concreteClassOrClasses))
+            {
+                if (objectType.IsClass)
+                {
+                    concreteClassOrClasses = objectType;
+                    this.concreteClassesByIObjectType[objectType] = concreteClassOrClasses;
+                }
+                else
+                {
+                    concreteClassOrClasses = new HashSet<IObjectType>(((IInterface)objectType).Subclasses);
+                    this.concreteClassesByIObjectType[objectType] = concreteClassOrClasses;
+                }
+            }
+
+            if (concreteClassOrClasses is IObjectType)
+            {
+                return concreteClass.Equals(concreteClassOrClasses);
+            }
+
+            var concreteClasses = (HashSet<IObjectType>)concreteClassOrClasses;
+            return concreteClasses.Contains(concreteClass);
+        }
+
+        public void UnitRoleChecks(IStrategy strategy, IRoleType relationType)
+        {
+            if (!this.ContainsConcreteClass(relationType.AssociationType.ObjectType, strategy.ObjectType))
+            {
+                throw new ArgumentException(strategy.ObjectType + " is not a valid association object type for " + relationType + ".");
+            }
+
+            if (!relationType.ObjectType.IsUnit)
+            {
+                throw new ArgumentException(relationType.ObjectType + " on relationType " + relationType + " is not a unit type.");
+            }
+        }
+
+        public void CompositeRoleChecks(IStrategy strategy, IRoleType roleType)
+        {
+            this.CompositeSharedChecks(strategy, roleType, null);
+        }
+
+        public void CompositeRoleChecks(IStrategy strategy, IRoleType roleType, IObject role)
+        {
+            this.CompositeSharedChecks(strategy, roleType, role);
+            if (!roleType.IsOne)
+            {
+                throw new ArgumentException("IRelationType " + roleType + " has multiplicity many.");
+            }
+        }
+
+        public void CompositeRolesChecks(IStrategy strategy, IRoleType roleType, IObject role)
+        {
+            this.CompositeSharedChecks(strategy, roleType, role);
+            if (!roleType.IsMany)
+            {
+                throw new ArgumentException("IRelationType " + roleType + " has multiplicity one.");
+            }
+        }
+
+        private void CompositeSharedChecks(IStrategy strategy, IRoleType roleType, IObject role)
+        {
+            if (!this.ContainsConcreteClass(roleType.AssociationType.ObjectType, strategy.ObjectType))
+            {
+                throw new ArgumentException(strategy.ObjectType + " has no relationType with role " + roleType + ".");
+            }
+
+            if (role != null)
+            {
+                if (!strategy.Session.Equals(role.Strategy.Session))
+                {
+                    throw new ArgumentException(role + " is from different session");
+                }
+
+                if (role.Strategy.IsDeleted)
+                {
+                    throw new ArgumentException(roleType + " on object " + strategy + " is removed.");
+                }
+
+                if (!ContainsConcreteClass(roleType.ObjectType, role.Strategy.ObjectType))
+                {
+                    throw new ArgumentException(role.Strategy.ObjectType + " is not compatible with type " + roleType.ObjectType + " of role " + roleType + ".");
+                }
+            }
+        }
+
+        private const string ConnectionStringsKey = "allors";
+
+        private readonly IWorkspaceFactory workspaceFactory;
+        private readonly string connectionString;
+        private readonly int commandTimeout;
+        private readonly IsolationLevel isolationLevel;
+
+        private readonly Dictionary<IObjectType, IRoleType[]> sortedUnitRolesByIObjectType;
+        private readonly ICache cache;
+
+        public event SessionCreatedEventHandler SessionCreated;
+
+        public event ObjectNotLoadedEventHandler ObjectNotLoaded;
+
+        public event RelationNotLoadedEventHandler RelationNotLoaded;
+
+        public bool IsDatabase
+        {
+            get
+            {
+                return true;
+            }
+        }
+
+        public bool IsWorkspace
+        {
+            get
+            {
+                return false;
+            }
+        }
+
+        public bool IsShared
+        {
+            get
+            {
+                return true;
+            }
+        }
+
+        public virtual string AscendingSortAppendix
+        {
+            get { return null; }
+        }
+
+        public virtual string DescendingSortAppendix
+        {
+            get { return null; }
+        }
+
+        public virtual string Except
+        {
+            get { return "EXCEPT"; }
+        }
+
+        public ICache Cache
+        {
+            get
+            {
+                return this.cache;
+            }
+        }
+
+        public string ConnectionString
+        {
+            get
+            {
+                if (this.connectionString == null)
+                {
+                    return System.Configuration.ConfigurationManager.ConnectionStrings[ConnectionStringsKey].ConnectionString;
+                }
+
+                return this.connectionString;
+            }
+        }
+
+        public int CommandTimeout
+        {
+            get
+            {
+                return this.commandTimeout;
+            }
+        }
+
+        public IsolationLevel IsolationLevel
+        {
+            get
+            {
+                return this.isolationLevel;
+            }
+        }
+
+        public ISession CreateSession()
+        {
+            return this.CreateDatabaseSession();
+        }
+
+        public void Recover()
+        {
+            if (!ObjectFactory.MetaPopulation.IsValid)
+            {
+                throw new ArgumentException("Domain is invalid");
+            }
+
+            var session = this.CreateManagementSession();
+            try
+            {
+                this.DropIndexes(session);
+                this.DropTriggers(session);
+                this.DropProcedures(session);
+                this.DropFunctions(session);
+                this.DropUserDefinedTypes(session);
+
+                this.CreateUserDefinedTypes(session);
+                this.CreateFunctions(session);
+                this.CreateProcedures(session);
+                this.CreateTriggers(session);
+                this.CreateIndexes(session);
+
+                session.Commit();
+            }
+            catch
+            {
+                session.Rollback();
+                throw;
+            }
+            finally
+            {
+                this.ResetSchema();
+                this.Cache.Invalidate();
+            }
+        }
+
+        protected abstract void ResetSchema();
+
+        IDatabaseSession Allors.IDatabase.CreateSession()
+        {
+            return this.CreateDatabaseSession();
+        }
+
+        public virtual IDatabaseSession CreateDatabaseSession()
+        {
+            if (Schema.SchemaValidationErrors.HasErrors)
+            {
+                var errors = new StringBuilder();
+                foreach (var error in Schema.SchemaValidationErrors.Errors)
+                {
+                    errors.Append("\n");
+                    errors.Append(error.Message);
+                }
+
+                throw new SchemaValidationException(Schema.SchemaValidationErrors, "Database schema is not compatible with domain.\nUpgrade manually or use Save & Load.\n" + errors);
+            }
+
+            var session = this.CreateSqlSession();
+
+            if (this.SessionCreated != null)
+            {
+                this.SessionCreated.Invoke(this, new SessionCreatedEventArgs(session));
+            }
+
+            return session;
+        }
+
+        public void Init()
+        {
+            this.Init(true);
+        }
+
+        public void Init(bool allowTruncate)
+        {
+            if (!ObjectFactory.MetaPopulation.IsValid)
+            {
+                throw new ArgumentException("Domain is invalid");
+            }
+
+            var session = this.CreateManagementSession();
+            try
+            {
+                if (allowTruncate && !this.Schema.SchemaValidationErrors.HasErrors)
+                {
+                    this.TruncateTables(session);
+                }
+                else
+                {
+                    this.DropTriggers(session);
+                    this.DropProcedures(session);
+                    this.DropFunctions(session);
+                    this.DropUserDefinedTypes(session);
+                    this.ResetSequence(session);
+                    this.DropTables(session);
+                    this.CreateTables(session);
+                    this.CreateUserDefinedTypes(session);
+                    this.CreateFunctions(session);
+                    this.CreateProcedures(session);
+                    this.CreateTriggers(session);
+                    this.CreateIndexes(session);
+                }
+
+                session.Commit();
+            }
+            catch
+            {
+                session.Rollback();
+                throw;
+            }
+            finally
+            {
+                this.Properties = null;
+                this.ResetSchema();
+                this.Cache.Invalidate();
+            }
+        }
+
+        public void Load(XmlReader reader)
+        {
+            this.Init();
+
+            var session = this.CreateManagementSession();
+            try
+            {
+                var load = this.CreateLoad(this.ObjectNotLoaded, this.RelationNotLoaded, reader);
+                load.Execute(session);
+                session.Commit();
+            }
+            catch
+            {
+                session.Rollback();
+                this.Init();
+                throw;
+            }
+        }
+
+        public void Save(XmlWriter writer)
+        {
+            var session = this.CreateManagementSession();
+            try
+            {
+                var save = this.CreateSave(writer);
+                save.Execute(session);
+            }
+            finally
+            {
+                session.Rollback();
+            }
+        }
+
+        public override string ToString()
+        {
+            return "Population[driver=Sql, type=Connected, id=" + this.GetHashCode() + "]";
+        }
+
+        public IWorkspace CreateWorkspace()
+        {
+            if (this.workspaceFactory == null)
+            {
+                throw new Exception("No workspacefactory defined");
+            }
+
+            return this.workspaceFactory.CreateWorkspace(this);
+        }
+
+        public Type GetDomainType(IObjectType objectType)
+        {
+            return this.ObjectFactory.GetTypeForObjectType(objectType);
+        }
+
+        public IRoleType[] GetSortedUnitRolesByIObjectType(IObjectType objectType)
+        {
+            IRoleType[] sortedUnitRoles;
+            if (!this.sortedUnitRolesByIObjectType.TryGetValue(objectType, out sortedUnitRoles))
+            {
+                var sortedUnitRoleList = new List<IRoleType>(((IComposite)objectType).RoleTypes.Where(r => r.ObjectType.IsUnit));
+                sortedUnitRoleList.Sort(MetaObjectComparer.ById);
+                sortedUnitRoles = sortedUnitRoleList.ToArray();
+                this.sortedUnitRolesByIObjectType[objectType] = sortedUnitRoles;
+            }
+
+            return sortedUnitRoles;
+        }
+
+        protected virtual void TruncateTables(ManagementSession session)
+        {
+            this.ResetSequence(session);
+
+            foreach (SchemaTable table in Schema)
+            {
+                switch (table.Kind)
+                {
+                    case SchemaTableKind.System:
+                    case SchemaTableKind.Object:
+                    case SchemaTableKind.Relation:
+                        this.TruncateTables(session, table);
+                        break;
+                }
+            }
+        }
+
+        protected virtual void CreateFunctions(ManagementSession session)
+        {
+        }
+
+        protected virtual void CreateIndexes(ManagementSession session)
+        {
+            foreach (SchemaTable table in Schema)
+            {
+                foreach (SchemaColumn column in table)
+                {
+                    if (column.IndexType != SchemaIndexType.None)
+                    {
+                        this.CreateIndex(session, table, column);
+                    }
+                }
+            }
+        }
+
+        protected virtual void DropIndexes(ManagementSession session)
+        {
+            foreach (SchemaTable table in Schema)
+            {
+                foreach (SchemaColumn column in table)
+                {
+                    if (column.IndexType != SchemaIndexType.None)
+                    {
+                        this.DropIndex(session, table, column);
+                    }
+                }
+            }
+        }
+
+        protected virtual void CreateProcedures(ManagementSession session)
+        {
+            foreach (var procedure in Schema.Procedures)
+            {
+                this.CreateProcedure(session, procedure);
+            }
+        }
+
+        protected virtual void CreateTables(ManagementSession session)
+        {
+            foreach (SchemaTable table in Schema)
+            {
+                this.CreateTable(session, table);
+            }
+        }
+
+        protected virtual void CreateTriggers(ManagementSession session)
+        {
+        }
+
+        protected virtual void DropFunctions(ManagementSession session)
+        {
+        }
+
+        protected virtual void DropTables(ManagementSession session)
+        {
+            foreach (SchemaTable table in Schema)
+            {
+                this.DropTable(session, table);
+            }
+        }
+
+        protected virtual void DropTriggers(ManagementSession session)
+        {
+        }
+
+        protected virtual void ResetSequence(ManagementSession session)
+        {
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         private readonly CommandFactories commandFactories;
 
-        private string id;
-
         protected Database(Configuration configuration)
-            : base(configuration)
         {
+            this.objectFactory = configuration.ObjectFactory;
+            this.concreteClassesByIObjectType = new Dictionary<IObjectType, object>();
+
+            this.workspaceFactory = configuration.WorkspaceFactory;
+            this.connectionString = configuration.ConnectionString;
+            this.commandTimeout = configuration.CommandTimeout;
+            this.isolationLevel = configuration.IsolationLevel;
+
+            this.sortedUnitRolesByIObjectType = new Dictionary<IObjectType, IRoleType[]>();
+
+            this.cache = configuration.CacheFactory.CreateCache(this);
+            
             this.commandFactories = new CommandFactories(this);
 
             var connectionStringBuilder = new SqlConnectionStringBuilder(this.ConnectionString);
@@ -64,6 +700,8 @@ namespace Allors.Databases.Object.SqlClient
 
         }
 
+        public abstract IObjectIds AllorsObjectIds { get; }
+
         public CommandFactories SqlClientCommandFactories
         {
             get
@@ -72,7 +710,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public override Adapters.Database.Sql.Schema Schema
+        public Adapters.Database.Sql.Schema Schema
         {
             get
             {
@@ -82,12 +720,12 @@ namespace Allors.Databases.Object.SqlClient
 
         public abstract Schema SqlClientSchema { get; }
 
-        public override Adapters.Database.Sql.CommandFactories CommandFactories
+        public Adapters.Database.Sql.CommandFactories CommandFactories
         {
             get { return this.commandFactories; }
         }
 
-        public override string Id
+        public string Id
         {
             get
             {
@@ -95,12 +733,12 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public override DbConnection CreateDbConnection()
+        public DbConnection CreateDbConnection()
         {
             return new SqlConnection(this.ConnectionString);
         }
 
-        public override void DropIndex(Adapters.Database.Sql.ManagementSession session, SchemaTable table, SchemaColumn column)
+        public void DropIndex(ManagementSession session, SchemaTable table, SchemaColumn column)
         {
             var indexName = Adapters.Database.Sql.Schema.AllorsPrefix + table.Name + "_" + column.Name;
 
@@ -222,12 +860,12 @@ namespace Allors.Databases.Object.SqlClient
             return new ManagementSession(this);
         }
 
-        protected internal override Adapters.Database.Sql.ManagementSession CreateManagementSession()
+        protected internal ManagementSession CreateManagementSession()
         {
             return this.CreateSqlClientManagementSession();
         }
 
-        protected override void CreateUserDefinedTypes(Adapters.Database.Sql.ManagementSession session)
+        protected void CreateUserDefinedTypes(ManagementSession session)
         {
             var sql = new StringBuilder();
             sql.Append("CREATE TYPE " + this.SqlClientSchema.ObjectTable + " AS TABLE\n");
@@ -293,12 +931,12 @@ namespace Allors.Databases.Object.SqlClient
              }
         }
 
-        protected override IDatabaseSession CreateSqlSession()
+        protected IDatabaseSession CreateSqlSession()
         {
             return new DatabaseSession(this);
         }
 
-        protected override void DropUserDefinedTypes(Adapters.Database.Sql.ManagementSession session)
+        protected void DropUserDefinedTypes(ManagementSession session)
         {
             this.DropUserDefinedType(session, this.SqlClientSchema.ObjectTable);
             this.DropUserDefinedType(session, this.SqlClientSchema.CompositeRelationTable);
@@ -318,7 +956,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        protected override void DropTable(Adapters.Database.Sql.ManagementSession session, SchemaTable schemaTable)
+        protected void DropTable(ManagementSession session, SchemaTable schemaTable)
         {
             var sql = new StringBuilder();
             sql.Append("IF EXISTS (SELECT * FROM sysobjects WHERE id = OBJECT_ID(N'" + schemaTable.Name + "'))\n");
@@ -326,7 +964,7 @@ namespace Allors.Databases.Object.SqlClient
             session.ExecuteSql(sql.ToString());
         }
 
-        protected override void CreateTable(Adapters.Database.Sql.ManagementSession session, SchemaTable table)
+        protected void CreateTable(ManagementSession session, SchemaTable table)
         {
             var sql = new StringBuilder();
             sql.Append("CREATE TABLE " + table + "\n");
@@ -369,7 +1007,7 @@ namespace Allors.Databases.Object.SqlClient
             session.ExecuteSql(sql.ToString());
         }
 
-        protected override void DropProcedures(Adapters.Database.Sql.ManagementSession session)
+        protected void DropProcedures(ManagementSession session)
         {
             var allorsProcedureNames = new List<string>();
             lock (this)
@@ -396,12 +1034,12 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        protected override void CreateProcedure(Adapters.Database.Sql.ManagementSession session, SchemaProcedure storedProcedure)
+        protected void CreateProcedure(ManagementSession session, SchemaProcedure storedProcedure)
         {
             session.ExecuteSql(storedProcedure.Definition);
         }
 
-        protected override void CreateIndex(Adapters.Database.Sql.ManagementSession session, SchemaTable table, SchemaColumn column)
+        protected void CreateIndex(ManagementSession session, SchemaTable table, SchemaColumn column)
         {
             var indexName = Adapters.Database.Sql.Schema.AllorsPrefix + table.Name + "_" + column.Name;
 
@@ -421,24 +1059,24 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        protected override void TruncateTables(Adapters.Database.Sql.ManagementSession session, SchemaTable table)
+        protected void TruncateTables(ManagementSession session, SchemaTable table)
         {
             var sql = new StringBuilder();
             sql.Append("TRUNCATE TABLE " + table.StatementName);
             session.ExecuteSql(sql.ToString());
         }
 
-        protected override Adapters.Database.Sql.Load CreateLoad(ObjectNotLoadedEventHandler objectNotLoaded, RelationNotLoadedEventHandler relationNotLoaded, System.Xml.XmlReader reader)
+        protected Adapters.Database.Sql.Load CreateLoad(ObjectNotLoadedEventHandler objectNotLoaded, RelationNotLoadedEventHandler relationNotLoaded, System.Xml.XmlReader reader)
         {
             return new Load(this, objectNotLoaded, relationNotLoaded, reader);
         }
 
-        protected override Adapters.Database.Sql.Save CreateSave(System.Xml.XmlWriter writer)
+        protected Adapters.Database.Sql.Save CreateSave(System.Xml.XmlWriter writer)
         {
             return new Save(this, writer);
         }
 
-        private void DropUserDefinedType(Adapters.Database.Sql.ManagementSession session, string userDefinedType)
+        private void DropUserDefinedType(ManagementSession session, string userDefinedType)
         {
             var sql = new StringBuilder();
             sql.Append("IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.DOMAINS WHERE DOMAIN_NAME = N'" + userDefinedType + "')\n");
@@ -446,7 +1084,7 @@ namespace Allors.Databases.Object.SqlClient
             session.ExecuteSql(sql.ToString());
         }
 
-        private void DropProcedure(Adapters.Database.Sql.ManagementSession session, string procedureName)
+        private void DropProcedure(ManagementSession session, string procedureName)
         {
             var sql = new StringBuilder();
             sql.Append("IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_NAME = N'" + procedureName + "')\n");

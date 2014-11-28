@@ -216,7 +216,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        protected override Adapters.Database.Sql.Database Database
+        protected override Database Database
         {
             get { return this.SqlClientDatabase; }
         }

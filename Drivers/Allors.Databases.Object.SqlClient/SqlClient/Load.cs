@@ -29,7 +29,7 @@ namespace Allors.Databases.Object.SqlClient
             this.database = database;
         }
 
-        protected override void LoadObjectsPostProcess(Adapters.Database.Sql.ManagementSession session)
+        protected override void LoadObjectsPostProcess(ManagementSession session)
         {
             var sql = new StringBuilder();
 

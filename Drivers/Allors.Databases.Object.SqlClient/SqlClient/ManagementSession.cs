@@ -23,7 +23,7 @@ namespace Allors.Databases.Object.SqlClient
     using Allors.Databases.Object.SqlClient.Commands.Procedure;
     using Allors.Databases.Object.SqlClient.Commands.Text;
 
-    public class ManagementSession : Adapters.Database.Sql.ManagementSession, ICommandFactory
+    public class ManagementSession : ICommandFactory, IDisposable
     {
         private readonly Database database;
         
@@ -44,7 +44,12 @@ namespace Allors.Databases.Object.SqlClient
             this.Dispose();
         }
 
-        public override LoadObjectsFactory LoadObjectsFactory
+        public void Dispose()
+        {
+            this.Rollback();
+        }
+
+        public LoadObjectsFactory LoadObjectsFactory
         {
             get
             {
@@ -52,7 +57,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public override LoadCompositeRelationsFactory LoadCompositeRelationsFactory
+        public LoadCompositeRelationsFactory LoadCompositeRelationsFactory
         {
             get
             {
@@ -60,7 +65,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public override LoadUnitRelationsFactory LoadUnitRelationsFactory
+        public LoadUnitRelationsFactory LoadUnitRelationsFactory
         {
             get
             {
@@ -68,7 +73,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public override Adapters.Database.Sql.Database Database
+        public Database Database
         {
             get
             {
@@ -84,7 +89,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public override void ExecuteSql(string sql)
+        public void ExecuteSql(string sql)
         {
             this.LazyConnect();
             using (DbCommand command = this.CreateSqlCommand(sql))
@@ -101,7 +106,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public override Adapters.Database.Sql.Command CreateCommand(string commandText)
+        public Adapters.Database.Sql.Command CreateCommand(string commandText)
         {
             return new Command(this, commandText);
         }
@@ -116,7 +121,7 @@ namespace Allors.Databases.Object.SqlClient
             return command;
         }
 
-        public override void Commit()
+        public void Commit()
         {
             try
             {
@@ -131,7 +136,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public override void Rollback()
+        public void Rollback()
         {
             try
             {

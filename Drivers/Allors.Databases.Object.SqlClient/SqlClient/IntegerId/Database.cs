@@ -60,7 +60,7 @@ namespace Allors.Databases.Object.SqlClient.IntegerId
             }
         }
 
-        public override void ResetSchema()
+        protected override void ResetSchema()
         {
             this.schema = null;
         }
