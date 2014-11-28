@@ -26,7 +26,7 @@ namespace Allors.Databases.Object.SqlClient
     using System.Data.SqlClient;
     using System.Linq;
 
-    using Allors.Adapters.Database.Sql;
+    using Allors.Databases.Object.SqlClient;
     using Allors.Meta;
 
     public class DatabaseSession : IDatabaseSession, ICommandFactory

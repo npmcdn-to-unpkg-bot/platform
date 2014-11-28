@@ -22,7 +22,7 @@ namespace Allors.Databases.Object.SqlClient
 {
     using System.Collections.Generic;
 
-    using Allors.Adapters.Database.Sql;
+    using Allors.Databases.Object.SqlClient;
     using Allors.Meta;
 
     public class CompositeRoles

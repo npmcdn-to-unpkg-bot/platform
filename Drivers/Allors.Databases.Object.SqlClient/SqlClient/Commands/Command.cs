@@ -25,7 +25,7 @@ namespace Allors.Databases.Object.SqlClient.Commands
     using System.Data;
     using System.Data.SqlClient;
 
-    using Allors.Adapters.Database.Sql;
+    using Allors.Databases.Object.SqlClient;
 
     using Microsoft.SqlServer.Server;
 
@@ -33,7 +33,7 @@ namespace Allors.Databases.Object.SqlClient.Commands
 
     public abstract class Command
     {
-        public void AddInObject(SqlCommand command, Adapters.Database.Sql.SchemaParameter parameter, object value)
+        public void AddInObject(SqlCommand command, SqlClient.SchemaParameter parameter, object value)
         {
             var schemaParameter = (SchemaParameter)parameter;
 
@@ -45,7 +45,7 @@ namespace Allors.Databases.Object.SqlClient.Commands
             command.Parameters.Add(sqlParameter);
         }
 
-        public void SetInObject(SqlCommand command, Adapters.Database.Sql.SchemaParameter param, object value)
+        public void SetInObject(SqlCommand command, SqlClient.SchemaParameter param, object value)
         {
             command.Parameters[param.Name].Value = Normalize(value);
         }

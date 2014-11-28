@@ -23,11 +23,39 @@ namespace Allors.Databases.Object.SqlClient
     using System;
     using System.Data;
 
-    public class SchemaParameter : Adapters.Database.Sql.SchemaParameter
+    public class SchemaParameter
     {
-        public SchemaParameter(Adapters.Database.Sql.Schema schema, string name, DbType type)
-            : base(schema, name, type)
+        public readonly DbType DbType;
+        public readonly string Name;
+        public readonly string InvocationName;
+
+        /// <summary>
+        /// Returns a String which represents the object instance.
+        /// </summary>
+        /// <returns>
+        /// The string which represents the object instance.
+        /// </returns>
+        public override string ToString()
         {
+            return this.Name;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+        public SchemaParameter(Schema schema, string name, DbType type)
+        {
+            this.Name = string.Format(schema.ParamFormat, name);
+            this.InvocationName = string.Format(schema.ParamInvocationFormat, name);
+            this.DbType = type;
         }
 
         public SqlDbType SqlDbType

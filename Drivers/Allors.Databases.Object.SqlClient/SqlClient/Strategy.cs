@@ -27,7 +27,7 @@ namespace Allors.Databases.Object.SqlClient
     using System.Collections;
     using System.Collections.Generic;
 
-    using Allors.Adapters.Database.Sql;
+    using Allors.Databases.Object.SqlClient;
 
     using Meta;
 

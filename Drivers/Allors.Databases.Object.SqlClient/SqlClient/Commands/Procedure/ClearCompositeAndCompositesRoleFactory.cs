@@ -53,17 +53,17 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
                 string sql;
                 if ((roleType.IsMany && associationType.IsMany) || !roleType.RelationType.ExistExclusiveLeafClasses)
                 {
-                    sql = Adapters.Database.Sql.Schema.AllorsPrefix + "C_" + roleType.SingularFullName;
+                    sql = SqlClient.Schema.AllorsPrefix + "C_" + roleType.SingularFullName;
                 }
                 else
                 {
                     if (roleType.IsOne)
                     {
-                        sql = Adapters.Database.Sql.Schema.AllorsPrefix + "C_" + associationType.ObjectType.ExclusiveLeafClass.Name + "_" + roleType.SingularFullName;
+                        sql = SqlClient.Schema.AllorsPrefix + "C_" + associationType.ObjectType.ExclusiveLeafClass.Name + "_" + roleType.SingularFullName;
                     }
                     else
                     {
-                        sql = Adapters.Database.Sql.Schema.AllorsPrefix + "C_" + ((IComposite)roleType.ObjectType).ExclusiveLeafClass.Name + "_" + associationType.SingularFullName;
+                        sql = SqlClient.Schema.AllorsPrefix + "C_" + ((IComposite)roleType.ObjectType).ExclusiveLeafClass.Name + "_" + associationType.SingularFullName;
                     }
                 }
 

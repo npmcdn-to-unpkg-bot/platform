@@ -26,7 +26,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
     using System.Collections.Generic;
     using System.Data;
 
-    using Allors.Adapters.Database.Sql;
+    using Allors.Databases.Object.SqlClient;
     using Allors.Meta;
 
     public class LoadObjectsFactory

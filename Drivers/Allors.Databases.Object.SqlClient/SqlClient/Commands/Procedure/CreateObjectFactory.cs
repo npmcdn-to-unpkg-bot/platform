@@ -27,7 +27,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
     using System.Data;
     using System.Data.SqlClient;
 
-    using Allors.Adapters.Database.Sql;
+    using Allors.Databases.Object.SqlClient;
     using Allors.Meta;
 
     using Database = Database;
@@ -65,7 +65,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
                 SqlCommand command;
                 if (!this.commandByIObjectType.TryGetValue(exclusiveRootClass, out command))
                 {
-                    command = this.Session.CreateSqlCommand(Adapters.Database.Sql.Schema.AllorsPrefix + "CO_" + exclusiveRootClass.Name);
+                    command = this.Session.CreateSqlCommand(SqlClient.Schema.AllorsPrefix + "CO_" + exclusiveRootClass.Name);
                     command.CommandType = CommandType.StoredProcedure;
                     this.AddInObject(command, schema.TypeId.Param, objectType.Id);
 

@@ -24,7 +24,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
     using System.Data;
     using System.Data.SqlClient;
 
-    using Allors.Adapters.Database.Sql;
+    using Allors.Databases.Object.SqlClient;
 
     using Database = Database;
     using DatabaseSession = DatabaseSession;
@@ -69,7 +69,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
 
                 if (this.command == null)
                 {
-                    this.command = this.Session.CreateSqlCommand(Adapters.Database.Sql.Schema.AllorsPrefix + "UC");
+                    this.command = this.Session.CreateSqlCommand(SqlClient.Schema.AllorsPrefix + "UC");
                     this.command.CommandType = CommandType.StoredProcedure;
                     this.AddInTable(this.command, schema.ObjectTableParam, this.Database.CreateObjectTable(modifiedRolesByReference.Keys));
                 }

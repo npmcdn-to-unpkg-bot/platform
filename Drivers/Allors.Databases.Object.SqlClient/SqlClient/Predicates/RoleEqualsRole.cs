@@ -26,7 +26,7 @@ namespace Allors.Databases.Object.SqlClient
     using System;
 
     using Allors.Adapters;
-    using Allors.Adapters.Database.Sql;
+    using Allors.Databases.Object.SqlClient;
     using Allors.Meta;
 
     public sealed class RoleEqualsRole : Predicate

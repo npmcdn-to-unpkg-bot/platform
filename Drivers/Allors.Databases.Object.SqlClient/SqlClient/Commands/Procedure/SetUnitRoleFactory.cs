@@ -26,7 +26,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
     using System.Data.SqlClient;
 
     using Allors.Adapters;
-    using Allors.Adapters.Database.Sql;
+    using Allors.Databases.Object.SqlClient;
     using Meta;
 
     using Database = Database;
@@ -59,7 +59,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
 
             if (!sqlByIRoleType.ContainsKey(roleType))
             {
-                var sql = Adapters.Database.Sql.Schema.AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularFullName;
+                var sql = SqlClient.Schema.AllorsPrefix + "SR_" + objectType.Name + "_" + roleType.SingularFullName;
                 sqlByIRoleType[roleType] = sql;
             }
 

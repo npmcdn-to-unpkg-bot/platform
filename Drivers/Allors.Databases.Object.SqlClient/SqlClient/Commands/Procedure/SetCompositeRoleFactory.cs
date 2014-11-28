@@ -56,11 +56,11 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
                 string sql;
                 if (!roleType.RelationType.ExistExclusiveLeafClasses)
                 {
-                    sql = Adapters.Database.Sql.Schema.AllorsPrefix + "S_" + roleType.SingularFullName;
+                    sql = SqlClient.Schema.AllorsPrefix + "S_" + roleType.SingularFullName;
                 }
                 else
                 {
-                    sql = Adapters.Database.Sql.Schema.AllorsPrefix + "S_" + associationType.ObjectType.ExclusiveLeafClass.Name + "_" + roleType.SingularFullName;
+                    sql = SqlClient.Schema.AllorsPrefix + "S_" + associationType.ObjectType.ExclusiveLeafClass.Name + "_" + roleType.SingularFullName;
                 }
 
                 this.sqlByIRoleType[roleType] = sql;

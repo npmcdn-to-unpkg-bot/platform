@@ -63,9 +63,9 @@
     <Compile Include="SqlClient\Extents\ExtentStatementChild.cs" />
     <Compile Include="SqlClient\Extents\ExtentStatementRoot.cs" />
     <Compile Include="SqlClient\Extents\SqlExtent.cs" />
-    <Compile Include="Adapters\Database\Sql\IObjectIds.cs" />
-    <Compile Include="Adapters\Database\Sql\ObjectIntegerIds.cs" />
-    <Compile Include="Adapters\Database\Sql\ObjectLongIds.cs" />
+    <Compile Include="SqlClient\IObjectIds.cs" />
+    <Compile Include="SqlClient\ObjectIntegerIds.cs" />
+    <Compile Include="SqlClient\ObjectLongIds.cs" />
     <Compile Include="SqlClient\Predicates\AndPredicate.cs" />
     <Compile Include="SqlClient\Predicates\AssociationContainedInEnumerable.cs" />
     <Compile Include="SqlClient\Predicates\AssociationContainedInExtent.cs" />
@@ -94,24 +94,20 @@
     <Compile Include="SqlClient\Predicates\RoleLessThanRole.cs" />
     <Compile Include="SqlClient\Predicates\RoleLessThanValue.cs" />
     <Compile Include="SqlClient\Predicates\RoleLike.cs" />
-    <Compile Include="Adapters\Database\Sql\Reference.cs" />
-    <Compile Include="Adapters\Database\Sql\Roles.cs" />
-    <Compile Include="Adapters\Database\Sql\Save.cs" />
-    <Compile Include="Adapters\Database\Sql\Schema\ISchemaValidationError.cs" />
-    <Compile Include="Adapters\Database\Sql\Schema\ProcedureSchemaValidationError.cs" />
-    <Compile Include="Adapters\Database\Sql\Schema\ReservedWords.cs" />
-    <Compile Include="Adapters\Database\Sql\Schema\Schema.cs" />
-    <Compile Include="Adapters\Database\Sql\Schema\SchemaColumn.cs" />
-    <Compile Include="Adapters\Database\Sql\Schema\SchemaIndexType.cs" />
-    <Compile Include="Adapters\Database\Sql\Schema\SchemaParameter.cs" />
-    <Compile Include="Adapters\Database\Sql\Schema\SchemaProcedure.cs" />
-    <Compile Include="Adapters\Database\Sql\Schema\SchemaTable.cs" />
-    <Compile Include="Adapters\Database\Sql\Schema\SchemaTableKind.cs" />
-    <Compile Include="Adapters\Database\Sql\Schema\SchemaValidationErrorKind.cs" />
-    <Compile Include="Adapters\Database\Sql\Schema\SchemaValidationErrors.cs" />
-    <Compile Include="Adapters\Database\Sql\Schema\SchemaValidationException.cs" />
-    <Compile Include="Adapters\Database\Sql\Schema\TableSchemaValidationError.cs" />
-    <Compile Include="Adapters\Database\Sql\SyncBatch.cs" />
+    <Compile Include="SqlClient\Reference.cs" />
+    <Compile Include="SqlClient\Roles.cs" />
+    <Compile Include="SqlClient\Schema\ISchemaValidationError.cs" />
+    <Compile Include="SqlClient\Schema\ProcedureSchemaValidationError.cs" />
+    <Compile Include="SqlClient\Schema\ReservedWords.cs" />
+    <Compile Include="SqlClient\Schema\SchemaColumn.cs" />
+    <Compile Include="SqlClient\Schema\SchemaIndexType.cs" />
+    <Compile Include="SqlClient\Schema\SchemaProcedure.cs" />
+    <Compile Include="SqlClient\Schema\SchemaTable.cs" />
+    <Compile Include="SqlClient\Schema\SchemaTableKind.cs" />
+    <Compile Include="SqlClient\Schema\SchemaValidationErrorKind.cs" />
+    <Compile Include="SqlClient\Schema\SchemaValidationErrors.cs" />
+    <Compile Include="SqlClient\Schema\SchemaValidationException.cs" />
+    <Compile Include="SqlClient\Schema\TableSchemaValidationError.cs" />
     <Compile Include="Adapters\RelationTypeManyXmlWriter.cs" />
     <Compile Include="Adapters\RelationTypeOneXmlWriter.cs" />
     <Compile Include="Adapters\Serialization.cs" />
@@ -179,7 +175,6 @@
     <Folder Include="SqlClient\SessionCommands\Text\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Adapters\Database\Sql\Overview.cd" />
     <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>

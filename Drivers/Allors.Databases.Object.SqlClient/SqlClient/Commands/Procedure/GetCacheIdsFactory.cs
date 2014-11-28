@@ -24,7 +24,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
     using System.Data;
     using System.Data.SqlClient;
 
-    using Allors.Adapters.Database.Sql;
+    using Allors.Databases.Object.SqlClient;
 
     using Database = Database;
     using DatabaseSession = DatabaseSession;

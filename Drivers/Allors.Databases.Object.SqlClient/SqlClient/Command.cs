@@ -163,7 +163,7 @@ namespace Allors.Databases.Object.SqlClient
             this.SetParameterValue(parameterName, value);
         }
 
-        public void AddInParameter(Adapters.Database.Sql.SchemaParameter parameter, object value)
+        public void AddInParameter(SqlClient.SchemaParameter parameter, object value)
         {
             var sqlParameter = this.command.Parameters.Contains(parameter.Name) ? this.command.Parameters[parameter.Name] : null;
             if (sqlParameter == null)
@@ -187,7 +187,7 @@ namespace Allors.Databases.Object.SqlClient
             this.command.Parameters.Add(parameter);
         }
 
-        public void AddOutParameter(Adapters.Database.Sql.SchemaParameter parameter)
+        public void AddOutParameter(SqlClient.SchemaParameter parameter)
         {
             var sqlParameter = this.command.Parameters.Contains(parameter.Name) ? this.command.Parameters[parameter.Name] : null;
             if (sqlParameter == null)
@@ -202,7 +202,7 @@ namespace Allors.Databases.Object.SqlClient
             this.command.Parameters.Add(sqlParameter);
         }
 
-        public void SetParameterValue(Adapters.Database.Sql.SchemaParameter parameter, object value)
+        public void SetParameterValue(SqlClient.SchemaParameter parameter, object value)
         {
             this.SetParameterValue(parameter.Name, value);
         }

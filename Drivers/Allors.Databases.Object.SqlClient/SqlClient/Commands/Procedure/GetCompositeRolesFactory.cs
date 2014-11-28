@@ -25,7 +25,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
     using System.Data.Common;
     using System.Data.SqlClient;
 
-    using Allors.Adapters.Database.Sql;
+    using Allors.Databases.Object.SqlClient;
 
     using Meta;
 
@@ -58,11 +58,11 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
                 string sql;
                 if (associationType.IsMany || !roleType.RelationType.ExistExclusiveLeafClasses)
                 {
-                    sql = Adapters.Database.Sql.Schema.AllorsPrefix + "GR_" + roleType.SingularFullName;
+                    sql = SqlClient.Schema.AllorsPrefix + "GR_" + roleType.SingularFullName;
                 }
                 else
                 {
-                    sql = Adapters.Database.Sql.Schema.AllorsPrefix + "GR_" + ((IComposite)roleType.ObjectType).ExclusiveLeafClass.Name + "_" + associationType.SingularFullName;
+                    sql = SqlClient.Schema.AllorsPrefix + "GR_" + ((IComposite)roleType.ObjectType).ExclusiveLeafClass.Name + "_" + associationType.SingularFullName;
                 }
  
                 this.sqlByIRoleType[roleType] = sql;

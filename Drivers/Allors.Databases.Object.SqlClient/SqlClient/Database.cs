@@ -26,7 +26,7 @@ namespace Allors.Databases.Object.SqlClient
     using System.Xml;
 
     using Allors.Adapters;
-    using Allors.Adapters.Database.Sql;
+    using Allors.Databases.Object.SqlClient;
     using Allors.Databases.Object.SqlClient.Caching;
     using Allors.Meta;
     using Allors.Populations;
@@ -740,7 +740,7 @@ namespace Allors.Databases.Object.SqlClient
 
         public void DropIndex(ManagementSession session, SchemaTable table, SchemaColumn column)
         {
-            var indexName = Adapters.Database.Sql.Schema.AllorsPrefix + table.Name + "_" + column.Name;
+            var indexName = SqlClient.Schema.AllorsPrefix + table.Name + "_" + column.Name;
 
             var sql = new StringBuilder();
             sql.Append("IF EXISTS (\n");
@@ -1019,7 +1019,7 @@ namespace Allors.Databases.Object.SqlClient
                         while (reader.Read())
                         {
                             var procedureName = reader.GetString(0);
-                            if (procedureName.StartsWith(Adapters.Database.Sql.Schema.AllorsPrefix))
+                            if (procedureName.StartsWith(SqlClient.Schema.AllorsPrefix))
                             {
                                 allorsProcedureNames.Add(procedureName);
                             }
@@ -1041,7 +1041,7 @@ namespace Allors.Databases.Object.SqlClient
 
         protected void CreateIndex(ManagementSession session, SchemaTable table, SchemaColumn column)
         {
-            var indexName = Adapters.Database.Sql.Schema.AllorsPrefix + table.Name + "_" + column.Name;
+            var indexName = SqlClient.Schema.AllorsPrefix + table.Name + "_" + column.Name;
 
             if (column.IndexType == SchemaIndexType.Single)
             {
@@ -1071,7 +1071,7 @@ namespace Allors.Databases.Object.SqlClient
             return new Load(this, objectNotLoaded, relationNotLoaded, reader);
         }
 
-        protected Adapters.Database.Sql.Save CreateSave(System.Xml.XmlWriter writer)
+        protected Save CreateSave(XmlWriter writer)
         {
             return new Save(this, writer);
         }

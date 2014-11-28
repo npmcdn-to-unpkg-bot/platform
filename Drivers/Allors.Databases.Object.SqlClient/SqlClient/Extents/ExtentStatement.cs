@@ -22,7 +22,7 @@ namespace Allors.Databases.Object.SqlClient
 {
     using System.Collections;
 
-    using Allors.Adapters.Database.Sql;
+    using Allors.Databases.Object.SqlClient;
     using Allors.Meta;
 
     public abstract class ExtentStatement
@@ -52,7 +52,7 @@ namespace Allors.Databases.Object.SqlClient
 
         public abstract bool IsRoot { get; }
 
-        public Adapters.Database.Sql.Schema Schema
+        public SqlClient.Schema Schema
         {
             get { return this.Session.SqlDatabase.Schema; }
         }

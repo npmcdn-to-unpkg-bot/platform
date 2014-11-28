@@ -21,7 +21,7 @@
 namespace Allors.Databases.Object.SqlClient
 {
     using Allors.Adapters;
-    using Allors.Adapters.Database.Sql;
+    using Allors.Databases.Object.SqlClient;
     using Allors.Meta;
 
     public sealed class RoleLessThanValue : Predicate
