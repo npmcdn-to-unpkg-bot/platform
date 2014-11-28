@@ -26,7 +26,7 @@ namespace Allors.Databases.Object.SqlClient
     public sealed class SessionCommands
     {
         private readonly DatabaseSession session;
-        private readonly Adapters.Database.Sql.CommandFactories commandFactories;
+        private readonly CommandFactories commandFactories;
 
         private GetIObjectTypeFactory.GetIObjectType getIObjectType;
         private CreateObjectFactory.CreateObject createObjectCommand;

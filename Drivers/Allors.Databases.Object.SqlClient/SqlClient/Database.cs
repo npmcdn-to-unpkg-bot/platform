@@ -720,7 +720,7 @@ namespace Allors.Databases.Object.SqlClient
 
         public abstract Schema SqlClientSchema { get; }
 
-        public Adapters.Database.Sql.CommandFactories CommandFactories
+        public CommandFactories CommandFactories
         {
             get { return this.commandFactories; }
         }
@@ -1066,7 +1066,7 @@ namespace Allors.Databases.Object.SqlClient
             session.ExecuteSql(sql.ToString());
         }
 
-        protected Adapters.Database.Sql.Load CreateLoad(ObjectNotLoadedEventHandler objectNotLoaded, RelationNotLoadedEventHandler relationNotLoaded, System.Xml.XmlReader reader)
+        protected Load CreateLoad(ObjectNotLoadedEventHandler objectNotLoaded, RelationNotLoadedEventHandler relationNotLoaded, System.Xml.XmlReader reader)
         {
             return new Load(this, objectNotLoaded, relationNotLoaded, reader);
         }

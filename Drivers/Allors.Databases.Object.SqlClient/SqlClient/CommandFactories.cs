@@ -25,7 +25,7 @@ namespace Allors.Databases.Object.SqlClient
 
     using AddCompositeRoleFactory = Allors.Databases.Object.SqlClient.Commands.Procedure.AddCompositeRoleFactory;
 
-    public sealed class CommandFactories : Adapters.Database.Sql.CommandFactories
+    public sealed class CommandFactories 
     {
         private readonly Database database;
 
@@ -56,7 +56,7 @@ namespace Allors.Databases.Object.SqlClient
             this.database = database;
         }
 
-        public override GetIObjectTypeFactory GetIObjectTypeFactory
+        public GetIObjectTypeFactory GetIObjectTypeFactory
         {
             get
             {
@@ -64,7 +64,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public override CreateObjectFactory CreateObjectFactory
+        public CreateObjectFactory CreateObjectFactory
         {
             get
             {
@@ -72,7 +72,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public override CreateObjectsFactory CreateObjectsFactory
+        public CreateObjectsFactory CreateObjectsFactory
         {
             get
             {
@@ -80,7 +80,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public override InsertObjectFactory InsertObjectFactory
+        public InsertObjectFactory InsertObjectFactory
         {
             get
             {
@@ -88,7 +88,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public override InstantiateObjectsFactory InstantiateObjectsFactory
+        public InstantiateObjectsFactory InstantiateObjectsFactory
         {
             get
             {
@@ -96,7 +96,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public override AddCompositeRoleFactory AddCompositeRoleFactory
+        public AddCompositeRoleFactory AddCompositeRoleFactory
         {
             get
             {
@@ -104,7 +104,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public override RemoveCompositeRoleFactory RemoveCompositeRoleFactory
+        public RemoveCompositeRoleFactory RemoveCompositeRoleFactory
         {
             get
             {
@@ -112,7 +112,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public override InstantiateObjectFactory InstantiateObjectFactory
+        public InstantiateObjectFactory InstantiateObjectFactory
         {
             get
             {
@@ -120,7 +120,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public override DeleteObjectFactory DeleteObjectFactory
+        public DeleteObjectFactory DeleteObjectFactory
         {
             get
             {
@@ -128,7 +128,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
         
-        public override GetCompositeAssociationFactory GetCompositeAssociationFactory
+        public GetCompositeAssociationFactory GetCompositeAssociationFactory
         {
             get
             {
@@ -136,7 +136,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public override GetCompositeAssociationsFactory GetCompositeAssociationsFactory
+        public GetCompositeAssociationsFactory GetCompositeAssociationsFactory
         {
             get
             {
@@ -144,7 +144,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public override GetCompositeRoleFactory GetCompositeRoleFactory
+        public GetCompositeRoleFactory GetCompositeRoleFactory
         {
             get
             {
@@ -152,7 +152,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public override GetCompositeRolesFactory GetCompositeRolesFactory
+        public GetCompositeRolesFactory GetCompositeRolesFactory
         {
             get
             {
@@ -160,7 +160,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public override GetUnitRolesFactory GetUnitRolesFactory
+        public GetUnitRolesFactory GetUnitRolesFactory
         {
             get
             {
@@ -168,7 +168,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public override ClearCompositeAndCompositesRoleFactory ClearCompositeAndCompositesRoleFactory
+        public ClearCompositeAndCompositesRoleFactory ClearCompositeAndCompositesRoleFactory
         {
             get
             {
@@ -176,7 +176,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public override SetCompositeRoleFactory SetCompositeRoleFactory
+        public SetCompositeRoleFactory SetCompositeRoleFactory
         {
             get
             {
@@ -184,7 +184,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public override SetUnitRoleFactory SetUnitRoleFactory
+        public SetUnitRoleFactory SetUnitRoleFactory
         {
             get
             {
@@ -192,7 +192,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public override SetUnitRolesFactory SetUnitRolesFactory
+        public SetUnitRolesFactory SetUnitRolesFactory
         {
             get
             {
@@ -200,7 +200,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public override GetCacheIdsFactory GetCacheIdsFactory
+        public GetCacheIdsFactory GetCacheIdsFactory
         {
             get
             {
@@ -208,7 +208,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public override UpdateCacheIdsFactory UpdateCacheIdsFactory
+        public UpdateCacheIdsFactory UpdateCacheIdsFactory
         {
             get
             {
@@ -216,7 +216,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        protected override Database Database
+        protected Database Database
         {
             get { return this.SqlClientDatabase; }
         }

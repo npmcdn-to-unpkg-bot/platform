@@ -839,7 +839,7 @@ namespace Allors.Databases.Object.SqlClient
             return new Command(this, commandText);
         }
 
-        protected IFlush CreateFlush(Dictionary<Reference, Roles> unsyncedRolesByReference)
+        protected Flush CreateFlush(Dictionary<Reference, Roles> unsyncedRolesByReference)
         {
             return new Flush(this, unsyncedRolesByReference);
         }

@@ -18,11 +18,23 @@ namespace Allors.Databases.Object.SqlClient
 {
     using System.Data;
 
-    public abstract class Configuration : Adapters.Database.Sql.Configuration
+    using Allors.Databases.Object.SqlClient.Caching;
+
+    public abstract class Configuration : Databases.Configuration
     {
         protected Configuration()
         {
+            this.CacheFactory = new CacheFactory();
+            this.CommandTimeout = 30;
             this.IsolationLevel = IsolationLevel.Snapshot;
         }
+
+        public ICacheFactory CacheFactory { get; set; }
+
+        public string ConnectionString { get; set; }
+
+        public int CommandTimeout { get; set; }
+
+        public IsolationLevel IsolationLevel { get; set; }
     }
 }

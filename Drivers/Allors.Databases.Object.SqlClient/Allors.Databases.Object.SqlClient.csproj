@@ -50,9 +50,7 @@
     <Compile Include="SqlClient\Caching\ICachedObject.cs" />
     <Compile Include="SqlClient\Caching\ICacheFactory.cs" />
     <Compile Include="SqlClient\ChangeSet.cs" />
-    <Compile Include="Adapters\Database\Sql\CommandFactories.cs" />
-    <Compile Include="Adapters\Database\Sql\CompositeRoles.cs" />
-    <Compile Include="Adapters\Database\Sql\Configuration.cs" />
+    <Compile Include="SqlClient\CompositeRoles.cs" />
     <Compile Include="SqlClient\Extents\Extent.cs" />
     <Compile Include="SqlClient\Extents\ExtentAssociations.cs" />
     <Compile Include="SqlClient\Extents\ExtentEnumerator.cs" />
@@ -65,10 +63,7 @@
     <Compile Include="SqlClient\Extents\ExtentStatementChild.cs" />
     <Compile Include="SqlClient\Extents\ExtentStatementRoot.cs" />
     <Compile Include="SqlClient\Extents\SqlExtent.cs" />
-    <Compile Include="Adapters\Database\Sql\IDatabase.cs" />
-    <Compile Include="Adapters\Database\Sql\IFlush.cs" />
     <Compile Include="Adapters\Database\Sql\IObjectIds.cs" />
-    <Compile Include="Adapters\Database\Sql\Load.cs" />
     <Compile Include="Adapters\Database\Sql\ObjectIntegerIds.cs" />
     <Compile Include="Adapters\Database\Sql\ObjectLongIds.cs" />
     <Compile Include="SqlClient\Predicates\AndPredicate.cs" />

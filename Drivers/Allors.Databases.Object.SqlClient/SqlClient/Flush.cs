@@ -26,7 +26,7 @@ namespace Allors.Databases.Object.SqlClient
     using Allors.Adapters.Database.Sql;
     using Allors.Meta;
 
-    public class Flush : IFlush
+    public class Flush
     {
         private const int BatchSize = 1000;
         private readonly DatabaseSession session;
