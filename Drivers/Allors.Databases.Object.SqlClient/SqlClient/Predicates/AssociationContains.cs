@@ -20,8 +20,8 @@
 
 namespace Allors.Databases.Object.SqlClient
 {
-    using Allors.Adapters;
     using Allors.Meta;
+    using Allors.Populations;
 
     public sealed class AssociationContains : Predicate
     {
@@ -31,7 +31,7 @@ namespace Allors.Databases.Object.SqlClient
         public AssociationContains(ExtentFiltered extent, IAssociationType association, IObject allorsObject)
         {
             extent.CheckAssociation(association);
-            CompositePredicateAssertions.AssertAssociationContains(association, allorsObject);
+            PredicateAssertions.AssertAssociationContains(association, allorsObject);
             this.association = association;
             this.allorsObject = allorsObject;
         }

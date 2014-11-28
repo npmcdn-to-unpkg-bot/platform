@@ -25,9 +25,8 @@ namespace Allors.Databases.Object.SqlClient
 {
     using System;
 
-    using Allors.Adapters;
-    using Allors.Databases.Object.SqlClient;
     using Allors.Meta;
+    using Allors.Populations;
 
     public sealed class RoleEqualsRole : Predicate
     {
@@ -37,7 +36,7 @@ namespace Allors.Databases.Object.SqlClient
         public RoleEqualsRole(ExtentFiltered extent, IRoleType role, IRoleType equalsRole)
         {
             extent.CheckRole(role);
-            CompositePredicateAssertions.ValidateRoleEquals(role, equalsRole);
+            PredicateAssertions.ValidateRoleEquals(role, equalsRole);
             this.role = role;
             this.equalsRole = equalsRole;
         }

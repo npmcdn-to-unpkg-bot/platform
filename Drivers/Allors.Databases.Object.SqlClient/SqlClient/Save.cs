@@ -19,11 +19,8 @@ namespace Allors.Databases.Object.SqlClient
     using System.Collections.Generic;
     using System.Xml;
 
-    using Allors.Adapters;
     using Allors.Meta;
     using Allors.Populations;
-
-    using Serialization = Allors.Adapters.Serialization;
 
     public class Save
     {
@@ -202,7 +199,7 @@ namespace Allors.Databases.Object.SqlClient
                         {
                             if (roleType.IsMany)
                             {
-                                using (var relationTypeManyXmlWriter = new IRelationTypeManyXmlWriter(relation, this.writer))
+                                using (var relationTypeManyXmlWriter = new RelationTypeManyXmlWriter(relation, this.writer))
                                 {
                                     while (reader.Read())
                                     {
@@ -216,7 +213,7 @@ namespace Allors.Databases.Object.SqlClient
                             }
                             else
                             {
-                                using (var relationTypeOneXmlWriter = new IRelationTypeOneXmlWriter(relation, this.writer))
+                                using (var relationTypeOneXmlWriter = new RelationTypeOneXmlWriter(relation, this.writer))
                                 {
                                     while (reader.Read())
                                     {

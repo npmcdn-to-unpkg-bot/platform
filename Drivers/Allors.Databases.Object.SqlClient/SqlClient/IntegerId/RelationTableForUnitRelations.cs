@@ -25,7 +25,6 @@ namespace Allors.Databases.Object.SqlClient.IntegerId
     using System.Collections.Generic;
     using System.Data;
 
-    using Allors.Adapters;
     using Allors.Meta;
 
     using Microsoft.SqlServer.Server;

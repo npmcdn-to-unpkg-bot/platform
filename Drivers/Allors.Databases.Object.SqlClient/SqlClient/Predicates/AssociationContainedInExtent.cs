@@ -20,7 +20,7 @@
 
 namespace Allors.Databases.Object.SqlClient
 {
-    using Allors.Adapters;
+    using Allors.Populations;
 
     using Meta;
 
@@ -32,7 +32,7 @@ namespace Allors.Databases.Object.SqlClient
         public AssociationContainedInExtent(ExtentFiltered extent, IAssociationType association, Allors.Extent inExtent)
         {
             extent.CheckAssociation(association);
-            CompositePredicateAssertions.AssertAssociationContainedIn(association, inExtent);
+            PredicateAssertions.AssertAssociationContainedIn(association, inExtent);
             this.association = association;
             this.inExtent = ((Extent)inExtent).ContainedInExtent;
         }

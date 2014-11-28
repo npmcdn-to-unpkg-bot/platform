@@ -25,7 +25,6 @@ namespace Allors.Databases.Object.SqlClient
     using System.Text;
     using System.Xml;
 
-    using Allors.Adapters;
     using Allors.Databases.Object.SqlClient;
     using Allors.Databases.Object.SqlClient.Caching;
     using Allors.Meta;

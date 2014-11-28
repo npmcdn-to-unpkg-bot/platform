@@ -40,8 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Adapters\CompositePredicateAssertions.cs" />
-    <Compile Include="Adapters\CompositeRelation.cs" />
+    <Compile Include="SqlClient\CompositeRelation.cs" />
     <Compile Include="SqlClient\Strategy.cs" />
     <Compile Include="SqlClient\Caching\Cache.cs" />
     <Compile Include="SqlClient\Caching\CachedObject.cs" />
@@ -108,10 +107,9 @@
     <Compile Include="SqlClient\Schema\SchemaValidationErrors.cs" />
     <Compile Include="SqlClient\Schema\SchemaValidationException.cs" />
     <Compile Include="SqlClient\Schema\TableSchemaValidationError.cs" />
-    <Compile Include="Adapters\RelationTypeManyXmlWriter.cs" />
-    <Compile Include="Adapters\RelationTypeOneXmlWriter.cs" />
-    <Compile Include="Adapters\Serialization.cs" />
-    <Compile Include="Adapters\UnitRelation.cs" />
+    <Compile Include="SqlClient\RelationTypeManyXmlWriter.cs" />
+    <Compile Include="SqlClient\RelationTypeOneXmlWriter.cs" />
+    <Compile Include="SqlClient\UnitRelation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlClient\Command.cs" />
     <Compile Include="SqlClient\CommandFactories.cs" />

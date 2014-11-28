@@ -20,8 +20,8 @@
 
 namespace Allors.Databases.Object.SqlClient
 {
-    using Allors.Adapters;
     using Allors.Meta;
+    using Allors.Populations;
 
     public sealed class InstanceOf : Predicate
     {
@@ -29,7 +29,7 @@ namespace Allors.Databases.Object.SqlClient
 
         public InstanceOf(IObjectType instanceType, IObjectType[] instanceClasses)
         {
-            CompositePredicateAssertions.ValidateInstanceof(instanceType);
+            PredicateAssertions.ValidateInstanceof(instanceType);
             this.instanceClasses = instanceClasses;
         }
 

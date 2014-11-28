@@ -20,7 +20,7 @@
 
 namespace Allors.Databases.Object.SqlClient
 {
-    using Allors.Adapters;
+    using Allors.Populations;
 
     public sealed class Equals : Predicate
     {
@@ -28,7 +28,7 @@ namespace Allors.Databases.Object.SqlClient
 
         public Equals(IObject obj)
         {
-            CompositePredicateAssertions.ValidateEquals(obj);
+            PredicateAssertions.ValidateEquals(obj);
             this.obj = obj;
         }
 

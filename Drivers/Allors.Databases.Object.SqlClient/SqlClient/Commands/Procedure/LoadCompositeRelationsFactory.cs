@@ -23,7 +23,6 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
     using System.Collections.Generic;
     using System.Data;
 
-    using Allors.Adapters;
     using Allors.Databases.Object.SqlClient;
     using Allors.Meta;
 

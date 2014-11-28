@@ -20,8 +20,8 @@
 
 namespace Allors.Databases.Object.SqlClient
 {
-    using Allors.Adapters;
     using Allors.Meta;
+    using Allors.Populations;
 
     public sealed class AssociationInstanceOf : Predicate
     {
@@ -31,7 +31,7 @@ namespace Allors.Databases.Object.SqlClient
         public AssociationInstanceOf(ExtentFiltered extent, IAssociationType association, IObjectType instanceType, IObjectType[] instanceClasses)
         {
             extent.CheckAssociation(association);
-            CompositePredicateAssertions.ValidateAssociationInstanceof(association, instanceType);
+            PredicateAssertions.ValidateAssociationInstanceof(association, instanceType);
             this.association = association;
             this.instanceClasses = instanceClasses;
         }

@@ -20,9 +20,8 @@
 
 namespace Allors.Databases.Object.SqlClient
 {
-    using Allors.Adapters;
-    using Allors.Databases.Object.SqlClient;
     using Allors.Meta;
+    using Allors.Populations;
 
     public sealed class RoleInstanceof : Predicate
     {
@@ -32,7 +31,7 @@ namespace Allors.Databases.Object.SqlClient
         public RoleInstanceof(ExtentFiltered extent, IRoleType role, IObjectType instanceType, IObjectType[] instanceClasses)
         {
             extent.CheckRole(role);
-            CompositePredicateAssertions.ValidateRoleInstanceOf(role, instanceType);
+            PredicateAssertions.ValidateRoleInstanceOf(role, instanceType);
             this.role = role;
             this.instanceClasses = instanceClasses;
         }

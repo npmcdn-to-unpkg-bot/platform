@@ -20,8 +20,7 @@
 
 namespace Allors.Databases.Object.SqlClient
 {
-    using Allors.Adapters;
-    using Allors.Databases.Object.SqlClient;
+    using Allors.Populations;
 
     using Meta;
 
@@ -33,7 +32,7 @@ namespace Allors.Databases.Object.SqlClient
         public RoleContainedInExtent(ExtentFiltered extent, IRoleType role, Allors.Extent inExtent)
         {
             extent.CheckRole(role);
-            CompositePredicateAssertions.ValidateRoleContainedIn(role, inExtent);
+            PredicateAssertions.ValidateRoleContainedIn(role, inExtent);
             this.role = role;
             this.inExtent = ((Extent)inExtent).ContainedInExtent;
         }

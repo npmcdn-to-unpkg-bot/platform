@@ -20,8 +20,7 @@
 
 namespace Allors.Databases.Object.SqlClient
 {
-    using Allors.Adapters;
-    using Allors.Databases.Object.SqlClient;
+    using Allors.Populations;
 
     using Meta;
 
@@ -34,7 +33,7 @@ namespace Allors.Databases.Object.SqlClient
         public RoleBetweenValue(ExtentFiltered extent, IRoleType roleType, object first, object second)
         {
             extent.CheckRole(roleType);
-            CompositePredicateAssertions.ValidateRoleBetween(roleType, first, second);
+            PredicateAssertions.ValidateRoleBetween(roleType, first, second);
             this.roleType = roleType;
             this.first = extent.Session.SqlDatabase.Internalize(first, roleType);
             this.second = extent.Session.SqlDatabase.Internalize(second, roleType);

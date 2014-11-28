@@ -20,8 +20,8 @@
 
 namespace Allors.Databases.Object.SqlClient
 {
-    using Allors.Adapters;
     using Allors.Meta;
+    using Allors.Populations;
 
     public sealed class AssociationExists : Predicate
     {
@@ -30,7 +30,7 @@ namespace Allors.Databases.Object.SqlClient
         public AssociationExists(ExtentFiltered extent, IAssociationType association)
         {
             extent.CheckAssociation(association);
-            CompositePredicateAssertions.ValidateAssociationExists(association);
+            PredicateAssertions.ValidateAssociationExists(association);
             this.association = association;
         }
 

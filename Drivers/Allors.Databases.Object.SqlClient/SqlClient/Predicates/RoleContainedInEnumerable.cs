@@ -23,8 +23,7 @@ namespace Allors.Databases.Object.SqlClient
     using System.Collections.Generic;
     using System.Text;
 
-    using Allors.Adapters;
-    using Allors.Databases.Object.SqlClient;
+    using Allors.Populations;
 
     using Meta;
 
@@ -36,7 +35,7 @@ namespace Allors.Databases.Object.SqlClient
         public RoleContainedInEnumerable(ExtentFiltered extent, IRoleType role, IEnumerable<IObject> enumerable)
         {
             extent.CheckRole(role);
-            CompositePredicateAssertions.ValidateRoleContainedIn(role, this.enumerable);
+            PredicateAssertions.ValidateRoleContainedIn(role, this.enumerable);
             this.role = role;
             this.enumerable = enumerable;
         }

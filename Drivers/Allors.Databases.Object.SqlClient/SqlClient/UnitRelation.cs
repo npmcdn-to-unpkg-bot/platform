@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="CompositeRelation.cs" company="Allors bvba">
+// <copyright file="UnitRelation.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -18,14 +18,14 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Adapters
+namespace Allors.Databases.Object.SqlClient
 {
-    public class CompositeRelation
+    public class UnitRelation
     {
         public readonly ObjectId Association;
-        public readonly ObjectId Role;
+        public readonly object Role;
 
-        public CompositeRelation(ObjectId association, ObjectId role)
+        public UnitRelation(ObjectId association, object role)
         {
             this.Association = association;
             this.Role = role;

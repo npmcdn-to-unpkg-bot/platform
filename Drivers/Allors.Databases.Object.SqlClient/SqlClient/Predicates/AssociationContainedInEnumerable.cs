@@ -23,7 +23,7 @@ namespace Allors.Databases.Object.SqlClient
     using System.Collections.Generic;
     using System.Text;
 
-    using Allors.Adapters;
+    using Allors.Populations;
 
     using Meta;
 
@@ -35,7 +35,7 @@ namespace Allors.Databases.Object.SqlClient
         public AssociationContainedInEnumerable(ExtentFiltered extent, IAssociationType association, IEnumerable<IObject> enumerable)
         {
             extent.CheckAssociation(association);
-            CompositePredicateAssertions.AssertAssociationContainedIn(association, this.enumerable);
+            PredicateAssertions.AssertAssociationContainedIn(association, this.enumerable);
             this.association = association;
             this.enumerable = enumerable;
         }

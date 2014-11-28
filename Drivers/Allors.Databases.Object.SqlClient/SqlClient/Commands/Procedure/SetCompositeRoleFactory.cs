@@ -24,7 +24,6 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
     using System.Data;
     using System.Data.SqlClient;
 
-    using Allors.Adapters;
     using Meta;
 
     using Database = Database;

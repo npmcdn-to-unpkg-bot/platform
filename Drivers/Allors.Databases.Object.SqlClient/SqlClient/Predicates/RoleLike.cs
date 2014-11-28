@@ -20,9 +20,8 @@
 
 namespace Allors.Databases.Object.SqlClient
 {
-    using Allors.Adapters;
-    using Allors.Databases.Object.SqlClient;
     using Allors.Meta;
+    using Allors.Populations;
 
     public sealed class RoleLike : Predicate
     {
@@ -32,7 +31,7 @@ namespace Allors.Databases.Object.SqlClient
         public RoleLike(ExtentFiltered extent, IRoleType role, string like)
         {
             extent.CheckRole(role);
-            CompositePredicateAssertions.ValidateRoleLikeFilter(role, like);
+            PredicateAssertions.ValidateRoleLikeFilter(role, like);
             this.role = role;
             this.like = like;
         }

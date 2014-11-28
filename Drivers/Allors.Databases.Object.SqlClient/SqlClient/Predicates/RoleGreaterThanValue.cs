@@ -20,9 +20,8 @@
 
 namespace Allors.Databases.Object.SqlClient
 {
-    using Allors.Adapters;
-    using Allors.Databases.Object.SqlClient;
     using Allors.Meta;
+    using Allors.Populations;
 
     public sealed class RoleGreaterThanValue : Predicate
     {
@@ -32,7 +31,7 @@ namespace Allors.Databases.Object.SqlClient
         public RoleGreaterThanValue(ExtentFiltered extent, IRoleType roleType, object obj)
         {
             extent.CheckRole(roleType);
-            CompositePredicateAssertions.ValidateRoleGreaterThan(roleType, obj);
+            PredicateAssertions.ValidateRoleGreaterThan(roleType, obj);
             this.roleType = roleType;
             this.obj = extent.Session.SqlDatabase.Internalize(obj, roleType);
         }

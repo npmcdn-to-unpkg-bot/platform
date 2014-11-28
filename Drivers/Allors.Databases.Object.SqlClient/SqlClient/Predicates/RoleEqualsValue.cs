@@ -22,9 +22,8 @@ namespace Allors.Databases.Object.SqlClient
 {
     using System;
 
-    using Allors.Adapters;
-    using Allors.Databases.Object.SqlClient;
     using Allors.Meta;
+    using Allors.Populations;
 
     public sealed class RoleEqualsValue : Predicate
     {
@@ -34,7 +33,7 @@ namespace Allors.Databases.Object.SqlClient
         public RoleEqualsValue(ExtentFiltered extent, IRoleType roleType, object obj)
         {
             extent.CheckRole(roleType);
-            CompositePredicateAssertions.ValidateRoleEquals(roleType, obj);
+            PredicateAssertions.ValidateRoleEquals(roleType, obj);
             this.roleType = roleType;
             if (obj is Enum)
             {

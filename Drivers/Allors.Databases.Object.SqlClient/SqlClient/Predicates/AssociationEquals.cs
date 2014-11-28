@@ -20,8 +20,8 @@
 
 namespace Allors.Databases.Object.SqlClient
 {
-    using Allors.Adapters;
     using Allors.Meta;
+    using Allors.Populations;
 
     public sealed class AssociationEquals : Predicate
     {
@@ -31,7 +31,7 @@ namespace Allors.Databases.Object.SqlClient
         public AssociationEquals(ExtentFiltered extent, IAssociationType association, IObject allorsObject)
         {
             extent.CheckAssociation(association);
-            CompositePredicateAssertions.AssertAssociationEquals(association, allorsObject);
+            PredicateAssertions.AssertAssociationEquals(association, allorsObject);
             this.association = association;
             this.allorsObject = allorsObject;
         }

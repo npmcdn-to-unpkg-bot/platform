@@ -24,8 +24,6 @@ namespace Allors.Databases.Object.SqlClient.IntegerId
     using System.Collections.Generic;
     using System.Data;
 
-    using Allors.Adapters;
-
     using Microsoft.SqlServer.Server;
 
     public class RelationTableForCompositeRelations : IEnumerable<SqlDataRecord>

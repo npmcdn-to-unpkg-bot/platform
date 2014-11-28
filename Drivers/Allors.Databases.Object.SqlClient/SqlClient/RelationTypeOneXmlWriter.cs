@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="IRelationTypeOneXmlWriter.cs" company="Allors bvba">
+// <copyright file="RelationTypeOneXmlWriter.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -18,17 +18,20 @@
 // </copyright>
 // <summary>Defines the IRelationTypeOneXmlWriter type.</summary>
 //-------------------------------------------------------------------------------------------------
-namespace Allors.Adapters
+namespace Allors.Databases.Object.SqlClient
 {
     using System;
     using System.Xml;
+
+    using Allors.Populations;
+
     using Meta;
 
     /// <summary>
     /// Writes all relations from a <see cref="IRelationType"/> with a Role
     /// with multiplicity of one  to the <see cref="XmlWriter"/> during a <see cref="IDatabase#Save"/>.
     /// </summary>
-    public class IRelationTypeOneXmlWriter : IDisposable
+    public class RelationTypeOneXmlWriter : IDisposable
     {
         /// <summary>
         /// The <see cref="relationType"/>.
@@ -46,16 +49,16 @@ namespace Allors.Adapters
         private bool isInUse;
 
         /// <summary>
-        /// Indicates that this <see cref="IRelationTypeOneXmlWriter"/> has been closed.
+        /// Indicates that this <see cref="RelationTypeOneXmlWriter"/> has been closed.
         /// </summary>
         private bool isClosed;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="IRelationTypeOneXmlWriter"/> class.
+        /// Initializes a new instance of the <see cref="RelationTypeOneXmlWriter"/> class.
         /// </summary>
         /// <param name="relationType">Type of the relation.</param>
         /// <param name="xmlWriter">The XML writer.</param>
-        public IRelationTypeOneXmlWriter(IRelationType relationType, XmlWriter xmlWriter)
+        public RelationTypeOneXmlWriter(IRelationType relationType, XmlWriter xmlWriter)
         {
             this.relationType = relationType;
             this.xmlWriter = xmlWriter;
@@ -63,7 +66,7 @@ namespace Allors.Adapters
         }
 
         /// <summary>
-        /// Closes this "<see cref="IRelationTypeOneXmlWriter"/>.
+        /// Closes this "<see cref="RelationTypeOneXmlWriter"/>.
         /// </summary>
         public void Close()
         {

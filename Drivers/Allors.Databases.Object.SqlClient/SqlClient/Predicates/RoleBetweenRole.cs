@@ -20,9 +20,8 @@
 
 namespace Allors.Databases.Object.SqlClient
 {
-    using Allors.Adapters;
-    using Allors.Databases.Object.SqlClient;
     using Allors.Meta;
+    using Allors.Populations;
 
     public sealed class RoleBetweenRole : Predicate
     {
@@ -33,7 +32,7 @@ namespace Allors.Databases.Object.SqlClient
         public RoleBetweenRole(ExtentFiltered extent, IRoleType role, IRoleType first, IRoleType second)
         {
             extent.CheckRole(role);
-            CompositePredicateAssertions.ValidateRoleBetween(role, first, second);
+            PredicateAssertions.ValidateRoleBetween(role, first, second);
             this.role = role;
             this.first = first;
             this.second = second;

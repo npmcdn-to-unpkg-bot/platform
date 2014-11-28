@@ -23,9 +23,8 @@
 
 namespace Allors.Databases.Object.SqlClient
 {
-    using Allors.Adapters;
-    using Allors.Databases.Object.SqlClient;
     using Allors.Meta;
+    using Allors.Populations;
 
     public sealed class RoleContains : Predicate
     {
@@ -35,7 +34,7 @@ namespace Allors.Databases.Object.SqlClient
         public RoleContains(ExtentFiltered extent, IRoleType role, IObject allorsObject)
         {
             extent.CheckRole(role);
-            CompositePredicateAssertions.ValidateRoleContains(role, allorsObject);
+            PredicateAssertions.ValidateRoleContains(role, allorsObject);
             this.role = role;
             this.allorsObject = allorsObject;
         }
