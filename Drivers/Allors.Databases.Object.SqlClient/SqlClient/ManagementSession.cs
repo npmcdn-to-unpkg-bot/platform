@@ -106,7 +106,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public Command CreateCommand(string commandText)
+        internal Command CreateCommand(string commandText)
         {
             return new Command(this, commandText);
         }

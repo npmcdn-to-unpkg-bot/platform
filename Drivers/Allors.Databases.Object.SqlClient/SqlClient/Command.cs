@@ -27,55 +27,51 @@ namespace Allors.Databases.Object.SqlClient
 
     using Allors.Meta;
 
-    public class Command : IDisposable
+    internal class Command : IDisposable
     {
-        public virtual byte[] GetBinary(DbDataReader reader, int i)
+        private readonly SqlCommand command;
+
+        public Command(ICommandFactory commandFactory, string commandText)
+        {
+            this.command = commandFactory.CreateSqlCommand(commandText);
+        }
+
+        public byte[] GetBinary(DbDataReader reader, int i)
         {
             return (byte[])reader.GetValue(i);
         }
 
-        public virtual bool GetBoolean(DbDataReader reader, int i)
+        public bool GetBoolean(DbDataReader reader, int i)
         {
             return reader.GetBoolean(i);
         }
 
-
-        public virtual decimal GetDecimal(DbDataReader reader, int i)
+        public decimal GetDecimal(DbDataReader reader, int i)
         {
             return reader.GetDecimal(i);
         }
 
-        public virtual double GetFloat(DbDataReader reader, int i)
+        public double GetFloat(DbDataReader reader, int i)
         {
             return reader.GetDouble(i);
         }
 
-        public virtual int GetInteger(DbDataReader reader, int i)
+        public int GetInteger(DbDataReader reader, int i)
         {
             return reader.GetInt32(i);
         }
 
-        public virtual object GetParameterValue(SchemaParameter parameter)
-        {
-            return this.DbCommand.Parameters[parameter.Name].Value;
-        }
-
-        public virtual string GetString(DbDataReader reader, int i)
+        public string GetString(DbDataReader reader, int i)
         {
             return reader.GetString(i);
         }
 
-        public virtual Guid GetUnique(DbDataReader reader, int i)
+        public Guid GetUnique(DbDataReader reader, int i)
         {
             return reader.GetGuid(i);
         }
 
-        public virtual object GetValue(DbDataReader reader, int i)
-        {
-            return reader.GetValue(i);
-        }
-
-        public virtual object GetValue(DbDataReader reader, UnitTags unitTypeTag, int i)
+        public object GetValue(DbDataReader reader, UnitTags unitTypeTag, int i)
         {
             switch (unitTypeTag)
             {
@@ -98,56 +94,14 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public virtual void ExecuteNonQuery()
+        public void ExecuteNonQuery()
         {
-            this.DbCommand.ExecuteNonQuery();
+            this.command.ExecuteNonQuery();
         }
 
-        public virtual DbDataReader ExecuteReader()
+        public DbDataReader ExecuteReader()
         {
-            return this.DbCommand.ExecuteReader();
-        }
-
-        public virtual object ExecuteReaderGetValue()
-        {
-            using (var reader = this.ExecuteReader())
-            {
-                if (reader.Read())
-                {
-                    return this.GetValue(reader, 0);
-                }
-
-                throw new Exception("Reader returned no rows");
-            }
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        private readonly SqlCommand command;
-
-        public Command(ICommandFactory commandFactory, string commandText)
-        {
-            this.command = commandFactory.CreateSqlCommand(commandText);
-        }
-
-        protected DbCommand DbCommand
-        {
-            get { return this.command; }
+            return ((DbCommand)this.command).ExecuteReader();
         }
 
         public void AddInParameter(string parameterName, object value)
@@ -161,50 +115,6 @@ namespace Allors.Databases.Object.SqlClient
             }
 
             this.SetParameterValue(parameterName, value);
-        }
-
-        public void AddInParameter(SqlClient.SchemaParameter parameter, object value)
-        {
-            var sqlParameter = this.command.Parameters.Contains(parameter.Name) ? this.command.Parameters[parameter.Name] : null;
-            if (sqlParameter == null)
-            {
-                sqlParameter = this.command.CreateParameter();
-                sqlParameter.DbType = parameter.DbType;
-                sqlParameter.ParameterName = parameter.Name;
-                this.command.Parameters.Add(sqlParameter);
-            }
-
-            this.SetParameterValue(parameter.Name, value);
-        }
-
-        public void AddInParameter(DbParameter parameter)
-        {
-            if (this.command.Parameters.Contains(parameter.ParameterName))
-            {
-                this.command.Parameters.Remove(this.command.Parameters[parameter.ParameterName]);
-            }
-
-            this.command.Parameters.Add(parameter);
-        }
-
-        public void AddOutParameter(SqlClient.SchemaParameter parameter)
-        {
-            var sqlParameter = this.command.Parameters.Contains(parameter.Name) ? this.command.Parameters[parameter.Name] : null;
-            if (sqlParameter == null)
-            {
-                sqlParameter = this.command.CreateParameter();
-                sqlParameter.ParameterName = parameter.Name;
-                sqlParameter.DbType = parameter.DbType;
-                sqlParameter.Direction = ParameterDirection.Output;
-                this.command.Parameters.Add(sqlParameter);
-            }
-
-            this.command.Parameters.Add(sqlParameter);
-        }
-
-        public void SetParameterValue(SqlClient.SchemaParameter parameter, object value)
-        {
-            this.SetParameterValue(parameter.Name, value);
         }
 
         public void Dispose()

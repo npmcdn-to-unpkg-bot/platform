@@ -22,7 +22,6 @@ namespace Allors.Databases.Object.SqlClient
 {
     using System.Collections.Generic;
 
-    using Allors.Databases.Object.SqlClient;
     using Allors.Meta;
 
     public class CompositeRoles
@@ -35,19 +34,6 @@ namespace Allors.Databases.Object.SqlClient
         public CompositeRoles(IEnumerable<ObjectId> compositeRoles)
         {
             this.baseline = new HashSet<ObjectId>(compositeRoles);
-        }
-
-        public HashSet<ObjectId> OriginalObjectIds
-        {
-            get
-            {
-                if (this.original == null)
-                {
-                    return this.baseline;
-                }
-
-                return this.baseline;
-            }
         }
 
         public HashSet<ObjectId> ObjectIds

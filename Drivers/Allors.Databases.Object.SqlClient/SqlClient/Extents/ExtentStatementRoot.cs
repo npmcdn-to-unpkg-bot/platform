@@ -84,7 +84,7 @@ namespace Allors.Databases.Object.SqlClient
             return new ExtentStatementChild(this, extent, role);
         }
 
-        public Command CreateDbCommand(string alias)
+        internal Command CreateDbCommand(string alias)
         {
             if (this.sql.Length == 0)
             {

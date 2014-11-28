@@ -216,11 +216,6 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        protected Database Database
-        {
-            get { return this.SqlClientDatabase; }
-        }
-
         private Database SqlClientDatabase
         {
             get { return this.database; }
