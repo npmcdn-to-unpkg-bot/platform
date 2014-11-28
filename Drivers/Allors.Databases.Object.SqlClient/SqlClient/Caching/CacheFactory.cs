@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ICache.cs" company="Allors bvba">
+// <copyright file="CacheFactory.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -18,30 +18,20 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Adapters.Database.Caching
+namespace Allors.Databases.Object.SqlClient.Caching
 {
-    using System.Collections.Generic;
-
     using Allors.Meta;
 
     /// <summary>
-    /// The Cache holds a CachedObject and/or IObjectType by ObjectId.
+    /// Factory for default cache.
     /// </summary>
-    public interface ICache
+    public sealed class CacheFactory : ICacheFactory
     {
-        ICachedObject GetOrCreateCachedObject(IClass concreteClass, ObjectId objectId, int localCacheId);
+        public IClass[] TransientIObjectTypes { get; set; } 
 
-        IClass GetObjectType(ObjectId objectId);
-
-        void SetObjectType(ObjectId objectId, IClass objectType);
-
-        void OnCommit(IList<ObjectId> accessedObjectIds, IList<ObjectId> changedObjectIds);
-
-        void OnRollback(IList<ObjectId> accessedObjectIds);
-
-        /// <summary>
-        /// Invalidates the Cache.
-        /// </summary>
-        void Invalidate();
+        public ICache CreateCache(IDatabase database)
+        {
+            return new Cache(this.TransientIObjectTypes);
+        }
     }
 }

@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Configuration.cs" company="Allors bvba">
+// <copyright file="ICacheFactory.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -18,10 +18,13 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Adapters.Database
+namespace Allors.Databases.Object.SqlClient.Caching
 {
-    public abstract class Configuration : Adapters.Configuration
+    /// <summary>
+    /// The cache factory is a factory for cache objects.
+    /// </summary>
+    public interface ICacheFactory
     {
-        public IWorkspaceFactory WorkspaceFactory { get; set; }
+        ICache CreateCache(IDatabase database);
     }
 }

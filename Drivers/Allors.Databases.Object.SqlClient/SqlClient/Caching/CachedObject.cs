@@ -18,7 +18,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Adapters.Database.Caching
+namespace Allors.Databases.Object.SqlClient.Caching
 {
     using System.Collections.Generic;
 

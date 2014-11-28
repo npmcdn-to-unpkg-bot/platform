@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="CacheFactory.cs" company="Allors bvba">
+// <copyright file="ICachedObject.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -18,20 +18,14 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Adapters.Database.Caching
+namespace Allors.Databases.Object.SqlClient.Caching
 {
     using Allors.Meta;
 
-    /// <summary>
-    /// Factory for default cache.
-    /// </summary>
-    public sealed class CacheFactory : ICacheFactory
+    public interface ICachedObject
     {
-        public IClass[] TransientIObjectTypes { get; set; } 
+        bool TryGetValue(IRoleType roleType, out object value);
 
-        public ICache CreateCache(IDatabase database)
-        {
-            return new Cache(this.TransientIObjectTypes);
-        }
+        void SetValue(IRoleType roleType, object value);
     }
 }
