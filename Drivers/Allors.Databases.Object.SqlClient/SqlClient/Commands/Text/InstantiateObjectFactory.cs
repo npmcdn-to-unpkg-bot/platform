@@ -41,7 +41,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
             this.Sql += "WHERE " + database.Schema.ObjectId + "=" + database.Schema.ObjectId.Param + "\n";
         }
 
-        public InstantiateObject Create(Adapters.Database.Sql.DatabaseSession session)
+        public InstantiateObject Create(DatabaseSession session)
         {
             return new InstantiateObject(this, session);
         }
@@ -51,7 +51,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
             private readonly InstantiateObjectFactory factory;
             private SqlCommand command;
 
-            public InstantiateObject(InstantiateObjectFactory factory, Adapters.Database.Sql.DatabaseSession session)
+            public InstantiateObject(InstantiateObjectFactory factory, DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;

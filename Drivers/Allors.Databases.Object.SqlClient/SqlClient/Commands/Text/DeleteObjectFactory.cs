@@ -40,7 +40,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
             this.sqlByMetaType = new Dictionary<IObjectType, string>();
         }
 
-        public DeleteObject Create(Adapters.Database.Sql.DatabaseSession session)
+        public DeleteObject Create(DatabaseSession session)
         {
             return new DeleteObject(this, session);
         }
@@ -74,7 +74,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
             private readonly DeleteObjectFactory factory;
             private readonly Dictionary<IObjectType, SqlCommand> commandByIObjectType;
 
-            public DeleteObject(DeleteObjectFactory factory, Adapters.Database.Sql.DatabaseSession session)
+            public DeleteObject(DeleteObjectFactory factory, DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;

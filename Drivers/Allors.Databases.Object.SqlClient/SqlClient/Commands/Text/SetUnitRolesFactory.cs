@@ -40,7 +40,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
             this.Database = database;
         }
 
-        public SetUnitRoles Create(Adapters.Database.Sql.DatabaseSession session)
+        public SetUnitRoles Create(DatabaseSession session)
         {
             return new SetUnitRoles(session);
         }
@@ -51,7 +51,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
 
             private readonly Dictionary<IObjectType, Dictionary<IList<IRoleType>, SqlCommand>> commandByKeyByIObjectType; 
 
-            public SetUnitRoles(Adapters.Database.Sql.DatabaseSession session)
+            public SetUnitRoles(DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.session = (DatabaseSession)session;

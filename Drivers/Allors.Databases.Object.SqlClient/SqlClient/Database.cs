@@ -710,7 +710,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public Adapters.Database.Sql.Schema Schema
+        public Schema Schema
         {
             get
             {

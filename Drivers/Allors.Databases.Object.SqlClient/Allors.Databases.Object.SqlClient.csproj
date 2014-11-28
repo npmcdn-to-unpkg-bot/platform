@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Adapters\CompositePredicateAssertions.cs" />
     <Compile Include="Adapters\CompositeRelation.cs" />
+    <Compile Include="Adapters\Database\Sql\Strategy.cs" />
     <Compile Include="SqlClient\Caching\Cache.cs" />
     <Compile Include="SqlClient\Caching\CachedObject.cs" />
     <Compile Include="SqlClient\Caching\CacheFactory.cs" />
@@ -53,7 +54,6 @@
     <Compile Include="Adapters\Database\Sql\CommandFactories.cs" />
     <Compile Include="Adapters\Database\Sql\CompositeRoles.cs" />
     <Compile Include="Adapters\Database\Sql\Configuration.cs" />
-    <Compile Include="Adapters\Database\Sql\DatabaseSession.cs" />
     <Compile Include="SqlClient\Extents\Extent.cs" />
     <Compile Include="SqlClient\Extents\ExtentAssociations.cs" />
     <Compile Include="SqlClient\Extents\ExtentEnumerator.cs" />
@@ -117,7 +117,6 @@
     <Compile Include="Adapters\Database\Sql\Schema\SchemaValidationErrors.cs" />
     <Compile Include="Adapters\Database\Sql\Schema\SchemaValidationException.cs" />
     <Compile Include="Adapters\Database\Sql\Schema\TableSchemaValidationError.cs" />
-    <Compile Include="Adapters\Database\Sql\Strategy.cs" />
     <Compile Include="Adapters\Database\Sql\SyncBatch.cs" />
     <Compile Include="Adapters\RelationTypeManyXmlWriter.cs" />
     <Compile Include="Adapters\RelationTypeOneXmlWriter.cs" />

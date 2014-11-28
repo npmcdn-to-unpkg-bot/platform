@@ -42,7 +42,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
             this.sqlByIAssociationType = new Dictionary<IAssociationType, string>();
         }
 
-        public GetCompositeAssociations Create(Adapters.Database.Sql.DatabaseSession session)
+        public GetCompositeAssociations Create(DatabaseSession session)
         {
             return new GetCompositeAssociations(this, session);
         }
@@ -74,7 +74,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
             private readonly GetCompositeAssociationsFactory factory;
             private readonly Dictionary<IAssociationType, SqlCommand> commandByIAssociationType;
 
-            public GetCompositeAssociations(GetCompositeAssociationsFactory factory, Adapters.Database.Sql.DatabaseSession session)
+            public GetCompositeAssociations(GetCompositeAssociationsFactory factory, DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;

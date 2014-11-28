@@ -40,7 +40,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             this.Database = database;
         }
 
-        public CreateObjects Create(Adapters.Database.Sql.DatabaseSession session)
+        public CreateObjects Create(DatabaseSession session)
         {
             return new CreateObjects(this, session);
         }
@@ -50,7 +50,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             private readonly CreateObjectsFactory factory;
             private readonly Dictionary<IObjectType, SqlCommand> commandByIObjectType;
 
-            public CreateObjects(CreateObjectsFactory factory, Adapters.Database.Sql.DatabaseSession session)
+            public CreateObjects(CreateObjectsFactory factory, DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;

@@ -62,7 +62,7 @@ namespace Allors.Databases.Object.SqlClient
 
         public virtual ExtentOperation ParentOperationExtent { get; set; }
 
-        public abstract Adapters.Database.Sql.DatabaseSession Session { get; }
+        public abstract DatabaseSession Session { get; }
 
         public virtual ExtentSort Sorter
         {

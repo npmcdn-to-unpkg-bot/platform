@@ -30,26 +30,26 @@ namespace Allors.Databases.Object.SqlClient
 
     public class ExtentFiltered : SqlExtent
     {
-        private readonly Adapters.Database.Sql.DatabaseSession session;
+        private readonly DatabaseSession session;
         private readonly IComposite objectType;
 
         private AndPredicate filter;
 
-        public ExtentFiltered(Adapters.Database.Sql.DatabaseSession session, Strategy strategy, IRoleType roleType)
+        public ExtentFiltered(DatabaseSession session, Strategy strategy, IRoleType roleType)
             : this(session, (IComposite)roleType.ObjectType)
         {
             this.Strategy = strategy;
             this.RoleType = roleType;
         }
 
-        public ExtentFiltered(Adapters.Database.Sql.DatabaseSession session, Strategy strategy, IAssociationType associationType)
+        public ExtentFiltered(DatabaseSession session, Strategy strategy, IAssociationType associationType)
             : this(session, associationType.ObjectType)
         {
             this.Strategy = strategy;
             this.AssociationType = associationType;
         }
 
-        public ExtentFiltered(Adapters.Database.Sql.DatabaseSession session, IComposite objectType)
+        public ExtentFiltered(DatabaseSession session, IComposite objectType)
         {
             this.session = session;
             this.objectType = objectType;
@@ -69,7 +69,7 @@ namespace Allors.Databases.Object.SqlClient
             get { return this.session.SqlDatabase.Schema; }
         }
 
-        public override Adapters.Database.Sql.DatabaseSession Session
+        public override DatabaseSession Session
         {
             get { return this.session; }
         }

@@ -62,7 +62,7 @@ namespace Allors.Databases.Object.SqlClient
             get { return this.extent.Sorter; }
         }
 
-        protected Adapters.Database.Sql.DatabaseSession Session
+        protected DatabaseSession Session
         {
             get { return this.extent.Session; }
         }

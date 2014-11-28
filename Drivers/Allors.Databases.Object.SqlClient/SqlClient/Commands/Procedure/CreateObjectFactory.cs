@@ -42,7 +42,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             this.Database = database;
         }
 
-        public CreateObject Create(Adapters.Database.Sql.DatabaseSession session)
+        public CreateObject Create(DatabaseSession session)
         {
             return new CreateObject(session);
         }
@@ -51,7 +51,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
         {
             private readonly Dictionary<IObjectType, SqlCommand> commandByIObjectType;
 
-            public CreateObject(Adapters.Database.Sql.DatabaseSession session)
+            public CreateObject(DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.commandByIObjectType = new Dictionary<IObjectType, SqlCommand>();

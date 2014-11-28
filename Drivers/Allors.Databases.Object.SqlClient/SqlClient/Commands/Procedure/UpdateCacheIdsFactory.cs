@@ -47,7 +47,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             }
         }
 
-        public UpdateCacheIds Create(Adapters.Database.Sql.DatabaseSession session)
+        public UpdateCacheIds Create(DatabaseSession session)
         {
             return new UpdateCacheIds(this, session);
         }
@@ -57,7 +57,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             private readonly UpdateCacheIdsFactory factory;
             private SqlCommand command;
 
-            public UpdateCacheIds(UpdateCacheIdsFactory factory, Adapters.Database.Sql.DatabaseSession session)
+            public UpdateCacheIds(UpdateCacheIdsFactory factory, DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;

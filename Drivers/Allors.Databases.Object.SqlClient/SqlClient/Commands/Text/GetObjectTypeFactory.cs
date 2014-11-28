@@ -41,7 +41,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
             this.Sql += "WHERE " + database.Schema.ObjectId + "=" + database.Schema.ObjectId.Param + "\n";
         }
 
-        public GetIObjectType Create(Adapters.Database.Sql.DatabaseSession session)
+        public GetIObjectType Create(DatabaseSession session)
         {
             return new GetIObjectType(this, session);
         }
@@ -51,7 +51,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
             private readonly GetIObjectTypeFactory factory;
             private SqlCommand command;
 
-            public GetIObjectType(GetIObjectTypeFactory factory, Adapters.Database.Sql.DatabaseSession session)
+            public GetIObjectType(GetIObjectTypeFactory factory, DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;

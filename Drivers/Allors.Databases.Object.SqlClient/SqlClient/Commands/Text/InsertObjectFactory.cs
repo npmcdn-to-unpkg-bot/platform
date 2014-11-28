@@ -41,7 +41,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
             this.sqlByMetaType = new Dictionary<IObjectType, string>();
         }
 
-        public InsertObject Create(Adapters.Database.Sql.DatabaseSession session)
+        public InsertObject Create(DatabaseSession session)
         {
             return new InsertObject(this, session);
         }
@@ -86,7 +86,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
             private readonly InsertObjectFactory factory;
             private readonly Dictionary<IObjectType, SqlCommand> commandByIObjectType;
 
-            public InsertObject(InsertObjectFactory factory, Adapters.Database.Sql.DatabaseSession session)
+            public InsertObject(InsertObjectFactory factory, DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;

@@ -39,7 +39,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             this.sqlByIRoleType = new Dictionary<IRoleType, string>();
         }
 
-        public ClearCompositeAndCompositesRole Create(Adapters.Database.Sql.DatabaseSession session)
+        public ClearCompositeAndCompositesRole Create(DatabaseSession session)
         {
             return new ClearCompositeAndCompositesRole(this, session);
         }
@@ -78,7 +78,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             private readonly ClearCompositeAndCompositesRoleFactory factory;
             private readonly Dictionary<IRoleType, SqlCommand> commandByIRoleType;
 
-            public ClearCompositeAndCompositesRole(ClearCompositeAndCompositesRoleFactory factory, Adapters.Database.Sql.DatabaseSession session)
+            public ClearCompositeAndCompositesRole(ClearCompositeAndCompositesRoleFactory factory, DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;

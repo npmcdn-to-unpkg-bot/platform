@@ -43,7 +43,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             this.sqlByIRoleTypeByIObjectType = new Dictionary<IObjectType, Dictionary<IRoleType, string>>();
         }
 
-        public SetUnitRole Create(Adapters.Database.Sql.DatabaseSession session)
+        public SetUnitRole Create(DatabaseSession session)
         {
             return new SetUnitRole(this, session);
         }
@@ -71,7 +71,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             private readonly SetUnitRoleFactory factory;
             private readonly Dictionary<IObjectType, Dictionary<IRoleType, SqlCommand>> commandByIRoleTypeByIObjectType;
 
-            public SetUnitRole(SetUnitRoleFactory factory, Adapters.Database.Sql.DatabaseSession session)
+            public SetUnitRole(SetUnitRoleFactory factory, DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;

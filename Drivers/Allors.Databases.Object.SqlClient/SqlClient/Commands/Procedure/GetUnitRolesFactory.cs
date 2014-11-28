@@ -44,7 +44,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             this.sqlByIObjectType = new Dictionary<IObjectType, string>();
         }
 
-        public GetUnitRoles Create(Adapters.Database.Sql.DatabaseSession session)
+        public GetUnitRoles Create(DatabaseSession session)
         {
             return new GetUnitRoles(this, session);
         }
@@ -65,7 +65,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             private readonly GetUnitRolesFactory factory;
             private readonly Dictionary<IObjectType, SqlCommand> commandByIObjectType;
 
-            public GetUnitRoles(GetUnitRolesFactory factory, Adapters.Database.Sql.DatabaseSession session)
+            public GetUnitRoles(GetUnitRolesFactory factory, DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;

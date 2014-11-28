@@ -43,7 +43,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
             this.Sql += "( SELECT " + this.Database.SqlClientSchema.ObjectTableObject + " FROM " + this.Database.SqlClientSchema.ObjectTableParam.Name + " )\n";
         }
 
-        public InstantiateObjects Create(Adapters.Database.Sql.DatabaseSession session)
+        public InstantiateObjects Create(DatabaseSession session)
         {
             return new InstantiateObjects(this, session);
         }
@@ -53,7 +53,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
             private readonly InstantiateObjectsFactory factory;
             private SqlCommand command;
 
-            public InstantiateObjects(InstantiateObjectsFactory factory, Adapters.Database.Sql.DatabaseSession session)
+            public InstantiateObjects(InstantiateObjectsFactory factory, DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;

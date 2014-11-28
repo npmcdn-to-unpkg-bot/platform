@@ -42,7 +42,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             this.sqlByIRoleType = new Dictionary<IRoleType, string>();
         }
 
-        public AddCompositeRole Create(Adapters.Database.Sql.DatabaseSession session)
+        public AddCompositeRole Create(DatabaseSession session)
         {
             return new AddCompositeRole(this, session);
         }
@@ -74,7 +74,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             private readonly AddCompositeRoleFactory factory;
             private readonly Dictionary<IRoleType, SqlCommand> commandByIRoleType;
 
-            public AddCompositeRole(AddCompositeRoleFactory factory, Adapters.Database.Sql.DatabaseSession session)
+            public AddCompositeRole(AddCompositeRoleFactory factory, DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;
