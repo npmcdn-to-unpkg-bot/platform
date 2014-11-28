@@ -23,13 +23,12 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
     using System.Data.SqlClient;
 
     using Allors.Adapters.Database.Sql;
-    using Allors.Adapters.Database.Sql.Commands;
     using Allors.Meta;
 
     using Database = Database;
     using DatabaseSession = DatabaseSession;
 
-    public class InstantiateObjectFactory : IInstantiateObjectFactory
+    public class InstantiateObjectFactory
     {
         public readonly Database Database;
         public readonly string Sql;
@@ -42,12 +41,12 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
             this.Sql += "WHERE " + database.Schema.ObjectId + "=" + database.Schema.ObjectId.Param + "\n";
         }
 
-        public IInstantiateObject Create(Adapters.Database.Sql.DatabaseSession session)
+        public InstantiateObject Create(Adapters.Database.Sql.DatabaseSession session)
         {
             return new InstantiateObject(this, session);
         }
 
-        private class InstantiateObject : DatabaseCommand, IInstantiateObject
+        public class InstantiateObject : DatabaseCommand
         {
             private readonly InstantiateObjectFactory factory;
             private SqlCommand command;

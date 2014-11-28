@@ -26,12 +26,10 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
 
     using Allors.Adapters.Database.Sql;
 
-    using Allors.Adapters.Database.Sql.Commands;
-
     using Database = Database;
     using DatabaseSession = DatabaseSession;
 
-    public class GetCacheIdsFactory : IGetCacheIdsFactory
+    public class GetCacheIdsFactory
     {
         private readonly Database database;
 
@@ -48,12 +46,12 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             }
         }
 
-        public IGetCacheIds Create(Adapters.Database.Sql.DatabaseSession session)
+        public GetCacheIds Create(Adapters.Database.Sql.DatabaseSession session)
         {
             return new GetCacheIds(this, session);
         }
 
-        private class GetCacheIds : DatabaseCommand, IGetCacheIds
+        public class GetCacheIds : DatabaseCommand
         {
             private readonly GetCacheIdsFactory factory;
             private SqlCommand command;

@@ -25,15 +25,13 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
     using System.Data.SqlClient;
 
     using Allors.Adapters.Database.Sql;
-    using Allors.Adapters.Database.Sql.Commands;
 
     using Meta;
 
     using Database = Database;
     using DatabaseSession = DatabaseSession;
-    using Schema = Schema;
 
-    public class GetCompositeAssociationsFactory : IGetCompositeAssociationsFactory
+    public class GetCompositeAssociationsFactory
     {
         public readonly Database Database;
         private readonly Dictionary<IAssociationType, string> sqlByIAssociationType;
@@ -44,7 +42,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
             this.sqlByIAssociationType = new Dictionary<IAssociationType, string>();
         }
 
-        public IGetCompositeAssociations Create(Adapters.Database.Sql.DatabaseSession session)
+        public GetCompositeAssociations Create(Adapters.Database.Sql.DatabaseSession session)
         {
             return new GetCompositeAssociations(this, session);
         }
@@ -71,7 +69,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
             return this.sqlByIAssociationType[associationType];
         }
 
-        public class GetCompositeAssociations : DatabaseCommand, IGetCompositeAssociations
+        public class GetCompositeAssociations : DatabaseCommand
         {
             private readonly GetCompositeAssociationsFactory factory;
             private readonly Dictionary<IAssociationType, SqlCommand> commandByIAssociationType;

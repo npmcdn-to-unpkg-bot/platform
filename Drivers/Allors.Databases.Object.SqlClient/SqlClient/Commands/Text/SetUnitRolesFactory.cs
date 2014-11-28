@@ -22,18 +22,16 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
 {
     using System.Collections.Generic;
     using System.Data.SqlClient;
-    using System.Linq;
     using System.Text;
 
     using Allors.Adapters.Database.Sql;
-    using Allors.Adapters.Database.Sql.Commands;
 
     using Meta;
 
     using Database = Database;
     using DatabaseSession = DatabaseSession;
 
-    public class SetUnitRolesFactory : ISetUnitRolesFactory
+    public class SetUnitRolesFactory
     {
         public readonly Database Database;
 
@@ -42,12 +40,12 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
             this.Database = database;
         }
 
-        public ISetUnitRoles Create(Adapters.Database.Sql.DatabaseSession session)
+        public SetUnitRoles Create(Adapters.Database.Sql.DatabaseSession session)
         {
             return new SetUnitRoles(session);
         }
 
-        private class SetUnitRoles : DatabaseCommand, ISetUnitRoles
+        public class SetUnitRoles : DatabaseCommand
         {
             private readonly DatabaseSession session;
 

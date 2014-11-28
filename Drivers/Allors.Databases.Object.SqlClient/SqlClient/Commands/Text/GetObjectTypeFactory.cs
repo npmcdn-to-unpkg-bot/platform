@@ -23,13 +23,12 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
     using System;
     using System.Data.SqlClient;
 
-    using Allors.Adapters.Database.Sql.Commands;
     using Allors.Meta;
 
     using Database = Database;
     using DatabaseSession = DatabaseSession;
 
-    public class GetIObjectTypeFactory : IGetIObjectTypeFactory
+    public class GetIObjectTypeFactory
     {
         public readonly Database Database;
         public readonly string Sql;
@@ -42,17 +41,17 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
             this.Sql += "WHERE " + database.Schema.ObjectId + "=" + database.Schema.ObjectId.Param + "\n";
         }
 
-        public IGetIObjectType Create(Adapters.Database.Sql.DatabaseSession session)
+        public GetIObjectType Create(Adapters.Database.Sql.DatabaseSession session)
         {
-            return new GetObjectType(this, session);
+            return new GetIObjectType(this, session);
         }
 
-        private class GetObjectType : DatabaseCommand, IGetIObjectType
+        public class GetIObjectType : DatabaseCommand
         {
             private readonly GetIObjectTypeFactory factory;
             private SqlCommand command;
 
-            public GetObjectType(GetIObjectTypeFactory factory, Adapters.Database.Sql.DatabaseSession session)
+            public GetIObjectType(GetIObjectTypeFactory factory, Adapters.Database.Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;

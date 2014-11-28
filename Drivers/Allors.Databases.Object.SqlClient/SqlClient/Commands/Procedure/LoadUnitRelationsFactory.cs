@@ -27,10 +27,9 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
 
     using Allors.Adapters;
     using Allors.Adapters.Database.Sql;
-    using Allors.Adapters.Database.Sql.Commands;
     using Allors.Meta;
 
-    public class LoadUnitRelationsFactory : ILoadUnitRelationsFactory
+    public class LoadUnitRelationsFactory
     {
         public readonly SqlClient.ManagementSession ManagementSession;
         private readonly Dictionary<IObjectType, Dictionary<IRoleType, string>> sqlByIRoleTypeByIObjectType;
@@ -41,7 +40,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
             this.sqlByIRoleTypeByIObjectType = new Dictionary<IObjectType, Dictionary<IRoleType, string>>();
         }
 
-        public ILoadUnitRelations Create()
+        public LoadUnitRelations Create()
         {
             return new LoadUnitRelations(this);
         }
@@ -64,7 +63,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
             return sqlByIRoleType[roleType];
         }
 
-        private class LoadUnitRelations : Commands.Command, ILoadUnitRelations
+        public class LoadUnitRelations : Commands.Command
         {
             private readonly LoadUnitRelationsFactory factory;
             private readonly Dictionary<IObjectType, Dictionary<IRoleType, SqlCommand>> commandByIRoleTypeByIObjectType;

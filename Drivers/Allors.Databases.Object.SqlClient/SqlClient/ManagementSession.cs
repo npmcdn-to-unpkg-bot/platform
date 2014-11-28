@@ -20,7 +20,6 @@ namespace Allors.Databases.Object.SqlClient
     using System.Data.Common;
     using System.Data.SqlClient;
 
-    using Allors.Adapters.Database.Sql.Commands;
     using Allors.Databases.Object.SqlClient.Commands.Procedure;
     using Allors.Databases.Object.SqlClient.Commands.Text;
 
@@ -31,9 +30,9 @@ namespace Allors.Databases.Object.SqlClient
         private SqlTransaction transaction;
         private SqlConnection connection;
        
-        private ILoadObjectsFactory loadObjectsFactory;
-        private ILoadCompositeRelationsFactory loadCompositeRelationsFactory;
-        private ILoadUnitRelationsFactory loadUnitRelationsFactory;
+        private LoadObjectsFactory loadObjectsFactory;
+        private LoadCompositeRelationsFactory loadCompositeRelationsFactory;
+        private LoadUnitRelationsFactory loadUnitRelationsFactory;
 
         public ManagementSession(Database database)
         {
@@ -45,7 +44,7 @@ namespace Allors.Databases.Object.SqlClient
             this.Dispose();
         }
 
-        public override ILoadObjectsFactory LoadObjectsFactory
+        public override LoadObjectsFactory LoadObjectsFactory
         {
             get
             {
@@ -53,7 +52,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public override ILoadCompositeRelationsFactory LoadCompositeRelationsFactory
+        public override LoadCompositeRelationsFactory LoadCompositeRelationsFactory
         {
             get
             {
@@ -61,7 +60,7 @@ namespace Allors.Databases.Object.SqlClient
             }
         }
 
-        public override ILoadUnitRelationsFactory LoadUnitRelationsFactory
+        public override LoadUnitRelationsFactory LoadUnitRelationsFactory
         {
             get
             {

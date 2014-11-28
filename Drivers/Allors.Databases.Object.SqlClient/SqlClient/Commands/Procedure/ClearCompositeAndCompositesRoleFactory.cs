@@ -23,17 +23,12 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
     using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
-
-    using Allors.Adapters.Database.Sql;
-    using Allors.Adapters.Database.Sql.Commands;
-
     using Meta;
 
     using Database = Database;
     using DatabaseSession = DatabaseSession;
-    using Schema = Schema;
 
-    public class ClearCompositeAndCompositesRoleFactory : IClearCompositeAndCompositesRoleFactory
+    public class ClearCompositeAndCompositesRoleFactory
     {
         public readonly Database Database;
         private readonly Dictionary<IRoleType, string> sqlByIRoleType;
@@ -44,9 +39,9 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             this.sqlByIRoleType = new Dictionary<IRoleType, string>();
         }
 
-        public IClearCompositeAndCompositesRole Create(Adapters.Database.Sql.DatabaseSession session)
+        public ClearCompositeAndCompositesRole Create(Adapters.Database.Sql.DatabaseSession session)
         {
-            return new ClearCompositeAndCompoisitesAndCompositesAndCompoisitesRole(this, session);
+            return new ClearCompositeAndCompositesRole(this, session);
         }
 
         public string GetSql(IRoleType roleType)
@@ -78,12 +73,12 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             return this.sqlByIRoleType[roleType];
         }
 
-        private class ClearCompositeAndCompoisitesAndCompositesAndCompoisitesRole : DatabaseCommand, IClearCompositeAndCompositesRole
+        public class ClearCompositeAndCompositesRole : DatabaseCommand
         {
             private readonly ClearCompositeAndCompositesRoleFactory factory;
             private readonly Dictionary<IRoleType, SqlCommand> commandByIRoleType;
 
-            public ClearCompositeAndCompoisitesAndCompositesAndCompoisitesRole(ClearCompositeAndCompositesRoleFactory factory, Adapters.Database.Sql.DatabaseSession session)
+            public ClearCompositeAndCompositesRole(ClearCompositeAndCompositesRoleFactory factory, Adapters.Database.Sql.DatabaseSession session)
                 : base((DatabaseSession)session)
             {
                 this.factory = factory;

@@ -28,14 +28,12 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
     using System.Data.SqlClient;
 
     using Allors.Adapters.Database.Sql;
-    using Allors.Adapters.Database.Sql.Commands;
     using Allors.Meta;
 
     using Database = Database;
     using DatabaseSession = DatabaseSession;
-    using Schema = Schema;
 
-    internal class CreateObjectFactory : ICreateObjectFactory
+    public class CreateObjectFactory
     {
         internal readonly Database Database;
 
@@ -44,12 +42,12 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             this.Database = database;
         }
 
-        public ICreateObject Create(Adapters.Database.Sql.DatabaseSession session)
+        public CreateObject Create(Adapters.Database.Sql.DatabaseSession session)
         {
             return new CreateObject(session);
         }
 
-        private class CreateObject : DatabaseCommand, ICreateObject
+        public class CreateObject : DatabaseCommand
         {
             private readonly Dictionary<IObjectType, SqlCommand> commandByIObjectType;
 

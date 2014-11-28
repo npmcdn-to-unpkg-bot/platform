@@ -26,7 +26,6 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
     using System.Data.SqlClient;
 
     using Allors.Adapters.Database.Sql;
-    using Allors.Adapters.Database.Sql.Commands;
 
     using Meta;
 
@@ -34,7 +33,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
     using DatabaseSession = DatabaseSession;
     using Schema = Schema;
 
-    public class GetCompositeRolesFactory : IGetCompositeRolesFactory
+    public class GetCompositeRolesFactory
     {
         public readonly Database Database;
         private readonly Dictionary<IRoleType, string> sqlByIRoleType;
@@ -45,7 +44,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
             this.sqlByIRoleType = new Dictionary<IRoleType, string>();
         }
 
-        public IGetCompositeRoles Create(Adapters.Database.Sql.DatabaseSession session)
+        public GetCompositeRoles Create(Adapters.Database.Sql.DatabaseSession session)
         {
             return new GetCompositeRoles(this, session);
         }
@@ -72,7 +71,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
             return this.sqlByIRoleType[roleType];
         }
 
-        private class GetCompositeRoles : DatabaseCommand, IGetCompositeRoles
+        public class GetCompositeRoles : DatabaseCommand
         {
             private readonly GetCompositeRolesFactory factory;
             private readonly Dictionary<IRoleType, SqlCommand> commandByIRoleType;

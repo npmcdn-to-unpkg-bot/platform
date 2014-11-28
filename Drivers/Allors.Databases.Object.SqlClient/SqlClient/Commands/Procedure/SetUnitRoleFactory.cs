@@ -27,15 +27,12 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
 
     using Allors.Adapters;
     using Allors.Adapters.Database.Sql;
-    using Allors.Adapters.Database.Sql.Commands;
-
     using Meta;
 
     using Database = Database;
     using DatabaseSession = DatabaseSession;
-    using Schema = Schema;
 
-    public class SetUnitRoleFactory : ISetUnitRoleFactory
+    public class SetUnitRoleFactory
     {
         public readonly Database Database;
         private readonly Dictionary<IObjectType, Dictionary<IRoleType, string>> sqlByIRoleTypeByIObjectType;
@@ -46,7 +43,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             this.sqlByIRoleTypeByIObjectType = new Dictionary<IObjectType, Dictionary<IRoleType, string>>();
         }
 
-        public ISetUnitRole Create(Adapters.Database.Sql.DatabaseSession session)
+        public SetUnitRole Create(Adapters.Database.Sql.DatabaseSession session)
         {
             return new SetUnitRole(this, session);
         }
@@ -69,7 +66,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             return sqlByIRoleType[roleType];
         }
 
-        private class SetUnitRole : DatabaseCommand, ISetUnitRole
+        public class SetUnitRole : DatabaseCommand
         {
             private readonly SetUnitRoleFactory factory;
             private readonly Dictionary<IObjectType, Dictionary<IRoleType, SqlCommand>> commandByIRoleTypeByIObjectType;

@@ -26,13 +26,11 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
 
     using Allors.Adapters.Database.Sql;
 
-    using Allors.Adapters.Database.Sql.Commands;
-
     using Database = Database;
     using DatabaseSession = DatabaseSession;
     using Schema = Schema;
 
-    public class UpdateCacheIdsFactory : IUpdateCacheIdsFactory
+    public class UpdateCacheIdsFactory
     {
         private readonly Database database;
 
@@ -49,12 +47,12 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             }
         }
 
-        public IUpdateCacheIds Create(Adapters.Database.Sql.DatabaseSession session)
+        public UpdateCacheIds Create(Adapters.Database.Sql.DatabaseSession session)
         {
             return new UpdateCacheIds(this, session);
         }
 
-        private class UpdateCacheIds : DatabaseCommand, IUpdateCacheIds
+        public class UpdateCacheIds : DatabaseCommand
         {
             private readonly UpdateCacheIdsFactory factory;
             private SqlCommand command;

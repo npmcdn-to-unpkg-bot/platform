@@ -52,31 +52,6 @@
     <Compile Include="Adapters\Database\Sql\ChangeSet.cs" />
     <Compile Include="Adapters\Database\Sql\Command.cs" />
     <Compile Include="Adapters\Database\Sql\CommandFactories.cs" />
-    <Compile Include="Adapters\Database\Sql\Commands\IAddCompositeRole.cs" />
-    <Compile Include="Adapters\Database\Sql\Commands\IAddToCompositeRoles.cs" />
-    <Compile Include="Adapters\Database\Sql\Commands\IClearCompositeAndCompositesRole.cs" />
-    <Compile Include="Adapters\Database\Sql\Commands\ICreateObject.cs" />
-    <Compile Include="Adapters\Database\Sql\Commands\ICreateObjects.cs" />
-    <Compile Include="Adapters\Database\Sql\Commands\IDeleteObject.cs" />
-    <Compile Include="Adapters\Database\Sql\Commands\IGetCacheIds.cs" />
-    <Compile Include="Adapters\Database\Sql\Commands\IGetCompositeAssociation.cs" />
-    <Compile Include="Adapters\Database\Sql\Commands\IGetCompositeAssociations.cs" />
-    <Compile Include="Adapters\Database\Sql\Commands\IGetCompositeRole.cs" />
-    <Compile Include="Adapters\Database\Sql\Commands\IGetCompositeRoles.cs" />
-    <Compile Include="Adapters\Database\Sql\Commands\IGetObjectType.cs" />
-    <Compile Include="Adapters\Database\Sql\Commands\IGetUnitRoles.cs" />
-    <Compile Include="Adapters\Database\Sql\Commands\IInsertObject.cs" />
-    <Compile Include="Adapters\Database\Sql\Commands\IInstantiateObject.cs" />
-    <Compile Include="Adapters\Database\Sql\Commands\IInstantiateObjects.cs" />
-    <Compile Include="Adapters\Database\Sql\Commands\ILoadCompositeRelations.cs" />
-    <Compile Include="Adapters\Database\Sql\Commands\ILoadObjects.cs" />
-    <Compile Include="Adapters\Database\Sql\Commands\ILoadUnitRelations.cs" />
-    <Compile Include="Adapters\Database\Sql\Commands\IRemoveCompositeRole.cs" />
-    <Compile Include="Adapters\Database\Sql\Commands\IRemoveFromCompositeRoles.cs" />
-    <Compile Include="Adapters\Database\Sql\Commands\ISetCompositeRole.cs" />
-    <Compile Include="Adapters\Database\Sql\Commands\ISetUnitRole.cs" />
-    <Compile Include="Adapters\Database\Sql\Commands\ISetUnitRoles.cs" />
-    <Compile Include="Adapters\Database\Sql\Commands\IUpdateCacheIds.cs" />
     <Compile Include="Adapters\Database\Sql\CompositeRoles.cs" />
     <Compile Include="Adapters\Database\Sql\Configuration.cs" />
     <Compile Include="Adapters\Database\Sql\Database.cs" />
@@ -145,11 +120,9 @@
     <Compile Include="Adapters\Database\Sql\Schema\SchemaValidationErrors.cs" />
     <Compile Include="Adapters\Database\Sql\Schema\SchemaValidationException.cs" />
     <Compile Include="Adapters\Database\Sql\Schema\TableSchemaValidationError.cs" />
-    <Compile Include="Adapters\Database\Sql\SessionCommands.cs" />
     <Compile Include="Adapters\Database\Sql\Strategy.cs" />
     <Compile Include="Adapters\Database\Sql\SyncBatch.cs" />
     <Compile Include="Adapters\EmptySet.cs" />
-    <Compile Include="Adapters\Population.cs" />
     <Compile Include="Adapters\RelationTypeManyXmlWriter.cs" />
     <Compile Include="Adapters\RelationTypeOneXmlWriter.cs" />
     <Compile Include="Adapters\Serialization.cs" />
@@ -220,6 +193,7 @@
     <None Include="Adapters\Database\Sql\Overview.cd" />
     <None Include="Adapters\Diagrams\Schema.cd" />
     <None Include="Adapters\Diagrams\Strategy.cd" />
+    <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Framework\Framework\Allors.csproj">

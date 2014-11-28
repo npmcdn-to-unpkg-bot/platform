@@ -27,14 +27,13 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
     using System.Data.SqlClient;
 
     using Allors.Adapters.Database.Sql;
-    using Allors.Adapters.Database.Sql.Commands;
 
     using Meta;
 
     using Database = Database;
     using DatabaseSession = DatabaseSession;
 
-    public class GetUnitRolesFactory : IGetUnitRolesFactory
+    public class GetUnitRolesFactory
     {
         public readonly Database Database;
         private readonly Dictionary<IObjectType, string> sqlByIObjectType;
@@ -45,7 +44,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             this.sqlByIObjectType = new Dictionary<IObjectType, string>();
         }
 
-        public IGetUnitRoles Create(Adapters.Database.Sql.DatabaseSession session)
+        public GetUnitRoles Create(Adapters.Database.Sql.DatabaseSession session)
         {
             return new GetUnitRoles(this, session);
         }
@@ -61,7 +60,7 @@ namespace Allors.Databases.Object.SqlClient.Commands.Procedure
             return this.sqlByIObjectType[objectType];
         }
 
-        public class GetUnitRoles : DatabaseCommand, IGetUnitRoles
+        public class GetUnitRoles : DatabaseCommand
         {
             private readonly GetUnitRolesFactory factory;
             private readonly Dictionary<IObjectType, SqlCommand> commandByIObjectType;

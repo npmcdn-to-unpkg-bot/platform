@@ -24,13 +24,12 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
     using System.Data.SqlClient;
 
     using Allors.Adapters.Database.Sql;
-    using Allors.Adapters.Database.Sql.Commands;
     using Allors.Meta;
 
     using Database = Database;
     using DatabaseSession = DatabaseSession;
 
-    internal class InstantiateObjectsFactory : IInstantiateObjectsFactory
+    public class InstantiateObjectsFactory
     {
         internal readonly Database Database;
         internal readonly string Sql;
@@ -44,12 +43,12 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
             this.Sql += "( SELECT " + this.Database.SqlClientSchema.ObjectTableObject + " FROM " + this.Database.SqlClientSchema.ObjectTableParam.Name + " )\n";
         }
 
-        public IInstantiateObjects Create(Adapters.Database.Sql.DatabaseSession session)
+        public InstantiateObjects Create(Adapters.Database.Sql.DatabaseSession session)
         {
             return new InstantiateObjects(this, session);
         }
 
-        private class InstantiateObjects : DatabaseCommand, IInstantiateObjects
+        public class InstantiateObjects : DatabaseCommand
         {
             private readonly InstantiateObjectsFactory factory;
             private SqlCommand command;
