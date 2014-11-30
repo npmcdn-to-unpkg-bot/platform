@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="f16652b0-b712-43d7-8d4e-34a22487514d">
+  <associationType id="c92466b5-55ba-496a-8880-2821f32f8f8e">
+    <objectType idref="313b97a5-328c-4600-9dd2-b5bc146fb13b" />
+  </associationType>
+  <roleType id="3a12d798-40c3-40e0-ba9f-9d01b1e39e89">
+    <objectType idref="a0309c3b-6f80-4777-983e-6e69800df5be" />
+    <pluralName>Guests</pluralName>
+    <singularName>Guest</singularName>
+  </roleType>
+</relationType>

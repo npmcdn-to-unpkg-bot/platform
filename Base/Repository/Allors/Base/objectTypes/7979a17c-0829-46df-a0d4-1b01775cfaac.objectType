@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="7979a17c-0829-46df-a0d4-1b01775cfaac">
+  <isInterface>true</isInterface>
+  <pluralName>Localiseds</pluralName>
+  <singularName>Localised</singularName>
+</objectType>

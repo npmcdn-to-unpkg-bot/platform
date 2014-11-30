@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="64aed238-7009-4157-8395-7eb58ebf7889">
+  <associationType id="2f79ecfe-5fd4-44d1-9c39-457bb3dc6815">
+    <objectType idref="313b97a5-328c-4600-9dd2-b5bc146fb13b" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="d861c8f8-7362-4805-9941-661a99ab11ac">
+    <objectType idref="b45705e3-0dc6-4296-824a-76bb6af223d3" />
+    <pluralName>DefaultPrintQueues</pluralName>
+    <singularName>DefaultPrintQueue</singularName>
+  </roleType>
+</relationType>

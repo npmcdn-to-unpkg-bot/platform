@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="d72f473f-8aaf-4abd-be01-f0a683c72721">
+  <associationType id="c1876168-3e12-48e8-8ca6-6c511d8b6a8c">
+    <objectType idref="56794636-cfad-47df-8567-84c8ee993ade" />
+  </associationType>
+  <roleType id="e4911a7d-140c-4e31-8e99-69668bf2cc18">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>WordBoundaryTexts</pluralName>
+    <singularName>WordBoundaryText</singularName>
+    <size>-1</size>
+  </roleType>
+</relationType>

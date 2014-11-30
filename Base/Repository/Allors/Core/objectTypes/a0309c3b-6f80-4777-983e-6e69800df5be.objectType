@@ -1,0 +1,6 @@
+<objectType allors="1.0" id="a0309c3b-6f80-4777-983e-6e69800df5be">
+  <isInterface>true</isInterface>
+  <namespace idref="83adbe96-b65f-45a0-9b74-f6a736d337dc" />
+  <pluralName>Users</pluralName>
+  <singularName>User</singularName>
+</objectType>

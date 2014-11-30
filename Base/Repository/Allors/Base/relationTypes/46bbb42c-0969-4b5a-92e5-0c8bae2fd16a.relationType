@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="46bbb42c-0969-4b5a-92e5-0c8bae2fd16a">
+  <associationType id="9c1b3242-aadf-4f6f-a24e-73a21a55b8a5">
+    <objectType idref="56794636-cfad-47df-8567-84c8ee993ade" />
+  </associationType>
+  <roleType id="395ffaca-97cd-4af3-a36e-3935bd775a8a">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>CharacterBoundaryTexts</pluralName>
+    <singularName>CharacterBoundaryText</singularName>
+    <size>-1</size>
+  </roleType>
+</relationType>

@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="f091b264-e6b1-4a57-bbfb-8225cbe8190c">
+  <associationType id="6650af3b-f537-4c2f-afff-6773552315cd">
+    <objectType idref="4a0eca4b-281f-488d-9c7e-497de882c044" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="5e9fcced-727d-42a2-95e6-a0f9d8be4ec7">
+    <isMany>true</isMany>
+    <objectType idref="020f5d4d-4a59-4d7b-865a-d72fc70e4d97" />
+    <pluralName>LocalisedNames</pluralName>
+    <singularName>LocalisedName</singularName>
+  </roleType>
+</relationType>

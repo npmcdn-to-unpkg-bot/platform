@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="fdd52472-e863-4e91-bb01-1dada2acc8f6">
+  <isInterface>true</isInterface>
+  <pluralName>Commentables</pluralName>
+  <singularName>Commentable</singularName>
+</objectType>

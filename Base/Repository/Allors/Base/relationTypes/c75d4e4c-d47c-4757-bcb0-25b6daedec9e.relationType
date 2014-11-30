@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="c75d4e4c-d47c-4757-bcb0-25b6daedec9e">
+  <associationType id="480b7df7-b463-4038-a48d-35b8a8af899e">
+    <objectType idref="61207a42-3199-4249-baa4-9dd11dc0f5b1" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="8d530dcd-2c3b-4d1d-8acc-9963338968ed">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>PrintContents</pluralName>
+    <singularName>PrintContent</singularName>
+    <size>-1</size>
+  </roleType>
+</relationType>

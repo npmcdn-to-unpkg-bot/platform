@@ -1,0 +1,6 @@
+<objectType allors="1.0" id="eb0ff756-3e3d-4cf9-8935-8802a73d2df2">
+  <isInterface>true</isInterface>
+  <namespace idref="83adbe96-b65f-45a0-9b74-f6a736d337dc" />
+  <pluralName>AccessControlledObjects</pluralName>
+  <singularName>AccessControlledObject</singularName>
+</objectType>

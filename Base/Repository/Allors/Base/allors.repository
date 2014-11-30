@@ -1,0 +1,5 @@
+<repository allors="1.0">
+  <super id="932b107d-b5e2-4f06-bc7f-92d8e798d6c3">
+    <location>..\..\Allors\Core</location>
+  </super>
+</repository>

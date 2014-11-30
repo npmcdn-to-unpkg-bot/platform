@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="59338f0b-40e7-49e8-ba1a-3ecebf96aebe">
+  <associationType id="fca0f3f6-bdd6-4405-93b3-35dd769bff0e">
+    <isMany>true</isMany>
+    <objectType idref="f991813f-3146-4431-96d0-554aa2186887" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="c338f087-559c-4239-9c6a-1f691e58ed16">
+    <isMany>true</isMany>
+    <objectType idref="7fded183-3337-4196-afb0-3266377944bc" />
+    <pluralName>DeniedPermissions</pluralName>
+    <singularName>DeniedPermission</singularName>
+  </roleType>
+</relationType>

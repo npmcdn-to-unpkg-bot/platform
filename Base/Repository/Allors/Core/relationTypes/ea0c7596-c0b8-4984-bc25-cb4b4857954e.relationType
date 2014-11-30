@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="ea0c7596-c0b8-4984-bc25-cb4b4857954e">
+  <associationType id="8537ddb5-8ce2-4f35-a16f-207f2519ba9c">
+    <objectType idref="a0309c3b-6f80-4777-983e-6e69800df5be" />
+  </associationType>
+  <roleType id="75ee3ec2-02bb-4666-a6f0-bac84c844dfa">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>UserPasswordHashes</pluralName>
+    <singularName>UserPasswordHash</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

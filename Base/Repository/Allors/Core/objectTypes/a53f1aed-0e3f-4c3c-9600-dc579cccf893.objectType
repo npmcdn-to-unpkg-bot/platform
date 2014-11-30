@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="a53f1aed-0e3f-4c3c-9600-dc579cccf893">
+  <namespace idref="83adbe96-b65f-45a0-9b74-f6a736d337dc" />
+  <pluralName>SecurityTokens</pluralName>
+  <singularName>SecurityToken</singularName>
+</objectType>

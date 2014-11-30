@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="ad7277a8-eda4-4128-a990-b47fe43d120a">
+  <namespace idref="83adbe96-b65f-45a0-9b74-f6a736d337dc" />
+  <pluralName>Logins</pluralName>
+  <singularName>Login</singularName>
+</objectType>

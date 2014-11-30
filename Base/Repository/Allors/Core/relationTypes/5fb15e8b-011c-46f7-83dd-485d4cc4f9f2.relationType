@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="5fb15e8b-011c-46f7-83dd-485d4cc4f9f2">
+  <associationType id="cdc21c1c-918e-4622-a01f-a3de06a8c802">
+    <objectType idref="a69cad9c-c2f1-463f-9af1-873ce65aeea6" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <isIndexed>true</isIndexed>
+  <roleType id="2acda9b3-89e8-475f-9d70-b9cde334409c">
+    <objectType idref="a53f1aed-0e3f-4c3c-9600-dc579cccf893" />
+    <pluralName>OwnerSecurityTokens</pluralName>
+    <singularName>OwnerSecurityToken</singularName>
+  </roleType>
+</relationType>

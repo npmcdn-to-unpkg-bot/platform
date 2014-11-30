@@ -1,0 +1,6 @@
+<objectType allors="1.0" id="ab2179ad-9eac-4b61-8d84-81cd777c4926">
+  <isInterface>true</isInterface>
+  <namespace idref="fcf317ee-ab3c-4aeb-add3-154be33b1241" />
+  <pluralName>Transitionals</pluralName>
+  <singularName>Transitional</singularName>
+</objectType>

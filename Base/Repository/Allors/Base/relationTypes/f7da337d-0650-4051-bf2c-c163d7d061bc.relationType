@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="f7da337d-0650-4051-bf2c-c163d7d061bc">
+  <associationType id="225d6642-89ec-4e3a-965c-36412a7f4ce8">
+    <objectType idref="490d150f-3322-4616-a75c-71e4d94b3e03" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="fe8190d7-d69b-425a-ade0-b2b1aed71801">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>LowerCaseTexts</pluralName>
+    <singularName>LowerCaseText</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

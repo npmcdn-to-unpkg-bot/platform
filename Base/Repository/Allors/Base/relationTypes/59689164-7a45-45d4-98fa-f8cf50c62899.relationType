@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="59689164-7a45-45d4-98fa-f8cf50c62899">
+  <associationType id="386c7cfc-4bec-4564-a7c4-b2c1bccf6ebe">
+    <objectType idref="caa2a2de-9454-4812-a69f-9d3728706345" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="ce4c0fbb-5bdb-4c7f-a70a-b930c1020624">
+    <objectType idref="da5b86a3-4f33-4c0d-965d-f4fbc1179374" />
+    <pluralName>Responsives</pluralName>
+    <singularName>Responsive</singularName>
+  </roleType>
+</relationType>

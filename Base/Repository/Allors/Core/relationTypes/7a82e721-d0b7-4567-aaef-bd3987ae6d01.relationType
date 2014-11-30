@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="7a82e721-d0b7-4567-aaef-bd3987ae6d01">
+  <associationType id="2f2ef41d-8310-45fd-8ab5-e5d067862e3d">
+    <objectType idref="ad7277a8-eda4-4128-a990-b47fe43d120a" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="c8e3851a-bc57-4acb-934a-4adfc37b1da7">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>Providers</pluralName>
+    <singularName>Provider</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

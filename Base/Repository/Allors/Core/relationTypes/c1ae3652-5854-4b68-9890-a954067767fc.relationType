@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="c1ae3652-5854-4b68-9890-a954067767fc">
+  <associationType id="111104a2-1181-4958-92f6-6528cef79af7">
+    <objectType idref="a0309c3b-6f80-4777-983e-6e69800df5be" />
+  </associationType>
+  <roleType id="58e35754-91a9-4956-aa66-ca48d05c7042">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>UserEmails</pluralName>
+    <singularName>UserEmail</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

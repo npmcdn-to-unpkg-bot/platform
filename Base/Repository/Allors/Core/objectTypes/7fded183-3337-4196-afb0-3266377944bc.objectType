@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="7fded183-3337-4196-afb0-3266377944bc">
+  <namespace idref="83adbe96-b65f-45a0-9b74-f6a736d337dc" />
+  <pluralName>Permissions</pluralName>
+  <singularName>Permission</singularName>
+</objectType>

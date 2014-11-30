@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="0756d508-44b7-405e-bf92-bc09e5702e63">
+  <associationType id="76e6547b-8dcf-4e69-ae2d-c8f8c33989e9">
+    <objectType idref="6c20422e-cb3e-4402-bb40-dacaf584405e" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="85170945-b020-485b-bb6f-c4122992ebfd">
+    <objectType idref="c28e515b-cae8-4d6b-95bf-062aec8042fc" />
+    <pluralName>Values</pluralName>
+    <singularName>Value</singularName>
+    <size>-1</size>
+  </roleType>
+</relationType>

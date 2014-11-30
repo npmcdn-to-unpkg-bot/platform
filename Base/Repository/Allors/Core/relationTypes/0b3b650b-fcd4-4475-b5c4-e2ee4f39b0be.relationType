@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="0b3b650b-fcd4-4475-b5c4-e2ee4f39b0be">
+  <associationType id="c89a8e3f-6f76-41ac-b4dc-839f9080d917">
+    <objectType idref="a0309c3b-6f80-4777-983e-6e69800df5be" />
+  </associationType>
+  <roleType id="1b1409b8-add7-494c-a895-002fc969ac7b">
+    <objectType idref="b5ee6cea-4e2b-498e-a5dd-24671d896477" />
+    <pluralName>UserEmailConfirmeds</pluralName>
+    <singularName>UserEmailConfirmed</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="a0c28d27-7be1-488d-85bf-2f84d4c61a55">
+  <associationType id="5c229928-80b4-47f6-a182-1b2c34ed5d7b">
+    <isMany>true</isMany>
+    <objectType idref="56794636-cfad-47df-8567-84c8ee993ade" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="594d3231-5d79-4c97-908f-558d0fa346c3">
+    <isMany>true</isMany>
+    <objectType idref="490d150f-3322-4616-a75c-71e4d94b3e03" />
+    <pluralName>SearchFragments</pluralName>
+    <singularName>SearchFragment</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="366410a7-7d51-4d7c-82fd-3444bdc0b3f7">
+  <associationType id="9d45e17e-962b-4f9b-a029-c1c1562e5260">
+    <isMany>true</isMany>
+    <objectType idref="caa2a2de-9454-4812-a69f-9d3728706345" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="9ed94fa8-e01e-4f63-9932-d56134616474">
+    <objectType idref="da5b86a3-4f33-4c0d-965d-f4fbc1179374" />
+    <pluralName>Originals</pluralName>
+    <singularName>Original</singularName>
+  </roleType>
+</relationType>

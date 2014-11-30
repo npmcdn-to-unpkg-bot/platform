@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="af6fe5f4-e5bc-4099-bcd1-97528af6505d">
+  <namespace idref="83adbe96-b65f-45a0-9b74-f6a736d337dc" />
+  <pluralName>Roles</pluralName>
+  <singularName>Role</singularName>
+</objectType>

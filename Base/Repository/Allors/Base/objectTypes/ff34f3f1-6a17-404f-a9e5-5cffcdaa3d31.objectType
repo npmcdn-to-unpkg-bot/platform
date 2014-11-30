@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="ff34f3f1-6a17-404f-a9e5-5cffcdaa3d31">
+  <isInterface>true</isInterface>
+  <pluralName>Searchables</pluralName>
+  <singularName>Searchable</singularName>
+</objectType>

@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="80adbbfd-952e-46f3-a744-78e0ce42bc80">
+  <isInterface>true</isInterface>
+  <pluralName>Periods</pluralName>
+  <singularName>Period</singularName>
+</objectType>

@@ -1,0 +1,5 @@
+<template allors="1.0">
+  <name>repository</name>
+  <output>c:\github\temp</output>
+  <source>file:///C:/allors/templates/Allors.Templates/allors.csharp.repository.stg</source>
+</template>

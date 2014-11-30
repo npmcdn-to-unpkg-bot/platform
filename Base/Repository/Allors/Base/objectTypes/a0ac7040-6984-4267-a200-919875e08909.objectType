@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="a0ac7040-6984-4267-a200-919875e08909">
+  <isInterface>true</isInterface>
+  <pluralName>SearchResults</pluralName>
+  <singularName>SearchResult</singularName>
+</objectType>

@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="f579494b-e550-4be6-9d93-84618ac78704">
+  <associationType id="33f17e75-99cc-417e-99f3-c29080f08f0a">
+    <isMany>true</isMany>
+    <objectType idref="313b97a5-328c-4600-9dd2-b5bc146fb13b" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="ca9e3469-583c-4950-ba2c-1bc3a0fc3e96">
+    <objectType idref="a53f1aed-0e3f-4c3c-9600-dc579cccf893" />
+    <pluralName>DefaultSecurityTokens</pluralName>
+    <singularName>DefaultSecurityToken</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="49481792-06f0-49a1-b32f-28d265815a24">
+  <associationType id="7ca17a9e-0b68-445f-8080-84b08ca0eb2d">
+    <isMany>true</isMany>
+    <objectType idref="da5b86a3-4f33-4c0d-965d-f4fbc1179374" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <isIndexed>true</isIndexed>
+  <roleType id="f1008c56-b375-4aa8-ac7e-c1f7ef9b2080">
+    <objectType idref="aa7d61f8-6618-47a0-9cf2-e75dd81dbd5b" />
+    <pluralName>MediaTypes</pluralName>
+    <singularName>MediaType</singularName>
+  </roleType>
+</relationType>
