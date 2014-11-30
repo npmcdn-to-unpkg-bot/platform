@@ -24,9 +24,7 @@ namespace Allors.Meta
 
     public static partial class Repository
     {
-        public static readonly MetaPopulation MetaPopulation;
-
-        public static Domain Test(MetaPopulation meta)
+        public static void TestPostInit(MetaPopulation meta)
         {
             // Imports
             // Core
@@ -457,8 +455,6 @@ namespace Allors.Meta
             // MethodTypes
             // Organisation
             new MethodTypeBuilder(domain, new Guid("{73F68023-C051-4CAA-B2EF-8DA67E229FEE}")).WithObjectType(organisation).WithName("JustDoIt").Build();
-
-            return domain;
        }
     }
 }

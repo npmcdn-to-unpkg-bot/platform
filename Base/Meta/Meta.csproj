@@ -164,6 +164,7 @@
     <Compile Include="..\..\Core\Meta\Core\ValidationLog.cs">
       <Link>Core\ValidationLog.cs</Link>
     </Compile>
+    <Compile Include="Repository.g.cs" />
     <Compile Include="Test\Meta\Repository.cs" />
     <Compile Include="Test\Meta\Repository.v.cs" />
     <Compile Include="Base\Meta\Path.cs" />

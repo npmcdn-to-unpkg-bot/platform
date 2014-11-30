@@ -22,13 +22,17 @@ namespace Allors.Meta
 {
     public static partial class Repository
     {
+        public static readonly MetaPopulation MetaPopulation;
+
         static Repository()
         {
             var meta = new MetaPopulation();
 
-            Core(meta);
-            Base(meta);
-            Test(meta);
+            Init(meta);
+
+            CorePostInit(meta);
+            BasePostInit(meta);
+            TestPostInit(meta);
 
             MetaPopulation = meta;
         }
