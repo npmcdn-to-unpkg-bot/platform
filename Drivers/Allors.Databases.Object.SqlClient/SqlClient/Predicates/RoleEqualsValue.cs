@@ -48,7 +48,7 @@ namespace Allors.Databases.Object.SqlClient
             }
             else
             {
-                this.obj = roleType.ObjectType.IsUnit ? extent.Session.SqlDatabase.Internalize(obj, roleType) : obj;
+                this.obj = roleType.ObjectType.IsUnit ? roleType.Normalize(obj) : obj;
             }
         }
 

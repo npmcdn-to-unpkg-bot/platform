@@ -139,7 +139,6 @@
     <Compile Include="SqlClient\Commands\Text\InstantiateObjectsFactory.cs" />
     <Compile Include="SqlClient\Commands\Text\SetUnitRolesFactory.cs" />
     <Compile Include="SqlClient\Configuration.cs" />
-    <Compile Include="SqlClient\Constants.cs" />
     <Compile Include="SqlClient\Database.cs" />
     <Compile Include="SqlClient\DatabaseSession.cs" />
     <Compile Include="SqlClient\Flush.cs" />

@@ -29,12 +29,12 @@ namespace Allors.Databases.Object.SqlClient
             this.IsolationLevel = IsolationLevel.Snapshot;
         }
 
-        internal ICacheFactory CacheFactory { get; set; }
+        public ICacheFactory CacheFactory { get; set; }
 
         public string ConnectionString { get; set; }
 
-        internal int CommandTimeout { get; set; }
+        public int CommandTimeout { get; set; }
 
-        internal IsolationLevel IsolationLevel { get; set; }
+        public IsolationLevel IsolationLevel { get; set; }
     }
 }

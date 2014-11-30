@@ -33,7 +33,7 @@ namespace Allors.Databases.Object.SqlClient
             extent.CheckRole(roleType);
             PredicateAssertions.ValidateRoleGreaterThan(roleType, obj);
             this.roleType = roleType;
-            this.obj = extent.Session.SqlDatabase.Internalize(obj, roleType);
+            this.obj = roleType.Normalize(obj);
         }
 
         internal override bool BuildWhere(ExtentStatement statement, string alias)

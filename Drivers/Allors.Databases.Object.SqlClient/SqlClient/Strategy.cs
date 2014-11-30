@@ -28,6 +28,7 @@ namespace Allors.Databases.Object.SqlClient
     using System.Collections.Generic;
 
     using Allors.Databases.Object.SqlClient;
+    using Allors.Populations;
 
     using Meta;
 
@@ -263,11 +264,11 @@ namespace Allors.Databases.Object.SqlClient
         {
             this.AssertExist();
 
-            this.SqlSession.SqlDatabase.UnitRoleChecks(this, roleType);
+            RoleAssertions.UnitRoleChecks(this, roleType);
 
             if (role != null)
             {
-                role = this.SqlSession.SqlDatabase.Internalize(role, roleType);
+                role = roleType.Normalize(role);
             }
 
             var oldUnit = this.GetUnitRole(roleType);
@@ -304,7 +305,7 @@ namespace Allors.Databases.Object.SqlClient
 
             this.AssertExist();
 
-            this.SqlSession.SqlDatabase.CompositeRoleChecks(this, roleType, newRoleObject);
+            RoleAssertions.CompositeRoleChecks(this, roleType, newRoleObject);
 
             var newRoleObjectId = (Strategy)newRoleObject.Strategy;
 
@@ -315,7 +316,7 @@ namespace Allors.Databases.Object.SqlClient
         {
             this.AssertExist();
 
-            this.SqlSession.SqlDatabase.CompositeRoleChecks(this, roleType);
+            RoleAssertions.CompositeRoleChecks(this, roleType);
 
             this.Roles.RemoveCompositeRole(roleType);
         }
@@ -338,7 +339,7 @@ namespace Allors.Databases.Object.SqlClient
 
             if (roleObject != null)
             {
-                this.SqlSession.SqlDatabase.CompositeRolesChecks(this, roleType, roleObject);
+                RoleAssertions.CompositeRolesChecks(this, roleType, roleObject);
 
                 var role = (Strategy)roleObject.Strategy;
                 
@@ -352,7 +353,7 @@ namespace Allors.Databases.Object.SqlClient
             
             if (roleObject != null)
             {
-                this.SqlSession.SqlDatabase.CompositeRolesChecks(this, roleType, roleObject);
+                RoleAssertions.CompositeRolesChecks(this, roleType, roleObject);
                 
                 var role = (Strategy)roleObject.Strategy;
 
@@ -378,7 +379,7 @@ namespace Allors.Databases.Object.SqlClient
                 {
                     if (roleObject != null)
                     {
-                        this.reference.Session.SqlDatabase.CompositeRolesChecks(this, roleType, roleObject);
+                        RoleAssertions.CompositeRolesChecks(this, roleType, roleObject);
                         var role = (Strategy)roleObject.Strategy;
 
                         if (!previousRoles.Contains(role.ObjectId))
@@ -404,7 +405,7 @@ namespace Allors.Databases.Object.SqlClient
         {
             this.AssertExist();
 
-            this.SqlSession.SqlDatabase.CompositeRoleChecks(this, roleType);
+            RoleAssertions.CompositeRoleChecks(this, roleType);
 
             var previousRoles = this.Roles.GetCompositeRoles(roleType);
 

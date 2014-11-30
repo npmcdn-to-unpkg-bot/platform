@@ -27,7 +27,7 @@ namespace Allors.Databases.Object.SqlClient.LongId
 
     using Microsoft.SqlServer.Server;
 
-    internal class Database : SqlClient.Database 
+    public class Database : SqlClient.Database 
     {
         private readonly IObjectIds allorsObjectIds;
        
@@ -60,11 +60,6 @@ namespace Allors.Databases.Object.SqlClient.LongId
             }
         }
 
-        protected override void ResetSchema()
-        {
-            this.schema = null;
-        }
-
         internal override IEnumerable<SqlDataRecord> CreateObjectTable(IEnumerable<ObjectId> objectids)
         {
             return new ObjectTableForObjectIds(this.schema, objectids);
@@ -88,6 +83,11 @@ namespace Allors.Databases.Object.SqlClient.LongId
         internal override IEnumerable<SqlDataRecord> CreateRelationTable(IRoleType roleType, IEnumerable<UnitRelation> relations)
         {
             return new RelationTableForUnitRelations(this, roleType, relations);
+        }
+
+        protected override void ResetSchema()
+        {
+            this.schema = null;
         }
     }
 }
