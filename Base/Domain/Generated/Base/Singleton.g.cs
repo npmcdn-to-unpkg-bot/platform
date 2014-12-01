@@ -12,18 +12,6 @@ namespace Allors.Domain
 			this.DisplayName = builder.DisplayName;
 		
 
-			this.AdministratorSecurityToken = builder.AdministratorSecurityToken;
-
-
-
-			this.Guest = builder.Guest;
-
-
-
-			this.DefaultSecurityToken = builder.DefaultSecurityToken;
-
-
-
 			this.DefaultPrintQueue = builder.DefaultPrintQueue;
 
 
@@ -35,6 +23,18 @@ namespace Allors.Domain
 			{
 				this.Locales = builder.Locales.ToArray();
 			}
+
+
+			this.AdministratorSecurityToken = builder.AdministratorSecurityToken;
+
+
+
+			this.Guest = builder.Guest;
+
+
+
+			this.DefaultSecurityToken = builder.DefaultSecurityToken;
+
 
 
 			this.PersonTemplate = builder.PersonTemplate;
@@ -59,39 +59,6 @@ namespace Allors.Domain
 	    {
 	    }
 
-				public SecurityToken AdministratorSecurityToken {get; set;}
-
-				/// <exclude/>
-				public SingletonBuilder WithAdministratorSecurityToken(SecurityToken value)
-		        {
-		            if(this.AdministratorSecurityToken!=null){throw new global::System.ArgumentException("One multicplicity");}
-					this.AdministratorSecurityToken = value;
-		            return this;
-		        }		
-
-				
-				public User Guest {get; set;}
-
-				/// <exclude/>
-				public SingletonBuilder WithGuest(User value)
-		        {
-		            if(this.Guest!=null){throw new global::System.ArgumentException("One multicplicity");}
-					this.Guest = value;
-		            return this;
-		        }		
-
-				
-				public SecurityToken DefaultSecurityToken {get; set;}
-
-				/// <exclude/>
-				public SingletonBuilder WithDefaultSecurityToken(SecurityToken value)
-		        {
-		            if(this.DefaultSecurityToken!=null){throw new global::System.ArgumentException("One multicplicity");}
-					this.DefaultSecurityToken = value;
-		            return this;
-		        }		
-
-				
 				public PrintQueue DefaultPrintQueue {get; set;}
 
 				/// <exclude/>
@@ -124,6 +91,39 @@ namespace Allors.Domain
 						this.Locales = new global::System.Collections.Generic.List<Locale>(); 
 					}
 		            this.Locales.Add(value);
+		            return this;
+		        }		
+
+				
+				public SecurityToken AdministratorSecurityToken {get; set;}
+
+				/// <exclude/>
+				public SingletonBuilder WithAdministratorSecurityToken(SecurityToken value)
+		        {
+		            if(this.AdministratorSecurityToken!=null){throw new global::System.ArgumentException("One multicplicity");}
+					this.AdministratorSecurityToken = value;
+		            return this;
+		        }		
+
+				
+				public User Guest {get; set;}
+
+				/// <exclude/>
+				public SingletonBuilder WithGuest(User value)
+		        {
+		            if(this.Guest!=null){throw new global::System.ArgumentException("One multicplicity");}
+					this.Guest = value;
+		            return this;
+		        }		
+
+				
+				public SecurityToken DefaultSecurityToken {get; set;}
+
+				/// <exclude/>
+				public SingletonBuilder WithDefaultSecurityToken(SecurityToken value)
+		        {
+		            if(this.DefaultSecurityToken!=null){throw new global::System.ArgumentException("One multicplicity");}
+					this.DefaultSecurityToken = value;
 		            return this;
 		        }		
 

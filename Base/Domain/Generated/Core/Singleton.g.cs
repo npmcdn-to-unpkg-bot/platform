@@ -15,84 +15,6 @@ namespace Allors.Domain
 
 
 
-		virtual public SecurityToken AdministratorSecurityToken
-		{ 
-			get
-			{
-				return (SecurityToken) Strategy.GetCompositeRole(Meta.AdministratorSecurityToken);
-			}
-			set
-			{
-				Strategy.SetCompositeRole(Meta.AdministratorSecurityToken ,value);
-			}
-		}
-
-		virtual public bool ExistAdministratorSecurityToken
-		{
-			get
-			{
-				return Strategy.ExistCompositeRole(Meta.AdministratorSecurityToken);
-			}
-		}
-
-		virtual public void RemoveAdministratorSecurityToken()
-		{
-			Strategy.RemoveCompositeRole(Meta.AdministratorSecurityToken);
-		}
-
-
-		virtual public User Guest
-		{ 
-			get
-			{
-				return (User) Strategy.GetCompositeRole(Meta.Guest);
-			}
-			set
-			{
-				Strategy.SetCompositeRole(Meta.Guest ,value);
-			}
-		}
-
-		virtual public bool ExistGuest
-		{
-			get
-			{
-				return Strategy.ExistCompositeRole(Meta.Guest);
-			}
-		}
-
-		virtual public void RemoveGuest()
-		{
-			Strategy.RemoveCompositeRole(Meta.Guest);
-		}
-
-
-		virtual public SecurityToken DefaultSecurityToken
-		{ 
-			get
-			{
-				return (SecurityToken) Strategy.GetCompositeRole(Meta.DefaultSecurityToken);
-			}
-			set
-			{
-				Strategy.SetCompositeRole(Meta.DefaultSecurityToken ,value);
-			}
-		}
-
-		virtual public bool ExistDefaultSecurityToken
-		{
-			get
-			{
-				return Strategy.ExistCompositeRole(Meta.DefaultSecurityToken);
-			}
-		}
-
-		virtual public void RemoveDefaultSecurityToken()
-		{
-			Strategy.RemoveCompositeRole(Meta.DefaultSecurityToken);
-		}
-
-
 		virtual public PrintQueue DefaultPrintQueue
 		{ 
 			get
@@ -178,6 +100,84 @@ namespace Allors.Domain
 		virtual public void RemoveLocales()
 		{
 			Strategy.RemoveCompositeRoles(Meta.Locale);
+		}
+
+
+		virtual public SecurityToken AdministratorSecurityToken
+		{ 
+			get
+			{
+				return (SecurityToken) Strategy.GetCompositeRole(Meta.AdministratorSecurityToken);
+			}
+			set
+			{
+				Strategy.SetCompositeRole(Meta.AdministratorSecurityToken ,value);
+			}
+		}
+
+		virtual public bool ExistAdministratorSecurityToken
+		{
+			get
+			{
+				return Strategy.ExistCompositeRole(Meta.AdministratorSecurityToken);
+			}
+		}
+
+		virtual public void RemoveAdministratorSecurityToken()
+		{
+			Strategy.RemoveCompositeRole(Meta.AdministratorSecurityToken);
+		}
+
+
+		virtual public User Guest
+		{ 
+			get
+			{
+				return (User) Strategy.GetCompositeRole(Meta.Guest);
+			}
+			set
+			{
+				Strategy.SetCompositeRole(Meta.Guest ,value);
+			}
+		}
+
+		virtual public bool ExistGuest
+		{
+			get
+			{
+				return Strategy.ExistCompositeRole(Meta.Guest);
+			}
+		}
+
+		virtual public void RemoveGuest()
+		{
+			Strategy.RemoveCompositeRole(Meta.Guest);
+		}
+
+
+		virtual public SecurityToken DefaultSecurityToken
+		{ 
+			get
+			{
+				return (SecurityToken) Strategy.GetCompositeRole(Meta.DefaultSecurityToken);
+			}
+			set
+			{
+				Strategy.SetCompositeRole(Meta.DefaultSecurityToken ,value);
+			}
+		}
+
+		virtual public bool ExistDefaultSecurityToken
+		{
+			get
+			{
+				return Strategy.ExistCompositeRole(Meta.DefaultSecurityToken);
+			}
+		}
+
+		virtual public void RemoveDefaultSecurityToken()
+		{
+			Strategy.RemoveCompositeRole(Meta.DefaultSecurityToken);
 		}
 
 
@@ -312,27 +312,6 @@ namespace Allors.Domain
 
 		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.Singleton;
 
-		public global::Allors.Meta.RoleType AdministratorSecurityToken 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.SingletonAdministratorSecurityToken;
-			}
-		} 
-		public global::Allors.Meta.RoleType Guest 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.SingletonGuest;
-			}
-		} 
-		public global::Allors.Meta.RoleType DefaultSecurityToken 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.SingletonDefaultSecurityToken;
-			}
-		} 
 		public global::Allors.Meta.RoleType DefaultPrintQueue 
 		{
 			get
@@ -352,6 +331,27 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.RoleTypes.SingletonLocale;
+			}
+		} 
+		public global::Allors.Meta.RoleType AdministratorSecurityToken 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.SingletonAdministratorSecurityToken;
+			}
+		} 
+		public global::Allors.Meta.RoleType Guest 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.SingletonGuest;
+			}
+		} 
+		public global::Allors.Meta.RoleType DefaultSecurityToken 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.SingletonDefaultSecurityToken;
 			}
 		} 
 		public global::Allors.Meta.RoleType PersonTemplate 

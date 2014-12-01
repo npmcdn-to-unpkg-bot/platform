@@ -24,17 +24,6 @@ namespace Allors.Domain
 		void RemoveLocalisedNames();
 
 
-		global::System.Boolean? IsActive 
-		{
-			get;
-			set;
-		}
-
-		bool ExistIsActive{get;}
-
-		void RemoveIsActive();
-
-
 		global::System.String Name 
 		{
 			get;
@@ -44,6 +33,17 @@ namespace Allors.Domain
 		bool ExistName{get;}
 
 		void RemoveName();
+
+
+		global::System.Boolean? IsActive 
+		{
+			get;
+			set;
+		}
+
+		bool ExistIsActive{get;}
+
+		void RemoveIsActive();
 
 	}
 
@@ -60,18 +60,18 @@ namespace Allors.Domain
 				return global::Allors.Meta.RoleTypes.EnumerationLocalisedName;
 			}
 		} 
-		public global::Allors.Meta.RoleType IsActive 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.EnumerationIsActive;
-			}
-		} 
 		public global::Allors.Meta.RoleType Name 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.EnumerationName;
+			}
+		} 
+		public global::Allors.Meta.RoleType IsActive 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.EnumerationIsActive;
 			}
 		} 
 		public global::Allors.Meta.RoleType DisplayName 

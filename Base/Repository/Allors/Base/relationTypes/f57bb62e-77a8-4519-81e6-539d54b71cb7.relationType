@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="f57bb62e-77a8-4519-81e6-539d54b71cb7">
+  <associationType id="a8993304-52c0-4b53-9982-6caa5675467a">
+    <objectType idref="b7bcc22f-03f0-46fd-b738-4e035921d445" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="0c6faf5a-eac9-454c-bd53-3b8409e56d34">
+    <objectType idref="b5ee6cea-4e2b-498e-a5dd-24671d896477" />
+    <pluralName>AreActive</pluralName>
+    <singularName>IsActive</singularName>
+  </roleType>
+</relationType>

@@ -52,32 +52,6 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean? IsActive 
-		{
-			get
-			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.IsActive);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.IsActive, value);
-			}
-		}
-
-		virtual public bool ExistIsActive{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.IsActive);
-			}
-		}
-
-		virtual public void RemoveIsActive()
-		{
-			Strategy.RemoveUnitRole(Meta.IsActive);
-		}
-
-
-
 		virtual public global::System.String Name 
 		{
 			get
@@ -100,6 +74,32 @@ namespace Allors.Domain
 		virtual public void RemoveName()
 		{
 			Strategy.RemoveUnitRole(Meta.Name);
+		}
+
+
+
+		virtual public global::System.Boolean? IsActive 
+		{
+			get
+			{
+				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.IsActive);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.IsActive, value);
+			}
+		}
+
+		virtual public bool ExistIsActive{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.IsActive);
+			}
+		}
+
+		virtual public void RemoveIsActive()
+		{
+			Strategy.RemoveUnitRole(Meta.IsActive);
 		}
 
 
@@ -259,18 +259,18 @@ namespace Allors.Domain
 				return global::Allors.Meta.RoleTypes.EnumerationLocalisedName;
 			}
 		} 
-		public global::Allors.Meta.RoleType IsActive 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.EnumerationIsActive;
-			}
-		} 
 		public global::Allors.Meta.RoleType Name 
 		{
 			get
 			{
 				return global::Allors.Meta.RoleTypes.EnumerationName;
+			}
+		} 
+		public global::Allors.Meta.RoleType IsActive 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.EnumerationIsActive;
 			}
 		} 
 		public global::Allors.Meta.RoleType DisplayName 

@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="f991813f-3146-4431-96d0-554aa2186887">
+  <isInterface>true</isInterface>
+  <pluralName>ObjectStates</pluralName>
+  <singularName>ObjectState</singularName>
+</objectType>

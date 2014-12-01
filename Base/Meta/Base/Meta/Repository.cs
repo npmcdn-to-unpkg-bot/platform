@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="Repository.cs" company="Allors bvba">
+// <copyreight file="Repository.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -24,6 +24,13 @@ namespace Allors.Meta
     {
         public static void BasePostInit(MetaPopulation meta)
         {
+            CounterValue.RoleType.IsRequired = true;
+
+            UniquelyIdentifiableUniqueId.RoleType.IsRequired = true;
+
+            PermissionOperandTypePointer.RoleType.IsRequired = true;
+            PermissionConcreteClassPointer.RoleType.IsRequired = true;
+            PermissionOperationEnum.RoleType.IsRequired = true;
         }
     }
 }

@@ -8,10 +8,6 @@ namespace Allors.Domain
 		global::System.Collections.Generic.List<Permission> DeniedPermissions {get;}		
 
 		
-
-		global::System.String Name {get;}
-
-		
 	}
 
 	public partial class ObjectStates : global::Allors.ObjectsBase<ObjectState>

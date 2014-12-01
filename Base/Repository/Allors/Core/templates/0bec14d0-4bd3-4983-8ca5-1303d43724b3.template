@@ -1,5 +1,0 @@
-<template allors="1.0">
-  <name>Uml</name>
-  <output>..\..\..\..\Diagrams</output>
-  <source>http://www.allors.com/svn/templates/trunk/Allors.Templates/allors.csharp.uml.stg</source>
-</template>

@@ -9,11 +9,11 @@ namespace Allors.Domain
 
 		
 
-		global::System.Boolean? IsActive {get;}
+		global::System.String Name {get;}
 
 		
 
-		global::System.String Name {get;}
+		global::System.Boolean? IsActive {get;}
 
 		
 	}

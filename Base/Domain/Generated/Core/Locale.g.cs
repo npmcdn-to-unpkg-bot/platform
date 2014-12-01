@@ -192,23 +192,6 @@ namespace Allors.Domain
 
 
 
-		virtual public global::Allors.Extent<Localised> LocalisedsWhereLocale
-		{ 
-			get
-			{
-				return Strategy.GetCompositeAssociations(Meta.LocalisedsWhereLocale);
-			}
-		}
-
-		virtual public bool ExistLocalisedsWhereLocale
-		{
-			get
-			{
-				return Strategy.ExistCompositeAssociations(Meta.LocalisedsWhereLocale);
-			}
-		}
-
-
 		virtual public global::Allors.Extent<Singleton> SingletonsWhereDefaultLocale
 		{ 
 			get
@@ -239,6 +222,23 @@ namespace Allors.Domain
 			get
 			{
 				return Strategy.ExistCompositeAssociation(Meta.SingletonWhereLocale);
+			}
+		}
+
+
+		virtual public global::Allors.Extent<Localised> LocalisedsWhereLocale
+		{ 
+			get
+			{
+				return Strategy.GetCompositeAssociations(Meta.LocalisedsWhereLocale);
+			}
+		}
+
+		virtual public bool ExistLocalisedsWhereLocale
+		{
+			get
+			{
+				return Strategy.ExistCompositeAssociations(Meta.LocalisedsWhereLocale);
 			}
 		}
 
@@ -293,13 +293,6 @@ namespace Allors.Domain
 			}
 		} 
 
-		public global::Allors.Meta.AssociationType LocalisedsWhereLocale 
-		{
-			get
-			{
-				return global::Allors.Meta.AssociationTypes.LocalisedLocale;
-			}
-		} 
 		public global::Allors.Meta.AssociationType SingletonsWhereDefaultLocale 
 		{
 			get
@@ -312,6 +305,13 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.SingletonLocale;
+			}
+		} 
+		public global::Allors.Meta.AssociationType LocalisedsWhereLocale 
+		{
+			get
+			{
+				return global::Allors.Meta.AssociationTypes.LocalisedLocale;
 			}
 		} 
 

@@ -37,6 +37,7 @@ namespace Allors.Meta
 	public static partial class Repository
 	{
 
+ 		public static Domain Core;
  		public static Domain $domain.Name$;
 $domain.SuperDomains:{superDomain|$if(!superDomain.IsAllorsUnitDomain)$			public static Domain $superDomain.Name$;$endif$
 }$
@@ -50,9 +51,11 @@ $domain.SuperDomains:{superDomain|$if(!superDomain.IsAllorsUnitDomain)$			public
         public static Unit AllorsBinary;
 
 $domain.compositeObjectTypes:{objectType|$objectTypeDeclaration(objectType)$}$
+$domain.relationTypes:{relationType|$relationTypeDeclaration(relationType)$}$
 
 		static void Init(MetaPopulation meta)
 		{
+            Core = new Domain(meta, new Guid("A5F4E562-323A-41C6-893F-12D7C6A9BD76")) { Name = "Core" };
 			$domain.Name$ = new Domain(meta, new Guid("$domain.IdAsString$")) { Name = "$domain.Name$" };
 $domain.SuperDomains:{superDomain|$superDomainInit(superDomain)$}$
 
@@ -88,14 +91,18 @@ objectTypeDeclaration(objectType) ::= <<		public static $if(objectType.IsInterfa
 
 >>
 
+relationTypeDeclaration(relationType) ::= <<		public static RelationType $relationType.Name$;
+
+>>
+
 objectTypeInit(objectType) ::= <<
 $if(!objectType.IsInterface)$
-			var $objectType.Name$ = new ClassBuilder($objectType.DomainWhereDeclaredObjectType.Name$, new Guid("$objectType.IdAsString$"))
+			$objectType.Name$ = new ClassBuilder($objectType.DomainWhereDeclaredObjectType.Name$, new Guid("$objectType.IdAsString$"))
 			.WithSingularName("$objectType.SingularName$")
 			.WithPluralName("$objectType.PluralName$")
 			.Build();
 $else$  
-			var $objectType.Name$ = new InterfaceBuilder($objectType.DomainWhereDeclaredObjectType.Name$, new Guid("$objectType.IdAsString$"))
+			$objectType.Name$ = new InterfaceBuilder($objectType.DomainWhereDeclaredObjectType.Name$, new Guid("$objectType.IdAsString$"))
 			.WithSingularName("$objectType.SingularName$")
 			.WithPluralName("$objectType.PluralName$")
 			.Build();
@@ -123,7 +130,7 @@ inheritanceInit(inheritance) ::= <<
 >>
 
 relationTypeInit(relationType) ::= <<
-				new RelationTypeBuilder($relationType.DomainWhereDeclaredRelationType.Name$, new Guid("$relationType.IdAsString$"),new Guid("$relationType.AssociationType.IdAsString$"),new Guid("$relationType.RoleType.IdAsString$"))
+				$relationType.Name$ = new RelationTypeBuilder($relationType.DomainWhereDeclaredRelationType.Name$, new Guid("$relationType.IdAsString$"),new Guid("$relationType.AssociationType.IdAsString$"),new Guid("$relationType.RoleType.IdAsString$"))
 				$objectTypes()$
 				$singularName()$
 				$pluralName()$

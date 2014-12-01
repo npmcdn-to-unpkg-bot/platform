@@ -24,17 +24,6 @@ namespace Allors.Domain
 		void RemoveDeniedPermissions();
 
 
-		global::System.String Name 
-		{
-			get;
-			set;
-		}
-
-		bool ExistName{get;}
-
-		void RemoveName();
-
-
 
 		global::Allors.Extent<Transition> TransitionsWhereFromState
 		{ 
@@ -70,13 +59,6 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.RoleTypes.ObjectStateDeniedPermission;
-			}
-		} 
-		public global::Allors.Meta.RoleType Name 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.ObjectStateName;
 			}
 		} 
 		public global::Allors.Meta.RoleType UniqueId 

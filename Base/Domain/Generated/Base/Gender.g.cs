@@ -8,15 +8,14 @@ namespace Allors.Domain
 		internal override void OnBuild(global::Allors.IObjectBuilder objectBuilder)
 		{
 			var builder = (GenderBuilder)objectBuilder;
-			
+
+			this.Name = builder.Name;
+					
 
 			if(builder.IsActive.HasValue)
 			{
 				this.IsActive = builder.IsActive.Value;
 			}			
-		
-
-			this.Name = builder.Name;
 		
 
 			this.DisplayName = builder.DisplayName;
@@ -65,16 +64,6 @@ namespace Allors.Domain
 		        }		
 
 				
-				public global::System.Boolean? IsActive {get; set;}
-
-				/// <exclude/>
-				public GenderBuilder WithIsActive(global::System.Boolean? value)
-		        {
-				    if(this.IsActive!=null){throw new global::System.ArgumentException("One multicplicity");}
-		            this.IsActive = value;
-		            return this;
-		        }	
-
 				public global::System.String Name {get; set;}
 
 				/// <exclude/>
@@ -82,6 +71,16 @@ namespace Allors.Domain
 		        {
 				    if(this.Name!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.Name = value;
+		            return this;
+		        }	
+
+				public global::System.Boolean? IsActive {get; set;}
+
+				/// <exclude/>
+				public GenderBuilder WithIsActive(global::System.Boolean? value)
+		        {
+				    if(this.IsActive!=null){throw new global::System.ArgumentException("One multicplicity");}
+		            this.IsActive = value;
 		            return this;
 		        }	
 

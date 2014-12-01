@@ -1,6 +1,0 @@
-<objectType allors="1.0" id="f991813f-3146-4431-96d0-554aa2186887">
-  <isAbstract>true</isAbstract>
-  <namespace idref="fcf317ee-ab3c-4aeb-add3-154be33b1241" />
-  <pluralName>ObjectStates</pluralName>
-  <singularName>ObjectState</singularName>
-</objectType>

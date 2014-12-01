@@ -33,6 +33,10 @@ namespace Allors.Domain
 			this.Parent = builder.Parent;
 
 
+
+			this.SearchData = builder.SearchData;
+
+
 			if(builder.DeniedPermissions!=null)
 			{
 				this.DeniedPermissions = builder.DeniedPermissions.ToArray();
@@ -43,14 +47,10 @@ namespace Allors.Domain
 				this.SecurityTokens = builder.SecurityTokens.ToArray();
 			}
 
-
-			this.SearchData = builder.SearchData;
-
-
 		}
 	}
 
-	public partial class UserGroupBuilder : Allors.ObjectBuilder<UserGroup> , UniquelyIdentifiableBuilder, UserInterfaceableBuilder, SearchableBuilder, global::System.IDisposable
+	public partial class UserGroupBuilder : Allors.ObjectBuilder<UserGroup> , UniquelyIdentifiableBuilder, SearchableBuilder, UserInterfaceableBuilder, global::System.IDisposable
 	{		
 		public UserGroupBuilder(Allors.ISession session) : base(session)
 	    {
@@ -112,6 +112,17 @@ namespace Allors.Domain
 		            return this;
 		        }	
 
+				public SearchData SearchData {get; set;}
+
+				/// <exclude/>
+				public UserGroupBuilder WithSearchData(SearchData value)
+		        {
+		            if(this.SearchData!=null){throw new global::System.ArgumentException("One multicplicity");}
+					this.SearchData = value;
+		            return this;
+		        }		
+
+				
 				public global::System.String DisplayName {get; set;}
 
 				/// <exclude/>
@@ -146,17 +157,6 @@ namespace Allors.Domain
 						this.SecurityTokens = new global::System.Collections.Generic.List<SecurityToken>(); 
 					}
 		            this.SecurityTokens.Add(value);
-		            return this;
-		        }		
-
-				
-				public SearchData SearchData {get; set;}
-
-				/// <exclude/>
-				public UserGroupBuilder WithSearchData(SearchData value)
-		        {
-		            if(this.SearchData!=null){throw new global::System.ArgumentException("One multicplicity");}
-					this.SearchData = value;
 		            return this;
 		        }		
 

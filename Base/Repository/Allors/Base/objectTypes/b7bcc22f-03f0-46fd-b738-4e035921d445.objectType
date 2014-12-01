@@ -1,5 +1,5 @@
 <objectType allors="1.0" id="b7bcc22f-03f0-46fd-b738-4e035921d445">
-  <isAbstract>true</isAbstract>
+  <isInterface>true</isInterface>
   <pluralName>Enumerations</pluralName>
   <singularName>Enumeration</singularName>
 </objectType>
