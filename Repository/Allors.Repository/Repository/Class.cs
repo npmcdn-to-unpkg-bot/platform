@@ -1,5 +1,5 @@
-//------------------------------------------------------------------------------------------------- 
-// <copyright file="Repository.cs" company="Allors bvba">
+﻿//------------------------------------------------------------------------------------------------- 
+// <copyright file="Class.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -16,14 +16,17 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
+// <summary>Defines the Domain type.</summary>
 //-------------------------------------------------------------------------------------------------
 
 namespace Allors.Meta
 {
-    public static partial class Repository
+    public partial class Class
     {
-        public static void CorePostInit(MetaPopulation meta)
+        public void Copy(Class source)
         {
+            this.SingularName = source.SingularName;
+            this.PluralName = source.PluralName;
         }
     }
 }

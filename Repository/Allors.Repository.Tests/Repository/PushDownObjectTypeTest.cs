@@ -71,15 +71,15 @@ namespace Allors.Meta
 
             var superDomainDomain = this.superDomainRepository.Domain;
 
-            var superDomainObjectType = superDomainDomain.BuildObjectType(objectTypeId, "ObjectType", "ObjectTypes");
-            var superDomainSuperType = superDomainDomain.BuildObjectType(superTypeId, "SuperType", "SuperTypes");
-            var superDomainSubType = superDomainDomain.BuildObjectType(subTypeId, "SubType", "SubTypes");
-            var superDomainRoleObjectType = superDomainDomain.BuildObjectType(roleObjectTypeId, "RoleObjectType", "RoleObjectTypes");
-            var superDomainAssociationObjectType = superDomainDomain.BuildObjectType(associationObjectTypeId, "AssociationObjectType", "AssociationObjectTypes");
-            var superDomainInheritanceWhereSubType = superDomainDomain.BuildInheritance(inheritanceWhereSubTypeId, superDomainObjectType, superDomainSuperType);
-            var superDomainInheritanceWhereSuperType = superDomainDomain.BuildInheritance(inheritanceWhereSuperTypeId, superDomainSubType, superDomainObjectType);
-            var superDomainRelationTypeWhereAssociation = superDomainDomain.BuildRelationType(relationTypeWhereAssociationId, relationTypeWhereAssociationAssociationTypeId, superDomainObjectType, relationTypeWhereAssociationRoleTypeId, superDomainRoleObjectType);
-            var superDomainRelationTypeWhereRole = superDomainDomain.BuildRelationType(relationTypeWhereRoleId, relationTypeWhereRoleAssociationTypeId, superDomainAssociationObjectType, relationTypeWhereRoleRoleTypeId, superDomainObjectType);
+            var superDomainSuperInterface = superDomainDomain.BuildInterface(superTypeId, "SuperType", "SuperTypes");
+            var superDomainInterface = superDomainDomain.BuildInterface(objectTypeId, "ObjectType", "ObjectTypes");
+            var superDomainClass = superDomainDomain.BuildClass(subTypeId, "SubType", "SubTypes");
+            var superDomainRoleObjectType = superDomainDomain.BuildClass(roleObjectTypeId, "RoleObjectType", "RoleObjectTypes");
+            var superDomainAssociationObjectType = superDomainDomain.BuildClass(associationObjectTypeId, "AssociationObjectType", "AssociationObjectTypes");
+            var superDomainInheritanceWhereSubType = superDomainDomain.BuildInheritance(inheritanceWhereSubTypeId, superDomainInterface, superDomainSuperInterface);
+            var superDomainInheritanceWhereSuperType = superDomainDomain.BuildInheritance(inheritanceWhereSuperTypeId, superDomainClass, superDomainInterface);
+            var superDomainRelationTypeWhereAssociation = superDomainDomain.BuildRelationType(relationTypeWhereAssociationId, relationTypeWhereAssociationAssociationTypeId, superDomainInterface, relationTypeWhereAssociationRoleTypeId, superDomainRoleObjectType);
+            var superDomainRelationTypeWhereRole = superDomainDomain.BuildRelationType(relationTypeWhereRoleId, relationTypeWhereRoleAssociationTypeId, superDomainAssociationObjectType, relationTypeWhereRoleRoleTypeId, superDomainInterface);
             
             this.domainRepository.AddSuper(this.superDomainDirectoryInfo);
 
@@ -124,15 +124,15 @@ namespace Allors.Meta
             Assert.AreEqual("RoleObjectTypes", superDomainRoleObjectType.PluralName);
             Assert.AreEqual(superDomainDomain, superDomainRoleObjectType.DomainWhereDeclaredObjectType);
 
-            superDomainSubType = (ObjectType)superDomainDomain.Domain.Find(subTypeId);
-            Assert.AreEqual("SubType", superDomainSubType.SingularName);
-            Assert.AreEqual("SubTypes", superDomainSubType.PluralName);
-            Assert.AreEqual(superDomainDomain, superDomainSubType.DomainWhereDeclaredObjectType);
+            superDomainClass = (ObjectType)superDomainDomain.Domain.Find(subTypeId);
+            Assert.AreEqual("SubType", superDomainClass.SingularName);
+            Assert.AreEqual("SubTypes", superDomainClass.PluralName);
+            Assert.AreEqual(superDomainDomain, superDomainClass.DomainWhereDeclaredObjectType);
 
-            superDomainSuperType = (ObjectType)superDomainDomain.Domain.Find(superTypeId);
-            Assert.AreEqual("SuperType", superDomainSuperType.SingularName);
-            Assert.AreEqual("SuperTypes", superDomainSuperType.PluralName);
-            Assert.AreEqual(superDomainDomain, superDomainSuperType.DomainWhereDeclaredObjectType);
+            superDomainSuperInterface = (ObjectType)superDomainDomain.Domain.Find(superTypeId);
+            Assert.AreEqual("SuperType", superDomainSuperInterface.SingularName);
+            Assert.AreEqual("SuperTypes", superDomainSuperInterface.PluralName);
+            Assert.AreEqual(superDomainDomain, superDomainSuperInterface.DomainWhereDeclaredObjectType);
 
             Assert.AreEqual(0, superDomainDomain.DeclaredInheritances.Length);
             Assert.IsNull(superDomainDomain.Domain.Find(inheritanceWhereSubTypeId));

@@ -183,30 +183,20 @@ relations(domain,settings,relationType) ::= <<
 
             this.template.Source = new Uri(templateSourceFileInfo.FullName);
 
-            var typeId = new Guid("{07B000C7-800F-459b-A6BB-17DC9E690A06}");
-            var type = this.domain.AddDeclaredObjectType(typeId);
-            type.SingularName = "Company";
-            type.PluralName = "Companies";
+            var @classId = new Guid("{07B000C7-800F-459b-A6BB-17DC9E690A06}");
+            var @class = this.domain.BuildClass(@classId, "Company", "Companies");
 
             var relationId = new Guid("{3C48C2D5-79E2-4da2-BDB4-2EE7307DB5EF}");
             var associationId = new Guid("{F43B2971-DEB8-494B-B2D3-3A5331991A03}");
             var roleId = new Guid("{B0FDE156-1009-4A04-B61D-10F1A6326416}");
-            var relationType = this.domain.AddDeclaredRelationType(relationId, associationId, roleId);
-            relationType.AssociationType.ObjectType = type;
-            relationType.RoleType.ObjectType = type;
-            relationType.RoleType.AssignedSingularName = "role";
-            relationType.RoleType.AssignedPluralName = "roles";
+            var relationType = this.domain.BuildRelationType(relationId, associationId, @class, roleId, @class, "role", "roles");
 
             var relation2Id = new Guid("{ABB975B6-5374-4654-96A2-E98D5C2A1786}");
             var association2Id = new Guid("{9A1B9365-29D0-4AD4-B6C6-D2D385EABC01}");
             var role2Id = new Guid("{4F280135-E385-4C08-B06E-AD38DDAAA0D5}");
-            var relation2 = this.domain.AddDeclaredRelationType(relation2Id, association2Id, role2Id);
-            relation2.AssociationType.ObjectType = type;
-            relation2.RoleType.ObjectType = type;
-            relation2.RoleType.AssignedSingularName = "role2";
-            relation2.RoleType.AssignedPluralName = "roles2";
+            var relation2 = this.domain.BuildRelationType(relation2Id, association2Id, @class, role2Id, @class, "role2", "roles2");
 
-            Assert.IsTrue(this.domain.IsValid);
+            Assert.IsTrue(this.domain.MetaPopulation.IsValid);
 
             this.template.Generate(new DummyLog());
 
@@ -217,10 +207,10 @@ relations(domain,settings,relationType) ::= <<
             var actualXml = this.ToComparableXml(xmlDocument.InnerXml);
             Assert.AreEqual(expectedXml, actualXml);
 
-            xmlFileInfo = new FileInfo(Path.Combine(this.repository.OutputDirectoryInfo.FullName, "MyTemplate/test/" + typeId.ToString().ToLower() + ".xml"));
+            xmlFileInfo = new FileInfo(Path.Combine(this.repository.OutputDirectoryInfo.FullName, "MyTemplate/test/" + @classId.ToString().ToLower() + ".xml"));
             xmlDocument = new XmlDocument();
             xmlDocument.Load(xmlFileInfo.FullName);
-            expectedXml = this.ToComparableXml(@"<objectType id=""" + typeId.ToString().ToLower() + @"""/>");
+            expectedXml = this.ToComparableXml(@"<objectType id=""" + @classId.ToString().ToLower() + @"""/>");
             actualXml = this.ToComparableXml(xmlDocument.InnerXml);
             Assert.AreEqual(expectedXml, actualXml);
 
@@ -239,7 +229,7 @@ relations(domain,settings,relationType) ::= <<
             Assert.AreEqual(expectedXml, actualXml);
 
             relationType.RoleType.AssignedSingularName = "role3";
-            Assert.IsTrue(this.domain.IsValid);
+            Assert.IsTrue(this.domain.MetaPopulation.IsValid);
 
             this.template.Generate(new DummyLog());
 
@@ -250,10 +240,10 @@ relations(domain,settings,relationType) ::= <<
             actualXml = this.ToComparableXml(xmlDocument.InnerXml);
             Assert.AreEqual(expectedXml, actualXml);
 
-            xmlFileInfo = new FileInfo(Path.Combine(this.repository.OutputDirectoryInfo.FullName, "MyTemplate/test/" + typeId.ToString().ToLower() + ".xml"));
+            xmlFileInfo = new FileInfo(Path.Combine(this.repository.OutputDirectoryInfo.FullName, "MyTemplate/test/" + @classId.ToString().ToLower() + ".xml"));
             xmlDocument = new XmlDocument();
             xmlDocument.Load(xmlFileInfo.FullName);
-            expectedXml = this.ToComparableXml(@"<objectType id=""" + typeId.ToString().ToLower() + @"""/>");
+            expectedXml = this.ToComparableXml(@"<objectType id=""" + @classId.ToString().ToLower() + @"""/>");
             actualXml = this.ToComparableXml(xmlDocument.InnerXml);
             Assert.AreEqual(expectedXml, actualXml);
 
@@ -319,30 +309,20 @@ domain(domain,settings) ::= <<
 
             this.template.Source = new Uri(templateSourceFileInfo.FullName);
 
-            var typeId = new Guid("{07B000C7-800F-459b-A6BB-17DC9E690A06}");
-            var type = this.domain.AddDeclaredObjectType(typeId);
-            type.SingularName = "Company";
-            type.PluralName = "Companies";
+            var @classId = new Guid("{07B000C7-800F-459b-A6BB-17DC9E690A06}");
+            var @class = this.domain.BuildClass(@classId, "Company", "Companies");
 
             var relationId = new Guid("{3C48C2D5-79E2-4da2-BDB4-2EE7307DB5EF}");
-            var associationId = new Guid("{3BBC9461-E580-4A1F-80BB-E8AA82DE3ABE}");
-            var roleId = new Guid("{0A268CDB-2C58-4DC8-80C6-DF6F464B9FFA}");
-            var relationType = this.domain.AddDeclaredRelationType(relationId, associationId, roleId);
-            relationType.AssociationType.ObjectType = type;
-            relationType.RoleType.ObjectType = type;
-            relationType.RoleType.AssignedSingularName = "role";
-            relationType.RoleType.AssignedPluralName = "roles";
+            var associationId = new Guid("{F43B2971-DEB8-494B-B2D3-3A5331991A03}");
+            var roleId = new Guid("{B0FDE156-1009-4A04-B61D-10F1A6326416}");
+            var relationType = this.domain.BuildRelationType(relationId, associationId, @class, roleId, @class, "role", "roles");
 
             var relation2Id = new Guid("{ABB975B6-5374-4654-96A2-E98D5C2A1786}");
-            var association2Id = new Guid("{06EDDEA3-5F27-40A5-8681-4D6981A02699}");
-            var role2Id = new Guid("{35BD8257-86ED-4323-A480-623D13A6A720}");
-            var relation2 = this.domain.AddDeclaredRelationType(relation2Id, association2Id, role2Id);
-            relation2.AssociationType.ObjectType = type;
-            relation2.RoleType.ObjectType = type;
-            relation2.RoleType.AssignedSingularName = "role2";
-            relation2.RoleType.AssignedPluralName = "roles2";
+            var association2Id = new Guid("{9A1B9365-29D0-4AD4-B6C6-D2D385EABC01}");
+            var role2Id = new Guid("{4F280135-E385-4C08-B06E-AD38DDAAA0D5}");
+            var relation2 = this.domain.BuildRelationType(relation2Id, association2Id, @class, role2Id, @class, "role2", "roles2");
 
-            Assert.IsTrue(this.domain.IsValid);
+            Assert.IsTrue(this.domain.MetaPopulation.IsValid);
 
             this.template.Generate(new DummyLog());
 
@@ -353,10 +333,10 @@ domain(domain,settings) ::= <<
             var actualXml = this.ToComparableXml(xmlDocumnt.InnerXml);
             Assert.AreEqual(expectedXml, actualXml);
 
-            xmlFileInfo = new FileInfo(Path.Combine(this.repository.OutputDirectoryInfo.FullName, "MyTemplate/test/" + typeId.ToString().ToLower() + ".xml"));
+            xmlFileInfo = new FileInfo(Path.Combine(this.repository.OutputDirectoryInfo.FullName, "MyTemplate/test/" + classId.ToString().ToLower() + ".xml"));
             xmlDocumnt = new XmlDocument();
             xmlDocumnt.Load(xmlFileInfo.FullName);
-            expectedXml = this.ToComparableXml(@"<objectType id=""" + typeId.ToString().ToLower() + @"""/>");
+            expectedXml = this.ToComparableXml(@"<objectType id=""" + classId.ToString().ToLower() + @"""/>");
             actualXml = this.ToComparableXml(xmlDocumnt.InnerXml);
             Assert.AreEqual(expectedXml, actualXml);
 
@@ -375,7 +355,7 @@ domain(domain,settings) ::= <<
             Assert.AreEqual(expectedXml, actualXml);
 
             relationType.RoleType.AssignedSingularName = "role3";
-            Assert.IsTrue(this.domain.IsValid);
+            Assert.IsTrue(this.domain.MetaPopulation.IsValid);
 
             this.template.Generate(new DummyLog());
 
@@ -386,10 +366,10 @@ domain(domain,settings) ::= <<
             actualXml = this.ToComparableXml(xmlDocumnt.InnerXml);
             Assert.AreEqual(expectedXml, actualXml);
 
-            xmlFileInfo = new FileInfo(Path.Combine(this.repository.OutputDirectoryInfo.FullName, "MyTemplate/test/" + typeId.ToString().ToLower() + ".xml"));
+            xmlFileInfo = new FileInfo(Path.Combine(this.repository.OutputDirectoryInfo.FullName, "MyTemplate/test/" + classId.ToString().ToLower() + ".xml"));
             xmlDocumnt = new XmlDocument();
             xmlDocumnt.Load(xmlFileInfo.FullName);
-            expectedXml = this.ToComparableXml(@"<objectType id=""" + typeId.ToString().ToLower() + @"""/>");
+            expectedXml = this.ToComparableXml(@"<objectType id=""" + classId.ToString().ToLower() + @"""/>");
             actualXml = this.ToComparableXml(xmlDocumnt.InnerXml);
             Assert.AreEqual(expectedXml, actualXml);
 
@@ -446,7 +426,7 @@ nested() ::= <%
 
             this.template.Source = new Uri(templateSourceFileInfo.FullName);
 
-            Assert.IsTrue(this.domain.IsValid);
+            Assert.IsTrue(this.domain.MetaPopulation.IsValid);
 
             this.template.Generate(new ExceptionLog());
 
@@ -490,7 +470,7 @@ domain(domain,settings) ::= <<
 
             this.template.Source = new Uri(templateSourceFileInfo.FullName);
 
-            Assert.IsTrue(this.domain.IsValid);
+            Assert.IsTrue(this.domain.MetaPopulation.IsValid);
 
             this.template.Generate(new ExceptionLog());
 
@@ -550,30 +530,20 @@ domain(domain,settings) ::= <<
             this.template.Source = new Uri(templateSourceFileInfo.ToString());
             this.template.Output = this.repository.OutputDirectoryInfo.FullName;
 
-            var typeId = new Guid("{07B000C7-800F-459b-A6BB-17DC9E690A06}");
-            var type = this.domain.AddDeclaredObjectType(typeId);
-            type.SingularName = "Company";
-            type.PluralName = "Companies";
+            var @classId = new Guid("{07B000C7-800F-459b-A6BB-17DC9E690A06}");
+            var @class = this.domain.BuildClass(@classId, "Company", "Companies");
 
             var relationId = new Guid("{3C48C2D5-79E2-4da2-BDB4-2EE7307DB5EF}");
-            var associationId = new Guid("{48CA4E59-70E0-4FFD-ADED-CFAEAE300C0E}");
-            var roleId = new Guid("{756E3B6F-12AF-4BB2-9F68-DAF928C7267A}"); 
-            var relationType = this.domain.AddDeclaredRelationType(relationId, associationId, roleId);
-            relationType.AssociationType.ObjectType = type;
-            relationType.RoleType.ObjectType = type;
-            relationType.RoleType.AssignedSingularName = "role";
-            relationType.RoleType.AssignedPluralName = "roles";
+            var associationId = new Guid("{F43B2971-DEB8-494B-B2D3-3A5331991A03}");
+            var roleId = new Guid("{B0FDE156-1009-4A04-B61D-10F1A6326416}");
+            var relationType = this.domain.BuildRelationType(relationId, associationId, @class, roleId, @class, "role", "roles");
 
             var relation2Id = new Guid("{ABB975B6-5374-4654-96A2-E98D5C2A1786}");
-            var association2Id = new Guid("{F461CC12-4C57-4425-88F9-D38BDB9981EE}");
-            var role2Id = new Guid("{ADD8F2F4-C99C-413D-9613-22C4C6809527}");
-            var relation2 = this.domain.AddDeclaredRelationType(relation2Id, association2Id, role2Id);
-            relation2.AssociationType.ObjectType = type;
-            relation2.RoleType.ObjectType = type;
-            relation2.RoleType.AssignedSingularName = "role2";
-            relation2.RoleType.AssignedPluralName = "roles2";
+            var association2Id = new Guid("{9A1B9365-29D0-4AD4-B6C6-D2D385EABC01}");
+            var role2Id = new Guid("{4F280135-E385-4C08-B06E-AD38DDAAA0D5}");
+            var relation2 = this.domain.BuildRelationType(relation2Id, association2Id, @class, role2Id, @class, "role2", "roles2");
 
-            Assert.IsTrue(this.domain.IsValid);
+            Assert.IsTrue(this.domain.MetaPopulation.IsValid);
 
             this.template.Generate(new DummyLog());
 
@@ -584,10 +554,10 @@ domain(domain,settings) ::= <<
             var actualXml = this.ToComparableXml(xmlDocumnt.InnerXml);
             Assert.AreEqual(expectedXml, actualXml);
 
-            xmlFileInfo = new FileInfo(Path.Combine(this.repository.OutputDirectoryInfo.FullName, "test/" + typeId.ToString().ToLower() + ".xml"));
+            xmlFileInfo = new FileInfo(Path.Combine(this.repository.OutputDirectoryInfo.FullName, "test/" + classId.ToString().ToLower() + ".xml"));
             xmlDocumnt = new XmlDocument();
             xmlDocumnt.Load(xmlFileInfo.FullName);
-            expectedXml = this.ToComparableXml(@"<objectType id=""" + typeId.ToString().ToLower() + @"""/>");
+            expectedXml = this.ToComparableXml(@"<objectType id=""" + classId.ToString().ToLower() + @"""/>");
             actualXml = this.ToComparableXml(xmlDocumnt.InnerXml);
             Assert.AreEqual(expectedXml, actualXml);
 
@@ -606,7 +576,7 @@ domain(domain,settings) ::= <<
             Assert.AreEqual(expectedXml, actualXml);
 
             relationType.RoleType.AssignedSingularName = "role3";
-            Assert.IsTrue(this.domain.IsValid);
+            Assert.IsTrue(this.domain.MetaPopulation.IsValid);
 
             this.template.Generate(new DummyLog());
 
@@ -617,10 +587,10 @@ domain(domain,settings) ::= <<
             actualXml = this.ToComparableXml(xmlDocumnt.InnerXml);
             Assert.AreEqual(expectedXml, actualXml);
 
-            xmlFileInfo = new FileInfo(Path.Combine(this.repository.OutputDirectoryInfo.FullName, "test/" + typeId.ToString().ToLower() + ".xml"));
+            xmlFileInfo = new FileInfo(Path.Combine(this.repository.OutputDirectoryInfo.FullName, "test/" + classId.ToString().ToLower() + ".xml"));
             xmlDocumnt = new XmlDocument();
             xmlDocumnt.Load(xmlFileInfo.FullName);
-            expectedXml = this.ToComparableXml(@"<objectType id=""" + typeId.ToString().ToLower() + @"""/>");
+            expectedXml = this.ToComparableXml(@"<objectType id=""" + classId.ToString().ToLower() + @"""/>");
             actualXml = this.ToComparableXml(xmlDocumnt.InnerXml);
             Assert.AreEqual(expectedXml, actualXml);
 

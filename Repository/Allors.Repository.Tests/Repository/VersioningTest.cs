@@ -194,21 +194,16 @@ namespace Allors.Meta
             var domain = this.repository.Domain;
             domain.Name = "MySuperDomain";
 
-            var abstractClassId = Guid.NewGuid();
-            var abstractClass = domain.AddDeclaredObjectType(abstractClassId);
-            abstractClass.SingularName = "AbstractClass";
-            abstractClass.PluralName = "AbstractClasses";
-            abstractClass.IsAbstract = true;
+            var interfaceId = Guid.NewGuid();
+            var @interface = domain.BuildInterface(interfaceId, "Interface", "Interfaces");
 
-            var concreteClassId = Guid.NewGuid();
-            var concreteClass = domain.AddDeclaredObjectType(concreteClassId);
-            concreteClass.SingularName = "ConcreteClass";
-            concreteClass.PluralName = "ConcreteClasses";
+            var classId = Guid.NewGuid();
+            var @class = domain.BuildClass(classId, "Class", "Classes");
 
-            Assert.IsTrue(domain.IsValid);
+            Assert.IsTrue(domain.MetaPopulation.IsValid);
 
-            abstractClass.SendChangedEvent();
-            concreteClass.SendChangedEvent();
+            @interface.SendChangedEvent();
+            @class.SendChangedEvent();
             domain.SendChangedEvent();
 
             var inheritanceId = Guid.NewGuid();
@@ -218,9 +213,9 @@ namespace Allors.Meta
                 var inheritanceXmlFileInfo = new FileInfo(Path.Combine(this.InheritancesDirectoryInfo.FullName, inheritanceId + ".inheritance"));
 
                 var inheritanceXml =
-                    @"<inheritance id=""" + inheritanceId + @""" allors=""" + version + @""">
-    <subtype idref=""" + concreteClassId + @"""/>
-    <supertype idref=""" + abstractClassId + @"""/>
+@"<inheritance id=""" + inheritanceId + @""" allors=""" + version + @""">
+    <subtype idref=""" + classId + @"""/>
+    <supertype idref=""" + interfaceId + @"""/>
 </inheritance>";
                 File.WriteAllText(inheritanceXmlFileInfo.FullName, inheritanceXml);
 
@@ -245,21 +240,16 @@ namespace Allors.Meta
             var domain = this.repository.Domain;
             domain.Name = "MyDomain";
 
-            var abstractClassId = Guid.NewGuid();
-            var abstractClass = domain.AddDeclaredObjectType(abstractClassId);
-            abstractClass.SingularName = "AbstractClass";
-            abstractClass.PluralName = "AbstractClasses";
-            abstractClass.IsAbstract = true;
+            var interfaceId = Guid.NewGuid();
+            var @interface = domain.BuildInterface(interfaceId, "Interface", "Interfaces");
 
-            var concreteClassId = Guid.NewGuid();
-            var concreteClass = domain.AddDeclaredObjectType(concreteClassId);
-            concreteClass.SingularName = "ConcreteClass";
-            concreteClass.PluralName = "ConcreteClasses";
+            var classId = Guid.NewGuid();
+            var @class = domain.BuildClass(classId, "Class", "Classes");
 
-            Assert.IsTrue(domain.IsValid);
+            Assert.IsTrue(domain.MetaPopulation.IsValid);
 
-            abstractClass.SendChangedEvent();
-            concreteClass.SendChangedEvent();
+            @interface.SendChangedEvent();
+            @class.SendChangedEvent();
             domain.SendChangedEvent();
 
             var inheritanceId = Guid.NewGuid();
@@ -268,8 +258,8 @@ namespace Allors.Meta
 
             var inheritanceXml =
 @"<inheritance id=""" + inheritanceId + @""">
-    <subtype idref=""" + concreteClassId + @"""/>
-    <supertype idref=""" + abstractClassId + @"""/>
+    <subtype idref=""" + @classId + @"""/>
+    <supertype idref=""" + @interfaceId + @"""/>
 </inheritance>";
             File.WriteAllText(inheritanceXmlFileInfo.FullName, inheritanceXml);
 

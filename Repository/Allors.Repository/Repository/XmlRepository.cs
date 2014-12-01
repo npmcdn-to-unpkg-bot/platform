@@ -26,6 +26,7 @@ namespace Allors.Meta
     using System.IO;
     using System.Xml;
 
+    using Allors.Meta.Events;
     using Allors.Meta.Tasks;
     using Allors.Meta.Templates;
     using Allors.Meta.Meta.Xml;
@@ -80,6 +81,22 @@ namespace Allors.Meta
 
         private List<Template> templates;
 
+        public void RemoveSuper(Domain superDomainToRemove)
+        {
+            XmlRepository repositoryToRemove;
+            if (this.repositoryBySuperId.TryGetValue(superDomainToRemove.Id, out repositoryToRemove))
+            {
+                this.repositoryBySuperId.Remove(superDomainToRemove.Id);
+                this.domain.SyncFromMeta(this.domainXml);
+                this.domainXml.Save();
+
+                this.xml.RemoveSuperDomainLocation(superDomainToRemove.Id);
+                this.xml.Save();
+
+                this.Init(false);
+            }
+        }
+
         public XmlRepository(DirectoryInfo directoryInfo, bool create = false)
         {
             this.directoryInfo = directoryInfo;
@@ -89,6 +106,10 @@ namespace Allors.Meta
         public event EventHandler<RepositoryObjectChangedEventArgs> ObjectChanged;
 
         public event EventHandler<RepositoryObjectDeletedEventArgs> ObjectDeleted;
+
+        public event EventHandler<RepositoryMetaObjectChangedEventArgs> MetaObjectChanged;
+
+        public event EventHandler<RepositoryMetaObjectDeletedEventArgs> MetaObjectDeleted;
 
         public DirectoryInfo DirectoryInfo 
         {
@@ -135,6 +156,21 @@ namespace Allors.Meta
                 this.xml.Save();
                 this.SendChangedEvent(this);
             }
+        }
+
+        public Template[] Templates
+        {
+            get
+            {
+                return this.templates.ToArray();
+            }
+        }
+
+        public Template AddTemplate()
+        {
+            var template = new Template(this);
+            this.templates.Add(template);
+            return template;
         }
 
         public override int CompareTo(object obj)
@@ -207,7 +243,17 @@ namespace Allors.Meta
             }
         }
 
-        private Domain AddSuper(XmlRepository superDomainRepository)
+        public Domain AddSuper(DirectoryInfo directoryInfo)
+        {
+            var superRepository = new XmlRepository(directoryInfo);
+            var superDomain = this.AddSuper(superRepository);
+
+            this.Init(false);
+
+            return superDomain;
+        }
+
+        public Domain AddSuper(XmlRepository superDomainRepository)
         {
             if (superDomainRepository.Equals(this))
             {
@@ -216,7 +262,7 @@ namespace Allors.Meta
 
             this.repositoryBySuperId.Add(superDomainRepository.Domain.Id, superDomainRepository);
             var superDomain = superDomainRepository.Domain;
-            this.Domain.AddDirectSuperdomain(superDomain);
+            this.Domain.Inherit(superDomain);
 
             this.Domain.SyncFromMeta(this.domainXml);
             this.domainXml.Save();
@@ -324,7 +370,14 @@ namespace Allors.Meta
                 var objectTypeXml = ObjectTypeXml.Load(typeFileInfo);
                 this.objectTypeXmlsById[objectTypeXml.id] = objectTypeXml;
 
-                this.domain.AddDeclaredObjectType(objectTypeXml.id);
+                if (!string.IsNullOrEmpty(objectTypeXml.isInterface) && bool.Parse(objectTypeXml.isInterface))
+                {
+                    new InterfaceBuilder(this.domain, objectTypeXml.id).Build();
+                }
+                else
+                {
+                    new ClassBuilder(this.domain, objectTypeXml.id).Build();
+                }
             }
 
             // then sync ObjectTypes
@@ -339,7 +392,7 @@ namespace Allors.Meta
                 var inheritanceXml = InheritanceXml.Load(inheritanceFileInfo);
                 this.inheritanceXmlsById[inheritanceXml.id] = inheritanceXml;
 
-                var inheritance = this.domain.AddDeclaredInheritance(inheritanceXml.id);
+                var inheritance = new InheritanceBuilder(this.domain, inheritanceXml.id).Build();
                 inheritance.SyncToMeta(this, inheritanceXml);
             }
 
@@ -376,7 +429,7 @@ namespace Allors.Meta
                     newIds = true;
                 }
 
-                var relationType = this.domain.AddDeclaredRelationType(relationTypeXml.id, associationTypeId, roleTypeId);
+                var relationType = new RelationTypeBuilder(this.domain, relationTypeXml.id, associationTypeId, roleTypeId).Build();
 
                 if (newIds)
                 {

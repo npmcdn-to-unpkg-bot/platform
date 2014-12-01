@@ -28,5 +28,9 @@ namespace Allors.Meta
         public void SyncToMeta(XmlRepository xmlRepository, ObjectTypeXml objectTypeXml)
         {
         }
+
+        public void SendChangedEvent()
+        {
+        }
     }
 }

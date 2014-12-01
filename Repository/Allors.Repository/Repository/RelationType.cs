@@ -28,5 +28,16 @@ namespace Allors.Meta
         public void SyncToMeta(XmlRepository xmlRepository, RelationTypeXml relationTypeXml)
         {
         }
+
+        public void Copy(RelationType source)
+        {
+            this.AssignedMultiplicity = source.AssignedMultiplicity;
+            this.IsDerived = source.IsDerived;
+            this.IsIndexed = source.IsIndexed;
+        }
+
+        public void SendChangedEvent()
+        {
+        }
     }
 }

@@ -32,16 +32,16 @@ namespace Allors.R1.Development.Resources
     [TestFixture]
     public class MergeTest
     {
-        private readonly DirectoryInfo outpuDirectory = new DirectoryInfo("../../Allors.R1.Development.Tests.Resources");
-        private readonly DirectoryInfo inputDirectory1 = new DirectoryInfo("../../Allors.R1.Development.Tests.Resources/1");
-        private readonly DirectoryInfo inputDirectory2 = new DirectoryInfo("../../Allors.R1.Development.Tests.Resources/2");
-        private readonly DirectoryInfo inputDirectory3 = new DirectoryInfo("../../Allors.R1.Development.Tests.Resources/3");
-        private readonly DirectoryInfo inputDirectory4 = new DirectoryInfo("../../Allors.R1.Development.Tests.Resources/4");
+        private readonly DirectoryInfo outpuDirectory = new DirectoryInfo("../../Allors.Repository.Tests.Resources");
+        private readonly DirectoryInfo inputDirectory1 = new DirectoryInfo("../../Allors.Repository.Tests.Resources/1");
+        private readonly DirectoryInfo inputDirectory2 = new DirectoryInfo("../../Allors.Repository.Tests.Resources/2");
+        private readonly DirectoryInfo inputDirectory3 = new DirectoryInfo("../../Allors.Repository.Tests.Resources/3");
+        private readonly DirectoryInfo inputDirectory4 = new DirectoryInfo("../../Allors.Repository.Tests.Resources/4");
 
-        private readonly FileInfo fileA = new FileInfo("../../Allors.R1.Development.Tests.Resources/a.resx");
-        private readonly FileInfo fileAnl = new FileInfo("../../Allors.R1.Development.Tests.Resources/a-nl.resx");
+        private readonly FileInfo fileA = new FileInfo("../../Allors.Repository.Tests.Resources/a.resx");
+        private readonly FileInfo fileAnl = new FileInfo("../../Allors.Repository.Tests.Resources/a-nl.resx");
 
-        private readonly FileInfo mergeProjectFile = new FileInfo("../../Allors.R1.Development.Tests.Resources/Merge.proj");
+        private readonly FileInfo mergeProjectFile = new FileInfo("../../Allors.Repository.Tests.Resources/Merge.proj");
 
         [SetUp]
         public void SetUp()

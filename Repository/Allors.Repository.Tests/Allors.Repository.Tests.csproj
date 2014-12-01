@@ -92,17 +92,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\Extensions\DomainExtension.cs" />
-    <Compile Include="Repository\PushDownObjectTypeTest.cs" />
-    <Compile Include="Repository\PullUpObjectTypeTest.cs" />
-    <Compile Include="Repository\Extensions\DirectoryInfoExtension.cs" />
-    <Compile Include="Repository\FileInfoTest.cs" />
     <Compile Include="Repository\DomainTest.cs" />
     <Compile Include="Repository\DuplicateTest.cs" />
+    <Compile Include="Repository\Extensions\DirectoryInfoExtension.cs" />
+    <Compile Include="Repository\Extensions\DomainExtension.cs" />
+    <Compile Include="Repository\FileInfoTest.cs" />
     <Compile Include="Repository\GenerateTest.cs" />
+    <Compile Include="Repository\PullUpObjectTypeTest.cs" />
+    <Compile Include="Repository\PushDownObjectTypeTest.cs" />
+    <Compile Include="Repository\StorageTest.cs" />
     <Compile Include="Repository\SuperDomainsTest.cs" />
     <Compile Include="Repository\TemplateTest.cs" />
-    <Compile Include="Repository\StorageTest.cs" />
     <Compile Include="Repository\VersioningTest.cs" />
     <Compile Include="Resources\MergeTest.cs" />
   </ItemGroup>
@@ -111,10 +111,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Repository\Templates\allors.repository.stg" />
     <None Include="Settings.StyleCop" />
-    <None Include="Repository\Templates\allors.repository.stg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

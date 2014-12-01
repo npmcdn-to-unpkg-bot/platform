@@ -24,31 +24,29 @@ namespace Allors.Meta
 
     public static class DomainExtension
     {
-        public static ObjectType BuildObjectType(this Domain domain, Guid id, string singularName, string pluralName)
+        public static Interface BuildInterface(this Domain domain, Guid id, string singularName, string pluralName)
         {
-            var objectType = domain.AddDeclaredObjectType(id);
-            objectType.SingularName = singularName;
-            objectType.PluralName = pluralName;
-            objectType.SendChangedEvent();
-            return objectType;
+            return new InterfaceBuilder(domain, id).WithSingularName(singularName).WithPluralName(pluralName).Build();
         }
 
-        public static Inheritance BuildInheritance(this Domain domain, Guid id, ObjectType subType, ObjectType superType)
+        public static Class BuildClass(this Domain domain, Guid id, string singularName, string pluralName)
         {
-            var inheritance = domain.AddDeclaredInheritance(id);
-            inheritance.Subtype = subType;
-            inheritance.Supertype = superType;
-            inheritance.SendChangedEvent();
-            return inheritance;
+            return new ClassBuilder(domain, id).WithSingularName(singularName).WithPluralName(pluralName).Build();
         }
 
-        public static RelationType BuildRelationType(this Domain domain, Guid id, Guid associationTypeId, ObjectType associationObjectType, Guid roleTypeId, ObjectType roleObjectType)
+        public static Inheritance BuildInheritance(this Domain domain, Guid id, Composite subType, Interface superType)
         {
-            var relaionType = domain.AddDeclaredRelationType(id, associationTypeId, roleTypeId);
-            relaionType.AssociationType.ObjectType = associationObjectType;
-            relaionType.RoleType.ObjectType = roleObjectType;
-            relaionType.SendChangedEvent();
-            return relaionType;
+            return new InheritanceBuilder(domain, id).WithSubtype(subType).WithSupertype(superType).Build();
+        }
+
+        public static RelationType BuildRelationType(this Domain domain, Guid id, Guid associationTypeId, Composite associationObjectType, Guid roleTypeId, ObjectType roleObjectType)
+        {
+            return new RelationTypeBuilder(domain, id, associationTypeId, roleTypeId).WithObjectTypes(associationObjectType, roleObjectType).Build();
+        }
+
+        public static RelationType BuildRelationType(this Domain domain, Guid id, Guid associationTypeId, Composite associationObjectType, Guid roleTypeId, ObjectType roleObjectType, string singularName, string pluralName)
+        {
+            return new RelationTypeBuilder(domain, id, associationTypeId, roleTypeId).WithObjectTypes(associationObjectType, roleObjectType).Build();
         }
     }
 }

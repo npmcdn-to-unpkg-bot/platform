@@ -172,9 +172,6 @@
     <Compile Include="..\..\core\meta\core\RelationTypeBuilder.v.cs">
       <Link>Core\RelationTypeBuilder.v.cs</Link>
     </Compile>
-    <Compile Include="..\..\core\meta\core\Repository.cs">
-      <Link>Core\Repository.cs</Link>
-    </Compile>
     <Compile Include="..\..\core\meta\core\RoleType.cs">
       <Link>Core\RoleType.cs</Link>
     </Compile>
@@ -203,25 +200,23 @@
     <Compile Include="Repository\Generation\Template.cs" />
     <Compile Include="Repository\Generation\Xml\SettingsXml.cs" />
     <Compile Include="Repository\Generation\Xml\TemplateXml.cs" />
+    <Compile Include="Repository\Class.cs" />
     <Compile Include="Repository\Log.cs" />
+    <Compile Include="Repository\Interface.cs" />
     <Compile Include="Repository\RepositoryObject.cs" />
-    <Compile Include="Repository\RepositoryObjectChangedEventArgs.cs" />
-    <Compile Include="Repository\RepositoryObjectDeletedEventArgs.cs" />
+    <Compile Include="Repository\Events\RepositoryObjectChangedEventArgs.cs" />
+    <Compile Include="Repository\Events\RepositoryObjectDeletedEventArgs.cs" />
     <Compile Include="Repository\Storage\AllorsDirectoryInfo.cs" />
     <Compile Include="Repository\Storage\AllorsFileInfo.cs" />
     <Compile Include="Repository\Storage\Location.cs" />
     <Compile Include="Repository\Tasks\Generate.cs" />
     <Compile Include="Repository\Tasks\GenerateLog.cs" />
     <Compile Include="Repository\XmlRepository.cs" />
-    <Compile Include="Repository\MetaPopulation.cs" />
     <Compile Include="Repository\AssociationType..cs" />
     <Compile Include="Repository\Domain.cs" />
-    <Compile Include="Repository\Events\MetaObjectChangedEventArgs.cs" />
-    <Compile Include="Repository\Events\MetaObjectDeletedEventArgs.cs" />
     <Compile Include="Repository\Events\RepositoryMetaObjectChangedEventArgs.cs" />
     <Compile Include="Repository\Events\RepositoryMetaObjectDeletedEventArgs.cs" />
     <Compile Include="Repository\Inheritance.cs" />
-    <Compile Include="Repository\MetaObject.cs" />
     <Compile Include="Repository\ObjectType.cs" />
     <Compile Include="Repository\RelationType.cs" />
     <Compile Include="Repository\Resources\ResourceDirectory.cs" />

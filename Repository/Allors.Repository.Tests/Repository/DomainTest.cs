@@ -362,18 +362,18 @@ namespace Allors.Meta
 
             var associationSortRelationType = superDomain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             associationSortRelationType.AssociationType.ObjectType = associationObjectType;
-            associationSortRelationType.RoleType.ObjectType = (ObjectType)superDomain.Domain.Find(UnitTypeIds.StringId);
+            associationSortRelationType.RoleType.ObjectType = (ObjectType)superDomain.Domain.Find(UnitIds.StringId);
             associationSortRelationType.RoleType.Size = 100;
             associationSortRelationType.SendChangedEvent();
 
             var roleSortRelationType = superDomain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             roleSortRelationType.AssociationType.ObjectType = roleObjectType;
-            roleSortRelationType.RoleType.ObjectType = (ObjectType)superDomain.Domain.Find(UnitTypeIds.IntegerId);
+            roleSortRelationType.RoleType.ObjectType = (ObjectType)superDomain.Domain.Find(UnitIds.IntegerId);
             roleSortRelationType.SendChangedEvent();
 
             var role2SortRelationType = superDomain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             role2SortRelationType.AssociationType.ObjectType = roleObjectType;
-            role2SortRelationType.RoleType.ObjectType = (ObjectType)superDomain.Domain.Find(UnitTypeIds.DecimalId);
+            role2SortRelationType.RoleType.ObjectType = (ObjectType)superDomain.Domain.Find(UnitIds.DecimalId);
             role2SortRelationType.RoleType.Precision = 10;
             role2SortRelationType.RoleType.Scale = 2;
             role2SortRelationType.SendChangedEvent();
@@ -468,18 +468,18 @@ namespace Allors.Meta
 
             var associationSortRelationType = domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             associationSortRelationType.AssociationType.ObjectType = associationObjectType;
-            associationSortRelationType.RoleType.ObjectType = (ObjectType)domain.Domain.Find(UnitTypeIds.StringId);
+            associationSortRelationType.RoleType.ObjectType = (ObjectType)domain.Domain.Find(UnitIds.StringId);
             associationSortRelationType.RoleType.Size = 200;
             associationSortRelationType.SendChangedEvent();
 
             var roleSortRelationType = domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             roleSortRelationType.AssociationType.ObjectType = roleObjectType;
-            roleSortRelationType.RoleType.ObjectType = (ObjectType)domain.Domain.Find(UnitTypeIds.IntegerId);
+            roleSortRelationType.RoleType.ObjectType = (ObjectType)domain.Domain.Find(UnitIds.IntegerId);
             roleSortRelationType.SendChangedEvent();
 
             var role2SortRelationType = domain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
             role2SortRelationType.AssociationType.ObjectType = roleObjectType;
-            role2SortRelationType.RoleType.ObjectType = (ObjectType)domain.Domain.Find(UnitTypeIds.DecimalId);
+            role2SortRelationType.RoleType.ObjectType = (ObjectType)domain.Domain.Find(UnitIds.DecimalId);
             role2SortRelationType.RoleType.Precision = 10;
             role2SortRelationType.RoleType.Scale = 2;
             role2SortRelationType.SendChangedEvent();
@@ -695,7 +695,7 @@ namespace Allors.Meta
             var association = relationType.AssociationType;
             association.ObjectType = subClas;
             var role = relationType.RoleType;
-            role.ObjectType = (ObjectType)domain.Domain.Find(UnitTypeIds.StringId);
+            role.ObjectType = (ObjectType)domain.Domain.Find(UnitIds.StringId);
             role.Size = -1;
             relationType.SendChangedEvent();
 

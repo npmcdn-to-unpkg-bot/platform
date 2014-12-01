@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------------------------- 
-// <copyright file="MetaPopulation.cs" company="Allors bvba">
+// <copyright file="Interface.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -21,9 +21,12 @@
 
 namespace Allors.Meta
 {
-    using System.IO;
-
-    public partial class MetaPopulation
+    public partial class Interface
     {
+        public void Copy(Interface source)
+        {
+            this.SingularName = source.SingularName;
+            this.PluralName = source.PluralName;
+        }
     }
 }

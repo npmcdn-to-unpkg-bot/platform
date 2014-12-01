@@ -123,44 +123,24 @@ namespace Allors.Meta
         {
             var superDomain = this.superDomainRepository.Domain;
 
-            var superDomainAssociationType = superDomain.AddDeclaredObjectType(Guid.NewGuid());
-            superDomainAssociationType.SingularName = "SuperDomainAssociationType";
-            superDomainAssociationType.PluralName = "SuperDomainAssociationTypes";
+            var superDomainAssociationClass = superDomain.BuildClass(Guid.NewGuid(), "SuperDomainAssociationType", "SuperDomainAssociationTypes");
+            var superDomainRoleInterface = superDomain.BuildInterface(Guid.NewGuid(), "SuperDomainRoleType", "SuperDomainRoleTypes");
+            
+            var superDomainInterface = superDomain.BuildInterface(Guid.NewGuid(), "SuperDomainAbstractType", "SuperDomainAbstractTypes");
+            var superDomainSuperInterface = superDomain.BuildInterface(Guid.NewGuid(), "SuperDomainInterfaceType", "SuperDomainInterfaceTypes");
+            
+            var superDomainAssociationInheritance = superDomain.BuildInheritance(Guid.NewGuid(), superDomainAssociationClass, superDomainInterface);
+            var superDomainRoleInheritance = superDomain.BuildInheritance(Guid.NewGuid(), superDomainRoleInterface, superDomainInterface);
 
-            var superDomainRoleType = superDomain.AddDeclaredObjectType(Guid.NewGuid());
-            superDomainRoleType.SingularName = "SuperDomainRoleType";
-            superDomainRoleType.PluralName = "SuperDomainRoleTypes";
-
-            var superDomainAbstractType = superDomain.AddDeclaredObjectType(Guid.NewGuid());
-            superDomainAbstractType.SingularName = "SuperDomainAbstractType";
-            superDomainAbstractType.PluralName = "SuperDomainAbstractTypes";
-
-            var superDomainInterfaceType = superDomain.AddDeclaredObjectType(Guid.NewGuid());
-            superDomainInterfaceType.SingularName = "SuperDomainInterfaceType";
-            superDomainInterfaceType.PluralName = "SuperDomainInterfaceTypes";
-
-            var superDomainAbstractInheritance = superDomain.AddDeclaredInheritance(Guid.NewGuid());
-            superDomainAbstractInheritance.Subtype = superDomainAssociationType;
-            superDomainAbstractInheritance.Supertype = superDomainAbstractType;
-
-            var superDomainInterfaceInheritance = superDomain.AddDeclaredInheritance(Guid.NewGuid());
-            superDomainInterfaceInheritance.Subtype = superDomainRoleType;
-            superDomainInterfaceInheritance.Supertype = superDomainInterfaceType;
-
-            var superDomainUnitRelationType = superDomain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            superDomainUnitRelationType.AssociationType.ObjectType = superDomainAssociationType;
-            superDomainUnitRelationType.RoleType.ObjectType = (ObjectType)superDomain.Domain.Find(UnitTypeIds.StringId);
-
-            var superDomainCompositeRelationType = superDomain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            superDomainCompositeRelationType.AssociationType.ObjectType = superDomainAssociationType;
-            superDomainCompositeRelationType.RoleType.ObjectType = superDomainRoleType;
-
-            superDomainAssociationType.SendChangedEvent();
-            superDomainRoleType.SendChangedEvent();
-            superDomainAbstractType.SendChangedEvent();
-            superDomainInterfaceType.SendChangedEvent();
-            superDomainAbstractInheritance.SendChangedEvent();
-            superDomainInterfaceInheritance.SendChangedEvent();
+            var superDomainUnitRelationType = superDomain.BuildRelationType(Guid.NewGuid(), Guid.NewGuid(), superDomainAssociationClass, Guid.NewGuid(), (ObjectType)superDomain.MetaPopulation.Find(UnitIds.StringId));
+            var superDomainCompositeRelationType = superDomain.BuildRelationType(Guid.NewGuid(), Guid.NewGuid(), superDomainAssociationClass, Guid.NewGuid(), superDomainRoleInterface);
+            
+            superDomainAssociationClass.SendChangedEvent();
+            superDomainRoleInterface.SendChangedEvent();
+            superDomainInterface.SendChangedEvent();
+            superDomainSuperInterface.SendChangedEvent();
+            superDomainAssociationInheritance.SendChangedEvent();
+            superDomainRoleInheritance.SendChangedEvent();
             superDomainUnitRelationType.SendChangedEvent();
             superDomainCompositeRelationType.SendChangedEvent();
 
@@ -184,15 +164,15 @@ namespace Allors.Meta
 </domain>";
             this.AssertXml(expectedXml, xmlFileInfo);
 
-            var domainSuperDomain = (Domain)domain.Domain.Find(superDomain.Id);
-            var domainAssociationType = (ObjectType)domain.Domain.Find(superDomainAssociationType.Id);
-            var domainRoleType = (ObjectType)domain.Domain.Find(superDomainRoleType.Id);
-            var domainAbstractType = (ObjectType)domain.Domain.Find(superDomainAbstractType.Id);
-            var domainInterfaceType = (ObjectType)domain.Domain.Find(superDomainInterfaceType.Id);
-            var domainAbstractInheritance = (Inheritance)domain.Domain.Find(superDomainAbstractInheritance.Id);
-            var domainInterfaceInheritance = (Inheritance)domain.Domain.Find(superDomainInterfaceInheritance.Id);
-            var domainUnitRelationType = (RelationType)domain.Domain.Find(superDomainUnitRelationType.Id);
-            var domainCompositeRelationType = (RelationType)domain.Domain.Find(superDomainCompositeRelationType.Id);
+            var domainSuperDomain = (Domain)domain.MetaPopulation.Find(superDomain.Id);
+            var domainAssociationType = (ObjectType)domain.MetaPopulation.Find(superDomainAssociationClass.Id);
+            var domainRoleType = (ObjectType)domain.MetaPopulation.Find(superDomainRoleInterface.Id);
+            var domainAbstractType = (ObjectType)domain.MetaPopulation.Find(superDomainInterface.Id);
+            var domainInterfaceType = (ObjectType)domain.MetaPopulation.Find(superDomainSuperInterface.Id);
+            var domainAbstractInheritance = (Inheritance)domain.MetaPopulation.Find(superDomainAssociationInheritance.Id);
+            var domainInterfaceInheritance = (Inheritance)domain.MetaPopulation.Find(superDomainRoleInheritance.Id);
+            var domainUnitRelationType = (RelationType)domain.MetaPopulation.Find(superDomainUnitRelationType.Id);
+            var domainCompositeRelationType = (RelationType)domain.MetaPopulation.Find(superDomainCompositeRelationType.Id);
             
             Assert.AreEqual(0, this.ObjectTypesDirectoryInfo.GetFiles().Length);
             Assert.AreEqual(0, this.RelationTypesDirectoryInfo.GetFiles().Length);
@@ -203,12 +183,12 @@ namespace Allors.Meta
             Assert.AreEqual(0, this.InheritancesDirectoryInfo.GetFiles().Length);
 
             Assert.AreEqual(superDomain.Id, domainSuperDomain.Id);
-            Assert.AreEqual(superDomainAssociationType.Id, domainAssociationType.Id);
-            Assert.AreEqual(superDomainRoleType.Id, domainRoleType.Id);
-            Assert.AreEqual(superDomainAbstractType.Id, domainAbstractType.Id);
-            Assert.AreEqual(superDomainInterfaceType.Id, domainInterfaceType.Id);
-            Assert.AreEqual(superDomainAbstractInheritance.Id, domainAbstractInheritance.Id);
-            Assert.AreEqual(superDomainInterfaceInheritance.Id, domainInterfaceInheritance.Id);
+            Assert.AreEqual(superDomainAssociationClass.Id, domainAssociationType.Id);
+            Assert.AreEqual(superDomainRoleInterface.Id, domainRoleType.Id);
+            Assert.AreEqual(superDomainInterface.Id, domainAbstractType.Id);
+            Assert.AreEqual(superDomainSuperInterface.Id, domainInterfaceType.Id);
+            Assert.AreEqual(superDomainAssociationInheritance.Id, domainAbstractInheritance.Id);
+            Assert.AreEqual(superDomainRoleInheritance.Id, domainInterfaceInheritance.Id);
             Assert.AreEqual(superDomainUnitRelationType.Id, domainUnitRelationType.Id);
             Assert.AreEqual(superDomainCompositeRelationType.Id, domainCompositeRelationType.Id);
 
@@ -231,29 +211,29 @@ namespace Allors.Meta
             var dupclicateRepository = new XmlRepository(this.domainDirectoryInfo);
             var duplicateDomain = dupclicateRepository.Domain;
 
-            Assert.IsFalse(domain.IsValid);
+            Assert.IsFalse(domain.MetaPopulation.IsValid);
 
-            var duplicateSuperDomain = (Domain)duplicateDomain.Domain.Find(superDomain.Id);
-            var duplicateAssociationType = (ObjectType)duplicateDomain.Domain.Find(superDomainAssociationType.Id);
-            var duplicateRoleType = (ObjectType)duplicateDomain.Domain.Find(superDomainRoleType.Id);
-            var duplicateAbstractType = (ObjectType)duplicateDomain.Domain.Find(superDomainAbstractType.Id);
-            var duplicateInterfaceType = (ObjectType)duplicateDomain.Domain.Find(superDomainInterfaceType.Id);
-            var duplicateAbstractInheritance = (Inheritance)duplicateDomain.Domain.Find(superDomainAbstractInheritance.Id);
-            var duplicateInterfaceInheritance = (Inheritance)duplicateDomain.Domain.Find(superDomainInterfaceInheritance.Id);
-            var duplicateUnitRelationType = (RelationType)duplicateDomain.Domain.Find(superDomainUnitRelationType.Id);
-            var duplicateCompositeRelationType = (RelationType)duplicateDomain.Domain.Find(superDomainCompositeRelationType.Id);
+            var duplicateSuperDomain = (Domain)duplicateDomain.MetaPopulation.Find(superDomain.Id);
+            var duplicateAssociationType = (ObjectType)duplicateDomain.MetaPopulation.Find(superDomainAssociationClass.Id);
+            var duplicateRoleType = (ObjectType)duplicateDomain.MetaPopulation.Find(superDomainRoleInterface.Id);
+            var duplicateAbstractType = (ObjectType)duplicateDomain.MetaPopulation.Find(superDomainInterface.Id);
+            var duplicateInterfaceType = (ObjectType)duplicateDomain.MetaPopulation.Find(superDomainSuperInterface.Id);
+            var duplicateAbstractInheritance = (Inheritance)duplicateDomain.MetaPopulation.Find(superDomainAssociationInheritance.Id);
+            var duplicateInterfaceInheritance = (Inheritance)duplicateDomain.MetaPopulation.Find(superDomainRoleInheritance.Id);
+            var duplicateUnitRelationType = (RelationType)duplicateDomain.MetaPopulation.Find(superDomainUnitRelationType.Id);
+            var duplicateCompositeRelationType = (RelationType)duplicateDomain.MetaPopulation.Find(superDomainCompositeRelationType.Id);
             
             Assert.AreEqual(0, this.ObjectTypesDirectoryInfo.GetFiles().Length);
             Assert.AreEqual(0, this.RelationTypesDirectoryInfo.GetFiles().Length);
             Assert.AreEqual(0, this.InheritancesDirectoryInfo.GetFiles().Length);
 
             Assert.AreEqual(superDomain.Id, duplicateSuperDomain.Id);
-            Assert.AreEqual(superDomainAssociationType.Id, duplicateAssociationType.Id);
-            Assert.AreEqual(superDomainRoleType.Id, duplicateRoleType.Id);
-            Assert.AreEqual(superDomainAbstractType.Id, duplicateAbstractType.Id);
-            Assert.AreEqual(superDomainInterfaceType.Id, duplicateInterfaceType.Id);
-            Assert.AreEqual(superDomainAbstractInheritance.Id, duplicateAbstractInheritance.Id);
-            Assert.AreEqual(superDomainInterfaceInheritance.Id, duplicateInterfaceInheritance.Id);
+            Assert.AreEqual(superDomainAssociationClass.Id, duplicateAssociationType.Id);
+            Assert.AreEqual(superDomainRoleInterface.Id, duplicateRoleType.Id);
+            Assert.AreEqual(superDomainInterface.Id, duplicateAbstractType.Id);
+            Assert.AreEqual(superDomainSuperInterface.Id, duplicateInterfaceType.Id);
+            Assert.AreEqual(superDomainAssociationInheritance.Id, duplicateAbstractInheritance.Id);
+            Assert.AreEqual(superDomainRoleInheritance.Id, duplicateInterfaceInheritance.Id);
             Assert.AreEqual(superDomainUnitRelationType.Id, duplicateUnitRelationType.Id);
             Assert.AreEqual(superDomainCompositeRelationType.Id, duplicateCompositeRelationType.Id);
         }
@@ -262,52 +242,29 @@ namespace Allors.Meta
         public void DeleteSuperDomain()
         {
             var superDomain = this.superDomainRepository.Domain;
-
-            var superDomainAssociationType = superDomain.AddDeclaredObjectType(Guid.NewGuid());
-            superDomainAssociationType.SingularName = "SuperDomainAssociationType";
-            superDomainAssociationType.PluralName = "SuperDomainAssociationTypes";
-
-            var superDomainRoleType = superDomain.AddDeclaredObjectType(Guid.NewGuid());
-            superDomainRoleType.SingularName = "SuperDomainRoleType";
-            superDomainRoleType.PluralName = "SuperDomainRoleTypes";
-
-            var superDomainAbstractType = superDomain.AddDeclaredObjectType(Guid.NewGuid());
-            superDomainAbstractType.SingularName = "SuperDomainAbstractType";
-            superDomainAbstractType.PluralName = "SuperDomainAbstractTypes";
-
-            var superDomainInterfaceType = superDomain.AddDeclaredObjectType(Guid.NewGuid());
-            superDomainInterfaceType.SingularName = "SuperDomainInterfaceType";
-            superDomainInterfaceType.PluralName = "SuperDomainInterfaceTypes";
-
-            var superDomainAbstractInheritance = superDomain.AddDeclaredInheritance(Guid.NewGuid());
-            superDomainAbstractInheritance.Subtype = superDomainAssociationType;
-            superDomainAbstractInheritance.Supertype = superDomainAbstractType;
-
-            var superDomainInterfaceInheritance = superDomain.AddDeclaredInheritance(Guid.NewGuid());
-            superDomainInterfaceInheritance.Subtype = superDomainRoleType;
-            superDomainInterfaceInheritance.Supertype = superDomainInterfaceType;
-
-            var superDomainUnitRelationType = superDomain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            superDomainUnitRelationType.AssociationType.ObjectType = superDomainAssociationType;
-            superDomainUnitRelationType.RoleType.ObjectType = (ObjectType)superDomain.Domain.Find(UnitTypeIds.StringId);
-
-            var superDomainCompositeRelationType = superDomain.AddDeclaredRelationType(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid());
-            superDomainCompositeRelationType.AssociationType.ObjectType = superDomainAssociationType;
-            superDomainCompositeRelationType.RoleType.ObjectType = superDomainRoleType;
-
-            superDomainAssociationType.SendChangedEvent();
-            superDomainRoleType.SendChangedEvent();
-            superDomainAbstractType.SendChangedEvent();
-            superDomainInterfaceType.SendChangedEvent();
-            superDomainAbstractInheritance.SendChangedEvent();
-            superDomainInterfaceInheritance.SendChangedEvent();
+            
+            var superDomainAssociationClass = superDomain.BuildClass(Guid.NewGuid(), "SuperDomainAssociationType", "SuperDomainAssociationTypes");
+            var superDomainRoleInterface = superDomain.BuildInterface(Guid.NewGuid(), "SuperDomainRoleType", "SuperDomainRoleTypes");
+            var superDomainInterface = superDomain.BuildInterface(Guid.NewGuid(), "SuperDomainAbstractType", "SuperDomainAbstractTypes");
+            var superDomainSuperInterface = superDomain.BuildInterface(Guid.NewGuid(), "SuperDomainInterfaceType", "SuperDomainInterfaceTypes");
+            var superDomainAssociationInheritance = superDomain.BuildInheritance(Guid.NewGuid(), superDomainAssociationClass, superDomainInterface);
+            var superDomainRoleInheritance = superDomain.BuildInheritance(Guid.NewGuid(), superDomainRoleInterface, superDomainInterface);
+            var superDomainUnitRelationType = superDomain.BuildRelationType(Guid.NewGuid(), Guid.NewGuid(), superDomainAssociationClass, Guid.NewGuid(), (ObjectType)superDomain.MetaPopulation.Find(UnitIds.StringId));
+            var superDomainCompositeRelationType = superDomain.BuildRelationType(Guid.NewGuid(), Guid.NewGuid(), superDomainAssociationClass, Guid.NewGuid(), superDomainRoleInterface);
+            
+            superDomainAssociationClass.SendChangedEvent();
+            superDomainRoleInterface.SendChangedEvent();
+            superDomainInterface.SendChangedEvent();
+            superDomainSuperInterface.SendChangedEvent();
+            superDomainAssociationInheritance.SendChangedEvent();
+            superDomainRoleInheritance.SendChangedEvent();
             superDomainUnitRelationType.SendChangedEvent();
             superDomainCompositeRelationType.SendChangedEvent();
 
             this.domainRepository.AddSuper(this.superDomainDirectoryInfo);
 
             var domain = this.domainRepository.Domain;
-            var integratedSuperDomain = (Domain)domain.Domain.Find(superDomain.Id);
+            var integratedSuperDomain = (Domain)domain.MetaPopulation.Find(superDomain.Id);
 
             this.domainRepository.MetaObjectChanged += this.DomainRepositoryMetaObjectChanged;
 
@@ -327,7 +284,7 @@ namespace Allors.Meta
             this.domainRepository = new XmlRepository(this.domainRepository.DirectoryInfo);
 
             domain = this.domainRepository.Domain;
-            integratedSuperDomain = (Domain)domain.Domain.Find(superDomain.Id);
+            integratedSuperDomain = (Domain)domain.MetaPopulation.Find(superDomain.Id);
 
             Assert.IsNull(integratedSuperDomain);
         }

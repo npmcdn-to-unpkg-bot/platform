@@ -28,5 +28,15 @@ namespace Allors.Meta
         public void SyncToMeta(XmlRepository xmlRepository, InheritanceXml inheritanceXml)
         {
         }
+
+        public void Copy(Inheritance source)
+        {
+            this.Subtype = (Class)this.MetaPopulation.Find(source.Subtype.Id);
+            this.Supertype = (Interface)this.MetaPopulation.Find(source.Supertype.Id);
+        }
+
+        public void SendChangedEvent()
+        {
+        }
     }
 }
