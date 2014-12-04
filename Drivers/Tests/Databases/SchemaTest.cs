@@ -868,7 +868,6 @@ namespace Allors.Databases
         protected RelationType CreateDomainWithUnitRelationType(Guid relationTypeId, Guid roleTypeObjectId)
         {
             this.domain = new Domain(new MetaPopulation(), Guid.NewGuid()) { Name = "MyDomain" };
-            Repository.Core(this.domain.MetaPopulation);
 
             var c1 = new ClassBuilder(this.domain, Guid.NewGuid()).WithSingularName("C1").WithPluralName("C1s").Build();
             var unitType = (ObjectType)this.domain.MetaPopulation.Find(roleTypeObjectId);

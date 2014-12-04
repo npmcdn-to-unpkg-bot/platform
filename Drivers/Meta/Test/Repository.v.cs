@@ -26,12 +26,13 @@ namespace Allors.Meta
 
         static Repository()
         {
-            var env = new MetaPopulation();
+            var meta = new MetaPopulation();
 
-            Core(env);
-            Adapters(env);
+            Init(meta);
 
-            MetaPopulation = env;
+            AdaptersPostInit(meta);
+
+            MetaPopulation = meta;
         }
     }
 }

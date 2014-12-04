@@ -1,0 +1,5 @@
+<template allors="1.0">
+  <name>Repository</name>
+  <output>../../../Meta</output>
+  <source>file:///C:/github/allors/Base/Repository/External/repository.stg</source>
+</template>

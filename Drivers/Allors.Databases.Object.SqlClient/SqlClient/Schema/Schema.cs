@@ -26,7 +26,6 @@ namespace Allors.Databases.Object.SqlClient
     using System.Collections.Generic;
     using System.Data;
 
-    using Allors.Databases.Object.SqlClient;
     using Allors.Meta;
 
     internal abstract class Schema : IEnumerable<SchemaTable>
@@ -326,19 +325,19 @@ namespace Allors.Databases.Object.SqlClient
                             }
                         }
 
-                        var column = new SchemaColumn(this, roleType.SingularFullName, this.GetDbType(roleType), false, false, index, relationType, size, precision, scale);
+                        var column = new SchemaColumn(this, roleType.SingularPropertyName, this.GetDbType(roleType), false, false, index, relationType, size, precision, scale);
                         this.ColumnsByRelationType.Add(relationType, column);
                     }
                     else if (relationType.ExistExclusiveLeafClasses)
                     {
                         if (roleType.IsOne)
                         {
-                            var column = new SchemaColumn(this, roleType.SingularFullName, this.ObjectDbType, false, false, relationType.IsIndexed ? SchemaIndexType.Combined : SchemaIndexType.None, relationType);
+                            var column = new SchemaColumn(this, roleType.SingularPropertyName, this.ObjectDbType, false, false, relationType.IsIndexed ? SchemaIndexType.Combined : SchemaIndexType.None, relationType);
                             this.ColumnsByRelationType.Add(relationType, column);
                         }
                         else
                         {
-                            var column = new SchemaColumn(this, associationType.SingularFullName, this.ObjectDbType, false, false, relationType.IsIndexed ? SchemaIndexType.Combined : SchemaIndexType.None, relationType);
+                            var column = new SchemaColumn(this, associationType.SingularPropertyName, this.ObjectDbType, false, false, relationType.IsIndexed ? SchemaIndexType.Combined : SchemaIndexType.None, relationType);
                             this.ColumnsByRelationType.Add(relationType, column);
                         }
                     }

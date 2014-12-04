@@ -140,9 +140,6 @@
     <Compile Include="..\..\Core\Meta\Core\RelationTypeBuilder.v.cs">
       <Link>Core\RelationTypeBuilder.v.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Repository.cs">
-      <Link>Core\Repository.cs</Link>
-    </Compile>
     <Compile Include="..\..\Core\Meta\Core\RoleType.cs">
       <Link>Core\RoleType.cs</Link>
     </Compile>
@@ -164,6 +161,7 @@
     <Compile Include="..\..\Core\Meta\Core\ValidationLog.cs">
       <Link>Core\ValidationLog.cs</Link>
     </Compile>
+    <Compile Include="Repository.g.cs" />
     <Compile Include="Test\TestHelper.cs" />
     <Compile Include="Test\Repository.cs" />
     <Compile Include="Test\Repository.v.cs" />
