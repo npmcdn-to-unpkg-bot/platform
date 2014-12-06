@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="7a8255f5-4283-4803-9f96-60a9adc2743b">
+  <associationType id="2c9b2182-7b93-46c9-86ac-d13add6d52b5">
+    <isMany>true</isMany>
+    <objectType idref="80de925c-04cc-412c-83a5-60405b0e63e6" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <isIndexed>true</isIndexed>
+  <roleType id="7596f471-e54c-4491-8af6-02f0e8d7d015">
+    <objectType idref="3bba6e5a-dc2d-4838-b6c4-881f6c8c3013" />
+    <pluralName>ShipToParties</pluralName>
+    <singularName>ShipToParty</singularName>
+  </roleType>
+</relationType>

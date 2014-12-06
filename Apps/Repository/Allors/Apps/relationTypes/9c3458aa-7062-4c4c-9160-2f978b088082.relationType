@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="9c3458aa-7062-4c4c-9160-2f978b088082">
+  <associationType id="2efde592-4a60-4c79-bc20-f389c5df5966">
+    <isMany>true</isMany>
+    <objectType idref="0ae3caca-9b4b-407f-bd98-46db03b72a43" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="99b85157-6b6a-4556-a910-af955802b6da">
+    <objectType idref="385a2ae6-368c-4c3f-ad34-f8d69d8ca6cd" />
+    <pluralName>Preferences</pluralName>
+    <singularName>Preference</singularName>
+  </roleType>
+</relationType>

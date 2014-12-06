@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="1546c9f0-84ce-4795-bcea-634d6a78e867">
+  <associationType id="56c5ff64-f67b-4830-a1e4-11661b0ff898">
+    <isMany>true</isMany>
+    <objectType idref="2b162153-f74d-4f97-b97c-48f04749b216" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="a0e757a2-d780-43a1-8b21-ab2fc4d75e7e">
+    <objectType idref="3a5dcec7-308f-48c7-afee-35d38415aa0b" />
+    <pluralName>Suppliers</pluralName>
+    <singularName>Supplier</singularName>
+  </roleType>
+</relationType>

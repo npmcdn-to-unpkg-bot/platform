@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="eb5a3564-996d-4bbe-b592-6205adad93b8">
+  <associationType id="37612ba0-d689-49ca-9005-3b3bf21cd272">
+    <objectType idref="716647bf-7589-4146-a45c-a6a3b1cee507" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="bd5d13f3-c1e7-4eea-9c33-09f4b47289f3">
+    <isMany>true</isMany>
+    <objectType idref="80de925c-04cc-412c-83a5-60405b0e63e6" />
+    <pluralName>SalesOrderItems</pluralName>
+    <singularName>SalesOrderItem</singularName>
+  </roleType>
+</relationType>

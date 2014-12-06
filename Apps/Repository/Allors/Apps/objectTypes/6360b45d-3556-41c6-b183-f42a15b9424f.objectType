@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="6360b45d-3556-41c6-b183-f42a15b9424f">
+  <namespace idref="a7c2d9a4-951f-4268-a433-b6d0bdec9366" />
+  <pluralName>TimeEntries</pluralName>
+  <singularName>TimeEntry</singularName>
+</objectType>

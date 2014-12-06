@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="5e3c675b-b329-47a4-9d53-b0e95837a23b">
+  <associationType id="16fa813c-15d6-4bfb-a7b3-c295efe47a1c">
+    <isMany>true</isMany>
+    <objectType idref="fcdf4f00-d6f4-493f-a430-89789a3cdef6" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="f9320b55-230d-4f10-9a1b-6960137326b7">
+    <isMany>true</isMany>
+    <objectType idref="c799ca62-a554-467d-9aa2-1663293bb37f" />
+    <pluralName>Receivers</pluralName>
+    <singularName>Receiver</singularName>
+  </roleType>
+</relationType>

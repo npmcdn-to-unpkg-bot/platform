@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="f7e10109-a4f2-4a54-b810-b00edf8a9330">
+  <associationType id="5b22ae85-d5ae-41f7-a461-201ae48db339">
+    <isMany>true</isMany>
+    <objectType idref="752a68b0-836e-4cd5-92d5-ebf2bfeda491" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="bdcce46f-e800-43fa-8cbc-2d4c5f65a7b2">
+    <objectType idref="956ecb86-097d-43d4-83b5-a7f45ea75448" />
+    <pluralName>TakenViaOrganisationContactRelationships</pluralName>
+    <singularName>TakenViaOrganisationContactRelationship</singularName>
+  </roleType>
+</relationType>

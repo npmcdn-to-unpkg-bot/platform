@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="9dd17a3f-0e3c-4d87-b840-2f23a96dd165">
+  <namespace idref="78bc14e1-57ea-4c6e-97ae-a18880c0facd" />
+  <pluralName>NonSerializedInventoryItemObjectStates</pluralName>
+  <singularName>NonSerializedInventoryItemObjectState</singularName>
+</objectType>

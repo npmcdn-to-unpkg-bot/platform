@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="1ee19062-e36d-4836-b0e6-928a3957bd57">
+  <namespace idref="83d90516-d523-40b7-8edb-9bda4ee2cd52" />
+  <pluralName>PurchaseInvoiceItems</pluralName>
+  <singularName>PurchaseInvoiceItem</singularName>
+</objectType>

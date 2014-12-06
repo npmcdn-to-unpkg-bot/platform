@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="954d4e3c-f188-45f4-98b8-ece14ac7dabd">
+  <associationType id="a08d71c8-6aa1-4ae3-bccc-a8078bd51071">
+    <objectType idref="d8611e48-b0ba-4037-a992-09e3e26c6d5d" />
+  </associationType>
+  <roleType id="92f5fc7a-eabe-4710-b1fe-aa35e7fd1606">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>OrdersThreshold</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>OrderThreshold</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="208f711f-5d9d-4dc3-89ad-b1583ad06582">
+  <associationType id="d91ef645-f5ef-4f09-9d6b-c023d02978f5">
+    <objectType idref="321a6047-2233-4bec-a1b1-9b965c0099e5" />
+  </associationType>
+  <roleType id="c1467dbc-9b64-49a0-8715-90ad277b02c9">
+    <objectType idref="c402fbda-133a-4b59-858a-832fbd2ec565" />
+    <pluralName>RequiredResponseDates</pluralName>
+    <singularName>RequiredResponseDate</singularName>
+  </roleType>
+</relationType>

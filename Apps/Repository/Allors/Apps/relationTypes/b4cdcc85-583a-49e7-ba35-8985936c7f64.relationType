@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="b4cdcc85-583a-49e7-ba35-8985936c7f64">
+  <associationType id="2133d78d-9f26-46bf-b706-e01e032402df">
+    <objectType idref="0ae3caca-9b4b-407f-bd98-46db03b72a43" />
+  </associationType>
+  <roleType id="12dd7fcb-0777-43a6-9524-b2b79c92c40c">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>MinimalOrderQuantities</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>MinimalOrderQuantity</singularName>
+  </roleType>
+</relationType>

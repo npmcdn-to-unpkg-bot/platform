@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="eeb16852-431b-4b84-983d-559e64af6dfb">
+  <associationType id="85960e64-77a1-4744-9be5-c1704030247c">
+    <objectType idref="c799ca62-a554-467d-9aa2-1663293bb37f" />
+  </associationType>
+  <roleType id="6fe6349d-b63f-4387-9a3f-bf83576e0d97">
+    <objectType idref="ccd6f134-26de-4103-bff9-a37ec3e997a3" />
+    <pluralName>TotalYearsWorkExperiences</pluralName>
+    <singularName>TotalYearsWorkExperience</singularName>
+  </roleType>
+</relationType>

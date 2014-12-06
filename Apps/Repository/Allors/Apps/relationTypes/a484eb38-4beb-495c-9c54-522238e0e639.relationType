@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="a484eb38-4beb-495c-9c54-522238e0e639">
+  <associationType id="03c7d5c4-4c80-4511-9ab2-2745f3f17596">
+    <objectType idref="3b9f21f4-2f2c-47a9-9c76-15f5ef4f5e00" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="f4a2fdef-d91a-4c7e-94d5-ebe13ab94338">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>YTDRevenues</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>YTDRevenue</singularName>
+  </roleType>
+</relationType>

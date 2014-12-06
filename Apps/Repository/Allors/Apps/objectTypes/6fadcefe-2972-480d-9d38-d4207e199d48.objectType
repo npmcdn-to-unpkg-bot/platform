@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="6fadcefe-2972-480d-9d38-d4207e199d48">
+  <namespace idref="a92f6a7c-713b-432e-8d7e-bfc82d16b942" />
+  <pluralName>DropShipmentStatuses</pluralName>
+  <singularName>DropShipmentStatus</singularName>
+</objectType>

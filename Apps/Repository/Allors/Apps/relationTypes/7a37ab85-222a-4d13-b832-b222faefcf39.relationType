@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="7a37ab85-222a-4d13-b832-b222faefcf39">
+  <associationType id="79c04646-6f62-4867-9f89-f2ce1876e981">
+    <isMany>true</isMany>
+    <objectType idref="fcdf4f00-d6f4-493f-a430-89789a3cdef6" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="507e6ff3-3baa-4c77-b41b-4d1893443dc2">
+    <objectType idref="c799ca62-a554-467d-9aa2-1663293bb37f" />
+    <pluralName>Callers</pluralName>
+    <singularName>Caller</singularName>
+  </roleType>
+</relationType>

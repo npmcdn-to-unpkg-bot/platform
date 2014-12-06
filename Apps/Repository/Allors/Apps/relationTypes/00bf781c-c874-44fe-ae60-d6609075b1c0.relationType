@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="00bf781c-c874-44fe-ae60-d6609075b1c0">
+  <associationType id="3b99af1e-e6c3-498b-aabd-78d6e82c8819">
+    <objectType idref="c81441c8-9ac9-440e-a926-c96230b2701f" />
+  </associationType>
+  <roleType id="b9a508e2-2931-4ddc-ab34-947d19c2d742">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>PurchaseOrderNumberPrefixes</pluralName>
+    <singularName>PurchaseOrderNumberPrefix</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="6553ee71-66dd-45f2-9de9-5656b011d2fc">
+  <associationType id="0a5662c3-1f60-41d5-a703-638480cb3c15">
+    <objectType idref="c22bf60e-6428-4d10-8194-94f7be396f28" />
+  </associationType>
+  <roleType id="a14f5154-bcf2-44f4-a49e-3c17aca71247">
+    <objectType idref="b5ee6cea-4e2b-498e-a5dd-24671d896477" />
+    <pluralName>EuMemberStates</pluralName>
+    <singularName>EuMemberState</singularName>
+  </roleType>
+</relationType>

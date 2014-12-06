@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="93e0e781-4755-4cd4-aeff-bff905d6e99b">
+  <associationType id="6f45d5e3-ef25-45ea-9f31-11fc6a480c6c">
+    <isMany>true</isMany>
+    <objectType idref="d79f734d-4434-4710-a7ea-7d6306f3064f" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <isIndexed>true</isIndexed>
+  <roleType id="0f3e4887-e43f-4b51-86ee-c4f474de2d7a">
+    <objectType idref="a5e29ca1-80de-4de4-9085-b69f21550b5a" />
+    <pluralName>DerivedVatRates</pluralName>
+    <singularName>DerivedVatRate</singularName>
+  </roleType>
+</relationType>

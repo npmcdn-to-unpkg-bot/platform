@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="81ddff76-9b82-4309-9c9f-f7f9dbd2db21">
+  <namespace idref="a7c2d9a4-951f-4268-a433-b6d0bdec9366" />
+  <pluralName>WorkEffortGoodStandards</pluralName>
+  <singularName>WorkEffortGoodStandard</singularName>
+</objectType>

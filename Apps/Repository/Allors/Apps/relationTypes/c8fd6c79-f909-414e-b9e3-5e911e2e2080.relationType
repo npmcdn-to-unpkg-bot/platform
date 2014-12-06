@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="c8fd6c79-f909-414e-b9e3-5e911e2e2080">
+  <associationType id="da451dab-03db-4bc5-8641-93ec74570f4f">
+    <isMany>true</isMany>
+    <objectType idref="6a7e45b2-36b2-4d2e-a29c-0cc13851766f" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="0bef74ad-3eb2-494e-846e-6ca3bbfb057b">
+    <objectType idref="f7b039f4-10f4-4939-8059-5f190fd13b09" />
+    <pluralName>EmploymentTerminationReasons</pluralName>
+    <singularName>EmploymentTerminationReason</singularName>
+  </roleType>
+</relationType>

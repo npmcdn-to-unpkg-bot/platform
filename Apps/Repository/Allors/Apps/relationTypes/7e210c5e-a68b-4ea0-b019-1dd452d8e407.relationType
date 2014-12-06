@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="7e210c5e-a68b-4ea0-b019-1dd452d8e407">
+  <associationType id="b9c41192-1666-44c0-9365-b24df29a2cdf">
+    <objectType idref="c81441c8-9ac9-440e-a926-c96230b2701f" />
+  </associationType>
+  <roleType id="dfe3042c-babb-416b-a414-5dda0a2958c0">
+    <objectType idref="ccd6f134-26de-4103-bff9-a37ec3e997a3" />
+    <pluralName>FiscalYearStartDays</pluralName>
+    <singularName>FiscalYearStartDay</singularName>
+  </roleType>
+</relationType>

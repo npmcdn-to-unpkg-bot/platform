@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="6f7b0a7f-0b8e-4fbe-b248-b7b90fb18613">
+  <associationType id="33d02f85-4e00-40ef-821d-19278666b178">
+    <objectType idref="c799ca62-a554-467d-9aa2-1663293bb37f" />
+  </associationType>
+  <roleType id="1e4214e8-f228-4f6e-8885-29a59fcd19f3">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>MothersMaidenNames</pluralName>
+    <singularName>MothersMaidenName</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="d48c94ea-5106-44a2-8eda-959e03480960">
+  <associationType id="32e77969-92bc-4387-9f93-350eaba42fea">
+    <objectType idref="c799ca62-a554-467d-9aa2-1663293bb37f" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="b7789142-9c4a-452c-927b-7de2c7e09e83">
+    <objectType idref="ccd6f134-26de-4103-bff9-a37ec3e997a3" />
+    <pluralName>Weights</pluralName>
+    <singularName>Weight</singularName>
+  </roleType>
+</relationType>

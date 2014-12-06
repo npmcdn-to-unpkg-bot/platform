@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="3198ade4-8080-4584-9b67-b00af681c5cf">
+  <associationType id="d0f5e3af-01ea-44fc-8921-a7eec052ed22">
+    <isMany>true</isMany>
+    <objectType idref="003433eb-a0c6-454d-8517-0c03e9be3e96" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="73ff3323-7903-42c7-8278-b5f36f547463">
+    <objectType idref="56b79619-d04a-4924-96e8-e3e7be9faa09" />
+    <pluralName>AvailableFor</pluralName>
+    <singularName>AvailableFor</singularName>
+  </roleType>
+</relationType>

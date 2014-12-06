@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="dc71aecf-1735-4858-b74f-65e805565eed">
+  <associationType id="e16d7c3d-628a-438f-b141-102d3d508380">
+    <objectType idref="f3ef0124-e867-4da2-9323-80fbe1f214c2" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="746ae197-8f1c-4631-8dcc-a7c9328f41e8">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>TotalExVats</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>TotalExVat</singularName>
+  </roleType>
+</relationType>

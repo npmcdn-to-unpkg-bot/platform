@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="a77dc8f3-4d28-43a6-8d2d-b9a0253128b1">
+  <associationType id="19216ddb-edb4-421a-91de-72f937abc8be">
+    <objectType idref="d8611e48-b0ba-4037-a992-09e3e26c6d5d" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="ae3269f7-6f0d-43e5-baac-a8c09a6a76ef">
+    <objectType idref="ccd6f134-26de-4103-bff9-a37ec3e997a3" />
+    <pluralName>NextSalesOrderNumbers</pluralName>
+    <singularName>NextSalesOrderNumber</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

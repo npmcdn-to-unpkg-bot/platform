@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="97e31ffb-b478-4599-a145-54880d4ffbe1">
+  <namespace idref="91bd1c52-d40f-4e84-9367-7cce846def6f" />
+  <pluralName>PartyRelationshipStatuses</pluralName>
+  <singularName>PartyRelationshipStatus</singularName>
+</objectType>

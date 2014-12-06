@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="a1608d47-9fa7-4dc4-9736-c59f28221842">
+  <associationType id="61d6a380-171a-41c2-bda9-6cd8638ba442">
+    <objectType idref="59f3100c-da48-4b4c-a302-1a75e37216a6" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="de2ad2c4-bf0e-4092-9611-b23c3e613429">
+    <objectType idref="b5ee6cea-4e2b-498e-a5dd-24671d896477" />
+    <pluralName>HasBankStatementsTransactions</pluralName>
+    <singularName>HasBankStatementTransactions</singularName>
+  </roleType>
+</relationType>

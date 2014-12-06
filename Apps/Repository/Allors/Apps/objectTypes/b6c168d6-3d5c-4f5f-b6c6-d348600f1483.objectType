@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="b6c168d6-3d5c-4f5f-b6c6-d348600f1483">
+  <namespace idref="78bc14e1-57ea-4c6e-97ae-a18880c0facd" />
+  <pluralName>ManufacturingConfigurations</pluralName>
+  <singularName>ManufacturingConfiguration</singularName>
+</objectType>

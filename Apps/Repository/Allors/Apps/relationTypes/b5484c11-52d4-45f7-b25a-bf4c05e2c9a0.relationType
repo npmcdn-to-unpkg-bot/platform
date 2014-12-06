@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="b5484c11-52d4-45f7-b25a-bf4c05e2c9a0">
+  <associationType id="15df289b-6c03-4fc4-8d8b-31edc394de8d">
+    <objectType idref="9492bd39-0f07-4978-a987-0393ca34b504" />
+  </associationType>
+  <roleType id="683f29d5-cc38-4165-8fd9-f97483130bac">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>CardNumbers</pluralName>
+    <singularName>CardNumber</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

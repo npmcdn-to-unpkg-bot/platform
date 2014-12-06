@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="ad76acee-eccc-42ce-9897-8c3f0252caf4">
+  <namespace idref="799e9780-81bd-41b6-8417-00b9c8498698" />
+  <pluralName>PurchaseOrderItemObjectStates</pluralName>
+  <singularName>PurchaseOrderItemObjectState</singularName>
+</objectType>

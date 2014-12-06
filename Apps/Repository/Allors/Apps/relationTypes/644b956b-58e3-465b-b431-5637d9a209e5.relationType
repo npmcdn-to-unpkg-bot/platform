@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="644b956b-58e3-465b-b431-5637d9a209e5">
+  <associationType id="1d6d156a-ac84-4453-9efc-40840539d48b">
+    <isMany>true</isMany>
+    <objectType idref="e41be1b2-715b-4bc0-b095-ac23d9950ee4" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="8cdd505a-f5f9-4e85-a49d-d88673f08004">
+    <objectType idref="67a8352d-7fe0-4398-93c3-50ec8d3e8038" />
+    <pluralName>OrganisationGlAccountBalances</pluralName>
+    <singularName>OrganisationGlAccountBalance</singularName>
+  </roleType>
+</relationType>

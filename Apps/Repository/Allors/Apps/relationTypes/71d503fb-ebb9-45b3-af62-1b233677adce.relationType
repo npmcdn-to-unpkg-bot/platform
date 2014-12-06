@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="71d503fb-ebb9-45b3-af62-1b233677adce">
+  <associationType id="ca0820dd-e0b2-4714-8e2f-f3613dcdbd15">
+    <objectType idref="6cf4845d-65a0-4957-95e9-f2b5327d6515" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="d855adc2-f70e-48d3-a185-957bf27d3d58">
+    <isMany>true</isMany>
+    <objectType idref="1a0e396b-69bd-4e77-a602-3d7f7938fd74" />
+    <pluralName>GeneralLedgerAccounts</pluralName>
+    <singularName>GeneralLedgerAccount</singularName>
+  </roleType>
+</relationType>

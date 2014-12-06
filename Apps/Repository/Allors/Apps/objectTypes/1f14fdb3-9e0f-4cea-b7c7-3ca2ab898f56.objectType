@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="1f14fdb3-9e0f-4cea-b7c7-3ca2ab898f56">
+  <namespace idref="83d90516-d523-40b7-8edb-9bda4ee2cd52" />
+  <pluralName>OrderItemsBilling</pluralName>
+  <singularName>OrderItemBilling</singularName>
+</objectType>

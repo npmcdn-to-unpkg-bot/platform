@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="555882ea-d25a-4da2-a8ea-330469c8cd41">
+  <namespace idref="9c5baf6a-59e8-4592-92a7-7a78bddc6b1c" />
+  <pluralName>SkillLevels</pluralName>
+  <singularName>SkillLevel</singularName>
+</objectType>

@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="627da684-d501-4221-97c2-81329e2b5e8c">
+  <associationType id="4b9c1fd3-acf0-4e5b-8cb5-d32f94bff10b">
+    <isMany>true</isMany>
+    <objectType idref="ac18c87b-683c-4529-9171-d23e73c583d4" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="e6409680-f8e1-4c61-8bd3-b9ec42435741">
+    <objectType idref="0bdfb093-35af-4c87-9c1c-05ed9dae6df6" />
+    <pluralName>WorkEffortPartyAssignments</pluralName>
+    <singularName>WorkEffortPartyAssignment</singularName>
+  </roleType>
+</relationType>

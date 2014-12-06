@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="8bb431b6-a6ea-48d0-ad78-975ec26b470f">
+  <associationType id="15e1b022-709b-4443-a85c-c1b2956c14e9">
+    <objectType idref="c78a49b1-9918-4f15-95f3-c537c82f59fd" />
+  </associationType>
+  <roleType id="8ce6a6a6-2387-4dd7-8bea-dec068aec152">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>BodyTemplates</pluralName>
+    <singularName>BodyTemplate</singularName>
+    <size>-1</size>
+  </roleType>
+</relationType>

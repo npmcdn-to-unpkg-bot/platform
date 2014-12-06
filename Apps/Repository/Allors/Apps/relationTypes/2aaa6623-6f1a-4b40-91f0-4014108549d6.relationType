@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="2aaa6623-6f1a-4b40-91f0-4014108549d6">
+  <associationType id="071735c4-bfbe-4f30-87a4-fbb4accc540c">
+    <objectType idref="7baa7594-6890-4e1e-8c06-fc49b3ea262d" />
+  </associationType>
+  <roleType id="d9dea2e1-6582-4ce4-863f-4819d2cffe96">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>Texts</pluralName>
+    <singularName>Text</singularName>
+    <size>-1</size>
+  </roleType>
+</relationType>

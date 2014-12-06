@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="5ad24730-a81e-4160-9af9-fa25342a5e96">
+  <namespace idref="a7c2d9a4-951f-4268-a433-b6d0bdec9366" />
+  <pluralName>Maintenances</pluralName>
+  <singularName>Maintenance</singularName>
+</objectType>

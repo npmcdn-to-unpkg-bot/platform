@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="7c5206f5-391d-485d-a030-513450f4dd2f">
+  <associationType id="1086a778-17dd-4984-b73b-a5629a9b8e7c">
+    <objectType idref="716647bf-7589-4146-a45c-a6a3b1cee507" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="1020ff0a-e353-418a-9111-c61a5216032d">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>TotalListPrices</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>TotalListPrice</singularName>
+  </roleType>
+</relationType>

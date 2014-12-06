@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="759f97a9-3105-49b4-81a0-c94c3700397c">
+  <namespace idref="78bc14e1-57ea-4c6e-97ae-a18880c0facd" />
+  <pluralName>InventoryItemKinds</pluralName>
+  <singularName>InventoryItemKind</singularName>
+</objectType>

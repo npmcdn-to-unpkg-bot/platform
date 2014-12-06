@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="d611f21a-1045-40ea-b05b-0c29913d5f1c">
+  <associationType id="115baf34-414a-4cfa-8d1f-dfbeb7264077">
+    <isMany>true</isMany>
+    <objectType idref="aadaf02e-0bb8-4862-a354-488f39aa8f4e" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="69161130-4a2e-430e-92a2-b8ab0e6ef8dc">
+    <objectType idref="3bba6e5a-dc2d-4838-b6c4-881f6c8c3013" />
+    <pluralName>Clients</pluralName>
+    <singularName>Client</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="3e798309-d5d5-4860-87ec-ba3766e96c9e">
+  <associationType id="4626b586-07e1-468c-877a-d1a8f1b196c5">
+    <isMany>true</isMany>
+    <objectType idref="80de925c-04cc-412c-83a5-60405b0e63e6" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <isIndexed>true</isIndexed>
+  <roleType id="b2aef5ac-45f7-41aa-8e1b-f2d79d3d9fad">
+    <objectType idref="5b294591-e20a-4bad-940a-27ae7b2f8770" />
+    <pluralName>PreviousReservedFromInventoryItems</pluralName>
+    <singularName>PreviousReservedFromInventoryItem</singularName>
+  </roleType>
+</relationType>

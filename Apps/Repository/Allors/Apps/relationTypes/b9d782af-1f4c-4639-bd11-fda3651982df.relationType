@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="b9d782af-1f4c-4639-bd11-fda3651982df">
+  <associationType id="c17dbf4f-504f-4b9e-ba5c-25545e1386d0">
+    <objectType idref="9b9f2a59-ae10-49df-b0b5-98b48ec99157" />
+  </associationType>
+  <roleType id="7a4ecdb9-2b88-4f41-9fe4-fe1016b12ad8">
+    <objectType idref="ccd6f134-26de-4103-bff9-a37ec3e997a3" />
+    <pluralName>EstimatedQuantities</pluralName>
+    <singularName>EstimatedQuantity</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="38cd5e9e-7305-4c56-bff7-13918bd9f059">
+  <associationType id="d21a1eff-5920-4dbb-9fcb-8f99ea1187f9">
+    <objectType idref="f3ef0124-e867-4da2-9323-80fbe1f214c2" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="a6e6c1d9-0009-4d5a-bebd-6e62c1d71a5a">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>PreviousQuantities</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>PreviousQuantity</singularName>
+  </roleType>
+</relationType>

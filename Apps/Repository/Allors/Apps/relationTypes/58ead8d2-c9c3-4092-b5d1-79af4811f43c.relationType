@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="58ead8d2-c9c3-4092-b5d1-79af4811f43c">
+  <associationType id="82f2636f-738d-45b8-bdc0-5136ad8d8382">
+    <objectType idref="b00e2650-283f-4326-bdd3-46a2890e2037" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="eee9f92b-5649-467f-8a99-4318c24cc002">
+    <objectType idref="4af573b7-a87f-400c-97e4-80bda17376e0" />
+    <pluralName>ItemVarianceAccountingTransactions</pluralName>
+    <singularName>ItemVarianceAccountingTransaction</singularName>
+  </roleType>
+</relationType>

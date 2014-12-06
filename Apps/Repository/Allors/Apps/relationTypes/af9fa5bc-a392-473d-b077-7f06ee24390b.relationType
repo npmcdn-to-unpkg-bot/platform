@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="af9fa5bc-a392-473d-b077-7f06ee24390b">
+  <associationType id="9a0f9ecd-9954-4c2f-bb0e-e94f9cc3c19a">
+    <objectType idref="b00e2650-283f-4326-bdd3-46a2890e2037" />
+  </associationType>
+  <roleType id="5665d533-cd9c-4328-b422-66a94d77b19b">
+    <objectType idref="c402fbda-133a-4b59-858a-832fbd2ec565" />
+    <pluralName>InventoryDates</pluralName>
+    <singularName>InventoryDate</singularName>
+  </roleType>
+</relationType>

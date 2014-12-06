@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="555c3b9a-7556-4fdf-a431-6d18a6ae7cbd">
+  <associationType id="b3625e45-4568-4030-85cc-565f77ccc1a1">
+    <objectType idref="d8611e48-b0ba-4037-a992-09e3e26c6d5d" />
+  </associationType>
+  <roleType id="5bda243d-b0c9-47bd-9d33-9fd3723512b9">
+    <objectType idref="ccd6f134-26de-4103-bff9-a37ec3e997a3" />
+    <pluralName>PaymentsNetDays</pluralName>
+    <singularName>PaymentNetDays</singularName>
+  </roleType>
+</relationType>

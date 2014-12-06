@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="f35745a9-a8d3-4002-a484-6f0fb00a69a2">
+  <namespace idref="91bd1c52-d40f-4e84-9367-7cce846def6f" />
+  <pluralName>GenderTypes</pluralName>
+  <singularName>GenderType</singularName>
+</objectType>

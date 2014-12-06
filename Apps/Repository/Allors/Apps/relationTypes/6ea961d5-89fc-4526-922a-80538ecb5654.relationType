@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="6ea961d5-89fc-4526-922a-80538ecb5654">
+  <associationType id="66c5cfdd-6af4-4d75-b826-843be3b01bca">
+    <isMany>true</isMany>
+    <objectType idref="a6f4eedb-b0b5-491d-bcc0-09d2bc109e86" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="f560bb3d-f855-4ec3-a5e7-4bd6c4da2595">
+    <objectType idref="34d08c66-6d7a-4089-b862-c93feda67ef1" />
+    <pluralName>BillingAccounts</pluralName>
+    <singularName>BillingAccount</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="fdac3beb-edf8-4d1b-80d4-21b643ef43ce">
+  <associationType id="63d8adfc-6afb-499f-bd27-2f1d3f78bee6">
+    <objectType idref="9c6f4ad8-5a4e-4b6e-96b7-876f7aabcffb" />
+  </associationType>
+  <roleType id="8f56ce24-500e-4db9-abce-c7a301c38fe6">
+    <objectType idref="c402fbda-133a-4b59-858a-832fbd2ec565" />
+    <pluralName>EstimatedArrivalDates</pluralName>
+    <singularName>EstimatedArrivalDate</singularName>
+  </roleType>
+</relationType>

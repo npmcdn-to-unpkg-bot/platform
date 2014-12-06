@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="39ee9493-b628-4cc6-a31c-239f306e8497">
+  <associationType id="04da42d7-6e24-409e-b384-2283dc95ac35">
+    <isMany>true</isMany>
+    <objectType idref="61af6d19-e8e4-4b5b-97e8-3610fbc82605" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="b08500e2-feee-4115-90ec-c65d719d1d29">
+    <objectType idref="9ec6dae1-439e-4b19-b4dc-885e1ed943d7" />
+    <pluralName>Containers</pluralName>
+    <singularName>Container</singularName>
+  </roleType>
+</relationType>

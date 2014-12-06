@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="a09af300-8983-4211-af75-3e04efa8ec36">
+  <associationType id="c8d26b39-96a6-4be4-9675-5a6fdb54bae5">
+    <isMany>true</isMany>
+    <objectType idref="0c50c02a-cc9c-4617-8530-15a24d4ac969" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="e40af32d-abdd-4d7b-9b3d-92abf7fb129a">
+    <objectType idref="ebf12996-6fc7-4f22-b9be-cedaaba7bfb2" />
+    <pluralName>TemplatePurposes</pluralName>
+    <singularName>TemplatePurpose</singularName>
+  </roleType>
+</relationType>

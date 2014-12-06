@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="b829da1c-2eb7-495b-a4a9-98e335cd87f9">
+  <associationType id="a0377434-67ae-4ab4-90b3-99fb6bc2bf90">
+    <objectType idref="c22bf60e-6428-4d10-8194-94f7be396f28" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="8a306049-a4b9-4489-a2b8-d627fa6444c3">
+    <objectType idref="eba70b57-05e3-487f-8cf1-45f14fcdc3b9" />
+    <pluralName>VatForms</pluralName>
+    <singularName>VatForm</singularName>
+  </roleType>
+</relationType>

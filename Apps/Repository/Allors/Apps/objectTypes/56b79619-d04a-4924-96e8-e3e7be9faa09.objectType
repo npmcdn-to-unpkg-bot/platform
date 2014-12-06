@@ -1,0 +1,6 @@
+<objectType allors="1.0" id="56b79619-d04a-4924-96e8-e3e7be9faa09">
+  <isInterface>true</isInterface>
+  <namespace idref="78bc14e1-57ea-4c6e-97ae-a18880c0facd" />
+  <pluralName>Products</pluralName>
+  <singularName>Product</singularName>
+</objectType>

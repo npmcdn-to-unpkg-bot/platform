@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="4a03f057-339f-4dd4-ac89-3b97d27d2170">
+  <associationType id="ca816c14-6aaf-4ed8-b140-f9c941e4f769">
+    <objectType idref="d50ffc20-9e2d-4362-8e3f-b54d7368d487" />
+  </associationType>
+  <roleType id="687c0be7-138d-4ea3-a87f-58df8ac7e60d">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>LongTexts</pluralName>
+    <singularName>LongText</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

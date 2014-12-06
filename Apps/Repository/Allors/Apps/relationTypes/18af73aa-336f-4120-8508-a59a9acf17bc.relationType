@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="18af73aa-336f-4120-8508-a59a9acf17bc">
+  <associationType id="31da78aa-5e06-48f8-90e4-018ef021a280">
+    <isMany>true</isMany>
+    <objectType idref="9e679821-8eeb-4dce-b090-d8ade95cb47f" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="cf515b68-b198-4348-881c-fd9a0bcf22bf">
+    <objectType idref="c799ca62-a554-467d-9aa2-1663293bb37f" />
+    <pluralName>Professionals</pluralName>
+    <singularName>Professional</singularName>
+  </roleType>
+</relationType>

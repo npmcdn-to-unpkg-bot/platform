@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="4e4845c9-9c37-49ec-9b5c-1cd5f247edd4">
+  <associationType id="f311eb9c-0aa9-4a8d-9283-ab8f32760519">
+    <objectType idref="02dec829-d0f0-4dfe-8dea-74aeadbe4fc3" />
+  </associationType>
+  <roleType id="bd33990b-5cf6-4e53-85c2-bfc743f1dfb8">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>Revenues</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>Revenue</singularName>
+  </roleType>
+</relationType>

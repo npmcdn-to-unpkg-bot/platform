@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="2b828f2b-201d-4ae2-b64c-b2c5be713653">
+  <associationType id="8bd1a8cc-4f4d-41ad-b4fb-d43d4759c0e4">
+    <isMany>true</isMany>
+    <objectType idref="d3f90525-b7fe-4f81-bccd-adf4f57260bc" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="041107e2-0936-48a6-86dd-58ace8cbf7ac">
+    <objectType idref="3bba6e5a-dc2d-4838-b6c4-881f6c8c3013" />
+    <pluralName>Authorizers</pluralName>
+    <singularName>Authorizer</singularName>
+  </roleType>
+</relationType>

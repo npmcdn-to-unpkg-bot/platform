@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="8b1280eb-0fef-450e-afc8-dbdc6fc65abb">
+  <associationType id="8a93a23b-6be9-44db-8c92-4ad4c2cc405b">
+    <isMany>true</isMany>
+    <objectType idref="01fc58a0-89b8-4dc0-97f9-5f628b9c9577" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="1961e2a8-ecf5-4c7b-8815-8ee4b2461820">
+    <objectType idref="123bfcba-0548-4637-8dfc-267d6c0ac262" />
+    <pluralName>Skill</pluralName>
+    <singularName>Skill</singularName>
+  </roleType>
+</relationType>

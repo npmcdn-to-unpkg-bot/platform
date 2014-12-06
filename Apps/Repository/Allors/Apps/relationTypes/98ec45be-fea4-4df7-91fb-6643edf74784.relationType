@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="98ec45be-fea4-4df7-91fb-6643edf74784">
+  <associationType id="102ff721-0f77-4e05-9252-974b0e2a1505">
+    <objectType idref="848053ee-18d8-4962-81c3-bd6c7837565a" />
+  </associationType>
+  <roleType id="e422bd7e-2998-4022-88cf-8de0a84621c4">
+    <objectType idref="ccd6f134-26de-4103-bff9-a37ec3e997a3" />
+    <pluralName>DunningSteps</pluralName>
+    <singularName>DunningStep</singularName>
+  </roleType>
+</relationType>

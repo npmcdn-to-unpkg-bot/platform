@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="3254f43d-7b3a-49c8-8c1b-19fa0e4f6901">
+  <associationType id="a25f511d-a4f9-4360-9150-304ed62d411f">
+    <objectType idref="1d157965-59b5-4ead-b4e4-c722495d7658" />
+  </associationType>
+  <roleType id="a6c023ba-549c-4895-bd32-ed70f05ef121">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>YearsExperiences</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>YearsExperience</singularName>
+  </roleType>
+</relationType>

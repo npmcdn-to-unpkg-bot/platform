@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="fefb8dc2-cfe5-4078-b3a9-8c4622047c34">
+  <associationType id="7ecef213-f2db-4f79-8bf3-fc0979f81420">
+    <objectType idref="c799ca62-a554-467d-9aa2-1663293bb37f" />
+  </associationType>
+  <roleType id="e19baff7-c31c-4462-8a48-ac30e862b4ea">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>SocialSecurityNumbers</pluralName>
+    <singularName>SocialSecurityNumber</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

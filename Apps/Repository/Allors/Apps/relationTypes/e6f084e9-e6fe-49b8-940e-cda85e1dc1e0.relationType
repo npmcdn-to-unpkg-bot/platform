@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="e6f084e9-e6fe-49b8-940e-cda85e1dc1e0">
+  <associationType id="7eb974af-86a6-4d26-a07f-7dd01b80d3ac">
+    <isMany>true</isMany>
+    <objectType idref="56b79619-d04a-4924-96e8-e3e7be9faa09" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="3918335f-7cde-4fd2-b168-fb422ab5ee1a">
+    <isMany>true</isMany>
+    <objectType idref="56b79619-d04a-4924-96e8-e3e7be9faa09" />
+    <pluralName>ProductObsolescences</pluralName>
+    <singularName>ProductObsolescence</singularName>
+  </roleType>
+</relationType>

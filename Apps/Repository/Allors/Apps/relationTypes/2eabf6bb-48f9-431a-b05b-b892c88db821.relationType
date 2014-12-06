@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="2eabf6bb-48f9-431a-b05b-b892c88db821">
+  <associationType id="2260b0c0-3a19-43cb-a2f1-22098d428a35">
+    <objectType idref="6c255f71-ce18-4d51-b0d9-e402ec0e570e" />
+  </associationType>
+  <roleType id="5d7ad31b-a29d-4b3f-8411-744a172bf6a9">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>AreaCodes</pluralName>
+    <singularName>AreaCode</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

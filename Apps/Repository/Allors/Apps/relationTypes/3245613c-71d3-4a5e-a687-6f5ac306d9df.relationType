@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="3245613c-71d3-4a5e-a687-6f5ac306d9df">
+  <associationType id="3cf6b4ce-56df-44c9-9348-3a419a226edc">
+    <isMany>true</isMany>
+    <objectType idref="2e588028-5de2-411c-ab43-b406ca735d5b" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="e672774d-e11d-46df-9387-ef9f52315148">
+    <objectType idref="b397c075-215a-4d5b-b962-ea48540a64fa" />
+    <pluralName>BudgetItems</pluralName>
+    <singularName>BudgetItem</singularName>
+  </roleType>
+</relationType>

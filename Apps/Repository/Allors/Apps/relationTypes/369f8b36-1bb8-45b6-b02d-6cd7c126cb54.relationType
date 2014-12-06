@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="369f8b36-1bb8-45b6-b02d-6cd7c126cb54">
+  <associationType id="bc2dd1eb-0f39-4717-bd3e-bfcaee6e0a0c">
+    <objectType idref="d50ffc20-9e2d-4362-8e3f-b54d7368d487" />
+  </associationType>
+  <roleType id="c43bf977-c5de-44f9-99a9-bb8e9dd96122">
+    <objectType idref="ccd6f134-26de-4103-bff9-a37ec3e997a3" />
+    <pluralName>DisplayOrders</pluralName>
+    <singularName>DisplayOrder</singularName>
+  </roleType>
+</relationType>

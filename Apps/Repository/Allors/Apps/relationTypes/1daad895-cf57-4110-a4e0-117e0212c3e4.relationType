@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="1daad895-cf57-4110-a4e0-117e0212c3e4">
+  <associationType id="304a1b7b-215a-4fad-ab99-d0a974e8b0c0">
+    <objectType idref="cdd79e23-a132-48b0-b88f-a03bd029f49d" />
+  </associationType>
+  <roleType id="5ab48116-f33a-484e-9e6e-05a912efc9d5">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>SquareFootages</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>SquareFootage</singularName>
+  </roleType>
+</relationType>

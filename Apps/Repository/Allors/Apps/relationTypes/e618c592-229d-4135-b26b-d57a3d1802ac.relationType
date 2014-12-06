@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="e618c592-229d-4135-b26b-d57a3d1802ac">
+  <associationType id="10f7837f-9025-4284-8821-04fe9291c726">
+    <objectType idref="930565df-e12c-43c3-9679-a2b42d5a8782" />
+  </associationType>
+  <roleType id="c0de4d35-c58e-4477-866a-d018a7ea7c7c">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>PartyNames</pluralName>
+    <singularName>PartyName</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

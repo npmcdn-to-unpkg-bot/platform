@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="5418fdea-366c-4e0b-b2e0-d49cfb12cbe5">
+  <associationType id="b63a4251-c297-46cb-a2a3-b0d619abe398">
+    <isMany>true</isMany>
+    <objectType idref="a5e29ca1-80de-4de4-9085-b69f21550b5a" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="52fc90c1-2de7-4076-8cbf-44174ebd25a2">
+    <objectType idref="3a5dcec7-308f-48c7-afee-35d38415aa0b" />
+    <pluralName>TaxAuthorities</pluralName>
+    <singularName>TaxAuthority</singularName>
+  </roleType>
+</relationType>

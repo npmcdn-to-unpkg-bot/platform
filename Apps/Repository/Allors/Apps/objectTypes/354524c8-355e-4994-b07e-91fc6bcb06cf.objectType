@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="354524c8-355e-4994-b07e-91fc6bcb06cf">
+  <namespace idref="bed2b711-d707-4cf6-9aee-11de07b2ba0d" />
+  <pluralName>SalesChannelRevenues</pluralName>
+  <singularName>SalesChannelRevenue</singularName>
+</objectType>

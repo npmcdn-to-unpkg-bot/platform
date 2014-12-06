@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="01c49e6f-087a-494d-902d-12811442470e">
+  <associationType id="839d77a1-7307-4aeb-921b-9aa8832ef853">
+    <isMany>true</isMany>
+    <objectType idref="1a0e396b-69bd-4e77-a602-3d7f7938fd74" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="6a616950-edba-4ed1-8419-7ed4ab3a8fcd">
+    <objectType idref="2ab70094-5481-4ecc-ae15-cb2131fbc2f1" />
+    <pluralName>DefaultCostCenters</pluralName>
+    <singularName>DefaultCostCenter</singularName>
+  </roleType>
+</relationType>

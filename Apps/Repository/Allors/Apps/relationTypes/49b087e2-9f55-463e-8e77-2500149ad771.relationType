@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="49b087e2-9f55-463e-8e77-2500149ad771">
+  <associationType id="1da60a2b-5359-4688-b925-edee515a2427">
+    <objectType idref="c81441c8-9ac9-440e-a926-c96230b2701f" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="a0e7966c-1096-4491-a712-1dc38b58b67c">
+    <isMany>true</isMany>
+    <objectType idref="6b56e13b-d075-40f1-8e33-a9a4c6cadb96" />
+    <pluralName>AccountingPeriods</pluralName>
+    <singularName>AccountingPeriod</singularName>
+  </roleType>
+</relationType>

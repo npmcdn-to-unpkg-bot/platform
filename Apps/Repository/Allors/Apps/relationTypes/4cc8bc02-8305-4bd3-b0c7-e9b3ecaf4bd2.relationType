@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="4cc8bc02-8305-4bd3-b0c7-e9b3ecaf4bd2">
+  <associationType id="c2be4896-2eae-40fa-9300-b548741407f2">
+    <objectType idref="3a5dcec7-308f-48c7-afee-35d38415aa0b" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <isIndexed>true</isIndexed>
+  <roleType id="a26de636-8efa-4df4-b56d-225ac25f31a8">
+    <objectType idref="60065f5d-a3c2-4418-880d-1026ab607319" />
+    <pluralName>CustomerContactUserGroups</pluralName>
+    <singularName>CustomerContactUserGroup</singularName>
+  </roleType>
+</relationType>

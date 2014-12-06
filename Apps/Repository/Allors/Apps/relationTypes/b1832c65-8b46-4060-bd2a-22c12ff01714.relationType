@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="b1832c65-8b46-4060-bd2a-22c12ff01714">
+  <associationType id="f320e24c-61b1-4820-a091-d8b63b21184d">
+    <isMany>true</isMany>
+    <objectType idref="2b162153-f74d-4f97-b97c-48f04749b216" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="4d7752a6-5bf6-420f-b4ed-fcf1cc5952e2">
+    <objectType idref="4117ba43-c7fd-4ba5-965e-50e2ce5b5058" />
+    <pluralName>DunningTypes</pluralName>
+    <singularName>DunningType</singularName>
+  </roleType>
+</relationType>

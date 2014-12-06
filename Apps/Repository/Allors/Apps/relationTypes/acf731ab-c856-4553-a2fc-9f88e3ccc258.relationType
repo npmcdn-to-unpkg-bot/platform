@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="acf731ab-c856-4553-a2fc-9f88e3ccc258">
+  <associationType id="c75a6014-98bd-4e2f-b526-1e2cfda9534c">
+    <objectType idref="3bba6e5a-dc2d-4838-b6c4-881f6c8c3013" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="87d94438-3756-42cd-9356-9d169ce42817">
+    <isMany>true</isMany>
+    <objectType idref="da5b86a3-4f33-4c0d-965d-f4fbc1179374" />
+    <pluralName>Contents</pluralName>
+    <singularName>Content</singularName>
+  </roleType>
+</relationType>

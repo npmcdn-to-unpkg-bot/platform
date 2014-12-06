@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="c0e1c31b-5506-48c0-b46f-239f89eca08f">
+  <associationType id="09a54b9f-1461-4956-ba7a-fc6f086abf77">
+    <isMany>true</isMany>
+    <objectType idref="e94bf9e1-373d-49e3-a0fe-f21a8b1525d4" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="226183cc-ae5d-4292-982b-aba15304ab70">
+    <objectType idref="c22bf60e-6428-4d10-8194-94f7be396f28" />
+    <pluralName>Countries</pluralName>
+    <singularName>Country</singularName>
+  </roleType>
+</relationType>

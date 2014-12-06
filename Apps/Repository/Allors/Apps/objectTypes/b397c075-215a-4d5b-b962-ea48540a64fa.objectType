@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="b397c075-215a-4d5b-b962-ea48540a64fa">
+  <namespace idref="bed2b711-d707-4cf6-9aee-11de07b2ba0d" />
+  <pluralName>BudgetItems</pluralName>
+  <singularName>BudgetItem</singularName>
+</objectType>

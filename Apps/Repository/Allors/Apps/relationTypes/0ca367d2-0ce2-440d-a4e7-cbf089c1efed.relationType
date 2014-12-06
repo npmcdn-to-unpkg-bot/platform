@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="0ca367d2-0ce2-440d-a4e7-cbf089c1efed">
+  <associationType id="738d9d62-4823-4045-9e2f-082b91127f3f">
+    <isMany>true</isMany>
+    <objectType idref="956ecb86-097d-43d4-83b5-a7f45ea75448" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="fa8ca2da-c75f-4ba9-9c22-6953008c3ba2">
+    <objectType idref="c799ca62-a554-467d-9aa2-1663293bb37f" />
+    <pluralName>Contacts</pluralName>
+    <singularName>Contact</singularName>
+  </roleType>
+</relationType>

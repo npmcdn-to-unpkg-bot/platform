@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="9b0e7410-6201-420c-9efc-0689edb33d42">
+  <associationType id="2e153d1b-3e03-4ff6-84a6-39c9186999f8">
+    <objectType idref="b7215af5-97d6-42b0-9f6f-c1fccb2bc695" />
+  </associationType>
+  <roleType id="60ebb0ec-bcb8-46c5-8293-36b3b0ad3bdb">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>Abbreviations</pluralName>
+    <singularName>Abbreviation</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

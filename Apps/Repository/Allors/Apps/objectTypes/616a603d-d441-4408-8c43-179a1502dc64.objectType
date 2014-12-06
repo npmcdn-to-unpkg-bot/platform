@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="616a603d-d441-4408-8c43-179a1502dc64">
+  <namespace idref="4f0fb63b-f01d-42dd-8093-122a5a46228e" />
+  <pluralName>Plants</pluralName>
+  <singularName>Plant</singularName>
+</objectType>

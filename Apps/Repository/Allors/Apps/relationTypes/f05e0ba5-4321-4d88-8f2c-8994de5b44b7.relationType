@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="f05e0ba5-4321-4d88-8f2c-8994de5b44b7">
+  <associationType id="38d76559-6a9c-48c7-bde5-1a2e685b9a40">
+    <isMany>true</isMany>
+    <objectType idref="062bd939-9902-4747-a631-99ea10002156" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="a0b2ec91-5b7e-4abb-91fb-91836cb88490">
+    <objectType idref="c81441c8-9ac9-440e-a926-c96230b2701f" />
+    <pluralName>BillToPurchasers</pluralName>
+    <singularName>BillToPurchaser</singularName>
+  </roleType>
+</relationType>

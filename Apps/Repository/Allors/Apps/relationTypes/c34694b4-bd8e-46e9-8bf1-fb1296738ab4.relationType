@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="c34694b4-bd8e-46e9-8bf1-fb1296738ab4">
+  <associationType id="3bd6d711-d49b-4477-9173-e4f8a17f1d8b">
+    <objectType idref="d3f90525-b7fe-4f81-bccd-adf4f57260bc" />
+  </associationType>
+  <roleType id="6f53fe03-c9a2-43b8-b38e-99597d751a82">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>EstimatedBudgets</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>EstimatedBudget</singularName>
+  </roleType>
+</relationType>

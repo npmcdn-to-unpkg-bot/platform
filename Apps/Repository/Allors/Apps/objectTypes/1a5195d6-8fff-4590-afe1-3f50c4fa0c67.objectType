@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="1a5195d6-8fff-4590-afe1-3f50c4fa0c67">
+  <namespace idref="bed2b711-d707-4cf6-9aee-11de07b2ba0d" />
+  <pluralName>ReceiptAccountingTransactions</pluralName>
+  <singularName>ReceiptAccountingTransaction</singularName>
+</objectType>

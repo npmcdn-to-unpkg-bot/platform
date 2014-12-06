@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="5f5d8dd2-33e6-4924-bae7-b6710a789ac9">
+  <associationType id="007ba2c5-9fdd-425e-8842-27554cdbaf27">
+    <objectType idref="c799ca62-a554-467d-9aa2-1663293bb37f" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="99b8085b-0ccf-44a3-a4d4-e1d091af8969">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>LastYearsCommissions</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>LastYearsCommission</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="f6d1ce52-7d8e-42e2-a76e-acc35e2b5dd8">
+  <associationType id="743000d8-a71b-4638-9b3e-a5be4e45fd29">
+    <isMany>true</isMany>
+    <objectType idref="bb5e8196-f821-4fb8-98cb-f19416d1427c" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="7e4d3cd9-4066-4186-a311-b1cd5155d632">
+    <objectType idref="c799ca62-a554-467d-9aa2-1663293bb37f" />
+    <pluralName>SalesReps</pluralName>
+    <singularName>SalesRep</singularName>
+  </roleType>
+</relationType>

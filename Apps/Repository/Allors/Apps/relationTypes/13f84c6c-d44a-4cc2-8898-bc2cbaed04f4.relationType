@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="13f84c6c-d44a-4cc2-8898-bc2cbaed04f4">
+  <associationType id="88a8016f-ecd7-4085-82d0-a9698d078184">
+    <objectType idref="4b1e9776-8851-4a2a-a402-1b40211d1f3b" />
+  </associationType>
+  <roleType id="72177a66-0459-4b6e-a8ea-2b5786e09f31">
+    <objectType idref="c402fbda-133a-4b59-858a-832fbd2ec565" />
+    <pluralName>SendingDates</pluralName>
+    <singularName>SendingDate</singularName>
+  </roleType>
+</relationType>

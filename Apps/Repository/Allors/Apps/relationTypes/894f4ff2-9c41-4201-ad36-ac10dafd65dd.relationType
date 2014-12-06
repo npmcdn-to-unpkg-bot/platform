@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="894f4ff2-9c41-4201-ad36-ac10dafd65dd">
+  <associationType id="c8a336f0-4fae-4ce6-a900-283066052ffd">
+    <objectType idref="3b9f21f4-2f2c-47a9-9c76-15f5ef4f5e00" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="11fa6c6e-c528-452c-adca-75f474d2f95b">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>AmountsDue</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>AmountDue</singularName>
+  </roleType>
+</relationType>

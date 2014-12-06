@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="835118da-148a-4c42-ab07-75b213a8e1f7">
+  <associationType id="f9f78e34-6fe1-4863-b831-cabe46cbc764">
+    <objectType idref="2e216901-eab9-42e3-9e49-7fe8e88291d3" />
+  </associationType>
+  <roleType id="c06dd0a5-dabe-46fa-97f7-62f6f4b47983">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>ConversionFactors</pluralName>
+    <precision>19</precision>
+    <scale>9</scale>
+    <singularName>ConversionFactor</singularName>
+  </roleType>
+</relationType>

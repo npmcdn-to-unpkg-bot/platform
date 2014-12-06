@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="786a74b0-015a-47db-8d3a-c790b326cc7d">
+  <associationType id="6f7363d4-46c5-4bcb-b19c-314733af9e9e">
+    <isMany>true</isMany>
+    <objectType idref="3a5dcec7-308f-48c7-afee-35d38415aa0b" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="1c339b5d-6f97-41bd-952a-3706d383c3d8">
+    <objectType idref="da5b86a3-4f33-4c0d-965d-f4fbc1179374" />
+    <pluralName>LogoImages</pluralName>
+    <singularName>LogoImage</singularName>
+  </roleType>
+</relationType>

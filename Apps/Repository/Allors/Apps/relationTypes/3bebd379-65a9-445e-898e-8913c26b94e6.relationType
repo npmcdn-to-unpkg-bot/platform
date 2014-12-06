@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="3bebd379-65a9-445e-898e-8913c26b94e6">
+  <associationType id="d12425ed-2676-419e-bfae-674810fde5a8">
+    <isMany>true</isMany>
+    <objectType idref="553a5280-a768-4ba1-8b5d-304d7c4bb7f1" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="f4b0fb7e-8e84-43ca-88b0-44242216ee7e">
+    <objectType idref="7d2d9452-f250-47c3-81e0-4e1c0655cc86" />
+    <pluralName>WorkEffortTypes</pluralName>
+    <singularName>WorkEffortType</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="928b9d1e-903b-4d56-aa72-b7aeaf3ba340">
+  <associationType id="ace8a50d-e396-4e47-b13c-f02fa018f652">
+    <objectType idref="8e6eaa35-85da-4c80-848c-3f1ed6cd2f8a" />
+  </associationType>
+  <roleType id="2b85c556-8726-41d4-a236-197816b2824b">
+    <objectType idref="c4c09343-61d3-418c-ade2-fe6fd588f128" />
+    <pluralName>ActualArrivalDateTimes</pluralName>
+    <singularName>ActualArrivalDateTime</singularName>
+  </roleType>
+</relationType>

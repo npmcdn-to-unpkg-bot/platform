@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="1452d159-857a-4fff-b1d6-6d27772e54bc">
+  <associationType id="eb122f1d-8615-4342-8beb-2a197677947a">
+    <objectType idref="11d75a7a-2e86-4430-a6af-2916440c9ecb" />
+  </associationType>
+  <roleType id="bf8485f3-d5dd-4236-b542-61674c2298db">
+    <objectType idref="e8989069-024b-4389-ac77-a98c4dfff25a" />
+    <pluralName>EntryNumbers</pluralName>
+    <singularName>EntryNumber</singularName>
+  </roleType>
+</relationType>

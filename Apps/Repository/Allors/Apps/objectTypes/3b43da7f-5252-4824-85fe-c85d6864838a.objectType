@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="3b43da7f-5252-4824-85fe-c85d6864838a">
+  <namespace idref="a7c2d9a4-951f-4268-a433-b6d0bdec9366" />
+  <pluralName>WorkEffortFixedAssetAssignments</pluralName>
+  <singularName>WorkEffortFixedAssetAssignment</singularName>
+</objectType>

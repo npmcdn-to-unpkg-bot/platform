@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="f52c0b7e-dbc4-4082-a2b9-9b1a05ce7179">
+  <associationType id="50478ca9-3eb4-487b-8c8a-6ff48d9155b5">
+    <isMany>true</isMany>
+    <objectType idref="e3e87d40-b4f0-4953-9716-db13b35d716b" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="802b6cdb-873a-4455-9fa7-7f2267407f0f">
+    <objectType idref="da5b86a3-4f33-4c0d-965d-f4fbc1179374" />
+    <pluralName>Photos</pluralName>
+    <singularName>Photo</singularName>
+  </roleType>
+</relationType>

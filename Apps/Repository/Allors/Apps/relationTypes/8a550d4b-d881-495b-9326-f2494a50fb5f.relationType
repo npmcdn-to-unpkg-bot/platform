@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="8a550d4b-d881-495b-9326-f2494a50fb5f">
+  <associationType id="3562b1e4-0acc-4a94-a111-f1afb8d889d4">
+    <isMany>true</isMany>
+    <objectType idref="34d08c66-6d7a-4089-b862-c93feda67ef1" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="7746a7a0-3dee-4279-8114-639c5f106d4d">
+    <objectType idref="b033f9c9-c799-485c-a199-914a9e9119d9" />
+    <pluralName>ContactMechanisms</pluralName>
+    <singularName>ContactMechanism</singularName>
+  </roleType>
+</relationType>

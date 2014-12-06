@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="3b6e0ea5-d9b9-4673-89e9-1491b8e6a691">
+  <associationType id="cd0ba793-77fb-44b4-bf1c-4bf32a98d254">
+    <objectType idref="a6f4eedb-b0b5-491d-bcc0-09d2bc109e86" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="d677c967-568a-4c32-a822-caba4ea5990c">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>TotalExVatsCustomerCurrency</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>TotalExVatCustomerCurrency</singularName>
+  </roleType>
+</relationType>

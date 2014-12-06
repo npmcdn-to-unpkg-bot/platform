@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="d48ef8bb-064b-4360-8162-a138fb601761">
+  <associationType id="91252cf4-eca3-4b9d-b06d-5df795c3709c">
+    <isMany>true</isMany>
+    <objectType idref="c81441c8-9ac9-440e-a926-c96230b2701f" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="3ef1f904-5b02-4f00-8486-2e452668be67">
+    <objectType idref="1a0e396b-69bd-4e77-a602-3d7f7938fd74" />
+    <pluralName>NetIncomeAccounts</pluralName>
+    <singularName>NetIncomeAccount</singularName>
+  </roleType>
+</relationType>

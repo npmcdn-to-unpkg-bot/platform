@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="834432b1-65b2-4499-a83d-71f0db6e177b">
+  <associationType id="b7f09631-6b4c-417d-ba12-115d07d9d6f5">
+    <objectType idref="ebd4da8c-b86a-4317-86b9-e90a02994dcc" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="b9ba1402-ce06-4bdd-9290-165ff8e555d2">
+    <isMany>true</isMany>
+    <objectType idref="d12719f0-2c0e-4a9d-869b-4a209fc35a56" />
+    <pluralName>BudgetReviews</pluralName>
+    <singularName>BudgetReview</singularName>
+  </roleType>
+</relationType>

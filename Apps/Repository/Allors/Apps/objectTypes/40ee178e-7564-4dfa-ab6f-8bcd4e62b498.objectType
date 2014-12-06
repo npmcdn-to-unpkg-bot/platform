@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="40ee178e-7564-4dfa-ab6f-8bcd4e62b498">
+  <namespace idref="a7c2d9a4-951f-4268-a433-b6d0bdec9366" />
+  <pluralName>PartyFixedAssetAssignments</pluralName>
+  <singularName>PartyFixedAssetAssignment</singularName>
+</objectType>

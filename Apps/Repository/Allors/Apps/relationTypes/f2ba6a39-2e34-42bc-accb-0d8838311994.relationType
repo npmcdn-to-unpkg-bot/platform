@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="f2ba6a39-2e34-42bc-accb-0d8838311994">
+  <associationType id="6d2b7cbb-1825-40a9-9000-2854a9cd6a26">
+    <objectType idref="d54b4bba-a84c-4826-85ba-7340714035c7" />
+  </associationType>
+  <roleType id="53349be7-9048-494f-96e0-367468eb9dad">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>Directions</pluralName>
+    <singularName>Directions</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

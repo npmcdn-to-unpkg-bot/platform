@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="9a0effb1-eff9-402a-9864-470569be9e7b">
+  <associationType id="fbb79a3b-013d-4ec9-93ae-3b80b759f6eb">
+    <objectType idref="084abb92-31fd-46e6-ab85-9a7a88c9d72b" />
+  </associationType>
+  <roleType id="f4e6833d-da52-484e-8c6f-b1f55730178e">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>SimpleMovingAverages</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>SimpleMovingAverage</singularName>
+  </roleType>
+</relationType>

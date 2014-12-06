@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="a79b3e89-e878-45a5-9c9f-7911d259fc33">
+  <namespace idref="799e9780-81bd-41b6-8417-00b9c8498698" />
+  <pluralName>RequirementStatuses</pluralName>
+  <singularName>RequirementStatus</singularName>
+</objectType>

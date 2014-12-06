@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="39298cc2-0869-4dc9-b0ff-bea8269ba958">
+  <associationType id="7ca00aff-ad0b-4195-902b-39b3d5cc2c25">
+    <objectType idref="04540476-602f-456a-b300-54166b65c8b1" />
+  </associationType>
+  <roleType id="949968c0-dc95-44d3-a8f0-65829a884c3b">
+    <objectType idref="c402fbda-133a-4b59-858a-832fbd2ec565" />
+    <pluralName>EstimatedThroughDates</pluralName>
+    <singularName>EstimatedThroughDate</singularName>
+  </roleType>
+</relationType>

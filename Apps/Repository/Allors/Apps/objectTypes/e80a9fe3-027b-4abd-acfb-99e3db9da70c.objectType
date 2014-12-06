@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="e80a9fe3-027b-4abd-acfb-99e3db9da70c">
+  <namespace idref="9c5baf6a-59e8-4592-92a7-7a78bddc6b1c" />
+  <pluralName>PerformanceReviewItemTypes</pluralName>
+  <singularName>PerformanceReviewItemType</singularName>
+</objectType>

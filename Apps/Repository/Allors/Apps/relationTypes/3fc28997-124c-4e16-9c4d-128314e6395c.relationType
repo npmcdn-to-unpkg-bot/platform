@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="3fc28997-124c-4e16-9c4d-128314e6395c">
+  <associationType id="f42c835a-4325-4d25-a2e4-ea621d9bab6b">
+    <objectType idref="1a0e396b-69bd-4e77-a602-3d7f7938fd74" />
+  </associationType>
+  <roleType id="c8224cdd-85c3-4dd7-85cc-3eee6b0ee010">
+    <objectType idref="b5ee6cea-4e2b-498e-a5dd-24671d896477" />
+    <pluralName>CostCenterAccounts</pluralName>
+    <singularName>CostCenterAccount</singularName>
+  </roleType>
+</relationType>

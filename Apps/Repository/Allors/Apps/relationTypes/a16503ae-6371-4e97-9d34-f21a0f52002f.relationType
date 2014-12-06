@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="a16503ae-6371-4e97-9d34-f21a0f52002f">
+  <associationType id="7002201c-53f7-457f-8c8c-4990fc4ed175">
+    <isMany>true</isMany>
+    <objectType idref="89c49578-bb5d-4589-b908-bf09c6495011" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="220d3993-fbca-4082-887c-ab7e9261d4da">
+    <objectType idref="ef5fb351-2f0f-454a-b7b2-104af42b2c72" />
+    <pluralName>BonusPayChecks</pluralName>
+    <singularName>BonusPayCheck</singularName>
+  </roleType>
+</relationType>

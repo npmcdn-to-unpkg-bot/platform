@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="45b3b293-b746-4d6d-9da7-e2378694f734">
+  <associationType id="5e1ba42d-9325-45b5-9c41-cc9b12d0929a">
+    <objectType idref="7dde949a-6f54-4ece-92b3-d269f50ef9d9" />
+  </associationType>
+  <roleType id="019d8b7a-79db-4100-a690-ae7587e30d8e">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>CustomerReferences</pluralName>
+    <singularName>CustomerReference</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

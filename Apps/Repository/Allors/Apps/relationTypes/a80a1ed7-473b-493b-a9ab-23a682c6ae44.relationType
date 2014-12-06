@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="a80a1ed7-473b-493b-a9ab-23a682c6ae44">
+  <associationType id="3e95c4c2-6164-486a-a483-e0552a142e13">
+    <isMany>true</isMany>
+    <objectType idref="9f20a35c-d814-4690-a96f-2bcd25f6c6a2" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="495d6adc-8fff-4754-99cf-b4f2a65e6b44">
+    <objectType idref="3bba6e5a-dc2d-4838-b6c4-881f6c8c3013" />
+    <pluralName>SendingParties</pluralName>
+    <singularName>SendingParty</singularName>
+  </roleType>
+</relationType>

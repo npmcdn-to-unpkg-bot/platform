@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="dc54aafb-f0f2-4f72-8a81-d5b2fc792b86">
+  <namespace idref="bed2b711-d707-4cf6-9aee-11de07b2ba0d" />
+  <pluralName>Properties</pluralName>
+  <singularName>Property</singularName>
+</objectType>

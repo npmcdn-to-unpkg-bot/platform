@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="b445f2d6-55a6-4cb4-9550-5be8863eddb6">
+  <associationType id="21509869-1643-402a-a5eb-9657f1f01af9">
+    <objectType idref="aa3bf631-5aa5-48ab-a249-ef61f640fb72" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="8844d711-33d6-4d19-ad21-edcd60851f1d">
+    <isMany>true</isMany>
+    <objectType idref="aa3bf631-5aa5-48ab-a249-ef61f640fb72" />
+    <pluralName>OrderedWiths</pluralName>
+    <singularName>OrderedWith</singularName>
+  </roleType>
+</relationType>

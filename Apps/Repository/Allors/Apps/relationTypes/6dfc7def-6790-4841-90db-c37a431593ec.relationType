@@ -1,0 +1,14 @@
+<relationType allors="1.0" id="6dfc7def-6790-4841-90db-c37a431593ec">
+  <associationType id="27f066ba-c894-4ced-9c3f-8af137d0ffb4">
+    <isMany>true</isMany>
+    <objectType idref="d79f734d-4434-4710-a7ea-7d6306f3064f" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <isIndexed>true</isIndexed>
+  <roleType id="88d55469-1e0c-4dc8-83a7-ce0a48d9c9d9">
+    <isMany>true</isMany>
+    <objectType idref="383589fb-f410-4d22-ade6-aa5126fdef18" />
+    <pluralName>CurrentPriceComponents</pluralName>
+    <singularName>CurrentPriceComponent</singularName>
+  </roleType>
+</relationType>

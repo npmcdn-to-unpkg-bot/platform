@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="871dc477-7231-4180-b479-e66c0d2dbe58">
+  <associationType id="b65cdd1a-423c-41b7-8978-a7cc4420166d">
+    <isMany>true</isMany>
+    <objectType idref="959dd6ba-dfd5-4c7f-84f0-819fbef5c76a" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="3153feb0-9213-496e-b1ac-2ed5d6b431a8">
+    <objectType idref="48d14522-5fa8-44a8-ba4c-e2ddfc18e069" />
+    <pluralName>ShipmentReceipts</pluralName>
+    <singularName>ShipmentReceipt</singularName>
+  </roleType>
+</relationType>

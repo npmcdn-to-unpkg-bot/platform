@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="a0cf565a-2dcf-4513-9110-8c34468d993f">
+  <namespace idref="a92f6a7c-713b-432e-8d7e-bfc82d16b942" />
+  <pluralName>PurchaseReturns</pluralName>
+  <singularName>PurchaseReturn</singularName>
+</objectType>

@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="e924ea41-ae61-4cf1-9bf4-4661497289c1">
+  <associationType id="b6d5c0a6-f5b4-43df-952f-0a5f82b68b1f">
+    <objectType idref="3b9f21f4-2f2c-47a9-9c76-15f5ef4f5e00" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="d4bbb472-cf06-4569-9d91-00ee3a98eb41">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>LastYearsRevenues</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>LastYearsRevenue</singularName>
+  </roleType>
+</relationType>

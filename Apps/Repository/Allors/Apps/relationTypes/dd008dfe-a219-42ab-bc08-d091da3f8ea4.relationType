@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="dd008dfe-a219-42ab-bc08-d091da3f8ea4">
+  <associationType id="77ce8418-a00b-46d0-ab7b-4a782b7387da">
+    <isMany>true</isMany>
+    <objectType idref="c81441c8-9ac9-440e-a926-c96230b2701f" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="a5ac9bc1-5323-41ec-a791-d4ecc7d0eee8">
+    <objectType idref="1a0e396b-69bd-4e77-a602-3d7f7938fd74" />
+    <pluralName>PurchasePaymentDiscountDifferencesAccounts</pluralName>
+    <singularName>PurchasePaymentDiscountDifferencesAccount</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="99b3395c-bb6a-4a4f-b22f-900e76e22520">
+  <associationType id="7ed44fc9-fc12-4a68-8938-1573ec28da2f">
+    <objectType idref="1ee19062-e36d-4836-b0e6-928a3957bd57" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <isIndexed>true</isIndexed>
+  <roleType id="7b17b8a8-fda9-4707-a7a3-e263b51bcd4f">
+    <objectType idref="6dd3dbf4-d14d-45a3-ad52-65b31a4bb24e" />
+    <pluralName>CurrentInvoiceItemStatuses</pluralName>
+    <singularName>CurrentInvoiceItemStatus</singularName>
+  </roleType>
+</relationType>

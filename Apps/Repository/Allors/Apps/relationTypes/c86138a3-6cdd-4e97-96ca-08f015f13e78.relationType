@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="c86138a3-6cdd-4e97-96ca-08f015f13e78">
+  <associationType id="43473687-dc7e-4a4b-8745-5e98747c3731">
+    <objectType idref="354524c8-355e-4994-b07e-91fc6bcb06cf" />
+  </associationType>
+  <roleType id="7d2869b9-d5e9-48ff-a12c-f32c7667d764">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>SalesChannelNames</pluralName>
+    <singularName>SalesChannelName</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

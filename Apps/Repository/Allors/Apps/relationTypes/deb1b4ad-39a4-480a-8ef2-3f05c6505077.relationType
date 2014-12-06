@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="deb1b4ad-39a4-480a-8ef2-3f05c6505077">
+  <associationType id="98bd67fc-c675-425a-800d-79cea6a4a193">
+    <objectType idref="6173fc23-115f-4356-a0ce-867872c151ac" />
+  </associationType>
+  <roleType id="1ed1e917-2729-4d14-8b28-686991e11d6c">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>TotalPurchasePrices</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>TotalPurchasePrice</singularName>
+  </roleType>
+</relationType>

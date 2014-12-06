@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="52ee223f-14e7-46e7-8e24-c6fdf19fa5d1">
+  <namespace idref="bed2b711-d707-4cf6-9aee-11de07b2ba0d" />
+  <pluralName>CostOfGoodsSoldMethods</pluralName>
+  <singularName>CostOfGoodsSoldMethod</singularName>
+</objectType>

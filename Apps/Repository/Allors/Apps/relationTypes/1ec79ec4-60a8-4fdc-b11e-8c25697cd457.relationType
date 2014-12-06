@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="1ec79ec4-60a8-4fdc-b11e-8c25697cd457">
+  <associationType id="cfda1134-8fdf-449c-99cb-1e9ad29448fc">
+    <isMany>true</isMany>
+    <objectType idref="d3446420-6d2a-4d18-a6eb-0405da9f7cc5" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="511439d3-de78-4b3b-8489-9fd661c41fdc">
+    <objectType idref="7b23440c-d26b-42f5-a94b-e26872e63e7d" />
+    <pluralName>JournalTypes</pluralName>
+    <singularName>JournalType</singularName>
+  </roleType>
+</relationType>

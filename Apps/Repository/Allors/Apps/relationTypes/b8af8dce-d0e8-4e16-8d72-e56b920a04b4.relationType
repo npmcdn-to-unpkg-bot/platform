@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="b8af8dce-d0e8-4e16-8d72-e56b920a04b4">
+  <associationType id="57168fae-0b31-4370-afff-ab5a02c9a8ee">
+    <objectType idref="c81441c8-9ac9-440e-a926-c96230b2701f" />
+  </associationType>
+  <roleType id="d4c44bcf-c38b-46b9-86f6-462a48714389">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>TransactionReferenceNumberPrefixes</pluralName>
+    <singularName>TransactionReferenceNumberPrefix</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

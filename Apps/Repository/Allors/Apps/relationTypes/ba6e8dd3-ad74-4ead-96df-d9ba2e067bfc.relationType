@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="ba6e8dd3-ad74-4ead-96df-d9ba2e067bfc">
+  <associationType id="a75c25e4-c88d-4d2b-981a-c5b561264e87">
+    <objectType idref="7dde949a-6f54-4ece-92b3-d269f50ef9d9" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="77ce4873-d2fa-4f0b-ba8d-0403886d613c">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>TotalIncVats</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>TotalIncVat</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="59187015-4689-4ef8-942f-c36ff4c74e64">
+  <associationType id="4f0c5035-bfd2-4843-8d6e-d3df15a7f5dd">
+    <isMany>true</isMany>
+    <objectType idref="40ee178e-7564-4dfa-ab6f-8bcd4e62b498" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="38f3a7f5-53b5-4572-bcb0-347fa3a543f3">
+    <objectType idref="3bba6e5a-dc2d-4838-b6c4-881f6c8c3013" />
+    <pluralName>Parties</pluralName>
+    <singularName>Party</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="d92c5fd4-68e9-402b-b540-86053df1b70d">
+  <associationType id="ce1593e7-a08d-43f3-a6af-ea5800ff9d3b">
+    <objectType idref="e94bf9e1-373d-49e3-a0fe-f21a8b1525d4" />
+  </associationType>
+  <roleType id="f35bdd80-6821-4d72-8cd7-a8f4d0542fc4">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>Regions</pluralName>
+    <singularName>Region</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

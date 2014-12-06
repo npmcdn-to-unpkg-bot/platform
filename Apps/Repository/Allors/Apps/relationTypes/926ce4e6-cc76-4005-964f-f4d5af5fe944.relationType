@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="926ce4e6-cc76-4005-964f-f4d5af5fe944">
+  <associationType id="71bf2977-eb86-4c5d-84f3-7ee97412e460">
+    <isMany>true</isMany>
+    <objectType idref="e6f97f86-6aec-4dde-b828-4de04d42c248" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="66743b3b-180e-4a8d-baec-b728fd4ed29c">
+    <objectType idref="c37f7876-51af-4748-b083-4a6e42e99597" />
+    <pluralName>States</pluralName>
+    <singularName>State</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="24a89a6a-dc83-431c-b94c-b2c976bc1784">
+  <associationType id="f7da0085-eeb3-4a4c-bc5c-2b0b32340d80">
+    <objectType idref="bb5e8196-f821-4fb8-98cb-f19416d1427c" />
+  </associationType>
+  <roleType id="3927fecb-c2fc-442e-b84e-1922a197acde">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>Commisisons</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>Commission</singularName>
+  </roleType>
+</relationType>

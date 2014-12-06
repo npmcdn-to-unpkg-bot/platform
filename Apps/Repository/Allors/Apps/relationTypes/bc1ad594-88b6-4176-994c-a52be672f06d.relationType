@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="bc1ad594-88b6-4176-994c-a52be672f06d">
+  <associationType id="ebc960bf-dd8c-4854-afec-185b260315e9">
+    <objectType idref="c5578565-c07a-4dc1-8381-41955db364e2" />
+  </associationType>
+  <roleType id="9d2f66e2-0bbd-46ab-b65b-43e6b38383b9">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>Percentages</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>Percentage</singularName>
+  </roleType>
+</relationType>

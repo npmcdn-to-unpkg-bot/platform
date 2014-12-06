@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="7c04f907-4254-4b59-861a-7b545c12b3d3">
+  <associationType id="6e8ff513-f6e2-411f-b679-1eda15e0f577">
+    <objectType idref="7dde949a-6f54-4ece-92b3-d269f50ef9d9" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <isIndexed>true</isIndexed>
+  <roleType id="795117b2-8b5a-4562-9acc-d77d2f93256a">
+    <isMany>true</isMany>
+    <objectType idref="f3ef0124-e867-4da2-9323-80fbe1f214c2" />
+    <pluralName>ValidOrderItems</pluralName>
+    <singularName>ValidOrderItem</singularName>
+  </roleType>
+</relationType>

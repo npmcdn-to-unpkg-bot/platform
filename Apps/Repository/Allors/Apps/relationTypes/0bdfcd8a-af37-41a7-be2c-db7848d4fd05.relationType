@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="0bdfcd8a-af37-41a7-be2c-db7848d4fd05">
+  <associationType id="88919577-6835-4c84-9e3d-a1ec50fc5c2b">
+    <objectType idref="27b6630a-35d0-4352-9223-b5b6c8d7496b" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="6042abcd-a859-42bb-818d-9409f7b08d7a">
+    <objectType idref="9301efcb-2f08-4825-aa60-752c031e4697" />
+    <pluralName>CustomerShipmentsCorrection</pluralName>
+    <singularName>CustomerShipmentCorrection</singularName>
+  </roleType>
+</relationType>

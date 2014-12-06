@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="24645d36-9f98-4d08-a7e0-51c1132a110d">
+  <associationType id="27704145-5c5c-4267-b1aa-27f8a64284bb">
+    <objectType idref="b397c075-215a-4d5b-b962-ea48540a64fa" />
+  </associationType>
+  <roleType id="ef36805b-89db-4195-9848-234e3adf9ba8">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>Puposes</pluralName>
+    <singularName>Purpose</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

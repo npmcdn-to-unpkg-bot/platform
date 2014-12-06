@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="773e731d-47f7-4742-b8c6-81dec0a09f29">
+  <associationType id="183113ef-8420-444d-8a80-61580a9f95dc">
+    <isMany>true</isMany>
+    <objectType idref="75916246-b1b5-48ef-9578-d65980fd2623" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="05f1428a-26cd-4f08-9f1d-dec02edf6fe1">
+    <isMany>true</isMany>
+    <objectType idref="1d21adf0-6008-459d-9f6a-3a026e7640bc" />
+    <pluralName>Documents</pluralName>
+    <singularName>Document</singularName>
+  </roleType>
+</relationType>

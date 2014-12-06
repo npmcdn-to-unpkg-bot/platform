@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="fc6cb229-6c94-4c80-a4a6-697d1d752997">
+  <associationType id="2481df7c-624c-44ce-a201-7d7c4d339780">
+    <objectType idref="7dde949a-6f54-4ece-92b3-d269f50ef9d9" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="f2540864-d417-482b-a7bf-0f01c1f185eb">
+    <objectType idref="70468d86-b8a0-4aff-881e-fca2386f64da" />
+    <pluralName>SurchargeAdjustments</pluralName>
+    <singularName>SurchargeAdjustment</singularName>
+  </roleType>
+</relationType>

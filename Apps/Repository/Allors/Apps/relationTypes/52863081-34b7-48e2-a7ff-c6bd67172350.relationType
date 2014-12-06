@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="52863081-34b7-48e2-a7ff-c6bd67172350">
+  <associationType id="7ab0f4b0-f4ae-45d4-8c9e-a576f36e4f1a">
+    <objectType idref="3bba6e5a-dc2d-4838-b6c4-881f6c8c3013" />
+  </associationType>
+  <roleType id="09d4533e-d118-4395-a7f1-358aad00f6e4">
+    <objectType idref="b5ee6cea-4e2b-498e-a5dd-24671d896477" />
+    <pluralName>ExcludesFromDunning</pluralName>
+    <singularName>ExcludeFromDunning</singularName>
+  </roleType>
+</relationType>

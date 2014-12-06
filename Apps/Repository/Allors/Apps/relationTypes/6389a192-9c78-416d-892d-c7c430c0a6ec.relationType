@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="6389a192-9c78-416d-892d-c7c430c0a6ec">
+  <associationType id="9b6baec6-0f85-4c7a-b80d-becf925322b9">
+    <objectType idref="c81441c8-9ac9-440e-a926-c96230b2701f" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="30465967-841c-4bbf-90ca-5bcaab4b18e2">
+    <objectType idref="ccd6f134-26de-4103-bff9-a37ec3e997a3" />
+    <pluralName>NextIncomingShipmentNumbers</pluralName>
+    <singularName>NextIncomingShipmentNumber</singularName>
+  </roleType>
+</relationType>

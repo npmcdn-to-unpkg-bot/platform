@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="6d0f4867-3237-4c3e-b00b-96f4ad456c55">
+  <associationType id="ac51d7e6-abd1-4d07-9b25-34888b4f830d">
+    <objectType idref="062bd939-9902-4747-a631-99ea10002156" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <isIndexed>true</isIndexed>
+  <roleType id="e146ab05-15d4-4f29-a89c-c97b5a75d0cf">
+    <isMany>true</isMany>
+    <objectType idref="92b62390-9bf9-432b-b81e-242a5467e10e" />
+    <pluralName>OrderStatuses</pluralName>
+    <singularName>OrderStatus</singularName>
+  </roleType>
+</relationType>

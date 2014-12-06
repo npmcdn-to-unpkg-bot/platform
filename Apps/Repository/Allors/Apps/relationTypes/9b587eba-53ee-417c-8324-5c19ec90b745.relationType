@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="9b587eba-53ee-417c-8324-5c19ec90b745">
+  <associationType id="7ea12a2f-a018-422b-8a03-a683e2bad699">
+    <objectType idref="6c255f71-ce18-4d51-b0d9-e402ec0e570e" />
+  </associationType>
+  <roleType id="fd07dae1-2e46-48a7-956d-7b881e6c271a">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>ContactNumbers</pluralName>
+    <singularName>ContactNumber</singularName>
+    <size>40</size>
+  </roleType>
+</relationType>

@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="0a7ac589-946b-4d49-b7e0-7e0b9bc90111">
+  <namespace idref="78bc14e1-57ea-4c6e-97ae-a18880c0facd" />
+  <pluralName>Brands</pluralName>
+  <singularName>Brand</singularName>
+</objectType>

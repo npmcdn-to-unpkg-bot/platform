@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="bc11d48f-bcab-4880-afe8-0a52d3c11e44">
+  <associationType id="d44420aa-80fc-4d55-8032-18b1b1c63d69">
+    <objectType idref="d8611e48-b0ba-4037-a992-09e3e26c6d5d" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="6a37b722-41b4-411e-bc84-18918990ad14">
+    <isMany>true</isMany>
+    <objectType idref="341fa885-0161-406b-89e6-08b1c92cd3b3" />
+    <pluralName>FiscalYearInvoiceNumbers</pluralName>
+    <singularName>FiscalYearInvoiceNumber</singularName>
+  </roleType>
+</relationType>

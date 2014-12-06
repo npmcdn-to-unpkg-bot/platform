@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="f403ab39-cc81-4e09-8794-a45db9ef178f">
+  <associationType id="78c8d202-0277-4c3a-9e24-74041cc56872">
+    <objectType idref="9c6f4ad8-5a4e-4b6e-96b7-876f7aabcffb" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="8086c3d5-1577-4c32-bf73-abe72aac725c">
+    <isMany>true</isMany>
+    <objectType idref="8e6eaa35-85da-4c80-848c-3f1ed6cd2f8a" />
+    <pluralName>ShipmentRouteSegments</pluralName>
+    <singularName>ShipmentRouteSegment</singularName>
+  </roleType>
+</relationType>

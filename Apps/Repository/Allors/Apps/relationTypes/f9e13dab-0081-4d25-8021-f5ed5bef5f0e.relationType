@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="f9e13dab-0081-4d25-8021-f5ed5bef5f0e">
+  <associationType id="86376834-b792-425e-a21d-30065dca6dd4">
+    <objectType idref="66bd584c-37c4-4969-874b-7a459195fd25" />
+  </associationType>
+  <roleType id="fb6ba6e4-2f9f-4230-b536-df8e305797f9">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>AgreedUponPrices</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>AgreedUponPrice</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="b1a10fe4-2d84-452b-b0cb-e96e55014856">
+  <namespace idref="78bc14e1-57ea-4c6e-97ae-a18880c0facd" />
+  <pluralName>SubAssemblies</pluralName>
+  <singularName>SubAssembly</singularName>
+</objectType>

@@ -1,0 +1,208 @@
+group AllorsCSharpMeta;
+
+TemplateId() ::= <<14F49218-A676-43ba-9CBD-B8FFA059D1BF>>
+TemplateName() ::= <<Allors C# Repository>>
+TemplateVersion() ::= <<1.0.1>>
+TemplateAllors() ::= <<1.0>>
+TemplateConfiguration(domain, settings) ::= <<
+$! 
+Copyright 2002-2013 Allors bvba.
+
+Dual Licensed under
+  a) the Lesser General Public Licence v3 (LGPL)
+  b) the Allors License
+
+The LGPL License is included in the file lgpl.txt.
+The Allors License is an addendum to your contract.
+
+Allors Platform is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+For more information visit http://www.allors.com/legal
+!$
+<generations>
+	<generation template="domain" output="Repository.g.cs"/> 
+</generations>
+>>
+
+domain(domain, settings) ::= <<
+namespace Allors.Meta
+{
+	using System;
+	using Allors.Meta;
+
+
+	public static partial class Repository
+	{
+
+ 		public static Domain Core;
+ 		public static Domain $domain.Name$;
+$domain.SuperDomains:{superDomain|$if(!superDomain.IsAllorsUnitDomain)$			public static Domain $superDomain.Name$;$endif$
+}$
+
+		public static Unit AllorsString;
+        public static Unit AllorsInteger;
+        public static Unit AllorsDecimal;
+        public static Unit AllorsFloat;
+        public static Unit AllorsBoolean;
+        public static Unit AllorsUnique;
+        public static Unit AllorsBinary;
+
+$domain.compositeObjectTypes:{objectType|$objectTypeDeclaration(objectType)$}$
+$domain.relationTypes:{relationType|$relationTypeDeclaration(relationType)$}$
+
+		static void Init(MetaPopulation meta)
+		{
+            Core = new Domain(meta, new Guid("A5F4E562-323A-41C6-893F-12D7C6A9BD76")) { Name = "Core" };
+			$domain.Name$ = new Domain(meta, new Guid("$domain.IdAsString$")) { Name = "$domain.Name$" };
+$domain.SuperDomains:{superDomain|$superDomainInit(superDomain)$}$
+
+			// Units
+			AllorsString = new UnitBuilder(Core, UnitIds.StringId).WithSingularName("AllorsString").WithPluralName("AllorsStrings").WithUnitTag(UnitTags.AllorsString).Build();
+            AllorsInteger = new UnitBuilder(Core, UnitIds.IntegerId).WithSingularName("AllorsInteger").WithPluralName("AllorsIntegers").WithUnitTag(UnitTags.AllorsInteger).Build();
+            AllorsDecimal = new UnitBuilder(Core, UnitIds.DecimalId).WithSingularName("AllorsDecimal").WithPluralName("AllorsDecimals").WithUnitTag(UnitTags.AllorsDecimal).Build();
+            AllorsFloat = new UnitBuilder(Core, UnitIds.FloatId).WithSingularName("AllorsFloat").WithPluralName("AllorsFloats").WithUnitTag(UnitTags.AllorsFloat).Build();
+            AllorsBoolean = new UnitBuilder(Core, UnitIds.BooleanId).WithSingularName("AllorsBoolean").WithPluralName("AllorsBooleans").WithUnitTag(UnitTags.AllorsBoolean).Build();
+            AllorsUnique = new UnitBuilder(Core, UnitIds.Unique).WithSingularName("AllorsUnique").WithPluralName("AllorsUniques").WithUnitTag(UnitTags.AllorsUnique).Build();
+            AllorsBinary = new UnitBuilder(Core, UnitIds.BinaryId).WithSingularName("AllorsBinary").WithPluralName("AllorsBinaries").WithUnitTag(UnitTags.AllorsBinary).Build();
+
+			// Composites
+$domain.compositeObjectTypes:{objectType|$objectTypeInit(objectType)$}$
+				
+			// Inheritances
+$domain.compositeObjectTypes:{objectType|$objectTypeInheritance(objectType)$}$
+
+			// RelationTypes
+$domain.compositeObjectTypes:{objectType|$objectTypeRelationType(objectType)$}$
+		}
+	}
+}
+>>
+
+superDomainInit(superDomain) ::= <<
+$if(!superDomain.IsAllorsUnitDomain)$
+			$superDomain.Name$ = new Domain(meta, new Guid("$superDomain.IdAsString$")) { Name = "$superDomain.Name$" };
+$endif$
+>>
+
+objectTypeDeclaration(objectType) ::= <<		public static $if(objectType.IsInterface)$Interface$else$Class$endif$ $objectType.Name$;
+
+>>
+
+relationTypeDeclaration(relationType) ::= <<		public static RelationType $relationType.Name$;
+
+>>
+
+objectTypeInit(objectType) ::= <<
+$if(!objectType.IsInterface)$
+			$objectType.Name$ = new ClassBuilder($objectType.DomainWhereDeclaredObjectType.Name$, new Guid("$objectType.IdAsString$"))
+			.WithSingularName("$objectType.SingularName$")
+			.WithPluralName("$objectType.PluralName$")
+			.Build();
+$else$  
+			$objectType.Name$ = new InterfaceBuilder($objectType.DomainWhereDeclaredObjectType.Name$, new Guid("$objectType.IdAsString$"))
+			.WithSingularName("$objectType.SingularName$")
+			.WithPluralName("$objectType.PluralName$")
+			.Build();
+$endif$  
+
+>>
+
+objectTypeInheritance(objectType) ::= <<
+				// $objectType.Name$
+$objectType.InheritancesWhereSubtype:{inheritance|$inheritanceInit(inheritance)$}$
+
+>>
+
+objectTypeRelationType(objectType) ::= <<
+				// $objectType.Name$
+$objectType.AssociationTypesWhereObjectType:{associationType|$relationTypeInit(associationType.RelationType)$}$
+
+>>
+
+inheritanceInit(inheritance) ::= <<
+				new InheritanceBuilder($inheritance.DomainWhereDeclaredInheritance.Name$, new Guid("$inheritance.IdAsString$"))
+				.WithSubtype($inheritance.Subtype.Name$)
+				.WithSupertype($inheritance.Supertype.Name$).Build();
+
+>>
+
+relationTypeInit(relationType) ::= <<
+				$relationType.Name$ = new RelationTypeBuilder($relationType.DomainWhereDeclaredRelationType.Name$, new Guid("$relationType.IdAsString$"),new Guid("$relationType.AssociationType.IdAsString$"),new Guid("$relationType.RoleType.IdAsString$"))
+				$objectTypes()$
+				$singularName()$
+				$pluralName()$
+				$cardinality()$
+				$isDerived()$
+				$isIndexed()$
+				$precision()$
+				$scale()$
+				$size()$
+				.Build();
+
+
+>>
+
+objectTypes() ::= <%
+.WithObjectTypes($relationType.AssociationType.ObjectType.Name$, $relationType.RoleType.ObjectType.Name$)
+%>
+
+singularName() ::= <%
+$if(!relationType.RoleType.IsAssignedSingularNameDefault)$
+.WithSingularName("$relationType.RoleType.AssignedSingularName$")
+$endif$  
+%>
+
+pluralName() ::= <%
+$if(!relationType.RoleType.IsAssignedPluralNameDefault)$
+.WithPluralName("$relationType.RoleType.AssignedPluralName$")
+$endif$  
+%>
+
+cardinality() ::= <%
+$if(relationType.AssociationType.IsMany)$
+	$if(relationType.RoleType.IsMany)$
+.WithMultiplicity(Multiplicity.ManyToMany)
+	$else$
+.WithMultiplicity(Multiplicity.ManyToOne)
+	$endif$
+$else$
+	$if(relationType.RoleType.IsMany)$
+.WithMultiplicity(Multiplicity.OneToMany)
+	$endif$
+$endif$
+%>
+
+isDerived() ::= <%
+$if(relationType.IsDerived)$
+.WithIsDerived($relationType.IsDerived$)
+$endif$  
+%>
+
+isIndexed() ::= <%
+$if(relationType.IsIndexed)$
+.WithIsIndexed($boolean(relationType.IsIndexed)$)
+$endif$  
+%>
+
+scale() ::= <%
+$if(!relationType.RoleType.IsScaleDefault)$
+.WithScale($relationType.RoleType.Scale$)
+$endif$
+%>
+
+precision() ::= <%
+$if(!relationType.RoleType.IsPrecisionDefault)$
+.WithPrecision($relationType.RoleType.Precision$)
+$endif$
+%>
+
+size() ::= <%
+$if(!relationType.RoleType.IsSizeDefault)$
+.WithSize($relationType.RoleType.Size$)
+$endif$
+%>
+
+boolean(value) ::= "$if(value)$true$else$false$endif$"

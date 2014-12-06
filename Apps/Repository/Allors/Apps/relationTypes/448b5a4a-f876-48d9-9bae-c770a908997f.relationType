@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="448b5a4a-f876-48d9-9bae-c770a908997f">
+  <associationType id="0060c405-1ed9-4f3c-be5c-bd12469ab019">
+    <isMany>true</isMany>
+    <objectType idref="d79f734d-4434-4710-a7ea-7d6306f3064f" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="9bd2aa77-b22e-43dc-be67-fddeb648d6c4">
+    <objectType idref="69db99bc-97f7-4e2e-903c-74afb55992af" />
+    <pluralName>AssignedVatRegimes</pluralName>
+    <singularName>AssignedVatRegime</singularName>
+  </roleType>
+</relationType>

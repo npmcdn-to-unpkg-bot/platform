@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="4f3cf098-b9d8-4c10-8317-ea2c05ebc4b0">
+  <associationType id="6d3492d0-dda6-41a0-a7e4-32bbccb237f5">
+    <objectType idref="716647bf-7589-4146-a45c-a6a3b1cee507" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="4ab44f50-c591-47ec-b6ce-130b5e8791f8">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>InitialProfitMargins</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>InitialProfitMargin</singularName>
+  </roleType>
+</relationType>

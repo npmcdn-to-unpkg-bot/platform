@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="9c8794b9-2c7b-4afa-86a6-21fb48fc902f">
+  <associationType id="7613dcb8-0c6f-4c65-96c0-75d2cc9db16e">
+    <isMany>true</isMany>
+    <objectType idref="b0a42c94-3d4e-47f1-86a2-cf45eeba5f0d" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="70d2a311-d09b-406c-89d4-3adbbc0a8fe2">
+    <objectType idref="3aa7bf17-bd02-4587-9006-177845ae69df" />
+    <pluralName>Responsibilities</pluralName>
+    <singularName>Responsibility</singularName>
+  </roleType>
+</relationType>

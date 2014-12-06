@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="8ff46109-8ae7-4da5-a1f9-f19d4cf4e27e">
+  <namespace idref="78bc14e1-57ea-4c6e-97ae-a18880c0facd" />
+  <pluralName>VarianceReasons</pluralName>
+  <singularName>VarianceReason</singularName>
+</objectType>

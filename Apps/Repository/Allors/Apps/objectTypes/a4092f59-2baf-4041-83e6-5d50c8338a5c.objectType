@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="a4092f59-2baf-4041-83e6-5d50c8338a5c">
+  <namespace idref="83d90516-d523-40b7-8edb-9bda4ee2cd52" />
+  <pluralName>SalesInvoiceObjectStates</pluralName>
+  <singularName>SalesInvoiceObjectState</singularName>
+</objectType>

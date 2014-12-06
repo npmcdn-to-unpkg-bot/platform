@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="27534e6f-55d3-45e3-82ba-1580af4647d6">
+  <associationType id="cda2b9ab-8d74-471c-95ea-38fb0c4a7589">
+    <objectType idref="f3ef0124-e867-4da2-9323-80fbe1f214c2" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="32f1c0f7-59d6-4c2c-a39e-607d359b6f53">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>TotalVatsCustomerCurrency</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>TotalVatCustomerCurrency</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="36b9d86d-4e2e-4ff5-b167-8ea6c81dd6cc">
+  <associationType id="8e37c73a-5508-432f-94c9-77d0159b0cc2">
+    <isMany>true</isMany>
+    <objectType idref="a5e29ca1-80de-4de4-9085-b69f21550b5a" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="955c2b54-1aab-4eb0-b71d-3b6e4664e3b3">
+    <isMany>true</isMany>
+    <objectType idref="8dc67774-c15a-47dd-9b8a-ce4e7139e8a3" />
+    <pluralName>VatReturnBoxes</pluralName>
+    <singularName>VatReturnBox</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="615a233a-659a-44cc-b056-fe02643cbeed">
+  <associationType id="847041e8-d780-4640-803d-927b23f7932f">
+    <objectType idref="7dde949a-6f54-4ece-92b3-d269f50ef9d9" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="18ff7372-059c-4717-9d9f-a3a20ea5a7ba">
+    <objectType idref="fb3dd618-eeb5-4ef6-87ca-abfe91dc603f" />
+    <pluralName>Fees</pluralName>
+    <singularName>Fee</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="b2aa3989-8e65-4fdb-9654-46ae615fd73a">
+  <associationType id="74a0152e-f989-4bf6-8164-7e515876a65a">
+    <isMany>true</isMany>
+    <objectType idref="a5e29ca1-80de-4de4-9085-b69f21550b5a" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="5b899c69-af8c-4655-9809-b4158738e1db">
+    <objectType idref="59f3100c-da48-4b4c-a302-1a75e37216a6" />
+    <pluralName>VatToPayAccounts</pluralName>
+    <singularName>VatToPayAccount</singularName>
+  </roleType>
+</relationType>

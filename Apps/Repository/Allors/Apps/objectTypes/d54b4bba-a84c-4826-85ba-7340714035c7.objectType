@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="d54b4bba-a84c-4826-85ba-7340714035c7">
+  <namespace idref="4f0fb63b-f01d-42dd-8093-122a5a46228e" />
+  <pluralName>PostalAddresses</pluralName>
+  <singularName>PostalAddress</singularName>
+</objectType>

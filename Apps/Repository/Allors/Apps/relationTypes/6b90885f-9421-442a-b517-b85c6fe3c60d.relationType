@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="6b90885f-9421-442a-b517-b85c6fe3c60d">
+  <associationType id="b4df53d0-3970-45bf-bcfb-251dc18ebb46">
+    <isMany>true</isMany>
+    <objectType idref="9c6f4ad8-5a4e-4b6e-96b7-876f7aabcffb" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <isIndexed>true</isIndexed>
+  <roleType id="215a7b54-93d9-455c-9979-759b116677cd">
+    <objectType idref="c81441c8-9ac9-440e-a926-c96230b2701f" />
+    <pluralName>BillFromInternalOrganisations</pluralName>
+    <singularName>BillFromInternalOrganisation</singularName>
+  </roleType>
+</relationType>

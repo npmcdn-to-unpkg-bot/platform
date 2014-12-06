@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="89557826-c9d1-4aa1-8789-79fb425cdb87">
+  <associationType id="7d157e5a-efbb-453e-bd95-27a9b0ab305f">
+    <objectType idref="6173fc23-115f-4356-a0ce-867872c151ac" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="751ada5f-ff41-43ae-8609-0c1457642375">
+    <isMany>true</isMany>
+    <objectType idref="a98f8aca-d711-47e8-ac9c-25b607cbaef1" />
+    <pluralName>SalesInvoiceItems</pluralName>
+    <singularName>SalesInvoiceItem</singularName>
+  </roleType>
+</relationType>

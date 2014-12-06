@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="a06befc5-c347-4ffb-9391-2a099fca5145">
+  <namespace idref="78bc14e1-57ea-4c6e-97ae-a18880c0facd" />
+  <pluralName>TestingRequirements</pluralName>
+  <singularName>TestingRequirement</singularName>
+</objectType>

@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="a2816fd1-babb-480c-8e29-0f7192aaff71">
+  <associationType id="c02a3dc0-c977-4893-b7e1-691cfe0c1b03">
+    <objectType idref="3b43da7f-5252-4824-85fe-c85d6864838a" />
+  </associationType>
+  <roleType id="c097dea3-8f6f-456c-b4cc-7c87c5441517">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>AllocatedCosts</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>AllocatedCost</singularName>
+  </roleType>
+</relationType>

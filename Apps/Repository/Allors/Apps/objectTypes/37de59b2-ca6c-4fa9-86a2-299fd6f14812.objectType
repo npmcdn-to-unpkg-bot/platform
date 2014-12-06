@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="37de59b2-ca6c-4fa9-86a2-299fd6f14812">
+  <namespace idref="a7c2d9a4-951f-4268-a433-b6d0bdec9366" />
+  <pluralName>ProductionRuns</pluralName>
+  <singularName>ProductionRun</singularName>
+</objectType>

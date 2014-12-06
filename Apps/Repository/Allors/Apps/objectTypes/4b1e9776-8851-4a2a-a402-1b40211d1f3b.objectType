@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="4b1e9776-8851-4a2a-a402-1b40211d1f3b">
+  <namespace idref="799e9780-81bd-41b6-8417-00b9c8498698" />
+  <pluralName>RespondingParties</pluralName>
+  <singularName>RespondingParty</singularName>
+</objectType>

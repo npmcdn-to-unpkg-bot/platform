@@ -1,0 +1,6 @@
+<objectType allors="1.0" id="75916246-b1b5-48ef-9578-d65980fd2623">
+  <isInterface>true</isInterface>
+  <namespace idref="78bc14e1-57ea-4c6e-97ae-a18880c0facd" />
+  <pluralName>Parts</pluralName>
+  <singularName>Part</singularName>
+</objectType>

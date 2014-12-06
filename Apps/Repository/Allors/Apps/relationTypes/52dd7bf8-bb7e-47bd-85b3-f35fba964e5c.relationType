@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="52dd7bf8-bb7e-47bd-85b3-f35fba964e5c">
+  <associationType id="3eac7011-d5ed-46ce-a678-b1e3a6c02962">
+    <objectType idref="3bba6e5a-dc2d-4838-b6c4-881f6c8c3013" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="fb2c26d4-c23c-4817-94ee-5f2acebb4e41">
+    <isMany>true</isMany>
+    <objectType idref="22bc5b67-8015-49c5-bc47-6f9e7e678943" />
+    <pluralName>BankAccounts</pluralName>
+    <singularName>BankAccount</singularName>
+  </roleType>
+</relationType>

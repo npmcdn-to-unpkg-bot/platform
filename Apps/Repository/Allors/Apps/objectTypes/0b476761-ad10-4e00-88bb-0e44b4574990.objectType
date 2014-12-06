@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="0b476761-ad10-4e00-88bb-0e44b4574990">
+  <namespace idref="a92f6a7c-713b-432e-8d7e-bfc82d16b942" />
+  <pluralName>Vehicles</pluralName>
+  <singularName>Vehicle</singularName>
+</objectType>

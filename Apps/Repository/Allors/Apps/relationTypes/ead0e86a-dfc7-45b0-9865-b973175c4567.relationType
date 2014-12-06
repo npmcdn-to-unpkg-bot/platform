@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="ead0e86a-dfc7-45b0-9865-b973175c4567">
+  <associationType id="6be614a2-0511-4ca0-9b1c-c8a3d0b0a998">
+    <objectType idref="4a3efb9c-1556-4e57-bb59-f09d297e607e" />
+  </associationType>
+  <roleType id="47d9d93c-8ba3-4f28-a8a5-6a4cb02853e6">
+    <objectType idref="c402fbda-133a-4b59-858a-832fbd2ec565" />
+    <pluralName>NextServiceDates</pluralName>
+    <singularName>NextServiceDate</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="327fc2cb-9589-4e9d-b9e6-7429cbe14746">
+  <associationType id="5fdf05a4-933c-42d9-897c-b68c6671f785">
+    <isMany>true</isMany>
+    <objectType idref="6bfa631c-80f4-495f-bb9a-0d3351390d64" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="df92000b-768e-41db-addc-1e2ca5c8baee">
+    <objectType idref="3bba6e5a-dc2d-4838-b6c4-881f6c8c3013" />
+    <pluralName>FromParties</pluralName>
+    <singularName>FromParty</singularName>
+  </roleType>
+</relationType>

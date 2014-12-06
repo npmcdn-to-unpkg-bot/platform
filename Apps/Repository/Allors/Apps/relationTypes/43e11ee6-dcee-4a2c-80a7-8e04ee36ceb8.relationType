@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="43e11ee6-dcee-4a2c-80a7-8e04ee36ceb8">
+  <associationType id="d2351d54-e600-400b-a350-9d2f81b5cf3d">
+    <isMany>true</isMany>
+    <objectType idref="d3f90525-b7fe-4f81-bccd-adf4f57260bc" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="0d52a5f8-3852-4483-9f0d-a6877fc3b5a0">
+    <objectType idref="3bba6e5a-dc2d-4838-b6c4-881f6c8c3013" />
+    <pluralName>NeededFors</pluralName>
+    <singularName>NeededFor</singularName>
+  </roleType>
+</relationType>

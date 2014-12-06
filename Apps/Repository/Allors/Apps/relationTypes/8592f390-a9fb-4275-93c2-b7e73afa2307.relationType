@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="8592f390-a9fb-4275-93c2-b7e73afa2307">
+  <associationType id="703bf4a7-8949-46ea-b7d3-092ab62c9bdd">
+    <objectType idref="7dde949a-6f54-4ece-92b3-d269f50ef9d9" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="1420978d-4e64-434e-926e-e26bbce2dd1f">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>TotalDiscounts</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>TotalDiscount</singularName>
+  </roleType>
+</relationType>

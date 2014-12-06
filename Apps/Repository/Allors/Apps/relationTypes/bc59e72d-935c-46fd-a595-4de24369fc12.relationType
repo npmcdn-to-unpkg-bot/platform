@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="bc59e72d-935c-46fd-a595-4de24369fc12">
+  <associationType id="d157af85-88b6-4a13-b142-ba7d176bbb40">
+    <objectType idref="9ffd634a-27b9-46a5-bf77-4ae25a9b9ebf" />
+  </associationType>
+  <roleType id="539cedbf-3d80-45b3-8d3c-2e154f541ce9">
+    <objectType idref="b5ee6cea-4e2b-498e-a5dd-24671d896477" />
+    <pluralName>Debits</pluralName>
+    <singularName>Debit</singularName>
+  </roleType>
+</relationType>

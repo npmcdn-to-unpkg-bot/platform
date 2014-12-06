@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="89971e75-61e5-4a0c-b7fc-6f4c15866175">
+  <associationType id="ef2f1c0e-ecc2-4949-aec9-88460c0d5b0b">
+    <isMany>true</isMany>
+    <objectType idref="3bba6e5a-dc2d-4838-b6c4-881f6c8c3013" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <isIndexed>true</isIndexed>
+  <roleType id="d80cc262-207a-462e-b8ed-ee58f04cf98b">
+    <objectType idref="b033f9c9-c799-485c-a199-914a9e9119d9" />
+    <pluralName>HeadQuarters</pluralName>
+    <singularName>HeadQuarter</singularName>
+  </roleType>
+</relationType>

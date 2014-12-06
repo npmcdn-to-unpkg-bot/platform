@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="4dfb4bda-1add-45d5-92c7-6393186301f0">
+  <associationType id="44088ee8-b84a-494c-a59c-3164c511176c">
+    <isMany>true</isMany>
+    <objectType idref="1a174f59-c8cd-49ad-b0f4-a561cdcdcfb2" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="eac922da-3beb-41b2-a3ca-f91120f927bd">
+    <objectType idref="3a3e6acf-48f4-4a33-848c-0c77cb18693a" />
+    <pluralName>ShipmentMethods</pluralName>
+    <singularName>ShipmentMethod</singularName>
+  </roleType>
+</relationType>

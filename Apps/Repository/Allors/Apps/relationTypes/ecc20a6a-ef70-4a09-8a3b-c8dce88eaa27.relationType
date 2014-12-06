@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="ecc20a6a-ef70-4a09-8a3b-c8dce88eaa27">
+  <associationType id="abdb3a26-ae86-4500-a9d9-d9546fb6f856">
+    <objectType idref="b05371ff-0c9e-4ee3-b31d-e2edeed8649e" />
+  </associationType>
+  <roleType id="406f48d7-a0be-48c9-81f5-7b506b41e114">
+    <objectType idref="c4c09343-61d3-418c-ade2-fe6fd588f128" />
+    <pluralName>ActualStarts</pluralName>
+    <singularName>ActualStart</singularName>
+  </roleType>
+</relationType>

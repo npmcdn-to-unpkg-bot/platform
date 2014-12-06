@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="209f99fb-2e14-45fe-9533-a56573a8c115">
+  <associationType id="f00c8458-3fc7-4279-b3b0-58902ff3bf1d">
+    <objectType idref="716647bf-7589-4146-a45c-a6a3b1cee507" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <isIndexed>true</isIndexed>
+  <roleType id="49399720-aa62-4f69-a20a-1d1e0b8d3978">
+    <objectType idref="347ee1c4-5275-4ea7-a349-6bab2de45aff" />
+    <pluralName>CurrentPaymentStatuses</pluralName>
+    <singularName>CurrentPaymentStatus</singularName>
+  </roleType>
+</relationType>

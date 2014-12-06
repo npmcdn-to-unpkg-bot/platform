@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="65eebcc4-d5ef-4933-8640-973b67c65127">
+  <associationType id="40703e06-25f8-425d-aa95-3c73fafbfa81">
+    <isMany>true</isMany>
+    <objectType idref="1ee19062-e36d-4836-b0e6-928a3957bd57" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="05f86785-08d8-4282-9734-6230e807181b">
+    <objectType idref="75916246-b1b5-48ef-9578-d65980fd2623" />
+    <pluralName>Parts</pluralName>
+    <singularName>Part</singularName>
+  </roleType>
+</relationType>

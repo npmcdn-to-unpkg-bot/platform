@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="d030a71e-10ba-48cc-9964-456518b705de">
+  <associationType id="a25d3578-feb9-4eb6-853f-673b2300dc7e">
+    <objectType idref="6b666a30-7a55-4986-8411-b6179768e70b" />
+  </associationType>
+  <roleType id="4d655601-37c1-4c31-83a7-406cce05ed4c">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>ChangeReasons</pluralName>
+    <singularName>ChangeReason</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

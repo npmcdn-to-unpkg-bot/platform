@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="22e85314-cfdf-4ead-a816-18588294fa79">
+  <namespace idref="a7c2d9a4-951f-4268-a433-b6d0bdec9366" />
+  <pluralName>ServiceEntryHeaders</pluralName>
+  <singularName>ServiceEntryHeader</singularName>
+</objectType>

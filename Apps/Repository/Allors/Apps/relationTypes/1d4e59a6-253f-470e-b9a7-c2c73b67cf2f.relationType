@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="1d4e59a6-253f-470e-b9a7-c2c73b67cf2f">
+  <associationType id="996ea544-3d27-410d-aa23-25457532e3b1">
+    <isMany>true</isMany>
+    <objectType idref="3bba6e5a-dc2d-4838-b6c4-881f6c8c3013" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <isIndexed>true</isIndexed>
+  <roleType id="90f0a491-c7c7-4ff5-9910-77d430f6292a">
+    <objectType idref="b033f9c9-c799-485c-a199-914a9e9119d9" />
+    <pluralName>SalesOffices</pluralName>
+    <singularName>SalesOffice</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="4afffb12-3a70-4903-af99-ed814fd6a444">
+  <associationType id="1bf53c71-0b09-4053-8bab-73d783fdfd62">
+    <isMany>true</isMany>
+    <objectType idref="752a68b0-836e-4cd5-92d5-ebf2bfeda491" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="dc2b8ab4-6eff-488c-955b-6329c1e1bfc3">
+    <objectType idref="b033f9c9-c799-485c-a199-914a9e9119d9" />
+    <pluralName>BillToContactMechanisms</pluralName>
+    <singularName>BillToContactMechanism</singularName>
+  </roleType>
+</relationType>

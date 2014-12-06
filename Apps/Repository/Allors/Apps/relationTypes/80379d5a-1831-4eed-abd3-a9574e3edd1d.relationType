@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="80379d5a-1831-4eed-abd3-a9574e3edd1d">
+  <associationType id="d1a93eac-7143-43fc-897e-be6b198e69ec">
+    <isMany>true</isMany>
+    <objectType idref="383589fb-f410-4d22-ade6-aa5126fdef18" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="cf38c778-74c9-4da2-8619-f3c87cee5f19">
+    <objectType idref="72237d95-e9c0-42c1-afe3-ec34f2e6cbfb" />
+    <pluralName>AgreementPricingPrograms</pluralName>
+    <singularName>AgreementPricingProgram</singularName>
+  </roleType>
+</relationType>

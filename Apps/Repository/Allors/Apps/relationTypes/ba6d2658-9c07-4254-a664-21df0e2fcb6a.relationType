@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="ba6d2658-9c07-4254-a664-21df0e2fcb6a">
+  <associationType id="f512d8bd-5ea3-461c-9310-6ab93696763d">
+    <objectType idref="6a7e45b2-36b2-4d2e-a29c-0cc13851766f" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="3c2fae70-49b5-407f-823c-db9b9052fb1e">
+    <isMany>true</isMany>
+    <objectType idref="92f48c0c-31d9-4ed5-8f92-753de6af471a" />
+    <pluralName>PayrollPreferences</pluralName>
+    <singularName>PayrollPreference</singularName>
+  </roleType>
+</relationType>

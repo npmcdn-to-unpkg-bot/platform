@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="beda5c75-e1a0-493a-85ec-a943214cec8d">
+  <associationType id="319a12b6-4ee9-4bbd-9026-480b02e71255">
+    <isMany>true</isMany>
+    <objectType idref="1a0e396b-69bd-4e77-a602-3d7f7938fd74" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="be03ce0d-4023-4d62-8f2e-918e46d1f097">
+    <isMany>true</isMany>
+    <objectType idref="2ab70094-5481-4ecc-ae15-cb2131fbc2f1" />
+    <pluralName>CostCentersAllowed</pluralName>
+    <singularName>CostCenterAllowed</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="42e3b2c4-376d-4e8b-bb49-2af031881ed0">
+  <associationType id="bcdd31e8-8101-4b6b-8f13-a4397c43adfa">
+    <objectType idref="3b9f21f4-2f2c-47a9-9c76-15f5ef4f5e00" />
+  </associationType>
+  <roleType id="a9ddfe04-e5fd-4b22-9a9a-702dc0533731">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>AmountsOverDue</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>AmountOverDue</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="e12818ad-4ffd-4d91-8142-4ac9bfcbc146">
+  <associationType id="a44a8d84-2510-45fd-add1-646f84be072d">
+    <isMany>true</isMany>
+    <objectType idref="9426c214-c85d-491b-a5a6-9f573c3341a0" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="ae354426-6273-4b09-aabf-3f6d25f86e56">
+    <objectType idref="c78a49b1-9918-4f15-95f3-c537c82f59fd" />
+    <pluralName>EmailTemplates</pluralName>
+    <singularName>EmailTemplate</singularName>
+  </roleType>
+</relationType>

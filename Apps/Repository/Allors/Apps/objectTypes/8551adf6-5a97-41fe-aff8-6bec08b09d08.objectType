@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="8551adf6-5a97-41fe-aff8-6bec08b09d08">
+  <namespace idref="a7c2d9a4-951f-4268-a433-b6d0bdec9366" />
+  <pluralName>WorkEffortTypeKinds</pluralName>
+  <singularName>WorkEffortTypeKind</singularName>
+</objectType>

@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="a7851af8-38cd-4785-b81c-fb2fa403d9f6">
+  <associationType id="f7460d4e-1094-46af-b04a-46115c2fee6a">
+    <objectType idref="a24a8e12-7067-4bfb-8fc0-225a824d1a05" />
+  </associationType>
+  <roleType id="92429a4b-9166-4e40-a356-caedaf296e23">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>SwiftCodes</pluralName>
+    <singularName>SwiftCode</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

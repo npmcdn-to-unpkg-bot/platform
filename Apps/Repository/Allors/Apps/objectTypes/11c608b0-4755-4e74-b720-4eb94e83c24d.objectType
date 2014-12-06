@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="11c608b0-4755-4e74-b720-4eb94e83c24d">
+  <namespace idref="78bc14e1-57ea-4c6e-97ae-a18880c0facd" />
+  <pluralName>BasePrices</pluralName>
+  <singularName>BasePrice</singularName>
+</objectType>

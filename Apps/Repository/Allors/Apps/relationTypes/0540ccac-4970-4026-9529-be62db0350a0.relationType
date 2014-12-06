@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="0540ccac-4970-4026-9529-be62db0350a0">
+  <associationType id="d5bc8696-24d9-408f-ba50-c20a2c43dec1">
+    <isMany>true</isMany>
+    <objectType idref="86cf6a28-baeb-479d-ac9e-fabc7fe1994d" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="76541960-6f11-4cd3-bc78-3018480cf742">
+    <objectType idref="1468c86a-4ac4-4c64-a93b-1b0c5f4b41bc" />
+    <pluralName>TermTypes</pluralName>
+    <singularName>TermType</singularName>
+  </roleType>
+</relationType>

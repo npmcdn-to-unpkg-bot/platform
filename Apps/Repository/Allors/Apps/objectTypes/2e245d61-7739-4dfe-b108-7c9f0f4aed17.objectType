@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="2e245d61-7739-4dfe-b108-7c9f0f4aed17">
+  <namespace idref="bed2b711-d707-4cf6-9aee-11de07b2ba0d" />
+  <pluralName>VatRateUsages</pluralName>
+  <singularName>VatRateUsage</singularName>
+</objectType>

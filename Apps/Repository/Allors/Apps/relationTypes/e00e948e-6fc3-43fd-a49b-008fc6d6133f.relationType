@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="e00e948e-6fc3-43fd-a49b-008fc6d6133f">
+  <associationType id="3f5cbcd9-c36b-4792-b1fc-15cf533ba6f3">
+    <objectType idref="d8611e48-b0ba-4037-a992-09e3e26c6d5d" />
+  </associationType>
+  <roleType id="a7e750a0-2e69-485d-8208-ab04682b6efd">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>SalesOrderNumberPrefixes</pluralName>
+    <singularName>SalesOrderNumberPrefix</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

@@ -1,0 +1,6 @@
+<objectType allors="1.0" id="eaebcfe7-0d65-43ab-857c-b171086a1982">
+  <isInterface>true</isInterface>
+  <namespace idref="4f0fb63b-f01d-42dd-8093-122a5a46228e" />
+  <pluralName>CountryBounds</pluralName>
+  <singularName>CountryBound</singularName>
+</objectType>

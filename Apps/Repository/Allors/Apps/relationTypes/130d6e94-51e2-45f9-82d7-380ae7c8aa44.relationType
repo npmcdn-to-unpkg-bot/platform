@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="130d6e94-51e2-45f9-82d7-380ae7c8aa44">
+  <associationType id="68c1c826-9915-4f7b-8a44-dc62e215b260">
+    <isMany>true</isMany>
+    <objectType idref="3bba6e5a-dc2d-4838-b6c4-881f6c8c3013" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <isIndexed>true</isIndexed>
+  <roleType id="e47aa296-12fa-45f1-8deb-0f151aaaba60">
+    <objectType idref="6c255f71-ce18-4d51-b0d9-e402ec0e570e" />
+    <pluralName>BillingInquiriesFaxes</pluralName>
+    <singularName>BillingInquiriesFax</singularName>
+  </roleType>
+</relationType>

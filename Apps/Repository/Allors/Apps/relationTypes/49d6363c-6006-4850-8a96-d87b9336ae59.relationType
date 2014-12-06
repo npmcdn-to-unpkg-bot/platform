@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="49d6363c-6006-4850-8a96-d87b9336ae59">
+  <associationType id="aab2420d-b105-4328-a71c-c2cdce2712a3">
+    <objectType idref="8ba98e1b-1d4d-46b1-bf27-bb2bf53501fd" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="16e3ac4d-1641-417f-bb72-1167ae809ef9">
+    <isMany>true</isMany>
+    <objectType idref="7baa7594-6890-4e1e-8c06-fc49b3ea262d" />
+    <pluralName>Addenda</pluralName>
+    <singularName>Addendum</singularName>
+  </roleType>
+</relationType>

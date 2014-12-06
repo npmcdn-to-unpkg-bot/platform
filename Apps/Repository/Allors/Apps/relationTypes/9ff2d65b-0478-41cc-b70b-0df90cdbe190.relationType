@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="9ff2d65b-0478-41cc-b70b-0df90cdbe190">
+  <associationType id="38654202-df58-4f2a-9c8d-094fb511a19a">
+    <objectType idref="a6f4eedb-b0b5-491d-bcc0-09d2bc109e86" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="a12bdf85-5c6d-43e4-92b2-8f2fefc03e3e">
+    <isMany>true</isMany>
+    <objectType idref="a917f763-e54a-4693-bf7b-d8e7aead8fe6" />
+    <pluralName>InvoiceTerms</pluralName>
+    <singularName>InvoiceTerm</singularName>
+  </roleType>
+</relationType>

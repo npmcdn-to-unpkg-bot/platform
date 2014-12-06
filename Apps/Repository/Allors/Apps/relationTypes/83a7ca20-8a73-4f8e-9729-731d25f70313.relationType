@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="83a7ca20-8a73-4f8e-9729-731d25f70313">
+  <associationType id="e4ccdfcc-790f-41d2-a225-0b46862aed11">
+    <isMany>true</isMany>
+    <objectType idref="2ab70094-5481-4ecc-ae15-cb2131fbc2f1" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="28b04874-6757-4cf9-a290-ed35ecba9d14">
+    <isMany>true</isMany>
+    <objectType idref="11214660-3c3a-42e9-8f12-f475d823da64" />
+    <pluralName>CostCenterCategories</pluralName>
+    <singularName>CostCenterCategory</singularName>
+  </roleType>
+</relationType>

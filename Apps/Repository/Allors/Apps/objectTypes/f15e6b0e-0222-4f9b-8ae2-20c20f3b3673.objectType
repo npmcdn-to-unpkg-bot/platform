@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="f15e6b0e-0222-4f9b-8ae2-20c20f3b3673">
+  <namespace idref="a7c2d9a4-951f-4268-a433-b6d0bdec9366" />
+  <pluralName>ExpenseEntries</pluralName>
+  <singularName>ExpenseEntry</singularName>
+</objectType>

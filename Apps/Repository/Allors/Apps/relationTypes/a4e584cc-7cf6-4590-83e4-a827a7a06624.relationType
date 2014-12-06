@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="a4e584cc-7cf6-4590-83e4-a827a7a06624">
+  <associationType id="76a35c5f-4f20-4520-ba02-f68a0dd61e0d">
+    <objectType idref="b397c075-215a-4d5b-b962-ea48540a64fa" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="528620b6-e0a7-424a-8c8a-a9fa9c8ed84c">
+    <isMany>true</isMany>
+    <objectType idref="b397c075-215a-4d5b-b962-ea48540a64fa" />
+    <pluralName>Children</pluralName>
+    <singularName>Child</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="f1d4ceeb-f859-4996-babc-dc55837489e0">
+  <associationType id="a0cb4a4e-322e-4f8c-b7b8-b171b1b0aaa5">
+    <isMany>true</isMany>
+    <objectType idref="f135770b-7228-4e4b-b7ea-9307b6317fd2" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="df3d337b-4998-4604-961c-3c074f91cd1b">
+    <objectType idref="61af6d19-e8e4-4b5b-97e8-3610fbc82605" />
+    <pluralName>ComponentInventoryItems</pluralName>
+    <singularName>ComponentInventoryItem</singularName>
+  </roleType>
+</relationType>

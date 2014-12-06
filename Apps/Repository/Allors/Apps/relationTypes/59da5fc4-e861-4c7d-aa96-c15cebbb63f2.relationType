@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="59da5fc4-e861-4c7d-aa96-c15cebbb63f2">
+  <associationType id="7e050127-bbea-490a-ac78-354c37daa799">
+    <isMany>true</isMany>
+    <objectType idref="f34d5b9b-b940-4885-9744-754dd0eae08d" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="e48560a6-b94d-459b-98d1-4bf429816798">
+    <objectType idref="59f3100c-da48-4b4c-a302-1a75e37216a6" />
+    <pluralName>GlsPaymentInTransit</pluralName>
+    <singularName>GlPaymentInTransit</singularName>
+  </roleType>
+</relationType>

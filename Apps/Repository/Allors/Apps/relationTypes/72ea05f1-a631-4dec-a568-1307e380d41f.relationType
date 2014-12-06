@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="72ea05f1-a631-4dec-a568-1307e380d41f">
+  <associationType id="3799c587-25f3-4d18-a671-2d2301dae0df">
+    <isMany>true</isMany>
+    <objectType idref="d8611e48-b0ba-4037-a992-09e3e26c6d5d" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="c6bb5b3c-c599-427d-9c42-dc1966f11ce5">
+    <isMany>true</isMany>
+    <objectType idref="0c50c02a-cc9c-4617-8530-15a24d4ac969" />
+    <pluralName>SalesOrderTemplates</pluralName>
+    <singularName>SalesOrderTemplate</singularName>
+  </roleType>
+</relationType>

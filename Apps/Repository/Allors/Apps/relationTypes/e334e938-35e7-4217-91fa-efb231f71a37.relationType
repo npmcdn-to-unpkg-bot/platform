@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="e334e938-35e7-4217-91fa-efb231f71a37">
+  <associationType id="0706d8f1-764d-4ab9-b63a-1b0213cc9dbd">
+    <isMany>true</isMany>
+    <objectType idref="27b6630a-35d0-4352-9223-b5b6c8d7496b" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="4c3d2de1-6735-40fc-bfe9-65a64aaf966c">
+    <objectType idref="d8611e48-b0ba-4037-a992-09e3e26c6d5d" />
+    <pluralName>Stores</pluralName>
+    <singularName>Store</singularName>
+  </roleType>
+</relationType>

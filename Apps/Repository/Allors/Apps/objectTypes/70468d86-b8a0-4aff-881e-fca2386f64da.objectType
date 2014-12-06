@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="70468d86-b8a0-4aff-881e-fca2386f64da">
+  <namespace idref="799e9780-81bd-41b6-8417-00b9c8498698" />
+  <pluralName>SurchargeAdjustments</pluralName>
+  <singularName>SurchargeAdjustment</singularName>
+</objectType>

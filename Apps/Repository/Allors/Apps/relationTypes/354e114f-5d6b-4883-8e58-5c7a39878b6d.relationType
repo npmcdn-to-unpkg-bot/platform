@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="354e114f-5d6b-4883-8e58-5c7a39878b6d">
+  <associationType id="5c30c485-8f98-4a6d-8e05-3774331d9e7a">
+    <objectType idref="a24a8e12-7067-4bfb-8fc0-225a824d1a05" />
+  </associationType>
+  <roleType id="ed87ce26-a306-4590-8901-7b4fca4e2f57">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>Bics</pluralName>
+    <singularName>Bic</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

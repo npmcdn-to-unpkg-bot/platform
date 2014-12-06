@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="28359bf8-506e-41db-a86b-a1eee3d50198">
+  <associationType id="9a1a8d51-904d-480e-869f-66f5edae0ccd">
+    <isMany>true</isMany>
+    <objectType idref="716647bf-7589-4146-a45c-a6a3b1cee507" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="de181822-ac8e-4a85-af28-b217aa9fcfcd">
+    <objectType idref="3bba6e5a-dc2d-4838-b6c4-881f6c8c3013" />
+    <pluralName>ShipToCustomers</pluralName>
+    <singularName>ShipToCustomer</singularName>
+  </roleType>
+</relationType>

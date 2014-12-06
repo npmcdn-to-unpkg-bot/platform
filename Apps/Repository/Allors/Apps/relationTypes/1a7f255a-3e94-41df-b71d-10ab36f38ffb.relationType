@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="1a7f255a-3e94-41df-b71d-10ab36f38ffb">
+  <associationType id="1341fb5d-26b6-4c07-bb31-a444c451c547">
+    <isMany>true</isMany>
+    <objectType idref="cdd79e23-a132-48b0-b88f-a03bd029f49d" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="cd2ee41e-ffba-4a59-9b9c-0d3eb581420c">
+    <objectType idref="cdd79e23-a132-48b0-b88f-a03bd029f49d" />
+    <pluralName>MadeUpOfs</pluralName>
+    <singularName>MadeUpOf</singularName>
+  </roleType>
+</relationType>

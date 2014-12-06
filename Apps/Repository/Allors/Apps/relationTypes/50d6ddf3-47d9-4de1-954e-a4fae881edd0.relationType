@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="50d6ddf3-47d9-4de1-954e-a4fae881edd0">
+  <associationType id="ebe67168-92de-45f8-96b0-b373c47e7ff3">
+    <isMany>true</isMany>
+    <objectType idref="383589fb-f410-4d22-ade6-aa5126fdef18" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="24ff9932-4fb4-4eab-b490-c397602f5820">
+    <objectType idref="aa5898e6-71d0-4dcb-9bbd-35ae5cb0e0ef" />
+    <pluralName>OrderQuantityBreaks</pluralName>
+    <singularName>OrderQuantityBreak</singularName>
+  </roleType>
+</relationType>

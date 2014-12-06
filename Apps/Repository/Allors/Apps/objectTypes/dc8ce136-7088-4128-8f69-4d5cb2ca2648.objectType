@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="dc8ce136-7088-4128-8f69-4d5cb2ca2648">
+  <namespace idref="78bc14e1-57ea-4c6e-97ae-a18880c0facd" />
+  <pluralName>ConstraintSpecifications</pluralName>
+  <singularName>ConstraintSpecification</singularName>
+</objectType>

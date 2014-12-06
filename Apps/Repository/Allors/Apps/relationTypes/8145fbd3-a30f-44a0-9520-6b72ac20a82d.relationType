@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="8145fbd3-a30f-44a0-9520-6b72ac20a82d">
+  <associationType id="59383e9d-690e-46aa-9cc0-1dd39db14f60">
+    <objectType idref="80de925c-04cc-412c-83a5-60405b0e63e6" />
+  </associationType>
+  <roleType id="31087f2f-10e8-4558-9e0a-a5dbceb3204a">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>QuantitiesReturned</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>QuantityReturned</singularName>
+  </roleType>
+</relationType>

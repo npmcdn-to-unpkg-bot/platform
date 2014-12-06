@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="6e61f71f-77a1-4795-b876-ba5d74ebdc3e">
+  <associationType id="ce1e09f8-1260-462d-be94-726a8716f6d8">
+    <objectType idref="f34d5b9b-b940-4885-9744-754dd0eae08d" />
+  </associationType>
+  <roleType id="108077d8-ca1c-48c1-8154-f52f7807eb5b">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>RemarksPlural</pluralName>
+    <singularName>Remarks</singularName>
+    <size>-1</size>
+  </roleType>
+</relationType>

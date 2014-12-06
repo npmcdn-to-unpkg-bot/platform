@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="454f28cf-bf52-4465-83e4-e871ec36c491">
+  <associationType id="5abe5891-40b6-4b87-a587-e6a2c7658c64">
+    <objectType idref="f3ef0124-e867-4da2-9323-80fbe1f214c2" />
+  </associationType>
+  <roleType id="c6d6c5dd-9239-45ae-970c-3716443bed29">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>QuantitiesOrdered</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>QuantityOrdered</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="30a0a0de-0c74-494c-bf21-ebf13238dd61">
+  <associationType id="e4e3c7ad-970d-4439-ba86-81be13a05dd8">
+    <objectType idref="fd411b2a-0121-4f1f-b1db-86c187e8a089" />
+  </associationType>
+  <roleType id="ab9e97c7-3c5c-4fdb-a36e-637875cb714d">
+    <objectType idref="ccd6f134-26de-4103-bff9-a37ec3e997a3" />
+    <pluralName>Months</pluralName>
+    <singularName>Month</singularName>
+  </roleType>
+</relationType>

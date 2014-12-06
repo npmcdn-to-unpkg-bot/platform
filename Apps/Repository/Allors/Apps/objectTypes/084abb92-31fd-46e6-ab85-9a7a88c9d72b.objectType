@@ -1,0 +1,6 @@
+<objectType allors="1.0" id="084abb92-31fd-46e6-ab85-9a7a88c9d72b">
+  <isInterface>true</isInterface>
+  <namespace idref="91bd1c52-d40f-4e84-9367-7cce846def6f" />
+  <pluralName>PartyRelationships</pluralName>
+  <singularName>PartyRelationship</singularName>
+</objectType>

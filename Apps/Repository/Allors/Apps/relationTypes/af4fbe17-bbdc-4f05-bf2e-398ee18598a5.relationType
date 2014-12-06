@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="af4fbe17-bbdc-4f05-bf2e-398ee18598a5">
+  <associationType id="6744410c-6f9c-49db-b73c-ed723592fee6">
+    <isMany>true</isMany>
+    <objectType idref="441f6007-022d-4d77-bc2d-04c7a876e1bd" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="938bb734-f18c-4756-9c68-54cad2377639">
+    <objectType idref="7fec090e-3d4a-4ec7-895f-4b30d01f59bb" />
+    <pluralName>PickListItems</pluralName>
+    <singularName>PickListItem</singularName>
+  </roleType>
+</relationType>

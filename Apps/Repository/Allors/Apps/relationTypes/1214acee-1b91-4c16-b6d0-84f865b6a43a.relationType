@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="1214acee-1b91-4c16-b6d0-84f865b6a43a">
+  <associationType id="b9120662-ebae-4f52-a913-4a3f9a91398e">
+    <isMany>true</isMany>
+    <objectType idref="01fc58a0-89b8-4dc0-97f9-5f628b9c9577" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="d008f8e2-a378-4e50-a9dd-32ffa427708c">
+    <objectType idref="68a6803d-0e65-4141-ac51-25f4c2e49914" />
+    <pluralName>Deliverables</pluralName>
+    <singularName>Deliverable</singularName>
+  </roleType>
+</relationType>

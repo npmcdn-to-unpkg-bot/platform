@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="9a9cce59-f45c-4da0-adb6-9583a1694921">
+  <associationType id="8cd7d5ad-ca46-4fb2-9df0-edd213680dd6">
+    <objectType idref="48d14522-5fa8-44a8-ba4c-e2ddfc18e069" />
+  </associationType>
+  <roleType id="1f523e25-d883-4207-8550-d8d2c95c2ac6">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>QuantitiesRejected</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>QuantityRejected</singularName>
+  </roleType>
+</relationType>

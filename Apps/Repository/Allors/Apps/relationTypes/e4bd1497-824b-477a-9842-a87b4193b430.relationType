@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="e4bd1497-824b-477a-9842-a87b4193b430">
+  <associationType id="fc6f6c2a-5732-4c3d-8db0-58e3a4f26d6c">
+    <objectType idref="d520cf1a-8d3a-4380-8b88-85cd63a5ad05" />
+  </associationType>
+  <roleType id="53891641-e7a9-46a6-bd2c-56b7f23b0ab5">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>ActualAvailableTimes</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>ActualAvailableTime</singularName>
+  </roleType>
+</relationType>

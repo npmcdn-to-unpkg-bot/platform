@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="9475dd68-43f7-4195-bf57-8ce82333980e">
+  <associationType id="c0a0b7b4-5f1a-4b8b-a858-5de3abc5e66f">
+    <objectType idref="d54b4bba-a84c-4826-85ba-7340714035c7" />
+  </associationType>
+  <roleType id="58ffb62f-f270-4a64-b2a9-26b2cec8eaee">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>Addresses2</pluralName>
+    <singularName>Address2</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="a5057413-950e-4825-8036-7f398c4b5d39">
+  <associationType id="86796848-4a49-43c1-879e-1e77063af4e0">
+    <objectType idref="89c49578-bb5d-4589-b908-bf09c6495011" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="7bbb3e7e-c3a0-4b63-84e7-4bb923425ec1">
+    <isMany>true</isMany>
+    <objectType idref="962e5149-546b-4b18-ab09-e4de59b709ff" />
+    <pluralName>PerformanceReviewItems</pluralName>
+    <singularName>PerformanceReviewItem</singularName>
+  </roleType>
+</relationType>

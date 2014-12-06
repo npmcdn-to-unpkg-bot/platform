@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="90b4eaea-21cd-4a04-a64b-3c3dce0718d9">
+  <associationType id="87f05475-29aa-4cb7-a5d9-865a47995cd6">
+    <objectType idref="848053ee-18d8-4962-81c3-bd6c7837565a" />
+  </associationType>
+  <roleType id="71271fdc-4a24-4650-a57a-9cbc2973cc04">
+    <objectType idref="c402fbda-133a-4b59-858a-832fbd2ec565" />
+    <pluralName>ReconciliationDates</pluralName>
+    <singularName>ReconciliationDate</singularName>
+  </roleType>
+</relationType>

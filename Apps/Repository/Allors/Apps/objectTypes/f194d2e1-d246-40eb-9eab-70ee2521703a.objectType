@@ -1,0 +1,6 @@
+<objectType allors="1.0" id="f194d2e1-d246-40eb-9eab-70ee2521703a">
+  <isInterface>true</isInterface>
+  <namespace idref="78bc14e1-57ea-4c6e-97ae-a18880c0facd" />
+  <pluralName>ProductAssociations</pluralName>
+  <singularName>ProductAssociation</singularName>
+</objectType>

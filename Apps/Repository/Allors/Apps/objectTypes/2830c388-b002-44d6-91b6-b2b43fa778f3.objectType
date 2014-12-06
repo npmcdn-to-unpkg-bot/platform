@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="2830c388-b002-44d6-91b6-b2b43fa778f3">
+  <namespace idref="91bd1c52-d40f-4e84-9367-7cce846def6f" />
+  <pluralName>AgreementExhibits</pluralName>
+  <singularName>AgreementExhibit</singularName>
+</objectType>

@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="9d0e9ea7-31d7-4c01-96f2-97c3e17b3f18">
+  <associationType id="2d2697e9-bbd2-4146-b96f-1bc36dca274c">
+    <objectType idref="4deca253-7135-4ceb-b984-6adaf1515630" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="5ef5b4ca-6faa-4cf2-bfad-fa2f2902dbde">
+    <isMany>true</isMany>
+    <objectType idref="734be1c9-e6af-49b7-8fe8-331cd7036e2e" />
+    <pluralName>AgreementTerms</pluralName>
+    <singularName>AgreementTerm</singularName>
+  </roleType>
+</relationType>

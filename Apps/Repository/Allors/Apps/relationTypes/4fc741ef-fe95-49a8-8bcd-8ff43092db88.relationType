@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="4fc741ef-fe95-49a8-8bcd-8ff43092db88">
+  <associationType id="0e58cd98-94e6-42ab-8501-394f8b8d3624">
+    <objectType idref="c81441c8-9ac9-440e-a926-c96230b2701f" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="d5096d5d-a443-4667-95dd-7184f348e55c">
+    <objectType idref="1a0e396b-69bd-4e77-a602-3d7f7938fd74" />
+    <pluralName>SalesPaymentDifferencesAccounts</pluralName>
+    <singularName>SalesPaymentDifferencesAccount</singularName>
+  </roleType>
+</relationType>

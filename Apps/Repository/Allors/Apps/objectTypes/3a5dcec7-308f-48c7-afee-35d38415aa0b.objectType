@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="3a5dcec7-308f-48c7-afee-35d38415aa0b">
+  <namespace idref="91bd1c52-d40f-4e84-9367-7cce846def6f" />
+  <pluralName>Organisations</pluralName>
+  <singularName>Organisation</singularName>
+</objectType>

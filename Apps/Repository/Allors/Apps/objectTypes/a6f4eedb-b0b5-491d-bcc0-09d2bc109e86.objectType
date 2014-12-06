@@ -1,0 +1,6 @@
+<objectType allors="1.0" id="a6f4eedb-b0b5-491d-bcc0-09d2bc109e86">
+  <isInterface>true</isInterface>
+  <namespace idref="83d90516-d523-40b7-8edb-9bda4ee2cd52" />
+  <pluralName>Invoices</pluralName>
+  <singularName>Invoice</singularName>
+</objectType>

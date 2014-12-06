@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="1638a432-3a4f-4cca-906e-660b9164838b">
+  <associationType id="04f4151a-1adf-426a-9fb1-a0f8cc782b0e">
+    <isMany>true</isMany>
+    <objectType idref="062bd939-9902-4747-a631-99ea10002156" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <isIndexed>true</isIndexed>
+  <roleType id="20131db5-50af-42a8-9ac8-fd250c1aa8b6">
+    <objectType idref="3bba6e5a-dc2d-4838-b6c4-881f6c8c3013" />
+    <pluralName>PreviousTakenViaSuppliers</pluralName>
+    <singularName>PreviousTakenViaSupplier</singularName>
+  </roleType>
+</relationType>

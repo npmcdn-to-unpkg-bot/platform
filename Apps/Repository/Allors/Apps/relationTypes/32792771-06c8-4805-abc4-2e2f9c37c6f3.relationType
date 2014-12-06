@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="32792771-06c8-4805-abc4-2e2f9c37c6f3">
+  <associationType id="8f165d5a-ad87-431f-bea6-b8531f78d731">
+    <objectType idref="f3ef0124-e867-4da2-9323-80fbe1f214c2" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="dda45a1d-2377-40ad-88e7-0a8961c1f1e1">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>TotalVats</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>TotalVat</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="98dab364-0db6-438f-ac12-9b0238e81afd">
+  <associationType id="eb32c549-bb3e-4789-abdb-9073905077bb">
+    <objectType idref="6c28f40a-1826-4110-83c8-7eaefc797f1a" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="f213a48e-d351-41c4-91df-48edd0043017">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>YTDCommissions</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>YTDCommission</singularName>
+  </roleType>
+</relationType>

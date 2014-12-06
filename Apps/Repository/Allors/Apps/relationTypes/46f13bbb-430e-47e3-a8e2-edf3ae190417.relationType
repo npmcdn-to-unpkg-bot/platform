@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="46f13bbb-430e-47e3-a8e2-edf3ae190417">
+  <associationType id="48167ab3-671a-4a2c-b5c9-e8964f35448b">
+    <objectType idref="b3753d18-0b7e-4177-92c3-81ae8ce35a8f" />
+  </associationType>
+  <roleType id="841659d8-deb9-4902-855b-22b9c9822331">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>NumbersOfPositions</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>NumberOfPositions</singularName>
+  </roleType>
+</relationType>

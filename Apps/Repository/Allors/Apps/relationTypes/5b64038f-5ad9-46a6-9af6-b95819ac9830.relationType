@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="5b64038f-5ad9-46a6-9af6-b95819ac9830">
+  <associationType id="753f6fa9-ff10-402c-9812-d2c738d35dbb">
+    <objectType idref="c81441c8-9ac9-440e-a926-c96230b2701f" />
+  </associationType>
+  <roleType id="8411c910-14d4-4629-aa39-c58602a799d4">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>PurchaseTransactionReferenceNumbers</pluralName>
+    <singularName>PurchaseTransactionReferenceNumber</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

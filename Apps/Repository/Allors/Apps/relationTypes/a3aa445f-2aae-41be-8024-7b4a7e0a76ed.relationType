@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="a3aa445f-2aae-41be-8024-7b4a7e0a76ed">
+  <associationType id="eae74634-5d98-482f-bfc5-c81e9731c2e0">
+    <objectType idref="1a0e396b-69bd-4e77-a602-3d7f7938fd74" />
+  </associationType>
+  <roleType id="5d60a6f0-eb91-4048-99fd-285c9685c555">
+    <objectType idref="b5ee6cea-4e2b-498e-a5dd-24671d896477" />
+    <pluralName>CostUnitsRequired</pluralName>
+    <singularName>CostUnitRequired</singularName>
+  </roleType>
+</relationType>

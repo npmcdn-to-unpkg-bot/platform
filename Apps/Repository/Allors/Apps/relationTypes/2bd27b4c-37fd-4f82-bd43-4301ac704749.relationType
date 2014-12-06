@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="2bd27b4c-37fd-4f82-bd43-4301ac704749">
+  <associationType id="39389068-26bb-4e3b-b816-ef5730761301">
+    <isMany>true</isMany>
+    <objectType idref="716647bf-7589-4146-a45c-a6a3b1cee507" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="97e7045d-cf35-46ee-acfc-34f6b2572096">
+    <objectType idref="3bba6e5a-dc2d-4838-b6c4-881f6c8c3013" />
+    <pluralName>BillToCustomers</pluralName>
+    <singularName>BillToCustomer</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="1a7eda6e-7b1c-4faf-8635-05bc233c5dd8">
+  <associationType id="ad6df638-67d2-4d41-9695-01c6adf3f251">
+    <objectType idref="0b9034b1-288a-48a7-9d46-3ca6dcb7ca3f" />
+  </associationType>
+  <roleType id="e2178198-6bbd-4caa-9402-40137b2bd529">
+    <objectType idref="e8989069-024b-4389-ac77-a98c4dfff25a" />
+    <pluralName>Numbers</pluralName>
+    <singularName>Number</singularName>
+  </roleType>
+</relationType>

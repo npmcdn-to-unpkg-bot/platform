@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="a573b8bf-42a6-4389-9f46-1def243220bf">
+  <associationType id="d70fe012-fbfb-486c-8ac7-ac3ae9ea380f">
+    <objectType idref="f3ef0124-e867-4da2-9323-80fbe1f214c2" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="6bff9fb4-7b17-4c5a-a7cb-fa8bd1bf9f5c">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>TotalSurchargesAsPercentage</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>TotalSurchargeAsPercentage</singularName>
+  </roleType>
+</relationType>

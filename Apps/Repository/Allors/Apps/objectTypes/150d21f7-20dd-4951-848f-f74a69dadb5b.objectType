@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="150d21f7-20dd-4951-848f-f74a69dadb5b">
+  <namespace idref="91bd1c52-d40f-4e84-9367-7cce846def6f" />
+  <pluralName>Incentives</pluralName>
+  <singularName>Incentive</singularName>
+</objectType>

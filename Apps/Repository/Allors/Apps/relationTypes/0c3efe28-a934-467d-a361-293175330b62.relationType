@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="0c3efe28-a934-467d-a361-293175330b62">
+  <associationType id="d9d8872d-3b77-48e6-9902-74560a60c3ef">
+    <objectType idref="8cea6932-d589-4b5b-99b8-ffba33936f8f" />
+  </associationType>
+  <roleType id="98a07703-261f-4a9a-8c1b-02af1a4a4e0b">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>EmployerPaidPercentages</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>EmployerPaidPercentage</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="a7d6815b-9d6c-44c4-a80f-bc2fd8aa1ea7">
+  <associationType id="14c83374-67ae-480b-a67d-597e8614480e">
+    <isMany>true</isMany>
+    <objectType idref="a981c832-dd3a-4b97-9bc9-d2dd83872bf2" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <isIndexed>true</isIndexed>
+  <roleType id="9b4e523e-215a-4b2a-bd99-1540113e5fc3">
+    <objectType idref="89d2037a-4bc2-4929-b333-5358ac4a14e5" />
+    <pluralName>CurrentObjectStates</pluralName>
+    <singularName>CurrentObjectState</singularName>
+  </roleType>
+</relationType>

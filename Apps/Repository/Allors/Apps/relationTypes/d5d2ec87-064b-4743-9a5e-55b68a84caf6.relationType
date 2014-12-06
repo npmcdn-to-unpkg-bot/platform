@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="d5d2ec87-064b-4743-9a5e-55b68a84caf6">
+  <associationType id="fec8b5fd-bf0f-4579-9af0-5a590b2b5b94">
+    <objectType idref="7dde949a-6f54-4ece-92b3-d269f50ef9d9" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="1fba3917-63b1-472e-96bf-08fc5068a7b6">
+    <objectType idref="e7625d17-2485-4894-ba1a-c565b8c6052c" />
+    <pluralName>ShippingAndHandlingCharges</pluralName>
+    <singularName>ShippingAndHandlingCharge</singularName>
+  </roleType>
+</relationType>

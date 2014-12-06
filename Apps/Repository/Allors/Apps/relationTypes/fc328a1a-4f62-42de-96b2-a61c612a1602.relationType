@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="fc328a1a-4f62-42de-96b2-a61c612a1602">
+  <associationType id="f815e446-05a5-4fa3-b3b4-4c7a94b7ca1f">
+    <objectType idref="04540476-602f-456a-b300-54166b65c8b1" />
+  </associationType>
+  <roleType id="c8cb5709-08d5-4b3b-9598-15289ba9d689">
+    <objectType idref="c402fbda-133a-4b59-858a-832fbd2ec565" />
+    <pluralName>ActualThroughDates</pluralName>
+    <singularName>ActualThroughDate</singularName>
+  </roleType>
+</relationType>

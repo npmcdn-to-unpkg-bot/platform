@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="79244ed7-6388-48ca-86db-7b57a64fe680">
+  <associationType id="5d145726-fa9e-46f9-b389-7f8380e0088c">
+    <objectType idref="d8611e48-b0ba-4037-a992-09e3e26c6d5d" />
+  </associationType>
+  <roleType id="1df01d8b-9d72-495c-baae-0f5ea4c9e76c">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>CreditLimits</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>CreditLimit</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="9371d5fc-748a-4ce4-95eb-6b21aa0ca841">
+  <namespace idref="78bc14e1-57ea-4c6e-97ae-a18880c0facd" />
+  <pluralName>Packages</pluralName>
+  <singularName>Package</singularName>
+</objectType>

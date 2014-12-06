@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="df1fa89e-25e2-4b72-a928-67fa2c95ad70">
+  <associationType id="361d313b-8313-43bd-8a98-9b2516ca25f7">
+    <objectType idref="7d2d9452-f250-47c3-81e0-4e1c0655cc86" />
+  </associationType>
+  <roleType id="3d4d3fd1-28dd-4349-bb57-b869687f5f82">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>StandardWorkHoursPlural</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>StandardWorkHours</singularName>
+  </roleType>
+</relationType>

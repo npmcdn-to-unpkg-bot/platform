@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="d7f6ed3a-cd81-418c-81c9-2bba827fe956">
+  <associationType id="644237c5-167a-49f8-887f-5d10a725fd80">
+    <objectType idref="6e380347-21e3-4a00-819f-ed11e6882d03" />
+  </associationType>
+  <roleType id="d5cd524d-b5ba-4d32-b9ab-03aa08e202b9">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>VatAmounts</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>VatAmount</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="3a5658bd-b1b9-47e3-b542-ea9de348a44e">
+  <associationType id="6086288c-6880-4b98-a0ef-7b4a7ecd0af9">
+    <isMany>true</isMany>
+    <objectType idref="b05371ff-0c9e-4ee3-b31d-e2edeed8649e" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="d55ec601-4f3f-4834-baec-1675234e7ba5">
+    <isMany>true</isMany>
+    <objectType idref="8e3fd781-f0b5-4e02-b1f6-6364d0559273" />
+    <pluralName>EventPurposes</pluralName>
+    <singularName>EventPurpose</singularName>
+  </roleType>
+</relationType>

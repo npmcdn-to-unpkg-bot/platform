@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="62ea5285-b9d8-4a41-9c14-79c712fd3bf4">
+  <namespace idref="4f0fb63b-f01d-42dd-8093-122a5a46228e" />
+  <pluralName>SalesTerritories</pluralName>
+  <singularName>SalesTerritory</singularName>
+</objectType>

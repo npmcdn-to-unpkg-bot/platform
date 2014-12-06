@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="9fd3ea50-280e-4d0d-a9db-450991248a53">
+  <associationType id="5c3af601-e6f8-4adc-af83-88058d86975a">
+    <objectType idref="7dde949a-6f54-4ece-92b3-d269f50ef9d9" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="7badb3f0-51a2-4e9b-bdc7-3d3bfbf7865f">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>TotalShippingAndHandlingsCustomerCurrency</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>TotalShippingAndHandlingCustomerCurrency</singularName>
+  </roleType>
+</relationType>

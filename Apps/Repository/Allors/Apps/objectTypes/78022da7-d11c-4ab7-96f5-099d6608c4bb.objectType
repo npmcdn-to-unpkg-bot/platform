@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="78022da7-d11c-4ab7-96f5-099d6608c4bb">
+  <namespace idref="799e9780-81bd-41b6-8417-00b9c8498698" />
+  <pluralName>CustomEngagementItems</pluralName>
+  <singularName>CustomEngagementItem</singularName>
+</objectType>

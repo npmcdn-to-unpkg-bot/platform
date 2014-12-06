@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="cd60cf6d-65ba-4e31-b85d-16c19fc0978b">
+  <namespace idref="799e9780-81bd-41b6-8417-00b9c8498698" />
+  <pluralName>QuoteTerms</pluralName>
+  <singularName>QuoteTerm</singularName>
+</objectType>

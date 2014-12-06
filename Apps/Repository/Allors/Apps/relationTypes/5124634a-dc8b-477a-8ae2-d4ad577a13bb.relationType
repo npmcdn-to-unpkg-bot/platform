@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="5124634a-dc8b-477a-8ae2-d4ad577a13bb">
+  <associationType id="fa00944b-f6a3-4c61-9739-6a8a109d32d5">
+    <objectType idref="9b6bf786-1c6c-4c4e-b940-7314d9c4ba71" />
+  </associationType>
+  <roleType id="a1230395-837b-4021-8075-642fdf1d7d2c">
+    <objectType idref="c402fbda-133a-4b59-858a-832fbd2ec565" />
+    <pluralName>RevisionDates</pluralName>
+    <singularName>RevisionDate</singularName>
+  </roleType>
+</relationType>

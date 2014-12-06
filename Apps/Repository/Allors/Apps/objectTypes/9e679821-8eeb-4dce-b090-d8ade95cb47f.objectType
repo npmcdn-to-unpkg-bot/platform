@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="9e679821-8eeb-4dce-b090-d8ade95cb47f">
+  <namespace idref="799e9780-81bd-41b6-8417-00b9c8498698" />
+  <pluralName>ProfessionalAssignments</pluralName>
+  <singularName>ProfessionalAssignment</singularName>
+</objectType>

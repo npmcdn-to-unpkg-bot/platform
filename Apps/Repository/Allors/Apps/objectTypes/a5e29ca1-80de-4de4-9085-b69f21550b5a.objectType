@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="a5e29ca1-80de-4de4-9085-b69f21550b5a">
+  <namespace idref="bed2b711-d707-4cf6-9aee-11de07b2ba0d" />
+  <pluralName>VatRates</pluralName>
+  <singularName>VatRate</singularName>
+</objectType>

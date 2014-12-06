@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="d562d1f0-1f8f-40c5-a346-ae32e498f332">
+  <associationType id="8dab565f-7386-4037-843f-bfc3603b27ab">
+    <isMany>true</isMany>
+    <objectType idref="3bba6e5a-dc2d-4838-b6c4-881f6c8c3013" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <isIndexed>true</isIndexed>
+  <roleType id="10c1c77e-4b1b-4fd5-b77f-95e8897a4b38">
+    <objectType idref="6c255f71-ce18-4d51-b0d9-e402ec0e570e" />
+    <pluralName>GeneralFaxNumbers</pluralName>
+    <singularName>GeneralFaxNumber</singularName>
+  </roleType>
+</relationType>

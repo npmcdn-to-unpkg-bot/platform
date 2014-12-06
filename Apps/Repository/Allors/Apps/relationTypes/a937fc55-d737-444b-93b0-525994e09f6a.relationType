@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="a937fc55-d737-444b-93b0-525994e09f6a">
+  <associationType id="c33d3bc7-13ff-4d83-be7b-e9fbd7c21d55">
+    <isMany>true</isMany>
+    <objectType idref="f34d5b9b-b940-4885-9744-754dd0eae08d" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="2b00353d-bc87-4aa1-b260-3650f93320ff">
+    <objectType idref="2b162153-f74d-4f97-b97c-48f04749b216" />
+    <pluralName>Creditors</pluralName>
+    <singularName>Creditor</singularName>
+  </roleType>
+</relationType>

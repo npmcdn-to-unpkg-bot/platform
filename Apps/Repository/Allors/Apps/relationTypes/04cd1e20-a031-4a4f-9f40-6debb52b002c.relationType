@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="04cd1e20-a031-4a4f-9f40-6debb52b002c">
+  <associationType id="4441b31a-7807-41c6-803b-aeacd18e2867">
+    <objectType idref="e3e87d40-b4f0-4953-9716-db13b35d716b" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="8dc2ddca-4ae2-48b9-92db-ac68f2f5542e">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>AvailablesToPromise</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>AvailableToPromise</singularName>
+  </roleType>
+</relationType>

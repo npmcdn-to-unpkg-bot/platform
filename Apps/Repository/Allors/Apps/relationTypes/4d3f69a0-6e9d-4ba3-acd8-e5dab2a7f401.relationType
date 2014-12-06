@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="4d3f69a0-6e9d-4ba3-acd8-e5dab2a7f401">
+  <associationType id="4ac19707-3c95-4b7d-b281-2f9d86c3eeb9">
+    <objectType idref="a6f4eedb-b0b5-491d-bcc0-09d2bc109e86" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="15779f7b-07ce-4373-a9cd-1ee5690ddbfc">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>AmountsPaid</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>AmountPaid</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="22bc5b67-8015-49c5-bc47-6f9e7e678943">
+  <namespace idref="bed2b711-d707-4cf6-9aee-11de07b2ba0d" />
+  <pluralName>BankAccounts</pluralName>
+  <singularName>BankAccount</singularName>
+</objectType>

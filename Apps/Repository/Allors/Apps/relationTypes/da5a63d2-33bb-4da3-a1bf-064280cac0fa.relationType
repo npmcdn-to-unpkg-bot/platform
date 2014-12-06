@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="da5a63d2-33bb-4da3-a1bf-064280cac0fa">
+  <associationType id="05da158d-3f90-4c1f-9bdf-22263b285ed1">
+    <objectType idref="716647bf-7589-4146-a45c-a6a3b1cee507" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <isIndexed>true</isIndexed>
+  <roleType id="d2390ce6-ea3d-43da-9a48-966e9274bcc2">
+    <objectType idref="6173fc23-115f-4356-a0ce-867872c151ac" />
+    <pluralName>ProformaInvoices</pluralName>
+    <singularName>ProformaInvoice</singularName>
+  </roleType>
+</relationType>

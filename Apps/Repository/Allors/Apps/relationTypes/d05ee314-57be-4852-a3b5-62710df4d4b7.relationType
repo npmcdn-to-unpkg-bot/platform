@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="d05ee314-57be-4852-a3b5-62710df4d4b7">
+  <associationType id="87821f12-6fed-4376-b239-6d2296457b88">
+    <objectType idref="3bba6e5a-dc2d-4838-b6c4-881f6c8c3013" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="a3a1df78-5469-41ae-bdc5-24c340abc378">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>OpenOrderAmounts</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>OpenOrderAmount</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="dbdca15b-5337-44f1-b490-c69cb36df9c3">
+  <associationType id="b4d7972b-4e79-4192-b862-c358ad10b48e">
+    <objectType idref="d3446420-6d2a-4d18-a6eb-0405da9f7cc5" />
+  </associationType>
+  <roleType id="1ba97bd5-9644-47c6-b5e0-52207322cc38">
+    <objectType idref="b5ee6cea-4e2b-498e-a5dd-24671d896477" />
+    <pluralName>CloseWhenInBalances</pluralName>
+    <singularName>CloseWhenInBalance</singularName>
+  </roleType>
+</relationType>

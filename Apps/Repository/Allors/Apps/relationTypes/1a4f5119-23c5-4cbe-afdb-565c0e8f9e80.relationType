@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="1a4f5119-23c5-4cbe-afdb-565c0e8f9e80">
+  <associationType id="1ba99ae5-2e3b-4e41-ba52-75f724860ee3">
+    <objectType idref="aad26d12-9e80-410c-ab99-57064bd3dd2e" />
+  </associationType>
+  <roleType id="1f2c258c-30c3-4e2d-a1ad-263fe0680381">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>Links</pluralName>
+    <singularName>Link</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

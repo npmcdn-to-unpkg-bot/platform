@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="f7e69670-1824-44ea-b2cd-fdef02ef84a7">
+  <namespace idref="78bc14e1-57ea-4c6e-97ae-a18880c0facd" />
+  <pluralName>TimePeriodUsages</pluralName>
+  <singularName>TimePeriodUsage</singularName>
+</objectType>

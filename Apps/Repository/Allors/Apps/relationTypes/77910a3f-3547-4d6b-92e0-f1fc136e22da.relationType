@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="77910a3f-3547-4d6b-92e0-f1fc136e22da">
+  <associationType id="97cc6287-9dc0-404a-ad92-bfd2c3927d30">
+    <objectType idref="785a36a9-4710-4f3f-bd26-dbaff5353535" />
+  </associationType>
+  <roleType id="83cfb29d-4311-4b16-9331-1c00d54b70c7">
+    <objectType idref="c402fbda-133a-4b59-858a-832fbd2ec565" />
+    <pluralName>TransactionDates</pluralName>
+    <singularName>TransactionDate</singularName>
+  </roleType>
+</relationType>

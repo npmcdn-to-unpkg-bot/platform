@@ -1,0 +1,6 @@
+<objectType allors="1.0" id="3453c2e1-77a4-4fe8-b663-02bac689883a">
+  <isAbstract>true</isAbstract>
+  <namespace idref="4f0fb63b-f01d-42dd-8093-122a5a46228e" />
+  <pluralName>GeographicBoundaries</pluralName>
+  <singularName>GeographicBoundary</singularName>
+</objectType>

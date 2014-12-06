@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="5ad71d39-d9e2-4b08-a6ac-322c18f14be5">
+  <associationType id="51e4f7d6-a511-493e-8207-b60343fccae6">
+    <isMany>true</isMany>
+    <objectType idref="e2c3f3fa-7b94-4315-b8dd-2f538d8e2132" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="4d04158e-c9a4-490c-9a35-c2205a01938a">
+    <objectType idref="f6ad2546-e977-4176-b03d-d30fb101270c" />
+    <pluralName>CommunicationEventObjectStates</pluralName>
+    <singularName>CommunicationEventObjectState</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="9a1d67c5-159c-41e0-9b5c-5ffdfe257b8d">
+  <namespace idref="78bc14e1-57ea-4c6e-97ae-a18880c0facd" />
+  <pluralName>Shelfs</pluralName>
+  <singularName>Shelf</singularName>
+</objectType>

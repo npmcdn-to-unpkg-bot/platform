@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="3bcc4fc9-5646-4ceb-b48b-bb1d7fbcba64">
+  <associationType id="69f949c3-f5c1-4cb4-a907-ce3673496628">
+    <objectType idref="8dc67774-c15a-47dd-9b8a-ce4e7139e8a3" />
+  </associationType>
+  <roleType id="ec126f8a-4d48-4c1e-bdb6-ad66ab529580">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>HeaderNumbers</pluralName>
+    <singularName>HeaderNumber</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="c6f86f31-d254-4001-94fa-273d041df31a">
+  <associationType id="0716922b-d051-459c-83c9-4390fa7723d0">
+    <isMany>true</isMany>
+    <objectType idref="7dde949a-6f54-4ece-92b3-d269f50ef9d9" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="58d1bcc3-332a-4830-b346-702efedaa010">
+    <objectType idref="69db99bc-97f7-4e2e-903c-74afb55992af" />
+    <pluralName>VatRegimes</pluralName>
+    <singularName>VatRegime</singularName>
+  </roleType>
+</relationType>

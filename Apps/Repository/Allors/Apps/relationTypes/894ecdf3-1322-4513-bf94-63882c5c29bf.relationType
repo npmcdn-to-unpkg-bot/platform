@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="894ecdf3-1322-4513-bf94-63882c5c29bf">
+  <associationType id="da1adb58-e2be-4018-97b0-fb2ef107a661">
+    <objectType idref="9c6f4ad8-5a4e-4b6e-96b7-876f7aabcffb" />
+  </associationType>
+  <roleType id="7e28940e-6039-4698-b1f5-b31769aa7bbb">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>EstimatedShipCosts</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>EstimatedShipCost</singularName>
+  </roleType>
+</relationType>

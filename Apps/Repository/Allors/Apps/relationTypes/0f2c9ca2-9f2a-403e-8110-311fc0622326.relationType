@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="0f2c9ca2-9f2a-403e-8110-311fc0622326">
+  <associationType id="099c426c-7b3f-4c9a-9059-525851488030">
+    <objectType idref="d3f90525-b7fe-4f81-bccd-adf4f57260bc" />
+  </associationType>
+  <roleType id="178dfe82-99e2-4026-84f9-223e10e852c7">
+    <objectType idref="c402fbda-133a-4b59-858a-832fbd2ec565" />
+    <pluralName>RequiredByDates</pluralName>
+    <singularName>RequiredByDate</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="6572f862-31b2-4be9-b7dc-7fff5d21f620">
+  <associationType id="2a502d47-1319-45a4-ad52-70dd41435732">
+    <isMany>true</isMany>
+    <objectType idref="27b6630a-35d0-4352-9223-b5b6c8d7496b" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="76ddffff-4968-4b4b-8b52-58a1a05a774d">
+    <objectType idref="c799ca62-a554-467d-9aa2-1663293bb37f" />
+    <pluralName>Pickers</pluralName>
+    <singularName>Picker</singularName>
+  </roleType>
+</relationType>

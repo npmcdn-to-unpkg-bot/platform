@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="0916d4d2-5f82-46da-967e-7b48012e4019">
+  <associationType id="21cc3945-4cc1-43c7-a0a3-0fc9af562c5a">
+    <isMany>true</isMany>
+    <objectType idref="9492bd39-0f07-4978-a987-0393ca34b504" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="bfba8caa-0f75-4e18-8d97-9427e3b5df97">
+    <objectType idref="86d934de-a5cf-46d3-aad3-2626c43ebc85" />
+    <pluralName>CreditCardCompanies</pluralName>
+    <singularName>CreditCardCompany</singularName>
+  </roleType>
+</relationType>

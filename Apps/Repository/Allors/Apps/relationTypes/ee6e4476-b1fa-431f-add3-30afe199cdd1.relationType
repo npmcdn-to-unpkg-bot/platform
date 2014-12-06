@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="ee6e4476-b1fa-431f-add3-30afe199cdd1">
+  <associationType id="ffecd512-f3cd-44d1-868e-824fd81e6431">
+    <isMany>true</isMany>
+    <objectType idref="c799ca62-a554-467d-9aa2-1663293bb37f" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="8a302cbf-f784-42d9-a127-55b256895959">
+    <isMany>true</isMany>
+    <objectType idref="2f18f79f-dd13-4e89-b3fa-95d789dd383e" />
+    <pluralName>Hobbies</pluralName>
+    <singularName>Hobby</singularName>
+  </roleType>
+</relationType>

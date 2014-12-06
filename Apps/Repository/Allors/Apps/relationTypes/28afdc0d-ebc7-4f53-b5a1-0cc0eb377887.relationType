@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="28afdc0d-ebc7-4f53-b5a1-0cc0eb377887">
+  <associationType id="8d6a5121-c704-4f04-95de-7e2ab8faecea">
+    <isMany>true</isMany>
+    <objectType idref="40ee178e-7564-4dfa-ab6f-8bcd4e62b498" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="e9058932-6beb-4698-89b9-c70e98b30b7f">
+    <objectType idref="4a3efb9c-1556-4e57-bb59-f09d297e607e" />
+    <pluralName>FixedAssets</pluralName>
+    <singularName>FixedAsset</singularName>
+  </roleType>
+</relationType>

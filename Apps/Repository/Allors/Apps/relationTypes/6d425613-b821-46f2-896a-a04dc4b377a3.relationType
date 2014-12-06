@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="6d425613-b821-46f2-896a-a04dc4b377a3">
+  <associationType id="18b225ef-df54-4fd1-9423-36d334d1d876">
+    <isMany>true</isMany>
+    <objectType idref="c799ca62-a554-467d-9aa2-1663293bb37f" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="128f6659-8313-4c53-8ff5-eb1fcffd1b36">
+    <isMany>true</isMany>
+    <objectType idref="1a4166b3-9d9c-427b-a0d8-da53b0e601a2" />
+    <pluralName>Titles</pluralName>
+    <singularName>Title</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="c231ce68-bf03-4122-8699-c3c6473ab90a">
+  <associationType id="153203db-be9a-4722-aab3-7163de779a2a">
+    <objectType idref="c22bf60e-6428-4d10-8194-94f7be396f28" />
+  </associationType>
+  <roleType id="e72228ee-ae28-406c-b7ee-a9be1a4d3286">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>UriExtension</pluralName>
+    <singularName>UriExtension</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

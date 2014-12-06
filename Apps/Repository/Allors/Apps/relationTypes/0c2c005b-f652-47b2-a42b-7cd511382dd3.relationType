@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="0c2c005b-f652-47b2-a42b-7cd511382dd3">
+  <associationType id="653e795b-52b5-4f76-b1a7-dd34dcc7fc0e">
+    <objectType idref="6b666a30-7a55-4986-8411-b6179768e70b" />
+  </associationType>
+  <roleType id="9770c0a9-f8bb-4fd2-ae33-8513e9dcd24b">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>BillingRate</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>BillingRate</singularName>
+  </roleType>
+</relationType>

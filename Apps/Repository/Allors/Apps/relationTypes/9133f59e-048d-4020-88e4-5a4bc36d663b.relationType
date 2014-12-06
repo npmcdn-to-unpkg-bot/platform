@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="9133f59e-048d-4020-88e4-5a4bc36d663b">
+  <associationType id="46ad58c7-3125-4307-93ae-58c386e98899">
+    <objectType idref="aa3bf631-5aa5-48ab-a249-ef61f640fb72" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="3065d420-15ec-47d3-9fa6-56a79d4c315b">
+    <isMany>true</isMany>
+    <objectType idref="6b666a30-7a55-4986-8411-b6179768e70b" />
+    <pluralName>EngagementRates</pluralName>
+    <singularName>EngagementRate</singularName>
+  </roleType>
+</relationType>

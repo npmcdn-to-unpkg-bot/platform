@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="5f727bd9-9c3e-421e-93eb-646c4fdf73d3">
+  <associationType id="210976bb-e440-44ee-b2b5-39bcee04965b">
+    <isMany>true</isMany>
+    <objectType idref="56b79619-d04a-4924-96e8-e3e7be9faa09" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="3165a365-a0db-4ce6-b194-7636cc9c015a">
+    <objectType idref="3bba6e5a-dc2d-4838-b6c4-881f6c8c3013" />
+    <pluralName>ManufacturedBys</pluralName>
+    <singularName>ManufacturedBy</singularName>
+  </roleType>
+</relationType>

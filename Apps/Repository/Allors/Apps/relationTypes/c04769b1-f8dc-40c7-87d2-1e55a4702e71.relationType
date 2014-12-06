@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="c04769b1-f8dc-40c7-87d2-1e55a4702e71">
+  <associationType id="7d5a3fa4-50bb-45b6-b355-2bad4485b9d1">
+    <isMany>true</isMany>
+    <objectType idref="8e6eaa35-85da-4c80-848c-3f1ed6cd2f8a" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="c8ad9159-10eb-4c38-8e5b-1339fa082406">
+    <objectType idref="3a5dcec7-308f-48c7-afee-35d38415aa0b" />
+    <pluralName>Carriers</pluralName>
+    <singularName>Carrier</singularName>
+  </roleType>
+</relationType>

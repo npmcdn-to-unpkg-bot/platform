@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="f77787aa-66af-4d6a-bbe1-ce3d93020185">
+  <namespace idref="a7c2d9a4-951f-4268-a433-b6d0bdec9366" />
+  <pluralName>MaterialsUsages</pluralName>
+  <singularName>MaterialsUsage</singularName>
+</objectType>

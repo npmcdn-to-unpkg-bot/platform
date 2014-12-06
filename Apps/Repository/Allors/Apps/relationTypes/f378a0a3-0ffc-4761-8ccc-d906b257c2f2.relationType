@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="f378a0a3-0ffc-4761-8ccc-d906b257c2f2">
+  <associationType id="1f9500ce-38dc-4b90-a638-c2a457978cc4">
+    <objectType idref="01fd14a1-c852-42c9-8d16-3243ff655b8f" />
+  </associationType>
+  <roleType id="a7b8f672-2e7e-4413-a3ff-a3a9ac7b3452">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>SalesRepNames</pluralName>
+    <singularName>SalesRepName</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

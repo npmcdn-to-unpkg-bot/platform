@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="2f18f79f-dd13-4e89-b3fa-95d789dd383e">
+  <namespace idref="91bd1c52-d40f-4e84-9367-7cce846def6f" />
+  <pluralName>Hobbies</pluralName>
+  <singularName>Hobby</singularName>
+</objectType>

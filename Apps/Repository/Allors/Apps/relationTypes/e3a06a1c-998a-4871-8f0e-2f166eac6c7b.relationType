@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="e3a06a1c-998a-4871-8f0e-2f166eac6c7b">
+  <associationType id="08dfdeb5-1a62-42d6-b8f3-16025960b09f">
+    <objectType idref="3b9f21f4-2f2c-47a9-9c76-15f5ef4f5e00" />
+  </associationType>
+  <roleType id="9400c681-2a68-4842-89fd-3c9ccb3f2a96">
+    <objectType idref="ccd6f134-26de-4103-bff9-a37ec3e997a3" />
+    <pluralName>SubAccountNumbers</pluralName>
+    <singularName>SubAccountNumber</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

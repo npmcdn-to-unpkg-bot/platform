@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="a0a42e5c-3106-4709-aa7b-c916a0ba8508">
+  <associationType id="dc0b4ab7-19d1-4d15-938a-07ce77ba3b23">
+    <objectType idref="b3753d18-0b7e-4177-92c3-81ae8ce35a8f" />
+  </associationType>
+  <roleType id="eeec43e2-dcb4-4ae1-aceb-afbb9da25f68">
+    <objectType idref="c402fbda-133a-4b59-858a-832fbd2ec565" />
+    <pluralName>RequiredStartDates</pluralName>
+    <singularName>RequiredStartDate</singularName>
+  </roleType>
+</relationType>

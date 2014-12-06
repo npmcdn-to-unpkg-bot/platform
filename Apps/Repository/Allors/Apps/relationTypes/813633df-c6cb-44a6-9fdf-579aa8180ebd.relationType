@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="813633df-c6cb-44a6-9fdf-579aa8180ebd">
+  <associationType id="4e4c1ca5-43e1-4567-8f1e-636197ca72b7">
+    <objectType idref="3a5dcec7-308f-48c7-afee-35d38415aa0b" />
+  </associationType>
+  <roleType id="e5c40212-c5c5-44a1-8f18-f5d3dbeec9ca">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>TaxNumbers</pluralName>
+    <singularName>TaxNumber</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

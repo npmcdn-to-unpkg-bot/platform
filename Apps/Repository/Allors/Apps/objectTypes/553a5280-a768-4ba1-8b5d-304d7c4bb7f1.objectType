@@ -1,0 +1,6 @@
+<objectType allors="1.0" id="553a5280-a768-4ba1-8b5d-304d7c4bb7f1">
+  <isAbstract>true</isAbstract>
+  <namespace idref="a7c2d9a4-951f-4268-a433-b6d0bdec9366" />
+  <pluralName>WorkEfforts</pluralName>
+  <singularName>WorkEffort</singularName>
+</objectType>

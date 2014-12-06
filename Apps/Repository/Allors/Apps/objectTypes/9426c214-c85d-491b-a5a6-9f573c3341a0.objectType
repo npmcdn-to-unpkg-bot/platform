@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="9426c214-c85d-491b-a5a6-9f573c3341a0">
+  <namespace idref="91bd1c52-d40f-4e84-9367-7cce846def6f" />
+  <pluralName>EmailCommunications</pluralName>
+  <singularName>EmailCommunication</singularName>
+</objectType>

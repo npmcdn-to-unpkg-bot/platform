@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="c1b0dcb6-8627-4a47-86d0-2866344da3f1">
+  <associationType id="3d1c515f-a52f-4038-9820-794f44927beb">
+    <objectType idref="341fa885-0161-406b-89e6-08b1c92cd3b3" />
+  </associationType>
+  <roleType id="ba7329de-0176-4782-92e1-1cd932823ec0">
+    <objectType idref="ccd6f134-26de-4103-bff9-a37ec3e997a3" />
+    <pluralName>FiscalYears</pluralName>
+    <singularName>FiscalYear</singularName>
+  </roleType>
+</relationType>

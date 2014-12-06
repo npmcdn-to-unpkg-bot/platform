@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="5990c1d7-02d5-4e0d-8073-657b0dbfc5e1">
+  <namespace idref="bed2b711-d707-4cf6-9aee-11de07b2ba0d" />
+  <pluralName>RequirementBudgetAllocations</pluralName>
+  <singularName>RequirementBudgetAllocation</singularName>
+</objectType>

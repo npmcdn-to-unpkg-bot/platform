@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="441f6007-022d-4d77-bc2d-04c7a876e1bd">
+  <namespace idref="a92f6a7c-713b-432e-8d7e-bfc82d16b942" />
+  <pluralName>ItemIssuances</pluralName>
+  <singularName>ItemIssuance</singularName>
+</objectType>

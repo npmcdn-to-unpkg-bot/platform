@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="bd485f1f-6937-4270-8695-6f9a50e671c3">
+  <associationType id="4314e405-2692-4cda-9617-804b43d7090f">
+    <isMany>true</isMany>
+    <objectType idref="a98f8aca-d711-47e8-ac9c-25b607cbaef1" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="b8ab5103-31c0-41cb-b6a0-e8f3e18a7945">
+    <isMany>true</isMany>
+    <objectType idref="6360b45d-3556-41c6-b183-f42a15b9424f" />
+    <pluralName>TimeEntries</pluralName>
+    <singularName>TimeEntry</singularName>
+  </roleType>
+</relationType>

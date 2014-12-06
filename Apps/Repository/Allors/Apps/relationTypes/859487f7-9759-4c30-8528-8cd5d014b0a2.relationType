@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="859487f7-9759-4c30-8528-8cd5d014b0a2">
+  <associationType id="e293bfae-afd7-4f15-8e01-58c9078364b6">
+    <objectType idref="e3e87d40-b4f0-4953-9716-db13b35d716b" />
+  </associationType>
+  <roleType id="3a499b07-0d4f-4f5a-b679-7d76118f8441">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>Skus</pluralName>
+    <singularName>Sku</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

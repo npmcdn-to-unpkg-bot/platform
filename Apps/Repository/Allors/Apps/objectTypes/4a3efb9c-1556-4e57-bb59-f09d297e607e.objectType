@@ -1,0 +1,6 @@
+<objectType allors="1.0" id="4a3efb9c-1556-4e57-bb59-f09d297e607e">
+  <isInterface>true</isInterface>
+  <namespace idref="bed2b711-d707-4cf6-9aee-11de07b2ba0d" />
+  <pluralName>FixedAssets</pluralName>
+  <singularName>FixedAsset</singularName>
+</objectType>

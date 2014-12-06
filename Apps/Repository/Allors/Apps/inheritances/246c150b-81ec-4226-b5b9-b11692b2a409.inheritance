@@ -1,0 +1,4 @@
+<inheritance allors="1.0" id="246c150b-81ec-4226-b5b9-b11692b2a409">
+  <subtype idref="4b1e9776-8851-4a2a-a402-1b40211d1f3b" />
+  <supertype idref="eea17b39-8912-40b3-8403-293bd5a3316d" />
+</inheritance>

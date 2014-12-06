@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="7f13c77f-1ef1-446d-928d-1c96f9fc8b05">
+  <namespace idref="799e9780-81bd-41b6-8417-00b9c8498698" />
+  <pluralName>OrderKinds</pluralName>
+  <singularName>OrderKind</singularName>
+</objectType>

@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="f56d7ad0-430d-482d-a298-5c41ffb082b4">
+  <associationType id="30ec7448-b167-4273-bb00-cb87a604bb52">
+    <objectType idref="c6c4537a-21f8-4d62-b584-3c609fb2210f" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <isIndexed>true</isIndexed>
+  <roleType id="013964b5-022e-4b39-89ba-1cfb466fc3ff">
+    <objectType idref="d149dd80-1cdc-4a29-bb0b-b88823d718bc" />
+    <pluralName>CurrentEngineeringChangeStatuses</pluralName>
+    <singularName>CurrentEngineeringChangeStatus</singularName>
+  </roleType>
+</relationType>

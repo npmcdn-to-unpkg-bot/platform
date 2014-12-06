@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="3081fa56-272c-43d6-a54c-ad70cb233034">
+  <associationType id="171d3338-5b58-4776-87de-a0b934e15a0a">
+    <isMany>true</isMany>
+    <objectType idref="553a5280-a768-4ba1-8b5d-304d7c4bb7f1" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="3c24f9fa-1ada-42f8-8fe1-90c244189254">
+    <objectType idref="f3ef0124-e867-4da2-9323-80fbe1f214c2" />
+    <pluralName>OrderItemFulfillments</pluralName>
+    <singularName>OrderItemFulfillment</singularName>
+  </roleType>
+</relationType>

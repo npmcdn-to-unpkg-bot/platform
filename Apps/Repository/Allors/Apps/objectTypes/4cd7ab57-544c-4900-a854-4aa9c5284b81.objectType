@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="4cd7ab57-544c-4900-a854-4aa9c5284b81">
+  <namespace idref="78bc14e1-57ea-4c6e-97ae-a18880c0facd" />
+  <pluralName>Barrels</pluralName>
+  <singularName>Barrel</singularName>
+</objectType>

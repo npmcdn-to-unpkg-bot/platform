@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="41f1aa5a-5043-42bb-aaf5-7d57a9deaccb">
+  <namespace idref="bed2b711-d707-4cf6-9aee-11de07b2ba0d" />
+  <pluralName>CapitalBudgets</pluralName>
+  <singularName>CapitalBudget</singularName>
+</objectType>

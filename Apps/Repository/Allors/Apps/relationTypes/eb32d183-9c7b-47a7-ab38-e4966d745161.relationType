@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="eb32d183-9c7b-47a7-ab38-e4966d745161">
+  <associationType id="a7512a69-d27e-47dc-9da5-8713489cc2e5">
+    <objectType idref="5b294591-e20a-4bad-940a-27ae7b2f8770" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="9aaf1a36-04b9-4cc5-9a22-691b3b3c4633">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>QuantitiesExpectedIn</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>QuantityExpectedIn</singularName>
+  </roleType>
+</relationType>

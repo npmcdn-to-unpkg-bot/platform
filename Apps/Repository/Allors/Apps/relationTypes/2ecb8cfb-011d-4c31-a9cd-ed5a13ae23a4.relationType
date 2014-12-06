@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="2ecb8cfb-011d-4c31-a9cd-ed5a13ae23a4">
+  <associationType id="ebdfd8e3-9d24-4721-b72b-5a5e4327d62b">
+    <objectType idref="c22bf60e-6428-4d10-8194-94f7be396f28" />
+  </associationType>
+  <roleType id="45aa4f50-a23b-4ce6-872f-d72b648e4e90">
+    <objectType idref="ccd6f134-26de-4103-bff9-a37ec3e997a3" />
+    <pluralName>IbanLengths</pluralName>
+    <singularName>IbanLength</singularName>
+  </roleType>
+</relationType>

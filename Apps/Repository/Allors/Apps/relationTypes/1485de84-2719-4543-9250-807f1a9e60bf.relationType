@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="1485de84-2719-4543-9250-807f1a9e60bf">
+  <associationType id="9694eb68-d7c4-40db-b15d-deacb698e976">
+    <isMany>true</isMany>
+    <objectType idref="15f511a9-7a08-42e4-a690-e0d2f01c9686" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="48bd4dce-ecae-4acf-b820-70352958c04b">
+    <objectType idref="23162c0f-f5ec-45a5-a948-13a3355d99f2" />
+    <pluralName>PurchaseReturnObjectStates</pluralName>
+    <singularName>PurchaseReturnObjectState</singularName>
+  </roleType>
+</relationType>

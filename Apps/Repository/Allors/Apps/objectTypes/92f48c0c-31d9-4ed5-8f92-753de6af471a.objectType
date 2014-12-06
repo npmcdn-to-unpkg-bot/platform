@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="92f48c0c-31d9-4ed5-8f92-753de6af471a">
+  <namespace idref="9c5baf6a-59e8-4592-92a7-7a78bddc6b1c" />
+  <pluralName>PayrollPreferences</pluralName>
+  <singularName>PayrollPreference</singularName>
+</objectType>

@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="b6f28dbd-f20f-44ed-a2e7-476f1a8a5518">
+  <associationType id="3ddb90b4-84df-4214-818d-7fa05a464815">
+    <isMany>true</isMany>
+    <objectType idref="c799ca62-a554-467d-9aa2-1663293bb37f" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="a609ed29-bde6-4b43-bfe7-4abda8630b90">
+    <objectType idref="f35745a9-a8d3-4002-a484-6f0fb00a69a2" />
+    <pluralName>Genders</pluralName>
+    <singularName>Gender</singularName>
+  </roleType>
+</relationType>

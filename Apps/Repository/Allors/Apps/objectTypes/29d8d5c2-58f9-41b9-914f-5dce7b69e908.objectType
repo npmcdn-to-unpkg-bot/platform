@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="29d8d5c2-58f9-41b9-914f-5dce7b69e908">
+  <namespace idref="bed2b711-d707-4cf6-9aee-11de07b2ba0d" />
+  <pluralName>ProductCategoryRevenueHistories</pluralName>
+  <singularName>ProductCategoryRevenueHistory</singularName>
+</objectType>

@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="3a52aa7c-fa01-4845-866c-976e48ea2179">
+  <associationType id="8ab91bc9-99da-4bb4-b249-866a54fb4117">
+    <objectType idref="d3446420-6d2a-4d18-a6eb-0405da9f7cc5" />
+  </associationType>
+  <roleType id="8bf5236d-6b99-4b86-b686-1cbf96bcde03">
+    <objectType idref="b5ee6cea-4e2b-498e-a5dd-24671d896477" />
+    <pluralName>BlockUnpaidTransactionss</pluralName>
+    <singularName>BlockUnpaidTransactions</singularName>
+  </roleType>
+</relationType>

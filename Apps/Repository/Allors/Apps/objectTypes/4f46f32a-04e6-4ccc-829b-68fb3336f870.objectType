@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="4f46f32a-04e6-4ccc-829b-68fb3336f870">
+  <namespace idref="91bd1c52-d40f-4e84-9367-7cce846def6f" />
+  <pluralName>Carriers</pluralName>
+  <singularName>Carrier</singularName>
+</objectType>

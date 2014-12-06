@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="91d1ad08-2eae-4d9e-8a2e-223eeae138af">
+  <namespace idref="91bd1c52-d40f-4e84-9367-7cce846def6f" />
+  <pluralName>Salutations</pluralName>
+  <singularName>Salutation</singularName>
+</objectType>

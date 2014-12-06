@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="ed091c3c-1f38-498a-8ca5-ca8b8ddfc5c4">
+  <associationType id="2531dbb0-e34e-41c2-b6e2-95e3a39cf54d">
+    <isMany>true</isMany>
+    <objectType idref="6173fc23-115f-4356-a0ce-867872c151ac" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="e279aec5-e503-46c5-9563-b13f58274f71">
+    <objectType idref="db1678af-6541-4a35-a3b9-cffd0f821bd2" />
+    <pluralName>SalesChannels</pluralName>
+    <singularName>SalesChannel</singularName>
+  </roleType>
+</relationType>

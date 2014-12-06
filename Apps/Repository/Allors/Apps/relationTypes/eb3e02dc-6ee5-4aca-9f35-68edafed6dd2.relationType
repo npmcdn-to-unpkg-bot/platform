@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="eb3e02dc-6ee5-4aca-9f35-68edafed6dd2">
+  <associationType id="9223e489-7115-4765-88fd-b18f0d7e8c28">
+    <isMany>true</isMany>
+    <objectType idref="1d157965-59b5-4ead-b4e4-c722495d7658" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="5d9c639a-7c94-4771-ad37-be6e4b68dd06">
+    <objectType idref="555882ea-d25a-4da2-a8ea-330469c8cd41" />
+    <pluralName>SkillLevels</pluralName>
+    <singularName>SkillLevel</singularName>
+  </roleType>
+</relationType>

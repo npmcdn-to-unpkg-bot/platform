@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="d2078f49-9745-48e5-bdd2-7d7738f25d4e">
+  <associationType id="276120e0-5e26-415c-bdc0-b1da8790d7f5">
+    <isMany>true</isMany>
+    <objectType idref="1a0e396b-69bd-4e77-a602-3d7f7938fd74" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="42f7e330-3be1-4eb7-8649-289c3907fb8f">
+    <isMany>true</isMany>
+    <objectType idref="56b79619-d04a-4924-96e8-e3e7be9faa09" />
+    <pluralName>CostUnitsAllowed</pluralName>
+    <singularName>CostUnitAllowed</singularName>
+  </roleType>
+</relationType>

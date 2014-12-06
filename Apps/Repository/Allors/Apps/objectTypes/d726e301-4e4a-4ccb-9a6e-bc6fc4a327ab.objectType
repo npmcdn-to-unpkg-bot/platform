@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="d726e301-4e4a-4ccb-9a6e-bc6fc4a327ab">
+  <namespace idref="91bd1c52-d40f-4e84-9367-7cce846def6f" />
+  <pluralName>ClientAgreements</pluralName>
+  <singularName>ClientAgreement</singularName>
+</objectType>

@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="b06a858d-a8ee-41b8-a747-7fd46336ae4f">
+  <associationType id="00656807-27c8-4803-a1e3-aad812af2f9e">
+    <objectType idref="22bc5b67-8015-49c5-bc47-6f9e7e678943" />
+  </associationType>
+  <roleType id="08604620-9d2f-4b98-bba6-16147c0d9978">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>Branches</pluralName>
+    <singularName>Branch</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="5835aca6-214b-41cf-aefe-e361dda026d7">
+  <namespace idref="78bc14e1-57ea-4c6e-97ae-a18880c0facd" />
+  <pluralName>OneTimeCharges</pluralName>
+  <singularName>OneTimeCharge</singularName>
+</objectType>

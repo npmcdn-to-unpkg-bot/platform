@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="520649d5-7775-43d0-ab4b-762b2ec6557e">
+  <associationType id="e63e57e3-ae72-456a-9dd4-881ac8c07525">
+    <objectType idref="4d599ed2-c5e3-4c1d-8128-6ff61f9072c3" />
+  </associationType>
+  <roleType id="a56a7a77-1233-46c4-86b1-f6ac24d7a1f8">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>BenefitPercentages</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>BenefitPercentage</singularName>
+  </roleType>
+</relationType>

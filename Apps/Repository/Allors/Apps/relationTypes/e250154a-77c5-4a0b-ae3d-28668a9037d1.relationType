@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="e250154a-77c5-4a0b-ae3d-28668a9037d1">
+  <associationType id="b5ba8cfd-2b16-4a50-89cd-46927d59b97a">
+    <objectType idref="066bf242-2710-4a68-8ff6-ce4d7d88a04a" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="f5b6881b-c4d5-42e3-a024-0ae4564cb970">
+    <isMany>true</isMany>
+    <objectType idref="01fc58a0-89b8-4dc0-97f9-5f628b9c9577" />
+    <pluralName>QuoteItems</pluralName>
+    <singularName>QuoteItem</singularName>
+  </roleType>
+</relationType>

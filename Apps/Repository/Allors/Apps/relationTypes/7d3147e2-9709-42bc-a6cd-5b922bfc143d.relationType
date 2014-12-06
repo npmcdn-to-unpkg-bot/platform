@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="7d3147e2-9709-42bc-a6cd-5b922bfc143d">
+  <associationType id="e8ec31ed-ebd4-4a2c-8948-7170adf61572">
+    <isMany>true</isMany>
+    <objectType idref="6940c300-47e6-44f2-b93b-d70bed9de602" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="af280063-af23-4afb-9dd6-8f44141c275e">
+    <objectType idref="c7c24ce4-3455-4cec-a733-64a436434b3e" />
+    <pluralName>EmploymentApplicationStatuses</pluralName>
+    <singularName>EmploymentApplicationStatus</singularName>
+  </roleType>
+</relationType>

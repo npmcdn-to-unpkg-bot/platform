@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="addf2b1e-a7c1-4ba8-94f0-13c99d2b8f63">
+  <associationType id="c9ccf0b5-b3a2-4a46-a035-4567215ce48a">
+    <objectType idref="7dde949a-6f54-4ece-92b3-d269f50ef9d9" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="2ad9cab5-25ea-49d2-9f70-145de25b2170">
+    <objectType idref="0346a1e2-03c7-4f1e-94ae-35fdf64143a9" />
+    <pluralName>DiscountAdjustments</pluralName>
+    <singularName>DiscountAdjustment</singularName>
+  </roleType>
+</relationType>

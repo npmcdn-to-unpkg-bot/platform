@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="902235fe-a6c5-47bb-936b-8b6ce54b3d15">
+  <associationType id="1f93dde3-a9bd-4e10-8ec6-38edaec6ffb5">
+    <isMany>true</isMany>
+    <objectType idref="22e85314-cfdf-4ead-a816-18588294fa79" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="3b27dd30-5452-480f-ae19-6937c422b541">
+    <objectType idref="c799ca62-a554-467d-9aa2-1663293bb37f" />
+    <pluralName>SubmittedBys</pluralName>
+    <singularName>SubmittedBy</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="28b3b976-3354-4095-b928-7c1474e8c492">
+  <associationType id="3b07f539-a06c-4cdc-8790-98c05e097aa6">
+    <objectType idref="81ddff76-9b82-4309-9c9f-f7f9dbd2db21" />
+  </associationType>
+  <roleType id="211ae475-665a-4677-a9eb-376ed9c4d886">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>EstimatedCosts</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>EstimatedCost</singularName>
+  </roleType>
+</relationType>

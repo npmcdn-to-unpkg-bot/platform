@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="ccabc13b-63cc-4cdf-909d-411edc26d648">
+  <associationType id="31ac20b1-d41d-4aa5-881b-708e38849017">
+    <objectType idref="42adee8e-5994-42e3-afe1-aa3d3089d594" />
+  </associationType>
+  <roleType id="179d1a3b-8325-49da-9009-f104802f189d">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>Descriptions</pluralName>
+    <singularName>Description</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

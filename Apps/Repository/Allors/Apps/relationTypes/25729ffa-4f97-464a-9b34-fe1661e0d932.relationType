@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="25729ffa-4f97-464a-9b34-fe1661e0d932">
+  <associationType id="ae59e80c-289d-487f-996c-c83615d8750d">
+    <isMany>true</isMany>
+    <objectType idref="0a7ac589-946b-4d49-b7e0-7e0b9bc90111" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="f02d54d1-8ed9-4f63-96b5-397cb4b761d2">
+    <isMany>true</isMany>
+    <objectType idref="ea83087e-05cc-458c-a6ba-3ce947644a0f" />
+    <pluralName>ProductCategories</pluralName>
+    <singularName>ProductCategory</singularName>
+  </roleType>
+</relationType>

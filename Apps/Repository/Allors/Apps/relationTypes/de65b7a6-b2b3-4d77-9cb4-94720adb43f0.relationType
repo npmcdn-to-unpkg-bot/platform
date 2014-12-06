@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="de65b7a6-b2b3-4d77-9cb4-94720adb43f0">
+  <associationType id="3ed4dffc-09eb-4285-a31c-ba3af0666451">
+    <objectType idref="c1b6fac9-8e69-4c07-8cec-e9b52c690e72" />
+  </associationType>
+  <roleType id="2f1173ef-1723-4ee5-9ff3-a01b6216584a">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>Prices</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>Price</singularName>
+  </roleType>
+</relationType>

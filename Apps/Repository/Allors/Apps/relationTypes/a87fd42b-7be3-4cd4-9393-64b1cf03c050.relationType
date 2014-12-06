@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="a87fd42b-7be3-4cd4-9393-64b1cf03c050">
+  <associationType id="9957bc91-53a9-431c-8eea-2e0dc04adde7">
+    <objectType idref="63ca0535-95e5-4b2d-847d-d619a5365605" />
+  </associationType>
+  <roleType id="67ecfd2b-4fc4-4474-81f8-cb8b720b30c4">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>Formulas</pluralName>
+    <singularName>Formula</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

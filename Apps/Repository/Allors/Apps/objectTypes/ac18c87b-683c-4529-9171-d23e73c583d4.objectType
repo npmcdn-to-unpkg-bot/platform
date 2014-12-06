@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="ac18c87b-683c-4529-9171-d23e73c583d4">
+  <namespace idref="a7c2d9a4-951f-4268-a433-b6d0bdec9366" />
+  <pluralName>WorkEffortAssignmentRates</pluralName>
+  <singularName>WorkEffortAssignmentRate</singularName>
+</objectType>

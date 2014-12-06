@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="9a0dfe33-016a-4b41-979c-d17a6f87d2d2">
+  <associationType id="a6741bcc-527d-4cbe-bd1e-fc881fd30951">
+    <isMany>true</isMany>
+    <objectType idref="d8611e48-b0ba-4037-a992-09e3e26c6d5d" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="611edb41-213f-4ade-8ea5-a512b99ee9b6">
+    <objectType idref="f34d5b9b-b940-4885-9744-754dd0eae08d" />
+    <pluralName>DefaultPaymentMethods</pluralName>
+    <singularName>DefaultPaymentMethod</singularName>
+  </roleType>
+</relationType>

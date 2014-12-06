@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="4888a06a-fcf5-42a7-a1c3-721d3abaa755">
+  <associationType id="0f922c04-b617-4b72-8c22-02f43ac2afb9">
+    <objectType idref="d900e278-7add-4e90-8bea-0a65d03f4fa7" />
+  </associationType>
+  <roleType id="46b3ec4d-0463-48eb-8764-8dedf8c48b1a">
+    <objectType idref="c402fbda-133a-4b59-858a-832fbd2ec565" />
+    <pluralName>ExpirationDates</pluralName>
+    <singularName>ExpirationDate</singularName>
+  </roleType>
+</relationType>

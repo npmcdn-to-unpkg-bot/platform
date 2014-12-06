@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="4f7703b0-7201-4f7a-a0b4-f177d64a2c31">
+  <namespace idref="9c5baf6a-59e8-4592-92a7-7a78bddc6b1c" />
+  <pluralName>Resumes</pluralName>
+  <singularName>Resume</singularName>
+</objectType>

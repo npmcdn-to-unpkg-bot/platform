@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="ee23df25-f7d7-4974-b62e-ee3cba56b709">
+  <namespace idref="78bc14e1-57ea-4c6e-97ae-a18880c0facd" />
+  <pluralName>Deployments</pluralName>
+  <singularName>Deployment</singularName>
+</objectType>

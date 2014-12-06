@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="c20f82fa-3ba2-4e84-beef-52ba30c92695">
+  <associationType id="0c9edf90-b6fd-476b-86e8-ca1b845ee62b">
+    <isMany>true</isMany>
+    <objectType idref="3bba6e5a-dc2d-4838-b6c4-881f6c8c3013" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <isIndexed>true</isIndexed>
+  <roleType id="5da6410e-1311-4664-a0b3-ee2fca4b9ad1">
+    <objectType idref="d54b4bba-a84c-4826-85ba-7340714035c7" />
+    <pluralName>ShippingAddresses</pluralName>
+    <singularName>ShippingAddress</singularName>
+  </roleType>
+</relationType>

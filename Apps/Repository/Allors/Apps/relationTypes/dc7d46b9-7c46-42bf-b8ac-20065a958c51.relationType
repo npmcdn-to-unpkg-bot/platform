@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="dc7d46b9-7c46-42bf-b8ac-20065a958c51">
+  <associationType id="d935d887-08c0-499b-be79-37973dac97e5">
+    <objectType idref="f3ef0124-e867-4da2-9323-80fbe1f214c2" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="edfe7ff0-3a6d-40b4-ab75-86d4b231de95">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>TotalBasePricesCustomerCurrency</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>TotalBasePriceCustomerCurrency</singularName>
+  </roleType>
+</relationType>

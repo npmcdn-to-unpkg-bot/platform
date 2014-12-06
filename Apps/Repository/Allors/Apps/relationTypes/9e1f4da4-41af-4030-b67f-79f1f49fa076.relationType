@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="9e1f4da4-41af-4030-b67f-79f1f49fa076">
+  <associationType id="b5361ebf-2809-4fe7-8f24-bd68ec61c9b8">
+    <isMany>true</isMany>
+    <objectType idref="aa3bf631-5aa5-48ab-a249-ef61f640fb72" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <isIndexed>true</isIndexed>
+  <roleType id="124043c0-dd7e-4d94-9c0c-a3804c343f11">
+    <objectType idref="6b666a30-7a55-4986-8411-b6179768e70b" />
+    <pluralName>CurrentEngagementRates</pluralName>
+    <singularName>CurrentEngagementRate</singularName>
+  </roleType>
+</relationType>

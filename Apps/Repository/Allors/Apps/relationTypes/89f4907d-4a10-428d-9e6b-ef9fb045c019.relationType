@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="89f4907d-4a10-428d-9e6b-ef9fb045c019">
+  <associationType id="a0fd3167-5d4e-400f-b593-1497fce5d024">
+    <isMany>true</isMany>
+    <objectType idref="c81441c8-9ac9-440e-a926-c96230b2701f" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="0ab03957-8140-4e1c-8a13-a9647f6c9e47">
+    <objectType idref="1a0e396b-69bd-4e77-a602-3d7f7938fd74" />
+    <pluralName>RetainedEarningsAccounts</pluralName>
+    <singularName>RetainedEarningsAccount</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="31ccabaf-1d31-4b35-93a4-8c18c813c3cd">
+  <associationType id="3d5d091c-0b5a-421e-bbe8-1c64b35d19b0">
+    <objectType idref="6c255f71-ce18-4d51-b0d9-e402ec0e570e" />
+  </associationType>
+  <roleType id="f8c81a88-4d53-461a-960d-32325ebc177a">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>CountryCodes</pluralName>
+    <singularName>CountryCode</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

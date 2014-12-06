@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="7107db4e-8406-4fe3-8136-271077c287f8">
+  <namespace idref="bed2b711-d707-4cf6-9aee-11de07b2ba0d" />
+  <pluralName>Depreciations</pluralName>
+  <singularName>Depreciation</singularName>
+</objectType>

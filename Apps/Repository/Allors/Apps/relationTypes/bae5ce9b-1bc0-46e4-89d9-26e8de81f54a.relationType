@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="bae5ce9b-1bc0-46e4-89d9-26e8de81f54a">
+  <associationType id="c1b72b95-f55f-4aaa-86a8-aba006489ec5">
+    <objectType idref="ce394ad6-1229-4621-8506-5f0347cd8c92" />
+  </associationType>
+  <roleType id="03cc5c67-caf6-4d1f-8a46-edd1c0f76fa9">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>Froms</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>From</singularName>
+  </roleType>
+</relationType>

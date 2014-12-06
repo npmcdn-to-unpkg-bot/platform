@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="ed542026-7020-43e3-ab72-c3f4dd991a4b">
+  <associationType id="cba93e20-e78d-4c86-8b5b-2daa930fde35">
+    <isMany>true</isMany>
+    <objectType idref="2b5efcb9-54ba-4d59-833b-716d321cc7cb" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="b2c0c98f-5ed7-4329-bfcb-ab0f3e6e169c">
+    <objectType idref="aad26d12-9e80-410c-ab99-57064bd3dd2e" />
+    <pluralName>Events</pluralName>
+    <singularName>Event</singularName>
+  </roleType>
+</relationType>

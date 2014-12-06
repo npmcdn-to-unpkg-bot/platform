@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="85d11891-5ffe-488f-9f23-5b2c7bc1c480">
+  <associationType id="283cdb9a-e7e3-4486-92da-5e94653505a8">
+    <objectType idref="80de925c-04cc-412c-83a5-60405b0e63e6" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="fd06dd18-c1d4-40c7-b62e-273a8522f580">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>QuantitiesReserved</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>QuantityReserved</singularName>
+  </roleType>
+</relationType>

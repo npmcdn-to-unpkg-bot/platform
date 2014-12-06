@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="07d663c5-4716-4e76-a280-ec635216791f">
+  <associationType id="e8db5958-e57e-4860-adc9-831c4e513c41">
+    <objectType idref="9492bd39-0f07-4978-a987-0393ca34b504" />
+  </associationType>
+  <roleType id="73942abf-a46a-4be4-868b-7c5d195504aa">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>NamesOnCard</pluralName>
+    <singularName>NameOnCard</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

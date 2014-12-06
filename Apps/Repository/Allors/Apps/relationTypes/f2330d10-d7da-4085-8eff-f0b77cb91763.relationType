@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="f2330d10-d7da-4085-8eff-f0b77cb91763">
+  <associationType id="d38024ac-2e0b-40f1-a6e4-252c5ffc0bcc">
+    <objectType idref="4f7703b0-7201-4f7a-a0b4-f177d64a2c31" />
+  </associationType>
+  <roleType id="b83ee648-06c2-40c6-a907-5d477d57d7db">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>ResumeTexts</pluralName>
+    <singularName>ResumeText</singularName>
+    <size>-1</size>
+  </roleType>
+</relationType>

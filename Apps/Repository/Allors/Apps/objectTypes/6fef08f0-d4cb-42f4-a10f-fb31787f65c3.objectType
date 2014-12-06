@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="6fef08f0-d4cb-42f4-a10f-fb31787f65c3">
+  <namespace idref="83d90516-d523-40b7-8edb-9bda4ee2cd52" />
+  <pluralName>PaymentApplications</pluralName>
+  <singularName>PaymentApplication</singularName>
+</objectType>

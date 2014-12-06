@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="009d073e-8c1b-4da5-8780-bd5bff43db0d">
+  <associationType id="f7a9d8ed-4efa-4d39-a79d-ab1e3acda26c">
+    <objectType idref="3b9f21f4-2f2c-47a9-9c76-15f5ef4f5e00" />
+  </associationType>
+  <roleType id="bfdae8de-2880-47c5-afd1-93c9b9b24dab">
+    <objectType idref="b5ee6cea-4e2b-498e-a5dd-24671d896477" />
+    <pluralName>BlockedsForDunning</pluralName>
+    <singularName>BlockedForDunning</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="86cf6a28-baeb-479d-ac9e-fabc7fe1994d">
+  <namespace idref="799e9780-81bd-41b6-8417-00b9c8498698" />
+  <pluralName>OrderTerms</pluralName>
+  <singularName>OrderTerm</singularName>
+</objectType>

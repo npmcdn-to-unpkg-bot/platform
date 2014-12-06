@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="b81633d1-5b22-42b9-a484-d401d06022fb">
+  <associationType id="17f4d6e4-fe43-46d4-b28d-651e6e766713">
+    <objectType idref="f3ef0124-e867-4da2-9323-80fbe1f214c2" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="e897b861-0e8a-4b57-ae52-b875d2f67c39">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>TotalSurcharges</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>TotalSurcharge</singularName>
+  </roleType>
+</relationType>

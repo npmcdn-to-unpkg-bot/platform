@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="eb1e7e03-8b88-4a69-b1cc-46dc77b44a8b">
+  <associationType id="cd06b83b-3b19-4b6d-bed8-90c5ece3c600">
+    <objectType idref="084829bc-d347-489a-9557-9ff1ac7fb5a0" />
+  </associationType>
+  <roleType id="fb5e417d-b1b1-4e23-90d4-01b0464e3a1b">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>AllocationPercentages</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>AllocationPercentage</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="8ac90ec6-9d3e-45fe-aaba-27d0c1c058a1">
+  <associationType id="438f6e6a-292b-4579-bf87-7478c48b9159">
+    <objectType idref="321a6047-2233-4bec-a1b1-9b965c0099e5" />
+  </associationType>
+  <roleType id="c16a1509-cfd6-4f9d-87ce-4b903365b9e5">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>RequestNumbers</pluralName>
+    <singularName>RequestNumber</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

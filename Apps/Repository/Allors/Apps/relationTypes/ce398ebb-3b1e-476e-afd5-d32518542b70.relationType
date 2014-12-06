@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="ce398ebb-3b1e-476e-afd5-d32518542b70">
+  <associationType id="d7f29cb6-bae1-41ce-bc67-c37c38f0ba73">
+    <objectType idref="f3ef0124-e867-4da2-9323-80fbe1f214c2" />
+  </associationType>
+  <roleType id="49a61617-586a-4b7b-bcc0-e2cf1f4cdee4">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>ShippingInstructions</pluralName>
+    <singularName>ShippingInstruction</singularName>
+    <size>-1</size>
+  </roleType>
+</relationType>

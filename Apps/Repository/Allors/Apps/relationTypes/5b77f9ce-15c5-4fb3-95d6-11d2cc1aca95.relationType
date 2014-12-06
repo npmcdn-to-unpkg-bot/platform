@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="5b77f9ce-15c5-4fb3-95d6-11d2cc1aca95">
+  <associationType id="5609dc7f-0354-4ed0-a6cf-120fd41d3eb9">
+    <objectType idref="3f2c4c17-ec80-44ad-b452-76cf694f3d6a" />
+  </associationType>
+  <roleType id="3d418a0d-f737-4bf8-856e-a94f8f7af774">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>PartyProductCategoryNames</pluralName>
+    <singularName>PartyProductCategoryName</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

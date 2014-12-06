@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="9a8fcada-bf2c-450d-a941-e0c7ec414cf3">
+  <associationType id="56813128-50b2-4fbf-ad0f-0385930a6805">
+    <isMany>true</isMany>
+    <objectType idref="d520cf1a-8d3a-4380-8b88-85cd63a5ad05" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="95e9e94b-0fad-47e0-bfcf-f131e6962694">
+    <objectType idref="8cea6932-d589-4b5b-99b8-ffba33936f8f" />
+    <pluralName>Benefits</pluralName>
+    <singularName>Benefit</singularName>
+  </roleType>
+</relationType>

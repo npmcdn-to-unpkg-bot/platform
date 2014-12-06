@@ -1,0 +1,14 @@
+<relationType allors="1.0" id="45b0b049-e047-4490-9dde-c48fb1e7bfc3">
+  <associationType id="130462ef-9d1d-48d9-b0f5-40c82ccea0a2">
+    <isMany>true</isMany>
+    <objectType idref="11214660-3c3a-42e9-8f12-f475d823da64" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <isIndexed>true</isIndexed>
+  <roleType id="1fd21431-34f6-4f5c-ad54-abecb5e717e1">
+    <isMany>true</isMany>
+    <objectType idref="11214660-3c3a-42e9-8f12-f475d823da64" />
+    <pluralName>Ancestors</pluralName>
+    <singularName>Ancestor</singularName>
+  </roleType>
+</relationType>

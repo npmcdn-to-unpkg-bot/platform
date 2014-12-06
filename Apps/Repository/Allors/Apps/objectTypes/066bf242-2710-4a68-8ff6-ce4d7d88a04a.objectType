@@ -1,0 +1,6 @@
+<objectType allors="1.0" id="066bf242-2710-4a68-8ff6-ce4d7d88a04a">
+  <isInterface>true</isInterface>
+  <namespace idref="799e9780-81bd-41b6-8417-00b9c8498698" />
+  <pluralName>Quotes</pluralName>
+  <singularName>Quote</singularName>
+</objectType>

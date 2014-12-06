@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="fb3dd618-eeb5-4ef6-87ca-abfe91dc603f">
+  <namespace idref="799e9780-81bd-41b6-8417-00b9c8498698" />
+  <pluralName>Fees</pluralName>
+  <singularName>Fee</singularName>
+</objectType>

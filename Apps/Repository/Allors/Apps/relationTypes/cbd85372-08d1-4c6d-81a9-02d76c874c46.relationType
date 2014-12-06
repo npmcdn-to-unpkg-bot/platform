@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="cbd85372-08d1-4c6d-81a9-02d76c874c46">
+  <associationType id="235cfb9b-1cea-4e37-8e35-f9993ca175b6">
+    <isMany>true</isMany>
+    <objectType idref="a5e29ca1-80de-4de4-9085-b69f21550b5a" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="41b72bc0-f2b6-4895-808b-76a5b6fb9035">
+    <objectType idref="59f3100c-da48-4b4c-a302-1a75e37216a6" />
+    <pluralName>VatToReceiveAccounts</pluralName>
+    <singularName>VatToReceiveAccount</singularName>
+  </roleType>
+</relationType>

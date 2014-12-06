@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="20267bfe-b651-4ed7-bd22-f4300022e39c">
+  <associationType id="48a9b292-452c-48be-9cb3-2b20f23a510e">
+    <objectType idref="9d0065b8-2760-4ec5-928a-9ebd128bbfdd" />
+  </associationType>
+  <roleType id="12e48856-88e9-4e97-aa32-fd532d2f050d">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>Codes</pluralName>
+    <singularName>Code</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

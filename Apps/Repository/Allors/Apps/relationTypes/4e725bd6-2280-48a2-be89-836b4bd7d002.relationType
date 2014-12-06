@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="4e725bd6-2280-48a2-be89-836b4bd7d002">
+  <associationType id="9d7f6130-f2ba-4da0-9b74-91b6205e42be">
+    <isMany>true</isMany>
+    <objectType idref="3bba6e5a-dc2d-4838-b6c4-881f6c8c3013" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="eb6079ed-489b-4673-8508-7a9a6e33573f">
+    <isMany>true</isMany>
+    <objectType idref="1d157965-59b5-4ead-b4e4-c722495d7658" />
+    <pluralName>PartySkills</pluralName>
+    <singularName>PartySkill</singularName>
+  </roleType>
+</relationType>

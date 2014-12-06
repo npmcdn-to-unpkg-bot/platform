@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="6a03924c-914b-4660-b7e8-5174caa0dff9">
+  <namespace idref="9c5baf6a-59e8-4592-92a7-7a78bddc6b1c" />
+  <pluralName>PositionFulfillments</pluralName>
+  <singularName>PositionFulfillment</singularName>
+</objectType>

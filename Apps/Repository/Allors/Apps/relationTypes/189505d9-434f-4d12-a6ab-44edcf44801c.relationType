@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="189505d9-434f-4d12-a6ab-44edcf44801c">
+  <associationType id="edd0f108-0d6c-414a-8460-2a6f2e4c8f6b">
+    <objectType idref="aad26d12-9e80-410c-ab99-57064bd3dd2e" />
+  </associationType>
+  <roleType id="ea95aeb1-2d78-4d96-b725-cb5bc7268176">
+    <objectType idref="b5ee6cea-4e2b-498e-a5dd-24671d896477" />
+    <pluralName>RegistrationsRequired</pluralName>
+    <singularName>RegistrationRequired</singularName>
+  </roleType>
+</relationType>

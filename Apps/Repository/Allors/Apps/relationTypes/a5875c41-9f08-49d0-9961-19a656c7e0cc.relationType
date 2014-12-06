@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="a5875c41-9f08-49d0-9961-19a656c7e0cc">
+  <associationType id="c6604ee5-e9f2-4b5a-9f08-fbfa1d126402">
+    <objectType idref="7dde949a-6f54-4ece-92b3-d269f50ef9d9" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="6a783dbf-0f8d-4249-8e1e-6c0c2a61a97e">
+    <objectType idref="c402fbda-133a-4b59-858a-832fbd2ec565" />
+    <pluralName>EntryDates</pluralName>
+    <singularName>EntryDate</singularName>
+  </roleType>
+</relationType>

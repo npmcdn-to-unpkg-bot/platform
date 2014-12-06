@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="dda88fe9-14b3-463b-ae66-25dd1b136e16">
+  <namespace idref="799e9780-81bd-41b6-8417-00b9c8498698" />
+  <pluralName>DesiredProductFeatures</pluralName>
+  <singularName>DesiredProductFeature</singularName>
+</objectType>

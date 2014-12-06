@@ -1,0 +1,6 @@
+<objectType allors="1.0" id="785a36a9-4710-4f3f-bd26-dbaff5353535">
+  <isInterface>true</isInterface>
+  <namespace idref="bed2b711-d707-4cf6-9aee-11de07b2ba0d" />
+  <pluralName>AccountingTransactions</pluralName>
+  <singularName>AccountingTransaction</singularName>
+</objectType>

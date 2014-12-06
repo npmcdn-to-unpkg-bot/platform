@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="b3f1071f-7e71-4ef1-aa9b-545ad694f44c">
+  <associationType id="717107b5-fafc-4cca-b85d-364d819a7529">
+    <isMany>true</isMany>
+    <objectType idref="208a5af6-8dd8-4a48-acb2-2ecb89e8d322" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="3f7535b3-76dc-47c8-9668-895596bafc16">
+    <objectType idref="6ebf4c66-dd19-494f-8081-67d7a10a16fc" />
+    <pluralName>SalarySteps</pluralName>
+    <singularName>SalaryStep</singularName>
+  </roleType>
+</relationType>

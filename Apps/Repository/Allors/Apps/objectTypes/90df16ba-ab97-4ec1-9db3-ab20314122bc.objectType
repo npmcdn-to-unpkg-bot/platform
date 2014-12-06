@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="90df16ba-ab97-4ec1-9db3-ab20314122bc">
+  <namespace idref="a7c2d9a4-951f-4268-a433-b6d0bdec9366" />
+  <pluralName>WorkEffortStatuses</pluralName>
+  <singularName>WorkEffortStatus</singularName>
+</objectType>

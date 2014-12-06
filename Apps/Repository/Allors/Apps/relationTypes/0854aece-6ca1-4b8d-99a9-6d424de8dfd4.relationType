@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="0854aece-6ca1-4b8d-99a9-6d424de8dfd4">
+  <associationType id="cebb5430-809a-4d46-bc7b-563ee72f0848">
+    <isMany>true</isMany>
+    <objectType idref="a98f8aca-d711-47e8-ac9c-25b607cbaef1" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="f1f68b89-b95f-43c9-82d5-cb9eec635869">
+    <objectType idref="d3c5a482-e17a-4e37-84eb-55a035e80f2f" />
+    <pluralName>ProductFeatures</pluralName>
+    <singularName>ProductFeature</singularName>
+  </roleType>
+</relationType>

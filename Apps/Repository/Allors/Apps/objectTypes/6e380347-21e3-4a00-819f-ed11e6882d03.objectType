@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="6e380347-21e3-4a00-819f-ed11e6882d03">
+  <namespace idref="83d90516-d523-40b7-8edb-9bda4ee2cd52" />
+  <pluralName>InvoiceVatRateItems</pluralName>
+  <singularName>InvoiceVatRateItem</singularName>
+</objectType>

@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="f444a4cf-9722-420b-8ba1-0591492929e5">
+  <associationType id="2aaf6afe-5fee-460f-ab37-75aa27be40f1">
+    <objectType idref="752a68b0-836e-4cd5-92d5-ebf2bfeda491" />
+  </associationType>
+  <roleType id="ffb337c1-e7d0-4b86-b694-43b927efad34">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>ClientPurchaseOrderNumbers</pluralName>
+    <singularName>ClientPurchaseOrderNumber</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

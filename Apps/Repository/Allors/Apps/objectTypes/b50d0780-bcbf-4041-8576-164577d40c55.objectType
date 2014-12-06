@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="b50d0780-bcbf-4041-8576-164577d40c55">
+  <namespace idref="9c5baf6a-59e8-4592-92a7-7a78bddc6b1c" />
+  <pluralName>PositionReportingStructures</pluralName>
+  <singularName>PositionReportingStructure</singularName>
+</objectType>

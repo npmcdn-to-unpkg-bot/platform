@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="874dfe70-2e50-4861-b26d-dc55bc8fa0d0">
+  <namespace idref="799e9780-81bd-41b6-8417-00b9c8498698" />
+  <pluralName>RequestsForQuote</pluralName>
+  <singularName>RequestForQuote</singularName>
+</objectType>

@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="103d42a5-fdee-4689-af19-2ea4c8060de3">
+  <associationType id="ee01bcc4-b926-444d-8982-8c56158327f1">
+    <objectType idref="a98f8aca-d711-47e8-ac9c-25b607cbaef1" />
+  </associationType>
+  <roleType id="a1643b4c-c95e-427c-a6b8-44860bc79d6e">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>RequiredProfitMargins</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>RequiredProfitMargin</singularName>
+  </roleType>
+</relationType>

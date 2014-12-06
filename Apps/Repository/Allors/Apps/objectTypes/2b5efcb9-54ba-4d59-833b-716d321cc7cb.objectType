@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="2b5efcb9-54ba-4d59-833b-716d321cc7cb">
+  <namespace idref="14720772-4daf-431c-ac0a-513b8c6f4254" />
+  <pluralName>EventRegistrations</pluralName>
+  <singularName>EventRegistration</singularName>
+</objectType>

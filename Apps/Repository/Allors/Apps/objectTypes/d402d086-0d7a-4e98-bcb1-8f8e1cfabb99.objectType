@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="d402d086-0d7a-4e98-bcb1-8f8e1cfabb99">
+  <namespace idref="91bd1c52-d40f-4e84-9367-7cce846def6f" />
+  <pluralName>EmploymentAgreements</pluralName>
+  <singularName>EmploymentAgreement</singularName>
+</objectType>

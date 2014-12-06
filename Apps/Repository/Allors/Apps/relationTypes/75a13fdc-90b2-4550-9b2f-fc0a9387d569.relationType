@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="75a13fdc-90b2-4550-9b2f-fc0a9387d569">
+  <associationType id="94922e2d-1570-4667-af8f-5d4415fd6d78">
+    <objectType idref="80de925c-04cc-412c-83a5-60405b0e63e6" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="39d62b69-520c-456d-b3f1-6ca640ffc4cb">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>UnitPurchasePrices</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>UnitPurchasePrice</singularName>
+  </roleType>
+</relationType>

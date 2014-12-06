@@ -1,0 +1,14 @@
+<relationType allors="1.0" id="f2abc02c-67a1-42b7-83f5-195841e58a6a">
+  <associationType id="dae3b48d-0dde-4c71-bbd3-4f7743d20a9f">
+    <isMany>true</isMany>
+    <objectType idref="56b79619-d04a-4924-96e8-e3e7be9faa09" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <isIndexed>true</isIndexed>
+  <roleType id="fe8dd3c4-0540-49d9-a18a-905fe0259ca1">
+    <isMany>true</isMany>
+    <objectType idref="383589fb-f410-4d22-ade6-aa5126fdef18" />
+    <pluralName>BasePrices</pluralName>
+    <singularName>BasePrice</singularName>
+  </roleType>
+</relationType>

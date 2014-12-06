@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="f1ae6225-15d0-4359-8188-afb73265a617">
+  <namespace idref="78bc14e1-57ea-4c6e-97ae-a18880c0facd" />
+  <pluralName>PartSpecificationStatuses</pluralName>
+  <singularName>PartSpecificationStatus</singularName>
+</objectType>

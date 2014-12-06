@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="76947134-0cae-4244-a8f3-fbb018930fd3">
+  <associationType id="dfb847f1-46fe-4adc-94a1-c2d57d911348">
+    <isMany>true</isMany>
+    <objectType idref="2ab70094-5481-4ecc-ae15-cb2131fbc2f1" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="7e795eb5-b79d-455f-919b-bdfed4d926c3">
+    <objectType idref="59f3100c-da48-4b4c-a302-1a75e37216a6" />
+    <pluralName>InternalTransferGlAccounts</pluralName>
+    <singularName>InternalTransferGlAccount</singularName>
+  </roleType>
+</relationType>

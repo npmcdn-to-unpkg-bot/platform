@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="52883992-8e1b-472a-9cc7-67d4824a2cd4">
+  <associationType id="5a14b240-2eb3-4051-b9cb-8eefb0fd1722">
+    <isMany>true</isMany>
+    <objectType idref="383589fb-f410-4d22-ade6-aa5126fdef18" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="ac8e7099-f0bd-492f-bbd9-5890060c56eb">
+    <objectType idref="d551887b-8520-478d-bf2c-b0f26e3bc356" />
+    <pluralName>PackageQuantityBreaks</pluralName>
+    <singularName>PackageQuantityBreak</singularName>
+  </roleType>
+</relationType>

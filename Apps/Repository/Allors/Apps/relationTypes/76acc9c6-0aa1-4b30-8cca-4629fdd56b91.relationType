@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="76acc9c6-0aa1-4b30-8cca-4629fdd56b91">
+  <associationType id="b9f585f4-a612-451a-ac0e-4a2584982385">
+    <isMany>true</isMany>
+    <objectType idref="c81441c8-9ac9-440e-a926-c96230b2701f" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="e9e6013f-9458-4d27-89a2-bced57a2b15f">
+    <isMany>true</isMany>
+    <objectType idref="af6fe5f4-e5bc-4099-bcd1-97528af6505d" />
+    <pluralName>EmployeeRoles</pluralName>
+    <singularName>EmployeeRole</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="46cf5d68-cceb-4b49-933c-875e9614eb8b">
+  <associationType id="deaf1d2c-6590-460e-9e16-0eaf68af6b3d">
+    <objectType idref="a5e29ca1-80de-4de4-9085-b69f21550b5a" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="b4fdf839-5b01-432c-b165-9664a199d0bf">
+    <objectType idref="59f3100c-da48-4b4c-a302-1a75e37216a6" />
+    <pluralName>VatPayableAccounts</pluralName>
+    <singularName>VatPayableAccount</singularName>
+  </roleType>
+</relationType>

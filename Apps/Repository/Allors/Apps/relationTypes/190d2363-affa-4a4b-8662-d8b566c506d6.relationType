@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="190d2363-affa-4a4b-8662-d8b566c506d6">
+  <associationType id="76194162-1ef0-45f0-8804-2183f42e0e17">
+    <isMany>true</isMany>
+    <objectType idref="d8611e48-b0ba-4037-a992-09e3e26c6d5d" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="b4d8f605-9a66-468d-b9a0-f2157e8528b7">
+    <isMany>true</isMany>
+    <objectType idref="0c50c02a-cc9c-4617-8530-15a24d4ac969" />
+    <pluralName>SalesInvoiceTemplates</pluralName>
+    <singularName>SalesInvoiceTemplate</singularName>
+  </roleType>
+</relationType>

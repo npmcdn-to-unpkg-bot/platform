@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="90a8fa64-c9c7-4a7a-a543-d500668619eb">
+  <namespace idref="a7c2d9a4-951f-4268-a433-b6d0bdec9366" />
+  <pluralName>Phases</pluralName>
+  <singularName>Phase</singularName>
+</objectType>

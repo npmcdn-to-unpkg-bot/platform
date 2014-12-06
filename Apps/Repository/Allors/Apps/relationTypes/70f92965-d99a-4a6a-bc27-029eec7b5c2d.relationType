@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="70f92965-d99a-4a6a-bc27-029eec7b5c2d">
+  <associationType id="93ffaaa6-7401-4b7f-a297-081a98bee032">
+    <isMany>true</isMany>
+    <objectType idref="f3ef0124-e867-4da2-9323-80fbe1f214c2" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="233fd990-758e-4f1d-87bd-ae3de8d9486b">
+    <objectType idref="062bd939-9902-4747-a631-99ea10002156" />
+    <pluralName>CorrespondingPurchaseOrders</pluralName>
+    <singularName>CorrespondingPurchaseOrder</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="3230c33b-42ac-4eb4-b0c9-9791cc5604d7">
+  <associationType id="0d248d95-468e-4a19-9e84-45065dfc0006">
+    <isMany>true</isMany>
+    <objectType idref="383589fb-f410-4d22-ade6-aa5126fdef18" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="8e87149c-0c44-4e02-b784-eeef963a4333">
+    <objectType idref="3bb83aa5-e58a-4421-bdbc-3c9fa0b2324f" />
+    <pluralName>PartyClassifications</pluralName>
+    <singularName>PartyClassification</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="6d10bb5d-babe-40fc-be6b-9adba27bbe71">
+  <associationType id="00321c87-f4d8-4c1c-8028-f5764ade308f">
+    <objectType idref="c81441c8-9ac9-440e-a926-c96230b2701f" />
+  </associationType>
+  <roleType id="d44f70e9-4558-4836-ac55-abfe17b8eab7">
+    <objectType idref="ccd6f134-26de-4103-bff9-a37ec3e997a3" />
+    <pluralName>NextSubAccountNumbers</pluralName>
+    <singularName>NextSubAccountNumber</singularName>
+  </roleType>
+</relationType>

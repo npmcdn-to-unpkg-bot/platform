@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="c2ec3c6b-af56-4c6b-bdaf-76d3ea340bf7">
+  <associationType id="d9a53328-0414-4403-bd54-37b48ec05823">
+    <isMany>true</isMany>
+    <objectType idref="aa3bf631-5aa5-48ab-a249-ef61f640fb72" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <isIndexed>true</isIndexed>
+  <roleType id="a2dd5921-6ec7-4d7b-8aae-9a7e685688d1">
+    <objectType idref="c799ca62-a554-467d-9aa2-1663293bb37f" />
+    <pluralName>CurrentAssignedProfessionals</pluralName>
+    <singularName>CurrentAssignedProfessional</singularName>
+  </roleType>
+</relationType>

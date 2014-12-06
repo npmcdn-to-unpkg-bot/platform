@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="76982824-9c87-4f93-b2c1-ae312b200bdb">
+  <associationType id="a2832845-c225-4c46-8ce5-c17b9cdcb04b">
+    <objectType idref="6173fc23-115f-4356-a0ce-867872c151ac" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="d097a56f-225e-46be-9474-b35872532e52">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>MaintainedProfitMargins</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>MaintainedProfitMargin</singularName>
+  </roleType>
+</relationType>

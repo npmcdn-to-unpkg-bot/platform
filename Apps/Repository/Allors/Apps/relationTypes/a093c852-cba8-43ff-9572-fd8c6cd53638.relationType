@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="a093c852-cba8-43ff-9572-fd8c6cd53638">
+  <associationType id="8c3d3a61-4d3a-477c-9701-a292435112e3">
+    <objectType idref="75916246-b1b5-48ef-9578-d65980fd2623" />
+  </associationType>
+  <roleType id="f2ffce75-82d5-460f-83cc-621d63211d18">
+    <objectType idref="ccd6f134-26de-4103-bff9-a37ec3e997a3" />
+    <pluralName>ReorderQuantities</pluralName>
+    <singularName>ReorderQuantity</singularName>
+  </roleType>
+</relationType>

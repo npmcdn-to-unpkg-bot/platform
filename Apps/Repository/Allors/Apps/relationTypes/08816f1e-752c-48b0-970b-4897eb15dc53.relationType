@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="08816f1e-752c-48b0-970b-4897eb15dc53">
+  <associationType id="2b60a9e6-d5d3-458c-8454-e2341c36494b">
+    <objectType idref="c81441c8-9ac9-440e-a926-c96230b2701f" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="cd14d576-2d7d-4b64-bc5b-4adc41dd8ec2">
+    <objectType idref="ccd6f134-26de-4103-bff9-a37ec3e997a3" />
+    <pluralName>NextQuoteNumbers</pluralName>
+    <singularName>NextQuoteNumber</singularName>
+  </roleType>
+</relationType>

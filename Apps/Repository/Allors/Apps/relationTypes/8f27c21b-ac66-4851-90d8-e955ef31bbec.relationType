@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="8f27c21b-ac66-4851-90d8-e955ef31bbec">
+  <associationType id="bfa36bda-784b-4540-a7da-813d37e24c56">
+    <objectType idref="716647bf-7589-4146-a45c-a6a3b1cee507" />
+  </associationType>
+  <roleType id="fc27baa3-1bdb-44a7-9848-431fbc8ef91e">
+    <objectType idref="b5ee6cea-4e2b-498e-a5dd-24671d896477" />
+    <pluralName>PartiallyShips</pluralName>
+    <singularName>PartiallyShip</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="66e7dcf3-90bc-4ac6-988f-54015f5bef11">
+  <namespace idref="a92f6a7c-713b-432e-8d7e-bfc82d16b942" />
+  <pluralName>PackagingSlips</pluralName>
+  <singularName>PackagingSlip</singularName>
+</objectType>

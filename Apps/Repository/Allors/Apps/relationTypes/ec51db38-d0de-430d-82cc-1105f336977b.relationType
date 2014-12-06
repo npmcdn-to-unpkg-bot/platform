@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="ec51db38-d0de-430d-82cc-1105f336977b">
+  <associationType id="f1a3abd2-636b-441a-90fc-9ac4cd9d0936">
+    <objectType idref="752a68b0-836e-4cd5-92d5-ebf2bfeda491" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="237743f7-01c5-4762-b034-c43854f22157">
+    <isMany>true</isMany>
+    <objectType idref="aa3bf631-5aa5-48ab-a249-ef61f640fb72" />
+    <pluralName>EngagementItems</pluralName>
+    <singularName>EngagementItem</singularName>
+  </roleType>
+</relationType>

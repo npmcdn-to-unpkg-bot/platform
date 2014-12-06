@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="ce228118-f5b2-49bb-b0cd-7e0ca8e10315">
+  <associationType id="d90b3906-a48d-473c-85a7-baae359d58a7">
+    <isMany>true</isMany>
+    <objectType idref="d3c5a482-e17a-4e37-84eb-55a035e80f2f" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="0305f707-683e-4fcd-94a0-7c0b3a2b27e4">
+    <isMany>true</isMany>
+    <objectType idref="d3c5a482-e17a-4e37-84eb-55a035e80f2f" />
+    <pluralName>IncompatibleFeatures</pluralName>
+    <singularName>IncompatibleFeature</singularName>
+  </roleType>
+</relationType>

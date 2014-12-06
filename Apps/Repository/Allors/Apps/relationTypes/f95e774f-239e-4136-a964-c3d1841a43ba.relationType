@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="f95e774f-239e-4136-a964-c3d1841a43ba">
+  <associationType id="46b2864f-5c9b-43b9-a6b0-0bcf907adbc8">
+    <isMany>true</isMany>
+    <objectType idref="a71e670c-f089-4ec1-8295-dda8e7b62a19" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="97a9949b-6266-4fa2-a33a-3b13eaf21a93">
+    <objectType idref="1aba0c3c-2a1c-414d-86df-5a9b8c672587" />
+    <pluralName>TimeFrequencies</pluralName>
+    <singularName>TimeFrequency</singularName>
+  </roleType>
+</relationType>

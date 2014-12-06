@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="4f696f91-e185-4d3d-bf40-40e6c2b02eb4">
+  <associationType id="a19fe8f6-a3b9-4d59-b2e6-cfc19cc01a58">
+    <isMany>true</isMany>
+    <objectType idref="9426c214-c85d-491b-a5a6-9f573c3341a0" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="661f4ae9-684b-4b56-9ec6-7bf9fbfea4ab">
+    <isMany>true</isMany>
+    <objectType idref="f4b7ea51-eac4-479b-92e8-5109cfeceb77" />
+    <pluralName>CarbonCopies</pluralName>
+    <singularName>CarbonCopy</singularName>
+  </roleType>
+</relationType>

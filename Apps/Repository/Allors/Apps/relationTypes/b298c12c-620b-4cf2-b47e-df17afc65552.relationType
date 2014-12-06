@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="b298c12c-620b-4cf2-b47e-df17afc65552">
+  <associationType id="4eff42a0-dfe5-440c-a2d2-7612ece8ff11">
+    <objectType idref="a6f4eedb-b0b5-491d-bcc0-09d2bc109e86" />
+  </associationType>
+  <roleType id="92365fb1-d257-4fbd-81e4-097ef6d2405e">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>Messages</pluralName>
+    <singularName>Message</singularName>
+    <size>-1</size>
+  </roleType>
+</relationType>

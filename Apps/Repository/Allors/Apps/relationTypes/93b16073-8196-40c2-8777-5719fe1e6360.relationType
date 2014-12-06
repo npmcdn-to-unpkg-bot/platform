@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="93b16073-8196-40c2-8777-5719fe1e6360">
+  <associationType id="50a13e06-7df7-4d56-b498-5eea8415bb48">
+    <objectType idref="6b56e13b-d075-40f1-8e33-a9a4c6cadb96" />
+  </associationType>
+  <roleType id="e6b86e57-d8d2-41aa-b238-2fe027d74813">
+    <objectType idref="b5ee6cea-4e2b-498e-a5dd-24671d896477" />
+    <pluralName>Actives</pluralName>
+    <singularName>Active</singularName>
+  </roleType>
+</relationType>

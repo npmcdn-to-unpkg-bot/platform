@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="eba70b57-05e3-487f-8cf1-45f14fcdc3b9">
+  <namespace idref="bed2b711-d707-4cf6-9aee-11de07b2ba0d" />
+  <pluralName>VatForms</pluralName>
+  <singularName>VatForm</singularName>
+</objectType>

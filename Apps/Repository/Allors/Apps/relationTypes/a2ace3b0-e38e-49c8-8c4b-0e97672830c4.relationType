@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="a2ace3b0-e38e-49c8-8c4b-0e97672830c4">
+  <associationType id="e5e9e017-d642-4c03-97c0-f106aff2eff5">
+    <objectType idref="c799ca62-a554-467d-9aa2-1663293bb37f" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="55ed88ed-5634-4267-961f-c75469302637">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>Heights</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>Height</singularName>
+  </roleType>
+</relationType>

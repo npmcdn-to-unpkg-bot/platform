@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="d3446420-6d2a-4d18-a6eb-0405da9f7cc5">
+  <namespace idref="bed2b711-d707-4cf6-9aee-11de07b2ba0d" />
+  <pluralName>Journals</pluralName>
+  <singularName>Journal</singularName>
+</objectType>

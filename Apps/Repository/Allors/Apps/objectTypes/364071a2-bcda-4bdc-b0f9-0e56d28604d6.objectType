@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="364071a2-bcda-4bdc-b0f9-0e56d28604d6">
+  <namespace idref="78bc14e1-57ea-4c6e-97ae-a18880c0facd" />
+  <pluralName>FinishedGoods</pluralName>
+  <singularName>FinishedGood</singularName>
+</objectType>

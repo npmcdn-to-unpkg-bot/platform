@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="2bf859c6-de64-476f-a437-5eb57a778262">
+  <namespace idref="a92f6a7c-713b-432e-8d7e-bfc82d16b942" />
+  <pluralName>PurchaseShipments</pluralName>
+  <singularName>PurchaseShipment</singularName>
+</objectType>

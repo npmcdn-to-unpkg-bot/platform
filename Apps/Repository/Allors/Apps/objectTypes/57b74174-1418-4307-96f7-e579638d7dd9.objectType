@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="57b74174-1418-4307-96f7-e579638d7dd9">
+  <namespace idref="bed2b711-d707-4cf6-9aee-11de07b2ba0d" />
+  <pluralName>TaxDues</pluralName>
+  <singularName>TaxDue</singularName>
+</objectType>

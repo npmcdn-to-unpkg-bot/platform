@@ -1,0 +1,6 @@
+<objectType allors="1.0" id="c8df7ac5-4e6f-4add-981f-f0d9a8c14e24">
+  <isInterface>true</isInterface>
+  <namespace idref="78bc14e1-57ea-4c6e-97ae-a18880c0facd" />
+  <pluralName>EstimatedProductCosts</pluralName>
+  <singularName>EstimatedProductCost</singularName>
+</objectType>

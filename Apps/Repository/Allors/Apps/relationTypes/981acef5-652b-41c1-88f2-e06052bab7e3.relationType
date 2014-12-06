@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="981acef5-652b-41c1-88f2-e06052bab7e3">
+  <associationType id="3772d6b0-c994-4240-b8de-054b2c72b25f">
+    <objectType idref="5b294591-e20a-4bad-940a-27ae7b2f8770" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <isIndexed>true</isIndexed>
+  <roleType id="25a16b8b-3f26-4cf3-8452-c7933d54af2a">
+    <objectType idref="700360b9-56be-4e51-9610-f1e5951dd765" />
+    <pluralName>CurrentInventoryItemStatuses</pluralName>
+    <singularName>CurrentInventoryItemStatus</singularName>
+  </roleType>
+</relationType>

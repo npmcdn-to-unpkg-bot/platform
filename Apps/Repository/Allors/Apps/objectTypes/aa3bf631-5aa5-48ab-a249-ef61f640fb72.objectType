@@ -1,0 +1,6 @@
+<objectType allors="1.0" id="aa3bf631-5aa5-48ab-a249-ef61f640fb72">
+  <isInterface>true</isInterface>
+  <namespace idref="799e9780-81bd-41b6-8417-00b9c8498698" />
+  <pluralName>EngagementItems</pluralName>
+  <singularName>EngagementItem</singularName>
+</objectType>

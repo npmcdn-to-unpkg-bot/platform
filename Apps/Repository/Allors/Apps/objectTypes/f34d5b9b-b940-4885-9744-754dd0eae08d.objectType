@@ -1,0 +1,6 @@
+<objectType allors="1.0" id="f34d5b9b-b940-4885-9744-754dd0eae08d">
+  <isInterface>true</isInterface>
+  <namespace idref="bed2b711-d707-4cf6-9aee-11de07b2ba0d" />
+  <pluralName>PaymentMethods</pluralName>
+  <singularName>PaymentMethod</singularName>
+</objectType>

@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="2ba5e05c-f1ab-4143-ae7e-4db7389ff34e">
+  <namespace idref="4f0fb63b-f01d-42dd-8093-122a5a46228e" />
+  <pluralName>Buildings</pluralName>
+  <singularName>Building</singularName>
+</objectType>

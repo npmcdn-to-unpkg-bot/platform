@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="1e67320b-9680-4477-bf1b-70ccd24ab758">
+  <namespace idref="91bd1c52-d40f-4e84-9367-7cce846def6f" />
+  <pluralName>FaxCommunications</pluralName>
+  <singularName>FaxCommunication</singularName>
+</objectType>

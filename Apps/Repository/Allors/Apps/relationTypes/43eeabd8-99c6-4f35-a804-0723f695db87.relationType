@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="43eeabd8-99c6-4f35-a804-0723f695db87">
+  <associationType id="ca00444f-ae9e-4688-942c-017f46227615">
+    <objectType idref="d79f734d-4434-4710-a7ea-7d6306f3064f" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="65ffee00-11cc-44b0-8f0e-91dd4007a865">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>UnitDiscounts</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>UnitDiscount</singularName>
+  </roleType>
+</relationType>

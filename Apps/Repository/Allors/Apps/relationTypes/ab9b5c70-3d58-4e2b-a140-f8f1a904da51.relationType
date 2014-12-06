@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="ab9b5c70-3d58-4e2b-a140-f8f1a904da51">
+  <associationType id="45889e13-eba5-4648-8f89-ee161e9335c9">
+    <isMany>true</isMany>
+    <objectType idref="c799ca62-a554-467d-9aa2-1663293bb37f" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="f634cc39-2f16-4dea-958d-bcc56fbe61aa">
+    <isMany>true</isMany>
+    <objectType idref="6674e32d-c139-4c99-97c5-92354d3ccc4c" />
+    <pluralName>PersonTrainings</pluralName>
+    <singularName>PersonTraining</singularName>
+  </roleType>
+</relationType>

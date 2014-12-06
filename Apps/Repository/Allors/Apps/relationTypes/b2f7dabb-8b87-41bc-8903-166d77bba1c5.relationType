@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="b2f7dabb-8b87-41bc-8903-166d77bba1c5">
+  <associationType id="ad7dfb12-d00d-4a93-a011-7cb09c1e9aa9">
+    <objectType idref="80de925c-04cc-412c-83a5-60405b0e63e6" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="ba9a9c6c-4df0-4488-b5fa-6181e45c6f18">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>QuantitiesPendingShipment</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>QuantityPendingShipment</singularName>
+  </roleType>
+</relationType>

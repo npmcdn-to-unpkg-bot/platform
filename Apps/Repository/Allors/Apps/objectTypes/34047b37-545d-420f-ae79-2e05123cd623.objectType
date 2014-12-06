@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="34047b37-545d-420f-ae79-2e05123cd623">
+  <namespace idref="78bc14e1-57ea-4c6e-97ae-a18880c0facd" />
+  <pluralName>SoftwareFeatures</pluralName>
+  <singularName>SoftwareFeature</singularName>
+</objectType>

@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="74cd22cf-1796-4c65-85df-9c3e09883843">
+  <namespace idref="9c5baf6a-59e8-4592-92a7-7a78bddc6b1c" />
+  <pluralName>EmploymentApplicationSources</pluralName>
+  <singularName>EmploymentApplicationSource</singularName>
+</objectType>

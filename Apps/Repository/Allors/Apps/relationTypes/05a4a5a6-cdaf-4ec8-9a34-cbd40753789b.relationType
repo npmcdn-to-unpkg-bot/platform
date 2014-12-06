@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="05a4a5a6-cdaf-4ec8-9a34-cbd40753789b">
+  <associationType id="a259de23-8d18-4d51-81e3-42796a144b5b">
+    <objectType idref="c2b88d46-c321-48c4-9493-22a886d91bf9" />
+  </associationType>
+  <roleType id="b3fd264c-91a5-425b-b9a0-48eb5cc765fd">
+    <objectType idref="c4c09343-61d3-418c-ade2-fe6fd588f128" />
+    <pluralName>StartDateTimes</pluralName>
+    <singularName>StartDateTime</singularName>
+  </roleType>
+</relationType>

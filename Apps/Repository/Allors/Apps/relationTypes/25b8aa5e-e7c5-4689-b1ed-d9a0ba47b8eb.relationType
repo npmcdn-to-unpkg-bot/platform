@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="25b8aa5e-e7c5-4689-b1ed-d9a0ba47b8eb">
+  <associationType id="11649936-a5fa-488e-8d17-e80619c4d634">
+    <isMany>true</isMany>
+    <objectType idref="9426c214-c85d-491b-a5a6-9f573c3341a0" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="6219fd3b-4f38-4f8f-8a5a-783f908ef55a">
+    <objectType idref="f4b7ea51-eac4-479b-92e8-5109cfeceb77" />
+    <pluralName>Originators</pluralName>
+    <singularName>Originator</singularName>
+  </roleType>
+</relationType>

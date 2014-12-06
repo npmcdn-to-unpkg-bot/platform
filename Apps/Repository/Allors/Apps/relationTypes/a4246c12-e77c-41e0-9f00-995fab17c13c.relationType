@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="a4246c12-e77c-41e0-9f00-995fab17c13c">
+  <associationType id="eef2f215-f262-4f7e-b87b-a8229b1d5d4b">
+    <objectType idref="4a4a0548-b75f-4a79-89aa-f5c242121f11" />
+  </associationType>
+  <roleType id="f1ff8c32-0f88-49b9-83c1-b0754d65700e">
+    <objectType idref="c4c09343-61d3-418c-ade2-fe6fd588f128" />
+    <pluralName>FromDateTimes</pluralName>
+    <singularName>FromDateTime</singularName>
+  </roleType>
+</relationType>

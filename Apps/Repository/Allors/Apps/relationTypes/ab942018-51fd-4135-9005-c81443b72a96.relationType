@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="ab942018-51fd-4135-9005-c81443b72a96">
+  <associationType id="c35de10d-2f22-4be8-b1e0-6a0e8e3b0922">
+    <objectType idref="17b9c8f1-ddf2-4db0-8358-ae66a02395ce" />
+  </associationType>
+  <roleType id="a443b5af-ae94-4a8b-9c56-2bd9459d9fd8">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>Rates</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>Rate</singularName>
+  </roleType>
+</relationType>

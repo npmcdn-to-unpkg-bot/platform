@@ -1,0 +1,6 @@
+<objectType allors="1.0" id="c5578565-c07a-4dc1-8381-41955db364e2">
+  <isInterface>true</isInterface>
+  <namespace idref="799e9780-81bd-41b6-8417-00b9c8498698" />
+  <pluralName>OrderAdjustments</pluralName>
+  <singularName>OrderAdjustment</singularName>
+</objectType>

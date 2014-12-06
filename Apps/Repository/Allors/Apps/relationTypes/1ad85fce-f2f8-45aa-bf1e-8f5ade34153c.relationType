@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="1ad85fce-f2f8-45aa-bf1e-8f5ade34153c">
+  <associationType id="20dd50d2-06c8-48e8-883d-5f894c973834">
+    <isMany>true</isMany>
+    <objectType idref="3bba6e5a-dc2d-4838-b6c4-881f6c8c3013" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <isIndexed>true</isIndexed>
+  <roleType id="e3834580-66fc-4b4d-b0fa-58e19f660316">
+    <objectType idref="b033f9c9-c799-485c-a199-914a9e9119d9" />
+    <pluralName>HomeAddresses</pluralName>
+    <singularName>HomeAddress</singularName>
+  </roleType>
+</relationType>

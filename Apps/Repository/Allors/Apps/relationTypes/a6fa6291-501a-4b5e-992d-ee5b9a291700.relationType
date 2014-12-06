@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="a6fa6291-501a-4b5e-992d-ee5b9a291700">
+  <associationType id="c5cbd6e4-8a61-4e7b-9219-55170ef79f3e">
+    <objectType idref="553a5280-a768-4ba1-8b5d-304d7c4bb7f1" />
+  </associationType>
+  <roleType id="8e8c2f0e-562f-4cb8-9b3f-6a255df820a3">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>SpecialTermsPlural</pluralName>
+    <singularName>SpecialTerms</singularName>
+    <size>-1</size>
+  </roleType>
+</relationType>

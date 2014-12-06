@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="591427f6-b61c-4c19-9f82-e97570d9bead">
+  <associationType id="352996f3-ffa9-4453-a602-938c7543a7c1">
+    <isMany>true</isMany>
+    <objectType idref="8e6eaa35-85da-4c80-848c-3f1ed6cd2f8a" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="bd604c1a-3540-472a-90f5-69ed94a82f03">
+    <objectType idref="cdd79e23-a132-48b0-b88f-a03bd029f49d" />
+    <pluralName>ToFacilities</pluralName>
+    <singularName>ToFacility</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="f7b039f4-10f4-4939-8059-5f190fd13b09">
+  <namespace idref="9c5baf6a-59e8-4592-92a7-7a78bddc6b1c" />
+  <pluralName>EmploymentTerminationReasons</pluralName>
+  <singularName>EmploymentTerminationReason</singularName>
+</objectType>

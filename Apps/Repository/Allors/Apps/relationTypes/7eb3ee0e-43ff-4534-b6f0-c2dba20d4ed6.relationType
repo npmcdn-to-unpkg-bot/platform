@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="7eb3ee0e-43ff-4534-b6f0-c2dba20d4ed6">
+  <associationType id="5a2b19b5-624a-4c2d-99a8-334502a1ca5e">
+    <objectType idref="6173fc23-115f-4356-a0ce-867872c151ac" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <isIndexed>true</isIndexed>
+  <roleType id="f9e155ae-80e3-42a7-a9be-a3a76dc72545">
+    <isMany>true</isMany>
+    <objectType idref="7d3a207b-dbdd-48c4-9a92-8b12e4e77874" />
+    <pluralName>InvoiceStatuses</pluralName>
+    <singularName>InvoiceStatus</singularName>
+  </roleType>
+</relationType>

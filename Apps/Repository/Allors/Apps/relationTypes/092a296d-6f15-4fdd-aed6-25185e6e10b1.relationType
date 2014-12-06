@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="092a296d-6f15-4fdd-aed6-25185e6e10b1">
+  <associationType id="95a67913-5914-4705-b76d-6eed73704fab">
+    <isMany>true</isMany>
+    <objectType idref="553a5280-a768-4ba1-8b5d-304d7c4bb7f1" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="ff1fade9-aa0b-4058-b8e0-8d993eb841cb">
+    <isMany>true</isMany>
+    <objectType idref="553a5280-a768-4ba1-8b5d-304d7c4bb7f1" />
+    <pluralName>Precendencies</pluralName>
+    <singularName>Precendency</singularName>
+  </roleType>
+</relationType>

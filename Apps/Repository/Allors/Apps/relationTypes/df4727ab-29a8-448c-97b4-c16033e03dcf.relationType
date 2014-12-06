@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="df4727ab-29a8-448c-97b4-c16033e03dcf">
+  <associationType id="a57b1bd3-a060-41c1-91bd-ecc428dd9b55">
+    <isMany>true</isMany>
+    <objectType idref="1a174f59-c8cd-49ad-b0f4-a561cdcdcfb2" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="a554ced2-84e0-41bb-97d9-d0b04ef56679">
+    <objectType idref="fd397adf-40b4-4ef8-b449-dd5a24273df3" />
+    <pluralName>Currencies</pluralName>
+    <singularName>Currency</singularName>
+  </roleType>
+</relationType>

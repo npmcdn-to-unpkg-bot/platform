@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="98d99ee6-6dc1-4ef5-ad5c-e24bcd1dfa27">
+  <associationType id="60d2c039-b034-4e7f-a677-d65a302d9f5f">
+    <objectType idref="e3e87d40-b4f0-4953-9716-db13b35d716b" />
+  </associationType>
+  <roleType id="eeba67a7-b5c4-4783-b391-b9dd35093efb">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>ManufacturerIds</pluralName>
+    <singularName>ManufacturerId</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

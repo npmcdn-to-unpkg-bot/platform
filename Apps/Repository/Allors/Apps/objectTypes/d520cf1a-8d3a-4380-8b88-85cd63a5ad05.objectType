@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="d520cf1a-8d3a-4380-8b88-85cd63a5ad05">
+  <namespace idref="9c5baf6a-59e8-4592-92a7-7a78bddc6b1c" />
+  <pluralName>PartyBenefits</pluralName>
+  <singularName>PartyBenefit</singularName>
+</objectType>

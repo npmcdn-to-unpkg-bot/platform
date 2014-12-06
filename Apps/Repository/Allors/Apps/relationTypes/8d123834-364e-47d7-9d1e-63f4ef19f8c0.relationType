@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="8d123834-364e-47d7-9d1e-63f4ef19f8c0">
+  <associationType id="b42a9f7c-5032-44e6-97ed-ac4d1ff48445">
+    <isMany>true</isMany>
+    <objectType idref="c6c4537a-21f8-4d62-b584-3c609fb2210f" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="b3943779-7867-4d29-b562-f67aeb595512">
+    <objectType idref="c799ca62-a554-467d-9aa2-1663293bb37f" />
+    <pluralName>Designers</pluralName>
+    <singularName>Designer</singularName>
+  </roleType>
+</relationType>

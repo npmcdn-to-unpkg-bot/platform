@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="f26e4376-4e3f-4d7d-8814-54d19c977a76">
+  <associationType id="7da35b67-dbf4-46ce-9f53-d6af8b4e208d">
+    <isMany>true</isMany>
+    <objectType idref="56b79619-d04a-4924-96e8-e3e7be9faa09" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="2c8e75e5-e030-4108-b528-c16aaeea40b8">
+    <objectType idref="a5e29ca1-80de-4de4-9085-b69f21550b5a" />
+    <pluralName>VatRates</pluralName>
+    <singularName>VatRate</singularName>
+  </roleType>
+</relationType>

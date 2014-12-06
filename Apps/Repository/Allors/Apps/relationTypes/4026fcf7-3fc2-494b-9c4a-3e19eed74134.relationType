@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="4026fcf7-3fc2-494b-9c4a-3e19eed74134">
+  <associationType id="f2febf7f-7917-4499-8546-cae1e53d6791">
+    <isMany>true</isMany>
+    <objectType idref="9426c214-c85d-491b-a5a6-9f573c3341a0" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="50439b5a-2251-469c-8512-f9dc65b0d9f6">
+    <isMany>true</isMany>
+    <objectType idref="f4b7ea51-eac4-479b-92e8-5109cfeceb77" />
+    <pluralName>Addressees</pluralName>
+    <singularName>Addressee</singularName>
+  </roleType>
+</relationType>

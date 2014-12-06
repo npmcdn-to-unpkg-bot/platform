@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="f97e6fa7-3c30-4ab1-9b9b-d2c9ad257009">
+  <associationType id="d57e1d69-6f84-4601-8ae8-0807d6bf4d5c">
+    <objectType idref="d54b4bba-a84c-4826-85ba-7340714035c7" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="26ca4fa5-70e5-4f38-a731-ca3a34f24a91">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>FormattedFullAddresses</pluralName>
+    <singularName>FormattedFullAddress</singularName>
+    <size>-1</size>
+  </roleType>
+</relationType>

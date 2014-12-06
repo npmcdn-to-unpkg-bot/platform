@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="19dc0809-46cb-4c37-923c-6bc29a357ba8">
+  <associationType id="bb864baf-b34d-48ab-87e4-e26d82cd4149">
+    <objectType idref="716647bf-7589-4146-a45c-a6a3b1cee507" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <isIndexed>true</isIndexed>
+  <roleType id="2bc32ce8-1202-4091-934a-c89ef338a5fe">
+    <objectType idref="347ee1c4-5275-4ea7-a349-6bab2de45aff" />
+    <pluralName>CurrentShipmentStatuses</pluralName>
+    <singularName>CurrentShipmentStatus</singularName>
+  </roleType>
+</relationType>

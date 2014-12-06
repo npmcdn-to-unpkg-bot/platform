@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="1a0e396b-69bd-4e77-a602-3d7f7938fd74">
+  <namespace idref="bed2b711-d707-4cf6-9aee-11de07b2ba0d" />
+  <pluralName>GeneralLedgerAccounts</pluralName>
+  <singularName>GeneralLedgerAccount</singularName>
+</objectType>

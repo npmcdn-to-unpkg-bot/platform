@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="6d20ad83-150b-44d7-940c-725554175ba9">
+  <associationType id="8d3c682c-a6fa-4ff9-9734-1a0fb21342fe">
+    <objectType idref="aa5898e6-71d0-4dcb-9bbd-35ae5cb0e0ef" />
+  </associationType>
+  <roleType id="88caf998-c922-437c-84a2-fa9370c6fb28">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>ThroughAmounts</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>ThroughAmount</singularName>
+  </roleType>
+</relationType>

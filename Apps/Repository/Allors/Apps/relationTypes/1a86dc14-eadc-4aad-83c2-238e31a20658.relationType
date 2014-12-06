@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="1a86dc14-eadc-4aad-83c2-238e31a20658">
+  <associationType id="f8d3058b-3e81-4da8-a29f-52dd267e1733">
+    <objectType idref="d50ffc20-9e2d-4362-8e3f-b54d7368d487" />
+  </associationType>
+  <roleType id="ae0eba55-6aaf-4ed4-a784-006f5bf95f49">
+    <objectType idref="b5ee6cea-4e2b-498e-a5dd-24671d896477" />
+    <pluralName>ArePublished</pluralName>
+    <singularName>IsPublished</singularName>
+  </roleType>
+</relationType>

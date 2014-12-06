@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="1468c86a-4ac4-4c64-a93b-1b0c5f4b41bc">
+  <namespace idref="91bd1c52-d40f-4e84-9367-7cce846def6f" />
+  <pluralName>TermTypes</pluralName>
+  <singularName>TermType</singularName>
+</objectType>

@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="b628964e-5139-4c32-a2c1-239deaff70e8">
+  <associationType id="229bebd5-4899-4f7d-bebd-266ee211f72a">
+    <isMany>true</isMany>
+    <objectType idref="a5e29ca1-80de-4de4-9085-b69f21550b5a" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="c51def22-77d1-4dc5-bc3e-b55095ae5af1">
+    <objectType idref="acbe7b46-bcfe-4e8b-b8a7-7b9eeac4d6e2" />
+    <pluralName>EuSalesListTypes</pluralName>
+    <singularName>EuSalesListType</singularName>
+  </roleType>
+</relationType>

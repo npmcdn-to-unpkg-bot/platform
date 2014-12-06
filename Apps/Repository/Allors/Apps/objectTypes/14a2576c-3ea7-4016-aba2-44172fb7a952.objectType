@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="14a2576c-3ea7-4016-aba2-44172fb7a952">
+  <namespace idref="91bd1c52-d40f-4e84-9367-7cce846def6f" />
+  <pluralName>LegalTerms</pluralName>
+  <singularName>LegalTerm</singularName>
+</objectType>

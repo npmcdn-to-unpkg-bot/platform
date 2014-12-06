@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="a271f7d4-cda1-4ae9-94e4-dda482bd8cd5">
+  <associationType id="68f757fc-3cf5-4dae-b6ba-e2cb08033381">
+    <objectType idref="f3ef0124-e867-4da2-9323-80fbe1f214c2" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="b856b6e9-93e8-47ac-8070-3bb8c0ff29d7">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>TotaIIncVats</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>TotalIncVat</singularName>
+  </roleType>
+</relationType>

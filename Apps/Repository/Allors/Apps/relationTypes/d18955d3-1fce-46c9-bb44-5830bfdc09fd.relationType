@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="d18955d3-1fce-46c9-bb44-5830bfdc09fd">
+  <associationType id="078d9017-3d7a-4ba5-9c9b-58f778893a15">
+    <isMany>true</isMany>
+    <objectType idref="c6c4537a-21f8-4d62-b584-3c609fb2210f" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="11d5ba0d-8c70-40a3-873d-ab27e1b8e4bf">
+    <objectType idref="c799ca62-a554-467d-9aa2-1663293bb37f" />
+    <pluralName>Testers</pluralName>
+    <singularName>Tester</singularName>
+  </roleType>
+</relationType>

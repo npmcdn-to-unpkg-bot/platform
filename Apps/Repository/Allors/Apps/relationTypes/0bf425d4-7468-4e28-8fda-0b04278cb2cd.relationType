@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="0bf425d4-7468-4e28-8fda-0b04278cb2cd">
+  <associationType id="2c6841c6-c161-48e0-a257-d932d99ae7b4">
+    <isMany>true</isMany>
+    <objectType idref="f67e7755-5848-4601-ba70-4d1a39abfe4b" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="1afed0f6-15fa-4fd2-91f5-648773933e3b">
+    <objectType idref="553a5280-a768-4ba1-8b5d-304d7c4bb7f1" />
+    <pluralName>Assignments</pluralName>
+    <singularName>Assignment</singularName>
+  </roleType>
+</relationType>

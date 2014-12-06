@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="73ecd49f-9614-4902-8ec6-9b503bffe9f2">
+  <associationType id="7ee32e78-a214-4e4a-bb43-d2f6642e997a">
+    <objectType idref="01fc58a0-89b8-4dc0-97f9-5f628b9c9577" />
+  </associationType>
+  <roleType id="e64fb7aa-75de-41a6-a76c-f25f22dfcf47">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>UnitPrices</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>UnitPrice</singularName>
+  </roleType>
+</relationType>

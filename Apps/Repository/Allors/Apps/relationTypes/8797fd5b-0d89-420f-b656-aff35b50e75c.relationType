@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="8797fd5b-0d89-420f-b656-aff35b50e75c">
+  <associationType id="42e2cb18-3596-443c-876c-3e557189ef2a">
+    <isMany>true</isMany>
+    <objectType idref="1e67320b-9680-4477-bf1b-70ccd24ab758" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="7c820d65-87d3-4be3-be2e-8fa6a8b13a97">
+    <objectType idref="6c255f71-ce18-4d51-b0d9-e402ec0e570e" />
+    <pluralName>OutgoingFaxNumbers</pluralName>
+    <singularName>OutgoingFaxNumber</singularName>
+  </roleType>
+</relationType>

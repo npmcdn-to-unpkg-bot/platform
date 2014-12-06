@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="63c9ceb1-d583-41e1-a9a9-0c2576e9adfc">
+  <associationType id="fd1ac2ff-6869-44bd-9b4e-05a3b14fbad9">
+    <isMany>true</isMany>
+    <objectType idref="c81441c8-9ac9-440e-a926-c96230b2701f" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="41058049-5c44-47b7-bbb9-34ab0bdcfbcb">
+    <objectType idref="52ee223f-14e7-46e7-8e24-c6fdf19fa5d1" />
+    <pluralName>CostOfGoodsSoldMethods</pluralName>
+    <singularName>CostOfGoodsSoldMethod</singularName>
+  </roleType>
+</relationType>

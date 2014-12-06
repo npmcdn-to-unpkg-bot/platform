@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="646382fa-3794-46be-81a0-28a1609e65b0">
+  <associationType id="0bb2b710-90c3-42c9-8eb4-5bffb06cb705">
+    <isMany>true</isMany>
+    <objectType idref="96fe3000-606e-4f88-ba04-87544ef176ca" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="0ec8beac-06c9-4f7f-a39b-fb9d7bfcae0f">
+    <objectType idref="9371d5fc-748a-4ce4-95eb-6b21aa0ca841" />
+    <pluralName>Packages</pluralName>
+    <singularName>Package</singularName>
+  </roleType>
+</relationType>

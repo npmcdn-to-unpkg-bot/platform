@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="02ef1727-e135-4af3-9d76-02bad7b122f3">
+  <associationType id="c4fd1dd3-ddef-4f2c-bc22-388d3f979798">
+    <objectType idref="8e6eaa35-85da-4c80-848c-3f1ed6cd2f8a" />
+  </associationType>
+  <roleType id="1c1e24d0-5635-4d17-bd8b-5e0513b7f024">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>EndKilometers</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>EndKilometers</singularName>
+  </roleType>
+</relationType>

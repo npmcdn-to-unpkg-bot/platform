@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="ff1ebc03-de68-4b52-944f-7cc10f79539b">
+  <associationType id="a23f63e7-1870-44a6-b62c-87834f542d55">
+    <isMany>true</isMany>
+    <objectType idref="56b79619-d04a-4924-96e8-e3e7be9faa09" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="e5a720c4-8d70-4583-9547-04f676f1b35f">
+    <objectType idref="c81441c8-9ac9-440e-a926-c96230b2701f" />
+    <pluralName>SoldBys</pluralName>
+    <singularName>SoldBy</singularName>
+  </roleType>
+</relationType>

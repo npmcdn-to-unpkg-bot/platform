@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="92a85a6b-4f65-4ba4-bd5e-bf44d5a9ca56">
+  <associationType id="e7e7fef5-a973-42b7-8c96-5ede712a353c">
+    <isMany>true</isMany>
+    <objectType idref="f135770b-7228-4e4b-b7ea-9307b6317fd2" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="6beb2ac6-0319-4524-80a2-54393ba77e69">
+    <objectType idref="61af6d19-e8e4-4b5b-97e8-3610fbc82605" />
+    <pluralName>InventoryItems</pluralName>
+    <singularName>InventoryItem</singularName>
+  </roleType>
+</relationType>

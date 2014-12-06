@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="1f5b8db1-58bd-4006-8878-f1609055149c">
+  <associationType id="f63d8052-8f2f-47b5-a5f8-585b0b2587ae">
+    <isMany>true</isMany>
+    <objectType idref="622c8a98-ec26-4f05-9a09-a9032a41e586" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="444ada74-4d76-4c78-a7c8-dc2c448dd7eb">
+    <objectType idref="6c485526-bf9e-42e0-b47e-84552a72589a" />
+    <pluralName>PurchaseInvoiceObjectStates</pluralName>
+    <singularName>PurchaseInvoiceObjectState</singularName>
+  </roleType>
+</relationType>

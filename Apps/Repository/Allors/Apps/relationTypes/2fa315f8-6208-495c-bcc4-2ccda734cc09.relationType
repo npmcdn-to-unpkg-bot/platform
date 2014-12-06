@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="2fa315f8-6208-495c-bcc4-2ccda734cc09">
+  <associationType id="6b5d29f8-7016-4cdb-9af9-8320b1c7304d">
+    <objectType idref="b05371ff-0c9e-4ee3-b31d-e2edeed8649e" />
+  </associationType>
+  <roleType id="8e7c8bab-063d-4f77-99ae-6e7979b63ce4">
+    <objectType idref="c402fbda-133a-4b59-858a-832fbd2ec565" />
+    <pluralName>InitialScheduledStartDates</pluralName>
+    <singularName>InitialScheduledStartDate</singularName>
+  </roleType>
+</relationType>

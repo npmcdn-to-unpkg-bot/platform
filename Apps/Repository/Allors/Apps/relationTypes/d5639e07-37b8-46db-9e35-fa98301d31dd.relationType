@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="d5639e07-37b8-46db-9e35-fa98301d31dd">
+  <associationType id="43ee44b6-2e51-4ade-8bb7-9b10a780ba2e">
+    <objectType idref="80de925c-04cc-412c-83a5-60405b0e63e6" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="38e21291-b24a-4331-b781-f7950df3f501">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>InitialMarkupPercentages</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>InitialMarkupPercentage</singularName>
+  </roleType>
+</relationType>

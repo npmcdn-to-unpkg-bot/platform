@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="afd7e182-d201-4eee-803c-9fb4dff0feed">
+  <associationType id="5b2b0551-afcb-4cc3-863e-ba351492da45">
+    <objectType idref="444e431b-f078-46e0-9c8e-694e15e807c7" />
+  </associationType>
+  <roleType id="d00256d2-fbc8-4935-bfe9-0b0843622936">
+    <objectType idref="c402fbda-133a-4b59-858a-832fbd2ec565" />
+    <pluralName>CreationDates</pluralName>
+    <singularName>CreationDate</singularName>
+  </roleType>
+</relationType>

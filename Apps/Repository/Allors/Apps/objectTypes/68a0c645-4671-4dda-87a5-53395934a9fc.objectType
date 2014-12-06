@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="68a0c645-4671-4dda-87a5-53395934a9fc">
+  <namespace idref="78bc14e1-57ea-4c6e-97ae-a18880c0facd" />
+  <pluralName>ManufacturingBoms</pluralName>
+  <singularName>ManufacturingBom</singularName>
+</objectType>

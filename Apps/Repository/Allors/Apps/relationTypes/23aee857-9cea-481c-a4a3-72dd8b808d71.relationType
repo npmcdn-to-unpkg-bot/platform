@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="23aee857-9cea-481c-a4a3-72dd8b808d71">
+  <associationType id="61c64e66-4647-439d-9efa-28500319e8ca">
+    <isMany>true</isMany>
+    <objectType idref="c81441c8-9ac9-440e-a926-c96230b2701f" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="4d68b2fe-d5b4-45f8-9e68-377d75f3401d">
+    <objectType idref="3b8e751c-6778-44cb-93a0-d35b86b724e0" />
+    <pluralName>InvoiceSequences</pluralName>
+    <singularName>InvoiceSequence</singularName>
+  </roleType>
+</relationType>

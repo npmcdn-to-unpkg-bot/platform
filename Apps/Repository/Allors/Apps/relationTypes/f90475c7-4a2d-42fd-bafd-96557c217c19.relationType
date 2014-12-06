@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="f90475c7-4a2d-42fd-bafd-96557c217c19">
+  <associationType id="5566f06a-feb0-45f0-9a84-673b758b6af9">
+    <objectType idref="27b45d45-459a-43cb-87b0-f8842ec56445" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="29bda327-86c2-4fa4-af63-8e870cc736b5">
+    <isMany>true</isMany>
+    <objectType idref="5500cb42-1aae-4816-9bc1-d63ff273f144" />
+    <pluralName>FinancialAccountTransactions</pluralName>
+    <singularName>FinancialAccountTransaction</singularName>
+  </roleType>
+</relationType>

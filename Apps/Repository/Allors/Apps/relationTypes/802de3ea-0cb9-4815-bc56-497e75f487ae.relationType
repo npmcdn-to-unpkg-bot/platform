@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="802de3ea-0cb9-4815-bc56-497e75f487ae">
+  <associationType id="75568752-3a42-412f-bf76-be6705bd441c">
+    <objectType idref="92f48c0c-31d9-4ed5-8f92-753de6af471a" />
+  </associationType>
+  <roleType id="fc4e22ba-ad4d-4f6e-b65f-d0aef6ff47ee">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>AccountNumbers</pluralName>
+    <singularName>AccountNumber</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

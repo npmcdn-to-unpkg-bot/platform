@@ -1,0 +1,6 @@
+<objectType allors="1.0" id="9ec6dae1-439e-4b19-b4dc-885e1ed943d7">
+  <isInterface>true</isInterface>
+  <namespace idref="78bc14e1-57ea-4c6e-97ae-a18880c0facd" />
+  <pluralName>Containers</pluralName>
+  <singularName>Container</singularName>
+</objectType>

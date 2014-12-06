@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="28f34f5d-c98c-45f8-9534-ce9191587ac8">
+  <associationType id="7c676669-52b3-4665-8212-e2e14dde5cf9">
+    <objectType idref="56b79619-d04a-4924-96e8-e3e7be9faa09" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <isIndexed>true</isIndexed>
+  <roleType id="5931ff6f-0972-4e9b-9dc3-dd072ed935a3">
+    <isMany>true</isMany>
+    <objectType idref="383589fb-f410-4d22-ade6-aa5126fdef18" />
+    <pluralName>VirtualProductPriceComponents</pluralName>
+    <singularName>VirtualProductPriceComponent</singularName>
+  </roleType>
+</relationType>

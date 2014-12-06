@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="e2017090-fa3f-420e-a5c5-6a2f5aaacd2f">
+  <associationType id="84c30383-6d26-4abe-92a3-d750e41d2561">
+    <isMany>true</isMany>
+    <objectType idref="3bba6e5a-dc2d-4838-b6c4-881f6c8c3013" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <isIndexed>true</isIndexed>
+  <roleType id="51170ba2-d717-41dc-9d6b-18967c37e751">
+    <objectType idref="6c255f71-ce18-4d51-b0d9-e402ec0e570e" />
+    <pluralName>GeneralPhoneNumbers</pluralName>
+    <singularName>GeneralPhoneNumber</singularName>
+  </roleType>
+</relationType>

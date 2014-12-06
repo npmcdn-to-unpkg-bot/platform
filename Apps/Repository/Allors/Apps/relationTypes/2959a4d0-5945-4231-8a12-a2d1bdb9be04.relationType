@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="2959a4d0-5945-4231-8a12-a2d1bdb9be04">
+  <associationType id="d48f3a6f-915f-42fe-a508-8cddc3cf3fbc">
+    <objectType idref="5b294591-e20a-4bad-940a-27ae7b2f8770" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="bd3e6dd7-c339-4ac4-bdce-31526ed7fa1a">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>QuantitiesCommittedOut</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>QuantityCommittedOut</singularName>
+  </roleType>
+</relationType>

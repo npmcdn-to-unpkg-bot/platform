@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="5906f4cd-3950-43ee-a3ba-84124c4180f6">
+  <namespace idref="78bc14e1-57ea-4c6e-97ae-a18880c0facd" />
+  <pluralName>PartBillOfMaterialSubstitutes</pluralName>
+  <singularName>PartBillOfMaterialSubstitute</singularName>
+</objectType>

@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="db94dd2c-5f39-4f64-ad6d-ce80bf7a4c22">
+  <associationType id="1e391ccb-da94-4b69-8dc7-b0659eaaf201">
+    <isMany>true</isMany>
+    <objectType idref="04540476-602f-456a-b300-54166b65c8b1" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="c3123ffe-f6d2-4d46-87be-77e184ec8adb">
+    <objectType idref="4250a005-4fec-4118-a5b4-725886c59269" />
+    <pluralName>PositionStatuses</pluralName>
+    <singularName>PositionStatus</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="6ee43a8c-8f42-491d-a0ab-3ea5d4352dc8">
+  <associationType id="9a6c58ab-5119-47f6-974d-fa01fbb3d320">
+    <isMany>true</isMany>
+    <objectType idref="fd411b2a-0121-4f1f-b1db-86c187e8a089" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="4d85870c-75ec-4153-894a-30a6cb253060">
+    <objectType idref="c81441c8-9ac9-440e-a926-c96230b2701f" />
+    <pluralName>InternalOrganisations</pluralName>
+    <singularName>InternalOrganisation</singularName>
+  </roleType>
+</relationType>

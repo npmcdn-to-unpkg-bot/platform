@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="1fb8d537-a870-4793-95a1-7742749e16fc">
+  <namespace idref="78bc14e1-57ea-4c6e-97ae-a18880c0facd" />
+  <pluralName>ProductDrawings</pluralName>
+  <singularName>ProductDrawing</singularName>
+</objectType>

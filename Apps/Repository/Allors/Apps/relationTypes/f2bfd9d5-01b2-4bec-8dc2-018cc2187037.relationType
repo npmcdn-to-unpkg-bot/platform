@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="f2bfd9d5-01b2-4bec-8dc2-018cc2187037">
+  <associationType id="cf282301-2e6c-43ed-8447-cc09edcb9810">
+    <isMany>true</isMany>
+    <objectType idref="1a174f59-c8cd-49ad-b0f4-a561cdcdcfb2" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="a3ee85b7-be6a-4e2b-a15d-57872bb57783">
+    <objectType idref="3453c2e1-77a4-4fe8-b663-02bac689883a" />
+    <pluralName>GeographicBoundaries</pluralName>
+    <singularName>GeographicBoundary</singularName>
+  </roleType>
+</relationType>

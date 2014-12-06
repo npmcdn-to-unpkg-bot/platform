@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="12ba6843-bae1-41d1-9ef2-c19d74b0a365">
+  <namespace idref="83d90516-d523-40b7-8edb-9bda4ee2cd52" />
+  <pluralName>FinancialAccountAdjustments</pluralName>
+  <singularName>FinancialAccountAdjustment</singularName>
+</objectType>

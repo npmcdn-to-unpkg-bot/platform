@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="339a58af-4939-4eee-8028-0fd18119ec34">
+  <namespace idref="a7c2d9a4-951f-4268-a433-b6d0bdec9366" />
+  <pluralName>Activities</pluralName>
+  <singularName>Activity</singularName>
+</objectType>

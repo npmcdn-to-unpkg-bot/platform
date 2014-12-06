@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="bce0d7d9-cfc9-4092-99a1-93ff5c0b94dd">
+  <associationType id="5c4cfec8-5bc0-48d2-ac92-132c0538e614">
+    <isMany>true</isMany>
+    <objectType idref="c81441c8-9ac9-440e-a926-c96230b2701f" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <isIndexed>true</isIndexed>
+  <roleType id="bece103b-dde6-4319-938b-e08d23d9f99e">
+    <objectType idref="fd397adf-40b4-4ef8-b449-dd5a24273df3" />
+    <pluralName>PreviousCurrencies</pluralName>
+    <singularName>PreviousCurrency</singularName>
+  </roleType>
+</relationType>

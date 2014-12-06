@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="1da8c258-fb73-4cce-88f3-3c39d21a7996">
+  <associationType id="191fa580-ad8b-4151-90e1-58c4c512ab68">
+    <isMany>true</isMany>
+    <objectType idref="383589fb-f410-4d22-ade6-aa5126fdef18" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="c3519e5a-981d-453f-ab7b-edf9f29556cc">
+    <objectType idref="32f8ea23-5ef9-4d2c-86d9-b6f67529c05d" />
+    <pluralName>RevenueValueBreaks</pluralName>
+    <singularName>RevenueValueBreak</singularName>
+  </roleType>
+</relationType>

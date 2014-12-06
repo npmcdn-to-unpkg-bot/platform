@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="591d3237-220b-4765-8001-4bc18ecd2d8c">
+  <associationType id="2a2704d6-44f6-4e86-a8c9-407842b7eb83">
+    <isMany>true</isMany>
+    <objectType idref="f13976d4-b1f4-4b78-a720-beab1e0a7e4c" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="fd56e773-b27b-4336-b1be-e262d1d26b41">
+    <objectType idref="f2d5bb8b-b50f-45e5-accb-c752a4445ad2" />
+    <pluralName>CustomerShipmentObjectStates</pluralName>
+    <singularName>CustomerShipmentObjectState</singularName>
+  </roleType>
+</relationType>

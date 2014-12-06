@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="a5273118-61c9-43de-9754-22555332cc27">
+  <associationType id="3de9b9ee-a96c-43b7-984a-86f6d0d20a52">
+    <objectType idref="5906f4cd-3950-43ee-a3ba-84124c4180f6" />
+  </associationType>
+  <roleType id="0aff8adf-0487-4beb-b5f9-2062fa37ec9f">
+    <objectType idref="ccd6f134-26de-4103-bff9-a37ec3e997a3" />
+    <pluralName>Quantities</pluralName>
+    <singularName>Quantity</singularName>
+  </roleType>
+</relationType>

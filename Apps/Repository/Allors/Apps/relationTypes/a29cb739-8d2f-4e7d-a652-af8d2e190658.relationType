@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="a29cb739-8d2f-4e7d-a652-af8d2e190658">
+  <associationType id="5f295cc2-a884-427b-8fb3-056af4f58b7b">
+    <objectType idref="785a36a9-4710-4f3f-bd26-dbaff5353535" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="d6cc2527-7a3f-4bac-bf4b-991f484c51a7">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>DerivedTotalAmounts</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>DerivedTotalAmount</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="496f6d33-2259-442e-924f-636d73cec52f">
+  <associationType id="4ac05596-41d8-402a-8308-d9f458d604e0">
+    <isMany>true</isMany>
+    <objectType idref="c81441c8-9ac9-440e-a926-c96230b2701f" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="0739dac1-6507-4306-95c9-78f10532a78e">
+    <objectType idref="528cf616-6c67-42e1-af69-b5e6cb1192ea" />
+    <pluralName>LegalForms</pluralName>
+    <singularName>LegalForm</singularName>
+  </roleType>
+</relationType>

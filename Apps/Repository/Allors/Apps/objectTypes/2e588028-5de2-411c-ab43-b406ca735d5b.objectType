@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="2e588028-5de2-411c-ab43-b406ca735d5b">
+  <namespace idref="bed2b711-d707-4cf6-9aee-11de07b2ba0d" />
+  <pluralName>PaymentBudgetAllocations</pluralName>
+  <singularName>PaymentBudgetAllocation</singularName>
+</objectType>

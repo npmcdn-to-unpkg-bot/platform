@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="2ddce7b3-c763-45ea-8e1b-5ef8a0ea8e4a">
+  <associationType id="d27ed7da-6a94-40ee-b790-8754282a2a1b">
+    <objectType idref="4deca253-7135-4ceb-b984-6adaf1515630" />
+  </associationType>
+  <roleType id="f199641e-5574-4733-b4e9-42f6ccb713a8">
+    <objectType idref="c402fbda-133a-4b59-858a-832fbd2ec565" />
+    <pluralName>AgreementDates</pluralName>
+    <singularName>AgreementDate</singularName>
+  </roleType>
+</relationType>

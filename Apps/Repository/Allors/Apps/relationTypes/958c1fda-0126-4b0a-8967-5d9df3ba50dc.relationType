@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="958c1fda-0126-4b0a-8967-5d9df3ba50dc">
+  <associationType id="edcb9612-a4d4-4ddc-971c-48b7dfa6b03c">
+    <isMany>true</isMany>
+    <objectType idref="a5e29ca1-80de-4de4-9085-b69f21550b5a" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="9e77b9ad-9031-4766-a2f3-33c875395a79">
+    <objectType idref="1aba0c3c-2a1c-414d-86df-5a9b8c672587" />
+    <pluralName>PaymentFrequencies</pluralName>
+    <singularName>PaymentFrequency</singularName>
+  </roleType>
+</relationType>

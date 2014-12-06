@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="821df580-26d4-415c-b2ea-3e96a08c2f62">
+  <associationType id="5678eef7-6892-4c47-900d-85b5c5c08940">
+    <isMany>true</isMany>
+    <objectType idref="a5e29ca1-80de-4de4-9085-b69f21550b5a" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="bb7c23b8-0a01-4afa-91a6-7816bbaa803c">
+    <objectType idref="c758f77e-e3b3-4517-831a-af1bf0e1dceb" />
+    <pluralName>VatRatePurchaseKinds</pluralName>
+    <singularName>VatRatePurchaseKind</singularName>
+  </roleType>
+</relationType>

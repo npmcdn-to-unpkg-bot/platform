@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="3a4e3614-cb04-4014-826b-78a2b87e6a1f">
+  <associationType id="0548e8ad-5ba7-462a-b3ef-6be2014bad65">
+    <isMany>true</isMany>
+    <objectType idref="ac18c87b-683c-4529-9171-d23e73c583d4" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="26ee13eb-79f5-46a1-8749-485f43a3ee8c">
+    <objectType idref="096448e3-991d-481e-b323-39064387141c" />
+    <pluralName>RateTypes</pluralName>
+    <singularName>RateType</singularName>
+  </roleType>
+</relationType>

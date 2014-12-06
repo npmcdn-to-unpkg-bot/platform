@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="1147413e-9b57-45b3-a15c-44923e83001a">
+  <associationType id="fba37a60-bd3c-4218-a0b8-64d3f60a7057">
+    <objectType idref="6fef08f0-d4cb-42f4-a10f-fb31787f65c3" />
+  </associationType>
+  <roleType id="23382708-15b9-4d96-8c87-599c80fd2f74">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>AmountsApplied</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>AmountApplied</singularName>
+  </roleType>
+</relationType>

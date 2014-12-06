@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="273e69b7-6cda-44d4-b1d6-605b32a6a70d">
+  <namespace idref="78bc14e1-57ea-4c6e-97ae-a18880c0facd" />
+  <pluralName>Models</pluralName>
+  <singularName>Model</singularName>
+</objectType>

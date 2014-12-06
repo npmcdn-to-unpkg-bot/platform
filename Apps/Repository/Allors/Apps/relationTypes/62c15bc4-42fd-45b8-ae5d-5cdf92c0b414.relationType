@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="62c15bc4-42fd-45b8-ae5d-5cdf92c0b414">
+  <associationType id="920ffcd4-6085-4d22-8d81-caf2dde21e70">
+    <objectType idref="a3a5aeea-3c8b-43ab-94f1-49a1bd2d7254" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="33b6e056-e1e2-4173-97db-485593bf9e36">
+    <objectType idref="d152e0a4-c76f-4945-8c0f-ad1e5f70ad07" />
+    <pluralName>Disbursements</pluralName>
+    <singularName>Disbursement</singularName>
+  </roleType>
+</relationType>

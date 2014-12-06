@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="4396be4d-edb4-405d-a39a-ee6ff5c39ca5">
+  <associationType id="9cbcaf98-22d1-41ed-b7d4-88a32e41de5f">
+    <objectType idref="d12719f0-2c0e-4a9d-869b-4a209fc35a56" />
+  </associationType>
+  <roleType id="61c422a4-cfb0-4e7a-b8ee-29ecf92589ee">
+    <objectType idref="c402fbda-133a-4b59-858a-832fbd2ec565" />
+    <pluralName>ReviewDates</pluralName>
+    <singularName>ReviewDate</singularName>
+  </roleType>
+</relationType>

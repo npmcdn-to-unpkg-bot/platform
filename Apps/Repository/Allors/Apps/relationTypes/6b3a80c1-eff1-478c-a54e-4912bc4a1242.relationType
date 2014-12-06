@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="6b3a80c1-eff1-478c-a54e-4912bc4a1242">
+  <associationType id="c8f87804-9940-491d-a6aa-3b4dd888a016">
+    <objectType idref="ebae3ca2-5dca-486d-bbc0-30550313f153" />
+  </associationType>
+  <roleType id="d187ff95-ee86-4d13-90b2-64adebc19be7">
+    <objectType idref="b5ee6cea-4e2b-498e-a5dd-24671d896477" />
+    <pluralName>DeletedPlural</pluralName>
+    <singularName>Deleted</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="776839ee-f6cb-4334-a017-4ffdfddd152a">
+  <associationType id="db3c9fba-5ca8-4296-b1a2-d306ad42dbcc">
+    <objectType idref="7d2d9452-f250-47c3-81e0-4e1c0655cc86" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="764e51c4-8a6f-403d-849a-1bf3a1a64911">
+    <isMany>true</isMany>
+    <objectType idref="81ddff76-9b82-4309-9c9f-f7f9dbd2db21" />
+    <pluralName>WorkEffortGoodStandards</pluralName>
+    <singularName>WorkEffortGoodStandard</singularName>
+  </roleType>
+</relationType>

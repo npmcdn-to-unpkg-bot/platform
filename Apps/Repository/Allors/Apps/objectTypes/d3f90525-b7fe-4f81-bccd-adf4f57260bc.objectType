@@ -1,0 +1,6 @@
+<objectType allors="1.0" id="d3f90525-b7fe-4f81-bccd-adf4f57260bc">
+  <isAbstract>true</isAbstract>
+  <namespace idref="799e9780-81bd-41b6-8417-00b9c8498698" />
+  <pluralName>Requirements</pluralName>
+  <singularName>Requirement</singularName>
+</objectType>

@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="2dfb4cd7-ed48-4b79-ba26-b430058356ef">
+  <associationType id="b935b150-4172-46fb-ab1a-b7197ea71f18">
+    <isMany>true</isMany>
+    <objectType idref="d0f9fc0d-a3c5-46cc-ab00-4c724995fc14" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="e6f4591e-ee9a-4fe8-b908-ee4e18084aa8">
+    <objectType idref="d54b4bba-a84c-4826-85ba-7340714035c7" />
+    <pluralName>Location</pluralName>
+    <singularName>Location</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="f05fc608-5dcd-4d7d-b472-5b84c2a195a4">
+  <associationType id="c00233a0-c9a2-4c01-88fc-9ea5eb7fd564">
+    <objectType idref="c78a49b1-9918-4f15-95f3-c537c82f59fd" />
+  </associationType>
+  <roleType id="c39a94b3-455b-4602-8d55-abb2fca560ed">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>SubjectTemplates</pluralName>
+    <singularName>SubjectTemplate</singularName>
+    <size>-1</size>
+  </roleType>
+</relationType>

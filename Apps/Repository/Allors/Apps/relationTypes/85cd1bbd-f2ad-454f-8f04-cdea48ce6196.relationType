@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="85cd1bbd-f2ad-454f-8f04-cdea48ce6196">
+  <associationType id="c28f6487-83a7-49b3-911d-21f691ae7d02">
+    <objectType idref="734be1c9-e6af-49b7-8fe8-331cd7036e2e" />
+  </associationType>
+  <roleType id="7eb5e9b4-834f-4774-ac40-11bd455a6ea8">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>TermValues</pluralName>
+    <singularName>TermValue</singularName>
+    <size>-1</size>
+  </roleType>
+</relationType>

@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="d1d8f99e-430d-4104-a2db-777a0f6292e3">
+  <namespace idref="a7c2d9a4-951f-4268-a433-b6d0bdec9366" />
+  <pluralName>Researches</pluralName>
+  <singularName>Research</singularName>
+</objectType>

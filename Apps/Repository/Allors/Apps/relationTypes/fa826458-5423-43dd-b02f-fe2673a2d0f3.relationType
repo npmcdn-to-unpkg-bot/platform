@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="fa826458-5423-43dd-b02f-fe2673a2d0f3">
+  <associationType id="ac559656-d5c1-4325-a267-9775136a25af">
+    <objectType idref="a6f4eedb-b0b5-491d-bcc0-09d2bc109e86" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="837d36ee-f23f-45bc-87a9-9760d08f29c4">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>TotalsFee</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>TotalFee</singularName>
+  </roleType>
+</relationType>

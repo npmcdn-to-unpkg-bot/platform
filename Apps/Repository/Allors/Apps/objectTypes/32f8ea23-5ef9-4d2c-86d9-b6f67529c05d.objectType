@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="32f8ea23-5ef9-4d2c-86d9-b6f67529c05d">
+  <namespace idref="bed2b711-d707-4cf6-9aee-11de07b2ba0d" />
+  <pluralName>RevenueValueBreaks</pluralName>
+  <singularName>RevenueValueBreak</singularName>
+</objectType>

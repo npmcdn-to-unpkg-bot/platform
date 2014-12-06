@@ -1,0 +1,14 @@
+<relationType allors="1.0" id="b0aba482-63eb-4482-a232-3863f089f4d9">
+  <associationType id="340069b9-a00b-420d-8f8d-52e627729db3">
+    <objectType idref="93960be2-f676-4e7f-9efb-f99c92303059" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="bab847eb-ff35-49dd-ae44-ccf4e1ee6743">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>Latitudes</pluralName>
+    <precision>8</precision>
+    <scale>6</scale>
+    <singularName>Latitude</singularName>
+    <size>32</size>
+  </roleType>
+</relationType>

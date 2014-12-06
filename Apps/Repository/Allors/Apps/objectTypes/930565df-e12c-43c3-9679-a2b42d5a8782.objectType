@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="930565df-e12c-43c3-9679-a2b42d5a8782">
+  <namespace idref="bed2b711-d707-4cf6-9aee-11de07b2ba0d" />
+  <pluralName>InternalOrganisationRevenues</pluralName>
+  <singularName>InternalOrganisationRevenue</singularName>
+</objectType>

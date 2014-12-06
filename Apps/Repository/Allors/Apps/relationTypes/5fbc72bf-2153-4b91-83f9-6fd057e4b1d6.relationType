@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="5fbc72bf-2153-4b91-83f9-6fd057e4b1d6">
+  <associationType id="c06de12f-bf0e-4d91-b8f6-9f6b250b107c">
+    <isMany>true</isMany>
+    <objectType idref="b50d0780-bcbf-4041-8576-164577d40c55" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="26944bd3-762b-4436-ba19-5e5c34c1247f">
+    <objectType idref="04540476-602f-456a-b300-54166b65c8b1" />
+    <pluralName>ManagedByPositions</pluralName>
+    <singularName>ManagedByPosition</singularName>
+  </roleType>
+</relationType>
