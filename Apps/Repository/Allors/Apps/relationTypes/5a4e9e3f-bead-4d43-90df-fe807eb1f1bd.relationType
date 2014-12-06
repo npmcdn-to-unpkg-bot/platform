@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="5a4e9e3f-bead-4d43-90df-fe807eb1f1bd">
+  <associationType id="618db903-ba57-45d5-b25c-41f54f0bd082">
+    <objectType idref="04540476-602f-456a-b300-54166b65c8b1" />
+  </associationType>
+  <roleType id="219613ef-da72-45da-806d-5504879ed08c">
+    <objectType idref="ccd6f134-26de-4103-bff9-a37ec3e997a3" />
+    <pluralName>EstimatedFromYears</pluralName>
+    <singularName>EstimatedFromYear</singularName>
+  </roleType>
+</relationType>

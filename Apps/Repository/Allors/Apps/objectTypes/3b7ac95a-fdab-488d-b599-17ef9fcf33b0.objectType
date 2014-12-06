@@ -1,6 +1,5 @@
 <objectType allors="1.0" id="3b7ac95a-fdab-488d-b599-17ef9fcf33b0">
-  <isAbstract>true</isAbstract>
-  <namespace idref="4f0fb63b-f01d-42dd-8093-122a5a46228e" />
+  <isInterface>true</isInterface>
   <pluralName>GeographicBoundariesComposites</pluralName>
   <singularName>GeographicBoundaryComposite</singularName>
 </objectType>

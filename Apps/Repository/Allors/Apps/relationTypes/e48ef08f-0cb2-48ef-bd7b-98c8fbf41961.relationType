@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="e48ef08f-0cb2-48ef-bd7b-98c8fbf41961">
+  <associationType id="f929e325-36ff-4d74-b6ea-e6ad45069e0f">
+    <objectType idref="04540476-602f-456a-b300-54166b65c8b1" />
+  </associationType>
+  <roleType id="ea64f861-276a-4b50-a6c0-b1d976d1b3ca">
+    <objectType idref="ccd6f134-26de-4103-bff9-a37ec3e997a3" />
+    <pluralName>ActualFromMonths</pluralName>
+    <singularName>ActualFromMonth</singularName>
+  </roleType>
+</relationType>

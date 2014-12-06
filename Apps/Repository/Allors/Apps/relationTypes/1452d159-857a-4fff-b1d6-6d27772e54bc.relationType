@@ -3,7 +3,7 @@
     <objectType idref="11d75a7a-2e86-4430-a6af-2916440c9ecb" />
   </associationType>
   <roleType id="bf8485f3-d5dd-4236-b542-61674c2298db">
-    <objectType idref="e8989069-024b-4389-ac77-a98c4dfff25a" />
+    <objectType idref="ccd6f134-26de-4103-bff9-a37ec3e997a3" />
     <pluralName>EntryNumbers</pluralName>
     <singularName>EntryNumber</singularName>
   </roleType>

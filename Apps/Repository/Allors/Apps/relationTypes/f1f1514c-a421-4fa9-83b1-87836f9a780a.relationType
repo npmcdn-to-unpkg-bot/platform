@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="f1f1514c-a421-4fa9-83b1-87836f9a780a">
+  <associationType id="d15589ae-bb75-4b21-9998-b7f788a7ae5f">
+    <objectType idref="15f511a9-7a08-42e4-a690-e0d2f01c9686" />
+  </associationType>
+  <roleType id="6ecd26e9-a4e9-492f-a3ba-a00d90d4db46">
+    <objectType idref="ccd6f134-26de-4103-bff9-a37ec3e997a3" />
+    <pluralName>StartMonths</pluralName>
+    <singularName>StartMonth</singularName>
+  </roleType>
+</relationType>

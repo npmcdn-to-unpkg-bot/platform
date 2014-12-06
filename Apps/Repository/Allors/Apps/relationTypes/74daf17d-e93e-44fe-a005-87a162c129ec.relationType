@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="74daf17d-e93e-44fe-a005-87a162c129ec">
+  <associationType id="e7a955f5-1360-4d96-a6dc-732a575877a3">
+    <objectType idref="04540476-602f-456a-b300-54166b65c8b1" />
+  </associationType>
+  <roleType id="9ec85db1-6050-4770-9224-79578bcb6767">
+    <objectType idref="ccd6f134-26de-4103-bff9-a37ec3e997a3" />
+    <pluralName>EstimatedThroughDay</pluralName>
+    <singularName>EstimatedThroughDay</singularName>
+  </roleType>
+</relationType>

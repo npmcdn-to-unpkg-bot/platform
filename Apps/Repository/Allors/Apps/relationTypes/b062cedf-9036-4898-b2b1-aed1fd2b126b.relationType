@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="b062cedf-9036-4898-b2b1-aed1fd2b126b">
+  <associationType id="bc550ac4-5c5f-4f32-9307-c80d8478109a">
+    <objectType idref="0091574c-edac-4376-8d03-c7e2c2d8132f" />
+  </associationType>
+  <roleType id="3b844ff9-2409-4402-b472-a538144dc55e">
+    <objectType idref="ccd6f134-26de-4103-bff9-a37ec3e997a3" />
+    <pluralName>DocumentationYears</pluralName>
+    <singularName>DocumentationYear</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="07e334d8-1c04-49d4-b73c-233eadf666c1">
+  <associationType id="9a0bdf1d-ada7-40e4-a09d-b1e03549d4a4">
+    <objectType idref="04540476-602f-456a-b300-54166b65c8b1" />
+  </associationType>
+  <roleType id="82de7bd5-8d95-4632-8f57-8686f3c60d56">
+    <objectType idref="ccd6f134-26de-4103-bff9-a37ec3e997a3" />
+    <pluralName>ActualFromYears</pluralName>
+    <singularName>ActualFromYear</singularName>
+  </roleType>
+</relationType>

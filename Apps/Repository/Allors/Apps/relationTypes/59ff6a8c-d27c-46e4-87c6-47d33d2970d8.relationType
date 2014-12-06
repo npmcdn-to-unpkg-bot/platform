@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="59ff6a8c-d27c-46e4-87c6-47d33d2970d8">
+  <associationType id="b700c0af-3c48-438c-b866-94d58e58e5ee">
+    <objectType idref="15f511a9-7a08-42e4-a690-e0d2f01c9686" />
+  </associationType>
+  <roleType id="68e412f9-fe22-4b71-a004-1a7610809f35">
+    <objectType idref="ccd6f134-26de-4103-bff9-a37ec3e997a3" />
+    <pluralName>StartDays</pluralName>
+    <singularName>StartDay</singularName>
+  </roleType>
+</relationType>

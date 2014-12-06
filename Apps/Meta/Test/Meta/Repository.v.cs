@@ -26,11 +26,11 @@ namespace Allors.Meta
         {
             var meta = new MetaPopulation();
 
-            Core(meta);
-            Base(meta);
-            Apps(meta);
+            Init(meta);
 
-            Test(meta);
+            BasePostInit(meta);
+            AppsPostInit(meta);
+            TestPostInit(meta);
 
             MetaPopulation = meta;
         }

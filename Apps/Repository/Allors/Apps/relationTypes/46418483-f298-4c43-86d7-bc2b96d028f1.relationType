@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="46418483-f298-4c43-86d7-bc2b96d028f1">
+  <associationType id="ea68b0c8-9c81-4e46-84c0-afe22ec4681f">
+    <objectType idref="01fc58a0-89b8-4dc0-97f9-5f628b9c9577" />
+  </associationType>
+  <roleType id="018f8317-8b6d-4b66-830e-8f8fc36cbd7f">
+    <objectType idref="ccd6f134-26de-4103-bff9-a37ec3e997a3" />
+    <pluralName>EstimatedDeliverDays</pluralName>
+    <singularName>EstimatedDeliverDay</singularName>
+  </roleType>
+</relationType>

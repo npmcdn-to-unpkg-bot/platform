@@ -3,7 +3,7 @@
     <objectType idref="c81441c8-9ac9-440e-a926-c96230b2701f" />
   </associationType>
   <roleType id="2f6236fc-4f59-4694-acd1-4ae339898bc3">
-    <objectType idref="e8989069-024b-4389-ac77-a98c4dfff25a" />
+    <objectType idref="ccd6f134-26de-4103-bff9-a37ec3e997a3" />
     <pluralName>NextAccountingTransactionNumbers</pluralName>
     <singularName>NextAccountingTransactionNumber</singularName>
   </roleType>
