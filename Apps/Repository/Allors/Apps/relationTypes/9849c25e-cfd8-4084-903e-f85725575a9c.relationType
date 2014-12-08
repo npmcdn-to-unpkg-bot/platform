@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="9849c25e-cfd8-4084-903e-f85725575a9c">
+  <associationType id="1f574cb0-3a0d-42fd-b5a5-0fb2eaf879c7">
+    <objectType idref="f13976d4-b1f4-4b78-a720-beab1e0a7e4c" />
+  </associationType>
+  <roleType id="a4c4a6c6-4858-410a-8181-6077778d18b6">
+    <objectType idref="ccd6f134-26de-4103-bff9-a37ec3e997a3" />
+    <pluralName>StartYears</pluralName>
+    <singularName>StartYear</singularName>
+  </roleType>
+</relationType>

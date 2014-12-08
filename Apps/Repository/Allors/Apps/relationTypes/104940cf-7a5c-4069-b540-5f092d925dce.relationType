@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="104940cf-7a5c-4069-b540-5f092d925dce">
+  <associationType id="22934fd3-1dc3-4ffc-9bee-b1269870b499">
+    <objectType idref="f13976d4-b1f4-4b78-a720-beab1e0a7e4c" />
+  </associationType>
+  <roleType id="5f6f8bf2-47be-447f-bd4f-0aebfcf77c69">
+    <objectType idref="ccd6f134-26de-4103-bff9-a37ec3e997a3" />
+    <pluralName>StartMinutes</pluralName>
+    <singularName>StartMinute</singularName>
+  </roleType>
+</relationType>

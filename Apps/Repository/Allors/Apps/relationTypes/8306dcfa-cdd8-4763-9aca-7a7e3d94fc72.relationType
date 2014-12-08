@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="8306dcfa-cdd8-4763-9aca-7a7e3d94fc72">
+  <associationType id="9eb23362-02fa-4b77-95ac-77814f0171ee">
+    <objectType idref="c799ca62-a554-467d-9aa2-1663293bb37f" />
+  </associationType>
+  <roleType id="7cd7be25-3828-4de7-973d-1e6bb8e77591">
+    <objectType idref="ccd6f134-26de-4103-bff9-a37ec3e997a3" />
+    <pluralName>DeceasedYears</pluralName>
+    <singularName>DeceasedYear</singularName>
+  </roleType>
+</relationType>

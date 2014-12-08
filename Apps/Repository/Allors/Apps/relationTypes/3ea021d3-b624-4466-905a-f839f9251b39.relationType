@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="3ea021d3-b624-4466-905a-f839f9251b39">
+  <associationType id="f881297e-5e16-4e8b-b0a4-e3ff80f50453">
+    <objectType idref="1da3e549-47cb-4896-94ec-3f8a263bb559" />
+  </associationType>
+  <roleType id="14603b18-473d-49b0-979b-1ac38efc2fbf">
+    <objectType idref="ccd6f134-26de-4103-bff9-a37ec3e997a3" />
+    <pluralName>StartSeconds</pluralName>
+    <singularName>StartSecond</singularName>
+  </roleType>
+</relationType>

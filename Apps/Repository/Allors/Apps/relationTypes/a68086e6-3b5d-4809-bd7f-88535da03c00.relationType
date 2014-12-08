@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="a68086e6-3b5d-4809-bd7f-88535da03c00">
+  <associationType id="3b712398-97e6-4497-990e-03e2d1735f78">
+    <objectType idref="22e85314-cfdf-4ead-a816-18588294fa79" />
+  </associationType>
+  <roleType id="70e3189b-03c5-4a39-ae38-e1f9fe25c682">
+    <objectType idref="ccd6f134-26de-4103-bff9-a37ec3e997a3" />
+    <pluralName>SubmittedMonths</pluralName>
+    <singularName>SubmittedMonth</singularName>
+  </roleType>
+</relationType>

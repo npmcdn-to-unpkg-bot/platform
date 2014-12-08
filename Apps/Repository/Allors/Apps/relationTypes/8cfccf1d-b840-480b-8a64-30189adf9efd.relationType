@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="8cfccf1d-b840-480b-8a64-30189adf9efd">
+  <associationType id="ef032509-11e9-4896-befd-a29d1c7f3b10">
+    <objectType idref="c799ca62-a554-467d-9aa2-1663293bb37f" />
+  </associationType>
+  <roleType id="58326dd6-4fd6-41ab-a274-4685260fdf13">
+    <objectType idref="ccd6f134-26de-4103-bff9-a37ec3e997a3" />
+    <pluralName>DeceasedMonths</pluralName>
+    <singularName>DeceasedMonth</singularName>
+  </roleType>
+</relationType>

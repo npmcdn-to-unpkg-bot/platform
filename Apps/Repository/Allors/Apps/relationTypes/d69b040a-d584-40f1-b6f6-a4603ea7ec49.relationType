@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="d69b040a-d584-40f1-b6f6-a4603ea7ec49">
+  <associationType id="b84d0f47-d13d-4b96-a0b4-dc36895d4363">
+    <objectType idref="f3ef0124-e867-4da2-9323-80fbe1f214c2" />
+  </associationType>
+  <roleType id="9e868390-827b-4e8d-b85c-c05fe062c07c">
+    <objectType idref="ccd6f134-26de-4103-bff9-a37ec3e997a3" />
+    <pluralName>AssignedDeliveryMonths</pluralName>
+    <singularName>AssignedDeliveryMonth</singularName>
+  </roleType>
+</relationType>

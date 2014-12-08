@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="07db265f-f318-4620-b4b7-cd621dca7fac">
+  <associationType id="581dafc9-880e-4809-a819-f0d5a537f3cd">
+    <objectType idref="c799ca62-a554-467d-9aa2-1663293bb37f" />
+  </associationType>
+  <roleType id="b4cfa416-1453-47b0-83b6-911f5af807ab">
+    <objectType idref="ccd6f134-26de-4103-bff9-a37ec3e997a3" />
+    <pluralName>DeceasedDays</pluralName>
+    <singularName>DeceasedDay</singularName>
+  </roleType>
+</relationType>
