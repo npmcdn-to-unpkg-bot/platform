@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{489D90A9-B63E-4983-86CC-2A061D8F6055}</ProjectGuid>
+    <ProjectGuid>{457BDDEB-41CF-46C6-BBCC-13618AEB646F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Allors.Databases.Object.SqlClient</RootNamespace>
@@ -167,15 +167,12 @@
     <Compile Include="SqlClient\Schema\SchemaParameter.cs" />
     <Compile Include="SqlClient\SessionCommands.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="SqlClient\RepositoryCommands\Text\" />
-    <Folder Include="SqlClient\SessionCommands\Text\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework\Framework\Allors.csproj">
+    <ProjectReference Include="..\Allors\Allors.csproj">
       <Project>{84495b8e-1800-41c9-a236-abe6265a23a3}</Project>
       <Name>Allors</Name>
     </ProjectReference>
