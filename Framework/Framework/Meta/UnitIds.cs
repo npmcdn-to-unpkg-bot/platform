@@ -40,6 +40,11 @@ namespace Allors.Meta
         public static readonly Guid BooleanId = new Guid("b5ee6cea-4E2b-498e-a5dd-24671d896477");
 
         /// <summary>
+        /// The id of the date time type.
+        /// </summary>
+        public static readonly Guid DateTimeId = new Guid("c4c09343-61d3-418c-ade2-fe6fd588f128");
+
+        /// <summary>
         /// The id of the decimal type.
         /// </summary>
         public static readonly Guid DecimalId = new Guid("da866d8e-2c40-41a8-ae5b-5f6dae0b89c8");
