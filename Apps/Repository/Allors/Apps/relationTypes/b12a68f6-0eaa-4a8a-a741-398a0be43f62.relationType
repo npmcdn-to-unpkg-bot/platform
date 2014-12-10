@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="b12a68f6-0eaa-4a8a-a741-398a0be43f62">
+  <associationType id="01adc720-91a4-47c6-9235-d21a3215ee6f">
+    <objectType idref="2b162153-f74d-4f97-b97c-48f04749b216" />
+  </associationType>
+  <roleType id="0363121b-d92e-4722-81dc-47032aae5440">
+    <objectType idref="c402fbda-133a-4b59-858a-832fbd2ec565" />
+    <pluralName>LastReminderDates</pluralName>
+    <singularName>LastReminderDate</singularName>
+  </roleType>
+</relationType>

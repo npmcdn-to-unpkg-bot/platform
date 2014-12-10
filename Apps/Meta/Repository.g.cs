@@ -14,6 +14,7 @@ namespace Allors.Meta
 
 		public static Unit AllorsString;
         public static Unit AllorsInteger;
+        public static Unit AllorsDateTime;
         public static Unit AllorsDecimal;
         public static Unit AllorsFloat;
         public static Unit AllorsBoolean;
@@ -568,6 +569,7 @@ namespace Allors.Meta
 		public static RelationType PersonTrainingTraining;
 		public static RelationType AmountDueAmount;
 		public static RelationType ShipmentRouteSegmentEndKilometers;
+		public static RelationType QuoteValidFromDate;
 		public static RelationType RequirementStatusRequirementObjectState;
 		public static RelationType WorkEffortCurrentWorkEffortStatus;
 		public static RelationType ProductPrimaryProductCategory;
@@ -606,8 +608,6 @@ namespace Allors.Meta
 		public static RelationType NeededSkillSkillLevel;
 		public static RelationType FinancialAccountTransactionEntryDate;
 		public static RelationType CreditCardNameOnCard;
-		public static RelationType PersonDeceasedDay;
-		public static RelationType PositionActualFromYear;
 		public static RelationType InvoiceItemTotalVatCustomerCurrency;
 		public static RelationType ShipmentItemQuantity;
 		public static RelationType SalesInvoiceItemProductFeature;
@@ -620,7 +620,6 @@ namespace Allors.Meta
 		public static RelationType CreditCardCreditCardCompany;
 		public static RelationType JournalEntryDescription;
 		public static RelationType WorkEffortPrecendency;
-		public static RelationType OrderItemAssignedDeliveryDay;
 		public static RelationType CountryBoundCountry;
 		public static RelationType NonSerializedInventoryItemCurrentObjectState;
 		public static RelationType DropShipmentShipmentStatus;
@@ -629,14 +628,12 @@ namespace Allors.Meta
 		public static RelationType EngineeringChangeStatusStartDateTime;
 		public static RelationType SalesInvoiceItemCurrentObjectState;
 		public static RelationType InternalOrganisationAccountingPreferenceGeneralLedgerAccount;
-		public static RelationType PersonBirthMonth;
 		public static RelationType PaymentMethodBalanceLimit;
 		public static RelationType ProductSalesDiscontinuationDate;
 		public static RelationType ExpenseEntryAmount;
 		public static RelationType StoreRevenueMonth;
 		public static RelationType PickListCustomerShipmentCorrection;
 		public static RelationType WorkEffortInventoryAssignmentAssignment;
-		public static RelationType QuoteValidFromMonth;
 		public static RelationType SalesRepRevenueRevenue;
 		public static RelationType EngagementRateBillingRate;
 		public static RelationType BenefitEmployerPaidPercentage;
@@ -655,17 +652,17 @@ namespace Allors.Meta
 		public static RelationType RequirementRequiredByDate;
 		public static RelationType InventoryItemInventoryItemVariance;
 		public static RelationType AccountingPeriodParent;
-		public static RelationType PurchaseReturnStatusStartYear;
 		public static RelationType SalesInvoiceItemRequiredProfitMargin;
 		public static RelationType PackageRevenueHistoryInternalOrganisation;
-		public static RelationType CustomerShipmentStatusStartMinute;
 		public static RelationType SalesOrderTakenByContactMechanism;
 		public static RelationType ProductionRunQuantityProduced;
 		public static RelationType DiscountComponentPercentage;
 		public static RelationType PaymentApplicationAmountApplied;
+		public static RelationType PickListCreationDate;
 		public static RelationType InvoiceItemTotalBasePrice;
 		public static RelationType QuoteItemDeliverable;
 		public static RelationType BudgetStatusBudgetObjectState;
+		public static RelationType ProductDeliverySkillRequirementStartedUsingDate;
 		public static RelationType CountryVatRate;
 		public static RelationType PartyBillingInquiriesFax;
 		public static RelationType OrderItemUnitVat;
@@ -673,7 +670,6 @@ namespace Allors.Meta
 		public static RelationType PositionOrganisation;
 		public static RelationType WorkEffortSkillStandardSkill;
 		public static RelationType RespondingPartySendingDate;
-		public static RelationType PartySkillStartedUsingDay;
 		public static RelationType EngagementItemQuoteItem;
 		public static RelationType JournalEntryEntryNumber;
 		public static RelationType PurchaseReturnStatusPurchaseReturnObjectState;
@@ -695,7 +691,6 @@ namespace Allors.Meta
 		public static RelationType PurchaseOrderPaymentStatus;
 		public static RelationType BudgetRevisionImpactBudgetItem;
 		public static RelationType ShipmentShipmentNumber;
-		public static RelationType SupplierRelationshipLastReminderYear;
 		public static RelationType SupplierRelationshipSubAccountNumber;
 		public static RelationType VatFormName;
 		public static RelationType BudgetDescription;
@@ -708,7 +703,6 @@ namespace Allors.Meta
 		public static RelationType StoreSalesInvoiceTemplate;
 		public static RelationType SalesRepPartyProductCategoryRevenueYear;
 		public static RelationType ProductCategoryRevenueHistoryCurrency;
-		public static RelationType PositionActualFromDay;
 		public static RelationType SalesOrderShipmentStatus;
 		public static RelationType ShipmentItemContentsDescription;
 		public static RelationType PartyQualification;
@@ -725,6 +719,7 @@ namespace Allors.Meta
 		public static RelationType ProductRevenueRevenue;
 		public static RelationType TimeEntryCost;
 		public static RelationType InvoiceItemTotalSurcharge;
+		public static RelationType JournalEntryEntryDate;
 		public static RelationType EngineeringChangeAuthorizer;
 		public static RelationType PerformanceNoteDescription;
 		public static RelationType PackageRevenueRevenue;
@@ -744,14 +739,12 @@ namespace Allors.Meta
 		public static RelationType FacilitySquareFootage;
 		public static RelationType EngagementRateRatingType;
 		public static RelationType SalesOrderItemQuantityShortFalled;
-		public static RelationType SalesInvoiceItemStatusStartDay;
 		public static RelationType OrderTotalBasePriceCustomerCurrency;
 		public static RelationType GoodThumbnail;
 		public static RelationType SalesOrderItemOrderedWithFeature;
 		public static RelationType JournalJournalType;
 		public static RelationType OrganisationRollUpParent;
 		public static RelationType SalesOrderItemMaintainedProfitMargin;
-		public static RelationType PartySkillStartedUsingYear;
 		public static RelationType PartyProductCategoryRevenueMonth;
 		public static RelationType PurchaseInvoiceStatusPurchaseInvoiceObjectState;
 		public static RelationType PurchaseOrderStatusPurchaseOrderObjectState;
@@ -767,13 +760,13 @@ namespace Allors.Meta
 		public static RelationType QuoteItemProduct;
 		public static RelationType NeededSkillYearsExperience;
 		public static RelationType DeploymentProductOffering;
+		public static RelationType QuoteValidThroughDate;
 		public static RelationType OrderItemBillingOrderItem;
 		public static RelationType BudgetBudgetStatus;
 		public static RelationType InternalOrganisationActualAccountingPeriod;
 		public static RelationType EmailTemplateDescription;
 		public static RelationType SalesInvoiceBilledFromInternalOrganisation;
 		public static RelationType CaseCurrentCaseStatus;
-		public static RelationType OrderItemDeliveryDay;
 		public static RelationType InternalOrganisationRevenueHistoryInternalOrganisation;
 		public static RelationType ProductCategoryCode;
 		public static RelationType IUnitOfMeasureDescription;
@@ -798,6 +791,7 @@ namespace Allors.Meta
 		public static RelationType EmailCommunicationOriginator;
 		public static RelationType SalesRepPartyProductCategoryRevenueSalesRep;
 		public static RelationType OrderShipmentPicked;
+		public static RelationType QuoteItemEstimatedDeliveryDate;
 		public static RelationType WorkEffortPartyAssignmentAssignment;
 		public static RelationType OrderItemTotalVatCustomerCurrency;
 		public static RelationType PackageRevenueYear;
@@ -840,17 +834,15 @@ namespace Allors.Meta
 		public static RelationType ShipmentReceiptInventoryItem;
 		public static RelationType SalesOrderBillToCustomer;
 		public static RelationType SalesOrderItemRequiredProfitMargin;
-		public static RelationType PositionEstimatedFromMonth;
-		public static RelationType ServiceEntryHeaderSubmittedYear;
 		public static RelationType TimeEntryBillingRate;
 		public static RelationType DropShipmentStatusStartDateTime;
 		public static RelationType PartyContactMechanismContactPurpose;
 		public static RelationType GoodInventoryItemKind;
-		public static RelationType QuoteItemEstimatedDeliverYear;
 		public static RelationType PayrollPreferencePercentage;
 		public static RelationType OrganisationName;
 		public static RelationType NonSerializedInventoryItemNonSerializedInventoryItemStatus;
 		public static RelationType SalesOrderTotalPurchasePrice;
+		public static RelationType SalesInvoiceItemStatusStartDateTime;
 		public static RelationType SalesInvoicePreviousBillToCustomer;
 		public static RelationType WorkEffortFixedAssetAssignmentAssignment;
 		public static RelationType InvoiceDescription;
@@ -899,11 +891,9 @@ namespace Allors.Meta
 		public static RelationType InvoiceItemTotalDiscount;
 		public static RelationType OrderItemTotalVat;
 		public static RelationType ExternalAccountingTransactionFromParty;
-		public static RelationType OrderItemAssignedDeliveryYear;
 		public static RelationType CaseStatusCaseObjectState;
 		public static RelationType InternalOrganisationPurchaseShipmentTemplate;
 		public static RelationType InvoiceItemInvoiceVatRateItem;
-		public static RelationType QuoteIssueMonth;
 		public static RelationType EngagementItemExpectedStartDate;
 		public static RelationType ProductIntrastatCode;
 		public static RelationType OrganisationGlAccountBalanceOrganisationGlAccount;
@@ -931,16 +921,15 @@ namespace Allors.Meta
 		public static RelationType InvoiceItemTotalDiscountAsPercentage;
 		public static RelationType OrderItemUnitDiscount;
 		public static RelationType InternalOrganisationMaximumAllowedPaymentDifference;
-		public static RelationType PositionEstimatedFromDay;
 		public static RelationType AmountDuePaymentMethod;
 		public static RelationType ServiceEntryThroughDateTime;
 		public static RelationType PaymentMethodDescription;
 		public static RelationType OrderItemPreviousQuantity;
 		public static RelationType WebSiteCommunicationReceiver;
+		public static RelationType PositionEstimatedThroughDate;
 		public static RelationType InternalOrganisationLogoImage;
 		public static RelationType WorkEffortWorkEffortStatus;
 		public static RelationType CashPersonResponsible;
-		public static RelationType ProductDeliverySkillRequirementStartedUsingYear;
 		public static RelationType AmountDueTransactionDate;
 		public static RelationType InventoryItemContainer;
 		public static RelationType SalesOrderShipToAddress;
@@ -967,7 +956,6 @@ namespace Allors.Meta
 		public static RelationType FaxCommunicationOriginator;
 		public static RelationType WorkEffortBillingWorkEffort;
 		public static RelationType AmountDueBlockedForDunning;
-		public static RelationType PurchaseReturnStatusStartHour;
 		public static RelationType SalesOrderPreviousShipToCustomer;
 		public static RelationType PackageRevenueHistoryRevenue;
 		public static RelationType PartBillOfMaterialSubstituteSubstitutionPartBillOfMaterial;
@@ -978,7 +966,6 @@ namespace Allors.Meta
 		public static RelationType StoreSalesInvoiceNumberPrefix;
 		public static RelationType ProductCategoryRevenueProductCategoryName;
 		public static RelationType SalesOrderItemPreviousReservedFromInventoryItem;
-		public static RelationType SerializedInventoryItemStatusStartSecond;
 		public static RelationType SalesInvoiceSalesInvoiceType;
 		public static RelationType SalesRepPartyProductCategoryRevenueMonth;
 		public static RelationType RequirementChild;
@@ -1011,7 +998,6 @@ namespace Allors.Meta
 		public static RelationType OrganisationRollUpRollupKind;
 		public static RelationType PurchaseOrderItemCurrentObjectState;
 		public static RelationType AmountDueAmountVat;
-		public static RelationType PickListCreationMonth;
 		public static RelationType PartyShippingInquiriesFax;
 		public static RelationType ProductProductCategoryExpanded;
 		public static RelationType BudgetReviewReviewDate;
@@ -1033,10 +1019,9 @@ namespace Allors.Meta
 		public static RelationType CostCenterCategoryAncestor;
 		public static RelationType OrderCustomerReference;
 		public static RelationType CitizenshipPassport;
-		public static RelationType CustomerShipmentStatusStartSecond;
+		public static RelationType PurchaseReturnStatusStartDateTime;
 		public static RelationType ProductProductComplement;
 		public static RelationType ProductConfigurationProductUsedIn;
-		public static RelationType QuoteItemEstimatedDeliverDay;
 		public static RelationType EngineeringChangePreviousObjectState;
 		public static RelationType StoreRevenueCurrency;
 		public static RelationType SalesOrderBillToContactMechanism;
@@ -1052,7 +1037,6 @@ namespace Allors.Meta
 		public static RelationType LotExpirationDate;
 		public static RelationType ProductRequirementProduct;
 		public static RelationType SalesOrderItemRequiredMarkupPercentage;
-		public static RelationType SalesInvoiceItemStatusStartSecond;
 		public static RelationType StorePaymentGracePeriod;
 		public static RelationType PositionResponsibilityPosition;
 		public static RelationType BudgetBudgetNumber;
@@ -1079,7 +1063,6 @@ namespace Allors.Meta
 		public static RelationType PaymentAmount;
 		public static RelationType OrganisationCustomerContactUserGroup;
 		public static RelationType PurchaseInvoicePurchaseInvoiceItem;
-		public static RelationType PickListCreationYear;
 		public static RelationType InvoiceAmountPaid;
 		public static RelationType WorkEffortPartStandardPart;
 		public static RelationType RequirementBudgetAllocationBudgetItem;
@@ -1096,6 +1079,7 @@ namespace Allors.Meta
 		public static RelationType PartyPartyClassification;
 		public static RelationType OrderAdjustmentAmount;
 		public static RelationType GoodBarCode;
+		public static RelationType JournalEntryJournalDate;
 		public static RelationType JournalContraAccount;
 		public static RelationType PartyClassificationDescription;
 		public static RelationType SalesOrderInitialProfitMargin;
@@ -1130,7 +1114,6 @@ namespace Allors.Meta
 		public static RelationType FaceToFaceCommunicationParticipant;
 		public static RelationType PartyBankAccount;
 		public static RelationType VolumeUsageQuantity;
-		public static RelationType QuoteIssueYear;
 		public static RelationType OrderItemDerivedVatRate;
 		public static RelationType InternalOrganisationName;
 		public static RelationType PersonCitizenship;
@@ -1146,7 +1129,6 @@ namespace Allors.Meta
 		public static RelationType VatRateVatRateUsage;
 		public static RelationType StorePaymentNetDays;
 		public static RelationType InvoiceVatRateItemBaseAmount;
-		public static RelationType CustomerShipmentStatusStartHour;
 		public static RelationType ProductionRunQuantityToProduce;
 		public static RelationType ProductCategoryRevenueInternalOrganisation;
 		public static RelationType CityState;
@@ -1172,13 +1154,10 @@ namespace Allors.Meta
 		public static RelationType SalesRepProductCategoryRevenueSalesRepName;
 		public static RelationType PaymentMethodGlPaymentInTransit;
 		public static RelationType PayCheckDeduction;
-		public static RelationType PurchaseReturnStatusStartDay;
 		public static RelationType SalesInvoiceItemInvoiceItemStatus;
 		public static RelationType RequirementCommunicationCommunicationEvent;
-		public static RelationType PositionEstimatedFromYear;
 		public static RelationType ProductDeliverySkillRequirementService;
 		public static RelationType InternalOrganisationRevenueRevenue;
-		public static RelationType QuoteIssueDay;
 		public static RelationType WorkEffortFixedAssetStandardEstimatedCost;
 		public static RelationType CommunicationEventStatusCommunicationEventObjectState;
 		public static RelationType PartyProductRevenueYear;
@@ -1189,7 +1168,6 @@ namespace Allors.Meta
 		public static RelationType PartyProductCategoryRevenuePartyProductCategoryName;
 		public static RelationType PriceComponentRevenueQuantityBreak;
 		public static RelationType BudgetPreviousObjectState;
-		public static RelationType SerializedInventoryItemStatusCreationMinute;
 		public static RelationType SalesInvoiceItemSalesOrderItem;
 		public static RelationType PaymentPaymentMethod;
 		public static RelationType SalesOrderItemCurrentOrderItemStatus;
@@ -1270,6 +1248,7 @@ namespace Allors.Meta
 		public static RelationType SalesOrderPreviousObjectState;
 		public static RelationType ShipmentShipmentItem;
 		public static RelationType EngineeringChangeStatusEngineeringChangeObjectState;
+		public static RelationType PartSpecificationDocumentationDate;
 		public static RelationType ProductCategoryChild;
 		public static RelationType ServiceEntryHeaderServiceEntry;
 		public static RelationType BudgetItemJustification;
@@ -1308,10 +1287,10 @@ namespace Allors.Meta
 		public static RelationType PickListItemRequestedQuantity;
 		public static RelationType InvoiceBillingAccount;
 		public static RelationType EventLocation;
+		public static RelationType PositionEstimatedFromDate;
 		public static RelationType SalesRepProductCategoryRevenueInternalOrganisation;
 		public static RelationType InventoryItemUnitOfMeasure;
 		public static RelationType DropShipmentPreviousObjectState;
-		public static RelationType JournalEntryJournalDay;
 		public static RelationType CaseCurrentObjectState;
 		public static RelationType SalesChannelRevenueHistoryCurrency;
 		public static RelationType DocumentDescription;
@@ -1333,7 +1312,6 @@ namespace Allors.Meta
 		public static RelationType StoreSalesOrderTemplate;
 		public static RelationType SalesRepRevenueInternalOrganisation;
 		public static RelationType OrderOrderTerm;
-		public static RelationType OrderItemDeliveryYear;
 		public static RelationType OrderTotalVat;
 		public static RelationType WorkEffortFixedAssetStandardEstimatedDuration;
 		public static RelationType QuoteItemUnitPrice;
@@ -1342,7 +1320,7 @@ namespace Allors.Meta
 		public static RelationType ProductCategoryDescription;
 		public static RelationType SupplierOfferingStandardLeadTime;
 		public static RelationType SalesInvoiceStatusStartDateTime;
-		public static RelationType PositionEstimatedThroughDay;
+		public static RelationType CustomerShipmentStatusStartDateTime;
 		public static RelationType ServiceEntryEngagementItem;
 		public static RelationType ProductIntroductionDate;
 		public static RelationType OrderTotalSurcharge;
@@ -1373,7 +1351,6 @@ namespace Allors.Meta
 		public static RelationType OrderAdjustmentVatRate;
 		public static RelationType VatReturnBoxDescription;
 		public static RelationType ShipmentReceiverContactMechanism;
-		public static RelationType JournalEntryJournalMonth;
 		public static RelationType StoreCreditLimit;
 		public static RelationType PartyDefaultShipmentMethod;
 		public static RelationType EventAnnouncementText;
@@ -1392,6 +1369,7 @@ namespace Allors.Meta
 		public static RelationType CustomerShipmentShipmentStatus;
 		public static RelationType InvoiceTotalIncVat;
 		public static RelationType RevenueQuantityBreakThrough;
+		public static RelationType PersonBirthDate;
 		public static RelationType OrderValidOrderItem;
 		public static RelationType ProductDocument;
 		public static RelationType SalesOrderTotalListPrice;
@@ -1407,16 +1385,17 @@ namespace Allors.Meta
 		public static RelationType SalesRepRelationshipInternalOrganisation;
 		public static RelationType PartyResume;
 		public static RelationType ShipmentShipToAddress;
+		public static RelationType ServiceEntryHeaderSubmittedDate;
 		public static RelationType InternalOrganisationFiscalYearStartDay;
 		public static RelationType PackageRevenueHistoryCurrency;
 		public static RelationType InvoiceTotalSurcharge;
 		public static RelationType SalesInvoiceInvoiceStatus;
 		public static RelationType PurchaseOrderBillToContactMechanism;
+		public static RelationType PartySkillStartedUsingDate;
 		public static RelationType InvoiceItemMessage;
 		public static RelationType ShipmentPackageDocument;
 		public static RelationType CustomerReturnStatusStartDateTime;
 		public static RelationType CountryTelephoneCode;
-		public static RelationType PickListCreationSecond;
 		public static RelationType OrderTotalVatCustomerCurrency;
 		public static RelationType GeneralLedgerAccountReconciliationAccount;
 		public static RelationType SalesRepProductCategoryRevenueProductCategory;
@@ -1438,7 +1417,6 @@ namespace Allors.Meta
 		public static RelationType GoodFinishedGood;
 		public static RelationType InvoiceTotalVatCustomerCurrency;
 		public static RelationType InvoiceInvoiceDate;
-		public static RelationType PersonDeceasedYear;
 		public static RelationType BudgetBudgetReview;
 		public static RelationType UnitOfMeasureConversionConversionFactor;
 		public static RelationType CostCenterCostCenterCategory;
@@ -1447,7 +1425,6 @@ namespace Allors.Meta
 		public static RelationType ItemIssuanceShipmentItem;
 		public static RelationType PartRevisionSupersededByPart;
 		public static RelationType InternalOrganisationGeneralLedgerAccount;
-		public static RelationType SerializedInventoryItemStatusStartHour;
 		public static RelationType OrderItemTotalOrderAdjustmentCustomerCurrency;
 		public static RelationType PassportIssueDate;
 		public static RelationType OrderTotalDiscount;
@@ -1456,7 +1433,6 @@ namespace Allors.Meta
 		public static RelationType SalesOrderItemQuantityReserved;
 		public static RelationType SalesRepPartyRevenueSalesRepName;
 		public static RelationType GeneralLedgerAccountName;
-		public static RelationType PurchaseReturnStatusStartSecond;
 		public static RelationType ProductStandardFeature;
 		public static RelationType LotQuantity;
 		public static RelationType PurchaseInvoiceBilledToInternalOrganisation;
@@ -1490,7 +1466,6 @@ namespace Allors.Meta
 		public static RelationType PickListItemInventoryItem;
 		public static RelationType ProductFeatureBasePrice;
 		public static RelationType RequestRequestNumber;
-		public static RelationType SalesInvoiceItemStatusStartHour;
 		public static RelationType ProductCategoryName;
 		public static RelationType PaymentMethodGeneralLedgerAccount;
 		public static RelationType QuoteItemSkill;
@@ -1501,13 +1476,11 @@ namespace Allors.Meta
 		public static RelationType PriceComponentDescription;
 		public static RelationType OrderMessage;
 		public static RelationType PartyProductRevenuePartyProductName;
-		public static RelationType PersonDeceasedMonth;
 		public static RelationType PurchaseOrderItemStatusStartDateTime;
 		public static RelationType EngineeringChangeDesigner;
 		public static RelationType WorkEffortTypeFixedAssetToRepair;
 		public static RelationType PartReorderLevel;
 		public static RelationType CarrierName;
-		public static RelationType SerializedInventoryItemStatusStartYear;
 		public static RelationType PartyProductCategoryRevenueProductCategory;
 		public static RelationType InvoiceTotalIncVatCustomerCurrency;
 		public static RelationType OrganisationGlAccountProduct;
@@ -1530,7 +1503,6 @@ namespace Allors.Meta
 		public static RelationType SalesInvoiceItemSalesRep;
 		public static RelationType AmountDueReconciliationDate;
 		public static RelationType SalesOrderItemStatusSalesOrderItemObjectState;
-		public static RelationType PersonBirthYear;
 		public static RelationType QuoteReceiver;
 		public static RelationType SalesOrderItemSalesRep;
 		public static RelationType EngagementItemEngagementRate;
@@ -1540,7 +1512,6 @@ namespace Allors.Meta
 		public static RelationType CommunicationEventDocument;
 		public static RelationType PurchaseReturnCurrentObjectState;
 		public static RelationType WorkEffortBillingPercentage;
-		public static RelationType PositionActualThroughYear;
 		public static RelationType WorkEffortPartyAssignmentParty;
 		public static RelationType CountyState;
 		public static RelationType ShipmentRouteSegmentActualArrivalDateTime;
@@ -1565,12 +1536,10 @@ namespace Allors.Meta
 		public static RelationType StoreOrderThreshold;
 		public static RelationType VatRatePaymentFrequency;
 		public static RelationType VatReturnBoxTypeType;
-		public static RelationType PartSpecificationDocumentationMonth;
 		public static RelationType NonSerializedInventoryItemStatusNonSerializedInventoryItemObjectState;
 		public static RelationType PartyBillingInquiriesPhone;
 		public static RelationType RevenueValueBreakThroughAmount;
 		public static RelationType OrderItemQuoteItem;
-		public static RelationType PurchaseReturnStatusStartMinute;
 		public static RelationType InternalAccountingTransactionInternalOrganisation;
 		public static RelationType InvoiceTotalBasePriceCustomerCurrency;
 		public static RelationType OrganisationContactRelationshipOrganisation;
@@ -1579,7 +1548,6 @@ namespace Allors.Meta
 		public static RelationType PostalAddressCity;
 		public static RelationType NonSerializedInventoryItemCurrentInventoryItemStatus;
 		public static RelationType InvoiceSurchargeAdjustment;
-		public static RelationType CustomerShipmentStatusStartYear;
 		public static RelationType GoodArticleNumber;
 		public static RelationType PartyProductRevenueCurrency;
 		public static RelationType WorkEffortFixedAssetStandardFixedAsset;
@@ -1618,6 +1586,7 @@ namespace Allors.Meta
 		public static RelationType PartyPartyName;
 		public static RelationType InternalOrganisationPurchaseInvoiceNumberPrefix;
 		public static RelationType PartyRelationshipCommunicationEvent;
+		public static RelationType OrderItemAssignedDeliveryDate;
 		public static RelationType SingletonDefaultCurrency;
 		public static RelationType EngagementItemCurrentEngagementRate;
 		public static RelationType JournalEntryDetailGeneralLedgerAccount;
@@ -1645,6 +1614,7 @@ namespace Allors.Meta
 		public static RelationType ProductCategoryRevenueRevenue;
 		public static RelationType OrganisationGlAccountHasBankStatementTransactions;
 		public static RelationType PerformanceReviewBonusPayCheck;
+		public static RelationType OrderItemDeliveryDate;
 		public static RelationType NewsItemDate;
 		public static RelationType SalesOrderCustomer;
 		public static RelationType PartPriceComponent;
@@ -1659,13 +1629,11 @@ namespace Allors.Meta
 		public static RelationType CountryIbanRegex;
 		public static RelationType PersonHeight;
 		public static RelationType SalesChannelRevenueCurrency;
-		public static RelationType JournalEntryEntryDay;
 		public static RelationType CostCenterName;
 		public static RelationType PartySkillSkillRating;
 		public static RelationType PayrollPreferencePaymentMethod;
 		public static RelationType SalesRepRevenueHistoryInternalOrganisation;
 		public static RelationType GeneralLedgerAccountCostUnitRequired;
-		public static RelationType QuoteItemEstimatedDeliverMonth;
 		public static RelationType AmountDueSubAccountNumber;
 		public static RelationType ServiceEntryFromDateTime;
 		public static RelationType JournalEntryNumberYear;
@@ -1686,11 +1654,9 @@ namespace Allors.Meta
 		public static RelationType PurchaseReturnShipmentStatus;
 		public static RelationType WorkEffortRequirementFulfillment;
 		public static RelationType AmountDueTransactionNumber;
-		public static RelationType ServiceEntryHeaderSubmittedMonth;
 		public static RelationType MarketingPackageProduct;
 		public static RelationType ReceiptAccountingTransactionReceipt;
 		public static RelationType ServiceEntryDescription;
-		public static RelationType PositionActualThroughDay;
 		public static RelationType NonSerializedInventoryItemQuantityOnHand;
 		public static RelationType WorkEffortSpecialTerms;
 		public static RelationType PartyProductRevenueHistoryQuantity;
@@ -1701,7 +1667,6 @@ namespace Allors.Meta
 		public static RelationType PartyOrderAddress;
 		public static RelationType StoreNextSalesOrderNumber;
 		public static RelationType BankSwiftCode;
-		public static RelationType QuoteValidThroughDay;
 		public static RelationType BankAccountCurrency;
 		public static RelationType DropShipmentCurrentObjectState;
 		public static RelationType AccountingTransactionAccountingTransactionNumber;
@@ -1710,7 +1675,6 @@ namespace Allors.Meta
 		public static RelationType ContainerFacility;
 		public static RelationType SalesRepProductCategoryRevenueRevenue;
 		public static RelationType ShipmentValueThroughAmount;
-		public static RelationType ProductDeliverySkillRequirementStartedUsingMonth;
 		public static RelationType DepreciationMethodFormula;
 		public static RelationType InternalOrganisationRevenueHistoryCurrency;
 		public static RelationType ServiceEntryBillingInvoiceItem;
@@ -1727,6 +1691,7 @@ namespace Allors.Meta
 		public static RelationType SalesOrderBillFromContactMechanism;
 		public static RelationType GeneralLedgerAccountGeneralLedgerAccountGroup;
 		public static RelationType ProductPurchasePriceUnitOfMeasure;
+		public static RelationType SerializedInventoryItemStatusStartDateTime;
 		public static RelationType InternalOrganisationSalesPaymentDiscountDifferencesAccount;
 		public static RelationType InvoiceInvoiceNumber;
 		public static RelationType ShippingAndHandlingComponentShipmentValue;
@@ -1741,9 +1706,7 @@ namespace Allors.Meta
 		public static RelationType GoodProductSubstitution;
 		public static RelationType AmountDueSide;
 		public static RelationType PartyContent;
-		public static RelationType OrderItemDeliveryMonth;
 		public static RelationType RequirementCurrentObjectState;
-		public static RelationType SerializedInventoryItemStatusStartMonth;
 		public static RelationType WorkEffortConcurrency;
 		public static RelationType OrderDiscountAdjustment;
 		public static RelationType PurchaseOrderItemProduct;
@@ -1765,7 +1728,6 @@ namespace Allors.Meta
 		public static RelationType ProductCategoryAncestor;
 		public static RelationType EventTitle;
 		public static RelationType AmountDueCurrency;
-		public static RelationType PartSpecificationDocumentationYear;
 		public static RelationType BankAccountBranch;
 		public static RelationType EngineeringChangePartBillOfMaterial;
 		public static RelationType EmploymentApplicationEmploymentApplicationSource;
@@ -1776,10 +1738,10 @@ namespace Allors.Meta
 		public static RelationType PartyProductCategoryRevenueQuantity;
 		public static RelationType PaymentPaymentApplication;
 		public static RelationType InvoiceItemTotalDiscountCustomerCurrency;
+		public static RelationType SupplierRelationshipLastReminderDate;
 		public static RelationType StoreRevenueRevenue;
 		public static RelationType SupplierRelationshipDunningType;
 		public static RelationType SalesRepRevenueSalesRepName;
-		public static RelationType PartySkillStartedUsingMonth;
 		public static RelationType OrderOrderKind;
 		public static RelationType InvoiceItemUnitSurcharge;
 		public static RelationType CostCenterCategoryChild;
@@ -1791,7 +1753,6 @@ namespace Allors.Meta
 		public static RelationType PartyProductRevenueParty;
 		public static RelationType WorkRequirementFixedAsset;
 		public static RelationType SalesOrderItemAssignedShipToParty;
-		public static RelationType PersonBirthDay;
 		public static RelationType SalesOrderItemQuantityPendingShipment;
 		public static RelationType PartSpecificationPreviousObjectState;
 		public static RelationType InternalOrganisationRevenueHistoryRevenue;
@@ -1835,7 +1796,6 @@ namespace Allors.Meta
 		public static RelationType ShipmentItemInventoryItem;
 		public static RelationType SalesOrderItemMaintainedMarkupPercentage;
 		public static RelationType FacilityName;
-		public static RelationType ServiceEntryHeaderSubmittedDay;
 		public static RelationType BudgetRevisionImpactBudgetRevision;
 		public static RelationType CustomerShipmentHeldManually;
 		public static RelationType PartyPackageRevenueYear;
@@ -1860,7 +1820,6 @@ namespace Allors.Meta
 		public static RelationType PurchaseInvoiceCurrentObjectState;
 		public static RelationType StoreFiscalYearInvoiceNumber;
 		public static RelationType OrderAdjustmentPercentage;
-		public static RelationType SupplierRelationshipLastReminderMonth;
 		public static RelationType JournalEntryDetailDebit;
 		public static RelationType InternalOrganisationPreviousCurrency;
 		public static RelationType InternalOrganisationAccountingPreferencePaymentMethod;
@@ -1886,14 +1845,12 @@ namespace Allors.Meta
 		public static RelationType ProductPurchasePriceCurrency;
 		public static RelationType ProductFeatureApplicabilityRelationshipUsedToDefine;
 		public static RelationType FiscalYearInvoiceNumberFiscalYear;
-		public static RelationType SerializedInventoryItemStatusCreationDay;
 		public static RelationType PartyShippingAddress;
 		public static RelationType CountryUriExtension;
 		public static RelationType ProductRevenueProduct;
 		public static RelationType PackageQuantityBreakThrough;
 		public static RelationType PriceComponentCurrency;
 		public static RelationType OrderTotalSurchargeCustomerCurrency;
-		public static RelationType JournalEntryEntryMonth;
 		public static RelationType EngagementItemCurrentAssignedProfessional;
 		public static RelationType InvoiceVatRegime;
 		public static RelationType PaymentMethodIsActive;
@@ -1904,7 +1861,6 @@ namespace Allors.Meta
 		public static RelationType CommunicationEventOwner;
 		public static RelationType SalesOrderItemPreviousObjectState;
 		public static RelationType PartyRevenueHistoryInternalOrganisation;
-		public static RelationType SerializedInventoryItemStatusStartDay;
 		public static RelationType PositionTypeRateRateType;
 		public static RelationType SalesOrderCurrentOrderStatus;
 		public static RelationType DimensionUnitOfMeasure;
@@ -1933,9 +1889,7 @@ namespace Allors.Meta
 		public static RelationType PartyPackageRevenueHistoryCurrency;
 		public static RelationType EmploymentEmploymentTerminationReason;
 		public static RelationType SalesOrderPreviousBillToCustomer;
-		public static RelationType CustomerShipmentStatusStartMonth;
 		public static RelationType WorkEffortGoodStandardEstimatedQuantity;
-		public static RelationType ProductDeliverySkillRequirementStartedUsingDay;
 		public static RelationType PartnershipPartner;
 		public static RelationType WorkRequirementDeliverable;
 		public static RelationType CitizenshipCountry;
@@ -1946,7 +1900,6 @@ namespace Allors.Meta
 		public static RelationType ProductConfigurationDescription;
 		public static RelationType SalesRepPartyRevenueCurrency;
 		public static RelationType EngineeringChangeEngineeringChangeStatus;
-		public static RelationType SalesInvoiceItemStatusStartYear;
 		public static RelationType PositionSalary;
 		public static RelationType OrderKindDescription;
 		public static RelationType PriceComponentOrderKind;
@@ -1962,7 +1915,6 @@ namespace Allors.Meta
 		public static RelationType WorkEffortTypeWorkEffortTypeKind;
 		public static RelationType PurchaseOrderFacility;
 		public static RelationType SupplierOfferingProduct;
-		public static RelationType QuoteValidFromYear;
 		public static RelationType RequirementCommunicationAssociatedProfessional;
 		public static RelationType EstimatedProductCostOrganisation;
 		public static RelationType ProductFeatureIncompatibleFeature;
@@ -1978,7 +1930,6 @@ namespace Allors.Meta
 		public static RelationType RequestItemNeededSkill;
 		public static RelationType EngagementRateChangeReason;
 		public static RelationType AccountingTransactionDetailDebit;
-		public static RelationType PartSpecificationDocumentationDay;
 		public static RelationType PartyOpenOrderAmount;
 		public static RelationType OrderTotalShippingAndHandling;
 		public static RelationType DesiredProductFeatureProductFeature;
@@ -1986,7 +1937,6 @@ namespace Allors.Meta
 		public static RelationType InternalOrganisationPurchasePaymentDifferencesAccount;
 		public static RelationType PartyProductRevenueHistoryInternalOrganisation;
 		public static RelationType EngineeringChangeTester;
-		public static RelationType PositionEstimatedThroughMonth;
 		public static RelationType SalesRepCommissionSalesRepName;
 		public static RelationType ResourceRequirementNeededSkill;
 		public static RelationType QuoteItemQuoteTerm;
@@ -2026,7 +1976,6 @@ namespace Allors.Meta
 		public static RelationType PerformanceReviewItemPerformanceReviewItemType;
 		public static RelationType ShipmentValueFromAmount;
 		public static RelationType SalesOrderPlacingCustomer;
-		public static RelationType OrderItemAssignedDeliveryMonth;
 		public static RelationType OrderShipmentPurchaseOrderItem;
 		public static RelationType WorkEffortCurrentObjectState;
 		public static RelationType DeliverableName;
@@ -2037,6 +1986,7 @@ namespace Allors.Meta
 		public static RelationType QuoteItemQuantity;
 		public static RelationType SalesOrderItemReservedFromInventoryItem;
 		public static RelationType ProductRevenueHistoryRevenue;
+		public static RelationType QuoteIssueDate;
 		public static RelationType CostCenterActive;
 		public static RelationType InvoiceVatRateItemVatAmount;
 		public static RelationType OwnBankAccountBankAccount;
@@ -2068,7 +2018,6 @@ namespace Allors.Meta
 		public static RelationType InternalOrganisationDefaultFacility;
 		public static RelationType InternalOrganisationPurchasePaymentDiscountDifferencesAccount;
 		public static RelationType PassportExpiriationDate;
-		public static RelationType PositionActualThroughMonth;
 		public static RelationType CustomerRelationshipCreditLimit;
 		public static RelationType PurchaseOrderPreviousObjectState;
 		public static RelationType EmailCommunicationBlindCopy;
@@ -2090,7 +2039,6 @@ namespace Allors.Meta
 		public static RelationType NonSerializedInventoryItemAvailableToPromise;
 		public static RelationType DeliverableDeliverableType;
 		public static RelationType PostalAddressPostalBoundary;
-		public static RelationType SalesInvoiceItemStatusStartMinute;
 		public static RelationType StoreSalesOrderNumberPrefix;
 		public static RelationType AccountingTransactionNumberYear;
 		public static RelationType GeneralLedgerAccountTypeDescription;
@@ -2123,17 +2071,12 @@ namespace Allors.Meta
 		public static RelationType OrderTotalExVatCustomerCurrency;
 		public static RelationType CustomerRelationshipSubAccountNumber;
 		public static RelationType PartyPackageRevenueHistoryParty;
-		public static RelationType SalesInvoiceItemStatusStartMonth;
 		public static RelationType TransferShipmentStatus;
 		public static RelationType InventoryItemVarianceReason;
 		public static RelationType GeneralLedgerAccountProtected;
 		public static RelationType PurchaseInvoicePurchaseInvoiceType;
-		public static RelationType QuoteValidThroughYear;
-		public static RelationType PositionActualFromMonth;
 		public static RelationType PartyBenefitActualAvailableTime;
 		public static RelationType ContainerContainerDescription;
-		public static RelationType CustomerShipmentStatusStartDay;
-		public static RelationType JournalEntryJournalYear;
 		public static RelationType InvoiceItemSurchargeAdjustment;
 		public static RelationType QuoteTermTermType;
 		public static RelationType InternalOrganisationNextAccountingTransactionNumber;
@@ -2163,7 +2106,6 @@ namespace Allors.Meta
 		public static RelationType CustomerRelationshipLastYearsRevenue;
 		public static RelationType PartyPackageRevenueCurrency;
 		public static RelationType PackageRevenuePackage;
-		public static RelationType PositionEstimatedThroughYear;
 		public static RelationType ProductRevenueHistoryCurrency;
 		public static RelationType SupplierRelationshipInternalOrganisation;
 		public static RelationType DocumentDocumentLocation;
@@ -2187,6 +2129,7 @@ namespace Allors.Meta
 		public static RelationType WorkEffortEstimatedHours;
 		public static RelationType WorkEffortPartStandardEstimatedQuantity;
 		public static RelationType EngagementEngagementItem;
+		public static RelationType PositionActualFromDate;
 		public static RelationType InternalOrganisationPurchaseTransactionReferenceNumberPrefix;
 		public static RelationType BankAccountContactPerson;
 		public static RelationType CommunicationEventActualStart;
@@ -2200,7 +2143,6 @@ namespace Allors.Meta
 		public static RelationType SalesOrderItemProductFeature;
 		public static RelationType WorkEffortSkillStandardEstimatedCost;
 		public static RelationType AmountDueOurReference;
-		public static RelationType JournalEntryEntryYear;
 		public static RelationType SalesRepPartyProductCategoryRevenueInternalOrganisation;
 		public static RelationType ShipmentHandlingInstruction;
 		public static RelationType WorkEffortTypeProductToProduce;
@@ -2239,7 +2181,6 @@ namespace Allors.Meta
 		public static RelationType InternalOrganisationRevenueInternalOrganisation;
 		public static RelationType ShipmentShipFromParty;
 		public static RelationType PartyPackageRevenueHistoryRevenue;
-		public static RelationType PurchaseReturnStatusStartMonth;
 		public static RelationType SalesOrderCurrentObjectState;
 		public static RelationType ResumeResumeText;
 		public static RelationType ProductVatRate;
@@ -2261,7 +2202,6 @@ namespace Allors.Meta
 		public static RelationType AccountingTransactionNumberAccountingTransactionType;
 		public static RelationType ShipmentShipmentRouteSegment;
 		public static RelationType EngagementClientPurchaseOrderNumber;
-		public static RelationType QuoteValidFromDay;
 		public static RelationType PaymentReferenceNumber;
 		public static RelationType PositionTypeRateTimeFrequency;
 		public static RelationType RequirementBudgetAllocationAmount;
@@ -2270,7 +2210,6 @@ namespace Allors.Meta
 		public static RelationType EngineeringChangeCurrentEngineeringChangeStatus;
 		public static RelationType ShipmentItemGood;
 		public static RelationType BudgetBudgetItem;
-		public static RelationType SerializedInventoryItemStatusStartMinute;
 		public static RelationType OrderTotalBasePrice;
 		public static RelationType SalesRepCommissionSalesRep;
 		public static RelationType OrganisationGlAccountBalanceAccountingPeriod;
@@ -2302,14 +2241,12 @@ namespace Allors.Meta
 		public static RelationType PaymentReceivingParty;
 		public static RelationType PartyVatRegime;
 		public static RelationType InvoiceItemDescription;
-		public static RelationType QuoteValidThroughMonth;
+		public static RelationType PositionActualThroughDate;
 		public static RelationType OrderSurchargeAdjustment;
 		public static RelationType CostCenterCategoryDescription;
 		public static RelationType SalesInvoiceStore;
-		public static RelationType SupplierRelationshipLastReminderDay;
 		public static RelationType ShipmentEstimatedArrivalDate;
 		public static RelationType SerializedInventoryItemCurrentInventoryItemStatus;
-		public static RelationType SerializedInventoryItemStatusCreationHour;
 		public static RelationType CustomerReturnCurrentObjectState;
 		public static RelationType PurchaseOrderStatusStartDateTime;
 		public static RelationType InternalOrganisationIncomingShipmentNumberPrefix;
@@ -2323,6 +2260,7 @@ namespace Allors.Meta
 		public static RelationType StoreNextSalesInvoiceNumber;
 		public static RelationType PartyProductRevenueHistoryCurrency;
 		public static RelationType ResourceRequirementRequiredEndDate;
+		public static RelationType PersonDeceasedDate;
 		public static RelationType MediaContentValue;
 		public static RelationType EnumerationLocalisedName;
 		public static RelationType PermissionOperandTypePointer;
@@ -2416,6 +2354,7 @@ namespace Allors.Meta
 			// Units
 			AllorsString = new UnitBuilder(Core, UnitIds.StringId).WithSingularName("AllorsString").WithPluralName("AllorsStrings").WithUnitTag(UnitTags.AllorsString).Build();
             AllorsInteger = new UnitBuilder(Core, UnitIds.IntegerId).WithSingularName("AllorsInteger").WithPluralName("AllorsIntegers").WithUnitTag(UnitTags.AllorsInteger).Build();
+            AllorsDateTime = new UnitBuilder(Core, UnitIds.DateTimeId).WithSingularName("AllorsDateTime").WithPluralName("AllorsDateTimes").WithUnitTag(UnitTags.AllorsDateTime).Build();
             AllorsDecimal = new UnitBuilder(Core, UnitIds.DecimalId).WithSingularName("AllorsDecimal").WithPluralName("AllorsDecimals").WithUnitTag(UnitTags.AllorsDecimal).Build();
             AllorsFloat = new UnitBuilder(Core, UnitIds.FloatId).WithSingularName("AllorsFloat").WithPluralName("AllorsFloats").WithUnitTag(UnitTags.AllorsFloat).Build();
             AllorsBoolean = new UnitBuilder(Core, UnitIds.BooleanId).WithSingularName("AllorsBoolean").WithPluralName("AllorsBooleans").WithUnitTag(UnitTags.AllorsBoolean).Build();
@@ -9187,28 +9126,20 @@ namespace Allors.Meta
 				.WithIsIndexed(true)  
 				.Build();
 
+				PartSpecificationDocumentationDate = new RelationTypeBuilder(Apps, new Guid("6a83ef4b-1ef5-4782-b9fd-19e3231c29c5"),new Guid("93f4241d-23ea-46ad-bcaa-fd1f5c909c43"),new Guid("c2b4a79f-c245-40d5-834e-5939c7748462"))
+				.WithObjectTypes(PartSpecification, AllorsDate)
+				.WithSingularName("DocumentationDate")  
+				.WithPluralName("DocumentationDates")  
+				  
+				  
+				.Build();
+
 				PartSpecificationCurrentPartSpecificationStatus = new RelationTypeBuilder(Apps, new Guid("79f03090-e058-439c-9398-738f08be2be1"),new Guid("8d5e16e5-2a18-4779-ad87-537db639c94e"),new Guid("f5451e3d-67ed-416f-aeeb-45daf876fd0d"))
 				.WithObjectTypes(PartSpecification, PartSpecificationStatus)
 				.WithSingularName("CurrentPartSpecificationStatus")  
 				.WithPluralName("CurrenPartSpecificationStatuses")  
 				.WithIsDerived(true)  
 				.WithIsIndexed(true)  
-				.Build();
-
-				PartSpecificationDocumentationMonth = new RelationTypeBuilder(Apps, new Guid("9595cfe7-a29a-40da-ba0f-dca05637702f"),new Guid("313aecfc-a71f-4a66-8766-92f38269022d"),new Guid("d3ddfd83-2ea5-407f-a77c-4fb0fc48413c"))
-				.WithObjectTypes(PartSpecification, AllorsInteger)
-				.WithSingularName("DocumentationMonth")  
-				.WithPluralName("DocumentationMonths")  
-				  
-				  
-				.Build();
-
-				PartSpecificationDocumentationYear = new RelationTypeBuilder(Apps, new Guid("b062cedf-9036-4898-b2b1-aed1fd2b126b"),new Guid("bc550ac4-5c5f-4f32-9307-c80d8478109a"),new Guid("3b844ff9-2409-4402-b472-a538144dc55e"))
-				.WithObjectTypes(PartSpecification, AllorsInteger)
-				.WithSingularName("DocumentationYear")  
-				.WithPluralName("DocumentationYears")  
-				  
-				  
 				.Build();
 
 				PartSpecificationPreviousObjectState = new RelationTypeBuilder(Apps, new Guid("b31753c5-6983-4753-8016-be389a71504b"),new Guid("702aad92-4bd9-461d-87c5-b438ecaa1387"),new Guid("f7307e39-1cce-4e70-a51a-d155a602526b"))
@@ -9218,14 +9149,6 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.ManyToOne)
 				.WithIsDerived(true)  
 				.WithIsIndexed(true)  
-				.Build();
-
-				PartSpecificationDocumentationDay = new RelationTypeBuilder(Apps, new Guid("d05d98fc-e7cb-4914-99fd-44351f600bb0"),new Guid("14369308-4569-4203-9c1c-65ab8f71c73f"),new Guid("083c8299-0eb2-41e6-aaf9-daf76ed13185"))
-				.WithObjectTypes(PartSpecification, AllorsInteger)
-				.WithSingularName("DocumentationDay")  
-				.WithPluralName("DocumentationDays")  
-				  
-				  
 				.Build();
 
 				PartSpecificationDescription = new RelationTypeBuilder(Apps, new Guid("e20b0fd5-f10a-44df-8bef-f454e7d23bce"),new Guid("0c7ad60f-57c9-469b-b8e4-dabeae4398ee"),new Guid("6a208020-712c-4ce8-b69b-ea4523ba2e85"))
@@ -9307,50 +9230,10 @@ namespace Allors.Meta
 
 				// RequestForProposal
 				// SalesInvoiceItemStatus
-				SalesInvoiceItemStatusStartDay = new RelationTypeBuilder(Apps, new Guid("1e4d714d-c58e-4036-8bd9-203412701a24"),new Guid("76110196-36ae-42e4-bedf-260b8d0bc5d1"),new Guid("811dd723-436c-4a0a-88ba-961644b83e10"))
-				.WithObjectTypes(SalesInvoiceItemStatus, AllorsInteger)
-				.WithSingularName("StartDay")  
-				.WithPluralName("StartDays")  
-				  
-				  
-				.Build();
-
-				SalesInvoiceItemStatusStartSecond = new RelationTypeBuilder(Apps, new Guid("49243828-9307-4760-ac29-3e7f689895e8"),new Guid("2e331bb0-36a6-4197-b48b-bf31f13e085c"),new Guid("ef15fc29-2b2b-44f8-8684-8dc9e7ce748f"))
-				.WithObjectTypes(SalesInvoiceItemStatus, AllorsInteger)
-				.WithSingularName("StartSecond")  
-				.WithPluralName("StartSeconds")  
-				  
-				  
-				.Build();
-
-				SalesInvoiceItemStatusStartHour = new RelationTypeBuilder(Apps, new Guid("8ad120c2-5b4a-419c-b722-d5827e8bfce7"),new Guid("f5a83a03-3a5f-4057-ba01-e3a58f22673c"),new Guid("44320612-3b56-4bc0-b6cc-61f362912225"))
-				.WithObjectTypes(SalesInvoiceItemStatus, AllorsInteger)
-				.WithSingularName("StartHour")  
-				.WithPluralName("StartHours")  
-				  
-				  
-				.Build();
-
-				SalesInvoiceItemStatusStartYear = new RelationTypeBuilder(Apps, new Guid("cafdb526-8d7d-4edc-8d29-ab23efd1a1fc"),new Guid("ddd41ff8-025f-4112-a1af-3ca32b4ca768"),new Guid("18b8e08a-9562-4ec3-a06b-c1edffb4f98f"))
-				.WithObjectTypes(SalesInvoiceItemStatus, AllorsInteger)
-				.WithSingularName("StartYear")  
-				.WithPluralName("StartYears")  
-				  
-				  
-				.Build();
-
-				SalesInvoiceItemStatusStartMinute = new RelationTypeBuilder(Apps, new Guid("e000626f-6bf5-4c8e-b7b1-2bbbfe0de2e8"),new Guid("b5eaf473-d3a2-4508-a822-5fe2567ffc0f"),new Guid("edfeffe7-6c68-4f5a-b2cf-b413a6fa5705"))
-				.WithObjectTypes(SalesInvoiceItemStatus, AllorsInteger)
-				.WithSingularName("StartMinute")  
-				.WithPluralName("StartMinutes")  
-				  
-				  
-				.Build();
-
-				SalesInvoiceItemStatusStartMonth = new RelationTypeBuilder(Apps, new Guid("e3babede-3bbf-4888-99ce-b71d53cd1ba5"),new Guid("fb2ac3d5-8807-44b6-823d-2f2d8b5542a9"),new Guid("64831f7e-e770-4d5b-ba94-fd97eb600509"))
-				.WithObjectTypes(SalesInvoiceItemStatus, AllorsInteger)
-				.WithSingularName("StartMonth")  
-				.WithPluralName("StartMonths")  
+				SalesInvoiceItemStatusStartDateTime = new RelationTypeBuilder(Apps, new Guid("2d0de395-ccfe-46b4-9391-020c276ddafd"),new Guid("a4d34c93-13ee-449f-b016-47707c7ae72d"),new Guid("054b768e-78ae-44e9-939f-765fe5c4ccf4"))
+				.WithObjectTypes(SalesInvoiceItemStatus, AllorsDateTime)
+				.WithSingularName("StartDateTime")  
+				.WithPluralName("StartDateTimes")  
 				  
 				  
 				.Build();
@@ -9393,6 +9276,14 @@ namespace Allors.Meta
 				.WithIsIndexed(true)  
 				.Build();
 
+				QuoteItemEstimatedDeliveryDate = new RelationTypeBuilder(Apps, new Guid("262a458d-0b38-4123-b210-576633297f44"),new Guid("e252b457-9fac-429d-a337-0c48a46c2bf0"),new Guid("a7ae793d-d315-4ac1-93c7-783391b2d294"))
+				.WithObjectTypes(QuoteItem, AllorsDate)
+				.WithSingularName("EstimatedDeliveryDate")  
+				.WithPluralName("EstimatedDeliveryDate")  
+				  
+				  
+				.Build();
+
 				QuoteItemUnitOfMeasure = new RelationTypeBuilder(Apps, new Guid("28c0e280-16ce-48fc-8bc4-734e1ea0cd36"),new Guid("49bd248e-a34f-43ce-b2fd-9db0d5b01db4"),new Guid("6eb4000d-559d-42b2-b02b-452370fa15b4"))
 				.WithObjectTypes(QuoteItem, UnitOfMeasure)
 				.WithSingularName("UnitOfMeasure")  
@@ -9409,22 +9300,6 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.ManyToOne)
 				  
 				.WithIsIndexed(true)  
-				.Build();
-
-				QuoteItemEstimatedDeliverYear = new RelationTypeBuilder(Apps, new Guid("2cb3ec3f-163e-4af3-8cba-c19fe36e7b2b"),new Guid("59dce02a-d612-4b97-aeec-bc0dfe194db9"),new Guid("8ad347aa-f978-450e-aac4-1195fc174122"))
-				.WithObjectTypes(QuoteItem, AllorsInteger)
-				.WithSingularName("EstimatedDeliverYear")  
-				.WithPluralName("EstimatedDeliverYears")  
-				  
-				  
-				.Build();
-
-				QuoteItemEstimatedDeliverDay = new RelationTypeBuilder(Apps, new Guid("46418483-f298-4c43-86d7-bc2b96d028f1"),new Guid("ea68b0c8-9c81-4e46-84c0-afe22ec4681f"),new Guid("018f8317-8b6d-4b66-830e-8f8fc36cbd7f"))
-				.WithObjectTypes(QuoteItem, AllorsInteger)
-				.WithSingularName("EstimatedDeliverDay")  
-				.WithPluralName("EstimatedDeliverDays")  
-				  
-				  
 				.Build();
 
 				QuoteItemUnitPrice = new RelationTypeBuilder(Apps, new Guid("73ecd49f-9614-4902-8ec6-9b503bffe9f2"),new Guid("7ee32e78-a214-4e4a-bb43-d2f6642e997a"),new Guid("e64fb7aa-75de-41a6-a76c-f25f22dfcf47"))
@@ -9453,14 +9328,6 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.ManyToOne)
 				  
 				.WithIsIndexed(true)  
-				.Build();
-
-				QuoteItemEstimatedDeliverMonth = new RelationTypeBuilder(Apps, new Guid("a3e9bfce-b39e-4b46-8c5f-5a27fdaa3e52"),new Guid("102008e5-5191-405c-bb09-be377d88f497"),new Guid("e63cd9f0-391d-43b2-8f4c-806851b97a6a"))
-				.WithObjectTypes(QuoteItem, AllorsInteger)
-				.WithSingularName("EstimatedDeliverMonth")  
-				.WithPluralName("EstimatedDeliverMonths")  
-				  
-				  
 				.Build();
 
 				QuoteItemQuoteTerm = new RelationTypeBuilder(Apps, new Guid("d1f7f2cb-cbc8-42b4-a3f0-198ff35957de"),new Guid("0f429c19-5cb8-459a-b95a-9e3ec1e045f3"),new Guid("0750e77a-40bd-4a0b-89a6-6e6fbb797cc4"))
@@ -9652,14 +9519,6 @@ namespace Allors.Meta
 
 				// DiscountAdjustment
 				// Position
-				PositionActualFromYear = new RelationTypeBuilder(Apps, new Guid("07e334d8-1c04-49d4-b73c-233eadf666c1"),new Guid("9a0bdf1d-ada7-40e4-a09d-b1e03549d4a4"),new Guid("82de7bd5-8d95-4632-8f57-8686f3c60d56"))
-				.WithObjectTypes(Position, AllorsInteger)
-				.WithSingularName("ActualFromYear")  
-				.WithPluralName("ActualFromYears")  
-				  
-				  
-				.Build();
-
 				PositionOrganisation = new RelationTypeBuilder(Apps, new Guid("137841cd-fa69-4704-a6e3-cd710c51af43"),new Guid("834d2485-8aac-4e7e-86ad-0b7c5c21b368"),new Guid("7f6522ca-1f5b-4c97-99b4-1f4ac6670d8e"))
 				.WithObjectTypes(Position, Organisation)
 				.WithSingularName("Organisation")  
@@ -9667,14 +9526,6 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.ManyToOne)
 				  
 				.WithIsIndexed(true)  
-				.Build();
-
-				PositionActualFromDay = new RelationTypeBuilder(Apps, new Guid("1994c691-db35-47da-926a-40efbad6ed85"),new Guid("7b2bf31e-63c1-4982-8c53-334c447312b7"),new Guid("7fcdeb91-a580-44c7-95d6-ffe51a7258b0"))
-				.WithObjectTypes(Position, AllorsInteger)
-				.WithSingularName("ActualFromDay")  
-				.WithPluralName("ActualFromDays")  
-				  
-				  
 				.Build();
 
 				PositionTemporary = new RelationTypeBuilder(Apps, new Guid("2806ca00-0b79-45e5-835e-b11f45b05f15"),new Guid("144fcdd3-d66c-4ad3-9c68-a6f8c96afdc5"),new Guid("cc54251d-b913-41f7-ba48-982e5829c0f0"))
@@ -9685,34 +9536,18 @@ namespace Allors.Meta
 				  
 				.Build();
 
-				PositionEstimatedFromMonth = new RelationTypeBuilder(Apps, new Guid("2c13df75-7275-4da3-a7e3-aef37288947b"),new Guid("1d0a0309-243c-48c1-993f-2379130169d4"),new Guid("2bed0b5b-2735-4b13-aea6-613834906013"))
-				.WithObjectTypes(Position, AllorsInteger)
-				.WithSingularName("EstimatedFromMonth")  
-				.WithPluralName("EstimatedFromMonths")  
+				PositionEstimatedThroughDate = new RelationTypeBuilder(Apps, new Guid("39298cc2-0869-4dc9-b0ff-bea8269ba958"),new Guid("7ca00aff-ad0b-4195-902b-39b3d5cc2c25"),new Guid("949968c0-dc95-44d3-a8f0-65829a884c3b"))
+				.WithObjectTypes(Position, AllorsDate)
+				.WithSingularName("EstimatedThroughDate")  
+				.WithPluralName("EstimatedThroughDates")  
 				  
 				  
 				.Build();
 
-				PositionEstimatedFromDay = new RelationTypeBuilder(Apps, new Guid("3806c6d9-ce76-44d2-beb0-cf8e5214c4aa"),new Guid("b329a22c-60b5-4c1b-b846-65487e4ee961"),new Guid("23eb7a9c-f5d3-4385-b0ac-bf6183cb9a2a"))
-				.WithObjectTypes(Position, AllorsInteger)
-				.WithSingularName("EstimatedFromDay")  
-				.WithPluralName("EstimatedFromDays")  
-				  
-				  
-				.Build();
-
-				PositionEstimatedFromYear = new RelationTypeBuilder(Apps, new Guid("5a4e9e3f-bead-4d43-90df-fe807eb1f1bd"),new Guid("618db903-ba57-45d5-b25c-41f54f0bd082"),new Guid("219613ef-da72-45da-806d-5504879ed08c"))
-				.WithObjectTypes(Position, AllorsInteger)
-				.WithSingularName("EstimatedFromYear")  
-				.WithPluralName("EstimatedFromYears")  
-				  
-				  
-				.Build();
-
-				PositionEstimatedThroughDay = new RelationTypeBuilder(Apps, new Guid("74daf17d-e93e-44fe-a005-87a162c129ec"),new Guid("e7a955f5-1360-4d96-a6dc-732a575877a3"),new Guid("9ec85db1-6050-4770-9224-79578bcb6767"))
-				.WithObjectTypes(Position, AllorsInteger)
-				.WithSingularName("EstimatedThroughDay")  
-				.WithPluralName("EstimatedThroughDay")  
+				PositionEstimatedFromDate = new RelationTypeBuilder(Apps, new Guid("6ede43f7-87a5-429c-8fc0-6441ca8753f1"),new Guid("c2100e41-9586-485c-8110-693de5479a9e"),new Guid("5f2fa20d-f4c8-468e-b9bb-d9a3cd777b70"))
+				.WithObjectTypes(Position, AllorsDate)
+				.WithSingularName("EstimatedFromDate")  
+				.WithPluralName("EstimatedFromDates")  
 				  
 				  
 				.Build();
@@ -9724,22 +9559,6 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.ManyToOne)
 				  
 				.WithIsIndexed(true)  
-				.Build();
-
-				PositionActualThroughYear = new RelationTypeBuilder(Apps, new Guid("91e175e2-6ba9-45b9-a920-691946772e64"),new Guid("5ff55b43-6501-4d19-b517-ca7399d241d9"),new Guid("6d99cbe1-6c0c-486a-9747-d8730c83564d"))
-				.WithObjectTypes(Position, AllorsInteger)
-				.WithSingularName("ActualThroughYear")  
-				.WithPluralName("ActualThroughYears")  
-				  
-				  
-				.Build();
-
-				PositionActualThroughDay = new RelationTypeBuilder(Apps, new Guid("a6af036a-863f-4555-bcae-b735593c6232"),new Guid("30f3af4a-c1fd-4516-abdd-65b6de440dfa"),new Guid("ad68bbb7-3868-41f0-ac27-1ba0884cebd1"))
-				.WithObjectTypes(Position, AllorsInteger)
-				.WithSingularName("ActualThroughDay")  
-				.WithPluralName("ActualThroughDays")  
-				  
-				  
 				.Build();
 
 				PositionFulltime = new RelationTypeBuilder(Apps, new Guid("bf81174e-1105-4313-8d42-4a7b03bfc308"),new Guid("679e6db2-ffd5-47db-a601-624d9f852057"),new Guid("a345fe4c-caa6-4d40-a168-e97d315bc37d"))
@@ -9758,14 +9577,6 @@ namespace Allors.Meta
 				  
 				.Build();
 
-				PositionEstimatedThroughMonth = new RelationTypeBuilder(Apps, new Guid("d19e4f0e-4421-4628-8c98-ef77ca115bae"),new Guid("0cc2c910-609a-4da8-8795-cf1701cb7b46"),new Guid("8d040654-2188-4b90-aa45-d591e1c11e6c"))
-				.WithObjectTypes(Position, AllorsInteger)
-				.WithSingularName("EstimatedThroughMonth")  
-				.WithPluralName("EstimatedThroughMonths")  
-				  
-				  
-				.Build();
-
 				PositionPositionStatus = new RelationTypeBuilder(Apps, new Guid("db94dd2c-5f39-4f64-ad6d-ce80bf7a4c22"),new Guid("1e391ccb-da94-4b69-8dc7-b0659eaaf201"),new Guid("c3123ffe-f6d2-4d46-87be-77e184ec8adb"))
 				.WithObjectTypes(Position, PositionStatus)
 				.WithSingularName("PositionStatus")  
@@ -9773,14 +9584,6 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.ManyToOne)
 				  
 				.WithIsIndexed(true)  
-				.Build();
-
-				PositionActualThroughMonth = new RelationTypeBuilder(Apps, new Guid("dd399002-e871-4e28-b49d-6d8814b1e2e3"),new Guid("0471fd13-447a-42f2-9508-9d988be546c3"),new Guid("17df7fc0-5367-4063-927c-8017182bcf58"))
-				.WithObjectTypes(Position, AllorsInteger)
-				.WithSingularName("ActualThroughMonth")  
-				.WithPluralName("ActualThroughMonths")  
-				  
-				  
 				.Build();
 
 				PositionApprovedBudgetItem = new RelationTypeBuilder(Apps, new Guid("e1f8d2a3-83a7-4357-9451-858c314dbefc"),new Guid("5d53246b-9497-476e-b68a-e8e5bea2c851"),new Guid("a026d5da-a2dd-4443-956f-2c6d8c73a894"))
@@ -9792,18 +9595,18 @@ namespace Allors.Meta
 				.WithIsIndexed(true)  
 				.Build();
 
-				PositionActualFromMonth = new RelationTypeBuilder(Apps, new Guid("e48ef08f-0cb2-48ef-bd7b-98c8fbf41961"),new Guid("f929e325-36ff-4d74-b6ea-e6ad45069e0f"),new Guid("ea64f861-276a-4b50-a6c0-b1d976d1b3ca"))
-				.WithObjectTypes(Position, AllorsInteger)
-				.WithSingularName("ActualFromMonth")  
-				.WithPluralName("ActualFromMonths")  
+				PositionActualFromDate = new RelationTypeBuilder(Apps, new Guid("ec8beecc-9e28-4103-94d3-249aed76c934"),new Guid("c68b7794-0379-4542-8f1b-24311e2358a4"),new Guid("3a72f3f0-0476-4629-9831-ed43ebaa8cf5"))
+				.WithObjectTypes(Position, AllorsDate)
+				.WithSingularName("ActualFromDate")  
+				.WithPluralName("ActualFromDates")  
 				  
 				  
 				.Build();
 
-				PositionEstimatedThroughYear = new RelationTypeBuilder(Apps, new Guid("e9669eda-0b1d-40cd-bf2d-d74073e7730c"),new Guid("72da332d-f8e2-4074-b89a-e8b268514fa1"),new Guid("a4d4e1bb-3b81-4f4d-898e-2f95609cd9c5"))
-				.WithObjectTypes(Position, AllorsInteger)
-				.WithSingularName("EstimatedThroughYear")  
-				.WithPluralName("EstimatedThroughYears")  
+				PositionActualThroughDate = new RelationTypeBuilder(Apps, new Guid("fc328a1a-4f62-42de-96b2-a61c612a1602"),new Guid("f815e446-05a5-4fa3-b3b4-4c7a94b7ca1f"),new Guid("c8cb5709-08d5-4b3b-9598-15289ba9d689"))
+				.WithObjectTypes(Position, AllorsDate)
+				.WithSingularName("ActualThroughDate")  
+				.WithPluralName("ActualThroughDates")  
 				  
 				  
 				.Build();
@@ -9991,6 +9794,14 @@ namespace Allors.Meta
 
 
 				// Quote
+				QuoteValidFromDate = new RelationTypeBuilder(Apps, new Guid("033df6dd-fdf7-44e4-84ca-5c7e100cb3f5"),new Guid("4b19f443-0d27-447d-8186-e5361a094460"),new Guid("fa17ef86-c074-414e-b223-b62522d68280"))
+				.WithObjectTypes(Quote, AllorsDate)
+				.WithSingularName("ValidFromDate")  
+				.WithPluralName("ValidFromDates")  
+				  
+				  
+				.Build();
+
 				QuoteQuoteTerm = new RelationTypeBuilder(Apps, new Guid("05e3454a-0a7a-488d-b4b1-f0fd41392ddf"),new Guid("ca3f0d26-9ead-4691-8f7f-f79272065251"),new Guid("92e46228-ad44-4b9b-b727-23159a59bca3"))
 				.WithObjectTypes(Quote, QuoteTerm)
 				.WithSingularName("QuoteTerm")  
@@ -9998,14 +9809,6 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.ManyToMany)
 				  
 				.WithIsIndexed(true)  
-				.Build();
-
-				QuoteValidFromMonth = new RelationTypeBuilder(Apps, new Guid("0bf78983-abe6-4e1e-ae88-2c0c89c96f82"),new Guid("f0cedb86-3e99-497f-bc07-ae10a2628646"),new Guid("6e63ea71-ad28-4f10-aa44-9ed50b6df98d"))
-				.WithObjectTypes(Quote, AllorsInteger)
-				.WithSingularName("ValidFromMonth")  
-				.WithPluralName("ValidFromMonths")  
-				  
-				  
 				.Build();
 
 				QuoteIssuer = new RelationTypeBuilder(Apps, new Guid("20880670-0496-4d24-8c97-69b83867c09e"),new Guid("c2bfd7fd-7956-4c28-960e-539f8159e46a"),new Guid("3242cf4f-589c-457b-9ecd-59110041ab34"))
@@ -10017,10 +9820,10 @@ namespace Allors.Meta
 				.WithIsIndexed(true)  
 				.Build();
 
-				QuoteIssueMonth = new RelationTypeBuilder(Apps, new Guid("33f00eb1-dd06-4734-8292-36e535ce4676"),new Guid("0fa1df68-b111-423b-9712-bf5fdb216de0"),new Guid("6ed8cf56-ac3b-43b7-8f6c-9cd6be733b61"))
-				.WithObjectTypes(Quote, AllorsInteger)
-				.WithSingularName("IssueMonth")  
-				.WithPluralName("IssueMonths")  
+				QuoteValidThroughDate = new RelationTypeBuilder(Apps, new Guid("2140e106-2ef3-427a-be94-458c2b8e154d"),new Guid("9d81ada4-a4f3-44bb-9098-bc1a3e61de19"),new Guid("60581583-2536-4b09-acae-f0f877169dae"))
+				.WithObjectTypes(Quote, AllorsDate)
+				.WithSingularName("ValidThroughDate")  
+				.WithPluralName("ValidThroughDates")  
 				  
 				  
 				.Build();
@@ -10034,22 +9837,6 @@ namespace Allors.Meta
 				.WithSize(256)
 				.Build();
 
-				QuoteIssueYear = new RelationTypeBuilder(Apps, new Guid("531f9758-dbc2-48bc-8d66-b37d6057b48f"),new Guid("80437f38-777e-47c0-a706-0ea1ecdb1e38"),new Guid("f7572778-90e0-4030-9711-ebb740a88e4d"))
-				.WithObjectTypes(Quote, AllorsInteger)
-				.WithSingularName("IssueYear")  
-				.WithPluralName("IssueYears")  
-				  
-				  
-				.Build();
-
-				QuoteIssueDay = new RelationTypeBuilder(Apps, new Guid("5a98e7b2-a7f2-4e54-899e-1a0a8d304f96"),new Guid("2d53be8a-e09c-47aa-802a-8ea897d78988"),new Guid("e291a4ab-4c12-4c14-9db6-a91d35282f30"))
-				.WithObjectTypes(Quote, AllorsInteger)
-				.WithSingularName("IssueDay")  
-				.WithPluralName("IssueDays")  
-				  
-				  
-				.Build();
-
 				QuoteReceiver = new RelationTypeBuilder(Apps, new Guid("9119c598-cd98-43da-bfdf-1e6573112c9e"),new Guid("d48cd46d-889b-4e2d-a6d6-ee26f30fb3e5"),new Guid("56f5d5ee-1ab5-48f2-a413-7b80dd2c283e"))
 				.WithObjectTypes(Quote, Party)
 				.WithSingularName("Receiver")  
@@ -10057,14 +9844,6 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.ManyToOne)
 				  
 				.WithIsIndexed(true)  
-				.Build();
-
-				QuoteValidThroughDay = new RelationTypeBuilder(Apps, new Guid("a7b04fb6-522a-45ab-af25-f61270419824"),new Guid("51e7e669-98cc-4622-955b-dbcd2770b615"),new Guid("11842a94-3c74-48d1-a661-4b2f64a7c4b8"))
-				.WithObjectTypes(Quote, AllorsInteger)
-				.WithSingularName("ValidThroughDay")  
-				.WithPluralName("ValidThroughDays")  
-				  
-				  
 				.Build();
 
 				QuoteAmount = new RelationTypeBuilder(Apps, new Guid("b5bcf357-ef14-424d-ad8d-01a8e3ff478c"),new Guid("b9338369-9081-4fa7-91c2-140a46ea7d27"),new Guid("984b073d-0213-4539-8d3c-a35a81a71bd5"))
@@ -10077,10 +9856,10 @@ namespace Allors.Meta
 				.WithScale(2)
 				.Build();
 
-				QuoteValidFromYear = new RelationTypeBuilder(Apps, new Guid("cd26e742-c635-4766-b383-6ba28abd502b"),new Guid("cbd28c35-923a-464a-a412-a1108a20e116"),new Guid("4ed50d9d-ee26-49cd-8c88-681d66bc1e10"))
-				.WithObjectTypes(Quote, AllorsInteger)
-				.WithSingularName("ValidFromYear")  
-				.WithPluralName("ValidFromYears")  
+				QuoteIssueDate = new RelationTypeBuilder(Apps, new Guid("d7dc81e8-76e7-4c68-9843-a2aaf8293510"),new Guid("6fbc80d1-e72b-4484-a9b1-e606f15d2435"),new Guid("219cb27f-20b5-48b3-9d89-4b119798b092"))
+				.WithObjectTypes(Quote, AllorsDate)
+				.WithSingularName("IssueDate")  
+				.WithPluralName("IssueDates")  
 				  
 				  
 				.Build();
@@ -10094,14 +9873,6 @@ namespace Allors.Meta
 				.WithIsIndexed(true)  
 				.Build();
 
-				QuoteValidThroughYear = new RelationTypeBuilder(Apps, new Guid("e474d5d3-cec4-4e0f-bf42-ca429ca4d10c"),new Guid("e46975a5-6810-4a14-9f65-c27052788d49"),new Guid("d75b3a52-82d2-4f91-842a-d27e68dad496"))
-				.WithObjectTypes(Quote, AllorsInteger)
-				.WithSingularName("ValidThroughYear")  
-				.WithPluralName("ValidThroughYears")  
-				  
-				  
-				.Build();
-
 				QuoteQuoteNumber = new RelationTypeBuilder(Apps, new Guid("e76cbd73-78b7-4ef8-a24c-9ac0db152f7f"),new Guid("057ad29f-c245-44b2-8a95-71bd6607830b"),new Guid("218e3a6e-b530-41f7-a60e-7587f8072c8c"))
 				.WithObjectTypes(Quote, AllorsString)
 				.WithSingularName("QuoteNumber")  
@@ -10109,22 +9880,6 @@ namespace Allors.Meta
 				  
 				  
 				.WithSize(256)
-				.Build();
-
-				QuoteValidFromDay = new RelationTypeBuilder(Apps, new Guid("f46ab359-a5da-4ea7-b32d-dae0639af7f3"),new Guid("ad06cb98-f9dc-4bc7-a684-76900666f067"),new Guid("897cf979-458a-4dda-aee4-fd017dc3b8e1"))
-				.WithObjectTypes(Quote, AllorsInteger)
-				.WithSingularName("ValidFromDay")  
-				.WithPluralName("ValidFromDays")  
-				  
-				  
-				.Build();
-
-				QuoteValidThroughMonth = new RelationTypeBuilder(Apps, new Guid("fb75efbc-661b-4f03-af41-9b7d1adfc022"),new Guid("ff2f5747-2998-4743-8c47-e78e012e258f"),new Guid("219147da-c4e4-4712-8594-558b59f3ddba"))
-				.WithObjectTypes(Quote, AllorsInteger)
-				.WithSingularName("ValidThroughMonth")  
-				.WithPluralName("ValidThroughMonths")  
-				  
-				  
 				.Build();
 
 
@@ -10323,7 +10078,7 @@ namespace Allors.Meta
 				// Vehicle
 				// AccountingTransactionNumber
 				AccountingTransactionNumberNumber = new RelationTypeBuilder(Apps, new Guid("1a7eda6e-7b1c-4faf-8635-05bc233c5dd8"),new Guid("ad6df638-67d2-4d41-9695-01c6adf3f251"),new Guid("e2178198-6bbd-4caa-9402-40137b2bd529"))
-				.WithObjectTypes(AccountingTransactionNumber, AllorsInteger)
+				.WithObjectTypes(AccountingTransactionNumber, AllorsLong)
 				.WithSingularName("Number")  
 				.WithPluralName("Numbers")  
 				  
@@ -10441,49 +10196,25 @@ namespace Allors.Meta
 				.Build();
 
 				JournalEntryEntryNumber = new RelationTypeBuilder(Apps, new Guid("1452d159-857a-4fff-b1d6-6d27772e54bc"),new Guid("eb122f1d-8615-4342-8beb-2a197677947a"),new Guid("bf8485f3-d5dd-4236-b542-61674c2298db"))
-				.WithObjectTypes(JournalEntry, AllorsInteger)
+				.WithObjectTypes(JournalEntry, AllorsLong)
 				.WithSingularName("EntryNumber")  
 				.WithPluralName("EntryNumbers")  
 				  
 				  
 				.Build();
 
-				JournalEntryJournalDay = new RelationTypeBuilder(Apps, new Guid("6f613b8d-1b98-44df-8aba-f146986088b7"),new Guid("e296010f-d85b-4b6c-958b-7e02d1bff646"),new Guid("24f4b9de-1ede-446b-a8c8-6280edfd79ff"))
-				.WithObjectTypes(JournalEntry, AllorsInteger)
-				.WithSingularName("JournalDay")  
-				.WithPluralName("JournalDays")  
+				JournalEntryEntryDate = new RelationTypeBuilder(Apps, new Guid("1b5f8acd-872d-498e-9c2d-ded4b7d31efe"),new Guid("9bb9541a-f0fc-4ed8-bc3f-13e1d7901395"),new Guid("0b9dd5eb-10a1-470b-a119-158c66c558f1"))
+				.WithObjectTypes(JournalEntry, AllorsDate)
+				.WithSingularName("EntryDate")  
+				.WithPluralName("EntryDates")  
 				  
 				  
 				.Build();
 
-				JournalEntryJournalMonth = new RelationTypeBuilder(Apps, new Guid("790d5263-47b1-452c-8ff3-b2c7eaae9010"),new Guid("3218febb-e344-432c-9701-600829f0828f"),new Guid("b3295598-9409-4767-95a2-2807a1393c12"))
-				.WithObjectTypes(JournalEntry, AllorsInteger)
-				.WithSingularName("JournalMonth")  
-				.WithPluralName("JournalMonths")  
-				  
-				  
-				.Build();
-
-				JournalEntryEntryDay = new RelationTypeBuilder(Apps, new Guid("a2d1de79-02b1-4362-86bb-5357075e09e0"),new Guid("08e6e863-27ec-4e38-ac75-0bf4bf50d3bb"),new Guid("7a8cc150-6bd8-49a6-8208-13a275ca3e2e"))
-				.WithObjectTypes(JournalEntry, AllorsInteger)
-				.WithSingularName("EntryDay")  
-				.WithPluralName("EntryDays")  
-				  
-				  
-				.Build();
-
-				JournalEntryEntryMonth = new RelationTypeBuilder(Apps, new Guid("c2c9c24a-d091-4547-903d-994282c391b4"),new Guid("1ed06693-be80-48e8-87ff-ffb94798a2d1"),new Guid("ed626006-9b9f-4b06-b24a-17d0e81931da"))
-				.WithObjectTypes(JournalEntry, AllorsInteger)
-				.WithSingularName("EntryMonth")  
-				.WithPluralName("EntryMonths")  
-				  
-				  
-				.Build();
-
-				JournalEntryJournalYear = new RelationTypeBuilder(Apps, new Guid("e4ff40fa-3209-40e8-a3f6-86853498a52f"),new Guid("483aac6e-ed3f-4306-aecd-4cd92876e2cf"),new Guid("836548b9-038d-4fed-93cc-b05187e5d5dc"))
-				.WithObjectTypes(JournalEntry, AllorsInteger)
-				.WithSingularName("JournalYear")  
-				.WithPluralName("JournalYears")  
+				JournalEntryJournalDate = new RelationTypeBuilder(Apps, new Guid("4eca8284-cc27-4440-8b5f-adeffd3b078b"),new Guid("b7897efa-b2f5-4807-8385-3da4936998c7"),new Guid("f8bcd82b-5209-45d1-a6ee-5452ca9cf11b"))
+				.WithObjectTypes(JournalEntry, AllorsDate)
+				.WithSingularName("JournalDate")  
+				.WithPluralName("JournalDates")  
 				  
 				  
 				.Build();
@@ -10495,14 +10226,6 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.OneToMany)
 				  
 				.WithIsIndexed(true)  
-				.Build();
-
-				JournalEntryEntryYear = new RelationTypeBuilder(Apps, new Guid("ede6126e-7edc-4de8-9a99-3c58499bf9c4"),new Guid("e70eef1f-ec02-4ed5-b59d-24d23e1b3dc7"),new Guid("4f5fa9d2-3299-4b6c-9e1f-36da81dfbd4d"))
-				.WithObjectTypes(JournalEntry, AllorsInteger)
-				.WithSingularName("EntryYear")  
-				.WithPluralName("EntryYears")  
-				  
-				  
 				.Build();
 
 
@@ -10548,14 +10271,6 @@ namespace Allors.Meta
 
 
 				// PurchaseReturnStatus
-				PurchaseReturnStatusStartYear = new RelationTypeBuilder(Apps, new Guid("0fde433e-07ff-4742-a2e3-5bfed8f56209"),new Guid("01749e29-70a8-4223-9918-b15d32b9c5db"),new Guid("00fe46c6-7207-4248-9548-34c49f2eb57b"))
-				.WithObjectTypes(PurchaseReturnStatus, AllorsInteger)
-				.WithSingularName("StartYear")  
-				.WithPluralName("StartYears")  
-				  
-				  
-				.Build();
-
 				PurchaseReturnStatusPurchaseReturnObjectState = new RelationTypeBuilder(Apps, new Guid("1485de84-2719-4543-9250-807f1a9e60bf"),new Guid("9694eb68-d7c4-40db-b15d-deacb698e976"),new Guid("48bd4dce-ecae-4acf-b820-70352958c04b"))
 				.WithObjectTypes(PurchaseReturnStatus, PurchaseReturnObjectState)
 				.WithSingularName("PurchaseReturnObjectState")  
@@ -10565,42 +10280,10 @@ namespace Allors.Meta
 				.WithIsIndexed(true)  
 				.Build();
 
-				PurchaseReturnStatusStartHour = new RelationTypeBuilder(Apps, new Guid("3cc335b7-a7d6-44c9-b618-e451da66d1a1"),new Guid("67b93802-8171-477c-a06b-e7eb37dd20ea"),new Guid("806eb22c-0623-44df-85ab-2304700a7d17"))
-				.WithObjectTypes(PurchaseReturnStatus, AllorsInteger)
-				.WithSingularName("StartHour")  
-				.WithPluralName("StartHours")  
-				  
-				  
-				.Build();
-
-				PurchaseReturnStatusStartDay = new RelationTypeBuilder(Apps, new Guid("59ff6a8c-d27c-46e4-87c6-47d33d2970d8"),new Guid("b700c0af-3c48-438c-b866-94d58e58e5ee"),new Guid("68e412f9-fe22-4b71-a004-1a7610809f35"))
-				.WithObjectTypes(PurchaseReturnStatus, AllorsInteger)
-				.WithSingularName("StartDay")  
-				.WithPluralName("StartDays")  
-				  
-				  
-				.Build();
-
-				PurchaseReturnStatusStartSecond = new RelationTypeBuilder(Apps, new Guid("8630f677-5303-4a9b-9a20-b093be7469aa"),new Guid("a3894de5-3fe7-43fa-af90-bce1f1651060"),new Guid("755b5f6f-1ee9-410f-8198-79e30f9bdf62"))
-				.WithObjectTypes(PurchaseReturnStatus, AllorsInteger)
-				.WithSingularName("StartSecond")  
-				.WithPluralName("StartSeconds")  
-				  
-				  
-				.Build();
-
-				PurchaseReturnStatusStartMinute = new RelationTypeBuilder(Apps, new Guid("9696ac14-b386-4ec0-9ea1-a649e1248e71"),new Guid("32060cdf-0473-4c5d-baae-2a3d71e5e198"),new Guid("41699004-5839-45b0-b834-53aec7d42698"))
-				.WithObjectTypes(PurchaseReturnStatus, AllorsInteger)
-				.WithSingularName("StartMinute")  
-				.WithPluralName("StartMinutes")  
-				  
-				  
-				.Build();
-
-				PurchaseReturnStatusStartMonth = new RelationTypeBuilder(Apps, new Guid("f1f1514c-a421-4fa9-83b1-87836f9a780a"),new Guid("d15589ae-bb75-4b21-9998-b7f788a7ae5f"),new Guid("6ecd26e9-a4e9-492f-a3ba-a00d90d4db46"))
-				.WithObjectTypes(PurchaseReturnStatus, AllorsInteger)
-				.WithSingularName("StartMonth")  
-				.WithPluralName("StartMonths")  
+				PurchaseReturnStatusStartDateTime = new RelationTypeBuilder(Apps, new Guid("46004f49-9d2e-49a6-870e-c81f44458c59"),new Guid("3b2a6ce5-a5c8-45c3-ba3b-3fa5326e4293"),new Guid("bd72c728-57ef-4e68-9bd1-2517bfe7e972"))
+				.WithObjectTypes(PurchaseReturnStatus, AllorsDateTime)
+				.WithSingularName("StartDateTime")  
+				.WithPluralName("StartDateTimes")  
 				  
 				  
 				.Build();
@@ -10935,22 +10618,6 @@ namespace Allors.Meta
 
 
 				// PartySkill
-				PartySkillStartedUsingDay = new RelationTypeBuilder(Apps, new Guid("13fb85f3-ae69-4bb7-8d48-00a8a2ff12de"),new Guid("6cd59802-37ad-49f6-90c6-c450c54b449a"),new Guid("34376b7c-a24d-42f3-9dbd-85771e42d27e"))
-				.WithObjectTypes(PartySkill, AllorsInteger)
-				.WithSingularName("StartedUsingDay")  
-				.WithPluralName("StartedUsingDays")  
-				  
-				  
-				.Build();
-
-				PartySkillStartedUsingYear = new RelationTypeBuilder(Apps, new Guid("1ef905b8-2dd1-4b67-a8c3-27a08aa7bd50"),new Guid("edd2fc19-3a92-40ed-9f1a-3c72cf3dc8f6"),new Guid("de4283cd-4dfe-429f-9a6a-54c0583e587e"))
-				.WithObjectTypes(PartySkill, AllorsInteger)
-				.WithSingularName("StartedUsingYear")  
-				.WithPluralName("StartedUsingYears")  
-				  
-				  
-				.Build();
-
 				PartySkillYearsExperience = new RelationTypeBuilder(Apps, new Guid("3254f43d-7b3a-49c8-8c1b-19fa0e4f6901"),new Guid("a25f511d-a4f9-4360-9150-304ed62d411f"),new Guid("a6c023ba-549c-4895-bd32-ed70f05ef121"))
 				.WithObjectTypes(PartySkill, AllorsDecimal)
 				.WithSingularName("YearsExperience")  
@@ -10961,18 +10628,18 @@ namespace Allors.Meta
 				.WithScale(2)
 				.Build();
 
-				PartySkillSkillRating = new RelationTypeBuilder(Apps, new Guid("a341478c-503c-49ee-8c9a-e85b777e9ff4"),new Guid("0a9d48d6-e307-461d-b30f-14deae3d5bd8"),new Guid("cd88bbe3-aa6a-4051-a800-57e685d85587"))
-				.WithObjectTypes(PartySkill, SkillRating)
-				.WithSingularName("SkillRating")  
-				.WithPluralName("SkillRatings")  
+				PartySkillStartedUsingDate = new RelationTypeBuilder(Apps, new Guid("7ed819c8-78ef-4fe3-b499-b381c246711f"),new Guid("4a88ee23-2c4a-41d2-9891-77e5086db97d"),new Guid("ecb7eb99-dc8f-4ca0-9744-fb87a708430a"))
+				.WithObjectTypes(PartySkill, AllorsDate)
+				.WithSingularName("StartedUsingDate")  
+				.WithPluralName("StartedUsingDates")  
 				  
 				  
 				.Build();
 
-				PartySkillStartedUsingMonth = new RelationTypeBuilder(Apps, new Guid("b1f75b7e-693e-492e-9349-756933512b5f"),new Guid("5c66a965-d24e-4be6-aab5-defca5cd8f75"),new Guid("69ae628d-0456-4084-aad5-767da94b3b1b"))
-				.WithObjectTypes(PartySkill, AllorsInteger)
-				.WithSingularName("StartedUsingMonth")  
-				.WithPluralName("StartedUsingMonths")  
+				PartySkillSkillRating = new RelationTypeBuilder(Apps, new Guid("a341478c-503c-49ee-8c9a-e85b777e9ff4"),new Guid("0a9d48d6-e307-461d-b30f-14deae3d5bd8"),new Guid("cd88bbe3-aa6a-4051-a800-57e685d85587"))
+				.WithObjectTypes(PartySkill, SkillRating)
+				.WithSingularName("SkillRating")  
+				.WithPluralName("SkillRatings")  
 				  
 				  
 				.Build();
@@ -11035,58 +10702,10 @@ namespace Allors.Meta
 
 
 				// SerializedInventoryItemStatus
-				SerializedInventoryItemStatusStartSecond = new RelationTypeBuilder(Apps, new Guid("3ea021d3-b624-4466-905a-f839f9251b39"),new Guid("f881297e-5e16-4e8b-b0a4-e3ff80f50453"),new Guid("14603b18-473d-49b0-979b-1ac38efc2fbf"))
-				.WithObjectTypes(SerializedInventoryItemStatus, AllorsInteger)
-				.WithSingularName("StartSecond")  
-				.WithPluralName("StartSeconds")  
-				  
-				  
-				.Build();
-
-				SerializedInventoryItemStatusCreationMinute = new RelationTypeBuilder(Apps, new Guid("5bc5fcef-93f1-4732-9764-7b1dd8329ae6"),new Guid("b75ca278-cc2d-4b92-bb8f-6a2046b6d91e"),new Guid("8f201790-6d60-481f-9b9b-6cb8bce4eff8"))
-				.WithObjectTypes(SerializedInventoryItemStatus, AllorsInteger)
-				.WithSingularName("CreationMinute")  
-				.WithPluralName("CreationMinutes")  
-				  
-				  
-				.Build();
-
-				SerializedInventoryItemStatusStartHour = new RelationTypeBuilder(Apps, new Guid("84dec4f0-a57c-4e47-983d-89b86848d21b"),new Guid("e9cfdc5c-8d84-4499-998e-29a74d99065a"),new Guid("8b11273a-70dd-4415-93cd-d37ca92d93f8"))
-				.WithObjectTypes(SerializedInventoryItemStatus, AllorsInteger)
-				.WithSingularName("StartHour")  
-				.WithPluralName("StartHours")  
-				  
-				  
-				.Build();
-
-				SerializedInventoryItemStatusStartYear = new RelationTypeBuilder(Apps, new Guid("8e017e4d-1d78-466f-b94a-4ebb6e0d0ce5"),new Guid("05291d6f-0847-4cd1-a04b-873cd911a60e"),new Guid("c2c6bfd0-0703-4e92-ad03-c6680e707f5c"))
-				.WithObjectTypes(SerializedInventoryItemStatus, AllorsInteger)
-				.WithSingularName("StartYear")  
-				.WithPluralName("StartYears")  
-				  
-				  
-				.Build();
-
-				SerializedInventoryItemStatusStartMonth = new RelationTypeBuilder(Apps, new Guid("adc1273b-6129-4cfe-8a61-748fc319f800"),new Guid("87f5840a-d1b7-4f5f-908e-1c8660fd9b77"),new Guid("6e53b538-345b-4685-833c-33b7574fe2e4"))
-				.WithObjectTypes(SerializedInventoryItemStatus, AllorsInteger)
-				.WithSingularName("StartMonth")  
-				.WithPluralName("StartMonths")  
-				  
-				  
-				.Build();
-
-				SerializedInventoryItemStatusCreationDay = new RelationTypeBuilder(Apps, new Guid("c1df3674-1d59-446a-87f7-489b5f13cde9"),new Guid("33cce7ae-c74e-450c-9599-da0fbe67ea21"),new Guid("b0a25498-9e4a-4825-9be3-3ad2480eac66"))
-				.WithObjectTypes(SerializedInventoryItemStatus, AllorsInteger)
-				.WithSingularName("CreationDay")  
-				.WithPluralName("CreationDays")  
-				  
-				  
-				.Build();
-
-				SerializedInventoryItemStatusStartDay = new RelationTypeBuilder(Apps, new Guid("c48bb7e0-0c03-4216-942a-124f749c37c0"),new Guid("90f0c1b8-5e73-457e-b8b0-be418ca060ba"),new Guid("4c14d736-a808-455d-9742-297c05e38273"))
-				.WithObjectTypes(SerializedInventoryItemStatus, AllorsInteger)
-				.WithSingularName("StartDay")  
-				.WithPluralName("StartDays")  
+				SerializedInventoryItemStatusStartDateTime = new RelationTypeBuilder(Apps, new Guid("aabb931a-38ee-4568-af8c-5f8ed98ed7b9"),new Guid("85598163-c71c-4bdc-942b-5ad461943e01"),new Guid("87e945cc-864b-42b6-ad9b-c3d447d96073"))
+				.WithObjectTypes(SerializedInventoryItemStatus, AllorsDateTime)
+				.WithSingularName("StartDateTime")  
+				.WithPluralName("StartDateTimes")  
 				  
 				  
 				.Build();
@@ -11098,22 +10717,6 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.ManyToOne)
 				  
 				.WithIsIndexed(true)  
-				.Build();
-
-				SerializedInventoryItemStatusStartMinute = new RelationTypeBuilder(Apps, new Guid("f617dbda-17f0-41d4-a9eb-ce5542086536"),new Guid("a6a6f411-d67b-4b54-8833-407368882fe7"),new Guid("621672e9-e8ee-43c5-a4eb-666a4b01bb54"))
-				.WithObjectTypes(SerializedInventoryItemStatus, AllorsInteger)
-				.WithSingularName("StartMinute")  
-				.WithPluralName("StartMinutes")  
-				  
-				  
-				.Build();
-
-				SerializedInventoryItemStatusCreationHour = new RelationTypeBuilder(Apps, new Guid("fde0f691-c1b2-498e-b37d-09ad6bb4bdd6"),new Guid("bd8a231a-5f37-4830-baaf-1e490b6a68c3"),new Guid("2facb957-c2de-4127-ac85-f82e5dd35d2e"))
-				.WithObjectTypes(SerializedInventoryItemStatus, AllorsInteger)
-				.WithSingularName("CreationHour")  
-				.WithPluralName("CreationHours")  
-				  
-				  
 				.Build();
 
 
@@ -11417,14 +11020,6 @@ namespace Allors.Meta
 
 
 				// ServiceEntryHeader
-				ServiceEntryHeaderSubmittedYear = new RelationTypeBuilder(Apps, new Guid("2c25bcc0-f657-489b-bbe2-a6d2efc71d92"),new Guid("8e8be0b5-223d-4783-b433-8891ca49992d"),new Guid("790e3a1f-1365-44dd-b19a-8097b3aa685e"))
-				.WithObjectTypes(ServiceEntryHeader, AllorsInteger)
-				.WithSingularName("SubmittedYear")  
-				.WithPluralName("SubmittedYears")  
-				  
-				  
-				.Build();
-
 				ServiceEntryHeaderServiceEntry = new RelationTypeBuilder(Apps, new Guid("6b29a626-04f6-423f-8ae5-cb49e8f9211d"),new Guid("9f14e67f-328b-44e6-8c80-707441848265"),new Guid("21500c76-8a3e-4737-aa69-e348e06440e2"))
 				.WithObjectTypes(ServiceEntryHeader, ServiceEntry)
 				.WithSingularName("ServiceEntry")  
@@ -11434,6 +11029,14 @@ namespace Allors.Meta
 				.WithIsIndexed(true)  
 				.Build();
 
+				ServiceEntryHeaderSubmittedDate = new RelationTypeBuilder(Apps, new Guid("7e160fbc-1339-433c-9dcb-9b3ad58ad400"),new Guid("a9d0cbd8-bb20-45e1-b109-6620b23fa1b7"),new Guid("ef8b435e-e354-45e2-89bc-3d452cc84f5a"))
+				.WithObjectTypes(ServiceEntryHeader, AllorsDate)
+				.WithSingularName("SubmittedDate")  
+				.WithPluralName("SubmittedDates")  
+				  
+				  
+				.Build();
+
 				ServiceEntryHeaderSubmittedBy = new RelationTypeBuilder(Apps, new Guid("902235fe-a6c5-47bb-936b-8b6ce54b3d15"),new Guid("1f93dde3-a9bd-4e10-8ec6-38edaec6ffb5"),new Guid("3b27dd30-5452-480f-ae19-6937c422b541"))
 				.WithObjectTypes(ServiceEntryHeader, Person)
 				.WithSingularName("SubmittedBy")  
@@ -11441,22 +11044,6 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.ManyToOne)
 				  
 				.WithIsIndexed(true)  
-				.Build();
-
-				ServiceEntryHeaderSubmittedMonth = new RelationTypeBuilder(Apps, new Guid("a68086e6-3b5d-4809-bd7f-88535da03c00"),new Guid("3b712398-97e6-4497-990e-03e2d1735f78"),new Guid("70e3189b-03c5-4a39-ae38-e1f9fe25c682"))
-				.WithObjectTypes(ServiceEntryHeader, AllorsInteger)
-				.WithSingularName("SubmittedMonth")  
-				.WithPluralName("SubmittedMonths")  
-				  
-				  
-				.Build();
-
-				ServiceEntryHeaderSubmittedDay = new RelationTypeBuilder(Apps, new Guid("b924f22e-5601-462e-9d21-51f8419a9434"),new Guid("1b5d409e-8739-4e65-8a09-0ba6703940a5"),new Guid("900b33f4-a750-4da3-bba8-4facc3299b29"))
-				.WithObjectTypes(ServiceEntryHeader, AllorsInteger)
-				.WithSingularName("SubmittedDay")  
-				.WithPluralName("SubmittedDays")  
-				  
-				  
 				.Build();
 
 
@@ -11592,6 +11179,14 @@ namespace Allors.Meta
 				.WithIsIndexed(true)  
 				.Build();
 
+				PickListCreationDate = new RelationTypeBuilder(Apps, new Guid("1176ffe1-efff-4c02-b4df-5bba9052f6da"),new Guid("dcb3602c-f60e-4798-b32d-2a69f9e1056b"),new Guid("920c6a7e-b8b8-4155-9209-4c8ed24a023a"))
+				.WithObjectTypes(PickList, AllorsDateTime)
+				.WithSingularName("CreationDate")  
+				.WithPluralName("CreationDates")  
+				  
+				  
+				.Build();
+
 				PickListPickListItem = new RelationTypeBuilder(Apps, new Guid("3bb68c85-4e2b-42b8-b5fb-18a66c58c283"),new Guid("11fddfe2-9b04-4b53-a4ff-6f571e73c32a"),new Guid("a139b102-f8a9-43f1-9b14-d3c76f7be294"))
 				.WithObjectTypes(PickList, PickListItem)
 				.WithSingularName("PickListItem")  
@@ -11608,22 +11203,6 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.ManyToOne)
 				.WithIsDerived(true)  
 				.WithIsIndexed(true)  
-				.Build();
-
-				PickListCreationMonth = new RelationTypeBuilder(Apps, new Guid("431c8ac7-459c-44e3-8260-085390d41abd"),new Guid("7b1a4d4e-34fd-44ef-96be-5cb8a8f68580"),new Guid("26258256-392e-4fe7-a52b-815ed0ca3057"))
-				.WithObjectTypes(PickList, AllorsInteger)
-				.WithSingularName("CreationMonth")  
-				.WithPluralName("CreationMonths")  
-				  
-				  
-				.Build();
-
-				PickListCreationYear = new RelationTypeBuilder(Apps, new Guid("4d1abb02-0bc9-49f2-a900-ad87d6817b9c"),new Guid("5269206c-972d-4472-8f23-86febd7beb81"),new Guid("b3faaf4b-d1e0-4083-939d-5770a47f8c0a"))
-				.WithObjectTypes(PickList, AllorsInteger)
-				.WithSingularName("CreationYear")  
-				.WithPluralName("CreationYears")  
-				  
-				  
 				.Build();
 
 				PickListCurrentPickListStatus = new RelationTypeBuilder(Apps, new Guid("62239709-cd1f-4582-99f7-8f18e875e241"),new Guid("61ae7eeb-259c-44bb-9de7-aff577a66669"),new Guid("fe4d009e-1ea4-43d2-b4ce-96a1d9af5cf7"))
@@ -11650,14 +11229,6 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.OneToMany)
 				.WithIsDerived(true)  
 				.WithIsIndexed(true)  
-				.Build();
-
-				PickListCreationSecond = new RelationTypeBuilder(Apps, new Guid("7f0d8505-72b6-4426-a397-8f83b2540f77"),new Guid("73998642-665b-4f91-8bf8-fd830f8d8b0a"),new Guid("fd48d664-e539-42d1-acba-6ebf4fa87344"))
-				.WithObjectTypes(PickList, AllorsInteger)
-				.WithSingularName("CreationSecond")  
-				.WithPluralName("CreationSeconds")  
-				  
-				  
 				.Build();
 
 				PickListPreviousObjectState = new RelationTypeBuilder(Apps, new Guid("8ffdbeab-618f-42fb-8ec8-4bb34c65f489"),new Guid("50ffbba5-5584-411c-98a8-61320be9ab15"),new Guid("e623f810-2bf7-4dda-8d83-c0d0bc17c379"))
@@ -11905,18 +11476,18 @@ namespace Allors.Meta
 				.WithIsIndexed(true)  
 				.Build();
 
-				SupplierRelationshipLastReminderYear = new RelationTypeBuilder(Apps, new Guid("1736a026-ef65-4aa5-8da1-508a65ab1549"),new Guid("03a4e722-1d1c-4544-8d87-3b3d78f5e6ea"),new Guid("6225eb29-4382-4186-a438-d885f7bbd2a1"))
-				.WithObjectTypes(SupplierRelationship, AllorsInteger)
-				.WithSingularName("LastReminderYear")  
-				.WithPluralName("LastReminderYears")  
-				  
-				  
-				.Build();
-
 				SupplierRelationshipSubAccountNumber = new RelationTypeBuilder(Apps, new Guid("17aa6ceb-0cbd-45fa-9f6d-848ce4a365b1"),new Guid("b5057208-9823-4a54-8394-6100d18dbe4a"),new Guid("6ddbeb86-39ea-4bd8-ae17-af4b9a1968ce"))
 				.WithObjectTypes(SupplierRelationship, AllorsInteger)
 				.WithSingularName("SubAccountNumber")  
 				.WithPluralName("SubAccountNumbers")  
+				  
+				  
+				.Build();
+
+				SupplierRelationshipLastReminderDate = new RelationTypeBuilder(Apps, new Guid("b12a68f6-0eaa-4a8a-a741-398a0be43f62"),new Guid("01adc720-91a4-47c6-9235-d21a3215ee6f"),new Guid("0363121b-d92e-4722-81dc-47032aae5440"))
+				.WithObjectTypes(SupplierRelationship, AllorsDate)
+				.WithSingularName("LastReminderDate")  
+				.WithPluralName("LastReminderDates")  
 				  
 				  
 				.Build();
@@ -11930,14 +11501,6 @@ namespace Allors.Meta
 				.WithIsIndexed(true)  
 				.Build();
 
-				SupplierRelationshipLastReminderMonth = new RelationTypeBuilder(Apps, new Guid("bc1f60c6-a263-4e2a-bb5d-fad759581a01"),new Guid("2309f322-d41f-4586-accd-09627357090a"),new Guid("428c630d-e192-45e7-a629-d18ee00c4b24"))
-				.WithObjectTypes(SupplierRelationship, AllorsInteger)
-				.WithSingularName("LastReminderMonth")  
-				.WithPluralName("LastReminderMonths")  
-				  
-				  
-				.Build();
-
 				SupplierRelationshipInternalOrganisation = new RelationTypeBuilder(Apps, new Guid("e96a79e7-c161-4ed9-a5cc-8de4f67bf954"),new Guid("1a406db2-268a-4669-a629-e0e15fdbd826"),new Guid("aa91e2ad-89c0-411e-9271-56fbf20489f6"))
 				.WithObjectTypes(SupplierRelationship, InternalOrganisation)
 				.WithSingularName("InternalOrganisation")  
@@ -11948,17 +11511,9 @@ namespace Allors.Meta
 				.Build();
 
 				SupplierRelationshipBlockedForDunning = new RelationTypeBuilder(Apps, new Guid("ee871786-8840-404d-9b41-932a9f59be13"),new Guid("5b98959d-5589-4958-a86f-4c9b465c1632"),new Guid("056ca61a-1ab4-4e53-8d5f-328ada5f3b11"))
-				.WithObjectTypes(SupplierRelationship, AccessControl)
+				.WithObjectTypes(SupplierRelationship, AllorsDate)
 				.WithSingularName("BlockedForDunning")  
 				.WithPluralName("BlockedsForDunning")  
-				  
-				  
-				.Build();
-
-				SupplierRelationshipLastReminderDay = new RelationTypeBuilder(Apps, new Guid("fd6c576e-b682-402e-a574-35c52268f758"),new Guid("1e39a8d9-0841-4633-926b-2f51e3f58ec3"),new Guid("6e3f18e9-cc98-4cf5-8627-7bc8d6e4f439"))
-				.WithObjectTypes(SupplierRelationship, AllorsInteger)
-				.WithSingularName("LastReminderDay")  
-				.WithPluralName("LastReminderDays")  
 				  
 				  
 				.Build();
@@ -21622,7 +21177,7 @@ namespace Allors.Meta
 				.Build();
 
 				JournalEntryNumberNumber = new RelationTypeBuilder(Apps, new Guid("99719445-24e6-445e-8ce1-60c0b5911723"),new Guid("4d278d9b-a817-4311-ba52-d1bd14db8cc2"),new Guid("2d669167-ac38-4dd1-a846-ba0f1b724bd2"))
-				.WithObjectTypes(JournalEntryNumber, AllorsInteger)
+				.WithObjectTypes(JournalEntryNumber, AllorsLong)
 				.WithSingularName("Number")  
 				.WithPluralName("Number")  
 				  
@@ -22200,7 +21755,7 @@ namespace Allors.Meta
 				.Build();
 
 				InternalOrganisationNextAccountingTransactionNumber = new RelationTypeBuilder(Apps, new Guid("e617fcf1-63fb-4333-aa79-7a8ac4d267e4"),new Guid("34c6c91f-3bb2-4821-a9cf-49a7d8959e9b"),new Guid("2f6236fc-4f59-4694-acd1-4ae339898bc3"))
-				.WithObjectTypes(InternalOrganisation, AllorsInteger)
+				.WithObjectTypes(InternalOrganisation, AllorsLong)
 				.WithSingularName("NextAccountingTransactionNumber")  
 				.WithPluralName("NextAccountingTransactionNumbers")  
 				  
@@ -24614,30 +24169,6 @@ namespace Allors.Meta
 
 
 				// CustomerShipmentStatus
-				CustomerShipmentStatusStartMinute = new RelationTypeBuilder(Apps, new Guid("104940cf-7a5c-4069-b540-5f092d925dce"),new Guid("22934fd3-1dc3-4ffc-9bee-b1269870b499"),new Guid("5f6f8bf2-47be-447f-bd4f-0aebfcf77c69"))
-				.WithObjectTypes(CustomerShipmentStatus, AllorsInteger)
-				.WithSingularName("StartMinute")  
-				.WithPluralName("StartMinutes")  
-				  
-				  
-				.Build();
-
-				CustomerShipmentStatusStartSecond = new RelationTypeBuilder(Apps, new Guid("460a129a-032c-4b81-956f-c92a41b7b8e0"),new Guid("2192fee7-30b2-4090-a05a-52a550882381"),new Guid("6e0ccecc-e7b9-4544-9bab-b7e351c909d6"))
-				.WithObjectTypes(CustomerShipmentStatus, AllorsInteger)
-				.WithSingularName("StartSecond")  
-				.WithPluralName("StartSeconds")  
-				  
-				  
-				.Build();
-
-				CustomerShipmentStatusStartHour = new RelationTypeBuilder(Apps, new Guid("5572f966-63a8-47c6-8245-96c08c21d5b1"),new Guid("9a40ad99-35b0-4fd6-a46a-068d2d8d1af3"),new Guid("51eb57ef-f08b-4de9-bc0f-e9f52201d31b"))
-				.WithObjectTypes(CustomerShipmentStatus, AllorsInteger)
-				.WithSingularName("StartHour")  
-				.WithPluralName("StartHours")  
-				  
-				  
-				.Build();
-
 				CustomerShipmentStatusCustomerShipmentObjectState = new RelationTypeBuilder(Apps, new Guid("591d3237-220b-4765-8001-4bc18ecd2d8c"),new Guid("2a2704d6-44f6-4e86-a8c9-407842b7eb83"),new Guid("fd56e773-b27b-4336-b1be-e262d1d26b41"))
 				.WithObjectTypes(CustomerShipmentStatus, CustomerShipmentObjectState)
 				.WithSingularName("CustomerShipmentObjectState")  
@@ -24647,26 +24178,10 @@ namespace Allors.Meta
 				.WithIsIndexed(true)  
 				.Build();
 
-				CustomerShipmentStatusStartYear = new RelationTypeBuilder(Apps, new Guid("9849c25e-cfd8-4084-903e-f85725575a9c"),new Guid("1f574cb0-3a0d-42fd-b5a5-0fb2eaf879c7"),new Guid("a4c4a6c6-4858-410a-8181-6077778d18b6"))
-				.WithObjectTypes(CustomerShipmentStatus, AllorsInteger)
-				.WithSingularName("StartYear")  
-				.WithPluralName("StartYears")  
-				  
-				  
-				.Build();
-
-				CustomerShipmentStatusStartMonth = new RelationTypeBuilder(Apps, new Guid("c92fb7b8-ae20-46d2-87fd-ee9c866640e6"),new Guid("843ea715-0481-4b3a-9f10-4b986c98b2f7"),new Guid("d8e8e2f0-9674-4e2a-8cbf-e0a6e45771c2"))
-				.WithObjectTypes(CustomerShipmentStatus, AllorsInteger)
-				.WithSingularName("StartMonth")  
-				.WithPluralName("StartMonths")  
-				  
-				  
-				.Build();
-
-				CustomerShipmentStatusStartDay = new RelationTypeBuilder(Apps, new Guid("e4ef639c-a29f-4cd3-9273-9265935f9859"),new Guid("bef8e8fb-d840-4737-a52c-1689a641a9b5"),new Guid("fac55b06-b129-4910-868e-6801abebe0a2"))
-				.WithObjectTypes(CustomerShipmentStatus, AllorsInteger)
-				.WithSingularName("StartDay")  
-				.WithPluralName("StartDays")  
+				CustomerShipmentStatusStartDateTime = new RelationTypeBuilder(Apps, new Guid("74e826e5-75d0-4e7d-b2fe-73a7c58e30ef"),new Guid("261ca695-c146-493d-b059-3836913268c4"),new Guid("eb029966-6353-401b-b24b-190460f0c035"))
+				.WithObjectTypes(CustomerShipmentStatus, AllorsDateTime)
+				.WithSingularName("StartDateTime")  
+				.WithPluralName("StartDateTimes")  
 				  
 				  
 				.Build();
@@ -24820,14 +24335,6 @@ namespace Allors.Meta
 				.WithScale(2)
 				.Build();
 
-				OrderItemAssignedDeliveryDay = new RelationTypeBuilder(Apps, new Guid("094de459-05d0-4328-85ce-e1dffe782964"),new Guid("e465dfd5-2aa7-4490-af38-fc8be1ee3fc3"),new Guid("c0d52980-8e16-45c4-9446-46cb3abba8bf"))
-				.WithObjectTypes(OrderItem, AllorsInteger)
-				.WithSingularName("AssignedDeliveryDay")  
-				.WithPluralName("AssignedDeliveryDays")  
-				  
-				  
-				.Build();
-
 				OrderItemDiscountAdjustment = new RelationTypeBuilder(Apps, new Guid("0dc8733d-816a-4231-8a56-24363923080f"),new Guid("f41fe55a-b9f4-4a81-a7c6-cffb5e3e8cc1"),new Guid("8aa28a5f-d801-4751-b37a-435b461b1b54"))
 				.WithObjectTypes(OrderItem, DiscountAdjustment)
 				.WithSingularName("DiscountAdjustment")  
@@ -24844,14 +24351,6 @@ namespace Allors.Meta
 				  
 				.WithPrecision(19)
 				.WithScale(2)
-				.Build();
-
-				OrderItemDeliveryDay = new RelationTypeBuilder(Apps, new Guid("228e3f5b-0fbd-49b1-91d4-8e1a0c3b4674"),new Guid("95d8cd9a-8d2d-4384-959f-79aceaf33830"),new Guid("c638d8c5-f147-43ec-804c-514ccf9aebe9"))
-				.WithObjectTypes(OrderItem, AllorsInteger)
-				.WithSingularName("DeliveryDay")  
-				.WithPluralName("DeliveryDays")  
-				  
-				  
 				.Build();
 
 				OrderItemTotalVatCustomerCurrency = new RelationTypeBuilder(Apps, new Guid("27534e6f-55d3-45e3-82ba-1580af4647d6"),new Guid("cda2b9ab-8d74-471c-95ea-38fb0c4a7589"),new Guid("32f1c0f7-59d6-4c2c-a39e-607d359b6f53"))
@@ -24890,14 +24389,6 @@ namespace Allors.Meta
 				  
 				.WithPrecision(19)
 				.WithScale(2)
-				.Build();
-
-				OrderItemAssignedDeliveryYear = new RelationTypeBuilder(Apps, new Guid("3328ddb9-a73a-4355-9e30-b6df6df74f74"),new Guid("0910c9bf-34fc-4a91-99d2-3f71e8a4d039"),new Guid("5f3023a4-6d9a-46bb-8dca-f02316fffa0e"))
-				.WithObjectTypes(OrderItem, AllorsInteger)
-				.WithSingularName("AssignedDeliveryYear")  
-				.WithPluralName("AssignedDeliveryYears")  
-				  
-				  
 				.Build();
 
 				OrderItemUnitSurcharge = new RelationTypeBuilder(Apps, new Guid("3722807a-0634-4df2-8964-4778b4edc314"),new Guid("091b8400-d566-472d-a804-a55bfd99ff92"),new Guid("7dcca5fa-73b5-4751-9d16-b05e6e5ef5b7"))
@@ -25007,14 +24498,6 @@ namespace Allors.Meta
 				.WithIsIndexed(true)  
 				.Build();
 
-				OrderItemDeliveryYear = new RelationTypeBuilder(Apps, new Guid("73608bf3-b957-47e6-9362-d8686c48a237"),new Guid("33b2a1a7-1630-4d76-8cf6-c47a4bee86ef"),new Guid("6502b9cb-a191-4d4a-8413-8ef8097c79d1"))
-				.WithObjectTypes(OrderItem, AllorsInteger)
-				.WithSingularName("DeliveryYear")  
-				.WithPluralName("DeliveryYears")  
-				  
-				  
-				.Build();
-
 				OrderItemCalculatedUnitPrice = new RelationTypeBuilder(Apps, new Guid("7595b52c-012b-42db-9cf2-46939b39f57f"),new Guid("93e899b5-b472-4aea-9f7c-d0863883abb1"),new Guid("c5f0b047-8a9b-4743-bac6-0d358b54a794"))
 				.WithObjectTypes(OrderItem, AllorsDecimal)
 				.WithSingularName("CalculatedUnitPrice")  
@@ -25064,6 +24547,22 @@ namespace Allors.Meta
 				.WithIsIndexed(true)  
 				.Build();
 
+				OrderItemAssignedDeliveryDate = new RelationTypeBuilder(Apps, new Guid("9dc87cdb-a35f-4a48-9f99-bf0fe07cad5c"),new Guid("b6f17e6b-f61a-4155-8e4c-79ebec1a01d4"),new Guid("9ec4f475-ecb7-4d57-a642-043b0a703094"))
+				.WithObjectTypes(OrderItem, AllorsDate)
+				.WithSingularName("AssignedDeliveryDate")  
+				.WithPluralName("AssignedDeliveryDates")  
+				  
+				  
+				.Build();
+
+				OrderItemDeliveryDate = new RelationTypeBuilder(Apps, new Guid("a1769a74-d832-4ade-be59-a98b17033ca1"),new Guid("72f9c5a1-a66a-4181-b683-c0546f7cb95d"),new Guid("279735e0-974a-46b3-b460-2bd528895f5a"))
+				.WithObjectTypes(OrderItem, AllorsDate)
+				.WithSingularName("DeliveryDate")  
+				.WithPluralName("DeliveryDates")  
+				.WithIsDerived(true)  
+				  
+				.Build();
+
 				OrderItemTotalIncVat = new RelationTypeBuilder(Apps, new Guid("a271f7d4-cda1-4ae9-94e4-dda482bd8cd5"),new Guid("68f757fc-3cf5-4dae-b6ba-e2cb08033381"),new Guid("b856b6e9-93e8-47ac-8070-3bb8c0ff29d7"))
 				.WithObjectTypes(OrderItem, AllorsDecimal)
 				.WithSingularName("TotalIncVat")  
@@ -25092,14 +24591,6 @@ namespace Allors.Meta
 				  
 				.WithPrecision(19)
 				.WithScale(2)
-				.Build();
-
-				OrderItemDeliveryMonth = new RelationTypeBuilder(Apps, new Guid("ad5e3071-c622-4d21-8d0a-41abf528cc80"),new Guid("51644cc4-9e93-4e83-864f-b2542effd676"),new Guid("24520b03-5706-4cb1-9ac9-a078150547ef"))
-				.WithObjectTypes(OrderItem, AllorsInteger)
-				.WithSingularName("DeliveryMonth")  
-				.WithPluralName("DeliveryMonths")  
-				  
-				  
 				.Build();
 
 				OrderItemTotalDiscount = new RelationTypeBuilder(Apps, new Guid("b4398edb-2a36-459d-95a1-5d209462ae02"),new Guid("82b15a97-315c-4671-a420-f1b4f50f7ce6"),new Guid("b561ab6f-8843-4409-ac10-accb4b6d123e"))
@@ -25157,14 +24648,6 @@ namespace Allors.Meta
 				  
 				.WithPrecision(19)
 				.WithScale(2)
-				.Build();
-
-				OrderItemAssignedDeliveryMonth = new RelationTypeBuilder(Apps, new Guid("d69b040a-d584-40f1-b6f6-a4603ea7ec49"),new Guid("b84d0f47-d13d-4b96-a0b4-dc36895d4363"),new Guid("9e868390-827b-4e8d-b85c-c05fe062c07c"))
-				.WithObjectTypes(OrderItem, AllorsInteger)
-				.WithSingularName("AssignedDeliveryMonth")  
-				.WithPluralName("AssignedDeliveryMonths")  
-				  
-				  
 				.Build();
 
 				OrderItemAssociation = new RelationTypeBuilder(Apps, new Guid("dadeac55-1586-47ce-9983-2113179e275d"),new Guid("f6bdee3b-d274-4bd6-841e-7dc3d373083f"),new Guid("6a038221-f3ec-4fd0-a235-7f6205404113"))
@@ -25342,10 +24825,10 @@ namespace Allors.Meta
 
 
 				// ProductDeliverySkillRequirement
-				ProductDeliverySkillRequirementStartedUsingYear = new RelationTypeBuilder(Apps, new Guid("39d06b92-db0e-4ee2-ba3c-1ec013de8e35"),new Guid("a60c51da-7830-4150-9eac-d39646bd73fe"),new Guid("a8103729-14bb-4a84-a439-751b4292d7ca"))
-				.WithObjectTypes(ProductDeliverySkillRequirement, AllorsInteger)
-				.WithSingularName("StartedUsingYear")  
-				.WithPluralName("StartedUsingYears")  
+				ProductDeliverySkillRequirementStartedUsingDate = new RelationTypeBuilder(Apps, new Guid("12c6abaf-a080-45f3-820d-b462978d2539"),new Guid("4a6bd8f2-ea2a-4e07-a018-4b4b37b45a96"),new Guid("3e12bb69-b0bb-40ba-a987-89f5cc40c436"))
+				.WithObjectTypes(ProductDeliverySkillRequirement, AllorsDate)
+				.WithSingularName("StartedUsingDate")  
+				.WithPluralName("StartedUsingDates")  
 				  
 				  
 				.Build();
@@ -25366,22 +24849,6 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.ManyToOne)
 				  
 				.WithIsIndexed(true)  
-				.Build();
-
-				ProductDeliverySkillRequirementStartedUsingMonth = new RelationTypeBuilder(Apps, new Guid("a87cb2ee-b169-4a17-95ec-77ee3abf7de1"),new Guid("ec9402b2-e5ac-4b10-9339-28b52eeb9f98"),new Guid("fbccce8a-9b1a-4a02-b7be-ddf0a197eb91"))
-				.WithObjectTypes(ProductDeliverySkillRequirement, AllorsInteger)
-				.WithSingularName("StartedUsingMonth")  
-				.WithPluralName("StartedUsingMonths")  
-				  
-				  
-				.Build();
-
-				ProductDeliverySkillRequirementStartedUsingDay = new RelationTypeBuilder(Apps, new Guid("c97ce06d-8d32-495f-83f5-53ea31652682"),new Guid("2fcb4cdf-d152-483a-b67c-6f100b6f852c"),new Guid("4eecdb79-5d07-4af9-b1c0-60f85e62bc82"))
-				.WithObjectTypes(ProductDeliverySkillRequirement, AllorsInteger)
-				.WithSingularName("StartedUsingDay")  
-				.WithPluralName("StartedUsingDays")  
-				  
-				  
 				.Build();
 
 
@@ -25890,21 +25357,19 @@ namespace Allors.Meta
 
 				// Period
 				PeriodFromDate = new RelationTypeBuilder(Base, new Guid("5aeb31c7-03d4-4314-bbb2-fca5704b1eab"),new Guid("8cf0bd14-753d-4f34-99b3-7a6b0d90c3d4"),new Guid("0da8ef4e-53b7-4152-b219-7e0cebbca268"))
-				.WithObjectTypes(Period, AllorsString)
+				.WithObjectTypes(Period, AllorsDateTime)
 				.WithSingularName("FromDate")  
 				.WithPluralName("FromDates")  
 				  
 				  
-				.WithSize(256)
 				.Build();
 
 				PeriodThroughDate = new RelationTypeBuilder(Base, new Guid("d7576ce2-da27-487a-86aa-b0912f745bc0"),new Guid("cb2fa6c1-f826-45f0-a03f-00e6cb268ebb"),new Guid("4e021875-5bae-4f01-8deb-641016cd2f8d"))
-				.WithObjectTypes(Period, AllorsString)
+				.WithObjectTypes(Period, AllorsDateTime)
 				.WithSingularName("ThroughDate")  
 				.WithPluralName("ThroughDates")  
 				  
 				  
-				.WithSize(256)
 				.Build();
 
 
@@ -26259,22 +25724,6 @@ namespace Allors.Meta
 				.WithSize(256)
 				.Build();
 
-				PersonDeceasedDay = new RelationTypeBuilder(Apps, new Guid("07db265f-f318-4620-b4b7-cd621dca7fac"),new Guid("581dafc9-880e-4809-a819-f0d5a537f3cd"),new Guid("b4cfa416-1453-47b0-83b6-911f5af807ab"))
-				.WithObjectTypes(Person, AllorsInteger)
-				.WithSingularName("DeceasedDay")  
-				.WithPluralName("DeceasedDays")  
-				  
-				  
-				.Build();
-
-				PersonBirthMonth = new RelationTypeBuilder(Apps, new Guid("0ad79a60-d27e-420c-a744-58489723fd1f"),new Guid("c9408e31-167f-4ba2-b7c2-4fbb4b983f04"),new Guid("590d1a79-81b5-4a12-85eb-84ca5df3c830"))
-				.WithObjectTypes(Person, AllorsInteger)
-				.WithSingularName("BirthMonth")  
-				.WithPluralName("BirthMonths")  
-				  
-				  
-				.Build();
-
 				PersonSalutation = new RelationTypeBuilder(Apps, new Guid("348dd7c2-c534-422c-90aa-d48b1e504df9"),new Guid("7516fdc6-10c1-4f61-8a9f-f1d84b1a9899"),new Guid("f0306c09-0b6f-4e73-b789-47c3b3c2b0d6"))
 				.WithObjectTypes(Person, Salutation)
 				.WithSingularName("Salutation")  
@@ -26339,26 +25788,10 @@ namespace Allors.Meta
 				.WithSize(256)
 				.Build();
 
-				PersonDeceasedYear = new RelationTypeBuilder(Apps, new Guid("8306dcfa-cdd8-4763-9aca-7a7e3d94fc72"),new Guid("9eb23362-02fa-4b77-95ac-77814f0171ee"),new Guid("7cd7be25-3828-4de7-973d-1e6bb8e77591"))
-				.WithObjectTypes(Person, AllorsInteger)
-				.WithSingularName("DeceasedYear")  
-				.WithPluralName("DeceasedYears")  
-				  
-				  
-				.Build();
-
-				PersonDeceasedMonth = new RelationTypeBuilder(Apps, new Guid("8cfccf1d-b840-480b-8a64-30189adf9efd"),new Guid("ef032509-11e9-4896-befd-a29d1c7f3b10"),new Guid("58326dd6-4fd6-41ab-a274-4685260fdf13"))
-				.WithObjectTypes(Person, AllorsInteger)
-				.WithSingularName("DeceasedMonth")  
-				.WithPluralName("DeceasedMonths")  
-				  
-				  
-				.Build();
-
-				PersonBirthYear = new RelationTypeBuilder(Apps, new Guid("90e3f418-b458-4417-8cb4-fd93fcad68e8"),new Guid("c075c671-b281-4133-81e4-bb1a996a55b8"),new Guid("82497723-9af0-4b69-8bb0-e2f205d36ceb"))
-				.WithObjectTypes(Person, AllorsInteger)
-				.WithSingularName("BirthYear")  
-				.WithPluralName("BirthYears")  
+				PersonBirthDate = new RelationTypeBuilder(Apps, new Guid("7bcba7fd-6419-4324-8a11-c56bd46581a1"),new Guid("78ccda0f-4b17-40f1-93ad-b86e1181cb80"),new Guid("1babd38a-8a52-4a92-bb99-7a289d41bb1e"))
+				.WithObjectTypes(Person, AllorsDate)
+				.WithSingularName("BirthDate")  
+				.WithPluralName("BirthDates")  
 				  
 				  
 				.Build();
@@ -26380,14 +25813,6 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.ManyToMany)
 				  
 				.WithIsIndexed(true)  
-				.Build();
-
-				PersonBirthDay = new RelationTypeBuilder(Apps, new Guid("b2db4af4-1eb7-4057-b1a4-65820edb6d39"),new Guid("ac665bcf-b404-4742-86cc-a5a00564bb5c"),new Guid("e9456a37-4f1c-4d93-bddb-6f8c547c475f"))
-				.WithObjectTypes(Person, AllorsInteger)
-				.WithSingularName("BirthDay")  
-				.WithPluralName("BirthDay")  
-				  
-				  
 				.Build();
 
 				PersonGender = new RelationTypeBuilder(Apps, new Guid("b6f28dbd-f20f-44ed-a2e7-476f1a8a5518"),new Guid("3ddb90b4-84df-4214-818d-7fa05a464815"),new Guid("a609ed29-bde6-4b43-bfe7-4abda8630b90"))
@@ -26456,6 +25881,14 @@ namespace Allors.Meta
 				  
 				  
 				.WithSize(256)
+				.Build();
+
+				PersonDeceasedDate = new RelationTypeBuilder(Apps, new Guid("ffda06c0-7dff-42fa-abd5-1ed6fa8c43da"),new Guid("8dabd93a-badc-40f3-96af-f97c1b61d262"),new Guid("92041fa4-b675-4fd4-b6c4-d9143393878e"))
+				.WithObjectTypes(Person, AllorsDate)
+				.WithSingularName("DeceasedDate")  
+				.WithPluralName("DeceasedDates")  
+				  
+				  
 				.Build();
 
 

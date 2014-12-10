@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="a1769a74-d832-4ade-be59-a98b17033ca1">
+  <associationType id="72f9c5a1-a66a-4181-b683-c0546f7cb95d">
+    <objectType idref="f3ef0124-e867-4da2-9323-80fbe1f214c2" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="279735e0-974a-46b3-b460-2bd528895f5a">
+    <objectType idref="c402fbda-133a-4b59-858a-832fbd2ec565" />
+    <pluralName>DeliveryDates</pluralName>
+    <singularName>DeliveryDate</singularName>
+  </roleType>
+</relationType>
