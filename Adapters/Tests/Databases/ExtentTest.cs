@@ -10648,6 +10648,1491 @@ namespace Allors.Databases
         }
 
         [Test]
+        public void RoleDateTimeBetweenValue()
+        {
+            foreach (var init in this.Inits)
+            {
+                init();
+                this.Populate();
+
+                foreach (var flag in TrueFalse)
+                {
+                    var dateTime1 = new DateTime(2000, 1, 1, 0, 0, 1, DateTimeKind.Utc);
+                    var dateTime2 = new DateTime(2000, 1, 1, 0, 0, 2, DateTimeKind.Utc);
+                    var dateTime3 = new DateTime(2000, 1, 1, 0, 0, 3, DateTimeKind.Utc);
+                    var dateTime4 = new DateTime(2000, 1, 1, 0, 0, 4, DateTimeKind.Utc);
+                    var dateTime5 = new DateTime(2000, 1, 1, 0, 0, 5, DateTimeKind.Utc);
+                    var dateTime6 = new DateTime(2000, 1, 1, 0, 0, 6, DateTimeKind.Utc);
+                    var dateTime7 = new DateTime(2000, 1, 1, 0, 0, 7, DateTimeKind.Utc);
+                    var dateTime10 = new DateTime(2000, 1, 1, 0, 0, 10, DateTimeKind.Utc);
+
+                    if (flag)
+                    {
+                        dateTime1 = dateTime1.ToLocalTime();
+                        dateTime2 = dateTime2.ToLocalTime();
+                        dateTime3 = dateTime3.ToLocalTime();
+                        dateTime4 = dateTime4.ToLocalTime();
+                        dateTime5 = dateTime5.ToLocalTime();
+                        dateTime6 = dateTime6.ToLocalTime();
+                        dateTime7 = dateTime7.ToLocalTime();
+                        dateTime10 = dateTime10.ToLocalTime();
+                    }
+
+                    // Class
+                    // Between 1 and 3
+                    var extent = this.LocalExtent(C1.Meta.ObjectType);
+                    extent.Filter.AddBetween(C1.Meta.C1AllorsDateTime, dateTime1, dateTime3);
+
+                    Assert.AreEqual(0, extent.Count);
+                    Assert.IsFalse(extent.Contains(this.c1A));
+                    Assert.IsFalse(extent.Contains(this.c1B));
+                    Assert.IsFalse(extent.Contains(this.c1C));
+                    Assert.IsFalse(extent.Contains(this.c1D));
+                    Assert.IsFalse(extent.Contains(this.c2A));
+                    Assert.IsFalse(extent.Contains(this.c2B));
+                    Assert.IsFalse(extent.Contains(this.c2C));
+                    Assert.IsFalse(extent.Contains(this.c2D));
+                    Assert.IsFalse(extent.Contains(this.c3A));
+                    Assert.IsFalse(extent.Contains(this.c3B));
+                    Assert.IsFalse(extent.Contains(this.c3C));
+                    Assert.IsFalse(extent.Contains(this.c3D));
+                    Assert.IsFalse(extent.Contains(this.c4A));
+                    Assert.IsFalse(extent.Contains(this.c4B));
+                    Assert.IsFalse(extent.Contains(this.c4C));
+                    Assert.IsFalse(extent.Contains(this.c4D));
+
+                    // Between 3 and 4
+                    extent = this.LocalExtent(C1.Meta.ObjectType);
+                    extent.Filter.AddBetween(C1.Meta.C1AllorsDateTime, dateTime3, dateTime4);
+
+                    Assert.AreEqual(1, extent.Count);
+                    Assert.IsFalse(extent.Contains(this.c1A));
+                    Assert.IsTrue(extent.Contains(this.c1B));
+                    Assert.IsFalse(extent.Contains(this.c1C));
+                    Assert.IsFalse(extent.Contains(this.c1D));
+                    Assert.IsFalse(extent.Contains(this.c2A));
+                    Assert.IsFalse(extent.Contains(this.c2B));
+                    Assert.IsFalse(extent.Contains(this.c2C));
+                    Assert.IsFalse(extent.Contains(this.c2D));
+                    Assert.IsFalse(extent.Contains(this.c3A));
+                    Assert.IsFalse(extent.Contains(this.c3B));
+                    Assert.IsFalse(extent.Contains(this.c3C));
+                    Assert.IsFalse(extent.Contains(this.c3D));
+                    Assert.IsFalse(extent.Contains(this.c4A));
+                    Assert.IsFalse(extent.Contains(this.c4B));
+                    Assert.IsFalse(extent.Contains(this.c4C));
+                    Assert.IsFalse(extent.Contains(this.c4D));
+
+                    // Between 4 and 5
+                    extent = this.LocalExtent(C1.Meta.ObjectType);
+                    extent.Filter.AddBetween(C1.Meta.C1AllorsDateTime, dateTime4, dateTime5);
+
+                    Assert.AreEqual(3, extent.Count);
+                    Assert.IsFalse(extent.Contains(this.c1A));
+                    Assert.IsTrue(extent.Contains(this.c1B));
+                    Assert.IsTrue(extent.Contains(this.c1C));
+                    Assert.IsTrue(extent.Contains(this.c1D));
+                    Assert.IsFalse(extent.Contains(this.c2A));
+                    Assert.IsFalse(extent.Contains(this.c2B));
+                    Assert.IsFalse(extent.Contains(this.c2C));
+                    Assert.IsFalse(extent.Contains(this.c2D));
+                    Assert.IsFalse(extent.Contains(this.c3A));
+                    Assert.IsFalse(extent.Contains(this.c3B));
+                    Assert.IsFalse(extent.Contains(this.c3C));
+                    Assert.IsFalse(extent.Contains(this.c3D));
+                    Assert.IsFalse(extent.Contains(this.c4A));
+                    Assert.IsFalse(extent.Contains(this.c4B));
+                    Assert.IsFalse(extent.Contains(this.c4C));
+                    Assert.IsFalse(extent.Contains(this.c4D));
+
+                    // Between 6 and 10
+                    extent = this.LocalExtent(C1.Meta.ObjectType);
+                    extent.Filter.AddBetween(C1.Meta.C1AllorsDateTime, dateTime6, dateTime10);
+
+                    Assert.AreEqual(0, extent.Count);
+                    Assert.IsFalse(extent.Contains(this.c1A));
+                    Assert.IsFalse(extent.Contains(this.c1B));
+                    Assert.IsFalse(extent.Contains(this.c1C));
+                    Assert.IsFalse(extent.Contains(this.c1D));
+                    Assert.IsFalse(extent.Contains(this.c2A));
+                    Assert.IsFalse(extent.Contains(this.c2B));
+                    Assert.IsFalse(extent.Contains(this.c2C));
+                    Assert.IsFalse(extent.Contains(this.c2D));
+                    Assert.IsFalse(extent.Contains(this.c3A));
+                    Assert.IsFalse(extent.Contains(this.c3B));
+                    Assert.IsFalse(extent.Contains(this.c3C));
+                    Assert.IsFalse(extent.Contains(this.c3D));
+                    Assert.IsFalse(extent.Contains(this.c4A));
+                    Assert.IsFalse(extent.Contains(this.c4B));
+                    Assert.IsFalse(extent.Contains(this.c4C));
+                    Assert.IsFalse(extent.Contains(this.c4D));
+
+                    // Interface
+                    // Between 1 and 3
+                    extent = this.LocalExtent(I12Meta.Instance.ObjectType);
+                    extent.Filter.AddBetween(I12Meta.Instance.I12AllorsDateTime, dateTime1, dateTime3);
+
+                    Assert.AreEqual(0, extent.Count);
+                    Assert.IsFalse(extent.Contains(this.c1A));
+                    Assert.IsFalse(extent.Contains(this.c1B));
+                    Assert.IsFalse(extent.Contains(this.c1C));
+                    Assert.IsFalse(extent.Contains(this.c1D));
+                    Assert.IsFalse(extent.Contains(this.c2A));
+                    Assert.IsFalse(extent.Contains(this.c2B));
+                    Assert.IsFalse(extent.Contains(this.c2C));
+                    Assert.IsFalse(extent.Contains(this.c2D));
+                    Assert.IsFalse(extent.Contains(this.c3A));
+                    Assert.IsFalse(extent.Contains(this.c3B));
+                    Assert.IsFalse(extent.Contains(this.c3C));
+                    Assert.IsFalse(extent.Contains(this.c3D));
+                    Assert.IsFalse(extent.Contains(this.c4A));
+                    Assert.IsFalse(extent.Contains(this.c4B));
+                    Assert.IsFalse(extent.Contains(this.c4C));
+                    Assert.IsFalse(extent.Contains(this.c4D));
+
+                    // Between 3 and 4
+                    extent = this.LocalExtent(I12Meta.Instance.ObjectType);
+                    extent.Filter.AddBetween(I12Meta.Instance.I12AllorsDateTime, dateTime3, dateTime4);
+
+                    Assert.AreEqual(2, extent.Count);
+                    Assert.IsFalse(extent.Contains(this.c1A));
+                    Assert.IsTrue(extent.Contains(this.c1B));
+                    Assert.IsFalse(extent.Contains(this.c1C));
+                    Assert.IsFalse(extent.Contains(this.c1D));
+                    Assert.IsFalse(extent.Contains(this.c2A));
+                    Assert.IsTrue(extent.Contains(this.c2B));
+                    Assert.IsFalse(extent.Contains(this.c2C));
+                    Assert.IsFalse(extent.Contains(this.c2D));
+                    Assert.IsFalse(extent.Contains(this.c3A));
+                    Assert.IsFalse(extent.Contains(this.c3B));
+                    Assert.IsFalse(extent.Contains(this.c3C));
+                    Assert.IsFalse(extent.Contains(this.c3D));
+                    Assert.IsFalse(extent.Contains(this.c4A));
+                    Assert.IsFalse(extent.Contains(this.c4B));
+                    Assert.IsFalse(extent.Contains(this.c4C));
+                    Assert.IsFalse(extent.Contains(this.c4D));
+
+                    // Between 4 and 5
+                    extent = this.LocalExtent(I12Meta.Instance.ObjectType);
+                    extent.Filter.AddBetween(I12Meta.Instance.I12AllorsDateTime, dateTime4, dateTime5);
+
+                    Assert.AreEqual(6, extent.Count);
+                    Assert.IsFalse(extent.Contains(this.c1A));
+                    Assert.IsTrue(extent.Contains(this.c1B));
+                    Assert.IsTrue(extent.Contains(this.c1C));
+                    Assert.IsTrue(extent.Contains(this.c1D));
+                    Assert.IsFalse(extent.Contains(this.c2A));
+                    Assert.IsTrue(extent.Contains(this.c2B));
+                    Assert.IsTrue(extent.Contains(this.c2C));
+                    Assert.IsTrue(extent.Contains(this.c2D));
+                    Assert.IsFalse(extent.Contains(this.c3A));
+                    Assert.IsFalse(extent.Contains(this.c3B));
+                    Assert.IsFalse(extent.Contains(this.c3C));
+                    Assert.IsFalse(extent.Contains(this.c3D));
+                    Assert.IsFalse(extent.Contains(this.c4A));
+                    Assert.IsFalse(extent.Contains(this.c4B));
+                    Assert.IsFalse(extent.Contains(this.c4C));
+                    Assert.IsFalse(extent.Contains(this.c4D));
+
+                    // Between 6 and 10
+                    extent = this.LocalExtent(I12Meta.Instance.ObjectType);
+                    extent.Filter.AddBetween(I12Meta.Instance.I12AllorsDateTime, dateTime6, dateTime10);
+
+                    Assert.AreEqual(0, extent.Count);
+                    Assert.IsFalse(extent.Contains(this.c1A));
+                    Assert.IsFalse(extent.Contains(this.c1B));
+                    Assert.IsFalse(extent.Contains(this.c1C));
+                    Assert.IsFalse(extent.Contains(this.c1D));
+                    Assert.IsFalse(extent.Contains(this.c2A));
+                    Assert.IsFalse(extent.Contains(this.c2B));
+                    Assert.IsFalse(extent.Contains(this.c2C));
+                    Assert.IsFalse(extent.Contains(this.c2D));
+                    Assert.IsFalse(extent.Contains(this.c3A));
+                    Assert.IsFalse(extent.Contains(this.c3B));
+                    Assert.IsFalse(extent.Contains(this.c3C));
+                    Assert.IsFalse(extent.Contains(this.c3D));
+                    Assert.IsFalse(extent.Contains(this.c4A));
+                    Assert.IsFalse(extent.Contains(this.c4B));
+                    Assert.IsFalse(extent.Contains(this.c4C));
+                    Assert.IsFalse(extent.Contains(this.c4D));
+
+                    // Super Interface
+                    // Between 1 and 3
+                    extent = this.LocalExtent(S1234Meta.Instance.ObjectType);
+                    extent.Filter.AddBetween(S1234Meta.Instance.S1234AllorsDateTime, dateTime1, dateTime3);
+
+                    Assert.AreEqual(0, extent.Count);
+                    Assert.IsFalse(extent.Contains(this.c1A));
+                    Assert.IsFalse(extent.Contains(this.c1B));
+                    Assert.IsFalse(extent.Contains(this.c1C));
+                    Assert.IsFalse(extent.Contains(this.c1D));
+                    Assert.IsFalse(extent.Contains(this.c2A));
+                    Assert.IsFalse(extent.Contains(this.c2B));
+                    Assert.IsFalse(extent.Contains(this.c2C));
+                    Assert.IsFalse(extent.Contains(this.c2D));
+                    Assert.IsFalse(extent.Contains(this.c3A));
+                    Assert.IsFalse(extent.Contains(this.c3B));
+                    Assert.IsFalse(extent.Contains(this.c3C));
+                    Assert.IsFalse(extent.Contains(this.c3D));
+                    Assert.IsFalse(extent.Contains(this.c4A));
+                    Assert.IsFalse(extent.Contains(this.c4B));
+                    Assert.IsFalse(extent.Contains(this.c4C));
+                    Assert.IsFalse(extent.Contains(this.c4D));
+
+                    // Between 3 and 4
+                    extent = this.LocalExtent(S1234Meta.Instance.ObjectType);
+                    extent.Filter.AddBetween(S1234Meta.Instance.S1234AllorsDateTime, dateTime3, dateTime4);
+
+                    Assert.AreEqual(4, extent.Count);
+                    Assert.IsFalse(extent.Contains(this.c1A));
+                    Assert.IsTrue(extent.Contains(this.c1B));
+                    Assert.IsFalse(extent.Contains(this.c1C));
+                    Assert.IsFalse(extent.Contains(this.c1D));
+                    Assert.IsFalse(extent.Contains(this.c2A));
+                    Assert.IsTrue(extent.Contains(this.c2B));
+                    Assert.IsFalse(extent.Contains(this.c2C));
+                    Assert.IsFalse(extent.Contains(this.c2D));
+                    Assert.IsFalse(extent.Contains(this.c3A));
+                    Assert.IsTrue(extent.Contains(this.c3B));
+                    Assert.IsFalse(extent.Contains(this.c3C));
+                    Assert.IsFalse(extent.Contains(this.c3D));
+                    Assert.IsFalse(extent.Contains(this.c4A));
+                    Assert.IsTrue(extent.Contains(this.c4B));
+                    Assert.IsFalse(extent.Contains(this.c4C));
+                    Assert.IsFalse(extent.Contains(this.c4D));
+
+                    // Between 4 and 5
+                    extent = this.LocalExtent(S1234Meta.Instance.ObjectType);
+                    extent.Filter.AddBetween(S1234Meta.Instance.S1234AllorsDateTime, dateTime4, dateTime5);
+
+                    Assert.AreEqual(12, extent.Count);
+                    Assert.IsFalse(extent.Contains(this.c1A));
+                    Assert.IsTrue(extent.Contains(this.c1B));
+                    Assert.IsTrue(extent.Contains(this.c1C));
+                    Assert.IsTrue(extent.Contains(this.c1D));
+                    Assert.IsFalse(extent.Contains(this.c2A));
+                    Assert.IsTrue(extent.Contains(this.c2B));
+                    Assert.IsTrue(extent.Contains(this.c2C));
+                    Assert.IsTrue(extent.Contains(this.c2D));
+                    Assert.IsFalse(extent.Contains(this.c3A));
+                    Assert.IsTrue(extent.Contains(this.c3B));
+                    Assert.IsTrue(extent.Contains(this.c3C));
+                    Assert.IsTrue(extent.Contains(this.c3D));
+                    Assert.IsFalse(extent.Contains(this.c4A));
+                    Assert.IsTrue(extent.Contains(this.c4B));
+                    Assert.IsTrue(extent.Contains(this.c4C));
+                    Assert.IsTrue(extent.Contains(this.c4D));
+
+                    // Between 6 and 10
+                    extent = this.LocalExtent(S1234Meta.Instance.ObjectType);
+                    extent.Filter.AddBetween(S1234Meta.Instance.S1234AllorsDateTime, dateTime6, dateTime10);
+
+                    Assert.AreEqual(0, extent.Count);
+                    Assert.IsFalse(extent.Contains(this.c1A));
+                    Assert.IsFalse(extent.Contains(this.c1B));
+                    Assert.IsFalse(extent.Contains(this.c1C));
+                    Assert.IsFalse(extent.Contains(this.c1D));
+                    Assert.IsFalse(extent.Contains(this.c2A));
+                    Assert.IsFalse(extent.Contains(this.c2B));
+                    Assert.IsFalse(extent.Contains(this.c2C));
+                    Assert.IsFalse(extent.Contains(this.c2D));
+                    Assert.IsFalse(extent.Contains(this.c3A));
+                    Assert.IsFalse(extent.Contains(this.c3B));
+                    Assert.IsFalse(extent.Contains(this.c3C));
+                    Assert.IsFalse(extent.Contains(this.c3D));
+                    Assert.IsFalse(extent.Contains(this.c4A));
+                    Assert.IsFalse(extent.Contains(this.c4B));
+                    Assert.IsFalse(extent.Contains(this.c4C));
+                    Assert.IsFalse(extent.Contains(this.c4D));
+
+                    // Class - Wrong RelationType0
+                    // Between 1 and 3
+                    extent = this.LocalExtent(C1.Meta.ObjectType);
+
+                    var exception = false;
+                    try
+                    {
+                        extent.Filter.AddBetween(C2.Meta.C2AllorsDateTime, dateTime1, dateTime3);
+                    }
+                    catch
+                    {
+                        exception = true;
+                    }
+
+                    Assert.IsTrue(exception);
+
+                    // Between 3 and 4
+                    extent = this.LocalExtent(C1.Meta.ObjectType);
+
+                    exception = false;
+                    try
+                    {
+                        extent.Filter.AddBetween(C2.Meta.C2AllorsDateTime, dateTime3, dateTime4);
+                    }
+                    catch
+                    {
+                        exception = true;
+                    }
+
+                    Assert.IsTrue(exception);
+
+                    // Between 4 and 5
+                    extent = this.LocalExtent(C1.Meta.ObjectType);
+
+                    exception = false;
+                    try
+                    {
+                        extent.Filter.AddBetween(C2.Meta.C2AllorsDateTime, dateTime4, dateTime5);
+                    }
+                    catch
+                    {
+                        exception = true;
+                    }
+
+                    Assert.IsTrue(exception);
+
+                    // Between 6 and 10
+                    extent = this.LocalExtent(C1.Meta.ObjectType);
+
+                    exception = false;
+                    try
+                    {
+                        extent.Filter.AddBetween(C2.Meta.C2AllorsDateTime, dateTime6, dateTime10);
+                    }
+                    catch
+                    {
+                        exception = true;
+                    }
+
+                    Assert.IsTrue(exception);
+                }
+            }
+        }
+
+        [Test]
+        public void RoleDateTimeLessThanValue()
+        {
+            foreach (var init in this.Inits)
+            {
+                init();
+                this.Populate();
+
+                foreach (var flag in TrueFalse)
+                {
+                    var dateTime1 = new DateTime(2000, 1, 1, 0, 0, 1, DateTimeKind.Utc);
+                    var dateTime2 = new DateTime(2000, 1, 1, 0, 0, 2, DateTimeKind.Utc);
+                    var dateTime3 = new DateTime(2000, 1, 1, 0, 0, 3, DateTimeKind.Utc);
+                    var dateTime4 = new DateTime(2000, 1, 1, 0, 0, 4, DateTimeKind.Utc);
+                    var dateTime5 = new DateTime(2000, 1, 1, 0, 0, 5, DateTimeKind.Utc);
+                    var dateTime6 = new DateTime(2000, 1, 1, 0, 0, 6, DateTimeKind.Utc);
+                    var dateTime7 = new DateTime(2000, 1, 1, 0, 0, 7, DateTimeKind.Utc);
+                    var dateTime10 = new DateTime(2000, 1, 1, 0, 0, 10, DateTimeKind.Utc);
+
+                    if (flag)
+                    {
+                        dateTime1 = dateTime1.ToLocalTime();
+                        dateTime2 = dateTime2.ToLocalTime();
+                        dateTime3 = dateTime3.ToLocalTime();
+                        dateTime4 = dateTime4.ToLocalTime();
+                        dateTime5 = dateTime5.ToLocalTime();
+                        dateTime6 = dateTime6.ToLocalTime();
+                        dateTime7 = dateTime7.ToLocalTime();
+                        dateTime10 = dateTime10.ToLocalTime();
+                    }
+
+                    // Class
+                    // Less Than 4
+                    var extent = this.LocalExtent(C1.Meta.ObjectType);
+                    extent.Filter.AddLessThan(C1.Meta.C1AllorsDateTime, dateTime4);
+
+                    Assert.AreEqual(0, extent.Count);
+                    Assert.IsFalse(extent.Contains(this.c1A));
+                    Assert.IsFalse(extent.Contains(this.c1B));
+                    Assert.IsFalse(extent.Contains(this.c1C));
+                    Assert.IsFalse(extent.Contains(this.c1D));
+                    Assert.IsFalse(extent.Contains(this.c2A));
+                    Assert.IsFalse(extent.Contains(this.c2B));
+                    Assert.IsFalse(extent.Contains(this.c2C));
+                    Assert.IsFalse(extent.Contains(this.c2D));
+                    Assert.IsFalse(extent.Contains(this.c3A));
+                    Assert.IsFalse(extent.Contains(this.c3B));
+                    Assert.IsFalse(extent.Contains(this.c3C));
+                    Assert.IsFalse(extent.Contains(this.c3D));
+                    Assert.IsFalse(extent.Contains(this.c4A));
+                    Assert.IsFalse(extent.Contains(this.c4B));
+                    Assert.IsFalse(extent.Contains(this.c4C));
+                    Assert.IsFalse(extent.Contains(this.c4D));
+
+                    // Less Than 5
+                    extent = this.LocalExtent(C1.Meta.ObjectType);
+                    extent.Filter.AddLessThan(C1.Meta.C1AllorsDateTime, dateTime5);
+
+                    Assert.AreEqual(1, extent.Count);
+                    Assert.IsFalse(extent.Contains(this.c1A));
+                    Assert.IsTrue(extent.Contains(this.c1B));
+                    Assert.IsFalse(extent.Contains(this.c1C));
+                    Assert.IsFalse(extent.Contains(this.c1D));
+                    Assert.IsFalse(extent.Contains(this.c2A));
+                    Assert.IsFalse(extent.Contains(this.c2B));
+                    Assert.IsFalse(extent.Contains(this.c2C));
+                    Assert.IsFalse(extent.Contains(this.c2D));
+                    Assert.IsFalse(extent.Contains(this.c3A));
+                    Assert.IsFalse(extent.Contains(this.c3B));
+                    Assert.IsFalse(extent.Contains(this.c3C));
+                    Assert.IsFalse(extent.Contains(this.c3D));
+                    Assert.IsFalse(extent.Contains(this.c4A));
+                    Assert.IsFalse(extent.Contains(this.c4B));
+                    Assert.IsFalse(extent.Contains(this.c4C));
+                    Assert.IsFalse(extent.Contains(this.c4D));
+
+                    // Less Than 6
+                    extent = this.LocalExtent(C1.Meta.ObjectType);
+                    extent.Filter.AddLessThan(C1.Meta.C1AllorsDateTime, dateTime6);
+
+                    Assert.AreEqual(3, extent.Count);
+                    Assert.IsFalse(extent.Contains(this.c1A));
+                    Assert.IsTrue(extent.Contains(this.c1B));
+                    Assert.IsTrue(extent.Contains(this.c1C));
+                    Assert.IsTrue(extent.Contains(this.c1D));
+                    Assert.IsFalse(extent.Contains(this.c2A));
+                    Assert.IsFalse(extent.Contains(this.c2B));
+                    Assert.IsFalse(extent.Contains(this.c2C));
+                    Assert.IsFalse(extent.Contains(this.c2D));
+                    Assert.IsFalse(extent.Contains(this.c3A));
+                    Assert.IsFalse(extent.Contains(this.c3B));
+                    Assert.IsFalse(extent.Contains(this.c3C));
+                    Assert.IsFalse(extent.Contains(this.c3D));
+                    Assert.IsFalse(extent.Contains(this.c4A));
+                    Assert.IsFalse(extent.Contains(this.c4B));
+                    Assert.IsFalse(extent.Contains(this.c4C));
+                    Assert.IsFalse(extent.Contains(this.c4D));
+
+                    // Interface
+                    // Less Than 4
+                    extent = this.LocalExtent(I12Meta.Instance.ObjectType);
+                    extent.Filter.AddLessThan(I12Meta.Instance.I12AllorsDateTime, dateTime4);
+
+                    Assert.AreEqual(0, extent.Count);
+                    Assert.IsFalse(extent.Contains(this.c1A));
+                    Assert.IsFalse(extent.Contains(this.c1B));
+                    Assert.IsFalse(extent.Contains(this.c1C));
+                    Assert.IsFalse(extent.Contains(this.c1D));
+                    Assert.IsFalse(extent.Contains(this.c2A));
+                    Assert.IsFalse(extent.Contains(this.c2B));
+                    Assert.IsFalse(extent.Contains(this.c2C));
+                    Assert.IsFalse(extent.Contains(this.c2D));
+                    Assert.IsFalse(extent.Contains(this.c3A));
+                    Assert.IsFalse(extent.Contains(this.c3B));
+                    Assert.IsFalse(extent.Contains(this.c3C));
+                    Assert.IsFalse(extent.Contains(this.c3D));
+                    Assert.IsFalse(extent.Contains(this.c4A));
+                    Assert.IsFalse(extent.Contains(this.c4B));
+                    Assert.IsFalse(extent.Contains(this.c4C));
+                    Assert.IsFalse(extent.Contains(this.c4D));
+
+                    // Less Than 5
+                    extent = this.LocalExtent(I12Meta.Instance.ObjectType);
+                    extent.Filter.AddLessThan(I12Meta.Instance.I12AllorsDateTime, dateTime5);
+
+                    Assert.AreEqual(2, extent.Count);
+                    Assert.IsFalse(extent.Contains(this.c1A));
+                    Assert.IsTrue(extent.Contains(this.c1B));
+                    Assert.IsFalse(extent.Contains(this.c1C));
+                    Assert.IsFalse(extent.Contains(this.c1D));
+                    Assert.IsFalse(extent.Contains(this.c2A));
+                    Assert.IsTrue(extent.Contains(this.c2B));
+                    Assert.IsFalse(extent.Contains(this.c2C));
+                    Assert.IsFalse(extent.Contains(this.c2D));
+                    Assert.IsFalse(extent.Contains(this.c3A));
+                    Assert.IsFalse(extent.Contains(this.c3B));
+                    Assert.IsFalse(extent.Contains(this.c3C));
+                    Assert.IsFalse(extent.Contains(this.c3D));
+                    Assert.IsFalse(extent.Contains(this.c4A));
+                    Assert.IsFalse(extent.Contains(this.c4B));
+                    Assert.IsFalse(extent.Contains(this.c4C));
+                    Assert.IsFalse(extent.Contains(this.c4D));
+
+                    // Less Than 6
+                    extent = this.LocalExtent(I12Meta.Instance.ObjectType);
+                    extent.Filter.AddLessThan(I12Meta.Instance.I12AllorsDateTime, dateTime6);
+
+                    Assert.AreEqual(6, extent.Count);
+                    Assert.IsFalse(extent.Contains(this.c1A));
+                    Assert.IsTrue(extent.Contains(this.c1B));
+                    Assert.IsTrue(extent.Contains(this.c1C));
+                    Assert.IsTrue(extent.Contains(this.c1D));
+                    Assert.IsFalse(extent.Contains(this.c2A));
+                    Assert.IsTrue(extent.Contains(this.c2B));
+                    Assert.IsTrue(extent.Contains(this.c2C));
+                    Assert.IsTrue(extent.Contains(this.c2D));
+                    Assert.IsFalse(extent.Contains(this.c3A));
+                    Assert.IsFalse(extent.Contains(this.c3B));
+                    Assert.IsFalse(extent.Contains(this.c3C));
+                    Assert.IsFalse(extent.Contains(this.c3D));
+                    Assert.IsFalse(extent.Contains(this.c4A));
+                    Assert.IsFalse(extent.Contains(this.c4B));
+                    Assert.IsFalse(extent.Contains(this.c4C));
+                    Assert.IsFalse(extent.Contains(this.c4D));
+
+                    // Super Interface
+                    // Less Than 4
+                    extent = this.LocalExtent(S1234Meta.Instance.ObjectType);
+                    extent.Filter.AddLessThan(S1234Meta.Instance.S1234AllorsDateTime, dateTime4);
+
+                    Assert.AreEqual(0, extent.Count);
+                    Assert.IsFalse(extent.Contains(this.c1A));
+                    Assert.IsFalse(extent.Contains(this.c1B));
+                    Assert.IsFalse(extent.Contains(this.c1C));
+                    Assert.IsFalse(extent.Contains(this.c1D));
+                    Assert.IsFalse(extent.Contains(this.c2A));
+                    Assert.IsFalse(extent.Contains(this.c2B));
+                    Assert.IsFalse(extent.Contains(this.c2C));
+                    Assert.IsFalse(extent.Contains(this.c2D));
+                    Assert.IsFalse(extent.Contains(this.c3A));
+                    Assert.IsFalse(extent.Contains(this.c3B));
+                    Assert.IsFalse(extent.Contains(this.c3C));
+                    Assert.IsFalse(extent.Contains(this.c3D));
+                    Assert.IsFalse(extent.Contains(this.c4A));
+                    Assert.IsFalse(extent.Contains(this.c4B));
+                    Assert.IsFalse(extent.Contains(this.c4C));
+                    Assert.IsFalse(extent.Contains(this.c4D));
+
+                    // Less Than 5
+                    extent = this.LocalExtent(S1234Meta.Instance.ObjectType);
+                    extent.Filter.AddLessThan(S1234Meta.Instance.S1234AllorsDateTime, dateTime5);
+
+                    Assert.AreEqual(4, extent.Count);
+                    Assert.IsFalse(extent.Contains(this.c1A));
+                    Assert.IsTrue(extent.Contains(this.c1B));
+                    Assert.IsFalse(extent.Contains(this.c1C));
+                    Assert.IsFalse(extent.Contains(this.c1D));
+                    Assert.IsFalse(extent.Contains(this.c2A));
+                    Assert.IsTrue(extent.Contains(this.c2B));
+                    Assert.IsFalse(extent.Contains(this.c2C));
+                    Assert.IsFalse(extent.Contains(this.c2D));
+                    Assert.IsFalse(extent.Contains(this.c3A));
+                    Assert.IsTrue(extent.Contains(this.c3B));
+                    Assert.IsFalse(extent.Contains(this.c3C));
+                    Assert.IsFalse(extent.Contains(this.c3D));
+                    Assert.IsFalse(extent.Contains(this.c4A));
+                    Assert.IsTrue(extent.Contains(this.c4B));
+                    Assert.IsFalse(extent.Contains(this.c4C));
+                    Assert.IsFalse(extent.Contains(this.c4D));
+
+                    // Less Than 6
+                    extent = this.LocalExtent(S1234Meta.Instance.ObjectType);
+                    extent.Filter.AddLessThan(S1234Meta.Instance.S1234AllorsDateTime, dateTime6);
+
+                    Assert.AreEqual(12, extent.Count);
+                    Assert.IsFalse(extent.Contains(this.c1A));
+                    Assert.IsTrue(extent.Contains(this.c1B));
+                    Assert.IsTrue(extent.Contains(this.c1C));
+                    Assert.IsTrue(extent.Contains(this.c1D));
+                    Assert.IsFalse(extent.Contains(this.c2A));
+                    Assert.IsTrue(extent.Contains(this.c2B));
+                    Assert.IsTrue(extent.Contains(this.c2C));
+                    Assert.IsTrue(extent.Contains(this.c2D));
+                    Assert.IsFalse(extent.Contains(this.c3A));
+                    Assert.IsTrue(extent.Contains(this.c3B));
+                    Assert.IsTrue(extent.Contains(this.c3C));
+                    Assert.IsTrue(extent.Contains(this.c3D));
+                    Assert.IsFalse(extent.Contains(this.c4A));
+                    Assert.IsTrue(extent.Contains(this.c4B));
+                    Assert.IsTrue(extent.Contains(this.c4C));
+                    Assert.IsTrue(extent.Contains(this.c4D));
+
+                    // Class - Wrong RelationType
+
+                    // Less Than 4
+                    extent = this.LocalExtent(C1.Meta.ObjectType);
+
+                    var exception = false;
+                    try
+                    {
+                        extent.Filter.AddLessThan(C2.Meta.C2AllorsDateTime, dateTime4);
+                    }
+                    catch
+                    {
+                        exception = true;
+                    }
+
+                    Assert.IsTrue(exception);
+
+                    // Less Than 5
+                    extent = this.LocalExtent(C1.Meta.ObjectType);
+
+                    exception = false;
+                    try
+                    {
+                        extent.Filter.AddLessThan(C2.Meta.C2AllorsDateTime, dateTime5);
+                    }
+                    catch
+                    {
+                        exception = true;
+                    }
+
+                    Assert.IsTrue(exception);
+
+                    // Less Than 6
+                    extent = this.LocalExtent(C1.Meta.ObjectType);
+
+                    exception = false;
+                    try
+                    {
+                        extent.Filter.AddLessThan(C2.Meta.C2AllorsDateTime, dateTime6);
+                    }
+                    catch
+                    {
+                        exception = true;
+                    }
+
+                    Assert.IsTrue(exception);
+
+                    // Interface - Wrong RelationType
+                    // Less Than 4
+                    extent = this.LocalExtent(C1.Meta.ObjectType);
+
+                    exception = false;
+                    try
+                    {
+                        extent.Filter.AddLessThan(I2Meta.Instance.I2AllorsDateTime, dateTime4);
+                    }
+                    catch
+                    {
+                        exception = true;
+                    }
+
+                    Assert.IsTrue(exception);
+
+                    // Less Than 5
+                    extent = this.LocalExtent(C1.Meta.ObjectType);
+
+                    exception = false;
+                    try
+                    {
+                        extent.Filter.AddLessThan(I2Meta.Instance.I2AllorsDateTime, dateTime5);
+                    }
+                    catch
+                    {
+                        exception = true;
+                    }
+
+                    Assert.IsTrue(exception);
+
+                    // Less Than 6
+                    extent = this.LocalExtent(C1.Meta.ObjectType);
+
+                    exception = false;
+                    try
+                    {
+                        extent.Filter.AddLessThan(I2Meta.Instance.I2AllorsDateTime, dateTime6);
+                    }
+                    catch
+                    {
+                        exception = true;
+                    }
+
+                    Assert.IsTrue(exception);
+
+                    // Super Interface - Wrong RelationType
+                    // Less Than 4
+                    extent = this.LocalExtent(C1.Meta.ObjectType);
+
+                    exception = false;
+                    try
+                    {
+                        extent.Filter.AddLessThan(S2Meta.Instance.S2AllorsDateTime, dateTime4);
+                    }
+                    catch
+                    {
+                        exception = true;
+                    }
+
+                    Assert.IsTrue(exception);
+
+                    // Less Than 5
+                    extent = this.LocalExtent(C1.Meta.ObjectType);
+
+                    exception = false;
+                    try
+                    {
+                        extent.Filter.AddLessThan(S2Meta.Instance.S2AllorsDateTime, dateTime5);
+                    }
+                    catch
+                    {
+                        exception = true;
+                    }
+
+                    Assert.IsTrue(exception);
+
+                    // Less Than 6
+                    extent = this.LocalExtent(C1.Meta.ObjectType);
+
+                    exception = false;
+                    try
+                    {
+                        extent.Filter.AddLessThan(S2Meta.Instance.S2AllorsDateTime, dateTime6);
+                    }
+                    catch
+                    {
+                        exception = true;
+                    }
+
+                    Assert.IsTrue(exception);
+                }
+            }
+        }
+
+        [Test]
+        public void RoleDateTimeGreaterThanValue()
+        {
+            foreach (var init in this.Inits)
+            {
+                init();
+                this.Populate();
+
+                foreach (var flag in TrueFalse)
+                {
+                    var dateTime1 = new DateTime(2000, 1, 1, 0, 0, 1, DateTimeKind.Utc);
+                    var dateTime2 = new DateTime(2000, 1, 1, 0, 0, 2, DateTimeKind.Utc);
+                    var dateTime3 = new DateTime(2000, 1, 1, 0, 0, 3, DateTimeKind.Utc);
+                    var dateTime4 = new DateTime(2000, 1, 1, 0, 0, 4, DateTimeKind.Utc);
+                    var dateTime5 = new DateTime(2000, 1, 1, 0, 0, 5, DateTimeKind.Utc);
+                    var dateTime6 = new DateTime(2000, 1, 1, 0, 0, 6, DateTimeKind.Utc);
+                    var dateTime7 = new DateTime(2000, 1, 1, 0, 0, 7, DateTimeKind.Utc);
+                    var dateTime10 = new DateTime(2000, 1, 1, 0, 0, 10, DateTimeKind.Utc);
+
+                    if (flag)
+                    {
+                        dateTime1 = dateTime1.ToLocalTime();
+                        dateTime2 = dateTime2.ToLocalTime();
+                        dateTime3 = dateTime3.ToLocalTime();
+                        dateTime4 = dateTime4.ToLocalTime();
+                        dateTime5 = dateTime5.ToLocalTime();
+                        dateTime6 = dateTime6.ToLocalTime();
+                        dateTime7 = dateTime7.ToLocalTime();
+                        dateTime10 = dateTime10.ToLocalTime();
+                    }
+
+                    // Class
+                    // Greater Than 3
+                    var extent = this.LocalExtent(C1.Meta.ObjectType);
+                    extent.Filter.AddGreaterThan(C1.Meta.C1AllorsDateTime, dateTime3);
+
+                    Assert.AreEqual(3, extent.Count);
+                    Assert.IsFalse(extent.Contains(this.c1A));
+                    Assert.IsTrue(extent.Contains(this.c1B));
+                    Assert.IsTrue(extent.Contains(this.c1C));
+                    Assert.IsTrue(extent.Contains(this.c1D));
+                    Assert.IsFalse(extent.Contains(this.c2A));
+                    Assert.IsFalse(extent.Contains(this.c2B));
+                    Assert.IsFalse(extent.Contains(this.c2C));
+                    Assert.IsFalse(extent.Contains(this.c2D));
+                    Assert.IsFalse(extent.Contains(this.c3A));
+                    Assert.IsFalse(extent.Contains(this.c3B));
+                    Assert.IsFalse(extent.Contains(this.c3C));
+                    Assert.IsFalse(extent.Contains(this.c3D));
+                    Assert.IsFalse(extent.Contains(this.c4A));
+                    Assert.IsFalse(extent.Contains(this.c4B));
+                    Assert.IsFalse(extent.Contains(this.c4C));
+                    Assert.IsFalse(extent.Contains(this.c4D));
+
+                    // Greater Than 4
+                    extent = this.LocalExtent(C1.Meta.ObjectType);
+                    extent.Filter.AddGreaterThan(C1.Meta.C1AllorsDateTime, dateTime4);
+
+                    Assert.AreEqual(2, extent.Count);
+                    Assert.IsFalse(extent.Contains(this.c1A));
+                    Assert.IsFalse(extent.Contains(this.c1B));
+                    Assert.IsTrue(extent.Contains(this.c1C));
+                    Assert.IsTrue(extent.Contains(this.c1D));
+                    Assert.IsFalse(extent.Contains(this.c2A));
+                    Assert.IsFalse(extent.Contains(this.c2B));
+                    Assert.IsFalse(extent.Contains(this.c2C));
+                    Assert.IsFalse(extent.Contains(this.c2D));
+                    Assert.IsFalse(extent.Contains(this.c3A));
+                    Assert.IsFalse(extent.Contains(this.c3B));
+                    Assert.IsFalse(extent.Contains(this.c3C));
+                    Assert.IsFalse(extent.Contains(this.c3D));
+                    Assert.IsFalse(extent.Contains(this.c4A));
+                    Assert.IsFalse(extent.Contains(this.c4B));
+                    Assert.IsFalse(extent.Contains(this.c4C));
+                    Assert.IsFalse(extent.Contains(this.c4D));
+
+                    // Greater Than 5
+                    extent = this.LocalExtent(C1.Meta.ObjectType);
+                    extent.Filter.AddGreaterThan(C1.Meta.C1AllorsDateTime, dateTime5);
+
+                    Assert.AreEqual(0, extent.Count);
+                    Assert.IsFalse(extent.Contains(this.c1A));
+                    Assert.IsFalse(extent.Contains(this.c1B));
+                    Assert.IsFalse(extent.Contains(this.c1C));
+                    Assert.IsFalse(extent.Contains(this.c1D));
+                    Assert.IsFalse(extent.Contains(this.c2A));
+                    Assert.IsFalse(extent.Contains(this.c2B));
+                    Assert.IsFalse(extent.Contains(this.c2C));
+                    Assert.IsFalse(extent.Contains(this.c2D));
+                    Assert.IsFalse(extent.Contains(this.c3A));
+                    Assert.IsFalse(extent.Contains(this.c3B));
+                    Assert.IsFalse(extent.Contains(this.c3C));
+                    Assert.IsFalse(extent.Contains(this.c3D));
+                    Assert.IsFalse(extent.Contains(this.c4A));
+                    Assert.IsFalse(extent.Contains(this.c4B));
+                    Assert.IsFalse(extent.Contains(this.c4C));
+                    Assert.IsFalse(extent.Contains(this.c4D));
+
+                    // Interface
+                    // Greater Than 3
+                    extent = this.LocalExtent(I12Meta.Instance.ObjectType);
+                    extent.Filter.AddGreaterThan(I12Meta.Instance.I12AllorsDateTime, dateTime3);
+
+                    Assert.AreEqual(6, extent.Count);
+                    Assert.IsFalse(extent.Contains(this.c1A));
+                    Assert.IsTrue(extent.Contains(this.c1B));
+                    Assert.IsTrue(extent.Contains(this.c1C));
+                    Assert.IsTrue(extent.Contains(this.c1D));
+                    Assert.IsFalse(extent.Contains(this.c2A));
+                    Assert.IsTrue(extent.Contains(this.c2B));
+                    Assert.IsTrue(extent.Contains(this.c2C));
+                    Assert.IsTrue(extent.Contains(this.c2D));
+                    Assert.IsFalse(extent.Contains(this.c3A));
+                    Assert.IsFalse(extent.Contains(this.c3B));
+                    Assert.IsFalse(extent.Contains(this.c3C));
+                    Assert.IsFalse(extent.Contains(this.c3D));
+                    Assert.IsFalse(extent.Contains(this.c4A));
+                    Assert.IsFalse(extent.Contains(this.c4B));
+                    Assert.IsFalse(extent.Contains(this.c4C));
+                    Assert.IsFalse(extent.Contains(this.c4D));
+
+                    // Greater Than 4
+                    extent = this.LocalExtent(I12Meta.Instance.ObjectType);
+                    extent.Filter.AddGreaterThan(I12Meta.Instance.I12AllorsDateTime, dateTime4);
+
+                    Assert.AreEqual(4, extent.Count);
+                    Assert.IsFalse(extent.Contains(this.c1A));
+                    Assert.IsFalse(extent.Contains(this.c1B));
+                    Assert.IsTrue(extent.Contains(this.c1C));
+                    Assert.IsTrue(extent.Contains(this.c1D));
+                    Assert.IsFalse(extent.Contains(this.c2A));
+                    Assert.IsFalse(extent.Contains(this.c2B));
+                    Assert.IsTrue(extent.Contains(this.c2C));
+                    Assert.IsTrue(extent.Contains(this.c2D));
+                    Assert.IsFalse(extent.Contains(this.c3A));
+                    Assert.IsFalse(extent.Contains(this.c3B));
+                    Assert.IsFalse(extent.Contains(this.c3C));
+                    Assert.IsFalse(extent.Contains(this.c3D));
+                    Assert.IsFalse(extent.Contains(this.c4A));
+                    Assert.IsFalse(extent.Contains(this.c4B));
+                    Assert.IsFalse(extent.Contains(this.c4C));
+                    Assert.IsFalse(extent.Contains(this.c4D));
+
+                    // Greater Than 5
+                    extent = this.LocalExtent(I12Meta.Instance.ObjectType);
+                    extent.Filter.AddGreaterThan(I12Meta.Instance.I12AllorsDateTime, dateTime5);
+
+                    Assert.AreEqual(0, extent.Count);
+                    Assert.IsFalse(extent.Contains(this.c1A));
+                    Assert.IsFalse(extent.Contains(this.c1B));
+                    Assert.IsFalse(extent.Contains(this.c1C));
+                    Assert.IsFalse(extent.Contains(this.c1D));
+                    Assert.IsFalse(extent.Contains(this.c2A));
+                    Assert.IsFalse(extent.Contains(this.c2B));
+                    Assert.IsFalse(extent.Contains(this.c2C));
+                    Assert.IsFalse(extent.Contains(this.c2D));
+                    Assert.IsFalse(extent.Contains(this.c3A));
+                    Assert.IsFalse(extent.Contains(this.c3B));
+                    Assert.IsFalse(extent.Contains(this.c3C));
+                    Assert.IsFalse(extent.Contains(this.c3D));
+                    Assert.IsFalse(extent.Contains(this.c4A));
+                    Assert.IsFalse(extent.Contains(this.c4B));
+                    Assert.IsFalse(extent.Contains(this.c4C));
+                    Assert.IsFalse(extent.Contains(this.c4D));
+
+                    // Super Interface
+                    // Greater Than 3
+                    extent = this.LocalExtent(S1234Meta.Instance.ObjectType);
+                    extent.Filter.AddGreaterThan(S1234Meta.Instance.S1234AllorsDateTime, dateTime3);
+
+                    Assert.AreEqual(12, extent.Count);
+                    Assert.IsFalse(extent.Contains(this.c1A));
+                    Assert.IsTrue(extent.Contains(this.c1B));
+                    Assert.IsTrue(extent.Contains(this.c1C));
+                    Assert.IsTrue(extent.Contains(this.c1D));
+                    Assert.IsFalse(extent.Contains(this.c2A));
+                    Assert.IsTrue(extent.Contains(this.c2B));
+                    Assert.IsTrue(extent.Contains(this.c2C));
+                    Assert.IsTrue(extent.Contains(this.c2D));
+                    Assert.IsFalse(extent.Contains(this.c3A));
+                    Assert.IsTrue(extent.Contains(this.c3B));
+                    Assert.IsTrue(extent.Contains(this.c3C));
+                    Assert.IsTrue(extent.Contains(this.c3D));
+                    Assert.IsFalse(extent.Contains(this.c4A));
+                    Assert.IsTrue(extent.Contains(this.c4B));
+                    Assert.IsTrue(extent.Contains(this.c4C));
+                    Assert.IsTrue(extent.Contains(this.c4D));
+
+                    // Greater Than 4
+                    extent = this.LocalExtent(S1234Meta.Instance.ObjectType);
+                    extent.Filter.AddGreaterThan(S1234Meta.Instance.S1234AllorsDateTime, dateTime4);
+
+                    Assert.AreEqual(8, extent.Count);
+                    Assert.IsFalse(extent.Contains(this.c1A));
+                    Assert.IsFalse(extent.Contains(this.c1B));
+                    Assert.IsTrue(extent.Contains(this.c1C));
+                    Assert.IsTrue(extent.Contains(this.c1D));
+                    Assert.IsFalse(extent.Contains(this.c2A));
+                    Assert.IsFalse(extent.Contains(this.c2B));
+                    Assert.IsTrue(extent.Contains(this.c2C));
+                    Assert.IsTrue(extent.Contains(this.c2D));
+                    Assert.IsFalse(extent.Contains(this.c3A));
+                    Assert.IsFalse(extent.Contains(this.c3B));
+                    Assert.IsTrue(extent.Contains(this.c3C));
+                    Assert.IsTrue(extent.Contains(this.c3D));
+                    Assert.IsFalse(extent.Contains(this.c4A));
+                    Assert.IsFalse(extent.Contains(this.c4B));
+                    Assert.IsTrue(extent.Contains(this.c4C));
+                    Assert.IsTrue(extent.Contains(this.c4D));
+
+                    // Greater Than 5
+                    extent = this.LocalExtent(S1234Meta.Instance.ObjectType);
+                    extent.Filter.AddGreaterThan(S1234Meta.Instance.S1234AllorsDateTime, dateTime5);
+
+                    Assert.AreEqual(0, extent.Count);
+                    Assert.IsFalse(extent.Contains(this.c1A));
+                    Assert.IsFalse(extent.Contains(this.c1B));
+                    Assert.IsFalse(extent.Contains(this.c1C));
+                    Assert.IsFalse(extent.Contains(this.c1D));
+                    Assert.IsFalse(extent.Contains(this.c2A));
+                    Assert.IsFalse(extent.Contains(this.c2B));
+                    Assert.IsFalse(extent.Contains(this.c2C));
+                    Assert.IsFalse(extent.Contains(this.c2D));
+                    Assert.IsFalse(extent.Contains(this.c3A));
+                    Assert.IsFalse(extent.Contains(this.c3B));
+                    Assert.IsFalse(extent.Contains(this.c3C));
+                    Assert.IsFalse(extent.Contains(this.c3D));
+                    Assert.IsFalse(extent.Contains(this.c4A));
+                    Assert.IsFalse(extent.Contains(this.c4B));
+                    Assert.IsFalse(extent.Contains(this.c4C));
+                    Assert.IsFalse(extent.Contains(this.c4D));
+
+                    // Class - Wrong RelationType
+
+                    // Greater Than 3
+                    extent = this.LocalExtent(C1.Meta.ObjectType);
+
+                    var exception = false;
+                    try
+                    {
+                        extent.Filter.AddGreaterThan(C2.Meta.C2AllorsDateTime, dateTime3);
+                    }
+                    catch
+                    {
+                        exception = true;
+                    }
+
+                    Assert.IsTrue(exception);
+
+                    // Greater Than 4
+                    extent = this.LocalExtent(C1.Meta.ObjectType);
+
+                    exception = false;
+                    try
+                    {
+                        extent.Filter.AddGreaterThan(C2.Meta.C2AllorsDateTime, dateTime4);
+                    }
+                    catch
+                    {
+                        exception = true;
+                    }
+
+                    Assert.IsTrue(exception);
+
+                    // Greater Than 5
+                    extent = this.LocalExtent(C1.Meta.ObjectType);
+
+                    exception = false;
+                    try
+                    {
+                        extent.Filter.AddGreaterThan(C2.Meta.C2AllorsDateTime, dateTime5);
+                    }
+                    catch
+                    {
+                        exception = true;
+                    }
+
+                    Assert.IsTrue(exception);
+
+                    // Interface - Wrong RelationType
+
+                    // Greater Than 3
+                    extent = this.LocalExtent(C1.Meta.ObjectType);
+
+                    exception = false;
+                    try
+                    {
+                        extent.Filter.AddGreaterThan(I2Meta.Instance.I2AllorsDateTime, dateTime3);
+                    }
+                    catch
+                    {
+                        exception = true;
+                    }
+
+                    Assert.IsTrue(exception);
+
+                    // Greater Than 4
+                    extent = this.LocalExtent(C1.Meta.ObjectType);
+
+                    exception = false;
+                    try
+                    {
+                        extent.Filter.AddGreaterThan(I2Meta.Instance.I2AllorsDateTime, dateTime4);
+                    }
+                    catch
+                    {
+                        exception = true;
+                    }
+
+                    Assert.IsTrue(exception);
+
+                    // Greater Than 5
+                    extent = this.LocalExtent(C1.Meta.ObjectType);
+
+                    exception = false;
+                    try
+                    {
+                        extent.Filter.AddGreaterThan(I2Meta.Instance.I2AllorsDateTime, dateTime5);
+                    }
+                    catch
+                    {
+                        exception = true;
+                    }
+
+                    Assert.IsTrue(exception);
+
+                    // Super Interface - Wrong RelationType
+
+                    // Greater Than 3
+                    extent = this.LocalExtent(C1.Meta.ObjectType);
+
+                    exception = false;
+                    try
+                    {
+                        extent.Filter.AddGreaterThan(I2Meta.Instance.I2AllorsDateTime, dateTime3);
+                    }
+                    catch
+                    {
+                        exception = true;
+                    }
+
+                    Assert.IsTrue(exception);
+
+                    // Greater Than 4
+                    extent = this.LocalExtent(C1.Meta.ObjectType);
+
+                    exception = false;
+                    try
+                    {
+                        extent.Filter.AddGreaterThan(I2Meta.Instance.I2AllorsDateTime, dateTime4);
+                    }
+                    catch
+                    {
+                        exception = true;
+                    }
+
+                    Assert.IsTrue(exception);
+
+                    // Greater Than 5
+                    extent = this.LocalExtent(C1.Meta.ObjectType);
+
+                    exception = false;
+                    try
+                    {
+                        extent.Filter.AddGreaterThan(I2Meta.Instance.I2AllorsDateTime, dateTime5);
+                    }
+                    catch
+                    {
+                        exception = true;
+                    }
+
+                    Assert.IsTrue(exception);
+                }
+            }
+        }
+
+        [Test]
+        public void RoleDateTimeEquals()
+        {
+            foreach (var init in this.Inits)
+            {
+                init();
+                this.Populate();
+
+                foreach (var flag in TrueFalse)
+                {
+                    var dateTime1 = new DateTime(2000, 1, 1, 0, 0, 1, DateTimeKind.Utc);
+                    var dateTime2 = new DateTime(2000, 1, 1, 0, 0, 2, DateTimeKind.Utc);
+                    var dateTime3 = new DateTime(2000, 1, 1, 0, 0, 3, DateTimeKind.Utc);
+                    var dateTime4 = new DateTime(2000, 1, 1, 0, 0, 4, DateTimeKind.Utc);
+                    var dateTime5 = new DateTime(2000, 1, 1, 0, 0, 5, DateTimeKind.Utc);
+                    var dateTime6 = new DateTime(2000, 1, 1, 0, 0, 6, DateTimeKind.Utc);
+                    var dateTime7 = new DateTime(2000, 1, 1, 0, 0, 7, DateTimeKind.Utc);
+                    var dateTime10 = new DateTime(2000, 1, 1, 0, 0, 10, DateTimeKind.Utc);
+
+                    if (flag)
+                    {
+                        dateTime1 = dateTime1.ToLocalTime();
+                        dateTime2 = dateTime2.ToLocalTime();
+                        dateTime3 = dateTime3.ToLocalTime();
+                        dateTime4 = dateTime4.ToLocalTime();
+                        dateTime5 = dateTime5.ToLocalTime();
+                        dateTime6 = dateTime6.ToLocalTime();
+                        dateTime7 = dateTime7.ToLocalTime();
+                        dateTime10 = dateTime10.ToLocalTime();
+                    }
+
+                    // Class
+                    // Equal 3
+                    var extent = this.LocalExtent(C1.Meta.ObjectType);
+                    extent.Filter.AddEquals(C1.Meta.C1AllorsDateTime, dateTime3);
+
+                    Assert.AreEqual(0, extent.Count);
+                    Assert.IsFalse(extent.Contains(this.c1A));
+                    Assert.IsFalse(extent.Contains(this.c1B));
+                    Assert.IsFalse(extent.Contains(this.c1C));
+                    Assert.IsFalse(extent.Contains(this.c1D));
+                    Assert.IsFalse(extent.Contains(this.c2A));
+                    Assert.IsFalse(extent.Contains(this.c2B));
+                    Assert.IsFalse(extent.Contains(this.c2C));
+                    Assert.IsFalse(extent.Contains(this.c2D));
+                    Assert.IsFalse(extent.Contains(this.c3A));
+                    Assert.IsFalse(extent.Contains(this.c3B));
+                    Assert.IsFalse(extent.Contains(this.c3C));
+                    Assert.IsFalse(extent.Contains(this.c3D));
+                    Assert.IsFalse(extent.Contains(this.c4A));
+                    Assert.IsFalse(extent.Contains(this.c4B));
+                    Assert.IsFalse(extent.Contains(this.c4C));
+                    Assert.IsFalse(extent.Contains(this.c4D));
+
+                    // Equal 4
+                    extent = this.LocalExtent(C1.Meta.ObjectType);
+                    extent.Filter.AddEquals(C1.Meta.C1AllorsDateTime, dateTime4);
+
+                    Assert.AreEqual(1, extent.Count);
+                    Assert.IsFalse(extent.Contains(this.c1A));
+                    Assert.IsTrue(extent.Contains(this.c1B));
+                    Assert.IsFalse(extent.Contains(this.c1C));
+                    Assert.IsFalse(extent.Contains(this.c1D));
+                    Assert.IsFalse(extent.Contains(this.c2A));
+                    Assert.IsFalse(extent.Contains(this.c2B));
+                    Assert.IsFalse(extent.Contains(this.c2C));
+                    Assert.IsFalse(extent.Contains(this.c2D));
+                    Assert.IsFalse(extent.Contains(this.c3A));
+                    Assert.IsFalse(extent.Contains(this.c3B));
+                    Assert.IsFalse(extent.Contains(this.c3C));
+                    Assert.IsFalse(extent.Contains(this.c3D));
+                    Assert.IsFalse(extent.Contains(this.c4A));
+                    Assert.IsFalse(extent.Contains(this.c4B));
+                    Assert.IsFalse(extent.Contains(this.c4C));
+                    Assert.IsFalse(extent.Contains(this.c4D));
+
+                    // Equal 5
+                    extent = this.LocalExtent(C1.Meta.ObjectType);
+                    extent.Filter.AddEquals(C1.Meta.C1AllorsDateTime, dateTime5);
+
+                    Assert.AreEqual(2, extent.Count);
+                    Assert.IsFalse(extent.Contains(this.c1A));
+                    Assert.IsFalse(extent.Contains(this.c1B));
+                    Assert.IsTrue(extent.Contains(this.c1C));
+                    Assert.IsTrue(extent.Contains(this.c1D));
+                    Assert.IsFalse(extent.Contains(this.c2A));
+                    Assert.IsFalse(extent.Contains(this.c2B));
+                    Assert.IsFalse(extent.Contains(this.c2C));
+                    Assert.IsFalse(extent.Contains(this.c2D));
+                    Assert.IsFalse(extent.Contains(this.c3A));
+                    Assert.IsFalse(extent.Contains(this.c3B));
+                    Assert.IsFalse(extent.Contains(this.c3C));
+                    Assert.IsFalse(extent.Contains(this.c3D));
+                    Assert.IsFalse(extent.Contains(this.c4A));
+                    Assert.IsFalse(extent.Contains(this.c4B));
+                    Assert.IsFalse(extent.Contains(this.c4C));
+                    Assert.IsFalse(extent.Contains(this.c4D));
+
+                    // Interface
+                    // Equal 3
+                    extent = this.LocalExtent(I12Meta.Instance.ObjectType);
+                    extent.Filter.AddEquals(I12Meta.Instance.I12AllorsDateTime, dateTime3);
+
+                    Assert.AreEqual(0, extent.Count);
+                    Assert.IsFalse(extent.Contains(this.c1A));
+                    Assert.IsFalse(extent.Contains(this.c1B));
+                    Assert.IsFalse(extent.Contains(this.c1C));
+                    Assert.IsFalse(extent.Contains(this.c1D));
+                    Assert.IsFalse(extent.Contains(this.c2A));
+                    Assert.IsFalse(extent.Contains(this.c2B));
+                    Assert.IsFalse(extent.Contains(this.c2C));
+                    Assert.IsFalse(extent.Contains(this.c2D));
+                    Assert.IsFalse(extent.Contains(this.c3A));
+                    Assert.IsFalse(extent.Contains(this.c3B));
+                    Assert.IsFalse(extent.Contains(this.c3C));
+                    Assert.IsFalse(extent.Contains(this.c3D));
+                    Assert.IsFalse(extent.Contains(this.c4A));
+                    Assert.IsFalse(extent.Contains(this.c4B));
+                    Assert.IsFalse(extent.Contains(this.c4C));
+                    Assert.IsFalse(extent.Contains(this.c4D));
+
+                    // Equal 4
+                    extent = this.LocalExtent(I12Meta.Instance.ObjectType);
+                    extent.Filter.AddEquals(I12Meta.Instance.I12AllorsDateTime, dateTime4);
+
+                    Assert.AreEqual(2, extent.Count);
+                    Assert.IsFalse(extent.Contains(this.c1A));
+                    Assert.IsTrue(extent.Contains(this.c1B));
+                    Assert.IsFalse(extent.Contains(this.c1C));
+                    Assert.IsFalse(extent.Contains(this.c1D));
+                    Assert.IsFalse(extent.Contains(this.c2A));
+                    Assert.IsTrue(extent.Contains(this.c2B));
+                    Assert.IsFalse(extent.Contains(this.c2C));
+                    Assert.IsFalse(extent.Contains(this.c2D));
+                    Assert.IsFalse(extent.Contains(this.c3A));
+                    Assert.IsFalse(extent.Contains(this.c3B));
+                    Assert.IsFalse(extent.Contains(this.c3C));
+                    Assert.IsFalse(extent.Contains(this.c3D));
+                    Assert.IsFalse(extent.Contains(this.c4A));
+                    Assert.IsFalse(extent.Contains(this.c4B));
+                    Assert.IsFalse(extent.Contains(this.c4C));
+                    Assert.IsFalse(extent.Contains(this.c4D));
+
+                    // Equal 5
+                    extent = this.LocalExtent(I12Meta.Instance.ObjectType);
+                    extent.Filter.AddEquals(I12Meta.Instance.I12AllorsDateTime, dateTime5);
+
+                    Assert.AreEqual(4, extent.Count);
+                    Assert.IsFalse(extent.Contains(this.c1A));
+                    Assert.IsFalse(extent.Contains(this.c1B));
+                    Assert.IsTrue(extent.Contains(this.c1C));
+                    Assert.IsTrue(extent.Contains(this.c1D));
+                    Assert.IsFalse(extent.Contains(this.c2A));
+                    Assert.IsFalse(extent.Contains(this.c2B));
+                    Assert.IsTrue(extent.Contains(this.c2C));
+                    Assert.IsTrue(extent.Contains(this.c2D));
+                    Assert.IsFalse(extent.Contains(this.c3A));
+                    Assert.IsFalse(extent.Contains(this.c3B));
+                    Assert.IsFalse(extent.Contains(this.c3C));
+                    Assert.IsFalse(extent.Contains(this.c3D));
+                    Assert.IsFalse(extent.Contains(this.c4A));
+                    Assert.IsFalse(extent.Contains(this.c4B));
+                    Assert.IsFalse(extent.Contains(this.c4C));
+                    Assert.IsFalse(extent.Contains(this.c4D));
+
+                    // Super Interface
+                    // Equal 3
+                    extent = this.LocalExtent(S1234Meta.Instance.ObjectType);
+                    extent.Filter.AddEquals(S1234Meta.Instance.S1234AllorsDateTime, dateTime3);
+
+                    Assert.AreEqual(0, extent.Count);
+                    Assert.IsFalse(extent.Contains(this.c1A));
+                    Assert.IsFalse(extent.Contains(this.c1B));
+                    Assert.IsFalse(extent.Contains(this.c1C));
+                    Assert.IsFalse(extent.Contains(this.c1D));
+                    Assert.IsFalse(extent.Contains(this.c2A));
+                    Assert.IsFalse(extent.Contains(this.c2B));
+                    Assert.IsFalse(extent.Contains(this.c2C));
+                    Assert.IsFalse(extent.Contains(this.c2D));
+                    Assert.IsFalse(extent.Contains(this.c3A));
+                    Assert.IsFalse(extent.Contains(this.c3B));
+                    Assert.IsFalse(extent.Contains(this.c3C));
+                    Assert.IsFalse(extent.Contains(this.c3D));
+                    Assert.IsFalse(extent.Contains(this.c4A));
+                    Assert.IsFalse(extent.Contains(this.c4B));
+                    Assert.IsFalse(extent.Contains(this.c4C));
+                    Assert.IsFalse(extent.Contains(this.c4D));
+
+                    // Equal 4
+                    extent = this.LocalExtent(S1234Meta.Instance.ObjectType);
+                    extent.Filter.AddEquals(S1234Meta.Instance.S1234AllorsDateTime, dateTime4);
+
+                    Assert.AreEqual(4, extent.Count);
+                    Assert.IsFalse(extent.Contains(this.c1A));
+                    Assert.IsTrue(extent.Contains(this.c1B));
+                    Assert.IsFalse(extent.Contains(this.c1C));
+                    Assert.IsFalse(extent.Contains(this.c1D));
+                    Assert.IsFalse(extent.Contains(this.c2A));
+                    Assert.IsTrue(extent.Contains(this.c2B));
+                    Assert.IsFalse(extent.Contains(this.c2C));
+                    Assert.IsFalse(extent.Contains(this.c2D));
+                    Assert.IsFalse(extent.Contains(this.c3A));
+                    Assert.IsTrue(extent.Contains(this.c3B));
+                    Assert.IsFalse(extent.Contains(this.c3C));
+                    Assert.IsFalse(extent.Contains(this.c3D));
+                    Assert.IsFalse(extent.Contains(this.c4A));
+                    Assert.IsTrue(extent.Contains(this.c4B));
+                    Assert.IsFalse(extent.Contains(this.c4C));
+                    Assert.IsFalse(extent.Contains(this.c4D));
+
+                    // Equal 5
+                    extent = this.LocalExtent(S1234Meta.Instance.ObjectType);
+                    extent.Filter.AddEquals(S1234Meta.Instance.S1234AllorsDateTime, dateTime5);
+
+                    Assert.AreEqual(8, extent.Count);
+                    Assert.IsFalse(extent.Contains(this.c1A));
+                    Assert.IsFalse(extent.Contains(this.c1B));
+                    Assert.IsTrue(extent.Contains(this.c1C));
+                    Assert.IsTrue(extent.Contains(this.c1D));
+                    Assert.IsFalse(extent.Contains(this.c2A));
+                    Assert.IsFalse(extent.Contains(this.c2B));
+                    Assert.IsTrue(extent.Contains(this.c2C));
+                    Assert.IsTrue(extent.Contains(this.c2D));
+                    Assert.IsFalse(extent.Contains(this.c3A));
+                    Assert.IsFalse(extent.Contains(this.c3B));
+                    Assert.IsTrue(extent.Contains(this.c3C));
+                    Assert.IsTrue(extent.Contains(this.c3D));
+                    Assert.IsFalse(extent.Contains(this.c4A));
+                    Assert.IsFalse(extent.Contains(this.c4B));
+                    Assert.IsTrue(extent.Contains(this.c4C));
+                    Assert.IsTrue(extent.Contains(this.c4D));
+
+                    // Class - Wrong RelationType
+                    // Equal 3
+                    extent = this.LocalExtent(C1.Meta.ObjectType);
+
+                    var exception = false;
+                    try
+                    {
+                        extent.Filter.AddEquals(C2.Meta.C2AllorsDateTime, dateTime3);
+                    }
+                    catch
+                    {
+                        exception = true;
+                    }
+
+                    Assert.IsTrue(exception);
+
+                    // Equal 4
+                    extent = this.LocalExtent(C1.Meta.ObjectType);
+
+                    exception = false;
+                    try
+                    {
+                        extent.Filter.AddEquals(C2.Meta.C2AllorsDateTime, dateTime4);
+                    }
+                    catch
+                    {
+                        exception = true;
+                    }
+
+                    Assert.IsTrue(exception);
+
+                    // Equal 5
+                    extent = this.LocalExtent(C1.Meta.ObjectType);
+
+                    exception = false;
+                    try
+                    {
+                        extent.Filter.AddEquals(C2.Meta.C2AllorsDateTime, dateTime5);
+                    }
+                    catch
+                    {
+                        exception = true;
+                    }
+
+                    Assert.IsTrue(exception);
+
+                    // Interface - Wrong RelationType
+                    // Equal 3
+                    extent = this.LocalExtent(C1.Meta.ObjectType);
+
+                    exception = false;
+                    try
+                    {
+                        extent.Filter.AddEquals(I2Meta.Instance.I2AllorsDateTime, dateTime3);
+                    }
+                    catch
+                    {
+                        exception = true;
+                    }
+
+                    Assert.IsTrue(exception);
+
+                    // Equal 4
+                    extent = this.LocalExtent(C1.Meta.ObjectType);
+
+                    exception = false;
+                    try
+                    {
+                        extent.Filter.AddEquals(I2Meta.Instance.I2AllorsDateTime, dateTime4);
+                    }
+                    catch
+                    {
+                        exception = true;
+                    }
+
+                    Assert.IsTrue(exception);
+
+                    // Equal 5
+                    extent = this.LocalExtent(C1.Meta.ObjectType);
+
+                    exception = false;
+                    try
+                    {
+                        extent.Filter.AddEquals(I2Meta.Instance.I2AllorsDateTime, dateTime5);
+                    }
+                    catch
+                    {
+                        exception = true;
+                    }
+
+                    Assert.IsTrue(exception);
+
+                    // Super Interface - Wrong RelationType
+                    // Equal 3
+                    extent = this.LocalExtent(C1.Meta.ObjectType);
+
+                    exception = false;
+                    try
+                    {
+                        extent.Filter.AddEquals(S2Meta.Instance.S2AllorsDateTime, dateTime3);
+                    }
+                    catch
+                    {
+                        exception = true;
+                    }
+
+                    Assert.IsTrue(exception);
+
+                    // Equal 4
+                    extent = this.LocalExtent(C1.Meta.ObjectType);
+
+                    exception = false;
+                    try
+                    {
+                        extent.Filter.AddEquals(S2Meta.Instance.S2AllorsDateTime, dateTime4);
+                    }
+                    catch
+                    {
+                        exception = true;
+                    }
+
+                    Assert.IsTrue(exception);
+
+                    // Equal 5
+                    extent = this.LocalExtent(C1.Meta.ObjectType);
+
+                    exception = false;
+                    try
+                    {
+                        extent.Filter.AddEquals(S2Meta.Instance.S2AllorsDateTime, dateTime5);
+                    }
+                    catch
+                    {
+                        exception = true;
+                    }
+
+                    Assert.IsTrue(exception);
+                }
+            }
+        }
+
+        [Test]
         public void RoleDecimalBetweenValue()
         {
             foreach (var init in this.Inits)

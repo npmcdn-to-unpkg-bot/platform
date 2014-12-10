@@ -2,7 +2,7 @@ group AllorsCSharpMeta;
 
 TemplateId() ::= <<14F49218-A676-43ba-9CBD-B8FFA059D1BF>>
 TemplateName() ::= <<Allors C# Repository>>
-TemplateVersion() ::= <<1.0.1>>
+TemplateVersion() ::= <<1.0.2>>
 TemplateAllors() ::= <<1.0>>
 TemplateConfiguration(domain, settings) ::= <<
 $! 
@@ -44,6 +44,7 @@ $domain.SuperDomains:{superDomain|$if(!superDomain.IsAllorsUnitDomain)$			public
 
 		public static Unit AllorsString;
         public static Unit AllorsInteger;
+        public static Unit AllorsDateTime;
         public static Unit AllorsDecimal;
         public static Unit AllorsFloat;
         public static Unit AllorsBoolean;
@@ -62,6 +63,7 @@ $domain.SuperDomains:{superDomain|$superDomainInit(superDomain)$}$
 			// Units
 			AllorsString = new UnitBuilder(Core, UnitIds.StringId).WithSingularName("AllorsString").WithPluralName("AllorsStrings").WithUnitTag(UnitTags.AllorsString).Build();
             AllorsInteger = new UnitBuilder(Core, UnitIds.IntegerId).WithSingularName("AllorsInteger").WithPluralName("AllorsIntegers").WithUnitTag(UnitTags.AllorsInteger).Build();
+            AllorsDateTime = new UnitBuilder(Core, UnitIds.DateTimeId).WithSingularName("AllorsDateTime").WithPluralName("AllorsDateTimes").WithUnitTag(UnitTags.AllorsDateTime).Build();
             AllorsDecimal = new UnitBuilder(Core, UnitIds.DecimalId).WithSingularName("AllorsDecimal").WithPluralName("AllorsDecimals").WithUnitTag(UnitTags.AllorsDecimal).Build();
             AllorsFloat = new UnitBuilder(Core, UnitIds.FloatId).WithSingularName("AllorsFloat").WithPluralName("AllorsFloats").WithUnitTag(UnitTags.AllorsFloat).Build();
             AllorsBoolean = new UnitBuilder(Core, UnitIds.BooleanId).WithSingularName("AllorsBoolean").WithPluralName("AllorsBooleans").WithUnitTag(UnitTags.AllorsBoolean).Build();

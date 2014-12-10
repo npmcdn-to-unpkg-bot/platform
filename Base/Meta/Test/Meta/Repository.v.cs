@@ -30,7 +30,6 @@ namespace Allors.Meta
 
             Init(meta);
 
-            CorePostInit(meta);
             BasePostInit(meta);
             TestPostInit(meta);
 

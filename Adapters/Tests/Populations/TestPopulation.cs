@@ -186,6 +186,54 @@ namespace Allors.Populations
             this.C4B.S1234AllorsInteger = 1;
             this.C4C.S1234AllorsInteger = 2;
             this.C4D.S1234AllorsInteger = 2;
+
+            // DateTime
+            this.C1B.C1AllorsDateTime = new DateTime(2000, 1, 1, 0, 0, 4, DateTimeKind.Utc);
+            this.C1C.C1AllorsDateTime = new DateTime(2000, 1, 1, 0, 0, 5, DateTimeKind.Utc);
+            this.C1D.C1AllorsDateTime = new DateTime(2000, 1, 1, 0, 0, 5, DateTimeKind.Utc);
+
+            this.C1B.C1DateTimeLessThan = new DateTime(2000, 1, 1, 0, 0, 3, DateTimeKind.Utc);
+            this.C1C.C1DateTimeLessThan = new DateTime(2000, 1, 1, 0, 0, 5, DateTimeKind.Utc);
+            this.C1D.C1DateTimeLessThan = new DateTime(2000, 1, 1, 0, 0, 7, DateTimeKind.Utc);
+
+            this.C1B.C1DateTimeGreaterThan = new DateTime(2000, 1, 1, 0, 0, 3, DateTimeKind.Utc);
+            this.C1C.C1DateTimeGreaterThan = new DateTime(2000, 1, 1, 0, 0, 5, DateTimeKind.Utc);
+            this.C1D.C1DateTimeGreaterThan = new DateTime(2000, 1, 1, 0, 0, 7, DateTimeKind.Utc);
+
+            this.C1B.C1DateTimeBetweenA = new DateTime(2000, 1, 1, 0, 0, 1, DateTimeKind.Utc);
+            this.C1B.C1DateTimeBetweenB = new DateTime(2000, 1, 1, 0, 0, 3, DateTimeKind.Utc);
+            this.C1C.C1DateTimeBetweenA = new DateTime(2000, 1, 1, 0, 0, 5, DateTimeKind.Utc);
+            this.C1C.C1DateTimeBetweenB = new DateTime(2000, 1, 1, 0, 0, 5, DateTimeKind.Utc);
+            this.C1D.C1DateTimeBetweenA = new DateTime(2000, 1, 1, 0, 0, 3, DateTimeKind.Utc);
+            this.C1D.C1DateTimeBetweenB = new DateTime(2000, 1, 1, 0, 0, 10, DateTimeKind.Utc);
+
+            this.C1B.I1AllorsDateTime = new DateTime(2000, 1, 1, 0, 0, 4, DateTimeKind.Utc);
+            this.C1C.I1AllorsDateTime = new DateTime(2000, 1, 1, 0, 0, 5, DateTimeKind.Utc);
+            this.C1D.I1AllorsDateTime = new DateTime(2000, 1, 1, 0, 0, 5, DateTimeKind.Utc);
+
+            this.C1B.S1AllorsDateTime = new DateTime(2000, 1, 1, 0, 0, 4, DateTimeKind.Utc);
+            this.C1C.S1AllorsDateTime = new DateTime(2000, 1, 1, 0, 0, 5, DateTimeKind.Utc);
+            this.C1D.S1AllorsDateTime = new DateTime(2000, 1, 1, 0, 0, 5, DateTimeKind.Utc);
+
+            this.C1B.I12AllorsDateTime = new DateTime(2000, 1, 1, 0, 0, 4, DateTimeKind.Utc);
+            this.C1C.I12AllorsDateTime = new DateTime(2000, 1, 1, 0, 0, 5, DateTimeKind.Utc);
+            this.C1D.I12AllorsDateTime = new DateTime(2000, 1, 1, 0, 0, 5, DateTimeKind.Utc);
+            this.C2B.I12AllorsDateTime = new DateTime(2000, 1, 1, 0, 0, 4, DateTimeKind.Utc);
+            this.C2C.I12AllorsDateTime = new DateTime(2000, 1, 1, 0, 0, 5, DateTimeKind.Utc);
+            this.C2D.I12AllorsDateTime = new DateTime(2000, 1, 1, 0, 0, 5, DateTimeKind.Utc);
+
+            this.C1B.S1234AllorsDateTime = new DateTime(2000, 1, 1, 0, 0, 4, DateTimeKind.Utc);
+            this.C1C.S1234AllorsDateTime = new DateTime(2000, 1, 1, 0, 0, 5, DateTimeKind.Utc);
+            this.C1D.S1234AllorsDateTime = new DateTime(2000, 1, 1, 0, 0, 5, DateTimeKind.Utc);
+            this.C2B.S1234AllorsDateTime = new DateTime(2000, 1, 1, 0, 0, 4, DateTimeKind.Utc);
+            this.C2C.S1234AllorsDateTime = new DateTime(2000, 1, 1, 0, 0, 5, DateTimeKind.Utc);
+            this.C2D.S1234AllorsDateTime = new DateTime(2000, 1, 1, 0, 0, 5, DateTimeKind.Utc);
+            this.C3B.S1234AllorsDateTime = new DateTime(2000, 1, 1, 0, 0, 4, DateTimeKind.Utc);
+            this.C3C.S1234AllorsDateTime = new DateTime(2000, 1, 1, 0, 0, 5, DateTimeKind.Utc);
+            this.C3D.S1234AllorsDateTime = new DateTime(2000, 1, 1, 0, 0, 5, DateTimeKind.Utc);
+            this.C4B.S1234AllorsDateTime = new DateTime(2000, 1, 1, 0, 0, 4, DateTimeKind.Utc);
+            this.C4C.S1234AllorsDateTime = new DateTime(2000, 1, 1, 0, 0, 5, DateTimeKind.Utc);
+            this.C4D.S1234AllorsDateTime = new DateTime(2000, 1, 1, 0, 0, 5, DateTimeKind.Utc);
             
             // Float
             this.C1B.C1AllorsFloat = 1;

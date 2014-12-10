@@ -29,25 +29,25 @@ namespace Allors.Databases.Relation.SqlClient
     internal sealed class AllorsPredicateRoleLessThanValueSql : AllorsPredicateSql
     {
         private readonly object obj;
-        private readonly IRoleType role;
+        private readonly IRoleType roleType;
 
-        internal AllorsPredicateRoleLessThanValueSql(AllorsExtentFilteredSql extent, IRoleType role, Object obj)
+        internal AllorsPredicateRoleLessThanValueSql(AllorsExtentFilteredSql extent, IRoleType roleType, Object obj)
         {
-            extent.CheckRole(role);
-            PredicateAssertions.ValidateRoleLessThan(role, obj);
-            this.role = role;
-            this.obj = obj;
+            extent.CheckRole(roleType);
+            PredicateAssertions.ValidateRoleLessThan(roleType, obj);
+            this.roleType = roleType;
+            this.obj = roleType.ObjectType is IUnit ? roleType.Normalize(obj) : obj;
         }
 
         internal override bool BuildWhere(AllorsExtentFilteredSql extent, Mapping mapping, AllorsExtentStatementSql statement, IObjectType type, string alias)
         {
-            statement.Append(" " + this.role.SingularFullName + "_R." + Mapping.ColumnNameForRole + " < " + statement.AddParameter(this.obj));
+            statement.Append(" " + this.roleType.SingularFullName + "_R." + Mapping.ColumnNameForRole + " < " + statement.AddParameter(this.obj));
             return this.Include;
         }
 
         internal override void Setup(AllorsExtentFilteredSql extent, AllorsExtentStatementSql statement)
         {
-            statement.UseRole(this.role);
+            statement.UseRole(this.roleType);
         }
     }
 }

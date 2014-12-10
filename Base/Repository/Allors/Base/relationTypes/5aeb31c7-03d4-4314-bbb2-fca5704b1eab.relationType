@@ -3,9 +3,8 @@
     <objectType idref="80adbbfd-952e-46f3-a744-78e0ce42bc80" />
   </associationType>
   <roleType id="0da8ef4e-53b7-4152-b219-7e0cebbca268">
-    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <objectType idref="c4c09343-61d3-418c-ade2-fe6fd588f128" />
     <pluralName>FromDates</pluralName>
     <singularName>FromDate</singularName>
-    <size>256</size>
   </roleType>
 </relationType>

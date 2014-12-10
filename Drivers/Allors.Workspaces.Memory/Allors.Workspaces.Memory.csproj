@@ -93,7 +93,7 @@
     <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Allors\Allors.csproj">
+    <ProjectReference Include="..\..\Framework\Framework\Allors.csproj">
       <Project>{84495b8e-1800-41c9-a236-abe6265a23a3}</Project>
       <Name>Allors</Name>
     </ProjectReference>

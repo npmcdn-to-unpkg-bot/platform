@@ -29,27 +29,27 @@ namespace Allors.Databases.Relation.SqlClient
     internal sealed class AllorsPredicateRoleBetweenValueSql : AllorsPredicateSql
     {
         private readonly object first;
-        private readonly IRoleType role;
+        private readonly IRoleType roleType;
         private readonly object second;
 
-        internal AllorsPredicateRoleBetweenValueSql(AllorsExtentFilteredSql extent, IRoleType role, Object first, Object second)
+        internal AllorsPredicateRoleBetweenValueSql(AllorsExtentFilteredSql extent, IRoleType roleType, Object first, Object second)
         {
-            extent.CheckRole(role);
-            PredicateAssertions.ValidateRoleBetween(role, first, second);
-            this.role = role;
-            this.first = first;
-            this.second = second;
+            extent.CheckRole(roleType);
+            PredicateAssertions.ValidateRoleBetween(roleType, first, second);
+            this.roleType = roleType;
+            this.first = roleType.ObjectType is IUnit ? roleType.Normalize(first) : first;
+            this.second = roleType.ObjectType is IUnit ? roleType.Normalize(second) : second;
         }
 
         internal override bool BuildWhere(AllorsExtentFilteredSql extent, Mapping mapping, AllorsExtentStatementSql statement, IObjectType type, string alias)
         {
-            statement.Append(" " + this.role.SingularFullName + "_R." + Mapping.ColumnNameForRole + " BETWEEN " + statement.AddParameter(this.first) + " AND " + statement.AddParameter(this.second) + " ");
+            statement.Append(" " + this.roleType.SingularFullName + "_R." + Mapping.ColumnNameForRole + " BETWEEN " + statement.AddParameter(this.first) + " AND " + statement.AddParameter(this.second) + " ");
             return this.Include;
         }
 
         internal override void Setup(AllorsExtentFilteredSql extent, AllorsExtentStatementSql statement)
         {
-            statement.UseRole(this.role);
+            statement.UseRole(this.roleType);
         }
     }
 }

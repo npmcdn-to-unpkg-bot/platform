@@ -12,6 +12,7 @@ namespace Allors.Meta
 
 		public static Unit AllorsString;
         public static Unit AllorsInteger;
+        public static Unit AllorsDateTime;
         public static Unit AllorsDecimal;
         public static Unit AllorsFloat;
         public static Unit AllorsBoolean;
@@ -71,6 +72,7 @@ namespace Allors.Meta
 		public static RelationType CounterValue;
 		public static RelationType ImageOriginal;
 		public static RelationType AccessControlSubject;
+		public static RelationType EnumerationName;
 		public static RelationType SearchDataCharacterBoundaryText;
 		public static RelationType MediaMediaType;
 		public static RelationType LocalisedTextText;
@@ -133,10 +135,9 @@ namespace Allors.Meta
 		public static RelationType LanguageLocalisedName;
 		public static RelationType SingletonGuest;
 		public static RelationType SingletonDefaultSecurityToken;
+		public static RelationType EnumerationIsActive;
 		public static RelationType SearchFragmentLowerCaseText;
 		public static RelationType CountryIsoCode;
-		public static RelationType EnumerationName;
-		public static RelationType EnumerationIsActive;
 
 
 		static void Init(MetaPopulation meta)
@@ -147,6 +148,7 @@ namespace Allors.Meta
 			// Units
 			AllorsString = new UnitBuilder(Core, UnitIds.StringId).WithSingularName("AllorsString").WithPluralName("AllorsStrings").WithUnitTag(UnitTags.AllorsString).Build();
             AllorsInteger = new UnitBuilder(Core, UnitIds.IntegerId).WithSingularName("AllorsInteger").WithPluralName("AllorsIntegers").WithUnitTag(UnitTags.AllorsInteger).Build();
+            AllorsDateTime = new UnitBuilder(Core, UnitIds.DateTimeId).WithSingularName("AllorsDateTime").WithPluralName("AllorsDateTimes").WithUnitTag(UnitTags.AllorsDateTime).Build();
             AllorsDecimal = new UnitBuilder(Core, UnitIds.DecimalId).WithSingularName("AllorsDecimal").WithPluralName("AllorsDecimals").WithUnitTag(UnitTags.AllorsDecimal).Build();
             AllorsFloat = new UnitBuilder(Core, UnitIds.FloatId).WithSingularName("AllorsFloat").WithPluralName("AllorsFloats").WithUnitTag(UnitTags.AllorsFloat).Build();
             AllorsBoolean = new UnitBuilder(Core, UnitIds.BooleanId).WithSingularName("AllorsBoolean").WithPluralName("AllorsBooleans").WithUnitTag(UnitTags.AllorsBoolean).Build();
@@ -898,21 +900,19 @@ namespace Allors.Meta
 
 				// Period
 				PeriodFromDate = new RelationTypeBuilder(Base, new Guid("5aeb31c7-03d4-4314-bbb2-fca5704b1eab"),new Guid("8cf0bd14-753d-4f34-99b3-7a6b0d90c3d4"),new Guid("0da8ef4e-53b7-4152-b219-7e0cebbca268"))
-				.WithObjectTypes(Period, AllorsString)
+				.WithObjectTypes(Period, AllorsDateTime)
 				.WithSingularName("FromDate")  
 				.WithPluralName("FromDates")  
 				  
 				  
-				.WithSize(256)
 				.Build();
 
 				PeriodThroughDate = new RelationTypeBuilder(Base, new Guid("d7576ce2-da27-487a-86aa-b0912f745bc0"),new Guid("cb2fa6c1-f826-45f0-a03f-00e6cb268ebb"),new Guid("4e021875-5bae-4f01-8deb-641016cd2f8d"))
-				.WithObjectTypes(Period, AllorsString)
+				.WithObjectTypes(Period, AllorsDateTime)
 				.WithSingularName("ThroughDate")  
 				.WithPluralName("ThroughDates")  
 				  
 				  
-				.WithSize(256)
 				.Build();
 
 
