@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="c2d1f044-b996-4b16-8fe3-1786f86973b1">
+  <associationType id="802b30da-76ab-4518-b6d8-204366a26b5e">
+    <objectType idref="97755724-b934-4cc5-beb4-3d49a7a4b27e" />
+  </associationType>
+  <roleType id="decf4aeb-6d1f-4f6d-b130-ba706a388326">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>PrefetchesTest</pluralName>
+    <singularName>PrefetchTest</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

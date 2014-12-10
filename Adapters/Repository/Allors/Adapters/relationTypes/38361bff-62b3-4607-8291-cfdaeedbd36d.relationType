@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="38361bff-62b3-4607-8291-cfdaeedbd36d">
+  <associationType id="f5403207-14c6-422e-9139-92e1c46ea15b">
+    <objectType idref="7ba2ab26-491b-49eb-944c-26f6bb66e50f" />
+  </associationType>
+  <roleType id="675e80d6-5718-4a84-aef0-92ccf07dcdc7">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>InvisibleValues</pluralName>
+    <singularName>InvisibleValue</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

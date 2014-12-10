@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="dd006700-a00c-4c67-819e-1d63df26a5b6">
+  <associationType id="5d1441a6-f665-470d-8f7f-03d794e0ee06">
+    <objectType idref="2a9b5a77-6065-4f2a-bbc3-655426f0f97b" />
+  </associationType>
+  <roleType id="3ad6a27f-4604-402a-a504-8ef3a3e7ccee">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>StringsEquals</pluralName>
+    <singularName>StringEquals</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

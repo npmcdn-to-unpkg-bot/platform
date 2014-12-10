@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="518da995-1f6b-4632-94f1-11cea5e72717">
+  <associationType id="11fe4c27-f656-46aa-bc30-341fe88d682a">
+    <objectType idref="fefcf1b6-ac8f-47b0-bed5-939207a2833e" />
+  </associationType>
+  <roleType id="730be644-122c-45d0-96b3-73c68a9846c2">
+    <objectType idref="ccd6f134-26de-4103-bff9-a37ec3e997a3" />
+    <pluralName>IntegersBetweenA</pluralName>
+    <singularName>IntegerBetweenA</singularName>
+  </roleType>
+</relationType>

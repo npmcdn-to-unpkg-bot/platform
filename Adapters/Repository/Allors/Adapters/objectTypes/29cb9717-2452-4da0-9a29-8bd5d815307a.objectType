@@ -1,0 +1,6 @@
+<objectType allors="1.0" id="29cb9717-2452-4da0-9a29-8bd5d815307a">
+  <isInterface>true</isInterface>
+  <namespace idref="a0208696-60db-4791-80bd-f2c39974fc3e" />
+  <pluralName>I23s</pluralName>
+  <singularName>I23</singularName>
+</objectType>

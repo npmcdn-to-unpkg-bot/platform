@@ -1,0 +1,6 @@
+<objectType allors="1.0" id="c5747a64-f468-4d0d-80f3-6463bd32b0ca">
+  <isInterface>true</isInterface>
+  <namespace idref="a0208696-60db-4791-80bd-f2c39974fc3e" />
+  <pluralName>S12s</pluralName>
+  <singularName>S12</singularName>
+</objectType>

@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="509c5341-3d87-4da4-a807-5567d897169b">
+  <associationType id="f769d260-4f19-44fd-8986-34f29d395bb1">
+    <isMany>true</isMany>
+    <objectType idref="b1b6361e-5ee5-434c-9c92-46c6166195c4" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="eba712df-716d-4c2d-aeaf-d877a25a4d0b">
+    <isMany>true</isMany>
+    <objectType idref="6a082a25-a8f2-4acd-a1a3-ba4461b729f1" />
+    <pluralName>IndexedMany2ManyPersons</pluralName>
+    <singularName>IndexedMany2ManyPerson</singularName>
+  </roleType>
+</relationType>

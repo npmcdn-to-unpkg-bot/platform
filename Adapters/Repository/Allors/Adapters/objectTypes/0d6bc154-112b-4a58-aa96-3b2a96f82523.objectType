@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="0d6bc154-112b-4a58-aa96-3b2a96f82523">
+  <namespace idref="e9c45748-90db-4a90-bcd5-bee9bd2668ab" />
+  <pluralName>Users</pluralName>
+  <singularName>User</singularName>
+</objectType>

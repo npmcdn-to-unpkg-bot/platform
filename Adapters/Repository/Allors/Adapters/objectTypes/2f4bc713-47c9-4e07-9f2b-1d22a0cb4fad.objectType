@@ -1,0 +1,6 @@
+<objectType allors="1.0" id="2f4bc713-47c9-4e07-9f2b-1d22a0cb4fad">
+  <isInterface>true</isInterface>
+  <namespace idref="e9c45748-90db-4a90-bcd5-bee9bd2668ab" />
+  <pluralName>InterfacesWithoutConcreteClass</pluralName>
+  <singularName>InterfaceWithoutConcreteClass</singularName>
+</objectType>

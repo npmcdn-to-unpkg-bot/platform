@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="c6932f0a-e1de-4d93-ab94-80a5eb0a315c">
+  <associationType id="13edb577-873b-40b7-8d5e-6a70c48cb8f0">
+    <objectType idref="ee84609f-e165-4037-b8ce-f7c8b826e603" />
+  </associationType>
+  <roleType id="81b25bc2-b44a-448c-a944-163b813285a0">
+    <objectType idref="ee84609f-e165-4037-b8ce-f7c8b826e603" />
+    <pluralName>Selfs28</pluralName>
+    <singularName>Self28</singularName>
+  </roleType>
+</relationType>

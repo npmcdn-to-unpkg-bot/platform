@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="44abca14-9fb2-42a7-b8ab-a1ca87d87b2e">
+  <associationType id="c212abeb-9a22-4577-98c2-3792ddb20ad9">
+    <isMany>true</isMany>
+    <objectType idref="b1b6361e-5ee5-434c-9c92-46c6166195c4" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="480debbc-ddb8-467d-bc3a-062a5c452b9f">
+    <isMany>true</isMany>
+    <objectType idref="6a082a25-a8f2-4acd-a1a3-ba4461b729f1" />
+    <pluralName>Owners</pluralName>
+    <singularName>Owner</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,6 @@
+<objectType allors="1.0" id="ebc22540-54c8-4601-a43d-2ed6da9f3e79">
+  <isInterface>true</isInterface>
+  <namespace idref="a0208696-60db-4791-80bd-f2c39974fc3e" />
+  <pluralName>I34s</pluralName>
+  <singularName>I34</singularName>
+</objectType>

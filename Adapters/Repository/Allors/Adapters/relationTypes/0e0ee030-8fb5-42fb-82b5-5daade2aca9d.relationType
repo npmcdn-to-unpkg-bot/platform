@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="0e0ee030-8fb5-42fb-82b5-5daade2aca9d">
+  <associationType id="209d7177-b6bc-4a13-ae35-ea14e37da038">
+    <isMany>true</isMany>
+    <objectType idref="73970b0f-1ff4-4d39-aad8-fdbfbaae472f" />
+  </associationType>
+  <roleType id="f0032ab2-d086-4d52-aa30-e295d640ed90">
+    <isMany>true</isMany>
+    <objectType idref="73970b0f-1ff4-4d39-aad8-fdbfbaae472f" />
+    <pluralName>InvisibleManies</pluralName>
+    <singularName>InvisibleMany</singularName>
+  </roleType>
+</relationType>

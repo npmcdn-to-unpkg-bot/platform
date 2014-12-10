@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="be3fc71d-66d8-411f-ab5f-4ed91e437852">
+  <associationType id="a0cba3a2-b964-46c0-9c84-0dcf4b7e91f7">
+    <isMany>true</isMany>
+    <objectType idref="4f53e1e7-e88a-4161-969c-1fed0b3a24a2" />
+  </associationType>
+  <roleType id="a418995c-57b6-4a7a-a619-bdf2a58a184f">
+    <objectType idref="4f53e1e7-e88a-4161-969c-1fed0b3a24a2" />
+    <pluralName>Selfs3</pluralName>
+    <singularName>Self3</singularName>
+  </roleType>
+</relationType>

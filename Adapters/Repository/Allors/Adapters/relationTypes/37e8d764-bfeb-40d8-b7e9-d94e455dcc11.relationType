@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="37e8d764-bfeb-40d8-b7e9-d94e455dcc11">
+  <associationType id="fd9a1d7e-913e-4fce-88b3-320ab6bbce96">
+    <objectType idref="ebc22540-54c8-4601-a43d-2ed6da9f3e79" />
+  </associationType>
+  <roleType id="d079cba2-c2af-4dc5-abf3-46abeb8b4928">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <precision>19</precision>
+    <scale>2</scale>
+  </roleType>
+</relationType>

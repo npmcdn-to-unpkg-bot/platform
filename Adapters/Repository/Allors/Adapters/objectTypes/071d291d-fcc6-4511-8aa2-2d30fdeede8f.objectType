@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="071d291d-fcc6-4511-8aa2-2d30fdeede8f">
+  <namespace idref="e9c45748-90db-4a90-bcd5-bee9bd2668ab" />
+  <pluralName>ClassesWithoutUnitRoles</pluralName>
+  <singularName>ClassWithoutUnitRoles</singularName>
+</objectType>

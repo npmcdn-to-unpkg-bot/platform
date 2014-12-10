@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="9d8c9863-dd8d-4c85-a5e6-58042ff3619d">
+  <associationType id="e8f5d99c-7dfb-44b4-8951-9cc37d84f5a6">
+    <objectType idref="7041c691-d896-4628-8f50-1c24f5d03414" />
+  </associationType>
+  <roleType id="708c391d-94a5-4c08-8cdc-ecb74cf7ac76">
+    <objectType idref="c4c09343-61d3-418c-ade2-fe6fd588f128" />
+    <pluralName>DateTimesGreaterThan</pluralName>
+    <singularName>DateTimeGreaterThan</singularName>
+  </roleType>
+</relationType>

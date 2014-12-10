@@ -175,13 +175,15 @@ namespace Allors.Populations
                 case UnitTags.AllorsString:
                     return value;
                 case UnitTags.AllorsInteger:
-                    return int.Parse(value, NumberFormatInfo.InvariantInfo);
+                    return XmlConvert.ToInt32(value);
                 case UnitTags.AllorsDecimal:
-                    return decimal.Parse(value, NumberFormatInfo.InvariantInfo);
+                    return XmlConvert.ToDecimal(value);
                 case UnitTags.AllorsFloat:
-                    return double.Parse(value, NumberFormatInfo.InvariantInfo);
+                    return XmlConvert.ToDouble(value);
                 case UnitTags.AllorsBoolean:
-                    return bool.Parse(value);
+                    return XmlConvert.ToBoolean(value);
+                case UnitTags.AllorsDateTime:
+                    return XmlConvert.ToDateTime(value, XmlDateTimeSerializationMode.Utc);
                 case UnitTags.AllorsUnique:
                     return Guid.Parse(value);
                 case UnitTags.AllorsBinary:
@@ -204,15 +206,17 @@ namespace Allors.Populations
                 case UnitTags.AllorsString:
                     return (string)unit;
                 case UnitTags.AllorsInteger:
-                    return ((int)unit).ToString(NumberFormatInfo.InvariantInfo);
+                    return XmlConvert.ToString((int)unit);
                 case UnitTags.AllorsDecimal:
-                    return ((decimal)unit).ToString("0.#############################", NumberFormatInfo.InvariantInfo);
+                    return XmlConvert.ToString((decimal)unit);
                 case UnitTags.AllorsFloat:
-                    return ((double)unit).ToString(NumberFormatInfo.InvariantInfo);
+                    return XmlConvert.ToString((double)unit);
                 case UnitTags.AllorsBoolean:
-                    return ((bool)unit).ToString(NumberFormatInfo.InvariantInfo).ToLowerInvariant();
+                    return XmlConvert.ToString((bool)unit);
+                case UnitTags.AllorsDateTime:
+                    return XmlConvert.ToString((DateTime)unit, XmlDateTimeSerializationMode.Utc);
                 case UnitTags.AllorsUnique:
-                    return ((Guid)unit).ToString("N");
+                    return XmlConvert.ToString((Guid)unit);
                 case UnitTags.AllorsBinary:
                     return Convert.ToBase64String((byte[])unit);
                 default:

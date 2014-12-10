@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="dba5deb2-880d-47f4-adae-0b3125ff1379">
+  <associationType id="8ad9a7aa-095e-43d9-aa4e-f21f7c70fdbb">
+    <objectType idref="7ba2ab26-491b-49eb-944c-26f6bb66e50f" />
+  </associationType>
+  <roleType id="3e8d7881-8112-4001-a518-3fcef1a24615">
+    <objectType idref="7ba2ab26-491b-49eb-944c-26f6bb66e50f" />
+    <pluralName>InvisibleOnes</pluralName>
+    <singularName>InvisibleOne</singularName>
+  </roleType>
+</relationType>

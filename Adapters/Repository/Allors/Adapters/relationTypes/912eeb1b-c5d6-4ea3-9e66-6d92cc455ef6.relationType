@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="912eeb1b-c5d6-4ea3-9e66-6d92cc455ef6">
+  <associationType id="96696293-9326-4a9b-9a85-97897d517007">
+    <isMany>true</isMany>
+    <objectType idref="fefcf1b6-ac8f-47b0-bed5-939207a2833e" />
+  </associationType>
+  <roleType id="4b1de97f-e65e-44a0-bbfd-f0fd6c9b7297">
+    <isMany>true</isMany>
+    <objectType idref="ebc22540-54c8-4601-a43d-2ed6da9f3e79" />
+    <pluralName>I34many2manies</pluralName>
+    <singularName>I34many2many</singularName>
+  </roleType>
+</relationType>

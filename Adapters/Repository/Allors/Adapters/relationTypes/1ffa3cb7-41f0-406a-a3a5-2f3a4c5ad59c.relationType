@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="1ffa3cb7-41f0-406a-a3a5-2f3a4c5ad59c">
+  <associationType id="5b87b0d4-3bad-499d-96f1-9d39ab58d1e8">
+    <isMany>true</isMany>
+    <objectType idref="0d6bc154-112b-4a58-aa96-3b2a96f82523" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="939e2772-0bf6-4867-ae7d-3331ab395ba7">
+    <isMany>true</isMany>
+    <objectType idref="0d6bc154-112b-4a58-aa96-3b2a96f82523" />
+    <pluralName>Selects</pluralName>
+    <singularName>Select</singularName>
+  </roleType>
+</relationType>

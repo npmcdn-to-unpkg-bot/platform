@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="d1601926-ae62-4592-b15b-6511e0d98355">
+  <associationType id="4a8dd1f7-a02f-49cb-a078-77ad93e3887d">
+    <objectType idref="2a9b5a77-6065-4f2a-bbc3-655426f0f97b" />
+  </associationType>
+  <roleType id="91874a28-56b7-4d5d-8fc9-33a59cabab95">
+    <isMany>true</isMany>
+    <objectType idref="20049a79-20c7-478b-a5ba-c54b1e615168" />
+    <pluralName>C4one2manies</pluralName>
+    <singularName>C4one2many</singularName>
+  </roleType>
+</relationType>

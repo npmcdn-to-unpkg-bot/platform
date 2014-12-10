@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="b889bc75-3d93-4577-a4d7-752393284220">
+  <associationType id="7df93147-276f-419d-b4b2-ff6dba76c683">
+    <isMany>true</isMany>
+    <objectType idref="97755724-b934-4cc5-beb4-3d49a7a4b27e" />
+  </associationType>
+  <roleType id="18a37e3c-539c-4cf5-9f75-05295f1bacda">
+    <isMany>true</isMany>
+    <objectType idref="2a9b5a77-6065-4f2a-bbc3-655426f0f97b" />
+    <pluralName>C3many2manies</pluralName>
+    <singularName>C3many2many</singularName>
+  </roleType>
+</relationType>

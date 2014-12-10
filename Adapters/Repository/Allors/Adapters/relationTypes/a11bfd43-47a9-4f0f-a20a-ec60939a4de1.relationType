@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="a11bfd43-47a9-4f0f-a20a-ec60939a4de1">
+  <associationType id="461777fc-08cd-472b-a1a5-ee85e23771d4">
+    <objectType idref="ee84609f-e165-4037-b8ce-f7c8b826e603" />
+  </associationType>
+  <roleType id="e75e4c7d-8dcc-49e5-bad6-623a221eb845">
+    <objectType idref="ee84609f-e165-4037-b8ce-f7c8b826e603" />
+    <pluralName>Selfs6</pluralName>
+    <singularName>Self6</singularName>
+  </roleType>
+</relationType>

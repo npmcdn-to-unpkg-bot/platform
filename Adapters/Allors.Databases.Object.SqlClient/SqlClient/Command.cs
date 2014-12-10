@@ -50,6 +50,8 @@ namespace Allors.Databases.Object.SqlClient
                     return reader.GetDecimal(i);
                 case UnitTags.AllorsBoolean:
                     return reader.GetBoolean(i);
+                case UnitTags.AllorsDateTime:
+                    return reader.GetDateTime(i);
                 case UnitTags.AllorsUnique:
                     return reader.GetGuid(i);
                 case UnitTags.AllorsBinary:
@@ -76,6 +78,11 @@ namespace Allors.Databases.Object.SqlClient
             {
                 sqlParameter = this.command.CreateParameter();
                 sqlParameter.ParameterName = parameterName;
+                if (value is DateTime)
+                {
+                    sqlParameter.SqlDbType = SqlDbType.DateTime2;    
+                }
+
                 this.command.Parameters.Add(sqlParameter);
             }
 

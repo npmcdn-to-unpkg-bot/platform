@@ -69,6 +69,17 @@ namespace Allors.Meta
         }
 
         /// <summary>
+        /// Gets a value indicating whether this instance is a date time.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if this instance is a date time; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsDateTime
+        {
+            get { return this.Id.Equals(UnitIds.DateTimeId); }
+        }
+
+        /// <summary>
         /// Gets a value indicating whether this instance is a decimal.
         /// </summary>
         /// <value>

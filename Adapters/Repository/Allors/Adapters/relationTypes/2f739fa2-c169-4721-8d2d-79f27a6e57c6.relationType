@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="2f739fa2-c169-4721-8d2d-79f27a6e57c6">
+  <associationType id="31b9b9af-df6c-425e-835c-ceb2d512afb6">
+    <objectType idref="fefcf1b6-ac8f-47b0-bed5-939207a2833e" />
+  </associationType>
+  <roleType id="6aee72d6-be71-4560-baf2-97e64cfd3eb8">
+    <objectType idref="ffcabd07-f35f-4083-bef6-f6c47970ca5d" />
+    <pluralName>DoublesLessThan</pluralName>
+    <singularName>DoubleLessThan</singularName>
+  </roleType>
+</relationType>

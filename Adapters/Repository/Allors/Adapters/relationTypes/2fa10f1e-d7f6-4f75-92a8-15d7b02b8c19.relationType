@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="2fa10f1e-d7f6-4f75-92a8-15d7b02b8c19">
+  <associationType id="287d5a30-a910-434d-a005-9af604fe6fd2">
+    <objectType idref="7041c691-d896-4628-8f50-1c24f5d03414" />
+  </associationType>
+  <roleType id="f199e3bc-a801-418b-99ea-7e693fe86f2b">
+    <objectType idref="ffcabd07-f35f-4083-bef6-f6c47970ca5d" />
+    <pluralName>DoublesBetweenA</pluralName>
+    <singularName>DoubleBetweenA</singularName>
+  </roleType>
+</relationType>

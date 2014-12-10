@@ -167,10 +167,7 @@
     <Compile Include="SqlClient\Schema\SchemaParameter.cs" />
     <Compile Include="SqlClient\SessionCommands.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="SqlClient\RepositoryCommands\Text\" />
-    <Folder Include="SqlClient\SessionCommands\Text\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Settings.StyleCop" />
   </ItemGroup>

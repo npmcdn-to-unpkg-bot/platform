@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="c95ac96b-4385-4e31-8719-f120c76ab67a">
+  <associationType id="7d094e06-7b45-4cf9-a65c-ff111a44ecf0">
+    <objectType idref="fefcf1b6-ac8f-47b0-bed5-939207a2833e" />
+  </associationType>
+  <roleType id="761b1ac8-87b2-440c-ab1b-06be3a6d5ab1">
+    <objectType idref="c4c09343-61d3-418c-ade2-fe6fd588f128" />
+    <pluralName>DateTimesBetweenA</pluralName>
+    <singularName>DateTimeBetweenA</singularName>
+  </roleType>
+</relationType>

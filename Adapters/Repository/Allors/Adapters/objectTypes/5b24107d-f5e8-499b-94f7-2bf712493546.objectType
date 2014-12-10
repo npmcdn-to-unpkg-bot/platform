@@ -1,0 +1,6 @@
+<objectType allors="1.0" id="5b24107d-f5e8-499b-94f7-2bf712493546">
+  <isInterface>true</isInterface>
+  <namespace idref="a0208696-60db-4791-80bd-f2c39974fc3e" />
+  <pluralName>S3s</pluralName>
+  <singularName>S3</singularName>
+</objectType>

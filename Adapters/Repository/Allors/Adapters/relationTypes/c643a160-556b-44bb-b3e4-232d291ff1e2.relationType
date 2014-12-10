@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="c643a160-556b-44bb-b3e4-232d291ff1e2">
+  <associationType id="76de7b03-d4a5-4cf8-9631-e59f42ddda21">
+    <objectType idref="ee84609f-e165-4037-b8ce-f7c8b826e603" />
+  </associationType>
+  <roleType id="c7fa0675-83f0-4b3a-9f6b-0fbc1360f12a">
+    <objectType idref="ee84609f-e165-4037-b8ce-f7c8b826e603" />
+    <pluralName>Selfs11</pluralName>
+    <singularName>Self11</singularName>
+  </roleType>
+</relationType>

@@ -68,6 +68,30 @@ namespace Allors.Populations
                     }
 
                     break;
+                case UnitTags.AllorsDateTime:
+                    if (unit is DateTime)
+                    {
+                        var dateTime = (DateTime)normalizedUnit;
+                        if (dateTime != DateTime.MinValue && dateTime != DateTime.MaxValue)
+                        {
+                            switch (dateTime.Kind)
+                            {
+                                case DateTimeKind.Local:
+                                    dateTime = dateTime.ToUniversalTime();
+                                    break;
+                                case DateTimeKind.Unspecified:
+                                    throw new ArgumentException("DateTime value is of DateTimeKind.Kind Unspecified. \nUnspecified is only allowed for DateTime.MaxValue and DateTime.MinValue, use DateTimeKind.Utc or DateTimeKind.Local instead.");
+                            }
+
+                            normalizedUnit = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second, dateTime.Millisecond, DateTimeKind.Utc);
+                        }
+                    }
+                    else if (!(unit is decimal))
+                    {
+                        throw new ArgumentException("RoleType is not a DateTime.");
+                    }
+
+                    break;
                 case UnitTags.AllorsDecimal:
                     if (unit is int || unit is long || unit is float || unit is double)
                     {

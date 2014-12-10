@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="18bf90a6-2954-4e4f-bfa9-78ede63314bf">
+  <associationType id="6a876bed-11d4-4d9f-abab-f6f650ce80eb">
+    <objectType idref="584681af-90f0-45b1-a80e-6a73c3592600" />
+  </associationType>
+  <roleType id="26bdbe43-a2bc-44e3-a8a2-f84d17f57470">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>AllorsStrings19</pluralName>
+    <singularName>AllorsString19</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="14a93943-13f6-481d-98c7-19fb55625af9">
+  <associationType id="729272d3-09c5-4e55-8d65-126f03e99fd2">
+    <objectType idref="fefcf1b6-ac8f-47b0-bed5-939207a2833e" />
+  </associationType>
+  <roleType id="4009851b-5819-414e-a0f2-6d9141ecdfa8">
+    <objectType idref="72c07e8a-03f5-4da8-ab37-236333d4f74e" />
+    <pluralName>C2one2ones</pluralName>
+    <singularName>C2one2one</singularName>
+  </roleType>
+</relationType>

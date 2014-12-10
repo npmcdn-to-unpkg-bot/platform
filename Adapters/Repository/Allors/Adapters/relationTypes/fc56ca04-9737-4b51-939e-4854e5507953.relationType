@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="fc56ca04-9737-4b51-939e-4854e5507953">
+  <associationType id="de7f8997-c48e-48b9-9ea2-43fb6597a67b">
+    <objectType idref="7041c691-d896-4628-8f50-1c24f5d03414" />
+  </associationType>
+  <roleType id="27f4e9f4-07e2-462d-917c-66fe659b789a">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>DecimalsLessThan</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>DecimalLessThan</singularName>
+  </roleType>
+</relationType>

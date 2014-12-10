@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="b299db28-1107-4120-946c-fbdad2271c5c">
+  <associationType id="385dc31e-b277-484c-b448-9c532a0196ba">
+    <objectType idref="c3c0ecf3-9f8d-4701-854f-8ddea1bd69fd" />
+  </associationType>
+  <roleType id="4716308c-67b8-492b-a9d5-0be18ade8344">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>ClassNames</pluralName>
+    <singularName>ClassName</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

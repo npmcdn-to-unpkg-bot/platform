@@ -1,0 +1,6 @@
+<objectType allors="1.0" id="fcaa52e3-4a90-4981-b45d-d158e2589506">
+  <isInterface>true</isInterface>
+  <namespace idref="e4f67a9d-bbf3-40a3-8a76-3016b18cb271" />
+  <pluralName>Nameds</pluralName>
+  <singularName>Named</singularName>
+</objectType>

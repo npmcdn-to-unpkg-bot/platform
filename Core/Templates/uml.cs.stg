@@ -57,6 +57,8 @@ $if(roleType.ObjectType.IsUnit)$
 			global::System.Byte[]
 		$elseif(roleType.ObjectType.IsBoolean)$
 			global::System.Boolean
+		$elseif(roleType.ObjectType.IsDateTime)$
+			global::System.DateTime
 		$elseif(roleType.ObjectType.IsDecimal)$
 			global::System.Decimal
 		$elseif(roleType.ObjectType.IsFloat)$
@@ -73,6 +75,8 @@ $if(roleType.ObjectType.IsUnit)$
 			global::System.Byte[]
 		$elseif(roleType.ObjectType.IsBoolean)$
 			global::System.Boolean?
+		$elseif(roleType.ObjectType.IsDateTime)$
+			global::System.DateTime?
 		$elseif(roleType.ObjectType.IsDecimal)$
 			global::System.Decimal?
 		$elseif(roleType.ObjectType.IsFloat)$

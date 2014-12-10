@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="08ab248d-bdb1-49c5-a2da-d6485f49239f">
+  <associationType id="ad0ef93c-be37-48a6-97c6-fd252d66fbac">
+    <isMany>true</isMany>
+    <objectType idref="b1b6361e-5ee5-434c-9c92-46c6166195c4" />
+  </associationType>
+  <roleType id="f2b72cff-9208-41c0-9c5c-09ed0725f107">
+    <objectType idref="6a082a25-a8f2-4acd-a1a3-ba4461b729f1" />
+    <pluralName>Managers</pluralName>
+    <singularName>Manager</singularName>
+  </roleType>
+</relationType>
