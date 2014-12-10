@@ -1387,6 +1387,15 @@ END
                 command.Parameters.Add(Mapping.ParameterNameForAssociation, mapping.SqlDbTypeForObject).Value = association.Value;
                 var role = command.ExecuteScalar();
 
+                if (role is DateTime)
+                {
+                    var dateTime = (DateTime)role;
+                    if (dateTime != DateTime.MaxValue && dateTime != DateTime.MinValue)
+                    {
+                        role = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second, dateTime.Millisecond, DateTimeKind.Utc);
+                    }
+                }
+
                 var cacheId = this.GetCacheId(association);
                 this.roleCache.SetUnit(association, cacheId, roleType, role);
                 

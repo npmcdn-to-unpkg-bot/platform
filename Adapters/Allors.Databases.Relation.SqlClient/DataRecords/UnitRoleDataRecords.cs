@@ -72,6 +72,15 @@ namespace Allors.Databases.Relation.SqlClient
                         }
 
                         break;
+                    case UnitTags.AllorsDateTime:
+                        foreach (var association in this.associations)
+                        {
+                            sqlDataRecord.SetInt32(0, (int)association.Value);
+                            sqlDataRecord.SetDateTime(1, (DateTime)this.roleByAssociation[association]);
+                            yield return sqlDataRecord;
+                        }
+
+                        break;
                     case UnitTags.AllorsDecimal:
                         foreach (var association in this.associations)
                         {
@@ -142,6 +151,15 @@ namespace Allors.Databases.Relation.SqlClient
                         {
                             sqlDataRecord.SetInt64(0, (long)association.Value);
                             sqlDataRecord.SetBoolean(1, (bool)this.roleByAssociation[association]);
+                            yield return sqlDataRecord;
+                        }
+
+                        break;
+                    case UnitTags.AllorsDateTime:
+                        foreach (var association in this.associations)
+                        {
+                            sqlDataRecord.SetInt64(0, (long)association.Value);
+                            sqlDataRecord.SetDateTime(1, (DateTime)this.roleByAssociation[association]);
                             yield return sqlDataRecord;
                         }
 

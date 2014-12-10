@@ -197,12 +197,32 @@ namespace Allors.Databases.Relation.SqlClient
                             sqlMetaData = sqlMetaDataBySqlType[tableTypeSqlType];
                             break;
 
+                        case UnitTags.AllorsDateTime:
+                            tableName = tableName + "_datetime";
+                            sqlDbType = SqlDbType.DateTime2;
+                            sqlType = "datetime2";
+
+                            tableTypeName = "_t_da";
+                            tableTypeSqlType = sqlType;
+
+                            if (!sqlMetaDataBySqlType.ContainsKey(tableTypeSqlType))
+                            {
+                                sqlMetaDataBySqlType[tableTypeSqlType] = new[]
+                                    {
+                                        new SqlMetaData(TableTypeColumnNameForAssociation, this.SqlDbTypeForObject), 
+                                        new SqlMetaData(TableTypeColumnNameForRole, sqlDbType)
+                                    };
+                            }
+
+                            sqlMetaData = sqlMetaDataBySqlType[tableTypeSqlType];
+                            break;
+
                         case UnitTags.AllorsDecimal:
                             tableName = tableName + "_decimal_" + roleType.Precision + "_" + roleType.Scale;
                             sqlDbType = SqlDbType.Decimal;
                             sqlType = "decimal(" + roleType.Precision + "," + roleType.Scale + ")";
 
-                            tableTypeName = "_t_d_" + roleType.Precision + "_" + roleType.Scale;
+                            tableTypeName = "_t_de_" + roleType.Precision + "_" + roleType.Scale;
                             tableTypeSqlType = sqlType;
 
                             if (!sqlMetaDataBySqlType.ContainsKey(tableTypeSqlType))

@@ -27,6 +27,7 @@ using Allors.Meta;
 
 namespace Allors.Databases.Relation.SqlClient
 {
+    using System.Data;
     using System.Data.SqlClient;
 
     internal abstract class AllorsExtentStatementSql
@@ -261,7 +262,12 @@ namespace Allors.Databases.Relation.SqlClient
                 }
                 else
                 {
-                    command.Parameters.AddWithValue(paramName, paramValue);
+                    var param = command.Parameters.AddWithValue(paramName, paramValue);
+
+                    if (paramValue is DateTime)
+                    {
+                        param.SqlDbType = SqlDbType.DateTime2;
+                    }
                 }
             }
 

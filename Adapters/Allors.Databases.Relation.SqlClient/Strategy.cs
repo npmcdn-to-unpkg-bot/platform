@@ -298,6 +298,7 @@ namespace Allors.Databases.Relation.SqlClient
             this.AssertNotDeleted();
 
             RoleAssertions.UnitRoleChecks(this, roleType);
+            unit = roleType.Normalize(unit);
             this.session.SetUnitRole(this.objectId, roleType, unit);
         }
 

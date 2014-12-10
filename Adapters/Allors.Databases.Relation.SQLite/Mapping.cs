@@ -96,6 +96,12 @@ namespace Allors.Databases.Relation.SQLite
                             sqlType = "integer";
                             break;
 
+                        case UnitTags.AllorsDateTime:
+                            tableName = tableName + "_datetime";
+                            dbType = DbType.String;
+                            sqlType = "text";
+                            break;
+
                         case UnitTags.AllorsDecimal:
                             tableName = tableName + "_decimal";
                             dbType = DbType.Decimal;

@@ -22,6 +22,7 @@ namespace Allors.Databases.Relation.SQLite
     using System.Data.SQLite;
     using System.Linq;
     using System.Runtime.InteropServices;
+    using System.Xml;
 
     using Allors.Databases;
     using Allors.Meta;
@@ -1337,6 +1338,14 @@ WHERE " + Mapping.ColumnNameForAssociation + @"=" + Mapping.ParameterNameForAsso
                             case UnitTags.AllorsBoolean:
                                 role = reader.GetBoolean(0);
                                 break;
+                            case UnitTags.AllorsDateTime:
+                                role = reader.GetString(0);
+                                if (role != null)
+                                {
+                                    role = XmlConvert.ToDateTime((string)role, XmlDateTimeSerializationMode.Utc);
+                                }
+
+                                break;
                             case UnitTags.AllorsDecimal:
                                 role = reader.GetDecimal(0);
                                 break;
@@ -1552,6 +1561,12 @@ VALUES (" + Mapping.ParameterNameForAssociation + @", " + Mapping.ParameterNameF
                                 var changedUnitRole = unitByAssociation[association];
 
                                 associationParam.Value = association.Value;
+
+                                if (changedUnitRole is DateTime)
+                                {
+                                    changedUnitRole = XmlConvert.ToString((DateTime)changedUnitRole, XmlDateTimeSerializationMode.Utc);
+                                }
+
                                 roleParam.Value = changedUnitRole;
                                 command.ExecuteNonQuery();
                             }

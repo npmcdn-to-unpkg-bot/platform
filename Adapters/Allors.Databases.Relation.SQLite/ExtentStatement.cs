@@ -28,6 +28,7 @@ using Allors.Meta;
 namespace Allors.Databases.Relation.SQLite
 {
     using System.Data.SQLite;
+    using System.Xml;
 
     internal abstract class AllorsExtentStatementSql
     {
@@ -261,6 +262,11 @@ namespace Allors.Databases.Relation.SQLite
                 }
                 else
                 {
+                    if (paramValue is DateTime)
+                    {
+                        paramValue = XmlConvert.ToString((DateTime)paramValue, XmlDateTimeSerializationMode.Utc);
+                    }
+
                     command.Parameters.AddWithValue(paramName, paramValue);
                 }
             }

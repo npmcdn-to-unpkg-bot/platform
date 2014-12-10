@@ -932,6 +932,9 @@ ORDER BY " + Mapping.ColumnNameForAssociation + "," + Mapping.ColumnNameForRole;
                                                 case UnitTags.AllorsBoolean:
                                                     r = reader.GetBoolean(1);
                                                     break;
+                                                case UnitTags.AllorsDateTime:
+                                                    r = reader.GetDateTime(1);
+                                                    break;
                                                 case UnitTags.AllorsDecimal:
                                                     r = reader.GetDecimal(1);
                                                     break;
