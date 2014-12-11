@@ -19,10 +19,15 @@
 //-------------------------------------------------------------------------------------------------
 namespace Allors.Meta
 {
+    using System;
+
     public static partial class Repository
     {
         public static void AppsPostInit(MetaPopulation meta)
         {
+            // Budget
+            new MethodTypeBuilder(Apps, new Guid("3E913270-98BC-4A29-8C54-AD94B78D62A3")).WithObjectType(Budget).WithName("Close").Build();
+            new MethodTypeBuilder(Apps, new Guid("4D8FD306-049E-4909-AFA8-91A615B76314")).WithObjectType(Budget).WithName("Reopen").Build();
         }
     }
 }

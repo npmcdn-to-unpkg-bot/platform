@@ -3,7 +3,7 @@
     <objectType idref="2b162153-f74d-4f97-b97c-48f04749b216" />
   </associationType>
   <roleType id="0363121b-d92e-4722-81dc-47032aae5440">
-    <objectType idref="c402fbda-133a-4b59-858a-832fbd2ec565" />
+    <objectType idref="c4c09343-61d3-418c-ade2-fe6fd588f128" />
     <pluralName>LastReminderDates</pluralName>
     <singularName>LastReminderDate</singularName>
   </roleType>

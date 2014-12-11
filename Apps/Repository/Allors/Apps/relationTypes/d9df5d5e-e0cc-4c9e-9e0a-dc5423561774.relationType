@@ -3,7 +3,7 @@
     <objectType idref="752a68b0-836e-4cd5-92d5-ebf2bfeda491" />
   </associationType>
   <roleType id="abcb554b-44f8-424c-b991-1e56f15c5412">
-    <objectType idref="c402fbda-133a-4b59-858a-832fbd2ec565" />
+    <objectType idref="c4c09343-61d3-418c-ade2-fe6fd588f128" />
     <pluralName>EndDates</pluralName>
     <singularName>EndDate</singularName>
   </roleType>

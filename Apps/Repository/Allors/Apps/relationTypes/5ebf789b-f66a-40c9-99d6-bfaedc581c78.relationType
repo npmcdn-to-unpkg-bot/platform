@@ -3,7 +3,7 @@
     <objectType idref="4f7703b0-7201-4f7a-a0b4-f177d64a2c31" />
   </associationType>
   <roleType id="62592457-6263-4e92-b45d-b929245fa750">
-    <objectType idref="c402fbda-133a-4b59-858a-832fbd2ec565" />
+    <objectType idref="c4c09343-61d3-418c-ade2-fe6fd588f128" />
     <pluralName>ResumeDates</pluralName>
     <singularName>ResumeDate</singularName>
   </roleType>

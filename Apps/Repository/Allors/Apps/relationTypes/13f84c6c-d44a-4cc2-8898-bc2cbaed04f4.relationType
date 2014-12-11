@@ -3,7 +3,7 @@
     <objectType idref="4b1e9776-8851-4a2a-a402-1b40211d1f3b" />
   </associationType>
   <roleType id="72177a66-0459-4b6e-a8ea-2b5786e09f31">
-    <objectType idref="c402fbda-133a-4b59-858a-832fbd2ec565" />
+    <objectType idref="c4c09343-61d3-418c-ade2-fe6fd588f128" />
     <pluralName>SendingDates</pluralName>
     <singularName>SendingDate</singularName>
   </roleType>

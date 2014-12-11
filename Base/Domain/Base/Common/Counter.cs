@@ -24,8 +24,6 @@ namespace Allors.Domain
 
     using Allors;
 
-    using Allors.Domain;
-
     public partial class Counter
     {
         protected override void BaseOnPostBuild(IObjectBuilder builder)

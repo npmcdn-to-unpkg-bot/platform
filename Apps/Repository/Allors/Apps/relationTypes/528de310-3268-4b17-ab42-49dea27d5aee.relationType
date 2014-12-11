@@ -3,7 +3,7 @@
     <objectType idref="6940c300-47e6-44f2-b93b-d70bed9de602" />
   </associationType>
   <roleType id="9b07c065-678f-4d21-878f-4ac2029dddc5">
-    <objectType idref="c402fbda-133a-4b59-858a-832fbd2ec565" />
+    <objectType idref="c4c09343-61d3-418c-ade2-fe6fd588f128" />
     <pluralName>ApplicationDates</pluralName>
     <singularName>ApplicationDate</singularName>
   </roleType>

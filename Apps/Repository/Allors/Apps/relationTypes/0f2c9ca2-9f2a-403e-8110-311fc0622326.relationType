@@ -3,7 +3,7 @@
     <objectType idref="d3f90525-b7fe-4f81-bccd-adf4f57260bc" />
   </associationType>
   <roleType id="178dfe82-99e2-4026-84f9-223e10e852c7">
-    <objectType idref="c402fbda-133a-4b59-858a-832fbd2ec565" />
+    <objectType idref="c4c09343-61d3-418c-ade2-fe6fd588f128" />
     <pluralName>RequiredByDates</pluralName>
     <singularName>RequiredByDate</singularName>
   </roleType>

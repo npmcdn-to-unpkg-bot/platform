@@ -3,7 +3,7 @@
     <objectType idref="b00e2650-283f-4326-bdd3-46a2890e2037" />
   </associationType>
   <roleType id="5665d533-cd9c-4328-b422-66a94d77b19b">
-    <objectType idref="c402fbda-133a-4b59-858a-832fbd2ec565" />
+    <objectType idref="c4c09343-61d3-418c-ade2-fe6fd588f128" />
     <pluralName>InventoryDates</pluralName>
     <singularName>InventoryDate</singularName>
   </roleType>

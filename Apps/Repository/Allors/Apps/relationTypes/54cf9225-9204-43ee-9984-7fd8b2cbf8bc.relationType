@@ -3,7 +3,7 @@
     <objectType idref="4a3efb9c-1556-4e57-bb59-f09d297e607e" />
   </associationType>
   <roleType id="99c0a722-af34-4008-b7f5-dc4315c7fa1a">
-    <objectType idref="c402fbda-133a-4b59-858a-832fbd2ec565" />
+    <objectType idref="c4c09343-61d3-418c-ade2-fe6fd588f128" />
     <pluralName>AcquiredDates</pluralName>
     <singularName>AcquiredDate</singularName>
   </roleType>

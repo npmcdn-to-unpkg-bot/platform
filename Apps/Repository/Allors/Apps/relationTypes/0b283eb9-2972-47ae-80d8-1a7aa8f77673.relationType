@@ -3,7 +3,7 @@
     <objectType idref="56b79619-d04a-4924-96e8-e3e7be9faa09" />
   </associationType>
   <roleType id="487e408f-d55b-4273-bbe9-b0291069ae42">
-    <objectType idref="c402fbda-133a-4b59-858a-832fbd2ec565" />
+    <objectType idref="c4c09343-61d3-418c-ade2-fe6fd588f128" />
     <pluralName>SalesDiscontinuationDates</pluralName>
     <singularName>SalesDiscontinuationDate</singularName>
   </roleType>

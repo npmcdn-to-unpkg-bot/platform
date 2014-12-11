@@ -3,7 +3,7 @@
     <objectType idref="11d75a7a-2e86-4430-a6af-2916440c9ecb" />
   </associationType>
   <roleType id="f8bcd82b-5209-45d1-a6ee-5452ca9cf11b">
-    <objectType idref="c402fbda-133a-4b59-858a-832fbd2ec565" />
+    <objectType idref="c4c09343-61d3-418c-ade2-fe6fd588f128" />
     <pluralName>JournalDates</pluralName>
     <singularName>JournalDate</singularName>
   </roleType>

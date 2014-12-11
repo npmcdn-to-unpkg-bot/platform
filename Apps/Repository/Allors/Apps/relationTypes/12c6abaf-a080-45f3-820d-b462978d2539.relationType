@@ -3,7 +3,7 @@
     <objectType idref="fd342cb7-53d3-4377-acd8-ee586b924678" />
   </associationType>
   <roleType id="3e12bb69-b0bb-40ba-a987-89f5cc40c436">
-    <objectType idref="c402fbda-133a-4b59-858a-832fbd2ec565" />
+    <objectType idref="c4c09343-61d3-418c-ade2-fe6fd588f128" />
     <pluralName>StartedUsingDates</pluralName>
     <singularName>StartedUsingDate</singularName>
   </roleType>

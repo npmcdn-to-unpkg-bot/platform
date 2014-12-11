@@ -3,7 +3,7 @@
     <objectType idref="4a3efb9c-1556-4e57-bb59-f09d297e607e" />
   </associationType>
   <roleType id="1cc0737e-a810-48d3-b048-7e3077d3db5c">
-    <objectType idref="c402fbda-133a-4b59-858a-832fbd2ec565" />
+    <objectType idref="c4c09343-61d3-418c-ade2-fe6fd588f128" />
     <pluralName>LastServiceDates</pluralName>
     <singularName>LastServiceDate</singularName>
   </roleType>

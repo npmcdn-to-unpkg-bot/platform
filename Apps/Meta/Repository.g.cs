@@ -9127,7 +9127,7 @@ namespace Allors.Meta
 				.Build();
 
 				PartSpecificationDocumentationDate = new RelationTypeBuilder(Apps, new Guid("6a83ef4b-1ef5-4782-b9fd-19e3231c29c5"),new Guid("93f4241d-23ea-46ad-bcaa-fd1f5c909c43"),new Guid("c2b4a79f-c245-40d5-834e-5939c7748462"))
-				.WithObjectTypes(PartSpecification, AllorsDate)
+				.WithObjectTypes(PartSpecification, AllorsDateTime)
 				.WithSingularName("DocumentationDate")  
 				.WithPluralName("DocumentationDates")  
 				  
@@ -9277,7 +9277,7 @@ namespace Allors.Meta
 				.Build();
 
 				QuoteItemEstimatedDeliveryDate = new RelationTypeBuilder(Apps, new Guid("262a458d-0b38-4123-b210-576633297f44"),new Guid("e252b457-9fac-429d-a337-0c48a46c2bf0"),new Guid("a7ae793d-d315-4ac1-93c7-783391b2d294"))
-				.WithObjectTypes(QuoteItem, AllorsDate)
+				.WithObjectTypes(QuoteItem, AllorsDateTime)
 				.WithSingularName("EstimatedDeliveryDate")  
 				.WithPluralName("EstimatedDeliveryDate")  
 				  
@@ -9537,7 +9537,7 @@ namespace Allors.Meta
 				.Build();
 
 				PositionEstimatedThroughDate = new RelationTypeBuilder(Apps, new Guid("39298cc2-0869-4dc9-b0ff-bea8269ba958"),new Guid("7ca00aff-ad0b-4195-902b-39b3d5cc2c25"),new Guid("949968c0-dc95-44d3-a8f0-65829a884c3b"))
-				.WithObjectTypes(Position, AllorsDate)
+				.WithObjectTypes(Position, AllorsDateTime)
 				.WithSingularName("EstimatedThroughDate")  
 				.WithPluralName("EstimatedThroughDates")  
 				  
@@ -9545,7 +9545,7 @@ namespace Allors.Meta
 				.Build();
 
 				PositionEstimatedFromDate = new RelationTypeBuilder(Apps, new Guid("6ede43f7-87a5-429c-8fc0-6441ca8753f1"),new Guid("c2100e41-9586-485c-8110-693de5479a9e"),new Guid("5f2fa20d-f4c8-468e-b9bb-d9a3cd777b70"))
-				.WithObjectTypes(Position, AllorsDate)
+				.WithObjectTypes(Position, AllorsDateTime)
 				.WithSingularName("EstimatedFromDate")  
 				.WithPluralName("EstimatedFromDates")  
 				  
@@ -9596,7 +9596,7 @@ namespace Allors.Meta
 				.Build();
 
 				PositionActualFromDate = new RelationTypeBuilder(Apps, new Guid("ec8beecc-9e28-4103-94d3-249aed76c934"),new Guid("c68b7794-0379-4542-8f1b-24311e2358a4"),new Guid("3a72f3f0-0476-4629-9831-ed43ebaa8cf5"))
-				.WithObjectTypes(Position, AllorsDate)
+				.WithObjectTypes(Position, AllorsDateTime)
 				.WithSingularName("ActualFromDate")  
 				.WithPluralName("ActualFromDates")  
 				  
@@ -9604,7 +9604,7 @@ namespace Allors.Meta
 				.Build();
 
 				PositionActualThroughDate = new RelationTypeBuilder(Apps, new Guid("fc328a1a-4f62-42de-96b2-a61c612a1602"),new Guid("f815e446-05a5-4fa3-b3b4-4c7a94b7ca1f"),new Guid("c8cb5709-08d5-4b3b-9598-15289ba9d689"))
-				.WithObjectTypes(Position, AllorsDate)
+				.WithObjectTypes(Position, AllorsDateTime)
 				.WithSingularName("ActualThroughDate")  
 				.WithPluralName("ActualThroughDates")  
 				  
@@ -9795,7 +9795,7 @@ namespace Allors.Meta
 
 				// Quote
 				QuoteValidFromDate = new RelationTypeBuilder(Apps, new Guid("033df6dd-fdf7-44e4-84ca-5c7e100cb3f5"),new Guid("4b19f443-0d27-447d-8186-e5361a094460"),new Guid("fa17ef86-c074-414e-b223-b62522d68280"))
-				.WithObjectTypes(Quote, AllorsDate)
+				.WithObjectTypes(Quote, AllorsDateTime)
 				.WithSingularName("ValidFromDate")  
 				.WithPluralName("ValidFromDates")  
 				  
@@ -9821,7 +9821,7 @@ namespace Allors.Meta
 				.Build();
 
 				QuoteValidThroughDate = new RelationTypeBuilder(Apps, new Guid("2140e106-2ef3-427a-be94-458c2b8e154d"),new Guid("9d81ada4-a4f3-44bb-9098-bc1a3e61de19"),new Guid("60581583-2536-4b09-acae-f0f877169dae"))
-				.WithObjectTypes(Quote, AllorsDate)
+				.WithObjectTypes(Quote, AllorsDateTime)
 				.WithSingularName("ValidThroughDate")  
 				.WithPluralName("ValidThroughDates")  
 				  
@@ -9857,7 +9857,7 @@ namespace Allors.Meta
 				.Build();
 
 				QuoteIssueDate = new RelationTypeBuilder(Apps, new Guid("d7dc81e8-76e7-4c68-9843-a2aaf8293510"),new Guid("6fbc80d1-e72b-4484-a9b1-e606f15d2435"),new Guid("219cb27f-20b5-48b3-9d89-4b119798b092"))
-				.WithObjectTypes(Quote, AllorsDate)
+				.WithObjectTypes(Quote, AllorsDateTime)
 				.WithSingularName("IssueDate")  
 				.WithPluralName("IssueDates")  
 				  
@@ -10078,7 +10078,7 @@ namespace Allors.Meta
 				// Vehicle
 				// AccountingTransactionNumber
 				AccountingTransactionNumberNumber = new RelationTypeBuilder(Apps, new Guid("1a7eda6e-7b1c-4faf-8635-05bc233c5dd8"),new Guid("ad6df638-67d2-4d41-9695-01c6adf3f251"),new Guid("e2178198-6bbd-4caa-9402-40137b2bd529"))
-				.WithObjectTypes(AccountingTransactionNumber, AllorsLong)
+				.WithObjectTypes(AccountingTransactionNumber, AllorsInteger)
 				.WithSingularName("Number")  
 				.WithPluralName("Numbers")  
 				  
@@ -10196,7 +10196,7 @@ namespace Allors.Meta
 				.Build();
 
 				JournalEntryEntryNumber = new RelationTypeBuilder(Apps, new Guid("1452d159-857a-4fff-b1d6-6d27772e54bc"),new Guid("eb122f1d-8615-4342-8beb-2a197677947a"),new Guid("bf8485f3-d5dd-4236-b542-61674c2298db"))
-				.WithObjectTypes(JournalEntry, AllorsLong)
+				.WithObjectTypes(JournalEntry, AllorsInteger)
 				.WithSingularName("EntryNumber")  
 				.WithPluralName("EntryNumbers")  
 				  
@@ -10204,7 +10204,7 @@ namespace Allors.Meta
 				.Build();
 
 				JournalEntryEntryDate = new RelationTypeBuilder(Apps, new Guid("1b5f8acd-872d-498e-9c2d-ded4b7d31efe"),new Guid("9bb9541a-f0fc-4ed8-bc3f-13e1d7901395"),new Guid("0b9dd5eb-10a1-470b-a119-158c66c558f1"))
-				.WithObjectTypes(JournalEntry, AllorsDate)
+				.WithObjectTypes(JournalEntry, AllorsDateTime)
 				.WithSingularName("EntryDate")  
 				.WithPluralName("EntryDates")  
 				  
@@ -10212,7 +10212,7 @@ namespace Allors.Meta
 				.Build();
 
 				JournalEntryJournalDate = new RelationTypeBuilder(Apps, new Guid("4eca8284-cc27-4440-8b5f-adeffd3b078b"),new Guid("b7897efa-b2f5-4807-8385-3da4936998c7"),new Guid("f8bcd82b-5209-45d1-a6ee-5452ca9cf11b"))
-				.WithObjectTypes(JournalEntry, AllorsDate)
+				.WithObjectTypes(JournalEntry, AllorsDateTime)
 				.WithSingularName("JournalDate")  
 				.WithPluralName("JournalDates")  
 				  
@@ -10629,7 +10629,7 @@ namespace Allors.Meta
 				.Build();
 
 				PartySkillStartedUsingDate = new RelationTypeBuilder(Apps, new Guid("7ed819c8-78ef-4fe3-b499-b381c246711f"),new Guid("4a88ee23-2c4a-41d2-9891-77e5086db97d"),new Guid("ecb7eb99-dc8f-4ca0-9744-fb87a708430a"))
-				.WithObjectTypes(PartySkill, AllorsDate)
+				.WithObjectTypes(PartySkill, AllorsDateTime)
 				.WithSingularName("StartedUsingDate")  
 				.WithPluralName("StartedUsingDates")  
 				  
@@ -11030,7 +11030,7 @@ namespace Allors.Meta
 				.Build();
 
 				ServiceEntryHeaderSubmittedDate = new RelationTypeBuilder(Apps, new Guid("7e160fbc-1339-433c-9dcb-9b3ad58ad400"),new Guid("a9d0cbd8-bb20-45e1-b109-6620b23fa1b7"),new Guid("ef8b435e-e354-45e2-89bc-3d452cc84f5a"))
-				.WithObjectTypes(ServiceEntryHeader, AllorsDate)
+				.WithObjectTypes(ServiceEntryHeader, AllorsDateTime)
 				.WithSingularName("SubmittedDate")  
 				.WithPluralName("SubmittedDates")  
 				  
@@ -11485,7 +11485,7 @@ namespace Allors.Meta
 				.Build();
 
 				SupplierRelationshipLastReminderDate = new RelationTypeBuilder(Apps, new Guid("b12a68f6-0eaa-4a8a-a741-398a0be43f62"),new Guid("01adc720-91a4-47c6-9235-d21a3215ee6f"),new Guid("0363121b-d92e-4722-81dc-47032aae5440"))
-				.WithObjectTypes(SupplierRelationship, AllorsDate)
+				.WithObjectTypes(SupplierRelationship, AllorsDateTime)
 				.WithSingularName("LastReminderDate")  
 				.WithPluralName("LastReminderDates")  
 				  
@@ -11511,7 +11511,7 @@ namespace Allors.Meta
 				.Build();
 
 				SupplierRelationshipBlockedForDunning = new RelationTypeBuilder(Apps, new Guid("ee871786-8840-404d-9b41-932a9f59be13"),new Guid("5b98959d-5589-4958-a86f-4c9b465c1632"),new Guid("056ca61a-1ab4-4e53-8d5f-328ada5f3b11"))
-				.WithObjectTypes(SupplierRelationship, AllorsDate)
+				.WithObjectTypes(SupplierRelationship, AllorsDateTime)
 				.WithSingularName("BlockedForDunning")  
 				.WithPluralName("BlockedsForDunning")  
 				  
@@ -11635,7 +11635,7 @@ namespace Allors.Meta
 				.Build();
 
 				UnitOfMeasureConversionStartDate = new RelationTypeBuilder(Apps, new Guid("5d7ed801-4a2e-4abc-a32d-d869210132af"),new Guid("a3467a5f-8c7d-453a-9a33-18d742f20d06"),new Guid("4b8a465d-9334-427f-b799-d08b7c84200a"))
-				.WithObjectTypes(UnitOfMeasureConversion, AllorsDate)
+				.WithObjectTypes(UnitOfMeasureConversion, AllorsDateTime)
 				.WithSingularName("StartDate")  
 				.WithPluralName("StartDates")  
 				  
@@ -11793,7 +11793,7 @@ namespace Allors.Meta
 				.Build();
 
 				RequestRequiredResponseDate = new RelationTypeBuilder(Apps, new Guid("208f711f-5d9d-4dc3-89ad-b1583ad06582"),new Guid("d91ef645-f5ef-4f09-9d6b-c023d02978f5"),new Guid("c1467dbc-9b64-49a0-8715-90ad277b02c9"))
-				.WithObjectTypes(Request, AllorsDate)
+				.WithObjectTypes(Request, AllorsDateTime)
 				.WithSingularName("RequiredResponseDate")  
 				.WithPluralName("RequiredResponseDates")  
 				  
@@ -12586,7 +12586,7 @@ namespace Allors.Meta
 				.Build();
 
 				CustomerRelationshipLastReminderDate = new RelationTypeBuilder(Apps, new Guid("af50ade8-5964-4963-819d-c87689c6434e"),new Guid("a06dda1c-d91d-4e27-b293-05cb53de65ec"),new Guid("7f6da6ca-b069-47f6-983c-6e33d65ffd0e"))
-				.WithObjectTypes(CustomerRelationship, AllorsDate)
+				.WithObjectTypes(CustomerRelationship, AllorsDateTime)
 				.WithSingularName("LastReminderDate")  
 				.WithPluralName("LastReminderDates")  
 				  
@@ -13199,7 +13199,7 @@ namespace Allors.Meta
 				.Build();
 
 				ShipmentPackageCreationDate = new RelationTypeBuilder(Apps, new Guid("afd7e182-d201-4eee-803c-9fb4dff0feed"),new Guid("5b2b0551-afcb-4cc3-863e-ba351492da45"),new Guid("d00256d2-fbc8-4935-bfe9-0b0843622936"))
-				.WithObjectTypes(ShipmentPackage, AllorsDate)
+				.WithObjectTypes(ShipmentPackage, AllorsDateTime)
 				.WithSingularName("CreationDate")  
 				.WithPluralName("CreationDates")  
 				  
@@ -13229,7 +13229,7 @@ namespace Allors.Meta
 				.Build();
 
 				PerformanceNoteCommunicationDate = new RelationTypeBuilder(Apps, new Guid("2f6ed687-4200-4a27-bfb2-922d9ce2e38f"),new Guid("5f2b047e-2cb0-4d2a-9cce-77846ad35f45"),new Guid("f21bbf2d-0780-4bbf-92e6-2c6676b4893d"))
-				.WithObjectTypes(PerformanceNote, AllorsDate)
+				.WithObjectTypes(PerformanceNote, AllorsDateTime)
 				.WithSingularName("CommunicationDate")  
 				.WithPluralName("CommunicationDates")  
 				  
@@ -13381,7 +13381,7 @@ namespace Allors.Meta
 				.Build();
 
 				FixedAssetLastServiceDate = new RelationTypeBuilder(Apps, new Guid("51133e4d-5135-4991-9f2f-8df9762fac78"),new Guid("fc2144b7-4a88-412d-9792-ba6f6c93c637"),new Guid("1cc0737e-a810-48d3-b048-7e3077d3db5c"))
-				.WithObjectTypes(FixedAsset, AllorsDate)
+				.WithObjectTypes(FixedAsset, AllorsDateTime)
 				.WithSingularName("LastServiceDate")  
 				.WithPluralName("LastServiceDates")  
 				  
@@ -13389,7 +13389,7 @@ namespace Allors.Meta
 				.Build();
 
 				FixedAssetAcquiredDate = new RelationTypeBuilder(Apps, new Guid("54cf9225-9204-43ee-9984-7fd8b2cbf8bc"),new Guid("efb718b5-7d70-4696-81c8-961582ed01f2"),new Guid("99c0a722-af34-4008-b7f5-dc4315c7fa1a"))
-				.WithObjectTypes(FixedAsset, AllorsDate)
+				.WithObjectTypes(FixedAsset, AllorsDateTime)
 				.WithSingularName("AcquiredDate")  
 				.WithPluralName("AcquiredDates")  
 				  
@@ -13416,7 +13416,7 @@ namespace Allors.Meta
 				.Build();
 
 				FixedAssetNextServiceDate = new RelationTypeBuilder(Apps, new Guid("ead0e86a-dfc7-45b0-9865-b973175c4567"),new Guid("6be614a2-0511-4ca0-9b1c-c8a3d0b0a998"),new Guid("47d9d93c-8ba3-4f28-a8a5-6a4cb02853e6"))
-				.WithObjectTypes(FixedAsset, AllorsDate)
+				.WithObjectTypes(FixedAsset, AllorsDateTime)
 				.WithSingularName("NextServiceDate")  
 				.WithPluralName("NextServiceDates")  
 				  
@@ -13546,7 +13546,7 @@ namespace Allors.Meta
 				// ItemVarianceAccountingTransaction
 				// RespondingParty
 				RespondingPartySendingDate = new RelationTypeBuilder(Apps, new Guid("13f84c6c-d44a-4cc2-8898-bc2cbaed04f4"),new Guid("88a8016f-ecd7-4085-82d0-a9698d078184"),new Guid("72177a66-0459-4b6e-a8ea-2b5786e09f31"))
-				.WithObjectTypes(RespondingParty, AllorsDate)
+				.WithObjectTypes(RespondingParty, AllorsDateTime)
 				.WithSingularName("SendingDate")  
 				.WithPluralName("SendingDates")  
 				  
@@ -13643,7 +13643,7 @@ namespace Allors.Meta
 
 				// Agreement
 				AgreementAgreementDate = new RelationTypeBuilder(Apps, new Guid("2ddce7b3-c763-45ea-8e1b-5ef8a0ea8e4a"),new Guid("d27ed7da-6a94-40ee-b790-8754282a2a1b"),new Guid("f199641e-5574-4733-b4e9-42f6ccb713a8"))
-				.WithObjectTypes(Agreement, AllorsDate)
+				.WithObjectTypes(Agreement, AllorsDateTime)
 				.WithSingularName("AgreementDate")  
 				.WithPluralName("AgreementDates")  
 				  
@@ -13748,7 +13748,7 @@ namespace Allors.Meta
 
 				// Resume
 				ResumeResumeDate = new RelationTypeBuilder(Apps, new Guid("5ebf789b-f66a-40c9-99d6-bfaedc581c78"),new Guid("f90810ba-d62d-4e51-b9c7-5aac4e7d4d87"),new Guid("62592457-6263-4e92-b45d-b929245fa750"))
-				.WithObjectTypes(Resume, AllorsDate)
+				.WithObjectTypes(Resume, AllorsDateTime)
 				.WithSingularName("ResumeDate")  
 				.WithPluralName("ResumeDates")  
 				  
@@ -13812,7 +13812,7 @@ namespace Allors.Meta
 				.Build();
 
 				FinancialAccountTransactionEntryDate = new RelationTypeBuilder(Apps, new Guid("07b3745c-581c-476b-a4a9-beacaa3bd700"),new Guid("7878206b-b4f9-4ddd-b69e-a041402844dd"),new Guid("2e77d783-9cda-41e6-be8b-1bf96520a385"))
-				.WithObjectTypes(FinancialAccountTransaction, AllorsDate)
+				.WithObjectTypes(FinancialAccountTransaction, AllorsDateTime)
 				.WithSingularName("EntryDate")  
 				.WithPluralName("EntryDates")  
 				  
@@ -13820,7 +13820,7 @@ namespace Allors.Meta
 				.Build();
 
 				FinancialAccountTransactionTransactionDate = new RelationTypeBuilder(Apps, new Guid("8f777804-597a-4604-a553-251e2e9d6502"),new Guid("f74151d5-ad2e-4418-b3a1-3772afbdaf52"),new Guid("3135d67e-7290-4eb2-aec8-e783d9325a02"))
-				.WithObjectTypes(FinancialAccountTransaction, AllorsDate)
+				.WithObjectTypes(FinancialAccountTransaction, AllorsDateTime)
 				.WithSingularName("TransactionDate")  
 				.WithPluralName("TransactionDates")  
 				  
@@ -14024,7 +14024,7 @@ namespace Allors.Meta
 				.Build();
 
 				ProductSupportDiscontinuationDate = new RelationTypeBuilder(Apps, new Guid("05a2e95a-e5f1-45bc-a8ca-4ebfad3290b5"),new Guid("1674a9e0-00de-45fa-bde4-63a716a31557"),new Guid("594503f3-c081-46b3-9695-92b921c15a6b"))
-				.WithObjectTypes(Product, AllorsDate)
+				.WithObjectTypes(Product, AllorsDateTime)
 				.WithSingularName("SupportDiscontinuationDate")  
 				.WithPluralName("SupportDiscontinuationDates")  
 				  
@@ -14032,7 +14032,7 @@ namespace Allors.Meta
 				.Build();
 
 				ProductSalesDiscontinuationDate = new RelationTypeBuilder(Apps, new Guid("0b283eb9-2972-47ae-80d8-1a7aa8f77673"),new Guid("aa3ccdc9-7286-4a82-912a-dd2e53c7410b"),new Guid("487e408f-d55b-4273-bbe9-b0291069ae42"))
-				.WithObjectTypes(Product, AllorsDate)
+				.WithObjectTypes(Product, AllorsDateTime)
 				.WithSingularName("SalesDiscontinuationDate")  
 				.WithPluralName("SalesDiscontinuationDates")  
 				  
@@ -14121,7 +14121,7 @@ namespace Allors.Meta
 				.Build();
 
 				ProductIntroductionDate = new RelationTypeBuilder(Apps, new Guid("74fc9be0-8677-463c-b3b6-f0e7bb7478ba"),new Guid("23a3e0bb-a2f9-48d5-b57b-40376e68b0ba"),new Guid("c977306e-8738-4e30-88c1-3c545fdb4e93"))
-				.WithObjectTypes(Product, AllorsDate)
+				.WithObjectTypes(Product, AllorsDateTime)
 				.WithSingularName("IntroductionDate")  
 				.WithPluralName("IntroductionDates")  
 				  
@@ -15133,7 +15133,7 @@ namespace Allors.Meta
 
 				// EmploymentApplication
 				EmploymentApplicationApplicationDate = new RelationTypeBuilder(Apps, new Guid("528de310-3268-4b17-ab42-49dea27d5aee"),new Guid("ca9bf054-52cf-40f1-995f-0e504b5bee9b"),new Guid("9b07c065-678f-4d21-878f-4ac2029dddc5"))
-				.WithObjectTypes(EmploymentApplication, AllorsDate)
+				.WithObjectTypes(EmploymentApplication, AllorsDateTime)
 				.WithSingularName("ApplicationDate")  
 				.WithPluralName("ApplicationDates")  
 				  
@@ -15668,7 +15668,7 @@ namespace Allors.Meta
 				// CaseObjectState
 				// SalaryStep
 				SalaryStepModifiedDate = new RelationTypeBuilder(Apps, new Guid("162b31b7-78fd-4ec5-95f7-3913be0662e2"),new Guid("c00111ef-5eb8-4155-a621-fd09d0aa1a6c"),new Guid("2872381c-833b-4dce-83f4-a56bbbd416b3"))
-				.WithObjectTypes(SalaryStep, AllorsDate)
+				.WithObjectTypes(SalaryStep, AllorsDateTime)
 				.WithSingularName("ModifiedDate")  
 				.WithPluralName("ModifiedDates")  
 				  
@@ -16276,7 +16276,7 @@ namespace Allors.Meta
 				.Build();
 
 				EngagementStartDate = new RelationTypeBuilder(Apps, new Guid("6ca9444e-3e1c-4631-ad4e-1025fc85c1a4"),new Guid("9e82a268-e421-42f4-8b6f-460b3b1ce8aa"),new Guid("108359bc-bb0a-426e-a6eb-7ab6de874721"))
-				.WithObjectTypes(Engagement, AllorsDate)
+				.WithObjectTypes(Engagement, AllorsDateTime)
 				.WithSingularName("StartDate")  
 				.WithPluralName("StartDates")  
 				  
@@ -16303,7 +16303,7 @@ namespace Allors.Meta
 				.Build();
 
 				EngagementEndDate = new RelationTypeBuilder(Apps, new Guid("d9df5d5e-e0cc-4c9e-9e0a-dc5423561774"),new Guid("4fec3a1a-28d4-4984-a82a-aee949ba79d5"),new Guid("abcb554b-44f8-424c-b991-1e56f15c5412"))
-				.WithObjectTypes(Engagement, AllorsDate)
+				.WithObjectTypes(Engagement, AllorsDateTime)
 				.WithSingularName("EndDate")  
 				.WithPluralName("EndDates")  
 				  
@@ -16311,7 +16311,7 @@ namespace Allors.Meta
 				.Build();
 
 				EngagementContractDate = new RelationTypeBuilder(Apps, new Guid("e1081976-b7e4-4e8e-85de-bd6ff096b39b"),new Guid("947ccaf8-9264-4703-86a8-58818128ff84"),new Guid("5670bb8d-64a0-4492-9bb7-383b27144b31"))
-				.WithObjectTypes(Engagement, AllorsDate)
+				.WithObjectTypes(Engagement, AllorsDateTime)
 				.WithSingularName("ContractDate")  
 				.WithPluralName("ContractDates")  
 				  
@@ -16478,7 +16478,7 @@ namespace Allors.Meta
 				.Build();
 
 				AccountingTransactionTransactionDate = new RelationTypeBuilder(Apps, new Guid("77910a3f-3547-4d6b-92e0-f1fc136e22da"),new Guid("97cc6287-9dc0-404a-ad92-bfd2c3927d30"),new Guid("83cfb29d-4311-4b16-9331-1c00d54b70c7"))
-				.WithObjectTypes(AccountingTransaction, AllorsDate)
+				.WithObjectTypes(AccountingTransaction, AllorsDateTime)
 				.WithSingularName("TransactionDate")  
 				.WithPluralName("TransactionDates")  
 				  
@@ -16504,7 +16504,7 @@ namespace Allors.Meta
 				.Build();
 
 				AccountingTransactionEntryDate = new RelationTypeBuilder(Apps, new Guid("be061dda-bb8f-4bc1-b386-dc0c05dc6eaf"),new Guid("8943c9e2-3c6f-49c4-aa87-397af24e8073"),new Guid("75b6517f-6e4a-4218-8ca1-de230c69a02e"))
-				.WithObjectTypes(AccountingTransaction, AllorsDate)
+				.WithObjectTypes(AccountingTransaction, AllorsDateTime)
 				.WithSingularName("EntryDate")  
 				.WithPluralName("EntryDates")  
 				  
@@ -16616,7 +16616,7 @@ namespace Allors.Meta
 				.Build();
 
 				AddendumEffictiveDate = new RelationTypeBuilder(Apps, new Guid("30b99ed6-cb44-4401-b5bd-76c0099153d4"),new Guid("002ba83d-d60f-4365-90e0-4df952697ae7"),new Guid("cfa04c20-ecc5-4942-b898-2966bf5052aa"))
-				.WithObjectTypes(Addendum, AllorsDate)
+				.WithObjectTypes(Addendum, AllorsDateTime)
 				.WithSingularName("EffictiveDate")  
 				.WithPluralName("EffictiveDates")  
 				  
@@ -16633,7 +16633,7 @@ namespace Allors.Meta
 				.Build();
 
 				AddendumCreationDate = new RelationTypeBuilder(Apps, new Guid("f14af73d-8d7d-4c5b-bc6a-957830fd0a80"),new Guid("5430d382-14ff-4af1-8e1b-3b11142612e4"),new Guid("51fc58ba-e9fb-4919-94e8-c8594f6e4ea5"))
-				.WithObjectTypes(Addendum, AllorsDate)
+				.WithObjectTypes(Addendum, AllorsDateTime)
 				.WithSingularName("CreationDate")  
 				.WithPluralName("CreationDates")  
 				.WithIsDerived(true)  
@@ -17037,7 +17037,7 @@ namespace Allors.Meta
 				.Build();
 
 				OrderEntryDate = new RelationTypeBuilder(Apps, new Guid("a5875c41-9f08-49d0-9961-19a656c7e0cc"),new Guid("c6604ee5-e9f2-4b5a-9f08-fbfa1d126402"),new Guid("6a783dbf-0f8d-4249-8e1e-6c0c2a61a97e"))
-				.WithObjectTypes(Order, AllorsDate)
+				.WithObjectTypes(Order, AllorsDateTime)
 				.WithSingularName("EntryDate")  
 				.WithPluralName("EntryDates")  
 				.WithIsDerived(true)  
@@ -17119,7 +17119,7 @@ namespace Allors.Meta
 				.Build();
 
 				OrderOrderDate = new RelationTypeBuilder(Apps, new Guid("e039e94d-db89-4a17-a692-e82fdb53bfea"),new Guid("f1eed6f2-fb70-4fd8-8e7a-0962759b00a7"),new Guid("e5e2710b-f662-4a50-8203-d0d7c0789e3e"))
-				.WithObjectTypes(Order, AllorsDate)
+				.WithObjectTypes(Order, AllorsDateTime)
 				.WithSingularName("OrderDate")  
 				.WithPluralName("OrderDates")  
 				  
@@ -17137,7 +17137,7 @@ namespace Allors.Meta
 				.Build();
 
 				OrderDeliveryDate = new RelationTypeBuilder(Apps, new Guid("f38b3c7d-ac20-49be-a115-d7e83557f49a"),new Guid("f4ff4e74-0bff-4a2a-b4bd-3a08310c6ce2"),new Guid("6d52e55f-2adb-4ec6-8b13-e8611dfcd38a"))
-				.WithObjectTypes(Order, AllorsDate)
+				.WithObjectTypes(Order, AllorsDateTime)
 				.WithSingularName("DeliveryDate")  
 				.WithPluralName("DeliveryDate")  
 				  
@@ -17616,7 +17616,7 @@ namespace Allors.Meta
 
 				// Passport
 				PassportIssueDate = new RelationTypeBuilder(Apps, new Guid("85036007-8e01-4d90-9cfe-7b9c25e43537"),new Guid("b1235d10-b895-40dc-bc99-680d08b4cef2"),new Guid("9a1e96ae-0a56-4812-ac52-1c142afd61c2"))
-				.WithObjectTypes(Passport, AllorsDate)
+				.WithObjectTypes(Passport, AllorsDateTime)
 				.WithSingularName("IssueDate")  
 				.WithPluralName("IssueDates")  
 				  
@@ -17624,7 +17624,7 @@ namespace Allors.Meta
 				.Build();
 
 				PassportExpiriationDate = new RelationTypeBuilder(Apps, new Guid("dd30acd3-2e7b-49e6-9fcd-04cfdafb62d0"),new Guid("cb5a7d75-b938-4451-9896-b661b1828fab"),new Guid("bc010471-bb69-4735-8a86-25d1a8528d34"))
-				.WithObjectTypes(Passport, AllorsDate)
+				.WithObjectTypes(Passport, AllorsDateTime)
 				.WithSingularName("ExpiriationDate")  
 				.WithPluralName("ExpiriationDates")  
 				  
@@ -17662,7 +17662,7 @@ namespace Allors.Meta
 				.Build();
 
 				AmountDueTransactionDate = new RelationTypeBuilder(Apps, new Guid("39d2f4f2-0c16-40f5-990b-38bad15fae99"),new Guid("cada8a73-b732-4789-aa7b-a4caeaea20e2"),new Guid("341bd110-6126-476c-9d35-1069c207dc1b"))
-				.WithObjectTypes(AmountDue, AllorsDate)
+				.WithObjectTypes(AmountDue, AllorsDateTime)
 				.WithSingularName("TransactionDate")  
 				.WithPluralName("TransactionDates")  
 				  
@@ -17670,7 +17670,7 @@ namespace Allors.Meta
 				.Build();
 
 				AmountDueBlockedForDunning = new RelationTypeBuilder(Apps, new Guid("3ca978b2-8c0a-4fec-8b98-88e9ea3b2966"),new Guid("90befe3a-0821-4ec9-bac1-f580ebdaab9e"),new Guid("6b0f0eed-a757-4668-97bb-9d82ed4ff983"))
-				.WithObjectTypes(AmountDue, AllorsDate)
+				.WithObjectTypes(AmountDue, AllorsDateTime)
 				.WithSingularName("BlockedForDunning")  
 				.WithPluralName("BlockedForDunnings")  
 				  
@@ -17697,7 +17697,7 @@ namespace Allors.Meta
 				.Build();
 
 				AmountDueReconciliationDate = new RelationTypeBuilder(Apps, new Guid("90b4eaea-21cd-4a04-a64b-3c3dce0718d9"),new Guid("87f05475-29aa-4cb7-a5d9-865a47995cd6"),new Guid("71271fdc-4a24-4650-a57a-9cbc2973cc04"))
-				.WithObjectTypes(AmountDue, AllorsDate)
+				.WithObjectTypes(AmountDue, AllorsDateTime)
 				.WithSingularName("ReconciliationDate")  
 				.WithPluralName("ReconciliationDates")  
 				  
@@ -17765,7 +17765,7 @@ namespace Allors.Meta
 				.Build();
 
 				AmountDueDateLastReminder = new RelationTypeBuilder(Apps, new Guid("def3c00e-f065-48e5-97a2-22497f1800b3"),new Guid("278bb3d9-da67-44ca-a78b-8c047da3b2d4"),new Guid("3b867d6f-f7e7-4223-99cf-052ac43e139b"))
-				.WithObjectTypes(AmountDue, AllorsDate)
+				.WithObjectTypes(AmountDue, AllorsDateTime)
 				.WithSingularName("DateLastReminder")  
 				.WithPluralName("DatesLastReminder")  
 				  
@@ -17800,7 +17800,7 @@ namespace Allors.Meta
 				.Build();
 
 				AmountDueDueDate = new RelationTypeBuilder(Apps, new Guid("f18c665b-4f88-4e97-950c-08a38d9f0d93"),new Guid("8707951a-3285-44a9-b3d8-7c51cc9977ec"),new Guid("9caf74b7-48c5-4d1b-81fb-15bc22518156"))
-				.WithObjectTypes(AmountDue, AllorsDate)
+				.WithObjectTypes(AmountDue, AllorsDateTime)
 				.WithSingularName("DueDate")  
 				.WithPluralName("DueDates")  
 				  
@@ -18774,7 +18774,7 @@ namespace Allors.Meta
 				// EstimatedOtherCost
 				// BudgetRevision
 				BudgetRevisionRevisionDate = new RelationTypeBuilder(Apps, new Guid("5124634a-dc8b-477a-8ae2-d4ad577a13bb"),new Guid("fa00944b-f6a3-4c61-9739-6a8a109d32d5"),new Guid("a1230395-837b-4021-8075-642fdf1d7d2c"))
-				.WithObjectTypes(BudgetRevision, AllorsDate)
+				.WithObjectTypes(BudgetRevision, AllorsDateTime)
 				.WithSingularName("RevisionDate")  
 				.WithPluralName("RevisionDates")  
 				  
@@ -18932,7 +18932,7 @@ namespace Allors.Meta
 				.Build();
 
 				ShipmentEstimatedShipDate = new RelationTypeBuilder(Apps, new Guid("97788e21-ec31-4fb2-9ef7-0b7b5a7367a1"),new Guid("227f8e47-58af-44be-bcaf-0da60e2c13d4"),new Guid("338e2be0-6eb5-42ad-b51c-83dd9b7f0194"))
-				.WithObjectTypes(Shipment, AllorsDate)
+				.WithObjectTypes(Shipment, AllorsDateTime)
 				.WithSingularName("EstimatedShipDate")  
 				.WithPluralName("EstimatedShipDates")  
 				  
@@ -18940,7 +18940,7 @@ namespace Allors.Meta
 				.Build();
 
 				ShipmentLatestCancelDate = new RelationTypeBuilder(Apps, new Guid("a74391e5-bd03-4247-93b8-e7081d939823"),new Guid("41060c75-fb34-4391-96f3-d0d267344ba3"),new Guid("eb3f084c-9d59-4fff-9fc3-186d7b9a19b3"))
-				.WithObjectTypes(Shipment, AllorsDate)
+				.WithObjectTypes(Shipment, AllorsDateTime)
 				.WithSingularName("LatestCancelDate")  
 				.WithPluralName("LatestCancelDates")  
 				  
@@ -18966,7 +18966,7 @@ namespace Allors.Meta
 				.Build();
 
 				ShipmentEstimatedReadyDate = new RelationTypeBuilder(Apps, new Guid("b69c6812-bdc4-4a06-a782-fa8ff4a71aca"),new Guid("988cafce-2323-4c0d-b1cd-026045764ba4"),new Guid("cd02effa-d176-4f6e-8407-ec12d23b9f2a"))
-				.WithObjectTypes(Shipment, AllorsDate)
+				.WithObjectTypes(Shipment, AllorsDateTime)
 				.WithSingularName("EstimatedReadyDate")  
 				.WithPluralName("EstimatedReadyDates")  
 				  
@@ -19028,7 +19028,7 @@ namespace Allors.Meta
 				.Build();
 
 				ShipmentEstimatedArrivalDate = new RelationTypeBuilder(Apps, new Guid("fdac3beb-edf8-4d1b-80d4-21b643ef43ce"),new Guid("63d8adfc-6afb-499f-bd27-2f1d3f78bee6"),new Guid("8f56ce24-500e-4db9-abce-c7a301c38fe6"))
-				.WithObjectTypes(Shipment, AllorsDate)
+				.WithObjectTypes(Shipment, AllorsDateTime)
 				.WithSingularName("EstimatedArrivalDate")  
 				.WithPluralName("EstimatedArrivalDates")  
 				  
@@ -19109,7 +19109,7 @@ namespace Allors.Meta
 				.Build();
 
 				PaymentEffectiveDate = new RelationTypeBuilder(Apps, new Guid("7afc9649-43c9-4a60-a298-27361ba59765"),new Guid("41547bdb-9d10-42fb-a75f-b0c8d9b8d09e"),new Guid("6038fc56-abb9-41e6-965c-d71648d9f5ce"))
-				.WithObjectTypes(Payment, AllorsDate)
+				.WithObjectTypes(Payment, AllorsDateTime)
 				.WithSingularName("EffectiveDate")  
 				.WithPluralName("EffectiveDates")  
 				  
@@ -19242,7 +19242,7 @@ namespace Allors.Meta
 				.Build();
 
 				CaseStartDate = new RelationTypeBuilder(Apps, new Guid("65e310b5-1358-450c-aec2-985dcc724cdd"),new Guid("d815e7c2-fe40-470c-9ab9-007f7bc0465b"),new Guid("fee6ebfb-3ce6-473b-9142-ea70ade93709"))
-				.WithObjectTypes(Case, AllorsDate)
+				.WithObjectTypes(Case, AllorsDateTime)
 				.WithSingularName("StartDate")  
 				.WithPluralName("StartDates")  
 				  
@@ -19780,7 +19780,7 @@ namespace Allors.Meta
 				.Build();
 
 				InvoiceInvoiceDate = new RelationTypeBuilder(Apps, new Guid("82541f62-bf0e-4e33-9971-15a5a4fa4469"),new Guid("b3579af4-1c8e-46c5-bc1c-a9d7711a4a48"),new Guid("d54fdbf9-c580-4a49-b058-28aab77d81e0"))
-				.WithObjectTypes(Invoice, AllorsDate)
+				.WithObjectTypes(Invoice, AllorsDateTime)
 				.WithSingularName("InvoiceDate")  
 				.WithPluralName("InvoiceDates")  
 				  
@@ -19788,7 +19788,7 @@ namespace Allors.Meta
 				.Build();
 
 				InvoiceEntryDate = new RelationTypeBuilder(Apps, new Guid("8798a760-de3d-4210-bd22-165582728f36"),new Guid("d0d6a00a-2d79-4798-b51f-7e6dfb8551d5"),new Guid("c1f88c71-2415-4928-ae3b-16c7f85af30c"))
-				.WithObjectTypes(Invoice, AllorsDate)
+				.WithObjectTypes(Invoice, AllorsDateTime)
 				.WithSingularName("EntryDate")  
 				.WithPluralName("EntryDates")  
 				.WithIsDerived(true)  
@@ -20191,7 +20191,7 @@ namespace Allors.Meta
 				.Build();
 
 				EngagementItemExpectedStartDate = new RelationTypeBuilder(Apps, new Guid("33fe3f86-8b73-4a70-b9c0-62ac27531ac3"),new Guid("24a3d499-1f30-4b0e-8a27-a42808c4b1a2"),new Guid("5e4915f7-955d-41a9-9c38-d8b6f7837ea4"))
-				.WithObjectTypes(EngagementItem, AllorsDate)
+				.WithObjectTypes(EngagementItem, AllorsDateTime)
 				.WithSingularName("ExpectedStartDate")  
 				.WithPluralName("ExpectedStartDates")  
 				  
@@ -20199,7 +20199,7 @@ namespace Allors.Meta
 				.Build();
 
 				EngagementItemExpectedEndDate = new RelationTypeBuilder(Apps, new Guid("3635cb84-2d4f-4fa1-ac18-4c8a6cc129c5"),new Guid("b58461be-8138-42e1-9e4b-e095ae66fc90"),new Guid("afc29589-892c-41ca-94b3-92a775009a6e"))
-				.WithObjectTypes(EngagementItem, AllorsDate)
+				.WithObjectTypes(EngagementItem, AllorsDateTime)
 				.WithSingularName("ExpectedEndDate")  
 				.WithPluralName("ExpectedEndDates")  
 				  
@@ -20559,7 +20559,7 @@ namespace Allors.Meta
 				.Build();
 
 				InventoryItemVarianceInventoryDate = new RelationTypeBuilder(Apps, new Guid("af9fa5bc-a392-473d-b077-7f06ee24390b"),new Guid("9a0f9ecd-9954-4c2f-bb0e-e94f9cc3c19a"),new Guid("5665d533-cd9c-4328-b422-66a94d77b19b"))
-				.WithObjectTypes(InventoryItemVariance, AllorsDate)
+				.WithObjectTypes(InventoryItemVariance, AllorsDateTime)
 				.WithSingularName("InventoryDate")  
 				.WithPluralName("InventoryDates")  
 				  
@@ -20624,7 +20624,7 @@ namespace Allors.Meta
 				.Build();
 
 				CommunicationEventInitialScheduledStartDate = new RelationTypeBuilder(Apps, new Guid("2fa315f8-6208-495c-bcc4-2ccda734cc09"),new Guid("6b5d29f8-7016-4cdb-9af9-8320b1c7304d"),new Guid("8e7c8bab-063d-4f77-99ae-6e7979b63ce4"))
-				.WithObjectTypes(CommunicationEvent, AllorsDate)
+				.WithObjectTypes(CommunicationEvent, AllorsDateTime)
 				.WithSingularName("InitialScheduledStartDate")  
 				.WithPluralName("InitialScheduledStartDates")  
 				  
@@ -20775,7 +20775,7 @@ namespace Allors.Meta
 				.Build();
 
 				ResourceRequirementRequiredStartDate = new RelationTypeBuilder(Apps, new Guid("a0a42e5c-3106-4709-aa7b-c916a0ba8508"),new Guid("dc0b4ab7-19d1-4d15-938a-07ce77ba3b23"),new Guid("eeec43e2-dcb4-4ae1-aceb-afbb9da25f68"))
-				.WithObjectTypes(ResourceRequirement, AllorsDate)
+				.WithObjectTypes(ResourceRequirement, AllorsDateTime)
 				.WithSingularName("RequiredStartDate")  
 				.WithPluralName("RequiredStartDates")  
 				  
@@ -20792,7 +20792,7 @@ namespace Allors.Meta
 				.Build();
 
 				ResourceRequirementRequiredEndDate = new RelationTypeBuilder(Apps, new Guid("ffd07bff-38a2-4284-958d-18b1296f6112"),new Guid("ff6383a4-8502-4f12-8337-6a6ead2f3f0f"),new Guid("1aea6980-6914-4587-98ad-93d9164ebd63"))
-				.WithObjectTypes(ResourceRequirement, AllorsDate)
+				.WithObjectTypes(ResourceRequirement, AllorsDateTime)
 				.WithSingularName("RequiredEndDate")  
 				.WithPluralName("RequiredEndDates")  
 				  
@@ -21069,7 +21069,7 @@ namespace Allors.Meta
 				.Build();
 
 				PartSubstituteFromDate = new RelationTypeBuilder(Apps, new Guid("9cd198eb-2c25-425e-a23b-c321938f2512"),new Guid("8f8c0254-8bb0-4e61-83b5-38b0b80d0b97"),new Guid("6939df10-1c96-4a64-aae4-201392e9fd59"))
-				.WithObjectTypes(PartSubstitute, AllorsDate)
+				.WithObjectTypes(PartSubstitute, AllorsDateTime)
 				.WithSingularName("FromDate")  
 				.WithPluralName("FromDates")  
 				  
@@ -21177,7 +21177,7 @@ namespace Allors.Meta
 				.Build();
 
 				JournalEntryNumberNumber = new RelationTypeBuilder(Apps, new Guid("99719445-24e6-445e-8ce1-60c0b5911723"),new Guid("4d278d9b-a817-4311-ba52-d1bd14db8cc2"),new Guid("2d669167-ac38-4dd1-a846-ba0f1b724bd2"))
-				.WithObjectTypes(JournalEntryNumber, AllorsLong)
+				.WithObjectTypes(JournalEntryNumber, AllorsInteger)
 				.WithSingularName("Number")  
 				.WithPluralName("Number")  
 				  
@@ -21755,7 +21755,7 @@ namespace Allors.Meta
 				.Build();
 
 				InternalOrganisationNextAccountingTransactionNumber = new RelationTypeBuilder(Apps, new Guid("e617fcf1-63fb-4333-aa79-7a8ac4d267e4"),new Guid("34c6c91f-3bb2-4821-a9cf-49a7d8959e9b"),new Guid("2f6236fc-4f59-4694-acd1-4ae339898bc3"))
-				.WithObjectTypes(InternalOrganisation, AllorsLong)
+				.WithObjectTypes(InternalOrganisation, AllorsInteger)
 				.WithSingularName("NextAccountingTransactionNumber")  
 				.WithPluralName("NextAccountingTransactionNumbers")  
 				  
@@ -22096,7 +22096,7 @@ namespace Allors.Meta
 
 				// BudgetReview
 				BudgetReviewReviewDate = new RelationTypeBuilder(Apps, new Guid("4396be4d-edb4-405d-a39a-ee6ff5c39ca5"),new Guid("9cbcaf98-22d1-41ed-b7d4-88a32e41de5f"),new Guid("61c422a4-cfb0-4e7a-b8ee-29ecf92589ee"))
-				.WithObjectTypes(BudgetReview, AllorsDate)
+				.WithObjectTypes(BudgetReview, AllorsDateTime)
 				.WithSingularName("ReviewDate")  
 				.WithPluralName("ReviewDates")  
 				  
@@ -22421,7 +22421,7 @@ namespace Allors.Meta
 
 				// Requirement
 				RequirementRequiredByDate = new RelationTypeBuilder(Apps, new Guid("0f2c9ca2-9f2a-403e-8110-311fc0622326"),new Guid("099c426c-7b3f-4c9a-9059-525851488030"),new Guid("178dfe82-99e2-4026-84f9-223e10e852c7"))
-				.WithObjectTypes(Requirement, AllorsDate)
+				.WithObjectTypes(Requirement, AllorsDateTime)
 				.WithSingularName("RequiredByDate")  
 				.WithPluralName("RequiredByDates")  
 				  
@@ -22610,7 +22610,7 @@ namespace Allors.Meta
 				.Build();
 
 				NewsItemDate = new RelationTypeBuilder(Apps, new Guid("a184408c-a1b0-47b2-821a-a2ab643b523e"),new Guid("213a7484-741a-4a2b-b765-3bc1b8427a64"),new Guid("55094ebe-bf49-44f4-bb0f-5722eca4ae90"))
-				.WithObjectTypes(NewsItem, AllorsDate)
+				.WithObjectTypes(NewsItem, AllorsDateTime)
 				.WithSingularName("Date")  
 				.WithPluralName("Date")  
 				  
@@ -23372,7 +23372,7 @@ namespace Allors.Meta
 
 				// Lot
 				LotExpirationDate = new RelationTypeBuilder(Apps, new Guid("4888a06a-fcf5-42a7-a1c3-721d3abaa755"),new Guid("0f922c04-b617-4b72-8c22-02f43ac2afb9"),new Guid("46b3ec4d-0463-48eb-8764-8dedf8c48b1a"))
-				.WithObjectTypes(Lot, AllorsDate)
+				.WithObjectTypes(Lot, AllorsDateTime)
 				.WithSingularName("ExpirationDate")  
 				.WithPluralName("ExpirationDates")  
 				  
@@ -23512,7 +23512,7 @@ namespace Allors.Meta
 				.Build();
 
 				RequestItemRequiredByDate = new RelationTypeBuilder(Apps, new Guid("ff41a43c-997d-4158-984e-e669eb935148"),new Guid("b46ffa62-adcb-4928-bdb0-79d0eef9e676"),new Guid("7c4353a9-efd5-437e-8789-fae92a0be1ed"))
-				.WithObjectTypes(RequestItem, AllorsDate)
+				.WithObjectTypes(RequestItem, AllorsDateTime)
 				.WithSingularName("RequiredByDate")  
 				.WithPluralName("RequiredByDates")  
 				  
@@ -24548,7 +24548,7 @@ namespace Allors.Meta
 				.Build();
 
 				OrderItemAssignedDeliveryDate = new RelationTypeBuilder(Apps, new Guid("9dc87cdb-a35f-4a48-9f99-bf0fe07cad5c"),new Guid("b6f17e6b-f61a-4155-8e4c-79ebec1a01d4"),new Guid("9ec4f475-ecb7-4d57-a642-043b0a703094"))
-				.WithObjectTypes(OrderItem, AllorsDate)
+				.WithObjectTypes(OrderItem, AllorsDateTime)
 				.WithSingularName("AssignedDeliveryDate")  
 				.WithPluralName("AssignedDeliveryDates")  
 				  
@@ -24556,7 +24556,7 @@ namespace Allors.Meta
 				.Build();
 
 				OrderItemDeliveryDate = new RelationTypeBuilder(Apps, new Guid("a1769a74-d832-4ade-be59-a98b17033ca1"),new Guid("72f9c5a1-a66a-4181-b683-c0546f7cb95d"),new Guid("279735e0-974a-46b3-b460-2bd528895f5a"))
-				.WithObjectTypes(OrderItem, AllorsDate)
+				.WithObjectTypes(OrderItem, AllorsDateTime)
 				.WithSingularName("DeliveryDate")  
 				.WithPluralName("DeliveryDates")  
 				.WithIsDerived(true)  
@@ -24826,7 +24826,7 @@ namespace Allors.Meta
 
 				// ProductDeliverySkillRequirement
 				ProductDeliverySkillRequirementStartedUsingDate = new RelationTypeBuilder(Apps, new Guid("12c6abaf-a080-45f3-820d-b462978d2539"),new Guid("4a6bd8f2-ea2a-4e07-a018-4b4b37b45a96"),new Guid("3e12bb69-b0bb-40ba-a987-89f5cc40c436"))
-				.WithObjectTypes(ProductDeliverySkillRequirement, AllorsDate)
+				.WithObjectTypes(ProductDeliverySkillRequirement, AllorsDateTime)
 				.WithSingularName("StartedUsingDate")  
 				.WithPluralName("StartedUsingDates")  
 				  
@@ -25789,7 +25789,7 @@ namespace Allors.Meta
 				.Build();
 
 				PersonBirthDate = new RelationTypeBuilder(Apps, new Guid("7bcba7fd-6419-4324-8a11-c56bd46581a1"),new Guid("78ccda0f-4b17-40f1-93ad-b86e1181cb80"),new Guid("1babd38a-8a52-4a92-bb99-7a289d41bb1e"))
-				.WithObjectTypes(Person, AllorsDate)
+				.WithObjectTypes(Person, AllorsDateTime)
 				.WithSingularName("BirthDate")  
 				.WithPluralName("BirthDates")  
 				  
@@ -25884,7 +25884,7 @@ namespace Allors.Meta
 				.Build();
 
 				PersonDeceasedDate = new RelationTypeBuilder(Apps, new Guid("ffda06c0-7dff-42fa-abd5-1ed6fa8c43da"),new Guid("8dabd93a-badc-40f3-96af-f97c1b61d262"),new Guid("92041fa4-b675-4fd4-b6c4-d9143393878e"))
-				.WithObjectTypes(Person, AllorsDate)
+				.WithObjectTypes(Person, AllorsDateTime)
 				.WithSingularName("DeceasedDate")  
 				.WithPluralName("DeceasedDates")  
 				  

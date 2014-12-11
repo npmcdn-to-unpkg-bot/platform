@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class BudgetStatus
     {
         protected override void AppsOnPostBuild(IObjectBuilder builder)

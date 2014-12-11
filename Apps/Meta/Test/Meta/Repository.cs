@@ -26,6 +26,6 @@ namespace Allors.Meta
 
         public static void TestPostInit(MetaPopulation meta)
         {
-       }
+        }
     }
 }

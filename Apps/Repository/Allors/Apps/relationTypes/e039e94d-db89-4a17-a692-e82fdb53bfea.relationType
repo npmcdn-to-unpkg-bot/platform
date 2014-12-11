@@ -3,7 +3,7 @@
     <objectType idref="7dde949a-6f54-4ece-92b3-d269f50ef9d9" />
   </associationType>
   <roleType id="e5e2710b-f662-4a50-8203-d0d7c0789e3e">
-    <objectType idref="c402fbda-133a-4b59-858a-832fbd2ec565" />
+    <objectType idref="c4c09343-61d3-418c-ade2-fe6fd588f128" />
     <pluralName>OrderDates</pluralName>
     <singularName>OrderDate</singularName>
   </roleType>

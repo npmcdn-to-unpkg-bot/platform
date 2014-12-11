@@ -3,7 +3,7 @@
     <objectType idref="d900e278-7add-4e90-8bea-0a65d03f4fa7" />
   </associationType>
   <roleType id="46b3ec4d-0463-48eb-8764-8dedf8c48b1a">
-    <objectType idref="c402fbda-133a-4b59-858a-832fbd2ec565" />
+    <objectType idref="c4c09343-61d3-418c-ade2-fe6fd588f128" />
     <pluralName>ExpirationDates</pluralName>
     <singularName>ExpirationDate</singularName>
   </roleType>

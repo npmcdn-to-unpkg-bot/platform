@@ -3,7 +3,7 @@
     <objectType idref="6ebf4c66-dd19-494f-8081-67d7a10a16fc" />
   </associationType>
   <roleType id="2872381c-833b-4dce-83f4-a56bbbd416b3">
-    <objectType idref="c402fbda-133a-4b59-858a-832fbd2ec565" />
+    <objectType idref="c4c09343-61d3-418c-ade2-fe6fd588f128" />
     <pluralName>ModifiedDates</pluralName>
     <singularName>ModifiedDate</singularName>
   </roleType>

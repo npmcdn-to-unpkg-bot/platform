@@ -3,7 +3,7 @@
     <objectType idref="9f20a35c-d814-4690-a96f-2bcd25f6c6a2" />
   </associationType>
   <roleType id="6038fc56-abb9-41e6-965c-d71648d9f5ce">
-    <objectType idref="c402fbda-133a-4b59-858a-832fbd2ec565" />
+    <objectType idref="c4c09343-61d3-418c-ade2-fe6fd588f128" />
     <pluralName>EffectiveDates</pluralName>
     <singularName>EffectiveDate</singularName>
   </roleType>

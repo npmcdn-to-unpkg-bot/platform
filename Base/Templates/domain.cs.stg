@@ -446,6 +446,8 @@ $elseif(objectType.IsBoolean)$
 	global::System.Boolean?
 $elseif(objectType.IsDecimal)$
 	global::System.Decimal?
+$elseif(objectType.IsDateTime)$
+	global::System.DateTime?
 $elseif(objectType.IsFloat)$
 	global::System.Double?
 $elseif(objectType.IsInteger)$
@@ -454,6 +456,8 @@ $elseif(objectType.IsString)$
 	global::System.String
 $elseif(objectType.IsUnique)$
 	global::System.Guid?
+$else$
+not found ...
 $endif$
 $else$
 	$objectType.SingularName$

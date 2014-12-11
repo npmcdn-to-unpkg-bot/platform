@@ -3,7 +3,7 @@
     <objectType idref="4629c7ed-e9a4-4f31-bb46-e3f2920bd768" />
   </associationType>
   <roleType id="f21bbf2d-0780-4bbf-92e6-2c6676b4893d">
-    <objectType idref="c402fbda-133a-4b59-858a-832fbd2ec565" />
+    <objectType idref="c4c09343-61d3-418c-ade2-fe6fd588f128" />
     <pluralName>CommunicationDates</pluralName>
     <singularName>CommunicationDate</singularName>
   </roleType>

@@ -3,7 +3,7 @@
     <objectType idref="04540476-602f-456a-b300-54166b65c8b1" />
   </associationType>
   <roleType id="949968c0-dc95-44d3-a8f0-65829a884c3b">
-    <objectType idref="c402fbda-133a-4b59-858a-832fbd2ec565" />
+    <objectType idref="c4c09343-61d3-418c-ade2-fe6fd588f128" />
     <pluralName>EstimatedThroughDates</pluralName>
     <singularName>EstimatedThroughDate</singularName>
   </roleType>

@@ -3,7 +3,7 @@
     <objectType idref="066bf242-2710-4a68-8ff6-ce4d7d88a04a" />
   </associationType>
   <roleType id="fa17ef86-c074-414e-b223-b62522d68280">
-    <objectType idref="c402fbda-133a-4b59-858a-832fbd2ec565" />
+    <objectType idref="c4c09343-61d3-418c-ade2-fe6fd588f128" />
     <pluralName>ValidFromDates</pluralName>
     <singularName>ValidFromDate</singularName>
   </roleType>

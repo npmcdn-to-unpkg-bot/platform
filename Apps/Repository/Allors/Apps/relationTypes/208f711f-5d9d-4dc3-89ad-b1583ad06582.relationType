@@ -3,7 +3,7 @@
     <objectType idref="321a6047-2233-4bec-a1b1-9b965c0099e5" />
   </associationType>
   <roleType id="c1467dbc-9b64-49a0-8715-90ad277b02c9">
-    <objectType idref="c402fbda-133a-4b59-858a-832fbd2ec565" />
+    <objectType idref="c4c09343-61d3-418c-ade2-fe6fd588f128" />
     <pluralName>RequiredResponseDates</pluralName>
     <singularName>RequiredResponseDate</singularName>
   </roleType>

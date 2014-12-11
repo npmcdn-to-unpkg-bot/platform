@@ -3,7 +3,7 @@
     <objectType idref="444e431b-f078-46e0-9c8e-694e15e807c7" />
   </associationType>
   <roleType id="d00256d2-fbc8-4935-bfe9-0b0843622936">
-    <objectType idref="c402fbda-133a-4b59-858a-832fbd2ec565" />
+    <objectType idref="c4c09343-61d3-418c-ade2-fe6fd588f128" />
     <pluralName>CreationDates</pluralName>
     <singularName>CreationDate</singularName>
   </roleType>
