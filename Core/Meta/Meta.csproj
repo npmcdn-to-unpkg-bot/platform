@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Core\AssociationType.cs" />
     <Compile Include="Core\Builder.cs" />
+    <Compile Include="Core\ConcreteRoleType.cs" />
     <Compile Include="Core\Class.cs" />
     <Compile Include="Core\ClassBuilder.cs" />
     <Compile Include="Core\ClassBuilder.v.cs" />
@@ -76,7 +77,6 @@
     <Compile Include="Core\ValidationLog.cs" />
     <Compile Include="Test\Meta\Repository.cs" />
     <Compile Include="Test\Meta\Repository.v.cs" />
-    <Compile Include="Core\Repository.cs" />
     <Compile Include="Core\Generation\Generate.cs" />
     <Compile Include="Core\Generation\GenerateLog.cs" />
     <Compile Include="Core\Generation\Log.cs" />

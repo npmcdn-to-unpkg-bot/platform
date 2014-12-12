@@ -44,12 +44,13 @@ namespace Allors.Domain
 	public interface Transitional  : AccessControlledObject 
 	{
 	}
-	public interface Enumeration  : UserInterfaceable, UniquelyIdentifiable
-    {
+	public interface Enumeration  : UserInterfaceable, UniquelyIdentifiable 
+	{
+					LocalisedText LocalisedNames {set;}
 
 					global::System.String Name {set;}
 
-					global::System.Boolean? IsActive {set;}
+					global::System.Boolean IsActive {set;}
 
 	}
 	public interface AccessControlledObject 

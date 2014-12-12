@@ -453,6 +453,12 @@ namespace Allors.Meta
                     {
                         type.DeriveMethodTypes(sharedMethodTypeList);
                     }
+
+                    // ConcreteRoleType
+                    foreach (var @class in this.classes)
+                    {
+                        @class.DeriveConcreteRoleTypes(sharedRoleTypes);
+                    }
                 }
                 finally
                 {

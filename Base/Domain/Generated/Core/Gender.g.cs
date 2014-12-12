@@ -78,11 +78,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Boolean? IsActive 
+		virtual public global::System.Boolean IsActive 
 		{
 			get
 			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.IsActive);
+				return (global::System.Boolean) Strategy.GetUnitRole(Meta.IsActive);
 			}
 			set
 			{

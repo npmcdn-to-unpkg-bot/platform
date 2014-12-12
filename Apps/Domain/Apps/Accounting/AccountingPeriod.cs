@@ -21,7 +21,6 @@
 namespace Allors.Domain
 {
     using System.Text;
-    using System.Threading;
 
     public partial class AccountingPeriod
     {

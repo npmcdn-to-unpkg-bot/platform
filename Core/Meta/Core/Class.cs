@@ -23,16 +23,41 @@ namespace Allors.Meta
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     public sealed partial class Class : Composite, IClass
     {
         private readonly Class[] leafClasses;
 
+        private readonly Dictionary<RoleType, ConcreteRoleType> concreteRoleTypeByRoleType;
+
+        private ConcreteRoleType[] concreteRoleTypes;
+
         internal Class(Domain domain, Guid id)
             : base(domain, id)
         {
+            this.concreteRoleTypeByRoleType = new Dictionary<RoleType, ConcreteRoleType>();
+
             this.leafClasses = new[] { this };
             domain.OnClassCreated(this);
+        }
+
+        public Dictionary<RoleType, ConcreteRoleType> ConcreteRoleTypeByRoleType
+        {
+            get
+            {
+                this.MetaPopulation.Derive();
+                return this.concreteRoleTypeByRoleType;
+            }
+        }
+
+        public ConcreteRoleType[] ConcreteRoleTypes
+        {
+            get
+            {
+                this.MetaPopulation.Derive();
+                return this.concreteRoleTypes;
+            }
         }
 
         public override IEnumerable<Class> LeafClasses
@@ -62,6 +87,32 @@ namespace Allors.Meta
         public override bool ExistLeafClass(IClass objectType)
         {
             return this.Equals(objectType);
+        }
+
+        public void DeriveConcreteRoleTypes(HashSet<RoleType> sharedRoleTypes)
+        {
+            sharedRoleTypes.Clear();
+            var removedRoleTypes = sharedRoleTypes;
+            removedRoleTypes.UnionWith(this.ConcreteRoleTypeByRoleType.Keys);
+
+            foreach (var roleType in this.RoleTypes)
+            {
+                removedRoleTypes.Remove(roleType);
+
+                ConcreteRoleType concreteRoleType;
+                if (!this.concreteRoleTypeByRoleType.TryGetValue(roleType, out concreteRoleType))
+                {
+                    concreteRoleType = new ConcreteRoleType(roleType);
+                    this.concreteRoleTypeByRoleType[roleType] = concreteRoleType;
+                }
+            }
+
+            foreach (var roleType in removedRoleTypes)
+            {
+                this.concreteRoleTypeByRoleType.Remove(roleType);
+            }
+
+            this.concreteRoleTypes = this.concreteRoleTypeByRoleType.Values.ToArray();
         }
     }
 }

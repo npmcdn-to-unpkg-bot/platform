@@ -59,6 +59,9 @@
     <Compile Include="..\..\Core\Meta\Core\Composite.cs">
       <Link>Core\Composite.cs</Link>
     </Compile>
+    <Compile Include="..\..\Core\Meta\Core\ConcreteRoleType.cs">
+      <Link>Core\ConcreteRoleType.cs</Link>
+    </Compile>
     <Compile Include="..\..\Core\Meta\Core\Domain.cs">
       <Link>Core\Domain.cs</Link>
     </Compile>
@@ -175,6 +178,7 @@
     <None Include="..\..\Core\Meta\Core\Overview.cd">
       <Link>Core\Overview.cd</Link>
     </None>
+    <None Include="Base\RelationType.cd" />
     <None Include="packages.config" />
     <None Include="Settings.StyleCop" />
   </ItemGroup>

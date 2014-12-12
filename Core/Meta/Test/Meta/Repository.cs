@@ -24,7 +24,7 @@ namespace Allors.Meta
 
     public static partial class Repository
     {
-        public static Domain Test(MetaPopulation env)
+        public static Domain TestOnPostInit(MetaPopulation env)
         {
             // Imports
             var core = (Domain)env.Find(new Guid("CA802192-8186-4C2A-8315-A8DEFAA74A12"));

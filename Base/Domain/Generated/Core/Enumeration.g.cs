@@ -35,7 +35,7 @@ namespace Allors.Domain
 		void RemoveName();
 
 
-		global::System.Boolean? IsActive 
+		global::System.Boolean IsActive 
 		{
 			get;
 			set;

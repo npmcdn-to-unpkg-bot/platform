@@ -27,7 +27,7 @@ namespace Allors.Meta.Static
         {
             this.metaPopulation = new MetaPopulation();
 
-            var allors = Repository.Core(this.metaPopulation);
+            var allors = Repository.TestOnPostInit(this.metaPopulation);
 
             var validationlog = this.metaPopulation.Validate();
 

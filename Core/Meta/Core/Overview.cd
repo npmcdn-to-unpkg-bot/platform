@@ -12,9 +12,9 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Allors.Meta.MetaPopulation" Collapsed="true">
-    <Position X="8.25" Y="1.75" Width="1.5" />
+    <Position X="1" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AIJQCAAAQAHCBAABqAgAVDgAEAAaAEAgFMRBYAmCDEg=</HashCode>
+      <HashCode>AINQCAAAQAHCBAABqAgAVDgAEAAaAEAgHMRBYAmCDEg=</HashCode>
       <FileName>Core\MetaPopulation.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -81,7 +81,7 @@
   <Class Name="Allors.Meta.RoleType" Collapsed="true">
     <Position X="9.5" Y="7.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAIGmBCCAAGgxIZEAMLABAQCgAAQAIASAJIQAADAEAA=</HashCode>
+      <HashCode>AAIGmBCCAAGgxIZEAMLABAQigAAQIIASAJIQAADAEAA=</HashCode>
       <FileName>Core\RoleType.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -97,7 +97,7 @@
   <Class Name="Allors.Meta.Unit" Collapsed="true">
     <Position X="5" Y="6" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAABIgAAAQAABAAAAAAIQAAAAAQAAAAA=</HashCode>
+      <HashCode>AAAIAAAAAAAAAABIgAAAQAABAAAAAAIQAAAAAQAAAAA=</HashCode>
       <FileName>Core\Unit.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -105,7 +105,7 @@
   <Class Name="Allors.Meta.Class" Collapsed="true">
     <Position X="1.75" Y="7.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAABAAAAAUAAAAAIAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Core\Class.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -113,7 +113,7 @@
   <Class Name="Allors.Meta.Interface" Collapsed="true">
     <Position X="4" Y="7.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAAAFAEAAEEAAAAAJAAAAAAAQAIAAEAAAAKIFAIAAgE=</HashCode>
+      <HashCode>IAAAFAEAAEEAAAABJAAAAAAAQAIAAEAAAAKIFAIAAgE=</HashCode>
       <FileName>Core\Interface.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />

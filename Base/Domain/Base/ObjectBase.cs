@@ -73,10 +73,11 @@ namespace Allors
         protected virtual void BaseOnPostBuild(IObjectBuilder builder)
         {
             // TODO: Optimize
-            foreach (RoleType roleType in this.strategy.ObjectType.RoleTypes)
+            foreach (ConcreteRoleType concreteRoleType in ((Class)this.strategy.ObjectType).ConcreteRoleTypes)
             {
-                if (roleType.IsRequired)
+                if ((concreteRoleType.IsRequired.HasValue && concreteRoleType.IsRequired.Value) || concreteRoleType.RoleType.IsRequired)
                 {
+                    var roleType = concreteRoleType.RoleType;
                     var unit = roleType.ObjectType as IUnit;
                     if (unit != null && !this.strategy.ExistRole(roleType))
                     {
@@ -122,10 +123,11 @@ namespace Allors
         protected virtual void BaseDerive(IDerivation derivation)
         {
             // TODO: Optimize
-            foreach (RoleType roleType in this.strategy.ObjectType.RoleTypes)
+            foreach (ConcreteRoleType concreteRoleType in ((Class)this.strategy.ObjectType).ConcreteRoleTypes)
             {
-                if (roleType.IsRequired)
+                if ((concreteRoleType.IsRequired.HasValue && concreteRoleType.IsRequired.Value) || concreteRoleType.RoleType.IsRequired)
                 {
+                    var roleType = concreteRoleType.RoleType;
                     derivation.Log.AssertExists(this, roleType);
                 }
             }
