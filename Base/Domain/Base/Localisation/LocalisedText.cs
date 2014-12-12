@@ -48,8 +48,6 @@ namespace Allors.Domain
         {
             base.BaseDerive(derivation);
 
-            derivation.Log.AssertExists(this, LocalisedTexts.Meta.Text);
-
             this.DisplayName = this.Text;
 
             this.SearchData.CharacterBoundaryText = this.Text;

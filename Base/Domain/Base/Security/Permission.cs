@@ -134,10 +134,6 @@ namespace Allors.Domain
 
         protected override void BaseDerive(IDerivation derivation)
         {
-            derivation.Log.AssertExists(this, Meta.OperationEnum);
-            derivation.Log.AssertExists(this, Meta.ConcreteClassPointer);
-            derivation.Log.AssertExists(this, Meta.OperandTypePointer);
-
             switch (this.Operation)
             {
                 case Operation.Read:

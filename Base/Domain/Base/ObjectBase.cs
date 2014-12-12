@@ -20,7 +20,10 @@
 
 namespace Allors
 {
+    using System;
+
     using Allors.Domain;
+    using Allors.Meta;
 
     public abstract partial class ObjectBase : Derivable
     {
@@ -69,6 +72,35 @@ namespace Allors
 
         protected virtual void BaseOnPostBuild(IObjectBuilder builder)
         {
+            // TODO: Optimize
+            foreach (RoleType roleType in this.strategy.ObjectType.RoleTypes)
+            {
+                if (roleType.IsRequired)
+                {
+                    var unit = roleType.ObjectType as IUnit;
+                    if (unit != null && !this.strategy.ExistRole(roleType))
+                    {
+                        switch (unit.UnitTag)
+                        {
+                            case UnitTags.AllorsBoolean:
+                                this.strategy.SetUnitRole(roleType, false);
+                                break;
+                            case UnitTags.AllorsDecimal:
+                                this.strategy.SetUnitRole(roleType, 0m);
+                                break;
+                            case UnitTags.AllorsFloat:
+                                this.strategy.SetUnitRole(roleType, 0d);
+                                break;
+                            case UnitTags.AllorsInteger:
+                                this.strategy.SetUnitRole(roleType, 0);
+                                break;
+                            case UnitTags.AllorsUnique:
+                                this.strategy.SetUnitRole(roleType, Guid.NewGuid());
+                                break;
+                        }
+                    }
+                }
+            }
         }
 
         protected virtual void BaseApplySecurityOnPostBuild()
@@ -89,6 +121,14 @@ namespace Allors
 
         protected virtual void BaseDerive(IDerivation derivation)
         {
+            // TODO: Optimize
+            foreach (RoleType roleType in this.strategy.ObjectType.RoleTypes)
+            {
+                if (roleType.IsRequired)
+                {
+                    derivation.Log.AssertExists(this, roleType);
+                }
+            }
         }
 
         protected virtual void BaseApplySecurityOnDerive()

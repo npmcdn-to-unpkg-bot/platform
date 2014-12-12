@@ -20,7 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
     using System.Globalization;
 
     public partial class Locale
@@ -44,9 +43,6 @@ namespace Allors.Domain
         protected override void BaseDerive(IDerivation derivation)
         {
             base.BaseDerive(derivation);
-
-            derivation.Log.AssertExists(this, Locales.Meta.Language);
-            derivation.Log.AssertExists(this, Locales.Meta.Country);
 
             if (!this.ExistName && this.ExistLanguage && this.ExistCountry)
             {

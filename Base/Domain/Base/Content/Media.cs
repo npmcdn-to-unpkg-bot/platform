@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class Media
     {
         private static readonly byte[] EmptyContent = { };
@@ -55,11 +53,6 @@ namespace Allors.Domain
         {
             base.BaseOnPostBuild(builder);
 
-            if (!this.ExistUniqueId)
-            {
-                this.UniqueId = Guid.NewGuid();
-            }
-
             var mediaBuilder = (MediaBuilder)builder;
             if (mediaBuilder.MediaContentValue != null)
             {
@@ -70,10 +63,6 @@ namespace Allors.Domain
         protected override void BaseDerive(IDerivation derivation)
         {
             base.BaseDerive(derivation);
-
-            derivation.Log.AssertExists(this, Medias.Meta.UniqueId);
-            derivation.Log.AssertExists(this, Medias.Meta.MediaType);
-            derivation.Log.AssertExists(this, Medias.Meta.MediaContent);
 
             this.DisplayName = this.ExistUniqueId ? this.UniqueId.ToString() : this.Strategy.ObjectType.PluralName + "/" + this.Id;
         }

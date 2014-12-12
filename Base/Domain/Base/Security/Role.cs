@@ -27,10 +27,7 @@ namespace Allors.Domain
         {
             base.BaseDerive(derivation);
 
-            derivation.Log.AssertExists(this, Meta.Name);
             derivation.Log.AssertIsUnique(this, Meta.Name);
-
-            derivation.Log.AssertExists(this, Meta.UniqueId);
             derivation.Log.AssertIsUnique(this, Meta.UniqueId);
 
             this.DeriveDisplayName();

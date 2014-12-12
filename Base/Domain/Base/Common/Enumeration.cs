@@ -44,18 +44,8 @@ namespace Allors.Domain
             }
         }
 
-        public static void AppsEnumerationOnPostBuild(this Enumeration enumeration, IObjectBuilder builder)
-        {
-            if (!enumeration.ExistIsActive)
-            {
-                enumeration.IsActive = true;
-            }
-        }
-
         public static void AppsEnumerationDerive(this Enumeration enumeration, IDerivation derivation)
         {
-            derivation.Log.AssertExists(enumeration, Enumerations.Meta.Name);
-
             enumeration.DisplayName = enumeration.Name;
         }
     }

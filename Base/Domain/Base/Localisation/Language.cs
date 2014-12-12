@@ -20,7 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
     using System.Linq;
 
     public partial class Language
@@ -48,10 +47,6 @@ namespace Allors.Domain
         protected override void BaseDerive(IDerivation derivation)
         {
             base.BaseDerive(derivation);
-
-            derivation.Log.AssertExists(this, Languages.Meta.IsoCode);
-            derivation.Log.AssertIsUnique(this, Languages.Meta.IsoCode);
-            derivation.Log.AssertExists(this, Languages.Meta.Name);
 
             this.DisplayName = this.Name;
         }

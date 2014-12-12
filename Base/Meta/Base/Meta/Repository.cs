@@ -24,13 +24,65 @@ namespace Allors.Meta
     {
         public static void BasePostInit(MetaPopulation meta)
         {
+            // Counter
+            AccessControlRole.RoleType.IsRequired = true;
+            AccessControlObject.RoleType.IsRequired = true;
+
+            // Counter
             CounterValue.RoleType.IsRequired = true;
 
-            UniquelyIdentifiableUniqueId.RoleType.IsRequired = true;
+            // Country
+            CountryIsoCode.RoleType.IsRequired = true;
+            CountryName.RoleType.IsRequired = true;
 
+            // Currency
+            CurrencyIsoCode.RoleType.IsRequired = true;
+            CurrencyName.RoleType.IsRequired = true;
+            CurrencySymbol.RoleType.IsRequired = true;
+
+            // Enumeration
+            EnumerationName.RoleType.IsRequired = true;
+            EnumerationIsActive.RoleType.IsRequired = true;
+
+            // Language
+            LanguageIsoCode.RoleType.IsRequired = true;
+            LanguageName.RoleType.IsRequired = true;
+
+            // Locale
+            LocaleLanguage.RoleType.IsRequired = true;
+            LocaleCountry.RoleType.IsRequired = true;
+            
+            // LocalisedText
+            LocalisedTextText.RoleType.IsRequired = true;
+
+            // Media
+            MediaMediaType.RoleType.IsRequired = true;
+            MediaMediaType.RoleType.IsRequired = true;
+
+            // MediaContent
+            MediaContentValue.RoleType.IsRequired = true;
+
+            // MediaType
+            MediaTypeName.RoleType.IsRequired = true;
+
+            // Permission
             PermissionOperandTypePointer.RoleType.IsRequired = true;
             PermissionConcreteClassPointer.RoleType.IsRequired = true;
             PermissionOperationEnum.RoleType.IsRequired = true;
+
+            // Role
+            RoleName.RoleType.IsRequired = true;
+
+            // UniquelyIdentifiable
+            UniquelyIdentifiableUniqueId.RoleType.IsRequired = true;
+
+            // UserGroup
+            UserGroupName.RoleType.IsRequired = true;
+
+            // StringTemplate
+            StringTemplateName.RoleType.IsRequired = true;
+
+
         }
     }
 }

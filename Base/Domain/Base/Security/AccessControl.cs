@@ -26,9 +26,7 @@ namespace Allors.Domain
         {
             base.BaseDerive(derivation);
 
-            derivation.Log.AssertExists(this, Meta.Role);
             derivation.Log.AssertAtLeastOne(this, Meta.Subject, Meta.SubjectGroup);
-            derivation.Log.AssertExists(this, Meta.Object);
 
             if (this.ExistRole)
             {

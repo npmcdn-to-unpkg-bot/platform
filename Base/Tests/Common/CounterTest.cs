@@ -44,6 +44,7 @@ namespace Allors.Common
 
             Assert.IsTrue(counterBuilder.ExistUniqueId);
             Assert.AreNotEqual(Guid.Empty, counterBuilder.UniqueId);
+
             Assert.AreEqual(0, counterBuilder.Value);
 
             var secondCounterBuilder = new CounterBuilder(this.DatabaseSession).Build();

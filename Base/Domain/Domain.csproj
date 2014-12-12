@@ -228,7 +228,6 @@
     <Compile Include="Test\Special\Three.cs" />
     <Compile Include="Test\Special\Two.cs" />
     <Compile Include="Base\Common\Cache.cs" />
-    <Compile Include="Base\Common\Counter.cs" />
     <Compile Include="Base\Common\Counters.cs" />
     <Compile Include="Base\Common\Derivable.cs" />
     <Compile Include="Base\Common\Derivation.cs" />

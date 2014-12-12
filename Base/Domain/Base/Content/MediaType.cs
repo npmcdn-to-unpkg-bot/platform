@@ -67,8 +67,6 @@ namespace Allors.Domain
         {
             base.BaseDerive(derivation);
 
-            derivation.Log.AssertExists(this, MediaTypes.Meta.Name);
-
             this.NameToLowerCase();
 
             this.DisplayName = this.Name;

@@ -31,8 +31,6 @@ namespace Allors.Domain
         {
             base.BaseDerive(derivation);
 
-            derivation.Log.AssertExists(this, MediaContents.Meta.Value);
-
             if (!this.ExistHash && this.ExistValue)
             {
                 var sha1CryptoServiceProvider = new SHA1CryptoServiceProvider();

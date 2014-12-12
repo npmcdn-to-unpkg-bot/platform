@@ -68,9 +68,7 @@ namespace Allors.Domain
         {
             base.BaseDerive(derivation);
 
-            derivation.Log.AssertExists(this, Countries.Meta.IsoCode);
             derivation.Log.AssertIsUnique(this, Countries.Meta.IsoCode);
-            derivation.Log.AssertExists(this, Countries.Meta.Name);
             
             this.DeriveDisplayName();
         }

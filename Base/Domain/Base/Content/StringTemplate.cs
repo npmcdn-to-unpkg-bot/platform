@@ -96,8 +96,6 @@ namespace Allors.Domain
         {
             base.BaseDerive(derivation);
 
-            derivation.Log.AssertExists(this, StringTemplates.Meta.UniqueId);
-
             derivation.Log.AssertIsUnique(this, StringTemplates.Meta.UniqueId);
         }
 

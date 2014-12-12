@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System.Linq;
 
-    using Allors.Domain;
-
     public partial class Currency
     {
         public string GetName()
@@ -54,10 +52,6 @@ namespace Allors.Domain
         protected override void BaseDerive(IDerivation derivation)
         {
             base.BaseDerive(derivation);
-
-            derivation.Log.AssertExists(this, Currencies.Meta.IsoCode);
-            derivation.Log.AssertExists(this, Currencies.Meta.Symbol);
-            derivation.Log.AssertExists(this, Currencies.Meta.Name);
 
             this.DisplayName = string.Format("{0} ({1})", this.Name, this.IsoCode);
         }
