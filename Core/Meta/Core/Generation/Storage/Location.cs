@@ -22,43 +22,65 @@ namespace Allors.Development.Repository.Storage
 {
     using System;
     using System.IO;
+    using System.Threading;
 
     public class Location
     {
-        private readonly DirectoryInfo directory;
+        private const int RetryCount = 10;
+
+        private readonly DirectoryInfo directoryInfo;
 
         public Location(DirectoryInfo directoryInfo)
         {
-            directory = directoryInfo;
+            this.directoryInfo = directoryInfo;
         }
 
         public DirectoryInfo DirectoryInfo
         {
-            get { return directory; }
+            get { return this.directoryInfo; }
         }
 
         public void Save(string fileName, string fileContents)
         {
-            FileInfo fileInfo = new FileInfo(directory.FullName + Path.DirectorySeparatorChar + fileName.Replace('\\', Path.DirectorySeparatorChar));
-            if (!fileInfo.Directory.Exists)
+            if (!this.DirectoryInfo.Exists)
             {
-                fileInfo.Directory.Create();
+                this.DirectoryInfo.Create();
             }
 
+            var fileInfo = new FileInfo(this.DirectoryInfo.FullName + Path.DirectorySeparatorChar + fileName.Replace('\\', Path.DirectorySeparatorChar));
+            
             if (fileInfo.Exists)
             {
-                string existingFileContents = File.ReadAllText(fileInfo.FullName);
+                var existingFileContents = File.ReadAllText(fileInfo.FullName);
                 if (!fileContents.Equals(existingFileContents))
                 {
-                    File.WriteAllText(fileInfo.FullName, fileContents);
-                    fileInfo.CreationTime = DateTime.Now;
+                    Save(fileInfo, fileContents);
                 }
             }
             else
             {
-                File.WriteAllText(fileInfo.FullName, fileContents);
-                fileInfo.CreationTime = DateTime.Now;
+                Save(fileInfo, fileContents);
             }
+        }
+
+        private static void Save(FileInfo fileInfo, string fileContents)
+        {
+            for (var i = 0; i < RetryCount; i++)
+            {
+                try
+                {
+                    File.WriteAllText(fileInfo.FullName, fileContents);
+                    fileInfo.CreationTime = DateTime.Now;
+                    return;
+                }
+                catch
+                {
+                    Thread.Sleep(100 * i);
+                    fileInfo.Refresh();
+                }
+            }
+
+            throw new Exception("Could not save " + fileInfo.FullName);
         }
     }
 }
