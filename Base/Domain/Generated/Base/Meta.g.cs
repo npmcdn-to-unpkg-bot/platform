@@ -686,5 +686,4 @@ namespace Allors.Meta
 		public static readonly MethodType OrganisationJustDoIt = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("73f68023-c051-4caa-b2ef-8da67e229fee")));
 
 	}
-
 }

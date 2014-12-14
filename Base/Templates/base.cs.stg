@@ -1,8 +1,8 @@
 delimiters "$", "$"
 
 TemplateId() ::= <<17ED40F8-BDF8-4A7C-9AE9-1C4D2AD6BA2B>>
-TemplateName() ::= <<C# Base Domain>>
-TemplateVersion() ::= <<1.0.72>>
+TemplateName() ::= <<C# Base>>
+TemplateVersion() ::= <<1.0.73>>
 TemplateAllors() ::= <<1.0>>
 TemplateConfiguration(meta) ::= <<
 $!
@@ -69,7 +69,6 @@ namespace Allors.Meta
 		$meta.MethodTypes:{methodType|public static readonly MethodType $methodType.FullName$ = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("$methodType.IdAsString$")));
 }$
 	}
-
 }
 >>
 
@@ -85,8 +84,8 @@ namespace Allors.Domain
 {
 	public partial interface $interface.name$ : $if(interface.existDirectSupertypes)$ $interface.directSupertypes:{directSupertype|$directSupertype.SingularName$,}$ $endif$Allors.IObjectBase
 	{
-$interface.exclusiveRoleTypes:{roleType|$interfaceRoleType(relationType=roleType.RelationType,associationType=roleType.AssociationType,roleType=roleType)$}$
-$interface.exclusiveAssociationTypes:{associationType|$interfaceAssociationType(relationType=associationType.RelationType,associationType=associationType,roleType=associationType.RoleType)$}$
+$interface.exclusiveRoleTypes:{roleType|$interfaceExclusiveRoleType_Interface()$}$
+$interface.exclusiveAssociationTypes:{associationType|$interfaceExclusiveAssociationType_Interface()$}$
 	}
 	
 	public class $interface.name$Meta
@@ -95,17 +94,17 @@ $interface.exclusiveAssociationTypes:{associationType|$interfaceAssociationType(
 
 		public global::Allors.Meta.Interface interface = global::Allors.Meta.Interfaces.$interface.Name$;
 
-$interface.RoleTypes:{roleType|$objectTypeMetaRoleType(roleType=roleType)$
+$interface.RoleTypes:{roleType|$objectTypeRoleType_Meta()$
 }$
-$interface.AssociationTypes:{associationType|$objectTypeMetaAssociationType(associationType=associationType)$
+$interface.AssociationTypes:{associationType|$objectTypeAssociationType_Meta()$
 }$
-$interface.MethodTypes:{methodType|$objectTypeMetaMethodType(methodType=methodType)$
+$interface.MethodTypes:{methodType|$objectTypeMethodType_Meta()$
 }$
 	}
 
 	public partial interface $interface.name$Builder : $interface.DirectSupertypes:{directSupertype|$nullableName(directSupertype)$Builder ,}$ global::System.IDisposable
 	{	
-$interface.exclusiveRoleTypes:{roleType|$interfaceWithRoleType(roleType=roleType)$}$
+$interface.exclusiveRoleTypes:{roleType|$interfaceExclusiveRoleTypes_Builder()$}$
 	}
 
 $objectTypePlural()$
@@ -113,7 +112,7 @@ $objectTypePlural()$
 }
 >>
 
-interfaceAssociationType(relationType,associationType,roleType) ::= <<
+interfaceExclusiveAssociationType_Interface() ::= <<
 $\n$
 $if(associationType.IsMany)$
 		global::Allors.Extent<$nullableName(associationType.ObjectType)$> $associationType.PluralPropertyName$
@@ -138,7 +137,7 @@ $else$
 $endif$
 >>
 
-interfaceRoleType(relationType,associationType,roleType) ::= <<
+interfaceExclusiveRoleType_Interface() ::= <<
 $\n$
 $if(roleType.ObjectType.IsUnit)$
 		$nullableName(roleType.ObjectType)$ $roleType.SingularPropertyName$ 
@@ -185,7 +184,7 @@ $endif$
 $endif$
 >>
 
-interfaceWithRoleType(roleType) ::= <<
+interfaceExclusiveRoleTypes_Builder() ::= <<
 $if(roleType.ObjectType.IsUnit)$
 $if(roleType.ObjectType.IsString)$
 		
@@ -239,12 +238,12 @@ namespace Allors.Domain
 		internal override void OnBuild(global::Allors.IObjectBuilder objectBuilder)
 		{
 			var builder = ($class.name$Builder)objectBuilder;
-$class.UnitRoleTypes:{roleType|$classInitUnitRoleType(roleType=roleType)$}$
-$class.CompositeRoleTypes:{roleType|$classInitCompositeRoleType(roleType=roleType)$}$
+$class.UnitRoleTypes:{roleType|$classUnitRoleTypes_Class_OnBuild()$}$
+$class.CompositeRoleTypes:{roleType|$classCompsiteRoleTypes_Class_OnBuild()$}$
 		}
 
-$class.RoleTypes:{roleType|$classRoleType(relationType=roleType.RelationType,associationType=roleType.AssociationType,roleType=roleType)$}$
-$class.AssociationTypes:{associationType|$classAssociationType(relationType=associationType.RelationType,associationType=associationType,roleType=associationType.RoleType)$}$
+$class.RoleTypes:{roleType|$classRoleType_Class()$}$
+$class.AssociationTypes:{associationType|$classAssociationType_Class()$}$
 	}
 
 	public class $class.name$Meta
@@ -253,11 +252,11 @@ $class.AssociationTypes:{associationType|$classAssociationType(relationType=asso
 
 		public global::Allors.Meta.Class class = global::Allors.Meta.Classes.$class.Name$;
 
-$class.RoleTypes:{roleType|$objectTypeMetaRoleType(roleType=roleType)$
+$class.RoleTypes:{roleType|$objectTypeRoleType_Meta()$
 }$
-$class.AssociationTypes:{associationType|$objectTypeMetaAssociationType(associationType=associationType)$
+$class.AssociationTypes:{associationType|$objectTypeAssociationType_Meta()$
 }$
-$class.MethodTypes:{methodType|$objectTypeMetaMethodType(methodType=methodType)$
+$class.MethodTypes:{methodType|$objectTypeMethodType_Meta()$
 }$
 	}
 
@@ -269,9 +268,9 @@ $class.MethodTypes:{methodType|$objectTypeMetaMethodType(methodType=methodType)$
 
 $class.RoleTypes:{roleType|
 	$if(roleType.objectType.IsUnit)$
-		$classWithUnitRoleType(roleType=roleType)$
+		$classUnitRoleType_Builder()$
 	$else$
-		$classWithCompositeRoleType(roleType=roleType)$
+		$classCompositeRoleType_Builder()$
 	$endif$
 }$
 	}
@@ -281,10 +280,36 @@ $objectTypePlural()$
 }
 >>
 
-classAssociationType(relationType,associationType,roleType) ::= <<
+classUnitRoleTypes_Class_OnBuild() ::= <<
+$if((roleType.ObjectType.IsString || roleType.ObjectType.IsBinary))$
+			
+			this.$roleType.PropertyName$ = builder.$roleType.PropertyName$;
+$else$			
+			
+			if(builder.$roleType.PropertyName$.HasValue)
+			{
+				this.$roleType.PropertyName$ = builder.$roleType.PropertyName$.Value;
+			}			
+$endif$		
+>>
+
+classCompsiteRoleTypes_Class_OnBuild() ::= <<
+$if(roleType.IsOne)$
+
+			this.$roleType.PropertyName$ = builder.$roleType.PropertyName$;
+		
+$else$
+			if(builder.$roleType.PropertyName$!=null)
+			{
+				this.$roleType.PropertyName$ = builder.$roleType.PropertyName$.ToArray();
+			}
+$endif$
+>>
+
+classAssociationType_Class() ::= <<
 $\n$
 $if(associationType.IsMany)$
-		virtual public global::Allors.Extent<$nullableName(associationType.ObjectType)$> $associationType.PluralName$Where$roleType.SingularName$
+		virtual public global::Allors.Extent<$nullableName(associationType.ObjectType)$> $associationType.PluralName$Where$associationType.roleType.SingularName$
 		{ 
 			get
 			{
@@ -292,7 +317,7 @@ $if(associationType.IsMany)$
 			}
 		}
 
-		virtual public bool Exist$associationType.PluralName$Where$roleType.SingularName$
+		virtual public bool Exist$associationType.PluralName$Where$associationType.roleType.SingularName$
 		{
 			get
 			{
@@ -300,7 +325,7 @@ $if(associationType.IsMany)$
 			}
 		}
 $else$
-		virtual public $nullableName(associationType.ObjectType)$ $associationType.SingularName$Where$roleType.SingularName$
+		virtual public $nullableName(associationType.ObjectType)$ $associationType.SingularName$Where$associationType.roleType.SingularName$
 		{ 
 			get
 			{
@@ -308,7 +333,7 @@ $else$
 			}
 		} 
 
-		virtual public bool Exist$associationType.SingularName$Where$roleType.SingularName$
+		virtual public bool Exist$associationType.SingularName$Where$associationType.roleType.SingularName$
 		{
 			get
 			{
@@ -318,7 +343,7 @@ $else$
 $endif$
 >>
 
-classRoleType(relationType,associationType,roleType) ::= <<
+classRoleType_Class() ::= <<
 $\n$
 $if(roleType.ObjectType.IsUnit)$
 		
@@ -410,33 +435,7 @@ $endif$
 $endif$
 >>
 
-classInitUnitRoleType(roleType) ::= <<
-$if((roleType.ObjectType.IsString || roleType.ObjectType.IsBinary))$
-			
-			this.$roleType.PropertyName$ = builder.$roleType.PropertyName$;
-$else$			
-			
-			if(builder.$roleType.PropertyName$.HasValue)
-			{
-				this.$roleType.PropertyName$ = builder.$roleType.PropertyName$.Value;
-			}			
-$endif$		
->>
-
-classInitCompositeRoleType(roleType) ::= <<
-$if(roleType.IsOne)$
-
-			this.$roleType.PropertyName$ = builder.$roleType.PropertyName$;
-		
-$else$
-			if(builder.$roleType.PropertyName$!=null)
-			{
-				this.$roleType.PropertyName$ = builder.$roleType.PropertyName$.ToArray();
-			}
-$endif$
->>
-
-classWithUnitRoleType(roleType) ::= <<
+classUnitRoleType_Builder() ::= <<
 $if(roleType.ObjectType.IsString)$
 		public $nullableName(roleType.ObjectType)$ $roleType.PropertyName$ {get; set;}
 
@@ -459,7 +458,7 @@ $endif$
 
 >>
 
-classWithCompositeRoleType(roleType) ::= <<
+classCompositeRoleType_Builder() ::= <<
 $if(roleType.IsOne)$
 		public $nullableName(roleType.ObjectType)$ $roleType.PropertyName$ {get; set;}
 
@@ -489,7 +488,7 @@ $endif$
 >>
 
 
-objectTypeMetaRoleType(roleType) ::= <<
+objectTypeRoleType_Meta() ::= <<
 		public global::Allors.Meta.RoleType $roleType.SingularPropertyName$ 
 		{
 			get
@@ -499,7 +498,7 @@ objectTypeMetaRoleType(roleType) ::= <<
 		} 
 >>
 
-objectTypeMetaAssociationType(associationType) ::= <<
+objectTypeAssociationType_Meta() ::= <<
 		public global::Allors.Meta.AssociationType $associationType.PropertyName$ 
 		{
 			get
@@ -509,7 +508,7 @@ objectTypeMetaAssociationType(associationType) ::= <<
 		} 
 >>
 
-objectTypeMetaMethodType(methodType) ::= <<
+objectTypeMethodType_Meta() ::= <<
 		public global::Allors.Meta.MethodType $methodType.Name$ 
 		{
 			get
