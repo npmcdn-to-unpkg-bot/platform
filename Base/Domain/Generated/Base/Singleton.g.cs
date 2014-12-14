@@ -228,32 +228,6 @@ namespace Allors.Domain
 		}
 
 
-		virtual public StringTemplate PersonTemplate
-		{ 
-			get
-			{
-				return (StringTemplate) Strategy.GetCompositeRole(Meta.PersonTemplate);
-			}
-			set
-			{
-				Strategy.SetCompositeRole(Meta.PersonTemplate ,value);
-			}
-		}
-
-		virtual public bool ExistPersonTemplate
-		{
-			get
-			{
-				return Strategy.ExistCompositeRole(Meta.PersonTemplate);
-			}
-		}
-
-		virtual public void RemovePersonTemplate()
-		{
-			Strategy.RemoveCompositeRole(Meta.PersonTemplate);
-		}
-
-
 
 		virtual public global::System.String DisplayName 
 		{
@@ -349,6 +323,32 @@ namespace Allors.Domain
 		virtual public void RemoveSecurityTokens()
 		{
 			Strategy.RemoveCompositeRoles(Meta.SecurityToken);
+		}
+
+
+		virtual public StringTemplate PersonTemplate
+		{ 
+			get
+			{
+				return (StringTemplate) Strategy.GetCompositeRole(Meta.PersonTemplate);
+			}
+			set
+			{
+				Strategy.SetCompositeRole(Meta.PersonTemplate ,value);
+			}
+		}
+
+		virtual public bool ExistPersonTemplate
+		{
+			get
+			{
+				return Strategy.ExistCompositeRole(Meta.PersonTemplate);
+			}
+		}
+
+		virtual public void RemovePersonTemplate()
+		{
+			Strategy.RemoveCompositeRole(Meta.PersonTemplate);
 		}
 
 	}

@@ -102,12 +102,12 @@ $interface.MethodTypes:{methodType|$objectTypeMethodType_Meta()$
 }$
 	}
 
-	public partial interface $interface.name$Builder : $interface.DirectSupertypes:{directSupertype|$nullableName(directSupertype)$Builder ,}$ global::System.IDisposable
+	public partial interface $interface.name$Builder : $interface.DirectSupertypes:{directSupertype|$directSupertype.Name$Builder ,}$ global::System.IDisposable
 	{	
 $interface.exclusiveRoleTypes:{roleType|$interfaceExclusiveRoleTypes_Builder()$}$
 	}
 
-$objectTypePlural()$
+$objectType_Plural()$
 
 }
 >>
@@ -115,7 +115,7 @@ $objectTypePlural()$
 interfaceExclusiveAssociationType_Interface() ::= <<
 $\n$
 $if(associationType.IsMany)$
-		global::Allors.Extent<$nullableName(associationType.ObjectType)$> $associationType.PluralPropertyName$
+		global::Allors.Extent<$associationType.ObjectType.Name$> $associationType.PluralPropertyName$
 		{ 
 			get;
 		}
@@ -125,7 +125,7 @@ $if(associationType.IsMany)$
 			get;
 		}
 $else$
-		$nullableName(associationType.ObjectType)$ $associationType.SingularPropertyName$
+		$associationType.ObjectType.Name$ $associationType.SingularPropertyName$
 		{
 			get;
 		}
@@ -140,7 +140,7 @@ $endif$
 interfaceExclusiveRoleType_Interface() ::= <<
 $\n$
 $if(roleType.ObjectType.IsUnit)$
-		$nullableName(roleType.ObjectType)$ $roleType.SingularPropertyName$ 
+		$roleType_ObjectType(roleType)$ $roleType.SingularPropertyName$ 
 		{
 			get;
 			set;
@@ -151,15 +151,15 @@ $if(roleType.ObjectType.IsUnit)$
 		void Remove$roleType.SingularPropertyName$();
 $else$
 $if(roleType.IsMany)$
-		global::Allors.Extent<$nullableName(roleType.ObjectType)$> $roleType.PluralPropertyName$
+		global::Allors.Extent<$roleType_ObjectType(roleType)$> $roleType.PluralPropertyName$
 		{ 
 			get;
 			set;
 		}
 
-		void Add$roleType.SingularPropertyName$ ($nullableName(roleType.ObjectType)$ value);
+		void Add$roleType.SingularPropertyName$ ($roleType_ObjectType(roleType)$ value);
 
-		void Remove$roleType.SingularPropertyName$ ($nullableName(roleType.ObjectType)$ value);
+		void Remove$roleType.SingularPropertyName$ ($roleType_ObjectType(roleType)$ value);
 
 		bool Exist$roleType.PluralPropertyName$
 		{
@@ -168,7 +168,7 @@ $if(roleType.IsMany)$
 
 		void Remove$roleType.PluralPropertyName$();
 $else$
-		$nullableName(roleType.ObjectType)$ $roleType.SingularPropertyName$
+		$roleType_ObjectType(roleType)$ $roleType.SingularPropertyName$
 		{ 
 			get;
 			set;
@@ -188,31 +188,30 @@ interfaceExclusiveRoleTypes_Builder() ::= <<
 $if(roleType.ObjectType.IsUnit)$
 $if(roleType.ObjectType.IsString)$
 		
-		$nullableName(roleType.ObjectType)$ $roleType.PropertyName$ {get;}
+		$roleType_ObjectType(roleType)$ $roleType.PropertyName$ {get;}
 
 $else$
 $if(roleType.ObjectType.IsBinary)$
 		
-		$nullableName(roleType.ObjectType)$ $roleType.PropertyName$ {get;}
+		$roleType_ObjectType(roleType)$ $roleType.PropertyName$ {get;}
 
 $else$
 		
-		$nullableName(roleType.ObjectType)$ $roleType.PropertyName$ {get;}
+		$roleType_ObjectType(roleType)$ $roleType.PropertyName$ {get;}
 
 $endif$
 $endif$
 $else$
 $if(roleType.IsOne)$
-		$nullableName(roleType.ObjectType)$ $roleType.PropertyName$ {get;}
+		$roleType_ObjectType(roleType)$ $roleType.PropertyName$ {get;}
 
 $else$
 		
-		global::System.Collections.Generic.List<$nullableName(roleType.ObjectType)$> $roleType.PropertyName$ {get;}		
+		global::System.Collections.Generic.List<$roleType_ObjectType(roleType)$> $roleType.PropertyName$ {get;}		
 
 $endif$
 $endif$		
 >>
-
 
 
 castClass(meta,objectType) ::= <<
@@ -242,7 +241,7 @@ $class.UnitRoleTypes:{roleType|$classUnitRoleTypes_Class_OnBuild()$}$
 $class.CompositeRoleTypes:{roleType|$classCompsiteRoleTypes_Class_OnBuild()$}$
 		}
 
-$class.RoleTypes:{roleType|$classRoleType_Class()$}$
+$class.ConcreteRoleTypes:{concreteRoleType|$classConcreteRoleType_Class()$}$
 $class.AssociationTypes:{associationType|$classAssociationType_Class()$}$
 	}
 
@@ -260,7 +259,7 @@ $class.MethodTypes:{methodType|$objectTypeMethodType_Meta()$
 }$
 	}
 
-	public partial class $class.name$Builder : Allors.ObjectBuilder<$class.name$> $class.DirectSupertypes:{directSupertype|, $nullableName(directSupertype)$Builder}$, global::System.IDisposable
+	public partial class $class.name$Builder : Allors.ObjectBuilder<$class.name$> $class.DirectSupertypes:{directSupertype|, $directSupertype.Name$Builder}$, global::System.IDisposable
 	{		
 		public $class.name$Builder(Allors.ISession session) : base(session)
 	    {
@@ -275,7 +274,7 @@ $class.RoleTypes:{roleType|
 }$
 	}
 
-$objectTypePlural()$
+$objectType_Plural()$
 
 }
 >>
@@ -309,7 +308,7 @@ $endif$
 classAssociationType_Class() ::= <<
 $\n$
 $if(associationType.IsMany)$
-		virtual public global::Allors.Extent<$nullableName(associationType.ObjectType)$> $associationType.PluralName$Where$associationType.roleType.SingularName$
+		virtual public global::Allors.Extent<$associationType.ObjectType.Name$> $associationType.PluralName$Where$associationType.roleType.SingularName$
 		{ 
 			get
 			{
@@ -325,11 +324,11 @@ $if(associationType.IsMany)$
 			}
 		}
 $else$
-		virtual public $nullableName(associationType.ObjectType)$ $associationType.SingularName$Where$associationType.roleType.SingularName$
+		virtual public $associationType.ObjectType.Name$ $associationType.SingularName$Where$associationType.roleType.SingularName$
 		{ 
 			get
 			{
-				return ($nullableName(associationType.ObjectType)$) Strategy.GetCompositeAssociation(Meta.$associationType.PropertyName$);
+				return ($associationType.ObjectType.Name$) Strategy.GetCompositeAssociation(Meta.$associationType.PropertyName$);
 			}
 		} 
 
@@ -343,93 +342,93 @@ $else$
 $endif$
 >>
 
-classRoleType_Class() ::= <<
+classConcreteRoleType_Class() ::= <<
 $\n$
-$if(roleType.ObjectType.IsUnit)$
+$if(concreteRoleType.RoleType.ObjectType.IsUnit)$
 		
-		virtual public $nullableName(roleType.ObjectType)$ $roleType.SingularPropertyName$ 
+		virtual public $concreteRoleType_ObjectType(concreteRoleType)$ $concreteRoleType.RoleType.SingularPropertyName$ 
 		{
 			get
 			{
-				return ($nullableName(roleType.ObjectType)$) Strategy.GetUnitRole(Meta.$roleType.SingularPropertyName$);
+				return ($concreteRoleType_ObjectType(concreteRoleType)$) Strategy.GetUnitRole(Meta.$concreteRoleType.RoleType.SingularPropertyName$);
 			}
 			set
 			{
-				Strategy.SetUnitRole(Meta.$roleType.SingularPropertyName$, value);
+				Strategy.SetUnitRole(Meta.$concreteRoleType.RoleType.SingularPropertyName$, value);
 			}
 		}
 
-		virtual public bool Exist$roleType.SingularPropertyName${
+		virtual public bool Exist$concreteRoleType.RoleType.SingularPropertyName${
 			get
 			{
-				return Strategy.ExistUnitRole(Meta.$roleType.SingularPropertyName$);
+				return Strategy.ExistUnitRole(Meta.$concreteRoleType.RoleType.SingularPropertyName$);
 			}
 		}
 
-		virtual public void Remove$roleType.SingularPropertyName$()
+		virtual public void Remove$concreteRoleType.RoleType.SingularPropertyName$()
 		{
-			Strategy.RemoveUnitRole(Meta.$roleType.SingularPropertyName$);
+			Strategy.RemoveUnitRole(Meta.$concreteRoleType.RoleType.SingularPropertyName$);
 		}
 $else$
-$if(roleType.IsMany)$
-		virtual public global::Allors.Extent<$nullableName(roleType.ObjectType)$> $roleType.PluralPropertyName$
+$if(concreteRoleType.RoleType.IsMany)$
+		virtual public global::Allors.Extent<$concreteRoleType_ObjectType(concreteRoleType)$> $concreteRoleType.RoleType.PluralPropertyName$
 		{ 
 			get
 			{
-				return Strategy.GetCompositeRoles(Meta.$roleType.SingularPropertyName$);
+				return Strategy.GetCompositeRoles(Meta.$concreteRoleType.RoleType.SingularPropertyName$);
 			}
 			set
 			{
-				Strategy.SetCompositeRoles(Meta.$roleType.SingularPropertyName$, value);
+				Strategy.SetCompositeRoles(Meta.$concreteRoleType.RoleType.SingularPropertyName$, value);
 			}
 		}
 
-		virtual public void Add$roleType.SingularPropertyName$ ($nullableName(roleType.ObjectType)$ value)
+		virtual public void Add$concreteRoleType.RoleType.SingularPropertyName$ ($concreteRoleType_ObjectType(concreteRoleType)$ value)
 		{
-			Strategy.AddCompositeRole(Meta.$roleType.SingularPropertyName$, value);
+			Strategy.AddCompositeRole(Meta.$concreteRoleType.RoleType.SingularPropertyName$, value);
 		}
 
-		virtual public void Remove$roleType.SingularPropertyName$ ($nullableName(roleType.ObjectType)$ value)
+		virtual public void Remove$concreteRoleType.RoleType.SingularPropertyName$ ($concreteRoleType_ObjectType(concreteRoleType)$ value)
 		{
-			Strategy.RemoveCompositeRole(Meta.$roleType.SingularPropertyName$,value);
+			Strategy.RemoveCompositeRole(Meta.$concreteRoleType.RoleType.SingularPropertyName$,value);
 		}
 
-		virtual public bool Exist$roleType.PluralPropertyName$
+		virtual public bool Exist$concreteRoleType.RoleType.PluralPropertyName$
 		{
 			get
 			{
-				return Strategy.ExistCompositeRoles(Meta.$roleType.SingularPropertyName$);
+				return Strategy.ExistCompositeRoles(Meta.$concreteRoleType.RoleType.SingularPropertyName$);
 			}
 		}
 
-		virtual public void Remove$roleType.PluralPropertyName$()
+		virtual public void Remove$concreteRoleType.RoleType.PluralPropertyName$()
 		{
-			Strategy.RemoveCompositeRoles(Meta.$roleType.SingularPropertyName$);
+			Strategy.RemoveCompositeRoles(Meta.$concreteRoleType.RoleType.SingularPropertyName$);
 		}
 $else$
-		virtual public $nullableName(roleType.ObjectType)$ $roleType.SingularPropertyName$
+		virtual public $concreteRoleType_ObjectType(concreteRoleType)$ $concreteRoleType.RoleType.SingularPropertyName$
 		{ 
 			get
 			{
-				return ($nullableName(roleType.ObjectType)$) Strategy.GetCompositeRole(Meta.$roleType.SingularPropertyName$);
+				return ($concreteRoleType_ObjectType(concreteRoleType)$) Strategy.GetCompositeRole(Meta.$concreteRoleType.RoleType.SingularPropertyName$);
 			}
 			set
 			{
-				Strategy.SetCompositeRole(Meta.$roleType.SingularPropertyName$ ,value);
+				Strategy.SetCompositeRole(Meta.$concreteRoleType.RoleType.SingularPropertyName$ ,value);
 			}
 		}
 
-		virtual public bool Exist$roleType.SingularPropertyName$
+		virtual public bool Exist$concreteRoleType.RoleType.SingularPropertyName$
 		{
 			get
 			{
-				return Strategy.ExistCompositeRole(Meta.$roleType.SingularPropertyName$);
+				return Strategy.ExistCompositeRole(Meta.$concreteRoleType.RoleType.SingularPropertyName$);
 			}
 		}
 
-		virtual public void Remove$roleType.SingularPropertyName$()
+		virtual public void Remove$concreteRoleType.RoleType.SingularPropertyName$()
 		{
-			Strategy.RemoveCompositeRole(Meta.$roleType.SingularPropertyName$);
+			Strategy.RemoveCompositeRole(Meta.$concreteRoleType.RoleType.SingularPropertyName$);
 		}
 $endif$
 $endif$
@@ -437,19 +436,19 @@ $endif$
 
 classUnitRoleType_Builder() ::= <<
 $if(roleType.ObjectType.IsString)$
-		public $nullableName(roleType.ObjectType)$ $roleType.PropertyName$ {get; set;}
+		public $objectType_Nullable(roleType.ObjectType)$ $roleType.PropertyName$ {get; set;}
 
 $else$
 $if(roleType.ObjectType.IsBinary)$
-		public $nullableName(roleType.ObjectType)$ $roleType.PropertyName$ {get; set;}
+		public $objectType_Nullable(roleType.ObjectType)$ $roleType.PropertyName$ {get; set;}
 
 $else$
-		public $nullableName(roleType.ObjectType)$ $roleType.PropertyName$ {get; set;}
+		public $objectType_Nullable(roleType.ObjectType)$ $roleType.PropertyName$ {get; set;}
 
 $endif$
 $endif$
 		/// <exclude/>
-		public $roleType.ObjectType.name$Builder With$roleType.SingularPropertyName$($nullableName(roleType.ObjectType)$ value)
+		public $roleType.ObjectType.name$Builder With$roleType.SingularPropertyName$($objectType_Nullable(roleType.ObjectType)$ value)
         {
 		    if(this.$roleType.PropertyName$!=null){throw new global::System.ArgumentException("One multicplicity");}
             this.$roleType.PropertyName$ = value;
@@ -460,10 +459,10 @@ $endif$
 
 classCompositeRoleType_Builder() ::= <<
 $if(roleType.IsOne)$
-		public $nullableName(roleType.ObjectType)$ $roleType.PropertyName$ {get; set;}
+		public $objectType_Nullable(roleType.ObjectType)$ $roleType.PropertyName$ {get; set;}
 
 		/// <exclude/>
-		public $roleType.ObjectType.name$Builder With$roleType.SingularPropertyName$($nullableName(roleType.ObjectType)$ value)
+		public $roleType.ObjectType.name$Builder With$roleType.SingularPropertyName$($objectType_Nullable(roleType.ObjectType)$ value)
         {
             if(this.$roleType.PropertyName$!=null){throw new global::System.ArgumentException("One multicplicity");}
 			this.$roleType.PropertyName$ = value;
@@ -471,14 +470,14 @@ $if(roleType.IsOne)$
         }		
 
 $else$
-		public global::System.Collections.Generic.List<$nullableName(roleType.ObjectType)$> $roleType.PropertyName$ {get; set;}	
+		public global::System.Collections.Generic.List<$objectType_Nullable(roleType.ObjectType)$> $roleType.PropertyName$ {get; set;}	
 
 		/// <exclude/>
-		public $roleType.ObjectType.name$Builder With$roleType.SingularPropertyName$($nullableName(roleType.ObjectType)$ value)
+		public $roleType.ObjectType.name$Builder With$roleType.SingularPropertyName$($objectType_Nullable(roleType.ObjectType)$ value)
         {
 			if(this.$roleType.PropertyName$ == null)
 			{
-				this.$roleType.PropertyName$ = new global::System.Collections.Generic.List<$nullableName(roleType.ObjectType)$>(); 
+				this.$roleType.PropertyName$ = new global::System.Collections.Generic.List<$objectType_Nullable(roleType.ObjectType)$>(); 
 			}
             this.$roleType.PropertyName$.Add(value);
             return this;
@@ -518,7 +517,7 @@ objectTypeMethodType_Meta() ::= <<
 		} 
 >>
 
-objectTypePlural() ::= <<
+objectType_Plural() ::= <<
 	public partial class $objectType.pluralName$ : global::Allors.ObjectsBase<$objectType.singularName$>
 	{
 		public static readonly $objectType.name$Meta Meta = $objectType.name$Meta.Instance;
@@ -540,7 +539,59 @@ objectTypePlural() ::= <<
 
 boolean(value) ::= "$if(value)$true$else$false$endif$"
 
-nullableName(objectType) ::= <%
+roleType_ObjectType(roleType) ::= <%
+$if(roleType.ObjectType.IsUnit)$
+$if(roleType.ObjectType.IsBinary)$
+	global::System.Byte[]
+$elseif(roleType.ObjectType.IsBoolean)$
+	global::System.Boolean?
+$elseif(roleType.ObjectType.IsDecimal)$
+	global::System.Decimal?
+$elseif(roleType.ObjectType.IsDateTime)$
+	global::System.DateTime?
+$elseif(roleType.ObjectType.IsFloat)$
+	global::System.Double?
+$elseif(roleType.ObjectType.IsInteger)$
+	global::System.Int32?
+$elseif(roleType.ObjectType.IsString)$
+	global::System.String
+$elseif(roleType.ObjectType.IsUnique)$
+	global::System.Guid?
+$else$
+not found ...
+$endif$
+$else$
+	$roleType.ObjectType.SingularName$
+$endif$
+%>
+
+concreteRoleType_ObjectType(roleType) ::= <%
+$if(concreteRoleType.RoleType.ObjectType.IsUnit)$
+$if(concreteRoleType.RoleType.ObjectType.IsBinary)$
+	global::System.Byte[]
+$elseif(concreteRoleType.RoleType.ObjectType.IsBoolean)$
+	global::System.Boolean?
+$elseif(concreteRoleType.RoleType.ObjectType.IsDecimal)$
+	global::System.Decimal?
+$elseif(concreteRoleType.RoleType.ObjectType.IsDateTime)$
+	global::System.DateTime?
+$elseif(concreteRoleType.RoleType.ObjectType.IsFloat)$
+	global::System.Double?
+$elseif(concreteRoleType.RoleType.ObjectType.IsInteger)$
+	global::System.Int32?
+$elseif(concreteRoleType.RoleType.ObjectType.IsString)$
+	global::System.String
+$elseif(concreteRoleType.RoleType.ObjectType.IsUnique)$
+	global::System.Guid?
+$else$
+not found ...
+$endif$
+$else$
+	$concreteRoleType.RoleType.ObjectType.SingularName$
+$endif$
+%>
+
+objectType_Nullable(objectType) ::= <%
 $if(objectType.IsUnit)$
 $if(objectType.IsBinary)$
 	global::System.Byte[]

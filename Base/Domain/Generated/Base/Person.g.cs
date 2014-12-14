@@ -219,6 +219,312 @@ namespace Allors.Domain
 		}
 
 
+
+		virtual public global::System.Boolean? UserEmailConfirmed 
+		{
+			get
+			{
+				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.UserEmailConfirmed);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.UserEmailConfirmed, value);
+			}
+		}
+
+		virtual public bool ExistUserEmailConfirmed{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.UserEmailConfirmed);
+			}
+		}
+
+		virtual public void RemoveUserEmailConfirmed()
+		{
+			Strategy.RemoveUnitRole(Meta.UserEmailConfirmed);
+		}
+
+
+
+		virtual public global::System.String UserName 
+		{
+			get
+			{
+				return (global::System.String) Strategy.GetUnitRole(Meta.UserName);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.UserName, value);
+			}
+		}
+
+		virtual public bool ExistUserName{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.UserName);
+			}
+		}
+
+		virtual public void RemoveUserName()
+		{
+			Strategy.RemoveUnitRole(Meta.UserName);
+		}
+
+
+
+		virtual public global::System.String UserEmail 
+		{
+			get
+			{
+				return (global::System.String) Strategy.GetUnitRole(Meta.UserEmail);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.UserEmail, value);
+			}
+		}
+
+		virtual public bool ExistUserEmail{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.UserEmail);
+			}
+		}
+
+		virtual public void RemoveUserEmail()
+		{
+			Strategy.RemoveUnitRole(Meta.UserEmail);
+		}
+
+
+
+		virtual public global::System.String UserPasswordHash 
+		{
+			get
+			{
+				return (global::System.String) Strategy.GetUnitRole(Meta.UserPasswordHash);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.UserPasswordHash, value);
+			}
+		}
+
+		virtual public bool ExistUserPasswordHash{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.UserPasswordHash);
+			}
+		}
+
+		virtual public void RemoveUserPasswordHash()
+		{
+			Strategy.RemoveUnitRole(Meta.UserPasswordHash);
+		}
+
+
+		virtual public SecurityToken OwnerSecurityToken
+		{ 
+			get
+			{
+				return (SecurityToken) Strategy.GetCompositeRole(Meta.OwnerSecurityToken);
+			}
+			set
+			{
+				Strategy.SetCompositeRole(Meta.OwnerSecurityToken ,value);
+			}
+		}
+
+		virtual public bool ExistOwnerSecurityToken
+		{
+			get
+			{
+				return Strategy.ExistCompositeRole(Meta.OwnerSecurityToken);
+			}
+		}
+
+		virtual public void RemoveOwnerSecurityToken()
+		{
+			Strategy.RemoveCompositeRole(Meta.OwnerSecurityToken);
+		}
+
+
+
+		virtual public global::System.String DisplayName 
+		{
+			get
+			{
+				return (global::System.String) Strategy.GetUnitRole(Meta.DisplayName);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.DisplayName, value);
+			}
+		}
+
+		virtual public bool ExistDisplayName{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.DisplayName);
+			}
+		}
+
+		virtual public void RemoveDisplayName()
+		{
+			Strategy.RemoveUnitRole(Meta.DisplayName);
+		}
+
+
+		virtual public global::Allors.Extent<Permission> DeniedPermissions
+		{ 
+			get
+			{
+				return Strategy.GetCompositeRoles(Meta.DeniedPermission);
+			}
+			set
+			{
+				Strategy.SetCompositeRoles(Meta.DeniedPermission, value);
+			}
+		}
+
+		virtual public void AddDeniedPermission (Permission value)
+		{
+			Strategy.AddCompositeRole(Meta.DeniedPermission, value);
+		}
+
+		virtual public void RemoveDeniedPermission (Permission value)
+		{
+			Strategy.RemoveCompositeRole(Meta.DeniedPermission,value);
+		}
+
+		virtual public bool ExistDeniedPermissions
+		{
+			get
+			{
+				return Strategy.ExistCompositeRoles(Meta.DeniedPermission);
+			}
+		}
+
+		virtual public void RemoveDeniedPermissions()
+		{
+			Strategy.RemoveCompositeRoles(Meta.DeniedPermission);
+		}
+
+
+		virtual public global::Allors.Extent<SecurityToken> SecurityTokens
+		{ 
+			get
+			{
+				return Strategy.GetCompositeRoles(Meta.SecurityToken);
+			}
+			set
+			{
+				Strategy.SetCompositeRoles(Meta.SecurityToken, value);
+			}
+		}
+
+		virtual public void AddSecurityToken (SecurityToken value)
+		{
+			Strategy.AddCompositeRole(Meta.SecurityToken, value);
+		}
+
+		virtual public void RemoveSecurityToken (SecurityToken value)
+		{
+			Strategy.RemoveCompositeRole(Meta.SecurityToken,value);
+		}
+
+		virtual public bool ExistSecurityTokens
+		{
+			get
+			{
+				return Strategy.ExistCompositeRoles(Meta.SecurityToken);
+			}
+		}
+
+		virtual public void RemoveSecurityTokens()
+		{
+			Strategy.RemoveCompositeRoles(Meta.SecurityToken);
+		}
+
+
+		virtual public Locale Locale
+		{ 
+			get
+			{
+				return (Locale) Strategy.GetCompositeRole(Meta.Locale);
+			}
+			set
+			{
+				Strategy.SetCompositeRole(Meta.Locale ,value);
+			}
+		}
+
+		virtual public bool ExistLocale
+		{
+			get
+			{
+				return Strategy.ExistCompositeRole(Meta.Locale);
+			}
+		}
+
+		virtual public void RemoveLocale()
+		{
+			Strategy.RemoveCompositeRole(Meta.Locale);
+		}
+
+
+
+		virtual public global::System.Guid? UniqueId 
+		{
+			get
+			{
+				return (global::System.Guid?) Strategy.GetUnitRole(Meta.UniqueId);
+			}
+			set
+			{
+				Strategy.SetUnitRole(Meta.UniqueId, value);
+			}
+		}
+
+		virtual public bool ExistUniqueId{
+			get
+			{
+				return Strategy.ExistUnitRole(Meta.UniqueId);
+			}
+		}
+
+		virtual public void RemoveUniqueId()
+		{
+			Strategy.RemoveUnitRole(Meta.UniqueId);
+		}
+
+
+		virtual public SearchData SearchData
+		{ 
+			get
+			{
+				return (SearchData) Strategy.GetCompositeRole(Meta.SearchData);
+			}
+			set
+			{
+				Strategy.SetCompositeRole(Meta.SearchData ,value);
+			}
+		}
+
+		virtual public bool ExistSearchData
+		{
+			get
+			{
+				return Strategy.ExistCompositeRole(Meta.SearchData);
+			}
+		}
+
+		virtual public void RemoveSearchData()
+		{
+			Strategy.RemoveCompositeRole(Meta.SearchData);
+		}
+
+
 		virtual public Address MainAddress
 		{ 
 			get
@@ -590,312 +896,6 @@ namespace Allors.Domain
 		virtual public void RemoveAddresses()
 		{
 			Strategy.RemoveCompositeRoles(Meta.Address);
-		}
-
-
-
-		virtual public global::System.Boolean? UserEmailConfirmed 
-		{
-			get
-			{
-				return (global::System.Boolean?) Strategy.GetUnitRole(Meta.UserEmailConfirmed);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.UserEmailConfirmed, value);
-			}
-		}
-
-		virtual public bool ExistUserEmailConfirmed{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.UserEmailConfirmed);
-			}
-		}
-
-		virtual public void RemoveUserEmailConfirmed()
-		{
-			Strategy.RemoveUnitRole(Meta.UserEmailConfirmed);
-		}
-
-
-
-		virtual public global::System.String UserName 
-		{
-			get
-			{
-				return (global::System.String) Strategy.GetUnitRole(Meta.UserName);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.UserName, value);
-			}
-		}
-
-		virtual public bool ExistUserName{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.UserName);
-			}
-		}
-
-		virtual public void RemoveUserName()
-		{
-			Strategy.RemoveUnitRole(Meta.UserName);
-		}
-
-
-
-		virtual public global::System.String UserEmail 
-		{
-			get
-			{
-				return (global::System.String) Strategy.GetUnitRole(Meta.UserEmail);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.UserEmail, value);
-			}
-		}
-
-		virtual public bool ExistUserEmail{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.UserEmail);
-			}
-		}
-
-		virtual public void RemoveUserEmail()
-		{
-			Strategy.RemoveUnitRole(Meta.UserEmail);
-		}
-
-
-
-		virtual public global::System.String UserPasswordHash 
-		{
-			get
-			{
-				return (global::System.String) Strategy.GetUnitRole(Meta.UserPasswordHash);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.UserPasswordHash, value);
-			}
-		}
-
-		virtual public bool ExistUserPasswordHash{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.UserPasswordHash);
-			}
-		}
-
-		virtual public void RemoveUserPasswordHash()
-		{
-			Strategy.RemoveUnitRole(Meta.UserPasswordHash);
-		}
-
-
-		virtual public SecurityToken OwnerSecurityToken
-		{ 
-			get
-			{
-				return (SecurityToken) Strategy.GetCompositeRole(Meta.OwnerSecurityToken);
-			}
-			set
-			{
-				Strategy.SetCompositeRole(Meta.OwnerSecurityToken ,value);
-			}
-		}
-
-		virtual public bool ExistOwnerSecurityToken
-		{
-			get
-			{
-				return Strategy.ExistCompositeRole(Meta.OwnerSecurityToken);
-			}
-		}
-
-		virtual public void RemoveOwnerSecurityToken()
-		{
-			Strategy.RemoveCompositeRole(Meta.OwnerSecurityToken);
-		}
-
-
-
-		virtual public global::System.String DisplayName 
-		{
-			get
-			{
-				return (global::System.String) Strategy.GetUnitRole(Meta.DisplayName);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.DisplayName, value);
-			}
-		}
-
-		virtual public bool ExistDisplayName{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.DisplayName);
-			}
-		}
-
-		virtual public void RemoveDisplayName()
-		{
-			Strategy.RemoveUnitRole(Meta.DisplayName);
-		}
-
-
-		virtual public global::Allors.Extent<Permission> DeniedPermissions
-		{ 
-			get
-			{
-				return Strategy.GetCompositeRoles(Meta.DeniedPermission);
-			}
-			set
-			{
-				Strategy.SetCompositeRoles(Meta.DeniedPermission, value);
-			}
-		}
-
-		virtual public void AddDeniedPermission (Permission value)
-		{
-			Strategy.AddCompositeRole(Meta.DeniedPermission, value);
-		}
-
-		virtual public void RemoveDeniedPermission (Permission value)
-		{
-			Strategy.RemoveCompositeRole(Meta.DeniedPermission,value);
-		}
-
-		virtual public bool ExistDeniedPermissions
-		{
-			get
-			{
-				return Strategy.ExistCompositeRoles(Meta.DeniedPermission);
-			}
-		}
-
-		virtual public void RemoveDeniedPermissions()
-		{
-			Strategy.RemoveCompositeRoles(Meta.DeniedPermission);
-		}
-
-
-		virtual public global::Allors.Extent<SecurityToken> SecurityTokens
-		{ 
-			get
-			{
-				return Strategy.GetCompositeRoles(Meta.SecurityToken);
-			}
-			set
-			{
-				Strategy.SetCompositeRoles(Meta.SecurityToken, value);
-			}
-		}
-
-		virtual public void AddSecurityToken (SecurityToken value)
-		{
-			Strategy.AddCompositeRole(Meta.SecurityToken, value);
-		}
-
-		virtual public void RemoveSecurityToken (SecurityToken value)
-		{
-			Strategy.RemoveCompositeRole(Meta.SecurityToken,value);
-		}
-
-		virtual public bool ExistSecurityTokens
-		{
-			get
-			{
-				return Strategy.ExistCompositeRoles(Meta.SecurityToken);
-			}
-		}
-
-		virtual public void RemoveSecurityTokens()
-		{
-			Strategy.RemoveCompositeRoles(Meta.SecurityToken);
-		}
-
-
-		virtual public Locale Locale
-		{ 
-			get
-			{
-				return (Locale) Strategy.GetCompositeRole(Meta.Locale);
-			}
-			set
-			{
-				Strategy.SetCompositeRole(Meta.Locale ,value);
-			}
-		}
-
-		virtual public bool ExistLocale
-		{
-			get
-			{
-				return Strategy.ExistCompositeRole(Meta.Locale);
-			}
-		}
-
-		virtual public void RemoveLocale()
-		{
-			Strategy.RemoveCompositeRole(Meta.Locale);
-		}
-
-
-
-		virtual public global::System.Guid? UniqueId 
-		{
-			get
-			{
-				return (global::System.Guid?) Strategy.GetUnitRole(Meta.UniqueId);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.UniqueId, value);
-			}
-		}
-
-		virtual public bool ExistUniqueId{
-			get
-			{
-				return Strategy.ExistUnitRole(Meta.UniqueId);
-			}
-		}
-
-		virtual public void RemoveUniqueId()
-		{
-			Strategy.RemoveUnitRole(Meta.UniqueId);
-		}
-
-
-		virtual public SearchData SearchData
-		{ 
-			get
-			{
-				return (SearchData) Strategy.GetCompositeRole(Meta.SearchData);
-			}
-			set
-			{
-				Strategy.SetCompositeRole(Meta.SearchData ,value);
-			}
-		}
-
-		virtual public bool ExistSearchData
-		{
-			get
-			{
-				return Strategy.ExistCompositeRole(Meta.SearchData);
-			}
-		}
-
-		virtual public void RemoveSearchData()
-		{
-			Strategy.RemoveCompositeRole(Meta.SearchData);
 		}
 
 
