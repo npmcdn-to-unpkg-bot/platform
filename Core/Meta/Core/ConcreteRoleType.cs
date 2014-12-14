@@ -25,7 +25,7 @@ namespace Allors.Meta
     {
         private readonly RoleType roleType;
 
-        private bool? isRequired;
+        private bool? assignedIsRequired;
 
         public ConcreteRoleType(RoleType roleType)
         {
@@ -40,24 +40,24 @@ namespace Allors.Meta
             }
         }
 
-        public bool? IsRequired
+        public bool IsRequired
         {
             get
             {
-                return this.isRequired;
+                return this.AssignedIsRequired.HasValue ? this.AssignedIsRequired.Value : this.roleType.IsRequired;
+            }
+        }
+
+        public bool? AssignedIsRequired
+        {
+            get
+            {
+                return this.assignedIsRequired;
             }
 
             set
             {
-                this.isRequired = value;
-            }
-        }
-
-        public IObjectType ObjectType
-        {
-            get
-            {
-                return roleType.ObjectType;
+                this.assignedIsRequired = value;
             }
         }
     }
