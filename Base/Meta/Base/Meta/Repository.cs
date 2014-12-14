@@ -81,8 +81,6 @@ namespace Allors.Meta
 
             // StringTemplate
             StringTemplateName.RoleType.IsRequired = true;
-
-
         }
     }
 }

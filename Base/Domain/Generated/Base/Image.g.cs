@@ -114,7 +114,7 @@ namespace Allors.Domain
 	{
 		public static readonly ImageMeta Instance = new ImageMeta();
 
-		public global::Allors.Meta.Class class = global::Allors.Meta.Classes.Image;
+		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.Image;
 
 		public global::Allors.Meta.RoleType Original 
 		{
@@ -149,7 +149,7 @@ namespace Allors.Domain
 				public Media Original {get; set;}
 
 				/// <exclude/>
-				public MediaBuilder WithOriginal(Media value)
+				public ImageBuilder WithOriginal(Media value)
 		        {
 		            if(this.Original!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.Original = value;
@@ -160,7 +160,7 @@ namespace Allors.Domain
 				public Media Responsive {get; set;}
 
 				/// <exclude/>
-				public MediaBuilder WithResponsive(Media value)
+				public ImageBuilder WithResponsive(Media value)
 		        {
 		            if(this.Responsive!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.Responsive = value;
@@ -171,7 +171,7 @@ namespace Allors.Domain
 				public global::System.String OriginalFilename {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithOriginalFilename(global::System.String value)
+				public ImageBuilder WithOriginalFilename(global::System.String value)
 		        {
 				    if(this.OriginalFilename!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.OriginalFilename = value;

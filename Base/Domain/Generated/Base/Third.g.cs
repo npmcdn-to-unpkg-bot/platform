@@ -76,7 +76,7 @@ namespace Allors.Domain
 	{
 		public static readonly ThirdMeta Instance = new ThirdMeta();
 
-		public global::Allors.Meta.Class class = global::Allors.Meta.Classes.Third;
+		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.Third;
 
 		public global::Allors.Meta.RoleType IsDerived 
 		{
@@ -105,7 +105,7 @@ namespace Allors.Domain
 				public global::System.Boolean? IsDerived {get; set;}
 
 				/// <exclude/>
-				public AllorsBooleanBuilder WithIsDerived(global::System.Boolean? value)
+				public ThirdBuilder WithIsDerived(global::System.Boolean? value)
 		        {
 				    if(this.IsDerived!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.IsDerived = value;

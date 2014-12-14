@@ -208,11 +208,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Guid? UniqueId 
+		virtual public global::System.Guid UniqueId 
 		{
 			get
 			{
-				return (global::System.Guid?) Strategy.GetUnitRole(Meta.UniqueId);
+				return (global::System.Guid) Strategy.GetUnitRole(Meta.UniqueId);
 			}
 			set
 			{
@@ -256,7 +256,7 @@ namespace Allors.Domain
 	{
 		public static readonly PrintQueueMeta Instance = new PrintQueueMeta();
 
-		public global::Allors.Meta.Class class = global::Allors.Meta.Classes.PrintQueue;
+		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.PrintQueue;
 
 		public global::Allors.Meta.RoleType Printable 
 		{
@@ -320,7 +320,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<Printable> Printables {get; set;}	
 
 				/// <exclude/>
-				public PrintableBuilder WithPrintable(Printable value)
+				public PrintQueueBuilder WithPrintable(Printable value)
 		        {
 					if(this.Printables == null)
 					{
@@ -334,7 +334,7 @@ namespace Allors.Domain
 				public global::System.String Name {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithName(global::System.String value)
+				public PrintQueueBuilder WithName(global::System.String value)
 		        {
 				    if(this.Name!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.Name = value;
@@ -344,7 +344,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<Permission> DeniedPermissions {get; set;}	
 
 				/// <exclude/>
-				public PermissionBuilder WithDeniedPermission(Permission value)
+				public PrintQueueBuilder WithDeniedPermission(Permission value)
 		        {
 					if(this.DeniedPermissions == null)
 					{
@@ -358,7 +358,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<SecurityToken> SecurityTokens {get; set;}	
 
 				/// <exclude/>
-				public SecurityTokenBuilder WithSecurityToken(SecurityToken value)
+				public PrintQueueBuilder WithSecurityToken(SecurityToken value)
 		        {
 					if(this.SecurityTokens == null)
 					{
@@ -372,7 +372,7 @@ namespace Allors.Domain
 				public global::System.String DisplayName {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithDisplayName(global::System.String value)
+				public PrintQueueBuilder WithDisplayName(global::System.String value)
 		        {
 				    if(this.DisplayName!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.DisplayName = value;
@@ -382,7 +382,7 @@ namespace Allors.Domain
 				public global::System.Guid? UniqueId {get; set;}
 
 				/// <exclude/>
-				public AllorsUniqueBuilder WithUniqueId(global::System.Guid? value)
+				public PrintQueueBuilder WithUniqueId(global::System.Guid? value)
 		        {
 				    if(this.UniqueId!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.UniqueId = value;

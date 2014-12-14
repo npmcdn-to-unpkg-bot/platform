@@ -183,7 +183,7 @@ namespace Allors.Domain
 	{
 		public static readonly ToMeta Instance = new ToMeta();
 
-		public global::Allors.Meta.Class class = global::Allors.Meta.Classes.To;
+		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.To;
 
 		public global::Allors.Meta.RoleType Name 
 		{
@@ -233,7 +233,7 @@ namespace Allors.Domain
 				public global::System.String Name {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithName(global::System.String value)
+				public ToBuilder WithName(global::System.String value)
 		        {
 				    if(this.Name!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.Name = value;
@@ -243,7 +243,7 @@ namespace Allors.Domain
 				public global::System.String DisplayName {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithDisplayName(global::System.String value)
+				public ToBuilder WithDisplayName(global::System.String value)
 		        {
 				    if(this.DisplayName!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.DisplayName = value;
@@ -253,7 +253,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<Permission> DeniedPermissions {get; set;}	
 
 				/// <exclude/>
-				public PermissionBuilder WithDeniedPermission(Permission value)
+				public ToBuilder WithDeniedPermission(Permission value)
 		        {
 					if(this.DeniedPermissions == null)
 					{
@@ -267,7 +267,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<SecurityToken> SecurityTokens {get; set;}	
 
 				/// <exclude/>
-				public SecurityTokenBuilder WithSecurityToken(SecurityToken value)
+				public ToBuilder WithSecurityToken(SecurityToken value)
 		        {
 					if(this.SecurityTokens == null)
 					{

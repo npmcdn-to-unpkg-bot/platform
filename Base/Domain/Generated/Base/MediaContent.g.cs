@@ -101,7 +101,7 @@ namespace Allors.Domain
 	{
 		public static readonly MediaContentMeta Instance = new MediaContentMeta();
 
-		public global::Allors.Meta.Class class = global::Allors.Meta.Classes.MediaContent;
+		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.MediaContent;
 
 		public global::Allors.Meta.RoleType Value 
 		{
@@ -137,7 +137,7 @@ namespace Allors.Domain
 				public global::System.Byte[] Value {get; set;}
 
 				/// <exclude/>
-				public AllorsBinaryBuilder WithValue(global::System.Byte[] value)
+				public MediaContentBuilder WithValue(global::System.Byte[] value)
 		        {
 				    if(this.Value!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.Value = value;
@@ -147,7 +147,7 @@ namespace Allors.Domain
 				public global::System.String Hash {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithHash(global::System.String value)
+				public MediaContentBuilder WithHash(global::System.String value)
 		        {
 				    if(this.Hash!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.Hash = value;

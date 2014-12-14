@@ -283,7 +283,7 @@ namespace Allors.Domain
 	{
 		public static readonly LanguageMeta Instance = new LanguageMeta();
 
-		public global::Allors.Meta.Class class = global::Allors.Meta.Classes.Language;
+		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.Language;
 
 		public global::Allors.Meta.RoleType Name 
 		{
@@ -354,7 +354,7 @@ namespace Allors.Domain
 				public global::System.String Name {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithName(global::System.String value)
+				public LanguageBuilder WithName(global::System.String value)
 		        {
 				    if(this.Name!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.Name = value;
@@ -364,7 +364,7 @@ namespace Allors.Domain
 				public global::System.String IsoCode {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithIsoCode(global::System.String value)
+				public LanguageBuilder WithIsoCode(global::System.String value)
 		        {
 				    if(this.IsoCode!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.IsoCode = value;
@@ -374,7 +374,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<LocalisedText> LocalisedNames {get; set;}	
 
 				/// <exclude/>
-				public LocalisedTextBuilder WithLocalisedName(LocalisedText value)
+				public LanguageBuilder WithLocalisedName(LocalisedText value)
 		        {
 					if(this.LocalisedNames == null)
 					{
@@ -388,7 +388,7 @@ namespace Allors.Domain
 				public global::System.String DisplayName {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithDisplayName(global::System.String value)
+				public LanguageBuilder WithDisplayName(global::System.String value)
 		        {
 				    if(this.DisplayName!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.DisplayName = value;
@@ -398,7 +398,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<Permission> DeniedPermissions {get; set;}	
 
 				/// <exclude/>
-				public PermissionBuilder WithDeniedPermission(Permission value)
+				public LanguageBuilder WithDeniedPermission(Permission value)
 		        {
 					if(this.DeniedPermissions == null)
 					{
@@ -412,7 +412,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<SecurityToken> SecurityTokens {get; set;}	
 
 				/// <exclude/>
-				public SecurityTokenBuilder WithSecurityToken(SecurityToken value)
+				public LanguageBuilder WithSecurityToken(SecurityToken value)
 		        {
 					if(this.SecurityTokens == null)
 					{
@@ -426,7 +426,7 @@ namespace Allors.Domain
 				public SearchData SearchData {get; set;}
 
 				/// <exclude/>
-				public SearchDataBuilder WithSearchData(SearchData value)
+				public LanguageBuilder WithSearchData(SearchData value)
 		        {
 		            if(this.SearchData!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.SearchData = value;

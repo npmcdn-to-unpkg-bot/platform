@@ -651,7 +651,7 @@ namespace Allors.Domain
 	{
 		public static readonly I12Meta Instance = new I12Meta();
 
-		public global::Allors.Meta.Interface interface = global::Allors.Meta.Interfaces.I12;
+		public global::Allors.Meta.Interface ObjectType = global::Allors.Meta.Interfaces.I12;
 
 		public global::Allors.Meta.RoleType I12AllorsBinary 
 		{
@@ -1030,31 +1030,23 @@ namespace Allors.Domain
 
 	public partial interface I12Builder : UserInterfaceableBuilder ,AccessControlledObjectBuilder ,SearchableBuilder , global::System.IDisposable
 	{	
-
 		global::System.Byte[] I12AllorsBinary {get;}
-
 		
 		C2 I12C2One2One {get;}
 
 		
-
 		global::System.Double? I12AllorsFloat {get;}
-
 		
 		I1 I12I1Many2One {get;}
 
 		
-
 		global::System.String I12AllorsString {get;}
-
 		
 
 		global::System.Collections.Generic.List<I12> I12I12Many2Manies {get;}		
 
 		
-
 		global::System.Decimal? I12AllorsDecimal {get;}
-
 		
 
 		global::System.Collections.Generic.List<I2> I12I2Many2Manies {get;}		
@@ -1072,9 +1064,7 @@ namespace Allors.Domain
 		global::System.Collections.Generic.List<I12> I12I12One2Manies {get;}		
 
 		
-
 		global::System.String Name {get;}
-
 		
 
 		global::System.Collections.Generic.List<C1> I12C1Many2Manies {get;}		
@@ -1083,13 +1073,9 @@ namespace Allors.Domain
 		I2 I12I2Many2One {get;}
 
 		
-
 		global::System.Guid? I12AllorsUnique {get;}
-
 		
-
 		global::System.Int32? I12AllorsInteger {get;}
-
 		
 
 		global::System.Collections.Generic.List<I1> I12I1One2Manies {get;}		
@@ -1118,9 +1104,7 @@ namespace Allors.Domain
 		I12 I12I12Many2One {get;}
 
 		
-
 		global::System.Boolean? I12AllorsBoolean {get;}
-
 		
 		I1 I12I1One2One {get;}
 

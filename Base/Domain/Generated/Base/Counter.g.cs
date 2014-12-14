@@ -34,11 +34,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Int32? Value 
+		virtual public global::System.Int32 Value 
 		{
 			get
 			{
-				return (global::System.Int32?) Strategy.GetUnitRole(Meta.Value);
+				return (global::System.Int32) Strategy.GetUnitRole(Meta.Value);
 			}
 			set
 			{
@@ -60,11 +60,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Guid? UniqueId 
+		virtual public global::System.Guid UniqueId 
 		{
 			get
 			{
-				return (global::System.Guid?) Strategy.GetUnitRole(Meta.UniqueId);
+				return (global::System.Guid) Strategy.GetUnitRole(Meta.UniqueId);
 			}
 			set
 			{
@@ -90,7 +90,7 @@ namespace Allors.Domain
 	{
 		public static readonly CounterMeta Instance = new CounterMeta();
 
-		public global::Allors.Meta.Class class = global::Allors.Meta.Classes.Counter;
+		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.Counter;
 
 		public global::Allors.Meta.RoleType Value 
 		{
@@ -118,7 +118,7 @@ namespace Allors.Domain
 				public global::System.Int32? Value {get; set;}
 
 				/// <exclude/>
-				public AllorsIntegerBuilder WithValue(global::System.Int32? value)
+				public CounterBuilder WithValue(global::System.Int32? value)
 		        {
 				    if(this.Value!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.Value = value;
@@ -128,7 +128,7 @@ namespace Allors.Domain
 				public global::System.Guid? UniqueId {get; set;}
 
 				/// <exclude/>
-				public AllorsUniqueBuilder WithUniqueId(global::System.Guid? value)
+				public CounterBuilder WithUniqueId(global::System.Guid? value)
 		        {
 				    if(this.UniqueId!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.UniqueId = value;

@@ -25,7 +25,7 @@ namespace Allors.Domain
 	{
 		public static readonly SecurityTokenOwnerMeta Instance = new SecurityTokenOwnerMeta();
 
-		public global::Allors.Meta.Interface interface = global::Allors.Meta.Interfaces.SecurityTokenOwner;
+		public global::Allors.Meta.Interface ObjectType = global::Allors.Meta.Interfaces.SecurityTokenOwner;
 
 		public global::Allors.Meta.RoleType OwnerSecurityToken 
 		{

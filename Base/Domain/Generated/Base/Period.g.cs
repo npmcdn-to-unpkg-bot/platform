@@ -33,7 +33,7 @@ namespace Allors.Domain
 	{
 		public static readonly PeriodMeta Instance = new PeriodMeta();
 
-		public global::Allors.Meta.Interface interface = global::Allors.Meta.Interfaces.Period;
+		public global::Allors.Meta.Interface ObjectType = global::Allors.Meta.Interfaces.Period;
 
 		public global::Allors.Meta.RoleType FromDate 
 		{
@@ -54,13 +54,9 @@ namespace Allors.Domain
 
 	public partial interface PeriodBuilder :  global::System.IDisposable
 	{	
-
 		global::System.DateTime? FromDate {get;}
-
 		
-
 		global::System.DateTime? ThroughDate {get;}
-
 		
 	}
 

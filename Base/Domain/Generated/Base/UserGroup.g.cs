@@ -174,11 +174,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Guid? UniqueId 
+		virtual public global::System.Guid UniqueId 
 		{
 			get
 			{
-				return (global::System.Guid?) Strategy.GetUnitRole(Meta.UniqueId);
+				return (global::System.Guid) Strategy.GetUnitRole(Meta.UniqueId);
 			}
 			set
 			{
@@ -363,7 +363,7 @@ namespace Allors.Domain
 	{
 		public static readonly UserGroupMeta Instance = new UserGroupMeta();
 
-		public global::Allors.Meta.Class class = global::Allors.Meta.Classes.UserGroup;
+		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.UserGroup;
 
 		public global::Allors.Meta.RoleType Role 
 		{
@@ -455,7 +455,7 @@ namespace Allors.Domain
 				public Role Role {get; set;}
 
 				/// <exclude/>
-				public RoleBuilder WithRole(Role value)
+				public UserGroupBuilder WithRole(Role value)
 		        {
 		            if(this.Role!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.Role = value;
@@ -466,7 +466,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<User> Members {get; set;}	
 
 				/// <exclude/>
-				public UserBuilder WithMember(User value)
+				public UserGroupBuilder WithMember(User value)
 		        {
 					if(this.Members == null)
 					{
@@ -491,7 +491,7 @@ namespace Allors.Domain
 				public global::System.String Name {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithName(global::System.String value)
+				public UserGroupBuilder WithName(global::System.String value)
 		        {
 				    if(this.Name!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.Name = value;
@@ -501,7 +501,7 @@ namespace Allors.Domain
 				public global::System.Guid? UniqueId {get; set;}
 
 				/// <exclude/>
-				public AllorsUniqueBuilder WithUniqueId(global::System.Guid? value)
+				public UserGroupBuilder WithUniqueId(global::System.Guid? value)
 		        {
 				    if(this.UniqueId!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.UniqueId = value;
@@ -511,7 +511,7 @@ namespace Allors.Domain
 				public SearchData SearchData {get; set;}
 
 				/// <exclude/>
-				public SearchDataBuilder WithSearchData(SearchData value)
+				public UserGroupBuilder WithSearchData(SearchData value)
 		        {
 		            if(this.SearchData!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.SearchData = value;
@@ -522,7 +522,7 @@ namespace Allors.Domain
 				public global::System.String DisplayName {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithDisplayName(global::System.String value)
+				public UserGroupBuilder WithDisplayName(global::System.String value)
 		        {
 				    if(this.DisplayName!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.DisplayName = value;
@@ -532,7 +532,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<Permission> DeniedPermissions {get; set;}	
 
 				/// <exclude/>
-				public PermissionBuilder WithDeniedPermission(Permission value)
+				public UserGroupBuilder WithDeniedPermission(Permission value)
 		        {
 					if(this.DeniedPermissions == null)
 					{
@@ -546,7 +546,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<SecurityToken> SecurityTokens {get; set;}	
 
 				/// <exclude/>
-				public SecurityTokenBuilder WithSecurityToken(SecurityToken value)
+				public UserGroupBuilder WithSecurityToken(SecurityToken value)
 		        {
 					if(this.SecurityTokens == null)
 					{

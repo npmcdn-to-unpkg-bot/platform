@@ -22,7 +22,7 @@ namespace Allors.Domain
 	{
 		public static readonly CommentableMeta Instance = new CommentableMeta();
 
-		public global::Allors.Meta.Interface interface = global::Allors.Meta.Interfaces.Commentable;
+		public global::Allors.Meta.Interface ObjectType = global::Allors.Meta.Interfaces.Commentable;
 
 		public global::Allors.Meta.RoleType Comment 
 		{
@@ -36,9 +36,7 @@ namespace Allors.Domain
 
 	public partial interface CommentableBuilder :  global::System.IDisposable
 	{	
-
 		global::System.String Comment {get;}
-
 		
 	}
 

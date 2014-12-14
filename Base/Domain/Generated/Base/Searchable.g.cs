@@ -25,7 +25,7 @@ namespace Allors.Domain
 	{
 		public static readonly SearchableMeta Instance = new SearchableMeta();
 
-		public global::Allors.Meta.Interface interface = global::Allors.Meta.Interfaces.Searchable;
+		public global::Allors.Meta.Interface ObjectType = global::Allors.Meta.Interfaces.Searchable;
 
 		public global::Allors.Meta.RoleType SearchData 
 		{

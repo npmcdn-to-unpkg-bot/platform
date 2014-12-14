@@ -22,7 +22,7 @@ namespace Allors.Domain
 	{
 		public static readonly SharedMeta Instance = new SharedMeta();
 
-		public global::Allors.Meta.Interface interface = global::Allors.Meta.Interfaces.Shared;
+		public global::Allors.Meta.Interface ObjectType = global::Allors.Meta.Interfaces.Shared;
 
 		public global::Allors.Meta.RoleType DisplayName 
 		{

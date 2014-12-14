@@ -10,7 +10,7 @@ namespace Allors.Domain
 	{
 		public static readonly TransitionalMeta Instance = new TransitionalMeta();
 
-		public global::Allors.Meta.Interface interface = global::Allors.Meta.Interfaces.Transitional;
+		public global::Allors.Meta.Interface ObjectType = global::Allors.Meta.Interfaces.Transitional;
 
 		public global::Allors.Meta.RoleType DeniedPermission 
 		{

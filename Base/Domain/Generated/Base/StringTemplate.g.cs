@@ -89,11 +89,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Guid? UniqueId 
+		virtual public global::System.Guid UniqueId 
 		{
 			get
 			{
-				return (global::System.Guid?) Strategy.GetUnitRole(Meta.UniqueId);
+				return (global::System.Guid) Strategy.GetUnitRole(Meta.UniqueId);
 			}
 			set
 			{
@@ -163,7 +163,7 @@ namespace Allors.Domain
 	{
 		public static readonly StringTemplateMeta Instance = new StringTemplateMeta();
 
-		public global::Allors.Meta.Class class = global::Allors.Meta.Classes.StringTemplate;
+		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.StringTemplate;
 
 		public global::Allors.Meta.RoleType Body 
 		{
@@ -213,7 +213,7 @@ namespace Allors.Domain
 				public global::System.String Body {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithBody(global::System.String value)
+				public StringTemplateBuilder WithBody(global::System.String value)
 		        {
 				    if(this.Body!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.Body = value;
@@ -223,7 +223,7 @@ namespace Allors.Domain
 				public global::System.String Name {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithName(global::System.String value)
+				public StringTemplateBuilder WithName(global::System.String value)
 		        {
 				    if(this.Name!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.Name = value;
@@ -233,7 +233,7 @@ namespace Allors.Domain
 				public global::System.Guid? UniqueId {get; set;}
 
 				/// <exclude/>
-				public AllorsUniqueBuilder WithUniqueId(global::System.Guid? value)
+				public StringTemplateBuilder WithUniqueId(global::System.Guid? value)
 		        {
 				    if(this.UniqueId!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.UniqueId = value;
@@ -243,7 +243,7 @@ namespace Allors.Domain
 				public Locale Locale {get; set;}
 
 				/// <exclude/>
-				public LocaleBuilder WithLocale(Locale value)
+				public StringTemplateBuilder WithLocale(Locale value)
 		        {
 		            if(this.Locale!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.Locale = value;

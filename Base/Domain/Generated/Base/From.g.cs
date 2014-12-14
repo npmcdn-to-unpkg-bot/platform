@@ -177,7 +177,7 @@ namespace Allors.Domain
 	{
 		public static readonly FromMeta Instance = new FromMeta();
 
-		public global::Allors.Meta.Class class = global::Allors.Meta.Classes.From;
+		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.From;
 
 		public global::Allors.Meta.RoleType To 
 		{
@@ -219,7 +219,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<To> Tos {get; set;}	
 
 				/// <exclude/>
-				public ToBuilder WithTo(To value)
+				public FromBuilder WithTo(To value)
 		        {
 					if(this.Tos == null)
 					{
@@ -233,7 +233,7 @@ namespace Allors.Domain
 				public global::System.String DisplayName {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithDisplayName(global::System.String value)
+				public FromBuilder WithDisplayName(global::System.String value)
 		        {
 				    if(this.DisplayName!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.DisplayName = value;
@@ -243,7 +243,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<Permission> DeniedPermissions {get; set;}	
 
 				/// <exclude/>
-				public PermissionBuilder WithDeniedPermission(Permission value)
+				public FromBuilder WithDeniedPermission(Permission value)
 		        {
 					if(this.DeniedPermissions == null)
 					{
@@ -257,7 +257,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<SecurityToken> SecurityTokens {get; set;}	
 
 				/// <exclude/>
-				public SecurityTokenBuilder WithSecurityToken(SecurityToken value)
+				public FromBuilder WithSecurityToken(SecurityToken value)
 		        {
 					if(this.SecurityTokens == null)
 					{

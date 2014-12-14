@@ -106,7 +106,7 @@ namespace Allors.Domain
 	{
 		public static readonly SecondMeta Instance = new SecondMeta();
 
-		public global::Allors.Meta.Class class = global::Allors.Meta.Classes.Second;
+		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.Second;
 
 		public global::Allors.Meta.RoleType Third 
 		{
@@ -142,7 +142,7 @@ namespace Allors.Domain
 				public Third Third {get; set;}
 
 				/// <exclude/>
-				public ThirdBuilder WithThird(Third value)
+				public SecondBuilder WithThird(Third value)
 		        {
 		            if(this.Third!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.Third = value;
@@ -153,7 +153,7 @@ namespace Allors.Domain
 				public global::System.Boolean? IsDerived {get; set;}
 
 				/// <exclude/>
-				public AllorsBooleanBuilder WithIsDerived(global::System.Boolean? value)
+				public SecondBuilder WithIsDerived(global::System.Boolean? value)
 		        {
 				    if(this.IsDerived!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.IsDerived = value;

@@ -72,7 +72,7 @@ namespace Allors.Domain
 	{
 		public static readonly SearchFragmentMeta Instance = new SearchFragmentMeta();
 
-		public global::Allors.Meta.Class class = global::Allors.Meta.Classes.SearchFragment;
+		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.SearchFragment;
 
 		public global::Allors.Meta.RoleType LowerCaseText 
 		{
@@ -101,7 +101,7 @@ namespace Allors.Domain
 				public global::System.String LowerCaseText {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithLowerCaseText(global::System.String value)
+				public SearchFragmentBuilder WithLowerCaseText(global::System.String value)
 		        {
 				    if(this.LowerCaseText!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.LowerCaseText = value;

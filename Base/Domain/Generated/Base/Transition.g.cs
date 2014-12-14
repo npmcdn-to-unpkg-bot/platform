@@ -96,7 +96,7 @@ namespace Allors.Domain
 	{
 		public static readonly TransitionMeta Instance = new TransitionMeta();
 
-		public global::Allors.Meta.Class class = global::Allors.Meta.Classes.Transition;
+		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.Transition;
 
 		public global::Allors.Meta.RoleType FromState 
 		{
@@ -124,7 +124,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<ObjectState> FromStates {get; set;}	
 
 				/// <exclude/>
-				public ObjectStateBuilder WithFromState(ObjectState value)
+				public TransitionBuilder WithFromState(ObjectState value)
 		        {
 					if(this.FromStates == null)
 					{
@@ -138,7 +138,7 @@ namespace Allors.Domain
 				public ObjectState ToState {get; set;}
 
 				/// <exclude/>
-				public ObjectStateBuilder WithToState(ObjectState value)
+				public TransitionBuilder WithToState(ObjectState value)
 		        {
 		            if(this.ToState!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.ToState = value;

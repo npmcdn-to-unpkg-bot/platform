@@ -35,7 +35,7 @@ namespace Allors.Domain
 		void RemoveName();
 
 
-		global::System.Boolean? IsActive 
+		global::System.Boolean IsActive 
 		{
 			get;
 			set;
@@ -51,7 +51,7 @@ namespace Allors.Domain
 	{
 		public static readonly EnumerationMeta Instance = new EnumerationMeta();
 
-		public global::Allors.Meta.Interface interface = global::Allors.Meta.Interfaces.Enumeration;
+		public global::Allors.Meta.Interface ObjectType = global::Allors.Meta.Interfaces.Enumeration;
 
 		public global::Allors.Meta.RoleType LocalisedName 
 		{
@@ -111,13 +111,9 @@ namespace Allors.Domain
 		global::System.Collections.Generic.List<LocalisedText> LocalisedNames {get;}		
 
 		
-
 		global::System.String Name {get;}
-
 		
-
 		global::System.Boolean? IsActive {get;}
-
 		
 	}
 

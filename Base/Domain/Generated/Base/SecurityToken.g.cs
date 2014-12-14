@@ -110,7 +110,7 @@ namespace Allors.Domain
 	{
 		public static readonly SecurityTokenMeta Instance = new SecurityTokenMeta();
 
-		public global::Allors.Meta.Class class = global::Allors.Meta.Classes.SecurityToken;
+		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.SecurityToken;
 
 		public global::Allors.Meta.AssociationType SingletonsWhereAdministratorSecurityToken 
 		{

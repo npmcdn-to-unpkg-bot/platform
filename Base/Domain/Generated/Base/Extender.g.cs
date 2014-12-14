@@ -54,7 +54,7 @@ namespace Allors.Domain
 	{
 		public static readonly ExtenderMeta Instance = new ExtenderMeta();
 
-		public global::Allors.Meta.Class class = global::Allors.Meta.Classes.Extender;
+		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.Extender;
 
 		public global::Allors.Meta.RoleType AllorsString 
 		{
@@ -75,7 +75,7 @@ namespace Allors.Domain
 				public global::System.String AllorsString {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithAllorsString(global::System.String value)
+				public ExtenderBuilder WithAllorsString(global::System.String value)
 		        {
 				    if(this.AllorsString!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.AllorsString = value;

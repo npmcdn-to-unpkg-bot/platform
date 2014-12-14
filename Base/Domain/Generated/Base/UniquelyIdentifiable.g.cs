@@ -6,7 +6,7 @@ namespace Allors.Domain
 	{
 
 
-		global::System.Guid? UniqueId 
+		global::System.Guid UniqueId 
 		{
 			get;
 			set;
@@ -22,7 +22,7 @@ namespace Allors.Domain
 	{
 		public static readonly UniquelyIdentifiableMeta Instance = new UniquelyIdentifiableMeta();
 
-		public global::Allors.Meta.Interface interface = global::Allors.Meta.Interfaces.UniquelyIdentifiable;
+		public global::Allors.Meta.Interface ObjectType = global::Allors.Meta.Interfaces.UniquelyIdentifiable;
 
 		public global::Allors.Meta.RoleType UniqueId 
 		{
@@ -36,9 +36,7 @@ namespace Allors.Domain
 
 	public partial interface UniquelyIdentifiableBuilder :  global::System.IDisposable
 	{	
-
 		global::System.Guid? UniqueId {get;}
-
 		
 	}
 

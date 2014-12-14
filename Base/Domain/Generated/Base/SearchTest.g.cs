@@ -195,7 +195,7 @@ namespace Allors.Domain
 	{
 		public static readonly SearchTestMeta Instance = new SearchTestMeta();
 
-		public global::Allors.Meta.Class class = global::Allors.Meta.Classes.SearchTest;
+		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.SearchTest;
 
 		public global::Allors.Meta.RoleType Text 
 		{
@@ -244,7 +244,7 @@ namespace Allors.Domain
 				public global::System.String Text {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithText(global::System.String value)
+				public SearchTestBuilder WithText(global::System.String value)
 		        {
 				    if(this.Text!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.Text = value;
@@ -254,7 +254,7 @@ namespace Allors.Domain
 				public SearchData SearchData {get; set;}
 
 				/// <exclude/>
-				public SearchDataBuilder WithSearchData(SearchData value)
+				public SearchTestBuilder WithSearchData(SearchData value)
 		        {
 		            if(this.SearchData!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.SearchData = value;
@@ -265,7 +265,7 @@ namespace Allors.Domain
 				public global::System.String DisplayName {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithDisplayName(global::System.String value)
+				public SearchTestBuilder WithDisplayName(global::System.String value)
 		        {
 				    if(this.DisplayName!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.DisplayName = value;
@@ -275,7 +275,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<Permission> DeniedPermissions {get; set;}	
 
 				/// <exclude/>
-				public PermissionBuilder WithDeniedPermission(Permission value)
+				public SearchTestBuilder WithDeniedPermission(Permission value)
 		        {
 					if(this.DeniedPermissions == null)
 					{
@@ -289,7 +289,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<SecurityToken> SecurityTokens {get; set;}	
 
 				/// <exclude/>
-				public SecurityTokenBuilder WithSecurityToken(SecurityToken value)
+				public SearchTestBuilder WithSecurityToken(SecurityToken value)
 		        {
 					if(this.SecurityTokens == null)
 					{

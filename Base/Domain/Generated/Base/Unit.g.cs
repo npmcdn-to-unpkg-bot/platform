@@ -354,7 +354,7 @@ namespace Allors.Domain
 	{
 		public static readonly UnitMeta Instance = new UnitMeta();
 
-		public global::Allors.Meta.Class class = global::Allors.Meta.Classes.Unit;
+		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.Unit;
 
 		public global::Allors.Meta.RoleType AllorsBinary 
 		{
@@ -438,7 +438,7 @@ namespace Allors.Domain
 				public global::System.Byte[] AllorsBinary {get; set;}
 
 				/// <exclude/>
-				public AllorsBinaryBuilder WithAllorsBinary(global::System.Byte[] value)
+				public UnitBuilder WithAllorsBinary(global::System.Byte[] value)
 		        {
 				    if(this.AllorsBinary!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.AllorsBinary = value;
@@ -448,7 +448,7 @@ namespace Allors.Domain
 				public global::System.Boolean? AllorsBoolean {get; set;}
 
 				/// <exclude/>
-				public AllorsBooleanBuilder WithAllorsBoolean(global::System.Boolean? value)
+				public UnitBuilder WithAllorsBoolean(global::System.Boolean? value)
 		        {
 				    if(this.AllorsBoolean!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.AllorsBoolean = value;
@@ -458,7 +458,7 @@ namespace Allors.Domain
 				public global::System.Double? AllorsFloat {get; set;}
 
 				/// <exclude/>
-				public AllorsFloatBuilder WithAllorsFloat(global::System.Double? value)
+				public UnitBuilder WithAllorsFloat(global::System.Double? value)
 		        {
 				    if(this.AllorsFloat!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.AllorsFloat = value;
@@ -468,7 +468,7 @@ namespace Allors.Domain
 				public global::System.Int32? AllorsInteger {get; set;}
 
 				/// <exclude/>
-				public AllorsIntegerBuilder WithAllorsInteger(global::System.Int32? value)
+				public UnitBuilder WithAllorsInteger(global::System.Int32? value)
 		        {
 				    if(this.AllorsInteger!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.AllorsInteger = value;
@@ -478,7 +478,7 @@ namespace Allors.Domain
 				public global::System.String AllorsString {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithAllorsString(global::System.String value)
+				public UnitBuilder WithAllorsString(global::System.String value)
 		        {
 				    if(this.AllorsString!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.AllorsString = value;
@@ -488,7 +488,7 @@ namespace Allors.Domain
 				public global::System.Guid? AllorsUnique {get; set;}
 
 				/// <exclude/>
-				public AllorsUniqueBuilder WithAllorsUnique(global::System.Guid? value)
+				public UnitBuilder WithAllorsUnique(global::System.Guid? value)
 		        {
 				    if(this.AllorsUnique!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.AllorsUnique = value;
@@ -498,7 +498,7 @@ namespace Allors.Domain
 				public global::System.Decimal? AllorsDecimal {get; set;}
 
 				/// <exclude/>
-				public AllorsDecimalBuilder WithAllorsDecimal(global::System.Decimal? value)
+				public UnitBuilder WithAllorsDecimal(global::System.Decimal? value)
 		        {
 				    if(this.AllorsDecimal!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.AllorsDecimal = value;
@@ -508,7 +508,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<Permission> DeniedPermissions {get; set;}	
 
 				/// <exclude/>
-				public PermissionBuilder WithDeniedPermission(Permission value)
+				public UnitBuilder WithDeniedPermission(Permission value)
 		        {
 					if(this.DeniedPermissions == null)
 					{
@@ -522,7 +522,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<SecurityToken> SecurityTokens {get; set;}	
 
 				/// <exclude/>
-				public SecurityTokenBuilder WithSecurityToken(SecurityToken value)
+				public UnitBuilder WithSecurityToken(SecurityToken value)
 		        {
 					if(this.SecurityTokens == null)
 					{
@@ -536,7 +536,7 @@ namespace Allors.Domain
 				public global::System.String DisplayName {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithDisplayName(global::System.String value)
+				public UnitBuilder WithDisplayName(global::System.String value)
 		        {
 				    if(this.DisplayName!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.DisplayName = value;

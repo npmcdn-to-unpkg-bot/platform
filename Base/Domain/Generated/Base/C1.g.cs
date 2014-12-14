@@ -4046,7 +4046,7 @@ namespace Allors.Domain
 	{
 		public static readonly C1Meta Instance = new C1Meta();
 
-		public global::Allors.Meta.Class class = global::Allors.Meta.Classes.C1;
+		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.C1;
 
 		public global::Allors.Meta.RoleType C1I1One2One 
 		{
@@ -5097,7 +5097,7 @@ namespace Allors.Domain
 				public I1 C1I1One2One {get; set;}
 
 				/// <exclude/>
-				public I1Builder WithC1I1One2One(I1 value)
+				public C1Builder WithC1I1One2One(I1 value)
 		        {
 		            if(this.C1I1One2One!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.C1I1One2One = value;
@@ -5108,7 +5108,7 @@ namespace Allors.Domain
 				public global::System.String C1AllorsString {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithC1AllorsString(global::System.String value)
+				public C1Builder WithC1AllorsString(global::System.String value)
 		        {
 				    if(this.C1AllorsString!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.C1AllorsString = value;
@@ -5118,7 +5118,7 @@ namespace Allors.Domain
 				public C2 C1C2Many2One {get; set;}
 
 				/// <exclude/>
-				public C2Builder WithC1C2Many2One(C2 value)
+				public C1Builder WithC1C2Many2One(C2 value)
 		        {
 		            if(this.C1C2Many2One!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.C1C2Many2One = value;
@@ -5129,7 +5129,7 @@ namespace Allors.Domain
 				public I2 C1I2One2One {get; set;}
 
 				/// <exclude/>
-				public I2Builder WithC1I2One2One(I2 value)
+				public C1Builder WithC1I2One2One(I2 value)
 		        {
 		            if(this.C1I2One2One!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.C1I2One2One = value;
@@ -5151,7 +5151,7 @@ namespace Allors.Domain
 				public I1 C1I1Many2One {get; set;}
 
 				/// <exclude/>
-				public I1Builder WithC1I1Many2One(I1 value)
+				public C1Builder WithC1I1Many2One(I1 value)
 		        {
 		            if(this.C1I1Many2One!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.C1I1Many2One = value;
@@ -5162,7 +5162,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<I1> C1I1Many2Manies {get; set;}	
 
 				/// <exclude/>
-				public I1Builder WithC1I1Many2Many(I1 value)
+				public C1Builder WithC1I1Many2Many(I1 value)
 		        {
 					if(this.C1I1Many2Manies == null)
 					{
@@ -5176,7 +5176,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<I2> C1I2One2Manies {get; set;}	
 
 				/// <exclude/>
-				public I2Builder WithC1I2One2Many(I2 value)
+				public C1Builder WithC1I2One2Many(I2 value)
 		        {
 					if(this.C1I2One2Manies == null)
 					{
@@ -5190,7 +5190,7 @@ namespace Allors.Domain
 				public global::System.Decimal? C1AllorsDecimal {get; set;}
 
 				/// <exclude/>
-				public AllorsDecimalBuilder WithC1AllorsDecimal(global::System.Decimal? value)
+				public C1Builder WithC1AllorsDecimal(global::System.Decimal? value)
 		        {
 				    if(this.C1AllorsDecimal!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.C1AllorsDecimal = value;
@@ -5214,7 +5214,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<I12> C1I12Many2Manies {get; set;}	
 
 				/// <exclude/>
-				public I12Builder WithC1I12Many2Many(I12 value)
+				public C1Builder WithC1I12Many2Many(I12 value)
 		        {
 					if(this.C1I12Many2Manies == null)
 					{
@@ -5228,7 +5228,7 @@ namespace Allors.Domain
 				public global::System.Byte[] C1AllorsBinary {get; set;}
 
 				/// <exclude/>
-				public AllorsBinaryBuilder WithC1AllorsBinary(global::System.Byte[] value)
+				public C1Builder WithC1AllorsBinary(global::System.Byte[] value)
 		        {
 				    if(this.C1AllorsBinary!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.C1AllorsBinary = value;
@@ -5238,7 +5238,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<I12> C1I12One2Manies {get; set;}	
 
 				/// <exclude/>
-				public I12Builder WithC1I12One2Many(I12 value)
+				public C1Builder WithC1I12One2Many(I12 value)
 		        {
 					if(this.C1I12One2Manies == null)
 					{
@@ -5252,7 +5252,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<C2> C1C2One2Manies {get; set;}	
 
 				/// <exclude/>
-				public C2Builder WithC1C2One2Many(C2 value)
+				public C1Builder WithC1C2One2Many(C2 value)
 		        {
 					if(this.C1C2One2Manies == null)
 					{
@@ -5280,7 +5280,7 @@ namespace Allors.Domain
 				public global::System.String AllorsStringMax {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithAllorsStringMax(global::System.String value)
+				public C1Builder WithAllorsStringMax(global::System.String value)
 		        {
 				    if(this.AllorsStringMax!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.AllorsStringMax = value;
@@ -5301,7 +5301,7 @@ namespace Allors.Domain
 				public global::System.Boolean? C1AllorsBoolean {get; set;}
 
 				/// <exclude/>
-				public AllorsBooleanBuilder WithC1AllorsBoolean(global::System.Boolean? value)
+				public C1Builder WithC1AllorsBoolean(global::System.Boolean? value)
 		        {
 				    if(this.C1AllorsBoolean!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.C1AllorsBoolean = value;
@@ -5311,7 +5311,7 @@ namespace Allors.Domain
 				public I12 C1I12One2One {get; set;}
 
 				/// <exclude/>
-				public I12Builder WithC1I12One2One(I12 value)
+				public C1Builder WithC1I12One2One(I12 value)
 		        {
 		            if(this.C1I12One2One!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.C1I12One2One = value;
@@ -5322,7 +5322,7 @@ namespace Allors.Domain
 				public I12 C1I12Many2One {get; set;}
 
 				/// <exclude/>
-				public I12Builder WithC1I12Many2One(I12 value)
+				public C1Builder WithC1I12Many2One(I12 value)
 		        {
 		            if(this.C1I12Many2One!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.C1I12Many2One = value;
@@ -5333,7 +5333,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<I2> C1I2Many2Manies {get; set;}	
 
 				/// <exclude/>
-				public I2Builder WithC1I2Many2Many(I2 value)
+				public C1Builder WithC1I2Many2Many(I2 value)
 		        {
 					if(this.C1I2Many2Manies == null)
 					{
@@ -5347,7 +5347,7 @@ namespace Allors.Domain
 				public global::System.Guid? C1AllorsUnique {get; set;}
 
 				/// <exclude/>
-				public AllorsUniqueBuilder WithC1AllorsUnique(global::System.Guid? value)
+				public C1Builder WithC1AllorsUnique(global::System.Guid? value)
 		        {
 				    if(this.C1AllorsUnique!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.C1AllorsUnique = value;
@@ -5357,7 +5357,7 @@ namespace Allors.Domain
 				public I2 C1I2Many2One {get; set;}
 
 				/// <exclude/>
-				public I2Builder WithC1I2Many2One(I2 value)
+				public C1Builder WithC1I2Many2One(I2 value)
 		        {
 		            if(this.C1I2Many2One!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.C1I2Many2One = value;
@@ -5368,7 +5368,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<I1> C1I1One2Manies {get; set;}	
 
 				/// <exclude/>
-				public I1Builder WithC1I1One2Many(I1 value)
+				public C1Builder WithC1I1One2Many(I1 value)
 		        {
 					if(this.C1I1One2Manies == null)
 					{
@@ -5382,7 +5382,7 @@ namespace Allors.Domain
 				public C2 C1C2One2One {get; set;}
 
 				/// <exclude/>
-				public C2Builder WithC1C2One2One(C2 value)
+				public C1Builder WithC1C2One2One(C2 value)
 		        {
 		            if(this.C1C2One2One!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.C1C2One2One = value;
@@ -5393,7 +5393,7 @@ namespace Allors.Domain
 				public global::System.Double? C1AllorsFloat {get; set;}
 
 				/// <exclude/>
-				public AllorsFloatBuilder WithC1AllorsFloat(global::System.Double? value)
+				public C1Builder WithC1AllorsFloat(global::System.Double? value)
 		        {
 				    if(this.C1AllorsFloat!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.C1AllorsFloat = value;
@@ -5403,7 +5403,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<C2> C1C2Many2Manies {get; set;}	
 
 				/// <exclude/>
-				public C2Builder WithC1C2Many2Many(C2 value)
+				public C1Builder WithC1C2Many2Many(C2 value)
 		        {
 					if(this.C1C2Many2Manies == null)
 					{
@@ -5417,7 +5417,7 @@ namespace Allors.Domain
 				public global::System.Int32? C1AllorsInteger {get; set;}
 
 				/// <exclude/>
-				public AllorsIntegerBuilder WithC1AllorsInteger(global::System.Int32? value)
+				public C1Builder WithC1AllorsInteger(global::System.Int32? value)
 		        {
 				    if(this.C1AllorsInteger!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.C1AllorsInteger = value;
@@ -5427,7 +5427,7 @@ namespace Allors.Domain
 				public I1 I1I1Many2One {get; set;}
 
 				/// <exclude/>
-				public I1Builder WithI1I1Many2One(I1 value)
+				public C1Builder WithI1I1Many2One(I1 value)
 		        {
 		            if(this.I1I1Many2One!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.I1I1Many2One = value;
@@ -5438,7 +5438,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<I12> I1I12Many2Manies {get; set;}	
 
 				/// <exclude/>
-				public I12Builder WithI1I12Many2Many(I12 value)
+				public C1Builder WithI1I12Many2Many(I12 value)
 		        {
 					if(this.I1I12Many2Manies == null)
 					{
@@ -5452,7 +5452,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<I2> I1I2Many2Manies {get; set;}	
 
 				/// <exclude/>
-				public I2Builder WithI1I2Many2Many(I2 value)
+				public C1Builder WithI1I2Many2Many(I2 value)
 		        {
 					if(this.I1I2Many2Manies == null)
 					{
@@ -5466,7 +5466,7 @@ namespace Allors.Domain
 				public I2 I1I2Many2One {get; set;}
 
 				/// <exclude/>
-				public I2Builder WithI1I2Many2One(I2 value)
+				public C1Builder WithI1I2Many2One(I2 value)
 		        {
 		            if(this.I1I2Many2One!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.I1I2Many2One = value;
@@ -5477,7 +5477,7 @@ namespace Allors.Domain
 				public global::System.String I1AllorsString {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithI1AllorsString(global::System.String value)
+				public C1Builder WithI1AllorsString(global::System.String value)
 		        {
 				    if(this.I1AllorsString!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.I1AllorsString = value;
@@ -5487,7 +5487,7 @@ namespace Allors.Domain
 				public I12 I1I12Many2One {get; set;}
 
 				/// <exclude/>
-				public I12Builder WithI1I12Many2One(I12 value)
+				public C1Builder WithI1I12Many2One(I12 value)
 		        {
 		            if(this.I1I12Many2One!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.I1I12Many2One = value;
@@ -5498,7 +5498,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<I2> I1I2One2Manies {get; set;}	
 
 				/// <exclude/>
-				public I2Builder WithI1I2One2Many(I2 value)
+				public C1Builder WithI1I2One2Many(I2 value)
 		        {
 					if(this.I1I2One2Manies == null)
 					{
@@ -5512,7 +5512,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<C2> I1C2One2Manies {get; set;}	
 
 				/// <exclude/>
-				public C2Builder WithI1C2One2Many(C2 value)
+				public C1Builder WithI1C2One2Many(C2 value)
 		        {
 					if(this.I1C2One2Manies == null)
 					{
@@ -5537,7 +5537,7 @@ namespace Allors.Domain
 				public global::System.Int32? I1AllorsInteger {get; set;}
 
 				/// <exclude/>
-				public AllorsIntegerBuilder WithI1AllorsInteger(global::System.Int32? value)
+				public C1Builder WithI1AllorsInteger(global::System.Int32? value)
 		        {
 				    if(this.I1AllorsInteger!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.I1AllorsInteger = value;
@@ -5547,7 +5547,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<C2> I1C2Many2Manies {get; set;}	
 
 				/// <exclude/>
-				public C2Builder WithI1C2Many2Many(C2 value)
+				public C1Builder WithI1C2Many2Many(C2 value)
 		        {
 					if(this.I1C2Many2Manies == null)
 					{
@@ -5561,7 +5561,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<I1> I1I1One2Manies {get; set;}	
 
 				/// <exclude/>
-				public I1Builder WithI1I1One2Many(I1 value)
+				public C1Builder WithI1I1One2Many(I1 value)
 		        {
 					if(this.I1I1One2Manies == null)
 					{
@@ -5575,7 +5575,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<I1> I1I1Many2Manies {get; set;}	
 
 				/// <exclude/>
-				public I1Builder WithI1I1Many2Many(I1 value)
+				public C1Builder WithI1I1Many2Many(I1 value)
 		        {
 					if(this.I1I1Many2Manies == null)
 					{
@@ -5589,7 +5589,7 @@ namespace Allors.Domain
 				public global::System.Boolean? I1AllorsBoolean {get; set;}
 
 				/// <exclude/>
-				public AllorsBooleanBuilder WithI1AllorsBoolean(global::System.Boolean? value)
+				public C1Builder WithI1AllorsBoolean(global::System.Boolean? value)
 		        {
 				    if(this.I1AllorsBoolean!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.I1AllorsBoolean = value;
@@ -5599,7 +5599,7 @@ namespace Allors.Domain
 				public global::System.Decimal? I1AllorsDecimal {get; set;}
 
 				/// <exclude/>
-				public AllorsDecimalBuilder WithI1AllorsDecimal(global::System.Decimal? value)
+				public C1Builder WithI1AllorsDecimal(global::System.Decimal? value)
 		        {
 				    if(this.I1AllorsDecimal!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.I1AllorsDecimal = value;
@@ -5609,7 +5609,7 @@ namespace Allors.Domain
 				public I12 I1I12One2One {get; set;}
 
 				/// <exclude/>
-				public I12Builder WithI1I12One2One(I12 value)
+				public C1Builder WithI1I12One2One(I12 value)
 		        {
 		            if(this.I1I12One2One!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.I1I12One2One = value;
@@ -5620,7 +5620,7 @@ namespace Allors.Domain
 				public I2 I1I2One2One {get; set;}
 
 				/// <exclude/>
-				public I2Builder WithI1I2One2One(I2 value)
+				public C1Builder WithI1I2One2One(I2 value)
 		        {
 		            if(this.I1I2One2One!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.I1I2One2One = value;
@@ -5631,7 +5631,7 @@ namespace Allors.Domain
 				public C2 I1C2One2One {get; set;}
 
 				/// <exclude/>
-				public C2Builder WithI1C2One2One(C2 value)
+				public C1Builder WithI1C2One2One(C2 value)
 		        {
 		            if(this.I1C2One2One!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.I1C2One2One = value;
@@ -5656,7 +5656,7 @@ namespace Allors.Domain
 				public global::System.Byte[] I1AllorsBinary {get; set;}
 
 				/// <exclude/>
-				public AllorsBinaryBuilder WithI1AllorsBinary(global::System.Byte[] value)
+				public C1Builder WithI1AllorsBinary(global::System.Byte[] value)
 		        {
 				    if(this.I1AllorsBinary!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.I1AllorsBinary = value;
@@ -5680,7 +5680,7 @@ namespace Allors.Domain
 				public global::System.Double? I1AllorsFloat {get; set;}
 
 				/// <exclude/>
-				public AllorsFloatBuilder WithI1AllorsFloat(global::System.Double? value)
+				public C1Builder WithI1AllorsFloat(global::System.Double? value)
 		        {
 				    if(this.I1AllorsFloat!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.I1AllorsFloat = value;
@@ -5690,7 +5690,7 @@ namespace Allors.Domain
 				public I1 I1I1One2One {get; set;}
 
 				/// <exclude/>
-				public I1Builder WithI1I1One2One(I1 value)
+				public C1Builder WithI1I1One2One(I1 value)
 		        {
 		            if(this.I1I1One2One!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.I1I1One2One = value;
@@ -5712,7 +5712,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<I12> I1I12One2Manies {get; set;}	
 
 				/// <exclude/>
-				public I12Builder WithI1I12One2Many(I12 value)
+				public C1Builder WithI1I12One2Many(I12 value)
 		        {
 					if(this.I1I12One2Manies == null)
 					{
@@ -5726,7 +5726,7 @@ namespace Allors.Domain
 				public C2 I1C2Many2One {get; set;}
 
 				/// <exclude/>
-				public C2Builder WithI1C2Many2One(C2 value)
+				public C1Builder WithI1C2Many2One(C2 value)
 		        {
 		            if(this.I1C2Many2One!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.I1C2Many2One = value;
@@ -5737,7 +5737,7 @@ namespace Allors.Domain
 				public global::System.Guid? I1AllorsUnique {get; set;}
 
 				/// <exclude/>
-				public AllorsUniqueBuilder WithI1AllorsUnique(global::System.Guid? value)
+				public C1Builder WithI1AllorsUnique(global::System.Guid? value)
 		        {
 				    if(this.I1AllorsUnique!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.I1AllorsUnique = value;
@@ -5747,7 +5747,7 @@ namespace Allors.Domain
 				public global::System.Byte[] I12AllorsBinary {get; set;}
 
 				/// <exclude/>
-				public AllorsBinaryBuilder WithI12AllorsBinary(global::System.Byte[] value)
+				public C1Builder WithI12AllorsBinary(global::System.Byte[] value)
 		        {
 				    if(this.I12AllorsBinary!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.I12AllorsBinary = value;
@@ -5757,7 +5757,7 @@ namespace Allors.Domain
 				public C2 I12C2One2One {get; set;}
 
 				/// <exclude/>
-				public C2Builder WithI12C2One2One(C2 value)
+				public C1Builder WithI12C2One2One(C2 value)
 		        {
 		            if(this.I12C2One2One!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.I12C2One2One = value;
@@ -5768,7 +5768,7 @@ namespace Allors.Domain
 				public global::System.Double? I12AllorsFloat {get; set;}
 
 				/// <exclude/>
-				public AllorsFloatBuilder WithI12AllorsFloat(global::System.Double? value)
+				public C1Builder WithI12AllorsFloat(global::System.Double? value)
 		        {
 				    if(this.I12AllorsFloat!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.I12AllorsFloat = value;
@@ -5778,7 +5778,7 @@ namespace Allors.Domain
 				public I1 I12I1Many2One {get; set;}
 
 				/// <exclude/>
-				public I1Builder WithI12I1Many2One(I1 value)
+				public C1Builder WithI12I1Many2One(I1 value)
 		        {
 		            if(this.I12I1Many2One!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.I12I1Many2One = value;
@@ -5789,7 +5789,7 @@ namespace Allors.Domain
 				public global::System.String I12AllorsString {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithI12AllorsString(global::System.String value)
+				public C1Builder WithI12AllorsString(global::System.String value)
 		        {
 				    if(this.I12AllorsString!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.I12AllorsString = value;
@@ -5799,7 +5799,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<I12> I12I12Many2Manies {get; set;}	
 
 				/// <exclude/>
-				public I12Builder WithI12I12Many2Many(I12 value)
+				public C1Builder WithI12I12Many2Many(I12 value)
 		        {
 					if(this.I12I12Many2Manies == null)
 					{
@@ -5813,7 +5813,7 @@ namespace Allors.Domain
 				public global::System.Decimal? I12AllorsDecimal {get; set;}
 
 				/// <exclude/>
-				public AllorsDecimalBuilder WithI12AllorsDecimal(global::System.Decimal? value)
+				public C1Builder WithI12AllorsDecimal(global::System.Decimal? value)
 		        {
 				    if(this.I12AllorsDecimal!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.I12AllorsDecimal = value;
@@ -5823,7 +5823,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<I2> I12I2Many2Manies {get; set;}	
 
 				/// <exclude/>
-				public I2Builder WithI12I2Many2Many(I2 value)
+				public C1Builder WithI12I2Many2Many(I2 value)
 		        {
 					if(this.I12I2Many2Manies == null)
 					{
@@ -5837,7 +5837,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<C2> I12C2Many2Manies {get; set;}	
 
 				/// <exclude/>
-				public C2Builder WithI12C2Many2Many(C2 value)
+				public C1Builder WithI12C2Many2Many(C2 value)
 		        {
 					if(this.I12C2Many2Manies == null)
 					{
@@ -5851,7 +5851,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<I1> I12I1Many2Manies {get; set;}	
 
 				/// <exclude/>
-				public I1Builder WithI12I1Many2Many(I1 value)
+				public C1Builder WithI12I1Many2Many(I1 value)
 		        {
 					if(this.I12I1Many2Manies == null)
 					{
@@ -5865,7 +5865,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<I12> I12I12One2Manies {get; set;}	
 
 				/// <exclude/>
-				public I12Builder WithI12I12One2Many(I12 value)
+				public C1Builder WithI12I12One2Many(I12 value)
 		        {
 					if(this.I12I12One2Manies == null)
 					{
@@ -5879,7 +5879,7 @@ namespace Allors.Domain
 				public global::System.String Name {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithName(global::System.String value)
+				public C1Builder WithName(global::System.String value)
 		        {
 				    if(this.Name!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.Name = value;
@@ -5903,7 +5903,7 @@ namespace Allors.Domain
 				public I2 I12I2Many2One {get; set;}
 
 				/// <exclude/>
-				public I2Builder WithI12I2Many2One(I2 value)
+				public C1Builder WithI12I2Many2One(I2 value)
 		        {
 		            if(this.I12I2Many2One!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.I12I2Many2One = value;
@@ -5914,7 +5914,7 @@ namespace Allors.Domain
 				public global::System.Guid? I12AllorsUnique {get; set;}
 
 				/// <exclude/>
-				public AllorsUniqueBuilder WithI12AllorsUnique(global::System.Guid? value)
+				public C1Builder WithI12AllorsUnique(global::System.Guid? value)
 		        {
 				    if(this.I12AllorsUnique!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.I12AllorsUnique = value;
@@ -5924,7 +5924,7 @@ namespace Allors.Domain
 				public global::System.Int32? I12AllorsInteger {get; set;}
 
 				/// <exclude/>
-				public AllorsIntegerBuilder WithI12AllorsInteger(global::System.Int32? value)
+				public C1Builder WithI12AllorsInteger(global::System.Int32? value)
 		        {
 				    if(this.I12AllorsInteger!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.I12AllorsInteger = value;
@@ -5934,7 +5934,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<I1> I12I1One2Manies {get; set;}	
 
 				/// <exclude/>
-				public I1Builder WithI12I1One2Many(I1 value)
+				public C1Builder WithI12I1One2Many(I1 value)
 		        {
 					if(this.I12I1One2Manies == null)
 					{
@@ -5959,7 +5959,7 @@ namespace Allors.Domain
 				public I12 I12I12One2One {get; set;}
 
 				/// <exclude/>
-				public I12Builder WithI12I12One2One(I12 value)
+				public C1Builder WithI12I12One2One(I12 value)
 		        {
 		            if(this.I12I12One2One!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.I12I12One2One = value;
@@ -5970,7 +5970,7 @@ namespace Allors.Domain
 				public I2 I12I2One2One {get; set;}
 
 				/// <exclude/>
-				public I2Builder WithI12I2One2One(I2 value)
+				public C1Builder WithI12I2One2One(I2 value)
 		        {
 		            if(this.I12I2One2One!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.I12I2One2One = value;
@@ -5981,7 +5981,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<I12> Dependencies {get; set;}	
 
 				/// <exclude/>
-				public I12Builder WithDependency(I12 value)
+				public C1Builder WithDependency(I12 value)
 		        {
 					if(this.Dependencies == null)
 					{
@@ -5995,7 +5995,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<I2> I12I2One2Manies {get; set;}	
 
 				/// <exclude/>
-				public I2Builder WithI12I2One2Many(I2 value)
+				public C1Builder WithI12I2One2Many(I2 value)
 		        {
 					if(this.I12I2One2Manies == null)
 					{
@@ -6009,7 +6009,7 @@ namespace Allors.Domain
 				public C2 I12C2Many2One {get; set;}
 
 				/// <exclude/>
-				public C2Builder WithI12C2Many2One(C2 value)
+				public C1Builder WithI12C2Many2One(C2 value)
 		        {
 		            if(this.I12C2Many2One!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.I12C2Many2One = value;
@@ -6020,7 +6020,7 @@ namespace Allors.Domain
 				public I12 I12I12Many2One {get; set;}
 
 				/// <exclude/>
-				public I12Builder WithI12I12Many2One(I12 value)
+				public C1Builder WithI12I12Many2One(I12 value)
 		        {
 		            if(this.I12I12Many2One!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.I12I12Many2One = value;
@@ -6031,7 +6031,7 @@ namespace Allors.Domain
 				public global::System.Boolean? I12AllorsBoolean {get; set;}
 
 				/// <exclude/>
-				public AllorsBooleanBuilder WithI12AllorsBoolean(global::System.Boolean? value)
+				public C1Builder WithI12AllorsBoolean(global::System.Boolean? value)
 		        {
 				    if(this.I12AllorsBoolean!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.I12AllorsBoolean = value;
@@ -6041,7 +6041,7 @@ namespace Allors.Domain
 				public I1 I12I1One2One {get; set;}
 
 				/// <exclude/>
-				public I1Builder WithI12I1One2One(I1 value)
+				public C1Builder WithI12I1One2One(I1 value)
 		        {
 		            if(this.I12I1One2One!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.I12I1One2One = value;
@@ -6077,7 +6077,7 @@ namespace Allors.Domain
 				public global::System.String DisplayName {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithDisplayName(global::System.String value)
+				public C1Builder WithDisplayName(global::System.String value)
 		        {
 				    if(this.DisplayName!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.DisplayName = value;
@@ -6087,7 +6087,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<Permission> DeniedPermissions {get; set;}	
 
 				/// <exclude/>
-				public PermissionBuilder WithDeniedPermission(Permission value)
+				public C1Builder WithDeniedPermission(Permission value)
 		        {
 					if(this.DeniedPermissions == null)
 					{
@@ -6101,7 +6101,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<SecurityToken> SecurityTokens {get; set;}	
 
 				/// <exclude/>
-				public SecurityTokenBuilder WithSecurityToken(SecurityToken value)
+				public C1Builder WithSecurityToken(SecurityToken value)
 		        {
 					if(this.SecurityTokens == null)
 					{
@@ -6115,7 +6115,7 @@ namespace Allors.Domain
 				public SearchData SearchData {get; set;}
 
 				/// <exclude/>
-				public SearchDataBuilder WithSearchData(SearchData value)
+				public C1Builder WithSearchData(SearchData value)
 		        {
 		            if(this.SearchData!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.SearchData = value;

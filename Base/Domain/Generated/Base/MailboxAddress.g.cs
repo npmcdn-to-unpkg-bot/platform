@@ -294,7 +294,7 @@ namespace Allors.Domain
 	{
 		public static readonly MailboxAddressMeta Instance = new MailboxAddressMeta();
 
-		public global::Allors.Meta.Class class = global::Allors.Meta.Classes.MailboxAddress;
+		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.MailboxAddress;
 
 		public global::Allors.Meta.RoleType PoBox 
 		{
@@ -379,7 +379,7 @@ namespace Allors.Domain
 				public global::System.String PoBox {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithPoBox(global::System.String value)
+				public MailboxAddressBuilder WithPoBox(global::System.String value)
 		        {
 				    if(this.PoBox!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.PoBox = value;
@@ -389,7 +389,7 @@ namespace Allors.Domain
 				public SearchData SearchData {get; set;}
 
 				/// <exclude/>
-				public SearchDataBuilder WithSearchData(SearchData value)
+				public MailboxAddressBuilder WithSearchData(SearchData value)
 		        {
 		            if(this.SearchData!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.SearchData = value;
@@ -400,7 +400,7 @@ namespace Allors.Domain
 				public Place Place {get; set;}
 
 				/// <exclude/>
-				public PlaceBuilder WithPlace(Place value)
+				public MailboxAddressBuilder WithPlace(Place value)
 		        {
 		            if(this.Place!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.Place = value;
@@ -411,7 +411,7 @@ namespace Allors.Domain
 				public global::System.String DisplayName {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithDisplayName(global::System.String value)
+				public MailboxAddressBuilder WithDisplayName(global::System.String value)
 		        {
 				    if(this.DisplayName!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.DisplayName = value;
@@ -421,7 +421,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<Permission> DeniedPermissions {get; set;}	
 
 				/// <exclude/>
-				public PermissionBuilder WithDeniedPermission(Permission value)
+				public MailboxAddressBuilder WithDeniedPermission(Permission value)
 		        {
 					if(this.DeniedPermissions == null)
 					{
@@ -435,7 +435,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<SecurityToken> SecurityTokens {get; set;}	
 
 				/// <exclude/>
-				public SecurityTokenBuilder WithSecurityToken(SecurityToken value)
+				public MailboxAddressBuilder WithSecurityToken(SecurityToken value)
 		        {
 					if(this.SecurityTokens == null)
 					{

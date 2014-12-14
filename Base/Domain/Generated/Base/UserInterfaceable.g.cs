@@ -22,7 +22,7 @@ namespace Allors.Domain
 	{
 		public static readonly UserInterfaceableMeta Instance = new UserInterfaceableMeta();
 
-		public global::Allors.Meta.Interface interface = global::Allors.Meta.Interfaces.UserInterfaceable;
+		public global::Allors.Meta.Interface ObjectType = global::Allors.Meta.Interfaces.UserInterfaceable;
 
 		public global::Allors.Meta.RoleType DisplayName 
 		{
@@ -50,9 +50,7 @@ namespace Allors.Domain
 
 	public partial interface UserInterfaceableBuilder : AccessControlledObjectBuilder , global::System.IDisposable
 	{	
-
 		global::System.String DisplayName {get;}
-
 		
 	}
 

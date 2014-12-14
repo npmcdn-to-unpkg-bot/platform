@@ -296,7 +296,7 @@ namespace Allors.Domain
 	{
 		public static readonly BadUIMeta Instance = new BadUIMeta();
 
-		public global::Allors.Meta.Class class = global::Allors.Meta.Classes.BadUI;
+		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.BadUI;
 
 		public global::Allors.Meta.RoleType PersonMany 
 		{
@@ -366,7 +366,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<Person> PersonsMany {get; set;}	
 
 				/// <exclude/>
-				public PersonBuilder WithPersonMany(Person value)
+				public BadUIBuilder WithPersonMany(Person value)
 		        {
 					if(this.PersonsMany == null)
 					{
@@ -380,7 +380,7 @@ namespace Allors.Domain
 				public Organisation CompanyOne {get; set;}
 
 				/// <exclude/>
-				public OrganisationBuilder WithCompanyOne(Organisation value)
+				public BadUIBuilder WithCompanyOne(Organisation value)
 		        {
 		            if(this.CompanyOne!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.CompanyOne = value;
@@ -391,7 +391,7 @@ namespace Allors.Domain
 				public Person PersonOne {get; set;}
 
 				/// <exclude/>
-				public PersonBuilder WithPersonOne(Person value)
+				public BadUIBuilder WithPersonOne(Person value)
 		        {
 		            if(this.PersonOne!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.PersonOne = value;
@@ -402,7 +402,7 @@ namespace Allors.Domain
 				public Organisation CompanyMany {get; set;}
 
 				/// <exclude/>
-				public OrganisationBuilder WithCompanyMany(Organisation value)
+				public BadUIBuilder WithCompanyMany(Organisation value)
 		        {
 		            if(this.CompanyMany!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.CompanyMany = value;
@@ -413,7 +413,7 @@ namespace Allors.Domain
 				public global::System.String AllorsString {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithAllorsString(global::System.String value)
+				public BadUIBuilder WithAllorsString(global::System.String value)
 		        {
 				    if(this.AllorsString!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.AllorsString = value;
@@ -423,7 +423,7 @@ namespace Allors.Domain
 				public global::System.String DisplayName {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithDisplayName(global::System.String value)
+				public BadUIBuilder WithDisplayName(global::System.String value)
 		        {
 				    if(this.DisplayName!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.DisplayName = value;
@@ -433,7 +433,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<Permission> DeniedPermissions {get; set;}	
 
 				/// <exclude/>
-				public PermissionBuilder WithDeniedPermission(Permission value)
+				public BadUIBuilder WithDeniedPermission(Permission value)
 		        {
 					if(this.DeniedPermissions == null)
 					{
@@ -447,7 +447,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<SecurityToken> SecurityTokens {get; set;}	
 
 				/// <exclude/>
-				public SecurityTokenBuilder WithSecurityToken(SecurityToken value)
+				public BadUIBuilder WithSecurityToken(SecurityToken value)
 		        {
 					if(this.SecurityTokens == null)
 					{

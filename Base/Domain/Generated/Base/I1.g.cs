@@ -629,7 +629,7 @@ namespace Allors.Domain
 	{
 		public static readonly I1Meta Instance = new I1Meta();
 
-		public global::Allors.Meta.Interface interface = global::Allors.Meta.Interfaces.I1;
+		public global::Allors.Meta.Interface ObjectType = global::Allors.Meta.Interfaces.I1;
 
 		public global::Allors.Meta.RoleType I1I1Many2One 
 		{
@@ -1351,9 +1351,7 @@ namespace Allors.Domain
 		I2 I1I2Many2One {get;}
 
 		
-
 		global::System.String I1AllorsString {get;}
-
 		
 		I12 I1I12Many2One {get;}
 
@@ -1369,9 +1367,7 @@ namespace Allors.Domain
 		C1 I1C1One2One {get;}
 
 		
-
 		global::System.Int32? I1AllorsInteger {get;}
-
 		
 
 		global::System.Collections.Generic.List<C2> I1C2Many2Manies {get;}		
@@ -1385,13 +1381,9 @@ namespace Allors.Domain
 		global::System.Collections.Generic.List<I1> I1I1Many2Manies {get;}		
 
 		
-
 		global::System.Boolean? I1AllorsBoolean {get;}
-
 		
-
 		global::System.Decimal? I1AllorsDecimal {get;}
-
 		
 		I12 I1I12One2One {get;}
 
@@ -1406,17 +1398,13 @@ namespace Allors.Domain
 		global::System.Collections.Generic.List<C1> I1C1One2Manies {get;}		
 
 		
-
 		global::System.Byte[] I1AllorsBinary {get;}
-
 		
 
 		global::System.Collections.Generic.List<C1> I1C1Many2Manies {get;}		
 
 		
-
 		global::System.Double? I1AllorsFloat {get;}
-
 		
 		I1 I1I1One2One {get;}
 
@@ -1431,9 +1419,7 @@ namespace Allors.Domain
 		C2 I1C2Many2One {get;}
 
 		
-
 		global::System.Guid? I1AllorsUnique {get;}
-
 		
 	}
 

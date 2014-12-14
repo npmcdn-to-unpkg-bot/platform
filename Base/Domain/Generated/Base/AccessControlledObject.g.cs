@@ -47,7 +47,7 @@ namespace Allors.Domain
 	{
 		public static readonly AccessControlledObjectMeta Instance = new AccessControlledObjectMeta();
 
-		public global::Allors.Meta.Interface interface = global::Allors.Meta.Interfaces.AccessControlledObject;
+		public global::Allors.Meta.Interface ObjectType = global::Allors.Meta.Interfaces.AccessControlledObject;
 
 		public global::Allors.Meta.RoleType DeniedPermission 
 		{

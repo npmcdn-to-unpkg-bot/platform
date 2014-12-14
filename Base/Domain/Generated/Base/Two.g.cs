@@ -201,7 +201,7 @@ namespace Allors.Domain
 	{
 		public static readonly TwoMeta Instance = new TwoMeta();
 
-		public global::Allors.Meta.Class class = global::Allors.Meta.Classes.Two;
+		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.Two;
 
 		public global::Allors.Meta.RoleType Shared 
 		{
@@ -258,7 +258,7 @@ namespace Allors.Domain
 				public Shared Shared {get; set;}
 
 				/// <exclude/>
-				public SharedBuilder WithShared(Shared value)
+				public TwoBuilder WithShared(Shared value)
 		        {
 		            if(this.Shared!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.Shared = value;
@@ -269,7 +269,7 @@ namespace Allors.Domain
 				public global::System.String DisplayName {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithDisplayName(global::System.String value)
+				public TwoBuilder WithDisplayName(global::System.String value)
 		        {
 				    if(this.DisplayName!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.DisplayName = value;
@@ -279,7 +279,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<Permission> DeniedPermissions {get; set;}	
 
 				/// <exclude/>
-				public PermissionBuilder WithDeniedPermission(Permission value)
+				public TwoBuilder WithDeniedPermission(Permission value)
 		        {
 					if(this.DeniedPermissions == null)
 					{
@@ -293,7 +293,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<SecurityToken> SecurityTokens {get; set;}	
 
 				/// <exclude/>
-				public SecurityTokenBuilder WithSecurityToken(SecurityToken value)
+				public TwoBuilder WithSecurityToken(SecurityToken value)
 		        {
 					if(this.SecurityTokens == null)
 					{

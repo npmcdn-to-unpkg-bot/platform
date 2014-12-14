@@ -474,11 +474,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Guid? UniqueId 
+		virtual public global::System.Guid UniqueId 
 		{
 			get
 			{
-				return (global::System.Guid?) Strategy.GetUnitRole(Meta.UniqueId);
+				return (global::System.Guid) Strategy.GetUnitRole(Meta.UniqueId);
 			}
 			set
 			{
@@ -1135,7 +1135,7 @@ namespace Allors.Domain
 	{
 		public static readonly PersonMeta Instance = new PersonMeta();
 
-		public global::Allors.Meta.Class class = global::Allors.Meta.Classes.Person;
+		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.Person;
 
 		public global::Allors.Meta.RoleType LastName 
 		{
@@ -1437,7 +1437,7 @@ namespace Allors.Domain
 				public global::System.String LastName {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithLastName(global::System.String value)
+				public PersonBuilder WithLastName(global::System.String value)
 		        {
 				    if(this.LastName!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.LastName = value;
@@ -1447,7 +1447,7 @@ namespace Allors.Domain
 				public global::System.String MiddleName {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithMiddleName(global::System.String value)
+				public PersonBuilder WithMiddleName(global::System.String value)
 		        {
 				    if(this.MiddleName!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.MiddleName = value;
@@ -1457,7 +1457,7 @@ namespace Allors.Domain
 				public global::System.String FirstName {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithFirstName(global::System.String value)
+				public PersonBuilder WithFirstName(global::System.String value)
 		        {
 				    if(this.FirstName!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.FirstName = value;
@@ -1467,7 +1467,7 @@ namespace Allors.Domain
 				public Address MainAddress {get; set;}
 
 				/// <exclude/>
-				public AddressBuilder WithMainAddress(Address value)
+				public PersonBuilder WithMainAddress(Address value)
 		        {
 		            if(this.MainAddress!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.MainAddress = value;
@@ -1478,7 +1478,7 @@ namespace Allors.Domain
 				public global::System.String TinyMCEText {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithTinyMCEText(global::System.String value)
+				public PersonBuilder WithTinyMCEText(global::System.String value)
 		        {
 				    if(this.TinyMCEText!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.TinyMCEText = value;
@@ -1488,7 +1488,7 @@ namespace Allors.Domain
 				public global::System.String Text {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithText(global::System.String value)
+				public PersonBuilder WithText(global::System.String value)
 		        {
 				    if(this.Text!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.Text = value;
@@ -1498,7 +1498,7 @@ namespace Allors.Domain
 				public global::System.Int32? Age {get; set;}
 
 				/// <exclude/>
-				public AllorsIntegerBuilder WithAge(global::System.Int32? value)
+				public PersonBuilder WithAge(global::System.Int32? value)
 		        {
 				    if(this.Age!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.Age = value;
@@ -1508,7 +1508,7 @@ namespace Allors.Domain
 				public global::System.Boolean? IsStudent {get; set;}
 
 				/// <exclude/>
-				public AllorsBooleanBuilder WithIsStudent(global::System.Boolean? value)
+				public PersonBuilder WithIsStudent(global::System.Boolean? value)
 		        {
 				    if(this.IsStudent!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.IsStudent = value;
@@ -1518,7 +1518,7 @@ namespace Allors.Domain
 				public MailboxAddress MailboxAddress {get; set;}
 
 				/// <exclude/>
-				public MailboxAddressBuilder WithMailboxAddress(MailboxAddress value)
+				public PersonBuilder WithMailboxAddress(MailboxAddress value)
 		        {
 		            if(this.MailboxAddress!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.MailboxAddress = value;
@@ -1529,7 +1529,7 @@ namespace Allors.Domain
 				public Gender Gender {get; set;}
 
 				/// <exclude/>
-				public GenderBuilder WithGender(Gender value)
+				public PersonBuilder WithGender(Gender value)
 		        {
 		            if(this.Gender!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.Gender = value;
@@ -1540,7 +1540,7 @@ namespace Allors.Domain
 				public global::System.String FullName {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithFullName(global::System.String value)
+				public PersonBuilder WithFullName(global::System.String value)
 		        {
 				    if(this.FullName!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.FullName = value;
@@ -1550,7 +1550,7 @@ namespace Allors.Domain
 				public global::System.Int32? ShirtSize {get; set;}
 
 				/// <exclude/>
-				public AllorsIntegerBuilder WithShirtSize(global::System.Int32? value)
+				public PersonBuilder WithShirtSize(global::System.Int32? value)
 		        {
 				    if(this.ShirtSize!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.ShirtSize = value;
@@ -1560,7 +1560,7 @@ namespace Allors.Domain
 				public global::System.String CKEditorText {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithCKEditorText(global::System.String value)
+				public PersonBuilder WithCKEditorText(global::System.String value)
 		        {
 				    if(this.CKEditorText!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.CKEditorText = value;
@@ -1570,7 +1570,7 @@ namespace Allors.Domain
 				public global::System.Boolean? IsMarried {get; set;}
 
 				/// <exclude/>
-				public AllorsBooleanBuilder WithIsMarried(global::System.Boolean? value)
+				public PersonBuilder WithIsMarried(global::System.Boolean? value)
 		        {
 				    if(this.IsMarried!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.IsMarried = value;
@@ -1580,7 +1580,7 @@ namespace Allors.Domain
 				public global::System.Decimal? Weight {get; set;}
 
 				/// <exclude/>
-				public AllorsDecimalBuilder WithWeight(global::System.Decimal? value)
+				public PersonBuilder WithWeight(global::System.Decimal? value)
 		        {
 				    if(this.Weight!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.Weight = value;
@@ -1590,7 +1590,7 @@ namespace Allors.Domain
 				public Media Photo {get; set;}
 
 				/// <exclude/>
-				public MediaBuilder WithPhoto(Media value)
+				public PersonBuilder WithPhoto(Media value)
 		        {
 		            if(this.Photo!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.Photo = value;
@@ -1601,7 +1601,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<Address> Addresses {get; set;}	
 
 				/// <exclude/>
-				public AddressBuilder WithAddress(Address value)
+				public PersonBuilder WithAddress(Address value)
 		        {
 					if(this.Addresses == null)
 					{
@@ -1615,7 +1615,7 @@ namespace Allors.Domain
 				public global::System.Boolean? UserEmailConfirmed {get; set;}
 
 				/// <exclude/>
-				public AllorsBooleanBuilder WithUserEmailConfirmed(global::System.Boolean? value)
+				public PersonBuilder WithUserEmailConfirmed(global::System.Boolean? value)
 		        {
 				    if(this.UserEmailConfirmed!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.UserEmailConfirmed = value;
@@ -1625,7 +1625,7 @@ namespace Allors.Domain
 				public global::System.String UserName {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithUserName(global::System.String value)
+				public PersonBuilder WithUserName(global::System.String value)
 		        {
 				    if(this.UserName!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.UserName = value;
@@ -1635,7 +1635,7 @@ namespace Allors.Domain
 				public global::System.String UserEmail {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithUserEmail(global::System.String value)
+				public PersonBuilder WithUserEmail(global::System.String value)
 		        {
 				    if(this.UserEmail!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.UserEmail = value;
@@ -1645,7 +1645,7 @@ namespace Allors.Domain
 				public global::System.String UserPasswordHash {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithUserPasswordHash(global::System.String value)
+				public PersonBuilder WithUserPasswordHash(global::System.String value)
 		        {
 				    if(this.UserPasswordHash!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.UserPasswordHash = value;
@@ -1655,7 +1655,7 @@ namespace Allors.Domain
 				public SecurityToken OwnerSecurityToken {get; set;}
 
 				/// <exclude/>
-				public SecurityTokenBuilder WithOwnerSecurityToken(SecurityToken value)
+				public PersonBuilder WithOwnerSecurityToken(SecurityToken value)
 		        {
 		            if(this.OwnerSecurityToken!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.OwnerSecurityToken = value;
@@ -1666,7 +1666,7 @@ namespace Allors.Domain
 				public global::System.String DisplayName {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithDisplayName(global::System.String value)
+				public PersonBuilder WithDisplayName(global::System.String value)
 		        {
 				    if(this.DisplayName!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.DisplayName = value;
@@ -1676,7 +1676,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<Permission> DeniedPermissions {get; set;}	
 
 				/// <exclude/>
-				public PermissionBuilder WithDeniedPermission(Permission value)
+				public PersonBuilder WithDeniedPermission(Permission value)
 		        {
 					if(this.DeniedPermissions == null)
 					{
@@ -1690,7 +1690,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<SecurityToken> SecurityTokens {get; set;}	
 
 				/// <exclude/>
-				public SecurityTokenBuilder WithSecurityToken(SecurityToken value)
+				public PersonBuilder WithSecurityToken(SecurityToken value)
 		        {
 					if(this.SecurityTokens == null)
 					{
@@ -1704,7 +1704,7 @@ namespace Allors.Domain
 				public Locale Locale {get; set;}
 
 				/// <exclude/>
-				public LocaleBuilder WithLocale(Locale value)
+				public PersonBuilder WithLocale(Locale value)
 		        {
 		            if(this.Locale!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.Locale = value;
@@ -1715,7 +1715,7 @@ namespace Allors.Domain
 				public global::System.Guid? UniqueId {get; set;}
 
 				/// <exclude/>
-				public AllorsUniqueBuilder WithUniqueId(global::System.Guid? value)
+				public PersonBuilder WithUniqueId(global::System.Guid? value)
 		        {
 				    if(this.UniqueId!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.UniqueId = value;
@@ -1725,7 +1725,7 @@ namespace Allors.Domain
 				public SearchData SearchData {get; set;}
 
 				/// <exclude/>
-				public SearchDataBuilder WithSearchData(SearchData value)
+				public PersonBuilder WithSearchData(SearchData value)
 		        {
 		            if(this.SearchData!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.SearchData = value;
@@ -1736,7 +1736,7 @@ namespace Allors.Domain
 				public global::System.String PrintContent {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithPrintContent(global::System.String value)
+				public PersonBuilder WithPrintContent(global::System.String value)
 		        {
 				    if(this.PrintContent!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.PrintContent = value;

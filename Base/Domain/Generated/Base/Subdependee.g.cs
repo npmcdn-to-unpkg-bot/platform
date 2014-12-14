@@ -76,7 +76,7 @@ namespace Allors.Domain
 	{
 		public static readonly SubdependeeMeta Instance = new SubdependeeMeta();
 
-		public global::Allors.Meta.Class class = global::Allors.Meta.Classes.Subdependee;
+		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.Subdependee;
 
 		public global::Allors.Meta.RoleType Subcounter 
 		{
@@ -105,7 +105,7 @@ namespace Allors.Domain
 				public global::System.Int32? Subcounter {get; set;}
 
 				/// <exclude/>
-				public AllorsIntegerBuilder WithSubcounter(global::System.Int32? value)
+				public SubdependeeBuilder WithSubcounter(global::System.Int32? value)
 		        {
 				    if(this.Subcounter!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.Subcounter = value;

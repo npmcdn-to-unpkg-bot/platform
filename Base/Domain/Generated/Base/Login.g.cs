@@ -113,7 +113,7 @@ namespace Allors.Domain
 	{
 		public static readonly LoginMeta Instance = new LoginMeta();
 
-		public global::Allors.Meta.Class class = global::Allors.Meta.Classes.Login;
+		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.Login;
 
 		public global::Allors.Meta.RoleType Key 
 		{
@@ -148,7 +148,7 @@ namespace Allors.Domain
 				public global::System.String Key {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithKey(global::System.String value)
+				public LoginBuilder WithKey(global::System.String value)
 		        {
 				    if(this.Key!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.Key = value;
@@ -158,7 +158,7 @@ namespace Allors.Domain
 				public global::System.String Provider {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithProvider(global::System.String value)
+				public LoginBuilder WithProvider(global::System.String value)
 		        {
 				    if(this.Provider!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.Provider = value;
@@ -168,7 +168,7 @@ namespace Allors.Domain
 				public User User {get; set;}
 
 				/// <exclude/>
-				public UserBuilder WithUser(User value)
+				public LoginBuilder WithUser(User value)
 		        {
 		            if(this.User!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.User = value;

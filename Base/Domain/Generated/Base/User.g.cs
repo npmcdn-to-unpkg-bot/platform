@@ -100,7 +100,7 @@ namespace Allors.Domain
 	{
 		public static readonly UserMeta Instance = new UserMeta();
 
-		public global::Allors.Meta.Interface interface = global::Allors.Meta.Interfaces.User;
+		public global::Allors.Meta.Interface ObjectType = global::Allors.Meta.Interfaces.User;
 
 		public global::Allors.Meta.RoleType UserEmailConfirmed 
 		{
@@ -199,21 +199,13 @@ namespace Allors.Domain
 
 	public partial interface UserBuilder : SecurityTokenOwnerBuilder ,UserInterfaceableBuilder ,LocalisedBuilder , global::System.IDisposable
 	{	
-
 		global::System.Boolean? UserEmailConfirmed {get;}
-
 		
-
 		global::System.String UserName {get;}
-
 		
-
 		global::System.String UserEmail {get;}
-
 		
-
 		global::System.String UserPasswordHash {get;}
-
 		
 	}
 

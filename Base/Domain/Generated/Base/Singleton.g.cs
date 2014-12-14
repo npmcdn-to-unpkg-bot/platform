@@ -357,7 +357,7 @@ namespace Allors.Domain
 	{
 		public static readonly SingletonMeta Instance = new SingletonMeta();
 
-		public global::Allors.Meta.Class class = global::Allors.Meta.Classes.Singleton;
+		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.Singleton;
 
 		public global::Allors.Meta.RoleType DefaultPrintQueue 
 		{
@@ -441,7 +441,7 @@ namespace Allors.Domain
 				public PrintQueue DefaultPrintQueue {get; set;}
 
 				/// <exclude/>
-				public PrintQueueBuilder WithDefaultPrintQueue(PrintQueue value)
+				public SingletonBuilder WithDefaultPrintQueue(PrintQueue value)
 		        {
 		            if(this.DefaultPrintQueue!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.DefaultPrintQueue = value;
@@ -452,7 +452,7 @@ namespace Allors.Domain
 				public Locale DefaultLocale {get; set;}
 
 				/// <exclude/>
-				public LocaleBuilder WithDefaultLocale(Locale value)
+				public SingletonBuilder WithDefaultLocale(Locale value)
 		        {
 		            if(this.DefaultLocale!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.DefaultLocale = value;
@@ -463,7 +463,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<Locale> Locales {get; set;}	
 
 				/// <exclude/>
-				public LocaleBuilder WithLocale(Locale value)
+				public SingletonBuilder WithLocale(Locale value)
 		        {
 					if(this.Locales == null)
 					{
@@ -477,7 +477,7 @@ namespace Allors.Domain
 				public SecurityToken AdministratorSecurityToken {get; set;}
 
 				/// <exclude/>
-				public SecurityTokenBuilder WithAdministratorSecurityToken(SecurityToken value)
+				public SingletonBuilder WithAdministratorSecurityToken(SecurityToken value)
 		        {
 		            if(this.AdministratorSecurityToken!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.AdministratorSecurityToken = value;
@@ -488,7 +488,7 @@ namespace Allors.Domain
 				public User Guest {get; set;}
 
 				/// <exclude/>
-				public UserBuilder WithGuest(User value)
+				public SingletonBuilder WithGuest(User value)
 		        {
 		            if(this.Guest!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.Guest = value;
@@ -499,7 +499,7 @@ namespace Allors.Domain
 				public SecurityToken DefaultSecurityToken {get; set;}
 
 				/// <exclude/>
-				public SecurityTokenBuilder WithDefaultSecurityToken(SecurityToken value)
+				public SingletonBuilder WithDefaultSecurityToken(SecurityToken value)
 		        {
 		            if(this.DefaultSecurityToken!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.DefaultSecurityToken = value;
@@ -510,7 +510,7 @@ namespace Allors.Domain
 				public StringTemplate PersonTemplate {get; set;}
 
 				/// <exclude/>
-				public StringTemplateBuilder WithPersonTemplate(StringTemplate value)
+				public SingletonBuilder WithPersonTemplate(StringTemplate value)
 		        {
 		            if(this.PersonTemplate!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.PersonTemplate = value;
@@ -521,7 +521,7 @@ namespace Allors.Domain
 				public global::System.String DisplayName {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithDisplayName(global::System.String value)
+				public SingletonBuilder WithDisplayName(global::System.String value)
 		        {
 				    if(this.DisplayName!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.DisplayName = value;
@@ -531,7 +531,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<Permission> DeniedPermissions {get; set;}	
 
 				/// <exclude/>
-				public PermissionBuilder WithDeniedPermission(Permission value)
+				public SingletonBuilder WithDeniedPermission(Permission value)
 		        {
 					if(this.DeniedPermissions == null)
 					{
@@ -545,7 +545,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<SecurityToken> SecurityTokens {get; set;}	
 
 				/// <exclude/>
-				public SecurityTokenBuilder WithSecurityToken(SecurityToken value)
+				public SingletonBuilder WithSecurityToken(SecurityToken value)
 		        {
 					if(this.SecurityTokens == null)
 					{

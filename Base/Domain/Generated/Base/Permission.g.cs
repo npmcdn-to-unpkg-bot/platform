@@ -53,11 +53,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Guid? OperandTypePointer 
+		virtual public global::System.Guid OperandTypePointer 
 		{
 			get
 			{
-				return (global::System.Guid?) Strategy.GetUnitRole(Meta.OperandTypePointer);
+				return (global::System.Guid) Strategy.GetUnitRole(Meta.OperandTypePointer);
 			}
 			set
 			{
@@ -79,11 +79,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Guid? ConcreteClassPointer 
+		virtual public global::System.Guid ConcreteClassPointer 
 		{
 			get
 			{
-				return (global::System.Guid?) Strategy.GetUnitRole(Meta.ConcreteClassPointer);
+				return (global::System.Guid) Strategy.GetUnitRole(Meta.ConcreteClassPointer);
 			}
 			set
 			{
@@ -105,11 +105,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Int32? OperationEnum 
+		virtual public global::System.Int32 OperationEnum 
 		{
 			get
 			{
-				return (global::System.Int32?) Strategy.GetUnitRole(Meta.OperationEnum);
+				return (global::System.Int32) Strategy.GetUnitRole(Meta.OperationEnum);
 			}
 			set
 			{
@@ -285,7 +285,7 @@ namespace Allors.Domain
 	{
 		public static readonly PermissionMeta Instance = new PermissionMeta();
 
-		public global::Allors.Meta.Class class = global::Allors.Meta.Classes.Permission;
+		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.Permission;
 
 		public global::Allors.Meta.RoleType OperandTypePointer 
 		{
@@ -363,7 +363,7 @@ namespace Allors.Domain
 				public global::System.Guid? OperandTypePointer {get; set;}
 
 				/// <exclude/>
-				public AllorsUniqueBuilder WithOperandTypePointer(global::System.Guid? value)
+				public PermissionBuilder WithOperandTypePointer(global::System.Guid? value)
 		        {
 				    if(this.OperandTypePointer!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.OperandTypePointer = value;
@@ -373,7 +373,7 @@ namespace Allors.Domain
 				public global::System.Guid? ConcreteClassPointer {get; set;}
 
 				/// <exclude/>
-				public AllorsUniqueBuilder WithConcreteClassPointer(global::System.Guid? value)
+				public PermissionBuilder WithConcreteClassPointer(global::System.Guid? value)
 		        {
 				    if(this.ConcreteClassPointer!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.ConcreteClassPointer = value;
@@ -383,7 +383,7 @@ namespace Allors.Domain
 				public global::System.Int32? OperationEnum {get; set;}
 
 				/// <exclude/>
-				public AllorsIntegerBuilder WithOperationEnum(global::System.Int32? value)
+				public PermissionBuilder WithOperationEnum(global::System.Int32? value)
 		        {
 				    if(this.OperationEnum!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.OperationEnum = value;
@@ -393,7 +393,7 @@ namespace Allors.Domain
 				public global::System.String DisplayName {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithDisplayName(global::System.String value)
+				public PermissionBuilder WithDisplayName(global::System.String value)
 		        {
 				    if(this.DisplayName!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.DisplayName = value;
@@ -417,7 +417,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<SecurityToken> SecurityTokens {get; set;}	
 
 				/// <exclude/>
-				public SecurityTokenBuilder WithSecurityToken(SecurityToken value)
+				public PermissionBuilder WithSecurityToken(SecurityToken value)
 		        {
 					if(this.SecurityTokens == null)
 					{

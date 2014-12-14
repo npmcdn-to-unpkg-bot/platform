@@ -52,7 +52,7 @@ namespace Allors.Domain
 	{
 		public static readonly ObjectStateMeta Instance = new ObjectStateMeta();
 
-		public global::Allors.Meta.Interface interface = global::Allors.Meta.Interfaces.ObjectState;
+		public global::Allors.Meta.Interface ObjectType = global::Allors.Meta.Interfaces.ObjectState;
 
 		public global::Allors.Meta.RoleType DeniedPermission 
 		{

@@ -170,7 +170,7 @@ namespace Allors.Domain
 	{
 		public static readonly DependeeMeta Instance = new DependeeMeta();
 
-		public global::Allors.Meta.Class class = global::Allors.Meta.Classes.Dependee;
+		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.Dependee;
 
 		public global::Allors.Meta.RoleType Subdependee 
 		{
@@ -220,7 +220,7 @@ namespace Allors.Domain
 				public Subdependee Subdependee {get; set;}
 
 				/// <exclude/>
-				public SubdependeeBuilder WithSubdependee(Subdependee value)
+				public DependeeBuilder WithSubdependee(Subdependee value)
 		        {
 		            if(this.Subdependee!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.Subdependee = value;
@@ -231,7 +231,7 @@ namespace Allors.Domain
 				public global::System.Int32? Subcounter {get; set;}
 
 				/// <exclude/>
-				public AllorsIntegerBuilder WithSubcounter(global::System.Int32? value)
+				public DependeeBuilder WithSubcounter(global::System.Int32? value)
 		        {
 				    if(this.Subcounter!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.Subcounter = value;
@@ -241,7 +241,7 @@ namespace Allors.Domain
 				public global::System.Int32? Counter {get; set;}
 
 				/// <exclude/>
-				public AllorsIntegerBuilder WithCounter(global::System.Int32? value)
+				public DependeeBuilder WithCounter(global::System.Int32? value)
 		        {
 				    if(this.Counter!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.Counter = value;
@@ -251,7 +251,7 @@ namespace Allors.Domain
 				public global::System.Boolean? DeleteDependent {get; set;}
 
 				/// <exclude/>
-				public AllorsBooleanBuilder WithDeleteDependent(global::System.Boolean? value)
+				public DependeeBuilder WithDeleteDependent(global::System.Boolean? value)
 		        {
 				    if(this.DeleteDependent!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.DeleteDependent = value;

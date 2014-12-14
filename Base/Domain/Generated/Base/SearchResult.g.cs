@@ -10,7 +10,7 @@ namespace Allors.Domain
 	{
 		public static readonly SearchResultMeta Instance = new SearchResultMeta();
 
-		public global::Allors.Meta.Interface interface = global::Allors.Meta.Interfaces.SearchResult;
+		public global::Allors.Meta.Interface ObjectType = global::Allors.Meta.Interfaces.SearchResult;
 
 		public global::Allors.Meta.RoleType DisplayName 
 		{

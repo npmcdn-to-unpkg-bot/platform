@@ -114,7 +114,7 @@ namespace Allors.Domain
 	{
 		public static readonly StatefulCompanyMeta Instance = new StatefulCompanyMeta();
 
-		public global::Allors.Meta.Class class = global::Allors.Meta.Classes.StatefulCompany;
+		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.StatefulCompany;
 
 		public global::Allors.Meta.RoleType Employee 
 		{
@@ -149,7 +149,7 @@ namespace Allors.Domain
 				public Person Employee {get; set;}
 
 				/// <exclude/>
-				public PersonBuilder WithEmployee(Person value)
+				public StatefulCompanyBuilder WithEmployee(Person value)
 		        {
 		            if(this.Employee!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.Employee = value;
@@ -160,7 +160,7 @@ namespace Allors.Domain
 				public global::System.String Name {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithName(global::System.String value)
+				public StatefulCompanyBuilder WithName(global::System.String value)
 		        {
 				    if(this.Name!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.Name = value;
@@ -170,7 +170,7 @@ namespace Allors.Domain
 				public Person Manager {get; set;}
 
 				/// <exclude/>
-				public PersonBuilder WithManager(Person value)
+				public StatefulCompanyBuilder WithManager(Person value)
 		        {
 		            if(this.Manager!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.Manager = value;

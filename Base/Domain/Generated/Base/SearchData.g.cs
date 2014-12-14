@@ -200,7 +200,7 @@ namespace Allors.Domain
 	{
 		public static readonly SearchDataMeta Instance = new SearchDataMeta();
 
-		public global::Allors.Meta.Class class = global::Allors.Meta.Classes.SearchData;
+		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.SearchData;
 
 		public global::Allors.Meta.RoleType CharacterBoundaryText 
 		{
@@ -257,7 +257,7 @@ namespace Allors.Domain
 				public global::System.String CharacterBoundaryText {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithCharacterBoundaryText(global::System.String value)
+				public SearchDataBuilder WithCharacterBoundaryText(global::System.String value)
 		        {
 				    if(this.CharacterBoundaryText!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.CharacterBoundaryText = value;
@@ -267,7 +267,7 @@ namespace Allors.Domain
 				public global::System.String PreviousCharacterBoundaryText {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithPreviousCharacterBoundaryText(global::System.String value)
+				public SearchDataBuilder WithPreviousCharacterBoundaryText(global::System.String value)
 		        {
 				    if(this.PreviousCharacterBoundaryText!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.PreviousCharacterBoundaryText = value;
@@ -277,7 +277,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<SearchFragment> SearchFragments {get; set;}	
 
 				/// <exclude/>
-				public SearchFragmentBuilder WithSearchFragment(SearchFragment value)
+				public SearchDataBuilder WithSearchFragment(SearchFragment value)
 		        {
 					if(this.SearchFragments == null)
 					{
@@ -291,7 +291,7 @@ namespace Allors.Domain
 				public global::System.String PreviousWordBoundaryText {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithPreviousWordBoundaryText(global::System.String value)
+				public SearchDataBuilder WithPreviousWordBoundaryText(global::System.String value)
 		        {
 				    if(this.PreviousWordBoundaryText!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.PreviousWordBoundaryText = value;
@@ -301,7 +301,7 @@ namespace Allors.Domain
 				public global::System.String WordBoundaryText {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithWordBoundaryText(global::System.String value)
+				public SearchDataBuilder WithWordBoundaryText(global::System.String value)
 		        {
 				    if(this.WordBoundaryText!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.WordBoundaryText = value;

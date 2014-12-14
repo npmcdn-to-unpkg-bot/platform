@@ -58,7 +58,7 @@ namespace Allors.Domain
 	{
 		public static readonly DerivationLogC1Meta Instance = new DerivationLogC1Meta();
 
-		public global::Allors.Meta.Class class = global::Allors.Meta.Classes.DerivationLogC1;
+		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.DerivationLogC1;
 
 		public global::Allors.Meta.RoleType UniqueId 
 		{
@@ -79,7 +79,7 @@ namespace Allors.Domain
 				public global::System.Guid? UniqueId {get; set;}
 
 				/// <exclude/>
-				public AllorsUniqueBuilder WithUniqueId(global::System.Guid? value)
+				public DerivationLogC1Builder WithUniqueId(global::System.Guid? value)
 		        {
 				    if(this.UniqueId!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.UniqueId = value;

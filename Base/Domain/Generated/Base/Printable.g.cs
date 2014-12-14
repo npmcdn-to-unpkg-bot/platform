@@ -34,7 +34,7 @@ namespace Allors.Domain
 	{
 		public static readonly PrintableMeta Instance = new PrintableMeta();
 
-		public global::Allors.Meta.Interface interface = global::Allors.Meta.Interfaces.Printable;
+		public global::Allors.Meta.Interface ObjectType = global::Allors.Meta.Interfaces.Printable;
 
 		public global::Allors.Meta.RoleType PrintContent 
 		{
@@ -84,9 +84,7 @@ namespace Allors.Domain
 
 	public partial interface PrintableBuilder : UserInterfaceableBuilder ,UniquelyIdentifiableBuilder , global::System.IDisposable
 	{	
-
 		global::System.String PrintContent {get;}
-
 		
 	}
 

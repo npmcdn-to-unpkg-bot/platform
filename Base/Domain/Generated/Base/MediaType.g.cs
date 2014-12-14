@@ -212,7 +212,7 @@ namespace Allors.Domain
 	{
 		public static readonly MediaTypeMeta Instance = new MediaTypeMeta();
 
-		public global::Allors.Meta.Class class = global::Allors.Meta.Classes.MediaType;
+		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.MediaType;
 
 		public global::Allors.Meta.RoleType DefaultFileExtension 
 		{
@@ -269,7 +269,7 @@ namespace Allors.Domain
 				public global::System.String DefaultFileExtension {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithDefaultFileExtension(global::System.String value)
+				public MediaTypeBuilder WithDefaultFileExtension(global::System.String value)
 		        {
 				    if(this.DefaultFileExtension!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.DefaultFileExtension = value;
@@ -279,7 +279,7 @@ namespace Allors.Domain
 				public global::System.String Name {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithName(global::System.String value)
+				public MediaTypeBuilder WithName(global::System.String value)
 		        {
 				    if(this.Name!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.Name = value;
@@ -289,7 +289,7 @@ namespace Allors.Domain
 				public global::System.String DisplayName {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithDisplayName(global::System.String value)
+				public MediaTypeBuilder WithDisplayName(global::System.String value)
 		        {
 				    if(this.DisplayName!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.DisplayName = value;
@@ -299,7 +299,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<Permission> DeniedPermissions {get; set;}	
 
 				/// <exclude/>
-				public PermissionBuilder WithDeniedPermission(Permission value)
+				public MediaTypeBuilder WithDeniedPermission(Permission value)
 		        {
 					if(this.DeniedPermissions == null)
 					{
@@ -313,7 +313,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<SecurityToken> SecurityTokens {get; set;}	
 
 				/// <exclude/>
-				public SecurityTokenBuilder WithSecurityToken(SecurityToken value)
+				public MediaTypeBuilder WithSecurityToken(SecurityToken value)
 		        {
 					if(this.SecurityTokens == null)
 					{

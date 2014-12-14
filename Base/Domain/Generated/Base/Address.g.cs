@@ -59,7 +59,7 @@ namespace Allors.Domain
 	{
 		public static readonly AddressMeta Instance = new AddressMeta();
 
-		public global::Allors.Meta.Interface interface = global::Allors.Meta.Interfaces.Address;
+		public global::Allors.Meta.Interface ObjectType = global::Allors.Meta.Interfaces.Address;
 
 		public global::Allors.Meta.RoleType Place 
 		{

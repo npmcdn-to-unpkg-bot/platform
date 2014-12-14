@@ -25,7 +25,7 @@ namespace Allors.Domain
 	{
 		public static readonly LocalisedMeta Instance = new LocalisedMeta();
 
-		public global::Allors.Meta.Interface interface = global::Allors.Meta.Interfaces.Localised;
+		public global::Allors.Meta.Interface ObjectType = global::Allors.Meta.Interfaces.Localised;
 
 		public global::Allors.Meta.RoleType Locale 
 		{

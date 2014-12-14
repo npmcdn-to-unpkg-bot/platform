@@ -330,7 +330,7 @@ namespace Allors.Domain
 	{
 		public static readonly CountryMeta Instance = new CountryMeta();
 
-		public global::Allors.Meta.Class class = global::Allors.Meta.Classes.Country;
+		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.Country;
 
 		public global::Allors.Meta.RoleType Currency 
 		{
@@ -415,7 +415,7 @@ namespace Allors.Domain
 				public Currency Currency {get; set;}
 
 				/// <exclude/>
-				public CurrencyBuilder WithCurrency(Currency value)
+				public CountryBuilder WithCurrency(Currency value)
 		        {
 		            if(this.Currency!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.Currency = value;
@@ -426,7 +426,7 @@ namespace Allors.Domain
 				public global::System.String Name {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithName(global::System.String value)
+				public CountryBuilder WithName(global::System.String value)
 		        {
 				    if(this.Name!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.Name = value;
@@ -436,7 +436,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<LocalisedText> LocalisedNames {get; set;}	
 
 				/// <exclude/>
-				public LocalisedTextBuilder WithLocalisedName(LocalisedText value)
+				public CountryBuilder WithLocalisedName(LocalisedText value)
 		        {
 					if(this.LocalisedNames == null)
 					{
@@ -450,7 +450,7 @@ namespace Allors.Domain
 				public global::System.String IsoCode {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithIsoCode(global::System.String value)
+				public CountryBuilder WithIsoCode(global::System.String value)
 		        {
 				    if(this.IsoCode!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.IsoCode = value;
@@ -460,7 +460,7 @@ namespace Allors.Domain
 				public global::System.String DisplayName {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithDisplayName(global::System.String value)
+				public CountryBuilder WithDisplayName(global::System.String value)
 		        {
 				    if(this.DisplayName!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.DisplayName = value;
@@ -470,7 +470,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<Permission> DeniedPermissions {get; set;}	
 
 				/// <exclude/>
-				public PermissionBuilder WithDeniedPermission(Permission value)
+				public CountryBuilder WithDeniedPermission(Permission value)
 		        {
 					if(this.DeniedPermissions == null)
 					{
@@ -484,7 +484,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<SecurityToken> SecurityTokens {get; set;}	
 
 				/// <exclude/>
-				public SecurityTokenBuilder WithSecurityToken(SecurityToken value)
+				public CountryBuilder WithSecurityToken(SecurityToken value)
 		        {
 					if(this.SecurityTokens == null)
 					{
@@ -498,7 +498,7 @@ namespace Allors.Domain
 				public SearchData SearchData {get; set;}
 
 				/// <exclude/>
-				public SearchDataBuilder WithSearchData(SearchData value)
+				public CountryBuilder WithSearchData(SearchData value)
 		        {
 		            if(this.SearchData!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.SearchData = value;

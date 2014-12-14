@@ -404,11 +404,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Guid? UniqueId 
+		virtual public global::System.Guid UniqueId 
 		{
 			get
 			{
-				return (global::System.Guid?) Strategy.GetUnitRole(Meta.UniqueId);
+				return (global::System.Guid) Strategy.GetUnitRole(Meta.UniqueId);
 			}
 			set
 			{
@@ -567,7 +567,7 @@ namespace Allors.Domain
 	{
 		public static readonly OrganisationMeta Instance = new OrganisationMeta();
 
-		public global::Allors.Meta.Class class = global::Allors.Meta.Classes.Organisation;
+		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.Organisation;
 
 		public global::Allors.Meta.RoleType Shareholder 
 		{
@@ -709,7 +709,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<Person> Shareholders {get; set;}	
 
 				/// <exclude/>
-				public PersonBuilder WithShareholder(Person value)
+				public OrganisationBuilder WithShareholder(Person value)
 		        {
 					if(this.Shareholders == null)
 					{
@@ -723,7 +723,7 @@ namespace Allors.Domain
 				public global::System.String Name {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithName(global::System.String value)
+				public OrganisationBuilder WithName(global::System.String value)
 		        {
 				    if(this.Name!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.Name = value;
@@ -733,7 +733,7 @@ namespace Allors.Domain
 				public global::System.String Description {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithDescription(global::System.String value)
+				public OrganisationBuilder WithDescription(global::System.String value)
 		        {
 				    if(this.Description!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.Description = value;
@@ -743,7 +743,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<Person> Employees {get; set;}	
 
 				/// <exclude/>
-				public PersonBuilder WithEmployee(Person value)
+				public OrganisationBuilder WithEmployee(Person value)
 		        {
 					if(this.Employees == null)
 					{
@@ -757,7 +757,7 @@ namespace Allors.Domain
 				public global::System.Boolean? Incorporated {get; set;}
 
 				/// <exclude/>
-				public AllorsBooleanBuilder WithIncorporated(global::System.Boolean? value)
+				public OrganisationBuilder WithIncorporated(global::System.Boolean? value)
 		        {
 				    if(this.Incorporated!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.Incorporated = value;
@@ -767,7 +767,7 @@ namespace Allors.Domain
 				public global::System.Boolean? IsSupplier {get; set;}
 
 				/// <exclude/>
-				public AllorsBooleanBuilder WithIsSupplier(global::System.Boolean? value)
+				public OrganisationBuilder WithIsSupplier(global::System.Boolean? value)
 		        {
 				    if(this.IsSupplier!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.IsSupplier = value;
@@ -777,7 +777,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<Address> Addresses {get; set;}	
 
 				/// <exclude/>
-				public AddressBuilder WithAddress(Address value)
+				public OrganisationBuilder WithAddress(Address value)
 		        {
 					if(this.Addresses == null)
 					{
@@ -791,7 +791,7 @@ namespace Allors.Domain
 				public Person Owner {get; set;}
 
 				/// <exclude/>
-				public PersonBuilder WithOwner(Person value)
+				public OrganisationBuilder WithOwner(Person value)
 		        {
 		            if(this.Owner!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.Owner = value;
@@ -802,7 +802,7 @@ namespace Allors.Domain
 				public Media Logo {get; set;}
 
 				/// <exclude/>
-				public MediaBuilder WithLogo(Media value)
+				public OrganisationBuilder WithLogo(Media value)
 		        {
 		            if(this.Logo!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.Logo = value;
@@ -813,7 +813,7 @@ namespace Allors.Domain
 				public global::System.String Size {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithSize(global::System.String value)
+				public OrganisationBuilder WithSize(global::System.String value)
 		        {
 				    if(this.Size!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.Size = value;
@@ -823,7 +823,7 @@ namespace Allors.Domain
 				public SearchData SearchData {get; set;}
 
 				/// <exclude/>
-				public SearchDataBuilder WithSearchData(SearchData value)
+				public OrganisationBuilder WithSearchData(SearchData value)
 		        {
 		            if(this.SearchData!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.SearchData = value;
@@ -834,7 +834,7 @@ namespace Allors.Domain
 				public global::System.Guid? UniqueId {get; set;}
 
 				/// <exclude/>
-				public AllorsUniqueBuilder WithUniqueId(global::System.Guid? value)
+				public OrganisationBuilder WithUniqueId(global::System.Guid? value)
 		        {
 				    if(this.UniqueId!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.UniqueId = value;
@@ -844,7 +844,7 @@ namespace Allors.Domain
 				public global::System.String DisplayName {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithDisplayName(global::System.String value)
+				public OrganisationBuilder WithDisplayName(global::System.String value)
 		        {
 				    if(this.DisplayName!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.DisplayName = value;
@@ -854,7 +854,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<Permission> DeniedPermissions {get; set;}	
 
 				/// <exclude/>
-				public PermissionBuilder WithDeniedPermission(Permission value)
+				public OrganisationBuilder WithDeniedPermission(Permission value)
 		        {
 					if(this.DeniedPermissions == null)
 					{
@@ -868,7 +868,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<SecurityToken> SecurityTokens {get; set;}	
 
 				/// <exclude/>
-				public SecurityTokenBuilder WithSecurityToken(SecurityToken value)
+				public OrganisationBuilder WithSecurityToken(SecurityToken value)
 		        {
 					if(this.SecurityTokens == null)
 					{

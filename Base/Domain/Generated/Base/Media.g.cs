@@ -101,11 +101,11 @@ namespace Allors.Domain
 
 
 
-		virtual public global::System.Guid? UniqueId 
+		virtual public global::System.Guid UniqueId 
 		{
 			get
 			{
-				return (global::System.Guid?) Strategy.GetUnitRole(Meta.UniqueId);
+				return (global::System.Guid) Strategy.GetUnitRole(Meta.UniqueId);
 			}
 			set
 			{
@@ -298,7 +298,7 @@ namespace Allors.Domain
 	{
 		public static readonly MediaMeta Instance = new MediaMeta();
 
-		public global::Allors.Meta.Class class = global::Allors.Meta.Classes.Media;
+		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.Media;
 
 		public global::Allors.Meta.RoleType MediaType 
 		{
@@ -383,7 +383,7 @@ namespace Allors.Domain
 				public MediaType MediaType {get; set;}
 
 				/// <exclude/>
-				public MediaTypeBuilder WithMediaType(MediaType value)
+				public MediaBuilder WithMediaType(MediaType value)
 		        {
 		            if(this.MediaType!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.MediaType = value;
@@ -394,7 +394,7 @@ namespace Allors.Domain
 				public MediaContent MediaContent {get; set;}
 
 				/// <exclude/>
-				public MediaContentBuilder WithMediaContent(MediaContent value)
+				public MediaBuilder WithMediaContent(MediaContent value)
 		        {
 		            if(this.MediaContent!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.MediaContent = value;
@@ -405,7 +405,7 @@ namespace Allors.Domain
 				public global::System.Guid? UniqueId {get; set;}
 
 				/// <exclude/>
-				public AllorsUniqueBuilder WithUniqueId(global::System.Guid? value)
+				public MediaBuilder WithUniqueId(global::System.Guid? value)
 		        {
 				    if(this.UniqueId!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.UniqueId = value;
@@ -415,7 +415,7 @@ namespace Allors.Domain
 				public global::System.String DisplayName {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithDisplayName(global::System.String value)
+				public MediaBuilder WithDisplayName(global::System.String value)
 		        {
 				    if(this.DisplayName!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.DisplayName = value;
@@ -425,7 +425,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<Permission> DeniedPermissions {get; set;}	
 
 				/// <exclude/>
-				public PermissionBuilder WithDeniedPermission(Permission value)
+				public MediaBuilder WithDeniedPermission(Permission value)
 		        {
 					if(this.DeniedPermissions == null)
 					{
@@ -439,7 +439,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<SecurityToken> SecurityTokens {get; set;}	
 
 				/// <exclude/>
-				public SecurityTokenBuilder WithSecurityToken(SecurityToken value)
+				public MediaBuilder WithSecurityToken(SecurityToken value)
 		        {
 					if(this.SecurityTokens == null)
 					{

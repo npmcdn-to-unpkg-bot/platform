@@ -22,7 +22,7 @@ namespace Allors.Domain
 	{
 		public static readonly DerivationLogI12Meta Instance = new DerivationLogI12Meta();
 
-		public global::Allors.Meta.Interface interface = global::Allors.Meta.Interfaces.DerivationLogI12;
+		public global::Allors.Meta.Interface ObjectType = global::Allors.Meta.Interfaces.DerivationLogI12;
 
 		public global::Allors.Meta.RoleType UniqueId 
 		{
@@ -36,9 +36,7 @@ namespace Allors.Domain
 
 	public partial interface DerivationLogI12Builder :  global::System.IDisposable
 	{	
-
 		global::System.Guid? UniqueId {get;}
-
 		
 	}
 

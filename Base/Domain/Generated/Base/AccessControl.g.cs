@@ -289,7 +289,7 @@ namespace Allors.Domain
 	{
 		public static readonly AccessControlMeta Instance = new AccessControlMeta();
 
-		public global::Allors.Meta.Class class = global::Allors.Meta.Classes.AccessControl;
+		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.AccessControl;
 
 		public global::Allors.Meta.RoleType SubjectGroup 
 		{
@@ -352,7 +352,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<UserGroup> SubjectGroups {get; set;}	
 
 				/// <exclude/>
-				public UserGroupBuilder WithSubjectGroup(UserGroup value)
+				public AccessControlBuilder WithSubjectGroup(UserGroup value)
 		        {
 					if(this.SubjectGroups == null)
 					{
@@ -366,7 +366,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<User> Subjects {get; set;}	
 
 				/// <exclude/>
-				public UserBuilder WithSubject(User value)
+				public AccessControlBuilder WithSubject(User value)
 		        {
 					if(this.Subjects == null)
 					{
@@ -380,7 +380,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<SecurityToken> Objects {get; set;}	
 
 				/// <exclude/>
-				public SecurityTokenBuilder WithObject(SecurityToken value)
+				public AccessControlBuilder WithObject(SecurityToken value)
 		        {
 					if(this.Objects == null)
 					{
@@ -394,7 +394,7 @@ namespace Allors.Domain
 				public Role Role {get; set;}
 
 				/// <exclude/>
-				public RoleBuilder WithRole(Role value)
+				public AccessControlBuilder WithRole(Role value)
 		        {
 		            if(this.Role!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.Role = value;
@@ -405,7 +405,7 @@ namespace Allors.Domain
 				public global::System.String DisplayName {get; set;}
 
 				/// <exclude/>
-				public AllorsStringBuilder WithDisplayName(global::System.String value)
+				public AccessControlBuilder WithDisplayName(global::System.String value)
 		        {
 				    if(this.DisplayName!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.DisplayName = value;
@@ -415,7 +415,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<Permission> DeniedPermissions {get; set;}	
 
 				/// <exclude/>
-				public PermissionBuilder WithDeniedPermission(Permission value)
+				public AccessControlBuilder WithDeniedPermission(Permission value)
 		        {
 					if(this.DeniedPermissions == null)
 					{
@@ -429,7 +429,7 @@ namespace Allors.Domain
 				public global::System.Collections.Generic.List<SecurityToken> SecurityTokens {get; set;}	
 
 				/// <exclude/>
-				public SecurityTokenBuilder WithSecurityToken(SecurityToken value)
+				public AccessControlBuilder WithSecurityToken(SecurityToken value)
 		        {
 					if(this.SecurityTokens == null)
 					{

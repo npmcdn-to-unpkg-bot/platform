@@ -92,7 +92,7 @@ $interface.exclusiveAssociationTypes:{associationType|$interfaceExclusiveAssocia
 	{
 		public static readonly $interface.name$Meta Instance = new $interface.name$Meta();
 
-		public global::Allors.Meta.Interface interface = global::Allors.Meta.Interfaces.$interface.Name$;
+		public global::Allors.Meta.Interface ObjectType = global::Allors.Meta.Interfaces.$interface.Name$;
 
 $interface.RoleTypes:{roleType|$objectTypeRoleType_Meta()$
 }$
@@ -186,28 +186,14 @@ $endif$
 
 interfaceExclusiveRoleTypes_Builder() ::= <<
 $if(roleType.ObjectType.IsUnit)$
-$if(roleType.ObjectType.IsString)$
-		
-		$roleType_ObjectType(roleType)$ $roleType.PropertyName$ {get;}
-
-$else$
-$if(roleType.ObjectType.IsBinary)$
-		
-		$roleType_ObjectType(roleType)$ $roleType.PropertyName$ {get;}
-
-$else$
-		
-		$roleType_ObjectType(roleType)$ $roleType.PropertyName$ {get;}
-
-$endif$
-$endif$
+		$objectType_NullableName(roleType.ObjectType)$ $roleType.PropertyName$ {get;}
 $else$
 $if(roleType.IsOne)$
-		$roleType_ObjectType(roleType)$ $roleType.PropertyName$ {get;}
+		$objectType_NullableName(roleType.ObjectType)$ $roleType.PropertyName$ {get;}
 
 $else$
 		
-		global::System.Collections.Generic.List<$roleType_ObjectType(roleType)$> $roleType.PropertyName$ {get;}		
+		global::System.Collections.Generic.List<$objectType_Name(roleType.ObjectType)$> $roleType.PropertyName$ {get;}		
 
 $endif$
 $endif$		
@@ -249,7 +235,7 @@ $class.AssociationTypes:{associationType|$classAssociationType_Class()$}$
 	{
 		public static readonly $class.name$Meta Instance = new $class.name$Meta();
 
-		public global::Allors.Meta.Class class = global::Allors.Meta.Classes.$class.Name$;
+		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.$class.Name$;
 
 $class.RoleTypes:{roleType|$objectTypeRoleType_Meta()$
 }$
@@ -436,19 +422,19 @@ $endif$
 
 classUnitRoleType_Builder() ::= <<
 $if(roleType.ObjectType.IsString)$
-		public $objectType_Nullable(roleType.ObjectType)$ $roleType.PropertyName$ {get; set;}
+		public $objectType_NullableName(roleType.ObjectType)$ $roleType.PropertyName$ {get; set;}
 
 $else$
 $if(roleType.ObjectType.IsBinary)$
-		public $objectType_Nullable(roleType.ObjectType)$ $roleType.PropertyName$ {get; set;}
+		public $objectType_NullableName(roleType.ObjectType)$ $roleType.PropertyName$ {get; set;}
 
 $else$
-		public $objectType_Nullable(roleType.ObjectType)$ $roleType.PropertyName$ {get; set;}
+		public $objectType_NullableName(roleType.ObjectType)$ $roleType.PropertyName$ {get; set;}
 
 $endif$
 $endif$
 		/// <exclude/>
-		public $roleType.ObjectType.name$Builder With$roleType.SingularPropertyName$($objectType_Nullable(roleType.ObjectType)$ value)
+		public $class.name$Builder With$roleType.SingularPropertyName$($objectType_NullableName(roleType.ObjectType)$ value)
         {
 		    if(this.$roleType.PropertyName$!=null){throw new global::System.ArgumentException("One multicplicity");}
             this.$roleType.PropertyName$ = value;
@@ -459,10 +445,10 @@ $endif$
 
 classCompositeRoleType_Builder() ::= <<
 $if(roleType.IsOne)$
-		public $objectType_Nullable(roleType.ObjectType)$ $roleType.PropertyName$ {get; set;}
+		public $objectType_NullableName(roleType.ObjectType)$ $roleType.PropertyName$ {get; set;}
 
 		/// <exclude/>
-		public $roleType.ObjectType.name$Builder With$roleType.SingularPropertyName$($objectType_Nullable(roleType.ObjectType)$ value)
+		public $class.name$Builder With$roleType.SingularPropertyName$($objectType_NullableName(roleType.ObjectType)$ value)
         {
             if(this.$roleType.PropertyName$!=null){throw new global::System.ArgumentException("One multicplicity");}
 			this.$roleType.PropertyName$ = value;
@@ -470,14 +456,14 @@ $if(roleType.IsOne)$
         }		
 
 $else$
-		public global::System.Collections.Generic.List<$objectType_Nullable(roleType.ObjectType)$> $roleType.PropertyName$ {get; set;}	
+		public global::System.Collections.Generic.List<$objectType_NullableName(roleType.ObjectType)$> $roleType.PropertyName$ {get; set;}	
 
 		/// <exclude/>
-		public $roleType.ObjectType.name$Builder With$roleType.SingularPropertyName$($objectType_Nullable(roleType.ObjectType)$ value)
+		public $class.name$Builder With$roleType.SingularPropertyName$($objectType_NullableName(roleType.ObjectType)$ value)
         {
 			if(this.$roleType.PropertyName$ == null)
 			{
-				this.$roleType.PropertyName$ = new global::System.Collections.Generic.List<$objectType_Nullable(roleType.ObjectType)$>(); 
+				this.$roleType.PropertyName$ = new global::System.Collections.Generic.List<$objectType_NullableName(roleType.ObjectType)$>(); 
 			}
             this.$roleType.PropertyName$.Add(value);
             return this;
@@ -540,58 +526,48 @@ objectType_Plural() ::= <<
 boolean(value) ::= "$if(value)$true$else$false$endif$"
 
 roleType_ObjectType(roleType) ::= <%
-$if(roleType.ObjectType.IsUnit)$
-$if(roleType.ObjectType.IsBinary)$
-	global::System.Byte[]
-$elseif(roleType.ObjectType.IsBoolean)$
-	global::System.Boolean?
-$elseif(roleType.ObjectType.IsDecimal)$
-	global::System.Decimal?
-$elseif(roleType.ObjectType.IsDateTime)$
-	global::System.DateTime?
-$elseif(roleType.ObjectType.IsFloat)$
-	global::System.Double?
-$elseif(roleType.ObjectType.IsInteger)$
-	global::System.Int32?
-$elseif(roleType.ObjectType.IsString)$
-	global::System.String
-$elseif(roleType.ObjectType.IsUnique)$
-	global::System.Guid?
+$if(roleType.IsRequired)$
+$objectType_Name(roleType.ObjectType)$
 $else$
-not found ...
-$endif$
-$else$
-	$roleType.ObjectType.SingularName$
+$objectType_NullableName(roleType.ObjectType)$
 $endif$
 %>
 
 concreteRoleType_ObjectType(roleType) ::= <%
-$if(concreteRoleType.RoleType.ObjectType.IsUnit)$
-$if(concreteRoleType.RoleType.ObjectType.IsBinary)$
+$if(concreteRoleType.IsRequired)$
+$objectType_Name(concreteRoleType.RoleType.ObjectType)$
+$else$
+$objectType_NullableName(concreteRoleType.RoleType.ObjectType)$
+$endif$
+%>
+
+objectType_Name(objectType) ::= <%
+$if(objectType.IsUnit)$
+$if(objectType.IsBinary)$
 	global::System.Byte[]
-$elseif(concreteRoleType.RoleType.ObjectType.IsBoolean)$
-	global::System.Boolean?
-$elseif(concreteRoleType.RoleType.ObjectType.IsDecimal)$
-	global::System.Decimal?
-$elseif(concreteRoleType.RoleType.ObjectType.IsDateTime)$
-	global::System.DateTime?
-$elseif(concreteRoleType.RoleType.ObjectType.IsFloat)$
-	global::System.Double?
-$elseif(concreteRoleType.RoleType.ObjectType.IsInteger)$
-	global::System.Int32?
-$elseif(concreteRoleType.RoleType.ObjectType.IsString)$
+$elseif(objectType.IsBoolean)$
+	global::System.Boolean
+$elseif(objectType.IsDecimal)$
+	global::System.Decimal
+$elseif(objectType.IsDateTime)$
+	global::System.DateTime
+$elseif(objectType.IsFloat)$
+	global::System.Double
+$elseif(objectType.IsInteger)$
+	global::System.Int32
+$elseif(objectType.IsString)$
 	global::System.String
-$elseif(concreteRoleType.RoleType.ObjectType.IsUnique)$
-	global::System.Guid?
+$elseif(objectType.IsUnique)$
+	global::System.Guid
 $else$
 not found ...
 $endif$
 $else$
-	$concreteRoleType.RoleType.ObjectType.SingularName$
+	$objectType.SingularName$
 $endif$
 %>
 
-objectType_Nullable(objectType) ::= <%
+objectType_NullableName(objectType) ::= <%
 $if(objectType.IsUnit)$
 $if(objectType.IsBinary)$
 	global::System.Byte[]

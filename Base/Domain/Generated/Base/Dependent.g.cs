@@ -120,7 +120,7 @@ namespace Allors.Domain
 	{
 		public static readonly DependentMeta Instance = new DependentMeta();
 
-		public global::Allors.Meta.Class class = global::Allors.Meta.Classes.Dependent;
+		public global::Allors.Meta.Class ObjectType = global::Allors.Meta.Classes.Dependent;
 
 		public global::Allors.Meta.RoleType Dependee 
 		{
@@ -155,7 +155,7 @@ namespace Allors.Domain
 				public Dependee Dependee {get; set;}
 
 				/// <exclude/>
-				public DependeeBuilder WithDependee(Dependee value)
+				public DependentBuilder WithDependee(Dependee value)
 		        {
 		            if(this.Dependee!=null){throw new global::System.ArgumentException("One multicplicity");}
 					this.Dependee = value;
@@ -166,7 +166,7 @@ namespace Allors.Domain
 				public global::System.Int32? Counter {get; set;}
 
 				/// <exclude/>
-				public AllorsIntegerBuilder WithCounter(global::System.Int32? value)
+				public DependentBuilder WithCounter(global::System.Int32? value)
 		        {
 				    if(this.Counter!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.Counter = value;
@@ -176,7 +176,7 @@ namespace Allors.Domain
 				public global::System.Int32? Subcounter {get; set;}
 
 				/// <exclude/>
-				public AllorsIntegerBuilder WithSubcounter(global::System.Int32? value)
+				public DependentBuilder WithSubcounter(global::System.Int32? value)
 		        {
 				    if(this.Subcounter!=null){throw new global::System.ArgumentException("One multicplicity");}
 		            this.Subcounter = value;
