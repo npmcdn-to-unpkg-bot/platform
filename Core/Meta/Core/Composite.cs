@@ -187,7 +187,7 @@ namespace Allors.Meta
             }
         }
 
-        public IEnumerable<AssociationType> AssociationTypesWhereObjectType
+        public IEnumerable<AssociationType> ExclusiveAssociationTypes
         {
             get
             {
@@ -232,7 +232,7 @@ namespace Allors.Meta
             }
         }
 
-        public IEnumerable<RoleType> RoleTypesWhereObjectType
+        public IEnumerable<RoleType> ExclusiveRoleTypes
         {
             get
             {

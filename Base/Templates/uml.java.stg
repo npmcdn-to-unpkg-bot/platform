@@ -2,7 +2,7 @@ group JavaUml;
 
 TemplateId() ::= <<2BD69D34-4989-4DE2-93D6-0AF734BAEA06>>
 TemplateName() ::= <<Allors Java Uml>>
-TemplateVersion() ::= <<1.0.4>>
+TemplateVersion() ::= <<1.0.5>>
 TemplateAllors() ::= <<1.0>>
 TemplateConfiguration(domain) ::= <<
 <generations>
@@ -16,7 +16,7 @@ package $objectType.Namespace.NameForJava$;
 $if(objectType.IsInterface)$
 public interface $objectType.SingularName$ $if(objectType.ExistDirectSuperInterfaces)$ $first(objectType.DirectSuperInterfaces):{extends $it.FullNameForJava$}$$rest(objectType.DirectSuperInterfaces):{, $it.FullNameForJava$}$ $endif$
 {
-$objectType.AssociationTypesWhereObjectType:{associationType|$interfaceRoleType(relationType=associationType.RelationType,associationType=associationType,roleType=associationType.RoleType)$}$
+$objectType.ExclusiveAssociationTypes:{associationType|$interfaceRoleType(relationType=associationType.RelationType,associationType=associationType,roleType=associationType.RoleType)$}$
 }
 $else$
 public $if(objectType.IsAbstract)$abstract$endif$ class $objectType.Name$ $if(objectType.ExistDirectSuperClass)$extends $objectType.DirectSuperClass.FullNameForJava$ $endif$ $if(objectType.ExistDirectSuperInterfaces)$implements $first([objectType.DirectSuperInterfaces]):{ $it.FullNameForJava$}$$rest([objectType.DirectSuperInterfaces]):{, $it.FullNameForJava$}$ $endif$

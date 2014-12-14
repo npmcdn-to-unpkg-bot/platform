@@ -1,8 +1,8 @@
-group AllorsCSharpUml;
+delimiters "$", "$"
 
 TemplateId() ::= <<FA2E53B4-915D-4227-8571-456FC8E04DB0>>
 TemplateName() ::= <<Allors C# Uml>>
-TemplateVersion() ::= <<1.0.21>>
+TemplateVersion() ::= <<1.0.23>>
 TemplateAllors() ::= <<1.0>>
 TemplateConfiguration(meta) ::= <<
 $! 
@@ -38,7 +38,7 @@ composite(meta,composite) ::= <<
 
 	public interface $composite.Name$ $if(composite.ExistDirectSupertypes)$ : $first([composite.DirectSupertypes]):{it | $it.Name$}$$rest([composite.DirectSupertypes]):{it | , $it.Name$}$ $endif$
 	{
-		$composite.RoleTypesWhereObjectType:{roleType|$roleType(roleType=roleType)$}$
+		$composite.ExclusiveRoleTypes:{roleType|$roleType(roleType=roleType)$}$
 	}
 >>
 
