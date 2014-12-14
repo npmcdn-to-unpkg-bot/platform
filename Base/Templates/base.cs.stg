@@ -73,36 +73,6 @@ namespace Allors.Meta
 }
 >>
 
-metaRoleType(relationType,associationType,roleType) ::= <<
-		public global::Allors.Meta.RoleType $roleType.SingularPropertyName$ 
-		{
-			get
-			{
-				return global::Allors.Meta.RoleTypes.$roleType.RelationType.Name$;
-			}
-		} 
->>
-
-metaAssociationType(relationType,associationType,roleType) ::= <<
-		public global::Allors.Meta.AssociationType $associationType.PropertyName$ 
-		{
-			get
-			{
-				return global::Allors.Meta.AssociationTypes.$associationType.RelationType.Name$;
-			}
-		} 
->>
-
-metaMethodType(methodType) ::= <<
-		public global::Allors.Meta.MethodType $methodType.Name$ 
-		{
-			get
-			{
-				return global::Allors.Meta.MethodTypes.$methodType.FullName$;
-			}
-		} 
->>
-
 
 castInterface(meta,objectType) ::= <<
 $interface(meta,objectType)$
@@ -125,11 +95,11 @@ $interface.exclusiveAssociationTypes:{associationType|$interfaceAssociationType(
 
 		public global::Allors.Meta.Interface interface = global::Allors.Meta.Interfaces.$interface.Name$;
 
-$interface.RoleTypes:{roleType|$metaRoleType(relationType=roleType.RelationType,associationType=roleType.AssociationType,roleType=roleType)$
+$interface.RoleTypes:{roleType|$objectTypeMetaRoleType(roleType=roleType)$
 }$
-$interface.AssociationTypes:{associationType|$metaAssociationType(relationType=associationType.RelationType,associationType=associationType,roleType=associationType.RoleType)$
+$interface.AssociationTypes:{associationType|$objectTypeMetaAssociationType(associationType=associationType)$
 }$
-$interface.MethodTypes:{methodType|$metaMethodType(methodType=methodType)$
+$interface.MethodTypes:{methodType|$objectTypeMetaMethodType(methodType=methodType)$
 }$
 	}
 
@@ -283,11 +253,11 @@ $class.AssociationTypes:{associationType|$classAssociationType(relationType=asso
 
 		public global::Allors.Meta.Class class = global::Allors.Meta.Classes.$class.Name$;
 
-$class.RoleTypes:{roleType|$metaRoleType(relationType=roleType.RelationType,associationType=roleType.AssociationType,roleType=roleType)$
+$class.RoleTypes:{roleType|$objectTypeMetaRoleType(roleType=roleType)$
 }$
-$class.AssociationTypes:{associationType|$metaAssociationType(relationType=associationType.RelationType,associationType=associationType,roleType=associationType.RoleType)$
+$class.AssociationTypes:{associationType|$objectTypeMetaAssociationType(associationType=associationType)$
 }$
-$class.MethodTypes:{methodType|$metaMethodType(methodType=methodType)$
+$class.MethodTypes:{methodType|$objectTypeMetaMethodType(methodType=methodType)$
 }$
 	}
 
@@ -518,6 +488,36 @@ $else$
 $endif$		
 >>
 
+
+objectTypeMetaRoleType(roleType) ::= <<
+		public global::Allors.Meta.RoleType $roleType.SingularPropertyName$ 
+		{
+			get
+			{
+				return global::Allors.Meta.RoleTypes.$roleType.RelationType.Name$;
+			}
+		} 
+>>
+
+objectTypeMetaAssociationType(associationType) ::= <<
+		public global::Allors.Meta.AssociationType $associationType.PropertyName$ 
+		{
+			get
+			{
+				return global::Allors.Meta.AssociationTypes.$associationType.RelationType.Name$;
+			}
+		} 
+>>
+
+objectTypeMetaMethodType(methodType) ::= <<
+		public global::Allors.Meta.MethodType $methodType.Name$ 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.$methodType.FullName$;
+			}
+		} 
+>>
 
 objectTypePlural() ::= <<
 	public partial class $objectType.pluralName$ : global::Allors.ObjectsBase<$objectType.singularName$>
