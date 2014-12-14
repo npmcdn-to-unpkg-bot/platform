@@ -29,7 +29,7 @@ namespace Allors.Domain
 
         protected override void AppsOnPostBuild(IObjectBuilder builder)
         {
-            this.AppsEnumerationOnPostBuild(builder);
+            
         }
 
         protected override void AppsDerive(IDerivation derivation)

@@ -122,8 +122,10 @@ namespace Allors
 
         protected virtual void BaseDerive(IDerivation derivation)
         {
+            var @class = (Class)this.strategy.ObjectType;
+
             // TODO: Optimize
-            foreach (var concreteRoleType in ((Class)this.strategy.ObjectType).ConcreteRoleTypes)
+            foreach (var concreteRoleType in @class.ConcreteRoleTypes)
             {
                 if (concreteRoleType.IsRequired)
                 {

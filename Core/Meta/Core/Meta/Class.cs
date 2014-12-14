@@ -102,7 +102,7 @@ namespace Allors.Meta
                 ConcreteRoleType concreteRoleType;
                 if (!this.concreteRoleTypeByRoleType.TryGetValue(roleType, out concreteRoleType))
                 {
-                    concreteRoleType = new ConcreteRoleType(roleType);
+                    concreteRoleType = new ConcreteRoleType(this, roleType);
                     this.concreteRoleTypeByRoleType[roleType] = concreteRoleType;
                 }
             }

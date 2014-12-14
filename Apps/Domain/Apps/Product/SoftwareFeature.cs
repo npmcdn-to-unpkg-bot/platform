@@ -34,7 +34,7 @@ namespace Allors.Domain
 
         protected override void AppsOnPostBuild(IObjectBuilder builder)
         {
-            this.AppsEnumerationOnPostBuild(builder);
+            
 
             if (!this.ExistSearchData)
             {

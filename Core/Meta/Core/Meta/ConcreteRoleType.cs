@@ -23,12 +23,12 @@ namespace Allors.Meta
 {
     public sealed partial class ConcreteRoleType
     {
+        private readonly Class @class;
         private readonly RoleType roleType;
 
-        private bool? assignedIsRequired;
-
-        public ConcreteRoleType(RoleType roleType)
+        public ConcreteRoleType(Class @class, RoleType roleType)
         {
+            this.@class = @class;
             this.roleType = roleType;
         }
 
@@ -40,24 +40,11 @@ namespace Allors.Meta
             }
         }
 
-        public bool IsRequired
+        public Class Class
         {
             get
             {
-                return this.AssignedIsRequired.HasValue ? this.AssignedIsRequired.Value : this.roleType.IsRequired;
-            }
-        }
-
-        public bool? AssignedIsRequired
-        {
-            get
-            {
-                return this.assignedIsRequired;
-            }
-
-            set
-            {
-                this.assignedIsRequired = value;
+                return this.@class;
             }
         }
     }

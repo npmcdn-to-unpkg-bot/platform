@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allors.Databases.Object.Sql
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allors.Workspaces.Memory", "..\Adapters\Allors.Workspaces.Memory\Allors.Workspaces.Memory.csproj", "{D09DAF58-D524-40C2-887C-EADBF5609794}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Diagrams", "Diagrams\Diagrams.csproj", "{533BDA8E-B214-4EE0-9F7F-9E92CA437D64}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{D09DAF58-D524-40C2-887C-EADBF5609794}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D09DAF58-D524-40C2-887C-EADBF5609794}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D09DAF58-D524-40C2-887C-EADBF5609794}.Release|Any CPU.Build.0 = Release|Any CPU
+		{533BDA8E-B214-4EE0-9F7F-9E92CA437D64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{533BDA8E-B214-4EE0-9F7F-9E92CA437D64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{533BDA8E-B214-4EE0-9F7F-9E92CA437D64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{533BDA8E-B214-4EE0-9F7F-9E92CA437D64}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -2314,6 +2314,7 @@ namespace Allors.Meta
 		public static RelationType SearchDataSearchFragment;
 		public static RelationType SearchDataPreviousWordBoundaryText;
 		public static RelationType AccessControlledObjectSecurityToken;
+		public static RelationType ObjectStateName;
 		public static RelationType LanguageName;
 		public static RelationType UserGroupParent;
 		public static RelationType UserUserEmail;
@@ -25979,6 +25980,15 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.ManyToMany)
 				  
 				.WithIsIndexed(true)  
+				.Build();
+
+				ObjectStateName = new RelationTypeBuilder(Base, new Guid("b86f9e42-fe10-4302-ab7c-6c6c7d357c39"),new Guid("052ec640-3150-458a-99d5-0edce6eb6149"),new Guid("945cbba6-4b09-4b87-931e-861b147c3823"))
+				.WithObjectTypes(ObjectState, AllorsString)
+				.WithSingularName("Name")  
+				.WithPluralName("Names")  
+				  
+				.WithIsIndexed(true)  
+				.WithSize(256)
 				.Build();
 
 

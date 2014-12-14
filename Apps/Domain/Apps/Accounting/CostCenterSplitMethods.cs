@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class CostCenterSplitMethods
     {
         public static readonly Guid Topid = new Guid("844444D0-5D69-4A3B-9CB6-0D98747839D8");

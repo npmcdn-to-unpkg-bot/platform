@@ -43,7 +43,7 @@ namespace Allors.Meta
             // Enumeration
             EnumerationName.RoleType.IsRequired = true;
             EnumerationIsActive.RoleType.IsRequired = true;
-
+            
             // Language
             LanguageIsoCode.RoleType.IsRequired = true;
             LanguageName.RoleType.IsRequired = true;
