@@ -23,9 +23,6 @@ namespace Allors.Domain
     using System;
     using System.Collections.Generic;
 
-    
-    using Allors.Domain;
-
     public partial class ProductCategoryRevenueHistories
     {
         public static void AppsDeriveHistory(ISession session)

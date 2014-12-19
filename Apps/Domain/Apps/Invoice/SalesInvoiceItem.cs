@@ -1,23 +1,8 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SalesInvoiceItem.cs" company="Allors bvba">
-//   Copyright 2002-2012 Allors bvba.
-// 
-// Dual Licensed under
-//   a) the General Public Licence v3 (GPL)
-//   b) the Allors License
-// 
-// The GPL License is included in the file gpl.txt.
-// The Allors License is an addendum to your contract.
-// 
-// Allors Applications is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// For more information visit http://www.allors.com/legal
+// <copyright file="SalesInvoiceItem.cs" company="">
+//   
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace Allors.Domain
 {
     using System.Collections.Generic;
@@ -71,7 +56,7 @@ namespace Allors.Domain
         {
             get
             {
-                return this.ExistActualUnitPrice ? DecimalExtensions.AsCurrencyString(this.ActualUnitPrice, this.SalesInvoiceWhereSalesInvoiceItem.CurrencyFormat) : string.Empty;
+                return this.ExistActualUnitPrice ? this.ActualUnitPrice.AsCurrencyString(this.SalesInvoiceWhereSalesInvoiceItem.CurrencyFormat) : string.Empty;
             }
         }
 
@@ -83,7 +68,7 @@ namespace Allors.Domain
                 {
                     if (this.DiscountAdjustment.ExistAmount)
                     {
-                        return DecimalExtensions.AsCurrencyString(this.DiscountAdjustment.Amount, this.SalesInvoiceWhereSalesInvoiceItem.CurrencyFormat);
+                        return this.DiscountAdjustment.Amount.AsCurrencyString(this.SalesInvoiceWhereSalesInvoiceItem.CurrencyFormat);
                     }
                 }
 
@@ -111,9 +96,9 @@ namespace Allors.Domain
         {
             get
             {
-                if (this.ExistTotalDiscountAsPercentage)
+                if (this.TotalDiscountAsPercentage.HasValue)
                 {
-                    return this.TotalDiscountAsPercentage.ToString(this.SalesInvoiceWhereSalesInvoiceItem.Locale);
+                    return this.TotalDiscountAsPercentage.Value.ToString(this.SalesInvoiceWhereSalesInvoiceItem.Locale);
                 }
 
                 return string.Empty;
@@ -124,9 +109,9 @@ namespace Allors.Domain
         {
             get
             {
-                if (this.ExistTotalSurchargeAsPercentage)
+                if (this.TotalSurchargeAsPercentage.HasValue)
                 {
-                    return this.TotalSurchargeAsPercentage.ToString(this.SalesInvoiceWhereSalesInvoiceItem.Locale);
+                    return this.TotalSurchargeAsPercentage.Value.ToString(this.SalesInvoiceWhereSalesInvoiceItem.Locale);
                 }
 
                 return string.Empty;
@@ -137,7 +122,7 @@ namespace Allors.Domain
         {
             get
             {
-                return DecimalExtensions.AsCurrencyString(this.UnitBasePrice, this.SalesInvoiceWhereSalesInvoiceItem.CurrencyFormat);
+                return this.UnitBasePrice.AsCurrencyString(this.SalesInvoiceWhereSalesInvoiceItem.CurrencyFormat);
             }
         }
 
@@ -145,7 +130,7 @@ namespace Allors.Domain
         {
             get
             {
-                return DecimalExtensions.AsCurrencyString(this.CalculatedUnitPrice, this.SalesInvoiceWhereSalesInvoiceItem.CurrencyFormat);
+                return this.CalculatedUnitPrice.AsCurrencyString(this.SalesInvoiceWhereSalesInvoiceItem.CurrencyFormat);
             }
         }
 
@@ -185,7 +170,7 @@ namespace Allors.Domain
         {
             get
             {
-                return DecimalExtensions.AsCurrencyString(this.TotalExVat, this.SalesInvoiceWhereSalesInvoiceItem.CurrencyFormat);
+                return this.TotalExVat.AsCurrencyString(this.SalesInvoiceWhereSalesInvoiceItem.CurrencyFormat);
             }
         }
 
@@ -193,7 +178,7 @@ namespace Allors.Domain
         {
             get
             {
-                return DecimalExtensions.AsCurrencyString(this.TotalIncVat, this.SalesInvoiceWhereSalesInvoiceItem.CurrencyFormat);
+                return this.TotalIncVat.AsCurrencyString(this.SalesInvoiceWhereSalesInvoiceItem.CurrencyFormat);
             }
         }
 
@@ -216,19 +201,18 @@ namespace Allors.Domain
 
         // TODO:
 
-        //public SalesOrderItem SalesOrderItem
-        //{
-        //    get
-        //    {
-        //        if (this.ExistShipmentItemWhereInvoiceItem)
-        //        {
-        //            return this.ShipmentItemWhereInvoiceItem.OrderShipmentsWhereShipmentItem[0].SalesOrderItem;
-        //        }
+        // public SalesOrderItem SalesOrderItem
+        // {
+        // get
+        // {
+        // if (this.ExistShipmentItemWhereInvoiceItem)
+        // {
+        // return this.ShipmentItemWhereInvoiceItem.OrderShipmentsWhereShipmentItem[0].SalesOrderItem;
+        // }
 
-        //        return null;
-        //    }
-        //}
-
+        // return null;
+        // }
+        // }
         public void SetActualDiscountAmount(decimal amount)
         {
             if (!this.ExistDiscountAdjustment)
@@ -459,9 +443,9 @@ namespace Allors.Domain
                 foreach (TimeEntry timeEntry in this.TimeEntries)
                 {
                     var timeEntryName = string.Format(
-                        "{0} {1} for {2}",
-                        timeEntry.ExistUnitOfMeasure ? timeEntry.UnitOfMeasure.Name : null,
-                        timeEntry.ExistCost ? timeEntry.Cost : 0,
+                        "{0} {1} for {2}", 
+                        timeEntry.ExistUnitOfMeasure ? timeEntry.UnitOfMeasure.Name : null, 
+                        timeEntry.ExistCost ? timeEntry.Cost : 0, 
                         timeEntry.ExistWorkEffort ? timeEntry.WorkEffort.ComposeDisplayName() : null);
 
                     uiText.Append(timeEntryName);
@@ -516,11 +500,11 @@ namespace Allors.Domain
                     {
                         if (PriceComponents.IsEligible(new PriceComponents.IsEligibleParams
                                                            {
-                                                               PriceComponent = priceComponent,
-                                                               Customer = customer,
-                                                               Product = this.Product,
-                                                               SalesInvoice = salesInvoice,
-                                                               QuantityOrdered = quantityInvoiced,
+                                                               PriceComponent = priceComponent, 
+                                                               Customer = customer, 
+                                                               Product = this.Product, 
+                                                               SalesInvoice = salesInvoice, 
+                                                               QuantityOrdered = quantityInvoiced, 
                                                                ValueOrdered = totalBasePrice
                                                            }))
                         {
@@ -561,14 +545,14 @@ namespace Allors.Domain
                     {
                         if (PriceComponents.IsEligible(new PriceComponents.IsEligibleParams
                                                            {
-                                                               PriceComponent = priceComponent,
-                                                               Customer = customer,
-                                                               Product = this.Product,
-                                                               SalesInvoice = salesInvoice,
-                                                               QuantityOrdered = quantityInvoiced,
-                                                               ValueOrdered = totalBasePrice,
-                                                               PartyPackageRevenueHistoryList = partyPackageRevenuesHistories,
-                                                               PartyRevenueHistory = partyRevenueHistory,
+                                                               PriceComponent = priceComponent, 
+                                                               Customer = customer, 
+                                                               Product = this.Product, 
+                                                               SalesInvoice = salesInvoice, 
+                                                               QuantityOrdered = quantityInvoiced, 
+                                                               ValueOrdered = totalBasePrice, 
+                                                               PartyPackageRevenueHistoryList = partyPackageRevenuesHistories, 
+                                                               PartyRevenueHistory = partyRevenueHistory, 
                                                                PartyProductCategoryRevenueHistoryByProductCategory = partyProductCategoryRevenueHistoryByProductCategory
                                                            }))
                         {
@@ -684,7 +668,7 @@ namespace Allors.Domain
                 }
             }
 
-            var price = this.ExistActualUnitPrice ? this.ActualUnitPrice : this.UnitBasePrice;
+            var price = this.ActualUnitPrice.HasValue ? this.ActualUnitPrice.Value : this.UnitBasePrice;
 
             decimal vat = 0;
             if (this.ExistDerivedVatRate)
@@ -706,9 +690,9 @@ namespace Allors.Domain
                 this.TotalSurchargeAsPercentage = decimal.Round((this.TotalSurcharge / this.TotalBasePrice) * 100, 2);
             }
 
-            if (this.ExistActualUnitPrice)
+            if (this.ActualUnitPrice.HasValue)
             {
-                this.CalculatedUnitPrice = this.ActualUnitPrice;
+                this.CalculatedUnitPrice = this.ActualUnitPrice.Value;
             }
             else
             {

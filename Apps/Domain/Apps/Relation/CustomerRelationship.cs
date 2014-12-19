@@ -250,7 +250,7 @@ namespace Allors.Domain
 
             if (this.ExistCustomer)
             {
-                foreach (Allors.Domain.SalesInvoice salesInvoice in this.Customer.SalesInvoicesWhereBillToCustomer)
+                foreach (SalesInvoice salesInvoice in this.Customer.SalesInvoicesWhereBillToCustomer)
                 {
                     if (salesInvoice.BilledFromInternalOrganisation.Equals(this.InternalOrganisation)
                         && !salesInvoice.CurrentObjectState.Equals(new Allors.Domain.SalesInvoiceObjectStates(this.Session).Paid))

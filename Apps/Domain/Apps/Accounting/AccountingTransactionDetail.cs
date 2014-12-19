@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using System.Threading;
-
     public partial class AccountingTransactionDetail
     {
         public string AppsDebitCreditString

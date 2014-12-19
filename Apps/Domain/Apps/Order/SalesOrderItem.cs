@@ -1,30 +1,14 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SalesOrderItem.cs" company="Allors bvba">
-//   Copyright 2002-2012 Allors bvba.
-// 
-// Dual Licensed under
-//   a) the General Public Licence v3 (GPL)
-//   b) the Allors License
-// 
-// The GPL License is included in the file gpl.txt.
-// The Allors License is an addendum to your contract.
-// 
-// Allors Applications is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-// 
-// For more information visit http://www.allors.com/legal
+// <copyright file="SalesOrderItem.cs" company="">
+//   
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-
 namespace Allors.Domain
 {
     using System.Collections.Generic;
     using System.Globalization;
     using System.Text;
 
-    
     using Allors.Domain;
 
     using Resources;
@@ -79,7 +63,7 @@ namespace Allors.Domain
                 {
                     if (this.DiscountAdjustment.ExistAmount)
                     {
-                        return DecimalExtensions.AsCurrencyString(this.DiscountAdjustment.Amount, this.SalesOrderWhereSalesOrderItem.CurrencyFormat);
+                        return this.DiscountAdjustment.Amount.AsCurrencyString(this.SalesOrderWhereSalesOrderItem.CurrencyFormat);
                     }
                 }
 
@@ -484,13 +468,13 @@ namespace Allors.Domain
 
         private void AppsDeriveDeliveryDate(IDerivation derivation)
         {
-            if (this.ExistAssignedDeliveryDate)
+            if (this.AssignedDeliveryDate.HasValue)
             {
-                this.DeliveryDate = this.AssignedDeliveryDate;
+                this.DeliveryDate = this.AssignedDeliveryDate.Value;
             }
-            else if (this.ExistSalesOrderWhereSalesOrderItem && this.SalesOrderWhereSalesOrderItem.ExistDeliveryDate)
+            else if (this.ExistSalesOrderWhereSalesOrderItem && this.SalesOrderWhereSalesOrderItem.DeliveryDate.HasValue)
             {
-                this.DeliveryDate = this.SalesOrderWhereSalesOrderItem.DeliveryDate;
+                this.DeliveryDate = this.SalesOrderWhereSalesOrderItem.DeliveryDate.Value;
             }
         }
         
@@ -821,14 +805,14 @@ namespace Allors.Domain
 
         private void AppsCalculateUnitPrice(IDerivation derivation)
         {
-            if (this.ExistRequiredMarkupPercentage && this.UnitPurchasePrice > 0)
+            if (this.RequiredMarkupPercentage.HasValue && this.UnitPurchasePrice > 0)
             {
-                this.ActualUnitPrice = decimal.Round((1 + (this.RequiredMarkupPercentage / 100)) * this.UnitPurchasePrice, 2);
+                this.ActualUnitPrice = decimal.Round((1 + (this.RequiredMarkupPercentage.Value / 100)) * this.UnitPurchasePrice, 2);
             }
 
-            if (this.ExistRequiredProfitMargin && this.UnitPurchasePrice > 0)
+            if (this.RequiredProfitMargin.HasValue && this.UnitPurchasePrice > 0)
             {
-                this.ActualUnitPrice = decimal.Round(this.UnitPurchasePrice / (1 - (this.RequiredProfitMargin / 100)), 2);
+                this.ActualUnitPrice = decimal.Round(this.UnitPurchasePrice / (1 - (this.RequiredProfitMargin.Value / 100)), 2);
             }
         }
 
@@ -865,11 +849,11 @@ namespace Allors.Domain
                 {
                     if (PriceComponents.IsEligible(new PriceComponents.IsEligibleParams
                     {
-                        PriceComponent = priceComponent,
-                        Customer = customer,
-                        Product = this.Product,
-                        SalesOrder = salesOrder,
-                        QuantityOrdered = quantityOrdered,
+                        PriceComponent = priceComponent, 
+                        Customer = customer, 
+                        Product = this.Product, 
+                        SalesOrder = salesOrder, 
+                        QuantityOrdered = quantityOrdered, 
                         ValueOrdered = totalBasePrice
                     }))
                     {
@@ -934,14 +918,14 @@ namespace Allors.Domain
                     {
                         if (PriceComponents.IsEligible(new PriceComponents.IsEligibleParams
                         {
-                            PriceComponent = priceComponent,
-                            Customer = customer,
-                            Product = this.Product,
-                            SalesOrder = salesOrder,
-                            QuantityOrdered = quantityOrdered,
-                            ValueOrdered = totalBasePrice,
-                            PartyPackageRevenueHistoryList = partyPackageRevenuesHistories,
-                            PartyProductCategoryRevenueHistoryByProductCategory = partyProductCategoryRevenueHistoryByProductCategory,
+                            PriceComponent = priceComponent, 
+                            Customer = customer, 
+                            Product = this.Product, 
+                            SalesOrder = salesOrder, 
+                            QuantityOrdered = quantityOrdered, 
+                            ValueOrdered = totalBasePrice, 
+                            PartyPackageRevenueHistoryList = partyPackageRevenuesHistories, 
+                            PartyProductCategoryRevenueHistoryByProductCategory = partyProductCategoryRevenueHistoryByProductCategory, 
                             PartyRevenueHistory = partyRevenueHistory
                         }))
                         {
@@ -1057,7 +1041,7 @@ namespace Allors.Domain
                 }
             }
 
-            var price = this.ExistActualUnitPrice ? this.ActualUnitPrice : this.UnitBasePrice;
+            var price = this.ActualUnitPrice.HasValue ? this.ActualUnitPrice.Value : this.UnitBasePrice;
 
             decimal vat = 0;
             if (this.ExistDerivedVatRate)
@@ -1079,9 +1063,9 @@ namespace Allors.Domain
                 this.TotalSurchargeAsPercentage = decimal.Round((this.TotalSurcharge / this.TotalBasePrice) * 100, 2);
             }
 
-            if (this.ExistActualUnitPrice)
+            if (this.ActualUnitPrice.HasValue)
             {
-                this.CalculatedUnitPrice = this.ActualUnitPrice;
+                this.CalculatedUnitPrice = this.ActualUnitPrice.Value;
             }
             else
             {

@@ -20,10 +20,6 @@
 
 namespace Allors.Domain
 {
-    using System;
-
-    using Allors.Domain;
-
     public partial class PurchaseInvoices
     {
         protected override void AppsPrepare(Setup setup)
@@ -49,7 +45,7 @@ namespace Allors.Domain
 
             var ready = Meta.Ready;
             var approve = Meta.Approve;
-            var cancel = Meta.Approve;
+            var cancel = Meta.Cancel;
 
             config.Deny(this.ObjectType, approved, approve);
             config.Deny(this.ObjectType, received, ready, approve, cancel);
