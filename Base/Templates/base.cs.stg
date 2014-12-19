@@ -548,7 +548,7 @@ namespace Allors.Domain
 $if(methodType.ObjectType.IsClass)$
 	public partial class $methodType.FullName$ : Allors.Meta.Method<$objectType_Name(methodType.ObjectType)$>
 	{
-	    private static Allors.Meta.MethodInvocation<$objectType_Name(methodType.ObjectType)$> methodInvocation = new Allors.Meta.MethodInvocation<$objectType_Name(methodType.ObjectType)$>($objectType_Name(methodType.ObjectType)$.Meta.$methodType.Name$); 
+	    private static readonly Allors.Meta.MethodInvocation<$objectType_Name(methodType.ObjectType)$> MethodInvocation = new Allors.Meta.MethodInvocation<$objectType_Name(methodType.ObjectType)$>($objectType_Name(methodType.ObjectType)$.Meta.$methodType.Name$); 
 
 		public $methodType.FullName$($objectType_Name(methodType.ObjectType)$ @object) : base(@object)
 		{
@@ -556,7 +556,7 @@ $if(methodType.ObjectType.IsClass)$
 
 		public override void Execute()
 		{
-            methodInvocation.Execute(this);
+            MethodInvocation.Execute(this);
 		}
 	}
 $else$
@@ -575,7 +575,7 @@ $endif$
 methodTypeLeafClass() ::= <<
 	public partial class $class.Name$$methodType.Name$ : $methodType.FullName$
 	{
-	    private static Allors.Meta.MethodInvocation<$objectType_Name(methodType.ObjectType)$> methodInvocation = new Allors.Meta.MethodInvocation<$objectType_Name(methodType.ObjectType)$>($class.name$.Meta.$methodType.Name$); 
+	    private static readonly Allors.Meta.MethodInvocation<$objectType_Name(methodType.ObjectType)$> MethodInvocation = new Allors.Meta.MethodInvocation<$objectType_Name(methodType.ObjectType)$>($class.name$.Meta.$methodType.Name$); 
 
 		public $methodType.FullName$($objectType_Name(methodType.ObjectType)$ @object) : base(@object)
 		{
@@ -583,7 +583,7 @@ methodTypeLeafClass() ::= <<
 
 		public override void Execute()
 		{
-            methodInvocation.Execute(this);
+            MethodInvocation.Execute(this);
 		}
 	}
 >>

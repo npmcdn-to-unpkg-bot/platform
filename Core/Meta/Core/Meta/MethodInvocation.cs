@@ -20,11 +20,42 @@
 
 namespace Allors.Meta
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+
     public partial class MethodInvocation<T>
         where T : IObject
     {
+        private readonly MethodType methodType;
+
+        private readonly List<MethodInfo> methodInfos; 
+
         public MethodInvocation(MethodType methodType)
         {
+            this.methodType = methodType;
+            this.methodInfos = new List<MethodInfo>();
+
+            var types = new List<Type> { typeof(T) };
+            types.AddRange(typeof(T).GetInterfaces());
+
+            var metaPopulation = this.methodType.MetaPopulation;
+            var domains = new List<Domain>(metaPopulation.Domains);
+            domains.Sort((a, b) => a.Superdomains.Contains(b) ? -1 : 1);
+
+            foreach (var type in types)
+            {   
+
+            }
+        }
+
+        public MethodType MethodType
+        {
+            get
+            {
+                return this.methodType;
+            }
         }
 
         public void Execute(Method<T> mehod)

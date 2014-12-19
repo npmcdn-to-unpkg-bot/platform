@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="Person.cs" company="Allors bvba">
+// <copyright file="Organisation.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -25,7 +25,7 @@ namespace Allors.Domain
     {
         public void TestJustDoIt(OrganisationJustDoIt method)
         {
-            
+            method.Value = "Test";
         }
     }
 }
