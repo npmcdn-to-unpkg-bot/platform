@@ -24,7 +24,6 @@
 namespace Allors.Domain
 {
     using Allors;
-    using Allors.Domain;
 
     using NUnit.Framework;
 
@@ -42,5 +41,18 @@ namespace Allors.Domain
 
             Assert.AreEqual("Organisation", organisation.DisplayName);
         }
-     }
+
+        [Test]
+        public void JustDoIt()
+        {
+            var organisation = new OrganisationBuilder(this.DatabaseSession)
+                .WithName("Organisation")
+                .Build();
+
+            var justDoIt = organisation.JustDoIt();
+            justDoIt.Execute();
+
+            Assert.AreEqual("Test", justDoIt.Value);
+        }
+    }
 }

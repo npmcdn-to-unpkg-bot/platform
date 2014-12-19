@@ -172,6 +172,7 @@ namespace Allors.Meta
 		public static readonly AssociationType AccessControlledObjectSecurityToken = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("b816fccd-08e0-46e0-a49c-7213c3604416"))).AssociationType;
 		public static readonly AssociationType UserInterfaceableDisplayName = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("6412301d-95ec-44c2-8c71-cc03de5327b9"))).AssociationType;
 		public static readonly AssociationType ObjectStateDeniedPermission = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("59338f0b-40e7-49e8-ba1a-3ecebf96aebe"))).AssociationType;
+		public static readonly AssociationType ObjectStateName = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("b86f9e42-fe10-4302-ab7c-6c6c7d357c39"))).AssociationType;
 		public static readonly AssociationType CurrencyIsoCode = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("294a4bdc-f03a-47a2-a649-419e6b9021a3"))).AssociationType;
 		public static readonly AssociationType CurrencyName = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("74c8308b-1b76-4218-9532-f01c9d1e146b"))).AssociationType;
 		public static readonly AssociationType CurrencySymbol = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("82797074-8d6c-4d61-a885-34ae7133a503"))).AssociationType;
@@ -465,6 +466,7 @@ namespace Allors.Meta
 		public static readonly RoleType AccessControlledObjectSecurityToken = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("b816fccd-08e0-46e0-a49c-7213c3604416"))).RoleType;
 		public static readonly RoleType UserInterfaceableDisplayName = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("6412301d-95ec-44c2-8c71-cc03de5327b9"))).RoleType;
 		public static readonly RoleType ObjectStateDeniedPermission = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("59338f0b-40e7-49e8-ba1a-3ecebf96aebe"))).RoleType;
+		public static readonly RoleType ObjectStateName = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("b86f9e42-fe10-4302-ab7c-6c6c7d357c39"))).RoleType;
 		public static readonly RoleType CurrencyIsoCode = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("294a4bdc-f03a-47a2-a649-419e6b9021a3"))).RoleType;
 		public static readonly RoleType CurrencyName = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("74c8308b-1b76-4218-9532-f01c9d1e146b"))).RoleType;
 		public static readonly RoleType CurrencySymbol = ((RelationType)Repository.MetaPopulation.Find( new System.Guid("82797074-8d6c-4d61-a885-34ae7133a503"))).RoleType;

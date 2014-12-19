@@ -116,6 +116,12 @@
     <Compile Include="..\..\Core\Meta\Core\Meta\MetaPopulation.cs">
       <Link>Core\Meta\MetaPopulation.cs</Link>
     </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Meta\Method.cs">
+      <Link>Core\Meta\Method.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Meta\MethodInvocation.cs">
+      <Link>Core\Meta\MethodInvocation.cs</Link>
+    </Compile>
     <Compile Include="..\..\Core\Meta\Core\Meta\MethodType.cs">
       <Link>Core\Meta\MethodType.cs</Link>
     </Compile>

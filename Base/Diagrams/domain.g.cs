@@ -69,6 +69,8 @@ namespace Allors.Domain
 	{
 					Permission DeniedPermissions {set;}
 
+					global::System.String Name {set;}
+
 	}
 	public interface Commentable 
 	{

@@ -51,6 +51,8 @@
     <Compile Include="Core\Meta\DomainObject.cs" />
     <Compile Include="Core\Meta\Composite.cs" />
     <Compile Include="Core\Meta\LazySet.cs" />
+    <Compile Include="Core\Meta\MethodInvocation.cs" />
+    <Compile Include="Core\Meta\Method.cs" />
     <Compile Include="Core\Meta\OperandType.cs" />
     <Compile Include="Core\Meta\PropertyType.cs" />
     <Compile Include="Core\Meta\ObjectType.cs" />

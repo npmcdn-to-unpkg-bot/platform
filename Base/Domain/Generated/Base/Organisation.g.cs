@@ -561,6 +561,12 @@ namespace Allors.Domain
 			}
 		}
 
+
+
+		public OrganisationJustDoIt JustDoIt()
+		{ 
+			return new OrganisationJustDoIt(this);
+		}
 	}
 
 	public class OrganisationMeta

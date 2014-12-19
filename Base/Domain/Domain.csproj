@@ -88,6 +88,7 @@
     <Compile Include="Generated\Base\ObjectState.g.cs" />
     <Compile Include="Generated\Base\One.g.cs" />
     <Compile Include="Generated\Base\Organisation.g.cs" />
+    <Compile Include="Generated\Base\OrganisationJustDoIt.g.cs" />
     <Compile Include="Generated\Base\Period.g.cs" />
     <Compile Include="Generated\Base\Permission.g.cs" />
     <Compile Include="Generated\Base\Person.g.cs" />
@@ -141,6 +142,8 @@
     <Compile Include="Test\ObjectBase.v.cs" />
     <Compile Include="Test\ObjectsBase.cs" />
     <Compile Include="Test\ObjectsBase.v.cs" />
+    <Compile Include="Test\Relation\OrganisationJustDoIt.cs" />
+    <Compile Include="Test\Relation\Organisation.cs" />
     <Compile Include="Test\Relation\Person.cs" />
     <Compile Include="Test\Security\AccessControls.cs" />
     <Compile Include="Test\Security\Roles.cs" />

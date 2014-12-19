@@ -49,6 +49,7 @@ namespace Allors.Development.Repository.Generation
         private const string InheritanceKey = "inheritance";
         private const string ObjectTypeKey = "objectType";
         private const string RelationTypeKey = "relationType";
+        private const string MethodTypeKey = "methodType";
         
         private readonly FileInfo fileInfo;
         private readonly Guid id;
@@ -149,7 +150,15 @@ namespace Allors.Development.Repository.Generation
                                 }
                                 else
                                 {
-                                    throw new ArgumentException(input + " was not found");
+                                    var methodType = metaPopulation.Find(input) as MethodType;
+                                    if (methodType != null)
+                                    {
+                                        template.Add(MethodTypeKey, methodType);
+                                    }
+                                    else
+                                    {
+                                        throw new ArgumentException(input + " was not found");
+                                    }
                                 }
                             }
                         }
