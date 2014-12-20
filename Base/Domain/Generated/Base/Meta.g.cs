@@ -34,6 +34,7 @@ namespace Allors.Meta
 		public static readonly Interface I1 = ((Interface)Repository.MetaPopulation.Find( new System.Guid("fefcf1b6-ac8f-47b0-bed5-939207a2833e")));
 		public static readonly Interface I2 = ((Interface)Repository.MetaPopulation.Find( new System.Guid("19bb2bc3-d53a-4d15-86d0-b250fdbcb0a0")));
 		public static readonly Interface I12 = ((Interface)Repository.MetaPopulation.Find( new System.Guid("b45ec13c-704f-413d-a662-bdc59a17bfe3")));
+		public static readonly Interface S1 = ((Interface)Repository.MetaPopulation.Find( new System.Guid("916a63c3-e825-4be8-9156-a59a19b49b5e")));
 		public static readonly Interface DerivationLogI12 = ((Interface)Repository.MetaPopulation.Find( new System.Guid("d61872ee-3778-47e8-8931-003f3f48cbc5")));
 		public static readonly Interface Address = ((Interface)Repository.MetaPopulation.Find( new System.Guid("130aa2ff-4f14-4ad7-8a27-f80e8aebfa00")));
 		public static readonly Interface Shared = ((Interface)Repository.MetaPopulation.Find( new System.Guid("5c3876c3-c3be-46aa-a598-a68b964d329e")));
@@ -685,7 +686,10 @@ namespace Allors.Meta
 
 	public partial class MethodTypes
 	{
-		public static readonly MethodType OrganisationJustDoIt = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("73f68023-c051-4caa-b2ef-8da67e229fee")));
+		public static readonly MethodType C1ClassMethod = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("a80e3732-daf2-4ad4-9378-b4bc13e74dde")));
+		public static readonly MethodType I1InterfaceMethod = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("336dc840-bdd8-45cc-8b95-dd0ea55f130d")));
+		public static readonly MethodType S1SuperinterfaceMethod = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("5c7f1ab4-0b61-416d-97f4-660663f0e933")));
+		public static readonly MethodType OrganisationJustDoIt = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("55aac529-beae-4d29-b069-decda86710a9")));
 
 	}
 }

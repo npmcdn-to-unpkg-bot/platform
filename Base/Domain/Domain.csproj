@@ -53,6 +53,7 @@
     <Compile Include="Generated\Base\Address.g.cs" />
     <Compile Include="Generated\Base\BadUI.g.cs" />
     <Compile Include="Generated\Base\C1.g.cs" />
+    <Compile Include="Generated\Base\C1ClassMethod.g.cs" />
     <Compile Include="Generated\Base\C2.g.cs" />
     <Compile Include="Generated\Base\ClassWithoutRoles.g.cs" />
     <Compile Include="Generated\Base\Commentable.g.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Generated\Base\HomeAddress.g.cs" />
     <Compile Include="Generated\Base\I1.g.cs" />
     <Compile Include="Generated\Base\I12.g.cs" />
+    <Compile Include="Generated\Base\I1InterfaceMethod.g.cs" />
     <Compile Include="Generated\Base\I2.g.cs" />
     <Compile Include="Generated\Base\Image.g.cs" />
     <Compile Include="Generated\Base\Language.g.cs" />
@@ -96,6 +98,8 @@
     <Compile Include="Generated\Base\Printable.g.cs" />
     <Compile Include="Generated\Base\PrintQueue.g.cs" />
     <Compile Include="Generated\Base\Role.g.cs" />
+    <Compile Include="Generated\Base\S1.g.cs" />
+    <Compile Include="Generated\Base\S1SuperinterfaceMethod.g.cs" />
     <Compile Include="Generated\Base\Searchable.g.cs" />
     <Compile Include="Generated\Base\SearchData.g.cs" />
     <Compile Include="Generated\Base\SearchFragment.g.cs" />
@@ -132,8 +136,9 @@
     <Compile Include="Test\Derivations\Third.cs" />
     <Compile Include="Test\General\HomeAddress.cs" />
     <Compile Include="Test\General\MailboxAddress.cs" />
-    <Compile Include="Test\General\Organisation.cs" />
-    <Compile Include="Test\General\Organisations.cs" />
+    <Compile Include="Test\Methods\SuperinterfaceMethod.cs" />
+    <Compile Include="Test\Methods\InterfaceMethod.cs" />
+    <Compile Include="Test\Relation\Organisations.cs" />
     <Compile Include="Test\General\Place.cs" />
     <Compile Include="Test\General\Places.cs" />
     <Compile Include="Test\General\To.cs" />
@@ -142,7 +147,7 @@
     <Compile Include="Test\ObjectBase.v.cs" />
     <Compile Include="Test\ObjectsBase.cs" />
     <Compile Include="Test\ObjectsBase.v.cs" />
-    <Compile Include="Test\Relation\OrganisationJustDoIt.cs" />
+    <Compile Include="Test\Methods\ClassMethod.cs" />
     <Compile Include="Test\Relation\Organisation.cs" />
     <Compile Include="Test\Relation\Person.cs" />
     <Compile Include="Test\Security\AccessControls.cs" />

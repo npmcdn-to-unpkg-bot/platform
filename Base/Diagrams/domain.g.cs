@@ -82,7 +82,7 @@ namespace Allors.Domain
 					SearchData SearchData {set;}
 
 	}
-	public interface I1  : I12 
+	public interface I1  : I12, S1 
 	{
 					I1 I1I1Many2One {set;}
 
@@ -254,6 +254,9 @@ namespace Allors.Domain
 
 					C1 I12C1Many2One {set;}
 
+	}
+	public interface S1 
+	{
 	}
 	public interface DerivationLogI12 
 	{

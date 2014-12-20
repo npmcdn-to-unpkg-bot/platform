@@ -23,9 +23,39 @@ namespace Allors.Domain
 {
     public partial class Organisation
     {
-        public void TestJustDoIt(OrganisationJustDoIt method)
+        protected override void TestOnPostBuild(IObjectBuilder builder)
         {
-            method.Value = "Test";
+            if (!this.ExistSearchData)
+            {
+                this.SearchData = new SearchDataBuilder(this.Session).Build();
+            }
+        }
+
+        protected override void TestDerive(IDerivation derivation)
+        {
+            base.TestDerive(derivation);
+
+            derivation.Log.AssertExists(this, Organisations.Meta.Name);
+
+            this.DisplayName = this.CustomComposeDisplayName();
+
+            this.SearchData.CharacterBoundaryText = this.DisplayName;
+            this.SearchData.RemoveWordBoundaryText();
+        }
+
+        private string CustomComposeDisplayName()
+        {
+            if (this.ExistName)
+            {
+                return this.Name;
+            }
+
+            if (this.ExistUniqueId)
+            {
+                return this.UniqueId.ToString();
+            }
+
+            return this.GetType() + "[" + this.Id + "]";
         }
     }
 }

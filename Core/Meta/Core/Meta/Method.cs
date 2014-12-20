@@ -20,16 +20,16 @@
 
 namespace Allors.Meta
 {
-    public abstract partial class Method<T> where T : IObject
+    public abstract partial class Method
     {
-        private readonly T @object;
+        private readonly IObject @object;
 
-        protected Method(T @object)
+        protected Method(IObject @object)
         {
             this.@object = @object;
         }
 
-        public T Object
+        public IObject Object
         {
             get
             {

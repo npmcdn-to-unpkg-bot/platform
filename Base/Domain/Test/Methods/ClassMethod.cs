@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="OrganisationJustDoIt.cs" company="Allors bvba">
+// <copyright file="C1ClassMethod.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -21,7 +21,25 @@
 
 namespace Allors.Domain
 {
-    public partial class OrganisationJustDoIt
+    public partial class C1
+    {
+        public void CoreClassMethod(C1ClassMethod method)
+        {
+            method.Value += "C1Core";
+        }
+
+        public void BaseClassMethod(C1ClassMethod method)
+        {
+            method.Value += "C1Base";
+        }
+
+        public void TestClassMethod(C1ClassMethod method)
+        {
+            method.Value += "C1Test";
+        }
+    }
+
+    public partial class C1ClassMethod
     {
         public string Value { get; set; }
     }

@@ -27,7 +27,7 @@ namespace Allors.Meta
         public static void TestPostInit(MetaPopulation meta)
         {
             // Test
-            var domain = new Domain(meta, new Guid("47636693-E55F-4ED3-93B6-3D75F11D5D4B")) { Name = "BaseTest" };
+            var domain = new Domain(meta, new Guid("47636693-E55F-4ED3-93B6-3D75F11D5D4B")) { Name = "Test" };
             domain.AddDirectSuperdomain(Base);
 
             // ObjectTypes
@@ -36,6 +36,7 @@ namespace Allors.Meta
             var i1 = new InterfaceBuilder(domain, new Guid("fefcf1b6-ac8f-47b0-bed5-939207a2833e")).WithSingularName("I1").WithPluralName("I1s").Build();
             var i2 = new InterfaceBuilder(domain, new Guid("19bb2bc3-d53a-4d15-86d0-b250fdbcb0a0")).WithSingularName("I2").WithPluralName("I2s").Build();
             var i12 = new InterfaceBuilder(domain, new Guid("b45ec13c-704f-413d-a662-bdc59a17bfe3")).WithSingularName("I12").WithPluralName("I12s").Build();
+            var s1 = new InterfaceBuilder(domain, new Guid("916A63C3-E825-4BE8-9156-A59A19B49B5E")).WithSingularName("S1").WithPluralName("S1s").Build();
 
             var derivationLogC1 = new ClassBuilder(domain, new Guid("2361c456-b624-493a-8377-2dd1e697e17a")).WithSingularName("DerivationLogC1").WithPluralName("DerivationLogC1s").Build();
             var derivationLogC2 = new ClassBuilder(domain, new Guid("c7563dd3-77b2-43ff-92f9-a4f98db36acf")).WithSingularName("DerivationLogC2").WithPluralName("DerivationLogC2s").Build();
@@ -84,6 +85,9 @@ namespace Allors.Meta
             new InheritanceBuilder(domain, new Guid("F56F2502-0394-4103-9C70-D66D56408EDD")).WithSubtype(i12).WithSupertype(UserInterfaceable).Build();
             new InheritanceBuilder(domain, new Guid("a71cee9c-3f73-4be5-941c-3f86d9fb0e07")).WithSubtype(i12).WithSupertype(AccessControlledObject).Build();
             new InheritanceBuilder(domain, new Guid("da105c1e-e19b-438a-bfc0-b845fb81864c")).WithSubtype(i12).WithSupertype(Searchable).Build();
+
+            // S1
+            new InheritanceBuilder(domain, new Guid("0C479724-316E-47A2-A081-958F910966B8")).WithSubtype(i1).WithSupertype(s1).Build();
 
             // Four
             new InheritanceBuilder(domain, new Guid("1a077ff9-b309-4982-8d79-2b176394eee4")).WithSubtype(four).WithSupertype(shared).Build();
@@ -425,8 +429,13 @@ namespace Allors.Meta
 
 
             // MethodTypes
+            // C1
+            new MethodTypeBuilder(domain, new Guid("A80E3732-DAF2-4AD4-9378-B4BC13E74DDE")).WithObjectType(c1).WithName("ClassMethod").Build();
+            new MethodTypeBuilder(domain, new Guid("336DC840-BDD8-45CC-8B95-DD0EA55F130D")).WithObjectType(i1).WithName("InterfaceMethod").Build();
+            new MethodTypeBuilder(domain, new Guid("5C7F1AB4-0B61-416D-97F4-660663F0E933")).WithObjectType(s1).WithName("SuperinterfaceMethod").Build();
+
             // Organisation
-            new MethodTypeBuilder(domain, new Guid("{73F68023-C051-4CAA-B2EF-8DA67E229FEE}")).WithObjectType(organisation).WithName("JustDoIt").Build();
-       }
+            new MethodTypeBuilder(domain, new Guid("55AAC529-BEAE-4D29-B069-DECDA86710A9")).WithObjectType(organisation).WithName("JustDoIt").Build();
+        }
     }
 }

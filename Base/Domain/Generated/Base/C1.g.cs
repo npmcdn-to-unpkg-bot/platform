@@ -4040,6 +4040,22 @@ namespace Allors.Domain
 			}
 		}
 
+
+
+		public C1ClassMethod ClassMethod()
+		{ 
+			return new C1ClassMethod(this);
+		}
+
+		public I1InterfaceMethod InterfaceMethod()
+		{ 
+			return new C1InterfaceMethod(this);
+		}
+
+		public S1SuperinterfaceMethod SuperinterfaceMethod()
+		{ 
+			return new C1SuperinterfaceMethod(this);
+		}
 	}
 
 	public class C1Meta
@@ -5083,6 +5099,28 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.I1I12One2Many;
+			}
+		} 
+
+		public global::Allors.Meta.MethodType ClassMethod 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.C1ClassMethod;
+			}
+		} 
+		public global::Allors.Meta.MethodType InterfaceMethod 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.I1InterfaceMethod;
+			}
+		} 
+		public global::Allors.Meta.MethodType SuperinterfaceMethod 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.S1SuperinterfaceMethod;
 			}
 		} 
 

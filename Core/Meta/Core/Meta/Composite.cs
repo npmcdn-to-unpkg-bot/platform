@@ -248,11 +248,6 @@ namespace Allors.Meta
         {
             get
             {
-                if (this.Name.Equals("Organisation"))
-                {
-                    var x = 1;
-                }
-
                 this.MetaPopulation.Derive();
                 return this.derivedMethodTypes;
             }
