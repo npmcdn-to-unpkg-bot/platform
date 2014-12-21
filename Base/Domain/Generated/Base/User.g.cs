@@ -94,6 +94,13 @@ namespace Allors.Domain
 			get;
 		}
 
+
+
+		DerivablePrepareDerivation PrepareDerivation();
+
+		DerivableDerive Derive();
+
+		DerivableApplySecurityOnDerive ApplySecurityOnDerive();
 	}
 
 	public class UserMeta
@@ -192,6 +199,28 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.AccessControlSubject;
+			}
+		} 
+
+		public global::Allors.Meta.MethodType PrepareDerivation 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.DerivablePrepareDerivation;
+			}
+		} 
+		public global::Allors.Meta.MethodType Derive 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.DerivableDerive;
+			}
+		} 
+		public global::Allors.Meta.MethodType ApplySecurityOnDerive 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.DerivableApplySecurityOnDerive;
 			}
 		} 
 

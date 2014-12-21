@@ -244,9 +244,16 @@ namespace Allors.Domain
                 this.derivationGraph = new DerivationGraph(this);
                 foreach (var changedObject in changedObjects)
                 {
-                    var objectBase = (ObjectBase)this.Session.Instantiate(changedObject);
-                    objectBase.PrepareDerivation(this);
-                    this.preparedObjects.Add(objectBase);
+                    var derivable = this.Session.Instantiate(changedObject) as Derivable;
+
+                    if (derivable != null)
+                    {
+                        var prepareDerivation = derivable.PrepareDerivation();
+                        prepareDerivation.Derivation = this;
+                        prepareDerivation.Execute();
+
+                        this.preparedObjects.Add(derivable);
+                    }
                 }
 
                 while (this.addedDerivables.Count > 0)
@@ -256,9 +263,12 @@ namespace Allors.Domain
 
                     this.addedDerivables = new HashSet<IObject>();
 
-                    foreach (ObjectBase dependencyObject in dependencyObjectsToPrepare)
+                    foreach (Derivable dependencyObject in dependencyObjectsToPrepare)
                     {
-                        dependencyObject.PrepareDerivation(this);
+                        var prepareDerivation = dependencyObject.PrepareDerivation();
+                        prepareDerivation.Derivation = this;
+                        prepareDerivation.Execute();
+                        
                         this.preparedObjects.Add(dependencyObject);
                     }
                 }

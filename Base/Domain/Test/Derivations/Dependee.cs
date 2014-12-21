@@ -42,20 +42,17 @@ namespace Allors.Domain
             }
         }
 
-        public override void PrepareDerivation(IDerivation derivation)
+        public void TestPrepareDerivation(DerivablePrepareDerivation method)
         {
-            base.PrepareDerivation(derivation);
-
+            var derivation = method.Derivation;
             if (this.ExistDependentWhereDependee)
             {
                 derivation.AddDependency(this.DependentWhereDependee, this);
             }
         }
 
-        public override void Derive(IDerivation derivation)
+        public void TestDerive(DerivableDerive method)
         {
-            base.Derive(derivation);
-
             this.Counter = this.Counter + 1;
 
             if (this.ExistSubdependee)

@@ -96,7 +96,9 @@ namespace Allors.Domain
 
             if (!this.derivable.Strategy.IsDeleted)
             {
-                this.derivable.Derive(derivation);
+                var derive = this.derivable.Derive();
+                derive.Derivation = derivation;
+                derive.Execute();
             }
 
             derivation.DerivedObjects.Add(this.derivable);

@@ -4,6 +4,13 @@ namespace Allors.Domain
 {
 	public partial interface SearchResult :  UserInterfaceable, Allors.IObjectBase
 	{
+
+
+		DerivablePrepareDerivation PrepareDerivation();
+
+		DerivableDerive Derive();
+
+		DerivableApplySecurityOnDerive ApplySecurityOnDerive();
 	}
 
 	public class SearchResultMeta
@@ -31,6 +38,28 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.RoleTypes.AccessControlledObjectSecurityToken;
+			}
+		} 
+
+		public global::Allors.Meta.MethodType PrepareDerivation 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.DerivablePrepareDerivation;
+			}
+		} 
+		public global::Allors.Meta.MethodType Derive 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.DerivableDerive;
+			}
+		} 
+		public global::Allors.Meta.MethodType ApplySecurityOnDerive 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.DerivableApplySecurityOnDerive;
 			}
 		} 
 

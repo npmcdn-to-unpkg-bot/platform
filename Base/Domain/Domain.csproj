@@ -62,6 +62,10 @@
     <Compile Include="Generated\Base\Currency.g.cs" />
     <Compile Include="Generated\Base\Dependee.g.cs" />
     <Compile Include="Generated\Base\Dependent.g.cs" />
+    <Compile Include="Generated\Base\Derivable.g.cs" />
+    <Compile Include="Generated\Base\DerivableApplySecurityOnDerive.g.cs" />
+    <Compile Include="Generated\Base\DerivableDerive.g.cs" />
+    <Compile Include="Generated\Base\DerivablePrepareDerivation.g.cs" />
     <Compile Include="Generated\Base\DerivationLogC1.g.cs" />
     <Compile Include="Generated\Base\DerivationLogC2.g.cs" />
     <Compile Include="Generated\Base\DerivationLogI12.g.cs" />

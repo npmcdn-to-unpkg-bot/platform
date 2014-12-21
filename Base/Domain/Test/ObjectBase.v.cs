@@ -20,8 +20,6 @@
 
 namespace Allors
 {
-    using Allors.Domain;
-
     public abstract partial class ObjectBase 
     {
         public virtual void OnPostBuild(IObjectBuilder builder)
@@ -36,26 +34,6 @@ namespace Allors
         {
             this.BaseApplySecurityOnPostBuild();
             this.TestApplySecurityOnPostBuild();
-        }
-
-        public virtual void PrepareDerivation(IDerivation derivation)
-        {
-            this.BasePrepareDerivation(derivation);
-            this.TestPrepareDerivation(derivation);
-        }
-
-        public virtual void Derive(IDerivation derivation)
-        {
-            this.BaseDerive(derivation);
-            this.TestDerive(derivation);
-
-            this.ApplySecurityOnDerive();
-        }
-
-        public virtual void ApplySecurityOnDerive()
-        {
-            this.BaseApplySecurityOnDerive();
-            this.TestApplySecurityOnDerive();
         }
 
         public virtual void Delete()

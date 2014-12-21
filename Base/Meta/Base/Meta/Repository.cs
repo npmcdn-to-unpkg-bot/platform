@@ -20,6 +20,8 @@
 
 namespace Allors.Meta
 {
+    using System;
+
     public static partial class Repository
     {
         public static void BasePostInit(MetaPopulation meta)
@@ -40,6 +42,11 @@ namespace Allors.Meta
             CurrencyName.RoleType.IsRequired = true;
             CurrencySymbol.RoleType.IsRequired = true;
 
+            // Derivation
+            new MethodTypeBuilder(Base, new Guid("122D3D78-AB97-4A69-A725-F465C71757DA")).WithObjectType(Derivable).WithName("PrepareDerivation").Build();
+            new MethodTypeBuilder(Base, new Guid("527DA7F8-68B4-46AB-B0D8-6B9E82D2A5AC")).WithObjectType(Derivable).WithName("Derive").Build();
+            new MethodTypeBuilder(Base, new Guid("349CBCDE-B4E9-4965-B3FF-7C41B021825D")).WithObjectType(Derivable).WithName("ApplySecurityOnDerive").Build();
+            
             // Enumeration
             EnumerationName.RoleType.IsRequired = true;
             EnumerationIsActive.RoleType.IsRequired = true;

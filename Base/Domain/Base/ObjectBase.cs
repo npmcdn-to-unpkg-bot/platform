@@ -25,7 +25,7 @@ namespace Allors
     using Allors.Domain;
     using Allors.Meta;
 
-    public abstract partial class ObjectBase : Derivable
+    public abstract partial class ObjectBase
     {
         public ISession Session
         {
@@ -105,37 +105,6 @@ namespace Allors
         }
 
         protected virtual void BaseApplySecurityOnPostBuild()
-        {
-        }
-
-        protected virtual void BasePrepareDerivation(IDerivation derivation)
-        {
-            var changeSet = derivation.ChangeSet;
-            if (derivation.IsForced(this.Id) || changeSet.Associations.Contains(this.Id) || changeSet.Created.Contains(this.Id))
-            {
-                if (!derivation.DerivedObjects.Contains(this))
-                {
-                    derivation.AddDerivable(this);
-                }
-            }
-        }
-
-        protected virtual void BaseDerive(IDerivation derivation)
-        {
-            var @class = (Class)this.strategy.ObjectType;
-
-            // TODO: Optimize
-            foreach (var concreteRoleType in @class.ConcreteRoleTypes)
-            {
-                if (concreteRoleType.IsRequired)
-                {
-                    var roleType = concreteRoleType.RoleType;
-                    derivation.Log.AssertExists(this, roleType);
-                }
-            }
-        }
-
-        protected virtual void BaseApplySecurityOnDerive()
         {
         }
 

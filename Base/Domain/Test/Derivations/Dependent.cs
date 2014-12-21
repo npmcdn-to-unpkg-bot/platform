@@ -39,10 +39,8 @@ namespace Allors.Domain
             }
         }
 
-        public override void Derive(IDerivation derivation)
+        public void TestDerive(DerivableDerive method)
         {
-            base.Derive(derivation);
-
             if (this.ExistDependee)
             {
                 this.Counter = this.Dependee.Counter;

@@ -277,6 +277,22 @@ namespace Allors.Domain
 			}
 		}
 
+
+
+		public DerivablePrepareDerivation PrepareDerivation()
+		{ 
+			return new LanguagePrepareDerivation(this);
+		}
+
+		public DerivableDerive Derive()
+		{ 
+			return new LanguageDerive(this);
+		}
+
+		public DerivableApplySecurityOnDerive ApplySecurityOnDerive()
+		{ 
+			return new LanguageApplySecurityOnDerive(this);
+		}
 	}
 
 	public class LanguageMeta
@@ -340,6 +356,28 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.LocaleLanguage;
+			}
+		} 
+
+		public global::Allors.Meta.MethodType PrepareDerivation 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.DerivablePrepareDerivation;
+			}
+		} 
+		public global::Allors.Meta.MethodType Derive 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.DerivableDerive;
+			}
+		} 
+		public global::Allors.Meta.MethodType ApplySecurityOnDerive 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.DerivableApplySecurityOnDerive;
 			}
 		} 
 

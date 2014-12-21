@@ -31,16 +31,18 @@ namespace Allors.Domain
             this.DisplayName = this.Name;
         }
 
-        protected override void TestPrepareDerivation(IDerivation derivation)
+        public void TestPrepareDerivation(DerivablePrepareDerivation method)
         {
+            var derivation = method.Derivation;
             foreach (Derivable dependency in this.Dependencies)
             {
                 derivation.AddDependency(this, dependency);
             }
         }
 
-        protected override void TestDerive(IDerivation derivation)
+        public void TestDerive(DerivableDerive method)
         {
+            var derivation = method.Derivation;
             var sequence = (IList<IObject>)derivation["sequence"];
             if (sequence != null)
             {

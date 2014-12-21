@@ -20,17 +20,56 @@
 
 namespace Allors.Domain
 {
-    using Allors;
+    using Allors.Meta;
 
-    /// <summary>
-    /// Object validations.
-    /// </summary>
-    public interface Derivable : IObject
+    public partial interface Derivable
     {
-        /// <summary>
-        /// Derives this object.
-        /// </summary>
-        /// <param name="derivation">The derivation.</param>
-        void Derive(IDerivation derivation);
+    }
+
+    public static partial class DerivableExtensions
+    {
+        public static void BasePrepareDerivation(this Derivable @this, DerivablePrepareDerivation method)
+        {
+            var derivation = method.Derivation;
+            var changeSet = derivation.ChangeSet;
+            if (derivation.IsForced(@this.Id) || changeSet.Associations.Contains(@this.Id) || changeSet.Created.Contains(@this.Id))
+            {
+                if (!derivation.DerivedObjects.Contains(@this))
+                {
+                    derivation.AddDerivable(@this);
+                }
+            }
+        }
+
+        public static void BaseDerive(this Derivable @this, DerivableDerive method)
+        {
+            var derivation = method.Derivation;
+            var @class = (Class)@this.Strategy.ObjectType;
+
+            // TODO: Optimize
+            foreach (var concreteRoleType in @class.ConcreteRoleTypes)
+            {
+                if (concreteRoleType.IsRequired)
+                {
+                    var roleType = concreteRoleType.RoleType;
+                    derivation.Log.AssertExists(@this, roleType);
+                }
+            }
+        }
+    }
+
+    public abstract partial class DerivablePrepareDerivation
+    {
+        public Derivation Derivation { get; set; }
+    }
+
+    public abstract partial class DerivableDerive
+    {
+        public Derivation Derivation { get; set; }
+    }
+
+    public abstract partial class DerivableApplySecurityOnDerive
+    {
+        public Derivation Derivation { get; set; }
     }
 }

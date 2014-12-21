@@ -20,9 +20,7 @@
 
 namespace Allors
 {
-    using Allors.Domain;
-
-    public partial interface IObjectBase : Derivable
+    public partial interface IObjectBase
     {
     }
 }

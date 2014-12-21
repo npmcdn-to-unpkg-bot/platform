@@ -23,9 +23,9 @@ namespace Allors.Domain
 {
     public partial class Role
     {
-        protected override void BaseDerive(IDerivation derivation)
+        public void BaseDerive(DerivableDerive method)
         {
-            base.BaseDerive(derivation);
+            var derivation = method.Derivation;
 
             derivation.Log.AssertIsUnique(this, Meta.Name);
             derivation.Log.AssertIsUnique(this, Meta.UniqueId);

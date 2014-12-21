@@ -132,8 +132,10 @@ namespace Allors.Domain
             this.ConcreteClassPointer = concreteClass.Id;
         }
 
-        protected override void BaseDerive(IDerivation derivation)
+        public void BaseDerive(DerivableDerive method)
         {
+            var derivation = method.Derivation;
+
             switch (this.Operation)
             {
                 case Operation.Read:

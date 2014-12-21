@@ -22,9 +22,9 @@ namespace Allors.Domain
 {
     public partial class Login
     {
-        protected override void BaseDerive(IDerivation derivation)
+        public void BaseDerive(DerivableDerive method)
         {
-            base.BaseDerive(derivation);
+            var derivation = method.Derivation;
 
             if (!this.ExistUser)
             {

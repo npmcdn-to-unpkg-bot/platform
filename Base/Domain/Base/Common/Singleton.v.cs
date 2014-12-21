@@ -22,9 +22,5 @@ namespace Allors.Domain
 {
     public partial class Singleton
     {
-        public override void PrepareDerivation(IDerivation derivation)
-        {
-            this.BasePrepareDerivation(derivation);
-        }
     }
 }

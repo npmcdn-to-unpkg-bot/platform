@@ -283,6 +283,22 @@ namespace Allors.Domain
 			Strategy.RemoveCompositeRoles(Meta.SecurityToken);
 		}
 
+
+
+		public DerivablePrepareDerivation PrepareDerivation()
+		{ 
+			return new AccessControlPrepareDerivation(this);
+		}
+
+		public DerivableDerive Derive()
+		{ 
+			return new AccessControlDerive(this);
+		}
+
+		public DerivableApplySecurityOnDerive ApplySecurityOnDerive()
+		{ 
+			return new AccessControlApplySecurityOnDerive(this);
+		}
 	}
 
 	public class AccessControlMeta
@@ -338,6 +354,28 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.RoleTypes.AccessControlledObjectSecurityToken;
+			}
+		} 
+
+		public global::Allors.Meta.MethodType PrepareDerivation 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.DerivablePrepareDerivation;
+			}
+		} 
+		public global::Allors.Meta.MethodType Derive 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.DerivableDerive;
+			}
+		} 
+		public global::Allors.Meta.MethodType ApplySecurityOnDerive 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.DerivableApplySecurityOnDerive;
 			}
 		} 
 

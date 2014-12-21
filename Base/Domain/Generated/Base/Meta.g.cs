@@ -26,6 +26,7 @@ namespace Allors.Meta
 		public static readonly Interface SecurityTokenOwner = ((Interface)Repository.MetaPopulation.Find( new System.Guid("a69cad9c-c2f1-463f-9af1-873ce65aeea6")));
 		public static readonly Interface Transitional = ((Interface)Repository.MetaPopulation.Find( new System.Guid("ab2179ad-9eac-4b61-8d84-81cd777c4926")));
 		public static readonly Interface Enumeration = ((Interface)Repository.MetaPopulation.Find( new System.Guid("b7bcc22f-03f0-46fd-b738-4e035921d445")));
+		public static readonly Interface Derivable = ((Interface)Repository.MetaPopulation.Find( new System.Guid("ccde0070-ad05-4336-8cab-a5b27bef5c29")));
 		public static readonly Interface AccessControlledObject = ((Interface)Repository.MetaPopulation.Find( new System.Guid("eb0ff756-3e3d-4cf9-8935-8802a73d2df2")));
 		public static readonly Interface UserInterfaceable = ((Interface)Repository.MetaPopulation.Find( new System.Guid("eea17b39-8912-40b3-8403-293bd5a3316d")));
 		public static readonly Interface ObjectState = ((Interface)Repository.MetaPopulation.Find( new System.Guid("f991813f-3146-4431-96d0-554aa2186887")));
@@ -686,6 +687,9 @@ namespace Allors.Meta
 
 	public partial class MethodTypes
 	{
+		public static readonly MethodType DerivablePrepareDerivation = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("122d3d78-ab97-4a69-a725-f465c71757da")));
+		public static readonly MethodType DerivableDerive = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("527da7f8-68b4-46ab-b0d8-6b9e82d2a5ac")));
+		public static readonly MethodType DerivableApplySecurityOnDerive = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("349cbcde-b4e9-4965-b3ff-7c41b021825d")));
 		public static readonly MethodType C1ClassMethod = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("a80e3732-daf2-4ad4-9378-b4bc13e74dde")));
 		public static readonly MethodType I1InterfaceMethod = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("336dc840-bdd8-45cc-8b95-dd0ea55f130d")));
 		public static readonly MethodType S1SuperinterfaceMethod = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("5c7f1ab4-0b61-416d-97f4-660663f0e933")));

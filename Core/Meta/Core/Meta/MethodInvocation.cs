@@ -23,6 +23,7 @@ namespace Allors.Meta
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Linq.Expressions;
     using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
@@ -32,12 +33,12 @@ namespace Allors.Meta
     {
         private readonly MethodType methodType;
 
-        private readonly List<MethodInfo> methodInfos; 
+        private readonly List<Action<object, object>> methods;
 
         public MethodInvocation(MethodType methodType)
         {
             this.methodType = methodType;
-            this.methodInfos = new List<MethodInfo>();
+            this.methods = new List<Action<object, object>>();
 
             var metaPopulation = this.methodType.MetaPopulation;
             var domains = new List<Domain>(metaPopulation.Domains);
@@ -50,10 +51,22 @@ namespace Allors.Meta
             {
                 var methodName = domain.Name + this.methodType.Name;
 
-                var methodInfo = @class.GetMethod(methodName);
-                if (methodInfo != null)
                 {
-                    this.methodInfos.Add(methodInfo);
+                    var methodInfo = @class.GetMethod(methodName);
+                    if (methodInfo != null)
+                    {
+                        var o = Expression.Parameter(typeof(object));
+                        var castO = Expression.Convert(o, @class);
+
+                        var p = Expression.Parameter(typeof(object));
+                        var castP = Expression.Convert(p, methodInfo.GetParameters()[0].ParameterType);
+
+                        Expression call = Expression.Call(castO, methodInfo, new Expression[] { castP });
+
+                        var action = Expression.Lambda<Action<object, object>>(call, o, p).Compile();
+                        
+                        this.methods.Add(action);
+                    }
                 }
 
                 foreach (var @interface in interfaces)
@@ -66,7 +79,19 @@ namespace Allors.Meta
 
                     if (extensionMethodInfos.Length == 1)
                     {
-                        this.methodInfos.Add(extensionMethodInfos[0]);
+                        var methodInfo = extensionMethodInfos[0];
+
+                        var o = Expression.Parameter(typeof(object));
+                        var castO = Expression.Convert(o, methodInfo.GetParameters()[0].ParameterType);
+
+                        var p = Expression.Parameter(typeof(object));
+                        var castP = Expression.Convert(p, methodInfo.GetParameters()[1].ParameterType);
+
+                        Expression call = Expression.Call(methodInfo, new Expression[] { castO, castP });
+
+                        var action = Expression.Lambda<Action<object, object>>(call, o, p).Compile();
+
+                        this.methods.Add(action);
                     }
                 }
             }
@@ -82,15 +107,12 @@ namespace Allors.Meta
 
         public void Execute(Method method)
         {
-            foreach (var methodInfo in this.methodInfos)
+            foreach (var methodInfo in this.methods)
             {
-                if (methodInfo.IsStatic)
+                // TODO: Add test for deletion
+                if (!method.Object.Strategy.IsDeleted)
                 {
-                    methodInfo.Invoke(null, new object[] { method.Object, method });
-                }
-                else
-                {
-                    methodInfo.Invoke(method.Object, new object[] { method });
+                    methodInfo.DynamicInvoke(new object[] { method.Object, method });
                 }
             }
         }
@@ -106,5 +128,6 @@ namespace Allors.Meta
                         select method;
             return query.ToArray();
         }
+
     }
 }

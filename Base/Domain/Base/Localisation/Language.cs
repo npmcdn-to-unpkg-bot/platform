@@ -44,9 +44,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void BaseDerive(IDerivation derivation)
+        public void BaseDerive(DerivableDerive method)
         {
-            base.BaseDerive(derivation);
+            var derivation = method.Derivation;
 
             this.DisplayName = this.Name;
         }

@@ -27,9 +27,9 @@ namespace Allors.Domain
     {
         // TODO: Value should be write-once
 
-        protected override void BaseDerive(IDerivation derivation)
+        public void BaseDerive(DerivableDerive method)
         {
-            base.BaseDerive(derivation);
+            var derivation = method.Derivation;
 
             if (!this.ExistHash && this.ExistValue)
             {

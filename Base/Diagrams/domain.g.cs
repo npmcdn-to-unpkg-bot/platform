@@ -53,7 +53,10 @@ namespace Allors.Domain
 					global::System.Boolean IsActive {set;}
 
 	}
-	public interface AccessControlledObject 
+	public interface Derivable 
+	{
+	}
+	public interface AccessControlledObject  : Derivable 
 	{
 					Permission DeniedPermissions {set;}
 
@@ -82,7 +85,7 @@ namespace Allors.Domain
 					SearchData SearchData {set;}
 
 	}
-	public interface I1  : I12, S1 
+	public interface I1  : Derivable, I12, S1 
 	{
 					I1 I1I1Many2One {set;}
 
@@ -139,7 +142,7 @@ namespace Allors.Domain
 					global::System.Guid? I1AllorsUnique {set;}
 
 	}
-	public interface I2  : I12 
+	public interface I2  : Derivable, I12 
 	{
 					I2 I2I2Many2One {set;}
 
@@ -196,7 +199,7 @@ namespace Allors.Domain
 					global::System.Double? I2AllorsFloat {set;}
 
 	}
-	public interface I12  : UserInterfaceable, AccessControlledObject, Searchable 
+	public interface I12  : Derivable, UserInterfaceable, AccessControlledObject, Searchable 
 	{
 					global::System.Byte[] I12AllorsBinary {set;}
 
@@ -255,20 +258,20 @@ namespace Allors.Domain
 					C1 I12C1Many2One {set;}
 
 	}
-	public interface S1 
+	public interface S1  : Derivable 
 	{
 	}
-	public interface DerivationLogI12 
+	public interface DerivationLogI12  : Derivable 
 	{
 					global::System.Guid? UniqueId {set;}
 
 	}
-	public interface Address  : UserInterfaceable 
+	public interface Address  : Derivable, UserInterfaceable 
 	{
 					Place Place {set;}
 
 	}
-	public interface Shared  : UserInterfaceable 
+	public interface Shared  : Derivable, UserInterfaceable 
 	{
 	}
 	public interface LocalisedText  : Searchable, UserInterfaceable, Localised 
@@ -314,7 +317,7 @@ namespace Allors.Domain
 					Country Country {set;}
 
 	}
-	public interface SearchFragment 
+	public interface SearchFragment  : Derivable 
 	{
 					global::System.String LowerCaseText {set;}
 
@@ -328,7 +331,7 @@ namespace Allors.Domain
 					LocalisedText LocalisedNames {set;}
 
 	}
-	public interface SearchData 
+	public interface SearchData  : Derivable 
 	{
 					global::System.String CharacterBoundaryText {set;}
 
@@ -352,7 +355,7 @@ namespace Allors.Domain
 					global::System.String Name {set;}
 
 	}
-	public interface MediaContent 
+	public interface MediaContent  : Derivable 
 	{
 					global::System.Byte[] Value {set;}
 
@@ -385,7 +388,7 @@ namespace Allors.Domain
 					global::System.String Name {set;}
 
 	}
-	public interface Login 
+	public interface Login  : Derivable 
 	{
 					global::System.String Key {set;}
 
@@ -494,7 +497,7 @@ namespace Allors.Domain
 					LocalisedText LocalisedNames {set;}
 
 	}
-	public interface C1  : I1 
+	public interface C1  : Derivable, I1 
 	{
 					I1 C1I1One2One {set;}
 
@@ -553,7 +556,7 @@ namespace Allors.Domain
 					global::System.Int32? C1AllorsInteger {set;}
 
 	}
-	public interface C2  : I2 
+	public interface C2  : Derivable, I2 
 	{
 					global::System.Decimal? C2AllorsDecimal {set;}
 
@@ -610,13 +613,13 @@ namespace Allors.Domain
 					global::System.Byte[] C2AllorsBinary {set;}
 
 	}
-	public interface DerivationLogC1  : DerivationLogI12 
+	public interface DerivationLogC1  : Derivable, DerivationLogI12 
 	{
 	}
-	public interface DerivationLogC2  : DerivationLogI12 
+	public interface DerivationLogC2  : Derivable, DerivationLogI12 
 	{
 	}
-	public interface Dependent 
+	public interface Dependent  : Derivable 
 	{
 					Dependee Dependee {set;}
 
@@ -625,10 +628,10 @@ namespace Allors.Domain
 					global::System.Int32? Subcounter {set;}
 
 	}
-	public interface Four  : Shared, UserInterfaceable 
+	public interface Four  : Derivable, Shared, UserInterfaceable 
 	{
 	}
-	public interface First 
+	public interface First  : Derivable 
 	{
 					Second Second {set;}
 
@@ -637,14 +640,14 @@ namespace Allors.Domain
 					global::System.Boolean? IsDerived {set;}
 
 	}
-	public interface HomeAddress  : Searchable, Address 
+	public interface HomeAddress  : Derivable, Searchable, Address 
 	{
 					global::System.String Street {set;}
 
 					global::System.String HouseNumber {set;}
 
 	}
-	public interface Place  : UserInterfaceable, Searchable 
+	public interface Place  : Derivable, UserInterfaceable, Searchable 
 	{
 					Country Country {set;}
 
@@ -653,10 +656,10 @@ namespace Allors.Domain
 					global::System.String PostalCode {set;}
 
 	}
-	public interface Gender  : Enumeration 
+	public interface Gender  : Derivable, Enumeration 
 	{
 	}
-	public interface Dependee 
+	public interface Dependee  : Derivable 
 	{
 					Subdependee Subdependee {set;}
 
@@ -667,12 +670,12 @@ namespace Allors.Domain
 					global::System.Boolean? DeleteDependent {set;}
 
 	}
-	public interface Third 
+	public interface Third  : Derivable 
 	{
 					global::System.Boolean? IsDerived {set;}
 
 	}
-	public interface Organisation  : Searchable, UniquelyIdentifiable, UserInterfaceable, SearchResult 
+	public interface Organisation  : Derivable, Searchable, UniquelyIdentifiable, UserInterfaceable, SearchResult 
 	{
 					Person Shareholders {set;}
 
@@ -695,12 +698,12 @@ namespace Allors.Domain
 					global::System.String Size {set;}
 
 	}
-	public interface Subdependee 
+	public interface Subdependee  : Derivable 
 	{
 					global::System.Int32? Subcounter {set;}
 
 	}
-	public interface Unit  : AccessControlledObject, UserInterfaceable 
+	public interface Unit  : Derivable, AccessControlledObject, UserInterfaceable 
 	{
 					global::System.Byte[] AllorsBinary {set;}
 
@@ -717,17 +720,17 @@ namespace Allors.Domain
 					global::System.Decimal? AllorsDecimal {set;}
 
 	}
-	public interface One  : Shared, UserInterfaceable 
+	public interface One  : Derivable, Shared, UserInterfaceable 
 	{
 					Two Two {set;}
 
 	}
-	public interface From  : UserInterfaceable 
+	public interface From  : Derivable, UserInterfaceable 
 	{
 					To Tos {set;}
 
 	}
-	public interface StatefulCompany 
+	public interface StatefulCompany  : Derivable 
 	{
 					Person Employee {set;}
 
@@ -736,32 +739,32 @@ namespace Allors.Domain
 					Person Manager {set;}
 
 	}
-	public interface To  : UserInterfaceable 
+	public interface To  : Derivable, UserInterfaceable 
 	{
 					global::System.String Name {set;}
 
 	}
-	public interface MailboxAddress  : Searchable, Address 
+	public interface MailboxAddress  : Derivable, Searchable, Address 
 	{
 					global::System.String PoBox {set;}
 
 	}
-	public interface Extender 
+	public interface Extender  : Derivable 
 	{
 					global::System.String AllorsString {set;}
 
 	}
-	public interface Two  : UserInterfaceable, Shared 
+	public interface Two  : Derivable, UserInterfaceable, Shared 
 	{
 					Shared Shared {set;}
 
 	}
-	public interface SearchTest  : Searchable, UserInterfaceable 
+	public interface SearchTest  : Derivable, Searchable, UserInterfaceable 
 	{
 					global::System.String Text {set;}
 
 	}
-	public interface BadUI  : UserInterfaceable 
+	public interface BadUI  : Derivable, UserInterfaceable 
 	{
 					Person PersonsMany {set;}
 
@@ -774,21 +777,21 @@ namespace Allors.Domain
 					global::System.String AllorsString {set;}
 
 	}
-	public interface Three  : Shared, UserInterfaceable 
+	public interface Three  : Derivable, Shared, UserInterfaceable 
 	{
 					Four Four {set;}
 
 					global::System.String AllorsString {set;}
 
 	}
-	public interface Second 
+	public interface Second  : Derivable 
 	{
 					Third Third {set;}
 
 					global::System.Boolean? IsDerived {set;}
 
 	}
-	public interface ClassWithoutRoles  : UserInterfaceable 
+	public interface ClassWithoutRoles  : Derivable, UserInterfaceable 
 	{
 	}
 }

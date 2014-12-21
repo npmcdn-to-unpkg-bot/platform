@@ -60,9 +60,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void TestDerive(IDerivation derivation)
+        public void TestDerive(DerivableDerive method)
         {
-            base.TestDerive(derivation);
+            var derivation = method.Derivation;
 
             if (!this.ExistOwnerSecurityToken)
             {

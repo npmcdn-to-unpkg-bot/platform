@@ -292,6 +292,22 @@ namespace Allors.Domain
 			}
 		}
 
+
+
+		public DerivablePrepareDerivation PrepareDerivation()
+		{ 
+			return new MediaPrepareDerivation(this);
+		}
+
+		public DerivableDerive Derive()
+		{ 
+			return new MediaDerive(this);
+		}
+
+		public DerivableApplySecurityOnDerive ApplySecurityOnDerive()
+		{ 
+			return new MediaApplySecurityOnDerive(this);
+		}
 	}
 
 	public class MediaMeta
@@ -369,6 +385,28 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.PersonPhoto;
+			}
+		} 
+
+		public global::Allors.Meta.MethodType PrepareDerivation 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.DerivablePrepareDerivation;
+			}
+		} 
+		public global::Allors.Meta.MethodType Derive 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.DerivableDerive;
+			}
+		} 
+		public global::Allors.Meta.MethodType ApplySecurityOnDerive 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.DerivableApplySecurityOnDerive;
 			}
 		} 
 

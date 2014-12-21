@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="ccde0070-ad05-4336-8cab-a5b27bef5c29">
+  <isInterface>true</isInterface>
+  <pluralName>Derivables</pluralName>
+  <singularName>Derivable</singularName>
+</objectType>

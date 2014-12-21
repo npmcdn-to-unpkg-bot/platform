@@ -33,8 +33,10 @@ namespace Allors.Domain
             return DisplayName;
         }
 
-        protected override void TestDerive(IDerivation derivation)
+        public void TestDerive(DerivableDerive method)
         {
+            var derivation = method.Derivation;
+            
             derivation.Log.AssertExists(this, HomeAddresses.Meta.Street);
             derivation.Log.AssertNonEmptyString(this, HomeAddresses.Meta.Street);
 

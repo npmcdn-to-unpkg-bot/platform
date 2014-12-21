@@ -74,9 +74,9 @@ namespace Allors.Domain
             this.BuildOwnerSecurityToken();
         }
 
-        protected override void BaseDerive(IDerivation derivation)
+        public void BaseDerive(DerivableDerive method)
         {
-            base.BaseDerive(derivation);
+            var derivation = method.Derivation;
             
             this.DisplayName = this.DeriveDisplayName();
             this.SearchData.CharacterBoundaryText = this.DeriveSearchDataCharacterBoundaryText();

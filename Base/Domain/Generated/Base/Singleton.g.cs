@@ -351,6 +351,22 @@ namespace Allors.Domain
 			Strategy.RemoveCompositeRole(Meta.PersonTemplate);
 		}
 
+
+
+		public DerivablePrepareDerivation PrepareDerivation()
+		{ 
+			return new SingletonPrepareDerivation(this);
+		}
+
+		public DerivableDerive Derive()
+		{ 
+			return new SingletonDerive(this);
+		}
+
+		public DerivableApplySecurityOnDerive ApplySecurityOnDerive()
+		{ 
+			return new SingletonApplySecurityOnDerive(this);
+		}
 	}
 
 	public class SingletonMeta
@@ -427,6 +443,28 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.RoleTypes.AccessControlledObjectSecurityToken;
+			}
+		} 
+
+		public global::Allors.Meta.MethodType PrepareDerivation 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.DerivablePrepareDerivation;
+			}
+		} 
+		public global::Allors.Meta.MethodType Derive 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.DerivableDerive;
+			}
+		} 
+		public global::Allors.Meta.MethodType ApplySecurityOnDerive 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.DerivableApplySecurityOnDerive;
 			}
 		} 
 

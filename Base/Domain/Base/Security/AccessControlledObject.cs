@@ -23,7 +23,5 @@ namespace Allors.Domain
     public partial interface AccessControlledObject
     {
         void ApplySecurityOnPostBuild();
-
-        void ApplySecurityOnDerive();
     }
 }

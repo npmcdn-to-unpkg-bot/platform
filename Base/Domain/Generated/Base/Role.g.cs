@@ -267,6 +267,22 @@ namespace Allors.Domain
 			}
 		}
 
+
+
+		public DerivablePrepareDerivation PrepareDerivation()
+		{ 
+			return new RolePrepareDerivation(this);
+		}
+
+		public DerivableDerive Derive()
+		{ 
+			return new RoleDerive(this);
+		}
+
+		public DerivableApplySecurityOnDerive ApplySecurityOnDerive()
+		{ 
+			return new RoleApplySecurityOnDerive(this);
+		}
 	}
 
 	public class RoleMeta
@@ -330,6 +346,28 @@ namespace Allors.Domain
 			get
 			{
 				return global::Allors.Meta.AssociationTypes.AccessControlRole;
+			}
+		} 
+
+		public global::Allors.Meta.MethodType PrepareDerivation 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.DerivablePrepareDerivation;
+			}
+		} 
+		public global::Allors.Meta.MethodType Derive 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.DerivableDerive;
+			}
+		} 
+		public global::Allors.Meta.MethodType ApplySecurityOnDerive 
+		{
+			get
+			{
+				return global::Allors.Meta.MethodTypes.DerivableApplySecurityOnDerive;
 			}
 		} 
 

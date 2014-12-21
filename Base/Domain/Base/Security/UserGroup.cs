@@ -37,19 +37,18 @@ namespace Allors.Domain
             return false;
         }
 
-        protected override void BasePrepareDerivation(IDerivation derivation)
+        protected void BasePrepareDerivation(DerivableDerive method)
         {
-            base.BasePrepareDerivation(derivation);
-
+            var derivation = method.Derivation;
             foreach (Derivable member in this.Members)
             {
                 derivation.AddDependency(member, this);
             }
         }
 
-        protected override void BaseDerive(IDerivation derivation)
+        public void BaseDerive(DerivableDerive method)
         {
-            base.BaseDerive(derivation);
+            var derivation = method.Derivation;
 
             derivation.Log.AssertIsUnique(this, Meta.Name);
 

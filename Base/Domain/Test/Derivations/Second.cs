@@ -20,14 +20,10 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class Second
     {
-        public override void Derive(IDerivation derivation)
+        public void TestDerive(DerivableDerive method)
         {
-            base.Derive(derivation);
-
             this.Third = new ThirdBuilder(this.Session).Build();
 
             this.IsDerived = true;

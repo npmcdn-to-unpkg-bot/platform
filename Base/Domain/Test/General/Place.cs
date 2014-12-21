@@ -41,8 +41,10 @@ namespace Allors.Domain
             }
         }
 
-        protected override void TestDerive(IDerivation derivation)
+        public void TestDerive(DerivableDerive method)
         {
+            var derivation = method.Derivation;
+
             derivation.Log.AssertExists(this, Places.Meta.PostalCode);
             derivation.Log.AssertNonEmptyString(this, Places.Meta.PostalCode);
             derivation.Log.AssertExists(this, Places.Meta.City);

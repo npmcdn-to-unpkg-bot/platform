@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class Subdependee
     {
         public override void OnPostBuild(Allors.IObjectBuilder builder)
@@ -34,20 +32,17 @@ namespace Allors.Domain
             }
         }
 
-        public override void PrepareDerivation(IDerivation derivation)
+        public void TestPrepareDerivation(DerivablePrepareDerivation method)
         {
-            base.PrepareDerivation(derivation);
-
+            var derivation = method.Derivation;
             if (this.ExistDependeeWhereSubdependee)
             {
                 derivation.AddDependency(this.DependeeWhereSubdependee, this);
             }
         }
 
-        public override void Derive(IDerivation derivation)
+        public void TestDerive(DerivableDerive method)
         {
-            base.Derive(derivation);
-
             this.Subcounter = this.Subcounter + 1;
         }
     }

@@ -31,7 +31,7 @@ namespace Allors.Security
     public class LoginTests : DomainTest
     {
         [Test]
-        public void WhenDeletingUserThenLoginShouldAlsBeDeleted()
+        public void WhenDeletingUserThenLoginShouldAlsoBeDeleted()
         {
             var user = new PersonBuilder(this.DatabaseSession).WithUserName("User").Build();
             var login = new LoginBuilder(this.DatabaseSession).WithUser(user).WithProvider("MyProvider").WithKey("XXXYYYZZZ").Build();

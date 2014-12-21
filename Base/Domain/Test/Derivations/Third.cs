@@ -22,10 +22,8 @@ namespace Allors.Domain
 {
     public partial class Third
     {
-        public override void Derive(IDerivation derivation)
+        public void TestDerive(DerivableDerive method)
         {
-            base.Derive(derivation);
-
             this.IsDerived = true;
         }
     }

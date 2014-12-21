@@ -21,6 +21,7 @@
 namespace Allors.Meta
 {
     using System;
+    using System.Linq;
 
     public static partial class Repository
     {
@@ -69,6 +70,14 @@ namespace Allors.Meta
             var classWithoutRoles = new ClassBuilder(domain, new Guid("e1008840-6d7c-4d44-b2ad-1545d23f90d8")).WithSingularName("ClassWithoutRoles").WithPluralName("ClassesWithoutRoles").Build();
             
             // Inheritances
+            foreach (var composite in meta.Composites.Where( c => c.DefiningDomain.Equals(domain)))
+            {
+                if (!composite.DirectSupertypes.Contains(Derivable))
+                {
+                    new InheritanceBuilder(domain, Guid.NewGuid()).WithSubtype(composite).WithSupertype(Derivable).Build();
+                }
+            }
+
             // C1
             new InheritanceBuilder(domain, new Guid("2d0db6cd-5837-4bbd-ad9e-9203a6cc7c61")).WithSubtype(c1).WithSupertype(i1).Build();
 

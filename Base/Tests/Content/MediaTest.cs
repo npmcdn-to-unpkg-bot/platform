@@ -44,6 +44,8 @@ namespace Allors.Domain
             var binary = new byte[] { 0, 1, 2, 3 };
             var octetStream = new MediaTypes(this.DatabaseSession).OctetStream;
 
+            this.DatabaseSession.Commit();
+
             var media = new MediaBuilder(this.DatabaseSession).WithContent(binary).WithMediaType(octetStream).Build();
 
             this.DatabaseSession.Derive(true);
