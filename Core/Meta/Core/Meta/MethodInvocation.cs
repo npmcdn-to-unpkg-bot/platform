@@ -26,19 +26,18 @@ namespace Allors.Meta
     using System.Linq.Expressions;
     using System.Reflection;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     public partial class MethodInvocation<T>
         where T : IObject
     {
         private readonly MethodType methodType;
 
-        private readonly List<Action<object, object>> methods;
+        private readonly List<Action<object, object>> actions;
 
         public MethodInvocation(MethodType methodType)
         {
             this.methodType = methodType;
-            this.methods = new List<Action<object, object>>();
+            this.actions = new List<Action<object, object>>();
 
             var metaPopulation = this.methodType.MetaPopulation;
             var domains = new List<Domain>(metaPopulation.Domains);
@@ -65,7 +64,7 @@ namespace Allors.Meta
 
                         var action = Expression.Lambda<Action<object, object>>(call, o, p).Compile();
                         
-                        this.methods.Add(action);
+                        this.actions.Add(action);
                     }
                 }
 
@@ -91,7 +90,7 @@ namespace Allors.Meta
 
                         var action = Expression.Lambda<Action<object, object>>(call, o, p).Compile();
 
-                        this.methods.Add(action);
+                        this.actions.Add(action);
                     }
                 }
             }
@@ -107,12 +106,12 @@ namespace Allors.Meta
 
         public void Execute(Method method)
         {
-            foreach (var methodInfo in this.methods)
+            foreach (var action in this.actions)
             {
                 // TODO: Add test for deletion
                 if (!method.Object.Strategy.IsDeleted)
                 {
-                    methodInfo.DynamicInvoke(new object[] { method.Object, method });
+                    action(method.Object, method);
                 }
             }
         }
