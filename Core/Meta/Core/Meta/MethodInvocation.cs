@@ -30,6 +30,8 @@ namespace Allors.Meta
     public partial class MethodInvocation<T>
         where T : IObject
     {
+        private static readonly Dictionary<Type, Dictionary<MethodInfo, Action<object, object>>> actionByMethodInfoByType = new Dictionary<Type, Dictionary<MethodInfo, Action<object, object>>>(); 
+
         private readonly MethodType methodType;
 
         private readonly List<Action<object, object>> actions;
@@ -54,15 +56,28 @@ namespace Allors.Meta
                     var methodInfo = @class.GetMethod(methodName);
                     if (methodInfo != null)
                     {
-                        var o = Expression.Parameter(typeof(object));
-                        var castO = Expression.Convert(o, @class);
+                        Dictionary<MethodInfo, Action<object, object>> actionByMethodInfo;
+                        if (!actionByMethodInfoByType.TryGetValue(@class, out actionByMethodInfo))
+                        {
+                            actionByMethodInfo = new Dictionary<MethodInfo, Action<object, object>>();
+                            actionByMethodInfoByType[@class] = actionByMethodInfo;
+                        }
 
-                        var p = Expression.Parameter(typeof(object));
-                        var castP = Expression.Convert(p, methodInfo.GetParameters()[0].ParameterType);
+                        Action<object, object> action;
+                        if (!actionByMethodInfo.TryGetValue(methodInfo, out action))
+                        {
+                            var o = Expression.Parameter(typeof(object));
+                            var castO = Expression.Convert(o, @class);
 
-                        Expression call = Expression.Call(castO, methodInfo, new Expression[] { castP });
+                            var p = Expression.Parameter(typeof(object));
+                            var castP = Expression.Convert(p, methodInfo.GetParameters()[0].ParameterType);
 
-                        var action = Expression.Lambda<Action<object, object>>(call, o, p).Compile();
+                            Expression call = Expression.Call(castO, methodInfo, new Expression[] { castP });
+
+                            action = Expression.Lambda<Action<object, object>>(call, o, p).Compile();
+
+                            actionByMethodInfo[methodInfo] = action;
+                        }
                         
                         this.actions.Add(action);
                     }
@@ -80,15 +95,27 @@ namespace Allors.Meta
                     {
                         var methodInfo = extensionMethodInfos[0];
 
-                        var o = Expression.Parameter(typeof(object));
-                        var castO = Expression.Convert(o, methodInfo.GetParameters()[0].ParameterType);
+                        Dictionary<MethodInfo, Action<object, object>> actionByMethodInfo;
+                        if (!actionByMethodInfoByType.TryGetValue(@class, out actionByMethodInfo))
+                        {
+                            actionByMethodInfo = new Dictionary<MethodInfo, Action<object, object>>();
+                            actionByMethodInfoByType[@class] = actionByMethodInfo;
+                        }
 
-                        var p = Expression.Parameter(typeof(object));
-                        var castP = Expression.Convert(p, methodInfo.GetParameters()[1].ParameterType);
+                        Action<object, object> action;
+                        if (!actionByMethodInfo.TryGetValue(methodInfo, out action))
+                        {
+                            var o = Expression.Parameter(typeof(object));
+                            var castO = Expression.Convert(o, methodInfo.GetParameters()[0].ParameterType);
 
-                        Expression call = Expression.Call(methodInfo, new Expression[] { castO, castP });
+                            var p = Expression.Parameter(typeof(object));
+                            var castP = Expression.Convert(p, methodInfo.GetParameters()[1].ParameterType);
 
-                        var action = Expression.Lambda<Action<object, object>>(call, o, p).Compile();
+                            Expression call = Expression.Call(methodInfo, new Expression[] { castO, castP });
+
+                            action = Expression.Lambda<Action<object, object>>(call, o, p).Compile();
+                            actionByMethodInfo[methodInfo] = action;
+                        }
 
                         this.actions.Add(action);
                     }
