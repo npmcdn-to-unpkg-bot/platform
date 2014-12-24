@@ -24,22 +24,6 @@ namespace Allors.Domain
 
     public partial class FaceToFaceCommunication
     {
-
-        public void Close()
-        {
-            this.AppsCommunicationEventClose();
-        }
-
-        public void Reopen()
-        {
-            this.AppsCommunicationEventReopen();
-        }
-
-        public void Cancel()
-        {
-            this.AppsCommunicationEventCancel();
-        }
-
         public void DeriveDisplayName()
         {
             this.AppsDeriveDisplayName();

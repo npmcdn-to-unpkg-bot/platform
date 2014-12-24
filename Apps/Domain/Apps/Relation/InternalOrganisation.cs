@@ -192,8 +192,10 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsPrepareDerivation(IDerivation derivation)
+        public void AppsPrepareDerivation(DerivablePrepareDerivation method)
         {
+            var derivation = method.Derivation;
+
             this.AppsPartyDerive(derivation);
 
             // TODO:
@@ -244,8 +246,10 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
+            var derivation = method.Derivation;
+
             if (this.ExistPreviousCurrency)
             {
                 derivation.Log.AssertAreEqual(this, InternalOrganisations.Meta.PreferredCurrency, InternalOrganisations.Meta.PreviousCurrency);

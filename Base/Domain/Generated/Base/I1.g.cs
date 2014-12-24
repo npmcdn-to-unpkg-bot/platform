@@ -626,14 +626,6 @@ namespace Allors.Domain
 
 
 		I1InterfaceMethod InterfaceMethod();
-
-		DerivablePrepareDerivation PrepareDerivation();
-
-		DerivableDerive Derive();
-
-		DerivableApplySecurityOnDerive ApplySecurityOnDerive();
-
-		S1SuperinterfaceMethod SuperinterfaceMethod();
 	}
 
 	public class I1Meta

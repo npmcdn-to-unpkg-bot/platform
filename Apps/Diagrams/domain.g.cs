@@ -1118,7 +1118,10 @@ namespace Allors.Domain
 					global::System.Boolean IsActive {set;}
 
 	}
-	public interface AccessControlledObject 
+	public interface Derivable 
+	{
+	}
+	public interface AccessControlledObject  : Derivable 
 	{
 					Permission DeniedPermissions {set;}
 
@@ -4964,7 +4967,7 @@ namespace Allors.Domain
 					Country Country {set;}
 
 	}
-	public interface SearchFragment 
+	public interface SearchFragment  : Derivable 
 	{
 					global::System.String LowerCaseText {set;}
 
@@ -4978,7 +4981,7 @@ namespace Allors.Domain
 					LocalisedText LocalisedNames {set;}
 
 	}
-	public interface SearchData 
+	public interface SearchData  : Derivable 
 	{
 					global::System.String CharacterBoundaryText {set;}
 
@@ -5004,7 +5007,7 @@ namespace Allors.Domain
 					Party Party {set;}
 
 	}
-	public interface MediaContent 
+	public interface MediaContent  : Derivable 
 	{
 					global::System.Byte[] Value {set;}
 
@@ -5037,7 +5040,7 @@ namespace Allors.Domain
 					global::System.String Name {set;}
 
 	}
-	public interface Login 
+	public interface Login  : Derivable 
 	{
 					global::System.String Key {set;}
 

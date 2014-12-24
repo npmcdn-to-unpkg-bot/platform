@@ -116,9 +116,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsPrepareDerivation(IDerivation derivation)
+        public void AppsPrepareDerivation(DerivablePrepareDerivation method)
         {
-            base.AppsPrepareDerivation(derivation);
+            var derivation = method.Derivation;
 
             // TODO:
             if (derivation.ChangeSet.Associations.Contains(this.Id))
@@ -133,9 +133,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            
+            var derivation = method.Derivation;
 
             derivation.Log.AssertExists(this, Shipments.Meta.ShipmentNumber);
             derivation.Log.AssertExists(this, Shipments.Meta.ShipToParty);
@@ -180,13 +180,13 @@ namespace Allors.Domain
 
             foreach (ShipmentItem shipmentItem in this.ShipmentItems)
             {
-                shipmentItem.Derive(derivation);
+                shipmentItem.Derive().Execute();
             }
 
             this.DeriveTemplate(derivation);
         }
 
-        protected override void AppsApplySecurityOnDerive()
+        public void AppsApplySecurityOnDerive(DerivableApplySecurityOnDerive method)
         {
             this.RemoveSecurityTokens();
             this.AddSecurityToken(Domain.Singleton.Instance(this.Session).AdministratorSecurityToken);

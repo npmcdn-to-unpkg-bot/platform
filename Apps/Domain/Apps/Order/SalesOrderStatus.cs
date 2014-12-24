@@ -23,8 +23,6 @@ namespace Allors.Domain
     using System;
     using System.Text;
 
-    using Allors.Domain;
-
     public partial class SalesOrderStatus
     {
         protected override void AppsOnPostBuild(IObjectBuilder builder)
@@ -34,9 +32,9 @@ namespace Allors.Domain
             this.AppsEnsure();
         }
 
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            
+            var derivation = method.Derivation;
 
             derivation.Log.AssertExists(this, SalesOrderStatuses.Meta.StartDateTime);
             derivation.Log.AssertExists(this, SalesOrderStatuses.Meta.SalesOrderObjectState);

@@ -23,9 +23,6 @@ namespace Allors.Domain
     using System;
     using System.Text;
 
-    
-    using Allors.Domain;
-
     public partial class ProductCategoryRevenue
     {
         public string RevenueAsCurrencyString()
@@ -33,8 +30,10 @@ namespace Allors.Domain
             return DecimalExtensions.AsCurrencyString(this.Revenue, this.InternalOrganisation.CurrencyFormat);
         }
 
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
+            var derivation = method.Derivation;
+
             this.AppsDeriveRevenue(derivation);
             this.AppsDeriveDisplayName(derivation);
         }
@@ -112,7 +111,7 @@ namespace Allors.Domain
                                                                                     .WithCurrency(this.Currency)
                                                                                     .WithRevenue(0M)
                                                                                     .Build();
-                productCategoryRevenue.Derive(derivation);
+                productCategoryRevenue.Derive().Execute();
             }
         }
     }

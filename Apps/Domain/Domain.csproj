@@ -125,6 +125,9 @@
     <Compile Include="..\..\Base\Domain\Base\Common\UniquelyIdentifiableCache.cs">
       <Link>Base\Common\UniquelyIdentifiableCache.cs</Link>
     </Compile>
+    <Compile Include="..\..\Base\Domain\Base\Config.cs">
+      <Link>Base\Config.cs</Link>
+    </Compile>
     <Compile Include="..\..\Base\Domain\Base\Content\HtmlCharacters.cs">
       <Link>Base\Content\HtmlCharacters.cs</Link>
     </Compile>
@@ -383,6 +386,7 @@
     <Compile Include="..\..\Core\Domain\Core\ObjectBase.cs">
       <Link>Core\ObjectBase.cs</Link>
     </Compile>
+    <Compile Include="Apps\Accounting\TimeFrequency.cs" />
     <Compile Include="Apps\Accounting\AccountingPeriod.cs" />
     <Compile Include="Apps\Accounting\AccountingPeriod.v.cs" />
     <Compile Include="Apps\Accounting\AccountingPeriods.cs" />
@@ -395,7 +399,6 @@
     <Compile Include="Apps\Accounting\Bank.cs" />
     <Compile Include="Apps\Accounting\BankAccount.cs" />
     <Compile Include="Apps\Accounting\BankAccount.v.cs" />
-    <Compile Include="Apps\Accounting\AccountingTransactionType.cs" />
     <Compile Include="Apps\Accounting\BankAccounts.cs" />
     <Compile Include="Apps\Accounting\Banks.cs" />
     <Compile Include="Apps\Accounting\Budget.cs" />
@@ -412,7 +415,6 @@
     <Compile Include="Apps\Accounting\Budgets.cs" />
     <Compile Include="Apps\Accounting\BudgetStatus.cs" />
     <Compile Include="Apps\Accounting\BudgetStatuses.cs" />
-    <Compile Include="Apps\Accounting\CapitalBudget.v.cs" />
     <Compile Include="Apps\Accounting\CapitalBudget.cs" />
     <Compile Include="Apps\Accounting\CapitalBudgets.cs" />
     <Compile Include="Apps\Accounting\Capitalization.cs" />
@@ -421,9 +423,7 @@
     <Compile Include="Apps\Accounting\ChartOfAccounts.cs" />
     <Compile Include="Apps\Accounting\CostCenter.cs" />
     <Compile Include="Apps\Accounting\CostCenterCategory.cs" />
-    <Compile Include="Apps\Accounting\CostCenterSplitMethod.cs" />
     <Compile Include="Apps\Accounting\CostCenterSplitMethods.cs" />
-    <Compile Include="Apps\Accounting\CostOfGoodsSoldMethod.cs" />
     <Compile Include="Apps\Accounting\CostOfGoodsSoldMethods.cs" />
     <Compile Include="Apps\Accounting\CreditCard.cs" />
     <Compile Include="Apps\Accounting\CreditCard.v.cs" />
@@ -432,7 +432,6 @@
     <Compile Include="Apps\Accounting\CreditCards.cs" />
     <Compile Include="Apps\Accounting\CreditLine.cs" />
     <Compile Include="Apps\Accounting\CreditLines.cs" />
-    <Compile Include="Apps\Accounting\DebitCreditConstant.cs" />
     <Compile Include="Apps\Accounting\DebitCreditConstants.cs" />
     <Compile Include="Apps\Accounting\Depreciation.cs" />
     <Compile Include="Apps\Accounting\DepreciationMethod.cs" />
@@ -442,7 +441,6 @@
     <Compile Include="Apps\Accounting\DisbursementAccountingTransactions.cs" />
     <Compile Include="Apps\Accounting\Equipment.cs" />
     <Compile Include="Apps\Accounting\Equipments.cs" />
-    <Compile Include="Apps\Accounting\EUSalesListType.cs" />
     <Compile Include="Apps\Accounting\EUSalesListTypes.cs" />
     <Compile Include="Apps\Accounting\GeneralLedgerAccount.cs" />
     <Compile Include="Apps\Accounting\GeneralLedgerAccountGroup.cs" />
@@ -460,13 +458,11 @@
     <Compile Include="Apps\Accounting\Journal.cs" />
     <Compile Include="Apps\Accounting\Journal.v.cs" />
     <Compile Include="Apps\Accounting\JournalEntry.cs" />
-    <Compile Include="Apps\Accounting\JournalType.cs" />
     <Compile Include="Apps\Accounting\JournalTypes.cs" />
     <Compile Include="Apps\Accounting\Note.cs" />
     <Compile Include="Apps\Accounting\Notes.cs" />
     <Compile Include="Apps\Accounting\Obligation.cs" />
     <Compile Include="Apps\Accounting\Obligations.cs" />
-    <Compile Include="Apps\Accounting\OperatingBudget.v.cs" />
     <Compile Include="Apps\Accounting\OperatingBudget.cs" />
     <Compile Include="Apps\Accounting\OperatingBudgets.cs" />
     <Compile Include="Apps\Accounting\OrganisationGlAccount.cs" />
@@ -542,24 +538,17 @@
     <Compile Include="Apps\Accounting\TaxDue.cs" />
     <Compile Include="Apps\Accounting\TaxDues.cs" />
     <Compile Include="Apps\Accounting\TimeFrequencies.cs" />
-    <Compile Include="Apps\Accounting\TimeFrequency.cs" />
-    <Compile Include="Apps\Accounting\VatCalculationMethod.cs" />
     <Compile Include="Apps\Accounting\VatCalculationMethods.cs" />
     <Compile Include="Apps\Accounting\VatRate.cs" />
-    <Compile Include="Apps\Accounting\VatRatePurchaseKind.cs" />
     <Compile Include="Apps\Accounting\VatRatePurchaseKinds.cs" />
     <Compile Include="Apps\Accounting\VatRates.cs" />
-    <Compile Include="Apps\Accounting\VatRateUsage.cs" />
     <Compile Include="Apps\Accounting\VatRateUsages.cs" />
-    <Compile Include="Apps\Accounting\VatRegime.cs" />
     <Compile Include="Apps\Accounting\VatRegimes.cs" />
-    <Compile Include="Apps\Accounting\VatTariff.cs" />
     <Compile Include="Apps\Accounting\VatTariffs.cs" />
     <Compile Include="Apps\Common\Singleton.cs" />
     <Compile Include="Apps\Common\Singleton.v.cs" />
     <Compile Include="Apps\Constants.cs" />
     <Compile Include="Apps\Content\StringTemplate.cs" />
-    <Compile Include="Apps\Content\TemplatePurpose.cs" />
     <Compile Include="Apps\Content\TemplatePurposes.cs" />
     <Compile Include="Apps\DateTimeExtensions.cs" />
     <Compile Include="Apps\DecimalExtensions.cs" />
@@ -567,17 +556,12 @@
     <Compile Include="Apps\HumanResource\Benefits.cs" />
     <Compile Include="Apps\HumanResource\Deduction.cs" />
     <Compile Include="Apps\HumanResource\Deductions.cs" />
-    <Compile Include="Apps\HumanResource\DeductionType.cs" />
     <Compile Include="Apps\HumanResource\DeductionTypes.cs" />
     <Compile Include="Apps\HumanResource\EmploymentApplication.cs" />
     <Compile Include="Apps\HumanResource\EmploymentApplications.cs" />
-    <Compile Include="Apps\HumanResource\EmploymentApplicationSource.cs" />
     <Compile Include="Apps\HumanResource\EmploymentApplicationSources.cs" />
-    <Compile Include="Apps\HumanResource\EmploymentApplicationStatus.cs" />
     <Compile Include="Apps\HumanResource\EmploymentApplicationStatuses.cs" />
-    <Compile Include="Apps\HumanResource\EmploymentTerminationReason.cs" />
     <Compile Include="Apps\HumanResource\EmploymentTerminationReasons.cs" />
-    <Compile Include="Apps\HumanResource\EmploymentTermination.cs" />
     <Compile Include="Apps\HumanResource\EmploymentTerminations.cs" />
     <Compile Include="Apps\HumanResource\PartyBenefit.cs" />
     <Compile Include="Apps\HumanResource\PartyBenefits.cs" />
@@ -595,7 +579,6 @@
     <Compile Include="Apps\HumanResource\PerformanceNotes.cs" />
     <Compile Include="Apps\HumanResource\PerformanceReview.cs" />
     <Compile Include="Apps\HumanResource\PerformanceReviewItem.cs" />
-    <Compile Include="Apps\HumanResource\PerformanceReviewItemType.cs" />
     <Compile Include="Apps\HumanResource\PerformanceReviewItemTypes.cs" />
     <Compile Include="Apps\HumanResource\PerformanceReviews.cs" />
     <Compile Include="Apps\HumanResource\PersonTraining.cs" />
@@ -608,15 +591,12 @@
     <Compile Include="Apps\HumanResource\PositionResponsibilities.cs" />
     <Compile Include="Apps\HumanResource\PositionResponsibility.cs" />
     <Compile Include="Apps\HumanResource\Positions.cs" />
-    <Compile Include="Apps\HumanResource\PositionStatus.cs" />
     <Compile Include="Apps\HumanResource\PositionStatuses.cs" />
     <Compile Include="Apps\HumanResource\PositionType.cs" />
     <Compile Include="Apps\HumanResource\PositionTypeRate.cs" />
     <Compile Include="Apps\HumanResource\PositionTypeRates.cs" />
     <Compile Include="Apps\HumanResource\PositionTypes.cs" />
-    <Compile Include="Apps\HumanResource\Qualification.cs" />
     <Compile Include="Apps\HumanResource\Qualifications.cs" />
-    <Compile Include="Apps\HumanResource\RateType.cs" />
     <Compile Include="Apps\HumanResource\RateTypes.cs" />
     <Compile Include="Apps\HumanResource\Responsibilities.cs" />
     <Compile Include="Apps\HumanResource\Responsibility.cs" />
@@ -624,11 +604,8 @@
     <Compile Include="Apps\HumanResource\Resumes.cs" />
     <Compile Include="Apps\HumanResource\SalaryStep.cs" />
     <Compile Include="Apps\HumanResource\SalarySteps.cs" />
-    <Compile Include="Apps\HumanResource\SkillLevel.cs" />
     <Compile Include="Apps\HumanResource\SkillLevels.cs" />
-    <Compile Include="Apps\HumanResource\SkillRating.cs" />
     <Compile Include="Apps\HumanResource\SkillRatings.cs" />
-    <Compile Include="Apps\HumanResource\Skill.cs" />
     <Compile Include="Apps\HumanResource\Skills.cs" />
     <Compile Include="Apps\HumanResource\Training.cs" />
     <Compile Include="Apps\HumanResource\Trainings.cs" />
@@ -649,7 +626,6 @@
     <Compile Include="Apps\Invoice\InvestmentAccounts.cs" />
     <Compile Include="Apps\Invoice\Invoice.cs" />
     <Compile Include="Apps\Invoice\Invoice.v.cs" />
-    <Compile Include="Apps\Invoice\InvoiceSequence.cs" />
     <Compile Include="Apps\Invoice\InvoiceSequences.cs" />
     <Compile Include="Apps\Invoice\InvoiceTerm.cs" />
     <Compile Include="Apps\Invoice\InvoiceTerms.cs" />
@@ -665,7 +641,6 @@
     <Compile Include="Apps\Invoice\PurchaseInvoiceItems.cs" />
     <Compile Include="Apps\Invoice\PurchaseInvoiceItemStatus.cs" />
     <Compile Include="Apps\Invoice\PurchaseInvoiceItemStatuses.cs" />
-    <Compile Include="Apps\Invoice\PurchaseInvoiceItemType.cs" />
     <Compile Include="Apps\Invoice\PurchaseInvoiceItemTypes.cs" />
     <Compile Include="Apps\Invoice\PurchaseInvoiceObjectStates.cs" />
     <Compile Include="Apps\Invoice\PurchaseInvoices.cs" />
@@ -683,14 +658,12 @@
     <Compile Include="Apps\Invoice\SalesInvoiceItems.cs" />
     <Compile Include="Apps\Invoice\SalesInvoiceItemStatus.cs" />
     <Compile Include="Apps\Invoice\SalesInvoiceItemStatuses.cs" />
-    <Compile Include="Apps\Invoice\SalesInvoiceItemType.cs" />
     <Compile Include="Apps\Invoice\SalesInvoiceItemTypes.cs" />
     <Compile Include="Apps\Invoice\SalesInvoiceObjectStates.cs" />
     <Compile Include="Apps\Invoice\SalesInvoices.cs" />
     <Compile Include="Apps\Invoice\SalesInvoices.v.cs" />
     <Compile Include="Apps\Invoice\SalesInvoiceStatus.cs" />
     <Compile Include="Apps\Invoice\SalesInvoiceStatuses.cs" />
-    <Compile Include="Apps\Invoice\SalesInvoiceType.cs" />
     <Compile Include="Apps\Invoice\SalesInvoiceTypes.cs" />
     <Compile Include="Apps\Invoice\ServiceEntryBilling.cs" />
     <Compile Include="Apps\Invoice\ServiceEntryBillings.cs" />
@@ -923,7 +896,6 @@
     <Compile Include="Apps\Product\Good.v.cs" />
     <Compile Include="Apps\Product\Goods.cs" />
     <Compile Include="Apps\Product\InventoryItem.v.cs" />
-    <Compile Include="Apps\Product\InventoryItemKind.cs" />
     <Compile Include="Apps\Product\InventoryItemKinds.cs" />
     <Compile Include="Apps\Product\InventoryItemVariance.cs" />
     <Compile Include="Apps\Product\InventoryItemVariances.cs" />
@@ -959,7 +931,6 @@
     <Compile Include="Apps\Product\OrderQuantityBreaks.cs" />
     <Compile Include="Apps\Product\OrderValue.cs" />
     <Compile Include="Apps\Product\OrderValues.cs" />
-    <Compile Include="Apps\Product\Ordinal.cs" />
     <Compile Include="Apps\Product\Ordinals.cs" />
     <Compile Include="Apps\Product\Package.cs" />
     <Compile Include="Apps\Product\Packages.cs" />
@@ -1002,14 +973,12 @@
     <Compile Include="Apps\Product\ProductQuality.v.cs" />
     <Compile Include="Apps\Product\Products.cs" />
     <Compile Include="Apps\Product\Products.v.cs" />
-    <Compile Include="Apps\Product\RatingType.cs" />
     <Compile Include="Apps\Product\RatingTypes.cs" />
     <Compile Include="Apps\Product\RawMaterial.cs" />
     <Compile Include="Apps\Product\RawMaterial.v.cs" />
     <Compile Include="Apps\Product\RawMaterials.cs" />
     <Compile Include="Apps\Product\RecurringCharge.cs" />
     <Compile Include="Apps\Product\RecurringCharges.cs" />
-    <Compile Include="Apps\Product\SalesChannel.cs" />
     <Compile Include="Apps\Product\SalesChannels.cs" />
     <Compile Include="Apps\Product\SerializedInventoryItem.cs" />
     <Compile Include="Apps\Product\SerializedInventoryItem.v.cs" />
@@ -1055,7 +1024,6 @@
     <Compile Include="Apps\Product\UnitsOfMeasure.cs" />
     <Compile Include="Apps\Product\UtilizationCharge.cs" />
     <Compile Include="Apps\Product\UtilizationCharges.cs" />
-    <Compile Include="Apps\Product\VarianceReason.cs" />
     <Compile Include="Apps\Product\VarianceReasons.cs" />
     <Compile Include="Apps\Product\VolumeUsage.cs" />
     <Compile Include="Apps\Product\VolumeUsages.cs" />
@@ -1087,7 +1055,6 @@
     <Compile Include="Apps\Relation\CommunicationEvent.cs" />
     <Compile Include="Apps\Relation\CommunicationEvent.v.cs" />
     <Compile Include="Apps\Relation\CommunicationEventObjectStates.cs" />
-    <Compile Include="Apps\Relation\CommunicationEventPurpose.cs" />
     <Compile Include="Apps\Relation\CommunicationEventPurposes.cs" />
     <Compile Include="Apps\Relation\CommunicationEvents.cs" />
     <Compile Include="Apps\Relation\CommunicationEventStatus.cs" />
@@ -1121,9 +1088,7 @@
     <Compile Include="Apps\Relation\FaxCommunications.cs" />
     <Compile Include="Apps\Relation\FinancialTerm.cs" />
     <Compile Include="Apps\Relation\FinancialTerms.cs" />
-    <Compile Include="Apps\Relation\GenderType.cs" />
     <Compile Include="Apps\Relation\GenderTypes.cs" />
-    <Compile Include="Apps\Relation\Hobby.cs" />
     <Compile Include="Apps\Relation\Hobbies.cs" />
     <Compile Include="Apps\Relation\Incentive.cs" />
     <Compile Include="Apps\Relation\Incentives.cs" />
@@ -1137,7 +1102,6 @@
     <Compile Include="Apps\Relation\LetterCorrespondence.v.cs" />
     <Compile Include="Apps\Relation\LetterCorrespondence.cs" />
     <Compile Include="Apps\Relation\LetterCorrespondences.cs" />
-    <Compile Include="Apps\Relation\MaritalStatus.cs" />
     <Compile Include="Apps\Relation\MaritalStatuses.cs" />
     <Compile Include="Apps\Relation\Organisation.cs" />
     <Compile Include="Apps\Relation\Organisation.v.cs" />
@@ -1149,7 +1113,6 @@
     <Compile Include="Apps\Relation\OrganisationRollUp.cs" />
     <Compile Include="Apps\Relation\OrganisationRollUps.cs" />
     <Compile Include="Apps\Relation\Organisations.cs" />
-    <Compile Include="Apps\Relation\OrganisationUnit.cs" />
     <Compile Include="Apps\Relation\OrganisationUnits.cs" />
     <Compile Include="Apps\Relation\Parties.cs" />
     <Compile Include="Apps\Relation\Parties.v.cs" />
@@ -1161,15 +1124,12 @@
     <Compile Include="Apps\Relation\PartyClassifications.cs" />
     <Compile Include="Apps\Relation\PartyContactMechanism.cs" />
     <Compile Include="Apps\Relation\PartyContactMechanisms.cs" />
-    <Compile Include="Apps\Relation\PartyRelationshipPriority.cs" />
     <Compile Include="Apps\Relation\PartyRelationshipPriorities.cs" />
-    <Compile Include="Apps\Relation\PartyRelationshipStatus.cs" />
     <Compile Include="Apps\Relation\PartyRelationshipStatuses.cs" />
     <Compile Include="Apps\Relation\Passport.cs" />
     <Compile Include="Apps\Relation\Passports.cs" />
     <Compile Include="Apps\Relation\Person.cs" />
     <Compile Include="Apps\Relation\Person.v.cs" />
-    <Compile Include="Apps\Relation\PersonalTitle.cs" />
     <Compile Include="Apps\Relation\PersonalTitles.cs" />
     <Compile Include="Apps\Relation\Persons.cs" />
     <Compile Include="Apps\Relation\PhoneCommunication.v.cs" />
@@ -1186,7 +1146,6 @@
     <Compile Include="Apps\Relation\SalesRepRelationship.cs" />
     <Compile Include="Apps\Relation\SalesRepRelationship.v.cs" />
     <Compile Include="Apps\Relation\SalesRepRelationships.cs" />
-    <Compile Include="Apps\Relation\Salutation.cs" />
     <Compile Include="Apps\Relation\Salutations.cs" />
     <Compile Include="Apps\Relation\SubAgreement.cs" />
     <Compile Include="Apps\Relation\SubAgreements.cs" />
@@ -1200,7 +1159,6 @@
     <Compile Include="Apps\Relation\TelecommunicationsNumber.cs" />
     <Compile Include="Apps\Relation\TelecommunicationsNumber.v.cs" />
     <Compile Include="Apps\Relation\TelecommunicationsNumbers.cs" />
-    <Compile Include="Apps\Relation\TermType.cs" />
     <Compile Include="Apps\Relation\TermTypes.cs" />
     <Compile Include="Apps\Relation\Threshold.cs" />
     <Compile Include="Apps\Relation\Thresholds.cs" />
@@ -1251,7 +1209,6 @@
     <Compile Include="Apps\Shipment\PackagingSlip.cs" />
     <Compile Include="Apps\Shipment\PackagingSlips.cs" />
     <Compile Include="Apps\Shipment\PickList.cs" />
-    <Compile Include="Apps\Shipment\PickList.v.cs" />
     <Compile Include="Apps\Shipment\PickListItem.cs" />
     <Compile Include="Apps\Shipment\PickListObjectStates.cs" />
     <Compile Include="Apps\Shipment\PickLists.cs" />
@@ -1274,7 +1231,6 @@
     <Compile Include="Apps\Shipment\Shipment.cs" />
     <Compile Include="Apps\Shipment\ShipmentItem.cs" />
     <Compile Include="Apps\Shipment\ShipmentItem.v.cs" />
-    <Compile Include="Apps\Shipment\ShipmentMethod.cs" />
     <Compile Include="Apps\Shipment\ShipmentMethods.cs" />
     <Compile Include="Apps\Shipment\ShipmentPackage.cs" />
     <Compile Include="Apps\Shipment\ShipmentPackages.cs" />
@@ -1301,13 +1257,11 @@
     <Compile Include="Apps\WorkEffort\Activities.cs" />
     <Compile Include="Apps\WorkEffort\Activity.v.cs" />
     <Compile Include="Apps\WorkEffort\Activity.cs" />
-    <Compile Include="Apps\WorkEffort\AssetAssignmentStatus.cs" />
     <Compile Include="Apps\WorkEffort\AssetAssignmentStatuses.cs" />
     <Compile Include="Apps\WorkEffort\Deliverable.cs" />
     <Compile Include="Apps\WorkEffort\Deliverables.cs" />
     <Compile Include="Apps\WorkEffort\DeliverableTurnover.cs" />
     <Compile Include="Apps\WorkEffort\DeliverableTurnovers.cs" />
-    <Compile Include="Apps\WorkEffort\DeliverableType.cs" />
     <Compile Include="Apps\WorkEffort\DeliverableTypes.cs" />
     <Compile Include="Apps\WorkEffort\ExpenseEntries.cs" />
     <Compile Include="Apps\WorkEffort\ExpenseEntry.cs" />
@@ -1363,7 +1317,6 @@
     <Compile Include="Apps\WorkEffort\WorkEffortStatus.cs" />
     <Compile Include="Apps\WorkEffort\WorkEffortStatuses.cs" />
     <Compile Include="Apps\WorkEffort\WorkEffortType.cs" />
-    <Compile Include="Apps\WorkEffort\WorkEffortTypeKind.cs" />
     <Compile Include="Apps\WorkEffort\WorkEffortTypeKinds.cs" />
     <Compile Include="Apps\WorkEffort\WorkEffortTypes.cs" />
     <Compile Include="Apps\WorkEffort\WorkFlow.v.cs" />
@@ -1403,8 +1356,10 @@
     <Compile Include="Generated\Base\Bin.g.cs" />
     <Compile Include="Generated\Base\Brand.g.cs" />
     <Compile Include="Generated\Base\Budget.g.cs" />
+    <Compile Include="Generated\Base\BudgetClose.g.cs" />
     <Compile Include="Generated\Base\BudgetItem.g.cs" />
     <Compile Include="Generated\Base\BudgetObjectState.g.cs" />
+    <Compile Include="Generated\Base\BudgetReopen.g.cs" />
     <Compile Include="Generated\Base\BudgetReview.g.cs" />
     <Compile Include="Generated\Base\BudgetRevision.g.cs" />
     <Compile Include="Generated\Base\BudgetRevisionImpact.g.cs" />
@@ -1427,8 +1382,11 @@
     <Compile Include="Generated\Base\Commentable.g.cs" />
     <Compile Include="Generated\Base\CommunicationAttachment.g.cs" />
     <Compile Include="Generated\Base\CommunicationEvent.g.cs" />
+    <Compile Include="Generated\Base\CommunicationEventCancel.g.cs" />
+    <Compile Include="Generated\Base\CommunicationEventClose.g.cs" />
     <Compile Include="Generated\Base\CommunicationEventObjectState.g.cs" />
     <Compile Include="Generated\Base\CommunicationEventPurpose.g.cs" />
+    <Compile Include="Generated\Base\CommunicationEventReopen.g.cs" />
     <Compile Include="Generated\Base\CommunicationEventStatus.g.cs" />
     <Compile Include="Generated\Base\ConstraintSpecification.g.cs" />
     <Compile Include="Generated\Base\ContactMechanism.g.cs" />
@@ -1453,7 +1411,15 @@
     <Compile Include="Generated\Base\CustomerReturnObjectState.g.cs" />
     <Compile Include="Generated\Base\CustomerReturnStatus.g.cs" />
     <Compile Include="Generated\Base\CustomerShipment.g.cs" />
+    <Compile Include="Generated\Base\CustomerShipmentCancel.g.cs" />
+    <Compile Include="Generated\Base\CustomerShipmentContinue.g.cs" />
+    <Compile Include="Generated\Base\CustomerShipmentHold.g.cs" />
     <Compile Include="Generated\Base\CustomerShipmentObjectState.g.cs" />
+    <Compile Include="Generated\Base\CustomerShipmentProcessOnContinue.g.cs" />
+    <Compile Include="Generated\Base\CustomerShipmentPutOnHold.g.cs" />
+    <Compile Include="Generated\Base\CustomerShipmentSetPacked.g.cs" />
+    <Compile Include="Generated\Base\CustomerShipmentSetPicked.g.cs" />
+    <Compile Include="Generated\Base\CustomerShipmentShip.g.cs" />
     <Compile Include="Generated\Base\CustomerShipmentStatus.g.cs" />
     <Compile Include="Generated\Base\DebitCreditConstant.g.cs" />
     <Compile Include="Generated\Base\Deduction.g.cs" />
@@ -1468,6 +1434,10 @@
     <Compile Include="Generated\Base\Deposit.g.cs" />
     <Compile Include="Generated\Base\Depreciation.g.cs" />
     <Compile Include="Generated\Base\DepreciationMethod.g.cs" />
+    <Compile Include="Generated\Base\Derivable.g.cs" />
+    <Compile Include="Generated\Base\DerivableApplySecurityOnDerive.g.cs" />
+    <Compile Include="Generated\Base\DerivableDerive.g.cs" />
+    <Compile Include="Generated\Base\DerivablePrepareDerivation.g.cs" />
     <Compile Include="Generated\Base\DesiredProductFeature.g.cs" />
     <Compile Include="Generated\Base\Dimension.g.cs" />
     <Compile Include="Generated\Base\Disbursement.g.cs" />
@@ -1598,10 +1568,24 @@
     <Compile Include="Generated\Base\OperatingCondition.g.cs" />
     <Compile Include="Generated\Base\Order.g.cs" />
     <Compile Include="Generated\Base\OrderAdjustment.g.cs" />
+    <Compile Include="Generated\Base\OrderApprove.g.cs" />
+    <Compile Include="Generated\Base\OrderCancelOrder.g.cs" />
+    <Compile Include="Generated\Base\OrderComplete.g.cs" />
+    <Compile Include="Generated\Base\OrderConfirm.g.cs" />
+    <Compile Include="Generated\Base\OrderContinue.g.cs" />
+    <Compile Include="Generated\Base\OrderFinish.g.cs" />
+    <Compile Include="Generated\Base\OrderHold.g.cs" />
     <Compile Include="Generated\Base\OrderItem.g.cs" />
+    <Compile Include="Generated\Base\OrderItemApprove.g.cs" />
     <Compile Include="Generated\Base\OrderItemBilling.g.cs" />
+    <Compile Include="Generated\Base\OrderItemCancel.g.cs" />
+    <Compile Include="Generated\Base\OrderItemConfirm.g.cs" />
+    <Compile Include="Generated\Base\OrderItemDelete.g.cs" />
+    <Compile Include="Generated\Base\OrderItemFinish.g.cs" />
+    <Compile Include="Generated\Base\OrderItemReject.g.cs" />
     <Compile Include="Generated\Base\OrderKind.g.cs" />
     <Compile Include="Generated\Base\OrderQuantityBreak.g.cs" />
+    <Compile Include="Generated\Base\OrderReject.g.cs" />
     <Compile Include="Generated\Base\OrderRequirementCommitment.g.cs" />
     <Compile Include="Generated\Base\OrderShipment.g.cs" />
     <Compile Include="Generated\Base\OrderTerm.g.cs" />
@@ -1670,8 +1654,12 @@
     <Compile Include="Generated\Base\Phase.g.cs" />
     <Compile Include="Generated\Base\PhoneCommunication.g.cs" />
     <Compile Include="Generated\Base\PickList.g.cs" />
+    <Compile Include="Generated\Base\PickListCancel.g.cs" />
+    <Compile Include="Generated\Base\PickListContinue.g.cs" />
+    <Compile Include="Generated\Base\PickListHold.g.cs" />
     <Compile Include="Generated\Base\PickListItem.g.cs" />
     <Compile Include="Generated\Base\PickListObjectState.g.cs" />
+    <Compile Include="Generated\Base\PickListSetPicked.g.cs" />
     <Compile Include="Generated\Base\PickListStatus.g.cs" />
     <Compile Include="Generated\Base\Plant.g.cs" />
     <Compile Include="Generated\Base\Position.g.cs" />
@@ -1716,15 +1704,19 @@
     <Compile Include="Generated\Base\Province.g.cs" />
     <Compile Include="Generated\Base\PurchaseAgreement.g.cs" />
     <Compile Include="Generated\Base\PurchaseInvoice.g.cs" />
+    <Compile Include="Generated\Base\PurchaseInvoiceApprove.g.cs" />
+    <Compile Include="Generated\Base\PurchaseInvoiceCancel.g.cs" />
     <Compile Include="Generated\Base\PurchaseInvoiceItem.g.cs" />
     <Compile Include="Generated\Base\PurchaseInvoiceItemObjectState.g.cs" />
     <Compile Include="Generated\Base\PurchaseInvoiceItemStatus.g.cs" />
     <Compile Include="Generated\Base\PurchaseInvoiceItemType.g.cs" />
     <Compile Include="Generated\Base\PurchaseInvoiceObjectState.g.cs" />
+    <Compile Include="Generated\Base\PurchaseInvoiceReady.g.cs" />
     <Compile Include="Generated\Base\PurchaseInvoiceStatus.g.cs" />
     <Compile Include="Generated\Base\PurchaseInvoiceType.g.cs" />
     <Compile Include="Generated\Base\PurchaseOrder.g.cs" />
     <Compile Include="Generated\Base\PurchaseOrderItem.g.cs" />
+    <Compile Include="Generated\Base\PurchaseOrderItemComplete.g.cs" />
     <Compile Include="Generated\Base\PurchaseOrderItemObjectState.g.cs" />
     <Compile Include="Generated\Base\PurchaseOrderItemStatus.g.cs" />
     <Compile Include="Generated\Base\PurchaseOrderObjectState.g.cs" />
@@ -1755,6 +1747,7 @@
     <Compile Include="Generated\Base\RequirementBudgetAllocation.g.cs" />
     <Compile Include="Generated\Base\RequirementCommunication.g.cs" />
     <Compile Include="Generated\Base\RequirementObjectState.g.cs" />
+    <Compile Include="Generated\Base\RequirementReopen.g.cs" />
     <Compile Include="Generated\Base\RequirementStatus.g.cs" />
     <Compile Include="Generated\Base\Research.g.cs" />
     <Compile Include="Generated\Base\ResourceRequirement.g.cs" />
@@ -1772,15 +1765,19 @@
     <Compile Include="Generated\Base\SalesChannelRevenue.g.cs" />
     <Compile Include="Generated\Base\SalesChannelRevenueHistory.g.cs" />
     <Compile Include="Generated\Base\SalesInvoice.g.cs" />
+    <Compile Include="Generated\Base\SalesInvoiceCancelInvoice.g.cs" />
     <Compile Include="Generated\Base\SalesInvoiceItem.g.cs" />
     <Compile Include="Generated\Base\SalesInvoiceItemObjectState.g.cs" />
     <Compile Include="Generated\Base\SalesInvoiceItemStatus.g.cs" />
     <Compile Include="Generated\Base\SalesInvoiceItemType.g.cs" />
     <Compile Include="Generated\Base\SalesInvoiceObjectState.g.cs" />
+    <Compile Include="Generated\Base\SalesInvoiceSend.g.cs" />
     <Compile Include="Generated\Base\SalesInvoiceStatus.g.cs" />
     <Compile Include="Generated\Base\SalesInvoiceType.g.cs" />
+    <Compile Include="Generated\Base\SalesInvoiceWriteOff.g.cs" />
     <Compile Include="Generated\Base\SalesOrder.g.cs" />
     <Compile Include="Generated\Base\SalesOrderItem.g.cs" />
+    <Compile Include="Generated\Base\SalesOrderItemContinue.g.cs" />
     <Compile Include="Generated\Base\SalesOrderItemObjectState.g.cs" />
     <Compile Include="Generated\Base\SalesOrderItemStatus.g.cs" />
     <Compile Include="Generated\Base\SalesOrderObjectState.g.cs" />
@@ -1888,6 +1885,9 @@
     <Compile Include="Generated\Base\WorkEffortAssignment.g.cs" />
     <Compile Include="Generated\Base\WorkEffortAssignmentRate.g.cs" />
     <Compile Include="Generated\Base\WorkEffortBilling.g.cs" />
+    <Compile Include="Generated\Base\WorkEffortCancel.g.cs" />
+    <Compile Include="Generated\Base\WorkEffortConfirm.g.cs" />
+    <Compile Include="Generated\Base\WorkEffortFinish.g.cs" />
     <Compile Include="Generated\Base\WorkEffortFixedAssetAssignment.g.cs" />
     <Compile Include="Generated\Base\WorkEffortFixedAssetStandard.g.cs" />
     <Compile Include="Generated\Base\WorkEffortGoodStandard.g.cs" />
@@ -1895,13 +1895,14 @@
     <Compile Include="Generated\Base\WorkEffortObjectState.g.cs" />
     <Compile Include="Generated\Base\WorkEffortPartStandard.g.cs" />
     <Compile Include="Generated\Base\WorkEffortPartyAssignment.g.cs" />
+    <Compile Include="Generated\Base\WorkEffortReopen.g.cs" />
     <Compile Include="Generated\Base\WorkEffortSkillStandard.g.cs" />
     <Compile Include="Generated\Base\WorkEffortStatus.g.cs" />
     <Compile Include="Generated\Base\WorkEffortType.g.cs" />
     <Compile Include="Generated\Base\WorkEffortTypeKind.g.cs" />
+    <Compile Include="Generated\Base\WorkEffortWorkDone.g.cs" />
     <Compile Include="Generated\Base\WorkFlow.g.cs" />
     <Compile Include="Generated\Base\WorkRequirement.g.cs" />
-    <Compile Include="Test\Databases.v.cs" />
     <Compile Include="Test\ObjectBase.cs" />
     <Compile Include="Test\ObjectBase.v.cs" />
     <Compile Include="Test\ObjectsBase.cs" />

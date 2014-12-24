@@ -87,7 +87,7 @@ namespace Allors.Domain
 	{
 $interface.exclusiveRoleTypes:{roleType|$interfaceExclusiveRoleType_Interface()$}$
 $interface.exclusiveAssociationTypes:{associationType|$interfaceExclusiveAssociationType_Interface()$}$
-$interface.MethodTypes:{methodType|$interfaceMethodType_Interface()$}$
+$interface.exclusiveMethodTypes:{methodType|$interfaceExclusiveMethodType_Interface()$}$
 	}
 	
 	public class $interface.name$Meta
@@ -186,7 +186,7 @@ $endif$
 $endif$
 >>
 
-interfaceMethodType_Interface() ::= <<
+interfaceExclusiveMethodType_Interface() ::= <<
 $\n$
 		$methodType.FullName$ $methodType.Name$();
 >>

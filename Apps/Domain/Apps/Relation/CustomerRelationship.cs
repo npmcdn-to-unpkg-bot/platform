@@ -108,9 +108,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsPrepareDerivation(IDerivation derivation)
+        public void AppsPrepareDerivation(DerivablePrepareDerivation method)
         {
-            base.AppsPrepareDerivation(derivation);
+            var derivation = method.Derivation;
 
             if (this.ExistCustomer)
             {
@@ -127,9 +127,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            
+            var derivation = method.Derivation;
 
             derivation.Log.AssertExists(this, CustomerRelationships.Meta.Customer);
             derivation.Log.AssertExists(this, CustomerRelationships.Meta.InternalOrganisation);

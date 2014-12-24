@@ -22,16 +22,6 @@ namespace Allors.Domain
 {
     public partial interface WorkEffort
     {
-        void Confirm();
-
-        void WorkDone();
-
-        void Finish();
-
-        void Cancel();
-
-        void Reopen();
-
         void DeriveDisplayName();
 
         void DeriveSearchDataCharacterBoundaryText();

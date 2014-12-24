@@ -21,26 +21,9 @@
 namespace Allors.Domain
 {
     using System;
-    using System.Text;
 
     public partial class FaxCommunication
     {
-
-        public void Close()
-        {
-            this.AppsCommunicationEventClose();
-        }
-
-        public void Reopen()
-        {
-            this.AppsCommunicationEventReopen();
-        }
-
-        public void Cancel()
-        {
-            this.AppsCommunicationEventCancel();
-        }
-
         public void DeriveDisplayName()
         {
             this.AppsDeriveDisplayName();

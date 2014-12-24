@@ -22,31 +22,6 @@ namespace Allors.Domain
 {
     public partial class Activity
     {
-        public void Confirm()
-        {
-            this.AppsWorkEffortConfirm();
-        }
-
-        public void WorkDone()
-        {
-            this.AppsWorkEffortWorkDone();
-        }
-
-        public void Finish()
-        {
-            this.AppsWorkEffortFinish();
-        }
-
-        public void Cancel()
-        {
-            this.AppsWorkEffortCancel();
-        }
-
-        public void Reopen()
-        {
-            this.AppsWorkEffortReopen();
-        }
-
         public void DeriveDisplayName()
         {
             this.AppsDeriveDisplayName();

@@ -20,13 +20,11 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class BudgetRevisionImpact
     {
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            
+            var derivation = method.Derivation;
 
             derivation.Log.AssertExists(this, BudgetRevisionImpacts.Meta.Reason);
 

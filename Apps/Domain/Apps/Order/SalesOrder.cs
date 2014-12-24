@@ -270,7 +270,7 @@ namespace Allors.Domain
         {
             get
             {
-                if (this.ExistOrderKind && this.OrderKind.ScheduleManually)
+                if (this.ExistOrderKind && this.OrderKind.ScheduleManually.HasValue && this.OrderKind.ScheduleManually.Value)
                 {
                     return true;
                 }
@@ -499,9 +499,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsPrepareDerivation(IDerivation derivation)
+        public void AppsPrepareDerivation(DerivablePrepareDerivation method)
         {
-            base.AppsPrepareDerivation(derivation);
+            var derivation = method.Derivation;
 
             if (this.ExistBillToCustomer)
             {
@@ -537,9 +537,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            
+            var derivation = method.Derivation;
 
             if (!this.ExistOrderNumber && this.ExistStore)
             {
@@ -669,7 +669,7 @@ namespace Allors.Domain
             this.DeriveTemplate(derivation);
         }
 
-        protected override void AppsApplySecurityOnDerive()
+        public void AppsApplySecurityOnDerive(DerivableApplySecurityOnDerive method)
         {
             this.RemoveSecurityTokens();
             this.AddSecurityToken(Singleton.Instance(this.Session).AdministratorSecurityToken);
@@ -718,12 +718,12 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsCancelOrder()
+        private void AppsCancelOrder(OrderCancelOrder method)
         {
             this.CurrentObjectState = new SalesOrderObjectStates(Session).Cancelled;
         }
 
-        private void AppsConfirm()
+        private void AppsConfirm(OrderConfirm method)
         {
             var orderThreshold = this.Store.OrderThreshold;
 
@@ -736,8 +736,8 @@ namespace Allors.Domain
             {
                 if (customerRelationship.FromDate <= DateTime.Now && (!customerRelationship.ExistThroughDate || customerRelationship.ThroughDate >= DateTime.Now))
                 {
-                    creditLimit = customerRelationship.ExistCreditLimit ? customerRelationship.CreditLimit : this.Store.ExistCreditLimit ? this.Store.CreditLimit : 0;
-                    amountOverDue = customerRelationship.AmountOverDue;
+                    creditLimit = customerRelationship.CreditLimit.HasValue ? customerRelationship.CreditLimit.Value : this.Store.CreditLimit.HasValue ? this.Store.CreditLimit.Value : 0;
+                    amountOverDue = customerRelationship.AmountOverDue.Value;
                 }
             }
             
@@ -751,32 +751,32 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsReject()
+        private void AppsReject(OrderReject method)
         {
             this.CurrentObjectState = new SalesOrderObjectStates(Session).Rejected;
         }
 
-        private void AppsHold()
+        private void AppsHold(OrderHold method)
         {
             this.CurrentObjectState = new SalesOrderObjectStates(Session).OnHold;
         }
 
-        private void AppsApprove()
+        private void AppsApprove(OrderApprove method)
         {
             this.CurrentObjectState = new SalesOrderObjectStates(Session).InProcess;
         }
 
-        private void AppsContinue()
+        private void AppsContinue(OrderContinue method)
         {
             this.CurrentObjectState = new SalesOrderObjectStates(Session).InProcess;
         }
 
-        private void AppsComplete()
+        private void AppsComplete(OrderComplete method)
         {
             this.CurrentObjectState = new SalesOrderObjectStates(Session).Completed;
         }
 
-        private void AppsFinish()
+        private void AppsFinish(OrderFinish method)
         {
             this.CurrentObjectState = new SalesOrderObjectStates(Session).Finished;
         }
@@ -1200,7 +1200,8 @@ namespace Allors.Domain
                 }
             }
 
-            pendingShipment.Derive(derivation);
+            // TODO: Check
+            pendingShipment.Derive().Execute();
             return pendingShipment;
         }
 

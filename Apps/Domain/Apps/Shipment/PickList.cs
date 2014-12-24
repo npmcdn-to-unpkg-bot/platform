@@ -24,6 +24,8 @@ namespace Allors.Domain
     using System.Collections.Generic;
     using System.Text;
 
+    using Allors.Meta;
+
     public partial class PickList
     {
         ObjectState Transitional.PreviousObjectState
@@ -83,7 +85,7 @@ namespace Allors.Domain
 
             if (!this.ExistStore)
             {
-                var internalOrganisation = Domain.Singleton.Instance(this.Session).DefaultInternalOrganisation;
+                var internalOrganisation = Allors.Domain.Singleton.Instance(this.Session).DefaultInternalOrganisation;
                 if (internalOrganisation.StoresWhereOwner.Count == 1)
                 {
                     this.Store = internalOrganisation.StoresWhereOwner.First;
@@ -96,9 +98,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsPrepareDerivation(IDerivation derivation)
+        public void AppsPrepareDerivation(DerivablePrepareDerivation method)
         {
-            base.AppsPrepareDerivation(derivation);
+            var derivation = method.Derivation;
 
             // TODO:
             if (derivation.ChangeSet.Associations.Contains(this.Id))
@@ -121,9 +123,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            
+            var derivation = method.Derivation;
 
             this.DeriveCurrentObjectState();
 
@@ -153,10 +155,10 @@ namespace Allors.Domain
             //this.AppsDeriveTemplate(derivation);
         }
 
-        protected override void AppsApplySecurityOnDerive()
+        public void AppsApplySecurityOnDerive(DerivableApplySecurityOnDerive method)
         {
             this.RemoveSecurityTokens();
-            this.AddSecurityToken(Domain.Singleton.Instance(this.Session).AdministratorSecurityToken);
+            this.AddSecurityToken(Allors.Domain.Singleton.Instance(this.Session).AdministratorSecurityToken);
 
             if (this.ExistShipToParty)
             {
@@ -204,22 +206,22 @@ namespace Allors.Domain
             this.DisplayName = uiText.ToString();
         }
 
-        private void AppsCancel()
+        public void AppsCancel(PickListCancel method)
         {
             this.CurrentObjectState = new PickListObjectStates(Session).Cancelled;
         }
 
-        private void AppsHold()
+        public void AppsHold(PickListHold method)
         {
             this.CurrentObjectState = new PickListObjectStates(Session).OnHold;
         }
 
-        private void AppsContinue()
+        public void AppsContinue(PickListContinue method)
         {
             this.CurrentObjectState = new PickListObjectStates(Session).Created;
         }
 
-        private void AppsSetPicked()
+        public void AppsSetPicked(PickListContinue method)
         {
             this.CurrentObjectState = new PickListObjectStates(Session).Picked;
 
@@ -235,7 +237,7 @@ namespace Allors.Domain
         private void AppsDeriveTemplate(IDerivation derivation)
         {
             var internalOrganisation = this.PickListItems[0].InventoryItem.Facility.Owner;
-            Domain.StringTemplate template = null;
+            Allors.Domain.StringTemplate template = null;
 
             if (internalOrganisation.ExistLocale)
             {

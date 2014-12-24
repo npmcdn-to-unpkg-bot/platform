@@ -16,13 +16,6 @@ namespace Allors.Domain
 
 		void RemoveDisplayName();
 
-
-
-		DerivablePrepareDerivation PrepareDerivation();
-
-		DerivableDerive Derive();
-
-		DerivableApplySecurityOnDerive ApplySecurityOnDerive();
 	}
 
 	public class UserInterfaceableMeta

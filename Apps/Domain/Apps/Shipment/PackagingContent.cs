@@ -44,9 +44,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsPrepareDerivation(IDerivation derivation)
+        public void AppsPrepareDerivation(DerivablePrepareDerivation method)
         {
-            base.AppsPrepareDerivation(derivation);
+            var derivation = method.Derivation;
 
             // TODO:
             if (derivation.ChangeSet.Associations.Contains(this.Id))
@@ -55,11 +55,11 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            this.AppsValidate(derivation);
+            var derivation = method.Derivation;
 
-            
+            this.AppsValidate(derivation);
 
             derivation.Log.AssertExists(this, PackagingContents.Meta.Quantity);
             derivation.Log.AssertExists(this, PackagingContents.Meta.ShipmentItem);

@@ -41,13 +41,6 @@ namespace Allors.Domain
 
 		void RemoveSecurityTokens();
 
-
-
-		DerivablePrepareDerivation PrepareDerivation();
-
-		DerivableDerive Derive();
-
-		DerivableApplySecurityOnDerive ApplySecurityOnDerive();
 	}
 
 	public class AccessControlledObjectMeta

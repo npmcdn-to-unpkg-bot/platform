@@ -20,13 +20,11 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class OrderQuantityBreak
     {
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            
+            var derivation = method.Derivation;
 
             derivation.Log.AssertAtLeastOne(this, OrderQuantityBreaks.Meta.FromAmount, OrderQuantityBreaks.Meta.ThroughAmount);
 

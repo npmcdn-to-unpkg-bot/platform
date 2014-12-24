@@ -39,9 +39,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            this.AppsCommunicationEventDerive(derivation);
+            var derivation = method.Derivation;
 
             derivation.Log.AssertExists(this, PhoneCommunications.Meta.Description);
 

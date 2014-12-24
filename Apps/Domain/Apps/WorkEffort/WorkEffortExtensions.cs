@@ -22,44 +22,44 @@ namespace Allors.Domain
 {
     public static partial class WorkEffortExtensions
     {
-        public static void AppsWorkEffortDerive(this WorkEffort workEffort, IDerivation derivation)
+        public static void AppsDerive(this WorkEffort @this, DerivableDerive method)
         {
-            if (workEffort.ExistCurrentObjectState && !workEffort.CurrentObjectState.Equals(workEffort.PreviousObjectState))
+            if (@this.ExistCurrentObjectState && !@this.CurrentObjectState.Equals(@this.PreviousObjectState))
             {
-                var currentStatus = new WorkEffortStatusBuilder(workEffort.Strategy.Session).WithWorkEffortObjectState(workEffort.CurrentObjectState).Build();
-                workEffort.AddWorkEffortStatus(currentStatus);
-                workEffort.CurrentWorkEffortStatus = currentStatus;
+                var currentStatus = new WorkEffortStatusBuilder(@this.Strategy.Session).WithWorkEffortObjectState(@this.CurrentObjectState).Build();
+                @this.AddWorkEffortStatus(currentStatus);
+                @this.CurrentWorkEffortStatus = currentStatus;
             }
 
-            if (workEffort.ExistCurrentObjectState)
+            if (@this.ExistCurrentObjectState)
             {
-                workEffort.CurrentObjectState.Process(workEffort);
+                @this.CurrentObjectState.Process(@this);
             }
         }
 
-        public static void AppsWorkEffortConfirm(this WorkEffort workEffort)
+        public static void AppsConfirm(this WorkEffort @this, WorkEffortConfirm method)
         {
-            workEffort.CurrentObjectState = new WorkEffortObjectStates(workEffort.Strategy.Session).Confirmed;
+            @this.CurrentObjectState = new WorkEffortObjectStates(@this.Strategy.Session).Confirmed;
         }
 
-        public static void AppsWorkEffortWorkDone(this WorkEffort workEffort)
+        public static void AppsWorkDone(this WorkEffort @this, WorkEffortWorkDone method)
         {
-            workEffort.CurrentObjectState = new WorkEffortObjectStates(workEffort.Strategy.Session).Fulffilled;
+            @this.CurrentObjectState = new WorkEffortObjectStates(@this.Strategy.Session).Fulffilled;
         }
 
-        public static void AppsWorkEffortFinish(this WorkEffort workEffort)
+        public static void AppsFinish(this WorkEffort @this, WorkEffortFinish method)
         {
-            workEffort.CurrentObjectState = new WorkEffortObjectStates(workEffort.Strategy.Session).Finished;
+            @this.CurrentObjectState = new WorkEffortObjectStates(@this.Strategy.Session).Finished;
         }
 
-        public static void AppsWorkEffortCancel(this WorkEffort workEffort)
+        public static void AppsCancel(this WorkEffort @this, WorkEffortCancel cancel)
         {
-            workEffort.CurrentObjectState = new WorkEffortObjectStates(workEffort.Strategy.Session).Cancelled;
+            @this.CurrentObjectState = new WorkEffortObjectStates(@this.Strategy.Session).Cancelled;
         }
 
-        public static void AppsWorkEffortReopen(this WorkEffort workEffort)
+        public static void AppsReopen(this WorkEffort @this, WorkEffortReopen reopen)
         {
-            workEffort.CurrentObjectState = new WorkEffortObjectStates(workEffort.Strategy.Session).Created;
+            @this.CurrentObjectState = new WorkEffortObjectStates(@this.Strategy.Session).Created;
         }
     }
 }

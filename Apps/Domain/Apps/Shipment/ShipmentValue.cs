@@ -20,13 +20,11 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class ShipmentValue
     {
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            
+            var derivation = method.Derivation;
 
             derivation.Log.AssertAtLeastOne(this, ShipmentValues.Meta.FromAmount, ShipmentValues.Meta.ThroughAmount);
 

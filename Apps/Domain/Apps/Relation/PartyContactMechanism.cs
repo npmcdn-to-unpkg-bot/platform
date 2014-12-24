@@ -36,9 +36,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            
+            var derivation = method.Derivation;
 
             derivation.Log.AssertExists(this, PartyContactMechanisms.Meta.ContactMechanism);
             if (this.ExistUseAsDefault && this.UseAsDefault)

@@ -94,7 +94,7 @@ namespace Allors.Domain
                     internalOrganisationRevenueHistory.Revenue += internalOrganisationRevenue.Revenue;
                 }
 
-                internalOrganisationRevenueHistory.Derive(derivation);
+                internalOrganisationRevenueHistory.Derive().Execute();
             }
         }
 

@@ -39,44 +39,44 @@ namespace Allors.Domain
             return null;
         }
         
-        public static void AppsCommunicationEventDerive(this CommunicationEvent communicationEvent, IDerivation derivation)
+        public static void AppsDerivableDerive(this CommunicationEvent @this, DerivableDerive method)
         {
-            if (!communicationEvent.ExistOwner)
+            if (!@this.ExistOwner)
             {
-                communicationEvent.Owner = (Person)new Users(communicationEvent.Strategy.Session).GetCurrentAuthenticatedUser();
+                @this.Owner = (Person)new Users(@this.Strategy.Session).GetCurrentAuthenticatedUser();
             }
 
-            if (communicationEvent.ExistCurrentObjectState && !communicationEvent.CurrentObjectState.Equals(communicationEvent.PreviousObjectState))
+            if (@this.ExistCurrentObjectState && !@this.CurrentObjectState.Equals(@this.PreviousObjectState))
             {
-                var currentStatus = new CommunicationEventStatusBuilder(communicationEvent.Strategy.Session).WithCommunicationEventObjectState(communicationEvent.CurrentObjectState).Build();
-                communicationEvent.AddCommunicationEventStatus(currentStatus);
-                communicationEvent.CurrentCommunicationEventStatus = currentStatus;
+                var currentStatus = new CommunicationEventStatusBuilder(@this.Strategy.Session).WithCommunicationEventObjectState(@this.CurrentObjectState).Build();
+                @this.AddCommunicationEventStatus(currentStatus);
+                @this.CurrentCommunicationEventStatus = currentStatus;
             }
 
-            if (communicationEvent.ExistCurrentObjectState)
+            if (@this.ExistCurrentObjectState)
             {
-                communicationEvent.CurrentObjectState.Process(communicationEvent);
+                @this.CurrentObjectState.Process(@this);
             }
 
-            if (!communicationEvent.ExistInitialScheduledStartDate && communicationEvent.ExistScheduledStart)
+            if (!@this.ExistInitialScheduledStartDate && @this.ExistScheduledStart)
             {
-                communicationEvent.InitialScheduledStartDate = communicationEvent.ScheduledStart;
+                @this.InitialScheduledStartDate = @this.ScheduledStart;
             }
         }
 
-        public static void AppsCommunicationEventClose(this CommunicationEvent communicationEvent)
+        public static void AppsCommunicationEventClose(this CommunicationEvent @this, CommunicationEventClose method)
         {
-            communicationEvent.CurrentObjectState = new CommunicationEventObjectStates(communicationEvent.Strategy.Session).Closed;
+            @this.CurrentObjectState = new CommunicationEventObjectStates(@this.Strategy.Session).Closed;
         }
 
-        public static void AppsCommunicationEventReopen(this CommunicationEvent communicationEvent)
+        public static void AppsCommunicationEventReopen(this CommunicationEvent @this, CommunicationEventReopen method)
         {
-            communicationEvent.CurrentObjectState = new CommunicationEventObjectStates(communicationEvent.Strategy.Session).Opened;
+            @this.CurrentObjectState = new CommunicationEventObjectStates(@this.Strategy.Session).Opened;
         }
 
-        public static void AppsCommunicationEventCancel(this CommunicationEvent communicationEvent)
+        public static void AppsCommunicationEventCancel(this CommunicationEvent @this, CommunicationEventCancel method)
         {
-            communicationEvent.CurrentObjectState = new CommunicationEventObjectStates(communicationEvent.Strategy.Session).Cancelled;
+            @this.CurrentObjectState = new CommunicationEventObjectStates(@this.Strategy.Session).Cancelled;
         }
     }
 }

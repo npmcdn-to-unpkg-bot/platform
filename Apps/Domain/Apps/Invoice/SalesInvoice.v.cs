@@ -20,28 +20,11 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class SalesInvoice
     {
         public string SalesRepNames()
         {
             return this.AppsSalesRepNames;
-        }
-
-        public void CancelInvoice()
-        {
-            this.AppsCancelInvoice();
-        }
-
-        public void Send()
-        {
-            this.AppsSend();
-        }
-
-        public void WriteOff()
-        {
-            this.AppsWriteOff();
         }
 
         public void DeriveLocale(IDerivation derivation)

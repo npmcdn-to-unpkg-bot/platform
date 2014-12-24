@@ -20,8 +20,6 @@
 
 namespace Allors
 {
-    using Allors.Domain;
-
     public abstract partial class ObjectBase
     {
         protected virtual void AppsOnPostBuild(IObjectBuilder builder)
@@ -29,18 +27,6 @@ namespace Allors
         }
 
         protected virtual void AppsApplySecurityOnPostBuild()
-        {
-        }
-
-        protected virtual void AppsPrepareDerivation(IDerivation derivation)
-        {
-        }
-
-        protected virtual void AppsDerive(IDerivation derivation)
-        {
-        }
-
-        protected virtual void AppsApplySecurityOnDerive()
         {
         }
 

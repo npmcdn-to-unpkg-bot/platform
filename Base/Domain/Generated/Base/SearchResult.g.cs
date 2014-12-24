@@ -4,13 +4,6 @@ namespace Allors.Domain
 {
 	public partial interface SearchResult :  UserInterfaceable, Allors.IObjectBase
 	{
-
-
-		DerivablePrepareDerivation PrepareDerivation();
-
-		DerivableDerive Derive();
-
-		DerivableApplySecurityOnDerive ApplySecurityOnDerive();
 	}
 
 	public class SearchResultMeta

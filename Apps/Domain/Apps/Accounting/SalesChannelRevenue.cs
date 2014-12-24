@@ -23,10 +23,6 @@ namespace Allors.Domain
     using System;
     using System.Text;
 
-    using Allors.Domain;
-
-    
-
     public partial class SalesChannelRevenue
     {
         public string RevenueAsCurrencyString()
@@ -34,8 +30,10 @@ namespace Allors.Domain
             return DecimalExtensions.AsCurrencyString(this.Revenue, this.InternalOrganisation.CurrencyFormat);
         }
 
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
+            var derivation = method.Derivation;
+            
             this.SalesChannelName = this.SalesChannel.Name;
 
             this.AppsDeriveDisplayName(derivation);

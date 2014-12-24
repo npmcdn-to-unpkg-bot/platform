@@ -34,14 +34,12 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            this.AppsBudgetDerive(derivation);
+            var derivation = method.Derivation;
 
             derivation.Log.AssertExists(this, AccountingPeriods.Meta.PeriodNumber);
             derivation.Log.AssertExists(this, AccountingPeriods.Meta.TimeFrequency);
-            derivation.Log.AssertExists(this, AccountingPeriods.Meta.FromDate);
-            derivation.Log.AssertExists(this, AccountingPeriods.Meta.ThroughDate);
 
             var stringBuilder = new StringBuilder();
             if (this.ExistFromDate)

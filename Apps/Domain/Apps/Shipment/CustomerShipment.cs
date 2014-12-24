@@ -190,9 +190,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsPrepareDerivation(IDerivation derivation)
+        public void AppsPrepareDerivation(DerivablePrepareDerivation method)
         {
-            base.AppsPrepareDerivation(derivation);
+            var derivation = method.Derivation;
 
             foreach (ShipmentItem shipmentItem in this.ShipmentItems)
             {
@@ -218,9 +218,9 @@ namespace Allors.Domain
             }                
         }
 
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            
+            var derivation = method.Derivation;
 
             if (!this.ExistShipToAddress && this.ExistShipToParty)
             {
@@ -276,7 +276,7 @@ namespace Allors.Domain
             this.DeriveTemplate(derivation);
         }
 
-        protected override void AppsApplySecurityOnDerive()
+        public void AppsApplySecurityOnDerive(DerivableApplySecurityOnDerive method)
         {
             this.RemoveSecurityTokens();
             this.AddSecurityToken(Domain.Singleton.Instance(this.Session).AdministratorSecurityToken);
@@ -395,23 +395,23 @@ namespace Allors.Domain
                 foreach (var keyValuePair in invoiceByOrder)
                 {
                     // TODO: put this in prepare
-                    // keyValuePair.Value.Derive(derivation);
+                    // keyValuePair.Value.Derive().Execute();
                 }
             }
         }
 
-        private void AppsCancel()
+        public void AppsCancel(CustomerShipmentCancel method)
         {
             this.CurrentObjectState = new CustomerShipmentObjectStates(Session).Cancelled;
         }
 
-        private void AppsHold()
+        public void AppsHold(CustomerShipmentHold method)
         {
             this.HeldManually = true;
             this.PutOnHold();
         }
 
-        private void AppsPutOnHold()
+        public void AppsPutOnHold(CustomerShipmentPutOnHold method)
         {
             foreach (PickList pickList in this.ShipToParty.PickListsWhereShipToParty)
             {
@@ -426,13 +426,13 @@ namespace Allors.Domain
             this.CurrentObjectState = new CustomerShipmentObjectStates(Session).OnHold;
         }
 
-        private void AppsContinue()
+        public void AppsContinue(CustomerShipmentContinue method)
         {
             this.ReleasedManually = true;
             this.ProcessOnContinue();
         }
 
-        private void AppsProcessOnContinue()
+        private void AppsProcessOnContinue(CustomerShipmentProcessOnContinue method)
         {
             this.CurrentObjectState = new CustomerShipmentObjectStates(Session).Created;
 
@@ -445,17 +445,17 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsSetPicked()
+        private void AppsSetPicked(CustomerShipmentSetPicked method)
         {
             this.CurrentObjectState = new CustomerShipmentObjectStates(Session).Picked;
         }
 
-        private void AppsSetPacked()
+        private void AppsSetPacked(CustomerShipmentSetPacked method)
         {
             this.CurrentObjectState = new CustomerShipmentObjectStates(Session).Packed;
         }
 
-        private void AppsShip()
+        private void AppsShip(CustomerShipmentShip method)
         {
             if (this.CanShip)
             {
@@ -542,7 +542,7 @@ namespace Allors.Domain
 
                 if (pendingPickList != null)
                 {
-                    pendingPickList.Derive(derivation);
+                    pendingPickList.Derive().Execute();
                 }
             }
         }

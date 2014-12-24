@@ -52,9 +52,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            
+            var derivation = method.Derivation;
 
             derivation.Log.AssertExists(this, Disbursements.Meta.EffectiveDate);
             derivation.Log.AssertExists(this, Disbursements.Meta.Amount);

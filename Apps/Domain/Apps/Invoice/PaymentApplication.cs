@@ -26,9 +26,9 @@ namespace Allors.Domain
 
     public partial class PaymentApplication
     {
-        protected override void AppsPrepareDerivation(IDerivation derivation)
+        public void AppsPrepareDerivation(DerivablePrepareDerivation method)
         {
-            base.AppsPrepareDerivation(derivation);
+            var derivation = method.Derivation;
 
             // TODO:
             if (derivation.ChangeSet.Associations.Contains(this.Id))
@@ -51,9 +51,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            
+            var derivation = method.Derivation;
 
             derivation.Log.AssertExistsAtMostOne(this, PaymentApplications.Meta.Invoice, PaymentApplications.Meta.InvoiceItem);
             derivation.Log.AssertExists(this, PaymentApplications.Meta.AmountApplied);
@@ -87,22 +87,22 @@ namespace Allors.Domain
 
             if (salesInvoice != null)
             {
-                salesInvoice.Derive(derivation);
+                salesInvoice.Derive().Execute();
             }
 
             if (purchaseInvoice != null)
             {
-                purchaseInvoice.Derive(derivation);
+                purchaseInvoice.Derive().Execute();
             }
 
             if (salesInvoiceItem != null)
             {
-                salesInvoiceItem.SalesInvoiceWhereSalesInvoiceItem.Derive(derivation);
+                salesInvoiceItem.SalesInvoiceWhereSalesInvoiceItem.Derive().Execute();
             }
 
             if (purchaseInvoiceItem != null)
             {
-                purchaseInvoiceItem.PurchaseInvoiceItemType.Derive(derivation);
+                purchaseInvoiceItem.PurchaseInvoiceItemType.Derive().Execute();
             }
         }
     }

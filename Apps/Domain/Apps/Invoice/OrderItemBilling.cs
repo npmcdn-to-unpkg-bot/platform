@@ -20,14 +20,12 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class OrderItemBilling
     {
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            
-
+            var derivation = method.Derivation;
+   
             derivation.Log.AssertExists(this, OrderItemsBilling.Meta.OrderItem);
             derivation.Log.AssertExists(this, OrderItemsBilling.Meta.Amount);
         }

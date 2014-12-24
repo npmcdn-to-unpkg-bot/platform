@@ -20,40 +20,8 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class PurchaseOrderItem
     {
-        public void Confirm()
-        {
-            this.AppsConfirm();
-        }
-
-        public void Approve()
-        {
-            this.AppsApprove();
-        }
-
-        public void Cancel()
-        {
-            this.AppsCancel();
-        }
-
-        public void Reject()
-        {
-            this.AppsReject();
-        }
-
-        public void Complete()
-        {
-            this.AppsComplete();
-        }
-
-        public void Finish()
-        {
-            this.AppsFinish();
-        }
-
         public void DeriveCurrentObjectState(IDerivation derivation)
         {
             this.AppsDeriveCurrentObjectState(derivation);

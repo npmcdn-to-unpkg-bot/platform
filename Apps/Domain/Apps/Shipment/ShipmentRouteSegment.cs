@@ -26,7 +26,7 @@ namespace Allors.Domain
 
     public partial class ShipmentRouteSegment
     {
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
             
 

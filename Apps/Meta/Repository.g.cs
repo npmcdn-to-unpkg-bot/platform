@@ -542,6 +542,7 @@ namespace Allors.Meta
 		public static Class AccessControl;
 		public static Class Person;
 		public static Class Image;
+		public static Interface Derivable;
 		public static Class Media;
 		public static Interface AccessControlledObject;
 		public static Interface UserInterfaceable;
@@ -5488,6 +5489,12 @@ namespace Allors.Meta
 			.WithPluralName("Images")
 			.Build();
   
+  
+			Derivable = new InterfaceBuilder(Base, new Guid("ccde0070-ad05-4336-8cab-a5b27bef5c29"))
+			.WithSingularName("Derivable")
+			.WithPluralName("Derivables")
+			.Build();
+  
 
 			Media = new ClassBuilder(Base, new Guid("da5b86a3-4f33-4c0d-965d-f4fbc1179374"))
 			.WithSingularName("Media")
@@ -8920,6 +8927,10 @@ namespace Allors.Meta
 				.WithSupertype(UserInterfaceable).Build();
 
 				// SearchFragment
+				new InheritanceBuilder(Base, new Guid("3ecd13de-c25f-48fc-a1d1-7a78767e825c"))
+				.WithSubtype(SearchFragment)
+				.WithSupertype(Derivable).Build();
+
 				// Language
 				new InheritanceBuilder(Base, new Guid("a4ebd1f9-84db-4888-ba53-414b67b03c73"))
 				.WithSubtype(Language)
@@ -8929,6 +8940,10 @@ namespace Allors.Meta
 				.WithSupertype(Searchable).Build();
 
 				// SearchData
+				new InheritanceBuilder(Base, new Guid("04af874d-d58c-4038-b98c-e822bfae2c3b"))
+				.WithSubtype(SearchData)
+				.WithSupertype(Derivable).Build();
+
 				// UserGroup
 				new InheritanceBuilder(Base, new Guid("6147b424-b6a9-44b9-b173-30d259165a51"))
 				.WithSubtype(UserGroup)
@@ -8949,6 +8964,10 @@ namespace Allors.Meta
 				.WithSupertype(UniquelyIdentifiable).Build();
 
 				// MediaContent
+				new InheritanceBuilder(Base, new Guid("6621c785-2a51-4472-8ecb-258760a62179"))
+				.WithSubtype(MediaContent)
+				.WithSupertype(Derivable).Build();
+
 				// Localised
 				// Permission
 				new InheritanceBuilder(Base, new Guid("aec174d4-5633-462c-91a1-10d3e782fdb4"))
@@ -8986,6 +9005,10 @@ namespace Allors.Meta
 				.WithSupertype(AccessControlledObject).Build();
 
 				// Login
+				new InheritanceBuilder(Base, new Guid("28799476-9ca8-43bf-a06c-d2b33f91e436"))
+				.WithSubtype(Login)
+				.WithSupertype(Derivable).Build();
+
 				// Role
 				new InheritanceBuilder(Base, new Guid("4e737d59-0330-4f4e-a3f3-7ec617d63748"))
 				.WithSubtype(Role)
@@ -9056,6 +9079,7 @@ namespace Allors.Meta
 				.WithSupertype(Party).Build();
 
 				// Image
+				// Derivable
 				// Media
 				new InheritanceBuilder(Base, new Guid("c8cd0830-d1a7-4343-8049-dc18c34c213e"))
 				.WithSubtype(Media)
@@ -9065,6 +9089,10 @@ namespace Allors.Meta
 				.WithSupertype(UserInterfaceable).Build();
 
 				// AccessControlledObject
+				new InheritanceBuilder(Base, new Guid("b97d7219-f7d9-4df0-80a0-b624c46359aa"))
+				.WithSubtype(AccessControlledObject)
+				.WithSupertype(Derivable).Build();
+
 				// UserInterfaceable
 				new InheritanceBuilder(Base, new Guid("d583715e-56c3-4212-81c7-3fa4de12144b"))
 				.WithSubtype(UserInterfaceable)
@@ -25921,6 +25949,7 @@ namespace Allors.Meta
 				.Build();
 
 
+				// Derivable
 				// Media
 				MediaMediaType = new RelationTypeBuilder(Base, new Guid("49481792-06f0-49a1-b32f-28d265815a24"),new Guid("7ca17a9e-0b68-445f-8080-84b08ca0eb2d"),new Guid("f1008c56-b375-4aa8-ac7e-c1f7ef9b2080"))
 				.WithObjectTypes(Media, MediaType)

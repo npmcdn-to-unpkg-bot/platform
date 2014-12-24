@@ -85,9 +85,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            
+            var derivation = method.Derivation;
 
             derivation.Log.AssertExists(this, NonSerializedInventoryItems.Meta.Facility);
             derivation.Log.AssertExists(this, NonSerializedInventoryItems.Meta.CurrentObjectState);
@@ -265,7 +265,7 @@ namespace Allors.Domain
                     extra -= diff;
 
                     salesOrderItem.DeriveAddToShipping(derivation, diff);
-                    salesOrderItem.SalesOrderWhereSalesOrderItem.Derive(derivation);
+                    salesOrderItem.SalesOrderWhereSalesOrderItem.Derive().Execute();
                 }
             }
         }
@@ -297,7 +297,7 @@ namespace Allors.Domain
                     subtract -= diff;
 
                     salesOrderItem.DeriveSubtractFromShipping(derivation, diff);
-                    salesOrderItem.SalesOrderWhereSalesOrderItem.Derive(derivation);
+                    salesOrderItem.SalesOrderWhereSalesOrderItem.Derive().Execute();
                 }
             }
         }

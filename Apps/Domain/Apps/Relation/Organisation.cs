@@ -39,7 +39,7 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsApplySecurityOnDerive()
+        public void AppsApplySecurityOnDerive(DerivableApplySecurityOnDerive method)
         {
             this.RemoveSecurityTokens();
             this.AddSecurityToken(this.OwnerSecurityToken);
@@ -51,8 +51,10 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
+            var derivation = method.Derivation;
+
             this.AppsPartyDerive(derivation);
 
             if (!this.ExistOwnerSecurityToken)

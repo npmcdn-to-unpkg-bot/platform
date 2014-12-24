@@ -20,13 +20,11 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class OrganisationRollUp
     {
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            
+            var derivation = method.Derivation;
 
             derivation.Log.AssertExists(this, OrganisationRollUps.Meta.Child);
             derivation.Log.AssertExists(this, OrganisationRollUps.Meta.Parent);

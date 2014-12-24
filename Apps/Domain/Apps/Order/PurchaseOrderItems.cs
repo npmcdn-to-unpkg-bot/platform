@@ -56,6 +56,7 @@ namespace Allors.Domain
 
             var cancel = Meta.Cancel;
             var reject = Meta.Reject;
+            // TODO: Delete
             var delete = Meta.Delete;
 
             config.Deny(this.ObjectType, created, cancel, reject);

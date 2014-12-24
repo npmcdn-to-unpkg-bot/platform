@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     using System;
     using System.Text;
 
@@ -32,9 +30,10 @@ namespace Allors.Domain
             return DecimalExtensions.AsCurrencyString(this.Revenue, this.InternalOrganisation.CurrencyFormat);
         }
 
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            
+            var derivation = method.Derivation;
+   
 
             this.PartyPackageName = string.Concat(this.Party.DisplayName, "/", this.Package.DisplayName);
 
@@ -114,7 +113,7 @@ namespace Allors.Domain
             if (this.ExistPackage)
             {
                 var packageRevenue = PackageRevenues.AppsFindOrCreateAsDependable(this.Session, this);
-                packageRevenue.Derive(derivation);
+                packageRevenue.Derive().Execute();
             }
         }
     }

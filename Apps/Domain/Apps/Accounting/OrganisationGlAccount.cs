@@ -93,9 +93,9 @@ namespace Allors.Domain
             this.HasBankStatementTransactions = false;
         }
 
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            
+            var derivation = method.Derivation;
 
             derivation.Log.AssertExists(this, OrganisationGlAccounts.Meta.GeneralLedgerAccount);
             derivation.Log.AssertExists(this, OrganisationGlAccounts.Meta.InternalOrganisation);

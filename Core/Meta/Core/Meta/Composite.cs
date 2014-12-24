@@ -252,7 +252,15 @@ namespace Allors.Meta
                 return this.derivedMethodTypes;
             }
         }
-        
+
+        public IEnumerable<MethodType> ExclusiveMethodTypes
+        {
+            get
+            {
+                return this.MethodTypes.Where(methodType => this.Equals(methodType.ObjectType)).ToArray();
+            }
+        }
+
         public bool ExistSupertype(IInterface @interface)
         {
             this.MetaPopulation.Derive();

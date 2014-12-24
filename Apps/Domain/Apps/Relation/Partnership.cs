@@ -36,9 +36,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            
+            var derivation = method.Derivation;
 
             derivation.Log.AssertExists(this, Partnerships.Meta.Partner);
             derivation.Log.AssertExists(this, Partnerships.Meta.InternalOrganisation);
@@ -60,7 +60,7 @@ namespace Allors.Domain
                 var partner = this.Partner;
                 foreach (OrganisationContactRelationship contactRelationship in partner.OrganisationContactRelationshipsWhereOrganisation)
                 {
-                    contactRelationship.Contact.Derive(derivation);                    
+                    contactRelationship.Contact.Derive().Execute();                    
                 }
             }
         }

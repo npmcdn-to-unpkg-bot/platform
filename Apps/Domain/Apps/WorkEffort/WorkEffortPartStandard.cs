@@ -24,9 +24,9 @@ namespace Allors.Domain
 
     public partial class WorkEffortPartStandard
     {
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            
+            var derivation = method.Derivation;
 
             derivation.Log.AssertExists(this, WorkEffortPartStandards.Meta.Part);
 

@@ -157,15 +157,5 @@ namespace Allors.Domain
                 return this.Equals(new ContactMechanismPurposes(this.Session).CellPhoneNumber);
             }
         }
-
-        protected override void AppsOnPostBuild(IObjectBuilder builder)
-        {
-            
-        }
-
-        protected override void AppsDerive(IDerivation derivation)
-        {
-            this.AppsEnumerationDerive(derivation);
-        }
-    }
+}
 }

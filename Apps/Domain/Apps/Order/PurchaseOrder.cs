@@ -276,9 +276,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsPrepareDerivation(IDerivation derivation)
+        public void AppsPrepareDerivation(DerivablePrepareDerivation method)
         {
-            base.AppsPrepareDerivation(derivation);
+            var derivation = method.Derivation;
 
             // TODO:
             if (derivation.ChangeSet.Associations.Contains(this.Id))
@@ -323,9 +323,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            
+            var derivation = method.Derivation;
 
             derivation.Log.AssertExists(this, PurchaseOrders.Meta.OrderNumber);
             derivation.Log.AssertExists(this, PurchaseOrders.Meta.OrderDate);
@@ -390,7 +390,7 @@ namespace Allors.Domain
             this.DeriveTemplate(derivation);
         }
 
-        protected override void AppsApplySecurityOnDerive()
+        public void AppsApplySecurityOnDerive(DerivableApplySecurityOnDerive method)
         {
             this.RemoveSecurityTokens();
             this.AddSecurityToken(Singleton.Instance(this.Session).AdministratorSecurityToken);
@@ -446,42 +446,42 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsCancelOrder()
+        private void AppsCancelOrder(OrderCancelOrder method)
         {
             this.CurrentObjectState = new PurchaseOrderObjectStates(Session).Cancelled;
         }
 
-        private void AppsConfirm()
+        private void AppsConfirm(OrderConfirm method)
         {
             this.CurrentObjectState = new PurchaseOrderObjectStates(Session).InProcess;
         }
 
-        private void AppsReject()
+        private void AppsReject(OrderReject method)
         {
             this.CurrentObjectState = new PurchaseOrderObjectStates(Session).Rejected;
         }
 
-        private void AppsHold()
+        private void AppsHold(OrderHold method)
         {
             this.CurrentObjectState = new PurchaseOrderObjectStates(Session).OnHold;
         }
 
-        private void AppsApprove()
+        private void AppsApprove(OrderApprove method)
         {
             this.CurrentObjectState = new PurchaseOrderObjectStates(Session).RequestsApproval;
         }
 
-        private void AppsContinue()
+        private void AppsContinue(OrderContinue method)
         {
             this.CurrentObjectState = new PurchaseOrderObjectStates(Session).InProcess;
         }
 
-        private void AppsComplete()
+        private void AppsComplete(OrderComplete method)
         {
             this.CurrentObjectState = new PurchaseOrderObjectStates(Session).Completed;
         }
 
-        private void AppsFinish()
+        private void AppsFinish(OrderFinish method)
         {
             this.CurrentObjectState = new PurchaseOrderObjectStates(Session).Finished;
         }
@@ -641,7 +641,7 @@ namespace Allors.Domain
 
             foreach (PurchaseOrderItem purchaseOrderItem in this.ValidOrderItems)
             {
-                purchaseOrderItem.Derive(derivation);
+                purchaseOrderItem.Derive().Execute();
                 purchaseOrderItem.DeriveDeliveryDate(derivation);
                 purchaseOrderItem.DeriveCurrentShipmentStatus(derivation);
                 purchaseOrderItem.DerivePrices();

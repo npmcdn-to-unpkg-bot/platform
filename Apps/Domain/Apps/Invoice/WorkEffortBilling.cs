@@ -20,13 +20,11 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class WorkEffortBilling
     {
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            
+            var derivation = method.Derivation;
 
             derivation.Log.AssertExists(this, WorkEffortBillings.Meta.InvoiceItem);
             derivation.Log.AssertExists(this, WorkEffortBillings.Meta.WorkEffort);

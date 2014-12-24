@@ -94,13 +94,6 @@ namespace Allors.Domain
 			get;
 		}
 
-
-
-		DerivablePrepareDerivation PrepareDerivation();
-
-		DerivableDerive Derive();
-
-		DerivableApplySecurityOnDerive ApplySecurityOnDerive();
 	}
 
 	public class UserMeta

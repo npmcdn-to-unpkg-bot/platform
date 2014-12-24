@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System.Text.RegularExpressions;
 
-    using Allors.Domain;
-
     using Resources;
 
     public partial class Bank
@@ -38,9 +36,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            
+            var derivation = method.Derivation;
 
             derivation.Log.AssertExists(this, Banks.Meta.Name);
             derivation.Log.AssertExists(this, Banks.Meta.Country);

@@ -39,9 +39,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            this.AppsCommunicationEventDerive(derivation);
+            var derivation = method.Derivation;
 
             derivation.Log.AssertExists(this, FaxCommunications.Meta.Description);
 
@@ -56,7 +56,7 @@ namespace Allors.Domain
             this.AddInvolvedParty(Owner);
         }
 
-        protected override void AppsApplySecurityOnDerive()
+        public void AppsApplySecurityOnDerive(DerivableApplySecurityOnDerive method)
         {
             this.RemoveSecurityTokens();
             this.AddSecurityToken(Domain.Singleton.Instance(this.Session).AdministratorSecurityToken);

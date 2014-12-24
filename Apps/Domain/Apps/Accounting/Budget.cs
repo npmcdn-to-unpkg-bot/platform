@@ -22,29 +22,29 @@ namespace Allors.Domain
 {
     public static partial class BudgetExtensions
     {
-        public static void AppsBudgetDerive(this Budget budget, IDerivation derivation)
+        public static void AppsDerive(this Budget @this, DerivableDerive method)
         {
-            if (budget.ExistCurrentObjectState && !budget.CurrentObjectState.Equals(budget.PreviousObjectState))
+            if (@this.ExistCurrentObjectState && !@this.CurrentObjectState.Equals(@this.PreviousObjectState))
             {
-                var currentStatus = new BudgetStatusBuilder(budget.Strategy.Session).WithBudgetObjectState(budget.CurrentObjectState).Build();
-                budget.AddBudgetStatus(currentStatus);
-                budget.CurrentBudgetStatus = currentStatus;
+                var currentStatus = new BudgetStatusBuilder(@this.Strategy.Session).WithBudgetObjectState(@this.CurrentObjectState).Build();
+                @this.AddBudgetStatus(currentStatus);
+                @this.CurrentBudgetStatus = currentStatus;
             }
 
-            if (budget.ExistCurrentObjectState)
+            if (@this.ExistCurrentObjectState)
             {
-                budget.CurrentObjectState.Process(budget);
+                @this.CurrentObjectState.Process(@this);
             }
         }
 
-        public static void AppsBudgetClose(this Budget budget)
+        public static void AppsBudgetClose(this Budget @this, BudgetClose method)
         {
-            budget.CurrentObjectState = new BudgetObjectStates(budget.Strategy.Session).Closed;
+            @this.CurrentObjectState = new BudgetObjectStates(@this.Strategy.Session).Closed;
         }
 
-        public static void AppsBudgetReopen(this Budget budget)
+        public static void AppsBudgetReopen(this Budget @this, BudgetReopen method)
         {
-            budget.CurrentObjectState = new BudgetObjectStates(budget.Strategy.Session).Opened;
+            @this.CurrentObjectState = new BudgetObjectStates(@this.Strategy.Session).Opened;
         }
     }
 }

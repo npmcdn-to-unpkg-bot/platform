@@ -40,9 +40,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsPrepareDerivation(IDerivation derivation)
+        public void AppsPrepareDerivation(DerivablePrepareDerivation method)
         {
-            base.AppsPrepareDerivation(derivation);
+            var derivation = method.Derivation;
 
             if (this.ExistBankAccount && derivation.ChangeSet.GetRoleTypes(this.Id).Contains(OwnBankAccounts.Meta.BankAccount))
             {
@@ -50,16 +50,16 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            
+            var derivation = method.Derivation;
 
             if (!this.ExistDescription && this.ExistBankAccount)
             {
                 this.Description = this.BankAccount.ComposeDisplayName();
             }
 
-            if (this.ExistInternalOrganisationWherePaymentMethod && this.InternalOrganisationWherePaymentMethod.DoAccounting)
+            if (this.ExistInternalOrganisationWherePaymentMethod && this.InternalOrganisationWherePaymentMethod.DoAccounting.HasValue && this.InternalOrganisationWherePaymentMethod.DoAccounting.Value)
             { 
                 derivation.Log.AssertExists(this, OwnBankAccounts.Meta.Creditor);
                 derivation.Log.AssertAtLeastOne(this, Cashes.Meta.GeneralLedgerAccount, Cashes.Meta.Journal);

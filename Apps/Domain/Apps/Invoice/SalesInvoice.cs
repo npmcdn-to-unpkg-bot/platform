@@ -519,9 +519,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsPrepareDerivation(IDerivation derivation)
+        public void AppsPrepareDerivation(DerivablePrepareDerivation method)
         {
-            base.AppsPrepareDerivation(derivation);
+            var derivation = method.Derivation;
 
             if (this.ExistBillToCustomer)
             {
@@ -557,9 +557,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            
+            var derivation = method.Derivation;
 
             derivation.Log.AssertExists(this, SalesInvoices.Meta.InvoiceNumber);
             derivation.Log.AssertExists(this, SalesInvoices.Meta.InvoiceDate);
@@ -603,7 +603,7 @@ namespace Allors.Domain
 
                 if (customerRelationship != null)
                 {
-                    customerRelationship.Derive(derivation);
+                    customerRelationship.Derive().Execute();
                 }
             }
 
@@ -638,7 +638,7 @@ namespace Allors.Domain
             this.AppsDeriveRevenues(derivation);
         }
 
-        protected override void AppsApplySecurityOnDerive()
+        public void AppsApplySecurityOnDerive(DerivableApplySecurityOnDerive method)
         {
             this.RemoveSecurityTokens();
             this.AddSecurityToken(Singleton.Instance(this.Session).AdministratorSecurityToken);
@@ -744,17 +744,17 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsSend()
+        public void AppsSend(SalesInvoiceSend method)
         {
             this.CurrentObjectState = new SalesInvoiceObjectStates(Session).Sent;
         }
 
-        private void AppsWriteOff()
+        public void AppsWriteOff(SalesInvoiceWriteOff method)
         {
             this.CurrentObjectState = new SalesInvoiceObjectStates(Session).WrittenOff;
         }
 
-        private void AppsCancelInvoice()
+        public void AppsCancelInvoice(SalesInvoiceCancelInvoice method)
         {
             this.CurrentObjectState = new SalesInvoiceObjectStates(Session).Cancelled;
         }
@@ -975,7 +975,7 @@ namespace Allors.Domain
                     foreach (OrderShipment orderShipment in invoiceItem.ShipmentItemWhereInvoiceItem.OrderShipmentsWhereShipmentItem)
                     {
                         orderShipment.SalesOrderItem.DeriveCurrentPaymentStatus(derivation);
-                        orderShipment.SalesOrderItem.SalesOrderWhereSalesOrderItem.Derive(derivation);
+                        orderShipment.SalesOrderItem.SalesOrderWhereSalesOrderItem.Derive().Execute();
                     }
                 }
             }
@@ -1003,7 +1003,7 @@ namespace Allors.Domain
             var invoiceFromOrder = true;
             foreach (SalesInvoiceItem salesInvoiceItem in this.SalesInvoiceItems)
             {
-                salesInvoiceItem.Derive(derivation);
+                salesInvoiceItem.Derive().Execute();
                 salesInvoiceItem.DeriveVatRegime(derivation);
                 salesInvoiceItem.DeriveSalesRep(derivation);
                 salesInvoiceItem.DeriveCurrentObjectState(derivation);
@@ -1062,12 +1062,12 @@ namespace Allors.Domain
                 if (salesInvoiceItem.ExistProduct)
                 {
                     var partyProductRevenue = PartyProductRevenues.AppsFindOrCreateAsDependable(this.Session, salesInvoiceItem.Product, salesInvoiceItem.SalesInvoiceWhereSalesInvoiceItem);
-                    partyProductRevenue.Derive(derivation);
+                    partyProductRevenue.Derive().Execute();
                 }
                 else
                 {
                     var partyRevenue = PartyRevenues.AppsFindOrCreateAsDependable(this.Session, salesInvoiceItem.SalesInvoiceWhereSalesInvoiceItem);
-                    partyRevenue.Derive(derivation);
+                    partyRevenue.Derive().Execute();
                 }
 
                 if (salesInvoiceItem.ExistSalesRep)
@@ -1075,33 +1075,33 @@ namespace Allors.Domain
                     if (salesInvoiceItem.ExistProduct && salesInvoiceItem.Product.ExistPrimaryProductCategory)
                     {
                         var salesRepPartyProductCategoryRevenue = SalesRepPartyProductCategoryRevenues.AppsFindOrCreateAsDependable(this.Session, salesInvoiceItem);
-                        salesRepPartyProductCategoryRevenue.Derive(derivation);
+                        salesRepPartyProductCategoryRevenue.Derive().Execute();
                     }
                     else
                     {
                         var salesRepPartyRevenue = SalesRepPartyRevenues.AppsFindOrCreateAsDependable(this.Session, salesInvoiceItem);
-                        salesRepPartyRevenue.Derive(derivation);
+                        salesRepPartyRevenue.Derive().Execute();
                     }
                 }
 
                 if (salesInvoiceItem.SalesInvoiceWhereSalesInvoiceItem.ExistBillToCustomer && salesInvoiceItem.ExistProduct)
                 {
                     var partyProductRevenue = PartyProductRevenues.AppsFindOrCreateAsDependable(this.Session, salesInvoiceItem.Product, salesInvoiceItem.SalesInvoiceWhereSalesInvoiceItem);
-                    partyProductRevenue.Derive(derivation);
+                    partyProductRevenue.Derive().Execute();
                 }
                 else
                 {
                     var partyRevenue = PartyRevenues.AppsFindOrCreateAsDependable(this.Session, salesInvoiceItem.SalesInvoiceWhereSalesInvoiceItem);
-                    partyRevenue.Derive(derivation);
+                    partyRevenue.Derive().Execute();
                 }
 
                 var storeRevenue = StoreRevenues.AppsFindOrCreateAsDependable(this.Session, this);
-                storeRevenue.Derive(derivation);
+                storeRevenue.Derive().Execute();
 
                 if (this.ExistSalesChannel)
                 {
                     var salesChannelRevenue = SalesChannelRevenues.AppsFindOrCreateAsDependable(this.Session, this);
-                    salesChannelRevenue.Derive(derivation);
+                    salesChannelRevenue.Derive().Execute();
                 }
             }
         }

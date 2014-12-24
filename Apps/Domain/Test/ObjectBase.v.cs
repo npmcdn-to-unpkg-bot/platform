@@ -40,29 +40,6 @@ namespace Allors
             this.TestApplySecurityOnPostBuild();
         }
 
-        public virtual void PrepareDerivation(IDerivation derivation)
-        {
-            this.BasePrepareDerivation(derivation);
-            this.AppsPrepareDerivation(derivation);
-            this.TestPrepareDerivation(derivation);
-        }
-
-        public virtual void Derive(IDerivation derivation)
-        {
-            this.BaseDerive(derivation);
-            this.AppsDerive(derivation);
-            this.TestDerive(derivation);
-
-            this.ApplySecurityOnDerive();
-        }
-
-        public virtual void ApplySecurityOnDerive()
-        {
-            this.BaseApplySecurityOnDerive();
-            this.AppsApplySecurityOnDerive();
-            this.TestApplySecurityOnDerive();
-        }
-
         public virtual void Delete()
         {
             this.BaseOnDelete();

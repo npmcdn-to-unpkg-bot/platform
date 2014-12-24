@@ -47,8 +47,10 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
+            var derivation = method.Derivation;
+
             this.AppsPartyDerive(derivation);
 
             derivation.Log.AssertExists(this, AutomatedAgents.Meta.Description);

@@ -22,8 +22,5 @@ namespace Allors.Domain
 {
     public partial interface Budget
     {
-        void Close();
-
-        void Reopen();
     }
 }

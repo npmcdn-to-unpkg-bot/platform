@@ -22,9 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-    
-
     public partial class PerformanceReview
     {
         protected override void AppsOnPostBuild(IObjectBuilder builder)
@@ -37,9 +34,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            
+            var derivation = method.Derivation;   
 
             derivation.Log.AssertExists(this, PerformanceReviews.Meta.FromDate);
             derivation.Log.AssertExists(this, PerformanceReviews.Meta.Employee);

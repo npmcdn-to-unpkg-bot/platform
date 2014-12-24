@@ -20,18 +20,14 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     using System;
     using System.Text;
 
-    
-
     public partial class PartyProductRevenueHistory
     {
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            
+            var derivation = method.Derivation;
 
             this.AppsDeriveDisplayName(derivation);
         }

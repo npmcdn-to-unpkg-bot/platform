@@ -22,13 +22,11 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class SalaryStep
     {
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            
+            var derivation = method.Derivation;
 
             derivation.Log.AssertExists(this, SalarySteps.Meta.ModifiedDate);
             derivation.Log.AssertExists(this, SalarySteps.Meta.Amount);

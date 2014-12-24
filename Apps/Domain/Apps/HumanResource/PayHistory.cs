@@ -22,16 +22,13 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class PayHistory
     {
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            
+            var derivation = method.Derivation;   
 
             derivation.Log.AssertExists(this, PayHistories.Meta.Employment);
-            derivation.Log.AssertExists(this, PayHistories.Meta.FromDate);
             derivation.Log.AssertExists(this, PayHistories.Meta.TimeFrequency);
             derivation.Log.AssertAtLeastOne(this, PayHistories.Meta.Amount, PayHistories.Meta.SalaryStep);
             derivation.Log.AssertExistsAtMostOne(this, PayHistories.Meta.Amount, PayHistories.Meta.SalaryStep);

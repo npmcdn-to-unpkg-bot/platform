@@ -20,13 +20,11 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class ProductDeliverySkillRequirement
     {
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            
+            var derivation = method.Derivation;
 
             derivation.Log.AssertExists(this, ProductDeliverySkillRequirements.Meta.Service);
             derivation.Log.AssertExists(this, ProductDeliverySkillRequirements.Meta.Skill);

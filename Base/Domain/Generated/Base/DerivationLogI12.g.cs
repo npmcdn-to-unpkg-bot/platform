@@ -16,13 +16,6 @@ namespace Allors.Domain
 
 		void RemoveUniqueId();
 
-
-
-		DerivablePrepareDerivation PrepareDerivation();
-
-		DerivableDerive Derive();
-
-		DerivableApplySecurityOnDerive ApplySecurityOnDerive();
 	}
 
 	public class DerivationLogI12Meta

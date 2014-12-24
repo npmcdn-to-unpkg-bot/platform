@@ -119,7 +119,7 @@ namespace Allors.Domain
                         storeRevenueHistory.Revenue += partyRevenue.Revenue;
                     }
 
-                    storeRevenueHistory.Derive(derivation);
+                    storeRevenueHistory.Derive().Execute();
                 }
             }
         }

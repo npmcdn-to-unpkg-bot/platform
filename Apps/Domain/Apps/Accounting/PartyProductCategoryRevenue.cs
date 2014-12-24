@@ -23,10 +23,6 @@ namespace Allors.Domain
     using System;
     using System.Text;
 
-    using Allors.Domain;
-
-    
-
     public partial class PartyProductCategoryRevenue
     {
         public string RevenueAsCurrencyString()
@@ -34,9 +30,9 @@ namespace Allors.Domain
             return DecimalExtensions.AsCurrencyString(this.Revenue, this.InternalOrganisation.CurrencyFormat);
         }
 
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            
+            var derivation = method.Derivation;
 
             this.PartyProductCategoryName = string.Concat(this.Party.DeriveDisplayName(), "/", this.ProductCategory.Description);
 
@@ -126,7 +122,7 @@ namespace Allors.Domain
                                                                 .WithRevenue(0M)
                                                                 .Build();
 
-                    partyProductCategoryRevenue.Derive(derivation);
+                    partyProductCategoryRevenue.Derive().Execute();
                 }
             }
 
@@ -149,19 +145,19 @@ namespace Allors.Domain
             if (this.ExistProductCategory)
             {
                 var productCategoryRevenue = ProductCategoryRevenues.AppsFindOrCreateAsDependable(this.Session, this);
-                productCategoryRevenue.Derive(derivation);
+                productCategoryRevenue.Derive().Execute();
             }
 
             if (this.ExistProductCategory)
             {
                 var productCategoryRevenue = ProductCategoryRevenues.AppsFindOrCreateAsDependable(this.Session, this);
-                productCategoryRevenue.Derive(derivation);
+                productCategoryRevenue.Derive().Execute();
             }
 
             if (this.ExistProductCategory && this.ProductCategory.ExistPackage)
             {
                 var partyPackageRevenue = PartyPackageRevenues.AppsFindOrCreateAsDependable(this.Session, this);
-                partyPackageRevenue.Derive(derivation);
+                partyPackageRevenue.Derive().Execute();
             }
         }
     }

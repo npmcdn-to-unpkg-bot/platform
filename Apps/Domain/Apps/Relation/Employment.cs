@@ -21,9 +21,6 @@
 namespace Allors.Domain
 {
     using System;
-
-    using Allors.Domain;
-
     using Resources;
 
     public partial class Employment
@@ -38,9 +35,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            
+            var derivation = method.Derivation;
 
             derivation.Log.AssertExists(this, Employments.Meta.Employer);
             derivation.Log.AssertExists(this, Employments.Meta.Employee);
@@ -64,19 +61,19 @@ namespace Allors.Domain
 
             if (this.ExistEmployee)
             {
-                this.Employee.Derive(derivation);
+                this.Employee.Derive().Execute();
             }
 
             if (this.ExistEmployer)
             {
-                this.Employer.Derive(derivation);
+                this.Employer.Derive().Execute();
             }
 
             if (this.ExistEmployee && this.Employee.ExistSalesRepRelationshipsWhereSalesRepresentative)
             {
                 foreach (SalesRepRelationship salesRepRelationship in this.Employee.SalesRepRelationshipsWhereSalesRepresentative)
                 {
-                    salesRepRelationship.Derive(derivation);
+                    salesRepRelationship.Derive().Execute();
                 }
             }
         }

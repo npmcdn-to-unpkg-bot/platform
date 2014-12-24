@@ -30,9 +30,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsPrepareDerivation(IDerivation derivation)
+        public void AppsPrepareDerivation(DerivablePrepareDerivation method)
         {
-            base.AppsPrepareDerivation(derivation);
+            var derivation = method.Derivation;
 
             if (this.ExistOrganisationGlAccountBalance && this.OrganisationGlAccountBalance.ExistAccountingPeriod)
             {
@@ -40,8 +40,10 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
+            var derivation = method.Derivation;
+            
             derivation.Log.AssertExists(this, AccountingTransactionDetails.Meta.Amount);
             derivation.Log.AssertExists(this, AccountingTransactionDetails.Meta.Debit);
             derivation.Log.AssertExists(this, AccountingTransactionDetails.Meta.OrganisationGlAccountBalance);

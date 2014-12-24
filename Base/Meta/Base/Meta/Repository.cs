@@ -72,6 +72,10 @@ namespace Allors.Meta
             // MediaType
             MediaTypeName.RoleType.IsRequired = true;
 
+            // Period
+            PeriodFromDate.RoleType.IsRequired = true;
+            PeriodThroughDate.RoleType.IsRequired = true;
+
             // Permission
             PermissionOperandTypePointer.RoleType.IsRequired = true;
             PermissionConcreteClassPointer.RoleType.IsRequired = true;

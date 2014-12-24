@@ -33,9 +33,9 @@ namespace Allors.Domain
             return salesInvoiceNumber;
         }
 
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            
+            var derivation = method.Derivation;
 
             derivation.Log.AssertExists(this, FiscalYearInvoiceNumbers.Meta.FiscalYear);
             derivation.Log.AssertExists(this, FiscalYearInvoiceNumbers.Meta.NextSalesInvoiceNumber);

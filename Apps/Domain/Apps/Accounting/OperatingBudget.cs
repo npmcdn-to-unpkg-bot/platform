@@ -37,12 +37,10 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            this.AppsBudgetDerive(derivation);
+            var derivation = method.Derivation;
 
-            derivation.Log.AssertExists(this, OperatingBudgets.Meta.FromDate);
-            derivation.Log.AssertExists(this, OperatingBudgets.Meta.ThroughDate);
             derivation.Log.AssertExists(this, OperatingBudgets.Meta.Description);
 
             this.DisplayName = this.Description;

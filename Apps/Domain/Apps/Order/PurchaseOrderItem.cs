@@ -111,6 +111,36 @@ namespace Allors.Domain
             }
         }
 
+        public void AppsConfirm(OrderItemConfirm method)
+        {
+            this.CurrentObjectState = new PurchaseOrderItemObjectStates(Session).InProcess;
+        }
+
+        public void AppsApprove(OrderItemApprove method)
+        {
+            this.CurrentObjectState = new PurchaseOrderItemObjectStates(Session).InProcess;
+        }
+
+        public void AppsCancel(OrderItemCancel method)
+        {
+            this.CurrentObjectState = new PurchaseOrderItemObjectStates(Session).Cancelled;
+        }
+
+        public void AppsReject(OrderItemReject method)
+        {
+            this.CurrentObjectState = new PurchaseOrderItemObjectStates(Session).Rejected;
+        }
+
+        public void AppsComplete(PurchaseOrderItemComplete method)
+        {
+            this.CurrentObjectState = new PurchaseOrderItemObjectStates(Session).Completed;
+        }
+
+        public void AppsFinish(OrderItemFinish method)
+        {
+            this.CurrentObjectState = new PurchaseOrderItemObjectStates(Session).Finished;
+        }
+
         protected override void AppsOnPostBuild(IObjectBuilder builder)
         {
             base.AppsOnPostBuild(builder);
@@ -121,9 +151,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsPrepareDerivation(IDerivation derivation)
+        public void AppsPrepareDerivation(DerivablePrepareDerivation method)
         {
-            base.AppsPrepareDerivation(derivation);
+            var derivation = method.Derivation;
 
             // TODO:
             if (derivation.ChangeSet.Associations.Contains(this.Id))
@@ -135,10 +165,10 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
+            var derivation = method.Derivation;
             
-
             derivation.Log.AssertExists(this, PurchaseOrderItems.Meta.QuantityOrdered);
             derivation.Log.AssertAtLeastOne(this, PurchaseOrderItems.Meta.Product, PurchaseOrderItems.Meta.Part);
             derivation.Log.AssertExistsAtMostOne(this, PurchaseOrderItems.Meta.Product, PurchaseOrderItems.Meta.Part);
@@ -265,45 +295,15 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsConfirm()
-        {
-            this.CurrentObjectState = new PurchaseOrderItemObjectStates(Session).InProcess;
-        }
-
-        private void AppsApprove()
-        {
-            this.CurrentObjectState = new PurchaseOrderItemObjectStates(Session).InProcess;
-        }
-
-        private void AppsCancel()
-        {
-            this.CurrentObjectState = new PurchaseOrderItemObjectStates(Session).Cancelled;
-        }
-
-        private void AppsReject()
-        {
-            this.CurrentObjectState = new PurchaseOrderItemObjectStates(Session).Rejected;
-        }
-
-        private void AppsComplete()
-        {
-            this.CurrentObjectState = new PurchaseOrderItemObjectStates(Session).Completed;
-        }
-
-        private void AppsFinish()
-        {
-            this.CurrentObjectState = new PurchaseOrderItemObjectStates(Session).Finished;
-        }
-
         private void AppsDeriveDeliveryDate(IDerivation derivation)
         {
-            if (this.ExistAssignedDeliveryDate)
+            if (this.AssignedDeliveryDate.HasValue)
             {
-                this.DeliveryDate = this.AssignedDeliveryDate;
+                this.DeliveryDate = this.AssignedDeliveryDate.Value;
             }
-            else if (this.PurchaseOrderWherePurchaseOrderItem.ExistDeliveryDate)
+            else if (this.PurchaseOrderWherePurchaseOrderItem.DeliveryDate.HasValue)
             {
-                this.DeliveryDate = this.PurchaseOrderWherePurchaseOrderItem.DeliveryDate;
+                this.DeliveryDate = this.PurchaseOrderWherePurchaseOrderItem.DeliveryDate.Value;
             }            
         }
 
@@ -313,10 +313,10 @@ namespace Allors.Domain
             this.UnitDiscount = 0;
             this.UnitSurcharge = 0;
 
-            if (this.ExistActualUnitPrice)
+            if (this.ActualUnitPrice.HasValue)
             {
-                this.UnitBasePrice = this.ActualUnitPrice;
-                this.CalculatedUnitPrice = this.ActualUnitPrice;
+                this.UnitBasePrice = this.ActualUnitPrice.Value;
+                this.CalculatedUnitPrice = this.ActualUnitPrice.Value;
             }
             else
             {
@@ -401,7 +401,7 @@ namespace Allors.Domain
                 {
                     if (inventoryItem != null)
                     {
-                        inventoryItem.Derive(derivation);
+                        inventoryItem.Derive().Execute();
                     }
                 }
             }
@@ -411,7 +411,7 @@ namespace Allors.Domain
             {
                 if (inventoryItem != null)
                 {
-                    inventoryItem.Derive(derivation);
+                    inventoryItem.Derive().Execute();
                 }
             }
         }

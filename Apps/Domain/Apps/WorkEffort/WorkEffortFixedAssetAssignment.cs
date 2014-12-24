@@ -20,13 +20,11 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class WorkEffortFixedAssetAssignment
     {
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            
+            var derivation = method.Derivation;
 
             derivation.Log.AssertExists(this, WorkEffortFixedAssetAssignments.Meta.Assignment);
             derivation.Log.AssertExists(this, WorkEffortFixedAssetAssignments.Meta.FixedAsset);

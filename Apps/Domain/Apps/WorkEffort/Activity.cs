@@ -37,9 +37,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            this.AppsWorkEffortDerive(derivation);
+            var derivation =  method.Derivation;
 
             derivation.Log.AssertExists(this, WorkEfforts.Meta.Description);
             

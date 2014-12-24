@@ -20,13 +20,11 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class PositionFulfillment
     {
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            
+            var derivation = method.Derivation;   
 
             derivation.Log.AssertExists(this, PositionFulfillments.Meta.Person);
             derivation.Log.AssertExists(this, PositionFulfillments.Meta.Position);

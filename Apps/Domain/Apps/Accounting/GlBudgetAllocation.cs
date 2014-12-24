@@ -20,13 +20,11 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class GlBudgetAllocation
     {
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            
+            var derivation = method.Derivation;
 
             derivation.Log.AssertExists(this, GlBudgetAllocations.Meta.AllocationPercentage);
             derivation.Log.AssertExists(this, GlBudgetAllocations.Meta.BudgetItem);

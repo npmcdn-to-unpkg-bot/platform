@@ -45,9 +45,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            
+            var derivation = method.Derivation;
 
             derivation.Log.AssertExists(this, SalesRepRelationships.Meta.Customer);
             derivation.Log.AssertExists(this, SalesRepRelationships.Meta.InternalOrganisation);
@@ -62,7 +62,7 @@ namespace Allors.Domain
             if (this.ExistCustomer && this.ExistSalesRepresentative)
             {
                 this.Customer.DeriveCurrentSalesReps(derivation);
-                this.SalesRepresentative.Derive(derivation);
+                this.SalesRepresentative.Derive().Execute();
             }
         }
 

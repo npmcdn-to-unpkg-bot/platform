@@ -45,13 +45,6 @@ namespace Allors.Domain
 
 		void RemoveIsActive();
 
-
-
-		DerivablePrepareDerivation PrepareDerivation();
-
-		DerivableDerive Derive();
-
-		DerivableApplySecurityOnDerive ApplySecurityOnDerive();
 	}
 
 	public class EnumerationMeta

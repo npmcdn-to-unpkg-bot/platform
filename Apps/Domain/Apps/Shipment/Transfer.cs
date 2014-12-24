@@ -58,9 +58,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsDerive(IDerivation derivation)
+        public void AppsDerive(DerivableDerive method)
         {
-            
+            var derivation = method.Derivation;
 
             derivation.Log.AssertExists(this, Shipments.Meta.ShipmentNumber);
             derivation.Log.AssertExists(this, Shipments.Meta.ShipToParty);

@@ -24,12 +24,6 @@ namespace Allors.Domain
 
     public partial interface CommunicationEvent
     {
-        void Close();
-
-        void Reopen();
-
-        void Cancel();
-
         void DeriveDisplayName();
 
         void DeriveSearchDataCharacterBoundaryText();
