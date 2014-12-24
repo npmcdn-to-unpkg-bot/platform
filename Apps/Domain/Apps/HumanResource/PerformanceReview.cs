@@ -38,9 +38,6 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;   
 
-            derivation.Log.AssertExists(this, PerformanceReviews.Meta.FromDate);
-            derivation.Log.AssertExists(this, PerformanceReviews.Meta.Employee);
-
             this.DisplayName = string.Format(
                 "{0} - {1}",
                 this.ExistFromDate ? this.FromDate : DateTime.MinValue,

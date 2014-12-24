@@ -20,9 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-    
-
     public partial class RecurringCharge
     {
         protected override void AppsOnPostBuild(IObjectBuilder builder)
@@ -44,8 +41,6 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            derivation.Log.AssertExists(this, PriceComponents.Meta.SpecifiedFor);
-            derivation.Log.AssertExists(this, PriceComponents.Meta.FromDate);
             derivation.Log.AssertExists(this, PriceComponents.Meta.Price);
 
             derivation.Log.AssertExists(this, PriceComponents.Meta.Description);

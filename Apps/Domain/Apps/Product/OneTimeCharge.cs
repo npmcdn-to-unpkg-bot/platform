@@ -44,8 +44,6 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            derivation.Log.AssertExists(this, PriceComponents.Meta.SpecifiedFor);
-            derivation.Log.AssertExists(this, PriceComponents.Meta.FromDate);
             derivation.Log.AssertExists(this, PriceComponents.Meta.Price);
 
             derivation.Log.AssertExists(this, PriceComponents.Meta.Description);

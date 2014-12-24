@@ -22,11 +22,6 @@ namespace Allors.Domain
 {
     using System.Text;
 
-    using Allors.Domain;
-    
-
-    
-
     public partial class SurchargeComponent
     {
         protected override void AppsOnPostBuild(IObjectBuilder builder)
@@ -48,8 +43,6 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            derivation.Log.AssertExists(this, SurchargeComponents.Meta.SpecifiedFor);
-            derivation.Log.AssertExists(this, SurchargeComponents.Meta.FromDate);
             derivation.Log.AssertAtLeastOne(this, SurchargeComponents.Meta.Price, SurchargeComponents.Meta.Percentage);
             derivation.Log.AssertExistsAtMostOne(this, SurchargeComponents.Meta.Price, SurchargeComponents.Meta.Percentage);
 

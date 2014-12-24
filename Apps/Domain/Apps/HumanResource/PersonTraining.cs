@@ -26,12 +26,6 @@ namespace Allors.Domain
     {
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;   
-
-            derivation.Log.AssertExists(this, PersonTrainings.Meta.FromDate);
-            derivation.Log.AssertExists(this, PersonTrainings.Meta.ThroughDate);
-            derivation.Log.AssertExists(this, PersonTrainings.Meta.Training);
-
             this.DisplayName = string.Format(
                 "{0} through {1} : {2}",
                 this.ExistFromDate ? this.FromDate : DateTime.MinValue,

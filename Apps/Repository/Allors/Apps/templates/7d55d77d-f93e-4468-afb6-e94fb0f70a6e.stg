@@ -2,7 +2,7 @@ group AllorsCSharpMeta;
 
 TemplateId() ::= <<14F49218-A676-43ba-9CBD-B8FFA059D1BF>>
 TemplateName() ::= <<Allors C# Repository>>
-TemplateVersion() ::= <<1.0.2>>
+TemplateVersion() ::= <<1.0.3>>
 TemplateAllors() ::= <<1.0>>
 TemplateConfiguration(domain, settings) ::= <<
 $! 
@@ -32,7 +32,6 @@ namespace Allors.Meta
 {
 	using System;
 	using Allors.Meta;
-
 
 	public static partial class Repository
 	{
@@ -78,6 +77,9 @@ $domain.compositeObjectTypes:{objectType|$objectTypeInheritance(objectType)$}$
 
 			// RelationTypes
 $domain.compositeObjectTypes:{objectType|$objectTypeRelationType(objectType)$}$
+
+			// ConcreteRoleTypes
+$domain.RelationTypes:{relationType|$relationTypeConcreteRoleTypes(relationType)$}$
 		}
 	}
 }
@@ -93,7 +95,12 @@ objectTypeDeclaration(objectType) ::= <<		public static $if(objectType.IsInterfa
 
 >>
 
-relationTypeDeclaration(relationType) ::= <<		public static RelationType $relationType.Name$;
+relationTypeDeclaration(relationType) ::= <<
+		public static RelationType $relationType.Name$;
+$relationType.AssociationType.ObjectType.ConcreteClasses:{class|$relationTypeDeclarationClass()$}$
+>>
+
+relationTypeDeclarationClass() ::= <<		public static ConcreteRoleType $class.name$$relationType.Name$;
 
 >>
 
@@ -121,6 +128,14 @@ $objectType.InheritancesWhereSubtype:{inheritance|$inheritanceInit(inheritance)$
 objectTypeRelationType(objectType) ::= <<
 				// $objectType.Name$
 $objectType.AssociationTypesWhereObjectType:{associationType|$relationTypeInit(associationType.RelationType)$}$
+
+>>
+
+relationTypeConcreteRoleTypes(relationType) ::= <<
+$relationType.AssociationType.ObjectType.ConcreteClasses:{class|$relationTypeConcreteRoleType(class)$}$
+>>
+
+relationTypeConcreteRoleType(objectType) ::= <<		$class.name$$relationType.Name$ = $class.name$.ConcreteRoleTypeByRoleType[$relationType.Name$.RoleType];
 
 >>
 

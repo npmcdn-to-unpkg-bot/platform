@@ -53,10 +53,8 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            derivation.Log.AssertExists(this, BasePrices.Meta.SpecifiedFor);
             derivation.Log.AssertExists(this, BasePrices.Meta.Price);
             derivation.Log.AssertExists(this, BasePrices.Meta.Currency);
-            derivation.Log.AssertExists(this, BasePrices.Meta.FromDate);
             derivation.Log.AssertAtLeastOne(this, BasePrices.Meta.Product, BasePrices.Meta.ProductFeature);
 
             if (this.ExistOrderQuantityBreak)

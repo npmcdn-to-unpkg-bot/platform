@@ -74,7 +74,6 @@ namespace Allors.Meta
 
             // Period
             PeriodFromDate.RoleType.IsRequired = true;
-            PeriodThroughDate.RoleType.IsRequired = true;
 
             // Permission
             PermissionOperandTypePointer.RoleType.IsRequired = true;

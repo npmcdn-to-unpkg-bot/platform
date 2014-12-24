@@ -28,8 +28,6 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;   
 
-            derivation.Log.AssertExists(this, PayHistories.Meta.Employment);
-            derivation.Log.AssertExists(this, PayHistories.Meta.TimeFrequency);
             derivation.Log.AssertAtLeastOne(this, PayHistories.Meta.Amount, PayHistories.Meta.SalaryStep);
             derivation.Log.AssertExistsAtMostOne(this, PayHistories.Meta.Amount, PayHistories.Meta.SalaryStep);
 

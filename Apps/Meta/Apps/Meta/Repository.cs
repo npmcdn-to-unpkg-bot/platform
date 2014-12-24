@@ -62,6 +62,17 @@ namespace Allors.Meta
             new MethodTypeBuilder(Apps, new Guid("C1517567-1708-47E6-8298-9D9B157E45FF")).WithObjectType(OrderItem).WithName("Finish").Build();
             new MethodTypeBuilder(Apps, new Guid("3962ED58-44BD-4A79-8F0C-6A98ED88BD44")).WithObjectType(OrderItem).WithName("Delete").Build();
 
+            // PayHistory
+            PayHistoryEmployment.RoleType.IsRequired = true;
+            PayHistoryTimeFrequency.RoleType.IsRequired = true;
+
+            // PerformanceReview
+            PerformanceReviewEmployee.RoleType.IsRequired = true;
+
+            // PersonTraining
+            PersonTrainingTraining.RoleType.IsRequired = true;
+            PersonTrainingPeriodThroughDate.AssignedIsRequired = true;
+
             // PickList
             new MethodTypeBuilder(Apps, new Guid("CCBD7DB6-EC0F-4D70-9833-BC2A9E3A9292")).WithObjectType(PickList).WithName("Hold").Build();
             new MethodTypeBuilder(Apps, new Guid("B88AF2FA-0940-4C3B-90E7-9937DF6C05AC")).WithObjectType(PickList).WithName("Continue").Build();
@@ -75,6 +86,9 @@ namespace Allors.Meta
 
             // PurchaseOrderItem
             new MethodTypeBuilder(Apps, new Guid("3F65C670-B891-4979-B664-D47D45833AF5")).WithObjectType(PurchaseOrderItem).WithName("Complete").Build();
+
+            // PriceComponent
+            PriceComponentSpecifiedFor.RoleType.IsRequired = true;
 
             // SalesOrderItem
             new MethodTypeBuilder(Apps, new Guid("F04381CD-3B28-4DD5-BBE8-873C5A56AEE2")).WithObjectType(SalesOrderItem).WithName("Continue").Build();
