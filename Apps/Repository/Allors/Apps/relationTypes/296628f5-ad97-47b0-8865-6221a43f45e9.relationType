@@ -6,7 +6,7 @@
   <roleType id="0a2a7b62-da4d-4099-b89e-7bf451ed9009">
     <isMany>true</isMany>
     <objectType idref="4deca253-7135-4ceb-b984-6adaf1515630" />
-    <pluralName>Agreements</pluralName>
-    <singularName>Agreement</singularName>
+    <pluralName>RelationshipAgreements</pluralName>
+    <singularName>RelationshipAgreement</singularName>
   </roleType>
 </relationType>

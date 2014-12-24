@@ -25,6 +25,9 @@ namespace Allors.Meta
     {
         public static void AppsPostInit(MetaPopulation meta)
         {
+            // BasePrice
+            BasePricePrice.AssignedIsRequired = true;
+
             // Budget
             new MethodTypeBuilder(Apps, new Guid("3E913270-98BC-4A29-8C54-AD94B78D62A3")).WithObjectType(Budget).WithName("Close").Build();
             new MethodTypeBuilder(Apps, new Guid("4D8FD306-049E-4909-AFA8-91A615B76314")).WithObjectType(Budget).WithName("Reopen").Build();
@@ -63,15 +66,15 @@ namespace Allors.Meta
             new MethodTypeBuilder(Apps, new Guid("3962ED58-44BD-4A79-8F0C-6A98ED88BD44")).WithObjectType(OrderItem).WithName("Delete").Build();
 
             // PayHistory
-            PayHistoryEmployment.RoleType.IsRequired = true;
-            PayHistoryTimeFrequency.RoleType.IsRequired = true;
+            PayHistoryEmployment.IsRequired = true;
+            PayHistoryTimeFrequency.IsRequired = true;
 
             // PerformanceReview
-            PerformanceReviewEmployee.RoleType.IsRequired = true;
+            PerformanceReviewEmployee.IsRequired = true;
 
             // PersonTraining
-            PersonTrainingTraining.RoleType.IsRequired = true;
-            PersonTrainingPeriodThroughDate.AssignedIsRequired = true;
+            PersonTrainingTraining.IsRequired = true;
+            PersonTrainingThroughDate.AssignedIsRequired = true;
 
             // PickList
             new MethodTypeBuilder(Apps, new Guid("CCBD7DB6-EC0F-4D70-9833-BC2A9E3A9292")).WithObjectType(PickList).WithName("Hold").Build();
@@ -88,7 +91,8 @@ namespace Allors.Meta
             new MethodTypeBuilder(Apps, new Guid("3F65C670-B891-4979-B664-D47D45833AF5")).WithObjectType(PurchaseOrderItem).WithName("Complete").Build();
 
             // PriceComponent
-            PriceComponentSpecifiedFor.RoleType.IsRequired = true;
+            PriceComponentDescription.IsRequired = true;
+            PriceComponentSpecifiedFor.IsRequired = true;
 
             // SalesOrderItem
             new MethodTypeBuilder(Apps, new Guid("F04381CD-3B28-4DD5-BBE8-873C5A56AEE2")).WithObjectType(SalesOrderItem).WithName("Continue").Build();
@@ -117,142 +121,142 @@ namespace Allors.Meta
             }
 
             // AccountingPeriod
-            AccountingPeriodActive.RoleType.IsRequired = true;
+            AccountingPeriodActive.IsRequired = true;
 
             // AccountingTransactionDetail
-            AccountingTransactionDetailDebit.RoleType.IsRequired = true;
+            AccountingTransactionDetailDebit.IsRequired = true;
 
             // DiscountComponent
-            DiscountComponentPercentage.RoleType.IsRequired = true;
+            DiscountComponentPercentage.IsRequired = true;
 
             // InternalOrganisation
-            InternalOrganisationNextSubAccountNumber.RoleType.IsRequired = true;
-            InternalOrganisationFiscalYearStartMonth.RoleType.IsRequired = true;
-            InternalOrganisationFiscalYearStartDay.RoleType.IsRequired = true;
+            InternalOrganisationNextSubAccountNumber.IsRequired = true;
+            InternalOrganisationFiscalYearStartMonth.IsRequired = true;
+            InternalOrganisationFiscalYearStartDay.IsRequired = true;
 
             // InternalOrganisationRevenue
-            InternalOrganisationRevenueYear.RoleType.IsRequired = true;
-            InternalOrganisationRevenueMonth.RoleType.IsRequired = true;
+            InternalOrganisationRevenueYear.IsRequired = true;
+            InternalOrganisationRevenueMonth.IsRequired = true;
 
             // Invoice
-            InvoiceInvoiceDate.RoleType.IsRequired = true;
+            InvoiceInvoiceDate.IsRequired = true;
 
             // InvoiceItem
-            InvoiceItemQuantity.RoleType.IsRequired = true;
+            InvoiceItemQuantity.IsRequired = true;
 
             // NonSerializedInventoryItem
-            NonSerializedInventoryItemAvailableToPromise.RoleType.IsRequired = true;
+            NonSerializedInventoryItemAvailableToPromise.IsRequired = true;
 
             // Order
-            OrderOrderDate.RoleType.IsRequired = true;
+            OrderOrderDate.IsRequired = true;
 
             // OrderAdjustment
-            OrderAdjustmentPercentage.RoleType.IsRequired = true;
-            OrderAdjustmentAmount.RoleType.IsRequired = true;
+            OrderAdjustmentPercentage.IsRequired = true;
+            OrderAdjustmentAmount.IsRequired = true;
 
             // OrderItem
-            OrderItemPreviousQuantity.RoleType.IsRequired = true;
-            OrderItemQuantityOrdered.RoleType.IsRequired = true;
-            OrderItemDerivedVatRate.RoleType.IsRequired = true;
-            OrderItemDeliveryDate.RoleType.IsRequired = true;
+            OrderItemPreviousQuantity.IsRequired = true;
+            OrderItemQuantityOrdered.IsRequired = true;
+            OrderItemDerivedVatRate.IsRequired = true;
+            OrderItemDeliveryDate.IsRequired = true;
 
             // OrderShipment
-            OrderShipmentQuantity.RoleType.IsRequired = true;
-            OrderShipmentPicked.RoleType.IsRequired = true;
+            OrderShipmentQuantity.IsRequired = true;
+            OrderShipmentPicked.IsRequired = true;
 
             // PackagingContent
-            PackagingContentQuantity.RoleType.IsRequired = true;
+            PackagingContentQuantity.IsRequired = true;
 
             // PackageRevenue
-            PackageRevenueYear.RoleType.IsRequired = true;
-            PackageRevenueMonth.RoleType.IsRequired = true;
+            PackageRevenueYear.IsRequired = true;
+            PackageRevenueMonth.IsRequired = true;
 
             // PartyContactMechanism
-            PartyContactMechanismUseAsDefault.RoleType.IsRequired = true;
+            PartyContactMechanismUseAsDefault.IsRequired = true;
 
             // PartyRevenue
-            PartyRevenueYear.RoleType.IsRequired = true;
-            PartyRevenueMonth.RoleType.IsRequired = true;
+            PartyRevenueYear.IsRequired = true;
+            PartyRevenueMonth.IsRequired = true;
 
             // PartyProductCategoryRevenue
-            PartyProductCategoryRevenueYear.RoleType.IsRequired = true;
-            PartyProductCategoryRevenueMonth.RoleType.IsRequired = true;
+            PartyProductCategoryRevenueYear.IsRequired = true;
+            PartyProductCategoryRevenueMonth.IsRequired = true;
 
             // PartyProductRevenue
-            PartyProductRevenueYear.RoleType.IsRequired = true;
-            PartyProductRevenueMonth.RoleType.IsRequired = true;
+            PartyProductRevenueYear.IsRequired = true;
+            PartyProductRevenueMonth.IsRequired = true;
 
             // PartyPackageRevenue
-            PartyPackageRevenueYear.RoleType.IsRequired = true;
-            PartyPackageRevenueMonth.RoleType.IsRequired = true;
+            PartyPackageRevenueYear.IsRequired = true;
+            PartyPackageRevenueMonth.IsRequired = true;
 
             // PriceComponent
-            PriceComponentPrice.RoleType.IsRequired = true;
+            PriceComponentPrice.IsRequired = true;
 
             // ProductPurchasePrice
-            ProductPurchasePricePrice.RoleType.IsRequired = true;
+            ProductPurchasePricePrice.IsRequired = true;
 
             // PaymentApplication
-            PaymentApplicationAmountApplied.RoleType.IsRequired = true;
+            PaymentApplicationAmountApplied.IsRequired = true;
 
             // Period
-            PeriodFromDate.RoleType.IsRequired = true;
-            PeriodThroughDate.RoleType.IsRequired = true;
+            PeriodFromDate.IsRequired = true;
+            PeriodThroughDate.IsRequired = true;
 
             // ProductCategoryRevenue
-            ProductCategoryRevenueYear.RoleType.IsRequired = true;
-            ProductCategoryRevenueMonth.RoleType.IsRequired = true;
+            ProductCategoryRevenueYear.IsRequired = true;
+            ProductCategoryRevenueMonth.IsRequired = true;
 
             // ProductRevenue
-            ProductRevenueYear.RoleType.IsRequired = true;
-            ProductRevenueMonth.RoleType.IsRequired = true;
+            ProductRevenueYear.IsRequired = true;
+            ProductRevenueMonth.IsRequired = true;
 
             // SalesChannelRevenue
-            SalesChannelRevenueYear.RoleType.IsRequired = true;
-            SalesChannelRevenueMonth.RoleType.IsRequired = true;
+            SalesChannelRevenueYear.IsRequired = true;
+            SalesChannelRevenueMonth.IsRequired = true;
 
             // SalesRepPartyProductCategoryRevenue
-            SalesRepPartyProductCategoryRevenueYear.RoleType.IsRequired = true;
-            SalesRepPartyProductCategoryRevenueMonth.RoleType.IsRequired = true;
+            SalesRepPartyProductCategoryRevenueYear.IsRequired = true;
+            SalesRepPartyProductCategoryRevenueMonth.IsRequired = true;
 
             // SalesRepPartyRevenue
-            SalesRepPartyRevenueYear.RoleType.IsRequired = true;
-            SalesRepPartyRevenueMonth.RoleType.IsRequired = true;
+            SalesRepPartyRevenueYear.IsRequired = true;
+            SalesRepPartyRevenueMonth.IsRequired = true;
 
             // SalesRepRevenue
-            SalesRepRevenueYear.RoleType.IsRequired = true;
-            SalesRepRevenueMonth.RoleType.IsRequired = true;
+            SalesRepRevenueYear.IsRequired = true;
+            SalesRepRevenueMonth.IsRequired = true;
 
             // SalesRepProductCategoryRevenue
-            SalesRepProductCategoryRevenueYear.RoleType.IsRequired = true;
-            SalesRepProductCategoryRevenueMonth.RoleType.IsRequired = true;
+            SalesRepProductCategoryRevenueYear.IsRequired = true;
+            SalesRepProductCategoryRevenueMonth.IsRequired = true;
 
             // ShipmentReceipt
-            ShipmentReceiptReceivedDateTime.RoleType.IsRequired = true;
+            ShipmentReceiptReceivedDateTime.IsRequired = true;
 
             // SurchargeComponent
-            SurchargeComponentPercentage.RoleType.IsRequired = true;
+            SurchargeComponentPercentage.IsRequired = true;
 
             // SalesOrderItem
-            SalesOrderItemQuantityReserved.RoleType.IsRequired = true;
-            SalesOrderItemQuantityRequestsShipping.RoleType.IsRequired = true;
-            SalesOrderItemQuantityShortFalled.RoleType.IsRequired = true;
-            SalesOrderItemQuantityRequestsShipping.RoleType.IsRequired = true;
-            SalesOrderItemQuantityReserved.RoleType.IsRequired = true;
+            SalesOrderItemQuantityReserved.IsRequired = true;
+            SalesOrderItemQuantityRequestsShipping.IsRequired = true;
+            SalesOrderItemQuantityShortFalled.IsRequired = true;
+            SalesOrderItemQuantityRequestsShipping.IsRequired = true;
+            SalesOrderItemQuantityReserved.IsRequired = true;
 
             // Store
-            StorePaymentNetDays.RoleType.IsRequired = true;
-            StorePaymentGracePeriod.RoleType.IsRequired = true;
+            StorePaymentNetDays.IsRequired = true;
+            StorePaymentGracePeriod.IsRequired = true;
 
             // StoreRevenue
-            StoreRevenueYear.RoleType.IsRequired = true;
-            StoreRevenueMonth.RoleType.IsRequired = true;
+            StoreRevenueYear.IsRequired = true;
+            StoreRevenueMonth.IsRequired = true;
 
             // UnitOfMeasureConversion
-            UnitOfMeasureConversionConversionFactor.RoleType.IsRequired = true;
+            UnitOfMeasureConversionConversionFactor.IsRequired = true;
 
             // VatRate
-            VatRateRate.RoleType.IsRequired = true;
+            VatRateRate.IsRequired = true;
         }
     }
 }

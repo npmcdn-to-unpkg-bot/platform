@@ -43,8 +43,6 @@ namespace Allors.Domain
 
             derivation.Log.AssertExists(this, PriceComponents.Meta.Price);
 
-            derivation.Log.AssertExists(this, PriceComponents.Meta.Description);
-
             this.DisplayName = this.Description;
 
             this.SearchData.CharacterBoundaryText = this.DisplayName;

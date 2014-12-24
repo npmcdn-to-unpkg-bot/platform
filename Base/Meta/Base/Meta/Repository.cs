@@ -27,20 +27,20 @@ namespace Allors.Meta
         public static void BasePostInit(MetaPopulation meta)
         {
             // Counter
-            AccessControlRole.RoleType.IsRequired = true;
-            AccessControlObject.RoleType.IsRequired = true;
+            AccessControlRole.IsRequired = true;
+            AccessControlObject.IsRequired = true;
 
             // Counter
-            CounterValue.RoleType.IsRequired = true;
+            CounterValue.IsRequired = true;
 
             // Country
-            CountryIsoCode.RoleType.IsRequired = true;
-            CountryName.RoleType.IsRequired = true;
+            CountryIsoCode.IsRequired = true;
+            CountryName.IsRequired = true;
 
             // Currency
-            CurrencyIsoCode.RoleType.IsRequired = true;
-            CurrencyName.RoleType.IsRequired = true;
-            CurrencySymbol.RoleType.IsRequired = true;
+            CurrencyIsoCode.IsRequired = true;
+            CurrencyName.IsRequired = true;
+            CurrencySymbol.IsRequired = true;
 
             // Derivation
             new MethodTypeBuilder(Base, new Guid("122D3D78-AB97-4A69-A725-F465C71757DA")).WithObjectType(Derivable).WithName("PrepareDerivation").Build();
@@ -48,49 +48,49 @@ namespace Allors.Meta
             new MethodTypeBuilder(Base, new Guid("349CBCDE-B4E9-4965-B3FF-7C41B021825D")).WithObjectType(Derivable).WithName("ApplySecurityOnDerive").Build();
             
             // Enumeration
-            EnumerationName.RoleType.IsRequired = true;
-            EnumerationIsActive.RoleType.IsRequired = true;
+            EnumerationName.IsRequired = true;
+            EnumerationIsActive.IsRequired = true;
             
             // Language
-            LanguageIsoCode.RoleType.IsRequired = true;
-            LanguageName.RoleType.IsRequired = true;
+            LanguageIsoCode.IsRequired = true;
+            LanguageName.IsRequired = true;
 
             // Locale
-            LocaleLanguage.RoleType.IsRequired = true;
-            LocaleCountry.RoleType.IsRequired = true;
+            LocaleLanguage.IsRequired = true;
+            LocaleCountry.IsRequired = true;
             
             // LocalisedText
-            LocalisedTextText.RoleType.IsRequired = true;
+            LocalisedTextText.IsRequired = true;
 
             // Media
-            MediaMediaType.RoleType.IsRequired = true;
-            MediaMediaType.RoleType.IsRequired = true;
+            MediaMediaType.IsRequired = true;
+            MediaMediaType.IsRequired = true;
 
             // MediaContent
-            MediaContentValue.RoleType.IsRequired = true;
+            MediaContentValue.IsRequired = true;
 
             // MediaType
-            MediaTypeName.RoleType.IsRequired = true;
+            MediaTypeName.IsRequired = true;
 
             // Period
-            PeriodFromDate.RoleType.IsRequired = true;
+            PeriodFromDate.IsRequired = true;
 
             // Permission
-            PermissionOperandTypePointer.RoleType.IsRequired = true;
-            PermissionConcreteClassPointer.RoleType.IsRequired = true;
-            PermissionOperationEnum.RoleType.IsRequired = true;
+            PermissionOperandTypePointer.IsRequired = true;
+            PermissionConcreteClassPointer.IsRequired = true;
+            PermissionOperationEnum.IsRequired = true;
 
             // Role
-            RoleName.RoleType.IsRequired = true;
+            RoleName.IsRequired = true;
 
             // UniquelyIdentifiable
-            UniquelyIdentifiableUniqueId.RoleType.IsRequired = true;
+            UniquelyIdentifiableUniqueId.IsRequired = true;
 
             // UserGroup
-            UserGroupName.RoleType.IsRequired = true;
+            UserGroupName.IsRequired = true;
 
             // StringTemplate
-            StringTemplateName.RoleType.IsRequired = true;
+            StringTemplateName.IsRequired = true;
         }
     }
 }

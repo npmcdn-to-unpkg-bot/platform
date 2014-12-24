@@ -22,11 +22,6 @@ namespace Allors.Domain
 {
     using System.Text;
 
-    using Allors.Domain;
-    
-
-    
-
     public partial class DiscountComponent
     {
         protected override void AppsOnPostBuild(IObjectBuilder builder)
