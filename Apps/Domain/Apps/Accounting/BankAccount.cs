@@ -58,7 +58,6 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            derivation.Log.AssertExists(this, BankAccounts.Meta.Iban);
             derivation.Log.AssertIsUnique(this, BankAccounts.Meta.Iban);
 
             if (this.ExistOwnBankAccountsWhereBankAccount)

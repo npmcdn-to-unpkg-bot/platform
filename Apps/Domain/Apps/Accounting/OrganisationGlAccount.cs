@@ -95,11 +95,6 @@ namespace Allors.Domain
 
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, OrganisationGlAccounts.Meta.GeneralLedgerAccount);
-            derivation.Log.AssertExists(this, OrganisationGlAccounts.Meta.InternalOrganisation);
-
             this.DisplayName = string.Format(
                 "account {0} {1} for {2}",
                 this.ExistGeneralLedgerAccount ? this.GeneralLedgerAccount.AccountNumber : null,

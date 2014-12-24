@@ -20,9 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-    
-
     public partial class OwnBankAccount
     {
         protected override void AppsOnPostBuild(IObjectBuilder builder)
@@ -65,8 +62,6 @@ namespace Allors.Domain
                 derivation.Log.AssertAtLeastOne(this, Cashes.Meta.GeneralLedgerAccount, Cashes.Meta.Journal);
             }
             
-            derivation.Log.AssertExists(this, OwnBankAccounts.Meta.Description);
-            derivation.Log.AssertExists(this, OwnBankAccounts.Meta.BankAccount);
             derivation.Log.AssertExistsAtMostOne(this, Cashes.Meta.GeneralLedgerAccount, Cashes.Meta.Journal);
 
             this.DisplayName = this.ExistBankAccount ? this.BankAccount.ComposeDisplayName() : null;

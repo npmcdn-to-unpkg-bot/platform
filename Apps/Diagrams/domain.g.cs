@@ -42,7 +42,7 @@ namespace Allors.Domain
 	{
 					PartyRelationshipStatus PartyRelationshipStatus {set;}
 
-					Agreement Agreements {set;}
+					Agreement RelationshipAgreements {set;}
 
 					PartyRelationshipPriority PartyRelationshipPriority {set;}
 
@@ -434,13 +434,13 @@ namespace Allors.Domain
 
 					global::System.String Description {set;}
 
-					global::System.DateTime? TransactionDate {set;}
+					global::System.DateTime TransactionDate {set;}
 
 					global::System.Decimal DerivedTotalAmount {set;}
 
 					AccountingTransactionNumber AccountingTransactionNumber {set;}
 
-					global::System.DateTime? EntryDate {set;}
+					global::System.DateTime EntryDate {set;}
 
 	}
 	public interface Order  : UserInterfaceable, Printable, UniquelyIdentifiable, Transitional, Searchable, Commentable, Localised, SearchResult 
@@ -1523,33 +1523,33 @@ namespace Allors.Domain
 
 					GeneralLedgerAccountType GeneralLedgerAccountType {set;}
 
-					global::System.Boolean? CashAccount {set;}
+					global::System.Boolean CashAccount {set;}
 
-					global::System.Boolean? CostCenterAccount {set;}
+					global::System.Boolean CostCenterAccount {set;}
 
 					DebitCreditConstant Side {set;}
 
-					global::System.Boolean? BalanceSheetAccount {set;}
+					global::System.Boolean BalanceSheetAccount {set;}
 
-					global::System.Boolean? ReconciliationAccount {set;}
+					global::System.Boolean ReconciliationAccount {set;}
 
 					global::System.String Name {set;}
 
-					global::System.Boolean? CostCenterRequired {set;}
+					global::System.Boolean CostCenterRequired {set;}
 
-					global::System.Boolean? CostUnitRequired {set;}
+					global::System.Boolean CostUnitRequired {set;}
 
 					GeneralLedgerAccountGroup GeneralLedgerAccountGroup {set;}
 
 					CostCenter CostCentersAllowed {set;}
 
-					global::System.Boolean? CostUnitAccount {set;}
+					global::System.Boolean CostUnitAccount {set;}
 
 					global::System.String AccountNumber {set;}
 
 					Product CostUnitsAllowed {set;}
 
-					global::System.Boolean? Protected {set;}
+					global::System.Boolean Protected {set;}
 
 	}
 	public interface ShippingAndHandlingComponent  : SearchResult, UserInterfaceable, Period, Searchable 
@@ -2325,7 +2325,7 @@ namespace Allors.Domain
 	}
 	public interface BudgetStatus  : UserInterfaceable 
 	{
-					global::System.DateTime? StartDateTime {set;}
+					global::System.DateTime StartDateTime {set;}
 
 					BudgetObjectState BudgetObjectState {set;}
 
@@ -2711,7 +2711,7 @@ namespace Allors.Domain
 
 					global::System.Boolean Active {set;}
 
-					global::System.Int32? PeriodNumber {set;}
+					global::System.Int32 PeriodNumber {set;}
 
 					TimeFrequency TimeFrequency {set;}
 
@@ -3509,9 +3509,9 @@ namespace Allors.Domain
 
 					CreditCardCompany CreditCardCompany {set;}
 
-					global::System.Int32? ExpirationYear {set;}
+					global::System.Int32 ExpirationYear {set;}
 
-					global::System.Int32? ExpirationMonth {set;}
+					global::System.Int32 ExpirationMonth {set;}
 
 					global::System.String CardNumber {set;}
 
@@ -3597,7 +3597,7 @@ namespace Allors.Domain
 	}
 	public interface BudgetRevision  : Searchable, UserInterfaceable 
 	{
-					global::System.DateTime? RevisionDate {set;}
+					global::System.DateTime RevisionDate {set;}
 
 	}
 	public interface WorkEffortFixedAssetStandard  : UserInterfaceable 
@@ -3989,7 +3989,7 @@ namespace Allors.Domain
 
 					BudgetItem Children {set;}
 
-					global::System.Decimal? Amount {set;}
+					global::System.Decimal Amount {set;}
 
 	}
 	public interface InternalRequirement  : Requirement 
@@ -4336,7 +4336,7 @@ namespace Allors.Domain
 	}
 	public interface BudgetReview  : Searchable, Commentable, UserInterfaceable 
 	{
-					global::System.DateTime? ReviewDate {set;}
+					global::System.DateTime ReviewDate {set;}
 
 					global::System.String Description {set;}
 
@@ -4661,7 +4661,7 @@ namespace Allors.Domain
 
 					OrganisationGlAccountBalance OrganisationGlAccountBalance {set;}
 
-					global::System.Decimal? Amount {set;}
+					global::System.Decimal Amount {set;}
 
 					global::System.Boolean Debit {set;}
 

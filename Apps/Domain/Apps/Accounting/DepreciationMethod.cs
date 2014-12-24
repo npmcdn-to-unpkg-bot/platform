@@ -20,16 +20,10 @@
 
 namespace Allors.Domain
 {
-   using Allors.Domain;
-
     public partial class DepreciationMethod
     {
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, DepreciationMethods.Meta.Formula);
-
             this.DisplayName = this.Formula;
         }
     }

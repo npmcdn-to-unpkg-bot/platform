@@ -36,15 +36,6 @@ namespace Allors.Domain
 
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, SalesAccountingTransactions.Meta.EntryDate);
-            derivation.Log.AssertExists(this, SalesAccountingTransactions.Meta.TransactionDate);
-            derivation.Log.AssertExists(this, SalesAccountingTransactions.Meta.FromParty);
-            derivation.Log.AssertExists(this, SalesAccountingTransactions.Meta.ToParty);
-            derivation.Log.AssertExists(this, SalesAccountingTransactions.Meta.Description);
-            derivation.Log.AssertExists(this, SalesAccountingTransactions.Meta.Invoice);
-
             this.DisplayName = string.Format(
                 "Transaction date {0}, {1} total amount {2}, invoice {3} from party {4} to party {5}",
                 this.ExistTransactionDate ? this.TransactionDate : DateTime.MinValue,

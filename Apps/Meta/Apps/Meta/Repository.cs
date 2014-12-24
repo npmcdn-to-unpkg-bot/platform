@@ -112,23 +112,117 @@ namespace Allors.Meta
             new MethodTypeBuilder(Apps, new Guid("0A66E9CA-89A8-4D5A-B63F-E061CDBC0A2E")).WithObjectType(WorkEffort).WithName("Cancel").Build();
             new MethodTypeBuilder(Apps, new Guid("A1189C0F-8E2E-41B7-B61E-36525B3895B5")).WithObjectType(WorkEffort).WithName("Reopen").Build();
 
-            foreach (var roleType in meta.RoleTypes)
-            {
-                if (roleType.RelationType.IsDerived)
-                {
-                    roleType.IsRequired = true;
-                }
-            }
-
             // AccountingPeriod
             AccountingPeriodActive.IsRequired = true;
+            AccountingPeriodPeriodNumber.IsRequired = true;
+            AccountingPeriodTimeFrequency.IsRequired = true;
+
+            // AccountingTransaction
+            AccountingTransactionEntryDate.IsRequired = true;
+            AccountingTransactionTransactionDate.IsRequired = true;
+            AccountingTransactionDescription.IsRequired = true;
 
             // AccountingTransactionDetail
+            AccountingTransactionDetailAmount.IsRequired = true;
             AccountingTransactionDetailDebit.IsRequired = true;
+            AccountingTransactionDetailOrganisationGlAccountBalance.IsRequired = true;
+
+            // Bank
+            BankName.IsRequired = true;
+            BankCountry.IsRequired = true;
+            BankBic.IsRequired = true;
+
+            // BankAccount
+            BankAccountIban.IsRequired = true;
+
+            // Budget
+            BudgetDescription.IsRequired = true;
+
+            // BudgetItem
+            BudgetItemAmount.IsRequired = true;
+            BudgetItemPurpose.IsRequired = true;
+
+            // BudgetReview
+            BudgetReviewReviewDate.IsRequired = true;
+            BudgetReviewDescription.IsRequired = true;
+
+            // BudgetRevision
+            BudgetRevisionRevisionDate.IsRequired = true;
+
+            // BudgetRevisionImpact
+            BudgetRevisionImpactReason.IsRequired = true;
+
+            // BudgetStatus
+            BudgetStatusStartDateTime.IsRequired = true;
+            BudgetStatusBudgetObjectState.IsRequired = true;
+
+            // ChartOfAccounts
+            ChartOfAccountsName.IsRequired = true;
+            
+            // CostCenter
+            CostCenterName.IsRequired = true;
+
+            // CostCenterCategory
+            CostCenterCategoryDescription.IsRequired = true;
+
+            // CreditCard
+            CreditCardCardNumber.IsRequired = true;
+            CreditCardCreditCardCompany.IsRequired = true;
+            CreditCardExpirationMonth.IsRequired = true;
+            CreditCardExpirationYear.IsRequired = true;
+            CreditCardNameOnCard.IsRequired = true;
+
+            // CreditCardCompany
+            CreditCardCompanyName.IsRequired = true;
+
+            // Depreciation
+            DepreciationFixedAsset.IsRequired = true;
+
+            // DepreciationMethod
+            DepreciationMethodFormula.IsRequired = true;
+
+            // DisbursementAccountingTransaction
+            DisbursementAccountingTransactionDisbursement.IsRequired = true;
 
             // DiscountComponent
             DiscountComponentPercentage.IsRequired = true;
 
+            // ExternalAccountingTransaction
+            ExternalAccountingTransactionFromParty.IsRequired = true;
+            ExternalAccountingTransactionToParty.IsRequired = true;
+
+            // FixedAsset
+            FixedAssetName.IsRequired = true;
+
+            // GeneralLedgerAccount
+            GeneralLedgerAccountCashAccount.IsRequired = true;
+            GeneralLedgerAccountCostCenterAccount.IsRequired = true;
+            GeneralLedgerAccountCostCenterRequired.IsRequired = true;
+            GeneralLedgerAccountCostUnitAccount.IsRequired = true;
+            GeneralLedgerAccountCostUnitRequired.IsRequired = true;
+            GeneralLedgerAccountReconciliationAccount.IsRequired = true;
+            GeneralLedgerAccountProtected.IsRequired = true;
+            GeneralLedgerAccountAccountNumber.IsRequired = true;
+            GeneralLedgerAccountName.IsRequired = true;
+            GeneralLedgerAccountBalanceSheetAccount.IsRequired = true;
+            GeneralLedgerAccountSide.IsRequired = true;
+            GeneralLedgerAccountGeneralLedgerAccountType.IsRequired = true;
+            GeneralLedgerAccountGeneralLedgerAccountGroup.IsRequired = true;
+
+            // GeneralLedgerAccountGroup
+            GeneralLedgerAccountGroupDescription.IsRequired = true;
+
+            // GeneralLedgerAccountType
+            GeneralLedgerAccountTypeDescription.IsRequired = true;
+
+            // GlBudgetAllocation
+            GlBudgetAllocationAllocationPercentage.IsRequired = true;
+            GlBudgetAllocationBudgetItem.IsRequired = true;
+            GlBudgetAllocationGeneralLedgerAccount.IsRequired = true;
+
+            // InternalAccountingTransaction
+            InternalAccountingTransactionInternalOrganisation.IsRequired = true;
+            
             // InternalOrganisation
             InternalOrganisationNextSubAccountNumber.IsRequired = true;
             InternalOrganisationFiscalYearStartMonth.IsRequired = true;
@@ -143,6 +237,12 @@ namespace Allors.Meta
 
             // InvoiceItem
             InvoiceItemQuantity.IsRequired = true;
+
+            // Journal
+            JournalDescription.IsRequired = true;
+            JournalInternalOrganisation.IsRequired = true;
+            JournalJournalType.IsRequired = true;
+            JournalContraAccount.IsRequired = true;
 
             // NonSerializedInventoryItem
             NonSerializedInventoryItemAvailableToPromise.IsRequired = true;
@@ -163,6 +263,20 @@ namespace Allors.Meta
             // OrderShipment
             OrderShipmentQuantity.IsRequired = true;
             OrderShipmentPicked.IsRequired = true;
+
+            // OrganisationGlAccount
+            OrganisationGlAccountGeneralLedgerAccount.IsRequired = true;
+            OrganisationGlAccountInternalOrganisation.IsRequired = true;
+
+            // OrganisationGlAccountBalance
+            OrganisationGlAccountBalanceAmount.IsRequired = true;
+            OrganisationGlAccountBalanceOrganisationGlAccount.IsRequired = true;
+
+            // OwnBankAccount
+            OwnBankAccountBankAccount.IsRequired = true;
+
+            // OwnCreditCard
+            OwnBankAccountBankAccount.IsRequired = true;
 
             // PackagingContent
             PackagingContentQuantity.IsRequired = true;
@@ -190,6 +304,14 @@ namespace Allors.Meta
             PartyPackageRevenueYear.IsRequired = true;
             PartyPackageRevenueMonth.IsRequired = true;
 
+            // PaymentBudgetAllocation
+            PaymentBudgetAllocationAmount.IsRequired = true;
+            PaymentBudgetAllocationBudgetItem.IsRequired = true;
+            PaymentBudgetAllocationPayment.IsRequired = true;
+
+            // PaymentMethod
+            PaymentMethodDescription.IsRequired = true;
+
             // PriceComponent
             PriceComponentPrice.IsRequired = true;
 
@@ -210,6 +332,17 @@ namespace Allors.Meta
             // ProductRevenue
             ProductRevenueYear.IsRequired = true;
             ProductRevenueMonth.IsRequired = true;
+
+            // ReceiptAccountingTransaction
+            ReceiptAccountingTransactionReceipt.IsRequired = true;
+
+            // RequirementBudgetAllocation
+            RequirementBudgetAllocationAmount.IsRequired = true;
+            RequirementBudgetAllocationBudgetItem.IsRequired = true;
+            RequirementBudgetAllocationRequirement.IsRequired = true;
+
+            // SalesAccountingTransaction
+            SalesAccountingTransactionInvoice.IsRequired = true;
 
             // SalesChannelRevenue
             SalesChannelRevenueYear.IsRequired = true;
@@ -257,6 +390,15 @@ namespace Allors.Meta
 
             // VatRate
             VatRateRate.IsRequired = true;
+
+            // HACK: 
+            foreach (var roleType in meta.RoleTypes)
+            {
+                if (roleType.RelationType.IsDerived)
+                {
+                    roleType.IsRequired = true;
+                }
+            }
         }
     }
 }

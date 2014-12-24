@@ -34,12 +34,6 @@ namespace Allors.Domain
 
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, RequirementBudgetAllocations.Meta.Amount);
-            derivation.Log.AssertExists(this, RequirementBudgetAllocations.Meta.BudgetItem);
-            derivation.Log.AssertExists(this, RequirementBudgetAllocations.Meta.Requirement);
-
             this.DisplayName = string.Format(
                 "{0} from budget item {1} - {2} allocated to {3}",
                 this.ExistAmount ? this.Amount : 0,

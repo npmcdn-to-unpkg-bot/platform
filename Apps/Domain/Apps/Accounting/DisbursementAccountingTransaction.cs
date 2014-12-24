@@ -22,9 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-    
-
     public partial class DisbursementAccountingTransaction
     {
         protected override void AppsOnPostBuild(IObjectBuilder builder)
@@ -39,15 +36,6 @@ namespace Allors.Domain
 
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, DisbursementAccountingTransactions.Meta.EntryDate);
-            derivation.Log.AssertExists(this, DisbursementAccountingTransactions.Meta.TransactionDate);
-            derivation.Log.AssertExists(this, DisbursementAccountingTransactions.Meta.FromParty);
-            derivation.Log.AssertExists(this, DisbursementAccountingTransactions.Meta.ToParty);
-            derivation.Log.AssertExists(this, DisbursementAccountingTransactions.Meta.Description);
-            derivation.Log.AssertExists(this, DisbursementAccountingTransactions.Meta.Disbursement);
-
             this.DisplayName = string.Format(
                 "Transaction date {0}, {1}, total amount {2}, disbursement {3} from party {4} to party {5}",
                 this.ExistTransactionDate ? this.TransactionDate : DateTime.MinValue,

@@ -40,10 +40,6 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            derivation.Log.AssertExists(this, Banks.Meta.Name);
-            derivation.Log.AssertExists(this, Banks.Meta.Country);
-            derivation.Log.AssertExists(this, Banks.Meta.Bic);
-
             if (this.ExistBic)
             {
                 if (!Regex.IsMatch(this.Bic, "^([a-zA-Z]){4}([a-zA-Z]){2}([0-9a-zA-Z]){2}([0-9a-zA-Z]{3})?$"))

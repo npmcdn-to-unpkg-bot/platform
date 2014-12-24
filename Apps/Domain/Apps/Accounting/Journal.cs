@@ -55,11 +55,6 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            derivation.Log.AssertExists(this, Journals.Meta.Description);
-            derivation.Log.AssertExists(this, Journals.Meta.InternalOrganisation);
-            derivation.Log.AssertExists(this, Journals.Meta.JournalType);
-            derivation.Log.AssertExists(this, Journals.Meta.ContraAccount);
-
             this.DeriveContraAccount(derivation);
             this.DerivePreviousJournalType(derivation);
 

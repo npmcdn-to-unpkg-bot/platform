@@ -36,11 +36,6 @@ namespace Allors.Domain
 
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, BudgetStatuses.Meta.StartDateTime);
-            derivation.Log.AssertExists(this, BudgetStatuses.Meta.BudgetObjectState);
-
             this.DisplayName = string.Format(
                 "{0} starting {1}",
                 this.ExistBudgetObjectState ? this.BudgetObjectState.Name : null,

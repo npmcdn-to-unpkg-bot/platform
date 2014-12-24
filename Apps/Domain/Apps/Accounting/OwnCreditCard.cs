@@ -62,8 +62,6 @@ namespace Allors.Domain
                 }
             }
 
-            derivation.Log.AssertExists(this, OwnCreditCards.Meta.Description);
-            derivation.Log.AssertExists(this, OwnCreditCards.Meta.CreditCard);
             derivation.Log.AssertExistsAtMostOne(this, Cashes.Meta.GeneralLedgerAccount, Cashes.Meta.Journal);
 
             this.DisplayName = this.ExistCreditCard? this.CreditCard.ComposeDisplayName() : null;

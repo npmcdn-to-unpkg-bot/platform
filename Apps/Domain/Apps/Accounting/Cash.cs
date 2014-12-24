@@ -48,7 +48,6 @@ namespace Allors.Domain
                 derivation.Log.AssertAtLeastOne(this, Cashes.Meta.GeneralLedgerAccount, Cashes.Meta.Journal);
             }
 
-            derivation.Log.AssertExists(this, Cashes.Meta.Description);
             derivation.Log.AssertExistsAtMostOne(this, Cashes.Meta.GeneralLedgerAccount, Cashes.Meta.Journal);
 
             this.DisplayName = this.ExistDescription? this.Description : null;

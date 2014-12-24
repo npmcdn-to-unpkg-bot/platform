@@ -24,11 +24,6 @@ namespace Allors.Domain
     {
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, BudgetItems.Meta.Amount);
-            derivation.Log.AssertExists(this, BudgetItems.Meta.Purpose);
-
             this.DisplayName = string.Format(
                 "{0} - {1}", 
                 this.ExistPurpose ? this.Purpose : null, 

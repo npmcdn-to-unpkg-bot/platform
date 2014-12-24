@@ -24,12 +24,6 @@ namespace Allors.Domain
     {
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, GlBudgetAllocations.Meta.AllocationPercentage);
-            derivation.Log.AssertExists(this, GlBudgetAllocations.Meta.BudgetItem);
-            derivation.Log.AssertExists(this, GlBudgetAllocations.Meta.GeneralLedgerAccount);
-
             this.DisplayName = string.Format(
                 "{0}% of account {1} {2} allocated to {3} - {4}",
                 this.ExistAllocationPercentage ? this.AllocationPercentage : 0,

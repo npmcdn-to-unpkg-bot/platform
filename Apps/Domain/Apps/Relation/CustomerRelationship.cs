@@ -32,7 +32,7 @@ namespace Allors.Domain
             get
             {
                 int? customerPaymentNetDays = null;
-                foreach (Agreement agreement in this.Agreements)
+                foreach (Agreement agreement in this.RelationshipAgreements)
                 {
                     foreach (AgreementTerm term in agreement.AgreementTerms)
                     {

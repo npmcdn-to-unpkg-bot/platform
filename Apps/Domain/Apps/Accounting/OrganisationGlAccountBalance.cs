@@ -34,11 +34,6 @@ namespace Allors.Domain
 
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, OrganisationGlAccountBalances.Meta.Amount);
-            derivation.Log.AssertExists(this, OrganisationGlAccountBalances.Meta.OrganisationGlAccount);
-
             this.DisplayName = string.Format(
                 "period {0} balance amount {1} account {2} {3} for {4}",
                 this.ExistAccountingPeriod ? this.AccountingPeriod.DisplayName : null,

@@ -22,9 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-    
-
     public partial class Depreciation
     {
         protected override void AppsOnPostBuild(IObjectBuilder builder)
@@ -39,14 +36,6 @@ namespace Allors.Domain
 
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, Depreciations.Meta.EntryDate);
-            derivation.Log.AssertExists(this, Depreciations.Meta.TransactionDate);
-            derivation.Log.AssertExists(this, Depreciations.Meta.Description);
-            derivation.Log.AssertExists(this, Depreciations.Meta.InternalOrganisation);
-            derivation.Log.AssertExists(this, Depreciations.Meta.FixedAsset);
-
             this.DisplayName = string.Format(
                 "Transaction date {0}, {1} total amount {2} fixed asset {3} for {4}",
                 this.ExistTransactionDate ? this.TransactionDate : DateTime.MinValue,

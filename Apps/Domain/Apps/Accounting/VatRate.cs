@@ -24,9 +24,6 @@ namespace Allors.Domain
     {
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, VatRates.Meta.Rate);
             this.DisplayName = string.Format(
                 "{0}%", 
                 this.ExistRate ? this.Rate : -1);

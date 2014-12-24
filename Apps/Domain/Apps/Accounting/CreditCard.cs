@@ -74,12 +74,7 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            derivation.Log.AssertExists(this, CreditCards.Meta.CardNumber);
             derivation.Log.AssertIsUnique(this, CreditCards.Meta.CardNumber);
-            derivation.Log.AssertExists(this, CreditCards.Meta.CreditCardCompany);
-            derivation.Log.AssertExists(this, CreditCards.Meta.ExpirationMonth);
-            derivation.Log.AssertExists(this, CreditCards.Meta.ExpirationYear);
-            derivation.Log.AssertExists(this, CreditCards.Meta.NameOnCard);
 
             this.DeriveDisplayName();
             this.DeriveSearchDataCharacterBoundaryText();

@@ -36,11 +36,6 @@ namespace Allors.Domain
 
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, AccountingPeriods.Meta.PeriodNumber);
-            derivation.Log.AssertExists(this, AccountingPeriods.Meta.TimeFrequency);
-
             var stringBuilder = new StringBuilder();
             if (this.ExistFromDate)
             {

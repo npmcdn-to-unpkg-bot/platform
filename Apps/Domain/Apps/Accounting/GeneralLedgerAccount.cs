@@ -75,13 +75,6 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            derivation.Log.AssertExists(this, GeneralLedgerAccounts.Meta.AccountNumber);
-            derivation.Log.AssertExists(this, GeneralLedgerAccounts.Meta.Name);
-            derivation.Log.AssertExists(this, GeneralLedgerAccounts.Meta.BalanceSheetAccount);
-            derivation.Log.AssertExists(this, GeneralLedgerAccounts.Meta.Side);
-            derivation.Log.AssertExists(this, GeneralLedgerAccounts.Meta.GeneralLedgerAccountType);
-            derivation.Log.AssertExists(this, GeneralLedgerAccounts.Meta.GeneralLedgerAccountGroup);
-
             if (this.ExistChartOfAccountsWhereGeneralLedgerAccount)
             {
                 var extent = this.DatabaseSession.Extent<GeneralLedgerAccount>();
