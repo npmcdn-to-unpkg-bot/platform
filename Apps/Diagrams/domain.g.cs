@@ -588,11 +588,11 @@ namespace Allors.Domain
 	}
 	public interface Payment  : UserInterfaceable, SearchResult, Searchable, Commentable, UniquelyIdentifiable 
 	{
-					global::System.Decimal? Amount {set;}
+					global::System.Decimal Amount {set;}
 
 					PaymentMethod PaymentMethod {set;}
 
-					global::System.DateTime? EffectiveDate {set;}
+					global::System.DateTime EffectiveDate {set;}
 
 					Party SendingParty {set;}
 
@@ -1337,7 +1337,7 @@ namespace Allors.Domain
 
 					BudgetItem BudgetItem {set;}
 
-					global::System.Decimal? AllocationPercentage {set;}
+					global::System.Decimal AllocationPercentage {set;}
 
 	}
 	public interface RateType  : Enumeration 
@@ -1912,7 +1912,7 @@ namespace Allors.Domain
 
 					BudgetItem BudgetItem {set;}
 
-					global::System.Decimal? Amount {set;}
+					global::System.Decimal Amount {set;}
 
 	}
 	public interface Hobby  : Enumeration 
@@ -2430,7 +2430,7 @@ namespace Allors.Domain
 
 					Requirement Requirement {set;}
 
-					global::System.Decimal? Amount {set;}
+					global::System.Decimal Amount {set;}
 
 	}
 	public interface OrganisationGlAccount  : UserInterfaceable, Period 
@@ -2639,7 +2639,7 @@ namespace Allors.Domain
 	{
 					OrganisationGlAccount OrganisationGlAccount {set;}
 
-					global::System.Decimal? Amount {set;}
+					global::System.Decimal Amount {set;}
 
 					AccountingPeriod AccountingPeriod {set;}
 
@@ -2667,7 +2667,7 @@ namespace Allors.Domain
 	}
 	public interface EmploymentApplication  : SearchResult, UserInterfaceable, Searchable 
 	{
-					global::System.DateTime? ApplicationDate {set;}
+					global::System.DateTime ApplicationDate {set;}
 
 					Position Position {set;}
 
@@ -4044,7 +4044,7 @@ namespace Allors.Domain
 	{
 					DeductionType DeductionType {set;}
 
-					global::System.Decimal? Amount {set;}
+					global::System.Decimal Amount {set;}
 
 	}
 	public interface CaseStatus  : UserInterfaceable 

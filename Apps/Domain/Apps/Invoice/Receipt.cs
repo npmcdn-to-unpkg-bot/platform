@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     using Resources;
 
     public partial class Receipt
@@ -71,9 +69,6 @@ namespace Allors.Domain
         public void AppsDerive(DerivableDerive method)
         {
             var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, Receipts.Meta.EffectiveDate);
-            derivation.Log.AssertExists(this, Receipts.Meta.Amount);
 
             decimal totalAmountApplied = 0;
             foreach (PaymentApplication paymentApplication in this.PaymentApplications)

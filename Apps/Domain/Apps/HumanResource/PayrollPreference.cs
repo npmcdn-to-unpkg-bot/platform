@@ -26,8 +26,6 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;   
 
-            derivation.Log.AssertExists(this, PayrollPreferences.Meta.PaymentMethod);
-            derivation.Log.AssertExists(this, PayrollPreferences.Meta.TimeFrequency);
             derivation.Log.AssertAtLeastOne(this, PayrollPreferences.Meta.Amount, PayrollPreferences.Meta.Percentage);
             derivation.Log.AssertExistsAtMostOne(this, PayrollPreferences.Meta.Amount, PayrollPreferences.Meta.Percentage);
 

@@ -56,7 +56,6 @@ namespace Allors.Domain
             var derivation = method.Derivation;
 
             derivation.Log.AssertExistsAtMostOne(this, PaymentApplications.Meta.Invoice, PaymentApplications.Meta.InvoiceItem);
-            derivation.Log.AssertExists(this, PaymentApplications.Meta.AmountApplied);
 
             if (this.ExistPaymentWherePaymentApplication && this.AmountApplied > this.PaymentWherePaymentApplication.Amount)
             {

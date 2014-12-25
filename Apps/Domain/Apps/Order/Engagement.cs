@@ -20,9 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-    
-
     public partial class Engagement
     {
         protected override void AppsOnPostBuild(IObjectBuilder builder)
@@ -42,18 +39,10 @@ namespace Allors.Domain
 
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, Engagements.Meta.Description);
-            derivation.Log.AssertExists(this, Engagements.Meta.BillToParty);
-            derivation.Log.AssertExists(this, Engagements.Meta.TakenViaInternalOrganisation);
-
             if (!this.ExistBillToContactMechanism && this.ExistBillToParty)
             {
                 this.BillToContactMechanism = this.BillToParty.BillingAddress;
             }
-
-            derivation.Log.AssertExists(this, Engagements.Meta.BillToContactMechanism);
 
             if (!this.ExistTakenViaContactMechanism && this.ExistTakenViaInternalOrganisation)
             {

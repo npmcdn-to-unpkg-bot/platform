@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-    
 
     public partial class QuoteTerm
     {
@@ -37,10 +35,6 @@ namespace Allors.Domain
 
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, QuoteTerms.Meta.TermType);
-
             this.DisplayName = string.Format(
                 "{0} value {1}",
                 this.ExistTermType ? this.TermType.Name : null,

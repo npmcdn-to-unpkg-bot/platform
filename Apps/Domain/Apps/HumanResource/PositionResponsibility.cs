@@ -24,11 +24,6 @@ namespace Allors.Domain
     {
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;   
-
-            derivation.Log.AssertExists(this, PositionResponsibilities.Meta.Position);
-            derivation.Log.AssertExists(this, PositionResponsibilities.Meta.Responsibility);
-
             this.DisplayName = string.Format(
                 "{0} within {1} : {2}",
                 this.ExistPosition ? this.Position.ExistPositionType ? this.Position.PositionType.Description : null : null,

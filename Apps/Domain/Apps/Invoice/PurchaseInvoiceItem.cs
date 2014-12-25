@@ -98,16 +98,6 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(DerivableDerive method)
-        {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, PurchaseInvoiceItems.Meta.Part);
-            derivation.Log.AssertExists(this, PurchaseInvoiceItems.Meta.Quantity);
-            derivation.Log.AssertExists(this, PurchaseInvoiceItems.Meta.ActualUnitPrice);
-            derivation.Log.AssertExists(this, PurchaseInvoiceItems.Meta.PurchaseInvoiceItemType);
-        }
-
         private void AppsDerivePrices()
         {
             this.UnitBasePrice = 0;

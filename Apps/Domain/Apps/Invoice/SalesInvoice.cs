@@ -561,19 +561,10 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            derivation.Log.AssertExists(this, SalesInvoices.Meta.InvoiceNumber);
-            derivation.Log.AssertExists(this, SalesInvoices.Meta.InvoiceDate);
-            derivation.Log.AssertExists(this, SalesInvoices.Meta.SalesInvoiceType);
-            derivation.Log.AssertExists(this, SalesInvoices.Meta.BilledFromInternalOrganisation);
-            derivation.Log.AssertExists(this, SalesInvoices.Meta.Store);
-            derivation.Log.AssertExists(this, SalesInvoices.Meta.BillToCustomer);
-
             if (!this.ExistBillToContactMechanism && this.ExistBillToCustomer)
             {
                 this.BillToContactMechanism = this.BillToCustomer.BillingAddress;
             }
-
-            derivation.Log.AssertExists(this, SalesInvoices.Meta.BillToContactMechanism);
 
             if (!this.ExistBilledFromContactMechanism && this.ExistBilledFromInternalOrganisation)
             {

@@ -20,9 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-    
-
     public partial class PerformanceNote
     {
         protected override void AppsOnPostBuild(IObjectBuilder builder)
@@ -37,11 +34,6 @@ namespace Allors.Domain
 
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;   
-
-            derivation.Log.AssertExists(this, PerformanceNotes.Meta.Description);
-            derivation.Log.AssertExists(this, PerformanceNotes.Meta.Employee);
-
             this.DisplayName = string.Format(
                 "{0} {1}",
                 this.ExistEmployee ? this.Employee.DeriveDisplayName(): null,

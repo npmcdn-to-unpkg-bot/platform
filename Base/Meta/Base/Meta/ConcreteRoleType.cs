@@ -23,26 +23,26 @@ namespace Allors.Meta
 {
     public partial class ConcreteRoleType
     {
-        private bool? assignedIsRequired;
+        private bool? isRequiredOverride;
 
         public bool IsRequired
         {
             get
             {
-                return this.AssignedIsRequired.HasValue ? this.AssignedIsRequired.Value : this.roleType.IsRequired;
+                return this.IsRequiredOverride.HasValue ? this.IsRequiredOverride.Value : this.roleType.IsRequired;
             }
         }
 
-        public bool? AssignedIsRequired
+        public bool? IsRequiredOverride
         {
             get
             {
-                return this.assignedIsRequired;
+                return this.isRequiredOverride;
             }
 
             set
             {
-                this.assignedIsRequired = value;
+                this.isRequiredOverride = value;
             }
         }
     }

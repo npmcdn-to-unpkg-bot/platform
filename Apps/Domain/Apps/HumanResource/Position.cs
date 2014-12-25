@@ -34,12 +34,6 @@ namespace Allors.Domain
 
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;   
-
-            derivation.Log.AssertExists(this, Positions.Meta.PositionType);
-            derivation.Log.AssertExists(this, Positions.Meta.Organisation);
-            derivation.Log.AssertExists(this, Positions.Meta.ActualFromDate);
-
             this.DisplayName = string.Format(
                 "{0} within {1}",
                 this.ExistPositionType ? this.PositionType.Description : null,

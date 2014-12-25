@@ -655,14 +655,6 @@ namespace Allors.Domain
             this.SearchData.CharacterBoundaryText = characterBoundaryText;
             this.SearchData.WordBoundaryText = wordBoundaryText;
 
-            derivation.Log.AssertExists(this, SalesOrders.Meta.OrderNumber);
-            derivation.Log.AssertExists(this, SalesOrders.Meta.OrderDate);
-            derivation.Log.AssertExists(this, SalesOrders.Meta.CustomerCurrency);
-            derivation.Log.AssertExists(this, SalesOrders.Meta.DeliveryDate);
-            derivation.Log.AssertExists(this, SalesOrders.Meta.CurrentObjectState);
-            derivation.Log.AssertExists(this, SalesOrders.Meta.TakenByInternalOrganisation);
-            derivation.Log.AssertExists(this, SalesOrders.Meta.Store);
-
             this.PreviousBillToCustomer = this.BillToCustomer;
             this.PreviousShipToCustomer = this.ShipToCustomer;  
         

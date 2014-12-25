@@ -327,13 +327,6 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            derivation.Log.AssertExists(this, PurchaseOrders.Meta.OrderNumber);
-            derivation.Log.AssertExists(this, PurchaseOrders.Meta.OrderDate);
-            derivation.Log.AssertExists(this, PurchaseOrders.Meta.CurrentObjectState);
-            derivation.Log.AssertExists(this, PurchaseOrders.Meta.ShipToBuyer);
-            derivation.Log.AssertExists(this, PurchaseOrders.Meta.BillToPurchaser);
-            derivation.Log.AssertExists(this, PurchaseOrders.Meta.TakenViaSupplier);
-
             Organisation supplier = this.TakenViaSupplier as Organisation;
             if (supplier != null && this.ExistShipToBuyer)
             {
@@ -357,8 +350,6 @@ namespace Allors.Domain
             {
                 this.TakenViaContactMechanism = this.TakenViaSupplier.OrderAddress;
             }
-
-            derivation.Log.AssertExists(this, PurchaseOrders.Meta.BillToContactMechanism);
 
             this.DeriveOrderItems(derivation);
 

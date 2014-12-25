@@ -24,11 +24,6 @@ namespace Allors.Domain
     {
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;   
-
-            derivation.Log.AssertExists(this, PerformanceReviewItems.Meta.PerformanceReviewItemType);
-            derivation.Log.AssertExists(this, PerformanceReviewItems.Meta.RatingType);
-
             this.DisplayName = string.Format(
                 "{0} {1}",
                 this.ExistPerformanceReviewItemType ? this.PerformanceReviewItemType.DisplayName : null,

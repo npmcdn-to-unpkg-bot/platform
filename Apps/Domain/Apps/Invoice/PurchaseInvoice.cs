@@ -312,12 +312,6 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            derivation.Log.AssertExists(this, PurchaseInvoices.Meta.InvoiceNumber);
-            derivation.Log.AssertExists(this, PurchaseInvoices.Meta.InvoiceDate);
-            derivation.Log.AssertExists(this, PurchaseInvoices.Meta.PurchaseInvoiceType);
-            derivation.Log.AssertExists(this, PurchaseInvoices.Meta.BilledToInternalOrganisation);
-            derivation.Log.AssertExists(this, PurchaseInvoices.Meta.BilledFromParty);
-
             Organisation supplier = this.BilledFromParty as Organisation;
             if (supplier != null && this.ExistBilledToInternalOrganisation)
             {

@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class PurchaseInvoiceItemStatus
     {
         protected override void AppsOnPostBuild(IObjectBuilder builder)
@@ -38,11 +36,6 @@ namespace Allors.Domain
 
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, PurchaseInvoiceItemStatuses.Meta.StartDateTime);
-            derivation.Log.AssertExists(this, PurchaseInvoiceItemStatuses.Meta.PurchaseInvoiceItemObjectState);
-
             this.DisplayName = string.Format(
                 "{0} starting {1}",
                 this.ExistPurchaseInvoiceItemObjectState ? this.PurchaseInvoiceItemObjectState.Name : null,

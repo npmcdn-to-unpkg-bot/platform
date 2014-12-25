@@ -24,10 +24,6 @@ namespace Allors.Domain
     {
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, Deposits.Meta.TransactionDate);
-
             this.DisplayName = this.TransactionDate.ToString();
         }
     }

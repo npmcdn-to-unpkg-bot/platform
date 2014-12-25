@@ -248,13 +248,7 @@ namespace Allors.Domain
                 }
             }
 
-            derivation.Log.AssertExists(this, Stores.Meta.PaymentGracePeriod);
-            derivation.Log.AssertExists(this, Stores.Meta.DefaultPaymentMethod);
             derivation.Log.AssertExistsAtMostOne(this, Stores.Meta.FiscalYearInvoiceNumber, Stores.Meta.NextSalesInvoiceNumber);
-            derivation.Log.AssertExists(this, Stores.Meta.Name);
-            derivation.Log.AssertExists(this, Stores.Meta.CreditLimit);
-            derivation.Log.AssertExists(this, Stores.Meta.DefaultShipmentMethod);
-            derivation.Log.AssertExists(this, Stores.Meta.DefaultCarrier);
 
             this.DisplayName = this.Name;
         }

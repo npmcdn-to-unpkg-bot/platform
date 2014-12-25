@@ -311,7 +311,6 @@ namespace Allors.Domain
                 this.AssignedShipToAddress = this.AssignedShipToParty.ShippingAddress;
             }
 
-            derivation.Log.AssertExists(this, SalesOrderItems.Meta.QuantityOrdered);
             derivation.Log.AssertAtLeastOne(this, SalesOrderItems.Meta.Product, SalesOrderItems.Meta.ProductFeature);
             derivation.Log.AssertExistsAtMostOne(this, SalesOrderItems.Meta.Product, SalesOrderItems.Meta.ProductFeature);
             derivation.Log.AssertExistsAtMostOne(this, SalesOrderItems.Meta.ActualUnitPrice, SalesOrderItems.Meta.DiscountAdjustment, SalesOrderItems.Meta.SurchargeAdjustment);

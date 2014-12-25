@@ -24,11 +24,6 @@ namespace Allors.Domain
     {
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, NeededSkills.Meta.Skill);
-            derivation.Log.AssertExists(this, NeededSkills.Meta.SkillLevel);
-
             this.DisplayName = string.Format(
                 "{0} at level {1}",
                 this.ExistSkill ? this.Skill.Name : null,

@@ -24,12 +24,6 @@ namespace Allors.Domain
     {
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, OrderRequirementCommitments.Meta.Quantity);
-            derivation.Log.AssertExists(this, OrderRequirementCommitments.Meta.OrderItem);
-            derivation.Log.AssertExists(this, OrderRequirementCommitments.Meta.Requirement);
-
             this.DisplayName = string.Format(
                 "{0} items from {1} are committed for requirement: {2}",
                 this.ExistQuantity ? this.Quantity : 0,

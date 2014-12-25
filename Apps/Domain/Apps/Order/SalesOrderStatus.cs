@@ -36,9 +36,6 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            derivation.Log.AssertExists(this, SalesOrderStatuses.Meta.StartDateTime);
-            derivation.Log.AssertExists(this, SalesOrderStatuses.Meta.SalesOrderObjectState);
-
             this.DeriveDisplayName(derivation);
         }
 

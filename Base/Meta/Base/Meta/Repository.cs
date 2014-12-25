@@ -83,6 +83,10 @@ namespace Allors.Meta
             // Role
             RoleName.IsRequired = true;
 
+            // StringTemplate
+            StringTemplateLocale.IsRequiredOverride = true;
+            StringTemplateTemplatePurpose.IsRequired = true;
+
             // UniquelyIdentifiable
             UniquelyIdentifiableUniqueId.IsRequired = true;
 

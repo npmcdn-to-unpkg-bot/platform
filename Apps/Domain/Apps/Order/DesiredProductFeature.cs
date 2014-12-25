@@ -20,9 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-    
-
     public partial class DesiredProductFeature
     {
         protected override void AppsOnPostBuild(IObjectBuilder builder)
@@ -37,11 +34,6 @@ namespace Allors.Domain
 
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, DesiredProductFeatures.Meta.Required);
-            derivation.Log.AssertExists(this, DesiredProductFeatures.Meta.ProductFeature);
-
             this.DisplayName = this.ExistProductFeature ? this.ProductFeature.ComposeDisplayName() : null;
 
             var characterBoundaryText = this.ExistProductFeature ? this.ProductFeature.ComposeSearchDataCharacterBoundaryText() : null;

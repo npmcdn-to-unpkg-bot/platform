@@ -24,10 +24,6 @@ namespace Allors.Domain
     {
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, RespondingParties.Meta.Party);
-
             this.DisplayName = this.ExistParty ? this.Party.DeriveDisplayName() : null;
         }
     }

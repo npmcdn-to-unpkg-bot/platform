@@ -6990,7 +6990,7 @@ namespace Allors.Meta
 			.Build();
   
 
-			CostCenterCategory = new ClassBuilder(Apps, new Guid("11214660-3c3a-42e9-8f12-f475d823da64"))
+			AppsCostCenterCategory = new ClassBuilder(Apps, new Guid("11214660-3c3a-42e9-8f12-f475d823da64"))
 			.WithSingularName("CostCenterCategory")
 			.WithPluralName("CostCenterCategories")
 			.Build();
@@ -8778,7 +8778,7 @@ namespace Allors.Meta
 			.Build();
   
 
-			Bank = new ClassBuilder(Apps, new Guid("a24a8e12-7067-4bfb-8fc0-225a824d1a05"))
+			AppsBank = new ClassBuilder(Apps, new Guid("a24a8e12-7067-4bfb-8fc0-225a824d1a05"))
 			.WithSingularName("Bank")
 			.WithPluralName("Banks")
 			.Build();
@@ -10193,19 +10193,19 @@ namespace Allors.Meta
 
 				// CostCenterCategory
 				new InheritanceBuilder(Apps, new Guid("0c6e25f1-27e3-4bdf-a00a-8cd8e0f9ec9e"))
-				.WithSubtype(CostCenterCategory)
+				.WithSubtype(AppsCostCenterCategory)
 				.WithSupertype(Searchable).Build();
 				new InheritanceBuilder(Apps, new Guid("31584f5d-5afb-4f13-bba9-2f381ec4e642"))
-				.WithSubtype(CostCenterCategory)
+				.WithSubtype(AppsCostCenterCategory)
 				.WithSupertype(UserInterfaceable).Build();
 				new InheritanceBuilder(Apps, new Guid("84c6b28a-e163-4b13-9546-f63170627c21"))
-				.WithSubtype(CostCenterCategory)
+				.WithSubtype(AppsCostCenterCategory)
 				.WithSupertype(SearchResult).Build();
 				new InheritanceBuilder(Apps, new Guid("a5ec5ae6-163c-4701-b2d4-bc3c87c7c769"))
-				.WithSubtype(CostCenterCategory)
+				.WithSubtype(AppsCostCenterCategory)
 				.WithSupertype(AccessControlledObject).Build();
 				new InheritanceBuilder(Apps, new Guid("c063f83b-6847-434b-bf4c-2f96884b7a58"))
-				.WithSubtype(CostCenterCategory)
+				.WithSubtype(AppsCostCenterCategory)
 				.WithSupertype(UniquelyIdentifiable).Build();
 
 				// BasePrice
@@ -12233,10 +12233,10 @@ namespace Allors.Meta
 
 				// Bank
 				new InheritanceBuilder(Apps, new Guid("cdaee2a7-a131-41cf-8115-ac65eb18809f"))
-				.WithSubtype(Bank)
+				.WithSubtype(AppsBank)
 				.WithSupertype(UserInterfaceable).Build();
 				new InheritanceBuilder(Apps, new Guid("fe7a699e-0493-460d-8023-4a3a4483c0c2"))
-				.WithSubtype(Bank)
+				.WithSubtype(AppsBank)
 				.WithSupertype(Searchable).Build();
 
 				// ProductRevenue
@@ -14749,7 +14749,7 @@ namespace Allors.Meta
 				// PurchaseAgreement
 				// CostCenterCategory
 				CostCenterCategoryParent = new RelationTypeBuilder(Apps, new Guid("15eade6f-f540-4916-9d66-30f4bd0f260a"),new Guid("f67c26e6-73e2-490a-aaf5-b66cd8e30972"),new Guid("b0767ddc-1b97-4289-afec-0519182982d0"))
-				.WithObjectTypes(CostCenterCategory, CostCenterCategory)
+				.WithObjectTypes(AppsCostCenterCategory, AppsCostCenterCategory)
 				.WithSingularName("Parent")  
 				.WithPluralName("Parents")  
 				.WithMultiplicity(Multiplicity.ManyToOne)
@@ -14759,7 +14759,7 @@ namespace Allors.Meta
 				.RoleType;
 
 				CostCenterCategoryAncestor = new RelationTypeBuilder(Apps, new Guid("45b0b049-e047-4490-9dde-c48fb1e7bfc3"),new Guid("130462ef-9d1d-48d9-b0f5-40c82ccea0a2"),new Guid("1fd21431-34f6-4f5c-ad54-abecb5e717e1"))
-				.WithObjectTypes(CostCenterCategory, CostCenterCategory)
+				.WithObjectTypes(AppsCostCenterCategory, AppsCostCenterCategory)
 				.WithSingularName("Ancestor")  
 				.WithPluralName("Ancestors")  
 				.WithMultiplicity(Multiplicity.ManyToMany)
@@ -14769,7 +14769,7 @@ namespace Allors.Meta
 				.RoleType;
 
 				CostCenterCategoryChild = new RelationTypeBuilder(Apps, new Guid("b20dc3d5-5067-4697-becf-0e8d44f117c7"),new Guid("d88647c8-b367-48e0-aef9-2af923a17b6f"),new Guid("0a65a2da-f091-4ed1-9af9-80ff63123adf"))
-				.WithObjectTypes(CostCenterCategory, CostCenterCategory)
+				.WithObjectTypes(AppsCostCenterCategory, AppsCostCenterCategory)
 				.WithSingularName("Child")  
 				.WithPluralName("Children")  
 				.WithMultiplicity(Multiplicity.ManyToMany)
@@ -14779,7 +14779,7 @@ namespace Allors.Meta
 				.RoleType;
 
 				CostCenterCategoryDescription = new RelationTypeBuilder(Apps, new Guid("fcb56761-342b-4d62-ba5b-27e0a0f405dd"),new Guid("4804ef05-ddb6-4f15-940a-cd663a7bef55"),new Guid("c1d56a33-314d-4aa7-a202-77ae675092ab"))
-				.WithObjectTypes(CostCenterCategory, AllorsString)
+				.WithObjectTypes(AppsCostCenterCategory, AllorsString)
 				.WithSingularName("Description")  
 				.WithPluralName("Descriptions")  
 				  
@@ -15641,7 +15641,7 @@ namespace Allors.Meta
 				// SalesOrderItemObjectState
 				// BankAccount
 				BankAccountBank = new RelationTypeBuilder(Apps, new Guid("52677328-d903-4e97-83c1-b55668ced66d"),new Guid("6895f657-2e32-4a12-af0c-bb2d5d633174"),new Guid("ddf52c63-b6d5-4bae-9d54-f1c71e76c289"))
-				.WithObjectTypes(BankAccount, Bank)
+				.WithObjectTypes(BankAccount, AppsBank)
 				.WithSingularName("Bank")  
 				.WithPluralName("Banks")  
 				.WithMultiplicity(Multiplicity.ManyToOne)
@@ -16157,7 +16157,7 @@ namespace Allors.Meta
 				.RoleType;
 
 				CostCenterCostCenterCategory = new RelationTypeBuilder(Apps, new Guid("83a7ca20-8a73-4f8e-9729-731d25f70313"),new Guid("e4ccdfcc-790f-41d2-a225-0b46862aed11"),new Guid("28b04874-6757-4cf9-a290-ed35ecba9d14"))
-				.WithObjectTypes(CostCenter, CostCenterCategory)
+				.WithObjectTypes(CostCenter, AppsCostCenterCategory)
 				.WithSingularName("CostCenterCategory")  
 				.WithPluralName("CostCenterCategories")  
 				.WithMultiplicity(Multiplicity.ManyToMany)
@@ -24930,7 +24930,7 @@ namespace Allors.Meta
 
 				// Bank
 				BankLogo = new RelationTypeBuilder(Apps, new Guid("28723704-3a61-445a-b14e-c757ebbf8d66"),new Guid("86b555ec-72f1-4ed6-b161-56d23508cf99"),new Guid("17dc868b-9a11-41c1-9366-b10f47d1fe3f"))
-				.WithObjectTypes(Bank, Media)
+				.WithObjectTypes(AppsBank, Media)
 				.WithSingularName("Logo")  
 				.WithPluralName("Logos")  
 				.WithMultiplicity(Multiplicity.ManyToOne)
@@ -24940,7 +24940,7 @@ namespace Allors.Meta
 				.RoleType;
 
 				BankBic = new RelationTypeBuilder(Apps, new Guid("354e114f-5d6b-4883-8e58-5c7a39878b6d"),new Guid("5c30c485-8f98-4a6d-8e05-3774331d9e7a"),new Guid("ed87ce26-a306-4590-8901-7b4fca4e2f57"))
-				.WithObjectTypes(Bank, AllorsString)
+				.WithObjectTypes(AppsBank, AllorsString)
 				.WithSingularName("Bic")  
 				.WithPluralName("Bics")  
 				  
@@ -24950,7 +24950,7 @@ namespace Allors.Meta
 				.RoleType;
 
 				BankSwiftCode = new RelationTypeBuilder(Apps, new Guid("a7851af8-38cd-4785-b81c-fb2fa403d9f6"),new Guid("f7460d4e-1094-46af-b04a-46115c2fee6a"),new Guid("92429a4b-9166-4e40-a356-caedaf296e23"))
-				.WithObjectTypes(Bank, AllorsString)
+				.WithObjectTypes(AppsBank, AllorsString)
 				.WithSingularName("SwiftCode")  
 				.WithPluralName("SwiftCodes")  
 				  
@@ -24960,7 +24960,7 @@ namespace Allors.Meta
 				.RoleType;
 
 				BankCountry = new RelationTypeBuilder(Apps, new Guid("d3a11d21-0232-48a0-b784-c111ad05f5da"),new Guid("0c8f4f92-50c5-4440-ae4e-e1734d7fdc60"),new Guid("627538dd-fac1-44a0-83c0-220b65440365"))
-				.WithObjectTypes(Bank, Country)
+				.WithObjectTypes(AppsBank, Country)
 				.WithSingularName("Country")  
 				.WithPluralName("Countries")  
 				.WithMultiplicity(Multiplicity.ManyToOne)
@@ -24970,7 +24970,7 @@ namespace Allors.Meta
 				.RoleType;
 
 				BankName = new RelationTypeBuilder(Apps, new Guid("d4191223-d9be-4cbb-b2ad-ee0844dcae87"),new Guid("dc80650c-b20f-468f-8d3f-5410a7632961"),new Guid("85b6a787-7c26-42a6-aef9-d8b685ff97f6"))
-				.WithObjectTypes(Bank, AllorsString)
+				.WithObjectTypes(AppsBank, AllorsString)
 				.WithSingularName("Name")  
 				.WithPluralName("Names")  
 				  
@@ -35347,7 +35347,7 @@ namespace Allors.Meta
 		TaxDocumentDeniedPermission = TaxDocument.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
 		TrainingDeniedPermission = Training.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
 		PurchaseAgreementDeniedPermission = PurchaseAgreement.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
-		CostCenterCategoryDeniedPermission = CostCenterCategory.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
+		CostCenterCategoryDeniedPermission = AppsCostCenterCategory.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
 		BasePriceDeniedPermission = BasePrice.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
 		JournalEntryDeniedPermission = JournalEntry.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
 		SubAgreementDeniedPermission = SubAgreement.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
@@ -35599,7 +35599,7 @@ namespace Allors.Meta
 		PurchaseReturnDeniedPermission = PurchaseReturn.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
 		WorkEffortPartStandardDeniedPermission = WorkEffortPartStandard.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
 		SurchargeComponentDeniedPermission = SurchargeComponent.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
-		BankDeniedPermission = Bank.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
+		BankDeniedPermission = AppsBank.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
 		ProductRevenueDeniedPermission = ProductRevenue.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
 		DisbursementAccountingTransactionDeniedPermission = DisbursementAccountingTransaction.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
 		OrderValueDeniedPermission = OrderValue.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
@@ -35763,7 +35763,7 @@ namespace Allors.Meta
 		TaxDocumentSearchData = TaxDocument.ConcreteRoleTypeByRoleType[SearchableSearchData];
 		TrainingSearchData = Training.ConcreteRoleTypeByRoleType[SearchableSearchData];
 		PurchaseAgreementSearchData = PurchaseAgreement.ConcreteRoleTypeByRoleType[SearchableSearchData];
-		CostCenterCategorySearchData = CostCenterCategory.ConcreteRoleTypeByRoleType[SearchableSearchData];
+		CostCenterCategorySearchData = AppsCostCenterCategory.ConcreteRoleTypeByRoleType[SearchableSearchData];
 		BasePriceSearchData = BasePrice.ConcreteRoleTypeByRoleType[SearchableSearchData];
 		JournalEntrySearchData = JournalEntry.ConcreteRoleTypeByRoleType[SearchableSearchData];
 		SkillSearchData = Skill.ConcreteRoleTypeByRoleType[SearchableSearchData];
@@ -35876,7 +35876,7 @@ namespace Allors.Meta
 		CapitalizationSearchData = Capitalization.ConcreteRoleTypeByRoleType[SearchableSearchData];
 		PurchaseReturnSearchData = PurchaseReturn.ConcreteRoleTypeByRoleType[SearchableSearchData];
 		SurchargeComponentSearchData = SurchargeComponent.ConcreteRoleTypeByRoleType[SearchableSearchData];
-		BankSearchData = Bank.ConcreteRoleTypeByRoleType[SearchableSearchData];
+		BankSearchData = AppsBank.ConcreteRoleTypeByRoleType[SearchableSearchData];
 		DisbursementAccountingTransactionSearchData = DisbursementAccountingTransaction.ConcreteRoleTypeByRoleType[SearchableSearchData];
 		ObligationSearchData = Obligation.ConcreteRoleTypeByRoleType[SearchableSearchData];
 		RecurringChargeSearchData = RecurringCharge.ConcreteRoleTypeByRoleType[SearchableSearchData];
@@ -35975,7 +35975,7 @@ namespace Allors.Meta
 		TaxDocumentDisplayName = TaxDocument.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
 		TrainingDisplayName = Training.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
 		PurchaseAgreementDisplayName = PurchaseAgreement.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
-		CostCenterCategoryDisplayName = CostCenterCategory.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
+		CostCenterCategoryDisplayName = AppsCostCenterCategory.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
 		BasePriceDisplayName = BasePrice.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
 		JournalEntryDisplayName = JournalEntry.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
 		SubAgreementDisplayName = SubAgreement.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
@@ -36227,7 +36227,7 @@ namespace Allors.Meta
 		PurchaseReturnDisplayName = PurchaseReturn.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
 		WorkEffortPartStandardDisplayName = WorkEffortPartStandard.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
 		SurchargeComponentDisplayName = SurchargeComponent.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
-		BankDisplayName = Bank.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
+		BankDisplayName = AppsBank.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
 		ProductRevenueDisplayName = ProductRevenue.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
 		DisbursementAccountingTransactionDisplayName = DisbursementAccountingTransaction.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
 		OrderValueDisplayName = OrderValue.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
@@ -36412,7 +36412,7 @@ namespace Allors.Meta
 		TaxDocumentSecurityToken = TaxDocument.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
 		TrainingSecurityToken = Training.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
 		PurchaseAgreementSecurityToken = PurchaseAgreement.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
-		CostCenterCategorySecurityToken = CostCenterCategory.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
+		CostCenterCategorySecurityToken = AppsCostCenterCategory.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
 		BasePriceSecurityToken = BasePrice.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
 		JournalEntrySecurityToken = JournalEntry.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
 		SubAgreementSecurityToken = SubAgreement.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
@@ -36664,7 +36664,7 @@ namespace Allors.Meta
 		PurchaseReturnSecurityToken = PurchaseReturn.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
 		WorkEffortPartStandardSecurityToken = WorkEffortPartStandard.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
 		SurchargeComponentSecurityToken = SurchargeComponent.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
-		BankSecurityToken = Bank.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
+		BankSecurityToken = AppsBank.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
 		ProductRevenueSecurityToken = ProductRevenue.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
 		DisbursementAccountingTransactionSecurityToken = DisbursementAccountingTransaction.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
 		OrderValueSecurityToken = OrderValue.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
@@ -37018,7 +37018,7 @@ namespace Allors.Meta
 		ContactMechanismPurposeUniqueId = ContactMechanismPurpose.ConcreteRoleTypeByRoleType[UniquelyIdentifiableUniqueId];
 		TaxDocumentUniqueId = TaxDocument.ConcreteRoleTypeByRoleType[UniquelyIdentifiableUniqueId];
 		PurchaseAgreementUniqueId = PurchaseAgreement.ConcreteRoleTypeByRoleType[UniquelyIdentifiableUniqueId];
-		CostCenterCategoryUniqueId = CostCenterCategory.ConcreteRoleTypeByRoleType[UniquelyIdentifiableUniqueId];
+		CostCenterCategoryUniqueId = AppsCostCenterCategory.ConcreteRoleTypeByRoleType[UniquelyIdentifiableUniqueId];
 		SkillUniqueId = Skill.ConcreteRoleTypeByRoleType[UniquelyIdentifiableUniqueId];
 		EmploymentTerminationUniqueId = EmploymentTermination.ConcreteRoleTypeByRoleType[UniquelyIdentifiableUniqueId];
 		OperatingConditionUniqueId = OperatingCondition.ConcreteRoleTypeByRoleType[UniquelyIdentifiableUniqueId];

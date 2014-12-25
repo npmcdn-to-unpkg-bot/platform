@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class PostalBoundary
     {
         public void AppsPrepareDerivation(DerivablePrepareDerivation method)
@@ -32,14 +30,6 @@ namespace Allors.Domain
             {
                 derivation.AddDependency(this.PostalAddressWherePostalBoundary, this);
             }
-        }
-
-        public void AppsDerive(DerivableDerive method)
-        {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, PostalBoundaries.Meta.Locality);
-            derivation.Log.AssertExists(this, PostalBoundaries.Meta.Country);
         }
     }
 }

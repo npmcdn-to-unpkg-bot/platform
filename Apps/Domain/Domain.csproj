@@ -548,7 +548,6 @@
     <Compile Include="Apps\Common\Singleton.cs" />
     <Compile Include="Apps\Common\Singleton.v.cs" />
     <Compile Include="Apps\Constants.cs" />
-    <Compile Include="Apps\Content\StringTemplate.cs" />
     <Compile Include="Apps\Content\TemplatePurposes.cs" />
     <Compile Include="Apps\DateTimeExtensions.cs" />
     <Compile Include="Apps\DecimalExtensions.cs" />
@@ -629,7 +628,6 @@
     <Compile Include="Apps\Invoice\InvoiceSequences.cs" />
     <Compile Include="Apps\Invoice\InvoiceTerm.cs" />
     <Compile Include="Apps\Invoice\InvoiceTerms.cs" />
-    <Compile Include="Apps\Invoice\OrderItemBilling.cs" />
     <Compile Include="Apps\Invoice\Payment.v.cs" />
     <Compile Include="Apps\Invoice\PaymentApplication.cs" />
     <Compile Include="Apps\Invoice\PaymentApplications.cs" />
@@ -665,11 +663,9 @@
     <Compile Include="Apps\Invoice\SalesInvoiceStatus.cs" />
     <Compile Include="Apps\Invoice\SalesInvoiceStatuses.cs" />
     <Compile Include="Apps\Invoice\SalesInvoiceTypes.cs" />
-    <Compile Include="Apps\Invoice\ServiceEntryBilling.cs" />
     <Compile Include="Apps\Invoice\ServiceEntryBillings.cs" />
     <Compile Include="Apps\Invoice\Withdrawal.cs" />
     <Compile Include="Apps\Invoice\Withdrawals.cs" />
-    <Compile Include="Apps\Invoice\WorkEffortBilling.cs" />
     <Compile Include="Apps\Invoice\WorkEffortBillings.cs" />
     <Compile Include="Apps\Localization\Building.cs" />
     <Compile Include="Apps\Localization\Building.v.cs" />

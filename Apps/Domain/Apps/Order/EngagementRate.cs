@@ -20,17 +20,10 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class EngagementRate
     {
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, EngagementRates.Meta.RatingType);
-            derivation.Log.AssertExists(this, EngagementRates.Meta.BillingRate);
-
             this.DisplayName = string.Format(
                 "{0} for {1}",
                 this.ExistBillingRate ? this.BillingRate : 0,

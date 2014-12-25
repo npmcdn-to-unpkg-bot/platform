@@ -37,12 +37,6 @@ namespace Allors.Domain
 
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, EmploymentApplications.Meta.Person);
-            derivation.Log.AssertExists(this, EmploymentApplications.Meta.ApplicationDate);
-            derivation.Log.AssertExists(this, EmploymentApplications.Meta.Position);
-
             this.DisplayName = string.Format(
                 "{0} {1} {2} within {3}",
                 this.ExistApplicationDate ? this.ApplicationDate : DateTime.MinValue,

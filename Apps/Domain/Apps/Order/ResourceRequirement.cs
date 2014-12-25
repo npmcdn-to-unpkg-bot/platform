@@ -43,8 +43,6 @@ namespace Allors.Domain
 
             this.AppsRequirementDerive(derivation);
 
-            derivation.Log.AssertExists(this, ResourceRequirements.Meta.Description);
-
             this.DeriveDisplayName();
             this.DeriveSearchDataCharacterBoundaryText();
             this.DeriveSearchDataWordBoundaryText();

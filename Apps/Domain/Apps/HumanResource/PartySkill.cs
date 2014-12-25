@@ -24,10 +24,6 @@ namespace Allors.Domain
     {
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;   
-
-            derivation.Log.AssertExists(this, PartySkills.Meta.Skill);
-
             this.DisplayName = this.ExistSkill ? this.Skill.Name : null;
         }
     }

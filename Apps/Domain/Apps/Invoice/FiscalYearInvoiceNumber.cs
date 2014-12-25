@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class FiscalYearInvoiceNumber
     {
         public int DeriveNextSalesInvoiceNumber()
@@ -31,14 +29,6 @@ namespace Allors.Domain
             this.NextSalesInvoiceNumber++;
             
             return salesInvoiceNumber;
-        }
-
-        public void AppsDerive(DerivableDerive method)
-        {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, FiscalYearInvoiceNumbers.Meta.FiscalYear);
-            derivation.Log.AssertExists(this, FiscalYearInvoiceNumbers.Meta.NextSalesInvoiceNumber);
         }
     }
 }

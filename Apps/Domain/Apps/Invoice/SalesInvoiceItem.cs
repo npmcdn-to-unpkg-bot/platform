@@ -279,8 +279,6 @@ namespace Allors.Domain
 
             this.AppsDeriveAmountPaid(derivation);
 
-            derivation.Log.AssertExists(this, SalesInvoiceItems.Meta.Quantity);
-            derivation.Log.AssertExists(this, SalesInvoiceItems.Meta.SalesInvoiceItemType);
             derivation.Log.AssertAtLeastOne(this, SalesInvoiceItems.Meta.Product, SalesInvoiceItems.Meta.ProductFeature, SalesInvoiceItems.Meta.TimeEntry);
             derivation.Log.AssertExistsAtMostOne(this, SalesInvoiceItems.Meta.Product, SalesInvoiceItems.Meta.ProductFeature, SalesInvoiceItems.Meta.TimeEntry);
         }

@@ -20,9 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-    
-
     public partial class OrderTerm
     {
         protected override void AppsOnPostBuild(IObjectBuilder builder)
@@ -37,10 +34,6 @@ namespace Allors.Domain
 
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, OrderTerms.Meta.TermType);
-
             this.DisplayName = string.Format(
                 "{0} value {1}",
                 this.ExistTermType ? this.TermType.Name : null,
