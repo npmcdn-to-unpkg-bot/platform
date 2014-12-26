@@ -25,9 +25,9 @@ namespace Allors.Domain
 
     public partial class Employment
     {
-        protected override void AppsOnPostBuild(IObjectBuilder builder)
+        public void AppsOnPostBuild(ObjectOnPostBuild method)
         {
-            base.AppsOnPostBuild(builder);
+            
 
             if (!this.ExistFromDate)
             {

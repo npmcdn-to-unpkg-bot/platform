@@ -1087,6 +1087,9 @@ namespace Allors.Domain
 					global::System.DateTime ThroughDate {set;}
 
 	}
+	public interface Deletable  : Object 
+	{
+	}
 	public interface User  : SecurityTokenOwner, UserInterfaceable, Localised 
 	{
 					global::System.Boolean? UserEmailConfirmed {set;}
@@ -1160,7 +1163,7 @@ namespace Allors.Domain
 					ProductFeature UsedToDefine {set;}
 
 	}
-	public interface OrderShipment  : Object 
+	public interface OrderShipment  : Deletable 
 	{
 					SalesOrderItem SalesOrderItem {set;}
 
@@ -1217,7 +1220,7 @@ namespace Allors.Domain
 					RequestItem RequestItem {set;}
 
 	}
-	public interface SalesRepPartyProductCategoryRevenue  : UserInterfaceable 
+	public interface SalesRepPartyProductCategoryRevenue  : UserInterfaceable, Deletable 
 	{
 					global::System.Int32 Year {set;}
 
@@ -1425,7 +1428,7 @@ namespace Allors.Domain
 					global::System.String Description {set;}
 
 	}
-	public interface BasePrice  : PriceComponent 
+	public interface BasePrice  : Deletable, PriceComponent 
 	{
 	}
 	public interface JournalEntry  : UserInterfaceable, Transitional, AccessControlledObject, Searchable 
@@ -1780,7 +1783,7 @@ namespace Allors.Domain
 					Store Store {set;}
 
 	}
-	public interface StoreRevenue  : UserInterfaceable 
+	public interface StoreRevenue  : UserInterfaceable, Deletable 
 	{
 					InternalOrganisation InternalOrganisation {set;}
 
@@ -1994,7 +1997,7 @@ namespace Allors.Domain
 					ContactMechanism ContactMechanism {set;}
 
 	}
-	public interface SalesChannelRevenue  : UserInterfaceable 
+	public interface SalesChannelRevenue  : UserInterfaceable, Deletable 
 	{
 					global::System.Int32 Year {set;}
 
@@ -2057,7 +2060,7 @@ namespace Allors.Domain
 					Country Country {set;}
 
 	}
-	public interface PartyProductRevenue  : UserInterfaceable 
+	public interface PartyProductRevenue  : Deletable, UserInterfaceable 
 	{
 					global::System.Decimal Revenue {set;}
 
@@ -2160,7 +2163,7 @@ namespace Allors.Domain
 					global::System.String Description {set;}
 
 	}
-	public interface PartyProductCategoryRevenue  : UserInterfaceable 
+	public interface PartyProductCategoryRevenue  : UserInterfaceable, Deletable 
 	{
 					Party Party {set;}
 
@@ -2217,7 +2220,7 @@ namespace Allors.Domain
 					global::System.Int32? QuantityUsed {set;}
 
 	}
-	public interface ItemIssuance  : UserInterfaceable 
+	public interface ItemIssuance  : Deletable, UserInterfaceable 
 	{
 					global::System.DateTime? IssuanceDateTime {set;}
 
@@ -2695,7 +2698,7 @@ namespace Allors.Domain
 					Person Person {set;}
 
 	}
-	public interface Employment  : PartyRelationship 
+	public interface Employment  : PartyRelationship, Deletable 
 	{
 					InternalOrganisation Employer {set;}
 
@@ -2761,7 +2764,7 @@ namespace Allors.Domain
 	public interface PurchaseInvoiceObjectState  : ObjectState 
 	{
 	}
-	public interface ProductCategoryRevenue  : UserInterfaceable 
+	public interface ProductCategoryRevenue  : Deletable, UserInterfaceable 
 	{
 					global::System.String ProductCategoryName {set;}
 
@@ -2785,7 +2788,7 @@ namespace Allors.Domain
 					GeneralLedgerAccount GeneralLedgerAccounts {set;}
 
 	}
-	public interface PartyRevenue  : UserInterfaceable 
+	public interface PartyRevenue  : UserInterfaceable, Deletable 
 	{
 					Currency Currency {set;}
 
@@ -2948,7 +2951,7 @@ namespace Allors.Domain
 	public interface AgreementPricingProgram  : AgreementItem 
 	{
 	}
-	public interface SalesRepRevenue  : UserInterfaceable 
+	public interface SalesRepRevenue  : UserInterfaceable, Deletable 
 	{
 					global::System.Decimal Revenue {set;}
 
@@ -3013,7 +3016,7 @@ namespace Allors.Domain
 					global::System.Decimal? AgreedUponPrice {set;}
 
 	}
-	public interface SalesRepPartyRevenue  : UserInterfaceable 
+	public interface SalesRepPartyRevenue  : UserInterfaceable, Deletable 
 	{
 					global::System.Decimal Revenue {set;}
 
@@ -3146,7 +3149,7 @@ namespace Allors.Domain
 	public interface Amortization  : InternalAccountingTransaction 
 	{
 	}
-	public interface PickListItem  : UserInterfaceable 
+	public interface PickListItem  : UserInterfaceable, Deletable 
 	{
 					global::System.Decimal RequestedQuantity {set;}
 
@@ -3342,7 +3345,7 @@ namespace Allors.Domain
 	public interface Colour  : Enumeration, ProductFeature 
 	{
 	}
-	public interface PackageRevenue  : UserInterfaceable 
+	public interface PackageRevenue  : Deletable, UserInterfaceable 
 	{
 					global::System.Decimal Revenue {set;}
 
@@ -3449,7 +3452,7 @@ namespace Allors.Domain
 					global::System.Decimal? Amount {set;}
 
 	}
-	public interface CustomerShipment  : Shipment 
+	public interface CustomerShipment  : Deletable, Shipment 
 	{
 					CustomerShipmentStatus CurrentShipmentStatus {set;}
 
@@ -3470,7 +3473,7 @@ namespace Allors.Domain
 					global::System.Decimal ShipmentValue {set;}
 
 	}
-	public interface InternalOrganisationRevenue  : UserInterfaceable 
+	public interface InternalOrganisationRevenue  : UserInterfaceable, Deletable 
 	{
 					global::System.Int32 Month {set;}
 
@@ -3556,7 +3559,7 @@ namespace Allors.Domain
 					UnitOfMeasure UnitOfMeasure {set;}
 
 	}
-	public interface PartyPackageRevenue  : UserInterfaceable 
+	public interface PartyPackageRevenue  : UserInterfaceable, Deletable 
 	{
 					global::System.Int32 Month {set;}
 
@@ -3711,7 +3714,7 @@ namespace Allors.Domain
 					global::System.String Name {set;}
 
 	}
-	public interface ProductRevenue  : UserInterfaceable 
+	public interface ProductRevenue  : Deletable, UserInterfaceable 
 	{
 					global::System.Decimal Revenue {set;}
 
@@ -4385,7 +4388,7 @@ namespace Allors.Domain
 					global::System.Boolean CloseWhenInBalance {set;}
 
 	}
-	public interface ShipmentItem  : UserInterfaceable 
+	public interface ShipmentItem  : Deletable, UserInterfaceable 
 	{
 					global::System.Decimal Quantity {set;}
 
@@ -4630,7 +4633,7 @@ namespace Allors.Domain
 	public interface AgreementSection  : AgreementItem 
 	{
 	}
-	public interface Good  : Product 
+	public interface Good  : Product, Deletable 
 	{
 					global::System.Decimal AvailableToPromise {set;}
 
@@ -4884,7 +4887,7 @@ namespace Allors.Domain
 					Skill Skill {set;}
 
 	}
-	public interface SalesRepProductCategoryRevenue  : UserInterfaceable 
+	public interface SalesRepProductCategoryRevenue  : UserInterfaceable, Deletable 
 	{
 					global::System.Int32 Month {set;}
 
@@ -4984,7 +4987,7 @@ namespace Allors.Domain
 					LocalisedText LocalisedNames {set;}
 
 	}
-	public interface SearchData  : Derivable 
+	public interface SearchData  : Derivable, Deletable 
 	{
 					global::System.String CharacterBoundaryText {set;}
 
@@ -5017,7 +5020,7 @@ namespace Allors.Domain
 					global::System.String Hash {set;}
 
 	}
-	public interface Permission  : UserInterfaceable 
+	public interface Permission  : Deletable, UserInterfaceable 
 	{
 					global::System.Guid OperandTypePointer {set;}
 
@@ -5026,7 +5029,7 @@ namespace Allors.Domain
 					global::System.Int32 OperationEnum {set;}
 
 	}
-	public interface SecurityToken  : Object 
+	public interface SecurityToken  : Deletable, Derivable 
 	{
 	}
 	public interface Transition  : Object 
@@ -5043,7 +5046,7 @@ namespace Allors.Domain
 					global::System.String Name {set;}
 
 	}
-	public interface Login  : Derivable 
+	public interface Login  : Derivable, Deletable 
 	{
 					global::System.String Key {set;}
 
@@ -5091,7 +5094,7 @@ namespace Allors.Domain
 					global::System.String UriExtension {set;}
 
 	}
-	public interface AccessControl  : UserInterfaceable 
+	public interface AccessControl  : Deletable, UserInterfaceable 
 	{
 					UserGroup SubjectGroups {set;}
 
@@ -5102,7 +5105,7 @@ namespace Allors.Domain
 					Role Role {set;}
 
 	}
-	public interface Person  : User, AccessControlledObject, UniquelyIdentifiable, SearchResult, UserInterfaceable, Searchable, Party 
+	public interface Person  : User, AccessControlledObject, UniquelyIdentifiable, SearchResult, UserInterfaceable, Searchable, Party, Deletable 
 	{
 					global::System.String LastName {set;}
 
@@ -5149,7 +5152,7 @@ namespace Allors.Domain
 					global::System.DateTime? DeceasedDate {set;}
 
 	}
-	public interface Image  : Object 
+	public interface Image  : Deletable, Derivable 
 	{
 					Media Original {set;}
 
@@ -5158,7 +5161,7 @@ namespace Allors.Domain
 					global::System.String OriginalFilename {set;}
 
 	}
-	public interface Media  : UniquelyIdentifiable, UserInterfaceable 
+	public interface Media  : UniquelyIdentifiable, UserInterfaceable, Deletable 
 	{
 					MediaType MediaType {set;}
 

@@ -32,9 +32,9 @@ namespace Allors.Domain
             this.RemoveBasePrice(basePrice);
         }
 
-        protected override void AppsOnPostBuild(IObjectBuilder builder)
+        public void AppsOnPostBuild(ObjectOnPostBuild method)
         {
-            base.AppsOnPostBuild(builder);
+            
 
             if (!this.ExistSoldBy)
             {

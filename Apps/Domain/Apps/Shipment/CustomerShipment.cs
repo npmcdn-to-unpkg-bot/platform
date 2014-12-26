@@ -128,9 +128,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void AppsOnPostBuild(IObjectBuilder builder)
+        public void AppsOnPostBuild(ObjectOnPostBuild method)
         {
-            base.AppsOnPostBuild(builder);
+            
 
             if (!this.ExistCurrentObjectState)
             {
@@ -460,11 +460,11 @@ namespace Allors.Domain
                     {
                         foreach (ItemIssuance itemIssuance in pickListItem.ItemIssuancesWherePickListItem)
                         {
-                            itemIssuance.Delete();
+                            itemIssuance.Delete().Execute();
                         }
    
                         pendingPickList.RemovePickListItem(pickListItem);
-                        pickListItem.Delete();
+                        pickListItem.Delete().Execute();
                     }
                 }
 
@@ -645,11 +645,11 @@ namespace Allors.Domain
                         {
                             if (!itemIssuance.PickListItem.PickListWherePickListItem.ExistPicker)
                             {
-                                itemIssuance.Delete();
+                                itemIssuance.Delete().Execute();
                             }
                         }
 
-                        orderShipment.Delete();
+                        orderShipment.Delete().Execute();
                     }
                 }
             }
@@ -662,7 +662,7 @@ namespace Allors.Domain
 
             if (shipmentItem.Quantity == 0)
             {
-                shipmentItem.Delete();
+                shipmentItem.Delete().Execute();
             }
 
             if (!this.ExistShipmentItems)

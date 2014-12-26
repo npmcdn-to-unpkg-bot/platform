@@ -173,7 +173,7 @@ namespace Allors.Domain
             {
                 if (!revenues.Contains(partyProductRevenue.Id))
                 {
-                    partyProductRevenue.Delete();
+                    partyProductRevenue.Delete().Execute();
                 }
             }
         }

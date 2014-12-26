@@ -26,9 +26,9 @@ namespace Allors.Domain
 
     public partial class Receipt
     {       
-        protected override void AppsOnPostBuild(IObjectBuilder builder)
+        public void AppsOnPostBuild(ObjectOnPostBuild method)
         {
-            base.AppsOnPostBuild(builder);
+            
 
             if (!this.ExistEffectiveDate)
             {

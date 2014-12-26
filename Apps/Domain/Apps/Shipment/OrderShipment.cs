@@ -22,9 +22,9 @@ namespace Allors.Domain
 {
     public partial class OrderShipment
     {
-        protected override void AppsOnPostBuild(IObjectBuilder builder)
+        public void AppsOnPostBuild(ObjectOnPostBuild method)
         {
-            base.AppsOnPostBuild(builder);
+            
 
             this.Picked = false;
 

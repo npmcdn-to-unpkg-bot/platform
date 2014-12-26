@@ -113,9 +113,9 @@ namespace Allors.Domain
             return string.Format(repositoryStore.SalesOrderNumberPrefix, salesOrderNumber);
         }
 
-        protected override void AppsOnPostBuild(IObjectBuilder builder)
+        public void AppsOnPostBuild(ObjectOnPostBuild method)
         {
-            base.AppsOnPostBuild(builder);
+            
 
             if (!this.ExistCreditLimit)
             {

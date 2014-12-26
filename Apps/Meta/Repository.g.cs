@@ -526,6 +526,7 @@ namespace Allors.Meta
 		public static Interface Localised;
 		public static Class Permission;
 		public static Interface Period;
+		public static Interface Deletable;
 		public static Interface User;
 		public static Interface SearchResult;
 		public static Class SecurityToken;
@@ -9866,6 +9867,12 @@ namespace Allors.Meta
 			.Build();
   
   
+			Deletable = new InterfaceBuilder(Base, new Guid("9279e337-c658-4086-946d-03c75cdb1ad3"))
+			.WithSingularName("Deletable")
+			.WithPluralName("Deletables")
+			.Build();
+  
+  
 			User = new InterfaceBuilder(Base, new Guid("a0309c3b-6f80-4777-983e-6e69800df5be"))
 			.WithSingularName("User")
 			.WithPluralName("Users")
@@ -10032,6 +10039,10 @@ namespace Allors.Meta
 				.WithSupertype(UserInterfaceable).Build();
 
 				// OrderShipment
+				new InheritanceBuilder(Apps, new Guid("29149755-2851-46e4-96eb-24fb6d33179d"))
+				.WithSubtype(OrderShipment)
+				.WithSupertype(Deletable).Build();
+
 				// ProductRequirement
 				new InheritanceBuilder(Apps, new Guid("7f440f68-d7ef-4ce7-b80c-8fba40b9fd4d"))
 				.WithSubtype(ProductRequirement)
@@ -10059,6 +10070,9 @@ namespace Allors.Meta
 				new InheritanceBuilder(Apps, new Guid("48cb2131-bdf7-4aba-8bd4-3ac204045111"))
 				.WithSubtype(SalesRepPartyProductCategoryRevenue)
 				.WithSupertype(UserInterfaceable).Build();
+				new InheritanceBuilder(Apps, new Guid("dc73b06a-10ac-4586-be69-1298f7a38176"))
+				.WithSubtype(SalesRepPartyProductCategoryRevenue)
+				.WithSupertype(Deletable).Build();
 
 				// PayGrade
 				new InheritanceBuilder(Apps, new Guid("021c31b8-e556-4632-92dc-74a07d4f9f3d"))
@@ -10223,6 +10237,9 @@ namespace Allors.Meta
 				.WithSupertype(UniquelyIdentifiable).Build();
 
 				// BasePrice
+				new InheritanceBuilder(Apps, new Guid("567ec306-8c47-4425-a4d1-e7c1a3acefc5"))
+				.WithSubtype(BasePrice)
+				.WithSupertype(Deletable).Build();
 				new InheritanceBuilder(Apps, new Guid("ea2621d8-86d5-4203-a8db-30fea5fc218f"))
 				.WithSubtype(BasePrice)
 				.WithSupertype(PriceComponent).Build();
@@ -10561,6 +10578,9 @@ namespace Allors.Meta
 				new InheritanceBuilder(Apps, new Guid("a67f5d14-585d-4e39-b117-aa80a108e2c2"))
 				.WithSubtype(StoreRevenue)
 				.WithSupertype(UserInterfaceable).Build();
+				new InheritanceBuilder(Apps, new Guid("ecc674ed-4aa7-4d21-b777-1abb272e1fd6"))
+				.WithSubtype(StoreRevenue)
+				.WithSupertype(Deletable).Build();
 
 				// AgreementExhibit
 				new InheritanceBuilder(Apps, new Guid("008d92b7-3163-4d13-b0c1-2727fc7dd229"))
@@ -10735,6 +10755,9 @@ namespace Allors.Meta
 				new InheritanceBuilder(Apps, new Guid("1f184480-e3ef-446b-96bf-eda004043685"))
 				.WithSubtype(SalesChannelRevenue)
 				.WithSupertype(UserInterfaceable).Build();
+				new InheritanceBuilder(Apps, new Guid("72f83acc-cc56-4dd7-8eda-6b4102d675ed"))
+				.WithSubtype(SalesChannelRevenue)
+				.WithSupertype(Deletable).Build();
 
 				// AutomatedAgent
 				new InheritanceBuilder(Apps, new Guid("0b48e079-3553-47e8-91ac-09e6599192ef"))
@@ -10794,6 +10817,9 @@ namespace Allors.Meta
 				.WithSupertype(UserInterfaceable).Build();
 
 				// PartyProductRevenue
+				new InheritanceBuilder(Apps, new Guid("7a91d7f5-e4ac-4df9-a81d-01358d7e605f"))
+				.WithSubtype(PartyProductRevenue)
+				.WithSupertype(Deletable).Build();
 				new InheritanceBuilder(Apps, new Guid("ea9dfdd5-9c03-4001-b5bb-565630b41858"))
 				.WithSubtype(PartyProductRevenue)
 				.WithSupertype(UserInterfaceable).Build();
@@ -10895,6 +10921,9 @@ namespace Allors.Meta
 				new InheritanceBuilder(Apps, new Guid("0ffbf75e-ef5f-44cd-bd6c-fa0fc95acd69"))
 				.WithSubtype(PartyProductCategoryRevenue)
 				.WithSupertype(UserInterfaceable).Build();
+				new InheritanceBuilder(Apps, new Guid("14c422e6-fed7-4acf-aae0-9f0db7718436"))
+				.WithSubtype(PartyProductCategoryRevenue)
+				.WithSupertype(Deletable).Build();
 
 				// PartyFixedAssetAssignment
 				new InheritanceBuilder(Apps, new Guid("2aac3cb3-7d19-4e9c-adc4-f4a806d2d623"))
@@ -10933,6 +10962,9 @@ namespace Allors.Meta
 				.WithSupertype(ProductAssociation).Build();
 
 				// ItemIssuance
+				new InheritanceBuilder(Apps, new Guid("b2e9b9cd-b4d8-4d87-a77d-e8be7f84f1bc"))
+				.WithSubtype(ItemIssuance)
+				.WithSupertype(Deletable).Build();
 				new InheritanceBuilder(Apps, new Guid("d386f7ae-da14-4533-a99f-9304305da23c"))
 				.WithSubtype(ItemIssuance)
 				.WithSupertype(UserInterfaceable).Build();
@@ -11462,6 +11494,9 @@ namespace Allors.Meta
 				new InheritanceBuilder(Apps, new Guid("a4377eca-6738-41a6-9519-295c0a7e15fe"))
 				.WithSubtype(Employment)
 				.WithSupertype(PartyRelationship).Build();
+				new InheritanceBuilder(Apps, new Guid("cbea6a5c-8c7f-4ac0-8f6a-ee227ca52bf5"))
+				.WithSubtype(Employment)
+				.WithSupertype(Deletable).Build();
 
 				// AccountingPeriod
 				new InheritanceBuilder(Apps, new Guid("423ad94c-1a54-40ed-8fa3-62b233521839"))
@@ -11512,6 +11547,9 @@ namespace Allors.Meta
 				.WithSupertype(ObjectState).Build();
 
 				// ProductCategoryRevenue
+				new InheritanceBuilder(Apps, new Guid("4096dd36-1728-43d2-82a0-479310cd05a3"))
+				.WithSubtype(ProductCategoryRevenue)
+				.WithSupertype(Deletable).Build();
 				new InheritanceBuilder(Apps, new Guid("ae90b408-9340-474f-bdcd-d8cffda524d1"))
 				.WithSubtype(ProductCategoryRevenue)
 				.WithSupertype(UserInterfaceable).Build();
@@ -11531,6 +11569,9 @@ namespace Allors.Meta
 				new InheritanceBuilder(Apps, new Guid("08a36b45-c64b-4f67-a059-79da252522b8"))
 				.WithSubtype(PartyRevenue)
 				.WithSupertype(UserInterfaceable).Build();
+				new InheritanceBuilder(Apps, new Guid("ef6149a6-c30a-488e-8faa-e8d1902f86c3"))
+				.WithSubtype(PartyRevenue)
+				.WithSupertype(Deletable).Build();
 
 				// MarketingMaterial
 				new InheritanceBuilder(Apps, new Guid("f0579a98-3e36-4dcf-9f06-a1c0ccf46cb0"))
@@ -11620,6 +11661,9 @@ namespace Allors.Meta
 				new InheritanceBuilder(Apps, new Guid("67dcf947-3f5b-4377-90f1-2035e4439def"))
 				.WithSubtype(SalesRepRevenue)
 				.WithSupertype(UserInterfaceable).Build();
+				new InheritanceBuilder(Apps, new Guid("aaf046c4-d170-4b94-91fc-a0ede06b9913"))
+				.WithSubtype(SalesRepRevenue)
+				.WithSupertype(Deletable).Build();
 
 				// EmploymentApplicationSource
 				new InheritanceBuilder(Apps, new Guid("27259086-0943-4308-8d63-e6a971d27e97"))
@@ -11679,6 +11723,9 @@ namespace Allors.Meta
 				new InheritanceBuilder(Apps, new Guid("2e608fe9-c064-4956-af3d-17426c94d621"))
 				.WithSubtype(SalesRepPartyRevenue)
 				.WithSupertype(UserInterfaceable).Build();
+				new InheritanceBuilder(Apps, new Guid("afd49559-f10c-4ff5-a4ac-5590c72a56f9"))
+				.WithSubtype(SalesRepPartyRevenue)
+				.WithSupertype(Deletable).Build();
 
 				// JournalType
 				new InheritanceBuilder(Apps, new Guid("fc8f1271-b38e-4e9c-8abf-d94ae7313fe2"))
@@ -11782,6 +11829,9 @@ namespace Allors.Meta
 				new InheritanceBuilder(Apps, new Guid("7c05dd7b-261a-407d-88fd-ae9349aa0bee"))
 				.WithSubtype(PickListItem)
 				.WithSupertype(UserInterfaceable).Build();
+				new InheritanceBuilder(Apps, new Guid("85f08bf4-b520-4332-8f49-d3cc5b0790c4"))
+				.WithSubtype(PickListItem)
+				.WithSupertype(Deletable).Build();
 
 				// SalesOrderItem
 				new InheritanceBuilder(Apps, new Guid("2e2eae5f-e584-41a9-8ca4-08d689987ff0"))
@@ -11891,6 +11941,9 @@ namespace Allors.Meta
 				.WithSupertype(ProductFeature).Build();
 
 				// PackageRevenue
+				new InheritanceBuilder(Apps, new Guid("2f39cc20-8192-45b9-afa4-eb0ce7467a7d"))
+				.WithSubtype(PackageRevenue)
+				.WithSupertype(Deletable).Build();
 				new InheritanceBuilder(Apps, new Guid("62f73400-4eb7-4722-b78b-764167188acd"))
 				.WithSubtype(PackageRevenue)
 				.WithSupertype(UserInterfaceable).Build();
@@ -11974,6 +12027,9 @@ namespace Allors.Meta
 				.WithSupertype(UserInterfaceable).Build();
 
 				// CustomerShipment
+				new InheritanceBuilder(Apps, new Guid("690c96ff-b571-49e0-be79-e1faea4bc288"))
+				.WithSubtype(CustomerShipment)
+				.WithSupertype(Deletable).Build();
 				new InheritanceBuilder(Apps, new Guid("b2c29382-1d90-4029-837d-505e2307022f"))
 				.WithSubtype(CustomerShipment)
 				.WithSupertype(Shipment).Build();
@@ -11982,6 +12038,9 @@ namespace Allors.Meta
 				new InheritanceBuilder(Apps, new Guid("7584b26b-c8c6-43fa-86f3-bcbcccdb9788"))
 				.WithSubtype(InternalOrganisationRevenue)
 				.WithSupertype(UserInterfaceable).Build();
+				new InheritanceBuilder(Apps, new Guid("9d1f6b24-9402-4afe-b915-7fb5ae178eb3"))
+				.WithSubtype(InternalOrganisationRevenue)
+				.WithSupertype(Deletable).Build();
 
 				// Package
 				new InheritanceBuilder(Apps, new Guid("431bf9a6-ba7d-4fff-8f4a-628dbfef42ae"))
@@ -12064,6 +12123,9 @@ namespace Allors.Meta
 				new InheritanceBuilder(Apps, new Guid("13c3a074-8ba2-4e6e-bde9-250cccf078dd"))
 				.WithSubtype(PartyPackageRevenue)
 				.WithSupertype(UserInterfaceable).Build();
+				new InheritanceBuilder(Apps, new Guid("ffbb7705-74f3-4456-8e82-2d4e0b3a6d40"))
+				.WithSubtype(PartyPackageRevenue)
+				.WithSupertype(Deletable).Build();
 
 				// PartyRelationshipStatus
 				new InheritanceBuilder(Apps, new Guid("b31dc56f-9e56-49d1-8f55-e1d4e1f4cdc6"))
@@ -12254,6 +12316,9 @@ namespace Allors.Meta
 				.WithSupertype(Searchable).Build();
 
 				// ProductRevenue
+				new InheritanceBuilder(Apps, new Guid("53ec5361-4844-45a7-8128-c1b22e5f6729"))
+				.WithSubtype(ProductRevenue)
+				.WithSupertype(Deletable).Build();
 				new InheritanceBuilder(Apps, new Guid("8cfffd6e-32aa-40b6-ad03-6ffaa72a188a"))
 				.WithSubtype(ProductRevenue)
 				.WithSupertype(UserInterfaceable).Build();
@@ -12844,6 +12909,9 @@ namespace Allors.Meta
 				.WithSupertype(AccessControlledObject).Build();
 
 				// ShipmentItem
+				new InheritanceBuilder(Apps, new Guid("8ec5cc0b-f4f9-4d1f-9b16-ab87a6d3ec08"))
+				.WithSubtype(ShipmentItem)
+				.WithSupertype(Deletable).Build();
 				new InheritanceBuilder(Apps, new Guid("b3a4fa91-dedc-4aaa-b29d-21b03e738114"))
 				.WithSubtype(ShipmentItem)
 				.WithSupertype(UserInterfaceable).Build();
@@ -13035,6 +13103,9 @@ namespace Allors.Meta
 				new InheritanceBuilder(Apps, new Guid("0064f173-9ab7-4291-9d28-cbfec04f8e72"))
 				.WithSubtype(Good)
 				.WithSupertype(Product).Build();
+				new InheritanceBuilder(Apps, new Guid("b0120538-d44a-458c-8fe0-6e3c89284100"))
+				.WithSubtype(Good)
+				.WithSupertype(Deletable).Build();
 
 				// EngineeringChangeObjectState
 				new InheritanceBuilder(Apps, new Guid("5ed6c227-75ee-477f-a235-68c76a7b4af7"))
@@ -13349,6 +13420,9 @@ namespace Allors.Meta
 				new InheritanceBuilder(Apps, new Guid("467836cd-8b9f-475a-b72c-338474df554c"))
 				.WithSubtype(SalesRepProductCategoryRevenue)
 				.WithSupertype(UserInterfaceable).Build();
+				new InheritanceBuilder(Apps, new Guid("9ba17394-99e3-4076-a396-ee90ceb32cdf"))
+				.WithSubtype(SalesRepProductCategoryRevenue)
+				.WithSupertype(Deletable).Build();
 
 				// ServiceFeature
 				new InheritanceBuilder(Apps, new Guid("044d8ced-1500-4eb9-9963-5f2697fa5d06"))
@@ -13415,6 +13489,9 @@ namespace Allors.Meta
 				new InheritanceBuilder(Base, new Guid("04af874d-d58c-4038-b98c-e822bfae2c3b"))
 				.WithSubtype(SearchData)
 				.WithSupertype(Derivable).Build();
+				new InheritanceBuilder(Base, new Guid("300c3e0c-f3b9-4558-afa4-34b00c5f5a2b"))
+				.WithSubtype(SearchData)
+				.WithSupertype(Deletable).Build();
 
 				// UserGroup
 				new InheritanceBuilder(Base, new Guid("6147b424-b6a9-44b9-b173-30d259165a51"))
@@ -13442,11 +13519,15 @@ namespace Allors.Meta
 
 				// Localised
 				// Permission
+				new InheritanceBuilder(Base, new Guid("799f485c-6f77-4da1-8f63-a2b1469f8808"))
+				.WithSubtype(Permission)
+				.WithSupertype(Deletable).Build();
 				new InheritanceBuilder(Base, new Guid("aec174d4-5633-462c-91a1-10d3e782fdb4"))
 				.WithSubtype(Permission)
 				.WithSupertype(UserInterfaceable).Build();
 
 				// Period
+				// Deletable
 				// User
 				new InheritanceBuilder(Base, new Guid("17c51f3d-869f-4f1e-95e0-011021837b69"))
 				.WithSubtype(User)
@@ -13464,6 +13545,13 @@ namespace Allors.Meta
 				.WithSupertype(UserInterfaceable).Build();
 
 				// SecurityToken
+				new InheritanceBuilder(Base, new Guid("0a52522a-c2e2-4647-98d4-27fb2fa6a7ad"))
+				.WithSubtype(SecurityToken)
+				.WithSupertype(Deletable).Build();
+				new InheritanceBuilder(Base, new Guid("62e808f2-cfc4-4281-b81d-6045220d4a97"))
+				.WithSubtype(SecurityToken)
+				.WithSupertype(Derivable).Build();
+
 				// SecurityTokenOwner
 				// Transition
 				// MediaType
@@ -13480,6 +13568,9 @@ namespace Allors.Meta
 				new InheritanceBuilder(Base, new Guid("28799476-9ca8-43bf-a06c-d2b33f91e436"))
 				.WithSubtype(Login)
 				.WithSupertype(Derivable).Build();
+				new InheritanceBuilder(Base, new Guid("9690ff31-1364-4e0e-9279-3e290477a37b"))
+				.WithSubtype(Login)
+				.WithSupertype(Deletable).Build();
 
 				// Role
 				new InheritanceBuilder(Base, new Guid("4e737d59-0330-4f4e-a3f3-7ec617d63748"))
@@ -13523,6 +13614,9 @@ namespace Allors.Meta
 				.WithSupertype(CityBound).Build();
 
 				// AccessControl
+				new InheritanceBuilder(Base, new Guid("421b85e6-f8c3-469f-bbd7-ce425355fb04"))
+				.WithSubtype(AccessControl)
+				.WithSupertype(Deletable).Build();
 				new InheritanceBuilder(Base, new Guid("b4c7e051-3605-41e6-a78b-edb1c70bde9d"))
 				.WithSubtype(AccessControl)
 				.WithSupertype(UserInterfaceable).Build();
@@ -13549,8 +13643,18 @@ namespace Allors.Meta
 				new InheritanceBuilder(Apps, new Guid("8ecbd248-e524-4bb7-9ea7-854391c91046"))
 				.WithSubtype(Person)
 				.WithSupertype(Party).Build();
+				new InheritanceBuilder(Apps, new Guid("bce76604-27d9-45df-a812-e121019aac52"))
+				.WithSubtype(Person)
+				.WithSupertype(Deletable).Build();
 
 				// Image
+				new InheritanceBuilder(Base, new Guid("ae0a1a2a-6413-470a-9c0d-e15ed36d4948"))
+				.WithSubtype(Image)
+				.WithSupertype(Deletable).Build();
+				new InheritanceBuilder(Base, new Guid("eedf1471-a143-479b-8ebe-47ddfa924877"))
+				.WithSubtype(Image)
+				.WithSupertype(Derivable).Build();
+
 				// Derivable
 				// Media
 				new InheritanceBuilder(Base, new Guid("c8cd0830-d1a7-4343-8049-dc18c34c213e"))
@@ -13559,6 +13663,9 @@ namespace Allors.Meta
 				new InheritanceBuilder(Base, new Guid("dae544a9-9dea-4b84-99c7-2b701868333d"))
 				.WithSubtype(Media)
 				.WithSupertype(UserInterfaceable).Build();
+				new InheritanceBuilder(Base, new Guid("f1586900-8030-46c1-a49b-7f2b5d6b6e64"))
+				.WithSubtype(Media)
+				.WithSupertype(Deletable).Build();
 
 				// AccessControlledObject
 				new InheritanceBuilder(Base, new Guid("b97d7219-f7d9-4df0-80a0-b624c46359aa"))
@@ -31596,6 +31703,7 @@ namespace Allors.Meta
 				.RoleType;
 
 
+				// Deletable
 				// User
 				UserUserEmailConfirmed = new RelationTypeBuilder(Base, new Guid("0b3b650b-fcd4-4475-b5c4-e2ee4f39b0be"),new Guid("c89a8e3f-6f76-41ac-b4dc-839f9080d917"),new Guid("1b1409b8-add7-494c-a895-002fc969ac7b"))
 				.WithObjectTypes(User, AllorsBoolean)

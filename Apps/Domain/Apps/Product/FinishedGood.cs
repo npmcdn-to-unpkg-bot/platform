@@ -22,9 +22,9 @@ namespace Allors.Domain
 {
     public partial class FinishedGood
     {
-        protected override void AppsOnPostBuild(IObjectBuilder builder)
+        public void AppsOnPostBuild(ObjectOnPostBuild method)
         {
-            base.AppsOnPostBuild(builder);
+            
 
             if (!this.ExistInventoryItemKind)
             {

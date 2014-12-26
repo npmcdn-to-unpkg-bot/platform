@@ -135,9 +135,9 @@ namespace Allors.Domain
             get { return this.OrderDate.ToShortDateString(); }
         }
 
-        protected override void AppsOnPostBuild(IObjectBuilder builder)
+        public void AppsOnPostBuild(ObjectOnPostBuild method)
         {
-            base.AppsOnPostBuild(builder);
+            
 
             if (!this.ExistCurrentObjectState)
             {

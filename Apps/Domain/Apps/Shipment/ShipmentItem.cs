@@ -20,26 +20,22 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class ShipmentItem
     {
-        public override void Delete()
+        public void AppsDelete(DeletableDelete method)
         {
             if (this.ExistItemIssuancesWhereShipmentItem)
             {
                 foreach (ItemIssuance itemIssuance in this.ItemIssuancesWhereShipmentItem)
                 {
-                    itemIssuance.Delete();
+                    itemIssuance.Delete().Execute();
                 }
             }
-
-            base.Delete();
         }
         
-        protected override void AppsOnPostBuild(IObjectBuilder builder)
+        public void AppsOnPostBuild(ObjectOnPostBuild method)
         {
-            base.AppsOnPostBuild(builder);
+            
         
             if (!this.ExistQuantity)
             {

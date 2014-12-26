@@ -22,9 +22,9 @@ namespace Allors.Domain
 {
     public partial class RawMaterial
     {
-        protected override void AppsOnPostBuild(IObjectBuilder builder)
+        public void AppsOnPostBuild(ObjectOnPostBuild method)
         {
-            base.AppsOnPostBuild(builder);
+            
 
             this.InventoryItemKind = new InventoryItemKinds(this.Strategy.Session).NonSerialized;
 

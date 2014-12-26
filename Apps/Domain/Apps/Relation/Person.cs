@@ -390,17 +390,17 @@ namespace Allors.Domain
         {
             foreach (Employment employment in this.EmploymentsWhereEmployee)
             {
-                employment.Delete();
+                employment.Delete().Execute();
             }
 
             if (this.ExistOwnerSecurityToken)
             {
                 foreach (AccessControl acl in this.OwnerSecurityToken.AccessControlsWhereObject)
                 {
-                    acl.Delete();
+                    acl.Delete().Execute();
                 }
 
-                this.OwnerSecurityToken.Delete();
+                this.OwnerSecurityToken.Delete().Execute();
             }
         }
 

@@ -97,7 +97,7 @@ namespace Allors.Domain
             {
                 if (!revenues.Contains(partyProductCategoryRevenue.Id))
                 {
-                    partyProductCategoryRevenue.Delete();
+                    partyProductCategoryRevenue.Delete().Execute();
                 }
             }
         }

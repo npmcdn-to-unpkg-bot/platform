@@ -49,7 +49,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Web\Tests.cs" />
     <Compile Include="Meta\AbstractTest.cs" />
     <Compile Include="Meta\Tests\AssociationTest.cs" />
     <Compile Include="Meta\Tests\DomainTest.cs" />
@@ -63,7 +62,6 @@
     <Compile Include="Meta\Population.cs" />
     <Compile Include="Generation\GenerationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Web\Tests\TextBoxTests.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -75,17 +73,9 @@
       <Project>{84495b8e-1800-41c9-a236-abe6265a23a3}</Project>
       <Name>Allors</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Domain\Domain.csproj">
-      <Project>{b6c2e17b-53e1-44a4-9299-5350cc854e65}</Project>
-      <Name>Domain</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Meta\Meta.csproj">
       <Project>{ba6efcfe-cb7f-4994-a5a4-c11ddaac32dd}</Project>
       <Name>Meta</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Resources\Resources.csproj">
-      <Project>{a10683f7-b261-4770-81c6-bb589e768acb}</Project>
-      <Name>Resources</Name>
     </ProjectReference>
     <ProjectReference Include="..\WebApplication\WebApplication.csproj">
       <Project>{243c86cd-a95c-496e-9c6c-96c25839725a}</Project>

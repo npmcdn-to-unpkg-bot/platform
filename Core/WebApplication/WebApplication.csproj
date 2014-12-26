@@ -99,17 +99,9 @@
       <Project>{84495b8e-1800-41c9-a236-abe6265a23a3}</Project>
       <Name>Allors</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Domain\Domain.csproj">
-      <Project>{b6c2e17b-53e1-44a4-9299-5350cc854e65}</Project>
-      <Name>Domain</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Meta\Meta.csproj">
       <Project>{ba6efcfe-cb7f-4994-a5a4-c11ddaac32dd}</Project>
       <Name>Meta</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Resources\Resources.csproj">
-      <Project>{a10683f7-b261-4770-81c6-bb589e768acb}</Project>
-      <Name>Resources</Name>
     </ProjectReference>
     <ProjectReference Include="..\Web\Web.csproj">
       <Project>{9b6a7130-eec4-49e0-99e9-0e3ee81d21dc}</Project>

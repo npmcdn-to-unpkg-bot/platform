@@ -24,10 +24,8 @@ namespace Allors.Domain
 
     public partial class AccountingPeriod
     {
-        protected override void AppsOnPostBuild(IObjectBuilder builder)
+        public void AppsOnPostBuild(ObjectOnPostBuild method)
         {
-            base.AppsOnPostBuild(builder);
-
             if (!this.ExistActive)
             {
                 this.Active = true;

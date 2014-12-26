@@ -26,17 +26,15 @@ namespace Allors.Domain
 
     public partial class BasePrice
     {
-        public override void Delete()
+        public void AppsDelete(DeletableDelete method)
         {
             this.Product.RemoveFromBasePrices(this);
             this.ProductFeature.RemoveFromBasePrices(this);
-
-            base.Delete();
         }
         
-        protected override void AppsOnPostBuild(IObjectBuilder builder)
+        public void AppsOnPostBuild(ObjectOnPostBuild method)
         {
-            base.AppsOnPostBuild(builder);
+            
 
             if (!this.ExistSpecifiedFor)
             {

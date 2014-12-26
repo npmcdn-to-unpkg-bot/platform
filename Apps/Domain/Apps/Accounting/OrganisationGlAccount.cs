@@ -86,9 +86,9 @@ namespace Allors.Domain
             return false;
         }
 
-        protected override void AppsOnPostBuild(IObjectBuilder builder)
+        public void AppsOnPostBuild(ObjectOnPostBuild method)
         {
-            base.AppsOnPostBuild(builder);
+            
                 
             this.HasBankStatementTransactions = false;
         }

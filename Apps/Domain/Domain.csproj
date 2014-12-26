@@ -47,6 +47,9 @@
     <Compile Include="..\..\Base\Domain\Base\Common\Counters.cs">
       <Link>Base\Common\Counters.cs</Link>
     </Compile>
+    <Compile Include="..\..\Base\Domain\Base\Common\Deletable.cs">
+      <Link>Base\Common\Deletable.cs</Link>
+    </Compile>
     <Compile Include="..\..\Base\Domain\Base\Common\Derivable.cs">
       <Link>Base\Common\Derivable.cs</Link>
     </Compile>
@@ -124,6 +127,9 @@
     </Compile>
     <Compile Include="..\..\Base\Domain\Base\Common\UniquelyIdentifiableCache.cs">
       <Link>Base\Common\UniquelyIdentifiableCache.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Base\Domain\Base\Common\UniquelyIdentifiableExtension.cs">
+      <Link>Base\Common\UniquelyIdentifiableExtension.cs</Link>
     </Compile>
     <Compile Include="..\..\Base\Domain\Base\Config.cs">
       <Link>Base\Config.cs</Link>
@@ -203,6 +209,9 @@
     <Compile Include="..\..\Base\Domain\Base\Drawing\BitmapExtensions.cs">
       <Link>Base\Drawing\BitmapExtensions.cs</Link>
     </Compile>
+    <Compile Include="..\..\Base\Domain\Base\IObjectBase.cs">
+      <Link>Base\IObjectBase.cs</Link>
+    </Compile>
     <Compile Include="..\..\Base\Domain\Base\IObjectBuilder.cs">
       <Link>Base\IObjectBuilder.cs</Link>
     </Compile>
@@ -257,11 +266,17 @@
     <Compile Include="..\..\Base\Domain\Base\Meta\Path.cs">
       <Link>Base\Meta\Path.cs</Link>
     </Compile>
+    <Compile Include="..\..\Base\Domain\Base\Object.cs">
+      <Link>Base\Object.cs</Link>
+    </Compile>
     <Compile Include="..\..\Base\Domain\Base\ObjectBuilder.cs">
       <Link>Base\ObjectBuilder.cs</Link>
     </Compile>
     <Compile Include="..\..\Base\Domain\Base\ObjectExtensions.cs">
       <Link>Base\ObjectExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Base\Domain\Base\ObjectOnBuild.cs">
+      <Link>Base\ObjectOnBuild.cs</Link>
     </Compile>
     <Compile Include="..\..\Base\Domain\Base\ObjectOnPostBuild.cs">
       <Link>Base\ObjectOnPostBuild.cs</Link>
@@ -307,9 +322,6 @@
     </Compile>
     <Compile Include="..\..\Base\Domain\Base\Security\AccessControl.cs">
       <Link>Base\Security\AccessControl.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Base\Domain\Base\Security\AccessControlledObject.cs">
-      <Link>Base\Security\AccessControlledObject.cs</Link>
     </Compile>
     <Compile Include="..\..\Base\Domain\Base\Security\AccessControlList.cs">
       <Link>Base\Security\AccessControlList.cs</Link>
@@ -382,9 +394,6 @@
     </Compile>
     <Compile Include="..\..\Base\Domain\Base\Setup.cs">
       <Link>Base\Setup.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Domain\Core\ObjectBase.cs">
-      <Link>Core\ObjectBase.cs</Link>
     </Compile>
     <Compile Include="Apps\Accounting\TimeFrequency.cs" />
     <Compile Include="Apps\Accounting\AccountingPeriod.cs" />
@@ -1418,6 +1427,8 @@
     <Compile Include="Generated\Base\DebitCreditConstant.g.cs" />
     <Compile Include="Generated\Base\Deduction.g.cs" />
     <Compile Include="Generated\Base\DeductionType.g.cs" />
+    <Compile Include="Generated\Base\Deletable.g.cs" />
+    <Compile Include="Generated\Base\DeletableDelete.g.cs" />
     <Compile Include="Generated\Base\Deliverable.g.cs" />
     <Compile Include="Generated\Base\DeliverableBasedService.g.cs" />
     <Compile Include="Generated\Base\DeliverableOrderItem.g.cs" />
@@ -1555,6 +1566,7 @@
     <Compile Include="Generated\Base\NonSerializedInventoryItemStatus.g.cs" />
     <Compile Include="Generated\Base\Note.g.cs" />
     <Compile Include="Generated\Base\Object.g.cs" />
+    <Compile Include="Generated\Base\ObjectApplySecurityOnPostBuild.g.cs" />
     <Compile Include="Generated\Base\ObjectOnPostBuild.g.cs" />
     <Compile Include="Generated\Base\ObjectState.g.cs" />
     <Compile Include="Generated\Base\Obligation.g.cs" />
@@ -1899,8 +1911,6 @@
     <Compile Include="Generated\Base\WorkEffortWorkDone.g.cs" />
     <Compile Include="Generated\Base\WorkFlow.g.cs" />
     <Compile Include="Generated\Base\WorkRequirement.g.cs" />
-    <Compile Include="Test\ObjectBase.cs" />
-    <Compile Include="Test\ObjectBase.v.cs" />
     <Compile Include="Test\ObjectsBase.cs" />
     <Compile Include="Test\ObjectsBase.v.cs" />
     <Compile Include="Test\Setup.cs" />

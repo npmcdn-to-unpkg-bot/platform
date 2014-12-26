@@ -20,20 +20,11 @@
 
 namespace Allors.Domain
 {
-    using System;
     using System.Collections.Generic;
     using System.Globalization;
 
     public partial class Person
     {
-        public override void Delete()
-        {
-            this.AppsDelete();
-            this.AppsDelete();
-
-            base.Delete();
-        }
-
         public void DeriveCommission()
         {
             this.AppsDeriveCommission();

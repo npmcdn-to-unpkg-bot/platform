@@ -365,9 +365,9 @@ namespace Allors.Domain
             this.DiscountAdjustment.RemoveAmount();
         }
 
-        protected override void AppsOnPostBuild(IObjectBuilder builder)
+        public void AppsOnPostBuild(ObjectOnPostBuild method)
         {
-            base.AppsOnPostBuild(builder);
+            
 
             if (!this.ExistCurrentObjectState)
             {
