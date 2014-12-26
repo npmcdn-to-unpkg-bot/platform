@@ -348,12 +348,12 @@ namespace Allors.Domain
 
                 foreach (PurchaseInvoiceItem item in this.PurchaseInvoiceItems)
                 {
-                    this.TotalBasePrice += item.TotalBasePrice;
-                    this.TotalSurcharge += item.TotalSurcharge;
-                    this.TotalSurcharge += item.TotalSurcharge;
-                    this.TotalVat += item.TotalVat;
-                    this.TotalExVat += item.TotalExVat;
-                    this.TotalIncVat += item.TotalIncVat;
+                    this.TotalBasePrice += item.TotalBasePrice.Value;
+                    this.TotalSurcharge += item.TotalSurcharge.Value;
+                    this.TotalSurcharge += item.TotalSurcharge.Value;
+                    this.TotalVat += item.TotalVat.Value;
+                    this.TotalExVat += item.TotalExVat.Value;
+                    this.TotalIncVat += item.TotalIncVat.Value;
                 }
             }
         }

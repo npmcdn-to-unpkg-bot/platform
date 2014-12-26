@@ -93,7 +93,7 @@ namespace Allors.Domain
                 {
                     if (salesInvoiceItem.ExistProduct && salesInvoiceItem.Product.Equals(this.Product))
                     {
-                        this.Revenue += salesInvoiceItem.TotalExVat;
+                        this.Revenue += salesInvoiceItem.TotalExVat.Value;
                         this.Quantity += salesInvoiceItem.Quantity;
                     }
                 }

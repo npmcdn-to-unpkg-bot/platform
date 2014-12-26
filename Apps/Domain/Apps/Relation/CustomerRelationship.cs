@@ -226,7 +226,7 @@ namespace Allors.Domain
                                 {
                                     if (invoiceItem.ExistTotalIncVat)
                                     {
-                                        this.AmountDue += invoiceItem.TotalIncVat - invoiceItem.AmountPaid;
+                                        this.AmountDue += invoiceItem.TotalIncVat.Value - invoiceItem.AmountPaid;
                                     }
                                 }
                             }

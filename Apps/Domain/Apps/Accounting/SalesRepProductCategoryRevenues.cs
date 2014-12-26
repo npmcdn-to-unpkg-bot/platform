@@ -226,7 +226,7 @@ namespace Allors.Domain
             }
 
             revenues.Add(salesRepProductCategoryRevenue.Id);
-            salesRepProductCategoryRevenue.Revenue += salesInvoiceItem.TotalExVat;
+            salesRepProductCategoryRevenue.Revenue += salesInvoiceItem.TotalExVat.Value;
 
             foreach (ProductCategory parent in productCategory.Parents)
             {

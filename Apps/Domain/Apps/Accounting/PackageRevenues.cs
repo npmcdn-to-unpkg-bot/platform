@@ -165,7 +165,7 @@ namespace Allors.Domain
             }
 
             revenues.Add(packageRevenue.Id);
-            packageRevenue.Revenue += salesInvoiceItem.TotalExVat;
+            packageRevenue.Revenue += salesInvoiceItem.TotalExVat.Value;
         }
 
         private static PackageRevenue CreatePackageRevenue(ISession session, SalesInvoice invoice, Package package)

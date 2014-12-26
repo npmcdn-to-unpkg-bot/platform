@@ -100,13 +100,13 @@ namespace Allors.Domain
                     {
                         if (this.ProductCategory.ProductsWhereProductCategory.Contains(salesInvoiceItem.Product))
                         {
-                            this.Revenue += salesInvoiceItem.TotalExVat;
+                            this.Revenue += salesInvoiceItem.TotalExVat.Value;
                         }
                         else
                         {
                             if (salesInvoiceItem.Product.ProductCategoriesExpanded.Contains(this.ProductCategory))
                             {
-                                this.Revenue += salesInvoiceItem.TotalExVat;
+                                this.Revenue += salesInvoiceItem.TotalExVat.Value;
                             }
                         }
                     }

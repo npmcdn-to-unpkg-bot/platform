@@ -36,7 +36,7 @@ namespace Allors.Domain
                 return true;
             }
 
-            if (this.HasBankStatementTransactions)
+            if (this.HasBankStatementTransactions.Value)
             {
                 return true;
             }

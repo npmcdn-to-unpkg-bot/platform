@@ -102,7 +102,7 @@ namespace Allors.Domain
                 {
                     if (salesInvoiceItem.ExistSalesRep && salesInvoiceItem.SalesRep.Equals(this.SalesRep))
                     {
-                        this.Revenue += salesInvoiceItem.TotalExVat;
+                        this.Revenue += salesInvoiceItem.TotalExVat.Value;
                     }
                 }
             }

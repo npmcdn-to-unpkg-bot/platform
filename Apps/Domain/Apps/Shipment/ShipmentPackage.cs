@@ -58,7 +58,7 @@ namespace Allors.Domain
 
             this.AppsDeriveSequenceNumber(derivation);
 
-            this.DisplayName = string.Format("Package {0}", this.ExistSequenceNumber ? this.SequenceNumber.ToString(CultureInfo.InvariantCulture) : string.Empty);
+            this.DisplayName = string.Format("Package {0}", this.SequenceNumber.HasValue ? this.SequenceNumber.Value.ToString(CultureInfo.InvariantCulture) : string.Empty);
 
             foreach (Document document in this.Documents)
             {
@@ -83,9 +83,9 @@ namespace Allors.Domain
             {
                 foreach (ShipmentPackage shipmentPackage in this.ShipmentWhereShipmentPackage.ShipmentPackages)
                 {
-                    if (shipmentPackage.ExistSequenceNumber && shipmentPackage.SequenceNumber > highestNumber)
+                    if (shipmentPackage.SequenceNumber.HasValue && shipmentPackage.SequenceNumber > highestNumber)
                     {
-                        highestNumber = shipmentPackage.SequenceNumber;
+                        highestNumber = shipmentPackage.SequenceNumber.Value;
                     }
                 }
 

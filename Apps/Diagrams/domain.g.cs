@@ -136,9 +136,9 @@ namespace Allors.Domain
 	}
 	public interface Party  : Localised, UserInterfaceable, SearchResult, SecurityTokenOwner, UniquelyIdentifiable, Searchable 
 	{
-					global::System.Decimal YTDRevenue {set;}
+					global::System.Decimal? YTDRevenue {set;}
 
-					global::System.Decimal LastYearsRevenue {set;}
+					global::System.Decimal? LastYearsRevenue {set;}
 
 					TelecommunicationsNumber BillingInquiriesFax {set;}
 
@@ -196,7 +196,7 @@ namespace Allors.Domain
 
 					PostalAddress ShippingAddress {set;}
 
-					global::System.Decimal OpenOrderAmount {set;}
+					global::System.Decimal? OpenOrderAmount {set;}
 
 					TelecommunicationsNumber GeneralFaxNumber {set;}
 
@@ -436,7 +436,7 @@ namespace Allors.Domain
 
 					global::System.DateTime TransactionDate {set;}
 
-					global::System.Decimal DerivedTotalAmount {set;}
+					global::System.Decimal? DerivedTotalAmount {set;}
 
 					AccountingTransactionNumber AccountingTransactionNumber {set;}
 
@@ -523,9 +523,9 @@ namespace Allors.Domain
 	}
 	public interface GeoLocatable  : AccessControlledObject, UserInterfaceable, Searchable, UniquelyIdentifiable 
 	{
-					global::System.Decimal Latitude {set;}
+					global::System.Decimal? Latitude {set;}
 
-					global::System.Decimal Longitude {set;}
+					global::System.Decimal? Longitude {set;}
 
 	}
 	public interface Shipment  : Printable, Transitional, Searchable, UniquelyIdentifiable, UserInterfaceable, SearchResult 
@@ -623,7 +623,7 @@ namespace Allors.Domain
 
 					DiscountAdjustment DiscountAdjustment {set;}
 
-					global::System.Decimal AmountPaid {set;}
+					global::System.Decimal? AmountPaid {set;}
 
 					global::System.Decimal TotalDiscount {set;}
 
@@ -850,39 +850,39 @@ namespace Allors.Domain
 	}
 	public interface InvoiceItem  : UserInterfaceable, Transitional 
 	{
-					global::System.Decimal TotalIncVatCustomerCurrency {set;}
+					global::System.Decimal? TotalIncVatCustomerCurrency {set;}
 
 					AgreementTerm InvoiceTerms {set;}
 
-					global::System.Decimal TotalVatCustomerCurrency {set;}
+					global::System.Decimal? TotalVatCustomerCurrency {set;}
 
-					global::System.Decimal TotalBasePrice {set;}
+					global::System.Decimal? TotalBasePrice {set;}
 
-					global::System.Decimal TotalSurcharge {set;}
+					global::System.Decimal? TotalSurcharge {set;}
 
-					global::System.Decimal TotalInvoiceAdjustment {set;}
+					global::System.Decimal? TotalInvoiceAdjustment {set;}
 
-					global::System.Decimal TotalExVatCustomerCurrency {set;}
+					global::System.Decimal? TotalExVatCustomerCurrency {set;}
 
-					global::System.Decimal TotalDiscount {set;}
+					global::System.Decimal? TotalDiscount {set;}
 
 					InvoiceVatRateItem InvoiceVatRateItems {set;}
 
 					global::System.Decimal? TotalDiscountAsPercentage {set;}
 
-					global::System.Decimal CalculatedUnitPrice {set;}
+					global::System.Decimal? CalculatedUnitPrice {set;}
 
-					global::System.Decimal UnitDiscount {set;}
+					global::System.Decimal? UnitDiscount {set;}
 
 					VatRegime AssignedVatRegime {set;}
 
-					global::System.Decimal TotalIncVat {set;}
+					global::System.Decimal? TotalIncVat {set;}
 
 					InvoiceItem AdjustmentFor {set;}
 
-					global::System.Decimal UnitBasePrice {set;}
+					global::System.Decimal? UnitBasePrice {set;}
 
-					global::System.Decimal TotalSurchargeCustomerCurrency {set;}
+					global::System.Decimal? TotalSurchargeCustomerCurrency {set;}
 
 					SerializedInventoryItem SerializedInventoryItem {set;}
 
@@ -894,17 +894,17 @@ namespace Allors.Domain
 
 					global::System.String Message {set;}
 
-					global::System.Decimal TotalInvoiceAdjustmentCustomerCurrency {set;}
+					global::System.Decimal? TotalInvoiceAdjustmentCustomerCurrency {set;}
 
-					global::System.Decimal AmountPaid {set;}
+					global::System.Decimal? AmountPaid {set;}
 
 					VatRate DerivedVatRate {set;}
 
-					global::System.Decimal TotalDiscountCustomerCurrency {set;}
+					global::System.Decimal? TotalDiscountCustomerCurrency {set;}
 
-					global::System.Decimal UnitSurcharge {set;}
+					global::System.Decimal? UnitSurcharge {set;}
 
-					global::System.Decimal TotalExVat {set;}
+					global::System.Decimal? TotalExVat {set;}
 
 					global::System.Decimal Quantity {set;}
 
@@ -912,13 +912,13 @@ namespace Allors.Domain
 
 					VatRegime VatRegime {set;}
 
-					global::System.Decimal TotalBasePriceCustomerCurrency {set;}
+					global::System.Decimal? TotalBasePriceCustomerCurrency {set;}
 
-					global::System.Decimal TotalVat {set;}
+					global::System.Decimal? TotalVat {set;}
 
 					SurchargeAdjustment SurchargeAdjustment {set;}
 
-					global::System.Decimal UnitVat {set;}
+					global::System.Decimal? UnitVat {set;}
 
 					global::System.String Description {set;}
 
@@ -965,7 +965,7 @@ namespace Allors.Domain
 	{
 					global::System.Decimal? BalanceLimit {set;}
 
-					global::System.Decimal CurrentBalance {set;}
+					global::System.Decimal? CurrentBalance {set;}
 
 					Journal Journal {set;}
 
@@ -984,49 +984,49 @@ namespace Allors.Domain
 	}
 	public interface OrderItem  : UserInterfaceable, Commentable, Transitional 
 	{
-					global::System.Decimal TotalDiscountAsPercentage {set;}
+					global::System.Decimal? TotalDiscountAsPercentage {set;}
 
 					DiscountAdjustment DiscountAdjustment {set;}
 
-					global::System.Decimal UnitVat {set;}
+					global::System.Decimal? UnitVat {set;}
 
-					global::System.Decimal TotalVatCustomerCurrency {set;}
+					global::System.Decimal? TotalVatCustomerCurrency {set;}
 
 					VatRegime VatRegime {set;}
 
 					BudgetItem BudgetItem {set;}
 
-					global::System.Decimal TotalVat {set;}
+					global::System.Decimal? TotalVat {set;}
 
-					global::System.Decimal UnitSurcharge {set;}
+					global::System.Decimal? UnitSurcharge {set;}
 
-					global::System.Decimal UnitDiscount {set;}
+					global::System.Decimal? UnitDiscount {set;}
 
 					global::System.Decimal PreviousQuantity {set;}
 
 					global::System.Decimal QuantityOrdered {set;}
 
-					global::System.Decimal TotalExVatCustomerCurrency {set;}
+					global::System.Decimal? TotalExVatCustomerCurrency {set;}
 
 					VatRate DerivedVatRate {set;}
 
 					global::System.Decimal? ActualUnitPrice {set;}
 
-					global::System.Decimal TotalIncVatCustomerCurrency {set;}
+					global::System.Decimal? TotalIncVatCustomerCurrency {set;}
 
 					global::System.String Description {set;}
 
-					global::System.Decimal UnitBasePrice {set;}
+					global::System.Decimal? UnitBasePrice {set;}
 
 					PurchaseOrder CorrespondingPurchaseOrder {set;}
 
-					global::System.Decimal CalculatedUnitPrice {set;}
+					global::System.Decimal? CalculatedUnitPrice {set;}
 
-					global::System.Decimal TotalOrderAdjustmentCustomerCurrency {set;}
+					global::System.Decimal? TotalOrderAdjustmentCustomerCurrency {set;}
 
-					global::System.Decimal TotalOrderAdjustment {set;}
+					global::System.Decimal? TotalOrderAdjustment {set;}
 
-					global::System.Decimal TotalSurchargeCustomerCurrency {set;}
+					global::System.Decimal? TotalSurchargeCustomerCurrency {set;}
 
 					QuoteItem QuoteItem {set;}
 
@@ -1034,15 +1034,15 @@ namespace Allors.Domain
 
 					global::System.DateTime DeliveryDate {set;}
 
-					global::System.Decimal TotalIncVat {set;}
+					global::System.Decimal? TotalIncVat {set;}
 
-					global::System.Decimal TotalSurchargeAsPercentage {set;}
+					global::System.Decimal? TotalSurchargeAsPercentage {set;}
 
-					global::System.Decimal TotalDiscountCustomerCurrency {set;}
+					global::System.Decimal? TotalDiscountCustomerCurrency {set;}
 
-					global::System.Decimal TotalDiscount {set;}
+					global::System.Decimal? TotalDiscount {set;}
 
-					global::System.Decimal TotalSurcharge {set;}
+					global::System.Decimal? TotalSurcharge {set;}
 
 					OrderTerm OrderTerms {set;}
 
@@ -1050,13 +1050,13 @@ namespace Allors.Domain
 
 					global::System.String ShippingInstruction {set;}
 
-					global::System.Decimal TotalBasePrice {set;}
+					global::System.Decimal? TotalBasePrice {set;}
 
 					OrderItem Associations {set;}
 
-					global::System.Decimal TotalExVat {set;}
+					global::System.Decimal? TotalExVat {set;}
 
-					global::System.Decimal TotalBasePriceCustomerCurrency {set;}
+					global::System.Decimal? TotalBasePriceCustomerCurrency {set;}
 
 					PriceComponent CurrentPriceComponents {set;}
 
@@ -2147,7 +2147,7 @@ namespace Allors.Domain
 
 					global::System.Decimal AmountDue {set;}
 
-					global::System.Decimal YTDRevenue {set;}
+					global::System.Decimal? YTDRevenue {set;}
 
 					global::System.DateTime? LastReminderDate {set;}
 
@@ -2155,7 +2155,7 @@ namespace Allors.Domain
 
 					global::System.Int32 SubAccountNumber {set;}
 
-					global::System.Decimal LastYearsRevenue {set;}
+					global::System.Decimal? LastYearsRevenue {set;}
 
 	}
 	public interface PartyClassification  : UserInterfaceable, Searchable 
@@ -2241,7 +2241,7 @@ namespace Allors.Domain
 
 					global::System.DateTime CreationDate {set;}
 
-					global::System.Int32 SequenceNumber {set;}
+					global::System.Int32? SequenceNumber {set;}
 
 	}
 	public interface PurchaseOrderObjectState  : ObjectState 
@@ -2447,7 +2447,7 @@ namespace Allors.Domain
 
 					Party Party {set;}
 
-					global::System.Boolean HasBankStatementTransactions {set;}
+					global::System.Boolean? HasBankStatementTransactions {set;}
 
 					ProductCategory ProductCategory {set;}
 
@@ -2473,7 +2473,7 @@ namespace Allors.Domain
 
 					global::System.Decimal QuantityOnHand {set;}
 
-					global::System.Decimal PreviousQuantityOnHand {set;}
+					global::System.Decimal? PreviousQuantityOnHand {set;}
 
 					global::System.Decimal AvailableToPromise {set;}
 
@@ -2523,21 +2523,21 @@ namespace Allors.Domain
 
 					SalesInvoiceType SalesInvoiceType {set;}
 
-					global::System.Decimal InitialProfitMargin {set;}
+					global::System.Decimal? InitialProfitMargin {set;}
 
 					PaymentMethod PaymentMethod {set;}
 
 					SalesOrder SalesOrder {set;}
 
-					global::System.Decimal InitialMarkupPercentage {set;}
+					global::System.Decimal? InitialMarkupPercentage {set;}
 
-					global::System.Decimal MaintainedMarkupPercentage {set;}
+					global::System.Decimal? MaintainedMarkupPercentage {set;}
 
 					Person SalesReps {set;}
 
 					Shipment Shipment {set;}
 
-					global::System.Decimal MaintainedProfitMargin {set;}
+					global::System.Decimal? MaintainedProfitMargin {set;}
 
 					SalesInvoiceStatus InvoiceStatuses {set;}
 
@@ -2549,7 +2549,7 @@ namespace Allors.Domain
 
 					SalesInvoiceItem SalesInvoiceItems {set;}
 
-					global::System.Decimal TotalListPriceCustomerCurrency {set;}
+					global::System.Decimal? TotalListPriceCustomerCurrency {set;}
 
 					Party ShipToCustomer {set;}
 
@@ -2590,7 +2590,7 @@ namespace Allors.Domain
 	{
 					global::System.Decimal Cost {set;}
 
-					global::System.Decimal GrossMargin {set;}
+					global::System.Decimal? GrossMargin {set;}
 
 					QuoteTerm QuoteTerm {set;}
 
@@ -2750,13 +2750,13 @@ namespace Allors.Domain
 	{
 					Person SalesRepresentative {set;}
 
-					global::System.Decimal LastYearsCommission {set;}
+					global::System.Decimal? LastYearsCommission {set;}
 
 					ProductCategory ProductCategories {set;}
 
 					InternalOrganisation InternalOrganisation {set;}
 
-					global::System.Decimal YTDCommission {set;}
+					global::System.Decimal? YTDCommission {set;}
 
 					Party Customer {set;}
 
@@ -2886,13 +2886,13 @@ namespace Allors.Domain
 
 					Party BillToCustomer {set;}
 
-					global::System.Decimal TotalPurchasePrice {set;}
+					global::System.Decimal? TotalPurchasePrice {set;}
 
 					ShipmentMethod ShipmentMethod {set;}
 
-					global::System.Decimal TotalListPriceCustomerCurrency {set;}
+					global::System.Decimal? TotalListPriceCustomerCurrency {set;}
 
-					global::System.Decimal MaintainedProfitMargin {set;}
+					global::System.Decimal? MaintainedProfitMargin {set;}
 
 					PostalAddress ShipToAddress {set;}
 
@@ -2902,11 +2902,11 @@ namespace Allors.Domain
 
 					Person SalesReps {set;}
 
-					global::System.Decimal InitialProfitMargin {set;}
+					global::System.Decimal? InitialProfitMargin {set;}
 
 					SalesOrderObjectState PreviousObjectState {set;}
 
-					global::System.Decimal TotalListPrice {set;}
+					global::System.Decimal? TotalListPrice {set;}
 
 					global::System.Boolean PartiallyShip {set;}
 
@@ -2916,7 +2916,7 @@ namespace Allors.Domain
 
 					Store Store {set;}
 
-					global::System.Decimal MaintainedMarkupPercentage {set;}
+					global::System.Decimal? MaintainedMarkupPercentage {set;}
 
 					ContactMechanism BillFromContactMechanism {set;}
 
@@ -2940,7 +2940,7 @@ namespace Allors.Domain
 
 					SalesOrderObjectState CurrentObjectState {set;}
 
-					global::System.Decimal InitialMarkupPercentage {set;}
+					global::System.Decimal? InitialMarkupPercentage {set;}
 
 					InternalOrganisation TakenByInternalOrganisation {set;}
 
@@ -3160,7 +3160,7 @@ namespace Allors.Domain
 	}
 	public interface SalesOrderItem  : OrderItem 
 	{
-					global::System.Decimal InitialProfitMargin {set;}
+					global::System.Decimal? InitialProfitMargin {set;}
 
 					SalesOrderItemStatus CurrentPaymentStatus {set;}
 
@@ -3168,7 +3168,7 @@ namespace Allors.Domain
 
 					OrderItem OrderedWithFeatures {set;}
 
-					global::System.Decimal MaintainedProfitMargin {set;}
+					global::System.Decimal? MaintainedProfitMargin {set;}
 
 					global::System.Decimal? RequiredProfitMargin {set;}
 
@@ -3192,7 +3192,7 @@ namespace Allors.Domain
 
 					SalesOrderItemObjectState CurrentObjectState {set;}
 
-					global::System.Decimal UnitPurchasePrice {set;}
+					global::System.Decimal? UnitPurchasePrice {set;}
 
 					Party ShipToParty {set;}
 
@@ -3210,11 +3210,11 @@ namespace Allors.Domain
 
 					global::System.Decimal QuantityPendingShipment {set;}
 
-					global::System.Decimal MaintainedMarkupPercentage {set;}
+					global::System.Decimal? MaintainedMarkupPercentage {set;}
 
 					SalesOrderItemObjectState PreviousObjectState {set;}
 
-					global::System.Decimal InitialMarkupPercentage {set;}
+					global::System.Decimal? InitialMarkupPercentage {set;}
 
 					NonSerializedInventoryItem ReservedFromInventoryItem {set;}
 
@@ -3470,7 +3470,7 @@ namespace Allors.Domain
 
 					global::System.Boolean HeldManually {set;}
 
-					global::System.Decimal ShipmentValue {set;}
+					global::System.Decimal? ShipmentValue {set;}
 
 	}
 	public interface InternalOrganisationRevenue  : UserInterfaceable, Deletable 
@@ -3830,13 +3830,13 @@ namespace Allors.Domain
 
 					global::System.Decimal? RequiredProfitMargin {set;}
 
-					global::System.Decimal InitialMarkupPercentage {set;}
+					global::System.Decimal? InitialMarkupPercentage {set;}
 
-					global::System.Decimal MaintainedMarkupPercentage {set;}
+					global::System.Decimal? MaintainedMarkupPercentage {set;}
 
 					Product Product {set;}
 
-					global::System.Decimal UnitPurchasePrice {set;}
+					global::System.Decimal? UnitPurchasePrice {set;}
 
 					SalesInvoiceItemStatus InvoiceItemStatuses {set;}
 
@@ -3846,11 +3846,11 @@ namespace Allors.Domain
 
 					Person SalesRep {set;}
 
-					global::System.Decimal InitialProfitMargin {set;}
+					global::System.Decimal? InitialProfitMargin {set;}
 
 					SalesInvoiceItemStatus CurrentInvoiceItemStatus {set;}
 
-					global::System.Decimal MaintainedProfitMargin {set;}
+					global::System.Decimal? MaintainedProfitMargin {set;}
 
 					TimeEntry TimeEntries {set;}
 
@@ -3908,7 +3908,7 @@ namespace Allors.Domain
 
 					PurchaseOrderItemStatus PaymentStatuses {set;}
 
-					global::System.Decimal QuantityReceived {set;}
+					global::System.Decimal? QuantityReceived {set;}
 
 					PurchaseOrderItemStatus CurrentShipmentStatus {set;}
 
@@ -4174,9 +4174,9 @@ namespace Allors.Domain
 
 					global::System.String TransactionReferenceNumber {set;}
 
-					global::System.Int32 NextPurchaseInvoiceNumber {set;}
+					global::System.Int32? NextPurchaseInvoiceNumber {set;}
 
-					global::System.Int32 NextQuoteNumber {set;}
+					global::System.Int32? NextQuoteNumber {set;}
 
 					JournalEntryNumber JournalEntryNumbers {set;}
 
@@ -4204,7 +4204,7 @@ namespace Allors.Domain
 
 					global::System.String Name {set;}
 
-					global::System.Int32 NextPurchaseOrderNumber {set;}
+					global::System.Int32? NextPurchaseOrderNumber {set;}
 
 					global::System.String PurchaseTransactionReferenceNumber {set;}
 
@@ -4212,7 +4212,7 @@ namespace Allors.Domain
 
 					StringTemplate PurchaseOrderTemplates {set;}
 
-					global::System.Int32 NextIncomingShipmentNumber {set;}
+					global::System.Int32? NextIncomingShipmentNumber {set;}
 
 					CostOfGoodsSoldMethod CostOfGoodsSoldMethod {set;}
 
@@ -4398,7 +4398,7 @@ namespace Allors.Domain
 
 					Document Documents {set;}
 
-					global::System.Decimal QuantityShipped {set;}
+					global::System.Decimal? QuantityShipped {set;}
 
 					ShipmentItem InResponseToShipmentItems {set;}
 
@@ -4523,7 +4523,7 @@ namespace Allors.Domain
 
 					PaymentMethod DefaultPaymentMethod {set;}
 
-					global::System.Int32 NextSalesOrderNumber {set;}
+					global::System.Int32? NextSalesOrderNumber {set;}
 
 					InternalOrganisation Owner {set;}
 
@@ -4537,7 +4537,7 @@ namespace Allors.Domain
 
 					StringTemplate CustomerShipmentTemplates {set;}
 
-					global::System.Int32 NextSalesInvoiceNumber {set;}
+					global::System.Int32? NextSalesInvoiceNumber {set;}
 
 	}
 	public interface Lot  : Searchable, UserInterfaceable 
@@ -4635,7 +4635,7 @@ namespace Allors.Domain
 	}
 	public interface Good  : Product, Deletable 
 	{
-					global::System.Decimal AvailableToPromise {set;}
+					global::System.Decimal? AvailableToPromise {set;}
 
 					Media Thumbnail {set;}
 
@@ -5115,13 +5115,13 @@ namespace Allors.Domain
 
 					Salutation Salutation {set;}
 
-					global::System.Decimal YTDCommission {set;}
+					global::System.Decimal? YTDCommission {set;}
 
 					Citizenship Citizenship {set;}
 
 					Employment CurrentEmployment {set;}
 
-					global::System.Decimal LastYearsCommission {set;}
+					global::System.Decimal? LastYearsCommission {set;}
 
 					PersonalTitle Titles {set;}
 

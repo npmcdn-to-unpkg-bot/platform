@@ -289,16 +289,6 @@ namespace Allors.Meta
             AppsPartyRevenueHistory();
             AppsSalesRepCommission();
             AppsStringTemplate();
-
-
-            // HACK: 
-            foreach (var roleType in meta.RoleTypes)
-            {
-                if (roleType.RelationType.IsDerived)
-                {
-                    roleType.IsRequired = true;
-                }
-            }
         }
 
         private static void AppsStringTemplate()
