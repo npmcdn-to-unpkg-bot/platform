@@ -1565,7 +1565,7 @@
     <Compile Include="Generated\Base\Order.g.cs" />
     <Compile Include="Generated\Base\OrderAdjustment.g.cs" />
     <Compile Include="Generated\Base\OrderApprove.g.cs" />
-    <Compile Include="Generated\Base\OrderCancelOrder.g.cs" />
+    <Compile Include="Generated\Base\OrderCancel.g.cs" />
     <Compile Include="Generated\Base\OrderComplete.g.cs" />
     <Compile Include="Generated\Base\OrderConfirm.g.cs" />
     <Compile Include="Generated\Base\OrderContinue.g.cs" />

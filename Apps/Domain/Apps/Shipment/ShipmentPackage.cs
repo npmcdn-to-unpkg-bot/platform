@@ -73,8 +73,6 @@ namespace Allors.Domain
                 this.AddDocument(new PackagingSlipBuilder(this.Session).WithPrintContent(this.PrintContent).WithName(this.DisplayName).Build());
             }
 
-            derivation.Log.AssertExists(this, ShipmentPackages.Meta.CreationDate);
-
             this.AppsDeriveTemplate(derivation);
         }
 

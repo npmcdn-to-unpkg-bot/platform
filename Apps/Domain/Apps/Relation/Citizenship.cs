@@ -24,10 +24,6 @@ namespace Allors.Domain
     {
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, Citizenships.Meta.Country);
-
             this.DisplayName = this.ExistCountry ? this.Country.DisplayName : null;
 
             string wordBoundaryText = null;

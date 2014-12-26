@@ -23,11 +23,6 @@ namespace Allors.Domain
     using System;
     using System.Text;
 
-    
-    using Allors.Domain;
-
-    
-
     public partial class SalesRepRelationship
     {
         protected override void AppsOnPostBuild(IObjectBuilder builder)
@@ -48,11 +43,6 @@ namespace Allors.Domain
         public void AppsDerive(DerivableDerive method)
         {
             var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, SalesRepRelationships.Meta.Customer);
-            derivation.Log.AssertExists(this, SalesRepRelationships.Meta.InternalOrganisation);
-            derivation.Log.AssertExists(this, SalesRepRelationships.Meta.SalesRepresentative);
-            derivation.Log.AssertExists(this, SalesRepRelationships.Meta.FromDate);
 
             this.DeriveDisplayName();
 

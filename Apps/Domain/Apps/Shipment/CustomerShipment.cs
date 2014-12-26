@@ -23,9 +23,6 @@ namespace Allors.Domain
     using System;
     using System.Collections.Generic;
 
-    
-    using Allors.Domain;
-
     public partial class CustomerShipment
     {
         public bool CanEdit
@@ -157,7 +154,7 @@ namespace Allors.Domain
 
             if (!this.ExistShipFromParty)
             {
-                this.ShipFromParty = Domain.Singleton.Instance(this.Session).DefaultInternalOrganisation;
+                this.ShipFromParty = Singleton.Instance(this.Session).DefaultInternalOrganisation;
             }
 
             if (!this.ExistStore && this.ExistShipFromParty)
@@ -256,14 +253,6 @@ namespace Allors.Domain
 
             this.SearchData.CharacterBoundaryText = characterBoundaryText;
             this.SearchData.WordBoundaryText = wordBoundaryText;            
-
-            derivation.Log.AssertExists(this, Shipments.Meta.ShipmentNumber);
-            derivation.Log.AssertExists(this, Shipments.Meta.ShipToParty);
-            derivation.Log.AssertExists(this, Shipments.Meta.ShipFromParty);
-            derivation.Log.AssertExists(this, Shipments.Meta.ShipToAddress);
-            derivation.Log.AssertExists(this, Shipments.Meta.ShipFromAddress);
-            derivation.Log.AssertExists(this, Shipments.Meta.ShipmentMethod);
-            derivation.Log.AssertExists(this, Shipments.Meta.Carrier);
 
             this.CreatePickList(derivation);
             this.AppsDeriveShipmentValue(derivation);
@@ -577,9 +566,12 @@ namespace Allors.Domain
                     {
                         if (ShippingAndHandlingComponents.IsEligible(shippingAndHandlingComponent, this))
                         {
-                            if (charges == 0 || shippingAndHandlingComponent.Cost < charges)
+                            if (shippingAndHandlingComponent.Cost.HasValue)
                             {
-                                charges = shippingAndHandlingComponent.Cost;
+                                if (charges == 0 || shippingAndHandlingComponent.Cost < charges)
+                                {
+                                    charges = shippingAndHandlingComponent.Cost.Value;
+                                }
                             }
                         }
                     }

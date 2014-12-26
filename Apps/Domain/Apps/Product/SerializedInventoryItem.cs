@@ -20,10 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-    
-    
-
     public partial class SerializedInventoryItem
     {
         ObjectState Transitional.PreviousObjectState
@@ -53,9 +49,9 @@ namespace Allors.Domain
 
             if (!this.ExistFacility)
             {
-                if (Domain.Singleton.Instance(this.Session).DefaultInternalOrganisation != null)
+                if (Singleton.Instance(this.Session).DefaultInternalOrganisation != null)
                 {
-                    this.Facility = Domain.Singleton.Instance(this.Session).DefaultInternalOrganisation.DefaultFacility;
+                    this.Facility = Singleton.Instance(this.Session).DefaultInternalOrganisation.DefaultFacility;
                 }
             }
 
@@ -69,10 +65,7 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            derivation.Log.AssertExists(this, SerializedInventoryItems.Meta.SerialNumber);
             derivation.Log.AssertIsUnique(this, SerializedInventoryItems.Meta.SerialNumber);
-            derivation.Log.AssertExists(this, SerializedInventoryItems.Meta.Facility);
-            derivation.Log.AssertExists(this, SerializedInventoryItems.Meta.CurrentObjectState);
             derivation.Log.AssertAtLeastOne(this, SerializedInventoryItems.Meta.Good, SerializedInventoryItems.Meta.Part);
             derivation.Log.AssertExistsAtMostOne(this, SerializedInventoryItems.Meta.Good, SerializedInventoryItems.Meta.Part);
 

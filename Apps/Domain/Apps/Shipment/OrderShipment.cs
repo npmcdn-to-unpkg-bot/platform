@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class OrderShipment
     {
         protected override void AppsOnPostBuild(IObjectBuilder builder)
@@ -40,8 +38,6 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            derivation.Log.AssertExists(this, OrderShipments.Meta.Quantity);
-            derivation.Log.AssertExists(this, OrderShipments.Meta.ShipmentItem);
             derivation.Log.AssertAtLeastOne(this, OrderShipments.Meta.SalesOrderItem, OrderShipments.Meta.PurchaseOrderItem);
             derivation.Log.AssertExistsAtMostOne(this, OrderShipments.Meta.SalesOrderItem, OrderShipments.Meta.PurchaseOrderItem);
         }

@@ -24,11 +24,6 @@ namespace Allors.Domain
     {
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, PartRevisions.Meta.Part);
-            derivation.Log.AssertExists(this, PartRevisions.Meta.SupersededByPart);
-
             this.DisplayName = string.Format(
                 "{0} superseded by {1}",
                 this.ExistPart ? this.Part.ComposeDisplayName() : null,

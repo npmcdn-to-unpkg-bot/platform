@@ -62,23 +62,15 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            derivation.Log.AssertExists(this, Shipments.Meta.ShipmentNumber);
-            derivation.Log.AssertExists(this, Shipments.Meta.ShipToParty);
-            derivation.Log.AssertExists(this, Shipments.Meta.ShipFromParty);
-
             if (!this.ExistShipToAddress && this.ExistShipToParty)
             {
                 this.ShipToAddress = this.ShipToParty.ShippingAddress;
             }
 
-            derivation.Log.AssertExists(this, Shipments.Meta.ShipToAddress);
-
             if (!this.ExistShipFromAddress && this.ExistShipFromParty)
             {
                 this.ShipFromAddress = this.ShipFromParty.ShippingAddress;
             }
-
-            derivation.Log.AssertExists(this, Shipments.Meta.ShipToAddress);
 
             this.DisplayName = string.Format(
                 "{0} to {1}",
@@ -95,7 +87,6 @@ namespace Allors.Domain
             this.SearchData.CharacterBoundaryText = characterBoundaryText;
             this.SearchData.WordBoundaryText = wordBoundaryText;
             
-
             this.DeriveCurrentObjectState(derivation);
             this.PreviousObjectState = this.CurrentObjectState;
 

@@ -570,7 +570,7 @@ namespace Allors.Domain
             this.partyRevenueHistory.Revenue = 50M;
 
             // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.order.Derive(new Derivation(this.DatabaseSession));
+            this.order.Derive().WithDerivation(new Derivation(this.DatabaseSession)).Execute();
 
             this.DatabaseSession.Derive(true);
 
@@ -583,7 +583,7 @@ namespace Allors.Domain
             this.partyRevenueHistory.Revenue = 110M;
 
             // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.order.Derive(new Derivation(this.DatabaseSession));
+            this.order.Derive().WithDerivation(new Derivation(this.DatabaseSession)).Execute();
 
             this.DatabaseSession.Derive(true);
 
@@ -674,7 +674,7 @@ namespace Allors.Domain
             this.productCategoryRevenueHistory.Quantity = 3;
 
             // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.order.Derive(new Derivation(this.DatabaseSession));
+            this.order.Derive().WithDerivation(new Derivation(this.DatabaseSession)).Execute();
 
             this.DatabaseSession.Derive(true);
 
@@ -688,7 +688,7 @@ namespace Allors.Domain
             this.productCategoryRevenueHistory.Quantity = 10;
 
             // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.order.Derive(new Derivation(this.DatabaseSession));
+            this.order.Derive().WithDerivation(new Derivation(this.DatabaseSession)).Execute();
 
             this.DatabaseSession.Derive(true);
 
@@ -781,7 +781,7 @@ namespace Allors.Domain
             this.productCategoryRevenueHistory.Quantity = 3;
 
             // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.order.Derive(new Derivation(this.DatabaseSession));
+            this.order.Derive().WithDerivation(new Derivation(this.DatabaseSession)).Execute();
 
             this.DatabaseSession.Derive(true);
 
@@ -795,7 +795,7 @@ namespace Allors.Domain
             this.productCategoryRevenueHistory.Quantity = 10;
 
             // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.order.Derive(new Derivation(this.DatabaseSession));
+            this.order.Derive().WithDerivation(new Derivation(this.DatabaseSession)).Execute();
 
             this.DatabaseSession.Derive(true);
 
@@ -888,7 +888,7 @@ namespace Allors.Domain
             this.productCategoryRevenueHistory.Quantity = 3;
 
             // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.order.Derive(new Derivation(this.DatabaseSession));
+            this.order.Derive().WithDerivation(new Derivation(this.DatabaseSession)).Execute();
 
             this.DatabaseSession.Derive(true);
 
@@ -902,7 +902,7 @@ namespace Allors.Domain
             this.productCategoryRevenueHistory.Quantity = 10;
 
             // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.order.Derive(new Derivation(this.DatabaseSession));
+            this.order.Derive().WithDerivation(new Derivation(this.DatabaseSession)).Execute();
 
             this.DatabaseSession.Derive(true);
 
@@ -966,7 +966,7 @@ namespace Allors.Domain
             this.ancestorProductCategoryRevenueHistory.Revenue = 50M;
 
             // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.order.Derive(new Derivation(this.DatabaseSession));
+            this.order.Derive().WithDerivation(new Derivation(this.DatabaseSession)).Execute();
 
             this.DatabaseSession.Derive(true);
 
@@ -979,7 +979,7 @@ namespace Allors.Domain
             this.ancestorProductCategoryRevenueHistory.Revenue = 110M;
 
             // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.order.Derive(new Derivation(this.DatabaseSession));
+            this.order.Derive().WithDerivation(new Derivation(this.DatabaseSession)).Execute();
 
             this.DatabaseSession.Derive(true);
 
@@ -1043,7 +1043,7 @@ namespace Allors.Domain
             this.parentProductCategoryRevenueHistory.Revenue = 50M;
 
             // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.order.Derive(new Derivation(this.DatabaseSession));
+            this.order.Derive().WithDerivation(new Derivation(this.DatabaseSession)).Execute();
 
             this.DatabaseSession.Derive(true);
 
@@ -1056,7 +1056,7 @@ namespace Allors.Domain
             this.parentProductCategoryRevenueHistory.Revenue = 110M;
 
             // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.order.Derive(new Derivation(this.DatabaseSession));
+            this.order.Derive().WithDerivation(new Derivation(this.DatabaseSession)).Execute();
 
             this.DatabaseSession.Derive(true);
 
@@ -1120,7 +1120,7 @@ namespace Allors.Domain
             this.productCategoryRevenueHistory.Revenue = 50M;
 
             // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.order.Derive(new Derivation(this.DatabaseSession));
+            this.order.Derive().WithDerivation(new Derivation(this.DatabaseSession)).Execute();
 
             this.DatabaseSession.Derive(true);
 
@@ -1133,7 +1133,7 @@ namespace Allors.Domain
             this.productCategoryRevenueHistory.Revenue = 110M;
 
             // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.order.Derive(new Derivation(this.DatabaseSession));
+            this.order.Derive().WithDerivation(new Derivation(this.DatabaseSession)).Execute();
 
             this.DatabaseSession.Derive(true);
 
@@ -1195,7 +1195,7 @@ namespace Allors.Domain
             this.partyRevenueHistory.Revenue = 50M;
 
             // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.order.Derive(new Derivation(this.DatabaseSession));
+            this.order.Derive().WithDerivation(new Derivation(this.DatabaseSession)).Execute();
 
             this.DatabaseSession.Derive(true);
 
@@ -1209,7 +1209,7 @@ namespace Allors.Domain
             this.partyRevenueHistory.Revenue = 110M;
 
             // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.order.Derive(new Derivation(this.DatabaseSession));
+            this.order.Derive().WithDerivation(new Derivation(this.DatabaseSession)).Execute();
 
             this.DatabaseSession.Derive(true);
 
@@ -1272,7 +1272,7 @@ namespace Allors.Domain
             this.productCategoryRevenueHistory.Revenue = 50M;
 
             // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.order.Derive(new Derivation(this.DatabaseSession));
+            this.order.Derive().WithDerivation(new Derivation(this.DatabaseSession)).Execute();
 
             this.DatabaseSession.Derive(true);
 
@@ -1286,7 +1286,7 @@ namespace Allors.Domain
             this.productCategoryRevenueHistory.Revenue = 110M;
 
             // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.order.Derive(new Derivation(this.DatabaseSession));
+            this.order.Derive().WithDerivation(new Derivation(this.DatabaseSession)).Execute();
 
             this.DatabaseSession.Derive(true);
 
@@ -1351,7 +1351,7 @@ namespace Allors.Domain
             this.partyRevenueHistory.Revenue = 50M;
 
             // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.order.Derive(new Derivation(this.DatabaseSession));
+            this.order.Derive().WithDerivation(new Derivation(this.DatabaseSession)).Execute();
 
             this.DatabaseSession.Derive(true);
 
@@ -1364,7 +1364,7 @@ namespace Allors.Domain
             this.partyRevenueHistory.Revenue = 110M;
 
             // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.order.Derive(new Derivation(this.DatabaseSession));
+            this.order.Derive().WithDerivation(new Derivation(this.DatabaseSession)).Execute();
 
             this.DatabaseSession.Derive(true);
 
@@ -1428,7 +1428,7 @@ namespace Allors.Domain
             this.productCategoryRevenueHistory.Revenue = 50M;
 
             // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.order.Derive(new Derivation(this.DatabaseSession));
+            this.order.Derive().WithDerivation(new Derivation(this.DatabaseSession)).Execute();
 
             this.DatabaseSession.Derive(true);
 
@@ -1441,7 +1441,7 @@ namespace Allors.Domain
             this.productCategoryRevenueHistory.Revenue = 110M;
 
             // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.order.Derive(new Derivation(this.DatabaseSession));
+            this.order.Derive().WithDerivation(new Derivation(this.DatabaseSession)).Execute();
 
             this.DatabaseSession.Derive(true);
 
@@ -1505,7 +1505,7 @@ namespace Allors.Domain
             this.partyRevenueHistory.Revenue = 50M;
 
             // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.order.Derive(new Derivation(this.DatabaseSession));
+            this.order.Derive().WithDerivation(new Derivation(this.DatabaseSession)).Execute();
 
             this.DatabaseSession.Derive(true);
 
@@ -1519,7 +1519,7 @@ namespace Allors.Domain
             this.partyRevenueHistory.Revenue = 110M;
 
             // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.order.Derive(new Derivation(this.DatabaseSession));
+            this.order.Derive().WithDerivation(new Derivation(this.DatabaseSession)).Execute();
 
             this.DatabaseSession.Derive(true);
 
@@ -1654,7 +1654,7 @@ namespace Allors.Domain
             this.ancestorProductCategoryRevenueHistory.Quantity = 5;
 
             // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.order.Derive(new Derivation(this.DatabaseSession));
+            this.order.Derive().WithDerivation(new Derivation(this.DatabaseSession)).Execute();
 
             this.DatabaseSession.Derive(true);
 
@@ -1667,7 +1667,7 @@ namespace Allors.Domain
             this.ancestorProductCategoryRevenueHistory.Quantity = 11M;
 
             // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.order.Derive(new Derivation(this.DatabaseSession));
+            this.order.Derive().WithDerivation(new Derivation(this.DatabaseSession)).Execute();
 
             this.DatabaseSession.Derive(true);
 
@@ -1731,7 +1731,7 @@ namespace Allors.Domain
             this.parentProductCategoryRevenueHistory.Quantity = 5;
 
             // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.order.Derive(new Derivation(this.DatabaseSession));
+            this.order.Derive().WithDerivation(new Derivation(this.DatabaseSession)).Execute();
 
             this.DatabaseSession.Derive(true);
 
@@ -1744,7 +1744,7 @@ namespace Allors.Domain
             this.parentProductCategoryRevenueHistory.Quantity = 11;
 
             // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.order.Derive(new Derivation(this.DatabaseSession));
+            this.order.Derive().WithDerivation(new Derivation(this.DatabaseSession)).Execute();
 
             this.DatabaseSession.Derive(true);
 
@@ -1808,7 +1808,7 @@ namespace Allors.Domain
             this.productCategoryRevenueHistory.Quantity = 50M;
 
             // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.order.Derive(new Derivation(this.DatabaseSession));
+            this.order.Derive().WithDerivation(new Derivation(this.DatabaseSession)).Execute();
 
             this.DatabaseSession.Derive(true);
 
@@ -1821,7 +1821,7 @@ namespace Allors.Domain
             this.productCategoryRevenueHistory.Quantity = 110M;
 
             // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.order.Derive(new Derivation(this.DatabaseSession));
+            this.order.Derive().WithDerivation(new Derivation(this.DatabaseSession)).Execute();
 
             this.DatabaseSession.Derive(true);
 
@@ -1883,7 +1883,7 @@ namespace Allors.Domain
             this.productCategoryRevenueHistory.Quantity = 50M;
 
             // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.order.Derive(new Derivation(this.DatabaseSession));
+            this.order.Derive().WithDerivation(new Derivation(this.DatabaseSession)).Execute();
 
             this.DatabaseSession.Derive(true);
 
@@ -1897,7 +1897,7 @@ namespace Allors.Domain
             this.productCategoryRevenueHistory.Quantity = 110M;
 
             // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.order.Derive(new Derivation(this.DatabaseSession));
+            this.order.Derive().WithDerivation(new Derivation(this.DatabaseSession)).Execute();
 
             this.DatabaseSession.Derive(true);
 
@@ -1962,7 +1962,7 @@ namespace Allors.Domain
             this.productCategoryRevenueHistory.Quantity = 50M;
 
             // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.order.Derive(new Derivation(this.DatabaseSession));
+            this.order.Derive().WithDerivation(new Derivation(this.DatabaseSession)).Execute();
 
             this.DatabaseSession.Derive(true);
 
@@ -1975,7 +1975,7 @@ namespace Allors.Domain
             this.productCategoryRevenueHistory.Quantity = 110M;
 
             // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.order.Derive(new Derivation(this.DatabaseSession));
+            this.order.Derive().WithDerivation(new Derivation(this.DatabaseSession)).Execute();
 
             this.DatabaseSession.Derive(true);
 
@@ -2037,7 +2037,7 @@ namespace Allors.Domain
             this.productCategoryRevenueHistory.Quantity = 50M;
 
             // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.order.Derive(new Derivation(this.DatabaseSession));
+            this.order.Derive().WithDerivation(new Derivation(this.DatabaseSession)).Execute();
 
             this.DatabaseSession.Derive(true);
 
@@ -2051,7 +2051,7 @@ namespace Allors.Domain
             this.productCategoryRevenueHistory.Quantity = 110M;
 
             // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.order.Derive(new Derivation(this.DatabaseSession));
+            this.order.Derive().WithDerivation(new Derivation(this.DatabaseSession)).Execute();
 
             this.DatabaseSession.Derive(true);
 
@@ -2237,7 +2237,7 @@ namespace Allors.Domain
             package3RevenueHistory.Revenue = 0;
 
             // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.order.Derive(new Derivation(this.DatabaseSession));
+            this.order.Derive().WithDerivation(new Derivation(this.DatabaseSession)).Execute();
 
             this.DatabaseSession.Derive(true);
 
@@ -2251,7 +2251,7 @@ namespace Allors.Domain
             package3RevenueHistory.Revenue = 100;
 
             // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.order.Derive(new Derivation(this.DatabaseSession));
+            this.order.Derive().WithDerivation(new Derivation(this.DatabaseSession)).Execute();
 
             this.DatabaseSession.Derive(true);
 
@@ -2338,7 +2338,7 @@ namespace Allors.Domain
             package3RevenueHistory.Revenue = 0;
 
             // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.order.Derive(new Derivation(this.DatabaseSession));
+            this.order.Derive().WithDerivation(new Derivation(this.DatabaseSession)).Execute();
 
             this.DatabaseSession.Derive(true);
 
@@ -2353,7 +2353,7 @@ namespace Allors.Domain
             package3RevenueHistory.Revenue = 100;
 
             // Only for test puposes: Force Order derivation, because of changed revenue data
-            this.order.Derive(new Derivation(this.DatabaseSession));
+            this.order.Derive().WithDerivation(new Derivation(this.DatabaseSession)).Execute();
 
             this.DatabaseSession.Derive(true);
 

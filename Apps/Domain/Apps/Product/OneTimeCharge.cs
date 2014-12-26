@@ -20,9 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-    
-
     public partial class OneTimeCharge
     {
         protected override void AppsOnPostBuild(IObjectBuilder builder)
@@ -31,7 +28,7 @@ namespace Allors.Domain
 
             if (!this.ExistSpecifiedFor)
             {
-                this.SpecifiedFor = Domain.Singleton.Instance(this.Session).DefaultInternalOrganisation;
+                this.SpecifiedFor = Singleton.Instance(this.Session).DefaultInternalOrganisation;
             }
 
             if (!this.ExistSearchData)
@@ -42,10 +39,6 @@ namespace Allors.Domain
 
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, PriceComponents.Meta.Price);
-
             this.DisplayName = this.Description;
 
             this.SearchData.CharacterBoundaryText = this.DisplayName;

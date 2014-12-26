@@ -24,11 +24,6 @@ namespace Allors.Domain
     {
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, PartBillOfMaterialSubstitutes.Meta.PartBillOfMaterial);
-            derivation.Log.AssertExists(this, PartBillOfMaterialSubstitutes.Meta.SubstitutionPartBillOfMaterial);
-
             this.DisplayName = string.Format(
                 "{0} may be substituted by {1}",
                 this.ExistPartBillOfMaterial ? this.PartBillOfMaterial.ComposeDisplayName() : null,

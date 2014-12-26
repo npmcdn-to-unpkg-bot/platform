@@ -24,12 +24,6 @@ namespace Allors.Domain
     {
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, SubContractorRelationships.Meta.Contractor);
-            derivation.Log.AssertExists(this, SubContractorRelationships.Meta.SubContractor);
-            derivation.Log.AssertExists(this, SubContractorRelationships.Meta.FromDate);
-
             this.DisplayName = string.Format(
                 "{0} subcontractor for {1}",
                 this.ExistSubContractor ? this.SubContractor.DeriveDisplayName() : null,

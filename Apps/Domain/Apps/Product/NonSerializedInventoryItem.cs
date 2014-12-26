@@ -20,10 +20,6 @@
 
 namespace Allors.Domain
 {
-    
-    
-    using Allors.Domain;
-
     public partial class NonSerializedInventoryItem
     {
         ObjectState Transitional.PreviousObjectState
@@ -89,8 +85,6 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            derivation.Log.AssertExists(this, NonSerializedInventoryItems.Meta.Facility);
-            derivation.Log.AssertExists(this, NonSerializedInventoryItems.Meta.CurrentObjectState);
             derivation.Log.AssertAtLeastOne(this, NonSerializedInventoryItems.Meta.Good, NonSerializedInventoryItems.Meta.Part);
             derivation.Log.AssertExistsAtMostOne(this, NonSerializedInventoryItems.Meta.Good, NonSerializedInventoryItems.Meta.Part);
 
@@ -139,9 +133,9 @@ namespace Allors.Domain
 
             foreach (PickListItem pickListItem in this.PickListItemsWhereInventoryItem)
             {
-                if (pickListItem.PickListWherePickListItem.CurrentObjectState.Equals(new PickListObjectStates(this.Session).Picked))
+                if (pickListItem.ActualQuantity.HasValue && pickListItem.PickListWherePickListItem.CurrentObjectState.Equals(new PickListObjectStates(this.Session).Picked))
                 {
-                    this.QuantityOnHand -= pickListItem.ActualQuantity;
+                    this.QuantityOnHand -= pickListItem.ActualQuantity.Value;
                 }
             }
 
@@ -160,9 +154,9 @@ namespace Allors.Domain
 
             foreach (PickListItem pickListItem in this.PickListItemsWhereInventoryItem)
             {
-                if (pickListItem.PickListWherePickListItem.CurrentObjectState.Equals(new PickListObjectStates(this.Session).Picked))
+                if (pickListItem.ActualQuantity.HasValue && pickListItem.PickListWherePickListItem.CurrentObjectState.Equals(new PickListObjectStates(this.Session).Picked))
                 {
-                    this.QuantityCommittedOut -= pickListItem.ActualQuantity;
+                    this.QuantityCommittedOut -= pickListItem.ActualQuantity.Value;
                 }
             }
 

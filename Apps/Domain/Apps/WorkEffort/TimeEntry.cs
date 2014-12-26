@@ -36,8 +36,6 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            derivation.Log.AssertExists(this, TimeEntries.Meta.UnitOfMeasure);
-            derivation.Log.AssertExists(this, TimeEntries.Meta.Cost);
             derivation.Log.AssertAtLeastOne(this, TimeEntries.Meta.WorkEffort, TimeEntries.Meta.EngagementItem);
 
             this.DisplayName = string.Format(

@@ -22,10 +22,6 @@ namespace Allors.Domain
 {
     using System.Text;
 
-    using Allors.Domain;
-    
-    
-
     public partial class ShippingAndHandlingComponent
     {
         protected override void AppsOnPostBuild(IObjectBuilder builder)
@@ -45,8 +41,6 @@ namespace Allors.Domain
 
         public void AppsDerive(DerivableDerive method)
         {
-            
-
             this.AppsDeriveDisplayName();
 
             var characterBoundaryText = string.Format(

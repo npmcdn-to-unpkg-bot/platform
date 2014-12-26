@@ -30,10 +30,10 @@ namespace Allors.Domain
         public void GivenSetConfiguration_WhenApplied_ThenCountryEuMemberStateIsSet()
         {
             var finland = new Countries(this.DatabaseSession).FindBy(Countries.Meta.IsoCode, "FI");
-            Assert.IsTrue(finland.EuMemberState);
+            Assert.IsTrue(finland.EuMemberState.Value);
 
             var norway = new Countries(this.DatabaseSession).FindBy(Countries.Meta.IsoCode, "NO");
-            Assert.IsFalse(norway.EuMemberState);
+            Assert.IsFalse(norway.EuMemberState.Value);
         }
 
         [Test]

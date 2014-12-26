@@ -21,10 +21,7 @@
 namespace Allors.Domain
 {
     using System.Text;
-
-    using Allors.Domain;
     
-
     public partial class EstimatedMaterialCost
     {
         protected override void AppsOnPostBuild(IObjectBuilder builder)
@@ -39,12 +36,6 @@ namespace Allors.Domain
 
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, EstimatedProductCosts.Meta.Cost);
-            derivation.Log.AssertExists(this, EstimatedProductCosts.Meta.Currency);
-            derivation.Log.AssertExists(this, EstimatedProductCosts.Meta.FromDate);
-
             this.DeriveDisplayName();
 
             var characterBoundaryText = string.Format(

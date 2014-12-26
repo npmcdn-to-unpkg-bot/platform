@@ -24,12 +24,6 @@ namespace Allors.Domain
     {
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, VolumeUsages.Meta.Quantity);
-            derivation.Log.AssertExists(this, VolumeUsages.Meta.UnitOfMeasure);
-            derivation.Log.AssertExists(this, VolumeUsages.Meta.TimeFrequency);
-
             this.DisplayName = string.Format(
                 "{0} {1} per {2}",
                 this.ExistQuantity ? this.Quantity : 0,

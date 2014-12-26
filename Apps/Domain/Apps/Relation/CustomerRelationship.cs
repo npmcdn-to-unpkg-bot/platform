@@ -22,9 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-    
-
     public partial class CustomerRelationship
     {
         public int? PaymentNetDays
@@ -130,11 +127,6 @@ namespace Allors.Domain
         public void AppsDerive(DerivableDerive method)
         {
             var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, CustomerRelationships.Meta.Customer);
-            derivation.Log.AssertExists(this, CustomerRelationships.Meta.InternalOrganisation);
-            derivation.Log.AssertExists(this, CustomerRelationships.Meta.FromDate);
-            derivation.Log.AssertExists(this, CustomerRelationships.Meta.SubAccountNumber);
 
             if (this.Session is IDatabaseSession)
             {

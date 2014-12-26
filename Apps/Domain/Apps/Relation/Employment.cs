@@ -39,10 +39,6 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            derivation.Log.AssertExists(this, Employments.Meta.Employer);
-            derivation.Log.AssertExists(this, Employments.Meta.Employee);
-            derivation.Log.AssertExists(this, Employments.Meta.FromDate);
-
             if (this.ExistEmployee && this.ExistEmployer)
             {
                 var employments = this.Employee.EmploymentsWhereEmployee;

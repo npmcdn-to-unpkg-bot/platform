@@ -2,7 +2,7 @@ group AllorsCSharpMeta;
 
 TemplateId() ::= <<14F49218-A676-43ba-9CBD-B8FFA059D1BF>>
 TemplateName() ::= <<Allors C# Repository>>
-TemplateVersion() ::= <<1.0.4>>
+TemplateVersion() ::= <<1.0.5>>
 TemplateAllors() ::= <<1.0>>
 TemplateConfiguration(domain, settings) ::= <<
 $! 
@@ -59,6 +59,8 @@ $domain.relationTypes:{relationType|$relationTypeDeclaration(relationType)$}$
 			$domain.Name$ = new Domain(meta, new Guid("$domain.IdAsString$")) { Name = "$domain.Name$" };
 $domain.SuperDomains:{superDomain|$superDomainInit(superDomain)$}$
 
+$domain.SuperDomains:{superDomain|$hierarchy(domain=domain, superDomain=superDomain)$}$
+
 			// Units
 			AllorsString = new UnitBuilder(Core, UnitIds.StringId).WithSingularName("AllorsString").WithPluralName("AllorsStrings").WithUnitTag(UnitTags.AllorsString).Build();
             AllorsInteger = new UnitBuilder(Core, UnitIds.IntegerId).WithSingularName("AllorsInteger").WithPluralName("AllorsIntegers").WithUnitTag(UnitTags.AllorsInteger).Build();
@@ -88,6 +90,15 @@ $domain.RelationTypes:{relationType|$relationTypeConcreteRoleTypes(relationType)
 superDomainInit(superDomain) ::= <<
 $if(!superDomain.IsAllorsUnitDomain)$
 			$superDomain.Name$ = new Domain(meta, new Guid("$superDomain.IdAsString$")) { Name = "$superDomain.Name$" };
+$endif$
+>>
+
+hierarchy(domain, superDomain) ::= <<
+$if(superDomain.IsAllorsUnitDomain)$
+			$domain.Name$.AddDirectSuperdomain(Core);
+$else$
+			$domain.Name$.AddDirectSuperdomain($superDomain.Name$);
+$superDomain.DirectSuperDomains:{superSuperDomain|$hierarchy(domain=superDomain, superDomain=superSuperDomain)$}$
 $endif$
 >>
 

@@ -20,11 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-    
-
-    
-
     public partial class TimeAndMaterialsService
     {
         public void AddToBasePrice(BasePrice basePrice)
@@ -54,11 +49,6 @@ namespace Allors.Domain
 
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, TimeAndMaterialsServices.Meta.Name);
-            derivation.Log.AssertExists(this, TimeAndMaterialsServices.Meta.VatRate);
-
             if (this.ProductCategories.Count == 1 && !this.ExistPrimaryProductCategory)
             {
                 this.PrimaryProductCategory = this.ProductCategories.First;

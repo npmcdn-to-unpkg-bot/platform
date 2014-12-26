@@ -20,11 +20,6 @@
 
 namespace Allors.Domain
 {
-    using System.Drawing.Imaging;
-
-    using Allors.Domain;
-    
-    
     public partial class Good
     {
         public void AddToBasePrice(BasePrice basePrice)
@@ -158,9 +153,6 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            derivation.Log.AssertExists(this, Goods.Meta.Name);
-            derivation.Log.AssertExists(this, Goods.Meta.VatRate);
-            derivation.Log.AssertExists(this, Goods.Meta.UnitOfMeasure);
             derivation.Log.AssertAtLeastOne(this, Goods.Meta.FinishedGood, Goods.Meta.InventoryItemKind);
             derivation.Log.AssertExistsAtMostOne(this, Goods.Meta.FinishedGood, Goods.Meta.InventoryItemKind);
 

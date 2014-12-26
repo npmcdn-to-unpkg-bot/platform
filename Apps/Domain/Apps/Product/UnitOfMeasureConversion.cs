@@ -20,9 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-    
-
     public partial class UnitOfMeasureConversion
     {
         protected override void AppsOnPostBuild(IObjectBuilder builder)
@@ -37,11 +34,6 @@ namespace Allors.Domain
 
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, UnitOfMeasureConversions.Meta.ConversionFactor);
-            derivation.Log.AssertExists(this, UnitOfMeasureConversions.Meta.ToUnitOfMeasure);
-
             this.DisplayName = string.Format(
                 "{0} {1}",
                 this.ExistConversionFactor ? this.ConversionFactor : 0,

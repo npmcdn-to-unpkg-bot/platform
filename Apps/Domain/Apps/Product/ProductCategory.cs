@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System.Collections.Generic;
 
-    using Allors.Domain;
-
     using Resources;
 
     public partial class ProductCategory
@@ -73,8 +71,6 @@ namespace Allors.Domain
         public void AppsDerive(DerivableDerive method)
         {
             var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, ProductCategories.Meta.Description);
 
             if (this.ExistProductCategoriesWhereParent && this.ExistPackage)
             {

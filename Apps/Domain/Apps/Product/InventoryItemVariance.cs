@@ -20,9 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-    
-
     public partial class InventoryItemVariance
     {
         protected override void AppsOnPostBuild(IObjectBuilder builder)
@@ -37,11 +34,6 @@ namespace Allors.Domain
 
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, InventoryItemVariances.Meta.Reason);
-            derivation.Log.AssertExists(this, InventoryItemVariances.Meta.Quantity);
-
             this.DisplayName = string.Format(
                 "{0} quantity {1}",
                 this.ExistReason ? this.Reason.DisplayName : null,

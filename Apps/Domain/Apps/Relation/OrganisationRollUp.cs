@@ -24,13 +24,6 @@ namespace Allors.Domain
     {
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, OrganisationRollUps.Meta.Child);
-            derivation.Log.AssertExists(this, OrganisationRollUps.Meta.Parent);
-            derivation.Log.AssertExists(this, OrganisationRollUps.Meta.RollupKind);
-            derivation.Log.AssertExists(this, OrganisationRollUps.Meta.FromDate);
-
             this.DisplayName = string.Format(
                 "{0} {1} {2}",
                 this.ExistChild ? this.Child.DeriveDisplayName() : null,

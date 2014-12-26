@@ -9,8 +9,6 @@ namespace Allors.Domain
     using System.Globalization;
     using System.Text;
 
-    using Allors.Domain;
-
     using Resources;
 
     public partial class SalesOrderItem
@@ -471,9 +469,9 @@ namespace Allors.Domain
             {
                 this.DeliveryDate = this.AssignedDeliveryDate.Value;
             }
-            else if (this.ExistSalesOrderWhereSalesOrderItem && this.SalesOrderWhereSalesOrderItem.DeliveryDate.HasValue)
+            else if (this.ExistSalesOrderWhereSalesOrderItem && this.SalesOrderWhereSalesOrderItem.ExistDeliveryDate)
             {
-                this.DeliveryDate = this.SalesOrderWhereSalesOrderItem.DeliveryDate.Value;
+                this.DeliveryDate = this.SalesOrderWhereSalesOrderItem.DeliveryDate;
             }
         }
         

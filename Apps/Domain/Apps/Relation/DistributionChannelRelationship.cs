@@ -24,12 +24,6 @@ namespace Allors.Domain
     {
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, DistributionChannelRelationships.Meta.Distributor);
-            derivation.Log.AssertExists(this, DistributionChannelRelationships.Meta.InternalOrganisation);
-            derivation.Log.AssertExists(this, DistributionChannelRelationships.Meta.FromDate);
-
             this.DisplayName = string.Format(
                 "{0} distributor for {1}",
                 this.ExistDistributor ? this.Distributor.DeriveDisplayName() : null,

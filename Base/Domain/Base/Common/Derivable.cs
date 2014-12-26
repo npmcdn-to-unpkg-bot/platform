@@ -66,6 +66,12 @@ namespace Allors.Domain
     public abstract partial class DerivableDerive
     {
         public Derivation Derivation { get; set; }
+
+        public DerivableDerive WithDerivation(Derivation derivation)
+        {
+            this.Derivation = derivation;
+            return this;
+        }
     }
 
     public abstract partial class DerivableApplySecurityOnDerive

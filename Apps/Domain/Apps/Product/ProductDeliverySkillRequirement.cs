@@ -24,11 +24,6 @@ namespace Allors.Domain
     {
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, ProductDeliverySkillRequirements.Meta.Service);
-            derivation.Log.AssertExists(this, ProductDeliverySkillRequirements.Meta.Skill);
-
             this.DisplayName = string.Format(
                 "{0} requires skill {1}",
                 this.ExistService ? this.Service.ComposeDisplayName() : null,

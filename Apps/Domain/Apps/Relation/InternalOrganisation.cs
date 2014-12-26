@@ -394,11 +394,6 @@ namespace Allors.Domain
                 this.DefaultPaymentMethod = this.PaymentMethods.First;
             }
 
-            derivation.Log.AssertExists(this, InternalOrganisations.Meta.DefaultPaymentMethod);
-            derivation.Log.AssertExists(this, InternalOrganisations.Meta.Name);
-            derivation.Log.AssertExists(this, InternalOrganisations.Meta.Locale);
-            derivation.Log.AssertExists(this, InternalOrganisations.Meta.PreferredCurrency);
-
             this.DisplayName = this.DeriveDisplayName();
             this.SearchData.CharacterBoundaryText = this.DeriveSearchDataCharacterBoundaryText();
             this.SearchData.WordBoundaryText = this.DeriveSearchDataWordBoundaryText();

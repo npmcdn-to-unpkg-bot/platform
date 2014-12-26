@@ -26,10 +26,8 @@ namespace Allors
     using System.Threading;
     using System.Xml;
 
-    using Allors.Adapters.Workspace.Memory.IntegerId;
     using Allors.Domain;
-
-    using Configuration = Allors.Adapters.Database.Memory.IntegerId.Configuration;
+    using Allors.Workspaces.Memory.IntegerId;
 
     public class Fixture
     {
@@ -64,14 +62,14 @@ namespace Allors
 
         private static void SetupBasic()
         {
-            var configuration = new Configuration { Id = Guid.NewGuid(), ObjectFactory = Databases.ObjectFactory, WorkspaceFactory = new WorkspaceFactory() };
-            Databases.Default = new Adapters.Database.Memory.IntegerId.Database(configuration);
+            var configuration = new Databases.Memory.IntegerId.Configuration { ObjectFactory = Config.ObjectFactory, WorkspaceFactory = new WorkspaceFactory() };
+            Config.Default = new Databases.Memory.IntegerId.Database(configuration);
             
             SearchDatas.SkipDerivation = true;
             Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-GB");
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-GB");
 
-            var database = Databases.Default;
+            var database = Config.Default;
             database.Init();
 
             using (var session = database.CreateSession())
@@ -99,14 +97,14 @@ namespace Allors
 
         private static void SetupFull()
         {
-            var configuration = new Configuration { Id = Guid.NewGuid(), ObjectFactory = Databases.ObjectFactory, WorkspaceFactory = new WorkspaceFactory() };
-            Databases.Default = new Adapters.Database.Memory.IntegerId.Database(configuration);
+            var configuration = new Databases.Memory.IntegerId.Configuration { ObjectFactory = Config.ObjectFactory, WorkspaceFactory = new WorkspaceFactory() };
+            Config.Default = new Databases.Memory.IntegerId.Database(configuration);
 
             SearchDatas.SkipDerivation = true;
             Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-GB");
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-GB");
 
-            var database = Databases.Default;
+            var database = Config.Default;
             database.Init();
 
             using (var session = database.CreateSession())

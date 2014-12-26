@@ -36,8 +36,6 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            derivation.Log.AssertExists(this, DeliverableTurnovers.Meta.Description);
-            derivation.Log.AssertExists(this, DeliverableTurnovers.Meta.Amount);
             derivation.Log.AssertAtLeastOne(this, DeliverableTurnovers.Meta.WorkEffort, DeliverableTurnovers.Meta.EngagementItem);
 
             this.DisplayName = string.Format(

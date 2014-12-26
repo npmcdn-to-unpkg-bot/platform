@@ -53,8 +53,6 @@ namespace Allors.Domain
 
             this.AppsPartyDerive(derivation);
 
-            derivation.Log.AssertExists(this, AutomatedAgents.Meta.Description);
-
             this.DisplayName = this.DeriveDisplayName();
             this.SearchData.CharacterBoundaryText = this.DeriveSearchDataCharacterBoundaryText();
             this.SearchData.WordBoundaryText = this.DeriveSearchDataWordBoundaryText();

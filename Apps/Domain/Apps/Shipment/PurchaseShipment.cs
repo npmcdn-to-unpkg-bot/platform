@@ -23,9 +23,6 @@ namespace Allors.Domain
     using System;
     using System.Collections.Generic;
 
-    
-    using Allors.Domain;
-
     public partial class PurchaseShipment
     {
         ObjectState Transitional.PreviousObjectState
@@ -136,11 +133,6 @@ namespace Allors.Domain
         public void AppsDerive(DerivableDerive method)
         {
             var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, Shipments.Meta.ShipmentNumber);
-            derivation.Log.AssertExists(this, Shipments.Meta.ShipToParty);
-            derivation.Log.AssertExists(this, Shipments.Meta.ShipFromParty);
-            derivation.Log.AssertExists(this, PurchaseShipments.Meta.Facility);
 
             if (!this.ExistShipToAddress && this.ExistShipToParty)
             {

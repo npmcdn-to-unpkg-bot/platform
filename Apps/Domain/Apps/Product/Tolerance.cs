@@ -38,8 +38,6 @@ namespace Allors.Domain
 
             this.AppsPartSpecificationDerive(derivation);
 
-            derivation.Log.AssertExists(this, Tolerances.Meta.Description);
-
             this.DisplayName = this.Description;
 
             this.PreviousObjectState = this.CurrentObjectState;

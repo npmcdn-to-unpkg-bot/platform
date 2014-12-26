@@ -61,9 +61,6 @@ namespace Allors.Domain
 
             this.AppsValidate(derivation);
 
-            derivation.Log.AssertExists(this, PackagingContents.Meta.Quantity);
-            derivation.Log.AssertExists(this, PackagingContents.Meta.ShipmentItem);
-
             this.DisplayName = string.Format(
                 "{0} - {1} {2}{3}",
                 this.ExistQuantity ? this.Quantity : 0,

@@ -36,7 +36,6 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            derivation.Log.AssertExists(this, Passports.Meta.Number);
             derivation.Log.AssertIsUnique(this, Passports.Meta.Number);
 
             this.DisplayName = this.Number;

@@ -26,8 +26,6 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            derivation.Log.AssertExists(this, SupplierOfferings.Meta.Supplier);
-            derivation.Log.AssertExists(this, SupplierOfferings.Meta.ProductPurchasePrice);
             derivation.Log.AssertAtLeastOne(this, SupplierOfferings.Meta.Part, SupplierOfferings.Meta.Product);
             derivation.Log.AssertExistsAtMostOne(this, SupplierOfferings.Meta.Part, SupplierOfferings.Meta.Product);
 

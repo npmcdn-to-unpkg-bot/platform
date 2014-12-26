@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class Partnership
     {
         protected override void AppsOnPostBuild(IObjectBuilder builder)
@@ -39,10 +37,6 @@ namespace Allors.Domain
         public void AppsDerive(DerivableDerive method)
         {
             var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, Partnerships.Meta.Partner);
-            derivation.Log.AssertExists(this, Partnerships.Meta.InternalOrganisation);
-            derivation.Log.AssertExists(this, Partnerships.Meta.FromDate);
 
             this.DisplayName = string.Format(
                 "{0} partner for {1}",

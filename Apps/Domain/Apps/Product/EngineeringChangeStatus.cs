@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class EngineeringChangeStatus
     {
         protected override void AppsOnPostBuild(IObjectBuilder builder)
@@ -38,11 +36,6 @@ namespace Allors.Domain
 
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, EngineeringChangeStatuses.Meta.StartDateTime);
-            derivation.Log.AssertExists(this, EngineeringChangeStatuses.Meta.EngineeringChangeObjectState);
-
             this.DisplayName = string.Format(
                 "{0} starting {1}",
                 this.ExistEngineeringChangeObjectState ? this.EngineeringChangeObjectState.Name : null,

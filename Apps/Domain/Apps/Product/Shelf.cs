@@ -37,10 +37,6 @@ namespace Allors.Domain
 
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, Shelfs.Meta.ContainerDescription);
-
             this.DisplayName = this.ContainerDescription;
 
             this.SearchData.CharacterBoundaryText = this.DisplayName;

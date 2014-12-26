@@ -270,7 +270,7 @@ namespace Allors.Domain
         {
             get
             {
-                if (this.ExistOrderKind && this.OrderKind.ScheduleManually.HasValue && this.OrderKind.ScheduleManually.Value)
+                if (this.ExistOrderKind && this.OrderKind.ScheduleManually)
                 {
                     return true;
                 }
@@ -710,7 +710,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsCancelOrder(OrderCancelOrder method)
+        private void AppsCancelOrder(OrderCancel method)
         {
             this.CurrentObjectState = new SalesOrderObjectStates(Session).Cancelled;
         }
@@ -728,8 +728,8 @@ namespace Allors.Domain
             {
                 if (customerRelationship.FromDate <= DateTime.Now && (!customerRelationship.ExistThroughDate || customerRelationship.ThroughDate >= DateTime.Now))
                 {
-                    creditLimit = customerRelationship.CreditLimit.HasValue ? customerRelationship.CreditLimit.Value : this.Store.CreditLimit.HasValue ? this.Store.CreditLimit.Value : 0;
-                    amountOverDue = customerRelationship.AmountOverDue.Value;
+                    creditLimit = customerRelationship.CreditLimit.HasValue ? customerRelationship.CreditLimit.Value : this.Store.ExistCreditLimit ? this.Store.CreditLimit : 0;
+                    amountOverDue = customerRelationship.AmountOverDue;
                 }
             }
             

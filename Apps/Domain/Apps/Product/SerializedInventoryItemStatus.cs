@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class SerializedInventoryItemStatus
     {
         protected override void AppsOnPostBuild(IObjectBuilder builder)
@@ -38,11 +36,6 @@ namespace Allors.Domain
 
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, SerializedInventoryItemStatuses.Meta.StartDateTime);
-            derivation.Log.AssertExists(this, SerializedInventoryItemStatuses.Meta.SerializedInventoryItemObjectState);
-
             this.DisplayName = string.Format(
                 "{0} starting {1}",
                 this.ExistSerializedInventoryItemObjectState ? this.SerializedInventoryItemObjectState.Name : null,

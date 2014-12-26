@@ -20,16 +20,10 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class WorkEffortPartStandard
     {
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, WorkEffortPartStandards.Meta.Part);
-
             this.DisplayName = this.ExistPart ? this.Part.ComposeDisplayName() : null;
         }
     }

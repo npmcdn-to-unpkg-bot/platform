@@ -24,6 +24,16 @@ namespace Allors.Domain
 
     public partial class Currency
     {
+        protected override void BaseOnPostBuild(IObjectBuilder builder)
+        {
+            base.BaseOnPostBuild(builder);
+
+            if (!this.ExistSearchData)
+            {
+                this.SearchData = new SearchDataBuilder(this.Session).Build();
+            }
+        }
+
         public string GetName()
         {
             return this.Name;

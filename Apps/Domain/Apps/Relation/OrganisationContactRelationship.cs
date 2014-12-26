@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class OrganisationContactRelationship
     {
         protected override void AppsOnPostBuild(IObjectBuilder builder)
@@ -39,10 +37,6 @@ namespace Allors.Domain
         public void AppsDerive(DerivableDerive method)
         {
             var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, OrganisationContactRelationships.Meta.Contact);
-            derivation.Log.AssertExists(this, OrganisationContactRelationships.Meta.Organisation);
-            derivation.Log.AssertExists(this, OrganisationContactRelationships.Meta.FromDate);
 
             this.DisplayName = string.Format(
                 "{0} contact for {1}",

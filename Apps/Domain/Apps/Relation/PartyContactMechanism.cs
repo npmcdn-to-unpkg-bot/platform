@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System.Text;
 
-    using Allors.Domain;
-
     public partial class PartyContactMechanism
     {
         protected override void AppsOnPostBuild(IObjectBuilder builder)
@@ -40,7 +38,6 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            derivation.Log.AssertExists(this, PartyContactMechanisms.Meta.ContactMechanism);
             if (this.ExistUseAsDefault && this.UseAsDefault)
             {
                 derivation.Log.AssertExists(this, PartyContactMechanisms.Meta.ContactPurpose);

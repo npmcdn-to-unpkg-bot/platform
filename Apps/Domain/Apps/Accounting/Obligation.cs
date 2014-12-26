@@ -22,9 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-    
-
     public partial class Obligation
     {
         protected override void AppsOnPostBuild(IObjectBuilder builder)

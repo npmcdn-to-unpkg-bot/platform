@@ -20,9 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-    
-
     public partial class StatementOfWork
     {
         protected override void AppsOnPostBuild(IObjectBuilder builder)

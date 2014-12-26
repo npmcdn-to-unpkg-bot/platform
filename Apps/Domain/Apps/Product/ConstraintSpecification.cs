@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class ConstraintSpecification
     {
         protected override void AppsOnPostBuild(IObjectBuilder builder)
@@ -39,8 +37,6 @@ namespace Allors.Domain
             var derivation = method.Derivation;
 
             this.AppsPartSpecificationDerive(derivation);
-
-            derivation.Log.AssertExists(this, ConstraintSpecifications.Meta.Description);
 
             this.DisplayName = this.Description;
 

@@ -20,11 +20,8 @@
 
 namespace Allors.Domain
 {
-    using System;
     using System.Globalization;
     using System.Text;
-
-    using Allors.Domain;
 
     public partial class ProductPurchasePrice
     {
@@ -41,13 +38,6 @@ namespace Allors.Domain
 
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, ProductPurchasePrices.Meta.Price);
-            derivation.Log.AssertExists(this, ProductPurchasePrices.Meta.Currency);
-            derivation.Log.AssertExists(this, ProductPurchasePrices.Meta.FromDate);
-            derivation.Log.AssertExists(this, ProductPurchasePrices.Meta.UnitOfMeasure);
-
             this.DeriveDisplayName();
         }
 

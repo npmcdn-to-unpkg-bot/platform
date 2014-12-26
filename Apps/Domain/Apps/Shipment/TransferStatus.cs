@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class TransferStatus
     {
         protected override void AppsOnPostBuild(IObjectBuilder builder)
@@ -38,11 +36,6 @@ namespace Allors.Domain
 
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, TransferStatuses.Meta.StartDateTime);
-            derivation.Log.AssertExists(this, TransferStatuses.Meta.TransferObjectState);
-
             this.DisplayName = string.Format(
                 "{0} starting {1}",
                 this.ExistTransferObjectState ? this.TransferObjectState.Name : null,

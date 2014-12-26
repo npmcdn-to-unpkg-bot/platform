@@ -42,7 +42,7 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            if (this.ExistInternalOrganisationWherePaymentMethod && this.InternalOrganisationWherePaymentMethod.DoAccounting.HasValue && this.InternalOrganisationWherePaymentMethod.DoAccounting.Value)
+            if (this.ExistInternalOrganisationWherePaymentMethod && this.InternalOrganisationWherePaymentMethod.DoAccounting)
             { 
                 derivation.Log.AssertExists(this, Cashes.Meta.Creditor);
                 derivation.Log.AssertAtLeastOne(this, Cashes.Meta.GeneralLedgerAccount, Cashes.Meta.Journal);

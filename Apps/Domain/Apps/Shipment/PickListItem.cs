@@ -30,9 +30,6 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            derivation.Log.AssertExists(this, PickListItems.Meta.InventoryItem);
-            derivation.Log.AssertExists(this, PickListItems.Meta.RequestedQuantity);
-
             if (this.ExistActualQuantity && this.ActualQuantity > this.RequestedQuantity)
             {
                 derivation.Log.AddError(this, PickListItems.Meta.ActualQuantity, ErrorMessages.PickListItemQuantityMoreThanAllowed);
@@ -48,9 +45,9 @@ namespace Allors.Domain
 
         private void AppsDeriveOrderItemAdjustment(IDerivation derivation)
         {
-            if (this.ExistPickListWherePickListItem && this.PickListWherePickListItem.CurrentObjectState.UniqueId.Equals(PickListObjectStates.PickedId))
+            if (this.ActualQuantity.HasValue && this.ExistPickListWherePickListItem && this.PickListWherePickListItem.CurrentObjectState.UniqueId.Equals(PickListObjectStates.PickedId))
             {
-                var diff = this.RequestedQuantity - this.ActualQuantity;
+                var diff = this.RequestedQuantity - this.ActualQuantity.Value;
 
                 foreach (ItemIssuance itemIssuance in this.ItemIssuancesWherePickListItem)
                 {

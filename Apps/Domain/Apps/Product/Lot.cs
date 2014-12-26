@@ -20,9 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-    
-
     public partial class Lot
     {
         protected override void AppsOnPostBuild(IObjectBuilder builder)
@@ -37,10 +34,6 @@ namespace Allors.Domain
 
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, Lots.Meta.LotNumber);
-
             this.DisplayName = this.LotNumber;
 
             this.SearchData.CharacterBoundaryText = this.DisplayName;

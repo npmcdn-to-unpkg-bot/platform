@@ -24,11 +24,6 @@ namespace Allors.Domain
     {
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, ProductFeatureApplicabilityRelationships.Meta.AvailableFor);
-            derivation.Log.AssertExists(this, ProductFeatureApplicabilityRelationships.Meta.UsedToDefine);
-
             this.DisplayName = string.Format(
                 "{0} feature applicable for {1}",
                 this.ExistUsedToDefine ? this.UsedToDefine.DisplayName : null,

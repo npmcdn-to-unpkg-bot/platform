@@ -24,10 +24,6 @@ namespace Allors.Domain
     {
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, WorkEffortFixedAssetStandards.Meta.FixedAsset);
-
             this.DisplayName = this.ExistFixedAsset ? this.FixedAsset.Name : null;
         }
     }

@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class ShipmentReceipt
     {
         protected override void AppsOnPostBuild(IObjectBuilder builder)
@@ -95,11 +93,6 @@ namespace Allors.Domain
                     this.ExistInventoryItem ? this.InventoryItem.ComposeDisplayName() : null,
                     this.QuantityAccepted,
                     this.QuantityRejected);
-
-            derivation.Log.AssertExists(this, ShipmentReceipts.Meta.InventoryItem);
-            derivation.Log.AssertExists(this, ShipmentReceipts.Meta.QuantityAccepted);
-            derivation.Log.AssertExists(this, ShipmentReceipts.Meta.QuantityRejected);
-            derivation.Log.AssertExists(this, ShipmentReceipts.Meta.ShipmentItem);
         }
 
         private void AppsDeriveInventoryItem(IDerivation derivation)

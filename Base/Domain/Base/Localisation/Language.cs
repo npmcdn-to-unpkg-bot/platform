@@ -24,6 +24,16 @@ namespace Allors.Domain
 
     public partial class Language
     {
+        protected override void BaseOnPostBuild(IObjectBuilder builder)
+        {
+            base.BaseOnPostBuild(builder);
+
+            if (!this.ExistSearchData)
+            {
+                this.SearchData = new SearchDataBuilder(this.Session).Build();
+            }
+        }
+
         public string GetLocalisedName(Locale locale)
         {
             var localisedName = this.LocalisedNames.FirstOrDefault(localizedText => localizedText.Locale.Equals(locale));

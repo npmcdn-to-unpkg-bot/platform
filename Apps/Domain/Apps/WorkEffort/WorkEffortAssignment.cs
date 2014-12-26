@@ -24,11 +24,6 @@ namespace Allors.Domain
     {
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, WorkEffortAssignments.Meta.Assignment);
-            derivation.Log.AssertExists(this, WorkEffortAssignments.Meta.Professional);
-
             this.DisplayName = string.Format(
                 "{0} assigned to {1}",
                 this.ExistProfessional ? this.Professional.DeriveDisplayName() : null,

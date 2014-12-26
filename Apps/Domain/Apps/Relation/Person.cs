@@ -299,14 +299,17 @@ namespace Allors.Domain
 
             foreach (SalesRepCommission salesRepCommission in this.SalesRepCommissionsWhereSalesRep)
             {
-                if (salesRepCommission.Year == DateTime.Now.Year)
+                if (salesRepCommission.Commission.HasValue)
                 {
-                    this.YTDCommission += salesRepCommission.Commission;
-                }
+                    if (salesRepCommission.Year == DateTime.Now.Year)
+                    {
+                        this.YTDCommission += salesRepCommission.Commission.Value;
+                    }
 
-                if (salesRepCommission.Year == DateTime.Now.AddYears(-1).Year)
-                {
-                    this.LastYearsCommission += salesRepCommission.Commission;
+                    if (salesRepCommission.Year == DateTime.Now.AddYears(-1).Year)
+                    {
+                        this.LastYearsCommission += salesRepCommission.Commission.Value;
+                    }
                 }
             }
         }

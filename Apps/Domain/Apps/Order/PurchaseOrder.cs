@@ -437,7 +437,7 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsCancelOrder(OrderCancelOrder method)
+        private void AppsCancel(OrderCancel method)
         {
             this.CurrentObjectState = new PurchaseOrderObjectStates(Session).Cancelled;
         }

@@ -65,9 +65,6 @@ namespace Allors.Domain
                 this.AddSecurityToken(this.OwnerSecurityToken);
             }
 
-            derivation.Log.AssertExists(this, Organisations.Meta.Name);
-            derivation.Log.AssertExists(this, Organisations.Meta.Locale);
-
             this.BillingAddress = null;
             this.BillingInquiriesFax = null;
             this.BillingInquiriesPhone = null;

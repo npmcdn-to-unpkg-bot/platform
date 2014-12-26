@@ -56,7 +56,7 @@ namespace Allors.Domain
                 this.Description = this.BankAccount.ComposeDisplayName();
             }
 
-            if (this.ExistInternalOrganisationWherePaymentMethod && this.InternalOrganisationWherePaymentMethod.DoAccounting.HasValue && this.InternalOrganisationWherePaymentMethod.DoAccounting.Value)
+            if (this.ExistInternalOrganisationWherePaymentMethod && this.InternalOrganisationWherePaymentMethod.DoAccounting)
             { 
                 derivation.Log.AssertExists(this, OwnBankAccounts.Meta.Creditor);
                 derivation.Log.AssertAtLeastOne(this, Cashes.Meta.GeneralLedgerAccount, Cashes.Meta.Journal);

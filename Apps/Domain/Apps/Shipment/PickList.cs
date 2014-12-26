@@ -129,8 +129,6 @@ namespace Allors.Domain
 
             this.DeriveCurrentObjectState();
 
-            derivation.Log.AssertExists(this, PickLists.Meta.CreationDate);
-
             this.AppsDeriveDisplayName();
 
             var characterBoundaryText = this.ExistPicker ? this.Picker.DeriveSearchDataCharacterBoundaryText() : null;
@@ -142,7 +140,6 @@ namespace Allors.Domain
 
             this.SearchData.CharacterBoundaryText = characterBoundaryText;
             this.SearchData.WordBoundaryText = wordBoundaryText;
-            
 
             if (this.ExistPickListItems)
             {

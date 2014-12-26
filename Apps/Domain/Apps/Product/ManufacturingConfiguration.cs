@@ -24,12 +24,6 @@ namespace Allors.Domain
     {
         public void AppsDerive(DerivableDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertExists(this, InventoryItemConfigurations.Meta.ComponentInventoryItem);
-            derivation.Log.AssertExists(this, InventoryItemConfigurations.Meta.InventoryItem);
-            derivation.Log.AssertExists(this, InventoryItemConfigurations.Meta.Quantity);
-
             this.DisplayName = string.Format(
                 "{0} made up of {1} {2}",
                 this.ExistComponentInventoryItem ? this.ComponentInventoryItem.ComposeDisplayName() : null,

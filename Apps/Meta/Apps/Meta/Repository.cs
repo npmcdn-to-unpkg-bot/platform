@@ -180,6 +180,114 @@ namespace Allors.Meta
             AppsState();
             AppsStore();
             AppsTerritory();
+            AppContainer();
+            AppsActivityUsage();
+            AppsVolumeUsage();
+            AppsDeploymentUsage();
+            AppsManufacturerSuggestedRetailPrice();
+            AppsOneTimeCharge();
+            AppsUtilizationCharge();
+            AppsRecurringCharge();
+            AppsBrand();
+            AppsPartSpecification();
+            AppsProduct();
+            AppsGood();
+            AppsPartBillOfMaterial();
+            AppsEngineeringChange();
+            AppsEngineeringChangeStatus();
+            AppsDocument();
+            AppsDimension();
+            AppsEstimatedProductCost();
+            AppsInventoryItemVariance();
+            AppsLot();
+            AppsInventoryItemConfiguration();
+            AppsMarketingPackage();
+            AppsInventoryItem();
+            AppsSerializedInventoryItem();
+            AppsNonSerializedInventoryItemStatus();
+            AppsPackage();
+            AppsPartBillOfMaterialSubstitute();
+            AppsPartRevision();
+            AppsPartSpecificationStatus();
+            AppsPartSubstitute();
+            AppsProductCategory();
+            AppsProductConfiguration();
+            AppsProductDeliverySkillRequirement();
+            AppsPart();
+            AppsSerializedInventoryItemStatus();
+            AppsSupplierOffering();
+            AppsAddendum();
+            AppsAgreementItem();
+            AppsAutomatedAgent();
+            AppsCarrier();
+            AppsCase();
+            AppsCaseStatus();
+            AppsCitizenship();
+            AppsAgreement();
+            AppsClientRelationship();
+            AppsCommunicationEventStatus();
+            AppsCustomerRelationship();
+            AppsDistributionChannelRelationship();
+            AppsElectronicAddress();
+            AppsEmailCommunication();
+            AppsEmailTemplate();
+            AppsEmployment();
+            AppsOrganisation();
+            AppsLegalForm();
+            AppsOrganisationContactKind();
+            AppsProfessionalServicesRelationship();
+            AppsSupplierRelationship();
+            AppsSubContractorRelationship();
+            AppsOrganisationContactRelationship();
+            AppsOrganisationRollUp();
+            AppsPartnership();
+            AppsSalesRepRelationship();
+            AppsPartyClassification();
+            AppPassport();
+            AppsProductFeatureApplicabilityRelationship();
+            AppsTelecommunicationsNumber();
+            AppsShipment();
+            AppsTransfer();
+            AppsPurchaseShipment();
+            AppsPurchaseReturn();
+            AppsDropShipment();
+            AppsCustomerReturn();
+            AppsCustomerReturnStatus();
+            AppsCustomerShipmentStatus();
+            AppsDropShipmentStatus();
+            AppsItemIssuance();
+            AppsPickListItem();
+            AppsPickListStatus();
+            AppsPurchaseReturnStatus();
+            AppsPurchaseShipmentStatus();
+            AppsShipmentPackage();
+            AppsTransferStatus();
+            AppsDeliverable();
+            AppsTimeEntry();
+            AppsDeliverableTurnover();
+            AppsExpenseEntry();
+            AppsMaterialsUsage();
+            AppPartyFixedAssetAssignment();
+            AppsServiceEntryHeader();
+            AppsWorkEffortAssignment();
+            AppsWorkEffortAssignmentRate();
+            AppsWorkEffortFixedAssetAssignment();
+            AppsWorkEffortFixedAssetStandard();
+            AppsWorkEffortGoodStandard();
+            AppsWorkEffortInventoryAssignment();
+            AppsWorkEffortPartStandard();
+            AppsWorkEffortPartyAssignment();
+            AppsWorkEffortStatus();
+            AppsWorkEffortType();
+            AppsOperatingBudget();
+            AppsCapitalBudget();
+            AppsReceipt();
+            AppSalesInvoiceItem();
+            AppsShipmentItem();
+            AppsShippingAndHandlingComponent();
+            AppsPartyProductCategoryRevenueHistory();
+            AppsPartyRevenueHistory();
+            AppsSalesRepCommission();
 
             // HACK: 
             foreach (var roleType in meta.RoleTypes)
@@ -189,6 +297,631 @@ namespace Allors.Meta
                     roleType.IsRequired = true;
                 }
             }
+        }
+
+        private static void AppsSalesRepCommission()
+        {
+            SalesRepCommissionYear.IsRequired = true;
+        }
+
+        private static void AppsPartyRevenueHistory()
+        {
+            PartyRevenueHistoryRevenue.IsRequired = true;
+        }
+
+        private static void AppsPartyProductCategoryRevenueHistory()
+        {
+            PartyProductCategoryRevenueHistoryQuantity.IsRequired = true;
+            PartyProductCategoryRevenueHistoryRevenue.IsRequired = true;
+        }
+
+        private static void AppsShippingAndHandlingComponent()
+        {
+            ShippingAndHandlingComponentSpecifiedFor.IsRequired = true;
+        }
+
+        private static void AppsShipmentItem()
+        {
+            ShipmentItemQuantity.IsRequired = true;
+        }
+
+        private static void AppSalesInvoiceItem()
+        {
+            SalesInvoiceItemCurrentObjectState.IsRequired = true;
+
+            SalesInvoiceItemQuantity.IsRequiredOverride = true;
+            SalesInvoiceItemAmountPaid.IsRequiredOverride = true;
+        }
+
+        private static void AppsReceipt()
+        {
+            ReceiptEffectiveDate.IsRequiredOverride = true;
+        }
+
+        private static void AppsCapitalBudget()
+        {
+            CapitalBudgetCurrentObjectState.IsRequiredOverride = true;
+        }
+
+        private static void AppsOperatingBudget()
+        {
+            OperatingBudgetCurrentObjectState.IsRequiredOverride = true;
+        }
+
+        private static void AppsWorkEffortType()
+        {
+            WorkEffortTypeDescription.IsRequired = true;
+            WorkEffortTypeWorkEffortTypeKind.IsRequired = true;
+        }
+
+        private static void AppsWorkEffortStatus()
+        {
+            WorkEffortStatusStartDateTime.IsRequired = true;
+            WorkEffortStatusWorkEffortObjectState.IsRequired = true;
+        }
+
+        private static void AppsWorkEffortPartyAssignment()
+        {
+            WorkEffortPartyAssignmentAssignment.IsRequired = true;
+            WorkEffortPartyAssignmentParty.IsRequired = true;
+        }
+
+        private static void AppsWorkEffortPartStandard()
+        {
+            WorkEffortPartStandardPart.IsRequired = true;
+        }
+
+        private static void AppsWorkEffortInventoryAssignment()
+        {
+            WorkEffortInventoryAssignmentAssignment.IsRequired = true;
+            WorkEffortInventoryAssignmentInventoryItem.IsRequired = true;
+        }
+
+        private static void AppsWorkEffortGoodStandard()
+        {
+            WorkEffortGoodStandardGood.IsRequired = true;
+        }
+
+        private static void AppsWorkEffortFixedAssetStandard()
+        {
+            WorkEffortFixedAssetStandardFixedAsset.IsRequired = true;
+        }
+
+        private static void AppsWorkEffortFixedAssetAssignment()
+        {
+            WorkEffortFixedAssetAssignmentAssignment.IsRequired = true;
+            WorkEffortFixedAssetAssignmentFixedAsset.IsRequired = true;
+        }
+
+        private static void AppsWorkEffortAssignmentRate()
+        {
+            WorkEffortAssignmentRateRateType.IsRequired = true;
+            WorkEffortAssignmentRateWorkEffortPartyAssignment.IsRequired = true;
+        }
+
+        private static void AppsWorkEffortAssignment()
+        {
+            WorkEffortAssignmentAssignment.IsRequired = true;
+            WorkEffortAssignmentProfessional.IsRequired = true;
+        }
+
+        private static void AppsServiceEntryHeader()
+        {
+            ServiceEntryHeaderSubmittedBy.IsRequired = true;
+            ServiceEntryHeaderSubmittedDate.IsRequired = true;
+        }
+
+        private static void AppPartyFixedAssetAssignment()
+        {
+            PartyFixedAssetAssignmentFixedAsset.IsRequired = true;
+            PartyFixedAssetAssignmentParty.IsRequired = true;
+        }
+
+        private static void AppsMaterialsUsage()
+        {
+            MaterialsUsageAmount.IsRequired = true;
+            MaterialsUsageDescription.IsRequiredOverride = true;
+        }
+
+        private static void AppsExpenseEntry()
+        {
+            ExpenseEntryAmount.IsRequired = true;
+            ExpenseEntryDescription.IsRequiredOverride = true;
+        }
+
+        private static void AppsDeliverableTurnover()
+        {
+            DeliverableTurnoverAmount.IsRequired = true;
+            DeliverableTurnoverDescription.IsRequiredOverride = true;
+        }
+
+        private static void AppsTimeEntry()
+        {
+            TimeEntryUnitOfMeasure.IsRequired = true;
+            TimeEntryCost.IsRequired = true;
+        }
+
+        private static void AppsDeliverable()
+        {
+            DeliverableName.IsRequired = true;
+        }
+
+        private static void AppsTransferStatus()
+        {
+            TransferStatusStartDateTime.IsRequired = true;
+            TransferStatusTransferObjectState.IsRequired = true;
+        }
+
+        private static void AppsShipmentPackage()
+        {
+            ShipmentPackageCreationDate.IsRequired = true;
+        }
+
+        private static void AppsPurchaseShipmentStatus()
+        {
+            PurchaseShipmentStatusStartDateTime.IsRequired = true;
+            PurchaseShipmentStatusPurchaseShipmentObjectState.IsRequired = true;
+        }
+
+        private static void AppsPurchaseReturnStatus()
+        {
+            PurchaseReturnStatusStartDateTime.IsRequired = true;
+            PurchaseReturnStatusPurchaseReturnObjectState.IsRequired = true;
+        }
+
+        private static void AppsPickListStatus()
+        {
+            PickListStatusStartDateTime.IsRequired = true;
+            PickListStatusPickListObjectState.IsRequired = true;
+        }
+
+        private static void AppsPickListItem()
+        {
+            PickListItemInventoryItem.IsRequired = true;
+            PickListItemRequestedQuantity.IsRequired = true;
+        }
+
+        private static void AppsItemIssuance()
+        {
+            ItemIssuanceQuantity.IsRequired = true;
+            ItemIssuanceInventoryItem.IsRequired = true;
+            ItemIssuanceShipmentItem.IsRequired = true;
+        }
+
+        private static void AppsDropShipmentStatus()
+        {
+            DropShipmentStatusStartDateTime.IsRequired = true;
+            DropShipmentStatusDropShipmentObjectState.IsRequired = true;
+        }
+
+        private static void AppsCustomerShipmentStatus()
+        {
+            CustomerShipmentStatusStartDateTime.IsRequired = true;
+            CustomerShipmentStatusCustomerShipmentObjectState.IsRequired = true;
+        }
+
+        private static void AppsCustomerReturnStatus()
+        {
+            CustomerReturnStatusStartDateTime.IsRequired = true;
+            CustomerReturnStatusCustomerReturnObjectState.IsRequired = true;
+        }
+
+        private static void AppsCustomerReturn()
+        {
+            CustomerReturnShipToAddress.IsRequiredOverride = true;
+            CustomerReturnCurrentObjectState.IsRequired = true;
+        }
+
+        private static void AppsDropShipment()
+        {
+            DropShipmentShipToAddress.IsRequiredOverride = true;
+            DropShipmentCurrentObjectState.IsRequired = true;
+        }
+
+        private static void AppsPurchaseReturn()
+        {
+            PurchaseReturnShipToAddress.IsRequiredOverride = true;
+            PurchaseReturnCurrentObjectState.IsRequired = true;
+        }
+
+        private static void AppsPurchaseShipment()
+        {
+            PurchaseShipmentFacility.IsRequired = true;
+            PurchaseShipmentCurrentObjectState.IsRequired = true;
+
+            PurchaseShipmentEstimatedArrivalDate.IsRequiredOverride = true;
+            PurchaseShipmentShipToParty.IsRequiredOverride = true;
+        }
+
+        private static void AppsTransfer()
+        {
+            TransferShipToAddress.IsRequiredOverride = true;
+            TransferCurrentObjectState.IsRequired = true;
+        }
+
+        private static void AppsShipment()
+        {
+            ShipmentShipmentNumber.IsRequired = true;
+            ShipmentShipToParty.IsRequired = true;
+            ShipmentShipFromParty.IsRequired = true;
+        }
+
+        private static void AppsTelecommunicationsNumber()
+        {
+            TelecommunicationsNumberContactNumber.IsRequired = true;
+        }
+
+        private static void AppsProductFeatureApplicabilityRelationship()
+        {
+            ProductFeatureApplicabilityRelationshipAvailableFor.IsRequired = true;
+            ProductFeatureApplicabilityRelationshipUsedToDefine.IsRequired = true;
+        }
+
+        private static void AppPassport()
+        {
+            PassportNumber.IsRequired = true;
+        }
+
+        private static void AppsPartyClassification()
+        {
+            PartyClassificationDescription.IsRequired = true;
+        }
+
+        private static void AppsSalesRepRelationship()
+        {
+            SalesRepRelationshipCustomer.IsRequired = true;
+            SalesRepRelationshipInternalOrganisation.IsRequired = true;
+            SalesRepRelationshipSalesRepresentative.IsRequired = true;
+        }
+
+        private static void AppsPartnership()
+        {
+            PartnershipPartner.IsRequired = true;
+            PartnershipInternalOrganisation.IsRequired = true;
+        }
+
+        private static void AppsOrganisationRollUp()
+        {
+            OrganisationRollUpChild.IsRequired = true;
+            OrganisationRollUpParent.IsRequired = true;
+            OrganisationRollUpRollupKind.IsRequired = true;
+        }
+
+        private static void AppsOrganisationContactRelationship()
+        {
+            OrganisationContactRelationshipContact.IsRequired = true;
+            OrganisationContactRelationshipOrganisation.IsRequired = true;
+        }
+
+        private static void AppsSubContractorRelationship()
+        {
+            SubContractorRelationshipContractor.IsRequired = true;
+            SubContractorRelationshipSubContractor.IsRequired = true;
+        }
+
+        private static void AppsSupplierRelationship()
+        {
+            SupplierRelationshipSupplier.IsRequired = true;
+            SupplierRelationshipInternalOrganisation.IsRequired = true;
+            SupplierRelationshipSubAccountNumber.IsRequired = true;
+        }
+
+        private static void AppsProfessionalServicesRelationship()
+        {
+            ProfessionalServicesRelationshipProfessional.IsRequired = true;
+            ProfessionalServicesRelationshipProfessionalServicesProvider.IsRequired = true;
+        }
+
+        private static void AppsOrganisationContactKind()
+        {
+            OrganisationContactKindDescription.IsRequired = true;
+        }
+
+        private static void AppsLegalForm()
+        {
+            LegalFormDescription.IsRequired = true;
+        }
+
+        private static void AppsOrganisation()
+        {
+            OrganisationName.IsRequired = true;
+            OrganisationLocale.IsRequiredOverride = true;
+        }
+
+        private static void AppsEmployment()
+        {
+            EmploymentEmployer.IsRequired = true;
+            EmploymentEmployee.IsRequired = true;
+        }
+
+        private static void AppsEmailTemplate()
+        {
+            EmailTemplateDescription.IsRequired = true;
+        }
+
+        private static void AppsEmailCommunication()
+        {
+            EmailCommunicationSubject.IsRequiredOverride = true;
+        }
+
+        private static void AppsElectronicAddress()
+        {
+            ElectronicAddressElectronicAddressString.IsRequired = true;
+        }
+
+        private static void AppsDistributionChannelRelationship()
+        {
+            DistributionChannelRelationshipDistributor.IsRequired = true;
+            DistributionChannelRelationshipInternalOrganisation.IsRequired = true;
+        }
+
+        private static void AppsCustomerRelationship()
+        {
+            CustomerRelationshipCustomer.IsRequired = true;
+            CustomerRelationshipInternalOrganisation.IsRequired = true;
+            CustomerRelationshipSubAccountNumber.IsRequired = true;
+            CustomerRelationshipAmountDue.IsRequired = true;
+            CustomerRelationshipAmountOverDue.IsRequired = true;
+        }
+
+        private static void AppsCommunicationEventStatus()
+        {
+            CommunicationEventStatusStartDateTime.IsRequired = true;
+            CommunicationEventStatusCommunicationEventObjectState.IsRequired = true;
+        }
+
+        private static void AppsClientRelationship()
+        {
+            ClientRelationshipClient.IsRequired = true;
+            ClientRelationshipInternalOrganisation.IsRequired = true;
+        }
+
+        private static void AppsAgreement()
+        {
+            AgreementDescription.IsRequired = true;
+        }
+
+        private static void AppsCitizenship()
+        {
+            CitizenshipCountry.IsRequired = true;
+        }
+
+        private static void AppsCaseStatus()
+        {
+            CaseStatusStartDateTime.IsRequired = true;
+            CaseStatusCaseObjectState.IsRequired = true;
+        }
+
+        private static void AppsCase()
+        {
+            CaseDescription.IsRequired = true;
+            CaseCurrentObjectState.IsRequired = true;
+        }
+
+        private static void AppsCarrier()
+        {
+            CarrierName.IsRequired = true;
+        }
+
+        private static void AppsAutomatedAgent()
+        {
+            AutomatedAgentDescription.IsRequired = true;
+        }
+
+        private static void AppsAgreementItem()
+        {
+            AgreementItemDescription.IsRequired = true;
+        }
+
+        private static void AppsAddendum()
+        {
+            AddendumDescription.IsRequired = true;
+            AddendumCreationDate.IsRequired = true;
+        }
+
+        private static void AppsSupplierOffering()
+        {
+            SupplierOfferingSupplier.IsRequired = true;
+            SupplierOfferingProductPurchasePrice.IsRequired = true;
+        }
+
+        private static void AppsSerializedInventoryItemStatus()
+        {
+            SerializedInventoryItemStatusStartDateTime.IsRequired = true;
+            SerializedInventoryItemStatusSerializedInventoryItemObjectState.IsRequired = true;
+        }
+
+        private static void AppsPart()
+        {
+            PartName.IsRequired = true;
+            PartInventoryItemKind.IsRequired = true;
+            PartOwnedByParty.IsRequired = true;
+        }
+
+        private static void AppsProductDeliverySkillRequirement()
+        {
+            ProductDeliverySkillRequirementService.IsRequired = true;
+            ProductDeliverySkillRequirementSkill.IsRequired = true;
+        }
+
+        private static void AppsProductConfiguration()
+        {
+            ProductConfigurationDescription.IsRequired = true;
+        }
+
+        private static void AppsProductCategory()
+        {
+            ProductCategoryDescription.IsRequired = true;
+        }
+
+        private static void AppsPartSubstitute()
+        {
+            PartSubstitutePart.IsRequired = true;
+            PartSubstituteSubstitutionPart.IsRequired = true;
+            PartSubstituteQuantity.IsRequired = true;
+        }
+
+        private static void AppsPartSpecificationStatus()
+        {
+            PartSpecificationStatusStartDateTime.IsRequired = true;
+            PartSpecificationStatusPartSpecificationObjectState.IsRequired = true;
+        }
+
+        private static void AppsPartRevision()
+        {
+            PartRevisionPart.IsRequired = true;
+            PartRevisionSupersededByPart.IsRequired = true;
+        }
+
+        private static void AppsPartBillOfMaterialSubstitute()
+        {
+            PartBillOfMaterialSubstitutePartBillOfMaterial.IsRequired = true;
+            PartBillOfMaterialSubstituteSubstitutionPartBillOfMaterial.IsRequired = true;
+        }
+
+        private static void AppsPackage()
+        {
+            PackageName.IsRequired = true;
+        }
+
+        private static void AppsNonSerializedInventoryItemStatus()
+        {
+            NonSerializedInventoryItemStatusStartDateTime.IsRequired = true;
+            NonSerializedInventoryItemStatusNonSerializedInventoryItemObjectState.IsRequired = true;
+        }
+
+        private static void AppsSerializedInventoryItem()
+        {
+            SerializedInventoryItemCurrentObjectState.IsRequired = true;
+            SerializedInventoryItemSerialNumber.IsRequired = true;
+        }
+
+        private static void AppsInventoryItem()
+        {
+            InventoryItemFacility.IsRequired = true;
+        }
+
+        private static void AppsMarketingPackage()
+        {
+            MarketingPackageDescription.IsRequired = true;
+        }
+
+        private static void AppsInventoryItemConfiguration()
+        {
+            InventoryItemConfigurationComponentInventoryItem.IsRequired = true;
+            InventoryItemConfigurationInventoryItem.IsRequired = true;
+            InventoryItemConfigurationQuantity.IsRequired = true;
+        }
+
+        private static void AppsLot()
+        {
+            LotLotNumber.IsRequired = true;
+        }
+
+        private static void AppsInventoryItemVariance()
+        {
+            InventoryItemVarianceReason.IsRequired = true;
+            InventoryItemVarianceQuantity.IsRequired = true;
+        }
+
+        private static void AppsEstimatedProductCost()
+        {
+            EstimatedProductCostCost.IsRequired = true;
+            EstimatedProductCostCurrency.IsRequired = true;
+        }
+
+        private static void AppsDimension()
+        {
+            DimensionUnitOfMeasure.IsRequired = true;
+        }
+
+        private static void AppsDocument()
+        {
+            DocumentName.IsRequired = true;
+        }
+
+        private static void AppsEngineeringChangeStatus()
+        {
+            EngineeringChangeStatusStartDateTime.IsRequired = true;
+            EngineeringChangeStatusEngineeringChangeObjectState.IsRequired = true;
+        }
+
+        private static void AppsEngineeringChange()
+        {
+            EngineeringChangeDescription.IsRequired = true;
+        }
+
+        private static void AppsPartBillOfMaterial()
+        {
+            PartBillOfMaterialQuantityUsed.IsRequired = true;
+            PartBillOfMaterialComponentPart.IsRequired = true;
+            PartBillOfMaterialPart.IsRequired = true;
+        }
+
+        private static void AppsGood()
+        {
+            GoodUnitOfMeasure.IsRequiredOverride = true;
+        }
+
+        private static void AppsProduct()
+        {
+            ProductName.IsRequired = true;
+            ProductVatRate.IsRequired = true;
+            ProductSoldBy.IsRequired = true;
+        }
+
+        private static void AppsPartSpecification()
+        {
+            PartSpecificationDescription.IsRequired = true;
+            PartSpecificationCurrentObjectState.IsRequired = true;
+        }
+
+        private static void AppsBrand()
+        {
+            BrandName.IsRequired = true;
+        }
+
+        private static void AppsRecurringCharge()
+        {
+            RecurringChargePrice.IsRequiredOverride = true;
+        }
+
+        private static void AppsUtilizationCharge()
+        {
+            UtilizationChargePrice.IsRequiredOverride = true;
+            UtilizationChargeDescription.IsRequiredOverride = true;
+        }
+
+        private static void AppsOneTimeCharge()
+        {
+            OneTimeChargePrice.IsRequiredOverride = true;
+        }
+
+        private static void AppsManufacturerSuggestedRetailPrice()
+        {
+            ManufacturerSuggestedRetailPricePrice.IsRequiredOverride = true;
+        }
+
+        private static void AppsDeploymentUsage()
+        {
+            DeploymentUsageTimeFrequency.IsRequired = true;
+        }
+
+        private static void AppsVolumeUsage()
+        {
+            VolumeUsageQuantity.IsRequired = true;
+            VolumeUsageUnitOfMeasure.IsRequired = true;
+        }
+
+        private static void AppsActivityUsage()
+        {
+            ActivityUsageQuantity.IsRequired = true;
+            ActivityUsageUnitOfMeasure.IsRequired = true;
+        }
+
+        private static void AppContainer()
+        {
+            ContainerContainerDescription.IsRequired = true;
         }
 
         private static void AppsTerritory()
@@ -204,6 +937,13 @@ namespace Allors.Meta
             StoreCreditLimit.IsRequired = true;
             StoreDefaultShipmentMethod.IsRequired = true;
             StoreDefaultCarrier.IsRequired = true;
+            StoreCreditLimit.IsRequired = true;
+            StoreShipmentThreshold.IsRequired = true;
+            StoreOrderThreshold.IsRequired = true;
+            StoreOrderThreshold.IsRequired = true;
+            StorePaymentGracePeriod.IsRequired = true;
+            StoreSalesInvoiceNumberPrefix.IsRequired = true;
+
         }
 
         private static void AppsState()
@@ -336,6 +1076,9 @@ namespace Allors.Meta
             SalesOrderStore.IsRequired = true;
             SalesOrderCustomerCurrency.IsRequiredOverride = true;
             SalesOrderDeliveryDate.IsRequiredOverride = true;
+            SalesOrderPartiallyShip.IsRequired = true;
+
+            SalesOrderDeliveryDate.IsRequiredOverride = true;
         }
 
         private static void AppsPurchaseOrder()
@@ -368,6 +1111,7 @@ namespace Allors.Meta
         private static void AppsOrderKind()
         {
             OrderKindDescription.IsRequired = true;
+            OrderKindScheduleManually.IsRequired = true;
         }
 
         private static void AppsNeededSkill()
@@ -408,6 +1152,9 @@ namespace Allors.Meta
             new MethodTypeBuilder(Apps, new Guid("860F33C9-7CD9-427D-9FFD-93B1274C9EB2")).WithObjectType(WorkEffort).WithName("Finish").Build();
             new MethodTypeBuilder(Apps, new Guid("0A66E9CA-89A8-4D5A-B63F-E061CDBC0A2E")).WithObjectType(WorkEffort).WithName("Cancel").Build();
             new MethodTypeBuilder(Apps, new Guid("A1189C0F-8E2E-41B7-B61E-36525B3895B5")).WithObjectType(WorkEffort).WithName("Reopen").Build();
+
+            WorkEffortDescription.IsRequired = true;
+            WorkEffortCurrentObjectState.IsRequired = true;
         }
 
         private static void AppsRequirement()
@@ -415,11 +1162,14 @@ namespace Allors.Meta
             new MethodTypeBuilder(Apps, new Guid("B96906C0-83CB-48D5-A67C-8E3E05073B14")).WithObjectType(Requirement).WithName("Reopen").Build();
 
             RequirementDescription.IsRequired = true;
+            RequirementCurrentObjectState.IsRequired = true;
         }
 
         private static void AppsPurchaseOrderItem()
         {
             new MethodTypeBuilder(Apps, new Guid("3F65C670-B891-4979-B664-D47D45833AF5")).WithObjectType(PurchaseOrderItem).WithName("Complete").Build();
+
+            PurchaseOrderItemCurrentObjectState.IsRequired = true;
         }
 
         private static void AppsPickList()
@@ -428,6 +1178,9 @@ namespace Allors.Meta
             new MethodTypeBuilder(Apps, new Guid("B88AF2FA-0940-4C3B-90E7-9937DF6C05AC")).WithObjectType(PickList).WithName("Continue").Build();
             new MethodTypeBuilder(Apps, new Guid("41E4C5C4-2CFE-4B7F-80FD-E4C0263FDF62")).WithObjectType(PickList).WithName("Cancel").Build();
             new MethodTypeBuilder(Apps, new Guid("CAC524A5-47A9-4FFD-ABC2-D5D3C0ABBFDD")).WithObjectType(PickList).WithName("SetPicked").Build();
+
+            PickListCreationDate.IsRequired = true;
+            PickListCurrentObjectState.IsRequired = true;
         }
 
         private static void AppsPersonTraining()
@@ -457,6 +1210,18 @@ namespace Allors.Meta
             new MethodTypeBuilder(Apps, new Guid("9AFF4390-9B51-4C33-A0CF-125FED33E34F")).WithObjectType(CustomerShipment).WithName("ProcessOnContinue").Build();
             new MethodTypeBuilder(Apps, new Guid("BD7F0406-29E2-4A10-AE55-C2849D257B01")).WithObjectType(CustomerShipment).WithName("SetPicked").Build();
             new MethodTypeBuilder(Apps, new Guid("F484244D-BB1D-4158-9A4D-40267D4B7D5B")).WithObjectType(CustomerShipment).WithName("SetPacked").Build();
+
+            CustomerShipmentShipToAddress.IsRequiredOverride = true;
+            CustomerShipmentShipFromAddress.IsRequiredOverride = true;
+            CustomerShipmentShipmentMethod.IsRequiredOverride = true;
+            CustomerShipmentCarrier.IsRequiredOverride = true;
+            CustomerShipmentCurrentObjectState.IsRequired = true;
+            CustomerShipmentReleasedManually.IsRequired = true;
+            CustomerShipmentHeldManually.IsRequired = true;
+            CustomerShipmentWithoutCharges.IsRequired = true;
+
+            CustomerShipmentEstimatedShipDate.IsRequiredOverride = true;
+            CustomerShipmentShipFromParty.IsRequiredOverride = true;
         }
 
         private static void AppsCommunicationEvent()
@@ -464,11 +1229,15 @@ namespace Allors.Meta
             new MethodTypeBuilder(Apps, new Guid("433211EF-4376-451E-863F-376F5EC66758")).WithObjectType(CommunicationEvent).WithName("Cancel").Build();
             new MethodTypeBuilder(Apps, new Guid("53138963-6B25-4A90-BFE3-89B77AF73329")).WithObjectType(CommunicationEvent).WithName("Close").Build();
             new MethodTypeBuilder(Apps, new Guid("0E18F37B-39AA-452A-8085-6BD8AA686D33")).WithObjectType(CommunicationEvent).WithName("Reopen").Build();
+
+            CommunicationEventDescription.IsRequired = true;
+            CommunicationEventCurrentObjectState.IsRequired = true;
         }
 
         private static void AppsBasePrice()
         {
             BasePricePrice.IsRequiredOverride = true;
+            BasePriceCurrency.IsRequiredOverride = true;
         }
 
         private static void AppsWorkEffortBilling()
@@ -484,6 +1253,7 @@ namespace Allors.Meta
 
         private static void AppsUnitOfMeasureConversion()
         {
+            UnitOfMeasureConversionToUnitOfMeasure.IsRequired = true;
             UnitOfMeasureConversionConversionFactor.IsRequired = true;
         }
 
@@ -496,6 +1266,7 @@ namespace Allors.Meta
         {
             StoreRevenueYear.IsRequired = true;
             StoreRevenueMonth.IsRequired = true;
+            StoreRevenueRevenue.IsRequired = true;
         }
 
         private static void AppsStorePayment()
@@ -513,6 +1284,16 @@ namespace Allors.Meta
             SalesOrderItemQuantityShortFalled.IsRequired = true;
             SalesOrderItemQuantityRequestsShipping.IsRequired = true;
             SalesOrderItemQuantityReserved.IsRequired = true;
+            SalesOrderItemCurrentObjectState.IsRequired = true;
+            SalesOrderItemQuantityPicked.IsRequired = true;
+            SalesOrderItemQuantityRequestsShipping.IsRequired = true;
+            SalesOrderItemQuantityReserved.IsRequired = true;
+            SalesOrderItemQuantityReturned.IsRequired = true;
+            SalesOrderItemQuantityShipped.IsRequired = true;
+            SalesOrderItemQuantityPendingShipment.IsRequired = true;
+            SalesOrderItemQuantityShortFalled.IsRequired = true;
+
+            SalesOrderItemQuantityOrdered.IsRequiredOverride = true;
         }
 
         private static void AppsSurchargeComponent()
@@ -523,6 +1304,10 @@ namespace Allors.Meta
         private static void AppsShipmentReceipt()
         {
             ShipmentReceiptReceivedDateTime.IsRequired = true;
+            ShipmentReceiptInventoryItem.IsRequired = true;
+            ShipmentReceiptQuantityAccepted.IsRequired = true;
+            ShipmentReceiptQuantityRejected.IsRequired = true;
+            ShipmentReceiptShipmentItem.IsRequired = true;
         }
 
         private static void AppsServiceEntryBilling()
@@ -535,24 +1320,28 @@ namespace Allors.Meta
         {
             SalesRepProductCategoryRevenueYear.IsRequired = true;
             SalesRepProductCategoryRevenueMonth.IsRequired = true;
+            SalesRepProductCategoryRevenueRevenue.IsRequired = true;
         }
 
         private static void AppsSalesRepRevenue()
         {
             SalesRepRevenueYear.IsRequired = true;
             SalesRepRevenueMonth.IsRequired = true;
+            SalesRepRevenueRevenue.IsRequired = true;
         }
 
         private static void AppsSalesRepPartyRevenue()
         {
             SalesRepPartyRevenueYear.IsRequired = true;
             SalesRepPartyRevenueMonth.IsRequired = true;
+            SalesRepPartyRevenueRevenue.IsRequired = true;
         }
 
         private static void AppsSalesRepPartyProductCategoryRevenue()
         {
             SalesRepPartyProductCategoryRevenueYear.IsRequired = true;
             SalesRepPartyProductCategoryRevenueMonth.IsRequired = true;
+            SalesRepPartyProductCategoryRevenueRevenue.IsRequired = true;
         }
 
         private static void AppsSalesInvoiceStatus()
@@ -583,12 +1372,16 @@ namespace Allors.Meta
             SalesInvoiceStore.IsRequired = true;
             SalesInvoiceBillToCustomer.IsRequired = true;
             SalesInvoiceBillToContactMechanism.IsRequired = true;
+            SalesInvoiceCurrentObjectState.IsRequired = true;
+
+            SalesInvoiceAmountPaid.IsRequiredOverride = true;
         }
 
         private static void AppsSalesChannelRevenue()
         {
             SalesChannelRevenueYear.IsRequired = true;
             SalesChannelRevenueMonth.IsRequired = true;
+            SalesChannelRevenueRevenue.IsRequired = true;
         }
 
         private static void AppsSalesAccountingTransaction()
@@ -653,18 +1446,21 @@ namespace Allors.Meta
             PurchaseInvoicePurchaseInvoiceType.IsRequired = true;
             PurchaseInvoiceBilledToInternalOrganisation.IsRequired = true;
             PurchaseInvoiceBilledFromParty.IsRequired = true;
+            PurchaseInvoiceCurrentObjectState.IsRequired = true;
         }
 
         private static void AppsProductRevenue()
         {
             ProductRevenueYear.IsRequired = true;
             ProductRevenueMonth.IsRequired = true;
+            ProductRevenueRevenue.IsRequired = true;
         }
 
         private static void AppsProductCategoryRevenue()
         {
             ProductCategoryRevenueYear.IsRequired = true;
             ProductCategoryRevenueMonth.IsRequired = true;
+            ProductCategoryRevenueRevenue.IsRequired = true;
         }
 
         private static void AppsPeriod()
@@ -681,6 +1477,8 @@ namespace Allors.Meta
         private static void AppsProductPurchasePrice()
         {
             ProductPurchasePricePrice.IsRequired = true;
+            ProductPurchasePriceCurrency.IsRequired = true;
+            ProductPurchasePriceUnitOfMeasure.IsRequired = true;
         }
 
         private static void AppsPriceComponent()
@@ -748,6 +1546,7 @@ namespace Allors.Meta
         private static void AppsPaymentMethod()
         {
             PaymentMethodDescription.IsRequired = true;
+            PaymentMethodIsActive.IsRequired = true;
         }
 
         private static void AppsPaymentBudgetAllocation()
@@ -782,28 +1581,35 @@ namespace Allors.Meta
         {
             PartyPackageRevenueYear.IsRequired = true;
             PartyPackageRevenueMonth.IsRequired = true;
+            PartyPackageRevenueRevenue.IsRequired = true;
         }
 
         private static void AppsPartyProductRevenue()
         {
             PartyProductRevenueYear.IsRequired = true;
             PartyProductRevenueMonth.IsRequired = true;
+            PartyProductRevenueRevenue.IsRequired = true;
+            PartyProductRevenueQuantity.IsRequired = true;
         }
 
         private static void AppsPartyProductCategoryRevenue()
         {
             PartyProductCategoryRevenueYear.IsRequired = true;
             PartyProductCategoryRevenueMonth.IsRequired = true;
+            PartyProductCategoryRevenueRevenue.IsRequired = true;
+            PartyProductCategoryRevenueQuantity.IsRequired = true;
         }
 
         private static void AppsPartyRevenue()
         {
             PartyRevenueYear.IsRequired = true;
             PartyRevenueMonth.IsRequired = true;
+            PartyRevenueRevenue.IsRequired = true;
         }
 
         private static void AppsPartyContactMechanism()
         {
+            PartyContactMechanismContactMechanism.IsRequired = true;
             PartyContactMechanismUseAsDefault.IsRequired = true;
         }
 
@@ -817,11 +1623,13 @@ namespace Allors.Meta
         {
             PackageRevenueYear.IsRequired = true;
             PackageRevenueMonth.IsRequired = true;
+            PackageRevenueRevenue.IsRequired = true;
         }
 
         private static void AppsPackagingContent()
         {
             PackagingContentQuantity.IsRequired = true;
+            PackagingContentShipmentItem.IsRequired = true;
         }
 
         private static void AppsOwnCreditCard()
@@ -850,6 +1658,7 @@ namespace Allors.Meta
         {
             OrderShipmentQuantity.IsRequired = true;
             OrderShipmentPicked.IsRequired = true;
+            OrderShipmentShipmentItem.IsRequired = true;
         }
 
         private static void AppsOrderItemBilling()
@@ -886,17 +1695,38 @@ namespace Allors.Meta
             new MethodTypeBuilder(Apps, new Guid("716909AB-F88C-4BD4-B238-87D117CE1515")).WithObjectType(Order).WithName("Hold").Build();
             new MethodTypeBuilder(Apps, new Guid("0D0F41BB-11C8-44A0-8B6D-1F7657BB85A8")).WithObjectType(Order).WithName("Continue").Build();
             new MethodTypeBuilder(Apps, new Guid("2142CD4A-C861-4E7A-986B-CDBFC1AD0E53")).WithObjectType(Order).WithName("Confirm").Build();
-            new MethodTypeBuilder(Apps, new Guid("CC489BED-55FA-449D-BC22-C9E0954DA8E3")).WithObjectType(Order).WithName("CancelOrder").Build();
+            new MethodTypeBuilder(Apps, new Guid("CC489BED-55FA-449D-BC22-C9E0954DA8E3")).WithObjectType(Order).WithName("Cancel").Build();
             new MethodTypeBuilder(Apps, new Guid("7154A033-6A07-49FE-B928-9EDD843FC56C")).WithObjectType(Order).WithName("Complete").Build();
             new MethodTypeBuilder(Apps, new Guid("E3441FE1-E403-4709-AF7F-84238D0E69F0")).WithObjectType(Order).WithName("Finish").Build();
 
             OrderOrderNumber.IsRequired = true;
             OrderOrderDate.IsRequired = true;
+            OrderEntryDate.IsRequired = true;
+            OrderTotalBasePrice.IsRequired = true;
+            OrderTotalBasePriceCustomerCurrency.IsRequired = true;
+            OrderTotalDiscount.IsRequired = true;
+            OrderTotalDiscountCustomerCurrency.IsRequired = true;
+            OrderTotalVat.IsRequired = true;
+            OrderTotalVatCustomerCurrency.IsRequired = true;
+            OrderTotalExVat.IsRequired = true;
+            OrderTotalExVatCustomerCurrency.IsRequired = true;
+            OrderTotalIncVat.IsRequired = true;
+            OrderTotalIncVatCustomerCurrency.IsRequired = true;
+            OrderTotalFee.IsRequired = true;
+            OrderTotalFeeCustomerCurrency.IsRequired = true;
+            OrderTotalShippingAndHandling.IsRequired = true;
+            OrderTotalShippingAndHandlingCustomerCurrency.IsRequired = true;
+            OrderTotalSurcharge.IsRequired = true;
+            OrderTotalSurchargeCustomerCurrency.IsRequired = true;
         }
 
         private static void AppsNonSerializedInventoryItem()
         {
+            NonSerializedInventoryItemCurrentObjectState.IsRequired = true;
             NonSerializedInventoryItemAvailableToPromise.IsRequired = true;
+            NonSerializedInventoryItemQuantityCommittedOut.IsRequired = true;
+            NonSerializedInventoryItemQuantityExpectedIn.IsRequired = true;
+            NonSerializedInventoryItemQuantityOnHand.IsRequired = true;
         }
 
         private static void AppsJournal()
@@ -905,6 +1735,9 @@ namespace Allors.Meta
             JournalInternalOrganisation.IsRequired = true;
             JournalJournalType.IsRequired = true;
             JournalContraAccount.IsRequired = true;
+            JournalBlockUnpaidTransactions.IsRequired = true;
+            JournalCloseWhenInBalance.IsRequired = true;
+            JournalUseAsDefault.IsRequired = true;
         }
 
         private static void AppsInvoiceTerm()
@@ -921,6 +1754,23 @@ namespace Allors.Meta
         {
             InvoiceInvoiceDate.IsRequired = true;
             InvoiceInvoiceNumber.IsRequired = true;
+            InvoiceEntryDate.IsRequired = true;
+            InvoiceTotalBasePrice.IsRequired = true;
+            InvoiceTotalBasePriceCustomerCurrency.IsRequired = true;
+            InvoiceTotalDiscount.IsRequired = true;
+            InvoiceTotalDiscountCustomerCurrency.IsRequired = true;
+            InvoiceTotalExVat.IsRequired = true;
+            InvoiceTotalExVatCustomerCurrency.IsRequired = true;
+            InvoiceTotalFee.IsRequired = true;
+            InvoiceTotalFeeCustomerCurrency.IsRequired = true;
+            InvoiceTotalIncVat.IsRequired = true;
+            InvoiceTotalIncVatCustomerCurrency.IsRequired = true;
+            InvoiceTotalShippingAndHandling.IsRequired = true;
+            InvoiceTotalShippingAndHandlingCustomerCurrency.IsRequired = true;
+            InvoiceTotalSurcharge.IsRequired = true;
+            InvoiceTotalSurchargeCustomerCurrency.IsRequired = true;
+            InvoiceTotalVat.IsRequired = true;
+            InvoiceTotalVatCustomerCurrency.IsRequired = true;
         }
 
         private static void AppsInvestmentAccount()
@@ -932,13 +1782,20 @@ namespace Allors.Meta
         {
             InternalOrganisationRevenueYear.IsRequired = true;
             InternalOrganisationRevenueMonth.IsRequired = true;
+            InternalOrganisationRevenueRevenue.IsRequired = true;
         }
 
         private static void AppsInternalOrganisation()
         {
+            InternalOrganisationName.IsRequired = true;
+            InternalOrganisationDefaultPaymentMethod.IsRequiredOverride = true;
+            InternalOrganisationLocale.IsRequiredOverride = true;
+            InternalOrganisationPreferredCurrency.IsRequiredOverride = true;
             InternalOrganisationNextSubAccountNumber.IsRequired = true;
             InternalOrganisationFiscalYearStartMonth.IsRequired = true;
             InternalOrganisationFiscalYearStartDay.IsRequired = true;
+            InternalOrganisationDoAccounting.IsRequired = true;
+            InternalOrganisationInvoiceSequence.IsRequired = true;
         }
 
         private static void AppsInternalAccountingTransaction()
