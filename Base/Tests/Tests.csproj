@@ -105,10 +105,6 @@
       <Project>{489d90a9-b63e-4983-86cc-2a061d8f6055}</Project>
       <Name>Allors.Databases.Object.SqlClient</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Adapters\Allors.Databases.Relation.SqlClient\Allors.Databases.Relation.SqlClient.csproj">
-      <Project>{457bddeb-41cf-46c6-bbcc-13618aeb646f}</Project>
-      <Name>Allors.Databases.Relation.SqlClient</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Adapters\Allors.Databases.Relation.SQLite\Allors.Databases.Relation.SQLite.csproj">
       <Project>{76db148d-bfbb-48be-929b-4631c860f2a1}</Project>
       <Name>Allors.Databases.Relation.SQLite</Name>

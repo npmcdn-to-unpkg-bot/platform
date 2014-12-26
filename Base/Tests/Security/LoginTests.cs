@@ -33,12 +33,12 @@ namespace Allors.Security
         [Test]
         public void WhenDeletingUserThenLoginShouldAlsoBeDeleted()
         {
-            var user = new PersonBuilder(this.DatabaseSession).WithUserName("User").Build();
+            var user = new PersonBuilder(this.DatabaseSession).WithUserName("User").WithLastName("User").Build();
             var login = new LoginBuilder(this.DatabaseSession).WithUser(user).WithProvider("MyProvider").WithKey("XXXYYYZZZ").Build();
 
             this.DatabaseSession.Derive();
 
-            user.Delete();
+            user.Delete().Execute();
 
             this.DatabaseSession.Derive();
 

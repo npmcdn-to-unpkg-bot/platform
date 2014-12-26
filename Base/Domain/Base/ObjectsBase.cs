@@ -94,7 +94,6 @@ namespace Allors
 
         protected virtual void BasePrepare(Setup config)
         {
-            new Locales(this.session).Sync();
             config.Add(this);
         }
 

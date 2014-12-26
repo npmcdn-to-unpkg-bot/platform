@@ -22,10 +22,8 @@ namespace Allors.Domain
 {
     public partial class Dependee
     {
-        public override void OnPostBuild(Allors.IObjectBuilder builder)
+        public void TestOnPostBuild(ObjectOnPostBuild method)
         {
-            base.OnPostBuild(builder);
-
             if (!this.ExistCounter)
             {
                 this.Counter = 0;
@@ -62,7 +60,7 @@ namespace Allors.Domain
 
             if (this.DeleteDependent.HasValue && this.DeleteDependent.Value)
             {
-                this.DependentWhereDependee.Delete();
+                this.DependentWhereDependee.Delete().Execute();
             }
         }
     }

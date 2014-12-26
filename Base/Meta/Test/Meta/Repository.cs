@@ -78,6 +78,12 @@ namespace Allors.Meta
                 }
             }
 
+            // Dependent
+            new InheritanceBuilder(domain, new Guid("6A2A0FEB-3E76-4BF1-921E-6A35FA255EF4")).WithSubtype(dependent).WithSupertype(Deletable).Build();
+
+            // User
+            new InheritanceBuilder(domain, new Guid("4EF23627-EE19-4BF0-AEDC-952039A64C52")).WithSubtype(User).WithSupertype(Deletable).Build();
+
             // C1
             new InheritanceBuilder(domain, new Guid("2d0db6cd-5837-4bbd-ad9e-9203a6cc7c61")).WithSubtype(c1).WithSupertype(i1).Build();
 
@@ -174,7 +180,7 @@ namespace Allors.Meta
             new RelationTypeBuilder(domain, new Guid("8859af04-ba38-42ce-8ac9-f428c3f92f31"), new Guid("cd3972e6-8ad4-4b01-9381-4d18718c7538"), new Guid("d6b1d6b6-539b-4b12-9363-18e7e9ab632c")).WithObjectTypes(dependent, dependee).WithIsIndexed(true).Build();
             new RelationTypeBuilder(domain, new Guid("9884955e-74ed-4f9d-9362-8e0274c53bf9"), new Guid("5b97e356-9bcd-4c4e-be7a-ef577eef5f14"), new Guid("d067129b-8440-4fc7-80d3-832ce569fe54")).WithObjectTypes(dependent, AllorsInteger).WithSingularName("Counter").WithPluralName("Counters").Build();
             new RelationTypeBuilder(domain, new Guid("e971733a-c381-4b5e-8e62-6bbd6d285bd7"), new Guid("6269351a-5e08-4b10-a895-ff2f669b259f"), new Guid("2b916cdb-93a6-42f1-b4e6-625b941c1874")).WithObjectTypes(dependent, AllorsInteger).WithSingularName("Subcounter").WithPluralName("Subcounters").Build();
-
+            
             // Address
             new RelationTypeBuilder(domain, new Guid("36e7d935-a9c7-484d-8551-9bdc5bdeab68"), new Guid("113a8abd-e587-45a3-b118-92e60182c94b"), new Guid("4f7016f6-1b87-4ac4-8363-7f8210108928")).WithObjectTypes(address, place).WithSingularName("Place").WithPluralName("Places").WithMultiplicity(Multiplicity.ManyToOne).WithIsIndexed(true).Build();
 

@@ -44,12 +44,12 @@ namespace Allors.Domain
 
                 var cachedOrganisation = new Organisations(session).Cache.Get(existingOrganisation.UniqueId);
                 Assert.AreEqual(existingOrganisation.UniqueId, cachedOrganisation.UniqueId);
-                Assert.AreSame(session, cachedOrganisation.Session);
+                Assert.AreSame(session, cachedOrganisation.Strategy.Session);
 
                 var newOrganisation = new OrganisationBuilder(session).WithName("new organisation").Build();
                 cachedOrganisation = new Organisations(session).Cache.Get(newOrganisation.UniqueId);
                 Assert.AreEqual(newOrganisation.UniqueId, cachedOrganisation.UniqueId);
-                Assert.AreSame(session, cachedOrganisation.Session);
+                Assert.AreSame(session, cachedOrganisation.Strategy.Session);
 
                 session.Rollback();
             }

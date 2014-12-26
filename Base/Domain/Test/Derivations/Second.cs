@@ -24,7 +24,7 @@ namespace Allors.Domain
     {
         public void TestDerive(DerivableDerive method)
         {
-            this.Third = new ThirdBuilder(this.Session).Build();
+            this.Third = new ThirdBuilder(this.Strategy.Session).Build();
 
             this.IsDerived = true;
         }

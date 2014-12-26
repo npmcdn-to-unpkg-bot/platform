@@ -28,7 +28,7 @@ namespace Allors.Domain
 
             if (!this.ExistUser)
             {
-                this.Delete();
+                this.Delete().Execute();
             }
         }
     }

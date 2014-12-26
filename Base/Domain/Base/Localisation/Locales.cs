@@ -23,6 +23,7 @@ namespace Allors.Domain
     using Allors.Domain;
 
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Globalization;
 
     public partial class Locales

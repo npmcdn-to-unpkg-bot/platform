@@ -33,11 +33,11 @@ namespace Allors.Domain
             return DisplayName;
         }
 
-        protected override void TestOnPostBuild(Allors.IObjectBuilder builder)
+        public void TestOnPostBuild(ObjectOnPostBuild method)
         {
             if (!this.ExistSearchData)
             {
-                this.SearchData = new SearchDataBuilder(this.Session).Build();
+                this.SearchData = new SearchDataBuilder(this.Strategy.Session).Build();
             }
         }
 

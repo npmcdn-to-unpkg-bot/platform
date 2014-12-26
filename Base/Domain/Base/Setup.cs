@@ -96,6 +96,8 @@ namespace Allors
 
             singleton.DefaultSecurityToken = new SecurityTokenBuilder(this.session).Build();
             singleton.AdministratorSecurityToken = new SecurityTokenBuilder(this.session).Build();
+
+            new Locales(this.session).Sync();
         }
 
         private void BaseOnPostSetup()

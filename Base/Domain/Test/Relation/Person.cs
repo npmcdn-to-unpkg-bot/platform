@@ -50,13 +50,11 @@ namespace Allors.Domain
             return base.ToString();
         }
 
-        protected override void TestOnPostBuild(IObjectBuilder objectBuilder)
+        public void TestOnPostBuild(ObjectOnPostBuild method)
         {
-            base.TestOnPostBuild(objectBuilder);
-
             if (!this.ExistSearchData)
             {
-                this.SearchData = new SearchDataBuilder(this.Session).Build();
+                this.SearchData = new SearchDataBuilder(this.Strategy.Session).Build();
             }
         }
 
@@ -66,7 +64,7 @@ namespace Allors.Domain
 
             if (!this.ExistOwnerSecurityToken)
             {
-                var mySecurityToken = new SecurityTokenBuilder(this.Session).Build();
+                var mySecurityToken = new SecurityTokenBuilder(this.Strategy.Session).Build();
                 this.OwnerSecurityToken = mySecurityToken;
             }
 
@@ -90,7 +88,7 @@ namespace Allors.Domain
                 this.FullName = this.LastName;
             }
 
-            var template = Singleton.Instance(this.Session).PersonTemplate;
+            var template = Singleton.Instance(this.Strategy.Session).PersonTemplate;
             this.PrintContent = template.Apply(new Dictionary<string, object> { { "this", this } });
         }
 

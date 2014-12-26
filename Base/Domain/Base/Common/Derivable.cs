@@ -22,10 +22,6 @@ namespace Allors.Domain
 {
     using Allors.Meta;
 
-    public partial interface Derivable
-    {
-    }
-
     public static partial class DerivableExtensions
     {
         public static void BasePrepareDerivation(this Derivable @this, DerivablePrepareDerivation method)

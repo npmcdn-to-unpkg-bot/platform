@@ -49,7 +49,7 @@ namespace Allors.Meta
                         var results = new HashSet<object>();
                         foreach (var item in (IEnumerable)currentValue)
                         {
-                            var nextValueResult = path.Next.Get((Allors.ObjectBase)item, aclFactory);
+                            var nextValueResult = path.Next.Get((IObject)item, aclFactory);
                             if (nextValueResult is HashSet<object>)
                             {
                                 results.UnionWith((HashSet<object>)nextValueResult);
@@ -132,7 +132,7 @@ namespace Allors.Meta
 
                         if (path.ExistNext)
                         {
-                            var next = role as Allors.ObjectBase;
+                            var next = role as IObject;
                             if (next != null)
                             {
                                 path.Next.Ensure(next, aclFactory);

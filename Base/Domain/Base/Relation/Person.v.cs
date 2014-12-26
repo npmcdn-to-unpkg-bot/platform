@@ -22,11 +22,22 @@ namespace Allors.Domain
 {
     public partial class Person
     {
-        public override void Delete()
+        public void BaseDelete(DeletableDelete method)
         {
-            this.CoreDelete();
+            if (this.ExistSearchData)
+            {
+                this.SearchData.Delete().Execute();
+            }
 
-            base.Delete();
+            if (this.ExistOwnerSecurityToken)
+            {
+                foreach (AccessControl acl in this.OwnerSecurityToken.AccessControlsWhereObject)
+                {
+                    acl.Delete().Execute();
+                }
+
+                this.OwnerSecurityToken.Delete().Execute();
+            }
         }
 
         public string DeriveSearchDataCharacterBoundaryText()

@@ -46,7 +46,7 @@ namespace Allors.Meta
             domains.Sort((a, b) => a.Superdomains.Contains(b) ? -1 : 1);
 
             var @class = typeof(T);
-            var interfaces = @class.GetInterfaces();
+            var interfaces = new List<Type>(@class.GetInterfaces());
 
             foreach (var domain in domains)
             {
@@ -81,6 +81,24 @@ namespace Allors.Meta
                         
                         this.actions.Add(action);
                     }
+                }
+
+                // MethodType is on an interface, make sure that interface
+                // gets called last. (the opposite of a class)
+                // TODO: respect the hierarchy dependency
+                var methodInterface = methodType.ObjectType as Interface;
+                if (methodInterface!=null)
+                {
+                    interfaces.Sort(
+                        (a, b) =>
+                            {
+                                if (a.Name.Equals(methodInterface.Name))
+                                {
+                                    return 1;
+                                }
+
+                                return -1;
+                            });
                 }
 
                 foreach (var @interface in interfaces)
