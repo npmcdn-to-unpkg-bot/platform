@@ -20,10 +20,15 @@
 
 namespace Allors.Domain
 {
+    using System;
+    using System.Collections.Generic;
+
     using Allors.Meta;
 
     public static partial class DerivableExtensions
     {
+        private static Dictionary<Type, RoleType[]> requiredRoleTypesByClass; 
+
         public static void BasePrepareDerivation(this Derivable @this, DerivablePrepareDerivation method)
         {
             var derivation = method.Derivation;
@@ -61,9 +66,9 @@ namespace Allors.Domain
 
     public abstract partial class DerivableDerive
     {
-        public Derivation Derivation { get; set; }
+        public IDerivation Derivation { get; set; }
 
-        public DerivableDerive WithDerivation(Derivation derivation)
+        public DerivableDerive WithDerivation(IDerivation derivation)
         {
             this.Derivation = derivation;
             return this;

@@ -1084,7 +1084,7 @@ namespace Allors.Domain
 	{
 					global::System.DateTime FromDate {set;}
 
-					global::System.DateTime ThroughDate {set;}
+					global::System.DateTime? ThroughDate {set;}
 
 	}
 	public interface Deletable  : Object 

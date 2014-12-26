@@ -97,7 +97,7 @@ namespace Allors.Domain
 
             foreach (ProductCategory productCategory in this.Product.ProductCategories)
             {
-                productCategory.Derive().Execute();
+                productCategory.Derive().WithDerivation(derivation).Execute();
             }
         }
     }

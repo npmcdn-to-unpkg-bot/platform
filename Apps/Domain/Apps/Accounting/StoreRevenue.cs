@@ -99,7 +99,7 @@ namespace Allors.Domain
             }
 
             var internalOrganisationRevenue = InternalOrganisationRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, this);
-            internalOrganisationRevenue.Derive().Execute();
+            internalOrganisationRevenue.Derive().WithDerivation(derivation).Execute();
         }
     }
 }

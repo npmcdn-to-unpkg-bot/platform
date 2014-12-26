@@ -56,7 +56,7 @@ namespace Allors.Domain
             ////After deriving this.Organisation
             if (this.ExistContact)
             {
-                this.Contact.Derive().Execute();
+                this.Contact.Derive().WithDerivation(derivation).Execute();
             }
         }
 

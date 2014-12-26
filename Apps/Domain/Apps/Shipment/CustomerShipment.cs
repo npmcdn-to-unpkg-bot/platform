@@ -379,7 +379,7 @@ namespace Allors.Domain
                 foreach (var keyValuePair in invoiceByOrder)
                 {
                     // TODO: put this in prepare
-                    // keyValuePair.Value.Derive().Execute();
+                    // keyValuePair.Value.Derive().WithDerivation(derivation).Execute();
                 }
             }
         }
@@ -526,7 +526,7 @@ namespace Allors.Domain
 
                 if (pendingPickList != null)
                 {
-                    pendingPickList.Derive().Execute();
+                    pendingPickList.Derive().WithDerivation(derivation).Execute();
                 }
             }
         }

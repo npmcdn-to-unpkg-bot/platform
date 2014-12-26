@@ -167,7 +167,7 @@ namespace Allors.Domain
 
             foreach (ShipmentItem shipmentItem in this.ShipmentItems)
             {
-                shipmentItem.Derive().Execute();
+                shipmentItem.Derive().WithDerivation(derivation).Execute();
             }
 
             this.DeriveTemplate(derivation);

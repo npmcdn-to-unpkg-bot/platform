@@ -294,9 +294,21 @@ namespace Allors.Meta
             // HACK: 
             foreach (var roleType in meta.RoleTypes)
             {
-                if (roleType.RelationType.IsDerived)
+                if (roleType.RelationType.IsDerived && roleType.ObjectType.IsUnit)
                 {
-                    roleType.IsRequired = true;
+                    var unit = roleType.ObjectType as Unit;
+
+                    switch (unit.UnitTag)
+                    {
+                        case UnitTags.AllorsBoolean:
+                        case UnitTags.AllorsDateTime:
+                        case UnitTags.AllorsDecimal:
+                        case UnitTags.AllorsFloat:
+                        case UnitTags.AllorsInteger:
+                        case UnitTags.AllorsUnique:
+                            roleType.IsRequired = true;
+                            break;
+                    }
                 }
             }
         }
@@ -1473,7 +1485,6 @@ namespace Allors.Meta
         private static void AppsPeriod()
         {
             PeriodFromDate.IsRequired = true;
-            PeriodThroughDate.IsRequired = true;
         }
 
         private static void AppsPaymentApplication()

@@ -86,22 +86,22 @@ namespace Allors.Domain
 
             if (salesInvoice != null)
             {
-                salesInvoice.Derive().Execute();
+                salesInvoice.Derive().WithDerivation(derivation).Execute();
             }
 
             if (purchaseInvoice != null)
             {
-                purchaseInvoice.Derive().Execute();
+                purchaseInvoice.Derive().WithDerivation(derivation).Execute();
             }
 
             if (salesInvoiceItem != null)
             {
-                salesInvoiceItem.SalesInvoiceWhereSalesInvoiceItem.Derive().Execute();
+                salesInvoiceItem.SalesInvoiceWhereSalesInvoiceItem.Derive().WithDerivation(derivation).Execute();
             }
 
             if (purchaseInvoiceItem != null)
             {
-                purchaseInvoiceItem.PurchaseInvoiceItemType.Derive().Execute();
+                purchaseInvoiceItem.PurchaseInvoiceItemType.Derive().WithDerivation(derivation).Execute();
             }
         }
     }

@@ -121,10 +121,10 @@ namespace Allors.Domain
             if (this.ExistParty && this.ExistProductCategory)
             {
                 var salesRepProductCategoryRevenue = SalesRepProductCategoryRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, this);
-                salesRepProductCategoryRevenue.Derive().Execute();
+                salesRepProductCategoryRevenue.Derive().WithDerivation(derivation).Execute();
 
                 var salesRepPartyRevenue = SalesRepPartyRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, this);
-                salesRepPartyRevenue.Derive().Execute();
+                salesRepPartyRevenue.Derive().WithDerivation(derivation).Execute();
             }
         }
     }

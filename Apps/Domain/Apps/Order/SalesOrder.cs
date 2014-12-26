@@ -1188,7 +1188,7 @@ namespace Allors.Domain
             }
 
             // TODO: Check
-            pendingShipment.Derive().Execute();
+            pendingShipment.Derive().WithDerivation(derivation).Execute();
             return pendingShipment;
         }
 

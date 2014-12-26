@@ -400,7 +400,7 @@ namespace Allors.Domain
                 {
                     if (inventoryItem != null)
                     {
-                        inventoryItem.Derive().Execute();
+                        inventoryItem.Derive().WithDerivation(derivation).Execute();
                     }
                 }
             }
@@ -410,7 +410,7 @@ namespace Allors.Domain
             {
                 if (inventoryItem != null)
                 {
-                    inventoryItem.Derive().Execute();
+                    inventoryItem.Derive().WithDerivation(derivation).Execute();
                 }
             }
         }

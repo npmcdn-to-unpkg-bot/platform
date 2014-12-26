@@ -113,7 +113,7 @@ namespace Allors.Domain
             if (this.ExistPackage)
             {
                 var packageRevenue = PackageRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, this);
-                packageRevenue.Derive().Execute();
+                packageRevenue.Derive().WithDerivation(derivation).Execute();
             }
         }
     }

@@ -120,13 +120,13 @@ namespace Allors.Domain
             if (this.ExistParty)
             {
                 var partyRevenue = PartyRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, this);
-                partyRevenue.Derive().Execute();
+                partyRevenue.Derive().WithDerivation(derivation).Execute();
             }
 
             if (this.ExistProduct)
             {
                 var productRevenue = ProductRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, this);
-                productRevenue.Derive().Execute();
+                productRevenue.Derive().WithDerivation(derivation).Execute();
 
                 foreach (ProductCategory productCategory in this.Product.ProductCategories)
                 {
@@ -145,7 +145,7 @@ namespace Allors.Domain
                                                                 .WithCurrency(this.Currency)
                                                                 .WithRevenue(0M)
                                                                 .Build();
-                    partyProductCategoryRevenue.Derive().Execute();
+                    partyProductCategoryRevenue.Derive().WithDerivation(derivation).Execute();
                 }
             }
         }

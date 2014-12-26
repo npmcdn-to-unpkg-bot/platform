@@ -589,7 +589,7 @@ namespace Allors.Domain
 
                 if (customerRelationship != null)
                 {
-                    customerRelationship.Derive().Execute();
+                    customerRelationship.Derive().WithDerivation(derivation).Execute();
                 }
             }
 
@@ -961,7 +961,7 @@ namespace Allors.Domain
                     foreach (OrderShipment orderShipment in invoiceItem.ShipmentItemWhereInvoiceItem.OrderShipmentsWhereShipmentItem)
                     {
                         orderShipment.SalesOrderItem.DeriveCurrentPaymentStatus(derivation);
-                        orderShipment.SalesOrderItem.SalesOrderWhereSalesOrderItem.Derive().Execute();
+                        orderShipment.SalesOrderItem.SalesOrderWhereSalesOrderItem.Derive().WithDerivation(derivation).Execute();
                     }
                 }
             }
@@ -989,7 +989,7 @@ namespace Allors.Domain
             var invoiceFromOrder = true;
             foreach (SalesInvoiceItem salesInvoiceItem in this.SalesInvoiceItems)
             {
-                salesInvoiceItem.Derive().Execute();
+                salesInvoiceItem.Derive().WithDerivation(derivation).Execute();
                 salesInvoiceItem.DeriveVatRegime(derivation);
                 salesInvoiceItem.DeriveSalesRep(derivation);
                 salesInvoiceItem.DeriveCurrentObjectState(derivation);
@@ -1048,12 +1048,12 @@ namespace Allors.Domain
                 if (salesInvoiceItem.ExistProduct)
                 {
                     var partyProductRevenue = PartyProductRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, salesInvoiceItem.Product, salesInvoiceItem.SalesInvoiceWhereSalesInvoiceItem);
-                    partyProductRevenue.Derive().Execute();
+                    partyProductRevenue.Derive().WithDerivation(derivation).Execute();
                 }
                 else
                 {
                     var partyRevenue = PartyRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, salesInvoiceItem.SalesInvoiceWhereSalesInvoiceItem);
-                    partyRevenue.Derive().Execute();
+                    partyRevenue.Derive().WithDerivation(derivation).Execute();
                 }
 
                 if (salesInvoiceItem.ExistSalesRep)
@@ -1061,33 +1061,33 @@ namespace Allors.Domain
                     if (salesInvoiceItem.ExistProduct && salesInvoiceItem.Product.ExistPrimaryProductCategory)
                     {
                         var salesRepPartyProductCategoryRevenue = SalesRepPartyProductCategoryRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, salesInvoiceItem);
-                        salesRepPartyProductCategoryRevenue.Derive().Execute();
+                        salesRepPartyProductCategoryRevenue.Derive().WithDerivation(derivation).Execute();
                     }
                     else
                     {
                         var salesRepPartyRevenue = SalesRepPartyRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, salesInvoiceItem);
-                        salesRepPartyRevenue.Derive().Execute();
+                        salesRepPartyRevenue.Derive().WithDerivation(derivation).Execute();
                     }
                 }
 
                 if (salesInvoiceItem.SalesInvoiceWhereSalesInvoiceItem.ExistBillToCustomer && salesInvoiceItem.ExistProduct)
                 {
                     var partyProductRevenue = PartyProductRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, salesInvoiceItem.Product, salesInvoiceItem.SalesInvoiceWhereSalesInvoiceItem);
-                    partyProductRevenue.Derive().Execute();
+                    partyProductRevenue.Derive().WithDerivation(derivation).Execute();
                 }
                 else
                 {
                     var partyRevenue = PartyRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, salesInvoiceItem.SalesInvoiceWhereSalesInvoiceItem);
-                    partyRevenue.Derive().Execute();
+                    partyRevenue.Derive().WithDerivation(derivation).Execute();
                 }
 
                 var storeRevenue = StoreRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, this);
-                storeRevenue.Derive().Execute();
+                storeRevenue.Derive().WithDerivation(derivation).Execute();
 
                 if (this.ExistSalesChannel)
                 {
                     var salesChannelRevenue = SalesChannelRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, this);
-                    salesChannelRevenue.Derive().Execute();
+                    salesChannelRevenue.Derive().WithDerivation(derivation).Execute();
                 }
             }
         }

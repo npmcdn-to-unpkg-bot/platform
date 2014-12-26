@@ -627,7 +627,7 @@ namespace Allors.Domain
 
             foreach (PurchaseOrderItem purchaseOrderItem in this.ValidOrderItems)
             {
-                purchaseOrderItem.Derive().Execute();
+                purchaseOrderItem.Derive().WithDerivation(derivation).Execute();
                 purchaseOrderItem.DeriveDeliveryDate(derivation);
                 purchaseOrderItem.DeriveCurrentShipmentStatus(derivation);
                 purchaseOrderItem.DerivePrices();
