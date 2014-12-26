@@ -106,7 +106,7 @@ namespace Allors.Domain
                         }
 
                         revenues.Add(internalOrganisationRevenue.Id);
-                        internalOrganisationRevenue.Revenue += salesInvoiceItem.TotalExVat.Value;
+                        internalOrganisationRevenue.Revenue += salesInvoiceItem.TotalExVat;
                     }
                 }
             }

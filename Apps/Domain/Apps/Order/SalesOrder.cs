@@ -895,12 +895,12 @@ namespace Allors.Domain
                 {
                     if (!item.ExistSalesOrderItemWhereOrderedWithFeature)
                     {
-                        this.TotalBasePrice += item.TotalBasePrice.Value;
-                        this.TotalDiscount += item.TotalDiscount.Value;
-                        this.TotalSurcharge += item.TotalSurcharge.Value;
-                        this.TotalExVat += item.TotalExVat.Value;
-                        this.TotalVat += item.TotalVat.Value;
-                        this.TotalIncVat += item.TotalIncVat.Value;
+                        this.TotalBasePrice += item.TotalBasePrice;
+                        this.TotalDiscount += item.TotalDiscount;
+                        this.TotalSurcharge += item.TotalSurcharge;
+                        this.TotalExVat += item.TotalExVat;
+                        this.TotalVat += item.TotalVat;
+                        this.TotalIncVat += item.TotalIncVat;
                         this.TotalPurchasePrice += item.UnitPurchasePrice;
                         this.TotalListPrice += item.CalculatedUnitPrice;
                     }
@@ -997,9 +997,9 @@ namespace Allors.Domain
             {
                 if (item.TotalExVat > 0)
                 {
-                    totalPurchasePrice += item.UnitPurchasePrice.Value;
-                    totalUnitBasePrice += item.UnitBasePrice.Value;
-                    totalListPrice += item.CalculatedUnitPrice.Value;
+                    totalPurchasePrice += item.UnitPurchasePrice;
+                    totalUnitBasePrice += item.UnitBasePrice;
+                    totalListPrice += item.CalculatedUnitPrice;
                 }
             }
 
@@ -1239,12 +1239,12 @@ namespace Allors.Domain
                     if (!quantityOrderedByProduct.ContainsKey(salesOrderItem.Product))
                     {
                         quantityOrderedByProduct.Add(salesOrderItem.Product, salesOrderItem.QuantityOrdered);
-                        totalBasePriceByProduct.Add(salesOrderItem.Product, salesOrderItem.TotalBasePrice.Value);
+                        totalBasePriceByProduct.Add(salesOrderItem.Product, salesOrderItem.TotalBasePrice);
                     }
                     else
                     {
                         quantityOrderedByProduct[salesOrderItem.Product] += salesOrderItem.QuantityOrdered;
-                        totalBasePriceByProduct[salesOrderItem.Product] += salesOrderItem.TotalBasePrice.Value;                        
+                        totalBasePriceByProduct[salesOrderItem.Product] += salesOrderItem.TotalBasePrice;                        
                     }
                 }
             }

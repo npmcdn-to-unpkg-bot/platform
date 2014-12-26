@@ -1055,7 +1055,7 @@
     <Compile Include="Apps\Relation\ClientAgreements.cs" />
     <Compile Include="Apps\Relation\ClientRelationship.cs" />
     <Compile Include="Apps\Relation\ClientRelationships.cs" />
-    <Compile Include="Apps\Relation\CommunicationEventExtensions.cs" />
+    <Compile Include="Apps\Relation\CommunicationEvent.cs" />
     <Compile Include="Apps\Relation\CommunicationEvent.v.cs" />
     <Compile Include="Apps\Relation\CommunicationEventObjectStates.cs" />
     <Compile Include="Apps\Relation\CommunicationEventPurposes.cs" />

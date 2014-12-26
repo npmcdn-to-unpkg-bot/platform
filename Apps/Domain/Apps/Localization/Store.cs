@@ -36,7 +36,7 @@ namespace Allors.Domain
             if (repositoryStore.Owner.InvoiceSequence.Equals(new Allors.Domain.InvoiceSequences(this.Strategy.Session).EnforcedSequence))
             {
                 repositoryStore.NextSalesInvoiceNumber = repositoryStore.ExistNextSalesInvoiceNumber ? repositoryStore.NextSalesInvoiceNumber : 1;
-                salesInvoiceNumber = repositoryStore.NextSalesInvoiceNumber.Value;
+                salesInvoiceNumber = repositoryStore.NextSalesInvoiceNumber;
                 repositoryStore.NextSalesInvoiceNumber++;
             }
             else

@@ -585,12 +585,12 @@ namespace Allors.Domain
 
                 foreach (PurchaseOrderItem orderItem in this.ValidOrderItems)
                 {
-                    this.TotalBasePrice += orderItem.TotalBasePrice.Value;
-                    this.TotalDiscount += orderItem.TotalDiscount.Value;
-                    this.TotalSurcharge += orderItem.TotalSurcharge.Value;
-                    this.TotalVat += orderItem.TotalVat.Value;
-                    this.TotalExVat += orderItem.TotalExVat.Value;
-                    this.TotalIncVat += orderItem.TotalIncVat.Value;
+                    this.TotalBasePrice += orderItem.TotalBasePrice;
+                    this.TotalDiscount += orderItem.TotalDiscount;
+                    this.TotalSurcharge += orderItem.TotalSurcharge;
+                    this.TotalVat += orderItem.TotalVat;
+                    this.TotalExVat += orderItem.TotalExVat;
+                    this.TotalIncVat += orderItem.TotalIncVat;
                 }
             }
         }
@@ -637,12 +637,12 @@ namespace Allors.Domain
                     if (!quantityOrderedByProduct.ContainsKey(purchaseOrderItem.Product))
                     {
                         quantityOrderedByProduct.Add(purchaseOrderItem.Product, purchaseOrderItem.QuantityOrdered);
-                        totalBasePriceByProduct.Add(purchaseOrderItem.Product, purchaseOrderItem.TotalBasePrice.Value);
+                        totalBasePriceByProduct.Add(purchaseOrderItem.Product, purchaseOrderItem.TotalBasePrice);
                     }
                     else
                     {
                         quantityOrderedByProduct[purchaseOrderItem.Product] += purchaseOrderItem.QuantityOrdered;
-                        totalBasePriceByProduct[purchaseOrderItem.Product] += purchaseOrderItem.TotalBasePrice.Value;
+                        totalBasePriceByProduct[purchaseOrderItem.Product] += purchaseOrderItem.TotalBasePrice;
                     }
                 }
 
@@ -651,12 +651,12 @@ namespace Allors.Domain
                     if (!quantityOrderedByPart.ContainsKey(purchaseOrderItem.Part))
                     {
                         quantityOrderedByPart.Add(purchaseOrderItem.Part, purchaseOrderItem.QuantityOrdered);
-                        totalBasePriceByPart.Add(purchaseOrderItem.Part, purchaseOrderItem.TotalBasePrice.Value);
+                        totalBasePriceByPart.Add(purchaseOrderItem.Part, purchaseOrderItem.TotalBasePrice);
                     }
                     else
                     {
                         quantityOrderedByPart[purchaseOrderItem.Part] += purchaseOrderItem.QuantityOrdered;
-                        totalBasePriceByPart[purchaseOrderItem.Part] += purchaseOrderItem.TotalBasePrice.Value;
+                        totalBasePriceByPart[purchaseOrderItem.Part] += purchaseOrderItem.TotalBasePrice;
                     }
                 }
             }

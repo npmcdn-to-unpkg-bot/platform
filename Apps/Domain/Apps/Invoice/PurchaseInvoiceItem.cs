@@ -44,7 +44,7 @@ namespace Allors.Domain
         {
             get
             {
-                return this.TotalSurcharge.Value - this.TotalDiscount.Value;
+                return this.TotalSurcharge - this.TotalDiscount;
             }
         }
 
@@ -113,7 +113,7 @@ namespace Allors.Domain
                 {
                     if (discountAdjustment.ExistPercentage)
                     {
-                        this.UnitDiscount += decimal.Round(((this.UnitBasePrice.Value * discountAdjustment.Percentage) / 100), 2);
+                        this.UnitDiscount += decimal.Round(((this.UnitBasePrice * discountAdjustment.Percentage) / 100), 2);
                     }
                     else
                     {
@@ -127,7 +127,7 @@ namespace Allors.Domain
                 {
                     if (surchargeAdjustment.ExistPercentage)
                     {
-                        this.UnitSurcharge += decimal.Round(((this.UnitBasePrice.Value * surchargeAdjustment.Percentage) / 100), 2);
+                        this.UnitSurcharge += decimal.Round(((this.UnitBasePrice * surchargeAdjustment.Percentage) / 100), 2);
                     }
                     else
                     {
@@ -141,7 +141,7 @@ namespace Allors.Domain
                 {
                     var vatRate = this.DerivedVatRate.Rate;
                     var vatBase = this.UnitBasePrice - this.UnitDiscount + this.UnitSurcharge;
-                    vat = decimal.Round(((vatBase.Value * vatRate) / 100), 2);
+                    vat = decimal.Round(((vatBase * vatRate) / 100), 2);
                 }
 
                 this.UnitVat = vat;

@@ -779,7 +779,7 @@ namespace Allors.Domain
             {
                 foreach (var invoiceItem in this.InvoiceItems)
                 {
-                    this.AmountPaid += invoiceItem.AmountPaid.Value;
+                    this.AmountPaid += invoiceItem.AmountPaid;
                 }
             }
         }
@@ -803,12 +803,12 @@ namespace Allors.Domain
 
             foreach (SalesInvoiceItem item in this.SalesInvoiceItems)
             {
-                this.TotalBasePrice += item.TotalBasePrice.Value;
-                this.TotalDiscount += item.TotalDiscount.Value;
-                this.TotalSurcharge += item.TotalSurcharge.Value;
-                this.TotalVat += item.TotalVat.Value;
-                this.TotalExVat += item.TotalExVat.Value;
-                this.TotalIncVat += item.TotalIncVat.Value;
+                this.TotalBasePrice += item.TotalBasePrice;
+                this.TotalDiscount += item.TotalDiscount;
+                this.TotalSurcharge += item.TotalSurcharge;
+                this.TotalVat += item.TotalVat;
+                this.TotalExVat += item.TotalExVat;
+                this.TotalIncVat += item.TotalIncVat;
                 this.TotalPurchasePrice += item.UnitPurchasePrice;
                 this.TotalListPrice += item.CalculatedUnitPrice;
             }
@@ -906,9 +906,9 @@ namespace Allors.Domain
             {
                 if (item.TotalExVat > 0 && item.InitialMarkupPercentage > 0)
                 {
-                    totalPurchasePrice += item.UnitPurchasePrice.Value;
-                    totalUnitBasePrice += item.UnitBasePrice.Value;
-                    totalListPrice += item.CalculatedUnitPrice.Value;
+                    totalPurchasePrice += item.UnitPurchasePrice;
+                    totalUnitBasePrice += item.UnitBasePrice;
+                    totalListPrice += item.CalculatedUnitPrice;
                 }
             }
 
@@ -1009,12 +1009,12 @@ namespace Allors.Domain
                         if (!quantityInvoicedByProduct.ContainsKey(salesInvoiceItem.Product))
                         {
                             quantityInvoicedByProduct.Add(salesInvoiceItem.Product, salesInvoiceItem.Quantity);
-                            totalBasePriceByProduct.Add(salesInvoiceItem.Product, salesInvoiceItem.TotalBasePrice.Value);
+                            totalBasePriceByProduct.Add(salesInvoiceItem.Product, salesInvoiceItem.TotalBasePrice);
                         }
                         else
                         {
                             quantityInvoicedByProduct[salesInvoiceItem.Product] += salesInvoiceItem.Quantity;
-                            totalBasePriceByProduct[salesInvoiceItem.Product] += salesInvoiceItem.TotalBasePrice.Value;
+                            totalBasePriceByProduct[salesInvoiceItem.Product] += salesInvoiceItem.TotalBasePrice;
                         }
                     }
                 }

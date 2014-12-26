@@ -33,7 +33,7 @@ namespace Allors.Domain
         {
             get
             {
-                return this.TotalSurcharge.Value - this.TotalDiscount.Value;
+                return this.TotalSurcharge - this.TotalDiscount;
             }
         }
 
@@ -41,7 +41,7 @@ namespace Allors.Domain
         {
             get
             {
-                return decimal.Round(((this.TotalSurcharge.Value - this.TotalDiscount.Value) / this.TotalBasePrice.Value) * 100, 2);
+                return decimal.Round(((this.TotalSurcharge - this.TotalDiscount) / this.TotalBasePrice) * 100, 2);
             }
         }
 
@@ -89,9 +89,9 @@ namespace Allors.Domain
         {
             get
             {
-                if (this.TotalDiscountAsPercentage.HasValue)
+                if (this.ExistTotalDiscountAsPercentage)
                 {
-                    return this.TotalDiscountAsPercentage.Value.ToString(new CultureInfo(this.SalesOrderWhereSalesOrderItem.Locale.Name));
+                    return this.TotalDiscountAsPercentage.ToString(new CultureInfo(this.SalesOrderWhereSalesOrderItem.Locale.Name));
                 }
 
                 return string.Empty;
@@ -102,9 +102,9 @@ namespace Allors.Domain
         {
             get
             {
-                if (this.TotalSurchargeAsPercentage.HasValue)
+                if (this.ExistTotalSurchargeAsPercentage)
                 {
-                    return this.TotalSurchargeAsPercentage.Value.ToString(new CultureInfo(this.SalesOrderWhereSalesOrderItem.Locale.Name));
+                    return this.TotalSurchargeAsPercentage.ToString(new CultureInfo(this.SalesOrderWhereSalesOrderItem.Locale.Name));
                 }
 
                 return string.Empty;
@@ -792,7 +792,7 @@ namespace Allors.Domain
                         {
                             if (unitOfMeasureConversion.ToUnitOfMeasure.Equals(this.Product.UnitOfMeasure))
                             {
-                                this.UnitPurchasePrice = decimal.Round(this.UnitPurchasePrice.Value * (1 / unitOfMeasureConversion.ConversionFactor), 2);
+                                this.UnitPurchasePrice = decimal.Round(this.UnitPurchasePrice * (1 / unitOfMeasureConversion.ConversionFactor), 2);
                             }
                         }
                     }
@@ -802,14 +802,14 @@ namespace Allors.Domain
 
         private void AppsCalculateUnitPrice(IDerivation derivation)
         {
-            if (this.RequiredMarkupPercentage.HasValue && this.UnitPurchasePrice.HasValue && this.UnitPurchasePrice > 0)
+            if (this.RequiredMarkupPercentage.HasValue && this.UnitPurchasePrice > 0)
             {
-                this.ActualUnitPrice = decimal.Round((1 + (this.RequiredMarkupPercentage.Value / 100)) * this.UnitPurchasePrice.Value, 2);
+                this.ActualUnitPrice = decimal.Round((1 + (this.RequiredMarkupPercentage.Value / 100)) * this.UnitPurchasePrice, 2);
             }
 
-            if (this.RequiredProfitMargin.HasValue && this.UnitPurchasePrice.HasValue && this.UnitPurchasePrice > 0)
+            if (this.RequiredProfitMargin.HasValue && this.UnitPurchasePrice > 0)
             {
-                this.ActualUnitPrice = decimal.Round(this.UnitPurchasePrice.Value / (1 - (this.RequiredProfitMargin.Value / 100)), 2);
+                this.ActualUnitPrice = decimal.Round(this.UnitPurchasePrice / (1 - (this.RequiredProfitMargin.Value / 100)), 2);
             }
         }
 
@@ -940,7 +940,7 @@ namespace Allors.Domain
                                 }
                                 else
                                 {
-                                    discount = decimal.Round((this.UnitBasePrice.Value * discountComponent.Percentage) / 100, 2);
+                                    discount = decimal.Round((this.UnitBasePrice * discountComponent.Percentage) / 100, 2);
                                     this.UnitDiscount += discount;
                                 }
 
@@ -978,7 +978,7 @@ namespace Allors.Domain
                                 }
                                 else
                                 {
-                                    surcharge = decimal.Round((this.UnitBasePrice.Value * surchargeComponent.Percentage) / 100, 2);
+                                    surcharge = decimal.Round((this.UnitBasePrice * surchargeComponent.Percentage) / 100, 2);
                                     this.UnitSurcharge += surcharge;
                                 }
 
@@ -1013,7 +1013,7 @@ namespace Allors.Domain
                 {
                     if (this.DiscountAdjustment.ExistPercentage)
                     {
-                        discountAdjustmentAmount = decimal.Round((adjustmentBase.Value * this.DiscountAdjustment.Percentage) / 100, 2);
+                        discountAdjustmentAmount = decimal.Round((adjustmentBase * this.DiscountAdjustment.Percentage) / 100, 2);
                     }
                     else
                     {
@@ -1027,7 +1027,7 @@ namespace Allors.Domain
                 {
                     if (this.SurchargeAdjustment.ExistPercentage)
                     {
-                        surchargeAdjustmentAmount = decimal.Round((adjustmentBase.Value * this.SurchargeAdjustment.Percentage) / 100, 2);
+                        surchargeAdjustmentAmount = decimal.Round((adjustmentBase * this.SurchargeAdjustment.Percentage) / 100, 2);
                     }
                     else
                     {
@@ -1045,7 +1045,7 @@ namespace Allors.Domain
             {
                 var vatRate = this.DerivedVatRate.Rate;
                 var vatBase = price - this.UnitDiscount + this.UnitSurcharge;
-                vat = decimal.Round((vatBase.Value * vatRate) / 100, 2);
+                vat = decimal.Round((vatBase * vatRate) / 100, 2);
             }
 
             this.UnitVat = vat;
@@ -1056,8 +1056,8 @@ namespace Allors.Domain
 
             if (this.TotalBasePrice > 0)
             {
-                this.TotalDiscountAsPercentage = decimal.Round((this.TotalDiscount.Value / this.TotalBasePrice.Value) * 100, 2);
-                this.TotalSurchargeAsPercentage = decimal.Round((this.TotalSurcharge.Value / this.TotalBasePrice.Value) * 100, 2);
+                this.TotalDiscountAsPercentage = decimal.Round((this.TotalDiscount / this.TotalBasePrice) * 100, 2);
+                this.TotalSurchargeAsPercentage = decimal.Round((this.TotalSurcharge / this.TotalBasePrice) * 100, 2);
             }
 
             if (this.ActualUnitPrice.HasValue)
@@ -1098,12 +1098,12 @@ namespace Allors.Domain
             }
             else
             {
-                this.TotalBasePriceCustomerCurrency = Currencies.ConvertCurrency(this.TotalBasePrice.Value, fromCurrency, toCurrency);
-                this.TotalDiscountCustomerCurrency = Currencies.ConvertCurrency(this.TotalDiscount.Value, fromCurrency, toCurrency);
-                this.TotalSurchargeCustomerCurrency = Currencies.ConvertCurrency(this.TotalSurcharge.Value, fromCurrency, toCurrency);
-                this.TotalExVatCustomerCurrency = Currencies.ConvertCurrency(this.TotalExVat.Value, fromCurrency, toCurrency);
-                this.TotalVatCustomerCurrency = Currencies.ConvertCurrency(this.TotalVat.Value, fromCurrency, toCurrency);
-                this.TotalIncVatCustomerCurrency = Currencies.ConvertCurrency(this.TotalIncVat.Value, fromCurrency, toCurrency);
+                this.TotalBasePriceCustomerCurrency = Currencies.ConvertCurrency(this.TotalBasePrice, fromCurrency, toCurrency);
+                this.TotalDiscountCustomerCurrency = Currencies.ConvertCurrency(this.TotalDiscount, fromCurrency, toCurrency);
+                this.TotalSurchargeCustomerCurrency = Currencies.ConvertCurrency(this.TotalSurcharge, fromCurrency, toCurrency);
+                this.TotalExVatCustomerCurrency = Currencies.ConvertCurrency(this.TotalExVat, fromCurrency, toCurrency);
+                this.TotalVatCustomerCurrency = Currencies.ConvertCurrency(this.TotalVat, fromCurrency, toCurrency);
+                this.TotalIncVatCustomerCurrency = Currencies.ConvertCurrency(this.TotalIncVat, fromCurrency, toCurrency);
             }
 
             this.DeriveMarkupAndProfitMargin(derivation);
@@ -1207,13 +1207,13 @@ namespace Allors.Domain
             this.MaintainedProfitMargin = 0;
 
             ////internet wiki page on markup business
-            if (this.UnitPurchasePrice.HasValue && this.UnitPurchasePrice != 0 && this.CalculatedUnitPrice != 0 && this.UnitBasePrice != 0)
+            if (this.ExistUnitPurchasePrice && this.UnitPurchasePrice != 0 && this.CalculatedUnitPrice != 0 && this.UnitBasePrice != 0)
             {
-                this.InitialMarkupPercentage = decimal.Round(((this.UnitBasePrice.Value / this.UnitPurchasePrice.Value) - 1) * 100, 2);
-                this.MaintainedMarkupPercentage = decimal.Round(((this.CalculatedUnitPrice.Value / this.UnitPurchasePrice.Value) - 1) * 100, 2);
+                this.InitialMarkupPercentage = decimal.Round(((this.UnitBasePrice / this.UnitPurchasePrice) - 1) * 100, 2);
+                this.MaintainedMarkupPercentage = decimal.Round(((this.CalculatedUnitPrice / this.UnitPurchasePrice) - 1) * 100, 2);
 
-                this.InitialProfitMargin = decimal.Round(((this.UnitBasePrice.Value - this.UnitPurchasePrice.Value) / this.UnitBasePrice.Value) * 100, 2);
-                this.MaintainedProfitMargin = decimal.Round(((this.CalculatedUnitPrice.Value - this.UnitPurchasePrice.Value) / this.CalculatedUnitPrice.Value) * 100, 2);
+                this.InitialProfitMargin = decimal.Round(((this.UnitBasePrice - this.UnitPurchasePrice) / this.UnitBasePrice) * 100, 2);
+                this.MaintainedProfitMargin = decimal.Round(((this.CalculatedUnitPrice - this.UnitPurchasePrice) / this.CalculatedUnitPrice) * 100, 2);
             }
         }
 

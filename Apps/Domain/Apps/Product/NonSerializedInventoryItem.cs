@@ -175,7 +175,7 @@ namespace Allors.Domain
                     if (purchaseOrderItem.CurrentObjectState.Equals(new PurchaseOrderItemObjectStates(this.Strategy.Session).InProcess))
                     {
                         this.QuantityExpectedIn += purchaseOrderItem.QuantityOrdered;
-                        this.QuantityExpectedIn -= purchaseOrderItem.QuantityReceived.Value;
+                        this.QuantityExpectedIn -= purchaseOrderItem.QuantityReceived;
                     }
                 }
             }
@@ -187,7 +187,7 @@ namespace Allors.Domain
                     if (purchaseOrderItem.CurrentObjectState.Equals(new PurchaseOrderItemObjectStates(this.Strategy.Session).InProcess))
                     {
                         this.QuantityExpectedIn += purchaseOrderItem.QuantityOrdered;
-                        this.QuantityExpectedIn -= purchaseOrderItem.QuantityReceived.Value;
+                        this.QuantityExpectedIn -= purchaseOrderItem.QuantityReceived;
                     }
                 }
             }
@@ -248,7 +248,7 @@ namespace Allors.Domain
                     }
                     else
                     {
-                        diff = extra.Value;
+                        diff = extra;
                     }
 
                     extra -= diff;
@@ -280,7 +280,7 @@ namespace Allors.Domain
                     }
                     else
                     {
-                        diff = subtract.Value;
+                        diff = subtract;
                     }
 
                     subtract -= diff;

@@ -189,7 +189,7 @@ namespace Allors.Domain
                         }
 
                         revenues.Add(salesRepPartyRevenue.Id);
-                        salesRepPartyRevenue.Revenue += salesInvoiceItem.TotalExVat.Value;
+                        salesRepPartyRevenue.Revenue += salesInvoiceItem.TotalExVat;
                     }
                 }
             }
