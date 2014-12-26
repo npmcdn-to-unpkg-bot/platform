@@ -1065,7 +1065,7 @@ namespace Allors.Domain
 					global::System.String Message {set;}
 
 	}
-	public interface UniquelyIdentifiable 
+	public interface UniquelyIdentifiable  : Object 
 	{
 					global::System.Guid UniqueId {set;}
 
@@ -1075,12 +1075,12 @@ namespace Allors.Domain
 					global::System.String PrintContent {set;}
 
 	}
-	public interface Localised 
+	public interface Localised  : Object 
 	{
 					Locale Locale {set;}
 
 	}
-	public interface Period 
+	public interface Period  : Object 
 	{
 					global::System.DateTime FromDate {set;}
 
@@ -1101,7 +1101,7 @@ namespace Allors.Domain
 	public interface SearchResult  : UserInterfaceable 
 	{
 	}
-	public interface SecurityTokenOwner 
+	public interface SecurityTokenOwner  : Object 
 	{
 					SecurityToken OwnerSecurityToken {set;}
 
@@ -1118,7 +1118,7 @@ namespace Allors.Domain
 					global::System.Boolean IsActive {set;}
 
 	}
-	public interface Derivable 
+	public interface Derivable  : Object 
 	{
 	}
 	public interface AccessControlledObject  : Derivable 
@@ -1133,6 +1133,9 @@ namespace Allors.Domain
 					global::System.String DisplayName {set;}
 
 	}
+	public interface Object 
+	{
+	}
 	public interface ObjectState  : UniquelyIdentifiable 
 	{
 					Permission DeniedPermissions {set;}
@@ -1140,12 +1143,12 @@ namespace Allors.Domain
 					global::System.String Name {set;}
 
 	}
-	public interface Commentable 
+	public interface Commentable  : Object 
 	{
 					global::System.String Comment {set;}
 
 	}
-	public interface Searchable 
+	public interface Searchable  : Object 
 	{
 					SearchData SearchData {set;}
 
@@ -1157,7 +1160,7 @@ namespace Allors.Domain
 					ProductFeature UsedToDefine {set;}
 
 	}
-	public interface OrderShipment 
+	public interface OrderShipment  : Object 
 	{
 					SalesOrderItem SalesOrderItem {set;}
 
@@ -1468,7 +1471,7 @@ namespace Allors.Domain
 	public interface Incentive  : AgreementTerm 
 	{
 	}
-	public interface WorkEffortBilling 
+	public interface WorkEffortBilling  : Object 
 	{
 					WorkEffort WorkEffort {set;}
 
@@ -1634,7 +1637,7 @@ namespace Allors.Domain
 					PurchaseInvoiceItemObjectState CurrentObjectState {set;}
 
 	}
-	public interface OrderItemBilling 
+	public interface OrderItemBilling  : Object 
 	{
 					OrderItem OrderItem {set;}
 
@@ -1857,7 +1860,7 @@ namespace Allors.Domain
 	public interface SkillRating  : Enumeration 
 	{
 	}
-	public interface EventRegistration 
+	public interface EventRegistration  : Object 
 	{
 					Person Person {set;}
 
@@ -1869,7 +1872,7 @@ namespace Allors.Domain
 	public interface Building  : Facility 
 	{
 	}
-	public interface ServiceEntryBilling 
+	public interface ServiceEntryBilling  : Object 
 	{
 					ServiceEntry ServiceEntry {set;}
 
@@ -1970,7 +1973,7 @@ namespace Allors.Domain
 	public interface SoftwareFeature  : ProductFeature, Enumeration 
 	{
 	}
-	public interface FiscalYearInvoiceNumber 
+	public interface FiscalYearInvoiceNumber  : Object 
 	{
 					global::System.Int32 NextSalesInvoiceNumber {set;}
 
@@ -3860,7 +3863,7 @@ namespace Allors.Domain
 					global::System.Decimal? FromAmount {set;}
 
 	}
-	public interface Event 
+	public interface Event  : Object 
 	{
 					global::System.Boolean? RegistrationRequired {set;}
 
@@ -5023,10 +5026,10 @@ namespace Allors.Domain
 					global::System.Int32 OperationEnum {set;}
 
 	}
-	public interface SecurityToken 
+	public interface SecurityToken  : Object 
 	{
 	}
-	public interface Transition 
+	public interface Transition  : Object 
 	{
 					ObjectState FromStates {set;}
 
@@ -5146,7 +5149,7 @@ namespace Allors.Domain
 					global::System.DateTime? DeceasedDate {set;}
 
 	}
-	public interface Image 
+	public interface Image  : Object 
 	{
 					Media Original {set;}
 

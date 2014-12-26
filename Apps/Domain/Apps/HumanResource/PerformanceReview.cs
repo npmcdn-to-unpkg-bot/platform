@@ -24,16 +24,6 @@ namespace Allors.Domain
 
     public partial class PerformanceReview
     {
-        protected override void AppsOnPostBuild(IObjectBuilder builder)
-        {
-            base.AppsOnPostBuild(builder);
-
-            if (!this.ExistSearchData)
-            {
-                this.SearchData = new SearchDataBuilder(this.Session).Build();
-            }
-        }
-
         public void AppsDerive(DerivableDerive method)
         {
             var derivation = method.Derivation;   

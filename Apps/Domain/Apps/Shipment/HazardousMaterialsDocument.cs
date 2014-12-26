@@ -22,23 +22,12 @@ namespace Allors.Domain
 {
     public partial class HazardousMaterialsDocument
     {
-        protected override void AppsOnPostBuild(IObjectBuilder builder)
-        {
-            base.AppsOnPostBuild(builder);
-
-            if (!this.ExistSearchData)
-            {
-                this.SearchData = new SearchDataBuilder(this.Session).Build();
-            }
-        }
-
         public void AppsDerive(DerivableDerive method)
         {
             this.DisplayName = this.Name;
 
             this.SearchData.CharacterBoundaryText = this.DisplayName;
             this.SearchData.RemoveWordBoundaryText();
-            
         }
     }
 }

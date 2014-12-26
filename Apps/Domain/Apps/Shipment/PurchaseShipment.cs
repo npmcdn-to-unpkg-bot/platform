@@ -45,7 +45,7 @@ namespace Allors.Domain
         {
             get
             {
-                if (this.CurrentObjectState.Equals(new PurchaseShipmentObjectStates(this.DatabaseSession).Created))
+                if (this.CurrentObjectState.Equals(new PurchaseShipmentObjectStates(this.Strategy.DatabaseSession).Created))
                 {
                     return true;
                 }
@@ -75,12 +75,12 @@ namespace Allors.Domain
 
             if (!this.ExistCurrentObjectState)
             {
-                this.CurrentObjectState = new PurchaseShipmentObjectStates(this.Session).Created;
+                this.CurrentObjectState = new PurchaseShipmentObjectStates(this.Strategy.Session).Created;
             }
 
             if (!this.ExistShipToParty)
             {
-                this.ShipToParty = Domain.Singleton.Instance(this.Session).DefaultInternalOrganisation;
+                this.ShipToParty = Domain.Singleton.Instance(this.Strategy.Session).DefaultInternalOrganisation;
             }
 
             if (!this.ExistFacility && this.ExistShipToParty)
@@ -105,11 +105,6 @@ namespace Allors.Domain
             if (!this.ExistEstimatedArrivalDate)
             {
                 this.EstimatedArrivalDate = DateTime.Now.Date;
-            }
-
-            if (!this.ExistSearchData)
-            {
-                this.SearchData = new SearchDataBuilder(this.Session).Build();
             }
         }
 
@@ -181,7 +176,7 @@ namespace Allors.Domain
         public void AppsApplySecurityOnDerive(DerivableApplySecurityOnDerive method)
         {
             this.RemoveSecurityTokens();
-            this.AddSecurityToken(Domain.Singleton.Instance(this.Session).AdministratorSecurityToken);
+            this.AddSecurityToken(Domain.Singleton.Instance(this.Strategy.Session).AdministratorSecurityToken);
 
             if (this.ExistShipToParty)
             {
@@ -195,7 +190,7 @@ namespace Allors.Domain
 
             if (this.ExistCurrentObjectState && !this.CurrentObjectState.Equals(this.PreviousObjectState))
             {
-                var currentStatus = new PurchaseShipmentStatusBuilder(this.Session).WithPurchaseShipmentObjectState(this.CurrentObjectState).Build();
+                var currentStatus = new PurchaseShipmentStatusBuilder(this.Strategy.Session).WithPurchaseShipmentObjectState(this.CurrentObjectState).Build();
                 this.AddShipmentStatus(currentStatus);
                 this.CurrentShipmentStatus = currentStatus;
             }
@@ -208,7 +203,7 @@ namespace Allors.Domain
 
         private void AppsComplete()
         {
-            this.CurrentObjectState = new PurchaseShipmentObjectStates(Session).Completed;
+            this.CurrentObjectState = new PurchaseShipmentObjectStates(this.Strategy.Session).Completed;
         }
 
         private void AppsDeriveOrderItemQuantityReceived(IDerivation derivation)

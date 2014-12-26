@@ -99,7 +99,7 @@ namespace Allors.Domain
                 var histories = this.Party.PartyPackageRevenueHistoriesWhereParty;
                 histories.Filter.AddEquals(PartyPackageRevenueHistories.Meta.InternalOrganisation, this.InternalOrganisation);
                 histories.Filter.AddEquals(PartyPackageRevenueHistories.Meta.Package, this.Package);
-                var history = histories.First ?? new PartyPackageRevenueHistoryBuilder(this.Session)
+                var history = histories.First ?? new PartyPackageRevenueHistoryBuilder(this.Strategy.Session)
                                                      .WithCurrency(this.Currency)
                                                      .WithInternalOrganisation(this.InternalOrganisation)
                                                      .WithParty(this.Party)
@@ -112,7 +112,7 @@ namespace Allors.Domain
 
             if (this.ExistPackage)
             {
-                var packageRevenue = PackageRevenues.AppsFindOrCreateAsDependable(this.Session, this);
+                var packageRevenue = PackageRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, this);
                 packageRevenue.Derive().Execute();
             }
         }

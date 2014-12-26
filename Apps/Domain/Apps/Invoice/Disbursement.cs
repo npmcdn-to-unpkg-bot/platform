@@ -39,16 +39,6 @@ namespace Allors.Domain
             return string.Format("{0} {1}", this.ExistEffectiveDate ? this.EffectiveDate : DateTime.MinValue, this.ExistAmount ? this.Amount : 0);
         }
 
-        protected override void AppsOnPostBuild(IObjectBuilder builder)
-        {
-            base.AppsOnPostBuild(builder);
-
-            if (!this.ExistSearchData)
-            {
-                this.SearchData = new SearchDataBuilder(this.Session).Build();
-            }
-        }
-
         public void AppsDerive(DerivableDerive method)
         {
             this.DeriveDisplayName();

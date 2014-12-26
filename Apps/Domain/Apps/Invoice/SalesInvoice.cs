@@ -49,9 +49,9 @@ namespace Allors.Domain
         {
             get
             {
-                if (this.CurrentObjectState.Equals(new SalesInvoiceObjectStates(this.DatabaseSession).Sent) ||
-                    this.CurrentObjectState.Equals(new SalesInvoiceObjectStates(this.DatabaseSession).ReadyForPosting) ||
-                    this.CurrentObjectState.Equals(new SalesInvoiceObjectStates(this.DatabaseSession).PartiallyPaid))
+                if (this.CurrentObjectState.Equals(new SalesInvoiceObjectStates(this.Strategy.DatabaseSession).Sent) ||
+                    this.CurrentObjectState.Equals(new SalesInvoiceObjectStates(this.Strategy.DatabaseSession).ReadyForPosting) ||
+                    this.CurrentObjectState.Equals(new SalesInvoiceObjectStates(this.Strategy.DatabaseSession).PartiallyPaid))
                 {
                     return true;
                 }
@@ -82,7 +82,7 @@ namespace Allors.Domain
                 {
                     foreach (AgreementTerm term in this.InvoiceTerms)
                     {
-                        if (term.TermType.Equals(new TermTypes(this.Session).PaymentNetDays))
+                        if (term.TermType.Equals(new TermTypes(this.Strategy.Session).PaymentNetDays))
                         {
                             int netDays;
                             if (int.TryParse(term.TermValue, out netDays))
@@ -347,7 +347,7 @@ namespace Allors.Domain
         {
             if (!this.ExistDiscountAdjustment)
             {
-                this.DiscountAdjustment = new DiscountAdjustmentBuilder(this.Session).Build();
+                this.DiscountAdjustment = new DiscountAdjustmentBuilder(this.Strategy.Session).Build();
             }
 
             this.DiscountAdjustment.Amount = amount;
@@ -358,7 +358,7 @@ namespace Allors.Domain
         {
             if (!this.ExistDiscountAdjustment)
             {
-                this.DiscountAdjustment = new DiscountAdjustmentBuilder(this.Session).Build();
+                this.DiscountAdjustment = new DiscountAdjustmentBuilder(this.Strategy.Session).Build();
             }
 
             this.DiscountAdjustment.Percentage = percentage;
@@ -371,7 +371,7 @@ namespace Allors.Domain
 
             if (!this.ExistCurrentObjectState)
             {
-                this.CurrentObjectState = new SalesInvoiceObjectStates(this.DatabaseSession).ReadyForPosting;
+                this.CurrentObjectState = new SalesInvoiceObjectStates(this.Strategy.DatabaseSession).ReadyForPosting;
             }
 
             if (!this.ExistEntryDate)
@@ -391,7 +391,7 @@ namespace Allors.Domain
 
             if (!this.ExistBilledFromInternalOrganisation)
             {
-                this.BilledFromInternalOrganisation = Singleton.Instance(this.Session).DefaultInternalOrganisation;
+                this.BilledFromInternalOrganisation = Singleton.Instance(this.Strategy.Session).DefaultInternalOrganisation;
             }
 
             if (!this.ExistStore && this.ExistBilledFromInternalOrganisation)
@@ -409,7 +409,7 @@ namespace Allors.Domain
 
             if (!this.ExistSalesInvoiceType)
             {
-                this.SalesInvoiceType = new SalesInvoiceTypes(this.DatabaseSession).SalesInvoice;
+                this.SalesInvoiceType = new SalesInvoiceTypes(this.Strategy.DatabaseSession).SalesInvoice;
             }
 
             if (!this.ExistCustomerCurrency)
@@ -511,11 +511,6 @@ namespace Allors.Domain
             if (!this.ExistTotalVatCustomerCurrency)
             {
                 this.TotalVatCustomerCurrency = 0;
-            }
-
-            if (!this.ExistSearchData)
-            {
-                this.SearchData = new SearchDataBuilder(this.Session).Build();
             }
         }
 
@@ -632,7 +627,7 @@ namespace Allors.Domain
         public void AppsApplySecurityOnDerive(DerivableApplySecurityOnDerive method)
         {
             this.RemoveSecurityTokens();
-            this.AddSecurityToken(Singleton.Instance(this.Session).AdministratorSecurityToken);
+            this.AddSecurityToken(Singleton.Instance(this.Strategy.Session).AdministratorSecurityToken);
 
             if (this.ExistBilledFromInternalOrganisation)
             {
@@ -673,44 +668,44 @@ namespace Allors.Domain
 
             foreach (SalesInvoiceItem invoiceItem in this.SalesInvoiceItems)
             {
-                if (invoiceItem.CurrentObjectState.Equals(new SalesInvoiceItemObjectStates(this.Session).PartiallyPaid))
+                if (invoiceItem.CurrentObjectState.Equals(new SalesInvoiceItemObjectStates(this.Strategy.Session).PartiallyPaid))
                 {
                     itemsPartiallyPaid = true;
                 }
 
-                if (invoiceItem.CurrentObjectState.Equals(new SalesInvoiceItemObjectStates(this.Session).Paid))
+                if (invoiceItem.CurrentObjectState.Equals(new SalesInvoiceItemObjectStates(this.Strategy.Session).Paid))
                 {
                     itemsPaid = true;
                 }
 
-                if (invoiceItem.CurrentObjectState.Equals(new SalesInvoiceItemObjectStates(this.Session).Sent))
+                if (invoiceItem.CurrentObjectState.Equals(new SalesInvoiceItemObjectStates(this.Strategy.Session).Sent))
                 {
                     itemsNotPaid = true;
                 }
             }
 
-            if (itemsPaid && !itemsNotPaid && !itemsPartiallyPaid && (!this.CurrentObjectState.Equals(new SalesInvoiceObjectStates(this.Session).Paid)))
+            if (itemsPaid && !itemsNotPaid && !itemsPartiallyPaid && (!this.CurrentObjectState.Equals(new SalesInvoiceObjectStates(this.Strategy.Session).Paid)))
             {
-                this.CurrentObjectState = new SalesInvoiceObjectStates(this.Session).Paid;
+                this.CurrentObjectState = new SalesInvoiceObjectStates(this.Strategy.Session).Paid;
             }
 
-            if ((itemsPartiallyPaid || (itemsPaid && itemsNotPaid)) && (!this.CurrentObjectState.Equals(new SalesInvoiceObjectStates(this.Session).PartiallyPaid)))
+            if ((itemsPartiallyPaid || (itemsPaid && itemsNotPaid)) && (!this.CurrentObjectState.Equals(new SalesInvoiceObjectStates(this.Strategy.Session).PartiallyPaid)))
             {
-                this.CurrentObjectState = new SalesInvoiceObjectStates(this.Session).PartiallyPaid;
+                this.CurrentObjectState = new SalesInvoiceObjectStates(this.Strategy.Session).PartiallyPaid;
             }
 
             if (this.ExistAmountPaid)
             {
                 if (this.AmountPaid > 0 && this.AmountPaid < this.TotalIncVat
-                    && (!this.CurrentObjectState.Equals(new SalesInvoiceObjectStates(this.Session).PartiallyPaid)))
+                    && (!this.CurrentObjectState.Equals(new SalesInvoiceObjectStates(this.Strategy.Session).PartiallyPaid)))
                 {
-                    this.CurrentObjectState = new SalesInvoiceObjectStates(this.Session).PartiallyPaid;
+                    this.CurrentObjectState = new SalesInvoiceObjectStates(this.Strategy.Session).PartiallyPaid;
                 }
 
                 if (this.AmountPaid > 0 && this.AmountPaid == this.TotalIncVat
-                    && (!this.CurrentObjectState.Equals(new SalesInvoiceObjectStates(this.Session).Paid)))
+                    && (!this.CurrentObjectState.Equals(new SalesInvoiceObjectStates(this.Strategy.Session).Paid)))
                 {
-                    this.CurrentObjectState = new SalesInvoiceObjectStates(this.Session).Paid;
+                    this.CurrentObjectState = new SalesInvoiceObjectStates(this.Strategy.Session).Paid;
                 }
             }
 
@@ -723,13 +718,13 @@ namespace Allors.Domain
             {
                 this.CurrentObjectState.Process(this);
 
-                var currentStatus = new SalesInvoiceStatusBuilder(this.Session).WithSalesInvoiceObjectState(this.CurrentObjectState).Build();
+                var currentStatus = new SalesInvoiceStatusBuilder(this.Strategy.Session).WithSalesInvoiceObjectState(this.CurrentObjectState).Build();
                 this.AddInvoiceStatus(currentStatus);
                 this.CurrentInvoiceStatus = currentStatus;
                 this.PreviousObjectState = this.CurrentObjectState;
             }
 
-            if (this.CurrentObjectState.Equals(new SalesInvoiceObjectStates(this.Session).Paid))
+            if (this.CurrentObjectState.Equals(new SalesInvoiceObjectStates(this.Strategy.Session).Paid))
             {
                 this.DeriveSalesOrderPaymentStatus(derivation);
             }
@@ -737,17 +732,17 @@ namespace Allors.Domain
 
         public void AppsSend(SalesInvoiceSend method)
         {
-            this.CurrentObjectState = new SalesInvoiceObjectStates(Session).Sent;
+            this.CurrentObjectState = new SalesInvoiceObjectStates(this.Strategy.Session).Sent;
         }
 
         public void AppsWriteOff(SalesInvoiceWriteOff method)
         {
-            this.CurrentObjectState = new SalesInvoiceObjectStates(Session).WrittenOff;
+            this.CurrentObjectState = new SalesInvoiceObjectStates(this.Strategy.Session).WrittenOff;
         }
 
         public void AppsCancelInvoice(SalesInvoiceCancelInvoice method)
         {
-            this.CurrentObjectState = new SalesInvoiceObjectStates(Session).Cancelled;
+            this.CurrentObjectState = new SalesInvoiceObjectStates(this.Strategy.Session).Cancelled;
         }
 
         private void AppsDeriveLocale(IDerivation derivation)
@@ -758,7 +753,7 @@ namespace Allors.Domain
             }
             else
             {
-                this.Locale = this.ExistBilledFromInternalOrganisation ? this.BilledFromInternalOrganisation.Locale : Singleton.Instance(this.Session).DefaultLocale;
+                this.Locale = this.ExistBilledFromInternalOrganisation ? this.BilledFromInternalOrganisation.Locale : Singleton.Instance(this.Strategy.Session).DefaultLocale;
             }
         }
 
@@ -947,7 +942,7 @@ namespace Allors.Domain
             if (this.ExistStore && template == null)
             {
                 var templates = this.Store.SalesInvoiceTemplates;
-                templates.Filter.AddEquals(StringTemplates.Meta.Locale, Singleton.Instance(this.Session).DefaultLocale);
+                templates.Filter.AddEquals(StringTemplates.Meta.Locale, Singleton.Instance(this.Strategy.Session).DefaultLocale);
                 template = templates.First;
             }
 
@@ -1052,12 +1047,12 @@ namespace Allors.Domain
             {
                 if (salesInvoiceItem.ExistProduct)
                 {
-                    var partyProductRevenue = PartyProductRevenues.AppsFindOrCreateAsDependable(this.Session, salesInvoiceItem.Product, salesInvoiceItem.SalesInvoiceWhereSalesInvoiceItem);
+                    var partyProductRevenue = PartyProductRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, salesInvoiceItem.Product, salesInvoiceItem.SalesInvoiceWhereSalesInvoiceItem);
                     partyProductRevenue.Derive().Execute();
                 }
                 else
                 {
-                    var partyRevenue = PartyRevenues.AppsFindOrCreateAsDependable(this.Session, salesInvoiceItem.SalesInvoiceWhereSalesInvoiceItem);
+                    var partyRevenue = PartyRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, salesInvoiceItem.SalesInvoiceWhereSalesInvoiceItem);
                     partyRevenue.Derive().Execute();
                 }
 
@@ -1065,33 +1060,33 @@ namespace Allors.Domain
                 {
                     if (salesInvoiceItem.ExistProduct && salesInvoiceItem.Product.ExistPrimaryProductCategory)
                     {
-                        var salesRepPartyProductCategoryRevenue = SalesRepPartyProductCategoryRevenues.AppsFindOrCreateAsDependable(this.Session, salesInvoiceItem);
+                        var salesRepPartyProductCategoryRevenue = SalesRepPartyProductCategoryRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, salesInvoiceItem);
                         salesRepPartyProductCategoryRevenue.Derive().Execute();
                     }
                     else
                     {
-                        var salesRepPartyRevenue = SalesRepPartyRevenues.AppsFindOrCreateAsDependable(this.Session, salesInvoiceItem);
+                        var salesRepPartyRevenue = SalesRepPartyRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, salesInvoiceItem);
                         salesRepPartyRevenue.Derive().Execute();
                     }
                 }
 
                 if (salesInvoiceItem.SalesInvoiceWhereSalesInvoiceItem.ExistBillToCustomer && salesInvoiceItem.ExistProduct)
                 {
-                    var partyProductRevenue = PartyProductRevenues.AppsFindOrCreateAsDependable(this.Session, salesInvoiceItem.Product, salesInvoiceItem.SalesInvoiceWhereSalesInvoiceItem);
+                    var partyProductRevenue = PartyProductRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, salesInvoiceItem.Product, salesInvoiceItem.SalesInvoiceWhereSalesInvoiceItem);
                     partyProductRevenue.Derive().Execute();
                 }
                 else
                 {
-                    var partyRevenue = PartyRevenues.AppsFindOrCreateAsDependable(this.Session, salesInvoiceItem.SalesInvoiceWhereSalesInvoiceItem);
+                    var partyRevenue = PartyRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, salesInvoiceItem.SalesInvoiceWhereSalesInvoiceItem);
                     partyRevenue.Derive().Execute();
                 }
 
-                var storeRevenue = StoreRevenues.AppsFindOrCreateAsDependable(this.Session, this);
+                var storeRevenue = StoreRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, this);
                 storeRevenue.Derive().Execute();
 
                 if (this.ExistSalesChannel)
                 {
-                    var salesChannelRevenue = SalesChannelRevenues.AppsFindOrCreateAsDependable(this.Session, this);
+                    var salesChannelRevenue = SalesChannelRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, this);
                     salesChannelRevenue.Derive().Execute();
                 }
             }

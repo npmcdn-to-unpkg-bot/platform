@@ -28,12 +28,7 @@ namespace Allors.Domain
 
             if (!this.ExistCurrentObjectState)
             {
-                this.CurrentObjectState = new Allors.Domain.RequirementObjectStates(this.DatabaseSession).Active;
-            }
-
-            if (!this.ExistSearchData)
-            {
-                this.SearchData = new SearchDataBuilder(this.Session).Build();
+                this.CurrentObjectState = new Allors.Domain.RequirementObjectStates(this.Strategy.DatabaseSession).Active;
             }
         }
 

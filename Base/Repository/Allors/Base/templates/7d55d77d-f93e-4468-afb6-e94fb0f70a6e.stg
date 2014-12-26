@@ -2,7 +2,7 @@ group AllorsCSharpMeta;
 
 TemplateId() ::= <<14F49218-A676-43ba-9CBD-B8FFA059D1BF>>
 TemplateName() ::= <<Allors C# Repository>>
-TemplateVersion() ::= <<1.0.2>>
+TemplateVersion() ::= <<1.0.5>>
 TemplateAllors() ::= <<1.0>>
 TemplateConfiguration(domain, settings) ::= <<
 $! 
@@ -33,7 +33,6 @@ namespace Allors.Meta
 	using System;
 	using Allors.Meta;
 
-
 	public static partial class Repository
 	{
 
@@ -60,6 +59,8 @@ $domain.relationTypes:{relationType|$relationTypeDeclaration(relationType)$}$
 			$domain.Name$ = new Domain(meta, new Guid("$domain.IdAsString$")) { Name = "$domain.Name$" };
 $domain.SuperDomains:{superDomain|$superDomainInit(superDomain)$}$
 
+$domain.SuperDomains:{superDomain|$hierarchy(domain=domain, superDomain=superDomain)$}$
+
 			// Units
 			AllorsString = new UnitBuilder(Core, UnitIds.StringId).WithSingularName("AllorsString").WithPluralName("AllorsStrings").WithUnitTag(UnitTags.AllorsString).Build();
             AllorsInteger = new UnitBuilder(Core, UnitIds.IntegerId).WithSingularName("AllorsInteger").WithPluralName("AllorsIntegers").WithUnitTag(UnitTags.AllorsInteger).Build();
@@ -78,6 +79,9 @@ $domain.compositeObjectTypes:{objectType|$objectTypeInheritance(objectType)$}$
 
 			// RelationTypes
 $domain.compositeObjectTypes:{objectType|$objectTypeRelationType(objectType)$}$
+
+			// ConcreteRoleTypes
+$domain.RelationTypes:{relationType|$relationTypeConcreteRoleTypes(relationType)$}$
 		}
 	}
 }
@@ -89,11 +93,27 @@ $if(!superDomain.IsAllorsUnitDomain)$
 $endif$
 >>
 
+hierarchy(domain, superDomain) ::= <<
+$if(superDomain.IsAllorsUnitDomain)$
+			$domain.Name$.AddDirectSuperdomain(Core);
+$else$
+			$domain.Name$.AddDirectSuperdomain($superDomain.Name$);
+$superDomain.DirectSuperDomains:{superSuperDomain|$hierarchy(domain=superDomain, superDomain=superSuperDomain)$}$
+$endif$
+>>
+
 objectTypeDeclaration(objectType) ::= <<		public static $if(objectType.IsInterface)$Interface$else$Class$endif$ $objectType.Name$;
 
 >>
 
-relationTypeDeclaration(relationType) ::= <<		public static RelationType $relationType.Name$;
+relationTypeDeclaration(relationType) ::= <<
+		public static RoleType $relationType.Name$;
+$if(relationType.AssociationType.ObjectType.IsInterface)$
+$relationType.AssociationType.ObjectType.ConcreteClasses:{class|$relationTypeDeclarationClass()$}$
+$endif$
+>>
+
+relationTypeDeclarationClass() ::= <<		public static ConcreteRoleType $class.name$$relationType.RoleType.HierarchySingularName$;
 
 >>
 
@@ -124,6 +144,16 @@ $objectType.AssociationTypesWhereObjectType:{associationType|$relationTypeInit(a
 
 >>
 
+relationTypeConcreteRoleTypes(relationType) ::= <<
+$if(relationType.AssociationType.ObjectType.IsInterface)$
+$relationType.AssociationType.ObjectType.ConcreteClasses:{class|$relationTypeConcreteRoleType(class)$}$
+$endif$
+>>
+
+relationTypeConcreteRoleType(objectType) ::= <<		$class.name$$relationType.RoleType.HierarchySingularName$ = $class.name$.ConcreteRoleTypeByRoleType[$relationType.Name$];
+
+>>
+
 inheritanceInit(inheritance) ::= <<
 				new InheritanceBuilder($inheritance.DomainWhereDeclaredInheritance.Name$, new Guid("$inheritance.IdAsString$"))
 				.WithSubtype($inheritance.Subtype.Name$)
@@ -142,7 +172,8 @@ relationTypeInit(relationType) ::= <<
 				$precision()$
 				$scale()$
 				$size()$
-				.Build();
+				.Build()
+				.RoleType;
 
 
 >>

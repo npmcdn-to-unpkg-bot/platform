@@ -49,12 +49,7 @@ namespace Allors.Domain
 
             if (!this.ExistCurrentObjectState)
             {
-                this.CurrentObjectState = new DropShipmentObjectStates(this.DatabaseSession).Created;
-            }
-
-            if (!this.ExistSearchData)
-            {
-                this.SearchData = new SearchDataBuilder(this.Session).Build();
+                this.CurrentObjectState = new DropShipmentObjectStates(this.Strategy.DatabaseSession).Created;
             }
         }
 
@@ -99,7 +94,7 @@ namespace Allors.Domain
 
             if (this.ExistCurrentObjectState && !this.CurrentObjectState.Equals(this.PreviousObjectState))
             {
-                var currentStatus = new DropShipmentStatusBuilder(this.Session).WithDropShipmentObjectState(this.CurrentObjectState).Build();
+                var currentStatus = new DropShipmentStatusBuilder(this.Strategy.Session).WithDropShipmentObjectState(this.CurrentObjectState).Build();
                 this.AddShipmentStatus(currentStatus);
                 this.CurrentShipmentStatus = currentStatus;
             }

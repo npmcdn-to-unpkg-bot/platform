@@ -20,14 +20,10 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class Dependent
     {
-        public override void OnPostBuild(Allors.IObjectBuilder builder)
+        public void OnPostBuild(ObjectOnPostBuild method)
         {
-            base.OnPostBuild(builder);
-
             if (!this.ExistCounter)
             {
                 this.Counter = 0;

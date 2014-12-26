@@ -80,7 +80,7 @@ namespace Allors.Domain
             if (months <= 12)
             {
                 var histories = this.InternalOrganisation.InternalOrganisationRevenueHistoriesWhereInternalOrganisation;
-                var history = histories.First ?? new InternalOrganisationRevenueHistoryBuilder(this.Session)
+                var history = histories.First ?? new InternalOrganisationRevenueHistoryBuilder(this.Strategy.Session)
                                                      .WithCurrency(this.Currency)
                                                      .WithInternalOrganisation(this.InternalOrganisation)
                                                      .Build();

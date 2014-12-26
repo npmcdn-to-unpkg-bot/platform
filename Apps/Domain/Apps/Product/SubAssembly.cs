@@ -26,16 +26,11 @@ namespace Allors.Domain
         {
             base.AppsOnPostBuild(builder);
 
-            this.InventoryItemKind = new InventoryItemKinds(this.Session).NonSerialized;
+            this.InventoryItemKind = new InventoryItemKinds(this.Strategy.Session).NonSerialized;
 
             if (!this.ExistOwnedByParty)
             {
-                this.OwnedByParty = Domain.Singleton.Instance(this.Session).DefaultInternalOrganisation;
-            }
-
-            if (!this.ExistSearchData)
-            {
-                this.SearchData = new SearchDataBuilder(this.Session).Build();
+                this.OwnedByParty = Domain.Singleton.Instance(this.Strategy.Session).DefaultInternalOrganisation;
             }
         }
 
@@ -69,11 +64,11 @@ namespace Allors.Domain
 
         private void AppsDeriveInventoryItem(IDerivation derivation)
         {
-            if (this.ExistInventoryItemKind && this.InventoryItemKind.Equals(new InventoryItemKinds(this.Session).NonSerialized))
+            if (this.ExistInventoryItemKind && this.InventoryItemKind.Equals(new InventoryItemKinds(this.Strategy.Session).NonSerialized))
             {
-                if (!ExistInventoryItemsWherePart)
+                if (!this.ExistInventoryItemsWherePart)
                 {
-                    new NonSerializedInventoryItemBuilder(this.Session)
+                    new NonSerializedInventoryItemBuilder(this.Strategy.Session)
                         .WithFacility(this.OwnedByParty.DefaultFacility)
                         .WithPart(this)
                         .Build();

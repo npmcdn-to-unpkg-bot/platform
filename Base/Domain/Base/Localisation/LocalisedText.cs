@@ -20,27 +20,13 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class LocalisedText
     {
-        protected override void BaseOnDelete()
+        protected void BaseDelete(DeletableDelete  method)
         {
-            base.BaseOnDelete();
-
             if (this.ExistSearchData)
             {
-                this.SearchData.Delete();
-            }
-        }
-
-        protected override void BaseOnPostBuild(IObjectBuilder objectBuilder)
-        {
-            base.BaseOnPostBuild(objectBuilder);
-
-            if (!this.ExistSearchData)
-            {
-                this.SearchData = new SearchDataBuilder(this.Session).Build();
+                this.SearchData.Delete().Execute();
             }
         }
 

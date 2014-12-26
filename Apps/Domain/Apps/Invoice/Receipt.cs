@@ -34,11 +34,6 @@ namespace Allors.Domain
             {
                 this.EffectiveDate = DateTime.Now;
             }
-
-            if (!this.ExistSearchData)
-            {
-                this.SearchData = new SearchDataBuilder(this.Session).Build();
-            }
         }
 
         protected string AppsComposeDisplayName()

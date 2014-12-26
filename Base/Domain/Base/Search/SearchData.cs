@@ -82,7 +82,7 @@ namespace Allors.Domain
 
             if (!SearchDatas.SkipDerivation)
             {
-                this.DeriveSearchFragments(new SearchFragments(this.Session));
+                this.DeriveSearchFragments(new SearchFragments(this.Strategy.Session));
             }
         }
 

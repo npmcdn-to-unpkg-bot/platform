@@ -22,19 +22,8 @@ namespace Allors.Domain
 {
     using System;
 
-
     public partial class EmploymentApplication
     {
-        protected override void AppsOnPostBuild(IObjectBuilder builder)
-        {
-            base.AppsOnPostBuild(builder);
-
-            if (!this.ExistSearchData)
-            {
-                this.SearchData = new SearchDataBuilder(this.Session).Build();
-            }
-        }
-
         public void AppsDerive(DerivableDerive method)
         {
             this.DisplayName = string.Format(

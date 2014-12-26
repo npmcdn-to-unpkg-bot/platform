@@ -44,12 +44,7 @@ namespace Allors.Domain
 
             if (!this.ExistCurrentObjectState)
             {
-                this.CurrentObjectState = new CaseObjectStates(this.DatabaseSession).Opened;
-            }
-
-            if (!this.ExistSearchData)
-            {
-                this.SearchData = new SearchDataBuilder(this.Session).Build();
+                this.CurrentObjectState = new CaseObjectStates(this.Strategy.DatabaseSession).Opened;
             }
         }
 
@@ -69,7 +64,7 @@ namespace Allors.Domain
         {
             if (this.ExistCurrentObjectState && !this.CurrentObjectState.Equals(this.PreviousObjectState))
             {
-                var currentStatus = new CaseStatusBuilder(this.Session).WithCaseObjectState(this.CurrentObjectState).Build();
+                var currentStatus = new CaseStatusBuilder(this.Strategy.Session).WithCaseObjectState(this.CurrentObjectState).Build();
                 this.AddCaseStatus(currentStatus);
                 this.CurrentCaseStatus = currentStatus;
             }
@@ -82,19 +77,19 @@ namespace Allors.Domain
 
         private void AppsClose()
         {
-            var closed = new CaseObjectStates(Session).Closed;
+            var closed = new CaseObjectStates(this.Strategy.Session).Closed;
             this.CurrentObjectState = closed;
         }
 
         private void AppsComplete()
         {
-            var completed = new CaseObjectStates(Session).Completed;
+            var completed = new CaseObjectStates(this.Strategy.Session).Completed;
             this.CurrentObjectState = completed;
         }
 
         private void AppsReopen()
         {
-            var opened = new CaseObjectStates(Session).Opened;
+            var opened = new CaseObjectStates(this.Strategy.Session).Opened;
             this.CurrentObjectState = opened;
         }
     }

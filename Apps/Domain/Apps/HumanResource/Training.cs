@@ -22,16 +22,6 @@ namespace Allors.Domain
 {
     public partial class Training
     {
-        protected override void AppsOnPostBuild(IObjectBuilder builder)
-        {
-            base.AppsOnPostBuild(builder);
-
-            if (!this.ExistSearchData)
-            {
-                this.SearchData = new SearchDataBuilder(this.Session).Build();
-            }
-        }
-
         public void AppsDerive(DerivableDerive method)
         {
             this.DisplayName = this.Description;

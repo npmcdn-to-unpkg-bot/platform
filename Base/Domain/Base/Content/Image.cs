@@ -27,12 +27,10 @@ namespace Allors.Domain
 
     public partial class Image
     {
-        public override void Delete()
+        public void BaseDelete(DeletableDelete method)
         {
             this.RemoveOriginal();
             this.RemoveResponsive();
-
-            base.Delete();
         }
 
         public void BaseDerive(DerivableDerive method)
@@ -45,17 +43,17 @@ namespace Allors.Domain
                 using (Stream stream = new MemoryStream(this.Original.Content))
                 {
                     var original = new Bitmap(stream);
-                    var mediaType = new MediaTypes(this.Session).Jpeg;
+                    var mediaType = new MediaTypes(this.Strategy.Session).Jpeg;
 
                     var responsive = CreateResponsive(original, mediaType);
                     if (!this.ExistResponsive || !responsive.SequenceEqual(this.Responsive.Content))
                     {
                         if (this.ExistResponsive)
                         {
-                            this.Responsive.Delete();
+                            this.Responsive.Delete().Execute();
                         }
 
-                        this.Responsive = new MediaBuilder(this.Session).WithContent(responsive).WithMediaType(mediaType).Build();
+                        this.Responsive = new MediaBuilder(this.Strategy.Session).WithContent(responsive).WithMediaType(mediaType).Build();
                     }
                 }
             }

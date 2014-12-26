@@ -31,11 +31,6 @@ namespace Allors.Domain
             {
                 this.IsActive = true;
             }
-
-            if (!this.ExistSearchData)
-            {
-                this.SearchData = new SearchDataBuilder(this.Session).Build();
-            }
         }
 
         public void AppsDerive(DerivableDerive method)

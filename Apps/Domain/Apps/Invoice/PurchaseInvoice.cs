@@ -172,7 +172,7 @@ namespace Allors.Domain
 
             if (!this.ExistCurrentObjectState)
             {
-                this.CurrentObjectState = new PurchaseInvoiceObjectStates(this.Session).InProcess;
+                this.CurrentObjectState = new PurchaseInvoiceObjectStates(this.Strategy.Session).InProcess;
             }
 
             if (!this.ExistInvoiceNumber && this.ExistBilledToInternalOrganisation)
@@ -269,11 +269,6 @@ namespace Allors.Domain
             {
                 this.TotalVatCustomerCurrency = 0;
             }
-
-            if (!this.ExistSearchData)
-            {
-                this.SearchData = new SearchDataBuilder(this.Session).Build();
-            }
         }
 
         public void AppsPrepareDerivation(DerivablePrepareDerivation method)
@@ -325,7 +320,7 @@ namespace Allors.Domain
             {
                 this.CurrentObjectState.Process(this);
 
-                var currentStatus = new PurchaseInvoiceStatusBuilder(this.Session).WithPurchaseInvoiceObjectState(this.CurrentObjectState).Build();
+                var currentStatus = new PurchaseInvoiceStatusBuilder(this.Strategy.Session).WithPurchaseInvoiceObjectState(this.CurrentObjectState).Build();
                 this.AddInvoiceStatus(currentStatus);
                 this.CurrentInvoiceStatus = currentStatus;
             }
@@ -365,17 +360,17 @@ namespace Allors.Domain
 
         private void AppsSearchDataApprove(IDerivation derivation)
         {
-            this.CurrentObjectState = new PurchaseInvoiceObjectStates(Session).Approved;
+            this.CurrentObjectState = new PurchaseInvoiceObjectStates(this.Strategy.Session).Approved;
         }
 
         private void AppsReady(IDerivation derivation)
         {
-            this.CurrentObjectState = new PurchaseInvoiceObjectStates(Session).ReadyForPosting;
+            this.CurrentObjectState = new PurchaseInvoiceObjectStates(this.Strategy.Session).ReadyForPosting;
         }
 
         private void AppsCancel(IDerivation derivation)
         {
-            this.CurrentObjectState = new PurchaseInvoiceObjectStates(Session).Cancelled;
+            this.CurrentObjectState = new PurchaseInvoiceObjectStates(this.Strategy.Session).Cancelled;
         }
 
         private void AppsDeriveInvoiceItems(IDerivation derivation)

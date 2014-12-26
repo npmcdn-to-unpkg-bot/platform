@@ -20,22 +20,8 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
-    
-
     public partial class Deployment
     {
-        protected override void AppsOnPostBuild(IObjectBuilder builder)
-        {
-            base.AppsOnPostBuild(builder);
-
-            if (!this.ExistSearchData)
-            {
-                this.SearchData = new SearchDataBuilder(this.Session).Build();
-            }
-        }
-
         public void AppsDerive(DerivableDerive method)
         {
             

@@ -24,16 +24,6 @@ namespace Allors.Domain
 
     public partial class Language
     {
-        protected override void BaseOnPostBuild(IObjectBuilder builder)
-        {
-            base.BaseOnPostBuild(builder);
-
-            if (!this.ExistSearchData)
-            {
-                this.SearchData = new SearchDataBuilder(this.Session).Build();
-            }
-        }
-
         public string GetLocalisedName(Locale locale)
         {
             var localisedName = this.LocalisedNames.FirstOrDefault(localizedText => localizedText.Locale.Equals(locale));
@@ -45,7 +35,7 @@ namespace Allors.Domain
             var localisedName = this.LocalisedNames.FirstOrDefault(localizedText => localizedText.Locale.Equals(locale));
             if (localisedName == null)
             {
-                localisedName = new LocalisedTextBuilder(this.Session).WithText(name).WithLocale(locale).Build();
+                localisedName = new LocalisedTextBuilder(this.Strategy.Session).WithText(name).WithLocale(locale).Build();
                 this.AddLocalisedName(localisedName);
             }
             else

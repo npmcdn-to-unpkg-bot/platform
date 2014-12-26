@@ -35,13 +35,13 @@ namespace Allors.Domain
             get
             {
                 // TODO: Setting or removing Body should flush caches
-                var templateGroup = (TemplateGroup)this.Session[this.Id.Key];
+                var templateGroup = (TemplateGroup)this.Strategy.Session[this.Id.Key];
 
                 if (templateGroup == null)
                 {
                     templateGroup = new TemplateGroupString("allors", this.Body, '$', '$') { Listener = new ErrorTemplateListener() };
                     templateGroup.RegisterRenderer(typeof(string), new StringRenderer());
-                    this.Session[this.Id.Key] = templateGroup;
+                    this.Strategy.Session[this.Id.Key] = templateGroup;
                 }
 
                 return templateGroup;
@@ -49,7 +49,7 @@ namespace Allors.Domain
 
             set
             {
-                this.Session[this.Id.Key] = value;
+                this.Strategy.Session[this.Id.Key] = value;
             }
         }
 

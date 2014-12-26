@@ -36,7 +36,7 @@ namespace Allors.Domain
 
             if (!this.ExistInternalOrganisation)
             {
-                this.InternalOrganisation = Singleton.Instance(this.Session).DefaultInternalOrganisation;
+                this.InternalOrganisation = Singleton.Instance(this.Strategy.Session).DefaultInternalOrganisation;
             }
         }
 
@@ -110,7 +110,7 @@ namespace Allors.Domain
         private void AppsDeriveMembership()
         {
             var usergroups = this.InternalOrganisation.UserGroupsWhereParty;
-            usergroups.Filter.AddEquals(UserGroups.Meta.Parent, new Roles(this.Session).Sales.UserGroupWhereRole);
+            usergroups.Filter.AddEquals(UserGroups.Meta.Parent, new Roles(this.Strategy.Session).Sales.UserGroupWhereRole);
             var salesRepUserGroup = usergroups.First;
 
             if (this.ExistSalesRepresentative && this.SalesRepresentative.ExistCurrentEmployment

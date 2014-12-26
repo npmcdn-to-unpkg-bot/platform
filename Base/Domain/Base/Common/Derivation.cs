@@ -27,8 +27,6 @@ namespace Allors.Domain
     using Allors;
     using Allors.Meta;
 
-    using ObjectBase = Allors.ObjectBase;
-
     public class Derivation : IDerivation
     {
         private readonly ISession session;

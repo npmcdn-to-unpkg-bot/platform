@@ -80,21 +80,16 @@ namespace Allors.Domain
 
             if (!this.ExistCurrentObjectState)
             {
-                this.CurrentObjectState = new PickListObjectStates(this.Session).Created;
+                this.CurrentObjectState = new PickListObjectStates(this.Strategy.Session).Created;
             }
 
             if (!this.ExistStore)
             {
-                var internalOrganisation = Allors.Domain.Singleton.Instance(this.Session).DefaultInternalOrganisation;
+                var internalOrganisation = Allors.Domain.Singleton.Instance(this.Strategy.Session).DefaultInternalOrganisation;
                 if (internalOrganisation.StoresWhereOwner.Count == 1)
                 {
                     this.Store = internalOrganisation.StoresWhereOwner.First;
                 }
-            }
-
-            if (!this.ExistSearchData)
-            {
-                this.SearchData = new SearchDataBuilder(this.Session).Build();
             }
         }
 
@@ -155,7 +150,7 @@ namespace Allors.Domain
         public void AppsApplySecurityOnDerive(DerivableApplySecurityOnDerive method)
         {
             this.RemoveSecurityTokens();
-            this.AddSecurityToken(Allors.Domain.Singleton.Instance(this.Session).AdministratorSecurityToken);
+            this.AddSecurityToken(Allors.Domain.Singleton.Instance(this.Strategy.Session).AdministratorSecurityToken);
 
             if (this.ExistShipToParty)
             {
@@ -175,7 +170,7 @@ namespace Allors.Domain
         {
             if (this.ExistCurrentObjectState && !this.CurrentObjectState.Equals(this.PreviousObjectState))
             {
-                var currentStatus = new PickListStatusBuilder(this.Session).WithPickListObjectState(this.CurrentObjectState).Build();
+                var currentStatus = new PickListStatusBuilder(this.Strategy.Session).WithPickListObjectState(this.CurrentObjectState).Build();
                 this.AddPickListStatus(currentStatus);
                 this.CurrentPickListStatus = currentStatus;
             }
@@ -205,22 +200,22 @@ namespace Allors.Domain
 
         public void AppsCancel(PickListCancel method)
         {
-            this.CurrentObjectState = new PickListObjectStates(Session).Cancelled;
+            this.CurrentObjectState = new PickListObjectStates(this.Strategy.Session).Cancelled;
         }
 
         public void AppsHold(PickListHold method)
         {
-            this.CurrentObjectState = new PickListObjectStates(Session).OnHold;
+            this.CurrentObjectState = new PickListObjectStates(this.Strategy.Session).OnHold;
         }
 
         public void AppsContinue(PickListContinue method)
         {
-            this.CurrentObjectState = new PickListObjectStates(Session).Created;
+            this.CurrentObjectState = new PickListObjectStates(this.Strategy.Session).Created;
         }
 
         public void AppsSetPicked(PickListContinue method)
         {
-            this.CurrentObjectState = new PickListObjectStates(Session).Picked;
+            this.CurrentObjectState = new PickListObjectStates(this.Strategy.Session).Picked;
 
             foreach (PickListItem pickListItem in this.PickListItems)
             {

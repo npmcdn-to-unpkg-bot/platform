@@ -21,6 +21,7 @@ namespace Allors.Meta
 		public static readonly Interface Printable = ((Interface)Repository.MetaPopulation.Find( new System.Guid("61207a42-3199-4249-baa4-9dd11dc0f5b1")));
 		public static readonly Interface Localised = ((Interface)Repository.MetaPopulation.Find( new System.Guid("7979a17c-0829-46df-a0d4-1b01775cfaac")));
 		public static readonly Interface Period = ((Interface)Repository.MetaPopulation.Find( new System.Guid("80adbbfd-952e-46f3-a744-78e0ce42bc80")));
+		public static readonly Interface Deletable = ((Interface)Repository.MetaPopulation.Find( new System.Guid("9279e337-c658-4086-946d-03c75cdb1ad3")));
 		public static readonly Interface User = ((Interface)Repository.MetaPopulation.Find( new System.Guid("a0309c3b-6f80-4777-983e-6e69800df5be")));
 		public static readonly Interface SearchResult = ((Interface)Repository.MetaPopulation.Find( new System.Guid("a0ac7040-6984-4267-a200-919875e08909")));
 		public static readonly Interface SecurityTokenOwner = ((Interface)Repository.MetaPopulation.Find( new System.Guid("a69cad9c-c2f1-463f-9af1-873ce65aeea6")));
@@ -29,6 +30,7 @@ namespace Allors.Meta
 		public static readonly Interface Derivable = ((Interface)Repository.MetaPopulation.Find( new System.Guid("ccde0070-ad05-4336-8cab-a5b27bef5c29")));
 		public static readonly Interface AccessControlledObject = ((Interface)Repository.MetaPopulation.Find( new System.Guid("eb0ff756-3e3d-4cf9-8935-8802a73d2df2")));
 		public static readonly Interface UserInterfaceable = ((Interface)Repository.MetaPopulation.Find( new System.Guid("eea17b39-8912-40b3-8403-293bd5a3316d")));
+		public static readonly Interface Object = ((Interface)Repository.MetaPopulation.Find( new System.Guid("f8a7cd0e-bd7f-4ce9-ab5d-8c1629cd883d")));
 		public static readonly Interface ObjectState = ((Interface)Repository.MetaPopulation.Find( new System.Guid("f991813f-3146-4431-96d0-554aa2186887")));
 		public static readonly Interface Commentable = ((Interface)Repository.MetaPopulation.Find( new System.Guid("fdd52472-e863-4e91-bb01-1dada2acc8f6")));
 		public static readonly Interface Searchable = ((Interface)Repository.MetaPopulation.Find( new System.Guid("ff34f3f1-6a17-404f-a9e5-5cffcdaa3d31")));
@@ -687,6 +689,9 @@ namespace Allors.Meta
 
 	public partial class MethodTypes
 	{
+		public static readonly MethodType ObjectOnPostBuild = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("62d48a76-a500-4d16-9d20-6fef43ac6dcb")));
+		public static readonly MethodType ObjectApplySecurityOnPostBuild = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("042375d8-bbdd-46e8-80b6-cc89d8782f1c")));
+		public static readonly MethodType DeletableDelete = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("f4cc201f-d6cb-4d82-8aeb-e9c4c79c33f7")));
 		public static readonly MethodType DerivablePrepareDerivation = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("122d3d78-ab97-4a69-a725-f465c71757da")));
 		public static readonly MethodType DerivableDerive = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("527da7f8-68b4-46ab-b0d8-6b9e82d2a5ac")));
 		public static readonly MethodType DerivableApplySecurityOnDerive = ((MethodType)Repository.MetaPopulation.Find( new System.Guid("349cbcde-b4e9-4965-b3ff-7c41b021825d")));

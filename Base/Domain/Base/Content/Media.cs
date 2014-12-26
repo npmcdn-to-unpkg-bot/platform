@@ -45,18 +45,18 @@ namespace Allors.Domain
                     throw new Exception("Media content is write once");
                 }
 
-                this.MediaContent = new MediaContentBuilder(this.Session).WithValue(value).Build();
+                this.MediaContent = new MediaContentBuilder(this.Strategy.Session).WithValue(value).Build();
             }
         }
 
-        protected override void BaseOnPostBuild(IObjectBuilder builder)
+        public void BaseOnPostBuild(ObjectOnPostBuild method)
         {
-            base.BaseOnPostBuild(builder);
+            var builder = method.Builder;
 
             var mediaBuilder = (MediaBuilder)builder;
             if (mediaBuilder.MediaContentValue != null)
             {
-                this.MediaContent = new MediaContentBuilder(this.Session).WithValue(mediaBuilder.MediaContentValue).Build();
+                this.MediaContent = new MediaContentBuilder(this.Strategy.Session).WithValue(mediaBuilder.MediaContentValue).Build();
             }
         }
 

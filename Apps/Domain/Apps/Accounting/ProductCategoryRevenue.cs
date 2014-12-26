@@ -82,7 +82,7 @@ namespace Allors.Domain
 
             if (this.ProductCategory.ExistParents)
             {
-                ProductCategoryRevenues.AppsFindOrCreateAsDependable(Session, this);
+                ProductCategoryRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, this);
             }
 
             var months = ((DateTime.Now.Year - this.Year) * 12) + DateTime.Now.Month - this.Month;
@@ -90,7 +90,7 @@ namespace Allors.Domain
             {
                 var histories = this.ProductCategory.ProductCategoryRevenueHistoriesWhereProductCategory;
                 histories.Filter.AddEquals(ProductCategoryRevenueHistories.Meta.InternalOrganisation, this.InternalOrganisation);
-                var history = histories.First ?? new ProductCategoryRevenueHistoryBuilder(this.Session)
+                var history = histories.First ?? new ProductCategoryRevenueHistoryBuilder(this.Strategy.Session)
                                                      .WithCurrency(this.Currency)
                                                      .WithInternalOrganisation(this.InternalOrganisation)
                                                      .WithProductCategory(this.ProductCategory)
@@ -103,7 +103,7 @@ namespace Allors.Domain
                 productCategoryRevenues.Filter.AddEquals(ProductCategoryRevenues.Meta.InternalOrganisation, this.InternalOrganisation);
                 productCategoryRevenues.Filter.AddEquals(ProductCategoryRevenues.Meta.Year, this.Year);
                 productCategoryRevenues.Filter.AddEquals(ProductCategoryRevenues.Meta.Month, this.Month);
-                var productCategoryRevenue = productCategoryRevenues.First ?? new ProductCategoryRevenueBuilder(this.Session)
+                var productCategoryRevenue = productCategoryRevenues.First ?? new ProductCategoryRevenueBuilder(this.Strategy.Session)
                                                                                     .WithInternalOrganisation(this.InternalOrganisation)
                                                                                     .WithProductCategory(parentCategory)
                                                                                     .WithYear(this.Year)

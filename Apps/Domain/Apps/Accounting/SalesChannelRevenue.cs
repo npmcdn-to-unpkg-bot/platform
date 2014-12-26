@@ -77,7 +77,7 @@ namespace Allors.Domain
 
             var invoices = this.SalesChannel.SalesInvoicesWhereSalesChannel;
             invoices.Filter.AddEquals(SalesInvoices.Meta.BilledFromInternalOrganisation, this.InternalOrganisation);
-            invoices.Filter.AddNot().AddEquals(SalesInvoices.Meta.CurrentObjectState, new SalesInvoiceObjectStates(this.DatabaseSession).WrittenOff);
+            invoices.Filter.AddNot().AddEquals(SalesInvoices.Meta.CurrentObjectState, new SalesInvoiceObjectStates(this.Strategy.DatabaseSession).WrittenOff);
             invoices.Filter.AddBetween(SalesInvoices.Meta.InvoiceDate, new DateTime(this.Year, this.Month, 01), new DateTime(this.Year, this.Month, lastDayOfMonth));
 
             foreach (SalesInvoice salesInvoice in invoices)
@@ -90,7 +90,7 @@ namespace Allors.Domain
             {
                 var histories = this.SalesChannel.SalesChannelRevenueHistoriesWhereSalesChannel;
                 histories.Filter.AddEquals(SalesChannelRevenueHistories.Meta.InternalOrganisation, this.InternalOrganisation);
-                var history = histories.First ?? new SalesChannelRevenueHistoryBuilder(this.Session)
+                var history = histories.First ?? new SalesChannelRevenueHistoryBuilder(this.Strategy.Session)
                                                      .WithCurrency(this.Currency)
                                                      .WithInternalOrganisation(this.InternalOrganisation)
                                                      .WithSalesChannel(this.SalesChannel)

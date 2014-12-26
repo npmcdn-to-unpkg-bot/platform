@@ -42,11 +42,6 @@ namespace Allors.Domain
             {
                 this.UseAsDefault = false;
             }
-
-            if (!this.ExistSearchData)
-            {
-                this.SearchData = new SearchDataBuilder(this.Session).Build();
-            }
         }
 
         public void AppsDerive(DerivableDerive method)
@@ -79,7 +74,7 @@ namespace Allors.Domain
             }
             else
             {
-                if (this.JournalType.Equals(new JournalTypes(this.Session).Bank))
+                if (this.JournalType.Equals(new JournalTypes(this.Strategy.Session).Bank))
                 {
                     // initial derivation of ContraAccount, PreviousContraAccount does not exist yet.
                     if (this.ExistContraAccount)

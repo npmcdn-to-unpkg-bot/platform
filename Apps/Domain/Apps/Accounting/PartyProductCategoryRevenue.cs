@@ -112,7 +112,7 @@ namespace Allors.Domain
                     partyProductCategoryRevenues.Filter.AddEquals(PartyProductCategoryRevenues.Meta.Month, this.Month);
                     partyProductCategoryRevenues.Filter.AddEquals(PartyProductCategoryRevenues.Meta.ProductCategory, parentCategory);
                     var partyProductCategoryRevenue = partyProductCategoryRevenues.First
-                                                      ?? new PartyProductCategoryRevenueBuilder(this.Session)
+                                                      ?? new PartyProductCategoryRevenueBuilder(this.Strategy.Session)
                                                                 .WithInternalOrganisation(this.InternalOrganisation)
                                                                 .WithParty(this.Party)
                                                                 .WithProductCategory(parentCategory)
@@ -135,7 +135,7 @@ namespace Allors.Domain
                 histories.Filter.AddEquals(PartyProductCategoryRevenueHistories.Meta.ProductCategory, this.ProductCategory);
                 var history = histories.First
                               ??
-                              new PartyProductCategoryRevenueHistoryBuilder(this.Session).WithCurrency(this.Currency).
+                              new PartyProductCategoryRevenueHistoryBuilder(this.Strategy.Session).WithCurrency(this.Currency).
                                   WithInternalOrganisation(this.InternalOrganisation).WithParty(this.Party).WithProductCategory(
                                       this.ProductCategory).WithRevenue(0).WithQuantity(0).Build();
 
@@ -144,19 +144,19 @@ namespace Allors.Domain
 
             if (this.ExistProductCategory)
             {
-                var productCategoryRevenue = ProductCategoryRevenues.AppsFindOrCreateAsDependable(this.Session, this);
+                var productCategoryRevenue = ProductCategoryRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, this);
                 productCategoryRevenue.Derive().Execute();
             }
 
             if (this.ExistProductCategory)
             {
-                var productCategoryRevenue = ProductCategoryRevenues.AppsFindOrCreateAsDependable(this.Session, this);
+                var productCategoryRevenue = ProductCategoryRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, this);
                 productCategoryRevenue.Derive().Execute();
             }
 
             if (this.ExistProductCategory && this.ProductCategory.ExistPackage)
             {
-                var partyPackageRevenue = PartyPackageRevenues.AppsFindOrCreateAsDependable(this.Session, this);
+                var partyPackageRevenue = PartyPackageRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, this);
                 partyPackageRevenue.Derive().Execute();
             }
         }

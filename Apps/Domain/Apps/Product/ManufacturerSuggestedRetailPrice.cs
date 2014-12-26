@@ -28,12 +28,7 @@ namespace Allors.Domain
 
             if (!this.ExistSpecifiedFor)
             {
-                this.SpecifiedFor = Domain.Singleton.Instance(this.Session).DefaultInternalOrganisation;
-            }
-
-            if (!this.ExistSearchData)
-            {
-                this.SearchData = new SearchDataBuilder(this.Session).Build();
+                this.SpecifiedFor = Domain.Singleton.Instance(this.Strategy.Session).DefaultInternalOrganisation;
             }
         }
 

@@ -56,9 +56,9 @@ namespace Allors.Domain
             }
         }
 
-        protected override void BaseOnPostBuild(IObjectBuilder builder)
+        public void BaseOnPostBuild(ObjectOnPostBuild method)
         {
-            base.BaseOnPostBuild(builder);
+            var builder = method.Builder;
 
             this.NameToLowerCase();
         }

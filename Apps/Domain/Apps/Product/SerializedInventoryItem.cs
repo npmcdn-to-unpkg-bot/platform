@@ -44,20 +44,15 @@ namespace Allors.Domain
 
             if (!this.ExistCurrentObjectState)
             {
-                this.CurrentObjectState = new SerializedInventoryItemObjectStates(this.Session).Good;
+                this.CurrentObjectState = new SerializedInventoryItemObjectStates(this.Strategy.Session).Good;
             }
 
             if (!this.ExistFacility)
             {
-                if (Singleton.Instance(this.Session).DefaultInternalOrganisation != null)
+                if (Singleton.Instance(this.Strategy.Session).DefaultInternalOrganisation != null)
                 {
-                    this.Facility = Singleton.Instance(this.Session).DefaultInternalOrganisation.DefaultFacility;
+                    this.Facility = Singleton.Instance(this.Strategy.Session).DefaultInternalOrganisation.DefaultFacility;
                 }
-            }
-
-            if (!this.ExistSearchData)
-            {
-                this.SearchData = new SearchDataBuilder(this.Session).Build();
             }
         }
 
@@ -84,7 +79,7 @@ namespace Allors.Domain
 
             if (this.ExistCurrentObjectState && !this.CurrentObjectState.Equals(this.PreviousObjectState))
             {
-                SerializedInventoryItemStatus currentStatus = new SerializedInventoryItemStatusBuilder(this.Session).WithSerializedInventoryItemObjectState(this.CurrentObjectState).Build();
+                SerializedInventoryItemStatus currentStatus = new SerializedInventoryItemStatusBuilder(this.Strategy.Session).WithSerializedInventoryItemObjectState(this.CurrentObjectState).Build();
                 this.AddInventoryItemStatus(currentStatus);
                 this.CurrentInventoryItemStatus = currentStatus;
             }

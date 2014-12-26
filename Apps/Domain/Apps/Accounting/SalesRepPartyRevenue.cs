@@ -93,7 +93,7 @@ namespace Allors.Domain
 
             var invoices = this.Party.SalesInvoicesWhereBillToCustomer;
             invoices.Filter.AddEquals(SalesInvoices.Meta.BilledFromInternalOrganisation, this.InternalOrganisation);
-            invoices.Filter.AddNot().AddEquals(SalesInvoices.Meta.CurrentObjectState, new SalesInvoiceObjectStates(this.DatabaseSession).WrittenOff);
+            invoices.Filter.AddNot().AddEquals(SalesInvoices.Meta.CurrentObjectState, new SalesInvoiceObjectStates(this.Strategy.DatabaseSession).WrittenOff);
             invoices.Filter.AddBetween(SalesInvoices.Meta.InvoiceDate, new DateTime(this.Year, this.Month, 01), new DateTime(this.Year, this.Month, lastDayOfMonth));
 
             foreach (SalesInvoice salesInvoice in invoices)
@@ -109,7 +109,7 @@ namespace Allors.Domain
 
             if (this.ExistSalesRep)
             {
-                var salesRepRevenue = SalesRepRevenues.AppsFindOrCreateAsDependable(this.Session, this);
+                var salesRepRevenue = SalesRepRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, this);
                 salesRepRevenue.Derive().Execute();
             }
         }

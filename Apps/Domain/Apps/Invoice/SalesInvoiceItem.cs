@@ -35,7 +35,7 @@ namespace Allors.Domain
                 {
                     foreach (AgreementTerm term in this.InvoiceTerms)
                     {
-                        if (term.TermType.Equals(new TermTypes(this.Session).PaymentNetDays))
+                        if (term.TermType.Equals(new TermTypes(this.Strategy.Session).PaymentNetDays))
                         {
                             int netDays;
                             if (int.TryParse(term.TermValue, out netDays))
@@ -217,7 +217,7 @@ namespace Allors.Domain
         {
             if (!this.ExistDiscountAdjustment)
             {
-                this.DiscountAdjustment = new DiscountAdjustmentBuilder(this.Session).Build();
+                this.DiscountAdjustment = new DiscountAdjustmentBuilder(this.Strategy.Session).Build();
             }
 
             this.DiscountAdjustment.Amount = amount;
@@ -228,7 +228,7 @@ namespace Allors.Domain
         {
             if (!this.ExistDiscountAdjustment)
             {
-                this.DiscountAdjustment = new DiscountAdjustmentBuilder(this.Session).Build();
+                this.DiscountAdjustment = new DiscountAdjustmentBuilder(this.Strategy.Session).Build();
             }
 
             this.DiscountAdjustment.Percentage = percentage;
@@ -241,7 +241,7 @@ namespace Allors.Domain
 
             if (!this.ExistCurrentObjectState)
             {
-                this.CurrentObjectState = new SalesInvoiceItemObjectStates(this.DatabaseSession).ReadyForPosting;
+                this.CurrentObjectState = new SalesInvoiceItemObjectStates(this.Strategy.DatabaseSession).ReadyForPosting;
             }
 
             if (!this.ExistQuantity)
@@ -301,28 +301,28 @@ namespace Allors.Domain
 
         private void AppsWriteOff(IDerivation derivation)
         {
-            this.CurrentObjectState = new SalesInvoiceItemObjectStates(Session).WrittenOff;
+            this.CurrentObjectState = new SalesInvoiceItemObjectStates(this.Strategy.Session).WrittenOff;
         }
 
         private void AppsCancel(IDerivation derivation)
         {
-            this.CurrentObjectState = new SalesInvoiceItemObjectStates(Session).Cancelled;
+            this.CurrentObjectState = new SalesInvoiceItemObjectStates(this.Strategy.Session).Cancelled;
         }
 
         private void AppsPaymentReceived(IDerivation derivation)
         {
             if (this.AmountPaid < this.TotalIncVat)
             {
-                this.CurrentObjectState = new SalesInvoiceItemObjectStates(Session).PartiallyPaid;
+                this.CurrentObjectState = new SalesInvoiceItemObjectStates(this.Strategy.Session).PartiallyPaid;
             }
             else
             {
-                this.CurrentObjectState = new SalesInvoiceItemObjectStates(Session).PartiallyPaid;                
+                this.CurrentObjectState = new SalesInvoiceItemObjectStates(this.Strategy.Session).PartiallyPaid;                
             }
 
             if (this.ExistCurrentObjectState)
             {
-                var currentStatus = new SalesInvoiceItemStatusBuilder(this.Session).WithSalesInvoiceItemObjectState(this.CurrentObjectState).Build();
+                var currentStatus = new SalesInvoiceItemStatusBuilder(this.Strategy.Session).WithSalesInvoiceItemObjectState(this.CurrentObjectState).Build();
                 this.AddInvoiceItemStatus(currentStatus);
                 this.CurrentInvoiceItemStatus = currentStatus;
                 this.PreviousObjectState = this.CurrentObjectState;
@@ -333,23 +333,23 @@ namespace Allors.Domain
 
         private void AppsDeriveCurrentPaymentStatus(IDerivation derivation)
         {
-            if (!this.CurrentObjectState.Equals(new SalesInvoiceItemObjectStates(this.Session).Cancelled) &&
-                !this.CurrentObjectState.Equals(new SalesInvoiceItemObjectStates(this.Session).WrittenOff))
+            if (!this.CurrentObjectState.Equals(new SalesInvoiceItemObjectStates(this.Strategy.Session).Cancelled) &&
+                !this.CurrentObjectState.Equals(new SalesInvoiceItemObjectStates(this.Strategy.Session).WrittenOff))
             {
                 if (this.ExistAmountPaid && this.AmountPaid > 0 && this.AmountPaid < this.TotalIncVat)
                 {
-                    if (!this.CurrentObjectState.Equals(new SalesInvoiceItemObjectStates(Session).PartiallyPaid))
+                    if (!this.CurrentObjectState.Equals(new SalesInvoiceItemObjectStates(this.Strategy.Session).PartiallyPaid))
                     {
-                        this.CurrentObjectState = new SalesInvoiceItemObjectStates(Session).PartiallyPaid;
+                        this.CurrentObjectState = new SalesInvoiceItemObjectStates(this.Strategy.Session).PartiallyPaid;
                         this.DeriveCurrentObjectState(derivation);
                     }
                 }
 
                 if (this.ExistAmountPaid && this.AmountPaid > 0 && this.AmountPaid >= this.TotalIncVat)
                 {
-                    if (!this.CurrentObjectState.Equals(new SalesInvoiceItemObjectStates(Session).Paid))
+                    if (!this.CurrentObjectState.Equals(new SalesInvoiceItemObjectStates(this.Strategy.Session).Paid))
                     {
-                        this.CurrentObjectState = new SalesInvoiceItemObjectStates(Session).Paid;
+                        this.CurrentObjectState = new SalesInvoiceItemObjectStates(this.Strategy.Session).Paid;
                         this.DeriveCurrentObjectState(derivation);
                     }
                 }
@@ -362,12 +362,12 @@ namespace Allors.Domain
             {
                 var invoice = this.SalesInvoiceWhereSalesInvoiceItem;
 
-                if (invoice.CurrentObjectState.Equals(new SalesInvoiceObjectStates(this.Session).Cancelled))
+                if (invoice.CurrentObjectState.Equals(new SalesInvoiceObjectStates(this.Strategy.Session).Cancelled))
                 {
                     this.Cancel(derivation);
                 }
 
-                if (invoice.CurrentObjectState.Equals(new SalesInvoiceObjectStates(this.Session).WrittenOff))
+                if (invoice.CurrentObjectState.Equals(new SalesInvoiceObjectStates(this.Strategy.Session).WrittenOff))
                 {
                     this.WriteOff(derivation);
                 }
@@ -375,7 +375,7 @@ namespace Allors.Domain
 
             if (this.ExistCurrentObjectState && !this.CurrentObjectState.Equals(this.PreviousObjectState))
             {
-                var currentStatus = new SalesInvoiceItemStatusBuilder(this.Session).WithSalesInvoiceItemObjectState(this.CurrentObjectState).Build();
+                var currentStatus = new SalesInvoiceItemStatusBuilder(this.Strategy.Session).WithSalesInvoiceItemObjectState(this.CurrentObjectState).Build();
                 this.AddInvoiceItemStatus(currentStatus);
                 this.CurrentInvoiceItemStatus = currentStatus;
                 this.PreviousObjectState = this.CurrentObjectState;

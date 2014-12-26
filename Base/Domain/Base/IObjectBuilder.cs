@@ -24,6 +24,6 @@ namespace Allors
 
     public interface IObjectBuilder : IDisposable
     {
-        ObjectBase DefaultBuild();
+        IObject DefaultBuild();
     }
 }

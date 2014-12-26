@@ -33,7 +33,7 @@ namespace Allors.Domain
                 {
                     foreach (AgreementTerm term in agreement.AgreementTerms)
                     {
-                        if (term.TermType.Equals(new TermTypes(this.Session).PaymentNetDays))
+                        if (term.TermType.Equals(new TermTypes(this.Strategy.Session).PaymentNetDays))
                         {
                             int netDays;
                             if (int.TryParse(term.TermValue, out netDays))
@@ -86,7 +86,7 @@ namespace Allors.Domain
 
             if (!this.ExistInternalOrganisation)
             {
-                this.InternalOrganisation = Domain.Singleton.Instance(this.Session).DefaultInternalOrganisation;
+                this.InternalOrganisation = Domain.Singleton.Instance(this.Strategy.Session).DefaultInternalOrganisation;
             }
 
             if (!this.ExistAmountDue)
@@ -128,7 +128,7 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            if (this.Session is IDatabaseSession)
+            if (this.Strategy.Session is IDatabaseSession)
             {
                 var customerRelationships = this.InternalOrganisation.CustomerRelationshipsWhereInternalOrganisation;
                 customerRelationships.Filter.AddEquals(CustomerRelationships.Meta.SubAccountNumber, this.SubAccountNumber);
@@ -212,7 +212,7 @@ namespace Allors.Domain
                 foreach (Allors.Domain.SalesInvoice salesInvoice in this.Customer.SalesInvoicesWhereBillToCustomer)
                 {
                     if (salesInvoice.BilledFromInternalOrganisation.Equals(this.InternalOrganisation)
-                        && !salesInvoice.CurrentObjectState.Equals(new Allors.Domain.SalesInvoiceObjectStates(this.Session).Paid))
+                        && !salesInvoice.CurrentObjectState.Equals(new Allors.Domain.SalesInvoiceObjectStates(this.Strategy.Session).Paid))
                     {
                         if (salesInvoice.AmountPaid > 0)
                         {
@@ -222,7 +222,7 @@ namespace Allors.Domain
                         {
                             foreach (Allors.Domain.SalesInvoiceItem invoiceItem in salesInvoice.InvoiceItems)
                             {
-                                if (!invoiceItem.CurrentObjectState.Equals(new Allors.Domain.SalesInvoiceItemObjectStates(this.Session).Paid))
+                                if (!invoiceItem.CurrentObjectState.Equals(new Allors.Domain.SalesInvoiceItemObjectStates(this.Strategy.Session).Paid))
                                 {
                                     if (invoiceItem.ExistTotalIncVat)
                                     {
@@ -245,7 +245,7 @@ namespace Allors.Domain
                 foreach (SalesInvoice salesInvoice in this.Customer.SalesInvoicesWhereBillToCustomer)
                 {
                     if (salesInvoice.BilledFromInternalOrganisation.Equals(this.InternalOrganisation)
-                        && !salesInvoice.CurrentObjectState.Equals(new Allors.Domain.SalesInvoiceObjectStates(this.Session).Paid))
+                        && !salesInvoice.CurrentObjectState.Equals(new Allors.Domain.SalesInvoiceObjectStates(this.Strategy.Session).Paid))
                     {
                         var gracePeriod = salesInvoice.Store.PaymentGracePeriod;
 

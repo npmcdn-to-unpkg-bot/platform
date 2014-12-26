@@ -64,11 +64,6 @@ namespace Allors.Domain
             {
                 this.Protected = false;
             }
-
-            if (!this.ExistSearchData)
-            {
-                this.SearchData = new SearchDataBuilder(this.Session).Build();
-            }
         }
 
         public void AppsDerive(DerivableDerive method)
@@ -77,7 +72,7 @@ namespace Allors.Domain
 
             if (this.ExistChartOfAccountsWhereGeneralLedgerAccount)
             {
-                var extent = this.DatabaseSession.Extent<GeneralLedgerAccount>();
+                var extent = this.Strategy.DatabaseSession.Extent<GeneralLedgerAccount>();
                 extent.Filter.AddEquals(GeneralLedgerAccounts.Meta.ChartOfAccountsWhereGeneralLedgerAccount, this.ChartOfAccountsWhereGeneralLedgerAccount);
                 extent.Filter.AddEquals(GeneralLedgerAccounts.Meta.AccountNumber, this.AccountNumber);
 

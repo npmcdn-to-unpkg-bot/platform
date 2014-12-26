@@ -29,11 +29,11 @@ namespace Allors.Domain
     {
         public string DeriveNextInvoiceNumber(int year)
         {
-            var repositorySession = this.DatabaseSession.Database.CreateSession();
+            var repositorySession = this.Strategy.DatabaseSession.Database.CreateSession();
             var repositoryStore = (Store)repositorySession.Instantiate(this) ?? this;
 
             int salesInvoiceNumber;
-            if (repositoryStore.Owner.InvoiceSequence.Equals(new Allors.Domain.InvoiceSequences(this.Session).EnforcedSequence))
+            if (repositoryStore.Owner.InvoiceSequence.Equals(new Allors.Domain.InvoiceSequences(this.Strategy.Session).EnforcedSequence))
             {
                 repositoryStore.NextSalesInvoiceNumber = repositoryStore.ExistNextSalesInvoiceNumber ? repositoryStore.NextSalesInvoiceNumber : 1;
                 salesInvoiceNumber = repositoryStore.NextSalesInvoiceNumber;
@@ -53,7 +53,7 @@ namespace Allors.Domain
 
                 if (fiscalYearInvoiceNumber == null)
                 {
-                    fiscalYearInvoiceNumber = new FiscalYearInvoiceNumberBuilder(repositoryStore.Session).WithFiscalYear(year).Build();
+                    fiscalYearInvoiceNumber = new FiscalYearInvoiceNumberBuilder(repositoryStore.Strategy.Session).WithFiscalYear(year).Build();
                     repositoryStore.AddFiscalYearInvoiceNumber(fiscalYearInvoiceNumber);
                 }
 
@@ -81,7 +81,7 @@ namespace Allors.Domain
 
         public string DeriveNextShipmentNumber()
         {
-            var repositorySession = this.DatabaseSession.Database.CreateSession();
+            var repositorySession = this.Strategy.DatabaseSession.Database.CreateSession();
             var repositoryStore = (Store)repositorySession.Instantiate(this) ?? this;
 
             repositoryStore.NextOutgoingShipmentNumber = repositoryStore.ExistNextOutgoingShipmentNumber ? repositoryStore.NextOutgoingShipmentNumber : 1;
@@ -98,7 +98,7 @@ namespace Allors.Domain
 
         public string DeriveNextSalesOrderNumber()
         {
-            var repositorySession = this.DatabaseSession.Database.CreateSession();
+            var repositorySession = this.Strategy.DatabaseSession.Database.CreateSession();
             var repositoryStore = (Store)repositorySession.Instantiate(this) ?? this;
 
             repositoryStore.NextSalesOrderNumber = repositoryStore.ExistNextSalesOrderNumber ? repositoryStore.NextSalesOrderNumber : 1;
@@ -142,8 +142,8 @@ namespace Allors.Domain
                 this.SalesInvoiceNumberPrefix = "{0}";
             }
 
-            if (new TemplatePurposes(this.Session).SalesInvoice != null &&
-                new TemplatePurposes(this.Session).SalesInvoice.StringTemplatesWhereTemplatePurpose.Count > 0)
+            if (new TemplatePurposes(this.Strategy.Session).SalesInvoice != null &&
+                new TemplatePurposes(this.Strategy.Session).SalesInvoice.StringTemplatesWhereTemplatePurpose.Count > 0)
             {
                 if (!this.ExistSalesInvoiceTemplates)
                 {
@@ -154,16 +154,16 @@ namespace Allors.Domain
                     }
                     else
                     {
-                        templates = Singleton.Instance(this.Session).DefaultLocale.StringTemplatesWhereLocale;
+                        templates = Singleton.Instance(this.Strategy.Session).DefaultLocale.StringTemplatesWhereLocale;
                     }
 
-                    templates.Filter.AddEquals(StringTemplates.Meta.TemplatePurpose, new TemplatePurposes(this.Session).SalesInvoice);
+                    templates.Filter.AddEquals(StringTemplates.Meta.TemplatePurpose, new TemplatePurposes(this.Strategy.Session).SalesInvoice);
                     this.AddSalesInvoiceTemplate(templates.First);
                 }
             }
 
-            if (new TemplatePurposes(this.Session).SalesOrder != null &&
-                new TemplatePurposes(this.Session).SalesOrder.StringTemplatesWhereTemplatePurpose.Count > 0)
+            if (new TemplatePurposes(this.Strategy.Session).SalesOrder != null &&
+                new TemplatePurposes(this.Strategy.Session).SalesOrder.StringTemplatesWhereTemplatePurpose.Count > 0)
             {
                 if (!this.ExistSalesOrderTemplates)
                 {
@@ -174,16 +174,16 @@ namespace Allors.Domain
                     }
                     else
                     {
-                        templates = Domain.Singleton.Instance(this.Session).DefaultLocale.StringTemplatesWhereLocale;
+                        templates = Domain.Singleton.Instance(this.Strategy.Session).DefaultLocale.StringTemplatesWhereLocale;
                     }
 
-                    templates.Filter.AddEquals(StringTemplates.Meta.TemplatePurpose, new Domain.TemplatePurposes(this.Session).SalesOrder);
+                    templates.Filter.AddEquals(StringTemplates.Meta.TemplatePurpose, new Domain.TemplatePurposes(this.Strategy.Session).SalesOrder);
                     this.AddSalesOrderTemplate(templates.First);
                 }
             }
 
-            if (new TemplatePurposes(this.Session).CustomerShipment != null &&
-                new TemplatePurposes(this.Session).CustomerShipment.StringTemplatesWhereTemplatePurpose.Count > 0)
+            if (new TemplatePurposes(this.Strategy.Session).CustomerShipment != null &&
+                new TemplatePurposes(this.Strategy.Session).CustomerShipment.StringTemplatesWhereTemplatePurpose.Count > 0)
             {
                 if (!this.ExistCustomerShipmentTemplates)
                 {
@@ -194,10 +194,10 @@ namespace Allors.Domain
                     }
                     else
                     {
-                        templates = Domain.Singleton.Instance(this.Session).DefaultLocale.StringTemplatesWhereLocale;
+                        templates = Domain.Singleton.Instance(this.Strategy.Session).DefaultLocale.StringTemplatesWhereLocale;
                     }
 
-                    templates.Filter.AddEquals(StringTemplates.Meta.TemplatePurpose, new Domain.TemplatePurposes(this.Session).CustomerShipment);
+                    templates.Filter.AddEquals(StringTemplates.Meta.TemplatePurpose, new Domain.TemplatePurposes(this.Strategy.Session).CustomerShipment);
                     this.AddCustomerShipmentTemplate(templates.First);
                 }
             }
@@ -209,7 +209,7 @@ namespace Allors.Domain
 
             if (!this.ExistOwner)
             {
-                this.Owner = Domain.Singleton.Instance(this.Session).DefaultInternalOrganisation;
+                this.Owner = Domain.Singleton.Instance(this.Strategy.Session).DefaultInternalOrganisation;
 
                 if (this.ExistOwner && this.Owner.ExistDefaultFacility)
                 {

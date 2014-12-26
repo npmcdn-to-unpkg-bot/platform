@@ -89,7 +89,7 @@ namespace Allors.Domain
 
             var invoices = this.Party.SalesInvoicesWhereBillToCustomer;
             invoices.Filter.AddEquals(SalesInvoices.Meta.BilledFromInternalOrganisation, this.InternalOrganisation);
-            invoices.Filter.AddNot().AddEquals(SalesInvoices.Meta.CurrentObjectState, new SalesInvoiceObjectStates(this.DatabaseSession).WrittenOff);
+            invoices.Filter.AddNot().AddEquals(SalesInvoices.Meta.CurrentObjectState, new SalesInvoiceObjectStates(this.Strategy.DatabaseSession).WrittenOff);
             invoices.Filter.AddBetween(SalesInvoices.Meta.InvoiceDate, new DateTime(this.Year, this.Month, 01), new DateTime(this.Year, this.Month, lastDayOfMonth));
 
             foreach (SalesInvoice salesInvoice in invoices)
@@ -115,15 +115,15 @@ namespace Allors.Domain
 
             if (this.ProductCategory.ExistParents)
             {
-                SalesRepPartyProductCategoryRevenues.AppsFindOrCreateAsDependable(Session, this);
+                SalesRepPartyProductCategoryRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, this);
             }
 
             if (this.ExistParty && this.ExistProductCategory)
             {
-                var salesRepProductCategoryRevenue = SalesRepProductCategoryRevenues.AppsFindOrCreateAsDependable(this.Session, this);
+                var salesRepProductCategoryRevenue = SalesRepProductCategoryRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, this);
                 salesRepProductCategoryRevenue.Derive().Execute();
 
-                var salesRepPartyRevenue = SalesRepPartyRevenues.AppsFindOrCreateAsDependable(this.Session, this);
+                var salesRepPartyRevenue = SalesRepPartyRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, this);
                 salesRepPartyRevenue.Derive().Execute();
             }
         }

@@ -42,7 +42,7 @@ namespace Allors.Domain
 
         public int DeriveNextSubAccountNumber()
         {
-            var repositorySession = this.DatabaseSession.Database.CreateSession();
+            var repositorySession = this.Strategy.DatabaseSession.Database.CreateSession();
             var repositoryOrganisation = (InternalOrganisation)repositorySession.Instantiate(this) ?? this;
 
             repositoryOrganisation.NextSubAccountNumber = repositoryOrganisation.ExistNextSubAccountNumber ? repositoryOrganisation.NextSubAccountNumber : 19;
@@ -59,7 +59,7 @@ namespace Allors.Domain
 
         public string DeriveNextPurchaseInvoiceNumber()
         {
-            var repositorySession = this.DatabaseSession.Database.CreateSession();
+            var repositorySession = this.Strategy.DatabaseSession.Database.CreateSession();
             var repositoryOrganisation = (InternalOrganisation)repositorySession.Instantiate(this) ?? this;
 
             repositoryOrganisation.NextPurchaseInvoiceNumber = repositoryOrganisation.ExistNextPurchaseInvoiceNumber ? repositoryOrganisation.NextPurchaseInvoiceNumber : 1;
@@ -76,7 +76,7 @@ namespace Allors.Domain
 
         public string DeriveNextShipmentNumber()
         {
-            var repositorySession = this.DatabaseSession.Database.CreateSession();
+            var repositorySession = this.Strategy.DatabaseSession.Database.CreateSession();
             var repositoryOrganisation = (InternalOrganisation)repositorySession.Instantiate(this) ?? this;
 
             repositoryOrganisation.NextIncomingShipmentNumber = repositoryOrganisation.ExistNextIncomingShipmentNumber ? repositoryOrganisation.NextIncomingShipmentNumber : 1;
@@ -93,7 +93,7 @@ namespace Allors.Domain
 
         public string DeriveNextPurchaseOrderNumber()
         {
-            var repositorySession = this.DatabaseSession.Database.CreateSession();
+            var repositorySession = this.Strategy.DatabaseSession.Database.CreateSession();
             var repositoryOrganisation = (InternalOrganisation)repositorySession.Instantiate(this) ?? this;
 
             repositoryOrganisation.NextPurchaseOrderNumber = repositoryOrganisation.ExistNextPurchaseOrderNumber ? repositoryOrganisation.NextPurchaseOrderNumber : 1;
@@ -134,7 +134,7 @@ namespace Allors.Domain
 
             if (!this.ExistInvoiceSequence)
             {
-                this.InvoiceSequence = new InvoiceSequences(this.Session).RestartOnFiscalYear;
+                this.InvoiceSequence = new InvoiceSequences(this.Strategy.Session).RestartOnFiscalYear;
             }
 
             if (!this.ExistFiscalYearStartMonth)
@@ -147,48 +147,43 @@ namespace Allors.Domain
                 this.FiscalYearStartDay = 1;
             }
             
-            if (this.DatabaseSession.Extent<TemplatePurpose>().Count > 0 &&
-                this.DatabaseSession.Extent<StringTemplate>().Count > 0)
+            if (this.Strategy.DatabaseSession.Extent<TemplatePurpose>().Count > 0 &&
+                this.Strategy.DatabaseSession.Extent<StringTemplate>().Count > 0)
             {
                 if (!this.ExistPurchaseOrderTemplates)
                 {
-                    var templates = this.ExistLocale ? this.Locale.StringTemplatesWhereLocale : Singleton.Instance(this.Session).DefaultLocale.StringTemplatesWhereLocale;
-                    var template = templates.FirstOrDefault(t => t.ExistTemplatePurpose && t.TemplatePurpose.Equals(new TemplatePurposes(this.Session).PurchaseOrder));
+                    var templates = this.ExistLocale ? this.Locale.StringTemplatesWhereLocale : Singleton.Instance(this.Strategy.Session).DefaultLocale.StringTemplatesWhereLocale;
+                    var template = templates.FirstOrDefault(t => t.ExistTemplatePurpose && t.TemplatePurpose.Equals(new TemplatePurposes(this.Strategy.Session).PurchaseOrder));
                     this.AddPurchaseOrderTemplate(template);
                 }
 
                 if (!this.ExistQuoteTemplates)
                 {
-                    var templates = this.ExistLocale ? this.Locale.StringTemplatesWhereLocale : Singleton.Instance(this.Session).DefaultLocale.StringTemplatesWhereLocale;
-                    var template = templates.FirstOrDefault(t => t.ExistTemplatePurpose && t.TemplatePurpose.Equals(new TemplatePurposes(this.Session).Quote));
+                    var templates = this.ExistLocale ? this.Locale.StringTemplatesWhereLocale : Singleton.Instance(this.Strategy.Session).DefaultLocale.StringTemplatesWhereLocale;
+                    var template = templates.FirstOrDefault(t => t.ExistTemplatePurpose && t.TemplatePurpose.Equals(new TemplatePurposes(this.Strategy.Session).Quote));
                     this.AddQuoteTemplate(template);
                 }
 
                 if (!this.ExistPickListTemplates)
                 {
-                    var templates = this.ExistLocale ? this.Locale.StringTemplatesWhereLocale : Singleton.Instance(this.Session).DefaultLocale.StringTemplatesWhereLocale;
-                    var template = templates.FirstOrDefault(t => t.ExistTemplatePurpose && t.TemplatePurpose.Equals(new TemplatePurposes(this.Session).PickList));
+                    var templates = this.ExistLocale ? this.Locale.StringTemplatesWhereLocale : Singleton.Instance(this.Strategy.Session).DefaultLocale.StringTemplatesWhereLocale;
+                    var template = templates.FirstOrDefault(t => t.ExistTemplatePurpose && t.TemplatePurpose.Equals(new TemplatePurposes(this.Strategy.Session).PickList));
                     this.AddPickListTemplate(template);
                 }
 
                 if (!this.ExistPackagingSlipTemplates)
                 {
-                    var templates = this.ExistLocale ? this.Locale.StringTemplatesWhereLocale : Singleton.Instance(this.Session).DefaultLocale.StringTemplatesWhereLocale;
-                    var template = templates.FirstOrDefault(t => t.ExistTemplatePurpose && t.TemplatePurpose.Equals(new TemplatePurposes(this.Session).PackagingSlip));
+                    var templates = this.ExistLocale ? this.Locale.StringTemplatesWhereLocale : Singleton.Instance(this.Strategy.Session).DefaultLocale.StringTemplatesWhereLocale;
+                    var template = templates.FirstOrDefault(t => t.ExistTemplatePurpose && t.TemplatePurpose.Equals(new TemplatePurposes(this.Strategy.Session).PackagingSlip));
                     this.AddPackagingSlipTemplate(template);
                 }
 
                 if (!this.ExistPurchaseOrderTemplates)
                 {
-                    var templates = this.ExistLocale ? this.Locale.StringTemplatesWhereLocale : Singleton.Instance(this.Session).DefaultLocale.StringTemplatesWhereLocale;
-                    var template = templates.FirstOrDefault(t => t.ExistTemplatePurpose && t.TemplatePurpose.Equals(new TemplatePurposes(this.Session).PurchaseShipment));
+                    var templates = this.ExistLocale ? this.Locale.StringTemplatesWhereLocale : Singleton.Instance(this.Strategy.Session).DefaultLocale.StringTemplatesWhereLocale;
+                    var template = templates.FirstOrDefault(t => t.ExistTemplatePurpose && t.TemplatePurpose.Equals(new TemplatePurposes(this.Strategy.Session).PurchaseShipment));
                     this.AddPurchaseOrderTemplate(template);
                 }
-            }
-
-            if (!this.ExistSearchData)
-            {
-                this.SearchData = new SearchDataBuilder(this.Session).Build();
             }
         }
 
@@ -400,11 +395,11 @@ namespace Allors.Domain
 
             if (!this.ExistOwnerSecurityToken)
             {
-                var securityToken = new SecurityTokenBuilder(this.Session).Build();
+                var securityToken = new SecurityTokenBuilder(this.Strategy.Session).Build();
                 this.OwnerSecurityToken = securityToken;
 
                 this.AddSecurityToken(this.OwnerSecurityToken);
-                this.AddSecurityToken(Singleton.Instance(this.Session).AdministratorSecurityToken);
+                this.AddSecurityToken(Singleton.Instance(this.Strategy.Session).AdministratorSecurityToken);
             }
 
             this.DeriveEmployeeUserGroups(derivation);
@@ -412,7 +407,7 @@ namespace Allors.Domain
 
         private void AppsDeriveEmployeeUserGroups(IDerivation derivation)
         {
-            if (this.IsInDatabase)
+            if (this.Strategy.Session.Population is IDatabase)
             {
                 var employeeUserGroupsByName = new Dictionary<string, UserGroup>();
                 foreach (UserGroup userGroup in this.UserGroupsWhereParty)
@@ -426,13 +421,13 @@ namespace Allors.Domain
 
                     if (!employeeUserGroupsByName.ContainsKey(userGroupName))
                     {
-                        var userGroup = new UserGroupBuilder(this.DatabaseSession)
+                        var userGroup = new UserGroupBuilder(this.Strategy.DatabaseSession)
                             .WithName(userGroupName)
                             .WithParty(this)
                             .WithParent(role.UserGroupWhereRole)
                             .Build();
 
-                        new AccessControlBuilder(this.DatabaseSession).WithRole(role).WithSubjectGroup(userGroup).WithObject(this.OwnerSecurityToken).Build();
+                        new AccessControlBuilder(this.Strategy.DatabaseSession).WithRole(role).WithSubjectGroup(userGroup).WithObject(this.OwnerSecurityToken).Build();
                     }
                 }
             }
@@ -453,32 +448,32 @@ namespace Allors.Domain
 
             var fromDate = new DateTime(year, this.FiscalYearStartMonth, this.FiscalYearStartDay).Date;
 
-            var yearPeriod = new AccountingPeriodBuilder(this.Session)
+            var yearPeriod = new AccountingPeriodBuilder(this.Strategy.Session)
                 .WithPeriodNumber(1)
-                .WithTimeFrequency(new TimeFrequencies(this.Session).Year)
+                .WithTimeFrequency(new TimeFrequencies(this.Strategy.Session).Year)
                 .WithFromDate(fromDate)
                 .WithThroughDate(fromDate.AddYears(1).AddSeconds(-1).Date)
                 .Build();
 
-            var semesterPeriod = new AccountingPeriodBuilder(this.Session)
+            var semesterPeriod = new AccountingPeriodBuilder(this.Strategy.Session)
                 .WithPeriodNumber(1)
-                .WithTimeFrequency(new TimeFrequencies(this.Session).Semester)
+                .WithTimeFrequency(new TimeFrequencies(this.Strategy.Session).Semester)
                 .WithFromDate(fromDate)
                 .WithThroughDate(fromDate.AddMonths(6).AddSeconds(-1).Date)
                 .WithParent(yearPeriod)
                 .Build();
 
-            var trimesterPeriod = new AccountingPeriodBuilder(this.Session)
+            var trimesterPeriod = new AccountingPeriodBuilder(this.Strategy.Session)
                 .WithPeriodNumber(1)
-                .WithTimeFrequency(new TimeFrequencies(this.Session).Trimester)
+                .WithTimeFrequency(new TimeFrequencies(this.Strategy.Session).Trimester)
                 .WithFromDate(fromDate)
                 .WithThroughDate(fromDate.AddMonths(3).AddSeconds(-1).Date)
                 .WithParent(semesterPeriod)
                 .Build();
 
-            var monthPeriod = new AccountingPeriodBuilder(this.Session)
+            var monthPeriod = new AccountingPeriodBuilder(this.Strategy.Session)
                 .WithPeriodNumber(1)
-                .WithTimeFrequency(new TimeFrequencies(this.Session).Month)
+                .WithTimeFrequency(new TimeFrequencies(this.Strategy.Session).Month)
                 .WithFromDate(fromDate)
                 .WithThroughDate(fromDate.AddMonths(1).AddSeconds(-1).Date)
                 .WithParent(trimesterPeriod)

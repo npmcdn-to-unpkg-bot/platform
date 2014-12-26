@@ -91,7 +91,7 @@ namespace Allors.Domain
 
             if (this.ProductCategory.ExistParents)
             {
-                SalesRepProductCategoryRevenues.AppsFindOrCreateAsDependable(Session, this);
+                SalesRepProductCategoryRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, this);
             }
         }
     }

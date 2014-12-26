@@ -28,12 +28,7 @@ namespace Allors.Domain
 
             if (!this.ExistCurrentObjectState)
             {
-                this.CurrentObjectState = new BudgetObjectStates(this.DatabaseSession).Opened;
-            }
-
-            if (!this.ExistSearchData)
-            {
-                this.SearchData = new SearchDataBuilder(this.Session).Build();
+                this.CurrentObjectState = new BudgetObjectStates(this.Strategy.DatabaseSession).Opened;
             }
         }
 

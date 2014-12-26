@@ -76,7 +76,7 @@ namespace Allors.Domain
         {
             this.RemoveSecurityTokens();
             this.AddSecurityToken(this.OwnerSecurityToken);
-            this.AddSecurityToken(Singleton.Instance(this.Session).AdministratorSecurityToken);
+            this.AddSecurityToken(Singleton.Instance(this.Strategy.Session).AdministratorSecurityToken);
 
             foreach (Organisation organisation in this.OrganisationsWhereCurrentContact)
             {
@@ -363,21 +363,21 @@ namespace Allors.Domain
         {
             if (!this.ExistOwnerSecurityToken)
             {
-                var mySecurityToken = new SecurityTokenBuilder(this.Session).Build();
+                var mySecurityToken = new SecurityTokenBuilder(this.Strategy.Session).Build();
                 this.OwnerSecurityToken = mySecurityToken;
 
                 //// In case person does not belong to any group (i.e. private person placing an order) this person should be granted customer permissions.
-                if (!this.ExistAccessControlsWhereSubject && this.IsInDatabase)
+                if (!this.ExistAccessControlsWhereSubject && this.Strategy.Session.Population is IDatabase)
                 {
-                    var customerRole = new Roles(this.DatabaseSession).Customer;
-                    new AccessControlBuilder(this.DatabaseSession)
+                    var customerRole = new Roles(this.Strategy.DatabaseSession).Customer;
+                    new AccessControlBuilder(this.Strategy.DatabaseSession)
                         .WithRole(customerRole)
                         .WithSubject(this)
                         .WithObject(this.OwnerSecurityToken)
                         .Build();
 
-                    var ownerRole = new Roles(this.DatabaseSession).Owner;
-                    new AccessControlBuilder(this.DatabaseSession)
+                    var ownerRole = new Roles(this.Strategy.DatabaseSession).Owner;
+                    new AccessControlBuilder(this.Strategy.DatabaseSession)
                         .WithRole(ownerRole)
                         .WithSubject(this)
                         .WithObject(this.OwnerSecurityToken)

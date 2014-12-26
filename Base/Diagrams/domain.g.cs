@@ -1,6 +1,6 @@
 namespace Allors.Domain
 {
-	public interface UniquelyIdentifiable 
+	public interface UniquelyIdentifiable  : Object 
 	{
 					global::System.Guid UniqueId {set;}
 
@@ -10,19 +10,22 @@ namespace Allors.Domain
 					global::System.String PrintContent {set;}
 
 	}
-	public interface Localised 
+	public interface Localised  : Object 
 	{
 					Locale Locale {set;}
 
 	}
-	public interface Period 
+	public interface Period  : Object 
 	{
-					global::System.DateTime? FromDate {set;}
+					global::System.DateTime FromDate {set;}
 
 					global::System.DateTime? ThroughDate {set;}
 
 	}
-	public interface User  : SecurityTokenOwner, UserInterfaceable, Localised 
+	public interface Deletable  : Object 
+	{
+	}
+	public interface User  : SecurityTokenOwner, UserInterfaceable, Localised, Deletable 
 	{
 					global::System.Boolean? UserEmailConfirmed {set;}
 
@@ -36,7 +39,7 @@ namespace Allors.Domain
 	public interface SearchResult  : UserInterfaceable 
 	{
 	}
-	public interface SecurityTokenOwner 
+	public interface SecurityTokenOwner  : Object 
 	{
 					SecurityToken OwnerSecurityToken {set;}
 
@@ -53,7 +56,7 @@ namespace Allors.Domain
 					global::System.Boolean IsActive {set;}
 
 	}
-	public interface Derivable 
+	public interface Derivable  : Object 
 	{
 	}
 	public interface AccessControlledObject  : Derivable 
@@ -68,6 +71,9 @@ namespace Allors.Domain
 					global::System.String DisplayName {set;}
 
 	}
+	public interface Object 
+	{
+	}
 	public interface ObjectState  : UniquelyIdentifiable 
 	{
 					Permission DeniedPermissions {set;}
@@ -75,12 +81,12 @@ namespace Allors.Domain
 					global::System.String Name {set;}
 
 	}
-	public interface Commentable 
+	public interface Commentable  : Object 
 	{
 					global::System.String Comment {set;}
 
 	}
-	public interface Searchable 
+	public interface Searchable  : Object 
 	{
 					SearchData SearchData {set;}
 
@@ -331,7 +337,7 @@ namespace Allors.Domain
 					LocalisedText LocalisedNames {set;}
 
 	}
-	public interface SearchData  : Derivable 
+	public interface SearchData  : Derivable, Deletable 
 	{
 					global::System.String CharacterBoundaryText {set;}
 
@@ -362,7 +368,7 @@ namespace Allors.Domain
 					global::System.String Hash {set;}
 
 	}
-	public interface Permission  : UserInterfaceable 
+	public interface Permission  : Deletable, UserInterfaceable 
 	{
 					global::System.Guid OperandTypePointer {set;}
 
@@ -371,10 +377,10 @@ namespace Allors.Domain
 					global::System.Int32 OperationEnum {set;}
 
 	}
-	public interface SecurityToken 
+	public interface SecurityToken  : Deletable, Derivable 
 	{
 	}
-	public interface Transition 
+	public interface Transition  : Object 
 	{
 					ObjectState FromStates {set;}
 
@@ -388,7 +394,7 @@ namespace Allors.Domain
 					global::System.String Name {set;}
 
 	}
-	public interface Login  : Derivable 
+	public interface Login  : Derivable, Deletable 
 	{
 					global::System.String Key {set;}
 
@@ -422,7 +428,7 @@ namespace Allors.Domain
 					global::System.String IsoCode {set;}
 
 	}
-	public interface AccessControl  : UserInterfaceable 
+	public interface AccessControl  : Deletable, UserInterfaceable 
 	{
 					UserGroup SubjectGroups {set;}
 
@@ -470,7 +476,7 @@ namespace Allors.Domain
 					Address Addresses {set;}
 
 	}
-	public interface Image 
+	public interface Image  : Deletable, Derivable 
 	{
 					Media Original {set;}
 
@@ -479,7 +485,7 @@ namespace Allors.Domain
 					global::System.String OriginalFilename {set;}
 
 	}
-	public interface Media  : UniquelyIdentifiable, UserInterfaceable 
+	public interface Media  : UniquelyIdentifiable, UserInterfaceable, Deletable 
 	{
 					MediaType MediaType {set;}
 
@@ -619,7 +625,7 @@ namespace Allors.Domain
 	public interface DerivationLogC2  : Derivable, DerivationLogI12 
 	{
 	}
-	public interface Dependent  : Derivable 
+	public interface Dependent  : Derivable, Deletable 
 	{
 					Dependee Dependee {set;}
 

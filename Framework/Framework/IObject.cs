@@ -43,10 +43,5 @@ namespace Allors
         /// </summary>
         /// <value>The object id.</value>
         ObjectId Id { get; }
-
-        /// <summary>
-        /// Deletes this instance.
-        /// </summary>
-        void Delete();
     }
 }

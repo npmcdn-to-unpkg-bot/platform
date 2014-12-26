@@ -288,6 +288,8 @@ namespace Allors.Meta
             AppsPartyProductCategoryRevenueHistory();
             AppsPartyRevenueHistory();
             AppsSalesRepCommission();
+            AppsStringTemplate();
+
 
             // HACK: 
             foreach (var roleType in meta.RoleTypes)
@@ -297,6 +299,11 @@ namespace Allors.Meta
                     roleType.IsRequired = true;
                 }
             }
+        }
+
+        private static void AppsStringTemplate()
+        {
+            StringTemplateTemplatePurpose.IsRequired = true;
         }
 
         private static void AppsSalesRepCommission()

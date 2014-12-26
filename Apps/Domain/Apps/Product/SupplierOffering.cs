@@ -49,7 +49,7 @@ namespace Allors.Domain
             var supplier = this.Supplier as Organisation;
             if (supplier != null && good != null)
             {
-                if (good.ExistInventoryItemKind && good.InventoryItemKind.Equals(new InventoryItemKinds(this.Session).NonSerialized))
+                if (good.ExistInventoryItemKind && good.InventoryItemKind.Equals(new InventoryItemKinds(this.Strategy.Session).NonSerialized))
                 {
                     foreach (SupplierRelationship supplierRelationship in supplier.SupplierRelationshipsWhereSupplier)
                     {
@@ -61,7 +61,7 @@ namespace Allors.Domain
 
                             if (inventoryItem == null)
                             {
-                                new NonSerializedInventoryItemBuilder(this.Session).WithFacility(facility).WithGood(good).Build();
+                                new NonSerializedInventoryItemBuilder(this.Strategy.Session).WithFacility(facility).WithGood(good).Build();
                             }
                         }
                     }
@@ -70,7 +70,7 @@ namespace Allors.Domain
                 {
                     if (good.ExistFinishedGood &&
                         good.FinishedGood.ExistInventoryItemKind && 
-                        good.FinishedGood.InventoryItemKind.Equals(new InventoryItemKinds(this.Session).NonSerialized))
+                        good.FinishedGood.InventoryItemKind.Equals(new InventoryItemKinds(this.Strategy.Session).NonSerialized))
                     {
                         foreach (SupplierRelationship supplierRelationship in supplier.SupplierRelationshipsWhereSupplier)
                         {
@@ -82,7 +82,7 @@ namespace Allors.Domain
 
                                 if (inventoryItem == null)
                                 {
-                                    new NonSerializedInventoryItemBuilder(this.Session).WithFacility(facility).WithPart(good.FinishedGood).Build();
+                                    new NonSerializedInventoryItemBuilder(this.Strategy.Session).WithFacility(facility).WithPart(good.FinishedGood).Build();
                                 }
                             }
                         }

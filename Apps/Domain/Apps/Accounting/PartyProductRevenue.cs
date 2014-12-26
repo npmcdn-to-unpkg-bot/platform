@@ -84,7 +84,7 @@ namespace Allors.Domain
 
             var invoices = this.Party.SalesInvoicesWhereBillToCustomer;
             invoices.Filter.AddEquals(SalesInvoices.Meta.BilledFromInternalOrganisation, this.InternalOrganisation);
-            invoices.Filter.AddNot().AddEquals(SalesInvoices.Meta.CurrentObjectState, new SalesInvoiceObjectStates(this.DatabaseSession).WrittenOff);
+            invoices.Filter.AddNot().AddEquals(SalesInvoices.Meta.CurrentObjectState, new SalesInvoiceObjectStates(this.Strategy.DatabaseSession).WrittenOff);
             invoices.Filter.AddBetween(SalesInvoices.Meta.InvoiceDate, new DateTime(this.Year, this.Month, 01), new DateTime(this.Year, this.Month, lastDayOfMonth));
 
             foreach (SalesInvoice salesInvoice in invoices)
@@ -105,7 +105,7 @@ namespace Allors.Domain
                 var histories = this.Party.PartyProductRevenueHistoriesWhereParty;
                 histories.Filter.AddEquals(PartyProductRevenueHistories.Meta.InternalOrganisation, this.InternalOrganisation);
                 histories.Filter.AddEquals(PartyProductRevenueHistories.Meta.Product, this.Product);
-                var history = histories.First ?? new PartyProductRevenueHistoryBuilder(this.Session)
+                var history = histories.First ?? new PartyProductRevenueHistoryBuilder(this.Strategy.Session)
                                                      .WithCurrency(this.Currency)
                                                      .WithInternalOrganisation(this.InternalOrganisation)
                                                      .WithParty(this.Party)
@@ -119,13 +119,13 @@ namespace Allors.Domain
 
             if (this.ExistParty)
             {
-                var partyRevenue = PartyRevenues.AppsFindOrCreateAsDependable(this.Session, this);
+                var partyRevenue = PartyRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, this);
                 partyRevenue.Derive().Execute();
             }
 
             if (this.ExistProduct)
             {
-                var productRevenue = ProductRevenues.AppsFindOrCreateAsDependable(this.Session, this);
+                var productRevenue = ProductRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, this);
                 productRevenue.Derive().Execute();
 
                 foreach (ProductCategory productCategory in this.Product.ProductCategories)
@@ -136,7 +136,7 @@ namespace Allors.Domain
                     partyProductCategoryRevenues.Filter.AddEquals(PartyProductCategoryRevenues.Meta.Month, this.Month);
                     partyProductCategoryRevenues.Filter.AddEquals(PartyProductCategoryRevenues.Meta.ProductCategory, productCategory);
                     var partyProductCategoryRevenue = partyProductCategoryRevenues.First
-                                                      ?? new PartyProductCategoryRevenueBuilder(this.Session)
+                                                      ?? new PartyProductCategoryRevenueBuilder(this.Strategy.Session)
                                                                 .WithInternalOrganisation(this.InternalOrganisation)
                                                                 .WithParty(this.Party)
                                                                 .WithProductCategory(productCategory)

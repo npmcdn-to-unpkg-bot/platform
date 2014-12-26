@@ -57,18 +57,13 @@ namespace Allors.Domain
             return false;
         }
 
-        protected override void BaseOnPostBuild(IObjectBuilder objectBuilder)
+        public void BaseOnPostBuild(ObjectOnPostBuild method)
         {
-            base.BaseOnPostBuild(objectBuilder);
+            var builder = method.Builder;
 
             if (!this.ExistUserEmailConfirmed)
             {
                 this.UserEmailConfirmed = false;
-            }
-
-            if (!this.ExistSearchData)
-            {
-                this.SearchData = new SearchDataBuilder(this.Session).Build();
             }
 
             this.BuildOwnerSecurityToken();
@@ -129,35 +124,17 @@ namespace Allors.Domain
         {
             if (!this.ExistOwnerSecurityToken)
             {
-                var mySecurityToken = new SecurityTokenBuilder(this.Session).Build();
+                var mySecurityToken = new SecurityTokenBuilder(this.Strategy.Session).Build();
                 this.OwnerSecurityToken = mySecurityToken;
 
-                if (!this.ExistAccessControlsWhereSubject && this.IsInDatabase)
+                if (!this.ExistAccessControlsWhereSubject && this.Strategy.Session.Population is IDatabase)
                 {
-                    new AccessControlBuilder(this.DatabaseSession)
-                        .WithRole(new Roles(this.DatabaseSession).Owner)
+                    new AccessControlBuilder(this.Strategy.DatabaseSession)
+                        .WithRole(new Roles(this.Strategy.DatabaseSession).Owner)
                         .WithSubject(this)
                         .WithObject(this.OwnerSecurityToken)
                         .Build();
                 }
-            }
-        }
-
-        private void CoreDelete()
-        {
-            if (this.ExistSearchData)
-            {
-                this.SearchData.Delete();
-            }
-
-            if (this.ExistOwnerSecurityToken)
-            {
-                foreach (AccessControl acl in this.OwnerSecurityToken.AccessControlsWhereObject)
-                {
-                    acl.Delete();
-                }
-
-                this.OwnerSecurityToken.Delete();
             }
         }
     }

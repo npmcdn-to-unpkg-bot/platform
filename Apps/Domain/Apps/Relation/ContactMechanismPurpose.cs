@@ -26,7 +26,7 @@ namespace Allors.Domain
         {
             get
             {
-                return this.Equals(new ContactMechanismPurposes(this.Session).HeadQuarters);
+                return this.Equals(new ContactMechanismPurposes(this.Strategy.Session).HeadQuarters);
             }
         }
 
@@ -34,7 +34,7 @@ namespace Allors.Domain
         {
             get
             {
-                return this.Equals(new ContactMechanismPurposes(this.Session).SalesOffice);
+                return this.Equals(new ContactMechanismPurposes(this.Strategy.Session).SalesOffice);
             }
         }
 
@@ -42,7 +42,7 @@ namespace Allors.Domain
         {
             get
             {
-                return this.Equals(new ContactMechanismPurposes(this.Session).HomeAddress);
+                return this.Equals(new ContactMechanismPurposes(this.Strategy.Session).HomeAddress);
             }
         }
 
@@ -50,7 +50,7 @@ namespace Allors.Domain
         {
             get
             {
-                return this.Equals(new ContactMechanismPurposes(this.Session).GeneralFaxNumber);
+                return this.Equals(new ContactMechanismPurposes(this.Strategy.Session).GeneralFaxNumber);
             }
         }
 
@@ -58,7 +58,7 @@ namespace Allors.Domain
         {
             get
             {
-                return this.Equals(new ContactMechanismPurposes(this.Session).GeneralPhoneNumber);
+                return this.Equals(new ContactMechanismPurposes(this.Strategy.Session).GeneralPhoneNumber);
             }
         }
 
@@ -66,7 +66,7 @@ namespace Allors.Domain
         {
             get
             {
-                return this.Equals(new ContactMechanismPurposes(this.Session).BillingAddress);
+                return this.Equals(new ContactMechanismPurposes(this.Strategy.Session).BillingAddress);
             }
         }
 
@@ -74,7 +74,7 @@ namespace Allors.Domain
         {
             get
             {
-                return this.Equals(new ContactMechanismPurposes(this.Session).InternetAddress);
+                return this.Equals(new ContactMechanismPurposes(this.Strategy.Session).InternetAddress);
             }
         }
 
@@ -82,7 +82,7 @@ namespace Allors.Domain
         {
             get
             {
-                return this.Equals(new ContactMechanismPurposes(this.Session).OrderAddress);
+                return this.Equals(new ContactMechanismPurposes(this.Strategy.Session).OrderAddress);
             }
         }
 
@@ -90,7 +90,7 @@ namespace Allors.Domain
         {
             get
             {
-                return this.Equals(new ContactMechanismPurposes(this.Session).ShippingAddress);
+                return this.Equals(new ContactMechanismPurposes(this.Strategy.Session).ShippingAddress);
             }
         }
 
@@ -98,7 +98,7 @@ namespace Allors.Domain
         {
             get
             {
-                return this.Equals(new ContactMechanismPurposes(this.Session).BillingInquiriesPhone);
+                return this.Equals(new ContactMechanismPurposes(this.Strategy.Session).BillingInquiriesPhone);
             }
         }
 
@@ -106,7 +106,7 @@ namespace Allors.Domain
         {
             get
             {
-                return this.Equals(new ContactMechanismPurposes(this.Session).OrderInquiriesPhone);
+                return this.Equals(new ContactMechanismPurposes(this.Strategy.Session).OrderInquiriesPhone);
             }
         }
 
@@ -114,7 +114,7 @@ namespace Allors.Domain
         {
             get
             {
-                return this.Equals(new ContactMechanismPurposes(this.Session).ShippingInquiriesPhone);
+                return this.Equals(new ContactMechanismPurposes(this.Strategy.Session).ShippingInquiriesPhone);
             }
         }
 
@@ -122,7 +122,7 @@ namespace Allors.Domain
         {
             get
             {
-                return this.Equals(new ContactMechanismPurposes(this.Session).BillingInquiriesFax);
+                return this.Equals(new ContactMechanismPurposes(this.Strategy.Session).BillingInquiriesFax);
             }
         }
 
@@ -130,7 +130,7 @@ namespace Allors.Domain
         {
             get
             {
-                return this.Equals(new ContactMechanismPurposes(this.Session).OrderInquiriesFax);
+                return this.Equals(new ContactMechanismPurposes(this.Strategy.Session).OrderInquiriesFax);
             }
         }
 
@@ -138,7 +138,7 @@ namespace Allors.Domain
         {
             get
             {
-                return this.Equals(new ContactMechanismPurposes(this.Session).ShippingInquiriesFax);
+                return this.Equals(new ContactMechanismPurposes(this.Strategy.Session).ShippingInquiriesFax);
             }
         }
 
@@ -146,7 +146,7 @@ namespace Allors.Domain
         {
             get
             {
-                return this.Equals(new ContactMechanismPurposes(this.Session).PersonalEmailAddress);
+                return this.Equals(new ContactMechanismPurposes(this.Strategy.Session).PersonalEmailAddress);
             }
         }
 
@@ -154,7 +154,7 @@ namespace Allors.Domain
         {
             get
             {
-                return this.Equals(new ContactMechanismPurposes(this.Session).CellPhoneNumber);
+                return this.Equals(new ContactMechanismPurposes(this.Strategy.Session).CellPhoneNumber);
             }
         }
 }

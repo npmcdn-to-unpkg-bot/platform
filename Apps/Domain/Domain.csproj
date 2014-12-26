@@ -203,9 +203,6 @@
     <Compile Include="..\..\Base\Domain\Base\Drawing\BitmapExtensions.cs">
       <Link>Base\Drawing\BitmapExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Domain\Base\IObjectBase.cs">
-      <Link>Base\IObjectBase.cs</Link>
-    </Compile>
     <Compile Include="..\..\Base\Domain\Base\IObjectBuilder.cs">
       <Link>Base\IObjectBuilder.cs</Link>
     </Compile>
@@ -260,11 +257,14 @@
     <Compile Include="..\..\Base\Domain\Base\Meta\Path.cs">
       <Link>Base\Meta\Path.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Domain\Base\ObjectBase.cs">
-      <Link>Base\ObjectBase.cs</Link>
-    </Compile>
     <Compile Include="..\..\Base\Domain\Base\ObjectBuilder.cs">
       <Link>Base\ObjectBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Base\Domain\Base\ObjectExtensions.cs">
+      <Link>Base\ObjectExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Base\Domain\Base\ObjectOnPostBuild.cs">
+      <Link>Base\ObjectOnPostBuild.cs</Link>
     </Compile>
     <Compile Include="..\..\Base\Domain\Base\ObjectsBase.cs">
       <Link>Base\ObjectsBase.cs</Link>
@@ -280,6 +280,9 @@
     </Compile>
     <Compile Include="..\..\Base\Domain\Base\Relation\Persons.cs">
       <Link>Base\Relation\Persons.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Base\Domain\Base\Search\SearchableExtensions.cs">
+      <Link>Base\Search\SearchableExtensions.cs</Link>
     </Compile>
     <Compile Include="..\..\Base\Domain\Base\Search\Searchables.cs">
       <Link>Base\Search\Searchables.cs</Link>
@@ -379,9 +382,6 @@
     </Compile>
     <Compile Include="..\..\Base\Domain\Base\Setup.cs">
       <Link>Base\Setup.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Domain\Core\IObjectBase.cs">
-      <Link>Core\IObjectBase.cs</Link>
     </Compile>
     <Compile Include="..\..\Core\Domain\Core\ObjectBase.cs">
       <Link>Core\ObjectBase.cs</Link>
@@ -727,8 +727,6 @@
     <Compile Include="Apps\Localization\Warehouse.cs" />
     <Compile Include="Apps\Localization\Warehouse.v.cs" />
     <Compile Include="Apps\Localization\Warehouses.cs" />
-    <Compile Include="Apps\IObjectBase.cs" />
-    <Compile Include="Apps\ObjectBase.cs" />
     <Compile Include="Apps\ObjectsBase.cs" />
     <Compile Include="Apps\Order\CustomEngagementItem.cs" />
     <Compile Include="Apps\Order\CustomEngagementItems.cs" />
@@ -1556,6 +1554,8 @@
     <Compile Include="Generated\Base\NonSerializedInventoryItemObjectState.g.cs" />
     <Compile Include="Generated\Base\NonSerializedInventoryItemStatus.g.cs" />
     <Compile Include="Generated\Base\Note.g.cs" />
+    <Compile Include="Generated\Base\Object.g.cs" />
+    <Compile Include="Generated\Base\ObjectOnPostBuild.g.cs" />
     <Compile Include="Generated\Base\ObjectState.g.cs" />
     <Compile Include="Generated\Base\Obligation.g.cs" />
     <Compile Include="Generated\Base\Office.g.cs" />

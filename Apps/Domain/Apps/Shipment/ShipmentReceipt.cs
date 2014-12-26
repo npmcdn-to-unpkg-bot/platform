@@ -57,7 +57,7 @@ namespace Allors.Domain
 
                 if (orderShipmentsWhereShipmentItem.First == null)
                 {
-                    new OrderShipmentBuilder(this.Session)
+                    new OrderShipmentBuilder(this.Strategy.Session)
                         .WithPurchaseOrderItem((Allors.Domain.PurchaseOrderItem)this.OrderItem)
                         .WithShipmentItem(this.ShipmentItem)
                         .WithQuantity(this.QuantityAccepted)
@@ -123,7 +123,7 @@ namespace Allors.Domain
                                 var inventoryItems = good.InventoryItemsWhereGood;
                                 inventoryItems.Filter.AddEquals(InventoryItems.Meta.Facility, order.ShipToBuyer.DefaultFacility);
                                 this.InventoryItem = inventoryItems.First as Allors.Domain.NonSerializedInventoryItem ??
-                                                     new NonSerializedInventoryItemBuilder(this.Session).WithGood(good).Build();
+                                                     new NonSerializedInventoryItemBuilder(this.Strategy.Session).WithGood(good).Build();
                             }
                         }
                     }

@@ -26,16 +26,6 @@ namespace Allors.Domain
 
     public partial class Bank
     {
-        protected override void AppsOnPostBuild(IObjectBuilder builder)
-        {
-            base.AppsOnPostBuild(builder);
-
-            if (!this.ExistSearchData)
-            {
-                this.SearchData = new SearchDataBuilder(this.Session).Build();
-            }
-        }
-
         public void AppsDerive(DerivableDerive method)
         {
             var derivation = method.Derivation;
@@ -47,7 +37,7 @@ namespace Allors.Domain
                     derivation.Log.AddError(this, Banks.Meta.Bic, ErrorMessages.NotAValidBic);
                 }
 
-                var country = new Countries(this.Session).FindBy(Countries.Meta.IsoCode, this.Bic.Substring(4, 2));
+                var country = new Countries(this.Strategy.Session).FindBy(Countries.Meta.IsoCode, this.Bic.Substring(4, 2));
                 if (country == null)
                 {
                     derivation.Log.AddError(this, Banks.Meta.Bic, ErrorMessages.NotAValidBic);

@@ -41,13 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\Core\Domain\Core\IObjectBase.cs">
-      <Link>Core\IObjectBase.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Domain\Core\ObjectBase.cs">
-      <Link>Core\ObjectBase.cs</Link>
-    </Compile>
+    <Compile Include="Base\Common\Deletable.cs" />
+    <Compile Include="Base\Common\UniquelyIdentifiableExtension.cs" />
     <Compile Include="Base\IObjectBase.cs" />
+    <Compile Include="Base\Object.cs" />
+    <Compile Include="Base\ObjectOnBuild.cs" />
+    <Compile Include="Base\ObjectOnPostBuild.cs" />
+    <Compile Include="Base\ObjectExtensions.cs" />
+    <Compile Include="Base\Search\SearchableExtensions.cs" />
     <Compile Include="Generated\Base\AccessControl.g.cs" />
     <Compile Include="Generated\Base\AccessControlledObject.g.cs" />
     <Compile Include="Generated\Base\Address.g.cs" />
@@ -60,6 +61,8 @@
     <Compile Include="Generated\Base\Counter.g.cs" />
     <Compile Include="Generated\Base\Country.g.cs" />
     <Compile Include="Generated\Base\Currency.g.cs" />
+    <Compile Include="Generated\Base\Deletable.g.cs" />
+    <Compile Include="Generated\Base\DeletableDelete.g.cs" />
     <Compile Include="Generated\Base\Dependee.g.cs" />
     <Compile Include="Generated\Base\Dependent.g.cs" />
     <Compile Include="Generated\Base\Derivable.g.cs" />
@@ -91,6 +94,9 @@
     <Compile Include="Generated\Base\MediaContent.g.cs" />
     <Compile Include="Generated\Base\MediaType.g.cs" />
     <Compile Include="Generated\Base\Meta.g.cs" />
+    <Compile Include="Generated\Base\Object.g.cs" />
+    <Compile Include="Generated\Base\ObjectApplySecurityOnPostBuild.g.cs" />
+    <Compile Include="Generated\Base\ObjectOnPostBuild.g.cs" />
     <Compile Include="Generated\Base\ObjectState.g.cs" />
     <Compile Include="Generated\Base\One.g.cs" />
     <Compile Include="Generated\Base\Organisation.g.cs" />
@@ -147,8 +153,6 @@
     <Compile Include="Test\General\Places.cs" />
     <Compile Include="Test\General\To.cs" />
     <Compile Include="Test\General\Units.cs" />
-    <Compile Include="Test\ObjectBase.cs" />
-    <Compile Include="Test\ObjectBase.v.cs" />
     <Compile Include="Test\ObjectsBase.cs" />
     <Compile Include="Test\ObjectsBase.v.cs" />
     <Compile Include="Test\Methods\ClassMethod.cs" />
@@ -241,7 +245,6 @@
     <Compile Include="Base\Localisation\LocalisedTexts.cs" />
     <Compile Include="Base\Meta\IObjectTypeExtensions.cs" />
     <Compile Include="Base\Meta\Path.cs" />
-    <Compile Include="Base\ObjectBase.cs" />
     <Compile Include="Base\ObjectBuilder.cs" />
     <Compile Include="Base\ObjectsBase.cs" />
     <Compile Include="Base\ObjectsGraph.cs" />
@@ -257,7 +260,6 @@
     <Compile Include="Base\Search\SearchFragments.cs" />
     <Compile Include="Base\Search\SearchResults.cs" />
     <Compile Include="Base\Security\AccessControl.cs" />
-    <Compile Include="Base\Security\AccessControlledObject.cs" />
     <Compile Include="Base\Security\AccessControlList.cs" />
     <Compile Include="Base\Security\AccessControlListCache.cs" />
     <Compile Include="Base\Security\AccessControls.cs" />
@@ -302,7 +304,9 @@
     <None Include="packages.config" />
     <None Include="Settings.StyleCop" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Core\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

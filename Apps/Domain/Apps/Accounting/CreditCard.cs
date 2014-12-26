@@ -44,16 +44,6 @@ namespace Allors.Domain
                 this.ExistCardNumber ? this.CardNumber : null);
         }
         
-        protected override void AppsOnPostBuild(IObjectBuilder builder)
-        {
-            base.AppsOnPostBuild(builder);
-
-            if (!this.ExistSearchData)
-            {
-                this.SearchData = new SearchDataBuilder(this.Session).Build();
-            }
-        }
-
         public void AppsPrepareDerivation(DerivablePrepareDerivation method)
         {
             var derivation = method.Derivation;

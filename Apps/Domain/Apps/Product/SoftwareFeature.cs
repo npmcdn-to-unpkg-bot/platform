@@ -32,16 +32,6 @@ namespace Allors.Domain
             this.RemoveBasePrice(basePrice);
         }
 
-        protected override void AppsOnPostBuild(IObjectBuilder builder)
-        {
-            
-
-            if (!this.ExistSearchData)
-            {
-                this.SearchData = new SearchDataBuilder(this.Session).Build();
-            }
-        }
-
         public void AppsDerive(DerivableDerive method)
         {
             this.DeriveDisplayName();

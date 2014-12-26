@@ -23,11 +23,11 @@ namespace Allors.Domain
 {
     public partial class Organisation
     {
-        protected override void TestOnPostBuild(IObjectBuilder builder)
+        public void TestOnPostBuild(ObjectOnPostBuild method)
         {
             if (!this.ExistSearchData)
             {
-                this.SearchData = new SearchDataBuilder(this.Session).Build();
+                this.SearchData = new SearchDataBuilder(this.Strategy.Session).Build();
             }
         }
 

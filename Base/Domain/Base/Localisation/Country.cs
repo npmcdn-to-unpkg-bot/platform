@@ -35,7 +35,7 @@ namespace Allors.Domain
             var localisedName = this.LocalisedNames.FirstOrDefault(localizedText => localizedText.Locale.Equals(locale));
             if (localisedName == null)
             {
-                localisedName = new LocalisedTextBuilder(this.Session).WithText(name).WithLocale(locale).Build();
+                localisedName = new LocalisedTextBuilder(this.Strategy.Session).WithText(name).WithLocale(locale).Build();
                 this.AddLocalisedName(localisedName);
             }
             else
@@ -52,16 +52,6 @@ namespace Allors.Domain
         protected string BaseComposeDisplayName()
         {
             return this.Name;
-        }
-
-        protected override void BaseOnPostBuild(IObjectBuilder objectBuilder)
-        {
-            base.BaseOnPostBuild(objectBuilder);
-
-            if (!this.ExistSearchData)
-            {
-                this.SearchData = new SearchDataBuilder(this.Session).Build();
-            }
         }
 
         public void BaseDerive(DerivableDerive method)

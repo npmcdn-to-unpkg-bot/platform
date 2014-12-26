@@ -31,7 +31,7 @@ namespace Allors.Domain
         public bool IsBankAccount()
         {
             if (this.ExistJournalWhereContraAccount &&
-                this.JournalWhereContraAccount.JournalType.Equals(new JournalTypes(this.Session).Bank))
+                this.JournalWhereContraAccount.JournalType.Equals(new JournalTypes(this.Strategy.Session).Bank))
             {
                 return true;
             }
@@ -45,7 +45,7 @@ namespace Allors.Domain
             {
                 foreach (AccountingTransactionDetail accountingTransactionDetail in organisationGlAccountBalance.AccountingTransactionDetailsWhereOrganisationGlAccountBalance)
                 {
-                    if (accountingTransactionDetail.AccountingTransactionWhereAccountingTransactionDetail.AccountingTransactionNumber.AccountingTransactionType.Equals(new AccountingTransactionTypes(this.Session).BankStatement))
+                    if (accountingTransactionDetail.AccountingTransactionWhereAccountingTransactionDetail.AccountingTransactionNumber.AccountingTransactionType.Equals(new AccountingTransactionTypes(this.Strategy.Session).BankStatement))
                     {
                         this.HasBankStatementTransactions = true;
                         return true;

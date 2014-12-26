@@ -49,12 +49,7 @@ namespace Allors.Domain
 
             if (!this.ExistCurrentObjectState)
             {
-                this.CurrentObjectState = new TransferObjectStates(this.DatabaseSession).Created;
-            }
-
-            if (!this.ExistSearchData)
-            {
-                this.SearchData = new SearchDataBuilder(this.Session).Build();
+                this.CurrentObjectState = new TransferObjectStates(this.Strategy.DatabaseSession).Created;
             }
         }
 
@@ -100,7 +95,7 @@ namespace Allors.Domain
 
             if (this.ExistCurrentObjectState && !this.CurrentObjectState.Equals(this.PreviousObjectState))
             {
-                var currentStatus = new TransferStatusBuilder(this.Session).WithTransferObjectState(this.CurrentObjectState).Build();
+                var currentStatus = new TransferStatusBuilder(this.Strategy.Session).WithTransferObjectState(this.CurrentObjectState).Build();
                 this.AddShipmentStatus(currentStatus);
                 this.CurrentShipmentStatus = currentStatus;
             }

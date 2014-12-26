@@ -30,12 +30,7 @@ namespace Allors.Domain
 
             if (!this.ExistCurrentObjectState)
             {
-                this.CurrentObjectState = new CommunicationEventObjectStates(this.DatabaseSession).Opened;
-            }
-
-            if (!this.ExistSearchData)
-            {
-                this.SearchData = new SearchDataBuilder(this.Session).Build();
+                this.CurrentObjectState = new CommunicationEventObjectStates(this.Strategy.DatabaseSession).Opened;
             }
         }
 
@@ -57,7 +52,7 @@ namespace Allors.Domain
         public void AppsApplySecurityOnDerive(DerivableApplySecurityOnDerive method)
         {
             this.RemoveSecurityTokens();
-            this.AddSecurityToken(Domain.Singleton.Instance(this.Session).AdministratorSecurityToken);
+            this.AddSecurityToken(Domain.Singleton.Instance(this.Strategy.Session).AdministratorSecurityToken);
 
             if (this.ExistOwner)
             {

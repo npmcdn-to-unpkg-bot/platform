@@ -25,7 +25,7 @@ namespace Allors
     /// <summary>
     /// A domain inheritable class for <see cref="IObject"/>.
     /// </summary>
-    public abstract partial class ObjectBase : IObjectBase
+    public abstract partial class ObjectBase
     {
         /// <summary>
         /// The <see cref="Strategy"/>.

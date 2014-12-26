@@ -26,7 +26,7 @@ namespace Allors.Domain
 
     public partial class C1
     {
-        protected override void TestOnPostBuild(IObjectBuilder builder)
+        public void TestOnPostBuild(ObjectOnPostBuild method)
         {
             this.DisplayName = this.Name;
         }

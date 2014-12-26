@@ -88,7 +88,7 @@ namespace Allors.Domain
             {
                 var histories = this.SalesRep.SalesRepRevenueHistoriesWhereSalesRep;
                 histories.Filter.AddEquals(SalesRepRevenueHistories.Meta.InternalOrganisation, this.InternalOrganisation);
-                var history = histories.First ?? new SalesRepRevenueHistoryBuilder(this.Session)
+                var history = histories.First ?? new SalesRepRevenueHistoryBuilder(this.Strategy.Session)
                                                      .WithCurrency(this.Currency)
                                                      .WithInternalOrganisation(this.InternalOrganisation)
                                                      .WithSalesRep(this.SalesRep)

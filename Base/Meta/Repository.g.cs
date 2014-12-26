@@ -3,7 +3,6 @@ namespace Allors.Meta
 	using System;
 	using Allors.Meta;
 
-
 	public static partial class Repository
 	{
 
@@ -34,6 +33,7 @@ namespace Allors.Meta
 		public static Interface Localised;
 		public static Class Permission;
 		public static Interface Period;
+		public static Interface Deletable;
 		public static Interface User;
 		public static Interface SearchResult;
 		public static Class SecurityToken;
@@ -53,99 +53,176 @@ namespace Allors.Meta
 		public static Class Media;
 		public static Interface AccessControlledObject;
 		public static Interface UserInterfaceable;
+		public static Interface Object;
 		public static Interface ObjectState;
 		public static Class Currency;
 		public static Interface Commentable;
 		public static Interface Searchable;
 
-		public static RelationType MediaContentValue;
-		public static RelationType EnumerationLocalisedName;
-		public static RelationType PermissionOperandTypePointer;
-		public static RelationType UserUserEmailConfirmed;
-		public static RelationType AccessControlSubjectGroup;
-		public static RelationType LoginKey;
-		public static RelationType MediaTypeDefaultFileExtension;
-		public static RelationType CurrencyIsoCode;
-		public static RelationType PermissionConcreteClassPointer;
-		public static RelationType LocaleName;
-		public static RelationType StringTemplateBody;
-		public static RelationType UserGroupRole;
-		public static RelationType CounterValue;
-		public static RelationType ImageOriginal;
-		public static RelationType AccessControlSubject;
-		public static RelationType EnumerationName;
-		public static RelationType SearchDataCharacterBoundaryText;
-		public static RelationType MediaMediaType;
-		public static RelationType LocalisedTextText;
-		public static RelationType RolePermission;
-		public static RelationType UserGroupMember;
-		public static RelationType ObjectStateDeniedPermission;
-		public static RelationType ImageResponsive;
-		public static RelationType PeriodFromDate;
-		public static RelationType AccessControlledObjectDeniedPermission;
-		public static RelationType UserUserName;
-		public static RelationType SearchableSearchData;
-		public static RelationType SecurityTokenOwnerOwnerSecurityToken;
-		public static RelationType MediaTypeName;
-		public static RelationType CountryCurrency;
-		public static RelationType UserInterfaceableDisplayName;
-		public static RelationType SingletonDefaultPrintQueue;
-		public static RelationType AccessControlObject;
-		public static RelationType MediaMediaContent;
-		public static RelationType PrintQueuePrintable;
-		public static RelationType AccessControlRole;
-		public static RelationType CountryName;
-		public static RelationType CurrencyName;
-		public static RelationType LoginProvider;
-		public static RelationType PrintQueueName;
-		public static RelationType SearchDataPreviousCharacterBoundaryText;
-		public static RelationType CountryLocalisedName;
-		public static RelationType CurrencySymbol;
-		public static RelationType MediaContentHash;
-		public static RelationType PersonLastName;
-		public static RelationType LocalisedLocale;
-		public static RelationType RoleName;
-		public static RelationType SingletonDefaultLocale;
-		public static RelationType PermissionOperationEnum;
-		public static RelationType SingletonLocale;
-		public static RelationType SearchDataSearchFragment;
-		public static RelationType SearchDataPreviousWordBoundaryText;
-		public static RelationType AccessControlledObjectSecurityToken;
-		public static RelationType ObjectStateName;
-		public static RelationType LanguageName;
-		public static RelationType UserGroupParent;
-		public static RelationType UserUserEmail;
-		public static RelationType LoginUser;
-		public static RelationType StringTemplateName;
-		public static RelationType TransitionFromState;
-		public static RelationType PrintablePrintContent;
-		public static RelationType ImageOriginalFilename;
-		public static RelationType LanguageIsoCode;
-		public static RelationType SearchDataWordBoundaryText;
-		public static RelationType PeriodThroughDate;
-		public static RelationType CommentableComment;
-		public static RelationType LocaleLanguage;
-		public static RelationType SingletonAdministratorSecurityToken;
-		public static RelationType TransitionToState;
-		public static RelationType UniquelyIdentifiableUniqueId;
-		public static RelationType UserGroupName;
-		public static RelationType CurrencyLocalisedName;
-		public static RelationType UserUserPasswordHash;
-		public static RelationType LocaleCountry;
-		public static RelationType PersonMiddleName;
-		public static RelationType PersonFirstName;
-		public static RelationType LanguageLocalisedName;
-		public static RelationType SingletonGuest;
-		public static RelationType SingletonDefaultSecurityToken;
-		public static RelationType EnumerationIsActive;
-		public static RelationType SearchFragmentLowerCaseText;
-		public static RelationType CountryIsoCode;
+		public static RoleType MediaContentValue;
+		public static RoleType EnumerationLocalisedName;
+		public static RoleType PermissionOperandTypePointer;
+		public static RoleType UserUserEmailConfirmed;
+		public static ConcreteRoleType PersonUserEmailConfirmed;
+
+		public static RoleType AccessControlSubjectGroup;
+		public static RoleType LoginKey;
+		public static RoleType MediaTypeDefaultFileExtension;
+		public static RoleType CurrencyIsoCode;
+		public static RoleType PermissionConcreteClassPointer;
+		public static RoleType LocaleName;
+		public static RoleType StringTemplateBody;
+		public static RoleType UserGroupRole;
+		public static RoleType CounterValue;
+		public static RoleType ImageOriginal;
+		public static RoleType AccessControlSubject;
+		public static RoleType EnumerationName;
+		public static RoleType SearchDataCharacterBoundaryText;
+		public static RoleType MediaMediaType;
+		public static RoleType LocalisedTextText;
+		public static RoleType RolePermission;
+		public static RoleType UserGroupMember;
+		public static RoleType ObjectStateDeniedPermission;
+		public static RoleType ImageResponsive;
+		public static RoleType PeriodFromDate;
+		public static RoleType AccessControlledObjectDeniedPermission;
+		public static ConcreteRoleType LocalisedTextDeniedPermission;
+		public static ConcreteRoleType SingletonDeniedPermission;
+		public static ConcreteRoleType LocaleDeniedPermission;
+		public static ConcreteRoleType LanguageDeniedPermission;
+		public static ConcreteRoleType UserGroupDeniedPermission;
+		public static ConcreteRoleType PermissionDeniedPermission;
+		public static ConcreteRoleType MediaTypeDeniedPermission;
+		public static ConcreteRoleType RoleDeniedPermission;
+		public static ConcreteRoleType PrintQueueDeniedPermission;
+		public static ConcreteRoleType CountryDeniedPermission;
+		public static ConcreteRoleType AccessControlDeniedPermission;
+		public static ConcreteRoleType PersonDeniedPermission;
+		public static ConcreteRoleType MediaDeniedPermission;
+		public static ConcreteRoleType CurrencyDeniedPermission;
+
+		public static RoleType UserUserName;
+		public static ConcreteRoleType PersonUserName;
+
+		public static RoleType SearchableSearchData;
+		public static ConcreteRoleType LocalisedTextSearchData;
+		public static ConcreteRoleType LanguageSearchData;
+		public static ConcreteRoleType UserGroupSearchData;
+		public static ConcreteRoleType CountrySearchData;
+		public static ConcreteRoleType PersonSearchData;
+
+		public static RoleType SecurityTokenOwnerOwnerSecurityToken;
+		public static ConcreteRoleType PersonOwnerSecurityToken;
+
+		public static RoleType MediaTypeName;
+		public static RoleType CountryCurrency;
+		public static RoleType UserInterfaceableDisplayName;
+		public static ConcreteRoleType LocalisedTextDisplayName;
+		public static ConcreteRoleType SingletonDisplayName;
+		public static ConcreteRoleType LocaleDisplayName;
+		public static ConcreteRoleType LanguageDisplayName;
+		public static ConcreteRoleType UserGroupDisplayName;
+		public static ConcreteRoleType PermissionDisplayName;
+		public static ConcreteRoleType MediaTypeDisplayName;
+		public static ConcreteRoleType RoleDisplayName;
+		public static ConcreteRoleType PrintQueueDisplayName;
+		public static ConcreteRoleType CountryDisplayName;
+		public static ConcreteRoleType AccessControlDisplayName;
+		public static ConcreteRoleType PersonDisplayName;
+		public static ConcreteRoleType MediaDisplayName;
+		public static ConcreteRoleType CurrencyDisplayName;
+
+		public static RoleType SingletonDefaultPrintQueue;
+		public static RoleType AccessControlObject;
+		public static RoleType MediaMediaContent;
+		public static RoleType PrintQueuePrintable;
+		public static RoleType AccessControlRole;
+		public static RoleType CountryName;
+		public static RoleType CurrencyName;
+		public static RoleType LoginProvider;
+		public static RoleType PrintQueueName;
+		public static RoleType SearchDataPreviousCharacterBoundaryText;
+		public static RoleType CountryLocalisedName;
+		public static RoleType CurrencySymbol;
+		public static RoleType MediaContentHash;
+		public static RoleType PersonLastName;
+		public static RoleType LocalisedLocale;
+		public static ConcreteRoleType LocalisedTextLocale;
+		public static ConcreteRoleType StringTemplateLocale;
+		public static ConcreteRoleType PersonLocale;
+
+		public static RoleType RoleName;
+		public static RoleType SingletonDefaultLocale;
+		public static RoleType PermissionOperationEnum;
+		public static RoleType SingletonLocale;
+		public static RoleType SearchDataSearchFragment;
+		public static RoleType SearchDataPreviousWordBoundaryText;
+		public static RoleType AccessControlledObjectSecurityToken;
+		public static ConcreteRoleType LocalisedTextSecurityToken;
+		public static ConcreteRoleType SingletonSecurityToken;
+		public static ConcreteRoleType LocaleSecurityToken;
+		public static ConcreteRoleType LanguageSecurityToken;
+		public static ConcreteRoleType UserGroupSecurityToken;
+		public static ConcreteRoleType PermissionSecurityToken;
+		public static ConcreteRoleType MediaTypeSecurityToken;
+		public static ConcreteRoleType RoleSecurityToken;
+		public static ConcreteRoleType PrintQueueSecurityToken;
+		public static ConcreteRoleType CountrySecurityToken;
+		public static ConcreteRoleType AccessControlSecurityToken;
+		public static ConcreteRoleType PersonSecurityToken;
+		public static ConcreteRoleType MediaSecurityToken;
+		public static ConcreteRoleType CurrencySecurityToken;
+
+		public static RoleType ObjectStateName;
+		public static RoleType LanguageName;
+		public static RoleType UserGroupParent;
+		public static RoleType UserUserEmail;
+		public static ConcreteRoleType PersonUserEmail;
+
+		public static RoleType LoginUser;
+		public static RoleType StringTemplateName;
+		public static RoleType TransitionFromState;
+		public static RoleType PrintablePrintContent;
+		public static RoleType ImageOriginalFilename;
+		public static RoleType LanguageIsoCode;
+		public static RoleType SearchDataWordBoundaryText;
+		public static RoleType PeriodThroughDate;
+		public static RoleType CommentableComment;
+		public static RoleType LocaleLanguage;
+		public static RoleType SingletonAdministratorSecurityToken;
+		public static RoleType TransitionToState;
+		public static RoleType UniquelyIdentifiableUniqueId;
+		public static ConcreteRoleType CounterUniqueId;
+		public static ConcreteRoleType StringTemplateUniqueId;
+		public static ConcreteRoleType UserGroupUniqueId;
+		public static ConcreteRoleType RoleUniqueId;
+		public static ConcreteRoleType PrintQueueUniqueId;
+		public static ConcreteRoleType PersonUniqueId;
+		public static ConcreteRoleType MediaUniqueId;
+
+		public static RoleType UserGroupName;
+		public static RoleType CurrencyLocalisedName;
+		public static RoleType UserUserPasswordHash;
+		public static ConcreteRoleType PersonUserPasswordHash;
+
+		public static RoleType LocaleCountry;
+		public static RoleType PersonMiddleName;
+		public static RoleType PersonFirstName;
+		public static RoleType LanguageLocalisedName;
+		public static RoleType SingletonGuest;
+		public static RoleType SingletonDefaultSecurityToken;
+		public static RoleType EnumerationIsActive;
+		public static RoleType SearchFragmentLowerCaseText;
+		public static RoleType CountryIsoCode;
 
 
 		static void Init(MetaPopulation meta)
 		{
             Core = new Domain(meta, new Guid("A5F4E562-323A-41C6-893F-12D7C6A9BD76")) { Name = "Core" };
 			Base = new Domain(meta, new Guid("770538dd-7b19-4694-bdce-cf04dcf9cf62")) { Name = "Base" };
+
+			Base.AddDirectSuperdomain(Core);
+
 
 			// Units
 			AllorsString = new UnitBuilder(Core, UnitIds.StringId).WithSingularName("AllorsString").WithPluralName("AllorsStrings").WithUnitTag(UnitTags.AllorsString).Build();
@@ -245,6 +322,12 @@ namespace Allors.Meta
 			Period = new InterfaceBuilder(Base, new Guid("80adbbfd-952e-46f3-a744-78e0ce42bc80"))
 			.WithSingularName("Period")
 			.WithPluralName("Periods")
+			.Build();
+  
+  
+			Deletable = new InterfaceBuilder(Base, new Guid("9279e337-c658-4086-946d-03c75cdb1ad3"))
+			.WithSingularName("Deletable")
+			.WithPluralName("Deletables")
 			.Build();
   
   
@@ -362,6 +445,12 @@ namespace Allors.Meta
 			.Build();
   
   
+			Object = new InterfaceBuilder(Base, new Guid("f8a7cd0e-bd7f-4ce9-ab5d-8c1629cd883d"))
+			.WithSingularName("Object")
+			.WithPluralName("Objects")
+			.Build();
+  
+  
 			ObjectState = new InterfaceBuilder(Base, new Guid("f991813f-3146-4431-96d0-554aa2186887"))
 			.WithSingularName("ObjectState")
 			.WithPluralName("ObjectStates")
@@ -440,6 +529,9 @@ namespace Allors.Meta
 				new InheritanceBuilder(Base, new Guid("04af874d-d58c-4038-b98c-e822bfae2c3b"))
 				.WithSubtype(SearchData)
 				.WithSupertype(Derivable).Build();
+				new InheritanceBuilder(Base, new Guid("300c3e0c-f3b9-4558-afa4-34b00c5f5a2b"))
+				.WithSubtype(SearchData)
+				.WithSupertype(Deletable).Build();
 
 				// UserGroup
 				new InheritanceBuilder(Base, new Guid("6147b424-b6a9-44b9-b173-30d259165a51"))
@@ -467,11 +559,15 @@ namespace Allors.Meta
 
 				// Localised
 				// Permission
+				new InheritanceBuilder(Base, new Guid("799f485c-6f77-4da1-8f63-a2b1469f8808"))
+				.WithSubtype(Permission)
+				.WithSupertype(Deletable).Build();
 				new InheritanceBuilder(Base, new Guid("aec174d4-5633-462c-91a1-10d3e782fdb4"))
 				.WithSubtype(Permission)
 				.WithSupertype(UserInterfaceable).Build();
 
 				// Period
+				// Deletable
 				// User
 				new InheritanceBuilder(Base, new Guid("17c51f3d-869f-4f1e-95e0-011021837b69"))
 				.WithSubtype(User)
@@ -489,6 +585,13 @@ namespace Allors.Meta
 				.WithSupertype(UserInterfaceable).Build();
 
 				// SecurityToken
+				new InheritanceBuilder(Base, new Guid("0a52522a-c2e2-4647-98d4-27fb2fa6a7ad"))
+				.WithSubtype(SecurityToken)
+				.WithSupertype(Deletable).Build();
+				new InheritanceBuilder(Base, new Guid("62e808f2-cfc4-4281-b81d-6045220d4a97"))
+				.WithSubtype(SecurityToken)
+				.WithSupertype(Derivable).Build();
+
 				// SecurityTokenOwner
 				// Transition
 				// MediaType
@@ -505,6 +608,9 @@ namespace Allors.Meta
 				new InheritanceBuilder(Base, new Guid("28799476-9ca8-43bf-a06c-d2b33f91e436"))
 				.WithSubtype(Login)
 				.WithSupertype(Derivable).Build();
+				new InheritanceBuilder(Base, new Guid("9690ff31-1364-4e0e-9279-3e290477a37b"))
+				.WithSubtype(Login)
+				.WithSupertype(Deletable).Build();
 
 				// Role
 				new InheritanceBuilder(Base, new Guid("4e737d59-0330-4f4e-a3f3-7ec617d63748"))
@@ -542,6 +648,9 @@ namespace Allors.Meta
 				.WithSupertype(Searchable).Build();
 
 				// AccessControl
+				new InheritanceBuilder(Base, new Guid("421b85e6-f8c3-469f-bbd7-ce425355fb04"))
+				.WithSubtype(AccessControl)
+				.WithSupertype(Deletable).Build();
 				new InheritanceBuilder(Base, new Guid("b4c7e051-3605-41e6-a78b-edb1c70bde9d"))
 				.WithSubtype(AccessControl)
 				.WithSupertype(UserInterfaceable).Build();
@@ -567,6 +676,13 @@ namespace Allors.Meta
 				.WithSupertype(Searchable).Build();
 
 				// Image
+				new InheritanceBuilder(Base, new Guid("ae0a1a2a-6413-470a-9c0d-e15ed36d4948"))
+				.WithSubtype(Image)
+				.WithSupertype(Deletable).Build();
+				new InheritanceBuilder(Base, new Guid("eedf1471-a143-479b-8ebe-47ddfa924877"))
+				.WithSubtype(Image)
+				.WithSupertype(Derivable).Build();
+
 				// Derivable
 				// Media
 				new InheritanceBuilder(Base, new Guid("c8cd0830-d1a7-4343-8049-dc18c34c213e"))
@@ -575,6 +691,9 @@ namespace Allors.Meta
 				new InheritanceBuilder(Base, new Guid("dae544a9-9dea-4b84-99c7-2b701868333d"))
 				.WithSubtype(Media)
 				.WithSupertype(UserInterfaceable).Build();
+				new InheritanceBuilder(Base, new Guid("f1586900-8030-46c1-a49b-7f2b5d6b6e64"))
+				.WithSubtype(Media)
+				.WithSupertype(Deletable).Build();
 
 				// AccessControlledObject
 				new InheritanceBuilder(Base, new Guid("b97d7219-f7d9-4df0-80a0-b624c46359aa"))
@@ -586,6 +705,7 @@ namespace Allors.Meta
 				.WithSubtype(UserInterfaceable)
 				.WithSupertype(AccessControlledObject).Build();
 
+				// Object
 				// ObjectState
 				new InheritanceBuilder(Base, new Guid("dd9d3cf5-5c9b-444a-a4b1-a4d807597cf6"))
 				.WithSubtype(ObjectState)
@@ -609,7 +729,8 @@ namespace Allors.Meta
 				  
 				  
 				.WithSize(-1)
-				.Build();
+				.Build()
+				.RoleType;
 
 
 				// Counter
@@ -619,7 +740,8 @@ namespace Allors.Meta
 				.WithPluralName("Values")  
 				  
 				  
-				.Build();
+				.Build()
+				.RoleType;
 
 
 				// StringTemplate
@@ -630,7 +752,8 @@ namespace Allors.Meta
 				  
 				  
 				.WithSize(-1)
-				.Build();
+				.Build()
+				.RoleType;
 
 				StringTemplateName = new RelationTypeBuilder(Base, new Guid("c501103b-037a-4961-93df-2dbb74b88a76"),new Guid("1bcdddcc-e462-4d59-af2d-7346245cb271"),new Guid("37bd5d22-89f1-47a4-b6bd-8841e194b213"))
 				.WithObjectTypes(StringTemplate, AllorsString)
@@ -639,7 +762,8 @@ namespace Allors.Meta
 				  
 				  
 				.WithSize(256)
-				.Build();
+				.Build()
+				.RoleType;
 
 
 				// UniquelyIdentifiable
@@ -649,7 +773,8 @@ namespace Allors.Meta
 				.WithPluralName("UniqueIds")  
 				.WithIsDerived(true)  
 				.WithIsIndexed(true)  
-				.Build();
+				.Build()
+				.RoleType;
 
 
 				// Singleton
@@ -659,7 +784,8 @@ namespace Allors.Meta
 				.WithPluralName("DefaultPrintQueues")  
 				  
 				.WithIsIndexed(true)  
-				.Build();
+				.Build()
+				.RoleType;
 
 				SingletonDefaultLocale = new RelationTypeBuilder(Base, new Guid("9c1634ab-be99-4504-8690-ed4b39fec5bc"),new Guid("45a4205d-7c02-40d4-8d97-6d7d59e05def"),new Guid("1e051b37-cf30-43ed-a623-dd2928d6d0a3"))
 				.WithObjectTypes(Singleton, Locale)
@@ -668,7 +794,8 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.ManyToOne)
 				  
 				.WithIsIndexed(true)  
-				.Build();
+				.Build()
+				.RoleType;
 
 				SingletonLocale = new RelationTypeBuilder(Base, new Guid("9e5a3413-ed33-474f-adf2-149ad5a80719"),new Guid("33d5d8b9-3472-48d8-ab1a-83d00d9cb691"),new Guid("e75a8956-4d02-49ba-b0cf-747b7a9f350d"))
 				.WithObjectTypes(Singleton, Locale)
@@ -677,7 +804,8 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.OneToMany)
 				  
 				.WithIsIndexed(true)  
-				.Build();
+				.Build()
+				.RoleType;
 
 				SingletonAdministratorSecurityToken = new RelationTypeBuilder(Base, new Guid("d9ea02e5-9aa1-4cbe-9318-06324529a923"),new Guid("6247e69d-4789-4ee0-a75b-c2de44a5fcce"),new Guid("c11f31e1-75a7-4b23-9d58-7dfec256b658"))
 				.WithObjectTypes(Singleton, SecurityToken)
@@ -686,7 +814,8 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.ManyToOne)
 				  
 				.WithIsIndexed(true)  
-				.Build();
+				.Build()
+				.RoleType;
 
 				SingletonGuest = new RelationTypeBuilder(Base, new Guid("f16652b0-b712-43d7-8d4e-34a22487514d"),new Guid("c92466b5-55ba-496a-8880-2821f32f8f8e"),new Guid("3a12d798-40c3-40e0-ba9f-9d01b1e39e89"))
 				.WithObjectTypes(Singleton, User)
@@ -694,7 +823,8 @@ namespace Allors.Meta
 				.WithPluralName("Guests")  
 				  
 				  
-				.Build();
+				.Build()
+				.RoleType;
 
 				SingletonDefaultSecurityToken = new RelationTypeBuilder(Base, new Guid("f579494b-e550-4be6-9d93-84618ac78704"),new Guid("33f17e75-99cc-417e-99f3-c29080f08f0a"),new Guid("ca9e3469-583c-4950-ba2c-1bc3a0fc3e96"))
 				.WithObjectTypes(Singleton, SecurityToken)
@@ -703,7 +833,8 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.ManyToOne)
 				  
 				.WithIsIndexed(true)  
-				.Build();
+				.Build()
+				.RoleType;
 
 
 				// Locale
@@ -714,7 +845,8 @@ namespace Allors.Meta
 				  
 				  
 				.WithSize(256)
-				.Build();
+				.Build()
+				.RoleType;
 
 				LocaleLanguage = new RelationTypeBuilder(Base, new Guid("d8cac34a-9bb2-4190-bd2a-ec0b87e04cf5"),new Guid("af501892-3c83-41d1-826b-f5c4cb1de7fe"),new Guid("ed32b12a-00ad-420b-9dfa-f1c6ce773fcd"))
 				.WithObjectTypes(Locale, Language)
@@ -723,7 +855,8 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.ManyToOne)
 				  
 				.WithIsIndexed(true)  
-				.Build();
+				.Build()
+				.RoleType;
 
 				LocaleCountry = new RelationTypeBuilder(Base, new Guid("ea778b77-2929-4ab4-ad99-bf2f970401a9"),new Guid("bb5904f5-feb0-47eb-903a-0351d55f0d8c"),new Guid("b2fc6e06-3881-427e-b4cc-8457a65f8076"))
 				.WithObjectTypes(Locale, Country)
@@ -732,7 +865,8 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.ManyToOne)
 				  
 				.WithIsIndexed(true)  
-				.Build();
+				.Build()
+				.RoleType;
 
 
 				// SearchFragment
@@ -743,7 +877,8 @@ namespace Allors.Meta
 				  
 				.WithIsIndexed(true)  
 				.WithSize(256)
-				.Build();
+				.Build()
+				.RoleType;
 
 
 				// Language
@@ -754,7 +889,8 @@ namespace Allors.Meta
 				  
 				.WithIsIndexed(true)  
 				.WithSize(256)
-				.Build();
+				.Build()
+				.RoleType;
 
 				LanguageIsoCode = new RelationTypeBuilder(Base, new Guid("d2a32d9f-21cc-4f9d-b0d3-a9b75da66907"),new Guid("6c860e73-d12e-4e35-897e-ed9f8fd8eba0"),new Guid("84f904a6-8dcc-4089-bda6-34325ade6367"))
 				.WithObjectTypes(Language, AllorsString)
@@ -763,7 +899,8 @@ namespace Allors.Meta
 				  
 				  
 				.WithSize(256)
-				.Build();
+				.Build()
+				.RoleType;
 
 				LanguageLocalisedName = new RelationTypeBuilder(Base, new Guid("f091b264-e6b1-4a57-bbfb-8225cbe8190c"),new Guid("6650af3b-f537-4c2f-afff-6773552315cd"),new Guid("5e9fcced-727d-42a2-95e6-a0f9d8be4ec7"))
 				.WithObjectTypes(Language, LocalisedText)
@@ -772,7 +909,8 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.OneToMany)
 				  
 				.WithIsIndexed(true)  
-				.Build();
+				.Build()
+				.RoleType;
 
 
 				// SearchData
@@ -783,7 +921,8 @@ namespace Allors.Meta
 				  
 				  
 				.WithSize(-1)
-				.Build();
+				.Build()
+				.RoleType;
 
 				SearchDataPreviousCharacterBoundaryText = new RelationTypeBuilder(Base, new Guid("7c38c20c-0555-4752-be27-372694a1f81a"),new Guid("c966f138-c511-4f65-90de-e43bbdfa0e46"),new Guid("dccc3db5-ccae-4a4d-9d61-e30bb4292c88"))
 				.WithObjectTypes(SearchData, AllorsString)
@@ -792,7 +931,8 @@ namespace Allors.Meta
 				  
 				  
 				.WithSize(-1)
-				.Build();
+				.Build()
+				.RoleType;
 
 				SearchDataSearchFragment = new RelationTypeBuilder(Base, new Guid("a0c28d27-7be1-488d-85bf-2f84d4c61a55"),new Guid("5c229928-80b4-47f6-a182-1b2c34ed5d7b"),new Guid("594d3231-5d79-4c97-908f-558d0fa346c3"))
 				.WithObjectTypes(SearchData, SearchFragment)
@@ -801,7 +941,8 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.ManyToMany)
 				  
 				.WithIsIndexed(true)  
-				.Build();
+				.Build()
+				.RoleType;
 
 				SearchDataPreviousWordBoundaryText = new RelationTypeBuilder(Base, new Guid("a51d3109-7a75-4a8d-9ace-ad9181e64f7d"),new Guid("de49d50b-dad1-4751-9821-ba02cb4b1a58"),new Guid("1ac5bb87-9352-4f37-a0f0-244b0a352e9c"))
 				.WithObjectTypes(SearchData, AllorsString)
@@ -810,7 +951,8 @@ namespace Allors.Meta
 				  
 				  
 				.WithSize(-1)
-				.Build();
+				.Build()
+				.RoleType;
 
 				SearchDataWordBoundaryText = new RelationTypeBuilder(Base, new Guid("d72f473f-8aaf-4abd-be01-f0a683c72721"),new Guid("c1876168-3e12-48e8-8ca6-6c511d8b6a8c"),new Guid("e4911a7d-140c-4e31-8e99-69668bf2cc18"))
 				.WithObjectTypes(SearchData, AllorsString)
@@ -819,7 +961,8 @@ namespace Allors.Meta
 				  
 				  
 				.WithSize(-1)
-				.Build();
+				.Build()
+				.RoleType;
 
 
 				// UserGroup
@@ -829,7 +972,8 @@ namespace Allors.Meta
 				  
 				.WithIsDerived(true)  
 				.WithIsIndexed(true)  
-				.Build();
+				.Build()
+				.RoleType;
 
 				UserGroupMember = new RelationTypeBuilder(Base, new Guid("585bb5cf-9ba4-4865-9027-3667185abc4f"),new Guid("1e2d1e31-ed80-4435-8850-7663d9c5f41d"),new Guid("c552f0b7-95ce-4d45-aaea-56bc8365eee4"))
 				.WithObjectTypes(UserGroup, User)
@@ -838,7 +982,8 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.ManyToMany)
 				  
 				.WithIsIndexed(true)  
-				.Build();
+				.Build()
+				.RoleType;
 
 				UserGroupParent = new RelationTypeBuilder(Base, new Guid("be9dc116-a7ea-4a4b-aaca-eb0f91fc3741"),new Guid("d8d8fdf7-f261-449b-b611-7c58dc43f6d3"),new Guid("6ec327af-86bc-4c79-8f00-bcb399686bf3"))
 				.WithObjectTypes(UserGroup, UserGroup)
@@ -847,7 +992,8 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.ManyToOne)
 				.WithIsDerived(true)  
 				.WithIsIndexed(true)  
-				.Build();
+				.Build()
+				.RoleType;
 
 				UserGroupName = new RelationTypeBuilder(Base, new Guid("e94e7f05-78bd-4291-923f-38f82d00e3f4"),new Guid("75859e2c-c1a3-4f4c-bb37-4064d0aa81d0"),new Guid("9d3c1eec-bf10-4a79-a37f-bc6a20ff2a79"))
 				.WithObjectTypes(UserGroup, AllorsString)
@@ -856,7 +1002,8 @@ namespace Allors.Meta
 				  
 				.WithIsIndexed(true)  
 				.WithSize(256)
-				.Build();
+				.Build()
+				.RoleType;
 
 
 				// Printable
@@ -867,7 +1014,8 @@ namespace Allors.Meta
 				.WithIsDerived(true)  
 				  
 				.WithSize(-1)
-				.Build();
+				.Build()
+				.RoleType;
 
 
 				// MediaContent
@@ -878,7 +1026,8 @@ namespace Allors.Meta
 				.WithIsDerived(true)  
 				  
 				.WithSize(-1)
-				.Build();
+				.Build()
+				.RoleType;
 
 				MediaContentHash = new RelationTypeBuilder(Base, new Guid("890598a9-0be4-49ee-8dd8-3581ee9355e6"),new Guid("3cf7f10e-dc56-4a50-95a5-fe7fae0be291"),new Guid("70823e7d-5829-4db7-99e0-f6c5f2b0e87b"))
 				.WithObjectTypes(MediaContent, AllorsString)
@@ -887,7 +1036,8 @@ namespace Allors.Meta
 				.WithIsDerived(true)  
 				.WithIsIndexed(true)  
 				.WithSize(1024)
-				.Build();
+				.Build()
+				.RoleType;
 
 
 				// Localised
@@ -898,7 +1048,8 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.ManyToOne)
 				  
 				.WithIsIndexed(true)  
-				.Build();
+				.Build()
+				.RoleType;
 
 
 				// Permission
@@ -908,7 +1059,8 @@ namespace Allors.Meta
 				.WithPluralName("OperandTypePointers")  
 				  
 				.WithIsIndexed(true)  
-				.Build();
+				.Build()
+				.RoleType;
 
 				PermissionConcreteClassPointer = new RelationTypeBuilder(Base, new Guid("29b80857-e51b-4dec-b859-887ed74b1626"),new Guid("8ffed1eb-b64e-4341-bbb6-348ed7f06e83"),new Guid("cadaca05-55ba-4a13-8758-786ff29c8e46"))
 				.WithObjectTypes(Permission, AllorsUnique)
@@ -916,7 +1068,8 @@ namespace Allors.Meta
 				.WithPluralName("ConcreteClassePointers")  
 				  
 				.WithIsIndexed(true)  
-				.Build();
+				.Build()
+				.RoleType;
 
 				PermissionOperationEnum = new RelationTypeBuilder(Base, new Guid("9d73d437-4918-4f20-b9a7-3ce23a04bd7b"),new Guid("891734d6-4855-4b33-8b3b-f46fd6103149"),new Guid("d29ce0ed-fba8-409d-8675-dc95e1566cfb"))
 				.WithObjectTypes(Permission, AllorsInteger)
@@ -924,7 +1077,8 @@ namespace Allors.Meta
 				.WithPluralName("OperationEnums")  
 				  
 				.WithIsIndexed(true)  
-				.Build();
+				.Build()
+				.RoleType;
 
 
 				// Period
@@ -934,7 +1088,8 @@ namespace Allors.Meta
 				.WithPluralName("FromDates")  
 				  
 				  
-				.Build();
+				.Build()
+				.RoleType;
 
 				PeriodThroughDate = new RelationTypeBuilder(Base, new Guid("d7576ce2-da27-487a-86aa-b0912f745bc0"),new Guid("cb2fa6c1-f826-45f0-a03f-00e6cb268ebb"),new Guid("4e021875-5bae-4f01-8deb-641016cd2f8d"))
 				.WithObjectTypes(Period, AllorsDateTime)
@@ -942,9 +1097,11 @@ namespace Allors.Meta
 				.WithPluralName("ThroughDates")  
 				  
 				  
-				.Build();
+				.Build()
+				.RoleType;
 
 
+				// Deletable
 				// User
 				UserUserEmailConfirmed = new RelationTypeBuilder(Base, new Guid("0b3b650b-fcd4-4475-b5c4-e2ee4f39b0be"),new Guid("c89a8e3f-6f76-41ac-b4dc-839f9080d917"),new Guid("1b1409b8-add7-494c-a895-002fc969ac7b"))
 				.WithObjectTypes(User, AllorsBoolean)
@@ -952,7 +1109,8 @@ namespace Allors.Meta
 				.WithPluralName("UserEmailConfirmeds")  
 				  
 				  
-				.Build();
+				.Build()
+				.RoleType;
 
 				UserUserName = new RelationTypeBuilder(Base, new Guid("5e8ab257-1a1c-4448-aacc-71dbaaba525b"),new Guid("eca7ef36-8928-4116-bfce-1896a685fe8c"),new Guid("3b7d40a0-18ea-4018-b797-6417723e1890"))
 				.WithObjectTypes(User, AllorsString)
@@ -961,7 +1119,8 @@ namespace Allors.Meta
 				  
 				  
 				.WithSize(256)
-				.Build();
+				.Build()
+				.RoleType;
 
 				UserUserEmail = new RelationTypeBuilder(Base, new Guid("c1ae3652-5854-4b68-9890-a954067767fc"),new Guid("111104a2-1181-4958-92f6-6528cef79af7"),new Guid("58e35754-91a9-4956-aa66-ca48d05c7042"))
 				.WithObjectTypes(User, AllorsString)
@@ -970,7 +1129,8 @@ namespace Allors.Meta
 				  
 				  
 				.WithSize(256)
-				.Build();
+				.Build()
+				.RoleType;
 
 				UserUserPasswordHash = new RelationTypeBuilder(Base, new Guid("ea0c7596-c0b8-4984-bc25-cb4b4857954e"),new Guid("8537ddb5-8ce2-4f35-a16f-207f2519ba9c"),new Guid("75ee3ec2-02bb-4666-a6f0-bac84c844dfa"))
 				.WithObjectTypes(User, AllorsString)
@@ -979,7 +1139,8 @@ namespace Allors.Meta
 				  
 				  
 				.WithSize(256)
-				.Build();
+				.Build()
+				.RoleType;
 
 
 				// SearchResult
@@ -991,7 +1152,8 @@ namespace Allors.Meta
 				.WithPluralName("OwnerSecurityTokens")  
 				.WithIsDerived(true)  
 				.WithIsIndexed(true)  
-				.Build();
+				.Build()
+				.RoleType;
 
 
 				// Transition
@@ -1002,7 +1164,8 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.ManyToMany)
 				  
 				.WithIsIndexed(true)  
-				.Build();
+				.Build()
+				.RoleType;
 
 				TransitionToState = new RelationTypeBuilder(Base, new Guid("dd19e7f8-83b7-4ff1-b475-02c4296b47e4"),new Guid("c88c9ab2-af38-45ca-9caa-fcb5715da129"),new Guid("c68eb959-1b2c-48a7-b15a-944a576944ef"))
 				.WithObjectTypes(Transition, ObjectState)
@@ -1011,7 +1174,8 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.ManyToOne)
 				  
 				.WithIsIndexed(true)  
-				.Build();
+				.Build()
+				.RoleType;
 
 
 				// MediaType
@@ -1022,7 +1186,8 @@ namespace Allors.Meta
 				.WithIsDerived(true)  
 				  
 				.WithSize(256)
-				.Build();
+				.Build()
+				.RoleType;
 
 				MediaTypeName = new RelationTypeBuilder(Base, new Guid("5fcee025-29fd-42d8-ad5a-75cb88d8aef0"),new Guid("0353bfc3-552c-43c7-bfe2-666d2a8199dc"),new Guid("437caa53-1838-4cc4-a403-d65cf3b64358"))
 				.WithObjectTypes(MediaType, AllorsString)
@@ -1031,7 +1196,8 @@ namespace Allors.Meta
 				  
 				  
 				.WithSize(256)
-				.Build();
+				.Build()
+				.RoleType;
 
 
 				// Transitional
@@ -1043,7 +1209,8 @@ namespace Allors.Meta
 				  
 				.WithIsIndexed(true)  
 				.WithSize(256)
-				.Build();
+				.Build()
+				.RoleType;
 
 				LoginProvider = new RelationTypeBuilder(Base, new Guid("7a82e721-d0b7-4567-aaef-bd3987ae6d01"),new Guid("2f2ef41d-8310-45fd-8ab5-e5d067862e3d"),new Guid("c8e3851a-bc57-4acb-934a-4adfc37b1da7"))
 				.WithObjectTypes(Login, AllorsString)
@@ -1052,7 +1219,8 @@ namespace Allors.Meta
 				  
 				.WithIsIndexed(true)  
 				.WithSize(256)
-				.Build();
+				.Build()
+				.RoleType;
 
 				LoginUser = new RelationTypeBuilder(Base, new Guid("c2d950ad-39d3-40f1-8817-11a026e9890b"),new Guid("e8091111-9f92-41a9-b4b1-4e8f277ea575"),new Guid("150daf84-13ce-4b5f-83e6-64c7ef4f81c6"))
 				.WithObjectTypes(Login, User)
@@ -1061,7 +1229,8 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.ManyToOne)
 				  
 				.WithIsIndexed(true)  
-				.Build();
+				.Build()
+				.RoleType;
 
 
 				// Role
@@ -1072,7 +1241,8 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.ManyToMany)
 				  
 				.WithIsIndexed(true)  
-				.Build();
+				.Build()
+				.RoleType;
 
 				RoleName = new RelationTypeBuilder(Base, new Guid("934bcbbe-5286-445c-a1bd-e2fcc786c448"),new Guid("05785884-ca83-43de-a6f3-86d3fa7ec82a"),new Guid("8d87c74f-53ed-4e1d-a2ea-12190ac233d2"))
 				.WithObjectTypes(Role, AllorsString)
@@ -1081,7 +1251,8 @@ namespace Allors.Meta
 				  
 				  
 				.WithSize(256)
-				.Build();
+				.Build()
+				.RoleType;
 
 
 				// PrintQueue
@@ -1092,7 +1263,8 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.ManyToMany)
 				  
 				.WithIsIndexed(true)  
-				.Build();
+				.Build()
+				.RoleType;
 
 				PrintQueueName = new RelationTypeBuilder(Base, new Guid("7a85e090-55cf-47f5-912e-4bd87c66a060"),new Guid("01fa325c-4b41-4cbf-9ffe-65d25e0ae694"),new Guid("285adf08-7f1b-4dfe-8db5-cbf4a9d0cb59"))
 				.WithObjectTypes(PrintQueue, AllorsString)
@@ -1101,7 +1273,8 @@ namespace Allors.Meta
 				  
 				.WithIsIndexed(true)  
 				.WithSize(256)
-				.Build();
+				.Build()
+				.RoleType;
 
 
 				// Enumeration
@@ -1112,7 +1285,8 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.OneToMany)
 				  
 				.WithIsIndexed(true)  
-				.Build();
+				.Build()
+				.RoleType;
 
 				EnumerationName = new RelationTypeBuilder(Base, new Guid("3d3ae4d0-bac6-4645-8a53-3e9f7f9af086"),new Guid("004cc333-b8ae-4952-ae13-f2ab80eb018c"),new Guid("5850860d-c772-402f-815b-7634c9a1e697"))
 				.WithObjectTypes(Enumeration, AllorsString)
@@ -1121,7 +1295,8 @@ namespace Allors.Meta
 				  
 				.WithIsIndexed(true)  
 				.WithSize(256)
-				.Build();
+				.Build()
+				.RoleType;
 
 				EnumerationIsActive = new RelationTypeBuilder(Base, new Guid("f57bb62e-77a8-4519-81e6-539d54b71cb7"),new Guid("a8993304-52c0-4b53-9982-6caa5675467a"),new Guid("0c6faf5a-eac9-454c-bd53-3b8409e56d34"))
 				.WithObjectTypes(Enumeration, AllorsBoolean)
@@ -1129,7 +1304,8 @@ namespace Allors.Meta
 				.WithPluralName("AreActive")  
 				  
 				.WithIsIndexed(true)  
-				.Build();
+				.Build()
+				.RoleType;
 
 
 				// Country
@@ -1140,7 +1316,8 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.ManyToOne)
 				  
 				.WithIsIndexed(true)  
-				.Build();
+				.Build()
+				.RoleType;
 
 				CountryName = new RelationTypeBuilder(Base, new Guid("6b9c977f-b394-440e-9781-5d56733b60da"),new Guid("6e3532ae-3528-4114-9274-54fc08effd0d"),new Guid("60f1f9a3-13d1-485f-bc77-fda1f9ef1815"))
 				.WithObjectTypes(Country, AllorsString)
@@ -1149,7 +1326,8 @@ namespace Allors.Meta
 				  
 				.WithIsIndexed(true)  
 				.WithSize(256)
-				.Build();
+				.Build()
+				.RoleType;
 
 				CountryLocalisedName = new RelationTypeBuilder(Base, new Guid("8236a702-a76d-4bb5-9afd-acacb1508261"),new Guid("9b682612-50f9-43f3-abde-4d0cb5156f0d"),new Guid("99c52c13-ef50-4f68-a32f-fef660aa3044"))
 				.WithObjectTypes(Country, LocalisedText)
@@ -1158,7 +1336,8 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.OneToMany)
 				  
 				.WithIsIndexed(true)  
-				.Build();
+				.Build()
+				.RoleType;
 
 				CountryIsoCode = new RelationTypeBuilder(Base, new Guid("f93acc4e-f89e-4610-ada9-e58f21c165bc"),new Guid("ea0efe67-89f2-4317-97e7-f0e14358e718"),new Guid("4fe997d6-d221-432b-9f09-4f77735c109b"))
 				.WithObjectTypes(Country, AllorsString)
@@ -1167,7 +1346,8 @@ namespace Allors.Meta
 				  
 				  
 				.WithSize(2)
-				.Build();
+				.Build()
+				.RoleType;
 
 
 				// AccessControl
@@ -1178,7 +1358,8 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.ManyToMany)
 				  
 				.WithIsIndexed(true)  
-				.Build();
+				.Build()
+				.RoleType;
 
 				AccessControlSubject = new RelationTypeBuilder(Base, new Guid("37dd1e27-ba75-404c-9410-c6399d28317c"),new Guid("3d74101d-97bc-46fb-9548-96cb7aa01b39"),new Guid("e0303a17-bf7a-4a7f-bb4b-0a447c56aaaf"))
 				.WithObjectTypes(AccessControl, User)
@@ -1187,7 +1368,8 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.ManyToMany)
 				  
 				.WithIsIndexed(true)  
-				.Build();
+				.Build()
+				.RoleType;
 
 				AccessControlObject = new RelationTypeBuilder(Base, new Guid("6503574b-8bab-4da8-a19d-23a9bcffe01e"),new Guid("cae9e5c2-afa1-46f4-b930-69d4e810038f"),new Guid("ab2b4b9c-87dd-4712-b123-f5f9271c6193"))
 				.WithObjectTypes(AccessControl, SecurityToken)
@@ -1196,7 +1378,8 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.ManyToMany)
 				  
 				.WithIsIndexed(true)  
-				.Build();
+				.Build()
+				.RoleType;
 
 				AccessControlRole = new RelationTypeBuilder(Base, new Guid("69a9dae8-678d-4c1c-a464-2e5aa5caf39e"),new Guid("ec79e57d-be81-430a-b12f-08ffd1e94af3"),new Guid("370d3d12-3164-4753-8a72-1c604bda1b64"))
 				.WithObjectTypes(AccessControl, Role)
@@ -1205,7 +1388,8 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.ManyToOne)
 				  
 				  
-				.Build();
+				.Build()
+				.RoleType;
 
 
 				// Person
@@ -1216,7 +1400,8 @@ namespace Allors.Meta
 				  
 				  
 				.WithSize(256)
-				.Build();
+				.Build()
+				.RoleType;
 
 				PersonMiddleName = new RelationTypeBuilder(Base, new Guid("eb18bb28-da9c-47b4-a091-2f8f2303dcb6"),new Guid("e3a4d7b2-c5f1-4101-9aab-a0135d37a5a5"),new Guid("a86fc7a6-dedd-4da9-a250-75c9ec730d22"))
 				.WithObjectTypes(Person, AllorsString)
@@ -1225,7 +1410,8 @@ namespace Allors.Meta
 				  
 				  
 				.WithSize(256)
-				.Build();
+				.Build()
+				.RoleType;
 
 				PersonFirstName = new RelationTypeBuilder(Base, new Guid("ed4b710a-fe24-4143-bb96-ed1bd9beae1a"),new Guid("1ea9eca4-eed0-4f61-8903-c99feae961ad"),new Guid("f10ea049-6d24-4ca2-8efa-032fcf3000b3"))
 				.WithObjectTypes(Person, AllorsString)
@@ -1234,7 +1420,8 @@ namespace Allors.Meta
 				  
 				  
 				.WithSize(256)
-				.Build();
+				.Build()
+				.RoleType;
 
 
 				// Image
@@ -1245,7 +1432,8 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.ManyToOne)
 				  
 				.WithIsIndexed(true)  
-				.Build();
+				.Build()
+				.RoleType;
 
 				ImageResponsive = new RelationTypeBuilder(Base, new Guid("59689164-7a45-45d4-98fa-f8cf50c62899"),new Guid("386c7cfc-4bec-4564-a7c4-b2c1bccf6ebe"),new Guid("ce4c0fbb-5bdb-4c7f-a70a-b930c1020624"))
 				.WithObjectTypes(Image, Media)
@@ -1253,7 +1441,8 @@ namespace Allors.Meta
 				.WithPluralName("Responsives")  
 				  
 				.WithIsIndexed(true)  
-				.Build();
+				.Build()
+				.RoleType;
 
 				ImageOriginalFilename = new RelationTypeBuilder(Base, new Guid("d149b012-1dc2-4bd1-a650-26b7c6f9024b"),new Guid("75fccc6e-1c89-4e0f-88c2-527eb3b0d71d"),new Guid("2f1c8149-f94a-448b-a832-4994f635c48f"))
 				.WithObjectTypes(Image, AllorsString)
@@ -1262,7 +1451,8 @@ namespace Allors.Meta
 				  
 				  
 				.WithSize(256)
-				.Build();
+				.Build()
+				.RoleType;
 
 
 				// Derivable
@@ -1274,7 +1464,8 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.ManyToOne)
 				.WithIsDerived(true)  
 				.WithIsIndexed(true)  
-				.Build();
+				.Build()
+				.RoleType;
 
 				MediaMediaContent = new RelationTypeBuilder(Base, new Guid("67082a51-1502-490b-b8db-537799e550bd"),new Guid("e8537dcf-1bd7-46c4-a37c-077bee6a78a1"),new Guid("02fe1ce8-c019-4a40-bd6f-b38d2f47a288"))
 				.WithObjectTypes(Media, MediaContent)
@@ -1283,7 +1474,8 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.ManyToOne)
 				.WithIsDerived(true)  
 				.WithIsIndexed(true)  
-				.Build();
+				.Build()
+				.RoleType;
 
 
 				// AccessControlledObject
@@ -1294,7 +1486,8 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.ManyToMany)
 				  
 				.WithIsIndexed(true)  
-				.Build();
+				.Build()
+				.RoleType;
 
 				AccessControlledObjectSecurityToken = new RelationTypeBuilder(Base, new Guid("b816fccd-08e0-46e0-a49c-7213c3604416"),new Guid("1739db0d-fe6b-42e1-a6a5-286536ff4f56"),new Guid("9f722315-385a-42ab-b84e-83063b0e5b0d"))
 				.WithObjectTypes(AccessControlledObject, SecurityToken)
@@ -1303,7 +1496,8 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.ManyToMany)
 				  
 				.WithIsIndexed(true)  
-				.Build();
+				.Build()
+				.RoleType;
 
 
 				// UserInterfaceable
@@ -1314,9 +1508,11 @@ namespace Allors.Meta
 				.WithIsDerived(true)  
 				.WithIsIndexed(true)  
 				.WithSize(256)
-				.Build();
+				.Build()
+				.RoleType;
 
 
+				// Object
 				// ObjectState
 				ObjectStateDeniedPermission = new RelationTypeBuilder(Base, new Guid("59338f0b-40e7-49e8-ba1a-3ecebf96aebe"),new Guid("fca0f3f6-bdd6-4405-93b3-35dd769bff0e"),new Guid("c338f087-559c-4239-9c6a-1f691e58ed16"))
 				.WithObjectTypes(ObjectState, Permission)
@@ -1325,7 +1521,8 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.ManyToMany)
 				  
 				.WithIsIndexed(true)  
-				.Build();
+				.Build()
+				.RoleType;
 
 				ObjectStateName = new RelationTypeBuilder(Base, new Guid("b86f9e42-fe10-4302-ab7c-6c6c7d357c39"),new Guid("052ec640-3150-458a-99d5-0edce6eb6149"),new Guid("945cbba6-4b09-4b87-931e-861b147c3823"))
 				.WithObjectTypes(ObjectState, AllorsString)
@@ -1334,7 +1531,8 @@ namespace Allors.Meta
 				  
 				.WithIsIndexed(true)  
 				.WithSize(256)
-				.Build();
+				.Build()
+				.RoleType;
 
 
 				// Currency
@@ -1345,7 +1543,8 @@ namespace Allors.Meta
 				  
 				  
 				.WithSize(256)
-				.Build();
+				.Build()
+				.RoleType;
 
 				CurrencyName = new RelationTypeBuilder(Base, new Guid("74c8308b-1b76-4218-9532-f01c9d1e146b"),new Guid("2cb43671-c648-4bd4-ac08-7302c29246e7"),new Guid("e7c93764-d634-4187-97ed-9248ea56bab2"))
 				.WithObjectTypes(Currency, AllorsString)
@@ -1354,7 +1553,8 @@ namespace Allors.Meta
 				  
 				.WithIsIndexed(true)  
 				.WithSize(256)
-				.Build();
+				.Build()
+				.RoleType;
 
 				CurrencySymbol = new RelationTypeBuilder(Base, new Guid("82797074-8d6c-4d61-a885-34ae7133a503"),new Guid("0d4524d0-503f-494d-87a4-cbc239b278e1"),new Guid("43e13383-ea7f-4aa1-872c-eec0b53a998e"))
 				.WithObjectTypes(Currency, AllorsString)
@@ -1363,7 +1563,8 @@ namespace Allors.Meta
 				  
 				  
 				.WithSize(256)
-				.Build();
+				.Build()
+				.RoleType;
 
 				CurrencyLocalisedName = new RelationTypeBuilder(Base, new Guid("e9fc0472-cf7a-4e02-b061-cb42b6f5c273"),new Guid("06b8f2b2-91f0-4b89-ae19-b47de4524556"),new Guid("e1301b8f-25cc-4ace-884e-79af1d303f53"))
 				.WithObjectTypes(Currency, LocalisedText)
@@ -1372,7 +1573,8 @@ namespace Allors.Meta
 				.WithMultiplicity(Multiplicity.OneToMany)
 				  
 				.WithIsIndexed(true)  
-				.Build();
+				.Build()
+				.RoleType;
 
 
 				// Commentable
@@ -1383,7 +1585,8 @@ namespace Allors.Meta
 				  
 				  
 				.WithSize(-1)
-				.Build();
+				.Build()
+				.RoleType;
 
 
 				// Searchable
@@ -1393,7 +1596,95 @@ namespace Allors.Meta
 				.WithPluralName("SearchDatas")  
 				.WithIsDerived(true)  
 				.WithIsIndexed(true)  
-				.Build();
+				.Build()
+				.RoleType;
+
+
+
+
+			// ConcreteRoleTypes
+		PersonUserEmailConfirmed = Person.ConcreteRoleTypeByRoleType[UserUserEmailConfirmed];
+
+
+		LocalisedTextDeniedPermission = LocalisedText.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
+		SingletonDeniedPermission = Singleton.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
+		LocaleDeniedPermission = Locale.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
+		LanguageDeniedPermission = Language.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
+		UserGroupDeniedPermission = UserGroup.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
+		PermissionDeniedPermission = Permission.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
+		MediaTypeDeniedPermission = MediaType.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
+		RoleDeniedPermission = Role.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
+		PrintQueueDeniedPermission = PrintQueue.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
+		CountryDeniedPermission = Country.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
+		AccessControlDeniedPermission = AccessControl.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
+		PersonDeniedPermission = Person.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
+		MediaDeniedPermission = Media.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
+		CurrencyDeniedPermission = Currency.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
+
+
+		PersonUserName = Person.ConcreteRoleTypeByRoleType[UserUserName];
+
+
+		LocalisedTextSearchData = LocalisedText.ConcreteRoleTypeByRoleType[SearchableSearchData];
+		LanguageSearchData = Language.ConcreteRoleTypeByRoleType[SearchableSearchData];
+		UserGroupSearchData = UserGroup.ConcreteRoleTypeByRoleType[SearchableSearchData];
+		CountrySearchData = Country.ConcreteRoleTypeByRoleType[SearchableSearchData];
+		PersonSearchData = Person.ConcreteRoleTypeByRoleType[SearchableSearchData];
+
+
+		PersonOwnerSecurityToken = Person.ConcreteRoleTypeByRoleType[SecurityTokenOwnerOwnerSecurityToken];
+
+
+		LocalisedTextDisplayName = LocalisedText.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
+		SingletonDisplayName = Singleton.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
+		LocaleDisplayName = Locale.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
+		LanguageDisplayName = Language.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
+		UserGroupDisplayName = UserGroup.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
+		PermissionDisplayName = Permission.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
+		MediaTypeDisplayName = MediaType.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
+		RoleDisplayName = Role.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
+		PrintQueueDisplayName = PrintQueue.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
+		CountryDisplayName = Country.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
+		AccessControlDisplayName = AccessControl.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
+		PersonDisplayName = Person.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
+		MediaDisplayName = Media.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
+		CurrencyDisplayName = Currency.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
+
+
+		LocalisedTextLocale = LocalisedText.ConcreteRoleTypeByRoleType[LocalisedLocale];
+		StringTemplateLocale = StringTemplate.ConcreteRoleTypeByRoleType[LocalisedLocale];
+		PersonLocale = Person.ConcreteRoleTypeByRoleType[LocalisedLocale];
+
+
+		LocalisedTextSecurityToken = LocalisedText.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
+		SingletonSecurityToken = Singleton.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
+		LocaleSecurityToken = Locale.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
+		LanguageSecurityToken = Language.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
+		UserGroupSecurityToken = UserGroup.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
+		PermissionSecurityToken = Permission.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
+		MediaTypeSecurityToken = MediaType.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
+		RoleSecurityToken = Role.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
+		PrintQueueSecurityToken = PrintQueue.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
+		CountrySecurityToken = Country.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
+		AccessControlSecurityToken = AccessControl.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
+		PersonSecurityToken = Person.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
+		MediaSecurityToken = Media.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
+		CurrencySecurityToken = Currency.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
+
+
+		PersonUserEmail = Person.ConcreteRoleTypeByRoleType[UserUserEmail];
+
+
+		CounterUniqueId = Counter.ConcreteRoleTypeByRoleType[UniquelyIdentifiableUniqueId];
+		StringTemplateUniqueId = StringTemplate.ConcreteRoleTypeByRoleType[UniquelyIdentifiableUniqueId];
+		UserGroupUniqueId = UserGroup.ConcreteRoleTypeByRoleType[UniquelyIdentifiableUniqueId];
+		RoleUniqueId = Role.ConcreteRoleTypeByRoleType[UniquelyIdentifiableUniqueId];
+		PrintQueueUniqueId = PrintQueue.ConcreteRoleTypeByRoleType[UniquelyIdentifiableUniqueId];
+		PersonUniqueId = Person.ConcreteRoleTypeByRoleType[UniquelyIdentifiableUniqueId];
+		MediaUniqueId = Media.ConcreteRoleTypeByRoleType[UniquelyIdentifiableUniqueId];
+
+
+		PersonUserPasswordHash = Person.ConcreteRoleTypeByRoleType[UserUserPasswordHash];
 
 
 

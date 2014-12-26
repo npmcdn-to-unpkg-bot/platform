@@ -25,12 +25,8 @@ namespace Allors.Domain
     using System.Globalization;
     using System.Text;
 
-    using Allors.Domain;
     using Allors.Meta;
     using Allors;
-    using Allors.Meta;
-
-    using ObjectBase = ObjectBase;
 
     public class CsvExportPath : CsvExportColumn
     {
@@ -57,7 +53,7 @@ namespace Allors.Domain
 
         public override void Write(CsvExport file, CultureInfo cultureInfo, StringBuilder stringBuilder, IObject obj, IAccessControlListFactory aclFactory)
         {
-            var value = this.Path.Get((ObjectBase)obj, aclFactory) ?? this.EmptyValue;
+            var value = this.Path.Get(obj, aclFactory) ?? this.EmptyValue;
 
             if (value != null)
             {

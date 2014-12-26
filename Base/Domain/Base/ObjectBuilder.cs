@@ -23,13 +23,10 @@ namespace Allors
     using System;
     using System.Collections.Generic;
 
-    using Allors;
     using Allors.Domain;
     using Allors.Meta;
 
-    using ObjectBase = Allors.ObjectBase;
-
-    public abstract class ObjectBuilder<T> : ObjectBuilder where T : Allors.ObjectBase
+    public abstract class ObjectBuilder<T> : ObjectBuilder where T : Domain.Object
     {
         private readonly ISession session;
 
@@ -72,7 +69,7 @@ namespace Allors
             return "Builder for " + typeof(T).Name;
         }
 
-        public override Allors.ObjectBase DefaultBuild()
+        public override IObject DefaultBuild()
         {
             return this.Build();
         }
@@ -86,12 +83,6 @@ namespace Allors
                 this.OnPreBuild();
                 var instance = this.session.Create<T>();
                 instance.OnBuild(this);
-
-                var identifiable = instance as UniquelyIdentifiable;
-                if (identifiable != null && !identifiable.ExistUniqueId)
-                {
-                    identifiable.Strategy.SetUnitRole(UniquelyIdentifiables.Meta.UniqueId, Guid.NewGuid());
-                }
 
                 this.OnPostBuild(instance);
 
@@ -112,7 +103,7 @@ namespace Allors
 
         protected virtual void OnPostBuild(T instance)
         {
-            instance.OnPostBuild(this);
+            instance.OnPostBuild().WithBuilder(this).Execute();
         }
     }
 
@@ -178,6 +169,6 @@ namespace Allors
 
         public abstract void Dispose();
 
-        public abstract Allors.ObjectBase DefaultBuild();
+        public abstract IObject DefaultBuild();
     }
 }

@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="AccessControlledObject.cs" company="Allors bvba">
+// <copyright file="SearchableExtensions.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 //
 // Dual Licensed under
@@ -20,8 +20,14 @@
 
 namespace Allors.Domain
 {
-    public partial interface AccessControlledObject
+    public static partial class SearchableExtensions
     {
-        void ApplySecurityOnPostBuild();
+        public static void BaseOnPostBuild(this Searchable @this, ObjectOnPostBuild method)
+        {
+            if (!@this.ExistSearchData)
+            {
+                @this.SearchData = new SearchDataBuilder(@this.Strategy.Session).Build();
+            }
+        }
     }
 }

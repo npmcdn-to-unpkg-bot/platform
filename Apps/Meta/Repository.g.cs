@@ -545,6 +545,7 @@ namespace Allors.Meta
 		public static Class Media;
 		public static Interface AccessControlledObject;
 		public static Interface UserInterfaceable;
+		public static Interface Object;
 		public static Interface ObjectState;
 		public static Class Currency;
 		public static Interface Commentable;
@@ -9979,6 +9980,12 @@ namespace Allors.Meta
 			.Build();
   
   
+			Object = new InterfaceBuilder(Base, new Guid("f8a7cd0e-bd7f-4ce9-ab5d-8c1629cd883d"))
+			.WithSingularName("Object")
+			.WithPluralName("Objects")
+			.Build();
+  
+  
 			ObjectState = new InterfaceBuilder(Base, new Guid("f991813f-3146-4431-96d0-554aa2186887"))
 			.WithSingularName("ObjectState")
 			.WithPluralName("ObjectStates")
@@ -13563,6 +13570,7 @@ namespace Allors.Meta
 				.WithSubtype(UserInterfaceable)
 				.WithSupertype(AccessControlledObject).Build();
 
+				// Object
 				// ObjectState
 				new InheritanceBuilder(Base, new Guid("dd9d3cf5-5c9b-444a-a4b1-a4d807597cf6"))
 				.WithSubtype(ObjectState)
@@ -32251,6 +32259,7 @@ namespace Allors.Meta
 				.RoleType;
 
 
+				// Object
 				// ObjectState
 				ObjectStateDeniedPermission = new RelationTypeBuilder(Base, new Guid("59338f0b-40e7-49e8-ba1a-3ecebf96aebe"),new Guid("fca0f3f6-bdd6-4405-93b3-35dd769bff0e"),new Guid("c338f087-559c-4239-9c6a-1f691e58ed16"))
 				.WithObjectTypes(ObjectState, Permission)

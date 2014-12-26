@@ -104,7 +104,7 @@ namespace Allors.Domain
             {
                 if (!this.ExistThumbnail)
                 {
-                    this.Thumbnail = new MediaBuilder(this.Session).Build();
+                    this.Thumbnail = new MediaBuilder(this.Strategy.Session).Build();
                 }
 
                 // TODO: Resize
@@ -123,12 +123,7 @@ namespace Allors.Domain
 
             if (!this.ExistSoldBy)
             {
-                this.SoldBy = Domain.Singleton.Instance(this.Session).DefaultInternalOrganisation;
-            }
-
-            if (!this.ExistSearchData)
-            {
-                this.SearchData = new SearchDataBuilder(this.Session).Build();
+                this.SoldBy = Domain.Singleton.Instance(this.Strategy.Session).DefaultInternalOrganisation;
             }
         }
 

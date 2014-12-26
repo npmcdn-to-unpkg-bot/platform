@@ -35,7 +35,7 @@ namespace Allors.Domain
 
             if (!this.ExistInternalOrganisation)
             {
-                this.InternalOrganisation = Domain.Singleton.Instance(this.Session).DefaultInternalOrganisation;
+                this.InternalOrganisation = Domain.Singleton.Instance(this.Strategy.Session).DefaultInternalOrganisation;
             }
 
             if (!this.ExistSubAccountNumber)
@@ -71,7 +71,7 @@ namespace Allors.Domain
             this.DeriveMembership(derivation);
             this.DeriveInternalOrganisationSupplier(derivation);
 
-            if (this.Session is IDatabaseSession)
+            if (this.Strategy.Session is IDatabaseSession)
             {
                 var supplierRelationships = this.InternalOrganisation.SupplierRelationshipsWhereInternalOrganisation;
                 supplierRelationships.Filter.AddEquals(SupplierRelationships.Meta.SubAccountNumber, this.SubAccountNumber);

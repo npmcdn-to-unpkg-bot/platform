@@ -28,14 +28,9 @@ namespace Allors.Domain
         {
             base.AppsOnPostBuild(builder);
 
-            if (!this.ExistSearchData)
-            {
-                this.SearchData = new SearchDataBuilder(this.Session).Build();
-            }
-
             if (!this.ExistLocale)
             {
-                this.Locale = Singleton.Instance(this.Session).DefaultLocale;
+                this.Locale = Singleton.Instance(this.Strategy.Session).DefaultLocale;
             }
         }
 
@@ -43,7 +38,7 @@ namespace Allors.Domain
         {
             this.RemoveSecurityTokens();
             this.AddSecurityToken(this.OwnerSecurityToken);
-            this.AddSecurityToken(Singleton.Instance(this.Session).AdministratorSecurityToken);
+            this.AddSecurityToken(Singleton.Instance(this.Strategy.Session).AdministratorSecurityToken);
 
             foreach (CustomerRelationship customerRelationship in this.CustomerRelationshipsWhereCustomer)
             {
@@ -59,7 +54,7 @@ namespace Allors.Domain
 
             if (!this.ExistOwnerSecurityToken)
             {
-                var securityToken = new SecurityTokenBuilder(this.Session).Build();
+                var securityToken = new SecurityTokenBuilder(this.Strategy.Session).Build();
                 this.OwnerSecurityToken = securityToken;
 
                 this.AddSecurityToken(this.OwnerSecurityToken);
@@ -260,7 +255,7 @@ namespace Allors.Domain
 
         private void AppsDeriveUserGroups(IDerivation derivation)
         {
-            if (this.IsInDatabase)
+            if (this.Strategy.Session.Population is IDatabase)
             {
                 var customerContactGroupName = string.Format("Customer contacts at {0} ({1})", this.DisplayName, this.UniqueId);
                 var supplierContactGroupName = string.Format("Supplier contacts at {0} ({1})", this.DisplayName, this.UniqueId);
@@ -290,35 +285,35 @@ namespace Allors.Domain
 
                 if (!customerContactGroupFound)
                 {
-                    this.CustomerContactUserGroup = new UserGroupBuilder(this.Session)
+                    this.CustomerContactUserGroup = new UserGroupBuilder(this.Strategy.Session)
                         .WithName(customerContactGroupName)
                         .WithParty(this)
-                        .WithParent(new UserGroups(this.Session).Customers)
+                        .WithParent(new UserGroups(this.Strategy.Session).Customers)
                         .Build();
 
-                    new AccessControlBuilder(this.Session).WithRole(new Roles(DatabaseSession).Customer).WithSubjectGroup(this.CustomerContactUserGroup).WithObject(this.OwnerSecurityToken).Build();
+                    new AccessControlBuilder(this.Strategy.Session).WithRole(new Roles(this.Strategy.DatabaseSession).Customer).WithSubjectGroup(this.CustomerContactUserGroup).WithObject(this.OwnerSecurityToken).Build();
                 }
 
                 if (!supplierContactGroupFound)
                 {
-                    this.SupplierContactUserGroup = new UserGroupBuilder(this.Session)
+                    this.SupplierContactUserGroup = new UserGroupBuilder(this.Strategy.Session)
                         .WithName(supplierContactGroupName)
                         .WithParty(this)
-                        .WithParent(new UserGroups(this.Session).Suppliers)
+                        .WithParent(new UserGroups(this.Strategy.Session).Suppliers)
                         .Build();
 
-                    new AccessControlBuilder(this.Session).WithRole(new Roles(DatabaseSession).Supplier).WithSubjectGroup(this.SupplierContactUserGroup).WithObject(this.OwnerSecurityToken).Build();
+                    new AccessControlBuilder(this.Strategy.Session).WithRole(new Roles(this.Strategy.DatabaseSession).Supplier).WithSubjectGroup(this.SupplierContactUserGroup).WithObject(this.OwnerSecurityToken).Build();
                 }
 
                 if (!partnerContactGroupFound)
                 {
-                    this.PartnerContactUserGroup = new UserGroupBuilder(this.Session)
+                    this.PartnerContactUserGroup = new UserGroupBuilder(this.Strategy.Session)
                         .WithName(partnerContactGroupName)
                         .WithParty(this)
-                        .WithParent(new UserGroups(this.Session).Partners)
+                        .WithParent(new UserGroups(this.Strategy.Session).Partners)
                         .Build();
 
-                    new AccessControlBuilder(this.Session).WithRole(new Roles(DatabaseSession).Partner).WithSubjectGroup(this.PartnerContactUserGroup).WithObject(this.OwnerSecurityToken).Build();
+                    new AccessControlBuilder(this.Strategy.Session).WithRole(new Roles(this.Strategy.DatabaseSession).Partner).WithSubjectGroup(this.PartnerContactUserGroup).WithObject(this.OwnerSecurityToken).Build();
                 }
             }
         }

@@ -76,7 +76,7 @@ namespace Allors.Domain
             var lastDayOfMonth = new DateTime(this.Year, this.Month, 01).AddMonths(1).AddSeconds(-1).Day;
 
             var invoices = this.Store.SalesInvoicesWhereStore;
-            invoices.Filter.AddNot().AddEquals(SalesInvoices.Meta.CurrentObjectState, new SalesInvoiceObjectStates(this.DatabaseSession).WrittenOff);
+            invoices.Filter.AddNot().AddEquals(SalesInvoices.Meta.CurrentObjectState, new SalesInvoiceObjectStates(this.Strategy.DatabaseSession).WrittenOff);
             invoices.Filter.AddBetween(SalesInvoices.Meta.InvoiceDate, new DateTime(this.Year, this.Month, 01), new DateTime(this.Year, this.Month, lastDayOfMonth));
 
             foreach (SalesInvoice salesInvoice in invoices)
@@ -89,7 +89,7 @@ namespace Allors.Domain
             {
                 var histories = this.Store.StoreRevenueHistoriesWhereStore;
                 histories.Filter.AddEquals(StoreRevenueHistories.Meta.InternalOrganisation, this.InternalOrganisation);
-                var history = histories.First ?? new StoreRevenueHistoryBuilder(this.Session)
+                var history = histories.First ?? new StoreRevenueHistoryBuilder(this.Strategy.Session)
                                                      .WithCurrency(this.Currency)
                                                      .WithInternalOrganisation(this.InternalOrganisation)
                                                      .WithStore(this.Store)
@@ -98,7 +98,7 @@ namespace Allors.Domain
                 history.AppsDeriveRevenue();
             }
 
-            var internalOrganisationRevenue = InternalOrganisationRevenues.AppsFindOrCreateAsDependable(this.Session, this);
+            var internalOrganisationRevenue = InternalOrganisationRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, this);
             internalOrganisationRevenue.Derive().Execute();
         }
     }

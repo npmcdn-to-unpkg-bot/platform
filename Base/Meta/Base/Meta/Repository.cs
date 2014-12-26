@@ -26,75 +26,141 @@ namespace Allors.Meta
     {
         public static void BasePostInit(MetaPopulation meta)
         {
-            // Counter
-            AccessControlRole.IsRequired = true;
-            AccessControlObject.IsRequired = true;
+            // All composites should implement Object
+            foreach (var composite in meta.Composites)
+            {
+                if (!composite.ExistDirectSupertypes && !composite.Equals(Object))
+                {
+                    new InheritanceBuilder(Base, Guid.NewGuid()).WithSubtype(composite).WithSupertype(Object).Build();
+                }
+            }
 
-            // Counter
-            CounterValue.IsRequired = true;
+            new MethodTypeBuilder(Base, new Guid("62D48A76-A500-4D16-9D20-6FEF43AC6DCB")).WithObjectType(Object).WithName("OnPostBuild").Build();
+            new MethodTypeBuilder(Base, new Guid("042375D8-BBDD-46E8-80B6-CC89D8782F1C")).WithObjectType(Object).WithName("ApplySecurityOnPostBuild").Build();
 
-            // Country
-            CountryIsoCode.IsRequired = true;
-            CountryName.IsRequired = true;
-
-            // Currency
-            CurrencyIsoCode.IsRequired = true;
-            CurrencyName.IsRequired = true;
-            CurrencySymbol.IsRequired = true;
-
-            // Derivation
-            new MethodTypeBuilder(Base, new Guid("122D3D78-AB97-4A69-A725-F465C71757DA")).WithObjectType(Derivable).WithName("PrepareDerivation").Build();
-            new MethodTypeBuilder(Base, new Guid("527DA7F8-68B4-46AB-B0D8-6B9E82D2A5AC")).WithObjectType(Derivable).WithName("Derive").Build();
-            new MethodTypeBuilder(Base, new Guid("349CBCDE-B4E9-4965-B3FF-7C41B021825D")).WithObjectType(Derivable).WithName("ApplySecurityOnDerive").Build();
+            new MethodTypeBuilder(Base, new Guid("F4CC201F-D6CB-4D82-8AEB-E9C4C79C33F7")).WithObjectType(Deletable).WithName("Delete").Build();
             
-            // Enumeration
-            EnumerationName.IsRequired = true;
-            EnumerationIsActive.IsRequired = true;
-            
-            // Language
-            LanguageIsoCode.IsRequired = true;
-            LanguageName.IsRequired = true;
+            BaseCounter();
+            BaseAccessControl();
+            BaseCountry();
+            BaseCurrency();
+            BaseDerivable();
+            BaseEnumeration();
+            BaseLanguage();
+            BaseLocale();
+            BaseLocalisedText();
+            BaseMedia();
+            BaseMediaContent();
+            BaseMediaType();
+            BasePeriod();
+            BasePermission();
+            BaseRole();
+            BaseStringTemplate();
+            BaseUniquelyIdentifiable();
+            BaseUserGroup();
+        }
 
-            // Locale
-            LocaleLanguage.IsRequired = true;
-            LocaleCountry.IsRequired = true;
-            
-            // LocalisedText
-            LocalisedTextText.IsRequired = true;
+        private static void BaseUserGroup()
+        {
+            UserGroupName.IsRequired = true;
+        }
 
-            // Media
-            MediaMediaType.IsRequired = true;
-            MediaMediaType.IsRequired = true;
+        private static void BaseUniquelyIdentifiable()
+        {
+            UniquelyIdentifiableUniqueId.IsRequired = true;
+        }
 
-            // MediaContent
-            MediaContentValue.IsRequired = true;
+        private static void BaseStringTemplate()
+        {
+            StringTemplateName.IsRequired = true;
+            StringTemplateLocale.IsRequiredOverride = true;
+        }
 
-            // MediaType
-            MediaTypeName.IsRequired = true;
+        private static void BaseRole()
+        {
+            RoleName.IsRequired = true;
+        }
 
-            // Period
-            PeriodFromDate.IsRequired = true;
-
-            // Permission
+        private static void BasePermission()
+        {
             PermissionOperandTypePointer.IsRequired = true;
             PermissionConcreteClassPointer.IsRequired = true;
             PermissionOperationEnum.IsRequired = true;
+        }
 
-            // Role
-            RoleName.IsRequired = true;
+        private static void BasePeriod()
+        {
+            PeriodFromDate.IsRequired = true;
+        }
 
-            // StringTemplate
-            StringTemplateLocale.IsRequiredOverride = true;
-            StringTemplateTemplatePurpose.IsRequired = true;
+        private static void BaseMediaType()
+        {
+            MediaTypeName.IsRequired = true;
+        }
 
-            // UniquelyIdentifiable
-            UniquelyIdentifiableUniqueId.IsRequired = true;
+        private static void BaseMediaContent()
+        {
+            MediaContentValue.IsRequired = true;
+        }
 
-            // UserGroup
-            UserGroupName.IsRequired = true;
+        private static void BaseMedia()
+        {
+            MediaMediaType.IsRequired = true;
+            MediaMediaType.IsRequired = true;
+        }
 
-            // StringTemplate
-            StringTemplateName.IsRequired = true;
+        private static void BaseLocalisedText()
+        {
+            LocalisedTextText.IsRequired = true;
+        }
+
+        private static void BaseLocale()
+        {
+            LocaleLanguage.IsRequired = true;
+            LocaleCountry.IsRequired = true;
+        }
+
+        private static void BaseLanguage()
+        {
+            LanguageIsoCode.IsRequired = true;
+            LanguageName.IsRequired = true;
+        }
+
+        private static void BaseEnumeration()
+        {
+            EnumerationName.IsRequired = true;
+            EnumerationIsActive.IsRequired = true;
+        }
+
+        private static void BaseDerivable()
+        {
+            new MethodTypeBuilder(Base, new Guid("122D3D78-AB97-4A69-A725-F465C71757DA")).WithObjectType(Derivable).WithName("PrepareDerivation").Build();
+            new MethodTypeBuilder(Base, new Guid("527DA7F8-68B4-46AB-B0D8-6B9E82D2A5AC")).WithObjectType(Derivable).WithName("Derive").Build();
+            new MethodTypeBuilder(Base, new Guid("349CBCDE-B4E9-4965-B3FF-7C41B021825D")).WithObjectType(Derivable).WithName("ApplySecurityOnDerive").Build();
+        }
+
+        private static void BaseCurrency()
+        {
+            CurrencyIsoCode.IsRequired = true;
+            CurrencyName.IsRequired = true;
+            CurrencySymbol.IsRequired = true;
+        }
+
+        private static void BaseCountry()
+        {
+            CountryIsoCode.IsRequired = true;
+            CountryName.IsRequired = true;
+        }
+
+        private static void BaseAccessControl()
+        {
+            AccessControlRole.IsRequired = true;
+            AccessControlObject.IsRequired = true;
+        }
+
+        private static void BaseCounter()
+        {
+            CounterValue.IsRequired = true;
         }
     }
 }
