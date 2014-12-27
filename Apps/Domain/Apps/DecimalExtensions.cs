@@ -24,7 +24,7 @@ namespace Allors
 
     using Allors.Domain;
 
-    public static class DecimalExtensions
+    public static partial class DecimalExtensions
     {
         public static string ToString(this decimal dec, Locale locale)
         {
