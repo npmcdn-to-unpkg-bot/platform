@@ -367,17 +367,20 @@ namespace Allors.Meta
 
             this.derivedRoleTypes = new LazySet<RoleType>(roleTypes);
         }
-        
+
         /// <summary>
         /// Derive association types.
         /// </summary>
         /// <param name="associations">The associations.</param>
-        internal void DeriveAssociationTypes(HashSet<AssociationType> associations)
+        /// <param name="relationTypesByRoleObjectType"></param>
+        internal void DeriveAssociationTypes(HashSet<AssociationType> associations, Dictionary<ObjectType, HashSet<AssociationType>> relationTypesByRoleObjectType)
         {
             associations.Clear();
-            foreach (var relationType in this.MetaPopulation.RelationTypes.Where(rel => this.Equals(rel.RoleType.ObjectType)))
+            
+            HashSet<AssociationType> classAssociationTypes;
+            if (relationTypesByRoleObjectType.TryGetValue(this, out classAssociationTypes))
             {
-                associations.Add(relationType.AssociationType);
+                associations.UnionWith(classAssociationTypes);
             }
 
             foreach (var superType in this.Supertypes)
@@ -385,7 +388,11 @@ namespace Allors.Meta
                 var type = superType;
                 foreach (var relationType in this.MetaPopulation.RelationTypes.Where(rel => type.Equals(rel.RoleType.ObjectType)))
                 {
-                    associations.Add(relationType.AssociationType);
+                    HashSet<AssociationType> interfaceAssociationTypes;
+                    if (relationTypesByRoleObjectType.TryGetValue(type, out interfaceAssociationTypes))
+                    {
+                        associations.UnionWith(interfaceAssociationTypes);
+                    }
                 }
             }
 

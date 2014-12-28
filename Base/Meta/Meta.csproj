@@ -80,6 +80,9 @@
     <Compile Include="..\..\Core\Meta\Core\Meta\Composite.cs">
       <Link>Core\Meta\Composite.cs</Link>
     </Compile>
+    <Compile Include="..\..\Core\Meta\Core\Meta\ConcreteMethodType.cs">
+      <Link>Core\Meta\ConcreteMethodType.cs</Link>
+    </Compile>
     <Compile Include="..\..\Core\Meta\Core\Meta\ConcreteRoleType.cs">
       <Link>Core\Meta\ConcreteRoleType.cs</Link>
     </Compile>

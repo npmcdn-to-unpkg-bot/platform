@@ -31,7 +31,11 @@ namespace Allors.Meta
 
         private readonly Dictionary<RoleType, ConcreteRoleType> concreteRoleTypeByRoleType;
 
+        private readonly Dictionary<MethodType, ConcreteMethodType> concreteMethodTypeByMethodType;
+
         private ConcreteRoleType[] concreteRoleTypes;
+
+        private ConcreteMethodType[] concreteMethodTypes;
 
         private Type clrType;
 
@@ -39,6 +43,7 @@ namespace Allors.Meta
             : base(domain, id)
         {
             this.concreteRoleTypeByRoleType = new Dictionary<RoleType, ConcreteRoleType>();
+            this.concreteMethodTypeByMethodType = new Dictionary<MethodType, ConcreteMethodType>();
 
             this.leafClasses = new[] { this };
             domain.OnClassCreated(this);
@@ -53,12 +58,31 @@ namespace Allors.Meta
             }
         }
 
+        public Dictionary<MethodType, ConcreteMethodType> ConcreteMethodTypeByMethodType
+        {
+            get
+            {
+                this.MetaPopulation.Derive();
+                return this.concreteMethodTypeByMethodType;
+            }
+        }
+
         public ConcreteRoleType[] ConcreteRoleTypes
         {
             get
             {
                 this.MetaPopulation.Derive();
                 return this.concreteRoleTypes;
+            }
+        }
+
+
+        public ConcreteMethodType[] ConcreteMethodTypes
+        {
+            get
+            {
+                this.MetaPopulation.Derive();
+                return this.concreteMethodTypes;
             }
         }
 
@@ -115,6 +139,32 @@ namespace Allors.Meta
             }
 
             this.concreteRoleTypes = this.concreteRoleTypeByRoleType.Values.ToArray();
+        }
+
+        public void DeriveConcreteMethodTypes(HashSet<MethodType> sharedMethodTypes)
+        {
+            sharedMethodTypes.Clear();
+            var removedMethodTypes = sharedMethodTypes;
+            removedMethodTypes.UnionWith(this.concreteMethodTypeByMethodType.Keys);
+
+            foreach (var methodType in this.MethodTypes)
+            {
+                removedMethodTypes.Remove(methodType);
+
+                ConcreteMethodType concreteMethodType;
+                if (!this.concreteMethodTypeByMethodType.TryGetValue(methodType, out concreteMethodType))
+                {
+                    concreteMethodType = new ConcreteMethodType(this, methodType);
+                    this.concreteMethodTypeByMethodType[methodType] = concreteMethodType;
+                }
+            }
+
+            foreach (var methodType in removedMethodTypes)
+            {
+                this.concreteMethodTypeByMethodType.Remove(methodType);
+            }
+
+            this.concreteMethodTypes = this.concreteMethodTypeByMethodType.Values.ToArray();
         }
 
         public override Type ClrType

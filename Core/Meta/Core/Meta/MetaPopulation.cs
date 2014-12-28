@@ -372,10 +372,15 @@ namespace Allors.Meta
                             where method.IsDefined(typeof(ExtensionAttribute), false)
                             select method).ToArray();
 
-                //foreach (var methodType in this.MethodTypes)
-                //{
-                //    methodType.Bind(assembly, sortedDomains, extensionMethods);
-                //}
+                var actionByMethodInfoByType = new Dictionary<Type, Dictionary<MethodInfo, Action<object, object>>>();
+
+                foreach (var @class in this.Classes)
+                {
+                    foreach (var concreteMethodType in @class.ConcreteMethodTypes)
+                    {
+                        concreteMethodType.Bind(assembly, sortedDomains, extensionMethods, actionByMethodInfoByType);
+                    }
+                }
             }
         }
 
@@ -401,6 +406,7 @@ namespace Allors.Meta
                     var sharedClasses = new HashSet<Class>();
                     var sharedAssociationTypes = new HashSet<AssociationType>();
                     var sharedRoleTypes = new HashSet<RoleType>();
+                    var sharedMethodTypes = new HashSet<MethodType>();
 
                     // Domains
                     foreach (var domain in this.domains)
@@ -461,10 +467,24 @@ namespace Allors.Meta
                         type.DeriveRoleTypes(sharedRoleTypes);
                     }
 
+                    var associationTypesByRoleObjectType = new Dictionary<ObjectType, HashSet<AssociationType>>();
+                    foreach (var relationType in this.RelationTypes)
+                    {
+                        var roleObjectType = relationType.RoleType.ObjectType;
+                        HashSet<AssociationType> associations;
+                        if (!associationTypesByRoleObjectType.TryGetValue(roleObjectType, out associations))
+                        {
+                            associations = new HashSet<AssociationType>();
+                            associationTypesByRoleObjectType[roleObjectType] = associations;
+                        }
+
+                        associations.Add(relationType.AssociationType);
+                    }
+
                     // AssociationTypes
                     foreach (var type in this.derivedComposites)
                     {
-                        type.DeriveAssociationTypes(sharedAssociationTypes);
+                        type.DeriveAssociationTypes(sharedAssociationTypes, associationTypesByRoleObjectType);
                     }
 
                     // RoleType
@@ -498,6 +518,12 @@ namespace Allors.Meta
                     foreach (var @class in this.classes)
                     {
                         @class.DeriveConcreteRoleTypes(sharedRoleTypes);
+                    }
+
+                    // ConcreteMethodType
+                    foreach (var @class in this.classes)
+                    {
+                        @class.DeriveConcreteMethodTypes(sharedMethodTypes);
                     }
                 }
                 finally

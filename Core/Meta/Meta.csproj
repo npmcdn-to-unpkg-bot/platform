@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Core\Meta\AssociationType.cs" />
     <Compile Include="Core\Meta\Builder.cs" />
+    <Compile Include="Core\Meta\ConcreteMethodType.cs" />
     <Compile Include="Core\Meta\ConcreteRoleType.cs" />
     <Compile Include="Core\Meta\Class.cs" />
     <Compile Include="Core\Meta\ClassBuilder.cs" />
