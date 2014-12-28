@@ -24,6 +24,7 @@ namespace Allors.Meta
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
 
     public sealed partial class Domain : MetaObject
     {
@@ -225,7 +226,7 @@ namespace Allors.Meta
             return this.IdAsString;
         }
 
-        internal void Lock()
+        internal void Bind(Assembly assembly)
         {
             this.directSuperdomains = this.directSuperdomains.ToArray();
             this.definedUnits = this.definedUnits.ToArray();

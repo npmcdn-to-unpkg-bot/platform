@@ -24,6 +24,7 @@ namespace Allors.Meta
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
 
     public sealed partial class Interface : Composite, IInterface
     {
@@ -36,6 +37,8 @@ namespace Allors.Meta
         private LazySet<Class> derivedLeafClasses;
 
         private Class derivedExclusiveLeafClass;
+
+        private Type clrType;
 
         internal Interface(Domain domain, Guid id)
             : base(domain, id)
@@ -231,6 +234,19 @@ namespace Allors.Meta
                     }
                 }
             }
+        }
+
+        public override Type ClrType
+        {
+            get
+            {
+                return this.clrType;
+            }
+        }
+
+        internal void Bind(Dictionary<string, Type> typeByTypeName)
+        {
+            this.clrType = typeByTypeName[this.Name];
         }
     }
 }

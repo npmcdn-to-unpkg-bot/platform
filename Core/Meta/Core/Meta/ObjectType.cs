@@ -22,6 +22,7 @@
 namespace Allors.Meta
 {
     using System;
+    using System.Reflection;
 
     public abstract partial class ObjectType : DomainObject, IObjectType
     {
@@ -107,6 +108,8 @@ namespace Allors.Meta
                 return this is IClass;
             }
         }
+
+        public abstract Type ClrType { get; }
 
         /// <summary>
         /// Gets the validation name.

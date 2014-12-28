@@ -21,18 +21,16 @@
 namespace Allors.Meta
 {
     using System;
+using System.Linq;
 
     public static partial class Repository
     {
         public static void BasePostInit(MetaPopulation meta)
         {
             // All composites should implement Object
-            foreach (var composite in meta.Composites)
+            foreach (var composite in meta.Composites.Where(composite => !composite.ExistDirectSupertypes && !composite.Equals(Object)).ToArray())
             {
-                if (!composite.ExistDirectSupertypes && !composite.Equals(Object))
-                {
-                    new InheritanceBuilder(Base, Guid.NewGuid()).WithSubtype(composite).WithSupertype(Object).Build();
-                }
+                new InheritanceBuilder(Base, Guid.NewGuid()).WithSubtype(composite).WithSupertype(Object).Build();
             }
 
             new MethodTypeBuilder(Base, new Guid("62D48A76-A500-4D16-9D20-6FEF43AC6DCB")).WithObjectType(Object).WithName("OnPostBuild").Build();

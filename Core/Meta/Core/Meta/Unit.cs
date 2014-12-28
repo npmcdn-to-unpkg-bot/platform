@@ -22,10 +22,13 @@
 namespace Allors.Meta
 {
     using System;
+    using System.Reflection;
 
     public sealed partial class Unit : ObjectType, IUnit
     {
         private UnitTags unitTag;
+
+        private Type clrType;
 
         internal Unit(Domain domain, Guid id)
             : base(domain, id)
@@ -126,6 +129,52 @@ namespace Allors.Meta
         public bool IsUnique
         {
             get { return this.Id.Equals(UnitIds.Unique); }
+        }
+
+        public override Type ClrType
+        {
+            get
+            {
+                return this.clrType;
+            }
+        }
+
+        internal void Bind()
+        {
+            switch (this.UnitTag)
+            {
+                case UnitTags.AllorsBinary:
+                    this.clrType = typeof(byte[]);
+                    break;
+
+                case UnitTags.AllorsBoolean:
+                    this.clrType = typeof(bool);
+                    break;
+
+                case UnitTags.AllorsDateTime:
+                    this.clrType = typeof(DateTime);
+                    break;
+
+                case UnitTags.AllorsDecimal:
+                    this.clrType = typeof(decimal);
+                    break;
+
+                case UnitTags.AllorsFloat:
+                    this.clrType = typeof(double);
+                    break;
+
+                case UnitTags.AllorsInteger:
+                    this.clrType = typeof(int);
+                    break;
+
+                case UnitTags.AllorsString:
+                    this.clrType = typeof(string);
+                    break;
+
+                case UnitTags.AllorsUnique:
+                    this.clrType = typeof(Guid);
+                    break;
+            }
         }
     }
 }

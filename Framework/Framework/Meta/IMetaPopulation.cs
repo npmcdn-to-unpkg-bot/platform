@@ -23,6 +23,7 @@ namespace Allors.Meta
 {
     using System;
     using System.Collections.Generic;
+    using System.Reflection;
 
     public interface IMetaPopulation
     {
@@ -42,6 +43,6 @@ namespace Allors.Meta
 
         IValidationLog Validate();
 
-        void Lock();
+        void Bind(Assembly assembly);
     }
 }

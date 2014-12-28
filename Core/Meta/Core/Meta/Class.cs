@@ -33,6 +33,8 @@ namespace Allors.Meta
 
         private ConcreteRoleType[] concreteRoleTypes;
 
+        private Type clrType;
+
         internal Class(Domain domain, Guid id)
             : base(domain, id)
         {
@@ -113,6 +115,19 @@ namespace Allors.Meta
             }
 
             this.concreteRoleTypes = this.concreteRoleTypeByRoleType.Values.ToArray();
+        }
+
+        public override Type ClrType
+        {
+            get
+            {
+                return this.clrType;
+            }
+        }
+
+        internal void Bind(Dictionary<string, Type> typeByTypeName)
+        {
+            this.clrType = typeByTypeName[this.Name];
         }
     }
 }

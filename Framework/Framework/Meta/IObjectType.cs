@@ -38,5 +38,7 @@ namespace Allors.Meta
         bool IsClass { get; }
 
         string Name { get; }
+
+        Type ClrType { get; }
     }
 }

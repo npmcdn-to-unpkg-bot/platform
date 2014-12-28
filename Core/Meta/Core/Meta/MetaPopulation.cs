@@ -24,14 +24,18 @@ namespace Allors.Meta
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
+    using System.Runtime.CompilerServices;
 
     public sealed partial class MetaPopulation : IMetaPopulation
     {
+        private const string NamespaceName = "Allors.Domain";
+
         private readonly Dictionary<Guid, MetaObject> metaObjectById;
 
         private Composite[] derivedComposites;
 
-        private bool isLocked;
+        private bool isBound;
 
         private bool isStale;
         private bool isDeriving;
@@ -45,7 +49,7 @@ namespace Allors.Meta
         private IList<AssociationType> associationTypes;
         private IList<RoleType> roleTypes;
         private IList<MethodType> methodTypes;
-        
+
         internal MetaPopulation()
         {
             this.isStale = true;
@@ -64,11 +68,11 @@ namespace Allors.Meta
             this.metaObjectById = new Dictionary<Guid, MetaObject>();
         }
 
-        public bool IsLocked
+        public bool IsBound
         {
             get
             {
-                return this.isLocked;
+                return this.isBound;
             }
         }
 
@@ -314,13 +318,13 @@ namespace Allors.Meta
             return log;
         }
 
-        public void Lock()
+        public void Bind(Assembly assembly)
         {
-            if (!this.IsLocked)
+            if (!this.IsBound)
             {
                 this.Derive();
 
-                this.isLocked = true;
+                this.isBound = true;
 
                 this.domains = this.domains.ToArray();
                 this.units = this.units.ToArray();
@@ -334,14 +338,50 @@ namespace Allors.Meta
 
                 foreach (var domain in this.domains)
                 {
-                    domain.Lock();
+                    domain.Bind(assembly);
                 }
+
+                var types = assembly.GetTypes().Where(type =>
+                    type.Namespace != null &&
+                    type.Namespace.Equals(NamespaceName) &&
+                    type.GetInterfaces().Contains(typeof(IObject)));
+
+                var typeByName = types.ToDictionary(type => type.Name, type => type);
+
+                foreach (var unit in this.Units)
+                {
+                    unit.Bind();
+                }
+
+                foreach (var @interface in this.interfaces)
+                {
+                    @interface.Bind(typeByName);
+                }
+
+                foreach (var @class in this.classes)
+                {
+                    @class.Bind(typeByName);
+                }
+
+                var sortedDomains = new List<Domain>(this.domains);
+                sortedDomains.Sort((a, b) => a.Superdomains.Contains(b) ? -1 : 1);
+
+                var extensionMethods = (from type in assembly.GetTypes()
+                            where type.IsSealed && !type.IsGenericType && !type.IsNested
+                            from method in type.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
+                            where method.IsDefined(typeof(ExtensionAttribute), false)
+                            select method).ToArray();
+
+                //foreach (var methodType in this.MethodTypes)
+                //{
+                //    methodType.Bind(assembly, sortedDomains, extensionMethods);
+                //}
             }
         }
 
         internal void AssertUnlocked()
         {
-            if (this.IsLocked)
+            if (this.IsBound)
             {
                 throw new Exception("Environment is locked");
             }

@@ -91,7 +91,7 @@ namespace Allors
                 throw new Exception(validationLog.ToString());
             }
 
-            metaPopulation.Lock();
+            metaPopulation.Bind(assembly);
             
             this.typeByObjectType = new Dictionary<IObjectType, Type>();
             this.objectTypeByType = new Dictionary<Type, IObjectType>();
