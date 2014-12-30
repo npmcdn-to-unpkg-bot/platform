@@ -192,14 +192,17 @@ namespace Allors.Domain
 
         public void AddDerivable(Derivable derivable)
         {
-            if (this.DerivedObjects.Contains(derivable))
+            if (derivable != null)
             {
-                throw new InvalidEnumArgumentException("Object has alreadry been derived.");
+                if (this.DerivedObjects.Contains(derivable))
+                {
+                    throw new InvalidEnumArgumentException("Object has alreadry been derived.");
+                }
+
+                this.derivationGraph.Add(derivable);
+
+                this.addedDerivables.Add(derivable);
             }
-
-            this.derivationGraph.Add(derivable);
-
-            this.addedDerivables.Add(derivable);
         }
 
         public void AddDerivables(IEnumerable<Derivable> derivables)
@@ -210,14 +213,21 @@ namespace Allors.Domain
             }
         }
 
-        // TODO: add additional methods in case dependent/dependee is already derived
-        //       and should'nt be derived again.
+        /// <summary>
+        /// The dependee is derived before the dependent object;
+        /// </summary>
+        /// <param name="dependent"></param>
+        /// <param name="dependee"></param>
         public void AddDependency(Derivable dependent, Derivable dependee)
         {
-            this.derivationGraph.AddDependency(dependent, dependee);
+            if (dependent != null && dependee != null)
+            {
+                // TODO: add additional methods in case dependent/dependee is already derived and shouldntt be derived again.
+                this.derivationGraph.AddDependency(dependent, dependee);
 
-            this.addedDerivables.Add(dependent);
-            this.addedDerivables.Add(dependee);
+                this.addedDerivables.Add(dependent);
+                this.addedDerivables.Add(dependee);
+            }
         }
 
         public DerivationLog Derive()
