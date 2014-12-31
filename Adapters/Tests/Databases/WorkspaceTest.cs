@@ -191,7 +191,7 @@ namespace Allors.Databases
                     workC1B.C1C2one2one = workC2A;
                     workC1B.AddC1C2one2many(workC2A);
 
-                    workC1B.Delete();
+                    workC1B.Strategy.Delete();
 
                     var stringWriter = new StringWriter();
                     var writer = new XmlTextWriter(stringWriter);
@@ -883,7 +883,7 @@ namespace Allors.Databases
                     var workC1 = C1.Instantiate(workspaceSession, c1.Id);
                     var workC2 = C2.Instantiate(workspaceSession, c2.Id);
 
-                    workC1.Delete();
+                    workC1.Strategy.Delete();
 
                     Assert.IsFalse(workC2.ExistC1WhereC2one2one);
                 }
@@ -910,7 +910,7 @@ namespace Allors.Databases
                     var workC1 = C1.Instantiate(workspaceSession, c1.Id);
                     var workC2 = C2.Instantiate(workspaceSession, c2.Id);
 
-                    workC1.Delete();
+                    workC1.Strategy.Delete();
 
                     Assert.IsFalse(workC2.ExistC1sWhereC2many2one);
                 }

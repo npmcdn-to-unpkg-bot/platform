@@ -24,6 +24,7 @@ namespace Allors.Databases
     using System.Collections.Generic;
 
     using Allors;
+    using Allors.Domain;
     using Allors.Meta;
     using Allors.Populations;
 
@@ -132,7 +133,7 @@ namespace Allors.Databases
 
         protected ObjectFactory CreateObjectFactory(IMetaPopulation metaPopulation)
         {
-            return new ObjectFactory(metaPopulation, typeof(ObjectBase).Assembly, "Allors.Domain");
+            return new ObjectFactory(metaPopulation, typeof(C1).Assembly, "Allors.Domain");
         }
     }
 }

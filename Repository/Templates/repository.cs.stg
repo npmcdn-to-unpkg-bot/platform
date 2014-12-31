@@ -2,7 +2,7 @@ group AllorsCSharpMeta;
 
 TemplateId() ::= <<14F49218-A676-43ba-9CBD-B8FFA059D1BF>>
 TemplateName() ::= <<Allors C# Repository>>
-TemplateVersion() ::= <<1.0.5>>
+TemplateVersion() ::= <<1.0.6>>
 TemplateAllors() ::= <<1.0>>
 TemplateConfiguration(domain, settings) ::= <<
 $! 
@@ -179,7 +179,11 @@ relationTypeInit(relationType) ::= <<
 >>
 
 objectTypes() ::= <%
+$if(relationType.RoleType.ObjectType.IsDouble)$
+.WithObjectTypes($relationType.AssociationType.ObjectType.Name$, AllorsFloat)
+$else$
 .WithObjectTypes($relationType.AssociationType.ObjectType.Name$, $relationType.RoleType.ObjectType.Name$)
+$endif$
 %>
 
 singularName() ::= <%

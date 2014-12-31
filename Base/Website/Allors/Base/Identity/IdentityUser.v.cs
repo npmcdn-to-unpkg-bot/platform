@@ -1,5 +1,5 @@
-// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ObjectBase.v.cs" company="Allors bvba">
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="IdentityUser.v.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -18,13 +18,23 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors
+namespace Allors.Web.Identity
 {
-    public abstract partial class ObjectBase 
+    using Allors.Domain;
+
+    using Microsoft.AspNet.Identity;
+
+    public partial class IdentityUser : IUser
     {
-        public virtual void Delete()
+        public IdentityUser MapFrom(User user)
         {
-            this.CoreDelete();
+            this.Id = user.Id.ToString();
+            this.UserName = user.UserName;
+            this.EmailConfirmed = user.UserEmailConfirmed.HasValue && user.UserEmailConfirmed.Value;
+            this.Email = user.UserEmail;
+            this.PasswordHash = user.UserPasswordHash;
+
+            return this;
         }
     }
 }

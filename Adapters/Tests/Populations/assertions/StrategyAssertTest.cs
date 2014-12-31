@@ -22,6 +22,7 @@ namespace Allors.Populations
 {
     using Allors;
     using Allors.Databases.Memory.IntegerId;
+    using Allors.Domain;
     using Allors.Meta;
 
     using NUnit.Framework;
@@ -34,7 +35,7 @@ namespace Allors.Populations
         [SetUp]
         protected void Init()
         {
-            var configuration = new Databases.Memory.IntegerId.Configuration { ObjectFactory = new ObjectFactory(Repository.MetaPopulation, typeof(ObjectBase).Assembly, "Allors.Domain") };
+            var configuration = new Databases.Memory.IntegerId.Configuration { ObjectFactory = new ObjectFactory(Repository.MetaPopulation, typeof(C1).Assembly, "Allors.Domain") };
             var database = new Database(configuration);
             this.session = database.CreateSession();
         }

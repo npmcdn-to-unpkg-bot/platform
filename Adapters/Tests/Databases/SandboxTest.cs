@@ -114,7 +114,7 @@ namespace Allors.Databases
 
                 foreach (C1 c in c1B.C1sWhereC1many2one)
                 {
-                    c.Delete();
+                    c.Strategy.Delete();
                 }
 
                 Assert.IsFalse(c1B.ExistC1sWhereC1many2one);

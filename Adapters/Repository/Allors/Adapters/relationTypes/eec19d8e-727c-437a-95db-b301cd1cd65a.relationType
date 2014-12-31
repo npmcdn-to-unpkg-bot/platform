@@ -4,7 +4,7 @@
   </associationType>
   <roleType id="2699f05a-4f69-4781-908a-57d43112bbf4">
     <objectType idref="ffcabd07-f35f-4083-bef6-f6c47970ca5d" />
-    <pluralName>DoublesBetweenB</pluralName>
-    <singularName>DoubleBetweenB</singularName>
+    <pluralName>FloatsBetweenB</pluralName>
+    <singularName>FloatBetweenB</singularName>
   </roleType>
 </relationType>

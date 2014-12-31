@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Meta", "Meta\Meta.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{B6C2E17B-53E1-44A4-9299-5350CC854E65}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{5582AF89-13A9-43B9-A208-230242323001}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Tests", "Domain.Tests\Domain.Tests.csproj", "{5582AF89-13A9-43B9-A208-230242323001}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{27040192-7F25-4F31-8FF9-68A562704B07}"
 	ProjectSection(SolutionItems) = preProject
@@ -36,6 +36,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allors.Workspaces.Memory", "..\Adapters\Allors.Workspaces.Memory\Allors.Workspaces.Memory.csproj", "{D09DAF58-D524-40C2-887C-EADBF5609794}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Diagrams", "Diagrams\Diagrams.csproj", "{62E1879F-7DA2-451B-B705-AD2247BA130D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Website", "Website\Website.csproj", "{59C1F6F2-F1BA-403C-AA39-B8F263F7EDE1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +89,10 @@ Global
 		{62E1879F-7DA2-451B-B705-AD2247BA130D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62E1879F-7DA2-451B-B705-AD2247BA130D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62E1879F-7DA2-451B-B705-AD2247BA130D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59C1F6F2-F1BA-403C-AA39-B8F263F7EDE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59C1F6F2-F1BA-403C-AA39-B8F263F7EDE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59C1F6F2-F1BA-403C-AA39-B8F263F7EDE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59C1F6F2-F1BA-403C-AA39-B8F263F7EDE1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

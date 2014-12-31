@@ -41,12 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\Core\Domain\Core\IObjectBase.cs">
-      <Link>Core\IObjectBase.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Core\Domain\Core\ObjectBase.cs">
-      <Link>Core\ObjectBase.cs</Link>
-    </Compile>
     <Compile Include="Adapters\DomainBusiness\Company.cs" />
     <Compile Include="Adapters\DomainBusiness\Named.cs" />
     <Compile Include="Adapters\DomainBusiness\Person.cs" />
@@ -82,43 +76,42 @@
     <Compile Include="Adapters\Domain\S3.cs" />
     <Compile Include="Adapters\Domain\S4.cs" />
     <Compile Include="Adapters\Domain\Subscriber.cs" />
-    <Compile Include="Adapters\ObjectBase.v.cs" />
-    <Compile Include="Generated\Core\C1.g.cs" />
-    <Compile Include="Generated\Core\C2.g.cs" />
-    <Compile Include="Generated\Core\C3.g.cs" />
-    <Compile Include="Generated\Core\C4.g.cs" />
-    <Compile Include="Generated\Core\ClassWithoutRoles.g.cs" />
-    <Compile Include="Generated\Core\ClassWithoutUnitRoles.g.cs" />
-    <Compile Include="Generated\Core\Company.g.cs" />
-    <Compile Include="Generated\Core\GT32.g.cs" />
-    <Compile Include="Generated\Core\GT32UnitLT32Composite.g.cs" />
-    <Compile Include="Generated\Core\I1.g.cs" />
-    <Compile Include="Generated\Core\I12.g.cs" />
-    <Compile Include="Generated\Core\I2.g.cs" />
-    <Compile Include="Generated\Core\I23.g.cs" />
-    <Compile Include="Generated\Core\I3.g.cs" />
-    <Compile Include="Generated\Core\I34.g.cs" />
-    <Compile Include="Generated\Core\I4.g.cs" />
-    <Compile Include="Generated\Core\IGT32Composite.g.cs" />
-    <Compile Include="Generated\Core\IGT32Unit.g.cs" />
-    <Compile Include="Generated\Core\ILT32Composite.g.cs" />
-    <Compile Include="Generated\Core\ILT32Unit.g.cs" />
-    <Compile Include="Generated\Core\InterfaceWithoutConcreteClass.g.cs" />
-    <Compile Include="Generated\Core\ISandbox.g.cs" />
-    <Compile Include="Generated\Core\LT32.g.cs" />
-    <Compile Include="Generated\Core\LT32UnitGT32Composite.g.cs" />
-    <Compile Include="Generated\Core\Meta.g.cs" />
-    <Compile Include="Generated\Core\Named.g.cs" />
-    <Compile Include="Generated\Core\Person.g.cs" />
-    <Compile Include="Generated\Core\S1.g.cs" />
-    <Compile Include="Generated\Core\S12.g.cs" />
-    <Compile Include="Generated\Core\S1234.g.cs" />
-    <Compile Include="Generated\Core\S2.g.cs" />
-    <Compile Include="Generated\Core\S3.g.cs" />
-    <Compile Include="Generated\Core\S4.g.cs" />
-    <Compile Include="Generated\Core\Sandbox.g.cs" />
-    <Compile Include="Generated\Core\SingleUnit.g.cs" />
-    <Compile Include="Generated\Core\User.g.cs" />
+    <Compile Include="Generated\Adapters\C1.g.cs" />
+    <Compile Include="Generated\Adapters\C2.g.cs" />
+    <Compile Include="Generated\Adapters\C3.g.cs" />
+    <Compile Include="Generated\Adapters\C4.g.cs" />
+    <Compile Include="Generated\Adapters\ClassWithoutRoles.g.cs" />
+    <Compile Include="Generated\Adapters\ClassWithoutUnitRoles.g.cs" />
+    <Compile Include="Generated\Adapters\Company.g.cs" />
+    <Compile Include="Generated\Adapters\GT32.g.cs" />
+    <Compile Include="Generated\Adapters\GT32UnitLT32Composite.g.cs" />
+    <Compile Include="Generated\Adapters\I1.g.cs" />
+    <Compile Include="Generated\Adapters\I12.g.cs" />
+    <Compile Include="Generated\Adapters\I2.g.cs" />
+    <Compile Include="Generated\Adapters\I23.g.cs" />
+    <Compile Include="Generated\Adapters\I3.g.cs" />
+    <Compile Include="Generated\Adapters\I34.g.cs" />
+    <Compile Include="Generated\Adapters\I4.g.cs" />
+    <Compile Include="Generated\Adapters\IGT32Composite.g.cs" />
+    <Compile Include="Generated\Adapters\IGT32Unit.g.cs" />
+    <Compile Include="Generated\Adapters\ILT32Composite.g.cs" />
+    <Compile Include="Generated\Adapters\ILT32Unit.g.cs" />
+    <Compile Include="Generated\Adapters\InterfaceWithoutConcreteClass.g.cs" />
+    <Compile Include="Generated\Adapters\ISandbox.g.cs" />
+    <Compile Include="Generated\Adapters\LT32.g.cs" />
+    <Compile Include="Generated\Adapters\LT32UnitGT32Composite.g.cs" />
+    <Compile Include="Generated\Adapters\Meta.g.cs" />
+    <Compile Include="Generated\Adapters\Named.g.cs" />
+    <Compile Include="Generated\Adapters\Person.g.cs" />
+    <Compile Include="Generated\Adapters\S1.g.cs" />
+    <Compile Include="Generated\Adapters\S12.g.cs" />
+    <Compile Include="Generated\Adapters\S1234.g.cs" />
+    <Compile Include="Generated\Adapters\S2.g.cs" />
+    <Compile Include="Generated\Adapters\S3.g.cs" />
+    <Compile Include="Generated\Adapters\S4.g.cs" />
+    <Compile Include="Generated\Adapters\Sandbox.g.cs" />
+    <Compile Include="Generated\Adapters\SingleUnit.g.cs" />
+    <Compile Include="Generated\Adapters\User.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

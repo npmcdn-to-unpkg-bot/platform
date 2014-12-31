@@ -884,7 +884,7 @@ namespace Allors.Databases
                 using (var databaseSession = database.CreateSession())
                 {
                     var c1A = databaseSession.Instantiate(c1AObjectId);
-                    c1A.Delete();
+                    c1A.Strategy.Delete();
                     databaseSession.Commit();
                 }
 

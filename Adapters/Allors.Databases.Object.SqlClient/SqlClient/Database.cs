@@ -777,6 +777,7 @@ namespace Allors.Databases.Object.SqlClient
             this.DropUserDefinedType(session, this.SqlClientSchema.IntegerRelationTable);
             this.DropUserDefinedType(session, this.SqlClientSchema.FloatRelationTable);
             this.DropUserDefinedType(session, this.SqlClientSchema.BooleanRelationTable);
+            this.DropUserDefinedType(session, this.SqlClientSchema.DateTimeRelationTable);
             this.DropUserDefinedType(session, this.SqlClientSchema.UniqueRelationTable);
             this.DropUserDefinedType(session, this.SqlClientSchema.BinaryRelationTable);
             foreach (var precisionEntry in this.SqlClientSchema.DecimalRelationTableByScaleByPrecision)

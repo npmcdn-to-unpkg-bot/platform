@@ -3,7 +3,7 @@
   <UsingTask TaskName="Generate" AssemblyFile="bin\Debug\Meta.dll"/>
 
   <Target Name="Generate">
-    <Generate Template="../../Core/Templates/domain.cs.stg" Output="../Domain/Generated/Core"/> 
+    <Generate Template="../Templates/adapters.cs.stg" Output="../Domain/Generated/Adapters"/> 
   </Target>
 
 </Project>

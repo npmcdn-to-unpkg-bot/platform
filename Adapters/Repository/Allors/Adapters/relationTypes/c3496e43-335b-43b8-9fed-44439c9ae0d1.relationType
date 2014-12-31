@@ -4,7 +4,7 @@
   </associationType>
   <roleType id="147642e9-ebb7-470e-9e57-4a47f8d4dbf4">
     <objectType idref="ffcabd07-f35f-4083-bef6-f6c47970ca5d" />
-    <pluralName>DoublesGreaterThan</pluralName>
-    <singularName>DoubleGreaterThan</singularName>
+    <pluralName>FloatsGreaterThan</pluralName>
+    <singularName>FloatGreaterThan</singularName>
   </roleType>
 </relationType>

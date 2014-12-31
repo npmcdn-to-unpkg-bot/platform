@@ -4,7 +4,7 @@
   </associationType>
   <roleType id="6aee72d6-be71-4560-baf2-97e64cfd3eb8">
     <objectType idref="ffcabd07-f35f-4083-bef6-f6c47970ca5d" />
-    <pluralName>DoublesLessThan</pluralName>
-    <singularName>DoubleLessThan</singularName>
+    <pluralName>FloatsLessThan</pluralName>
+    <singularName>FloatLessThan</singularName>
   </roleType>
 </relationType>

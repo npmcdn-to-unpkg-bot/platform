@@ -594,8 +594,8 @@ namespace Allors.Databases
                 var b = C2.Create(this.Session);
                 this.Session.Instantiate(c);
 
-                a.Delete();
-                b.Delete();
+                a.Strategy.Delete();
+                b.Strategy.Delete();
 
                 var changes = this.Session.Checkpoint();
 
@@ -609,7 +609,7 @@ namespace Allors.Databases
 
                 Assert.AreEqual(0, changes.Deleted.Count());
 
-                a.Delete();
+                a.Strategy.Delete();
 
                 this.Session.Commit();
 
