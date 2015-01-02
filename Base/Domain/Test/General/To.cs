@@ -25,7 +25,7 @@ namespace Allors.Domain
 
     public partial class To
     {
-        public void TestOnPostBuild(ObjectOnPostBuild method)
+        public void TestsOnPostBuild(ObjectOnPostBuild method)
         {
             this.DisplayName = this.Name;
         }

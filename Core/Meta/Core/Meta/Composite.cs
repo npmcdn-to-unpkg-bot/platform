@@ -289,6 +289,10 @@ namespace Allors.Meta
         /// </returns>
         public abstract bool ExistLeafClass(IClass objectType);
 
+        internal abstract void BuildInheritances();
+
+        internal abstract void BuildRelationTypes();
+
         /// <summary>
         /// Derive direct super type derivations.
         /// </summary>

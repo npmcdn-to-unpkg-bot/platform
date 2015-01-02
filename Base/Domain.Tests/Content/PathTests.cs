@@ -51,7 +51,7 @@ namespace Allors.Domain
 
             this.DatabaseSession.Derive(true);
 
-            var path = new Path(C1s.Meta.C1C2One2Many, C2s.Meta.C2AllorsString);
+            var path = new Path(C1s.Meta.C1C2One2Manies, C2s.Meta.C2AllorsString);
 
             var aclMock = new Mock<IAccessControlList>();
             aclMock.Setup(acl => acl.CanRead(It.IsAny<PropertyType>())).Returns(true);

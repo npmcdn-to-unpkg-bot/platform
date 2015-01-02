@@ -226,6 +226,8 @@ namespace Allors.Meta
             return this.IdAsString;
         }
 
+        internal abstract void Build();
+
         internal void Bind(Assembly assembly)
         {
             this.directSuperdomains = this.directSuperdomains.ToArray();

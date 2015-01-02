@@ -57,64 +57,40 @@ namespace Allors.Meta
             Instance = new MetaPopulation();
 
             var assembly = Assembly.GetExecutingAssembly();
-            var types = assembly.GetTypes();
+            var nonAbstractClasses = new List<Type>(assembly.GetTypes().Where(type => type.IsClass && !type.IsAbstract));
 
-            var domains = types.Where(
-                    type => type.IsClass && 
-                    !type.IsAbstract && 
-                    (
-                        type.GetInterfaces().Contains(typeof(IDomain)))
-                    )
-                    .ToArray();
-
-            foreach (var initType in domains)
+            foreach (var domainType in nonAbstractClasses.Where(type => type.GetInterfaces().Contains(typeof(IDomain))))
             {
-                try
-                {
-                    // Trigger static contructor
-                    var instance = initType.GetField("Instance").GetValue(null);
-                }
-                catch (Exception e)
-                {
-                    var innerException = e;
-                    while (innerException.InnerException != null)
-                    {
-                        innerException = innerException.InnerException;
-                    }
-
-                    throw innerException;
-                }
+                var constructor = domainType.GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, null, new []{Instance.GetType()}, null);
+                var instance = constructor.Invoke(new object[]{Instance});
+                var instanceProperty = domainType.GetProperty("Instance");
+                instanceProperty.SetMethod.Invoke(null, new[] { instance });
             }
 
-            var objectTypes = types.Where(
-                    type => type.IsClass &&
-                    !type.IsAbstract &&
-                    (
-                        type.GetInterfaces().Contains(typeof(IUnit)) ||
-                        type.GetInterfaces().Contains(typeof(IInterface)) ||
-                        type.GetInterfaces().Contains(typeof(IClass)))
-                    )
-                    .ToArray();
-
-            foreach (var initType in domains)
+            foreach (var domain in Instance.Domains)
             {
-                try
-                {
-                    // Trigger static contructor
-                    var objectType = (ObjectType)initType.GetField("Instance").GetValue(null);
-                    objectType.Build();
-                }
-                catch (Exception e)
-                {
-                    var innerException = e;
-                    while (innerException.InnerException != null)
-                    {
-                        innerException = innerException.InnerException;
-                    }
+                domain.Build();
+            }
 
-                    throw innerException;
-                }
-            }           
+            foreach (var objectType in nonAbstractClasses.Where(type => type.GetInterfaces().Contains(typeof(IUnit)) || type.GetInterfaces().Contains(typeof(IInterface)) || type.GetInterfaces().Contains(typeof(IClass))))
+            {
+                var constructor = objectType.GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, null, Type.EmptyTypes, null);
+                var instance = constructor.Invoke(null);
+                var instanceProperty = objectType.GetProperty("Instance");
+                instanceProperty.SetMethod.Invoke(null, new[] { instance });
+            }
+
+            foreach (var composite in Instance.Composites)
+            {
+                composite.BuildInheritances();
+            }
+
+            foreach (var composite in Instance.Composites)
+            {
+                composite.BuildRelationTypes();
+            }
+
+            Instance.Extend();
         }
 
         private MetaPopulation()
@@ -726,5 +702,5 @@ namespace Allors.Meta
 
             return false;
         }
-}
+    }
 }

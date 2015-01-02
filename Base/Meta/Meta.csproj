@@ -149,9 +149,6 @@
     <Compile Include="..\..\Core\Meta\Core\Meta\RelationType.cs">
       <Link>Core\Meta\RelationType.cs</Link>
     </Compile>
-    <Compile Include="..\..\Core\Meta\Core\Meta\Repository.cs">
-      <Link>Core\Meta\Repository.cs</Link>
-    </Compile>
     <Compile Include="..\..\Core\Meta\Core\Meta\RoleType.cs">
       <Link>Core\Meta\RoleType.cs</Link>
     </Compile>
@@ -167,14 +164,30 @@
     <Compile Include="..\..\Core\Meta\Core\Meta\ValidationLog.cs">
       <Link>Core\Meta\ValidationLog.cs</Link>
     </Compile>
-    <Compile Include="Base\Domain\StringTemplate.cs" />
-    <Compile Include="Base\Meta\Interface.cs" />
-    <Compile Include="Base\Meta\Unit.cs" />
-    <Compile Include="Base\Meta\Class.cs" />
-    <Compile Include="Base\Meta\Composite.cs" />
-    <Compile Include="Base\Meta\ConcreteRoleType.cs" />
-    <Compile Include="Base\Meta\Path.cs" />
-    <Compile Include="Base\Meta\Repository.cs" />
+    <Compile Include="Base\Domain\Composite.cs" />
+    <Compile Include="Base\Population\AccessControl.cs" />
+    <Compile Include="Base\Population\Counter.cs" />
+    <Compile Include="Base\Population\Country.cs" />
+    <Compile Include="Base\Population\Currency.cs" />
+    <Compile Include="Base\Population\Derivable.cs" />
+    <Compile Include="Base\Population\Enumeration.cs" />
+    <Compile Include="Base\Population\Language.cs" />
+    <Compile Include="Base\Population\Locale.cs" />
+    <Compile Include="Base\Population\LocalisedText.cs" />
+    <Compile Include="Base\Population\Media.cs" />
+    <Compile Include="Base\Population\MediaContent.cs" />
+    <Compile Include="Base\Population\MediaType.cs" />
+    <Compile Include="Base\Population\Period.cs" />
+    <Compile Include="Base\Population\Permission.cs" />
+    <Compile Include="Base\Population\Role.cs" />
+    <Compile Include="Base\Population\StringTemplate.cs" />
+    <Compile Include="Base\Population\UniquelyIdentifiable.cs" />
+    <Compile Include="Base\Population\UserGroupClass.cs" />
+    <Compile Include="Base\Population\Deletable.cs" />
+    <Compile Include="Base\Population\ObjectInterface.cs" />
+    <Compile Include="Base\Population\StringTemplateClass.cs" />
+    <Compile Include="Base\Domain\ConcreteRoleType.cs" />
+    <Compile Include="Base\Domain\Path.cs" />
     <Compile Include="Generated\AccessControl.g.cs" />
     <Compile Include="Generated\AccessControlledObject.g.cs" />
     <Compile Include="Generated\Address.g.cs" />
@@ -251,8 +264,12 @@
     <Compile Include="Generated\UserGroup.g.cs" />
     <Compile Include="Generated\UserInterfaceable.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Test\Meta\Repository.cs" />
-    <Compile Include="Test\Meta\Repository.v.cs" />
+    <Compile Include="Test\MetaPopulation.v.cs" />
+    <Compile Include="Test\Meta\Composite.cs" />
+    <Compile Include="Test\Population\Organisation.cs" />
+    <Compile Include="Test\Population\S1.cs" />
+    <Compile Include="Test\Population\I1.cs" />
+    <Compile Include="Test\Population\C1.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Base\RelationType.cd" />

@@ -26,12 +26,12 @@ namespace Allors.Domain
 
     public partial class C2
     {
-        public void TestOnPostBuild(ObjectOnPostBuild method)
+        public void TestsOnPostBuild(ObjectOnPostBuild method)
         {
             this.DisplayName = this.Name;
         }
 
-        public void TestPrepareDerivation(DerivablePrepareDerivation method)
+        public void TestsPrepareDerivation(DerivablePrepareDerivation method)
         {
             var derivation = method.Derivation;
 
@@ -41,7 +41,7 @@ namespace Allors.Domain
             }
         }
 
-        public void TestDerive(DerivableDerive method)
+        public void TestsDerive(DerivableDerive method)
         {
             var derivation = method.Derivation;
 

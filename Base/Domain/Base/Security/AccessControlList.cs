@@ -210,7 +210,7 @@ namespace Allors.Domain
                         else
                         {
                             accessControls = this.databaseSession.Extent<AccessControl>();
-                            accessControls.Filter.AddContainedIn(AccessControls.Meta.Object, (Extent)securityTokens);
+                            accessControls.Filter.AddContainedIn(AccessControls.Meta.Objects, (Extent)securityTokens);
                         }
                     }
                     else
@@ -229,10 +229,10 @@ namespace Allors.Domain
                     }
 
                     var subjectOr = accessControls.Filter.AddOr();
-                    subjectOr.AddContains(AccessControls.Meta.Subject, this.user);
+                    subjectOr.AddContains(AccessControls.Meta.Subjects, this.user);
                     foreach (UserGroup userGroup in this.user.UserGroupsWhereMember)
                     {
-                        subjectOr.AddContains(AccessControls.Meta.SubjectGroup, userGroup);
+                        subjectOr.AddContains(AccessControls.Meta.SubjectGroups, userGroup);
                     }
 
                     if (accessControls.Count > 0)

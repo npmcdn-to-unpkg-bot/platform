@@ -35,7 +35,7 @@ namespace Allors.Domain
             }
         }
 
-        public void TestDerive(DerivableDerive method)
+        public void TestsDerive(DerivableDerive method)
         {
             if (this.ExistDependee)
             {

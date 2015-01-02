@@ -2,22 +2,23 @@ namespace Allors.Meta
 {
 	using System;
 
-	public class ObjectInterface: Interface
+	public partial class ObjectInterface: Interface
 	{
-		public static readonly ObjectInterface Instance;
+        public static ObjectInterface Instance { get; internal set; }
 
-		static ObjectInterface()
+		private ObjectInterface() : base(CoreDomain.Instance, new Guid("12504F04-02C6-4778-98FE-04EBA12EF8B2"))
 		{
-		    Instance = new ObjectInterface
-		                   {
-		                       SingularName = "Object", 
-                               PluralName = "Objects"
-		                   };
+		    this.SingularName = "Object";
+		    this.PluralName = "Objects";
 		}
 
-		private ObjectInterface() : base(CoreDomain.Instance, new Guid("f8a7cd0e-bd7f-4ce9-ab5d-8c1629cd883d"))
-        {
-        }
+	    internal override void BuildInheritances()
+	    {
+	    }
+
+	    internal override void BuildRelationTypes()
+	    {
+	    }
 	}
 
 }

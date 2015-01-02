@@ -26,12 +26,12 @@ namespace Allors.Domain
 
     public partial class C1
     {
-        public void TestOnPostBuild(ObjectOnPostBuild method)
+        public void TestsOnPostBuild(ObjectOnPostBuild method)
         {
             this.DisplayName = this.Name;
         }
 
-        public void TestPrepareDerivation(DerivablePrepareDerivation method)
+        public void TestsPrepareDerivation(DerivablePrepareDerivation method)
         {
             var derivation = method.Derivation;
             foreach (Derivable dependency in this.Dependencies)
@@ -40,7 +40,7 @@ namespace Allors.Domain
             }
         }
 
-        public void TestDerive(DerivableDerive method)
+        public void TestsDerive(DerivableDerive method)
         {
             var derivation = method.Derivation;
             var sequence = (IList<IObject>)derivation["sequence"];

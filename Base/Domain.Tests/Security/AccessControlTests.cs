@@ -75,8 +75,8 @@ namespace Allors.Security
 
             Assert.AreEqual(2, derivationError.Relations.Length);
             Assert.AreEqual(typeof(DerivationErrorAtLeastOne), derivationError.GetType());
-            Assert.IsTrue(new ArrayList(derivationError.RoleTypes).Contains((RoleType)AccessControls.Meta.Subject));
-            Assert.IsTrue(new ArrayList(derivationError.RoleTypes).Contains((RoleType)AccessControls.Meta.SubjectGroup));
+            Assert.IsTrue(new ArrayList(derivationError.RoleTypes).Contains((RoleType)AccessControls.Meta.Subjects));
+            Assert.IsTrue(new ArrayList(derivationError.RoleTypes).Contains((RoleType)AccessControls.Meta.SubjectGroups));
         }
 
         [Test]
@@ -99,7 +99,7 @@ namespace Allors.Security
 
             Assert.AreEqual(1, derivationError.Relations.Length);
             Assert.AreEqual(typeof(DerivationErrorRequired), derivationError.GetType());
-            Assert.IsTrue(new ArrayList(derivationError.RoleTypes).Contains((RoleType)AccessControls.Meta.Object));
+            Assert.IsTrue(new ArrayList(derivationError.RoleTypes).Contains((RoleType)AccessControls.Meta.Objects));
         }
     }
 }

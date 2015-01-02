@@ -21,23 +21,16 @@
 
 namespace Allors.Meta
 {
-    public class AllorsUniqueUnit : Unit
+    public partial class AllorsUniqueUnit : Unit
     {
-        public static readonly AllorsUniqueUnit Instance;
+        public static AllorsUniqueUnit Instance { get; internal set; }
 
-        static AllorsUniqueUnit()
-        {
-            Instance = new AllorsUniqueUnit
-                           {
-                               SingularName = "AllorsUnique", 
-                               PluralName = "AllorsUniques", 
-                               UnitTag = UnitTags.AllorsUnique
-                           };
-        }
-
-        private AllorsUniqueUnit()
+        internal AllorsUniqueUnit()
             : base(CoreDomain.Instance, UnitIds.UniqueId)
         {
+            this.SingularName = "AllorsUnique";
+            this.PluralName = "AllorsUniques";
+            this.UnitTag = UnitTags.AllorsUnique;
         }
     }
 }

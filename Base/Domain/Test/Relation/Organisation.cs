@@ -23,7 +23,7 @@ namespace Allors.Domain
 {
     public partial class Organisation
     {
-        public void TestOnPostBuild(ObjectOnPostBuild method)
+        public void TestsOnPostBuild(ObjectOnPostBuild method)
         {
             if (!this.ExistSearchData)
             {
@@ -31,7 +31,7 @@ namespace Allors.Domain
             }
         }
 
-        public void TestDerive(DerivableDerive method)
+        public void TestsDerive(DerivableDerive method)
         {
             var derivation = method.Derivation;
 

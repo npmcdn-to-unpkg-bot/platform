@@ -24,7 +24,7 @@ namespace Allors.Domain
     {
         public void BaseDerive(DerivableDerive method)
         {
-            method.Derivation.Log.AssertAtLeastOne(this, Meta.Subject, Meta.SubjectGroup);
+            method.Derivation.Log.AssertAtLeastOne(this, Meta.Subjects, Meta.SubjectGroups);
 
             if (this.ExistRole)
             {

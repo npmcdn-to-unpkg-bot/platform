@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     public partial class Subdependee
     {
-        public void TestOnPostBuild(ObjectOnPostBuild method)
+        public void TestsOnPostBuild(ObjectOnPostBuild method)
         {
             if (!this.ExistSubcounter)
             {
@@ -30,7 +30,7 @@ namespace Allors.Domain
             }
         }
 
-        public void TestPrepareDerivation(DerivablePrepareDerivation method)
+        public void TestsPrepareDerivation(DerivablePrepareDerivation method)
         {
             var derivation = method.Derivation;
             if (this.ExistDependeeWhereSubdependee)
@@ -39,7 +39,7 @@ namespace Allors.Domain
             }
         }
 
-        public void TestDerive(DerivableDerive method)
+        public void TestsDerive(DerivableDerive method)
         {
             this.Subcounter = this.Subcounter + 1;
         }

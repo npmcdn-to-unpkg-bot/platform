@@ -25,7 +25,7 @@ namespace Allors
 
     public static partial class Config
     {
-        public static readonly ObjectFactory ObjectFactory = new ObjectFactory(Repository.MetaPopulation, typeof(Config).Assembly, typeof(Singleton).Namespace);
+        public static readonly ObjectFactory ObjectFactory = new ObjectFactory(MetaPopulation.Instance, typeof(Config).Assembly, typeof(Singleton).Namespace);
 
         public static IDatabase Default { get; set; }
 

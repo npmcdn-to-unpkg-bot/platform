@@ -135,7 +135,7 @@ namespace Allors.Domain
 
             var export = new CsvExport("Test");
             export.Columns.Add(new CsvExportPath(C1s.Meta.C1AllorsString));
-            export.Columns.Add(new CsvExportPath(new Path(C1s.Meta.C1C2One2Many, C2s.Meta.C2AllorsString)));
+            export.Columns.Add(new CsvExportPath(new Path(C1s.Meta.C1C2One2Manies, C2s.Meta.C2AllorsString)));
 
             var extent = this.DatabaseSession.Extent(C1s.Meta.ObjectType).AddSort(C1s.Meta.C1AllorsString);
 

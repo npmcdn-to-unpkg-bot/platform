@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     public partial class Second
     {
-        public void TestDerive(DerivableDerive method)
+        public void TestsDerive(DerivableDerive method)
         {
             this.Third = new ThirdBuilder(this.Strategy.Session).Build();
 

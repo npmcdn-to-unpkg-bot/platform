@@ -21,23 +21,16 @@
 
 namespace Allors.Meta
 {
-    public class AllorsDecimalUnit : Unit
+    public partial class AllorsDecimalUnit : Unit
     {
-        public static readonly AllorsDecimalUnit Instance;
+        public static AllorsDecimalUnit Instance { get; internal set; }
 
-        static AllorsDecimalUnit()
-        {
-            Instance = new AllorsDecimalUnit
-                           {
-                               SingularName = "AllorsDecimal", 
-                               PluralName = "AllorsDecimals", 
-                               UnitTag = UnitTags.AllorsDecimal
-                           };
-        }
-
-        private AllorsDecimalUnit()
+        internal AllorsDecimalUnit()
             : base(CoreDomain.Instance, UnitIds.DecimalId)
         {
+            this.SingularName = "AllorsDecimal";
+            this.PluralName = "AllorsDecimals";
+            this.UnitTag = UnitTags.AllorsDecimal;
         }
     }
 }

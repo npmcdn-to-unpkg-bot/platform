@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="Repository.v.cs" company="Allors bvba">
+// <copyright file="Composite.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -16,21 +16,15 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
+// <summary>Defines the ObjectType type.</summary>
 //-------------------------------------------------------------------------------------------------
 
 namespace Allors.Meta
 {
-    public static partial class Repository
+    public partial class Composite
     {
-        public static readonly MetaPopulation MetaPopulation;
-
-        static Repository()
+        internal virtual void TestsExtend()
         {
-            MetaPopulation = MetaPopulation.Instance;
-
-            CorePostInit();
-            BasePostInit();
-            TestPostInit();
-}
+        }
     }
 }

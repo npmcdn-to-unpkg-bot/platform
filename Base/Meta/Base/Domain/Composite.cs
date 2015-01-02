@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="Composite.cs" company="Allors bvba">
+// <copyright file="Class.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -23,5 +23,8 @@ namespace Allors.Meta
 {
     public partial class Composite
     {
+        internal virtual void BaseExtend()
+        {
+        }
     }
 }

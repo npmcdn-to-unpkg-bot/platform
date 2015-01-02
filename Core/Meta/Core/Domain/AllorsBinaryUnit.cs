@@ -21,23 +21,16 @@
 
 namespace Allors.Meta
 {
-    public class AllorsBinaryUnit : Unit
+    public partial class AllorsBinaryUnit : Unit
     {
-        public static readonly AllorsBinaryUnit Instance;
+        public static AllorsBinaryUnit Instance { get; internal set; }
 
-        static AllorsBinaryUnit()
-        {
-            Instance = new AllorsBinaryUnit
-                           {
-                               SingularName = "AllorsBinary", 
-                               PluralName = "AllorsBinarys", 
-                               UnitTag = UnitTags.AllorsBinary
-                           };
-        }
-
-        private AllorsBinaryUnit()
+        internal AllorsBinaryUnit()
             : base(CoreDomain.Instance, UnitIds.BinaryId)
         {
+            this.SingularName = "AllorsBinary";
+            this.PluralName = "AllorsBinarys";
+            this.UnitTag = UnitTags.AllorsBinary;
         }
     }
 }

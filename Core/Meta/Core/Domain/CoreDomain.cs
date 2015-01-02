@@ -23,18 +23,17 @@ namespace Allors.Meta
 {
     using System;
 
-    public class CoreDomain : Domain
+    public partial class CoreDomain : Domain
     {
-        public static readonly CoreDomain Instance;
+        public static CoreDomain Instance { get; internal set;}
 
-        static CoreDomain()
+        internal CoreDomain(MetaPopulation metaPopulation)
+            : base(metaPopulation, new Guid("2d337e3a-5e9e-4705-b327-c14bd279d322"))
         {
-            Instance = new CoreDomain(new Guid("2d337e3a-5e9e-4705-b327-c14bd279d322"));
-            Instance.Name = "Core";
+            this.Name = "Core";
         }
 
-        private CoreDomain(Guid id)
-            : base(MetaPopulation.Instance, id)
+        internal override void Build()
         {
         }
     }
