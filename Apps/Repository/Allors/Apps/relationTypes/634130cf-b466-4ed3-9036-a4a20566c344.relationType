@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="634130cf-b466-4ed3-9036-a4a20566c344">
+  <associationType id="41dd15b0-3525-428d-8af3-7ef4b90b974c">
+    <objectType idref="c799ca62-a554-467d-9aa2-1663293bb37f" />
+  </associationType>
+  <roleType id="1dd0070d-af81-486e-8897-45727dae950a">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>GivenNames</pluralName>
+    <singularName>GivenName</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

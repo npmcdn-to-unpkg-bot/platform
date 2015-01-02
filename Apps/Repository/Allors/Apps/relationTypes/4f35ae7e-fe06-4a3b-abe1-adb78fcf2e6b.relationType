@@ -4,8 +4,8 @@
   </associationType>
   <roleType id="654f2aca-2eb7-495c-a739-82c38a629130">
     <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
-    <pluralName>Descriptions</pluralName>
-    <singularName>Description</singularName>
+    <pluralName>Names</pluralName>
+    <singularName>Name</singularName>
     <size>256</size>
   </roleType>
 </relationType>
