@@ -27,6 +27,10 @@ namespace Allors.Domain
 
     public partial class Roles
     {
+        public const string GuestName = "Guest";
+        public const string AdministratorName = "Administrator";
+        public const string OwnerName = "Owner";
+
         // Horizontal roles
         public static readonly Guid AdministratorId = new Guid("9D162C26-15B2-428e-AB80-DB4B3EBDBB7A");
         public static readonly Guid GuestId = new Guid("86445257-3F62-41e0-8B4A-2DF9FB18A8AA");
@@ -67,11 +71,11 @@ namespace Allors.Domain
             base.BaseSetup(config);
 
             // Horizontal Roles
-            new RoleBuilder(Session).WithName("Administrator").WithUniqueId(AdministratorId).Build();
-            new RoleBuilder(Session).WithName("Guest").WithUniqueId(GuestId).Build();
+            new RoleBuilder(Session).WithName(AdministratorName).WithUniqueId(AdministratorId).Build();
+            new RoleBuilder(Session).WithName(GuestName).WithUniqueId(GuestId).Build();
 
             // DAC emulation
-            new RoleBuilder(Session).WithName("Owner").WithUniqueId(OwnerId).Build();
+            new RoleBuilder(Session).WithName(OwnerName).WithUniqueId(OwnerId).Build();
 
             SecurityCache.Invalidate();
         }
