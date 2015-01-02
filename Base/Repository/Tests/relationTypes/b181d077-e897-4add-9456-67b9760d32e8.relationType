@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="b181d077-e897-4add-9456-67b9760d32e8">
+  <associationType id="5eca1733-0f01-4141-b0d0-d7a2bfd90388">
+    <objectType idref="2561e93c-5b85-44fb-a924-a1c0d1f78846" />
+  </associationType>
+  <roleType id="d29dbed0-a68a-4075-b893-55e16e6335fd">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>HouseNumbers</pluralName>
+    <singularName>HouseNumber</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

@@ -25,7 +25,7 @@ namespace Allors.Meta
     using System.Collections.Generic;
     using System.Linq;
 
-    public sealed partial class Class : Composite, IClass
+    public abstract partial class Class : Composite, IClass
     {
         private readonly Class[] leafClasses;
 

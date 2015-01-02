@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="9884955e-74ed-4f9d-9362-8e0274c53bf9">
+  <associationType id="5b97e356-9bcd-4c4e-be7a-ef577eef5f14">
+    <objectType idref="0cb8d2a7-4566-432f-9882-893b05a77f44" />
+  </associationType>
+  <roleType id="d067129b-8440-4fc7-80d3-832ce569fe54">
+    <objectType idref="ccd6f134-26de-4103-bff9-a37ec3e997a3" />
+    <pluralName>Counters</pluralName>
+    <singularName>Counter</singularName>
+  </roleType>
+</relationType>

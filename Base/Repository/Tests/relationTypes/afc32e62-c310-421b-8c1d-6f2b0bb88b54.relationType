@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="afc32e62-c310-421b-8c1d-6f2b0bb88b54">
+  <associationType id="c21ebc52-6b32-4af7-847e-d3d7e1c4defe">
+    <objectType idref="c799ca62-a554-467d-9aa2-1663293bb37f" />
+  </associationType>
+  <roleType id="0aab73c3-f997-4dd9-885a-2c1c892adb0e">
+    <objectType idref="da866d8e-2c40-41a8-ae5b-5f6dae0b89c8" />
+    <pluralName>Weights</pluralName>
+    <precision>19</precision>
+    <scale>2</scale>
+    <singularName>Weight</singularName>
+  </roleType>
+</relationType>

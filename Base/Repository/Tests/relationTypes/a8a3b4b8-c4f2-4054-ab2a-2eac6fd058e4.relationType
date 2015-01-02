@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="a8a3b4b8-c4f2-4054-ab2a-2eac6fd058e4">
+  <associationType id="0fdeacf1-35bd-473d-88a9-acd65803f731">
+    <objectType idref="c799ca62-a554-467d-9aa2-1663293bb37f" />
+  </associationType>
+  <roleType id="656f11e4-7652-4b4d-9dda-28cfe16333ec">
+    <objectType idref="b5ee6cea-4e2b-498e-a5dd-24671d896477" />
+    <pluralName>AreMarried</pluralName>
+    <singularName>IsMarried</singularName>
+  </roleType>
+</relationType>

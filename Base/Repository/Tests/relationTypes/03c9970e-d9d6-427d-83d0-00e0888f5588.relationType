@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="03c9970e-d9d6-427d-83d0-00e0888f5588">
+  <associationType id="8d565792-4315-44eb-9930-55aa30e8f23a">
+    <objectType idref="7ee3b00b-4e63-4774-b744-3add2c6035ab" />
+  </associationType>
+  <roleType id="10b46f89-7f3a-4571-8621-259a2a501dc7">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>PoBoxes</pluralName>
+    <singularName>PoBox</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

@@ -22,9 +22,8 @@
 namespace Allors.Meta
 {
     using System;
-    using System.Reflection;
 
-    public sealed partial class Unit : ObjectType, IUnit
+    public abstract partial class Unit : ObjectType, IUnit
     {
         private UnitTags unitTag;
 
@@ -128,7 +127,7 @@ namespace Allors.Meta
         /// <value><c>true</c> if this instance is a unique; otherwise, <c>false</c>.</value>
         public bool IsUnique
         {
-            get { return this.Id.Equals(UnitIds.Unique); }
+            get { return this.Id.Equals(UnitIds.UniqueId); }
         }
 
         public override Type ClrType

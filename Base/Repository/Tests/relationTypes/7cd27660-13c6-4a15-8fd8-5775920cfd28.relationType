@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="7cd27660-13c6-4a15-8fd8-5775920cfd28">
+  <associationType id="da384d02-5d30-4df5-acb5-ca36c895ef53">
+    <objectType idref="320985b6-d571-4b6c-b940-e02c04ad37d3" />
+  </associationType>
+  <roleType id="44b9e3cc-e584-48c0-bfec-916ab14e5f03">
+    <objectType idref="ccd6f134-26de-4103-bff9-a37ec3e997a3" />
+    <pluralName>Indeces</pluralName>
+    <singularName>Index</singularName>
+  </roleType>
+</relationType>

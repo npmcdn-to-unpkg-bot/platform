@@ -1,0 +1,15 @@
+<relationType allors="1.0" id="15f33fa4-c878-45a0-b40c-c5214bce350b">
+  <associationType id="4fdd9abb-f2e7-4f07-860e-27b4207224bd">
+    <isMany>true</isMany>
+    <objectType idref="3a5dcec7-308f-48c7-afee-35d38415aa0b" />
+    <pluralName>Companies</pluralName>
+    <singularName>Company</singularName>
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="45bef644-dfcf-417a-9356-3c1cfbcada1b">
+    <isMany>true</isMany>
+    <objectType idref="c799ca62-a554-467d-9aa2-1663293bb37f" />
+    <pluralName>Shareholders</pluralName>
+    <singularName>Shareholder</singularName>
+  </roleType>
+</relationType>

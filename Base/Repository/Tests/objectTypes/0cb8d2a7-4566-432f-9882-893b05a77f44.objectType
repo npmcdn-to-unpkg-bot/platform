@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="0cb8d2a7-4566-432f-9882-893b05a77f44">
+  <namespace idref="001a4113-b25f-4937-8fe0-448784e6ffcd" />
+  <pluralName>Dependents</pluralName>
+  <singularName>Dependent</singularName>
+</objectType>

@@ -1,0 +1,6 @@
+<objectType allors="1.0" id="19bb2bc3-d53a-4d15-86d0-b250fdbcb0a0">
+  <isInterface>true</isInterface>
+  <namespace idref="a0208696-60db-4791-80bd-f2c39974fc3e" />
+  <pluralName>I2s</pluralName>
+  <singularName>I2</singularName>
+</objectType>

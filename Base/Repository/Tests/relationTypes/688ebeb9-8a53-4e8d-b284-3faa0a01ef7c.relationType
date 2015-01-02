@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="688ebeb9-8a53-4e8d-b284-3faa0a01ef7c">
+  <associationType id="8a181cec-7bae-4248-8e24-8abc7e01eea2">
+    <objectType idref="c799ca62-a554-467d-9aa2-1663293bb37f" />
+  </associationType>
+  <isDerived>true</isDerived>
+  <roleType id="e431d53c-37ed-4fde-86a9-755f354c1d75">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>FullNames</pluralName>
+    <singularName>FullName</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

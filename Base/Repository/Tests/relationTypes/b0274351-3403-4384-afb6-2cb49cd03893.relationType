@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="b0274351-3403-4384-afb6-2cb49cd03893">
+  <associationType id="ec145229-e33a-4807-a0dd-48778cc88ac7">
+    <objectType idref="1937b42e-954b-4ef9-bc63-5b8ae7903e9d" />
+  </associationType>
+  <roleType id="12c46bf1-eed0-4e2a-b704-5d40032b4911">
+    <objectType idref="b5ee6cea-4e2b-498e-a5dd-24671d896477" />
+    <pluralName>CreateCycles</pluralName>
+    <singularName>CreateCycle</singularName>
+  </roleType>
+</relationType>

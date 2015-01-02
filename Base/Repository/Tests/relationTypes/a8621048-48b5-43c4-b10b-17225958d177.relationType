@@ -1,0 +1,14 @@
+<relationType allors="1.0" id="a8621048-48b5-43c4-b10b-17225958d177">
+  <associationType id="718eaf0b-1b62-43b2-b336-c9820d806b28">
+    <isMany>true</isMany>
+    <objectType idref="bb1b0a2e-66d1-4e09-860f-52dc7145029e" />
+    <pluralName>BadUIs</pluralName>
+    <singularName>BadUI</singularName>
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="1663525b-5add-4a96-a596-5d736d466985">
+    <objectType idref="3a5dcec7-308f-48c7-afee-35d38415aa0b" />
+    <pluralName>CompanyManies</pluralName>
+    <singularName>CompanyMany</singularName>
+  </roleType>
+</relationType>

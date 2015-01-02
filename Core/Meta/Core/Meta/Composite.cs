@@ -164,8 +164,7 @@ namespace Allors.Meta
                 return this.derivedSupertypes;
             }
         }
-
-
+        
         IEnumerable<IAssociationType> IComposite.AssociationTypes 
         {
             get

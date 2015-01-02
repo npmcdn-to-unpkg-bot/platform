@@ -1,0 +1,15 @@
+<relationType allors="1.0" id="b2e3ddda-0cc3-4cfd-a114-9040882ec58a">
+  <associationType id="014cf60e-595f-42d5-9146-e7d860396f4d">
+    <isMany>true</isMany>
+    <objectType idref="b45ec13c-704f-413d-a662-bdc59a17bfe3" />
+    <pluralName>Derivables</pluralName>
+    <singularName>Derivable</singularName>
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="d5c22b99-6984-4042-98fd-93fe60dfe5d7">
+    <isMany>true</isMany>
+    <objectType idref="b45ec13c-704f-413d-a662-bdc59a17bfe3" />
+    <pluralName>Dependencies</pluralName>
+    <singularName>Dependency</singularName>
+  </roleType>
+</relationType>

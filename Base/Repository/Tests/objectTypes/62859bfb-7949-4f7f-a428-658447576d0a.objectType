@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="62859bfb-7949-4f7f-a428-658447576d0a">
+  <namespace idref="35c3f396-af3c-4882-92ba-abe26b01b921" />
+  <pluralName>StatefulCompanies</pluralName>
+  <singularName>StatefulCompany</singularName>
+</objectType>

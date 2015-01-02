@@ -1,0 +1,14 @@
+<relationType allors="1.0" id="73f23588-1444-416d-b43c-b3384ca87bfc">
+  <associationType id="d1a098bf-a3d8-4b71-948f-a77ae82f02db">
+    <objectType idref="3a5dcec7-308f-48c7-afee-35d38415aa0b" />
+    <pluralName>Companies</pluralName>
+    <singularName>Company</singularName>
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="a365f0ee-a94f-4435-a7b1-c92ac804a845">
+    <isMany>true</isMany>
+    <objectType idref="130aa2ff-4f14-4ad7-8a27-f80e8aebfa00" />
+    <pluralName>Addresses</pluralName>
+    <singularName>Address</singularName>
+  </roleType>
+</relationType>

@@ -111,6 +111,8 @@ namespace Allors.Meta
 
         public abstract Type ClrType { get; }
 
+        public abstract void Build();
+
         /// <summary>
         /// Gets the validation name.
         /// </summary>

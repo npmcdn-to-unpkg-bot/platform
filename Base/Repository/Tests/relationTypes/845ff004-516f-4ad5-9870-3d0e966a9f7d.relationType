@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="845ff004-516f-4ad5-9870-3d0e966a9f7d">
+  <associationType id="3820f65f-0e79-4f30-a973-5d17dca6ad33">
+    <objectType idref="3a5dcec7-308f-48c7-afee-35d38415aa0b" />
+    <pluralName>Companies</pluralName>
+    <singularName>Company</singularName>
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="58d7df91-fbc5-4bcb-9398-a9957949402b">
+    <objectType idref="c799ca62-a554-467d-9aa2-1663293bb37f" />
+    <pluralName>Owners</pluralName>
+    <singularName>Owner</singularName>
+  </roleType>
+</relationType>

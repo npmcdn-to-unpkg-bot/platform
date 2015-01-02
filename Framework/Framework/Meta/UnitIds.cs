@@ -67,6 +67,6 @@ namespace Allors.Meta
         /// <summary>
         /// The id of the unique type.
         /// </summary>
-        public static readonly Guid Unique = new Guid("6dc0a1a8-88a4-4614-adb4-92dd3d017c0e");
+        public static readonly Guid UniqueId = new Guid("6dc0a1a8-88a4-4614-adb4-92dd3d017c0e");
     }
 }

@@ -1,0 +1,14 @@
+<relationType allors="1.0" id="6340de2a-c3b1-4893-a7f3-cb924b82fa0e">
+  <associationType id="b6ea4ac5-088a-4773-8410-6813d0185d7c">
+    <isMany>true</isMany>
+    <objectType idref="c799ca62-a554-467d-9aa2-1663293bb37f" />
+    <pluralName>Persons</pluralName>
+    <singularName>Person</singularName>
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="5a472c98-481f-407c-b53e-eaaa7e7a5340">
+    <objectType idref="7ee3b00b-4e63-4774-b744-3add2c6035ab" />
+    <pluralName>MailboxAddresses</pluralName>
+    <singularName>MailboxAddress</singularName>
+  </roleType>
+</relationType>

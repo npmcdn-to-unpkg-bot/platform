@@ -21,22 +21,28 @@
 namespace Allors.Meta
 {
     using System;
-using System.Linq;
 
     public static partial class Repository
     {
-        public static void BasePostInit(MetaPopulation meta)
+        public static void BasePostInit()
         {
-            // All composites should implement Object
-            foreach (var composite in meta.Composites.Where(composite => !composite.ExistDirectSupertypes && !composite.Equals(Object)).ToArray())
+            new MethodType(BaseDomain.Instance, new Guid("62D48A76-A500-4D16-9D20-6FEF43AC6DCB"))
+                {
+                    ObjectType = ObjectInterface.Instance,
+                    Name = "OnPostBuild" 
+                };
+
+            new MethodType(BaseDomain.Instance, new Guid("042375D8-BBDD-46E8-80B6-CC89D8782F1C"))
             {
-                new InheritanceBuilder(Base, Guid.NewGuid()).WithSubtype(composite).WithSupertype(Object).Build();
-            }
+                ObjectType = ObjectInterface.Instance,
+                Name = "ApplySecurityOnPostBuild"
+            };
 
-            new MethodTypeBuilder(Base, new Guid("62D48A76-A500-4D16-9D20-6FEF43AC6DCB")).WithObjectType(Object).WithName("OnPostBuild").Build();
-            new MethodTypeBuilder(Base, new Guid("042375D8-BBDD-46E8-80B6-CC89D8782F1C")).WithObjectType(Object).WithName("ApplySecurityOnPostBuild").Build();
-
-            new MethodTypeBuilder(Base, new Guid("F4CC201F-D6CB-4D82-8AEB-E9C4C79C33F7")).WithObjectType(Deletable).WithName("Delete").Build();
+            new MethodType(BaseDomain.Instance, new Guid("F4CC201F-D6CB-4D82-8AEB-E9C4C79C33F7"))
+            {
+                ObjectType = DeletableInterface.Instance,
+                Name = "Delete"
+            };
             
             BaseCounter();
             BaseAccessControl();
@@ -60,105 +66,120 @@ using System.Linq;
 
         private static void BaseUserGroup()
         {
-            UserGroupName.IsRequired = true;
+            UserGroupNameType.Instance.RoleType.IsRequired = true;
         }
 
         private static void BaseUniquelyIdentifiable()
         {
-            UniquelyIdentifiableUniqueId.IsRequired = true;
+            UniquelyIdentifiableUniqueIdType.Instance.RoleType.IsRequired = true;
         }
 
         private static void BaseStringTemplate()
         {
-            StringTemplateName.IsRequired = true;
-            StringTemplateLocale.IsRequiredOverride = true;
+            StringTemplateNameType.Instance.RoleType.IsRequired = true;
+            // TODO:
+            //StringTemplateLocaleType.Instance.RoleType.IsRequiredOverride = true;
         }
 
         private static void BaseRole()
         {
-            RoleName.IsRequired = true;
+            RoleNameType.Instance.RoleType.IsRequired = true;
         }
 
         private static void BasePermission()
         {
-            PermissionOperandTypePointer.IsRequired = true;
-            PermissionConcreteClassPointer.IsRequired = true;
-            PermissionOperationEnum.IsRequired = true;
+            PermissionOperandTypePointerType.Instance.RoleType.IsRequired = true;
+            PermissionConcreteClassPointerType.Instance.RoleType.IsRequired = true;
+            PermissionOperationEnumType.Instance.RoleType.IsRequired = true;
         }
 
         private static void BasePeriod()
         {
-            PeriodFromDate.IsRequired = true;
+            PeriodFromDateType.Instance.RoleType.IsRequired = true;
         }
 
         private static void BaseMediaType()
         {
-            MediaTypeName.IsRequired = true;
+            MediaTypeNameType.Instance.RoleType.IsRequired = true;
         }
 
         private static void BaseMediaContent()
         {
-            MediaContentValue.IsRequired = true;
+            MediaContentValueType.Instance.RoleType.IsRequired = true;
         }
 
         private static void BaseMedia()
         {
-            MediaMediaType.IsRequired = true;
-            MediaMediaType.IsRequired = true;
+            MediaMediaTypeType.Instance.RoleType.IsRequired = true;
+            MediaMediaTypeType.Instance.RoleType.IsRequired = true;
         }
 
         private static void BaseLocalisedText()
         {
-            LocalisedTextText.IsRequired = true;
+            LocalisedTextTextType.Instance.RoleType.IsRequired = true;
         }
 
         private static void BaseLocale()
         {
-            LocaleLanguage.IsRequired = true;
-            LocaleCountry.IsRequired = true;
+            LocaleLanguageType.Instance.RoleType.IsRequired = true;
+            LocaleCountryType.Instance.RoleType.IsRequired = true;
         }
 
         private static void BaseLanguage()
         {
-            LanguageIsoCode.IsRequired = true;
-            LanguageName.IsRequired = true;
+            LanguageIsoCodeType.Instance.RoleType.IsRequired = true;
+            LanguageNameType.Instance.RoleType.IsRequired = true;
         }
 
         private static void BaseEnumeration()
         {
-            EnumerationName.IsRequired = true;
-            EnumerationIsActive.IsRequired = true;
+            EnumerationNameType.Instance.RoleType.IsRequired = true;
+            EnumerationIsActiveType.Instance.RoleType.IsRequired = true;
         }
 
         private static void BaseDerivable()
         {
-            new MethodTypeBuilder(Base, new Guid("122D3D78-AB97-4A69-A725-F465C71757DA")).WithObjectType(Derivable).WithName("PrepareDerivation").Build();
-            new MethodTypeBuilder(Base, new Guid("527DA7F8-68B4-46AB-B0D8-6B9E82D2A5AC")).WithObjectType(Derivable).WithName("Derive").Build();
-            new MethodTypeBuilder(Base, new Guid("349CBCDE-B4E9-4965-B3FF-7C41B021825D")).WithObjectType(Derivable).WithName("ApplySecurityOnDerive").Build();
+            new MethodType(BaseDomain.Instance, new Guid("122D3D78-AB97-4A69-A725-F465C71757DA"))
+            {
+                ObjectType = DeletableInterface.Instance,
+                Name = "PrepareDerivation"
+            };
+
+            new MethodType(BaseDomain.Instance, new Guid("527DA7F8-68B4-46AB-B0D8-6B9E82D2A5AC"))
+            {
+                ObjectType = DeletableInterface.Instance,
+                Name = "Derive"
+            };
+
+            new MethodType(BaseDomain.Instance, new Guid("349CBCDE-B4E9-4965-B3FF-7C41B021825D"))
+            {
+                ObjectType = DeletableInterface.Instance,
+                Name = "ApplySecurityOnDerive"
+            };
         }
 
         private static void BaseCurrency()
         {
-            CurrencyIsoCode.IsRequired = true;
-            CurrencyName.IsRequired = true;
-            CurrencySymbol.IsRequired = true;
+            CurrencyIsoCodeType.Instance.RoleType.IsRequired = true;
+            CurrencyNameType.Instance.RoleType.IsRequired = true;
+            CurrencySymbolType.Instance.RoleType.IsRequired = true;
         }
 
         private static void BaseCountry()
         {
-            CountryIsoCode.IsRequired = true;
-            CountryName.IsRequired = true;
+            CountryIsoCodeType.Instance.RoleType.IsRequired = true;
+            CountryNameType.Instance.RoleType.IsRequired = true;
         }
 
         private static void BaseAccessControl()
         {
-            AccessControlRole.IsRequired = true;
-            AccessControlObject.IsRequired = true;
+            AccessControlRoleType.Instance.RoleType.IsRequired = true;
+            AccessControlObjectType.Instance.RoleType.IsRequired = true;
         }
 
         private static void BaseCounter()
         {
-            CounterValue.IsRequired = true;
+            CounterValueType.Instance.RoleType.IsRequired = true;
         }
     }
 }

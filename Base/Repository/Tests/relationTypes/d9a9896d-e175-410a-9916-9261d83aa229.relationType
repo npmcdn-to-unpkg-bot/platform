@@ -1,0 +1,14 @@
+<relationType allors="1.0" id="d9a9896d-e175-410a-9916-9261d83aa229">
+  <associationType id="a963f593-cad0-4fa9-96a3-3853f0f7d7c6">
+    <objectType idref="6217b428-4ad0-4f7f-ad4b-e334cf0b3ab1" />
+    <pluralName>Froms</pluralName>
+    <singularName>From</singularName>
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="775a29b8-6e21-4545-9881-d52f6eb7db8b">
+    <isMany>true</isMany>
+    <objectType idref="7eb25112-4b81-4e8d-9f75-90950c40c65f" />
+    <pluralName>Tos</pluralName>
+    <singularName>To</singularName>
+  </roleType>
+</relationType>

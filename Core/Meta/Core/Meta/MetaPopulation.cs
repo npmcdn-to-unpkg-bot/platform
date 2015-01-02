@@ -31,6 +31,8 @@ namespace Allors.Meta
     {
         private const string NamespaceName = "Allors.Domain";
 
+        public static readonly MetaPopulation Instance;
+
         private readonly Dictionary<Guid, MetaObject> metaObjectById;
 
         private Composite[] derivedComposites;
@@ -50,7 +52,72 @@ namespace Allors.Meta
         private IList<RoleType> roleTypes;
         private IList<MethodType> methodTypes;
 
-        internal MetaPopulation()
+        static MetaPopulation()
+        {
+            Instance = new MetaPopulation();
+
+            var assembly = Assembly.GetExecutingAssembly();
+            var types = assembly.GetTypes();
+
+            var domains = types.Where(
+                    type => type.IsClass && 
+                    !type.IsAbstract && 
+                    (
+                        type.GetInterfaces().Contains(typeof(IDomain)))
+                    )
+                    .ToArray();
+
+            foreach (var initType in domains)
+            {
+                try
+                {
+                    // Trigger static contructor
+                    var instance = initType.GetField("Instance").GetValue(null);
+                }
+                catch (Exception e)
+                {
+                    var innerException = e;
+                    while (innerException.InnerException != null)
+                    {
+                        innerException = innerException.InnerException;
+                    }
+
+                    throw innerException;
+                }
+            }
+
+            var objectTypes = types.Where(
+                    type => type.IsClass &&
+                    !type.IsAbstract &&
+                    (
+                        type.GetInterfaces().Contains(typeof(IUnit)) ||
+                        type.GetInterfaces().Contains(typeof(IInterface)) ||
+                        type.GetInterfaces().Contains(typeof(IClass)))
+                    )
+                    .ToArray();
+
+            foreach (var initType in domains)
+            {
+                try
+                {
+                    // Trigger static contructor
+                    var objectType = (ObjectType)initType.GetField("Instance").GetValue(null);
+                    objectType.Build();
+                }
+                catch (Exception e)
+                {
+                    var innerException = e;
+                    while (innerException.InnerException != null)
+                    {
+                        innerException = innerException.InnerException;
+                    }
+
+                    throw innerException;
+                }
+            }           
+        }
+
+        private MetaPopulation()
         {
             this.isStale = true;
             this.isDeriving = false;

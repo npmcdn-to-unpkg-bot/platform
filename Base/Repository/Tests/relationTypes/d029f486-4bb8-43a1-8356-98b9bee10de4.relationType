@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="d029f486-4bb8-43a1-8356-98b9bee10de4">
+  <associationType id="1454029b-b016-41e1-b142-cea20c7b36d1">
+    <objectType idref="268f63d2-17da-4f29-b0d0-76db611598c6" />
+    <pluralName>Places</pluralName>
+    <singularName>Place</singularName>
+  </associationType>
+  <roleType id="dccca416-913b-406a-9405-c5d037af2fd8">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>Cities</pluralName>
+    <singularName>City</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

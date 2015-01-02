@@ -26,14 +26,11 @@ namespace Allors.Meta
 
         static Repository()
         {
-            var meta = new MetaPopulation();
+            MetaPopulation = MetaPopulation.Instance;
 
-            Init(meta);
-
-            BasePostInit(meta);
-            TestPostInit(meta);
-
-            MetaPopulation = meta;
-        }
+            CorePostInit();
+            BasePostInit();
+            TestPostInit();
+}
     }
 }

@@ -100,7 +100,8 @@ namespace Allors.Development.Repository.Generation
 
         internal void Generate(MetaPopulation metaPopulation, DirectoryInfo outputDirectory, Log log)
         {
-            if (!metaPopulation.IsValid)
+            var validation = metaPopulation.Validate();
+            if (validation.ContainsErrors)
             {
                 log.Error(this, "Meta population " + metaPopulation + " has validation errors.");
                 return;

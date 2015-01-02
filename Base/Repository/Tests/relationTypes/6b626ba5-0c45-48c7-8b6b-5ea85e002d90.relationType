@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="6b626ba5-0c45-48c7-8b6b-5ea85e002d90">
+  <associationType id="520bb966-6e8a-46a4-a3c0-18422af13cba">
+    <objectType idref="c799ca62-a554-467d-9aa2-1663293bb37f" />
+  </associationType>
+  <roleType id="66e20063-ab51-417a-8ce4-135bb6e115c1">
+    <objectType idref="ccd6f134-26de-4103-bff9-a37ec3e997a3" />
+    <pluralName>ShirtSizes</pluralName>
+    <singularName>ShirtSize</singularName>
+    <size>10</size>
+  </roleType>
+</relationType>

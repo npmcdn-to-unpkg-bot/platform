@@ -3,7 +3,7 @@
   <UsingTask TaskName="Generate" AssemblyFile="external\allors\development\Allors.R1.Development.dll"/>
 
   <Target Name="Generate">
-    <Generate Repository="allors/base"/>
+    <Generate Repository="Tests"/>
   </Target>
 
 </Project>

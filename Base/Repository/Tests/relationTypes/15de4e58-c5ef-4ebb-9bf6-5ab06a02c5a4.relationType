@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="15de4e58-c5ef-4ebb-9bf6-5ab06a02c5a4">
+  <associationType id="be22968c-a450-418f-8f2e-f6140a56589c">
+    <objectType idref="c799ca62-a554-467d-9aa2-1663293bb37f" />
+  </associationType>
+  <roleType id="ad249eb0-6cf2-4bcb-b3d1-3ff1282cd2f9">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>TinyMCETexts</pluralName>
+    <singularName>TinyMCEText</singularName>
+    <size>-1</size>
+  </roleType>
+</relationType>

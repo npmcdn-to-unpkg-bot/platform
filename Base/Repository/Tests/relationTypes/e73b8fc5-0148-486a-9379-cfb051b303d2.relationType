@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="e73b8fc5-0148-486a-9379-cfb051b303d2">
+  <associationType id="db615c1c-3d08-4faa-b19f-740bd7102fbd">
+    <objectType idref="2cc9bde1-80da-4159-bb20-219074266101" />
+  </associationType>
+  <roleType id="bde110ae-8242-4d98-bdc3-feeed8fde742">
+    <objectType idref="b5ee6cea-4e2b-498e-a5dd-24671d896477" />
+    <pluralName>DeleteDependents</pluralName>
+    <singularName>DeleteDependent</singularName>
+  </roleType>
+</relationType>

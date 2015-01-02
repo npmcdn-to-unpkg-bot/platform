@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="39e28141-fd6b-4f49-8884-d5400f6c57ff">
+  <associationType id="9118c09c-e8c2-4685-a464-9be9ece2e746">
+    <objectType idref="fefcf1b6-ac8f-47b0-bed5-939207a2833e" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="a4b456e2-b45f-4398-875b-4ba99ead49fe">
+    <isMany>true</isMany>
+    <objectType idref="19bb2bc3-d53a-4d15-86d0-b250fdbcb0a0" />
+    <pluralName>I2One2Manies</pluralName>
+    <singularName>I2One2Many</singularName>
+  </roleType>
+</relationType>

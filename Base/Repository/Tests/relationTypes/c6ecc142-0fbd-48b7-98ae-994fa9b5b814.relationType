@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="c6ecc142-0fbd-48b7-98ae-994fa9b5b814">
+  <associationType id="c7469ffd-ffd7-4913-962c-8a7a0b4df3dd">
+    <isMany>true</isMany>
+    <objectType idref="b45ec13c-704f-413d-a662-bdc59a17bfe3" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="1d091625-ec4a-486d-a9be-8f87fe300967">
+    <objectType idref="b45ec13c-704f-413d-a662-bdc59a17bfe3" />
+    <pluralName>I12Many2Ones</pluralName>
+    <singularName>I12Many2One</singularName>
+  </roleType>
+</relationType>

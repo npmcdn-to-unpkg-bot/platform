@@ -45,6 +45,7 @@ namespace Allors.Development.Repository.Tasks
             var templateFileInfo = new FileInfo(template);
             var stringTemplate = new StringTemplate(templateFileInfo);
             var outputDirectoryInfo = new DirectoryInfo(output);
+
             stringTemplate.Generate(Repository.MetaPopulation, outputDirectoryInfo, log);
 
             return log;

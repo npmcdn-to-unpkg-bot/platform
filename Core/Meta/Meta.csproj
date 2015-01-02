@@ -42,12 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Meta\AssociationType.cs" />
-    <Compile Include="Core\Meta\Builder.cs" />
+    <Compile Include="Core\Meta\Repository.cs" />
     <Compile Include="Core\Meta\ConcreteMethodType.cs" />
     <Compile Include="Core\Meta\ConcreteRoleType.cs" />
     <Compile Include="Core\Meta\Class.cs" />
-    <Compile Include="Core\Meta\ClassBuilder.cs" />
-    <Compile Include="Core\Meta\ClassBuilder.v.cs" />
     <Compile Include="Core\Meta\Domain.cs" />
     <Compile Include="Core\Meta\DomainObject.cs" />
     <Compile Include="Core\Meta\Composite.cs" />
@@ -59,22 +57,12 @@
     <Compile Include="Core\Meta\ObjectType.cs" />
     <Compile Include="Core\Meta\MetaObject.cs" />
     <Compile Include="Core\Meta\Inheritance.cs" />
-    <Compile Include="Core\Meta\InheritanceBuilder.cs" />
-    <Compile Include="Core\Meta\InheritanceBuilder.v.cs" />
     <Compile Include="Core\Meta\MethodType.cs" />
-    <Compile Include="Core\Meta\MethodTypeBuilder.cs" />
-    <Compile Include="Core\Meta\MethodTypeBuilder.v.cs" />
     <Compile Include="Core\Meta\RelationType.cs" />
-    <Compile Include="Core\Meta\RelationTypeBuilder.cs" />
-    <Compile Include="Core\Meta\RelationTypeBuilder.v.cs" />
     <Compile Include="Core\Meta\Interface.cs" />
-    <Compile Include="Core\Meta\InterfaceBuilder.cs" />
-    <Compile Include="Core\Meta\InterfaceBuilder.v.cs" />
     <Compile Include="Core\Meta\MetaPopulation.cs" />
     <Compile Include="Core\Meta\RoleType.cs" />
     <Compile Include="Core\Meta\Unit.cs" />
-    <Compile Include="Core\Meta\UnitBuilder.cs" />
-    <Compile Include="Core\Meta\UnitBuilder.v.cs" />
     <Compile Include="Core\Meta\ValidationError.cs" />
     <Compile Include="Core\Meta\ValidationKind.cs" />
     <Compile Include="Core\Meta\ValidationLog.cs" />

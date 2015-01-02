@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="0375a3d3-1a1b-4cbb-b735-1fe508bcc672">
+  <associationType id="ebaedf39-1af9-42b7-83dc-8945450cebf2">
+    <isMany>true</isMany>
+    <objectType idref="c799ca62-a554-467d-9aa2-1663293bb37f" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="86685c44-5196-46dd-9260-e40a434e9a52">
+    <objectType idref="130aa2ff-4f14-4ad7-8a27-f80e8aebfa00" />
+    <pluralName>MainAddresses</pluralName>
+    <singularName>MainAddress</singularName>
+  </roleType>
+</relationType>

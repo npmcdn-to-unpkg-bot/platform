@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="7ee3b00b-4e63-4774-b744-3add2c6035ab">
+  <namespace idref="35c3f396-af3c-4882-92ba-abe26b01b921" />
+  <pluralName>MailboxAddresses</pluralName>
+  <singularName>MailboxAddress</singularName>
+</objectType>

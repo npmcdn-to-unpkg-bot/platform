@@ -1,0 +1,11 @@
+<relationType allors="1.0" id="6f0f42c4-9b47-47c2-a632-da8e08116be4">
+  <associationType id="652a00b8-f708-4804-80b6-c1fe3211acf2">
+    <objectType idref="2561e93c-5b85-44fb-a924-a1c0d1f78846" />
+  </associationType>
+  <roleType id="fc273b47-d98a-4afd-90ba-574fbdbfb395">
+    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <pluralName>Street</pluralName>
+    <singularName>Street</singularName>
+    <size>256</size>
+  </roleType>
+</relationType>

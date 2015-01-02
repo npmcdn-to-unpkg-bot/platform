@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="c1e86449-e5a8-4911-97c7-b03de9142f98">
+  <associationType id="2786b8ca-2d71-44cc-8e1e-1896ac5e6c5c">
+    <objectType idref="2cc9bde1-80da-4159-bb20-219074266101" />
+  </associationType>
+  <roleType id="af75f294-b20d-4304-8804-32ef9c0a324a">
+    <objectType idref="ccd6f134-26de-4103-bff9-a37ec3e997a3" />
+    <pluralName>Subcounters</pluralName>
+    <singularName>Subcounter</singularName>
+  </roleType>
+</relationType>

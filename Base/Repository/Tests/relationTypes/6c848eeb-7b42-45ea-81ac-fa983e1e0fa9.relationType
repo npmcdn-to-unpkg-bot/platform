@@ -1,0 +1,14 @@
+<relationType allors="1.0" id="6c848eeb-7b42-45ea-81ac-fa983e1e0fa9">
+  <associationType id="be566287-a26d-46fb-a4f2-1fc8bf1c1de4">
+    <isMany>true</isMany>
+    <objectType idref="62859bfb-7949-4f7f-a428-658447576d0a" />
+    <pluralName>StatefulCompanies</pluralName>
+    <singularName>StatefulCompany</singularName>
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="2a482b25-a154-4306-87f3-b6cd7af3c80d">
+    <objectType idref="c799ca62-a554-467d-9aa2-1663293bb37f" />
+    <pluralName>Employees</pluralName>
+    <singularName>Employee</singularName>
+  </roleType>
+</relationType>
