@@ -43,13 +43,13 @@ namespace Allors.Domain
 
             config.GrantCustomer(this.ObjectType, Meta.CurrentShipmentStatus, Operation.Read);
             config.GrantCustomer(this.ObjectType, Meta.ShipToParty, Operation.Read);
-            config.GrantCustomer(this.ObjectType, Meta.ShipmentStatus, Operation.Read);
-            config.GrantCustomer(this.ObjectType, Meta.ShipmentPackage, Operation.Read);
+            config.GrantCustomer(this.ObjectType, Meta.ShipmentStatuses, Operation.Read);
+            config.GrantCustomer(this.ObjectType, Meta.ShipmentPackages, Operation.Read);
 
             config.GrantSales(this.ObjectType, Meta.CurrentShipmentStatus, Operation.Read);
             config.GrantSales(this.ObjectType, Meta.ShipToParty, Operation.Read);
-            config.GrantSales(this.ObjectType, Meta.ShipmentStatus, Operation.Read);
-            config.GrantSales(this.ObjectType, Meta.ShipmentPackage, Operation.Read);
+            config.GrantSales(this.ObjectType, Meta.ShipmentStatuses, Operation.Read);
+            config.GrantSales(this.ObjectType, Meta.ShipmentPackages, Operation.Read);
 
             var created = new CustomerShipmentObjectStates(Session).Created;
             var picked = new CustomerShipmentObjectStates(Session).Picked;

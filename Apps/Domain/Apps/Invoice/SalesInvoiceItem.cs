@@ -279,8 +279,8 @@ namespace Allors.Domain
 
             this.AppsDeriveAmountPaid(derivation);
 
-            derivation.Log.AssertAtLeastOne(this, SalesInvoiceItems.Meta.Product, SalesInvoiceItems.Meta.ProductFeature, SalesInvoiceItems.Meta.TimeEntry);
-            derivation.Log.AssertExistsAtMostOne(this, SalesInvoiceItems.Meta.Product, SalesInvoiceItems.Meta.ProductFeature, SalesInvoiceItems.Meta.TimeEntry);
+            derivation.Log.AssertAtLeastOne(this, SalesInvoiceItems.Meta.Product, SalesInvoiceItems.Meta.ProductFeature, SalesInvoiceItems.Meta.TimeEntries);
+            derivation.Log.AssertExistsAtMostOne(this, SalesInvoiceItems.Meta.Product, SalesInvoiceItems.Meta.ProductFeature, SalesInvoiceItems.Meta.TimeEntries);
         }
 
         private static decimal PriceInCurrency(decimal price, Currency fromCurrency, Currency toCurrency)

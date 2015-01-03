@@ -244,11 +244,11 @@ namespace Allors.Domain
             {
                 if (this.ExistOwner && !this.Owner.PaymentMethods.Contains(paymentMethod))
                 {
-                    derivation.Log.AddError(this, Stores.Meta.PaymentMethod, ErrorMessages.PaymentApplicationNotLargerThanInvoiceItemAmount);
+                    derivation.Log.AddError(this, Stores.Meta.PaymentMethods, ErrorMessages.PaymentApplicationNotLargerThanInvoiceItemAmount);
                 }
             }
 
-            derivation.Log.AssertExistsAtMostOne(this, Stores.Meta.FiscalYearInvoiceNumber, Stores.Meta.NextSalesInvoiceNumber);
+            derivation.Log.AssertExistsAtMostOne(this, Stores.Meta.FiscalYearInvoiceNumbers, Stores.Meta.NextSalesInvoiceNumber);
 
             this.DisplayName = this.Name;
         }

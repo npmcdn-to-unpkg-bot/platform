@@ -83,7 +83,7 @@ namespace Allors.Domain
             config.GrantOperations(this.ObjectType, full);
 
             config.GrantCustomer(this.ObjectType, Meta.CurrentPickListStatus, Operation.Read);
-            config.GrantCustomer(this.ObjectType, Meta.PickListStatus, Operation.Read);
+            config.GrantCustomer(this.ObjectType, Meta.PickListStatuses, Operation.Read);
 
             var created = new PickListObjectStates(Session).Created;
             var onHold = new PickListObjectStates(Session).OnHold;

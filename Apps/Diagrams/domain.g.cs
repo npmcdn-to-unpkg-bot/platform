@@ -1,248 +1,112 @@
 namespace Allors.Domain
 {
-	public interface PartSpecification  : UniquelyIdentifiable, Commentable, Transitional, UserInterfaceable 
+	public interface AccessControlledObject  : Object, Derivable 
 	{
-					PartSpecificationStatus PartSpecificationStatuses {set;}
+					Permission DeniedPermissions {set;}
 
-					PartSpecificationObjectState CurrentObjectState {set;}
-
-					global::System.DateTime? DocumentationDate {set;}
-
-					PartSpecificationStatus CurrentPartSpecificationStatus {set;}
-
-					PartSpecificationObjectState PreviousObjectState {set;}
-
-					global::System.String Description {set;}
+					SecurityToken SecurityTokens {set;}
 
 	}
-	public interface Quote  : UserInterfaceable, SearchResult, Searchable 
+	public interface Commentable  : Object 
 	{
-					global::System.DateTime? ValidFromDate {set;}
-
-					QuoteTerm QuoteTerms {set;}
-
-					Party Issuer {set;}
-
-					global::System.DateTime? ValidThroughDate {set;}
-
-					global::System.String Description {set;}
-
-					Party Receiver {set;}
-
-					global::System.Decimal? Amount {set;}
-
-					global::System.DateTime? IssueDate {set;}
-
-					QuoteItem QuoteItems {set;}
-
-					global::System.String QuoteNumber {set;}
+					global::System.String Comment {set;}
 
 	}
-	public interface PartyRelationship  : Period, Commentable, UserInterfaceable 
-	{
-					PartyRelationshipStatus PartyRelationshipStatus {set;}
-
-					Agreement RelationshipAgreements {set;}
-
-					PartyRelationshipPriority PartyRelationshipPriority {set;}
-
-					global::System.Decimal? SimpleMovingAverage {set;}
-
-					CommunicationEvent CommunicationEvents {set;}
-
-	}
-	public interface Service  : Product 
+	public interface Deletable  : Object 
 	{
 	}
-	public interface Document  : Printable, UserInterfaceable, Commentable, Searchable, SearchResult 
+	public interface Derivable  : Object 
 	{
+	}
+	public interface Enumeration  : Object, UserInterfaceable, UniquelyIdentifiable 
+	{
+					LocalisedText LocalisedNames {set;}
+
 					global::System.String Name {set;}
 
-					global::System.String Description {set;}
-
-					global::System.String Text {set;}
-
-					global::System.String DocumentLocation {set;}
+					global::System.Boolean IsActive {set;}
 
 	}
-	public interface FinancialAccount  : UserInterfaceable, SearchResult, Searchable 
+	public interface Localised  : Object 
 	{
-					FinancialAccountTransaction FinancialAccountTransactions {set;}
+					Locale Locale {set;}
 
 	}
-	public interface Request  : UserInterfaceable, Searchable, SearchResult, Commentable 
-	{
-					global::System.String Description {set;}
-
-					global::System.DateTime? RequiredResponseDate {set;}
-
-					RequestItem RequestItems {set;}
-
-					global::System.String RequestNumber {set;}
-
-					RespondingParty RespondingParties {set;}
-
-					Party Originator {set;}
-
-	}
-	public interface GeographicBoundary  : Searchable, GeoLocatable, UserInterfaceable 
-	{
-					global::System.String Abbreviation {set;}
-
-	}
-	public interface PriceComponent  : Period, Searchable, UserInterfaceable, Commentable 
-	{
-					GeographicBoundary GeographicBoundary {set;}
-
-					global::System.Decimal? Rate {set;}
-
-					RevenueValueBreak RevenueValueBreak {set;}
-
-					PartyClassification PartyClassification {set;}
-
-					OrderQuantityBreak OrderQuantityBreak {set;}
-
-					PackageQuantityBreak PackageQuantityBreak {set;}
-
-					Product Product {set;}
-
-					RevenueQuantityBreak RevenueQuantityBreak {set;}
-
-					Party SpecifiedFor {set;}
-
-					ProductFeature ProductFeature {set;}
-
-					AgreementPricingProgram AgreementPricingProgram {set;}
-
-					global::System.String Description {set;}
-
-					Currency Currency {set;}
-
-					OrderKind OrderKind {set;}
-
-					OrderValue OrderValue {set;}
-
-					global::System.Decimal Price {set;}
-
-					ProductCategory ProductCategory {set;}
-
-					SalesChannel SalesChannel {set;}
-
-	}
-	public interface GeographicBoundaryComposite  : GeographicBoundary 
-	{
-					GeographicBoundary Associations {set;}
-
-	}
-	public interface Party  : Localised, UserInterfaceable, SearchResult, SecurityTokenOwner, UniquelyIdentifiable, Searchable 
-	{
-					global::System.Decimal YTDRevenue {set;}
-
-					global::System.Decimal LastYearsRevenue {set;}
-
-					TelecommunicationsNumber BillingInquiriesFax {set;}
-
-					Qualification Qualifications {set;}
-
-					ContactMechanism HomeAddress {set;}
-
-					ContactMechanism SalesOffice {set;}
-
-					TelecommunicationsNumber OrderInquiriesFax {set;}
-
-					Person CurrentSalesReps {set;}
-
-					PartyContactMechanism PartyContactMechanisms {set;}
-
-					TelecommunicationsNumber ShippingInquiriesFax {set;}
-
-					TelecommunicationsNumber ShippingInquiriesPhone {set;}
-
-					BillingAccount BillingAccounts {set;}
-
-					TelecommunicationsNumber OrderInquiriesPhone {set;}
-
-					PartySkill PartySkills {set;}
-
-					PartyClassification PartyClassifications {set;}
-
-					global::System.Boolean? ExcludeFromDunning {set;}
-
-					BankAccount BankAccounts {set;}
-
-					ContactMechanism BillingAddress {set;}
-
-					ShipmentMethod DefaultShipmentMethod {set;}
-
-					Resume Resumes {set;}
-
-					ContactMechanism HeadQuarter {set;}
-
-					ElectronicAddress PersonalEmailAddress {set;}
-
-					TelecommunicationsNumber CellPhoneNumber {set;}
-
-					TelecommunicationsNumber BillingInquiriesPhone {set;}
-
-					global::System.String PartyName {set;}
-
-					ContactMechanism OrderAddress {set;}
-
-					ElectronicAddress InternetAddress {set;}
-
-					Media Contents {set;}
-
-					CreditCard CreditCards {set;}
-
-					PostalAddress ShippingAddress {set;}
-
-					global::System.Decimal OpenOrderAmount {set;}
-
-					TelecommunicationsNumber GeneralFaxNumber {set;}
-
-					PaymentMethod DefaultPaymentMethod {set;}
-
-					TelecommunicationsNumber GeneralPhoneNumber {set;}
-
-					Currency PreferredCurrency {set;}
-
-					VatRegime VatRegime {set;}
-
-	}
-	public interface CommunicationAttachment  : UserInterfaceable 
+	public interface Object 
 	{
 	}
-	public interface FixedAsset  : UserInterfaceable, SearchResult, Searchable 
+	public interface ObjectState  : Object, UniquelyIdentifiable 
 	{
+					Permission DeniedPermissions {set;}
+
 					global::System.String Name {set;}
 
-					global::System.DateTime? LastServiceDate {set;}
-
-					global::System.DateTime? AcquiredDate {set;}
-
-					global::System.String Description {set;}
-
-					global::System.Decimal? ProductionCapacity {set;}
-
-					global::System.DateTime? NextServiceDate {set;}
-
 	}
-	public interface ServiceEntry  : Commentable, UserInterfaceable, Searchable, SearchResult 
+	public interface Period  : Object 
 	{
-					global::System.DateTime? ThroughDateTime {set;}
+					global::System.DateTime FromDate {set;}
 
-					EngagementItem EngagementItem {set;}
+					global::System.DateTime? ThroughDate {set;}
 
-					global::System.Boolean? IsBillable {set;}
+	}
+	public interface Printable  : Object, UserInterfaceable, UniquelyIdentifiable 
+	{
+					global::System.String PrintContent {set;}
 
-					global::System.DateTime? FromDateTime {set;}
+	}
+	public interface Searchable  : Object 
+	{
+					SearchData SearchData {set;}
+
+	}
+	public interface SearchResult  : Object, UserInterfaceable 
+	{
+	}
+	public interface SecurityTokenOwner  : Object 
+	{
+					SecurityToken OwnerSecurityToken {set;}
+
+	}
+	public interface Transitional  : Object, AccessControlledObject 
+	{
+	}
+	public interface UniquelyIdentifiable  : Object 
+	{
+					global::System.Guid UniqueId {set;}
+
+	}
+	public interface User  : Object, SecurityTokenOwner, UserInterfaceable, Localised 
+	{
+					global::System.Boolean? UserEmailConfirmed {set;}
+
+					global::System.String UserName {set;}
+
+					global::System.String UserEmail {set;}
+
+					global::System.String UserPasswordHash {set;}
+
+	}
+	public interface UserInterfaceable  : Object, Derivable, AccessControlledObject 
+	{
+					global::System.String DisplayName {set;}
+
+	}
+	public interface AccountingTransaction  : Object, UserInterfaceable, SearchResult, Searchable 
+	{
+					AccountingTransactionDetail AccountingTransactionDetails {set;}
 
 					global::System.String Description {set;}
 
-					WorkEffort WorkEffort {set;}
+					global::System.DateTime TransactionDate {set;}
+
+					global::System.Decimal DerivedTotalAmount {set;}
+
+					AccountingTransactionNumber AccountingTransactionNumber {set;}
+
+					global::System.DateTime EntryDate {set;}
 
 	}
-	public interface Agreement  : UserInterfaceable, Searchable, SearchResult, UniquelyIdentifiable, Period 
+	public interface Agreement  : Object, UserInterfaceable, Searchable, SearchResult, UniquelyIdentifiable, Period 
 	{
 					global::System.DateTime? AgreementDate {set;}
 
@@ -259,7 +123,196 @@ namespace Allors.Domain
 					global::System.String AgreementNumber {set;}
 
 	}
-	public interface FinancialAccountTransaction  : UserInterfaceable 
+	public interface AgreementItem  : Object, UserInterfaceable 
+	{
+					global::System.String Text {set;}
+
+					Addendum Addenda {set;}
+
+					AgreementItem Children {set;}
+
+					global::System.String Description {set;}
+
+					AgreementTerm AgreementTerms {set;}
+
+	}
+	public interface AgreementTerm  : Object, UserInterfaceable 
+	{
+					global::System.String TermValue {set;}
+
+					TermType TermType {set;}
+
+					global::System.String Description {set;}
+
+	}
+	public interface Budget  : Object, Period, Commentable, SearchResult, UniquelyIdentifiable, Transitional, UserInterfaceable, Searchable 
+	{
+					global::System.String Description {set;}
+
+					BudgetRevision BudgetRevisions {set;}
+
+					BudgetStatus BudgetStatuses {set;}
+
+					global::System.String BudgetNumber {set;}
+
+					BudgetObjectState CurrentObjectState {set;}
+
+					BudgetObjectState PreviousObjectState {set;}
+
+					BudgetReview BudgetReviews {set;}
+
+					BudgetStatus CurrentBudgetStatus {set;}
+
+					BudgetItem BudgetItems {set;}
+
+	}
+	public interface CityBound  : Object, UserInterfaceable 
+	{
+					City Cities {set;}
+
+	}
+	public interface CommunicationAttachment  : Object, UserInterfaceable 
+	{
+	}
+	public interface CommunicationEvent  : Object, Transitional, UserInterfaceable, SearchResult, Searchable, Commentable, UniquelyIdentifiable 
+	{
+					global::System.DateTime? ScheduledStart {set;}
+
+					CommunicationEventStatus CommunicationEventStatuses {set;}
+
+					Party InvolvedParties {set;}
+
+					global::System.DateTime? InitialScheduledStartDate {set;}
+
+					CommunicationEventObjectState CurrentObjectState {set;}
+
+					CommunicationEventPurpose EventPurposes {set;}
+
+					WorkEffort WorkEfforts {set;}
+
+					global::System.String Description {set;}
+
+					global::System.String Subject {set;}
+
+					CommunicationEventObjectState PreviousObjectState {set;}
+
+					Media Documents {set;}
+
+					Case Case {set;}
+
+					Person Owner {set;}
+
+					CommunicationEventStatus CurrentCommunicationEventStatus {set;}
+
+					global::System.DateTime? ActualStart {set;}
+
+	}
+	public interface ContactMechanism  : Object, UserInterfaceable, Searchable 
+	{
+					global::System.String Description {set;}
+
+					ContactMechanism FollowTo {set;}
+
+	}
+	public interface Container  : Object, Searchable, SearchResult, UserInterfaceable 
+	{
+					Facility Facility {set;}
+
+					global::System.String ContainerDescription {set;}
+
+	}
+	public interface CountryBound  : Object, UserInterfaceable, Searchable 
+	{
+					Country Country {set;}
+
+	}
+	public interface DeploymentUsage  : Object, UserInterfaceable, Commentable, Period 
+	{
+					TimeFrequency TimeFrequency {set;}
+
+	}
+	public interface Document  : Object, Printable, UserInterfaceable, Commentable, Searchable, SearchResult 
+	{
+					global::System.String Name {set;}
+
+					global::System.String Description {set;}
+
+					global::System.String Text {set;}
+
+					global::System.String DocumentLocation {set;}
+
+	}
+	public interface ElectronicAddress  : Object, ContactMechanism 
+	{
+					global::System.String ElectronicAddressString {set;}
+
+	}
+	public interface EngagementItem  : Object, UserInterfaceable 
+	{
+					QuoteItem QuoteItem {set;}
+
+					global::System.String Description {set;}
+
+					global::System.DateTime? ExpectedStartDate {set;}
+
+					global::System.DateTime? ExpectedEndDate {set;}
+
+					WorkEffort EngagementWorkFulfillment {set;}
+
+					EngagementRate EngagementRates {set;}
+
+					EngagementRate CurrentEngagementRate {set;}
+
+					EngagementItem OrderedWiths {set;}
+
+					Person CurrentAssignedProfessional {set;}
+
+					Product Product {set;}
+
+					ProductFeature ProductFeature {set;}
+
+	}
+	public interface EstimatedProductCost  : Object, Period, SearchResult, Searchable, UserInterfaceable 
+	{
+					global::System.Decimal Cost {set;}
+
+					Currency Currency {set;}
+
+					Organisation Organisation {set;}
+
+					global::System.String Description {set;}
+
+					GeographicBoundary GeographicBoundary {set;}
+
+	}
+	public interface ExternalAccountingTransaction  : Object, AccountingTransaction 
+	{
+					Party FromParty {set;}
+
+					Party ToParty {set;}
+
+	}
+	public interface Facility  : Object, UserInterfaceable, SearchResult, GeoLocatable, Searchable 
+	{
+					Facility MadeUpOf {set;}
+
+					global::System.Decimal? SquareFootage {set;}
+
+					global::System.String Description {set;}
+
+					ContactMechanism FacilityContactMechanisms {set;}
+
+					global::System.String Name {set;}
+
+					InternalOrganisation Owner {set;}
+
+	}
+	public interface FinancialAccount  : Object, UserInterfaceable, SearchResult, Searchable 
+	{
+					FinancialAccountTransaction FinancialAccountTransactions {set;}
+
+	}
+	public interface FinancialAccountTransaction  : Object, UserInterfaceable 
 	{
 					global::System.String Description {set;}
 
@@ -268,105 +321,44 @@ namespace Allors.Domain
 					global::System.DateTime TransactionDate {set;}
 
 	}
-	public interface WorkEffort  : Searchable, UserInterfaceable, SearchResult, Transitional, UniquelyIdentifiable 
+	public interface FixedAsset  : Object, UserInterfaceable, SearchResult, Searchable 
 	{
-					WorkEffortStatus CurrentWorkEffortStatus {set;}
-
-					WorkEffort Precendencies {set;}
-
-					Facility Facility {set;}
-
-					Deliverable DeliverablesProduced {set;}
-
-					WorkEffortInventoryAssignment InventoryItemsNeeded {set;}
-
-					WorkEffort Children {set;}
-
-					OrderItem OrderItemFulfillment {set;}
-
-					WorkEffortStatus WorkEffortStatuses {set;}
-
-					WorkEffortType WorkEffortType {set;}
-
-					InventoryItem InventoryItemsProduced {set;}
-
-					Requirement RequirementFulfillments {set;}
-
-					global::System.String SpecialTerms {set;}
-
-					WorkEffort Concurrencies {set;}
-
-					global::System.Decimal? ActualHours {set;}
-
-					global::System.String Description {set;}
-
-					WorkEffortObjectState PreviousObjectState {set;}
-
-					WorkEffortObjectState CurrentObjectState {set;}
-
-					global::System.Decimal? EstimatedHours {set;}
-
-	}
-	public interface Product  : SearchResult, UniquelyIdentifiable, UserInterfaceable, Searchable 
-	{
-					ProductCategory PrimaryProductCategory {set;}
-
-					global::System.DateTime? SupportDiscontinuationDate {set;}
-
-					global::System.DateTime? SalesDiscontinuationDate {set;}
-
-					global::System.String Description {set;}
-
-					PriceComponent VirtualProductPriceComponents {set;}
-
-					global::System.String IntrastatCode {set;}
-
-					ProductCategory ProductCategoriesExpanded {set;}
-
-					Product ProductComplement {set;}
-
-					ProductFeature OptionalFeatures {set;}
-
-					Party ManufacturedBy {set;}
-
-					Product Variants {set;}
-
 					global::System.String Name {set;}
 
-					global::System.DateTime? IntroductionDate {set;}
+					global::System.DateTime? LastServiceDate {set;}
 
-					Document Documents {set;}
+					global::System.DateTime? AcquiredDate {set;}
 
-					ProductFeature StandardFeatures {set;}
+					global::System.String Description {set;}
 
-					UnitOfMeasure UnitOfMeasure {set;}
+					global::System.Decimal? ProductionCapacity {set;}
 
-					EstimatedProductCost EstimatedProductCosts {set;}
-
-					Product ProductObsolescences {set;}
-
-					ProductFeature SelectableFeatures {set;}
-
-					VatRate VatRate {set;}
-
-					PriceComponent BasePrices {set;}
-
-					ProductCategory ProductCategories {set;}
-
-					InternalOrganisation SoldBy {set;}
+					global::System.DateTime? NextServiceDate {set;}
 
 	}
-	public interface InternalAccountingTransaction  : AccountingTransaction 
+	public interface GeographicBoundary  : Object, Searchable, GeoLocatable, UserInterfaceable 
+	{
+					global::System.String Abbreviation {set;}
+
+	}
+	public interface GeographicBoundaryComposite  : Object, GeographicBoundary 
+	{
+					GeographicBoundary Associations {set;}
+
+	}
+	public interface GeoLocatable  : Object, AccessControlledObject, UserInterfaceable, Searchable, UniquelyIdentifiable 
+	{
+					global::System.Decimal Latitude {set;}
+
+					global::System.Decimal Longitude {set;}
+
+	}
+	public interface InternalAccountingTransaction  : Object, AccountingTransaction 
 	{
 					InternalOrganisation InternalOrganisation {set;}
 
 	}
-	public interface ElectronicAddress  : ContactMechanism 
-	{
-					global::System.String ElectronicAddressString {set;}
-
-	}
-	public interface InventoryItem  : Transitional, Searchable, UniquelyIdentifiable, UserInterfaceable 
+	public interface InventoryItem  : Object, Transitional, Searchable, UniquelyIdentifiable, UserInterfaceable 
 	{
 					InventoryItemVariance InventoryItemVariances {set;}
 
@@ -389,221 +381,16 @@ namespace Allors.Domain
 					Facility Facility {set;}
 
 	}
-	public interface ExternalAccountingTransaction  : AccountingTransaction 
+	public interface InventoryItemConfiguration  : Object, Commentable, UserInterfaceable 
 	{
-					Party FromParty {set;}
+					InventoryItem InventoryItem {set;}
 
-					Party ToParty {set;}
+					global::System.Int32 Quantity {set;}
+
+					InventoryItem ComponentInventoryItem {set;}
 
 	}
-	public interface AgreementTerm  : UserInterfaceable 
-	{
-					global::System.String TermValue {set;}
-
-					TermType TermType {set;}
-
-					global::System.String Description {set;}
-
-	}
-	public interface Part  : UserInterfaceable, Searchable, UniquelyIdentifiable, SearchResult 
-	{
-					InternalOrganisation OwnedByParty {set;}
-
-					global::System.String Name {set;}
-
-					PartSpecification PartSpecifications {set;}
-
-					UnitOfMeasure UnitOfMeasure {set;}
-
-					Document Documents {set;}
-
-					global::System.String ManufacturerId {set;}
-
-					global::System.Int32? ReorderLevel {set;}
-
-					global::System.Int32? ReorderQuantity {set;}
-
-					PriceComponent PriceComponents {set;}
-
-					InventoryItemKind InventoryItemKind {set;}
-
-	}
-	public interface AccountingTransaction  : UserInterfaceable, SearchResult, Searchable 
-	{
-					AccountingTransactionDetail AccountingTransactionDetails {set;}
-
-					global::System.String Description {set;}
-
-					global::System.DateTime TransactionDate {set;}
-
-					global::System.Decimal DerivedTotalAmount {set;}
-
-					AccountingTransactionNumber AccountingTransactionNumber {set;}
-
-					global::System.DateTime EntryDate {set;}
-
-	}
-	public interface Order  : UserInterfaceable, Printable, UniquelyIdentifiable, Transitional, Searchable, Commentable, Localised, SearchResult 
-	{
-					Currency CustomerCurrency {set;}
-
-					global::System.Decimal TotalBasePriceCustomerCurrency {set;}
-
-					global::System.Decimal TotalIncVatCustomerCurrency {set;}
-
-					global::System.Decimal TotalDiscountCustomerCurrency {set;}
-
-					global::System.String CustomerReference {set;}
-
-					Fee Fee {set;}
-
-					global::System.Decimal TotalExVat {set;}
-
-					OrderTerm OrderTerms {set;}
-
-					global::System.Decimal TotalVat {set;}
-
-					global::System.Decimal TotalSurcharge {set;}
-
-					OrderItem ValidOrderItems {set;}
-
-					global::System.String OrderNumber {set;}
-
-					global::System.Decimal TotalVatCustomerCurrency {set;}
-
-					global::System.Decimal TotalDiscount {set;}
-
-					global::System.String Message {set;}
-
-					global::System.Decimal TotalShippingAndHandlingCustomerCurrency {set;}
-
-					global::System.DateTime EntryDate {set;}
-
-					DiscountAdjustment DiscountAdjustment {set;}
-
-					OrderKind OrderKind {set;}
-
-					global::System.Decimal TotalIncVat {set;}
-
-					global::System.Decimal TotalSurchargeCustomerCurrency {set;}
-
-					VatRegime VatRegime {set;}
-
-					global::System.Decimal TotalFeeCustomerCurrency {set;}
-
-					global::System.Decimal TotalShippingAndHandling {set;}
-
-					ShippingAndHandlingCharge ShippingAndHandlingCharge {set;}
-
-					global::System.DateTime OrderDate {set;}
-
-					global::System.Decimal TotalExVatCustomerCurrency {set;}
-
-					global::System.DateTime? DeliveryDate {set;}
-
-					global::System.Decimal TotalBasePrice {set;}
-
-					global::System.Decimal TotalFee {set;}
-
-					SurchargeAdjustment SurchargeAdjustment {set;}
-
-	}
-	public interface AgreementItem  : UserInterfaceable 
-	{
-					global::System.String Text {set;}
-
-					Addendum Addenda {set;}
-
-					AgreementItem Children {set;}
-
-					global::System.String Description {set;}
-
-					AgreementTerm AgreementTerms {set;}
-
-	}
-	public interface GeoLocatable  : AccessControlledObject, UserInterfaceable, Searchable, UniquelyIdentifiable 
-	{
-					global::System.Decimal Latitude {set;}
-
-					global::System.Decimal Longitude {set;}
-
-	}
-	public interface Shipment  : Printable, Transitional, Searchable, UniquelyIdentifiable, UserInterfaceable, SearchResult 
-	{
-					ShipmentMethod ShipmentMethod {set;}
-
-					ContactMechanism BillToContactMechanism {set;}
-
-					ShipmentPackage ShipmentPackages {set;}
-
-					global::System.String ShipmentNumber {set;}
-
-					Document Documents {set;}
-
-					Party BillToParty {set;}
-
-					Party ShipToParty {set;}
-
-					ShipmentItem ShipmentItems {set;}
-
-					InternalOrganisation BillFromInternalOrganisation {set;}
-
-					ContactMechanism ReceiverContactMechanism {set;}
-
-					PostalAddress ShipToAddress {set;}
-
-					global::System.Decimal? EstimatedShipCost {set;}
-
-					global::System.DateTime? EstimatedShipDate {set;}
-
-					global::System.DateTime? LatestCancelDate {set;}
-
-					Carrier Carrier {set;}
-
-					ContactMechanism InquireAboutContactMechanism {set;}
-
-					global::System.DateTime? EstimatedReadyDate {set;}
-
-					PostalAddress ShipFromAddress {set;}
-
-					ContactMechanism BillFromContactMechanism {set;}
-
-					global::System.String HandlingInstruction {set;}
-
-					Store Store {set;}
-
-					Party ShipFromParty {set;}
-
-					ShipmentRouteSegment ShipmentRouteSegments {set;}
-
-					global::System.DateTime? EstimatedArrivalDate {set;}
-
-	}
-	public interface Container  : Searchable, SearchResult, UserInterfaceable 
-	{
-					Facility Facility {set;}
-
-					global::System.String ContainerDescription {set;}
-
-	}
-	public interface Payment  : UserInterfaceable, SearchResult, Searchable, Commentable, UniquelyIdentifiable 
-	{
-					global::System.Decimal Amount {set;}
-
-					PaymentMethod PaymentMethod {set;}
-
-					global::System.DateTime EffectiveDate {set;}
-
-					Party SendingParty {set;}
-
-					PaymentApplication PaymentApplications {set;}
-
-					global::System.String ReferenceNumber {set;}
-
-					Party ReceivingParty {set;}
-
-	}
-	public interface Invoice  : UserInterfaceable, Localised, Transitional, SearchResult, Commentable, Searchable, Printable, UniquelyIdentifiable 
+	public interface Invoice  : Object, UserInterfaceable, Localised, Transitional, SearchResult, Commentable, Searchable, Printable, UniquelyIdentifiable 
 	{
 					global::System.Decimal TotalShippingAndHandlingCustomerCurrency {set;}
 
@@ -668,187 +455,7 @@ namespace Allors.Domain
 					global::System.Decimal TotalFee {set;}
 
 	}
-	public interface EngagementItem  : UserInterfaceable 
-	{
-					QuoteItem QuoteItem {set;}
-
-					global::System.String Description {set;}
-
-					global::System.DateTime? ExpectedStartDate {set;}
-
-					global::System.DateTime? ExpectedEndDate {set;}
-
-					WorkEffort EngagementWorkFulfillment {set;}
-
-					EngagementRate EngagementRates {set;}
-
-					EngagementRate CurrentEngagementRate {set;}
-
-					EngagementItem OrderedWiths {set;}
-
-					Person CurrentAssignedProfessional {set;}
-
-					Product Product {set;}
-
-					ProductFeature ProductFeature {set;}
-
-	}
-	public interface ContactMechanism  : UserInterfaceable, Searchable 
-	{
-					global::System.String Description {set;}
-
-					ContactMechanism FollowTo {set;}
-
-	}
-	public interface CommunicationEvent  : Transitional, UserInterfaceable, SearchResult, Searchable, Commentable, UniquelyIdentifiable 
-	{
-					global::System.DateTime? ScheduledStart {set;}
-
-					CommunicationEventStatus CommunicationEventStatuses {set;}
-
-					Party InvolvedParties {set;}
-
-					global::System.DateTime? InitialScheduledStartDate {set;}
-
-					CommunicationEventObjectState CurrentObjectState {set;}
-
-					CommunicationEventPurpose EventPurposes {set;}
-
-					WorkEffort WorkEfforts {set;}
-
-					global::System.String Description {set;}
-
-					global::System.String Subject {set;}
-
-					CommunicationEventObjectState PreviousObjectState {set;}
-
-					Media Documents {set;}
-
-					Case Case {set;}
-
-					Person Owner {set;}
-
-					CommunicationEventStatus CurrentCommunicationEventStatus {set;}
-
-					global::System.DateTime? ActualStart {set;}
-
-	}
-	public interface IUnitOfMeasure  : UserInterfaceable, UniquelyIdentifiable, AccessControlledObject, Searchable 
-	{
-					global::System.String Description {set;}
-
-					UnitOfMeasureConversion UnitOfMeasureConversions {set;}
-
-					global::System.String Abbreviation {set;}
-
-	}
-	public interface CityBound  : UserInterfaceable 
-	{
-					City Cities {set;}
-
-	}
-	public interface OrderAdjustment  : UserInterfaceable 
-	{
-					global::System.Decimal Amount {set;}
-
-					VatRate VatRate {set;}
-
-					global::System.Decimal Percentage {set;}
-
-	}
-	public interface EstimatedProductCost  : Period, SearchResult, Searchable, UserInterfaceable 
-	{
-					global::System.Decimal Cost {set;}
-
-					Currency Currency {set;}
-
-					Organisation Organisation {set;}
-
-					global::System.String Description {set;}
-
-					GeographicBoundary GeographicBoundary {set;}
-
-	}
-	public interface DeploymentUsage  : UserInterfaceable, Commentable, Period 
-	{
-					TimeFrequency TimeFrequency {set;}
-
-	}
-	public interface Facility  : UserInterfaceable, SearchResult, GeoLocatable, Searchable 
-	{
-					Facility MadeUpOf {set;}
-
-					global::System.Decimal? SquareFootage {set;}
-
-					global::System.String Description {set;}
-
-					ContactMechanism FacilityContactMechanisms {set;}
-
-					global::System.String Name {set;}
-
-					InternalOrganisation Owner {set;}
-
-	}
-	public interface PartBillOfMaterial  : UserInterfaceable, Commentable, Period, Searchable 
-	{
-					Part Part {set;}
-
-					global::System.String Instruction {set;}
-
-					global::System.Int32 QuantityUsed {set;}
-
-					Part ComponentPart {set;}
-
-	}
-	public interface ProductFeature  : Searchable, UniquelyIdentifiable, UserInterfaceable 
-	{
-					EstimatedProductCost EstimatedProductCosts {set;}
-
-					PriceComponent BasePrices {set;}
-
-					global::System.String Description {set;}
-
-					ProductFeature DependentFeatures {set;}
-
-					ProductFeature IncompatibleFeatures {set;}
-
-					VatRate VatRate {set;}
-
-	}
-	public interface Requirement  : SearchResult, Transitional, UniquelyIdentifiable, UserInterfaceable, Searchable 
-	{
-					global::System.DateTime? RequiredByDate {set;}
-
-					RequirementObjectState PreviousObjectState {set;}
-
-					Party Authorizer {set;}
-
-					RequirementStatus RequirementStatuses {set;}
-
-					global::System.String Reason {set;}
-
-					Requirement Children {set;}
-
-					Party NeededFor {set;}
-
-					Party Originator {set;}
-
-					RequirementObjectState CurrentObjectState {set;}
-
-					RequirementStatus CurrentRequirementStatus {set;}
-
-					Facility Facility {set;}
-
-					Party ServicedBy {set;}
-
-					global::System.Decimal? EstimatedBudget {set;}
-
-					global::System.String Description {set;}
-
-					global::System.Int32? Quantity {set;}
-
-	}
-	public interface InvoiceItem  : UserInterfaceable, Transitional 
+	public interface InvoiceItem  : Object, UserInterfaceable, Transitional 
 	{
 					global::System.Decimal TotalIncVatCustomerCurrency {set;}
 
@@ -923,66 +530,90 @@ namespace Allors.Domain
 					global::System.String Description {set;}
 
 	}
-	public interface CountryBound  : UserInterfaceable, Searchable 
-	{
-					Country Country {set;}
-
-	}
-	public interface Budget  : Period, Commentable, SearchResult, UniquelyIdentifiable, Transitional, UserInterfaceable, Searchable 
+	public interface IUnitOfMeasure  : Object, UserInterfaceable, UniquelyIdentifiable, AccessControlledObject, Searchable 
 	{
 					global::System.String Description {set;}
 
-					BudgetRevision BudgetRevisions {set;}
+					UnitOfMeasureConversion UnitOfMeasureConversions {set;}
 
-					BudgetStatus BudgetStatuses {set;}
-
-					global::System.String BudgetNumber {set;}
-
-					BudgetObjectState CurrentObjectState {set;}
-
-					BudgetObjectState PreviousObjectState {set;}
-
-					BudgetReview BudgetReviews {set;}
-
-					BudgetStatus CurrentBudgetStatus {set;}
-
-					BudgetItem BudgetItems {set;}
+					global::System.String Abbreviation {set;}
 
 	}
-	public interface InventoryItemConfiguration  : Commentable, UserInterfaceable 
+	public interface Order  : Object, UserInterfaceable, Printable, UniquelyIdentifiable, Transitional, Searchable, Commentable, Localised, SearchResult 
 	{
-					InventoryItem InventoryItem {set;}
+					Currency CustomerCurrency {set;}
 
-					global::System.Int32 Quantity {set;}
+					global::System.Decimal TotalBasePriceCustomerCurrency {set;}
 
-					InventoryItem ComponentInventoryItem {set;}
+					global::System.Decimal TotalIncVatCustomerCurrency {set;}
+
+					global::System.Decimal TotalDiscountCustomerCurrency {set;}
+
+					global::System.String CustomerReference {set;}
+
+					Fee Fee {set;}
+
+					global::System.Decimal TotalExVat {set;}
+
+					OrderTerm OrderTerms {set;}
+
+					global::System.Decimal TotalVat {set;}
+
+					global::System.Decimal TotalSurcharge {set;}
+
+					OrderItem ValidOrderItems {set;}
+
+					global::System.String OrderNumber {set;}
+
+					global::System.Decimal TotalVatCustomerCurrency {set;}
+
+					global::System.Decimal TotalDiscount {set;}
+
+					global::System.String Message {set;}
+
+					global::System.Decimal TotalShippingAndHandlingCustomerCurrency {set;}
+
+					global::System.DateTime EntryDate {set;}
+
+					DiscountAdjustment DiscountAdjustment {set;}
+
+					OrderKind OrderKind {set;}
+
+					global::System.Decimal TotalIncVat {set;}
+
+					global::System.Decimal TotalSurchargeCustomerCurrency {set;}
+
+					VatRegime VatRegime {set;}
+
+					global::System.Decimal TotalFeeCustomerCurrency {set;}
+
+					global::System.Decimal TotalShippingAndHandling {set;}
+
+					ShippingAndHandlingCharge ShippingAndHandlingCharge {set;}
+
+					global::System.DateTime OrderDate {set;}
+
+					global::System.Decimal TotalExVatCustomerCurrency {set;}
+
+					global::System.DateTime? DeliveryDate {set;}
+
+					global::System.Decimal TotalBasePrice {set;}
+
+					global::System.Decimal TotalFee {set;}
+
+					SurchargeAdjustment SurchargeAdjustment {set;}
 
 	}
-	public interface ProductAssociation  : Commentable, AccessControlledObject, UserInterfaceable, Period 
+	public interface OrderAdjustment  : Object, UserInterfaceable 
 	{
-	}
-	public interface PaymentMethod  : UserInterfaceable, UniquelyIdentifiable, AccessControlledObject, Searchable 
-	{
-					global::System.Decimal? BalanceLimit {set;}
+					global::System.Decimal Amount {set;}
 
-					global::System.Decimal CurrentBalance {set;}
+					VatRate VatRate {set;}
 
-					Journal Journal {set;}
-
-					global::System.String Description {set;}
-
-					OrganisationGlAccount GlPaymentInTransit {set;}
-
-					global::System.String Remarks {set;}
-
-					OrganisationGlAccount GeneralLedgerAccount {set;}
-
-					SupplierRelationship Creditor {set;}
-
-					global::System.Boolean IsActive {set;}
+					global::System.Decimal Percentage {set;}
 
 	}
-	public interface OrderItem  : UserInterfaceable, Commentable, Transitional 
+	public interface OrderItem  : Object, UserInterfaceable, Commentable, Transitional 
 	{
 					global::System.Decimal TotalDiscountAsPercentage {set;}
 
@@ -1065,1653 +696,725 @@ namespace Allors.Domain
 					global::System.String Message {set;}
 
 	}
-	public interface UniquelyIdentifiable  : Object 
+	public interface Part  : Object, UserInterfaceable, Searchable, UniquelyIdentifiable, SearchResult 
 	{
-					global::System.Guid UniqueId {set;}
-
-	}
-	public interface Printable  : UserInterfaceable, UniquelyIdentifiable 
-	{
-					global::System.String PrintContent {set;}
-
-	}
-	public interface Localised  : Object 
-	{
-					Locale Locale {set;}
-
-	}
-	public interface Period  : Object 
-	{
-					global::System.DateTime FromDate {set;}
-
-					global::System.DateTime? ThroughDate {set;}
-
-	}
-	public interface Deletable  : Object 
-	{
-	}
-	public interface User  : SecurityTokenOwner, UserInterfaceable, Localised 
-	{
-					global::System.Boolean? UserEmailConfirmed {set;}
-
-					global::System.String UserName {set;}
-
-					global::System.String UserEmail {set;}
-
-					global::System.String UserPasswordHash {set;}
-
-	}
-	public interface SearchResult  : UserInterfaceable 
-	{
-	}
-	public interface SecurityTokenOwner  : Object 
-	{
-					SecurityToken OwnerSecurityToken {set;}
-
-	}
-	public interface Transitional  : AccessControlledObject 
-	{
-	}
-	public interface Enumeration  : UserInterfaceable, UniquelyIdentifiable 
-	{
-					LocalisedText LocalisedNames {set;}
+					InternalOrganisation OwnedByParty {set;}
 
 					global::System.String Name {set;}
+
+					PartSpecification PartSpecifications {set;}
+
+					UnitOfMeasure UnitOfMeasure {set;}
+
+					Document Documents {set;}
+
+					global::System.String ManufacturerId {set;}
+
+					global::System.Int32? ReorderLevel {set;}
+
+					global::System.Int32? ReorderQuantity {set;}
+
+					PriceComponent PriceComponents {set;}
+
+					InventoryItemKind InventoryItemKind {set;}
+
+	}
+	public interface PartBillOfMaterial  : Object, UserInterfaceable, Commentable, Period, Searchable 
+	{
+					Part Part {set;}
+
+					global::System.String Instruction {set;}
+
+					global::System.Int32 QuantityUsed {set;}
+
+					Part ComponentPart {set;}
+
+	}
+	public interface PartSpecification  : Object, UniquelyIdentifiable, Commentable, Transitional, UserInterfaceable 
+	{
+					PartSpecificationStatus PartSpecificationStatuses {set;}
+
+					PartSpecificationObjectState CurrentObjectState {set;}
+
+					global::System.DateTime? DocumentationDate {set;}
+
+					PartSpecificationStatus CurrentPartSpecificationStatus {set;}
+
+					PartSpecificationObjectState PreviousObjectState {set;}
+
+					global::System.String Description {set;}
+
+	}
+	public interface Party  : Object, Localised, UserInterfaceable, SearchResult, SecurityTokenOwner, UniquelyIdentifiable, Searchable 
+	{
+					global::System.Decimal YTDRevenue {set;}
+
+					global::System.Decimal LastYearsRevenue {set;}
+
+					TelecommunicationsNumber BillingInquiriesFax {set;}
+
+					Qualification Qualifications {set;}
+
+					ContactMechanism HomeAddress {set;}
+
+					ContactMechanism SalesOffice {set;}
+
+					TelecommunicationsNumber OrderInquiriesFax {set;}
+
+					Person CurrentSalesReps {set;}
+
+					PartyContactMechanism PartyContactMechanisms {set;}
+
+					TelecommunicationsNumber ShippingInquiriesFax {set;}
+
+					TelecommunicationsNumber ShippingInquiriesPhone {set;}
+
+					BillingAccount BillingAccounts {set;}
+
+					TelecommunicationsNumber OrderInquiriesPhone {set;}
+
+					PartySkill PartySkills {set;}
+
+					PartyClassification PartyClassifications {set;}
+
+					global::System.Boolean? ExcludeFromDunning {set;}
+
+					BankAccount BankAccounts {set;}
+
+					ContactMechanism BillingAddress {set;}
+
+					ShipmentMethod DefaultShipmentMethod {set;}
+
+					Resume Resumes {set;}
+
+					ContactMechanism HeadQuarter {set;}
+
+					ElectronicAddress PersonalEmailAddress {set;}
+
+					TelecommunicationsNumber CellPhoneNumber {set;}
+
+					TelecommunicationsNumber BillingInquiriesPhone {set;}
+
+					global::System.String PartyName {set;}
+
+					ContactMechanism OrderAddress {set;}
+
+					ElectronicAddress InternetAddress {set;}
+
+					Media Contents {set;}
+
+					CreditCard CreditCards {set;}
+
+					PostalAddress ShippingAddress {set;}
+
+					global::System.Decimal OpenOrderAmount {set;}
+
+					TelecommunicationsNumber GeneralFaxNumber {set;}
+
+					PaymentMethod DefaultPaymentMethod {set;}
+
+					TelecommunicationsNumber GeneralPhoneNumber {set;}
+
+					Currency PreferredCurrency {set;}
+
+					VatRegime VatRegime {set;}
+
+	}
+	public interface PartyRelationship  : Object, Period, Commentable, UserInterfaceable 
+	{
+					PartyRelationshipStatus PartyRelationshipStatus {set;}
+
+					Agreement RelationshipAgreements {set;}
+
+					PartyRelationshipPriority PartyRelationshipPriority {set;}
+
+					global::System.Decimal? SimpleMovingAverage {set;}
+
+					CommunicationEvent CommunicationEvents {set;}
+
+	}
+	public interface Payment  : Object, UserInterfaceable, SearchResult, Searchable, Commentable, UniquelyIdentifiable 
+	{
+					global::System.Decimal Amount {set;}
+
+					PaymentMethod PaymentMethod {set;}
+
+					global::System.DateTime EffectiveDate {set;}
+
+					Party SendingParty {set;}
+
+					PaymentApplication PaymentApplications {set;}
+
+					global::System.String ReferenceNumber {set;}
+
+					Party ReceivingParty {set;}
+
+	}
+	public interface PaymentMethod  : Object, UserInterfaceable, UniquelyIdentifiable, AccessControlledObject, Searchable 
+	{
+					global::System.Decimal? BalanceLimit {set;}
+
+					global::System.Decimal CurrentBalance {set;}
+
+					Journal Journal {set;}
+
+					global::System.String Description {set;}
+
+					OrganisationGlAccount GlPaymentInTransit {set;}
+
+					global::System.String Remarks {set;}
+
+					OrganisationGlAccount GeneralLedgerAccount {set;}
+
+					SupplierRelationship Creditor {set;}
 
 					global::System.Boolean IsActive {set;}
 
 	}
-	public interface Derivable  : Object 
+	public interface PriceComponent  : Object, Period, Searchable, UserInterfaceable, Commentable 
 	{
-	}
-	public interface AccessControlledObject  : Derivable 
-	{
-					Permission DeniedPermissions {set;}
+					GeographicBoundary GeographicBoundary {set;}
 
-					SecurityToken SecurityTokens {set;}
+					global::System.Decimal? Rate {set;}
 
-	}
-	public interface UserInterfaceable  : AccessControlledObject 
-	{
-					global::System.String DisplayName {set;}
+					RevenueValueBreak RevenueValueBreak {set;}
 
-	}
-	public interface Object 
-	{
-	}
-	public interface ObjectState  : UniquelyIdentifiable 
-	{
-					Permission DeniedPermissions {set;}
+					PartyClassification PartyClassification {set;}
 
-					global::System.String Name {set;}
+					OrderQuantityBreak OrderQuantityBreak {set;}
 
-	}
-	public interface Commentable  : Object 
-	{
-					global::System.String Comment {set;}
-
-	}
-	public interface Searchable  : Object 
-	{
-					SearchData SearchData {set;}
-
-	}
-	public interface ProductFeatureApplicabilityRelationship  : UserInterfaceable 
-	{
-					Product AvailableFor {set;}
-
-					ProductFeature UsedToDefine {set;}
-
-	}
-	public interface OrderShipment  : Deletable 
-	{
-					SalesOrderItem SalesOrderItem {set;}
-
-					global::System.Boolean Picked {set;}
-
-					ShipmentItem ShipmentItem {set;}
-
-					global::System.Decimal Quantity {set;}
-
-					PurchaseOrderItem PurchaseOrderItem {set;}
-
-	}
-	public interface ProductRequirement  : Requirement 
-	{
-					Product Product {set;}
-
-					DesiredProductFeature DesiredProductFeatures {set;}
-
-	}
-	public interface RequestForProposal  : Request 
-	{
-	}
-	public interface SalesInvoiceItemStatus  : UserInterfaceable 
-	{
-					global::System.DateTime StartDateTime {set;}
-
-					SalesInvoiceItemObjectState SalesInvoiceItemObjectState {set;}
-
-	}
-	public interface QuoteItem  : Commentable, UserInterfaceable 
-	{
-					Party Authorizer {set;}
-
-					Deliverable Deliverable {set;}
+					PackageQuantityBreak PackageQuantityBreak {set;}
 
 					Product Product {set;}
 
-					global::System.DateTime? EstimatedDeliveryDate {set;}
+					RevenueQuantityBreak RevenueQuantityBreak {set;}
 
-					UnitOfMeasure UnitOfMeasure {set;}
+					Party SpecifiedFor {set;}
 
 					ProductFeature ProductFeature {set;}
 
-					global::System.Decimal? UnitPrice {set;}
+					AgreementPricingProgram AgreementPricingProgram {set;}
 
-					Skill Skill {set;}
+					global::System.String Description {set;}
 
-					WorkEffort WorkEffort {set;}
+					Currency Currency {set;}
 
-					QuoteTerm QuoteTerms {set;}
+					OrderKind OrderKind {set;}
 
-					global::System.Int32? Quantity {set;}
+					OrderValue OrderValue {set;}
 
-					RequestItem RequestItem {set;}
-
-	}
-	public interface SalesRepPartyProductCategoryRevenue  : UserInterfaceable, Deletable 
-	{
-					global::System.Int32 Year {set;}
-
-					Person SalesRep {set;}
+					global::System.Decimal Price {set;}
 
 					ProductCategory ProductCategory {set;}
 
-					global::System.Int32 Month {set;}
-
-					Party Party {set;}
-
-					global::System.Decimal Revenue {set;}
-
-					Currency Currency {set;}
-
-					InternalOrganisation InternalOrganisation {set;}
-
-					global::System.String SalesRepName {set;}
+					SalesChannel SalesChannel {set;}
 
 	}
-	public interface PayGrade  : UserInterfaceable, Commentable 
+	public interface Product  : Object, SearchResult, UniquelyIdentifiable, UserInterfaceable, Searchable 
 	{
-					global::System.String Name {set;}
+					ProductCategory PrimaryProductCategory {set;}
 
-					SalaryStep SalarySteps {set;}
+					global::System.DateTime? SupportDiscontinuationDate {set;}
 
-	}
-	public interface PartyProductCategoryRevenueHistory  : UserInterfaceable 
-	{
-					ProductCategory ProductCategory {set;}
-
-					Party Party {set;}
-
-					global::System.Decimal Quantity {set;}
-
-					global::System.Decimal Revenue {set;}
-
-					InternalOrganisation InternalOrganisation {set;}
-
-					Currency Currency {set;}
-
-	}
-	public interface DiscountAdjustment  : OrderAdjustment 
-	{
-	}
-	public interface Position  : UserInterfaceable, SearchResult, Searchable 
-	{
-					Organisation Organisation {set;}
-
-					global::System.Boolean? Temporary {set;}
-
-					global::System.DateTime? EstimatedThroughDate {set;}
-
-					global::System.DateTime? EstimatedFromDate {set;}
-
-					PositionType PositionType {set;}
-
-					global::System.Boolean? Fulltime {set;}
-
-					global::System.Boolean? Salary {set;}
-
-					PositionStatus PositionStatus {set;}
-
-					BudgetItem ApprovedBudgetItem {set;}
-
-					global::System.DateTime ActualFromDate {set;}
-
-					global::System.DateTime? ActualThroughDate {set;}
-
-	}
-	public interface LetterCorrespondence  : CommunicationEvent 
-	{
-					PostalAddress PostalAddresses {set;}
-
-					Party Originator {set;}
-
-					Party Receivers {set;}
-
-	}
-	public interface PurchaseOrder  : Order 
-	{
-					PurchaseOrderItem PurchaseOrderItems {set;}
-
-					Party PreviousTakenViaSupplier {set;}
-
-					PurchaseOrderStatus PaymentStatuses {set;}
-
-					PurchaseOrderStatus CurrentPaymentStatus {set;}
-
-					Party TakenViaSupplier {set;}
-
-					PurchaseOrderObjectState CurrentObjectState {set;}
-
-					PurchaseOrderStatus CurrentShipmentStatus {set;}
-
-					ContactMechanism TakenViaContactMechanism {set;}
-
-					PurchaseOrderStatus OrderStatuses {set;}
-
-					ContactMechanism BillToContactMechanism {set;}
-
-					PurchaseOrderStatus ShipmentStatuses {set;}
-
-					InternalOrganisation ShipToBuyer {set;}
-
-					PurchaseOrderStatus CurrentOrderStatus {set;}
-
-					Facility Facility {set;}
-
-					PostalAddress ShipToAddress {set;}
-
-					PurchaseOrderObjectState PreviousObjectState {set;}
-
-					InternalOrganisation BillToPurchaser {set;}
-
-	}
-	public interface GlBudgetAllocation  : UserInterfaceable 
-	{
-					GeneralLedgerAccount GeneralLedgerAccount {set;}
-
-					BudgetItem BudgetItem {set;}
-
-					global::System.Decimal AllocationPercentage {set;}
-
-	}
-	public interface RateType  : Enumeration 
-	{
-	}
-	public interface Brand  : UserInterfaceable, AccessControlledObject, Searchable 
-	{
-					global::System.String Name {set;}
-
-					ProductCategory ProductCategories {set;}
-
-	}
-	public interface SupplierOffering  : Commentable, Period, UserInterfaceable 
-	{
-					RatingType Rating {set;}
-
-					global::System.Int32? StandardLeadTime {set;}
-
-					ProductPurchasePrice ProductPurchasePrices {set;}
-
-					Ordinal Preference {set;}
-
-					global::System.Decimal? MinimalOrderQuantity {set;}
-
-					Product Product {set;}
-
-					Party Supplier {set;}
-
-					global::System.String ReferenceNumber {set;}
-
-					Part Part {set;}
-
-	}
-	public interface SalesAccountingTransaction  : ExternalAccountingTransaction 
-	{
-					Invoice Invoice {set;}
-
-	}
-	public interface Vehicle  : FixedAsset 
-	{
-	}
-	public interface AccountingTransactionNumber  : AccessControlledObject, UserInterfaceable 
-	{
-					global::System.Int32? Number {set;}
-
-					global::System.Int32? Year {set;}
-
-					AccountingTransactionType AccountingTransactionType {set;}
-
-	}
-	public interface WorkEffortPartyAssignment  : Period, UserInterfaceable, Commentable 
-	{
-					WorkEffort Assignment {set;}
-
-					Party Party {set;}
-
-					Facility Facility {set;}
-
-	}
-	public interface ContactMechanismPurpose  : Enumeration 
-	{
-	}
-	public interface TaxDocument  : Document 
-	{
-	}
-	public interface Training  : UserInterfaceable, Searchable 
-	{
-					global::System.String Description {set;}
-
-	}
-	public interface PurchaseAgreement  : Agreement 
-	{
-	}
-	public interface CostCenterCategory  : Searchable, UserInterfaceable, SearchResult, AccessControlledObject, UniquelyIdentifiable 
-	{
-					CostCenterCategory Parent {set;}
-
-					CostCenterCategory Ancestors {set;}
-
-					CostCenterCategory Children {set;}
+					global::System.DateTime? SalesDiscontinuationDate {set;}
 
 					global::System.String Description {set;}
 
-	}
-	public interface BasePrice  : Deletable, PriceComponent 
-	{
-	}
-	public interface JournalEntry  : UserInterfaceable, Transitional, AccessControlledObject, Searchable 
-	{
-					global::System.String Description {set;}
+					PriceComponent VirtualProductPriceComponents {set;}
 
-					global::System.Int32? EntryNumber {set;}
+					global::System.String IntrastatCode {set;}
 
-					global::System.DateTime? EntryDate {set;}
+					ProductCategory ProductCategoriesExpanded {set;}
 
-					global::System.DateTime? JournalDate {set;}
+					Product ProductComplement {set;}
 
-					JournalEntryDetail JournalEntryDetails {set;}
+					ProductFeature OptionalFeatures {set;}
 
-	}
-	public interface SubAgreement  : AgreementItem 
-	{
-	}
-	public interface Skill  : Enumeration, Searchable 
-	{
-	}
-	public interface EmploymentTermination  : Searchable, Enumeration 
-	{
-	}
-	public interface FinancialAccountAdjustment  : FinancialAccountTransaction 
-	{
-	}
-	public interface OperatingCondition  : PartSpecification 
-	{
-	}
-	public interface TermType  : Enumeration 
-	{
-	}
-	public interface LegalTerm  : AgreementTerm 
-	{
-	}
-	public interface EngineeringBom  : PartBillOfMaterial 
-	{
-	}
-	public interface PurchaseInvoiceItemType  : Enumeration 
-	{
-	}
-	public interface Incentive  : AgreementTerm 
-	{
-	}
-	public interface WorkEffortBilling  : Object 
-	{
-					WorkEffort WorkEffort {set;}
+					Party ManufacturedBy {set;}
 
-					global::System.Decimal? Percentage {set;}
-
-					InvoiceItem InvoiceItem {set;}
-
-	}
-	public interface PurchaseReturnStatus  : UserInterfaceable 
-	{
-					PurchaseReturnObjectState PurchaseReturnObjectState {set;}
-
-					global::System.DateTime StartDateTime {set;}
-
-	}
-	public interface PartyRevenueHistory  : UserInterfaceable 
-	{
-					Currency Currency {set;}
-
-					global::System.Decimal Revenue {set;}
-
-					Party Party {set;}
-
-					InternalOrganisation InternalOrganisation {set;}
-
-	}
-	public interface PartSpecificationObjectState  : ObjectState 
-	{
-	}
-	public interface PositionTypeRate  : AccessControlledObject, UserInterfaceable 
-	{
-					global::System.Decimal Rate {set;}
-
-					RateType RateType {set;}
-
-					TimeFrequency TimeFrequency {set;}
-
-	}
-	public interface RatingType  : Enumeration 
-	{
-	}
-	public interface PurchaseInvoiceType  : Enumeration 
-	{
-	}
-	public interface GeneralLedgerAccount  : UniquelyIdentifiable, UserInterfaceable, Searchable, SearchResult 
-	{
-					Product DefaultCostUnit {set;}
-
-					CostCenter DefaultCostCenter {set;}
-
-					global::System.String Description {set;}
-
-					GeneralLedgerAccountType GeneralLedgerAccountType {set;}
-
-					global::System.Boolean CashAccount {set;}
-
-					global::System.Boolean CostCenterAccount {set;}
-
-					DebitCreditConstant Side {set;}
-
-					global::System.Boolean BalanceSheetAccount {set;}
-
-					global::System.Boolean ReconciliationAccount {set;}
+					Product Variants {set;}
 
 					global::System.String Name {set;}
 
-					global::System.Boolean CostCenterRequired {set;}
+					global::System.DateTime? IntroductionDate {set;}
 
-					global::System.Boolean CostUnitRequired {set;}
+					Document Documents {set;}
 
-					GeneralLedgerAccountGroup GeneralLedgerAccountGroup {set;}
-
-					CostCenter CostCentersAllowed {set;}
-
-					global::System.Boolean CostUnitAccount {set;}
-
-					global::System.String AccountNumber {set;}
-
-					Product CostUnitsAllowed {set;}
-
-					global::System.Boolean Protected {set;}
-
-	}
-	public interface ShippingAndHandlingComponent  : SearchResult, UserInterfaceable, Period, Searchable 
-	{
-					global::System.Decimal? Cost {set;}
-
-					ShipmentMethod ShipmentMethod {set;}
-
-					Carrier Carrier {set;}
-
-					ShipmentValue ShipmentValue {set;}
-
-					Currency Currency {set;}
-
-					InternalOrganisation SpecifiedFor {set;}
-
-					GeographicBoundary GeographicBoundary {set;}
-
-	}
-	public interface PersonalTitle  : Enumeration 
-	{
-	}
-	public interface ReceiptAccountingTransaction  : ExternalAccountingTransaction 
-	{
-					Receipt Receipt {set;}
-
-	}
-	public interface TimeFrequency  : Enumeration, IUnitOfMeasure 
-	{
-	}
-	public interface SubContractorAgreement  : Agreement 
-	{
-	}
-	public interface PackagingContent  : UserInterfaceable 
-	{
-					ShipmentItem ShipmentItem {set;}
-
-					global::System.Decimal Quantity {set;}
-
-	}
-	public interface PartySkill  : UserInterfaceable 
-	{
-					global::System.Decimal? YearsExperience {set;}
-
-					global::System.DateTime? StartedUsingDate {set;}
-
-					SkillRating SkillRating {set;}
-
-					SkillLevel SkillLevel {set;}
-
-					Skill Skill {set;}
-
-	}
-	public interface SerializedInventoryItemStatus  : UserInterfaceable 
-	{
-					global::System.DateTime StartDateTime {set;}
-
-					SerializedInventoryItemObjectState SerializedInventoryItemObjectState {set;}
-
-	}
-	public interface FaxCommunication  : CommunicationEvent 
-	{
-					Party Originator {set;}
-
-					Party Receiver {set;}
-
-					TelecommunicationsNumber OutgoingFaxNumber {set;}
-
-	}
-	public interface PurchaseInvoiceItem  : InvoiceItem 
-	{
-					PurchaseInvoiceItemObjectState PreviousObjectState {set;}
-
-					PurchaseInvoiceItemType PurchaseInvoiceItemType {set;}
-
-					Part Part {set;}
-
-					PurchaseInvoiceItemStatus CurrentInvoiceItemStatus {set;}
-
-					PurchaseInvoiceItemStatus InvoiceItemStatuses {set;}
-
-					PurchaseInvoiceItemObjectState CurrentObjectState {set;}
-
-	}
-	public interface OrderItemBilling  : Object 
-	{
-					OrderItem OrderItem {set;}
-
-					SalesInvoiceItem SalesInvoiceItem {set;}
-
-					global::System.Decimal Amount {set;}
-
-					global::System.Decimal? Quantity {set;}
-
-	}
-	public interface ProductDrawing  : Document 
-	{
-	}
-	public interface PayHistory  : UserInterfaceable, Period 
-	{
-					Employment Employment {set;}
-
-					TimeFrequency TimeFrequency {set;}
-
-					SalaryStep SalaryStep {set;}
-
-					global::System.Decimal? Amount {set;}
-
-	}
-	public interface ShipmentValue  : UserInterfaceable 
-	{
-					global::System.Decimal? ThroughAmount {set;}
-
-					global::System.Decimal? FromAmount {set;}
-
-	}
-	public interface InternalOrganisationAccountingPreference  : AccessControlledObject, UserInterfaceable, Searchable 
-	{
-					GeneralLedgerAccount GeneralLedgerAccount {set;}
-
-					InventoryItemKind InventoryItemKind {set;}
-
-					PaymentMethod PaymentMethod {set;}
-
-					Receipt Receipt {set;}
-
-					InternalOrganisation InternalOrganisation {set;}
-
-	}
-	public interface PurchaseShipmentObjectState  : ObjectState 
-	{
-	}
-	public interface SalesOrderItemObjectState  : ObjectState 
-	{
-	}
-	public interface BankAccount  : FinancialAccount 
-	{
-					Bank Bank {set;}
-
-					global::System.String NameOnAccount {set;}
-
-					ContactMechanism ContactMechanisms {set;}
-
-					Currency Currency {set;}
-
-					global::System.String Iban {set;}
-
-					global::System.String Branch {set;}
-
-					Person ContactPersons {set;}
-
-	}
-	public interface ServiceEntryHeader  : Period, UserInterfaceable 
-	{
-					ServiceEntry ServiceEntries {set;}
-
-					global::System.DateTime SubmittedDate {set;}
-
-					Person SubmittedBy {set;}
-
-	}
-	public interface PartRevision  : Period, UserInterfaceable 
-	{
-					global::System.String Reason {set;}
-
-					Part SupersededByPart {set;}
-
-					Part Part {set;}
-
-	}
-	public interface PurchaseReturnObjectState  : ObjectState 
-	{
-	}
-	public interface ProductConfiguration  : ProductAssociation 
-	{
-					Product ProductsUsedIn {set;}
-
-					Product Product {set;}
-
-					global::System.Decimal? QuantityUsed {set;}
-
-					global::System.String Description {set;}
-
-	}
-	public interface OwnCreditCard  : PaymentMethod, FinancialAccount 
-	{
-					Person Owner {set;}
-
-					CreditCard CreditCard {set;}
-
-	}
-	public interface Dimension  : ProductFeature 
-	{
-					global::System.Decimal? Unit {set;}
+					ProductFeature StandardFeatures {set;}
 
 					UnitOfMeasure UnitOfMeasure {set;}
 
+					EstimatedProductCost EstimatedProductCosts {set;}
+
+					Product ProductObsolescences {set;}
+
+					ProductFeature SelectableFeatures {set;}
+
+					VatRate VatRate {set;}
+
+					PriceComponent BasePrices {set;}
+
+					ProductCategory ProductCategories {set;}
+
+					InternalOrganisation SoldBy {set;}
+
 	}
-	public interface SalesInvoiceItemType  : Enumeration 
+	public interface ProductAssociation  : Object, Commentable, AccessControlledObject, UserInterfaceable, Period 
 	{
 	}
-	public interface Model  : ProductFeature, Enumeration 
+	public interface ProductFeature  : Object, Searchable, UniquelyIdentifiable, UserInterfaceable 
 	{
-	}
-	public interface PickList  : UserInterfaceable, SearchResult, Printable, Transitional, Searchable, UniquelyIdentifiable 
-	{
-					CustomerShipment CustomerShipmentCorrection {set;}
+					EstimatedProductCost EstimatedProductCosts {set;}
 
-					global::System.DateTime CreationDate {set;}
+					PriceComponent BasePrices {set;}
 
-					PickListItem PickListItems {set;}
+					global::System.String Description {set;}
 
-					PickListObjectState CurrentObjectState {set;}
+					ProductFeature DependentFeatures {set;}
 
-					PickListStatus CurrentPickListStatus {set;}
+					ProductFeature IncompatibleFeatures {set;}
 
-					Person Picker {set;}
-
-					PickListStatus PickListStatuses {set;}
-
-					PickListObjectState PreviousObjectState {set;}
-
-					Party ShipToParty {set;}
-
-					Store Store {set;}
+					VatRate VatRate {set;}
 
 	}
-	public interface StoreRevenue  : UserInterfaceable, Deletable 
+	public interface Quote  : Object, UserInterfaceable, SearchResult, Searchable 
 	{
-					InternalOrganisation InternalOrganisation {set;}
+					global::System.DateTime? ValidFromDate {set;}
 
-					global::System.Int32 Month {set;}
+					QuoteTerm QuoteTerms {set;}
 
-					Currency Currency {set;}
+					Party Issuer {set;}
 
-					Store Store {set;}
+					global::System.DateTime? ValidThroughDate {set;}
 
-					global::System.String StoreName {set;}
+					global::System.String Description {set;}
 
-					global::System.Decimal Revenue {set;}
+					Party Receiver {set;}
 
-					global::System.Int32 Year {set;}
+					global::System.Decimal? Amount {set;}
+
+					global::System.DateTime? IssueDate {set;}
+
+					QuoteItem QuoteItems {set;}
+
+					global::System.String QuoteNumber {set;}
 
 	}
-	public interface AgreementExhibit  : AgreementItem 
-	{
-	}
-	public interface ProductCategoryRevenueHistory  : UserInterfaceable 
-	{
-					Currency Currency {set;}
-
-					global::System.Decimal? Revenue {set;}
-
-					InternalOrganisation InternalOrganisation {set;}
-
-					ProductCategory ProductCategory {set;}
-
-	}
-	public interface SalesRepRevenueHistory  : UserInterfaceable 
-	{
-					Currency Currency {set;}
-
-					Person SalesRep {set;}
-
-					InternalOrganisation InternalOrganisation {set;}
-
-					global::System.Decimal? Revenue {set;}
-
-	}
-	public interface EstimatedLaborCost  : EstimatedProductCost 
-	{
-	}
-	public interface CostCenter  : UserInterfaceable, Searchable, UniquelyIdentifiable, AccessControlledObject 
+	public interface Request  : Object, UserInterfaceable, Searchable, SearchResult, Commentable 
 	{
 					global::System.String Description {set;}
 
-					OrganisationGlAccount InternalTransferGlAccount {set;}
+					global::System.DateTime? RequiredResponseDate {set;}
 
-					CostCenterCategory CostCenterCategories {set;}
+					RequestItem RequestItems {set;}
 
-					OrganisationGlAccount RedistributedCostsGlAccount {set;}
+					global::System.String RequestNumber {set;}
 
-					global::System.String Name {set;}
+					RespondingParty RespondingParties {set;}
 
-					global::System.Boolean? Active {set;}
-
-					global::System.Boolean? UseGlAccountOfBooking {set;}
+					Party Originator {set;}
 
 	}
-	public interface SupplierRelationship  : PartyRelationship 
+	public interface Requirement  : Object, SearchResult, Transitional, UniquelyIdentifiable, UserInterfaceable, Searchable 
 	{
-					Organisation Supplier {set;}
+					global::System.DateTime? RequiredByDate {set;}
 
-					global::System.Int32 SubAccountNumber {set;}
+					RequirementObjectState PreviousObjectState {set;}
 
-					global::System.DateTime? LastReminderDate {set;}
+					Party Authorizer {set;}
 
-					DunningType DunningType {set;}
+					RequirementStatus RequirementStatuses {set;}
 
-					InternalOrganisation InternalOrganisation {set;}
+					global::System.String Reason {set;}
 
-					global::System.DateTime? BlockedForDunning {set;}
+					Requirement Children {set;}
 
-	}
-	public interface SkillRating  : Enumeration 
-	{
-	}
-	public interface EventRegistration  : Object 
-	{
-					Person Person {set;}
+					Party NeededFor {set;}
 
-					Event Event {set;}
+					Party Originator {set;}
 
-					global::System.DateTime? AllorsDateTime {set;}
+					RequirementObjectState CurrentObjectState {set;}
 
-	}
-	public interface Building  : Facility 
-	{
-	}
-	public interface ServiceEntryBilling  : Object 
-	{
-					ServiceEntry ServiceEntry {set;}
-
-					InvoiceItem InvoiceItem {set;}
-
-	}
-	public interface PurchaseShipment  : Shipment 
-	{
-					PurchaseShipmentObjectState CurrentObjectState {set;}
+					RequirementStatus CurrentRequirementStatus {set;}
 
 					Facility Facility {set;}
 
-					PurchaseShipmentObjectState PreviousObjectState {set;}
+					Party ServicedBy {set;}
 
-					PurchaseShipmentStatus ShipmentStatuses {set;}
+					global::System.Decimal? EstimatedBudget {set;}
 
-					PurchaseShipmentStatus CurrentShipmentStatus {set;}
-
-					PurchaseOrder PurchaseOrder {set;}
-
-	}
-	public interface UnitOfMeasureConversion  : Searchable, UserInterfaceable 
-	{
-					IUnitOfMeasure ToUnitOfMeasure {set;}
-
-					global::System.DateTime? StartDate {set;}
-
-					global::System.Decimal ConversionFactor {set;}
-
-	}
-	public interface VatRateUsage  : Enumeration 
-	{
-	}
-	public interface Project  : WorkEffort 
-	{
-	}
-	public interface PaymentBudgetAllocation  : UserInterfaceable 
-	{
-					Payment Payment {set;}
-
-					BudgetItem BudgetItem {set;}
-
-					global::System.Decimal Amount {set;}
-
-	}
-	public interface Hobby  : Enumeration 
-	{
-	}
-	public interface ProductRevenueHistory  : UserInterfaceable 
-	{
-					InternalOrganisation InternalOrganisation {set;}
-
-					global::System.Decimal? Revenue {set;}
-
-					Currency Currency {set;}
-
-					Product Product {set;}
-
-	}
-	public interface OrderRequirementCommitment  : UserInterfaceable 
-	{
-					global::System.Int32 Quantity {set;}
-
-					OrderItem OrderItem {set;}
-
-					Requirement Requirement {set;}
-
-	}
-	public interface OrganisationRollUp  : PartyRelationship 
-	{
-					Organisation Parent {set;}
-
-					OrganisationUnit RollupKind {set;}
-
-					Organisation Child {set;}
-
-	}
-	public interface AccountingTransactionType  : Enumeration 
-	{
-	}
-	public interface RevenueValueBreak  : UserInterfaceable 
-	{
-					global::System.Decimal? ThroughAmount {set;}
-
-					global::System.Decimal? FromAmount {set;}
-
-	}
-	public interface Activity  : WorkEffort 
-	{
-	}
-	public interface WorkEffortAssignment  : Period, UserInterfaceable, Commentable 
-	{
-					Person Professional {set;}
-
-					WorkEffort Assignment {set;}
-
-	}
-	public interface SoftwareFeature  : ProductFeature, Enumeration 
-	{
-	}
-	public interface FiscalYearInvoiceNumber  : Object 
-	{
-					global::System.Int32 NextSalesInvoiceNumber {set;}
-
-					global::System.Int32 FiscalYear {set;}
-
-	}
-	public interface SalesOrderStatus  : UserInterfaceable 
-	{
-					global::System.DateTime StartDateTime {set;}
-
-					SalesOrderObjectState SalesOrderObjectState {set;}
-
-	}
-	public interface BillingAccount  : UserInterfaceable 
-	{
 					global::System.String Description {set;}
 
-					ContactMechanism ContactMechanism {set;}
+					global::System.Int32? Quantity {set;}
 
 	}
-	public interface SalesChannelRevenue  : UserInterfaceable, Deletable 
+	public interface Service  : Object, Product 
 	{
-					global::System.Int32 Year {set;}
+	}
+	public interface ServiceEntry  : Object, Commentable, UserInterfaceable, Searchable, SearchResult 
+	{
+					global::System.DateTime? ThroughDateTime {set;}
 
-					global::System.Int32 Month {set;}
+					EngagementItem EngagementItem {set;}
 
+					global::System.Boolean? IsBillable {set;}
+
+					global::System.DateTime? FromDateTime {set;}
+
+					global::System.String Description {set;}
+
+					WorkEffort WorkEffort {set;}
+
+	}
+	public interface Shipment  : Object, Printable, Transitional, Searchable, UniquelyIdentifiable, UserInterfaceable, SearchResult 
+	{
+					ShipmentMethod ShipmentMethod {set;}
+
+					ContactMechanism BillToContactMechanism {set;}
+
+					ShipmentPackage ShipmentPackages {set;}
+
+					global::System.String ShipmentNumber {set;}
+
+					Document Documents {set;}
+
+					Party BillToParty {set;}
+
+					Party ShipToParty {set;}
+
+					ShipmentItem ShipmentItems {set;}
+
+					InternalOrganisation BillFromInternalOrganisation {set;}
+
+					ContactMechanism ReceiverContactMechanism {set;}
+
+					PostalAddress ShipToAddress {set;}
+
+					global::System.Decimal? EstimatedShipCost {set;}
+
+					global::System.DateTime? EstimatedShipDate {set;}
+
+					global::System.DateTime? LatestCancelDate {set;}
+
+					Carrier Carrier {set;}
+
+					ContactMechanism InquireAboutContactMechanism {set;}
+
+					global::System.DateTime? EstimatedReadyDate {set;}
+
+					PostalAddress ShipFromAddress {set;}
+
+					ContactMechanism BillFromContactMechanism {set;}
+
+					global::System.String HandlingInstruction {set;}
+
+					Store Store {set;}
+
+					Party ShipFromParty {set;}
+
+					ShipmentRouteSegment ShipmentRouteSegments {set;}
+
+					global::System.DateTime? EstimatedArrivalDate {set;}
+
+	}
+	public interface WorkEffort  : Object, Searchable, UserInterfaceable, SearchResult, Transitional, UniquelyIdentifiable 
+	{
+					WorkEffortStatus CurrentWorkEffortStatus {set;}
+
+					WorkEffort Precendencies {set;}
+
+					Facility Facility {set;}
+
+					Deliverable DeliverablesProduced {set;}
+
+					WorkEffortInventoryAssignment InventoryItemsNeeded {set;}
+
+					WorkEffort Children {set;}
+
+					OrderItem OrderItemFulfillment {set;}
+
+					WorkEffortStatus WorkEffortStatuses {set;}
+
+					WorkEffortType WorkEffortType {set;}
+
+					InventoryItem InventoryItemsProduced {set;}
+
+					Requirement RequirementFulfillments {set;}
+
+					global::System.String SpecialTerms {set;}
+
+					WorkEffort Concurrencies {set;}
+
+					global::System.Decimal? ActualHours {set;}
+
+					global::System.String Description {set;}
+
+					WorkEffortObjectState PreviousObjectState {set;}
+
+					WorkEffortObjectState CurrentObjectState {set;}
+
+					global::System.Decimal? EstimatedHours {set;}
+
+	}
+	public interface AccessControl  : Object, Deletable, UserInterfaceable 
+	{
+					UserGroup SubjectGroups {set;}
+
+					User Subjects {set;}
+
+					SecurityToken Objects {set;}
+
+					Role Role {set;}
+
+	}
+	public interface Counter  : Object, UniquelyIdentifiable 
+	{
+					global::System.Int32 Value {set;}
+
+	}
+	public interface Country  : Object, UserInterfaceable, Searchable, GeographicBoundary, CityBound 
+	{
 					Currency Currency {set;}
 
-					SalesChannel SalesChannel {set;}
+					global::System.String Name {set;}
 
-					global::System.String SalesChannelName {set;}
+					LocalisedText LocalisedNames {set;}
 
-					global::System.Decimal Revenue {set;}
+					global::System.String IsoCode {set;}
 
-					InternalOrganisation InternalOrganisation {set;}
+					VatRate VatRates {set;}
+
+					global::System.Int32? IbanLength {set;}
+
+					global::System.Boolean? EuMemberState {set;}
+
+					global::System.String TelephoneCode {set;}
+
+					global::System.String IbanRegex {set;}
+
+					VatForm VatForm {set;}
+
+					global::System.String UriExtension {set;}
 
 	}
-	public interface AutomatedAgent  : User, Party 
+	public interface Currency  : Object, UserInterfaceable, IUnitOfMeasure 
+	{
+					global::System.String IsoCode {set;}
+
+					global::System.String Name {set;}
+
+					global::System.String Symbol {set;}
+
+					LocalisedText LocalisedNames {set;}
+
+	}
+	public interface Image  : Object, Deletable, Derivable 
+	{
+					Media Original {set;}
+
+					Media Responsive {set;}
+
+					global::System.String OriginalFilename {set;}
+
+	}
+	public interface Language  : Object, UserInterfaceable, Searchable 
 	{
 					global::System.String Name {set;}
 
-					global::System.String Description {set;}
+					global::System.String IsoCode {set;}
+
+					LocalisedText LocalisedNames {set;}
 
 	}
-	public interface SalesChannelRevenueHistory  : UserInterfaceable 
+	public interface Locale  : Object, UserInterfaceable 
 	{
-					SalesChannel SalesChannel {set;}
+					global::System.String Name {set;}
 
-					Currency Currency {set;}
-
-					global::System.Decimal? Revenue {set;}
-
-					InternalOrganisation InternalOrganisation {set;}
-
-	}
-	public interface Proposal  : Quote 
-	{
-	}
-	public interface FinishedGood  : Part 
-	{
-	}
-	public interface PerformanceSpecification  : PartSpecification 
-	{
-	}
-	public interface ProductionRun  : WorkEffort 
-	{
-					global::System.Int32? QuantityProduced {set;}
-
-					global::System.Int32? QuantityRejected {set;}
-
-					global::System.Int32? QuantityToProduce {set;}
-
-	}
-	public interface Ordinal  : Enumeration 
-	{
-	}
-	public interface Citizenship  : UserInterfaceable 
-	{
-					Passport Passports {set;}
+					Language Language {set;}
 
 					Country Country {set;}
 
 	}
-	public interface PartyProductRevenue  : Deletable, UserInterfaceable 
+	public interface LocalisedText  : Object, Searchable, UserInterfaceable, Localised 
 	{
-					global::System.Decimal Revenue {set;}
-
-					global::System.Int32 Month {set;}
-
-					global::System.Int32 Year {set;}
-
-					global::System.String PartyProductName {set;}
-
-					global::System.Decimal Quantity {set;}
-
-					Currency Currency {set;}
-
-					Party Party {set;}
-
-					InternalOrganisation InternalOrganisation {set;}
-
-					Product Product {set;}
+					global::System.String Text {set;}
 
 	}
-	public interface ShipmentMethod  : Enumeration 
+	public interface Login  : Object, Derivable, Deletable 
 	{
+					global::System.String Key {set;}
+
+					global::System.String Provider {set;}
+
+					User User {set;}
+
 	}
-	public interface Organisation  : Party 
+	public interface Media  : Object, UniquelyIdentifiable, UserInterfaceable, Deletable 
 	{
-					LegalForm LegalForm {set;}
+					MediaType MediaType {set;}
+
+					MediaContent MediaContent {set;}
+
+	}
+	public interface MediaContent  : Object, Derivable 
+	{
+					global::System.Byte[] Value {set;}
+
+					global::System.String Hash {set;}
+
+	}
+	public interface MediaType  : Object, UserInterfaceable 
+	{
+					global::System.String DefaultFileExtension {set;}
 
 					global::System.String Name {set;}
 
-					UserGroup CustomerContactUserGroup {set;}
+	}
+	public interface Permission  : Object, Deletable, UserInterfaceable 
+	{
+					global::System.Guid OperandTypePointer {set;}
 
-					Person CurrentContacts {set;}
+					global::System.Guid ConcreteClassPointer {set;}
 
-					Media LogoImage {set;}
-
-					UserGroup PartnerContactUserGroup {set;}
-
-					global::System.String TaxNumber {set;}
-
-					UserGroup SupplierContactUserGroup {set;}
+					global::System.Int32 OperationEnum {set;}
 
 	}
-	public interface Responsibility  : UserInterfaceable, Searchable 
+	public interface Person  : Object, User, AccessControlledObject, UniquelyIdentifiable, SearchResult, UserInterfaceable, Searchable, Party, Deletable 
 	{
-					global::System.String Description {set;}
+					global::System.String LastName {set;}
+
+					global::System.String MiddleName {set;}
+
+					global::System.String FirstName {set;}
+
+					Salutation Salutation {set;}
+
+					global::System.Decimal YTDCommission {set;}
+
+					Citizenship Citizenship {set;}
+
+					Employment CurrentEmployment {set;}
+
+					global::System.Decimal LastYearsCommission {set;}
+
+					PersonalTitle Titles {set;}
+
+					global::System.String MothersMaidenName {set;}
+
+					global::System.DateTime? BirthDate {set;}
+
+					global::System.Decimal? Height {set;}
+
+					PersonTraining PersonTrainings {set;}
+
+					GenderType Gender {set;}
+
+					global::System.Int32? Weight {set;}
+
+					Hobby Hobbies {set;}
+
+					global::System.Int32? TotalYearsWorkExperience {set;}
+
+					Passport Passports {set;}
+
+					MaritalStatus MaritalStatus {set;}
+
+					Media Picture {set;}
+
+					global::System.String SocialSecurityNumber {set;}
+
+					global::System.DateTime? DeceasedDate {set;}
 
 	}
-	public interface VatReturnBoxType  : AccessControlledObject, UserInterfaceable 
+	public interface PrintQueue  : Object, AccessControlledObject, UserInterfaceable, UniquelyIdentifiable 
 	{
-					global::System.String Type {set;}
+					Printable Printables {set;}
+
+					global::System.String Name {set;}
 
 	}
-	public interface DebitCreditConstant  : UniquelyIdentifiable, Enumeration 
+	public interface Role  : Object, UserInterfaceable, UniquelyIdentifiable 
 	{
-	}
-	public interface WorkEffortFixedAssetAssignment  : Commentable, UserInterfaceable, Period 
-	{
-					AssetAssignmentStatus AssetAssignmentStatus {set;}
+					Permission Permissions {set;}
 
-					WorkEffort Assignment {set;}
-
-					global::System.Decimal? AllocatedCost {set;}
-
-					FixedAsset FixedAsset {set;}
+					global::System.String Name {set;}
 
 	}
-	public interface VatCalculationMethod  : Enumeration 
+	public interface SearchData  : Object, Derivable, Deletable 
 	{
-	}
-	public interface InvoiceSequence  : Enumeration 
-	{
-	}
-	public interface CustomerRelationship  : PartyRelationship 
-	{
-					global::System.Boolean? BlockedForDunning {set;}
+					global::System.String CharacterBoundaryText {set;}
 
-					InternalOrganisation InternalOrganisation {set;}
+					global::System.String PreviousCharacterBoundaryText {set;}
 
-					global::System.Decimal AmountOverDue {set;}
+					SearchFragment SearchFragments {set;}
 
-					Party Customer {set;}
+					global::System.String PreviousWordBoundaryText {set;}
 
-					DunningType DunningType {set;}
-
-					global::System.Decimal AmountDue {set;}
-
-					global::System.Decimal YTDRevenue {set;}
-
-					global::System.DateTime? LastReminderDate {set;}
-
-					global::System.Decimal? CreditLimit {set;}
-
-					global::System.Int32 SubAccountNumber {set;}
-
-					global::System.Decimal LastYearsRevenue {set;}
+					global::System.String WordBoundaryText {set;}
 
 	}
-	public interface PartyClassification  : UserInterfaceable, Searchable 
+	public interface SearchFragment  : Object, Derivable 
 	{
-					global::System.String Description {set;}
+					global::System.String LowerCaseText {set;}
 
 	}
-	public interface PartyProductCategoryRevenue  : UserInterfaceable, Deletable 
-	{
-					Party Party {set;}
-
-					global::System.Decimal Revenue {set;}
-
-					global::System.Int32 Month {set;}
-
-					Currency Currency {set;}
-
-					global::System.Int32 Year {set;}
-
-					global::System.String PartyProductCategoryName {set;}
-
-					InternalOrganisation InternalOrganisation {set;}
-
-					ProductCategory ProductCategory {set;}
-
-					global::System.Decimal Quantity {set;}
-
-	}
-	public interface PartyFixedAssetAssignment  : UserInterfaceable, Period, Commentable 
-	{
-					FixedAsset FixedAsset {set;}
-
-					Party Party {set;}
-
-					AssetAssignmentStatus AssetAssignmentStatus {set;}
-
-					global::System.Decimal? AllocatedCost {set;}
-
-	}
-	public interface DunningType  : Enumeration 
+	public interface SecurityToken  : Object, Deletable, Derivable 
 	{
 	}
-	public interface CapitalBudget  : Budget 
+	public interface Singleton  : Object, UserInterfaceable 
 	{
-	}
-	public interface AccountAdjustment  : FinancialAccountTransaction 
-	{
-	}
-	public interface PositionStatus  : Enumeration 
-	{
-	}
-	public interface MarketingPackage  : ProductAssociation 
-	{
-					global::System.String Instruction {set;}
+					PrintQueue DefaultPrintQueue {set;}
 
-					Product ProductsUsedIn {set;}
+					Locale DefaultLocale {set;}
 
-					Product Product {set;}
+					Locale Locales {set;}
 
-					global::System.String Description {set;}
+					SecurityToken AdministratorSecurityToken {set;}
 
-					global::System.Int32? QuantityUsed {set;}
+					User Guest {set;}
 
-	}
-	public interface ItemIssuance  : Deletable, UserInterfaceable 
-	{
-					global::System.DateTime? IssuanceDateTime {set;}
+					SecurityToken DefaultSecurityToken {set;}
 
-					InventoryItem InventoryItem {set;}
+					Currency DefaultCurrency {set;}
 
-					global::System.Decimal Quantity {set;}
+					Media NoImageAvailableImage {set;}
 
-					ShipmentItem ShipmentItem {set;}
-
-					PickListItem PickListItem {set;}
+					InternalOrganisation DefaultInternalOrganisation {set;}
 
 	}
-	public interface ShipmentPackage  : UserInterfaceable, UniquelyIdentifiable, Printable 
+	public interface StringTemplate  : Object, UniquelyIdentifiable, Localised 
 	{
-					PackagingContent PackagingContents {set;}
+					global::System.String Body {set;}
 
-					Document Documents {set;}
+					global::System.String Name {set;}
 
-					global::System.DateTime CreationDate {set;}
-
-					global::System.Int32 SequenceNumber {set;}
+					TemplatePurpose TemplatePurpose {set;}
 
 	}
-	public interface PurchaseOrderObjectState  : ObjectState 
+	public interface Transition  : Object 
 	{
-	}
-	public interface Size  : Enumeration, ProductFeature 
-	{
-	}
-	public interface PerformanceNote  : Searchable, UserInterfaceable, Commentable, SearchResult 
-	{
-					global::System.String Description {set;}
+					ObjectState FromStates {set;}
 
-					global::System.DateTime? CommunicationDate {set;}
-
-					Person GivenByManager {set;}
-
-					Person Employee {set;}
+					ObjectState ToState {set;}
 
 	}
-	public interface DeliverableTurnover  : ServiceEntry 
+	public interface UserGroup  : Object, UniquelyIdentifiable, Searchable, UserInterfaceable 
 	{
-					global::System.Decimal Amount {set;}
+					Role Role {set;}
 
-	}
-	public interface ShipmentReceipt  : UserInterfaceable 
-	{
-					global::System.String ItemDescription {set;}
+					User Members {set;}
 
-					NonSerializedInventoryItem InventoryItem {set;}
+					UserGroup Parent {set;}
 
-					global::System.String RejectionReason {set;}
-
-					OrderItem OrderItem {set;}
-
-					global::System.Decimal QuantityRejected {set;}
-
-					ShipmentItem ShipmentItem {set;}
-
-					global::System.DateTime ReceivedDateTime {set;}
-
-					global::System.Decimal QuantityAccepted {set;}
-
-	}
-	public interface RequirementCommunication  : UserInterfaceable 
-	{
-					CommunicationEvent CommunicationEvent {set;}
-
-					Requirement Requirement {set;}
-
-					Person AssociatedProfessional {set;}
-
-	}
-	public interface GeneralLedgerAccountGroup  : AccessControlledObject, UserInterfaceable 
-	{
-					GeneralLedgerAccountGroup Parent {set;}
-
-					global::System.String Description {set;}
-
-	}
-	public interface SerializedInventoryItem  : InventoryItem 
-	{
-					SerializedInventoryItemObjectState PreviousObjectState {set;}
-
-					SerializedInventoryItemStatus InventoryItemStatuses {set;}
-
-					global::System.String SerialNumber {set;}
-
-					SerializedInventoryItemObjectState CurrentObjectState {set;}
-
-					SerializedInventoryItemStatus CurrentInventoryItemStatus {set;}
-
-	}
-	public interface ItemVarianceAccountingTransaction  : AccountingTransaction 
-	{
-	}
-	public interface RespondingParty  : UserInterfaceable 
-	{
-					global::System.DateTime? SendingDate {set;}
-
-					ContactMechanism ContactMechanism {set;}
+					global::System.String Name {set;}
 
 					Party Party {set;}
 
 	}
-	public interface SalesInvoiceItemObjectState  : ObjectState 
+	public interface AccountAdjustment  : Object, FinancialAccountTransaction 
 	{
 	}
-	public interface BudgetStatus  : UserInterfaceable 
-	{
-					global::System.DateTime StartDateTime {set;}
-
-					BudgetObjectState BudgetObjectState {set;}
-
-	}
-	public interface Barrel  : Container 
-	{
-	}
-	public interface PositionType  : Searchable, UserInterfaceable 
-	{
-					global::System.String Description {set;}
-
-					Responsibility Responsibilities {set;}
-
-					global::System.Decimal? BenefitPercentage {set;}
-
-					global::System.String Title {set;}
-
-					PositionTypeRate PositionTypeRate {set;}
-
-	}
-	public interface ProductPurchasePrice  : AccessControlledObject, Period, UserInterfaceable 
-	{
-					global::System.Decimal Price {set;}
-
-					UnitOfMeasure UnitOfMeasure {set;}
-
-					Currency Currency {set;}
-
-	}
-	public interface Carrier  : UniquelyIdentifiable, AccessControlledObject, UserInterfaceable, Searchable 
-	{
-					global::System.String Name {set;}
-
-	}
-	public interface Resume  : Searchable, UserInterfaceable 
-	{
-					global::System.DateTime ResumeDate {set;}
-
-					global::System.String ResumeText {set;}
-
-	}
-	public interface WebAddress  : ElectronicAddress 
-	{
-	}
-	public interface ProjectRequirement  : Requirement 
-	{
-					Deliverable NeededDeliverables {set;}
-
-	}
-	public interface Deposit  : FinancialAccountTransaction 
-	{
-					Receipt Receipts {set;}
-
-	}
-	public interface LegalForm  : UserInterfaceable, Searchable 
-	{
-					global::System.String Description {set;}
-
-	}
-	public interface CostOfGoodsSoldMethod  : Enumeration 
-	{
-	}
-	public interface StatementOfWork  : Quote 
-	{
-	}
-	public interface SkillLevel  : Enumeration 
-	{
-	}
-	public interface PickListStatus  : UserInterfaceable, AccessControlledObject 
-	{
-					PickListObjectState PickListObjectState {set;}
-
-					global::System.DateTime StartDateTime {set;}
-
-	}
-	public interface TaxDue  : ExternalAccountingTransaction 
-	{
-	}
-	public interface OneTimeCharge  : PriceComponent 
-	{
-	}
-	public interface Note  : ExternalAccountingTransaction 
-	{
-	}
-	public interface PartBillOfMaterialSubstitute  : Period, UserInterfaceable, Commentable 
-	{
-					PartBillOfMaterial SubstitutionPartBillOfMaterial {set;}
-
-					Ordinal Preference {set;}
-
-					global::System.Int32? Quantity {set;}
-
-					PartBillOfMaterial PartBillOfMaterial {set;}
-
-	}
-	public interface Receipt  : Payment 
-	{
-	}
-	public interface RequirementBudgetAllocation  : Searchable, UserInterfaceable 
-	{
-					BudgetItem BudgetItem {set;}
-
-					Requirement Requirement {set;}
-
-					global::System.Decimal Amount {set;}
-
-	}
-	public interface OrganisationGlAccount  : UserInterfaceable, Period 
-	{
-					Product Product {set;}
-
-					OrganisationGlAccount Parent {set;}
-
-					Party Party {set;}
-
-					global::System.Boolean HasBankStatementTransactions {set;}
-
-					ProductCategory ProductCategory {set;}
-
-					InternalOrganisation InternalOrganisation {set;}
-
-					GeneralLedgerAccount GeneralLedgerAccount {set;}
-
-	}
-	public interface Maintenance  : WorkEffort 
-	{
-	}
-	public interface NonSerializedInventoryItem  : InventoryItem 
-	{
-					NonSerializedInventoryItemObjectState CurrentObjectState {set;}
-
-					global::System.Decimal QuantityCommittedOut {set;}
-
-					NonSerializedInventoryItemStatus NonSerializedInventoryItemStatuses {set;}
-
-					NonSerializedInventoryItemObjectState PreviousObjectState {set;}
-
-					NonSerializedInventoryItemStatus CurrentInventoryItemStatus {set;}
-
-					global::System.Decimal QuantityOnHand {set;}
-
-					global::System.Decimal PreviousQuantityOnHand {set;}
-
-					global::System.Decimal AvailableToPromise {set;}
-
-					global::System.Decimal QuantityExpectedIn {set;}
-
-	}
-	public interface CreditLine  : ExternalAccountingTransaction 
-	{
-	}
-	public interface BillOfLading  : Document 
-	{
-	}
-	public interface UnitOfMeasure  : IUnitOfMeasure, UniquelyIdentifiable, UserInterfaceable, Searchable, Enumeration 
-	{
-	}
-	public interface ServiceConfiguration  : InventoryItemConfiguration 
-	{
-	}
-	public interface NeededSkill  : UserInterfaceable 
-	{
-					SkillLevel SkillLevel {set;}
-
-					global::System.Decimal? YearsExperience {set;}
-
-					Skill Skill {set;}
-
-	}
-	public interface Room  : Facility, Container 
-	{
-	}
-	public interface Plant  : Facility 
-	{
-	}
-	public interface SalesInvoice  : Invoice 
-	{
-					SalesInvoiceObjectState CurrentObjectState {set;}
-
-					SalesInvoiceObjectState PreviousObjectState {set;}
-
-					global::System.Decimal? TotalListPrice {set;}
-
-					InternalOrganisation BilledFromInternalOrganisation {set;}
-
-					ContactMechanism BillToContactMechanism {set;}
-
-					Party PreviousBillToCustomer {set;}
-
-					SalesInvoiceType SalesInvoiceType {set;}
-
-					global::System.Decimal InitialProfitMargin {set;}
-
-					PaymentMethod PaymentMethod {set;}
-
-					SalesOrder SalesOrder {set;}
-
-					global::System.Decimal InitialMarkupPercentage {set;}
-
-					global::System.Decimal MaintainedMarkupPercentage {set;}
-
-					Person SalesReps {set;}
-
-					Shipment Shipment {set;}
-
-					global::System.Decimal MaintainedProfitMargin {set;}
-
-					SalesInvoiceStatus InvoiceStatuses {set;}
-
-					Party PreviousShipToCustomer {set;}
-
-					Party BillToCustomer {set;}
-
-					SalesInvoiceStatus CurrentInvoiceStatus {set;}
-
-					SalesInvoiceItem SalesInvoiceItems {set;}
-
-					global::System.Decimal TotalListPriceCustomerCurrency {set;}
-
-					Party ShipToCustomer {set;}
-
-					ContactMechanism BilledFromContactMechanism {set;}
-
-					global::System.Decimal? TotalPurchasePrice {set;}
-
-					SalesChannel SalesChannel {set;}
-
-					Party Customers {set;}
-
-					PostalAddress ShipToAddress {set;}
-
-					Store Store {set;}
-
-	}
-	public interface StandardServiceOrderItem  : EngagementItem 
-	{
-	}
-	public interface PurchaseInvoiceStatus  : UserInterfaceable 
-	{
-					global::System.DateTime StartDateTime {set;}
-
-					PurchaseInvoiceObjectState PurchaseInvoiceObjectState {set;}
-
-	}
-	public interface Region  : GeographicBoundaryComposite, UserInterfaceable 
-	{
-					global::System.String Name {set;}
-
-	}
-	public interface SalesTerritory  : UserInterfaceable, GeographicBoundaryComposite 
-	{
-					global::System.String Name {set;}
-
-	}
-	public interface TimeEntry  : ServiceEntry 
-	{
-					global::System.Decimal Cost {set;}
-
-					global::System.Decimal GrossMargin {set;}
-
-					QuoteTerm QuoteTerm {set;}
-
-					global::System.Decimal? BillingRate {set;}
-
-					UnitOfMeasure UnitOfMeasure {set;}
-
-					global::System.Decimal? AmountOfTime {set;}
-
-	}
-	public interface DepreciationMethod  : UserInterfaceable 
-	{
-					global::System.String Formula {set;}
-
-					global::System.String Description {set;}
-
-	}
-	public interface AssetAssignmentStatus  : Enumeration 
-	{
-	}
-	public interface StoreRevenueHistory  : UserInterfaceable 
-	{
-					InternalOrganisation InternalOrganisation {set;}
-
-					Currency Currency {set;}
-
-					Store Store {set;}
-
-					global::System.Decimal? Revenue {set;}
-
-	}
-	public interface PersonTraining  : Period, UserInterfaceable 
-	{
-					Training Training {set;}
-
-	}
-	public interface DeductionType  : Enumeration 
-	{
-	}
-	public interface DeliverableOrderItem  : EngagementItem 
-	{
-					global::System.Decimal? AgreedUponPrice {set;}
-
-	}
-	public interface PackagingSlip  : Document 
-	{
-	}
-	public interface CustomerReturnObjectState  : ObjectState 
-	{
-	}
-	public interface OrganisationGlAccountBalance  : UserInterfaceable 
-	{
-					OrganisationGlAccount OrganisationGlAccount {set;}
-
-					global::System.Decimal Amount {set;}
-
-					AccountingPeriod AccountingPeriod {set;}
-
-	}
-	public interface InternalOrganisationRevenueHistory  : UserInterfaceable 
-	{
-					InternalOrganisation InternalOrganisation {set;}
-
-					global::System.Decimal? AllorsDecimal {set;}
-
-					Currency Currency {set;}
-
-					global::System.Decimal? Revenue {set;}
-
-	}
-	public interface ManufacturingBom  : PartBillOfMaterial 
-	{
-	}
-	public interface Deliverable  : Searchable, UserInterfaceable 
-	{
-					global::System.String Name {set;}
-
-					DeliverableType DeliverableType {set;}
-
-	}
-	public interface EmploymentApplication  : SearchResult, UserInterfaceable, Searchable 
-	{
-					global::System.DateTime ApplicationDate {set;}
-
-					Position Position {set;}
-
-					EmploymentApplicationStatus EmploymentApplicationStatus {set;}
-
-					Person Person {set;}
-
-					EmploymentApplicationSource EmploymentApplicationSource {set;}
-
-	}
-	public interface VatRegime  : Enumeration 
-	{
-					VatRate VatRate {set;}
-
-					OrganisationGlAccount GeneralLedgerAccount {set;}
-
-	}
-	public interface PositionFulfillment  : Commentable, Period, UserInterfaceable 
-	{
-					Position Position {set;}
-
-					Person Person {set;}
-
-	}
-	public interface Employment  : PartyRelationship, Deletable 
-	{
-					InternalOrganisation Employer {set;}
-
-					Person Employee {set;}
-
-					PayrollPreference PayrollPreferences {set;}
-
-					EmploymentTerminationReason EmploymentTerminationReason {set;}
-
-					EmploymentTermination EmploymentTermination {set;}
-
-	}
-	public interface AccountingPeriod  : Budget, UserInterfaceable 
+	public interface AccountingPeriod  : Object, Budget, UserInterfaceable 
 	{
 					AccountingPeriod Parent {set;}
 
@@ -2722,330 +1425,40 @@ namespace Allors.Domain
 					TimeFrequency TimeFrequency {set;}
 
 	}
-	public interface EngagementRate  : Period, UserInterfaceable 
+	public interface AccountingTransactionDetail  : Object, UserInterfaceable 
 	{
-					global::System.Decimal BillingRate {set;}
+					AccountingTransactionDetail AssociatedWith {set;}
 
-					RatingType RatingType {set;}
+					OrganisationGlAccountBalance OrganisationGlAccountBalance {set;}
 
-					global::System.Decimal? Cost {set;}
+					global::System.Decimal Amount {set;}
 
-					PriceComponent GoverningPriceComponents {set;}
+					global::System.Boolean Debit {set;}
 
-					global::System.String ChangeReason {set;}
+	}
+	public interface AccountingTransactionNumber  : Object, AccessControlledObject, UserInterfaceable 
+	{
+					global::System.Int32? Number {set;}
+
+					global::System.Int32? Year {set;}
+
+					AccountingTransactionType AccountingTransactionType {set;}
+
+	}
+	public interface AccountingTransactionType  : Object, Enumeration 
+	{
+	}
+	public interface Activity  : Object, WorkEffort 
+	{
+	}
+	public interface ActivityUsage  : Object, DeploymentUsage 
+	{
+					global::System.Decimal Quantity {set;}
 
 					UnitOfMeasure UnitOfMeasure {set;}
 
 	}
-	public interface TelecommunicationsNumber  : ContactMechanism 
-	{
-					global::System.String AreaCode {set;}
-
-					global::System.String CountryCode {set;}
-
-					global::System.String ContactNumber {set;}
-
-	}
-	public interface SalesRepRelationship  : UserInterfaceable, Commentable, AccessControlledObject, Period, PartyRelationship 
-	{
-					Person SalesRepresentative {set;}
-
-					global::System.Decimal LastYearsCommission {set;}
-
-					ProductCategory ProductCategories {set;}
-
-					InternalOrganisation InternalOrganisation {set;}
-
-					global::System.Decimal YTDCommission {set;}
-
-					Party Customer {set;}
-
-	}
-	public interface PurchaseInvoiceObjectState  : ObjectState 
-	{
-	}
-	public interface ProductCategoryRevenue  : Deletable, UserInterfaceable 
-	{
-					global::System.String ProductCategoryName {set;}
-
-					global::System.Int32 Month {set;}
-
-					InternalOrganisation InternalOrganisation {set;}
-
-					ProductCategory ProductCategory {set;}
-
-					global::System.Decimal Revenue {set;}
-
-					Currency Currency {set;}
-
-					global::System.Int32 Year {set;}
-
-	}
-	public interface ChartOfAccounts  : UserInterfaceable, AccessControlledObject, UniquelyIdentifiable 
-	{
-					global::System.String Name {set;}
-
-					GeneralLedgerAccount GeneralLedgerAccounts {set;}
-
-	}
-	public interface PartyRevenue  : UserInterfaceable, Deletable 
-	{
-					Currency Currency {set;}
-
-					global::System.String PartyName {set;}
-
-					global::System.Int32 Month {set;}
-
-					Party Party {set;}
-
-					InternalOrganisation InternalOrganisation {set;}
-
-					global::System.Int32 Year {set;}
-
-					global::System.Decimal Revenue {set;}
-
-	}
-	public interface MarketingMaterial  : Document 
-	{
-	}
-	public interface PurchaseInvoiceItemStatus  : UserInterfaceable 
-	{
-					PurchaseInvoiceItemObjectState PurchaseInvoiceItemObjectState {set;}
-
-					global::System.DateTime StartDateTime {set;}
-
-	}
-	public interface InvoiceVatRateItem  : UserInterfaceable 
-	{
-					global::System.Decimal? BaseAmount {set;}
-
-					VatRate VatRates {set;}
-
-					global::System.Decimal? VatAmount {set;}
-
-	}
-	public interface CaseObjectState  : ObjectState 
-	{
-	}
-	public interface SalaryStep  : UserInterfaceable 
-	{
-					global::System.DateTime ModifiedDate {set;}
-
-					global::System.Decimal Amount {set;}
-
-	}
-	public interface DropShipmentStatus  : UserInterfaceable 
-	{
-					global::System.DateTime StartDateTime {set;}
-
-					DropShipmentObjectState DropShipmentObjectState {set;}
-
-	}
-	public interface PaymentApplication  : UserInterfaceable 
-	{
-					global::System.Decimal AmountApplied {set;}
-
-					InvoiceItem InvoiceItem {set;}
-
-					Invoice Invoice {set;}
-
-					BillingAccount BillingAccount {set;}
-
-	}
-	public interface NonSerializedInventoryItemStatus  : UserInterfaceable 
-	{
-					global::System.DateTime StartDateTime {set;}
-
-					NonSerializedInventoryItemObjectState NonSerializedInventoryItemObjectState {set;}
-
-	}
-	public interface SurchargeAdjustment  : OrderAdjustment 
-	{
-	}
-	public interface Depreciation  : InternalAccountingTransaction 
-	{
-					FixedAsset FixedAsset {set;}
-
-	}
-	public interface Territory  : UserInterfaceable, CityBound, GeographicBoundary, CountryBound 
-	{
-					global::System.String Name {set;}
-
-	}
-	public interface SalesOrder  : Order 
-	{
-					ContactMechanism TakenByContactMechanism {set;}
-
-					SalesOrderStatus ShipmentStatuses {set;}
-
-					SalesOrderStatus CurrentShipmentStatus {set;}
-
-					SalesOrderStatus CurrentPaymentStatus {set;}
-
-					Party ShipToCustomer {set;}
-
-					Party BillToCustomer {set;}
-
-					global::System.Decimal TotalPurchasePrice {set;}
-
-					ShipmentMethod ShipmentMethod {set;}
-
-					global::System.Decimal TotalListPriceCustomerCurrency {set;}
-
-					global::System.Decimal MaintainedProfitMargin {set;}
-
-					PostalAddress ShipToAddress {set;}
-
-					Party PreviousShipToCustomer {set;}
-
-					ContactMechanism BillToContactMechanism {set;}
-
-					Person SalesReps {set;}
-
-					global::System.Decimal InitialProfitMargin {set;}
-
-					SalesOrderObjectState PreviousObjectState {set;}
-
-					global::System.Decimal TotalListPrice {set;}
-
-					global::System.Boolean PartiallyShip {set;}
-
-					SalesOrderStatus PaymentStatuses {set;}
-
-					Party Customers {set;}
-
-					Store Store {set;}
-
-					global::System.Decimal MaintainedMarkupPercentage {set;}
-
-					ContactMechanism BillFromContactMechanism {set;}
-
-					PaymentMethod PaymentMethod {set;}
-
-					ContactMechanism PlacingContactMechanism {set;}
-
-					SalesOrderStatus CurrentOrderStatus {set;}
-
-					Party PreviousBillToCustomer {set;}
-
-					SalesChannel SalesChannel {set;}
-
-					Party PlacingCustomer {set;}
-
-					SalesOrderStatus OrderStatuses {set;}
-
-					SalesInvoice ProformaInvoice {set;}
-
-					SalesOrderItem SalesOrderItems {set;}
-
-					SalesOrderObjectState CurrentObjectState {set;}
-
-					global::System.Decimal InitialMarkupPercentage {set;}
-
-					InternalOrganisation TakenByInternalOrganisation {set;}
-
-	}
-	public interface Warehouse  : Facility 
-	{
-	}
-	public interface AgreementPricingProgram  : AgreementItem 
-	{
-	}
-	public interface SalesRepRevenue  : UserInterfaceable, Deletable 
-	{
-					global::System.Decimal Revenue {set;}
-
-					Currency Currency {set;}
-
-					InternalOrganisation InternalOrganisation {set;}
-
-					global::System.Int32 Month {set;}
-
-					global::System.String SalesRepName {set;}
-
-					global::System.Int32 Year {set;}
-
-					Person SalesRep {set;}
-
-	}
-	public interface EmploymentApplicationSource  : Enumeration, Searchable 
-	{
-	}
-	public interface Engagement  : UserInterfaceable, Searchable, SearchResult 
-	{
-					Agreement Agreement {set;}
-
-					ContactMechanism PlacingContactMechanism {set;}
-
-					global::System.Decimal? MaximumAmount {set;}
-
-					ContactMechanism BillToContactMechanism {set;}
-
-					global::System.String Description {set;}
-
-					Party BillToParty {set;}
-
-					Party PlacingParty {set;}
-
-					InternalOrganisation TakenViaInternalOrganisation {set;}
-
-					global::System.DateTime? StartDate {set;}
-
-					ContactMechanism TakenViaContactMechanism {set;}
-
-					global::System.Decimal? EstimatedAmount {set;}
-
-					global::System.DateTime? EndDate {set;}
-
-					global::System.DateTime? ContractDate {set;}
-
-					EngagementItem EngagementItems {set;}
-
-					global::System.String ClientPurchaseOrderNumber {set;}
-
-					OrganisationContactRelationship TakenViaOrganisationContactRelationship {set;}
-
-	}
-	public interface InventoryItemKind  : Enumeration 
-	{
-	}
-	public interface CustomEngagementItem  : EngagementItem 
-	{
-					global::System.String DescriptionOfWork {set;}
-
-					global::System.Decimal? AgreedUponPrice {set;}
-
-	}
-	public interface SalesRepPartyRevenue  : UserInterfaceable, Deletable 
-	{
-					global::System.Decimal Revenue {set;}
-
-					global::System.Int32 Year {set;}
-
-					Person SalesRep {set;}
-
-					global::System.String SalesRepName {set;}
-
-					InternalOrganisation InternalOrganisation {set;}
-
-					Party Party {set;}
-
-					Currency Currency {set;}
-
-					global::System.Int32 Month {set;}
-
-	}
-	public interface JournalType  : Enumeration 
-	{
-	}
-	public interface PurchaseOrderItemStatus  : UserInterfaceable 
-	{
-					global::System.DateTime StartDateTime {set;}
-
-					PurchaseOrderItemObjectState PurchaseOrderItemObjectState {set;}
-
-	}
-	public interface Addendum  : UserInterfaceable 
+	public interface Addendum  : Object, UserInterfaceable 
 	{
 					global::System.String Text {set;}
 
@@ -3056,199 +1469,19 @@ namespace Allors.Domain
 					global::System.DateTime CreationDate {set;}
 
 	}
-	public interface Floor  : Facility 
+	public interface AgreementExhibit  : Object, AgreementItem 
 	{
 	}
-	public interface WorkEffortType  : Searchable, UserInterfaceable 
-	{
-					WorkEffortFixedAssetStandard WorkEffortFixedAssetStandards {set;}
-
-					WorkEffortGoodStandard WorkEffortGoodStandards {set;}
-
-					WorkEffortType Children {set;}
-
-					FixedAsset FixedAssetToRepair {set;}
-
-					global::System.String Description {set;}
-
-					WorkEffortType Dependencies {set;}
-
-					WorkEffortTypeKind WorkEffortTypeKind {set;}
-
-					WorkEffortPartStandard WorkEffortPartStandards {set;}
-
-					WorkEffortSkillStandard WorkEffortSkillStandards {set;}
-
-					global::System.Decimal? StandardWorkHours {set;}
-
-					Product ProductToProduce {set;}
-
-					Deliverable DeliverableToProduce {set;}
-
-	}
-	public interface SalesInvoiceStatus  : UserInterfaceable 
-	{
-					SalesInvoiceObjectState SalesInvoiceObjectState {set;}
-
-					global::System.DateTime StartDateTime {set;}
-
-	}
-	public interface SalesAgreement  : Agreement 
+	public interface AgreementPricingProgram  : Object, AgreementItem 
 	{
 	}
-	public interface PurchaseInvoice  : Invoice 
-	{
-					PurchaseInvoiceObjectState PreviousObjectState {set;}
-
-					PurchaseInvoiceItem PurchaseInvoiceItems {set;}
-
-					InternalOrganisation BilledToInternalOrganisation {set;}
-
-					PurchaseInvoiceStatus CurrentInvoiceStatus {set;}
-
-					PurchaseInvoiceObjectState CurrentObjectState {set;}
-
-					Party BilledFromParty {set;}
-
-					PurchaseInvoiceType PurchaseInvoiceType {set;}
-
-					PurchaseInvoiceStatus InvoiceStatuses {set;}
-
-	}
-	public interface CustomerReturn  : Shipment 
-	{
-					CustomerReturnStatus CurrentShipmentStatus {set;}
-
-					CustomerReturnObjectState PreviousObjectState {set;}
-
-					CustomerReturnStatus ShipmentStatuses {set;}
-
-					CustomerReturnObjectState CurrentObjectState {set;}
-
-	}
-	public interface PartyPackageRevenueHistory  : UserInterfaceable 
-	{
-					Package Package {set;}
-
-					InternalOrganisation InternalOrganisation {set;}
-
-					Currency Currency {set;}
-
-					Party Party {set;}
-
-					global::System.Decimal? Revenue {set;}
-
-	}
-	public interface OrderKind  : Searchable, UserInterfaceable, UniquelyIdentifiable, AccessControlledObject 
-	{
-					global::System.String Description {set;}
-
-					global::System.Boolean ScheduleManually {set;}
-
-	}
-	public interface Amortization  : InternalAccountingTransaction 
+	public interface AgreementSection  : Object, AgreementItem 
 	{
 	}
-	public interface PickListItem  : UserInterfaceable, Deletable 
-	{
-					global::System.Decimal RequestedQuantity {set;}
-
-					InventoryItem InventoryItem {set;}
-
-					global::System.Decimal? ActualQuantity {set;}
-
-	}
-	public interface SalesOrderItem  : OrderItem 
-	{
-					global::System.Decimal InitialProfitMargin {set;}
-
-					SalesOrderItemStatus CurrentPaymentStatus {set;}
-
-					global::System.Decimal QuantityShortFalled {set;}
-
-					OrderItem OrderedWithFeatures {set;}
-
-					global::System.Decimal MaintainedProfitMargin {set;}
-
-					global::System.Decimal? RequiredProfitMargin {set;}
-
-					SalesOrderItemStatus OrderItemStatuses {set;}
-
-					SalesOrderItemStatus CurrentShipmentStatus {set;}
-
-					NonSerializedInventoryItem PreviousReservedFromInventoryItem {set;}
-
-					global::System.Decimal? RequiredMarkupPercentage {set;}
-
-					global::System.Decimal QuantityShipped {set;}
-
-					SalesOrderItemStatus CurrentOrderItemStatus {set;}
-
-					PostalAddress ShipToAddress {set;}
-
-					global::System.Decimal QuantityPicked {set;}
-
-					Product PreviousProduct {set;}
-
-					SalesOrderItemObjectState CurrentObjectState {set;}
-
-					global::System.Decimal UnitPurchasePrice {set;}
-
-					Party ShipToParty {set;}
-
-					PostalAddress AssignedShipToAddress {set;}
-
-					global::System.Decimal QuantityReturned {set;}
-
-					global::System.Decimal QuantityReserved {set;}
-
-					Person SalesRep {set;}
-
-					SalesOrderItemStatus ShipmentStatuses {set;}
-
-					Party AssignedShipToParty {set;}
-
-					global::System.Decimal QuantityPendingShipment {set;}
-
-					global::System.Decimal MaintainedMarkupPercentage {set;}
-
-					SalesOrderItemObjectState PreviousObjectState {set;}
-
-					global::System.Decimal InitialMarkupPercentage {set;}
-
-					NonSerializedInventoryItem ReservedFromInventoryItem {set;}
-
-					Product Product {set;}
-
-					ProductFeature ProductFeature {set;}
-
-					global::System.Decimal QuantityRequestsShipping {set;}
-
-					SalesOrderItemStatus PaymentStatuses {set;}
-
-	}
-	public interface SalesInvoiceType  : Enumeration 
+	public interface Amortization  : Object, InternalAccountingTransaction 
 	{
 	}
-	public interface WorkEffortGoodStandard  : UserInterfaceable 
-	{
-					Good Good {set;}
-
-					global::System.Decimal? EstimatedCost {set;}
-
-					global::System.Int32? EstimatedQuantity {set;}
-
-	}
-	public interface Passport  : UserInterfaceable, Searchable 
-	{
-					global::System.DateTime? IssueDate {set;}
-
-					global::System.DateTime? ExpiriationDate {set;}
-
-					global::System.String Number {set;}
-
-	}
-	public interface AmountDue  : AccessControlledObject, Searchable, UserInterfaceable 
+	public interface AmountDue  : Object, AccessControlledObject, Searchable, UserInterfaceable 
 	{
 					global::System.Decimal? Amount {set;}
 
@@ -3289,83 +1522,53 @@ namespace Allors.Domain
 					global::System.DateTime? DueDate {set;}
 
 	}
-	public interface WorkEffortTypeKind  : Enumeration 
+	public interface AssetAssignmentStatus  : Object, Enumeration 
 	{
 	}
-	public interface OrderTerm  : UserInterfaceable, Searchable 
-	{
-					global::System.String TermValue {set;}
-
-					TermType TermType {set;}
-
-	}
-	public interface CreditCardCompany  : UserInterfaceable 
+	public interface AutomatedAgent  : Object, User, Party 
 	{
 					global::System.String Name {set;}
 
-	}
-	public interface RequestForQuote  : Request 
-	{
-	}
-	public interface PurchaseShipmentStatus  : UserInterfaceable 
-	{
-					PurchaseShipmentObjectState PurchaseShipmentObjectState {set;}
-
-					global::System.DateTime StartDateTime {set;}
+					global::System.String Description {set;}
 
 	}
-	public interface Cash  : PaymentMethod 
+	public interface Bank  : Object, UserInterfaceable, Searchable 
 	{
-					Person PersonResponsible {set;}
+					Media Logo {set;}
 
-	}
-	public interface PerformanceReview  : Searchable, UserInterfaceable, Commentable, SearchResult, Period 
-	{
-					Person Manager {set;}
+					global::System.String Bic {set;}
 
-					PayHistory PayHistory {set;}
+					global::System.String SwiftCode {set;}
 
-					PayCheck BonusPayCheck {set;}
+					Country Country {set;}
 
-					PerformanceReviewItem PerformanceReviewItems {set;}
-
-					Person Employee {set;}
-
-					Position ResultingPosition {set;}
-
-	}
-	public interface DropShipmentObjectState  : ObjectState 
-	{
-	}
-	public interface InvestmentAccount  : FinancialAccount 
-	{
 					global::System.String Name {set;}
 
 	}
-	public interface Colour  : Enumeration, ProductFeature 
+	public interface BankAccount  : Object, FinancialAccount 
 	{
-	}
-	public interface PackageRevenue  : Deletable, UserInterfaceable 
-	{
-					global::System.Decimal Revenue {set;}
+					Bank Bank {set;}
 
-					global::System.Int32 Year {set;}
+					global::System.String NameOnAccount {set;}
 
-					global::System.Int32 Month {set;}
+					ContactMechanism ContactMechanisms {set;}
 
 					Currency Currency {set;}
 
-					global::System.String PackageName {set;}
+					global::System.String Iban {set;}
 
-					InternalOrganisation InternalOrganisation {set;}
+					global::System.String Branch {set;}
 
-					Package Package {set;}
+					Person ContactPersons {set;}
 
 	}
-	public interface SalesOrderObjectState  : ObjectState 
+	public interface Barrel  : Object, Container 
 	{
 	}
-	public interface Benefit  : SearchResult, UserInterfaceable, Searchable 
+	public interface BasePrice  : Object, Deletable, PriceComponent 
+	{
+	}
+	public interface Benefit  : Object, SearchResult, UserInterfaceable, Searchable 
 	{
 					global::System.Decimal? EmployerPaidPercentage {set;}
 
@@ -3376,83 +1579,292 @@ namespace Allors.Domain
 					global::System.Decimal? AvailableTime {set;}
 
 	}
-	public interface EngineeringDocument  : Document 
+	public interface BillingAccount  : Object, UserInterfaceable 
+	{
+					global::System.String Description {set;}
+
+					ContactMechanism ContactMechanism {set;}
+
+	}
+	public interface BillOfLading  : Object, Document 
 	{
 	}
-	public interface VatReturnBox  : UserInterfaceable, AccessControlledObject 
+	public interface Bin  : Object, Container 
 	{
-					global::System.String HeaderNumber {set;}
+	}
+	public interface Brand  : Object, UserInterfaceable, AccessControlledObject, Searchable 
+	{
+					global::System.String Name {set;}
+
+					ProductCategory ProductCategories {set;}
+
+	}
+	public interface BudgetItem  : Object, UserInterfaceable 
+	{
+					global::System.String Purpose {set;}
+
+					global::System.String Justification {set;}
+
+					BudgetItem Children {set;}
+
+					global::System.Decimal Amount {set;}
+
+	}
+	public interface BudgetObjectState  : Object, ObjectState 
+	{
+	}
+	public interface BudgetReview  : Object, Searchable, Commentable, UserInterfaceable 
+	{
+					global::System.DateTime ReviewDate {set;}
 
 					global::System.String Description {set;}
 
 	}
-	public interface CommunicationEventPurpose  : Enumeration 
+	public interface BudgetRevision  : Object, Searchable, UserInterfaceable 
 	{
-	}
-	public interface ShipmentRouteSegment  : UserInterfaceable 
-	{
-					global::System.Decimal? EndKilometers {set;}
-
-					Facility FromFacility {set;}
-
-					global::System.Decimal? StartKilometers {set;}
-
-					ShipmentMethod ShipmentMethod {set;}
-
-					global::System.DateTime? EstimatedStartDateTime {set;}
-
-					Facility ToFacility {set;}
-
-					global::System.DateTime? EstimatedArrivalDateTime {set;}
-
-					Vehicle Vehicle {set;}
-
-					global::System.DateTime? ActualArrivalDateTime {set;}
-
-					global::System.DateTime? ActualStartDateTime {set;}
-
-					Organisation Carrier {set;}
+					global::System.DateTime RevisionDate {set;}
 
 	}
-	public interface VarianceReason  : Enumeration 
+	public interface BudgetRevisionImpact  : Object, UserInterfaceable 
 	{
+					BudgetItem BudgetItem {set;}
+
+					global::System.String Reason {set;}
+
+					global::System.Boolean? Deleted {set;}
+
+					global::System.Boolean? Added {set;}
+
+					global::System.Decimal? RevisedAmount {set;}
+
+					BudgetRevision BudgetRevision {set;}
+
 	}
-	public interface Phase  : WorkEffort 
-	{
-	}
-	public interface WorkEffortStatus  : UserInterfaceable 
+	public interface BudgetStatus  : Object, UserInterfaceable 
 	{
 					global::System.DateTime StartDateTime {set;}
 
-					WorkEffortObjectState WorkEffortObjectState {set;}
+					BudgetObjectState BudgetObjectState {set;}
 
 	}
-	public interface Salutation  : UserInterfaceable, Enumeration, UniquelyIdentifiable, AccessControlledObject 
+	public interface Building  : Object, Facility 
 	{
 	}
-	public interface PurchaseOrderStatus  : UserInterfaceable 
+	public interface CapitalBudget  : Object, Budget 
 	{
-					PurchaseOrderObjectState PurchaseOrderObjectState {set;}
+	}
+	public interface Capitalization  : Object, InternalAccountingTransaction 
+	{
+	}
+	public interface Carrier  : Object, UniquelyIdentifiable, AccessControlledObject, UserInterfaceable, Searchable 
+	{
+					global::System.String Name {set;}
 
+	}
+	public interface Case  : Object, Searchable, UserInterfaceable, Transitional, UniquelyIdentifiable, SearchResult 
+	{
+					CaseStatus CurrentCaseStatus {set;}
+
+					CaseStatus CaseStatuses {set;}
+
+					global::System.DateTime? StartDate {set;}
+
+					CaseObjectState CurrentObjectState {set;}
+
+					global::System.String Description {set;}
+
+					CaseObjectState PreviousObjectState {set;}
+
+	}
+	public interface CaseObjectState  : Object, ObjectState 
+	{
+	}
+	public interface CaseStatus  : Object, UserInterfaceable 
+	{
 					global::System.DateTime StartDateTime {set;}
 
+					CaseObjectState CaseObjectState {set;}
+
 	}
-	public interface PayrollPreference  : UserInterfaceable 
+	public interface Cash  : Object, PaymentMethod 
 	{
-					global::System.Decimal? Percentage {set;}
-
-					global::System.String AccountNumber {set;}
-
-					PaymentMethod PaymentMethod {set;}
-
-					TimeFrequency TimeFrequency {set;}
-
-					DeductionType DeductionType {set;}
-
-					global::System.Decimal? Amount {set;}
+					Person PersonResponsible {set;}
 
 	}
-	public interface CustomerShipment  : Deletable, Shipment 
+	public interface ChartOfAccounts  : Object, UserInterfaceable, AccessControlledObject, UniquelyIdentifiable 
+	{
+					global::System.String Name {set;}
+
+					GeneralLedgerAccount GeneralLedgerAccounts {set;}
+
+	}
+	public interface Citizenship  : Object, UserInterfaceable 
+	{
+					Passport Passports {set;}
+
+					Country Country {set;}
+
+	}
+	public interface City  : Object, GeographicBoundary, UserInterfaceable, CountryBound 
+	{
+					global::System.String Name {set;}
+
+					State State {set;}
+
+	}
+	public interface ClientAgreement  : Object, Agreement 
+	{
+	}
+	public interface ClientRelationship  : Object, PartyRelationship 
+	{
+					Party Client {set;}
+
+					InternalOrganisation InternalOrganisation {set;}
+
+	}
+	public interface Colour  : Object, Enumeration, ProductFeature 
+	{
+	}
+	public interface CommunicationEventObjectState  : Object, ObjectState 
+	{
+	}
+	public interface CommunicationEventPurpose  : Object, Enumeration 
+	{
+	}
+	public interface CommunicationEventStatus  : Object, UserInterfaceable 
+	{
+					global::System.DateTime StartDateTime {set;}
+
+					CommunicationEventObjectState CommunicationEventObjectState {set;}
+
+	}
+	public interface ConstraintSpecification  : Object, PartSpecification 
+	{
+	}
+	public interface ContactMechanismPurpose  : Object, Enumeration 
+	{
+	}
+	public interface CostCenter  : Object, UserInterfaceable, Searchable, UniquelyIdentifiable, AccessControlledObject 
+	{
+					global::System.String Description {set;}
+
+					OrganisationGlAccount InternalTransferGlAccount {set;}
+
+					CostCenterCategory CostCenterCategories {set;}
+
+					OrganisationGlAccount RedistributedCostsGlAccount {set;}
+
+					global::System.String Name {set;}
+
+					global::System.Boolean? Active {set;}
+
+					global::System.Boolean? UseGlAccountOfBooking {set;}
+
+	}
+	public interface CostCenterCategory  : Object, Searchable, UserInterfaceable, SearchResult, AccessControlledObject, UniquelyIdentifiable 
+	{
+					CostCenterCategory Parent {set;}
+
+					CostCenterCategory Ancestors {set;}
+
+					CostCenterCategory Children {set;}
+
+					global::System.String Description {set;}
+
+	}
+	public interface CostCenterSplitMethod  : Object, Enumeration 
+	{
+	}
+	public interface CostOfGoodsSoldMethod  : Object, Enumeration 
+	{
+	}
+	public interface County  : Object, GeographicBoundary, CityBound, UserInterfaceable 
+	{
+					global::System.String Name {set;}
+
+					State State {set;}
+
+	}
+	public interface CreditCard  : Object, FinancialAccount, UserInterfaceable, Searchable 
+	{
+					global::System.String NameOnCard {set;}
+
+					CreditCardCompany CreditCardCompany {set;}
+
+					global::System.Int32 ExpirationYear {set;}
+
+					global::System.Int32 ExpirationMonth {set;}
+
+					global::System.String CardNumber {set;}
+
+	}
+	public interface CreditCardCompany  : Object, UserInterfaceable 
+	{
+					global::System.String Name {set;}
+
+	}
+	public interface CreditLine  : Object, ExternalAccountingTransaction 
+	{
+	}
+	public interface CustomEngagementItem  : Object, EngagementItem 
+	{
+					global::System.String DescriptionOfWork {set;}
+
+					global::System.Decimal? AgreedUponPrice {set;}
+
+	}
+	public interface CustomerRelationship  : Object, PartyRelationship 
+	{
+					global::System.Boolean? BlockedForDunning {set;}
+
+					InternalOrganisation InternalOrganisation {set;}
+
+					global::System.Decimal AmountOverDue {set;}
+
+					Party Customer {set;}
+
+					DunningType DunningType {set;}
+
+					global::System.Decimal AmountDue {set;}
+
+					global::System.Decimal YTDRevenue {set;}
+
+					global::System.DateTime? LastReminderDate {set;}
+
+					global::System.Decimal? CreditLimit {set;}
+
+					global::System.Int32 SubAccountNumber {set;}
+
+					global::System.Decimal LastYearsRevenue {set;}
+
+	}
+	public interface CustomerRequirement  : Object, Requirement 
+	{
+	}
+	public interface CustomerReturn  : Object, Shipment 
+	{
+					CustomerReturnStatus CurrentShipmentStatus {set;}
+
+					CustomerReturnObjectState PreviousObjectState {set;}
+
+					CustomerReturnStatus ShipmentStatuses {set;}
+
+					CustomerReturnObjectState CurrentObjectState {set;}
+
+	}
+	public interface CustomerReturnObjectState  : Object, ObjectState 
+	{
+	}
+	public interface CustomerReturnStatus  : Object, UserInterfaceable 
+	{
+					global::System.DateTime StartDateTime {set;}
+
+					ShipmentReceipt ShipmentReceipt {set;}
+
+					CustomerReturnObjectState CustomerReturnObjectState {set;}
+
+	}
+	public interface CustomerShipment  : Object, Deletable, Shipment 
 	{
 					CustomerShipmentStatus CurrentShipmentStatus {set;}
 
@@ -3473,30 +1885,143 @@ namespace Allors.Domain
 					global::System.Decimal ShipmentValue {set;}
 
 	}
-	public interface InternalOrganisationRevenue  : UserInterfaceable, Deletable 
+	public interface CustomerShipmentObjectState  : Object, ObjectState 
 	{
-					global::System.Int32 Month {set;}
+	}
+	public interface CustomerShipmentStatus  : Object, UserInterfaceable 
+	{
+					CustomerShipmentObjectState CustomerShipmentObjectState {set;}
 
-					global::System.Int32 Year {set;}
-
-					global::System.Decimal Revenue {set;}
-
-					Currency Currency {set;}
-
-					global::System.String PartyName {set;}
-
-					InternalOrganisation InternalOrganisation {set;}
+					global::System.DateTime StartDateTime {set;}
 
 	}
-	public interface Package  : UniquelyIdentifiable, UserInterfaceable, Searchable 
+	public interface DebitCreditConstant  : Object, UniquelyIdentifiable, Enumeration 
+	{
+	}
+	public interface Deduction  : Object, UserInterfaceable 
+	{
+					DeductionType DeductionType {set;}
+
+					global::System.Decimal Amount {set;}
+
+	}
+	public interface DeductionType  : Object, Enumeration 
+	{
+	}
+	public interface Deliverable  : Object, Searchable, UserInterfaceable 
 	{
 					global::System.String Name {set;}
 
+					DeliverableType DeliverableType {set;}
+
 	}
-	public interface HazardousMaterialsDocument  : Document 
+	public interface DeliverableBasedService  : Object, Service 
 	{
 	}
-	public interface EmailCommunication  : CommunicationEvent 
+	public interface DeliverableOrderItem  : Object, EngagementItem 
+	{
+					global::System.Decimal? AgreedUponPrice {set;}
+
+	}
+	public interface DeliverableTurnover  : Object, ServiceEntry 
+	{
+					global::System.Decimal Amount {set;}
+
+	}
+	public interface DeliverableType  : Object, Enumeration 
+	{
+	}
+	public interface Deployment  : Object, Searchable, UserInterfaceable, Period, SearchResult 
+	{
+					Good ProductOffering {set;}
+
+					DeploymentUsage DeploymentUsage {set;}
+
+					SerializedInventoryItem SerializedInventoryItem {set;}
+
+	}
+	public interface Deposit  : Object, FinancialAccountTransaction 
+	{
+					Receipt Receipts {set;}
+
+	}
+	public interface Depreciation  : Object, InternalAccountingTransaction 
+	{
+					FixedAsset FixedAsset {set;}
+
+	}
+	public interface DepreciationMethod  : Object, UserInterfaceable 
+	{
+					global::System.String Formula {set;}
+
+					global::System.String Description {set;}
+
+	}
+	public interface DesiredProductFeature  : Object, UserInterfaceable, Searchable 
+	{
+					global::System.Boolean Required {set;}
+
+					ProductFeature ProductFeature {set;}
+
+	}
+	public interface Dimension  : Object, ProductFeature 
+	{
+					global::System.Decimal? Unit {set;}
+
+					UnitOfMeasure UnitOfMeasure {set;}
+
+	}
+	public interface Disbursement  : Object, Payment 
+	{
+	}
+	public interface DisbursementAccountingTransaction  : Object, ExternalAccountingTransaction 
+	{
+					Disbursement Disbursement {set;}
+
+	}
+	public interface DiscountAdjustment  : Object, OrderAdjustment 
+	{
+	}
+	public interface DiscountComponent  : Object, PriceComponent 
+	{
+					global::System.Decimal Percentage {set;}
+
+	}
+	public interface DistributionChannelRelationship  : Object, PartyRelationship 
+	{
+					InternalOrganisation InternalOrganisation {set;}
+
+					Organisation Distributor {set;}
+
+	}
+	public interface DropShipment  : Object, Shipment 
+	{
+					DropShipmentStatus ShipmentStatuses {set;}
+
+					DropShipmentStatus CurrentShipmentStatus {set;}
+
+					DropShipmentObjectState PreviousObjectState {set;}
+
+					DropShipmentObjectState CurrentObjectState {set;}
+
+	}
+	public interface DropShipmentObjectState  : Object, ObjectState 
+	{
+	}
+	public interface DropShipmentStatus  : Object, UserInterfaceable 
+	{
+					global::System.DateTime StartDateTime {set;}
+
+					DropShipmentObjectState DropShipmentObjectState {set;}
+
+	}
+	public interface DunningType  : Object, Enumeration 
+	{
+	}
+	public interface EmailAddress  : Object, ElectronicAddress 
+	{
+	}
+	public interface EmailCommunication  : Object, CommunicationEvent 
 	{
 					EmailAddress Originator {set;}
 
@@ -3509,362 +2034,161 @@ namespace Allors.Domain
 					EmailTemplate EmailTemplate {set;}
 
 	}
-	public interface CreditCard  : FinancialAccount, UserInterfaceable, Searchable 
-	{
-					global::System.String NameOnCard {set;}
-
-					CreditCardCompany CreditCardCompany {set;}
-
-					global::System.Int32 ExpirationYear {set;}
-
-					global::System.Int32 ExpirationMonth {set;}
-
-					global::System.String CardNumber {set;}
-
-	}
-	public interface OrganisationContactRelationship  : PartyRelationship 
-	{
-					Person Contact {set;}
-
-					Organisation Organisation {set;}
-
-					OrganisationContactKind ContactKind {set;}
-
-	}
-	public interface OrganisationContactKind  : UserInterfaceable, UniquelyIdentifiable 
+	public interface EmailTemplate  : Object, UserInterfaceable 
 	{
 					global::System.String Description {set;}
 
-	}
-	public interface CustomerReturnStatus  : UserInterfaceable 
-	{
-					global::System.DateTime StartDateTime {set;}
+					global::System.String BodyTemplate {set;}
 
-					ShipmentReceipt ShipmentReceipt {set;}
-
-					CustomerReturnObjectState CustomerReturnObjectState {set;}
+					global::System.String SubjectTemplate {set;}
 
 	}
-	public interface PerformanceReviewItem  : Commentable, UserInterfaceable 
+	public interface Employment  : Object, PartyRelationship, Deletable 
 	{
+					InternalOrganisation Employer {set;}
+
+					Person Employee {set;}
+
+					PayrollPreference PayrollPreferences {set;}
+
+					EmploymentTerminationReason EmploymentTerminationReason {set;}
+
+					EmploymentTermination EmploymentTermination {set;}
+
+	}
+	public interface EmploymentAgreement  : Object, Agreement 
+	{
+	}
+	public interface EmploymentApplication  : Object, SearchResult, UserInterfaceable, Searchable 
+	{
+					global::System.DateTime ApplicationDate {set;}
+
+					Position Position {set;}
+
+					EmploymentApplicationStatus EmploymentApplicationStatus {set;}
+
+					Person Person {set;}
+
+					EmploymentApplicationSource EmploymentApplicationSource {set;}
+
+	}
+	public interface EmploymentApplicationSource  : Object, Enumeration, Searchable 
+	{
+	}
+	public interface EmploymentApplicationStatus  : Object, Enumeration 
+	{
+	}
+	public interface EmploymentTermination  : Object, Searchable, Enumeration 
+	{
+	}
+	public interface EmploymentTerminationReason  : Object, Enumeration, Searchable 
+	{
+	}
+	public interface Engagement  : Object, UserInterfaceable, Searchable, SearchResult 
+	{
+					Agreement Agreement {set;}
+
+					ContactMechanism PlacingContactMechanism {set;}
+
+					global::System.Decimal? MaximumAmount {set;}
+
+					ContactMechanism BillToContactMechanism {set;}
+
+					global::System.String Description {set;}
+
+					Party BillToParty {set;}
+
+					Party PlacingParty {set;}
+
+					InternalOrganisation TakenViaInternalOrganisation {set;}
+
+					global::System.DateTime? StartDate {set;}
+
+					ContactMechanism TakenViaContactMechanism {set;}
+
+					global::System.Decimal? EstimatedAmount {set;}
+
+					global::System.DateTime? EndDate {set;}
+
+					global::System.DateTime? ContractDate {set;}
+
+					EngagementItem EngagementItems {set;}
+
+					global::System.String ClientPurchaseOrderNumber {set;}
+
+					OrganisationContactRelationship TakenViaOrganisationContactRelationship {set;}
+
+	}
+	public interface EngagementRate  : Object, Period, UserInterfaceable 
+	{
+					global::System.Decimal BillingRate {set;}
+
 					RatingType RatingType {set;}
 
-					PerformanceReviewItemType PerformanceReviewItemType {set;}
+					global::System.Decimal? Cost {set;}
 
-	}
-	public interface UtilizationCharge  : PriceComponent 
-	{
-					global::System.Decimal? Quantity {set;}
+					PriceComponent GoverningPriceComponents {set;}
+
+					global::System.String ChangeReason {set;}
 
 					UnitOfMeasure UnitOfMeasure {set;}
 
 	}
-	public interface PartyPackageRevenue  : UserInterfaceable, Deletable 
-	{
-					global::System.Int32 Month {set;}
-
-					Package Package {set;}
-
-					Party Party {set;}
-
-					global::System.Decimal Revenue {set;}
-
-					global::System.Int32 Year {set;}
-
-					global::System.String PartyPackageName {set;}
-
-					Currency Currency {set;}
-
-					InternalOrganisation InternalOrganisation {set;}
-
-	}
-	public interface PartyRelationshipStatus  : Enumeration 
+	public interface EngineeringBom  : Object, PartBillOfMaterial 
 	{
 	}
-	public interface ServiceTerritory  : UserInterfaceable, GeographicBoundaryComposite 
+	public interface EngineeringChange  : Object, Searchable, Transitional, UserInterfaceable, SearchResult 
 	{
-					global::System.String Name {set;}
+					Person Requestor {set;}
 
-	}
-	public interface DeliverableBasedService  : Service 
-	{
-	}
-	public interface ProductModel  : Document 
-	{
-	}
-	public interface Shelf  : Container 
-	{
-	}
-	public interface RawMaterial  : Part 
-	{
-	}
-	public interface EstimatedOtherCost  : EstimatedProductCost 
-	{
-	}
-	public interface BudgetRevision  : Searchable, UserInterfaceable 
-	{
-					global::System.DateTime RevisionDate {set;}
-
-	}
-	public interface WorkEffortFixedAssetStandard  : UserInterfaceable 
-	{
-					global::System.Decimal? EstimatedCost {set;}
-
-					global::System.Decimal? EstimatedDuration {set;}
-
-					FixedAsset FixedAsset {set;}
-
-					global::System.Int32? EstimatedQuantity {set;}
-
-	}
-	public interface PostalCode  : UserInterfaceable, GeographicBoundary 
-	{
-					global::System.String Code {set;}
-
-	}
-	public interface NonSerializedInventoryItemObjectState  : ObjectState 
-	{
-	}
-	public interface ProfessionalAssignment  : UserInterfaceable, Period 
-	{
-					Person Professional {set;}
-
-					EngagementItem EngagementItem {set;}
-
-	}
-	public interface TransferObjectState  : ObjectState 
-	{
-	}
-	public interface PackageRevenueHistory  : UserInterfaceable 
-	{
-					InternalOrganisation InternalOrganisation {set;}
-
-					global::System.Decimal? Revenue {set;}
-
-					Package Package {set;}
-
-					Currency Currency {set;}
-
-	}
-	public interface JournalEntryDetail  : AccessControlledObject, UserInterfaceable 
-	{
-					OrganisationGlAccount GeneralLedgerAccount {set;}
-
-					global::System.Decimal? Amount {set;}
-
-					global::System.Boolean? Debit {set;}
-
-	}
-	public interface TestingRequirement  : PartSpecification 
-	{
-	}
-	public interface Case  : Searchable, UserInterfaceable, Transitional, UniquelyIdentifiable, SearchResult 
-	{
-					CaseStatus CurrentCaseStatus {set;}
-
-					CaseStatus CaseStatuses {set;}
-
-					global::System.DateTime? StartDate {set;}
-
-					CaseObjectState CurrentObjectState {set;}
+					Person Authorizer {set;}
 
 					global::System.String Description {set;}
 
-					CaseObjectState PreviousObjectState {set;}
+					EngineeringChangeObjectState PreviousObjectState {set;}
+
+					Person Designer {set;}
+
+					PartSpecification PartSpecifications {set;}
+
+					PartBillOfMaterial PartBillOfMaterials {set;}
+
+					EngineeringChangeObjectState CurrentObjectState {set;}
+
+					EngineeringChangeStatus EngineeringChangeStatuses {set;}
+
+					Person Tester {set;}
+
+					EngineeringChangeStatus CurrentEngineeringChangeStatus {set;}
 
 	}
-	public interface Capitalization  : InternalAccountingTransaction 
+	public interface EngineeringChangeObjectState  : Object, ObjectState 
 	{
 	}
-	public interface PurchaseReturn  : Shipment 
+	public interface EngineeringChangeStatus  : Object, UserInterfaceable 
 	{
-					PurchaseReturnStatus CurrentShipmentStatus {set;}
-
-					PurchaseReturnObjectState CurrentObjectState {set;}
-
-					PurchaseReturnStatus ShipmentStatuses {set;}
-
-					PurchaseReturnObjectState PreviousObjectState {set;}
-
-	}
-	public interface WorkEffortPartStandard  : UserInterfaceable 
-	{
-					Part Part {set;}
-
-					global::System.Decimal? EstimatedCost {set;}
-
-					global::System.Int32? EstimatedQuantity {set;}
-
-	}
-	public interface SurchargeComponent  : PriceComponent 
-	{
-					global::System.Decimal Percentage {set;}
-
-	}
-	public interface Bank  : UserInterfaceable, Searchable 
-	{
-					Media Logo {set;}
-
-					global::System.String Bic {set;}
-
-					global::System.String SwiftCode {set;}
-
-					Country Country {set;}
-
-					global::System.String Name {set;}
-
-	}
-	public interface ProductRevenue  : Deletable, UserInterfaceable 
-	{
-					global::System.Decimal Revenue {set;}
-
-					global::System.String ProductName {set;}
-
-					Currency Currency {set;}
-
-					global::System.Int32 Year {set;}
-
-					Product Product {set;}
-
-					global::System.Int32 Month {set;}
-
-					InternalOrganisation InternalOrganisation {set;}
-
-	}
-	public interface DisbursementAccountingTransaction  : ExternalAccountingTransaction 
-	{
-					Disbursement Disbursement {set;}
-
-	}
-	public interface OrderValue  : UserInterfaceable 
-	{
-					global::System.Decimal? ThroughAmount {set;}
-
-					global::System.Decimal? FromAmount {set;}
-
-	}
-	public interface VatTariff  : Enumeration 
-	{
-	}
-	public interface Obligation  : ExternalAccountingTransaction 
-	{
-	}
-	public interface SalesInvoiceObjectState  : ObjectState 
-	{
-	}
-	public interface VatRate  : UserInterfaceable 
-	{
-					VatCalculationMethod VatCalculationMethod {set;}
-
-					VatReturnBox VatReturnBoxes {set;}
-
-					global::System.Decimal Rate {set;}
-
-					OrganisationGlAccount VatPayableAccount {set;}
-
-					Organisation TaxAuthority {set;}
-
-					VatRateUsage VatRateUsage {set;}
-
-					VatRatePurchaseKind VatRatePurchaseKind {set;}
-
-					VatTariff VatTariff {set;}
-
-					TimeFrequency PaymentFrequency {set;}
-
-					OrganisationGlAccount VatToPayAccount {set;}
-
-					EuSalesListType EuSalesListType {set;}
-
-					OrganisationGlAccount VatToReceiveAccount {set;}
-
-					OrganisationGlAccount VatReceivableAccount {set;}
-
-					global::System.Boolean? ReverseCharge {set;}
-
-	}
-	public interface ProfessionalServicesRelationship  : PartyRelationship 
-	{
-					Person Professional {set;}
-
-					Organisation ProfessionalServicesProvider {set;}
-
-	}
-	public interface RecurringCharge  : PriceComponent 
-	{
-					TimeFrequency TimeFrequency {set;}
-
-	}
-	public interface FinancialTerm  : AgreementTerm 
-	{
-	}
-	public interface RequirementStatus  : UserInterfaceable 
-	{
-					RequirementObjectState RequirementObjectState {set;}
-
 					global::System.DateTime StartDateTime {set;}
 
-	}
-	public interface PurchaseInvoiceItemObjectState  : ObjectState 
-	{
-	}
-	public interface InvoiceTerm  : UserInterfaceable, AgreementTerm 
-	{
-	}
-	public interface DropShipment  : Shipment 
-	{
-					DropShipmentStatus ShipmentStatuses {set;}
-
-					DropShipmentStatus CurrentShipmentStatus {set;}
-
-					DropShipmentObjectState PreviousObjectState {set;}
-
-					DropShipmentObjectState CurrentObjectState {set;}
+					EngineeringChangeObjectState EngineeringChangeObjectState {set;}
 
 	}
-	public interface SalesInvoiceItem  : InvoiceItem 
+	public interface EngineeringDocument  : Object, Document 
 	{
-					ProductFeature ProductFeature {set;}
-
-					SalesInvoiceItemObjectState CurrentObjectState {set;}
-
-					global::System.Decimal? RequiredProfitMargin {set;}
-
-					global::System.Decimal InitialMarkupPercentage {set;}
-
-					global::System.Decimal MaintainedMarkupPercentage {set;}
-
-					Product Product {set;}
-
-					global::System.Decimal UnitPurchasePrice {set;}
-
-					SalesInvoiceItemStatus InvoiceItemStatuses {set;}
-
-					SalesOrderItem SalesOrderItem {set;}
-
-					SalesInvoiceItemType SalesInvoiceItemType {set;}
-
-					Person SalesRep {set;}
-
-					global::System.Decimal InitialProfitMargin {set;}
-
-					SalesInvoiceItemStatus CurrentInvoiceItemStatus {set;}
-
-					global::System.Decimal MaintainedProfitMargin {set;}
-
-					TimeEntry TimeEntries {set;}
-
-					global::System.Decimal? RequiredMarkupPercentage {set;}
-
-					SalesInvoiceItemObjectState PreviousObjectState {set;}
-
 	}
-	public interface OrderQuantityBreak  : UserInterfaceable 
+	public interface Equipment  : Object, FixedAsset 
 	{
-					global::System.Decimal? ThroughAmount {set;}
-
-					global::System.Decimal? FromAmount {set;}
-
+	}
+	public interface EstimatedLaborCost  : Object, EstimatedProductCost 
+	{
+	}
+	public interface EstimatedMaterialCost  : Object, EstimatedProductCost 
+	{
+	}
+	public interface EstimatedOtherCost  : Object, EstimatedProductCost 
+	{
+	}
+	public interface EuSalesListType  : Object, Enumeration 
+	{
 	}
 	public interface Event  : Object 
 	{
@@ -3891,284 +2215,166 @@ namespace Allors.Domain
 					global::System.DateTime? To {set;}
 
 	}
-	public interface ClientRelationship  : PartyRelationship 
+	public interface EventRegistration  : Object 
 	{
-					Party Client {set;}
+					Person Person {set;}
 
-					InternalOrganisation InternalOrganisation {set;}
+					Event Event {set;}
+
+					global::System.DateTime? AllorsDateTime {set;}
 
 	}
-	public interface PurchaseOrderItem  : OrderItem 
+	public interface ExpenseEntry  : Object, ServiceEntry 
 	{
-					PurchaseOrderItemStatus OrderItemStatuses {set;}
-
-					PurchaseOrderItemObjectState CurrentObjectState {set;}
-
-					PurchaseOrderItemStatus ShipmentStatuses {set;}
-
-					PurchaseOrderItemStatus PaymentStatuses {set;}
-
-					global::System.Decimal QuantityReceived {set;}
-
-					PurchaseOrderItemStatus CurrentShipmentStatus {set;}
-
-					Product Product {set;}
-
-					PurchaseOrderItemStatus CurrentOrderItemStatus {set;}
-
-					PurchaseOrderItemStatus CurrentPaymentStatus {set;}
-
-					PurchaseOrderItemObjectState PreviousObjectState {set;}
-
-					Part Part {set;}
+					global::System.Decimal Amount {set;}
 
 	}
-	public interface WorkEffortAssignmentRate  : UserInterfaceable 
+	public interface ExportDocument  : Object, Document 
 	{
-					RateType RateType {set;}
+	}
+	public interface FaceToFaceCommunication  : Object, CommunicationEvent 
+	{
+					PostalAddress Location {set;}
 
-					WorkEffortPartyAssignment WorkEffortPartyAssignment {set;}
+					Person Participants {set;}
 
 	}
-	public interface EuSalesListType  : Enumeration 
+	public interface FaxCommunication  : Object, CommunicationEvent 
+	{
+					Party Originator {set;}
+
+					Party Receiver {set;}
+
+					TelecommunicationsNumber OutgoingFaxNumber {set;}
+
+	}
+	public interface Fee  : Object, OrderAdjustment 
 	{
 	}
-	public interface PurchaseOrderItemObjectState  : ObjectState 
+	public interface FinancialAccountAdjustment  : Object, FinancialAccountTransaction 
 	{
 	}
-	public interface Province  : CityBound, GeographicBoundary, CountryBound, UserInterfaceable 
+	public interface FinancialTerm  : Object, AgreementTerm 
 	{
+	}
+	public interface FinishedGood  : Object, Part 
+	{
+	}
+	public interface FiscalYearInvoiceNumber  : Object 
+	{
+					global::System.Int32 NextSalesInvoiceNumber {set;}
+
+					global::System.Int32 FiscalYear {set;}
+
+	}
+	public interface Floor  : Object, Facility 
+	{
+	}
+	public interface GenderType  : Object, Enumeration 
+	{
+	}
+	public interface GeneralLedgerAccount  : Object, UniquelyIdentifiable, UserInterfaceable, Searchable, SearchResult 
+	{
+					Product DefaultCostUnit {set;}
+
+					CostCenter DefaultCostCenter {set;}
+
+					global::System.String Description {set;}
+
+					GeneralLedgerAccountType GeneralLedgerAccountType {set;}
+
+					global::System.Boolean CashAccount {set;}
+
+					global::System.Boolean CostCenterAccount {set;}
+
+					DebitCreditConstant Side {set;}
+
+					global::System.Boolean BalanceSheetAccount {set;}
+
+					global::System.Boolean ReconciliationAccount {set;}
+
 					global::System.String Name {set;}
 
+					global::System.Boolean CostCenterRequired {set;}
+
+					global::System.Boolean CostUnitRequired {set;}
+
+					GeneralLedgerAccountGroup GeneralLedgerAccountGroup {set;}
+
+					CostCenter CostCentersAllowed {set;}
+
+					global::System.Boolean CostUnitAccount {set;}
+
+					global::System.String AccountNumber {set;}
+
+					Product CostUnitsAllowed {set;}
+
+					global::System.Boolean Protected {set;}
+
 	}
-	public interface InventoryItemVariance  : Searchable, UserInterfaceable, Commentable 
+	public interface GeneralLedgerAccountGroup  : Object, AccessControlledObject, UserInterfaceable 
 	{
-					global::System.Int32 Quantity {set;}
+					GeneralLedgerAccountGroup Parent {set;}
 
-					ItemVarianceAccountingTransaction ItemVarianceAccountingTransaction {set;}
-
-					global::System.DateTime? InventoryDate {set;}
-
-					VarianceReason Reason {set;}
+					global::System.String Description {set;}
 
 	}
-	public interface PositionResponsibility  : Commentable, UserInterfaceable 
+	public interface GeneralLedgerAccountType  : Object, UserInterfaceable, AccessControlledObject 
 	{
-					Position Position {set;}
-
-					Responsibility Responsibility {set;}
+					global::System.String Description {set;}
 
 	}
-	public interface DeliverableType  : Enumeration 
+	public interface GlBudgetAllocation  : Object, UserInterfaceable 
 	{
+					GeneralLedgerAccount GeneralLedgerAccount {set;}
+
+					BudgetItem BudgetItem {set;}
+
+					global::System.Decimal AllocationPercentage {set;}
+
 	}
-	public interface SubAssembly  : Part 
+	public interface Good  : Object, Product, Deletable 
 	{
-	}
-	public interface RequirementObjectState  : ObjectState 
-	{
-	}
-	public interface WorkFlow  : WorkEffort 
-	{
-	}
-	public interface Task  : WorkEffort 
-	{
-	}
-	public interface ResourceRequirement  : Requirement 
-	{
-					global::System.String Duties {set;}
+					global::System.Decimal AvailableToPromise {set;}
 
-					global::System.Decimal? NumberOfPositions {set;}
+					Media Thumbnail {set;}
 
-					global::System.DateTime? RequiredStartDate {set;}
+					InventoryItemKind InventoryItemKind {set;}
 
-					NeededSkill NeededSkills {set;}
+					global::System.String BarCode {set;}
 
-					global::System.DateTime? RequiredEndDate {set;}
+					FinishedGood FinishedGood {set;}
 
-	}
-	public interface BudgetItem  : UserInterfaceable 
-	{
-					global::System.String Purpose {set;}
+					global::System.String Sku {set;}
 
-					global::System.String Justification {set;}
+					global::System.String ArticleNumber {set;}
 
-					BudgetItem Children {set;}
+					global::System.String ManufacturerId {set;}
 
-					global::System.Decimal Amount {set;}
+					Product ProductSubstitutions {set;}
+
+					Product ProductIncompatibilities {set;}
+
+					Media Photo {set;}
 
 	}
-	public interface InternalRequirement  : Requirement 
-	{
-	}
-	public interface PositionReportingStructure  : UserInterfaceable, Commentable 
-	{
-					global::System.Boolean? Primary {set;}
-
-					Position ManagedByPosition {set;}
-
-					Position Position {set;}
-
-	}
-	public interface Partnership  : PartyRelationship 
-	{
-					InternalOrganisation InternalOrganisation {set;}
-
-					Organisation Partner {set;}
-
-	}
-	public interface OperatingBudget  : Budget 
-	{
-	}
-	public interface Bin  : Container 
-	{
-	}
-	public interface ManufacturingConfiguration  : InventoryItemConfiguration 
-	{
-	}
-	public interface ProfessionalPlacement  : EngagementItem 
-	{
-	}
-	public interface SalesRepCommission  : UserInterfaceable 
-	{
-					global::System.Decimal? Commission {set;}
-
-					InternalOrganisation InternalOrganisation {set;}
-
-					global::System.String SalesRepName {set;}
-
-					global::System.Int32? Month {set;}
-
-					global::System.Int32 Year {set;}
-
-					Currency Currency {set;}
-
-					Person SalesRep {set;}
-
-	}
-	public interface Deduction  : UserInterfaceable 
-	{
-					DeductionType DeductionType {set;}
-
-					global::System.Decimal Amount {set;}
-
-	}
-	public interface CaseStatus  : UserInterfaceable 
-	{
-					global::System.DateTime StartDateTime {set;}
-
-					CaseObjectState CaseObjectState {set;}
-
-	}
-	public interface DiscountComponent  : PriceComponent 
-	{
-					global::System.Decimal Percentage {set;}
-
-	}
-	public interface OrganisationUnit  : Enumeration 
-	{
-	}
-	public interface PartSubstitute  : Commentable, UserInterfaceable 
-	{
-					Part SubstitutionPart {set;}
-
-					Ordinal Preference {set;}
-
-					global::System.DateTime? FromDate {set;}
-
-					global::System.Int32 Quantity {set;}
-
-					Part Part {set;}
-
-	}
-	public interface GoodOrderItem  : EngagementItem 
+	public interface GoodOrderItem  : Object, EngagementItem 
 	{
 					global::System.Decimal? Price {set;}
 
 					global::System.Int32? Quantity {set;}
 
 	}
-	public interface VolumeUsage  : DeploymentUsage 
-	{
-					global::System.Decimal Quantity {set;}
-
-					UnitOfMeasure UnitOfMeasure {set;}
-
-	}
-	public interface ProductQuote  : Quote 
+	public interface HazardousMaterialsDocument  : Object, Document 
 	{
 	}
-	public interface TransferStatus  : UserInterfaceable 
-	{
-					global::System.DateTime StartDateTime {set;}
-
-					TransferObjectState TransferObjectState {set;}
-
-	}
-	public interface State  : CityBound, GeographicBoundary, AccessControlledObject, CountryBound 
-	{
-					global::System.String Name {set;}
-
-	}
-	public interface JournalEntryNumber  : UserInterfaceable, AccessControlledObject 
-	{
-					JournalType JournalType {set;}
-
-					global::System.Int32? Number {set;}
-
-					global::System.Int32? Year {set;}
-
-	}
-	public interface Tolerance  : PartSpecification 
+	public interface Hobby  : Object, Enumeration 
 	{
 	}
-	public interface EngineeringChange  : Searchable, Transitional, UserInterfaceable, SearchResult 
-	{
-					Person Requestor {set;}
-
-					Person Authorizer {set;}
-
-					global::System.String Description {set;}
-
-					EngineeringChangeObjectState PreviousObjectState {set;}
-
-					Person Designer {set;}
-
-					PartSpecification PartSpecifications {set;}
-
-					PartBillOfMaterial PartBillOfMaterials {set;}
-
-					EngineeringChangeObjectState CurrentObjectState {set;}
-
-					EngineeringChangeStatus EngineeringChangeStatuses {set;}
-
-					Person Tester {set;}
-
-					EngineeringChangeStatus CurrentEngineeringChangeStatus {set;}
-
-	}
-	public interface VatRatePurchaseKind  : Enumeration 
+	public interface Incentive  : Object, AgreementTerm 
 	{
 	}
-	public interface EmailTemplate  : UserInterfaceable 
-	{
-					global::System.String Description {set;}
-
-					global::System.String BodyTemplate {set;}
-
-					global::System.String SubjectTemplate {set;}
-
-	}
-	public interface Threshold  : AgreementTerm 
-	{
-	}
-	public interface EmploymentApplicationStatus  : Enumeration 
-	{
-	}
-	public interface Qualification  : Enumeration, Searchable 
-	{
-	}
-	public interface InternalOrganisation  : Party 
+	public interface InternalOrganisation  : Object, Party 
 	{
 					global::System.String PurchaseOrderNumberPrefix {set;}
 
@@ -4275,95 +2481,99 @@ namespace Allors.Domain
 					global::System.String IncomingShipmentNumberPrefix {set;}
 
 	}
-	public interface OwnBankAccount  : PaymentMethod, FinancialAccount 
+	public interface InternalOrganisationAccountingPreference  : Object, AccessControlledObject, UserInterfaceable, Searchable 
 	{
-					BankAccount BankAccount {set;}
+					GeneralLedgerAccount GeneralLedgerAccount {set;}
+
+					InventoryItemKind InventoryItemKind {set;}
+
+					PaymentMethod PaymentMethod {set;}
+
+					Receipt Receipt {set;}
+
+					InternalOrganisation InternalOrganisation {set;}
 
 	}
-	public interface PartyContactMechanism  : Commentable, UserInterfaceable 
+	public interface InternalOrganisationRevenue  : Object, UserInterfaceable, Deletable 
 	{
-					ContactMechanismPurpose ContactPurpose {set;}
+					global::System.Int32 Month {set;}
 
-					ContactMechanism ContactMechanism {set;}
+					global::System.Int32 Year {set;}
 
-					global::System.Boolean UseAsDefault {set;}
+					global::System.Decimal Revenue {set;}
 
-					global::System.Boolean? NonSolicitationIndicator {set;}
+					Currency Currency {set;}
+
+					global::System.String PartyName {set;}
+
+					InternalOrganisation InternalOrganisation {set;}
 
 	}
-	public interface PartyRelationshipPriority  : Enumeration 
+	public interface InternalOrganisationRevenueHistory  : Object, UserInterfaceable 
 	{
-	}
-	public interface CostCenterSplitMethod  : Enumeration 
-	{
-	}
-	public interface EstimatedMaterialCost  : EstimatedProductCost 
-	{
-	}
-	public interface QuoteTerm  : Searchable, UserInterfaceable 
-	{
-					global::System.String TermValue {set;}
+					InternalOrganisation InternalOrganisation {set;}
 
-					TermType TermType {set;}
+					global::System.Decimal? AllorsDecimal {set;}
+
+					Currency Currency {set;}
+
+					global::System.Decimal? Revenue {set;}
 
 	}
-	public interface Transfer  : Shipment 
-	{
-					TransferObjectState PreviousObjectState {set;}
-
-					TransferObjectState CurrentObjectState {set;}
-
-					TransferStatus CurrentShipmentStatus {set;}
-
-					TransferStatus ShipmentStatuses {set;}
-
-	}
-	public interface RevenueQuantityBreak  : UserInterfaceable 
-	{
-					global::System.Decimal? Through {set;}
-
-					global::System.Decimal? From {set;}
-
-	}
-	public interface GeneralLedgerAccountType  : UserInterfaceable, AccessControlledObject 
-	{
-					global::System.String Description {set;}
-
-	}
-	public interface SerializedInventoryItemObjectState  : ObjectState 
+	public interface InternalRequirement  : Object, Requirement 
 	{
 	}
-	public interface FaceToFaceCommunication  : CommunicationEvent 
-	{
-					PostalAddress Location {set;}
-
-					Person Participants {set;}
-
-	}
-	public interface BudgetReview  : Searchable, Commentable, UserInterfaceable 
-	{
-					global::System.DateTime ReviewDate {set;}
-
-					global::System.String Description {set;}
-
-	}
-	public interface EngineeringChangeStatus  : UserInterfaceable 
-	{
-					global::System.DateTime StartDateTime {set;}
-
-					EngineeringChangeObjectState EngineeringChangeObjectState {set;}
-
-	}
-	public interface ProductQuality  : ProductFeature, Enumeration 
+	public interface InventoryItemKind  : Object, Enumeration 
 	{
 	}
-	public interface Disbursement  : Payment 
+	public interface InventoryItemVariance  : Object, Searchable, UserInterfaceable, Commentable 
+	{
+					global::System.Int32 Quantity {set;}
+
+					ItemVarianceAccountingTransaction ItemVarianceAccountingTransaction {set;}
+
+					global::System.DateTime? InventoryDate {set;}
+
+					VarianceReason Reason {set;}
+
+	}
+	public interface InvestmentAccount  : Object, FinancialAccount 
+	{
+					global::System.String Name {set;}
+
+	}
+	public interface InvoiceSequence  : Object, Enumeration 
 	{
 	}
-	public interface Research  : WorkEffort 
+	public interface InvoiceTerm  : Object, UserInterfaceable, AgreementTerm 
 	{
 	}
-	public interface Journal  : Searchable, UserInterfaceable, AccessControlledObject 
+	public interface InvoiceVatRateItem  : Object, UserInterfaceable 
+	{
+					global::System.Decimal? BaseAmount {set;}
+
+					VatRate VatRates {set;}
+
+					global::System.Decimal? VatAmount {set;}
+
+	}
+	public interface ItemIssuance  : Object, Deletable, UserInterfaceable 
+	{
+					global::System.DateTime? IssuanceDateTime {set;}
+
+					InventoryItem InventoryItem {set;}
+
+					global::System.Decimal Quantity {set;}
+
+					ShipmentItem ShipmentItem {set;}
+
+					PickListItem PickListItem {set;}
+
+	}
+	public interface ItemVarianceAccountingTransaction  : Object, AccountingTransaction 
+	{
+	}
+	public interface Journal  : Object, Searchable, UserInterfaceable, AccessControlledObject 
 	{
 					global::System.Boolean UseAsDefault {set;}
 
@@ -4388,36 +2598,118 @@ namespace Allors.Domain
 					global::System.Boolean CloseWhenInBalance {set;}
 
 	}
-	public interface ShipmentItem  : Deletable, UserInterfaceable 
+	public interface JournalEntry  : Object, UserInterfaceable, Transitional, AccessControlledObject, Searchable 
 	{
-					global::System.Decimal Quantity {set;}
+					global::System.String Description {set;}
 
-					Part Part {set;}
+					global::System.Int32? EntryNumber {set;}
 
-					global::System.String ContentsDescription {set;}
+					global::System.DateTime? EntryDate {set;}
 
-					Document Documents {set;}
+					global::System.DateTime? JournalDate {set;}
 
-					global::System.Decimal QuantityShipped {set;}
-
-					ShipmentItem InResponseToShipmentItems {set;}
-
-					InventoryItem InventoryItems {set;}
-
-					ProductFeature ProductFeatures {set;}
-
-					InvoiceItem InvoiceItems {set;}
-
-					Good Good {set;}
+					JournalEntryDetail JournalEntryDetails {set;}
 
 	}
-	public interface EmploymentAgreement  : Agreement 
+	public interface JournalEntryDetail  : Object, AccessControlledObject, UserInterfaceable 
+	{
+					OrganisationGlAccount GeneralLedgerAccount {set;}
+
+					global::System.Decimal? Amount {set;}
+
+					global::System.Boolean? Debit {set;}
+
+	}
+	public interface JournalEntryNumber  : Object, UserInterfaceable, AccessControlledObject 
+	{
+					JournalType JournalType {set;}
+
+					global::System.Int32? Number {set;}
+
+					global::System.Int32? Year {set;}
+
+	}
+	public interface JournalType  : Object, Enumeration 
 	{
 	}
-	public interface ManufacturerSuggestedRetailPrice  : PriceComponent 
+	public interface LegalForm  : Object, UserInterfaceable, Searchable 
+	{
+					global::System.String Description {set;}
+
+	}
+	public interface LegalTerm  : Object, AgreementTerm 
 	{
 	}
-	public interface NewsItem  : Searchable, SearchResult, UserInterfaceable 
+	public interface LetterCorrespondence  : Object, CommunicationEvent 
+	{
+					PostalAddress PostalAddresses {set;}
+
+					Party Originator {set;}
+
+					Party Receivers {set;}
+
+	}
+	public interface Lot  : Object, Searchable, UserInterfaceable 
+	{
+					global::System.DateTime? ExpirationDate {set;}
+
+					global::System.Int32? Quantity {set;}
+
+					global::System.String LotNumber {set;}
+
+	}
+	public interface Maintenance  : Object, WorkEffort 
+	{
+	}
+	public interface Manifest  : Object, Document 
+	{
+	}
+	public interface ManufacturerSuggestedRetailPrice  : Object, PriceComponent 
+	{
+	}
+	public interface ManufacturingBom  : Object, PartBillOfMaterial 
+	{
+	}
+	public interface ManufacturingConfiguration  : Object, InventoryItemConfiguration 
+	{
+	}
+	public interface MaritalStatus  : Object, Enumeration 
+	{
+	}
+	public interface MarketingMaterial  : Object, Document 
+	{
+	}
+	public interface MarketingPackage  : Object, ProductAssociation 
+	{
+					global::System.String Instruction {set;}
+
+					Product ProductsUsedIn {set;}
+
+					Product Product {set;}
+
+					global::System.String Description {set;}
+
+					global::System.Int32? QuantityUsed {set;}
+
+	}
+	public interface MaterialsUsage  : Object, ServiceEntry 
+	{
+					global::System.Decimal Amount {set;}
+
+	}
+	public interface Model  : Object, ProductFeature, Enumeration 
+	{
+	}
+	public interface NeededSkill  : Object, UserInterfaceable 
+	{
+					SkillLevel SkillLevel {set;}
+
+					global::System.Decimal? YearsExperience {set;}
+
+					Skill Skill {set;}
+
+	}
+	public interface NewsItem  : Object, Searchable, SearchResult, UserInterfaceable 
 	{
 					global::System.Boolean? IsPublished {set;}
 
@@ -4436,7 +2728,303 @@ namespace Allors.Domain
 					global::System.Boolean? Announcement {set;}
 
 	}
-	public interface PartyBenefit  : UserInterfaceable 
+	public interface NonSerializedInventoryItem  : Object, InventoryItem 
+	{
+					NonSerializedInventoryItemObjectState CurrentObjectState {set;}
+
+					global::System.Decimal QuantityCommittedOut {set;}
+
+					NonSerializedInventoryItemStatus NonSerializedInventoryItemStatuses {set;}
+
+					NonSerializedInventoryItemObjectState PreviousObjectState {set;}
+
+					NonSerializedInventoryItemStatus CurrentInventoryItemStatus {set;}
+
+					global::System.Decimal QuantityOnHand {set;}
+
+					global::System.Decimal PreviousQuantityOnHand {set;}
+
+					global::System.Decimal AvailableToPromise {set;}
+
+					global::System.Decimal QuantityExpectedIn {set;}
+
+	}
+	public interface NonSerializedInventoryItemObjectState  : Object, ObjectState 
+	{
+	}
+	public interface NonSerializedInventoryItemStatus  : Object, UserInterfaceable 
+	{
+					global::System.DateTime StartDateTime {set;}
+
+					NonSerializedInventoryItemObjectState NonSerializedInventoryItemObjectState {set;}
+
+	}
+	public interface Note  : Object, ExternalAccountingTransaction 
+	{
+	}
+	public interface Obligation  : Object, ExternalAccountingTransaction 
+	{
+	}
+	public interface Office  : Object, Facility 
+	{
+	}
+	public interface OneTimeCharge  : Object, PriceComponent 
+	{
+	}
+	public interface OperatingBudget  : Object, Budget 
+	{
+	}
+	public interface OperatingCondition  : Object, PartSpecification 
+	{
+	}
+	public interface OrderItemBilling  : Object 
+	{
+					OrderItem OrderItem {set;}
+
+					SalesInvoiceItem SalesInvoiceItem {set;}
+
+					global::System.Decimal Amount {set;}
+
+					global::System.Decimal? Quantity {set;}
+
+	}
+	public interface OrderKind  : Object, Searchable, UserInterfaceable, UniquelyIdentifiable, AccessControlledObject 
+	{
+					global::System.String Description {set;}
+
+					global::System.Boolean ScheduleManually {set;}
+
+	}
+	public interface OrderQuantityBreak  : Object, UserInterfaceable 
+	{
+					global::System.Decimal? ThroughAmount {set;}
+
+					global::System.Decimal? FromAmount {set;}
+
+	}
+	public interface OrderRequirementCommitment  : Object, UserInterfaceable 
+	{
+					global::System.Int32 Quantity {set;}
+
+					OrderItem OrderItem {set;}
+
+					Requirement Requirement {set;}
+
+	}
+	public interface OrderShipment  : Object, Deletable 
+	{
+					SalesOrderItem SalesOrderItem {set;}
+
+					global::System.Boolean Picked {set;}
+
+					ShipmentItem ShipmentItem {set;}
+
+					global::System.Decimal Quantity {set;}
+
+					PurchaseOrderItem PurchaseOrderItem {set;}
+
+	}
+	public interface OrderTerm  : Object, UserInterfaceable, Searchable 
+	{
+					global::System.String TermValue {set;}
+
+					TermType TermType {set;}
+
+	}
+	public interface OrderValue  : Object, UserInterfaceable 
+	{
+					global::System.Decimal? ThroughAmount {set;}
+
+					global::System.Decimal? FromAmount {set;}
+
+	}
+	public interface Ordinal  : Object, Enumeration 
+	{
+	}
+	public interface Organisation  : Object, Party 
+	{
+					LegalForm LegalForm {set;}
+
+					global::System.String Name {set;}
+
+					UserGroup CustomerContactUserGroup {set;}
+
+					Person CurrentContacts {set;}
+
+					Media LogoImage {set;}
+
+					UserGroup PartnerContactUserGroup {set;}
+
+					global::System.String TaxNumber {set;}
+
+					UserGroup SupplierContactUserGroup {set;}
+
+	}
+	public interface OrganisationContactKind  : Object, UserInterfaceable, UniquelyIdentifiable 
+	{
+					global::System.String Description {set;}
+
+	}
+	public interface OrganisationContactRelationship  : Object, PartyRelationship 
+	{
+					Person Contact {set;}
+
+					Organisation Organisation {set;}
+
+					OrganisationContactKind ContactKind {set;}
+
+	}
+	public interface OrganisationGlAccount  : Object, UserInterfaceable, Period 
+	{
+					Product Product {set;}
+
+					OrganisationGlAccount Parent {set;}
+
+					Party Party {set;}
+
+					global::System.Boolean HasBankStatementTransactions {set;}
+
+					ProductCategory ProductCategory {set;}
+
+					InternalOrganisation InternalOrganisation {set;}
+
+					GeneralLedgerAccount GeneralLedgerAccount {set;}
+
+	}
+	public interface OrganisationGlAccountBalance  : Object, UserInterfaceable 
+	{
+					OrganisationGlAccount OrganisationGlAccount {set;}
+
+					global::System.Decimal Amount {set;}
+
+					AccountingPeriod AccountingPeriod {set;}
+
+	}
+	public interface OrganisationRollUp  : Object, PartyRelationship 
+	{
+					Organisation Parent {set;}
+
+					OrganisationUnit RollupKind {set;}
+
+					Organisation Child {set;}
+
+	}
+	public interface OrganisationUnit  : Object, Enumeration 
+	{
+	}
+	public interface OwnBankAccount  : Object, PaymentMethod, FinancialAccount 
+	{
+					BankAccount BankAccount {set;}
+
+	}
+	public interface OwnCreditCard  : Object, PaymentMethod, FinancialAccount 
+	{
+					Person Owner {set;}
+
+					CreditCard CreditCard {set;}
+
+	}
+	public interface Package  : Object, UniquelyIdentifiable, UserInterfaceable, Searchable 
+	{
+					global::System.String Name {set;}
+
+	}
+	public interface PackageQuantityBreak  : Object, UserInterfaceable 
+	{
+					global::System.Int32? From {set;}
+
+					global::System.Int32? Through {set;}
+
+	}
+	public interface PackageRevenue  : Object, Deletable, UserInterfaceable 
+	{
+					global::System.Decimal Revenue {set;}
+
+					global::System.Int32 Year {set;}
+
+					global::System.Int32 Month {set;}
+
+					Currency Currency {set;}
+
+					global::System.String PackageName {set;}
+
+					InternalOrganisation InternalOrganisation {set;}
+
+					Package Package {set;}
+
+	}
+	public interface PackageRevenueHistory  : Object, UserInterfaceable 
+	{
+					InternalOrganisation InternalOrganisation {set;}
+
+					global::System.Decimal? Revenue {set;}
+
+					Package Package {set;}
+
+					Currency Currency {set;}
+
+	}
+	public interface PackagingContent  : Object, UserInterfaceable 
+	{
+					ShipmentItem ShipmentItem {set;}
+
+					global::System.Decimal Quantity {set;}
+
+	}
+	public interface PackagingSlip  : Object, Document 
+	{
+	}
+	public interface PartBillOfMaterialSubstitute  : Object, Period, UserInterfaceable, Commentable 
+	{
+					PartBillOfMaterial SubstitutionPartBillOfMaterial {set;}
+
+					Ordinal Preference {set;}
+
+					global::System.Int32? Quantity {set;}
+
+					PartBillOfMaterial PartBillOfMaterial {set;}
+
+	}
+	public interface Partnership  : Object, PartyRelationship 
+	{
+					InternalOrganisation InternalOrganisation {set;}
+
+					Organisation Partner {set;}
+
+	}
+	public interface PartRevision  : Object, Period, UserInterfaceable 
+	{
+					global::System.String Reason {set;}
+
+					Part SupersededByPart {set;}
+
+					Part Part {set;}
+
+	}
+	public interface PartSpecificationObjectState  : Object, ObjectState 
+	{
+	}
+	public interface PartSpecificationStatus  : Object, UserInterfaceable 
+	{
+					global::System.DateTime StartDateTime {set;}
+
+					PartSpecificationObjectState PartSpecificationObjectState {set;}
+
+	}
+	public interface PartSubstitute  : Object, Commentable, UserInterfaceable 
+	{
+					Part SubstitutionPart {set;}
+
+					Ordinal Preference {set;}
+
+					global::System.DateTime? FromDate {set;}
+
+					global::System.Int32 Quantity {set;}
+
+					Part Part {set;}
+
+	}
+	public interface PartyBenefit  : Object, UserInterfaceable 
 	{
 					TimeFrequency TimeFrequency {set;}
 
@@ -4451,7 +3039,429 @@ namespace Allors.Domain
 					Employment Employment {set;}
 
 	}
-	public interface PostalAddress  : ContactMechanism, AccessControlledObject, GeoLocatable 
+	public interface PartyClassification  : Object, UserInterfaceable, Searchable 
+	{
+					global::System.String Description {set;}
+
+	}
+	public interface PartyContactMechanism  : Object, Commentable, UserInterfaceable 
+	{
+					ContactMechanismPurpose ContactPurpose {set;}
+
+					ContactMechanism ContactMechanism {set;}
+
+					global::System.Boolean UseAsDefault {set;}
+
+					global::System.Boolean? NonSolicitationIndicator {set;}
+
+	}
+	public interface PartyFixedAssetAssignment  : Object, UserInterfaceable, Period, Commentable 
+	{
+					FixedAsset FixedAsset {set;}
+
+					Party Party {set;}
+
+					AssetAssignmentStatus AssetAssignmentStatus {set;}
+
+					global::System.Decimal? AllocatedCost {set;}
+
+	}
+	public interface PartyPackageRevenue  : Object, UserInterfaceable, Deletable 
+	{
+					global::System.Int32 Month {set;}
+
+					Package Package {set;}
+
+					Party Party {set;}
+
+					global::System.Decimal Revenue {set;}
+
+					global::System.Int32 Year {set;}
+
+					global::System.String PartyPackageName {set;}
+
+					Currency Currency {set;}
+
+					InternalOrganisation InternalOrganisation {set;}
+
+	}
+	public interface PartyPackageRevenueHistory  : Object, UserInterfaceable 
+	{
+					Package Package {set;}
+
+					InternalOrganisation InternalOrganisation {set;}
+
+					Currency Currency {set;}
+
+					Party Party {set;}
+
+					global::System.Decimal? Revenue {set;}
+
+	}
+	public interface PartyProductCategoryRevenue  : Object, UserInterfaceable, Deletable 
+	{
+					Party Party {set;}
+
+					global::System.Decimal Revenue {set;}
+
+					global::System.Int32 Month {set;}
+
+					Currency Currency {set;}
+
+					global::System.Int32 Year {set;}
+
+					global::System.String PartyProductCategoryName {set;}
+
+					InternalOrganisation InternalOrganisation {set;}
+
+					ProductCategory ProductCategory {set;}
+
+					global::System.Decimal Quantity {set;}
+
+	}
+	public interface PartyProductCategoryRevenueHistory  : Object, UserInterfaceable 
+	{
+					ProductCategory ProductCategory {set;}
+
+					Party Party {set;}
+
+					global::System.Decimal Quantity {set;}
+
+					global::System.Decimal Revenue {set;}
+
+					InternalOrganisation InternalOrganisation {set;}
+
+					Currency Currency {set;}
+
+	}
+	public interface PartyProductRevenue  : Object, Deletable, UserInterfaceable 
+	{
+					global::System.Decimal Revenue {set;}
+
+					global::System.Int32 Month {set;}
+
+					global::System.Int32 Year {set;}
+
+					global::System.String PartyProductName {set;}
+
+					global::System.Decimal Quantity {set;}
+
+					Currency Currency {set;}
+
+					Party Party {set;}
+
+					InternalOrganisation InternalOrganisation {set;}
+
+					Product Product {set;}
+
+	}
+	public interface PartyProductRevenueHistory  : Object, UserInterfaceable 
+	{
+					global::System.Decimal? Revenue {set;}
+
+					Party Party {set;}
+
+					Product Product {set;}
+
+					global::System.Decimal? Quantity {set;}
+
+					InternalOrganisation InternalOrganisation {set;}
+
+					Currency Currency {set;}
+
+	}
+	public interface PartyRelationshipPriority  : Object, Enumeration 
+	{
+	}
+	public interface PartyRelationshipStatus  : Object, Enumeration 
+	{
+	}
+	public interface PartyRevenue  : Object, UserInterfaceable, Deletable 
+	{
+					Currency Currency {set;}
+
+					global::System.String PartyName {set;}
+
+					global::System.Int32 Month {set;}
+
+					Party Party {set;}
+
+					InternalOrganisation InternalOrganisation {set;}
+
+					global::System.Int32 Year {set;}
+
+					global::System.Decimal Revenue {set;}
+
+	}
+	public interface PartyRevenueHistory  : Object, UserInterfaceable 
+	{
+					Currency Currency {set;}
+
+					global::System.Decimal Revenue {set;}
+
+					Party Party {set;}
+
+					InternalOrganisation InternalOrganisation {set;}
+
+	}
+	public interface PartySkill  : Object, UserInterfaceable 
+	{
+					global::System.Decimal? YearsExperience {set;}
+
+					global::System.DateTime? StartedUsingDate {set;}
+
+					SkillRating SkillRating {set;}
+
+					SkillLevel SkillLevel {set;}
+
+					Skill Skill {set;}
+
+	}
+	public interface Passport  : Object, UserInterfaceable, Searchable 
+	{
+					global::System.DateTime? IssueDate {set;}
+
+					global::System.DateTime? ExpiriationDate {set;}
+
+					global::System.String Number {set;}
+
+	}
+	public interface PayCheck  : Object, Payment 
+	{
+					Deduction Deductions {set;}
+
+					Employment Employment {set;}
+
+	}
+	public interface PayGrade  : Object, UserInterfaceable, Commentable 
+	{
+					global::System.String Name {set;}
+
+					SalaryStep SalarySteps {set;}
+
+	}
+	public interface PayHistory  : Object, UserInterfaceable, Period 
+	{
+					Employment Employment {set;}
+
+					TimeFrequency TimeFrequency {set;}
+
+					SalaryStep SalaryStep {set;}
+
+					global::System.Decimal? Amount {set;}
+
+	}
+	public interface PaymentApplication  : Object, UserInterfaceable 
+	{
+					global::System.Decimal AmountApplied {set;}
+
+					InvoiceItem InvoiceItem {set;}
+
+					Invoice Invoice {set;}
+
+					BillingAccount BillingAccount {set;}
+
+	}
+	public interface PaymentBudgetAllocation  : Object, UserInterfaceable 
+	{
+					Payment Payment {set;}
+
+					BudgetItem BudgetItem {set;}
+
+					global::System.Decimal Amount {set;}
+
+	}
+	public interface PayrollPreference  : Object, UserInterfaceable 
+	{
+					global::System.Decimal? Percentage {set;}
+
+					global::System.String AccountNumber {set;}
+
+					PaymentMethod PaymentMethod {set;}
+
+					TimeFrequency TimeFrequency {set;}
+
+					DeductionType DeductionType {set;}
+
+					global::System.Decimal? Amount {set;}
+
+	}
+	public interface PerformanceNote  : Object, Searchable, UserInterfaceable, Commentable, SearchResult 
+	{
+					global::System.String Description {set;}
+
+					global::System.DateTime? CommunicationDate {set;}
+
+					Person GivenByManager {set;}
+
+					Person Employee {set;}
+
+	}
+	public interface PerformanceReview  : Object, Searchable, UserInterfaceable, Commentable, SearchResult, Period 
+	{
+					Person Manager {set;}
+
+					PayHistory PayHistory {set;}
+
+					PayCheck BonusPayCheck {set;}
+
+					PerformanceReviewItem PerformanceReviewItems {set;}
+
+					Person Employee {set;}
+
+					Position ResultingPosition {set;}
+
+	}
+	public interface PerformanceReviewItem  : Object, Commentable, UserInterfaceable 
+	{
+					RatingType RatingType {set;}
+
+					PerformanceReviewItemType PerformanceReviewItemType {set;}
+
+	}
+	public interface PerformanceReviewItemType  : Object, Enumeration 
+	{
+	}
+	public interface PerformanceSpecification  : Object, PartSpecification 
+	{
+	}
+	public interface PersonalTitle  : Object, Enumeration 
+	{
+	}
+	public interface PersonTraining  : Object, Period, UserInterfaceable 
+	{
+					Training Training {set;}
+
+	}
+	public interface Phase  : Object, WorkEffort 
+	{
+	}
+	public interface PhoneCommunication  : Object, CommunicationEvent 
+	{
+					Person Receivers {set;}
+
+					Person Caller {set;}
+
+	}
+	public interface PickList  : Object, UserInterfaceable, SearchResult, Printable, Transitional, Searchable, UniquelyIdentifiable 
+	{
+					CustomerShipment CustomerShipmentCorrection {set;}
+
+					global::System.DateTime CreationDate {set;}
+
+					PickListItem PickListItems {set;}
+
+					PickListObjectState CurrentObjectState {set;}
+
+					PickListStatus CurrentPickListStatus {set;}
+
+					Person Picker {set;}
+
+					PickListStatus PickListStatuses {set;}
+
+					PickListObjectState PreviousObjectState {set;}
+
+					Party ShipToParty {set;}
+
+					Store Store {set;}
+
+	}
+	public interface PickListItem  : Object, UserInterfaceable, Deletable 
+	{
+					global::System.Decimal RequestedQuantity {set;}
+
+					InventoryItem InventoryItem {set;}
+
+					global::System.Decimal? ActualQuantity {set;}
+
+	}
+	public interface PickListObjectState  : Object, ObjectState 
+	{
+	}
+	public interface PickListStatus  : Object, UserInterfaceable, AccessControlledObject 
+	{
+					PickListObjectState PickListObjectState {set;}
+
+					global::System.DateTime StartDateTime {set;}
+
+	}
+	public interface Plant  : Object, Facility 
+	{
+	}
+	public interface Position  : Object, UserInterfaceable, SearchResult, Searchable 
+	{
+					Organisation Organisation {set;}
+
+					global::System.Boolean? Temporary {set;}
+
+					global::System.DateTime? EstimatedThroughDate {set;}
+
+					global::System.DateTime? EstimatedFromDate {set;}
+
+					PositionType PositionType {set;}
+
+					global::System.Boolean? Fulltime {set;}
+
+					global::System.Boolean? Salary {set;}
+
+					PositionStatus PositionStatus {set;}
+
+					BudgetItem ApprovedBudgetItem {set;}
+
+					global::System.DateTime ActualFromDate {set;}
+
+					global::System.DateTime? ActualThroughDate {set;}
+
+	}
+	public interface PositionFulfillment  : Object, Commentable, Period, UserInterfaceable 
+	{
+					Position Position {set;}
+
+					Person Person {set;}
+
+	}
+	public interface PositionReportingStructure  : Object, UserInterfaceable, Commentable 
+	{
+					global::System.Boolean? Primary {set;}
+
+					Position ManagedByPosition {set;}
+
+					Position Position {set;}
+
+	}
+	public interface PositionResponsibility  : Object, Commentable, UserInterfaceable 
+	{
+					Position Position {set;}
+
+					Responsibility Responsibility {set;}
+
+	}
+	public interface PositionStatus  : Object, Enumeration 
+	{
+	}
+	public interface PositionType  : Object, Searchable, UserInterfaceable 
+	{
+					global::System.String Description {set;}
+
+					Responsibility Responsibilities {set;}
+
+					global::System.Decimal? BenefitPercentage {set;}
+
+					global::System.String Title {set;}
+
+					PositionTypeRate PositionTypeRate {set;}
+
+	}
+	public interface PositionTypeRate  : Object, AccessControlledObject, UserInterfaceable 
+	{
+					global::System.Decimal Rate {set;}
+
+					RateType RateType {set;}
+
+					TimeFrequency TimeFrequency {set;}
+
+	}
+	public interface PostalAddress  : Object, ContactMechanism, AccessControlledObject, GeoLocatable 
 	{
 					GeographicBoundary GeographicBoundaries {set;}
 
@@ -4474,24 +3484,1214 @@ namespace Allors.Domain
 					global::System.String FormattedFullAddress {set;}
 
 	}
-	public interface PackageQuantityBreak  : UserInterfaceable 
+	public interface PostalBoundary  : Object, UserInterfaceable 
 	{
-					global::System.Int32? From {set;}
+					global::System.String PostalCode {set;}
 
-					global::System.Int32? Through {set;}
+					global::System.String Locality {set;}
+
+					Country Country {set;}
+
+					global::System.String Region {set;}
 
 	}
-	public interface SubContractorRelationship  : PartyRelationship 
+	public interface PostalCode  : Object, UserInterfaceable, GeographicBoundary 
 	{
-					Party Contractor {set;}
-
-					Party SubContractor {set;}
+					global::System.String Code {set;}
 
 	}
-	public interface ClientAgreement  : Agreement 
+	public interface ProductCategory  : Object, UserInterfaceable, Searchable, SearchResult, UniquelyIdentifiable 
+	{
+					Package Package {set;}
+
+					global::System.String Code {set;}
+
+					Media NoImageAvailableImage {set;}
+
+					ProductCategory Parents {set;}
+
+					ProductCategory Children {set;}
+
+					global::System.String Description {set;}
+
+					global::System.String Name {set;}
+
+					Media CategoryImage {set;}
+
+					ProductCategory Ancestors {set;}
+
+	}
+	public interface ProductCategoryRevenue  : Object, Deletable, UserInterfaceable 
+	{
+					global::System.String ProductCategoryName {set;}
+
+					global::System.Int32 Month {set;}
+
+					InternalOrganisation InternalOrganisation {set;}
+
+					ProductCategory ProductCategory {set;}
+
+					global::System.Decimal Revenue {set;}
+
+					Currency Currency {set;}
+
+					global::System.Int32 Year {set;}
+
+	}
+	public interface ProductCategoryRevenueHistory  : Object, UserInterfaceable 
+	{
+					Currency Currency {set;}
+
+					global::System.Decimal? Revenue {set;}
+
+					InternalOrganisation InternalOrganisation {set;}
+
+					ProductCategory ProductCategory {set;}
+
+	}
+	public interface ProductConfiguration  : Object, ProductAssociation 
+	{
+					Product ProductsUsedIn {set;}
+
+					Product Product {set;}
+
+					global::System.Decimal? QuantityUsed {set;}
+
+					global::System.String Description {set;}
+
+	}
+	public interface ProductDeliverySkillRequirement  : Object, UserInterfaceable 
+	{
+					global::System.DateTime? StartedUsingDate {set;}
+
+					Service Service {set;}
+
+					Skill Skill {set;}
+
+	}
+	public interface ProductDrawing  : Object, Document 
 	{
 	}
-	public interface Store  : UniquelyIdentifiable, UserInterfaceable 
+	public interface ProductFeatureApplicabilityRelationship  : Object, UserInterfaceable 
+	{
+					Product AvailableFor {set;}
+
+					ProductFeature UsedToDefine {set;}
+
+	}
+	public interface ProductionRun  : Object, WorkEffort 
+	{
+					global::System.Int32? QuantityProduced {set;}
+
+					global::System.Int32? QuantityRejected {set;}
+
+					global::System.Int32? QuantityToProduce {set;}
+
+	}
+	public interface ProductModel  : Object, Document 
+	{
+	}
+	public interface ProductPurchasePrice  : Object, AccessControlledObject, Period, UserInterfaceable 
+	{
+					global::System.Decimal Price {set;}
+
+					UnitOfMeasure UnitOfMeasure {set;}
+
+					Currency Currency {set;}
+
+	}
+	public interface ProductQuality  : Object, ProductFeature, Enumeration 
+	{
+	}
+	public interface ProductQuote  : Object, Quote 
+	{
+	}
+	public interface ProductRequirement  : Object, Requirement 
+	{
+					Product Product {set;}
+
+					DesiredProductFeature DesiredProductFeatures {set;}
+
+	}
+	public interface ProductRevenue  : Object, Deletable, UserInterfaceable 
+	{
+					global::System.Decimal Revenue {set;}
+
+					global::System.String ProductName {set;}
+
+					Currency Currency {set;}
+
+					global::System.Int32 Year {set;}
+
+					Product Product {set;}
+
+					global::System.Int32 Month {set;}
+
+					InternalOrganisation InternalOrganisation {set;}
+
+	}
+	public interface ProductRevenueHistory  : Object, UserInterfaceable 
+	{
+					InternalOrganisation InternalOrganisation {set;}
+
+					global::System.Decimal? Revenue {set;}
+
+					Currency Currency {set;}
+
+					Product Product {set;}
+
+	}
+	public interface ProfessionalAssignment  : Object, UserInterfaceable, Period 
+	{
+					Person Professional {set;}
+
+					EngagementItem EngagementItem {set;}
+
+	}
+	public interface ProfessionalPlacement  : Object, EngagementItem 
+	{
+	}
+	public interface ProfessionalServicesRelationship  : Object, PartyRelationship 
+	{
+					Person Professional {set;}
+
+					Organisation ProfessionalServicesProvider {set;}
+
+	}
+	public interface Program  : Object, WorkEffort 
+	{
+	}
+	public interface Project  : Object, WorkEffort 
+	{
+	}
+	public interface ProjectRequirement  : Object, Requirement 
+	{
+					Deliverable NeededDeliverables {set;}
+
+	}
+	public interface Property  : Object, FixedAsset 
+	{
+	}
+	public interface Proposal  : Object, Quote 
+	{
+	}
+	public interface Province  : Object, CityBound, GeographicBoundary, CountryBound, UserInterfaceable 
+	{
+					global::System.String Name {set;}
+
+	}
+	public interface PurchaseAgreement  : Object, Agreement 
+	{
+	}
+	public interface PurchaseInvoice  : Object, Invoice 
+	{
+					PurchaseInvoiceObjectState PreviousObjectState {set;}
+
+					PurchaseInvoiceItem PurchaseInvoiceItems {set;}
+
+					InternalOrganisation BilledToInternalOrganisation {set;}
+
+					PurchaseInvoiceStatus CurrentInvoiceStatus {set;}
+
+					PurchaseInvoiceObjectState CurrentObjectState {set;}
+
+					Party BilledFromParty {set;}
+
+					PurchaseInvoiceType PurchaseInvoiceType {set;}
+
+					PurchaseInvoiceStatus InvoiceStatuses {set;}
+
+	}
+	public interface PurchaseInvoiceItem  : Object, InvoiceItem 
+	{
+					PurchaseInvoiceItemObjectState PreviousObjectState {set;}
+
+					PurchaseInvoiceItemType PurchaseInvoiceItemType {set;}
+
+					Part Part {set;}
+
+					PurchaseInvoiceItemStatus CurrentInvoiceItemStatus {set;}
+
+					PurchaseInvoiceItemStatus InvoiceItemStatuses {set;}
+
+					PurchaseInvoiceItemObjectState CurrentObjectState {set;}
+
+	}
+	public interface PurchaseInvoiceItemObjectState  : Object, ObjectState 
+	{
+	}
+	public interface PurchaseInvoiceItemStatus  : Object, UserInterfaceable 
+	{
+					PurchaseInvoiceItemObjectState PurchaseInvoiceItemObjectState {set;}
+
+					global::System.DateTime StartDateTime {set;}
+
+	}
+	public interface PurchaseInvoiceItemType  : Object, Enumeration 
+	{
+	}
+	public interface PurchaseInvoiceObjectState  : Object, ObjectState 
+	{
+	}
+	public interface PurchaseInvoiceStatus  : Object, UserInterfaceable 
+	{
+					global::System.DateTime? StartDateTime {set;}
+
+					PurchaseInvoiceObjectState PurchaseInvoiceObjectState {set;}
+
+	}
+	public interface PurchaseInvoiceType  : Object, Enumeration 
+	{
+	}
+	public interface PurchaseOrder  : Object, Order 
+	{
+					PurchaseOrderItem PurchaseOrderItems {set;}
+
+					Party PreviousTakenViaSupplier {set;}
+
+					PurchaseOrderStatus PaymentStatuses {set;}
+
+					PurchaseOrderStatus CurrentPaymentStatus {set;}
+
+					Party TakenViaSupplier {set;}
+
+					PurchaseOrderObjectState CurrentObjectState {set;}
+
+					PurchaseOrderStatus CurrentShipmentStatus {set;}
+
+					ContactMechanism TakenViaContactMechanism {set;}
+
+					PurchaseOrderStatus OrderStatuses {set;}
+
+					ContactMechanism BillToContactMechanism {set;}
+
+					PurchaseOrderStatus ShipmentStatuses {set;}
+
+					InternalOrganisation ShipToBuyer {set;}
+
+					PurchaseOrderStatus CurrentOrderStatus {set;}
+
+					Facility Facility {set;}
+
+					PostalAddress ShipToAddress {set;}
+
+					PurchaseOrderObjectState PreviousObjectState {set;}
+
+					InternalOrganisation BillToPurchaser {set;}
+
+	}
+	public interface PurchaseOrderItem  : Object, OrderItem 
+	{
+					PurchaseOrderItemStatus OrderItemStatuses {set;}
+
+					PurchaseOrderItemObjectState CurrentObjectState {set;}
+
+					PurchaseOrderItemStatus ShipmentStatuses {set;}
+
+					PurchaseOrderItemStatus PaymentStatuses {set;}
+
+					global::System.Decimal QuantityReceived {set;}
+
+					PurchaseOrderItemStatus CurrentShipmentStatus {set;}
+
+					Product Product {set;}
+
+					PurchaseOrderItemStatus CurrentOrderItemStatus {set;}
+
+					PurchaseOrderItemStatus CurrentPaymentStatus {set;}
+
+					PurchaseOrderItemObjectState PreviousObjectState {set;}
+
+					Part Part {set;}
+
+	}
+	public interface PurchaseOrderItemObjectState  : Object, ObjectState 
+	{
+	}
+	public interface PurchaseOrderItemStatus  : Object, UserInterfaceable 
+	{
+					global::System.DateTime StartDateTime {set;}
+
+					PurchaseOrderItemObjectState PurchaseOrderItemObjectState {set;}
+
+	}
+	public interface PurchaseOrderObjectState  : Object, ObjectState 
+	{
+	}
+	public interface PurchaseOrderStatus  : Object, UserInterfaceable 
+	{
+					PurchaseOrderObjectState PurchaseOrderObjectState {set;}
+
+					global::System.DateTime StartDateTime {set;}
+
+	}
+	public interface PurchaseReturn  : Object, Shipment 
+	{
+					PurchaseReturnStatus CurrentShipmentStatus {set;}
+
+					PurchaseReturnObjectState CurrentObjectState {set;}
+
+					PurchaseReturnStatus ShipmentStatuses {set;}
+
+					PurchaseReturnObjectState PreviousObjectState {set;}
+
+	}
+	public interface PurchaseReturnObjectState  : Object, ObjectState 
+	{
+	}
+	public interface PurchaseReturnStatus  : Object, UserInterfaceable 
+	{
+					PurchaseReturnObjectState PurchaseReturnObjectState {set;}
+
+					global::System.DateTime StartDateTime {set;}
+
+	}
+	public interface PurchaseShipment  : Object, Shipment 
+	{
+					PurchaseShipmentObjectState CurrentObjectState {set;}
+
+					Facility Facility {set;}
+
+					PurchaseShipmentObjectState PreviousObjectState {set;}
+
+					PurchaseShipmentStatus ShipmentStatuses {set;}
+
+					PurchaseShipmentStatus CurrentShipmentStatus {set;}
+
+					PurchaseOrder PurchaseOrder {set;}
+
+	}
+	public interface PurchaseShipmentObjectState  : Object, ObjectState 
+	{
+	}
+	public interface PurchaseShipmentStatus  : Object, UserInterfaceable 
+	{
+					PurchaseShipmentObjectState PurchaseShipmentObjectState {set;}
+
+					global::System.DateTime StartDateTime {set;}
+
+	}
+	public interface Qualification  : Object, Enumeration, Searchable 
+	{
+	}
+	public interface QuoteItem  : Object, Commentable, UserInterfaceable 
+	{
+					Party Authorizer {set;}
+
+					Deliverable Deliverable {set;}
+
+					Product Product {set;}
+
+					global::System.DateTime? EstimatedDeliveryDate {set;}
+
+					UnitOfMeasure UnitOfMeasure {set;}
+
+					ProductFeature ProductFeature {set;}
+
+					global::System.Decimal? UnitPrice {set;}
+
+					Skill Skill {set;}
+
+					WorkEffort WorkEffort {set;}
+
+					QuoteTerm QuoteTerms {set;}
+
+					global::System.Int32? Quantity {set;}
+
+					RequestItem RequestItem {set;}
+
+	}
+	public interface QuoteTerm  : Object, Searchable, UserInterfaceable 
+	{
+					global::System.String TermValue {set;}
+
+					TermType TermType {set;}
+
+	}
+	public interface RateType  : Object, Enumeration 
+	{
+	}
+	public interface RatingType  : Object, Enumeration 
+	{
+	}
+	public interface RawMaterial  : Object, Part 
+	{
+	}
+	public interface Receipt  : Object, Payment 
+	{
+	}
+	public interface ReceiptAccountingTransaction  : Object, ExternalAccountingTransaction 
+	{
+					Receipt Receipt {set;}
+
+	}
+	public interface RecurringCharge  : Object, PriceComponent 
+	{
+					TimeFrequency TimeFrequency {set;}
+
+	}
+	public interface Region  : Object, GeographicBoundaryComposite, UserInterfaceable 
+	{
+					global::System.String Name {set;}
+
+	}
+	public interface RequestForInformation  : Object, Request 
+	{
+	}
+	public interface RequestForProposal  : Object, Request 
+	{
+	}
+	public interface RequestForQuote  : Object, Request 
+	{
+	}
+	public interface RequestItem  : Object, UserInterfaceable, Commentable 
+	{
+					global::System.String Description {set;}
+
+					global::System.Int32? Quantity {set;}
+
+					Requirement Requirements {set;}
+
+					Deliverable Deliverable {set;}
+
+					ProductFeature ProductFeature {set;}
+
+					NeededSkill NeededSkill {set;}
+
+					Product Product {set;}
+
+					global::System.Decimal? MaximumAllowedPrice {set;}
+
+					global::System.DateTime? RequiredByDate {set;}
+
+	}
+	public interface RequirementBudgetAllocation  : Object, Searchable, UserInterfaceable 
+	{
+					BudgetItem BudgetItem {set;}
+
+					Requirement Requirement {set;}
+
+					global::System.Decimal Amount {set;}
+
+	}
+	public interface RequirementCommunication  : Object, UserInterfaceable 
+	{
+					CommunicationEvent CommunicationEvent {set;}
+
+					Requirement Requirement {set;}
+
+					Person AssociatedProfessional {set;}
+
+	}
+	public interface RequirementObjectState  : Object, ObjectState 
+	{
+	}
+	public interface RequirementStatus  : Object, UserInterfaceable 
+	{
+					RequirementObjectState RequirementObjectState {set;}
+
+					global::System.DateTime StartDateTime {set;}
+
+	}
+	public interface Research  : Object, WorkEffort 
+	{
+	}
+	public interface ResourceRequirement  : Object, Requirement 
+	{
+					global::System.String Duties {set;}
+
+					global::System.Decimal? NumberOfPositions {set;}
+
+					global::System.DateTime? RequiredStartDate {set;}
+
+					NeededSkill NeededSkills {set;}
+
+					global::System.DateTime? RequiredEndDate {set;}
+
+	}
+	public interface RespondingParty  : Object, UserInterfaceable 
+	{
+					global::System.DateTime? SendingDate {set;}
+
+					ContactMechanism ContactMechanism {set;}
+
+					Party Party {set;}
+
+	}
+	public interface Responsibility  : Object, UserInterfaceable, Searchable 
+	{
+					global::System.String Description {set;}
+
+	}
+	public interface Resume  : Object, Searchable, UserInterfaceable 
+	{
+					global::System.DateTime ResumeDate {set;}
+
+					global::System.String ResumeText {set;}
+
+	}
+	public interface RevenueQuantityBreak  : Object, UserInterfaceable 
+	{
+					global::System.Decimal? Through {set;}
+
+					global::System.Decimal? From {set;}
+
+	}
+	public interface RevenueValueBreak  : Object, UserInterfaceable 
+	{
+					global::System.Decimal? ThroughAmount {set;}
+
+					global::System.Decimal? FromAmount {set;}
+
+	}
+	public interface Room  : Object, Facility, Container 
+	{
+	}
+	public interface SalaryStep  : Object, UserInterfaceable 
+	{
+					global::System.DateTime ModifiedDate {set;}
+
+					global::System.Decimal Amount {set;}
+
+	}
+	public interface SalesAccountingTransaction  : Object, ExternalAccountingTransaction 
+	{
+					Invoice Invoice {set;}
+
+	}
+	public interface SalesAgreement  : Object, Agreement 
+	{
+	}
+	public interface SalesChannel  : Object, Searchable, Enumeration 
+	{
+	}
+	public interface SalesChannelRevenue  : Object, UserInterfaceable, Deletable 
+	{
+					global::System.Int32 Year {set;}
+
+					global::System.Int32 Month {set;}
+
+					Currency Currency {set;}
+
+					SalesChannel SalesChannel {set;}
+
+					global::System.String SalesChannelName {set;}
+
+					global::System.Decimal Revenue {set;}
+
+					InternalOrganisation InternalOrganisation {set;}
+
+	}
+	public interface SalesChannelRevenueHistory  : Object, UserInterfaceable 
+	{
+					SalesChannel SalesChannel {set;}
+
+					Currency Currency {set;}
+
+					global::System.Decimal? Revenue {set;}
+
+					InternalOrganisation InternalOrganisation {set;}
+
+	}
+	public interface SalesInvoice  : Object, Invoice 
+	{
+					SalesInvoiceObjectState CurrentObjectState {set;}
+
+					SalesInvoiceObjectState PreviousObjectState {set;}
+
+					global::System.Decimal? TotalListPrice {set;}
+
+					InternalOrganisation BilledFromInternalOrganisation {set;}
+
+					ContactMechanism BillToContactMechanism {set;}
+
+					Party PreviousBillToCustomer {set;}
+
+					SalesInvoiceType SalesInvoiceType {set;}
+
+					global::System.Decimal InitialProfitMargin {set;}
+
+					PaymentMethod PaymentMethod {set;}
+
+					SalesOrder SalesOrder {set;}
+
+					global::System.Decimal InitialMarkupPercentage {set;}
+
+					global::System.Decimal MaintainedMarkupPercentage {set;}
+
+					Person SalesReps {set;}
+
+					Shipment Shipment {set;}
+
+					global::System.Decimal MaintainedProfitMargin {set;}
+
+					SalesInvoiceStatus InvoiceStatuses {set;}
+
+					Party PreviousShipToCustomer {set;}
+
+					Party BillToCustomer {set;}
+
+					SalesInvoiceStatus CurrentInvoiceStatus {set;}
+
+					SalesInvoiceItem SalesInvoiceItems {set;}
+
+					global::System.Decimal TotalListPriceCustomerCurrency {set;}
+
+					Party ShipToCustomer {set;}
+
+					ContactMechanism BilledFromContactMechanism {set;}
+
+					global::System.Decimal? TotalPurchasePrice {set;}
+
+					SalesChannel SalesChannel {set;}
+
+					Party Customers {set;}
+
+					PostalAddress ShipToAddress {set;}
+
+					Store Store {set;}
+
+	}
+	public interface SalesInvoiceItem  : Object, InvoiceItem 
+	{
+					ProductFeature ProductFeature {set;}
+
+					SalesInvoiceItemObjectState CurrentObjectState {set;}
+
+					global::System.Decimal? RequiredProfitMargin {set;}
+
+					global::System.Decimal InitialMarkupPercentage {set;}
+
+					global::System.Decimal MaintainedMarkupPercentage {set;}
+
+					Product Product {set;}
+
+					global::System.Decimal UnitPurchasePrice {set;}
+
+					SalesInvoiceItemStatus InvoiceItemStatuses {set;}
+
+					SalesOrderItem SalesOrderItem {set;}
+
+					SalesInvoiceItemType SalesInvoiceItemType {set;}
+
+					Person SalesRep {set;}
+
+					global::System.Decimal InitialProfitMargin {set;}
+
+					SalesInvoiceItemStatus CurrentInvoiceItemStatus {set;}
+
+					global::System.Decimal MaintainedProfitMargin {set;}
+
+					TimeEntry TimeEntries {set;}
+
+					global::System.Decimal? RequiredMarkupPercentage {set;}
+
+					SalesInvoiceItemObjectState PreviousObjectState {set;}
+
+	}
+	public interface SalesInvoiceItemObjectState  : Object, ObjectState 
+	{
+	}
+	public interface SalesInvoiceItemStatus  : Object, UserInterfaceable 
+	{
+					global::System.DateTime StartDateTime {set;}
+
+					SalesInvoiceItemObjectState SalesInvoiceItemObjectState {set;}
+
+	}
+	public interface SalesInvoiceItemType  : Object, Enumeration 
+	{
+	}
+	public interface SalesInvoiceObjectState  : Object, ObjectState 
+	{
+	}
+	public interface SalesInvoiceStatus  : Object, UserInterfaceable 
+	{
+					SalesInvoiceObjectState SalesInvoiceObjectState {set;}
+
+					global::System.DateTime StartDateTime {set;}
+
+	}
+	public interface SalesInvoiceType  : Object, Enumeration 
+	{
+	}
+	public interface SalesOrder  : Object, Order 
+	{
+					ContactMechanism TakenByContactMechanism {set;}
+
+					SalesOrderStatus ShipmentStatuses {set;}
+
+					SalesOrderStatus CurrentShipmentStatus {set;}
+
+					SalesOrderStatus CurrentPaymentStatus {set;}
+
+					Party ShipToCustomer {set;}
+
+					Party BillToCustomer {set;}
+
+					global::System.Decimal TotalPurchasePrice {set;}
+
+					ShipmentMethod ShipmentMethod {set;}
+
+					global::System.Decimal TotalListPriceCustomerCurrency {set;}
+
+					global::System.Decimal MaintainedProfitMargin {set;}
+
+					PostalAddress ShipToAddress {set;}
+
+					Party PreviousShipToCustomer {set;}
+
+					ContactMechanism BillToContactMechanism {set;}
+
+					Person SalesReps {set;}
+
+					global::System.Decimal InitialProfitMargin {set;}
+
+					SalesOrderObjectState PreviousObjectState {set;}
+
+					global::System.Decimal TotalListPrice {set;}
+
+					global::System.Boolean PartiallyShip {set;}
+
+					SalesOrderStatus PaymentStatuses {set;}
+
+					Party Customers {set;}
+
+					Store Store {set;}
+
+					global::System.Decimal MaintainedMarkupPercentage {set;}
+
+					ContactMechanism BillFromContactMechanism {set;}
+
+					PaymentMethod PaymentMethod {set;}
+
+					ContactMechanism PlacingContactMechanism {set;}
+
+					SalesOrderStatus CurrentOrderStatus {set;}
+
+					Party PreviousBillToCustomer {set;}
+
+					SalesChannel SalesChannel {set;}
+
+					Party PlacingCustomer {set;}
+
+					SalesOrderStatus OrderStatuses {set;}
+
+					SalesInvoice ProformaInvoice {set;}
+
+					SalesOrderItem SalesOrderItems {set;}
+
+					SalesOrderObjectState CurrentObjectState {set;}
+
+					global::System.Decimal InitialMarkupPercentage {set;}
+
+					InternalOrganisation TakenByInternalOrganisation {set;}
+
+	}
+	public interface SalesOrderItem  : Object, OrderItem 
+	{
+					global::System.Decimal InitialProfitMargin {set;}
+
+					SalesOrderItemStatus CurrentPaymentStatus {set;}
+
+					global::System.Decimal QuantityShortFalled {set;}
+
+					OrderItem OrderedWithFeatures {set;}
+
+					global::System.Decimal MaintainedProfitMargin {set;}
+
+					global::System.Decimal? RequiredProfitMargin {set;}
+
+					SalesOrderItemStatus OrderItemStatuses {set;}
+
+					SalesOrderItemStatus CurrentShipmentStatus {set;}
+
+					NonSerializedInventoryItem PreviousReservedFromInventoryItem {set;}
+
+					global::System.Decimal? RequiredMarkupPercentage {set;}
+
+					global::System.Decimal QuantityShipped {set;}
+
+					SalesOrderItemStatus CurrentOrderItemStatus {set;}
+
+					PostalAddress ShipToAddress {set;}
+
+					global::System.Decimal QuantityPicked {set;}
+
+					Product PreviousProduct {set;}
+
+					SalesOrderItemObjectState CurrentObjectState {set;}
+
+					global::System.Decimal UnitPurchasePrice {set;}
+
+					Party ShipToParty {set;}
+
+					PostalAddress AssignedShipToAddress {set;}
+
+					global::System.Decimal QuantityReturned {set;}
+
+					global::System.Decimal QuantityReserved {set;}
+
+					Person SalesRep {set;}
+
+					SalesOrderItemStatus ShipmentStatuses {set;}
+
+					Party AssignedShipToParty {set;}
+
+					global::System.Decimal QuantityPendingShipment {set;}
+
+					global::System.Decimal MaintainedMarkupPercentage {set;}
+
+					SalesOrderItemObjectState PreviousObjectState {set;}
+
+					global::System.Decimal InitialMarkupPercentage {set;}
+
+					NonSerializedInventoryItem ReservedFromInventoryItem {set;}
+
+					Product Product {set;}
+
+					ProductFeature ProductFeature {set;}
+
+					global::System.Decimal QuantityRequestsShipping {set;}
+
+					SalesOrderItemStatus PaymentStatuses {set;}
+
+	}
+	public interface SalesOrderItemObjectState  : Object, ObjectState 
+	{
+	}
+	public interface SalesOrderItemStatus  : Object, UserInterfaceable 
+	{
+					SalesOrderItemObjectState SalesOrderItemObjectState {set;}
+
+					global::System.DateTime StartDateTime {set;}
+
+	}
+	public interface SalesOrderObjectState  : Object, ObjectState 
+	{
+	}
+	public interface SalesOrderStatus  : Object, UserInterfaceable 
+	{
+					global::System.DateTime StartDateTime {set;}
+
+					SalesOrderObjectState SalesOrderObjectState {set;}
+
+	}
+	public interface SalesRepCommission  : Object, UserInterfaceable 
+	{
+					global::System.Decimal? Commission {set;}
+
+					InternalOrganisation InternalOrganisation {set;}
+
+					global::System.String SalesRepName {set;}
+
+					global::System.Int32? Month {set;}
+
+					global::System.Int32 Year {set;}
+
+					Currency Currency {set;}
+
+					Person SalesRep {set;}
+
+	}
+	public interface SalesRepPartyProductCategoryRevenue  : Object, UserInterfaceable, Deletable 
+	{
+					global::System.Int32 Year {set;}
+
+					Person SalesRep {set;}
+
+					ProductCategory ProductCategory {set;}
+
+					global::System.Int32 Month {set;}
+
+					Party Party {set;}
+
+					global::System.Decimal Revenue {set;}
+
+					Currency Currency {set;}
+
+					InternalOrganisation InternalOrganisation {set;}
+
+					global::System.String SalesRepName {set;}
+
+	}
+	public interface SalesRepPartyRevenue  : Object, UserInterfaceable, Deletable 
+	{
+					global::System.Decimal Revenue {set;}
+
+					global::System.Int32 Year {set;}
+
+					Person SalesRep {set;}
+
+					global::System.String SalesRepName {set;}
+
+					InternalOrganisation InternalOrganisation {set;}
+
+					Party Party {set;}
+
+					Currency Currency {set;}
+
+					global::System.Int32 Month {set;}
+
+	}
+	public interface SalesRepProductCategoryRevenue  : Object, UserInterfaceable, Deletable 
+	{
+					global::System.Int32 Month {set;}
+
+					global::System.String SalesRepName {set;}
+
+					InternalOrganisation InternalOrganisation {set;}
+
+					ProductCategory ProductCategory {set;}
+
+					Currency Currency {set;}
+
+					global::System.Decimal Revenue {set;}
+
+					global::System.Int32 Year {set;}
+
+					Person SalesRep {set;}
+
+	}
+	public interface SalesRepRelationship  : Object, UserInterfaceable, Commentable, AccessControlledObject, Period, PartyRelationship 
+	{
+					Person SalesRepresentative {set;}
+
+					global::System.Decimal LastYearsCommission {set;}
+
+					ProductCategory ProductCategories {set;}
+
+					InternalOrganisation InternalOrganisation {set;}
+
+					global::System.Decimal YTDCommission {set;}
+
+					Party Customer {set;}
+
+	}
+	public interface SalesRepRevenue  : Object, UserInterfaceable, Deletable 
+	{
+					global::System.Decimal Revenue {set;}
+
+					Currency Currency {set;}
+
+					InternalOrganisation InternalOrganisation {set;}
+
+					global::System.Int32 Month {set;}
+
+					global::System.String SalesRepName {set;}
+
+					global::System.Int32 Year {set;}
+
+					Person SalesRep {set;}
+
+	}
+	public interface SalesRepRevenueHistory  : Object, UserInterfaceable 
+	{
+					Currency Currency {set;}
+
+					Person SalesRep {set;}
+
+					InternalOrganisation InternalOrganisation {set;}
+
+					global::System.Decimal? Revenue {set;}
+
+	}
+	public interface SalesTerritory  : Object, UserInterfaceable, GeographicBoundaryComposite 
+	{
+					global::System.String Name {set;}
+
+	}
+	public interface Salutation  : Object, UserInterfaceable, Enumeration, UniquelyIdentifiable, AccessControlledObject 
+	{
+	}
+	public interface SerializedInventoryItem  : Object, InventoryItem 
+	{
+					SerializedInventoryItemObjectState PreviousObjectState {set;}
+
+					SerializedInventoryItemStatus InventoryItemStatuses {set;}
+
+					global::System.String SerialNumber {set;}
+
+					SerializedInventoryItemObjectState CurrentObjectState {set;}
+
+					SerializedInventoryItemStatus CurrentInventoryItemStatus {set;}
+
+	}
+	public interface SerializedInventoryItemObjectState  : Object, ObjectState 
+	{
+	}
+	public interface SerializedInventoryItemStatus  : Object, UserInterfaceable 
+	{
+					global::System.DateTime StartDateTime {set;}
+
+					SerializedInventoryItemObjectState SerializedInventoryItemObjectState {set;}
+
+	}
+	public interface ServiceConfiguration  : Object, InventoryItemConfiguration 
+	{
+	}
+	public interface ServiceEntryBilling  : Object 
+	{
+					ServiceEntry ServiceEntry {set;}
+
+					InvoiceItem InvoiceItem {set;}
+
+	}
+	public interface ServiceEntryHeader  : Object, Period, UserInterfaceable 
+	{
+					ServiceEntry ServiceEntries {set;}
+
+					global::System.DateTime SubmittedDate {set;}
+
+					Person SubmittedBy {set;}
+
+	}
+	public interface ServiceFeature  : Object, Enumeration, ProductFeature 
+	{
+	}
+	public interface ServiceTerritory  : Object, UserInterfaceable, GeographicBoundaryComposite 
+	{
+					global::System.String Name {set;}
+
+	}
+	public interface Shelf  : Object, Container 
+	{
+	}
+	public interface ShipmentItem  : Object, Deletable, UserInterfaceable 
+	{
+					global::System.Decimal Quantity {set;}
+
+					Part Part {set;}
+
+					global::System.String ContentsDescription {set;}
+
+					Document Documents {set;}
+
+					global::System.Decimal QuantityShipped {set;}
+
+					ShipmentItem InResponseToShipmentItems {set;}
+
+					InventoryItem InventoryItems {set;}
+
+					ProductFeature ProductFeatures {set;}
+
+					InvoiceItem InvoiceItems {set;}
+
+					Good Good {set;}
+
+	}
+	public interface ShipmentMethod  : Object, Enumeration 
+	{
+	}
+	public interface ShipmentPackage  : Object, UserInterfaceable, UniquelyIdentifiable, Printable 
+	{
+					PackagingContent PackagingContents {set;}
+
+					Document Documents {set;}
+
+					global::System.DateTime CreationDate {set;}
+
+					global::System.Int32 SequenceNumber {set;}
+
+	}
+	public interface ShipmentReceipt  : Object, UserInterfaceable 
+	{
+					global::System.String ItemDescription {set;}
+
+					NonSerializedInventoryItem InventoryItem {set;}
+
+					global::System.String RejectionReason {set;}
+
+					OrderItem OrderItem {set;}
+
+					global::System.Decimal QuantityRejected {set;}
+
+					ShipmentItem ShipmentItem {set;}
+
+					global::System.DateTime ReceivedDateTime {set;}
+
+					global::System.Decimal QuantityAccepted {set;}
+
+	}
+	public interface ShipmentRouteSegment  : Object, UserInterfaceable 
+	{
+					global::System.Decimal? EndKilometers {set;}
+
+					Facility FromFacility {set;}
+
+					global::System.Decimal? StartKilometers {set;}
+
+					ShipmentMethod ShipmentMethod {set;}
+
+					global::System.DateTime? EstimatedStartDateTime {set;}
+
+					Facility ToFacility {set;}
+
+					global::System.DateTime? EstimatedArrivalDateTime {set;}
+
+					Vehicle Vehicle {set;}
+
+					global::System.DateTime? ActualArrivalDateTime {set;}
+
+					global::System.DateTime? ActualStartDateTime {set;}
+
+					Organisation Carrier {set;}
+
+	}
+	public interface ShipmentValue  : Object, UserInterfaceable 
+	{
+					global::System.Decimal? ThroughAmount {set;}
+
+					global::System.Decimal? FromAmount {set;}
+
+	}
+	public interface ShippingAndHandlingCharge  : Object, OrderAdjustment 
+	{
+	}
+	public interface ShippingAndHandlingComponent  : Object, SearchResult, UserInterfaceable, Period, Searchable 
+	{
+					global::System.Decimal? Cost {set;}
+
+					ShipmentMethod ShipmentMethod {set;}
+
+					Carrier Carrier {set;}
+
+					ShipmentValue ShipmentValue {set;}
+
+					Currency Currency {set;}
+
+					InternalOrganisation SpecifiedFor {set;}
+
+					GeographicBoundary GeographicBoundary {set;}
+
+	}
+	public interface Size  : Object, Enumeration, ProductFeature 
+	{
+	}
+	public interface Skill  : Object, Enumeration, Searchable 
+	{
+	}
+	public interface SkillLevel  : Object, Enumeration 
+	{
+	}
+	public interface SkillRating  : Object, Enumeration 
+	{
+	}
+	public interface SoftwareFeature  : Object, ProductFeature, Enumeration 
+	{
+	}
+	public interface StandardServiceOrderItem  : Object, EngagementItem 
+	{
+	}
+	public interface State  : Object, CityBound, GeographicBoundary, AccessControlledObject, CountryBound 
+	{
+					global::System.String Name {set;}
+
+	}
+	public interface StatementOfWork  : Object, Quote 
+	{
+	}
+	public interface Store  : Object, UniquelyIdentifiable, UserInterfaceable 
 	{
 					global::System.Decimal ShipmentThreshold {set;}
 
@@ -4540,16 +4740,386 @@ namespace Allors.Domain
 					global::System.Int32 NextSalesInvoiceNumber {set;}
 
 	}
-	public interface Lot  : Searchable, UserInterfaceable 
+	public interface StoreRevenue  : Object, UserInterfaceable, Deletable 
 	{
-					global::System.DateTime? ExpirationDate {set;}
+					InternalOrganisation InternalOrganisation {set;}
+
+					global::System.Int32 Month {set;}
+
+					Currency Currency {set;}
+
+					Store Store {set;}
+
+					global::System.String StoreName {set;}
+
+					global::System.Decimal Revenue {set;}
+
+					global::System.Int32 Year {set;}
+
+	}
+	public interface StoreRevenueHistory  : Object, UserInterfaceable 
+	{
+					InternalOrganisation InternalOrganisation {set;}
+
+					Currency Currency {set;}
+
+					Store Store {set;}
+
+					global::System.Decimal? Revenue {set;}
+
+	}
+	public interface SubAgreement  : Object, AgreementItem 
+	{
+	}
+	public interface SubAssembly  : Object, Part 
+	{
+	}
+	public interface SubContractorAgreement  : Object, Agreement 
+	{
+	}
+	public interface SubContractorRelationship  : Object, PartyRelationship 
+	{
+					Party Contractor {set;}
+
+					Party SubContractor {set;}
+
+	}
+	public interface SupplierOffering  : Object, Commentable, Period, UserInterfaceable 
+	{
+					RatingType Rating {set;}
+
+					global::System.Int32? StandardLeadTime {set;}
+
+					ProductPurchasePrice ProductPurchasePrices {set;}
+
+					Ordinal Preference {set;}
+
+					global::System.Decimal? MinimalOrderQuantity {set;}
+
+					Product Product {set;}
+
+					Party Supplier {set;}
+
+					global::System.String ReferenceNumber {set;}
+
+					Part Part {set;}
+
+	}
+	public interface SupplierRelationship  : Object, PartyRelationship 
+	{
+					Organisation Supplier {set;}
+
+					global::System.Int32 SubAccountNumber {set;}
+
+					global::System.DateTime? LastReminderDate {set;}
+
+					DunningType DunningType {set;}
+
+					InternalOrganisation InternalOrganisation {set;}
+
+					global::System.DateTime? BlockedForDunning {set;}
+
+	}
+	public interface SurchargeAdjustment  : Object, OrderAdjustment 
+	{
+	}
+	public interface SurchargeComponent  : Object, PriceComponent 
+	{
+					global::System.Decimal Percentage {set;}
+
+	}
+	public interface Task  : Object, WorkEffort 
+	{
+	}
+	public interface TaxDocument  : Object, Document 
+	{
+	}
+	public interface TaxDue  : Object, ExternalAccountingTransaction 
+	{
+	}
+	public interface TelecommunicationsNumber  : Object, ContactMechanism 
+	{
+					global::System.String AreaCode {set;}
+
+					global::System.String CountryCode {set;}
+
+					global::System.String ContactNumber {set;}
+
+	}
+	public interface TemplatePurpose  : Object, Enumeration 
+	{
+	}
+	public interface TermType  : Object, Enumeration 
+	{
+	}
+	public interface Territory  : Object, UserInterfaceable, CityBound, GeographicBoundary, CountryBound 
+	{
+					global::System.String Name {set;}
+
+	}
+	public interface TestingRequirement  : Object, PartSpecification 
+	{
+	}
+	public interface Threshold  : Object, AgreementTerm 
+	{
+	}
+	public interface TimeAndMaterialsService  : Object, Service 
+	{
+	}
+	public interface TimeEntry  : Object, ServiceEntry 
+	{
+					global::System.Decimal Cost {set;}
+
+					global::System.Decimal GrossMargin {set;}
+
+					QuoteTerm QuoteTerm {set;}
+
+					global::System.Decimal? BillingRate {set;}
+
+					UnitOfMeasure UnitOfMeasure {set;}
+
+					global::System.Decimal? AmountOfTime {set;}
+
+	}
+	public interface TimeFrequency  : Object, Enumeration, IUnitOfMeasure 
+	{
+	}
+	public interface TimePeriodUsage  : Object, DeploymentUsage 
+	{
+	}
+	public interface Tolerance  : Object, PartSpecification 
+	{
+	}
+	public interface Training  : Object, UserInterfaceable, Searchable 
+	{
+					global::System.String Description {set;}
+
+	}
+	public interface Transfer  : Object, Shipment 
+	{
+					TransferObjectState PreviousObjectState {set;}
+
+					TransferObjectState CurrentObjectState {set;}
+
+					TransferStatus CurrentShipmentStatus {set;}
+
+					TransferStatus ShipmentStatuses {set;}
+
+	}
+	public interface TransferObjectState  : Object, ObjectState 
+	{
+	}
+	public interface TransferStatus  : Object, UserInterfaceable 
+	{
+					global::System.DateTime StartDateTime {set;}
+
+					TransferObjectState TransferObjectState {set;}
+
+	}
+	public interface UnitOfMeasure  : Object, IUnitOfMeasure, UniquelyIdentifiable, UserInterfaceable, Searchable, Enumeration 
+	{
+	}
+	public interface UnitOfMeasureConversion  : Object, Searchable, UserInterfaceable 
+	{
+					IUnitOfMeasure ToUnitOfMeasure {set;}
+
+					global::System.DateTime? StartDate {set;}
+
+					global::System.Decimal ConversionFactor {set;}
+
+	}
+	public interface UtilizationCharge  : Object, PriceComponent 
+	{
+					global::System.Decimal? Quantity {set;}
+
+					UnitOfMeasure UnitOfMeasure {set;}
+
+	}
+	public interface VarianceReason  : Object, Enumeration 
+	{
+	}
+	public interface VatCalculationMethod  : Object, Enumeration 
+	{
+	}
+	public interface VatForm  : Object, AccessControlledObject, UserInterfaceable 
+	{
+					global::System.String Name {set;}
+
+					VatReturnBox VatReturnBoxes {set;}
+
+	}
+	public interface VatRate  : Object, UserInterfaceable 
+	{
+					VatCalculationMethod VatCalculationMethod {set;}
+
+					VatReturnBox VatReturnBoxes {set;}
+
+					global::System.Decimal Rate {set;}
+
+					OrganisationGlAccount VatPayableAccount {set;}
+
+					Organisation TaxAuthority {set;}
+
+					VatRateUsage VatRateUsage {set;}
+
+					VatRatePurchaseKind VatRatePurchaseKind {set;}
+
+					VatTariff VatTariff {set;}
+
+					TimeFrequency PaymentFrequency {set;}
+
+					OrganisationGlAccount VatToPayAccount {set;}
+
+					EuSalesListType EuSalesListType {set;}
+
+					OrganisationGlAccount VatToReceiveAccount {set;}
+
+					OrganisationGlAccount VatReceivableAccount {set;}
+
+					global::System.Boolean? ReverseCharge {set;}
+
+	}
+	public interface VatRatePurchaseKind  : Object, Enumeration 
+	{
+	}
+	public interface VatRateUsage  : Object, Enumeration 
+	{
+	}
+	public interface VatRegime  : Object, Enumeration 
+	{
+					VatRate VatRate {set;}
+
+					OrganisationGlAccount GeneralLedgerAccount {set;}
+
+	}
+	public interface VatReturnBox  : Object, UserInterfaceable, AccessControlledObject 
+	{
+					global::System.String HeaderNumber {set;}
+
+					global::System.String Description {set;}
+
+	}
+	public interface VatReturnBoxType  : Object, AccessControlledObject, UserInterfaceable 
+	{
+					global::System.String Type {set;}
+
+	}
+	public interface VatTariff  : Object, Enumeration 
+	{
+	}
+	public interface Vehicle  : Object, FixedAsset 
+	{
+	}
+	public interface VolumeUsage  : Object, DeploymentUsage 
+	{
+					global::System.Decimal Quantity {set;}
+
+					UnitOfMeasure UnitOfMeasure {set;}
+
+	}
+	public interface Warehouse  : Object, Facility 
+	{
+	}
+	public interface WebAddress  : Object, ElectronicAddress 
+	{
+	}
+	public interface WebSiteCommunication  : Object, CommunicationEvent 
+	{
+					Party Originator {set;}
+
+					Party Receiver {set;}
+
+	}
+	public interface Withdrawal  : Object, FinancialAccountTransaction 
+	{
+					Disbursement Disbursement {set;}
+
+	}
+	public interface WorkEffortAssignment  : Object, Period, UserInterfaceable, Commentable 
+	{
+					Person Professional {set;}
+
+					WorkEffort Assignment {set;}
+
+	}
+	public interface WorkEffortAssignmentRate  : Object, UserInterfaceable 
+	{
+					RateType RateType {set;}
+
+					WorkEffortPartyAssignment WorkEffortPartyAssignment {set;}
+
+	}
+	public interface WorkEffortBilling  : Object 
+	{
+					WorkEffort WorkEffort {set;}
+
+					global::System.Decimal? Percentage {set;}
+
+					InvoiceItem InvoiceItem {set;}
+
+	}
+	public interface WorkEffortFixedAssetAssignment  : Object, Commentable, UserInterfaceable, Period 
+	{
+					AssetAssignmentStatus AssetAssignmentStatus {set;}
+
+					WorkEffort Assignment {set;}
+
+					global::System.Decimal? AllocatedCost {set;}
+
+					FixedAsset FixedAsset {set;}
+
+	}
+	public interface WorkEffortFixedAssetStandard  : Object, UserInterfaceable 
+	{
+					global::System.Decimal? EstimatedCost {set;}
+
+					global::System.Decimal? EstimatedDuration {set;}
+
+					FixedAsset FixedAsset {set;}
+
+					global::System.Int32? EstimatedQuantity {set;}
+
+	}
+	public interface WorkEffortGoodStandard  : Object, UserInterfaceable 
+	{
+					Good Good {set;}
+
+					global::System.Decimal? EstimatedCost {set;}
+
+					global::System.Int32? EstimatedQuantity {set;}
+
+	}
+	public interface WorkEffortInventoryAssignment  : Object, UserInterfaceable 
+	{
+					WorkEffort Assignment {set;}
+
+					InventoryItem InventoryItem {set;}
 
 					global::System.Int32? Quantity {set;}
 
-					global::System.String LotNumber {set;}
+	}
+	public interface WorkEffortObjectState  : Object, ObjectState 
+	{
+	}
+	public interface WorkEffortPartStandard  : Object, UserInterfaceable 
+	{
+					Part Part {set;}
+
+					global::System.Decimal? EstimatedCost {set;}
+
+					global::System.Int32? EstimatedQuantity {set;}
 
 	}
-	public interface WorkEffortSkillStandard  : UserInterfaceable 
+	public interface WorkEffortPartyAssignment  : Object, Period, UserInterfaceable, Commentable 
+	{
+					WorkEffort Assignment {set;}
+
+					Party Party {set;}
+
+					Facility Facility {set;}
+
+	}
+	public interface WorkEffortSkillStandard  : Object, UserInterfaceable 
 	{
 					Skill Skill {set;}
 
@@ -4560,623 +5130,53 @@ namespace Allors.Domain
 					global::System.Decimal? EstimatedCost {set;}
 
 	}
-	public interface TimeAndMaterialsService  : Service 
-	{
-	}
-	public interface Equipment  : FixedAsset 
-	{
-	}
-	public interface RequestItem  : UserInterfaceable, Commentable 
-	{
-					global::System.String Description {set;}
-
-					global::System.Int32? Quantity {set;}
-
-					Requirement Requirements {set;}
-
-					Deliverable Deliverable {set;}
-
-					ProductFeature ProductFeature {set;}
-
-					NeededSkill NeededSkill {set;}
-
-					Product Product {set;}
-
-					global::System.Decimal? MaximumAllowedPrice {set;}
-
-					global::System.DateTime? RequiredByDate {set;}
-
-	}
-	public interface SalesChannel  : Searchable, Enumeration 
-	{
-	}
-	public interface CustomerRequirement  : Requirement 
-	{
-	}
-	public interface Property  : FixedAsset 
-	{
-	}
-	public interface ConstraintSpecification  : PartSpecification 
-	{
-	}
-	public interface DesiredProductFeature  : UserInterfaceable, Searchable 
-	{
-					global::System.Boolean Required {set;}
-
-					ProductFeature ProductFeature {set;}
-
-	}
-	public interface SalesOrderItemStatus  : UserInterfaceable 
-	{
-					SalesOrderItemObjectState SalesOrderItemObjectState {set;}
-
-					global::System.DateTime StartDateTime {set;}
-
-	}
-	public interface ActivityUsage  : DeploymentUsage 
-	{
-					global::System.Decimal Quantity {set;}
-
-					UnitOfMeasure UnitOfMeasure {set;}
-
-	}
-	public interface Program  : WorkEffort 
-	{
-	}
-	public interface CommunicationEventStatus  : UserInterfaceable 
+	public interface WorkEffortStatus  : Object, UserInterfaceable 
 	{
 					global::System.DateTime StartDateTime {set;}
 
-					CommunicationEventObjectState CommunicationEventObjectState {set;}
+					WorkEffortObjectState WorkEffortObjectState {set;}
 
 	}
-	public interface AgreementSection  : AgreementItem 
+	public interface WorkEffortType  : Object, Searchable, UserInterfaceable 
 	{
-	}
-	public interface Good  : Product, Deletable 
-	{
-					global::System.Decimal AvailableToPromise {set;}
+					WorkEffortFixedAssetStandard WorkEffortFixedAssetStandards {set;}
 
-					Media Thumbnail {set;}
+					WorkEffortGoodStandard WorkEffortGoodStandards {set;}
 
-					InventoryItemKind InventoryItemKind {set;}
+					WorkEffortType Children {set;}
 
-					global::System.String BarCode {set;}
-
-					FinishedGood FinishedGood {set;}
-
-					global::System.String Sku {set;}
-
-					global::System.String ArticleNumber {set;}
-
-					global::System.String ManufacturerId {set;}
-
-					Product ProductSubstitutions {set;}
-
-					Product ProductIncompatibilities {set;}
-
-					Media Photo {set;}
-
-	}
-	public interface EngineeringChangeObjectState  : ObjectState 
-	{
-	}
-	public interface AccountingTransactionDetail  : UserInterfaceable 
-	{
-					AccountingTransactionDetail AssociatedWith {set;}
-
-					OrganisationGlAccountBalance OrganisationGlAccountBalance {set;}
-
-					global::System.Decimal Amount {set;}
-
-					global::System.Boolean Debit {set;}
-
-	}
-	public interface County  : GeographicBoundary, CityBound, UserInterfaceable 
-	{
-					global::System.String Name {set;}
-
-					State State {set;}
-
-	}
-	public interface ShippingAndHandlingCharge  : OrderAdjustment 
-	{
-	}
-	public interface PerformanceReviewItemType  : Enumeration 
-	{
-	}
-	public interface PostalBoundary  : UserInterfaceable 
-	{
-					global::System.String PostalCode {set;}
-
-					global::System.String Locality {set;}
-
-					Country Country {set;}
-
-					global::System.String Region {set;}
-
-	}
-	public interface ProductCategory  : UserInterfaceable, Searchable, SearchResult, UniquelyIdentifiable 
-	{
-					Package Package {set;}
-
-					global::System.String Code {set;}
-
-					Media NoImageAvailableImage {set;}
-
-					ProductCategory Parents {set;}
-
-					ProductCategory Children {set;}
+					FixedAsset FixedAssetToRepair {set;}
 
 					global::System.String Description {set;}
 
-					global::System.String Name {set;}
+					WorkEffortType Dependencies {set;}
 
-					Media CategoryImage {set;}
+					WorkEffortTypeKind WorkEffortTypeKind {set;}
 
-					ProductCategory Ancestors {set;}
+					WorkEffortPartStandard WorkEffortPartStandards {set;}
+
+					WorkEffortSkillStandard WorkEffortSkillStandards {set;}
+
+					global::System.Decimal? StandardWorkHours {set;}
+
+					Product ProductToProduce {set;}
+
+					Deliverable DeliverableToProduce {set;}
 
 	}
-	public interface RequestForInformation  : Request 
+	public interface WorkEffortTypeKind  : Object, Enumeration 
 	{
 	}
-	public interface VatForm  : AccessControlledObject, UserInterfaceable 
-	{
-					global::System.String Name {set;}
-
-					VatReturnBox VatReturnBoxes {set;}
-
-	}
-	public interface BudgetRevisionImpact  : UserInterfaceable 
-	{
-					BudgetItem BudgetItem {set;}
-
-					global::System.String Reason {set;}
-
-					global::System.Boolean? Deleted {set;}
-
-					global::System.Boolean? Added {set;}
-
-					global::System.Decimal? RevisedAmount {set;}
-
-					BudgetRevision BudgetRevision {set;}
-
-	}
-	public interface TemplatePurpose  : Enumeration 
+	public interface WorkFlow  : Object, WorkEffort 
 	{
 	}
-	public interface WebSiteCommunication  : CommunicationEvent 
-	{
-					Party Originator {set;}
-
-					Party Receiver {set;}
-
-	}
-	public interface Withdrawal  : FinancialAccountTransaction 
-	{
-					Disbursement Disbursement {set;}
-
-	}
-	public interface Deployment  : Searchable, UserInterfaceable, Period, SearchResult 
-	{
-					Good ProductOffering {set;}
-
-					DeploymentUsage DeploymentUsage {set;}
-
-					SerializedInventoryItem SerializedInventoryItem {set;}
-
-	}
-	public interface PayCheck  : Payment 
-	{
-					Deduction Deductions {set;}
-
-					Employment Employment {set;}
-
-	}
-	public interface MaritalStatus  : Enumeration 
-	{
-	}
-	public interface Manifest  : Document 
-	{
-	}
-	public interface ExportDocument  : Document 
-	{
-	}
-	public interface CustomerShipmentStatus  : UserInterfaceable 
-	{
-					CustomerShipmentObjectState CustomerShipmentObjectState {set;}
-
-					global::System.DateTime StartDateTime {set;}
-
-	}
-	public interface ExpenseEntry  : ServiceEntry 
-	{
-					global::System.Decimal Amount {set;}
-
-	}
-	public interface PartSpecificationStatus  : UserInterfaceable 
-	{
-					global::System.DateTime StartDateTime {set;}
-
-					PartSpecificationObjectState PartSpecificationObjectState {set;}
-
-	}
-	public interface DistributionChannelRelationship  : PartyRelationship 
-	{
-					InternalOrganisation InternalOrganisation {set;}
-
-					Organisation Distributor {set;}
-
-	}
-	public interface CustomerShipmentObjectState  : ObjectState 
-	{
-	}
-	public interface GenderType  : Enumeration 
-	{
-	}
-	public interface Office  : Facility 
-	{
-	}
-	public interface EmailAddress  : ElectronicAddress 
-	{
-	}
-	public interface WorkEffortInventoryAssignment  : UserInterfaceable 
-	{
-					WorkEffort Assignment {set;}
-
-					InventoryItem InventoryItem {set;}
-
-					global::System.Int32? Quantity {set;}
-
-	}
-	public interface CommunicationEventObjectState  : ObjectState 
-	{
-	}
-	public interface City  : GeographicBoundary, UserInterfaceable, CountryBound 
-	{
-					global::System.String Name {set;}
-
-					State State {set;}
-
-	}
-	public interface PickListObjectState  : ObjectState 
-	{
-	}
-	public interface MaterialsUsage  : ServiceEntry 
-	{
-					global::System.Decimal Amount {set;}
-
-	}
-	public interface EmploymentTerminationReason  : Enumeration, Searchable 
-	{
-	}
-	public interface WorkEffortObjectState  : ObjectState 
-	{
-	}
-	public interface TimePeriodUsage  : DeploymentUsage 
-	{
-	}
-	public interface BudgetObjectState  : ObjectState 
-	{
-	}
-	public interface WorkRequirement  : Requirement 
+	public interface WorkRequirement  : Object, Requirement 
 	{
 					FixedAsset FixedAsset {set;}
 
 					Deliverable Deliverable {set;}
 
 					Product Product {set;}
-
-	}
-	public interface Fee  : OrderAdjustment 
-	{
-	}
-	public interface PhoneCommunication  : CommunicationEvent 
-	{
-					Person Receivers {set;}
-
-					Person Caller {set;}
-
-	}
-	public interface ProductDeliverySkillRequirement  : UserInterfaceable 
-	{
-					global::System.DateTime? StartedUsingDate {set;}
-
-					Service Service {set;}
-
-					Skill Skill {set;}
-
-	}
-	public interface SalesRepProductCategoryRevenue  : UserInterfaceable, Deletable 
-	{
-					global::System.Int32 Month {set;}
-
-					global::System.String SalesRepName {set;}
-
-					InternalOrganisation InternalOrganisation {set;}
-
-					ProductCategory ProductCategory {set;}
-
-					Currency Currency {set;}
-
-					global::System.Decimal Revenue {set;}
-
-					global::System.Int32 Year {set;}
-
-					Person SalesRep {set;}
-
-	}
-	public interface ServiceFeature  : Enumeration, ProductFeature 
-	{
-	}
-	public interface PartyProductRevenueHistory  : UserInterfaceable 
-	{
-					global::System.Decimal? Revenue {set;}
-
-					Party Party {set;}
-
-					Product Product {set;}
-
-					global::System.Decimal? Quantity {set;}
-
-					InternalOrganisation InternalOrganisation {set;}
-
-					Currency Currency {set;}
-
-	}
-	public interface LocalisedText  : Searchable, UserInterfaceable, Localised 
-	{
-					global::System.String Text {set;}
-
-	}
-	public interface Counter  : UniquelyIdentifiable 
-	{
-					global::System.Int32 Value {set;}
-
-	}
-	public interface StringTemplate  : UniquelyIdentifiable, Localised 
-	{
-					global::System.String Body {set;}
-
-					global::System.String Name {set;}
-
-					TemplatePurpose TemplatePurpose {set;}
-
-	}
-	public interface Singleton  : UserInterfaceable 
-	{
-					PrintQueue DefaultPrintQueue {set;}
-
-					Locale DefaultLocale {set;}
-
-					Locale Locales {set;}
-
-					SecurityToken AdministratorSecurityToken {set;}
-
-					User Guest {set;}
-
-					SecurityToken DefaultSecurityToken {set;}
-
-					Currency DefaultCurrency {set;}
-
-					Media NoImageAvailableImage {set;}
-
-					InternalOrganisation DefaultInternalOrganisation {set;}
-
-	}
-	public interface Locale  : UserInterfaceable 
-	{
-					global::System.String Name {set;}
-
-					Language Language {set;}
-
-					Country Country {set;}
-
-	}
-	public interface SearchFragment  : Derivable 
-	{
-					global::System.String LowerCaseText {set;}
-
-	}
-	public interface Language  : UserInterfaceable, Searchable 
-	{
-					global::System.String Name {set;}
-
-					global::System.String IsoCode {set;}
-
-					LocalisedText LocalisedNames {set;}
-
-	}
-	public interface SearchData  : Derivable, Deletable 
-	{
-					global::System.String CharacterBoundaryText {set;}
-
-					global::System.String PreviousCharacterBoundaryText {set;}
-
-					SearchFragment SearchFragments {set;}
-
-					global::System.String PreviousWordBoundaryText {set;}
-
-					global::System.String WordBoundaryText {set;}
-
-	}
-	public interface UserGroup  : UniquelyIdentifiable, Searchable, UserInterfaceable 
-	{
-					Role Role {set;}
-
-					User Members {set;}
-
-					UserGroup Parent {set;}
-
-					global::System.String Name {set;}
-
-					Party Party {set;}
-
-	}
-	public interface MediaContent  : Derivable 
-	{
-					global::System.Byte[] Value {set;}
-
-					global::System.String Hash {set;}
-
-	}
-	public interface Permission  : Deletable, UserInterfaceable 
-	{
-					global::System.Guid OperandTypePointer {set;}
-
-					global::System.Guid ConcreteClassPointer {set;}
-
-					global::System.Int32 OperationEnum {set;}
-
-	}
-	public interface SecurityToken  : Deletable, Derivable 
-	{
-	}
-	public interface Transition  : Object 
-	{
-					ObjectState FromStates {set;}
-
-					ObjectState ToState {set;}
-
-	}
-	public interface MediaType  : UserInterfaceable 
-	{
-					global::System.String DefaultFileExtension {set;}
-
-					global::System.String Name {set;}
-
-	}
-	public interface Login  : Derivable, Deletable 
-	{
-					global::System.String Key {set;}
-
-					global::System.String Provider {set;}
-
-					User User {set;}
-
-	}
-	public interface Role  : UserInterfaceable, UniquelyIdentifiable 
-	{
-					Permission Permissions {set;}
-
-					global::System.String Name {set;}
-
-	}
-	public interface PrintQueue  : AccessControlledObject, UserInterfaceable, UniquelyIdentifiable 
-	{
-					Printable Printables {set;}
-
-					global::System.String Name {set;}
-
-	}
-	public interface Country  : UserInterfaceable, Searchable, GeographicBoundary, CityBound 
-	{
-					Currency Currency {set;}
-
-					global::System.String Name {set;}
-
-					LocalisedText LocalisedNames {set;}
-
-					global::System.String IsoCode {set;}
-
-					VatRate VatRates {set;}
-
-					global::System.Int32? IbanLength {set;}
-
-					global::System.Boolean? EuMemberState {set;}
-
-					global::System.String TelephoneCode {set;}
-
-					global::System.String IbanRegex {set;}
-
-					VatForm VatForm {set;}
-
-					global::System.String UriExtension {set;}
-
-	}
-	public interface AccessControl  : Deletable, UserInterfaceable 
-	{
-					UserGroup SubjectGroups {set;}
-
-					User Subjects {set;}
-
-					SecurityToken Objects {set;}
-
-					Role Role {set;}
-
-	}
-	public interface Person  : User, AccessControlledObject, UniquelyIdentifiable, SearchResult, UserInterfaceable, Searchable, Party, Deletable 
-	{
-					global::System.String LastName {set;}
-
-					global::System.String MiddleName {set;}
-
-					global::System.String FirstName {set;}
-
-					Salutation Salutation {set;}
-
-					global::System.Decimal YTDCommission {set;}
-
-					Citizenship Citizenship {set;}
-
-					Employment CurrentEmployment {set;}
-
-					global::System.Decimal LastYearsCommission {set;}
-
-					PersonalTitle Titles {set;}
-
-					global::System.String MothersMaidenName {set;}
-
-					global::System.DateTime? BirthDate {set;}
-
-					global::System.Decimal? Height {set;}
-
-					PersonTraining PersonTrainings {set;}
-
-					GenderType Gender {set;}
-
-					global::System.Int32? Weight {set;}
-
-					Hobby Hobbies {set;}
-
-					global::System.Int32? TotalYearsWorkExperience {set;}
-
-					Passport Passports {set;}
-
-					MaritalStatus MaritalStatus {set;}
-
-					Media Picture {set;}
-
-					global::System.String SocialSecurityNumber {set;}
-
-					global::System.DateTime? DeceasedDate {set;}
-
-	}
-	public interface Image  : Deletable, Derivable 
-	{
-					Media Original {set;}
-
-					Media Responsive {set;}
-
-					global::System.String OriginalFilename {set;}
-
-	}
-	public interface Media  : UniquelyIdentifiable, UserInterfaceable, Deletable 
-	{
-					MediaType MediaType {set;}
-
-					MediaContent MediaContent {set;}
-
-	}
-	public interface Currency  : UserInterfaceable, IUnitOfMeasure 
-	{
-					global::System.String IsoCode {set;}
-
-					global::System.String Name {set;}
-
-					global::System.String Symbol {set;}
-
-					LocalisedText LocalisedNames {set;}
 
 	}
 }

@@ -166,6 +166,8 @@ namespace Allors.Domain
                     break;
             }
 
+            this.DisplayName = this.Operation + " " + this.ConcreteClass + "." + this.OperandType; 
+
             SecurityCache.Invalidate();
         }
     }

@@ -32,7 +32,7 @@ namespace Allors.Domain
             get
             {
                 var extent = this.Session.Extent(this.ObjectType);
-                extent.Filter.AddNot().AddExists(Meta.Parent);
+                extent.Filter.AddNot().AddExists(Meta.Parents);
                 return extent;
             }
         }

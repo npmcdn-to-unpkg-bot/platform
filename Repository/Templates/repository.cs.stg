@@ -1,4 +1,4 @@
-group AllorsCSharpMeta;
+group AllorsCSharpRepository;
 
 TemplateId() ::= <<14F49218-A676-43ba-9CBD-B8FFA059D1BF>>
 TemplateName() ::= <<Allors C# Repository>>
@@ -111,7 +111,11 @@ $objectType.InheritancesWhereSubtype:{inheritance|$inheritanceInit(inheritance)$
 		internal override void BuildRelationTypes()
 		{
 $objectType.AssociationTypesWhereObjectType:{associationType|$relationType(relationType=associationType.RelationType)$}$
+		}
 
+		internal override void SetRelationTypes()
+		{
+$objectType.AssociationTypesWhereObjectType:{associationType|$setRelationType(relationType=associationType.RelationType)$}$
 		}
 
 		internal class RolesType
@@ -155,6 +159,11 @@ $objectType.InheritancesWhereSubtype:{inheritance|$inheritanceInit(inheritance)$
 		internal override void BuildRelationTypes()
 		{
 $objectType.AssociationTypesWhereObjectType:{associationType|$relationType(relationType=associationType.RelationType)$}$
+		}
+
+		internal override void SetRelationTypes()
+		{
+$objectType.AssociationTypesWhereObjectType:{associationType|$setRelationType(relationType=associationType.RelationType)$}$
 		}
 
 		internal class RolesType
@@ -202,6 +211,10 @@ $if(!relationType.RoleType.IsSizeDefault)$
 $endif$
 			this.Roles.$relationType.RoleType.HierarchySingularName$ = $relationType.Name$.RoleType;
 
+
+>>
+
+setRelationType(relationType) ::= <<
 			$relationType.AssociationType.ObjectType.ConcreteClasses:{class|$class.Name$Class.Instance.ConcreteRoles.$relationType.RoleType.HierarchySingularName$ = $class.Name$Class.Instance.ConcreteRoleTypeByRoleType[this.Roles.$relationType.RoleType.HierarchySingularName$]; 
 }$
 

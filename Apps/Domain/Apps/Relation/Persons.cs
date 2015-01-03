@@ -48,15 +48,15 @@ namespace Allors.Domain
             config.GrantCustomer(this.ObjectType, Meta.MaritalStatus, Operation.Read, Operation.Write);
             config.GrantCustomer(this.ObjectType, Meta.MiddleName, Operation.Read, Operation.Write);
             config.GrantCustomer(this.ObjectType, Meta.MothersMaidenName, Operation.Read, Operation.Write);
-            config.GrantCustomer(this.ObjectType, Meta.PartyContactMechanism, Operation.Read, Operation.Write);
-            config.GrantCustomer(this.ObjectType, Meta.Passport, Operation.Read, Operation.Write);
+            config.GrantCustomer(this.ObjectType, Meta.PartyContactMechanisms, Operation.Read, Operation.Write);
+            config.GrantCustomer(this.ObjectType, Meta.Passports, Operation.Read, Operation.Write);
             config.GrantCustomer(this.ObjectType, Meta.Picture, Operation.Read, Operation.Write);
             config.GrantCustomer(this.ObjectType, Meta.PreferredCurrency, Operation.Read, Operation.Write);
             config.GrantCustomer(this.ObjectType, Meta.Locale, Operation.Read, Operation.Write);
-            config.GrantCustomer(this.ObjectType, Meta.Title, Operation.Read, Operation.Write);
+            config.GrantCustomer(this.ObjectType, Meta.Titles, Operation.Read, Operation.Write);
             config.GrantCustomer(this.ObjectType, Meta.Salutation, Operation.Read, Operation.Write);
             config.GrantCustomer(this.ObjectType, Meta.SocialSecurityNumber, Operation.Read, Operation.Write);
-            config.GrantCustomer(this.ObjectType, Meta.BankAccount, Operation.Read, Operation.Write);
+            config.GrantCustomer(this.ObjectType, Meta.BankAccounts, Operation.Read, Operation.Write);
 
             config.GrantSales(this.ObjectType, Meta.BirthDate, Operation.Read, Operation.Write);
             config.GrantSales(this.ObjectType, Meta.Citizenship, Operation.Read, Operation.Write);
@@ -66,15 +66,15 @@ namespace Allors.Domain
             config.GrantSales(this.ObjectType, Meta.MaritalStatus, Operation.Read, Operation.Write);
             config.GrantSales(this.ObjectType, Meta.MiddleName, Operation.Read, Operation.Write);
             config.GrantSales(this.ObjectType, Meta.MothersMaidenName, Operation.Read, Operation.Write);
-            config.GrantSales(this.ObjectType, Meta.PartyContactMechanism, Operation.Read, Operation.Write);
-            config.GrantSales(this.ObjectType, Meta.Passport, Operation.Read, Operation.Write);
+            config.GrantSales(this.ObjectType, Meta.PartyContactMechanisms, Operation.Read, Operation.Write);
+            config.GrantSales(this.ObjectType, Meta.Passports, Operation.Read, Operation.Write);
             config.GrantSales(this.ObjectType, Meta.Picture, Operation.Read, Operation.Write);
             config.GrantSales(this.ObjectType, Meta.PreferredCurrency, Operation.Read, Operation.Write);
             config.GrantSales(this.ObjectType, Meta.Locale, Operation.Read, Operation.Write);
-            config.GrantSales(this.ObjectType, Meta.Title, Operation.Read, Operation.Write);
+            config.GrantSales(this.ObjectType, Meta.Titles, Operation.Read, Operation.Write);
             config.GrantSales(this.ObjectType, Meta.Salutation, Operation.Read, Operation.Write);
             config.GrantSales(this.ObjectType, Meta.SocialSecurityNumber, Operation.Read, Operation.Write);
-            config.GrantSales(this.ObjectType, Meta.BankAccount, Operation.Read, Operation.Write);
+            config.GrantSales(this.ObjectType, Meta.BankAccounts, Operation.Read, Operation.Write);
 
             config.GrantSupplier(this.ObjectType, Meta.BirthDate, Operation.Read, Operation.Write);
             config.GrantSupplier(this.ObjectType, Meta.Citizenship, Operation.Read, Operation.Write);
@@ -84,15 +84,15 @@ namespace Allors.Domain
             config.GrantSupplier(this.ObjectType, Meta.MaritalStatus, Operation.Read, Operation.Write);
             config.GrantSupplier(this.ObjectType, Meta.MiddleName, Operation.Read, Operation.Write);
             config.GrantSupplier(this.ObjectType, Meta.MothersMaidenName, Operation.Read, Operation.Write);
-            config.GrantSupplier(this.ObjectType, Meta.PartyContactMechanism, Operation.Read, Operation.Write);
-            config.GrantSupplier(this.ObjectType, Meta.Passport, Operation.Read, Operation.Write);
+            config.GrantSupplier(this.ObjectType, Meta.PartyContactMechanisms, Operation.Read, Operation.Write);
+            config.GrantSupplier(this.ObjectType, Meta.Passports, Operation.Read, Operation.Write);
             config.GrantSupplier(this.ObjectType, Meta.Picture, Operation.Read, Operation.Write);
             config.GrantSupplier(this.ObjectType, Meta.PreferredCurrency, Operation.Read, Operation.Write);
             config.GrantSupplier(this.ObjectType, Meta.Locale, Operation.Read, Operation.Write);
-            config.GrantSupplier(this.ObjectType, Meta.Title, Operation.Read, Operation.Write);
+            config.GrantSupplier(this.ObjectType, Meta.Titles, Operation.Read, Operation.Write);
             config.GrantSupplier(this.ObjectType, Meta.Salutation, Operation.Read, Operation.Write);
             config.GrantSupplier(this.ObjectType, Meta.SocialSecurityNumber, Operation.Read, Operation.Write);
-            config.GrantSupplier(this.ObjectType, Meta.BankAccount, Operation.Read, Operation.Write);
+            config.GrantSupplier(this.ObjectType, Meta.BankAccounts, Operation.Read, Operation.Write);
 
             config.GrantPartner(this.ObjectType, Meta.BirthDate, Operation.Read, Operation.Write);
             config.GrantPartner(this.ObjectType, Meta.Citizenship, Operation.Read, Operation.Write);
@@ -102,15 +102,15 @@ namespace Allors.Domain
             config.GrantPartner(this.ObjectType, Meta.MaritalStatus, Operation.Read, Operation.Write);
             config.GrantPartner(this.ObjectType, Meta.MiddleName, Operation.Read, Operation.Write);
             config.GrantPartner(this.ObjectType, Meta.MothersMaidenName, Operation.Read, Operation.Write);
-            config.GrantPartner(this.ObjectType, Meta.PartyContactMechanism, Operation.Read, Operation.Write);
-            config.GrantPartner(this.ObjectType, Meta.Passport, Operation.Read, Operation.Write);
+            config.GrantPartner(this.ObjectType, Meta.PartyContactMechanisms, Operation.Read, Operation.Write);
+            config.GrantPartner(this.ObjectType, Meta.Passports, Operation.Read, Operation.Write);
             config.GrantPartner(this.ObjectType, Meta.Picture, Operation.Read, Operation.Write);
             config.GrantPartner(this.ObjectType, Meta.PreferredCurrency, Operation.Read, Operation.Write);
             config.GrantPartner(this.ObjectType, Meta.Locale, Operation.Read, Operation.Write);
-            config.GrantPartner(this.ObjectType, Meta.Title, Operation.Read, Operation.Write);
+            config.GrantPartner(this.ObjectType, Meta.Titles, Operation.Read, Operation.Write);
             config.GrantPartner(this.ObjectType, Meta.Salutation, Operation.Read, Operation.Write);
             config.GrantPartner(this.ObjectType, Meta.SocialSecurityNumber, Operation.Read, Operation.Write);
-            config.GrantPartner(this.ObjectType, Meta.BankAccount, Operation.Read, Operation.Write);
+            config.GrantPartner(this.ObjectType, Meta.BankAccounts, Operation.Read, Operation.Write);
         }
     }
 }

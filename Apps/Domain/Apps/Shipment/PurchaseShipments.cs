@@ -68,10 +68,10 @@ namespace Allors.Domain
             config.GrantOperations(this.ObjectType, full);
 
             config.GrantCustomer(this.ObjectType, Meta.CurrentShipmentStatus, Operation.Read);
-            config.GrantCustomer(this.ObjectType, Meta.ShipmentStatus, Operation.Read);
+            config.GrantCustomer(this.ObjectType, Meta.ShipmentStatuses, Operation.Read);
 
             config.GrantSales(this.ObjectType, Meta.CurrentShipmentStatus, Operation.Read);
-            config.GrantSales(this.ObjectType, Meta.ShipmentStatus, Operation.Read);
+            config.GrantSales(this.ObjectType, Meta.ShipmentStatuses, Operation.Read);
         }
     }
 }

@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="358833ba-1bec-4e9a-b1f0-2411a6b6277b">
+  <associationType id="aff826f5-822e-4cc1-b912-4210286fc9ff">
+    <objectType idref="d3ab7492-d73f-4dda-83c2-6d5bec0d0c86" />
+  </associationType>
+  <roleType id="e1af71e0-b0e3-43c0-a22a-3b1428630ce4">
+    <objectType idref="ffcabd07-f35f-4083-bef6-f6c47970ca5d" />
+    <pluralName>AllorsFloats</pluralName>
+    <singularName>AllorsFloat</singularName>
+  </roleType>
+</relationType>

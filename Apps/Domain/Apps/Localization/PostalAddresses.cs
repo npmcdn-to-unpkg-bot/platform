@@ -30,32 +30,32 @@ namespace Allors.Domain
 
             if (!string.IsNullOrEmpty(address1))
             {
-                postalAddresses.Filter.AddEquals(PostalAddresses.Meta.Address1, address1);
+                postalAddresses.Filter.AddEquals(Meta.Address1, address1);
             }
 
             if (!string.IsNullOrEmpty(address2))
             {
-                postalAddresses.Filter.AddEquals(PostalAddresses.Meta.Address2, address2);
+                postalAddresses.Filter.AddEquals(Meta.Address2, address2);
             }
 
             if (!string.IsNullOrEmpty(address3))
             {
-                postalAddresses.Filter.AddEquals(PostalAddresses.Meta.Address3, address3);
+                postalAddresses.Filter.AddEquals(Meta.Address3, address3);
             }
 
             if (postalCode != null)
             {
-                postalAddresses.Filter.AddContains(PostalAddresses.Meta.GeographicBoundary, postalCode);
+                postalAddresses.Filter.AddContains(Meta.GeographicBoundaries, postalCode);
             }
 
             if (city != null)
             {
-                postalAddresses.Filter.AddContains(PostalAddresses.Meta.GeographicBoundary, city);
+                postalAddresses.Filter.AddContains(Meta.GeographicBoundaries, city);
             }
 
             if (country != null)
             {
-                postalAddresses.Filter.AddContains(PostalAddresses.Meta.GeographicBoundary, country);
+                postalAddresses.Filter.AddContains(Meta.GeographicBoundaries, country);
             }
 
             return postalAddresses.First;

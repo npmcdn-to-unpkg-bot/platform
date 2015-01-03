@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="417f23ec-ba4d-4e9c-ba8a-5d4e146c86e7">
+  <isInterface>true</isInterface>
+  <pluralName>I2s</pluralName>
+  <singularName>I2</singularName>
+</objectType>

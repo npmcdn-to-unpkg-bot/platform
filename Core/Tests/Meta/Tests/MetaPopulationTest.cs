@@ -21,9 +21,6 @@ namespace Allors.Meta.Static
 
     using NUnit.Framework;
 
-    using Unit = Allors.Meta.Unit;
-    using UnitBuilder = Allors.Meta.UnitBuilder;
-
     [TestFixture]
     public class MetaPopulationTest : AbstractTest
     {

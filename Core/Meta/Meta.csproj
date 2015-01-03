@@ -41,32 +41,40 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\Meta\AssociationType.cs" />
-    <Compile Include="Core\Meta\ConcreteMethodType.cs" />
-    <Compile Include="Core\Meta\ConcreteRoleType.cs" />
-    <Compile Include="Core\Meta\Class.cs" />
-    <Compile Include="Core\Meta\Domain.cs" />
-    <Compile Include="Core\Meta\DomainObject.cs" />
-    <Compile Include="Core\Meta\Composite.cs" />
-    <Compile Include="Core\Meta\LazySet.cs" />
-    <Compile Include="Core\Meta\MethodInvocation.cs" />
-    <Compile Include="Core\Meta\Method.cs" />
-    <Compile Include="Core\Meta\OperandType.cs" />
-    <Compile Include="Core\Meta\PropertyType.cs" />
-    <Compile Include="Core\Meta\ObjectType.cs" />
-    <Compile Include="Core\Meta\MetaObject.cs" />
-    <Compile Include="Core\Meta\Inheritance.cs" />
-    <Compile Include="Core\Meta\MethodType.cs" />
-    <Compile Include="Core\Meta\RelationType.cs" />
-    <Compile Include="Core\Meta\Interface.cs" />
-    <Compile Include="Core\Meta\MetaPopulation.cs" />
-    <Compile Include="Core\Meta\RoleType.cs" />
-    <Compile Include="Core\Meta\Unit.cs" />
-    <Compile Include="Core\Meta\ValidationError.cs" />
-    <Compile Include="Core\Meta\ValidationKind.cs" />
-    <Compile Include="Core\Meta\ValidationLog.cs" />
-    <Compile Include="Test\Meta\Repository.cs" />
-    <Compile Include="Test\Meta\Repository.v.cs" />
+    <Compile Include="Core\Population\AllorsBinaryUnit.cs" />
+    <Compile Include="Core\Population\AllorsBooleanUnit.cs" />
+    <Compile Include="Core\Population\AllorsDateTimeUnit.cs" />
+    <Compile Include="Core\Population\AllorsDecimalUnit.cs" />
+    <Compile Include="Core\Population\AllorsFloatUnit.cs" />
+    <Compile Include="Core\Population\AllorsIntegerUnit.cs" />
+    <Compile Include="Core\Population\AllorsStringUnit.cs" />
+    <Compile Include="Core\Population\AllorsUniqueUnit.cs" />
+    <Compile Include="Core\Population\CoreDomain.cs" />
+    <Compile Include="Core\Population\ObjectInterface.cs" />
+    <Compile Include="Core\Domain\AssociationType.cs" />
+    <Compile Include="Core\Domain\ConcreteMethodType.cs" />
+    <Compile Include="Core\Domain\ConcreteRoleType.cs" />
+    <Compile Include="Core\Domain\Class.cs" />
+    <Compile Include="Core\Domain\Domain.cs" />
+    <Compile Include="Core\Domain\DomainObject.cs" />
+    <Compile Include="Core\Domain\Composite.cs" />
+    <Compile Include="Core\Domain\LazySet.cs" />
+    <Compile Include="Core\Domain\MethodInvocation.cs" />
+    <Compile Include="Core\Domain\Method.cs" />
+    <Compile Include="Core\Domain\OperandType.cs" />
+    <Compile Include="Core\Domain\PropertyType.cs" />
+    <Compile Include="Core\Domain\ObjectType.cs" />
+    <Compile Include="Core\Domain\MetaObject.cs" />
+    <Compile Include="Core\Domain\Inheritance.cs" />
+    <Compile Include="Core\Domain\MethodType.cs" />
+    <Compile Include="Core\Domain\RelationType.cs" />
+    <Compile Include="Core\Domain\Interface.cs" />
+    <Compile Include="Core\Domain\MetaPopulation.cs" />
+    <Compile Include="Core\Domain\RoleType.cs" />
+    <Compile Include="Core\Domain\Unit.cs" />
+    <Compile Include="Core\Domain\ValidationError.cs" />
+    <Compile Include="Core\Domain\ValidationKind.cs" />
+    <Compile Include="Core\Domain\ValidationLog.cs" />
     <Compile Include="Core\Generation\Generate.cs" />
     <Compile Include="Core\Generation\GenerateLog.cs" />
     <Compile Include="Core\Generation\Log.cs" />
@@ -74,7 +82,15 @@
     <Compile Include="Core\Generation\Storage\AllorsFileInfo.cs" />
     <Compile Include="Core\Generation\Storage\Location.cs" />
     <Compile Include="Core\Generation\StringTemplate.cs" />
+    <Compile Include="Generated\C1.g.cs" />
+    <Compile Include="Generated\C2.g.cs" />
+    <Compile Include="Generated\I1.g.cs" />
+    <Compile Include="Generated\I12.g.cs" />
+    <Compile Include="Generated\I2.g.cs" />
+    <Compile Include="Generated\Meta.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Test\MetaPopulation.v.cs" />
+    <Compile Include="Test\Meta\Composite.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Core\Overview.cd" />
@@ -87,6 +103,7 @@
       <Name>Allors</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

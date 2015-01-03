@@ -75,9 +75,9 @@ namespace Allors.Domain
             config.GrantSupplier(this.ObjectType, Meta.CurrentOrderStatus, Operation.Read);
             config.GrantSupplier(this.ObjectType, Meta.CurrentPaymentStatus, Operation.Read);
             config.GrantSupplier(this.ObjectType, Meta.CurrentShipmentStatus, Operation.Read);
-            config.GrantSupplier(this.ObjectType, Meta.OrderStatus, Operation.Read);
-            config.GrantSupplier(this.ObjectType, Meta.PaymentStatus, Operation.Read);
-            config.GrantSupplier(this.ObjectType, Meta.ShipmentStatus, Operation.Read);
+            config.GrantSupplier(this.ObjectType, Meta.OrderStatuses, Operation.Read);
+            config.GrantSupplier(this.ObjectType, Meta.PaymentStatuses, Operation.Read);
+            config.GrantSupplier(this.ObjectType, Meta.ShipmentStatuses, Operation.Read);
             config.GrantSupplier(this.ObjectType, Meta.TotalBasePrice, Operation.Read);
             config.GrantSupplier(this.ObjectType, Meta.TotalDiscount, Operation.Read);
             config.GrantSupplier(this.ObjectType, Meta.TotalSurcharge, Operation.Read);
@@ -90,9 +90,9 @@ namespace Allors.Domain
             config.GrantProcurement(this.ObjectType, Meta.CurrentOrderStatus, Operation.Read);
             config.GrantProcurement(this.ObjectType, Meta.CurrentPaymentStatus, Operation.Read);
             config.GrantProcurement(this.ObjectType, Meta.CurrentShipmentStatus, Operation.Read);
-            config.GrantProcurement(this.ObjectType, Meta.OrderStatus, Operation.Read);
-            config.GrantProcurement(this.ObjectType, Meta.PaymentStatus, Operation.Read);
-            config.GrantProcurement(this.ObjectType, Meta.ShipmentStatus, Operation.Read);
+            config.GrantProcurement(this.ObjectType, Meta.OrderStatuses, Operation.Read);
+            config.GrantProcurement(this.ObjectType, Meta.PaymentStatuses, Operation.Read);
+            config.GrantProcurement(this.ObjectType, Meta.ShipmentStatuses, Operation.Read);
             config.GrantProcurement(this.ObjectType, Meta.TotalBasePrice, Operation.Read);
             config.GrantProcurement(this.ObjectType, Meta.TotalDiscount, Operation.Read);
             config.GrantProcurement(this.ObjectType, Meta.TotalSurcharge, Operation.Read);
