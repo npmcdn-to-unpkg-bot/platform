@@ -2,7 +2,7 @@ namespace Allors.Meta
 {
 	using System;
 
-	public partial class PartyClassificationInterface
+	public partial class ProspectRelationshipClass
 	{
 	    internal override void AppsExtend()
         {

@@ -38,7 +38,7 @@ namespace Allors.Domain
 
             this.DatabaseSession.Derive(true);
 
-            Assert.AreEqual(new CommunicationEventObjectStates(this.DatabaseSession).Opened, communication.CurrentObjectState);
+            Assert.AreEqual(new CommunicationEventObjectStates(this.DatabaseSession).InProgress, communication.CurrentObjectState);
             Assert.IsNotNull(communication.PreviousObjectState);
             Assert.AreEqual(communication.PreviousObjectState, communication.CurrentObjectState);
         }
@@ -54,7 +54,7 @@ namespace Allors.Domain
             this.DatabaseSession.Derive(true);
 
             Assert.AreEqual(1, communication.CommunicationEventStatuses.Count);
-            Assert.AreEqual(new CommunicationEventObjectStates(this.DatabaseSession).Opened, communication.CurrentCommunicationEventStatus.CommunicationEventObjectState);
+            Assert.AreEqual(new CommunicationEventObjectStates(this.DatabaseSession).InProgress, communication.CurrentCommunicationEventStatus.CommunicationEventObjectState);
 
             communication.Close();
             
@@ -62,7 +62,7 @@ namespace Allors.Domain
 
             this.DatabaseSession.Derive(true);
             Assert.AreEqual(2, communication.CommunicationEventStatuses.Count);
-            Assert.AreEqual(new CommunicationEventObjectStates(this.DatabaseSession).Closed, communication.CurrentCommunicationEventStatus.CommunicationEventObjectState);
+            Assert.AreEqual(new CommunicationEventObjectStates(this.DatabaseSession).Completed, communication.CurrentCommunicationEventStatus.CommunicationEventObjectState);
         }
     }
 }

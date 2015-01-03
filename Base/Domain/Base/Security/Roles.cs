@@ -71,11 +71,11 @@ namespace Allors.Domain
             base.BaseSetup(config);
 
             // Horizontal Roles
-            new RoleBuilder(Session).WithName(AdministratorName).WithUniqueId(AdministratorId).Build();
-            new RoleBuilder(Session).WithName(GuestName).WithUniqueId(GuestId).Build();
+            new RoleBuilder(this.Session).WithName(AdministratorName).WithUniqueId(AdministratorId).Build();
+            new RoleBuilder(this.Session).WithName(GuestName).WithUniqueId(GuestId).Build();
 
             // DAC emulation
-            new RoleBuilder(Session).WithName(OwnerName).WithUniqueId(OwnerId).Build();
+            new RoleBuilder(this.Session).WithName(OwnerName).WithUniqueId(OwnerId).Build();
 
             SecurityCache.Invalidate();
         }

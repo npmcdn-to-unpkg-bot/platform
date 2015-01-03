@@ -20,9 +20,6 @@
 
 namespace Allors.Domain
 {
-    
-    using Allors.Domain;
-
     public partial class Persons
     {
         public static void AppsDeriveCommissions(ISession session)
@@ -34,6 +31,11 @@ namespace Allors.Domain
                     person.DeriveCommission();
                 }
             }
+        }
+
+        protected override void AppsPrepare(Setup setup)
+        {
+            setup.AddDependency(Meta.ObjectType, Roles.Meta.ObjectType);
         }
 
         protected override void AppsSecure(Security config)

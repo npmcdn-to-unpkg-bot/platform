@@ -22,10 +22,13 @@ namespace Allors.Domain
 {
     public partial class InternalOrganisations
     {
+        protected override void AppsPrepare(Setup setup)
+        {
+            setup.AddDependency(Meta.ObjectType, Roles.Meta.ObjectType);
+        }
+
         protected override void AppsSecure(Security config)
         {
-            base.AppsSecure(config);
-
             var full = new[] { Operation.Read, Operation.Write, Operation.Execute };
 
             config.GrantAdministrator(this.ObjectType, full);

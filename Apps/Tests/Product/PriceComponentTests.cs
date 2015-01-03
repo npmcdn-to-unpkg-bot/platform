@@ -138,7 +138,7 @@ namespace Allors.Domain
             
             Assert.AreEqual("Baseprice: € 10.00 for feature golden with product gizmo, SKU: 10101, with boundary Netherlands", basePrice.DisplayName);
 
-            basePrice.PartyClassification = new PartyClassificationBuilder(this.DatabaseSession).WithDescription("Minority").Build();
+            basePrice.PartyClassification = new IndustryClassificationBuilder(this.DatabaseSession).WithName("Minority").Build();
             
             this.DatabaseSession.Derive(true);
 
@@ -479,7 +479,7 @@ namespace Allors.Domain
 
             Assert.AreEqual("Discount: € 10.00 for feature golden with product gizmo, SKU: 10101, with boundary Netherlands", discount.DisplayName);
 
-            discount.PartyClassification = new PartyClassificationBuilder(this.DatabaseSession).WithDescription("Minority").Build();
+            discount.PartyClassification = new IndustryClassificationBuilder(this.DatabaseSession).WithName("Minority").Build();
             this.DatabaseSession.Derive(true);
 
             Assert.AreEqual("Discount: € 10.00 for feature golden with product gizmo, SKU: 10101, with boundary Netherlands, with party classification Minority", discount.DisplayName);
@@ -590,7 +590,7 @@ namespace Allors.Domain
             this.DatabaseSession.Derive(true);
             Assert.AreEqual("Surcharge: € 10.00 for feature golden with product gizmo, SKU: 10101, with boundary Netherlands", surcharge.DisplayName);
 
-            surcharge.PartyClassification = new PartyClassificationBuilder(this.DatabaseSession).WithDescription("Minority").Build();
+            surcharge.PartyClassification = new IndustryClassificationBuilder(this.DatabaseSession).WithName("Minority").Build();
             this.DatabaseSession.Derive(true);
             Assert.AreEqual("Surcharge: € 10.00 for feature golden with product gizmo, SKU: 10101, with boundary Netherlands, with party classification Minority", surcharge.DisplayName);
 

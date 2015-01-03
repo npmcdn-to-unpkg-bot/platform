@@ -20,14 +20,14 @@
 
 namespace Allors.Domain
 {
-    public partial class PartyClassification
+    public static partial class PartyClassificationExtension
     {
-        public void AppsDerive(DerivableDerive method)
+        public static void AppsDerive(this PartyClassification @this, DerivableDerive method)
         {
-            this.DisplayName = this.Description;
+            @this.DisplayName = @this.Name;
 
-            this.SearchData.CharacterBoundaryText = this.DisplayName;
-            this.SearchData.RemoveWordBoundaryText();
+            @this.SearchData.CharacterBoundaryText = @this.DisplayName;
+            @this.SearchData.RemoveWordBoundaryText();
         }
     }
 }

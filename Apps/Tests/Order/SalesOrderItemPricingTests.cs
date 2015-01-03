@@ -2911,7 +2911,7 @@ namespace Allors.Domain
             const decimal QuantityOrdered = 3;
             const decimal Amount = 1;
 
-            var classification = new PartyClassificationBuilder(this.DatabaseSession).WithDescription("gold customer").Build();
+            var classification = new IndustryClassificationBuilder(this.DatabaseSession).WithName("gold customer").Build();
             new DiscountComponentBuilder(this.DatabaseSession)
                 .WithSpecifiedFor(this.internalOrganisation)
                 .WithDescription("discount good for party classification")
@@ -2958,7 +2958,7 @@ namespace Allors.Domain
             const decimal QuantityOrdered = 3;
             const decimal Percentage = 5;
 
-            var classification = new PartyClassificationBuilder(this.DatabaseSession).WithDescription("gold customer").Build();
+            var classification = new IndustryClassificationBuilder(this.DatabaseSession).WithName("gold customer").Build();
             new DiscountComponentBuilder(this.DatabaseSession)
                 .WithSpecifiedFor(this.internalOrganisation)
                 .WithDescription("discount good for party classification")
@@ -3005,7 +3005,7 @@ namespace Allors.Domain
             const decimal QuantityOrdered = 3;
             const decimal Amount = 1;
 
-            var classification = new PartyClassificationBuilder(this.DatabaseSession).WithDescription("gold customer").Build();
+            var classification = new IndustryClassificationBuilder(this.DatabaseSession).WithName("gold customer").Build();
             new SurchargeComponentBuilder(this.DatabaseSession)
                 .WithSpecifiedFor(this.internalOrganisation)
                 .WithDescription("discount good for party classification")
@@ -3051,7 +3051,7 @@ namespace Allors.Domain
             const decimal QuantityOrdered = 3;
             const decimal Percentage = 5;
 
-            var classification = new PartyClassificationBuilder(this.DatabaseSession).WithDescription("gold customer").Build();
+            var classification = new IndustryClassificationBuilder(this.DatabaseSession).WithName("gold customer").Build();
             new SurchargeComponentBuilder(this.DatabaseSession)
                 .WithSpecifiedFor(this.internalOrganisation)
                 .WithDescription("discount good for party classification")

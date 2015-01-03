@@ -2,11 +2,11 @@ namespace Allors.Meta
 {
 	using System;
 
-	public partial class PartyClassificationClass
+	public partial class PartyClassificationInterface
 	{
-	    internal override void AppsExtend()
+        internal override void AppsExtend()
         {
-            this.Roles.Description.IsRequired = true;
+            this.Roles.Name.IsRequired = true;
         }
 	}
 }

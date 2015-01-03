@@ -182,15 +182,21 @@ namespace Allors.Domain
 
 					Party InvolvedParties {set;}
 
-					global::System.DateTime? InitialScheduledStartDate {set;}
+					global::System.DateTime? InitialScheduledStart {set;}
 
 					CommunicationEventObjectState CurrentObjectState {set;}
 
 					CommunicationEventPurpose EventPurposes {set;}
 
+					global::System.DateTime? ScheduledEnd {set;}
+
+					global::System.DateTime? ActualEnd {set;}
+
 					WorkEffort WorkEfforts {set;}
 
 					global::System.String Description {set;}
+
+					global::System.DateTime? InitialScheduledEnd {set;}
 
 					global::System.String Subject {set;}
 
@@ -198,11 +204,15 @@ namespace Allors.Domain
 
 					Media Documents {set;}
 
+					GeographicBoundary CommunicationEventLocation {set;}
+
 					Case Case {set;}
 
 					Person Owner {set;}
 
 					CommunicationEventStatus CurrentCommunicationEventStatus {set;}
+
+					global::System.String Note {set;}
 
 					global::System.DateTime? ActualStart {set;}
 
@@ -820,6 +830,11 @@ namespace Allors.Domain
 					VatRegime VatRegime {set;}
 
 	}
+	public interface PartyClassification  : Object, UserInterfaceable, Searchable 
+	{
+					global::System.String Name {set;}
+
+	}
 	public interface PartyRelationship  : Object, Period, Commentable, UserInterfaceable 
 	{
 					PartyRelationshipStatus PartyRelationshipStatus {set;}
@@ -1156,6 +1171,12 @@ namespace Allors.Domain
 					global::System.Decimal? EstimatedHours {set;}
 
 	}
+	public interface OrganisationClassification  : Object, PartyClassification 
+	{
+	}
+	public interface PersonClassification  : Object, PartyClassification 
+	{
+	}
 	public interface AccessControl  : Object, Deletable, UserInterfaceable 
 	{
 					UserGroup SubjectGroups {set;}
@@ -1291,11 +1312,15 @@ namespace Allors.Domain
 
 					global::System.Decimal YTDCommission {set;}
 
+					PersonClassification PersonClassifications {set;}
+
 					Citizenship Citizenship {set;}
 
 					Employment CurrentEmployment {set;}
 
 					global::System.Decimal LastYearsCommission {set;}
+
+					global::System.String GivenName {set;}
 
 					PersonalTitle Titles {set;}
 
@@ -2234,7 +2259,7 @@ namespace Allors.Domain
 	}
 	public interface FaceToFaceCommunication  : Object, CommunicationEvent 
 	{
-					PostalAddress Location {set;}
+					PostalAddress FaceToFaceCommunicationLocation {set;}
 
 					Person Participants {set;}
 
@@ -2859,6 +2884,8 @@ namespace Allors.Domain
 
 					UserGroup SupplierContactUserGroup {set;}
 
+					OrganisationClassification OrganisationClassifications {set;}
+
 	}
 	public interface OrganisationContactKind  : Object, UserInterfaceable, UniquelyIdentifiable 
 	{
@@ -3037,11 +3064,6 @@ namespace Allors.Domain
 					global::System.Decimal? ActualAvailableTime {set;}
 
 					Employment Employment {set;}
-
-	}
-	public interface PartyClassification  : Object, UserInterfaceable, Searchable 
-	{
-					global::System.String Description {set;}
 
 	}
 	public interface PartyContactMechanism  : Object, Commentable, UserInterfaceable 
@@ -3495,7 +3517,7 @@ namespace Allors.Domain
 					global::System.String Region {set;}
 
 	}
-	public interface PostalCode  : Object, UserInterfaceable, GeographicBoundary 
+	public interface PostalCode  : Object, CountryBound, UserInterfaceable, GeographicBoundary 
 	{
 					global::System.String Code {set;}
 
@@ -5177,6 +5199,16 @@ namespace Allors.Domain
 					Deliverable Deliverable {set;}
 
 					Product Product {set;}
+
+	}
+	public interface IndustryClassification  : Object, OrganisationClassification 
+	{
+	}
+	public interface ProspectRelationship  : Object, PartyRelationship 
+	{
+					InternalOrganisation InternalOrganisation {set;}
+
+					Party Prospect {set;}
 
 	}
 }

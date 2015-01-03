@@ -992,6 +992,7 @@
     <Compile Include="Generated\Hobby.g.cs" />
     <Compile Include="Generated\Image.g.cs" />
     <Compile Include="Generated\Incentive.g.cs" />
+    <Compile Include="Generated\IndustryClassification.g.cs" />
     <Compile Include="Generated\InternalAccountingTransaction.g.cs" />
     <Compile Include="Generated\InternalOrganisation.g.cs" />
     <Compile Include="Generated\InternalOrganisationAccountingPreference.g.cs" />
@@ -1063,6 +1064,7 @@
     <Compile Include="Generated\OrderValue.g.cs" />
     <Compile Include="Generated\Ordinal.g.cs" />
     <Compile Include="Generated\Organisation.g.cs" />
+    <Compile Include="Generated\OrganisationClassification.g.cs" />
     <Compile Include="Generated\OrganisationContactKind.g.cs" />
     <Compile Include="Generated\OrganisationContactRelationship.g.cs" />
     <Compile Include="Generated\OrganisationGlAccount.g.cs" />
@@ -1121,6 +1123,7 @@
     <Compile Include="Generated\Permission.g.cs" />
     <Compile Include="Generated\Person.g.cs" />
     <Compile Include="Generated\PersonalTitle.g.cs" />
+    <Compile Include="Generated\PersonClassification.g.cs" />
     <Compile Include="Generated\PersonTraining.g.cs" />
     <Compile Include="Generated\Phase.g.cs" />
     <Compile Include="Generated\PhoneCommunication.g.cs" />
@@ -1168,6 +1171,7 @@
     <Compile Include="Generated\ProjectRequirement.g.cs" />
     <Compile Include="Generated\Property.g.cs" />
     <Compile Include="Generated\Proposal.g.cs" />
+    <Compile Include="Generated\ProspectRelationship.g.cs" />
     <Compile Include="Generated\Province.g.cs" />
     <Compile Include="Generated\PurchaseAgreement.g.cs" />
     <Compile Include="Generated\PurchaseInvoice.g.cs" />

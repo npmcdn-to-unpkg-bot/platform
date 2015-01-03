@@ -36,8 +36,6 @@ namespace Allors
             this.BaseSetup(setup);
             this.AppsSetup(setup);
             this.TestSetup(setup);
-
-            this.session.Derive(true);
         }
 
         public void Secure(Security security)

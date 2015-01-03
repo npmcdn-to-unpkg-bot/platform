@@ -20,6 +20,8 @@
 
 namespace Allors.Domain
 {
+    using System;
+
     public partial class AccessControl
     {
         public void BaseDerive(DerivableDerive method)
