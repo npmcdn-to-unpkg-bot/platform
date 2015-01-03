@@ -1,5 +1,5 @@
 <objectType allors="1.0" id="3bb83aa5-e58a-4421-bdbc-3c9fa0b2324f">
-  <namespace idref="91bd1c52-d40f-4e84-9367-7cce846def6f" />
+  <isInterface>true</isInterface>
   <pluralName>PartyClassifications</pluralName>
   <singularName>PartyClassification</singularName>
 </objectType>

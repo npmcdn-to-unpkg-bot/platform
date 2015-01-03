@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="e803f51e-a497-4e3a-b082-494fc4af943a">
+  <associationType id="4e75fb76-3831-4646-99a7-c6b904d867ef">
+    <isMany>true</isMany>
+    <objectType idref="d0de3fad-1944-44e5-be99-b74df7a1f917" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="1f4abcc7-8c9a-4e4a-8ff4-48a05c5d4291">
+    <objectType idref="3bba6e5a-dc2d-4838-b6c4-881f6c8c3013" />
+    <pluralName>Prospects</pluralName>
+    <singularName>Prospect</singularName>
+  </roleType>
+</relationType>

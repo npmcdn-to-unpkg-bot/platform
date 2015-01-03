@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="3bc21bd3-1af9-492d-8dde-b0696e20a11a">
+  <associationType id="439ec2e8-0f9c-474f-8cca-6b33887897ae">
+    <objectType idref="b05371ff-0c9e-4ee3-b31d-e2edeed8649e" />
+  </associationType>
+  <roleType id="1d09f872-86ef-4970-9459-d03075799145">
+    <objectType idref="c4c09343-61d3-418c-ade2-fe6fd588f128" />
+    <pluralName>ScheduledEnds</pluralName>
+    <singularName>ScheduledEnd</singularName>
+  </roleType>
+</relationType>

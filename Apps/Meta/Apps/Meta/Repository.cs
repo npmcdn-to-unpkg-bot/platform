@@ -583,7 +583,7 @@ namespace Allors.Meta
 
         private static void AppsPartyClassification()
         {
-            PartyClassificationDescription.IsRequired = true;
+            PartyClassificationName.IsRequired = true;
         }
 
         private static void AppsSalesRepRelationship()

@@ -39,6 +39,7 @@ namespace Allors.Meta
 		public static Interface PartyRelationship;
 		public static Class RateType;
 		public static Class Brand;
+		public static Interface OrganisationClassification;
 		public static Class SupplierOffering;
 		public static Class SalesAccountingTransaction;
 		public static Class Vehicle;
@@ -150,7 +151,7 @@ namespace Allors.Meta
 		public static Interface GeographicBoundaryComposite;
 		public static Class InvoiceSequence;
 		public static Class CustomerRelationship;
-		public static Class PartyClassification;
+		public static Interface PartyClassification;
 		public static Interface Party;
 		public static Class PartyProductCategoryRevenue;
 		public static Class PartyFixedAssetAssignment;
@@ -263,6 +264,7 @@ namespace Allors.Meta
 		public static Class Engagement;
 		public static Interface Part;
 		public static Class InventoryItemKind;
+		public static Interface PersonClassification;
 		public static Class CustomEngagementItem;
 		public static Interface AccountingTransaction;
 		public static Class SalesRepPartyRevenue;
@@ -426,6 +428,7 @@ namespace Allors.Meta
 		public static Class RevenueQuantityBreak;
 		public static Class GeneralLedgerAccountType;
 		public static Class SerializedInventoryItemObjectState;
+		public static Class ProspectRelationship;
 		public static Class FaceToFaceCommunication;
 		public static Class BudgetReview;
 		public static Class EngineeringChangeStatus;
@@ -449,6 +452,7 @@ namespace Allors.Meta
 		public static Class Store;
 		public static Class Lot;
 		public static Class WorkEffortSkillStandard;
+		public static Class IndustryClassification;
 		public static Class TimeAndMaterialsService;
 		public static Class Equipment;
 		public static Class RequestItem;
@@ -719,6 +723,7 @@ namespace Allors.Meta
 
 		public static RoleType CountryBoundCountry;
 		public static ConcreteRoleType TerritoryCountry;
+		public static ConcreteRoleType PostalCodeCountry;
 		public static ConcreteRoleType ProvinceCountry;
 		public static ConcreteRoleType StateCountry;
 		public static ConcreteRoleType CityCountry;
@@ -988,6 +993,7 @@ namespace Allors.Meta
 		public static ConcreteRoleType ProfessionalServicesRelationshipPartyRelationshipStatus;
 		public static ConcreteRoleType ClientRelationshipPartyRelationshipStatus;
 		public static ConcreteRoleType PartnershipPartyRelationshipStatus;
+		public static ConcreteRoleType ProspectRelationshipPartyRelationshipStatus;
 		public static ConcreteRoleType SubContractorRelationshipPartyRelationshipStatus;
 		public static ConcreteRoleType DistributionChannelRelationshipPartyRelationshipStatus;
 
@@ -1181,6 +1187,7 @@ namespace Allors.Meta
 		public static ConcreteRoleType ProfessionalServicesRelationshipRelationshipAgreement;
 		public static ConcreteRoleType ClientRelationshipRelationshipAgreement;
 		public static ConcreteRoleType PartnershipRelationshipAgreement;
+		public static ConcreteRoleType ProspectRelationshipRelationshipAgreement;
 		public static ConcreteRoleType SubContractorRelationshipRelationshipAgreement;
 		public static ConcreteRoleType DistributionChannelRelationshipRelationshipAgreement;
 
@@ -1455,6 +1462,7 @@ namespace Allors.Meta
 		public static ConcreteRoleType ProfessionalServicesRelationshipPartyRelationshipPriority;
 		public static ConcreteRoleType ClientRelationshipPartyRelationshipPriority;
 		public static ConcreteRoleType PartnershipPartyRelationshipPriority;
+		public static ConcreteRoleType ProspectRelationshipPartyRelationshipPriority;
 		public static ConcreteRoleType SubContractorRelationshipPartyRelationshipPriority;
 		public static ConcreteRoleType DistributionChannelRelationshipPartyRelationshipPriority;
 
@@ -1837,6 +1845,7 @@ namespace Allors.Meta
 
 		public static RoleType SalesInvoiceItemProduct;
 		public static RoleType ProductCategoryRevenueHistoryRevenue;
+		public static RoleType PersonPersonClassification;
 		public static RoleType PositionFulfillmentPerson;
 		public static RoleType CreditCardExpirationYear;
 		public static RoleType ShippingAndHandlingComponentShipmentMethod;
@@ -1876,7 +1885,9 @@ namespace Allors.Meta
 		public static RoleType GoodBarCode;
 		public static RoleType JournalEntryJournalDate;
 		public static RoleType JournalContraAccount;
-		public static RoleType PartyClassificationDescription;
+		public static RoleType PartyClassificationName;
+		public static ConcreteRoleType IndustryClassificationName;
+
 		public static RoleType SalesOrderInitialProfitMargin;
 		public static RoleType EmailCommunicationCarbonCopy;
 		public static RoleType CustomerShipmentReleasedManually;
@@ -2177,6 +2188,7 @@ namespace Allors.Meta
 		public static RoleType DisbursementAccountingTransactionDisbursement;
 		public static RoleType ProfessionalServicesRelationshipProfessional;
 		public static RoleType PurchaseShipmentPreviousObjectState;
+		public static RoleType PersonGivenName;
 		public static RoleType AccountingTransactionDetailAssociatedWith;
 		public static RoleType InternalOrganisationNextIncomingShipmentNumber;
 		public static RoleType EngagementTakenViaInternalOrganisation;
@@ -2361,6 +2373,7 @@ namespace Allors.Meta
 		public static ConcreteRoleType ExportDocumentDescription;
 
 		public static RoleType PersonMothersMaidenName;
+		public static RoleType ProspectRelationshipInternalOrganisation;
 		public static RoleType WorkEffortInventoryAssignmentQuantity;
 		public static RoleType PartyBillingAddress;
 		public static ConcreteRoleType AutomatedAgentBillingAddress;
@@ -2961,6 +2974,7 @@ namespace Allors.Meta
 		public static ConcreteRoleType ProfessionalServicesRelationshipSimpleMovingAverage;
 		public static ConcreteRoleType ClientRelationshipSimpleMovingAverage;
 		public static ConcreteRoleType PartnershipSimpleMovingAverage;
+		public static ConcreteRoleType ProspectRelationshipSimpleMovingAverage;
 		public static ConcreteRoleType SubContractorRelationshipSimpleMovingAverage;
 		public static ConcreteRoleType DistributionChannelRelationshipSimpleMovingAverage;
 
@@ -3025,6 +3039,7 @@ namespace Allors.Meta
 		public static ConcreteRoleType ProfessionalServicesRelationshipCommunicationEvent;
 		public static ConcreteRoleType ClientRelationshipCommunicationEvent;
 		public static ConcreteRoleType PartnershipCommunicationEvent;
+		public static ConcreteRoleType ProspectRelationshipCommunicationEvent;
 		public static ConcreteRoleType SubContractorRelationshipCommunicationEvent;
 		public static ConcreteRoleType DistributionChannelRelationshipCommunicationEvent;
 
@@ -3895,6 +3910,7 @@ namespace Allors.Meta
 		public static ConcreteRoleType SalesOrderTotalShippingAndHandling;
 
 		public static RoleType DesiredProductFeatureProductFeature;
+		public static RoleType OrganisationOrganisationClassification;
 		public static RoleType OrderItemTotalBasePrice;
 		public static ConcreteRoleType SalesOrderItemTotalBasePrice;
 		public static ConcreteRoleType PurchaseOrderItemTotalBasePrice;
@@ -4237,6 +4253,7 @@ namespace Allors.Meta
 		public static RoleType SalesRepCommissionYear;
 		public static RoleType PartSubstitutePart;
 		public static RoleType EngagementRateUnitOfMeasure;
+		public static RoleType ProspectRelationshipProspect;
 		public static RoleType SalesInvoiceItemPreviousObjectState;
 		public static RoleType JournalEntryJournalEntryDetail;
 		public static RoleType PartyPackageRevenuePartyPackageName;
@@ -4806,6 +4823,7 @@ namespace Allors.Meta
 		public static ConcreteRoleType DiscountComponentFromDate;
 		public static ConcreteRoleType VolumeUsageFromDate;
 		public static ConcreteRoleType EstimatedMaterialCostFromDate;
+		public static ConcreteRoleType ProspectRelationshipFromDate;
 		public static ConcreteRoleType EmploymentAgreementFromDate;
 		public static ConcreteRoleType ManufacturerSuggestedRetailPriceFromDate;
 		public static ConcreteRoleType SubContractorRelationshipFromDate;
@@ -4926,7 +4944,6 @@ namespace Allors.Meta
 		public static ConcreteRoleType VatCalculationMethodDeniedPermission;
 		public static ConcreteRoleType InvoiceSequenceDeniedPermission;
 		public static ConcreteRoleType CustomerRelationshipDeniedPermission;
-		public static ConcreteRoleType PartyClassificationDeniedPermission;
 		public static ConcreteRoleType PartyProductCategoryRevenueDeniedPermission;
 		public static ConcreteRoleType PartyFixedAssetAssignmentDeniedPermission;
 		public static ConcreteRoleType DunningTypeDeniedPermission;
@@ -5156,6 +5173,7 @@ namespace Allors.Meta
 		public static ConcreteRoleType TransferDeniedPermission;
 		public static ConcreteRoleType RevenueQuantityBreakDeniedPermission;
 		public static ConcreteRoleType GeneralLedgerAccountTypeDeniedPermission;
+		public static ConcreteRoleType ProspectRelationshipDeniedPermission;
 		public static ConcreteRoleType FaceToFaceCommunicationDeniedPermission;
 		public static ConcreteRoleType BudgetReviewDeniedPermission;
 		public static ConcreteRoleType EngineeringChangeStatusDeniedPermission;
@@ -5175,6 +5193,7 @@ namespace Allors.Meta
 		public static ConcreteRoleType StoreDeniedPermission;
 		public static ConcreteRoleType LotDeniedPermission;
 		public static ConcreteRoleType WorkEffortSkillStandardDeniedPermission;
+		public static ConcreteRoleType IndustryClassificationDeniedPermission;
 		public static ConcreteRoleType TimeAndMaterialsServiceDeniedPermission;
 		public static ConcreteRoleType EquipmentDeniedPermission;
 		public static ConcreteRoleType RequestItemDeniedPermission;
@@ -5289,7 +5308,6 @@ namespace Allors.Meta
 		public static ConcreteRoleType ProductionRunSearchData;
 		public static ConcreteRoleType OrganisationSearchData;
 		public static ConcreteRoleType ResponsibilitySearchData;
-		public static ConcreteRoleType PartyClassificationSearchData;
 		public static ConcreteRoleType CapitalBudgetSearchData;
 		public static ConcreteRoleType SizeSearchData;
 		public static ConcreteRoleType PerformanceNoteSearchData;
@@ -5405,6 +5423,7 @@ namespace Allors.Meta
 		public static ConcreteRoleType PostalAddressSearchData;
 		public static ConcreteRoleType ClientAgreementSearchData;
 		public static ConcreteRoleType LotSearchData;
+		public static ConcreteRoleType IndustryClassificationSearchData;
 		public static ConcreteRoleType TimeAndMaterialsServiceSearchData;
 		public static ConcreteRoleType EquipmentSearchData;
 		public static ConcreteRoleType SalesChannelSearchData;
@@ -5556,7 +5575,6 @@ namespace Allors.Meta
 		public static ConcreteRoleType VatCalculationMethodDisplayName;
 		public static ConcreteRoleType InvoiceSequenceDisplayName;
 		public static ConcreteRoleType CustomerRelationshipDisplayName;
-		public static ConcreteRoleType PartyClassificationDisplayName;
 		public static ConcreteRoleType PartyProductCategoryRevenueDisplayName;
 		public static ConcreteRoleType PartyFixedAssetAssignmentDisplayName;
 		public static ConcreteRoleType DunningTypeDisplayName;
@@ -5786,6 +5804,7 @@ namespace Allors.Meta
 		public static ConcreteRoleType TransferDisplayName;
 		public static ConcreteRoleType RevenueQuantityBreakDisplayName;
 		public static ConcreteRoleType GeneralLedgerAccountTypeDisplayName;
+		public static ConcreteRoleType ProspectRelationshipDisplayName;
 		public static ConcreteRoleType FaceToFaceCommunicationDisplayName;
 		public static ConcreteRoleType BudgetReviewDisplayName;
 		public static ConcreteRoleType EngineeringChangeStatusDisplayName;
@@ -5805,6 +5824,7 @@ namespace Allors.Meta
 		public static ConcreteRoleType StoreDisplayName;
 		public static ConcreteRoleType LotDisplayName;
 		public static ConcreteRoleType WorkEffortSkillStandardDisplayName;
+		public static ConcreteRoleType IndustryClassificationDisplayName;
 		public static ConcreteRoleType TimeAndMaterialsServiceDisplayName;
 		public static ConcreteRoleType EquipmentDisplayName;
 		public static ConcreteRoleType RequestItemDisplayName;
@@ -6013,7 +6033,6 @@ namespace Allors.Meta
 		public static ConcreteRoleType VatCalculationMethodSecurityToken;
 		public static ConcreteRoleType InvoiceSequenceSecurityToken;
 		public static ConcreteRoleType CustomerRelationshipSecurityToken;
-		public static ConcreteRoleType PartyClassificationSecurityToken;
 		public static ConcreteRoleType PartyProductCategoryRevenueSecurityToken;
 		public static ConcreteRoleType PartyFixedAssetAssignmentSecurityToken;
 		public static ConcreteRoleType DunningTypeSecurityToken;
@@ -6243,6 +6262,7 @@ namespace Allors.Meta
 		public static ConcreteRoleType TransferSecurityToken;
 		public static ConcreteRoleType RevenueQuantityBreakSecurityToken;
 		public static ConcreteRoleType GeneralLedgerAccountTypeSecurityToken;
+		public static ConcreteRoleType ProspectRelationshipSecurityToken;
 		public static ConcreteRoleType FaceToFaceCommunicationSecurityToken;
 		public static ConcreteRoleType BudgetReviewSecurityToken;
 		public static ConcreteRoleType EngineeringChangeStatusSecurityToken;
@@ -6262,6 +6282,7 @@ namespace Allors.Meta
 		public static ConcreteRoleType StoreSecurityToken;
 		public static ConcreteRoleType LotSecurityToken;
 		public static ConcreteRoleType WorkEffortSkillStandardSecurityToken;
+		public static ConcreteRoleType IndustryClassificationSecurityToken;
 		public static ConcreteRoleType TimeAndMaterialsServiceSecurityToken;
 		public static ConcreteRoleType EquipmentSecurityToken;
 		public static ConcreteRoleType RequestItemSecurityToken;
@@ -6436,6 +6457,7 @@ namespace Allors.Meta
 		public static ConcreteRoleType DiscountComponentThroughDate;
 		public static ConcreteRoleType VolumeUsageThroughDate;
 		public static ConcreteRoleType EstimatedMaterialCostThroughDate;
+		public static ConcreteRoleType ProspectRelationshipThroughDate;
 		public static ConcreteRoleType EmploymentAgreementThroughDate;
 		public static ConcreteRoleType ManufacturerSuggestedRetailPriceThroughDate;
 		public static ConcreteRoleType SubContractorRelationshipThroughDate;
@@ -6514,6 +6536,7 @@ namespace Allors.Meta
 		public static ConcreteRoleType VolumeUsageComment;
 		public static ConcreteRoleType ToleranceComment;
 		public static ConcreteRoleType PartyContactMechanismComment;
+		public static ConcreteRoleType ProspectRelationshipComment;
 		public static ConcreteRoleType FaceToFaceCommunicationComment;
 		public static ConcreteRoleType BudgetReviewComment;
 		public static ConcreteRoleType DisbursementComment;
@@ -6942,6 +6965,12 @@ namespace Allors.Meta
 			Brand = new ClassBuilder(Apps, new Guid("0a7ac589-946b-4d49-b7e0-7e0b9bc90111"))
 			.WithSingularName("Brand")
 			.WithPluralName("Brands")
+			.Build();
+  
+  
+			OrganisationClassification = new InterfaceBuilder(Apps, new Guid("0aaee7b0-0a32-4d0b-a3ed-a448608fe935"))
+			.WithSingularName("OrganisationClassification")
+			.WithPluralName("OrganisationClassifications")
 			.Build();
   
 
@@ -7610,8 +7639,8 @@ namespace Allors.Meta
 			.WithPluralName("CustomerRelationships")
 			.Build();
   
-
-			PartyClassification = new ClassBuilder(Apps, new Guid("3bb83aa5-e58a-4421-bdbc-3c9fa0b2324f"))
+  
+			PartyClassification = new InterfaceBuilder(Apps, new Guid("3bb83aa5-e58a-4421-bdbc-3c9fa0b2324f"))
 			.WithSingularName("PartyClassification")
 			.WithPluralName("PartyClassifications")
 			.Build();
@@ -8286,6 +8315,12 @@ namespace Allors.Meta
 			InventoryItemKind = new ClassBuilder(Apps, new Guid("759f97a9-3105-49b4-81a0-c94c3700397c"))
 			.WithSingularName("InventoryItemKind")
 			.WithPluralName("InventoryItemKinds")
+			.Build();
+  
+  
+			PersonClassification = new InterfaceBuilder(Apps, new Guid("77f63100-054a-459b-8864-e69b646ff307"))
+			.WithSingularName("PersonClassification")
+			.WithPluralName("PersonClassifications")
 			.Build();
   
 
@@ -9267,6 +9302,12 @@ namespace Allors.Meta
 			.Build();
   
 
+			ProspectRelationship = new ClassBuilder(Apps, new Guid("d0de3fad-1944-44e5-be99-b74df7a1f917"))
+			.WithSingularName("ProspectRelationship")
+			.WithPluralName("ProspectRelationships")
+			.Build();
+  
+
 			FaceToFaceCommunication = new ClassBuilder(Apps, new Guid("d0f9fc0d-a3c5-46cc-ab00-4c724995fc14"))
 			.WithSingularName("FaceToFaceCommunication")
 			.WithPluralName("FaceToFaceCommunications")
@@ -9402,6 +9443,12 @@ namespace Allors.Meta
 			WorkEffortSkillStandard = new ClassBuilder(Apps, new Guid("da16f5ee-0e04-41a7-afd7-b12e20414135"))
 			.WithSingularName("WorkEffortSkillStandard")
 			.WithPluralName("WorkEffortSkillStandards")
+			.Build();
+  
+
+			IndustryClassification = new ClassBuilder(Apps, new Guid("da27b432-85e4-4c83-bdb0-64cefb347e8a"))
+			.WithSingularName("IndustryClassification")
+			.WithPluralName("IndustryClassifications")
 			.Build();
   
 
@@ -10155,6 +10202,11 @@ namespace Allors.Meta
 				new InheritanceBuilder(Apps, new Guid("7b151d2a-d991-4e1f-8804-a75ea0df3207"))
 				.WithSubtype(Brand)
 				.WithSupertype(Searchable).Build();
+
+				// OrganisationClassification
+				new InheritanceBuilder(Apps, new Guid("496416d0-e82f-4bd3-b975-d1f0182bec8b"))
+				.WithSubtype(OrganisationClassification)
+				.WithSupertype(PartyClassification).Build();
 
 				// SupplierOffering
 				new InheritanceBuilder(Apps, new Guid("15f94cb3-467e-4362-989e-3e09f935c9dd"))
@@ -11703,6 +11755,11 @@ namespace Allors.Meta
 				.WithSubtype(InventoryItemKind)
 				.WithSupertype(Enumeration).Build();
 
+				// PersonClassification
+				new InheritanceBuilder(Apps, new Guid("7baecab7-5251-49a9-a76c-f690ac50d6da"))
+				.WithSubtype(PersonClassification)
+				.WithSupertype(PartyClassification).Build();
+
 				// CustomEngagementItem
 				new InheritanceBuilder(Apps, new Guid("caea57cd-123d-41e8-a539-83c4b5ca13f1"))
 				.WithSubtype(CustomEngagementItem)
@@ -12199,6 +12256,9 @@ namespace Allors.Meta
 				.WithSupertype(SearchResult).Build();
 
 				// PostalCode
+				new InheritanceBuilder(Apps, new Guid("8b0bf632-7c0f-46e6-a7f4-581e713f6a22"))
+				.WithSubtype(PostalCode)
+				.WithSupertype(CountryBound).Build();
 				new InheritanceBuilder(Apps, new Guid("a2554a5d-d5a9-44ed-bcfc-11cd3988a562"))
 				.WithSubtype(PostalCode)
 				.WithSupertype(UserInterfaceable).Build();
@@ -12844,6 +12904,11 @@ namespace Allors.Meta
 				.WithSubtype(SerializedInventoryItemObjectState)
 				.WithSupertype(ObjectState).Build();
 
+				// ProspectRelationship
+				new InheritanceBuilder(Apps, new Guid("108a5f14-2944-46cd-98ed-8563eee412c8"))
+				.WithSubtype(ProspectRelationship)
+				.WithSupertype(PartyRelationship).Build();
+
 				// FaceToFaceCommunication
 				new InheritanceBuilder(Apps, new Guid("95e81c3f-b0f9-48ff-8d0c-f00792e605d9"))
 				.WithSubtype(FaceToFaceCommunication)
@@ -13024,6 +13089,11 @@ namespace Allors.Meta
 				new InheritanceBuilder(Apps, new Guid("7730be15-f57f-4f9a-af73-51d2a2dd3452"))
 				.WithSubtype(WorkEffortSkillStandard)
 				.WithSupertype(UserInterfaceable).Build();
+
+				// IndustryClassification
+				new InheritanceBuilder(Apps, new Guid("d358bcbd-3048-4343-87b4-1f2571344309"))
+				.WithSubtype(IndustryClassification)
+				.WithSupertype(OrganisationClassification).Build();
 
 				// TimeAndMaterialsService
 				new InheritanceBuilder(Apps, new Guid("841252fa-7848-4cc2-ad67-c92678053088"))
@@ -14688,6 +14758,7 @@ namespace Allors.Meta
 				.RoleType;
 
 
+				// OrganisationClassification
 				// SupplierOffering
 				SupplierOfferingRating = new RelationTypeBuilder(Apps, new Guid("44e38ad4-833c-4da9-894d-bbe57d0f784e"),new Guid("c5769d37-d236-4ab6-9cab-dcc861dfbade"),new Guid("68ab327e-4ad4-460a-8b9f-f740a19670e0"))
 				.WithObjectTypes(SupplierOffering, RatingType)
@@ -17407,6 +17478,16 @@ namespace Allors.Meta
 				.Build()
 				.RoleType;
 
+				OrganisationOrganisationClassification = new RelationTypeBuilder(Apps, new Guid("d0ac426e-4775-4f2f-8055-08cb84e8e9bd"),new Guid("e8677033-8927-4a52-b210-9a98558625ba"),new Guid("8e2fd09a-eda9-47e2-8908-2527e947ffd1"))
+				.WithObjectTypes(Organisation, OrganisationClassification)
+				  
+				  
+				.WithMultiplicity(Multiplicity.ManyToMany)
+				  
+				.WithIsIndexed(true)  
+				.Build()
+				.RoleType;
+
 
 				// Responsibility
 				ResponsibilityDescription = new RelationTypeBuilder(Apps, new Guid("a570dd47-5bb6-4a37-b73e-3a9f7b3f37ee"),new Guid("0f98ce04-447c-497c-b63b-f943eb818c84"),new Guid("9ccfe2ef-4980-43d8-9c5b-247c93c902b7"))
@@ -17605,10 +17686,10 @@ namespace Allors.Meta
 
 
 				// PartyClassification
-				PartyClassificationDescription = new RelationTypeBuilder(Apps, new Guid("4f35ae7e-fe06-4a3b-abe1-adb78fcf2e6b"),new Guid("fd171d61-90ae-4169-8286-6054b82569a1"),new Guid("654f2aca-2eb7-495c-a739-82c38a629130"))
+				PartyClassificationName = new RelationTypeBuilder(Apps, new Guid("4f35ae7e-fe06-4a3b-abe1-adb78fcf2e6b"),new Guid("fd171d61-90ae-4169-8286-6054b82569a1"),new Guid("654f2aca-2eb7-495c-a739-82c38a629130"))
 				.WithObjectTypes(PartyClassification, AllorsString)
-				.WithSingularName("Description")  
-				.WithPluralName("Descriptions")  
+				.WithSingularName("Name")  
+				.WithPluralName("Names")  
 				  
 				  
 				.WithSize(256)
@@ -21822,6 +21903,7 @@ namespace Allors.Meta
 
 
 				// InventoryItemKind
+				// PersonClassification
 				// CustomEngagementItem
 				CustomEngagementItemDescriptionOfWork = new RelationTypeBuilder(Apps, new Guid("71a3ed63-922f-44ae-8e89-6425759b3eb3"),new Guid("00621849-ee7b-4a7e-b5c3-7ca2e2d40b3a"),new Guid("2b2d9ceb-cce9-4edd-bbaa-2829b3e5e32f"))
 				.WithObjectTypes(CustomEngagementItem, AllorsString)
@@ -28057,6 +28139,28 @@ namespace Allors.Meta
 
 
 				// SerializedInventoryItemObjectState
+				// ProspectRelationship
+				ProspectRelationshipInternalOrganisation = new RelationTypeBuilder(Apps, new Guid("6ff817ee-7f62-440b-a699-6a04c0e0b730"),new Guid("25b90f76-b9ba-4f95-bb17-9479f6ee58e4"),new Guid("5e3e7da0-1c75-4a77-9ac1-0b43b7f4c087"))
+				.WithObjectTypes(ProspectRelationship, InternalOrganisation)
+				  
+				  
+				.WithMultiplicity(Multiplicity.ManyToOne)
+				  
+				.WithIsIndexed(true)  
+				.Build()
+				.RoleType;
+
+				ProspectRelationshipProspect = new RelationTypeBuilder(Apps, new Guid("e803f51e-a497-4e3a-b082-494fc4af943a"),new Guid("4e75fb76-3831-4646-99a7-c6b904d867ef"),new Guid("1f4abcc7-8c9a-4e4a-8ff4-48a05c5d4291"))
+				.WithObjectTypes(ProspectRelationship, Party)
+				.WithSingularName("Prospect")  
+				.WithPluralName("Prospects")  
+				.WithMultiplicity(Multiplicity.ManyToOne)
+				  
+				.WithIsIndexed(true)  
+				.Build()
+				.RoleType;
+
+
 				// FaceToFaceCommunication
 				FaceToFaceCommunicationLocation = new RelationTypeBuilder(Apps, new Guid("2dfb4cd7-ed48-4b79-ba26-b430058356ef"),new Guid("b935b150-4172-46fb-ab1a-b7197ea71f18"),new Guid("e6f4591e-ee9a-4fe8-b908-ee4e18084aa8"))
 				.WithObjectTypes(FaceToFaceCommunication, PostalAddress)
@@ -29565,6 +29669,7 @@ namespace Allors.Meta
 				.RoleType;
 
 
+				// IndustryClassification
 				// TimeAndMaterialsService
 				// Equipment
 				// RequestItem
@@ -32113,6 +32218,16 @@ namespace Allors.Meta
 				.Build()
 				.RoleType;
 
+				PersonPersonClassification = new RelationTypeBuilder(Apps, new Guid("4de34e8b-6c0e-48e7-9b5a-5390325a13ff"),new Guid("aa8b50f0-176f-4036-819a-205f68ab6d64"),new Guid("525e2b11-5917-4b21-abdf-15ed74048e38"))
+				.WithObjectTypes(Person, PersonClassification)
+				  
+				  
+				.WithMultiplicity(Multiplicity.ManyToMany)
+				  
+				.WithIsIndexed(true)  
+				.Build()
+				.RoleType;
+
 				PersonCitizenship = new RelationTypeBuilder(Apps, new Guid("539b51e6-dd15-481c-86d3-ceb84588c078"),new Guid("280bf735-be99-4c2e-b867-efbf187d8a67"),new Guid("766470ee-34f8-4a49-8622-28e5f79bea72"))
 				.WithObjectTypes(Person, Citizenship)
 				.WithSingularName("Citizenship")  
@@ -32140,6 +32255,16 @@ namespace Allors.Meta
 				  
 				.WithPrecision(19)
 				.WithScale(2)
+				.Build()
+				.RoleType;
+
+				PersonGivenName = new RelationTypeBuilder(Apps, new Guid("634130cf-b466-4ed3-9036-a4a20566c344"),new Guid("41dd15b0-3525-428d-8af3-7ef4b90b974c"),new Guid("1dd0070d-af81-486e-8897-45727dae950a"))
+				.WithObjectTypes(Person, AllorsString)
+				.WithSingularName("GivenName")  
+				.WithPluralName("GivenNames")  
+				  
+				  
+				.WithSize(256)
 				.Build()
 				.RoleType;
 
@@ -32573,6 +32698,7 @@ namespace Allors.Meta
 
 
 		TerritoryCountry = Territory.ConcreteRoleTypeByRoleType[CountryBoundCountry];
+		PostalCodeCountry = PostalCode.ConcreteRoleTypeByRoleType[CountryBoundCountry];
 		ProvinceCountry = Province.ConcreteRoleTypeByRoleType[CountryBoundCountry];
 		StateCountry = State.ConcreteRoleTypeByRoleType[CountryBoundCountry];
 		CityCountry = City.ConcreteRoleTypeByRoleType[CountryBoundCountry];
@@ -32756,6 +32882,7 @@ namespace Allors.Meta
 		ProfessionalServicesRelationshipPartyRelationshipStatus = ProfessionalServicesRelationship.ConcreteRoleTypeByRoleType[PartyRelationshipPartyRelationshipStatus];
 		ClientRelationshipPartyRelationshipStatus = ClientRelationship.ConcreteRoleTypeByRoleType[PartyRelationshipPartyRelationshipStatus];
 		PartnershipPartyRelationshipStatus = Partnership.ConcreteRoleTypeByRoleType[PartyRelationshipPartyRelationshipStatus];
+		ProspectRelationshipPartyRelationshipStatus = ProspectRelationship.ConcreteRoleTypeByRoleType[PartyRelationshipPartyRelationshipStatus];
 		SubContractorRelationshipPartyRelationshipStatus = SubContractorRelationship.ConcreteRoleTypeByRoleType[PartyRelationshipPartyRelationshipStatus];
 		DistributionChannelRelationshipPartyRelationshipStatus = DistributionChannelRelationship.ConcreteRoleTypeByRoleType[PartyRelationshipPartyRelationshipStatus];
 
@@ -32888,6 +33015,7 @@ namespace Allors.Meta
 		ProfessionalServicesRelationshipRelationshipAgreement = ProfessionalServicesRelationship.ConcreteRoleTypeByRoleType[PartyRelationshipRelationshipAgreement];
 		ClientRelationshipRelationshipAgreement = ClientRelationship.ConcreteRoleTypeByRoleType[PartyRelationshipRelationshipAgreement];
 		PartnershipRelationshipAgreement = Partnership.ConcreteRoleTypeByRoleType[PartyRelationshipRelationshipAgreement];
+		ProspectRelationshipRelationshipAgreement = ProspectRelationship.ConcreteRoleTypeByRoleType[PartyRelationshipRelationshipAgreement];
 		SubContractorRelationshipRelationshipAgreement = SubContractorRelationship.ConcreteRoleTypeByRoleType[PartyRelationshipRelationshipAgreement];
 		DistributionChannelRelationshipRelationshipAgreement = DistributionChannelRelationship.ConcreteRoleTypeByRoleType[PartyRelationshipRelationshipAgreement];
 
@@ -33094,6 +33222,7 @@ namespace Allors.Meta
 		ProfessionalServicesRelationshipPartyRelationshipPriority = ProfessionalServicesRelationship.ConcreteRoleTypeByRoleType[PartyRelationshipPartyRelationshipPriority];
 		ClientRelationshipPartyRelationshipPriority = ClientRelationship.ConcreteRoleTypeByRoleType[PartyRelationshipPartyRelationshipPriority];
 		PartnershipPartyRelationshipPriority = Partnership.ConcreteRoleTypeByRoleType[PartyRelationshipPartyRelationshipPriority];
+		ProspectRelationshipPartyRelationshipPriority = ProspectRelationship.ConcreteRoleTypeByRoleType[PartyRelationshipPartyRelationshipPriority];
 		SubContractorRelationshipPartyRelationshipPriority = SubContractorRelationship.ConcreteRoleTypeByRoleType[PartyRelationshipPartyRelationshipPriority];
 		DistributionChannelRelationshipPartyRelationshipPriority = DistributionChannelRelationship.ConcreteRoleTypeByRoleType[PartyRelationshipPartyRelationshipPriority];
 
@@ -33401,6 +33530,9 @@ namespace Allors.Meta
 		SurchargeAdjustmentAmount = SurchargeAdjustment.ConcreteRoleTypeByRoleType[OrderAdjustmentAmount];
 		ShippingAndHandlingChargeAmount = ShippingAndHandlingCharge.ConcreteRoleTypeByRoleType[OrderAdjustmentAmount];
 		FeeAmount = Fee.ConcreteRoleTypeByRoleType[OrderAdjustmentAmount];
+
+
+		IndustryClassificationName = IndustryClassification.ConcreteRoleTypeByRoleType[PartyClassificationName];
 
 
 		VolumeUsageTimeFrequency = VolumeUsage.ConcreteRoleTypeByRoleType[DeploymentUsageTimeFrequency];
@@ -34139,6 +34271,7 @@ namespace Allors.Meta
 		ProfessionalServicesRelationshipSimpleMovingAverage = ProfessionalServicesRelationship.ConcreteRoleTypeByRoleType[PartyRelationshipSimpleMovingAverage];
 		ClientRelationshipSimpleMovingAverage = ClientRelationship.ConcreteRoleTypeByRoleType[PartyRelationshipSimpleMovingAverage];
 		PartnershipSimpleMovingAverage = Partnership.ConcreteRoleTypeByRoleType[PartyRelationshipSimpleMovingAverage];
+		ProspectRelationshipSimpleMovingAverage = ProspectRelationship.ConcreteRoleTypeByRoleType[PartyRelationshipSimpleMovingAverage];
 		SubContractorRelationshipSimpleMovingAverage = SubContractorRelationship.ConcreteRoleTypeByRoleType[PartyRelationshipSimpleMovingAverage];
 		DistributionChannelRelationshipSimpleMovingAverage = DistributionChannelRelationship.ConcreteRoleTypeByRoleType[PartyRelationshipSimpleMovingAverage];
 
@@ -34181,6 +34314,7 @@ namespace Allors.Meta
 		ProfessionalServicesRelationshipCommunicationEvent = ProfessionalServicesRelationship.ConcreteRoleTypeByRoleType[PartyRelationshipCommunicationEvent];
 		ClientRelationshipCommunicationEvent = ClientRelationship.ConcreteRoleTypeByRoleType[PartyRelationshipCommunicationEvent];
 		PartnershipCommunicationEvent = Partnership.ConcreteRoleTypeByRoleType[PartyRelationshipCommunicationEvent];
+		ProspectRelationshipCommunicationEvent = ProspectRelationship.ConcreteRoleTypeByRoleType[PartyRelationshipCommunicationEvent];
 		SubContractorRelationshipCommunicationEvent = SubContractorRelationship.ConcreteRoleTypeByRoleType[PartyRelationshipCommunicationEvent];
 		DistributionChannelRelationshipCommunicationEvent = DistributionChannelRelationship.ConcreteRoleTypeByRoleType[PartyRelationshipCommunicationEvent];
 
@@ -35437,6 +35571,7 @@ namespace Allors.Meta
 		DiscountComponentFromDate = DiscountComponent.ConcreteRoleTypeByRoleType[PeriodFromDate];
 		VolumeUsageFromDate = VolumeUsage.ConcreteRoleTypeByRoleType[PeriodFromDate];
 		EstimatedMaterialCostFromDate = EstimatedMaterialCost.ConcreteRoleTypeByRoleType[PeriodFromDate];
+		ProspectRelationshipFromDate = ProspectRelationship.ConcreteRoleTypeByRoleType[PeriodFromDate];
 		EmploymentAgreementFromDate = EmploymentAgreement.ConcreteRoleTypeByRoleType[PeriodFromDate];
 		ManufacturerSuggestedRetailPriceFromDate = ManufacturerSuggestedRetailPrice.ConcreteRoleTypeByRoleType[PeriodFromDate];
 		SubContractorRelationshipFromDate = SubContractorRelationship.ConcreteRoleTypeByRoleType[PeriodFromDate];
@@ -35557,7 +35692,6 @@ namespace Allors.Meta
 		VatCalculationMethodDeniedPermission = VatCalculationMethod.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
 		InvoiceSequenceDeniedPermission = InvoiceSequence.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
 		CustomerRelationshipDeniedPermission = CustomerRelationship.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
-		PartyClassificationDeniedPermission = PartyClassification.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
 		PartyProductCategoryRevenueDeniedPermission = PartyProductCategoryRevenue.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
 		PartyFixedAssetAssignmentDeniedPermission = PartyFixedAssetAssignment.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
 		DunningTypeDeniedPermission = DunningType.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
@@ -35787,6 +35921,7 @@ namespace Allors.Meta
 		TransferDeniedPermission = Transfer.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
 		RevenueQuantityBreakDeniedPermission = RevenueQuantityBreak.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
 		GeneralLedgerAccountTypeDeniedPermission = GeneralLedgerAccountType.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
+		ProspectRelationshipDeniedPermission = ProspectRelationship.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
 		FaceToFaceCommunicationDeniedPermission = FaceToFaceCommunication.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
 		BudgetReviewDeniedPermission = BudgetReview.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
 		EngineeringChangeStatusDeniedPermission = EngineeringChangeStatus.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
@@ -35806,6 +35941,7 @@ namespace Allors.Meta
 		StoreDeniedPermission = Store.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
 		LotDeniedPermission = Lot.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
 		WorkEffortSkillStandardDeniedPermission = WorkEffortSkillStandard.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
+		IndustryClassificationDeniedPermission = IndustryClassification.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
 		TimeAndMaterialsServiceDeniedPermission = TimeAndMaterialsService.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
 		EquipmentDeniedPermission = Equipment.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
 		RequestItemDeniedPermission = RequestItem.ConcreteRoleTypeByRoleType[AccessControlledObjectDeniedPermission];
@@ -35920,7 +36056,6 @@ namespace Allors.Meta
 		ProductionRunSearchData = ProductionRun.ConcreteRoleTypeByRoleType[SearchableSearchData];
 		OrganisationSearchData = Organisation.ConcreteRoleTypeByRoleType[SearchableSearchData];
 		ResponsibilitySearchData = Responsibility.ConcreteRoleTypeByRoleType[SearchableSearchData];
-		PartyClassificationSearchData = PartyClassification.ConcreteRoleTypeByRoleType[SearchableSearchData];
 		CapitalBudgetSearchData = CapitalBudget.ConcreteRoleTypeByRoleType[SearchableSearchData];
 		SizeSearchData = Size.ConcreteRoleTypeByRoleType[SearchableSearchData];
 		PerformanceNoteSearchData = PerformanceNote.ConcreteRoleTypeByRoleType[SearchableSearchData];
@@ -36036,6 +36171,7 @@ namespace Allors.Meta
 		PostalAddressSearchData = PostalAddress.ConcreteRoleTypeByRoleType[SearchableSearchData];
 		ClientAgreementSearchData = ClientAgreement.ConcreteRoleTypeByRoleType[SearchableSearchData];
 		LotSearchData = Lot.ConcreteRoleTypeByRoleType[SearchableSearchData];
+		IndustryClassificationSearchData = IndustryClassification.ConcreteRoleTypeByRoleType[SearchableSearchData];
 		TimeAndMaterialsServiceSearchData = TimeAndMaterialsService.ConcreteRoleTypeByRoleType[SearchableSearchData];
 		EquipmentSearchData = Equipment.ConcreteRoleTypeByRoleType[SearchableSearchData];
 		SalesChannelSearchData = SalesChannel.ConcreteRoleTypeByRoleType[SearchableSearchData];
@@ -36185,7 +36321,6 @@ namespace Allors.Meta
 		VatCalculationMethodDisplayName = VatCalculationMethod.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
 		InvoiceSequenceDisplayName = InvoiceSequence.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
 		CustomerRelationshipDisplayName = CustomerRelationship.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
-		PartyClassificationDisplayName = PartyClassification.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
 		PartyProductCategoryRevenueDisplayName = PartyProductCategoryRevenue.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
 		PartyFixedAssetAssignmentDisplayName = PartyFixedAssetAssignment.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
 		DunningTypeDisplayName = DunningType.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
@@ -36415,6 +36550,7 @@ namespace Allors.Meta
 		TransferDisplayName = Transfer.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
 		RevenueQuantityBreakDisplayName = RevenueQuantityBreak.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
 		GeneralLedgerAccountTypeDisplayName = GeneralLedgerAccountType.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
+		ProspectRelationshipDisplayName = ProspectRelationship.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
 		FaceToFaceCommunicationDisplayName = FaceToFaceCommunication.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
 		BudgetReviewDisplayName = BudgetReview.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
 		EngineeringChangeStatusDisplayName = EngineeringChangeStatus.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
@@ -36434,6 +36570,7 @@ namespace Allors.Meta
 		StoreDisplayName = Store.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
 		LotDisplayName = Lot.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
 		WorkEffortSkillStandardDisplayName = WorkEffortSkillStandard.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
+		IndustryClassificationDisplayName = IndustryClassification.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
 		TimeAndMaterialsServiceDisplayName = TimeAndMaterialsService.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
 		EquipmentDisplayName = Equipment.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
 		RequestItemDisplayName = RequestItem.ConcreteRoleTypeByRoleType[UserInterfaceableDisplayName];
@@ -36622,7 +36759,6 @@ namespace Allors.Meta
 		VatCalculationMethodSecurityToken = VatCalculationMethod.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
 		InvoiceSequenceSecurityToken = InvoiceSequence.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
 		CustomerRelationshipSecurityToken = CustomerRelationship.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
-		PartyClassificationSecurityToken = PartyClassification.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
 		PartyProductCategoryRevenueSecurityToken = PartyProductCategoryRevenue.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
 		PartyFixedAssetAssignmentSecurityToken = PartyFixedAssetAssignment.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
 		DunningTypeSecurityToken = DunningType.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
@@ -36852,6 +36988,7 @@ namespace Allors.Meta
 		TransferSecurityToken = Transfer.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
 		RevenueQuantityBreakSecurityToken = RevenueQuantityBreak.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
 		GeneralLedgerAccountTypeSecurityToken = GeneralLedgerAccountType.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
+		ProspectRelationshipSecurityToken = ProspectRelationship.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
 		FaceToFaceCommunicationSecurityToken = FaceToFaceCommunication.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
 		BudgetReviewSecurityToken = BudgetReview.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
 		EngineeringChangeStatusSecurityToken = EngineeringChangeStatus.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
@@ -36871,6 +37008,7 @@ namespace Allors.Meta
 		StoreSecurityToken = Store.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
 		LotSecurityToken = Lot.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
 		WorkEffortSkillStandardSecurityToken = WorkEffortSkillStandard.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
+		IndustryClassificationSecurityToken = IndustryClassification.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
 		TimeAndMaterialsServiceSecurityToken = TimeAndMaterialsService.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
 		EquipmentSecurityToken = Equipment.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
 		RequestItemSecurityToken = RequestItem.ConcreteRoleTypeByRoleType[AccessControlledObjectSecurityToken];
@@ -37037,6 +37175,7 @@ namespace Allors.Meta
 		DiscountComponentThroughDate = DiscountComponent.ConcreteRoleTypeByRoleType[PeriodThroughDate];
 		VolumeUsageThroughDate = VolumeUsage.ConcreteRoleTypeByRoleType[PeriodThroughDate];
 		EstimatedMaterialCostThroughDate = EstimatedMaterialCost.ConcreteRoleTypeByRoleType[PeriodThroughDate];
+		ProspectRelationshipThroughDate = ProspectRelationship.ConcreteRoleTypeByRoleType[PeriodThroughDate];
 		EmploymentAgreementThroughDate = EmploymentAgreement.ConcreteRoleTypeByRoleType[PeriodThroughDate];
 		ManufacturerSuggestedRetailPriceThroughDate = ManufacturerSuggestedRetailPrice.ConcreteRoleTypeByRoleType[PeriodThroughDate];
 		SubContractorRelationshipThroughDate = SubContractorRelationship.ConcreteRoleTypeByRoleType[PeriodThroughDate];
@@ -37115,6 +37254,7 @@ namespace Allors.Meta
 		VolumeUsageComment = VolumeUsage.ConcreteRoleTypeByRoleType[CommentableComment];
 		ToleranceComment = Tolerance.ConcreteRoleTypeByRoleType[CommentableComment];
 		PartyContactMechanismComment = PartyContactMechanism.ConcreteRoleTypeByRoleType[CommentableComment];
+		ProspectRelationshipComment = ProspectRelationship.ConcreteRoleTypeByRoleType[CommentableComment];
 		FaceToFaceCommunicationComment = FaceToFaceCommunication.ConcreteRoleTypeByRoleType[CommentableComment];
 		BudgetReviewComment = BudgetReview.ConcreteRoleTypeByRoleType[CommentableComment];
 		DisbursementComment = Disbursement.ConcreteRoleTypeByRoleType[CommentableComment];

@@ -24,6 +24,17 @@ namespace Allors.Domain
 
     public partial class Persons
     {
+        public const string GuestName = "Guest";
+        public const string AdministratorName = "Administrator";
+
+        protected override void BaseSetup(Setup config)
+        {
+            base.BaseSetup(config);
+
+            new PersonBuilder(Session).WithUserName(GuestName).WithLastName("Guest").Build();
+            new PersonBuilder(Session).WithUserName(AdministratorName).WithLastName("Administrator").Build();
+        }
+        
         protected override void BaseSecure(Security config)
         {
             base.BaseSecure(config);

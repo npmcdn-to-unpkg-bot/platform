@@ -1,0 +1,5 @@
+<objectType allors="1.0" id="77f63100-054a-459b-8864-e69b646ff307">
+  <isInterface>true</isInterface>
+  <pluralName>PersonClassifications</pluralName>
+  <singularName>PersonClassification</singularName>
+</objectType>

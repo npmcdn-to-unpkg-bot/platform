@@ -60,7 +60,7 @@ namespace Allors.Domain
                 this.ExistGeographicBoundary ? this.GeographicBoundary.ComposeSearchDataCharacterBoundaryText() : null,
                 this.ExistProductCategory ? this.ProductCategory.Description : null,
                 this.ExistOrderKind ? this.OrderKind.Description : null,
-                this.ExistPartyClassification ? this.PartyClassification.Description : null);
+                this.ExistPartyClassification ? this.PartyClassification.Name : null);
 
             var wordBoundaryText = string.Format(
                 "{0} {1} {2} {3}",
@@ -175,7 +175,7 @@ namespace Allors.Domain
             if (this.ExistPartyClassification)
             {
                 uiText.Append(", with party classification ");
-                uiText.Append(this.PartyClassification.Description);
+                uiText.Append(this.PartyClassification.Name);
             }
 
             if (this.ExistProductCategory)

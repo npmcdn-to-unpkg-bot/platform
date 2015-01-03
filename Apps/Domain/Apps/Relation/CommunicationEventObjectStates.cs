@@ -26,22 +26,16 @@ namespace Allors.Domain
 
     public partial class CommunicationEventObjectStates
     {
-        public static readonly Guid OpenedId = new Guid("199131EB-18FD-4b8a-9FEC-23789C169FF5");
-        public static readonly Guid ReadId = new Guid("55959953-A465-4a45-B2D0-27077B285C77");
-        public static readonly Guid ClosedId = new Guid("35612611-62C5-4de5-B138-9C8D874D8916");
+        public static readonly Guid ScheduledId = new Guid("199131EB-18FD-4b8a-9FEC-23789C169FF5");
+        public static readonly Guid CompletedId = new Guid("35612611-62C5-4de5-B138-9C8D874D8916");
         public static readonly Guid CancelledId = new Guid("F236E865-E2CA-43d7-8F17-56C3DC54C191");
         public static readonly Guid InProgressId = new Guid("D1232CEB-1530-451e-BAED-DB1356BC1EB2");
 
         private UniquelyIdentifiableCache<CommunicationEventObjectState> cache;
 
-        public CommunicationEventObjectState Opened
+        public CommunicationEventObjectState Scheduled
         {
-            get { return this.Cache.Get(OpenedId); }
-        }
-
-        public CommunicationEventObjectState Read
-        {
-            get { return this.Cache.Get(ReadId); }
+            get { return this.Cache.Get(ScheduledId); }
         }
 
         public CommunicationEventObjectState InProgress
@@ -49,9 +43,9 @@ namespace Allors.Domain
             get { return this.Cache.Get(InProgressId); }
         }
 
-        public CommunicationEventObjectState Closed
+        public CommunicationEventObjectState Completed
         {
-            get { return this.Cache.Get(ClosedId); }
+            get { return this.Cache.Get(CompletedId); }
         }
 
         public CommunicationEventObjectState Cancelled
@@ -75,13 +69,8 @@ namespace Allors.Domain
             var durchLocale = new Locales(this.Session).DutchNetherlands;
 
             new CommunicationEventObjectStateBuilder(this.Session)
-                .WithName("Opened")
-                .WithUniqueId(OpenedId)
-                .Build();
-
-            new CommunicationEventObjectStateBuilder(this.Session)
-                .WithName("Read")
-                .WithUniqueId(ReadId)
+                .WithName("Scheduled")
+                .WithUniqueId(ScheduledId)
                 .Build();
 
             new CommunicationEventObjectStateBuilder(this.Session)
@@ -90,8 +79,8 @@ namespace Allors.Domain
                 .Build();
 
             new CommunicationEventObjectStateBuilder(this.Session)
-                .WithName("Closed")
-                .WithUniqueId(ClosedId)
+                .WithName("Completed")
+                .WithUniqueId(CompletedId)
                 .Build();
 
             new CommunicationEventObjectStateBuilder(this.Session)
