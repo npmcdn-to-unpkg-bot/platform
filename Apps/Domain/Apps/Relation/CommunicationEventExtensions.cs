@@ -58,20 +58,25 @@ namespace Allors.Domain
                 @this.CurrentObjectState.Process(@this);
             }
 
-            if (!@this.ExistInitialScheduledStartDate && @this.ExistScheduledStart)
+            if (!@this.ExistInitialScheduledStart && @this.ExistScheduledStart)
             {
-                @this.InitialScheduledStartDate = @this.ScheduledStart;
+                @this.InitialScheduledStart = @this.ScheduledStart;
+            }
+
+            if (!@this.ExistInitialScheduledEnd && @this.ExistScheduledEnd)
+            {
+                @this.InitialScheduledEnd = @this.ScheduledEnd;
             }
         }
 
         public static void AppsCommunicationEventClose(this CommunicationEvent @this, CommunicationEventClose method)
         {
-            @this.CurrentObjectState = new CommunicationEventObjectStates(@this.Strategy.Session).Closed;
+            @this.CurrentObjectState = new CommunicationEventObjectStates(@this.Strategy.Session).Completed;
         }
 
         public static void AppsCommunicationEventReopen(this CommunicationEvent @this, CommunicationEventReopen method)
         {
-            @this.CurrentObjectState = new CommunicationEventObjectStates(@this.Strategy.Session).Opened;
+            @this.CurrentObjectState = new CommunicationEventObjectStates(@this.Strategy.Session).Scheduled;
         }
 
         public static void AppsCommunicationEventCancel(this CommunicationEvent @this, CommunicationEventCancel method)

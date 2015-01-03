@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="43c26f1f-25bd-4b45-9cdf-c81d021b0b37">
+  <associationType id="feaad4be-f3e2-4f76-9a87-9676d86bda35">
+    <objectType idref="b05371ff-0c9e-4ee3-b31d-e2edeed8649e" />
+  </associationType>
+  <roleType id="10be3680-44d1-41c9-a084-fbd27a36ecbb">
+    <objectType idref="c4c09343-61d3-418c-ade2-fe6fd588f128" />
+    <pluralName>ActualEnds</pluralName>
+    <singularName>ActualEnd</singularName>
+  </roleType>
+</relationType>

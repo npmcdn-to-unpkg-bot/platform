@@ -33,11 +33,11 @@ namespace Allors.Domain
             config.GrantAdministrator(this.ObjectType, full);
             config.GrantOwner(this.ObjectType, full);
 
-            ObjectState opened = new CommunicationEventObjectStates(this.Session).Opened;
+            ObjectState scheduled = new CommunicationEventObjectStates(this.Session).Scheduled;
             ObjectState cancelled = new CommunicationEventObjectStates(this.Session).Cancelled;
-            ObjectState closed = new CommunicationEventObjectStates(this.Session).Closed;
+            ObjectState closed = new CommunicationEventObjectStates(this.Session).Completed;
 
-            config.Deny(this.ObjectType, opened, CommunicationEvents.Meta.Reopen);
+            config.Deny(this.ObjectType, scheduled, CommunicationEvents.Meta.Reopen);
             config.Deny(this.ObjectType, closed, CommunicationEvents.Meta.Close, CommunicationEvents.Meta.Cancel);
 
             config.Deny(this.ObjectType, closed, Operation.Write);

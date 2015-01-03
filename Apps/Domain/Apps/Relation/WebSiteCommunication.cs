@@ -30,7 +30,7 @@ namespace Allors.Domain
 
             if (!this.ExistCurrentObjectState)
             {
-                this.CurrentObjectState = new CommunicationEventObjectStates(this.Strategy.DatabaseSession).Opened;
+                this.CurrentObjectState = new CommunicationEventObjectStates(this.Strategy.DatabaseSession).Scheduled;
             }
         }
 
