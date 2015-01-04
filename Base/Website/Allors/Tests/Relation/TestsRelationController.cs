@@ -4,7 +4,7 @@
 
     using Allors.Domain;
 
-    public class PersonController : Allors.Web.Mvc.Controller
+    public abstract class TestsRelationController : Allors.Web.Mvc.Controller
     {
         public ActionResult Index()
         {

@@ -1,0 +1,12 @@
+﻿@model Allors.Web.Mvc.MenuItemForView
+
+@{
+    var active = this.Model.IsActive ? "active" : null;
+}
+
+<li class="@active">@Html.ActionLink(Model.LinkText, Model.ActionName, Model.ControllerName, null, null)
+    @foreach (var menuItem in Model)
+    {
+        @Html.Partial("_MenuItemPartial", menuItem)
+    }
+</li>

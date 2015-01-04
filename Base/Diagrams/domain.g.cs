@@ -3,6 +3,21 @@ namespace Allors.Domain
 	public interface Object 
 	{
 	}
+	public interface AccessControlledObject  : Object, Derivable 
+	{
+					Permission DeniedPermissions {set;}
+
+					SecurityToken SecurityTokens {set;}
+
+	}
+	public interface Commentable  : Object 
+	{
+					global::System.String Comment {set;}
+
+	}
+	public interface Deletable  : Object 
+	{
+	}
 	public interface Derivable  : Object 
 	{
 	}
@@ -15,6 +30,18 @@ namespace Allors.Domain
 					global::System.Boolean IsActive {set;}
 
 	}
+	public interface Localised  : Object 
+	{
+					Locale Locale {set;}
+
+	}
+	public interface ObjectState  : Object, UniquelyIdentifiable 
+	{
+					Permission DeniedPermissions {set;}
+
+					global::System.String Name {set;}
+
+	}
 	public interface Period  : Object 
 	{
 					global::System.DateTime FromDate {set;}
@@ -22,29 +49,51 @@ namespace Allors.Domain
 					global::System.DateTime? ThroughDate {set;}
 
 	}
+	public interface Printable  : Object, UserInterfaceable, UniquelyIdentifiable 
+	{
+					global::System.String PrintContent {set;}
+
+	}
+	public interface Searchable  : Object 
+	{
+					SearchData SearchData {set;}
+
+	}
+	public interface SearchResult  : Object, UserInterfaceable 
+	{
+	}
+	public interface SecurityTokenOwner  : Object 
+	{
+					SecurityToken OwnerSecurityToken {set;}
+
+	}
+	public interface Transitional  : Object, AccessControlledObject 
+	{
+	}
 	public interface UniquelyIdentifiable  : Object 
 	{
 					global::System.Guid UniqueId {set;}
 
 	}
-	public interface Deletable  : Object 
+	public interface User  : Object, SecurityTokenOwner, UserInterfaceable, Localised 
 	{
-	}
-	public interface AccessControlledObject  : Object, Derivable 
-	{
-					Permission DeniedPermissions {set;}
+					global::System.Boolean? UserEmailConfirmed {set;}
 
-					SecurityToken SecurityTokens {set;}
+					global::System.String UserName {set;}
+
+					global::System.String UserEmail {set;}
+
+					global::System.String UserPasswordHash {set;}
+
+	}
+	public interface UserInterfaceable  : Object, Derivable, AccessControlledObject 
+	{
+					global::System.String DisplayName {set;}
 
 	}
 	public interface Address  : Object, UserInterfaceable 
 	{
 					Place Place {set;}
-
-	}
-	public interface Commentable  : Object 
-	{
-					global::System.String Comment {set;}
 
 	}
 	public interface DerivationLogI12  : Object, Derivable 
@@ -231,60 +280,11 @@ namespace Allors.Domain
 					global::System.Double? I2AllorsFloat {set;}
 
 	}
-	public interface Localised  : Object 
-	{
-					Locale Locale {set;}
-
-	}
-	public interface ObjectState  : Object, UniquelyIdentifiable 
-	{
-					Permission DeniedPermissions {set;}
-
-					global::System.String Name {set;}
-
-	}
-	public interface Printable  : Object, UserInterfaceable, UniquelyIdentifiable 
-	{
-					global::System.String PrintContent {set;}
-
-	}
 	public interface S1  : Object 
 	{
 	}
-	public interface Searchable  : Object 
-	{
-					SearchData SearchData {set;}
-
-	}
-	public interface SearchResult  : Object, UserInterfaceable 
-	{
-	}
-	public interface SecurityTokenOwner  : Object 
-	{
-					SecurityToken OwnerSecurityToken {set;}
-
-	}
 	public interface Shared  : Object, UserInterfaceable 
 	{
-	}
-	public interface Transitional  : Object, AccessControlledObject 
-	{
-	}
-	public interface User  : Object, SecurityTokenOwner, UserInterfaceable, Localised 
-	{
-					global::System.Boolean? UserEmailConfirmed {set;}
-
-					global::System.String UserName {set;}
-
-					global::System.String UserEmail {set;}
-
-					global::System.String UserPasswordHash {set;}
-
-	}
-	public interface UserInterfaceable  : Object, Derivable, AccessControlledObject 
-	{
-					global::System.String DisplayName {set;}
-
 	}
 	public interface AccessControl  : Object, Deletable, UserInterfaceable 
 	{
@@ -324,6 +324,15 @@ namespace Allors.Domain
 					LocalisedText LocalisedNames {set;}
 
 	}
+	public interface Image  : Object, Deletable, Derivable 
+	{
+					Media Original {set;}
+
+					Media Responsive {set;}
+
+					global::System.String OriginalFilename {set;}
+
+	}
 	public interface Language  : Object, UserInterfaceable, Searchable 
 	{
 					global::System.String Name {set;}
@@ -345,6 +354,15 @@ namespace Allors.Domain
 	public interface LocalisedText  : Object, Searchable, UserInterfaceable, Localised 
 	{
 					global::System.String Text {set;}
+
+	}
+	public interface Login  : Object, Derivable, Deletable 
+	{
+					global::System.String Key {set;}
+
+					global::System.String Provider {set;}
+
+					User User {set;}
 
 	}
 	public interface Media  : Object, UniquelyIdentifiable, UserInterfaceable, Deletable 
@@ -377,6 +395,52 @@ namespace Allors.Domain
 					global::System.Int32 OperationEnum {set;}
 
 	}
+	public interface Person  : Object, User, AccessControlledObject, UniquelyIdentifiable, SearchResult, UserInterfaceable, Searchable, Printable, Deletable 
+	{
+					global::System.String LastName {set;}
+
+					global::System.String MiddleName {set;}
+
+					global::System.String FirstName {set;}
+
+					Address MainAddress {set;}
+
+					global::System.String TinyMCEText {set;}
+
+					global::System.String Text {set;}
+
+					global::System.Int32? Age {set;}
+
+					global::System.Boolean? IsStudent {set;}
+
+					MailboxAddress MailboxAddress {set;}
+
+					Gender Gender {set;}
+
+					global::System.String FullName {set;}
+
+					global::System.Int32? ShirtSize {set;}
+
+					global::System.String CKEditorText {set;}
+
+					global::System.Boolean? IsMarried {set;}
+
+					global::System.DateTime? BirthDate {set;}
+
+					global::System.Decimal? Weight {set;}
+
+					Media Photo {set;}
+
+					Address Addresses {set;}
+
+	}
+	public interface PrintQueue  : Object, AccessControlledObject, UserInterfaceable, UniquelyIdentifiable 
+	{
+					Printable Printables {set;}
+
+					global::System.String Name {set;}
+
+	}
 	public interface Role  : Object, UserInterfaceable, UniquelyIdentifiable 
 	{
 					Permission Permissions {set;}
@@ -384,11 +448,56 @@ namespace Allors.Domain
 					global::System.String Name {set;}
 
 	}
+	public interface SearchData  : Object, Derivable, Deletable 
+	{
+					global::System.String CharacterBoundaryText {set;}
+
+					global::System.String PreviousCharacterBoundaryText {set;}
+
+					SearchFragment SearchFragments {set;}
+
+					global::System.String PreviousWordBoundaryText {set;}
+
+					global::System.String WordBoundaryText {set;}
+
+	}
+	public interface SearchFragment  : Object, Derivable 
+	{
+					global::System.String LowerCaseText {set;}
+
+	}
+	public interface SecurityToken  : Object, Deletable, Derivable 
+	{
+	}
+	public interface Singleton  : Object, UserInterfaceable 
+	{
+					PrintQueue DefaultPrintQueue {set;}
+
+					Locale DefaultLocale {set;}
+
+					Locale Locales {set;}
+
+					SecurityToken AdministratorSecurityToken {set;}
+
+					User Guest {set;}
+
+					SecurityToken DefaultSecurityToken {set;}
+
+					StringTemplate PersonTemplate {set;}
+
+	}
 	public interface StringTemplate  : Object, UniquelyIdentifiable, Localised 
 	{
 					global::System.String Body {set;}
 
 					global::System.String Name {set;}
+
+	}
+	public interface Transition  : Object 
+	{
+					ObjectState FromStates {set;}
+
+					ObjectState ToState {set;}
 
 	}
 	public interface UserGroup  : Object, UniquelyIdentifiable, Searchable, UserInterfaceable 
@@ -596,24 +705,6 @@ namespace Allors.Domain
 					global::System.String HouseNumber {set;}
 
 	}
-	public interface Image  : Object, Deletable, Derivable 
-	{
-					Media Original {set;}
-
-					Media Responsive {set;}
-
-					global::System.String OriginalFilename {set;}
-
-	}
-	public interface Login  : Object, Derivable, Deletable 
-	{
-					global::System.String Key {set;}
-
-					global::System.String Provider {set;}
-
-					User User {set;}
-
-	}
 	public interface MailboxAddress  : Object, Searchable, Address 
 	{
 					global::System.String PoBox {set;}
@@ -649,45 +740,6 @@ namespace Allors.Domain
 					global::System.String Size {set;}
 
 	}
-	public interface Person  : Object, User, AccessControlledObject, UniquelyIdentifiable, SearchResult, UserInterfaceable, Searchable, Printable, Deletable 
-	{
-					global::System.String LastName {set;}
-
-					global::System.String MiddleName {set;}
-
-					global::System.String FirstName {set;}
-
-					Address MainAddress {set;}
-
-					global::System.String TinyMCEText {set;}
-
-					global::System.String Text {set;}
-
-					global::System.Int32? Age {set;}
-
-					global::System.Boolean? IsStudent {set;}
-
-					MailboxAddress MailboxAddress {set;}
-
-					Gender Gender {set;}
-
-					global::System.String FullName {set;}
-
-					global::System.Int32? ShirtSize {set;}
-
-					global::System.String CKEditorText {set;}
-
-					global::System.Boolean? IsMarried {set;}
-
-					global::System.DateTime? BirthDate {set;}
-
-					global::System.Decimal? Weight {set;}
-
-					Media Photo {set;}
-
-					Address Addresses {set;}
-
-	}
 	public interface Place  : Object, UserInterfaceable, Searchable 
 	{
 					Country Country {set;}
@@ -697,34 +749,9 @@ namespace Allors.Domain
 					global::System.String PostalCode {set;}
 
 	}
-	public interface PrintQueue  : Object, AccessControlledObject, UserInterfaceable, UniquelyIdentifiable 
-	{
-					Printable Printables {set;}
-
-					global::System.String Name {set;}
-
-	}
 	public interface Search  : Object, Searchable, UserInterfaceable 
 	{
 					global::System.String Text {set;}
-
-	}
-	public interface SearchData  : Object, Derivable, Deletable 
-	{
-					global::System.String CharacterBoundaryText {set;}
-
-					global::System.String PreviousCharacterBoundaryText {set;}
-
-					SearchFragment SearchFragments {set;}
-
-					global::System.String PreviousWordBoundaryText {set;}
-
-					global::System.String WordBoundaryText {set;}
-
-	}
-	public interface SearchFragment  : Object, Derivable 
-	{
-					global::System.String LowerCaseText {set;}
 
 	}
 	public interface Second  : Object 
@@ -734,29 +761,9 @@ namespace Allors.Domain
 					global::System.Boolean? IsDerived {set;}
 
 	}
-	public interface SecurityToken  : Object, Deletable, Derivable 
-	{
-	}
 	public interface SimpleJob  : Object 
 	{
 					global::System.Int32? Index {set;}
-
-	}
-	public interface Singleton  : Object, UserInterfaceable 
-	{
-					PrintQueue DefaultPrintQueue {set;}
-
-					Locale DefaultLocale {set;}
-
-					Locale Locales {set;}
-
-					SecurityToken AdministratorSecurityToken {set;}
-
-					User Guest {set;}
-
-					SecurityToken DefaultSecurityToken {set;}
-
-					StringTemplate PersonTemplate {set;}
 
 	}
 	public interface StatefulCompany  : Object 
@@ -788,13 +795,6 @@ namespace Allors.Domain
 	public interface To  : Object, UserInterfaceable 
 	{
 					global::System.String Name {set;}
-
-	}
-	public interface Transition  : Object 
-	{
-					ObjectState FromStates {set;}
-
-					ObjectState ToState {set;}
 
 	}
 	public interface Two  : Object, UserInterfaceable, Shared 

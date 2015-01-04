@@ -1,0 +1,6 @@
+﻿@model Allors.Web.Mvc.MenuForView
+
+@foreach (var menuItem in this.Model)
+{
+    @Html.Partial("_MenuItemPartial", menuItem)
+}

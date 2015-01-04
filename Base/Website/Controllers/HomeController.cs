@@ -9,6 +9,7 @@
             return this.View();
         }
 
+        [Authorize]
         public ActionResult About()
         {
             this.ViewBag.Message = "Your application description page.";
@@ -16,6 +17,7 @@
             return this.View();
         }
 
+        [Authorize(Roles="administrator, users")]
         public ActionResult Contact()
         {
             this.ViewBag.Message = "Your contact page.";
