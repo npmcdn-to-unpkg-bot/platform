@@ -1637,7 +1637,6 @@
     <Compile Include="Generated\Base\PartyProductRevenue.g.cs" />
     <Compile Include="Generated\Base\PartyProductRevenueHistory.g.cs" />
     <Compile Include="Generated\Base\PartyRelationship.g.cs" />
-    <Compile Include="Generated\Base\PartyRelationshipPriority.g.cs" />
     <Compile Include="Generated\Base\PartyRelationshipStatus.g.cs" />
     <Compile Include="Generated\Base\PartyRevenue.g.cs" />
     <Compile Include="Generated\Base\PartyRevenueHistory.g.cs" />
@@ -1686,6 +1685,7 @@
     <Compile Include="Generated\Base\PriceComponent.g.cs" />
     <Compile Include="Generated\Base\Printable.g.cs" />
     <Compile Include="Generated\Base\PrintQueue.g.cs" />
+    <Compile Include="Generated\Base\Priority.g.cs" />
     <Compile Include="Generated\Base\Product.g.cs" />
     <Compile Include="Generated\Base\ProductAssociation.g.cs" />
     <Compile Include="Generated\Base\ProductCategory.g.cs" />
