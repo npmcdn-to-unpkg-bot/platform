@@ -566,7 +566,6 @@
     <Compile Include="Apps\Population\PartyProductRevenue.cs" />
     <Compile Include="Apps\Population\PartyProductRevenueHistory.cs" />
     <Compile Include="Apps\Population\PartyRelationship.cs" />
-    <Compile Include="Apps\Population\PartyRelationshipPriority.cs" />
     <Compile Include="Apps\Population\PartyRelationshipStatus.cs" />
     <Compile Include="Apps\Population\PartyRevenue.cs" />
     <Compile Include="Apps\Population\PartyRevenueHistory.cs" />
@@ -610,6 +609,7 @@
     <Compile Include="Apps\Population\PriceComponent.cs" />
     <Compile Include="Apps\Population\Printable.cs" />
     <Compile Include="Apps\Population\PrintQueue.cs" />
+    <Compile Include="Apps\Population\Priority.cs" />
     <Compile Include="Apps\Population\Product.cs" />
     <Compile Include="Apps\Population\ProductAssociation.cs" />
     <Compile Include="Apps\Population\ProductCategory.cs" />
@@ -1100,7 +1100,6 @@
     <Compile Include="Generated\PartyProductRevenue.g.cs" />
     <Compile Include="Generated\PartyProductRevenueHistory.g.cs" />
     <Compile Include="Generated\PartyRelationship.g.cs" />
-    <Compile Include="Generated\PartyRelationshipPriority.g.cs" />
     <Compile Include="Generated\PartyRelationshipStatus.g.cs" />
     <Compile Include="Generated\PartyRevenue.g.cs" />
     <Compile Include="Generated\PartyRevenueHistory.g.cs" />
@@ -1145,6 +1144,7 @@
     <Compile Include="Generated\PriceComponent.g.cs" />
     <Compile Include="Generated\Printable.g.cs" />
     <Compile Include="Generated\PrintQueue.g.cs" />
+    <Compile Include="Generated\Priority.g.cs" />
     <Compile Include="Generated\Product.g.cs" />
     <Compile Include="Generated\ProductAssociation.g.cs" />
     <Compile Include="Generated\ProductCategory.g.cs" />

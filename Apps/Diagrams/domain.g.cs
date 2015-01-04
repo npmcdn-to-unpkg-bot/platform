@@ -208,6 +208,8 @@ namespace Allors.Domain
 
 					Case Case {set;}
 
+					Priority Priority {set;}
+
 					Person Owner {set;}
 
 					CommunicationEventStatus CurrentCommunicationEventStatus {set;}
@@ -841,7 +843,7 @@ namespace Allors.Domain
 
 					Agreement RelationshipAgreements {set;}
 
-					PartyRelationshipPriority PartyRelationshipPriority {set;}
+					Priority PartyRelationshipPriority {set;}
 
 					global::System.Decimal? SimpleMovingAverage {set;}
 
@@ -3192,9 +3194,6 @@ namespace Allors.Domain
 					Currency Currency {set;}
 
 	}
-	public interface PartyRelationshipPriority  : Object, Enumeration 
-	{
-	}
 	public interface PartyRelationshipStatus  : Object, Enumeration 
 	{
 	}
@@ -3521,6 +3520,9 @@ namespace Allors.Domain
 	{
 					global::System.String Code {set;}
 
+	}
+	public interface Priority  : Object, Enumeration 
+	{
 	}
 	public interface ProductCategory  : Object, UserInterfaceable, Searchable, SearchResult, UniquelyIdentifiable 
 	{
