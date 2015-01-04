@@ -24,7 +24,7 @@ namespace Allors.Domain
 
     using Allors.Domain;
 
-    public partial class PartyRelationshipPriorities
+    public partial class Priorities
     {
         public static readonly Guid VeryHighId = new Guid("AE6AB101-481C-4ff1-8BE5-6CD6311903D7");
         public static readonly Guid HighId = new Guid("23248D29-A6B5-4081-A1B9-101A28460366");
@@ -34,46 +34,46 @@ namespace Allors.Domain
         public static readonly Guid SecondId = new Guid("1BE83C5B-72C4-4d08-900B-79D2EF36BF1A");
         public static readonly Guid ThirdId = new Guid("1078C4C8-37B4-4f5b-B650-04DEA2C337C8");
 
-        private UniquelyIdentifiableCache<PartyRelationshipPriority> cache;
+        private UniquelyIdentifiableCache<Priority> cache;
 
-        public PartyRelationshipPriority VeryHigh
+        public Priority VeryHigh
         {
             get { return this.Cache.Get(VeryHighId); }
         }
 
-        public PartyRelationshipPriority High
+        public Priority High
         {
             get { return this.Cache.Get(HighId); }
         }
 
-        public PartyRelationshipPriority Medium
+        public Priority Medium
         {
             get { return this.Cache.Get(MediumId); }
         }
 
-        public PartyRelationshipPriority Low
+        public Priority Low
         {
             get { return this.Cache.Get(LowId); }
         }
 
-        public PartyRelationshipPriority First
+        public Priority First
         {
             get { return this.Cache.Get(FirstId); }
         }
 
-        public PartyRelationshipPriority Second
+        public Priority Second
         {
             get { return this.Cache.Get(SecondId); }
         }
 
-        public PartyRelationshipPriority Third
+        public Priority Third
         {
             get { return this.Cache.Get(ThirdId); }
         }
 
-        private UniquelyIdentifiableCache<PartyRelationshipPriority> Cache
+        private UniquelyIdentifiableCache<Priority> Cache
         {
-            get { return this.cache ?? (this.cache = new UniquelyIdentifiableCache<PartyRelationshipPriority>(this.Session)); }
+            get { return this.cache ?? (this.cache = new UniquelyIdentifiableCache<Priority>(this.Session)); }
         }
 
         protected override void AppsSetup(Setup setup)
@@ -83,49 +83,49 @@ namespace Allors.Domain
             var englishLocale = new Locales(this.Session).EnglishGreatBritain;
             var dutchLocale = new Locales(this.Session).DutchNetherlands;
 
-            new PartyRelationshipPriorityBuilder(this.Session)
+            new PriorityBuilder(this.Session)
                 .WithName("Very High")
                 .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Very High").WithLocale(englishLocale).Build())
                 .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Hoog").WithLocale(dutchLocale).Build())
                 .WithUniqueId(VeryHighId)
                 .Build();
-            
-            new PartyRelationshipPriorityBuilder(this.Session)
+
+            new PriorityBuilder(this.Session)
                 .WithName("High")
                 .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("High").WithLocale(englishLocale).Build())
                 .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Hoog").WithLocale(dutchLocale).Build())
                 .WithUniqueId(HighId)
                 .Build();
-            
-            new PartyRelationshipPriorityBuilder(this.Session)
+
+            new PriorityBuilder(this.Session)
                 .WithName("Medium")
                 .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Medium").WithLocale(englishLocale).Build())
                 .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Gemiddeld").WithLocale(dutchLocale).Build())
                 .WithUniqueId(MediumId)
                 .Build();
-            
-            new PartyRelationshipPriorityBuilder(this.Session)
+
+            new PriorityBuilder(this.Session)
                 .WithName("Low")
                 .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Low").WithLocale(englishLocale).Build())
                 .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Laag").WithLocale(dutchLocale).Build())
                 .WithUniqueId(LowId)
                 .Build();
-            
-            new PartyRelationshipPriorityBuilder(this.Session)
+
+            new PriorityBuilder(this.Session)
                 .WithName("First")
                 .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("First").WithLocale(englishLocale).Build())
                 .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Eerste").WithLocale(dutchLocale).Build())
                 .WithUniqueId(FirstId)
                 .Build();
-            
-            new PartyRelationshipPriorityBuilder(this.Session)
+
+            new PriorityBuilder(this.Session)
                 .WithName("Third")
                 .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Third").WithLocale(englishLocale).Build())
                 .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Tweede").WithLocale(dutchLocale).Build())
                 .WithUniqueId(SecondId)
                 .Build();
-            
-            new PartyRelationshipPriorityBuilder(this.Session)
+
+            new PriorityBuilder(this.Session)
                 .WithName("Third")
                 .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Third").WithLocale(englishLocale).Build())
                 .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Derde").WithLocale(dutchLocale).Build())

@@ -1127,7 +1127,7 @@
     <Compile Include="Apps\Relation\PartyClassifications.cs" />
     <Compile Include="Apps\Relation\PartyContactMechanism.cs" />
     <Compile Include="Apps\Relation\PartyContactMechanisms.cs" />
-    <Compile Include="Apps\Relation\PartyRelationshipPriorities.cs" />
+    <Compile Include="Apps\Relation\Priorities.cs" />
     <Compile Include="Apps\Relation\PartyRelationshipStatuses.cs" />
     <Compile Include="Apps\Relation\Passport.cs" />
     <Compile Include="Apps\Relation\Passports.cs" />
