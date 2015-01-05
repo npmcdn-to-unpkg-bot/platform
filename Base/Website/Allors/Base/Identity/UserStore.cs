@@ -36,7 +36,8 @@ namespace Allors.Web.Identity
                              IUserRoleStore<IdentityUser>,
                              IUserPasswordStore<IdentityUser>,
                              IUserLockoutStore<IdentityUser, string>,
-                             IUserTwoFactorStore<IdentityUser, string>
+                             IUserTwoFactorStore<IdentityUser, string>,
+                             IUserPhoneNumberStore<IdentityUser>
     {
         private IDatabase Database 
         {
@@ -495,6 +496,26 @@ namespace Allors.Web.Identity
         public Task<bool> GetTwoFactorEnabledAsync(IdentityUser user)
         {
             return Task.FromResult(false);
+        }
+
+        public Task SetPhoneNumberAsync(IdentityUser user, string phoneNumber)
+        {
+            return Task.FromResult<object>(null);
+        }
+
+        public Task<string> GetPhoneNumberAsync(IdentityUser user)
+        {
+            return Task.FromResult<string>(null);
+        }
+
+        public Task<bool> GetPhoneNumberConfirmedAsync(IdentityUser user)
+        {
+            return Task.FromResult(false);
+        }
+
+        public Task SetPhoneNumberConfirmedAsync(IdentityUser user, bool confirmed)
+        {
+            return Task.FromResult<object>(null);
         }
     }
 }

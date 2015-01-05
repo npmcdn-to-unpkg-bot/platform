@@ -209,7 +209,7 @@
     <Content Include="Views\Setup\Index.cshtml" />
     <Content Include="Allors\Web.config" />
     <Content Include="Allors\_ViewStart.cshtml" />
-    <Content Include="Allors\Base\Shared\_MenuPartial.cshtml" />
+    <Content Include="Allors\Base\Shared\_NavbarPartial.cshtml" />
     <Content Include="Allors\Base\Data\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -260,7 +260,7 @@
     <Content Include="Allors\Tests\Relation\Index.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Allors\Base\Shared\_MenuItemPartial.cshtml" />
+    <Content Include="Allors\Base\Shared\_NavbarItemPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -44,7 +44,7 @@ namespace Allors.Web.Mvc
 
             var call = ((MethodCallExpression)expression.Body).Method;
 
-            var allowAnonymousAttribute = (AuthorizeAttribute)call.GetCustomAttributes(typeof(AllowAnonymousAttribute), true).FirstOrDefault();
+            var allowAnonymousAttribute = (AllowAnonymousAttribute)call.GetCustomAttributes(typeof(AllowAnonymousAttribute), true).FirstOrDefault();
             this.AllowAnonymous = allowAnonymousAttribute != null;
 
             if (!this.AllowAnonymous)

@@ -51,7 +51,8 @@ namespace Website
             });       
 
             Menus.Set("main", new Menu()
-                .Add(new MenuItem().Action<HomeController>(c => c.Index()))
+                .Add(new MenuItem().Action<HomeController>(c => c.Index())
+                            .Add(new MenuItem().Action<AccountController>(c => c.Login("x"))))
                 .Add(new MenuItem{Text = "Info" , AllowAnonymous = true}
                             .Add(new MenuItem().Action<HomeController>(c => c.About()))
                             .Add(new MenuItem().Action<HomeController>(c => c.Contact())))

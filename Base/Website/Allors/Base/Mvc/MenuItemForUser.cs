@@ -61,6 +61,22 @@
             }
         }
 
+        public bool HasChildren
+        {
+            get
+            {
+                return this.items.Count > 0;
+            }
+        }
+
+        public bool HasLink
+        {
+            get
+            {
+                return !string.IsNullOrWhiteSpace(this.ControllerName) && !string.IsNullOrWhiteSpace(this.ActionName);
+            }
+        }
+
         public override string ToString()
         {
             return this.Text;
