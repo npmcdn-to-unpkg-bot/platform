@@ -24,8 +24,11 @@
 namespace Allors.Domain
 {
     using System.Linq;
+    using System.Security.Principal;
 
     using Allors.Web.Mvc;
+
+    using Moq;
 
     using NUnit.Framework;
 
@@ -44,7 +47,7 @@ namespace Allors.Domain
                                new MenuItem().Action<HomeController>(c => c.About())
                            };
 
-            var menuForView = new MenuForView(menu, "Home", "Index", null);
+            var menuForView = new MenuForUser(menu, "Home", "Index", null);
             foreach (var menuItemForView in menuForView)
             {
                 var isActive = menuItemForView.ControllerName.Equals("Home") && menuItemForView.ActionName.Equals("Index"); 
@@ -62,7 +65,7 @@ namespace Allors.Domain
                                new MenuItem().Action<HomeController>(c => c.About())
                            };
 
-            var menuForView = new MenuForView(menu, "Home", "Contact", null);
+            var menuForView = new MenuForUser(menu, "Home", "Contact", null);
             foreach (var menuItemForView in menuForView)
             {
                 var isActive = (menuItemForView.ControllerName.Equals("Home") && menuItemForView.ActionName.Equals("Index")) ||
@@ -81,9 +84,13 @@ namespace Allors.Domain
                                new MenuItem().Action<HomeController>(c => c.About())
                            };
 
-            var administrator = new Users(this.DatabaseSession).FindBy(Users.Meta.UserName, Users.AdministratorUserName);
-            
-            var menuForView = new MenuForView(menu, "Home", "Contact", administrator);
+            var identityMock = new Mock<IIdentity>();
+            identityMock.Setup(identity => identity.IsAuthenticated).Returns(true);
+
+            var userMock = new Mock<IPrincipal>();
+            userMock.Setup(user => user.Identity).Returns(identityMock.Object);
+
+            var menuForView = new MenuForUser(menu, "Home", "Contact", userMock.Object);
 
             var menuItemsForView = menuForView.ToArray();
 
@@ -100,7 +107,7 @@ namespace Allors.Domain
                                new MenuItem().Action<HomeController>(c => c.About())
                            };
 
-            var menuForView = new MenuForView(menu, "Home", "Contact", null);
+            var menuForView = new MenuForUser(menu, "Home", "Contact", null);
 
             var menuItemsForView = menuForView.ToArray();
 

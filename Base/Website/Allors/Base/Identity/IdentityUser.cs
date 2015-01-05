@@ -25,7 +25,7 @@ namespace Allors.Web.Identity
 
     using Microsoft.AspNet.Identity;
 
-    public partial class IdentityUser : IUser<string>
+    public partial class IdentityUser : IUser
     {
         public string Id { get; private set; }
 

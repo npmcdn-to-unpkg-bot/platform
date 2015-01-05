@@ -26,6 +26,8 @@ namespace Allors.Web.Mvc
 
     using Allors.Domain;
 
+    using Microsoft.AspNet.Identity;
+
     public abstract partial class Controller : System.Web.Mvc.Controller
     {
         private ISession allorsSession;
@@ -72,7 +74,17 @@ namespace Allors.Web.Mvc
         {
             get
             {
-                return this.authenticatedUser ?? (this.authenticatedUser = new Users(this.allorsSession).GetCurrentAuthenticatedUser());
+                if (this.authenticatedUser == null)
+                {
+                    var userId = this.User.Identity.GetUserId();
+
+                    if (userId != null)
+                    {
+                        this.authenticatedUser = (User)this.allorsSession.Instantiate(userId);
+                    }
+                }
+
+                return this.authenticatedUser;
             }
         }
 

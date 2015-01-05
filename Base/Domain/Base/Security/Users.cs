@@ -75,6 +75,25 @@ namespace Allors.Domain
             return cached.GetUser(this.Session);
         }
 
+        public User GetUser(string userId)
+        {
+            var cached = (CachedUser)this.Session[SessionKey];
+            if (cached == null || !userId.ToLower().Equals(cached.UserId))
+            {
+                var user = this.FindBy(Meta.UserName, userId.ToLowerInvariant());
+
+                if (user == null)
+                {
+                    return null;
+                }
+
+                cached = new CachedUser(user);
+                this.Session[SessionKey] = cached;
+            }
+
+            return cached.GetUser(this.Session);
+        }
+
         private class CachedUser
         {
             public readonly string UserId;

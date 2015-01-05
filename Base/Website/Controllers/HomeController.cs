@@ -16,7 +16,7 @@
             return this.View();
         }
 
-        [Authorize(Roles="administrator, users")]
+        [Authorize(Roles="Administrators, users")]
         public ActionResult Contact()
         {
             this.ViewBag.Message = "Your contact page.";

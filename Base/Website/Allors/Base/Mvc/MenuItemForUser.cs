@@ -3,23 +3,23 @@
     using System.Collections;
     using System.Collections.Generic;
 
-    public class MenuItemForView : IEnumerable<MenuItemForView>
+    public class MenuItemForUser : IEnumerable<MenuItemForUser>
     {
-        private readonly List<MenuItemForView> items = new List<MenuItemForView>();
+        private readonly List<MenuItemForUser> items = new List<MenuItemForUser>();
 
         private readonly MenuItem menuItem;
 
         private bool isActive;
 
-        public MenuItemForView(MenuItem menuItem, MenuForView menuForView)
+        public MenuItemForUser(MenuItem menuItem, MenuForUser menuForUser)
         {
             this.menuItem = menuItem;
 
             foreach (var childMenuItem in menuItem)
             {
-                if (menuForView.Show(menuItem))
+                if (menuForUser.Show(menuItem))
                 {
-                    this.items.Add(new MenuItemForView(childMenuItem, menuForView));
+                    this.items.Add(new MenuItemForUser(childMenuItem, menuForUser));
                 }
             }
         }
@@ -66,7 +66,7 @@
             return this.LinkText;
         }
 
-        public IEnumerator<MenuItemForView> GetEnumerator()
+        public IEnumerator<MenuItemForUser> GetEnumerator()
         {
             return this.items.GetEnumerator();
         }

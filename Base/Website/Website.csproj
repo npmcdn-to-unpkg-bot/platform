@@ -165,8 +165,8 @@
     <Compile Include="Allors\Base\Data\BaseDataController.cs" />
     <Compile Include="Allors\Base\Manage\BaseManageController.cs" />
     <Compile Include="Allors\Base\Mvc\ViewContextExtensions.cs" />
-    <Compile Include="Allors\Base\Mvc\MenuForView.cs" />
-    <Compile Include="Allors\Base\Mvc\MenuItemForView.cs" />
+    <Compile Include="Allors\Base\Mvc\MenuForUser.cs" />
+    <Compile Include="Allors\Base\Mvc\MenuItemForUser.cs" />
     <Compile Include="Allors\Base\Mvc\Menus.cs" />
     <Compile Include="Allors\Base\Mvc\Menu.cs" />
     <Compile Include="Allors\Base\Mvc\Controller.cs" />

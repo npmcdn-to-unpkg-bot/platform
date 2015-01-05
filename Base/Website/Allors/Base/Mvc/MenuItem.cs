@@ -25,6 +25,7 @@ namespace Allors.Web.Mvc
     using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
+    using System.Security.Principal;
     using System.Web.Mvc;
 
     using ExpressionHelper = Microsoft.Web.Mvc.Internal.ExpressionHelper;
@@ -73,12 +74,12 @@ namespace Allors.Web.Mvc
                     {
                         if (!string.IsNullOrWhiteSpace(authorizeAttribute.Roles))
                         {
-                            var newRoles = authorizeAttribute.Roles.Split(',').Select(role => role.Trim());
+                            var newRoles = authorizeAttribute.Roles.Split(',');
                             roles.AddRange(newRoles);
                         }
                     }
 
-                    this.Roles = roles.ToArray();
+                    this.Roles = roles.Select(role => role.Trim()).ToArray();
                 }
             }
 
@@ -132,6 +133,21 @@ namespace Allors.Web.Mvc
         public override string ToString()
         {
             return this.LinkText;
+        }
+
+        public bool Allow(IPrincipal user)
+        {
+            if (this.AllowAnonymous)
+            {
+                return true;
+            }
+
+            if (user.Identity.IsAuthenticated)
+            {
+                return this.Roles.Length == 0 || this.Roles.Any(user.IsInRole);
+            }
+
+            return false;
         }
     }
 }

@@ -36,7 +36,7 @@ namespace Allors.Web.Identity
 
         public override Task<ClaimsIdentity> CreateUserIdentityAsync(IdentityUser user)
         {
-            return user.GenerateUserIdentityAsync((IdentityUserManager)UserManager);
+            return user.GenerateUserIdentityAsync((IdentityUserManager)this.UserManager);
         }
 
         public static IdentitySignInManager Create(IdentityFactoryOptions<IdentitySignInManager> options, IOwinContext context)

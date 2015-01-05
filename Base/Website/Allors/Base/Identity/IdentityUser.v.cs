@@ -22,9 +22,7 @@ namespace Allors.Web.Identity
 {
     using Allors.Domain;
 
-    using Microsoft.AspNet.Identity;
-
-    public partial class IdentityUser : IUser
+    public partial class IdentityUser
     {
         public IdentityUser MapFrom(User user)
         {

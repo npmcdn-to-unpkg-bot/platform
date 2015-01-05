@@ -4,12 +4,17 @@ using Owin;
 [assembly: OwinStartupAttribute(typeof(Website.Startup))]
 namespace Website
 {
+    using System;
     using System.Web.Mvc;
 
     using Allors;
     using Allors.Web.Identity;
     using Allors.Web.Mvc;
     using Allors.Workspaces.Memory.IntegerId;
+
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.Owin;
+    using Microsoft.Owin.Security.Cookies;
 
     using Website.Controllers;
 
@@ -31,6 +36,19 @@ namespace Website
             // Identity
             app.CreatePerOwinContext<IdentityUserManager>(IdentityUserManager.Create);
             app.CreatePerOwinContext<IdentitySignInManager>(IdentitySignInManager.Create);
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
+            {
+                AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
+                LoginPath = new PathString("/Account/Login"),
+                Provider = new CookieAuthenticationProvider
+                {
+                    // Enables the application to validate the security stamp when the user logs in.
+                    // This is a security feature which is used when you change a password or add an external login to your account.  
+                    OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<IdentityUserManager, IdentityUser>(
+                        validateInterval: TimeSpan.FromMinutes(30),
+                        regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
+                }
+            });       
 
             Menus.Set("main", new Menu()
                 .Add(new MenuItem().Action<HomeController>(c => c.Index()))

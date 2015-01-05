@@ -23,6 +23,7 @@ namespace Allors.Web.Mvc
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Security.Principal;
     using System.Web.Mvc;
 
     public partial class Menu : IEnumerable<MenuItem>
@@ -45,7 +46,7 @@ namespace Allors.Web.Mvc
             return this;
         }
 
-        public MenuForView For(ViewContext context)
+        public MenuForUser For(ViewContext context)
         {
             var controller = context.RootController();
             var typeName = controller.GetType().Name;
@@ -54,12 +55,13 @@ namespace Allors.Web.Mvc
                                       : null;
             var actionName = (string)controller.ControllerContext.RouteData.Values["action"];
 
-            if (controller is Controller)
+            IPrincipal user = null;
+            if (controller is System.Web.Mvc.Controller)
             {
-                return new MenuForView(this, controllerName, actionName, ((Controller)controller).AuthenticatedUser);
+                user = ((System.Web.Mvc.Controller)controller).User;
             }
 
-            return new MenuForView(this, controllerName, actionName, null);
+            return new MenuForUser(this, controllerName, actionName, user);
         }
     }
 }
