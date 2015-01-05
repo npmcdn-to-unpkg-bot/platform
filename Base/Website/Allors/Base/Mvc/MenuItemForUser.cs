@@ -24,11 +24,11 @@
             }
         }
 
-        public string LinkText
+        public string Text
         {
             get
             {
-                return this.menuItem.LinkText;
+                return this.menuItem.Text;
             }
         }
 
@@ -63,7 +63,7 @@
 
         public override string ToString()
         {
-            return this.LinkText;
+            return this.Text;
         }
 
         public IEnumerator<MenuItemForUser> GetEnumerator()

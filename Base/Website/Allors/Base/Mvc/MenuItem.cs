@@ -83,19 +83,19 @@ namespace Allors.Web.Mvc
                 }
             }
 
-            if (string.IsNullOrEmpty(this.LinkText))
+            if (string.IsNullOrEmpty(this.Text))
             {
                 if (this.ActionName.ToLowerInvariant().Equals("index"))
                 {
-                    this.LinkText = this.ControllerName;
+                    this.Text = this.ControllerName;
                 }
                 else if(this.ControllerName.ToLowerInvariant().Equals("home"))
                 {
-                    this.LinkText = this.ActionName;
+                    this.Text = this.ActionName;
                 }
                 else
                 {
-                    this.LinkText = this.ActionName + " " + this.ControllerName;
+                    this.Text = this.ActionName + " " + this.ControllerName;
                 }
             }
 
@@ -108,7 +108,7 @@ namespace Allors.Web.Mvc
 
         public string Area { get; set; }
 
-        public string LinkText { get; set; }
+        public string Text { get; set; }
 
         public bool AllowAnonymous { get; set; }
 
@@ -132,7 +132,7 @@ namespace Allors.Web.Mvc
 
         public override string ToString()
         {
-            return this.LinkText;
+            return this.Text;
         }
 
         public bool Allow(IPrincipal user)
@@ -144,7 +144,7 @@ namespace Allors.Web.Mvc
 
             if (user.Identity.IsAuthenticated)
             {
-                return this.Roles.Length == 0 || this.Roles.Any(user.IsInRole);
+                return this.Roles == null || this.Roles.Length == 0 || this.Roles.Any(user.IsInRole);
             }
 
             return false;

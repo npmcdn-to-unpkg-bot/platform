@@ -1,12 +1,22 @@
 ﻿@model Allors.Web.Mvc.MenuItemForUser
 
 @{
-    var active = this.Model.IsActive ? "active" : null;
+    var active = Model.IsActive ? "active" : null;
 }
 
-<li class="@active">@Html.ActionLink(Model.LinkText, Model.ActionName, Model.ControllerName, null, null)
-    @foreach (var menuItem in Model)
+<li class="@active">
+    @if (!string.IsNullOrWhiteSpace(Model.ControllerName))
     {
-        @Html.Partial("_MenuItemPartial", menuItem)
+        @Html.ActionLink(Model.Text, Model.ActionName, Model.ControllerName, null, null)
     }
+    else
+    {
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">@Model.Text <span class="caret"></span></a>
+    }
+    <ul class="dropdown-menu" role="menu">
+        @foreach (var menuItem in Model)
+        {
+            @Html.Partial("_MenuItemPartial", menuItem)
+        }
+    </ul>
 </li>

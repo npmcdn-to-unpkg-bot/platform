@@ -44,7 +44,7 @@
 
         private bool SetActive(MenuItemForUser menuItemForUser)
         {
-            if (menuItemForUser.ControllerName.Equals(this.controllerName) && menuItemForUser.ActionName.Equals(this.actionName))
+            if (this.controllerName.Equals(menuItemForUser.ControllerName) && this.actionName.Equals(menuItemForUser.ActionName))
             {
                 menuItemForUser.IsActive = true;
                 return true;
