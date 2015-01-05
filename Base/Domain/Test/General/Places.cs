@@ -30,7 +30,7 @@ namespace Allors.Domain
             return places;
         }
 
-        protected override void TestSecure(Security config)
+        protected override void TestsSecure(Security config)
         {
             var full = new[] { Operation.Read, Operation.Write, Operation.Execute };
 

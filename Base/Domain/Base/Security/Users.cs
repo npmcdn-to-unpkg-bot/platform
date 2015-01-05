@@ -20,6 +20,7 @@
 
 namespace Allors.Domain
 {
+    using System;
     using System.Threading;
 
     using Allors;
@@ -29,6 +30,9 @@ namespace Allors.Domain
     /// </summary>
     public partial class Users
     {
+        public const string GuestUserName = "Guest";
+        public const string AdministratorUserName = "Administrator";
+
         private static readonly string SessionKey = "Allors.Cache." + typeof(User);
 
         public User GetCurrentUser()
@@ -49,7 +53,7 @@ namespace Allors.Domain
         {
             var userId = Thread.CurrentPrincipal.Identity.Name;
 
-            if (string.IsNullOrWhiteSpace(userId))
+            if (String.IsNullOrWhiteSpace(userId))
             {
                 return null;
             }

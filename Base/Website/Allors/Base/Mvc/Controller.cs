@@ -24,9 +24,12 @@ namespace Allors.Web.Mvc
     using System.Web.Mvc;
     using System.Web.Routing;
 
+    using Allors.Domain;
+
     public abstract partial class Controller : System.Web.Mvc.Controller
     {
         private ISession allorsSession;
+        private User authenticatedUser; 
 
         ~Controller()
         {
@@ -62,6 +65,14 @@ namespace Allors.Web.Mvc
                 }
 
                 return viewContext;
+            }
+        }
+
+        public User AuthenticatedUser
+        {
+            get
+            {
+                return this.authenticatedUser ?? (this.authenticatedUser = new Users(this.allorsSession).GetCurrentAuthenticatedUser());
             }
         }
 

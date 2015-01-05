@@ -1,5 +1,5 @@
-// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ObjectsBase.cs" company="Allors bvba">
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Controller.cs" company="Allors bvba">
 //   Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -18,22 +18,21 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors
+namespace Allors.Web.Mvc
 {
-    using Allors.Domain;
+    using System.Web.Mvc;
 
-    public abstract partial class ObjectsBase<T> 
+    public static partial class ViewContextExtensions
     {
-        protected virtual void TestsPrepare(Setup setup)
+        public static ControllerBase RootController(this ViewContext @this)
         {
-        }
+            var controller = @this.Controller;
+            while (controller.ControllerContext.IsChildAction)
+            {
+                controller = controller.ControllerContext.ParentActionViewContext.Controller;
+            }
 
-        protected virtual void TestsSetup(Setup setup)
-        {
-        }
-
-        protected virtual void TestsSecure(Security security)
-        {
+            return controller;
         }
     }
 }

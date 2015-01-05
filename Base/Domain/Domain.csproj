@@ -159,6 +159,7 @@
     <Compile Include="Test\Methods\ClassMethod.cs" />
     <Compile Include="Test\Relation\Organisation.cs" />
     <Compile Include="Test\Relation\Person.cs" />
+    <Compile Include="Test\Relation\Persons.cs" />
     <Compile Include="Test\Security\AccessControls.cs" />
     <Compile Include="Test\Security\Roles.cs" />
     <Compile Include="Test\Security\Security.cs" />

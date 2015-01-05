@@ -11,13 +11,16 @@
 
         private bool isActive;
 
-        public MenuItemForView(MenuItem menuItem)
+        public MenuItemForView(MenuItem menuItem, MenuForView menuForView)
         {
             this.menuItem = menuItem;
 
             foreach (var childMenuItem in menuItem)
             {
-                this.items.Add(childMenuItem.ForView());
+                if (menuForView.Show(menuItem))
+                {
+                    this.items.Add(new MenuItemForView(childMenuItem, menuForView));
+                }
             }
         }
 

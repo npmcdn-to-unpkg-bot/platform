@@ -20,6 +20,7 @@
 
 namespace Allors.Web.Mvc
 {
+    using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Web.Mvc;
@@ -46,7 +47,19 @@ namespace Allors.Web.Mvc
 
         public MenuForView For(ViewContext context)
         {
-            return new MenuForView(this, context);
+            var controller = context.RootController();
+            var typeName = controller.GetType().Name;
+            var controllerName = typeName.ToLowerInvariant().EndsWith("controller")
+                                      ? typeName.Substring(0, typeName.ToLowerInvariant().LastIndexOf("controller", StringComparison.Ordinal))
+                                      : null;
+            var actionName = (string)controller.ControllerContext.RouteData.Values["action"];
+
+            if (controller is Controller)
+            {
+                return new MenuForView(this, controllerName, actionName, ((Controller)controller).AuthenticatedUser);
+            }
+
+            return new MenuForView(this, controllerName, actionName, null);
         }
     }
 }

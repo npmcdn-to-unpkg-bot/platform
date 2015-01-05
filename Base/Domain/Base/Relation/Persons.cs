@@ -22,15 +22,17 @@ namespace Allors.Domain
 {
     public partial class Persons
     {
-        public const string GuestName = "Guest";
-        public const string AdministratorName = "Administrator";
+        protected override void BasePrepare(Setup setup)
+        {
+            setup.AddDependency(Meta.ObjectType, Roles.Meta.ObjectType);
+        }
 
         protected override void BaseSetup(Setup config)
         {
             base.BaseSetup(config);
 
-            new PersonBuilder(Session).WithUserName(GuestName).WithLastName("Guest").Build();
-            new PersonBuilder(Session).WithUserName(AdministratorName).WithLastName("Administrator").Build();
+            new PersonBuilder(this.Session).WithUserName(Users.GuestUserName).WithLastName("Guest").Build();
+            new PersonBuilder(this.Session).WithUserName(Users.AdministratorUserName).WithLastName("Administrator").Build();
         }
         
         protected override void BaseSecure(Security config)

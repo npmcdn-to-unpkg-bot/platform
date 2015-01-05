@@ -27,13 +27,13 @@ namespace Allors
         public void Prepare(Setup setup)
         {
             this.BasePrepare(setup);
-            this.TestPrepare(setup);
+            this.TestsPrepare(setup);
         }
 
         public void Setup(Setup setup)
         {
             this.BaseSetup(setup);
-            this.TestSetup(setup);
+            this.TestsSetup(setup);
 
             this.session.Derive(true);
         }
@@ -41,7 +41,7 @@ namespace Allors
         public void Secure(Security security)
         {
             this.BaseSecure(security);
-            this.TestSecure(security);
+            this.TestsSecure(security);
         }
     }
 }

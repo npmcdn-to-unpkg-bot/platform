@@ -42,14 +42,43 @@ namespace Allors.Web.Mvc
             this.Area = (string)valuesFromExpression["Area"];
 
             var call = ((MethodCallExpression)expression.Body).Method;
-            
-            var authorizeAttribute = (AuthorizeAttribute)call.GetCustomAttributes(typeof(AuthorizeAttribute), true).FirstOrDefault();
-            if (authorizeAttribute != null)
+
+            var allowAnonymousAttribute = (AuthorizeAttribute)call.GetCustomAttributes(typeof(AllowAnonymousAttribute), true).FirstOrDefault();
+            this.AllowAnonymous = allowAnonymousAttribute != null;
+
+            if (!this.AllowAnonymous)
             {
-                this.Authorize = true;
-                if (!string.IsNullOrWhiteSpace(authorizeAttribute.Roles))
+                var authorizeAttributes = call.GetCustomAttributes(typeof(AuthorizeAttribute), true).Cast<AuthorizeAttribute>().ToArray();
+                if (authorizeAttributes.Length == 0)
                 {
-                    this.Roles = authorizeAttribute.Roles.Split(',').Select(role => role.Trim()).ToArray();
+                    if (call.DeclaringType != null)
+                    {
+                        authorizeAttributes = call.DeclaringType.GetCustomAttributes(typeof(AuthorizeAttribute), true).Cast<AuthorizeAttribute>().ToArray();
+                    }
+
+                    if (authorizeAttributes.Length == 0)
+                    {
+                        authorizeAttributes = GlobalFilters.Filters.Where(filter => filter.Instance is AuthorizeAttribute).Select(filter => filter.Instance).Cast<AuthorizeAttribute>().ToArray();
+                    }
+                }
+
+                if (authorizeAttributes.Length == 0)
+                {
+                    this.AllowAnonymous = true;
+                }
+                else
+                {
+                    var roles = new List<string>();
+                    foreach (var authorizeAttribute in authorizeAttributes)
+                    {
+                        if (!string.IsNullOrWhiteSpace(authorizeAttribute.Roles))
+                        {
+                            var newRoles = authorizeAttribute.Roles.Split(',').Select(role => role.Trim());
+                            roles.AddRange(newRoles);
+                        }
+                    }
+
+                    this.Roles = roles.ToArray();
                 }
             }
 
@@ -80,7 +109,7 @@ namespace Allors.Web.Mvc
 
         public string LinkText { get; set; }
 
-        public bool Authorize { get; set; }
+        public bool AllowAnonymous { get; set; }
 
         public string[] Roles { get; set; }
 
@@ -98,11 +127,6 @@ namespace Allors.Web.Mvc
         {
             this.items.Add(menuItem);
             return this;
-        }
-
-        public MenuItemForView ForView()
-        {
-            return new MenuItemForView(this);
         }
 
         public override string ToString()

@@ -44,9 +44,9 @@ namespace Allors.Domain
             get { return this.RoleCache.Get(SalesId); }
         }
 
-        protected override void TestSetup(Setup setup)
+        protected override void TestsSetup(Setup setup)
         {
-            base.TestSetup(setup);
+            base.TestsSetup(setup);
 
             new RoleBuilder(Session).WithName("Operations").WithUniqueId(OperationsId).Build();
             new RoleBuilder(Session).WithName("Procurement").WithUniqueId(ProcurementId).Build();

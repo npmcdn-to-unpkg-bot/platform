@@ -107,11 +107,11 @@ namespace Allors
 
         private void BaseOnPostSetup()
         {
-            var guest = new Persons(this.session).FindBy(Persons.Meta.UserName, Persons.GuestName);
+            var guest = new Persons(this.session).FindBy(Persons.Meta.UserName, Users.GuestUserName);
             new UserGroups(this.session).Guests.AddMember(guest);
             Singleton.Instance(this.session).Guest = guest;
 
-            var administrator = new Persons(this.session).FindBy(Persons.Meta.UserName, Persons.AdministratorName); 
+            var administrator = new Persons(this.session).FindBy(Persons.Meta.UserName, Domain.Users.AdministratorUserName); 
             new UserGroups(this.session).Administrators.AddMember(administrator);
         }
 

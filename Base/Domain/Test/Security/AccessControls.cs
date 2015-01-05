@@ -22,9 +22,9 @@ namespace Allors.Domain
 {
     public partial class AccessControls
     {
-        protected override void TestSecure(Security config)
+        protected override void TestsSecure(Security config)
         {
-            base.TestSecure(config);
+            base.TestsSecure(config);
 
             var defaultSecurityToken = Singleton.Instance(this.Session).DefaultSecurityToken;
 

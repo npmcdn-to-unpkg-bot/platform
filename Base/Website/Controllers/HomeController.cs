@@ -2,14 +2,13 @@
 {
     using System.Web.Mvc;
 
-    public class HomeController : Controller
+    public class HomeController : Allors.Web.Mvc.Controller
     {
         public ActionResult Index()
         {
             return this.View();
         }
 
-        [Authorize]
         public ActionResult About()
         {
             this.ViewBag.Message = "Your application description page.";

@@ -1,9 +1,10 @@
 ﻿namespace Allors.Web.Mvc
 {
-    using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Web.Mvc;
+    using System.Linq;
+
+    using Allors.Domain;
 
     public class MenuForView : IEnumerable<MenuItemForView>
     {
@@ -12,23 +13,25 @@
         private readonly string controllerName;
         private readonly string actionName;
 
-        public MenuForView(Menu menu, ViewContext context)
-        {
-            var controller = context.Controller;
-            while (controller.ControllerContext.IsChildAction)
-            {
-                controller = controller.ControllerContext.ParentActionViewContext.Controller;
-            }
+        private readonly HashSet<string> userRoles; 
 
-            var typeName = controller.GetType().Name;
-            this.controllerName = typeName.ToLowerInvariant().EndsWith("controller")
-                                      ? typeName.Substring(0, typeName.ToLowerInvariant().LastIndexOf("controller", StringComparison.Ordinal))
-                                      : null;
-            this.actionName = (string)controller.ControllerContext.RouteData.Values["action"];
+        public MenuForView(Menu menu, string controllerName, string actionName, User user)
+        {
+            this.controllerName = controllerName;
+            this.actionName = actionName;
+
+            if (user != null)
+            {
+                this.userRoles = new HashSet<string>(user.UserGroupsWhereMember.Select(group => group.Name));
+            }
 
             foreach (var menuItem in menu)
             {
-                this.items.Add(menuItem.ForView());
+                if (this.Show(menuItem))
+                {
+                    var menuItemForView = new MenuItemForView(menuItem, this);
+                    this.items.Add(menuItemForView);
+                }
             }
 
             foreach (var menuItemForView in this)
@@ -60,6 +63,18 @@
         public IEnumerator<MenuItemForView> GetEnumerator()
         {
             return this.items.GetEnumerator();
+        }
+
+        public bool Show(MenuItem menuItem)
+        {
+            // Anonymous user
+            if (this.userRoles == null)
+            {
+                return menuItem.AllowAnonymous;
+            }
+
+            // Authenticated User
+            return menuItem.AllowAnonymous || menuItem.Roles.Length == 0 || menuItem.Roles.Any(role => this.userRoles.Contains(role));
         }
 
         IEnumerator IEnumerable.GetEnumerator()

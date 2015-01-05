@@ -162,7 +162,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Allors\Base\Account\BaseAccountController.cs" />
+    <Compile Include="Allors\Base\Data\BaseDataController.cs" />
     <Compile Include="Allors\Base\Manage\BaseManageController.cs" />
+    <Compile Include="Allors\Base\Mvc\ViewContextExtensions.cs" />
     <Compile Include="Allors\Base\Mvc\MenuForView.cs" />
     <Compile Include="Allors\Base\Mvc\MenuItemForView.cs" />
     <Compile Include="Allors\Base\Mvc\Menus.cs" />
@@ -181,6 +183,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Allors\Tests\Relation\TestsRelationController.cs" />
+    <Compile Include="Controllers\DataController.cs" />
     <Compile Include="Controllers\RelationController.cs" />
     <Compile Include="Controllers\SetupController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -207,6 +210,7 @@
     <Content Include="Allors\Web.config" />
     <Content Include="Allors\_ViewStart.cshtml" />
     <Content Include="Allors\Base\Shared\_MenuPartial.cshtml" />
+    <Content Include="Allors\Base\Data\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
