@@ -26,7 +26,6 @@ namespace Allors.Databases.Object.SqlClient
     using System.Data.SqlClient;
     using System.Linq;
 
-    using Allors.Databases.Object.SqlClient;
     using Allors.Meta;
 
     internal class DatabaseSession : IDatabaseSession, ICommandFactory
@@ -218,7 +217,6 @@ namespace Allors.Databases.Object.SqlClient
         public virtual IStrategy InstantiateStrategy(ObjectId objectId)
         {
             var strategyReference = this.InstantiateSqlStrategy(objectId);
-
             if (strategyReference == null)
             {
                 return null;
@@ -710,6 +708,11 @@ namespace Allors.Databases.Object.SqlClient
 
         private Reference InstantiateSqlStrategy(ObjectId objectId)
         {
+            if (objectId == null)
+            {
+                return null;
+            }
+
             Reference strategyReference;
             if (!this.referenceByObjectId.TryGetValue(objectId, out strategyReference))
             {

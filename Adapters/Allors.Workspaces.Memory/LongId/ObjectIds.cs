@@ -45,7 +45,7 @@ namespace Allors.Workspaces.Memory.LongId
 
         internal override ObjectId Parse(string idString)
         {
-            return new ObjectIdLong(idString);
+            return string.IsNullOrWhiteSpace(idString) ? null : new ObjectIdLong(long.Parse(idString));
         }
     }
 }

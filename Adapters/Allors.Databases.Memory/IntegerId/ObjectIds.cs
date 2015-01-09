@@ -45,7 +45,7 @@ namespace Allors.Databases.Memory.IntegerId
 
         internal override ObjectId Parse(string idString)
         {
-            return new ObjectIdInteger(idString);
+            return string.IsNullOrWhiteSpace(idString) ? null : new ObjectIdInteger(int.Parse(idString));
         }
 
         internal override void Reset()

@@ -24,7 +24,7 @@ namespace Allors.Databases.Object.SqlClient
     {
         public ObjectId Parse(string idString)
         {
-            return new ObjectIdLong(idString);
+            return string.IsNullOrWhiteSpace(idString) ? null : new ObjectIdLong(long.Parse(idString));
         }
     }
 }
