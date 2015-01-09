@@ -45,14 +45,6 @@ namespace Allors
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ObjectIdInteger"/> class.
-        /// </summary>
-        /// <param name="idString">The id string.</param>
-        public ObjectIdInteger(string idString) : this(int.Parse(idString))
-        {
-        }
-
-        /// <summary>
         /// Gets the value of the Id.
         /// </summary>
         /// <value>The value.</value>

@@ -44,14 +44,6 @@ namespace Allors
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ObjectIdLong"/> class.
-        /// </summary>
-        /// <param name="idString">The id string.</param>
-        public ObjectIdLong(string idString) : this(long.Parse(idString))
-        {
-        }
-
-        /// <summary>
         /// Gets the value of the Id.
         /// </summary>
         /// <value>The value.</value>

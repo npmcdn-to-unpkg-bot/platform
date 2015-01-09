@@ -25,7 +25,7 @@ namespace Allors
     {
         public override ObjectId Parse(string value)
         {
-            return new ObjectIdLong(value);
+            return string.IsNullOrWhiteSpace(value) ? null : new ObjectIdLong(long.Parse(value));
         }
     }
 }
