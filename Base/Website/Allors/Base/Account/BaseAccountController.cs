@@ -139,7 +139,7 @@ namespace Website.Controllers
         //
         // GET: /Account/Register
         [AllowAnonymous]
-        public ActionResult Register()
+        public virtual ActionResult Register()
         {
             return this.View();
         }
