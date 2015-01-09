@@ -1,5 +1,6 @@
 ﻿namespace Allors.Web.Identity
 {
+    using Microsoft.Ajax.Utilities;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin;
@@ -20,6 +21,8 @@
             {
                 manager.UserTokenProvider = new DataProtectorTokenProvider<IdentityUser>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
+            
+            manager.EmailService =  new EmailService();
 
             return manager;
         }

@@ -12,6 +12,7 @@ namespace Website
     using Allors.Web.Mvc;
     using Allors.Workspaces.Memory.IntegerId;
 
+    using Microsoft.Ajax.Utilities;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin.Security.Cookies;
@@ -48,7 +49,7 @@ namespace Website
                         validateInterval: TimeSpan.FromMinutes(30),
                         regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
                 }
-            });       
+            });
 
             Menus.Set("main", new Menu()
                 .Add(new MenuItem().Action<HomeController>(c => c.Index())
@@ -66,8 +67,8 @@ namespace Website
                 this.ViewLocationFormats = new[]
 {
 "~/Views/{1}/{0}.cshtml",
-"~/Views/Shared/{0}.cshtml",
 "~/Allors/Base/{1}/{0}.cshtml",
+"~/Views/Shared/{0}.cshtml",
 "~/Allors/Base/Shared/{0}.cshtml",
 };
 
@@ -76,8 +77,8 @@ namespace Website
                 this.PartialViewLocationFormats = new[]
 {
 "~/Views/{1}/{0}.cshtml",
-"~/Views/Shared/{0}.cshtml",
 "~/Allors/Base/{1}/{0}.cshtml",
+"~/Views/Shared/{0}.cshtml",
 "~/Allors/Base/Shared/{0}.cshtml",
 };
             }

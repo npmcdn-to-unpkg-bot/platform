@@ -30,7 +30,7 @@
 
                     var passwordHasher = new PasswordHasher();
 
-                    var koen = new PersonBuilder(session).WithFirstName("Koen").WithLastName("Van Exem").WithUserName("koen@allors.com").WithUserEmail("koen@allors.com").WithUserPasswordHash(passwordHasher.HashPassword("a")).Build();
+                    var koen = new PersonBuilder(session).WithFirstName("Koen").WithLastName("Van Exem").WithUserName("koen@allors.com").WithUserEmail("koen@allors.com").WithUserEmailConfirmed(true).WithUserPasswordHash(passwordHasher.HashPassword("a")).Build();
                     new UserGroups(session).Administrators.AddMember(koen);
 
                     session.Derive();
