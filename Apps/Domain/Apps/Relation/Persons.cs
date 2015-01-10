@@ -18,10 +18,18 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
+
 namespace Allors.Domain
 {
     public partial class Persons
     {
+        public const string GuestName = "Guest";
+        public const string AdministratorName = "Administrator";
+
+        public static readonly Guid AdministratorId = new Guid("FF791BA1-6E02-4F64-83A3-E6BEE1208C11");
+        public static readonly Guid GuestId = new Guid("1261CB56-67F2-4725-AF7D-604A117ABBEC");
+
         public static void AppsDeriveCommissions(ISession session)
         {
             foreach (Person person in session.Extent<Person>())
