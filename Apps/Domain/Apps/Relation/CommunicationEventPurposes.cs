@@ -30,6 +30,7 @@ namespace Allors.Domain
         public static readonly Guid InquiryId = new Guid("C038D09A-5365-42ec-BAF9-A2D7D1E9E783");
         public static readonly Guid CustomerServiceCallId = new Guid("C31D91C7-1A96-47d5-8E85-76B89CED8E79");
         public static readonly Guid SalesFollowUpId = new Guid("8C95CE16-43ED-4450-B896-F6DBF66BC271");
+        public static readonly Guid AppointmentId = new Guid("9C572283-BAEE-4F36-AD26-F0B22EDE0AD6");
         public static readonly Guid MeetingId = new Guid("4A953F5A-3E35-4ba7-9BA7-9E636908E00E");
         public static readonly Guid SeminarId = new Guid("25328926-7028-4e7d-A35F-DADDBD9EE926");
         public static readonly Guid ActivityRequestId = new Guid("D93A0B3C-0641-4b2a-B966-26964A505F68");
@@ -59,6 +60,11 @@ namespace Allors.Domain
             get { return this.Cache.Get(SalesFollowUpId); }
         }
 
+        public CommunicationEventPurpose Appointment
+        {
+            get { return this.Cache.Get(AppointmentId); }
+        }
+        
         public CommunicationEventPurpose Meeting
         {
             get { return this.Cache.Get(MeetingId); }
@@ -131,18 +137,25 @@ namespace Allors.Domain
                 .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Verkoop opvolging").WithLocale(dutchLocale).Build())
                 .WithUniqueId(SalesFollowUpId)
                 .Build();
+
+            new CommunicationEventPurposeBuilder(this.Session)
+                .WithName("Appointment")
+                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Appointment").WithLocale(englishLocale).Build())
+                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Afspraak").WithLocale(dutchLocale).Build())
+                .WithUniqueId(MeetingId)
+                .Build();
             
             new CommunicationEventPurposeBuilder(this.Session)
                 .WithName("Meeting")
                 .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Meeting").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Meeting").WithLocale(dutchLocale).Build())
+                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Vergadering").WithLocale(dutchLocale).Build())
                 .WithUniqueId(MeetingId)
                 .Build();
             
             new CommunicationEventPurposeBuilder(this.Session)
                 .WithName("Seminar")
                 .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Seminar").WithLocale(englishLocale).Build())
-                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Seminarie").WithLocale(dutchLocale).Build())
+                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Seminar").WithLocale(dutchLocale).Build())
                 .WithUniqueId(SeminarId)
                 .Build();
             
