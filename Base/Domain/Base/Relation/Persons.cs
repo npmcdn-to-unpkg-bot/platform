@@ -31,8 +31,8 @@ namespace Allors.Domain
         {
             base.BaseSetup(config);
 
-            new PersonBuilder(this.Session).WithUserName(Users.GuestUserName).WithLastName("Guest").Build();
-            new PersonBuilder(this.Session).WithUserName(Users.AdministratorUserName).WithLastName("Administrator").Build();
+            new PersonBuilder(this.Session).WithUserName(Users.GuestUserName).WithLastName(GuestName).Build();
+            new PersonBuilder(this.Session).WithUserName(Users.AdministratorUserName).WithLastName(AdministratorName).Build();
         }
         
         protected override void BaseSecure(Security config)
