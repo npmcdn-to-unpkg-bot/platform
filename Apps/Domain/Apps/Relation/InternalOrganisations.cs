@@ -24,7 +24,7 @@ namespace Allors.Domain
     {
         protected override void AppsPrepare(Setup setup)
         {
-            setup.AddDependency(Meta.ObjectType, Roles.Meta.ObjectType);
+            setup.AddDependency(Meta.ObjectType, Roles.Meta.ObjectType); 
             setup.AddDependency(Meta.ObjectType, InvoiceSequences.Meta.ObjectType);
         }
 
