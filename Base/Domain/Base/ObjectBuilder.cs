@@ -23,7 +23,6 @@ namespace Allors
     using System;
     using System.Collections.Generic;
 
-    using Allors.Domain;
     using Allors.Meta;
 
     public abstract class ObjectBuilder<T> : ObjectBuilder where T : Domain.Object
@@ -109,14 +108,14 @@ namespace Allors
 
     public abstract class ObjectBuilder : IObjectBuilder
     {
-        public static readonly Dictionary<ObjectType, Type> BuilderTypeByObjectTypeId = new Dictionary<ObjectType, Type>();
+        public static readonly Dictionary<IObjectType, Type> BuilderTypeByObjectTypeId = new Dictionary<IObjectType, Type>();
 
-        public static object Build(ISession session, ObjectType objectType)
+        public static object Build(ISession session, IObjectType objectType)
         {
             if (objectType.IsUnit)
             {
-                var unit = (Meta.Unit)objectType;
-                var unitTypeTag = (UnitTags)unit.UnitTag;
+                var unit = (Unit)objectType;
+                var unitTypeTag = unit.UnitTag;
                 switch (unitTypeTag)
                 {
                     case UnitTags.AllorsString:
@@ -148,13 +147,12 @@ namespace Allors
             Type builderType;
             if (!BuilderTypeByObjectTypeId.TryGetValue(objectType, out builderType))
             {
-                // TODO: NOW
-                //var builderTypeName = objectType.SingularNameForCts + "Builder";
-                //builderType = Type.GetType(builderTypeName, false);
-                //if (builderType != null)
-                //{
-                //    BuilderTypeByObjectTypeId[objectType] = builderType;
-                //}
+                var builderTypeName = "Allors.Domain." + objectType.Name + "Builder";
+                builderType = Type.GetType(builderTypeName, false);
+                if (builderType != null)
+                {
+                    BuilderTypeByObjectTypeId[objectType] = builderType;
+                }
             }
 
             if (builderType != null)
