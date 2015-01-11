@@ -2407,13 +2407,11 @@ namespace Allors.Domain
 
 					global::System.String TransactionReferenceNumber {set;}
 
-					global::System.Int32 NextPurchaseInvoiceNumber {set;}
-
-					global::System.Int32 NextQuoteNumber {set;}
-
 					JournalEntryNumber JournalEntryNumbers {set;}
 
 					Country EuListingState {set;}
+
+					Counter PurchaseInvoiceCounter {set;}
 
 					AccountingPeriod ActualAccountingPeriod {set;}
 
@@ -2429,6 +2427,8 @@ namespace Allors.Domain
 
 					CostCenterSplitMethod CostCenterSplitMethod {set;}
 
+					Counter PurchaseOrderCounter {set;}
+
 					LegalForm LegalForm {set;}
 
 					AccountingPeriod AccountingPeriods {set;}
@@ -2437,19 +2437,13 @@ namespace Allors.Domain
 
 					global::System.String Name {set;}
 
-					global::System.Int32 NextPurchaseOrderNumber {set;}
-
 					global::System.String PurchaseTransactionReferenceNumber {set;}
 
 					global::System.Int32 FiscalYearStartMonth {set;}
 
 					StringTemplate PurchaseOrderTemplates {set;}
 
-					global::System.Int32 NextIncomingShipmentNumber {set;}
-
 					CostOfGoodsSoldMethod CostOfGoodsSoldMethod {set;}
-
-					global::System.Int32 NextSubAccountNumber {set;}
 
 					Role EmployeeRoles {set;}
 
@@ -2458,6 +2452,10 @@ namespace Allors.Domain
 					global::System.Int32 FiscalYearStartDay {set;}
 
 					GeneralLedgerAccount GeneralLedgerAccounts {set;}
+
+					Counter AccountingTransactionCounter {set;}
+
+					Counter IncomingShipmentCounter {set;}
 
 					GeneralLedgerAccount RetainedEarningsAccount {set;}
 
@@ -2471,11 +2469,15 @@ namespace Allors.Domain
 
 					GeneralLedgerAccount SalesPaymentDiscountDifferencesAccount {set;}
 
+					Counter SubAccountCounter {set;}
+
 					AccountingTransactionNumber AccountingTransactionNumbers {set;}
 
 					StringTemplate QuoteTemplates {set;}
 
 					global::System.String TransactionReferenceNumberPrefix {set;}
+
+					Counter QuoteCounter {set;}
 
 					Currency PreviousCurrency {set;}
 
@@ -2492,8 +2494,6 @@ namespace Allors.Domain
 					GeneralLedgerAccount PurchasePaymentDiscountDifferencesAccount {set;}
 
 					Party Suppliers {set;}
-
-					global::System.Int32? NextAccountingTransactionNumber {set;}
 
 					global::System.String QuoteNumberPrefix {set;}
 
@@ -4719,6 +4719,8 @@ namespace Allors.Domain
 	{
 					global::System.Decimal ShipmentThreshold {set;}
 
+					Counter SalesOrderCounter {set;}
+
 					StringTemplate SalesInvoiceTemplates {set;}
 
 					global::System.String OutgoingShipmentNumberPrefix {set;}
@@ -4743,11 +4745,11 @@ namespace Allors.Domain
 
 					Carrier DefaultCarrier {set;}
 
+					Counter SalesInvoiceCounter {set;}
+
 					global::System.Decimal OrderThreshold {set;}
 
 					PaymentMethod DefaultPaymentMethod {set;}
-
-					global::System.Int32 NextSalesOrderNumber {set;}
 
 					InternalOrganisation Owner {set;}
 
@@ -4755,13 +4757,11 @@ namespace Allors.Domain
 
 					PaymentMethod PaymentMethods {set;}
 
+					Counter OutgoingShipmentCounter {set;}
+
 					global::System.String SalesOrderNumberPrefix {set;}
 
-					global::System.Int32? NextOutgoingShipmentNumber {set;}
-
 					StringTemplate CustomerShipmentTemplates {set;}
-
-					global::System.Int32 NextSalesInvoiceNumber {set;}
 
 	}
 	public interface StoreRevenue  : Object, UserInterfaceable, Deletable 

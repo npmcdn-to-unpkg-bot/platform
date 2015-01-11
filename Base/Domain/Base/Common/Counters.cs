@@ -42,7 +42,7 @@ namespace Allors.Domain
             }
         }
 
-        public static long NextValue(ISession session, Guid counterId, Retry snapshotRetryCount = null)
+        public static int NextValue(ISession session, Guid counterId, Retry snapshotRetryCount = null)
         {
             if (snapshotRetryCount == null)
             {
@@ -73,7 +73,7 @@ namespace Allors.Domain
             return NextValueSnapshot(database, counterId, snapshotRetryCount);
         }
 
-        private static long NextValueNonShared(ISession session, Guid counterId)
+        private static int NextValueNonShared(ISession session, Guid counterId)
         {
             var counter = new Counters(session).CounterById[counterId];
             counter.Value = counter.Value + 1;
@@ -81,7 +81,7 @@ namespace Allors.Domain
             return counter.Value;
         }
 
-        private static long NextValueSerializable(IDatabase database, Guid counterId)
+        private static int NextValueSerializable(IDatabase database, Guid counterId)
         {
             using (var counterSession = database.CreateSession())
             {
@@ -95,7 +95,7 @@ namespace Allors.Domain
             }
         }
 
-        private static long NextValueSnapshot(IDatabase database, Guid counterId, Retry snapshotRetryCount)
+        private static int NextValueSnapshot(IDatabase database, Guid counterId, Retry snapshotRetryCount)
         {
             Exception lastException = null;
             for (var i = 0; i < snapshotRetryCount.Count; i++)

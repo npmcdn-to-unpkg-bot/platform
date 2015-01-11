@@ -330,7 +330,7 @@ namespace Allors.Domain
 
             new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(customer).WithInternalOrganisation(Singleton.Instance(this.DatabaseSession).DefaultInternalOrganisation).Build();
 
-            Assert.IsFalse(store.ExistNextSalesInvoiceNumber);
+            Assert.IsFalse(store.ExistSalesInvoiceCounter);
             Assert.AreEqual(DateTime.Now.Year, store.FiscalYearInvoiceNumbers.First.FiscalYear);
             Assert.AreEqual("1", invoice1.InvoiceNumber);
 
@@ -342,7 +342,7 @@ namespace Allors.Domain
                 .WithBilledFromInternalOrganisation(new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation"))
                 .Build();
 
-            Assert.IsFalse(store.ExistNextSalesInvoiceNumber);
+            Assert.IsFalse(store.ExistSalesInvoiceCounter);
             Assert.AreEqual(DateTime.Now.Year, store.FiscalYearInvoiceNumbers.First.FiscalYear);
             Assert.AreEqual("2", invoice2.InvoiceNumber);
         }

@@ -42,70 +42,26 @@ namespace Allors.Domain
 
         public int DeriveNextSubAccountNumber()
         {
-            var repositorySession = this.Strategy.DatabaseSession.Database.CreateSession();
-            var repositoryOrganisation = (InternalOrganisation)repositorySession.Instantiate(this) ?? this;
-
-            repositoryOrganisation.NextSubAccountNumber = repositoryOrganisation.ExistNextSubAccountNumber ? repositoryOrganisation.NextSubAccountNumber : 19;
-            var subAccountNumber = repositoryOrganisation.NextSubAccountNumber;
-            repositoryOrganisation.NextSubAccountNumber = this.NextValidElevenTestNumer(subAccountNumber + 1);
-
-            if (repositorySession.Database.ToString().IndexOf("Memory") < 0)
-            {
-                repositorySession.Commit();
-            }
-
-            return subAccountNumber;
+            var next = this.SubAccountCounter.NextValue();
+            return next;
         }
 
         public string DeriveNextPurchaseInvoiceNumber()
         {
-            var repositorySession = this.Strategy.DatabaseSession.Database.CreateSession();
-            var repositoryOrganisation = (InternalOrganisation)repositorySession.Instantiate(this) ?? this;
-
-            repositoryOrganisation.NextPurchaseInvoiceNumber = repositoryOrganisation.ExistNextPurchaseInvoiceNumber ? repositoryOrganisation.NextPurchaseInvoiceNumber : 1;
-            var purchaseInvoiceNumber = repositoryOrganisation.NextPurchaseInvoiceNumber;
-            repositoryOrganisation.NextPurchaseInvoiceNumber++;
-
-            if (repositorySession.Database.ToString().IndexOf("Memory") < 0)
-            {
-                repositorySession.Commit();
-            }
-
-            return string.Format(repositoryOrganisation.PurchaseInvoiceNumberPrefix, purchaseInvoiceNumber);
+            var purchaseInvoiceNumber = this.PurchaseInvoiceCounter.NextValue();
+            return string.Format(this.PurchaseInvoiceNumberPrefix, purchaseInvoiceNumber);
         }
 
         public string DeriveNextShipmentNumber()
         {
-            var repositorySession = this.Strategy.DatabaseSession.Database.CreateSession();
-            var repositoryOrganisation = (InternalOrganisation)repositorySession.Instantiate(this) ?? this;
-
-            repositoryOrganisation.NextIncomingShipmentNumber = repositoryOrganisation.ExistNextIncomingShipmentNumber ? repositoryOrganisation.NextIncomingShipmentNumber : 1;
-            var shipmentNumber = repositoryOrganisation.NextIncomingShipmentNumber;
-            repositoryOrganisation.NextIncomingShipmentNumber++;
-
-            if (repositorySession.Database.ToString().IndexOf("Memory") < 0)
-            {
-                repositorySession.Commit();
-            }
-
-            return string.Format(repositoryOrganisation.IncomingShipmentNumberPrefix, shipmentNumber);
+            var shipmentNumber = this.IncomingShipmentCounter.NextValue();
+            return string.Format(this.IncomingShipmentNumberPrefix, shipmentNumber);
         }
 
         public string DeriveNextPurchaseOrderNumber()
         {
-            var repositorySession = this.Strategy.DatabaseSession.Database.CreateSession();
-            var repositoryOrganisation = (InternalOrganisation)repositorySession.Instantiate(this) ?? this;
-
-            repositoryOrganisation.NextPurchaseOrderNumber = repositoryOrganisation.ExistNextPurchaseOrderNumber ? repositoryOrganisation.NextPurchaseOrderNumber : 1;
-            var purchaseOrderNumber = repositoryOrganisation.NextPurchaseOrderNumber;
-            repositoryOrganisation.NextPurchaseOrderNumber++;
-
-            if (repositorySession.Database.ToString().IndexOf("Memory") < 0)
-            {
-                repositorySession.Commit();
-            }
-
-            return string.Format(repositoryOrganisation.PurchaseOrderNumberPrefix, purchaseOrderNumber);
+            var purchaseOrderNumber = this.PurchaseInvoiceCounter.NextValue();
+            return string.Format(this.PurchaseOrderNumberPrefix, purchaseOrderNumber);
         }
 
         protected string AppsDeriveDisplayName()
@@ -125,7 +81,30 @@ namespace Allors.Domain
 
         public void AppsOnPostBuild(ObjectOnPostBuild method)
         {
-            
+            if (!this.ExistPurchaseInvoiceCounter)
+            {
+                this.PurchaseInvoiceCounter = new CounterBuilder(this.strategy.Session).WithUniqueId(Guid.NewGuid()).WithValue(0).Build();
+            }
+
+            if (!this.ExistQuoteCounter)
+            {
+                this.QuoteCounter = new CounterBuilder(this.strategy.Session).WithUniqueId(Guid.NewGuid()).WithValue(0).Build();
+            }
+
+            if (!this.ExistPurchaseOrderCounter)
+            {
+                this.PurchaseOrderCounter = new CounterBuilder(this.strategy.Session).WithUniqueId(Guid.NewGuid()).WithValue(0).Build();
+            }
+
+            if (!this.ExistIncomingShipmentCounter)
+            {
+                this.IncomingShipmentCounter = new CounterBuilder(this.strategy.Session).WithUniqueId(Guid.NewGuid()).WithValue(0).Build();
+            }
+
+            if (!this.ExistSubAccountCounter)
+            {
+                this.SubAccountCounter = new CounterBuilder(this.strategy.Session).WithUniqueId(Guid.NewGuid()).WithValue(0).Build();
+            }
 
             if (!this.ExistDoAccounting)
             {

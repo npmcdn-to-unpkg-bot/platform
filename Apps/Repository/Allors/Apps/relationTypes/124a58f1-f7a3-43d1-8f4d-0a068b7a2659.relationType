@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="124a58f1-f7a3-43d1-8f4d-0a068b7a2659">
+  <associationType id="87a6b9dd-5c38-4b79-a0e4-75e6777f5207">
+    <isMany>true</isMany>
+    <objectType idref="d8611e48-b0ba-4037-a992-09e3e26c6d5d" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="5725c16f-b079-4435-a347-660fe9de7223">
+    <objectType idref="0568354f-e3d9-439e-baac-b7dce31b956a" />
+    <pluralName>SalesOrderCounters</pluralName>
+    <singularName>SalesOrderCounter</singularName>
+  </roleType>
+</relationType>

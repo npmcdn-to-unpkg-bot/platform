@@ -69,7 +69,7 @@ namespace Allors.Domain
         [Test]
         public void GivenSupplierRelationshipBuilder_WhenBuild_ThenSubAccountNumerIsValidElevenTestNumber()
         {
-            this.internalOrganisation.NextSubAccountNumber = 1007;
+            this.internalOrganisation.SubAccountCounter.Value = 1007;
 
             this.DatabaseSession.Commit();
 

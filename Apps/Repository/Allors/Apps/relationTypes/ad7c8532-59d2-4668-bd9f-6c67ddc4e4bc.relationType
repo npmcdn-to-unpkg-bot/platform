@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="ad7c8532-59d2-4668-bd9f-6c67ddc4e4bc">
+  <associationType id="7028e722-f29d-42f6-b7c5-d73c2e99c907">
+    <isMany>true</isMany>
+    <objectType idref="c81441c8-9ac9-440e-a926-c96230b2701f" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="48454368-06c6-4e64-876b-b5e4268407a4">
+    <objectType idref="0568354f-e3d9-439e-baac-b7dce31b956a" />
+    <pluralName>SubAccountCounters</pluralName>
+    <singularName>SubAccountCounter</singularName>
+  </roleType>
+</relationType>

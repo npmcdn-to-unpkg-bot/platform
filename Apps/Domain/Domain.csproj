@@ -44,6 +44,9 @@
     <Compile Include="..\..\Base\Domain\Base\Common\Cache.cs">
       <Link>Base\Common\Cache.cs</Link>
     </Compile>
+    <Compile Include="..\..\Base\Domain\Base\Common\Counter.cs">
+      <Link>Base\Common\Counter.cs</Link>
+    </Compile>
     <Compile Include="..\..\Base\Domain\Base\Common\Counters.cs">
       <Link>Base\Common\Counters.cs</Link>
     </Compile>

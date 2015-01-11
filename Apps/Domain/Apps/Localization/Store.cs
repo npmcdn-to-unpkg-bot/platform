@@ -20,8 +20,7 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-    
+    using System;
 
     using Resources;
 
@@ -29,20 +28,15 @@ namespace Allors.Domain
     {
         public string DeriveNextInvoiceNumber(int year)
         {
-            var repositorySession = this.Strategy.DatabaseSession.Database.CreateSession();
-            var repositoryStore = (Store)repositorySession.Instantiate(this) ?? this;
-
             int salesInvoiceNumber;
-            if (repositoryStore.Owner.InvoiceSequence.Equals(new Allors.Domain.InvoiceSequences(this.Strategy.Session).EnforcedSequence))
+            if (this.Owner.InvoiceSequence.Equals(new InvoiceSequences(this.Strategy.Session).EnforcedSequence))
             {
-                repositoryStore.NextSalesInvoiceNumber = repositoryStore.ExistNextSalesInvoiceNumber ? repositoryStore.NextSalesInvoiceNumber : 1;
-                salesInvoiceNumber = repositoryStore.NextSalesInvoiceNumber;
-                repositoryStore.NextSalesInvoiceNumber++;
+                salesInvoiceNumber = this.SalesInvoiceCounter.NextValue();
             }
             else
             {
-                Allors.Domain.FiscalYearInvoiceNumber fiscalYearInvoiceNumber = null;
-                foreach (Allors.Domain.FiscalYearInvoiceNumber x in repositoryStore.FiscalYearInvoiceNumbers)
+                FiscalYearInvoiceNumber fiscalYearInvoiceNumber = null;
+                foreach (FiscalYearInvoiceNumber x in this.FiscalYearInvoiceNumbers)
                 {
                     if (x.FiscalYear.Equals(year))
                     {
@@ -53,19 +47,14 @@ namespace Allors.Domain
 
                 if (fiscalYearInvoiceNumber == null)
                 {
-                    fiscalYearInvoiceNumber = new FiscalYearInvoiceNumberBuilder(repositoryStore.Strategy.Session).WithFiscalYear(year).Build();
-                    repositoryStore.AddFiscalYearInvoiceNumber(fiscalYearInvoiceNumber);
+                    fiscalYearInvoiceNumber = new FiscalYearInvoiceNumberBuilder(this.Strategy.Session).WithFiscalYear(year).Build();
+                    this.AddFiscalYearInvoiceNumber(fiscalYearInvoiceNumber);
                 }
 
                 salesInvoiceNumber = fiscalYearInvoiceNumber.DeriveNextSalesInvoiceNumber();
             }
 
-            if (repositorySession.Database.ToString().IndexOf("Memory") < 0)
-            {
-                repositorySession.Commit();
-            }
-
-            return string.Format(repositoryStore.SalesInvoiceNumberPrefix, salesInvoiceNumber);
+            return string.Format(this.SalesInvoiceNumberPrefix, salesInvoiceNumber);
         }
 
         // TODO: Cascading delete
@@ -81,41 +70,22 @@ namespace Allors.Domain
 
         public string DeriveNextShipmentNumber()
         {
-            var repositorySession = this.Strategy.DatabaseSession.Database.CreateSession();
-            var repositoryStore = (Store)repositorySession.Instantiate(this) ?? this;
-
-            repositoryStore.NextOutgoingShipmentNumber = repositoryStore.ExistNextOutgoingShipmentNumber ? repositoryStore.NextOutgoingShipmentNumber : 1;
-            var shipmentNumber = repositoryStore.NextOutgoingShipmentNumber;
-            repositoryStore.NextOutgoingShipmentNumber++;
-
-            if (repositorySession.Database.ToString().IndexOf("Memory") < 0)
-            {
-                repositorySession.Commit();
-            }
-
-            return string.Format(repositoryStore.OutgoingShipmentNumberPrefix, shipmentNumber);
+            var shipmentNumber = this.OutgoingShipmentCounter.NextValue();
+            return string.Format(this.OutgoingShipmentNumberPrefix, shipmentNumber);
         }
 
         public string DeriveNextSalesOrderNumber()
         {
-            var repositorySession = this.Strategy.DatabaseSession.Database.CreateSession();
-            var repositoryStore = (Store)repositorySession.Instantiate(this) ?? this;
-
-            repositoryStore.NextSalesOrderNumber = repositoryStore.ExistNextSalesOrderNumber ? repositoryStore.NextSalesOrderNumber : 1;
-            var salesOrderNumber = repositoryStore.NextSalesOrderNumber;
-            repositoryStore.NextSalesOrderNumber++;
-
-            if (repositorySession.Database.ToString().IndexOf("Memory") < 0)
-            {
-                repositorySession.Commit();
-            }
-
-            return string.Format(repositoryStore.SalesOrderNumberPrefix, salesOrderNumber);
+            var salesOrderNumber = this.SalesOrderCounter.NextValue();
+            return string.Format(this.SalesOrderNumberPrefix, salesOrderNumber);
         }
 
         public void AppsOnPostBuild(ObjectOnPostBuild method)
         {
-            
+            if (!this.ExistSalesOrderCounter)
+            {
+                this.SalesOrderCounter = new CounterBuilder(this.strategy.Session).WithUniqueId(Guid.NewGuid()).WithValue(0).Build();
+            }
 
             if (!this.ExistCreditLimit)
             {
@@ -248,7 +218,7 @@ namespace Allors.Domain
                 }
             }
 
-            derivation.Log.AssertExistsAtMostOne(this, Stores.Meta.FiscalYearInvoiceNumbers, Stores.Meta.NextSalesInvoiceNumber);
+            derivation.Log.AssertExistsAtMostOne(this, Stores.Meta.FiscalYearInvoiceNumbers, Stores.Meta.SalesInvoiceCounter);
 
             this.DisplayName = this.Name;
         }

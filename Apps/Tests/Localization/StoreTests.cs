@@ -76,7 +76,7 @@ namespace Allors.Domain
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
 
-            builder.WithNextSalesInvoiceNumber(1);
+            builder.WithSalesInvoiceCounter( new CounterBuilder(this.DatabaseSession).Build() ).Build();
             builder.Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);

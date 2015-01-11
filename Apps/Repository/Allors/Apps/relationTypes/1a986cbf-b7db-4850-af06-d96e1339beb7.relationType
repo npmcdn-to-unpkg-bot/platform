@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="1a986cbf-b7db-4850-af06-d96e1339beb7">
+  <associationType id="fc69f819-2ca0-4ac4-b36e-cfff791679a1">
+    <isMany>true</isMany>
+    <objectType idref="c81441c8-9ac9-440e-a926-c96230b2701f" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="d6e816ae-50c5-41c7-8877-9f4c30208d47">
+    <objectType idref="0568354f-e3d9-439e-baac-b7dce31b956a" />
+    <pluralName>PurchaseInvoiceCounters</pluralName>
+    <singularName>PurchaseInvoiceCounter</singularName>
+  </roleType>
+</relationType>

@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="859d95c2-7321-4408-bcd1-405dc0b31efc">
+  <associationType id="47674006-74f4-497e-b9b6-1d5cff1ada0f">
+    <isMany>true</isMany>
+    <objectType idref="c81441c8-9ac9-440e-a926-c96230b2701f" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="0dc922be-86d0-469e-a9d2-5bf19a910994">
+    <objectType idref="0568354f-e3d9-439e-baac-b7dce31b956a" />
+    <pluralName>AccountingTransactionCounters</pluralName>
+    <singularName>AccountingTransactionCounter</singularName>
+  </roleType>
+</relationType>

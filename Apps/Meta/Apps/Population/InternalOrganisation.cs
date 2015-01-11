@@ -6,13 +6,13 @@ namespace Allors.Meta
 	{
 	    internal override void AppsExtend()
         {
-			this.Roles.NextPurchaseInvoiceNumber.IsRequired = true;
-			this.Roles.NextQuoteNumber.IsRequired = true;
-			this.Roles.NextPurchaseOrderNumber.IsRequired = true;
-			this.Roles.NextIncomingShipmentNumber.IsRequired = true;
+			this.Roles.PurchaseInvoiceCounter.IsRequired = true;
+			this.Roles.QuoteCounter.IsRequired = true;
+			this.Roles.PurchaseOrderCounter.IsRequired = true;
+			this.Roles.IncomingShipmentCounter.IsRequired = true;
+            this.Roles.SubAccountCounter.IsRequired = true;
 
             this.Roles.Name.IsRequired = true;
-            this.Roles.NextSubAccountNumber.IsRequired = true;
             this.Roles.FiscalYearStartMonth.IsRequired = true;
             this.Roles.FiscalYearStartDay.IsRequired = true;
             this.Roles.DoAccounting.IsRequired = true;

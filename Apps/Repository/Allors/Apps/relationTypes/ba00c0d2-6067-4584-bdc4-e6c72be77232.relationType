@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="ba00c0d2-6067-4584-bdc4-e6c72be77232">
+  <associationType id="687afb94-445e-41e2-bf22-deaac5b40e5a">
+    <isMany>true</isMany>
+    <objectType idref="c81441c8-9ac9-440e-a926-c96230b2701f" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="9fa5512e-098a-40fd-a821-38a5f5f280f5">
+    <objectType idref="0568354f-e3d9-439e-baac-b7dce31b956a" />
+    <pluralName>QuoteCounters</pluralName>
+    <singularName>QuoteCounter</singularName>
+  </roleType>
+</relationType>

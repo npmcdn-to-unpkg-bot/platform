@@ -144,7 +144,7 @@ namespace Allors.Domain
         public void GivenCustomerRelationshipBuilder_WhenBuild_ThenSubAccountNumerIsValidElevenTestNumber()
         {
             var internalOrganisation = Singleton.Instance(this.DatabaseSession).DefaultInternalOrganisation;
-            internalOrganisation.NextSubAccountNumber = 1007;
+            internalOrganisation.SubAccountCounter.Value = 1007;
 
             this.DatabaseSession.Commit();
 

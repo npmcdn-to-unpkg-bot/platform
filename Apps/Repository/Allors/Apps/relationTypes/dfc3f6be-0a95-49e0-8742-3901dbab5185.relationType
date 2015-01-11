@@ -1,0 +1,12 @@
+<relationType allors="1.0" id="dfc3f6be-0a95-49e0-8742-3901dbab5185">
+  <associationType id="92072a30-fdb0-42c2-b4b6-f1fa53e83e7e">
+    <isMany>true</isMany>
+    <objectType idref="d8611e48-b0ba-4037-a992-09e3e26c6d5d" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="9fc009b2-0c9c-446f-ba4f-39144cb6c90d">
+    <objectType idref="0568354f-e3d9-439e-baac-b7dce31b956a" />
+    <pluralName>OutgoingShipmentCounters</pluralName>
+    <singularName>OutgoingShipmentCounter</singularName>
+  </roleType>
+</relationType>
