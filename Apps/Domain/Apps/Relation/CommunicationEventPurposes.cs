@@ -142,7 +142,7 @@ namespace Allors.Domain
                 .WithName("Appointment")
                 .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Appointment").WithLocale(englishLocale).Build())
                 .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Afspraak").WithLocale(dutchLocale).Build())
-                .WithUniqueId(MeetingId)
+                .WithUniqueId(AppointmentId)
                 .Build();
             
             new CommunicationEventPurposeBuilder(this.Session)
