@@ -27,7 +27,8 @@ namespace Allors.Web.Identity
     using Allors.Domain;
 
     using Microsoft.AspNet.Identity;
-    using Microsoft.SqlServer.Server;
+
+    using Task = System.Threading.Tasks.Task;
 
     public partial class UserStore : IUserStore<IdentityUser>,
                              IUserEmailStore<IdentityUser>,/*
