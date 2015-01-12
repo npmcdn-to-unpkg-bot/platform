@@ -3,9 +3,8 @@
     <objectType idref="e94bf9e1-373d-49e3-a0fe-f21a8b1525d4" />
   </associationType>
   <roleType id="68f52b6f-6feb-4e22-ae1a-8ef8334c578f">
-    <objectType idref="ad7f5ddc-bedb-4aaa-97ac-d6693a009ba9" />
+    <objectType idref="9d0065b8-2760-4ec5-928a-9ebd128bbfdd" />
     <pluralName>PostalCodes</pluralName>
     <singularName>PostalCode</singularName>
-    <size>256</size>
   </roleType>
 </relationType>
