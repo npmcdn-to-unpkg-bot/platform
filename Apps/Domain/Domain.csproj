@@ -1056,7 +1056,9 @@
     <Compile Include="Apps\Relation\Citizenships.cs" />
     <Compile Include="Apps\Relation\ClientAgreement.cs" />
     <Compile Include="Apps\Relation\ClientAgreements.cs" />
+    <Compile Include="Apps\Relation\ProspectRelationship.cs" />
     <Compile Include="Apps\Relation\ClientRelationship.cs" />
+    <Compile Include="Apps\Relation\ProspectRelationships.cs" />
     <Compile Include="Apps\Relation\ClientRelationships.cs" />
     <Compile Include="Apps\Relation\CommunicationEvent.v.cs" />
     <Compile Include="Apps\Relation\CommunicationEventExtensions.cs" />
