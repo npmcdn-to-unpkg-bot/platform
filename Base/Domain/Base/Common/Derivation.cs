@@ -33,15 +33,15 @@ namespace Allors.Domain
         public delegate void AddedDerivableHandler(Derivable derivable);
         public delegate void AddedDependencyHandler(Derivable dependent, Derivable dependee);
         public delegate void StartedGenerationHandler(int generation);
-        public delegate void RunningPreparationHandler(int run);
+        public delegate void StartedPreparationHandler(int preparation);
         public delegate void PreparingDerivationHandler(Derivable derivable);
         public delegate void DerivedHandler(Derivable derivable);
 
         public event AddedDerivableHandler AddedDerivable;
         public event AddedDependencyHandler AddedDependency;
         public event StartedGenerationHandler StartedGeneration;
-        public event RunningPreparationHandler RunningPreparation;
-        public event PreparingDerivationHandler PreparingDerivation;
+        public event StartedPreparationHandler StartedPreparation;
+        public event PreparingDerivationHandler Preparing;
         public event DerivedHandler Derived;
 
         private readonly ISession session;
@@ -280,9 +280,9 @@ namespace Allors.Domain
 
                 var preparationRun = 1;
                 
-                if (this.RunningPreparation != null)
+                if (this.StartedPreparation != null)
                 {
-                    this.RunningPreparation(preparationRun);
+                    this.StartedPreparation(preparationRun);
                 }
 
                 this.derivationGraph = new DerivationGraph(this);
@@ -292,9 +292,9 @@ namespace Allors.Domain
 
                     if (derivable != null)
                     {
-                        if (this.PreparingDerivation != null)
+                        if (this.Preparing != null)
                         {
-                            this.PreparingDerivation(derivable);
+                            this.Preparing(derivable);
                         }
 
                         var prepareDerivation = derivable.PrepareDerivation();
@@ -308,9 +308,9 @@ namespace Allors.Domain
                 while (this.addedDerivables.Count > 0)
                 {
                     preparationRun++;
-                    if (this.RunningPreparation != null)
+                    if (this.StartedPreparation != null)
                     {
-                        this.RunningPreparation(preparationRun);
+                        this.StartedPreparation(preparationRun);
                     }
 
                     var dependencyObjectsToPrepare = new HashSet<IObject>(this.addedDerivables);
@@ -320,9 +320,9 @@ namespace Allors.Domain
 
                     foreach (Derivable dependencyObject in dependencyObjectsToPrepare)
                     {
-                        if (this.PreparingDerivation != null)
+                        if (this.Preparing != null)
                         {
-                            this.PreparingDerivation(dependencyObject);
+                            this.Preparing(dependencyObject);
                         }
 
                         var prepareDerivation = dependencyObject.PrepareDerivation();
