@@ -31,7 +31,7 @@ namespace Allors.Domain
 
         public DerivationLog(Derivation derivation)
         {
-            Derivation = derivation;
+            this.Derivation = derivation;
             this.errors = new List<IDerivationError>();
         }
 

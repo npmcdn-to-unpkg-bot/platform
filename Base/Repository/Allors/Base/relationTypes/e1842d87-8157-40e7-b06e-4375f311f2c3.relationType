@@ -2,7 +2,6 @@
   <associationType id="fe413e96-cfcf-4e8d-9f23-0fa4f457fdf1">
     <objectType idref="122ccfe1-f902-44c1-9d6c-6f6a0afa9469" />
   </associationType>
-  <isDerived>true</isDerived>
   <isIndexed>true</isIndexed>
   <roleType id="d73fd9a4-13ee-4fa9-8925-d93eca328bf6">
     <objectType idref="6dc0a1a8-88a4-4614-adb4-92dd3d017c0e" />

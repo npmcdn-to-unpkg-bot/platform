@@ -2,7 +2,7 @@ delimiters "$", "$"
 
 TemplateId() ::= <<17ED40F8-BDF8-4A7C-9AE9-1C4D2AD6BA2B>>
 TemplateName() ::= <<C# Base>>
-TemplateVersion() ::= <<1.0.75>>
+TemplateVersion() ::= <<1.0.76>>
 TemplateAllors() ::= <<1.0>>
 TemplateConfiguration(meta) ::= <<
 $!
@@ -156,6 +156,7 @@ $\n$
 >>
 
 interfaceExclusiveRoleTypes_Builder() ::= <<
+$if(!roleType.RelationType.IsDerived)$
 $if(roleType.ObjectType.IsUnit)$
 		$objectType_NullableName(roleType.ObjectType)$ $roleType.PropertyName$ {get;}
 $else$
@@ -168,6 +169,7 @@ $else$
 
 $endif$
 $endif$		
+$endif$
 >>
 
 
@@ -253,11 +255,13 @@ $class.MethodTypes:{methodType|$objectTypeMethodType_Meta()$
 	    }
 
 $class.RoleTypes:{roleType|
+$if(!roleType.RelationType.IsDerived)$
 	$if(roleType.objectType.IsUnit)$
 		$classUnitRoleType_Builder()$
 	$else$
 		$classCompositeRoleType_Builder()$
 	$endif$
+$endif$
 }$
 	}
 
@@ -267,6 +271,7 @@ $objectType_Plural()$
 >>
 
 classUnitRoleTypes_Class_OnBuild() ::= <<
+$if(!roleType.RelationType.IsDerived)$
 $if((roleType.ObjectType.IsString || roleType.ObjectType.IsBinary))$
 			
 			this.$roleType.PropertyName$ = builder.$roleType.PropertyName$;
@@ -277,9 +282,11 @@ $else$
 				this.$roleType.PropertyName$ = builder.$roleType.PropertyName$.Value;
 			}			
 $endif$		
+$endif$		
 >>
 
 classCompsiteRoleTypes_Class_OnBuild() ::= <<
+$if(!roleType.RelationType.IsDerived)$
 $if(roleType.IsOne)$
 
 			this.$roleType.PropertyName$ = builder.$roleType.PropertyName$;
@@ -290,6 +297,7 @@ $else$
 				this.$roleType.PropertyName$ = builder.$roleType.PropertyName$.ToArray();
 			}
 $endif$
+$endif$		
 >>
 
 classAssociationType_Class() ::= <<

@@ -101,7 +101,7 @@ namespace Allors.Domain
                 derive.Execute();
             }
 
-            derivation.DerivedObjects.Add(this.derivable);
+            derivation.AddDerivedObject(this.derivable);
 
             this.currentRoot = null;
         }

@@ -22,6 +22,7 @@ namespace Allors.Domain
 {
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Linq;
 
     using Allors;
@@ -29,6 +30,20 @@ namespace Allors.Domain
 
     public class Derivation : IDerivation
     {
+        public delegate void AddedDerivableHandler(Derivable derivable);
+        public delegate void AddedDependencyHandler(Derivable dependent, Derivable dependee);
+        public delegate void StartedGenerationHandler(int generation);
+        public delegate void RunningPreparationHandler(int run);
+        public delegate void PreparingDerivationHandler(Derivable derivable);
+        public delegate void DerivedHandler(Derivable derivable);
+
+        public event AddedDerivableHandler AddedDerivable;
+        public event AddedDependencyHandler AddedDependency;
+        public event StartedGenerationHandler StartedGeneration;
+        public event RunningPreparationHandler RunningPreparation;
+        public event PreparingDerivationHandler PreparingDerivation;
+        public event DerivedHandler Derived;
+
         private readonly ISession session;
         private readonly DerivationLog log;
 
@@ -198,10 +213,14 @@ namespace Allors.Domain
                 {
                     throw new InvalidEnumArgumentException("Object has alreadry been derived.");
                 }
-
+                
                 this.derivationGraph.Add(derivable);
-
                 this.addedDerivables.Add(derivable);
+
+                if (this.AddedDerivable != null)
+                {
+                    this.AddedDerivable(derivable);
+                }
             }
         }
 
@@ -222,11 +241,16 @@ namespace Allors.Domain
         {
             if (dependent != null && dependee != null)
             {
-                // TODO: add additional methods in case dependent/dependee is already derived and shouldntt be derived again.
+                // TODO: add additional methods in case dependent/dependee is already derived and should not be derived again.
                 this.derivationGraph.AddDependency(dependent, dependee);
 
                 this.addedDerivables.Add(dependent);
                 this.addedDerivables.Add(dependee);
+
+                if (this.AddedDependency != null)
+                {
+                    this.AddedDependency(dependent, dependee);
+                }
             }
         }
 
@@ -247,7 +271,19 @@ namespace Allors.Domain
             {
                 this.generation++;
 
+                if (this.StartedGeneration != null)
+                {
+                    this.StartedGeneration(this.generation);
+                }
+
                 this.addedDerivables = new HashSet<IObject>();
+
+                var preparationRun = 1;
+                
+                if (this.RunningPreparation != null)
+                {
+                    this.RunningPreparation(preparationRun);
+                }
 
                 this.derivationGraph = new DerivationGraph(this);
                 foreach (var changedObject in changedObjects)
@@ -256,6 +292,11 @@ namespace Allors.Domain
 
                     if (derivable != null)
                     {
+                        if (this.PreparingDerivation != null)
+                        {
+                            this.PreparingDerivation(derivable);
+                        }
+
                         var prepareDerivation = derivable.PrepareDerivation();
                         prepareDerivation.Derivation = this;
                         prepareDerivation.Execute();
@@ -266,6 +307,12 @@ namespace Allors.Domain
 
                 while (this.addedDerivables.Count > 0)
                 {
+                    preparationRun++;
+                    if (this.RunningPreparation != null)
+                    {
+                        this.RunningPreparation(preparationRun);
+                    }
+
                     var dependencyObjectsToPrepare = new HashSet<IObject>(this.addedDerivables);
                     dependencyObjectsToPrepare.ExceptWith(this.preparedObjects);
 
@@ -273,6 +320,11 @@ namespace Allors.Domain
 
                     foreach (Derivable dependencyObject in dependencyObjectsToPrepare)
                     {
+                        if (this.PreparingDerivation != null)
+                        {
+                            this.PreparingDerivation(dependencyObject);
+                        }
+
                         var prepareDerivation = dependencyObject.PrepareDerivation();
                         prepareDerivation.Derivation = this;
                         prepareDerivation.Execute();
@@ -301,6 +353,16 @@ namespace Allors.Domain
             }
 
             return this.log;
+        }
+
+        internal void AddDerivedObject(Derivable derivable)
+        {
+            this.derivedObjects.Add(derivable);
+
+            if (this.Derived != null)
+            {
+                this.Derived(derivable);
+            }
         }
     }
 }
