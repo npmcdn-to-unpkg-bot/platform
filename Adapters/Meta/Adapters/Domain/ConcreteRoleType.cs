@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="Repository.cs" company="Allors bvba">
+// <copyright file="ConcreteRoleType.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -16,14 +16,34 @@
 // 
 // For more information visit http://www.allors.com/legal
 // </copyright>
+// <summary>Defines the IObjectType type.</summary>
 //-------------------------------------------------------------------------------------------------
 
 namespace Allors.Meta
 {
-    public static partial class Repository
+    public partial class ConcreteRoleType
     {
-        public static void TestPostInit(MetaPopulation env)
+        private bool? isRequiredOverride;
+
+        public bool IsRequired
         {
+            get
+            {
+                return this.IsRequiredOverride.HasValue ? this.IsRequiredOverride.Value : this.roleType.IsRequired;
+            }
+        }
+
+        public bool? IsRequiredOverride
+        {
+            get
+            {
+                return this.isRequiredOverride;
+            }
+
+            set
+            {
+                this.isRequiredOverride = value;
+            }
         }
     }
 }

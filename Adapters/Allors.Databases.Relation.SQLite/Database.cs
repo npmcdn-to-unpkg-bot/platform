@@ -523,7 +523,7 @@ namespace Allors.Databases.Relation.SQLite
 
                 for (var i = 0; i < oids.Length; i++)
                 {
-                    var objectId = new ObjectIdLong(oids[i]);
+                    var objectId = new ObjectIdLong(long.Parse(oids[i]));
 
                     if (!(objectType is IClass))
                     {
@@ -559,7 +559,7 @@ VALUES (" + Mapping.ParameterNameForObject + "," + Mapping.ParameterNameForType 
                         if (reader.Name.Equals(Serialization.Relation))
                         {
                             var associationString = reader.GetAttribute(Serialization.Association);
-                            var association = new ObjectIdLong(associationString);
+                            var association = new ObjectIdLong(long.Parse(associationString));
 
                             if (reader.IsEmptyElement)
                             {
@@ -580,7 +580,7 @@ VALUES (" + Mapping.ParameterNameForObject + "," + Mapping.ParameterNameForType 
 
                                 foreach (var roleString in roleStrings)
                                 {
-                                    var role = new ObjectIdLong(roleString);
+                                    var role = new ObjectIdLong(long.Parse(roleString));
                                     //this.OnRelationNotLoaded(relationType.Id, association.ToString(), r);
 
                                     var cmdText = @"
@@ -671,7 +671,7 @@ VALUES (" + Mapping.ParameterNameForAssociation + "," + Mapping.ParameterNameFor
                         if (reader.Name.Equals(Serialization.Relation))
                         {
                             var associationString = reader.GetAttribute(Serialization.Association);
-                            var association = new ObjectIdLong(associationString);
+                            var association = new ObjectIdLong(long.Parse(associationString));
                             if (reader.IsEmptyElement)
                             {
                                 object role;

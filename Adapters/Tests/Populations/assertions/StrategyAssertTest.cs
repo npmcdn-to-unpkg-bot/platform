@@ -35,7 +35,7 @@ namespace Allors.Populations
         [SetUp]
         protected void Init()
         {
-            var configuration = new Databases.Memory.IntegerId.Configuration { ObjectFactory = new ObjectFactory(Repository.MetaPopulation, typeof(C1).Assembly, "Allors.Domain") };
+            var configuration = new Databases.Memory.IntegerId.Configuration { ObjectFactory = new ObjectFactory(MetaPopulation.Instance, typeof(C1).Assembly, "Allors.Domain") };
             var database = new Database(configuration);
             this.session = database.CreateSession();
         }

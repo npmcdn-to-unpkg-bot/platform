@@ -311,7 +311,7 @@ VALUES (" + Mapping.ParameterNameForObject + ", " + Mapping.ParameterNameForType
 
         public IObject Instantiate(string objectId)
         {
-            return this.Instantiate(new ObjectIdLong(objectId));
+            return this.Instantiate(new ObjectIdLong(long.Parse(objectId)));
         }
 
         public IObject Instantiate(ObjectId objectId)
@@ -341,7 +341,7 @@ VALUES (" + Mapping.ParameterNameForObject + ", " + Mapping.ParameterNameForType
             {
                 if (objectIdString != null)
                 {
-                    objectIds.Add(new ObjectIdLong(objectIdString));
+                    objectIds.Add(new ObjectIdLong(long.Parse(objectIdString)));
                 }
             }
 
@@ -370,7 +370,7 @@ VALUES (" + Mapping.ParameterNameForObject + ", " + Mapping.ParameterNameForType
 
         public IObject Insert(IClass objectType, string objectIdString)
         {
-            var objectId = new ObjectIdLong(objectIdString);
+            var objectId = new ObjectIdLong(long.Parse(objectIdString));
              var insertedObject = this.Insert(objectType, objectId);
 
             return insertedObject;
@@ -1391,7 +1391,7 @@ WHERE " + Mapping.ColumnNameForAssociation + @"=" + Mapping.ParameterNameForAsso
                 var result = command.ExecuteScalar();
                 if (result != null)
                 {
-                    role = new ObjectIdLong(result.ToString());
+                    role = new ObjectIdLong((long)result);
                 }
 
                 var cacheId = this.GetCacheId(association);
@@ -1423,7 +1423,7 @@ WHERE " + Mapping.ColumnNameForAssociation + @"=" + Mapping.ParameterNameForAsso
                             roles = new List<ObjectId>();
                         }
 
-                        var value = reader.GetValue(0).ToString();
+                        var value = reader.GetInt64(0);
                         var role = new ObjectIdLong(value);
                         roles.Add(role);
                     }
@@ -1453,7 +1453,7 @@ WHERE " + Mapping.ColumnNameForRole + @"=" + Mapping.ParameterNameForRole + @";
                 var result = command.ExecuteScalar();
                 if (result != null)
                 {
-                    var objectId = new ObjectIdLong(result.ToString());
+                    var objectId = new ObjectIdLong((long)result);
                     return objectId;
                 }
             }
@@ -1483,7 +1483,7 @@ WHERE " + Mapping.ColumnNameForRole + @"=" + Mapping.ParameterNameForRole + @";
                             associations = new List<ObjectId>();
                         }
 
-                        var value = reader.GetValue(0).ToString();
+                        var value = reader.GetInt64(0);
                         var association = new ObjectIdLong(value);
                         associations.Add(association);
                     }

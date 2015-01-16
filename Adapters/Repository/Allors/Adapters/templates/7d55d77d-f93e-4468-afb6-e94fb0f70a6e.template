@@ -1,5 +1,5 @@
 <template allors="1.0">
   <name>Repository</name>
-  <output>../../../Meta</output>
+  <output>../../../Meta/Generated</output>
   <source>file:///C:/github/allors/Repository/Templates/repository.cs.stg</source>
 </template>

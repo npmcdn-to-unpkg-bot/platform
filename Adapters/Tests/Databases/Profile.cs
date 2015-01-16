@@ -38,7 +38,7 @@ namespace Allors.Databases
 
         protected Profile()
         {
-            this.objectFactory = this.CreateObjectFactory(Repository.MetaPopulation);
+            this.objectFactory = this.CreateObjectFactory(MetaPopulation.Instance);
         }
 
         public IObjectFactory ObjectFactory

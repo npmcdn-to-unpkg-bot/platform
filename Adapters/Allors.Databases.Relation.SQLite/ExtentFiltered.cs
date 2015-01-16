@@ -115,7 +115,7 @@ namespace Allors.Databases.Relation.SQLite
                 {
                     while (reader.Read())
                     {
-                        var objectId = new ObjectIdLong(reader.GetValue(0).ToString());
+                        var objectId = new ObjectIdLong(reader.GetInt64(0));
                         objects.Add(objectId);
                     }
 
