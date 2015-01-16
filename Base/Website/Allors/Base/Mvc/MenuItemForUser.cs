@@ -11,6 +11,8 @@
 
         private bool isActive;
 
+        private bool isHeader;
+
         public MenuItemForUser(MenuItem menuItem, MenuForUser menuForUser)
         {
             this.menuItem = menuItem;
@@ -58,6 +60,22 @@
             set
             {
                 this.isActive = value;
+            }
+        }
+
+        public bool IsHeader
+        {
+            get
+            {
+                return this.menuItem.IsHeader;
+            }
+        }
+
+        public bool IsDivider
+        {
+            get
+            {
+                return this.menuItem.IsDivider;
             }
         }
 

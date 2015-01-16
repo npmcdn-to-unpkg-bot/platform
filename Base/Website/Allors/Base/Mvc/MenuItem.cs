@@ -83,7 +83,7 @@ namespace Allors.Web.Mvc
                 }
             }
 
-            if (string.IsNullOrEmpty(this.Text))
+            if (!this.IsDivider && !this.IsHeader && string.IsNullOrEmpty(this.Text))
             {
                 if (this.ActionName.ToLowerInvariant().Equals("index"))
                 {
@@ -109,6 +109,10 @@ namespace Allors.Web.Mvc
         public string Area { get; set; }
 
         public string Text { get; set; }
+
+        public bool IsDivider { get; set; }
+
+        public bool IsHeader { get; set; }
 
         public bool AllowAnonymous { get; set; }
 

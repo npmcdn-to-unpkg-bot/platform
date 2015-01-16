@@ -4,19 +4,31 @@
     var active = Model.IsActive ? "active" : null;
 }
 
-<li class="@active">
-    @if (Model.HasChildren)
-    {
+@if (Model.IsDivider)
+{
+    <li class="divider"></li>
+}
+else if(Model.IsHeader)
+{
+    <li class="dropdown-header">
+        @Model.Text
+    </li>
+}
+else if (Model.HasChildren)
+{
+    <li class="@active">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">@Model.Text <span class="caret"></span></a>
-         <ul class="dropdown-menu" role="menu">
+        <ul class="dropdown-menu" role="menu">
             @foreach (var menuItem in Model)
             {
                 @Html.Partial("_NavbarItemPartial", menuItem)
             }
-         </ul>
-    }
-    else
-    {
+        </ul>
+    </li>
+}
+else
+{
+    <li class="@active">
         @Html.ActionLink(Model.Text, Model.ActionName, Model.ControllerName, null, null)
-    }
-</li>
+    </li> 
+}
