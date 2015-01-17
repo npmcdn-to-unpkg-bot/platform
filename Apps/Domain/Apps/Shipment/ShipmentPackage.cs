@@ -70,7 +70,7 @@ namespace Allors.Domain
 
             if (!this.ExistDocuments)
             {
-                this.AddDocument(new PackagingSlipBuilder(this.Strategy.Session).WithPrintContent(this.PrintContent).WithName(this.DisplayName).Build());
+                this.AddDocument(new PackagingSlipBuilder(this.Strategy.Session).WithName(this.DisplayName).Build());
             }
 
             this.AppsDeriveTemplate(derivation);

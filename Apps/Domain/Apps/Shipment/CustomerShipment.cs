@@ -311,8 +311,6 @@ namespace Allors.Domain
                     {
                         salesInvoice = new SalesInvoiceBuilder(this.Strategy.Session)
                             .WithStore(salesOrder.Store)
-                            .WithSalesOrder(salesOrder)
-                            .WithShipment(this)
                             .WithInvoiceDate(DateTime.Now)
                             .WithSalesChannel(salesOrder.SalesChannel)
                             .WithSalesInvoiceType(new Allors.Domain.SalesInvoiceTypes(this.Strategy.Session).SalesInvoice)
@@ -323,10 +321,6 @@ namespace Allors.Domain
                             .WithBillToCustomer(this.BillToParty)
                             .WithShipToCustomer(this.ShipToParty)
                             .WithShipToAddress(this.ShipToAddress)
-                            .WithInitialMarkupPercentage(salesOrder.InitialMarkupPercentage)
-                            .WithInitialProfitMargin(salesOrder.InitialProfitMargin)
-                            .WithMaintainedMarkupPercentage(salesOrder.MaintainedMarkupPercentage)
-                            .WithMaintainedProfitMargin(salesOrder.MaintainedProfitMargin)
                             .WithDiscountAdjustment(salesOrder.DiscountAdjustment)
                             .WithSurchargeAdjustment(salesOrder.SurchargeAdjustment)
                             .WithShippingAndHandlingCharge(salesOrder.ShippingAndHandlingCharge)
@@ -350,26 +344,8 @@ namespace Allors.Domain
 
                     var invoiceItem = new SalesInvoiceItemBuilder(this.Strategy.Session)
                         .WithSalesInvoiceItemType(new Allors.Domain.SalesInvoiceItemTypes(this.Strategy.Session).ProductItem)
-                        .WithSalesOrderItem(orderShipment.SalesOrderItem)
-                        .WithVatRegime(orderShipment.SalesOrderItem.VatRegime)
                         .WithProduct(orderShipment.SalesOrderItem.Product)
                         .WithQuantity(orderShipment.Quantity)
-                        .WithUnitVat(orderShipment.SalesOrderItem.UnitVat)
-                        .WithUnitBasePrice(orderShipment.SalesOrderItem.UnitBasePrice)
-                        .WithUnitDiscount(orderShipment.SalesOrderItem.UnitDiscount)
-                        .WithUnitSurcharge(orderShipment.SalesOrderItem.UnitSurcharge)
-                        .WithCalculatedUnitPrice(orderShipment.SalesOrderItem.CalculatedUnitPrice)
-                        .WithTotalBasePrice(orderShipment.SalesOrderItem.UnitBasePrice * orderShipment.Quantity)
-                        .WithTotalDiscount(orderShipment.SalesOrderItem.UnitDiscount * orderShipment.Quantity)
-                        .WithTotalSurcharge(orderShipment.SalesOrderItem.UnitSurcharge * orderShipment.Quantity)
-                        .WithTotalVat(orderShipment.SalesOrderItem.UnitVat * orderShipment.Quantity)
-                        .WithTotalExVat(orderShipment.SalesOrderItem.CalculatedUnitPrice * orderShipment.Quantity)
-                        .WithTotalIncVat((orderShipment.SalesOrderItem.CalculatedUnitPrice + orderShipment.SalesOrderItem.UnitVat) * orderShipment.Quantity)
-                        .WithUnitPurchasePrice(orderShipment.SalesOrderItem.UnitPurchasePrice)
-                        .WithInitialMarkupPercentage(orderShipment.SalesOrderItem.InitialMarkupPercentage)
-                        .WithInitialProfitMargin(orderShipment.SalesOrderItem.InitialProfitMargin)
-                        .WithMaintainedMarkupPercentage(orderShipment.SalesOrderItem.MaintainedMarkupPercentage)
-                        .WithMaintainedProfitMargin(orderShipment.SalesOrderItem.MaintainedProfitMargin)
                         .Build();
 
                     salesInvoice.AddSalesInvoiceItem(invoiceItem);
@@ -482,7 +458,7 @@ namespace Allors.Domain
 
                         if (pendingPickList == null)
                         {
-                            pendingPickList = new PickListBuilder(this.Strategy.Session).WithShipToParty(this.ShipToParty).WithStore(this.Store).Build();
+                            pendingPickList = new PickListBuilder(this.Strategy.Session).WithStore(this.Store).Build();
                         }
 
                         PickListItem pickListItem = null;
@@ -536,7 +512,6 @@ namespace Allors.Domain
             if (this.ExistShipToParty)
             {
                 var pickList = new PickListBuilder(this.Strategy.Session)
-                    .WithShipToParty(this.ShipToParty)
                     .WithCustomerShipmentCorrection(shipment)
                     .WithStore(this.Store)
                     .Build();

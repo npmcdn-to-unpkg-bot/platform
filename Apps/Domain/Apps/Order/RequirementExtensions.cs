@@ -26,7 +26,7 @@ namespace Allors.Domain
         {
             if (requirement.ExistCurrentObjectState && !requirement.CurrentObjectState.Equals(requirement.PreviousObjectState))
             {
-                var currentStatus = new RequirementStatusBuilder(requirement.Strategy.Session).WithRequirementObjectState(requirement.CurrentObjectState).Build();
+                var currentStatus = new RequirementStatusBuilder(requirement.Strategy.Session).Build();
                 requirement.AddRequirementStatus(currentStatus);
                 requirement.CurrentRequirementStatus = currentStatus;
             }
