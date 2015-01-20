@@ -21,7 +21,11 @@
 namespace Allors.Domain
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading;
+    using System.Xml;
+    using System.Xml.Serialization;
 
     using Allors;
 
@@ -94,6 +98,60 @@ namespace Allors.Domain
             return cached.GetUser(this.Session);
         }
 
+        public void SavePasswords(XmlWriter writer)
+        {
+            var usersWithPassword = this.Extent();
+            usersWithPassword.Filter.AddExists(Meta.UserPasswordHash);
+
+            var records = new List<Credentials.Record>();
+            foreach (User user in usersWithPassword)
+            {
+                records.Add( new Credentials.Record
+                                 {
+                                     UserName = user.UserName,
+                                     PasswordHash = user.UserPasswordHash
+                                 });
+            }
+
+            var credentials = new Credentials
+                                  {
+                                      Records = records.ToArray()
+                                  
+                                  };
+            var xmlSerializer = new XmlSerializer(typeof(Credentials));
+            xmlSerializer.Serialize(writer, credentials);
+        }
+
+        public void LoadPasswords(XmlReader reader)
+        {
+            var userByUserName = this.Extent().ToDictionary(x => x.UserName, x => x);
+
+            var xmlSerializer = new XmlSerializer(typeof(Credentials));
+            var credentials = (Credentials)xmlSerializer.Deserialize(reader);
+            foreach (var credential in credentials.Records)
+            {
+                User user;
+                if (userByUserName.TryGetValue(credential.UserName, out user))
+                {
+                    user.UserPasswordHash = credential.PasswordHash;
+                }
+            }
+        }
+
+        [XmlRoot("Credentials")]
+        public class Credentials
+        {
+            [XmlElement("Credential", typeof(Record))]
+            public Record[] Records;
+
+            public class Record
+            {
+                public string UserName { get; set; }
+
+                public string PasswordHash { get; set; }
+            }
+        }
+        
         private class CachedUser
         {
             public readonly string UserId;
