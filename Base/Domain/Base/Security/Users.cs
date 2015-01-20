@@ -124,7 +124,9 @@ namespace Allors.Domain
 
         public void LoadPasswords(XmlReader reader)
         {
-            var userByUserName = this.Extent().ToDictionary(x => x.UserName, x => x);
+            var users = this.Extent();
+            users.Filter.AddExists(Meta.UserName);
+            var userByUserName = users.ToDictionary(x => x.UserName, x => x);
 
             var xmlSerializer = new XmlSerializer(typeof(Credentials));
             var credentials = (Credentials)xmlSerializer.Deserialize(reader);
