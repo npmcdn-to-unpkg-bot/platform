@@ -254,17 +254,32 @@ namespace Allors.Databases.Memory
 
         public IObject Instantiate(string objectIdString)
         {
+            if (objectIdString == null)
+            {
+                return null;
+            }
+
             var id = this.ObjectIds.Parse(objectIdString);
             return this.Instantiate(id);
         }
 
         public IObject Instantiate(IObject obj)
         {
+            if (obj == null)
+            {
+                return null;
+            }
+            
             return this.Instantiate(obj.Strategy.ObjectId);
         }
 
         public IObject Instantiate(ObjectId objectId)
         {
+            if (objectId == null)
+            {
+                return null;
+            }
+
             var strategy = this.InstantiateMemoryStrategy(objectId);
             if (strategy != null)
             {
@@ -276,6 +291,11 @@ namespace Allors.Databases.Memory
 
         public IStrategy InstantiateStrategy(ObjectId objectId)
         {
+            if (objectId == null)
+            {
+                return null;
+            }
+
             return this.InstantiateMemoryStrategy(objectId);
         }
 
