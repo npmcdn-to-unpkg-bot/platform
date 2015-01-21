@@ -124,16 +124,12 @@ namespace Allors.Domain
 
         public void LoadPasswords(XmlReader reader)
         {
-            var users = this.Extent();
-            users.Filter.AddExists(Meta.UserName);
-            var userByUserName = users.ToDictionary(x => x.UserName, x => x);
-
             var xmlSerializer = new XmlSerializer(typeof(Credentials));
             var credentials = (Credentials)xmlSerializer.Deserialize(reader);
             foreach (var credential in credentials.Records)
             {
-                User user;
-                if (userByUserName.TryGetValue(credential.UserName, out user))
+                User user = this.FindBy(Meta.UserName, credential.UserName);
+                if (user != null)
                 {
                     user.UserPasswordHash = credential.PasswordHash;
                 }
