@@ -32,6 +32,7 @@ namespace Allors.Domain
         public static readonly Guid GeneralPhoneNumberId = new Guid("87467125-5CCB-49fd-9A4E-7A9A18246671");
         public static readonly Guid GeneralFaxNumberId = new Guid("33B5B453-1B38-440a-A116-3EB3C641014A");
         public static readonly Guid GeneralEmailId = new Guid("EEEAF9AB-868D-4553-ACEB-62A5409CA2B2");
+        public static readonly Guid GeneralCorrespondenceId = new Guid("9E86EA3C-6EFE-4B80-9D04-5480199FE26A");
         public static readonly Guid BillingAddressId = new Guid("23FC662A-CCD0-49d7-BB48-AB3A199F070E");
         public static readonly Guid InternetAddressId = new Guid("5BA234F1-40BE-4e23-BD77-FEC9A696CB5B");
         public static readonly Guid OrderAddressId = new Guid("CB8779E1-CC02-428b-8423-F0630C970BBA");
@@ -60,6 +61,11 @@ namespace Allors.Domain
         public ContactMechanismPurpose HomeAddress
         {
             get { return this.Cache.Get(HomeAddressId); }
+        }
+
+        public ContactMechanismPurpose GeneralCorrespondence
+        {
+            get { return this.Cache.Get(GeneralCorrespondenceId); }
         }
 
         public ContactMechanismPurpose GeneralFaxNumber
@@ -171,6 +177,13 @@ namespace Allors.Domain
                 .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Home Address").WithLocale(englishLocale).Build())
                 .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Thuis adres").WithLocale(dutchLocale).Build())
                 .WithUniqueId(HomeAddressId)
+                .Build();
+
+            new ContactMechanismPurposeBuilder(this.Session)
+                .WithName("General Correspondence Address")
+                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("General correspondence address").WithLocale(englishLocale).Build())
+                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Algemeen correspondentie adres").WithLocale(dutchLocale).Build())
+                .WithUniqueId(GeneralCorrespondenceId)
                 .Build();
             
             new ContactMechanismPurposeBuilder(this.Session)

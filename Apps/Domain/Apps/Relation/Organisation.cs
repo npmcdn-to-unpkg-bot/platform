@@ -18,6 +18,8 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+
 namespace Allors.Domain
 {
     using System;
@@ -193,18 +195,18 @@ namespace Allors.Domain
             this.DeriveCurrentContacts(derivation);
         }
 
-        private bool AppsIsActiveCustomer(DateTime? date)
+        private bool AppsIsActiveClient(DateTime? date)
         {
             if (date == DateTime.MinValue)
             {
                 return false;
             }
 
-            var customerRelationships = this.CustomerRelationshipsWhereCustomer;
-            foreach (CustomerRelationship customerRelationship in customerRelationships)
+            var clientRelationships = this.ClientRelationshipsWhereClient;
+            foreach (ClientRelationship relationship in clientRelationships)
             {
-                if (customerRelationship.FromDate <= date &&
-                    (!customerRelationship.ExistThroughDate || customerRelationship.ThroughDate >= date))
+                if (relationship.FromDate <= date &&
+                    (!relationship.ExistThroughDate || relationship.ThroughDate >= date))
                 {
                     return true;
                 }
@@ -213,18 +215,38 @@ namespace Allors.Domain
             return false;
         }
 
-        private bool AppsIsActiveSupplier(DateTime? date)
+        private bool AppsIsActiveCustomer(DateTime? date)
         {
             if (date == DateTime.MinValue)
             {
                 return false;
             }
 
-            var supplierRelationships = this.SupplierRelationshipsWhereSupplier;
-            foreach (SupplierRelationship supplierRelationship in supplierRelationships)
+            var customerRelationships = this.CustomerRelationshipsWhereCustomer;
+            foreach (CustomerRelationship relationship in customerRelationships)
             {
-                if (supplierRelationship.FromDate <= date &&
-                    (!supplierRelationship.ExistThroughDate || supplierRelationship.ThroughDate >= date))
+                if (relationship.FromDate <= date &&
+                    (!relationship.ExistThroughDate || relationship.ThroughDate >= date))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private bool AppsIsActiveDistributor(DateTime? date)
+        {
+            if (date == DateTime.MinValue)
+            {
+                return false;
+            }
+
+            var distributorRelationships = this.DistributionChannelRelationshipsWhereDistributor;
+            foreach (DistributionChannelRelationship relationship in distributorRelationships)
+            {
+                if (relationship.FromDate <= date &&
+                    (!relationship.ExistThroughDate || relationship.ThroughDate >= date))
                 {
                     return true;
                 }
@@ -245,6 +267,86 @@ namespace Allors.Domain
             {
                 if (partnership.FromDate <= date &&
                     (!partnership.ExistThroughDate || partnership.ThroughDate >= date))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private bool AppsIsActiveProfessionalServicesProvider(DateTime? date)
+        {
+            if (date == DateTime.MinValue)
+            {
+                return false;
+            }
+
+            var professionalServicesRelationships = this.ProfessionalServicesRelationshipsWhereProfessionalServicesProvider;
+            foreach (ProfessionalServicesRelationship relationship in professionalServicesRelationships)
+            {
+                if (relationship.FromDate <= date &&
+                    (!relationship.ExistThroughDate || relationship.ThroughDate >= date))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private bool AppsIsActiveProspect(DateTime? date)
+        {
+            if (date == DateTime.MinValue)
+            {
+                return false;
+            }
+
+            var prospectRelationships = this.ProspectRelationshipsWhereProspect;
+            foreach (ProspectRelationship relationship in prospectRelationships)
+            {
+                if (relationship.FromDate <= date &&
+                    (!relationship.ExistThroughDate || relationship.ThroughDate >= date))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private bool AppsIsActiveSubContractor(DateTime? date)
+        {
+            if (date == DateTime.MinValue)
+            {
+                return false;
+            }
+
+            var subContractorRelationships = this.SubContractorRelationshipsWhereSubContractor;
+            foreach (SubContractorRelationship relationship in subContractorRelationships)
+            {
+                if (relationship.FromDate <= date &&
+                    (!relationship.ExistThroughDate || relationship.ThroughDate >= date))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private bool AppsIsActiveSupplier(DateTime? date)
+        {
+            if (date == DateTime.MinValue)
+            {
+                return false;
+            }
+
+            var supplierRelationships = this.SupplierRelationshipsWhereSupplier;
+            foreach (SupplierRelationship relationship in supplierRelationships)
+            {
+                if (relationship.FromDate <= date &&
+                    (!relationship.ExistThroughDate || relationship.ThroughDate >= date))
                 {
                     return true;
                 }
@@ -363,6 +465,56 @@ namespace Allors.Domain
             {
                 return true;
             }
+        }
+
+        public List<string> Roles
+        {
+            get
+            {
+                var roles = new List<string>();
+
+                if (IsActiveClient(DateTime.Now.Date))
+                {
+                    roles.Add("Client");
+                }
+
+                if (IsActiveCustomer(DateTime.Now.Date))
+                {
+                    roles.Add("Customer");
+                }
+
+                if (IsActiveDistributor(DateTime.Now.Date))
+                {
+                    roles.Add("Distributor");
+                }
+
+                if (IsActivePartner(DateTime.Now.Date))
+                {
+                    roles.Add("Partner");
+                }
+
+                if (IsActiveProfessionalServicesProvider(DateTime.Now.Date))
+                {
+                    roles.Add("Professional Service Provider");
+                }
+
+                if (IsActiveProspect(DateTime.Now.Date))
+                {
+                    roles.Add("Prospect");
+                }
+
+                if (IsActiveSubContractor(DateTime.Now.Date))
+                {
+                    roles.Add("Subcontractor");
+                }
+
+                if (IsActiveSupplier(DateTime.Now.Date))
+                {
+                    roles.Add("Supplier");
+                }
+
+                return roles;
+            }            
         }
     }
 }

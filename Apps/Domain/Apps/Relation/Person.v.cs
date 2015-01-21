@@ -18,6 +18,8 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
+
 namespace Allors.Domain
 {
     using System.Collections.Generic;
@@ -25,6 +27,41 @@ namespace Allors.Domain
 
     public partial class Person
     {
+        public bool IsActiveClient(DateTime date)
+        {
+            return this.AppsIsActiveClient(date);
+        }
+
+        public bool IsActiveCustomer(DateTime date)
+        {
+            return this.AppsIsActiveCustomer(date);
+        }
+
+        public bool IsActiveEmployee(DateTime date)
+        {
+            return this.AppsIsActiveEmployee(date);
+        }
+
+        public bool IsActiveOrganisationContact(DateTime date)
+        {
+            return this.AppsIsActiveOrganisationContact(date);
+        }
+
+        public bool IsActiveSalesRep(DateTime date)
+        {
+            return this.AppsIsActiveSalesRep(date);
+        }
+
+        public bool IsActiveProspect(DateTime date)
+        {
+            return this.AppsIsActiveProspect(date);
+        }
+
+        public bool IsActiveSubContractor(DateTime date)
+        {
+            return this.AppsIsActiveSubContractor(date);
+        }
+
         public void DeriveCommission()
         {
             this.AppsDeriveCommission();

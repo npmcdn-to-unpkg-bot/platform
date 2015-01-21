@@ -72,19 +72,44 @@ namespace Allors.Domain
             return this.AppsPartyGetPendingCustomerShipmentForStore(address, store, shipmentMethod);
         }
 
+        public bool IsActiveClient(DateTime date)
+        {
+            return this.AppsIsActiveClient(date);
+        }
+
         public bool IsActiveCustomer(DateTime date)
         {
             return this.AppsIsActiveCustomer(date);
         }
 
-        public bool IsActiveSupplier(DateTime date)
+        public bool IsActiveDistributor(DateTime date)
         {
-            return this.AppsIsActiveSupplier(date);
+            return this.AppsIsActiveDistributor(date);
         }
 
         public bool IsActivePartner(DateTime date)
         {
             return this.AppsIsActivePartner(date);
+        }
+
+        public bool IsActiveProfessionalServicesProvider(DateTime date)
+        {
+            return this.AppsIsActiveProfessionalServicesProvider(date);
+        }
+
+        public bool IsActiveProspect(DateTime date)
+        {
+            return this.AppsIsActiveProspect(date);
+        }
+
+        public bool IsActiveSubContractor(DateTime date)
+        {
+            return this.AppsIsActiveSubContractor(date);
+        }
+
+        public bool IsActiveSupplier(DateTime date)
+        {
+            return this.AppsIsActiveSupplier(date);
         }
 
         public void DeriveUserGroups(IDerivation derivation)

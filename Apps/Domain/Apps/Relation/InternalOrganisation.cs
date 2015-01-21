@@ -504,5 +504,13 @@ namespace Allors.Domain
                 return false;
             }
         }
+
+        public List<string> Roles
+        {
+            get
+            {
+                return new List<string>() {"Internal organisation"};
+            }
+        }
     }
 }

@@ -18,6 +18,8 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+
 namespace Allors.Domain
 {
     public partial class AutomatedAgent
@@ -36,6 +38,8 @@ namespace Allors.Domain
                 return false;
             }
         }
+
+        public List<string> Roles { get; private set; }
 
         public void AppsDerive(DerivableDerive method)
         {

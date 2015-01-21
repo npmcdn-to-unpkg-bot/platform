@@ -42,6 +42,191 @@ namespace Allors.Domain
             }
         }
 
+        private bool AppsIsActiveClient(DateTime? date)
+        {
+            if (date == DateTime.MinValue)
+            {
+                return false;
+            }
+
+            var clientRelationships = this.ClientRelationshipsWhereClient;
+            foreach (ClientRelationship relationship in clientRelationships)
+            {
+                if (relationship.FromDate <= date &&
+                    (!relationship.ExistThroughDate || relationship.ThroughDate >= date))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private bool AppsIsActiveCustomer(DateTime? date)
+        {
+            if (date == DateTime.MinValue)
+            {
+                return false;
+            }
+
+            var customerRelationships = this.CustomerRelationshipsWhereCustomer;
+            foreach (CustomerRelationship relationship in customerRelationships)
+            {
+                if (relationship.FromDate <= date &&
+                    (!relationship.ExistThroughDate || relationship.ThroughDate >= date))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private bool AppsIsActiveEmployee(DateTime? date)
+        {
+            if (date == DateTime.MinValue)
+            {
+                return false;
+            }
+
+            var employments = this.EmploymentsWhereEmployee;
+            foreach (Employment relationship in employments)
+            {
+                if (relationship.FromDate <= date &&
+                    (!relationship.ExistThroughDate || relationship.ThroughDate >= date))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private bool AppsIsActiveOrganisationContact(DateTime? date)
+        {
+            if (date == DateTime.MinValue)
+            {
+                return false;
+            }
+
+            var organisationContactRelationships = this.OrganisationContactRelationshipsWhereContact;
+            foreach (OrganisationContactRelationship relationship in organisationContactRelationships)
+            {
+                if (relationship.FromDate <= date &&
+                    (!relationship.ExistThroughDate || relationship.ThroughDate >= date))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private bool AppsIsActiveSalesRep(DateTime? date)
+        {
+            if (date == DateTime.MinValue)
+            {
+                return false;
+            }
+
+            var salesRepRelationships = this.SalesRepRelationshipsWhereSalesRepresentative;
+            foreach (SalesRepRelationship relationship in salesRepRelationships)
+            {
+                if (relationship.FromDate <= date &&
+                    (!relationship.ExistThroughDate || relationship.ThroughDate >= date))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private bool AppsIsActiveProspect(DateTime? date)
+        {
+            if (date == DateTime.MinValue)
+            {
+                return false;
+            }
+
+            var prospectRelationships = this.ProspectRelationshipsWhereProspect;
+            foreach (ProspectRelationship relationship in prospectRelationships)
+            {
+                if (relationship.FromDate <= date &&
+                    (!relationship.ExistThroughDate || relationship.ThroughDate >= date))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private bool AppsIsActiveSubContractor(DateTime? date)
+        {
+            if (date == DateTime.MinValue)
+            {
+                return false;
+            }
+
+            var subContractorRelationships = this.SubContractorRelationshipsWhereSubContractor;
+            foreach (SubContractorRelationship relationship in subContractorRelationships)
+            {
+                if (relationship.FromDate <= date &&
+                    (!relationship.ExistThroughDate || relationship.ThroughDate >= date))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public List<string> Roles
+        {
+            get
+            {
+                var roles = new List<string>();
+
+                if (IsActiveClient(DateTime.Now.Date))
+                {
+                    roles.Add("Client");
+                }
+
+                if (IsActiveCustomer(DateTime.Now.Date))
+                {
+                    roles.Add("Customer");
+                }
+
+                if (IsActiveEmployee(DateTime.Now.Date))
+                {
+                    roles.Add("Employee");
+                }
+
+                if (IsActiveOrganisationContact(DateTime.Now.Date))
+                {
+                    roles.Add("Organisation contact");
+                }
+
+                if (IsActiveSalesRep(DateTime.Now.Date))
+                {
+                    roles.Add("Sales representative");
+                }
+
+                if (IsActiveProspect(DateTime.Now.Date))
+                {
+                    roles.Add("Prospect");
+                }
+
+                if (IsActiveSubContractor(DateTime.Now.Date))
+                {
+                    roles.Add("Subcontractor");
+                }
+
+                return roles;
+            }            
+        }
+
         public bool IsActiveContact(DateTime date)
         {
             if (date == DateTime.MinValue)
