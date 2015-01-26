@@ -6,7 +6,6 @@ namespace Allors.Meta
 	{
 	    internal override void BaseExtend()
 	    {
-	        this.Roles.DisplayName.IsRequired = true;
 	    }
 	}
 }
