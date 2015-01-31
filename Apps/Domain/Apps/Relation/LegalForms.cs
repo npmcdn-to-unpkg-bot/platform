@@ -57,6 +57,15 @@ namespace Allors.Domain
             new LegalFormBuilder(Session).WithDescription("BE - Maatschap / Société de Droit Commun").Build();
             new LegalFormBuilder(Session).WithDescription("BE - VZW / ASBL").Build();
             new LegalFormBuilder(Session).WithDescription("BE - Zelfstandige / Indépendent").Build();
+            new LegalFormBuilder(Session).WithDescription("NL - Eenmanszaak").Build();
+            new LegalFormBuilder(Session).WithDescription("NL - Vennotschap onder firma (vof)").Build();
+            new LegalFormBuilder(Session).WithDescription("NL - Commanditaire vennootschap (cv)").Build();
+            new LegalFormBuilder(Session).WithDescription("NL - Maatschap").Build();
+            new LegalFormBuilder(Session).WithDescription("NL - Besloten vennootschap (bv)").Build();
+            new LegalFormBuilder(Session).WithDescription("NL - Naamloze vennootschap (nv)").Build();
+            new LegalFormBuilder(Session).WithDescription("NL - Vereniging").Build();
+            new LegalFormBuilder(Session).WithDescription("NL - Coörperatie en onderlinge waarborgmaatschappij").Build();
+            new LegalFormBuilder(Session).WithDescription("NL - Stichting").Build();
         }
 
         protected override void AppsSecure(Security config)
