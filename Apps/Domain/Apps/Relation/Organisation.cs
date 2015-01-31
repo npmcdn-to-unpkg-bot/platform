@@ -82,7 +82,7 @@ namespace Allors.Domain
 
             foreach (PartyContactMechanism partyContactMechanism in this.PartyContactMechanisms)
             {
-                if (partyContactMechanism.UseAsDefault)
+                if (partyContactMechanism.UseAsDefault && partyContactMechanism.ExistContactPurpose)
                 {
                     if (partyContactMechanism.ContactPurpose.IsBillingAddress)
                     {

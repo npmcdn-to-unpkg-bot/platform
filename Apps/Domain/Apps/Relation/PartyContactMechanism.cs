@@ -45,7 +45,7 @@ namespace Allors.Domain
 
             this.AppsDeriveDisplayName();
 
-            if (this.UseAsDefault && this.ExistPartyWherePartyContactMechanism)
+            if (this.UseAsDefault && this.ExistPartyWherePartyContactMechanism && this.ExistContactPurpose)
             {
                 var partyContactMechanisms = this.PartyWherePartyContactMechanism.PartyContactMechanisms;
                 partyContactMechanisms.Filter.AddEquals(PartyContactMechanisms.Meta.ContactPurpose, this.ContactPurpose);
