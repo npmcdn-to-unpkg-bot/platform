@@ -34,6 +34,16 @@ namespace Allors.Domain
             }
         }
 
+        protected override void AppsSetup(Setup setup)
+        {
+            base.AppsSetup(setup);
+
+            new OrganisationContactKindBuilder(Session).WithDescription("General contact").Build();
+            new OrganisationContactKindBuilder(Session).WithDescription("Sales contact").Build();
+            new OrganisationContactKindBuilder(Session).WithDescription("Support contact").Build();
+            new OrganisationContactKindBuilder(Session).WithDescription("Supplier contact").Build();
+        }
+
         protected override void AppsSecure(Security config)
         {
             base.AppsSecure(config);

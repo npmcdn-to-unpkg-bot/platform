@@ -44,6 +44,28 @@ namespace Allors.Domain
             get { return this.cache ?? (this.cache = new UniquelyIdentifiableCache<GenderType>(this.Session)); }
         }
 
+        protected override void AppsSetup(Setup setup)
+        {
+            base.AppsSetup(setup);
+
+            var englishLocale = new Locales(this.Session).EnglishGreatBritain;
+            var dutchLocale = new Locales(this.Session).DutchNetherlands;
+
+            new GenderTypeBuilder(this.Session)
+                .WithName("Male")
+                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Male").WithLocale(englishLocale).Build())
+                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Mannelijk").WithLocale(dutchLocale).Build())
+                .WithUniqueId(MaleId)
+                .Build();
+
+            new GenderTypeBuilder(this.Session)
+                .WithName("Female")
+                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Female").WithLocale(englishLocale).Build())
+                .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Vrouwelijk").WithLocale(dutchLocale).Build())
+                .WithUniqueId(FemaleId)
+                .Build();
+        }
+
         protected override void AppsSecure(Security config)
         {
             base.AppsSecure(config);

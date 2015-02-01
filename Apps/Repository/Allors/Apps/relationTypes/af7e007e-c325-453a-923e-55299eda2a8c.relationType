@@ -5,6 +5,7 @@
   </associationType>
   <isIndexed>true</isIndexed>
   <roleType id="2399e636-f267-4299-b2c7-747497487d63">
+    <isMany>true</isMany>
     <objectType idref="9570d60a-8baa-439c-99f4-472d10952165" />
     <pluralName>ContactKinds</pluralName>
     <singularName>ContactKind</singularName>

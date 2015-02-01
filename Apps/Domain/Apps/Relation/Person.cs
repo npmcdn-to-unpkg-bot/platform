@@ -472,6 +472,8 @@ namespace Allors.Domain
                 }
             }
 
+            this.DeriveFullName();
+
             this.DeriveCurrentEmployment(derivation);
 
             this.DeriveCommission();
@@ -501,34 +503,66 @@ namespace Allors.Domain
 
         private string AppsDeriveDisplayName()
         {
-            var uiText = new StringBuilder();
+            var fullName = new StringBuilder();
 
             if (this.ExistFirstName)
             {
-                uiText.Append(this.FirstName);
+                fullName.Append(this.FirstName);
             }
 
             if (this.ExistMiddleName)
             {
-                if (uiText.Length > 0)
+                if (fullName.Length > 0)
                 {
-                    uiText.Append(" ");
+                    fullName.Append(" ");
                 }
 
-                uiText.Append(this.MiddleName);
+                fullName.Append(this.MiddleName);
             }
 
             if (this.ExistLastName)
             {
-                if (uiText.Length > 0)
+                if (fullName.Length > 0)
                 {
-                    uiText.Append(" ");
+                    fullName.Append(" ");
                 }
 
-                uiText.Append(this.LastName);
+                fullName.Append(this.LastName);
             }
 
-            return uiText.ToString();
+            return fullName.ToString();
+        }
+
+        private void AppsDeriveFullName()
+        {
+            var fullName = new StringBuilder();
+
+            if (this.ExistFirstName)
+            {
+                fullName.Append(this.FirstName);
+            }
+
+            if (this.ExistMiddleName)
+            {
+                if (fullName.Length > 0)
+                {
+                    fullName.Append(" ");
+                }
+
+                fullName.Append(this.MiddleName);
+            }
+
+            if (this.ExistLastName)
+            {
+                if (fullName.Length > 0)
+                {
+                    fullName.Append(" ");
+                }
+
+                fullName.Append(this.LastName);
+            }
+
+            this.FullName = fullName.ToString();
         }
 
         private string AppsDeriveSearchDataCharacterBoundaryText()
