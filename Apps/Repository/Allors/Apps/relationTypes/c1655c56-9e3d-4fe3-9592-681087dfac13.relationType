@@ -1,0 +1,13 @@
+<relationType allors="1.0" id="c1655c56-9e3d-4fe3-9592-681087dfac13">
+  <associationType id="c92e6264-1872-4cc5-b6d3-6ab1c8c0f877">
+    <isMany>true</isMany>
+    <objectType idref="b05371ff-0c9e-4ee3-b31d-e2edeed8649e" />
+  </associationType>
+  <isIndexed>true</isIndexed>
+  <roleType id="a2b30174-2efe-4517-be55-c8d4b16d4402">
+    <isMany>true</isMany>
+    <objectType idref="b033f9c9-c799-485c-a199-914a9e9119d9" />
+    <pluralName>FromContactMechanisms</pluralName>
+    <singularName>FromContactMechanism</singularName>
+  </roleType>
+</relationType>
