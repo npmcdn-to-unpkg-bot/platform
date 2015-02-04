@@ -44,7 +44,9 @@ namespace Allors.Domain
             
             this.PreviousObjectState = this.CurrentObjectState;
 
-            this.AppsDeriveInvolvedPersons(derivation);
+            this.AppsDeriveFromParties();
+            this.AppsDeriveToParties();
+            this.AppsDeriveInvolvedParties(derivation);
         }
 
         protected void AppsDeriveDisplayName()
@@ -103,7 +105,19 @@ namespace Allors.Domain
             return text;
         }
 
-        private void AppsDeriveInvolvedPersons(IDerivation derivation)
+        private void AppsDeriveFromParties()
+        {
+            this.RemoveFromParties();
+            this.AddFromParty(this.Caller);
+        }
+
+        private void AppsDeriveToParties()
+        {
+            this.RemoveToParties();
+            this.ToParties = (Extent)this.Receivers;
+        }
+
+        private void AppsDeriveInvolvedParties(IDerivation derivation)
         {
             this.RemoveInvolvedParties();
             this.InvolvedParties = (Extent)this.Receivers;

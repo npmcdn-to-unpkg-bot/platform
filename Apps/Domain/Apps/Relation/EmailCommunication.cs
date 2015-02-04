@@ -42,6 +42,8 @@ namespace Allors.Domain
 
             this.PreviousObjectState = this.CurrentObjectState;
 
+            this.AppsDeriveFromParties();
+            this.AppsDeriveToParties();
             this.AppsDeriveInvolvedParties();
         }
 
@@ -135,6 +137,33 @@ namespace Allors.Domain
         protected string AppsComposeSearchDataWordBoundaryText()
         {
             return this.ExistOriginator ? this.Originator.SearchData.WordBoundaryText : null;
+        }
+
+        private void AppsDeriveFromParties()
+        {
+            this.RemoveFromParties();
+            this.AddToParty(this.Originator.PartyWherePersonalEmailAddress);
+
+        }
+
+        private void AppsDeriveToParties()
+        {
+            this.RemoveToParties();
+
+            foreach (EmailAddress addressee in this.Addressees)
+            {
+                this.AddFromParty(addressee.PartyWherePersonalEmailAddress);
+            }
+
+            foreach (EmailAddress carbonCopy in this.CarbonCopies)
+            {
+                this.AddFromParty(carbonCopy.PartyWherePersonalEmailAddress);
+            }
+
+            foreach (EmailAddress blindCopy in this.BlindCopies)
+            {
+                this.AddFromParty(blindCopy.PartyWherePersonalEmailAddress);
+            }
         }
 
         private void AppsDeriveInvolvedParties()

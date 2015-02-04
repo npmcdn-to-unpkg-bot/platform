@@ -18,6 +18,8 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.Threading;
+
 namespace Allors.Domain
 {
     using System.Text;
@@ -43,7 +45,9 @@ namespace Allors.Domain
             this.DeriveSearchDataWordBoundaryText();
             this.PreviousObjectState = this.CurrentObjectState;
 
-            this.AppsDeriveInvolvedPersons(derivation);
+            this.AppsDeriveFromParties();
+            this.AppsDeriveToParties();
+            this.AppsDeriveInvolvedParties(derivation);
         }
 
         protected void AppsDeriveDisplayName()
@@ -98,7 +102,19 @@ namespace Allors.Domain
                 this.ExistReceiver ? this.Receiver.DeriveSearchDataWordBoundaryText() : null);
         }
 
-        private void AppsDeriveInvolvedPersons(IDerivation derivation)
+        private void AppsDeriveFromParties()
+        {
+            this.RemoveFromParties();
+            this.AddFromParty(Originator);
+        }
+
+        private void AppsDeriveToParties()
+        {
+            this.RemoveToParties();
+            this.AddToParty(Receiver);
+        }
+
+        private void AppsDeriveInvolvedParties(IDerivation derivation)
         {
             this.RemoveInvolvedParties();
             this.AddInvolvedParty(this.Owner);

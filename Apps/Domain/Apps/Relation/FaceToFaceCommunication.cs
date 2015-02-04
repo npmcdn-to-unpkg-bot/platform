@@ -49,6 +49,26 @@ namespace Allors.Domain
             this.AddInvolvedParty(Owner);
         }
 
+        private void AppsDeriveFromParties()
+        {
+            this.RemoveFromParties();
+
+            foreach (Person participant in this.Participants)
+            {
+                this.AddFromParty(participant);
+            }
+        }
+
+        private void AppsDeriveToParties()
+        {
+            this.RemoveToParties();
+
+            foreach (Person participant in this.Participants)
+            {
+                this.AddFromParty(participant);
+            }
+        }
+
         public void AppsApplySecurityOnDerive(DerivableApplySecurityOnDerive method)
         {
             this.RemoveSecurityTokens();

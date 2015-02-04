@@ -42,7 +42,9 @@ namespace Allors.Domain
             
             this.PreviousObjectState = this.CurrentObjectState;
 
-            this.AppsDeriveInvolvedPersons();
+            this.AppsDeriveFromParties();
+            this.AppsDeriveToParties();
+            this.AppsDeriveInvolvedParties();
         }
 
         protected void AppsDeriveDisplayName()
@@ -97,7 +99,19 @@ namespace Allors.Domain
                 this.ExistReceiver ? this.Receiver.DeriveSearchDataWordBoundaryText() : null);
         }
 
-        private void AppsDeriveInvolvedPersons()
+        private void AppsDeriveFromParties()
+        {
+            this.RemoveFromParties();
+            this.AddFromParty(this.Originator);
+        }
+
+        private void AppsDeriveToParties()
+        {
+            this.RemoveToParties();
+            this.AddToParty(this.Receiver);
+        }
+
+        private void AppsDeriveInvolvedParties()
         {
             this.RemoveInvolvedParties();
             this.AddInvolvedParty(this.Owner);
