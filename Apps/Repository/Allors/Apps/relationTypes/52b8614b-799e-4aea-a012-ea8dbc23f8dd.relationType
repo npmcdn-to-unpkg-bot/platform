@@ -6,7 +6,7 @@
   <isIndexed>true</isIndexed>
   <roleType id="bcf4a8df-8b57-4b3c-a6e5-f9b56c71a13b">
     <isMany>true</isMany>
-    <objectType idref="c799ca62-a554-467d-9aa2-1663293bb37f" />
+    <objectType idref="3bba6e5a-dc2d-4838-b6c4-881f6c8c3013" />
     <pluralName>Participants</pluralName>
     <singularName>Participant</singularName>
   </roleType>

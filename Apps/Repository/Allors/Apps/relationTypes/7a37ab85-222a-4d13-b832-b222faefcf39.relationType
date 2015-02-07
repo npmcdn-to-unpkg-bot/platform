@@ -5,7 +5,7 @@
   </associationType>
   <isIndexed>true</isIndexed>
   <roleType id="507e6ff3-3baa-4c77-b41b-4d1893443dc2">
-    <objectType idref="c799ca62-a554-467d-9aa2-1663293bb37f" />
+    <objectType idref="3bba6e5a-dc2d-4838-b6c4-881f6c8c3013" />
     <pluralName>Callers</pluralName>
     <singularName>Caller</singularName>
   </roleType>
