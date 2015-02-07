@@ -18,6 +18,8 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using Allors.Meta;
+
 namespace Allors.Domain
 {
     using System.Text;
@@ -53,7 +55,7 @@ namespace Allors.Domain
         {
             this.RemoveFromParties();
 
-            foreach (Person participant in this.Participants)
+            foreach (Party participant in this.Participants)
             {
                 this.AddFromParty(participant);
             }
@@ -63,7 +65,7 @@ namespace Allors.Domain
         {
             this.RemoveToParties();
 
-            foreach (Person participant in this.Participants)
+            foreach (Party participant in this.Participants)
             {
                 this.AddFromParty(participant);
             }
@@ -79,22 +81,30 @@ namespace Allors.Domain
                 this.AddSecurityToken(Owner.OwnerSecurityToken);
             }
 
-            foreach (Person participant in this.Participants)
+            foreach (Party participant in this.Participants)
             {
-                if (participant.ExistCurrentEmployment)
+                if (participant.GetType().Name == PersonClass.Instance.Name)
                 {
-                    this.AddSecurityToken(participant.CurrentEmployment.Employer.OwnerSecurityToken);
-                }
-
-                if (participant.ExistOrganisationContactRelationshipsWhereContact)
-                {
-                    foreach (OrganisationContactRelationship organisationContactRelationship in participant.OrganisationContactRelationshipsWhereContact)
+                    var person = participant as Person;
+                    if (person.ExistCurrentEmployment)
                     {
-                        if (organisationContactRelationship.ExistOrganisation)
+                        this.AddSecurityToken(person.CurrentEmployment.Employer.OwnerSecurityToken);
+                    }
+
+                    if (person.ExistOrganisationContactRelationshipsWhereContact)
+                    {
+                        foreach (
+                            OrganisationContactRelationship organisationContactRelationship in
+                                person.OrganisationContactRelationshipsWhereContact)
                         {
-                            foreach (CustomerRelationship customerRelationship in organisationContactRelationship.Organisation.CustomerRelationshipsWhereCustomer)
+                            if (organisationContactRelationship.ExistOrganisation)
                             {
-                                this.AddSecurityToken(customerRelationship.InternalOrganisation.OwnerSecurityToken);
+                                foreach (
+                                    CustomerRelationship customerRelationship in
+                                        organisationContactRelationship.Organisation.CustomerRelationshipsWhereCustomer)
+                                {
+                                    this.AddSecurityToken(customerRelationship.InternalOrganisation.OwnerSecurityToken);
+                                }
                             }
                         }
                     }
@@ -122,10 +132,10 @@ namespace Allors.Domain
             var text = new StringBuilder();
             text.Append("Face to Face meeting between");
 
-            foreach (Person person in this.Participants)
+            foreach (Party party in this.Participants)
             {
                 text.Append(" ");
-                text.Append(person.DeriveDisplayName());
+                text.Append(party.DeriveDisplayName());
             }
 
             return text.ToString();
@@ -135,9 +145,9 @@ namespace Allors.Domain
         {
             var text = this.Description;
 
-            foreach (Person person in this.Participants)
+            foreach (Party party in this.Participants)
             {
-                text += " " + person.DeriveSearchDataCharacterBoundaryText();
+                text += " " + party.DeriveSearchDataCharacterBoundaryText();
             }
 
             return text;
@@ -147,9 +157,9 @@ namespace Allors.Domain
         {
             var text = string.Empty;
 
-            foreach (Person person in this.Participants)
+            foreach (Party party in this.Participants)
             {
-                text += " " + person.DeriveSearchDataWordBoundaryText();
+                text += " " + party.DeriveSearchDataWordBoundaryText();
             }
 
             return text;

@@ -97,9 +97,9 @@ namespace Allors.Domain
         {
             var text = this.ExistCaller ? this.Caller.DeriveSearchDataWordBoundaryText() : null;
 
-            foreach (Person person in this.Receivers)
+            foreach (Party party in this.Receivers)
             {
-                text += " " + person.DeriveSearchDataWordBoundaryText();
+                text += " " + party.DeriveSearchDataWordBoundaryText();
             }
 
             return text;
