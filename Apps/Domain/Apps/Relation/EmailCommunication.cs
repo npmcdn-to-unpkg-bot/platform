@@ -18,6 +18,9 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
+using Allors.Meta;
+
 namespace Allors.Domain
 {
     using System.Text;
@@ -142,27 +145,42 @@ namespace Allors.Domain
         private void AppsDeriveFromParties()
         {
             this.RemoveFromParties();
-            this.AddToParty(this.Originator.PartyWherePersonalEmailAddress);
-
+            this.AddFromParty(this.Originator.PartyWherePersonalEmailAddress);
         }
 
         private void AppsDeriveToParties()
         {
             this.RemoveToParties();
 
+            var partyRelationship = this.PartyRelationshipWhereCommunicationEvent;
+            if (Equals(this.PartyRelationshipWhereCommunicationEvent.GetType().Name, CustomerRelationshipClass.Instance.Name))
+            {
+                var customerRelationship = (CustomerRelationship) partyRelationship;
+                this.AddToParty(customerRelationship.Customer);
+            }
+
             foreach (EmailAddress addressee in this.Addressees)
             {
-                this.AddFromParty(addressee.PartyWherePersonalEmailAddress);
+                if (addressee.ExistPartyWherePersonalEmailAddress && !ToParties.Contains(addressee.PartyWherePersonalEmailAddress))
+                {
+                    this.AddToParty(addressee.PartyWherePersonalEmailAddress);
+                }
             }
 
             foreach (EmailAddress carbonCopy in this.CarbonCopies)
             {
-                this.AddFromParty(carbonCopy.PartyWherePersonalEmailAddress);
+                if (carbonCopy.ExistPartyWherePersonalEmailAddress && !ToParties.Contains(carbonCopy.PartyWherePersonalEmailAddress))
+                {
+                    this.AddToParty(carbonCopy.PartyWherePersonalEmailAddress);
+                }
             }
 
             foreach (EmailAddress blindCopy in this.BlindCopies)
             {
-                this.AddFromParty(blindCopy.PartyWherePersonalEmailAddress);
+                if (blindCopy.ExistPartyWherePersonalEmailAddress && !ToParties.Contains(blindCopy.PartyWherePersonalEmailAddress))
+                {
+                    this.AddToParty(blindCopy.PartyWherePersonalEmailAddress);
+                }
             }
         }
 
@@ -171,24 +189,14 @@ namespace Allors.Domain
             this.RemoveInvolvedParties();
             this.AddInvolvedParty(this.Owner);
 
-            if (this.ExistOriginator)
+            foreach (Party party in this.FromParties)
             {
-                this.AddInvolvedParty(this.Originator.PartyWherePersonalEmailAddress);
+                this.AddInvolvedParty(party);
             }
 
-            foreach (EmailAddress addressee in this.Addressees)
+            foreach (Party party in this.ToParties)
             {
-                this.AddInvolvedParty(addressee.PartyWherePersonalEmailAddress);
-            }
-
-            foreach (EmailAddress carbonCopy in this.CarbonCopies)
-            {
-                this.AddInvolvedParty(carbonCopy.PartyWherePersonalEmailAddress);
-            }
-
-            foreach (EmailAddress blindCopy in this.BlindCopies)
-            {
-                this.AddInvolvedParty(blindCopy.PartyWherePersonalEmailAddress);
+                this.AddInvolvedParty(party);
             }
         }
 
