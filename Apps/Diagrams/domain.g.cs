@@ -178,6 +178,10 @@ namespace Allors.Domain
 	{
 					global::System.DateTime? ScheduledStart {set;}
 
+					Party ToParties {set;}
+
+					ContactMechanism ToContactMechanisms {set;}
+
 					CommunicationEventStatus CommunicationEventStatuses {set;}
 
 					Party InvolvedParties {set;}
@@ -198,6 +202,8 @@ namespace Allors.Domain
 
 					global::System.DateTime? InitialScheduledEnd {set;}
 
+					Party FromParties {set;}
+
 					global::System.String Subject {set;}
 
 					CommunicationEventObjectState PreviousObjectState {set;}
@@ -209,6 +215,8 @@ namespace Allors.Domain
 					Case Case {set;}
 
 					Priority Priority {set;}
+
+					ContactMechanism FromContactMechanisms {set;}
 
 					Person Owner {set;}
 
@@ -1314,6 +1322,8 @@ namespace Allors.Domain
 
 					global::System.Decimal YTDCommission {set;}
 
+					global::System.String FullName {set;}
+
 					PersonClassification PersonClassifications {set;}
 
 					Citizenship Citizenship {set;}
@@ -2263,7 +2273,7 @@ namespace Allors.Domain
 	{
 					PostalAddress FaceToFaceCommunicationLocation {set;}
 
-					Person Participants {set;}
+					Party Participants {set;}
 
 	}
 	public interface FaxCommunication  : Object, CommunicationEvent 
@@ -2900,7 +2910,7 @@ namespace Allors.Domain
 
 					Organisation Organisation {set;}
 
-					OrganisationContactKind ContactKind {set;}
+					OrganisationContactKind ContactKinds {set;}
 
 	}
 	public interface OrganisationGlAccount  : Object, UserInterfaceable, Period 
@@ -3359,9 +3369,11 @@ namespace Allors.Domain
 	}
 	public interface PhoneCommunication  : Object, CommunicationEvent 
 	{
-					Person Receivers {set;}
+					global::System.Boolean? LeftVoiceMail {set;}
 
-					Person Caller {set;}
+					Party Receivers {set;}
+
+					Party Caller {set;}
 
 	}
 	public interface PickList  : Object, UserInterfaceable, SearchResult, Printable, Transitional, Searchable, UniquelyIdentifiable 

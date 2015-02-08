@@ -7,6 +7,7 @@ namespace Allors.Meta
 	    internal override void AppsExtend()
         {
 			this.Roles.YTDCommission.IsRequired = true;
+			this.Roles.FullName.IsRequired = true;
 			this.Roles.LastYearsCommission.IsRequired = true;
 
 		}
