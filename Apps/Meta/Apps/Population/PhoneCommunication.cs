@@ -6,6 +6,8 @@ namespace Allors.Meta
 	{
 	    internal override void AppsExtend()
         {
+            this.Roles.Caller.IsRequired = true;
+            this.Roles.Receiver.IsRequired = true;
 		}
 	}
 }
