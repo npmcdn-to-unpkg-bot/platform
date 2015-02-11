@@ -1,0 +1,10 @@
+<relationType allors="1.0" id="53df1269-a6f0-49a4-bd2f-af4aff75565a">
+  <associationType id="32e719bd-39c7-4fc3-bff2-e0091cebd0b7">
+    <objectType idref="fcdf4f00-d6f4-493f-a430-89789a3cdef6" />
+  </associationType>
+  <roleType id="5bbb6e8a-7c82-492e-b497-3579007f9294">
+    <objectType idref="b5ee6cea-4e2b-498e-a5dd-24671d896477" />
+    <pluralName>IncomingCalls</pluralName>
+    <singularName>IncomingCall</singularName>
+  </roleType>
+</relationType>

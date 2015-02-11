@@ -152,13 +152,6 @@ namespace Allors.Domain
         {
             this.RemoveToParties();
 
-            var partyRelationship = this.PartyRelationshipWhereCommunicationEvent;
-            if (Equals(this.PartyRelationshipWhereCommunicationEvent.GetType().Name, CustomerRelationshipClass.Instance.Name))
-            {
-                var customerRelationship = (CustomerRelationship) partyRelationship;
-                this.AddToParty(customerRelationship.Customer);
-            }
-
             foreach (EmailAddress addressee in this.Addressees)
             {
                 if (addressee.ExistPartyWherePersonalEmailAddress && !ToParties.Contains(addressee.PartyWherePersonalEmailAddress))
@@ -180,6 +173,75 @@ namespace Allors.Domain
                 if (blindCopy.ExistPartyWherePersonalEmailAddress && !ToParties.Contains(blindCopy.PartyWherePersonalEmailAddress))
                 {
                     this.AddToParty(blindCopy.PartyWherePersonalEmailAddress);
+                }
+            }
+
+            var partyRelationship = this.PartyRelationshipWhereCommunicationEvent;
+            if (partyRelationship != null)
+            {
+                if (Equals(this.PartyRelationshipWhereCommunicationEvent.GetType().Name,
+                    ClientRelationshipClass.Instance.Name))
+                {
+                    var relationship = (ClientRelationship) partyRelationship;
+                    this.AddToParty(relationship.Client);
+                }
+                if (Equals(this.PartyRelationshipWhereCommunicationEvent.GetType().Name,
+                    CustomerRelationshipClass.Instance.Name))
+                {
+                    var relationship = (CustomerRelationship) partyRelationship;
+                    this.AddToParty(relationship.Customer);
+                }
+                if (Equals(this.PartyRelationshipWhereCommunicationEvent.GetType().Name,
+                    DistributionChannelRelationshipClass.Instance.Name))
+                {
+                    var relationship = (DistributionChannelRelationship) partyRelationship;
+                    this.AddToParty(relationship.Distributor);
+                }
+                if (Equals(this.PartyRelationshipWhereCommunicationEvent.GetType().Name, EmploymentClass.Instance.Name))
+                {
+                    var relationship = (Employment) partyRelationship;
+                    this.AddToParty(relationship.Employee);
+                }
+                if (Equals(this.PartyRelationshipWhereCommunicationEvent.GetType().Name,
+                    OrganisationContactRelationshipClass.Instance.Name))
+                {
+                    var relationship = (OrganisationContactRelationship) partyRelationship;
+                    this.AddToParty(relationship.Contact);
+                }
+                if (Equals(this.PartyRelationshipWhereCommunicationEvent.GetType().Name, PartnershipClass.Instance.Name))
+                {
+                    var relationship = (Partnership) partyRelationship;
+                    this.AddToParty(relationship.Partner);
+                }
+                if (Equals(this.PartyRelationshipWhereCommunicationEvent.GetType().Name,
+                    ProfessionalServicesRelationshipClass.Instance.Name))
+                {
+                    var relationship = (ProfessionalServicesRelationship) partyRelationship;
+                    this.AddToParty(relationship.Professional);
+                }
+                if (Equals(this.PartyRelationshipWhereCommunicationEvent.GetType().Name,
+                    ProspectRelationshipClass.Instance.Name))
+                {
+                    var relationship = (ProspectRelationship) partyRelationship;
+                    this.AddToParty(relationship.Prospect);
+                }
+                if (Equals(this.PartyRelationshipWhereCommunicationEvent.GetType().Name,
+                    SalesRepCommissionClass.Instance.Name))
+                {
+                    var relationship = (SalesRepCommission) partyRelationship;
+                    this.AddToParty(relationship.SalesRep);
+                }
+                if (Equals(this.PartyRelationshipWhereCommunicationEvent.GetType().Name,
+                    SubContractorRelationshipClass.Instance.Name))
+                {
+                    var relationship = (SubContractorRelationship) partyRelationship;
+                    this.AddToParty(relationship.SubContractor);
+                }
+                if (Equals(this.PartyRelationshipWhereCommunicationEvent.GetType().Name,
+                    SupplierRelationshipClass.Instance.Name))
+                {
+                    var relationship = (SupplierRelationship) partyRelationship;
+                    this.AddToParty(relationship.Supplier);
                 }
             }
         }
