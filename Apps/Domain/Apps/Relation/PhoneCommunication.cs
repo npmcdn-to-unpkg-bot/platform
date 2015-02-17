@@ -28,11 +28,16 @@ namespace Allors.Domain
     {
         public void AppsOnPostBuild(ObjectOnPostBuild method)
         {
-            
-
             if (!this.ExistCurrentObjectState)
             {
                 this.CurrentObjectState = new CommunicationEventObjectStates(this.Strategy.DatabaseSession).Scheduled;
+
+                if (!this.ExistCurrentCommunicationEventStatus)
+                {
+                    var currentStatus = new CommunicationEventStatusBuilder(this.Strategy.DatabaseSession).WithCommunicationEventObjectState(this.CurrentObjectState).Build();
+                    this.AddCommunicationEventStatus(currentStatus);
+                    this.CurrentCommunicationEventStatus = currentStatus;
+                }
             }
         }
 
@@ -111,6 +116,15 @@ namespace Allors.Domain
         {
             this.RemoveFromParties();
             this.AddFromParty(this.Caller);
+
+            if (this.IsIncomingCall())
+            {
+                var party = this.GetRelationshipWithParty();
+                if (party != null)
+                {
+                    this.AddFromParty(party);
+                }
+            }
         }
 
         private void AppsDeriveToParties()
@@ -118,6 +132,23 @@ namespace Allors.Domain
             this.RemoveToParties();
             this.ToParties = (Extent)this.Receivers;
 
+            if (!this.IsIncomingCall())
+            {
+                var party = this.GetRelationshipWithParty();
+                if (party != null)
+                {
+                    this.AddToParty(party);
+                }
+            }
+        }
+
+        private bool IsIncomingCall()
+        {
+            return this.IncomingCall.HasValue && this.IncomingCall.Value;
+        }
+
+        private Party GetRelationshipWithParty()
+        {
             var partyRelationship = this.PartyRelationshipWhereCommunicationEvent;
             if (partyRelationship != null)
             {
@@ -125,67 +156,69 @@ namespace Allors.Domain
                     ClientRelationshipClass.Instance.Name))
                 {
                     var relationship = (ClientRelationship) partyRelationship;
-                    this.AddToParty(relationship.Client);
+                    return relationship.Client;
                 }
                 if (Equals(this.PartyRelationshipWhereCommunicationEvent.GetType().Name,
                     CustomerRelationshipClass.Instance.Name))
                 {
                     var relationship = (CustomerRelationship) partyRelationship;
-                    this.AddToParty(relationship.Customer);
+                    return relationship.Customer;
                 }
                 if (Equals(this.PartyRelationshipWhereCommunicationEvent.GetType().Name,
                     DistributionChannelRelationshipClass.Instance.Name))
                 {
                     var relationship = (DistributionChannelRelationship) partyRelationship;
-                    this.AddToParty(relationship.Distributor);
+                    return relationship.Distributor;
                 }
                 if (Equals(this.PartyRelationshipWhereCommunicationEvent.GetType().Name, EmploymentClass.Instance.Name))
                 {
                     var relationship = (Employment) partyRelationship;
-                    this.AddToParty(relationship.Employee);
+                    return relationship.Employee;
                 }
                 if (Equals(this.PartyRelationshipWhereCommunicationEvent.GetType().Name,
                     OrganisationContactRelationshipClass.Instance.Name))
                 {
                     var relationship = (OrganisationContactRelationship) partyRelationship;
-                    this.AddToParty(relationship.Contact);
+                    return relationship.Contact;
                 }
                 if (Equals(this.PartyRelationshipWhereCommunicationEvent.GetType().Name, PartnershipClass.Instance.Name))
                 {
                     var relationship = (Partnership) partyRelationship;
-                    this.AddToParty(relationship.Partner);
+                    return relationship.Partner;
                 }
                 if (Equals(this.PartyRelationshipWhereCommunicationEvent.GetType().Name,
                     ProfessionalServicesRelationshipClass.Instance.Name))
                 {
                     var relationship = (ProfessionalServicesRelationship) partyRelationship;
-                    this.AddToParty(relationship.Professional);
+                    return relationship.Professional;
                 }
                 if (Equals(this.PartyRelationshipWhereCommunicationEvent.GetType().Name,
                     ProspectRelationshipClass.Instance.Name))
                 {
                     var relationship = (ProspectRelationship) partyRelationship;
-                    this.AddToParty(relationship.Prospect);
+                    return relationship.Prospect;
                 }
                 if (Equals(this.PartyRelationshipWhereCommunicationEvent.GetType().Name,
                     SalesRepCommissionClass.Instance.Name))
                 {
                     var relationship = (SalesRepCommission) partyRelationship;
-                    this.AddToParty(relationship.SalesRep);
+                    return relationship.SalesRep;
                 }
                 if (Equals(this.PartyRelationshipWhereCommunicationEvent.GetType().Name,
                     SubContractorRelationshipClass.Instance.Name))
                 {
                     var relationship = (SubContractorRelationship) partyRelationship;
-                    this.AddToParty(relationship.SubContractor);
+                    return relationship.SubContractor;
                 }
                 if (Equals(this.PartyRelationshipWhereCommunicationEvent.GetType().Name,
                     SupplierRelationshipClass.Instance.Name))
                 {
                     var relationship = (SupplierRelationship) partyRelationship;
-                    this.AddToParty(relationship.Supplier);
+                    return relationship.Supplier;
                 }
             }
+
+            return null;
         }
 
         private void AppsDeriveInvolvedParties(IDerivation derivation)
