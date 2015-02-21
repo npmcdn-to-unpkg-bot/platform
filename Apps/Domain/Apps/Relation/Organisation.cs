@@ -201,7 +201,9 @@ namespace Allors.Domain
             name = name.ToLower();
             foreach (Person person in this.CurrentContacts)
             {
-                if (person.FullName.ToLower() == name || person.LastName.ToLower() == name || person.FirstName.ToLower() == name)
+                if ((person.ExistFullName && person.FullName.ToLower() == name) || 
+                    (person.ExistLastName && person.LastName.ToLower() == name) || 
+                    (person.ExistFirstName &&person.FirstName.ToLower() == name))
                 {
                     personsFound.Add(person);
                 }
