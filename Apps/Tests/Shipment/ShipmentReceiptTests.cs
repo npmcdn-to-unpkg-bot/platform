@@ -43,44 +43,46 @@ namespace Allors.Domain
         [Test]
         public void GivenShipmentReceiptWhenValidatingThenRequiredRelationsMustExist()
         {
-            var supplier = new OrganisationBuilder(this.DatabaseSession).WithName("supplier").Build();
-            var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
-            new SupplierRelationshipBuilder(this.DatabaseSession).WithSupplier(supplier).WithInternalOrganisation(internalOrganisation).Build();
+            throw new Exception("TODO");
 
-            var good = new GoodBuilder(this.DatabaseSession)
-                .WithName("Good")
-                .WithSku("10101")
-                .WithVatRate(new VatRateBuilder(this.DatabaseSession).WithRate(21).Build())
-                .WithInventoryItemKind(new InventoryItemKinds(this.DatabaseSession).NonSerialized)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .Build();
+            //var supplier = new OrganisationBuilder(this.DatabaseSession).WithName("supplier").Build();
+            //var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
+            //new SupplierRelationshipBuilder(this.DatabaseSession).WithSupplier(supplier).WithInternalOrganisation(internalOrganisation).Build();
 
-            var inventoryItem = new NonSerializedInventoryItemBuilder(this.DatabaseSession).WithGood(good).WithQuantityOnHand(100).Build();
-            this.DatabaseSession.Derive(true);
-            this.DatabaseSession.Commit();
+            //var good = new GoodBuilder(this.DatabaseSession)
+            //    .WithName("Good")
+            //    .WithSku("10101")
+            //    .WithVatRate(new VatRateBuilder(this.DatabaseSession).WithRate(21).Build())
+            //    .WithInventoryItemKind(new InventoryItemKinds(this.DatabaseSession).NonSerialized)
+            //    .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
+            //    .Build();
 
-            var builder = new ShipmentReceiptBuilder(this.DatabaseSession);
-            builder.Build();
+            //var inventoryItem = new NonSerializedInventoryItemBuilder(this.DatabaseSession).WithGood(good).WithQuantityOnHand(100).Build();
+            //this.DatabaseSession.Derive(true);
+            //this.DatabaseSession.Commit();
 
-            Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
+            //var builder = new ShipmentReceiptBuilder(this.DatabaseSession);
+            //builder.Build();
 
-            this.DatabaseSession.Rollback();
+            //Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
 
-            builder.WithInventoryItem(inventoryItem);
-            builder.Build();
+            //this.DatabaseSession.Rollback();
 
-            Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
+            //builder.WithInventoryItem(inventoryItem);
+            //builder.Build();
 
-            this.DatabaseSession.Rollback();
+            //Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
 
-            var shipment = new PurchaseShipmentBuilder(this.DatabaseSession).WithShipFromParty(supplier).Build();
-            var shipmentItem = new ShipmentItemBuilder(this.DatabaseSession).WithGood(good).Build();
-            shipment.AddShipmentItem(shipmentItem);
+            //this.DatabaseSession.Rollback();
 
-            builder.WithShipmentItem(shipmentItem);
-            builder.Build();
+            //var shipment = new PurchaseShipmentBuilder(this.DatabaseSession).WithShipFromParty(supplier).Build();
+            //var shipmentItem = new ShipmentItemBuilder(this.DatabaseSession).WithGood(good).Build();
+            //shipment.AddShipmentItem(shipmentItem);
 
-            Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
+            //builder.WithShipmentItem(shipmentItem);
+            //builder.Build();
+
+            //Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
 
         [Test]

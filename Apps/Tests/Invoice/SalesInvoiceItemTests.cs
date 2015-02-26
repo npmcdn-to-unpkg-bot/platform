@@ -22,13 +22,7 @@
 namespace Allors.Domain
 {
     using System;
-
-    
-    
-
     using NUnit.Framework;
-
-    using Allors.Domain;
 
     [TestFixture]
     public class SalesInvoiceItemTests : DomainTest
@@ -56,207 +50,209 @@ namespace Allors.Domain
         [SetUp]
         public override void Init()
         {
-            base.Init();
+            throw new Exception("TODO");
 
-            var euro = new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR");
+            //base.Init();
 
-            this.supplier = new OrganisationBuilder(this.DatabaseSession).WithName("supplier").WithLocale(new Locales(this.DatabaseSession).EnglishGreatBritain).Build();
+            //var euro = new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR");
 
-            this.internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
+            //this.supplier = new OrganisationBuilder(this.DatabaseSession).WithName("supplier").WithLocale(new Locales(this.DatabaseSession).EnglishGreatBritain).Build();
 
-            this.vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
+            //this.internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
 
-            this.mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
-            this.kiev = new CityBuilder(this.DatabaseSession).WithName("Kiev").Build();
+            //this.vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
 
-            this.billToContactMechanismMechelen = new PostalAddressBuilder(this.DatabaseSession).WithAddress1("Mechelen").WithGeographicBoundary(this.mechelen).Build();
-            this.shipToContactMechanismKiev = new PostalAddressBuilder(this.DatabaseSession).WithAddress1("Kiev").WithGeographicBoundary(this.kiev).Build();
-            this.billToCustomer = new OrganisationBuilder(this.DatabaseSession).WithName("billToCustomer").WithPreferredCurrency(euro).Build();
+            //this.mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
+            //this.kiev = new CityBuilder(this.DatabaseSession).WithName("Kiev").Build();
 
-            this.shipToCustomer = new OrganisationBuilder(this.DatabaseSession).WithName("shipToCustomer").WithPreferredCurrency(euro).Build();
+            //this.billToContactMechanismMechelen = new PostalAddressBuilder(this.DatabaseSession).WithAddress1("Mechelen").WithGeographicBoundary(this.mechelen).Build();
+            //this.shipToContactMechanismKiev = new PostalAddressBuilder(this.DatabaseSession).WithAddress1("Kiev").WithGeographicBoundary(this.kiev).Build();
+            //this.billToCustomer = new OrganisationBuilder(this.DatabaseSession).WithName("billToCustomer").WithPreferredCurrency(euro).Build();
 
-            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(this.billToCustomer).WithInternalOrganisation(this.internalOrganisation).Build();
-            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(this.shipToCustomer).WithInternalOrganisation(this.internalOrganisation).Build();
+            //this.shipToCustomer = new OrganisationBuilder(this.DatabaseSession).WithName("shipToCustomer").WithPreferredCurrency(euro).Build();
 
-            this.good = new GoodBuilder(this.DatabaseSession)
-                .WithSku("10101")
-                .WithVatRate(this.vatRate21)
-                .WithName("good")
-                .WithInventoryItemKind(new InventoryItemKinds(this.DatabaseSession).NonSerialized)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .Build();
+            //new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(this.billToCustomer).WithInternalOrganisation(this.internalOrganisation).Build();
+            //new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(this.shipToCustomer).WithInternalOrganisation(this.internalOrganisation).Build();
 
-            this.feature1 = new ColourBuilder(this.DatabaseSession)
-                .WithVatRate(this.vatRate21)
-                .WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
-                                            .WithText("white")
-                                            .WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale)
-                                            .Build())
-                .Build();
+            //this.good = new GoodBuilder(this.DatabaseSession)
+            //    .WithSku("10101")
+            //    .WithVatRate(this.vatRate21)
+            //    .WithName("good")
+            //    .WithInventoryItemKind(new InventoryItemKinds(this.DatabaseSession).NonSerialized)
+            //    .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
+            //    .Build();
 
-            this.feature2 = new ColourBuilder(this.DatabaseSession)
-                .WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
-                                            .WithText("black")
-                                            .WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale)
-                                            .Build())
-                .Build();
+            //this.feature1 = new ColourBuilder(this.DatabaseSession)
+            //    .WithVatRate(this.vatRate21)
+            //    .WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
+            //                                .WithText("white")
+            //                                .WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale)
+            //                                .Build())
+            //    .Build();
 
-            this.goodPurchasePrice = new ProductPurchasePriceBuilder(this.DatabaseSession)
-                .WithCurrency(euro)
-                .WithFromDate(DateTime.Now)
-                .WithPrice(7)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .Build();
+            //this.feature2 = new ColourBuilder(this.DatabaseSession)
+            //    .WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
+            //                                .WithText("black")
+            //                                .WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale)
+            //                                .Build())
+            //    .Build();
 
-            this.goodSupplierOffering = new SupplierOfferingBuilder(this.DatabaseSession)
-                .WithProduct(this.good)
-                .WithSupplier(this.supplier)
-                .WithFromDate(DateTime.Now)
-                .WithProductPurchasePrice(this.goodPurchasePrice)
-                .Build();
+            //this.goodPurchasePrice = new ProductPurchasePriceBuilder(this.DatabaseSession)
+            //    .WithCurrency(euro)
+            //    .WithFromDate(DateTime.Now)
+            //    .WithPrice(7)
+            //    .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
+            //    .Build();
 
-            this.currentBasePriceGeoBoundary = new BasePriceBuilder(this.DatabaseSession)
-                .WithSpecifiedFor(this.internalOrganisation)
-                .WithDescription("current BasePriceGeoBoundary")
-                .WithGeographicBoundary(this.mechelen)
-                .WithProduct(this.good)
-                .WithPrice(8)
-                .WithCurrency(euro)
-                .WithFromDate(DateTime.Now)
-                .Build();
+            //this.goodSupplierOffering = new SupplierOfferingBuilder(this.DatabaseSession)
+            //    .WithProduct(this.good)
+            //    .WithSupplier(this.supplier)
+            //    .WithFromDate(DateTime.Now)
+            //    .WithProductPurchasePrice(this.goodPurchasePrice)
+            //    .Build();
 
-            // previous basePrice for good
-            new BasePriceBuilder(this.DatabaseSession).WithDescription("previous good")
-                .WithSpecifiedFor(this.internalOrganisation)
-                .WithProduct(this.good)
-                .WithPrice(8)
-                .WithCurrency(euro)
-                .WithFromDate(DateTime.Now.AddYears(-1))
-                .WithThroughDate(DateTime.Now.AddDays(-1))
-                .Build();
+            //this.currentBasePriceGeoBoundary = new BasePriceBuilder(this.DatabaseSession)
+            //    .WithSpecifiedFor(this.internalOrganisation)
+            //    .WithDescription("current BasePriceGeoBoundary")
+            //    .WithGeographicBoundary(this.mechelen)
+            //    .WithProduct(this.good)
+            //    .WithPrice(8)
+            //    .WithCurrency(euro)
+            //    .WithFromDate(DateTime.Now)
+            //    .Build();
 
-            this.currentGood1BasePrice = new BasePriceBuilder(this.DatabaseSession)
-                .WithSpecifiedFor(this.internalOrganisation)
-                .WithDescription("current good")
-                .WithProduct(this.good)
-                .WithPrice(10)
-                .WithCurrency(euro)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
-                .Build();
+            //// previous basePrice for good
+            //new BasePriceBuilder(this.DatabaseSession).WithDescription("previous good")
+            //    .WithSpecifiedFor(this.internalOrganisation)
+            //    .WithProduct(this.good)
+            //    .WithPrice(8)
+            //    .WithCurrency(euro)
+            //    .WithFromDate(DateTime.Now.AddYears(-1))
+            //    .WithThroughDate(DateTime.Now.AddDays(-1))
+            //    .Build();
 
-            // future basePrice for good
-            new BasePriceBuilder(this.DatabaseSession).WithDescription("future good")
-                .WithSpecifiedFor(this.internalOrganisation)
-                .WithProduct(this.good)
-                .WithPrice(11)
-                .WithCurrency(euro)
-                .WithFromDate(DateTime.Now.AddYears(1))
-                .Build();
+            //this.currentGood1BasePrice = new BasePriceBuilder(this.DatabaseSession)
+            //    .WithSpecifiedFor(this.internalOrganisation)
+            //    .WithDescription("current good")
+            //    .WithProduct(this.good)
+            //    .WithPrice(10)
+            //    .WithCurrency(euro)
+            //    .WithFromDate(DateTime.Now)
+            //    .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+            //    .Build();
 
-            // previous basePrice for feature1
-            new BasePriceBuilder(this.DatabaseSession).WithDescription("previous feature1")
-                .WithSpecifiedFor(this.internalOrganisation)
-                .WithProductFeature(this.feature1)
-                .WithPrice(0.5M)
-                .WithCurrency(euro)
-                .WithFromDate(DateTime.Now.AddYears(-1))
-                .WithThroughDate(DateTime.Now.AddDays(-1))
-                .Build();
+            //// future basePrice for good
+            //new BasePriceBuilder(this.DatabaseSession).WithDescription("future good")
+            //    .WithSpecifiedFor(this.internalOrganisation)
+            //    .WithProduct(this.good)
+            //    .WithPrice(11)
+            //    .WithCurrency(euro)
+            //    .WithFromDate(DateTime.Now.AddYears(1))
+            //    .Build();
 
-            // future basePrice for feature1
-            new BasePriceBuilder(this.DatabaseSession).WithDescription("future feature1")
-                .WithSpecifiedFor(this.internalOrganisation)
-                .WithProductFeature(this.feature1)
-                .WithPrice(2.5M)
-                .WithCurrency(euro)
-                .WithFromDate(DateTime.Now.AddYears(1))
-                .Build();
+            //// previous basePrice for feature1
+            //new BasePriceBuilder(this.DatabaseSession).WithDescription("previous feature1")
+            //    .WithSpecifiedFor(this.internalOrganisation)
+            //    .WithProductFeature(this.feature1)
+            //    .WithPrice(0.5M)
+            //    .WithCurrency(euro)
+            //    .WithFromDate(DateTime.Now.AddYears(-1))
+            //    .WithThroughDate(DateTime.Now.AddDays(-1))
+            //    .Build();
 
-            this.currentFeature1BasePrice = new BasePriceBuilder(this.DatabaseSession)
-                .WithSpecifiedFor(this.internalOrganisation)
-                .WithDescription("current feature1")
-                .WithProductFeature(this.feature1)
-                .WithPrice(2)
-                .WithCurrency(euro)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
-                .Build();
+            //// future basePrice for feature1
+            //new BasePriceBuilder(this.DatabaseSession).WithDescription("future feature1")
+            //    .WithSpecifiedFor(this.internalOrganisation)
+            //    .WithProductFeature(this.feature1)
+            //    .WithPrice(2.5M)
+            //    .WithCurrency(euro)
+            //    .WithFromDate(DateTime.Now.AddYears(1))
+            //    .Build();
 
-            // previous basePrice for feature2
-            new BasePriceBuilder(this.DatabaseSession).WithDescription("previous feature2")
-                .WithSpecifiedFor(this.internalOrganisation)
-                .WithProductFeature(this.feature2)
-                .WithPrice(2)
-                .WithCurrency(euro)
-                .WithFromDate(DateTime.Now.AddYears(-1))
-                .WithThroughDate(DateTime.Now.AddDays(-1))
-                .Build();
+            //this.currentFeature1BasePrice = new BasePriceBuilder(this.DatabaseSession)
+            //    .WithSpecifiedFor(this.internalOrganisation)
+            //    .WithDescription("current feature1")
+            //    .WithProductFeature(this.feature1)
+            //    .WithPrice(2)
+            //    .WithCurrency(euro)
+            //    .WithFromDate(DateTime.Now)
+            //    .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+            //    .Build();
 
-            // future basePrice for feature2
-            new BasePriceBuilder(this.DatabaseSession)
-                .WithSpecifiedFor(this.internalOrganisation)
-                .WithDescription("future feature2")
-                .WithProductFeature(this.feature2)
-                .WithPrice(4)
-                .WithCurrency(euro)
-                .WithFromDate(DateTime.Now.AddYears(1))
-                .Build();
+            //// previous basePrice for feature2
+            //new BasePriceBuilder(this.DatabaseSession).WithDescription("previous feature2")
+            //    .WithSpecifiedFor(this.internalOrganisation)
+            //    .WithProductFeature(this.feature2)
+            //    .WithPrice(2)
+            //    .WithCurrency(euro)
+            //    .WithFromDate(DateTime.Now.AddYears(-1))
+            //    .WithThroughDate(DateTime.Now.AddDays(-1))
+            //    .Build();
 
-            new BasePriceBuilder(this.DatabaseSession)
-                .WithSpecifiedFor(this.internalOrganisation)
-                .WithDescription("current feature2")
-                .WithProductFeature(this.feature2)
-                .WithPrice(3)
-                .WithCurrency(euro)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
-                .Build();
+            //// future basePrice for feature2
+            //new BasePriceBuilder(this.DatabaseSession)
+            //    .WithSpecifiedFor(this.internalOrganisation)
+            //    .WithDescription("future feature2")
+            //    .WithProductFeature(this.feature2)
+            //    .WithPrice(4)
+            //    .WithCurrency(euro)
+            //    .WithFromDate(DateTime.Now.AddYears(1))
+            //    .Build();
 
-            // previous basePrice for good with feature1
-            new BasePriceBuilder(this.DatabaseSession).WithDescription("previous good/feature1")
-                .WithSpecifiedFor(this.internalOrganisation)
-                .WithProduct(this.good)
-                .WithProductFeature(this.feature1)
-                .WithPrice(4)
-                .WithCurrency(euro)
-                .WithFromDate(DateTime.Now.AddYears(-1))
-                .WithThroughDate(DateTime.Now.AddDays(-1))
-                .Build();
+            //new BasePriceBuilder(this.DatabaseSession)
+            //    .WithSpecifiedFor(this.internalOrganisation)
+            //    .WithDescription("current feature2")
+            //    .WithProductFeature(this.feature2)
+            //    .WithPrice(3)
+            //    .WithCurrency(euro)
+            //    .WithFromDate(DateTime.Now)
+            //    .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+            //    .Build();
 
-            // future basePrice for good with feature1
-            new BasePriceBuilder(this.DatabaseSession)
-                .WithSpecifiedFor(this.internalOrganisation)
-                .WithDescription("future good/feature1")
-                .WithProduct(this.good)
-                .WithProductFeature(this.feature1)
-                .WithPrice(6)
-                .WithCurrency(euro)
-                .WithFromDate(DateTime.Now.AddYears(1))
-                .Build();
+            //// previous basePrice for good with feature1
+            //new BasePriceBuilder(this.DatabaseSession).WithDescription("previous good/feature1")
+            //    .WithSpecifiedFor(this.internalOrganisation)
+            //    .WithProduct(this.good)
+            //    .WithProductFeature(this.feature1)
+            //    .WithPrice(4)
+            //    .WithCurrency(euro)
+            //    .WithFromDate(DateTime.Now.AddYears(-1))
+            //    .WithThroughDate(DateTime.Now.AddDays(-1))
+            //    .Build();
 
-            this.currentGood1Feature1BasePrice = new BasePriceBuilder(this.DatabaseSession)
-                .WithSpecifiedFor(this.internalOrganisation)
-                .WithDescription("current good/feature1")
-                .WithProduct(this.good)
-                .WithProductFeature(this.feature1)
-                .WithPrice(5)
-                .WithCurrency(euro)
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
-                .Build();
+            //// future basePrice for good with feature1
+            //new BasePriceBuilder(this.DatabaseSession)
+            //    .WithSpecifiedFor(this.internalOrganisation)
+            //    .WithDescription("future good/feature1")
+            //    .WithProduct(this.good)
+            //    .WithProductFeature(this.feature1)
+            //    .WithPrice(6)
+            //    .WithCurrency(euro)
+            //    .WithFromDate(DateTime.Now.AddYears(1))
+            //    .Build();
 
-            this.invoice = new SalesInvoiceBuilder(this.DatabaseSession)
-                .WithSalesInvoiceType(new SalesInvoiceTypes(this.DatabaseSession).SalesInvoice)
-                .WithBillToContactMechanism(this.billToContactMechanismMechelen)
-                .WithBillToCustomer(this.billToCustomer)
-                .WithShipToAddress(this.shipToContactMechanismKiev)
-                .WithShipToCustomer(this.shipToCustomer)
-                .WithBilledFromInternalOrganisation(this.internalOrganisation)
-                .Build();
+            //this.currentGood1Feature1BasePrice = new BasePriceBuilder(this.DatabaseSession)
+            //    .WithSpecifiedFor(this.internalOrganisation)
+            //    .WithDescription("current good/feature1")
+            //    .WithProduct(this.good)
+            //    .WithProductFeature(this.feature1)
+            //    .WithPrice(5)
+            //    .WithCurrency(euro)
+            //    .WithFromDate(DateTime.Now)
+            //    .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+            //    .Build();
 
-            this.DatabaseSession.Derive(true);
-            this.DatabaseSession.Commit();
+            //this.invoice = new SalesInvoiceBuilder(this.DatabaseSession)
+            //    .WithSalesInvoiceType(new SalesInvoiceTypes(this.DatabaseSession).SalesInvoice)
+            //    .WithBillToContactMechanism(this.billToContactMechanismMechelen)
+            //    .WithBillToCustomer(this.billToCustomer)
+            //    .WithShipToAddress(this.shipToContactMechanismKiev)
+            //    .WithShipToCustomer(this.shipToCustomer)
+            //    .WithBilledFromInternalOrganisation(this.internalOrganisation)
+            //    .Build();
+
+            //this.DatabaseSession.Derive(true);
+            //this.DatabaseSession.Commit();
         }
 
         [Test]
@@ -580,76 +576,80 @@ namespace Allors.Domain
         [Test]
         public void GivenInvoiceItemWithDiscount_WhenDeriving_ThenUseGeneralDiscountNotBoundToProduct()
         {
-            const decimal Quantity = 3;
-            const decimal Amount = 1;
-            new DiscountComponentBuilder(this.DatabaseSession)
-                .WithSpecifiedFor(this.internalOrganisation)
-                .WithDescription("discount good for geo boundary")
-                .WithGeographicBoundary(this.kiev)
-                .WithPrice(Amount)
-                .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
-                .Build();
+            throw new Exception("TODO");
 
-            this.DatabaseSession.Derive(true);
-            this.DatabaseSession.Commit();
+            //const decimal Quantity = 3;
+            //const decimal Amount = 1;
+            //new DiscountComponentBuilder(this.DatabaseSession)
+            //    .WithSpecifiedFor(this.internalOrganisation)
+            //    .WithDescription("discount good for geo boundary")
+            //    .WithGeographicBoundary(this.kiev)
+            //    .WithPrice(Amount)
+            //    .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
+            //    .WithFromDate(DateTime.Now)
+            //    .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+            //    .Build();
 
-            this.InstantiateObjects(this.DatabaseSession);
+            //this.DatabaseSession.Derive(true);
+            //this.DatabaseSession.Commit();
 
-            var item1 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity).Build();
-            this.invoice.AddSalesInvoiceItem(item1);
+            //this.InstantiateObjects(this.DatabaseSession);
 
-            this.DatabaseSession.Derive(true);
+            //var item1 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity).Build();
+            //this.invoice.AddSalesInvoiceItem(item1);
 
-            Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
-            Assert.AreEqual(Amount, item1.UnitDiscount);
-            Assert.AreEqual(0, item1.UnitSurcharge);
-            Assert.AreEqual(this.currentGood1BasePrice.Price - Amount, item1.CalculatedUnitPrice);
-            Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
+            //this.DatabaseSession.Derive(true);
 
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
+            //Assert.AreEqual(Amount, item1.UnitDiscount);
+            //Assert.AreEqual(0, item1.UnitSurcharge);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price - Amount, item1.CalculatedUnitPrice);
+            //Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
+
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
         }
 
         [Test]
         public void GivenInvoiceItemWithDiscountAmountForGeoBoundary_WhenDeriving_ThenUseDiscountComponentsForGeoBoundary()
         {
-            const decimal Quantity = 3;
-            const decimal Amount = 1;
-            new DiscountComponentBuilder(this.DatabaseSession)
-                .WithSpecifiedFor(this.internalOrganisation)
-                .WithDescription("discount good for geo boundary")
-                .WithGeographicBoundary(this.kiev)
-                .WithProduct(this.good)
-                .WithPrice(Amount)
-                .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
-                .Build();
+            throw new Exception("TODO");
 
-            this.DatabaseSession.Derive(true);
-            this.DatabaseSession.Commit();
+            //const decimal Quantity = 3;
+            //const decimal Amount = 1;
+            //new DiscountComponentBuilder(this.DatabaseSession)
+            //    .WithSpecifiedFor(this.internalOrganisation)
+            //    .WithDescription("discount good for geo boundary")
+            //    .WithGeographicBoundary(this.kiev)
+            //    .WithProduct(this.good)
+            //    .WithPrice(Amount)
+            //    .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
+            //    .WithFromDate(DateTime.Now)
+            //    .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+            //    .Build();
 
-            this.InstantiateObjects(this.DatabaseSession);
+            //this.DatabaseSession.Derive(true);
+            //this.DatabaseSession.Commit();
 
-            var item1 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity).Build();
-            this.invoice.AddSalesInvoiceItem(item1);
+            //this.InstantiateObjects(this.DatabaseSession);
 
-            this.DatabaseSession.Derive(true);
+            //var item1 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity).Build();
+            //this.invoice.AddSalesInvoiceItem(item1);
 
-            Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
-            Assert.AreEqual(Amount, item1.UnitDiscount);
-            Assert.AreEqual(0, item1.UnitSurcharge);
-            Assert.AreEqual(this.currentGood1BasePrice.Price - Amount, item1.CalculatedUnitPrice);
-            Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
+            //this.DatabaseSession.Derive(true);
 
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
+            //Assert.AreEqual(Amount, item1.UnitDiscount);
+            //Assert.AreEqual(0, item1.UnitSurcharge);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price - Amount, item1.CalculatedUnitPrice);
+            //Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
+
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
         }
 
         [Test]
@@ -694,40 +694,42 @@ namespace Allors.Domain
         [Test]
         public void GivenInvoiceItemWithSurchargeAmountForGeoBoundary_WhenDeriving_ThenUseSurchargeComponentsForGeoBoundary()
         {
-            const decimal Quantity = 3;
-            const decimal Amount = 1;
+            throw new Exception("TODO");
 
-            new SurchargeComponentBuilder(this.DatabaseSession)
-                .WithSpecifiedFor(this.internalOrganisation)
-                .WithDescription("surcharge good for geo boundary")
-                .WithGeographicBoundary(this.kiev)
-                .WithProduct(this.good)
-                .WithPrice(Amount)
-                .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
-                .Build();
+            //const decimal Quantity = 3;
+            //const decimal Amount = 1;
 
-            this.DatabaseSession.Derive(true);
-            this.DatabaseSession.Commit();
+            //new SurchargeComponentBuilder(this.DatabaseSession)
+            //    .WithSpecifiedFor(this.internalOrganisation)
+            //    .WithDescription("surcharge good for geo boundary")
+            //    .WithGeographicBoundary(this.kiev)
+            //    .WithProduct(this.good)
+            //    .WithPrice(Amount)
+            //    .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
+            //    .WithFromDate(DateTime.Now)
+            //    .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+            //    .Build();
 
-            this.InstantiateObjects(this.DatabaseSession);
+            //this.DatabaseSession.Derive(true);
+            //this.DatabaseSession.Commit();
 
-            var item1 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity).Build();
-            this.invoice.AddSalesInvoiceItem(item1);
+            //this.InstantiateObjects(this.DatabaseSession);
 
-            this.DatabaseSession.Derive(true);
+            //var item1 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity).Build();
+            //this.invoice.AddSalesInvoiceItem(item1);
 
-            Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
-            Assert.AreEqual(0, item1.UnitDiscount);
-            Assert.AreEqual(Amount, item1.UnitSurcharge);
-            Assert.AreEqual(this.currentGood1BasePrice.Price + Amount, item1.CalculatedUnitPrice);
-            Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
+            //this.DatabaseSession.Derive(true);
 
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
+            //Assert.AreEqual(0, item1.UnitDiscount);
+            //Assert.AreEqual(Amount, item1.UnitSurcharge);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price + Amount, item1.CalculatedUnitPrice);
+            //Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
+
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
         }
 
         [Test]
@@ -772,45 +774,47 @@ namespace Allors.Domain
         [Test]
         public void GivenInvoiceItemWithDiscountAmountForPartyClassification_WhenDeriving_ThenUseDiscountComponentsForPartyClassification()
         {
-            const decimal Quantity = 3;
-            const decimal Amount = 1;
+            throw new Exception("TODO");
 
-            var classification = new IndustryClassificationBuilder(this.DatabaseSession).WithName("gold customer").Build();
-            new DiscountComponentBuilder(this.DatabaseSession)
-                .WithSpecifiedFor(this.internalOrganisation)
-                .WithDescription("discount good for party classification")
-                .WithPartyClassification(classification)
-                .WithProduct(this.good)
-                .WithPrice(Amount)
-                .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
-                .Build();
+            //const decimal Quantity = 3;
+            //const decimal Amount = 1;
 
-            this.DatabaseSession.Derive(true);
-            this.DatabaseSession.Commit();
+            //var classification = new IndustryClassificationBuilder(this.DatabaseSession).WithName("gold customer").Build();
+            //new DiscountComponentBuilder(this.DatabaseSession)
+            //    .WithSpecifiedFor(this.internalOrganisation)
+            //    .WithDescription("discount good for party classification")
+            //    .WithPartyClassification(classification)
+            //    .WithProduct(this.good)
+            //    .WithPrice(Amount)
+            //    .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
+            //    .WithFromDate(DateTime.Now)
+            //    .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+            //    .Build();
 
-            this.InstantiateObjects(this.DatabaseSession);
+            //this.DatabaseSession.Derive(true);
+            //this.DatabaseSession.Commit();
 
-            this.billToCustomer.AddPartyClassification(classification);
+            //this.InstantiateObjects(this.DatabaseSession);
 
-            this.invoice.ShipToCustomer = this.shipToCustomer;
+            //this.billToCustomer.AddPartyClassification(classification);
 
-            var item1 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity).Build();
-            this.invoice.AddSalesInvoiceItem(item1);
+            //this.invoice.ShipToCustomer = this.shipToCustomer;
 
-            this.DatabaseSession.Derive(true);
+            //var item1 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity).Build();
+            //this.invoice.AddSalesInvoiceItem(item1);
 
-            Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
-            Assert.AreEqual(Amount, item1.UnitDiscount);
-            Assert.AreEqual(0, item1.UnitSurcharge);
-            Assert.AreEqual(this.currentGood1BasePrice.Price - Amount, item1.CalculatedUnitPrice);
-            Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
+            //this.DatabaseSession.Derive(true);
 
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
+            //Assert.AreEqual(Amount, item1.UnitDiscount);
+            //Assert.AreEqual(0, item1.UnitSurcharge);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price - Amount, item1.CalculatedUnitPrice);
+            //Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
+
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
         }
 
         [Test]
@@ -860,45 +864,47 @@ namespace Allors.Domain
         [Test]
         public void GivenInvoiceItemWithSurchargeAmountForPartyClassification_WhenDeriving_ThenUseSurchargeComponentsForPartyClassification()
         {
-            const decimal Quantity = 3;
-            const decimal Amount = 1;
+            throw new Exception("TODO");
 
-            var classification = new IndustryClassificationBuilder(this.DatabaseSession).WithName("gold customer").Build();
-            new SurchargeComponentBuilder(this.DatabaseSession)
-                .WithSpecifiedFor(this.internalOrganisation)
-                .WithDescription("discount good for party classification")
-                .WithPartyClassification(classification)
-                .WithProduct(this.good)
-                .WithPrice(Amount)
-                .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
-                .Build();
+            //const decimal Quantity = 3;
+            //const decimal Amount = 1;
 
-            this.DatabaseSession.Derive(true);
-            this.DatabaseSession.Commit();
+            //var classification = new IndustryClassificationBuilder(this.DatabaseSession).WithName("gold customer").Build();
+            //new SurchargeComponentBuilder(this.DatabaseSession)
+            //    .WithSpecifiedFor(this.internalOrganisation)
+            //    .WithDescription("discount good for party classification")
+            //    .WithPartyClassification(classification)
+            //    .WithProduct(this.good)
+            //    .WithPrice(Amount)
+            //    .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
+            //    .WithFromDate(DateTime.Now)
+            //    .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+            //    .Build();
 
-            this.InstantiateObjects(this.DatabaseSession);
+            //this.DatabaseSession.Derive(true);
+            //this.DatabaseSession.Commit();
 
-            this.billToCustomer.AddPartyClassification(classification);
+            //this.InstantiateObjects(this.DatabaseSession);
 
-            this.invoice.ShipToCustomer = this.shipToCustomer;
+            //this.billToCustomer.AddPartyClassification(classification);
 
-            var item1 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity).Build();
-            this.invoice.AddSalesInvoiceItem(item1);
+            //this.invoice.ShipToCustomer = this.shipToCustomer;
 
-            this.DatabaseSession.Derive(true);
+            //var item1 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity).Build();
+            //this.invoice.AddSalesInvoiceItem(item1);
 
-            Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
-            Assert.AreEqual(0, item1.UnitDiscount);
-            Assert.AreEqual(Amount, item1.UnitSurcharge);
-            Assert.AreEqual(this.currentGood1BasePrice.Price + Amount, item1.CalculatedUnitPrice);
-            Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
+            //this.DatabaseSession.Derive(true);
 
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
+            //Assert.AreEqual(0, item1.UnitDiscount);
+            //Assert.AreEqual(Amount, item1.UnitSurcharge);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price + Amount, item1.CalculatedUnitPrice);
+            //Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
+
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
         }
 
         [Test]
@@ -948,45 +954,47 @@ namespace Allors.Domain
         [Test]
         public void GivenInvoiceItemWithDiscountAmountForProductCatergory_WhenDeriving_ThenUseDiscountComponentsForProductCatergory()
         {
-            const decimal Quantity = 3;
-            const decimal Amount = 1;
+            throw new Exception("TODO");
 
-            var category = new ProductCategoryBuilder(this.DatabaseSession).WithDescription("gizmo").Build();
-            new DiscountComponentBuilder(this.DatabaseSession)
-                .WithSpecifiedFor(this.internalOrganisation)
-                .WithDescription("discount good for product category")
-                .WithProductCategory(category)
-                .WithProduct(this.good)
-                .WithPrice(Amount)
-                .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
-                .Build();
+            //const decimal Quantity = 3;
+            //const decimal Amount = 1;
 
-            this.DatabaseSession.Derive(true);
-            this.DatabaseSession.Commit();
+            //var category = new ProductCategoryBuilder(this.DatabaseSession).WithDescription("gizmo").Build();
+            //new DiscountComponentBuilder(this.DatabaseSession)
+            //    .WithSpecifiedFor(this.internalOrganisation)
+            //    .WithDescription("discount good for product category")
+            //    .WithProductCategory(category)
+            //    .WithProduct(this.good)
+            //    .WithPrice(Amount)
+            //    .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
+            //    .WithFromDate(DateTime.Now)
+            //    .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+            //    .Build();
 
-            this.InstantiateObjects(this.DatabaseSession);
+            //this.DatabaseSession.Derive(true);
+            //this.DatabaseSession.Commit();
 
-            this.good.AddProductCategory(category);
+            //this.InstantiateObjects(this.DatabaseSession);
 
-            this.DatabaseSession.Derive(true);
+            //this.good.AddProductCategory(category);
 
-            var item1 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity).Build();
-            this.invoice.AddSalesInvoiceItem(item1);
+            //this.DatabaseSession.Derive(true);
 
-            this.DatabaseSession.Derive(true);
+            //var item1 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity).Build();
+            //this.invoice.AddSalesInvoiceItem(item1);
 
-            Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
-            Assert.AreEqual(Amount, item1.UnitDiscount);
-            Assert.AreEqual(0, item1.UnitSurcharge);
-            Assert.AreEqual(this.currentGood1BasePrice.Price - Amount, item1.CalculatedUnitPrice);
-            Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
+            //this.DatabaseSession.Derive(true);
 
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
+            //Assert.AreEqual(Amount, item1.UnitDiscount);
+            //Assert.AreEqual(0, item1.UnitSurcharge);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price - Amount, item1.CalculatedUnitPrice);
+            //Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
+
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
         }
 
         [Test]
@@ -1036,45 +1044,47 @@ namespace Allors.Domain
         [Test]
         public void GivenInvoiceItemWithSurchargeAmountForProductCatergory_WhenDeriving_ThenUseSurchargeComponentsForProductCatergory()
         {
-            const decimal Quantity = 3;
-            const decimal Amount = 1;
+            throw new Exception("TODO");
 
-            var category = new ProductCategoryBuilder(this.DatabaseSession).WithDescription("gizmo").Build();
-            new SurchargeComponentBuilder(this.DatabaseSession)
-                .WithSpecifiedFor(this.internalOrganisation)
-                .WithDescription("discount good for product category")
-                .WithProductCategory(category)
-                .WithProduct(this.good)
-                .WithPrice(Amount)
-                .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
-                .Build();
+            //const decimal Quantity = 3;
+            //const decimal Amount = 1;
 
-            this.DatabaseSession.Derive(true);
-            this.DatabaseSession.Commit();
+            //var category = new ProductCategoryBuilder(this.DatabaseSession).WithDescription("gizmo").Build();
+            //new SurchargeComponentBuilder(this.DatabaseSession)
+            //    .WithSpecifiedFor(this.internalOrganisation)
+            //    .WithDescription("discount good for product category")
+            //    .WithProductCategory(category)
+            //    .WithProduct(this.good)
+            //    .WithPrice(Amount)
+            //    .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
+            //    .WithFromDate(DateTime.Now)
+            //    .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+            //    .Build();
 
-            this.InstantiateObjects(this.DatabaseSession);
+            //this.DatabaseSession.Derive(true);
+            //this.DatabaseSession.Commit();
 
-            this.good.AddProductCategory(category);
+            //this.InstantiateObjects(this.DatabaseSession);
 
-            this.DatabaseSession.Derive(true);
+            //this.good.AddProductCategory(category);
 
-            var item1 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity).Build();
-            this.invoice.AddSalesInvoiceItem(item1);
+            //this.DatabaseSession.Derive(true);
 
-            this.DatabaseSession.Derive(true);
+            //var item1 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity).Build();
+            //this.invoice.AddSalesInvoiceItem(item1);
 
-            Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
-            Assert.AreEqual(0, item1.UnitDiscount);
-            Assert.AreEqual(Amount, item1.UnitSurcharge);
-            Assert.AreEqual(this.currentGood1BasePrice.Price + Amount, item1.CalculatedUnitPrice);
-            Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
+            //this.DatabaseSession.Derive(true);
 
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
+            //Assert.AreEqual(0, item1.UnitDiscount);
+            //Assert.AreEqual(Amount, item1.UnitSurcharge);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price + Amount, item1.CalculatedUnitPrice);
+            //Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
+
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
         }
 
         [Test]
@@ -1124,122 +1134,124 @@ namespace Allors.Domain
         [Test]
         public void GivenInvoiceItemWithDiscountAmountForOrderQuantityBreak_WhenDeriving_ThenUseDiscountComponentsForOrderQuantityBreak()
         {
-            const decimal Quantity1 = 3;
-            const decimal Quantity2 = 50;
-            const decimal Quantity3 = 50;
-            const decimal Amount1 = 1;
-            const decimal Amount2 = 3;
+            throw new Exception("TODO");
 
-            var break1 = new OrderQuantityBreakBuilder(this.DatabaseSession).WithFromAmount(50).WithThroughAmount(99).Build();
-            var break2 = new OrderQuantityBreakBuilder(this.DatabaseSession).WithFromAmount(100).Build();
+            //const decimal Quantity1 = 3;
+            //const decimal Quantity2 = 50;
+            //const decimal Quantity3 = 50;
+            //const decimal Amount1 = 1;
+            //const decimal Amount2 = 3;
 
-            new DiscountComponentBuilder(this.DatabaseSession)
-                .WithSpecifiedFor(this.internalOrganisation)
-                .WithDescription("discount good for quantity break 1")
-                .WithOrderQuantityBreak(break1)
-                .WithProduct(this.good)
-                .WithPrice(Amount1)
-                .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
-                .Build();
+            //var break1 = new OrderQuantityBreakBuilder(this.DatabaseSession).WithFromAmount(50).WithThroughAmount(99).Build();
+            //var break2 = new OrderQuantityBreakBuilder(this.DatabaseSession).WithFromAmount(100).Build();
 
-            new DiscountComponentBuilder(this.DatabaseSession)
-                .WithSpecifiedFor(this.internalOrganisation)
-                .WithDescription("discount good for quantity break 2")
-                .WithOrderQuantityBreak(break2)
-                .WithProduct(this.good)
-                .WithPrice(Amount2)
-                .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
-                .Build();
+            //new DiscountComponentBuilder(this.DatabaseSession)
+            //    .WithSpecifiedFor(this.internalOrganisation)
+            //    .WithDescription("discount good for quantity break 1")
+            //    .WithOrderQuantityBreak(break1)
+            //    .WithProduct(this.good)
+            //    .WithPrice(Amount1)
+            //    .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
+            //    .WithFromDate(DateTime.Now)
+            //    .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+            //    .Build();
 
-            this.DatabaseSession.Derive(true);
-            this.DatabaseSession.Commit();
+            //new DiscountComponentBuilder(this.DatabaseSession)
+            //    .WithSpecifiedFor(this.internalOrganisation)
+            //    .WithDescription("discount good for quantity break 2")
+            //    .WithOrderQuantityBreak(break2)
+            //    .WithProduct(this.good)
+            //    .WithPrice(Amount2)
+            //    .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
+            //    .WithFromDate(DateTime.Now)
+            //    .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+            //    .Build();
 
-            this.InstantiateObjects(this.DatabaseSession);
+            //this.DatabaseSession.Derive(true);
+            //this.DatabaseSession.Commit();
 
-            var item1 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity1).Build();
-            this.invoice.AddSalesInvoiceItem(item1);
+            //this.InstantiateObjects(this.DatabaseSession);
 
-            this.DatabaseSession.Derive(true);
+            //var item1 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity1).Build();
+            //this.invoice.AddSalesInvoiceItem(item1);
 
-            Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
-            Assert.AreEqual(0, item1.UnitDiscount);
-            Assert.AreEqual(0, item1.UnitSurcharge);
-            Assert.AreEqual(this.currentGood1BasePrice.Price, item1.CalculatedUnitPrice);
-            Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
+            //this.DatabaseSession.Derive(true);
 
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
+            //Assert.AreEqual(0, item1.UnitDiscount);
+            //Assert.AreEqual(0, item1.UnitSurcharge);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price, item1.CalculatedUnitPrice);
+            //Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
-            var item2 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity2).Build();
-            this.invoice.AddSalesInvoiceItem(item2);
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
 
-            this.DatabaseSession.Derive(true);
+            //var item2 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity2).Build();
+            //this.invoice.AddSalesInvoiceItem(item2);
 
-            Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
-            Assert.AreEqual(Amount1, item1.UnitDiscount);
-            Assert.AreEqual(0, item1.UnitSurcharge);
-            Assert.AreEqual(this.currentGood1BasePrice.Price - Amount1, item1.CalculatedUnitPrice);
-            Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
+            //this.DatabaseSession.Derive(true);
 
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
+            //Assert.AreEqual(Amount1, item1.UnitDiscount);
+            //Assert.AreEqual(0, item1.UnitSurcharge);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price - Amount1, item1.CalculatedUnitPrice);
+            //Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
-            Assert.AreEqual(this.currentGood1BasePrice.Price, item2.UnitBasePrice);
-            Assert.AreEqual(Amount1, item2.UnitDiscount);
-            Assert.AreEqual(0, item2.UnitSurcharge);
-            Assert.AreEqual(this.currentGood1BasePrice.Price - Amount1, item2.CalculatedUnitPrice);
-            Assert.AreEqual(this.goodPurchasePrice.Price, item2.UnitPurchasePrice);
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
 
-            Assert.AreEqual(decimal.Round(((item2.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item2.InitialMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item2.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item2.MaintainedMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item2.UnitBasePrice - this.goodPurchasePrice.Price) / item2.UnitBasePrice) * 100, 2), item2.InitialProfitMargin);
-            Assert.AreEqual(decimal.Round(((item2.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item2.CalculatedUnitPrice) * 100, 2), item2.MaintainedProfitMargin);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price, item2.UnitBasePrice);
+            //Assert.AreEqual(Amount1, item2.UnitDiscount);
+            //Assert.AreEqual(0, item2.UnitSurcharge);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price - Amount1, item2.CalculatedUnitPrice);
+            //Assert.AreEqual(this.goodPurchasePrice.Price, item2.UnitPurchasePrice);
 
-            var item3 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity3).Build();
-            this.invoice.AddSalesInvoiceItem(item3);
+            //Assert.AreEqual(decimal.Round(((item2.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item2.InitialMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item2.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item2.MaintainedMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item2.UnitBasePrice - this.goodPurchasePrice.Price) / item2.UnitBasePrice) * 100, 2), item2.InitialProfitMargin);
+            //Assert.AreEqual(decimal.Round(((item2.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item2.CalculatedUnitPrice) * 100, 2), item2.MaintainedProfitMargin);
 
-            this.DatabaseSession.Derive(true);
+            //var item3 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity3).Build();
+            //this.invoice.AddSalesInvoiceItem(item3);
 
-            Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
-            Assert.AreEqual(Amount2, item1.UnitDiscount);
-            Assert.AreEqual(0, item1.UnitSurcharge);
-            Assert.AreEqual(this.currentGood1BasePrice.Price - Amount2, item1.CalculatedUnitPrice);
-            Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
+            //this.DatabaseSession.Derive(true);
 
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
+            //Assert.AreEqual(Amount2, item1.UnitDiscount);
+            //Assert.AreEqual(0, item1.UnitSurcharge);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price - Amount2, item1.CalculatedUnitPrice);
+            //Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
-            Assert.AreEqual(this.currentGood1BasePrice.Price, item2.UnitBasePrice);
-            Assert.AreEqual(Amount2, item2.UnitDiscount);
-            Assert.AreEqual(0, item2.UnitSurcharge);
-            Assert.AreEqual(this.currentGood1BasePrice.Price - Amount2, item2.CalculatedUnitPrice);
-            Assert.AreEqual(this.goodPurchasePrice.Price, item2.UnitPurchasePrice);
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
 
-            Assert.AreEqual(decimal.Round(((item2.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item2.InitialMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item2.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item2.MaintainedMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item2.UnitBasePrice - this.goodPurchasePrice.Price) / item2.UnitBasePrice) * 100, 2), item2.InitialProfitMargin);
-            Assert.AreEqual(decimal.Round(((item2.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item2.CalculatedUnitPrice) * 100, 2), item2.MaintainedProfitMargin);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price, item2.UnitBasePrice);
+            //Assert.AreEqual(Amount2, item2.UnitDiscount);
+            //Assert.AreEqual(0, item2.UnitSurcharge);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price - Amount2, item2.CalculatedUnitPrice);
+            //Assert.AreEqual(this.goodPurchasePrice.Price, item2.UnitPurchasePrice);
 
-            Assert.AreEqual(this.currentGood1BasePrice.Price, item3.UnitBasePrice);
-            Assert.AreEqual(Amount2, item3.UnitDiscount);
-            Assert.AreEqual(0, item3.UnitSurcharge);
-            Assert.AreEqual(this.currentGood1BasePrice.Price - Amount2, item3.CalculatedUnitPrice);
-            Assert.AreEqual(this.goodPurchasePrice.Price, item3.UnitPurchasePrice);
+            //Assert.AreEqual(decimal.Round(((item2.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item2.InitialMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item2.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item2.MaintainedMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item2.UnitBasePrice - this.goodPurchasePrice.Price) / item2.UnitBasePrice) * 100, 2), item2.InitialProfitMargin);
+            //Assert.AreEqual(decimal.Round(((item2.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item2.CalculatedUnitPrice) * 100, 2), item2.MaintainedProfitMargin);
 
-            Assert.AreEqual(decimal.Round(((item3.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item3.InitialMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item3.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item3.MaintainedMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item3.UnitBasePrice - this.goodPurchasePrice.Price) / item3.UnitBasePrice) * 100, 2), item3.InitialProfitMargin);
-            Assert.AreEqual(decimal.Round(((item3.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item3.CalculatedUnitPrice) * 100, 2), item3.MaintainedProfitMargin);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price, item3.UnitBasePrice);
+            //Assert.AreEqual(Amount2, item3.UnitDiscount);
+            //Assert.AreEqual(0, item3.UnitSurcharge);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price - Amount2, item3.CalculatedUnitPrice);
+            //Assert.AreEqual(this.goodPurchasePrice.Price, item3.UnitPurchasePrice);
+
+            //Assert.AreEqual(decimal.Round(((item3.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item3.InitialMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item3.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item3.MaintainedMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item3.UnitBasePrice - this.goodPurchasePrice.Price) / item3.UnitBasePrice) * 100, 2), item3.InitialProfitMargin);
+            //Assert.AreEqual(decimal.Round(((item3.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item3.CalculatedUnitPrice) * 100, 2), item3.MaintainedProfitMargin);
         }
 
         [Test]
@@ -1366,122 +1378,124 @@ namespace Allors.Domain
         [Test]
         public void GivenInvoiceItemWithSurchargeAmountForOrderQuantityBreak_WhenDeriving_ThenUseSurchargeComponentsForOrderQuantityBreak()
         {
-            const decimal Quantity1 = 3;
-            const decimal Quantity2 = 50;
-            const decimal Quantity3 = 50;
-            const decimal Amount1 = 1;
-            const decimal Amount2 = 3;
+            throw new Exception("TODO");
 
-            var break1 = new OrderQuantityBreakBuilder(this.DatabaseSession).WithFromAmount(50).WithThroughAmount(99).Build();
-            var break2 = new OrderQuantityBreakBuilder(this.DatabaseSession).WithFromAmount(100).Build();
+            //const decimal Quantity1 = 3;
+            //const decimal Quantity2 = 50;
+            //const decimal Quantity3 = 50;
+            //const decimal Amount1 = 1;
+            //const decimal Amount2 = 3;
 
-            new SurchargeComponentBuilder(this.DatabaseSession)
-                .WithSpecifiedFor(this.internalOrganisation)
-                .WithDescription("surcharge good for quantity break 1")
-                .WithOrderQuantityBreak(break1)
-                .WithProduct(this.good)
-                .WithPrice(Amount1)
-                .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
-                .Build();
+            //var break1 = new OrderQuantityBreakBuilder(this.DatabaseSession).WithFromAmount(50).WithThroughAmount(99).Build();
+            //var break2 = new OrderQuantityBreakBuilder(this.DatabaseSession).WithFromAmount(100).Build();
 
-            new SurchargeComponentBuilder(this.DatabaseSession)
-                .WithSpecifiedFor(this.internalOrganisation)
-                .WithDescription("surcharge good for quantity break 2")
-                .WithOrderQuantityBreak(break2)
-                .WithProduct(this.good)
-                .WithPrice(Amount2)
-                .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
-                .Build();
+            //new SurchargeComponentBuilder(this.DatabaseSession)
+            //    .WithSpecifiedFor(this.internalOrganisation)
+            //    .WithDescription("surcharge good for quantity break 1")
+            //    .WithOrderQuantityBreak(break1)
+            //    .WithProduct(this.good)
+            //    .WithPrice(Amount1)
+            //    .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
+            //    .WithFromDate(DateTime.Now)
+            //    .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+            //    .Build();
 
-            this.DatabaseSession.Derive(true);
-            this.DatabaseSession.Commit();
+            //new SurchargeComponentBuilder(this.DatabaseSession)
+            //    .WithSpecifiedFor(this.internalOrganisation)
+            //    .WithDescription("surcharge good for quantity break 2")
+            //    .WithOrderQuantityBreak(break2)
+            //    .WithProduct(this.good)
+            //    .WithPrice(Amount2)
+            //    .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
+            //    .WithFromDate(DateTime.Now)
+            //    .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+            //    .Build();
 
-            this.InstantiateObjects(this.DatabaseSession);
+            //this.DatabaseSession.Derive(true);
+            //this.DatabaseSession.Commit();
 
-            var item1 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity1).Build();
-            this.invoice.AddSalesInvoiceItem(item1);
+            //this.InstantiateObjects(this.DatabaseSession);
 
-            this.DatabaseSession.Derive(true);
+            //var item1 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity1).Build();
+            //this.invoice.AddSalesInvoiceItem(item1);
 
-            Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
-            Assert.AreEqual(0, item1.UnitDiscount);
-            Assert.AreEqual(0, item1.UnitSurcharge);
-            Assert.AreEqual(this.currentGood1BasePrice.Price, item1.CalculatedUnitPrice);
-            Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
+            //this.DatabaseSession.Derive(true);
 
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
+            //Assert.AreEqual(0, item1.UnitDiscount);
+            //Assert.AreEqual(0, item1.UnitSurcharge);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price, item1.CalculatedUnitPrice);
+            //Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
-            var item2 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity2).Build();
-            this.invoice.AddSalesInvoiceItem(item2);
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
 
-            this.DatabaseSession.Derive(true);
+            //var item2 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity2).Build();
+            //this.invoice.AddSalesInvoiceItem(item2);
 
-            Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
-            Assert.AreEqual(0, item1.UnitDiscount);
-            Assert.AreEqual(Amount1, item1.UnitSurcharge);
-            Assert.AreEqual(this.currentGood1BasePrice.Price + Amount1, item1.CalculatedUnitPrice);
-            Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
+            //this.DatabaseSession.Derive(true);
 
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
+            //Assert.AreEqual(0, item1.UnitDiscount);
+            //Assert.AreEqual(Amount1, item1.UnitSurcharge);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price + Amount1, item1.CalculatedUnitPrice);
+            //Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
-            Assert.AreEqual(this.currentGood1BasePrice.Price, item2.UnitBasePrice);
-            Assert.AreEqual(0, item2.UnitDiscount);
-            Assert.AreEqual(Amount1, item2.UnitSurcharge);
-            Assert.AreEqual(this.currentGood1BasePrice.Price + Amount1, item2.CalculatedUnitPrice);
-            Assert.AreEqual(this.goodPurchasePrice.Price, item2.UnitPurchasePrice);
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
 
-            Assert.AreEqual(decimal.Round(((item2.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item2.InitialMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item2.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item2.MaintainedMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item2.UnitBasePrice - this.goodPurchasePrice.Price) / item2.UnitBasePrice) * 100, 2), item2.InitialProfitMargin);
-            Assert.AreEqual(decimal.Round(((item2.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item2.CalculatedUnitPrice) * 100, 2), item2.MaintainedProfitMargin);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price, item2.UnitBasePrice);
+            //Assert.AreEqual(0, item2.UnitDiscount);
+            //Assert.AreEqual(Amount1, item2.UnitSurcharge);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price + Amount1, item2.CalculatedUnitPrice);
+            //Assert.AreEqual(this.goodPurchasePrice.Price, item2.UnitPurchasePrice);
 
-            var item3 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity3).Build();
-            this.invoice.AddSalesInvoiceItem(item3);
+            //Assert.AreEqual(decimal.Round(((item2.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item2.InitialMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item2.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item2.MaintainedMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item2.UnitBasePrice - this.goodPurchasePrice.Price) / item2.UnitBasePrice) * 100, 2), item2.InitialProfitMargin);
+            //Assert.AreEqual(decimal.Round(((item2.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item2.CalculatedUnitPrice) * 100, 2), item2.MaintainedProfitMargin);
 
-            this.DatabaseSession.Derive(true);
+            //var item3 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity3).Build();
+            //this.invoice.AddSalesInvoiceItem(item3);
 
-            Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
-            Assert.AreEqual(0, item1.UnitDiscount);
-            Assert.AreEqual(Amount2, item1.UnitSurcharge);
-            Assert.AreEqual(this.currentGood1BasePrice.Price + Amount2, item1.CalculatedUnitPrice);
-            Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
+            //this.DatabaseSession.Derive(true);
 
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
+            //Assert.AreEqual(0, item1.UnitDiscount);
+            //Assert.AreEqual(Amount2, item1.UnitSurcharge);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price + Amount2, item1.CalculatedUnitPrice);
+            //Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
-            Assert.AreEqual(this.currentGood1BasePrice.Price, item2.UnitBasePrice);
-            Assert.AreEqual(0, item2.UnitDiscount);
-            Assert.AreEqual(Amount2, item2.UnitSurcharge);
-            Assert.AreEqual(this.currentGood1BasePrice.Price + Amount2, item2.CalculatedUnitPrice);
-            Assert.AreEqual(this.goodPurchasePrice.Price, item2.UnitPurchasePrice);
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
 
-            Assert.AreEqual(decimal.Round(((item2.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item2.InitialMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item2.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item2.MaintainedMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item2.UnitBasePrice - this.goodPurchasePrice.Price) / item2.UnitBasePrice) * 100, 2), item2.InitialProfitMargin);
-            Assert.AreEqual(decimal.Round(((item2.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item2.CalculatedUnitPrice) * 100, 2), item2.MaintainedProfitMargin);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price, item2.UnitBasePrice);
+            //Assert.AreEqual(0, item2.UnitDiscount);
+            //Assert.AreEqual(Amount2, item2.UnitSurcharge);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price + Amount2, item2.CalculatedUnitPrice);
+            //Assert.AreEqual(this.goodPurchasePrice.Price, item2.UnitPurchasePrice);
 
-            Assert.AreEqual(this.currentGood1BasePrice.Price, item3.UnitBasePrice);
-            Assert.AreEqual(0, item3.UnitDiscount);
-            Assert.AreEqual(Amount2, item3.UnitSurcharge);
-            Assert.AreEqual(this.currentGood1BasePrice.Price + Amount2, item3.CalculatedUnitPrice);
-            Assert.AreEqual(this.goodPurchasePrice.Price, item3.UnitPurchasePrice);
+            //Assert.AreEqual(decimal.Round(((item2.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item2.InitialMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item2.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item2.MaintainedMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item2.UnitBasePrice - this.goodPurchasePrice.Price) / item2.UnitBasePrice) * 100, 2), item2.InitialProfitMargin);
+            //Assert.AreEqual(decimal.Round(((item2.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item2.CalculatedUnitPrice) * 100, 2), item2.MaintainedProfitMargin);
 
-            Assert.AreEqual(decimal.Round(((item3.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item3.InitialMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item3.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item3.MaintainedMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item3.UnitBasePrice - this.goodPurchasePrice.Price) / item3.UnitBasePrice) * 100, 2), item3.InitialProfitMargin);
-            Assert.AreEqual(decimal.Round(((item3.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item3.CalculatedUnitPrice) * 100, 2), item3.MaintainedProfitMargin);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price, item3.UnitBasePrice);
+            //Assert.AreEqual(0, item3.UnitDiscount);
+            //Assert.AreEqual(Amount2, item3.UnitSurcharge);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price + Amount2, item3.CalculatedUnitPrice);
+            //Assert.AreEqual(this.goodPurchasePrice.Price, item3.UnitPurchasePrice);
+
+            //Assert.AreEqual(decimal.Round(((item3.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item3.InitialMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item3.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item3.MaintainedMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item3.UnitBasePrice - this.goodPurchasePrice.Price) / item3.UnitBasePrice) * 100, 2), item3.InitialProfitMargin);
+            //Assert.AreEqual(decimal.Round(((item3.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item3.CalculatedUnitPrice) * 100, 2), item3.MaintainedProfitMargin);
         }
 
         [Test]
@@ -1608,122 +1622,124 @@ namespace Allors.Domain
         [Test]
         public void GivenInvoiceItemWithDiscountAmountForOrderValue_WhenDeriving_ThenUseDiscountComponentsForOrderValue()
         {
-            const decimal Quantity1 = 3;
-            const decimal Quantity2 = 3;
-            const decimal Quantity3 = 10;
-            const decimal Amount1 = 1;
-            const decimal Amount2 = 3;
+            throw new Exception("TODO");
 
-            var value1 = new OrderValueBuilder(this.DatabaseSession).WithFromAmount(50).WithThroughAmount(99).Build();
-            var value2 = new OrderValueBuilder(this.DatabaseSession).WithFromAmount(100).Build();
+            //const decimal Quantity1 = 3;
+            //const decimal Quantity2 = 3;
+            //const decimal Quantity3 = 10;
+            //const decimal Amount1 = 1;
+            //const decimal Amount2 = 3;
 
-            new DiscountComponentBuilder(this.DatabaseSession)
-                .WithSpecifiedFor(this.internalOrganisation)
-                .WithDescription("discount good for order value 1")
-                .WithOrderValue(value1)
-                .WithProduct(this.good)
-                .WithPrice(Amount1)
-                .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
-                .Build();
+            //var value1 = new OrderValueBuilder(this.DatabaseSession).WithFromAmount(50).WithThroughAmount(99).Build();
+            //var value2 = new OrderValueBuilder(this.DatabaseSession).WithFromAmount(100).Build();
 
-            new DiscountComponentBuilder(this.DatabaseSession)
-                .WithSpecifiedFor(this.internalOrganisation)
-                .WithDescription("discount good for order value 1")
-                .WithOrderValue(value2)
-                .WithProduct(this.good)
-                .WithPrice(Amount2)
-                .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
-                .Build();
+            //new DiscountComponentBuilder(this.DatabaseSession)
+            //    .WithSpecifiedFor(this.internalOrganisation)
+            //    .WithDescription("discount good for order value 1")
+            //    .WithOrderValue(value1)
+            //    .WithProduct(this.good)
+            //    .WithPrice(Amount1)
+            //    .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
+            //    .WithFromDate(DateTime.Now)
+            //    .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+            //    .Build();
 
-            this.DatabaseSession.Derive(true);
-            this.DatabaseSession.Commit();
+            //new DiscountComponentBuilder(this.DatabaseSession)
+            //    .WithSpecifiedFor(this.internalOrganisation)
+            //    .WithDescription("discount good for order value 1")
+            //    .WithOrderValue(value2)
+            //    .WithProduct(this.good)
+            //    .WithPrice(Amount2)
+            //    .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
+            //    .WithFromDate(DateTime.Now)
+            //    .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+            //    .Build();
 
-            this.InstantiateObjects(this.DatabaseSession);
+            //this.DatabaseSession.Derive(true);
+            //this.DatabaseSession.Commit();
 
-            var item1 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity1).Build();
-            this.invoice.AddSalesInvoiceItem(item1);
+            //this.InstantiateObjects(this.DatabaseSession);
 
-            this.DatabaseSession.Derive(true);
+            //var item1 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity1).Build();
+            //this.invoice.AddSalesInvoiceItem(item1);
 
-            Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
-            Assert.AreEqual(0, item1.UnitDiscount);
-            Assert.AreEqual(0, item1.UnitSurcharge);
-            Assert.AreEqual(this.currentGood1BasePrice.Price, item1.CalculatedUnitPrice);
-            Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
+            //this.DatabaseSession.Derive(true);
 
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
+            //Assert.AreEqual(0, item1.UnitDiscount);
+            //Assert.AreEqual(0, item1.UnitSurcharge);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price, item1.CalculatedUnitPrice);
+            //Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
-            var item2 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity2).Build();
-            this.invoice.AddSalesInvoiceItem(item2);
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
 
-            this.DatabaseSession.Derive(true);
+            //var item2 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity2).Build();
+            //this.invoice.AddSalesInvoiceItem(item2);
 
-            Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
-            Assert.AreEqual(Amount1, item1.UnitDiscount);
-            Assert.AreEqual(0, item1.UnitSurcharge);
-            Assert.AreEqual(this.currentGood1BasePrice.Price - Amount1, item1.CalculatedUnitPrice);
-            Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
+            //this.DatabaseSession.Derive(true);
 
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
+            //Assert.AreEqual(Amount1, item1.UnitDiscount);
+            //Assert.AreEqual(0, item1.UnitSurcharge);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price - Amount1, item1.CalculatedUnitPrice);
+            //Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
-            Assert.AreEqual(this.currentGood1BasePrice.Price, item2.UnitBasePrice);
-            Assert.AreEqual(Amount1, item2.UnitDiscount);
-            Assert.AreEqual(0, item2.UnitSurcharge);
-            Assert.AreEqual(this.currentGood1BasePrice.Price - Amount1, item2.CalculatedUnitPrice);
-            Assert.AreEqual(this.goodPurchasePrice.Price, item2.UnitPurchasePrice);
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
 
-            Assert.AreEqual(decimal.Round(((item2.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item2.InitialMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item2.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item2.MaintainedMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item2.UnitBasePrice - this.goodPurchasePrice.Price) / item2.UnitBasePrice) * 100, 2), item2.InitialProfitMargin);
-            Assert.AreEqual(decimal.Round(((item2.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item2.CalculatedUnitPrice) * 100, 2), item2.MaintainedProfitMargin);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price, item2.UnitBasePrice);
+            //Assert.AreEqual(Amount1, item2.UnitDiscount);
+            //Assert.AreEqual(0, item2.UnitSurcharge);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price - Amount1, item2.CalculatedUnitPrice);
+            //Assert.AreEqual(this.goodPurchasePrice.Price, item2.UnitPurchasePrice);
 
-            var item3 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity3).Build();
-            this.invoice.AddSalesInvoiceItem(item3);
+            //Assert.AreEqual(decimal.Round(((item2.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item2.InitialMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item2.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item2.MaintainedMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item2.UnitBasePrice - this.goodPurchasePrice.Price) / item2.UnitBasePrice) * 100, 2), item2.InitialProfitMargin);
+            //Assert.AreEqual(decimal.Round(((item2.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item2.CalculatedUnitPrice) * 100, 2), item2.MaintainedProfitMargin);
 
-            this.DatabaseSession.Derive(true);
+            //var item3 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity3).Build();
+            //this.invoice.AddSalesInvoiceItem(item3);
 
-            Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
-            Assert.AreEqual(Amount2, item1.UnitDiscount);
-            Assert.AreEqual(0, item1.UnitSurcharge);
-            Assert.AreEqual(this.currentGood1BasePrice.Price - Amount2, item1.CalculatedUnitPrice);
-            Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
+            //this.DatabaseSession.Derive(true);
 
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
+            //Assert.AreEqual(Amount2, item1.UnitDiscount);
+            //Assert.AreEqual(0, item1.UnitSurcharge);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price - Amount2, item1.CalculatedUnitPrice);
+            //Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
-            Assert.AreEqual(this.currentGood1BasePrice.Price, item2.UnitBasePrice);
-            Assert.AreEqual(Amount2, item2.UnitDiscount);
-            Assert.AreEqual(0, item2.UnitSurcharge);
-            Assert.AreEqual(this.currentGood1BasePrice.Price - Amount2, item2.CalculatedUnitPrice);
-            Assert.AreEqual(this.goodPurchasePrice.Price, item2.UnitPurchasePrice);
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
 
-            Assert.AreEqual(decimal.Round(((item2.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item2.InitialMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item2.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item2.MaintainedMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item2.UnitBasePrice - this.goodPurchasePrice.Price) / item2.UnitBasePrice) * 100, 2), item2.InitialProfitMargin);
-            Assert.AreEqual(decimal.Round(((item2.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item2.CalculatedUnitPrice) * 100, 2), item2.MaintainedProfitMargin);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price, item2.UnitBasePrice);
+            //Assert.AreEqual(Amount2, item2.UnitDiscount);
+            //Assert.AreEqual(0, item2.UnitSurcharge);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price - Amount2, item2.CalculatedUnitPrice);
+            //Assert.AreEqual(this.goodPurchasePrice.Price, item2.UnitPurchasePrice);
 
-            Assert.AreEqual(this.currentGood1BasePrice.Price, item3.UnitBasePrice);
-            Assert.AreEqual(Amount2, item3.UnitDiscount);
-            Assert.AreEqual(0, item3.UnitSurcharge);
-            Assert.AreEqual(this.currentGood1BasePrice.Price - Amount2, item3.CalculatedUnitPrice);
-            Assert.AreEqual(this.goodPurchasePrice.Price, item3.UnitPurchasePrice);
+            //Assert.AreEqual(decimal.Round(((item2.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item2.InitialMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item2.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item2.MaintainedMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item2.UnitBasePrice - this.goodPurchasePrice.Price) / item2.UnitBasePrice) * 100, 2), item2.InitialProfitMargin);
+            //Assert.AreEqual(decimal.Round(((item2.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item2.CalculatedUnitPrice) * 100, 2), item2.MaintainedProfitMargin);
 
-            Assert.AreEqual(decimal.Round(((item3.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item3.InitialMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item3.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item3.MaintainedMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item3.UnitBasePrice - this.goodPurchasePrice.Price) / item3.UnitBasePrice) * 100, 2), item3.InitialProfitMargin);
-            Assert.AreEqual(decimal.Round(((item3.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item3.CalculatedUnitPrice) * 100, 2), item3.MaintainedProfitMargin);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price, item3.UnitBasePrice);
+            //Assert.AreEqual(Amount2, item3.UnitDiscount);
+            //Assert.AreEqual(0, item3.UnitSurcharge);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price - Amount2, item3.CalculatedUnitPrice);
+            //Assert.AreEqual(this.goodPurchasePrice.Price, item3.UnitPurchasePrice);
+
+            //Assert.AreEqual(decimal.Round(((item3.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item3.InitialMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item3.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item3.MaintainedMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item3.UnitBasePrice - this.goodPurchasePrice.Price) / item3.UnitBasePrice) * 100, 2), item3.InitialProfitMargin);
+            //Assert.AreEqual(decimal.Round(((item3.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item3.CalculatedUnitPrice) * 100, 2), item3.MaintainedProfitMargin);
         }
 
         [Test]
@@ -1850,122 +1866,124 @@ namespace Allors.Domain
         [Test]
         public void GivenInvoiceItemWithSurchargeAmountForOrderValue_WhenDeriving_ThenUseSurchargeComponentsForOrderValue()
         {
-            const decimal Quantity1 = 3;
-            const decimal Quantity2 = 3;
-            const decimal Quantity3 = 10;
-            const decimal Amount1 = 1;
-            const decimal Amount2 = 3;
+            throw new Exception("TODO");
 
-            var value1 = new OrderValueBuilder(this.DatabaseSession).WithFromAmount(50).WithThroughAmount(99).Build();
-            var value2 = new OrderValueBuilder(this.DatabaseSession).WithFromAmount(100).Build();
+            //const decimal Quantity1 = 3;
+            //const decimal Quantity2 = 3;
+            //const decimal Quantity3 = 10;
+            //const decimal Amount1 = 1;
+            //const decimal Amount2 = 3;
 
-            new SurchargeComponentBuilder(this.DatabaseSession)
-                .WithSpecifiedFor(this.internalOrganisation)
-                .WithDescription("surcharge good for order value 1")
-                .WithOrderValue(value1)
-                .WithProduct(this.good)
-                .WithPrice(Amount1)
-                .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
-                .Build();
+            //var value1 = new OrderValueBuilder(this.DatabaseSession).WithFromAmount(50).WithThroughAmount(99).Build();
+            //var value2 = new OrderValueBuilder(this.DatabaseSession).WithFromAmount(100).Build();
 
-            new SurchargeComponentBuilder(this.DatabaseSession)
-                .WithSpecifiedFor(this.internalOrganisation)
-                .WithDescription("surcharge good for order value 1")
-                .WithOrderValue(value2)
-                .WithProduct(this.good)
-                .WithPrice(Amount2)
-                .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
-                .Build();
+            //new SurchargeComponentBuilder(this.DatabaseSession)
+            //    .WithSpecifiedFor(this.internalOrganisation)
+            //    .WithDescription("surcharge good for order value 1")
+            //    .WithOrderValue(value1)
+            //    .WithProduct(this.good)
+            //    .WithPrice(Amount1)
+            //    .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
+            //    .WithFromDate(DateTime.Now)
+            //    .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+            //    .Build();
 
-            this.DatabaseSession.Derive(true);
-            this.DatabaseSession.Commit();
+            //new SurchargeComponentBuilder(this.DatabaseSession)
+            //    .WithSpecifiedFor(this.internalOrganisation)
+            //    .WithDescription("surcharge good for order value 1")
+            //    .WithOrderValue(value2)
+            //    .WithProduct(this.good)
+            //    .WithPrice(Amount2)
+            //    .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
+            //    .WithFromDate(DateTime.Now)
+            //    .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+            //    .Build();
 
-            this.InstantiateObjects(this.DatabaseSession);
+            //this.DatabaseSession.Derive(true);
+            //this.DatabaseSession.Commit();
 
-            var item1 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity1).Build();
-            this.invoice.AddSalesInvoiceItem(item1);
+            //this.InstantiateObjects(this.DatabaseSession);
 
-            this.DatabaseSession.Derive(true);
+            //var item1 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity1).Build();
+            //this.invoice.AddSalesInvoiceItem(item1);
 
-            Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
-            Assert.AreEqual(0, item1.UnitDiscount);
-            Assert.AreEqual(0, item1.UnitSurcharge);
-            Assert.AreEqual(this.currentGood1BasePrice.Price, item1.CalculatedUnitPrice);
-            Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
+            //this.DatabaseSession.Derive(true);
 
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
+            //Assert.AreEqual(0, item1.UnitDiscount);
+            //Assert.AreEqual(0, item1.UnitSurcharge);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price, item1.CalculatedUnitPrice);
+            //Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
-            var item2 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity2).Build();
-            this.invoice.AddSalesInvoiceItem(item2);
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
 
-            this.DatabaseSession.Derive(true);
+            //var item2 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity2).Build();
+            //this.invoice.AddSalesInvoiceItem(item2);
 
-            Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
-            Assert.AreEqual(0, item1.UnitDiscount);
-            Assert.AreEqual(Amount1, item1.UnitSurcharge);
-            Assert.AreEqual(this.currentGood1BasePrice.Price + Amount1, item1.CalculatedUnitPrice);
-            Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
+            //this.DatabaseSession.Derive(true);
 
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
+            //Assert.AreEqual(0, item1.UnitDiscount);
+            //Assert.AreEqual(Amount1, item1.UnitSurcharge);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price + Amount1, item1.CalculatedUnitPrice);
+            //Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
-            Assert.AreEqual(this.currentGood1BasePrice.Price, item2.UnitBasePrice);
-            Assert.AreEqual(0, item2.UnitDiscount);
-            Assert.AreEqual(Amount1, item2.UnitSurcharge);
-            Assert.AreEqual(this.currentGood1BasePrice.Price + Amount1, item2.CalculatedUnitPrice);
-            Assert.AreEqual(this.goodPurchasePrice.Price, item2.UnitPurchasePrice);
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
 
-            Assert.AreEqual(decimal.Round(((item2.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item2.InitialMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item2.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item2.MaintainedMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item2.UnitBasePrice - this.goodPurchasePrice.Price) / item2.UnitBasePrice) * 100, 2), item2.InitialProfitMargin);
-            Assert.AreEqual(decimal.Round(((item2.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item2.CalculatedUnitPrice) * 100, 2), item2.MaintainedProfitMargin);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price, item2.UnitBasePrice);
+            //Assert.AreEqual(0, item2.UnitDiscount);
+            //Assert.AreEqual(Amount1, item2.UnitSurcharge);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price + Amount1, item2.CalculatedUnitPrice);
+            //Assert.AreEqual(this.goodPurchasePrice.Price, item2.UnitPurchasePrice);
 
-            var item3 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity3).Build();
-            this.invoice.AddSalesInvoiceItem(item3);
+            //Assert.AreEqual(decimal.Round(((item2.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item2.InitialMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item2.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item2.MaintainedMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item2.UnitBasePrice - this.goodPurchasePrice.Price) / item2.UnitBasePrice) * 100, 2), item2.InitialProfitMargin);
+            //Assert.AreEqual(decimal.Round(((item2.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item2.CalculatedUnitPrice) * 100, 2), item2.MaintainedProfitMargin);
 
-            this.DatabaseSession.Derive(true);
+            //var item3 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity3).Build();
+            //this.invoice.AddSalesInvoiceItem(item3);
 
-            Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
-            Assert.AreEqual(0, item1.UnitDiscount);
-            Assert.AreEqual(Amount2, item1.UnitSurcharge);
-            Assert.AreEqual(this.currentGood1BasePrice.Price + Amount2, item1.CalculatedUnitPrice);
-            Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
+            //this.DatabaseSession.Derive(true);
 
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
+            //Assert.AreEqual(0, item1.UnitDiscount);
+            //Assert.AreEqual(Amount2, item1.UnitSurcharge);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price + Amount2, item1.CalculatedUnitPrice);
+            //Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
 
-            Assert.AreEqual(this.currentGood1BasePrice.Price, item2.UnitBasePrice);
-            Assert.AreEqual(0, item2.UnitDiscount);
-            Assert.AreEqual(Amount2, item2.UnitSurcharge);
-            Assert.AreEqual(this.currentGood1BasePrice.Price + Amount2, item2.CalculatedUnitPrice);
-            Assert.AreEqual(this.goodPurchasePrice.Price, item2.UnitPurchasePrice);
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
 
-            Assert.AreEqual(decimal.Round(((item2.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item2.InitialMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item2.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item2.MaintainedMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item2.UnitBasePrice - this.goodPurchasePrice.Price) / item2.UnitBasePrice) * 100, 2), item2.InitialProfitMargin);
-            Assert.AreEqual(decimal.Round(((item2.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item2.CalculatedUnitPrice) * 100, 2), item2.MaintainedProfitMargin);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price, item2.UnitBasePrice);
+            //Assert.AreEqual(0, item2.UnitDiscount);
+            //Assert.AreEqual(Amount2, item2.UnitSurcharge);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price + Amount2, item2.CalculatedUnitPrice);
+            //Assert.AreEqual(this.goodPurchasePrice.Price, item2.UnitPurchasePrice);
 
-            Assert.AreEqual(this.currentGood1BasePrice.Price, item3.UnitBasePrice);
-            Assert.AreEqual(0, item3.UnitDiscount);
-            Assert.AreEqual(Amount2, item3.UnitSurcharge);
-            Assert.AreEqual(this.currentGood1BasePrice.Price + Amount2, item3.CalculatedUnitPrice);
-            Assert.AreEqual(this.goodPurchasePrice.Price, item3.UnitPurchasePrice);
+            //Assert.AreEqual(decimal.Round(((item2.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item2.InitialMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item2.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item2.MaintainedMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item2.UnitBasePrice - this.goodPurchasePrice.Price) / item2.UnitBasePrice) * 100, 2), item2.InitialProfitMargin);
+            //Assert.AreEqual(decimal.Round(((item2.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item2.CalculatedUnitPrice) * 100, 2), item2.MaintainedProfitMargin);
 
-            Assert.AreEqual(decimal.Round(((item3.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item3.InitialMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item3.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item3.MaintainedMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item3.UnitBasePrice - this.goodPurchasePrice.Price) / item3.UnitBasePrice) * 100, 2), item3.InitialProfitMargin);
-            Assert.AreEqual(decimal.Round(((item3.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item3.CalculatedUnitPrice) * 100, 2), item3.MaintainedProfitMargin);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price, item3.UnitBasePrice);
+            //Assert.AreEqual(0, item3.UnitDiscount);
+            //Assert.AreEqual(Amount2, item3.UnitSurcharge);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price + Amount2, item3.CalculatedUnitPrice);
+            //Assert.AreEqual(this.goodPurchasePrice.Price, item3.UnitPurchasePrice);
+
+            //Assert.AreEqual(decimal.Round(((item3.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item3.InitialMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item3.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item3.MaintainedMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item3.UnitBasePrice - this.goodPurchasePrice.Price) / item3.UnitBasePrice) * 100, 2), item3.InitialProfitMargin);
+            //Assert.AreEqual(decimal.Round(((item3.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item3.CalculatedUnitPrice) * 100, 2), item3.MaintainedProfitMargin);
         }
 
         [Test]
@@ -2062,42 +2080,44 @@ namespace Allors.Domain
         [Test]
         public void GivenInvoiceItemWithDiscountAmountForSalesType_WhenDeriving_ThenUseDiscountComponentsForSalesType()
         {
-            const decimal Quantity = 3;
-            const decimal Amount = 1;
+            throw new Exception("TODO");
 
-            new DiscountComponentBuilder(this.DatabaseSession)
-                .WithSpecifiedFor(this.internalOrganisation)
-                .WithDescription("discount good for sales type")
-                .WithSalesChannel(new SalesChannels(this.DatabaseSession).EmailChannel)
-                .WithProduct(this.good)
-                .WithPrice(Amount)
-                .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
-                .Build();
+            //const decimal Quantity = 3;
+            //const decimal Amount = 1;
 
-            this.DatabaseSession.Derive(true);
-            this.DatabaseSession.Commit();
+            //new DiscountComponentBuilder(this.DatabaseSession)
+            //    .WithSpecifiedFor(this.internalOrganisation)
+            //    .WithDescription("discount good for sales type")
+            //    .WithSalesChannel(new SalesChannels(this.DatabaseSession).EmailChannel)
+            //    .WithProduct(this.good)
+            //    .WithPrice(Amount)
+            //    .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
+            //    .WithFromDate(DateTime.Now)
+            //    .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+            //    .Build();
 
-            this.InstantiateObjects(this.DatabaseSession);
+            //this.DatabaseSession.Derive(true);
+            //this.DatabaseSession.Commit();
 
-            this.invoice.SalesChannel = new SalesChannels(this.DatabaseSession).EmailChannel;
+            //this.InstantiateObjects(this.DatabaseSession);
 
-            var item1 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity).Build();
-            this.invoice.AddSalesInvoiceItem(item1);
+            //this.invoice.SalesChannel = new SalesChannels(this.DatabaseSession).EmailChannel;
 
-            this.DatabaseSession.Derive(true);
+            //var item1 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity).Build();
+            //this.invoice.AddSalesInvoiceItem(item1);
 
-            Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
-            Assert.AreEqual(Amount, item1.UnitDiscount);
-            Assert.AreEqual(0, item1.UnitSurcharge);
-            Assert.AreEqual(this.currentGood1BasePrice.Price - Amount, item1.CalculatedUnitPrice);
-            Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
+            //this.DatabaseSession.Derive(true);
 
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
+            //Assert.AreEqual(Amount, item1.UnitDiscount);
+            //Assert.AreEqual(0, item1.UnitSurcharge);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price - Amount, item1.CalculatedUnitPrice);
+            //Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
+
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
         }
 
         [Test]
@@ -2156,42 +2176,44 @@ namespace Allors.Domain
         [Test]
         public void GivenInvoiceItemWithSurchargeAmountForSalesType_WhenDeriving_ThenUseSurchargeComponentsForSalesType()
         {
-            const decimal Quantity = 3;
-            const decimal Amount = 1;
+            throw new Exception("TODO");
 
-            new SurchargeComponentBuilder(this.DatabaseSession)
-                .WithSpecifiedFor(this.internalOrganisation)
-                .WithDescription("discount good for sales type")
-                .WithSalesChannel(new SalesChannels(this.DatabaseSession).EmailChannel)
-                .WithProduct(this.good)
-                .WithPrice(Amount)
-                .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
-                .Build();
+            //const decimal Quantity = 3;
+            //const decimal Amount = 1;
 
-            this.DatabaseSession.Derive(true);
-            this.DatabaseSession.Commit();
+            //new SurchargeComponentBuilder(this.DatabaseSession)
+            //    .WithSpecifiedFor(this.internalOrganisation)
+            //    .WithDescription("discount good for sales type")
+            //    .WithSalesChannel(new SalesChannels(this.DatabaseSession).EmailChannel)
+            //    .WithProduct(this.good)
+            //    .WithPrice(Amount)
+            //    .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
+            //    .WithFromDate(DateTime.Now)
+            //    .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+            //    .Build();
 
-            this.InstantiateObjects(this.DatabaseSession);
+            //this.DatabaseSession.Derive(true);
+            //this.DatabaseSession.Commit();
 
-            this.invoice.SalesChannel = new SalesChannels(this.DatabaseSession).EmailChannel;
+            //this.InstantiateObjects(this.DatabaseSession);
 
-            var item1 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity).Build();
-            this.invoice.AddSalesInvoiceItem(item1);
+            //this.invoice.SalesChannel = new SalesChannels(this.DatabaseSession).EmailChannel;
 
-            this.DatabaseSession.Derive(true);
+            //var item1 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(this.good).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).WithQuantity(Quantity).Build();
+            //this.invoice.AddSalesInvoiceItem(item1);
 
-            Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
-            Assert.AreEqual(0, item1.UnitDiscount);
-            Assert.AreEqual(Amount, item1.UnitSurcharge);
-            Assert.AreEqual(this.currentGood1BasePrice.Price + Amount, item1.CalculatedUnitPrice);
-            Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
+            //this.DatabaseSession.Derive(true);
 
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
-            Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
-            Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price, item1.UnitBasePrice);
+            //Assert.AreEqual(0, item1.UnitDiscount);
+            //Assert.AreEqual(Amount, item1.UnitSurcharge);
+            //Assert.AreEqual(this.currentGood1BasePrice.Price + Amount, item1.CalculatedUnitPrice);
+            //Assert.AreEqual(this.goodPurchasePrice.Price, item1.UnitPurchasePrice);
+
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.InitialMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice / this.goodPurchasePrice.Price) - 1) * 100, 2), item1.MaintainedMarkupPercentage);
+            //Assert.AreEqual(decimal.Round(((item1.UnitBasePrice - this.goodPurchasePrice.Price) / item1.UnitBasePrice) * 100, 2), item1.InitialProfitMargin);
+            //Assert.AreEqual(decimal.Round(((item1.CalculatedUnitPrice - this.goodPurchasePrice.Price) / item1.CalculatedUnitPrice) * 100, 2), item1.MaintainedProfitMargin);
         }
 
         [Test]

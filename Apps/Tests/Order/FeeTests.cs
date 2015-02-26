@@ -21,6 +21,8 @@
 
 namespace Allors.Domain
 {
+    using System;
+
     using Allors.Domain;
     using NUnit.Framework;
 
@@ -51,40 +53,42 @@ namespace Allors.Domain
         [Test]
         public void GivenFee_WhenDeriving_ThenDisplayNameIsSet()
         {
-            var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
-            var shipToContactMechanism = new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build();
+            throw new Exception("TODO");
 
-            var customer = new OrganisationBuilder(this.DatabaseSession)
-                .WithName("customer")
-                .WithLocale(new Locales(this.DatabaseSession).EnglishGreatBritain)
-                .WithPreferredCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .Build();
+            //var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
+            //var shipToContactMechanism = new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build();
 
-            var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
+            //var customer = new OrganisationBuilder(this.DatabaseSession)
+            //    .WithName("customer")
+            //    .WithLocale(new Locales(this.DatabaseSession).EnglishGreatBritain)
+            //    .WithPreferredCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
+            //    .Build();
 
-            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(customer).WithInternalOrganisation(internalOrganisation).Build();
+            //var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
 
-            var amountAdjustment = new FeeBuilder(this.DatabaseSession).WithAmount(1).Build();
-            var percentageAdjustment = new FeeBuilder(this.DatabaseSession).WithPercentage(1).Build();
+            //new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(customer).WithInternalOrganisation(internalOrganisation).Build();
 
-            var order = new SalesOrderBuilder(this.DatabaseSession)
-                .WithOrderNumber("1")
-                .WithBillToCustomer(customer)
-                .WithShipToCustomer(customer)
-                .WithShipToAddress(shipToContactMechanism)
-                .WithTakenByInternalOrganisation(internalOrganisation)
-                .WithFee(amountAdjustment)
-                .Build();
+            //var amountAdjustment = new FeeBuilder(this.DatabaseSession).WithAmount(1).Build();
+            //var percentageAdjustment = new FeeBuilder(this.DatabaseSession).WithPercentage(1).Build();
+
+            //var order = new SalesOrderBuilder(this.DatabaseSession)
+            //    .WithOrderNumber("1")
+            //    .WithBillToCustomer(customer)
+            //    .WithShipToCustomer(customer)
+            //    .WithShipToAddress(shipToContactMechanism)
+            //    .WithTakenByInternalOrganisation(internalOrganisation)
+            //    .WithFee(amountAdjustment)
+            //    .Build();
             
-            this.DatabaseSession.Derive(true);
+            //this.DatabaseSession.Derive(true);
 
-            Assert.AreEqual("Fee: €1.00", amountAdjustment.DisplayName);
+            //Assert.AreEqual("Fee: €1.00", amountAdjustment.DisplayName);
 
-            order.Fee = percentageAdjustment;
+            //order.Fee = percentageAdjustment;
             
-            this.DatabaseSession.Derive(true);
+            //this.DatabaseSession.Derive(true);
 
-            Assert.AreEqual("Fee: 1%", percentageAdjustment.DisplayName);
+            //Assert.AreEqual("Fee: 1%", percentageAdjustment.DisplayName);
         }
     }
 }

@@ -21,6 +21,8 @@
 
 namespace Allors.Domain
 {
+    using System;
+
     using Allors.Domain;
 
     using NUnit.Framework;
@@ -31,145 +33,153 @@ namespace Allors.Domain
         [Test]
         public void GivenJournal_WhenDeriving_ThenDescriptionMustExist()
         {
-            var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
+            throw new Exception("TODO");
 
-            var glAccount = new GeneralLedgerAccountBuilder(this.DatabaseSession)
-                .WithAccountNumber("0001")
-                .WithName("GeneralLedgerAccount")
-                .WithBalanceSheetAccount(true)
-                .WithSide(new DebitCreditConstants(this.DatabaseSession).Debit)
-                .WithGeneralLedgerAccountType(new GeneralLedgerAccountTypeBuilder(this.DatabaseSession).WithDescription("accountType").Build())
-                .WithGeneralLedgerAccountGroup(new GeneralLedgerAccountGroupBuilder(this.DatabaseSession).WithDescription("accountGroup").Build())
-                .Build();
+            //var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
 
-            var internalOrganisationGlAccount = new OrganisationGlAccountBuilder(this.DatabaseSession)
-                .WithInternalOrganisation(internalOrganisation)
-                .WithGeneralLedgerAccount(glAccount)
-                .Build();
+            //var glAccount = new GeneralLedgerAccountBuilder(this.DatabaseSession)
+            //    .WithAccountNumber("0001")
+            //    .WithName("GeneralLedgerAccount")
+            //    .WithBalanceSheetAccount(true)
+            //    .WithSide(new DebitCreditConstants(this.DatabaseSession).Debit)
+            //    .WithGeneralLedgerAccountType(new GeneralLedgerAccountTypeBuilder(this.DatabaseSession).WithDescription("accountType").Build())
+            //    .WithGeneralLedgerAccountGroup(new GeneralLedgerAccountGroupBuilder(this.DatabaseSession).WithDescription("accountGroup").Build())
+            //    .Build();
 
-            this.DatabaseSession.Commit();
+            //var internalOrganisationGlAccount = new OrganisationGlAccountBuilder(this.DatabaseSession)
+            //    .WithInternalOrganisation(internalOrganisation)
+            //    .WithGeneralLedgerAccount(glAccount)
+            //    .Build();
 
-            var builder = new JournalBuilder(this.DatabaseSession);
-            builder.WithInternalOrganisation(internalOrganisation);
-            builder.WithJournalType(new JournalTypes(this.DatabaseSession).Bank);
-            builder.WithContraAccount(internalOrganisationGlAccount);
-            builder.Build();
+            //this.DatabaseSession.Commit();
 
-            Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
+            //var builder = new JournalBuilder(this.DatabaseSession);
+            //builder.WithInternalOrganisation(internalOrganisation);
+            //builder.WithJournalType(new JournalTypes(this.DatabaseSession).Bank);
+            //builder.WithContraAccount(internalOrganisationGlAccount);
+            //builder.Build();
 
-            this.DatabaseSession.Rollback();
+            //Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
 
-            builder.WithDescription("description");
-            builder.Build();
+            //this.DatabaseSession.Rollback();
 
-            Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
+            //builder.WithDescription("description");
+            //builder.Build();
+
+            //Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
 
         [Test]
         public void GivenJournal_WhenDeriving_ThenInternalOrganisationMustExist()
         {
-            var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
-            var glAccount = new GeneralLedgerAccountBuilder(this.DatabaseSession)
-                .WithAccountNumber("0001")
-                .WithName("GeneralLedgerAccount")
-                .WithBalanceSheetAccount(true)
-                .WithSide(new DebitCreditConstants(this.DatabaseSession).Debit)
-                .WithGeneralLedgerAccountType(new GeneralLedgerAccountTypeBuilder(this.DatabaseSession).WithDescription("accountType").Build())
-                .WithGeneralLedgerAccountGroup(new GeneralLedgerAccountGroupBuilder(this.DatabaseSession).WithDescription("accountGroup").Build())
-                .Build();
+            throw new Exception("TODO");
 
-            var internalOrganisationGlAccount = new OrganisationGlAccountBuilder(this.DatabaseSession)
-                .WithInternalOrganisation(internalOrganisation)
-                .WithGeneralLedgerAccount(glAccount)
-                .Build();
+            //var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
+            //var glAccount = new GeneralLedgerAccountBuilder(this.DatabaseSession)
+            //    .WithAccountNumber("0001")
+            //    .WithName("GeneralLedgerAccount")
+            //    .WithBalanceSheetAccount(true)
+            //    .WithSide(new DebitCreditConstants(this.DatabaseSession).Debit)
+            //    .WithGeneralLedgerAccountType(new GeneralLedgerAccountTypeBuilder(this.DatabaseSession).WithDescription("accountType").Build())
+            //    .WithGeneralLedgerAccountGroup(new GeneralLedgerAccountGroupBuilder(this.DatabaseSession).WithDescription("accountGroup").Build())
+            //    .Build();
 
-            this.DatabaseSession.Commit();
+            //var internalOrganisationGlAccount = new OrganisationGlAccountBuilder(this.DatabaseSession)
+            //    .WithInternalOrganisation(internalOrganisation)
+            //    .WithGeneralLedgerAccount(glAccount)
+            //    .Build();
 
-            var builder = new JournalBuilder(this.DatabaseSession);
-            builder.WithDescription("description");
-            builder.WithJournalType(new JournalTypes(this.DatabaseSession).Bank);
-            builder.WithContraAccount(internalOrganisationGlAccount);
-            builder.Build();
+            //this.DatabaseSession.Commit();
 
-            Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
+            //var builder = new JournalBuilder(this.DatabaseSession);
+            //builder.WithDescription("description");
+            //builder.WithJournalType(new JournalTypes(this.DatabaseSession).Bank);
+            //builder.WithContraAccount(internalOrganisationGlAccount);
+            //builder.Build();
 
-            this.DatabaseSession.Rollback();
+            //Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
 
-            builder.WithInternalOrganisation(new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation"));
-            builder.Build();
+            //this.DatabaseSession.Rollback();
 
-            Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
+            //builder.WithInternalOrganisation(new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation"));
+            //builder.Build();
+
+            //Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
 
         [Test]
         public void GivenJournal_WhenDeriving_ThenJournalTypeMustExist()
         {
-            var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
-            var glAccount = new GeneralLedgerAccountBuilder(this.DatabaseSession)
-                .WithAccountNumber("0001")
-                .WithName("GeneralLedgerAccount")
-                .WithBalanceSheetAccount(true)
-                .WithSide(new DebitCreditConstants(this.DatabaseSession).Debit)
-                .WithGeneralLedgerAccountType(new GeneralLedgerAccountTypeBuilder(this.DatabaseSession).WithDescription("accountType").Build())
-                .WithGeneralLedgerAccountGroup(new GeneralLedgerAccountGroupBuilder(this.DatabaseSession).WithDescription("accountGroup").Build())
-                .Build();
+            throw new Exception("TODO");
 
-            var internalOrganisationGlAccount = new OrganisationGlAccountBuilder(this.DatabaseSession)
-                .WithInternalOrganisation(internalOrganisation)
-                .WithGeneralLedgerAccount(glAccount)
-                .Build();
+            //var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
+            //var glAccount = new GeneralLedgerAccountBuilder(this.DatabaseSession)
+            //    .WithAccountNumber("0001")
+            //    .WithName("GeneralLedgerAccount")
+            //    .WithBalanceSheetAccount(true)
+            //    .WithSide(new DebitCreditConstants(this.DatabaseSession).Debit)
+            //    .WithGeneralLedgerAccountType(new GeneralLedgerAccountTypeBuilder(this.DatabaseSession).WithDescription("accountType").Build())
+            //    .WithGeneralLedgerAccountGroup(new GeneralLedgerAccountGroupBuilder(this.DatabaseSession).WithDescription("accountGroup").Build())
+            //    .Build();
 
-            this.DatabaseSession.Commit();
+            //var internalOrganisationGlAccount = new OrganisationGlAccountBuilder(this.DatabaseSession)
+            //    .WithInternalOrganisation(internalOrganisation)
+            //    .WithGeneralLedgerAccount(glAccount)
+            //    .Build();
 
-            var builder = new JournalBuilder(this.DatabaseSession);
-            builder.WithDescription("description");
-            builder.WithInternalOrganisation(new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation"));
-            builder.WithContraAccount(internalOrganisationGlAccount);
-            builder.Build();
+            //this.DatabaseSession.Commit();
 
-            Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
+            //var builder = new JournalBuilder(this.DatabaseSession);
+            //builder.WithDescription("description");
+            //builder.WithInternalOrganisation(new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation"));
+            //builder.WithContraAccount(internalOrganisationGlAccount);
+            //builder.Build();
 
-            this.DatabaseSession.Rollback();
+            //Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
 
-            builder.WithJournalType(new JournalTypes(this.DatabaseSession).Bank);
-            builder.Build();
+            //this.DatabaseSession.Rollback();
 
-            Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
+            //builder.WithJournalType(new JournalTypes(this.DatabaseSession).Bank);
+            //builder.Build();
+
+            //Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
 
         [Test]
         public void GivenJournal_WhenDeriving_ThenContraAccountMustExist()
         {
-            var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
+            throw new Exception("TODO");
 
-            var builder = new JournalBuilder(this.DatabaseSession);
-            builder.WithDescription("description");
-            builder.WithInternalOrganisation(internalOrganisation);
-            builder.WithJournalType(new JournalTypes(this.DatabaseSession).Bank);
-            builder.Build();
+            //var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
 
-            Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
+            //var builder = new JournalBuilder(this.DatabaseSession);
+            //builder.WithDescription("description");
+            //builder.WithInternalOrganisation(internalOrganisation);
+            //builder.WithJournalType(new JournalTypes(this.DatabaseSession).Bank);
+            //builder.Build();
 
-            this.DatabaseSession.Rollback();
+            //Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
 
-            var glAccount = new GeneralLedgerAccountBuilder(this.DatabaseSession)
-                .WithAccountNumber("0001")
-                .WithName("GeneralLedgerAccount")
-                .WithBalanceSheetAccount(true)
-                .WithSide(new DebitCreditConstants(this.DatabaseSession).Debit)
-                .WithGeneralLedgerAccountType(new GeneralLedgerAccountTypeBuilder(this.DatabaseSession).WithDescription("accountType").Build())
-                .WithGeneralLedgerAccountGroup(new GeneralLedgerAccountGroupBuilder(this.DatabaseSession).WithDescription("accountGroup").Build())
-                .Build();
+            //this.DatabaseSession.Rollback();
 
-            var internalOrganisationGlAccount = new OrganisationGlAccountBuilder(this.DatabaseSession)
-                .WithInternalOrganisation(internalOrganisation)
-                .WithGeneralLedgerAccount(glAccount)
-                .Build();
+            //var glAccount = new GeneralLedgerAccountBuilder(this.DatabaseSession)
+            //    .WithAccountNumber("0001")
+            //    .WithName("GeneralLedgerAccount")
+            //    .WithBalanceSheetAccount(true)
+            //    .WithSide(new DebitCreditConstants(this.DatabaseSession).Debit)
+            //    .WithGeneralLedgerAccountType(new GeneralLedgerAccountTypeBuilder(this.DatabaseSession).WithDescription("accountType").Build())
+            //    .WithGeneralLedgerAccountGroup(new GeneralLedgerAccountGroupBuilder(this.DatabaseSession).WithDescription("accountGroup").Build())
+            //    .Build();
 
-            builder.WithContraAccount(internalOrganisationGlAccount);
-            builder.Build();
+            //var internalOrganisationGlAccount = new OrganisationGlAccountBuilder(this.DatabaseSession)
+            //    .WithInternalOrganisation(internalOrganisation)
+            //    .WithGeneralLedgerAccount(glAccount)
+            //    .Build();
 
-            Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
+            //builder.WithContraAccount(internalOrganisationGlAccount);
+            //builder.Build();
+
+            //Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
 
         [Test]
@@ -213,196 +223,204 @@ namespace Allors.Domain
                 .Build();
 
             this.DatabaseSession.Derive();
- 
+
             Assert.AreEqual("description", journal.DisplayName);
         }
 
         [Test]
         public void GivenJournal_WhenDeriving_ThenContraAccountCanBeChangedWhenNotUsedYet()
         {
-            var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
+            throw new Exception("TODO");
 
-            var generalLedgerAccount1 = new GeneralLedgerAccountBuilder(this.DatabaseSession)
-                .WithAccountNumber("0001")
-                .WithName("bankAccount 1")
-                .WithBalanceSheetAccount(true)
-                .WithSide(new DebitCreditConstants(this.DatabaseSession).Debit)
-                .WithGeneralLedgerAccountType(new GeneralLedgerAccountTypeBuilder(this.DatabaseSession).WithDescription("accountType").Build())
-                .WithGeneralLedgerAccountGroup(new GeneralLedgerAccountGroupBuilder(this.DatabaseSession).WithDescription("accountGroup").Build())
-                .Build();
+            //var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
 
-            var internalOrganisationGlAccount1 = new OrganisationGlAccountBuilder(this.DatabaseSession)
-                .WithInternalOrganisation(internalOrganisation)
-                .WithGeneralLedgerAccount(generalLedgerAccount1)
-                .Build();
+            //var generalLedgerAccount1 = new GeneralLedgerAccountBuilder(this.DatabaseSession)
+            //    .WithAccountNumber("0001")
+            //    .WithName("bankAccount 1")
+            //    .WithBalanceSheetAccount(true)
+            //    .WithSide(new DebitCreditConstants(this.DatabaseSession).Debit)
+            //    .WithGeneralLedgerAccountType(new GeneralLedgerAccountTypeBuilder(this.DatabaseSession).WithDescription("accountType").Build())
+            //    .WithGeneralLedgerAccountGroup(new GeneralLedgerAccountGroupBuilder(this.DatabaseSession).WithDescription("accountGroup").Build())
+            //    .Build();
 
-            var generalLedgerAccount2 = new GeneralLedgerAccountBuilder(this.DatabaseSession)
-                .WithAccountNumber("0002")
-                .WithName("bankAccount 2")
-                .WithBalanceSheetAccount(true)
-                .WithSide(new DebitCreditConstants(this.DatabaseSession).Debit)
-                .WithGeneralLedgerAccountType(new GeneralLedgerAccountTypeBuilder(this.DatabaseSession).WithDescription("accountType").Build())
-                .WithGeneralLedgerAccountGroup(new GeneralLedgerAccountGroupBuilder(this.DatabaseSession).WithDescription("accountGroup").Build())
-                .Build();
+            //var internalOrganisationGlAccount1 = new OrganisationGlAccountBuilder(this.DatabaseSession)
+            //    .WithInternalOrganisation(internalOrganisation)
+            //    .WithGeneralLedgerAccount(generalLedgerAccount1)
+            //    .Build();
 
-            var internalOrganisationGlAccount2 = new OrganisationGlAccountBuilder(this.DatabaseSession)
-                .WithInternalOrganisation(internalOrganisation)
-                .WithGeneralLedgerAccount(generalLedgerAccount2)
-                .Build();
+            //var generalLedgerAccount2 = new GeneralLedgerAccountBuilder(this.DatabaseSession)
+            //    .WithAccountNumber("0002")
+            //    .WithName("bankAccount 2")
+            //    .WithBalanceSheetAccount(true)
+            //    .WithSide(new DebitCreditConstants(this.DatabaseSession).Debit)
+            //    .WithGeneralLedgerAccountType(new GeneralLedgerAccountTypeBuilder(this.DatabaseSession).WithDescription("accountType").Build())
+            //    .WithGeneralLedgerAccountGroup(new GeneralLedgerAccountGroupBuilder(this.DatabaseSession).WithDescription("accountGroup").Build())
+            //    .Build();
 
-            var journal = new JournalBuilder(this.DatabaseSession)
-                .WithDescription("description")
-                .WithContraAccount(internalOrganisationGlAccount1)
-                .WithInternalOrganisation(new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation"))
-                .WithJournalType(new JournalTypes(this.DatabaseSession).Bank)
-                .Build();
+            //var internalOrganisationGlAccount2 = new OrganisationGlAccountBuilder(this.DatabaseSession)
+            //    .WithInternalOrganisation(internalOrganisation)
+            //    .WithGeneralLedgerAccount(generalLedgerAccount2)
+            //    .Build();
 
-            this.DatabaseSession.Derive(true);
+            //var journal = new JournalBuilder(this.DatabaseSession)
+            //    .WithDescription("description")
+            //    .WithContraAccount(internalOrganisationGlAccount1)
+            //    .WithInternalOrganisation(new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation"))
+            //    .WithJournalType(new JournalTypes(this.DatabaseSession).Bank)
+            //    .Build();
 
-            Assert.AreEqual(generalLedgerAccount1, journal.PreviousContraAccount);
+            //this.DatabaseSession.Derive(true);
 
-            journal.ContraAccount = internalOrganisationGlAccount2;
+            //Assert.AreEqual(generalLedgerAccount1, journal.PreviousContraAccount);
 
-            this.DatabaseSession.Derive(true);
+            //journal.ContraAccount = internalOrganisationGlAccount2;
 
-            Assert.AreEqual(generalLedgerAccount2, journal.PreviousContraAccount);
+            //this.DatabaseSession.Derive(true);
+
+            //Assert.AreEqual(generalLedgerAccount2, journal.PreviousContraAccount);
         }
 
         [Test]
         public void GivenJournal_WhenDeriving_ThenContraAccountCanNotBeChangedWhenJournalEntriesArePresent()
         {
-            var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
+            throw new Exception("TODO");
 
-            var generalLedgerAccount1 = new GeneralLedgerAccountBuilder(this.DatabaseSession)
-                .WithAccountNumber("0001")
-                .WithName("bankAccount 1")
-                .WithBalanceSheetAccount(true)
-                .WithSide(new DebitCreditConstants(this.DatabaseSession).Debit)
-                .WithGeneralLedgerAccountType(new GeneralLedgerAccountTypeBuilder(this.DatabaseSession).WithDescription("accountType").Build())
-                .WithGeneralLedgerAccountGroup(new GeneralLedgerAccountGroupBuilder(this.DatabaseSession).WithDescription("accountGroup").Build())
-                .Build();
+            //var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
 
-            var internalOrganisationGlAccount1 = new OrganisationGlAccountBuilder(this.DatabaseSession)
-                .WithInternalOrganisation(internalOrganisation)
-                .WithGeneralLedgerAccount(generalLedgerAccount1)
-                .Build();
+            //var generalLedgerAccount1 = new GeneralLedgerAccountBuilder(this.DatabaseSession)
+            //    .WithAccountNumber("0001")
+            //    .WithName("bankAccount 1")
+            //    .WithBalanceSheetAccount(true)
+            //    .WithSide(new DebitCreditConstants(this.DatabaseSession).Debit)
+            //    .WithGeneralLedgerAccountType(new GeneralLedgerAccountTypeBuilder(this.DatabaseSession).WithDescription("accountType").Build())
+            //    .WithGeneralLedgerAccountGroup(new GeneralLedgerAccountGroupBuilder(this.DatabaseSession).WithDescription("accountGroup").Build())
+            //    .Build();
 
-            var generalLedgerAccount2 = new GeneralLedgerAccountBuilder(this.DatabaseSession)
-                .WithAccountNumber("0002")
-                .WithName("bankAccount 2")
-                .WithBalanceSheetAccount(true)
-                .WithSide(new DebitCreditConstants(this.DatabaseSession).Debit)
-                .WithGeneralLedgerAccountType(new GeneralLedgerAccountTypeBuilder(this.DatabaseSession).WithDescription("accountType").Build())
-                .WithGeneralLedgerAccountGroup(new GeneralLedgerAccountGroupBuilder(this.DatabaseSession).WithDescription("accountGroup").Build())
-                .Build();
+            //var internalOrganisationGlAccount1 = new OrganisationGlAccountBuilder(this.DatabaseSession)
+            //    .WithInternalOrganisation(internalOrganisation)
+            //    .WithGeneralLedgerAccount(generalLedgerAccount1)
+            //    .Build();
 
-            var internalOrganisationGlAccount2 = new OrganisationGlAccountBuilder(this.DatabaseSession)
-                .WithInternalOrganisation(internalOrganisation)
-                .WithGeneralLedgerAccount(generalLedgerAccount2)
-                .Build();
+            //var generalLedgerAccount2 = new GeneralLedgerAccountBuilder(this.DatabaseSession)
+            //    .WithAccountNumber("0002")
+            //    .WithName("bankAccount 2")
+            //    .WithBalanceSheetAccount(true)
+            //    .WithSide(new DebitCreditConstants(this.DatabaseSession).Debit)
+            //    .WithGeneralLedgerAccountType(new GeneralLedgerAccountTypeBuilder(this.DatabaseSession).WithDescription("accountType").Build())
+            //    .WithGeneralLedgerAccountGroup(new GeneralLedgerAccountGroupBuilder(this.DatabaseSession).WithDescription("accountGroup").Build())
+            //    .Build();
 
-            var journal = new JournalBuilder(this.DatabaseSession)
-                .WithDescription("description")
-                .WithContraAccount(internalOrganisationGlAccount1)
-                .WithInternalOrganisation(new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation"))
-                .WithJournalType(new JournalTypes(this.DatabaseSession).Bank)
-                .Build();
+            //var internalOrganisationGlAccount2 = new OrganisationGlAccountBuilder(this.DatabaseSession)
+            //    .WithInternalOrganisation(internalOrganisation)
+            //    .WithGeneralLedgerAccount(generalLedgerAccount2)
+            //    .Build();
 
-            this.DatabaseSession.Derive(true);
+            //var journal = new JournalBuilder(this.DatabaseSession)
+            //    .WithDescription("description")
+            //    .WithContraAccount(internalOrganisationGlAccount1)
+            //    .WithInternalOrganisation(new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation"))
+            //    .WithJournalType(new JournalTypes(this.DatabaseSession).Bank)
+            //    .Build();
 
-            Assert.AreEqual(generalLedgerAccount1, journal.PreviousContraAccount);
+            //this.DatabaseSession.Derive(true);
 
-            journal.AddJournalEntry(new JournalEntryBuilder(this.DatabaseSession)
-                                        .WithJournalEntryDetail(new JournalEntryDetailBuilder(this.DatabaseSession)
-                                                                    .WithAmount(1)
-                                                                    .WithDebit(true)
-                                                                    .WithGeneralLedgerAccount(internalOrganisationGlAccount1)
-                                                                    .Build())
-                                        .Build()); 
-                                                                    
-            journal.ContraAccount = internalOrganisationGlAccount2;
+            //Assert.AreEqual(generalLedgerAccount1, journal.PreviousContraAccount);
 
-            Assert.AreEqual("description.ContraAccount, description.PreviousContraAccount are not equal", this.DatabaseSession.Derive().Errors[0].Message);
+            //journal.AddJournalEntry(new JournalEntryBuilder(this.DatabaseSession)
+            //                            .WithJournalEntryDetail(new JournalEntryDetailBuilder(this.DatabaseSession)
+            //                                                        .WithAmount(1)
+            //                                                        .WithDebit(true)
+            //                                                        .WithGeneralLedgerAccount(internalOrganisationGlAccount1)
+            //                                                        .Build())
+            //                            .Build());
+
+            //journal.ContraAccount = internalOrganisationGlAccount2;
+
+            //Assert.AreEqual("description.ContraAccount, description.PreviousContraAccount are not equal", this.DatabaseSession.Derive().Errors[0].Message);
         }
 
         [Test]
         public void GivenJournal_WhenDeriving_ThenJournalTypeCanBeChangedWhenJournalIsNotUsedYet()
         {
-            var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
+            throw new Exception("TODO");
 
-            var generalLedgerAccount1 = new GeneralLedgerAccountBuilder(this.DatabaseSession)
-                .WithAccountNumber("0001")
-                .WithName("bankAccount 1")
-                .WithBalanceSheetAccount(true)
-                .WithSide(new DebitCreditConstants(this.DatabaseSession).Debit)
-                .WithGeneralLedgerAccountType(new GeneralLedgerAccountTypeBuilder(this.DatabaseSession).WithDescription("accountType").Build())
-                .WithGeneralLedgerAccountGroup(new GeneralLedgerAccountGroupBuilder(this.DatabaseSession).WithDescription("accountGroup").Build())
-                .Build();
+            //var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
 
-            var internalOrganisationGlAccount = new OrganisationGlAccountBuilder(this.DatabaseSession)
-                .WithInternalOrganisation(internalOrganisation)
-                .WithGeneralLedgerAccount(generalLedgerAccount1)
-                .Build();
+            //var generalLedgerAccount1 = new GeneralLedgerAccountBuilder(this.DatabaseSession)
+            //    .WithAccountNumber("0001")
+            //    .WithName("bankAccount 1")
+            //    .WithBalanceSheetAccount(true)
+            //    .WithSide(new DebitCreditConstants(this.DatabaseSession).Debit)
+            //    .WithGeneralLedgerAccountType(new GeneralLedgerAccountTypeBuilder(this.DatabaseSession).WithDescription("accountType").Build())
+            //    .WithGeneralLedgerAccountGroup(new GeneralLedgerAccountGroupBuilder(this.DatabaseSession).WithDescription("accountGroup").Build())
+            //    .Build();
 
-            var journal = new JournalBuilder(this.DatabaseSession)
-                .WithDescription("description")
-                .WithContraAccount(internalOrganisationGlAccount)
-                .WithInternalOrganisation(new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation"))
-                .WithJournalType(new JournalTypes(this.DatabaseSession).Bank)
-                .Build();
+            //var internalOrganisationGlAccount = new OrganisationGlAccountBuilder(this.DatabaseSession)
+            //    .WithInternalOrganisation(internalOrganisation)
+            //    .WithGeneralLedgerAccount(generalLedgerAccount1)
+            //    .Build();
 
-            this.DatabaseSession.Derive(true);
+            //var journal = new JournalBuilder(this.DatabaseSession)
+            //    .WithDescription("description")
+            //    .WithContraAccount(internalOrganisationGlAccount)
+            //    .WithInternalOrganisation(new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation"))
+            //    .WithJournalType(new JournalTypes(this.DatabaseSession).Bank)
+            //    .Build();
 
-            Assert.AreEqual(generalLedgerAccount1, journal.PreviousContraAccount);
+            //this.DatabaseSession.Derive(true);
 
-            journal.JournalType = new JournalTypes(this.DatabaseSession).Cash;
+            //Assert.AreEqual(generalLedgerAccount1, journal.PreviousContraAccount);
 
-            this.DatabaseSession.Derive(true);
+            //journal.JournalType = new JournalTypes(this.DatabaseSession).Cash;
 
-            Assert.AreEqual(new JournalTypes(this.DatabaseSession).Cash, journal.PreviousJournalType);
+            //this.DatabaseSession.Derive(true);
+
+            //Assert.AreEqual(new JournalTypes(this.DatabaseSession).Cash, journal.PreviousJournalType);
         }
 
         [Test]
         public void GivenJournal_WhenDeriving_ThenJournalTypeCanNotBeChangedWhenJournalEntriesArePresent()
         {
-            var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
+            throw new Exception("TODO");
 
-            var generalLedgerAccount1 = new GeneralLedgerAccountBuilder(this.DatabaseSession)
-                .WithAccountNumber("0001")
-                .WithName("bankAccount 1")
-                .WithBalanceSheetAccount(true)
-                .WithSide(new DebitCreditConstants(this.DatabaseSession).Debit)
-                .WithGeneralLedgerAccountType(new GeneralLedgerAccountTypeBuilder(this.DatabaseSession).WithDescription("accountType").Build())
-                .WithGeneralLedgerAccountGroup(new GeneralLedgerAccountGroupBuilder(this.DatabaseSession).WithDescription("accountGroup").Build())
-                .Build();
+            //var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
 
-            var internalOrganisationGlAccount = new OrganisationGlAccountBuilder(this.DatabaseSession)
-                .WithInternalOrganisation(internalOrganisation)
-                .WithGeneralLedgerAccount(generalLedgerAccount1)
-                .Build();
+            //var generalLedgerAccount1 = new GeneralLedgerAccountBuilder(this.DatabaseSession)
+            //    .WithAccountNumber("0001")
+            //    .WithName("bankAccount 1")
+            //    .WithBalanceSheetAccount(true)
+            //    .WithSide(new DebitCreditConstants(this.DatabaseSession).Debit)
+            //    .WithGeneralLedgerAccountType(new GeneralLedgerAccountTypeBuilder(this.DatabaseSession).WithDescription("accountType").Build())
+            //    .WithGeneralLedgerAccountGroup(new GeneralLedgerAccountGroupBuilder(this.DatabaseSession).WithDescription("accountGroup").Build())
+            //    .Build();
 
-            var journal = new JournalBuilder(this.DatabaseSession)
-                .WithDescription("description")
-                .WithContraAccount(internalOrganisationGlAccount)
-                .WithInternalOrganisation(new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation"))
-                .WithJournalType(new JournalTypes(this.DatabaseSession).Bank)
-                .Build();
+            //var internalOrganisationGlAccount = new OrganisationGlAccountBuilder(this.DatabaseSession)
+            //    .WithInternalOrganisation(internalOrganisation)
+            //    .WithGeneralLedgerAccount(generalLedgerAccount1)
+            //    .Build();
 
-            this.DatabaseSession.Derive(true);
+            //var journal = new JournalBuilder(this.DatabaseSession)
+            //    .WithDescription("description")
+            //    .WithContraAccount(internalOrganisationGlAccount)
+            //    .WithInternalOrganisation(new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation"))
+            //    .WithJournalType(new JournalTypes(this.DatabaseSession).Bank)
+            //    .Build();
 
-            Assert.AreEqual(generalLedgerAccount1, journal.PreviousContraAccount);
+            //this.DatabaseSession.Derive(true);
 
-            journal.AddJournalEntry(new JournalEntryBuilder(this.DatabaseSession)
-                                        .WithJournalEntryDetail(new JournalEntryDetailBuilder(this.DatabaseSession)
-                                                                    .WithAmount(1)
-                                                                    .WithDebit(true)
-                                                                    .WithGeneralLedgerAccount(internalOrganisationGlAccount)
-                                                                    .Build())
-                                        .Build());
+            //Assert.AreEqual(generalLedgerAccount1, journal.PreviousContraAccount);
 
-            journal.JournalType = new JournalTypes(this.DatabaseSession).Cash;
+            //journal.AddJournalEntry(new JournalEntryBuilder(this.DatabaseSession)
+            //                            .WithJournalEntryDetail(new JournalEntryDetailBuilder(this.DatabaseSession)
+            //                                                        .WithAmount(1)
+            //                                                        .WithDebit(true)
+            //                                                        .WithGeneralLedgerAccount(internalOrganisationGlAccount)
+            //                                                        .Build())
+            //                            .Build());
 
-            Assert.AreEqual("description.JournalType, description.PreviousJournalType are not equal", this.DatabaseSession.Derive().Errors[0].Message);
+            //journal.JournalType = new JournalTypes(this.DatabaseSession).Cash;
+
+            //Assert.AreEqual("description.JournalType, description.PreviousJournalType are not equal", this.DatabaseSession.Derive().Errors[0].Message);
         }
     }
 }

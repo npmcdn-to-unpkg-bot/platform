@@ -95,39 +95,43 @@ namespace Allors.Domain
         [Test]
         public void GivenPurchaseOrder_WhenDeriving_ThenDisplayNameIsSet()
         {
-            var supplier = new OrganisationBuilder(this.DatabaseSession).WithName("supplier").Build();
-            var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
-            new SupplierRelationshipBuilder(this.DatabaseSession).WithSupplier(supplier).WithInternalOrganisation(internalOrganisation).Build();
+            throw new Exception("TODO");
 
-            var order = new PurchaseOrderBuilder(this.DatabaseSession)
-                .WithOrderNumber("1")
-                .WithTakenViaSupplier(supplier)
-                .WithBillToPurchaser(internalOrganisation)
-                .Build();
+            //var supplier = new OrganisationBuilder(this.DatabaseSession).WithName("supplier").Build();
+            //var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
+            //new SupplierRelationshipBuilder(this.DatabaseSession).WithSupplier(supplier).WithInternalOrganisation(internalOrganisation).Build();
 
-            this.DatabaseSession.Derive(true);
+            //var order = new PurchaseOrderBuilder(this.DatabaseSession)
+            //    .WithOrderNumber("1")
+            //    .WithTakenViaSupplier(supplier)
+            //    .WithBillToPurchaser(internalOrganisation)
+            //    .Build();
 
-            Assert.AreEqual(string.Format("{0} - {1} from {2}", order.OrderNumber, order.OrderDate.Date, supplier.DisplayName), order.DisplayName);
+            //this.DatabaseSession.Derive(true);
+
+            //Assert.AreEqual(string.Format("{0} - {1} from {2}", order.OrderNumber, order.OrderDate.Date, supplier.DisplayName), order.DisplayName);
         }
 
         [Test]
         public void GivenPurchaseOrder_WhenDeriving_ThenTakenViaSupplierMustBeInSupplierRelationship()
         {
-            var supplier = new OrganisationBuilder(this.DatabaseSession).WithName("supplier").Build();
-            var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
+            throw new Exception("TODO");
 
-            new PurchaseOrderBuilder(this.DatabaseSession)
-                .WithOrderNumber("1")
-                .WithTakenViaSupplier(supplier)
-                .WithBillToPurchaser(internalOrganisation)
-                .Build();
+            //var supplier = new OrganisationBuilder(this.DatabaseSession).WithName("supplier").Build();
+            //var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
 
-            var expectedError = ErrorMessages.PartyIsNotASupplier;
-            Assert.AreEqual(expectedError, this.DatabaseSession.Derive().Errors[0].Message);
+            //new PurchaseOrderBuilder(this.DatabaseSession)
+            //    .WithOrderNumber("1")
+            //    .WithTakenViaSupplier(supplier)
+            //    .WithBillToPurchaser(internalOrganisation)
+            //    .Build();
 
-            new SupplierRelationshipBuilder(this.DatabaseSession).WithSupplier(supplier).WithInternalOrganisation(internalOrganisation).Build();
+            //var expectedError = ErrorMessages.PartyIsNotASupplier;
+            //Assert.AreEqual(expectedError, this.DatabaseSession.Derive().Errors[0].Message);
 
-            Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
+            //new SupplierRelationshipBuilder(this.DatabaseSession).WithSupplier(supplier).WithInternalOrganisation(internalOrganisation).Build();
+
+            //Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
 
         [Test]

@@ -411,25 +411,27 @@ namespace Allors.Domain
         [Test]
         public void GivenCustomerShipment_WhenObjectStateIsShipped_ThenCheckTransitions()
         {
-            var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
-            var shipToAddress = new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build();
+            throw new Exception("TODO");
 
-            Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity("orderProcessor", "Forms"), new string[0]);
+            //var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
+            //var shipToAddress = new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build();
 
-            var customer = new PersonBuilder(this.DatabaseSession).WithLastName("customer").Build();
-            var shipment = new CustomerShipmentBuilder(this.DatabaseSession)
-                .WithShipToParty(customer)
-                .WithShipToAddress(shipToAddress)
-                .WithCurrentObjectState(new CustomerShipmentObjectStates(this.DatabaseSession).Shipped)
-                .WithShipmentMethod(new ShipmentMethods(this.DatabaseSession).Ground)
-                .Build();
+            //Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity("orderProcessor", "Forms"), new string[0]);
 
-            this.DatabaseSession.Derive(true);
+            //var customer = new PersonBuilder(this.DatabaseSession).WithLastName("customer").Build();
+            //var shipment = new CustomerShipmentBuilder(this.DatabaseSession)
+            //    .WithShipToParty(customer)
+            //    .WithShipToAddress(shipToAddress)
+            //    .WithCurrentObjectState(new CustomerShipmentObjectStates(this.DatabaseSession).Shipped)
+            //    .WithShipmentMethod(new ShipmentMethods(this.DatabaseSession).Ground)
+            //    .Build();
 
-            var acl = new AccessControlList(shipment, new Users(this.DatabaseSession).GetCurrentUser());
-            Assert.AreEqual(new CustomerShipmentObjectStates(this.DatabaseSession).Shipped, shipment.CurrentObjectState);
-            Assert.IsFalse(acl.CanExecute(CustomerShipments.Meta.Cancel));
-            Assert.IsFalse(acl.CanWrite(CustomerShipments.Meta.HandlingInstruction));
+            //this.DatabaseSession.Derive(true);
+
+            //var acl = new AccessControlList(shipment, new Users(this.DatabaseSession).GetCurrentUser());
+            //Assert.AreEqual(new CustomerShipmentObjectStates(this.DatabaseSession).Shipped, shipment.CurrentObjectState);
+            //Assert.IsFalse(acl.CanExecute(CustomerShipments.Meta.Cancel));
+            //Assert.IsFalse(acl.CanWrite(CustomerShipments.Meta.HandlingInstruction));
         }
 
         [Test]
@@ -1153,46 +1155,48 @@ namespace Allors.Domain
         [Test]
         public void GivenCustomerShipment_WhenDeriving_ThenBillFromContactMechanismMustExist()
         {
-            var belgium = new Countries(this.DatabaseSession).CountryByIsoCode["BE"];
-            var euro = belgium.Currency;
+            throw new Exception("TODO");
 
-            var bank = new BankBuilder(this.DatabaseSession).WithCountry(belgium).WithName("ING België").WithBic("BBRUBEBB").Build();
+            //var belgium = new Countries(this.DatabaseSession).CountryByIsoCode["BE"];
+            //var euro = belgium.Currency;
 
-            var ownBankAccount = new OwnBankAccountBuilder(this.DatabaseSession)
-                .WithBankAccount(new BankAccountBuilder(this.DatabaseSession).WithBank(bank).WithCurrency(euro).WithIban("BE23 3300 6167 6391").WithNameOnAccount("Koen").Build())
-                .Build();
+            //var bank = new BankBuilder(this.DatabaseSession).WithCountry(belgium).WithName("ING België").WithBic("BBRUBEBB").Build();
 
-            var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
-            var customer = new PersonBuilder(this.DatabaseSession).WithLastName("customer").Build();
-            var address1 = new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build();
+            //var ownBankAccount = new OwnBankAccountBuilder(this.DatabaseSession)
+            //    .WithBankAccount(new BankAccountBuilder(this.DatabaseSession).WithBank(bank).WithCurrency(euro).WithIban("BE23 3300 6167 6391").WithNameOnAccount("Koen").Build())
+            //    .Build();
 
-            var billingAddress = new PartyContactMechanismBuilder(this.DatabaseSession)
-                .WithContactMechanism(address1)
-                .WithContactPurpose(new ContactMechanismPurposes(this.DatabaseSession).BillingAddress)
-                .WithUseAsDefault(true)
-                .Build();
+            //var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
+            //var customer = new PersonBuilder(this.DatabaseSession).WithLastName("customer").Build();
+            //var address1 = new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build();
 
-            var internalOrganisation = new InternalOrganisationBuilder(this.DatabaseSession)
-                .WithLocale(new Locales(this.DatabaseSession).EnglishGreatBritain)
-                .WithName("internalOrganisation")
-                .WithPreferredCurrency(euro)
-                .WithDefaultPaymentMethod(ownBankAccount)
-                .Build();
+            //var billingAddress = new PartyContactMechanismBuilder(this.DatabaseSession)
+            //    .WithContactMechanism(address1)
+            //    .WithContactPurpose(new ContactMechanismPurposes(this.DatabaseSession).BillingAddress)
+            //    .WithUseAsDefault(true)
+            //    .Build();
 
-            internalOrganisation.AddPartyContactMechanism(billingAddress);
+            //var internalOrganisation = new InternalOrganisationBuilder(this.DatabaseSession)
+            //    .WithLocale(new Locales(this.DatabaseSession).EnglishGreatBritain)
+            //    .WithName("internalOrganisation")
+            //    .WithPreferredCurrency(euro)
+            //    .WithDefaultPaymentMethod(ownBankAccount)
+            //    .Build();
 
-            this.DatabaseSession.Derive(true);
+            //internalOrganisation.AddPartyContactMechanism(billingAddress);
 
-            var shipment1 = new CustomerShipmentBuilder(this.DatabaseSession)
-                .WithShipToParty(customer)
-                .WithBillFromInternalOrganisation(internalOrganisation)
-                .WithShipToAddress(new PostalAddresses(this.DatabaseSession).Extent().First)
-                .WithShipmentMethod(new ShipmentMethods(this.DatabaseSession).Boat)
-                .Build();
+            //this.DatabaseSession.Derive(true);
 
-            this.DatabaseSession.Derive(true);
+            //var shipment1 = new CustomerShipmentBuilder(this.DatabaseSession)
+            //    .WithShipToParty(customer)
+            //    .WithBillFromInternalOrganisation(internalOrganisation)
+            //    .WithShipToAddress(new PostalAddresses(this.DatabaseSession).Extent().First)
+            //    .WithShipmentMethod(new ShipmentMethods(this.DatabaseSession).Boat)
+            //    .Build();
 
-            Assert.AreEqual(address1, shipment1.BillFromContactMechanism);
+            //this.DatabaseSession.Derive(true);
+
+            //Assert.AreEqual(address1, shipment1.BillFromContactMechanism);
         }
 
         [Test]

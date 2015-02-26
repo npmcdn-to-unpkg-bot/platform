@@ -1275,141 +1275,145 @@ namespace Allors.Domain
         [Test]
         public void GivenConfirmedOrder_WhenOrderIsRejected_ThenNonSerializedInventoryQuantitiesAreReleased()
         {
-            var billToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person1").Build();
-            var shipToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person2").Build();
-            var internalOrganisation = Singleton.Instance(this.DatabaseSession).DefaultInternalOrganisation;
+            throw new Exception("TODO");
 
-            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(billToCustomer).WithInternalOrganisation(internalOrganisation).Build();
-            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(shipToCustomer).WithInternalOrganisation(internalOrganisation).Build();
+            //var billToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person1").Build();
+            //var shipToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person2").Build();
+            //var internalOrganisation = Singleton.Instance(this.DatabaseSession).DefaultInternalOrganisation;
 
-            var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
-            var shipToContactMechanism = new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build();
+            //new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(billToCustomer).WithInternalOrganisation(internalOrganisation).Build();
+            //new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(shipToCustomer).WithInternalOrganisation(internalOrganisation).Build();
 
-            var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
-            var part1 = new FinishedGoodBuilder(this.DatabaseSession).WithName("part1").Build();
-            var part2 = new FinishedGoodBuilder(this.DatabaseSession).WithName("part2").Build();
+            //var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
+            //var shipToContactMechanism = new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build();
 
-            var good1 = new GoodBuilder(this.DatabaseSession)
-                .WithSku("10101")
-                .WithVatRate(vatRate21)
-                .WithName("good1")
-                .WithFinishedGood(part1)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .Build();
+            //var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
+            //var part1 = new FinishedGoodBuilder(this.DatabaseSession).WithName("part1").Build();
+            //var part2 = new FinishedGoodBuilder(this.DatabaseSession).WithName("part2").Build();
 
-            var good2 = new GoodBuilder(this.DatabaseSession)
-                .WithSku("10102")
-                .WithVatRate(vatRate21)
-                .WithName("good1")
-                .WithFinishedGood(part2)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .Build();
+            //var good1 = new GoodBuilder(this.DatabaseSession)
+            //    .WithSku("10101")
+            //    .WithVatRate(vatRate21)
+            //    .WithName("good1")
+            //    .WithFinishedGood(part1)
+            //    .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
+            //    .Build();
 
-            var order = new SalesOrderBuilder(this.DatabaseSession)
-                .WithOrderNumber("1")
-                .WithBillToCustomer(billToCustomer)
-                .WithShipToCustomer(shipToCustomer)
-                .WithShipToAddress(shipToContactMechanism)
-                .Build();
+            //var good2 = new GoodBuilder(this.DatabaseSession)
+            //    .WithSku("10102")
+            //    .WithVatRate(vatRate21)
+            //    .WithName("good1")
+            //    .WithFinishedGood(part2)
+            //    .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
+            //    .Build();
 
-            var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good1).WithQuantityOrdered(1).WithActualUnitPrice(15).Build();
-            var item2 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good1).WithQuantityOrdered(2).WithActualUnitPrice(15).Build();
-            var item3 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good2).WithQuantityOrdered(3).WithActualUnitPrice(15).Build();
-            var item4 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good2).WithQuantityOrdered(4).WithActualUnitPrice(15).Build();
-            order.AddSalesOrderItem(item1);
-            order.AddSalesOrderItem(item2);
-            order.AddSalesOrderItem(item3);
-            order.AddSalesOrderItem(item4);
+            //var order = new SalesOrderBuilder(this.DatabaseSession)
+            //    .WithOrderNumber("1")
+            //    .WithBillToCustomer(billToCustomer)
+            //    .WithShipToCustomer(shipToCustomer)
+            //    .WithShipToAddress(shipToContactMechanism)
+            //    .Build();
 
-            this.DatabaseSession.Derive(true);
+            //var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good1).WithQuantityOrdered(1).WithActualUnitPrice(15).Build();
+            //var item2 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good1).WithQuantityOrdered(2).WithActualUnitPrice(15).Build();
+            //var item3 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good2).WithQuantityOrdered(3).WithActualUnitPrice(15).Build();
+            //var item4 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good2).WithQuantityOrdered(4).WithActualUnitPrice(15).Build();
+            //order.AddSalesOrderItem(item1);
+            //order.AddSalesOrderItem(item2);
+            //order.AddSalesOrderItem(item3);
+            //order.AddSalesOrderItem(item4);
 
-            order.Confirm();
+            //this.DatabaseSession.Derive(true);
 
-            this.DatabaseSession.Derive(true);
+            //order.Confirm();
 
-            Assert.AreEqual(3, item1.ReservedFromInventoryItem.QuantityCommittedOut);
-            Assert.AreEqual(0, item1.ReservedFromInventoryItem.AvailableToPromise);
-            Assert.AreEqual(7, item3.ReservedFromInventoryItem.QuantityCommittedOut);
-            Assert.AreEqual(0, item3.ReservedFromInventoryItem.AvailableToPromise);
+            //this.DatabaseSession.Derive(true);
 
-            order.Reject();
+            //Assert.AreEqual(3, item1.ReservedFromInventoryItem.QuantityCommittedOut);
+            //Assert.AreEqual(0, item1.ReservedFromInventoryItem.AvailableToPromise);
+            //Assert.AreEqual(7, item3.ReservedFromInventoryItem.QuantityCommittedOut);
+            //Assert.AreEqual(0, item3.ReservedFromInventoryItem.AvailableToPromise);
 
-            this.DatabaseSession.Derive(true);
+            //order.Reject();
 
-            Assert.AreEqual(0, item1.ReservedFromInventoryItem.QuantityCommittedOut);
-            Assert.AreEqual(0, item1.ReservedFromInventoryItem.AvailableToPromise);
-            Assert.AreEqual(0, item3.ReservedFromInventoryItem.QuantityCommittedOut);
-            Assert.AreEqual(0, item3.ReservedFromInventoryItem.AvailableToPromise);
+            //this.DatabaseSession.Derive(true);
+
+            //Assert.AreEqual(0, item1.ReservedFromInventoryItem.QuantityCommittedOut);
+            //Assert.AreEqual(0, item1.ReservedFromInventoryItem.AvailableToPromise);
+            //Assert.AreEqual(0, item3.ReservedFromInventoryItem.QuantityCommittedOut);
+            //Assert.AreEqual(0, item3.ReservedFromInventoryItem.AvailableToPromise);
         }
 
         [Test]
         public void GivenConfirmedOrder_WhenOrderIsCancelled_ThenNonSerializedInventoryQuantitiesAreReleased()
         {
-            var billToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person1").Build();
-            var shipToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person2").Build();
-            var internalOrganisation = Singleton.Instance(this.DatabaseSession).DefaultInternalOrganisation;
+            throw new Exception("TODO");
 
-            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(billToCustomer).WithInternalOrganisation(internalOrganisation).Build();
-            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(shipToCustomer).WithInternalOrganisation(internalOrganisation).Build();
+            //var billToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person1").Build();
+            //var shipToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person2").Build();
+            //var internalOrganisation = Singleton.Instance(this.DatabaseSession).DefaultInternalOrganisation;
 
-            var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
-            var shipToContactMechanism = new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build();
+            //new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(billToCustomer).WithInternalOrganisation(internalOrganisation).Build();
+            //new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(shipToCustomer).WithInternalOrganisation(internalOrganisation).Build();
 
-            var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
-            var part1 = new FinishedGoodBuilder(this.DatabaseSession).WithName("part1").Build();
-            var part2 = new FinishedGoodBuilder(this.DatabaseSession).WithName("part2").Build();
+            //var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
+            //var shipToContactMechanism = new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build();
 
-            var good1 = new GoodBuilder(this.DatabaseSession)
-                .WithSku("10101")
-                .WithVatRate(vatRate21)
-                .WithName("good1")
-                .WithFinishedGood(part1)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .Build();
+            //var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
+            //var part1 = new FinishedGoodBuilder(this.DatabaseSession).WithName("part1").Build();
+            //var part2 = new FinishedGoodBuilder(this.DatabaseSession).WithName("part2").Build();
 
-            var good2 = new GoodBuilder(this.DatabaseSession)
-                .WithSku("10102")
-                .WithVatRate(vatRate21)
-                .WithName("good1")
-                .WithFinishedGood(part2)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .Build();
+            //var good1 = new GoodBuilder(this.DatabaseSession)
+            //    .WithSku("10101")
+            //    .WithVatRate(vatRate21)
+            //    .WithName("good1")
+            //    .WithFinishedGood(part1)
+            //    .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
+            //    .Build();
 
-            var order = new SalesOrderBuilder(this.DatabaseSession)
-                .WithOrderNumber("1")
-                .WithBillToCustomer(billToCustomer)
-                .WithShipToCustomer(shipToCustomer)
-                .WithShipToAddress(shipToContactMechanism)
-                .Build();
+            //var good2 = new GoodBuilder(this.DatabaseSession)
+            //    .WithSku("10102")
+            //    .WithVatRate(vatRate21)
+            //    .WithName("good1")
+            //    .WithFinishedGood(part2)
+            //    .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
+            //    .Build();
 
-            var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good1).WithQuantityOrdered(1).WithActualUnitPrice(15).Build();
-            var item2 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good1).WithQuantityOrdered(2).WithActualUnitPrice(15).Build();
-            var item3 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good2).WithQuantityOrdered(3).WithActualUnitPrice(15).Build();
-            var item4 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good2).WithQuantityOrdered(4).WithActualUnitPrice(15).Build();
-            order.AddSalesOrderItem(item1);
-            order.AddSalesOrderItem(item2);
-            order.AddSalesOrderItem(item3);
-            order.AddSalesOrderItem(item4);
+            //var order = new SalesOrderBuilder(this.DatabaseSession)
+            //    .WithOrderNumber("1")
+            //    .WithBillToCustomer(billToCustomer)
+            //    .WithShipToCustomer(shipToCustomer)
+            //    .WithShipToAddress(shipToContactMechanism)
+            //    .Build();
 
-            this.DatabaseSession.Derive(true);
+            //var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good1).WithQuantityOrdered(1).WithActualUnitPrice(15).Build();
+            //var item2 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good1).WithQuantityOrdered(2).WithActualUnitPrice(15).Build();
+            //var item3 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good2).WithQuantityOrdered(3).WithActualUnitPrice(15).Build();
+            //var item4 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good2).WithQuantityOrdered(4).WithActualUnitPrice(15).Build();
+            //order.AddSalesOrderItem(item1);
+            //order.AddSalesOrderItem(item2);
+            //order.AddSalesOrderItem(item3);
+            //order.AddSalesOrderItem(item4);
 
-            order.Confirm();
+            //this.DatabaseSession.Derive(true);
 
-            this.DatabaseSession.Derive(true);
+            //order.Confirm();
 
-            Assert.AreEqual(3, item1.ReservedFromInventoryItem.QuantityCommittedOut);
-            Assert.AreEqual(0, item1.ReservedFromInventoryItem.AvailableToPromise);
-            Assert.AreEqual(7, item3.ReservedFromInventoryItem.QuantityCommittedOut);
-            Assert.AreEqual(0, item3.ReservedFromInventoryItem.AvailableToPromise);
+            //this.DatabaseSession.Derive(true);
 
-            order.Cancel().Execute();
+            //Assert.AreEqual(3, item1.ReservedFromInventoryItem.QuantityCommittedOut);
+            //Assert.AreEqual(0, item1.ReservedFromInventoryItem.AvailableToPromise);
+            //Assert.AreEqual(7, item3.ReservedFromInventoryItem.QuantityCommittedOut);
+            //Assert.AreEqual(0, item3.ReservedFromInventoryItem.AvailableToPromise);
 
-            this.DatabaseSession.Derive(true);
+            //order.Cancel().Execute();
 
-            Assert.AreEqual(0, item1.ReservedFromInventoryItem.QuantityCommittedOut);
-            Assert.AreEqual(0, item1.ReservedFromInventoryItem.AvailableToPromise);
-            Assert.AreEqual(0, item3.ReservedFromInventoryItem.QuantityCommittedOut);
-            Assert.AreEqual(0, item3.ReservedFromInventoryItem.AvailableToPromise);
+            //this.DatabaseSession.Derive(true);
+
+            //Assert.AreEqual(0, item1.ReservedFromInventoryItem.QuantityCommittedOut);
+            //Assert.AreEqual(0, item1.ReservedFromInventoryItem.AvailableToPromise);
+            //Assert.AreEqual(0, item3.ReservedFromInventoryItem.QuantityCommittedOut);
+            //Assert.AreEqual(0, item3.ReservedFromInventoryItem.AvailableToPromise);
         }
 
         [Test]
@@ -1550,64 +1554,66 @@ namespace Allors.Domain
         [Test]
         public void GivenSalesOrderWithCancelledItem_WhenDeriving_ThenCancelledItemIsNotInValidOrderItems()
         {
-            var billToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person1").Build();
-            var shipToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person2").Build();
-            var internalOrganisation = Singleton.Instance(this.DatabaseSession).DefaultInternalOrganisation;
+            throw new Exception("TODO");
 
-            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(billToCustomer).WithInternalOrganisation(internalOrganisation).Build();
-            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(shipToCustomer).WithInternalOrganisation(internalOrganisation).Build();
+            //var billToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person1").Build();
+            //var shipToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person2").Build();
+            //var internalOrganisation = Singleton.Instance(this.DatabaseSession).DefaultInternalOrganisation;
 
-            var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
-            var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
-            var part1 = new FinishedGoodBuilder(this.DatabaseSession).WithName("part1").Build();
-            var part2 = new FinishedGoodBuilder(this.DatabaseSession).WithName("part2").Build();
+            //new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(billToCustomer).WithInternalOrganisation(internalOrganisation).Build();
+            //new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(shipToCustomer).WithInternalOrganisation(internalOrganisation).Build();
 
-            var good1 = new GoodBuilder(this.DatabaseSession)
-                .WithSku("10101")
-                .WithVatRate(vatRate21)
-                .WithName("good1")
-                .WithFinishedGood(part1)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .Build();
+            //var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
+            //var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
+            //var part1 = new FinishedGoodBuilder(this.DatabaseSession).WithName("part1").Build();
+            //var part2 = new FinishedGoodBuilder(this.DatabaseSession).WithName("part2").Build();
 
-            var good2 = new GoodBuilder(this.DatabaseSession)
-                .WithSku("10102")
-                .WithVatRate(vatRate21)
-                .WithName("good1")
-                .WithFinishedGood(part2)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .Build();
+            //var good1 = new GoodBuilder(this.DatabaseSession)
+            //    .WithSku("10101")
+            //    .WithVatRate(vatRate21)
+            //    .WithName("good1")
+            //    .WithFinishedGood(part1)
+            //    .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
+            //    .Build();
 
-            var order = new SalesOrderBuilder(this.DatabaseSession)
-                .WithOrderNumber("1")
-                .WithBillToCustomer(billToCustomer)
-                .WithShipToCustomer(shipToCustomer)
-                .WithShipToAddress(new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build())
-                .Build();
+            //var good2 = new GoodBuilder(this.DatabaseSession)
+            //    .WithSku("10102")
+            //    .WithVatRate(vatRate21)
+            //    .WithName("good1")
+            //    .WithFinishedGood(part2)
+            //    .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
+            //    .Build();
 
-            var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good1).WithQuantityOrdered(3).WithActualUnitPrice(15).Build();
-            var item2 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good1).WithQuantityOrdered(3).WithActualUnitPrice(15).Build();
-            var item3 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good2).WithQuantityOrdered(3).WithActualUnitPrice(15).Build();
-            var item4 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good2).WithQuantityOrdered(3).WithActualUnitPrice(15).Build();
-            order.AddSalesOrderItem(item1);
-            order.AddSalesOrderItem(item2);
-            order.AddSalesOrderItem(item3);
-            order.AddSalesOrderItem(item4);
+            //var order = new SalesOrderBuilder(this.DatabaseSession)
+            //    .WithOrderNumber("1")
+            //    .WithBillToCustomer(billToCustomer)
+            //    .WithShipToCustomer(shipToCustomer)
+            //    .WithShipToAddress(new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build())
+            //    .Build();
 
-            this.DatabaseSession.Derive(true);
+            //var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good1).WithQuantityOrdered(3).WithActualUnitPrice(15).Build();
+            //var item2 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good1).WithQuantityOrdered(3).WithActualUnitPrice(15).Build();
+            //var item3 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good2).WithQuantityOrdered(3).WithActualUnitPrice(15).Build();
+            //var item4 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good2).WithQuantityOrdered(3).WithActualUnitPrice(15).Build();
+            //order.AddSalesOrderItem(item1);
+            //order.AddSalesOrderItem(item2);
+            //order.AddSalesOrderItem(item3);
+            //order.AddSalesOrderItem(item4);
 
-            item4.Cancel();
+            //this.DatabaseSession.Derive(true);
 
-            this.DatabaseSession.Derive(true);
+            //item4.Cancel();
 
-            order.Confirm();
+            //this.DatabaseSession.Derive(true);
 
-            this.DatabaseSession.Derive(true);
+            //order.Confirm();
 
-            Assert.AreEqual(3, order.ValidOrderItems.Count);
-            Assert.Contains(item1, order.ValidOrderItems);
-            Assert.Contains(item2, order.ValidOrderItems);
-            Assert.Contains(item3, order.ValidOrderItems);
+            //this.DatabaseSession.Derive(true);
+
+            //Assert.AreEqual(3, order.ValidOrderItems.Count);
+            //Assert.Contains(item1, order.ValidOrderItems);
+            //Assert.Contains(item2, order.ValidOrderItems);
+            //Assert.Contains(item3, order.ValidOrderItems);
         }
 
         [Test]
@@ -1621,25 +1627,27 @@ namespace Allors.Domain
         [Test]
         public void GivenSalesOrderItem_WhenDeriving_ThenDisplayNameAndSearchTextAreSet()
         {
-            var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
-            var billToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person1").Build();
-            var shipToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person2").Build();
-            var internalOrganisation = Singleton.Instance(this.DatabaseSession).DefaultInternalOrganisation;
+            throw new Exception("TODO");
 
-            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(billToCustomer).WithInternalOrganisation(internalOrganisation).Build();
-            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(shipToCustomer).WithInternalOrganisation(internalOrganisation).Build();
+            //var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
+            //var billToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person1").Build();
+            //var shipToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person2").Build();
+            //var internalOrganisation = Singleton.Instance(this.DatabaseSession).DefaultInternalOrganisation;
 
-            var order = new SalesOrderBuilder(this.DatabaseSession)
-                .WithOrderNumber("1")
-                .WithBillToCustomer(billToCustomer)
-                .WithShipToCustomer(shipToCustomer)
-                .WithShipToAddress(new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build())
-                .WithTakenByInternalOrganisation(internalOrganisation)
-                .Build();
+            //new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(billToCustomer).WithInternalOrganisation(internalOrganisation).Build();
+            //new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(shipToCustomer).WithInternalOrganisation(internalOrganisation).Build();
 
-            this.DatabaseSession.Derive(true);
+            //var order = new SalesOrderBuilder(this.DatabaseSession)
+            //    .WithOrderNumber("1")
+            //    .WithBillToCustomer(billToCustomer)
+            //    .WithShipToCustomer(shipToCustomer)
+            //    .WithShipToAddress(new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build())
+            //    .WithTakenByInternalOrganisation(internalOrganisation)
+            //    .Build();
 
-            Assert.AreEqual(string.Format("{0} - {1} to {2}", order.OrderNumber, order.OrderDate.Date, shipToCustomer.DisplayName), order.DisplayName);
+            //this.DatabaseSession.Derive(true);
+
+            //Assert.AreEqual(string.Format("{0} - {1} to {2}", order.OrderNumber, order.OrderDate.Date, shipToCustomer.DisplayName), order.DisplayName);
         }
 
         [Test]
@@ -2549,503 +2557,519 @@ namespace Allors.Domain
         [Test]
         public void GivenSalesOrderWithShippingAndHandlingAmount_WhenDeriving_ThenOrderTotalsMustIncludeShippingAndHandlingAmount()
         {
-            var billToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person1").Build();
-            var shipToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person2").Build();
-            var internalOrganisation = Singleton.Instance(this.DatabaseSession).DefaultInternalOrganisation;
+            throw new Exception("TODO");
 
-            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(billToCustomer).WithInternalOrganisation(internalOrganisation).Build();
-            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(shipToCustomer).WithInternalOrganisation(internalOrganisation).Build();
+            //var billToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person1").Build();
+            //var shipToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person2").Build();
+            //var internalOrganisation = Singleton.Instance(this.DatabaseSession).DefaultInternalOrganisation;
 
-            var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
-            var euro = new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR");
-            var supplier = new OrganisationBuilder(this.DatabaseSession).WithName("supplier").Build();
-            var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
-            var adjustment = new ShippingAndHandlingChargeBuilder(this.DatabaseSession).WithAmount(7.5M).WithVatRate(vatRate21).Build();
+            //new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(billToCustomer).WithInternalOrganisation(internalOrganisation).Build();
+            //new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(shipToCustomer).WithInternalOrganisation(internalOrganisation).Build();
 
-            var good = new GoodBuilder(this.DatabaseSession)
-                .WithSku("10101")
-                .WithVatRate(vatRate21)
-                .WithName("good")
-                .WithInventoryItemKind(new InventoryItemKinds(this.DatabaseSession).NonSerialized)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .Build();
+            //var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
+            //var euro = new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR");
+            //var supplier = new OrganisationBuilder(this.DatabaseSession).WithName("supplier").Build();
+            //var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
+            //var adjustment = new ShippingAndHandlingChargeBuilder(this.DatabaseSession).WithAmount(7.5M).WithVatRate(vatRate21).Build();
 
-            var goodPurchasePrice = new ProductPurchasePriceBuilder(this.DatabaseSession)
-                .WithCurrency(euro)
-                .WithFromDate(DateTime.Now)
-                .WithPrice(7)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .Build();
+            //var good = new GoodBuilder(this.DatabaseSession)
+            //    .WithSku("10101")
+            //    .WithVatRate(vatRate21)
+            //    .WithName("good")
+            //    .WithInventoryItemKind(new InventoryItemKinds(this.DatabaseSession).NonSerialized)
+            //    .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
+            //    .Build();
 
-            new SupplierOfferingBuilder(this.DatabaseSession)
-                .WithProduct(good)
-                .WithSupplier(supplier)
-                .WithFromDate(DateTime.Now)
-                .WithProductPurchasePrice(goodPurchasePrice)
-                .Build();
+            //var goodPurchasePrice = new ProductPurchasePriceBuilder(this.DatabaseSession)
+            //    .WithCurrency(euro)
+            //    .WithFromDate(DateTime.Now)
+            //    .WithPrice(7)
+            //    .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
+            //    .Build();
 
-            var order = new SalesOrderBuilder(this.DatabaseSession)
-                .WithOrderNumber("1")
-                .WithBillToCustomer(billToCustomer)
-                .WithShipToCustomer(shipToCustomer)
-                .WithShipToAddress(new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build())
-                .WithShippingAndHandlingCharge(adjustment)
-                .Build();
+            //new SupplierOfferingBuilder(this.DatabaseSession)
+            //    .WithProduct(good)
+            //    .WithSupplier(supplier)
+            //    .WithFromDate(DateTime.Now)
+            //    .WithProductPurchasePrice(goodPurchasePrice)
+            //    .Build();
 
-            const decimal QuantityOrdered = 3;
-            var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good).WithQuantityOrdered(QuantityOrdered).WithActualUnitPrice(15).Build();
-            order.AddSalesOrderItem(item1);
+            //var order = new SalesOrderBuilder(this.DatabaseSession)
+            //    .WithOrderNumber("1")
+            //    .WithBillToCustomer(billToCustomer)
+            //    .WithShipToCustomer(shipToCustomer)
+            //    .WithShipToAddress(new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build())
+            //    .WithShippingAndHandlingCharge(adjustment)
+            //    .Build();
 
-            this.DatabaseSession.Derive(true);
+            //const decimal QuantityOrdered = 3;
+            //var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good).WithQuantityOrdered(QuantityOrdered).WithActualUnitPrice(15).Build();
+            //order.AddSalesOrderItem(item1);
 
-            Assert.AreEqual(45, order.TotalBasePrice);
-            Assert.AreEqual(0, order.TotalDiscount);
-            Assert.AreEqual(0, order.TotalSurcharge);
-            Assert.AreEqual(7.5, order.TotalShippingAndHandling);
-            Assert.AreEqual(0, order.TotalFee);
-            Assert.AreEqual(52.5, order.TotalExVat);
-            Assert.AreEqual(11.03, order.TotalVat);
-            Assert.AreEqual(63.53, order.TotalIncVat);
-            Assert.AreEqual(goodPurchasePrice.Price, order.TotalPurchasePrice);
+            //this.DatabaseSession.Derive(true);
+
+            //Assert.AreEqual(45, order.TotalBasePrice);
+            //Assert.AreEqual(0, order.TotalDiscount);
+            //Assert.AreEqual(0, order.TotalSurcharge);
+            //Assert.AreEqual(7.5, order.TotalShippingAndHandling);
+            //Assert.AreEqual(0, order.TotalFee);
+            //Assert.AreEqual(52.5, order.TotalExVat);
+            //Assert.AreEqual(11.03, order.TotalVat);
+            //Assert.AreEqual(63.53, order.TotalIncVat);
+            //Assert.AreEqual(goodPurchasePrice.Price, order.TotalPurchasePrice);
         }
 
         [Test]
         public void GivenSalesOrderWithShippingAndHandlingPercentage_WhenDeriving_ThenOrderTotalsMustIncludeShippingAndHandlingAmount()
         {
-            var billToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person1").Build();
-            var shipToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person2").Build();
-            var internalOrganisation = Singleton.Instance(this.DatabaseSession).DefaultInternalOrganisation;
+            throw new Exception("TODO");
 
-            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(billToCustomer).WithInternalOrganisation(internalOrganisation).Build();
-            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(shipToCustomer).WithInternalOrganisation(internalOrganisation).Build();
+            //var billToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person1").Build();
+            //var shipToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person2").Build();
+            //var internalOrganisation = Singleton.Instance(this.DatabaseSession).DefaultInternalOrganisation;
 
-            var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
-            var euro = new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR");
-            var supplier = new OrganisationBuilder(this.DatabaseSession).WithName("supplier").Build();
-            var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
-            var adjustment = new ShippingAndHandlingChargeBuilder(this.DatabaseSession).WithPercentage(5).WithVatRate(vatRate21).Build();
+            //new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(billToCustomer).WithInternalOrganisation(internalOrganisation).Build();
+            //new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(shipToCustomer).WithInternalOrganisation(internalOrganisation).Build();
 
-            var good = new GoodBuilder(this.DatabaseSession)
-                .WithSku("10101")
-                .WithVatRate(vatRate21)
-                .WithName("good")
-                .WithInventoryItemKind(new InventoryItemKinds(this.DatabaseSession).NonSerialized)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .Build();
+            //var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
+            //var euro = new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR");
+            //var supplier = new OrganisationBuilder(this.DatabaseSession).WithName("supplier").Build();
+            //var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
+            //var adjustment = new ShippingAndHandlingChargeBuilder(this.DatabaseSession).WithPercentage(5).WithVatRate(vatRate21).Build();
 
-            var goodPurchasePrice = new ProductPurchasePriceBuilder(this.DatabaseSession)
-                .WithCurrency(euro)
-                .WithFromDate(DateTime.Now)
-                .WithPrice(7)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .Build();
+            //var good = new GoodBuilder(this.DatabaseSession)
+            //    .WithSku("10101")
+            //    .WithVatRate(vatRate21)
+            //    .WithName("good")
+            //    .WithInventoryItemKind(new InventoryItemKinds(this.DatabaseSession).NonSerialized)
+            //    .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
+            //    .Build();
 
-            new SupplierOfferingBuilder(this.DatabaseSession)
-                .WithProduct(good)
-                .WithSupplier(supplier)
-                .WithFromDate(DateTime.Now)
-                .WithProductPurchasePrice(goodPurchasePrice)
-                .Build();
+            //var goodPurchasePrice = new ProductPurchasePriceBuilder(this.DatabaseSession)
+            //    .WithCurrency(euro)
+            //    .WithFromDate(DateTime.Now)
+            //    .WithPrice(7)
+            //    .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
+            //    .Build();
 
-            var order = new SalesOrderBuilder(this.DatabaseSession)
-                .WithOrderNumber("1")
-                .WithBillToCustomer(billToCustomer)
-                .WithShipToCustomer(shipToCustomer)
-                .WithShipToAddress(new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build())
-                .WithShippingAndHandlingCharge(adjustment)
-                .Build();
+            //new SupplierOfferingBuilder(this.DatabaseSession)
+            //    .WithProduct(good)
+            //    .WithSupplier(supplier)
+            //    .WithFromDate(DateTime.Now)
+            //    .WithProductPurchasePrice(goodPurchasePrice)
+            //    .Build();
 
-            const decimal QuantityOrdered = 3;
-            var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good).WithQuantityOrdered(QuantityOrdered).WithActualUnitPrice(15).Build();
-            order.AddSalesOrderItem(item1);
+            //var order = new SalesOrderBuilder(this.DatabaseSession)
+            //    .WithOrderNumber("1")
+            //    .WithBillToCustomer(billToCustomer)
+            //    .WithShipToCustomer(shipToCustomer)
+            //    .WithShipToAddress(new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build())
+            //    .WithShippingAndHandlingCharge(adjustment)
+            //    .Build();
 
-            this.DatabaseSession.Derive(true);
+            //const decimal QuantityOrdered = 3;
+            //var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good).WithQuantityOrdered(QuantityOrdered).WithActualUnitPrice(15).Build();
+            //order.AddSalesOrderItem(item1);
 
-            Assert.AreEqual(45, order.TotalBasePrice);
-            Assert.AreEqual(0, order.TotalDiscount);
-            Assert.AreEqual(0, order.TotalSurcharge);
-            Assert.AreEqual(2.25, order.TotalShippingAndHandling);
-            Assert.AreEqual(0, order.TotalFee);
-            Assert.AreEqual(47.25, order.TotalExVat);
-            Assert.AreEqual(9.92, order.TotalVat);
-            Assert.AreEqual(57.17, order.TotalIncVat);
-            Assert.AreEqual(goodPurchasePrice.Price, order.TotalPurchasePrice);
+            //this.DatabaseSession.Derive(true);
+
+            //Assert.AreEqual(45, order.TotalBasePrice);
+            //Assert.AreEqual(0, order.TotalDiscount);
+            //Assert.AreEqual(0, order.TotalSurcharge);
+            //Assert.AreEqual(2.25, order.TotalShippingAndHandling);
+            //Assert.AreEqual(0, order.TotalFee);
+            //Assert.AreEqual(47.25, order.TotalExVat);
+            //Assert.AreEqual(9.92, order.TotalVat);
+            //Assert.AreEqual(57.17, order.TotalIncVat);
+            //Assert.AreEqual(goodPurchasePrice.Price, order.TotalPurchasePrice);
         }
 
         [Test]
         public void GivenSalesOrderWithFeeAmount_WhenDeriving_ThenOrderTotalsMustIncludeFeeAmount()
         {
-            var billToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person1").Build();
-            var shipToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person2").Build();
-            var internalOrganisation = Singleton.Instance(this.DatabaseSession).DefaultInternalOrganisation;
+            throw new Exception("TODO");
 
-            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(billToCustomer).WithInternalOrganisation(internalOrganisation).Build();
-            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(shipToCustomer).WithInternalOrganisation(internalOrganisation).Build();
+            //var billToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person1").Build();
+            //var shipToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person2").Build();
+            //var internalOrganisation = Singleton.Instance(this.DatabaseSession).DefaultInternalOrganisation;
 
-            var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
-            var euro = new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR");
-            var supplier = new OrganisationBuilder(this.DatabaseSession).WithName("supplier").Build();
-            var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
-            var adjustment = new FeeBuilder(this.DatabaseSession).WithAmount(7.5M).WithVatRate(vatRate21).Build();
+            //new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(billToCustomer).WithInternalOrganisation(internalOrganisation).Build();
+            //new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(shipToCustomer).WithInternalOrganisation(internalOrganisation).Build();
 
-            var good = new GoodBuilder(this.DatabaseSession)
-                .WithSku("10101")
-                .WithVatRate(vatRate21)
-                .WithName("good")
-                .WithInventoryItemKind(new InventoryItemKinds(this.DatabaseSession).NonSerialized)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .Build();
+            //var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
+            //var euro = new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR");
+            //var supplier = new OrganisationBuilder(this.DatabaseSession).WithName("supplier").Build();
+            //var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
+            //var adjustment = new FeeBuilder(this.DatabaseSession).WithAmount(7.5M).WithVatRate(vatRate21).Build();
 
-            var goodPurchasePrice = new ProductPurchasePriceBuilder(this.DatabaseSession)
-                .WithCurrency(euro)
-                .WithFromDate(DateTime.Now)
-                .WithPrice(7)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .Build();
+            //var good = new GoodBuilder(this.DatabaseSession)
+            //    .WithSku("10101")
+            //    .WithVatRate(vatRate21)
+            //    .WithName("good")
+            //    .WithInventoryItemKind(new InventoryItemKinds(this.DatabaseSession).NonSerialized)
+            //    .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
+            //    .Build();
 
-            new SupplierOfferingBuilder(this.DatabaseSession)
-                .WithProduct(good)
-                .WithSupplier(supplier)
-                .WithFromDate(DateTime.Now)
-                .WithProductPurchasePrice(goodPurchasePrice)
-                .Build();
+            //var goodPurchasePrice = new ProductPurchasePriceBuilder(this.DatabaseSession)
+            //    .WithCurrency(euro)
+            //    .WithFromDate(DateTime.Now)
+            //    .WithPrice(7)
+            //    .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
+            //    .Build();
 
-            var order = new SalesOrderBuilder(this.DatabaseSession)
-                .WithOrderNumber("1")
-                .WithBillToCustomer(billToCustomer)
-                .WithShipToCustomer(shipToCustomer)
-                .WithShipToAddress(new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build())
-                .WithFee(adjustment)
-                .Build();
+            //new SupplierOfferingBuilder(this.DatabaseSession)
+            //    .WithProduct(good)
+            //    .WithSupplier(supplier)
+            //    .WithFromDate(DateTime.Now)
+            //    .WithProductPurchasePrice(goodPurchasePrice)
+            //    .Build();
 
-            const decimal QuantityOrdered = 3;
-            var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good).WithQuantityOrdered(QuantityOrdered).WithActualUnitPrice(15).Build();
-            order.AddSalesOrderItem(item1);
+            //var order = new SalesOrderBuilder(this.DatabaseSession)
+            //    .WithOrderNumber("1")
+            //    .WithBillToCustomer(billToCustomer)
+            //    .WithShipToCustomer(shipToCustomer)
+            //    .WithShipToAddress(new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build())
+            //    .WithFee(adjustment)
+            //    .Build();
+
+            //const decimal QuantityOrdered = 3;
+            //var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good).WithQuantityOrdered(QuantityOrdered).WithActualUnitPrice(15).Build();
+            //order.AddSalesOrderItem(item1);
             
-            this.DatabaseSession.Derive(true);
+            //this.DatabaseSession.Derive(true);
 
-            Assert.AreEqual(45, order.TotalBasePrice);
-            Assert.AreEqual(0, order.TotalDiscount);
-            Assert.AreEqual(0, order.TotalSurcharge);
-            Assert.AreEqual(0, order.TotalShippingAndHandling);
-            Assert.AreEqual(7.5, order.TotalFee);
-            Assert.AreEqual(52.5, order.TotalExVat);
-            Assert.AreEqual(11.03, order.TotalVat);
-            Assert.AreEqual(63.53, order.TotalIncVat);
-            Assert.AreEqual(goodPurchasePrice.Price, order.TotalPurchasePrice);
+            //Assert.AreEqual(45, order.TotalBasePrice);
+            //Assert.AreEqual(0, order.TotalDiscount);
+            //Assert.AreEqual(0, order.TotalSurcharge);
+            //Assert.AreEqual(0, order.TotalShippingAndHandling);
+            //Assert.AreEqual(7.5, order.TotalFee);
+            //Assert.AreEqual(52.5, order.TotalExVat);
+            //Assert.AreEqual(11.03, order.TotalVat);
+            //Assert.AreEqual(63.53, order.TotalIncVat);
+            //Assert.AreEqual(goodPurchasePrice.Price, order.TotalPurchasePrice);
         }
 
         [Test]
         public void GivenSalesOrderWithFeePercentage_WhenDeriving_ThenOrderTotalsMustIncludeFeeAmount()
         {
-            var billToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person1").Build();
-            var shipToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person2").Build();
-            var internalOrganisation = Singleton.Instance(this.DatabaseSession).DefaultInternalOrganisation;
+            throw new Exception("TODO");
 
-            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(billToCustomer).WithInternalOrganisation(internalOrganisation).Build();
-            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(shipToCustomer).WithInternalOrganisation(internalOrganisation).Build();
+            //var billToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person1").Build();
+            //var shipToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person2").Build();
+            //var internalOrganisation = Singleton.Instance(this.DatabaseSession).DefaultInternalOrganisation;
 
-            var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
-            var euro = new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR");
-            var supplier = new OrganisationBuilder(this.DatabaseSession).WithName("supplier").Build();
-            var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
-            var adjustment = new FeeBuilder(this.DatabaseSession).WithPercentage(5).WithVatRate(vatRate21).Build();
+            //new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(billToCustomer).WithInternalOrganisation(internalOrganisation).Build();
+            //new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(shipToCustomer).WithInternalOrganisation(internalOrganisation).Build();
 
-            var good = new GoodBuilder(this.DatabaseSession)
-                .WithSku("10101")
-                .WithVatRate(vatRate21)
-                .WithName("good")
-                .WithInventoryItemKind(new InventoryItemKinds(this.DatabaseSession).NonSerialized)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .Build();
+            //var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
+            //var euro = new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR");
+            //var supplier = new OrganisationBuilder(this.DatabaseSession).WithName("supplier").Build();
+            //var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
+            //var adjustment = new FeeBuilder(this.DatabaseSession).WithPercentage(5).WithVatRate(vatRate21).Build();
 
-            var goodPurchasePrice = new ProductPurchasePriceBuilder(this.DatabaseSession)
-                .WithCurrency(euro)
-                .WithFromDate(DateTime.Now)
-                .WithPrice(7)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .Build();
+            //var good = new GoodBuilder(this.DatabaseSession)
+            //    .WithSku("10101")
+            //    .WithVatRate(vatRate21)
+            //    .WithName("good")
+            //    .WithInventoryItemKind(new InventoryItemKinds(this.DatabaseSession).NonSerialized)
+            //    .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
+            //    .Build();
 
-            new SupplierOfferingBuilder(this.DatabaseSession)
-                .WithProduct(good)
-                .WithSupplier(supplier)
-                .WithFromDate(DateTime.Now)
-                .WithProductPurchasePrice(goodPurchasePrice)
-                .Build();
+            //var goodPurchasePrice = new ProductPurchasePriceBuilder(this.DatabaseSession)
+            //    .WithCurrency(euro)
+            //    .WithFromDate(DateTime.Now)
+            //    .WithPrice(7)
+            //    .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
+            //    .Build();
 
-            var order = new SalesOrderBuilder(this.DatabaseSession)
-                .WithOrderNumber("1")
-                .WithBillToCustomer(billToCustomer)
-                .WithShipToCustomer(shipToCustomer)
-                .WithShipToAddress(new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build())
-                .WithFee(adjustment)
-                .Build();
+            //new SupplierOfferingBuilder(this.DatabaseSession)
+            //    .WithProduct(good)
+            //    .WithSupplier(supplier)
+            //    .WithFromDate(DateTime.Now)
+            //    .WithProductPurchasePrice(goodPurchasePrice)
+            //    .Build();
 
-            const decimal QuantityOrdered = 3;
-            var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good).WithQuantityOrdered(QuantityOrdered).WithActualUnitPrice(15).Build();
-            order.AddSalesOrderItem(item1);
+            //var order = new SalesOrderBuilder(this.DatabaseSession)
+            //    .WithOrderNumber("1")
+            //    .WithBillToCustomer(billToCustomer)
+            //    .WithShipToCustomer(shipToCustomer)
+            //    .WithShipToAddress(new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build())
+            //    .WithFee(adjustment)
+            //    .Build();
+
+            //const decimal QuantityOrdered = 3;
+            //var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good).WithQuantityOrdered(QuantityOrdered).WithActualUnitPrice(15).Build();
+            //order.AddSalesOrderItem(item1);
             
-            this.DatabaseSession.Derive(true);
+            //this.DatabaseSession.Derive(true);
 
-            Assert.AreEqual(45, order.TotalBasePrice);
-            Assert.AreEqual(0, order.TotalDiscount);
-            Assert.AreEqual(0, order.TotalSurcharge);
-            Assert.AreEqual(0, order.TotalShippingAndHandling);
-            Assert.AreEqual(2.25, order.TotalFee);
-            Assert.AreEqual(47.25, order.TotalExVat);
-            Assert.AreEqual(9.92, order.TotalVat);
-            Assert.AreEqual(57.17, order.TotalIncVat);
-            Assert.AreEqual(goodPurchasePrice.Price, order.TotalPurchasePrice);
+            //Assert.AreEqual(45, order.TotalBasePrice);
+            //Assert.AreEqual(0, order.TotalDiscount);
+            //Assert.AreEqual(0, order.TotalSurcharge);
+            //Assert.AreEqual(0, order.TotalShippingAndHandling);
+            //Assert.AreEqual(2.25, order.TotalFee);
+            //Assert.AreEqual(47.25, order.TotalExVat);
+            //Assert.AreEqual(9.92, order.TotalVat);
+            //Assert.AreEqual(57.17, order.TotalIncVat);
+            //Assert.AreEqual(goodPurchasePrice.Price, order.TotalPurchasePrice);
         }
 
         [Test]
         public void GivenSalesOrder_WhenConfirming_ThenInventoryItemsQuantityCommittedOutAndAvailableToPromiseMustBeUpdated()
         {
-            var billToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person1").Build();
-            var shipToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person2").Build();
-            var internalOrganisation = Singleton.Instance(this.DatabaseSession).DefaultInternalOrganisation;
+            throw new Exception("TODO");
 
-            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(billToCustomer).WithInternalOrganisation(internalOrganisation).Build();
-            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(shipToCustomer).WithInternalOrganisation(internalOrganisation).Build();
+            //var billToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person1").Build();
+            //var shipToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person2").Build();
+            //var internalOrganisation = Singleton.Instance(this.DatabaseSession).DefaultInternalOrganisation;
 
-            var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
-            var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
-            var part1 = new FinishedGoodBuilder(this.DatabaseSession).WithName("part1").Build();
-            var part2 = new FinishedGoodBuilder(this.DatabaseSession).WithName("part2").Build();
+            //new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(billToCustomer).WithInternalOrganisation(internalOrganisation).Build();
+            //new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(shipToCustomer).WithInternalOrganisation(internalOrganisation).Build();
 
-            var good1 = new GoodBuilder(this.DatabaseSession)
-                .WithSku("10101")
-                .WithVatRate(vatRate21)
-                .WithName("good1")
-                .WithFinishedGood(part1)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .Build();
+            //var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
+            //var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
+            //var part1 = new FinishedGoodBuilder(this.DatabaseSession).WithName("part1").Build();
+            //var part2 = new FinishedGoodBuilder(this.DatabaseSession).WithName("part2").Build();
 
-            var good2 = new GoodBuilder(this.DatabaseSession)
-                .WithSku("10102")
-                .WithVatRate(vatRate21)
-                .WithName("good1")
-                .WithFinishedGood(part2)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .Build();
+            //var good1 = new GoodBuilder(this.DatabaseSession)
+            //    .WithSku("10101")
+            //    .WithVatRate(vatRate21)
+            //    .WithName("good1")
+            //    .WithFinishedGood(part1)
+            //    .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
+            //    .Build();
 
-            var order = new SalesOrderBuilder(this.DatabaseSession)
-                .WithOrderNumber("1")
-                .WithBillToCustomer(billToCustomer)
-                .WithShipToCustomer(shipToCustomer)
-                .WithShipToAddress(new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build())
-                .Build();
+            //var good2 = new GoodBuilder(this.DatabaseSession)
+            //    .WithSku("10102")
+            //    .WithVatRate(vatRate21)
+            //    .WithName("good1")
+            //    .WithFinishedGood(part2)
+            //    .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
+            //    .Build();
 
-            var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good1).WithQuantityOrdered(3).WithActualUnitPrice(15).Build();
-            var item2 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good1).WithQuantityOrdered(3).WithActualUnitPrice(15).Build();
-            var item3 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good2).WithQuantityOrdered(3).WithActualUnitPrice(15).Build();
-            order.AddSalesOrderItem(item1);
-            order.AddSalesOrderItem(item2);
-            order.AddSalesOrderItem(item3);
+            //var order = new SalesOrderBuilder(this.DatabaseSession)
+            //    .WithOrderNumber("1")
+            //    .WithBillToCustomer(billToCustomer)
+            //    .WithShipToCustomer(shipToCustomer)
+            //    .WithShipToAddress(new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build())
+            //    .Build();
 
-            this.DatabaseSession.Derive(true);
+            //var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good1).WithQuantityOrdered(3).WithActualUnitPrice(15).Build();
+            //var item2 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good1).WithQuantityOrdered(3).WithActualUnitPrice(15).Build();
+            //var item3 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good2).WithQuantityOrdered(3).WithActualUnitPrice(15).Build();
+            //order.AddSalesOrderItem(item1);
+            //order.AddSalesOrderItem(item2);
+            //order.AddSalesOrderItem(item3);
 
-            order.Confirm();
+            //this.DatabaseSession.Derive(true);
 
-            this.DatabaseSession.Derive(true);
+            //order.Confirm();
 
-            Assert.AreEqual(6, item1.ReservedFromInventoryItem.QuantityCommittedOut);
-            Assert.AreEqual(0, item1.ReservedFromInventoryItem.AvailableToPromise);
-            Assert.AreEqual(3, item3.ReservedFromInventoryItem.QuantityCommittedOut);
-            Assert.AreEqual(0, item3.ReservedFromInventoryItem.AvailableToPromise);
+            //this.DatabaseSession.Derive(true);
+
+            //Assert.AreEqual(6, item1.ReservedFromInventoryItem.QuantityCommittedOut);
+            //Assert.AreEqual(0, item1.ReservedFromInventoryItem.AvailableToPromise);
+            //Assert.AreEqual(3, item3.ReservedFromInventoryItem.QuantityCommittedOut);
+            //Assert.AreEqual(0, item3.ReservedFromInventoryItem.AvailableToPromise);
         }
 
         [Test]
         public void GivenSalesOrder_WhenChangingItemQuantityToZero_ThenItemIsInvalid()
         {
-            var billToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person1").Build();
-            var shipToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person2").Build();
-            var internalOrganisation = Singleton.Instance(this.DatabaseSession).DefaultInternalOrganisation;
+            throw new Exception("TODO");
 
-            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(billToCustomer).WithInternalOrganisation(internalOrganisation).Build();
-            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(shipToCustomer).WithInternalOrganisation(internalOrganisation).Build();
+            //var billToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person1").Build();
+            //var shipToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person2").Build();
+            //var internalOrganisation = Singleton.Instance(this.DatabaseSession).DefaultInternalOrganisation;
 
-            var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
-            var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
-            var part1 = new FinishedGoodBuilder(this.DatabaseSession).WithName("part1").Build();
-            var part2 = new FinishedGoodBuilder(this.DatabaseSession).WithName("part2").Build();
+            //new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(billToCustomer).WithInternalOrganisation(internalOrganisation).Build();
+            //new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(shipToCustomer).WithInternalOrganisation(internalOrganisation).Build();
 
-            var good1 = new GoodBuilder(this.DatabaseSession)
-                .WithSku("10101")
-                .WithVatRate(vatRate21)
-                .WithName("good1")
-                .WithFinishedGood(part1)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .Build();
+            //var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
+            //var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
+            //var part1 = new FinishedGoodBuilder(this.DatabaseSession).WithName("part1").Build();
+            //var part2 = new FinishedGoodBuilder(this.DatabaseSession).WithName("part2").Build();
 
-            var good2 = new GoodBuilder(this.DatabaseSession)
-                .WithSku("10102")
-                .WithVatRate(vatRate21)
-                .WithName("good1")
-                .WithFinishedGood(part2)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .Build();
+            //var good1 = new GoodBuilder(this.DatabaseSession)
+            //    .WithSku("10101")
+            //    .WithVatRate(vatRate21)
+            //    .WithName("good1")
+            //    .WithFinishedGood(part1)
+            //    .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
+            //    .Build();
 
-            var order = new SalesOrderBuilder(this.DatabaseSession)
-                .WithOrderNumber("1")
-                .WithBillToCustomer(billToCustomer)
-                .WithShipToCustomer(shipToCustomer)
-                .WithShipToAddress(new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build())
-                .Build();
+            //var good2 = new GoodBuilder(this.DatabaseSession)
+            //    .WithSku("10102")
+            //    .WithVatRate(vatRate21)
+            //    .WithName("good1")
+            //    .WithFinishedGood(part2)
+            //    .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
+            //    .Build();
 
-            var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good1).WithQuantityOrdered(1).WithActualUnitPrice(15).Build();
-            var item2 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good1).WithQuantityOrdered(2).WithActualUnitPrice(15).Build();
-            var item3 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good2).WithQuantityOrdered(3).WithActualUnitPrice(15).Build();
-            var item4 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good2).WithQuantityOrdered(4).WithActualUnitPrice(15).Build();
-            order.AddSalesOrderItem(item1);
-            order.AddSalesOrderItem(item2);
-            order.AddSalesOrderItem(item3);
-            order.AddSalesOrderItem(item4);
+            //var order = new SalesOrderBuilder(this.DatabaseSession)
+            //    .WithOrderNumber("1")
+            //    .WithBillToCustomer(billToCustomer)
+            //    .WithShipToCustomer(shipToCustomer)
+            //    .WithShipToAddress(new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build())
+            //    .Build();
 
-            this.DatabaseSession.Derive(true);
-            Assert.AreEqual(4, order.ValidOrderItems.Count);
+            //var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good1).WithQuantityOrdered(1).WithActualUnitPrice(15).Build();
+            //var item2 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good1).WithQuantityOrdered(2).WithActualUnitPrice(15).Build();
+            //var item3 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good2).WithQuantityOrdered(3).WithActualUnitPrice(15).Build();
+            //var item4 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good2).WithQuantityOrdered(4).WithActualUnitPrice(15).Build();
+            //order.AddSalesOrderItem(item1);
+            //order.AddSalesOrderItem(item2);
+            //order.AddSalesOrderItem(item3);
+            //order.AddSalesOrderItem(item4);
 
-            order.Confirm();
+            //this.DatabaseSession.Derive(true);
+            //Assert.AreEqual(4, order.ValidOrderItems.Count);
 
-            this.DatabaseSession.Derive(true);
+            //order.Confirm();
 
-            item4.QuantityOrdered = 0;
+            //this.DatabaseSession.Derive(true);
 
-            this.DatabaseSession.Derive(true);
+            //item4.QuantityOrdered = 0;
 
-            Assert.AreEqual(3, order.ValidOrderItems.Count);
-            Assert.Contains(item1, order.ValidOrderItems);
-            Assert.Contains(item2, order.ValidOrderItems);
-            Assert.Contains(item3, order.ValidOrderItems);
+            //this.DatabaseSession.Derive(true);
+
+            //Assert.AreEqual(3, order.ValidOrderItems.Count);
+            //Assert.Contains(item1, order.ValidOrderItems);
+            //Assert.Contains(item2, order.ValidOrderItems);
+            //Assert.Contains(item3, order.ValidOrderItems);
         }
 
         [Test]
         public void GivenSalesOrder_WhenOrderItemIsWithoutBasePrice_ThenItemIsInvalid()
         {
-            var billToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person1").Build();
-            var shipToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person2").Build();
-            var internalOrganisation = Singleton.Instance(this.DatabaseSession).DefaultInternalOrganisation;
+            throw new Exception("TODO");
 
-            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(billToCustomer).WithInternalOrganisation(internalOrganisation).Build();
-            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(shipToCustomer).WithInternalOrganisation(internalOrganisation).Build();
+            //var billToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person1").Build();
+            //var shipToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person2").Build();
+            //var internalOrganisation = Singleton.Instance(this.DatabaseSession).DefaultInternalOrganisation;
 
-            var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
-            var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
-            var part1 = new FinishedGoodBuilder(this.DatabaseSession).WithName("part1").Build();
-            var part2 = new FinishedGoodBuilder(this.DatabaseSession).WithName("part2").Build();
+            //new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(billToCustomer).WithInternalOrganisation(internalOrganisation).Build();
+            //new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(shipToCustomer).WithInternalOrganisation(internalOrganisation).Build();
 
-            var good1 = new GoodBuilder(this.DatabaseSession)
-                .WithSku("10101")
-                .WithVatRate(vatRate21)
-                .WithName("good1")
-                .WithFinishedGood(part1)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .Build();
+            //var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
+            //var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
+            //var part1 = new FinishedGoodBuilder(this.DatabaseSession).WithName("part1").Build();
+            //var part2 = new FinishedGoodBuilder(this.DatabaseSession).WithName("part2").Build();
 
-            var good2 = new GoodBuilder(this.DatabaseSession)
-                .WithSku("10102")
-                .WithVatRate(vatRate21)
-                .WithName("good1")
-                .WithFinishedGood(part2)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .Build();
+            //var good1 = new GoodBuilder(this.DatabaseSession)
+            //    .WithSku("10101")
+            //    .WithVatRate(vatRate21)
+            //    .WithName("good1")
+            //    .WithFinishedGood(part1)
+            //    .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
+            //    .Build();
 
-            var order = new SalesOrderBuilder(this.DatabaseSession)
-                .WithOrderNumber("1")
-                .WithBillToCustomer(billToCustomer)
-                .WithShipToCustomer(shipToCustomer)
-                .WithShipToAddress(new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build())
-                .Build();
+            //var good2 = new GoodBuilder(this.DatabaseSession)
+            //    .WithSku("10102")
+            //    .WithVatRate(vatRate21)
+            //    .WithName("good1")
+            //    .WithFinishedGood(part2)
+            //    .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
+            //    .Build();
 
-            var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good1).WithQuantityOrdered(1).WithActualUnitPrice(15).Build();
-            var item2 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good1).WithQuantityOrdered(2).WithActualUnitPrice(15).Build();
-            var item3 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good2).WithQuantityOrdered(3).WithActualUnitPrice(15).Build();
-            var item4 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good2).WithQuantityOrdered(4).WithActualUnitPrice(15).Build();
-            order.AddSalesOrderItem(item1);
-            order.AddSalesOrderItem(item2);
-            order.AddSalesOrderItem(item3);
-            order.AddSalesOrderItem(item4);
+            //var order = new SalesOrderBuilder(this.DatabaseSession)
+            //    .WithOrderNumber("1")
+            //    .WithBillToCustomer(billToCustomer)
+            //    .WithShipToCustomer(shipToCustomer)
+            //    .WithShipToAddress(new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build())
+            //    .Build();
 
-            order.Confirm();
+            //var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good1).WithQuantityOrdered(1).WithActualUnitPrice(15).Build();
+            //var item2 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good1).WithQuantityOrdered(2).WithActualUnitPrice(15).Build();
+            //var item3 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good2).WithQuantityOrdered(3).WithActualUnitPrice(15).Build();
+            //var item4 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good2).WithQuantityOrdered(4).WithActualUnitPrice(15).Build();
+            //order.AddSalesOrderItem(item1);
+            //order.AddSalesOrderItem(item2);
+            //order.AddSalesOrderItem(item3);
+            //order.AddSalesOrderItem(item4);
 
-            this.DatabaseSession.Derive(true);
+            //order.Confirm();
 
-            item4.RemoveActualUnitPrice();
+            //this.DatabaseSession.Derive(true);
 
-            this.DatabaseSession.Derive(true);
+            //item4.RemoveActualUnitPrice();
 
-            Assert.AreEqual(0, item4.UnitBasePrice);
-            Assert.AreEqual(3, order.ValidOrderItems.Count);
-            Assert.Contains(item1, order.ValidOrderItems);
-            Assert.Contains(item2, order.ValidOrderItems);
-            Assert.Contains(item3, order.ValidOrderItems);
+            //this.DatabaseSession.Derive(true);
+
+            //Assert.AreEqual(0, item4.UnitBasePrice);
+            //Assert.AreEqual(3, order.ValidOrderItems.Count);
+            //Assert.Contains(item1, order.ValidOrderItems);
+            //Assert.Contains(item2, order.ValidOrderItems);
+            //Assert.Contains(item3, order.ValidOrderItems);
         }
 
         [Test]
         public void GivenSalesOrder_WhenConfirming_ThenAllValidItemsAreInConfirmedState()
         {
-            var billToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person1").Build();
-            var shipToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person2").Build();
-            var internalOrganisation = Singleton.Instance(this.DatabaseSession).DefaultInternalOrganisation;
+            throw new Exception("TODO");
 
-            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(billToCustomer).WithInternalOrganisation(internalOrganisation).Build();
-            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(shipToCustomer).WithInternalOrganisation(internalOrganisation).Build();
+            //var billToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person1").Build();
+            //var shipToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person2").Build();
+            //var internalOrganisation = Singleton.Instance(this.DatabaseSession).DefaultInternalOrganisation;
 
-            var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
-            var shipToContactMechanism = new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build();
+            //new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(billToCustomer).WithInternalOrganisation(internalOrganisation).Build();
+            //new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(shipToCustomer).WithInternalOrganisation(internalOrganisation).Build();
 
-            var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
-            var part1 = new FinishedGoodBuilder(this.DatabaseSession).WithName("part1").Build();
-            var part2 = new FinishedGoodBuilder(this.DatabaseSession).WithName("part2").Build();
+            //var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
+            //var shipToContactMechanism = new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build();
 
-            var good1 = new GoodBuilder(this.DatabaseSession)
-                .WithSku("10101")
-                .WithVatRate(vatRate21)
-                .WithName("good1")
-                .WithFinishedGood(part1)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .Build();
+            //var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
+            //var part1 = new FinishedGoodBuilder(this.DatabaseSession).WithName("part1").Build();
+            //var part2 = new FinishedGoodBuilder(this.DatabaseSession).WithName("part2").Build();
 
-            var good2 = new GoodBuilder(this.DatabaseSession)
-                .WithSku("10102")
-                .WithVatRate(vatRate21)
-                .WithName("good1")
-                .WithFinishedGood(part2)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .Build();
+            //var good1 = new GoodBuilder(this.DatabaseSession)
+            //    .WithSku("10101")
+            //    .WithVatRate(vatRate21)
+            //    .WithName("good1")
+            //    .WithFinishedGood(part1)
+            //    .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
+            //    .Build();
 
-            var order = new SalesOrderBuilder(this.DatabaseSession)
-                .WithOrderNumber("1")
-                .WithBillToCustomer(billToCustomer)
-                .WithShipToCustomer(shipToCustomer)
-                .WithShipToAddress(shipToContactMechanism)
-                .Build();
+            //var good2 = new GoodBuilder(this.DatabaseSession)
+            //    .WithSku("10102")
+            //    .WithVatRate(vatRate21)
+            //    .WithName("good1")
+            //    .WithFinishedGood(part2)
+            //    .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
+            //    .Build();
 
-            var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good1).WithQuantityOrdered(1).WithActualUnitPrice(15).Build();
-            var item2 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good1).WithQuantityOrdered(2).WithActualUnitPrice(15).Build();
-            var item3 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good2).WithQuantityOrdered(3).WithActualUnitPrice(15).Build();
-            var item4 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good2).WithQuantityOrdered(4).WithActualUnitPrice(15).Build();
-            order.AddSalesOrderItem(item1);
-            order.AddSalesOrderItem(item2);
-            order.AddSalesOrderItem(item3);
-            order.AddSalesOrderItem(item4);
+            //var order = new SalesOrderBuilder(this.DatabaseSession)
+            //    .WithOrderNumber("1")
+            //    .WithBillToCustomer(billToCustomer)
+            //    .WithShipToCustomer(shipToCustomer)
+            //    .WithShipToAddress(shipToContactMechanism)
+            //    .Build();
 
-            order.Confirm();
+            //var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good1).WithQuantityOrdered(1).WithActualUnitPrice(15).Build();
+            //var item2 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good1).WithQuantityOrdered(2).WithActualUnitPrice(15).Build();
+            //var item3 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good2).WithQuantityOrdered(3).WithActualUnitPrice(15).Build();
+            //var item4 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good2).WithQuantityOrdered(4).WithActualUnitPrice(15).Build();
+            //order.AddSalesOrderItem(item1);
+            //order.AddSalesOrderItem(item2);
+            //order.AddSalesOrderItem(item3);
+            //order.AddSalesOrderItem(item4);
 
-            this.DatabaseSession.Derive(true); 
+            //order.Confirm();
 
-            item4.Cancel();
+            //this.DatabaseSession.Derive(true); 
 
-            this.DatabaseSession.Derive(true); 
+            //item4.Cancel();
 
-            Assert.AreEqual(3, order.ValidOrderItems.Count);
-            Assert.Contains(item1, order.ValidOrderItems);
-            Assert.Contains(item2, order.ValidOrderItems);
-            Assert.Contains(item3, order.ValidOrderItems);
-            Assert.AreEqual(new SalesOrderItemObjectStates(this.DatabaseSession).InProcess, item1.CurrentObjectState);
-            Assert.AreEqual(new SalesOrderItemObjectStates(this.DatabaseSession).InProcess, item2.CurrentObjectState);
-            Assert.AreEqual(new SalesOrderItemObjectStates(this.DatabaseSession).InProcess, item3.CurrentObjectState);
-            Assert.AreEqual(new SalesOrderItemObjectStates(this.DatabaseSession).Cancelled, item4.CurrentObjectState);
+            //this.DatabaseSession.Derive(true); 
+
+            //Assert.AreEqual(3, order.ValidOrderItems.Count);
+            //Assert.Contains(item1, order.ValidOrderItems);
+            //Assert.Contains(item2, order.ValidOrderItems);
+            //Assert.Contains(item3, order.ValidOrderItems);
+            //Assert.AreEqual(new SalesOrderItemObjectStates(this.DatabaseSession).InProcess, item1.CurrentObjectState);
+            //Assert.AreEqual(new SalesOrderItemObjectStates(this.DatabaseSession).InProcess, item2.CurrentObjectState);
+            //Assert.AreEqual(new SalesOrderItemObjectStates(this.DatabaseSession).InProcess, item3.CurrentObjectState);
+            //Assert.AreEqual(new SalesOrderItemObjectStates(this.DatabaseSession).Cancelled, item4.CurrentObjectState);
         }
 
         [Test]
@@ -3122,114 +3146,116 @@ namespace Allors.Domain
         [Test]
         public void GivenSalesOrderWithMultipleRecipients_WhenConfirmed_ThenShipmentIsCreatedForEachRecipientAndPickListIsCreated()
         {
-            var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
-            var mechelenAddress = new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build();
-            var shipToMechelen = new PartyContactMechanismBuilder(this.DatabaseSession)
-                .WithContactMechanism(mechelenAddress)
-                .WithContactPurpose(new ContactMechanismPurposes(this.DatabaseSession).ShippingAddress)
-                .WithUseAsDefault(true)
-                .Build();
+            throw new Exception("TODO");
 
-            var baal = new CityBuilder(this.DatabaseSession).WithName("Baal").Build();
-            var baalAddress = new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(baal).WithAddress1("Haverwerf 15").Build();
-            var shipToBaal = new PartyContactMechanismBuilder(this.DatabaseSession)
-                .WithContactMechanism(baalAddress)
-                .WithContactPurpose(new ContactMechanismPurposes(this.DatabaseSession).ShippingAddress)
-                .WithUseAsDefault(true)
-                .Build();
+            //var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
+            //var mechelenAddress = new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build();
+            //var shipToMechelen = new PartyContactMechanismBuilder(this.DatabaseSession)
+            //    .WithContactMechanism(mechelenAddress)
+            //    .WithContactPurpose(new ContactMechanismPurposes(this.DatabaseSession).ShippingAddress)
+            //    .WithUseAsDefault(true)
+            //    .Build();
 
-            var person1 = new PersonBuilder(this.DatabaseSession).WithLastName("person1").WithPartyContactMechanism(shipToMechelen).Build();
-            var person2 = new PersonBuilder(this.DatabaseSession).WithLastName("person2").WithPartyContactMechanism(shipToBaal).Build();
-            var internalOrganisation = Singleton.Instance(this.DatabaseSession).DefaultInternalOrganisation;
+            //var baal = new CityBuilder(this.DatabaseSession).WithName("Baal").Build();
+            //var baalAddress = new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(baal).WithAddress1("Haverwerf 15").Build();
+            //var shipToBaal = new PartyContactMechanismBuilder(this.DatabaseSession)
+            //    .WithContactMechanism(baalAddress)
+            //    .WithContactPurpose(new ContactMechanismPurposes(this.DatabaseSession).ShippingAddress)
+            //    .WithUseAsDefault(true)
+            //    .Build();
 
-            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(person1).WithInternalOrganisation(internalOrganisation).Build();
-            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(person2).WithInternalOrganisation(internalOrganisation).Build();
+            //var person1 = new PersonBuilder(this.DatabaseSession).WithLastName("person1").WithPartyContactMechanism(shipToMechelen).Build();
+            //var person2 = new PersonBuilder(this.DatabaseSession).WithLastName("person2").WithPartyContactMechanism(shipToBaal).Build();
+            //var internalOrganisation = Singleton.Instance(this.DatabaseSession).DefaultInternalOrganisation;
 
-            var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
-            var part = new FinishedGoodBuilder(this.DatabaseSession)
-                .WithName("part1")
-                .WithOwnedByParty(new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation"))
-                .Build();
+            //new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(person1).WithInternalOrganisation(internalOrganisation).Build();
+            //new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(person2).WithInternalOrganisation(internalOrganisation).Build();
 
-            this.DatabaseSession.Derive(true);
+            //var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
+            //var part = new FinishedGoodBuilder(this.DatabaseSession)
+            //    .WithName("part1")
+            //    .WithOwnedByParty(new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation"))
+            //    .Build();
 
-            var partInventory = (NonSerializedInventoryItem)part.InventoryItemsWherePart[0];
-            partInventory.AddInventoryItemVariance(new InventoryItemVarianceBuilder(this.DatabaseSession).WithQuantity(100).WithReason(new VarianceReasons(this.DatabaseSession).Unknown).Build());
+            //this.DatabaseSession.Derive(true);
 
-            this.DatabaseSession.Derive(true);
+            //var partInventory = (NonSerializedInventoryItem)part.InventoryItemsWherePart[0];
+            //partInventory.AddInventoryItemVariance(new InventoryItemVarianceBuilder(this.DatabaseSession).WithQuantity(100).WithReason(new VarianceReasons(this.DatabaseSession).Unknown).Build());
 
-            var good1 = new GoodBuilder(this.DatabaseSession)
-                .WithSku("10101")
-                .WithVatRate(vatRate21)
-                .WithName("good1")
-                .WithFinishedGood(part)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .Build();
+            //this.DatabaseSession.Derive(true);
 
-            var good2 = new GoodBuilder(this.DatabaseSession)
-                .WithSku("10102")
-                .WithVatRate(vatRate21)
-                .WithName("good2")
-                .WithFinishedGood(part)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .Build();
+            //var good1 = new GoodBuilder(this.DatabaseSession)
+            //    .WithSku("10101")
+            //    .WithVatRate(vatRate21)
+            //    .WithName("good1")
+            //    .WithFinishedGood(part)
+            //    .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
+            //    .Build();
 
-            var colorBlack = new ColourBuilder(this.DatabaseSession)
-                .WithDescription("white")
-                .WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
-                                            .WithText("White")
-                                            .WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale)
-                                            .Build())
-                .Build();
+            //var good2 = new GoodBuilder(this.DatabaseSession)
+            //    .WithSku("10102")
+            //    .WithVatRate(vatRate21)
+            //    .WithName("good2")
+            //    .WithFinishedGood(part)
+            //    .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
+            //    .Build();
 
-            var extraLarge = new SizeBuilder(this.DatabaseSession)
-                .WithDescription("Extra large")
-                .WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
-                                            .WithText("White")
-                                            .WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale)
-                                            .Build())
-                .Build();
+            //var colorBlack = new ColourBuilder(this.DatabaseSession)
+            //    .WithDescription("white")
+            //    .WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
+            //                                .WithText("White")
+            //                                .WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale)
+            //                                .Build())
+            //    .Build();
 
-            var order = new SalesOrderBuilder(this.DatabaseSession)
-                .WithOrderNumber("1")
-                .WithBillToCustomer(person1)
-                .WithShipToCustomer(person1)
-                .WithShipToAddress(mechelenAddress)
-                .Build();
+            //var extraLarge = new SizeBuilder(this.DatabaseSession)
+            //    .WithDescription("Extra large")
+            //    .WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
+            //                                .WithText("White")
+            //                                .WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale)
+            //                                .Build())
+            //    .Build();
 
-            var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good1).WithQuantityOrdered(1).WithActualUnitPrice(15).Build();
-            var item2 = new SalesOrderItemBuilder(this.DatabaseSession).WithProductFeature(colorBlack).WithQuantityOrdered(1).WithActualUnitPrice(15).Build();
-            var item3 = new SalesOrderItemBuilder(this.DatabaseSession).WithProductFeature(extraLarge).WithQuantityOrdered(1).WithActualUnitPrice(15).Build();
-            item1.AddOrderedWithFeature(item2);
-            item1.AddOrderedWithFeature(item3);
-            var item4 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good1).WithQuantityOrdered(2).WithActualUnitPrice(15).Build();
-            var item5 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good2).WithQuantityOrdered(5).WithActualUnitPrice(15).WithAssignedShipToParty(person2).Build();
-            order.AddSalesOrderItem(item1);
-            order.AddSalesOrderItem(item2);
-            order.AddSalesOrderItem(item3);
-            order.AddSalesOrderItem(item4);
-            order.AddSalesOrderItem(item5);
+            //var order = new SalesOrderBuilder(this.DatabaseSession)
+            //    .WithOrderNumber("1")
+            //    .WithBillToCustomer(person1)
+            //    .WithShipToCustomer(person1)
+            //    .WithShipToAddress(mechelenAddress)
+            //    .Build();
 
-            this.DatabaseSession.Derive(true);
+            //var item1 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good1).WithQuantityOrdered(1).WithActualUnitPrice(15).Build();
+            //var item2 = new SalesOrderItemBuilder(this.DatabaseSession).WithProductFeature(colorBlack).WithQuantityOrdered(1).WithActualUnitPrice(15).Build();
+            //var item3 = new SalesOrderItemBuilder(this.DatabaseSession).WithProductFeature(extraLarge).WithQuantityOrdered(1).WithActualUnitPrice(15).Build();
+            //item1.AddOrderedWithFeature(item2);
+            //item1.AddOrderedWithFeature(item3);
+            //var item4 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good1).WithQuantityOrdered(2).WithActualUnitPrice(15).Build();
+            //var item5 = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good2).WithQuantityOrdered(5).WithActualUnitPrice(15).WithAssignedShipToParty(person2).Build();
+            //order.AddSalesOrderItem(item1);
+            //order.AddSalesOrderItem(item2);
+            //order.AddSalesOrderItem(item3);
+            //order.AddSalesOrderItem(item4);
+            //order.AddSalesOrderItem(item5);
 
-            order.Confirm();
+            //this.DatabaseSession.Derive(true);
 
-            this.DatabaseSession.Derive(true);
+            //order.Confirm();
 
-            var shipmentToMechelen = mechelenAddress.ShipmentsWhereShipToAddress[0];
+            //this.DatabaseSession.Derive(true);
 
-            var shipmentToBaal = baalAddress.ShipmentsWhereShipToAddress[0];
+            //var shipmentToMechelen = mechelenAddress.ShipmentsWhereShipToAddress[0];
 
-            this.DatabaseSession.Derive(true);
+            //var shipmentToBaal = baalAddress.ShipmentsWhereShipToAddress[0];
 
-            Assert.AreEqual(mechelenAddress, shipmentToMechelen.ShipToAddress);
-            Assert.AreEqual(1, shipmentToMechelen.ShipmentItems.Count);
-            Assert.AreEqual(3, shipmentToMechelen.ShipmentItems[0].Quantity);
+            //this.DatabaseSession.Derive(true);
 
-            Assert.AreEqual(baalAddress, shipmentToBaal.ShipToAddress);
-            Assert.AreEqual(1, shipmentToBaal.ShipmentItems.Count);
-            Assert.AreEqual(good2, shipmentToBaal.ShipmentItems[0].Good);
-            Assert.AreEqual(5, shipmentToBaal.ShipmentItems[0].Quantity);
+            //Assert.AreEqual(mechelenAddress, shipmentToMechelen.ShipToAddress);
+            //Assert.AreEqual(1, shipmentToMechelen.ShipmentItems.Count);
+            //Assert.AreEqual(3, shipmentToMechelen.ShipmentItems[0].Quantity);
+
+            //Assert.AreEqual(baalAddress, shipmentToBaal.ShipToAddress);
+            //Assert.AreEqual(1, shipmentToBaal.ShipmentItems.Count);
+            //Assert.AreEqual(good2, shipmentToBaal.ShipmentItems[0].Good);
+            //Assert.AreEqual(5, shipmentToBaal.ShipmentItems[0].Quantity);
         }
 
         [Test]

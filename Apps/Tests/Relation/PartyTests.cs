@@ -86,24 +86,26 @@ namespace Allors.Domain
         [Test]
         public void GivenPartyWithOpenOrders_WhenDeriving_ThenOpenOrderAmountIsUpdated()
         {
-            var organisation = new OrganisationBuilder(this.DatabaseSession).WithName("customer").Build();
-            var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
-            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(organisation).WithInternalOrganisation(internalOrganisation).Build();
+            throw new Exception("TODO");
 
-            var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
+            //var organisation = new OrganisationBuilder(this.DatabaseSession).WithName("customer").Build();
+            //var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
+            //new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(organisation).WithInternalOrganisation(internalOrganisation).Build();
 
-            var postalAddress = new PostalAddressBuilder(this.DatabaseSession)
-                  .WithAddress1("Kleine Nieuwedijkstraat 2")
-                  .WithGeographicBoundary(mechelen)
-                  .Build();
+            //var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
 
-            new SalesOrderBuilder(this.DatabaseSession).WithBillToCustomer(organisation).WithShipToAddress(postalAddress).WithTotalIncVat(100M).Build();
-            new SalesOrderBuilder(this.DatabaseSession).WithBillToCustomer(organisation).WithShipToAddress(postalAddress).WithTotalIncVat(200M).Build();
-            new SalesOrderBuilder(this.DatabaseSession).WithBillToCustomer(organisation).WithShipToAddress(postalAddress).WithTotalIncVat(400M).WithCurrentObjectState(new SalesOrderObjectStates(this.DatabaseSession).Finished).Build();
+            //var postalAddress = new PostalAddressBuilder(this.DatabaseSession)
+            //      .WithAddress1("Kleine Nieuwedijkstraat 2")
+            //      .WithGeographicBoundary(mechelen)
+            //      .Build();
+
+            //new SalesOrderBuilder(this.DatabaseSession).WithBillToCustomer(organisation).WithShipToAddress(postalAddress).WithTotalIncVat(100M).Build();
+            //new SalesOrderBuilder(this.DatabaseSession).WithBillToCustomer(organisation).WithShipToAddress(postalAddress).WithTotalIncVat(200M).Build();
+            //new SalesOrderBuilder(this.DatabaseSession).WithBillToCustomer(organisation).WithShipToAddress(postalAddress).WithTotalIncVat(400M).WithCurrentObjectState(new SalesOrderObjectStates(this.DatabaseSession).Finished).Build();
             
-            this.DatabaseSession.Derive(true);
+            //this.DatabaseSession.Derive(true);
 
-            Assert.AreEqual(300M, organisation.OpenOrderAmount);
+            //Assert.AreEqual(300M, organisation.OpenOrderAmount);
         }
 
         [Test]

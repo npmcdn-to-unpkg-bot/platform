@@ -22,10 +22,6 @@
 namespace Allors.Domain
 {
     using System;
-    using Allors.Domain;
-
-    
-
     using NUnit.Framework;
 
     [TestFixture]
@@ -34,187 +30,195 @@ namespace Allors.Domain
         [Test]
         public void GivenBasePrice_WhenDeriving_ThenRequiredRelationsMustExist()
         {
-            var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
-            var good = new GoodBuilder(this.DatabaseSession)
-                .WithName("gizmo")
-                .WithSku("10101")
-                .WithVatRate(vatRate21)
-                .WithInventoryItemKind(new InventoryItemKinds(this.DatabaseSession).NonSerialized)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .Build();
+            throw new Exception("TODO");
 
-            var colorFeature = new ColourBuilder(this.DatabaseSession)
-                .WithDescription("golden")
-                .WithVatRate(vatRate21)
-                .WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
-                                            .WithText("black")
-                                            .WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale)
-                                            .Build())
-                .Build();
+            //var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
+            //var good = new GoodBuilder(this.DatabaseSession)
+            //    .WithName("gizmo")
+            //    .WithSku("10101")
+            //    .WithVatRate(vatRate21)
+            //    .WithInventoryItemKind(new InventoryItemKinds(this.DatabaseSession).NonSerialized)
+            //    .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
+            //    .Build();
 
-            this.DatabaseSession.Derive(true);
-            this.DatabaseSession.Commit();
+            //var colorFeature = new ColourBuilder(this.DatabaseSession)
+            //    .WithDescription("golden")
+            //    .WithVatRate(vatRate21)
+            //    .WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
+            //                                .WithText("black")
+            //                                .WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale)
+            //                                .Build())
+            //    .Build();
 
-            var builder = new BasePriceBuilder(this.DatabaseSession);
-            var basePrice = builder.Build();
+            //this.DatabaseSession.Derive(true);
+            //this.DatabaseSession.Commit();
 
-            Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
+            //var builder = new BasePriceBuilder(this.DatabaseSession);
+            //var basePrice = builder.Build();
 
-            this.DatabaseSession.Rollback();
+            //Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
 
-            builder.WithPrice(1);
-            basePrice = builder.Build();
+            //this.DatabaseSession.Rollback();
 
-            Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
+            //builder.WithPrice(1);
+            //basePrice = builder.Build();
 
-            this.DatabaseSession.Rollback();
+            //Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
 
-            builder.WithProduct(good);
-            basePrice = builder.Build();
+            //this.DatabaseSession.Rollback();
 
-            Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
+            //builder.WithProduct(good);
+            //basePrice = builder.Build();
 
-            this.DatabaseSession.Rollback();
+            //Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
 
-            builder.WithProductFeature(colorFeature);
-            basePrice = builder.Build();
+            //this.DatabaseSession.Rollback();
 
-            Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
+            //builder.WithProductFeature(colorFeature);
+            //basePrice = builder.Build();
 
-            this.DatabaseSession.Rollback();
+            //Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
 
-            builder.WithFromDate(DateTime.Now);
-            basePrice = builder.Build();
+            //this.DatabaseSession.Rollback();
 
-            Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
+            //builder.WithFromDate(DateTime.Now);
+            //basePrice = builder.Build();
 
-            this.DatabaseSession.Rollback();
+            //Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
 
-            builder.WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"));
-            basePrice = builder.Build();
+            //this.DatabaseSession.Rollback();
 
-            Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
+            //builder.WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"));
+            //basePrice = builder.Build();
+
+            //Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
 
         [Test]
         public void GivenBasePrice_WhenDeriving_ThenDisplayNameIsSet()
         {
-            var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
-            var good = new GoodBuilder(this.DatabaseSession)
-                .WithName("gizmo")
-                .WithSku("10101")
-                .WithVatRate(vatRate21)
-                .WithInventoryItemKind(new InventoryItemKinds(this.DatabaseSession).NonSerialized)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .Build();
+            throw new Exception("TODO");
 
-            var basePrice = new BasePriceBuilder(this.DatabaseSession)
-                .WithPrice(10)
-                .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithProduct(good)
-                .WithFromDate(DateTime.Now)
-                .Build();
+            //var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
+            //var good = new GoodBuilder(this.DatabaseSession)
+            //    .WithName("gizmo")
+            //    .WithSku("10101")
+            //    .WithVatRate(vatRate21)
+            //    .WithInventoryItemKind(new InventoryItemKinds(this.DatabaseSession).NonSerialized)
+            //    .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
+            //    .Build();
 
-            this.DatabaseSession.Derive(true);
+            //var basePrice = new BasePriceBuilder(this.DatabaseSession)
+            //    .WithPrice(10)
+            //    .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
+            //    .WithProduct(good)
+            //    .WithFromDate(DateTime.Now)
+            //    .Build();
 
-            Assert.AreEqual("Baseprice: € 10.00 for product gizmo, SKU: 10101", basePrice.DisplayName);
+            //this.DatabaseSession.Derive(true);
 
-            basePrice.ProductFeature = new ColourBuilder(this.DatabaseSession)
-                .WithVatRate(vatRate21)
-                .WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
-                                            .WithText("golden")
-                                            .WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale)
-                                            .Build())
-                .Build();
+            //Assert.AreEqual("Baseprice: € 10.00 for product gizmo, SKU: 10101", basePrice.DisplayName);
+
+            //basePrice.ProductFeature = new ColourBuilder(this.DatabaseSession)
+            //    .WithVatRate(vatRate21)
+            //    .WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
+            //                                .WithText("golden")
+            //                                .WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale)
+            //                                .Build())
+            //    .Build();
 
 
-            this.DatabaseSession.Derive(true); 
+            //this.DatabaseSession.Derive(true); 
             
-            Assert.AreEqual("Baseprice: € 10.00 for feature golden with product gizmo, SKU: 10101", basePrice.DisplayName);
+            //Assert.AreEqual("Baseprice: € 10.00 for feature golden with product gizmo, SKU: 10101", basePrice.DisplayName);
 
-            basePrice.GeographicBoundary = new Countries(this.DatabaseSession).FindBy(Countries.Meta.IsoCode, "NL");
+            //basePrice.GeographicBoundary = new Countries(this.DatabaseSession).FindBy(Countries.Meta.IsoCode, "NL");
             
-            this.DatabaseSession.Derive(true);
+            //this.DatabaseSession.Derive(true);
             
-            Assert.AreEqual("Baseprice: € 10.00 for feature golden with product gizmo, SKU: 10101, with boundary Netherlands", basePrice.DisplayName);
+            //Assert.AreEqual("Baseprice: € 10.00 for feature golden with product gizmo, SKU: 10101, with boundary Netherlands", basePrice.DisplayName);
 
-            basePrice.PartyClassification = new IndustryClassificationBuilder(this.DatabaseSession).WithName("Minority").Build();
+            //basePrice.PartyClassification = new IndustryClassificationBuilder(this.DatabaseSession).WithName("Minority").Build();
             
-            this.DatabaseSession.Derive(true);
+            //this.DatabaseSession.Derive(true);
 
-            Assert.AreEqual("Baseprice: € 10.00 for feature golden with product gizmo, SKU: 10101, with boundary Netherlands, with party classification Minority", basePrice.DisplayName);
+            //Assert.AreEqual("Baseprice: € 10.00 for feature golden with product gizmo, SKU: 10101, with boundary Netherlands, with party classification Minority", basePrice.DisplayName);
 
-            basePrice.ProductCategory = new ProductCategoryBuilder(this.DatabaseSession).WithDescription("Summer sale").Build();
+            //basePrice.ProductCategory = new ProductCategoryBuilder(this.DatabaseSession).WithDescription("Summer sale").Build();
             
-            this.DatabaseSession.Derive(true);
+            //this.DatabaseSession.Derive(true);
             
-            Assert.AreEqual("Baseprice: € 10.00 for feature golden with product gizmo, SKU: 10101, with boundary Netherlands, with party classification Minority, with product category Summer sale", basePrice.DisplayName);
+            //Assert.AreEqual("Baseprice: € 10.00 for feature golden with product gizmo, SKU: 10101, with boundary Netherlands, with party classification Minority, with product category Summer sale", basePrice.DisplayName);
 
-            basePrice.SalesChannel = new SalesChannels(this.DatabaseSession).EbayChannel;
+            //basePrice.SalesChannel = new SalesChannels(this.DatabaseSession).EbayChannel;
 
-            this.DatabaseSession.Derive(true);
+            //this.DatabaseSession.Derive(true);
             
-            Assert.AreEqual("Baseprice: € 10.00 for feature golden with product gizmo, SKU: 10101, with boundary Netherlands, with party classification Minority, with product category Summer sale, with sales channel via eBay", basePrice.DisplayName);
+            //Assert.AreEqual("Baseprice: € 10.00 for feature golden with product gizmo, SKU: 10101, with boundary Netherlands, with party classification Minority, with product category Summer sale, with sales channel via eBay", basePrice.DisplayName);
         }
 
         [Test]
         public void GivenBasePriceForVirtualProduct_WhenDeriving_ThenProductVirtualProductPriceComponentIsUpdated()
         {
-            var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
-            var virtualGood = new GoodBuilder(this.DatabaseSession)
-                .WithName("virtual gizmo")
-                .WithVatRate(vatRate21)
-                .WithInventoryItemKind(new InventoryItemKinds(this.DatabaseSession).NonSerialized)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .Build();
+            throw new Exception("TODO");
 
-            var physicalGood = new GoodBuilder(this.DatabaseSession)
-                .WithName("real gizmo")
-                .WithSku("10101")
-                .WithVatRate(vatRate21)                                     
-                .WithInventoryItemKind(new InventoryItemKinds(this.DatabaseSession).NonSerialized)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .Build();
+            //var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
+            //var virtualGood = new GoodBuilder(this.DatabaseSession)
+            //    .WithName("virtual gizmo")
+            //    .WithVatRate(vatRate21)
+            //    .WithInventoryItemKind(new InventoryItemKinds(this.DatabaseSession).NonSerialized)
+            //    .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
+            //    .Build();
 
-            virtualGood.AddVariant(physicalGood);
+            //var physicalGood = new GoodBuilder(this.DatabaseSession)
+            //    .WithName("real gizmo")
+            //    .WithSku("10101")
+            //    .WithVatRate(vatRate21)                                     
+            //    .WithInventoryItemKind(new InventoryItemKinds(this.DatabaseSession).NonSerialized)
+            //    .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
+            //    .Build();
+
+            //virtualGood.AddVariant(physicalGood);
             
-            this.DatabaseSession.Derive(true);
+            //this.DatabaseSession.Derive(true);
 
-            var basePrice = new BasePriceBuilder(this.DatabaseSession)
-                .WithPrice(10)
-                .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithProduct(virtualGood)
-                .WithFromDate(DateTime.Now)
-                .Build();
+            //var basePrice = new BasePriceBuilder(this.DatabaseSession)
+            //    .WithPrice(10)
+            //    .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
+            //    .WithProduct(virtualGood)
+            //    .WithFromDate(DateTime.Now)
+            //    .Build();
 
-            this.DatabaseSession.Derive(true);
+            //this.DatabaseSession.Derive(true);
 
-            Assert.AreEqual(1, physicalGood.VirtualProductPriceComponents.Count);
-            Assert.Contains(basePrice, physicalGood.VirtualProductPriceComponents);
-            Assert.IsFalse(virtualGood.ExistVirtualProductPriceComponents);
+            //Assert.AreEqual(1, physicalGood.VirtualProductPriceComponents.Count);
+            //Assert.Contains(basePrice, physicalGood.VirtualProductPriceComponents);
+            //Assert.IsFalse(virtualGood.ExistVirtualProductPriceComponents);
         }
 
         [Test]
         public void GivenBasePriceForNonVirtualProduct_WhenDeriving_ThenProductVirtualProductPriceComponentIsNull()
         {
-            var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
+            throw new Exception("TODO");
 
-            var physicalGood = new GoodBuilder(this.DatabaseSession)
-                .WithName("real gizmo")
-                .WithSku("10101")
-                .WithVatRate(vatRate21)
-                .WithInventoryItemKind(new InventoryItemKinds(this.DatabaseSession).NonSerialized)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .Build();
+            //var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
 
-            new BasePriceBuilder(this.DatabaseSession)
-                .WithPrice(10)
-                .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithProduct(physicalGood)
-                .WithFromDate(DateTime.Now)
-                .Build();
+            //var physicalGood = new GoodBuilder(this.DatabaseSession)
+            //    .WithName("real gizmo")
+            //    .WithSku("10101")
+            //    .WithVatRate(vatRate21)
+            //    .WithInventoryItemKind(new InventoryItemKinds(this.DatabaseSession).NonSerialized)
+            //    .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
+            //    .Build();
 
-            Assert.IsFalse(physicalGood.ExistVirtualProductPriceComponents);
+            //new BasePriceBuilder(this.DatabaseSession)
+            //    .WithPrice(10)
+            //    .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
+            //    .WithProduct(physicalGood)
+            //    .WithFromDate(DateTime.Now)
+            //    .Build();
+
+            //Assert.IsFalse(physicalGood.ExistVirtualProductPriceComponents);
         }
 
         [Test]
@@ -281,52 +285,56 @@ namespace Allors.Domain
         [Test]
         public void GivenDiscountForVirtualProduct_WhenDeriving_ThenProductVirtualProductPriceComponentIsUpdated()
         {
-            var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
-            var virtualService = new DeliverableBasedServiceBuilder(this.DatabaseSession)
-                .WithName("virtual service")
-                .WithVatRate(vatRate21)
-                .Build();
+            throw new Exception("TODO");
 
-            var physicalService = new DeliverableBasedServiceBuilder(this.DatabaseSession)
-                .WithName("real service")
-                .WithVatRate(vatRate21)
-                .Build();
+            //var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
+            //var virtualService = new DeliverableBasedServiceBuilder(this.DatabaseSession)
+            //    .WithName("virtual service")
+            //    .WithVatRate(vatRate21)
+            //    .Build();
 
-            virtualService.AddVariant(physicalService);
+            //var physicalService = new DeliverableBasedServiceBuilder(this.DatabaseSession)
+            //    .WithName("real service")
+            //    .WithVatRate(vatRate21)
+            //    .Build();
 
-            this.DatabaseSession.Derive(true); 
+            //virtualService.AddVariant(physicalService);
 
-            var discount = new DiscountComponentBuilder(this.DatabaseSession)
-                .WithPrice(10)
-                .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithProduct(virtualService)
-                .WithFromDate(DateTime.Now)
-                .Build();
+            //this.DatabaseSession.Derive(true); 
 
-            this.DatabaseSession.Derive(true);
+            //var discount = new DiscountComponentBuilder(this.DatabaseSession)
+            //    .WithPrice(10)
+            //    .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
+            //    .WithProduct(virtualService)
+            //    .WithFromDate(DateTime.Now)
+            //    .Build();
 
-            Assert.AreEqual(1, physicalService.VirtualProductPriceComponents.Count);
-            Assert.Contains(discount, physicalService.VirtualProductPriceComponents);
-            Assert.IsFalse(virtualService.ExistVirtualProductPriceComponents);
+            //this.DatabaseSession.Derive(true);
+
+            //Assert.AreEqual(1, physicalService.VirtualProductPriceComponents.Count);
+            //Assert.Contains(discount, physicalService.VirtualProductPriceComponents);
+            //Assert.IsFalse(virtualService.ExistVirtualProductPriceComponents);
         }
 
         [Test]
         public void GivenDiscountForNonVirtualProduct_WhenDeriving_ThenProductVirtualProductPriceComponentIsNull()
         {
-            var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
-            var physicalService = new DeliverableBasedServiceBuilder(this.DatabaseSession)
-                .WithName("real service")
-                .WithVatRate(vatRate21)
-                .Build();
+            throw new Exception("TODO");
 
-            new DiscountComponentBuilder(this.DatabaseSession)
-                .WithPrice(10)
-                .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithProduct(physicalService)
-                .WithFromDate(DateTime.Now)
-                .Build();
+            //var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
+            //var physicalService = new DeliverableBasedServiceBuilder(this.DatabaseSession)
+            //    .WithName("real service")
+            //    .WithVatRate(vatRate21)
+            //    .Build();
 
-            Assert.IsFalse(physicalService.ExistVirtualProductPriceComponents);
+            //new DiscountComponentBuilder(this.DatabaseSession)
+            //    .WithPrice(10)
+            //    .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
+            //    .WithProduct(physicalService)
+            //    .WithFromDate(DateTime.Now)
+            //    .Build();
+
+            //Assert.IsFalse(physicalService.ExistVirtualProductPriceComponents);
         }
 
         [Test]
@@ -391,269 +399,277 @@ namespace Allors.Domain
         [Test]
         public void GivenSurchargeForVirtualProduct_WhenDeriving_ThenProductVirtualProductPriceComponentIsUpdated()
         {
-            var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
-            var virtualService = new TimeAndMaterialsServiceBuilder(this.DatabaseSession)
-                .WithName("virtual service")
-                .WithVatRate(vatRate21)
-                .Build();
+            throw new Exception("TODO");
 
-            var physicalService = new TimeAndMaterialsServiceBuilder(this.DatabaseSession)
-                .WithName("real service")
-                .WithVatRate(vatRate21)
-                .Build();
+            //var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
+            //var virtualService = new TimeAndMaterialsServiceBuilder(this.DatabaseSession)
+            //    .WithName("virtual service")
+            //    .WithVatRate(vatRate21)
+            //    .Build();
 
-            virtualService.AddVariant(physicalService);
+            //var physicalService = new TimeAndMaterialsServiceBuilder(this.DatabaseSession)
+            //    .WithName("real service")
+            //    .WithVatRate(vatRate21)
+            //    .Build();
 
-            this.DatabaseSession.Derive(true); 
+            //virtualService.AddVariant(physicalService);
 
-            var surcharge = new SurchargeComponentBuilder(this.DatabaseSession)
-                .WithPrice(10)
-                .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithProduct(virtualService)
-                .WithFromDate(DateTime.Now)
-                .Build();
+            //this.DatabaseSession.Derive(true); 
 
-            this.DatabaseSession.Derive(true); 
+            //var surcharge = new SurchargeComponentBuilder(this.DatabaseSession)
+            //    .WithPrice(10)
+            //    .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
+            //    .WithProduct(virtualService)
+            //    .WithFromDate(DateTime.Now)
+            //    .Build();
 
-            Assert.AreEqual(1, physicalService.VirtualProductPriceComponents.Count);
-            Assert.Contains(surcharge, physicalService.VirtualProductPriceComponents);
-            Assert.IsFalse(virtualService.ExistVirtualProductPriceComponents);
+            //this.DatabaseSession.Derive(true); 
+
+            //Assert.AreEqual(1, physicalService.VirtualProductPriceComponents.Count);
+            //Assert.Contains(surcharge, physicalService.VirtualProductPriceComponents);
+            //Assert.IsFalse(virtualService.ExistVirtualProductPriceComponents);
         }
 
         [Test]
         public void GivenSurchargeForNonVirtualProduct_WhenDeriving_ThenProductVirtualProductPriceComponentIsNull()
         {
-            var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
-            var physicalService = new TimeAndMaterialsServiceBuilder(this.DatabaseSession)
-                .WithName("real service")
-                .WithVatRate(vatRate21)
-                .Build();
+            throw new Exception("TODO");
 
-            new SurchargeComponentBuilder(this.DatabaseSession)
-                .WithPrice(10)
-                .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithProduct(physicalService)
-                .WithFromDate(DateTime.Now)
-                .Build();
+            //var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
+            //var physicalService = new TimeAndMaterialsServiceBuilder(this.DatabaseSession)
+            //    .WithName("real service")
+            //    .WithVatRate(vatRate21)
+            //    .Build();
 
-            Assert.IsFalse(physicalService.ExistVirtualProductPriceComponents);
+            //new SurchargeComponentBuilder(this.DatabaseSession)
+            //    .WithPrice(10)
+            //    .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
+            //    .WithProduct(physicalService)
+            //    .WithFromDate(DateTime.Now)
+            //    .Build();
+
+            //Assert.IsFalse(physicalService.ExistVirtualProductPriceComponents);
         }
 
         [Test]
         public void GivenDiscount_WhenDeriving_ThenDisplayNameIsSet()
         {
-            var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
-            var good = new GoodBuilder(this.DatabaseSession)
-                .WithName("gizmo")
-                .WithSku("10101")
-                .WithVatRate(vatRate21)
-                .WithInventoryItemKind(new InventoryItemKinds(this.DatabaseSession).NonSerialized)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .Build();
+            throw new Exception("TODO");
 
-            var discount = new DiscountComponentBuilder(this.DatabaseSession)
-                .WithPrice(10)
-                .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithProduct(good)
-                .WithFromDate(DateTime.Now)
-                .Build();
+            //var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
+            //var good = new GoodBuilder(this.DatabaseSession)
+            //    .WithName("gizmo")
+            //    .WithSku("10101")
+            //    .WithVatRate(vatRate21)
+            //    .WithInventoryItemKind(new InventoryItemKinds(this.DatabaseSession).NonSerialized)
+            //    .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
+            //    .Build();
 
-            this.DatabaseSession.Derive(true);
+            //var discount = new DiscountComponentBuilder(this.DatabaseSession)
+            //    .WithPrice(10)
+            //    .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
+            //    .WithProduct(good)
+            //    .WithFromDate(DateTime.Now)
+            //    .Build();
 
-            Assert.AreEqual("Discount: € 10.00 for product gizmo, SKU: 10101", discount.DisplayName);
+            //this.DatabaseSession.Derive(true);
 
-            discount.ProductFeature = new ColourBuilder(this.DatabaseSession)
-                .WithVatRate(vatRate21)
-                .WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
-                                            .WithText("golden")
-                                            .WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale)
-                                            .Build())
-                .Build();
+            //Assert.AreEqual("Discount: € 10.00 for product gizmo, SKU: 10101", discount.DisplayName);
 
-            this.DatabaseSession.Derive(true);
+            //discount.ProductFeature = new ColourBuilder(this.DatabaseSession)
+            //    .WithVatRate(vatRate21)
+            //    .WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
+            //                                .WithText("golden")
+            //                                .WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale)
+            //                                .Build())
+            //    .Build();
 
-            Assert.AreEqual("Discount: € 10.00 for feature golden with product gizmo, SKU: 10101", discount.DisplayName);
+            //this.DatabaseSession.Derive(true);
 
-            discount.GeographicBoundary = new Countries(this.DatabaseSession).FindBy(Countries.Meta.IsoCode, "NL");
-            this.DatabaseSession.Derive(true);
+            //Assert.AreEqual("Discount: € 10.00 for feature golden with product gizmo, SKU: 10101", discount.DisplayName);
 
-            Assert.AreEqual("Discount: € 10.00 for feature golden with product gizmo, SKU: 10101, with boundary Netherlands", discount.DisplayName);
+            //discount.GeographicBoundary = new Countries(this.DatabaseSession).FindBy(Countries.Meta.IsoCode, "NL");
+            //this.DatabaseSession.Derive(true);
 
-            discount.PartyClassification = new IndustryClassificationBuilder(this.DatabaseSession).WithName("Minority").Build();
-            this.DatabaseSession.Derive(true);
+            //Assert.AreEqual("Discount: € 10.00 for feature golden with product gizmo, SKU: 10101, with boundary Netherlands", discount.DisplayName);
 
-            Assert.AreEqual("Discount: € 10.00 for feature golden with product gizmo, SKU: 10101, with boundary Netherlands, with party classification Minority", discount.DisplayName);
+            //discount.PartyClassification = new IndustryClassificationBuilder(this.DatabaseSession).WithName("Minority").Build();
+            //this.DatabaseSession.Derive(true);
 
-            discount.ProductCategory = new ProductCategoryBuilder(this.DatabaseSession).WithDescription("Summer sale").Build();
-            this.DatabaseSession.Derive(true);
+            //Assert.AreEqual("Discount: € 10.00 for feature golden with product gizmo, SKU: 10101, with boundary Netherlands, with party classification Minority", discount.DisplayName);
 
-            Assert.AreEqual("Discount: € 10.00 for feature golden with product gizmo, SKU: 10101, with boundary Netherlands, with party classification Minority, with product category Summer sale", discount.DisplayName);
+            //discount.ProductCategory = new ProductCategoryBuilder(this.DatabaseSession).WithDescription("Summer sale").Build();
+            //this.DatabaseSession.Derive(true);
 
-            discount.SalesChannel = new SalesChannels(this.DatabaseSession).EbayChannel;
-            this.DatabaseSession.Derive(true);
+            //Assert.AreEqual("Discount: € 10.00 for feature golden with product gizmo, SKU: 10101, with boundary Netherlands, with party classification Minority, with product category Summer sale", discount.DisplayName);
 
-            Assert.AreEqual("Discount: € 10.00 for feature golden with product gizmo, SKU: 10101, with boundary Netherlands, with party classification Minority, with product category Summer sale, with sales channel via eBay", discount.DisplayName);
+            //discount.SalesChannel = new SalesChannels(this.DatabaseSession).EbayChannel;
+            //this.DatabaseSession.Derive(true);
 
-            discount.RemoveGeographicBoundary();
-            discount.RemovePartyClassification();
-            discount.RemoveProductCategory();
-            discount.RemoveSalesChannel();
+            //Assert.AreEqual("Discount: € 10.00 for feature golden with product gizmo, SKU: 10101, with boundary Netherlands, with party classification Minority, with product category Summer sale, with sales channel via eBay", discount.DisplayName);
 
-            var quantityBreak = new OrderQuantityBreakBuilder(this.DatabaseSession).WithFromAmount(100).Build();
-            discount.OrderQuantityBreak = quantityBreak;
-            this.DatabaseSession.Derive(true);
+            //discount.RemoveGeographicBoundary();
+            //discount.RemovePartyClassification();
+            //discount.RemoveProductCategory();
+            //discount.RemoveSalesChannel();
 
-            Assert.AreEqual("Discount: € 10.00 for feature golden with product gizmo, SKU: 10101, with order quantity break from 100", discount.DisplayName);
+            //var quantityBreak = new OrderQuantityBreakBuilder(this.DatabaseSession).WithFromAmount(100).Build();
+            //discount.OrderQuantityBreak = quantityBreak;
+            //this.DatabaseSession.Derive(true);
 
-            quantityBreak.ThroughAmount = 1000;
-            discount.OrderQuantityBreak = quantityBreak;
-            this.DatabaseSession.Derive(true);
+            //Assert.AreEqual("Discount: € 10.00 for feature golden with product gizmo, SKU: 10101, with order quantity break from 100", discount.DisplayName);
 
-            Assert.AreEqual("Discount: € 10.00 for feature golden with product gizmo, SKU: 10101, with order quantity break from 100 through 1000", discount.DisplayName);
+            //quantityBreak.ThroughAmount = 1000;
+            //discount.OrderQuantityBreak = quantityBreak;
+            //this.DatabaseSession.Derive(true);
 
-            quantityBreak.RemoveFromAmount();
-            discount.OrderQuantityBreak = quantityBreak;
-            this.DatabaseSession.Derive(true);
+            //Assert.AreEqual("Discount: € 10.00 for feature golden with product gizmo, SKU: 10101, with order quantity break from 100 through 1000", discount.DisplayName);
 
-            Assert.AreEqual("Discount: € 10.00 for feature golden with product gizmo, SKU: 10101, with order quantity break through 1000", discount.DisplayName);
+            //quantityBreak.RemoveFromAmount();
+            //discount.OrderQuantityBreak = quantityBreak;
+            //this.DatabaseSession.Derive(true);
 
-            var orderValue = new OrderValueBuilder(this.DatabaseSession).WithFromAmount(100).Build();
-            discount.OrderValue = orderValue;
+            //Assert.AreEqual("Discount: € 10.00 for feature golden with product gizmo, SKU: 10101, with order quantity break through 1000", discount.DisplayName);
 
-            this.DatabaseSession.Derive(true);
-            Assert.AreEqual("Discount: € 10.00 for feature golden with product gizmo, SKU: 10101, with order quantity break through 1000, with order value from 100", discount.DisplayName);
+            //var orderValue = new OrderValueBuilder(this.DatabaseSession).WithFromAmount(100).Build();
+            //discount.OrderValue = orderValue;
 
-            orderValue.ThroughAmount = 1000;
-            discount.OrderValue = orderValue;
-            this.DatabaseSession.Derive(true);
-            Assert.AreEqual("Discount: € 10.00 for feature golden with product gizmo, SKU: 10101, with order quantity break through 1000, with order value from 100 through 1000", discount.DisplayName);
+            //this.DatabaseSession.Derive(true);
+            //Assert.AreEqual("Discount: € 10.00 for feature golden with product gizmo, SKU: 10101, with order quantity break through 1000, with order value from 100", discount.DisplayName);
 
-            orderValue.RemoveFromAmount();
-            discount.OrderValue = orderValue;
-            this.DatabaseSession.Derive(true);
-            Assert.AreEqual("Discount: € 10.00 for feature golden with product gizmo, SKU: 10101, with order quantity break through 1000, with order value through 1000", discount.DisplayName);
+            //orderValue.ThroughAmount = 1000;
+            //discount.OrderValue = orderValue;
+            //this.DatabaseSession.Derive(true);
+            //Assert.AreEqual("Discount: € 10.00 for feature golden with product gizmo, SKU: 10101, with order quantity break through 1000, with order value from 100 through 1000", discount.DisplayName);
 
-            discount.RemoveOrderQuantityBreak();
-            discount.RemoveOrderValue();
+            //orderValue.RemoveFromAmount();
+            //discount.OrderValue = orderValue;
+            //this.DatabaseSession.Derive(true);
+            //Assert.AreEqual("Discount: € 10.00 for feature golden with product gizmo, SKU: 10101, with order quantity break through 1000, with order value through 1000", discount.DisplayName);
 
-            var packageBreak = new PackageQuantityBreakBuilder(this.DatabaseSession).WithFrom(2).Build();
-            discount.PackageQuantityBreak = packageBreak;
-            this.DatabaseSession.Derive(true);
-            Assert.AreEqual("Discount: € 10.00 for feature golden with product gizmo, SKU: 10101, with package count from 2", discount.DisplayName);
+            //discount.RemoveOrderQuantityBreak();
+            //discount.RemoveOrderValue();
 
-            packageBreak.Through = 2;
-            discount.PackageQuantityBreak = packageBreak;
-            this.DatabaseSession.Derive(true);
-            Assert.AreEqual("Discount: € 10.00 for feature golden with product gizmo, SKU: 10101, with package count from 2 through 2", discount.DisplayName);
+            //var packageBreak = new PackageQuantityBreakBuilder(this.DatabaseSession).WithFrom(2).Build();
+            //discount.PackageQuantityBreak = packageBreak;
+            //this.DatabaseSession.Derive(true);
+            //Assert.AreEqual("Discount: € 10.00 for feature golden with product gizmo, SKU: 10101, with package count from 2", discount.DisplayName);
 
-            packageBreak.RemoveFrom();
-            discount.PackageQuantityBreak = packageBreak;
-            this.DatabaseSession.Derive(true);
-            Assert.AreEqual("Discount: € 10.00 for feature golden with product gizmo, SKU: 10101, with package count through 2", discount.DisplayName);
+            //packageBreak.Through = 2;
+            //discount.PackageQuantityBreak = packageBreak;
+            //this.DatabaseSession.Derive(true);
+            //Assert.AreEqual("Discount: € 10.00 for feature golden with product gizmo, SKU: 10101, with package count from 2 through 2", discount.DisplayName);
+
+            //packageBreak.RemoveFrom();
+            //discount.PackageQuantityBreak = packageBreak;
+            //this.DatabaseSession.Derive(true);
+            //Assert.AreEqual("Discount: € 10.00 for feature golden with product gizmo, SKU: 10101, with package count through 2", discount.DisplayName);
         }
 
         [Test]
         public void GivenSurcharge_WhenDeriving_ThenDisplayNameIsSet()
         {
-            var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
-            var good = new GoodBuilder(this.DatabaseSession)
-                .WithName("gizmo")
-                .WithSku("10101")
-                .WithVatRate(vatRate21)
-                .WithInventoryItemKind(new InventoryItemKinds(this.DatabaseSession).NonSerialized)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .Build();
+            throw new Exception("TODO");
 
-            var surcharge = new SurchargeComponentBuilder(this.DatabaseSession)
-                .WithPrice(10)
-                .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithProduct(good)
-                .WithFromDate(DateTime.Now)
-                .Build();
+            //var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
+            //var good = new GoodBuilder(this.DatabaseSession)
+            //    .WithName("gizmo")
+            //    .WithSku("10101")
+            //    .WithVatRate(vatRate21)
+            //    .WithInventoryItemKind(new InventoryItemKinds(this.DatabaseSession).NonSerialized)
+            //    .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
+            //    .Build();
 
-            this.DatabaseSession.Derive(true);
+            //var surcharge = new SurchargeComponentBuilder(this.DatabaseSession)
+            //    .WithPrice(10)
+            //    .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
+            //    .WithProduct(good)
+            //    .WithFromDate(DateTime.Now)
+            //    .Build();
 
-            Assert.AreEqual("Surcharge: € 10.00 for product gizmo, SKU: 10101", surcharge.DisplayName);
+            //this.DatabaseSession.Derive(true);
 
-            surcharge.ProductFeature = new ColourBuilder(this.DatabaseSession)
-                .WithVatRate(vatRate21)
-                .WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
-                                            .WithText("golden")
-                                            .WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale)
-                                            .Build())
-                .Build();
+            //Assert.AreEqual("Surcharge: € 10.00 for product gizmo, SKU: 10101", surcharge.DisplayName);
 
-            this.DatabaseSession.Derive(true);
-            Assert.AreEqual("Surcharge: € 10.00 for feature golden with product gizmo, SKU: 10101", surcharge.DisplayName);
+            //surcharge.ProductFeature = new ColourBuilder(this.DatabaseSession)
+            //    .WithVatRate(vatRate21)
+            //    .WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
+            //                                .WithText("golden")
+            //                                .WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale)
+            //                                .Build())
+            //    .Build();
 
-            surcharge.GeographicBoundary = new Countries(this.DatabaseSession).FindBy(Countries.Meta.IsoCode, "NL");
-            this.DatabaseSession.Derive(true);
-            Assert.AreEqual("Surcharge: € 10.00 for feature golden with product gizmo, SKU: 10101, with boundary Netherlands", surcharge.DisplayName);
+            //this.DatabaseSession.Derive(true);
+            //Assert.AreEqual("Surcharge: € 10.00 for feature golden with product gizmo, SKU: 10101", surcharge.DisplayName);
 
-            surcharge.PartyClassification = new IndustryClassificationBuilder(this.DatabaseSession).WithName("Minority").Build();
-            this.DatabaseSession.Derive(true);
-            Assert.AreEqual("Surcharge: € 10.00 for feature golden with product gizmo, SKU: 10101, with boundary Netherlands, with party classification Minority", surcharge.DisplayName);
+            //surcharge.GeographicBoundary = new Countries(this.DatabaseSession).FindBy(Countries.Meta.IsoCode, "NL");
+            //this.DatabaseSession.Derive(true);
+            //Assert.AreEqual("Surcharge: € 10.00 for feature golden with product gizmo, SKU: 10101, with boundary Netherlands", surcharge.DisplayName);
 
-            surcharge.ProductCategory = new ProductCategoryBuilder(this.DatabaseSession).WithDescription("Summer sale").Build();
-            this.DatabaseSession.Derive(true);
-            Assert.AreEqual("Surcharge: € 10.00 for feature golden with product gizmo, SKU: 10101, with boundary Netherlands, with party classification Minority, with product category Summer sale", surcharge.DisplayName);
+            //surcharge.PartyClassification = new IndustryClassificationBuilder(this.DatabaseSession).WithName("Minority").Build();
+            //this.DatabaseSession.Derive(true);
+            //Assert.AreEqual("Surcharge: € 10.00 for feature golden with product gizmo, SKU: 10101, with boundary Netherlands, with party classification Minority", surcharge.DisplayName);
 
-            surcharge.SalesChannel = new SalesChannels(this.DatabaseSession).EbayChannel;
-            this.DatabaseSession.Derive(true);
-            Assert.AreEqual("Surcharge: € 10.00 for feature golden with product gizmo, SKU: 10101, with boundary Netherlands, with party classification Minority, with product category Summer sale, with sales channel via eBay", surcharge.DisplayName);
+            //surcharge.ProductCategory = new ProductCategoryBuilder(this.DatabaseSession).WithDescription("Summer sale").Build();
+            //this.DatabaseSession.Derive(true);
+            //Assert.AreEqual("Surcharge: € 10.00 for feature golden with product gizmo, SKU: 10101, with boundary Netherlands, with party classification Minority, with product category Summer sale", surcharge.DisplayName);
 
-            surcharge.RemoveGeographicBoundary();
-            surcharge.RemovePartyClassification();
-            surcharge.RemoveProductCategory();
-            surcharge.RemoveSalesChannel();
+            //surcharge.SalesChannel = new SalesChannels(this.DatabaseSession).EbayChannel;
+            //this.DatabaseSession.Derive(true);
+            //Assert.AreEqual("Surcharge: € 10.00 for feature golden with product gizmo, SKU: 10101, with boundary Netherlands, with party classification Minority, with product category Summer sale, with sales channel via eBay", surcharge.DisplayName);
 
-            var quantityBreak = new OrderQuantityBreakBuilder(this.DatabaseSession).WithFromAmount(100).Build();
-            surcharge.OrderQuantityBreak = quantityBreak;
-            this.DatabaseSession.Derive(true);
-            Assert.AreEqual("Surcharge: € 10.00 for feature golden with product gizmo, SKU: 10101, with order quantity break from 100", surcharge.DisplayName);
+            //surcharge.RemoveGeographicBoundary();
+            //surcharge.RemovePartyClassification();
+            //surcharge.RemoveProductCategory();
+            //surcharge.RemoveSalesChannel();
 
-            quantityBreak.ThroughAmount = 1000;
-            surcharge.OrderQuantityBreak = quantityBreak;
-            this.DatabaseSession.Derive(true);
-            Assert.AreEqual("Surcharge: € 10.00 for feature golden with product gizmo, SKU: 10101, with order quantity break from 100 through 1000", surcharge.DisplayName);
+            //var quantityBreak = new OrderQuantityBreakBuilder(this.DatabaseSession).WithFromAmount(100).Build();
+            //surcharge.OrderQuantityBreak = quantityBreak;
+            //this.DatabaseSession.Derive(true);
+            //Assert.AreEqual("Surcharge: € 10.00 for feature golden with product gizmo, SKU: 10101, with order quantity break from 100", surcharge.DisplayName);
 
-            quantityBreak.RemoveFromAmount();
-            surcharge.OrderQuantityBreak = quantityBreak;
-            this.DatabaseSession.Derive(true);
-            Assert.AreEqual("Surcharge: € 10.00 for feature golden with product gizmo, SKU: 10101, with order quantity break through 1000", surcharge.DisplayName);
+            //quantityBreak.ThroughAmount = 1000;
+            //surcharge.OrderQuantityBreak = quantityBreak;
+            //this.DatabaseSession.Derive(true);
+            //Assert.AreEqual("Surcharge: € 10.00 for feature golden with product gizmo, SKU: 10101, with order quantity break from 100 through 1000", surcharge.DisplayName);
 
-            var orderValue = new OrderValueBuilder(this.DatabaseSession).WithFromAmount(100).Build();
-            surcharge.OrderValue = orderValue;
-            this.DatabaseSession.Derive(true);
-            Assert.AreEqual("Surcharge: € 10.00 for feature golden with product gizmo, SKU: 10101, with order quantity break through 1000, with order value from 100", surcharge.DisplayName);
+            //quantityBreak.RemoveFromAmount();
+            //surcharge.OrderQuantityBreak = quantityBreak;
+            //this.DatabaseSession.Derive(true);
+            //Assert.AreEqual("Surcharge: € 10.00 for feature golden with product gizmo, SKU: 10101, with order quantity break through 1000", surcharge.DisplayName);
 
-            orderValue.ThroughAmount = 1000;
-            surcharge.OrderValue = orderValue;
-            this.DatabaseSession.Derive(true);
-            Assert.AreEqual("Surcharge: € 10.00 for feature golden with product gizmo, SKU: 10101, with order quantity break through 1000, with order value from 100 through 1000", surcharge.DisplayName);
+            //var orderValue = new OrderValueBuilder(this.DatabaseSession).WithFromAmount(100).Build();
+            //surcharge.OrderValue = orderValue;
+            //this.DatabaseSession.Derive(true);
+            //Assert.AreEqual("Surcharge: € 10.00 for feature golden with product gizmo, SKU: 10101, with order quantity break through 1000, with order value from 100", surcharge.DisplayName);
 
-            orderValue.RemoveFromAmount();
-            surcharge.OrderValue = orderValue;
-            this.DatabaseSession.Derive(true);
-            Assert.AreEqual("Surcharge: € 10.00 for feature golden with product gizmo, SKU: 10101, with order quantity break through 1000, with order value through 1000", surcharge.DisplayName);
+            //orderValue.ThroughAmount = 1000;
+            //surcharge.OrderValue = orderValue;
+            //this.DatabaseSession.Derive(true);
+            //Assert.AreEqual("Surcharge: € 10.00 for feature golden with product gizmo, SKU: 10101, with order quantity break through 1000, with order value from 100 through 1000", surcharge.DisplayName);
 
-            surcharge.RemoveOrderQuantityBreak();
-            surcharge.RemoveOrderValue();
+            //orderValue.RemoveFromAmount();
+            //surcharge.OrderValue = orderValue;
+            //this.DatabaseSession.Derive(true);
+            //Assert.AreEqual("Surcharge: € 10.00 for feature golden with product gizmo, SKU: 10101, with order quantity break through 1000, with order value through 1000", surcharge.DisplayName);
 
-            var packageBreak = new PackageQuantityBreakBuilder(this.DatabaseSession).WithFrom(2).Build();
-            surcharge.PackageQuantityBreak = packageBreak;
-            this.DatabaseSession.Derive(true);
-            Assert.AreEqual("Surcharge: € 10.00 for feature golden with product gizmo, SKU: 10101, with package count from 2", surcharge.DisplayName);
+            //surcharge.RemoveOrderQuantityBreak();
+            //surcharge.RemoveOrderValue();
 
-            packageBreak.Through = 2;
-            surcharge.PackageQuantityBreak = packageBreak;
-            this.DatabaseSession.Derive(true);
-            Assert.AreEqual("Surcharge: € 10.00 for feature golden with product gizmo, SKU: 10101, with package count from 2 through 2", surcharge.DisplayName);
+            //var packageBreak = new PackageQuantityBreakBuilder(this.DatabaseSession).WithFrom(2).Build();
+            //surcharge.PackageQuantityBreak = packageBreak;
+            //this.DatabaseSession.Derive(true);
+            //Assert.AreEqual("Surcharge: € 10.00 for feature golden with product gizmo, SKU: 10101, with package count from 2", surcharge.DisplayName);
 
-            packageBreak.RemoveFrom();
-            surcharge.PackageQuantityBreak = packageBreak;
-            this.DatabaseSession.Derive(true);
-            Assert.AreEqual("Surcharge: € 10.00 for feature golden with product gizmo, SKU: 10101, with package count through 2", surcharge.DisplayName);
+            //packageBreak.Through = 2;
+            //surcharge.PackageQuantityBreak = packageBreak;
+            //this.DatabaseSession.Derive(true);
+            //Assert.AreEqual("Surcharge: € 10.00 for feature golden with product gizmo, SKU: 10101, with package count from 2 through 2", surcharge.DisplayName);
+
+            //packageBreak.RemoveFrom();
+            //surcharge.PackageQuantityBreak = packageBreak;
+            //this.DatabaseSession.Derive(true);
+            //Assert.AreEqual("Surcharge: € 10.00 for feature golden with product gizmo, SKU: 10101, with package count through 2", surcharge.DisplayName);
         }
     }
 }

@@ -21,6 +21,8 @@
 
 namespace Allors.Domain
 {
+    using System;
+
     using Allors.Domain;
 
     using NUnit.Framework;
@@ -61,41 +63,42 @@ namespace Allors.Domain
         [Test]
         public void GivenOrganisationGlAccount_WhenBuild_ThenHasBankStatementTransactionsIsAlwaysFalse()
         {
-            var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
+            throw new Exception("Review");
+            //var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
 
-            var generalLedgerAccount1 = new GeneralLedgerAccountBuilder(this.DatabaseSession)
-                .WithAccountNumber("0001")
-                .WithName("GeneralLedgerAccount")
-                .WithBalanceSheetAccount(true)
-                .WithSide(new DebitCreditConstants(this.DatabaseSession).Debit)
-                .WithGeneralLedgerAccountType(new GeneralLedgerAccountTypeBuilder(this.DatabaseSession).WithDescription("accountType").Build())
-                .WithGeneralLedgerAccountGroup(new GeneralLedgerAccountGroupBuilder(this.DatabaseSession).WithDescription("accountGroup").Build())
-                .Build();
+            //var generalLedgerAccount1 = new GeneralLedgerAccountBuilder(this.DatabaseSession)
+            //    .WithAccountNumber("0001")
+            //    .WithName("GeneralLedgerAccount")
+            //    .WithBalanceSheetAccount(true)
+            //    .WithSide(new DebitCreditConstants(this.DatabaseSession).Debit)
+            //    .WithGeneralLedgerAccountType(new GeneralLedgerAccountTypeBuilder(this.DatabaseSession).WithDescription("accountType").Build())
+            //    .WithGeneralLedgerAccountGroup(new GeneralLedgerAccountGroupBuilder(this.DatabaseSession).WithDescription("accountGroup").Build())
+            //    .Build();
 
-            var organisationGlAccount1 = new OrganisationGlAccountBuilder(this.DatabaseSession)
-                .WithInternalOrganisation(internalOrganisation)
-                .WithGeneralLedgerAccount(generalLedgerAccount1)
-                .Build();
+            //var organisationGlAccount1 = new OrganisationGlAccountBuilder(this.DatabaseSession)
+            //    .WithInternalOrganisation(internalOrganisation)
+            //    .WithGeneralLedgerAccount(generalLedgerAccount1)
+            //    .Build();
 
-            var generalLedgerAccount2 = new GeneralLedgerAccountBuilder(this.DatabaseSession)
-                .WithAccountNumber("0002")
-                .WithName("GeneralLedgerAccount")
-                .WithBalanceSheetAccount(true)
-                .WithSide(new DebitCreditConstants(this.DatabaseSession).Debit)
-                .WithGeneralLedgerAccountType(new GeneralLedgerAccountTypeBuilder(this.DatabaseSession).WithDescription("accountType").Build())
-                .WithGeneralLedgerAccountGroup(new GeneralLedgerAccountGroupBuilder(this.DatabaseSession).WithDescription("accountGroup").Build())
-                .Build();
+            //var generalLedgerAccount2 = new GeneralLedgerAccountBuilder(this.DatabaseSession)
+            //    .WithAccountNumber("0002")
+            //    .WithName("GeneralLedgerAccount")
+            //    .WithBalanceSheetAccount(true)
+            //    .WithSide(new DebitCreditConstants(this.DatabaseSession).Debit)
+            //    .WithGeneralLedgerAccountType(new GeneralLedgerAccountTypeBuilder(this.DatabaseSession).WithDescription("accountType").Build())
+            //    .WithGeneralLedgerAccountGroup(new GeneralLedgerAccountGroupBuilder(this.DatabaseSession).WithDescription("accountGroup").Build())
+            //    .Build();
 
-            var organisationGlAccount2 = new OrganisationGlAccountBuilder(this.DatabaseSession)
-                .WithInternalOrganisation(internalOrganisation)
-                .WithGeneralLedgerAccount(generalLedgerAccount2)
-                .WithHasBankStatementTransactions(true)
-                .Build();
+            //var organisationGlAccount2 = new OrganisationGlAccountBuilder(this.DatabaseSession)
+            //    .WithInternalOrganisation(internalOrganisation)
+            //    .WithGeneralLedgerAccount(generalLedgerAccount2)
+            //    .WithHasBankStatementTransactions(true)
+            //    .Build();
 
-            this.DatabaseSession.Derive();
+            //this.DatabaseSession.Derive();
 
-            Assert.IsFalse(organisationGlAccount1.HasBankStatementTransactions);
-            Assert.IsFalse(organisationGlAccount2.HasBankStatementTransactions);
+            //Assert.IsFalse(organisationGlAccount1.HasBankStatementTransactions);
+            //Assert.IsFalse(organisationGlAccount2.HasBankStatementTransactions);
         }
 
         [Test]

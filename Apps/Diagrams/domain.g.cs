@@ -210,8 +210,6 @@ namespace Allors.Domain
 
 					Media Documents {set;}
 
-					GeographicBoundary CommunicationEventLocation {set;}
-
 					Case Case {set;}
 
 					Priority Priority {set;}
@@ -2271,9 +2269,9 @@ namespace Allors.Domain
 	}
 	public interface FaceToFaceCommunication  : Object, CommunicationEvent 
 	{
-					PostalAddress FaceToFaceCommunicationLocation {set;}
-
 					Party Participants {set;}
+
+					global::System.String Location {set;}
 
 	}
 	public interface FaxCommunication  : Object, CommunicationEvent 
@@ -3370,6 +3368,8 @@ namespace Allors.Domain
 	public interface PhoneCommunication  : Object, CommunicationEvent 
 	{
 					global::System.Boolean? LeftVoiceMail {set;}
+
+					global::System.Boolean? IncomingCall {set;}
 
 					Party Receivers {set;}
 

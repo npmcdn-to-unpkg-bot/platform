@@ -83,37 +83,39 @@ namespace Allors.Domain
         [Test]
         public void GivenTaxDue_WhenDeriving_ThenDisplayNameIsSet()
         {
-            var fromParty = new OrganisationBuilder(this.DatabaseSession)
-                .WithName("party paying")
-                .WithLocale(new Locales(this.DatabaseSession).EnglishGreatBritain)
-                .Build();
+            throw new Exception("Review");
 
-            var toParty = new OrganisationBuilder(this.DatabaseSession)
-                .WithName("party receiving")
-                .WithLocale(new Locales(this.DatabaseSession).EnglishGreatBritain)
-                .Build();
+            //var fromParty = new OrganisationBuilder(this.DatabaseSession)
+            //    .WithName("party paying")
+            //    .WithLocale(new Locales(this.DatabaseSession).EnglishGreatBritain)
+            //    .Build();
 
-            var taxDue = new TaxDueBuilder(this.DatabaseSession)
-                .WithDescription("Three word description")
-                .WithEntryDate(DateTime.Now)
-                .WithTransactionDate(DateTime.Now)
-                .WithFromParty(fromParty)
-                .WithToParty(toParty)
-                .WithDerivedTotalAmount(10M)
-                .Build();
+            //var toParty = new OrganisationBuilder(this.DatabaseSession)
+            //    .WithName("party receiving")
+            //    .WithLocale(new Locales(this.DatabaseSession).EnglishGreatBritain)
+            //    .Build();
 
-            this.DatabaseSession.Derive(true);
+            //var taxDue = new TaxDueBuilder(this.DatabaseSession)
+            //    .WithDescription("Three word description")
+            //    .WithEntryDate(DateTime.Now)
+            //    .WithTransactionDate(DateTime.Now)
+            //    .WithFromParty(fromParty)
+            //    .WithToParty(toParty)
+            //    .WithDerivedTotalAmount(10M)
+            //    .Build();
 
-            var expectedDisplayName =
-                string.Format(
-                    "Transaction date {0}, {1}, total amount {2} from party {3} to party {4}",
-                    taxDue.TransactionDate,
-                    taxDue.Description,
-                    taxDue.DerivedTotalAmount,
-                    fromParty.DisplayName,
-                    toParty.DisplayName);
+            //this.DatabaseSession.Derive(true);
 
-            Assert.AreEqual(expectedDisplayName, taxDue.DisplayName);
+            //var expectedDisplayName =
+            //    string.Format(
+            //        "Transaction date {0}, {1}, total amount {2} from party {3} to party {4}",
+            //        taxDue.TransactionDate,
+            //        taxDue.Description,
+            //        taxDue.DerivedTotalAmount,
+            //        fromParty.DisplayName,
+            //        toParty.DisplayName);
+
+            //Assert.AreEqual(expectedDisplayName, taxDue.DisplayName);
         }
     }
 }
