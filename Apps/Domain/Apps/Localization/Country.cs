@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     public partial class Country
     {
-        public void AppsDerive(DerivableDerive method)
+        public void AppsDerive(ObjectDerive method)
         {
             if (this.ExistIsoCode)
             {

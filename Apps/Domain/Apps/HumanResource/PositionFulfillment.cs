@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     public partial class PositionFulfillment
     {
-        public void AppsDerive(DerivableDerive method)
+        public void AppsDerive(ObjectDerive method)
         {
             this.DisplayName = string.Format(
                 "{0} within {1} fulfilled by {2}",

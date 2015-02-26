@@ -44,7 +44,7 @@ namespace Allors.Domain
             return this.Iban;
         }
 
-        public void AppsDerive(DerivableDerive method)
+        public void AppsDerive(ObjectDerive method)
         {
             var derivation = method.Derivation;
 

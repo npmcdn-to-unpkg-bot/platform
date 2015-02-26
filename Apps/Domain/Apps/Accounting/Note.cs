@@ -24,7 +24,7 @@ namespace Allors.Domain
 
     public partial class Note
     {
-        public void AppsDerive(DerivableDerive method)
+        public void AppsDerive(ObjectDerive method)
         {
             this.DisplayName = string.Format(
                 "Transaction date {0}, {1} total amount {2} from party {3} to party {4}",

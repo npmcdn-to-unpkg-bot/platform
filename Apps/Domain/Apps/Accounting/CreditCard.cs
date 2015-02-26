@@ -44,20 +44,20 @@ namespace Allors.Domain
                 this.ExistCardNumber ? this.CardNumber : null);
         }
         
-        public void AppsPrepareDerivation(DerivablePrepareDerivation method)
+        public void AppsPrepareDerivation(ObjectPrepareDerivation method)
         {
             var derivation = method.Derivation;
 
             if (this.ExistOwnCreditCardsWhereCreditCard)
             {
-                foreach (Derivable ownCreditCard in this.OwnCreditCardsWhereCreditCard)
+                foreach (Object ownCreditCard in this.OwnCreditCardsWhereCreditCard)
                 {
                     derivation.AddDerivable(ownCreditCard);                    
                 }
             }
         }
 
-        public void AppsDerive(DerivableDerive method)
+        public void AppsDerive(ObjectDerive method)
         {
             var derivation = method.Derivation;
 

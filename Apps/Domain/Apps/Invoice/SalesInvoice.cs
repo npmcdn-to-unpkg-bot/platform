@@ -514,7 +514,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsPrepareDerivation(DerivablePrepareDerivation method)
+        public void AppsPrepareDerivation(ObjectPrepareDerivation method)
         {
             var derivation = method.Derivation;
 
@@ -552,7 +552,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(DerivableDerive method)
+        public void AppsDerive(ObjectDerive method)
         {
             var derivation = method.Derivation;
 
@@ -624,7 +624,7 @@ namespace Allors.Domain
             this.AppsDeriveRevenues(derivation);
         }
 
-        public void AppsApplySecurityOnDerive(DerivableApplySecurityOnDerive method)
+        public void AppsApplySecurityOnDerive(ObjectApplySecurityOnDerive method)
         {
             this.RemoveSecurityTokens();
             this.AddSecurityToken(Singleton.Instance(this.Strategy.Session).AdministratorSecurityToken);

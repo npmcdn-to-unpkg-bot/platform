@@ -67,14 +67,14 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsPrepareDerivation(DerivablePrepareDerivation method)
+        public void AppsPrepareDerivation(ObjectPrepareDerivation method)
         {
             var derivation = method.Derivation;
 
             derivation.AddDependency(this.Party, this);
         }
 
-        public void AppsDerive(DerivableDerive method)
+        public void AppsDerive(ObjectDerive method)
         {
             var derivation = method.Derivation;
             

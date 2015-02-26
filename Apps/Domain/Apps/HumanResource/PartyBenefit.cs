@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     public partial class PartyBenefit
     {
-        public void AppsDerive(DerivableDerive method)
+        public void AppsDerive(ObjectDerive method)
         {
             this.DisplayName = string.Format(
                 "{0} employee at {1} benefit {2}",

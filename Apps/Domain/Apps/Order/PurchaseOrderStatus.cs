@@ -32,7 +32,7 @@ namespace Allors.Domain
             this.AppsEnsure();
         }
 
-        public void AppsDerive(DerivableDerive method)
+        public void AppsDerive(ObjectDerive method)
         {
             var derivation = method.Derivation;
 

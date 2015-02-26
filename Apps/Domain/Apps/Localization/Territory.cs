@@ -55,7 +55,7 @@ namespace Allors.Domain
             return null;
         }
 
-        public void AppsDerive(DerivableDerive method)
+        public void AppsDerive(ObjectDerive method)
         {
             this.DeriveDisplayName();
             this.DeriveSearchDataCharacterBoundaryText();

@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     public partial class PaymentBudgetAllocation
     {
-        public void AppsDerive(DerivableDerive method)
+        public void AppsDerive(ObjectDerive method)
         {
             this.DisplayName = string.Format(
                 "{0} from payment {1} allocated to {2} - {3}",

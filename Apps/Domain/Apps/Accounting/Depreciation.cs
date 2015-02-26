@@ -24,7 +24,7 @@ namespace Allors.Domain
 
     public partial class Depreciation
     {
-        public void AppsDerive(DerivableDerive method)
+        public void AppsDerive(ObjectDerive method)
         {
             this.DisplayName = string.Format(
                 "Transaction date {0}, {1} total amount {2} fixed asset {3} for {4}",

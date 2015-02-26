@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     public partial class GlBudgetAllocation
     {
-        public void AppsDerive(DerivableDerive method)
+        public void AppsDerive(ObjectDerive method)
         {
             this.DisplayName = string.Format(
                 "{0}% of account {1} {2} allocated to {3} - {4}",

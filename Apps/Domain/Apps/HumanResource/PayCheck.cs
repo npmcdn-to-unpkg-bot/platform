@@ -46,7 +46,7 @@ namespace Allors.Domain
                 this.ExistAmount ? this.Amount : 0);
         }
 
-        public void AppsDerive(DerivableDerive method)
+        public void AppsDerive(ObjectDerive method)
         {
             this.DeriveDisplayName();
             this.DeriveSearchDataCharacterBoundaryText();

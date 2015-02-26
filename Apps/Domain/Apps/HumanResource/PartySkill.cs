@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     public partial class PartySkill
     {
-        public void AppsDerive(DerivableDerive method)
+        public void AppsDerive(ObjectDerive method)
         {
             this.DisplayName = this.ExistSkill ? this.Skill.Name : null;
         }

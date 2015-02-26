@@ -28,7 +28,7 @@ namespace Allors.Domain
     /// </summary>
     public partial class Singleton
     {
-        public void AppsDerive(DerivableDerive method)
+        public void AppsDerive(ObjectDerive method)
         {
             this.DisplayName = "Applications";
         }

@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     public partial class OrderRequirementCommitment
     {
-        public void AppsDerive(DerivableDerive method)
+        public void AppsDerive(ObjectDerive method)
         {
             this.DisplayName = string.Format(
                 "{0} items from {1} are committed for requirement: {2}",

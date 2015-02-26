@@ -34,7 +34,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(DerivableDerive method)
+        public void AppsDerive(ObjectDerive method)
         {
             this.DisplayName = string.Format(
                 "{0} starting {1}",

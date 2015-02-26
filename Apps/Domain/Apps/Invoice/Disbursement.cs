@@ -39,7 +39,7 @@ namespace Allors.Domain
             return string.Format("{0} {1}", this.ExistEffectiveDate ? this.EffectiveDate : DateTime.MinValue, this.ExistAmount ? this.Amount : 0);
         }
 
-        public void AppsDerive(DerivableDerive method)
+        public void AppsDerive(ObjectDerive method)
         {
             this.DeriveDisplayName();
             this.DeriveSearchDataCharacterBoundaryText();

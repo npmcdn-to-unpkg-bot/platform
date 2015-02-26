@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     public partial class PositionResponsibility
     {
-        public void AppsDerive(DerivableDerive method)
+        public void AppsDerive(ObjectDerive method)
         {
             this.DisplayName = string.Format(
                 "{0} within {1} : {2}",

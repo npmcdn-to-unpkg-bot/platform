@@ -24,7 +24,7 @@ namespace Allors.Domain
 
     public partial class PerformanceReview
     {
-        public void AppsDerive(DerivableDerive method)
+        public void AppsDerive(ObjectDerive method)
         {
             var derivation = method.Derivation;   
 

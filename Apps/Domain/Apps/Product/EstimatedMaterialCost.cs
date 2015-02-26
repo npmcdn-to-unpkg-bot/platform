@@ -24,7 +24,7 @@ namespace Allors.Domain
     
     public partial class EstimatedMaterialCost
     {
-        public void AppsDerive(DerivableDerive method)
+        public void AppsDerive(ObjectDerive method)
         {
             this.DeriveDisplayName();
 

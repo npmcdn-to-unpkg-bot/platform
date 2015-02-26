@@ -1,6 +1,6 @@
 namespace Allors.Domain
 {
-	public interface AccessControlledObject  : Object, Derivable 
+	public interface AccessControlledObject  : Object 
 	{
 					Permission DeniedPermissions {set;}
 
@@ -13,9 +13,6 @@ namespace Allors.Domain
 
 	}
 	public interface Deletable  : Object 
-	{
-	}
-	public interface Derivable  : Object 
 	{
 	}
 	public interface Enumeration  : Object, UserInterfaceable, UniquelyIdentifiable 
@@ -86,7 +83,7 @@ namespace Allors.Domain
 					global::System.String UserPasswordHash {set;}
 
 	}
-	public interface UserInterfaceable  : Object, Derivable, AccessControlledObject 
+	public interface UserInterfaceable  : Object, AccessControlledObject 
 	{
 					global::System.String DisplayName {set;}
 
@@ -1237,7 +1234,7 @@ namespace Allors.Domain
 					LocalisedText LocalisedNames {set;}
 
 	}
-	public interface Image  : Object, Deletable, Derivable 
+	public interface Image  : Object, Deletable 
 	{
 					Media Original {set;}
 
@@ -1269,7 +1266,7 @@ namespace Allors.Domain
 					global::System.String Text {set;}
 
 	}
-	public interface Login  : Object, Derivable, Deletable 
+	public interface Login  : Object, Deletable 
 	{
 					global::System.String Key {set;}
 
@@ -1285,7 +1282,7 @@ namespace Allors.Domain
 					MediaContent MediaContent {set;}
 
 	}
-	public interface MediaContent  : Object, Derivable 
+	public interface MediaContent  : Object 
 	{
 					global::System.Byte[] Value {set;}
 
@@ -1375,7 +1372,7 @@ namespace Allors.Domain
 					global::System.String Name {set;}
 
 	}
-	public interface SearchData  : Object, Derivable, Deletable 
+	public interface SearchData  : Object, Deletable 
 	{
 					global::System.String CharacterBoundaryText {set;}
 
@@ -1388,12 +1385,12 @@ namespace Allors.Domain
 					global::System.String WordBoundaryText {set;}
 
 	}
-	public interface SearchFragment  : Object, Derivable 
+	public interface SearchFragment  : Object 
 	{
 					global::System.String LowerCaseText {set;}
 
 	}
-	public interface SecurityToken  : Object, Deletable, Derivable 
+	public interface SecurityToken  : Object, Deletable 
 	{
 	}
 	public interface Singleton  : Object, UserInterfaceable 

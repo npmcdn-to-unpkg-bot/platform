@@ -25,7 +25,7 @@ namespace Allors.Domain
 
     public partial class PartyProductRevenueHistory
     {
-        public void AppsDerive(DerivableDerive method)
+        public void AppsDerive(ObjectDerive method)
         {
             var derivation = method.Derivation;
 

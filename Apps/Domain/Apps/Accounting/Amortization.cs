@@ -24,7 +24,7 @@ namespace Allors.Domain
 
     public partial class Amortization
     {
-        public void AppsDerive(DerivableDerive method)
+        public void AppsDerive(ObjectDerive method)
         {
             this.DisplayName = string.Format(
                 "Transaction date {0}, {1}, for {2}",

@@ -26,7 +26,7 @@ namespace Allors.Domain
 
     public partial class Bank
     {
-        public void AppsDerive(DerivableDerive method)
+        public void AppsDerive(ObjectDerive method)
         {
             var derivation = method.Derivation;
 

@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     public partial class ProfessionalPlacement
     {
-        public void AppsDerive(DerivableDerive method)
+        public void AppsDerive(ObjectDerive method)
         {
             this.DisplayName = this.Description;
         }

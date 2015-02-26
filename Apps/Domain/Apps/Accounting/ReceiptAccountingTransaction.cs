@@ -24,7 +24,7 @@ namespace Allors.Domain
 
     public partial class ReceiptAccountingTransaction
     {
-        public void AppsDerive(DerivableDerive method)
+        public void AppsDerive(ObjectDerive method)
         {
             this.DisplayName = string.Format(
                 "Transaction date {0}, {1} total amount {2}, receipt {3} receipt for amount {4} from party {5} to party {6}",

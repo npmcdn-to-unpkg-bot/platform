@@ -93,7 +93,7 @@ namespace Allors.Domain
             this.HasBankStatementTransactions = false;
         }
 
-        public void AppsDerive(DerivableDerive method)
+        public void AppsDerive(ObjectDerive method)
         {
             this.DisplayName = string.Format(
                 "account {0} {1} for {2}",
