@@ -36,7 +36,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsApplySecurityOnDerive(DerivableApplySecurityOnDerive method)
+        public void AppsApplySecurityOnDerive(ObjectApplySecurityOnDerive method)
         {
             this.RemoveSecurityTokens();
             this.AddSecurityToken(this.OwnerSecurityToken);
@@ -48,7 +48,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsDerive(DerivableDerive method)
+        public void AppsDerive(ObjectDerive method)
         {
             var derivation = method.Derivation;
 

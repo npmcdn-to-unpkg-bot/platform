@@ -24,7 +24,7 @@ namespace Allors.Domain
 
     public partial class PrintQueue
     {
-        public void BaseDerive(DerivableDerive method)
+        public void BaseDerive(ObjectDerive method)
         {
             var derivation = method.Derivation;
 

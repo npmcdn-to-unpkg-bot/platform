@@ -22,7 +22,6 @@ namespace Allors.Domain
 {
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Diagnostics;
     using System.Linq;
 
     using Allors;
@@ -30,12 +29,12 @@ namespace Allors.Domain
 
     public class Derivation : IDerivation
     {
-        public delegate void AddedDerivableHandler(Derivable derivable);
-        public delegate void AddedDependencyHandler(Derivable dependent, Derivable dependee);
+        public delegate void AddedDerivableHandler(Object derivable);
+        public delegate void AddedDependencyHandler(Object dependent, Object dependee);
         public delegate void StartedGenerationHandler(int generation);
         public delegate void StartedPreparationHandler(int preparation);
-        public delegate void PreparingDerivationHandler(Derivable derivable);
-        public delegate void DerivedHandler(Derivable derivable);
+        public delegate void PreparingDerivationHandler(Object derivable);
+        public delegate void DerivedHandler(Object derivable);
 
         public event AddedDerivableHandler AddedDerivable;
         public event AddedDependencyHandler AddedDependency;
@@ -47,7 +46,7 @@ namespace Allors.Domain
         private readonly ISession session;
         private readonly DerivationLog log;
 
-        private readonly HashSet<Derivable> derivedObjects;
+        private readonly HashSet<Object> derivedObjects;
         private readonly HashSet<IObject> preparedObjects;
         
         private HashSet<ObjectId> forcedDerivations;
@@ -65,7 +64,7 @@ namespace Allors.Domain
             this.session = session;
             this.log = new DerivationLog(this);
 
-            this.derivedObjects = new HashSet<Derivable>();
+            this.derivedObjects = new HashSet<Object>();
             this.preparedObjects = new HashSet<IObject>();
             this.changeSet = session.Checkpoint();
 
@@ -129,7 +128,7 @@ namespace Allors.Domain
             }
         }
 
-        public ISet<Derivable> DerivedObjects
+        public ISet<Object> DerivedObjects
         {
             get
             {
@@ -205,7 +204,7 @@ namespace Allors.Domain
             return this.changeSet.GetRoleTypes(association.Id);
         }
 
-        public void AddDerivable(Derivable derivable)
+        public void AddDerivable(Object derivable)
         {
             if (derivable != null)
             {
@@ -224,7 +223,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AddDerivables(IEnumerable<Derivable> derivables)
+        public void AddDerivables(IEnumerable<Object> derivables)
         {
             foreach (var derivable in derivables)
             {
@@ -237,7 +236,7 @@ namespace Allors.Domain
         /// </summary>
         /// <param name="dependent"></param>
         /// <param name="dependee"></param>
-        public void AddDependency(Derivable dependent, Derivable dependee)
+        public void AddDependency(Object dependent, Object dependee)
         {
             if (dependent != null && dependee != null)
             {
@@ -288,7 +287,7 @@ namespace Allors.Domain
                 this.derivationGraph = new DerivationGraph(this);
                 foreach (var changedObject in changedObjects)
                 {
-                    var derivable = this.Session.Instantiate(changedObject) as Derivable;
+                    var derivable = this.Session.Instantiate(changedObject) as Object;
 
                     if (derivable != null)
                     {
@@ -318,7 +317,7 @@ namespace Allors.Domain
 
                     this.addedDerivables = new HashSet<IObject>();
 
-                    foreach (Derivable dependencyObject in dependencyObjectsToPrepare)
+                    foreach (Object dependencyObject in dependencyObjectsToPrepare)
                     {
                         if (this.Preparing != null)
                         {
@@ -355,7 +354,7 @@ namespace Allors.Domain
             return this.log;
         }
 
-        internal void AddDerivedObject(Derivable derivable)
+        internal void AddDerivedObject(Object derivable)
         {
             this.derivedObjects.Add(derivable);
 

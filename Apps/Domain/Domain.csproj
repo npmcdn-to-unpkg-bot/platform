@@ -53,9 +53,6 @@
     <Compile Include="..\..\Base\Domain\Base\Common\Deletable.cs">
       <Link>Base\Common\Deletable.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Domain\Base\Common\Derivable.cs">
-      <Link>Base\Common\Derivable.cs</Link>
-    </Compile>
     <Compile Include="..\..\Base\Domain\Base\Common\Derivation.cs">
       <Link>Base\Common\Derivation.cs</Link>
     </Compile>
@@ -109,6 +106,9 @@
     </Compile>
     <Compile Include="..\..\Base\Domain\Base\Common\IDerivationError.cs">
       <Link>Base\Common\IDerivationError.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Base\Domain\Base\Common\Object.cs">
+      <Link>Base\Common\Object.cs</Link>
     </Compile>
     <Compile Include="..\..\Base\Domain\Base\Common\ObjectState.cs">
       <Link>Base\Common\ObjectState.cs</Link>
@@ -1444,10 +1444,6 @@
     <Compile Include="Generated\Base\Deposit.g.cs" />
     <Compile Include="Generated\Base\Depreciation.g.cs" />
     <Compile Include="Generated\Base\DepreciationMethod.g.cs" />
-    <Compile Include="Generated\Base\Derivable.g.cs" />
-    <Compile Include="Generated\Base\DerivableApplySecurityOnDerive.g.cs" />
-    <Compile Include="Generated\Base\DerivableDerive.g.cs" />
-    <Compile Include="Generated\Base\DerivablePrepareDerivation.g.cs" />
     <Compile Include="Generated\Base\DesiredProductFeature.g.cs" />
     <Compile Include="Generated\Base\Dimension.g.cs" />
     <Compile Include="Generated\Base\Disbursement.g.cs" />
@@ -1572,8 +1568,11 @@
     <Compile Include="Generated\Base\NonSerializedInventoryItemStatus.g.cs" />
     <Compile Include="Generated\Base\Note.g.cs" />
     <Compile Include="Generated\Base\Object.g.cs" />
+    <Compile Include="Generated\Base\ObjectApplySecurityOnDerive.g.cs" />
     <Compile Include="Generated\Base\ObjectApplySecurityOnPostBuild.g.cs" />
+    <Compile Include="Generated\Base\ObjectDerive.g.cs" />
     <Compile Include="Generated\Base\ObjectOnPostBuild.g.cs" />
+    <Compile Include="Generated\Base\ObjectPrepareDerivation.g.cs" />
     <Compile Include="Generated\Base\ObjectState.g.cs" />
     <Compile Include="Generated\Base\Obligation.g.cs" />
     <Compile Include="Generated\Base\Office.g.cs" />

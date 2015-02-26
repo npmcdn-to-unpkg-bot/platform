@@ -43,18 +43,18 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsPrepareDerivation(DerivablePrepareDerivation method)
+        public void AppsPrepareDerivation(ObjectPrepareDerivation method)
         {
             var derivation = method.Derivation;
 
             // TODO:
             if (derivation.ChangeSet.Associations.Contains(this.Id))
             {
-                derivation.AddDependency(this.ShipmentWhereShipmentItem as Derivable, this);
+                derivation.AddDependency(this.ShipmentWhereShipmentItem, this);
             }
         }
 
-        public void AppsDerive(DerivableDerive method)
+        public void AppsDerive(ObjectDerive method)
         {
             var derivation = method.Derivation;
 

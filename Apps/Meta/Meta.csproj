@@ -71,9 +71,6 @@
     <Compile Include="..\..\Base\Meta\Base\Population\Deletable.cs">
       <Link>Base\Population\Deletable.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Population\Derivable.cs">
-      <Link>Base\Population\Derivable.cs</Link>
-    </Compile>
     <Compile Include="..\..\Base\Meta\Base\Population\Enumeration.cs">
       <Link>Base\Population\Enumeration.cs</Link>
     </Compile>
@@ -391,7 +388,6 @@
     <Compile Include="Apps\Population\Deposit.cs" />
     <Compile Include="Apps\Population\Depreciation.cs" />
     <Compile Include="Apps\Population\DepreciationMethod.cs" />
-    <Compile Include="Apps\Population\Derivable.cs" />
     <Compile Include="Apps\Population\DesiredProductFeature.cs" />
     <Compile Include="Apps\Population\Dimension.cs" />
     <Compile Include="Apps\Population\Disbursement.cs" />
@@ -922,7 +918,6 @@
     <Compile Include="Generated\Deposit.g.cs" />
     <Compile Include="Generated\Depreciation.g.cs" />
     <Compile Include="Generated\DepreciationMethod.g.cs" />
-    <Compile Include="Generated\Derivable.g.cs" />
     <Compile Include="Generated\DesiredProductFeature.g.cs" />
     <Compile Include="Generated\Dimension.g.cs" />
     <Compile Include="Generated\Disbursement.g.cs" />

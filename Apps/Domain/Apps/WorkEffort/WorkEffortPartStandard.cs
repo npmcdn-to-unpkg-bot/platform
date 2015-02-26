@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     public partial class WorkEffortPartStandard
     {
-        public void AppsDerive(DerivableDerive method)
+        public void AppsDerive(ObjectDerive method)
         {
             this.DisplayName = this.ExistPart ? this.Part.ComposeDisplayName() : null;
         }

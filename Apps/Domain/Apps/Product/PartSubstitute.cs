@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     public partial class PartSubstitute
     {
-        public void AppsDerive(DerivableDerive method)
+        public void AppsDerive(ObjectDerive method)
         {
             this.DisplayName = string.Format(
                 "{0} may be substituted with {1} preference {2}",

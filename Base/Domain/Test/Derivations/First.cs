@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     public partial class First
     {
-        public void TestsDerive(DerivableDerive method)
+        public void TestsDerive(ObjectDerive method)
         {
             var derivation = method.Derivation;
 

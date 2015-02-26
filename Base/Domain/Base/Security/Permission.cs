@@ -132,7 +132,7 @@ namespace Allors.Domain
             this.ConcreteClassPointer = concreteClass.Id;
         }
 
-        public void BaseDerive(DerivableDerive method)
+        public void BaseDerive(ObjectDerive method)
         {
             var derivation = method.Derivation;
 

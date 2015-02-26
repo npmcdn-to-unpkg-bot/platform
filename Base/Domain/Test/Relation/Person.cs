@@ -58,7 +58,7 @@ namespace Allors.Domain
             }
         }
 
-        public void TestsDerive(DerivableDerive method)
+        public void TestsDerive(ObjectDerive method)
         {
             var derivation = method.Derivation;
 

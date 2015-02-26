@@ -25,13 +25,13 @@ namespace Allors.Domain
 
     public class DerivationNode : IEquatable<DerivationNode>
     {
-        private readonly Derivable derivable;
+        private readonly Object derivable;
 
         private bool visited;
         private DerivationNode currentRoot;
         private HashSet<DerivationNode> dependencies;
 
-        public DerivationNode(Derivable derivable)
+        public DerivationNode(Object derivable)
         {
             this.derivable = derivable;
         }

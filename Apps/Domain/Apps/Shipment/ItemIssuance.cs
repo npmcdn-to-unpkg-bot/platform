@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     public partial class ItemIssuance
     {
-        public void AppsDerive(DerivableDerive method)
+        public void AppsDerive(ObjectDerive method)
         {
             this.DisplayName = string.Format(
                 "inventory item {0}, quantity {1}, shipment item {2} {3}{4}",

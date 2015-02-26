@@ -25,14 +25,14 @@ namespace Allors.Domain
     public class DerivationGraph
     {
         private readonly Derivation derivation;
-        private readonly Dictionary<Derivable, DerivationNode> derivationNodeByDerivable = new Dictionary<Derivable, DerivationNode>();
+        private readonly Dictionary<Object, DerivationNode> derivationNodeByDerivable = new Dictionary<Object, DerivationNode>();
 
         public DerivationGraph(Derivation derivation)
         {
             this.derivation = derivation;
         }
 
-        public Dictionary<Derivable, DerivationNode> DerivationNodeByDerivable
+        public Dictionary<Object, DerivationNode> DerivationNodeByDerivable
         {
             get
             {
@@ -57,7 +57,7 @@ namespace Allors.Domain
             }
         }
 
-        public DerivationNode Add(Derivable derivable)
+        public DerivationNode Add(Object derivable)
         {
             DerivationNode derivationNode;
             if (!this.DerivationNodeByDerivable.TryGetValue(derivable, out derivationNode))
@@ -69,7 +69,7 @@ namespace Allors.Domain
             return derivationNode;
         }
 
-        public void AddDependency(Derivable dependent, Derivable dependee)
+        public void AddDependency(Object dependent, Object dependee)
         {
             var derivationNode = this.Add(dependent);
             var dependencyNode = this.Add(dependee);

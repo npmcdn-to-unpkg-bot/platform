@@ -184,9 +184,6 @@
     <Compile Include="Base\Population\Deletable.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Base\Population\Derivable.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Base\Population\Enumeration.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -259,7 +256,6 @@
     <Compile Include="Generated\Deletable.g.cs" />
     <Compile Include="Generated\Dependee.g.cs" />
     <Compile Include="Generated\Dependent.g.cs" />
-    <Compile Include="Generated\Derivable.g.cs" />
     <Compile Include="Generated\DerivationLogC1.g.cs" />
     <Compile Include="Generated\DerivationLogC2.g.cs" />
     <Compile Include="Generated\DerivationLogI12.g.cs" />

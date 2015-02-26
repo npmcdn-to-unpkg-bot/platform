@@ -31,16 +31,16 @@ namespace Allors.Domain
             this.DisplayName = this.Name;
         }
 
-        public void TestsPrepareDerivation(DerivablePrepareDerivation method)
+        public void TestsPrepareDerivation(ObjectPrepareDerivation method)
         {
             var derivation = method.Derivation;
-            foreach (Derivable dependency in this.Dependencies)
+            foreach (Object dependency in this.Dependencies)
             {
                 derivation.AddDependency(this, dependency);
             }
         }
 
-        public void TestsDerive(DerivableDerive method)
+        public void TestsDerive(ObjectDerive method)
         {
             var derivation = method.Derivation;
             var sequence = (IList<IObject>)derivation["sequence"];

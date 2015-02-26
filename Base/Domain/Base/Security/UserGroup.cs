@@ -37,16 +37,16 @@ namespace Allors.Domain
             return false;
         }
 
-        protected void BasePrepareDerivation(DerivableDerive method)
+        protected void BasePrepareDerivation(ObjectDerive method)
         {
             var derivation = method.Derivation;
-            foreach (Derivable member in this.Members)
+            foreach (Object member in this.Members)
             {
                 derivation.AddDependency(member, this);
             }
         }
 
-        public void BaseDerive(DerivableDerive method)
+        public void BaseDerive(ObjectDerive method)
         {
             var derivation = method.Derivation;
 

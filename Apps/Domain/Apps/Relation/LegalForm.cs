@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     public partial class LegalForm
     {
-        public void AppsDerive(DerivableDerive method)
+        public void AppsDerive(ObjectDerive method)
         {
             this.DisplayName = this.Description;
 

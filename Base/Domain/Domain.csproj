@@ -66,10 +66,6 @@
     <Compile Include="Generated\Base\DeletableDelete.g.cs" />
     <Compile Include="Generated\Base\Dependee.g.cs" />
     <Compile Include="Generated\Base\Dependent.g.cs" />
-    <Compile Include="Generated\Base\Derivable.g.cs" />
-    <Compile Include="Generated\Base\DerivableApplySecurityOnDerive.g.cs" />
-    <Compile Include="Generated\Base\DerivableDerive.g.cs" />
-    <Compile Include="Generated\Base\DerivablePrepareDerivation.g.cs" />
     <Compile Include="Generated\Base\DerivationLogC1.g.cs" />
     <Compile Include="Generated\Base\DerivationLogC2.g.cs" />
     <Compile Include="Generated\Base\DerivationLogI12.g.cs" />
@@ -96,8 +92,11 @@
     <Compile Include="Generated\Base\MediaType.g.cs" />
     <Compile Include="Generated\Base\Meta.g.cs" />
     <Compile Include="Generated\Base\Object.g.cs" />
+    <Compile Include="Generated\Base\ObjectApplySecurityOnDerive.g.cs" />
     <Compile Include="Generated\Base\ObjectApplySecurityOnPostBuild.g.cs" />
+    <Compile Include="Generated\Base\ObjectDerive.g.cs" />
     <Compile Include="Generated\Base\ObjectOnPostBuild.g.cs" />
+    <Compile Include="Generated\Base\ObjectPrepareDerivation.g.cs" />
     <Compile Include="Generated\Base\ObjectState.g.cs" />
     <Compile Include="Generated\Base\One.g.cs" />
     <Compile Include="Generated\Base\Organisation.g.cs" />
@@ -177,7 +176,7 @@
     <Compile Include="Test\Special\Two.cs" />
     <Compile Include="Base\Common\Cache.cs" />
     <Compile Include="Base\Common\Counters.cs" />
-    <Compile Include="Base\Common\Derivable.cs" />
+    <Compile Include="Base\Common\Object.cs" />
     <Compile Include="Base\Common\Derivation.cs" />
     <Compile Include="Base\Common\DerivationError.cs" />
     <Compile Include="Base\Common\DerivationErrorAtLeastOne.cs" />

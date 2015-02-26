@@ -44,7 +44,7 @@ namespace Allors.Domain
             }
         }
 
-        public void BaseDerive(DerivableDerive method)
+        public void BaseDerive(ObjectDerive method)
         {
             var derivation = method.Derivation;
 

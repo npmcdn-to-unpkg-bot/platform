@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     public partial class Citizenship
     {
-        public void AppsDerive(DerivableDerive method)
+        public void AppsDerive(ObjectDerive method)
         {
             this.DisplayName = this.ExistCountry ? this.Country.DisplayName : null;
 

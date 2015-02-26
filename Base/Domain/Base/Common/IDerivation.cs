@@ -39,7 +39,7 @@ namespace Allors.Domain
 
         int Generation { get; }
 
-        ISet<Derivable> DerivedObjects { get; }
+        ISet<Object> DerivedObjects { get; }
 
         object this[string name] { get; set; }
 
@@ -47,11 +47,11 @@ namespace Allors.Domain
 
         ISet<IRoleType> GetChangedRoleTypes(IObject association);
 
-        void AddDerivable(Derivable derivable);
+        void AddDerivable(Object derivable);
 
-        void AddDerivables(IEnumerable<Derivable> derivables);
+        void AddDerivables(IEnumerable<Object> derivables);
 
-        void AddDependency(Derivable dependent, Derivable dependee);
+        void AddDependency(Object dependent, Object dependee);
 
         DerivationLog Derive();
     }

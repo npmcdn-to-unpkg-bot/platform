@@ -166,7 +166,7 @@ namespace Allors.Domain
             }
         }
 
-        public void AppsPrepareDerivation(DerivablePrepareDerivation method)
+        public void AppsPrepareDerivation(ObjectPrepareDerivation method)
         {
             var derivation = method.Derivation;
 
@@ -215,12 +215,12 @@ namespace Allors.Domain
 
                 foreach (PaymentMethod paymentMethod in this.PaymentMethods)
                 {
-                    derivation.AddDependency((Derivable)paymentMethod, this);
+                    derivation.AddDependency(paymentMethod, this);
                 }
             }
         }
 
-        public void AppsDerive(DerivableDerive method)
+        public void AppsDerive(ObjectDerive method)
         {
             var derivation = method.Derivation;
 

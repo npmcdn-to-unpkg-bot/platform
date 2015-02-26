@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     public static partial class PartyClassificationExtension
     {
-        public static void AppsDerive(this PartyClassification @this, DerivableDerive method)
+        public static void AppsDerive(this PartyClassification @this, ObjectDerive method)
         {
             @this.DisplayName = @this.Name;
 

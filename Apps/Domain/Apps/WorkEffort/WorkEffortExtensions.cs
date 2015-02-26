@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     public static partial class WorkEffortExtensions
     {
-        public static void AppsDerive(this WorkEffort @this, DerivableDerive method)
+        public static void AppsDerive(this WorkEffort @this, ObjectDerive method)
         {
             if (@this.ExistCurrentObjectState && !@this.CurrentObjectState.Equals(@this.PreviousObjectState))
             {

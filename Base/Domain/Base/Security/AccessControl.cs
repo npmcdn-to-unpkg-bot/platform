@@ -24,7 +24,7 @@ namespace Allors.Domain
 
     public partial class AccessControl
     {
-        public void BaseDerive(DerivableDerive method)
+        public void BaseDerive(ObjectDerive method)
         {
             method.Derivation.Log.AssertAtLeastOne(this, Meta.Subjects, Meta.SubjectGroups);
 

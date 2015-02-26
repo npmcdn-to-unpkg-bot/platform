@@ -41,7 +41,7 @@ namespace Allors.Domain
 
         public List<string> Roles { get; private set; }
 
-        public void AppsDerive(DerivableDerive method)
+        public void AppsDerive(ObjectDerive method)
         {
             var derivation = method.Derivation;
 

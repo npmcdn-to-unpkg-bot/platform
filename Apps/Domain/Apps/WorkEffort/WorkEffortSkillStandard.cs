@@ -24,7 +24,7 @@ namespace Allors.Domain
 
     public partial class WorkEffortSkillStandard
     {
-        public void AppsDerive(DerivableDerive method)
+        public void AppsDerive(ObjectDerive method)
         {
             
 

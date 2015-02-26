@@ -33,7 +33,7 @@ namespace Allors.Domain
             return DisplayName;
         }
 
-        public void TestsDerive(DerivableDerive method)
+        public void TestsDerive(ObjectDerive method)
         {
             var derivation = method.Derivation;
             

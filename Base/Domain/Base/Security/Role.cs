@@ -23,7 +23,7 @@ namespace Allors.Domain
 {
     public partial class Role
     {
-        public void BaseDerive(DerivableDerive method)
+        public void BaseDerive(ObjectDerive method)
         {
             var derivation = method.Derivation;
 

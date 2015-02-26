@@ -44,7 +44,7 @@ namespace Allors.Domain
             }
         }
 
-        public static void AppsDerive(this Enumeration @this, DerivableDerive method)
+        public static void AppsDerive(this Enumeration @this, ObjectDerive method)
         {
             @this.DisplayName = @this.Name;
         }

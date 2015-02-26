@@ -63,7 +63,7 @@ namespace Allors.Domain
             this.NameToLowerCase();
         }
 
-        public void BaseDerive(DerivableDerive method)
+        public void BaseDerive(ObjectDerive method)
         {
             var derivation = method.Derivation;
 

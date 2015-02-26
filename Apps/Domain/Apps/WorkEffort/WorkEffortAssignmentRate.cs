@@ -22,7 +22,7 @@ namespace Allors.Domain
 {
     public partial class WorkEffortAssignmentRate
     {
-        public void AppsDerive(DerivableDerive method)
+        public void AppsDerive(ObjectDerive method)
         {
             this.DisplayName = string.Format(
                 "{0} rate for {1} assigned to {2}",

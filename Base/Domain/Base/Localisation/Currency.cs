@@ -49,7 +49,7 @@ namespace Allors.Domain
             }
         }
 
-        public void BaseDerive(DerivableDerive method)
+        public void BaseDerive(ObjectDerive method)
         {
             this.DisplayName = string.Format("{0} ({1})", this.Name, this.IsoCode);
         }
