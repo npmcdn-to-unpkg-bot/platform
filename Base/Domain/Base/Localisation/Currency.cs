@@ -48,10 +48,5 @@ namespace Allors.Domain
                 localisedName.Text = name;
             }
         }
-
-        public void BaseDerive(ObjectDerive method)
-        {
-            this.DisplayName = string.Format("{0} ({1})", this.Name, this.IsoCode);
-        }
     }
 }

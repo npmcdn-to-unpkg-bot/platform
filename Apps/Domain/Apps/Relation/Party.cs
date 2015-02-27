@@ -106,8 +106,6 @@ namespace Allors.Domain
             party.DeriveCurrentSalesReps(derivation);
             party.DeriveOpenOrderAmount();
             party.DeriveRevenue();
-
-            party.PartyName = party.DeriveDisplayName();
         }
 
         public static void AppsPartyDeriveCurrentSalesReps(this Party party, IDerivation derivation)
@@ -116,8 +114,8 @@ namespace Allors.Domain
 
             foreach (SalesRepRelationship salesRepRelationship in party.SalesRepRelationshipsWhereCustomer)
             {
-                if (salesRepRelationship.FromDate <= DateTime.Now &&
-                    (!salesRepRelationship.ExistThroughDate || salesRepRelationship.ThroughDate >= DateTime.Now))
+                if (salesRepRelationship.FromDate <= DateTime.UtcNow &&
+                    (!salesRepRelationship.ExistThroughDate || salesRepRelationship.ThroughDate >= DateTime.UtcNow))
                 {
                     party.AddCurrentSalesRep(salesRepRelationship.SalesRepresentative);
                 }
@@ -144,12 +142,12 @@ namespace Allors.Domain
 
             foreach (PartyRevenue partyRevenue in party.PartyRevenuesWhereParty)
             {
-                if (partyRevenue.Year == DateTime.Now.Year)
+                if (partyRevenue.Year == DateTime.UtcNow.Year)
                 {
                     party.YTDRevenue += partyRevenue.Revenue;
                 }
 
-                if (partyRevenue.Year == DateTime.Now.AddYears(-1).Year)
+                if (partyRevenue.Year == DateTime.UtcNow.AddYears(-1).Year)
                 {
                     party.LastYearsRevenue += partyRevenue.Revenue;
                 }

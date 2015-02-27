@@ -187,10 +187,6 @@ namespace Allors.Domain
                 }
             }
 
-            this.DisplayName = this.DeriveDisplayName();
-            this.SearchData.CharacterBoundaryText = this.DeriveSearchDataCharacterBoundaryText();
-            this.SearchData.WordBoundaryText = this.DeriveSearchDataWordBoundaryText();
-
             this.DeriveUserGroups(derivation);
             this.DeriveCurrentContacts(derivation);
         }
@@ -381,9 +377,9 @@ namespace Allors.Domain
         {
             if (this.Strategy.Session.Population is IDatabase)
             {
-                var customerContactGroupName = string.Format("Customer contacts at {0} ({1})", this.DisplayName, this.UniqueId);
-                var supplierContactGroupName = string.Format("Supplier contacts at {0} ({1})", this.DisplayName, this.UniqueId);
-                var partnerContactGroupName = string.Format("Partner contacts at {0} ({1})", this.DisplayName, this.UniqueId);
+                var customerContactGroupName = string.Format("Customer contacts at {0} ({1})", this.Name, this.UniqueId);
+                var supplierContactGroupName = string.Format("Supplier contacts at {0} ({1})", this.Name, this.UniqueId);
+                var partnerContactGroupName = string.Format("Partner contacts at {0} ({1})", this.Name, this.UniqueId);
 
                 var customerContactGroupFound = false;
                 var supplierContactGroupFound = false;
@@ -449,30 +445,12 @@ namespace Allors.Domain
             var contactRelationships = this.OrganisationContactRelationshipsWhereOrganisation;
             foreach (OrganisationContactRelationship contactRelationship in contactRelationships)
             {
-                if (contactRelationship.FromDate <= DateTime.Now &&
-                    (!contactRelationship.ExistThroughDate || contactRelationship.ThroughDate >= DateTime.Now))
+                if (contactRelationship.FromDate <= DateTime.UtcNow &&
+                    (!contactRelationship.ExistThroughDate || contactRelationship.ThroughDate >= DateTime.UtcNow))
                 {
                     this.AddCurrentContact(contactRelationship.Contact);
                 }
             }
-        }
-
-        private string AppsDeriveDisplayName()
-        {
-            return this.Name;
-        }
-
-        private string AppsDeriveSearchDataCharacterBoundaryText()
-        {
-            return string.Format(
-                "{0} {1}",
-                this.DisplayName,
-                this.ExistShippingAddress ? this.ShippingAddress.SearchData.CharacterBoundaryText : null);
-        }
-
-        private string AppsDeriveSearchDataWordBoundaryText()
-        {
-            return null;
         }
 
         public bool IsPerson {
@@ -495,42 +473,42 @@ namespace Allors.Domain
             {
                 var roles = new List<string>();
 
-                if (IsActiveClient(DateTime.Now.Date))
+                if (IsActiveClient(DateTime.UtcNow.Date))
                 {
                     roles.Add("Client");
                 }
 
-                if (IsActiveCustomer(DateTime.Now.Date))
+                if (IsActiveCustomer(DateTime.UtcNow.Date))
                 {
                     roles.Add("Customer");
                 }
 
-                if (IsActiveDistributor(DateTime.Now.Date))
+                if (IsActiveDistributor(DateTime.UtcNow.Date))
                 {
                     roles.Add("Distributor");
                 }
 
-                if (IsActivePartner(DateTime.Now.Date))
+                if (IsActivePartner(DateTime.UtcNow.Date))
                 {
                     roles.Add("Partner");
                 }
 
-                if (IsActiveProfessionalServicesProvider(DateTime.Now.Date))
+                if (IsActiveProfessionalServicesProvider(DateTime.UtcNow.Date))
                 {
                     roles.Add("Professional Service Provider");
                 }
 
-                if (IsActiveProspect(DateTime.Now.Date))
+                if (IsActiveProspect(DateTime.UtcNow.Date))
                 {
                     roles.Add("Prospect");
                 }
 
-                if (IsActiveSubContractor(DateTime.Now.Date))
+                if (IsActiveSubContractor(DateTime.UtcNow.Date))
                 {
                     roles.Add("Subcontractor");
                 }
 
-                if (IsActiveSupplier(DateTime.Now.Date))
+                if (IsActiveSupplier(DateTime.UtcNow.Date))
                 {
                     roles.Add("Supplier");
                 }

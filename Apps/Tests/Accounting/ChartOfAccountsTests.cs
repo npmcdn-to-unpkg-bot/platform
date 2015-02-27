@@ -51,17 +51,5 @@ namespace Allors.Domain
 
             Assert.IsTrue(chartOfAccounts.ExistUniqueId);
         }
-
-        [Test]
-        public void GivenChartOfAccounts_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var chartOfAccounts = new ChartOfAccountsBuilder(this.DatabaseSession)
-                .WithName("ChartOfAccounts")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual(chartOfAccounts.Name, chartOfAccounts.DisplayName);
-        }
     }
 }

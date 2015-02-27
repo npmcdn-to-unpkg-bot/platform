@@ -161,50 +161,10 @@ namespace Allors.Domain
                 this.AddProductCategory(PrimaryProductCategory);
             }
 
-            this.DeriveDisplayName();
-            this.DeriveSearchDataCharacterBoundaryText();
-            this.DeriveSearchDataWordBoundaryText();
-
             this.DeriveVirtualProductPriceComponent();
             this.DeriveProductCategoryExpanded();
             this.DeriveAvailableToPromise();
             this.DeriveThumbnail();
-        }
-
-        private void AppsDeriveDisplayName()
-        {
-            this.DisplayName = this.ComposeDisplayName();
-        }
-
-        private void AppsDeriveSearchDataCharacterBoundaryText()
-        {
-            this.SearchData.CharacterBoundaryText = this.AppsComposeSearchDataCharacterBoundaryText();
-        }
-
-        private void AppsDeriveSearchDataWordBoundaryText()
-        {
-            this.SearchData.WordBoundaryText = this.AppsComposeSearchDataWordBoundaryText();
-        }
-
-        private string AppsComposeDisplayName()
-        {
-            return string.Format("{0}, SKU: {1}", this.ExistName ? this.Name : null, this.ExistSku ? this.Sku : null);
-        }
-
-        private string AppsComposeSearchDataCharacterBoundaryText()
-        {
-            return string.Format(
-                "{0} {1} {2} {3} {4}",
-                this.ExistName ? this.Name : null,
-                this.ExistSku ? this.Sku : null,
-                this.ExistBarCode ? this.BarCode : null,
-                this.ExistManufacturerId ? this.ManufacturerId : null,
-                this.ExistArticleNumber ? this.ArticleNumber : null);
-        }
-
-        private string AppsComposeSearchDataWordBoundaryText()
-        {
-            return null;
         }
     }
 }

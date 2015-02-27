@@ -59,20 +59,7 @@ namespace Allors.Domain
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
-
-        [Test]
-        public void GivenBank_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var netherlands = new Countries(this.DatabaseSession).CountryByIsoCode["NL"];
-            const string name = "RABOBANK GROEP";
-
-            var bank = new BankBuilder(this.DatabaseSession).WithCountry(netherlands).WithName(name).WithBic("RABONL2U").Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual(name, bank.DisplayName);
-        }
-
+        
         [Test]
         public void GivenBankWithBic_WhenDeriving_ThenFirstfourCharactersMustBeAlphabetic()
         {

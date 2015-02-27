@@ -50,20 +50,5 @@ namespace Allors.Domain
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
-
-        [Test]
-        public void GivenEngagementRate_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var poor = new RatingTypes(this.DatabaseSession).Poor;
-
-            var engagementRate = new EngagementRateBuilder(this.DatabaseSession)
-                .WithBillingRate(10M)
-                .WithRatingType(poor)
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual(string.Format("{0} for {1}", 10M, poor.Name), engagementRate.DisplayName);
-        }
     }
 }

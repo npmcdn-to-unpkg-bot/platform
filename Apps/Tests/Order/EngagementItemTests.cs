@@ -46,18 +46,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenCustomEngagementItem_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var customEngagementItem = new CustomEngagementItemBuilder(this.DatabaseSession)
-                .WithDescription("CustomEngagementItem")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("CustomEngagementItem", customEngagementItem.DisplayName);
-        }
-
-        [Test]
         public void GivenDeliverableOrderItem_WhenDeriving_ThenDescriptionIsRequired()
         {
             var builder = new DeliverableOrderItemBuilder(this.DatabaseSession);
@@ -71,18 +59,6 @@ namespace Allors.Domain
             deliverableOrderItem = builder.Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
-        }
-
-        [Test]
-        public void GivenDeliverableOrderItem_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var deliverableOrderItem = new DeliverableOrderItemBuilder(this.DatabaseSession)
-                .WithDescription("DeliverableOrderItem")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("DeliverableOrderItem", deliverableOrderItem.DisplayName);
         }
 
         [Test]
@@ -102,18 +78,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenGoodOrderItem_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var goodOrderItem = new GoodOrderItemBuilder(this.DatabaseSession)
-                .WithDescription("GoodOrderItem")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("GoodOrderItem", goodOrderItem.DisplayName);
-        }
-
-        [Test]
         public void GivenProfessionalPlacement_WhenDeriving_ThenDescriptionIsRequired()
         {
             var builder = new ProfessionalPlacementBuilder(this.DatabaseSession);
@@ -130,18 +94,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenProfessionalPlacement_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var professionalPlacement = new ProfessionalPlacementBuilder(this.DatabaseSession)
-                .WithDescription("ProfessionalPlacement")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("ProfessionalPlacement", professionalPlacement.DisplayName);
-        }
-
-        [Test]
         public void GivenStandardServiceOrderItem_WhenDeriving_ThenDescriptionIsRequired()
         {
             var builder = new StandardServiceOrderItemBuilder(this.DatabaseSession);
@@ -155,18 +107,6 @@ namespace Allors.Domain
             standardServiceOrderItem = builder.Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
-        }
-
-        [Test]
-        public void GivenStandardServiceOrderItem_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var standardServiceOrderItem = new StandardServiceOrderItemBuilder(this.DatabaseSession)
-                .WithDescription("StandardServiceOrderItem")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("StandardServiceOrderItem", standardServiceOrderItem.DisplayName);
         }
     }
 }

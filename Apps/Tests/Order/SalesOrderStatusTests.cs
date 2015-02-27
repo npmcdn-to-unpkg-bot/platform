@@ -44,15 +44,5 @@ namespace Allors.Domain
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
-
-        [Test]
-        public void GivenOrderStatusWhenValidatingThenDisplayNameIsSet()
-        {
-            var orderStatus = new SalesOrderStatusBuilder(this.DatabaseSession).WithSalesOrderObjectState(new SalesOrderObjectStates(this.DatabaseSession).Provisional).Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual(string.Format("{0} {1}", new SalesOrderObjectStates(this.DatabaseSession).Provisional.Name, orderStatus.StartDateTime), orderStatus.DisplayName);
-        }
     }
 }

@@ -39,32 +39,10 @@ namespace Allors.Domain
             }
         }
 
-        public List<string> Roles { get; private set; }
-
         public void AppsDerive(ObjectDerive method)
         {
             var derivation = method.Derivation;
-
             this.AppsPartyDerive(derivation);
-
-            this.DisplayName = this.DeriveDisplayName();
-            this.SearchData.CharacterBoundaryText = this.DeriveSearchDataCharacterBoundaryText();
-            this.SearchData.WordBoundaryText = this.DeriveSearchDataWordBoundaryText();
-        }
-
-        private string AppsDeriveDisplayName()
-        {
-            return this.Description;
-        }
-
-        private string AppsDeriveSearchDataCharacterBoundaryText()
-        {
-            return this.Description;
-        }
-
-        private string AppsDeriveSearchDataWordBoundaryText()
-        {
-            return null;
         }
     }
 }

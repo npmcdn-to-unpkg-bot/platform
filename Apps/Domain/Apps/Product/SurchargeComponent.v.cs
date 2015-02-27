@@ -20,18 +20,11 @@
 
 namespace Allors.Domain
 {
-    
-
     public partial class SurchargeComponent
     {
         public void DeriveVirtualProductPriceComponent()
         {
             this.AppsDeriveVirtualProductPriceComponent();
-        }
-
-        public void DeriveDisplayName()
-        {
-            this.AppsDeriveDisplayName();
         }
     }
 }

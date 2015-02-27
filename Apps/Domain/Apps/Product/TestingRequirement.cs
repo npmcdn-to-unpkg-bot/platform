@@ -24,8 +24,6 @@ namespace Allors.Domain
     {
         public void AppsOnPostBuild(ObjectOnPostBuild method)
         {
-            
-
             if (!this.ExistCurrentObjectState)
             {
                 this.CurrentObjectState = new PartSpecificationObjectStates(this.Strategy.DatabaseSession).Created;
@@ -37,8 +35,6 @@ namespace Allors.Domain
             var derivation = method.Derivation;
 
             this.AppsPartSpecificationDerive(derivation);
-
-            this.DisplayName = this.Description;
 
             this.PreviousObjectState = this.CurrentObjectState;
         }

@@ -219,8 +219,6 @@ namespace Allors.Domain
             }
 
             derivation.Log.AssertExistsAtMostOne(this, Stores.Meta.FiscalYearInvoiceNumbers, Stores.Meta.SalesInvoiceCounter);
-
-            this.DisplayName = this.Name;
         }
     }
 }

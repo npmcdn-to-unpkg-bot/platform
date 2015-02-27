@@ -28,12 +28,6 @@ namespace Allors.Domain
 
             derivation.Log.AssertExists(this, WorkEffortTypes.Meta.Description);
             derivation.Log.AssertExists(this, WorkEffortTypes.Meta.WorkEffortTypeKind);
-
-            this.DisplayName = this.Description;
-
-            this.SearchData.CharacterBoundaryText = this.Description;
-            this.SearchData.WordBoundaryText = null;
-            
         }
     }
 }

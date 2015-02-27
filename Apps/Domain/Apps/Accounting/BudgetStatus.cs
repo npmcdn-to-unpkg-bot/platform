@@ -30,16 +30,8 @@ namespace Allors.Domain
 
             if (!this.ExistStartDateTime)
             {
-                this.StartDateTime = DateTime.Now;
+                this.StartDateTime = DateTime.UtcNow;
             }
-        }
-
-        public void AppsDerive(ObjectDerive method)
-        {
-            this.DisplayName = string.Format(
-                "{0} starting {1}",
-                this.ExistBudgetObjectState ? this.BudgetObjectState.Name : null,
-                this.ExistStartDateTime ? this.StartDateTime : DateTime.MinValue);
         }
     }
 }

@@ -46,15 +46,5 @@ namespace Allors.Domain
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
-
-        [Test]
-        public void GivenOrganisationContactKind_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var contactKind = new OrganisationContactKindBuilder(this.DatabaseSession).WithDescription("contactkind").Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("contactkind", contactKind.DisplayName);
-        }
     }
 }

@@ -64,37 +64,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenPostalBoundary_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var city = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
-            var postalCode = new PostalCodeBuilder(this.DatabaseSession).WithCode("2800").Build();
-            var country = new Countries(this.DatabaseSession).FindBy(Countries.Meta.IsoCode, "BE");
-
-            var address = new PostalAddressBuilder(this.DatabaseSession).WithAddress1("Haverwerf 15").WithGeographicBoundary(country).Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("Haverwerf 15, , Belgium", address.DisplayName);
-
-            address.Address2 = "address2";
-            address.Address3 = "address3";
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("Haverwerf 15, address2, address3, , Belgium", address.DisplayName);
-
-            address.RemoveAddress2();
-            address.RemoveAddress3();
-
-            address.AddGeographicBoundary(postalCode);
-            address.AddGeographicBoundary(city);
-            
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("Haverwerf 15, 2800 Mechelen, Belgium", address.DisplayName);
-        }
-
-        [Test]
         public void GivenPostalBoundary_WhenDeriving_ThenFormattedFullAddressIsSet()
         {
             var city = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
@@ -112,7 +81,6 @@ namespace Allors.Domain
             this.DatabaseSession.Derive(true);
 
             Assert.AreEqual("Haverwerf 15<br />address2<br /><br />Belgium", address.FormattedFullAddress);
-            Assert.AreEqual("Haverwerf 15, address2, , Belgium", address.DisplayName);
 
             address.RemoveAddress2();
 
@@ -122,7 +90,6 @@ namespace Allors.Domain
             this.DatabaseSession.Derive(true);
 
             Assert.AreEqual("Haverwerf 15<br />2800 Mechelen<br />Belgium", address.FormattedFullAddress);
-            Assert.AreEqual("Haverwerf 15, 2800 Mechelen, Belgium", address.DisplayName);
         }
 
         [Test]

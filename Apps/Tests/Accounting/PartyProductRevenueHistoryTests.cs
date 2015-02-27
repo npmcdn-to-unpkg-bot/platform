@@ -21,46 +21,11 @@
 namespace Allors.Domain
 {
     using System;
-
-    
-    using Allors.Domain;
-
     using NUnit.Framework;
 
     [TestFixture]
     public class PartyProductRevenueHistoryTests : DomainTest
     {
-        [Test]
-        public void GivenPartyProductRevenueHistory_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var revenue = 100.25M;
-            
-            var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
-            var party = new OrganisationBuilder(this.DatabaseSession).WithName("Organisation").Build();
-
-            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(party).WithInternalOrganisation(internalOrganisation).Build();
-
-            var product = new GoodBuilder(this.DatabaseSession)
-                .WithSku("10101")
-                .WithVatRate(new VatRates(this.DatabaseSession).Extent().First)
-                .WithName("good1")
-                .WithInventoryItemKind(new InventoryItemKinds(this.DatabaseSession).NonSerialized)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .WithPrimaryProductCategory(new ProductCategories(this.DatabaseSession).Extent().First)
-                .Build();
-
-            var packageRevenueHistory = new PartyProductRevenueHistoryBuilder(this.DatabaseSession)
-                .WithParty(party)
-                .WithProduct(product)
-                .WithRevenue(revenue)
-                .WithInternalOrganisation(internalOrganisation)
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual(string.Format("{0}, {1}: {2} revenue trailing twelve months at {3}", party.DisplayName, product.DisplayName, revenue.AsCurrencyString(internalOrganisation.CurrencyFormat), internalOrganisation.DisplayName), packageRevenueHistory.DisplayName);
-        }
-
         [Test]
         public void GivenSalesInvoice_WhenDerived_ThenTotalExVatIsAddedToPartyProductRevenueHistory()
         {

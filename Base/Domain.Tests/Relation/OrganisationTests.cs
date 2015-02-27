@@ -30,16 +30,5 @@ namespace Allors.Domain
     [TestFixture]
     public class OrganisationTests : DomainTest
     {
-        [Test]
-        public void GivenOrganisationWhenDerivingThenDisplayNameIsSet()
-        {
-            var organisation = new OrganisationBuilder(this.DatabaseSession)
-                .WithName("Organisation")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("Organisation", organisation.DisplayName);
-        }
     }
 }

@@ -28,15 +28,6 @@ namespace Allors.Domain
 
             derivation.Log.AssertAtLeastOne(this, RequestItems.Meta.Product, RequestItems.Meta.ProductFeature, RequestItems.Meta.Description, RequestItems.Meta.NeededSkill, RequestItems.Meta.Deliverable);
             derivation.Log.AssertExistsAtMostOne(this, RequestItems.Meta.Product, RequestItems.Meta.ProductFeature, RequestItems.Meta.Description, RequestItems.Meta.NeededSkill, RequestItems.Meta.Deliverable);
-
-            this.DisplayName = string.Format(
-                "{0}{1}{2}{3} at level {4}{5}",
-                this.ExistDescription ? this.Description : null,
-                this.ExistProduct ? this.Product.ComposeDisplayName() : null,
-                this.ExistProductFeature ? this.ProductFeature.ComposeDisplayName() : null,
-                this.ExistNeededSkill ? this.NeededSkill.Skill.Name : null,
-                this.ExistNeededSkill ? this.NeededSkill.SkillLevel.Name : null,
-                this.ExistDeliverable ? this.Deliverable.Name : null);
         }
     }
 }

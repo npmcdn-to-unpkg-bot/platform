@@ -41,17 +41,5 @@ namespace Allors.Domain
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
-
-        [Test]
-        public void GivenGeneralLedgerAccountGroup_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var costCenter = new GeneralLedgerAccountGroupBuilder(this.DatabaseSession)
-                .WithDescription("GeneralLedgerAccountGroup")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual(costCenter.Description, costCenter.DisplayName);
-        }
     }
 }

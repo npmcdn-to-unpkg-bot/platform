@@ -77,19 +77,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenCustomerRelationship_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var customer = new PersonBuilder(this.DatabaseSession).WithLastName("customer").Build();
-
-            var customerRelationship = new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(customer).Build();
-            var internalOrganisation = Singleton.Instance(this.DatabaseSession).DefaultInternalOrganisation;
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual(string.Format("{0} customer at {1}", customer.DisplayName, internalOrganisation.DisplayName), customerRelationship.DisplayName);
-        }
-
-        [Test]
         public void GivenActiveCustomerRelationship_WhenDeriving_ThenInternalOrganisationCustomersContainsCustomer()
         {
             var customer = new PersonBuilder(this.DatabaseSession).WithLastName("customer").Build();

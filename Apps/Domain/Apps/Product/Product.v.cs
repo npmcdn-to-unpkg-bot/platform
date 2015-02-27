@@ -29,17 +29,5 @@ namespace Allors.Domain
         void DeriveVirtualProductPriceComponent();
 
         void DeriveProductCategoryExpanded();
-
-        void DeriveDisplayName();
-
-        void DeriveSearchDataCharacterBoundaryText();
-
-        void DeriveSearchDataWordBoundaryText();
-
-        string ComposeDisplayName();
-
-        string ComposeSearchDataCharacterBoundaryText();
-
-        string ComposeSearchDataWordBoundaryText();
     } 
 }

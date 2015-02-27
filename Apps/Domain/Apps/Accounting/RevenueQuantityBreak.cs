@@ -27,11 +27,6 @@ namespace Allors.Domain
             var derivation = method.Derivation;
 
             derivation.Log.AssertAtLeastOne(this, RevenueQuantityBreaks.Meta.From, RevenueQuantityBreaks.Meta.Through);
-
-            this.DisplayName = string.Format(
-                "Revenue quantity: from {0} through {1}",
-                this.ExistFrom ? this.From : 0,
-                this.ExistThrough ? this.Through : 0);
         }
     }
 }

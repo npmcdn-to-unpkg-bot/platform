@@ -182,12 +182,12 @@ namespace Allors.Domain
 
             if (!this.ExistInvoiceDate)
             {
-                this.InvoiceDate = DateTime.Now;
+                this.InvoiceDate = DateTime.UtcNow;
             }
 
             if (!this.ExistEntryDate)
             {
-                this.EntryDate = DateTime.Now;
+                this.EntryDate = DateTime.UtcNow;
             }
 
             if (!this.ExistTotalBasePrice)
@@ -294,7 +294,7 @@ namespace Allors.Domain
 
                     foreach (SupplierRelationship supplierRelationship in supplierRelationships)
                     {
-                        if (supplierRelationship.FromDate <= DateTime.Now && (!supplierRelationship.ExistThroughDate || supplierRelationship.ThroughDate >= DateTime.Now))
+                        if (supplierRelationship.FromDate <= DateTime.UtcNow && (!supplierRelationship.ExistThroughDate || supplierRelationship.ThroughDate >= DateTime.UtcNow))
                         {
                             derivation.AddDependency(this, supplierRelationship);
                         }
@@ -324,10 +324,6 @@ namespace Allors.Domain
                 this.AddInvoiceStatus(currentStatus);
                 this.CurrentInvoiceStatus = currentStatus;
             }
-
-            this.DeriveDisplayName();
-            this.DeriveSearchDataCharacterBoundaryText();
-            this.DeriveSearchDataWordBoundaryText();
 
             this.PreviousObjectState = this.CurrentObjectState;
 
@@ -378,47 +374,7 @@ namespace Allors.Domain
             foreach (PurchaseInvoiceItem purchaseInvoiceItem in this.PurchaseInvoiceItems)
             {
                 purchaseInvoiceItem.DerivePrices();
-
-                purchaseInvoiceItem.DeriveDisplayName();
             }
-        }
-
-        private void AppsDeriveDisplayName()
-        {
-            this.DisplayName = this.ComposeDisplayName();
-        }
-
-        private void AppsDeriveSearchDataCharacterBoundaryText()
-        {
-            this.SearchData.CharacterBoundaryText = this.AppsComposeSearchDataCharacterBoundaryText();
-        }
-
-        private void AppsDeriveSearchDataWordBoundaryText()
-        {
-            this.SearchData.WordBoundaryText = this.AppsComposeSearchDataWordBoundaryText();
-        }
-
-        private string AppsComposeDisplayName()
-        {
-            return string.Format(
-                "{0} - {1} from {2}",
-                this.ExistInvoiceNumber ? this.InvoiceNumber : null,
-                this.ExistInvoiceDate ? this.InvoiceDate : DateTime.MinValue,
-                this.ExistBilledFromParty ? this.BilledFromParty.DeriveDisplayName() : null);
-        }
-
-        private string AppsComposeSearchDataCharacterBoundaryText()
-        {
-            return this.ExistBilledFromParty ? this.BilledFromParty.DeriveSearchDataCharacterBoundaryText() : null;
-        }
-
-        private string AppsComposeSearchDataWordBoundaryText()
-        {
-            return string.Format(
-                "{0} {1} {2}",
-                this.ExistInvoiceNumber ? this.InvoiceNumber : null,
-                this.ExistInvoiceDate ? this.InvoiceDate : DateTime.MinValue,
-                this.ExistBilledFromParty ? this.BilledFromParty.DeriveSearchDataWordBoundaryText() : null);
         }
     }
 }

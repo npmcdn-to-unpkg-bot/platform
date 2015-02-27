@@ -20,12 +20,7 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     using System;
-    using System.Text;
-
-    
 
     public partial class SalesRepRevenueHistory
     {
@@ -41,7 +36,7 @@ namespace Allors.Domain
         {
             this.Revenue = 0;
 
-            var startDate = DateTime.Now.AddYears(-1);
+            var startDate = DateTime.UtcNow.AddYears(-1);
             var year = startDate.Year;
             var month = startDate.Month;
 
@@ -50,42 +45,11 @@ namespace Allors.Domain
             foreach (SalesRepRevenue revenue in revenues)
             {
                 if (revenue.InternalOrganisation.Equals(this.InternalOrganisation) &&
-                    ((revenue.Year == year && revenue.Month >= month) || (revenue.Year == DateTime.Now.Year && revenue.Month < month)))
+                    ((revenue.Year == year && revenue.Month >= month) || (revenue.Year == DateTime.UtcNow.Year && revenue.Month < month)))
                 {
                     this.Revenue += revenue.Revenue;
                 }
             }
-        }
-
-        public void AppsDerive(ObjectDerive method)
-        {
-            var derivation = method.Derivation;
-    
-            this.AppsDeriveDisplayName(derivation);
-        }
-
-        private void AppsDeriveDisplayName(IDerivation derivation)
-        {
-            var uiText = new StringBuilder();
-
-            if (this.ExistSalesRep)
-            {
-                uiText.Append(this.SalesRep.DeriveDisplayName());
-            }
-
-            if (this.ExistRevenue)
-            {
-                uiText.Append(": ");
-                uiText.Append(DecimalExtensions.AsCurrencyString(this.Revenue, this.InternalOrganisation.CurrencyFormat));
-            }
-
-            if (this.ExistInternalOrganisation)
-            {
-                uiText.Append(" revenue trailing twelve months at ");
-                uiText.Append(this.InternalOrganisation.Name);
-            }
-
-            this.DisplayName = uiText.ToString();
         }
     }
 }

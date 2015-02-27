@@ -79,16 +79,6 @@ namespace Allors.Domain
         {
             var results = new HashSet<SearchResult>();
 
-            foreach (var objectType in classes)
-            {
-                var extent = session.Extent(objectType);
-                extent.Filter.AddEquals(UserInterfaceables.Meta.DisplayName, displayName);
-                foreach (SearchResult searchResult in extent)
-                {
-                    results.Add(searchResult);
-                }
-            }
-
             return results;
         }
 

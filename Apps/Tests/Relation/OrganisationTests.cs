@@ -49,19 +49,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenOrganisation_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var organisation = new OrganisationBuilder(this.DatabaseSession)
-                .WithName("Organisation")
-                .WithLocale(new Locales(this.DatabaseSession).EnglishGreatBritain)
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("Organisation", organisation.DisplayName);
-        }
-
-        [Test]
         public void GivenOrganisation_WhenCurrentUserIsContactForOrganisation_ThenCustomerPermissionsAreGranted()
         {
             var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");

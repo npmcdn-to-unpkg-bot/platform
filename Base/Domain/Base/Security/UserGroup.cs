@@ -56,22 +56,6 @@ namespace Allors.Domain
             {
                 // TODO: members should be added to ancestor groups
             }
-
-            if (this.ExistName)
-            {
-                if (this.ExistMembers)
-                {
-                    this.DisplayName = this.Name + string.Format(" with {0} members", this.Members.Count);
-                }
-                else
-                {
-                    this.DisplayName = this.Name;
-                }
-            }
-            else
-            {
-                this.DisplayName = "Unnamed";
-            }
         }
 
         private void BaseDeriveDisplayName()
@@ -89,8 +73,6 @@ namespace Allors.Domain
                 uiText.Append(this.Members.Count);
                 uiText.Append(" members");
             }
-
-            this.DisplayName = uiText.ToString();
         }
     }
 }

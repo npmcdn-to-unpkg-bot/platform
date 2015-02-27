@@ -27,12 +27,6 @@ namespace Allors.Domain
             var derivation = method.Derivation;
 
             derivation.Log.AssertAtLeastOne(this, AgreementTerms.Meta.TermType, AgreementTerms.Meta.Description);
-
-            this.DisplayName = string.Format(
-                "{0} {1} with value {2}",
-                this.ExistDescription ? this.Description : null,
-                this.ExistTermType ? this.TermType.Name : null,
-                this.ExistTermValue ? this.TermValue : null);
         }
     }
 }

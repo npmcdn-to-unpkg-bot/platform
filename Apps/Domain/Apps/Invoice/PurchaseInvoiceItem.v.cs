@@ -22,11 +22,6 @@ namespace Allors.Domain
 {
     public partial class PurchaseInvoiceItem
     {
-        public void DeriveDisplayName()
-        {
-            this.AppsDeriveDisplayName();
-        }
-
         public void DerivePrices()
         {
             this.AppsDerivePrices();

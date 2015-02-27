@@ -56,15 +56,5 @@ namespace Allors.Domain
         {
             this.AppsDeriveCurrentShipmentStatus(derivation);
         }
-
-        public void DeriveDisplayName()
-        {
-            this.AppsDeriveDisplayName();
-        }
-
-        public string ComposeDisplayName()
-        {
-            return this.AppsComposeDisplayName();
-        }
     }
 }

@@ -41,15 +41,5 @@ namespace Allors.Domain
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
-
-        [Test]
-        public void GivenAddendum_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var addendum = new AddendumBuilder(this.DatabaseSession).WithDescription("addendum").Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("addendum", addendum.DisplayName);
-        }
     }
 }

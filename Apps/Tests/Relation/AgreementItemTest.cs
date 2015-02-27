@@ -46,18 +46,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenAgreementExhibit_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var agreementExhibit = new AgreementExhibitBuilder(this.DatabaseSession)
-                .WithDescription("AgreementExhibit")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("AgreementExhibit", agreementExhibit.DisplayName);
-        }
-
-        [Test]
         public void GivenAgreementPricingProgram_WhenDeriving_ThenDescriptionIsRequired()
         {
             var builder = new AgreementPricingProgramBuilder(this.DatabaseSession);
@@ -71,18 +59,6 @@ namespace Allors.Domain
             agreementPricingProgram = builder.Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
-        }
-
-        [Test]
-        public void GivenAgreementPricingProgram_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var agreementPricingProgram = new AgreementPricingProgramBuilder(this.DatabaseSession)
-                .WithDescription("AgreementPricingProgram")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("AgreementPricingProgram", agreementPricingProgram.DisplayName);
         }
 
         [Test]
@@ -102,18 +78,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenAgreementSection_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var agreementSection = new AgreementSectionBuilder(this.DatabaseSession)
-                .WithDescription("AgreementSection")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("AgreementSection", agreementSection.DisplayName);
-        }
-
-        [Test]
         public void GivenSubAgreement_WhenDeriving_ThenDescriptionIsRequired()
         {
             var builder = new SubAgreementBuilder(this.DatabaseSession);
@@ -127,18 +91,6 @@ namespace Allors.Domain
             subAgreement = builder.Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
-        }
-
-        [Test]
-        public void GivenSubAgreement_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var subAgreement = new SubAgreementBuilder(this.DatabaseSession)
-                .WithDescription("SubAgreement")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("SubAgreement", subAgreement.DisplayName);
         }
     }
 }

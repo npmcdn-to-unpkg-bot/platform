@@ -31,43 +31,5 @@ namespace Allors.Domain
         {
             this.RemoveBasePrice(basePrice);
         }
-
-        public void AppsDerive(ObjectDerive method)
-        {
-            this.DeriveDisplayName();
-            this.DeriveSearchDataCharacterBoundaryText();
-            this.DeriveSearchDataWordBoundaryText();
-        }
-
-        private void AppsDeriveDisplayName()
-        {
-            this.DisplayName = this.ComposeDisplayName();
-        }
-
-        private void AppsDeriveSearchDataCharacterBoundaryText()
-        {
-            this.SearchData.CharacterBoundaryText = this.AppsComposeSearchDataCharacterBoundaryText();
-        }
-
-        private void AppsDeriveSearchDataWordBoundaryText()
-        {
-            this.SearchData.WordBoundaryText = this.AppsComposeSearchDataWordBoundaryText();
-        }
-
-        private string AppsComposeDisplayName()
-        {
-            return string.Format("{0} {1}", this.ExistUnit ? this.Unit : 0, this.ExistUnitOfMeasure ? this.UnitOfMeasure.DisplayName : null);
-
-        }
-
-        private string AppsComposeSearchDataCharacterBoundaryText()
-        {
-            return null;
-        }
-
-        private string AppsComposeSearchDataWordBoundaryText()
-        {
-            return this.ExistUnitOfMeasure ? this.UnitOfMeasure.DisplayName : null;
-        }
     }
 }

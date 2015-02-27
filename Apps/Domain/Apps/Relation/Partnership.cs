@@ -26,22 +26,15 @@ namespace Allors.Domain
     {
         public void AppsOnPostBuild(ObjectOnPostBuild method)
         {
-            
-
             if (!this.ExistFromDate)
             {
-                this.FromDate = DateTime.Now;
+                this.FromDate = DateTime.UtcNow;
             }
         }
 
         public void AppsDerive(ObjectDerive method)
         {
             var derivation = method.Derivation;
-
-            this.DisplayName = string.Format(
-                "{0} partner for {1}",
-                this.ExistPartner ? this.Partner.DeriveDisplayName() : null,
-                this.ExistInternalOrganisation ? this.InternalOrganisation.DeriveDisplayName() : null);
 
             this.AppsDeriveMembership();
             this.AppsDerivePartnerContacts(derivation);
@@ -67,8 +60,8 @@ namespace Allors.Domain
                 {
                     foreach (OrganisationContactRelationship contactRelationship in this.Partner.OrganisationContactRelationshipsWhereOrganisation)
                     {
-                        if (this.FromDate <= DateTime.Now &&
-                            (!this.ExistThroughDate || this.ThroughDate >= DateTime.Now))
+                        if (this.FromDate <= DateTime.UtcNow &&
+                            (!this.ExistThroughDate || this.ThroughDate >= DateTime.UtcNow))
                         {
                             if (!this.Partner.PartnerContactUserGroup.ContainsMember(contactRelationship.Contact))
                             {

@@ -50,21 +50,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenColor_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var color = new ColourBuilder(this.DatabaseSession)
-                .WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
-                                            .WithText("Color")
-                                            .WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale)
-                                            .Build())
-                .Build();
-
-            this.DatabaseSession.Derive(true); 
-
-            Assert.AreEqual("Color", color.DisplayName);
-        }
-
-        [Test]
         public void GivenDimension_WhenDeriving_ThenRequiredRelationsMustExist()
         {
             var builder = new DimensionBuilder(this.DatabaseSession);
@@ -88,23 +73,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenDimension_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var unitOfMeasure = new UnitOfMeasureBuilder(this.DatabaseSession)
-                .WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
-                                            .WithText("uom")
-                                            .WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale)
-                                            .Build())
-                .Build();
-
-            var dimension = new DimensionBuilder(this.DatabaseSession).WithUnitOfMeasure(unitOfMeasure).WithUnit(3).Build();
-
-            this.DatabaseSession.Derive(true); 
-
-            Assert.AreEqual("3 uom", dimension.DisplayName);
-        }
-
-        [Test]
         public void GivenModel_WhenDeriving_ThenRequiredRelationsMustExist()
         {
             var builder = new ModelBuilder(this.DatabaseSession);
@@ -121,21 +89,6 @@ namespace Allors.Domain
             model = builder.Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
-        }
-
-        [Test]
-        public void GivenModel_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var model = new ModelBuilder(this.DatabaseSession)
-                .WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
-                                            .WithText("Model")
-                                            .WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale)
-                                            .Build())
-                .Build();
-
-            this.DatabaseSession.Derive(true); 
-
-            Assert.AreEqual("Model", model.DisplayName);
         }
 
         [Test]
@@ -158,21 +111,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenServiceFeature_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var serviceFeature = new ServiceFeatureBuilder(this.DatabaseSession)
-                .WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
-                                            .WithText("Service Feature")
-                                            .WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale)
-                                            .Build())
-                .Build();
-
-            this.DatabaseSession.Derive(true); 
-
-            Assert.AreEqual("Service Feature", serviceFeature.DisplayName);
-        }
-
-        [Test]
         public void GivenSizeConstant_WhenDeriving_ThenRequiredRelationsMustExist()
         {
             var builder = new SizeBuilder(this.DatabaseSession);
@@ -189,21 +127,6 @@ namespace Allors.Domain
             size = builder.Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
-        }
-
-        [Test]
-        public void GivenSizeConstant_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var size = new SizeBuilder(this.DatabaseSession)
-                .WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
-                                            .WithText("Size")
-                                            .WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale)
-                                            .Build())
-                .Build();
-
-            this.DatabaseSession.Derive(true); 
-
-            Assert.AreEqual("Size", size.DisplayName);
         }
 
         [Test]
@@ -226,21 +149,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenSoftwareFeature_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var softwareFeature = new SoftwareFeatureBuilder(this.DatabaseSession)
-                .WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
-                                            .WithText("Software Feature")
-                                            .WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale)
-                                            .Build())
-                .Build();
-
-            this.DatabaseSession.Derive(true); 
-
-            Assert.AreEqual("Software Feature", softwareFeature.DisplayName);
-        }
-
-        [Test]
         public void GivenProductQualityConstant_WhenDeriving_ThenRequiredRelationsMustExist()
         {
             var builder = new ProductQualityBuilder(this.DatabaseSession);
@@ -257,21 +165,6 @@ namespace Allors.Domain
             productQuality = builder.Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
-        }
-
-        [Test]
-        public void GivenProductQualityConstant_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var productQuality = new ProductQualityBuilder(this.DatabaseSession)
-                .WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
-                                            .WithText("Product Quality")
-                                            .WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale)
-                                            .Build())
-                .Build();
-
-            this.DatabaseSession.Derive(true); 
-
-            Assert.AreEqual("Product Quality", productQuality.DisplayName);
         }
     }
 }

@@ -27,11 +27,6 @@ namespace Allors.Domain
             var derivation = method.Derivation;
 
             derivation.Log.AssertIsUnique(this, Passports.Meta.Number);
-
-            this.DisplayName = this.Number;
-
-            this.SearchData.CharacterBoundaryText = this.DisplayName;
-            this.SearchData.RemoveWordBoundaryText();
         }
     }
 }

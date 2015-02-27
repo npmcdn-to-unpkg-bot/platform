@@ -26,7 +26,7 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
             
-            this.SalesRepName = this.SalesRep.DeriveDisplayName();
+            this.SalesRepName = this.SalesRep.FullName;
         }
     }
 }

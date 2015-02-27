@@ -164,9 +164,6 @@
     <Compile Include="..\..\Base\Meta\Base\Population\UserGroup.cs">
       <Link>Base\Population\UserGroup.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Population\UserInterfaceable.cs">
-      <Link>Base\Population\UserInterfaceable.cs</Link>
-    </Compile>
     <Compile Include="..\..\Core\Meta\Core\Domain\AssociationType.cs">
       <Link>Core\Domain\AssociationType.cs</Link>
     </Compile>
@@ -785,7 +782,6 @@
     <Compile Include="Apps\Population\UnitOfMeasureConversion.cs" />
     <Compile Include="Apps\Population\User.cs" />
     <Compile Include="Apps\Population\UserGroup.cs" />
-    <Compile Include="Apps\Population\UserInterfaceable.cs" />
     <Compile Include="Apps\Population\UtilizationCharge.cs" />
     <Compile Include="Apps\Population\VarianceReason.cs" />
     <Compile Include="Apps\Population\VatCalculationMethod.cs" />
@@ -1320,7 +1316,6 @@
     <Compile Include="Generated\UnitOfMeasureConversion.g.cs" />
     <Compile Include="Generated\User.g.cs" />
     <Compile Include="Generated\UserGroup.g.cs" />
-    <Compile Include="Generated\UserInterfaceable.g.cs" />
     <Compile Include="Generated\UtilizationCharge.g.cs" />
     <Compile Include="Generated\VarianceReason.g.cs" />
     <Compile Include="Generated\VatCalculationMethod.g.cs" />

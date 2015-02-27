@@ -81,14 +81,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenorganisationContactRelationship_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            this.InstantiateObjects(this.DatabaseSession);
-
-            Assert.AreEqual("organisationContact contact for customer", this.organisationContactRelationship.DisplayName);
-        }
-
-        [Test]
         public void GivenPerson_WhenFirstContactForOrganisationIsCreated_ThenContactUserGroupIsCreated()
         {
             this.InstantiateObjects(this.DatabaseSession);

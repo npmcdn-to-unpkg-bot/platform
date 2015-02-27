@@ -82,16 +82,6 @@ namespace Allors.Domain
             this.AppsPartyDeriveRevenue();
         }
 
-        public string DeriveSearchDataCharacterBoundaryText()
-        {
-            return this.AppsDeriveSearchDataCharacterBoundaryText();
-        }
-
-        public string DeriveSearchDataWordBoundaryText()
-        {
-            return this.AppsDeriveSearchDataWordBoundaryText();
-        }
-
         public NumberFormatInfo CurrencyFormat {
             get
             {
@@ -111,11 +101,6 @@ namespace Allors.Domain
             {
                 return this.AppsPartyGetPendingCustomerShipments();
             }
-        }
-
-        public string DeriveDisplayName()
-        {
-            return this.AppsDeriveDisplayName();
         }
 
         public void DeriveFullName()

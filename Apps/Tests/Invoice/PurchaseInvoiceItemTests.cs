@@ -68,33 +68,5 @@ namespace Allors.Domain
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
-
-        [Test]
-        public void GivenInvoiceItem_WhenDeriving_ThenUiTextIsSet()
-        {
-            var rawMaterial = new RawMaterialBuilder(this.DatabaseSession).WithName("rawmaterial").Build();
-
-            this.DatabaseSession.Derive(true); 
-            this.DatabaseSession.Commit();
-
-            var invoice = new PurchaseInvoiceBuilder(this.DatabaseSession)
-                .WithPurchaseInvoiceType(new PurchaseInvoiceTypes(this.DatabaseSession).PurchaseInvoice)
-                .WithBilledFromParty(new Organisations(this.DatabaseSession).FindBy(Organisations.Meta.Name, "supplier"))
-                .WithBilledToInternalOrganisation(new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation"))
-                .Build();
-
-            var invoiceItem = new PurchaseInvoiceItemBuilder(this.DatabaseSession)
-                .WithPart(rawMaterial)
-                .WithPurchaseInvoiceItemType(new PurchaseInvoiceItemTypes(this.DatabaseSession).PartItem)
-                .WithQuantity(3)
-                .WithActualUnitPrice(5M)
-                .Build();
-            
-            invoice.AddPurchaseInvoiceItem(invoiceItem);
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("3 rawmaterial, Total: 15.00", invoiceItem.DisplayName);
-        }
     }
 }

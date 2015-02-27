@@ -68,8 +68,6 @@ namespace Allors.Domain
             var derivation = method.Derivation;
 
             this.NameToLowerCase();
-
-            this.DisplayName = this.Name;
         }
 
         private void NameToLowerCase()

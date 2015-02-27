@@ -49,18 +49,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenOrderKind_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var orderKind = new OrderKindBuilder(this.DatabaseSession)
-                .WithDescription("Pre order summer collections")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("Pre order summer collections", orderKind.DisplayName);
-        }
-
-        [Test]
         public void GivenOrderKind_WhenBuild_ThenPostBuildRelationsMustExist()
         {
             var orderKind = new OrderKindBuilder(this.DatabaseSession)

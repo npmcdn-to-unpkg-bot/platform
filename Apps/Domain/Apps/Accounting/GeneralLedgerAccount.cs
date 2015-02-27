@@ -107,14 +107,6 @@ namespace Allors.Domain
                     derivation.Log.AddError(this, GeneralLedgerAccounts.Meta.DefaultCostUnit, ErrorMessages.CostUnitNotAllowed);
                 }
             }
-
-            this.DisplayName = string.Format(
-                "{0} {1}", 
-                this.ExistAccountNumber ? this.AccountNumber : null, 
-                this.ExistName ? this.Name : null);
-
-            this.SearchData.CharacterBoundaryText = this.Name;
-            this.SearchData.WordBoundaryText = this.AccountNumber;
         }
     }
 }

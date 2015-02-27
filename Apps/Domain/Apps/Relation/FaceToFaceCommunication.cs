@@ -18,18 +18,30 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Allors.Meta;
-
 namespace Allors.Domain
 {
-    using System.Text;
-
+    using Allors.Meta;
+    
     public partial class FaceToFaceCommunication
     {
+        ObjectState Transitional.PreviousObjectState
+        {
+            get
+            {
+                return this.PreviousObjectState;
+            }
+        }
+
+        ObjectState Transitional.CurrentObjectState
+        {
+            get
+            {
+                return this.CurrentObjectState;
+            }
+        }
+        
         public void AppsOnPostBuild(ObjectOnPostBuild method)
         {
-            
-
             if (!this.ExistCurrentObjectState)
             {
                 this.CurrentObjectState = new CommunicationEventObjectStates(this.Strategy.DatabaseSession).Scheduled;
@@ -39,10 +51,6 @@ namespace Allors.Domain
         public void AppsDerive(ObjectDerive method)
         {
             var derivation = method.Derivation;
-
-            this.DeriveDisplayName();
-            this.DeriveSearchDataCharacterBoundaryText();
-            this.DeriveSearchDataWordBoundaryText();
 
             this.PreviousObjectState = this.CurrentObjectState;
 
@@ -135,7 +143,7 @@ namespace Allors.Domain
         public void AppsApplySecurityOnDerive(ObjectApplySecurityOnDerive method)
         {
             this.RemoveSecurityTokens();
-            this.AddSecurityToken(Domain.Singleton.Instance(this.Strategy.Session).AdministratorSecurityToken);
+            this.AddSecurityToken(Singleton.Instance(this.Strategy.Session).AdministratorSecurityToken);
 
             if (this.ExistOwner)
             {
@@ -170,75 +178,6 @@ namespace Allors.Domain
                         }
                     }
                 }
-            }
-        }
-
-        protected void AppsDeriveDisplayName()
-        {
-            this.DisplayName = this.ComposeDisplayName();
-        }
-
-        protected void AppsDeriveSearchDataCharacterBoundaryText()
-        {
-            this.SearchData.CharacterBoundaryText = this.AppsComposeSearchDataCharacterBoundaryText();
-        }
-
-        protected void AppsDeriveSearchDataWordBoundaryText()
-        {
-            this.SearchData.WordBoundaryText = this.AppsComposeSearchDataWordBoundaryText();
-        }
-
-        protected string AppsComposeDisplayName()
-        {
-            var text = new StringBuilder();
-            text.Append("Face to Face meeting between");
-
-            foreach (Party party in this.Participants)
-            {
-                text.Append(" ");
-                text.Append(party.DeriveDisplayName());
-            }
-
-            return text.ToString();
-        }
-
-        protected string AppsComposeSearchDataCharacterBoundaryText()
-        {
-            var text = this.Description;
-
-            foreach (Party party in this.Participants)
-            {
-                text += " " + party.DeriveSearchDataCharacterBoundaryText();
-            }
-
-            return text;
-        }
-
-        protected string AppsComposeSearchDataWordBoundaryText()
-        {
-            var text = string.Empty;
-
-            foreach (Party party in this.Participants)
-            {
-                text += " " + party.DeriveSearchDataWordBoundaryText();
-            }
-
-            return text;
-        }
-        
-        ObjectState Transitional.PreviousObjectState
-        {
-            get
-            {
-                return this.PreviousObjectState;
-            }
-        }
-
-        ObjectState Transitional.CurrentObjectState
-        {
-            get
-            {
-                return this.CurrentObjectState;
             }
         }
     }

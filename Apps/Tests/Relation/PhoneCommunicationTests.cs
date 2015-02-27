@@ -49,31 +49,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenPhoneCommunication_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var caller = new PersonBuilder(this.DatabaseSession).WithLastName("caller").Build();
-            var receiver1 = new PersonBuilder(this.DatabaseSession).WithLastName("receiver1").Build();
-            var receiver2 = new PersonBuilder(this.DatabaseSession).WithLastName("receiver2").Build();
-
-            this.DatabaseSession.Derive(true);
-            this.DatabaseSession.Commit();
-
-            var communication = new PhoneCommunicationBuilder(this.DatabaseSession)
-                .WithDescription("Phonecommunication")
-                .WithReceiver(receiver1)
-                .WithReceiver(receiver2)
-                .WithCaller(caller)
-                .WithActualStart(DateTime.Now)
-                .Build();
-
-            var uiText = string.Format("Phone conversation from: {0} with: {1} {2}", caller.DisplayName, receiver1.DisplayName, receiver2.DisplayName);
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual(uiText, communication.DisplayName);
-        }
-
-        [Test]
         public void GivenPhoneCommunication_WhenDeriving_ThenInvolvedPartiesAreDerived()
         {
             var owner = new PersonBuilder(this.DatabaseSession).WithLastName("owner").Build();

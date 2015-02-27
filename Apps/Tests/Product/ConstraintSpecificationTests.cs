@@ -45,17 +45,5 @@ namespace Allors.Domain
             Assert.AreEqual(specification.CurrentObjectState, new PartSpecificationObjectStates(this.DatabaseSession).Created);
             Assert.AreEqual(specification.CurrentObjectState, specification.PreviousObjectState);
         }
-
-        [Test]
-        public void GivenConstraintSpecification_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var specification = new ConstraintSpecificationBuilder(this.DatabaseSession)
-                .WithDescription("Activity")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual(specification.Description, specification.DisplayName);
-        }
     }
 }

@@ -21,35 +21,11 @@
 namespace Allors.Domain
 {
     using System;
-
-    
-    using Allors.Domain;
-
     using NUnit.Framework;
 
     [TestFixture]
     public class PartyPackageRevenueHistoryTests : DomainTest
     {
-        [Test]
-        public void GivenPartyPackageRevenueHistory_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var revenue = 100.25M;
-            var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
-            var party = new OrganisationBuilder(this.DatabaseSession).WithName("Organisation").Build();
-            var package = new PackageBuilder(this.DatabaseSession).WithName("package").Build();
-
-            var packageRevenueHistory = new PartyPackageRevenueHistoryBuilder(this.DatabaseSession)
-                .WithParty(party)
-                .WithPackage(package)
-                .WithRevenue(revenue)
-                .WithInternalOrganisation(internalOrganisation)
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual(string.Format("{0}, {1}: {2} revenue trailing twelve months at {3}", party.DisplayName, package.DisplayName, revenue.AsCurrencyString(internalOrganisation.CurrencyFormat), internalOrganisation.DisplayName), packageRevenueHistory.DisplayName);
-        }
-
         [Test]
         public void GivenSalesInvoice_WhenDerived_ThenTotalExVatIsAddedToPartyPackageRevenueHistory()
         {

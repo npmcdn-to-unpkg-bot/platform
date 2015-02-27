@@ -35,11 +35,6 @@ namespace Allors.Domain
             {
                 requirement.CurrentObjectState.Process(requirement);
             }
-
-            requirement.DisplayName = requirement.Description;
-
-            requirement.SearchData.CharacterBoundaryText = requirement.DisplayName;
-            requirement.SearchData.RemoveWordBoundaryText();
         }
 
         public static void AppsRequirementCancel(this Requirement requirement)

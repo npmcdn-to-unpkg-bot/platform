@@ -69,31 +69,5 @@ namespace Allors.Domain
             Assert.AreEqual(new SerializedInventoryItemObjectStates(this.DatabaseSession).Good, item.CurrentObjectState);
             Assert.AreEqual(new Warehouses(this.DatabaseSession).FindBy(Warehouses.Meta.Name, "facility"), item.Facility);
         }
-
-        [Test]
-        public void GivenInventoryItem_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var item = new SerializedInventoryItemBuilder(this.DatabaseSession)
-                .WithPart(new FinishedGoodBuilder(this.DatabaseSession).WithName("part").WithManufacturerId("10101").Build())
-                .WithSerialNumber("1")
-                .Build();
-
-            this.DatabaseSession.Derive(true); 
-
-            Assert.AreEqual("part, Id: 10101 with serialnumber 1", item.DisplayName);
-
-            item.RemovePart();
-            item.Good = new GoodBuilder(this.DatabaseSession)
-                .WithSku("10101")
-                .WithName("Good")
-                .WithVatRate(new VatRateBuilder(this.DatabaseSession).WithRate(21).Build())
-                .WithInventoryItemKind(new InventoryItemKinds(this.DatabaseSession).NonSerialized)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("Good, SKU: 10101 with serialnumber 1", item.DisplayName);
-        }
     }
 }

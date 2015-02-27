@@ -26,11 +26,6 @@ namespace Allors.Domain
 
     public partial class C1
     {
-        public void TestsOnPostBuild(ObjectOnPostBuild method)
-        {
-            this.DisplayName = this.Name;
-        }
-
         public void TestsPrepareDerivation(ObjectPrepareDerivation method)
         {
             var derivation = method.Derivation;

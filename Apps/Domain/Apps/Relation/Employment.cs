@@ -31,7 +31,7 @@ namespace Allors.Domain
 
             if (!this.ExistFromDate)
             {
-                this.FromDate = DateTime.Now;
+                this.FromDate = DateTime.UtcNow;
             }
         }
 
@@ -49,11 +49,6 @@ namespace Allors.Domain
                     derivation.Log.AddError(this, Employments.Meta.FromDate, ErrorMessages.ActiveDeploymentRegistered, this.Employer.DeriveDisplayName());
                 }
             }
-
-            this.DisplayName = string.Format(
-                "{0} employee at {1}",
-                this.ExistEmployee ? this.Employee.DeriveDisplayName() : null,
-                this.ExistEmployer ? this.Employer.DeriveDisplayName() : null);
 
             if (this.ExistEmployee)
             {

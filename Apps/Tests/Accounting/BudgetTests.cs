@@ -99,19 +99,5 @@ namespace Allors.Domain
             Assert.AreEqual(budget.CurrentObjectState, new BudgetObjectStates(this.DatabaseSession).Opened);
             Assert.AreEqual(budget.CurrentObjectState, budget.PreviousObjectState);
         }
-
-        [Test]
-        public void GivenOperatingBudget_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var budget = new OperatingBudgetBuilder(this.DatabaseSession)
-                .WithDescription("Budget")
-                .WithFromDate(DateTime.Now)
-                .WithThroughDate(DateTime.Now.AddYears(1))
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual(budget.Description, budget.DisplayName);
-        }
     }
 }

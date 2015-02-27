@@ -72,51 +72,5 @@ namespace Allors.Domain
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
-
-        [Test]
-        public void GivenOrderRequirementCommitment_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
-            var good = new GoodBuilder(this.DatabaseSession)
-                .WithSku("10101")
-                .WithName("Gizmo")
-                .WithVatRate(vatRate21)
-                .WithInventoryItemKind(new InventoryItemKinds(this.DatabaseSession).NonSerialized)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .Build();
-
-            var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
-            var shipToContactMechanism = new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build();
-
-            var customer = new PersonBuilder(this.DatabaseSession).WithFirstName("Koen").Build();
-
-            var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
-
-            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(customer).WithInternalOrganisation(internalOrganisation).Build();
-
-            var order = new SalesOrderBuilder(this.DatabaseSession)
-                .WithBillToCustomer(customer)
-                .WithShipToCustomer(customer)
-                .WithShipToAddress(shipToContactMechanism)
-                .WithTakenByInternalOrganisation(internalOrganisation)
-                .Build();
-
-            var orderItem = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good).WithQuantityOrdered(100).WithActualUnitPrice(10).Build();
-            order.AddSalesOrderItem(orderItem);
-
-            this.DatabaseSession.Derive(true);
-    
-            var customerRequirement = new CustomerRequirementBuilder(this.DatabaseSession).WithDescription("100 gizmo's").Build();
-
-            var orderRequirementCommitment = new OrderRequirementCommitmentBuilder(this.DatabaseSession)
-                .WithOrderItem(orderItem)
-                .WithRequirement(customerRequirement)
-                .WithQuantity(10)
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("10 items from 100 Gizmo, SKU: 10101, Total: 1,000.00 are committed for requirement: 100 gizmo's", orderRequirementCommitment.DisplayName);
-        }
     }
 }

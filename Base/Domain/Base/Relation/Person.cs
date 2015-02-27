@@ -69,58 +69,7 @@ namespace Allors.Domain
             this.BuildOwnerSecurityToken();
         }
 
-        public void BaseDerive(ObjectDerive method)
-        {
-            var derivation = method.Derivation;
-            
-            this.DisplayName = this.DeriveDisplayName();
-            this.SearchData.CharacterBoundaryText = this.DeriveSearchDataCharacterBoundaryText();
-            this.SearchData.WordBoundaryText = this.DeriveSearchDataWordBoundaryText();
-        }
-
-        private string CoreDeriveDisplayName()
-        {
-            var uiText = new StringBuilder();
-
-            if (this.ExistFirstName)
-            {
-                uiText.Append(this.FirstName);
-            }
-
-            if (this.ExistMiddleName)
-            {
-                if (uiText.Length > 0)
-                {
-                    uiText.Append(" ");
-                }
-
-                uiText.Append(this.MiddleName);
-            }
-
-            if (this.ExistLastName)
-            {
-                if (uiText.Length > 0)
-                {
-                    uiText.Append(" ");
-                }
-
-                uiText.Append(this.LastName);
-            }
-
-            return uiText.ToString();
-        }
-
-        private string CoreDeriveSearchDataCharacterBoundaryText()
-        {
-            return this.DeriveDisplayName();
-        }
-
-        private string CoreDeriveSearchDataWordBoundaryText()
-        {
-            return null;
-        }
-
-        private void CoreCreateOwnerSecurityToken()
+        private void BaseCreateOwnerSecurityToken()
         {
             if (!this.ExistOwnerSecurityToken)
             {

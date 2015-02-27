@@ -45,17 +45,5 @@ namespace Allors.Domain
             Assert.AreEqual(requirement.CurrentObjectState, new RequirementObjectStates(this.DatabaseSession).Active);
             Assert.AreEqual(requirement.CurrentObjectState, requirement.PreviousObjectState);
         }
-
-        [Test]
-        public void GivenCustomerRequirement_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var requirement = new CustomerRequirementBuilder(this.DatabaseSession)
-                .WithDescription("requirement")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual(requirement.Description, requirement.DisplayName);
-        }
     }
 }

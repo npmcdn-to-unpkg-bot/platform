@@ -51,17 +51,5 @@ namespace Allors.Domain
 
             Assert.IsTrue(costCenterCategory.ExistUniqueId);
         }
-
-        [Test]
-        public void GivenCostCenterCategory_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var costCenterCategory = new CostCenterCategoryBuilder(this.DatabaseSession)
-                .WithDescription("CostCenterCategory")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual(costCenterCategory.Description, costCenterCategory.DisplayName);
-        }
     }
 }

@@ -49,18 +49,5 @@ namespace Allors.Domain
             Assert.AreEqual(activity.CurrentObjectState, new WorkEffortObjectStates(this.DatabaseSession).Created);
             Assert.AreEqual(activity.CurrentObjectState, activity.PreviousObjectState);
         }
-
-
-        [Test]
-        public void GivenActivity_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var activity = new ActivityBuilder(this.DatabaseSession)
-                .WithDescription("Activity")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual(activity.Description, activity.DisplayName);
-        }
     }
 }

@@ -51,17 +51,5 @@ namespace Allors.Domain
 
             Assert.IsTrue(costCenter.ExistUniqueId);
         }
-
-        [Test]
-        public void GivenCostCenter_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var costCenter = new CostCenterBuilder(this.DatabaseSession)
-                .WithName("CostCenter")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual(costCenter.Name, costCenter.DisplayName);
-        }
     }
 }

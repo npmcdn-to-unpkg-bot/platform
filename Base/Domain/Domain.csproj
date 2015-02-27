@@ -134,7 +134,6 @@
     <Compile Include="Generated\Base\Unit.g.cs" />
     <Compile Include="Generated\Base\User.g.cs" />
     <Compile Include="Generated\Base\UserGroup.g.cs" />
-    <Compile Include="Generated\Base\UserInterfaceable.g.cs" />
     <Compile Include="Test\Combinations\C1.cs" />
     <Compile Include="Test\Combinations\C2.cs" />
     <Compile Include="Test\Common\Singletons.cs" />
@@ -152,7 +151,6 @@
     <Compile Include="Test\Relation\Organisations.cs" />
     <Compile Include="Test\General\Place.cs" />
     <Compile Include="Test\General\Places.cs" />
-    <Compile Include="Test\General\To.cs" />
     <Compile Include="Test\General\Units.cs" />
     <Compile Include="Test\ObjectsBase.cs" />
     <Compile Include="Test\ObjectsBase.v.cs" />
@@ -217,7 +215,6 @@
     <Compile Include="Base\Content\MediaType.cs" />
     <Compile Include="Base\Content\MediaTypes.cs" />
     <Compile Include="Base\Content\MediaTypes.v.cs" />
-    <Compile Include="Base\Content\PrintQueue.cs" />
     <Compile Include="Base\Content\PrintQueues.cs" />
     <Compile Include="Base\Content\PrintQueues.v.cs" />
     <Compile Include="Base\Content\StringTemplate.cs" />
@@ -235,7 +232,6 @@
     <Compile Include="Base\ISetup.cs" />
     <Compile Include="Base\Localisation\Countries.cs" />
     <Compile Include="Base\Localisation\Country.cs" />
-    <Compile Include="Base\Localisation\Country.v.cs" />
     <Compile Include="Base\Localisation\Currencies.cs" />
     <Compile Include="Base\Localisation\Currency.cs" />
     <Compile Include="Base\Localisation\Language.cs" />
@@ -275,7 +271,6 @@
     <Compile Include="Base\Security\PermissionComparer.cs" />
     <Compile Include="Base\Security\Permissions.cs" />
     <Compile Include="Base\Security\Role.cs" />
-    <Compile Include="Base\Security\Role.v.cs" />
     <Compile Include="Base\Security\Roles.cs" />
     <Compile Include="Base\Security\Security.cs" />
     <Compile Include="Base\Security\SecurityToken.cs" />

@@ -77,13 +77,6 @@ namespace Allors.Domain
             var salesInvoiceItem = this.InvoiceItem as SalesInvoiceItem;
             var purchaseInvoiceItem  = this.InvoiceItem as PurchaseInvoiceItem;
 
-            this.DisplayName = string.Format(
-                "amount {0} applied to invoice {1}{2}{3}",
-                this.ExistAmountApplied ? this.AmountApplied : 0,
-                this.Invoice != null ? this.Invoice.ComposeDisplayName() : null,
-                salesInvoiceItem != null ? salesInvoiceItem.SalesInvoiceWhereSalesInvoiceItem.ComposeDisplayName() : null,
-                purchaseInvoiceItem != null ? purchaseInvoiceItem.PurchaseInvoiceItemType.Name : null);
-
             if (salesInvoice != null)
             {
                 salesInvoice.Derive().WithDerivation(derivation).Execute();

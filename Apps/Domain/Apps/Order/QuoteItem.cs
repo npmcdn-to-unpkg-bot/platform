@@ -28,12 +28,6 @@ namespace Allors.Domain
 
             derivation.Log.AssertAtLeastOne(this, QuoteItems.Meta.Product, QuoteItems.Meta.ProductFeature, QuoteItems.Meta.Deliverable);
             derivation.Log.AssertExistsAtMostOne(this, QuoteItems.Meta.Product, QuoteItems.Meta.ProductFeature, QuoteItems.Meta.Deliverable);
-
-            this.DisplayName = string.Format(
-                "{0}{1}{2}",
-                this.ExistProduct ? this.Product.ComposeDisplayName() : null,
-                this.ExistProductFeature ? this.ProductFeature.ComposeDisplayName() : null,
-                this.ExistDeliverable ? this.Deliverable.Name : null);
         }
     }
 }

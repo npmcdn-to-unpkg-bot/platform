@@ -34,8 +34,6 @@ namespace Allors.Domain
 
         public void AppsOnPostBuild(ObjectOnPostBuild method)
         {
-            
-
             if (!this.ExistSoldBy)
             {
                 this.SoldBy = Domain.Singleton.Instance(this.Strategy.Session).DefaultInternalOrganisation;
@@ -53,10 +51,6 @@ namespace Allors.Domain
             {
                 this.AddProductCategory(PrimaryProductCategory);
             }
-
-            this.DeriveDisplayName();
-            this.DeriveSearchDataCharacterBoundaryText();
-            this.DeriveSearchDataWordBoundaryText();
 
             this.DeriveVirtualProductPriceComponent();
             this.DeriveProductCategoryExpanded();
@@ -112,36 +106,6 @@ namespace Allors.Domain
                     this.AddProductCategoryExpanded(ancestor);
                 }
             }
-        }
-
-        private void AppsDeriveDisplayName()
-        {
-            this.DisplayName = this.ComposeDisplayName();
-        }
-
-        private void AppsDeriveSearchDataCharacterBoundaryText()
-        {
-            this.SearchData.CharacterBoundaryText = this.AppsComposeSearchDataCharacterBoundaryText();
-        }
-
-        private void AppsDeriveSearchDataWordBoundaryText()
-        {
-            this.SearchData.WordBoundaryText = this.AppsComposeSearchDataWordBoundaryText();
-        }
-
-        private string AppsComposeDisplayName()
-        {
-            return this.Name;
-        }
-
-        private string AppsComposeSearchDataCharacterBoundaryText()
-        {
-            return this.Name;
-        }
-
-        private string AppsComposeSearchDataWordBoundaryText()
-        {
-            return null;
         }
     }
 }

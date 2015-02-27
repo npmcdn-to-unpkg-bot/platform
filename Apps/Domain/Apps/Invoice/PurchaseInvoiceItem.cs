@@ -176,29 +176,5 @@ namespace Allors.Domain
 
             return discountAdjustment;
         }
-
-        private void AppsDeriveDisplayName()
-        {
-            var uiText = new StringBuilder();
-
-            if (this.ExistQuantity)
-            {
-                uiText.Append(this.Quantity);
-                uiText.Append(" ");
-            }
-
-            if (this.ExistPart)
-            {
-                uiText.Append(this.Part.ComposeDisplayName());
-            }
-
-            if (this.ExistTotalExVat)
-            {
-                uiText.Append(", Total: ");
-                uiText.Append(string.Format("{0:N2}", this.TotalExVat));
-            }
-
-            this.DisplayName = uiText.ToString();
-        }
     }
 }

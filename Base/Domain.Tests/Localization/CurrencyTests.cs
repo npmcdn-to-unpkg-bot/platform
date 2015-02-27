@@ -50,13 +50,5 @@ namespace Allors.Domain
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
-
-        [Test]
-        public void GivenCurrencyWhenValidatingThenDisplayNameIsSet()
-        {
-            var currency = new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "NOK");
-
-            Assert.AreEqual("Norwegian Krone (NOK)", currency.DisplayName);
-        }
     }
 }

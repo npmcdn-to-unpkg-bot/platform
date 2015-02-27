@@ -35,7 +35,7 @@ namespace Allors.Domain
 
             foreach (ProductCategoryRevenue productCategoryRevenue in productCategoryRevenues)
             {
-                var months = ((DateTime.Now.Year - productCategoryRevenue.Year) * 12) + DateTime.Now.Month - productCategoryRevenue.Month;
+                var months = ((DateTime.UtcNow.Year - productCategoryRevenue.Year) * 12) + DateTime.UtcNow.Month - productCategoryRevenue.Month;
                 if (months <= 12)
                 {
                     var date = new DateTime(productCategoryRevenue.Year, productCategoryRevenue.Month, 01);

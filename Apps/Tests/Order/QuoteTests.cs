@@ -44,18 +44,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenProductQuote_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var productQuote = new ProductQuoteBuilder(this.DatabaseSession)
-                .WithDescription("ProductQuote")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("ProductQuote", productQuote.DisplayName);
-        }
-
-        [Test]
         public void GivenProposal_WhenDeriving_ThenDescriptionIsRequired()
         {
             var builder = new ProposalBuilder(this.DatabaseSession);
@@ -72,18 +60,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenProposal_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var requirement = new ProposalBuilder(this.DatabaseSession)
-                .WithDescription("Proposal")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("Proposal", requirement.DisplayName);
-        }
-
-        [Test]
         public void GivenStatementOfWork_WhenDeriving_ThenDescriptionIsRequired()
         {
             var builder = new StatementOfWorkBuilder(this.DatabaseSession);
@@ -97,18 +73,6 @@ namespace Allors.Domain
             statementOfWork = builder.Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
-        }
-
-        [Test]
-        public void GivenStatementOfWork_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var statementOfWork = new StatementOfWorkBuilder(this.DatabaseSession)
-                .WithDescription("StatementOfWork")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("StatementOfWork", statementOfWork.DisplayName);
         }
     }
 }

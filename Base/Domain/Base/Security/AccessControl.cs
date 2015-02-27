@@ -20,18 +20,11 @@
 
 namespace Allors.Domain
 {
-    using System;
-
     public partial class AccessControl
     {
         public void BaseDerive(ObjectDerive method)
         {
             method.Derivation.Log.AssertAtLeastOne(this, Meta.Subjects, Meta.SubjectGroups);
-
-            if (this.ExistRole)
-            {
-                this.DisplayName = "ACL(" + this.Role.Name + ")";
-            }
         }
     }
 }

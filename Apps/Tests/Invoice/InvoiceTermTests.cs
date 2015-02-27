@@ -21,9 +21,6 @@
 
 namespace Allors.Domain
 {
-    
-    using Allors.Domain;
-
     using NUnit.Framework;
 
     [TestFixture]
@@ -43,19 +40,6 @@ namespace Allors.Domain
             invoiceTerm = builder.Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
-        }
-
-        [Test]
-        public void GivenInvoiceTerm_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var invoiceTerm = new InvoiceTermBuilder(this.DatabaseSession)
-                .WithTermType(new TermTypes(this.DatabaseSession).PaymentNetDays)
-                .WithTermValue("10")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("Payment-net days value 10", invoiceTerm.DisplayName);
         }
     }
 }

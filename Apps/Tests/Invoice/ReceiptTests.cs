@@ -94,16 +94,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenReceipt_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var receipt = new ReceiptBuilder(this.DatabaseSession).WithAmount(100).WithEffectiveDate(DateTime.Now).Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual(string.Format("{0} receipt for amount {1}", receipt.EffectiveDate, receipt.Amount), receipt.DisplayName);
-        }
-
-        [Test]
         public void GivenReceipt_WhenApplied_ThenInvoiceItemAmountPaidIsUpdated()
         {
             this.InstantiateObjects(this.DatabaseSession);

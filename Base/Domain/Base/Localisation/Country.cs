@@ -44,23 +44,11 @@ namespace Allors.Domain
             }
         }
 
-        protected void BaseDeriveDisplayName()
-        {
-            this.DisplayName = this.ComposeDisplayName();
-        }
-
-        protected string BaseComposeDisplayName()
-        {
-            return this.Name;
-        }
-
         public void BaseDerive(ObjectDerive method)
         {
             var derivation = method.Derivation;
 
             derivation.Log.AssertIsUnique(this, Countries.Meta.IsoCode);
-            
-            this.DeriveDisplayName();
         }
     }
 }

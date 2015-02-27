@@ -20,11 +20,6 @@
 
 namespace Allors.Domain
 {
-    using System.Globalization;
-    using System.Text;
-
-    using Allors.Domain;
-
     public partial class SurchargeAdjustment
     {
         public void AppsPrepareDerivation(ObjectPrepareDerivation method)
@@ -60,80 +55,12 @@ namespace Allors.Domain
             }
         }
 
-
         public void AppsDerive(ObjectDerive method)
         {
             var derivation = method.Derivation;
 
             derivation.Log.AssertAtLeastOne(this, SurchargeAdjustments.Meta.Amount, SurchargeAdjustments.Meta.Percentage);
             derivation.Log.AssertExistsAtMostOne(this, SurchargeAdjustments.Meta.Amount, SurchargeAdjustments.Meta.Percentage);
-
-            this.DeriveDisplayName();
-        }
-
-        private void AppsDeriveDisplayName()
-        {
-            var cultureInfo = new CultureInfo(CultureInfo.CurrentCulture.Name);
-            var currencyFormat = (NumberFormatInfo)cultureInfo.NumberFormat.Clone();
-
-            if (this.ExistOrderItemWhereSurchargeAdjustment)
-            {
-                var salesOrderItem = (SalesOrderItem)this.OrderItemWhereSurchargeAdjustment;
-                var cultureInfoName = salesOrderItem.SalesOrderWhereSalesOrderItem.Locale.Name;
-
-                cultureInfo = new CultureInfo(cultureInfoName, false);
-                currencyFormat = (NumberFormatInfo)cultureInfo.NumberFormat.Clone();
-                currencyFormat.CurrencySymbol = salesOrderItem.SalesOrderWhereSalesOrderItem.TakenByInternalOrganisation.PreferredCurrency.Symbol;
-            }
-
-            if (this.ExistOrderWhereSurchargeAdjustment)
-            {
-                var salesOrder = (SalesOrder)this.OrderWhereSurchargeAdjustment;
-                var cultureInfoName = salesOrder.Locale.Name;
-
-                cultureInfo = new CultureInfo(cultureInfoName, false);
-                currencyFormat = (NumberFormatInfo)cultureInfo.NumberFormat.Clone();
-                currencyFormat.CurrencySymbol = salesOrder.TakenByInternalOrganisation.PreferredCurrency.Symbol;
-            }
-
-            if (this.ExistInvoiceItemWhereSurchargeAdjustment)
-            {
-                var salesInvoiceItem = (Allors.Domain.SalesInvoiceItem)this.InvoiceItemWhereSurchargeAdjustment;
-                var cultureInfoName = salesInvoiceItem.SalesInvoiceWhereSalesInvoiceItem.Locale.Name;
-
-                cultureInfo = new CultureInfo(cultureInfoName, false);
-                currencyFormat = (NumberFormatInfo)cultureInfo.NumberFormat.Clone();
-                currencyFormat.CurrencySymbol = salesInvoiceItem.SalesInvoiceWhereSalesInvoiceItem.BilledFromInternalOrganisation.PreferredCurrency.Symbol;
-            }
-
-            if (this.ExistInvoiceWhereSurchargeAdjustment)
-            {
-                var salesInvoice = (Allors.Domain.SalesInvoice)this.InvoiceWhereSurchargeAdjustment;
-                var cultureInfoName = salesInvoice.Locale.Name;
-
-                cultureInfo = new CultureInfo(cultureInfoName, false);
-                currencyFormat = (NumberFormatInfo)cultureInfo.NumberFormat.Clone();
-                currencyFormat.CurrencySymbol = salesInvoice.BilledFromInternalOrganisation.PreferredCurrency.Symbol;
-            }
-
-            var uiText = new StringBuilder();
-
-            uiText.Append("Surcharge: ");
-
-            if (this.ExistAmount)
-            {
-                uiText.Append(this.Amount.ToString("C", currencyFormat));
-            }
-            else
-            {
-                if (this.ExistPercentage)
-                {
-                    uiText.Append(this.Percentage.ToString("##.##"));
-                    uiText.Append("%");
-                }
-            }
-
-            this.DisplayName = uiText.ToString();
         }
     }
 }

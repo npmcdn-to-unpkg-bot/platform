@@ -230,34 +230,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenSalesInvoice_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var customer = new OrganisationBuilder(this.DatabaseSession).WithName("customer").Build();
-            var contactMechanism = new PostalAddressBuilder(this.DatabaseSession)
-                .WithAddress1("Haverwerf 15")
-                .WithPostalBoundary(new PostalBoundaryBuilder(this.DatabaseSession)
-                                        .WithLocality("Mechelen")
-                                        .WithCountry(new Countries(this.DatabaseSession).FindBy(Countries.Meta.IsoCode, "BE"))
-                                        .Build())
-
-                .Build();
-
-            var invoice = new SalesInvoiceBuilder(this.DatabaseSession)
-                .WithInvoiceNumber("1")
-                .WithBillToCustomer(customer)
-                .WithBillToContactMechanism(contactMechanism)
-                .WithSalesInvoiceType(new SalesInvoiceTypes(this.DatabaseSession).SalesInvoice)
-                .WithBilledFromInternalOrganisation(new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation"))
-                .Build();
-
-            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(customer).WithInternalOrganisation(Singleton.Instance(this.DatabaseSession).DefaultInternalOrganisation).Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual(string.Format("{0} - {1} to {2}", invoice.InvoiceNumber, invoice.InvoiceDate.Date, customer.DisplayName), invoice.DisplayName);
-        }
-
-        [Test]
         public void GivenSalesInvoice_WhenGettingInvoiceNumberWithoutFormat_ThenInvoiceNumberShouldBeReturned()
         {
             var store = new StoreBuilder(this.DatabaseSession).WithName("store")

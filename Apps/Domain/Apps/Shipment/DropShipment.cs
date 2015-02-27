@@ -45,8 +45,6 @@ namespace Allors.Domain
 
         public void AppsOnPostBuild(ObjectOnPostBuild method)
         {
-            
-
             if (!this.ExistCurrentObjectState)
             {
                 this.CurrentObjectState = new DropShipmentObjectStates(this.Strategy.DatabaseSession).Created;
@@ -66,21 +64,6 @@ namespace Allors.Domain
             {
                 this.ShipFromAddress = this.ShipFromParty.ShippingAddress;
             }
-
-            this.DisplayName = string.Format(
-                "{0} to {1}",
-                this.ExistShipmentNumber ? this.ShipmentNumber : null,
-                this.ExistShipToParty ? this.ShipToParty.DeriveDisplayName() : null);
-
-            var characterBoundaryText = this.ExistShipToParty ? this.ShipToParty.DeriveSearchDataCharacterBoundaryText() : null;
-
-            var wordBoundaryText = string.Format(
-                "{0} {1}",
-                this.ExistShipmentNumber ? this.ShipmentNumber : null,
-                this.ExistShipToParty ? this.ShipToParty.DeriveSearchDataWordBoundaryText() : null);
-
-            this.SearchData.CharacterBoundaryText = characterBoundaryText;
-            this.SearchData.WordBoundaryText = wordBoundaryText;
             
             this.DeriveCurrentObjectState(derivation);
             this.PreviousObjectState = this.CurrentObjectState;

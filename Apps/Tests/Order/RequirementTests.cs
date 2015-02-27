@@ -76,18 +76,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenCustomerRequirement_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var customerRequirement = new CustomerRequirementBuilder(this.DatabaseSession)
-                .WithDescription("CustomerRequirement")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("CustomerRequirement", customerRequirement.DisplayName);
-        }
-
-        [Test]
         public void GivenInternalRequirement_WhenDeriving_ThenDescriptionIsRequired()
         {
             var builder = new InternalRequirementBuilder(this.DatabaseSession);
@@ -101,18 +89,6 @@ namespace Allors.Domain
             internalRequirement = builder.Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
-        }
-
-        [Test]
-        public void GivenInternalRequirement_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var internalRequirement = new InternalRequirementBuilder(this.DatabaseSession)
-                .WithDescription("InternalRequirement")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("InternalRequirement", internalRequirement.DisplayName);
         }
 
         [Test]
@@ -132,18 +108,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenProductRequirement_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var productRequirement = new ProductRequirementBuilder(this.DatabaseSession)
-                .WithDescription("ProductRequirement")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("ProductRequirement", productRequirement.DisplayName);
-        }
-
-        [Test]
         public void GivenProjectRequirement_WhenDeriving_ThenDescriptionIsRequired()
         {
             var builder = new ProjectRequirementBuilder(this.DatabaseSession);
@@ -157,18 +121,6 @@ namespace Allors.Domain
             projectRequirement = builder.Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
-        }
-
-        [Test]
-        public void GivenProjectRequirement_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var projectRequirement = new ProjectRequirementBuilder(this.DatabaseSession)
-                .WithDescription("ProjectRequirement")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("ProjectRequirement", projectRequirement.DisplayName);
         }
 
         [Test]
@@ -188,18 +140,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenResourceRequirement_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var resourceRequirement = new ResourceRequirementBuilder(this.DatabaseSession)
-                .WithDescription("ResourceRequirement")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("ResourceRequirement", resourceRequirement.DisplayName);
-        }
-
-        [Test]
         public void GivenWorkRequirement_WhenDeriving_ThenDescriptionIsRequired()
         {
             var builder = new WorkRequirementBuilder(this.DatabaseSession);
@@ -213,18 +153,6 @@ namespace Allors.Domain
             workRequirement = builder.Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
-        }
-
-        [Test]
-        public void GivenWorkRequirement_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var workRequirement = new WorkRequirementBuilder(this.DatabaseSession)
-                .WithDescription("WorkRequirement")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("WorkRequirement", workRequirement.DisplayName);
         }
     }
 }

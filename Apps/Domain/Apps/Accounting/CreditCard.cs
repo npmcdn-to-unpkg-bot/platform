@@ -62,25 +62,6 @@ namespace Allors.Domain
             var derivation = method.Derivation;
 
             derivation.Log.AssertIsUnique(this, CreditCards.Meta.CardNumber);
-
-            this.DeriveDisplayName();
-            this.DeriveSearchDataCharacterBoundaryText();
-            this.DeriveSearchDataWordBoundaryText();
-        }
-
-        private void AppsDeriveDisplayName()
-        {
-            this.DisplayName = this.ComposeDisplayName();
-        }
-
-        private void AppsSearchDataCharacterBoundaryText()
-        {
-            this.SearchData.CharacterBoundaryText = this.AppsComposeSearchDataCharacterBoundaryText();
-        }
-
-        private void AppsSearchDataWordBoundaryText()
-        {
-            this.SearchData.WordBoundaryText = this.AppsComposeSearchDataWordBoundaryText();
         }
     }
 }

@@ -44,72 +44,12 @@ namespace Allors.Domain
         public void AppsDerive(ObjectDerive method)
         {
             var derivation = method.Derivation;
-
-            this.DeriveDisplayName();
-            this.DeriveSearchDataCharacterBoundaryText();
-            this.DeriveSearchDataWordBoundaryText();
             
             this.PreviousObjectState = this.CurrentObjectState;
 
             this.AppsDeriveFromParties();
             this.AppsDeriveToParties();
             this.AppsDeriveInvolvedParties(derivation);
-        }
-
-        protected void AppsDeriveDisplayName()
-        {
-            this.DisplayName = this.ComposeDisplayName();
-        }
-
-        protected void AppsDeriveSearchDataCharacterBoundaryText()
-        {
-            this.SearchData.CharacterBoundaryText = this.AppsComposeSearchDataCharacterBoundaryText();
-        }
-
-        protected void AppsDeriveSearchDataWordBoundaryText()
-        {
-            this.SearchData.WordBoundaryText = this.AppsComposeSearchDataWordBoundaryText();
-        }
-
-        protected string AppsComposeDisplayName()
-        {
-            var searchText = new StringBuilder();
-            searchText.Append("Phone conversation ");
-
-            if (this.ExistCaller)
-            {
-                searchText.Append("from: ");
-                searchText.Append(this.Caller.DeriveDisplayName());
-            }
-
-            searchText.Append(" with:");
-            foreach (Party receiver in this.Receivers)
-            {
-                searchText.Append(" ");
-                searchText.Append(receiver.DeriveDisplayName());
-            }
-
-            return searchText.ToString();
-        }
-
-        protected string AppsComposeSearchDataCharacterBoundaryText()
-        {
-            return string.Format(
-                "{0} {1}",
-                this.ExistDescription ? this.Description : null,
-                this.ExistCaller ? this.Caller.DeriveSearchDataCharacterBoundaryText() : null);
-        }
-
-        protected string AppsComposeSearchDataWordBoundaryText()
-        {
-            var text = this.ExistCaller ? this.Caller.DeriveSearchDataWordBoundaryText() : null;
-
-            foreach (Party party in this.Receivers)
-            {
-                text += " " + party.DeriveSearchDataWordBoundaryText();
-            }
-
-            return text;
         }
 
         private void AppsDeriveFromParties()

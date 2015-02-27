@@ -88,14 +88,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenPartnership_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            this.InstantiateObjects(this.DatabaseSession);
-
-            Assert.AreEqual("partner partner for internalOrganisation", this.partnership.DisplayName);
-        }
-
-        [Test]
         public void GivenSupplierOrganisation_WhenPartnershipIsCreatedIsCreated_ThenPersonIsAddedToUserGroup()
         {
             this.InstantiateObjects(this.DatabaseSession);

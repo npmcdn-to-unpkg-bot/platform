@@ -20,13 +20,6 @@
 
 namespace Allors.Domain
 {
-    using System.Text;
-
-    
-    using Allors.Domain;
-
-    
-
     public partial class PurchaseOrderItem
     {
         ObjectState Transitional.PreviousObjectState
@@ -175,37 +168,6 @@ namespace Allors.Domain
             this.DeriveIsValidOrderItem(derivation);
 
             this.DeriveCurrentObjectState(derivation);
-
-            this.DeriveDisplayName();
-        }
-
-        private void AppsDeriveDisplayName()
-        {
-            this.DisplayName = this.ComposeDisplayName();
-        }
-
-        private string AppsComposeDisplayName()
-        {
-            var uiText = new StringBuilder();
-
-            if (this.ExistQuantityOrdered)
-            {
-                uiText.Append(this.QuantityOrdered);
-                uiText.Append(" ");
-            }
-
-            if (this.ExistPart)
-            {
-                uiText.Append(this.Part.ComposeDisplayName());
-            }
-
-            if (this.ExistTotalExVat)
-            {
-                uiText.Append(", Total ex. VAT: ");
-                uiText.Append(string.Format("{0:N2}", this.TotalExVat));
-            }
-
-            return uiText.ToString();
         }
 
         private void AppsDeriveIsValidOrderItem(IDerivation derivation)
@@ -332,8 +294,6 @@ namespace Allors.Domain
             this.TotalVat = 0;
             this.TotalExVat = this.CalculatedUnitPrice * this.QuantityOrdered;
             this.TotalIncVat = this.TotalExVat + this.TotalVat;
-
-            this.DeriveDisplayName();
         }
 
         private void AppsDeriveCurrentShipmentStatus(IDerivation derivation)

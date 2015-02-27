@@ -27,17 +27,5 @@ namespace Allors.Domain
         void Hold();
 
         void Close();
-
-        void DeriveDisplayName();
-
-        void DeriveSearchDataCharacterBoundaryText();
-
-        void DeriveSearchDataWordBoundaryText();
-
-        string ComposeDisplayName();
-
-        string ComposeSearchDataCharacterBoundaryText();
-
-        string ComposeSearchDataWordBoundaryText();
     }
 }

@@ -102,30 +102,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenOrganisationGlAccount_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
-
-            var generalLedgerAccount = new GeneralLedgerAccountBuilder(this.DatabaseSession)
-                .WithAccountNumber("0001")
-                .WithName("GeneralLedgerAccount")
-                .WithBalanceSheetAccount(true)
-                .WithSide(new DebitCreditConstants(this.DatabaseSession).Debit)
-                .WithGeneralLedgerAccountType(new GeneralLedgerAccountTypeBuilder(this.DatabaseSession).WithDescription("accountType").Build())
-                .WithGeneralLedgerAccountGroup(new GeneralLedgerAccountGroupBuilder(this.DatabaseSession).WithDescription("accountGroup").Build())
-                .Build();
-
-            var organisationGlAccount = new OrganisationGlAccountBuilder(this.DatabaseSession)
-                .WithInternalOrganisation(internalOrganisation)
-                .WithGeneralLedgerAccount(generalLedgerAccount)
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual(string.Format("account {0} {1} for {2}", generalLedgerAccount.AccountNumber, generalLedgerAccount.Name, internalOrganisation.Name), organisationGlAccount.DisplayName);
-        }
-
-        [Test]
         public void GivenOrganisationGlAccount_WhenNotReferenced_ThenAccountIsNeutral()
         {
             var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");

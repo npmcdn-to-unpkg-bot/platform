@@ -21,46 +21,14 @@
 namespace Allors.Domain
 {
     using System;
-    using System.Text;
 
     public partial class SalesOrderItemStatus
     {
         public void AppsOnPostBuild(ObjectOnPostBuild method)
         {
-            
-
-            this.AppsEnsure();
-        }
-
-        public void AppsDerive(ObjectDerive method)
-        {
-            var derivation = method.Derivation;
-
-            this.DeriveDisplayName(derivation);
-        }
-
-        private void AppsDeriveDisplayName(IDerivation derivation)
-        {
-            var displayName = new StringBuilder();
-            if (this.ExistSalesOrderItemObjectState)
-            {
-                displayName.Append(this.SalesOrderItemObjectState.Name);
-            }
-
-            if (this.ExistStartDateTime)
-            {
-                displayName.Append(" ");
-                displayName.Append(this.StartDateTime);
-            }
-
-            this.DisplayName = displayName.ToString();
-        }
-
-        private void AppsEnsure()
-        {
             if (!this.ExistStartDateTime)
             {
-                this.StartDateTime = DateTime.Now;
+                this.StartDateTime = DateTime.UtcNow;
             }
         }
     }

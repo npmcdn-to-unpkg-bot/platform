@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using System.Text;
-
     public partial class SalesRepProductCategoryRevenue
     {
         public string RevenueAsCurrencyString()
@@ -33,45 +31,9 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
             
-            this.SalesRepName = this.SalesRep.DeriveDisplayName();
-
-            this.AppsDeriveDisplayName(derivation);
+            this.SalesRepName = this.SalesRep.FullName;
 
             this.AppsDeriveRevenue();
-        }
-
-        private void AppsDeriveDisplayName(IDerivation derivation)
-        {
-            var uiText = new StringBuilder();
-
-            if (this.ExistSalesRep)
-            {
-                uiText.Append(this.SalesRep.DeriveDisplayName());
-            }
-
-            if (this.ExistProductCategory)
-            {
-                uiText.Append(", ");
-                uiText.Append(this.ProductCategory.Description);
-            }
-
-            if (this.ExistRevenue)
-            {
-                uiText.Append(": ");
-                uiText.Append(this.Year);
-                uiText.Append("/");
-                uiText.Append(this.Month);
-                uiText.Append(" ");
-                uiText.Append(DecimalExtensions.AsCurrencyString(this.Revenue, this.InternalOrganisation.CurrencyFormat));
-            }
-
-            if (this.ExistInternalOrganisation)
-            {
-                uiText.Append(" at ");
-                uiText.Append(this.InternalOrganisation.Name);
-            }
-
-            this.DisplayName = uiText.ToString();
         }
 
         private void AppsDeriveRevenue()

@@ -49,30 +49,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenLetterCorrespondence_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var originator = new PersonBuilder(this.DatabaseSession).WithLastName("originator").Build();
-            var receiver1 = new PersonBuilder(this.DatabaseSession).WithLastName("receiver1").Build();
-            var receiver2 = new PersonBuilder(this.DatabaseSession).WithLastName("receiver2").Build();
-
-            this.DatabaseSession.Derive(true);
-            this.DatabaseSession.Commit();
-
-            var communication = new LetterCorrespondenceBuilder(this.DatabaseSession)
-                .WithDescription("Letter correspondence")
-                .WithOriginator(originator)
-                .WithReceiver(receiver1)
-                .WithReceiver(receiver2)
-                .WithActualStart(DateTime.Now)
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-            
-            var uiText = string.Format("Letter from: {0} to: {1} {2}", originator.DisplayName, receiver1.DisplayName, receiver2.DisplayName);
-            Assert.AreEqual(uiText, communication.DisplayName);
-        }
-
-        [Test]
         public void GivenLetterCorrespondence_WhenDeriving_ThenInvolvedPartiesAreDerived()
         {
             var owner = new PersonBuilder(this.DatabaseSession).WithLastName("owner").Build();

@@ -24,8 +24,6 @@ namespace Allors.Domain
     {
         public void AppsOnPostBuild(ObjectOnPostBuild method)
         {
-            
-
             if (!this.ExistTakenViaInternalOrganisation)
             {
                 this.TakenViaInternalOrganisation = Domain.Singleton.Instance(this.Strategy.Session).DefaultInternalOrganisation;
@@ -48,11 +46,6 @@ namespace Allors.Domain
             {
                 this.PlacingContactMechanism = this.PlacingParty.OrderAddress;
             }
-
-            this.DisplayName = this.Description;
-
-            this.SearchData.CharacterBoundaryText = this.DisplayName;
-            this.SearchData.RemoveWordBoundaryText();
         }
     }
 }

@@ -24,20 +24,10 @@ namespace Allors.Domain
     {
         public void AppsOnPostBuild(ObjectOnPostBuild method)
         {
-            
-
             if (!this.ExistScheduleManually)
             {
                 this.ScheduleManually = false;
             }
-        }
-
-        public void AppsDerive(ObjectDerive method)
-        {
-            this.DisplayName = this.Description;
-
-            this.SearchData.CharacterBoundaryText = this.DisplayName;
-            this.SearchData.RemoveWordBoundaryText();
         }
     }
 }

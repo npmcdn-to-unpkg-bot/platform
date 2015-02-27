@@ -71,23 +71,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenCreditCard_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var creditCard = new CreditCardBuilder(this.DatabaseSession)
-                .WithCardNumber("4012888888881881")
-                .WithExpirationYear(2016)
-                .WithExpirationMonth(03)
-                .WithNameOnCard("M.E. van Knippenberg")
-                .WithCreditCardCompany(new CreditCardCompanyBuilder(this.DatabaseSession).WithName("Visa").Build())
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            var resultstring = string.Format("{0} card {1}, account holder {2}", creditCard.CreditCardCompany.Name, creditCard.CardNumber, creditCard.NameOnCard);
-            Assert.AreEqual(resultstring, creditCard.DisplayName);
-        }
-
-        [Test]
         public void GivenCreditCard_WhenDeriving_ThenCardNumberMustBeUnique()
         {
             new CreditCardBuilder(this.DatabaseSession)

@@ -99,8 +99,6 @@ namespace Allors.Domain
                     uiText.Append("%");
                 }
             }
-
-            this.DisplayName = uiText.ToString();
         }
     }
 }

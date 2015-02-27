@@ -63,19 +63,5 @@ namespace Allors.Domain
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
-
-        [Test]
-        public void GivenEngagement_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var engagement = new EngagementBuilder(this.DatabaseSession)
-                .WithDescription("Engagement")
-                .WithBillToParty(new Organisations(this.DatabaseSession).Extent().First)
-                .WithBillToContactMechanism(new PostalAddresses(this.DatabaseSession).Extent().First)
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("Engagement", engagement.DisplayName);
-        }
     }
 }

@@ -51,21 +51,5 @@ namespace Allors.Domain
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
-
-        [Test]
-        public void GivenNeededSkillTest_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var projectManagement = new Skills(this.DatabaseSession).ProjectManagement;
-            var expert = new SkillLevels(this.DatabaseSession).Expert;
-
-            var neededSkill = new NeededSkillBuilder(this.DatabaseSession)
-                .WithSkill(projectManagement)
-                .WithSkillLevel(expert)
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("Project Management at level Expert", neededSkill.DisplayName);
-        }
     }
 }

@@ -52,18 +52,5 @@ namespace Allors.Domain
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
-
-        [Test]
-        public void GivenFacility_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            Facility facility = new WarehouseBuilder(this.DatabaseSession)
-                .WithName("facility")
-                .WithOwner(new InternalOrganisations(this.DatabaseSession).Extent().First)
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("facility", facility.DisplayName);
-        }
     }
 }

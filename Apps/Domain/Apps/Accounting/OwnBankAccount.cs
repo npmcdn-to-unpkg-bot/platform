@@ -24,8 +24,6 @@ namespace Allors.Domain
     {
         public void AppsOnPostBuild(ObjectOnPostBuild method)
         {
-            
-
             if (!this.ExistIsActive)
             {
                 this.IsActive = true;
@@ -46,11 +44,6 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            if (!this.ExistDescription && this.ExistBankAccount)
-            {
-                this.Description = this.BankAccount.ComposeDisplayName();
-            }
-
             if (this.ExistInternalOrganisationWherePaymentMethod && this.InternalOrganisationWherePaymentMethod.DoAccounting)
             { 
                 derivation.Log.AssertExists(this, OwnBankAccounts.Meta.Creditor);
@@ -58,18 +51,6 @@ namespace Allors.Domain
             }
             
             derivation.Log.AssertExistsAtMostOne(this, Cashes.Meta.GeneralLedgerAccount, Cashes.Meta.Journal);
-
-            this.DisplayName = this.ExistBankAccount ? this.BankAccount.ComposeDisplayName() : null;
-
-            var characterBoundaryText = string.Format(
-                "{0} {1}",
-                this.ExistDescription ? this.Description : null,
-                this.ExistBankAccount ? this.BankAccount.ComposeSearchDataCharacterBoundaryText() : null);
-
-            var wordBoundaryText = this.ExistBankAccount ? this.BankAccount.ComposeSearchDataWordBoundaryText() : null;
-
-            this.SearchData.CharacterBoundaryText = characterBoundaryText;
-            this.SearchData.WordBoundaryText = wordBoundaryText;
         }
     }
 }

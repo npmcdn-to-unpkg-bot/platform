@@ -35,8 +35,6 @@ namespace Allors.Domain
         
         public void AppsOnPostBuild(ObjectOnPostBuild method)
         {
-            
-        
             if (!this.ExistQuantity)
             {
                 this.Quantity = 0;
@@ -61,17 +59,6 @@ namespace Allors.Domain
             this.DeriveCustomerShipmentItem(derivation);
 
             this.DerivePurchaseShipmentItem(derivation);
-
-            this.DisplayName = this.ExistContentsDescription ? this.ContentsDescription : string.Empty;
-
-            if (string.IsNullOrEmpty(this.DisplayName))
-            {
-                this.DisplayName = string.Format(
-                    "{0} {1} {2}", 
-                    this.Quantity, 
-                    this.ExistGood ? this.Good.ComposeDisplayName() : null, 
-                    this.ExistPart ? this.Part.ComposeDisplayName() : null);
-            }
         }
 
         private void AppsDerivePurchaseShipmentItem(IDerivation derivation)

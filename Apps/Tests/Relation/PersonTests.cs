@@ -49,32 +49,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenPerson_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var builder = new PersonBuilder(this.DatabaseSession).WithLastName("Knippenberg");
-
-            var person = builder.Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("Knippenberg", person.DisplayName);
-
-            builder.WithMiddleName("van");
-            person = builder.Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("van Knippenberg", person.DisplayName);
-
-            builder.WithFirstName("Martien");
-            person = builder.Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("Martien van Knippenberg", person.DisplayName);
-        }
-
-        [Test]
         public void GivenPerson_WhenEmployed_ThenCurrentEmploymentIsDerived()
         {
             var salesRep = new PersonBuilder(this.DatabaseSession).WithLastName("salesRep").Build();

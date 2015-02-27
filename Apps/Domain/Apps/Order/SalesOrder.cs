@@ -291,7 +291,7 @@ namespace Allors.Domain
                         names.Append(", ");
                     }
 
-                    names.Append(salesRep.DeriveDisplayName());
+                    names.Append(salesRep.FullName);
                 }
 
                 return names.ToString();
@@ -341,17 +341,17 @@ namespace Allors.Domain
 
             if (!this.ExistOrderDate)
             {
-                this.OrderDate = DateTime.Now;
+                this.OrderDate = DateTime.UtcNow;
             }
 
             if (!this.ExistEntryDate)
             {
-                this.EntryDate = DateTime.Now;
+                this.EntryDate = DateTime.UtcNow;
             }
 
             if (!this.ExistDeliveryDate)
             {
-                this.DeliveryDate = DateTime.Now;
+                this.DeliveryDate = DateTime.UtcNow;
             }
 
             if (!this.ExistTakenByInternalOrganisation)
@@ -505,7 +505,7 @@ namespace Allors.Domain
 
                 foreach (CustomerRelationship customerRelationship in customerRelationships)
                 {
-                    if (customerRelationship.FromDate <= DateTime.Now && (!customerRelationship.ExistThroughDate || customerRelationship.ThroughDate >= DateTime.Now))
+                    if (customerRelationship.FromDate <= DateTime.UtcNow && (!customerRelationship.ExistThroughDate || customerRelationship.ThroughDate >= DateTime.UtcNow))
                     {
                         derivation.AddDependency(this, customerRelationship);
                     }
@@ -519,7 +519,7 @@ namespace Allors.Domain
 
                 foreach (CustomerRelationship customerRelationship in customerRelationships)
                 {
-                    if (customerRelationship.FromDate <= DateTime.Now && (!customerRelationship.ExistThroughDate || customerRelationship.ThroughDate >= DateTime.Now))
+                    if (customerRelationship.FromDate <= DateTime.UtcNow && (!customerRelationship.ExistThroughDate || customerRelationship.ThroughDate >= DateTime.UtcNow))
                     {
                         derivation.AddDependency(this, customerRelationship);
                     }
@@ -631,25 +631,6 @@ namespace Allors.Domain
 
             this.TryShip(derivation);
 
-            this.DisplayName = string.Format(
-                "{0} - {1} to {2}",
-                this.ExistOrderNumber ? this.OrderNumber : null,
-                this.ExistOrderDate ? this.OrderDate : DateTime.MinValue,
-                this.ExistShipToCustomer ? this.ShipToCustomer.DeriveDisplayName() : null);
-
-            var characterBoundaryText = string.Format(
-                "{0} {1}",
-                this.ExistOrderNumber ? this.OrderNumber : null,
-                this.ExistShipToCustomer ? this.ShipToCustomer.DeriveSearchDataCharacterBoundaryText() : null);
-
-            var wordBoundaryText = string.Format(
-                "{0} {1}",
-                this.ExistOrderDate ? this.OrderDate : DateTime.MinValue,
-                this.ExistShipToCustomer ? this.ShipToCustomer.DeriveSearchDataWordBoundaryText() : null);
-
-            this.SearchData.CharacterBoundaryText = characterBoundaryText;
-            this.SearchData.WordBoundaryText = wordBoundaryText;
-
             this.PreviousBillToCustomer = this.BillToCustomer;
             this.PreviousShipToCustomer = this.ShipToCustomer;  
         
@@ -721,7 +702,7 @@ namespace Allors.Domain
             decimal creditLimit = 0;
             foreach (CustomerRelationship customerRelationship in customerRelationships)
             {
-                if (customerRelationship.FromDate <= DateTime.Now && (!customerRelationship.ExistThroughDate || customerRelationship.ThroughDate >= DateTime.Now))
+                if (customerRelationship.FromDate <= DateTime.UtcNow && (!customerRelationship.ExistThroughDate || customerRelationship.ThroughDate >= DateTime.UtcNow))
                 {
                     creditLimit = customerRelationship.CreditLimit.HasValue ? customerRelationship.CreditLimit.Value : this.Store.ExistCreditLimit ? this.Store.CreditLimit : 0;
                     amountOverDue = customerRelationship.AmountOverDue;
@@ -1264,7 +1245,6 @@ namespace Allors.Domain
                 }
 
                 salesOrderItem.DerivePrices(derivation, quantityOrdered, totalBasePrice);
-                salesOrderItem.DeriveDisplayName();
             }
         }
     }

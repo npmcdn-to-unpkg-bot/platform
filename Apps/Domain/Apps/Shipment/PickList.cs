@@ -75,7 +75,7 @@ namespace Allors.Domain
 
             if (!this.ExistCreationDate)
             {
-                this.CreationDate = DateTime.Now;
+                this.CreationDate = DateTime.UtcNow;
             }
 
             if (!this.ExistCurrentObjectState)
@@ -124,18 +124,6 @@ namespace Allors.Domain
 
             this.DeriveCurrentObjectState();
 
-            this.AppsDeriveDisplayName();
-
-            var characterBoundaryText = this.ExistPicker ? this.Picker.DeriveSearchDataCharacterBoundaryText() : null;
-
-            var wordBoundaryText = string.Format(
-                "{0} {1}",
-                this.ExistCreationDate ? this.CreationDate : DateTime.MinValue,
-                this.ExistPicker ? this.Picker.DeriveSearchDataWordBoundaryText() : null);
-
-            this.SearchData.CharacterBoundaryText = characterBoundaryText;
-            this.SearchData.WordBoundaryText = wordBoundaryText;
-
             if (this.ExistPickListItems)
             {
                 this.AppsDeriveTemplate(derivation);
@@ -181,21 +169,6 @@ namespace Allors.Domain
             }
 
             this.PreviousObjectState = this.CurrentObjectState;
-        }
-
-        private void AppsDeriveDisplayName()
-        {
-            var uiText = new StringBuilder();
-
-            uiText.Append(this.CreationDate);
-
-            if (this.ExistShipToParty)
-            {
-                uiText.Append(" for : ");
-                uiText.Append(this.ShipToParty.DeriveDisplayName());
-            }
-
-            this.DisplayName = uiText.ToString();
         }
 
         public void AppsCancel(PickListCancel method)

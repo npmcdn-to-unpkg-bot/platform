@@ -41,15 +41,5 @@ namespace Allors.Domain
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
-
-        [Test]
-        public void GivenPackage_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var package = new PackageBuilder(this.DatabaseSession).WithName("package").Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("package", package.DisplayName);
-        }
     }
 }

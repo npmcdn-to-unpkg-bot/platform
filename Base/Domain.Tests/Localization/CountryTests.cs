@@ -55,15 +55,5 @@ namespace Allors.Domain
 
             Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
         }
-
-        [Test]
-        public void GivenCountryWhenValidatingThenDisplayNameIsSet()
-        {
-            var country = new Countries(this.DatabaseSession).FindBy(Countries.Meta.IsoCode, "BE");
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("Belgium", country.DisplayName);
-        }
     }
 }

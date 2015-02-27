@@ -241,7 +241,6 @@
     </Compile>
     <Compile Include="Base\Population\User.cs" />
     <Compile Include="Base\Population\UserGroup.cs" />
-    <Compile Include="Base\Population\UserInterfaceable.cs" />
     <Compile Include="Generated\AccessControl.g.cs" />
     <Compile Include="Generated\AccessControlledObject.g.cs" />
     <Compile Include="Generated\Address.g.cs" />
@@ -315,7 +314,6 @@
     <Compile Include="Generated\Unit.g.cs" />
     <Compile Include="Generated\User.g.cs" />
     <Compile Include="Generated\UserGroup.g.cs" />
-    <Compile Include="Generated\UserInterfaceable.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Test\MetaPopulation.v.cs" />
     <Compile Include="Test\Domain\Composite.cs" />

@@ -68,9 +68,7 @@ namespace Allors.Domain
                 this.OwnerSecurityToken = mySecurityToken;
             }
 
-            this.DisplayName = this.TestComposeDisplayName();
 
-            this.SearchData.CharacterBoundaryText = this.DisplayName;
             this.SearchData.RemoveWordBoundaryText();
 
             derivation.Log.AssertExists(this, Persons.Meta.LastName);

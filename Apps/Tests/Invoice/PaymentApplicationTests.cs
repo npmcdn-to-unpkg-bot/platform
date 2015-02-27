@@ -68,50 +68,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenPaymentApplication_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var contactMechanism = new ContactMechanisms(this.DatabaseSession).Extent().First;
-
-            var good = new GoodBuilder(this.DatabaseSession)
-                .WithSku("10101")
-                .WithVatRate(new VatRateBuilder(this.DatabaseSession).WithRate(0).Build())
-                .WithName("good")
-                .WithInventoryItemKind(new InventoryItemKinds(this.DatabaseSession).NonSerialized)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .Build();
-
-            var customer = new PersonBuilder(this.DatabaseSession).WithLastName("customer").Build();
-            new CustomerRelationshipBuilder(this.DatabaseSession)
-                .WithCustomer(customer)
-                .WithInternalOrganisation(Singleton.Instance(this.DatabaseSession).DefaultInternalOrganisation)
-                .Build();
-
-            var invoice = new SalesInvoiceBuilder(this.DatabaseSession)
-                .WithBillToCustomer(customer)
-                .WithBillToContactMechanism(contactMechanism)
-                .WithSalesInvoiceItem(new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(good).WithQuantity(1).WithActualUnitPrice(100M).WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem).Build())
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            var receipt = new ReceiptBuilder(this.DatabaseSession)
-                .WithAmount(100)
-                .WithEffectiveDate(DateTime.Now)
-                .Build();
-
-            var paymentApplication = new PaymentApplicationBuilder(this.DatabaseSession)
-                .WithAmountApplied(10)
-                .WithInvoiceItem(invoice.InvoiceItems[0])
-                .Build();
-
-            receipt.AddPaymentApplication(paymentApplication);
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual(string.Format("amount {0} applied to invoice {1}", paymentApplication.AmountApplied, invoice.DisplayName), paymentApplication.DisplayName);
-        }
-
-        [Test]
         public void GivenPaymentApplication_WhenDeriving_ThenAmountAppliedCannotBeLargerThenAmountReceived()
         {
             var contactMechanism = new ContactMechanisms(this.DatabaseSession).Extent().First;

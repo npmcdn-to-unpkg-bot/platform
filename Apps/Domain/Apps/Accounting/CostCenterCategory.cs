@@ -27,8 +27,6 @@ namespace Allors.Domain
             var derivation = method.Derivation;
 
             derivation.Log.AssertExists(this, CostCenterCategories.Meta.Description);
-
-            this.DisplayName = this.Description;
         }
     }
 }

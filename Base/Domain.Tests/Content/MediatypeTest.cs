@@ -41,17 +41,5 @@ namespace Allors.Domain
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
-
-        [Test]
-        public void GivenMimeType_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var mediaType = new MediaTypeBuilder(this.DatabaseSession)
-                .WithName("image/gif")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-            
-            Assert.AreEqual("image/gif", mediaType.DisplayName);
-        }
     }
 }

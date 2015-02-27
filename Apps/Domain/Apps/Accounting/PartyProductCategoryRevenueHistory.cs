@@ -21,52 +21,14 @@
 namespace Allors.Domain
 {
     using System;
-    using System.Text;
 
     public partial class PartyProductCategoryRevenueHistory
     {
-        public void AppsDerive(ObjectDerive method)
-        {
-            var derivation = method.Derivation;
-
-            this.AppsDeriveDisplayName(derivation);
-        }
-
-        private void AppsDeriveDisplayName(IDerivation derivation)
-        {
-            var uiText = new StringBuilder();
-
-            if (this.ExistParty)
-            {
-                uiText.Append(this.Party.DeriveDisplayName());
-            }
-
-            if (this.ExistProductCategory)
-            {
-                uiText.Append(", ");
-                uiText.Append(this.ProductCategory.Description);
-            }
-
-            if (this.ExistRevenue)
-            {
-                uiText.Append(": ");
-                uiText.Append(DecimalExtensions.AsCurrencyString(this.Revenue, this.InternalOrganisation.CurrencyFormat));
-            }
-
-            if (this.ExistInternalOrganisation)
-            {
-                uiText.Append(" revenue trailing twelve months at ");
-                uiText.Append(this.InternalOrganisation.Name);
-            }
-
-            this.DisplayName = uiText.ToString();
-        }
-
         internal void AppsDeriveHistory()
         {
             this.Revenue = 0;
 
-            var startDate = DateTime.Now.AddYears(-1);
+            var startDate = DateTime.UtcNow.AddYears(-1);
             var year = startDate.Year;
             var month = startDate.Month;
 
@@ -77,7 +39,7 @@ namespace Allors.Domain
             {
                 if (revenue.InternalOrganisation.Equals(this.InternalOrganisation) &&
                     revenue.ProductCategory == this.ProductCategory &&
-                    ((revenue.Year == year && revenue.Month >= month) || (revenue.Year == DateTime.Now.Year && revenue.Month <= month)))
+                    ((revenue.Year == year && revenue.Month >= month) || (revenue.Year == DateTime.UtcNow.Year && revenue.Month <= month)))
                 {
                     this.Revenue += revenue.Revenue;
                     this.Quantity += revenue.Quantity;

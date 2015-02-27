@@ -49,28 +49,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenFaxCommunication_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var originator = new PersonBuilder(this.DatabaseSession).WithLastName("originator").Build();
-            var receiver = new PersonBuilder(this.DatabaseSession).WithLastName("receiver").Build();
-
-            this.DatabaseSession.Derive(true);
-            this.DatabaseSession.Commit();
-
-            var communication = new FaxCommunicationBuilder(this.DatabaseSession)
-                .WithDescription("Fax communication")
-                .WithReceiver(receiver)
-                .WithOriginator(originator)
-                .WithActualStart(DateTime.Now)
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            var uiText = string.Format("Fax from: {0} to: {1}", originator.DisplayName, receiver.DisplayName);
-            Assert.AreEqual(uiText, communication.DisplayName);
-        }
-
-        [Test]
         public void GivenFaxCommunication_WhenDeriving_ThenInvolvedPartiesAreDerived()
         {
             var owner = new PersonBuilder(this.DatabaseSession).WithLastName("owner").Build();

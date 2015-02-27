@@ -85,17 +85,8 @@ namespace Allors.Domain
 
         public override string ToString()
         {
-            string associationName = null;
-            if (!this.Association.Strategy.IsDeleted && this.Association is UserInterfaceable)
-            {
-                associationName = ((UserInterfaceable)this.Association).DisplayName;
-            }
-
-            if (string.IsNullOrEmpty(associationName))
-            {
-                associationName = this.Association.Strategy.ObjectType.Name;
-            }
-
+            var associationName = this.Association.Strategy.ObjectType.Name;
+            
             if (this.RoleType != null)
             {
                 var roleName = this.RoleType.Name;

@@ -39,15 +39,5 @@ namespace Allors.Domain
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
-
-        [Test]
-        public void GivenLocalisedTextWhenValidatingThenDisplayNameIsSet()
-        {
-            var localeDescription = new LocalisedTextBuilder(this.DatabaseSession).WithText("description").Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("description", localeDescription.DisplayName);
-        }
     }
 }

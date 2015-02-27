@@ -31,7 +31,7 @@ namespace Allors.Domain
 
             if (!this.ExistFromDate)
             {
-                this.FromDate = DateTime.Now;
+                this.FromDate = DateTime.UtcNow;
             }
 
             if (!this.ExistInternalOrganisation)
@@ -44,8 +44,6 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            this.DeriveDisplayName();
-
             this.DeriveMembership();
             this.DeriveCustomerContacts();
 
@@ -54,37 +52,6 @@ namespace Allors.Domain
                 this.Customer.DeriveCurrentSalesReps(derivation);
                 this.SalesRepresentative.Derive().WithDerivation(derivation).Execute();
             }
-        }
-
-        private void AppsDeriveDisplayName()
-        {
-            var uiText = new StringBuilder();
-
-            if (this.ExistFromDate)
-            {
-                uiText.Append("from ");
-                uiText.Append(this.FromDate.ToShortDateString());
-            }
-
-            if (this.ExistThroughDate)
-            {
-                uiText.Append(" thru ");
-                uiText.Append(this.ThroughDate.ToShortDateString());
-            }
-
-            if (this.ExistSalesRepresentative)
-            {
-                uiText.Append(" ");
-                uiText.Append(this.SalesRepresentative.DeriveDisplayName());
-            }
-
-            if (this.ExistCustomer)
-            {
-                uiText.Append(" sales rep. for ");
-                uiText.Append(this.Customer.DeriveDisplayName());
-            }
-
-            this.DisplayName = uiText.ToString();
         }
 
         private void AppsCustomerContacts()
@@ -118,7 +85,7 @@ namespace Allors.Domain
             {
                 if (salesRepUserGroup != null)
                 {
-                    if (this.FromDate <= DateTime.Now && (!this.ExistThroughDate || this.ThroughDate >= DateTime.Now))
+                    if (this.FromDate <= DateTime.UtcNow && (!this.ExistThroughDate || this.ThroughDate >= DateTime.UtcNow))
                     {
                         if (!salesRepUserGroup.ContainsMember(this.SalesRepresentative))
                         {
@@ -149,12 +116,12 @@ namespace Allors.Domain
             {
                 if (salesRepCommission.InternalOrganisation.Equals(this.InternalOrganisation))
                 {
-                    if (salesRepCommission.Year == DateTime.Now.Year)
+                    if (salesRepCommission.Year == DateTime.UtcNow.Year)
                     {
                         this.YTDCommission += salesRepCommission.Year;
                     }
 
-                    if (salesRepCommission.Year == DateTime.Now.AddYears(-1).Year)
+                    if (salesRepCommission.Year == DateTime.UtcNow.AddYears(-1).Year)
                     {
                         this.LastYearsCommission += salesRepCommission.Year;
                     }

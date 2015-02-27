@@ -188,37 +188,37 @@ namespace Allors.Domain
             {
                 var roles = new List<string>();
 
-                if (IsActiveClient(DateTime.Now.Date))
+                if (IsActiveClient(DateTime.UtcNow.Date))
                 {
                     roles.Add("Client");
                 }
 
-                if (IsActiveCustomer(DateTime.Now.Date))
+                if (IsActiveCustomer(DateTime.UtcNow.Date))
                 {
                     roles.Add("Customer");
                 }
 
-                if (IsActiveEmployee(DateTime.Now.Date))
+                if (IsActiveEmployee(DateTime.UtcNow.Date))
                 {
                     roles.Add("Employee");
                 }
 
-                if (IsActiveOrganisationContact(DateTime.Now.Date))
+                if (IsActiveOrganisationContact(DateTime.UtcNow.Date))
                 {
                     roles.Add("Organisation contact");
                 }
 
-                if (IsActiveSalesRep(DateTime.Now.Date))
+                if (IsActiveSalesRep(DateTime.UtcNow.Date))
                 {
                     roles.Add("Sales representative");
                 }
 
-                if (IsActiveProspect(DateTime.Now.Date))
+                if (IsActiveProspect(DateTime.UtcNow.Date))
                 {
                     roles.Add("Prospect");
                 }
 
-                if (IsActiveSubContractor(DateTime.Now.Date))
+                if (IsActiveSubContractor(DateTime.UtcNow.Date))
                 {
                     roles.Add("Subcontractor");
                 }
@@ -488,49 +488,17 @@ namespace Allors.Domain
             {
                 if (salesRepCommission.Commission.HasValue)
                 {
-                    if (salesRepCommission.Year == DateTime.Now.Year)
+                    if (salesRepCommission.Year == DateTime.UtcNow.Year)
                     {
                         this.YTDCommission += salesRepCommission.Commission.Value;
                     }
 
-                    if (salesRepCommission.Year == DateTime.Now.AddYears(-1).Year)
+                    if (salesRepCommission.Year == DateTime.UtcNow.AddYears(-1).Year)
                     {
                         this.LastYearsCommission += salesRepCommission.Commission.Value;
                     }
                 }
             }
-        }
-
-        private string AppsDeriveDisplayName()
-        {
-            var fullName = new StringBuilder();
-
-            if (this.ExistFirstName)
-            {
-                fullName.Append(this.FirstName);
-            }
-
-            if (this.ExistMiddleName)
-            {
-                if (fullName.Length > 0)
-                {
-                    fullName.Append(" ");
-                }
-
-                fullName.Append(this.MiddleName);
-            }
-
-            if (this.ExistLastName)
-            {
-                if (fullName.Length > 0)
-                {
-                    fullName.Append(" ");
-                }
-
-                fullName.Append(this.LastName);
-            }
-
-            return fullName.ToString();
         }
 
         private void AppsDeriveFullName()
@@ -563,19 +531,6 @@ namespace Allors.Domain
             }
 
             this.FullName = fullName.ToString();
-        }
-
-        private string AppsDeriveSearchDataCharacterBoundaryText()
-        {
-            return string.Format(
-                "{0} {1}",
-                this.DisplayName,
-                this.ExistShippingAddress ? this.ShippingAddress.SearchData.CharacterBoundaryText : null);
-        }
-
-        private string AppsDeriveSearchDataWordBoundaryText()
-        {
-            return null;
         }
 
         private void AppsBuildOwnerSecurityToken()
@@ -645,7 +600,7 @@ namespace Allors.Domain
             foreach (Employment employment in employments)
             {
                 if (employment.ExistEmployer &&
-                    employment.FromDate <= DateTime.Now && (!employment.ExistThroughDate || employment.ThroughDate >= DateTime.Now))
+                    employment.FromDate <= DateTime.UtcNow && (!employment.ExistThroughDate || employment.ThroughDate >= DateTime.UtcNow))
                 {
                     this.CurrentEmployment = employment;
                 }

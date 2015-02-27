@@ -66,20 +66,5 @@ namespace Allors.Domain
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
-
-        [Test]
-        public void GivenProductPurchasePrice_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var purchasePrice = new ProductPurchasePriceBuilder(this.DatabaseSession)
-                .WithPrice(10)
-                .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithFromDate(DateTime.Now)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .Build();
-
-            this.DatabaseSession.Derive(true); 
-
-            Assert.AreEqual("Purchase price: € 10.00", purchasePrice.DisplayName);
-        }
     }
 }

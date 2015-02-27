@@ -39,42 +39,5 @@ namespace Allors.Domain
                 derivation.AddDependency(partyContactMechanism, this);
             }
         }
-
-        public void AppsDerive(ObjectDerive method)
-        {
-            this.DeriveDisplayName();
-            this.DeriveSearchDataCharacterBoundaryText();
-            this.DeriveSearchDataWordBoundaryText();
-        }
-
-        private void AppsDeriveDisplayName()
-        {
-            this.DisplayName = this.ComposeDisplayName();
-        }
-
-        private void AppsDeriveSearchDataCharacterBoundaryText()
-        {
-            this.SearchData.CharacterBoundaryText = this.AppsComposeSearchDataCharacterBoundaryText();
-        }
-
-        private void AppsDeriveSearchDataWordBoundaryText()
-        {
-            this.SearchData.WordBoundaryText = this.AppsComposeSearchDataWordBoundaryText();
-        }
-
-        private string AppsComposeDisplayName()
-        {
-            return this.ElectronicAddressString;
-        }
-
-        private string AppsComposeSearchDataCharacterBoundaryText()
-        {
-            return this.ElectronicAddressString;
-        }
-
-        private string AppsComposeSearchDataWordBoundaryText()
-        {
-            return null;
-        }
     }
 }

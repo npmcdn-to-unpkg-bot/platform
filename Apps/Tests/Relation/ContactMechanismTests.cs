@@ -48,19 +48,5 @@ namespace Allors.Domain
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
-
-        [Test]
-        public void GivenTelecommunicationsNumber_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var contactMechanism = new TelecommunicationsNumberBuilder(this.DatabaseSession)
-                .WithAreaCode("0495")
-                .WithContactNumber("493499")
-                .WithDescription("Phone")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual(" 0495 493499", contactMechanism.DisplayName);
-        }
     }
 }

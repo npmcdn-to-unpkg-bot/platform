@@ -51,29 +51,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenFaceToFaceCommunication_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var participant1 = new PersonBuilder(this.DatabaseSession).WithLastName("participant1").Build();
-            var participant2 = new PersonBuilder(this.DatabaseSession).WithLastName("participant2").Build();
-
-            this.DatabaseSession.Derive(true);
-            this.DatabaseSession.Commit();
-
-            var communication = new FaceToFaceCommunicationBuilder(this.DatabaseSession)
-                .WithDescription("Budget")
-                .WithParticipant(participant1)
-                .WithParticipant(participant2)
-                .WithActualStart(DateTime.Now)
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-            
-            var uiText = string.Format("Face to Face meeting between {0} {1}", participant1.DisplayName, participant2.DisplayName);
-                
-            Assert.AreEqual(uiText, communication.DisplayName);
-        }
-        
-        [Test]
         public void GivenFaceToFaceCommunication_WhenDeriving_ThenInvolvedPartiesAreDerived()
         {
             var owner = new PersonBuilder(this.DatabaseSession).WithLastName("owner").Build();

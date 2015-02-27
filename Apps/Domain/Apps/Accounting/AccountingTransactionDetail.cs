@@ -39,18 +39,5 @@ namespace Allors.Domain
                 derivation.AddDependency(this, this.OrganisationGlAccountBalance.AccountingPeriod);
             }
         }
-
-        public void AppsDerive(ObjectDerive method)
-        {
-            this.DisplayName = string.Format(
-                "{0} {1} period {2} balance amount {3} account {4} {5} for {6}",
-                this.ExistAmount ? this.Amount : 0,
-                this.DebitCreditString(),
-                this.ExistOrganisationGlAccountBalance ? this.OrganisationGlAccountBalance.ExistAccountingPeriod ? this.OrganisationGlAccountBalance.AccountingPeriod.DisplayName : null : null,
-                this.ExistOrganisationGlAccountBalance ? this.OrganisationGlAccountBalance.ExistAmount ? this.OrganisationGlAccountBalance.Amount : 0 : 0,
-                this.ExistOrganisationGlAccountBalance ? this.OrganisationGlAccountBalance.ExistOrganisationGlAccount ? this.OrganisationGlAccountBalance.OrganisationGlAccount.ExistGeneralLedgerAccount ? this.OrganisationGlAccountBalance.OrganisationGlAccount.GeneralLedgerAccount.AccountNumber : null : null : null,
-                this.ExistOrganisationGlAccountBalance ? this.OrganisationGlAccountBalance.ExistOrganisationGlAccount ? this.OrganisationGlAccountBalance.OrganisationGlAccount.ExistGeneralLedgerAccount ? this.OrganisationGlAccountBalance.OrganisationGlAccount.GeneralLedgerAccount.Name : null : null : null,
-                this.ExistOrganisationGlAccountBalance ? this.OrganisationGlAccountBalance.ExistOrganisationGlAccount ? this.OrganisationGlAccountBalance.OrganisationGlAccount.ExistInternalOrganisation ? this.OrganisationGlAccountBalance.OrganisationGlAccount.InternalOrganisation.Name : null : null : null);
-        }
     }
 }

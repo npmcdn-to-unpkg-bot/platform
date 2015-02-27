@@ -30,7 +30,7 @@ namespace Allors.Domain
 
             if (!this.ExistFromDate)
             {
-                this.FromDate = DateTime.Now;
+                this.FromDate = DateTime.UtcNow;
             }
 
             if (!this.ExistInternalOrganisation)
@@ -63,11 +63,6 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            this.DisplayName = string.Format(
-                "{0} supplier for {1}",
-                this.ExistSupplier ? this.Supplier.DeriveDisplayName() : null,
-                this.ExistInternalOrganisation ? this.InternalOrganisation.DeriveDisplayName() : null);
-
             this.DeriveMembership(derivation);
             this.DeriveInternalOrganisationSupplier(derivation);
 
@@ -93,7 +88,7 @@ namespace Allors.Domain
         {
             if (this.ExistSupplier && this.ExistInternalOrganisation)
             {
-                if (this.FromDate <= DateTime.Now && (!this.ExistThroughDate || this.ThroughDate >= DateTime.Now))
+                if (this.FromDate <= DateTime.UtcNow && (!this.ExistThroughDate || this.ThroughDate >= DateTime.UtcNow))
                 {
                     if (!this.Supplier.ExistInternalOrganisationWhereSupplier)
                     {
@@ -101,7 +96,7 @@ namespace Allors.Domain
                     }
                 }
 
-                if (this.FromDate > DateTime.Now || (this.ExistThroughDate && this.ThroughDate < DateTime.Now))
+                if (this.FromDate > DateTime.UtcNow || (this.ExistThroughDate && this.ThroughDate < DateTime.UtcNow))
                 {
                     if (this.Supplier.ExistInternalOrganisationWhereSupplier)
                     {
@@ -119,8 +114,8 @@ namespace Allors.Domain
                 {
                     foreach (OrganisationContactRelationship contactRelationship in this.Supplier.OrganisationContactRelationshipsWhereOrganisation)
                     {
-                        if (this.FromDate <= DateTime.Now &&
-                            (!this.ExistThroughDate || this.ThroughDate >= DateTime.Now))
+                        if (this.FromDate <= DateTime.UtcNow &&
+                            (!this.ExistThroughDate || this.ThroughDate >= DateTime.UtcNow))
                         {
                             if (!this.Supplier.SupplierContactUserGroup.ContainsMember(contactRelationship.Contact))
                             {

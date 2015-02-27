@@ -33,8 +33,6 @@ namespace Allors.Domain
 
         List<SalesOrder> PreOrders { get; }
 
-        List<string> Roles { get; }
-
         IEnumerable<CustomerShipment> PendingCustomerShipments { get; }
 
         void DeriveCurrentSalesReps(IDerivation derivation);
@@ -42,12 +40,6 @@ namespace Allors.Domain
         void DeriveOpenOrderAmount();
 
         void DeriveRevenue();
-
-        string DeriveSearchDataCharacterBoundaryText();
-
-        string DeriveSearchDataWordBoundaryText();
-
-        string DeriveDisplayName();
 
         CustomerShipment GetPendingCustomerShipmentForStore(PostalAddress address, Store store, ShipmentMethod shipmentMethod);
     }

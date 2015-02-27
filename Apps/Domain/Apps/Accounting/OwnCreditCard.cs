@@ -38,11 +38,6 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            if (!this.ExistDescription && this.ExistCreditCard)
-            {
-                this.Description = this.CreditCard.ComposeDisplayName();
-            }
-
             if (this.ExistInternalOrganisationWherePaymentMethod && this.InternalOrganisationWherePaymentMethod.DoAccounting)
             { 
                 derivation.Log.AssertExists(this, OwnCreditCards.Meta.Creditor);
@@ -51,25 +46,13 @@ namespace Allors.Domain
 
             if (this.ExistCreditCard)
             {
-                if (this.CreditCard.ExpirationYear <= DateTime.Now.Year && this.CreditCard.ExpirationMonth <= DateTime.Now.Month)
+                if (this.CreditCard.ExpirationYear <= DateTime.UtcNow.Year && this.CreditCard.ExpirationMonth <= DateTime.UtcNow.Month)
                 {
                     this.IsActive = false;
                 }
             }
 
             derivation.Log.AssertExistsAtMostOne(this, Cashes.Meta.GeneralLedgerAccount, Cashes.Meta.Journal);
-
-            this.DisplayName = this.ExistCreditCard? this.CreditCard.ComposeDisplayName() : null;
-
-            var characterBoundaryText = string.Format(
-                "{0} {1}",
-                this.ExistDescription ? this.Description : null,
-                this.ExistCreditCard ? this.CreditCard.ComposeSearchDataCharacterBoundaryText() : null);
-
-            var wordBoundaryText = this.ExistCreditCard ? this.CreditCard.ComposeSearchDataWordBoundaryText() : null;
-
-            this.SearchData.CharacterBoundaryText = characterBoundaryText;
-            this.SearchData.WordBoundaryText = wordBoundaryText;
         }
     }
 }

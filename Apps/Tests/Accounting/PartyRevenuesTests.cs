@@ -21,39 +21,11 @@
 namespace Allors.Domain
 {
     using System;
-
-    
-    using Allors.Domain;
-
     using NUnit.Framework;
 
     [TestFixture]
     public class PartyRevenuesTests : DomainTest
     {
-        [Test]
-        public void GivenPartyRevenue_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            const decimal Revenue = 100.25M;
-            const int Year = 2011;
-            const int Month = 12;
-            var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
-            var party = new OrganisationBuilder(this.DatabaseSession).WithName("Organisation").Build();
-
-            this.DatabaseSession.Derive(true);
-
-            var revenue = new PartyRevenueBuilder(this.DatabaseSession)
-                .WithParty(party)
-                .WithYear(Year)
-                .WithMonth(Month)
-                .WithRevenue(Revenue)
-                .WithInternalOrganisation(internalOrganisation)
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual(string.Format("{0}: {1}/{2} {3} at {4}", party.DisplayName, Year, Month, Revenue.AsCurrencyString(internalOrganisation.CurrencyFormat), internalOrganisation.DisplayName), revenue.DisplayName);
-        }
-
         [Test]
         public void DeriveRevenues()
         {

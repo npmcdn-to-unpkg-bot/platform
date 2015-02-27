@@ -28,11 +28,6 @@ namespace Allors.Domain
     /// </summary>
     public partial class MailboxAddress
     {
-        public override string ToString()
-        {
-            return DisplayName;
-        }
-
         public void TestsDerive(ObjectDerive method)
         {
             var derivation = method.Derivation;
@@ -41,20 +36,6 @@ namespace Allors.Domain
             derivation.Log.AssertNonEmptyString(this, MailboxAddresses.Meta.PoBox);
 
             derivation.Log.AssertExists(this, MailboxAddresses.Meta.Place);
-
-            var sb = new StringBuilder();
-            sb.Append("PO Box ");
-            if (this.ExistPoBox)
-            {
-                sb.Append(this.PoBox);
-            }
-
-            if (this.ExistPlace)
-            {
-                sb.AppendFormat(" {0}", this.Place.DisplayName);
-            }
-
-            this.DisplayName = sb.ToString();
         }
     }
 }

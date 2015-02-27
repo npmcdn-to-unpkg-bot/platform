@@ -18,18 +18,28 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System.Threading;
-
 namespace Allors.Domain
 {
-    using System.Text;
-
     public partial class WebSiteCommunication
     {
+        ObjectState Transitional.PreviousObjectState
+        {
+            get
+            {
+                return this.PreviousObjectState;
+            }
+        }
+
+        ObjectState Transitional.CurrentObjectState
+        {
+            get
+            {
+                return this.CurrentObjectState;
+            }
+        }
+        
         public void AppsOnPostBuild(ObjectOnPostBuild method)
         {
-            
-
             if (!this.ExistCurrentObjectState)
             {
                 this.CurrentObjectState = new CommunicationEventObjectStates(this.Strategy.DatabaseSession).Scheduled;
@@ -40,66 +50,11 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            this.DeriveDisplayName();
-            this.DeriveSearchDataCharacterBoundaryText();
-            this.DeriveSearchDataWordBoundaryText();
             this.PreviousObjectState = this.CurrentObjectState;
 
             this.AppsDeriveFromParties();
             this.AppsDeriveToParties();
             this.AppsDeriveInvolvedParties(derivation);
-        }
-
-        protected void AppsDeriveDisplayName()
-        {
-            this.DisplayName = this.ComposeDisplayName();
-        }
-
-        protected void AppsDeriveSearchDataCharacterBoundaryText()
-        {
-            this.SearchData.CharacterBoundaryText = this.AppsComposeSearchDataCharacterBoundaryText();
-        }
-
-        protected void AppsDeriveSearchDataWordBoundaryText()
-        {
-            this.SearchData.WordBoundaryText = this.AppsComposeSearchDataWordBoundaryText();
-        }
-
-        protected string AppsComposeDisplayName()
-        {
-            var searchText = new StringBuilder();
-            searchText.Append("Website communication ");
-
-            if (this.ExistOriginator)
-            {
-                searchText.Append("from: ");
-                searchText.Append(this.Originator.DeriveDisplayName());
-            }
-
-            if (this.ExistReceiver)
-            {
-                searchText.Append(" to: ");
-                searchText.Append(this.Receiver.DeriveDisplayName());
-            }
-
-            return searchText.ToString();
-        }
-
-        protected string AppsComposeSearchDataCharacterBoundaryText()
-        {
-            return string.Format(
-                "{0} {1} {2}",
-                this.ExistDescription ? this.Description : null,
-                this.ExistOriginator ? this.Originator.DeriveSearchDataCharacterBoundaryText() : null,
-                this.ExistReceiver ? this.Receiver.DeriveSearchDataCharacterBoundaryText() : null);
-        }
-
-        protected string AppsComposeSearchDataWordBoundaryText()
-        {
-            return string.Format(
-                "{0} {1}",
-                this.ExistOriginator ? this.Originator.DeriveSearchDataWordBoundaryText() : null,
-                this.ExistReceiver ? this.Receiver.DeriveSearchDataWordBoundaryText() : null);
         }
 
         private void AppsDeriveFromParties()
@@ -120,22 +75,6 @@ namespace Allors.Domain
             this.AddInvolvedParty(this.Owner);
             this.AddInvolvedParty(this.Originator);
             this.AddInvolvedParty(this.Receiver);
-        }
-
-        ObjectState Transitional.PreviousObjectState
-        {
-            get
-            {
-                return this.PreviousObjectState;
-            }
-        }
-
-        ObjectState Transitional.CurrentObjectState
-        {
-            get
-            {
-                return this.CurrentObjectState;
-            }
         }
     }
 }

@@ -59,13 +59,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenSalesRepRelationship_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var salesRep = new Persons(this.DatabaseSession).FindBy(Persons.Meta.LastName, "salesRep");
-            Assert.AreEqual(string.Format("from {0} salesRep sales rep. for customer", DateTime.Now.ToShortDateString()), salesRep.SalesRepRelationshipsWhereSalesRepresentative.First.DisplayName);
-        }
-
-        [Test]
         public void GivenNextSalesRep_WhenEmploymentAndSalesRepRelationshipAreCreated_ThenSalesRepIsAddedToUserGroup()
         {
             var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");

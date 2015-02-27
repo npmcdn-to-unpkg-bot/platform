@@ -36,37 +36,7 @@ namespace Allors.Domain
             
             this.SalesChannelName = this.SalesChannel.Name;
 
-            this.AppsDeriveDisplayName(derivation);
-
             this.AppsDeriveRevenue();
-        }
-
-        private void AppsDeriveDisplayName(IDerivation derivation)
-        {
-            var uiText = new StringBuilder();
-
-            if (this.ExistSalesChannel)
-            {
-                uiText.Append(this.SalesChannel.Name);
-            }
-
-            if (this.ExistRevenue)
-            {
-                uiText.Append(": ");
-                uiText.Append(this.Year);
-                uiText.Append("/");
-                uiText.Append(this.Month);
-                uiText.Append(" ");
-                uiText.Append(DecimalExtensions.AsCurrencyString(this.Revenue, this.InternalOrganisation.CurrencyFormat));
-            }
-
-            if (this.ExistInternalOrganisation)
-            {
-                uiText.Append(" at ");
-                uiText.Append(this.InternalOrganisation.Name);
-            }
-
-            this.DisplayName = uiText.ToString();
         }
 
         private void AppsDeriveRevenue()
@@ -85,7 +55,7 @@ namespace Allors.Domain
                 this.Revenue += salesInvoice.TotalExVat;
             }
 
-            var months = ((DateTime.Now.Year - this.Year) * 12) + DateTime.Now.Month - this.Month;
+            var months = ((DateTime.UtcNow.Year - this.Year) * 12) + DateTime.UtcNow.Month - this.Month;
             if (months <= 12)
             {
                 var histories = this.SalesChannel.SalesChannelRevenueHistoriesWhereSalesChannel;

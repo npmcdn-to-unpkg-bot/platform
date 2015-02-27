@@ -20,43 +20,11 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class NonSerializedInventoryItem
     {
         public void DeriveCurrentObjectState(IDerivation derivation)
         {
             this.AppsDeriveCurrentObjectState(derivation);
-        }
-
-        public void DeriveDisplayName()
-        {
-            this.AppsDeriveDisplayName();
-        }
-
-        public void DeriveSearchDataCharacterBoundaryText()
-        {
-            this.AppsDeriveSearchDataCharacterBoundaryText();
-        }
-
-        public void DeriveSearchDataWordBoundaryText()
-        {
-            this.AppsDeriveSearchDataWordBoundaryText();
-        }
-
-        public string ComposeDisplayName()
-        {
-            return this.AppsComposeDisplayName();
-        }
-
-        public string ComposeSearchDataCharacterBoundaryText()
-        {
-            return this.AppsComposeSearchDataCharacterBoundaryText();
-        }
-
-        public string ComposeSearchDataWordBoundaryText()
-        {
-            return this.AppsComposeSearchDataWordBoundaryText();
         }
     }
 }

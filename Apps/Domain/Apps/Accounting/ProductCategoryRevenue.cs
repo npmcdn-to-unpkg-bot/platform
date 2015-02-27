@@ -35,35 +35,6 @@ namespace Allors.Domain
             var derivation = method.Derivation;
 
             this.AppsDeriveRevenue(derivation);
-            this.AppsDeriveDisplayName(derivation);
-        }
-
-        private void AppsDeriveDisplayName(IDerivation derivation)
-        {
-            var uiText = new StringBuilder();
-
-            if (this.ExistProductCategory)
-            {
-                uiText.Append(this.ProductCategory.Description);
-            }
-
-            if (this.ExistRevenue)
-            {
-                uiText.Append(": ");
-                uiText.Append(this.Year);
-                uiText.Append("/");
-                uiText.Append(this.Month);
-                uiText.Append(" ");
-                uiText.Append(DecimalExtensions.AsCurrencyString(this.Revenue, this.InternalOrganisation.CurrencyFormat));
-            }
-
-            if (this.ExistInternalOrganisation)
-            {
-                uiText.Append(" at ");
-                uiText.Append(this.InternalOrganisation.Name);
-            }
-
-            this.DisplayName = uiText.ToString();
         }
 
         private void AppsDeriveRevenue(IDerivation derivation)
@@ -85,7 +56,7 @@ namespace Allors.Domain
                 ProductCategoryRevenues.AppsFindOrCreateAsDependable(this.Strategy.Session, this);
             }
 
-            var months = ((DateTime.Now.Year - this.Year) * 12) + DateTime.Now.Month - this.Month;
+            var months = ((DateTime.UtcNow.Year - this.Year) * 12) + DateTime.UtcNow.Month - this.Month;
             if (months <= 12)
             {
                 var histories = this.ProductCategory.ProductCategoryRevenueHistoriesWhereProductCategory;

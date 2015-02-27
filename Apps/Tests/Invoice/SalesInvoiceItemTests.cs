@@ -309,38 +309,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenInvoiceItem_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            this.InstantiateObjects(this.DatabaseSession);
-
-            var productInvoiceItem = new SalesInvoiceItemBuilder(this.DatabaseSession)
-                .WithProduct(this.good)
-                .WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem)
-                .WithQuantity(3)
-                .WithActualUnitPrice(5)
-                .Build();
-
-            this.invoice.AddSalesInvoiceItem(productInvoiceItem);
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("3 good, SKU: 10101, Total: 15.00", productInvoiceItem.DisplayName);
-
-            var productFeatureInvoiceItem = new SalesInvoiceItemBuilder(this.DatabaseSession)
-                .WithProductFeature(this.feature1)
-                .WithSalesInvoiceItemType(new SalesInvoiceItemTypes(this.DatabaseSession).ProductFeatureItem)
-                .WithQuantity(3)
-                .WithActualUnitPrice(5)
-                .Build();
-
-            this.invoice.AddSalesInvoiceItem(productFeatureInvoiceItem);
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("3 white, Total: 15.00", productFeatureInvoiceItem.DisplayName);
-        }
-
-        [Test]
         public void GivenInvoiceItemWithoutVatRegime_WhenDeriving_ThenDerivedVatRegimeIsFromOrder()
         {
             this.InstantiateObjects(this.DatabaseSession);

@@ -59,10 +59,6 @@ namespace Allors.Domain
             this.AppsDerivePostalCode();
             this.AppsDeriveCity();
             this.AppsDeriveCountry();
-
-            this.DeriveDisplayName();
-            this.DeriveSearchDataCharacterBoundaryText();
-            this.DeriveSearchDataWordBoundaryText();
         }
 
         private static void AppendNextLine(StringBuilder fullAddress)
@@ -144,7 +140,7 @@ namespace Allors.Domain
                     var postalCode = geographicBoundary as PostalCode;
                     if (postalCode != null)
                     {
-                        fullAddress.Append(postalCode.ComposeDisplayName());
+                        fullAddress.Append(postalCode.Code);
                         fullAddress.Append(" ");
                     }
                 }
@@ -154,7 +150,7 @@ namespace Allors.Domain
                     var city = geographicBoundary as City;
                     if (city != null)
                     {
-                        fullAddress.Append(city.ComposeDisplayName());
+                        fullAddress.Append(city.Name);
                     }
                 }
 
@@ -164,7 +160,7 @@ namespace Allors.Domain
                     if (country != null)
                     {
                         AppendNextLine(fullAddress);
-                        fullAddress.Append(country.ComposeDisplayName());
+                        fullAddress.Append(country.Name);
                     }
                 }
             }
@@ -199,44 +195,11 @@ namespace Allors.Domain
 
                 if (this.PostalBoundary.ExistCountry)
                 {
-                    fullAddress.Append(this.PostalBoundary.Country.ComposeDisplayName());
+                    fullAddress.Append(this.PostalBoundary.Country.Name);
                 }
             }
 
             this.FormattedFullAddress = fullAddress.ToString();
-        }
-
-        private void AppsDeriveDisplayName()
-        {
-            this.DisplayName = this.ComposeDisplayName();
-        }
-
-        private void AppsDeriveSearchDataCharacterBoundaryText()
-        {
-            this.SearchData.CharacterBoundaryText = this.AppsComposeSearchDataCharacterBoundaryText();
-        }
-
-        private void AppsDeriveSearchDataWordBoundaryText()
-        {
-            this.SearchData.WordBoundaryText = this.AppsComposeSearchDataWordBoundaryText();
-        }
-
-        private string AppsComposeDisplayName()
-        {
-            this.DeriveFormattedfullAddress();
-            const string Pattern = "<br />";
-            const string Replacement = ", ";
-            return Regex.Replace(this.FormattedFullAddress, Pattern, Replacement);
-        }
-
-        private string AppsComposeSearchDataCharacterBoundaryText()
-        {
-            return this.ComposeDisplayName();
-        }
-
-        private string AppsComposeSearchDataWordBoundaryText()
-        {
-            return null;
         }
     }
 }

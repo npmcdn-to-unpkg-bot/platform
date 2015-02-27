@@ -39,107 +39,11 @@ namespace Allors.Domain
 
         public void AppsDerive(ObjectDerive method)
         {
-            this.DeriveDisplayName();
-            this.DeriveSearchDataCharacterBoundaryText();
-            this.DeriveSearchDataWordBoundaryText();
-
             this.PreviousObjectState = this.CurrentObjectState;
 
             this.AppsDeriveFromParties();
             this.AppsDeriveToParties();
             this.AppsDeriveInvolvedParties();
-        }
-
-        protected void AppsDeriveDisplayName()
-        {
-            this.DisplayName = this.ComposeDisplayName();
-        }
-
-        protected void AppsDeriveSearchDataCharacterBoundaryText()
-        {
-            this.SearchData.CharacterBoundaryText = this.AppsComposeSearchDataCharacterBoundaryText();
-        }
-
-        protected void AppsDeriveSearchDataWordBoundaryText()
-        {
-            this.SearchData.WordBoundaryText = this.AppsComposeSearchDataWordBoundaryText();
-        }
-
-        protected string AppsComposeDisplayName()
-        {
-            var searchText = new StringBuilder();
-            searchText.Append("Email ");
-
-            if (this.ExistSubject)
-            {
-                searchText.Append("subject: ");
-                searchText.Append(this.Subject);
-            }
-
-            if (this.ExistOriginator)
-            {
-                searchText.Append(" from: ");
-                searchText.Append(this.Originator.ElectronicAddressString);
-            }
-
-            searchText.Append(" to:");
-            foreach (EmailAddress address in this.Addressees)
-            {
-                searchText.Append(" ");
-                searchText.Append(address.ElectronicAddressString);
-            }
-
-            if (this.ExistCarbonCopies)
-            {
-                searchText.Append(" CC:");
-                foreach (EmailAddress carbonCopy in this.CarbonCopies)
-                {
-                    searchText.Append(" ");
-                    searchText.Append(carbonCopy.ElectronicAddressString);
-                }
-            }
-
-            if (this.ExistBlindCopies)
-            {
-                searchText.Append(" BC:");
-                foreach (EmailAddress blindCopy in this.BlindCopies)
-                {
-                    searchText.Append(" ");
-                    searchText.Append(blindCopy.ElectronicAddressString);
-                }
-            }
-
-            return searchText.ToString();
-        }
-
-        protected string AppsComposeSearchDataCharacterBoundaryText()
-        {
-            var text = string.Format(
-                "{0} {1}",
-                this.ExistSubject ? this.Subject : null,
-                this.ExistOriginator ? this.Originator.SearchData.CharacterBoundaryText : null);
-
-            foreach (EmailAddress address in this.Addressees)
-            {
-                text += " " + address.ElectronicAddressString;
-            }
-
-            foreach (EmailAddress address in this.CarbonCopies)
-            {
-                text += " " + address.ElectronicAddressString;
-            }
-
-            foreach (EmailAddress address in this.BlindCopies)
-            {
-                text += " " + address.ElectronicAddressString;
-            }
-
-            return text;
-        }
-
-        protected string AppsComposeSearchDataWordBoundaryText()
-        {
-            return this.ExistOriginator ? this.Originator.SearchData.WordBoundaryText : null;
         }
 
         private void AppsDeriveFromParties()

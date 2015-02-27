@@ -35,11 +35,6 @@ namespace Allors.Domain
                 derivation.Log.AddError(this, PickListItems.Meta.ActualQuantity, ErrorMessages.PickListItemQuantityMoreThanAllowed);
             }
 
-            this.DisplayName = string.Format(
-                "{0} - {1}",
-                this.ExistRequestedQuantity ? this.RequestedQuantity : 0,
-                this.ExistInventoryItem ? this.InventoryItem.DisplayName : null);
-
             this.AppsDeriveOrderItemAdjustment(derivation);
         }
 
@@ -51,7 +46,7 @@ namespace Allors.Domain
 
                 foreach (ItemIssuance itemIssuance in this.ItemIssuancesWherePickListItem)
                 {
-                    itemIssuance.IssuanceDateTime = DateTime.Now;
+                    itemIssuance.IssuanceDateTime = DateTime.UtcNow;
                     foreach (OrderShipment orderShipment in itemIssuance.ShipmentItem.OrderShipmentsWhereShipmentItem)
                     {
                         if (!orderShipment.Picked)

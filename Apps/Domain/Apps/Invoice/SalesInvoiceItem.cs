@@ -416,55 +416,6 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDeriveDisplayName()
-        {
-            var uiText = new StringBuilder();
-
-            if (this.ExistQuantity)
-            {
-                uiText.Append(this.Quantity);
-                uiText.Append(" ");
-            }
-
-            if (this.ExistProduct)
-            {
-                uiText.Append(this.Product.ComposeDisplayName());
-            }
-
-            if (this.ExistProductFeature)
-            {
-                uiText.Append(this.ProductFeature.ComposeDisplayName());
-            }
-
-            if (this.ExistTimeEntries)
-            {
-                foreach (TimeEntry timeEntry in this.TimeEntries)
-                {
-                    var timeEntryName = string.Format(
-                        "{0} {1} for {2}", 
-                        timeEntry.ExistUnitOfMeasure ? timeEntry.UnitOfMeasure.Name : null, 
-                        timeEntry.ExistCost ? timeEntry.Cost : 0, 
-                        timeEntry.ExistWorkEffort ? timeEntry.WorkEffort.ComposeDisplayName() : null);
-
-                    uiText.Append(timeEntryName);
-                    uiText.Append(" ");
-                }
-            }
-
-            if (!this.ExistProduct && !this.ExistProductFeature && !this.ExistTimeEntries)
-            {
-                uiText.Append(this.Description);
-            }
-
-            if (this.ExistTotalExVat)
-            {
-                uiText.Append(", Total: ");
-                uiText.Append(string.Format("{0:N2}", this.TotalExVat));
-            }
-
-            this.DisplayName = uiText.ToString();
-        }
-
         private void AppsDerivePrices(IDerivation derivation, decimal quantityInvoiced, decimal totalBasePrice)
         {
             this.UnitBasePrice = 0;

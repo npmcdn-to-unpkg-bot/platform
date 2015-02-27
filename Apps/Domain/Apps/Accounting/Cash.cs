@@ -20,13 +20,10 @@
 
 namespace Allors.Domain
 {
-
     public partial class Cash
     {
         public void AppsOnPostBuild(ObjectOnPostBuild method)
         {
-            
-
             if (!this.ExistIsActive)
             {
                 this.IsActive = true;
@@ -44,13 +41,6 @@ namespace Allors.Domain
             }
 
             derivation.Log.AssertExistsAtMostOne(this, Cashes.Meta.GeneralLedgerAccount, Cashes.Meta.Journal);
-
-            this.DisplayName = this.ExistDescription? this.Description : null;
-
-            var characterBoundaryText = this.ExistDescription ? this.Description : null;
-
-            this.SearchData.CharacterBoundaryText = characterBoundaryText;
-            this.SearchData.WordBoundaryText = null;
         }
     }
 }

@@ -26,17 +26,10 @@ namespace Allors.Domain
     {
         public void AppsOnPostBuild(ObjectOnPostBuild method)
         {
-            
-
             if (!this.ExistCreationDate)
             {
-                this.CreationDate = DateTime.Now.Date;
+                this.CreationDate = DateTime.UtcNow.Date;
             }
-        }
-
-        public void AppsDerive(ObjectDerive method)
-        {
-            this.DisplayName = this.Description;
         }
     }
 }

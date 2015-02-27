@@ -31,10 +31,5 @@ namespace Allors.Domain
                 derivation.AddDependency(this.PostalAddressWherePostalBoundary, this);
             }
         }
-
-        public void AppsDerive(ObjectDerive method)
-        {
-            this.DisplayName = this.PostalCode + " " + this.Locality + ", " + this.Region + ", " + this.Country;
-        }
     }
 }

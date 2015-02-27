@@ -64,10 +64,6 @@ namespace Allors.Domain
             derivation.Log.AssertAtLeastOne(this, SerializedInventoryItems.Meta.Good, SerializedInventoryItems.Meta.Part);
             derivation.Log.AssertExistsAtMostOne(this, SerializedInventoryItems.Meta.Good, SerializedInventoryItems.Meta.Part);
 
-            this.DeriveDisplayName();
-            this.DeriveSearchDataCharacterBoundaryText();
-            this.DeriveSearchDataWordBoundaryText();
-
             this.DeriveCurrentObjectState(derivation);
 
             this.PreviousObjectState = this.CurrentObjectState;
@@ -116,47 +112,6 @@ namespace Allors.Domain
                     this.AddParentCategories(parent);
                 }
             }
-        }
-
-        private void AppsDeriveDisplayName()
-        {
-            this.DisplayName = this.ComposeDisplayName();
-        }
-
-        private void AppsDeriveSearchDataCharacterBoundaryText()
-        {
-            this.SearchData.CharacterBoundaryText = this.AppsComposeSearchDataCharacterBoundaryText();
-        }
-
-        private void AppsDeriveSearchDataWordBoundaryText()
-        {
-            this.SearchData.WordBoundaryText = this.AppsComposeSearchDataWordBoundaryText();
-        }
-
-        private string AppsComposeDisplayName()
-        {
-            return string.Format(
-                "{0}{1} with serialnumber {2}",
-                this.ExistGood ? this.Good.ComposeDisplayName() : null,
-                this.ExistPart ? this.Part.ComposeDisplayName() : null,
-                this.ExistSerialNumber ? this.SerialNumber : null);
-        }
-
-        private string AppsComposeSearchDataCharacterBoundaryText()
-        {
-            return string.Format(
-                "{0} {1} {2}",
-                this.ExistGood ? this.Good.ComposeSearchDataCharacterBoundaryText() : null,
-                this.ExistPart ? this.Part.ComposeSearchDataCharacterBoundaryText() : null,
-                this.ExistSerialNumber ? this.SerialNumber : null);
-        }
-
-        private string AppsComposeSearchDataWordBoundaryText()
-        {
-            return string.Format(
-                "{0} {1}",
-                this.ExistGood ? this.Good.ComposeSearchDataWordBoundaryText() : null,
-                this.ExistPart ? this.Part.ComposeSearchDataWordBoundaryText() : null);
         }
     }
 }

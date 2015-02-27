@@ -48,26 +48,5 @@ namespace Allors.Domain
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
-
-        [Test]
-        public void GivenPartyContactMechanism_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var contactMechanism = new TelecommunicationsNumberBuilder(this.DatabaseSession)
-                .WithAreaCode("0495")
-                .WithContactNumber("493499")
-                .WithDescription("cellphone")
-                .Build();
-
-            var purpose = new ContactMechanismPurposes(this.DatabaseSession).GeneralPhoneNumber;
-
-            var partyContactMechanism = new PartyContactMechanismBuilder(this.DatabaseSession)
-                .WithContactMechanism(contactMechanism)
-                .WithContactPurpose(purpose)
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("General PhoneNumber:  0495 493499", partyContactMechanism.DisplayName);
-        }
     }
 }

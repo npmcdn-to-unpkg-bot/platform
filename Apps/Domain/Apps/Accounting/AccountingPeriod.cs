@@ -49,8 +49,6 @@ namespace Allors.Domain
 
                 stringBuilder.AppendFormat("{0:d}", this.ThroughDate);
             }
-
-            this.DisplayName = stringBuilder.ToString();
         }
 
         private AccountingPeriod AppsAddNextMonth()

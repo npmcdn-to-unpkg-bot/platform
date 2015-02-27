@@ -216,18 +216,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenJournal_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var journal = new JournalBuilder(this.DatabaseSession)
-                .WithDescription("description")
-                .Build();
-
-            this.DatabaseSession.Derive();
-
-            Assert.AreEqual("description", journal.DisplayName);
-        }
-
-        [Test]
         public void GivenJournal_WhenDeriving_ThenContraAccountCanBeChangedWhenNotUsedYet()
         {
             throw new Exception("TODO");

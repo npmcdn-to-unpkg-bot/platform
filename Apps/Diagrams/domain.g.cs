@@ -15,7 +15,7 @@ namespace Allors.Domain
 	public interface Deletable  : Object 
 	{
 	}
-	public interface Enumeration  : Object, UserInterfaceable, UniquelyIdentifiable 
+	public interface Enumeration  : Object, AccessControlledObject, UniquelyIdentifiable 
 	{
 					LocalisedText LocalisedNames {set;}
 
@@ -46,7 +46,7 @@ namespace Allors.Domain
 					global::System.DateTime? ThroughDate {set;}
 
 	}
-	public interface Printable  : Object, UserInterfaceable, UniquelyIdentifiable 
+	public interface Printable  : Object, AccessControlledObject, UniquelyIdentifiable 
 	{
 					global::System.String PrintContent {set;}
 
@@ -56,7 +56,7 @@ namespace Allors.Domain
 					SearchData SearchData {set;}
 
 	}
-	public interface SearchResult  : Object, UserInterfaceable 
+	public interface SearchResult  : Object, AccessControlledObject 
 	{
 	}
 	public interface SecurityTokenOwner  : Object 
@@ -72,7 +72,7 @@ namespace Allors.Domain
 					global::System.Guid UniqueId {set;}
 
 	}
-	public interface User  : Object, SecurityTokenOwner, UserInterfaceable, Localised 
+	public interface User  : Object, SecurityTokenOwner, AccessControlledObject, Localised 
 	{
 					global::System.Boolean? UserEmailConfirmed {set;}
 
@@ -83,12 +83,7 @@ namespace Allors.Domain
 					global::System.String UserPasswordHash {set;}
 
 	}
-	public interface UserInterfaceable  : Object, AccessControlledObject 
-	{
-					global::System.String DisplayName {set;}
-
-	}
-	public interface AccountingTransaction  : Object, UserInterfaceable, SearchResult, Searchable 
+	public interface AccountingTransaction  : Object, AccessControlledObject, SearchResult, Searchable 
 	{
 					AccountingTransactionDetail AccountingTransactionDetails {set;}
 
@@ -103,7 +98,7 @@ namespace Allors.Domain
 					global::System.DateTime EntryDate {set;}
 
 	}
-	public interface Agreement  : Object, UserInterfaceable, Searchable, SearchResult, UniquelyIdentifiable, Period 
+	public interface Agreement  : Object, AccessControlledObject, Searchable, SearchResult, UniquelyIdentifiable, Period 
 	{
 					global::System.DateTime? AgreementDate {set;}
 
@@ -120,7 +115,7 @@ namespace Allors.Domain
 					global::System.String AgreementNumber {set;}
 
 	}
-	public interface AgreementItem  : Object, UserInterfaceable 
+	public interface AgreementItem  : Object, AccessControlledObject 
 	{
 					global::System.String Text {set;}
 
@@ -133,7 +128,7 @@ namespace Allors.Domain
 					AgreementTerm AgreementTerms {set;}
 
 	}
-	public interface AgreementTerm  : Object, UserInterfaceable 
+	public interface AgreementTerm  : Object, AccessControlledObject 
 	{
 					global::System.String TermValue {set;}
 
@@ -142,7 +137,7 @@ namespace Allors.Domain
 					global::System.String Description {set;}
 
 	}
-	public interface Budget  : Object, Period, Commentable, SearchResult, UniquelyIdentifiable, Transitional, UserInterfaceable, Searchable 
+	public interface Budget  : Object, Period, Commentable, SearchResult, UniquelyIdentifiable, Transitional, AccessControlledObject, Searchable 
 	{
 					global::System.String Description {set;}
 
@@ -163,15 +158,15 @@ namespace Allors.Domain
 					BudgetItem BudgetItems {set;}
 
 	}
-	public interface CityBound  : Object, UserInterfaceable 
+	public interface CityBound  : Object, AccessControlledObject 
 	{
 					City Cities {set;}
 
 	}
-	public interface CommunicationAttachment  : Object, UserInterfaceable 
+	public interface CommunicationAttachment  : Object, AccessControlledObject 
 	{
 	}
-	public interface CommunicationEvent  : Object, Transitional, UserInterfaceable, SearchResult, Searchable, Commentable, UniquelyIdentifiable 
+	public interface CommunicationEvent  : Object, Transitional, AccessControlledObject, SearchResult, Searchable, Commentable, UniquelyIdentifiable 
 	{
 					global::System.DateTime? ScheduledStart {set;}
 
@@ -222,31 +217,31 @@ namespace Allors.Domain
 					global::System.DateTime? ActualStart {set;}
 
 	}
-	public interface ContactMechanism  : Object, UserInterfaceable, Searchable 
+	public interface ContactMechanism  : Object, AccessControlledObject, Searchable 
 	{
 					global::System.String Description {set;}
 
 					ContactMechanism FollowTo {set;}
 
 	}
-	public interface Container  : Object, Searchable, SearchResult, UserInterfaceable 
+	public interface Container  : Object, Searchable, SearchResult, AccessControlledObject 
 	{
 					Facility Facility {set;}
 
 					global::System.String ContainerDescription {set;}
 
 	}
-	public interface CountryBound  : Object, UserInterfaceable, Searchable 
+	public interface CountryBound  : Object, AccessControlledObject, Searchable 
 	{
 					Country Country {set;}
 
 	}
-	public interface DeploymentUsage  : Object, UserInterfaceable, Commentable, Period 
+	public interface DeploymentUsage  : Object, AccessControlledObject, Commentable, Period 
 	{
 					TimeFrequency TimeFrequency {set;}
 
 	}
-	public interface Document  : Object, Printable, UserInterfaceable, Commentable, Searchable, SearchResult 
+	public interface Document  : Object, Printable, AccessControlledObject, Commentable, Searchable, SearchResult 
 	{
 					global::System.String Name {set;}
 
@@ -262,7 +257,7 @@ namespace Allors.Domain
 					global::System.String ElectronicAddressString {set;}
 
 	}
-	public interface EngagementItem  : Object, UserInterfaceable 
+	public interface EngagementItem  : Object, AccessControlledObject 
 	{
 					QuoteItem QuoteItem {set;}
 
@@ -287,7 +282,7 @@ namespace Allors.Domain
 					ProductFeature ProductFeature {set;}
 
 	}
-	public interface EstimatedProductCost  : Object, Period, SearchResult, Searchable, UserInterfaceable 
+	public interface EstimatedProductCost  : Object, Period, SearchResult, Searchable, AccessControlledObject 
 	{
 					global::System.Decimal Cost {set;}
 
@@ -307,7 +302,7 @@ namespace Allors.Domain
 					Party ToParty {set;}
 
 	}
-	public interface Facility  : Object, UserInterfaceable, SearchResult, GeoLocatable, Searchable 
+	public interface Facility  : Object, AccessControlledObject, SearchResult, GeoLocatable, Searchable 
 	{
 					Facility MadeUpOf {set;}
 
@@ -322,12 +317,12 @@ namespace Allors.Domain
 					InternalOrganisation Owner {set;}
 
 	}
-	public interface FinancialAccount  : Object, UserInterfaceable, SearchResult, Searchable 
+	public interface FinancialAccount  : Object, AccessControlledObject, SearchResult, Searchable 
 	{
 					FinancialAccountTransaction FinancialAccountTransactions {set;}
 
 	}
-	public interface FinancialAccountTransaction  : Object, UserInterfaceable 
+	public interface FinancialAccountTransaction  : Object, AccessControlledObject 
 	{
 					global::System.String Description {set;}
 
@@ -336,7 +331,7 @@ namespace Allors.Domain
 					global::System.DateTime TransactionDate {set;}
 
 	}
-	public interface FixedAsset  : Object, UserInterfaceable, SearchResult, Searchable 
+	public interface FixedAsset  : Object, AccessControlledObject, SearchResult, Searchable 
 	{
 					global::System.String Name {set;}
 
@@ -351,7 +346,7 @@ namespace Allors.Domain
 					global::System.DateTime? NextServiceDate {set;}
 
 	}
-	public interface GeographicBoundary  : Object, Searchable, GeoLocatable, UserInterfaceable 
+	public interface GeographicBoundary  : Object, Searchable, GeoLocatable, AccessControlledObject 
 	{
 					global::System.String Abbreviation {set;}
 
@@ -361,7 +356,7 @@ namespace Allors.Domain
 					GeographicBoundary Associations {set;}
 
 	}
-	public interface GeoLocatable  : Object, AccessControlledObject, UserInterfaceable, Searchable, UniquelyIdentifiable 
+	public interface GeoLocatable  : Object, Searchable, AccessControlledObject, UniquelyIdentifiable 
 	{
 					global::System.Decimal Latitude {set;}
 
@@ -373,7 +368,7 @@ namespace Allors.Domain
 					InternalOrganisation InternalOrganisation {set;}
 
 	}
-	public interface InventoryItem  : Object, Transitional, Searchable, UniquelyIdentifiable, UserInterfaceable 
+	public interface InventoryItem  : Object, Transitional, Searchable, UniquelyIdentifiable, AccessControlledObject 
 	{
 					InventoryItemVariance InventoryItemVariances {set;}
 
@@ -396,7 +391,7 @@ namespace Allors.Domain
 					Facility Facility {set;}
 
 	}
-	public interface InventoryItemConfiguration  : Object, Commentable, UserInterfaceable 
+	public interface InventoryItemConfiguration  : Object, Commentable, AccessControlledObject 
 	{
 					InventoryItem InventoryItem {set;}
 
@@ -405,7 +400,7 @@ namespace Allors.Domain
 					InventoryItem ComponentInventoryItem {set;}
 
 	}
-	public interface Invoice  : Object, UserInterfaceable, Localised, Transitional, SearchResult, Commentable, Searchable, Printable, UniquelyIdentifiable 
+	public interface Invoice  : Object, AccessControlledObject, Localised, Transitional, SearchResult, Commentable, Searchable, Printable, UniquelyIdentifiable 
 	{
 					global::System.Decimal TotalShippingAndHandlingCustomerCurrency {set;}
 
@@ -470,7 +465,7 @@ namespace Allors.Domain
 					global::System.Decimal TotalFee {set;}
 
 	}
-	public interface InvoiceItem  : Object, UserInterfaceable, Transitional 
+	public interface InvoiceItem  : Object, AccessControlledObject, Transitional 
 	{
 					global::System.Decimal TotalIncVatCustomerCurrency {set;}
 
@@ -545,7 +540,7 @@ namespace Allors.Domain
 					global::System.String Description {set;}
 
 	}
-	public interface IUnitOfMeasure  : Object, UserInterfaceable, UniquelyIdentifiable, AccessControlledObject, Searchable 
+	public interface IUnitOfMeasure  : Object, AccessControlledObject, UniquelyIdentifiable, Searchable 
 	{
 					global::System.String Description {set;}
 
@@ -554,7 +549,7 @@ namespace Allors.Domain
 					global::System.String Abbreviation {set;}
 
 	}
-	public interface Order  : Object, UserInterfaceable, Printable, UniquelyIdentifiable, Transitional, Searchable, Commentable, Localised, SearchResult 
+	public interface Order  : Object, AccessControlledObject, Printable, UniquelyIdentifiable, Transitional, Searchable, Commentable, Localised, SearchResult 
 	{
 					Currency CustomerCurrency {set;}
 
@@ -619,7 +614,7 @@ namespace Allors.Domain
 					SurchargeAdjustment SurchargeAdjustment {set;}
 
 	}
-	public interface OrderAdjustment  : Object, UserInterfaceable 
+	public interface OrderAdjustment  : Object, AccessControlledObject 
 	{
 					global::System.Decimal Amount {set;}
 
@@ -628,7 +623,7 @@ namespace Allors.Domain
 					global::System.Decimal Percentage {set;}
 
 	}
-	public interface OrderItem  : Object, UserInterfaceable, Commentable, Transitional 
+	public interface OrderItem  : Object, AccessControlledObject, Commentable, Transitional 
 	{
 					global::System.Decimal TotalDiscountAsPercentage {set;}
 
@@ -711,7 +706,7 @@ namespace Allors.Domain
 					global::System.String Message {set;}
 
 	}
-	public interface Part  : Object, UserInterfaceable, Searchable, UniquelyIdentifiable, SearchResult 
+	public interface Part  : Object, AccessControlledObject, Searchable, UniquelyIdentifiable, SearchResult 
 	{
 					InternalOrganisation OwnedByParty {set;}
 
@@ -734,7 +729,7 @@ namespace Allors.Domain
 					InventoryItemKind InventoryItemKind {set;}
 
 	}
-	public interface PartBillOfMaterial  : Object, UserInterfaceable, Commentable, Period, Searchable 
+	public interface PartBillOfMaterial  : Object, AccessControlledObject, Commentable, Period, Searchable 
 	{
 					Part Part {set;}
 
@@ -745,7 +740,7 @@ namespace Allors.Domain
 					Part ComponentPart {set;}
 
 	}
-	public interface PartSpecification  : Object, UniquelyIdentifiable, Commentable, Transitional, UserInterfaceable 
+	public interface PartSpecification  : Object, UniquelyIdentifiable, Commentable, Transitional, AccessControlledObject 
 	{
 					PartSpecificationStatus PartSpecificationStatuses {set;}
 
@@ -760,7 +755,7 @@ namespace Allors.Domain
 					global::System.String Description {set;}
 
 	}
-	public interface Party  : Object, Localised, UserInterfaceable, SearchResult, SecurityTokenOwner, UniquelyIdentifiable, Searchable 
+	public interface Party  : Object, Localised, AccessControlledObject, SearchResult, SecurityTokenOwner, UniquelyIdentifiable, Searchable 
 	{
 					global::System.Decimal YTDRevenue {set;}
 
@@ -835,12 +830,12 @@ namespace Allors.Domain
 					VatRegime VatRegime {set;}
 
 	}
-	public interface PartyClassification  : Object, UserInterfaceable, Searchable 
+	public interface PartyClassification  : Object, AccessControlledObject, Searchable 
 	{
 					global::System.String Name {set;}
 
 	}
-	public interface PartyRelationship  : Object, Period, Commentable, UserInterfaceable 
+	public interface PartyRelationship  : Object, Period, Commentable, AccessControlledObject 
 	{
 					PartyRelationshipStatus PartyRelationshipStatus {set;}
 
@@ -853,7 +848,7 @@ namespace Allors.Domain
 					CommunicationEvent CommunicationEvents {set;}
 
 	}
-	public interface Payment  : Object, UserInterfaceable, SearchResult, Searchable, Commentable, UniquelyIdentifiable 
+	public interface Payment  : Object, AccessControlledObject, SearchResult, Searchable, Commentable, UniquelyIdentifiable 
 	{
 					global::System.Decimal Amount {set;}
 
@@ -870,7 +865,7 @@ namespace Allors.Domain
 					Party ReceivingParty {set;}
 
 	}
-	public interface PaymentMethod  : Object, UserInterfaceable, UniquelyIdentifiable, AccessControlledObject, Searchable 
+	public interface PaymentMethod  : Object, AccessControlledObject, UniquelyIdentifiable, Searchable 
 	{
 					global::System.Decimal? BalanceLimit {set;}
 
@@ -891,7 +886,7 @@ namespace Allors.Domain
 					global::System.Boolean IsActive {set;}
 
 	}
-	public interface PriceComponent  : Object, Period, Searchable, UserInterfaceable, Commentable 
+	public interface PriceComponent  : Object, Period, Searchable, AccessControlledObject, Commentable 
 	{
 					GeographicBoundary GeographicBoundary {set;}
 
@@ -930,7 +925,7 @@ namespace Allors.Domain
 					SalesChannel SalesChannel {set;}
 
 	}
-	public interface Product  : Object, SearchResult, UniquelyIdentifiable, UserInterfaceable, Searchable 
+	public interface Product  : Object, SearchResult, UniquelyIdentifiable, AccessControlledObject, Searchable 
 	{
 					ProductCategory PrimaryProductCategory {set;}
 
@@ -979,10 +974,10 @@ namespace Allors.Domain
 					InternalOrganisation SoldBy {set;}
 
 	}
-	public interface ProductAssociation  : Object, Commentable, AccessControlledObject, UserInterfaceable, Period 
+	public interface ProductAssociation  : Object, Commentable, AccessControlledObject, Period 
 	{
 	}
-	public interface ProductFeature  : Object, Searchable, UniquelyIdentifiable, UserInterfaceable 
+	public interface ProductFeature  : Object, Searchable, UniquelyIdentifiable, AccessControlledObject 
 	{
 					EstimatedProductCost EstimatedProductCosts {set;}
 
@@ -997,7 +992,7 @@ namespace Allors.Domain
 					VatRate VatRate {set;}
 
 	}
-	public interface Quote  : Object, UserInterfaceable, SearchResult, Searchable 
+	public interface Quote  : Object, AccessControlledObject, SearchResult, Searchable 
 	{
 					global::System.DateTime? ValidFromDate {set;}
 
@@ -1020,7 +1015,7 @@ namespace Allors.Domain
 					global::System.String QuoteNumber {set;}
 
 	}
-	public interface Request  : Object, UserInterfaceable, Searchable, SearchResult, Commentable 
+	public interface Request  : Object, AccessControlledObject, Searchable, SearchResult, Commentable 
 	{
 					global::System.String Description {set;}
 
@@ -1035,7 +1030,7 @@ namespace Allors.Domain
 					Party Originator {set;}
 
 	}
-	public interface Requirement  : Object, SearchResult, Transitional, UniquelyIdentifiable, UserInterfaceable, Searchable 
+	public interface Requirement  : Object, SearchResult, Transitional, UniquelyIdentifiable, AccessControlledObject, Searchable 
 	{
 					global::System.DateTime? RequiredByDate {set;}
 
@@ -1071,7 +1066,7 @@ namespace Allors.Domain
 	public interface Service  : Object, Product 
 	{
 	}
-	public interface ServiceEntry  : Object, Commentable, UserInterfaceable, Searchable, SearchResult 
+	public interface ServiceEntry  : Object, Commentable, AccessControlledObject, Searchable, SearchResult 
 	{
 					global::System.DateTime? ThroughDateTime {set;}
 
@@ -1086,7 +1081,7 @@ namespace Allors.Domain
 					WorkEffort WorkEffort {set;}
 
 	}
-	public interface Shipment  : Object, Printable, Transitional, Searchable, UniquelyIdentifiable, UserInterfaceable, SearchResult 
+	public interface Shipment  : Object, Printable, Transitional, Searchable, UniquelyIdentifiable, AccessControlledObject, SearchResult 
 	{
 					ShipmentMethod ShipmentMethod {set;}
 
@@ -1137,7 +1132,7 @@ namespace Allors.Domain
 					global::System.DateTime? EstimatedArrivalDate {set;}
 
 	}
-	public interface WorkEffort  : Object, Searchable, UserInterfaceable, SearchResult, Transitional, UniquelyIdentifiable 
+	public interface WorkEffort  : Object, Searchable, AccessControlledObject, SearchResult, Transitional, UniquelyIdentifiable 
 	{
 					WorkEffortStatus CurrentWorkEffortStatus {set;}
 
@@ -1182,7 +1177,7 @@ namespace Allors.Domain
 	public interface PersonClassification  : Object, PartyClassification 
 	{
 	}
-	public interface AccessControl  : Object, Deletable, UserInterfaceable 
+	public interface AccessControl  : Object, Deletable, AccessControlledObject 
 	{
 					UserGroup SubjectGroups {set;}
 
@@ -1198,7 +1193,7 @@ namespace Allors.Domain
 					global::System.Int32 Value {set;}
 
 	}
-	public interface Country  : Object, UserInterfaceable, Searchable, GeographicBoundary, CityBound 
+	public interface Country  : Object, AccessControlledObject, Searchable, GeographicBoundary, CityBound 
 	{
 					Currency Currency {set;}
 
@@ -1223,7 +1218,7 @@ namespace Allors.Domain
 					global::System.String UriExtension {set;}
 
 	}
-	public interface Currency  : Object, UserInterfaceable, IUnitOfMeasure 
+	public interface Currency  : Object, AccessControlledObject, IUnitOfMeasure 
 	{
 					global::System.String IsoCode {set;}
 
@@ -1243,7 +1238,7 @@ namespace Allors.Domain
 					global::System.String OriginalFilename {set;}
 
 	}
-	public interface Language  : Object, UserInterfaceable, Searchable 
+	public interface Language  : Object, AccessControlledObject, Searchable 
 	{
 					global::System.String Name {set;}
 
@@ -1252,7 +1247,7 @@ namespace Allors.Domain
 					LocalisedText LocalisedNames {set;}
 
 	}
-	public interface Locale  : Object, UserInterfaceable 
+	public interface Locale  : Object, AccessControlledObject 
 	{
 					global::System.String Name {set;}
 
@@ -1261,7 +1256,7 @@ namespace Allors.Domain
 					Country Country {set;}
 
 	}
-	public interface LocalisedText  : Object, Searchable, UserInterfaceable, Localised 
+	public interface LocalisedText  : Object, Searchable, AccessControlledObject, Localised 
 	{
 					global::System.String Text {set;}
 
@@ -1275,7 +1270,7 @@ namespace Allors.Domain
 					User User {set;}
 
 	}
-	public interface Media  : Object, UniquelyIdentifiable, UserInterfaceable, Deletable 
+	public interface Media  : Object, UniquelyIdentifiable, AccessControlledObject, Deletable 
 	{
 					MediaType MediaType {set;}
 
@@ -1289,14 +1284,14 @@ namespace Allors.Domain
 					global::System.String Hash {set;}
 
 	}
-	public interface MediaType  : Object, UserInterfaceable 
+	public interface MediaType  : Object, AccessControlledObject 
 	{
 					global::System.String DefaultFileExtension {set;}
 
 					global::System.String Name {set;}
 
 	}
-	public interface Permission  : Object, Deletable, UserInterfaceable 
+	public interface Permission  : Object, Deletable, AccessControlledObject 
 	{
 					global::System.Guid OperandTypePointer {set;}
 
@@ -1305,7 +1300,7 @@ namespace Allors.Domain
 					global::System.Int32 OperationEnum {set;}
 
 	}
-	public interface Person  : Object, User, AccessControlledObject, UniquelyIdentifiable, SearchResult, UserInterfaceable, Searchable, Party, Deletable 
+	public interface Person  : Object, User, AccessControlledObject, UniquelyIdentifiable, SearchResult, Searchable, Party, Deletable 
 	{
 					global::System.String LastName {set;}
 
@@ -1358,14 +1353,14 @@ namespace Allors.Domain
 					global::System.DateTime? DeceasedDate {set;}
 
 	}
-	public interface PrintQueue  : Object, AccessControlledObject, UserInterfaceable, UniquelyIdentifiable 
+	public interface PrintQueue  : Object, AccessControlledObject, UniquelyIdentifiable 
 	{
 					Printable Printables {set;}
 
 					global::System.String Name {set;}
 
 	}
-	public interface Role  : Object, UserInterfaceable, UniquelyIdentifiable 
+	public interface Role  : Object, AccessControlledObject, UniquelyIdentifiable 
 	{
 					Permission Permissions {set;}
 
@@ -1393,7 +1388,7 @@ namespace Allors.Domain
 	public interface SecurityToken  : Object, Deletable 
 	{
 	}
-	public interface Singleton  : Object, UserInterfaceable 
+	public interface Singleton  : Object, AccessControlledObject 
 	{
 					PrintQueue DefaultPrintQueue {set;}
 
@@ -1430,7 +1425,7 @@ namespace Allors.Domain
 					ObjectState ToState {set;}
 
 	}
-	public interface UserGroup  : Object, UniquelyIdentifiable, Searchable, UserInterfaceable 
+	public interface UserGroup  : Object, UniquelyIdentifiable, Searchable, AccessControlledObject 
 	{
 					Role Role {set;}
 
@@ -1446,7 +1441,7 @@ namespace Allors.Domain
 	public interface AccountAdjustment  : Object, FinancialAccountTransaction 
 	{
 	}
-	public interface AccountingPeriod  : Object, Budget, UserInterfaceable 
+	public interface AccountingPeriod  : Object, Budget, AccessControlledObject 
 	{
 					AccountingPeriod Parent {set;}
 
@@ -1457,7 +1452,7 @@ namespace Allors.Domain
 					TimeFrequency TimeFrequency {set;}
 
 	}
-	public interface AccountingTransactionDetail  : Object, UserInterfaceable 
+	public interface AccountingTransactionDetail  : Object, AccessControlledObject 
 	{
 					AccountingTransactionDetail AssociatedWith {set;}
 
@@ -1468,7 +1463,7 @@ namespace Allors.Domain
 					global::System.Boolean Debit {set;}
 
 	}
-	public interface AccountingTransactionNumber  : Object, AccessControlledObject, UserInterfaceable 
+	public interface AccountingTransactionNumber  : Object, AccessControlledObject 
 	{
 					global::System.Int32? Number {set;}
 
@@ -1490,7 +1485,7 @@ namespace Allors.Domain
 					UnitOfMeasure UnitOfMeasure {set;}
 
 	}
-	public interface Addendum  : Object, UserInterfaceable 
+	public interface Addendum  : Object, AccessControlledObject 
 	{
 					global::System.String Text {set;}
 
@@ -1513,7 +1508,7 @@ namespace Allors.Domain
 	public interface Amortization  : Object, InternalAccountingTransaction 
 	{
 	}
-	public interface AmountDue  : Object, AccessControlledObject, Searchable, UserInterfaceable 
+	public interface AmountDue  : Object, AccessControlledObject, Searchable 
 	{
 					global::System.Decimal? Amount {set;}
 
@@ -1564,7 +1559,7 @@ namespace Allors.Domain
 					global::System.String Description {set;}
 
 	}
-	public interface Bank  : Object, UserInterfaceable, Searchable 
+	public interface Bank  : Object, AccessControlledObject, Searchable 
 	{
 					Media Logo {set;}
 
@@ -1600,7 +1595,7 @@ namespace Allors.Domain
 	public interface BasePrice  : Object, Deletable, PriceComponent 
 	{
 	}
-	public interface Benefit  : Object, SearchResult, UserInterfaceable, Searchable 
+	public interface Benefit  : Object, SearchResult, AccessControlledObject, Searchable 
 	{
 					global::System.Decimal? EmployerPaidPercentage {set;}
 
@@ -1611,7 +1606,7 @@ namespace Allors.Domain
 					global::System.Decimal? AvailableTime {set;}
 
 	}
-	public interface BillingAccount  : Object, UserInterfaceable 
+	public interface BillingAccount  : Object, AccessControlledObject 
 	{
 					global::System.String Description {set;}
 
@@ -1624,14 +1619,14 @@ namespace Allors.Domain
 	public interface Bin  : Object, Container 
 	{
 	}
-	public interface Brand  : Object, UserInterfaceable, AccessControlledObject, Searchable 
+	public interface Brand  : Object, AccessControlledObject, Searchable 
 	{
 					global::System.String Name {set;}
 
 					ProductCategory ProductCategories {set;}
 
 	}
-	public interface BudgetItem  : Object, UserInterfaceable 
+	public interface BudgetItem  : Object, AccessControlledObject 
 	{
 					global::System.String Purpose {set;}
 
@@ -1645,19 +1640,19 @@ namespace Allors.Domain
 	public interface BudgetObjectState  : Object, ObjectState 
 	{
 	}
-	public interface BudgetReview  : Object, Searchable, Commentable, UserInterfaceable 
+	public interface BudgetReview  : Object, Searchable, Commentable, AccessControlledObject 
 	{
 					global::System.DateTime ReviewDate {set;}
 
 					global::System.String Description {set;}
 
 	}
-	public interface BudgetRevision  : Object, Searchable, UserInterfaceable 
+	public interface BudgetRevision  : Object, Searchable, AccessControlledObject 
 	{
 					global::System.DateTime RevisionDate {set;}
 
 	}
-	public interface BudgetRevisionImpact  : Object, UserInterfaceable 
+	public interface BudgetRevisionImpact  : Object, AccessControlledObject 
 	{
 					BudgetItem BudgetItem {set;}
 
@@ -1672,7 +1667,7 @@ namespace Allors.Domain
 					BudgetRevision BudgetRevision {set;}
 
 	}
-	public interface BudgetStatus  : Object, UserInterfaceable 
+	public interface BudgetStatus  : Object, AccessControlledObject 
 	{
 					global::System.DateTime StartDateTime {set;}
 
@@ -1688,12 +1683,12 @@ namespace Allors.Domain
 	public interface Capitalization  : Object, InternalAccountingTransaction 
 	{
 	}
-	public interface Carrier  : Object, UniquelyIdentifiable, AccessControlledObject, UserInterfaceable, Searchable 
+	public interface Carrier  : Object, UniquelyIdentifiable, Searchable, AccessControlledObject 
 	{
 					global::System.String Name {set;}
 
 	}
-	public interface Case  : Object, Searchable, UserInterfaceable, Transitional, UniquelyIdentifiable, SearchResult 
+	public interface Case  : Object, Searchable, AccessControlledObject, Transitional, UniquelyIdentifiable, SearchResult 
 	{
 					CaseStatus CurrentCaseStatus {set;}
 
@@ -1711,7 +1706,7 @@ namespace Allors.Domain
 	public interface CaseObjectState  : Object, ObjectState 
 	{
 	}
-	public interface CaseStatus  : Object, UserInterfaceable 
+	public interface CaseStatus  : Object, AccessControlledObject 
 	{
 					global::System.DateTime StartDateTime {set;}
 
@@ -1723,21 +1718,21 @@ namespace Allors.Domain
 					Person PersonResponsible {set;}
 
 	}
-	public interface ChartOfAccounts  : Object, UserInterfaceable, AccessControlledObject, UniquelyIdentifiable 
+	public interface ChartOfAccounts  : Object, UniquelyIdentifiable, AccessControlledObject 
 	{
 					global::System.String Name {set;}
 
 					GeneralLedgerAccount GeneralLedgerAccounts {set;}
 
 	}
-	public interface Citizenship  : Object, UserInterfaceable 
+	public interface Citizenship  : Object, AccessControlledObject 
 	{
 					Passport Passports {set;}
 
 					Country Country {set;}
 
 	}
-	public interface City  : Object, GeographicBoundary, UserInterfaceable, CountryBound 
+	public interface City  : Object, GeographicBoundary, AccessControlledObject, CountryBound 
 	{
 					global::System.String Name {set;}
 
@@ -1763,7 +1758,7 @@ namespace Allors.Domain
 	public interface CommunicationEventPurpose  : Object, Enumeration 
 	{
 	}
-	public interface CommunicationEventStatus  : Object, UserInterfaceable 
+	public interface CommunicationEventStatus  : Object, AccessControlledObject 
 	{
 					global::System.DateTime StartDateTime {set;}
 
@@ -1776,7 +1771,7 @@ namespace Allors.Domain
 	public interface ContactMechanismPurpose  : Object, Enumeration 
 	{
 	}
-	public interface CostCenter  : Object, UserInterfaceable, Searchable, UniquelyIdentifiable, AccessControlledObject 
+	public interface CostCenter  : Object, AccessControlledObject, Searchable, UniquelyIdentifiable 
 	{
 					global::System.String Description {set;}
 
@@ -1793,7 +1788,7 @@ namespace Allors.Domain
 					global::System.Boolean? UseGlAccountOfBooking {set;}
 
 	}
-	public interface CostCenterCategory  : Object, Searchable, UserInterfaceable, SearchResult, AccessControlledObject, UniquelyIdentifiable 
+	public interface CostCenterCategory  : Object, Searchable, SearchResult, UniquelyIdentifiable 
 	{
 					CostCenterCategory Parent {set;}
 
@@ -1810,14 +1805,14 @@ namespace Allors.Domain
 	public interface CostOfGoodsSoldMethod  : Object, Enumeration 
 	{
 	}
-	public interface County  : Object, GeographicBoundary, CityBound, UserInterfaceable 
+	public interface County  : Object, GeographicBoundary, CityBound, AccessControlledObject 
 	{
 					global::System.String Name {set;}
 
 					State State {set;}
 
 	}
-	public interface CreditCard  : Object, FinancialAccount, UserInterfaceable, Searchable 
+	public interface CreditCard  : Object, FinancialAccount, AccessControlledObject, Searchable 
 	{
 					global::System.String NameOnCard {set;}
 
@@ -1830,7 +1825,7 @@ namespace Allors.Domain
 					global::System.String CardNumber {set;}
 
 	}
-	public interface CreditCardCompany  : Object, UserInterfaceable 
+	public interface CreditCardCompany  : Object, AccessControlledObject 
 	{
 					global::System.String Name {set;}
 
@@ -1887,7 +1882,7 @@ namespace Allors.Domain
 	public interface CustomerReturnObjectState  : Object, ObjectState 
 	{
 	}
-	public interface CustomerReturnStatus  : Object, UserInterfaceable 
+	public interface CustomerReturnStatus  : Object, AccessControlledObject 
 	{
 					global::System.DateTime StartDateTime {set;}
 
@@ -1920,7 +1915,7 @@ namespace Allors.Domain
 	public interface CustomerShipmentObjectState  : Object, ObjectState 
 	{
 	}
-	public interface CustomerShipmentStatus  : Object, UserInterfaceable 
+	public interface CustomerShipmentStatus  : Object, AccessControlledObject 
 	{
 					CustomerShipmentObjectState CustomerShipmentObjectState {set;}
 
@@ -1930,7 +1925,7 @@ namespace Allors.Domain
 	public interface DebitCreditConstant  : Object, UniquelyIdentifiable, Enumeration 
 	{
 	}
-	public interface Deduction  : Object, UserInterfaceable 
+	public interface Deduction  : Object, AccessControlledObject 
 	{
 					DeductionType DeductionType {set;}
 
@@ -1940,7 +1935,7 @@ namespace Allors.Domain
 	public interface DeductionType  : Object, Enumeration 
 	{
 	}
-	public interface Deliverable  : Object, Searchable, UserInterfaceable 
+	public interface Deliverable  : Object, Searchable, AccessControlledObject 
 	{
 					global::System.String Name {set;}
 
@@ -1963,7 +1958,7 @@ namespace Allors.Domain
 	public interface DeliverableType  : Object, Enumeration 
 	{
 	}
-	public interface Deployment  : Object, Searchable, UserInterfaceable, Period, SearchResult 
+	public interface Deployment  : Object, Searchable, AccessControlledObject, Period, SearchResult 
 	{
 					Good ProductOffering {set;}
 
@@ -1982,14 +1977,14 @@ namespace Allors.Domain
 					FixedAsset FixedAsset {set;}
 
 	}
-	public interface DepreciationMethod  : Object, UserInterfaceable 
+	public interface DepreciationMethod  : Object, AccessControlledObject 
 	{
 					global::System.String Formula {set;}
 
 					global::System.String Description {set;}
 
 	}
-	public interface DesiredProductFeature  : Object, UserInterfaceable, Searchable 
+	public interface DesiredProductFeature  : Object, AccessControlledObject, Searchable 
 	{
 					global::System.Boolean Required {set;}
 
@@ -2040,7 +2035,7 @@ namespace Allors.Domain
 	public interface DropShipmentObjectState  : Object, ObjectState 
 	{
 	}
-	public interface DropShipmentStatus  : Object, UserInterfaceable 
+	public interface DropShipmentStatus  : Object, AccessControlledObject 
 	{
 					global::System.DateTime StartDateTime {set;}
 
@@ -2066,7 +2061,7 @@ namespace Allors.Domain
 					EmailTemplate EmailTemplate {set;}
 
 	}
-	public interface EmailTemplate  : Object, UserInterfaceable 
+	public interface EmailTemplate  : Object, AccessControlledObject 
 	{
 					global::System.String Description {set;}
 
@@ -2091,7 +2086,7 @@ namespace Allors.Domain
 	public interface EmploymentAgreement  : Object, Agreement 
 	{
 	}
-	public interface EmploymentApplication  : Object, SearchResult, UserInterfaceable, Searchable 
+	public interface EmploymentApplication  : Object, SearchResult, AccessControlledObject, Searchable 
 	{
 					global::System.DateTime ApplicationDate {set;}
 
@@ -2116,7 +2111,7 @@ namespace Allors.Domain
 	public interface EmploymentTerminationReason  : Object, Enumeration, Searchable 
 	{
 	}
-	public interface Engagement  : Object, UserInterfaceable, Searchable, SearchResult 
+	public interface Engagement  : Object, AccessControlledObject, Searchable, SearchResult 
 	{
 					Agreement Agreement {set;}
 
@@ -2151,7 +2146,7 @@ namespace Allors.Domain
 					OrganisationContactRelationship TakenViaOrganisationContactRelationship {set;}
 
 	}
-	public interface EngagementRate  : Object, Period, UserInterfaceable 
+	public interface EngagementRate  : Object, Period, AccessControlledObject 
 	{
 					global::System.Decimal BillingRate {set;}
 
@@ -2169,7 +2164,7 @@ namespace Allors.Domain
 	public interface EngineeringBom  : Object, PartBillOfMaterial 
 	{
 	}
-	public interface EngineeringChange  : Object, Searchable, Transitional, UserInterfaceable, SearchResult 
+	public interface EngineeringChange  : Object, Searchable, Transitional, AccessControlledObject, SearchResult 
 	{
 					Person Requestor {set;}
 
@@ -2197,7 +2192,7 @@ namespace Allors.Domain
 	public interface EngineeringChangeObjectState  : Object, ObjectState 
 	{
 	}
-	public interface EngineeringChangeStatus  : Object, UserInterfaceable 
+	public interface EngineeringChangeStatus  : Object, AccessControlledObject 
 	{
 					global::System.DateTime StartDateTime {set;}
 
@@ -2305,7 +2300,7 @@ namespace Allors.Domain
 	public interface GenderType  : Object, Enumeration 
 	{
 	}
-	public interface GeneralLedgerAccount  : Object, UniquelyIdentifiable, UserInterfaceable, Searchable, SearchResult 
+	public interface GeneralLedgerAccount  : Object, UniquelyIdentifiable, AccessControlledObject, Searchable, SearchResult 
 	{
 					Product DefaultCostUnit {set;}
 
@@ -2344,19 +2339,19 @@ namespace Allors.Domain
 					global::System.Boolean Protected {set;}
 
 	}
-	public interface GeneralLedgerAccountGroup  : Object, AccessControlledObject, UserInterfaceable 
+	public interface GeneralLedgerAccountGroup  : Object, AccessControlledObject 
 	{
 					GeneralLedgerAccountGroup Parent {set;}
 
 					global::System.String Description {set;}
 
 	}
-	public interface GeneralLedgerAccountType  : Object, UserInterfaceable, AccessControlledObject 
+	public interface GeneralLedgerAccountType  : Object, AccessControlledObject 
 	{
 					global::System.String Description {set;}
 
 	}
-	public interface GlBudgetAllocation  : Object, UserInterfaceable 
+	public interface GlBudgetAllocation  : Object, AccessControlledObject 
 	{
 					GeneralLedgerAccount GeneralLedgerAccount {set;}
 
@@ -2513,7 +2508,7 @@ namespace Allors.Domain
 					global::System.String IncomingShipmentNumberPrefix {set;}
 
 	}
-	public interface InternalOrganisationAccountingPreference  : Object, AccessControlledObject, UserInterfaceable, Searchable 
+	public interface InternalOrganisationAccountingPreference  : Object, Searchable, AccessControlledObject 
 	{
 					GeneralLedgerAccount GeneralLedgerAccount {set;}
 
@@ -2526,7 +2521,7 @@ namespace Allors.Domain
 					InternalOrganisation InternalOrganisation {set;}
 
 	}
-	public interface InternalOrganisationRevenue  : Object, UserInterfaceable, Deletable 
+	public interface InternalOrganisationRevenue  : Object, AccessControlledObject, Deletable 
 	{
 					global::System.Int32 Month {set;}
 
@@ -2541,7 +2536,7 @@ namespace Allors.Domain
 					InternalOrganisation InternalOrganisation {set;}
 
 	}
-	public interface InternalOrganisationRevenueHistory  : Object, UserInterfaceable 
+	public interface InternalOrganisationRevenueHistory  : Object, AccessControlledObject 
 	{
 					InternalOrganisation InternalOrganisation {set;}
 
@@ -2558,7 +2553,7 @@ namespace Allors.Domain
 	public interface InventoryItemKind  : Object, Enumeration 
 	{
 	}
-	public interface InventoryItemVariance  : Object, Searchable, UserInterfaceable, Commentable 
+	public interface InventoryItemVariance  : Object, Searchable, AccessControlledObject, Commentable 
 	{
 					global::System.Int32 Quantity {set;}
 
@@ -2577,10 +2572,10 @@ namespace Allors.Domain
 	public interface InvoiceSequence  : Object, Enumeration 
 	{
 	}
-	public interface InvoiceTerm  : Object, UserInterfaceable, AgreementTerm 
+	public interface InvoiceTerm  : Object, AccessControlledObject, AgreementTerm 
 	{
 	}
-	public interface InvoiceVatRateItem  : Object, UserInterfaceable 
+	public interface InvoiceVatRateItem  : Object, AccessControlledObject 
 	{
 					global::System.Decimal? BaseAmount {set;}
 
@@ -2589,7 +2584,7 @@ namespace Allors.Domain
 					global::System.Decimal? VatAmount {set;}
 
 	}
-	public interface ItemIssuance  : Object, Deletable, UserInterfaceable 
+	public interface ItemIssuance  : Object, Deletable, AccessControlledObject 
 	{
 					global::System.DateTime? IssuanceDateTime {set;}
 
@@ -2605,7 +2600,7 @@ namespace Allors.Domain
 	public interface ItemVarianceAccountingTransaction  : Object, AccountingTransaction 
 	{
 	}
-	public interface Journal  : Object, Searchable, UserInterfaceable, AccessControlledObject 
+	public interface Journal  : Object, AccessControlledObject, Searchable 
 	{
 					global::System.Boolean UseAsDefault {set;}
 
@@ -2630,7 +2625,7 @@ namespace Allors.Domain
 					global::System.Boolean CloseWhenInBalance {set;}
 
 	}
-	public interface JournalEntry  : Object, UserInterfaceable, Transitional, AccessControlledObject, Searchable 
+	public interface JournalEntry  : Object, Transitional, AccessControlledObject, Searchable 
 	{
 					global::System.String Description {set;}
 
@@ -2643,7 +2638,7 @@ namespace Allors.Domain
 					JournalEntryDetail JournalEntryDetails {set;}
 
 	}
-	public interface JournalEntryDetail  : Object, AccessControlledObject, UserInterfaceable 
+	public interface JournalEntryDetail  : Object, AccessControlledObject 
 	{
 					OrganisationGlAccount GeneralLedgerAccount {set;}
 
@@ -2652,7 +2647,7 @@ namespace Allors.Domain
 					global::System.Boolean? Debit {set;}
 
 	}
-	public interface JournalEntryNumber  : Object, UserInterfaceable, AccessControlledObject 
+	public interface JournalEntryNumber  : Object, AccessControlledObject 
 	{
 					JournalType JournalType {set;}
 
@@ -2664,7 +2659,7 @@ namespace Allors.Domain
 	public interface JournalType  : Object, Enumeration 
 	{
 	}
-	public interface LegalForm  : Object, UserInterfaceable, Searchable 
+	public interface LegalForm  : Object, AccessControlledObject, Searchable 
 	{
 					global::System.String Description {set;}
 
@@ -2681,7 +2676,7 @@ namespace Allors.Domain
 					Party Receivers {set;}
 
 	}
-	public interface Lot  : Object, Searchable, UserInterfaceable 
+	public interface Lot  : Object, Searchable, AccessControlledObject 
 	{
 					global::System.DateTime? ExpirationDate {set;}
 
@@ -2732,7 +2727,7 @@ namespace Allors.Domain
 	public interface Model  : Object, ProductFeature, Enumeration 
 	{
 	}
-	public interface NeededSkill  : Object, UserInterfaceable 
+	public interface NeededSkill  : Object, AccessControlledObject 
 	{
 					SkillLevel SkillLevel {set;}
 
@@ -2741,7 +2736,7 @@ namespace Allors.Domain
 					Skill Skill {set;}
 
 	}
-	public interface NewsItem  : Object, Searchable, SearchResult, UserInterfaceable 
+	public interface NewsItem  : Object, Searchable, SearchResult, AccessControlledObject 
 	{
 					global::System.Boolean? IsPublished {set;}
 
@@ -2784,7 +2779,7 @@ namespace Allors.Domain
 	public interface NonSerializedInventoryItemObjectState  : Object, ObjectState 
 	{
 	}
-	public interface NonSerializedInventoryItemStatus  : Object, UserInterfaceable 
+	public interface NonSerializedInventoryItemStatus  : Object, AccessControlledObject 
 	{
 					global::System.DateTime StartDateTime {set;}
 
@@ -2820,21 +2815,21 @@ namespace Allors.Domain
 					global::System.Decimal? Quantity {set;}
 
 	}
-	public interface OrderKind  : Object, Searchable, UserInterfaceable, UniquelyIdentifiable, AccessControlledObject 
+	public interface OrderKind  : Object, Searchable, UniquelyIdentifiable, AccessControlledObject 
 	{
 					global::System.String Description {set;}
 
 					global::System.Boolean ScheduleManually {set;}
 
 	}
-	public interface OrderQuantityBreak  : Object, UserInterfaceable 
+	public interface OrderQuantityBreak  : Object, AccessControlledObject 
 	{
 					global::System.Decimal? ThroughAmount {set;}
 
 					global::System.Decimal? FromAmount {set;}
 
 	}
-	public interface OrderRequirementCommitment  : Object, UserInterfaceable 
+	public interface OrderRequirementCommitment  : Object, AccessControlledObject 
 	{
 					global::System.Int32 Quantity {set;}
 
@@ -2856,14 +2851,14 @@ namespace Allors.Domain
 					PurchaseOrderItem PurchaseOrderItem {set;}
 
 	}
-	public interface OrderTerm  : Object, UserInterfaceable, Searchable 
+	public interface OrderTerm  : Object, AccessControlledObject, Searchable 
 	{
 					global::System.String TermValue {set;}
 
 					TermType TermType {set;}
 
 	}
-	public interface OrderValue  : Object, UserInterfaceable 
+	public interface OrderValue  : Object, AccessControlledObject 
 	{
 					global::System.Decimal? ThroughAmount {set;}
 
@@ -2894,7 +2889,7 @@ namespace Allors.Domain
 					OrganisationClassification OrganisationClassifications {set;}
 
 	}
-	public interface OrganisationContactKind  : Object, UserInterfaceable, UniquelyIdentifiable 
+	public interface OrganisationContactKind  : Object, AccessControlledObject, UniquelyIdentifiable 
 	{
 					global::System.String Description {set;}
 
@@ -2908,7 +2903,7 @@ namespace Allors.Domain
 					OrganisationContactKind ContactKinds {set;}
 
 	}
-	public interface OrganisationGlAccount  : Object, UserInterfaceable, Period 
+	public interface OrganisationGlAccount  : Object, AccessControlledObject, Period 
 	{
 					Product Product {set;}
 
@@ -2925,7 +2920,7 @@ namespace Allors.Domain
 					GeneralLedgerAccount GeneralLedgerAccount {set;}
 
 	}
-	public interface OrganisationGlAccountBalance  : Object, UserInterfaceable 
+	public interface OrganisationGlAccountBalance  : Object, AccessControlledObject 
 	{
 					OrganisationGlAccount OrganisationGlAccount {set;}
 
@@ -2958,19 +2953,19 @@ namespace Allors.Domain
 					CreditCard CreditCard {set;}
 
 	}
-	public interface Package  : Object, UniquelyIdentifiable, UserInterfaceable, Searchable 
+	public interface Package  : Object, UniquelyIdentifiable, AccessControlledObject, Searchable 
 	{
 					global::System.String Name {set;}
 
 	}
-	public interface PackageQuantityBreak  : Object, UserInterfaceable 
+	public interface PackageQuantityBreak  : Object, AccessControlledObject 
 	{
 					global::System.Int32? From {set;}
 
 					global::System.Int32? Through {set;}
 
 	}
-	public interface PackageRevenue  : Object, Deletable, UserInterfaceable 
+	public interface PackageRevenue  : Object, Deletable, AccessControlledObject 
 	{
 					global::System.Decimal Revenue {set;}
 
@@ -2987,7 +2982,7 @@ namespace Allors.Domain
 					Package Package {set;}
 
 	}
-	public interface PackageRevenueHistory  : Object, UserInterfaceable 
+	public interface PackageRevenueHistory  : Object, AccessControlledObject 
 	{
 					InternalOrganisation InternalOrganisation {set;}
 
@@ -2998,7 +2993,7 @@ namespace Allors.Domain
 					Currency Currency {set;}
 
 	}
-	public interface PackagingContent  : Object, UserInterfaceable 
+	public interface PackagingContent  : Object, AccessControlledObject 
 	{
 					ShipmentItem ShipmentItem {set;}
 
@@ -3008,7 +3003,7 @@ namespace Allors.Domain
 	public interface PackagingSlip  : Object, Document 
 	{
 	}
-	public interface PartBillOfMaterialSubstitute  : Object, Period, UserInterfaceable, Commentable 
+	public interface PartBillOfMaterialSubstitute  : Object, Period, AccessControlledObject, Commentable 
 	{
 					PartBillOfMaterial SubstitutionPartBillOfMaterial {set;}
 
@@ -3026,7 +3021,7 @@ namespace Allors.Domain
 					Organisation Partner {set;}
 
 	}
-	public interface PartRevision  : Object, Period, UserInterfaceable 
+	public interface PartRevision  : Object, Period, AccessControlledObject 
 	{
 					global::System.String Reason {set;}
 
@@ -3038,14 +3033,14 @@ namespace Allors.Domain
 	public interface PartSpecificationObjectState  : Object, ObjectState 
 	{
 	}
-	public interface PartSpecificationStatus  : Object, UserInterfaceable 
+	public interface PartSpecificationStatus  : Object, AccessControlledObject 
 	{
 					global::System.DateTime StartDateTime {set;}
 
 					PartSpecificationObjectState PartSpecificationObjectState {set;}
 
 	}
-	public interface PartSubstitute  : Object, Commentable, UserInterfaceable 
+	public interface PartSubstitute  : Object, Commentable, AccessControlledObject 
 	{
 					Part SubstitutionPart {set;}
 
@@ -3058,7 +3053,7 @@ namespace Allors.Domain
 					Part Part {set;}
 
 	}
-	public interface PartyBenefit  : Object, UserInterfaceable 
+	public interface PartyBenefit  : Object, AccessControlledObject 
 	{
 					TimeFrequency TimeFrequency {set;}
 
@@ -3073,7 +3068,7 @@ namespace Allors.Domain
 					Employment Employment {set;}
 
 	}
-	public interface PartyContactMechanism  : Object, Commentable, UserInterfaceable 
+	public interface PartyContactMechanism  : Object, Commentable, AccessControlledObject 
 	{
 					ContactMechanismPurpose ContactPurpose {set;}
 
@@ -3084,7 +3079,7 @@ namespace Allors.Domain
 					global::System.Boolean? NonSolicitationIndicator {set;}
 
 	}
-	public interface PartyFixedAssetAssignment  : Object, UserInterfaceable, Period, Commentable 
+	public interface PartyFixedAssetAssignment  : Object, AccessControlledObject, Period, Commentable 
 	{
 					FixedAsset FixedAsset {set;}
 
@@ -3095,7 +3090,7 @@ namespace Allors.Domain
 					global::System.Decimal? AllocatedCost {set;}
 
 	}
-	public interface PartyPackageRevenue  : Object, UserInterfaceable, Deletable 
+	public interface PartyPackageRevenue  : Object, AccessControlledObject, Deletable 
 	{
 					global::System.Int32 Month {set;}
 
@@ -3114,7 +3109,7 @@ namespace Allors.Domain
 					InternalOrganisation InternalOrganisation {set;}
 
 	}
-	public interface PartyPackageRevenueHistory  : Object, UserInterfaceable 
+	public interface PartyPackageRevenueHistory  : Object, AccessControlledObject 
 	{
 					Package Package {set;}
 
@@ -3127,7 +3122,7 @@ namespace Allors.Domain
 					global::System.Decimal? Revenue {set;}
 
 	}
-	public interface PartyProductCategoryRevenue  : Object, UserInterfaceable, Deletable 
+	public interface PartyProductCategoryRevenue  : Object, AccessControlledObject, Deletable 
 	{
 					Party Party {set;}
 
@@ -3148,7 +3143,7 @@ namespace Allors.Domain
 					global::System.Decimal Quantity {set;}
 
 	}
-	public interface PartyProductCategoryRevenueHistory  : Object, UserInterfaceable 
+	public interface PartyProductCategoryRevenueHistory  : Object, AccessControlledObject 
 	{
 					ProductCategory ProductCategory {set;}
 
@@ -3163,7 +3158,7 @@ namespace Allors.Domain
 					Currency Currency {set;}
 
 	}
-	public interface PartyProductRevenue  : Object, Deletable, UserInterfaceable 
+	public interface PartyProductRevenue  : Object, Deletable, AccessControlledObject 
 	{
 					global::System.Decimal Revenue {set;}
 
@@ -3184,7 +3179,7 @@ namespace Allors.Domain
 					Product Product {set;}
 
 	}
-	public interface PartyProductRevenueHistory  : Object, UserInterfaceable 
+	public interface PartyProductRevenueHistory  : Object, AccessControlledObject 
 	{
 					global::System.Decimal? Revenue {set;}
 
@@ -3202,7 +3197,7 @@ namespace Allors.Domain
 	public interface PartyRelationshipStatus  : Object, Enumeration 
 	{
 	}
-	public interface PartyRevenue  : Object, UserInterfaceable, Deletable 
+	public interface PartyRevenue  : Object, AccessControlledObject, Deletable 
 	{
 					Currency Currency {set;}
 
@@ -3219,7 +3214,7 @@ namespace Allors.Domain
 					global::System.Decimal Revenue {set;}
 
 	}
-	public interface PartyRevenueHistory  : Object, UserInterfaceable 
+	public interface PartyRevenueHistory  : Object, AccessControlledObject 
 	{
 					Currency Currency {set;}
 
@@ -3230,7 +3225,7 @@ namespace Allors.Domain
 					InternalOrganisation InternalOrganisation {set;}
 
 	}
-	public interface PartySkill  : Object, UserInterfaceable 
+	public interface PartySkill  : Object, AccessControlledObject 
 	{
 					global::System.Decimal? YearsExperience {set;}
 
@@ -3243,7 +3238,7 @@ namespace Allors.Domain
 					Skill Skill {set;}
 
 	}
-	public interface Passport  : Object, UserInterfaceable, Searchable 
+	public interface Passport  : Object, AccessControlledObject, Searchable 
 	{
 					global::System.DateTime? IssueDate {set;}
 
@@ -3259,14 +3254,14 @@ namespace Allors.Domain
 					Employment Employment {set;}
 
 	}
-	public interface PayGrade  : Object, UserInterfaceable, Commentable 
+	public interface PayGrade  : Object, AccessControlledObject, Commentable 
 	{
 					global::System.String Name {set;}
 
 					SalaryStep SalarySteps {set;}
 
 	}
-	public interface PayHistory  : Object, UserInterfaceable, Period 
+	public interface PayHistory  : Object, AccessControlledObject, Period 
 	{
 					Employment Employment {set;}
 
@@ -3277,7 +3272,7 @@ namespace Allors.Domain
 					global::System.Decimal? Amount {set;}
 
 	}
-	public interface PaymentApplication  : Object, UserInterfaceable 
+	public interface PaymentApplication  : Object, AccessControlledObject 
 	{
 					global::System.Decimal AmountApplied {set;}
 
@@ -3288,7 +3283,7 @@ namespace Allors.Domain
 					BillingAccount BillingAccount {set;}
 
 	}
-	public interface PaymentBudgetAllocation  : Object, UserInterfaceable 
+	public interface PaymentBudgetAllocation  : Object, AccessControlledObject 
 	{
 					Payment Payment {set;}
 
@@ -3297,7 +3292,7 @@ namespace Allors.Domain
 					global::System.Decimal Amount {set;}
 
 	}
-	public interface PayrollPreference  : Object, UserInterfaceable 
+	public interface PayrollPreference  : Object, AccessControlledObject 
 	{
 					global::System.Decimal? Percentage {set;}
 
@@ -3312,7 +3307,7 @@ namespace Allors.Domain
 					global::System.Decimal? Amount {set;}
 
 	}
-	public interface PerformanceNote  : Object, Searchable, UserInterfaceable, Commentable, SearchResult 
+	public interface PerformanceNote  : Object, Searchable, AccessControlledObject, Commentable, SearchResult 
 	{
 					global::System.String Description {set;}
 
@@ -3323,7 +3318,7 @@ namespace Allors.Domain
 					Person Employee {set;}
 
 	}
-	public interface PerformanceReview  : Object, Searchable, UserInterfaceable, Commentable, SearchResult, Period 
+	public interface PerformanceReview  : Object, Searchable, AccessControlledObject, Commentable, SearchResult, Period 
 	{
 					Person Manager {set;}
 
@@ -3338,7 +3333,7 @@ namespace Allors.Domain
 					Position ResultingPosition {set;}
 
 	}
-	public interface PerformanceReviewItem  : Object, Commentable, UserInterfaceable 
+	public interface PerformanceReviewItem  : Object, Commentable, AccessControlledObject 
 	{
 					RatingType RatingType {set;}
 
@@ -3354,7 +3349,7 @@ namespace Allors.Domain
 	public interface PersonalTitle  : Object, Enumeration 
 	{
 	}
-	public interface PersonTraining  : Object, Period, UserInterfaceable 
+	public interface PersonTraining  : Object, Period, AccessControlledObject 
 	{
 					Training Training {set;}
 
@@ -3373,7 +3368,7 @@ namespace Allors.Domain
 					Party Caller {set;}
 
 	}
-	public interface PickList  : Object, UserInterfaceable, SearchResult, Printable, Transitional, Searchable, UniquelyIdentifiable 
+	public interface PickList  : Object, AccessControlledObject, SearchResult, Printable, Transitional, Searchable, UniquelyIdentifiable 
 	{
 					CustomerShipment CustomerShipmentCorrection {set;}
 
@@ -3396,7 +3391,7 @@ namespace Allors.Domain
 					Store Store {set;}
 
 	}
-	public interface PickListItem  : Object, UserInterfaceable, Deletable 
+	public interface PickListItem  : Object, AccessControlledObject, Deletable 
 	{
 					global::System.Decimal RequestedQuantity {set;}
 
@@ -3408,7 +3403,7 @@ namespace Allors.Domain
 	public interface PickListObjectState  : Object, ObjectState 
 	{
 	}
-	public interface PickListStatus  : Object, UserInterfaceable, AccessControlledObject 
+	public interface PickListStatus  : Object, AccessControlledObject 
 	{
 					PickListObjectState PickListObjectState {set;}
 
@@ -3418,7 +3413,7 @@ namespace Allors.Domain
 	public interface Plant  : Object, Facility 
 	{
 	}
-	public interface Position  : Object, UserInterfaceable, SearchResult, Searchable 
+	public interface Position  : Object, AccessControlledObject, SearchResult, Searchable 
 	{
 					Organisation Organisation {set;}
 
@@ -3443,14 +3438,14 @@ namespace Allors.Domain
 					global::System.DateTime? ActualThroughDate {set;}
 
 	}
-	public interface PositionFulfillment  : Object, Commentable, Period, UserInterfaceable 
+	public interface PositionFulfillment  : Object, Commentable, Period, AccessControlledObject 
 	{
 					Position Position {set;}
 
 					Person Person {set;}
 
 	}
-	public interface PositionReportingStructure  : Object, UserInterfaceable, Commentable 
+	public interface PositionReportingStructure  : Object, AccessControlledObject, Commentable 
 	{
 					global::System.Boolean? Primary {set;}
 
@@ -3459,7 +3454,7 @@ namespace Allors.Domain
 					Position Position {set;}
 
 	}
-	public interface PositionResponsibility  : Object, Commentable, UserInterfaceable 
+	public interface PositionResponsibility  : Object, Commentable, AccessControlledObject 
 	{
 					Position Position {set;}
 
@@ -3469,7 +3464,7 @@ namespace Allors.Domain
 	public interface PositionStatus  : Object, Enumeration 
 	{
 	}
-	public interface PositionType  : Object, Searchable, UserInterfaceable 
+	public interface PositionType  : Object, Searchable, AccessControlledObject 
 	{
 					global::System.String Description {set;}
 
@@ -3482,7 +3477,7 @@ namespace Allors.Domain
 					PositionTypeRate PositionTypeRate {set;}
 
 	}
-	public interface PositionTypeRate  : Object, AccessControlledObject, UserInterfaceable 
+	public interface PositionTypeRate  : Object, AccessControlledObject 
 	{
 					global::System.Decimal Rate {set;}
 
@@ -3514,7 +3509,7 @@ namespace Allors.Domain
 					global::System.String FormattedFullAddress {set;}
 
 	}
-	public interface PostalBoundary  : Object, UserInterfaceable 
+	public interface PostalBoundary  : Object, AccessControlledObject 
 	{
 					global::System.String PostalCode {set;}
 
@@ -3525,7 +3520,7 @@ namespace Allors.Domain
 					global::System.String Region {set;}
 
 	}
-	public interface PostalCode  : Object, CountryBound, UserInterfaceable, GeographicBoundary 
+	public interface PostalCode  : Object, CountryBound, AccessControlledObject, GeographicBoundary 
 	{
 					global::System.String Code {set;}
 
@@ -3533,7 +3528,7 @@ namespace Allors.Domain
 	public interface Priority  : Object, Enumeration 
 	{
 	}
-	public interface ProductCategory  : Object, UserInterfaceable, Searchable, SearchResult, UniquelyIdentifiable 
+	public interface ProductCategory  : Object, AccessControlledObject, Searchable, SearchResult, UniquelyIdentifiable 
 	{
 					Package Package {set;}
 
@@ -3554,7 +3549,7 @@ namespace Allors.Domain
 					ProductCategory Ancestors {set;}
 
 	}
-	public interface ProductCategoryRevenue  : Object, Deletable, UserInterfaceable 
+	public interface ProductCategoryRevenue  : Object, Deletable, AccessControlledObject 
 	{
 					global::System.String ProductCategoryName {set;}
 
@@ -3571,7 +3566,7 @@ namespace Allors.Domain
 					global::System.Int32 Year {set;}
 
 	}
-	public interface ProductCategoryRevenueHistory  : Object, UserInterfaceable 
+	public interface ProductCategoryRevenueHistory  : Object, AccessControlledObject 
 	{
 					Currency Currency {set;}
 
@@ -3593,7 +3588,7 @@ namespace Allors.Domain
 					global::System.String Description {set;}
 
 	}
-	public interface ProductDeliverySkillRequirement  : Object, UserInterfaceable 
+	public interface ProductDeliverySkillRequirement  : Object, AccessControlledObject 
 	{
 					global::System.DateTime? StartedUsingDate {set;}
 
@@ -3605,7 +3600,7 @@ namespace Allors.Domain
 	public interface ProductDrawing  : Object, Document 
 	{
 	}
-	public interface ProductFeatureApplicabilityRelationship  : Object, UserInterfaceable 
+	public interface ProductFeatureApplicabilityRelationship  : Object, AccessControlledObject 
 	{
 					Product AvailableFor {set;}
 
@@ -3624,7 +3619,7 @@ namespace Allors.Domain
 	public interface ProductModel  : Object, Document 
 	{
 	}
-	public interface ProductPurchasePrice  : Object, AccessControlledObject, Period, UserInterfaceable 
+	public interface ProductPurchasePrice  : Object, AccessControlledObject, Period 
 	{
 					global::System.Decimal Price {set;}
 
@@ -3646,7 +3641,7 @@ namespace Allors.Domain
 					DesiredProductFeature DesiredProductFeatures {set;}
 
 	}
-	public interface ProductRevenue  : Object, Deletable, UserInterfaceable 
+	public interface ProductRevenue  : Object, Deletable, AccessControlledObject 
 	{
 					global::System.Decimal Revenue {set;}
 
@@ -3663,7 +3658,7 @@ namespace Allors.Domain
 					InternalOrganisation InternalOrganisation {set;}
 
 	}
-	public interface ProductRevenueHistory  : Object, UserInterfaceable 
+	public interface ProductRevenueHistory  : Object, AccessControlledObject 
 	{
 					InternalOrganisation InternalOrganisation {set;}
 
@@ -3674,7 +3669,7 @@ namespace Allors.Domain
 					Product Product {set;}
 
 	}
-	public interface ProfessionalAssignment  : Object, UserInterfaceable, Period 
+	public interface ProfessionalAssignment  : Object, AccessControlledObject, Period 
 	{
 					Person Professional {set;}
 
@@ -3708,7 +3703,7 @@ namespace Allors.Domain
 	public interface Proposal  : Object, Quote 
 	{
 	}
-	public interface Province  : Object, CityBound, GeographicBoundary, CountryBound, UserInterfaceable 
+	public interface Province  : Object, CityBound, GeographicBoundary, CountryBound, AccessControlledObject 
 	{
 					global::System.String Name {set;}
 
@@ -3753,7 +3748,7 @@ namespace Allors.Domain
 	public interface PurchaseInvoiceItemObjectState  : Object, ObjectState 
 	{
 	}
-	public interface PurchaseInvoiceItemStatus  : Object, UserInterfaceable 
+	public interface PurchaseInvoiceItemStatus  : Object, AccessControlledObject 
 	{
 					PurchaseInvoiceItemObjectState PurchaseInvoiceItemObjectState {set;}
 
@@ -3766,7 +3761,7 @@ namespace Allors.Domain
 	public interface PurchaseInvoiceObjectState  : Object, ObjectState 
 	{
 	}
-	public interface PurchaseInvoiceStatus  : Object, UserInterfaceable 
+	public interface PurchaseInvoiceStatus  : Object, AccessControlledObject 
 	{
 					global::System.DateTime? StartDateTime {set;}
 
@@ -3841,7 +3836,7 @@ namespace Allors.Domain
 	public interface PurchaseOrderItemObjectState  : Object, ObjectState 
 	{
 	}
-	public interface PurchaseOrderItemStatus  : Object, UserInterfaceable 
+	public interface PurchaseOrderItemStatus  : Object, AccessControlledObject 
 	{
 					global::System.DateTime StartDateTime {set;}
 
@@ -3851,7 +3846,7 @@ namespace Allors.Domain
 	public interface PurchaseOrderObjectState  : Object, ObjectState 
 	{
 	}
-	public interface PurchaseOrderStatus  : Object, UserInterfaceable 
+	public interface PurchaseOrderStatus  : Object, AccessControlledObject 
 	{
 					PurchaseOrderObjectState PurchaseOrderObjectState {set;}
 
@@ -3872,7 +3867,7 @@ namespace Allors.Domain
 	public interface PurchaseReturnObjectState  : Object, ObjectState 
 	{
 	}
-	public interface PurchaseReturnStatus  : Object, UserInterfaceable 
+	public interface PurchaseReturnStatus  : Object, AccessControlledObject 
 	{
 					PurchaseReturnObjectState PurchaseReturnObjectState {set;}
 
@@ -3897,7 +3892,7 @@ namespace Allors.Domain
 	public interface PurchaseShipmentObjectState  : Object, ObjectState 
 	{
 	}
-	public interface PurchaseShipmentStatus  : Object, UserInterfaceable 
+	public interface PurchaseShipmentStatus  : Object, AccessControlledObject 
 	{
 					PurchaseShipmentObjectState PurchaseShipmentObjectState {set;}
 
@@ -3907,7 +3902,7 @@ namespace Allors.Domain
 	public interface Qualification  : Object, Enumeration, Searchable 
 	{
 	}
-	public interface QuoteItem  : Object, Commentable, UserInterfaceable 
+	public interface QuoteItem  : Object, Commentable, AccessControlledObject 
 	{
 					Party Authorizer {set;}
 
@@ -3934,7 +3929,7 @@ namespace Allors.Domain
 					RequestItem RequestItem {set;}
 
 	}
-	public interface QuoteTerm  : Object, Searchable, UserInterfaceable 
+	public interface QuoteTerm  : Object, Searchable, AccessControlledObject 
 	{
 					global::System.String TermValue {set;}
 
@@ -3963,7 +3958,7 @@ namespace Allors.Domain
 					TimeFrequency TimeFrequency {set;}
 
 	}
-	public interface Region  : Object, GeographicBoundaryComposite, UserInterfaceable 
+	public interface Region  : Object, GeographicBoundaryComposite, AccessControlledObject 
 	{
 					global::System.String Name {set;}
 
@@ -3977,7 +3972,7 @@ namespace Allors.Domain
 	public interface RequestForQuote  : Object, Request 
 	{
 	}
-	public interface RequestItem  : Object, UserInterfaceable, Commentable 
+	public interface RequestItem  : Object, AccessControlledObject, Commentable 
 	{
 					global::System.String Description {set;}
 
@@ -3998,7 +3993,7 @@ namespace Allors.Domain
 					global::System.DateTime? RequiredByDate {set;}
 
 	}
-	public interface RequirementBudgetAllocation  : Object, Searchable, UserInterfaceable 
+	public interface RequirementBudgetAllocation  : Object, Searchable, AccessControlledObject 
 	{
 					BudgetItem BudgetItem {set;}
 
@@ -4007,7 +4002,7 @@ namespace Allors.Domain
 					global::System.Decimal Amount {set;}
 
 	}
-	public interface RequirementCommunication  : Object, UserInterfaceable 
+	public interface RequirementCommunication  : Object, AccessControlledObject 
 	{
 					CommunicationEvent CommunicationEvent {set;}
 
@@ -4019,7 +4014,7 @@ namespace Allors.Domain
 	public interface RequirementObjectState  : Object, ObjectState 
 	{
 	}
-	public interface RequirementStatus  : Object, UserInterfaceable 
+	public interface RequirementStatus  : Object, AccessControlledObject 
 	{
 					RequirementObjectState RequirementObjectState {set;}
 
@@ -4042,7 +4037,7 @@ namespace Allors.Domain
 					global::System.DateTime? RequiredEndDate {set;}
 
 	}
-	public interface RespondingParty  : Object, UserInterfaceable 
+	public interface RespondingParty  : Object, AccessControlledObject 
 	{
 					global::System.DateTime? SendingDate {set;}
 
@@ -4051,26 +4046,26 @@ namespace Allors.Domain
 					Party Party {set;}
 
 	}
-	public interface Responsibility  : Object, UserInterfaceable, Searchable 
+	public interface Responsibility  : Object, AccessControlledObject, Searchable 
 	{
 					global::System.String Description {set;}
 
 	}
-	public interface Resume  : Object, Searchable, UserInterfaceable 
+	public interface Resume  : Object, Searchable, AccessControlledObject 
 	{
 					global::System.DateTime ResumeDate {set;}
 
 					global::System.String ResumeText {set;}
 
 	}
-	public interface RevenueQuantityBreak  : Object, UserInterfaceable 
+	public interface RevenueQuantityBreak  : Object, AccessControlledObject 
 	{
 					global::System.Decimal? Through {set;}
 
 					global::System.Decimal? From {set;}
 
 	}
-	public interface RevenueValueBreak  : Object, UserInterfaceable 
+	public interface RevenueValueBreak  : Object, AccessControlledObject 
 	{
 					global::System.Decimal? ThroughAmount {set;}
 
@@ -4080,7 +4075,7 @@ namespace Allors.Domain
 	public interface Room  : Object, Facility, Container 
 	{
 	}
-	public interface SalaryStep  : Object, UserInterfaceable 
+	public interface SalaryStep  : Object, AccessControlledObject 
 	{
 					global::System.DateTime ModifiedDate {set;}
 
@@ -4098,7 +4093,7 @@ namespace Allors.Domain
 	public interface SalesChannel  : Object, Searchable, Enumeration 
 	{
 	}
-	public interface SalesChannelRevenue  : Object, UserInterfaceable, Deletable 
+	public interface SalesChannelRevenue  : Object, AccessControlledObject, Deletable 
 	{
 					global::System.Int32 Year {set;}
 
@@ -4115,7 +4110,7 @@ namespace Allors.Domain
 					InternalOrganisation InternalOrganisation {set;}
 
 	}
-	public interface SalesChannelRevenueHistory  : Object, UserInterfaceable 
+	public interface SalesChannelRevenueHistory  : Object, AccessControlledObject 
 	{
 					SalesChannel SalesChannel {set;}
 
@@ -4225,7 +4220,7 @@ namespace Allors.Domain
 	public interface SalesInvoiceItemObjectState  : Object, ObjectState 
 	{
 	}
-	public interface SalesInvoiceItemStatus  : Object, UserInterfaceable 
+	public interface SalesInvoiceItemStatus  : Object, AccessControlledObject 
 	{
 					global::System.DateTime StartDateTime {set;}
 
@@ -4238,7 +4233,7 @@ namespace Allors.Domain
 	public interface SalesInvoiceObjectState  : Object, ObjectState 
 	{
 	}
-	public interface SalesInvoiceStatus  : Object, UserInterfaceable 
+	public interface SalesInvoiceStatus  : Object, AccessControlledObject 
 	{
 					SalesInvoiceObjectState SalesInvoiceObjectState {set;}
 
@@ -4393,7 +4388,7 @@ namespace Allors.Domain
 	public interface SalesOrderItemObjectState  : Object, ObjectState 
 	{
 	}
-	public interface SalesOrderItemStatus  : Object, UserInterfaceable 
+	public interface SalesOrderItemStatus  : Object, AccessControlledObject 
 	{
 					SalesOrderItemObjectState SalesOrderItemObjectState {set;}
 
@@ -4403,14 +4398,14 @@ namespace Allors.Domain
 	public interface SalesOrderObjectState  : Object, ObjectState 
 	{
 	}
-	public interface SalesOrderStatus  : Object, UserInterfaceable 
+	public interface SalesOrderStatus  : Object, AccessControlledObject 
 	{
 					global::System.DateTime StartDateTime {set;}
 
 					SalesOrderObjectState SalesOrderObjectState {set;}
 
 	}
-	public interface SalesRepCommission  : Object, UserInterfaceable 
+	public interface SalesRepCommission  : Object, AccessControlledObject 
 	{
 					global::System.Decimal? Commission {set;}
 
@@ -4427,7 +4422,7 @@ namespace Allors.Domain
 					Person SalesRep {set;}
 
 	}
-	public interface SalesRepPartyProductCategoryRevenue  : Object, UserInterfaceable, Deletable 
+	public interface SalesRepPartyProductCategoryRevenue  : Object, AccessControlledObject, Deletable 
 	{
 					global::System.Int32 Year {set;}
 
@@ -4448,7 +4443,7 @@ namespace Allors.Domain
 					global::System.String SalesRepName {set;}
 
 	}
-	public interface SalesRepPartyRevenue  : Object, UserInterfaceable, Deletable 
+	public interface SalesRepPartyRevenue  : Object, AccessControlledObject, Deletable 
 	{
 					global::System.Decimal Revenue {set;}
 
@@ -4467,7 +4462,7 @@ namespace Allors.Domain
 					global::System.Int32 Month {set;}
 
 	}
-	public interface SalesRepProductCategoryRevenue  : Object, UserInterfaceable, Deletable 
+	public interface SalesRepProductCategoryRevenue  : Object, AccessControlledObject, Deletable 
 	{
 					global::System.Int32 Month {set;}
 
@@ -4486,7 +4481,7 @@ namespace Allors.Domain
 					Person SalesRep {set;}
 
 	}
-	public interface SalesRepRelationship  : Object, UserInterfaceable, Commentable, AccessControlledObject, Period, PartyRelationship 
+	public interface SalesRepRelationship  : Object, AccessControlledObject, Commentable, Period, PartyRelationship 
 	{
 					Person SalesRepresentative {set;}
 
@@ -4501,7 +4496,7 @@ namespace Allors.Domain
 					Party Customer {set;}
 
 	}
-	public interface SalesRepRevenue  : Object, UserInterfaceable, Deletable 
+	public interface SalesRepRevenue  : Object, AccessControlledObject, Deletable 
 	{
 					global::System.Decimal Revenue {set;}
 
@@ -4518,7 +4513,7 @@ namespace Allors.Domain
 					Person SalesRep {set;}
 
 	}
-	public interface SalesRepRevenueHistory  : Object, UserInterfaceable 
+	public interface SalesRepRevenueHistory  : Object, AccessControlledObject 
 	{
 					Currency Currency {set;}
 
@@ -4529,12 +4524,12 @@ namespace Allors.Domain
 					global::System.Decimal? Revenue {set;}
 
 	}
-	public interface SalesTerritory  : Object, UserInterfaceable, GeographicBoundaryComposite 
+	public interface SalesTerritory  : Object, AccessControlledObject, GeographicBoundaryComposite 
 	{
 					global::System.String Name {set;}
 
 	}
-	public interface Salutation  : Object, UserInterfaceable, Enumeration, UniquelyIdentifiable, AccessControlledObject 
+	public interface Salutation  : Object, AccessControlledObject, Enumeration, UniquelyIdentifiable 
 	{
 	}
 	public interface SerializedInventoryItem  : Object, InventoryItem 
@@ -4553,7 +4548,7 @@ namespace Allors.Domain
 	public interface SerializedInventoryItemObjectState  : Object, ObjectState 
 	{
 	}
-	public interface SerializedInventoryItemStatus  : Object, UserInterfaceable 
+	public interface SerializedInventoryItemStatus  : Object, AccessControlledObject 
 	{
 					global::System.DateTime StartDateTime {set;}
 
@@ -4570,7 +4565,7 @@ namespace Allors.Domain
 					InvoiceItem InvoiceItem {set;}
 
 	}
-	public interface ServiceEntryHeader  : Object, Period, UserInterfaceable 
+	public interface ServiceEntryHeader  : Object, Period, AccessControlledObject 
 	{
 					ServiceEntry ServiceEntries {set;}
 
@@ -4582,7 +4577,7 @@ namespace Allors.Domain
 	public interface ServiceFeature  : Object, Enumeration, ProductFeature 
 	{
 	}
-	public interface ServiceTerritory  : Object, UserInterfaceable, GeographicBoundaryComposite 
+	public interface ServiceTerritory  : Object, AccessControlledObject, GeographicBoundaryComposite 
 	{
 					global::System.String Name {set;}
 
@@ -4590,7 +4585,7 @@ namespace Allors.Domain
 	public interface Shelf  : Object, Container 
 	{
 	}
-	public interface ShipmentItem  : Object, Deletable, UserInterfaceable 
+	public interface ShipmentItem  : Object, Deletable, AccessControlledObject 
 	{
 					global::System.Decimal Quantity {set;}
 
@@ -4616,7 +4611,7 @@ namespace Allors.Domain
 	public interface ShipmentMethod  : Object, Enumeration 
 	{
 	}
-	public interface ShipmentPackage  : Object, UserInterfaceable, UniquelyIdentifiable, Printable 
+	public interface ShipmentPackage  : Object, AccessControlledObject, UniquelyIdentifiable, Printable 
 	{
 					PackagingContent PackagingContents {set;}
 
@@ -4627,7 +4622,7 @@ namespace Allors.Domain
 					global::System.Int32 SequenceNumber {set;}
 
 	}
-	public interface ShipmentReceipt  : Object, UserInterfaceable 
+	public interface ShipmentReceipt  : Object, AccessControlledObject 
 	{
 					global::System.String ItemDescription {set;}
 
@@ -4646,7 +4641,7 @@ namespace Allors.Domain
 					global::System.Decimal QuantityAccepted {set;}
 
 	}
-	public interface ShipmentRouteSegment  : Object, UserInterfaceable 
+	public interface ShipmentRouteSegment  : Object, AccessControlledObject 
 	{
 					global::System.Decimal? EndKilometers {set;}
 
@@ -4671,7 +4666,7 @@ namespace Allors.Domain
 					Organisation Carrier {set;}
 
 	}
-	public interface ShipmentValue  : Object, UserInterfaceable 
+	public interface ShipmentValue  : Object, AccessControlledObject 
 	{
 					global::System.Decimal? ThroughAmount {set;}
 
@@ -4681,7 +4676,7 @@ namespace Allors.Domain
 	public interface ShippingAndHandlingCharge  : Object, OrderAdjustment 
 	{
 	}
-	public interface ShippingAndHandlingComponent  : Object, SearchResult, UserInterfaceable, Period, Searchable 
+	public interface ShippingAndHandlingComponent  : Object, SearchResult, AccessControlledObject, Period, Searchable 
 	{
 					global::System.Decimal? Cost {set;}
 
@@ -4724,7 +4719,7 @@ namespace Allors.Domain
 	public interface StatementOfWork  : Object, Quote 
 	{
 	}
-	public interface Store  : Object, UniquelyIdentifiable, UserInterfaceable 
+	public interface Store  : Object, UniquelyIdentifiable, AccessControlledObject 
 	{
 					global::System.Decimal ShipmentThreshold {set;}
 
@@ -4773,7 +4768,7 @@ namespace Allors.Domain
 					StringTemplate CustomerShipmentTemplates {set;}
 
 	}
-	public interface StoreRevenue  : Object, UserInterfaceable, Deletable 
+	public interface StoreRevenue  : Object, AccessControlledObject, Deletable 
 	{
 					InternalOrganisation InternalOrganisation {set;}
 
@@ -4790,7 +4785,7 @@ namespace Allors.Domain
 					global::System.Int32 Year {set;}
 
 	}
-	public interface StoreRevenueHistory  : Object, UserInterfaceable 
+	public interface StoreRevenueHistory  : Object, AccessControlledObject 
 	{
 					InternalOrganisation InternalOrganisation {set;}
 
@@ -4817,7 +4812,7 @@ namespace Allors.Domain
 					Party SubContractor {set;}
 
 	}
-	public interface SupplierOffering  : Object, Commentable, Period, UserInterfaceable 
+	public interface SupplierOffering  : Object, Commentable, Period, AccessControlledObject 
 	{
 					RatingType Rating {set;}
 
@@ -4885,7 +4880,7 @@ namespace Allors.Domain
 	public interface TermType  : Object, Enumeration 
 	{
 	}
-	public interface Territory  : Object, UserInterfaceable, CityBound, GeographicBoundary, CountryBound 
+	public interface Territory  : Object, AccessControlledObject, CityBound, GeographicBoundary, CountryBound 
 	{
 					global::System.String Name {set;}
 
@@ -4923,7 +4918,7 @@ namespace Allors.Domain
 	public interface Tolerance  : Object, PartSpecification 
 	{
 	}
-	public interface Training  : Object, UserInterfaceable, Searchable 
+	public interface Training  : Object, AccessControlledObject, Searchable 
 	{
 					global::System.String Description {set;}
 
@@ -4942,17 +4937,17 @@ namespace Allors.Domain
 	public interface TransferObjectState  : Object, ObjectState 
 	{
 	}
-	public interface TransferStatus  : Object, UserInterfaceable 
+	public interface TransferStatus  : Object, AccessControlledObject 
 	{
 					global::System.DateTime StartDateTime {set;}
 
 					TransferObjectState TransferObjectState {set;}
 
 	}
-	public interface UnitOfMeasure  : Object, IUnitOfMeasure, UniquelyIdentifiable, UserInterfaceable, Searchable, Enumeration 
+	public interface UnitOfMeasure  : Object, IUnitOfMeasure, UniquelyIdentifiable, AccessControlledObject, Searchable, Enumeration 
 	{
 	}
-	public interface UnitOfMeasureConversion  : Object, Searchable, UserInterfaceable 
+	public interface UnitOfMeasureConversion  : Object, Searchable, AccessControlledObject 
 	{
 					IUnitOfMeasure ToUnitOfMeasure {set;}
 
@@ -4974,14 +4969,14 @@ namespace Allors.Domain
 	public interface VatCalculationMethod  : Object, Enumeration 
 	{
 	}
-	public interface VatForm  : Object, AccessControlledObject, UserInterfaceable 
+	public interface VatForm  : Object, AccessControlledObject 
 	{
 					global::System.String Name {set;}
 
 					VatReturnBox VatReturnBoxes {set;}
 
 	}
-	public interface VatRate  : Object, UserInterfaceable 
+	public interface VatRate  : Object, AccessControlledObject 
 	{
 					VatCalculationMethod VatCalculationMethod {set;}
 
@@ -5025,14 +5020,14 @@ namespace Allors.Domain
 					OrganisationGlAccount GeneralLedgerAccount {set;}
 
 	}
-	public interface VatReturnBox  : Object, UserInterfaceable, AccessControlledObject 
+	public interface VatReturnBox  : Object, AccessControlledObject 
 	{
 					global::System.String HeaderNumber {set;}
 
 					global::System.String Description {set;}
 
 	}
-	public interface VatReturnBoxType  : Object, AccessControlledObject, UserInterfaceable 
+	public interface VatReturnBoxType  : Object, AccessControlledObject 
 	{
 					global::System.String Type {set;}
 
@@ -5068,14 +5063,14 @@ namespace Allors.Domain
 					Disbursement Disbursement {set;}
 
 	}
-	public interface WorkEffortAssignment  : Object, Period, UserInterfaceable, Commentable 
+	public interface WorkEffortAssignment  : Object, Period, AccessControlledObject, Commentable 
 	{
 					Person Professional {set;}
 
 					WorkEffort Assignment {set;}
 
 	}
-	public interface WorkEffortAssignmentRate  : Object, UserInterfaceable 
+	public interface WorkEffortAssignmentRate  : Object, AccessControlledObject 
 	{
 					RateType RateType {set;}
 
@@ -5091,7 +5086,7 @@ namespace Allors.Domain
 					InvoiceItem InvoiceItem {set;}
 
 	}
-	public interface WorkEffortFixedAssetAssignment  : Object, Commentable, UserInterfaceable, Period 
+	public interface WorkEffortFixedAssetAssignment  : Object, Commentable, AccessControlledObject, Period 
 	{
 					AssetAssignmentStatus AssetAssignmentStatus {set;}
 
@@ -5102,7 +5097,7 @@ namespace Allors.Domain
 					FixedAsset FixedAsset {set;}
 
 	}
-	public interface WorkEffortFixedAssetStandard  : Object, UserInterfaceable 
+	public interface WorkEffortFixedAssetStandard  : Object, AccessControlledObject 
 	{
 					global::System.Decimal? EstimatedCost {set;}
 
@@ -5113,7 +5108,7 @@ namespace Allors.Domain
 					global::System.Int32? EstimatedQuantity {set;}
 
 	}
-	public interface WorkEffortGoodStandard  : Object, UserInterfaceable 
+	public interface WorkEffortGoodStandard  : Object, AccessControlledObject 
 	{
 					Good Good {set;}
 
@@ -5122,7 +5117,7 @@ namespace Allors.Domain
 					global::System.Int32? EstimatedQuantity {set;}
 
 	}
-	public interface WorkEffortInventoryAssignment  : Object, UserInterfaceable 
+	public interface WorkEffortInventoryAssignment  : Object, AccessControlledObject 
 	{
 					WorkEffort Assignment {set;}
 
@@ -5134,7 +5129,7 @@ namespace Allors.Domain
 	public interface WorkEffortObjectState  : Object, ObjectState 
 	{
 	}
-	public interface WorkEffortPartStandard  : Object, UserInterfaceable 
+	public interface WorkEffortPartStandard  : Object, AccessControlledObject 
 	{
 					Part Part {set;}
 
@@ -5143,7 +5138,7 @@ namespace Allors.Domain
 					global::System.Int32? EstimatedQuantity {set;}
 
 	}
-	public interface WorkEffortPartyAssignment  : Object, Period, UserInterfaceable, Commentable 
+	public interface WorkEffortPartyAssignment  : Object, Period, AccessControlledObject, Commentable 
 	{
 					WorkEffort Assignment {set;}
 
@@ -5152,7 +5147,7 @@ namespace Allors.Domain
 					Facility Facility {set;}
 
 	}
-	public interface WorkEffortSkillStandard  : Object, UserInterfaceable 
+	public interface WorkEffortSkillStandard  : Object, AccessControlledObject 
 	{
 					Skill Skill {set;}
 
@@ -5163,14 +5158,14 @@ namespace Allors.Domain
 					global::System.Decimal? EstimatedCost {set;}
 
 	}
-	public interface WorkEffortStatus  : Object, UserInterfaceable 
+	public interface WorkEffortStatus  : Object, AccessControlledObject 
 	{
 					global::System.DateTime StartDateTime {set;}
 
 					WorkEffortObjectState WorkEffortObjectState {set;}
 
 	}
-	public interface WorkEffortType  : Object, Searchable, UserInterfaceable 
+	public interface WorkEffortType  : Object, Searchable, AccessControlledObject 
 	{
 					WorkEffortFixedAssetStandard WorkEffortFixedAssetStandards {set;}
 

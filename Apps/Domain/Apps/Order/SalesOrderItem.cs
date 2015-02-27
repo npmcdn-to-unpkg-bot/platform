@@ -317,47 +317,6 @@ namespace Allors.Domain
             this.AppsDeriveIsValidOrderItem(derivation);
 
             this.DeriveCurrentObjectState(derivation);
-
-            this.DeriveDisplayName();
-        }
-
-        private void AppsDeriveDisplayName()
-        {
-            this.DisplayName = this.ComposeDisplayName();
-        }
-
-        private string AppsComposeDisplayName()
-        {
-            var uiText = new StringBuilder();
-
-            if (this.ExistQuantityOrdered)
-            {
-                uiText.Append(this.QuantityOrdered);
-                uiText.Append(" ");
-            }
-
-            if (this.ExistProduct)
-            {
-                uiText.Append(this.Product.ComposeDisplayName());
-            }
-
-            if (this.ExistProductFeature)
-            {
-                uiText.Append(this.ProductFeature.ComposeDisplayName());
-            }
-
-            if (!this.ExistProduct && !this.ExistProductFeature)
-            {
-                uiText.Append(this.Description);
-            }
-
-            if (this.ExistTotalExVat)
-            {
-                uiText.Append(", Total: ");
-                uiText.Append(string.Format("{0:N2}", this.TotalExVat));
-            }
-
-            return uiText.ToString();
         }
 
         private void AppsDeriveIsValidOrderItem(IDerivation derivation)

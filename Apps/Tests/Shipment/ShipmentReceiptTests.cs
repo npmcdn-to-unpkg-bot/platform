@@ -86,54 +86,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenShipmentReceiptWhenValidatingThenDisplayNameIsSet()
-        {
-            var supplier = new OrganisationBuilder(this.DatabaseSession).WithName("supplier").Build();
-            var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
-            new SupplierRelationshipBuilder(this.DatabaseSession).WithSupplier(supplier).WithInternalOrganisation(internalOrganisation).Build();
-
-            var part = new RawMaterialBuilder(this.DatabaseSession).WithName("RawMaterial").Build();
-
-            var order = new PurchaseOrderBuilder(this.DatabaseSession).WithTakenViaSupplier(supplier).Build();
-
-            var item1 = new PurchaseOrderItemBuilder(this.DatabaseSession).WithPart(part).WithQuantityOrdered(1).Build();
-            order.AddPurchaseOrderItem(item1);
-
-            this.DatabaseSession.Derive(true);
-            this.DatabaseSession.Commit();
-
-            order.Confirm();
-
-            var shipment = new PurchaseShipmentBuilder(this.DatabaseSession).WithShipFromParty(supplier).Build();
-            var shipmentItem = new ShipmentItemBuilder(this.DatabaseSession).WithPart(part).Build();
-            shipment.AddShipmentItem(shipmentItem);
-
-            var receipt = new ShipmentReceiptBuilder(this.DatabaseSession)
-                .WithQuantityAccepted(1M)
-                .WithItemDescription("Description")
-                .WithInventoryItem(new NonSerializedInventoryItemBuilder(this.DatabaseSession).WithPart(part).Build())
-                .WithShipmentItem(shipmentItem)
-                .WithOrderItem(item1)
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-            this.DatabaseSession.Commit();
-
-            Assert.AreEqual(
-                string.Format(
-                    "Received on {0}: from shipment {1} for order {2}, allocated to {3}, {4} items accepted, {5} items rejected",
-                    receipt.ExistReceivedDateTime ? receipt.ReceivedDateTime : DateTime.MinValue,
-                    receipt.ExistShipmentItem ? receipt.ShipmentItem.ShipmentWhereShipmentItem.ShipmentNumber : null,
-                order.OrderNumber,
-                receipt.ExistInventoryItem ? receipt.InventoryItem.DisplayName : null,
-                receipt.QuantityAccepted,
-                receipt.QuantityRejected),
-                receipt.DisplayName); 
-
-            this.DatabaseSession.Rollback();
-        }
-
-        [Test]
         public void GivenShipmentReceiptForPartWithoutSelectedInventoryItemWhenDerivingThenInventoryItemIsFromDefaultFacility()
         {
             var supplier = new OrganisationBuilder(this.DatabaseSession).WithName("supplier").Build();

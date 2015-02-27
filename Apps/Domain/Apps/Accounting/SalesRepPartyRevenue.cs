@@ -44,45 +44,9 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
             
-            this.SalesRepName = this.SalesRep.DeriveDisplayName();
+            this.SalesRepName = this.SalesRep.FullName;
 
             this.AppsDeriveRevenue(derivation);
-
-            this.AppsDeriveDisplayName(derivation);
-        }
-
-        private void AppsDeriveDisplayName(IDerivation derivation)
-        {
-            var uiText = new StringBuilder();
-
-            if (this.ExistSalesRep)
-            {
-                uiText.Append(this.SalesRep.DeriveDisplayName());
-            }
-
-            if (this.ExistParty)
-            {
-                uiText.Append(", ");
-                uiText.Append(this.Party.DeriveDisplayName());
-            }
-
-            if (this.ExistRevenue)
-            {
-                uiText.Append(": ");
-                uiText.Append(this.Year);
-                uiText.Append("/");
-                uiText.Append(this.Month);
-                uiText.Append(" ");
-                uiText.Append(DecimalExtensions.AsCurrencyString(this.Revenue, this.InternalOrganisation.CurrencyFormat));
-            }
-
-            if (this.ExistInternalOrganisation)
-            {
-                uiText.Append(" at ");
-                uiText.Append(this.InternalOrganisation.Name);
-            }
-
-            this.DisplayName = uiText.ToString();
         }
 
         private void AppsDeriveRevenue(IDerivation derivation)

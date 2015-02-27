@@ -368,10 +368,6 @@ namespace Allors.Domain
                 this.DefaultPaymentMethod = this.PaymentMethods.First;
             }
 
-            this.DisplayName = this.DeriveDisplayName();
-            this.SearchData.CharacterBoundaryText = this.DeriveSearchDataCharacterBoundaryText();
-            this.SearchData.WordBoundaryText = this.DeriveSearchDataWordBoundaryText();
-
             if (!this.ExistOwnerSecurityToken)
             {
                 var securityToken = new SecurityTokenBuilder(this.Strategy.Session).Build();
@@ -396,7 +392,7 @@ namespace Allors.Domain
 
                 foreach (Role role in this.EmployeeRoles)
                 {
-                    var userGroupName = string.Format("{0} for {1})", role.ComposeDisplayName(), this.DisplayName);
+                    var userGroupName = string.Format("{0} for {1})", role.Name, this.Name);
 
                     if (!employeeUserGroupsByName.ContainsKey(userGroupName))
                     {
@@ -419,7 +415,7 @@ namespace Allors.Domain
                 return;
             }
 
-            int year = DateTime.Now.Year;
+            int year = DateTime.UtcNow.Year;
             if (this.ExistActualAccountingPeriod)
             {
                 year = this.ActualAccountingPeriod.FromDate.Date.Year + 1;

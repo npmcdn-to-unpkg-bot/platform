@@ -48,8 +48,6 @@ namespace Allors.Domain
             {
                 this.Name = this.Language.IsoCode + "-" + this.Country.IsoCode;
             }
-
-            this.DisplayName = this.Name;
         }
     }
 }

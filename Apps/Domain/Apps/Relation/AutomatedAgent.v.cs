@@ -62,21 +62,6 @@ namespace Allors.Domain
             this.AppsPartyDeriveRevenue();
         }
 
-        public string DeriveSearchDataCharacterBoundaryText()
-        {
-            return this.AppsDeriveSearchDataCharacterBoundaryText();
-        }
-
-        public string DeriveSearchDataWordBoundaryText()
-        {
-            return this.AppsDeriveSearchDataWordBoundaryText();
-        }
-
-        public string DeriveDisplayName()
-        {
-            return this.AppsDeriveDisplayName();
-        }
-
         public CustomerShipment GetPendingCustomerShipmentForStore(PostalAddress address, Store store, ShipmentMethod shipmentMethod)
         {
             return this.AppsPartyGetPendingCustomerShipmentForStore(address, store, shipmentMethod);

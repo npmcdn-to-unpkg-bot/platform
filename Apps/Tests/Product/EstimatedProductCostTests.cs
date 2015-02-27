@@ -61,38 +61,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenEstimatedLaborCost_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var laborCost = new EstimatedLaborCostBuilder(this.DatabaseSession)
-                .WithCost(10)
-                .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithFromDate(DateTime.Now)
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("Laborcost: € 10.00", laborCost.DisplayName);
-
-            laborCost.Description = "cheap labor";
-            
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("Laborcost: cheap labor € 10.00", laborCost.DisplayName);
-
-            laborCost.GeographicBoundary = new Countries(this.DatabaseSession).FindBy(Countries.Meta.IsoCode, "NL");
-            
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("Laborcost: cheap labor € 10.00, with boundary Netherlands", laborCost.DisplayName);
-
-            laborCost.Organisation = new OrganisationBuilder(this.DatabaseSession).WithName("Supplier x").WithLocale(new Locales(this.DatabaseSession).EnglishGreatBritain).Build();
-            
-            this.DatabaseSession.Derive(true);
-            
-            Assert.AreEqual("Laborcost: cheap labor € 10.00, with boundary Netherlands, for Supplier x", laborCost.DisplayName);
-        }
-
-        [Test]
         public void GivenEstimatedMaterialCost_WhenDeriving_ThenRequiredRelationsMustExist()
         {
             var builder = new EstimatedMaterialCostBuilder(this.DatabaseSession);
@@ -123,38 +91,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenEstimatedmaterialCost_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var materialCost = new EstimatedMaterialCostBuilder(this.DatabaseSession)
-                .WithCost(10)
-                .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithFromDate(DateTime.Now)
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("Materialcost: € 10.00", materialCost.DisplayName);
-
-            materialCost.Description = "cheap material";
-            
-            this.DatabaseSession.Derive(true);
-            
-            Assert.AreEqual("Materialcost: cheap material € 10.00", materialCost.DisplayName);
-
-            materialCost.GeographicBoundary = new Countries(this.DatabaseSession).FindBy(Countries.Meta.IsoCode, "NL");
-            
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("Materialcost: cheap material € 10.00, with boundary Netherlands", materialCost.DisplayName);
-
-            materialCost.Organisation = new OrganisationBuilder(this.DatabaseSession).WithName("Supplier x").WithLocale(new Locales(this.DatabaseSession).EnglishGreatBritain).Build();
-            
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("Materialcost: cheap material € 10.00, with boundary Netherlands, for Supplier x", materialCost.DisplayName);
-        }
-
-        [Test]
         public void GivenEstimatedOtherCost_WhenDeriving_ThenRequiredRelationsMustExist()
         {
             var builder = new EstimatedOtherCostBuilder(this.DatabaseSession);
@@ -182,38 +118,6 @@ namespace Allors.Domain
             otherCost = builder.Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
-        }
-
-        [Test]
-        public void GivenEstimatedOtherCost_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var otherCost = new EstimatedOtherCostBuilder(this.DatabaseSession)
-                .WithCost(10)
-                .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithFromDate(DateTime.Now)
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("Othercost: € 10.00", otherCost.DisplayName);
-
-            otherCost.Description = "cheap labor";
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("Othercost: cheap labor € 10.00", otherCost.DisplayName);
-
-            otherCost.GeographicBoundary = new Countries(this.DatabaseSession).FindBy(Countries.Meta.IsoCode, "NL");
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("Othercost: cheap labor € 10.00, with boundary Netherlands", otherCost.DisplayName);
-
-            otherCost.Organisation = new OrganisationBuilder(this.DatabaseSession).WithName("Supplier x").WithLocale(new Locales(this.DatabaseSession).EnglishGreatBritain).Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("Othercost: cheap labor € 10.00, with boundary Netherlands, for Supplier x", otherCost.DisplayName);
         }
     }
 }

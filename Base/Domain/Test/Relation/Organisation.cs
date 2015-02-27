@@ -36,11 +36,6 @@ namespace Allors.Domain
             var derivation = method.Derivation;
 
             derivation.Log.AssertExists(this, Organisations.Meta.Name);
-
-            this.DisplayName = this.CustomComposeDisplayName();
-
-            this.SearchData.CharacterBoundaryText = this.DisplayName;
-            this.SearchData.RemoveWordBoundaryText();
         }
 
         private string CustomComposeDisplayName()

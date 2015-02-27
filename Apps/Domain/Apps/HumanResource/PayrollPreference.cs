@@ -28,13 +28,6 @@ namespace Allors.Domain
 
             derivation.Log.AssertAtLeastOne(this, PayrollPreferences.Meta.Amount, PayrollPreferences.Meta.Percentage);
             derivation.Log.AssertExistsAtMostOne(this, PayrollPreferences.Meta.Amount, PayrollPreferences.Meta.Percentage);
-
-            this.DisplayName = string.Format(
-                "{0} : amount/percentage {1}{2} per {3}",
-                this.ExistPaymentMethod ? this.PaymentMethod.DisplayName : null,
-                this.ExistAmount ? this.Amount : 0,
-                this.ExistPercentage ? this.Percentage : 0,
-                this.ExistTimeFrequency ? this.TimeFrequency.Name : null);
         }
     }
 }

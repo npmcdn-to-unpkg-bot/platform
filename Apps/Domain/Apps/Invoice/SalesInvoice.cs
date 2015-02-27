@@ -331,7 +331,7 @@ namespace Allors.Domain
                         names.Append(", ");
                     }
 
-                    names.Append(salesRep.DeriveDisplayName());
+                    names.Append(salesRep.FullName);
                 }
 
                 return names.ToString();
@@ -376,12 +376,12 @@ namespace Allors.Domain
 
             if (!this.ExistEntryDate)
             {
-                this.EntryDate = DateTime.Now;
+                this.EntryDate = DateTime.UtcNow;
             }
 
             if (!this.ExistInvoiceDate)
             {
-                this.InvoiceDate = DateTime.Now;
+                this.InvoiceDate = DateTime.UtcNow;
             }
 
             if (this.ExistBillToCustomer)
@@ -525,7 +525,7 @@ namespace Allors.Domain
 
                 foreach (CustomerRelationship customerRelationship in customerRelationships)
                 {
-                    if (customerRelationship.FromDate <= DateTime.Now && (!customerRelationship.ExistThroughDate || customerRelationship.ThroughDate >= DateTime.Now))
+                    if (customerRelationship.FromDate <= DateTime.UtcNow && (!customerRelationship.ExistThroughDate || customerRelationship.ThroughDate >= DateTime.UtcNow))
                     {
                         derivation.AddDependency(this, customerRelationship);
                     }
@@ -539,7 +539,7 @@ namespace Allors.Domain
 
                 foreach (CustomerRelationship customerRelationship in customerRelationships)
                 {
-                    if (customerRelationship.FromDate <= DateTime.Now && (!customerRelationship.ExistThroughDate || customerRelationship.ThroughDate >= DateTime.Now))
+                    if (customerRelationship.FromDate <= DateTime.UtcNow && (!customerRelationship.ExistThroughDate || customerRelationship.ThroughDate >= DateTime.UtcNow))
                     {
                         derivation.AddDependency(this, customerRelationship);
                     }
@@ -611,10 +611,6 @@ namespace Allors.Domain
 
             this.DeriveCurrentPaymentStatus(derivation);
             this.DeriveCurrentObjectState(derivation);
-
-            this.DeriveDisplayName();
-            this.DeriveSearchDataCharacterBoundaryText();
-            this.DeriveSearchDataWordBoundaryText();
 
             this.PreviousBillToCustomer = this.BillToCustomer;
             this.PreviousShipToCustomer = this.ShipToCustomer;
@@ -994,11 +990,7 @@ namespace Allors.Domain
                 salesInvoiceItem.DeriveSalesRep(derivation);
                 salesInvoiceItem.DeriveCurrentObjectState(derivation);
 
-                if (salesInvoiceItem.ExistShipmentItemWhereInvoiceItem)
-                {
-                    salesInvoiceItem.DeriveDisplayName();
-                }
-                else
+                if (!salesInvoiceItem.ExistShipmentItemWhereInvoiceItem)
                 {
                     invoiceFromOrder = false;
                     salesInvoiceItem.DerivePrices(derivation);
@@ -1035,8 +1027,6 @@ namespace Allors.Domain
 
                     salesInvoiceItem.DerivePrices(derivation, quantity, totalBasePrice);
                     salesInvoiceItem.DeriveCurrentPaymentStatus(derivation);
-
-                    salesInvoiceItem.DeriveDisplayName();
                 }
             }
         }
@@ -1090,46 +1080,6 @@ namespace Allors.Domain
                     salesChannelRevenue.Derive().WithDerivation(derivation).Execute();
                 }
             }
-        }
-
-        private void AppsDeriveDisplayName()
-        {
-            this.DisplayName = this.ComposeDisplayName();
-        }
-
-        private void AppsDeriveSearchDataCharacterBoundaryText()
-        {
-            this.SearchData.CharacterBoundaryText = this.AppsComposeSearchDataCharacterBoundaryText();
-        }
-
-        private void AppsDeriveSearchDataWordBoundaryText()
-        {
-            this.SearchData.WordBoundaryText = this.AppsComposeSearchDataWordBoundaryText();
-        }
-
-        private string AppsComposeDisplayName()
-        {
-            return string.Format(
-                "{0} - {1} to {2}",
-                this.ExistInvoiceNumber ? this.InvoiceNumber : null,
-                this.ExistInvoiceDate ? this.InvoiceDate : DateTime.MinValue,
-                this.ExistBillToCustomer ? this.BillToCustomer.DeriveDisplayName() : null);
-        }
-
-        private string AppsComposeSearchDataCharacterBoundaryText()
-        {
-            return string.Format(
-                "{0} {1}",
-                this.ExistInvoiceNumber ? this.InvoiceNumber : null,
-                this.ExistBillToCustomer ? this.BillToCustomer.DeriveSearchDataCharacterBoundaryText() : null);
-        }
-
-        private string AppsComposeSearchDataWordBoundaryText()
-        {
-            return string.Format(
-                "{0} {1}",
-                this.ExistInvoiceDate ? this.InvoiceDate : DateTime.MinValue,
-                this.ExistBillToCustomer ? this.BillToCustomer.DeriveSearchDataWordBoundaryText() : null);
         }
     }
 }

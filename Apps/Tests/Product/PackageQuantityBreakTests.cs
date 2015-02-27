@@ -51,28 +51,5 @@ namespace Allors.Domain
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
-
-        [Test]
-        public void GivenPackageQuantityBreak_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var fromAmount = 2;
-            var throughAmount = 3;
-
-            var quantityBreak = new PackageQuantityBreakBuilder(this.DatabaseSession)
-                .WithFrom(fromAmount)
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            var displayname = string.Format("Package quantity: from {0} through {1}", fromAmount, 0);
-            Assert.AreEqual(displayname, quantityBreak.DisplayName);
-
-            quantityBreak.Through = throughAmount;
-            
-            this.DatabaseSession.Derive(true);
-
-            displayname = string.Format("Package quantity: from {0} through {1}", fromAmount, throughAmount);
-            Assert.AreEqual(displayname, quantityBreak.DisplayName);
-        }
     }
 }

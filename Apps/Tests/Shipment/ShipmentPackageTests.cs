@@ -21,8 +21,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     using NUnit.Framework;
 
     [TestFixture]
@@ -34,32 +32,6 @@ namespace Allors.Domain
             var package = new ShipmentPackageBuilder(this.DatabaseSession).Build();
 
             Assert.IsNotNull(package.CreationDate);
-        }
-
-        [Test]
-        public void GivenShipmentPackage_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var customer = new PersonBuilder(this.DatabaseSession).WithLastName("customer").Build();
-            var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
-            var shipToAddress = new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build();
-
-            var shipment = new CustomerShipmentBuilder(this.DatabaseSession)
-                .WithShipToParty(customer)
-                .WithShipToAddress(shipToAddress)
-                .WithShipmentMethod(new ShipmentMethods(this.DatabaseSession).Ground)
-                .Build();
-
-            shipment.AddShipmentPackage(new ShipmentPackageBuilder(this.DatabaseSession).Build());
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual(string.Format("Package 1"), shipment.ShipmentPackages[0].DisplayName);
-
-            shipment.AddShipmentPackage(new ShipmentPackageBuilder(this.DatabaseSession).Build());
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual(string.Format("Package 2"), shipment.ShipmentPackages[1].DisplayName);
         }
     }
 }

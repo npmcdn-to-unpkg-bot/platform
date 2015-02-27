@@ -30,14 +30,7 @@ namespace Allors.Domain
             derivation.Log.AssertIsUnique(this, Meta.Name);
             derivation.Log.AssertIsUnique(this, Meta.UniqueId);
 
-            this.DeriveDisplayName();
-
             SecurityCache.Invalidate();
-        }
-
-        private void BaseDeriveDisplayName()
-        {
-            this.DisplayName = this.ComposeDisplayName();
         }
 
         private string BaseComposeDisplayName()

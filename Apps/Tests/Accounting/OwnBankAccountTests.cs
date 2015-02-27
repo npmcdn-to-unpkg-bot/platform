@@ -75,25 +75,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenOwnBankAccount_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var netherlands = new Countries(this.DatabaseSession).CountryByIsoCode["NL"];
-            var euro = netherlands.Currency;
-
-            var bank = new BankBuilder(this.DatabaseSession).WithCountry(netherlands).WithName("RABOBANK GROEP").WithBic("RABONL2U").Build();
-            var bankAccount = new BankAccountBuilder(this.DatabaseSession).WithBank(bank).WithCurrency(euro).WithIban("NL50RABO0109546784").WithNameOnAccount("Martien").Build();
-
-            var paymentMethod = new OwnBankAccountBuilder(this.DatabaseSession)
-                .WithBankAccount(bankAccount)
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            var resultstring = string.Format("{0} {1}", bank.Name, paymentMethod.BankAccount.Iban);
-            Assert.AreEqual(resultstring, paymentMethod.DisplayName);
-        }
-
-        [Test]
         public void GivenOwnBankAccount_WhenDeriving_ThenBankAccountMustBeValidated()
         {
             var netherlands = new Countries(this.DatabaseSession).CountryByIsoCode["NL"];

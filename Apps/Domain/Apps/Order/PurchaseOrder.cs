@@ -166,12 +166,12 @@ namespace Allors.Domain
 
             if (!this.ExistOrderDate)
             {
-                this.OrderDate = DateTime.Now;
+                this.OrderDate = DateTime.UtcNow;
             }
 
             if (!this.ExistEntryDate)
             {
-                this.EntryDate = DateTime.Now;
+                this.EntryDate = DateTime.UtcNow;
             }
 
             if (!this.ExistCustomerCurrency)
@@ -304,7 +304,7 @@ namespace Allors.Domain
 
                     foreach (SupplierRelationship supplierRelationship in supplierRelationships)
                     {
-                        if (supplierRelationship.FromDate <= DateTime.Now && (!supplierRelationship.ExistThroughDate || supplierRelationship.ThroughDate >= DateTime.Now))
+                        if (supplierRelationship.FromDate <= DateTime.UtcNow && (!supplierRelationship.ExistThroughDate || supplierRelationship.ThroughDate >= DateTime.UtcNow))
                         {
                             derivation.AddDependency(this, supplierRelationship);
                         }
@@ -354,22 +354,6 @@ namespace Allors.Domain
             this.DeriveLocale(derivation);
             this.DeriveOrderTotals(derivation);
 
-            this.DisplayName = string.Format(
-                "{0} - {1} from {2}",
-                this.ExistOrderNumber ? this.OrderNumber : null,
-                this.ExistOrderDate ? this.OrderDate : DateTime.MinValue,
-                this.ExistTakenViaSupplier ? this.TakenViaSupplier.DeriveDisplayName() : null);
-
-            var characterBoundaryText = this.ExistTakenViaSupplier ? this.TakenViaSupplier.DeriveSearchDataCharacterBoundaryText() : null;
-
-            var wordBoundaryText = string.Format(
-                "{0} {1} {2}",
-                this.ExistOrderNumber ? this.OrderNumber : null,
-                this.ExistOrderDate ? this.OrderDate : DateTime.MinValue,
-                this.ExistTakenViaSupplier ? this.TakenViaSupplier.DeriveSearchDataWordBoundaryText() : null);
-
-            this.SearchData.CharacterBoundaryText = characterBoundaryText;
-            this.SearchData.WordBoundaryText = wordBoundaryText;
             this.PreviousTakenViaSupplier = this.TakenViaSupplier;
             this.PreviousObjectState = this.CurrentObjectState;
 

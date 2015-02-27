@@ -30,7 +30,7 @@ namespace Allors.Domain
 
             if (!this.ExistReceivedDateTime)
             {
-                this.ReceivedDateTime = DateTime.Now;
+                this.ReceivedDateTime = DateTime.UtcNow;
             }
 
             if (!this.ExistQuantityAccepted)
@@ -70,29 +70,6 @@ namespace Allors.Domain
             }
 
             this.AppsDeriveInventoryItem(derivation);
-
-            var orderNumber = string.Empty;
-            var salesOrderItem = this.ExistOrderItem ? this.OrderItem as Allors.Domain.SalesOrderItem : null;
-            if (salesOrderItem != null)
-            {
-                orderNumber = salesOrderItem.SalesOrderWhereSalesOrderItem.OrderNumber;
-            }
-
-            var purchaseOrderItem = this.ExistOrderItem ? this.OrderItem as Allors.Domain.PurchaseOrderItem : null;
-            if (purchaseOrderItem != null)
-            {
-                orderNumber = purchaseOrderItem.PurchaseOrderWherePurchaseOrderItem.OrderNumber;
-            }
-
-            this.DisplayName =
-                string.Format(
-                    "Received on {0}: from shipment {1} for order {2}, allocated to {3}, {4} items accepted, {5} items rejected",
-                    this.ExistReceivedDateTime ? this.ReceivedDateTime : DateTime.MinValue,
-                    this.ExistShipmentItem ? this.ShipmentItem.ShipmentWhereShipmentItem.ShipmentNumber : null,
-                    orderNumber,
-                    this.ExistInventoryItem ? this.InventoryItem.ComposeDisplayName() : null,
-                    this.QuantityAccepted,
-                    this.QuantityRejected);
         }
 
         private void AppsDeriveInventoryItem(IDerivation derivation)

@@ -59,18 +59,6 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            this.AppsValidate(derivation);
-
-            this.DisplayName = string.Format(
-                "{0} - {1} {2}{3}",
-                this.ExistQuantity ? this.Quantity : 0,
-                this.ExistShipmentItem ? this.ShipmentItem.ExistQuantity ? this.ShipmentItem.Quantity : 0 : 0,
-                this.ExistShipmentItem ? this.ShipmentItem.ExistGood ? this.ShipmentItem.Good.ComposeDisplayName() : null : null,
-                this.ExistShipmentItem ? this.ShipmentItem.ExistPart ? this.ShipmentItem.Part.ComposeDisplayName() : null : null);
-        }
-
-        private void AppsValidate(IDerivation derivation)
-        {
             if (this.ExistQuantity && this.ExistShipmentItem)
             {
                 var maxQuantity = this.ShipmentItem.Quantity - this.ShipmentItem.QuantityShipped;

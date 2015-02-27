@@ -97,10 +97,6 @@ namespace Allors.Domain
             {
                 this.AppsDepleteSalesOrders(derivation);
             }
-
-            this.DeriveDisplayName();
-            this.DeriveSearchDataCharacterBoundaryText();
-            this.DeriveSearchDataWordBoundaryText();
             
             this.DeriveCurrentObjectState(derivation);
 
@@ -346,49 +342,6 @@ namespace Allors.Domain
             {
                 this.UnitOfMeasure = this.Part.UnitOfMeasure;
             }
-        }
-
-        private void AppsDeriveDisplayName()
-        {
-            this.DisplayName = this.ComposeDisplayName();
-        }
-
-        private void AppsDeriveSearchDataCharacterBoundaryText()
-        {
-            this.SearchData.CharacterBoundaryText = this.AppsComposeSearchDataCharacterBoundaryText();
-        }
-
-        private void AppsDeriveSearchDataWordBoundaryText()
-        {
-            this.SearchData.WordBoundaryText = this.AppsComposeSearchDataWordBoundaryText();
-        }
-
-        private string AppsComposeDisplayName()
-        {
-            return string.Format(
-                "{0}{1}, {2} items located at {3}",
-                this.ExistGood ? this.Good.ComposeDisplayName() : null,
-                this.ExistPart ? this.Part.ComposeDisplayName() : null,
-                this.QuantityOnHand,
-                this.ExistFacility ? this.Facility.ComposeDisplayName() : null);
-        }
-
-        private string AppsComposeSearchDataCharacterBoundaryText()
-        {
-            return string.Format(
-                "{0} {1} {2}",
-                this.ExistGood ? this.Good.ComposeSearchDataCharacterBoundaryText(): null,
-                this.ExistPart ? this.Part.ComposeSearchDataCharacterBoundaryText() : null,
-                this.ExistFacility ? this.Facility.ComposeSearchDataCharacterBoundaryText() : null);
-        }
-
-        private string AppsComposeSearchDataWordBoundaryText()
-        {
-            return string.Format(
-                "{0} {1} {2}",
-                this.ExistGood ? this.Good.ComposeSearchDataWordBoundaryText() : null,
-                this.ExistPart ? this.Part.ComposeSearchDataWordBoundaryText() : null,
-                this.ExistFacility ? this.Facility.ComposeSearchDataWordBoundaryText() : null);
         }
     }
 }

@@ -76,25 +76,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenAccountingPeriod_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var fromDate = new DateTime(2010, 12, 31);
-            var toDate = new DateTime(2011, 12, 31);
-
-            var accountingPeriod = new AccountingPeriodBuilder(this.DatabaseSession)
-                .WithPeriodNumber(1)
-                .WithTimeFrequency(new TimeFrequencies(this.DatabaseSession).Day)
-                .WithFromDate(fromDate)
-                .WithThroughDate(toDate)
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            var resultstring = string.Format("{0:d} through {1:d}", fromDate, toDate);
-            Assert.AreEqual(resultstring, accountingPeriod.DisplayName);
-        }
-
-        [Test]
         public void GivenAccountingPeriod_WhenMonthInSameQuarterIsAdded_ThenOnlyPeriodForMonthIsAdded()
         {
             var belgium = new Countries(this.DatabaseSession).CountryByIsoCode["BE"];

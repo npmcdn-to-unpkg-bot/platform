@@ -69,20 +69,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenPurchaseShipment_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var supplier = new PersonBuilder(this.DatabaseSession).WithLastName("supplier").Build();
-            var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
-            var shipFromAddress = new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build();
-
-            var shipment = new PurchaseShipmentBuilder(this.DatabaseSession).WithShipFromParty(supplier).WithShipFromAddress(shipFromAddress).Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual(string.Format("{0} from {1}", shipment.ShipmentNumber, supplier.DisplayName), shipment.DisplayName);
-        }
-
-        [Test]
         public void GivenPurchaseShipment_WhenGettingShipmentNumberWithoutFormat_ThenShipmentNumberShouldBeReturned()
         {
             var internalOrganisation = new InternalOrganisationBuilder(this.DatabaseSession).Build();

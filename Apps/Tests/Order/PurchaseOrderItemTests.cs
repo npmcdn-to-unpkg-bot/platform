@@ -147,25 +147,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenOrderItem_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            this.InstantiateObjects(this.DatabaseSession);
-
-            var rawMaterial = new RawMaterialBuilder(this.DatabaseSession).WithName("RawMaterial").Build();
-            var partOrderItem = new PurchaseOrderItemBuilder(this.DatabaseSession)
-                .WithPart(rawMaterial)
-                .WithQuantityOrdered(3)
-                .WithActualUnitPrice(5)
-                .Build();
-
-            this.order.AddPurchaseOrderItem(partOrderItem);
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("3 RawMaterial, Total ex. VAT: 15.00", partOrderItem.DisplayName);
-        }
-
-        [Test]
         public void GivenConfirmedOrderItemForGood_WhenOrderItemIsRemoved_ThenItemIsRemovedFromValidOrderItems()
         {
             this.InstantiateObjects(this.DatabaseSession);

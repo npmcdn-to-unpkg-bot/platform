@@ -168,7 +168,7 @@ namespace Allors.Domain
 
             if (!this.ExistEstimatedShipDate)
             {
-                this.EstimatedShipDate = DateTime.Now.Date;
+                this.EstimatedShipDate = DateTime.UtcNow.Date;
             }
 
             if (!this.ExistShipmentNumber && this.ExistStore)
@@ -233,21 +233,6 @@ namespace Allors.Domain
             {
                 this.BillFromContactMechanism = this.BillFromInternalOrganisation.BillingAddress;
             }
-        
-            this.DisplayName = string.Format(
-                "{0} to {1}",
-                this.ExistShipmentNumber ? this.ShipmentNumber : null,
-                this.ExistShipToParty ? this.ShipToParty.DeriveDisplayName() : null);
-
-            var characterBoundaryText = this.ExistShipToParty ? this.ShipToParty.DeriveSearchDataCharacterBoundaryText() : null;
-
-            var wordBoundaryText = string.Format(
-                "{0} {1}",
-                this.ExistShipmentNumber ? this.ShipmentNumber : null,
-                this.ExistShipToParty ? this.ShipToParty.DeriveSearchDataWordBoundaryText() : null);
-
-            this.SearchData.CharacterBoundaryText = characterBoundaryText;
-            this.SearchData.WordBoundaryText = wordBoundaryText;            
 
             this.CreatePickList(derivation);
             this.AppsDeriveShipmentValue(derivation);
@@ -311,7 +296,7 @@ namespace Allors.Domain
                     {
                         salesInvoice = new SalesInvoiceBuilder(this.Strategy.Session)
                             .WithStore(salesOrder.Store)
-                            .WithInvoiceDate(DateTime.Now)
+                            .WithInvoiceDate(DateTime.UtcNow)
                             .WithSalesChannel(salesOrder.SalesChannel)
                             .WithSalesInvoiceType(new Allors.Domain.SalesInvoiceTypes(this.Strategy.Session).SalesInvoice)
                             .WithVatRegime(salesOrder.VatRegime)
@@ -420,7 +405,7 @@ namespace Allors.Domain
             if (this.CanShip)
             {
                 this.CurrentObjectState = new CustomerShipmentObjectStates(this.Strategy.Session).Shipped;
-                this.EstimatedShipDate = DateTime.Now.Date;
+                this.EstimatedShipDate = DateTime.UtcNow.Date;
             }
         }
 
@@ -531,8 +516,8 @@ namespace Allors.Domain
             {
                 foreach (ShippingAndHandlingComponent shippingAndHandlingComponent in new ShippingAndHandlingComponents(this.Strategy.DatabaseSession).Extent())
                 {
-                    if (shippingAndHandlingComponent.FromDate <= DateTime.Now &&
-                        (!shippingAndHandlingComponent.ExistThroughDate || shippingAndHandlingComponent.ThroughDate >= DateTime.Now))
+                    if (shippingAndHandlingComponent.FromDate <= DateTime.UtcNow &&
+                        (!shippingAndHandlingComponent.ExistThroughDate || shippingAndHandlingComponent.ThroughDate >= DateTime.UtcNow))
                     {
                         if (ShippingAndHandlingComponents.IsEligible(shippingAndHandlingComponent, this))
                         {

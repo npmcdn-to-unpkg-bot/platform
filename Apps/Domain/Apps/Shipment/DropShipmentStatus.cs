@@ -26,20 +26,10 @@ namespace Allors.Domain
     {
         public void AppsOnPostBuild(ObjectOnPostBuild method)
         {
-            
-
             if (!this.ExistStartDateTime)
             {
-                this.StartDateTime = DateTime.Now;
+                this.StartDateTime = DateTime.UtcNow;
             }
-        }
-
-        public void AppsDerive(ObjectDerive method)
-        {
-            this.DisplayName = string.Format(
-                "{0} starting {1}",
-                this.ExistDropShipmentObjectState ? this.DropShipmentObjectState.Name : null,
-                this.ExistStartDateTime ? this.StartDateTime : DateTime.MinValue);
         }
     }
 }

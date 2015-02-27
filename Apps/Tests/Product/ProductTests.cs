@@ -58,20 +58,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenDeliverableCoredService_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
-            var deliverableBasedService = new DeliverableBasedServiceBuilder(this.DatabaseSession)
-                .WithName("DeliverableCoredService")
-                .WithVatRate(vatRate21)
-                .Build();
-
-            this.DatabaseSession.Derive(true); 
-
-            Assert.AreEqual("DeliverableCoredService", deliverableBasedService.DisplayName);
-        }
-
-        [Test]
         public void GivenDeliverableCoredServiceWithPrimaryProductCategoryWithoutProductCategory_WhenDeriving_ThenFirstProductCategoryIsCopiedFromPrimaryCategory()
         {
             var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
@@ -155,23 +141,6 @@ namespace Allors.Domain
             good.RemoveFinishedGood();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
-        }
-
-        [Test]
-        public void GivenGood_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
-            var good = new GoodBuilder(this.DatabaseSession)
-                .WithName("Good")
-                .WithSku("10101")
-                .WithVatRate(vatRate21)
-                .WithInventoryItemKind(new InventoryItemKinds(this.DatabaseSession).NonSerialized)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .Build();
-
-            this.DatabaseSession.Derive(true); 
-
-            Assert.AreEqual("Good, SKU: 10101", good.DisplayName);
         }
 
         [Test]
@@ -378,20 +347,6 @@ namespace Allors.Domain
             good = builder.Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
-        }
-
-        [Test]
-        public void GivenTimeAndMaterialsService_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
-            var timeAndMaterialsService = new TimeAndMaterialsServiceBuilder(this.DatabaseSession)
-                .WithName("TimeAndMaterialsService")
-                .WithVatRate(vatRate21)
-                .Build();
-
-            this.DatabaseSession.Derive(true); 
-
-            Assert.AreEqual("TimeAndMaterialsService", timeAndMaterialsService.DisplayName);
         }
 
         [Test]

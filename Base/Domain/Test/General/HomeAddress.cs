@@ -28,35 +28,12 @@ namespace Allors.Domain
     /// </summary>
     public partial class HomeAddress
     {
-        public override string ToString()
-        {
-            return DisplayName;
-        }
-
         public void TestsDerive(ObjectDerive method)
         {
             var derivation = method.Derivation;
             
             derivation.Log.AssertExists(this, HomeAddresses.Meta.Street);
             derivation.Log.AssertNonEmptyString(this, HomeAddresses.Meta.Street);
-
-            var sb = new StringBuilder();
-            if (ExistStreet)
-            {
-                sb.AppendFormat("{0} ", Street);
-            }
-
-            if (ExistHouseNumber)
-            {
-                sb.Append(HouseNumber);
-            }
-
-            if (ExistPlace)
-            {
-                sb.AppendFormat(", {0}", this.Place.DisplayName);
-            }
-
-            this.DisplayName = sb.ToString();
         }
     }
 }

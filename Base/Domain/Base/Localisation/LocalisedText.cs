@@ -34,8 +34,6 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            this.DisplayName = this.Text;
-
             this.SearchData.CharacterBoundaryText = this.Text;
             this.SearchData.RemoveWordBoundaryText();
         }

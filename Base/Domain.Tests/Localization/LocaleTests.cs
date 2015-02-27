@@ -49,7 +49,7 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenLocale_WhenDeriving_ThenDisplayNameIsSet()
+        public void GivenLocale_WhenDeriving_ThenNameIsSet()
         {
             var locale = new LocaleBuilder(this.DatabaseSession)
                 .WithLanguage(new Languages(this.DatabaseSession).FindBy(Languages.Meta.IsoCode, "en"))
@@ -58,7 +58,6 @@ namespace Allors.Domain
 
             this.DatabaseSession.Derive(true);
 
-            Assert.AreEqual("en-BE", locale.DisplayName);
             Assert.AreEqual("en-BE", locale.Name);
         }
 
@@ -83,12 +82,11 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenLocaleWhenValidatingThenDisplayNameIsSet()
+        public void GivenLocaleWhenValidatingThenNameIsSet()
         {
             var locale = new Locales(this.DatabaseSession).FindBy(Locales.Meta.Name, Locales.DutchNetherlandsName);
 
             Assert.AreEqual("nl-NL", locale.Name);
-            Assert.AreEqual("nl-NL", locale.DisplayName);
         }
     }
 }

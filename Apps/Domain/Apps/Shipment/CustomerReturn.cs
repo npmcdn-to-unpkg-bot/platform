@@ -70,22 +70,6 @@ namespace Allors.Domain
                 this.ShipFromAddress = this.ShipFromParty.ShippingAddress;
             }
 
-            this.DisplayName = string.Format(
-                "{0} to {1}",
-                this.ExistShipmentNumber ? this.ShipmentNumber : null,
-                this.ExistShipToParty ? this.ShipToParty.DeriveDisplayName() : null);
-
-            var characterBoundaryText = this.ExistShipToParty ? this.ShipToParty.DeriveSearchDataCharacterBoundaryText() : null;
-
-            var wordBoundaryText = string.Format(
-                "{0} {1}",
-                this.ExistShipmentNumber ? this.ShipmentNumber : null,
-                this.ExistShipToParty ? this.ShipToParty.DeriveSearchDataWordBoundaryText() : null);
-
-            this.SearchData.CharacterBoundaryText = characterBoundaryText;
-            this.SearchData.WordBoundaryText = wordBoundaryText;
-            
-
             this.DeriveCurrentObjectState(derivation);
             this.PreviousObjectState = this.CurrentObjectState;
 
@@ -94,8 +78,6 @@ namespace Allors.Domain
 
         private void AppsDeriveCurrentObjectState(IDerivation derivation)
         {
-            
-
             if (this.ExistCurrentObjectState && !this.CurrentObjectState.Equals(this.PreviousObjectState))
             {
                 var currentStatus = new CustomerReturnStatusBuilder(this.Strategy.Session).WithCustomerReturnObjectState(this.CurrentObjectState).Build();

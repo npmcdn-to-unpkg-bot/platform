@@ -59,12 +59,5 @@ namespace Allors.Domain
                 this.MediaContent = new MediaContentBuilder(this.Strategy.Session).WithValue(mediaBuilder.MediaContentValue).Build();
             }
         }
-
-        public void BaseDerive(ObjectDerive method)
-        {
-            var derivation = method.Derivation;
-
-            this.DisplayName = this.ExistUniqueId ? this.UniqueId.ToString() : this.Strategy.ObjectType.PluralName + "/" + this.Id;
-        }
     }
 }

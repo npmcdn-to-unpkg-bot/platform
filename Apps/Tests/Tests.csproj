@@ -49,11 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Accounting\AccountingPeriodTests.cs" />
-    <Compile Include="Accounting\AccountingTransactionDetailTests.cs" />
-    <Compile Include="Accounting\AmortizationTests.cs" />
     <Compile Include="Accounting\BankAccountTests.cs" />
     <Compile Include="Accounting\BankTests.cs" />
-    <Compile Include="Accounting\BudgetItemTests.cs" />
     <Compile Include="Accounting\BudgetTests.cs" />
     <Compile Include="Accounting\CashTests.cs" />
     <Compile Include="Accounting\ChartOfAccountsTests.cs" />
@@ -70,7 +67,6 @@
     <Compile Include="Accounting\OrganisationGlAccountTests.cs" />
     <Compile Include="Accounting\OwnBankAccountTests.cs" />
     <Compile Include="Accounting\OwnCreditCardTests.cs" />
-    <Compile Include="Accounting\PackageRevenueHistoryTests.cs" />
     <Compile Include="Accounting\PackageRevenuesTests.cs" />
     <Compile Include="Accounting\PartyPackageRevenueHistoryTests.cs" />
     <Compile Include="Accounting\PartyPackageRevenuesTests.cs" />
@@ -93,7 +89,6 @@
     <Compile Include="Accounting\SalesRepRevenuesTests.cs" />
     <Compile Include="Accounting\StoreRevenueHistoryTests.cs" />
     <Compile Include="Accounting\StoreRevenuesTests.cs" />
-    <Compile Include="Common\SingletonTests.cs" />
     <Compile Include="DomainTest.cs" />
     <Compile Include="Fixture.cs" />
     <Compile Include="Import\ChartOfAccountsImportTests.cs" />
@@ -160,7 +155,6 @@
     <Compile Include="Relation\AgreementTest.cs" />
     <Compile Include="Relation\CaseTests.cs" />
     <Compile Include="Relation\CommunicationEventTests.cs" />
-    <Compile Include="Relation\ContactMechanismPurposeTests.cs" />
     <Compile Include="Relation\ContactMechanismTests.cs" />
     <Compile Include="Relation\CustomerRelationshipTests.cs" />
     <Compile Include="Relation\EmailCommunicationTests.cs" />

@@ -568,36 +568,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenOrderItem_WhenDeriving_ThenDisplayNameAndSearchTextAreSet()
-        {
-            this.InstantiateObjects(this.DatabaseSession);
-
-            var productOrderItem = new SalesOrderItemBuilder(this.DatabaseSession)
-                .WithProduct(this.good)
-                .WithQuantityOrdered(3)
-                .WithActualUnitPrice(5)
-                .Build();
-
-            this.order.AddSalesOrderItem(productOrderItem);
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("3 good, SKU: 10101, Total: 15.00", productOrderItem.DisplayName);
-
-            var productFeatureOrderItem = new SalesOrderItemBuilder(this.DatabaseSession)
-                .WithProductFeature(this.feature1)
-                .WithQuantityOrdered(3)
-                .WithActualUnitPrice(5)
-                .Build();
-
-            this.order.AddSalesOrderItem(productFeatureOrderItem);
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("3 white, Total: 15.00", productFeatureOrderItem.DisplayName);
-        }
-
-        [Test]
         public void GivenOrderItemWithoutCustomer_WhenDeriving_ShipToAddressIsNull()
         {
             this.InstantiateObjects(this.DatabaseSession);

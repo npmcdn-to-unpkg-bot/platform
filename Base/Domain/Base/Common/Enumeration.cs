@@ -43,10 +43,5 @@ namespace Allors.Domain
                 localisedName.Text = name;
             }
         }
-
-        public static void AppsDerive(this Enumeration @this, ObjectDerive method)
-        {
-            @this.DisplayName = @this.Name;
-        }
     }
 }

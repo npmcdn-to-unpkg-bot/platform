@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using System;
-
     public partial class PayHistory
     {
         public void AppsDerive(ObjectDerive method)
@@ -30,17 +28,6 @@ namespace Allors.Domain
 
             derivation.Log.AssertAtLeastOne(this, PayHistories.Meta.Amount, PayHistories.Meta.SalaryStep);
             derivation.Log.AssertExistsAtMostOne(this, PayHistories.Meta.Amount, PayHistories.Meta.SalaryStep);
-
-            this.DisplayName = string.Format(
-                "{0} employee at {1} : {2} through {3}, amount/step {4} {5} {6} per {7}",
-                this.ExistEmployment ? this.Employment.ExistEmployee ? this.Employment.Employee.DeriveDisplayName() : null : null,
-                this.ExistEmployment ? this.Employment.ExistEmployer ? this.Employment.Employer.DeriveDisplayName() : null : null,
-                this.ExistFromDate ? this.FromDate : DateTime.MinValue,
-                this.ExistThroughDate ? this.ThroughDate : DateTime.MaxValue,
-                this.ExistAmount ? this.Amount : 0,
-                this.ExistSalaryStep ? this.SalaryStep.ExistModifiedDate ? this.SalaryStep.ModifiedDate : DateTime.MinValue : DateTime.MinValue,
-                this.ExistSalaryStep ? this.SalaryStep.ExistAmount ? this.SalaryStep.Amount : 0 : 0,
-                this.ExistTimeFrequency ? this.TimeFrequency.Name : null);
         }
     }
 }

@@ -79,26 +79,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenOwnCreditCard_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var creditCard = new CreditCardBuilder(this.DatabaseSession)
-                .WithCardNumber("4012888888881881")
-                .WithExpirationYear(2016)
-                .WithExpirationMonth(03)
-                .WithNameOnCard("M.E. van Knippenberg")
-                .WithCreditCardCompany(new CreditCardCompanyBuilder(this.DatabaseSession).WithName("Visa").Build())
-                .Build();
-
-            var paymentMethod = new OwnCreditCardBuilder(this.DatabaseSession)
-                .WithCreditCard(creditCard)
-                .Build();
-
-            this.DatabaseSession.Derive(true);
- 
-            Assert.AreEqual(creditCard.DisplayName, paymentMethod.DisplayName);
-        }
-
-        [Test]
         public void GivenOwnCreditCardForInternalOrganisationThatDoesAccounting_WhenDeriving_ThenCreditorIsRequired()
         {
             var creditCard = new CreditCardBuilder(this.DatabaseSession)

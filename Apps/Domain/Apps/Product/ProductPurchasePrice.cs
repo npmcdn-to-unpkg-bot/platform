@@ -35,30 +35,5 @@ namespace Allors.Domain
                 return currencyFormat;
             }
         }
-
-        public void AppsDerive(ObjectDerive method)
-        {
-            this.DeriveDisplayName();
-        }
-
-        private void AppsDeriveDisplayName()
-        {
-            StringBuilder uiText = new StringBuilder();
-
-            uiText.Append("Purchase price: ");
-
-            if (this.ExistPrice)
-            {
-                if (this.ExistCurrency)
-                {
-                    uiText.Append(this.Currency.Symbol);
-                }
-
-                uiText.Append(" ");
-                uiText.Append(string.Format("{0:N2}", this.Price));
-            }
-
-            this.DisplayName = uiText.ToString();
-        }
     }
 }

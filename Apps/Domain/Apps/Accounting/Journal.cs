@@ -50,13 +50,6 @@ namespace Allors.Domain
 
             this.DeriveContraAccount(derivation);
             this.DerivePreviousJournalType(derivation);
-
-            this.DisplayName = this.ExistDescription ? this.Description : null;
-
-            var characterBoundaryText = this.ExistDescription ? this.Description : null;
-
-            this.SearchData.CharacterBoundaryText = characterBoundaryText;
-            this.SearchData.WordBoundaryText = null;
         }
 
         private void AppsDeriveContraAccount(IDerivation derivation)

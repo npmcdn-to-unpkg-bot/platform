@@ -26,10 +26,5 @@ namespace Allors.Domain
         {
             this.AppsDeriveVirtualProductPriceComponent();
         }
-
-        public void DeriveDisplayName()
-        {
-            this.AppsDeriveDisplayName();
-        }
     }
 }

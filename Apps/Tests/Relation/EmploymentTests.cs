@@ -81,16 +81,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenEmployment_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            this.InstantiateObjects(this.DatabaseSession);
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("slave employee at internalOrganisation", this.employment.DisplayName);
-        }
-
-        [Test]
         public void GivenPerson_WhenEmploymentIsCreated_ThenNoOtherActiveEmploymentMayExist()
         {
             var secondEmployment = new EmploymentBuilder(this.DatabaseSession)

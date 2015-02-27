@@ -48,7 +48,7 @@ namespace Allors.Domain
 
             if (!this.ExistCreationDate)
             {
-                this.CreationDate = DateTime.Now;
+                this.CreationDate = DateTime.UtcNow;
             }
         }
 
@@ -57,8 +57,6 @@ namespace Allors.Domain
             var derivation = method.Derivation;
 
             this.AppsDeriveSequenceNumber(derivation);
-
-            this.DisplayName = string.Format("Package {0}", this.ExistSequenceNumber ? this.SequenceNumber.ToString(CultureInfo.InvariantCulture) : string.Empty);
 
             foreach (Document document in this.Documents)
             {
@@ -70,7 +68,8 @@ namespace Allors.Domain
 
             if (!this.ExistDocuments)
             {
-                this.AddDocument(new PackagingSlipBuilder(this.Strategy.Session).WithName(this.DisplayName).Build());
+                var name = string.Format("Package {0}", this.ExistSequenceNumber ? this.SequenceNumber.ToString(CultureInfo.InvariantCulture) : string.Empty);
+                this.AddDocument(new PackagingSlipBuilder(this.Strategy.Session).WithName(name).Build());
             }
 
             this.AppsDeriveTemplate(derivation);

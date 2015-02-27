@@ -20,40 +20,8 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class BankAccount
     {
-        public string ComposeDisplayName()
-        {
-            return this.AppsComposeDisplayName();
-        }
-
-        public string ComposeSearchDataCharacterBoundaryText()
-        {
-            return this.AppsComposeSearchDataCharacterBoundaryText();
-        }
-
-        public string ComposeSearchDataWordBoundaryText()
-        {
-            return this.AppsComposeSearchDataWordBoundaryText();
-        }
-
-        public void DeriveDisplayName()
-        {
-            this.AppsDeriveDisplayName();
-        }
-
-        public void DeriveSearchDataCharacterBoundaryText()
-        {
-            this.AppsSearchDataCharacterBoundaryText();
-        }
-
-        public void DeriveSearchDataWordBoundaryText()
-        {
-            this.AppsSearchDataWordBoundaryText();
-        }
-
         public void DeriveIban(IDerivation derivation)
         {
             this.AppsDeriveIban(derivation);

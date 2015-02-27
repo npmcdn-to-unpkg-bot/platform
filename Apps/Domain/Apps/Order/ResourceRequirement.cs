@@ -22,10 +22,24 @@ namespace Allors.Domain
 {
     public partial class ResourceRequirement
     {
+        ObjectState Transitional.PreviousObjectState
+        {
+            get
+            {
+                return this.PreviousObjectState;
+            }
+        }
+
+        ObjectState Transitional.CurrentObjectState
+        {
+            get
+            {
+                return this.CurrentObjectState;
+            }
+        }
+
         public void AppsOnPostBuild(ObjectOnPostBuild method)
         {
-            
-
             if (!this.ExistCurrentObjectState)
             {
                 this.CurrentObjectState = new RequirementObjectStates(this.Strategy.DatabaseSession).Active;
@@ -38,55 +52,7 @@ namespace Allors.Domain
 
             this.AppsRequirementDerive(derivation);
 
-            this.DeriveDisplayName();
-            this.DeriveSearchDataCharacterBoundaryText();
-            this.DeriveSearchDataWordBoundaryText();
-
             this.PreviousObjectState = this.CurrentObjectState;
-        }
-
-        protected void AppsDeriveDisplayName()
-        {
-            this.DisplayName = this.ComposeDisplayName();
-        }
-
-        protected void AppsDeriveSearchDataCharacterBoundaryText()
-        {
-            this.SearchData.CharacterBoundaryText = this.AppsComposeSearchDataCharacterBoundaryText();
-        }
-
-        protected void AppsDeriveSearchDataWordBoundaryText()
-        {
-            this.SearchData.WordBoundaryText = this.AppsComposeSearchDataWordBoundaryText();
-        }
-
-        protected string AppsComposeDisplayName()
-        {
-            return this.Description;
-        }
-
-        protected string AppsComposeSearchDataCharacterBoundaryText()
-        {
-            return this.Description;
-        }
-
-        protected string AppsComposeSearchDataWordBoundaryText()
-        {
-            return null;
-        }
-
-        ObjectState Transitional.PreviousObjectState {
-            get
-            {
-                return this.PreviousObjectState;
-            }
-        }
-
-        ObjectState Transitional.CurrentObjectState {
-            get
-            {
-                return this.CurrentObjectState;
-            }
         }
     }
 }

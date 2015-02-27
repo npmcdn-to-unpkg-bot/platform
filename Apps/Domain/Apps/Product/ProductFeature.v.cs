@@ -25,11 +25,5 @@ namespace Allors.Domain
         void AddToBasePrice(BasePrice basePrice);
 
         void RemoveFromBasePrices(BasePrice basePrice);
-
-        string ComposeDisplayName();
-
-        string ComposeSearchDataCharacterBoundaryText();
-
-        string ComposeSearchDataWordBoundaryText();
     } 
 }

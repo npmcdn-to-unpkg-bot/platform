@@ -57,11 +57,6 @@ namespace Allors.Domain
             this.AppsDerivePrices(derivation, quantityInvoiced, totalBasePrice);
         }
 
-        public void DeriveDisplayName()
-        {
-            this.AppsDeriveDisplayName();
-        }
-
         public void DeriveVatRate(IDerivation derivation)
         {
             this.AppsDeriveVatRate(derivation);

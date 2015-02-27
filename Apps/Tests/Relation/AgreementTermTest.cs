@@ -55,27 +55,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenFinancialTerm_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var financialTerm = new FinancialTermBuilder(this.DatabaseSession)
-                .WithDescription("FinancialTerm")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("FinancialTerm  with value ", financialTerm.DisplayName);
-
-            financialTerm = new FinancialTermBuilder(this.DatabaseSession)
-                .WithTermType(new TermTypes(this.DatabaseSession).LateFee)
-                .WithTermValue("10%")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual(" Penalty for late fee with value 10%", financialTerm.DisplayName);
-        }
-
-        [Test]
         public void GivenIncentive_WhenDeriving_ThenRequiredRelationsMustExist()
         {
             var builder = new IncentiveBuilder(this.DatabaseSession);
@@ -100,27 +79,6 @@ namespace Allors.Domain
             incentive.RemoveDescription();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
-        }
-
-        [Test]
-        public void GivenIncentive_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var incentive = new IncentiveBuilder(this.DatabaseSession)
-                .WithDescription("Incentive")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("Incentive  with value ", incentive.DisplayName);
-
-            incentive = new IncentiveBuilder(this.DatabaseSession)
-                .WithTermType(new TermTypes(this.DatabaseSession).LateFee)
-                .WithTermValue("10%")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual(" Penalty for late fee with value 10%", incentive.DisplayName);
         }
 
         [Test]
@@ -149,27 +107,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenLegalTerm_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var legalTerm = new LegalTermBuilder(this.DatabaseSession)
-                .WithDescription("LegalTerm")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("LegalTerm  with value ", legalTerm.DisplayName);
-
-            legalTerm = new LegalTermBuilder(this.DatabaseSession)
-                .WithTermType(new TermTypes(this.DatabaseSession).LateFee)
-                .WithTermValue("10%")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual(" Penalty for late fee with value 10%", legalTerm.DisplayName);
-        }
-
-        [Test]
         public void GivenThreshold_WhenDeriving_ThenRequiredRelationsMustExist()
         {
             var builder = new ThresholdBuilder(this.DatabaseSession);
@@ -191,27 +128,6 @@ namespace Allors.Domain
             threshold.RemoveDescription();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
-        }
-
-        [Test]
-        public void GivenThreshold_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var threshold = new ThresholdBuilder(this.DatabaseSession)
-                .WithDescription("Threshold")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("Threshold  with value ", threshold.DisplayName);
-
-            threshold = new ThresholdBuilder(this.DatabaseSession)
-                .WithTermType(new TermTypes(this.DatabaseSession).LateFee)
-                .WithTermValue("10%")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual(" Penalty for late fee with value 10%", threshold.DisplayName);
         }
     }
 }

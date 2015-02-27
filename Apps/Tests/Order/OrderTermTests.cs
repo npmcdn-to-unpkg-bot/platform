@@ -44,18 +44,5 @@ namespace Allors.Domain
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
-
-        [Test]
-        public void GivenOrderTerm_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var orderTerm = new OrderTermBuilder(this.DatabaseSession)
-                .WithTermType(new TermTypes(this.DatabaseSession).PercentageCancellationCharge)
-                .WithTermValue("10")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("Percentage Cancellation Charge value 10", orderTerm.DisplayName);
-        }
     }
 }

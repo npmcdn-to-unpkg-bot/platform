@@ -28,11 +28,6 @@ namespace Allors.Domain
     /// </summary>
     public partial class Singleton
     {
-        public void AppsDerive(ObjectDerive method)
-        {
-            this.DisplayName = "Applications";
-        }
-
         private void AppsDeriveRevenues()
         {
             PartyPackageRevenues.AppsDeriveRevenues(this.Strategy.Session);

@@ -48,20 +48,5 @@ namespace Allors.Domain
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
-
-        [Test]
-        public void GivenUnitOfMeasure_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var unitOfMeasure = new UnitOfMeasureBuilder(this.DatabaseSession)
-                .WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
-                                            .WithText("uom")
-                                            .WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale)
-                                            .Build())
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("uom", unitOfMeasure.DisplayName);
-        }
     }
 }

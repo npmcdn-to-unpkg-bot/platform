@@ -39,50 +39,5 @@ namespace Allors.Domain
                 derivation.AddDependency(partyContactMechanism, this);
             }
         }
-
-        public void AppsDerive(ObjectDerive method)
-        {
-            this.DeriveDisplayName();
-            this.DeriveSearchDataCharacterBoundaryText();
-            this.DeriveSearchDataWordBoundaryText();
-        }
-
-        private void AppsDeriveDisplayName()
-        {
-            this.DisplayName = this.ComposeDisplayName();
-        }
-
-        private void AppsDeriveSearchDataCharacterBoundaryText()
-        {
-            this.SearchData.CharacterBoundaryText = this.AppsComposeSearchDataCharacterBoundaryText();
-        }
-
-        private void AppsDeriveSearchDataWordBoundaryText()
-        {
-            this.SearchData.WordBoundaryText = this.AppsComposeSearchDataWordBoundaryText();
-        }
-
-        private string AppsComposeDisplayName()
-        {
-            return string.Format(
-                "{0} {1} {2}",
-                this.ExistCountryCode ? this.CountryCode : null,
-                this.ExistAreaCode ? this.AreaCode : null,
-                this.ExistContactNumber ? this.ContactNumber : null);
-        }
-
-        private string AppsComposeSearchDataCharacterBoundaryText()
-        {
-            return null;
-        }
-
-        private string AppsComposeSearchDataWordBoundaryText()
-        {
-            return string.Format(
-                "{0} {1} {2}",
-                this.ExistCountryCode ? this.CountryCode : null,
-                this.ExistAreaCode ? this.AreaCode : null,
-                this.ExistContactNumber ? this.ContactNumber : null);
-        }
     }
 }

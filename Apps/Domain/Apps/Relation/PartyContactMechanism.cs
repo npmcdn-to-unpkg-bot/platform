@@ -43,8 +43,6 @@ namespace Allors.Domain
                 derivation.Log.AssertExists(this, PartyContactMechanisms.Meta.ContactPurpose);
             }
 
-            this.AppsDeriveDisplayName();
-
             if (this.UseAsDefault && this.ExistPartyWherePartyContactMechanism && this.ExistContactPurpose)
             {
                 var partyContactMechanisms = this.PartyWherePartyContactMechanism.PartyContactMechanisms;
@@ -58,24 +56,6 @@ namespace Allors.Domain
                     }
                 }   
             }
-        }
-
-        private void AppsDeriveDisplayName()
-        {
-            var uiText = new StringBuilder();
-
-            if (this.ExistContactPurpose)
-            {
-                uiText.Append(this.ContactPurpose.Name);
-                uiText.Append(": ");
-            }
-
-            if (this.ExistContactMechanism)
-            {
-                uiText.Append(this.ContactMechanism.ComposeDisplayName());
-            }
-
-            this.DisplayName = uiText.ToString();
         }
     }
 }

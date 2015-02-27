@@ -71,8 +71,6 @@ namespace Allors.Domain
 
         public void AppsOnPostBuild(ObjectOnPostBuild method)
         {
-            
-
             if (!this.ExistCurrentObjectState)
             {
                 this.CurrentObjectState = new PurchaseShipmentObjectStates(this.Strategy.Session).Created;
@@ -104,7 +102,7 @@ namespace Allors.Domain
 
             if (!this.ExistEstimatedArrivalDate)
             {
-                this.EstimatedArrivalDate = DateTime.Now.Date;
+                this.EstimatedArrivalDate = DateTime.UtcNow.Date;
             }
         }
 
@@ -138,21 +136,6 @@ namespace Allors.Domain
             {
                 this.ShipFromAddress = this.ShipFromParty.ShippingAddress;
             }
-
-            this.DisplayName = string.Format(
-                "{0} from {1}",
-                this.ExistShipmentNumber ? this.ShipmentNumber : null,
-                this.ExistShipFromParty ? this.ShipFromParty.DeriveDisplayName() : null);
-
-            var characterBoundaryText = this.ExistShipFromParty ? this.ShipFromParty.DeriveSearchDataCharacterBoundaryText() : null;
-
-            var wordBoundaryText = string.Format(
-                "{0} {1}",
-                this.ExistShipmentNumber ? this.ShipmentNumber : null,
-                this.ExistShipFromParty ? this.ShipFromParty.DeriveSearchDataWordBoundaryText() : null);
-
-            this.SearchData.CharacterBoundaryText = characterBoundaryText;
-            this.SearchData.WordBoundaryText = wordBoundaryText;
 
             if (this.ExistCurrentObjectState && 
                 this.CurrentObjectState.UniqueId.Equals(PurchaseShipmentObjectStates.CompletedId) &&

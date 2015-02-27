@@ -61,12 +61,12 @@ namespace Allors.Domain
                 {
                     if (partyRevenue.InternalOrganisation.Equals(this.InternalOrganisation))
                     {
-                        if (partyRevenue.Year == DateTime.Now.Year)
+                        if (partyRevenue.Year == DateTime.UtcNow.Year)
                         {
                             this.YTDRevenue += partyRevenue.Year;
                         }
 
-                        if (partyRevenue.Year == DateTime.Now.AddYears(-1).Year)
+                        if (partyRevenue.Year == DateTime.UtcNow.AddYears(-1).Year)
                         {
                             this.LastYearsRevenue += partyRevenue.Year;
                         }
@@ -81,7 +81,7 @@ namespace Allors.Domain
 
             if (!this.ExistFromDate)
             {
-                this.FromDate = DateTime.Now;
+                this.FromDate = DateTime.UtcNow;
             }
 
             if (!this.ExistInternalOrganisation)
@@ -145,11 +145,6 @@ namespace Allors.Domain
                 }
             }
 
-            this.DisplayName = string.Format(
-                "{0} customer at {1}",
-                this.ExistCustomer ? this.Customer.DeriveDisplayName() : null,
-                this.ExistInternalOrganisation ? this.InternalOrganisation.DeriveDisplayName() : null);
-
             this.DeriveInternalOrganisationCustomer(derivation);
             this.DeriveMembership(derivation);
 
@@ -162,7 +157,7 @@ namespace Allors.Domain
         {
             if (this.ExistCustomer && this.ExistInternalOrganisation)
             {
-                if (this.FromDate <= DateTime.Now && (!this.ExistThroughDate || this.ThroughDate >= DateTime.Now))
+                if (this.FromDate <= DateTime.UtcNow && (!this.ExistThroughDate || this.ThroughDate >= DateTime.UtcNow))
                 {
                     if (!this.Customer.ExistInternalOrganisationWhereCustomer)
                     {
@@ -170,7 +165,7 @@ namespace Allors.Domain
                     }
                 }
 
-                if (this.FromDate > DateTime.Now || (this.ExistThroughDate && this.ThroughDate < DateTime.Now))
+                if (this.FromDate > DateTime.UtcNow || (this.ExistThroughDate && this.ThroughDate < DateTime.UtcNow))
                 {
                     if (this.Customer.ExistInternalOrganisationWhereCustomer)
                     {
@@ -192,7 +187,7 @@ namespace Allors.Domain
                         customerOrganisation.CustomerContactUserGroup.RemoveMember(contact);
                     }
 
-                    if (this.FromDate <= DateTime.Now && (!this.ExistThroughDate || this.ThroughDate >= DateTime.Now))
+                    if (this.FromDate <= DateTime.UtcNow && (!this.ExistThroughDate || this.ThroughDate >= DateTime.UtcNow))
                     {
                         foreach (Person currentContact in customerOrganisation.CurrentContacts)
                         {
@@ -253,7 +248,7 @@ namespace Allors.Domain
                         {
                             var dueDate = salesInvoice.DueDate.Value.AddDays(gracePeriod);
 
-                            if (DateTime.Now > dueDate)
+                            if (DateTime.UtcNow > dueDate)
                             {
                                 this.AmountOverDue += salesInvoice.TotalIncVat - salesInvoice.AmountPaid;
                             }

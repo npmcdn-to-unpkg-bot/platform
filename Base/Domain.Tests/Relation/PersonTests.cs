@@ -29,30 +29,5 @@ namespace Allors.Domain
     [TestFixture]
     public class PersonTests : DomainTest
     {
-        [Test]
-        public void GivenPersonWhenDerivingThenDisplayNameIsSet()
-        {
-            var builder = new PersonBuilder(this.DatabaseSession).WithLastName("Knippenberg");
-
-            var person = builder.Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("Knippenberg", person.DisplayName);
-
-            builder.WithMiddleName("van");
-            person = builder.Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("van Knippenberg", person.DisplayName);
-
-            builder.WithFirstName("Martien");
-            person = builder.Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("Martien van Knippenberg", person.DisplayName);
-        }
     }
 }

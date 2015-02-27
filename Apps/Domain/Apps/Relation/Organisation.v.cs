@@ -126,20 +126,5 @@ namespace Allors.Domain
         {
             this.AppsDeriveCurrentContacts(derivation);
         }
-
-        public string DeriveDisplayName()
-        {
-            return this.AppsDeriveDisplayName();
-        }
-
-        public string DeriveSearchDataCharacterBoundaryText()
-        {
-            return this.AppsDeriveSearchDataCharacterBoundaryText();
-        }
-
-        public string DeriveSearchDataWordBoundaryText()
-        {
-            return this.AppsDeriveSearchDataWordBoundaryText();
-        }
     }
 }

@@ -82,23 +82,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenInternalOrganisation_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            this.InstantiateObjects(this.DatabaseSession);
-
-            var organisation = new InternalOrganisationBuilder(this.DatabaseSession)
-                .WithName("Internal")
-                .WithLocale(new Locales(this.DatabaseSession).EnglishGreatBritain)
-                .WithPreferredCurrency(this.euro)
-                .WithDefaultPaymentMethod(this.ownBankAccount)
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("Internal", organisation.DisplayName);
-        }
-
-        [Test]
         public void GivenInternalOrganisation_WhenBuildWithout_ThenDoAccountingIsFalse()
         {
             this.InstantiateObjects(this.DatabaseSession);
@@ -221,7 +204,7 @@ namespace Allors.Domain
 
             this.DatabaseSession.Derive(true);
 
-            var name = string.Format("{0} for {1})", new Roles(this.DatabaseSession).Administrator, internalOrganisation.DisplayName);
+            var name = string.Format("{0} for {1})", new Roles(this.DatabaseSession).Administrator, internalOrganisation.Name);
 
             Assert.IsNotNull(new UserGroups(this.DatabaseSession).FindBy(UserGroups.Meta.Name, name));
         }
@@ -241,7 +224,7 @@ namespace Allors.Domain
 
             this.DatabaseSession.Derive(true);
 
-            var name = string.Format("{0} for {1})", new Roles(this.DatabaseSession).Administrator, internalOrganisation.DisplayName);
+            var name = string.Format("{0} for {1})", new Roles(this.DatabaseSession).Administrator, internalOrganisation.Name);
             var userGroup = new UserGroups(this.DatabaseSession).FindBy(UserGroups.Meta.Name, name);
             Assert.IsNotNull(userGroup);
         }
@@ -261,7 +244,7 @@ namespace Allors.Domain
 
             this.DatabaseSession.Derive(true);
 
-            var name = string.Format("{0} for {1})", new Roles(this.DatabaseSession).Administrator, internalOrganisation.DisplayName);
+            var name = string.Format("{0} for {1})", new Roles(this.DatabaseSession).Administrator, internalOrganisation.Name);
             var userGroup = new UserGroups(this.DatabaseSession).FindBy(UserGroups.Meta.Name, name);
             Assert.IsNotNull(userGroup);
 

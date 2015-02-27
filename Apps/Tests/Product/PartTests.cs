@@ -57,19 +57,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenFinishedGood_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var finishedGood = new FinishedGoodBuilder(this.DatabaseSession)
-                .WithName("FinishedGood")
-                .WithManufacturerId("0101")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-            
-            Assert.AreEqual("FinishedGood, Id: 0101", finishedGood.DisplayName);
-        }
-
-        [Test]
         public void GivenNewFinishedGood_WhenDeriving_ThenInventoryItemIsCreated()
         {
             var finishedGood = new FinishedGoodBuilder(this.DatabaseSession)
@@ -110,19 +97,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenRawMaterial_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var rawMaterial = new RawMaterialBuilder(this.DatabaseSession)
-                .WithName("RawMaterial")
-                .WithManufacturerId("0101")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("RawMaterial", rawMaterial.DisplayName);
-        }
-
-        [Test]
         public void GivenNewRawMaterial_WhenDeriving_ThenInventoryItemIsCreated()
         {
             var rawMaterial = new RawMaterialBuilder(this.DatabaseSession)
@@ -149,19 +123,6 @@ namespace Allors.Domain
             subAssembly = builder.Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
-        }
-
-        [Test]
-        public void GivenSubAssembly_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var subAssembly = new SubAssemblyBuilder(this.DatabaseSession)
-                .WithName("SubAssembly")
-                .WithManufacturerId("0101")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("SubAssembly", subAssembly.DisplayName);
         }
 
         [Test]

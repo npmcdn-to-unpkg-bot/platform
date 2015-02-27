@@ -24,18 +24,6 @@ namespace Allors.Domain
 
     public partial interface CommunicationEvent
     {
-        void DeriveDisplayName();
-
-        void DeriveSearchDataCharacterBoundaryText();
-
-        void DeriveSearchDataWordBoundaryText();
-
-        string ComposeDisplayName();
-
-        string ComposeSearchDataCharacterBoundaryText();
-
-        string ComposeSearchDataWordBoundaryText();
-
         DateTime? Start { get; }
     }
 }

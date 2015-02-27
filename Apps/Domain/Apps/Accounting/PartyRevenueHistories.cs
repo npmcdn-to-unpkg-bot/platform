@@ -36,7 +36,7 @@ namespace Allors.Domain
 
             foreach (PartyRevenue partyRevenue in partyRevenues)
             {
-                var months = ((DateTime.Now.Year - partyRevenue.Year) * 12) + DateTime.Now.Month - partyRevenue.Month;
+                var months = ((DateTime.UtcNow.Year - partyRevenue.Year) * 12) + DateTime.UtcNow.Month - partyRevenue.Month;
                 if (months <= 12)
                 {
                     var date = new DateTime(partyRevenue.Year, partyRevenue.Month, 01);

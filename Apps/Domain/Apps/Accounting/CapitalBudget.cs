@@ -24,8 +24,6 @@ namespace Allors.Domain
     {
         public void AppsOnPostBuild(ObjectOnPostBuild method)
         {
-            
-
             if (!this.ExistCurrentObjectState)
             {
                 this.CurrentObjectState = new BudgetObjectStates(this.Strategy.DatabaseSession).Opened;
@@ -34,11 +32,6 @@ namespace Allors.Domain
 
         public void AppsDerive(ObjectDerive method)
         {
-            this.DisplayName = this.Description;
-
-            this.SearchData.CharacterBoundaryText = this.DisplayName;
-            this.SearchData.RemoveWordBoundaryText();
-            
             this.PreviousObjectState = this.CurrentObjectState;
         }
 

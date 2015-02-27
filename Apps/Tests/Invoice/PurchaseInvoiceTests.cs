@@ -62,21 +62,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenPurchaseInvoice_WhenDeriving_ThenUiTextIsSet()
-        {
-            var invoice = new PurchaseInvoiceBuilder(this.DatabaseSession)
-                .WithInvoiceNumber("1")
-                .WithPurchaseInvoiceType(new PurchaseInvoiceTypes(this.DatabaseSession).PurchaseInvoice)
-                .WithBilledFromParty(new Organisations(this.DatabaseSession).FindBy(Organisations.Meta.Name, "supplier"))
-                .WithBilledToInternalOrganisation(new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation"))
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual(string.Format("{0} - {1} from supplier", invoice.InvoiceNumber, invoice.InvoiceDate.Date), invoice.DisplayName);
-        }
-
-        [Test]
         public void GivenPurchaseInvoice_WhenDeriving_ThenBilledFromPartyMustBeInSupplierRelationship()
         {
             var supplier2 = new OrganisationBuilder(this.DatabaseSession).WithName("supplier2").Build();

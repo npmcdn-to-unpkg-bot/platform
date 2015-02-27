@@ -155,22 +155,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenCustomerShipment_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var customer = new PersonBuilder(this.DatabaseSession).WithLastName("customer").Build();
-
-            var shipment = new CustomerShipmentBuilder(this.DatabaseSession)
-                .WithShipToParty(customer)
-                .WithShipToAddress(new PostalAddresses(this.DatabaseSession).Extent().First)
-                .WithShipmentMethod(new ShipmentMethods(this.DatabaseSession).Boat)
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual(string.Format("{0} to {1}", shipment.ShipmentNumber, customer.DisplayName), shipment.DisplayName);
-        }
-
-        [Test]
         public void GivenCustomerShipment_WhenGettingShipmentNumberWithoutFormat_ThenShipmentNumberShouldBeReturned()
         {
             var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();

@@ -88,18 +88,7 @@ namespace Allors.Domain
 
         public void AppsOnPostBuild(ObjectOnPostBuild method)
         {
-            
-                
             this.HasBankStatementTransactions = false;
-        }
-
-        public void AppsDerive(ObjectDerive method)
-        {
-            this.DisplayName = string.Format(
-                "account {0} {1} for {2}",
-                this.ExistGeneralLedgerAccount ? this.GeneralLedgerAccount.AccountNumber : null,
-                this.ExistGeneralLedgerAccount ? this.GeneralLedgerAccount.Name : null,
-                this.ExistInternalOrganisation ? this.InternalOrganisation.Name : null);
         }
     }
 }

@@ -21,31 +21,11 @@
 namespace Allors.Domain
 {
     using System;
-
-    
-    using Allors.Domain;
-
     using NUnit.Framework;
 
     [TestFixture]
     public class InternalOrganisationRevenueHistoryTests : DomainTest
     {
-        [Test]
-        public void GivenInternalOrganisationRevenueHistory_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            const decimal Revenue = 100.25M;
-            var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
-
-            var revenueHistory = new InternalOrganisationRevenueHistoryBuilder(this.DatabaseSession)
-                .WithRevenue(Revenue)
-                .WithInternalOrganisation(internalOrganisation)
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual(string.Format("{0}: {1} revenue trailing twelve months", internalOrganisation.DisplayName, Revenue.AsCurrencyString(internalOrganisation.CurrencyFormat)), revenueHistory.DisplayName);
-        }
-
         [Test]
         public void DeriveHistory()
         {

@@ -43,18 +43,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenClientAgreement_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var clientAgreement = new ClientAgreementBuilder(this.DatabaseSession)
-                .WithDescription("client agreement")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("client agreement", clientAgreement.DisplayName);
-        }
-
-        [Test]
         public void GivenEmploymentAgreement_WhenDeriving_ThenDescriptionIsRequired()
         {
             var builder = new EmploymentAgreementBuilder(this.DatabaseSession);
@@ -68,18 +56,6 @@ namespace Allors.Domain
             employmentAgreement = builder.Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
-        }
-
-        [Test]
-        public void GivenEmploymentAgreement_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var employmentAgreement = new EmploymentAgreementBuilder(this.DatabaseSession)
-                .WithDescription("employment agreement")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("employment agreement", employmentAgreement.DisplayName);
         }
 
         [Test]
@@ -99,18 +75,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenPurchaseAgreement_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var purchaseAgreement = new PurchaseAgreementBuilder(this.DatabaseSession)
-                .WithDescription("purchase agreement")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("purchase agreement", purchaseAgreement.DisplayName);
-        }
-
-        [Test]
         public void GivenSalesAgreement_WhenDeriving_ThenDescriptionIsRequired()
         {
             var builder = new SalesAgreementBuilder(this.DatabaseSession);
@@ -127,18 +91,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenSalesAgreement_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var salesAgreement = new SalesAgreementBuilder(this.DatabaseSession)
-                .WithDescription("sales agreement")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("sales agreement", salesAgreement.DisplayName);
-        }
-
-        [Test]
         public void GivenSubContractorAgreement_WhenDeriving_ThenDescriptionIsRequired()
         {
             var builder = new SubContractorAgreementBuilder(this.DatabaseSession);
@@ -152,18 +104,6 @@ namespace Allors.Domain
             subContractorAgreement = builder.Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
-        }
-
-        [Test]
-        public void GivenSubContractorAgreement_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var subContractorAgreement = new SubContractorAgreementBuilder(this.DatabaseSession)
-                .WithDescription("subContractor agreement")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("subContractor agreement", subContractorAgreement.DisplayName);
         }
     }
 }

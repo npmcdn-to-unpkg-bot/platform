@@ -163,14 +163,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenSupplierRelationship_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            this.InstantiateObjects(this.DatabaseSession);
-
-            Assert.AreEqual("supplier supplier for internalOrganisation", this.supplierRelationship.DisplayName);
-        }
-
-        [Test]
         public void GivenSupplierOrganisation_WhenOrganisationContactRelationshipIsCreated_ThenPersonIsAddedToUserGroup()
         {
             this.InstantiateObjects(this.DatabaseSession);

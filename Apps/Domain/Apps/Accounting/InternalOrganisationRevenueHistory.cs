@@ -37,7 +37,7 @@ namespace Allors.Domain
         {
             this.Revenue = 0;
 
-            var startDate = DateTime.Now.AddYears(-1);
+            var startDate = DateTime.UtcNow.AddYears(-1);
             var year = startDate.Year;
             var month = startDate.Month;
 
@@ -45,37 +45,11 @@ namespace Allors.Domain
 
             foreach (InternalOrganisationRevenue revenue in revenues)
             {
-                if ((revenue.Year == year && revenue.Month >= month) || (revenue.Year == DateTime.Now.Year && revenue.Month < month))
+                if ((revenue.Year == year && revenue.Month >= month) || (revenue.Year == DateTime.UtcNow.Year && revenue.Month < month))
                 {
                     this.Revenue += revenue.Revenue;
                 }
             }
-        }
-
-        public void AppsDerive(ObjectDerive method)
-        {
-            var derivation = method.Derivation;
-            
-            this.AppsDeriveDisplayName(derivation);
-        }
-
-        private void AppsDeriveDisplayName(IDerivation derivation)
-        {
-            var uiText = new StringBuilder();
-
-            if (this.ExistInternalOrganisation)
-            {
-                uiText.Append(this.InternalOrganisation.Name);
-            }
-
-            if (this.ExistRevenue)
-            {
-                uiText.Append(": ");
-                uiText.Append(DecimalExtensions.AsCurrencyString(this.Revenue, this.InternalOrganisation.CurrencyFormat));
-                uiText.Append(" revenue trailing twelve months");
-            }
-
-            this.DisplayName = uiText.ToString();
         }
     }
 }

@@ -47,27 +47,5 @@ namespace Allors.Domain
                 this.RemoveIbanRegex();
             }
         }
-
-        private void AppsDeriveSearchDataCharacterBoundaryText()
-        {
-            // TODO:
-        }
-
-        private void AppsDeriveSearchDataWordBoundaryText()
-        {
-            // TODO:
-        }
-
-        private string AppsComposeSearchDataCharacterBoundaryText()
-        {
-            // TODO:
-            return null;
-        }
-
-        private string AppsComposeSearchDataWordBoundaryText()
-        {
-            // TODO:
-            return null;
-        }
     }
 }

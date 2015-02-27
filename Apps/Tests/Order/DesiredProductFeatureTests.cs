@@ -61,23 +61,5 @@ namespace Allors.Domain
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
-
-        [Test]
-        public void GivenDesiredProductFeature_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
-            var softwareFeature = new SoftwareFeatureBuilder(this.DatabaseSession)
-                .WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession).WithText("Tutorial DVD").WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale).Build())
-                .WithVatRate(vatRate21).Build();
-
-            var desiredProductFeature = new DesiredProductFeatureBuilder(this.DatabaseSession)
-                .WithRequired(false)
-                .WithProductFeature(softwareFeature)
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("Tutorial DVD", desiredProductFeature.DisplayName);
-        }
     }
 }

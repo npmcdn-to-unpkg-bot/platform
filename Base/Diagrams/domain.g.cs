@@ -18,7 +18,7 @@ namespace Allors.Domain
 	public interface Deletable  : Object 
 	{
 	}
-	public interface Enumeration  : Object, UserInterfaceable, UniquelyIdentifiable 
+	public interface Enumeration  : Object, AccessControlledObject, UniquelyIdentifiable 
 	{
 					LocalisedText LocalisedNames {set;}
 
@@ -46,7 +46,7 @@ namespace Allors.Domain
 					global::System.DateTime? ThroughDate {set;}
 
 	}
-	public interface Printable  : Object, UserInterfaceable, UniquelyIdentifiable 
+	public interface Printable  : Object, AccessControlledObject, UniquelyIdentifiable 
 	{
 					global::System.String PrintContent {set;}
 
@@ -56,7 +56,7 @@ namespace Allors.Domain
 					SearchData SearchData {set;}
 
 	}
-	public interface SearchResult  : Object, UserInterfaceable 
+	public interface SearchResult  : Object, AccessControlledObject 
 	{
 	}
 	public interface SecurityTokenOwner  : Object 
@@ -72,7 +72,7 @@ namespace Allors.Domain
 					global::System.Guid UniqueId {set;}
 
 	}
-	public interface User  : Object, SecurityTokenOwner, UserInterfaceable, Localised 
+	public interface User  : Object, SecurityTokenOwner, AccessControlledObject, Localised 
 	{
 					global::System.Boolean? UserEmailConfirmed {set;}
 
@@ -83,12 +83,7 @@ namespace Allors.Domain
 					global::System.String UserPasswordHash {set;}
 
 	}
-	public interface UserInterfaceable  : Object, AccessControlledObject 
-	{
-					global::System.String DisplayName {set;}
-
-	}
-	public interface Address  : Object, UserInterfaceable 
+	public interface Address  : Object 
 	{
 					Place Place {set;}
 
@@ -157,7 +152,7 @@ namespace Allors.Domain
 					global::System.Guid? I1AllorsUnique {set;}
 
 	}
-	public interface I12  : Object, UserInterfaceable 
+	public interface I12  : Object 
 	{
 					global::System.Byte[] I12AllorsBinary {set;}
 
@@ -218,7 +213,7 @@ namespace Allors.Domain
 					global::System.DateTime? I12AllorsDateTime {set;}
 
 	}
-	public interface I2  : Object, I12, UserInterfaceable 
+	public interface I2  : Object, I12 
 	{
 					I2 I2I2Many2One {set;}
 
@@ -280,10 +275,10 @@ namespace Allors.Domain
 	public interface S1  : Object 
 	{
 	}
-	public interface Shared  : Object, UserInterfaceable 
+	public interface Shared  : Object 
 	{
 	}
-	public interface AccessControl  : Object, Deletable, UserInterfaceable 
+	public interface AccessControl  : Object, Deletable, AccessControlledObject 
 	{
 					UserGroup SubjectGroups {set;}
 
@@ -299,7 +294,7 @@ namespace Allors.Domain
 					global::System.Int32 Value {set;}
 
 	}
-	public interface Country  : Object, UserInterfaceable, Searchable 
+	public interface Country  : Object, AccessControlledObject, Searchable 
 	{
 					Currency Currency {set;}
 
@@ -310,7 +305,7 @@ namespace Allors.Domain
 					global::System.String IsoCode {set;}
 
 	}
-	public interface Currency  : Object, UserInterfaceable 
+	public interface Currency  : Object, AccessControlledObject 
 	{
 					global::System.String IsoCode {set;}
 
@@ -330,7 +325,7 @@ namespace Allors.Domain
 					global::System.String OriginalFilename {set;}
 
 	}
-	public interface Language  : Object, UserInterfaceable, Searchable 
+	public interface Language  : Object, AccessControlledObject, Searchable 
 	{
 					global::System.String Name {set;}
 
@@ -339,7 +334,7 @@ namespace Allors.Domain
 					LocalisedText LocalisedNames {set;}
 
 	}
-	public interface Locale  : Object, UserInterfaceable 
+	public interface Locale  : Object, AccessControlledObject 
 	{
 					global::System.String Name {set;}
 
@@ -348,7 +343,7 @@ namespace Allors.Domain
 					Country Country {set;}
 
 	}
-	public interface LocalisedText  : Object, Searchable, UserInterfaceable, Localised 
+	public interface LocalisedText  : Object, Searchable, AccessControlledObject, Localised 
 	{
 					global::System.String Text {set;}
 
@@ -362,7 +357,7 @@ namespace Allors.Domain
 					User User {set;}
 
 	}
-	public interface Media  : Object, UniquelyIdentifiable, UserInterfaceable, Deletable 
+	public interface Media  : Object, UniquelyIdentifiable, AccessControlledObject, Deletable 
 	{
 					MediaType MediaType {set;}
 
@@ -376,14 +371,14 @@ namespace Allors.Domain
 					global::System.String Hash {set;}
 
 	}
-	public interface MediaType  : Object, UserInterfaceable 
+	public interface MediaType  : Object, AccessControlledObject 
 	{
 					global::System.String DefaultFileExtension {set;}
 
 					global::System.String Name {set;}
 
 	}
-	public interface Permission  : Object, Deletable, UserInterfaceable 
+	public interface Permission  : Object, Deletable, AccessControlledObject 
 	{
 					global::System.Guid OperandTypePointer {set;}
 
@@ -392,7 +387,7 @@ namespace Allors.Domain
 					global::System.Int32 OperationEnum {set;}
 
 	}
-	public interface Person  : Object, User, AccessControlledObject, UniquelyIdentifiable, SearchResult, UserInterfaceable, Searchable, Printable, Deletable 
+	public interface Person  : Object, User, AccessControlledObject, UniquelyIdentifiable, SearchResult, Searchable, Printable, Deletable 
 	{
 					global::System.String LastName {set;}
 
@@ -431,14 +426,14 @@ namespace Allors.Domain
 					Address Addresses {set;}
 
 	}
-	public interface PrintQueue  : Object, AccessControlledObject, UserInterfaceable, UniquelyIdentifiable 
+	public interface PrintQueue  : Object, AccessControlledObject, UniquelyIdentifiable 
 	{
 					Printable Printables {set;}
 
 					global::System.String Name {set;}
 
 	}
-	public interface Role  : Object, UserInterfaceable, UniquelyIdentifiable 
+	public interface Role  : Object, AccessControlledObject, UniquelyIdentifiable 
 	{
 					Permission Permissions {set;}
 
@@ -466,7 +461,7 @@ namespace Allors.Domain
 	public interface SecurityToken  : Object, Deletable 
 	{
 	}
-	public interface Singleton  : Object, UserInterfaceable 
+	public interface Singleton  : Object, AccessControlledObject 
 	{
 					PrintQueue DefaultPrintQueue {set;}
 
@@ -497,7 +492,7 @@ namespace Allors.Domain
 					ObjectState ToState {set;}
 
 	}
-	public interface UserGroup  : Object, UniquelyIdentifiable, Searchable, UserInterfaceable 
+	public interface UserGroup  : Object, UniquelyIdentifiable, Searchable, AccessControlledObject 
 	{
 					Role Role {set;}
 
@@ -508,7 +503,7 @@ namespace Allors.Domain
 					global::System.String Name {set;}
 
 	}
-	public interface BadUI  : Object, UserInterfaceable 
+	public interface BadUI  : Object 
 	{
 					Person PersonsMany {set;}
 
@@ -521,7 +516,7 @@ namespace Allors.Domain
 					global::System.String AllorsString {set;}
 
 	}
-	public interface C1  : Object, UserInterfaceable, I1, AccessControlledObject, Searchable 
+	public interface C1  : Object, I1, AccessControlledObject, Searchable 
 	{
 					I1 C1I1One2One {set;}
 
@@ -641,7 +636,7 @@ namespace Allors.Domain
 					global::System.Byte[] C2AllorsBinary {set;}
 
 	}
-	public interface ClassWithoutRoles  : Object, UserInterfaceable 
+	public interface ClassWithoutRoles  : Object 
 	{
 	}
 	public interface Dependee  : Object 
@@ -684,10 +679,10 @@ namespace Allors.Domain
 					global::System.Boolean? IsDerived {set;}
 
 	}
-	public interface Four  : Object, Shared, UserInterfaceable 
+	public interface Four  : Object, Shared 
 	{
 	}
-	public interface From  : Object, UserInterfaceable 
+	public interface From  : Object 
 	{
 					To Tos {set;}
 
@@ -707,12 +702,12 @@ namespace Allors.Domain
 					global::System.String PoBox {set;}
 
 	}
-	public interface One  : Object, Shared, UserInterfaceable 
+	public interface One  : Object, Shared 
 	{
 					Two Two {set;}
 
 	}
-	public interface Organisation  : Object, Searchable, UniquelyIdentifiable, UserInterfaceable, SearchResult 
+	public interface Organisation  : Object, Searchable, UniquelyIdentifiable, SearchResult 
 	{
 					Person Shareholders {set;}
 
@@ -737,7 +732,7 @@ namespace Allors.Domain
 					global::System.String Size {set;}
 
 	}
-	public interface Place  : Object, UserInterfaceable, Searchable 
+	public interface Place  : Object, Searchable 
 	{
 					Country Country {set;}
 
@@ -746,7 +741,7 @@ namespace Allors.Domain
 					global::System.String PostalCode {set;}
 
 	}
-	public interface Search  : Object, Searchable, UserInterfaceable 
+	public interface Search  : Object, Searchable 
 	{
 					global::System.String Text {set;}
 
@@ -782,24 +777,24 @@ namespace Allors.Domain
 					global::System.Boolean? IsDerived {set;}
 
 	}
-	public interface Three  : Object, Shared, UserInterfaceable 
+	public interface Three  : Object, Shared 
 	{
 					Four Four {set;}
 
 					global::System.String AllorsString {set;}
 
 	}
-	public interface To  : Object, UserInterfaceable 
+	public interface To  : Object 
 	{
 					global::System.String Name {set;}
 
 	}
-	public interface Two  : Object, UserInterfaceable, Shared 
+	public interface Two  : Object, Shared 
 	{
 					Shared Shared {set;}
 
 	}
-	public interface Unit  : Object, AccessControlledObject, UserInterfaceable 
+	public interface Unit  : Object, AccessControlledObject 
 	{
 					global::System.Byte[] AllorsBinary {set;}
 

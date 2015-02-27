@@ -34,45 +34,9 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            this.PartyProductName = string.Concat(this.Party.DeriveDisplayName(), "/", this.Product.ComposeDisplayName());
+            this.PartyProductName = string.Concat(this.Party.PartyName, "/", this.Product.Name);
 
             this.AppsDeriveRevenue(derivation);
-
-            this.AppsDeriveDisplayName(derivation);
-        }
-
-        private void AppsDeriveDisplayName(IDerivation derivation)
-        {
-            var uiText = new StringBuilder();
-
-            if (this.ExistParty)
-            {
-                uiText.Append(this.Party.DeriveDisplayName());
-            }
-
-            if (this.ExistProduct)
-            {
-                uiText.Append(", ");
-                uiText.Append(this.Product.ComposeDisplayName());
-            }
-
-            if (this.ExistRevenue)
-            {
-                uiText.Append(": ");
-                uiText.Append(this.Year);
-                uiText.Append("/");
-                uiText.Append(this.Month);
-                uiText.Append(" ");
-                uiText.Append(DecimalExtensions.AsCurrencyString(this.Revenue, this.InternalOrganisation.CurrencyFormat));
-            }
-
-            if (this.ExistInternalOrganisation)
-            {
-                uiText.Append(" at ");
-                uiText.Append(this.InternalOrganisation.Name);
-            }
-
-            this.DisplayName = uiText.ToString();
         }
 
         private void AppsDeriveRevenue(IDerivation derivation)
@@ -99,7 +63,7 @@ namespace Allors.Domain
                 }
             }
 
-            var months = ((DateTime.Now.Year - this.Year) * 12) + DateTime.Now.Month - this.Month;
+            var months = ((DateTime.UtcNow.Year - this.Year) * 12) + DateTime.UtcNow.Month - this.Month;
             if (months <= 12)
             {
                 var histories = this.Party.PartyProductRevenueHistoriesWhereParty;

@@ -24,29 +24,11 @@
 namespace Allors.Domain
 {
     using System;
-
-    using Allors.Domain;
-    
-
     using NUnit.Framework;
 
     [TestFixture]
     public class StoreTests : DomainTest
     {
-        [Test]
-        public void GivenStore_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var store = new StoreBuilder(this.DatabaseSession)
-                .WithName("Organisation store")
-                .WithDefaultCarrier(new Carriers(this.DatabaseSession).Fedex)
-                .WithDefaultShipmentMethod(new ShipmentMethods(this.DatabaseSession).Ground)
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("Organisation store", store.DisplayName);
-        }
-
         [Test]
         public void GivenStore_WhenDeriving_ThenRequiredRelationsMustExist()
         {

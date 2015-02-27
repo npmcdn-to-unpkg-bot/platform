@@ -93,44 +93,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenSupplierOffering_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var supplier = new OrganisationBuilder(this.DatabaseSession).WithName("supplier").WithLocale(new Locales(this.DatabaseSession).EnglishGreatBritain).Build();
-            var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
-
-            new SupplierRelationshipBuilder(this.DatabaseSession)
-                .WithInternalOrganisation(internalOrganisation)
-                .WithSupplier(supplier)
-                .WithFromDate(DateTime.Now)
-                .Build();
-
-            var good = new GoodBuilder(this.DatabaseSession)
-                .WithName("Good")
-                .WithSku("10101")
-                .WithVatRate(new VatRateBuilder(this.DatabaseSession).WithRate(21).Build())
-                .WithInventoryItemKind(new InventoryItemKinds(this.DatabaseSession).NonSerialized)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .Build();
-
-            var purchasePrice = new ProductPurchasePriceBuilder(this.DatabaseSession)
-                .WithFromDate(DateTime.Now)
-                .WithCurrency(new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR"))
-                .WithPrice(1)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .Build();
-
-            var supplierOffering = new SupplierOfferingBuilder(this.DatabaseSession)
-                .WithProduct(good)
-                .WithSupplier(supplier)
-                .WithProductPurchasePrice(purchasePrice)
-                .Build();
-
-            this.DatabaseSession.Derive(true); 
-
-            Assert.AreEqual("Good, SKU: 10101 supplied by supplier", supplierOffering.DisplayName);
-        }
-
-        [Test]
         public void GivenNewGood_WhenDeriving_ThenNonSerializedInventryItemIsCreatedForEveryFacility()
         {
             var supplier = new OrganisationBuilder(this.DatabaseSession).WithName("supplier").Build();

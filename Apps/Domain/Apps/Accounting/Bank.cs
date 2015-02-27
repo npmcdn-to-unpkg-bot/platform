@@ -43,11 +43,6 @@ namespace Allors.Domain
                     derivation.Log.AddError(this, Banks.Meta.Bic, ErrorMessages.NotAValidBic);
                 }
             }
-
-            this.DisplayName = this.Name;
-
-            this.SearchData.CharacterBoundaryText = this.DisplayName;
-            this.SearchData.RemoveWordBoundaryText();
         }
     }
 }

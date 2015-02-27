@@ -117,16 +117,6 @@ namespace Allors.Domain
             this.AppsDeriveIsValidOrderItem(derivation);
         }
 
-        public void DeriveDisplayName()
-        {
-            this.AppsDeriveDisplayName();
-        }
-
-        public string ComposeDisplayName()
-        {
-            return this.AppsComposeDisplayName();
-        }
-
         public void DeriveVatRate(IDerivation derivation)
         {
             this.AppsDeriveVatRate(derivation);

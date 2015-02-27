@@ -21,62 +21,11 @@
 namespace Allors.Domain
 {
     using System;
-
-    
-    using Allors.Domain;
-
     using NUnit.Framework;
 
     [TestFixture]
     public class SalesRepPartyProductCategoryRevenuesTests : DomainTest
     {
-        [Test]
-        public void GivenSalesRepPartyProductCategoryRevenueHistory_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
-
-            var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
-            var salesRep = new PersonBuilder(this.DatabaseSession).WithLastName("salesRep").Build();
-            var customer = new OrganisationBuilder(this.DatabaseSession).WithName("customer").Build();
-            var cat = new ProductCategoryBuilder(this.DatabaseSession).WithDescription("cat for good").Build();
-
-            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(customer).WithInternalOrganisation(internalOrganisation).Build();
-
-            var good = new GoodBuilder(this.DatabaseSession)
-                .WithSku("10101")
-                .WithVatRate(vatRate21)
-                .WithName("good1")
-                .WithInventoryItemKind(new InventoryItemKinds(this.DatabaseSession).NonSerialized)
-                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-                .WithPrimaryProductCategory(cat)
-                .Build();
-
-            new SalesRepRelationshipBuilder(this.DatabaseSession).WithFromDate(DateTime.Now).WithCustomer(customer).WithProductCategory(cat).WithSalesRepresentative(salesRep).Build();
-
-            this.DatabaseSession.Derive(true);
-
-            var productItem = new SalesInvoiceItemTypes(this.DatabaseSession).ProductItem;
-            var contactMechanism = new ContactMechanisms(this.DatabaseSession).Extent().First;
-
-            var invoice1 = new SalesInvoiceBuilder(this.DatabaseSession)
-                .WithInvoiceDate(DateTime.Now)
-                .WithInvoiceNumber("1")
-                .WithBillToCustomer(customer)
-                .WithBillToContactMechanism(contactMechanism)
-                .WithSalesInvoiceType(new SalesInvoiceTypes(this.DatabaseSession).SalesInvoice)
-                .Build();
-
-            var item1 = new SalesInvoiceItemBuilder(this.DatabaseSession).WithProduct(good).WithQuantity(3).WithActualUnitPrice(15).WithSalesInvoiceItemType(productItem).Build();
-            invoice1.AddSalesInvoiceItem(item1);
-
-            this.DatabaseSession.Derive(true);
-            this.DatabaseSession.Commit();
-
-            var revenue = new SalesRepPartyProductCategoryRevenues(this.DatabaseSession).Extent().First;
-
-            Assert.AreEqual(string.Format("{0}, {1}, {2}: {3}/{4} {5} at {6}", salesRep.DisplayName, customer.DisplayName, cat.DisplayName, DateTime.Now.Year, DateTime.Now.Month, revenue.Revenue.AsCurrencyString(internalOrganisation.CurrencyFormat), internalOrganisation.DisplayName), revenue.DisplayName);
-        }
-
         [Test]
         public void DeriveRevenues()
         {

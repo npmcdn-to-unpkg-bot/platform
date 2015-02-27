@@ -31,16 +31,5 @@ namespace Allors.Domain
                 derivation.AddDependency(this, this.AccountingPeriod);
             }
         }
-
-        public void AppsDerive(ObjectDerive method)
-        {
-            this.DisplayName = string.Format(
-                "period {0} balance amount {1} account {2} {3} for {4}",
-                this.ExistAccountingPeriod ? this.AccountingPeriod.DisplayName : null,
-                this.ExistAmount ? this.Amount : 0,
-                this.ExistOrganisationGlAccount ? this.OrganisationGlAccount.ExistGeneralLedgerAccount ? this.OrganisationGlAccount.GeneralLedgerAccount.AccountNumber : null : null,
-                this.ExistOrganisationGlAccount ? this.OrganisationGlAccount.ExistGeneralLedgerAccount ? this.OrganisationGlAccount.GeneralLedgerAccount.Name : null : null,
-                this.ExistOrganisationGlAccount ? this.OrganisationGlAccount.ExistInternalOrganisation ? this.OrganisationGlAccount.InternalOrganisation.Name : null : null);
-        }
     }
 }

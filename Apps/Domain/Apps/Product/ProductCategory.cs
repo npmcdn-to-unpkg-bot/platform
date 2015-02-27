@@ -67,15 +67,6 @@ namespace Allors.Domain
                 derivation.Log.AddError(this, ProductCategories.Meta.Package, ErrorMessages.ProductCategoryPackageOnlyAtLowestLevel);
             }
 
-            this.DisplayName = this.Name;
-            if (string.IsNullOrEmpty(this.DisplayName))
-            {
-                this.DisplayName = this.Description;
-            }
-
-            this.SearchData.CharacterBoundaryText = this.DisplayName;
-            this.SearchData.RemoveWordBoundaryText();
-
             foreach (ProductCategory productCategory in this.ProductCategoriesWhereAncestor)
             {
                 productCategory.AppsDeriveAncestors(derivation);

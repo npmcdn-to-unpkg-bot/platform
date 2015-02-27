@@ -32,11 +32,6 @@ namespace Allors.Domain
             this.AppsDeriveMembership();
         }
 
-        public void DeriveDisplayName()
-        {
-            this.AppsDeriveDisplayName();
-        }
-
         public void DeriveCommission()
         {
             this.AppsDeriveCommission();

@@ -106,23 +106,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenGeneralLedgerAccount_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var generalLedgerAccount = new GeneralLedgerAccountBuilder(this.DatabaseSession)
-                .WithAccountNumber("0001")
-                .WithName("GeneralLedgerAccount")
-                .WithBalanceSheetAccount(true)
-                .WithSide(new DebitCreditConstants(this.DatabaseSession).Debit)
-                .WithGeneralLedgerAccountType(new GeneralLedgerAccountTypeBuilder(this.DatabaseSession).WithDescription("accountType").Build())
-                .WithGeneralLedgerAccountGroup(new GeneralLedgerAccountGroupBuilder(this.DatabaseSession).WithDescription("accountGroup").Build())
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("0001 GeneralLedgerAccount", generalLedgerAccount.DisplayName);
-        }
-
-        [Test]
         public void GivenGeneralLedgerAccount_WhenAddedToChartOfAccounts_ThenAccountNumberMustBeUnique()
         {
             var glAccount0001 = new GeneralLedgerAccountBuilder(this.DatabaseSession)

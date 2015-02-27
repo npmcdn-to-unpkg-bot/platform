@@ -61,43 +61,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenGeographicBoundary_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var city = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
-            var postalCode = new PostalCodeBuilder(this.DatabaseSession).WithCode("2800").Build();
-            var country = new Countries(this.DatabaseSession).FindBy(Countries.Meta.IsoCode, "BE");
-
-            var address = new PostalAddressBuilder(this.DatabaseSession).WithAddress1("Haverwerf 15").Build();
-
-            this.DatabaseSession.Derive(false);
-
-            Assert.AreEqual("Haverwerf 15", address.DisplayName);
-
-            address.Address2 = "address2";
-            address.Address3 = "address3";
-
-            this.DatabaseSession.Derive(false);
-
-            Assert.AreEqual("Haverwerf 15, address2, address3", address.DisplayName);
-
-            address.RemoveAddress2();
-            address.RemoveAddress3();
-
-            address.AddGeographicBoundary(postalCode);
-            address.AddGeographicBoundary(city);
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("Haverwerf 15, 2800 Mechelen", address.DisplayName);
-
-            address.AddGeographicBoundary(country);
-            
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("Haverwerf 15, 2800 Mechelen, Belgium", address.DisplayName);
-        }
-
-        [Test]
         public void GivenGeographicBoundary_WhenDeriving_ThenFormattedFullAddressIsSet()
         {
             var city = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
@@ -186,43 +149,6 @@ namespace Allors.Domain
             new PostalAddressBuilder(this.DatabaseSession).WithAddress1("address1").WithPostalBoundary(postalBoundary).Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
-        }
-
-        [Test]
-        public void GivenPostalBoundary_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var country = new Countries(this.DatabaseSession).CountryByIsoCode["BE"];
-            var postalBoundary = new PostalBoundaryBuilder(this.DatabaseSession).WithLocality("Mechelen").WithCountry(country).Build();
-            this.DatabaseSession.Derive();
-            this.DatabaseSession.Commit();
-
-            var address = new PostalAddressBuilder(this.DatabaseSession).WithAddress1("Haverwerf 15").Build();
-
-            this.DatabaseSession.Derive(false);
-
-            Assert.AreEqual("Haverwerf 15", address.DisplayName);
-
-            address.Address2 = "address2";
-            address.Address3 = "address3";
-
-            this.DatabaseSession.Derive(false);
-
-            Assert.AreEqual("Haverwerf 15, address2, address3", address.DisplayName);
-
-            address.RemoveAddress2();
-            address.RemoveAddress3();
-
-            address.PostalBoundary = postalBoundary;
-            
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("Haverwerf 15, Mechelen, Belgium", address.DisplayName);
-
-            address.PostalBoundary.PostalCode = "2800";
-
-            this.DatabaseSession.Derive(true);
-
-            Assert.AreEqual("Haverwerf 15, 2800 Mechelen, Belgium", address.DisplayName);
         }
 
         [Test]

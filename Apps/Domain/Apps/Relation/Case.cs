@@ -50,11 +50,6 @@ namespace Allors.Domain
 
         public void AppsDerive(ObjectDerive method)
         {
-            this.DisplayName = this.Description;
-
-            this.SearchData.CharacterBoundaryText = this.DisplayName;
-            this.SearchData.RemoveWordBoundaryText();
-
             this.DeriveCurrentObjectState();
 
             this.PreviousObjectState = this.CurrentObjectState;

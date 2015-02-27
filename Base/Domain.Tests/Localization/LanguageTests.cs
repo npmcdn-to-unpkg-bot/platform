@@ -43,13 +43,5 @@ namespace Allors.Domain
         
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
-
-        [Test]
-        public void GivenLanguageWhenValidatingThenDisplayNameIsSet()
-        {
-            var language = new Languages(this.DatabaseSession).FindBy(Languages.Meta.IsoCode, "nl");
-
-            Assert.AreEqual("Dutch", language.DisplayName);
-        }
     }
 }

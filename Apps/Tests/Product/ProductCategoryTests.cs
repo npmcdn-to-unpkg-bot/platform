@@ -45,16 +45,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenProductCategory_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var productCategory = new ProductCategoryBuilder(this.DatabaseSession).WithDescription("Category").Build();
-
-            this.DatabaseSession.Derive(true); 
-
-            Assert.AreEqual("Category", productCategory.DisplayName);
-        }
-
-        [Test]
         public void GivenLeafeProductCategory_WhenPackageIsDefined_ThenValidationHasNoErrors()
         {
             var package = new PackageBuilder(this.DatabaseSession).WithName("package").Build();

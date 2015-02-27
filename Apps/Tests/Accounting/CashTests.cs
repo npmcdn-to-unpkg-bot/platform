@@ -48,18 +48,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenCashPaymentMethod_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var cash = new CashBuilder(this.DatabaseSession)
-                .WithDescription("description")
-                .Build();
-
-            this.DatabaseSession.Derive(true);
- 
-            Assert.AreEqual("description", cash.DisplayName);
-        }
-
-        [Test]
         public void GivenCashPaymentMethodForInternalOrganisationThatDoesAccounting_WhenDeriving_ThenCreditorIsRequired()
         {
             var cash = new CashBuilder(this.DatabaseSession)

@@ -29,12 +29,6 @@ namespace Allors.Domain
             derivation.Log.AssertAtLeastOne(this, SupplierOfferings.Meta.Part, SupplierOfferings.Meta.Product);
             derivation.Log.AssertExistsAtMostOne(this, SupplierOfferings.Meta.Part, SupplierOfferings.Meta.Product);
 
-            this.DisplayName = string.Format(
-                "{0}{1} supplied by {2}",
-                this.ExistPart ? this.Part.ComposeDisplayName() : null,
-                this.ExistProduct ? this.Product.ComposeDisplayName() : null,
-                this.ExistSupplier ? this.Supplier.DeriveDisplayName() : null);
-
             this.DeriveInventoryItem(derivation);
         }
 

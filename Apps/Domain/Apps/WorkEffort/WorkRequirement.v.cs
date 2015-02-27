@@ -36,35 +36,5 @@ namespace Allors.Domain
         {
             this.AppsRequirementClose();
         }
-
-        public void DeriveDisplayName()
-        {
-            this.AppsDeriveDisplayName();
-        }
-
-        public void DeriveSearchDataCharacterBoundaryText()
-        {
-            this.AppsDeriveSearchDataCharacterBoundaryText();
-        }
-
-        public void DeriveSearchDataWordBoundaryText()
-        {
-            this.AppsDeriveSearchDataWordBoundaryText();
-        }
-
-        public string ComposeDisplayName()
-        {
-            return this.AppsComposeDisplayName();
-        }
-
-        public string ComposeSearchDataCharacterBoundaryText()
-        {
-            return this.AppsComposeSearchDataCharacterBoundaryText();
-        }
-
-        public string ComposeSearchDataWordBoundaryText()
-        {
-            return this.AppsComposeSearchDataWordBoundaryText();
-        }
     }
 }

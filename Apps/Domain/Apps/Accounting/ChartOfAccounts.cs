@@ -31,10 +31,5 @@ namespace Allors.Domain
                 derivation.AddDependency(this, generalLedgerAccount);                
             }
         }
-
-        public void AppsDerive(ObjectDerive method)
-        {
-            this.DisplayName = this.Name;
-        }
     }
 }

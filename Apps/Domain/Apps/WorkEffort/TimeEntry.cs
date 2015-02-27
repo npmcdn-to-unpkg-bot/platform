@@ -27,24 +27,6 @@ namespace Allors.Domain
             var derivation = method.Derivation;
 
             derivation.Log.AssertAtLeastOne(this, TimeEntries.Meta.WorkEffort, TimeEntries.Meta.EngagementItem);
-
-            this.DisplayName = string.Format(
-                "{0} {1} for {2}",
-                this.ExistUnitOfMeasure ? this.UnitOfMeasure.Name : null,
-                this.ExistCost ? this.Cost : 0,
-                this.ExistWorkEffort ? this.WorkEffort.ComposeDisplayName() : null);
-
-            var characterBoundaryText = this.ExistWorkEffort ? this.WorkEffort.ComposeSearchDataCharacterBoundaryText() : null;
-
-            var wordBoundaryText = string.Format(
-                "{0} {1} {2}",
-                this.ExistCost ? this.Cost : 0,
-                this.ExistUnitOfMeasure ? this.UnitOfMeasure.Name : null,
-                this.ExistWorkEffort ? this.WorkEffort.ComposeSearchDataWordBoundaryText() : null);
-
-            this.SearchData.CharacterBoundaryText = characterBoundaryText;
-            this.SearchData.WordBoundaryText = wordBoundaryText;
-            
         }
     }
 }

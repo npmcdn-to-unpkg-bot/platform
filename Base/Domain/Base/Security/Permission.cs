@@ -120,7 +120,7 @@ namespace Allors.Domain
 
             toString.Append(" for ");
 
-            toString.Append(this.ExistOperandType ? this.OperandType.GetType().Name + ":" + this.OperandType.ToString() : "[missing operand]");
+            toString.Append(this.ExistOperandType ? this.OperandType.GetType().Name + ":" + this.OperandType : "[missing operand]");
 
             return toString.ToString();
         }
@@ -165,8 +165,6 @@ namespace Allors.Domain
 
                     break;
             }
-
-            this.DisplayName = this.Operation + " " + this.ConcreteClass + "." + this.OperandType; 
 
             SecurityCache.Invalidate();
         }

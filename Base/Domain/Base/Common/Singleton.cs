@@ -45,12 +45,5 @@ namespace Allors.Domain
             session[SessionKey] = instance;
             return instance;
         }
-
-        public void BaseDerive(ObjectDerive method)
-        {
-            var derivation = method.Derivation;
-
-            this.DisplayName = "Singleton";
-        }
     }
 }

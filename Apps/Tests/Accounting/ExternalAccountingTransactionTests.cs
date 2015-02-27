@@ -79,43 +79,5 @@ namespace Allors.Domain
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
-
-        [Test]
-        public void GivenTaxDue_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            throw new Exception("Review");
-
-            //var fromParty = new OrganisationBuilder(this.DatabaseSession)
-            //    .WithName("party paying")
-            //    .WithLocale(new Locales(this.DatabaseSession).EnglishGreatBritain)
-            //    .Build();
-
-            //var toParty = new OrganisationBuilder(this.DatabaseSession)
-            //    .WithName("party receiving")
-            //    .WithLocale(new Locales(this.DatabaseSession).EnglishGreatBritain)
-            //    .Build();
-
-            //var taxDue = new TaxDueBuilder(this.DatabaseSession)
-            //    .WithDescription("Three word description")
-            //    .WithEntryDate(DateTime.Now)
-            //    .WithTransactionDate(DateTime.Now)
-            //    .WithFromParty(fromParty)
-            //    .WithToParty(toParty)
-            //    .WithDerivedTotalAmount(10M)
-            //    .Build();
-
-            //this.DatabaseSession.Derive(true);
-
-            //var expectedDisplayName =
-            //    string.Format(
-            //        "Transaction date {0}, {1}, total amount {2} from party {3} to party {4}",
-            //        taxDue.TransactionDate,
-            //        taxDue.Description,
-            //        taxDue.DerivedTotalAmount,
-            //        fromParty.DisplayName,
-            //        toParty.DisplayName);
-
-            //Assert.AreEqual(expectedDisplayName, taxDue.DisplayName);
-        }
     }
 }

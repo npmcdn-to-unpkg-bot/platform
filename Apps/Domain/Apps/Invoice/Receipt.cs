@@ -32,7 +32,7 @@ namespace Allors.Domain
 
             if (!this.ExistEffectiveDate)
             {
-                this.EffectiveDate = DateTime.Now;
+                this.EffectiveDate = DateTime.UtcNow;
             }
         }
 
@@ -75,25 +75,6 @@ namespace Allors.Domain
             {
                 derivation.Log.AddError(this, Receipts.Meta.Amount, ErrorMessages.ReceiptAmountIsToSmall);
             }
-
-            this.DeriveDisplayName();
-            this.DeriveSearchDataCharacterBoundaryText();
-            this.DeriveSearchDataWordBoundaryText();
-        }
-
-        private void AppsDeriveDisplayName()
-        {
-            this.DisplayName = this.ComposeDisplayName();
-        }
-
-        private void AppsSearchDataCharacterBoundaryText()
-        {
-            this.SearchData.CharacterBoundaryText = this.AppsComposeSearchDataCharacterBoundaryText();
-        }
-
-        private void AppsSearchDataWordBoundaryText()
-        {
-            this.SearchData.WordBoundaryText = this.AppsComposeSearchDataWordBoundaryText();
         }
     }
 }

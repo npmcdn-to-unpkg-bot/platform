@@ -24,8 +24,6 @@ namespace Allors.Domain
     {
         public void AppsOnPostBuild(ObjectOnPostBuild method)
         {
-            
-
             this.InventoryItemKind = new InventoryItemKinds(this.Strategy.Session).NonSerialized;
 
             if (!this.ExistOwnedByParty)
@@ -55,10 +53,6 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            this.DeriveDisplayName();
-            this.DeriveSearchDataCharacterBoundaryText();
-            this.DeriveSearchDataWordBoundaryText();
-
             this.DeriveInventoryItem(derivation);
         }
 
@@ -74,36 +68,6 @@ namespace Allors.Domain
                         .Build();
                 }
             }
-        }
-
-        private void AppsDeriveDisplayName()
-        {
-            this.DisplayName = this.ComposeDisplayName();
-        }
-
-        private void AppsDeriveSearchDataCharacterBoundaryText()
-        {
-            this.SearchData.CharacterBoundaryText = this.AppsComposeSearchDataCharacterBoundaryText();
-        }
-
-        private void AppsDeriveSearchDataWordBoundaryText()
-        {
-            this.SearchData.WordBoundaryText = this.AppsComposeSearchDataWordBoundaryText();
-        }
-
-        private string AppsComposeDisplayName()
-        {
-            return this.Name;
-        }
-
-        private string AppsComposeSearchDataCharacterBoundaryText()
-        {
-            return this.Name;
-        }
-
-        private string AppsComposeSearchDataWordBoundaryText()
-        {
-            return null;
         }
     }
 }

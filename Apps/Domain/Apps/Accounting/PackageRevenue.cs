@@ -21,7 +21,6 @@
 namespace Allors.Domain
 {
     using System;
-    using System.Text;
 
     public partial class PackageRevenue
     {
@@ -33,38 +32,8 @@ namespace Allors.Domain
         public void AppsDerive(ObjectDerive method)
         {
             var derivation = method.Derivation;
-            
-            this.AppsDeriveDisplayName(derivation);
 
             this.AppsDeriveRevenue();
-        }
-
-        private void AppsDeriveDisplayName(IDerivation derivation)
-        {
-            var uiText = new StringBuilder();
-
-            if (this.ExistPackage)
-            {
-                uiText.Append(this.Package.Name);
-            }
-
-            if (this.ExistRevenue)
-            {
-                uiText.Append(": ");
-                uiText.Append(this.Year);
-                uiText.Append("/");
-                uiText.Append(this.Month);
-                uiText.Append(" ");
-                uiText.Append(DecimalExtensions.AsCurrencyString(this.Revenue, this.InternalOrganisation.CurrencyFormat));
-            }
-
-            if (this.ExistInternalOrganisation)
-            {
-                uiText.Append(" at ");
-                uiText.Append(this.InternalOrganisation.Name);
-            }
-
-            this.DisplayName = uiText.ToString();
         }
 
         private void AppsDeriveRevenue()
@@ -81,7 +50,7 @@ namespace Allors.Domain
                 this.Revenue += productCategoryRevenue.Revenue;
             }
 
-            var months = ((DateTime.Now.Year - this.Year) * 12) + DateTime.Now.Month - this.Month;
+            var months = ((DateTime.UtcNow.Year - this.Year) * 12) + DateTime.UtcNow.Month - this.Month;
             if (months <= 12)
             {
                 var histories = this.Package.PackageRevenueHistoriesWherePackage;

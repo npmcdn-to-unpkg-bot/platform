@@ -56,35 +56,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenEmailCommunication_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            var originator = new EmailAddressBuilder(this.DatabaseSession).WithElectronicAddressString("originator@allors.com").Build();
-            var addressee1 = new EmailAddressBuilder(this.DatabaseSession).WithElectronicAddressString("addressee1@allors.com").Build();
-            var addressee2 = new EmailAddressBuilder(this.DatabaseSession).WithElectronicAddressString("addressee2@allors.com").Build();
-            var blindCopy = new EmailAddressBuilder(this.DatabaseSession).WithElectronicAddressString("blindcopy@allors.com").Build();
-            var carbonCopy = new EmailAddressBuilder(this.DatabaseSession).WithElectronicAddressString("carboncopy@allors.com").Build();
-
-            this.DatabaseSession.Derive(true);
-            this.DatabaseSession.Commit();
-
-            var communication = new EmailCommunicationBuilder(this.DatabaseSession)
-                .WithDescription("Email communication")
-                .WithSubject("Email communication")
-                .WithOriginator(originator)
-                .WithBlindCopy(blindCopy)
-                .WithCarbonCopy(carbonCopy)
-                .WithAddressee(addressee1)
-                .WithAddressee(addressee2)
-                .WithActualStart(DateTime.Now)
-                .Build();
-
-            this.DatabaseSession.Derive(true);
-
-            var uiText = string.Format("Email subject: {0} from: {1} to: {2} {3} CC: {4} BC: {5}", communication.Subject, originator.DisplayName, addressee1.DisplayName, addressee2.DisplayName, carbonCopy.DisplayName, blindCopy.DisplayName);
-            Assert.AreEqual(uiText, communication.DisplayName);
-        }
-
-        [Test]
         public void GivenEmailCommunication_WhenDeriving_ThenInvolvedPartiesAreDerived()
         {
             var owner = new PersonBuilder(this.DatabaseSession).WithLastName("owner").Build();
