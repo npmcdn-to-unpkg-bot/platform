@@ -26,8 +26,9 @@ namespace Allors.Domain
 
     public partial class BudgetObjectStates
     {
-        public static readonly Guid OpenedId = new Guid("FA6E7137-D028-498a-99D1-AB2B85C0EC30");
-        public static readonly Guid ClosedId = new Guid("10B82C2D-9D43-4a1c-A0CA-A03C29C7E8CC");
+        public static readonly Guid OpenedId = new Guid("D5DE64D5-FE6B-456D-81BE-10BAA8C75C89");
+        public static readonly Guid ClosedId = new Guid("4986E755-51D6-4D88-86A4-F22445029D84");
+        public static readonly Guid ReopenedId = new Guid("1C435A55-9327-4B32-AE62-07378B11CE0A");
 
         private UniquelyIdentifiableCache<BudgetObjectState> cache;
 
@@ -67,7 +68,7 @@ namespace Allors.Domain
                 .Build();
 
             new BudgetObjectStateBuilder(Session)
-                .WithUniqueId(ClosedId)
+                .WithUniqueId(ReopenedId)
                 .WithName("Reopened")
                 .Build();
         }

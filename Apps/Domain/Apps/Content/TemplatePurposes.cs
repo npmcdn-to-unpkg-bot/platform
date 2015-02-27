@@ -146,7 +146,7 @@ namespace Allors.Domain
                 .WithName("Customer Shipment")
                 .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Customer Shipment").WithLocale(englishLocale).Build())
                 .WithLocalisedName(new LocalisedTextBuilder(this.Session).WithText("Klant zending").WithLocale(dutchLocale).Build())
-                .WithUniqueId(PurchaseShipmentId)
+                .WithUniqueId(CustomerShipmentId)
                 .Build();
 
             new TemplatePurposeBuilder(this.Session)

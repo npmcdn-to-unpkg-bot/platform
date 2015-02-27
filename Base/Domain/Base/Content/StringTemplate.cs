@@ -92,13 +92,6 @@ namespace Allors.Domain
             }
         }
 
-        public void BaseDerive(ObjectDerive method)
-        {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertIsUnique(this, StringTemplates.Meta.UniqueId);
-        }
-
         private Template GetTemplate()
         {
             var templateGroup = this.TemplateGroup;

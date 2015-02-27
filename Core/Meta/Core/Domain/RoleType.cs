@@ -48,8 +48,6 @@ namespace Allors.Meta
 
         private int? size;
 
-        private bool isRequired;
-
         internal RoleType(RelationType relationType, Guid id)
             : base(relationType.DefiningDomain, id)
         {
@@ -348,20 +346,7 @@ namespace Allors.Meta
                 this.MetaPopulation.Stale();
             }
         }
-
-        public bool IsRequired
-        {
-            get
-            {
-                return this.isRequired;
-            }
-
-            set
-            {
-                this.isRequired = value;
-            }
-        }
-
+        
         /// <summary>
         /// Gets the validation name.
         /// </summary>

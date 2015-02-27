@@ -47,10 +47,6 @@ namespace Allors.Domain
 
         public void BaseDerive(ObjectDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertIsUnique(this, Meta.Name);
-
             if (this.ExistParent)
             {
                 // TODO: members should be added to ancestor groups

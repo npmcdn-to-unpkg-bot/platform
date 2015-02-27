@@ -25,35 +25,7 @@ namespace Allors.Domain
     {
         public void BaseDerive(ObjectDerive method)
         {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertIsUnique(this, Meta.Name);
-            derivation.Log.AssertIsUnique(this, Meta.UniqueId);
-
             SecurityCache.Invalidate();
-        }
-
-        private string BaseComposeDisplayName()
-        {
-            var name = string.Empty;
-
-            if (ExistName)
-            {
-                if (this.ExistPermissions)
-                {
-                    name = this.Name + string.Format(" with {0} members", this.Permissions.Count);
-                }
-                else
-                {
-                    name = this.Name;
-                }
-            }
-            else
-            {
-                name = "Unnamed";
-            }
-
-            return name;
         }
     }
 }

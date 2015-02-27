@@ -531,6 +531,7 @@ namespace Allors.Domain
             }
 
             this.FullName = fullName.ToString();
+            this.PartyName = this.FullName;
         }
 
         private void AppsBuildOwnerSecurityToken()

@@ -60,7 +60,6 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
-            derivation.Log.AssertIsUnique(this, SerializedInventoryItems.Meta.SerialNumber);
             derivation.Log.AssertAtLeastOne(this, SerializedInventoryItems.Meta.Good, SerializedInventoryItems.Meta.Part);
             derivation.Log.AssertExistsAtMostOne(this, SerializedInventoryItems.Meta.Good, SerializedInventoryItems.Meta.Part);
 

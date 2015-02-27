@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="ConcreteRoleType.cs" company="Allors bvba">
+// <copyright file="RoleType.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -21,26 +21,10 @@
 
 namespace Allors.Meta
 {
-    public partial class ConcreteRoleType
+    public partial class RoleType
     {
-        public bool IsRequired
-        {
-            get
-            {
-                return this.IsRequiredOverride ?? this.roleType.IsRequired;
-            }
-        }
+        public bool IsRequired { get; set; }
 
-        public bool? IsRequiredOverride { get; set; }
-
-        public bool IsUnique
-        {
-            get
-            {
-                return this.IsUniqueOverride ?? this.roleType.IsUnique;
-            }
-        }
-
-        public bool? IsUniqueOverride { get; set; }
+        public bool IsUnique { get; set; }
     }
 }

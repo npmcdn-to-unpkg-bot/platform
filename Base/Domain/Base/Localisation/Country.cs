@@ -43,12 +43,5 @@ namespace Allors.Domain
                 localisedName.Text = name;
             }
         }
-
-        public void BaseDerive(ObjectDerive method)
-        {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertIsUnique(this, Countries.Meta.IsoCode);
-        }
     }
 }

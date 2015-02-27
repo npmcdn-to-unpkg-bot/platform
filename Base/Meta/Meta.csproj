@@ -165,6 +165,7 @@
       <Link>Core\Population\ObjectInterface.cs</Link>
     </Compile>
     <Compile Include="Base\Domain\Composite.cs" />
+    <Compile Include="Base\Domain\RoleType.cs" />
     <Compile Include="Base\Domain\ConcreteRoleType.cs" />
     <Compile Include="Base\Domain\Path.cs" />
     <Compile Include="Base\Population\AccessControl.cs">

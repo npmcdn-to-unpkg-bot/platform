@@ -129,7 +129,12 @@ namespace Allors
                 var bank = new BankBuilder(session).WithCountry(belgium).WithName("ING België").WithBic("BBRUBEBB").Build();
 
                 var ownBankAccount = new OwnBankAccountBuilder(session)
-                    .WithBankAccount(new BankAccountBuilder(session).WithBank(bank).WithCurrency(euro).WithIban("BE68539007547034").WithNameOnAccount("Koen").Build())
+                    .WithBankAccount(new BankAccountBuilder(session).WithBank(bank)
+                                        .WithCurrency(euro)
+                                        .WithIban("BE68539007547034")
+                                        .WithNameOnAccount("Koen")
+                                        .Build())
+                    .WithDescription("Main bank account")
                     .Build();
 
                 var postalBoundary = new PostalBoundaryBuilder(session).WithLocality("Mechelen").WithCountry(belgium).Build();

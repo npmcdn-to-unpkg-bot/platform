@@ -45,6 +45,7 @@ namespace Allors.Domain
             var dutchLocale = new Locales(Session).DutchNetherlands;
 
             new StringTemplateBuilder(Session)
+                .WithName("PurchaseOrder " + englishLocale.Name)
                 .WithBody(PurchaseOrderTemplateEn)
                 .WithUniqueId(PurchaseOrderTemplateEnId)
                 .WithLocale(englishLocale)
@@ -52,6 +53,7 @@ namespace Allors.Domain
                 .Build();
 
             new StringTemplateBuilder(Session)
+                .WithName("PurchaseOrder " + dutchLocale.Name)
                 .WithBody(PurchaseOrderTemplateNl)
                 .WithUniqueId(PurchaseOrderTemplateNlId)
                 .WithLocale(dutchLocale)

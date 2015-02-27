@@ -60,7 +60,10 @@ namespace Allors.Domain
                 this.OwnerSecurityToken = mySecurityToken;
             }
 
-            derivation.Log.AssertExists(this, Persons.Meta.LastName);
+            if (!Users.GuestUserName.Equals(this.UserName) && !Users.AdministratorUserName.Equals(this.UserName))
+            {
+                derivation.Log.AssertExists(this, Persons.Meta.LastName);
+            }
 
             if (this.ExistFirstName && this.ExistLastName)
             {

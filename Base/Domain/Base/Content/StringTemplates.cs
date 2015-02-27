@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class StringTemplates
     {
         protected override void BaseSecure(Domain.Security config)

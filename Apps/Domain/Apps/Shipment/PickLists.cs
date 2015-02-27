@@ -58,6 +58,7 @@ namespace Allors.Domain
             var dutchLocale = new Locales(this.Session).DutchNetherlands;
 
             new StringTemplateBuilder(Session)
+                .WithName("PickList " + englischLocale.Name)
                 .WithBody(PickListTemplateEn)
                 .WithUniqueId(PickListTemplateEnId)
                 .WithLocale(englischLocale)
@@ -65,6 +66,7 @@ namespace Allors.Domain
                 .Build();
 
             new StringTemplateBuilder(Session)
+                .WithName("PickList " + dutchLocale.Name)
                 .WithBody(PickListTemplateNl)
                 .WithUniqueId(PickListTemplateNlId)
                 .WithLocale(dutchLocale)

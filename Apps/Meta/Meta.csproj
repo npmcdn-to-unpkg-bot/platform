@@ -50,6 +50,9 @@
     <Compile Include="..\..\Base\Meta\Base\Domain\Path.cs">
       <Link>Base\Domain\Path.cs</Link>
     </Compile>
+    <Compile Include="..\..\Base\Meta\Base\Domain\RoleType.cs">
+      <Link>Base\Domain\RoleType.cs</Link>
+    </Compile>
     <Compile Include="..\..\Base\Meta\Base\Population\AccessControl.cs">
       <Link>Base\Population\AccessControl.cs</Link>
     </Compile>

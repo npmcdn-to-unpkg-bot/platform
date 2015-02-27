@@ -21,9 +21,6 @@
 namespace Allors.Domain
 {
     using System;
-    using System.Text;
-
-    using Allors.Domain;
 
     public partial class Person
     {

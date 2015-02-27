@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class ShipmentPackages
     {
         public static readonly Guid PackagingSlipTemplateEnId = new Guid("528805EA-CCDE-41D7-9323-5E0638D75399");
@@ -44,6 +42,7 @@ namespace Allors.Domain
             var dutchLocale = new Locales(Session).DutchNetherlands;
 
             new StringTemplateBuilder(Session)
+                .WithName("ShipmentPackage " + englishLocale.Name)
                 .WithBody(PackagingSlipTemplateEn)
                 .WithUniqueId(PackagingSlipTemplateEnId)
                 .WithLocale(englishLocale)
@@ -51,6 +50,7 @@ namespace Allors.Domain
                 .Build();
 
             new StringTemplateBuilder(Session)
+                .WithName("ShipmentPackage " + dutchLocale.Name)
                 .WithBody(PackagingSlipTemplateNl)
                 .WithUniqueId(PackagingSlipTemplateNlId)
                 .WithLocale(dutchLocale)

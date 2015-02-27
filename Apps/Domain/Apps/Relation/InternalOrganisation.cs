@@ -209,6 +209,8 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
 
+            this.PartyName = this.Name;
+
             if (this.ExistPreviousCurrency)
             {
                 derivation.Log.AssertAreEqual(this, InternalOrganisations.Meta.PreferredCurrency, InternalOrganisations.Meta.PreviousCurrency);

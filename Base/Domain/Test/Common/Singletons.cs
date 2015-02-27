@@ -34,6 +34,7 @@ namespace Allors.Domain
 
             this.Instance.PersonTemplate = new StringTemplateBuilder(this.Session).WithUniqueId(PersonTemplateId)
                                                    .WithName("Person Derivation")
+                                                   .WithLocale(new Locales(this.Session).DutchBelgium)
                                                    .WithBody(@"main(this) ::= <<
 Hello $this.UserName$!
 >>")

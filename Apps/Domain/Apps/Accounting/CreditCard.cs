@@ -22,28 +22,6 @@ namespace Allors.Domain
 {
     public partial class CreditCard
     {
-        protected string AppsComposeDisplayName()
-        {
-            return string.Format(
-                "{0} card {1}, account holder {2}",
-                this.ExistCreditCardCompany ? this.CreditCardCompany.Name : null,
-                this.ExistCardNumber ? this.CardNumber : null,
-                this.ExistNameOnCard ? this.NameOnCard : null);
-        }
-
-        protected string AppsComposeSearchDataCharacterBoundaryText()
-        {
-            return this.ExistNameOnCard ? this.NameOnCard: null;
-        }
-
-        protected string AppsComposeSearchDataWordBoundaryText()
-        {
-            return string.Format(
-                "{0} {1}",
-                this.ExistCreditCardCompany ? this.CreditCardCompany.Name : null,
-                this.ExistCardNumber ? this.CardNumber : null);
-        }
-        
         public void AppsPrepareDerivation(ObjectPrepareDerivation method)
         {
             var derivation = method.Derivation;
@@ -55,13 +33,6 @@ namespace Allors.Domain
                     derivation.AddDerivable(ownCreditCard);                    
                 }
             }
-        }
-
-        public void AppsDerive(ObjectDerive method)
-        {
-            var derivation = method.Derivation;
-
-            derivation.Log.AssertIsUnique(this, CreditCards.Meta.CardNumber);
         }
     }
 }

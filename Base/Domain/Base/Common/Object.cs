@@ -27,7 +27,8 @@ namespace Allors.Domain
 
     public static partial class ObjectExtensions
     {
-        private static readonly Dictionary<string, RoleType[]> RequiredRoleTypesByClassName = new Dictionary<string, RoleType[]>(); 
+        private static readonly Dictionary<string, RoleType[]> RequiredRoleTypesByClassName = new Dictionary<string, RoleType[]>();
+        private static readonly Dictionary<string, RoleType[]> UniqueRoleTypesByClassName = new Dictionary<string, RoleType[]>(); 
 
         public static void BasePrepareDerivation(this Object @this, ObjectPrepareDerivation method)
         {
@@ -47,6 +48,7 @@ namespace Allors.Domain
             var derivation = method.Derivation;
             var @class = (Class)@this.Strategy.ObjectType;
 
+            // Required
             RoleType[] requiredRoleTypes;
             if (!RequiredRoleTypesByClassName.TryGetValue(@class.Name, out requiredRoleTypes))
             {
@@ -61,6 +63,23 @@ namespace Allors.Domain
             foreach (var roleType in requiredRoleTypes)
             {
                 derivation.Log.AssertExists(@this, roleType);
+            }
+
+            // Unique
+            RoleType[] uniqueRoleTypes;
+            if (!UniqueRoleTypesByClassName.TryGetValue(@class.Name, out uniqueRoleTypes))
+            {
+                uniqueRoleTypes = @class.ConcreteRoleTypes
+                    .Where(concreteRoleType => concreteRoleType.IsUnique)
+                    .Select(concreteRoleType => concreteRoleType.RoleType)
+                    .ToArray();
+
+                UniqueRoleTypesByClassName[@class.Name] = uniqueRoleTypes;
+            }
+
+            foreach (var roleType in uniqueRoleTypes)
+            {
+                derivation.Log.AssertIsUnique(@this, roleType);
             }
         }
     }
