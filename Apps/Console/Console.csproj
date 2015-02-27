@@ -49,6 +49,18 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Adapters\Allors.Databases.Memory\Allors.Databases.Memory.csproj">
+      <Project>{233622ff-5493-4981-9529-4337d84c8312}</Project>
+      <Name>Allors.Databases.Memory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Adapters\Allors.Databases.Object.SqlClient\Allors.Databases.Object.SqlClient.csproj">
+      <Project>{489d90a9-b63e-4983-86cc-2a061d8f6055}</Project>
+      <Name>Allors.Databases.Object.SqlClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Adapters\Allors.Workspaces.Memory\Allors.Workspaces.Memory.csproj">
+      <Project>{d09daf58-d524-40c2-887c-eadbf5609794}</Project>
+      <Name>Allors.Workspaces.Memory</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Framework\Framework\Allors.csproj">
       <Project>{84495b8e-1800-41c9-a236-abe6265a23a3}</Project>
       <Name>Allors</Name>

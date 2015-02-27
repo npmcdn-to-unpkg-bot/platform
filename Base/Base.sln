@@ -29,8 +29,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allors", "..\Framework\Fram
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allors.Databases.Memory", "..\Adapters\Allors.Databases.Memory\Allors.Databases.Memory.csproj", "{233622FF-5493-4981-9529-4337D84C8312}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allors.Databases.Relation.SQLite", "..\Adapters\Allors.Databases.Relation.SQLite\Allors.Databases.Relation.SQLite.csproj", "{76DB148D-BFBB-48BE-929B-4631C860F2A1}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allors.Databases.Object.SqlClient", "..\Adapters\Allors.Databases.Object.SqlClient\Allors.Databases.Object.SqlClient.csproj", "{489D90A9-B63E-4983-86CC-2A061D8F6055}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allors.Workspaces.Memory", "..\Adapters\Allors.Workspaces.Memory\Allors.Workspaces.Memory.csproj", "{D09DAF58-D524-40C2-887C-EADBF5609794}"
@@ -75,10 +73,6 @@ Global
 		{233622FF-5493-4981-9529-4337D84C8312}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{233622FF-5493-4981-9529-4337D84C8312}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{233622FF-5493-4981-9529-4337D84C8312}.Release|Any CPU.Build.0 = Release|Any CPU
-		{76DB148D-BFBB-48BE-929B-4631C860F2A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{76DB148D-BFBB-48BE-929B-4631C860F2A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{76DB148D-BFBB-48BE-929B-4631C860F2A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{76DB148D-BFBB-48BE-929B-4631C860F2A1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{489D90A9-B63E-4983-86CC-2A061D8F6055}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{489D90A9-B63E-4983-86CC-2A061D8F6055}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{489D90A9-B63E-4983-86CC-2A061D8F6055}.Release|Any CPU.ActiveCfg = Release|Any CPU

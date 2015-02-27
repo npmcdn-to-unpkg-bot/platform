@@ -53,7 +53,7 @@ namespace Allors.Databases.Object.SqlClient.ReadCommitted
         {
             get
             {
-                return System.Configuration.ConfigurationManager.ConnectionStrings["objectSqlclient"].ConnectionString;
+                return System.Configuration.ConfigurationManager.ConnectionStrings["sqlclientobject"].ConnectionString;
             }
         }
 

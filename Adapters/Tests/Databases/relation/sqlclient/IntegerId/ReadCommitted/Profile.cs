@@ -56,7 +56,7 @@ namespace Allors.Databases.Relation.SqlClient.ReadCommitted
         {
             get
             {
-                return System.Configuration.ConfigurationManager.ConnectionStrings["sqlclient"].ConnectionString;
+                return System.Configuration.ConfigurationManager.ConnectionStrings["sqlclientrelation"].ConnectionString;
             }
         }
 
