@@ -40,24 +40,9 @@ namespace Allors.Domain
             }
         }
 
-        public string DeriveSearchDataCharacterBoundaryText()
-        {
-            return this.CoreDeriveSearchDataCharacterBoundaryText();
-        }
-
-        public string DeriveSearchDataWordBoundaryText()
-        {
-            return this.CoreDeriveSearchDataWordBoundaryText();
-        }
-
-        public string DeriveDisplayName()
-        {
-            return this.CoreDeriveDisplayName();
-        }
-
         private void BuildOwnerSecurityToken()
         {
-            this.CoreCreateOwnerSecurityToken();
+            this.BaseCreateOwnerSecurityToken();
         }
     }
 }
