@@ -165,7 +165,6 @@
       <Link>Core\Population\ObjectInterface.cs</Link>
     </Compile>
     <Compile Include="Adapters\Domain\Composite.cs" />
-    <Compile Include="Adapters\Domain\ConcreteRoleType.cs" />
     <Compile Include="Adapters\MetaPopulation.v.cs" />
     <Compile Include="Generated\C1.g.cs" />
     <Compile Include="Generated\C2.g.cs" />
