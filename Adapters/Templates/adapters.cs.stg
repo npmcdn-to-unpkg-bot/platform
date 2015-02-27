@@ -309,26 +309,6 @@ $endif$
 classConcreteRoleType_Class() ::= <<
 $\n$
 $if(concreteRoleType.RoleType.ObjectType.IsUnit)$
-$if(concreteRoleType.IsRequiredOverride)$
-$if(concreteRoleType.RoleType.ObjectType.IsBoolean || 
-	concreteRoleType.RoleType.ObjectType.IsDateTime || 
-	concreteRoleType.RoleType.ObjectType.IsDecimal || 
-	concreteRoleType.RoleType.ObjectType.IsFloat || 
-	concreteRoleType.RoleType.ObjectType.IsInteger || 
-	concreteRoleType.RoleType.ObjectType.IsUnique)$
-		$roleType_ObjectType(concreteRoleType.RoleType)$ $concreteRoleType.RoleType.AssociationType.ObjectType.Name$.$concreteRoleType.RoleType.SingularPropertyName$ 
-		{
-			get
-			{
-				return ($roleType_ObjectType(concreteRoleType.RoleType)$) Strategy.GetUnitRole(Meta.$concreteRoleType.RoleType.PropertyName$);
-			}
-			set
-			{
-				Strategy.SetUnitRole(Meta.$concreteRoleType.RoleType.PropertyName$, value);
-			}
-		}
-$endif$
-$endif$
 		virtual public $concreteRoleType_ObjectType(concreteRoleType)$ $concreteRoleType.RoleType.SingularPropertyName$ 
 		{
 			get
@@ -489,19 +469,11 @@ methodTypeLeafClass() ::= <<
 boolean(value) ::= "$if(value)$true$else$false$endif$"
 
 roleType_ObjectType(roleType) ::= <%
-$if(roleType.IsRequired)$
-$objectType_Name(roleType.ObjectType)$
-$else$
 $objectType_NullableName(roleType.ObjectType)$
-$endif$
 %>
 
 concreteRoleType_ObjectType(roleType) ::= <%
-$if(concreteRoleType.IsRequired)$
-$objectType_Name(concreteRoleType.RoleType.ObjectType)$
-$else$
 $objectType_NullableName(concreteRoleType.RoleType.ObjectType)$
-$endif$
 %>
 
 objectType_Name(objectType) ::= <%
