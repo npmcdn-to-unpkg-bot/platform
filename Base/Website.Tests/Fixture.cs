@@ -46,8 +46,6 @@ namespace Allors
             var configuration = new Databases.Memory.IntegerId.Configuration { ObjectFactory = Config.ObjectFactory, WorkspaceFactory = new WorkspaceFactory() };
             Config.Default = new Databases.Memory.IntegerId.Database(configuration);
 
-            SearchDatas.SkipDerivation = true;
-
             Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("nl-BE");
 
             var database = Config.Default;
@@ -85,8 +83,6 @@ namespace Allors
                 session.Derive(true);
                 session.Commit();
 
-                SearchDatas.Derive(database);
-
                 using (var stringWriter = new StringWriter())
                 {
                     using (var writer = new XmlTextWriter(stringWriter))
@@ -95,8 +91,6 @@ namespace Allors
                         DefaultXml = stringWriter.ToString();
                     }
                 }
-
-                SearchDatas.SkipDerivation = false;
             }
         }
     }

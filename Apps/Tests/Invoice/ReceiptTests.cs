@@ -90,7 +90,6 @@ namespace Allors.Domain
             var receipt = new ReceiptBuilder(this.DatabaseSession).WithEffectiveDate(DateTime.Now).Build();
 
             Assert.IsTrue(receipt.ExistUniqueId);
-            Assert.IsTrue(receipt.ExistSearchData);
         }
 
         [Test]

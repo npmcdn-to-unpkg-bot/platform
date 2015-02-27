@@ -95,7 +95,6 @@ namespace Allors.Domain
                 .Build();
 
             Assert.IsTrue(generalLedgerAccount.ExistUniqueId);
-            Assert.IsTrue(generalLedgerAccount.ExistSearchData);
             Assert.AreEqual(generalLedgerAccount.CashAccount, false);
             Assert.AreEqual(generalLedgerAccount.CostCenterAccount, false);
             Assert.AreEqual(generalLedgerAccount.CostCenterRequired, false);

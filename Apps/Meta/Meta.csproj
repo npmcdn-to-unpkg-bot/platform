@@ -125,18 +125,6 @@
     <Compile Include="..\..\Base\Meta\Base\Population\Role.cs">
       <Link>Base\Population\Role.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Population\Searchable.cs">
-      <Link>Base\Population\Searchable.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Population\SearchData.cs">
-      <Link>Base\Population\SearchData.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Population\SearchFragment.cs">
-      <Link>Base\Population\SearchFragment.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Base\Meta\Base\Population\SearchResult.cs">
-      <Link>Base\Population\SearchResult.cs</Link>
-    </Compile>
     <Compile Include="..\..\Base\Meta\Base\Population\SecurityToken.cs">
       <Link>Base\Population\SecurityToken.cs</Link>
     </Compile>
@@ -710,10 +698,6 @@
     <Compile Include="Apps\Population\SalesRepRevenueHistory.cs" />
     <Compile Include="Apps\Population\SalesTerritory.cs" />
     <Compile Include="Apps\Population\Salutation.cs" />
-    <Compile Include="Apps\Population\Searchable.cs" />
-    <Compile Include="Apps\Population\SearchData.cs" />
-    <Compile Include="Apps\Population\SearchFragment.cs" />
-    <Compile Include="Apps\Population\SearchResult.cs" />
     <Compile Include="Apps\Population\SecurityToken.cs" />
     <Compile Include="Apps\Population\SecurityTokenOwner.cs" />
     <Compile Include="Apps\Population\SerializedInventoryItem.cs" />
@@ -1244,10 +1228,6 @@
     <Compile Include="Generated\SalesRepRevenueHistory.g.cs" />
     <Compile Include="Generated\SalesTerritory.g.cs" />
     <Compile Include="Generated\Salutation.g.cs" />
-    <Compile Include="Generated\Searchable.g.cs" />
-    <Compile Include="Generated\SearchData.g.cs" />
-    <Compile Include="Generated\SearchFragment.g.cs" />
-    <Compile Include="Generated\SearchResult.g.cs" />
     <Compile Include="Generated\SecurityToken.g.cs" />
     <Compile Include="Generated\SecurityTokenOwner.g.cs" />
     <Compile Include="Generated\SerializedInventoryItem.g.cs" />

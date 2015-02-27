@@ -51,14 +51,6 @@ namespace Allors.Domain
 					global::System.String PrintContent {set;}
 
 	}
-	public interface Searchable  : Object 
-	{
-					SearchData SearchData {set;}
-
-	}
-	public interface SearchResult  : Object, AccessControlledObject 
-	{
-	}
 	public interface SecurityTokenOwner  : Object 
 	{
 					SecurityToken OwnerSecurityToken {set;}
@@ -294,7 +286,7 @@ namespace Allors.Domain
 					global::System.Int32 Value {set;}
 
 	}
-	public interface Country  : Object, AccessControlledObject, Searchable 
+	public interface Country  : Object, AccessControlledObject 
 	{
 					Currency Currency {set;}
 
@@ -325,7 +317,7 @@ namespace Allors.Domain
 					global::System.String OriginalFilename {set;}
 
 	}
-	public interface Language  : Object, AccessControlledObject, Searchable 
+	public interface Language  : Object, AccessControlledObject 
 	{
 					global::System.String Name {set;}
 
@@ -343,7 +335,7 @@ namespace Allors.Domain
 					Country Country {set;}
 
 	}
-	public interface LocalisedText  : Object, Searchable, AccessControlledObject, Localised 
+	public interface LocalisedText  : Object, AccessControlledObject, Localised 
 	{
 					global::System.String Text {set;}
 
@@ -387,7 +379,7 @@ namespace Allors.Domain
 					global::System.Int32 OperationEnum {set;}
 
 	}
-	public interface Person  : Object, User, AccessControlledObject, UniquelyIdentifiable, SearchResult, Searchable, Printable, Deletable 
+	public interface Person  : Object, User, AccessControlledObject, UniquelyIdentifiable, Printable, Deletable 
 	{
 					global::System.String LastName {set;}
 
@@ -440,24 +432,6 @@ namespace Allors.Domain
 					global::System.String Name {set;}
 
 	}
-	public interface SearchData  : Object, Deletable 
-	{
-					global::System.String CharacterBoundaryText {set;}
-
-					global::System.String PreviousCharacterBoundaryText {set;}
-
-					SearchFragment SearchFragments {set;}
-
-					global::System.String PreviousWordBoundaryText {set;}
-
-					global::System.String WordBoundaryText {set;}
-
-	}
-	public interface SearchFragment  : Object 
-	{
-					global::System.String LowerCaseText {set;}
-
-	}
 	public interface SecurityToken  : Object, Deletable 
 	{
 	}
@@ -492,7 +466,7 @@ namespace Allors.Domain
 					ObjectState ToState {set;}
 
 	}
-	public interface UserGroup  : Object, UniquelyIdentifiable, Searchable, AccessControlledObject 
+	public interface UserGroup  : Object, UniquelyIdentifiable, AccessControlledObject 
 	{
 					Role Role {set;}
 
@@ -516,7 +490,7 @@ namespace Allors.Domain
 					global::System.String AllorsString {set;}
 
 	}
-	public interface C1  : Object, I1, AccessControlledObject, Searchable 
+	public interface C1  : Object, I1, AccessControlledObject 
 	{
 					I1 C1I1One2One {set;}
 
@@ -577,7 +551,7 @@ namespace Allors.Domain
 					global::System.Int32? C1AllorsInteger {set;}
 
 	}
-	public interface C2  : Object, Searchable, I2 
+	public interface C2  : Object, I2 
 	{
 					global::System.Decimal? C2AllorsDecimal {set;}
 
@@ -690,14 +664,14 @@ namespace Allors.Domain
 	public interface Gender  : Object, Enumeration 
 	{
 	}
-	public interface HomeAddress  : Object, Searchable, Address 
+	public interface HomeAddress  : Object, Address 
 	{
 					global::System.String Street {set;}
 
 					global::System.String HouseNumber {set;}
 
 	}
-	public interface MailboxAddress  : Object, Searchable, Address 
+	public interface MailboxAddress  : Object, Address 
 	{
 					global::System.String PoBox {set;}
 
@@ -707,7 +681,7 @@ namespace Allors.Domain
 					Two Two {set;}
 
 	}
-	public interface Organisation  : Object, Searchable, UniquelyIdentifiable, SearchResult 
+	public interface Organisation  : Object, UniquelyIdentifiable, AccessControlledObject 
 	{
 					Person Shareholders {set;}
 
@@ -732,18 +706,13 @@ namespace Allors.Domain
 					global::System.String Size {set;}
 
 	}
-	public interface Place  : Object, Searchable 
+	public interface Place  : Object 
 	{
 					Country Country {set;}
 
 					global::System.String City {set;}
 
 					global::System.String PostalCode {set;}
-
-	}
-	public interface Search  : Object, Searchable 
-	{
-					global::System.String Text {set;}
 
 	}
 	public interface Second  : Object 

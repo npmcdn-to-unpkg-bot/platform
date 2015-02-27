@@ -77,21 +77,6 @@ namespace Allors.Domain
             this.AppsStartNewFiscalYear();
         }
 
-        public string DeriveDisplayName()
-        {
-            return this.AppsDeriveDisplayName();
-        }
-
-        public string DeriveSearchDataCharacterBoundaryText()
-        {
-            return this.AppsDeriveSearchDataCharacterBoundaryText();
-        }
-
-        public string DeriveSearchDataWordBoundaryText()
-        {
-            return this.AppsDeriveSearchDataWordBoundaryText();
-        }
-
         private void DeriveEmployeeUserGroups(IDerivation derivation)
         {
             this.AppsDeriveEmployeeUserGroups(derivation);

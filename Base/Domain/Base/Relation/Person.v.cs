@@ -24,11 +24,6 @@ namespace Allors.Domain
     {
         public void BaseDelete(DeletableDelete method)
         {
-            if (this.ExistSearchData)
-            {
-                this.SearchData.Delete().Execute();
-            }
-
             if (this.ExistOwnerSecurityToken)
             {
                 foreach (AccessControl acl in this.OwnerSecurityToken.AccessControlsWhereObject)

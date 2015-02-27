@@ -20,11 +20,6 @@
 
 namespace Allors.Domain
 {
-    using System.Globalization;
-    using System.Text;
-
-    using Allors.Domain;
-
     public partial class Fee
     {
         public void AppsPrepareDerivation(ObjectPrepareDerivation method)
@@ -54,51 +49,6 @@ namespace Allors.Domain
 
             derivation.Log.AssertAtLeastOne(this, Fees.Meta.Amount, Fees.Meta.Percentage);
             derivation.Log.AssertExistsAtMostOne(this, Fees.Meta.Amount, Fees.Meta.Percentage);
-
-            this.DeriveDisplayName();
-        }
-
-        private void AppsDeriveDisplayName()
-        {
-            var cultureInfo = new CultureInfo(CultureInfo.CurrentCulture.Name);
-            var currencyFormat = (NumberFormatInfo)cultureInfo.NumberFormat.Clone();
-
-            if (this.ExistOrderWhereFee)
-            {
-                var salesOrder = (SalesOrder)this.OrderWhereFee;
-                var cultureInfoName = salesOrder.Locale.Name;
-
-                cultureInfo = new CultureInfo(cultureInfoName, false);
-                currencyFormat = (NumberFormatInfo)cultureInfo.NumberFormat.Clone();
-                currencyFormat.CurrencySymbol = salesOrder.TakenByInternalOrganisation.PreferredCurrency.Symbol;
-            }
-
-            if (this.ExistInvoiceWhereFee)
-            {
-                var salesInvoice = (Allors.Domain.SalesInvoice)this.InvoiceWhereFee;
-                var cultureInfoName = salesInvoice.Locale.Name;
-
-                cultureInfo = new CultureInfo(cultureInfoName, false);
-                currencyFormat = (NumberFormatInfo)cultureInfo.NumberFormat.Clone();
-                currencyFormat.CurrencySymbol = salesInvoice.BilledFromInternalOrganisation.PreferredCurrency.Symbol;
-            }
-
-            var uiText = new StringBuilder();
-
-            uiText.Append("Fee: ");
-
-            if (this.ExistAmount)
-            {
-                uiText.Append(this.Amount.ToString("C", currencyFormat));
-            }
-            else
-            {
-                if (this.ExistPercentage)
-                {
-                    uiText.Append(this.Percentage.ToString("##.##"));
-                    uiText.Append("%");
-                }
-            }
         }
     }
 }

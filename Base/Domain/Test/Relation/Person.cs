@@ -50,14 +50,6 @@ namespace Allors.Domain
             return base.ToString();
         }
 
-        public void TestsOnPostBuild(ObjectOnPostBuild method)
-        {
-            if (!this.ExistSearchData)
-            {
-                this.SearchData = new SearchDataBuilder(this.Strategy.Session).Build();
-            }
-        }
-
         public void TestsDerive(ObjectDerive method)
         {
             var derivation = method.Derivation;
@@ -67,9 +59,6 @@ namespace Allors.Domain
                 var mySecurityToken = new SecurityTokenBuilder(this.Strategy.Session).Build();
                 this.OwnerSecurityToken = mySecurityToken;
             }
-
-
-            this.SearchData.RemoveWordBoundaryText();
 
             derivation.Log.AssertExists(this, Persons.Meta.LastName);
 
@@ -88,41 +77,6 @@ namespace Allors.Domain
 
             var template = Singleton.Instance(this.Strategy.Session).PersonTemplate;
             this.PrintContent = template.Apply(new Dictionary<string, object> { { "this", this } });
-        }
-
-        private string TestComposeDisplayName()
-        {
-            if (this.ExistFirstName && this.ExistMiddleName && this.ExistLastName)
-            {
-                return this.FirstName + " " + this.MiddleName + " " + this.LastName;
-            }
-
-            if (this.ExistFirstName && this.ExistLastName)
-            {
-                return this.FirstName + " " + this.LastName;
-            }
-
-            if (this.ExistMiddleName && this.ExistLastName)
-            {
-                return this.MiddleName + " " + this.LastName;
-            }
-
-            if (this.ExistLastName)
-            {
-                return this.LastName;
-            }
-
-            if (this.ExistFirstName)
-            {
-                return FirstName;
-            }
-
-            if (this.ExistUniqueId)
-            {
-                return this.UniqueId.ToString();
-            }
-
-            return this.GetType() + "[" + this.Id + "]";
         }
     }
 }

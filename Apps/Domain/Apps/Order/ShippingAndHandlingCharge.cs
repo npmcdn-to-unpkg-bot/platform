@@ -54,51 +54,6 @@ namespace Allors.Domain
 
             derivation.Log.AssertAtLeastOne(this, ShippingAndHandlingCharges.Meta.Amount, ShippingAndHandlingCharges.Meta.Percentage);
             derivation.Log.AssertExistsAtMostOne(this, ShippingAndHandlingCharges.Meta.Amount, ShippingAndHandlingCharges.Meta.Percentage);
-
-            this.DeriveDisplayName();
-        }
-
-        private void AppsDeriveDisplayName()
-        {
-            var cultureInfo = new CultureInfo(CultureInfo.CurrentCulture.Name);
-            var currencyFormat = (NumberFormatInfo)cultureInfo.NumberFormat.Clone();
-
-            if (this.ExistOrderWhereShippingAndHandlingCharge)
-            {
-                var salesOrder = (SalesOrder)this.OrderWhereShippingAndHandlingCharge;
-                var cultureInfoName = salesOrder.Locale.Name;
-
-                cultureInfo = new CultureInfo(cultureInfoName, false);
-                currencyFormat = (NumberFormatInfo)cultureInfo.NumberFormat.Clone();
-                currencyFormat.CurrencySymbol = salesOrder.TakenByInternalOrganisation.PreferredCurrency.Symbol;
-            }
-
-            if (this.ExistInvoiceWhereShippingAndHandlingCharge)
-            {
-                var salesInvoice = (Allors.Domain.SalesInvoice)this.InvoiceWhereShippingAndHandlingCharge;
-                var cultureInfoName = salesInvoice.Locale.Name;
-
-                cultureInfo = new CultureInfo(cultureInfoName, false);
-                currencyFormat = (NumberFormatInfo)cultureInfo.NumberFormat.Clone();
-                currencyFormat.CurrencySymbol = salesInvoice.BilledFromInternalOrganisation.PreferredCurrency.Symbol;
-            }
-
-            var uiText = new StringBuilder();
-
-            uiText.Append("Shipping and handling: ");
-
-            if (this.ExistAmount)
-            {
-                uiText.Append(this.Amount.ToString("C", currencyFormat));
-            }
-            else
-            {
-                if (this.ExistPercentage)
-                {
-                    uiText.Append(this.Percentage.ToString("##.##"));
-                    uiText.Append("%");
-                }
-            }
         }
     }
 }

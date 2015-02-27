@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using System.Text;
-
     public partial class UserGroup
     {
         public bool ContainsMember(User user)
@@ -40,6 +38,7 @@ namespace Allors.Domain
         protected void BasePrepareDerivation(ObjectDerive method)
         {
             var derivation = method.Derivation;
+            
             foreach (Object member in this.Members)
             {
                 derivation.AddDependency(member, this);
@@ -55,23 +54,6 @@ namespace Allors.Domain
             if (this.ExistParent)
             {
                 // TODO: members should be added to ancestor groups
-            }
-        }
-
-        private void BaseDeriveDisplayName()
-        {
-            var uiText = new StringBuilder();
-
-            if (this.ExistName)
-            {
-                uiText.Append(this.Name);
-            }
-
-            if (this.ExistMembers)
-            {
-                uiText.Append(" with ");
-                uiText.Append(this.Members.Count);
-                uiText.Append(" members");
             }
         }
     }

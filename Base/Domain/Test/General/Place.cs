@@ -26,14 +26,6 @@ namespace Allors.Domain
     /// </summary>
     public partial class Place
     {
-        public void TestsOnPostBuild(ObjectOnPostBuild method)
-        {
-            if (!this.ExistSearchData)
-            {
-                this.SearchData = new SearchDataBuilder(this.Strategy.Session).Build();
-            }
-        }
-
         public void TestsDerive(ObjectDerive method)
         {
             var derivation = method.Derivation;

@@ -49,7 +49,6 @@
     <Compile Include="Base\ObjectOnBuild.cs" />
     <Compile Include="Base\ObjectOnPostBuild.cs" />
     <Compile Include="Base\ObjectExtensions.cs" />
-    <Compile Include="Base\Search\SearchableExtensions.cs" />
     <Compile Include="Generated\Base\AccessControl.g.cs" />
     <Compile Include="Generated\Base\AccessControlledObject.g.cs" />
     <Compile Include="Generated\Base\Address.g.cs" />
@@ -110,11 +109,6 @@
     <Compile Include="Generated\Base\Role.g.cs" />
     <Compile Include="Generated\Base\S1.g.cs" />
     <Compile Include="Generated\Base\S1SuperinterfaceMethod.g.cs" />
-    <Compile Include="Generated\Base\Search.g.cs" />
-    <Compile Include="Generated\Base\Searchable.g.cs" />
-    <Compile Include="Generated\Base\SearchData.g.cs" />
-    <Compile Include="Generated\Base\SearchFragment.g.cs" />
-    <Compile Include="Generated\Base\SearchResult.g.cs" />
     <Compile Include="Generated\Base\Second.g.cs" />
     <Compile Include="Generated\Base\SecurityToken.g.cs" />
     <Compile Include="Generated\Base\SecurityTokenOwner.g.cs" />
@@ -239,7 +233,6 @@
     <Compile Include="Base\Localisation\Locale.cs" />
     <Compile Include="Base\Localisation\Locales.cs" />
     <Compile Include="Base\Localisation\Locales.v.cs" />
-    <Compile Include="Base\Localisation\LocalisedText.cs" />
     <Compile Include="Base\Localisation\LocalisedTexts.cs" />
     <Compile Include="Base\Meta\IObjectTypeExtensions.cs" />
     <Compile Include="Base\Meta\Path.cs" />
@@ -250,13 +243,6 @@
     <Compile Include="Base\Relation\Person.cs" />
     <Compile Include="Base\Relation\Person.v.cs" />
     <Compile Include="Base\Relation\Persons.cs" />
-    <Compile Include="Base\Search\Searchables.cs" />
-    <Compile Include="Base\Search\SearchData.cs" />
-    <Compile Include="Base\Search\SearchData.v.cs" />
-    <Compile Include="Base\Search\SearchDatas.cs" />
-    <Compile Include="Base\Search\SearchFragment.cs" />
-    <Compile Include="Base\Search\SearchFragments.cs" />
-    <Compile Include="Base\Search\SearchResults.cs" />
     <Compile Include="Base\Security\AccessControl.cs" />
     <Compile Include="Base\Security\AccessControlList.cs" />
     <Compile Include="Base\Security\AccessControlListCache.cs" />
@@ -277,7 +263,6 @@
     <Compile Include="Base\Security\SecurityTokens.cs" />
     <Compile Include="Base\Security\UserExtensions.cs" />
     <Compile Include="Base\Security\UserGroup.cs" />
-    <Compile Include="Base\Security\UserGroup.v.cs" />
     <Compile Include="Base\Security\UserGroups.cs" />
     <Compile Include="Base\Security\Users.cs" />
     <Compile Include="Base\Setup.cs" />

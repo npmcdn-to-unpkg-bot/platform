@@ -24,9 +24,6 @@ namespace Allors.Domain
     using System.Threading;
 
     using Allors;
-    using Allors;
-
-    using Allors.Domain;
 
     public partial class Counters
     {

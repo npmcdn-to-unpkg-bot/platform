@@ -21,27 +21,18 @@
         {
             var database = Config.Default;
             database.Init();
-            try
+
+            using (var session = database.CreateSession())
             {
-                SearchDatas.SkipDerivation = true;
-                using (var session = database.CreateSession())
-                {
-                    new Setup(session).Apply();
+                new Setup(session).Apply();
 
-                    var passwordHasher = new PasswordHasher();
+                var passwordHasher = new PasswordHasher();
 
-                    var koen = new PersonBuilder(session).WithFirstName("Koen").WithLastName("Van Exem").WithUserName("koen@allors.com").WithUserEmail("koen@allors.com").WithUserEmailConfirmed(true).WithUserPasswordHash(passwordHasher.HashPassword("a")).Build();
-                    new UserGroups(session).Administrators.AddMember(koen);
+                var koen = new PersonBuilder(session).WithFirstName("Koen").WithLastName("Van Exem").WithUserName("koen@allors.com").WithUserEmail("koen@allors.com").WithUserEmailConfirmed(true).WithUserPasswordHash(passwordHasher.HashPassword("a")).Build();
+                new UserGroups(session).Administrators.AddMember(koen);
 
-                    session.Derive();
-                    session.Commit();
-                }
-
-                SearchDatas.Derive(database);
-            }
-            finally
-            {
-                SearchDatas.SkipDerivation = false;
+                session.Derive();
+                session.Commit();
             }
 
             return this.View("Index");

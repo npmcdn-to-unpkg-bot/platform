@@ -23,34 +23,11 @@ namespace Allors.Domain
 {
     public partial class Organisation
     {
-        public void TestsOnPostBuild(ObjectOnPostBuild method)
-        {
-            if (!this.ExistSearchData)
-            {
-                this.SearchData = new SearchDataBuilder(this.Strategy.Session).Build();
-            }
-        }
-
         public void TestsDerive(ObjectDerive method)
         {
             var derivation = method.Derivation;
 
             derivation.Log.AssertExists(this, Organisations.Meta.Name);
-        }
-
-        private string CustomComposeDisplayName()
-        {
-            if (this.ExistName)
-            {
-                return this.Name;
-            }
-
-            if (this.ExistUniqueId)
-            {
-                return this.UniqueId.ToString();
-            }
-
-            return this.GetType() + "[" + this.Id + "]";
         }
     }
 }

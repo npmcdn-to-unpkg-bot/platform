@@ -254,9 +254,6 @@
     <Compile Include="..\..\Base\Domain\Base\Localisation\Locales.v.cs">
       <Link>Base\Localisation\Locales.v.cs</Link>
     </Compile>
-    <Compile Include="..\..\Base\Domain\Base\Localisation\LocalisedText.cs">
-      <Link>Base\Localisation\LocalisedText.cs</Link>
-    </Compile>
     <Compile Include="..\..\Base\Domain\Base\Localisation\LocalisedTexts.cs">
       <Link>Base\Localisation\LocalisedTexts.cs</Link>
     </Compile>
@@ -295,30 +292,6 @@
     </Compile>
     <Compile Include="..\..\Base\Domain\Base\Relation\Persons.cs">
       <Link>Base\Relation\Persons.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Base\Domain\Base\Search\SearchableExtensions.cs">
-      <Link>Base\Search\SearchableExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Base\Domain\Base\Search\Searchables.cs">
-      <Link>Base\Search\Searchables.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Base\Domain\Base\Search\SearchData.cs">
-      <Link>Base\Search\SearchData.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Base\Domain\Base\Search\SearchData.v.cs">
-      <Link>Base\Search\SearchData.v.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Base\Domain\Base\Search\SearchDatas.cs">
-      <Link>Base\Search\SearchDatas.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Base\Domain\Base\Search\SearchFragment.cs">
-      <Link>Base\Search\SearchFragment.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Base\Domain\Base\Search\SearchFragments.cs">
-      <Link>Base\Search\SearchFragments.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Base\Domain\Base\Search\SearchResults.cs">
-      <Link>Base\Search\SearchResults.cs</Link>
     </Compile>
     <Compile Include="..\..\Base\Domain\Base\Security\AccessControl.cs">
       <Link>Base\Security\AccessControl.cs</Link>
@@ -379,9 +352,6 @@
     </Compile>
     <Compile Include="..\..\Base\Domain\Base\Security\UserGroup.cs">
       <Link>Base\Security\UserGroup.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Base\Domain\Base\Security\UserGroup.v.cs">
-      <Link>Base\Security\UserGroup.v.cs</Link>
     </Compile>
     <Compile Include="..\..\Base\Domain\Base\Security\UserGroups.cs">
       <Link>Base\Security\UserGroups.cs</Link>
@@ -650,7 +620,6 @@
     <Compile Include="Apps\Order\EngagementRates.cs" />
     <Compile Include="Apps\Order\Engagements.cs" />
     <Compile Include="Apps\Order\Fee.cs" />
-    <Compile Include="Apps\Order\Fee.v.cs" />
     <Compile Include="Apps\Order\Fees.cs" />
     <Compile Include="Apps\Order\InternalRequirement.cs" />
     <Compile Include="Apps\Order\InternalRequirement.v.cs" />
@@ -715,7 +684,6 @@
     <Compile Include="Apps\Order\SalesOrderStatus.cs" />
     <Compile Include="Apps\Order\SalesOrderStatuses.cs" />
     <Compile Include="Apps\Order\ShippingAndHandlingCharge.cs" />
-    <Compile Include="Apps\Order\ShippingAndHandlingCharge.v.cs" />
     <Compile Include="Apps\Order\ShippingAndHandlingCharges.cs" />
     <Compile Include="Apps\Order\StatementsOfWork.cs" />
     <Compile Include="Apps\Order\SurchargeAdjustment.cs" />
@@ -1577,10 +1545,6 @@
     <Compile Include="Generated\Base\SalesRepRevenueHistory.g.cs" />
     <Compile Include="Generated\Base\SalesTerritory.g.cs" />
     <Compile Include="Generated\Base\Salutation.g.cs" />
-    <Compile Include="Generated\Base\Searchable.g.cs" />
-    <Compile Include="Generated\Base\SearchData.g.cs" />
-    <Compile Include="Generated\Base\SearchFragment.g.cs" />
-    <Compile Include="Generated\Base\SearchResult.g.cs" />
     <Compile Include="Generated\Base\SecurityToken.g.cs" />
     <Compile Include="Generated\Base\SecurityTokenOwner.g.cs" />
     <Compile Include="Generated\Base\SerializedInventoryItem.g.cs" />

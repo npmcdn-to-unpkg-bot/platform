@@ -1625,32 +1625,6 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenSalesOrderItem_WhenDeriving_ThenDisplayNameAndSearchTextAreSet()
-        {
-            throw new Exception("TODO");
-
-            //var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
-            //var billToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person1").Build();
-            //var shipToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person2").Build();
-            //var internalOrganisation = Singleton.Instance(this.DatabaseSession).DefaultInternalOrganisation;
-
-            //new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(billToCustomer).WithInternalOrganisation(internalOrganisation).Build();
-            //new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(shipToCustomer).WithInternalOrganisation(internalOrganisation).Build();
-
-            //var order = new SalesOrderBuilder(this.DatabaseSession)
-            //    .WithOrderNumber("1")
-            //    .WithBillToCustomer(billToCustomer)
-            //    .WithShipToCustomer(shipToCustomer)
-            //    .WithShipToAddress(new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build())
-            //    .WithTakenByInternalOrganisation(internalOrganisation)
-            //    .Build();
-
-            //this.DatabaseSession.Derive(true);
-
-            //Assert.AreEqual(string.Format("{0} - {1} to {2}", order.OrderNumber, order.OrderDate.Date, shipToCustomer.DisplayName), order.DisplayName);
-        }
-
-        [Test]
         public void GivenSalesOrder_WhenGettingOrderNumberWithoutFormat_ThenOrderNumberShouldBeReturned()
         {
             var billToCustomer = new PersonBuilder(this.DatabaseSession).WithLastName("person1").Build();

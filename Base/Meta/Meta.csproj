@@ -224,10 +224,6 @@
     <Compile Include="Base\Population\Role.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Base\Population\Searchable.cs" />
-    <Compile Include="Base\Population\SearchData.cs" />
-    <Compile Include="Base\Population\SearchFragment.cs" />
-    <Compile Include="Base\Population\SearchResult.cs" />
     <Compile Include="Base\Population\SecurityToken.cs" />
     <Compile Include="Base\Population\SecurityTokenOwner.cs" />
     <Compile Include="Base\Population\Singleton.cs" />
@@ -290,11 +286,6 @@
     <Compile Include="Generated\PrintQueue.g.cs" />
     <Compile Include="Generated\Role.g.cs" />
     <Compile Include="Generated\S1.g.cs" />
-    <Compile Include="Generated\Search.g.cs" />
-    <Compile Include="Generated\Searchable.g.cs" />
-    <Compile Include="Generated\SearchData.g.cs" />
-    <Compile Include="Generated\SearchFragment.g.cs" />
-    <Compile Include="Generated\SearchResult.g.cs" />
     <Compile Include="Generated\Second.g.cs" />
     <Compile Include="Generated\SecurityToken.g.cs" />
     <Compile Include="Generated\SecurityTokenOwner.g.cs" />

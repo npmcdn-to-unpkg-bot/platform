@@ -64,21 +64,6 @@ namespace Allors.Domain
             return string.Format(this.PurchaseOrderNumberPrefix, purchaseOrderNumber);
         }
 
-        protected string AppsDeriveDisplayName()
-        {
-            return this.Name;
-        }
-
-        protected string AppsDeriveSearchDataCharacterBoundaryText()
-        {
-            return this.Name;
-        }
-
-        protected string AppsDeriveSearchDataWordBoundaryText()
-        {
-            return null;
-        }
-
         public void AppsOnPostBuild(ObjectOnPostBuild method)
         {
             if (!this.ExistPurchaseInvoiceCounter)
