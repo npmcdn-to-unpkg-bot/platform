@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{84495B8E-1800-41C9-A236-ABE6265A23A3}</ProjectGuid>
+    <ProjectGuid>{5B4E2D7C-8EF8-45F5-BFB2-E595C401A95F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Allors</RootNamespace>
     <AssemblyName>Allors</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -32,18 +32,14 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Databases\IClassCache.cs" />
     <Compile Include="Databases\ClassCache.cs" />
-    <Compile Include="Databases\RoleCache.cs" />
-    <Compile Include="Databases\IRoleCache.cs" />
     <Compile Include="Databases\Configuration.cs" />
+    <Compile Include="Databases\IClassCache.cs" />
+    <Compile Include="Databases\IRoleCache.cs" />
+    <Compile Include="Databases\RoleCache.cs" />
     <Compile Include="Extent.cs" />
     <Compile Include="ExtentT.cs" />
     <Compile Include="IChangeSet.cs" />
@@ -59,11 +55,10 @@
     <Compile Include="IWorkspace.cs" />
     <Compile Include="IWorkspaceFactory.cs" />
     <Compile Include="IWorkspaceSession.cs" />
-    <Compile Include="Meta\IDomain.cs" />
-    <Compile Include="Meta\Multiplicity.cs" />
     <Compile Include="Meta\IAssociationType.cs" />
     <Compile Include="Meta\IClass.cs" />
     <Compile Include="Meta\IComposite.cs" />
+    <Compile Include="Meta\IDomain.cs" />
     <Compile Include="Meta\IInterface.cs" />
     <Compile Include="Meta\IMetaObject.cs" />
     <Compile Include="Meta\IMetaPopulation.cs" />
@@ -72,20 +67,21 @@
     <Compile Include="Meta\IRoleType.cs" />
     <Compile Include="Meta\IUnit.cs" />
     <Compile Include="Meta\IValidationLog.cs" />
+    <Compile Include="Meta\Multiplicity.cs" />
     <Compile Include="Meta\UnitIds.cs" />
     <Compile Include="Meta\UnitTags.cs" />
     <Compile Include="ObjectFactory.cs" />
-    <Compile Include="ObjectIdsInteger.cs" />
-    <Compile Include="ObjectIdsLong.cs" />
-    <Compile Include="ObjectIds.cs" />
     <Compile Include="ObjectId.cs" />
     <Compile Include="ObjectIdInteger.cs" />
     <Compile Include="ObjectIdLong.cs" />
+    <Compile Include="ObjectIds.cs" />
+    <Compile Include="ObjectIdsInteger.cs" />
+    <Compile Include="ObjectIdsLong.cs" />
     <Compile Include="ObjectNotLoadedEventArgs.cs" />
-    <Compile Include="Populations\PredicateAssertions.cs" />
     <Compile Include="Populations\Configuration.cs" />
     <Compile Include="Populations\EmptySet.cs" />
     <Compile Include="Populations\MetaObjectComparer.cs" />
+    <Compile Include="Populations\PredicateAssertions.cs" />
     <Compile Include="Populations\RoleAssertions.cs" />
     <Compile Include="Populations\RoleTypeExtensions.cs" />
     <Compile Include="Populations\Serialization.cs" />
