@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B6C2E17B-53E1-44A4-9299-5350CC854E65}</ProjectGuid>
+    <ProjectGuid>{B4EDDCC1-BA69-4415-BFC8-78098AEFF221}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Domain</RootNamespace>
     <AssemblyName>Domain</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -32,12 +32,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Antlr4.StringTemplate">
+    <Reference Include="Antlr4.StringTemplate, Version=4.0.6.9004, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Antlr4.StringTemplate.4.0.6.9004\lib\net35\Antlr4.StringTemplate.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -845,8 +850,6 @@
     <Compile Include="Apps\Relation\CaseStatuses.cs" />
     <Compile Include="Apps\Relation\Citizenships.cs" />
     <Compile Include="Apps\Relation\ClientAgreements.cs" />
-    <Compile Include="Apps\Relation\LetterCorrespondence.v.cs" />
-    <Compile Include="Apps\Relation\ProspectRelationships.cs" />
     <Compile Include="Apps\Relation\ClientRelationships.cs" />
     <Compile Include="Apps\Relation\CommunicationEvent.v.cs" />
     <Compile Include="Apps\Relation\CommunicationEventExtensions.cs" />
@@ -890,6 +893,7 @@
     <Compile Include="Apps\Relation\LegalTerm.cs" />
     <Compile Include="Apps\Relation\LegalTerms.cs" />
     <Compile Include="Apps\Relation\LetterCorrespondence.cs" />
+    <Compile Include="Apps\Relation\LetterCorrespondence.v.cs" />
     <Compile Include="Apps\Relation\LetterCorrespondences.cs" />
     <Compile Include="Apps\Relation\MaritalStatuses.cs" />
     <Compile Include="Apps\Relation\Organisation.cs" />
@@ -910,7 +914,6 @@
     <Compile Include="Apps\Relation\PartyClassifications.cs" />
     <Compile Include="Apps\Relation\PartyContactMechanism.cs" />
     <Compile Include="Apps\Relation\PartyContactMechanisms.cs" />
-    <Compile Include="Apps\Relation\Priorities.cs" />
     <Compile Include="Apps\Relation\PartyRelationshipStatuses.cs" />
     <Compile Include="Apps\Relation\Passport.cs" />
     <Compile Include="Apps\Relation\Passports.cs" />
@@ -921,8 +924,10 @@
     <Compile Include="Apps\Relation\PhoneCommunication.cs" />
     <Compile Include="Apps\Relation\PhoneCommunication.v.cs" />
     <Compile Include="Apps\Relation\PhoneCommunications.cs" />
+    <Compile Include="Apps\Relation\Priorities.cs" />
     <Compile Include="Apps\Relation\ProductFeatureApplicabilityRelationships.cs" />
     <Compile Include="Apps\Relation\ProfessionalServicesRelationships.cs" />
+    <Compile Include="Apps\Relation\ProspectRelationships.cs" />
     <Compile Include="Apps\Relation\PurchaseAgreements.cs" />
     <Compile Include="Apps\Relation\SalesAgreements.cs" />
     <Compile Include="Apps\Relation\SalesRepRelationship.cs" />
@@ -1652,32 +1657,31 @@
     <Compile Include="Generated\Base\WorkEffortWorkDone.g.cs" />
     <Compile Include="Generated\Base\WorkFlow.g.cs" />
     <Compile Include="Generated\Base\WorkRequirement.g.cs" />
-    <Compile Include="Test\ObjectsBase.cs" />
-    <Compile Include="Test\ObjectsBase.v.cs" />
-    <Compile Include="Test\Setup.cs" />
-    <Compile Include="Test\Setup.v.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Framework\Framework\Allors.csproj">
-      <Project>{84495b8e-1800-41c9-a236-abe6265a23a3}</Project>
-      <Name>Allors</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Meta\Meta.csproj">
-      <Project>{BA6EFCFE-CB7F-4994-A5A4-C11DDAAC32DD}</Project>
-      <Name>Meta</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Resources\Resources.csproj">
-      <Project>{a10683f7-b261-4770-81c6-bb589e768acb}</Project>
-      <Name>Resources</Name>
-    </ProjectReference>
+    <Compile Include="Tests\ObjectsBase.cs" />
+    <Compile Include="Tests\ObjectsBase.v.cs" />
+    <Compile Include="Tests\Setup.cs" />
+    <Compile Include="Tests\Setup.v.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Apps\Order\Overview.cd" />
     <None Include="packages.config" />
     <None Include="Settings.StyleCop" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\Framework\Allors\Allors.csproj">
+      <Project>{5b4e2d7c-8ef8-45f5-bfb2-e595c401a95f}</Project>
+      <Name>Allors</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Meta\Meta.csproj">
+      <Project>{6fa12f00-07b3-4aa8-9c50-c8d412891500}</Project>
+      <Name>Meta</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Resources\Resources.csproj">
+      <Project>{514ab4d1-cc77-49dc-8bc4-0dede041ffd1}</Project>
+      <Name>Resources</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

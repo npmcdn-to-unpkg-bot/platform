@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5582AF89-13A9-43B9-A208-230242323001}</ProjectGuid>
+    <ProjectGuid>{953F37B8-865D-4D8C-A084-FFE10F360ECE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Allors</RootNamespace>
+    <RootNamespace>Tests</RootNamespace>
     <AssemblyName>Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -32,14 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Moq">
-      <HintPath>..\packages\Moq.4.2.1409.1722\lib\net40\Moq.dll</HintPath>
-    </Reference>
     <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
+      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -189,44 +185,44 @@
     <Compile Include="XmlStrictValidation.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="Settings.StyleCop" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Adapters\Allors.Databases.Memory\Allors.Databases.Memory.csproj">
-      <Project>{233622ff-5493-4981-9529-4337d84c8312}</Project>
-      <Name>Allors.Databases.Memory</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Adapters\Allors.Databases.Object.SqlClient\Allors.Databases.Object.SqlClient.csproj">
-      <Project>{489d90a9-b63e-4983-86cc-2a061d8f6055}</Project>
-      <Name>Allors.Databases.Object.SqlClient</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Adapters\Allors.Workspaces.Memory\Allors.Workspaces.Memory.csproj">
-      <Project>{d09daf58-d524-40c2-887c-eadbf5609794}</Project>
-      <Name>Allors.Workspaces.Memory</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Framework\Framework\Allors.csproj">
-      <Project>{84495b8e-1800-41c9-a236-abe6265a23a3}</Project>
-      <Name>Allors</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Domain\Domain.csproj">
-      <Project>{b6c2e17b-53e1-44a4-9299-5350cc854e65}</Project>
-      <Name>Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Meta\Meta.csproj">
-      <Project>{ba6efcfe-cb7f-4994-a5a4-c11ddaac32dd}</Project>
-      <Name>Meta</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Resources\Resources.csproj">
-      <Project>{a10683f7-b261-4770-81c6-bb589e768acb}</Project>
-      <Name>Resources</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Import\minimaal genormaliseerd rekeningstelsel 1.xml" />
     <Content Include="Import\minimaal genormaliseerd rekeningstelsel 2.xml" />
     <Content Include="Import\minimaal genormaliseerd rekeningstelsel 3.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+    <None Include="Settings.StyleCop" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Adapters\Allors.Databases.Memory\Allors.Databases.Memory.csproj">
+      <Project>{cb9b7108-c8f3-459c-b2da-88187c84cfc1}</Project>
+      <Name>Allors.Databases.Memory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Adapters\Allors.Databases.Object.SqlClient\Allors.Databases.Object.SqlClient.csproj">
+      <Project>{06bc1665-8fe8-4f04-9e80-ec2d54404ba7}</Project>
+      <Name>Allors.Databases.Object.SqlClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Adapters\Allors.Workspaces.Memory\Allors.Workspaces.Memory.csproj">
+      <Project>{db96de40-9b4c-4112-bb6f-c6c4c6a9b5a9}</Project>
+      <Name>Allors.Workspaces.Memory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Framework\Allors\Allors.csproj">
+      <Project>{5b4e2d7c-8ef8-45f5-bfb2-e595c401a95f}</Project>
+      <Name>Allors</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{b4eddcc1-ba69-4415-bfc8-78098aeff221}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Meta\Meta.csproj">
+      <Project>{6fa12f00-07b3-4aa8-9c50-c8d412891500}</Project>
+      <Name>Meta</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Resources\Resources.csproj">
+      <Project>{514ab4d1-cc77-49dc-8bc4-0dede041ffd1}</Project>
+      <Name>Resources</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

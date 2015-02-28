@@ -1,5 +1,0 @@
-<template allors="1.0">
-  <name>Defaults</name>
-  <output>../../../Temp/Defaults</output>
-  <source>file:///C:/github/allors/Repository/Templates/defaults.cs.stg</source>
-</template>

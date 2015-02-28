@@ -1,16 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5DA41687-F93A-4B0C-B5F8-44B318DAA6ED}</ProjectGuid>
+    <ProjectGuid>{23DD35E8-5611-46E1-A913-717AFB4150C2}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Console</RootNamespace>
     <AssemblyName>Console</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -50,28 +51,32 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Adapters\Allors.Databases.Memory\Allors.Databases.Memory.csproj">
-      <Project>{233622ff-5493-4981-9529-4337d84c8312}</Project>
+      <Project>{cb9b7108-c8f3-459c-b2da-88187c84cfc1}</Project>
       <Name>Allors.Databases.Memory</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Adapters\Allors.Databases.Object.SqlClient\Allors.Databases.Object.SqlClient.csproj">
-      <Project>{489d90a9-b63e-4983-86cc-2a061d8f6055}</Project>
+      <Project>{06bc1665-8fe8-4f04-9e80-ec2d54404ba7}</Project>
       <Name>Allors.Databases.Object.SqlClient</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Adapters\Allors.Workspaces.Memory\Allors.Workspaces.Memory.csproj">
-      <Project>{d09daf58-d524-40c2-887c-eadbf5609794}</Project>
+      <Project>{db96de40-9b4c-4112-bb6f-c6c4c6a9b5a9}</Project>
       <Name>Allors.Workspaces.Memory</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Framework\Framework\Allors.csproj">
-      <Project>{84495b8e-1800-41c9-a236-abe6265a23a3}</Project>
+    <ProjectReference Include="..\..\Framework\Allors\Allors.csproj">
+      <Project>{5b4e2d7c-8ef8-45f5-bfb2-e595c401a95f}</Project>
       <Name>Allors</Name>
     </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
-      <Project>{b6c2e17b-53e1-44a4-9299-5350cc854e65}</Project>
+      <Project>{b4eddcc1-ba69-4415-bfc8-78098aeff221}</Project>
       <Name>Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\Meta\Meta.csproj">
-      <Project>{BA6EFCFE-CB7F-4994-A5A4-C11DDAAC32DD}</Project>
+      <Project>{6fa12f00-07b3-4aa8-9c50-c8d412891500}</Project>
       <Name>Meta</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Resources\Resources.csproj">
+      <Project>{514ab4d1-cc77-49dc-8bc4-0dede041ffd1}</Project>
+      <Name>Resources</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
