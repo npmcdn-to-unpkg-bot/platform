@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class Priorities
     {
         public static readonly Guid VeryHighId = new Guid("AE6AB101-481C-4ff1-8BE5-6CD6311903D7");

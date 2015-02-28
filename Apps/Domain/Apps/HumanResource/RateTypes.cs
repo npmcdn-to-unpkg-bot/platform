@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class RateTypes
     {
         public static readonly Guid BillingRateId = new Guid("FE2C3012-7FBC-4c10-B76E-F0DA4754020A");

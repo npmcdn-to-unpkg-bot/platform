@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class DropShipmentStatuses
     {
         protected override void AppsSecure(Domain.Security config)

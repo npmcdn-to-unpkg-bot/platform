@@ -20,8 +20,6 @@
 
 namespace Allors.Workspaces.Memory
 {
-    using System;
-
     using Allors.Meta;
     using Allors.Populations;
 

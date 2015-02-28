@@ -1,8 +1,6 @@
 namespace Allors.Meta
 {
-	using System;
-
-	public partial class PerformanceReviewClass
+    public partial class PerformanceReviewClass
 	{
 	    internal override void AppsExtend()
         {

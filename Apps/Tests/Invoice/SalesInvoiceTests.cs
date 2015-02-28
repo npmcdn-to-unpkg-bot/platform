@@ -24,9 +24,6 @@ namespace Allors.Domain
     using System;
     using System.Security.Principal;
     using System.Threading;
-
-    using Allors.Domain;
-
     using NUnit.Framework;
 
     using Resources;

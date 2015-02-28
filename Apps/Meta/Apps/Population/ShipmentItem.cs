@@ -1,8 +1,6 @@
 namespace Allors.Meta
 {
-	using System;
-
-	public partial class ShipmentItemClass
+    public partial class ShipmentItemClass
 	{
 	    internal override void AppsExtend()
         {

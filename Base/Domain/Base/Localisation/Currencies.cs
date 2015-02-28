@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class Currencies
     {
         private Cache<string, Currency> currencyByCode;

@@ -23,8 +23,6 @@ namespace Allors.Databases.Object.SqlClient
     using System.Collections;
     using System.Collections.Generic;
 
-    using Allors.Databases.Object.SqlClient;
-
     internal class ExtentEnumerator : IEnumerator
     {
         private readonly IEnumerator enumerator;

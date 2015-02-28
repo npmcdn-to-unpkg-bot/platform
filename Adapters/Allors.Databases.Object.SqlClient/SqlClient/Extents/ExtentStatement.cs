@@ -21,8 +21,6 @@
 namespace Allors.Databases.Object.SqlClient
 {
     using System.Collections;
-
-    using Allors.Databases.Object.SqlClient;
     using Allors.Meta;
 
     internal abstract class ExtentStatement

@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class BillOfLadings
     {
         protected override void AppsSecure(Domain.Security config)

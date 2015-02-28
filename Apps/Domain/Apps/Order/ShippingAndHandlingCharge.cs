@@ -20,11 +20,6 @@
 
 namespace Allors.Domain
 {
-    using System.Globalization;
-    using System.Text;
-
-    using Allors.Domain;
-
     public partial class ShippingAndHandlingCharge
     {
         public void AppsPrepareDerivation(ObjectPrepareDerivation method)

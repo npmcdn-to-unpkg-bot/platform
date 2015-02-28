@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class Plants
     {
         protected override void AppsSecure(Security config)

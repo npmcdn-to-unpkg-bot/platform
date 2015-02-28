@@ -22,9 +22,6 @@ namespace Allors.Domain
 {
     using System.Globalization;
     using System.Text.RegularExpressions;
-
-    using Allors.Domain;
-
     using Resources;
 
     public partial class BankAccount

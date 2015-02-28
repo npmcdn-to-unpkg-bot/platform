@@ -23,8 +23,6 @@ namespace Allors.Domain
 {
     using NUnit.Framework;
 
-    using Allors.Domain;
-
     [TestFixture]
     public class PackagingContentTests : DomainTest
     {

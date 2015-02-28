@@ -1,8 +1,6 @@
 namespace Allors.Meta
 {
-	using System;
-
-	public partial class NonSerializedInventoryItemClass
+    public partial class NonSerializedInventoryItemClass
 	{
 	    internal override void AppsExtend()
         {

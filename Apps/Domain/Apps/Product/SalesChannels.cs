@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class SalesChannels
     {
         public static readonly Guid NoChannelId = new Guid("C2F8E220-722E-4b6d-94A9-C02B2ABB2ABE");

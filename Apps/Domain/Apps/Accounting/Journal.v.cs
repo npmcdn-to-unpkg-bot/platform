@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class Journal
     {
         public void DeriveContraAccount(IDerivation derivation)

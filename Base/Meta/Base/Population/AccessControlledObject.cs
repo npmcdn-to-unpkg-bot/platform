@@ -1,8 +1,6 @@
 namespace Allors.Meta
 {
-	using System;
-
-	public partial class AccessControlledObjectInterface
+    public partial class AccessControlledObjectInterface
 	{
 	}
 }

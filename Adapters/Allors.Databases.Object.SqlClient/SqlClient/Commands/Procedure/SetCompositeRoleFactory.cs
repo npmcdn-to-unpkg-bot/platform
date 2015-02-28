@@ -28,7 +28,6 @@ namespace Allors.Databases.Object.SqlClient.Commands.Text
 
     using Database = Database;
     using DatabaseSession = DatabaseSession;
-    using Schema = Schema;
 
     internal class SetCompositeRoleFactory
     {

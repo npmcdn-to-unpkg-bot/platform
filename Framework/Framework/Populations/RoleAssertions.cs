@@ -21,8 +21,6 @@
 namespace Allors.Populations
 {
     using System;
-    using System.Collections.Generic;
-
     using Allors.Meta;
 
     public static class RoleAssertions 

@@ -25,7 +25,6 @@ namespace Allors.Domain
     using System.Text;
 
     using Allors;
-    using Allors.Domain;
 
     public class CsvExportFunction<T> : CsvExportColumn where T : IObject
     {

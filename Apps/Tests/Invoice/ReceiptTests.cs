@@ -34,52 +34,49 @@ namespace Allors.Domain
         [SetUp]
         public override void Init()
         {
-            throw new Exception("TODO");
+            base.Init();
 
-            //base.Init();
+            var euro = new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR");
 
-            //var euro = new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR");
+            this.internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
+            this.billToCustomer = new OrganisationBuilder(this.DatabaseSession).WithName("billToCustomer").WithPreferredCurrency(euro).Build();
+            var supplier = new OrganisationBuilder(this.DatabaseSession).WithName("supplier").WithLocale(new Locales(this.DatabaseSession).EnglishGreatBritain).Build();
 
-            //this.internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
-            //this.billToCustomer = new OrganisationBuilder(this.DatabaseSession).WithName("billToCustomer").WithPreferredCurrency(euro).Build();
-            //var supplier = new OrganisationBuilder(this.DatabaseSession).WithName("supplier").WithLocale(new Locales(this.DatabaseSession).EnglishGreatBritain).Build();
+            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(this.billToCustomer).WithInternalOrganisation(this.internalOrganisation).Build();
 
-            //new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(this.billToCustomer).WithInternalOrganisation(this.internalOrganisation).Build();
+            this.good = new GoodBuilder(this.DatabaseSession)
+                .WithSku("10101")
+                .WithVatRate(new VatRateBuilder(this.DatabaseSession).WithRate(21).Build())
+                .WithName("good")
+                .WithInventoryItemKind(new InventoryItemKinds(this.DatabaseSession).NonSerialized)
+                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
+                .Build();
 
-            //this.good = new GoodBuilder(this.DatabaseSession)
-            //    .WithSku("10101")
-            //    .WithVatRate(new VatRateBuilder(this.DatabaseSession).WithRate(21).Build())
-            //    .WithName("good")
-            //    .WithInventoryItemKind(new InventoryItemKinds(this.DatabaseSession).NonSerialized)
-            //    .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-            //    .Build();
+            var goodPurchasePrice = new ProductPurchasePriceBuilder(this.DatabaseSession)
+                .WithCurrency(euro)
+                .WithFromDate(DateTime.Now)
+                .WithPrice(7)
+                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
+                .Build();
 
-            //var goodPurchasePrice = new ProductPurchasePriceBuilder(this.DatabaseSession)
-            //    .WithCurrency(euro)
-            //    .WithFromDate(DateTime.Now)
-            //    .WithPrice(7)
-            //    .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-            //    .Build();
+            new SupplierOfferingBuilder(this.DatabaseSession)
+                .WithProduct(this.good)
+                .WithSupplier(supplier)
+                .WithFromDate(DateTime.Now)
+                .WithProductPurchasePrice(goodPurchasePrice)
+                .Build();
 
-            //new SupplierOfferingBuilder(this.DatabaseSession)
-            //    .WithProduct(this.good)
-            //    .WithSupplier(supplier)
-            //    .WithFromDate(DateTime.Now)
-            //    .WithProductPurchasePrice(goodPurchasePrice)
-            //    .Build();
+            new BasePriceBuilder(this.DatabaseSession)
+                .WithSpecifiedFor(this.internalOrganisation)
+                .WithDescription("current good")
+                .WithProduct(this.good)
+                .WithPrice(10)
+                .WithFromDate(DateTime.Now)
+                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .Build();
 
-            //new BasePriceBuilder(this.DatabaseSession)
-            //    .WithSpecifiedFor(this.internalOrganisation)
-            //    .WithDescription("current good")
-            //    .WithProduct(this.good)
-            //    .WithPrice(10)
-            //    .WithCurrency(euro)
-            //    .WithFromDate(DateTime.Now)
-            //    .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
-            //    .Build();
-
-            //this.DatabaseSession.Derive(true);
-            //this.DatabaseSession.Commit();
+            this.DatabaseSession.Derive(true);
+            this.DatabaseSession.Commit();
         }
 
         [Test]

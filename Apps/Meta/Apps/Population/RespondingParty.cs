@@ -1,8 +1,6 @@
 namespace Allors.Meta
 {
-	using System;
-
-	public partial class RespondingPartyClass
+    public partial class RespondingPartyClass
 	{
 	    internal override void AppsExtend()
         {

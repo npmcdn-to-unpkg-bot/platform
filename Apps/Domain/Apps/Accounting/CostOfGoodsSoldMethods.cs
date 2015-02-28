@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class CostOfGoodsSoldMethods
     {
         public static readonly Guid FiFoId = new Guid("CC6A3F78-9063-4E4A-BBB1-08A529017696");

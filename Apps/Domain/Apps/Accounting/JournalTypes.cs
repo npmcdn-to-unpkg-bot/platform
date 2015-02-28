@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class JournalTypes
     {
         public static readonly Guid CashId = new Guid("B057AB5B-3BFD-46A4-80AA-D5330252E7E8");

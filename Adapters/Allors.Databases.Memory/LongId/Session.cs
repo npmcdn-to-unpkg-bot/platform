@@ -19,8 +19,6 @@
 // <summary>Defines the DatabaseSession type.</summary>
 //-------------------------------------------------------------------------------------------------
 
-using Allors;
-
 namespace Allors.Databases.Memory.LongId
 {
     using System;

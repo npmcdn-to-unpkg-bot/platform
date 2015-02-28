@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class ShipmentItem
     {
         public void DeriveCustomerShipmentItem(IDerivation derivation)

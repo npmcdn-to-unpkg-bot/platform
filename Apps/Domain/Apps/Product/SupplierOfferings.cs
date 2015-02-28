@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class SupplierOfferings
     {
         public ProductPurchasePrice PurchasePrice(Party supplier, DateTime orderDate, Product product = null, Part part = null)

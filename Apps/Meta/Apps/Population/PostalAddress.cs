@@ -1,8 +1,6 @@
 namespace Allors.Meta
 {
-	using System;
-
-	public partial class PostalAddressClass
+    public partial class PostalAddressClass
 	{
 	    internal override void AppsExtend()
         {

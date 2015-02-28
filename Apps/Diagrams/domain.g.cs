@@ -4041,6 +4041,8 @@ namespace Allors.Domain
 	{
 					global::System.Decimal? ThroughAmount {set;}
 
+					ProductCategory ProductCategory {set;}
+
 					global::System.Decimal? FromAmount {set;}
 
 	}

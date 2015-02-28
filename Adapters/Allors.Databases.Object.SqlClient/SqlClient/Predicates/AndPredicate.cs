@@ -20,8 +20,6 @@
 
 namespace Allors.Databases.Object.SqlClient
 {
-    using Allors.Databases.Object.SqlClient;
-
     internal sealed class AndPredicate : CompositePredicate
     {
         internal AndPredicate(ExtentFiltered extent) : base(extent)

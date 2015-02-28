@@ -24,7 +24,6 @@ namespace Allors.Domain
     using System.Collections.Generic;
 
     using Allors;
-    using Allors;
     using Allors.Meta;
 
     public partial class Security

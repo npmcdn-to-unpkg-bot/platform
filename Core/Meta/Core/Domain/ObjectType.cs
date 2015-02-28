@@ -22,7 +22,6 @@
 namespace Allors.Meta
 {
     using System;
-    using System.Reflection;
 
     public abstract partial class ObjectType : DomainObject, IObjectType
     {

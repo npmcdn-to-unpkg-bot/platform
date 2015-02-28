@@ -1,8 +1,6 @@
 namespace Allors.Meta
 {
-	using System;
-
-	public partial class PartyFixedAssetAssignmentClass
+    public partial class PartyFixedAssetAssignmentClass
 	{
 	    internal override void AppsExtend()
         {

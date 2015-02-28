@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class DropShipmentObjectStates
     {
         public static readonly Guid CreatedId = new Guid("40B4CAC6-861D-45a8-9B77-0945558A1262");

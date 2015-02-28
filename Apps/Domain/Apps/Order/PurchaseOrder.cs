@@ -23,9 +23,6 @@ namespace Allors.Domain
     using System;
     using System.Collections.Generic;
     using System.Globalization;
-
-    using Allors.Domain;
-
     using Resources;
 
     public partial class PurchaseOrder

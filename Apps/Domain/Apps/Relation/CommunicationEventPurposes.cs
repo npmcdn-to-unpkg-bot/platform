@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class CommunicationEventPurposes
     {
         public static readonly Guid SupportCallId = new Guid("376805EE-5CBE-4cf0-95F4-F2649174FCBF");

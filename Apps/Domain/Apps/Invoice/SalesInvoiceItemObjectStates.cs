@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class SalesInvoiceItemObjectStates
     {
         public static readonly Guid SentId = new Guid("9DC3A779-8734-4c19-BFF5-0DE9F29A584B");

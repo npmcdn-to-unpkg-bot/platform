@@ -1,8 +1,6 @@
 namespace Allors.Meta
 {
-	using System;
-
-	public partial class CustomerRelationshipClass
+    public partial class CustomerRelationshipClass
 	{
 	    internal override void AppsExtend()
         {

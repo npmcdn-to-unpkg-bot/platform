@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class CommunicationEventObjectStates
     {
         public static readonly Guid ScheduledId = new Guid("199131EB-18FD-4b8a-9FEC-23789C169FF5");

@@ -21,7 +21,6 @@
 namespace Allors.Domain
 {
     using Allors;
-    using Allors.Domain;
 
     public partial class SalesInvoiceItems
     {

@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class TaxDocuments
     {
         protected override void AppsSecure(Domain.Security config)

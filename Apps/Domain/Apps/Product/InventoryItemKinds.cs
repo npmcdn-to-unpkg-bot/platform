@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class InventoryItemKinds
     {
         public static readonly Guid SerializedId = new Guid("2596E2DD-3F5D-4588-A4A2-167D6FBE3FAE");

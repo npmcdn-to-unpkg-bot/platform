@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class Currencies
     {
         public static decimal ConvertCurrency(decimal amount, Currency fromCurrency, Currency toCurrency)

@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class PurchaseShipmentObjectStates
     {
         public static readonly Guid CreatedId = new Guid("DF78516E-FC7C-48f2-B07B-1C53DA08D9B8");

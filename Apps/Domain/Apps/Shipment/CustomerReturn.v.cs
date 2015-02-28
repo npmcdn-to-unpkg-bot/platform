@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class CustomerReturn
     {
         public void DeriveCurrentObjectState(IDerivation derivation)

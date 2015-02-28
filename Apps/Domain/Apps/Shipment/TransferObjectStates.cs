@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class TransferObjectStates
     {
         public static readonly Guid CreatedId = new Guid("ADAD2959-5472-4aed-977B-C04FBC67FAD8");

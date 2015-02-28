@@ -20,9 +20,6 @@
 
 namespace Allors.Domain
 {
-    
-    using Allors.Domain;
-
     public partial class SalesRepCommissions
     {
         public static void AppsFindOrCreateAsDependable(ISession session, SalesRepRevenue dependant)

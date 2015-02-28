@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class Maintenances
     {
         protected override void AppsSecure(Domain.Security config)

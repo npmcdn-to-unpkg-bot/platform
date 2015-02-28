@@ -20,9 +20,6 @@
 
 namespace Allors.Domain
 {
-    using System.IO;
-
-    using Allors.Domain;
     using Allors;
 
     public partial class MediaTypes

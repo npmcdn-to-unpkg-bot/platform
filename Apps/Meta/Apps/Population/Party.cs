@@ -1,8 +1,6 @@
 namespace Allors.Meta
 {
-	using System;
-
-	public partial class PartyInterface
+    public partial class PartyInterface
 	{
 	    internal override void AppsExtend()
         {

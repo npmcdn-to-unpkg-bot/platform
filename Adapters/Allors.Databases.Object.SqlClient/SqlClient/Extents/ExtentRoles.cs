@@ -22,9 +22,6 @@ namespace Allors.Databases.Object.SqlClient
 {
     using System;
     using System.Collections;
-
-    using Allors.Databases.Object.SqlClient;
-
     using Meta;
 
     internal class ExtentRoles : Extent

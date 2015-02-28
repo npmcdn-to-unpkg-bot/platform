@@ -23,9 +23,6 @@ namespace Allors.Databases.Object.SqlClient
     using System;
     using System.Collections.Generic;
     using System.Linq;
-
-    using Allors.Databases.Object.SqlClient;
-
     using Meta;
 
     internal class ExtentFiltered : SqlExtent

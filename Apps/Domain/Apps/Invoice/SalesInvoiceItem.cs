@@ -6,7 +6,6 @@
 namespace Allors.Domain
 {
     using System.Collections.Generic;
-    using System.Text;
 
     public partial class SalesInvoiceItem
     {

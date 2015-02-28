@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class JournalEntry
     {
         public ObjectState PreviousObjectState { get; private set; }

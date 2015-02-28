@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class OperatingBudgets
     {
         protected override void AppsSecure(Security config)

@@ -21,10 +21,7 @@
 namespace Allors.Domain
 {
     using System.Text;
-    using System.Text.RegularExpressions;
 
-    using Allors.Domain;
-    
 
     public partial class PostalAddress
     {

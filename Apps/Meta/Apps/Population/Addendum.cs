@@ -1,8 +1,6 @@
 namespace Allors.Meta
 {
-	using System;
-
-	public partial class AddendumClass
+    public partial class AddendumClass
 	{
 	    internal override void AppsExtend()
         {

@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class Carriers
     {
         public static readonly Guid GlsId = new Guid("69C1CD1D-4D4E-4F2D-AF3C-4E1F740C7F62");

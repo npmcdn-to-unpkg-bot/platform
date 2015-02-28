@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class CustomerReturns
     {
         protected override void AppsPrepare(Setup setup)

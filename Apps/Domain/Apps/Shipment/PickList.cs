@@ -22,9 +22,6 @@ namespace Allors.Domain
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
-
-    using Allors.Meta;
 
     public partial class PickList
     {

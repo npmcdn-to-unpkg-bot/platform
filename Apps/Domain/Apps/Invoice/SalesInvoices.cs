@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class SalesInvoices
     {
         public static readonly SalesInvoice[] EmptyArray = new SalesInvoice[0];

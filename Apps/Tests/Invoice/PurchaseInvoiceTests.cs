@@ -21,9 +21,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-    
-
     using NUnit.Framework;
 
     using Resources;

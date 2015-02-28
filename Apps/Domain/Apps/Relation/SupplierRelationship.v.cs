@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class SupplierRelationship
     {
         public void DeriveMembership(IDerivation derivation)

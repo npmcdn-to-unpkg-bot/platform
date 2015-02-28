@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class EmploymentApplicationStatuses
     {
         public static readonly Guid ReceivedId = new Guid("0BB970D8-9273-42af-AD26-58217B1D8501");

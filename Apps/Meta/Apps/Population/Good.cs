@@ -1,8 +1,6 @@
 namespace Allors.Meta
 {
-	using System;
-
-	public partial class GoodClass
+    public partial class GoodClass
 	{
 	    internal override void AppsExtend()
         {

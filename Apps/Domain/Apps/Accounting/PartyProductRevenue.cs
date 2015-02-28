@@ -21,8 +21,7 @@
 namespace Allors.Domain
 {
     using System;
-    using System.Text;
-    
+
     public partial class PartyProductRevenue
     {
         public string RevenueAsCurrencyString()

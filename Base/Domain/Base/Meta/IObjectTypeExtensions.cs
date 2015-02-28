@@ -22,8 +22,6 @@
 namespace Allors
 {
     using System;
-
-    using Allors;
     using Allors.Meta;
 
     public static class IObjectTypeExtensions

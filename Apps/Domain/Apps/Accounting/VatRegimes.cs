@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class VatRegimes
     {
         public static readonly Guid CoContractorId = new Guid("49D061B2-A9F9-408b-B781-409ECC3D54FC");

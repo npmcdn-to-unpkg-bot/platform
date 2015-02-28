@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class PickListStatuses
     {
         protected override void AppsSecure(Domain.Security config)

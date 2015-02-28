@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class ProductRequirements
     {
         protected override void AppsSecure(Security config)

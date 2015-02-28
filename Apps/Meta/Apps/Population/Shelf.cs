@@ -1,8 +1,6 @@
 namespace Allors.Meta
 {
-	using System;
-
-	public partial class ShelfClass
+    public partial class ShelfClass
 	{
 	    internal override void AppsExtend()
         {

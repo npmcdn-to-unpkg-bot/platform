@@ -1,8 +1,6 @@
 namespace Allors.Meta
 {
-	using System;
-
-	public partial class InventoryItemInterface
+    public partial class InventoryItemInterface
 	{
 	    internal override void AppsExtend()
         {

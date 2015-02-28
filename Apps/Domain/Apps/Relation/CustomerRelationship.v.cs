@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class CustomerRelationship
     {
         public void DeriveMembership(IDerivation derivation)

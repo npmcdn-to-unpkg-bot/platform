@@ -1,8 +1,6 @@
 namespace Allors.Meta
 {
-	using System;
-
-	public partial class OneTimeChargeClass
+    public partial class OneTimeChargeClass
 	{
 	    internal override void AppsExtend()
         {

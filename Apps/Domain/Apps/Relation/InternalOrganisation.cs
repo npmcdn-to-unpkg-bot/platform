@@ -24,8 +24,6 @@ namespace Allors.Domain
     using System.Collections.Generic;
     using System.Linq;
 
-    using Allors.Domain;
-
     public partial class InternalOrganisation
     {
         // TODO: Cascading delete

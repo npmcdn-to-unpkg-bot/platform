@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class SalesOrderObjectStates
     {
         public static readonly Guid ProvisionalId = new Guid("29ABC67D-4BE1-4af3-B993-64E9E36C3E6B");

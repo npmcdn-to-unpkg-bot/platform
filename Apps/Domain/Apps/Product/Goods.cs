@@ -24,8 +24,6 @@ namespace Allors.Domain
     using System.Collections.Generic;
     using System.IO;
 
-    using Allors.Domain;
-
     public partial class Goods
     {
         protected override void AppsSecure(Security config)

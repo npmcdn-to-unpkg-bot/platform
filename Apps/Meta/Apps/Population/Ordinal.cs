@@ -1,8 +1,6 @@
 namespace Allors.Meta
 {
-	using System;
-
-	public partial class OrdinalClass
+    public partial class OrdinalClass
 	{
 	    internal override void AppsExtend()
         {

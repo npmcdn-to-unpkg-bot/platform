@@ -1,8 +1,6 @@
 namespace Allors.Meta
 {
-	using System;
-
-	public partial class PurchaseOrderStatusClass
+    public partial class PurchaseOrderStatusClass
 	{
 	    internal override void AppsExtend()
         {

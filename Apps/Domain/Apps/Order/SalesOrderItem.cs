@@ -7,8 +7,6 @@ namespace Allors.Domain
 {
     using System.Collections.Generic;
     using System.Globalization;
-    using System.Text;
-
     using Resources;
 
     public partial class SalesOrderItem

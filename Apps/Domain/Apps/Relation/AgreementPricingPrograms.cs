@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class AgreementPricingPrograms
     {
         protected override void AppsSecure(Security config)

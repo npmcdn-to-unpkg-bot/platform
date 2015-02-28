@@ -1,8 +1,6 @@
 namespace Allors.Meta
 {
-	using System;
-
-	public partial class CostCenterSplitMethodClass
+    public partial class CostCenterSplitMethodClass
 	{
 	    internal override void AppsExtend()
         {

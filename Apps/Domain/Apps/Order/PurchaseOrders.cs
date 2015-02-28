@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class PurchaseOrders
     {
         public static readonly Guid PurchaseOrderTemplateEnId = new Guid("3A442D2F-4D8D-46EC-983F-BD003F8ABB3D");

@@ -27,8 +27,6 @@ namespace Allors.Domain
 
     using NUnit.Framework;
 
-    using Allors.Domain;
-
     [TestFixture]
     public class CustomerShipmentTests : DomainTest
     {
@@ -395,27 +393,24 @@ namespace Allors.Domain
         [Test]
         public void GivenCustomerShipment_WhenObjectStateIsShipped_ThenCheckTransitions()
         {
-            throw new Exception("TODO");
+            var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
+            var shipToAddress = new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build();
 
-            //var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
-            //var shipToAddress = new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build();
+            Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity("orderProcessor", "Forms"), new string[0]);
 
-            //Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity("orderProcessor", "Forms"), new string[0]);
+            var customer = new PersonBuilder(this.DatabaseSession).WithLastName("customer").Build();
+            var shipment = new CustomerShipmentBuilder(this.DatabaseSession)
+                .WithShipToParty(customer)
+                .WithShipToAddress(shipToAddress)
+                .WithShipmentMethod(new ShipmentMethods(this.DatabaseSession).Ground)
+                .Build();
 
-            //var customer = new PersonBuilder(this.DatabaseSession).WithLastName("customer").Build();
-            //var shipment = new CustomerShipmentBuilder(this.DatabaseSession)
-            //    .WithShipToParty(customer)
-            //    .WithShipToAddress(shipToAddress)
-            //    .WithCurrentObjectState(new CustomerShipmentObjectStates(this.DatabaseSession).Shipped)
-            //    .WithShipmentMethod(new ShipmentMethods(this.DatabaseSession).Ground)
-            //    .Build();
+            this.DatabaseSession.Derive(true);
 
-            //this.DatabaseSession.Derive(true);
-
-            //var acl = new AccessControlList(shipment, new Users(this.DatabaseSession).GetCurrentUser());
-            //Assert.AreEqual(new CustomerShipmentObjectStates(this.DatabaseSession).Shipped, shipment.CurrentObjectState);
-            //Assert.IsFalse(acl.CanExecute(CustomerShipments.Meta.Cancel));
-            //Assert.IsFalse(acl.CanWrite(CustomerShipments.Meta.HandlingInstruction));
+            var acl = new AccessControlList(shipment, new Users(this.DatabaseSession).GetCurrentUser());
+            Assert.AreEqual(new CustomerShipmentObjectStates(this.DatabaseSession).Shipped, shipment.CurrentObjectState);
+            Assert.IsFalse(acl.CanExecute(CustomerShipments.Meta.Cancel));
+            Assert.IsFalse(acl.CanWrite(CustomerShipments.Meta.HandlingInstruction));
         }
 
         [Test]
@@ -451,11 +446,11 @@ namespace Allors.Domain
                 .WithInventoryItemKind(new InventoryItemKinds(this.DatabaseSession).NonSerialized)
                 .Build();
 
-            var good1inventoryItem = new NonSerializedInventoryItemBuilder(this.DatabaseSession).WithGood(good1).Build();
-            good1inventoryItem.AddInventoryItemVariance(new InventoryItemVarianceBuilder(this.DatabaseSession).WithQuantity(100).WithReason(new VarianceReasons(this.DatabaseSession).Ruined).Build());
+            var good1InventoryItem = new NonSerializedInventoryItemBuilder(this.DatabaseSession).WithGood(good1).Build();
+            good1InventoryItem.AddInventoryItemVariance(new InventoryItemVarianceBuilder(this.DatabaseSession).WithQuantity(100).WithReason(new VarianceReasons(this.DatabaseSession).Ruined).Build());
 
-            var good2inventoryItem = new NonSerializedInventoryItemBuilder(this.DatabaseSession).WithGood(good2).Build();
-            good2inventoryItem.AddInventoryItemVariance(new InventoryItemVarianceBuilder(this.DatabaseSession).WithQuantity(100).WithReason(new VarianceReasons(this.DatabaseSession).Ruined).Build());
+            var good2InventoryItem = new NonSerializedInventoryItemBuilder(this.DatabaseSession).WithGood(good2).Build();
+            good2InventoryItem.AddInventoryItemVariance(new InventoryItemVarianceBuilder(this.DatabaseSession).WithQuantity(100).WithReason(new VarianceReasons(this.DatabaseSession).Ruined).Build());
 
             this.DatabaseSession.Derive(true);
 
@@ -1087,8 +1082,8 @@ namespace Allors.Domain
                 .WithShipToCustomer(customer)
                 .Build();
 
-            var order1item = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good1).WithQuantityOrdered(1).WithActualUnitPrice(15).Build();
-            order1.AddSalesOrderItem(order1item);
+            var order1Item = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good1).WithQuantityOrdered(1).WithActualUnitPrice(15).Build();
+            order1.AddSalesOrderItem(order1Item);
 
             this.DatabaseSession.Derive(true);
 
@@ -1105,8 +1100,8 @@ namespace Allors.Domain
                 .WithShipToCustomer(customer)
                 .Build();
 
-            var order2item = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good1).WithQuantityOrdered(1).WithActualUnitPrice(15).Build();
-            order2.AddSalesOrderItem(order2item);
+            var order2Item = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good1).WithQuantityOrdered(1).WithActualUnitPrice(15).Build();
+            order2.AddSalesOrderItem(order2Item);
 
             this.DatabaseSession.Derive(true);
 
@@ -1123,8 +1118,8 @@ namespace Allors.Domain
                 .WithShipToCustomer(customer)
                 .Build();
 
-            var order3item = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good1).WithQuantityOrdered(1).WithActualUnitPrice(15).Build();
-            order3.AddSalesOrderItem(order3item);
+            var order3Item = new SalesOrderItemBuilder(this.DatabaseSession).WithProduct(good1).WithQuantityOrdered(1).WithActualUnitPrice(15).Build();
+            order3.AddSalesOrderItem(order3Item);
 
             this.DatabaseSession.Derive(true);
 
@@ -1139,48 +1134,45 @@ namespace Allors.Domain
         [Test]
         public void GivenCustomerShipment_WhenDeriving_ThenBillFromContactMechanismMustExist()
         {
-            throw new Exception("TODO");
+            var belgium = new Countries(this.DatabaseSession).CountryByIsoCode["BE"];
+            var euro = belgium.Currency;
 
-            //var belgium = new Countries(this.DatabaseSession).CountryByIsoCode["BE"];
-            //var euro = belgium.Currency;
+            var bank = new BankBuilder(this.DatabaseSession).WithCountry(belgium).WithName("ING België").WithBic("BBRUBEBB").Build();
 
-            //var bank = new BankBuilder(this.DatabaseSession).WithCountry(belgium).WithName("ING België").WithBic("BBRUBEBB").Build();
+            var ownBankAccount = new OwnBankAccountBuilder(this.DatabaseSession)
+                .WithBankAccount(new BankAccountBuilder(this.DatabaseSession).WithBank(bank).WithCurrency(euro).WithIban("BE23 3300 6167 6391").WithNameOnAccount("Koen").Build())
+                .Build();
 
-            //var ownBankAccount = new OwnBankAccountBuilder(this.DatabaseSession)
-            //    .WithBankAccount(new BankAccountBuilder(this.DatabaseSession).WithBank(bank).WithCurrency(euro).WithIban("BE23 3300 6167 6391").WithNameOnAccount("Koen").Build())
-            //    .Build();
+            var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
+            var customer = new PersonBuilder(this.DatabaseSession).WithLastName("customer").Build();
+            var address1 = new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build();
 
-            //var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
-            //var customer = new PersonBuilder(this.DatabaseSession).WithLastName("customer").Build();
-            //var address1 = new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build();
+            var billingAddress = new PartyContactMechanismBuilder(this.DatabaseSession)
+                .WithContactMechanism(address1)
+                .WithContactPurpose(new ContactMechanismPurposes(this.DatabaseSession).BillingAddress)
+                .WithUseAsDefault(true)
+                .Build();
 
-            //var billingAddress = new PartyContactMechanismBuilder(this.DatabaseSession)
-            //    .WithContactMechanism(address1)
-            //    .WithContactPurpose(new ContactMechanismPurposes(this.DatabaseSession).BillingAddress)
-            //    .WithUseAsDefault(true)
-            //    .Build();
+            var internalOrganisation = new InternalOrganisationBuilder(this.DatabaseSession)
+                .WithLocale(new Locales(this.DatabaseSession).EnglishGreatBritain)
+                .WithName("internalOrganisation")
+                .WithPreferredCurrency(euro)
+                .WithDefaultPaymentMethod(ownBankAccount)
+                .Build();
 
-            //var internalOrganisation = new InternalOrganisationBuilder(this.DatabaseSession)
-            //    .WithLocale(new Locales(this.DatabaseSession).EnglishGreatBritain)
-            //    .WithName("internalOrganisation")
-            //    .WithPreferredCurrency(euro)
-            //    .WithDefaultPaymentMethod(ownBankAccount)
-            //    .Build();
+            internalOrganisation.AddPartyContactMechanism(billingAddress);
 
-            //internalOrganisation.AddPartyContactMechanism(billingAddress);
+            this.DatabaseSession.Derive(true);
 
-            //this.DatabaseSession.Derive(true);
+            var shipment1 = new CustomerShipmentBuilder(this.DatabaseSession)
+                .WithShipToParty(customer)
+                .WithShipToAddress(new PostalAddresses(this.DatabaseSession).Extent().First)
+                .WithShipmentMethod(new ShipmentMethods(this.DatabaseSession).Boat)
+                .Build();
 
-            //var shipment1 = new CustomerShipmentBuilder(this.DatabaseSession)
-            //    .WithShipToParty(customer)
-            //    .WithBillFromInternalOrganisation(internalOrganisation)
-            //    .WithShipToAddress(new PostalAddresses(this.DatabaseSession).Extent().First)
-            //    .WithShipmentMethod(new ShipmentMethods(this.DatabaseSession).Boat)
-            //    .Build();
+            this.DatabaseSession.Derive(true);
 
-            //this.DatabaseSession.Derive(true);
-
-            //Assert.AreEqual(address1, shipment1.BillFromContactMechanism);
+            Assert.AreEqual(address1, shipment1.BillFromContactMechanism);
         }
 
         [Test]

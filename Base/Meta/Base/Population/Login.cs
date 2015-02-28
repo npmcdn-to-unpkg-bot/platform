@@ -1,8 +1,6 @@
 namespace Allors.Meta
 {
-	using System;
-
-	public partial class LoginClass
+    public partial class LoginClass
 	{
 	}
 }

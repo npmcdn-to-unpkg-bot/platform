@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class EmploymentApplicationSources
     {
         public static readonly Guid NewsPaperId = new Guid("206E641B-DAC1-4b2e-9DD4-E4770AF09B9F");

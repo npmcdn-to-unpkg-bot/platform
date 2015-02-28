@@ -1,8 +1,6 @@
 namespace Allors.Meta
 {
-	using System;
-
-	public partial class MediaContentClass
+    public partial class MediaContentClass
 	{
 	    internal override void AppsExtend()
         {

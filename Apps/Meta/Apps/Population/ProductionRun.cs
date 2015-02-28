@@ -1,8 +1,6 @@
 namespace Allors.Meta
 {
-	using System;
-
-	public partial class ProductionRunClass
+    public partial class ProductionRunClass
 	{
 	    internal override void AppsExtend()
         {

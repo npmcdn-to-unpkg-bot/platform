@@ -1,8 +1,6 @@
 namespace Allors.Meta
 {
-	using System;
-
-	public partial class SubContractorAgreementClass
+    public partial class SubContractorAgreementClass
 	{
 	    internal override void AppsExtend()
         {

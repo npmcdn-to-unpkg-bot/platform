@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class VatTariffs
     {
         public static readonly Guid StandardId = new Guid("2942BF39-0B73-4015-8815-E6279ED0381F");

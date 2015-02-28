@@ -20,10 +20,6 @@
 
 namespace Allors.Workspaces.Memory
 {
-    using System;
-
-    using Allors.Meta;
-
     internal abstract class Predicate
     {
         internal virtual bool Include

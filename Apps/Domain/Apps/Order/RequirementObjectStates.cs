@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class RequirementObjectStates
     {
         public static readonly Guid ActiveId = new Guid("FD324E47-69A2-4a7e-B953-E4749C67A2B0");

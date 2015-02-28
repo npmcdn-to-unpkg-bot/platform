@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class PurchaseInvoice
     {
         public void Approve(IDerivation derivation)

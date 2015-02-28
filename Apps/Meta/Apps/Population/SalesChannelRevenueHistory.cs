@@ -1,8 +1,6 @@
 namespace Allors.Meta
 {
-	using System;
-
-	public partial class SalesChannelRevenueHistoryClass
+    public partial class SalesChannelRevenueHistoryClass
 	{
 	    internal override void AppsExtend()
         {

@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class PurchaseInvoiceItemObjectStates
     {
         public static readonly Guid InProcessId = new Guid("72366881-A6CE-455f-80FF-A0E7295F2B8C");

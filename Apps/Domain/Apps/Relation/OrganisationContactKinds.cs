@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class OrganisationContactKinds
     {
         private UniquelyIdentifiableCache<OrganisationContactKind> cache;

@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class Medias
     {
         protected override void BaseSecure(Domain.Security config)

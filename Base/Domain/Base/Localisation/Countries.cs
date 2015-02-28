@@ -20,7 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
     using Allors;
 
     public partial class Countries

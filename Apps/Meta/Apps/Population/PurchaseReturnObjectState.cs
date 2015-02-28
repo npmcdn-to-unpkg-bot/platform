@@ -1,8 +1,6 @@
 namespace Allors.Meta
 {
-	using System;
-
-	public partial class PurchaseReturnObjectStateClass
+    public partial class PurchaseReturnObjectStateClass
 	{
 	    internal override void AppsExtend()
         {

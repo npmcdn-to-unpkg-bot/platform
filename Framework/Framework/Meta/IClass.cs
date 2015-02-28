@@ -21,8 +21,6 @@
 
 namespace Allors.Meta
 {
-    using System.Collections.Generic;
-
     public interface IClass : IComposite
     {
     }

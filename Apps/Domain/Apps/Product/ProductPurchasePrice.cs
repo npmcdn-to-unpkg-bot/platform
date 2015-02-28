@@ -21,7 +21,6 @@
 namespace Allors.Domain
 {
     using System.Globalization;
-    using System.Text;
 
     public partial class ProductPurchasePrice
     {

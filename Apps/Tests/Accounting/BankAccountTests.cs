@@ -22,11 +22,6 @@
 namespace Allors.Domain
 {
     using System.Collections.Generic;
-
-    
-    
-    using Allors.Domain;
-
     using NUnit.Framework;
 
     using Resources;

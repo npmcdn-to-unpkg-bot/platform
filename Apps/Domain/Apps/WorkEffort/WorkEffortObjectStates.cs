@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class WorkEffortObjectStates
     {
         public static readonly Guid CreatedId = new Guid("0D2618A7-A3B7-40f5-88C4-30DADE4D5164");

@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class DebitCreditConstants
     {
         public static readonly Guid DebitId = new Guid("C957ED48-7A31-4308-8CC5-03C8014A8646");

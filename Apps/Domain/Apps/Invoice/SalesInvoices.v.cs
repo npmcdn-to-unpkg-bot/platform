@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class SalesInvoices
     {
         private const string AppsSalesInvoiceTemplateEn =

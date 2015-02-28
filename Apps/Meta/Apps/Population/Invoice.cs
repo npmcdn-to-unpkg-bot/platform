@@ -1,8 +1,6 @@
 namespace Allors.Meta
 {
-	using System;
-
-	public partial class InvoiceInterface
+    public partial class InvoiceInterface
 	{
 	    internal override void AppsExtend()
         {

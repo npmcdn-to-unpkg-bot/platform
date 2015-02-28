@@ -1,8 +1,6 @@
 namespace Allors.Meta
 {
-	using System;
-
-	public partial class OrganisationRollUpClass
+    public partial class OrganisationRollUpClass
 	{
 	    internal override void AppsExtend()
         {

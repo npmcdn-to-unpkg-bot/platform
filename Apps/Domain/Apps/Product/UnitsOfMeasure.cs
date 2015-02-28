@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class UnitsOfMeasure
     {
         public static readonly Guid PackId = new Guid("C4EC577A-D682-433c-BD70-84538BE83209");

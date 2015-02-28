@@ -21,7 +21,6 @@
 namespace Allors.Populations
 {
     using System;
-    using System.Globalization;
     using System.Xml;
     using Allors.Meta;
     

@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class NonSerializedInventoryItems
     {
         protected override void AppsPrepare(Setup setup)

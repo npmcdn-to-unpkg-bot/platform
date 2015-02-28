@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class PostalAddresses
     {
         public PostalAddress GetPostalAddress(string address1, string address2, string address3, PostalCode postalCode, City city, Country country)

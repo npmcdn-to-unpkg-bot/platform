@@ -24,8 +24,6 @@ namespace Allors.Domain
     using System.Collections.Generic;
     using System.Globalization;
 
-    using Allors.Domain;
-
     public partial class ShipmentPackage
     {
         public decimal TotalQuantity

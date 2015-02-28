@@ -26,8 +26,7 @@ namespace Allors.Meta
 
     using Allors.Domain;
     using Allors;
-    using Allors.Meta;
-    
+
     public static class PathExtensions
     {
         public static object Get(this Path path, IObject allorsObject, IAccessControlListFactory aclFactory)

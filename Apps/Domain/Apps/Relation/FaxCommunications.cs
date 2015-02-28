@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class FaxCommunications
     {
         protected override void AppsSecure(Security config)

@@ -1,8 +1,6 @@
 namespace Allors.Meta
 {
-	using System;
-
-	public partial class WarehouseClass
+    public partial class WarehouseClass
 	{
 	    internal override void AppsExtend()
         {

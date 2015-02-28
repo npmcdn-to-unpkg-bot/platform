@@ -23,8 +23,6 @@ namespace Allors
     using System;
     using System.Collections.Generic;
 
-    using Allors.Domain;
-
     public class ObjectsGraph
     {
         private readonly Dictionary<IObjects, ObjectsNode> objectsNodeByObjects;

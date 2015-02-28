@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class MaritalStatuses
     {
         public static readonly Guid SingleId = new Guid("83CD5BBD-85A4-417d-A3E0-5DAA509ACE23");

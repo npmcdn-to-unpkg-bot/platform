@@ -18,13 +18,10 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System;
 using Allors.Meta;
 
 namespace Allors.Domain
 {
-    using System.Text;
-    
     public partial class EmailCommunication
     {
         public void AppsOnPostBuild(ObjectOnPostBuild method)

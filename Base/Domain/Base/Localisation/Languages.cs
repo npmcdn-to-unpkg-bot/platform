@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class Languages
     {
         private Cache<string, Language> languageByCode;

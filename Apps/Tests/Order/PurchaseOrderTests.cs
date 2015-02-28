@@ -19,19 +19,14 @@
 // <summary>Defines the MediaTests type.</summary>
 //-------------------------------------------------------------------------------------------------
 
+using Resources;
+
 namespace Allors.Domain
 {
     using System;
     using System.Security.Principal;
     using System.Threading;
-
-    
-    using Allors.Domain;
-    
-
     using NUnit.Framework;
-
-    using Resources;
 
     [TestFixture]
     public class PurchaseOrderTests : DomainTest
@@ -93,45 +88,22 @@ namespace Allors.Domain
         }
 
         [Test]
-        public void GivenPurchaseOrder_WhenDeriving_ThenDisplayNameIsSet()
-        {
-            throw new Exception("TODO");
-
-            //var supplier = new OrganisationBuilder(this.DatabaseSession).WithName("supplier").Build();
-            //var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
-            //new SupplierRelationshipBuilder(this.DatabaseSession).WithSupplier(supplier).WithInternalOrganisation(internalOrganisation).Build();
-
-            //var order = new PurchaseOrderBuilder(this.DatabaseSession)
-            //    .WithOrderNumber("1")
-            //    .WithTakenViaSupplier(supplier)
-            //    .WithBillToPurchaser(internalOrganisation)
-            //    .Build();
-
-            //this.DatabaseSession.Derive(true);
-
-            //Assert.AreEqual(string.Format("{0} - {1} from {2}", order.OrderNumber, order.OrderDate.Date, supplier.DisplayName), order.DisplayName);
-        }
-
-        [Test]
         public void GivenPurchaseOrder_WhenDeriving_ThenTakenViaSupplierMustBeInSupplierRelationship()
         {
-            throw new Exception("TODO");
+            var supplier = new OrganisationBuilder(this.DatabaseSession).WithName("supplier").Build();
+            var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
 
-            //var supplier = new OrganisationBuilder(this.DatabaseSession).WithName("supplier").Build();
-            //var internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
+            new PurchaseOrderBuilder(this.DatabaseSession)
+                .WithTakenViaSupplier(supplier)
+                .WithBillToPurchaser(internalOrganisation)
+                .Build();
 
-            //new PurchaseOrderBuilder(this.DatabaseSession)
-            //    .WithOrderNumber("1")
-            //    .WithTakenViaSupplier(supplier)
-            //    .WithBillToPurchaser(internalOrganisation)
-            //    .Build();
+            var expectedError = ErrorMessages.PartyIsNotASupplier;
+            Assert.AreEqual(expectedError, this.DatabaseSession.Derive().Errors[0].Message);
 
-            //var expectedError = ErrorMessages.PartyIsNotASupplier;
-            //Assert.AreEqual(expectedError, this.DatabaseSession.Derive().Errors[0].Message);
+            new SupplierRelationshipBuilder(this.DatabaseSession).WithSupplier(supplier).WithInternalOrganisation(internalOrganisation).Build();
 
-            //new SupplierRelationshipBuilder(this.DatabaseSession).WithSupplier(supplier).WithInternalOrganisation(internalOrganisation).Build();
-
-            //Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
+            Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
 
         [Test]

@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class SkillLevels
     {
         public static readonly Guid BeginnerId = new Guid("F8A94F72-E5F2-49c5-B738-6B0F5EFC7BAF");

@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class PickListObjectStates
     {
         public static readonly Guid CreatedId = new Guid("E65872C0-AD3C-4802-A253-CF99F8209011");

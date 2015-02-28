@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class HazardousMaterialsDocuments
     {
         protected override void AppsSecure(Domain.Security config)

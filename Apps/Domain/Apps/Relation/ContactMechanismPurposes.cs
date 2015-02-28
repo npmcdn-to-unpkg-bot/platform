@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class ContactMechanismPurposes
     {
         public static readonly Guid HeadQuartersId = new Guid("065AF4A2-44E0-4bc5-8E09-3D3A6091F841");

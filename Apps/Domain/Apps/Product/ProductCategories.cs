@@ -20,9 +20,6 @@
 
 namespace Allors.Domain
 {
-    
-    using Allors.Domain;
-
     public partial class ProductCategories
     {
         private UniquelyIdentifiableCache<ProductCategory> cache;

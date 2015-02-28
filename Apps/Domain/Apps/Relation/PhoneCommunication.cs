@@ -22,8 +22,6 @@ using Allors.Meta;
 
 namespace Allors.Domain
 {
-    using System.Text;
-
     public partial class PhoneCommunication
     {
         public void AppsOnPostBuild(ObjectOnPostBuild method)

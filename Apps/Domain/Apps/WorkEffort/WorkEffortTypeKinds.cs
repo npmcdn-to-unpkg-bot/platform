@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class WorkEffortTypeKinds
     {
         public static readonly Guid ProductionRunId = new Guid("61480275-3EB4-45b1-9E2D-533ABB3A6C64");

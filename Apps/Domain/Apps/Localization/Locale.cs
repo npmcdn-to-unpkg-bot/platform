@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System.Linq;
 
-    using Allors.Domain;
-
     public partial class Locale
     {
         public Domain.StringTemplate[] StringTemplatesWhereLocale

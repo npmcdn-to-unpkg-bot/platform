@@ -22,8 +22,6 @@ namespace Allors.Databases.Object.SqlClient
 {
     using System;
 
-    using Allors.Meta;
-
     /// <summary>
     /// Thrown when the <see cref="IDatabase"/> encounters a Sql schema that is incompatible with the <see cref="Domain"/>.
     /// </summary>

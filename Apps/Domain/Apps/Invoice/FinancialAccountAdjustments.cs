@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using Allors.Domain;
-
     public partial class FinancialAccountAdjustments
     {
         protected override void AppsSecure(Security config)

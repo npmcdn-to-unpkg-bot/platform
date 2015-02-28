@@ -20,10 +20,6 @@
 
 namespace Allors.Domain
 {
-    using System;
-
-    using Allors.Domain;
-
     public partial class PurchaseShipments
     {
         public const string PurchaseShipmentTemplateEn =

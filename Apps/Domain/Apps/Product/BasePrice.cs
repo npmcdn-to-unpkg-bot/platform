@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using System.Text;
-
     using Resources;
 
     public partial class BasePrice

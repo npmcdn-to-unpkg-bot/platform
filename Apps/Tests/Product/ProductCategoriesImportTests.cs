@@ -22,11 +22,6 @@
 
 namespace Allors.Domain
 {
-    using System.Collections.Generic;
-
-    using Allors;
-    using NUnit.Framework;
-
     // TODO: 
     //[TestFixture]
     //public class ProductCategoriesImportTests : DomainTest

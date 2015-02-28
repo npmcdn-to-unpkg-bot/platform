@@ -16,7 +16,6 @@
 
 namespace Allors.Databases.Memory
 {
-    using System;
     using System.Collections.Generic;
     using System.Xml;
 

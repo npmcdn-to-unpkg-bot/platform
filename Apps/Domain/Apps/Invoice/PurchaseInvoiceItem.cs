@@ -20,8 +20,6 @@
 
 namespace Allors.Domain
 {
-    using System.Text;
-
     public partial class PurchaseInvoiceItem
     {
         ObjectState Transitional.PreviousObjectState

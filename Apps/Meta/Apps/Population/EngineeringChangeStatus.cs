@@ -1,8 +1,6 @@
 namespace Allors.Meta
 {
-	using System;
-
-	public partial class EngineeringChangeStatusClass
+    public partial class EngineeringChangeStatusClass
 	{
 	    internal override void AppsExtend()
         {

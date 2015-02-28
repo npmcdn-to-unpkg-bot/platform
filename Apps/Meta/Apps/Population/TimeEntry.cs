@@ -1,8 +1,6 @@
 namespace Allors.Meta
 {
-	using System;
-
-	public partial class TimeEntryClass
+    public partial class TimeEntryClass
 	{
 	    internal override void AppsExtend()
         {

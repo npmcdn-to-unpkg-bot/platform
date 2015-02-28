@@ -22,8 +22,6 @@ namespace Allors.Domain
 {
     using System;
 
-    using Allors.Domain;
-
     public partial class AccountingTransactionTypes
     {
         public static readonly Guid BankStatementId = new Guid("2E2CB1CB-BA50-43FD-8A3C-D5CA23CA5B4F");
