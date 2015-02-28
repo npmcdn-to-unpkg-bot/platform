@@ -33,7 +33,7 @@ namespace Allors.Domain
             method.Value += "C1Base";
         }
 
-        public void TestInterfaceMethod(I1InterfaceMethod method)
+        public void TestsInterfaceMethod(I1InterfaceMethod method)
         {
             method.Value += "C1Test";
         }
@@ -51,7 +51,7 @@ namespace Allors.Domain
             method.Value += "I1Base";
         }
 
-        public static void TestInterfaceMethod(this I1 @this, I1InterfaceMethod method)
+        public static void TestsInterfaceMethod(this I1 @this, I1InterfaceMethod method)
         {
             method.Value += "I1Test";
         }

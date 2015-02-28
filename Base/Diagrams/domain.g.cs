@@ -689,8 +689,6 @@ namespace Allors.Domain
 
 					global::System.String Description {set;}
 
-					global::System.Boolean? IsMethodCalled {set;}
-
 					Person Employees {set;}
 
 					global::System.Boolean? Incorporated {set;}

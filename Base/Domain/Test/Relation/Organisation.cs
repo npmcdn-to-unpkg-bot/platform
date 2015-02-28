@@ -25,23 +25,11 @@ namespace Allors.Domain
 
     public partial class Organisation
     {
-        public void TestsOnPostBuild(ObjectOnPostBuild method)
-        {
-            this.IsMethodCalled = false;
-        }
-
         public void TestsDerive(ObjectDerive method)
         {
             var derivation = method.Derivation;
 
             derivation.Log.AssertExists(this, Organisations.Meta.Name);
-        }
-
-        public void TestsJustDoIt(OrganisationJustDoIt method)
-        {
-            this.IsMethodCalled = true;
-
-            method.result = method.a + method.b;
         }
     }
 }

@@ -31,7 +31,7 @@ namespace Allors.Domain
                     acl.Delete();
                 }
 
-                this.OwnerSecurityToken.Delete().Execute();
+                this.OwnerSecurityToken.Delete();
             }
         }
 

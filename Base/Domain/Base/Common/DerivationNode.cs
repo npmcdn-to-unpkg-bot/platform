@@ -22,6 +22,7 @@ namespace Allors.Domain
 {
     using System;
     using System.Collections.Generic;
+    using System.Security.Cryptography.X509Certificates;
 
     public class DerivationNode : IEquatable<DerivationNode>
     {
@@ -96,9 +97,7 @@ namespace Allors.Domain
 
             if (!this.derivable.Strategy.IsDeleted)
             {
-                var derive = this.derivable.Derive();
-                derive.Derivation = derivation;
-                derive.Execute();
+                this.derivable.Derive(x=>x.WithDerivation(derivation));
             }
 
             derivation.AddDerivedObject(this.derivable);

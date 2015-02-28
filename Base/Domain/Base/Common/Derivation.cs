@@ -23,6 +23,7 @@ namespace Allors.Domain
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
+    using System.Security.Cryptography.X509Certificates;
 
     using Allors;
     using Allors.Meta;
@@ -296,9 +297,7 @@ namespace Allors.Domain
                             this.Preparing(derivable);
                         }
 
-                        var prepareDerivation = derivable.PrepareDerivation();
-                        prepareDerivation.Derivation = this;
-                        prepareDerivation.Execute();
+                        derivable.PrepareDerivation(x=>x.Derivation = this);
 
                         this.preparedObjects.Add(derivable);
                     }
@@ -324,9 +323,7 @@ namespace Allors.Domain
                             this.Preparing(dependencyObject);
                         }
 
-                        var prepareDerivation = dependencyObject.PrepareDerivation();
-                        prepareDerivation.Derivation = this;
-                        prepareDerivation.Execute();
+                        dependencyObject.PrepareDerivation(x => x.Derivation = this);
                         
                         this.preparedObjects.Add(dependencyObject);
                     }

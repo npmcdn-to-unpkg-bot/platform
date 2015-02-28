@@ -22,6 +22,7 @@ namespace Allors
 {
     using System;
     using System.Collections.Generic;
+    using System.Security.Cryptography.X509Certificates;
 
     using Allors.Meta;
 
@@ -102,7 +103,7 @@ namespace Allors
 
         protected virtual void OnPostBuild(T instance)
         {
-            instance.OnPostBuild().WithBuilder(this).Execute();
+            instance.OnPostBuild(x => x.WithBuilder(this));
         }
     }
 

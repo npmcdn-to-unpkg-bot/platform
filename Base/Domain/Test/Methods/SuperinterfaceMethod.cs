@@ -33,7 +33,7 @@ namespace Allors.Domain
             method.Value += "C1Base";
         }
 
-        public void TestSuperinterfaceMethod(S1SuperinterfaceMethod method)
+        public void TestsSuperinterfaceMethod(S1SuperinterfaceMethod method)
         {
             method.Value += "C1Test";
         }
@@ -51,7 +51,7 @@ namespace Allors.Domain
             method.Value += "I1Base";
         }
 
-        public static void TestSuperinterfaceMethod(this I1 @this, S1SuperinterfaceMethod method)
+        public static void TestsSuperinterfaceMethod(this I1 @this, S1SuperinterfaceMethod method)
         {
             method.Value += "I1Test";
         }
@@ -69,7 +69,7 @@ namespace Allors.Domain
             method.Value += "S1Base";
         }
 
-        public static void TestSuperinterfaceMethod(this S1 @this, S1SuperinterfaceMethod method)
+        public static void TestsSuperinterfaceMethod(this S1 @this, S1SuperinterfaceMethod method)
         {
             method.Value += "S1Test";
         }

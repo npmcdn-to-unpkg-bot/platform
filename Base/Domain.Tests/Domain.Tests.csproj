@@ -71,7 +71,6 @@
     <Compile Include="Localization\LocaleTests.cs" />
     <Compile Include="Localization\LocalizedTextTests.cs" />
     <Compile Include="Meta\MethodsTests.cs" />
-    <Compile Include="Misc\MethodTest.cs" />
     <Compile Include="Misc\BuilderTest.cs" />
     <Compile Include="Misc\CacheTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

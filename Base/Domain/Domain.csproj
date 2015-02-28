@@ -55,6 +55,7 @@
     <Compile Include="Generated\Base\BadUI.g.cs" />
     <Compile Include="Generated\Base\C1.g.cs" />
     <Compile Include="Generated\Base\C1ClassMethod.g.cs" />
+    <Compile Include="Generated\Base\C1Sum.g.cs" />
     <Compile Include="Generated\Base\C2.g.cs" />
     <Compile Include="Generated\Base\ClassWithoutRoles.g.cs" />
     <Compile Include="Generated\Base\Commentable.g.cs" />
@@ -142,7 +143,7 @@
     <Compile Include="Test\General\MailboxAddress.cs" />
     <Compile Include="Test\Methods\SuperinterfaceMethod.cs" />
     <Compile Include="Test\Methods\InterfaceMethod.cs" />
-    <Compile Include="Test\Relation\OrganisationJustDoIt.cs" />
+    <Compile Include="Test\Combinations\C1Sum.cs" />
     <Compile Include="Test\Relation\Organisations.cs" />
     <Compile Include="Test\General\Place.cs" />
     <Compile Include="Test\General\Places.cs" />

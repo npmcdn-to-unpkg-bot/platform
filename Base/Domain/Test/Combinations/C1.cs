@@ -44,5 +44,10 @@ namespace Allors.Domain
                 sequence.Add(this);
             }
         }
+
+        public void TestsSum(C1Sum method)
+        {
+            method.result = method.a + method.b;
+        }
     }
 }

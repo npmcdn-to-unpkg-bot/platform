@@ -11,6 +11,12 @@ namespace Allors.Meta
                 ObjectType = Instance,
                 Name = "ClassMethod"
             };
+
+            new MethodType(BaseDomain.Instance, new Guid("30BF52C7-7DF6-4A34-8333-F114E2752905"))
+            {
+                ObjectType = Instance,
+                Name = "Sum"
+            };
         }
     }
 }

@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="Organisation.cs" company="Allors bvba">
+// <copyright file="C1Sum.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -21,7 +21,7 @@
 
 namespace Allors.Domain
 {
-    public partial class OrganisationJustDoIt
+    public partial class C1Sum
     {
         public int a { get; set; }
 

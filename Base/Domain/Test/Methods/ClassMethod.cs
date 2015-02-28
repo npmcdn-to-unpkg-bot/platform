@@ -33,7 +33,7 @@ namespace Allors.Domain
             method.Value += "C1Base";
         }
 
-        public void TestClassMethod(C1ClassMethod method)
+        public void TestsClassMethod(C1ClassMethod method)
         {
             method.Value += "C1Test";
         }

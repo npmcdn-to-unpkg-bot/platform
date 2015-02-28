@@ -153,6 +153,8 @@ $endif$
 interfaceExclusiveMethodType_Interface() ::= <<
 $\n$
 		$methodType.FullName$ $methodType.Name$();
+
+		$methodType.FullName$ $methodType.Name$(System.Action<$methodType.FullName$> action);
 >>
 
 interfaceExclusiveRoleTypes_Builder() ::= <<

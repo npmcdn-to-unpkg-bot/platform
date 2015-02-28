@@ -23,9 +23,10 @@ namespace Allors.Meta
     public abstract partial class Method
     {
         private readonly IObject @object;
-
+        
         protected Method(IObject @object)
         {
+            this.Executed = false;
             this.@object = @object;
         }
 
@@ -36,6 +37,8 @@ namespace Allors.Meta
                 return this.@object;
             }
         }
+
+        public bool Executed { get; set; }
 
         public abstract void Execute();
     }

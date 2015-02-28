@@ -20,6 +20,8 @@
 
 namespace Allors.Meta
 {
+    using System;
+
     public partial class MethodInvocation<T>
         where T : IObject
     {
@@ -40,6 +42,13 @@ namespace Allors.Meta
 
         public void Execute(Method method)
         {
+            if (method.Executed)
+            {
+                throw new Exception("Method already executed.");
+            }
+
+            method.Executed = true;
+
             foreach (var action in this.concreteMethodType.Actions)
             {
                 // TODO: Add test for deletion

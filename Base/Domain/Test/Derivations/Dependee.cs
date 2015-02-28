@@ -60,7 +60,7 @@ namespace Allors.Domain
 
             if (this.DeleteDependent.HasValue && this.DeleteDependent.Value)
             {
-                this.DependentWhereDependee.Delete().Execute();
+                this.DependentWhereDependee.Delete();
             }
         }
     }

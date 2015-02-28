@@ -37,7 +37,6 @@ namespace Allors.Domain
                 .Build();
 
             var classMethod = c1.ClassMethod();
-            classMethod.Execute();
 
             Assert.AreEqual("C1TestC1BaseC1Core", classMethod.Value);
         }
@@ -49,7 +48,6 @@ namespace Allors.Domain
                 .Build();
 
             var interfaceMethod = c1.InterfaceMethod();
-            interfaceMethod.Execute();
 
             Assert.AreEqual("C1TestI1TestC1BaseI1BaseC1CoreI1Core", interfaceMethod.Value);
         }
@@ -61,9 +59,45 @@ namespace Allors.Domain
                 .Build();
 
             var interfaceMethod = c1.SuperinterfaceMethod();
-            interfaceMethod.Execute();
 
             Assert.AreEqual("C1TestI1TestS1TestC1BaseI1BaseS1BaseC1CoreI1CoreS1Core", interfaceMethod.Value);
         }
+
+        [Test]
+        public void MethodWithResults()
+        {
+            var c1 = new C1Builder(this.DatabaseSession).Build();
+
+            var method = c1.Sum(
+                m =>
+                {
+                    m.a = 1;
+                    m.b = 2;
+                });
+
+            Assert.AreEqual(3, method.result);
+        }
+
+        [Test]
+        public void CallMethodTwice()
+        {
+            var c1 = new C1Builder(this.DatabaseSession)
+                .Build();
+
+            var classMethod = c1.ClassMethod();
+
+            var exceptionThrown = false;
+            try
+            {
+                classMethod.Execute();
+            }
+            catch
+            {
+                exceptionThrown = true;
+            }
+
+            Assert.IsTrue(exceptionThrown);
+        }
+
     }
 }

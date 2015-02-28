@@ -36,7 +36,7 @@ namespace Allors.Domain
             {
                 if (!(permission.ExistOperandType && permission.ExistConcreteClass && permission.ExistOperation))
                 {
-                    permission.Delete().Execute();
+                    permission.Delete();
                     return;
                 }
 
@@ -125,7 +125,7 @@ namespace Allors.Domain
                             {
                                 if (permission != null)
                                 {
-                                    permission.Delete().Execute();
+                                    permission.Delete();
                                 }
                             }
                             else
