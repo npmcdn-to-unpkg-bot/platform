@@ -105,6 +105,7 @@ namespace Allors.Domain
             var bank = new BankBuilder(this.DatabaseSession).WithCountry(netherlands).WithName("RABOBANK GROEP").WithBic("RABONL2U").Build();
 
             var ownBankAccount = new OwnBankAccountBuilder(this.DatabaseSession)
+                .WithDescription("BE23 3300 6167 6391")
                 .WithBankAccount(new BankAccountBuilder(this.DatabaseSession).WithBank(bank).WithCurrency(euro).WithIban("NL50RABO0109546784").WithNameOnAccount("Martien").Build())
                 .Build();
 
@@ -133,6 +134,7 @@ namespace Allors.Domain
             var bank = new BankBuilder(this.DatabaseSession).WithCountry(netherlands).WithName("RABOBANK GROEP").WithBic("RABONL2U").Build();
 
             var ownBankAccount = new OwnBankAccountBuilder(this.DatabaseSession)
+                .WithDescription("BE23 3300 6167 6391")
                 .WithBankAccount(new BankAccountBuilder(this.DatabaseSession).WithBank(bank).WithCurrency(euro).WithIban("NL50RABO0109546784").WithNameOnAccount("Martien").Build())
                 .Build();
 

@@ -51,6 +51,10 @@ namespace Allors.Domain
                 return this.AppsPartyGetPendingCustomerShipments();
             }
         }
+        public void DeriveFullName()
+        {
+            this.AppsDeriveFullName();
+        }
 
         public void DeriveCurrentSalesReps(IDerivation derivation)
         {

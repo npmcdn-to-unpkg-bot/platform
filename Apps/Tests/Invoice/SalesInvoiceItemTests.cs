@@ -50,209 +50,194 @@ namespace Allors.Domain
         [SetUp]
         public override void Init()
         {
-            throw new Exception("TODO");
+            base.Init();
 
-            //base.Init();
+            var euro = new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR");
 
-            //var euro = new Currencies(this.DatabaseSession).FindBy(Currencies.Meta.IsoCode, "EUR");
+            this.supplier = new OrganisationBuilder(this.DatabaseSession).WithName("supplier").WithLocale(new Locales(this.DatabaseSession).EnglishGreatBritain).Build();
 
-            //this.supplier = new OrganisationBuilder(this.DatabaseSession).WithName("supplier").WithLocale(new Locales(this.DatabaseSession).EnglishGreatBritain).Build();
+            this.internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
 
-            //this.internalOrganisation = new InternalOrganisations(this.DatabaseSession).FindBy(InternalOrganisations.Meta.Name, "internalOrganisation");
+            this.vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
 
-            //this.vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
+            this.mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
+            this.kiev = new CityBuilder(this.DatabaseSession).WithName("Kiev").Build();
 
-            //this.mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
-            //this.kiev = new CityBuilder(this.DatabaseSession).WithName("Kiev").Build();
+            this.billToContactMechanismMechelen = new PostalAddressBuilder(this.DatabaseSession).WithAddress1("Mechelen").WithGeographicBoundary(this.mechelen).Build();
+            this.shipToContactMechanismKiev = new PostalAddressBuilder(this.DatabaseSession).WithAddress1("Kiev").WithGeographicBoundary(this.kiev).Build();
+            this.billToCustomer = new OrganisationBuilder(this.DatabaseSession).WithName("billToCustomer").WithPreferredCurrency(euro).Build();
 
-            //this.billToContactMechanismMechelen = new PostalAddressBuilder(this.DatabaseSession).WithAddress1("Mechelen").WithGeographicBoundary(this.mechelen).Build();
-            //this.shipToContactMechanismKiev = new PostalAddressBuilder(this.DatabaseSession).WithAddress1("Kiev").WithGeographicBoundary(this.kiev).Build();
-            //this.billToCustomer = new OrganisationBuilder(this.DatabaseSession).WithName("billToCustomer").WithPreferredCurrency(euro).Build();
+            this.shipToCustomer = new OrganisationBuilder(this.DatabaseSession).WithName("shipToCustomer").WithPreferredCurrency(euro).Build();
 
-            //this.shipToCustomer = new OrganisationBuilder(this.DatabaseSession).WithName("shipToCustomer").WithPreferredCurrency(euro).Build();
+            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(this.billToCustomer).WithInternalOrganisation(this.internalOrganisation).Build();
+            new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(this.shipToCustomer).WithInternalOrganisation(this.internalOrganisation).Build();
 
-            //new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(this.billToCustomer).WithInternalOrganisation(this.internalOrganisation).Build();
-            //new CustomerRelationshipBuilder(this.DatabaseSession).WithCustomer(this.shipToCustomer).WithInternalOrganisation(this.internalOrganisation).Build();
+            this.good = new GoodBuilder(this.DatabaseSession)
+                .WithSku("10101")
+                .WithVatRate(this.vatRate21)
+                .WithName("good")
+                .WithInventoryItemKind(new InventoryItemKinds(this.DatabaseSession).NonSerialized)
+                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
+                .Build();
 
-            //this.good = new GoodBuilder(this.DatabaseSession)
-            //    .WithSku("10101")
-            //    .WithVatRate(this.vatRate21)
-            //    .WithName("good")
-            //    .WithInventoryItemKind(new InventoryItemKinds(this.DatabaseSession).NonSerialized)
-            //    .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-            //    .Build();
+            this.feature1 = new ColourBuilder(this.DatabaseSession)
+                .WithVatRate(this.vatRate21)
+                .WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
+                                            .WithText("white")
+                                            .WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale)
+                                            .Build())
+                .Build();
 
-            //this.feature1 = new ColourBuilder(this.DatabaseSession)
-            //    .WithVatRate(this.vatRate21)
-            //    .WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
-            //                                .WithText("white")
-            //                                .WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale)
-            //                                .Build())
-            //    .Build();
+            this.feature2 = new ColourBuilder(this.DatabaseSession)
+                .WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
+                                            .WithText("black")
+                                            .WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale)
+                                            .Build())
+                .Build();
 
-            //this.feature2 = new ColourBuilder(this.DatabaseSession)
-            //    .WithLocalisedName(new LocalisedTextBuilder(this.DatabaseSession)
-            //                                .WithText("black")
-            //                                .WithLocale(Singleton.Instance(this.DatabaseSession).DefaultLocale)
-            //                                .Build())
-            //    .Build();
+            this.goodPurchasePrice = new ProductPurchasePriceBuilder(this.DatabaseSession)
+                .WithCurrency(euro)
+                .WithFromDate(DateTime.Now)
+                .WithPrice(7)
+                .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
+                .Build();
 
-            //this.goodPurchasePrice = new ProductPurchasePriceBuilder(this.DatabaseSession)
-            //    .WithCurrency(euro)
-            //    .WithFromDate(DateTime.Now)
-            //    .WithPrice(7)
-            //    .WithUnitOfMeasure(new UnitsOfMeasure(this.DatabaseSession).Piece)
-            //    .Build();
+            this.goodSupplierOffering = new SupplierOfferingBuilder(this.DatabaseSession)
+                .WithProduct(this.good)
+                .WithSupplier(this.supplier)
+                .WithFromDate(DateTime.Now)
+                .WithProductPurchasePrice(this.goodPurchasePrice)
+                .Build();
 
-            //this.goodSupplierOffering = new SupplierOfferingBuilder(this.DatabaseSession)
-            //    .WithProduct(this.good)
-            //    .WithSupplier(this.supplier)
-            //    .WithFromDate(DateTime.Now)
-            //    .WithProductPurchasePrice(this.goodPurchasePrice)
-            //    .Build();
+            this.currentBasePriceGeoBoundary = new BasePriceBuilder(this.DatabaseSession)
+                .WithSpecifiedFor(this.internalOrganisation)
+                .WithDescription("current BasePriceGeoBoundary")
+                .WithGeographicBoundary(this.mechelen)
+                .WithProduct(this.good)
+                .WithPrice(8)
+                .WithFromDate(DateTime.Now)
+                .Build();
 
-            //this.currentBasePriceGeoBoundary = new BasePriceBuilder(this.DatabaseSession)
-            //    .WithSpecifiedFor(this.internalOrganisation)
-            //    .WithDescription("current BasePriceGeoBoundary")
-            //    .WithGeographicBoundary(this.mechelen)
-            //    .WithProduct(this.good)
-            //    .WithPrice(8)
-            //    .WithCurrency(euro)
-            //    .WithFromDate(DateTime.Now)
-            //    .Build();
+            // previous basePrice for good
+            new BasePriceBuilder(this.DatabaseSession).WithDescription("previous good")
+                .WithSpecifiedFor(this.internalOrganisation)
+                .WithProduct(this.good)
+                .WithPrice(8)
+                .WithFromDate(DateTime.Now.AddYears(-1))
+                .WithThroughDate(DateTime.Now.AddDays(-1))
+                .Build();
 
-            //// previous basePrice for good
-            //new BasePriceBuilder(this.DatabaseSession).WithDescription("previous good")
-            //    .WithSpecifiedFor(this.internalOrganisation)
-            //    .WithProduct(this.good)
-            //    .WithPrice(8)
-            //    .WithCurrency(euro)
-            //    .WithFromDate(DateTime.Now.AddYears(-1))
-            //    .WithThroughDate(DateTime.Now.AddDays(-1))
-            //    .Build();
+            this.currentGood1BasePrice = new BasePriceBuilder(this.DatabaseSession)
+                .WithSpecifiedFor(this.internalOrganisation)
+                .WithDescription("current good")
+                .WithProduct(this.good)
+                .WithPrice(10)
+                .WithFromDate(DateTime.Now)
+                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .Build();
 
-            //this.currentGood1BasePrice = new BasePriceBuilder(this.DatabaseSession)
-            //    .WithSpecifiedFor(this.internalOrganisation)
-            //    .WithDescription("current good")
-            //    .WithProduct(this.good)
-            //    .WithPrice(10)
-            //    .WithCurrency(euro)
-            //    .WithFromDate(DateTime.Now)
-            //    .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
-            //    .Build();
+            // future basePrice for good
+            new BasePriceBuilder(this.DatabaseSession).WithDescription("future good")
+                .WithSpecifiedFor(this.internalOrganisation)
+                .WithProduct(this.good)
+                .WithPrice(11)
+                .WithFromDate(DateTime.Now.AddYears(1))
+                .Build();
 
-            //// future basePrice for good
-            //new BasePriceBuilder(this.DatabaseSession).WithDescription("future good")
-            //    .WithSpecifiedFor(this.internalOrganisation)
-            //    .WithProduct(this.good)
-            //    .WithPrice(11)
-            //    .WithCurrency(euro)
-            //    .WithFromDate(DateTime.Now.AddYears(1))
-            //    .Build();
+            // previous basePrice for feature1
+            new BasePriceBuilder(this.DatabaseSession).WithDescription("previous feature1")
+                .WithSpecifiedFor(this.internalOrganisation)
+                .WithProductFeature(this.feature1)
+                .WithPrice(0.5M)
+                .WithFromDate(DateTime.Now.AddYears(-1))
+                .WithThroughDate(DateTime.Now.AddDays(-1))
+                .Build();
 
-            //// previous basePrice for feature1
-            //new BasePriceBuilder(this.DatabaseSession).WithDescription("previous feature1")
-            //    .WithSpecifiedFor(this.internalOrganisation)
-            //    .WithProductFeature(this.feature1)
-            //    .WithPrice(0.5M)
-            //    .WithCurrency(euro)
-            //    .WithFromDate(DateTime.Now.AddYears(-1))
-            //    .WithThroughDate(DateTime.Now.AddDays(-1))
-            //    .Build();
+            // future basePrice for feature1
+            new BasePriceBuilder(this.DatabaseSession).WithDescription("future feature1")
+                .WithSpecifiedFor(this.internalOrganisation)
+                .WithProductFeature(this.feature1)
+                .WithPrice(2.5M)
+                .WithFromDate(DateTime.Now.AddYears(1))
+                .Build();
 
-            //// future basePrice for feature1
-            //new BasePriceBuilder(this.DatabaseSession).WithDescription("future feature1")
-            //    .WithSpecifiedFor(this.internalOrganisation)
-            //    .WithProductFeature(this.feature1)
-            //    .WithPrice(2.5M)
-            //    .WithCurrency(euro)
-            //    .WithFromDate(DateTime.Now.AddYears(1))
-            //    .Build();
+            this.currentFeature1BasePrice = new BasePriceBuilder(this.DatabaseSession)
+                .WithSpecifiedFor(this.internalOrganisation)
+                .WithDescription("current feature1")
+                .WithProductFeature(this.feature1)
+                .WithPrice(2)
+                .WithFromDate(DateTime.Now)
+                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .Build();
 
-            //this.currentFeature1BasePrice = new BasePriceBuilder(this.DatabaseSession)
-            //    .WithSpecifiedFor(this.internalOrganisation)
-            //    .WithDescription("current feature1")
-            //    .WithProductFeature(this.feature1)
-            //    .WithPrice(2)
-            //    .WithCurrency(euro)
-            //    .WithFromDate(DateTime.Now)
-            //    .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
-            //    .Build();
+            // previous basePrice for feature2
+            new BasePriceBuilder(this.DatabaseSession).WithDescription("previous feature2")
+                .WithSpecifiedFor(this.internalOrganisation)
+                .WithProductFeature(this.feature2)
+                .WithPrice(2)
+                .WithFromDate(DateTime.Now.AddYears(-1))
+                .WithThroughDate(DateTime.Now.AddDays(-1))
+                .Build();
 
-            //// previous basePrice for feature2
-            //new BasePriceBuilder(this.DatabaseSession).WithDescription("previous feature2")
-            //    .WithSpecifiedFor(this.internalOrganisation)
-            //    .WithProductFeature(this.feature2)
-            //    .WithPrice(2)
-            //    .WithCurrency(euro)
-            //    .WithFromDate(DateTime.Now.AddYears(-1))
-            //    .WithThroughDate(DateTime.Now.AddDays(-1))
-            //    .Build();
+            // future basePrice for feature2
+            new BasePriceBuilder(this.DatabaseSession)
+                .WithSpecifiedFor(this.internalOrganisation)
+                .WithDescription("future feature2")
+                .WithProductFeature(this.feature2)
+                .WithPrice(4)
+                .WithFromDate(DateTime.Now.AddYears(1))
+                .Build();
 
-            //// future basePrice for feature2
-            //new BasePriceBuilder(this.DatabaseSession)
-            //    .WithSpecifiedFor(this.internalOrganisation)
-            //    .WithDescription("future feature2")
-            //    .WithProductFeature(this.feature2)
-            //    .WithPrice(4)
-            //    .WithCurrency(euro)
-            //    .WithFromDate(DateTime.Now.AddYears(1))
-            //    .Build();
+            new BasePriceBuilder(this.DatabaseSession)
+                .WithSpecifiedFor(this.internalOrganisation)
+                .WithDescription("current feature2")
+                .WithProductFeature(this.feature2)
+                .WithPrice(3)
+                .WithFromDate(DateTime.Now)
+                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .Build();
 
-            //new BasePriceBuilder(this.DatabaseSession)
-            //    .WithSpecifiedFor(this.internalOrganisation)
-            //    .WithDescription("current feature2")
-            //    .WithProductFeature(this.feature2)
-            //    .WithPrice(3)
-            //    .WithCurrency(euro)
-            //    .WithFromDate(DateTime.Now)
-            //    .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
-            //    .Build();
+            // previous basePrice for good with feature1
+            new BasePriceBuilder(this.DatabaseSession).WithDescription("previous good/feature1")
+                .WithSpecifiedFor(this.internalOrganisation)
+                .WithProduct(this.good)
+                .WithProductFeature(this.feature1)
+                .WithPrice(4)
+                .WithFromDate(DateTime.Now.AddYears(-1))
+                .WithThroughDate(DateTime.Now.AddDays(-1))
+                .Build();
 
-            //// previous basePrice for good with feature1
-            //new BasePriceBuilder(this.DatabaseSession).WithDescription("previous good/feature1")
-            //    .WithSpecifiedFor(this.internalOrganisation)
-            //    .WithProduct(this.good)
-            //    .WithProductFeature(this.feature1)
-            //    .WithPrice(4)
-            //    .WithCurrency(euro)
-            //    .WithFromDate(DateTime.Now.AddYears(-1))
-            //    .WithThroughDate(DateTime.Now.AddDays(-1))
-            //    .Build();
+            // future basePrice for good with feature1
+            new BasePriceBuilder(this.DatabaseSession)
+                .WithSpecifiedFor(this.internalOrganisation)
+                .WithDescription("future good/feature1")
+                .WithProduct(this.good)
+                .WithProductFeature(this.feature1)
+                .WithPrice(6)
+                .WithFromDate(DateTime.Now.AddYears(1))
+                .Build();
 
-            //// future basePrice for good with feature1
-            //new BasePriceBuilder(this.DatabaseSession)
-            //    .WithSpecifiedFor(this.internalOrganisation)
-            //    .WithDescription("future good/feature1")
-            //    .WithProduct(this.good)
-            //    .WithProductFeature(this.feature1)
-            //    .WithPrice(6)
-            //    .WithCurrency(euro)
-            //    .WithFromDate(DateTime.Now.AddYears(1))
-            //    .Build();
+            this.currentGood1Feature1BasePrice = new BasePriceBuilder(this.DatabaseSession)
+                .WithSpecifiedFor(this.internalOrganisation)
+                .WithDescription("current good/feature1")
+                .WithProduct(this.good)
+                .WithProductFeature(this.feature1)
+                .WithPrice(5)
+                .WithFromDate(DateTime.Now)
+                .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
+                .Build();
 
-            //this.currentGood1Feature1BasePrice = new BasePriceBuilder(this.DatabaseSession)
-            //    .WithSpecifiedFor(this.internalOrganisation)
-            //    .WithDescription("current good/feature1")
-            //    .WithProduct(this.good)
-            //    .WithProductFeature(this.feature1)
-            //    .WithPrice(5)
-            //    .WithCurrency(euro)
-            //    .WithFromDate(DateTime.Now)
-            //    .WithThroughDate(DateTime.Now.AddYears(1).AddDays(-1))
-            //    .Build();
+            this.invoice = new SalesInvoiceBuilder(this.DatabaseSession)
+                .WithSalesInvoiceType(new SalesInvoiceTypes(this.DatabaseSession).SalesInvoice)
+                .WithBillToContactMechanism(this.billToContactMechanismMechelen)
+                .WithBillToCustomer(this.billToCustomer)
+                .WithShipToAddress(this.shipToContactMechanismKiev)
+                .WithShipToCustomer(this.shipToCustomer)
+                .WithBilledFromInternalOrganisation(this.internalOrganisation)
+                .Build();
 
-            //this.invoice = new SalesInvoiceBuilder(this.DatabaseSession)
-            //    .WithSalesInvoiceType(new SalesInvoiceTypes(this.DatabaseSession).SalesInvoice)
-            //    .WithBillToContactMechanism(this.billToContactMechanismMechelen)
-            //    .WithBillToCustomer(this.billToCustomer)
-            //    .WithShipToAddress(this.shipToContactMechanismKiev)
-            //    .WithShipToCustomer(this.shipToCustomer)
-            //    .WithBilledFromInternalOrganisation(this.internalOrganisation)
-            //    .Build();
-
-            //this.DatabaseSession.Derive(true);
-            //this.DatabaseSession.Commit();
+            this.DatabaseSession.Derive(true);
+            this.DatabaseSession.Commit();
         }
 
         [Test]

@@ -56,7 +56,7 @@ namespace Allors.Domain
             }
 
             if (@this.ExistActualStart && @this.ActualStart <= DateTime.UtcNow && 
-                @this.ExistActualEnd && @this.ActualEnd > DateTime.UtcNow)
+                (@this.ExistActualEnd && @this.ActualEnd > DateTime.UtcNow || !@this.ExistActualEnd))
             {
                 @this.CurrentObjectState = new CommunicationEventObjectStates(@this.Strategy.Session).InProgress;
                 @this.CurrentCommunicationEventStatus = new CommunicationEventStatusBuilder(@this.Strategy.Session)
@@ -97,17 +97,17 @@ namespace Allors.Domain
             }
         }
 
-        public static void AppsCommunicationEventClose(this CommunicationEvent @this, CommunicationEventClose method)
+        public static void AppsClose(this CommunicationEvent @this, CommunicationEventClose method)
         {
             @this.CurrentObjectState = new CommunicationEventObjectStates(@this.Strategy.Session).Completed;
         }
 
-        public static void AppsCommunicationEventReopen(this CommunicationEvent @this, CommunicationEventReopen method)
+        public static void AppsReopen(this CommunicationEvent @this, CommunicationEventReopen method)
         {
             @this.CurrentObjectState = new CommunicationEventObjectStates(@this.Strategy.Session).Scheduled;
         }
 
-        public static void AppsCommunicationEventCancel(this CommunicationEvent @this, CommunicationEventCancel method)
+        public static void AppsCancel(this CommunicationEvent @this, CommunicationEventCancel method)
         {
             @this.CurrentObjectState = new CommunicationEventObjectStates(@this.Strategy.Session).Cancelled;
         }

@@ -192,6 +192,11 @@ namespace Allors.Domain
             this.DeriveUserGroups(derivation);
             this.DeriveCurrentContacts(derivation);
         }
+        
+        private void AppsDeriveFullName()
+        {
+            this.FullName = this.Name;
+        }
 
         private Person AppsFindCurrentContactByName(string name)
         {

@@ -62,7 +62,7 @@ namespace Allors.Domain
             $if(this.ShipmentWhereShipmentPackage.ExistShipToParty)$
                 <span style=""font-weight: bold"">Shipping Address</span>
                 <p>
-                    $this.ShipmentWhereShipmentPackage.ShipToParty.DisplayName;format=""xml-encode""$<br />
+                    $this.ShipmentWhereShipmentPackage.ShipToParty.FullName;format=""xml-encode""$<br />
                     $if(this.ShipmentWhereShipmentPackage.ExistShipToAddress)$
                         $this.ShipmentWhereShipmentPackage.ShipToAddress.FormattedFullAddress$
                     $endif$
@@ -116,10 +116,10 @@ $if(party.ExistBillingAddress)$
     $party.BillingAddress.FormattedFullAddress$<br /><br />  
 $endif$
 $if(party.ExistGeneralPhoneNumber)$
-    Phone number: $party.GeneralPhoneNumber.DisplayName;format=""xml-encode""$<br />
+    Phone number: $party.GeneralPhoneNumber.AreaCode $party.GeneralPhoneNumber.ContactNumber;format=""xml-encode""$<br />
 $endif$
 $if(party.ExistGeneralFaxNumber)$
-    Fax number: $party.GeneralFaxNumber.DisplayName;format=""xml-encode""$<br />
+    Fax number: $party.GeneralFaxNumber.AreaCode $party.GeneralFaxNumber.ContactNumber;format=""xml-encode""$<br />
 $endif$
 >>
 
@@ -127,7 +127,7 @@ bank(bankAccount) ::= <<
 <p>
     Bank: 
     $if(bankAccount.ExistBank)$
-         &#xA0;$bankAccount.Bank.DisplayName;format=""xml-encode""$
+         &#xA0;$bankAccount.Bank.Name;format=""xml-encode""$
     $endif$
     $if(bankAccount.ExistIban)$
         IBAN: $bankAccount.Iban$<br />
@@ -197,7 +197,7 @@ packagingContent(item) ::= <<
             $if(this.ShipmentWhereShipmentPackage.ExistShipToParty)$
                 <span style=""font-weight: bold"">Afleveradres</span>
                 <p>
-                    $this.ShipmentWhereShipmentPackage.ShipToParty.DisplayName;format=""xml-encode""$<br />
+                    $this.ShipmentWhereShipmentPackage.ShipToParty.FullName;format=""xml-encode""$<br />
                     $if(this.ShipmentWhereShipmentPackage.ExistShipToAddress)$
                         $this.ShipmentWhereShipmentPackage.ShipToAddress.FormattedFullAddress$
                     $endif$
@@ -251,10 +251,10 @@ $if(party.ExistBillingAddress)$
     $party.BillingAddress.FormattedFullAddress$<br /><br />  
 $endif$
 $if(party.ExistGeneralPhoneNumber)$
-    Telefoon: $party.GeneralPhoneNumber.DisplayName;format=""xml-encode""$<br />
+    Telefoon: $party.GeneralPhoneNumber.AreaCode $party.GeneralPhoneNumber.ContactNumber;format=""xml-encode""$<br />
 $endif$
 $if(party.ExistGeneralFaxNumber)$
-    Fax: $party.GeneralFaxNumber.DisplayName;format=""xml-encode""$<br />
+    Fax: $party.GeneralFaxNumber.AreaCode $party.GeneralFaxNumber.ContactNumber;format=""xml-encode""$<br />
 $endif$
 >>
 
@@ -262,7 +262,7 @@ bank(bankAccount) ::= <<
 <p>
     Bank: 
     $if(bankAccount.ExistBank)$
-         &#xA0;$bankAccount.Bank.DisplayName;format=""xml-encode""$
+         &#xA0;$bankAccount.Bank.Name;format=""xml-encode""$
     $endif$
     $if(bankAccount.ExistIban)$
         IBAN: $bankAccount.Iban$<br />

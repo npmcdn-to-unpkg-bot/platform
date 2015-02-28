@@ -81,7 +81,7 @@ namespace Allors.Domain
         [Test]
         public void GivenCustomerShipmentBuilder_WhenBuild_ThenPostBuildRelationsMustExist()
         {
-            var customer = new PersonBuilder(this.DatabaseSession).WithLastName("customer").Build(); 
+            var customer = new PersonBuilder(this.DatabaseSession).WithLastName("customer").Build();
             var mechelen = new CityBuilder(this.DatabaseSession).WithName("Mechelen").Build();
             var shipFromAddress = new PostalAddressBuilder(this.DatabaseSession).WithGeographicBoundary(mechelen).WithAddress1("Haverwerf 15").Build();
             var partyContactMechanism = new PartyContactMechanismBuilder(this.DatabaseSession)
@@ -273,7 +273,7 @@ namespace Allors.Domain
 
             Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity("orderProcessor", "Forms"), new string[0]);
 
-            var customer = new PersonBuilder(this.DatabaseSession).WithLastName("customer").Build(); 
+            var customer = new PersonBuilder(this.DatabaseSession).WithLastName("customer").Build();
             var shipment = new CustomerShipmentBuilder(this.DatabaseSession)
                 .WithShipToParty(customer)
                 .WithShipToAddress(shipToAddress)
@@ -376,7 +376,7 @@ namespace Allors.Domain
 
             Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity("orderProcessor", "Forms"), new string[0]);
 
-            var customer = new PersonBuilder(this.DatabaseSession).WithLastName("customer").Build(); 
+            var customer = new PersonBuilder(this.DatabaseSession).WithLastName("customer").Build();
 
             var shipment = new CustomerShipmentBuilder(this.DatabaseSession)
                 .WithShipToParty(customer)
@@ -511,7 +511,7 @@ namespace Allors.Domain
             shipment.AddShipmentPackage(package2);
 
             this.DatabaseSession.Derive(true);
-            
+
             Assert.AreEqual(2, package2.SequenceNumber);
 
             var package3 = new ShipmentPackageBuilder(this.DatabaseSession).Build();
@@ -710,7 +710,7 @@ namespace Allors.Domain
             order.AddSalesOrderItem(item);
 
             this.DatabaseSession.Derive(true);
-            
+
             order.Confirm();
 
             this.DatabaseSession.Derive(true);
@@ -830,7 +830,7 @@ namespace Allors.Domain
             this.DatabaseSession.Derive(true);
 
             var shipment = (CustomerShipment)item.OrderShipmentsWhereSalesOrderItem[0].ShipmentItem.ShipmentWhereShipmentItem;
-                
+
             var pickList = shipment.ShipmentItems[0].ItemIssuancesWhereShipmentItem[0].PickListItem.PickListWherePickListItem;
             pickList.Picker = new Persons(this.DatabaseSession).FindBy(Persons.Meta.LastName, "orderProcessor");
 
@@ -1057,7 +1057,7 @@ namespace Allors.Domain
                 .WithDefaultCarrier(new Carriers(this.DatabaseSession).Fedex)
                 .Build();
 
-            var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build(); 
+            var vatRate21 = new VatRateBuilder(this.DatabaseSession).WithRate(21).Build();
             var good1 = new GoodBuilder(this.DatabaseSession)
                 .WithSku("10101")
                 .WithName("good1")
@@ -1192,6 +1192,7 @@ namespace Allors.Domain
             var bank = new BankBuilder(this.DatabaseSession).WithCountry(belgium).WithName("ING België").WithBic("BBRUBEBB").Build();
 
             var ownBankAccount = new OwnBankAccountBuilder(this.DatabaseSession)
+                .WithDescription("BE23 3300 6167 6391")
                 .WithBankAccount(new BankAccountBuilder(this.DatabaseSession).WithBank(bank).WithCurrency(euro).WithIban("BE23 3300 6167 6391").WithNameOnAccount("Koen").Build())
                 .Build();
 

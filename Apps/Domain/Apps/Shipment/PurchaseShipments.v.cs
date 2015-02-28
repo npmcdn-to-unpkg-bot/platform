@@ -47,13 +47,13 @@ namespace Allors.Domain
     </div>
     <div>
     $if(this.ExistShipToParty)$
-        To      : $this.ShipToParty.DisplayName;format=""xml-encode""$<br />
+        To      : $this.ShipToParty.FullName;format=""xml-encode""$<br />
     $endif$
     $if(this.ExistFacility)$
-        Facility: $this.Facility.DisplayName;format=""xml-encode""$<br />
+        Facility: $this.Facility.Name;format=""xml-encode""$<br />
     $endif$
     $if(this.ExistShipFromParty)$
-        From    : $this.ShipFromParty.DisplayName;format=""xml-encode""$<br />
+        From    : $this.ShipFromParty.FullName;format=""xml-encode""$<br />
     $endif$
         Date    : $this.DateString;format=""xml-encode""$<br />
      </div>
@@ -119,13 +119,13 @@ shipmentItems(item) ::= <<
     </div>
     <div>
     $if(this.ExistShipToParty)$
-        Aan     : $this.ShipToParty.DisplayName;format=""xml-encode""$<br />
+        Aan     : $this.ShipToParty.FullName;format=""xml-encode""$<br />
     $endif$
     $if(this.ExistFacility)$
-        Magazijn: $this.Facility.DisplayName;format=""xml-encode""$<br />
+        Magazijn: $this.Facility.Name;format=""xml-encode""$<br />
     $endif$
     $if(this.ExistShipFromParty)$
-        Van     : $this.ShipFromParty.DisplayName;format=""xml-encode""$<br />
+        Van     : $this.ShipFromParty.FullName;format=""xml-encode""$<br />
     $endif$
         Datum   : $this.DateString;format=""xml-encode""$<br />
      </div>

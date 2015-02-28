@@ -26,6 +26,11 @@ namespace Allors.Domain
 
     public partial class AutomatedAgent
     {
+        public void DeriveFullName()
+        {
+            this.AppsDeriveFullName();
+        }
+
         public NumberFormatInfo CurrencyFormat {
             get
             {

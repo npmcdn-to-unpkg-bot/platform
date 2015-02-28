@@ -44,5 +44,10 @@ namespace Allors.Domain
             var derivation = method.Derivation;
             this.AppsPartyDerive(derivation);
         }
+
+        private void AppsDeriveFullName()
+        {
+            this.FullName = this.Name;
+        }
     }
 }

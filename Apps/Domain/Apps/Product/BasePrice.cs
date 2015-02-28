@@ -34,8 +34,6 @@ namespace Allors.Domain
         
         public void AppsOnPostBuild(ObjectOnPostBuild method)
         {
-            
-
             if (!this.ExistSpecifiedFor)
             {
                 this.SpecifiedFor = Domain.Singleton.Instance(this.Strategy.Session).DefaultInternalOrganisation;

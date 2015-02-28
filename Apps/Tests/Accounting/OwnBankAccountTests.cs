@@ -65,6 +65,7 @@ namespace Allors.Domain
             var bankAccount = new BankAccountBuilder(this.DatabaseSession).WithBank(bank).WithCurrency(euro).WithIban("NL50RABO0109546784").WithNameOnAccount("Martien").Build();
 
             var paymentMethod = new OwnBankAccountBuilder(this.DatabaseSession)
+                .WithDescription("own account")
                 .WithBankAccount(bankAccount)
                 .Build();
 
@@ -83,7 +84,9 @@ namespace Allors.Domain
             var builder = new BankAccountBuilder(this.DatabaseSession).WithCurrency(euro).WithIban("NL50RABO0109546784").WithNameOnAccount("Martien");
             var bankAccount = builder.Build();
 
-            new OwnBankAccountBuilder(this.DatabaseSession).WithBankAccount(bankAccount).Build();
+            new OwnBankAccountBuilder(this.DatabaseSession)
+                .WithDescription("own account")
+                .WithBankAccount(bankAccount).Build();
 
             Assert.IsTrue(this.DatabaseSession.Derive().HasErrors);
 
@@ -94,7 +97,9 @@ namespace Allors.Domain
             builder.WithBank(bank);
             bankAccount = builder.Build();
 
-            new OwnBankAccountBuilder(this.DatabaseSession).WithBankAccount(bankAccount).Build();
+            new OwnBankAccountBuilder(this.DatabaseSession)
+                .WithDescription("own account")
+                .WithBankAccount(bankAccount).Build();
 
             Assert.IsFalse(this.DatabaseSession.Derive().HasErrors);
         }
@@ -147,6 +152,7 @@ namespace Allors.Domain
             var bankAccount = new BankAccountBuilder(this.DatabaseSession).WithBank(bank).WithCurrency(euro).WithIban("NL50RABO0109546784").WithNameOnAccount("Martien").Build();
 
             var paymentMethod = new OwnBankAccountBuilder(this.DatabaseSession)
+                .WithDescription("own account")
                 .WithBankAccount(bankAccount)
                 .WithGeneralLedgerAccount(internalOrganisationGlAccount)
                 .WithCreditor(supplierRelationship)
@@ -205,6 +211,7 @@ namespace Allors.Domain
             var bankAccount = new BankAccountBuilder(this.DatabaseSession).WithBank(bank).WithCurrency(euro).WithIban("NL50RABO0109546784").WithNameOnAccount("Martien").Build();
 
             var paymentMethod = new OwnBankAccountBuilder(this.DatabaseSession)
+                .WithDescription("own account")
                 .WithBankAccount(bankAccount)
                 .WithCreditor(supplierRelationship)
                 .Build();

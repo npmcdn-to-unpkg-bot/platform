@@ -36,21 +36,6 @@ namespace Allors.Domain
             }
         }
 
-        protected string AppsComposeDisplayName()
-        {
-            return string.Format("{0} receipt for amount {1}", this.ExistEffectiveDate ? this.EffectiveDate : DateTime.MinValue, this.ExistAmount ? this.Amount : 0);
-        }
-
-        protected string AppsComposeSearchDataCharacterBoundaryText()
-        {
-            return null;
-        }
-
-        protected string AppsComposeSearchDataWordBoundaryText()
-        {
-            return string.Format("{0} {1}", this.ExistEffectiveDate ? this.EffectiveDate : DateTime.MinValue, this.ExistAmount ? this.Amount : 0);
-        }
-
         public void AppsPrepareDerivation(ObjectPrepareDerivation method)
         {
             var derivation = method.Derivation;

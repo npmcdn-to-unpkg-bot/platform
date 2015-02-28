@@ -45,18 +45,18 @@ namespace Allors.Domain
         </h1>
         $else$
         <h1>
-            Verzamellijst in $this.PickListItems.first.InventoryItem.Facility.DisplayName;format=""xml-encode""$
+            Verzamellijst in $this.PickListItems.first.InventoryItem.Facility.Name;format=""xml-encode""$
         </h1>
         <h2>
             Zending nummer(s): $this.ShipToParty.PendingCustomerShipments:{customerShipment|$customerShipment.ShipmentNumber$, }$
         </h2>
         $endif$
         <div> 
-            Zending voor     :$this.ShipToParty.DisplayName;format=""xml-encode""$<br />
+            Zending voor     :$this.ShipToParty.FullName;format=""xml-encode""$<br />
         </div>
     $if(this.ExistPicker)$
         <h2>
-            Picker: $this.Picker.DisplayName;format=""xml-encode""$
+            Picker: $this.Picker.FullName;format=""xml-encode""$
         </h2>
     $endif$
     </div>
@@ -124,18 +124,18 @@ picklistitem(item) ::= <<
         </h1>
         $else$
         <h1>
-            Picklist in $this.PickListItems.first.InventoryItem.Facility.DisplayName;format=""xml-encode""$
+            Picklist in $this.PickListItems.first.InventoryItem.Facility.Name;format=""xml-encode""$
         </h1>
         <h2>
             Shipment number(s): $this.ShipToParty.PendingCustomerShipments:{customerShipment|$customerShipment.ShipmentNumber$, }$
         </h2>
         $endif$
         <div> 
-            Ship to           :$this.ShipToParty.DisplayName;format=""xml-encode""$<br />
+            Ship to           :$this.ShipToParty.FullName;format=""xml-encode""$<br />
         </div>
     $if(this.ExistPicker)$
         <h2>
-            Picker: $this.Picker.DisplayName;format=""xml-encode""$
+            Picker: $this.Picker.FullName;format=""xml-encode""$
         </h2>
     $endif$
     </div>

@@ -29,21 +29,6 @@ namespace Allors.Domain
 
     public partial class BankAccount
     {
-        protected string AppsComposeDisplayName()
-        {
-            return string.Format("{0} {1}", this.ExistBank ? this.Bank.Name : null, this.ExistIban ? this.Iban : null);
-        }
-
-        protected string AppsComposeSearchDataCharacterBoundaryText()
-        {
-            return this.ExistBank ? this.Bank.Name : null;
-        }
-
-        protected string AppsComposeSearchDataWordBoundaryText()
-        {
-            return this.Iban;
-        }
-
         public void AppsDerive(ObjectDerive method)
         {
             var derivation = method.Derivation;

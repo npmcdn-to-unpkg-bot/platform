@@ -28,6 +28,8 @@ namespace Allors.Domain
         bool IsPerson { get; }
 
         bool IsOrganisation { get; }
+        
+        void DeriveFullName();
 
         NumberFormatInfo CurrencyFormat { get; }
 

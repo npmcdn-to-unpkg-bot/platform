@@ -84,6 +84,7 @@ namespace Allors.Domain
             var bank = new BankBuilder(this.DatabaseSession).WithCountry(belgium).WithName("ING België").WithBic("BBRUBEBB").Build();
 
             var ownBankAccount = new OwnBankAccountBuilder(this.DatabaseSession)
+                .WithDescription("own account")
                 .WithBankAccount(new BankAccountBuilder(this.DatabaseSession).WithBank(bank).WithCurrency(euro).WithIban("BE23 3300 6167 6391").WithNameOnAccount("Koen").Build())
                 .Build();
 
@@ -119,6 +120,7 @@ namespace Allors.Domain
             var bank = new BankBuilder(this.DatabaseSession).WithCountry(belgium).WithName("ING België").WithBic("BBRUBEBB").Build();
 
             var ownBankAccount = new OwnBankAccountBuilder(this.DatabaseSession)
+                .WithDescription("own account")
                 .WithBankAccount(new BankAccountBuilder(this.DatabaseSession).WithBank(bank).WithCurrency(euro).WithIban("BE23 3300 6167 6391").WithNameOnAccount("Koen").Build())
                 .Build();
 
@@ -171,6 +173,7 @@ namespace Allors.Domain
             var bank = new BankBuilder(this.DatabaseSession).WithCountry(belgium).WithName("ING België").WithBic("BBRUBEBB").Build();
 
             var ownBankAccount = new OwnBankAccountBuilder(this.DatabaseSession)
+                .WithDescription("own account")
                 .WithBankAccount(new BankAccountBuilder(this.DatabaseSession).WithBank(bank).WithCurrency(euro).WithIban("BE23 3300 6167 6391").WithNameOnAccount("Koen").Build())
                 .Build();
 
@@ -236,6 +239,7 @@ namespace Allors.Domain
             var bank = new BankBuilder(this.DatabaseSession).WithCountry(belgium).WithName("ING België").WithBic("BBRUBEBB").Build();
 
             var ownBankAccount = new OwnBankAccountBuilder(this.DatabaseSession)
+                .WithDescription("own account")
                 .WithBankAccount(new BankAccountBuilder(this.DatabaseSession).WithBank(bank).WithCurrency(euro).WithIban("BE23 3300 6167 6391").WithNameOnAccount("Koen").Build())
                 .Build();
 

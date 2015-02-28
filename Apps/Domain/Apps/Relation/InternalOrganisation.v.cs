@@ -28,6 +28,11 @@ namespace Allors.Domain
 
     public partial class InternalOrganisation
     {
+        public void DeriveFullName()
+        {
+            this.AppsDeriveFullName();
+        }
+
         public NumberFormatInfo CurrencyFormat
         {
             get
