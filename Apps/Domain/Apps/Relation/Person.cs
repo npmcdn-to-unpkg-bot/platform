@@ -472,7 +472,7 @@ namespace Allors.Domain
                 }
             }
 
-            this.DeriveFullName();
+            this.PartyName = this.DerivePartyName();
 
             this.DeriveCurrentEmployment(derivation);
 
@@ -501,37 +501,36 @@ namespace Allors.Domain
             }
         }
 
-        private void AppsDeriveFullName()
+        private string DerivePartyName()
         {
-            var fullName = new StringBuilder();
+            var partyName = new StringBuilder();
 
             if (this.ExistFirstName)
             {
-                fullName.Append(this.FirstName);
+                partyName.Append(this.FirstName);
             }
 
             if (this.ExistMiddleName)
             {
-                if (fullName.Length > 0)
+                if (partyName.Length > 0)
                 {
-                    fullName.Append(" ");
+                    partyName.Append(" ");
                 }
 
-                fullName.Append(this.MiddleName);
+                partyName.Append(this.MiddleName);
             }
 
             if (this.ExistLastName)
             {
-                if (fullName.Length > 0)
+                if (partyName.Length > 0)
                 {
-                    fullName.Append(" ");
+                    partyName.Append(" ");
                 }
 
-                fullName.Append(this.LastName);
+                partyName.Append(this.LastName);
             }
 
-            this.FullName = fullName.ToString();
-            this.PartyName = this.FullName;
+            return partyName.ToString(); 
         }
 
         private void AppsBuildOwnerSecurityToken()

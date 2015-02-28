@@ -193,18 +193,13 @@ namespace Allors.Domain
             this.DeriveCurrentContacts(derivation);
         }
         
-        private void AppsDeriveFullName()
-        {
-            this.FullName = this.Name;
-        }
-
         private Person AppsFindCurrentContactByName(string name)
         {
             var personsFound = new List<Person>();
             name = name.ToLower();
             foreach (Person person in this.CurrentContacts)
             {
-                if ((person.ExistFullName && person.FullName.ToLower() == name) || 
+                if ((person.ExistPartyName && person.PartyName.ToLower() == name) || 
                     (person.ExistLastName && person.LastName.ToLower() == name) || 
                     (person.ExistFirstName &&person.FirstName.ToLower() == name))
                 {

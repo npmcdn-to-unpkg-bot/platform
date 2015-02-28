@@ -103,11 +103,6 @@ namespace Allors.Domain
             }
         }
 
-        public void DeriveFullName()
-        {
-            this.AppsDeriveFullName();
-        }
-
         public CustomerShipment GetPendingCustomerShipmentForStore(PostalAddress address, Store store, ShipmentMethod shipmentMethod)
         {
             return this.AppsPartyGetPendingCustomerShipmentForStore(address, store, shipmentMethod);

@@ -71,7 +71,7 @@ namespace Allors.Domain
                 <span style=""font-weight: bold"">Billing Address</span>
                 $if(this.ExistBillToPurchaser)$
                 <p>
-                    $this.BillToPurchaser.FullName;format=""xml-encode""$<br />
+                    $this.BillToPurchaser.PartyName;format=""xml-encode""$<br />
                     $if(this.ExistBillToContactMechanism)$
                         $if(this.BillToContactMechanism.IsPostalAddress)$
                             $this.BillToContactMechanism.FormattedFullAddress$
@@ -91,7 +91,7 @@ namespace Allors.Domain
             $if(this.ExistTakenViaSupplier)$
                 <span style=""font-weight: bold"">Order from</span>
                 <p>
-                    $this.TakenViaSupplier.FullName;format=""xml-encode""$<br />
+                    $this.TakenViaSupplier.PartyName;format=""xml-encode""$<br />
                     $if(this.ExistTakenViaContactMechanism)$
                         $this.TakenViaContactMechanism.Description$
                     $endif$
@@ -317,7 +317,7 @@ orderItem(item) ::= <<
                 <span style=""font-weight: bold"">Factuuradres</span>
                 $if(this.ExistBillToPurchaser)$
                 <p>
-                    $this.BillToPurchaser.FullName;format=""xml-encode""$<br />
+                    $this.BillToPurchaser.PartyName;format=""xml-encode""$<br />
                     $if(this.ExistBillToContactMechanism)$
                         $if(this.BillToContactMechanism.IsPostalAddress)$
                             $this.BillToContactMechanism.FormattedFullAddress$
@@ -337,7 +337,7 @@ orderItem(item) ::= <<
             $if(this.ExistTakenViaSupplier)$
                 <span style=""font-weight: bold"">Leverancier</span>
                 <p>
-                    $this.TakenViaSupplier.FullName;format=""xml-encode""$<br />
+                    $this.TakenViaSupplier.PartyName;format=""xml-encode""$<br />
                     $if(this.ExistTakenViaContactMechanism)$
                         $this.TakenViaContactMechanism.Description$
                     $endif$

@@ -62,7 +62,7 @@ namespace Allors.Domain
             $if(this.ShipmentWhereShipmentPackage.ExistShipToParty)$
                 <span style=""font-weight: bold"">Shipping Address</span>
                 <p>
-                    $this.ShipmentWhereShipmentPackage.ShipToParty.FullName;format=""xml-encode""$<br />
+                    $this.ShipmentWhereShipmentPackage.ShipToParty.PartyName;format=""xml-encode""$<br />
                     $if(this.ShipmentWhereShipmentPackage.ExistShipToAddress)$
                         $this.ShipmentWhereShipmentPackage.ShipToAddress.FormattedFullAddress$
                     $endif$
@@ -197,7 +197,7 @@ packagingContent(item) ::= <<
             $if(this.ShipmentWhereShipmentPackage.ExistShipToParty)$
                 <span style=""font-weight: bold"">Afleveradres</span>
                 <p>
-                    $this.ShipmentWhereShipmentPackage.ShipToParty.FullName;format=""xml-encode""$<br />
+                    $this.ShipmentWhereShipmentPackage.ShipToParty.PartyName;format=""xml-encode""$<br />
                     $if(this.ShipmentWhereShipmentPackage.ExistShipToAddress)$
                         $this.ShipmentWhereShipmentPackage.ShipToAddress.FormattedFullAddress$
                     $endif$

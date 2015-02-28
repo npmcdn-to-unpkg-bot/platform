@@ -1304,8 +1304,6 @@ namespace Allors.Domain
 
 					global::System.Decimal YTDCommission {set;}
 
-					global::System.String FullName {set;}
-
 					PersonClassification PersonClassifications {set;}
 
 					Citizenship Citizenship {set;}

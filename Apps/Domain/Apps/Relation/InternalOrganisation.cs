@@ -64,11 +64,6 @@ namespace Allors.Domain
             return string.Format(this.PurchaseOrderNumberPrefix, purchaseOrderNumber);
         }
 
-        private void AppsDeriveFullName()
-        {
-            this.FullName = this.Name;
-        }
-
         public void AppsOnPostBuild(ObjectOnPostBuild method)
         {
             if (!this.ExistPurchaseInvoiceCounter)

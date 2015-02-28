@@ -31,7 +31,7 @@ namespace Allors.Domain
         {
             var derivation = method.Derivation;
             
-            this.SalesRepName = this.SalesRep.FullName;
+            this.SalesRepName = this.SalesRep.PartyName;
 
             this.AppsDeriveRevenue();
         }

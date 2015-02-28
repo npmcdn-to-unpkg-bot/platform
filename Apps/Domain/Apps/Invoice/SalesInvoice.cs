@@ -331,7 +331,7 @@ namespace Allors.Domain
                         names.Append(", ");
                     }
 
-                    names.Append(salesRep.FullName);
+                    names.Append(salesRep.PartyName);
                 }
 
                 return names.ToString();

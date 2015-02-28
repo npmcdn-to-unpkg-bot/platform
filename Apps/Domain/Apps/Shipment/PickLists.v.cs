@@ -52,11 +52,11 @@ namespace Allors.Domain
         </h2>
         $endif$
         <div> 
-            Zending voor     :$this.ShipToParty.FullName;format=""xml-encode""$<br />
+            Zending voor     :$this.ShipToParty.PartyName;format=""xml-encode""$<br />
         </div>
     $if(this.ExistPicker)$
         <h2>
-            Picker: $this.Picker.FullName;format=""xml-encode""$
+            Picker: $this.Picker.PartyName;format=""xml-encode""$
         </h2>
     $endif$
     </div>
@@ -131,11 +131,11 @@ picklistitem(item) ::= <<
         </h2>
         $endif$
         <div> 
-            Ship to           :$this.ShipToParty.FullName;format=""xml-encode""$<br />
+            Ship to           :$this.ShipToParty.PartyName;format=""xml-encode""$<br />
         </div>
     $if(this.ExistPicker)$
         <h2>
-            Picker: $this.Picker.FullName;format=""xml-encode""$
+            Picker: $this.Picker.PartyName;format=""xml-encode""$
         </h2>
     $endif$
     </div>

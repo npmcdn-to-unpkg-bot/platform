@@ -68,7 +68,7 @@ namespace Allors.Domain
                 <span style=""font-weight: bold"">Billing Address</span>
                 $if(this.ExistBillToCustomer)$
                 <p>
-                    $this.BillToCustomer.FullName;format=""xml-encode""$<br />
+                    $this.BillToCustomer.PartyName;format=""xml-encode""$<br />
                     $if(this.ExistBillToContactMechanism)$
                         $if(this.BillToContactMechanism.IsPostalAddress)$
                             $this.BillToContactMechanism.FormattedFullAddress$
@@ -88,7 +88,7 @@ namespace Allors.Domain
             $if(this.ExistShipToCustomer)$
                 <span style=""font-weight: bold"">Shipping Address</span>
                 <p>
-                    $this.ShipToCustomer.FullName;format=""xml-encode""$<br />
+                    $this.ShipToCustomer.PartyName;format=""xml-encode""$<br />
                     $if(this.ExistShipToAddress)$
                         $this.ShipToAddress.FormattedFullAddress$
                     $endif$
@@ -346,7 +346,7 @@ $if(item.ExistMessage || item.ExistAssignedShipToParty || item.ExistAssignedShip
     $if(item.ExistAssignedShipToParty || item.ExistAssignedShipToAddress)$
         Item shipped to: &#xA0;
         $if(item.ItemDifferentShippingParty)$
-            $item.ItemDifferentShippingParty.FullName;format=""xml-encode""$ &#xA0;
+            $item.ItemDifferentShippingParty.PartyName;format=""xml-encode""$ &#xA0;
         $endif$
         $if(item.ItemDifferentShippingAddress)$
             $item.ItemDifferentShippingAddress.DisplayName;format=""xml-encode""$  
@@ -404,7 +404,7 @@ $endif$
                 <span style=""font-weight: bold"">Factuuradres</span>
                 $if(this.ExistBillToCustomer)$
                 <p>
-                    $this.BillToCustomer.FullName;format=""xml-encode""$<br />
+                    $this.BillToCustomer.PartyName;format=""xml-encode""$<br />
                     $if(this.ExistBillToContactMechanism)$
                         $if(this.BillToContactMechanism.IsPostalAddress)$
                             $this.BillToContactMechanism.FormattedFullAddress$
@@ -424,7 +424,7 @@ $endif$
             $if(this.ExistShipToCustomer)$
                 <span style=""font-weight: bold"">Afleveradres</span>
                 <p>
-                    $this.ShipToCustomer.FullName;format=""xml-encode""$<br />
+                    $this.ShipToCustomer.PartyName;format=""xml-encode""$<br />
                     $if(this.ExistShipToAddress)$
                         $this.ShipToAddress.FormattedFullAddress$
                     $endif$
