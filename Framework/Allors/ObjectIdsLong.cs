@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------- 
-// <copyright file="ObjectIdsInteger.cs" company="Allors bvba">
+// <copyright file="ObjectIdsLong.cs" company="Allors bvba">
 // Copyright 2002-2013 Allors bvba.
 // 
 // Dual Licensed under
@@ -21,11 +21,11 @@
 
 namespace Allors
 {
-    public sealed class ObjectIdsInteger : ObjectIds
+    public sealed class ObjectIdsLong : ObjectIds
     {
         public override ObjectId Parse(string value)
         {
-            return string.IsNullOrWhiteSpace(value) ? null : new ObjectIdInteger(int.Parse(value));
+            return string.IsNullOrWhiteSpace(value) ? null : new ObjectIdLong(long.Parse(value));
         }
     }
 }

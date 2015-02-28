@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D09DAF58-D524-40C2-887C-EADBF5609794}</ProjectGuid>
+    <ProjectGuid>{DB96DE40-9B4C-4112-BB6F-C6C4C6A9B5A9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Allors.Workspaces.Memory</RootNamespace>
     <AssemblyName>Allors.Workspaces.Memory</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -32,10 +32,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -93,8 +89,8 @@
     <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework\Framework\Allors.csproj">
-      <Project>{84495b8e-1800-41c9-a236-abe6265a23a3}</Project>
+    <ProjectReference Include="..\..\Framework\Allors\Allors.csproj">
+      <Project>{5b4e2d7c-8ef8-45f5-bfb2-e595c401a95f}</Project>
       <Name>Allors</Name>
     </ProjectReference>
   </ItemGroup>

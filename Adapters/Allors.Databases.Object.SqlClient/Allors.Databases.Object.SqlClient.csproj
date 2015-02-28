@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{489D90A9-B63E-4983-86CC-2A061D8F6055}</ProjectGuid>
+    <ProjectGuid>{06BC1665-8FE8-4F04-9E80-EC2D54404BA7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Allors.Databases.Object.SqlClient</RootNamespace>
     <AssemblyName>Allors.Databases.Object.SqlClient</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -31,17 +31,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SqlClient\CompositeRelation.cs" />
-    <Compile Include="SqlClient\Strategy.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlClient\Caching\Cache.cs" />
     <Compile Include="SqlClient\Caching\CachedObject.cs" />
     <Compile Include="SqlClient\Caching\CacheFactory.cs" />
@@ -49,7 +46,38 @@
     <Compile Include="SqlClient\Caching\ICachedObject.cs" />
     <Compile Include="SqlClient\Caching\ICacheFactory.cs" />
     <Compile Include="SqlClient\ChangeSet.cs" />
+    <Compile Include="SqlClient\Command.cs" />
+    <Compile Include="SqlClient\CommandFactories.cs" />
+    <Compile Include="SqlClient\Commands\Command.cs" />
+    <Compile Include="SqlClient\Commands\DatabaseCommand.cs" />
+    <Compile Include="SqlClient\Commands\Procedure\AddCompositeRoleFactory.cs" />
+    <Compile Include="SqlClient\Commands\Procedure\ClearCompositeAndCompositesRoleFactory.cs" />
+    <Compile Include="SqlClient\Commands\Procedure\CreateObjectFactory.cs" />
+    <Compile Include="SqlClient\Commands\Procedure\CreateObjectsFactory.cs" />
+    <Compile Include="SqlClient\Commands\Procedure\GetCacheIdsFactory.cs" />
+    <Compile Include="SqlClient\Commands\Procedure\GetCompositeAssociationFactory.cs" />
+    <Compile Include="SqlClient\Commands\Procedure\GetCompositeAssociationsFactory.cs" />
+    <Compile Include="SqlClient\Commands\Procedure\GetCompositeRoleFactory.cs" />
+    <Compile Include="SqlClient\Commands\Procedure\GetCompositeRolesFactory.cs" />
+    <Compile Include="SqlClient\Commands\Procedure\GetUnitRolesFactory.cs" />
+    <Compile Include="SqlClient\Commands\Procedure\LoadCompositeRelationsFactory.cs" />
+    <Compile Include="SqlClient\Commands\Procedure\LoadObjectsFactory.cs" />
+    <Compile Include="SqlClient\Commands\Procedure\LoadUnitRelationsFactory.cs" />
+    <Compile Include="SqlClient\Commands\Procedure\RemoveCompositeRoleFactory.cs" />
+    <Compile Include="SqlClient\Commands\Procedure\SetCompositeRoleFactory.cs" />
+    <Compile Include="SqlClient\Commands\Procedure\SetUnitRoleFactory.cs" />
+    <Compile Include="SqlClient\Commands\Procedure\UpdateCacheIdsFactory.cs" />
+    <Compile Include="SqlClient\Commands\Text\DeleteObjectFactory.cs" />
+    <Compile Include="SqlClient\Commands\Text\GetObjectTypeFactory.cs" />
+    <Compile Include="SqlClient\Commands\Text\InsertObjectFactory.cs" />
+    <Compile Include="SqlClient\Commands\Text\InstantiateObjectFactory.cs" />
+    <Compile Include="SqlClient\Commands\Text\InstantiateObjectsFactory.cs" />
+    <Compile Include="SqlClient\Commands\Text\SetUnitRolesFactory.cs" />
+    <Compile Include="SqlClient\CompositeRelation.cs" />
     <Compile Include="SqlClient\CompositeRoles.cs" />
+    <Compile Include="SqlClient\Configuration.cs" />
+    <Compile Include="SqlClient\Database.cs" />
+    <Compile Include="SqlClient\DatabaseSession.cs" />
     <Compile Include="SqlClient\Extents\Extent.cs" />
     <Compile Include="SqlClient\Extents\ExtentAssociations.cs" />
     <Compile Include="SqlClient\Extents\ExtentEnumerator.cs" />
@@ -62,7 +90,27 @@
     <Compile Include="SqlClient\Extents\ExtentStatementChild.cs" />
     <Compile Include="SqlClient\Extents\ExtentStatementRoot.cs" />
     <Compile Include="SqlClient\Extents\SqlExtent.cs" />
+    <Compile Include="SqlClient\Flush.cs" />
+    <Compile Include="SqlClient\ICommandFactory.cs" />
+    <Compile Include="SqlClient\IntegerId\Configuration.cs" />
+    <Compile Include="SqlClient\IntegerId\Database.cs" />
+    <Compile Include="SqlClient\IntegerId\ObjectTableForObjectIds.cs" />
+    <Compile Include="SqlClient\IntegerId\ObjectTableForRolesByReference.cs" />
+    <Compile Include="SqlClient\IntegerId\ObjectTableForStrategies.cs" />
+    <Compile Include="SqlClient\IntegerId\RelationTableForCompositeRelations.cs" />
+    <Compile Include="SqlClient\IntegerId\RelationTableForUnitRelations.cs" />
+    <Compile Include="SqlClient\IntegerId\Schema.cs" />
     <Compile Include="SqlClient\IObjectIds.cs" />
+    <Compile Include="SqlClient\Load.cs" />
+    <Compile Include="SqlClient\LongId\Configuration.cs" />
+    <Compile Include="SqlClient\LongId\Database.cs" />
+    <Compile Include="SqlClient\LongId\ObjectTableForObjectIds.cs" />
+    <Compile Include="SqlClient\LongId\ObjectTableForRolesByReference.cs" />
+    <Compile Include="SqlClient\LongId\ObjectTableForStrategies.cs" />
+    <Compile Include="SqlClient\LongId\RelationTableForCompositeRelations.cs" />
+    <Compile Include="SqlClient\LongId\RelationTableForUnitRelations.cs" />
+    <Compile Include="SqlClient\LongId\Schema.cs" />
+    <Compile Include="SqlClient\ManagementSession.cs" />
     <Compile Include="SqlClient\ObjectIntegerIds.cs" />
     <Compile Include="SqlClient\ObjectLongIds.cs" />
     <Compile Include="SqlClient\Predicates\AndPredicate.cs" />
@@ -94,12 +142,18 @@
     <Compile Include="SqlClient\Predicates\RoleLessThanValue.cs" />
     <Compile Include="SqlClient\Predicates\RoleLike.cs" />
     <Compile Include="SqlClient\Reference.cs" />
+    <Compile Include="SqlClient\RelationTypeManyXmlWriter.cs" />
+    <Compile Include="SqlClient\RelationTypeOneXmlWriter.cs" />
     <Compile Include="SqlClient\Roles.cs" />
+    <Compile Include="SqlClient\Save.cs" />
+    <Compile Include="SqlClient\SchemaTableParameter.cs" />
     <Compile Include="SqlClient\Schema\ISchemaValidationError.cs" />
     <Compile Include="SqlClient\Schema\ProcedureSchemaValidationError.cs" />
     <Compile Include="SqlClient\Schema\ReservedWords.cs" />
+    <Compile Include="SqlClient\Schema\Schema.cs" />
     <Compile Include="SqlClient\Schema\SchemaColumn.cs" />
     <Compile Include="SqlClient\Schema\SchemaIndexType.cs" />
+    <Compile Include="SqlClient\Schema\SchemaParameter.cs" />
     <Compile Include="SqlClient\Schema\SchemaProcedure.cs" />
     <Compile Include="SqlClient\Schema\SchemaTable.cs" />
     <Compile Include="SqlClient\Schema\SchemaTableKind.cs" />
@@ -107,73 +161,16 @@
     <Compile Include="SqlClient\Schema\SchemaValidationErrors.cs" />
     <Compile Include="SqlClient\Schema\SchemaValidationException.cs" />
     <Compile Include="SqlClient\Schema\TableSchemaValidationError.cs" />
-    <Compile Include="SqlClient\RelationTypeManyXmlWriter.cs" />
-    <Compile Include="SqlClient\RelationTypeOneXmlWriter.cs" />
-    <Compile Include="SqlClient\UnitRelation.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SqlClient\Command.cs" />
-    <Compile Include="SqlClient\CommandFactories.cs" />
-    <Compile Include="SqlClient\Commands\Command.cs" />
-    <Compile Include="SqlClient\Commands\DatabaseCommand.cs" />
-    <Compile Include="SqlClient\Commands\Procedure\AddCompositeRoleFactory.cs" />
-    <Compile Include="SqlClient\Commands\Procedure\ClearCompositeAndCompositesRoleFactory.cs" />
-    <Compile Include="SqlClient\Commands\Procedure\CreateObjectFactory.cs" />
-    <Compile Include="SqlClient\Commands\Procedure\CreateObjectsFactory.cs" />
-    <Compile Include="SqlClient\Commands\Procedure\GetCacheIdsFactory.cs" />
-    <Compile Include="SqlClient\Commands\Procedure\GetCompositeAssociationFactory.cs" />
-    <Compile Include="SqlClient\Commands\Procedure\GetCompositeAssociationsFactory.cs" />
-    <Compile Include="SqlClient\Commands\Procedure\GetCompositeRoleFactory.cs" />
-    <Compile Include="SqlClient\Commands\Procedure\GetCompositeRolesFactory.cs" />
-    <Compile Include="SqlClient\Commands\Procedure\GetUnitRolesFactory.cs" />
-    <Compile Include="SqlClient\Commands\Procedure\LoadCompositeRelationsFactory.cs" />
-    <Compile Include="SqlClient\Commands\Procedure\LoadObjectsFactory.cs" />
-    <Compile Include="SqlClient\Commands\Procedure\LoadUnitRelationsFactory.cs" />
-    <Compile Include="SqlClient\Commands\Procedure\RemoveCompositeRoleFactory.cs" />
-    <Compile Include="SqlClient\Commands\Procedure\SetCompositeRoleFactory.cs" />
-    <Compile Include="SqlClient\Commands\Procedure\SetUnitRoleFactory.cs" />
-    <Compile Include="SqlClient\Commands\Procedure\UpdateCacheIdsFactory.cs" />
-    <Compile Include="SqlClient\Commands\Text\DeleteObjectFactory.cs" />
-    <Compile Include="SqlClient\Commands\Text\GetObjectTypeFactory.cs" />
-    <Compile Include="SqlClient\Commands\Text\InsertObjectFactory.cs" />
-    <Compile Include="SqlClient\Commands\Text\InstantiateObjectFactory.cs" />
-    <Compile Include="SqlClient\Commands\Text\InstantiateObjectsFactory.cs" />
-    <Compile Include="SqlClient\Commands\Text\SetUnitRolesFactory.cs" />
-    <Compile Include="SqlClient\Configuration.cs" />
-    <Compile Include="SqlClient\Database.cs" />
-    <Compile Include="SqlClient\DatabaseSession.cs" />
-    <Compile Include="SqlClient\Flush.cs" />
-    <Compile Include="SqlClient\ICommandFactory.cs" />
-    <Compile Include="SqlClient\IntegerId\Configuration.cs" />
-    <Compile Include="SqlClient\IntegerId\Database.cs" />
-    <Compile Include="SqlClient\IntegerId\ObjectTableForObjectIds.cs" />
-    <Compile Include="SqlClient\IntegerId\ObjectTableForRolesByReference.cs" />
-    <Compile Include="SqlClient\IntegerId\ObjectTableForStrategies.cs" />
-    <Compile Include="SqlClient\IntegerId\RelationTableForCompositeRelations.cs" />
-    <Compile Include="SqlClient\IntegerId\RelationTableForUnitRelations.cs" />
-    <Compile Include="SqlClient\IntegerId\Schema.cs" />
-    <Compile Include="SqlClient\Load.cs" />
-    <Compile Include="SqlClient\LongId\Configuration.cs" />
-    <Compile Include="SqlClient\LongId\Database.cs" />
-    <Compile Include="SqlClient\LongId\ObjectTableForObjectIds.cs" />
-    <Compile Include="SqlClient\LongId\ObjectTableForRolesByReference.cs" />
-    <Compile Include="SqlClient\LongId\ObjectTableForStrategies.cs" />
-    <Compile Include="SqlClient\LongId\RelationTableForCompositeRelations.cs" />
-    <Compile Include="SqlClient\LongId\RelationTableForUnitRelations.cs" />
-    <Compile Include="SqlClient\LongId\Schema.cs" />
-    <Compile Include="SqlClient\ManagementSession.cs" />
-    <Compile Include="SqlClient\Save.cs" />
-    <Compile Include="SqlClient\SchemaTableParameter.cs" />
-    <Compile Include="SqlClient\Schema\Schema.cs" />
-    <Compile Include="SqlClient\Schema\SchemaParameter.cs" />
     <Compile Include="SqlClient\SessionCommands.cs" />
+    <Compile Include="SqlClient\Strategy.cs" />
+    <Compile Include="SqlClient\UnitRelation.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Framework\Framework\Allors.csproj">
-      <Project>{84495b8e-1800-41c9-a236-abe6265a23a3}</Project>
+    <ProjectReference Include="..\..\Framework\Allors\Allors.csproj">
+      <Project>{5b4e2d7c-8ef8-45f5-bfb2-e595c401a95f}</Project>
       <Name>Allors</Name>
     </ProjectReference>
   </ItemGroup>
