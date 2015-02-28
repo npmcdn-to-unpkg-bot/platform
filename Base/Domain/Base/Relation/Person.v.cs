@@ -28,7 +28,7 @@ namespace Allors.Domain
             {
                 foreach (AccessControl acl in this.OwnerSecurityToken.AccessControlsWhereObject)
                 {
-                    acl.Delete().Execute();
+                    acl.Delete();
                 }
 
                 this.OwnerSecurityToken.Delete().Execute();

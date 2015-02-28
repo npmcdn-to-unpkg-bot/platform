@@ -21,27 +21,12 @@
 
 namespace Allors.Domain
 {
-    using System;
-
-    public partial class Organisation
+    public partial class OrganisationJustDoIt
     {
-        public void TestsOnPostBuild(ObjectOnPostBuild method)
-        {
-            this.IsMethodCalled = false;
-        }
+        public int a { get; set; }
 
-        public void TestsDerive(ObjectDerive method)
-        {
-            var derivation = method.Derivation;
+        public int b { get; set; }
 
-            derivation.Log.AssertExists(this, Organisations.Meta.Name);
-        }
-
-        public void TestsJustDoIt(OrganisationJustDoIt method)
-        {
-            this.IsMethodCalled = true;
-
-            method.result = method.a + method.b;
-        }
+        public int result { get; set; }
     }
 }

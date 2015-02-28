@@ -60,7 +60,7 @@ namespace Allors
                 }
             }
 
-            @this.ApplySecurityOnPostBuild().Execute();
+            @this.ApplySecurityOnPostBuild();
         }
 
         // TODO: move to security

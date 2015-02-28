@@ -38,7 +38,7 @@ namespace Allors.Security
 
             this.DatabaseSession.Derive();
 
-            user.Delete().Execute();
+            user.Delete();
 
             this.DatabaseSession.Derive();
 

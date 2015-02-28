@@ -50,7 +50,7 @@ namespace Allors.Domain
                     {
                         if (this.ExistResponsive)
                         {
-                            this.Responsive.Delete().Execute();
+                            this.Responsive.Delete();
                         }
 
                         this.Responsive = new MediaBuilder(this.Strategy.Session).WithContent(responsive).WithMediaType(mediaType).Build();

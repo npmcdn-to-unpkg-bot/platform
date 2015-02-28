@@ -1,8 +1,8 @@
-group AllorsCSharpMeta;
+group AllorsCSharpRepository;
 
 TemplateId() ::= <<14F49218-A676-43ba-9CBD-B8FFA059D1BF>>
 TemplateName() ::= <<Allors C# Repository>>
-TemplateVersion() ::= <<1.0.8>>
+TemplateVersion() ::= <<1.0.9>>
 TemplateAllors() ::= <<1.0>>
 TemplateConfiguration(domain, settings) ::= <<
 $! 
@@ -187,7 +187,7 @@ relationType(relationType) ::= <<
 $if(relationType.IsDerived)$
 			$relationType.Name$.IsDerived = $boolean(relationType.IsDerived)$;
 $endif$
-$if(!relationType.IsIndexed)$
+$if(relationType.IsIndexed)$
 			$relationType.Name$.IsIndexed = $boolean(relationType.IsIndexed)$;
 $endif$
 

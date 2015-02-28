@@ -142,6 +142,7 @@
     <Compile Include="Test\General\MailboxAddress.cs" />
     <Compile Include="Test\Methods\SuperinterfaceMethod.cs" />
     <Compile Include="Test\Methods\InterfaceMethod.cs" />
+    <Compile Include="Test\Relation\OrganisationJustDoIt.cs" />
     <Compile Include="Test\Relation\Organisations.cs" />
     <Compile Include="Test\General\Place.cs" />
     <Compile Include="Test\General\Places.cs" />
