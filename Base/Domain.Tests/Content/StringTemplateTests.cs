@@ -68,6 +68,8 @@ Hello $this.FirstName$!
 Hi $this.FirstName$!
 >>";
 
+            this.DatabaseSession.Derive();
+
             for (var i = 0; i < NrOfRuns; i++)
             {
                 var result = stringTemplate.Apply(new Dictionary<string, object> { { "this", person } });

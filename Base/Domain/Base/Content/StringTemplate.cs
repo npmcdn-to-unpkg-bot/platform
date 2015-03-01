@@ -30,27 +30,9 @@ namespace Allors.Domain
 
     public partial class StringTemplate
     {
-        private TemplateGroup TemplateGroup
+        public void BaseDerive(ObjectDerive method)
         {
-            get
-            {
-                // TODO: Setting or removing Body should flush caches
-                var templateGroup = (TemplateGroup)this.Strategy.Session[this.Id.Key];
-
-                if (templateGroup == null)
-                {
-                    templateGroup = new TemplateGroupString("allors", this.Body, '$', '$') { Listener = new ErrorTemplateListener() };
-                    templateGroup.RegisterRenderer(typeof(string), new StringRenderer());
-                    this.Strategy.Session[this.Id.Key] = templateGroup;
-                }
-
-                return templateGroup;
-            }
-
-            set
-            {
-                this.Strategy.Session[this.Id.Key] = value;
-            }
+            this.Strategy.Session[this.Id.Key] = null;
         }
 
         public void Load(Assembly assembly, string resourceName)
@@ -89,6 +71,29 @@ namespace Allors.Domain
             finally
             {
                 listener.Assert();
+            }
+        }
+
+        private TemplateGroup TemplateGroup
+        {
+            get
+            {
+                // TODO: Setting or removing Body should flush caches
+                var templateGroup = (TemplateGroup)this.Strategy.Session[this.Id.Key];
+
+                if (templateGroup == null)
+                {
+                    templateGroup = new TemplateGroupString("allors", this.Body, '$', '$') { Listener = new ErrorTemplateListener() };
+                    templateGroup.RegisterRenderer(typeof(string), new StringRenderer());
+                    this.Strategy.Session[this.Id.Key] = templateGroup;
+                }
+
+                return templateGroup;
+            }
+
+            set
+            {
+                this.Strategy.Session[this.Id.Key] = value;
             }
         }
 

@@ -53,8 +53,8 @@ namespace Allors.Domain
             Assert.AreEqual(
 @"""C1AllorsString"";""C1AllorsDecimal""
 ""c1A"";""10,5""
-""c1B"";""11,5""",
-                    csv);
+""c1B"";""11,5""".Replace(@"\r\n", "@\n"),
+                    csv.Replace(@"\r\n", "@\n"));
         }
 
         [Test]
@@ -82,8 +82,8 @@ namespace Allors.Domain
             Assert.AreEqual(
 @"""C1AllorsString"";""C2AllorsString""
 ""c1A"";""c2A""
-""c1B"";""c2B""",
-                    csv);
+""c1B"";""c2B""".Replace(@"\r\n", "@\n"),
+                    csv.Replace(@"\r\n", "@\n"));
         }
 
         [Test]
@@ -148,8 +148,8 @@ namespace Allors.Domain
             Assert.AreEqual(
 @"""C1AllorsString"";""C2AllorsString""
 ""c1A"";""c2A""
-""c1B"";""c2B;c2C""", 
-                    csv);
+""c1B"";""c2B;c2C""".Replace(@"\r\n", "@\n"),
+                    csv.Replace(@"\r\n", "@\n"));
         }
     }
 }
