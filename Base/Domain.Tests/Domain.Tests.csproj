@@ -95,19 +95,19 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Adapters\Allors.Databases.Memory\Allors.Databases.Memory.csproj">
-      <Project>{233622ff-5493-4981-9529-4337d84c8312}</Project>
+      <Project>{cb9b7108-c8f3-459c-b2da-88187c84cfc1}</Project>
       <Name>Allors.Databases.Memory</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Adapters\Allors.Databases.Object.SqlClient\Allors.Databases.Object.SqlClient.csproj">
-      <Project>{489d90a9-b63e-4983-86cc-2a061d8f6055}</Project>
+      <Project>{06bc1665-8fe8-4f04-9e80-ec2d54404ba7}</Project>
       <Name>Allors.Databases.Object.SqlClient</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Adapters\Allors.Workspaces.Memory\Allors.Workspaces.Memory.csproj">
-      <Project>{d09daf58-d524-40c2-887c-eadbf5609794}</Project>
+      <Project>{db96de40-9b4c-4112-bb6f-c6c4c6a9b5a9}</Project>
       <Name>Allors.Workspaces.Memory</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Framework\Allors\Allors.csproj">
-      <Project>{84495b8e-1800-41c9-a236-abe6265a23a3}</Project>
+      <Project>{5b4e2d7c-8ef8-45f5-bfb2-e595c401a95f}</Project>
       <Name>Allors</Name>
     </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">

@@ -56,7 +56,7 @@ namespace Allors.Domain
 
         public string Write(Extent extent, CultureInfo cultureInfo, IAccessControlListFactory aclFactory)
         {
-            var actualRecordSeparator = this.RecordSeparator ?? Environment.NewLine;
+            var actualRecordSeparator = this.RecordSeparator ?? "\n";
             var actualFieldSeparator = this.FieldSeparator ?? cultureInfo.TextInfo.ListSeparator;
 
             var stringBuilder = new StringBuilder();
@@ -73,7 +73,7 @@ namespace Allors.Domain
                 }
             }
 
-            stringBuilder.Append(Environment.NewLine);
+            stringBuilder.Append("\n");
 
             for (var objectCounter = 0; objectCounter < extent.Count; objectCounter++)
             {
