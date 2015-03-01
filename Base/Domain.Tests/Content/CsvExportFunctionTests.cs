@@ -53,8 +53,8 @@ namespace Allors.Domain
             Assert.AreEqual(
 @"""C1AllorsString"";""Function""
 ""c1A"";""Hello c1A""
-""c1B"";""Hello c1B""".Replace(@"\r\n", "@\n"),
-                    csv.Replace(@"\r\n", "@\n"));
+""c1B"";""Hello c1B""".Replace("\r\n", "\n"),
+                    csv.Replace("\r\n", "\n"));
         }
 
         [Test]
@@ -96,14 +96,14 @@ namespace Allors.Domain
             Assert.AreEqual(
 @"""C1AllorsString"";""Function""
 ""c1A"";""10,5""
-""c1B"";""11,5""".Replace(@"\r\n", "@\n"),
-        csvNl.Replace(@"\r\n", "@\n"));
+""c1B"";""11,5""".Replace("\r\n", "\n"),
+        csvNl.Replace("\r\n", "\n"));
 
             Assert.AreEqual(
 @"""C1AllorsString"",""Function""
 ""c1A"",""10.5""
-""c1B"",""11.5""".Replace(@"\r\n", "@\n"),
-        csvEn.Replace(@"\r\n", "@\n"));
+""c1B"",""11.5""".Replace("\r\n", "\n"),
+        csvEn.Replace("\r\n", "\n"));
         }
     }
 }

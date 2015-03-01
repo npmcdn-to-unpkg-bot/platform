@@ -23,11 +23,7 @@
 
 namespace Allors.Domain
 {
-    using System;
-
     using Allors;
-    using Allors.Common;
-    using Allors.Domain;
 
     using NUnit.Framework;
 

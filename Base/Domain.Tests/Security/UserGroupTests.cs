@@ -24,8 +24,6 @@
 namespace Allors.Security
 {
     using Allors.Meta;
-    using Allors.Security;
-    using Allors.Common;
 
     using global::Allors.Domain;
 

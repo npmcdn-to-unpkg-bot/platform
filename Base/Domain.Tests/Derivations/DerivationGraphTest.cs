@@ -26,8 +26,6 @@ namespace Allors.Domain
     using System.Collections.Generic;
 
     using Allors;
-    using Allors.Common;
-    
 
     using NUnit.Framework;
 

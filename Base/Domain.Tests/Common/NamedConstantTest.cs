@@ -21,7 +21,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Common
+namespace Allors.Domain
 {
     using NUnit.Framework;
 

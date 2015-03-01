@@ -26,8 +26,6 @@ namespace Allors.Security
 
     using global::System;
 
-    using Allors.Common;
-
     using NUnit.Framework;
 
     [TestFixture]
@@ -86,34 +84,6 @@ namespace Allors.Security
             var derivationLog = this.DatabaseSession.Derive();
 
             Assert.IsFalse(derivationLog.HasErrors);
-        }
-
-        [Test]
-        public void GivenARoleWhenCreatingARoleWithTheSameUniqueIdThenRoleIsInvalid()
-        {
-            var id = Guid.NewGuid();
-
-            new RoleBuilder(this.DatabaseSession)
-                .WithUniqueId(id)
-                .WithName("Role1")
-                .Build();
-
-            new RoleBuilder(this.DatabaseSession)
-                .WithUniqueId(id)
-                .WithName("Role2")
-                .Build();
-
-            var derivationLog = this.DatabaseSession.Derive();
-
-            Assert.IsTrue(derivationLog.HasErrors);
-            Assert.AreEqual(2, derivationLog.Errors.Length);
-
-            foreach (var derivationError in derivationLog.Errors)
-            {
-                Assert.AreEqual(1, derivationError.Relations.Length);
-                Assert.AreEqual(typeof(DerivationErrorUnique), derivationError.GetType());
-                Assert.AreEqual((RoleType)Roles.Meta.UniqueId, derivationError.Relations[0].RoleType);
-            }
         }
     }
 }

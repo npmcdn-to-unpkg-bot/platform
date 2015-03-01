@@ -21,11 +21,9 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Allors.Common
+namespace Allors.Domain
 {
     using System;
-
-    using global::Allors.Domain;
 
     using NUnit.Framework;
 

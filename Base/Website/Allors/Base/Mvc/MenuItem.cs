@@ -146,7 +146,7 @@ namespace Allors.Web.Mvc
                 return true;
             }
 
-            if (user.Identity.IsAuthenticated)
+            if (user != null && user.Identity != null && user.Identity.IsAuthenticated)
             {
                 return this.Roles == null || this.Roles.Length == 0 || this.Roles.Any(user.IsInRole);
             }
