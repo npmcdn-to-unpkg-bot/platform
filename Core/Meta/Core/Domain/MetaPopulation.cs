@@ -62,7 +62,7 @@ namespace Allors.Meta
             foreach (var domainType in nonAbstractClasses.Where(type => type.GetInterfaces().Contains(typeof(IDomain))))
             {
                 var constructor = domainType.GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, null, new []{Instance.GetType()}, null);
-                var instance = constructor.Invoke(new object[]{Instance});
+                var instance = constructor.Invoke(new object[] { Instance });
                 var instanceProperty = domainType.GetProperty("Instance");
                 instanceProperty.SetMethod.Invoke(null, new[] { instance });
             }
@@ -509,24 +509,39 @@ namespace Allors.Meta
                         type.DeriveExclusiveLeafClass();
                     }
 
-                    // RoleTypes
-                    foreach (var type in this.derivedComposites)
-                    {
-                        type.DeriveRoleTypes(sharedRoleTypes);
-                    }
-
+                    var roleTypesByAssociationObjectType = new Dictionary<ObjectType, HashSet<RoleType>>();
                     var associationTypesByRoleObjectType = new Dictionary<ObjectType, HashSet<AssociationType>>();
                     foreach (var relationType in this.RelationTypes)
                     {
-                        var roleObjectType = relationType.RoleType.ObjectType;
-                        HashSet<AssociationType> associations;
-                        if (!associationTypesByRoleObjectType.TryGetValue(roleObjectType, out associations))
                         {
-                            associations = new HashSet<AssociationType>();
-                            associationTypesByRoleObjectType[roleObjectType] = associations;
+                            var associationObjectType = relationType.AssociationType.ObjectType;
+                            HashSet<RoleType> roles;
+                            if (!roleTypesByAssociationObjectType.TryGetValue(associationObjectType, out roles))
+                            {
+                                roles = new HashSet<RoleType>();
+                                roleTypesByAssociationObjectType[associationObjectType] = roles;
+                            }
+
+                            roles.Add(relationType.RoleType);
                         }
 
-                        associations.Add(relationType.AssociationType);
+                        {
+                            var roleObjectType = relationType.RoleType.ObjectType;
+                            HashSet<AssociationType> associations;
+                            if (!associationTypesByRoleObjectType.TryGetValue(roleObjectType, out associations))
+                            {
+                                associations = new HashSet<AssociationType>();
+                                associationTypesByRoleObjectType[roleObjectType] = associations;
+                            }
+
+                            associations.Add(relationType.AssociationType);
+                        }
+                    }
+
+                    // RoleTypes
+                    foreach (var type in this.derivedComposites)
+                    {
+                        type.DeriveRoleTypes(sharedRoleTypes, roleTypesByAssociationObjectType);
                     }
 
                     // AssociationTypes

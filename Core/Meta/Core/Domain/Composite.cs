@@ -353,20 +353,23 @@ namespace Allors.Meta
         /// Derive role types.
         /// </summary>
         /// <param name="roleTypes">The role types.</param>
-        internal void DeriveRoleTypes(HashSet<RoleType> roleTypes)
+        /// <param name="roleTypesByAssociationObjectType">RoleTypes grouped by the ObjectType of the Association</param>
+        internal void DeriveRoleTypes(HashSet<RoleType> roleTypes, Dictionary<ObjectType, HashSet<RoleType>> roleTypesByAssociationObjectType)
         {
             roleTypes.Clear();
-            foreach (var relationType in this.MetaPopulation.RelationTypes.Where(rel => this.Equals(rel.AssociationType.ObjectType)))
+
+            HashSet<RoleType> classRoleTypes;
+            if (roleTypesByAssociationObjectType.TryGetValue(this, out classRoleTypes))
             {
-                roleTypes.Add(relationType.RoleType);
+                roleTypes.UnionWith(classRoleTypes);
             }
 
             foreach (var superType in this.Supertypes)
             {
-                var type = superType;
-                foreach (var relationType in this.MetaPopulation.RelationTypes.Where(rel => type.Equals(rel.AssociationType.ObjectType)))
+                HashSet<RoleType> superTypeRoleTypes;
+                if (roleTypesByAssociationObjectType.TryGetValue(superType, out superTypeRoleTypes))
                 {
-                    roleTypes.Add(relationType.RoleType);
+                    roleTypes.UnionWith(superTypeRoleTypes);
                 }
             }
 
@@ -377,7 +380,7 @@ namespace Allors.Meta
         /// Derive association types.
         /// </summary>
         /// <param name="associations">The associations.</param>
-        /// <param name="relationTypesByRoleObjectType"></param>
+        /// <param name="relationTypesByRoleObjectType">AssociationTypes grouped by the ObjectType of the Role</param>
         internal void DeriveAssociationTypes(HashSet<AssociationType> associations, Dictionary<ObjectType, HashSet<AssociationType>> relationTypesByRoleObjectType)
         {
             associations.Clear();
@@ -390,14 +393,10 @@ namespace Allors.Meta
 
             foreach (var superType in this.Supertypes)
             {
-                var type = superType;
-                foreach (var relationType in this.MetaPopulation.RelationTypes.Where(rel => type.Equals(rel.RoleType.ObjectType)))
+                HashSet<AssociationType> interfaceAssociationTypes;
+                if (relationTypesByRoleObjectType.TryGetValue(superType, out interfaceAssociationTypes))
                 {
-                    HashSet<AssociationType> interfaceAssociationTypes;
-                    if (relationTypesByRoleObjectType.TryGetValue(type, out interfaceAssociationTypes))
-                    {
-                        associations.UnionWith(interfaceAssociationTypes);
-                    }
+                    associations.UnionWith(interfaceAssociationTypes);
                 }
             }
 

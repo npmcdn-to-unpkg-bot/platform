@@ -109,71 +109,74 @@ namespace Allors.Domain
 
         public void AssertIsUnique(IObject association, RoleType roleType)
         {
-            var objectType = roleType.AssociationType.ObjectType;
-            var role = association.Strategy.GetRole(roleType);
-
-            if (role != null)
+            if (this.Derivation.ChangeSet.RoleTypesByAssociation[association.Id].Contains(roleType))
             {
-                var session = association.Strategy.Session;
-                if (session is IDatabaseSession)
+                var objectType = roleType.AssociationType.ObjectType;
+                var role = association.Strategy.GetRole(roleType);
+
+                if (role != null)
                 {
-                    var extent = association.Strategy.DatabaseSession.Extent(objectType);
-                    extent.Filter.AddEquals(roleType, role);
-                    if (extent.Count != 1)
+                    var session = association.Strategy.Session;
+                    if (session is IDatabaseSession)
                     {
-                        this.AddError(new DerivationErrorUnique(this, association, roleType));
-                    }
-                }
-                else
-                {
-                    var workspaceSession = (IWorkspaceSession)session;
-
-                    // First check workspace
-                    IObject[] workspaceObjects = workspaceSession.LocalExtent(objectType);
-                    var workspaceMatch = false;
-                    foreach (var workspaceObject in workspaceObjects)
-                    {
-                        var workspaceRole = workspaceObject.Strategy.GetRole(roleType);
-                        if (role.Equals(workspaceRole))
-                        {
-                            if (workspaceMatch)
-                            {
-                                this.AddError(new DerivationErrorUnique(this, association, roleType));
-                                break;
-                            }
-
-                            workspaceMatch = true;
-                        }
-                    }
-
-                    if (!workspaceMatch)
-                    {
-                        var databaseSession = ((IWorkspaceSession)session).DatabaseSession;
-                        var databaseAssociation = databaseSession.Instantiate(association);
-                        var databaseRole = role is IObject ? databaseSession.Instantiate((IObject)role) : role;
-
                         var extent = association.Strategy.DatabaseSession.Extent(objectType);
-                        extent.Filter.AddEquals(roleType, databaseRole);
-
-                        if (databaseAssociation == null)
+                        extent.Filter.AddEquals(roleType, role);
+                        if (extent.Count != 1)
                         {
-                            if (extent.Count > 0)
+                            this.AddError(new DerivationErrorUnique(this, association, roleType));
+                        }
+                    }
+                    else
+                    {
+                        var workspaceSession = (IWorkspaceSession)session;
+
+                        // First check workspace
+                        IObject[] workspaceObjects = workspaceSession.LocalExtent(objectType);
+                        var workspaceMatch = false;
+                        foreach (var workspaceObject in workspaceObjects)
+                        {
+                            var workspaceRole = workspaceObject.Strategy.GetRole(roleType);
+                            if (role.Equals(workspaceRole))
                             {
-                                this.AddError(new DerivationErrorUnique(this, association, roleType));
+                                if (workspaceMatch)
+                                {
+                                    this.AddError(new DerivationErrorUnique(this, association, roleType));
+                                    break;
+                                }
+
+                                workspaceMatch = true;
                             }
                         }
-                        else
+
+                        if (!workspaceMatch)
                         {
-                            if (extent.Count == 1)
+                            var databaseSession = ((IWorkspaceSession)session).DatabaseSession;
+                            var databaseAssociation = databaseSession.Instantiate(association);
+                            var databaseRole = role is IObject ? databaseSession.Instantiate((IObject)role) : role;
+
+                            var extent = association.Strategy.DatabaseSession.Extent(objectType);
+                            extent.Filter.AddEquals(roleType, databaseRole);
+
+                            if (databaseAssociation == null)
                             {
-                                if (!extent[0].Equals(databaseAssociation))
+                                if (extent.Count > 0)
                                 {
                                     this.AddError(new DerivationErrorUnique(this, association, roleType));
                                 }
                             }
-                            else if (extent.Count > 1)
+                            else
                             {
-                                this.AddError(new DerivationErrorUnique(this, association, roleType));
+                                if (extent.Count == 1)
+                                {
+                                    if (!extent[0].Equals(databaseAssociation))
+                                    {
+                                        this.AddError(new DerivationErrorUnique(this, association, roleType));
+                                    }
+                                }
+                                else if (extent.Count > 1)
+                                {
+                                    this.AddError(new DerivationErrorUnique(this, association, roleType));
+                                }
                             }
                         }
                     }
