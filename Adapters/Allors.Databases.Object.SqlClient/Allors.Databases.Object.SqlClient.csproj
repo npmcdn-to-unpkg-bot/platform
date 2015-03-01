@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{06BC1665-8FE8-4F04-9E80-EC2D54404BA7}</ProjectGuid>
+    <ProjectGuid>{489D90A9-B63E-4983-86CC-2A061D8F6055}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Allors.Databases.Object.SqlClient</RootNamespace>

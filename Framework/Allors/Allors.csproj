@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5B4E2D7C-8EF8-45F5-BFB2-E595C401A95F}</ProjectGuid>
+    <ProjectGuid>{84495B8E-1800-41C9-A236-ABE6265A23A3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Allors</RootNamespace>
